@@ -17,6 +17,8 @@ LONG WINAPI ntvdm_shadow_reg_create_key(HKEY root, LPCSTR subkey, PHKEY result);
 LONG WINAPI ntvdm_shadow_reg_delete_key(HKEY key, LPCSTR subkey);
 LONG WINAPI ntvdm_shadow_reg_set_value(HKEY key, LPCSTR subkey, DWORD type,
     LPCSTR data, DWORD data_size);
+LONG WINAPI ntvdm_shadow_reg_set_value_ex(HKEY key, LPCSTR value, DWORD reserved,
+    DWORD type, const BYTE *data, DWORD data_size);
 LONG WINAPI ntvdm_shadow_reg_query_value(HKEY key, LPCSTR subkey, LPSTR data,
     PLONG data_size);
 LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY key, DWORD index, LPSTR name,

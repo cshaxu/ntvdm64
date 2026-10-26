@@ -8,7 +8,9 @@ typedef LONG (WINAPI *wow_registry_open_key_fn)(HKEY,LPCSTR,PHKEY);
 typedef LONG (WINAPI *wow_registry_close_key_fn)(HKEY);
 typedef LONG (WINAPI *wow_registry_delete_key_fn)(HKEY,LPCSTR);
 typedef LONG (WINAPI *wow_registry_set_value_fn)(HKEY,LPCSTR,DWORD,LPCSTR,DWORD);
+typedef LONG (WINAPI *wow_registry_set_value_ex_fn)(HKEY,LPCSTR,DWORD,DWORD,const BYTE *,DWORD);
 typedef LONG (WINAPI *wow_registry_query_value_fn)(HKEY,LPCSTR,LPSTR,PLONG);
+typedef LONG (WINAPI *wow_registry_query_value_ex_fn)(HKEY,LPCSTR,LPDWORD,LPDWORD,LPBYTE,LPDWORD);
 typedef LONG (WINAPI *wow_registry_enum_key_fn)(HKEY,DWORD,LPSTR,DWORD);
 typedef LONG (WINAPI *wow_registry_open_key_ex_fn)(HKEY,LPCSTR,DWORD,REGSAM,PHKEY);
 typedef LONG (WINAPI *wow_registry_query_info_key_fn)(HKEY,LPTSTR,LPDWORD,
@@ -21,7 +23,9 @@ static wow_registry_open_key_fn wow_parent_open_key, wow_parent_create_key;
 static wow_registry_close_key_fn wow_parent_close_key;
 static wow_registry_delete_key_fn wow_parent_delete_key;
 static wow_registry_set_value_fn wow_parent_set_value;
+static wow_registry_set_value_ex_fn wow_parent_set_value_ex;
 static wow_registry_query_value_fn wow_parent_query_value;
+static wow_registry_query_value_ex_fn wow_parent_query_value_ex;
 static wow_registry_enum_key_fn wow_parent_enum_key;
 static wow_registry_open_key_ex_fn wow_parent_open_key_ex;
 static wow_registry_query_info_key_fn wow_parent_query_info_key;
@@ -39,13 +43,15 @@ static BOOL CALLBACK wow_registry_parent_initialize(PINIT_ONCE once,
     wow_parent_close_key=(wow_registry_close_key_fn)GetProcAddress(parent,"ntvdm_shadow_reg_close_key");
     wow_parent_delete_key=(wow_registry_delete_key_fn)GetProcAddress(parent,"ntvdm_shadow_reg_delete_key");
     wow_parent_set_value=(wow_registry_set_value_fn)GetProcAddress(parent,"ntvdm_shadow_reg_set_value");
+    wow_parent_set_value_ex=(wow_registry_set_value_ex_fn)GetProcAddress(parent,"ntvdm_shadow_reg_set_value_ex");
     wow_parent_query_value=(wow_registry_query_value_fn)GetProcAddress(parent,"ntvdm_shadow_reg_query_value");
+    wow_parent_query_value_ex=(wow_registry_query_value_ex_fn)GetProcAddress(parent,"ntvdm_shadow_reg_query_value_ex");
     wow_parent_enum_key=(wow_registry_enum_key_fn)GetProcAddress(parent,"ntvdm_shadow_reg_enum_key");
     wow_parent_open_key_ex=(wow_registry_open_key_ex_fn)GetProcAddress(parent,"ntvdm_shadow_reg_open_key_ex");
     wow_parent_query_info_key=(wow_registry_query_info_key_fn)GetProcAddress(parent,"ntvdm_shadow_reg_query_info_key");
     wow_parent_enum_value=(wow_registry_enum_value_fn)GetProcAddress(parent,"ntvdm_shadow_reg_enum_value");
     return wow_parent_open_key && wow_parent_create_key && wow_parent_close_key &&
-        wow_parent_delete_key && wow_parent_set_value && wow_parent_query_value &&
+        wow_parent_delete_key && wow_parent_set_value && wow_parent_set_value_ex && wow_parent_query_value && wow_parent_query_value_ex &&
         wow_parent_enum_key && wow_parent_open_key_ex && wow_parent_query_info_key &&
         wow_parent_enum_value;
 }
@@ -87,18 +93,28 @@ static BOOL wow_registry_predefined(HKEY key)
     return key==HKEY_CLASSES_ROOT || key==HKEY_LOCAL_MACHINE;
 }
 
-static HKEY wow_registry_parent_key(HKEY key)
+/* A token protects a parent raw key until the parent call returns.  Do not
+ * resolve then unlock: another WOW thread could close the token and retire
+ * the parent key between those two operations. */
+static HKEY wow_registry_parent_key(HKEY key, BOOL *locked)
 {
     wow_registry_token *entry;
     HKEY parent=NULL;
 
+    if(locked)*locked=FALSE;
     if(wow_registry_predefined(key))return key;
     if(!key || !wow_registry_ready())return NULL;
     EnterCriticalSection(&wow_registry_lock);
     for(entry=wow_registry_tokens;entry;entry=entry->next)
         if(entry->value==(DWORD)(ULONG_PTR)key) { parent=entry->parent; break; }
-    LeaveCriticalSection(&wow_registry_lock);
+    if(!parent)LeaveCriticalSection(&wow_registry_lock);
+    else if(locked)*locked=TRUE;
     return parent;
+}
+
+static VOID wow_registry_parent_key_release(BOOL locked)
+{
+    if(locked)LeaveCriticalSection(&wow_registry_lock);
 }
 
 static LONG wow_registry_publish(HKEY parent, PHKEY result)
@@ -132,16 +148,18 @@ static LONG wow_registry_publish(HKEY parent, PHKEY result)
 static LONG wow_registry_open(HKEY root, LPCSTR subkey, DWORD options,
     REGSAM access, PHKEY result, BOOL create)
 {
-    HKEY parent_root=wow_registry_parent_key(root),parent=NULL;
+    BOOL locked;
+    HKEY parent_root=wow_registry_parent_key(root,&locked),parent=NULL;
     LONG status;
 
     if(!result)return ERROR_INVALID_PARAMETER;
     *result=NULL;
     if(!parent_root)return ERROR_INVALID_HANDLE;
-    if(!wow_registry_parent_ready())return ERROR_NOT_READY;
+    if(!wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_NOT_READY; }
     status=create ? wow_parent_create_key(parent_root,subkey,&parent) :
         (options || access ? wow_parent_open_key_ex(parent_root,subkey,
             options,access,&parent) : wow_parent_open_key(parent_root,subkey,&parent));
+    wow_registry_parent_key_release(locked);
     if(status!=ERROR_SUCCESS)return status;
     status=wow_registry_publish(parent,result);
     if(status!=ERROR_SUCCESS)(void)wow_parent_close_key(parent);
@@ -183,32 +201,51 @@ LONG WINAPI wow_registry_close_key(HKEY key)
 
 LONG WINAPI wow_registry_delete_key(HKEY key, LPCSTR subkey)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_delete_key(parent,subkey) : ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_delete_key(parent,subkey); wow_registry_parent_key_release(locked); return status;
 }
 
 LONG WINAPI wow_registry_set_value(HKEY key, LPCSTR subkey, DWORD type,
     LPCSTR data, DWORD data_size)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_set_value(parent,subkey,type,data,data_size) :
-        ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_set_value(parent,subkey,type,data,data_size); wow_registry_parent_key_release(locked); return status;
+}
+
+LONG WINAPI wow_registry_set_value_ex(HKEY key, LPCSTR value, DWORD reserved,
+    DWORD type, const BYTE *data, DWORD data_size)
+{
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_set_value_ex(parent,value,reserved,type,data,data_size);
+    wow_registry_parent_key_release(locked); return status;
 }
 
 LONG WINAPI wow_registry_query_value(HKEY key, LPCSTR subkey, LPSTR data,
     PLONG data_size)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_query_value(parent,subkey,data,data_size) :
-        ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_query_value(parent,subkey,data,data_size); wow_registry_parent_key_release(locked); return status;
+}
+
+LONG WINAPI wow_registry_query_value_ex(HKEY key, LPCSTR value, LPDWORD reserved,
+    LPDWORD type, LPBYTE data, LPDWORD data_size)
+{
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_query_value_ex(parent,value,reserved,type,data,data_size);
+    wow_registry_parent_key_release(locked); return status;
 }
 
 LONG WINAPI wow_registry_enum_key(HKEY key, DWORD index, LPSTR name,
     DWORD name_size)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_enum_key(parent,index,name,name_size) :
-        ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_enum_key(parent,index,name,name_size); wow_registry_parent_key_release(locked); return status;
 }
 
 LONG WINAPI wow_registry_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
@@ -224,20 +261,22 @@ LONG WINAPI wow_registry_query_info_key(HKEY key, LPTSTR class_name,
     LPDWORD maximum_value_data_length, LPDWORD security_descriptor,
     PFILETIME last_write_time)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_query_info_key(parent,class_name,class_length,
-        reserved,subkeys,maximum_subkey_length,maximum_class_length,values,
-        maximum_value_name_length,maximum_value_data_length,security_descriptor,
-        last_write_time) : ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_query_info_key(parent,class_name,class_length,reserved,subkeys,
+        maximum_subkey_length,maximum_class_length,values,maximum_value_name_length,
+        maximum_value_data_length,security_descriptor,last_write_time);
+    wow_registry_parent_key_release(locked); return status;
 }
 
 LONG WINAPI wow_registry_enum_value(HKEY key, DWORD index, LPSTR value_name,
     LPDWORD value_name_size, LPDWORD reserved, LPDWORD type, LPBYTE data,
     LPDWORD data_size)
 {
-    HKEY parent=wow_registry_parent_key(key);
-    return parent && wow_registry_parent_ready() ? wow_parent_enum_value(parent,index,value_name,
-        value_name_size,reserved,type,data,data_size) : ERROR_INVALID_HANDLE;
+    BOOL locked; HKEY parent=wow_registry_parent_key(key,&locked); LONG status;
+    if(!parent || !wow_registry_parent_ready()) { wow_registry_parent_key_release(locked); return ERROR_INVALID_HANDLE; }
+    status=wow_parent_enum_value(parent,index,value_name,value_name_size,reserved,type,data,data_size);
+    wow_registry_parent_key_release(locked); return status;
 }
 
 VOID WINAPI wow_registry_binding_shutdown(VOID)

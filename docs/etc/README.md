@@ -145,6 +145,14 @@ finite S2 handoff; it is source evidence, not runtime acceptance.
 fixes the parent-owned façade, guest-safe worker-token and original-thunk
 binding boundary before S2 implementation; it does not claim a runtime path.
 
+[T461 S2 Shell/Registry binding acceptance](evidence/m0-t461-s2-binding-implementation.md)
+records the retained original callers, one parent façade/token boundary,
+formal builds and the published coherent-package gate.
+
+[T461 S3 durable Registry overlay design](operations/t461-shell-registry-s3-design.md)
+defines the sole façade's atomic persistence, tombstone and cross-worker
+serialization boundary before implementation.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

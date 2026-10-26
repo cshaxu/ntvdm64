@@ -2,7 +2,8 @@
 
 ## Decision
 
-Retain every selected original `wshell.c` and `wkernel.c` body unchanged.
+Retain every selected original `wshell.c`, `wkernel.c`, `mapembed.c`,
+`wdde.c` and `wow32fax.c` body unchanged.
 The existing `mvdm_shadow_registry` component remains the sole owner of the
 layered Registry state.  A small WOW32-DLL binding maps guest-visible DWORD
 tokens to that component's private parent-process keys; it has no Registry
@@ -19,7 +20,7 @@ behaviour.  Neither is allowed.
 
 | Layer | Owner | State and rule |
 | --- | --- | --- |
-| Original WOW callers | `wshell.c` ordinals 1--7 and `wkernel.c` selected registry thunks | Retain original calls, argument conversions, error conversion, guest buffer flushes and `WOWRegDeleteKey` recursion. |
+| Original WOW callers | `wshell.c` ordinals 1--7, `wkernel.c` selected registry thunks, and the existing `mapembed.c`/`wdde.c`/`wow32fax.c` Registry call sites | Retain original calls, argument conversions, error conversion, guest buffer flushes and `WOWRegDeleteKey` recursion. |
 | Parent façade | `mvdm_shadow_registry.c` in `ntvdm.exe` | Owns all raw key objects, the read baseline and future mutable `NTVDM.REG` overlay. It exposes only fixed Win32-shaped private imports to its late-loaded WOW32 child. No raw key leaves this component. |
 | WOW binding | one `wow32-dll` Registry-binding source and header | Owns a bounded worker-local token table only. It resolves a guest DWORD token immediately to a parent opaque key, calls the parent façade, and never stores a raw key in guest memory. |
 | Guest | original DWORD `HKEY` fields | Receives nonzero worker-local tokens. Tokens are monotonic and never reused during the worker lifetime; stale/foreign values fail as invalid handles. |
@@ -39,8 +40,11 @@ The existing generated parent import surface gains these `WINAPI` operations:
 `mvdm_shadow_reg_open_key`, `mvdm_shadow_reg_create_key`,
 `mvdm_shadow_reg_close_key`, `mvdm_shadow_reg_delete_key`,
 `mvdm_shadow_reg_set_value`, `mvdm_shadow_reg_query_value`,
-`mvdm_shadow_reg_enum_key`, plus the existing `open_key_ex`, `query_info_key`
-and `enum_value` used by original `WOWRegDeleteKey` and KERNEL thunks.
+`mvdm_shadow_reg_enum_key`, `mvdm_shadow_reg_set_value_ex`, plus the existing
+`open_key_ex`, `query_info_key` and `enum_value` used by original
+`WOWRegDeleteKey` and KERNEL thunks.  WOW32 resolves this fixed private parent
+ABI only from its loaded `ntvdm.exe`; there is no static second façade copy or
+independent Registry provider.
 
 The WOW binding presents the corresponding historical `Reg*` signatures to
 the original source through a source-specific forced-include/build mapping.

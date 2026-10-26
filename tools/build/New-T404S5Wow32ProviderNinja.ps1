@@ -307,16 +307,6 @@ foreach ($alias in @(
     [pscustomobject]@{ Decorated = 'RemoveFontResourceOem@4'; Raw = 'RemoveFontResourceOem' },
     [pscustomobject]@{ Decorated = 'CreateFileOem@28'; Raw = 'CreateFileOem' },
     [pscustomobject]@{ Decorated = 'GetVolumeInformationOem@32'; Raw = 'GetVolumeInformationOem' }
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_open_key@12'; Raw = 'mvdm_shadow_reg_open_key' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_create_key@12'; Raw = 'mvdm_shadow_reg_create_key' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_close_key@4'; Raw = '_mvdm_shadow_reg_close_key@4' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_delete_key@8'; Raw = 'mvdm_shadow_reg_delete_key' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_set_value@20'; Raw = 'mvdm_shadow_reg_set_value' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_query_value@16'; Raw = 'mvdm_shadow_reg_query_value' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_enum_key@16'; Raw = 'mvdm_shadow_reg_enum_key' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_open_key_ex@20'; Raw = '_mvdm_shadow_reg_open_key_ex@20' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_query_info_key@48'; Raw = '_mvdm_shadow_reg_query_info_key@48' },
-    [pscustomobject]@{ Decorated = 'mvdm_shadow_reg_enum_value@32'; Raw = '_mvdm_shadow_reg_enum_value@32' }
 )) {
     $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:_' + $alias.Decorated + '=' + $alias.Raw + '")')
     $parentImportAliasLines.Add('#pragma comment(linker, "/alternatename:__imp__' + $alias.Decorated + '=__imp_' + $alias.Raw + '")')
@@ -454,7 +444,7 @@ foreach ($source in $sources) {
         $ninja.Add('  cflags = $cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
         $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
-    } elseif ($source -eq 'wkernel.c') {
+    } elseif ($source -in @('wkernel.c','mapembed.c','wdde.c','wow32fax.c')) {
         $ninja.Add('  cflags = $cflags /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
     }
 }

@@ -57,10 +57,10 @@ static int require(LONG actual, LONG expected, LPCSTR label)
 
 int main(VOID)
 {
-    HKEY root,child,leaf,stale; char value[32],name[32]; LONG size; DWORD count,written,type,data_size;
+    HKEY root,child,leaf,stale; char value[32],name[32]; LONG size; DWORD count,written,type,data_size,values;
     HANDLE file; char path[MAX_PATH];
     static const char baseline[]="Windows Registry Editor Version 5.00\r\n\r\n"
-        "[HKEY_CLASSES_ROOT\\Baseline]\r\n@=\"baseline\"\r\n";
+        "[HKEY_CLASSES_ROOT\\Baseline]\r\n@=\"baseline\"\r\n\"Old\"=\"old\"\r\n";
 
     if (common_product_path_a(L"",path,sizeof(path))) return 2;
     /* CREATE_NEW is intentional: never replace an existing product overlay. */
@@ -69,6 +69,14 @@ int main(VOID)
     if (!WriteFile(file,baseline,sizeof(baseline)-1u,&written,NULL) || written!=sizeof(baseline)-1u) return 4;
     CloseHandle(file);
     if (!ntvdm_shadow_registry_initialize()) return 5;
+    if (require(ntvdm_shadow_reg_open_key(HKEY_CLASSES_ROOT,"Baseline",&root),ERROR_SUCCESS,"open baseline")) return 52;
+    if (require(ntvdm_shadow_reg_set_value_ex(root,"Old",0,REG_SZ,(const BYTE *)"new",4),ERROR_SUCCESS,"override baseline")) return 53;
+    if (require(ntvdm_shadow_reg_set_value_ex(root,"Added",0,REG_SZ,(const BYTE *)"added",6),ERROR_SUCCESS,"add baseline value")) return 54;
+    data_size=sizeof(value);
+    if (require(ntvdm_shadow_reg_query_value_ex(root,"Old",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"query override") || strcmp(value,"new")) return 55;
+    if (require(ntvdm_shadow_reg_query_info_key(root,NULL,NULL,NULL,NULL,NULL,NULL,&values,NULL,NULL,NULL,NULL),ERROR_SUCCESS,"merged query info") || values!=3) return 56;
+    if (require(ntvdm_shadow_reg_close_key(root),ERROR_SUCCESS,"close baseline")) return 57;
+    if (require(ntvdm_shadow_reg_create_key(HKEY_LOCAL_MACHINE,"Software\\Unadmitted",&root),ERROR_FILE_NOT_FOUND,"unadmitted machine reject")) return 51;
     if (require(ntvdm_shadow_reg_create_key(HKEY_CLASSES_ROOT,"S2",&root),ERROR_SUCCESS,"create root")) return 6;
     if (require(ntvdm_shadow_reg_set_value(root,"",REG_SZ,"value",6),ERROR_SUCCESS,"set default")) return 7;
     size=sizeof(value);
@@ -76,6 +84,10 @@ int main(VOID)
     data_size=sizeof(value); count=sizeof(name);
     if (require(ntvdm_shadow_reg_enum_value(root,0,name,&count,NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"enum default") ||
         count!=0 || type!=REG_SZ || data_size!=6 || strcmp(value,"value")) return 81;
+    if (require(ntvdm_shadow_reg_set_value_ex(root,"Named",0,REG_SZ,(const BYTE *)"named",6),ERROR_SUCCESS,"set named")) return 82;
+    data_size=sizeof(value);
+    if (require(ntvdm_shadow_reg_query_value_ex(root,"Named",NULL,&type,(BYTE *)value,&data_size),ERROR_SUCCESS,"query named") ||
+        type!=REG_SZ || data_size!=6 || strcmp(value,"named")) return 83;
     if (require(ntvdm_shadow_reg_create_key(root,"Child",&child),ERROR_SUCCESS,"create child")) return 9;
     if (require(ntvdm_shadow_reg_delete_key(root,"Child"),ERROR_SUCCESS,"delete leaf")) return 10;
     if (require(ntvdm_shadow_reg_open_key(root,"Child",&leaf),ERROR_FILE_NOT_FOUND,"deleted leaf absent")) return 11;

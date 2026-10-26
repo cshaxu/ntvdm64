@@ -16,8 +16,12 @@ LONG WINAPI wow_registry_close_key(HKEY key);
 LONG WINAPI wow_registry_delete_key(HKEY key, LPCSTR subkey);
 LONG WINAPI wow_registry_set_value(HKEY key, LPCSTR subkey, DWORD type,
     LPCSTR data, DWORD data_size);
+LONG WINAPI wow_registry_set_value_ex(HKEY key, LPCSTR value, DWORD reserved,
+    DWORD type, const BYTE *data, DWORD data_size);
 LONG WINAPI wow_registry_query_value(HKEY key, LPCSTR subkey, LPSTR data,
     PLONG data_size);
+LONG WINAPI wow_registry_query_value_ex(HKEY key, LPCSTR value, LPDWORD reserved,
+    LPDWORD type, LPBYTE data, LPDWORD data_size);
 LONG WINAPI wow_registry_enum_key(HKEY key, DWORD index, LPSTR name,
     DWORD name_size);
 LONG WINAPI wow_registry_open_key_ex(HKEY root, LPCSTR subkey, DWORD options,
@@ -41,7 +45,9 @@ VOID WINAPI wow_registry_binding_shutdown(VOID);
 #undef RegCloseKey
 #undef RegDeleteKey
 #undef RegSetValue
+#undef RegSetValueEx
 #undef RegQueryValue
+#undef RegQueryValueEx
 #undef RegEnumKey
 #undef RegOpenKeyEx
 #undef RegQueryInfoKey
@@ -51,7 +57,9 @@ VOID WINAPI wow_registry_binding_shutdown(VOID);
 #define RegCloseKey wow_registry_close_key
 #define RegDeleteKey wow_registry_delete_key
 #define RegSetValue wow_registry_set_value
+#define RegSetValueEx wow_registry_set_value_ex
 #define RegQueryValue wow_registry_query_value
+#define RegQueryValueEx wow_registry_query_value_ex
 #define RegEnumKey wow_registry_enum_key
 #define RegOpenKeyEx wow_registry_open_key_ex
 #define RegQueryInfoKey wow_registry_query_info_key

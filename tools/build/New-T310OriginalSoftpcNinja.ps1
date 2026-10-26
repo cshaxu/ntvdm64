@@ -581,6 +581,7 @@ foreach ($entry in @(
     'ntvdm_shadow_reg_close_key',
     'ntvdm_shadow_reg_delete_key',
     'ntvdm_shadow_reg_set_value',
+    'ntvdm_shadow_reg_set_value_ex',
     'ntvdm_shadow_reg_query_value',
     'ntvdm_shadow_reg_enum_key',
     'opennt_exit_thread=_opennt_exit_thread@4',

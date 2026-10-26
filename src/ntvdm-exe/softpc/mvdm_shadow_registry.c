@@ -233,14 +233,21 @@ static BOOL admitted_host_section(LPCSTR section)
     };
     static const char wow_prefix[]=
         "HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Control\\WOW";
+    static const char fax_prefix[]=
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\WOW\\WowFax";
     DWORD index;
 
     if (!section) return FALSE;
     for (index=0; exact[index]; ++index)
         if (!_stricmp(section,exact[index])) return TRUE;
-    return !_strnicmp(section,wow_prefix,sizeof(wow_prefix)-1u) &&
+    if (!_strnicmp(section,wow_prefix,sizeof(wow_prefix)-1u) &&
         (section[sizeof(wow_prefix)-1u]=='\0' ||
-         section[sizeof(wow_prefix)-1u]=='\\');
+         section[sizeof(wow_prefix)-1u]=='\\')) return TRUE;
+    /* WOWFAX is an original selected caller.  Admit only its exact product
+     * subtree; never widen the machine-root view to generic HKLM. */
+    return !_strnicmp(section,fax_prefix,sizeof(fax_prefix)-1u) &&
+        (section[sizeof(fax_prefix)-1u]=='\0' ||
+         section[sizeof(fax_prefix)-1u]=='\\');
 }
 
 static VOID free_host_values(MVDM_SHADOW_VALUE *value)
@@ -1024,9 +1031,31 @@ static BOOL section_baseline_exists(LPCSTR section)
 
 static BOOL section_visible(LPCSTR section)
 {
-    MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(section,FALSE);
-    return !(overlay && overlay->deleted) &&
-        (section_baseline_exists(section) || (overlay && overlay->created));
+    char parent[512];
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    size_t length;
+
+    if (!section) return FALSE;
+    lstrcpynA(parent,section,sizeof(parent));
+    for (;;) {
+        overlay=overlay_key(parent,FALSE);
+        if (overlay && overlay->deleted) return FALSE;
+        length=strlen(parent);
+        while (length && parent[length-1u]!='\\') --length;
+        if (!length) break;
+        parent[length-1u]='\0';
+    }
+    overlay=overlay_key(section,FALSE);
+    return section_baseline_exists(section) || (overlay && overlay->created);
+}
+
+static BOOL section_admitted(LPCSTR section)
+{
+    static const char classes[]="HKEY_CLASSES_ROOT";
+    if (!_strnicmp(section,classes,sizeof(classes)-1u) &&
+        (section[sizeof(classes)-1u]=='\0' || section[sizeof(classes)-1u]=='\\'))
+        return TRUE;
+    return admitted_host_section(section);
 }
 
 static LONG section_from_root(HKEY root, LPCSTR subkey, char *section,
@@ -1056,11 +1085,19 @@ static LONG open_section(HKEY root, LPCSTR subkey, BOOL create, PHKEY result)
     MVDM_SHADOW_OVERLAY_KEY *overlay;
     char section[512];
     LONG status;
+    BOOL host_exists=FALSE;
     if (!result || !shadow_initialized) return ERROR_FILE_NOT_FOUND;
     *result=NULL;
     status=section_from_root(root,subkey,section,sizeof(section));
     if (status!=ERROR_SUCCESS) return status;
-    if (!section_visible(section)) {
+    if (!section_admitted(section)) return ERROR_FILE_NOT_FOUND;
+    if (admitted_host_section(section)) {
+        MVDM_SHADOW_KEY probe;
+        memset(&probe,0,sizeof(probe)); lstrcpyA(probe.section,section);
+        host_exists=snapshot_host_values(&probe)==ERROR_SUCCESS;
+        free_host_values(probe.host_values);
+    }
+    if (!section_visible(section) && !host_exists) {
         if (!create) return ERROR_FILE_NOT_FOUND;
         overlay=overlay_key(section,TRUE);
         if (!overlay) return ERROR_NOT_ENOUGH_MEMORY;
@@ -1133,6 +1170,26 @@ LONG WINAPI ntvdm_shadow_reg_set_value(HKEY handle, LPCSTR subkey, DWORD type,
     return ntvdm_shadow_reg_close_key(child);
 }
 
+LONG WINAPI ntvdm_shadow_reg_set_value_ex(HKEY handle, LPCSTR name, DWORD reserved,
+    DWORD type, const BYTE *data, DWORD data_size)
+{
+    MVDM_SHADOW_KEY *key=validate_key(handle);
+    MVDM_SHADOW_OVERLAY_KEY *overlay;
+    MVDM_SHADOW_OVERLAY_VALUE *value;
+    BYTE *copy;
+    (void)reserved;
+    if (!key || (!data && data_size)) return ERROR_INVALID_PARAMETER;
+    overlay=overlay_key(key->section,TRUE);
+    value=overlay_value(overlay,name ? name : "",TRUE);
+    if (!overlay || !value) return ERROR_NOT_ENOUGH_MEMORY;
+    copy=data_size ? (BYTE *)malloc(data_size) : NULL;
+    if (data_size && !copy) return ERROR_NOT_ENOUGH_MEMORY;
+    if (data_size) memcpy(copy,data,data_size);
+    free(value->data); value->data=copy; value->data_size=data_size; value->type=type;
+    value->deleted=FALSE; overlay->created=TRUE; overlay->deleted=FALSE;
+    return ERROR_SUCCESS;
+}
+
 LONG WINAPI ntvdm_shadow_reg_query_value(HKEY handle, LPCSTR subkey, LPSTR data,
     PLONG data_size)
 {
@@ -1190,7 +1247,19 @@ LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
         { char section[512]; DWORD section_length=(DWORD)(end-line-2);
           if (section_length>=sizeof(section)) continue;
           memcpy(section,line+1,section_length); section[section_length]=0;
+          const char *prior;
+          BOOL duplicate=FALSE;
           if (!section_is_child(key->section,section,&child,&length) || !section_visible(section)) continue;
+          for (prior=shadow_contents; prior<line; prior=next_line(prior)) {
+              const char *old_child; DWORD old_length; const char *prior_end=line_end(prior);
+              if (prior[0]=='[' && prior_end>prior+2) { char old[512]; DWORD n=(DWORD)(prior_end-prior-2);
+                  if (n<sizeof(old)) { memcpy(old,prior+1,n); old[n]=0;
+                      if (section_is_child(key->section,old,&old_child,&old_length) &&
+                          old_length==length && !_strnicmp(old_child,child,length)) { duplicate=TRUE; break; }
+                  }
+              }
+          }
+          if (duplicate) continue;
           if (current++==index) { if (length+1u>name_size) return ERROR_MORE_DATA; memcpy(name,child,length); name[length]=0; return ERROR_SUCCESS; }
         }
     }
@@ -1202,6 +1271,15 @@ LONG WINAPI ntvdm_shadow_reg_enum_key(HKEY handle, DWORD index, LPSTR name,
             if (scan[0]=='[' && end>scan+2) { char old[512]; DWORD n=(DWORD)(end-scan-2);
                 if (n<sizeof(old)) { memcpy(old,scan+1,n); old[n]=0;
                     if (section_is_child(key->section,old,&old_child,&old_length) && old_length==length && !_strnicmp(old_child,child,length)) { prior=1; break; } }
+            }
+        }
+        if (!prior) {
+            MVDM_SHADOW_OVERLAY_KEY *earlier;
+            for (earlier=shadow_overlay_keys; earlier!=overlay; earlier=earlier->next) {
+                const char *old_child; DWORD old_length;
+                if (!earlier->deleted && section_is_child(key->section,earlier->section,
+                    &old_child,&old_length) && old_length==length &&
+                    !_strnicmp(old_child,child,length)) { prior=1; break; }
             }
         }
         if (prior) continue;
@@ -1217,7 +1295,8 @@ LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY handle, LPTSTR class_name,
     LPDWORD maximum_value_data_length, LPDWORD security_descriptor,
     PFILETIME last_write_time)
 {
-    MVDM_SHADOW_KEY *key=validate_key(handle); char child[512]; DWORD count=0,max=0;
+    MVDM_SHADOW_KEY *key=validate_key(handle); char child[512], value_name[512];
+    DWORD count=0,max=0,value_count=0,value_name_max=0,value_data_max=0;
     LONG status;
     if (!key) return ERROR_INVALID_HANDLE;
     while ((status=ntvdm_shadow_reg_enum_key(handle,count,child,sizeof(child)))==ERROR_SUCCESS) {
@@ -1226,27 +1305,43 @@ LONG WINAPI ntvdm_shadow_reg_query_info_key(HKEY handle, LPTSTR class_name,
     if (status!=ERROR_NO_MORE_ITEMS) return status;
     if (subkeys) *subkeys=count;
     if (maximum_subkey_length) *maximum_subkey_length=max;
-    {
-        MVDM_SHADOW_OVERLAY_KEY *overlay=overlay_key(key->section,FALSE);
-        if (overlay && overlay->created && !find_section(key->section)) {
-            MVDM_SHADOW_OVERLAY_VALUE *value;
-            DWORD value_count=0,value_name_max=0,value_data_max=0;
-            for (value=overlay->values; value; value=value->next) if (!value->deleted) {
-                DWORD length=(DWORD)lstrlenA(value->name);
-                ++value_count;
-                if (length>value_name_max) value_name_max=length;
-                if (value->data_size>value_data_max) value_data_max=value->data_size;
-            }
-            if (values) *values=value_count;
-            if (maximum_value_name_length) *maximum_value_name_length=value_name_max;
-            if (maximum_value_data_length) *maximum_value_data_length=value_data_max;
-            if (class_length) *class_length=0;
-            return ERROR_SUCCESS;
-        }
+    for (;;) {
+        DWORD name_size=sizeof(value_name), data_size=0;
+        status=ntvdm_shadow_reg_enum_value(handle,value_count,value_name,&name_size,
+            NULL,NULL,NULL,&data_size);
+        if (status==ERROR_NO_MORE_ITEMS) break;
+        if (status!=ERROR_SUCCESS && status!=ERROR_MORE_DATA) return status;
+        ++value_count;
+        if (name_size>value_name_max) value_name_max=name_size;
+        if (data_size>value_data_max) value_data_max=data_size;
     }
-    return ntvdm_shadow_reg_query_info_key_readonly(handle,class_name,class_length,reserved,
-        NULL,NULL,maximum_class_length,values,maximum_value_name_length,
-        maximum_value_data_length,security_descriptor,last_write_time);
+    if (values) *values=value_count;
+    if (maximum_value_name_length) *maximum_value_name_length=value_name_max;
+    if (maximum_value_data_length) *maximum_value_data_length=value_data_max;
+    (void)class_name; (void)reserved; (void)maximum_class_length;
+    (void)security_descriptor; (void)last_write_time;
+    if (class_length) *class_length=0;
+    return ERROR_SUCCESS;
+}
+
+static LONG copy_overlay_value(const MVDM_SHADOW_OVERLAY_VALUE *value,
+    LPSTR value_name, LPDWORD value_name_size, LPDWORD type, LPBYTE data,
+    LPDWORD data_size)
+{
+    DWORD length;
+    if (!value || !value_name_size) return ERROR_INVALID_PARAMETER;
+    length=(DWORD)lstrlenA(value->name);
+    if (*value_name_size<=length || !data_size || (!data && *data_size)) {
+        *value_name_size=length; return ERROR_MORE_DATA;
+    }
+    if (*data_size<value->data_size) {
+        *value_name_size=length; *data_size=value->data_size; return ERROR_MORE_DATA;
+    }
+    memcpy(value_name,value->name,length+1u); *value_name_size=length;
+    if (type) *type=value->type;
+    if (data && value->data_size) memcpy(data,value->data,value->data_size);
+    *data_size=value->data_size;
+    return ERROR_SUCCESS;
 }
 
 LONG WINAPI ntvdm_shadow_reg_enum_value(HKEY handle, DWORD index, LPSTR value_name,
@@ -1256,27 +1351,65 @@ LONG WINAPI ntvdm_shadow_reg_enum_value(HKEY handle, DWORD index, LPSTR value_na
     MVDM_SHADOW_KEY *key=validate_key(handle);
     MVDM_SHADOW_OVERLAY_KEY *overlay;
     MVDM_SHADOW_OVERLAY_VALUE *value;
-    DWORD length;
+    const char *line;
+    DWORD current=0;
+    (void)reserved;
     if (!key || !value_name_size) return ERROR_INVALID_HANDLE;
     overlay=overlay_key(key->section,FALSE);
-    if (overlay && overlay->created && !find_section(key->section)) {
-        for (value=overlay->values; value && index; value=value->next)
-            if (!value->deleted) --index;
-        while (value && value->deleted) value=value->next;
-        if (!value) return ERROR_NO_MORE_ITEMS;
-        length=(DWORD)lstrlenA(value->name);
-        if (*value_name_size<=length || !data_size || (!data && *data_size)) {
-            *value_name_size=length; return ERROR_MORE_DATA;
+    if (!overlay) return ntvdm_shadow_reg_enum_value_readonly(handle,index,value_name,
+        value_name_size,reserved,type,data,data_size);
+    /* Preserve the original static/host enumeration order.  An overlay entry
+     * replaces its same-named baseline value in place; a new value follows
+     * the baseline.  Deleted values are absent from both views. */
+    line=find_section(key->section);
+    while (line && line<shadow_contents+shadow_size && line[0]!='[') {
+        const char *name,*raw,*end;
+        DWORD name_length;
+        if (value_line(line,&name,&name_length,&raw,&end)) {
+            char candidate[512];
+            if (name_length<sizeof(candidate)) {
+                memcpy(candidate,name,name_length); candidate[name_length]=0;
+                value=overlay_value(overlay,candidate,FALSE);
+                if (value && value->deleted) { line=next_line(line); continue; }
+                if (current++==index) {
+                    if (value) return copy_overlay_value(value,value_name,value_name_size,type,data,data_size);
+                    { BYTE *decoded; DWORD decoded_type,decoded_size;
+                      LONG status=decode_value(raw,end,&decoded_type,&decoded,&decoded_size);
+                      if (status!=ERROR_SUCCESS) return status;
+                      if (*value_name_size<=name_length || !data_size || (!data && *data_size)) {
+                          *value_name_size=name_length; free(decoded); return ERROR_MORE_DATA; }
+                      if (*data_size<decoded_size) { *value_name_size=name_length; *data_size=decoded_size;
+                          free(decoded); return ERROR_MORE_DATA; }
+                      memcpy(value_name,name,name_length); value_name[name_length]=0; *value_name_size=name_length;
+                      if (type) *type=decoded_type; if (data && decoded_size) memcpy(data,decoded,decoded_size);
+                      *data_size=decoded_size; free(decoded); return ERROR_SUCCESS; }
+                }
+            }
         }
-        if (*data_size<value->data_size) {
-            *value_name_size=length; *data_size=value->data_size; return ERROR_MORE_DATA;
-        }
-        memcpy(value_name,value->name,length+1u); *value_name_size=length;
-        if (type) *type=value->type;
-        if (data) memcpy(data,value->data,value->data_size);
-        *data_size=value->data_size;
-        return ERROR_SUCCESS;
+        line=next_line(line);
     }
-    return ntvdm_shadow_reg_enum_value_readonly(handle,index,value_name,value_name_size,
-        reserved,type,data,data_size);
+    {
+        MVDM_SHADOW_VALUE *host;
+        for (host=key->host_values; host; host=host->next) {
+            const char *raw,*end;
+            if (find_value(key,host->name,&raw,&end)) continue;
+            value=overlay_value(overlay,host->name,FALSE);
+            if (value && value->deleted) continue;
+            if (current++==index) {
+                if (value) return copy_overlay_value(value,value_name,value_name_size,type,data,data_size);
+                { DWORD length=(DWORD)lstrlenA(host->name);
+                  if (*value_name_size<=length || !data_size || (!data && *data_size)) { *value_name_size=length; return ERROR_MORE_DATA; }
+                  if (*data_size<host->data_size) { *value_name_size=length; *data_size=host->data_size; return ERROR_MORE_DATA; }
+                  memcpy(value_name,host->name,length+1u); *value_name_size=length;
+                  if (type) *type=host->type; if (data && host->data_size) memcpy(data,host->data,host->data_size);
+                  *data_size=host->data_size; return ERROR_SUCCESS; }
+            }
+        }
+    }
+    for (value=overlay->values; value; value=value->next) {
+        const char *raw,*end;
+        if (value->deleted || find_value(key,value->name,&raw,&end) || host_value(key,value->name)) continue;
+        if (current++==index) return copy_overlay_value(value,value_name,value_name_size,type,data,data_size);
+    }
+    return ERROR_NO_MORE_ITEMS;
 }

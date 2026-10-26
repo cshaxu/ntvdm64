@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T461 S2**
+**Active: M0 T461 S3**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
@@ -14,29 +14,29 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T461 S2 — Shell services and Registry operations
+### M0 T461 S3 — Registry persistence and concurrency
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T461 S2, Ordinary Mode; single-agent implementation and final review. |
-| Admission And Approval | Automatic sequential advance after completed T461 S1 source matrix. |
-| Objective | Complete selected Shell calls and the one `NTVDM.REG` façade's read/create/set/enum/delete/close conversions while retaining original caller bodies, errors and cleanup. |
-| Non-goals | No guest-media modification/rebuild; no system-Registry write; no second Registry provider, shell launcher/association database, DDE/OLE consumer, persistence/concurrency completion or unrelated runtime repair. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md), [S2 binding design](../etc/operations/t461-shell-registry-s2-design.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
-| Files And ABI Surface | Selected original `wshell.c`/`wkernel.c` callers, registered Shell callback binding, and `mvdm_shadow_registry` opaque-key C ABI; preserve guest buffers and original error conversion. |
+| Identifier Mode | M0 T461 S3, Ordinary Mode; single-agent implementation and final review. |
+| Admission And Approval | Automatic sequential advance after the S2 published binding acceptance. |
+| Objective | Persist the one parent-owned `NTVDM.REG` overlay atomically, including key/value tombstones and cross-worker serialization, without changing selected original caller bodies. |
+| Non-goals | No guest-media modification/rebuild; no system-Registry write; no second Registry provider, shell launcher/association database, DDE/OLE consumer or unrelated runtime repair. |
+| Reference Baseline | [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md), [S3 persistence design](../etc/operations/t461-shell-registry-s3-design.md), [Shell and layered Registry proposal](../proposals/proposal-wow32-shell-registry-001.md), shared minimum-diff governance and OpenNT-only seam ledger. |
+| Files And ABI Surface | `mvdm_shadow_registry` serialization/overlay state and its existing opaque-key ABI; selected original callers and the S2 WOW token binding remain source-shaped consumers. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; original behavior remains in original callers, façade remains the one Registry authority. |
-| Verification | Original ShellExecute/FindExecutable normal/error guest routes; Registry read/create/set/enum/delete/close normal/failure/retirement fixtures; source-owner, build and ABI review. |
-| Expected Markers | No native Registry handle crosses an original caller; no system Registry write; exact `NTVDM.REG` errors/cleanup and finite shell callback/return evidence. |
-| Asset Needs | Build-owned `build/t461-s2` fixtures and installed package inputs read-only; no guest or host-Registry mutation. |
-| Reporting Requirements | Changed owner/body/adapter split, error and lifetime matrix, test evidence, image/guest diff and finite S3 persistence/concurrency handoff. |
+| Verification | Restart, tombstone, atomic-write rollback and concurrent-worker fixtures; source-owner/build/ABI review and coherent product package gate. |
+| Expected Markers | No native Registry handle crosses an original caller; no system Registry write; a failed commit preserves the prior file/view and a restart preserves explicit deletion. |
+| Asset Needs | Build-owned `build/t461-s3` fixtures and installed package inputs read-only; no guest or host-Registry mutation. |
+| Reporting Requirements | Commit/rollback/lifetime matrix, test evidence, image/guest diff and finite S4 service-acceptance handoff. |
 | Stop Conditions | A second provider, host Registry write, replacement shell resolver, unbounded mirror import or unapproved semantic relaxation. |
-| Exit Criteria | Selected original callers and single façade operations pass normal/failure/cleanup evidence; governed review, coherent build/package evidence, commit and push. |
+| Exit Criteria | One façade persists and reloads correct value/deletion state across workers without partial commits; governed review, coherent build/package evidence, commit and push. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
-| Similar-Issue Sweep | Every selected Shell entry plus all façade read/create/set/enum/delete/close error/retirement paths, including stale keys and no-write guarantees. |
+| Similar-Issue Sweep | Every mutation, deletion, failed commit, restart and cross-worker ordering path, including unchanged S2 token retirement and no-write guarantees. |
 | Candidate Proposal | [WOW32 Shell and layered Registry](../proposals/proposal-wow32-shell-registry-001.md). |
 
-S2 begins from the completed S1 matrix. Static S1 evidence is not a substitute
-for original guest/runtime normal, failure and retirement proof.
+S3 begins from the published S2 binding. It may not substitute persistence
+with a second provider or re-open the accepted raw-key/token boundary.
 
 ## T461 S1 Closure Record
 
@@ -48,6 +48,16 @@ write/persistence/concurrency contract, its necessary replacement of a
 private-pointer key representation with bounded guest-safe tokens, and the
 explicit W18/W11 consumer handoffs. It changed no runtime, guest or installed
 package.
+
+## T461 S2 Closure Record
+
+S2 closes at the reviewed binding delivery. The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
+records the retained original five-caller Registry bodies, one parent-owned
+façade, worker-local non-reused tokens, façade mutation/retirement fixture,
+formal x86 builds and a coherent ten-image Product gate. `ntvdm.exe` and
+`WOW32.DLL` are published with matching release/installed hashes; guest media
+is unchanged. S3 alone owns durable commit, restart tombstones and
+cross-worker serialization.
 
 ## S1 Closure Record
 
@@ -161,6 +171,10 @@ T461 S2 may use only `build/t461-s2` for disposable Shell/Registry fixture and
 build evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
 budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
 evidence roots.
+
+T461 S3 may use only `build/t461-s3` for disposable persistence/concurrency
+evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
+Stable `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
