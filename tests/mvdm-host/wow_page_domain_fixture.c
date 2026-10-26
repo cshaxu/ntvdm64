@@ -535,7 +535,7 @@ static void verify_returned_windows(void)
         BORROW_CHECK(UnregisterClassA(message_class.lpszClassName, message_class.hInstance));
         dead = first;
         BORROW_CHECK(wow_native_DestroyWindow(first)); first = NULL;
-        BORROW_CHECK(wow_user_window_refresh_return(dead));
+        BORROW_CHECK(wow_user_window_refresh_payload(NULL, &dead, 1));
         BORROW_CHECK(!mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)dead));
         payload[0] = dead; payload[1] = second;
         payload[2] = (HWND)(LONG)(SHORT)LOWORD(child); payload[3] = NULL;
@@ -679,6 +679,38 @@ static int verify_callback_scope(ULONG teb)
         borrow = wow_window_words_acquire(window);
         BORROW_CHECK(borrow != NULL);
         BORROW_CHECK(wow_window_words_publish_owner(window, borrow, &thread));
+        /* Public USER return values cross a different boundary than original
+         * HWND32 conversion. Verify the production runtime wrapper returns
+         * only this exact live worker window, never a low-word collision. */
+        BORROW_CHECK(wow_user_window_public_handle(
+            (HWND)(ULONG_PTR)LOWORD(window)) == window);
+        BORROW_CHECK(wow_user_window_public_handle(
+            (HWND)(LONG_PTR)(SHORT)LOWORD(window)) == window);
+        SetLastError(0);
+        BORROW_CHECK(wow_user_window_public_handle(window) == NULL &&
+            GetLastError() == ERROR_INVALID_PARAMETER);
+        BORROW_CHECK(wow_user_window_public_guest_handle(window) ==
+            (HWND)(ULONG_PTR)LOWORD(window));
+        BORROW_CHECK(wow_user_window_public_guest_handle(
+            (HWND)((ULONG_PTR)window ^ 0x10000u)) == NULL);
+        {
+            HWND observed = CreateWindowExA(0, "STATIC", "S3 observed public return",
+                0, 30, 40, 160, 80, NULL, NULL, GetModuleHandle(NULL), NULL);
+            BORROW_CHECK(observed && LOWORD(observed) != LOWORD(window));
+            /* The normal public-result adapter must reuse the existing graph
+             * observation mechanism for an unowned native window.  It may not
+             * manufacture an owned table row, and it must reject the identity
+             * after the observation is withdrawn. */
+            BORROW_CHECK(wow_user_window_public_guest_handle(observed) ==
+                (HWND)(ULONG_PTR)LOWORD(observed));
+            BORROW_CHECK(wow_user_window_public_handle(
+                (HWND)(ULONG_PTR)LOWORD(observed)) == observed);
+            BORROW_CHECK(IsWindow(observed) && DestroyWindow(observed));
+            BORROW_CHECK(wow_user_window_refresh_graph(NULL));
+            BORROW_CHECK(wow_user_window_public_guest_handle(observed) == NULL);
+            BORROW_CHECK(wow_user_window_public_handle(
+                (HWND)(ULONG_PTR)LOWORD(observed)) == NULL);
+        }
         if (mode == 0) {
             wow_window_words_binding *retry_borrow;
             mvdm_softpc_wow_page_domain_leave_protected();
@@ -726,13 +758,20 @@ static int verify_callback_scope(ULONG teb)
         BORROW_CHECK(!IsMenu(menu));
         BORROW_CHECK(wow_menu_native_refresh_menu(NULL));
         BORROW_CHECK(objects.entries[LOWORD(window)].bType == TYPE_FREE);
+        BORROW_CHECK(wow_user_window_public_handle(
+            (HWND)(ULONG_PTR)LOWORD(window)) == NULL);
+        BORROW_CHECK(wow_user_window_public_handle(
+            (HWND)(LONG_PTR)(SHORT)LOWORD(window)) == NULL);
+        BORROW_CHECK(wow_user_window_public_guest_handle(window) == NULL);
         BORROW_CHECK(c_sas_dw_at(teb + 0x6cu) == 0u &&
             c_sas_dw_at(teb + 0x70u) == 0u);
         /* Query the original allocator instead of attempting a double free.
-         * Native window creation has no other guest allocation in this test. */
+         * Callback execution can also collect an older, deferred retired
+         * backing: a larger free count is therefore valid.  A smaller count
+         * would instead show that this callback leaked its guest backing. */
         BORROW_CHECK(callback_backing &&
             VdmQueryFreeVirtualMemory(&free_after, &largest) >= 0 &&
-            free_after == free_before);
+            free_after >= free_before);
         if (IsWindow(window)) DestroyWindow(window);
     }
     {
@@ -1959,7 +1998,7 @@ static void verify_native_window_first_subclass_case(BOOL existing_subclass)
         wow_window_terminal_observer,NULL,GetCurrentThreadId());
     BORROW_CHECK(terminal != NULL);
     if (!terminal) goto unbind;
-    BORROW_CHECK(wow_user_window_refresh_return(window));
+    BORROW_CHECK(wow_user_window_refresh_payload(NULL, &window, 1));
     if (!wow_user_borrow_enter(&scope)) {
         BORROW_CHECK(FALSE); goto unbind;
     }
@@ -5060,6 +5099,10 @@ guest_window_failure:
         object_table.entries[index].bType != 1u ||
         object_table.entries[index].wUniq != HIWORD(geometry_window) ||
         wow_user_window_full_handle(&object_table, index) != geometry_window ||
+        wow_user_window_guest_handle(&object_table, geometry_window) !=
+            (HWND)(ULONG_PTR)index ||
+        wow_user_window_guest_handle(&object_table,
+            (HWND)((ULONG_PTR)geometry_window ^ 0x10000u)) != NULL ||
         object_table.last_handle != expected_last ||
         c_sas_dw_at(entry + 8u) != ((ULONG)HIWORD(geometry_window) << 16 | 1u) ||
         !mvdm_softpc_wow_page_domain_callback_window(
@@ -5067,6 +5110,7 @@ guest_window_failure:
         !wow_user_window_retire(&object_table,
             geometry_window, &object_storage, &retained_backing) ||
         wow_user_window_full_handle(&object_table, index) != NULL ||
+        wow_user_window_guest_handle(&object_table, geometry_window) != NULL ||
         c_sas_dw_at(entry) != (ULONG)index + 1u ||
         c_sas_dw_at(entry + 8u) != 0x00010000u) goto done;
     stage = "retired-window-borrow";

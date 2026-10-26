@@ -2,63 +2,29 @@
 
 ## Current Work
 
-**Active: M0 T460 S3**
+**Active: M0 T460 S4**
+
+Owner requests standalone Win95 launch/path toolkits on 2026-10-25, based on
+copies of win31-launch/win31-path. Admit tools/win95-launch, tools/win95-path,
+independent add-on producers, arbitrary DOS-safe installation-root support,
+identity-bound recoverable VMM32 consumer adaptations, driver/profile/version
+installation and INI/PIF/LNK/GRP/registry relocation. Original media remains
+read-only. No host/core NTIO/NTDOS change or Computer Use. Use disposable
+`build/t460-s3/win95-toolkit-owner` (90 minutes, 2 GiB, 10-minute no-progress
+budget); verify alternate-root install, rollback/failure safety and original
+Win95 runtime before delivery. Preserve unrelated main-session work; no joint
+commit from this standalone work until the owner's main session collects it.
 
 Automatic sequential S closure/advancement is approved. Completed work follows
 the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 
-Owner direction on 2026-10-25 additionally authorizes the standalone Video7
-preserve-mode source correction, matching SoftPC T70 S10. It is limited to
-normalizing the BIOS mode before validation in `v7_video.c`, with no guest
-change or Win95-specific branch. The source register is `src/mvdm/README.md`;
-`tests/observation/verify-video7-mode-flags.ps1` owns the focused BIOS check.
-This source integration does not close S3 or claim coherent publication.
-Owner-requested test publication on 2026-10-25 subsequently rebuilt/staged
-the ten-image package, passed the 32-setting Video7 BIOS regression and
-verified release/installed manifest identities. Publication/rollback records
-are in `O:/WINNT/logs/video7-owner-publication`; S3 acceptance remains open.
-Owner subsequently reported doubled-width/black Win95 output. Isolated host
-DIB capture reproduces 1280x480; default 16-colour configuration was restored.
-Owner explicitly authorizes SoftPC packed-surface fixes in `nt_graph.c` and
-`nt_vga.c`; `src/mvdm/README.md` records their source and actual-output gate.
-The two-file candidate passes actual painter/baseline-control and real Win95
-640x480 host-DIB checks; test publication is in `O:/WINNT/logs/video7-packed-surface`.
-Temporary size exception retains concurrent S3 evidence until closure compaction.
-Owner separately authorizes `src/addon/win95-compat-sys` on 2026-10-25: retain the
-installed compatibility driver, add opt-in guest boot-logo display/handoff,
-and provide source/build instructions. No core guest/host change or S3 closure.
-Disposable output: `build/t460-s3/win95comp-logo-owner` (45 minutes, 2 GiB,
-10-minute no-progress budget); supplied IO.SYS and original image stay read-only.
-The add-on is now `compat.asm` -> `compat95.sys`; both mouse sources are
-`mouse.asm`, retaining MOUSE101.DRV/MOUSE31.DRV outputs. Four isolated logo
-cases pass (enabled/missing/invalid/disabled), including exact image DIB and
-Explorer desktop handoff. Released/installed identities and recoverable
-configuration backup are under `O:/WINNT/logs/win95-compat-logo` and
-`O:/WINNT/builds/pre-compat95-logo-20261025`; this does not close S3.
-Owner then requests original boot-bar animation in the same add-on. Reuse the
-same disposable root/budgets for source-bound IO.SYS contract research and
-four-case DAC-phase/desktop-handoff verification; no core/runtime change.
-Animation now passes all four cases, including three real DAC phases and
-51 frozen post-handoff samples. The 4856-byte `compat95.sys` is published and
-installed; results and static-version rollback are under
-`O:/WINNT/logs/win95-compat-animation` and
-`O:/WINNT/builds/pre-compat95-animation-20261025`. No S3 closure is claimed.
-Owner separately requests a reusable LNK.EXE add-on and repair of the installed
-Win95 menu/shortcut relocation. Admit `src/addon/lnk`, format tests, shared
-add-on publication and recoverable installed-menu preparation; no host/guest
-core change or original-image write. Disposable root
-`build/t460-s3/win95-menu-owner`: 60 minutes, 2 GiB, 10-minute no-progress budget.
-LNK.EXE is published/installed; 31 menu entries and 26 exact application copies
-have rollback at `O:/WINNT/builds/pre-win95-startmenu-20261025`. Original Win95
-SHELL32 reads all 30 installed LNK files with zero missing targets; three canary
-targets and a CP936 filename also pass. This is a menu path-resolution pass
-only: separate program launch returned error 8 and remains unresolved.
-Evidence is retained under `O:/WINNT/logs/win95-startmenu`; the supplied image,
-original extracted trees and core binaries stay unchanged.
-Owner additionally requests audit and joint submission of all new add-on and
-launch-tool sources. [The add-on audit](../etc/evidence/m0-t460-s3-addon-tool-audit.md)
-records provenance, release identities and installation/recovery checks.
+The independent Video7, packed-surface and Win95 add-on/tool work is bounded
+outside S3 core closure. Their source register, published/recovery identities,
+and explicit Win95 launch limits are in `src/mvdm/README.md`,
+[the paging record](../etc/evidence/m0-t460-s3-win95-paging-research.md) and
+[the add-on audit](../etc/evidence/m0-t460-s3-addon-tool-audit.md). Original
+media remains read-only; no such record upgrades this Clipboard/PIC/keyboard S.
 Clipboard callback source tracing identified twelve stray WORD arguments in
 the independently authored probe's zero-argument Close/EmptyClipboard calls.
 Removing them passes owner-destroy callback return and all eighteen shared
@@ -66,43 +32,61 @@ Clipboard transfer/deferred/replacement phases; the guarded version also
 passes. [The S3 evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
 supersedes the unproved continuation-failure hypothesis. Final coherent-package
 acceptance, review and joint submission remain open.
-The independent add-on/tool audit forms a bounded progress delivery;
-installer journal-failure rollback passes. Core candidate r2 passes callback,
-PIC/keyboard, DOS and message checks; complete shared Clipboard reruns hit
-external OpenClipboard denial. Core publication/S3 closure remain open.
+The independent add-on/tool audit was pushed as `6048075f4`.
+The frozen-source candidate now passes thirteen-phase owner destruction,
+seven-phase task exit and the unchanged eighteen-phase full Clipboard group,
+24 PIC/RTC/mouse assertions, 46 keyboard assertions and noninteractive
+regressions. Owner clarified that probe-driven interaction is allowed:
+reuse the successful private-desktop DOS17/Window17 and gameplay runners,
+without Computer Use. The candidate-only submission question is superseded;
+complete the ordinary package gates before publication and S3 closure.
+The first full run passes both seventeen-case command matrices, six RPC
+groups and GUI routing, then correctly rejects the stale `0.0.451` product
+identity. The shared version is advanced to admitted T460 (`0.0.460`), without
+changing protocol 65. All affected components have been incrementally rebuilt
+into `build/t460-s3/versioned-package`; acceptance is rerun against that exact
+package. The first gameplay invocation's relative compiler path failed before
+execution; both runners now resolve their compiler/observer paths before
+changing directory. Neither earlier failure is counted as a pass.
+R4 rebuilt the stale monitor fixture and exposed only external global-Clipboard
+contention: `RadeonSoftware.exe` owned it during two fresh attempts. R5 closes
+a return-to-input asymmetry by reusing the existing shared-view snapshot for
+public Clipboard operands. After verified unrelated Clipboard owner
+`logioptionsplus_agent.exe` was stopped, the complete 18-checkpoint shared
+transfer passes (`guest_to_native`, `native_to_guest`, rejection, deferred
+render and replacement all succeed). R5's five cached builds, focused suite,
+complete product gate and WINMINE/SOL probes pass; its ten images are published
+to `assets/release` and `O:\winnt\system32` with matching SHA-256 manifests.
+S3 is closed at `5e2e8bfaf`; S4 now owns the remaining selected-format and
+full lifetime acceptance, without reopening S3's completed boundaries.
 ## Active Packet
 
-### M0 T460 S3 — delayed rendering/loss, PIC-reset and keyboard-EOI repair
+### M0 T460 S4 — Clipboard complete selected-format and lifetime acceptance
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T460 S3, Ordinary Mode; single-agent implementation and independent final review. |
-| Admission And Approval | S2 transfer delivery is closed; automatic continuation under Queue W10 Clipboard proposal. Owner approved independent PIC-reset/EOI repair and keyboard early-EOI slot repair in this S on 2026-10-25. |
-| Objective | Prove selected original Clipboard deferred callbacks, replacement and task-loss cleanup; restore source-proven device EOI reset cancellation and keyboard-byte retention when IRQ1 is acknowledged before port 60 is read. |
-| Non-goals | No guest change/rebuild; no Clipboard manager/cache/listener/DDE substitute; no Win95 experiment/image, timer-reset, IRQ-injection, fabricated keyboard EOI/reinjection, driver change or command-specific change. |
-| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md), [Clipboard proposal](../proposals/proposal-wow32-clipboard-001.md), W01/W02/W03/W07 records, [PIC-reset plan](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md), read-only keyboard experiment evidence, and WOW32 minimum-diff governance. |
-| Files And ABI Surface | Original `wuclip.c` callbacks and public USER/VDM/GDI boundary; original `ica.c` ICW1 reset, `nt_eoi.c` EOI hooks and device callback contracts; original `keyba.c` output slot and port 60/64 paths; immutable guest/native fixtures. |
+| Identifier Mode | M0 T460 S4, Ordinary Mode; single-agent implementation and independent final review. |
+| Admission And Approval | Automatic continuation under the admitted Queue W10 Clipboard proposal, after S3 closure at `5e2e8bfaf`. |
+| Objective | Prove all selected Clipboard formats and their normal, rejection, replacement, deferred-render and task-loss lifetimes through production callers; hand only proved reusable boundary facts to the later DDE package. |
+| Non-goals | No guest change/rebuild; no Clipboard manager/cache/listener/DDE substitute; no unrelated Win95/video/device expansion; no claim that a selected-format acceptance closes DDE. |
+| Reference Baseline | [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md), [Clipboard proposal](../proposals/proposal-wow32-clipboard-001.md), [S3 lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md), and WOW32 minimum-diff governance. |
+| Files And ABI Surface | Original `wuclip.c` format/ownership callers, original guest/native conversion and USER public boundary only; immutable guest/native fixtures. |
 | Applicable Rules | Applicable execution, architecture, coding, documentation, source-policy and WOW32 minimum-diff rules. |
-| Verification | Clipboard matrix plus PIC baseline/fix/control, IRR/ISR/empty/master-slave/repeat-reset cases, early/normal IRQ1 ordering, port-64 non-consumption, direct controller replies, delayed IRQ and reset/resume cases; focused device callbacks, DOS timing/input/protected-mode and noninteractive WOW/Win3.x lifecycle routes; coherent package regression if production changes. |
-| Expected Markers | Clipboard callbacks retire once; PIC reset retires only source-proven outstanding device ownership, with no stale EOI block, duplicate callback or cascade leak; keyboard output advances exactly once only after both data consumption and its normal PIC EOI. |
-| Asset Needs | Existing immutable guest media, mirrors, fixtures and read-only PIC research evidence only; no Win95 image use or new guest artifact. |
-| Reporting Requirements | Exact Clipboard, PIC and keyboard-slot source/ownership matrices, IRR-versus-ISR conclusion, device/cascade/result and pre-read-EOI result, failure disposition, production diff and package hashes or explicit no-change result. |
-| Stop Conditions | Guest change; Clipboard substitute; Win95-specific change; source-less PIC cancellation; unproved ISR semantics; callback requeue/lock contract not established; keyboard change that treats status read as data consumption, duplicates an IRQ or loses direct controller reply semantics. |
-| Exit Criteria | Clipboard paths meet their existing boundary; PIC repair has source-proven IRR/ISR semantics; and keyboard slot repair proves both normal and early-EOI orders with required noninteractive evidence, or each bounded path is retained as a documented candidate/non-pass. |
-| Original Owner Request | 单人双角色模式复通 WOW32；新增 PIC 重新初始化 EOI 通用兼容修复；源码追溯优先、最少 diff、禁止 guest/Win95 实验混入。 |
-| Similar-Issue Sweep | Clipboard formats/ownership/callbacks; PIC pending/in-service state, timer/keyboard/RTC/mouse hooks, callback requeue, master/slave, ICW ordering, AEOI, locks and repeated reset. |
+| Verification | Repeated real guest/native selected-format exchanges; open/set/get/close, rejected/abandoned data, owner replacement, deferred rendering and task loss; targeted error/cleanup evidence and complete package regression for a production change. |
+| Expected Markers | Each selected format has one original conversion/ownership owner; native and guest results agree; callbacks retire once; dead/replaced owners neither leak buffers nor receive callbacks. |
+| Asset Needs | Existing immutable guest media, mirrors and fixtures only; no Win95 image or new guest artifact. |
+| Reporting Requirements | Per-format source/ownership matrix, failure/lifetime disposition, production diff and package hashes or explicit no-change result, and precise DDE handoff facts. |
+| Stop Conditions | Guest change; Clipboard substitute; a new cache/listener/manager; DDE implementation; source-less conversion; or a failed/rejected/retired path silently counted as a transfer success. |
+| Exit Criteria | All selected formats and their stated lifetime/error paths are verified through production callers, or each remaining bounded non-pass is retained explicitly rather than transferred to generic integration. |
+| Original Owner Request | 单人双角色模式复通 WOW32；源码追溯优先、最少 diff、禁止 guest 修改。 |
+| Similar-Issue Sweep | All selected formats, ownership, callbacks, rejection, replacement, deferred render, task loss and public USER operands/results. |
 | Candidate Proposal | [WOW32 clipboard](../proposals/proposal-wow32-clipboard-001.md). |
 
-S3 retains original handle projection and scopes the only public-USER
-adaptation to the three live Clipboard operands and four returned HWND
-results; its private-desktop control reaches the owner call but is denied
-`ERROR_ACCESS_DENIED`, not accepted. [S3
-progress](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md) records
-the deferred/replacement/dead-owner obligations.
-
-The PIC addendum is independent of Clipboard/Win95; its research candidate
-only proves IRQ0/IRR. The source matrix and decision are in [the PIC-reset
-plan](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md).
+S4 inherits S3's original-handle projection and narrow public-USER adaptation;
+the shared-view snapshot remains an identity projection, not a second Clipboard
+state owner. [S3 lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
+and [the PIC plan](../etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md) are
+closed inputs, not S4 expansion authority.
 
 ## S1 Closure Record
 
@@ -122,6 +106,18 @@ Console-17/Window-17 product gates pass against one published ten-image
 package.  [The S2 transfer acceptance](../etc/evidence/m0-t460-s2-clipboard-transfer-acceptance.md)
 records the hashes, modern-host exceptions and finite S3 handoff.  Guest media
 is unchanged.
+
+## S3 Closure Record
+
+S3 closes at `5e2e8bfaf`. [Its lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
+records the selected original `wuclip.c` owners, the live public-USER identity
+seam, deferred rendering, owner replacement and task-loss proof. It also
+delivers source-proven PIC ICW1 device cancellation and the keyboard
+early-EOI/read ordering repair. Five cached build stages, 24 PIC/RTC/mouse and
+46 keyboard assertions, focused Clipboard/graph/ABI routes, the complete
+product gate and isolated WINMINE/SOL probes pass. Ten matching images are
+published; guest media is unchanged. S4 retains selected-format acceptance and
+DDE handoff only.
 
 ## T459 Closure Record
 
@@ -143,11 +139,11 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-T454 S3 `5ede6c0e4` is the current coherent ten-image delivery: it publishes
-the bounded WOW32 free/rollback correction with rebuilt dependent product
-images. Its release identity and formal evidence are indexed in
-`docs/etc/README.md`; guest media remains unchanged. T452 S2 `0f8487f04`
-remains the prior W03 allocation/alias foundation delivery.
+T460 S3 `5e2e8bfaf` is the current coherent ten-image delivery: it publishes
+the Clipboard deferred-lifetime boundary plus PIC/keyboard device repairs with
+rebuilt dependent images. Its release identity is `assets/release/release-manifest.json`;
+guest media remains unchanged. T454 S3 `5ede6c0e4` remains the prior bounded
+WOW32 free/rollback delivery.
 
 ## Successor Boundary
 

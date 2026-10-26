@@ -14,6 +14,7 @@
 
 
 #include "precomp.h"
+#include "wow_user_object_bindings.h"
 #pragma hdrstop
 
 struct _CBFORMATS  ClipboardFormats;
@@ -29,6 +30,37 @@ UINT CFOLELinkSrcDescriptor;
 
 MODNAME(wuclip.c);
 
+
+/* DIVERGENCE(MVDM-HOST-DIV-454): `FULLHWND32` is an original WOW
+ * index/uniqueness token for the paired NT4 USER implementation.  Public
+ * modern USER Clipboard calls instead require the already-published live
+ * native HWND.  The reverse edge may return only an already-published
+ * guest HWND. An external result is representable only after the existing
+ * shared-view publication confirms the same full native identity.
+ * Keep these conversions at the Clipboard HWND operands/results;
+ * do not alter the registered original `GetFullUserHandle` callback, whose
+ * contract is shared by message, DDE and dialog conversion. */
+static BOOL WU32NativeClipboardWindow(HWND hwnd16, HWND *native)
+{
+    if (!native) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return FALSE;
+    }
+    /* NULL is an original public Clipboard operand (notably OpenClipboard's
+     * current-task owner). A nonzero retired/foreign guest identity must not
+     * be collapsed into that valid NULL meaning. */
+    if (!hwnd16) {
+        *native = NULL;
+        return TRUE;
+    }
+    *native = wow_user_window_public_handle(hwnd16);
+    return *native != NULL;
+}
+
+static HWND WU32GuestClipboardWindow(HWND hwnd)
+{
+    return wow_user_window_public_guest_handle(hwnd);
+}
 
 /*++
     BOOL ChangeClipboardChain(<hwnd>, <hwndNext>)
@@ -57,14 +89,17 @@ MODNAME(wuclip.c);
 ULONG FASTCALL WU32ChangeClipboardChain(PVDMFRAME pFrame)
 {
     ULONG ul;
+    HWND hwnd, hwndNext;
     register PCHANGECLIPBOARDCHAIN16 parg16;
 
     GETARGPTR(pFrame, sizeof(CHANGECLIPBOARDCHAIN16), parg16);
 
-    ul = GETBOOL16(ChangeClipboardChain(
-            HWND32(parg16->f1),
-            HWND32(parg16->f2)
-    ));
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
+    if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd) ||
+            !WU32NativeClipboardWindow((HWND)parg16->f2, &hwndNext))
+        ul = FALSE;
+    else
+        ul = GETBOOL16(ChangeClipboardChain(hwnd, hwndNext));
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -469,7 +504,8 @@ ULONG FASTCALL WU32GetClipboardOwner(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    ul = GETHWND16(GetClipboardOwner());
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
+    ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardOwner()));
 
     RETURN(ul);
 }
@@ -493,7 +529,8 @@ ULONG FASTCALL WU32GetClipboardViewer(PVDMFRAME pFrame)
 
     UNREFERENCED_PARAMETER(pFrame);
 
-    ul = GETHWND16(GetClipboardViewer());
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32GuestClipboardWindow above. */
+    ul = GETHWND16(WU32GuestClipboardWindow(GetClipboardViewer()));
 
     RETURN(ul);
 }
@@ -635,13 +672,16 @@ ULONG FASTCALL WU32IsClipboardFormatAvailable(PVDMFRAME pFrame)
 ULONG FASTCALL WU32OpenClipboard(PVDMFRAME pFrame)
 {
     ULONG ul;
+    HWND hwnd;
     register POPENCLIPBOARD16 parg16;
 
     GETARGPTR(pFrame, sizeof(OPENCLIPBOARD16), parg16);
 
-    ul = GETBOOL16(OpenClipboard(
-            HWND32(parg16->f1)
-    ));
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
+    if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd))
+        ul = FALSE;
+    else
+        ul = GETBOOL16(OpenClipboard(hwnd));
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -979,11 +1019,16 @@ ULONG FASTCALL WU32SetClipboardData(PVDMFRAME pFrame)
 ULONG FASTCALL WU32SetClipboardViewer(PVDMFRAME pFrame)
 {
     ULONG ul;
+    HWND hwnd;
     register PSETCLIPBOARDVIEWER16 parg16;
 
     GETARGPTR(pFrame, sizeof(SETCLIPBOARDVIEWER16), parg16);
 
-    ul = GETHWND16(SetClipboardViewer(HWND32(parg16->f1)));
+    /* DIVERGENCE(MVDM-HOST-DIV-454): see WU32NativeClipboardWindow above. */
+    if (!WU32NativeClipboardWindow((HWND)parg16->f1, &hwnd))
+        ul = 0;
+    else
+        ul = GETHWND16(WU32GuestClipboardWindow(SetClipboardViewer(hwnd)));
 
     FREEARGPTR(parg16);
     RETURN(ul);

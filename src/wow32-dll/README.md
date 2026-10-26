@@ -1,5 +1,31 @@
 # WOW32 DLL target component
 
+MVDM-HOST-DIV-454 is the bounded live-HWND adaptation at existing original
+WOW-to-USER boundaries.  NT4's `HWND32` short carrier and its full
+index/uniqueness form could be passed to the paired NT4 USER implementation;
+modern public USER instead requires the actual live HWND.  The existing object
+table remains the only authority.  The registered full-handle callback retains
+its original index/uniqueness result for all original WOW conversion callers.
+`WU32OpenClipboard`, `WU32SetClipboardViewer`, and
+`WU32ChangeClipboardChain` call `wow_user_window_public_handle` to obtain
+`windows[index]` for their public USER operands. `WU32GetClipboardOwner`,
+`WU32GetClipboardViewer`, `WU32SetClipboardViewer`'s returned predecessor,
+and `WU32GetOpenClipboardWindow` use the inverse exact-table check: a native
+result becomes its short guest handle only when it is a currently published
+window in this WOW worker.
+An unrelated native HWND is returned as zero rather than being truncated into
+a false guest identity. `wow_user_window_native_handle` remains the original
+conversion projection for all existing callers. This adds no Clipboard
+registry, reverse map, listener, cache, proxy or ownership policy. The
+corresponding S3 evidence must separately exercise deferred rendering,
+replacement, and owner destruction; handle projection alone is not
+Clipboard-lifetime acceptance.
+
+The selected public-USER input helper preserves an explicit zero operand but
+rejects a nonzero guest handle that has no current live table entry. This
+prevents an invalid historical owner from being mistaken for the valid
+`OpenClipboard(NULL)` current-task operation.
+
 ADAPTER-WOW-103 completes CallMsgFilter's existing native execution boundary
 for both ANSI and Unicode consumers. The original ANSI WUMSG entry currently
 imports CallMsgFilterA directly, while the existing W wrapper is bound only

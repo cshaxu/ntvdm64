@@ -31,12 +31,25 @@ BOOL WINAPI wow_user_window_retire(wow_user_object_table *, HWND,
 BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *, HWND,
     struct wow_cleanup_window *, ULONG);
 HWND WINAPI wow_user_window_full_handle(wow_user_object_table *, WORD);
+/* A public native USER return value can re-enter WOW only when it names a
+ * currently published window in this worker.  The existing table is the sole
+ * identity authority: do not truncate an unrelated native HWND into a guest
+ * alias and do not allocate a proxy alias for it. */
+HWND WINAPI wow_user_window_guest_handle(wow_user_object_table *, HWND);
 /* Original message-conversion contract, including dead/non-window fallback.
  * Not a replacement for the strict lookup above at ownership boundaries. */
 DWORD WINAPI wow_user_full_handle(wow_user_object_table *, WORD);
-/* Typed native HWND input. Short forms consume the same original handle
- * publication, never a new native sample; caller serializes the USER view. */
+/* Original WOW conversion projection. Short forms consume the existing
+ * index/uniqueness representation, never a new native sample. */
 HWND WINAPI wow_user_window_native_handle(HWND);
+/* Public modern USER boundary only. A short guest carrier resolves to a live
+ * owned table entry or to the already committed shared-window observation;
+ * no caller may reuse this as a general original conversion helper. */
+HWND WINAPI wow_user_window_public_handle(HWND);
+/* The reverse public-USER boundary first consults an owned object, then the
+ * already committed original shared-window observation.  Both require exact
+ * full native identity; neither may truncate or allocate a new alias. */
+HWND WINAPI wow_user_window_public_guest_handle(HWND);
 /* Call-local public-USER relationship sample. No WW, task association or
  * native ownership is created. Identities remain native until publication;
  * the desktop must be translated by the existing guest-view owner. */
@@ -53,8 +66,6 @@ BOOL WINAPI wow_user_window_project_graph(const HWND *, ULONG);
  * native mutations. Includes live unlinked creation/terminal windows from
  * the managed table; does not acquire execution or native USER ownership. */
 BOOL WINAPI wow_user_window_refresh_graph(HWND);
-/* Completed native setter's previous HWND; dead results are not revived. */
-BOOL WINAPI wow_user_window_refresh_return(HWND);
 /* Typed callback payload identities, sampled in the same graph transaction.
  * Caller excludes insertion-order constants and non-window union members. */
 BOOL WINAPI wow_user_window_refresh_payload(HWND, const HWND *, ULONG);

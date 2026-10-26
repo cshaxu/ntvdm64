@@ -516,17 +516,24 @@ therefore silently made
 the native low word look like a guest identity.  It could collide with a live
 worker-local handle and is not a valid cross-process Win16 handle.
 
-`MVDM-HOST-DIV-454` now uses the already existing worker object table in both
-directions.  Guest input is resolved to the exact currently published native
-HWND for the three public operands; a returned native HWND is projected back
-only if the same table contains that exact live native HWND at its original
-short index.  Unknown/retired/low-word-colliding native windows become zero.
-This adds no alias, proxy, listener or second authority.  It preserves all
-representable same-WOW-worker owner/viewer relationships and prevents an
-external host identity from being misrepresented as a guest handle.  A full
-legacy viewer chain through an arbitrary native process remains unrepresentable
-without the explicitly excluded proxy/transport machinery; this is an exposed
-modern-host boundary, not a reason to revive raw truncation.
+`MVDM-HOST-DIV-454` uses only two existing authorities. Guest input resolves
+through the worker's exact owned-object table. A native return first uses that
+same table; when it is not owned, it may use the already committed page-domain
+shared window view, but only after the normal graph refresh and only when its
+full native identity still equals the stored full HWND. Unknown, retired, and
+low-word-colliding native windows become zero. This adds no alias, proxy,
+listener, cache or second authority. It preserves representable observed
+relationships without reviving unsafe raw truncation; an arbitrary external
+viewer chain remains outside this bounded public-USER adaptation.
+
+The inverse public operand must use the same committed view as well. Otherwise
+an observed predecessor returned by `SetClipboardViewer` could be represented
+to Win16 but could not be supplied to the next original
+`ChangeClipboardChain`. `wow_user_window_public_handle` therefore checks the
+owned table first and then the existing page-domain full-identity snapshot.
+The production fixture proves this round trip and proves that a graph refresh
+after native destruction withdraws both directions. Generic original
+`HWND32`/`FULLHWND32` conversion remains untouched.
 
 The input adapter distinguishes an explicit zero handle from a failed nonzero
 lookup. This is required because `OpenClipboard(NULL)` is a valid original
@@ -830,3 +837,153 @@ The independently published add-ons/tools are submitted separately as a
 bounded progress delivery under the linked add-on audit. The core runtime
 candidate and the remaining S3 acceptance/publication stay open; this record
 does not declare the entire worktree clean or S3 closed.
+
+## Task loss versus live owner destruction
+
+The S3 source audit distinguished actual task exit from DestroyWindow followed
+by exit. `verify-wow-clipboard-transfer.ps1 -OwnerTaskExit` now assembles the
+independent probe with one delayed CF_TEXT owner, records its original HWND,
+and exits without calling DestroyWindow. `wow_user_task_prepare_exit` retains
+original queue/cleanup ordering: mark cleanup, withdraw the departing window
+procedure, destroy native windows while their original resource owner is
+still live, then retire the task through original cleanup/taskman.
+
+`task-exit-r3` and `final-source-task-exit` pass seven phases, zero guest
+errors, original TaskRetirement complete, no guest WM_RENDERALLFORMATS
+dispatch, and a separate headless native observer's `IsWindow`/Clipboard-owner
+retirement checks. This supplements, rather than replaces, the live-owner
+DestroyWindow/WM_RENDERALLFORMATS witness. The normal transfer mode still
+requires its entire eighteen-phase original contract.
+
+The first draft correctly exercised normal rundown but its host assertion
+mistook WOWExec's own windows for probe windows (`task-exit-r1`). The corrected
+check binds the complete native HWND to the exact reported guest low word.
+`task-exit-r2` failed earlier in its unrelated eager/second-open preamble.
+The final task-loss mode therefore has one original open/empty/deferred-set/
+close and direct exit, with no eager-transfer preamble or retry. All earlier
+failed reports are retained as non-passes. Callback-only mode likewise now
+isolates delayed setup and live-owner destruction, reporting the actual
+rendered handle; complete bidirectional transfer remains a separate mode.
+
+After the probe ABI cause was established, the temporary DPMI register-trace
+extension was also removed. `dpmiint.c`, its termination helper/header and
+`ntthread.c` now match their pre-investigation baseline; no abandoned tracing
+or scheduler change is retained. The seven actual original code files still
+changed are Clipboard identity, PIC/keyboard and separately approved Video7
+sources; all their exceptions are recorded in `src/mvdm/README.md`.
+
+## Frozen-source acceptance and remaining delivery gate
+
+`final-source-build-results.json` has four successful dependency-selected
+build steps, including the second no-change x86 increment. The package is
+`final-source-package`; it retains original system media, root applications
+and configuration but does not recursively copy historical build/log/test
+output. No original guest content changes. The affected images are:
+
+| Image | SHA-256 |
+| --- | --- |
+| ntvdm.exe | F45A1908A1F1C8C5D6E5A53542EF46D35686486DBA2047E12503402D7F3763AE |
+| WOW32.DLL | 710E8184AA05F637801C12067940EF46B68CE39B5248C19DD46DBAC1FC52786A |
+| VDMREDIR.DLL | CAFDC81425DD1045DFF249D0DF0EBA4BEC87B3F13EB34F5FFB9BB89BD61B678B |
+
+Its full ten-image manifest retains unchanged images too. The final explicit
+three-mode run `final-source-clipboard-results.json` passes all modes:
+`final-clipboard-callback` has thirteen delayed-setup/live-destruction phases;
+`final-clipboard-task-exit` has seven direct-rundown phases;
+`final-clipboard-transfer` retains all eighteen bidirectional, rejected,
+deferred, replacement and owner-destruction phases. Every mode checks zero
+guest errors and unchanged actual package/fixture inputs. This is not a
+retry loop or removal of the full transfer assertions. Earlier failures
+remain non-passes: the first broad callback attempt failed in its unnecessary
+eager/second-open preamble, and the broad transfer attempt was refused before
+runtime by another live owner test's BaseSrv. That broker was confirmed exited
+before this final three-mode group started.
+
+The same frozen package passes actual DOS IRQ0 control/reset plus the
+twenty-four PIC/RTC/mouse assertions, forty-six keyboard assertions, the
+production-object task-lifecycle fixture, twenty-one-slot callback ABI,
+seventy-seven-source formal graph, actual two-task/native-peer messages,
+DOS errorlevels 7/99 with subsequent MEM and normal COMMAND return, three
+read-only application-window frontiers, and the actual packed-painter
+boundary/guard fixture. `final-source-acceptance-results.json` retains the
+individual results, including the two superseded non-passes rather than
+overwriting them with this final Clipboard group.
+
+The original code delta is seven files, 161 added/23 removed lines (net 138),
+excluding the exception register. No new Clipboard behavior/cache/scheduler
+exists; no temporary CCPU/DPMI investigation change remains. PIC and keyboard
+have one original owner each; the additional two keyboard facts describe
+separate real port consumption and normal IRQ acknowledgement, not duplicate
+PIC state. RTC/mouse fixtures call their actual original providers.
+
+This is **not** a full production-P/S3-closure verdict. The owner subsequently
+clarified that probe-driven interaction is allowed. The inherited interactive
+DOS17/Window17 and gameplay/input gates are therefore being run using the
+existing isolated-desktop probes, without Computer Use. Read-only window
+creation does not substitute for those gates. The candidate-only submission
+question is superseded, not approved; the ordinary coherent publication,
+verification, review and submission requirements still apply. The earlier
+PIC/keyboard package remains published until the new package passes them.
+
+S4 still owns repeated combined transfer, the inherited selected structured
+format (CF_DIB) and complete selected-format/lifetime acceptance before DDE
+handoff. S2's text-only delivery does not silently discharge that requirement.
+These are inherited S4 obligations, not a transfer of a proved S3 foundation
+defect. No finite test result here completes the overall WOW32 program.
+
+## R4 candidate gate — 2026-10-25
+
+The exact `r3-package` built after the shared-view correction was rebuilt with
+the otherwise stale x64 `monitor-rpc-test.exe`; all five R3 build stages and
+the no-change x86 increment succeeded. R4 then passed independent callback,
+task-exit, page-domain lifecycle (including committed external-HWND return and
+post-retirement rejection), callback ABI, formal graph, PIC-reset (24
+PIC/RTC/mouse assertions plus DOS IRQ0 control/reset), keyboard (46
+assertions), Win16 message, packed-painter and the complete product gate.
+The complete gate includes Console17, Window17, all six RPC rows, GUI routes,
+identity negatives, modern EDIT, rapid relaunch, interactive relaunch and
+Console close/return routes. Previously run private-desktop WINMINE and SOL
+gameplay probes also pass against the same package.
+
+The independent full shared-Clipboard mode is the sole R4 non-pass. Its first
+fresh root reached 132 of 216 expected bytes; a single strict fresh retry
+reached 96. In the retry native trace, public `OpenClipboard` returned
+`ERROR_ACCESS_DENIED` with owner PID `0xA7C` (2684), confirmed as unrelated
+`RadeonSoftware.exe`. The former root also recorded access denial while
+Windows exposed no owner PID. The probe's callback and task-loss modes pass;
+there is no observed assertion failure in the public-HWND mapping itself.
+No unrelated process was stopped and no retry loop was used. Accordingly this
+is an explicit external global-Clipboard release gate, not a passed full
+transfer or a reason to publish the new coherent candidate.
+
+## R5 shared-view round-trip correction — 2026-10-25
+
+Source review found and repaired one closure defect in the R4 adapter: it
+could return an already observed external `HWND` to Win16, but the inverse
+public operand path searched only the owned table. R5 reuses the existing
+page-domain exact snapshot after that table lookup, so the returned viewer can
+be presented to the next original `ChangeClipboardChain`; it does not alter
+generic original handle conversion. The production page-domain fixture proves
+external return → inverse public operand → native full HWND, and proves both
+directions reject it after destruction and graph withdrawal.
+
+`r5-package` was rebuilt in five cached stages, including a no-change x86
+increment. It passes callback, task-exit, page-domain, ABI and graph fixtures;
+the whole product gate; and both isolated WINMINE and SOL gameplay probes.
+
+The remaining full-transfer row was then run once with a freshly identified
+global Clipboard owner, `logioptionsplus_agent.exe` (PID 12216), stopped under
+owner authorization. It passes all 18 checkpoints with no guest errors:
+`guest_to_native=1`, `native_to_guest=1`, `rejected=1`, `deferred=1`, and
+`replacement=1`. The bridge trace has three successful public calls and no
+`OpenClipboard` failure. This resolves the prior environment-only
+`ERROR_ACCESS_DENIED` measurements (Radeon had already auto-restarted after
+its first termination, proving its PID was not a durable attribution).
+
+R5 was published after that result: all ten manifest images were copied to
+`assets/release` and `O:\winnt\system32`, each matched its package SHA-256, and
+the pre-publication files were saved recoverably under
+`build/t460-s3/publish-r5/recovery`. The exact published manifest is
+`build/t460-s3/publish-r5/published-manifest.json`. This evidence records a
+passed candidate; source review, governance and coherent commit remain the
+separate closure steps.

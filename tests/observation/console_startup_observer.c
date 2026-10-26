@@ -1573,6 +1573,29 @@ static int private_desktop_observer(void)
     return (int)result;
 }
 
+/* Test only the runner's Clipboard access before a fixture can change
+ * Clipboard contents.  The private-desktop parent above remains responsible
+ * for creating and owning the disposable Desktop; this re-executed child
+ * opens and closes the Clipboard without reading or changing any format. */
+static int clipboard_access_probe(const char *report_path)
+{
+    FILE *report;
+    BOOL opened;
+    DWORD open_error = ERROR_SUCCESS;
+    DWORD close_error = ERROR_SUCCESS;
+
+    SetLastError(ERROR_SUCCESS);
+    opened = OpenClipboard(NULL);
+    if (!opened) open_error = GetLastError();
+    else if (!CloseClipboard()) close_error = GetLastError();
+    if (fopen_s(&report, report_path, "wb") != 0 || !report) return 70;
+    fprintf(report, "result=clipboard-access\nopen=%u open-error=%lu close-error=%lu\n",
+            opened ? 1u : 0u, (unsigned long)open_error,
+            (unsigned long)close_error);
+    if (fclose(report) != 0) return 70;
+    return opened && close_error == ERROR_SUCCESS ? 0 : 67;
+}
+
 static BOOL graphics_window_return(HANDLE input,HANDLE output,const char *report_path)
 {
     char desktop[96],path[MAX_PATH];DWORD needed,pid=0,written;
@@ -1827,6 +1850,8 @@ int main(int argc, char **argv)
     }
     if (GetEnvironmentVariableA("MVDM_OBSERVER_PRIVATE_DESKTOP", NULL, 0))
         return private_desktop_observer();
+    if (GetEnvironmentVariableA("MVDM_OBSERVER_CLIPBOARD_ACCESS_PROBE", NULL, 0))
+        return clipboard_access_probe(argv[3]);
     if (GetEnvironmentVariableA("MVDM_OBSERVER_OWN_JOB", NULL, 0)) {
         JOBOBJECT_EXTENDED_LIMIT_INFORMATION limits={0};
         HANDLE owned_job=CreateJobObjectW(NULL,NULL);

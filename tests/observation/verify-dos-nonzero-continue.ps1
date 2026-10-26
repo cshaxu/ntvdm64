@@ -9,6 +9,9 @@ param(
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+. "$PSScriptRoot/isolated_package_cleanup.ps1"
+$PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+$binary=Get-PackageBinaryRoot $PackageRoot
 $build=[IO.Path]::GetFullPath($BuildRoot)
 if(!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)){
     throw 'BuildRoot must be below repository build'
@@ -34,16 +37,20 @@ foreach($pair in @(@($image,$guest),@((Join-Path $PSScriptRoot $batchSource),$ba
     Copy-Item -LiteralPath $pair[0] -Destination $pair[1]
 }
 $prior=[Environment]::GetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP')
+$priorPath=$env:PATH
 try {
+    # Match the retained product command matrix's controlled executable
+    # lookup. The toolchain PATH is not a DOS command-lookup test input.
+    $env:PATH=$binary+';'+(Join-Path $env:SystemRoot 'System32')
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
     if($NativeBatch){
         # Native CMD has no OS-integrated DOS CreateProcess support on Win64.
         # Each DOS invocation explicitly uses run16, including MEM.
-        & $Observer (Join-Path $PackageRoot 'run16.exe') $PackageRoot $report COMMAND.COM `
+        & $Observer (Join-Path $binary 'run16.exe') $PackageRoot $report (Join-Path $binary 'COMMAND.COM') `
             --observation-timeout-ms 40000 --observe-console-input-text "tests\$batchName`rexit`r"
         $expected='00000001'
     } else {
-        & $Observer (Join-Path $PackageRoot 'run16.exe') $PackageRoot $report COMMAND.COM /c "tests\$batchName" `
+        & $Observer (Join-Path $binary 'run16.exe') $PackageRoot $report (Join-Path $binary 'COMMAND.COM') /c "tests\$batchName" `
             --observation-timeout-ms 40000
         $expected='00000000'
     }
@@ -61,5 +68,6 @@ try {
     if($screen.Contains('S2-DOS-NONZERO-FAILED')){throw 'Guest errorlevel assertion failed'}
     "PASS: DOS exits 7 and 99 retain errorlevel; subsequent MEM runs; COMMAND returns $expected"
 } finally {
+    $env:PATH=$priorPath
     [Environment]::SetEnvironmentVariable('MVDM_OBSERVER_PRIVATE_DESKTOP',$prior)
 }

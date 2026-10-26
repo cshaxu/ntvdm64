@@ -1,9 +1,12 @@
 param(
-    [string]$RepositoryRoot = (Resolve-Path "$PSScriptRoot/../..").Path,
+    [string]$RepositoryRoot,
     [Parameter(Mandatory=$true)][string]$BuildRoot,
     [string]$Dumpbin = 'C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Tools/MSVC/14.43.34808/bin/Hostx86/x86/dumpbin.exe'
 )
 $ErrorActionPreference = 'Stop'
+if (!$RepositoryRoot) {
+    $RepositoryRoot = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
+}
 # Complete PFNWOWHANDLERSIN x86 ABI, not a real guest/provider acceptance test.
 $bytes = [ordered]@{
     pfnLocalAlloc=12; pfnLocalReAlloc=20; pfnLocalLock=8; pfnLocalUnlock=8

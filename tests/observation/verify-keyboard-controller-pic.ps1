@@ -46,15 +46,17 @@ try {
     }
     $text = $stdout.Result + $stderr.Result
     $text | Set-Content -LiteralPath (Join-Path $out 'controller.txt') -Encoding UTF8
-    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=30 failures=0' -or
-        $text -notmatch 'PASS actual INTACK/EOI') { throw 'Controller/PIC assertions failed.' }
+    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=46 failures=0' -or
+        $text -notmatch 'PASS actual INTACK/EOI' -or
+        $text -notmatch 'PASS early EOI retains unread port-60 byte' -or
+        $text -notmatch 'PASS PIC reset cancels rather than early-acknowledges') { throw 'Controller/PIC assertions failed.' }
     [pscustomobject]@{
         profile = 'x86 /MT NTVDM CCPU40'; elapsed_ms = $clock.ElapsedMilliseconds
         executable_sha256 = (Get-FileHash -LiteralPath $exe).Hash
         keyba_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm/softpc.new/base/keymouse/keyba.c')).Hash
         ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm/softpc.new/base/system/ica.c')).Hash
         controller_reply = 'C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes'
-        scope = 'Actual controller/PIC; controlled host callbacks, no BIOS ISR/timer acceptance'
+        scope = 'Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance'
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $out 'result.json') -Encoding UTF8
     Write-Output $text
 } finally { $process.Dispose() }

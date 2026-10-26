@@ -282,10 +282,11 @@ v7vga_extended_set_mode()
 	set_host_pix_height(1);
 	set_banking( 0, 0 );
 
-	if (is_bad_vid_mode(getBL()) && !is_v7vga_mode(getBL()))
-		return;
-
+	/* DIVERGENCE(VIDEO7-PRESERVE-MODE): SoftPC T70 S10 validates the mode,
+	 * not BL's preserve-memory flag; retain that flag for screen clearing. */
 	video_mode = getBL() & 0x7F; /* get rid of top bit - indicates clear or not */
+	if (is_bad_vid_mode(video_mode) && !is_v7vga_mode(video_mode))
+		return;
 
 	/*
 	 * The method of storing an extended video mode according to a real BIOS is

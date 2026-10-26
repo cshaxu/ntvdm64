@@ -36,6 +36,9 @@ static int scanning_discontinued,waiting_for_next_code,keyboard_disabled,LastKey
 static int translating=1,waiting_for_upcode,output_full,pending_8042,pending_8042_value;
 static char output_contents;static int KbdData,keyboard_interface_disabled;
 static int bKbdEoiPending,bBiosOwnsKbdHdw,bKbdIntHooked,bBiosBufferSpace,bPifFastPaste,bForceDelayInts;
+/* Extracted output paths do not include kbd_inb; each legacy EOI retirement
+ * below therefore records the normal preceding port-60 consumption. */
+static int kbd_output_data_read,kbd_output_irq_acknowledged;
 static word KbdInt09Off,KbdInt09Seg;static unsigned char guest[1024],*Start_of_M_area=guest;
 static int interrupts;
 static int current_light_pattern,set_3_key_state[127],set_3_default_key_state[127];
@@ -89,7 +92,7 @@ int main(void)
     continue_output();
     CHECK(output_full && output_contents==0x32 && nt_keyboard_history.output==1);
     CHECK(!nt_keyboard_history.device[0] && PendingKeyboardHistory()==1);
-    bKbdEoiPending=1;KbdEOIHook(1,0);
+    kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);
     CHECK(!output_full && !nt_keyboard_history.output && !PendingKeyboardHistory());
     puts("PASS actual enqueue/remove/output/EOI preserves then retires origin; ignored release has none");
     buff_6805_out_ptr=buff_6805_in_ptr=511;calc_buff_6805_left();
@@ -99,14 +102,14 @@ int main(void)
     CHECK((unsigned char)output_contents==0xb2 && nt_keyboard_history.output==3);
     CHECK(!nt_keyboard_history.device[511] && !nt_keyboard_history.device[0]);
     CHECK(PendingKeyboardHistory()==1);
-    bKbdEoiPending=1;KbdEOIHook(1,0);CHECK(!PendingKeyboardHistory());
+    kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);CHECK(!PendingKeyboardHistory());
     puts("PASS actual wrapped two-byte translation preserves one raw release");
     scanning_discontinued=1;begin();host_key_up(0x12);end();
     CHECK(held_event_count==1 && nt_keyboard_history.held[0]==4);
     CHECK(PendingKeyboardHistory()==1);replay();
     CHECK(!scanning_discontinued && !nt_keyboard_history.active);
     CHECK(PendingKeyboardHistory()==1);continue_output();
-    CHECK(nt_keyboard_history.output==4);bKbdEoiPending=1;KbdEOIHook(1,0);
+    CHECK(nt_keyboard_history.output==4);kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);
     CHECK(!PendingKeyboardHistory()); /* Stale held storage is not pending. */
     puts("PASS actual held admission/replay transfers identity once and ignores inactive held storage");
     begin();add_to_6805_buff(0xf0,0);end();continue_output();
@@ -114,11 +117,11 @@ int main(void)
     CHECK(PendingKeyboardHistory()==1);
     nt_keyboard_history.active=5;add_to_6805_buff(0x32,0);end();continue_output();
     CHECK(!waiting_for_upcode && nt_keyboard_history.output==5);
-    bKbdEoiPending=1;KbdEOIHook(1,0);CHECK(!PendingKeyboardHistory());
+    kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);CHECK(!PendingKeyboardHistory());
     puts("PASS actual split-prefix translation keeps pending origin until output retirement");
     AddTo6805BuffImm(0xfa);continue_output();
     CHECK(output_full && !nt_keyboard_history.output && !PendingKeyboardHistory());
-    bKbdEoiPending=1;KbdEOIHook(1,0);
+    kbd_output_data_read=1;bKbdEoiPending=1;KbdEOIHook(1,0);
     begin();host_key_down(0x32);end();CHECK(PendingKeyboardHistory()==1);
     clear_buff_6805();CHECK(!PendingKeyboardHistory());
     puts("PASS actual internal response has no raw origin and buffer clear discards pending metadata");

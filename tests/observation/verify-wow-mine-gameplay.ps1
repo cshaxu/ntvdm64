@@ -19,6 +19,8 @@ param(
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
+$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
+$Observer=(Resolve-Path -LiteralPath $Observer).Path
 if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
 $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}

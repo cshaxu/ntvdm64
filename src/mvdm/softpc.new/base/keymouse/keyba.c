@@ -143,6 +143,15 @@ char KbdData = -1;
 BOOL bKbdEoiPending = TRUE;   // Kbd interrupts blocked until KbdResume invoked
 BOOL bDelayIntPending = FALSE;
 BOOL bForceDelayInts = FALSE;
+/*
+ * DIVERGENCE(MVDM-HOST-DIV-461): output-data consumption and IRQ1's PIC
+ * acknowledgement are distinct hardware observations.  The original NT host
+ * path retired this one-slot latch from KbdEOIHook(), which loses a scan byte
+ * when a client acknowledges IRQ1 before reading port 60.  Advance the slot
+ * only after this byte has been both read and normally acknowledged.
+ */
+LOCAL BOOL kbd_output_data_read = FALSE;
+LOCAL BOOL kbd_output_irq_acknowledged = FALSE;
 ULONG LastKbdInt=0;
 
 // The Brazilian ABNT keyboard has 104 keys, 2 more than 'usual'
@@ -1185,6 +1194,8 @@ void Reset6805and8042(void)
     op_port_remembered_bits = 0xc;
 
     pending_8042 = output_full = in_anomalous_state = FALSE;
+    kbd_output_data_read = FALSE;
+    kbd_output_irq_acknowledged = FALSE;
     int_enabled = translating = TRUE;
     scanning_discontinued = FALSE;
     held_event_count = 0;
@@ -1930,6 +1941,8 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
 {
   add_to_6805_buff(code,IMMEDIATE_OUTPUT);
   output_full = FALSE;
+  kbd_output_data_read = FALSE;
+  kbd_output_irq_acknowledged = FALSE;
   nt_keyboard_history.output=0; /* DIV-317: original port replacement. */
   KbdData = -1;
 }
@@ -2244,7 +2257,7 @@ LOCAL VOID KbdIntDelay(VOID)
        // Wait until the kbd scancode has been read,
        // before invoking the next interrupt.
        //
-   if (bKbdEoiPending)
+   if (bKbdEoiPending || kbd_output_irq_acknowledged)
        return;
 
 
@@ -2290,7 +2303,6 @@ LOCAL VOID KbdIntDelay(VOID)
 //This function is called by the ICA with the ica lock
 void KbdEOIHook(int IrqLine, int CallCount)
 {
-
    if (!bKbdEoiPending)  // sanity
        return;
 
@@ -2299,19 +2311,41 @@ void KbdEOIHook(int IrqLine, int CallCount)
        return;
        }
 
+   /* PIC reset cancellation is not a normal EOI.  The original hook did not
+    * distinguish CallCount and consequently retired this old device slot.
+    * Preserve that reset semantics explicitly: it must neither retain an
+    * unread pre-reset byte as an early-normal-EOI slot nor manufacture a
+    * second acknowledgement for it. */
+   if (CallCount < 0) {
+       bKbdEoiPending = FALSE;
+       kbd_output_data_read = FALSE;
+       kbd_output_irq_acknowledged = FALSE;
+       output_full = FALSE;
+       nt_keyboard_history.output=0;
+       bForceDelayInts = TRUE;
+       continue_output();
+       bForceDelayInts = FALSE;
+       if (!bBiosOwnsKbdHdw)
+            HostReleaseKbd();
+       return;
+   }
+
    bKbdIntHooked = KbdInt09Off != *(word *)(Start_of_M_area+0x09*4) ||
                    KbdInt09Seg != *(word *)(Start_of_M_area+0x09*4+2);
 
    bBiosBufferSpace = bBiosOwnsKbdHdw &&
                       (bios_buffer_size() < (bPifFastPaste ? 8 : 2));
 
-   output_full = FALSE;
-   nt_keyboard_history.output=0; /* DIV-317: original EOI retires this port value. */
    bKbdEoiPending = FALSE;
+   kbd_output_irq_acknowledged = TRUE;
 
-   bForceDelayInts = TRUE;
-   continue_output();
-   bForceDelayInts = FALSE;
+   if (!output_full || kbd_output_data_read) {
+       output_full = FALSE;
+       nt_keyboard_history.output=0; /* DIV-317: both slot observations retire this value. */
+       bForceDelayInts = TRUE;
+       continue_output();
+       bForceDelayInts = FALSE;
+   }
 
    if (!bBiosOwnsKbdHdw)
         HostReleaseKbd();
@@ -2324,6 +2358,8 @@ LOCAL VOID do_q_int(char scancode)
 {
    nt_keyboard_history.output=nt_keyboard_history.translated; /* DIV-317 */
    nt_keyboard_history.translated=0;
+   kbd_output_data_read = FALSE;
+   kbd_output_irq_acknowledged = FALSE;
    output_full = TRUE;
    output_contents = scancode;
 
@@ -2654,6 +2690,8 @@ if (code_to_send_valid)
          *  since we no longer clear output_full in the Kbd_inb routine
          */
         output_full = FALSE;
+        kbd_output_data_read = FALSE;
+        kbd_output_irq_acknowledged = FALSE;
         KbdData = -1;
         nt_keyboard_history.output=0; /* DIV-317: direct controller response replaces scan output. */
         /* DIV-359: expose the controller reply through port 60/status,
@@ -2855,6 +2893,8 @@ GLOBAL VOID KbdResume(VOID)
 {
     WaitKbdHdw(0xffffffff);
     bKbdEoiPending = FALSE;
+    kbd_output_data_read = FALSE;
+    kbd_output_irq_acknowledged = FALSE;
     bKbdIntHooked = FALSE;
     bBiosBufferSpace = TRUE;
     if (!keyboard_interface_disabled && output_full)
@@ -2919,6 +2959,15 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 
         *val=KbdData;
         kbd_status &= 0xfe;
+        /* Port 64 observes controller status; only port 60 consumes data. */
+        kbd_output_data_read = TRUE;
+        if (kbd_output_irq_acknowledged && output_full) {
+            output_full = FALSE;
+            nt_keyboard_history.output=0;
+            bForceDelayInts = TRUE;
+            continue_output();
+            bForceDelayInts = FALSE;
+        }
         sure_note_trace1(AT_KBD_VERBOSE,"scan code read:0x%x",*val);
 
 
@@ -3287,6 +3336,8 @@ GLOBAL VOID AT_kbd_init()
        cmd_byte_8042=0x45;
        op_port_remembered_bits=0xc;
 
+       kbd_output_data_read = FALSE;
+       kbd_output_irq_acknowledged = FALSE;
        int_enabled = translating = TRUE;
 
        io_define_inb(AT_KEYB_ADAPTOR, kbd_inb);

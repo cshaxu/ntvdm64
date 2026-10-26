@@ -21,7 +21,8 @@ function Test-PhysicalRuntimeStage([string]$Path) {
 }
 function New-PhysicalRuntimeStage([string]$PackageRoot,
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
-    [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')) {
+    [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe'),
+    [string[]]$TopLevelNames=@()) {
     if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
     $source = (Resolve-Path -LiteralPath $PackageRoot).Path
     $build = (Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path + '\'
@@ -43,20 +44,41 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
         # This is test containment only; it never aliases or changes a user
         # installation path.
         $candidate = Join-Path $stageRoot ('n' + [Guid]::NewGuid().ToString('N').Substring(0,3))
-        if(!(Test-Path -LiteralPath $candidate)) {
+        if(Test-Path -LiteralPath $candidate) { continue }
+        # Creation, not the preceding observation, establishes ownership.
+        # A concurrent test may claim the same three-hex leaf between those
+        # operations; retain the compact-path constraint and try another leaf
+        # rather than treating another task's stage as ours.
+        try {
+            $null = New-Item -ItemType Directory -Path $candidate -ErrorAction Stop
             $stage = $candidate
             break
+        } catch [System.IO.IOException] {
+            continue
+        } catch [System.UnauthorizedAccessException] {
+            continue
         }
     }
     if(!$stage) { throw 'Unable to allocate a short physical test stage' }
-    $null = New-Item -ItemType Directory -Path $stage
     try {
         # Copy the complete product package, but never historical build/log
         # evidence that happens to share the package root.  The product sees
         # its real physical path; no global drive alias is manufactured.
-        Get-ChildItem -LiteralPath $source -Force | Where-Object {
+        $content = Get-ChildItem -LiteralPath $source -Force | Where-Object {
             $_.Name -notin @('builds','logs','logs2')
-        } | ForEach-Object {
+        }
+        if($TopLevelNames.Count) {
+            foreach($name in $TopLevelNames) {
+                if([IO.Path]::GetFileName($name) -ne $name -or $name -in @('builds','logs','logs2')) {
+                    throw 'Runtime stage top-level content must be a direct non-log package item.'
+                }
+            }
+            $content=@($content | Where-Object { $_.Name -in $TopLevelNames })
+            if($content.Count -ne @($TopLevelNames | Select-Object -Unique).Count) {
+                throw 'Requested runtime stage content is absent from the package.'
+            }
+        }
+        $content | ForEach-Object {
             # This helper's sole successful pipeline result is the stage
             # root below.  Do not leak Copy-Item results into the caller's
             # `$runtime` assignment, which would turn it into an array and

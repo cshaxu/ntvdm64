@@ -44,6 +44,17 @@ The fixture owner is ordinary Clipboard API usage, not production presentation
 code.  Earlier no-owner diagnostics are retained only as discarded test
 investigation; they are not acceptance evidence.
 
+### Subsequent S3 evidence correction
+
+Later retention review found that the directories now named `transfer-r42` and
+`transfer-r43` contain `failure.txt` and an observer report with Run16 exit
+`0x0000042b`; their recorded artifacts therefore do not substantiate the
+passing assertion above. This historical S2 narrative is retained unchanged
+for its delivery context, but those two paths are withdrawn as acceptance
+evidence. The live source/runner reconciliation and the current private-
+Desktop Clipboard boundary are recorded in
+[the active S3 progress record](m0-t460-s3-clipboard-deferred-lifetime.md).
+
 The focused original callback ABI check reported
 `WOW_USER_INPUT_CALLBACK_ABI_21_OK`.  The formal graph check reported
 `WOW32_S1_FORMAL_GRAPH_OK` (77 original sources and 29 target bindings).  The

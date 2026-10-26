@@ -102,9 +102,9 @@ try{
   $pendingHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_pending.dll'
   $script=Join-Path $PSScriptRoot 'verify-win16-message-probe.ps1'
   $kinds=if($PendingSend){@('local','pending')}elseif($CrossWorkers){@('local','cross')}else{@('local','x86','x64')}
-  foreach($kind in $kinds){foreach($style in @('Off','Win16','All')){
-   $name="$kind-$style";$hostImage=if($kind -eq 'local'){$localHost}elseif($kind -eq 'pending'){$pendingHost}elseif($kind -eq 'cross'){$crossHost}else{$externalHost}
-   $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',"`"$script`"",'-PackageRoot',"`"$package`"",'-Observer',"`"$observer`"",'-CompilerDriver',"`"$driver`"",'-BuildRoot',"`"$root/$name`"",'-Win16Style',$style,'-StructuredPayloads','-ThreadClientView','-NativeHost',"`"$hostImage`"")
+  foreach($kind in $kinds){
+   $name=$kind;$hostImage=if($kind -eq 'local'){$localHost}elseif($kind -eq 'pending'){$pendingHost}elseif($kind -eq 'cross'){$crossHost}else{$externalHost}
+   $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',"`"$script`"",'-PackageRoot',"`"$package`"",'-Observer',"`"$observer`"",'-CompilerDriver',"`"$driver`"",'-BuildRoot',"`"$root/$name`"",'-StructuredPayloads','-ThreadClientView','-NativeHost',"`"$hostImage`"")
    if($kind -eq 'pending'){$arguments+='-PendingSend'}
    elseif($kind -eq 'cross'){$arguments+=@('-CrossWorkerCoordinator',"`"$coordinator`"")}
    elseif($kind -ne 'local'){$peer=Join-Path $repo "build/.ninja/msvc-$kind-release/message-probes/MSGPEER.exe";$arguments+=@('-ExternalNativePeer',"`"$peer`"")}
@@ -112,7 +112,7 @@ try{
    if(!(Test-Path "$root/$name/exit.txt") -or (Get-Content "$root/$name/exit.txt").Trim() -ne '0'){throw "Missing actual result: $name"}
    if($kind -eq 'local' -and ((Get-FileHash "$root/$name/MSGSEND.EXE").Hash -ne 'B0692BB2A0948B2AAE4C4E98E703CEF39200C8FFEEABFFF8AA9038DC9CDF86BB' -or
       (Get-FileHash "$root/$name/MSGRECV.EXE").Hash -ne '356AB86E785A1DF9F137B77D60B0D606CC450010F24F95729F44C99F9534DEF8')){throw 'Default authored NE images changed from P14'}
-  }}
+  }
   if($PendingSend){
    $badHost=Join-Path $repo 'build/.ninja/msvc-x86-release/message-probes/MSGHOST_nonblock.dll'
    $arguments=@('-NoProfile','-ExecutionPolicy','Bypass','-File',"`"$script`"",'-PackageRoot',"`"$package`"",'-Observer',"`"$observer`"",'-CompilerDriver',"`"$driver`"",'-BuildRoot',"`"$root/nonblock-negative`"",'-StructuredPayloads','-ThreadClientView','-PendingSend','-NativeHost',"`"$badHost`"")

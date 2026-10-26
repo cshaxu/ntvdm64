@@ -12,6 +12,7 @@
 --*/
 
 #include "precomp.h"
+#include "wow_user_object_bindings.h"
 #pragma hdrstop
 
 MODNAME(wuser31.c);
@@ -146,7 +147,12 @@ ULONG FASTCALL WU32GetOpenClipboardWindow(PVDMFRAME pFrame)
 {
     ULONG ul;
 
-    ul = GETHWND16(GetOpenClipboardWindow());
+    UNREFERENCED_PARAMETER(pFrame);
+    /* DIVERGENCE(MVDM-HOST-DIV-454): public USER may return a foreign native
+     * HWND. Reuse only an exact current worker or shared-view publication;
+     * never truncate an unrelated native identity. */
+    ul = GETHWND16(wow_user_window_public_guest_handle(
+            GetOpenClipboardWindow()));
 
     RETURN (ul);
 }

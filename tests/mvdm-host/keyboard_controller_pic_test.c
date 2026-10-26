@@ -114,6 +114,43 @@ int main(void)
     CHECK(!(pic(0x0a) & 2) && !(pic(0x0b) & 2));
     fprintf(stderr, "PASS actual INTACK/EOI advances queued bytes and retires final slot\n");
 
+    /* A status-port observation is not a data read.  VKD may complete the
+     * PIC EOI before it reads 60h; that must retain this exact byte and must
+     * not manufacture another IRQ for it. */
+    bDelayIntPending = FALSE; DelayIrqLine = 0;
+    AddTo6805BuffImm(0xfe); AddTo6805BuffImm(0xfa); continue_output();
+    CHECK(output_full && (unsigned char)output_contents == 0xfa);
+    CHECK(bKbdEoiPending && (pic(0x0a) & 2));
+    before = eoi_calls;
+    CHECK(ica_intack(&hook) == 9);
+    ica_outb(0x20, 0x20);
+    CHECK(eoi_calls == before + 1 && !bKbdEoiPending);
+    CHECK(output_full && (unsigned char)output_contents == 0xfa);
+    kbd_inb(0x64, &value); CHECK((value & 1) && output_full);
+    kbd_inb(0x64, &value); CHECK((value & 1) && output_full);
+    CHECK(!(pic(0x0a) & 2) && !(pic(0x0b) & 2));
+    kbd_inb(0x60, &value); CHECK(value == 0xfa);
+    CHECK(output_full && (unsigned char)output_contents == 0xfe);
+    CHECK(bKbdEoiPending && bDelayIntPending);
+    ica_hw_interrupt(0, 1, 1);
+    kbd_inb(0x60, &value); CHECK(value == 0xfe);
+    CHECK(ica_intack(&hook) == 9);
+    ica_outb(0x20, 0x20);
+    CHECK(!output_full && !bKbdEoiPending);
+    fprintf(stderr, "PASS early EOI retains unread port-60 byte and advances once\n");
+
+    /* ICW1 is a cancellation, not an early normal EOI.  Preserve the
+     * original cancellation behavior: retire the old unread slot exactly
+     * once, then let the original PIC initialization sequence resume. */
+    bDelayIntPending = FALSE; DelayIrqLine = 0;
+    AddTo6805BuffImm(0xfa); continue_output();
+    CHECK(output_full && (unsigned char)output_contents == 0xfa && bKbdEoiPending);
+    before = eoi_calls;
+    ica_outb(0x20, 0x11);
+    CHECK(eoi_calls == before + 1 && !output_full && !bKbdEoiPending);
+    ica_outb(0x21, 8); ica_outb(0x21, 4); ica_outb(0x21, 1); ica_outb(0x21, 0xfd);
+    fprintf(stderr, "PASS PIC reset cancels rather than early-acknowledges unread keyboard output\n");
+
     /* A direct controller reply replaces the output byte without consuming
      * the queued scan-code slot or fabricating an EOI. */
     bDelayIntPending = FALSE; DelayIrqLine = 0;
@@ -126,6 +163,7 @@ int main(void)
     ica_outb(0x20, 0x20);
     CHECK(eoi_calls > before && output_full && (unsigned char)output_contents == 0xfe);
     ica_hw_interrupt(0, 1, 1);
+    kbd_inb(0x60, &value);
     CHECK(ica_intack(&hook) == 9);
     ica_outb(0x20, 0x20);
     CHECK(!output_full && !bKbdEoiPending && !pending_8042);

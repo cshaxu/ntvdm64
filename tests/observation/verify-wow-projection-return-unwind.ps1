@@ -20,14 +20,18 @@ if($SourceFile){
 $CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
 $null=New-Item -ItemType Directory $root
 function Owned($name,$exe,$line,$seconds){
- $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt";$null=$p.Handle
+ if($line){
+  $p=Start-Process $exe -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt"
+ }else{
+  $p=Start-Process $exe -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/$name.stdout.txt" -RedirectStandardError "$root/$name.stderr.txt"
+ };$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command="$exe $line";deadlineSeconds=$seconds}|ConvertTo-Json|Set-Content "$root/$name.process.json"
  if(!$p.WaitForExit($seconds*1000)){taskkill.exe /PID $p.Id /T /F;throw "Owned source-body deadline $name"}
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/$name.exit.txt";return $code
 }
 function Region($text,$start,$end){
  $at=$text.IndexOf($start);if($at -lt 0){throw "Exact body start missing: $start"}
- $last=$text.IndexOf($end,$at);if($last -le $at){throw "Exact body end missing: $end"}
+ $last=$text.IndexOf($end,$at+$start.Length);if($last -le $at){throw "Exact body end missing: $end"}
  return $text.Substring($at,$last-$at)
 }
 try{
@@ -45,7 +49,18 @@ try{
    $source=if($SourceFile){$SourceFile}else{"$repo/src/wow32-dll/source/wow_user_task_lifecycle.c"}
    $fixture="$PSScriptRoot/wow_native_wait_publication_fixture.c";$header='native_wait_publication_body.h'
    $text=[IO.File]::ReadAllText($source).Replace("`r`n","`n")
-   $body=Region $text 'static BOOL publish_guest_return(' 'static BOOL native_call_end('
+   # The initial-view entry sits between the two publication helpers but is
+   # outside this fixture's exact return-unwind contract.  Extract the two
+   # helpers explicitly so a legitimate startup entry cannot make the
+   # generated control compile a larger, mismatched API surface.
+   $first=Region $text 'static BOOL publish_guest_return(' 'BOOL WINAPI wow_user_task_lifecycle_publish_initial_view('
+   # publish_scheduled_return is forward-declared near the file head.  Take
+   # the implementation following the first helper, not that declaration.
+   $after=$text.IndexOf('BOOL WINAPI wow_user_task_lifecycle_publish_initial_view(')
+   $start=$text.IndexOf('static void publish_scheduled_return(',$after)
+   $end=$text.IndexOf('static BOOL native_call_end(',$start)
+   if($start -lt 0 -or $end -le $start){throw 'Exact scheduler publication body missing'}
+   $body=$first+$text.Substring($start,$end-$start)
    $marker='NATIVE_WAIT_PUBLICATION_BODY errors=0 '
   }
   [IO.File]::WriteAllText("$dir/$header",$body,[Text.UTF8Encoding]::new($false))

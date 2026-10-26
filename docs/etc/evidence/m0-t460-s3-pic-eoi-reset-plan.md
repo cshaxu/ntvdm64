@@ -188,3 +188,30 @@ This closes the unrun candidate DOS IRQ0 gap above, not dedicated RTC/mouse
 reset-cancellation or interactive DOS/WOW/Win3.x acceptance. Those remain
 unverified boundaries; read-only window creation is not input/gameplay or
 normal application exit acceptance.
+
+## Final callback-side-effect fixture
+
+`device-matrix-r1` extends the same production-object fixture to **24**
+assertions; all pass, as do its real DOS IRQ0 control and reset. Its link map
+now also proves `RtcIntEoiHook` from selected `cmosnt.obj`, `MouseEoiHook` from
+selected `nt_mouse.obj`, and `FlushMouseEvents` from selected `nt_event.obj`.
+No substitute RTC or mouse callback was added. The only controlled boundary
+is the fixture's existing delayed-IRQ submission, now counted explicitly.
+
+Actual RTC cancellation without periodic work clears its pending gate and
+does not queue another request. With periodic work enabled, its original
+callback intentionally schedules one new 976-unit delayed request and retains
+the new pending ownership; ICW1 does not cancel that post-snapshot work.
+Actual mouse cancellation clears lazy count and EOI ownership, flushes the
+existing event indices, and does not schedule normal-EOI continuation.
+Repeated ICW1 does not repeat the cancellation. The fixture directly sets
+the pre-reset architectural states; it does not claim physical input, alarm
+clock behavior or concurrent stress coverage.
+
+The frozen-source package repeats all these checks in `final-source-pic`.
+Its fixture SHA-256 is
+`3BF25A3664E82A5EB7B6254B127DD0B3B7DCA8389A52EFABC6C867C4C7E6A95C`;
+the selected `ica.c` SHA-256 remains
+`A2C983FEEDAF8E121D0F47A1EC12C019EB826F3B8AC75655C882D6B4B1C429EA`.
+Thus dedicated RTC/mouse cancellation is no longer an unrun fixture gap.
+Interactive DOS/WOW/Win3.x and broader physical-device cases remain unclaimed.

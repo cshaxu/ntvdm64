@@ -1,5 +1,82 @@
 # mvdm
 
+DIVERGENCE(VIDEO7-PACKED-SURFACE), owner-authorized on 2026-10-25 after
+the test publication displayed a 1280x480 mostly empty DIB for a 640x480
+guest desktop. `host/src/nt_graph.c::check_win_size` uses the selected packed
+painter's byte width, matching standalone SoftPC's same function.
+`host/src/nt_vga.c::nt_v7vga_hi_graph_std` adopts SoftPC T60's actual
+DIB/source-extent bounds instead of rejecting full 480-row updates.
+Both retain the original painter and copying algorithm; no guest or CPU
+bank/access behavior is changed. The captured chain4/seq-chain4 state is
+already packed, so unrelated T70/T88 stride and painter-selection changes
+are not imported speculatively. `tests/observation/verify-video7-packed-painter.ps1`
+links the actual painter for full-frame, pitch, clipped-damage, source-end,
+invalid-input and guard checks. Baseline/candidate Win95 host-DIB evidence,
+native layout offsets and process/hash identities are retained under
+`O:/assets/win95-ntvdm-research/display256/published-failure`.
+Guest GDI readback or BIOS mode success alone is not host-output acceptance.
+Local acceptance passes the actual painter fixture (original source fails),
+32 BIOS settings and Win95 desktop/256-colour witness. Captured host output
+changes from 1280x480 with 50 populated rows to 640x480 with all 480 populated
+rows and later desktop content. The exact candidate worker is test-published
+in `O:/WINNT/logs/video7-packed-surface`; physical input and full DOS/WOW/Win3.x
+regression remain unclaimed.
+
+DIVERGENCE(VIDEO7-PRESERVE-MODE), owner-approved standalone correction on
+2026-10-25: `softpc.new/base/video/v7_video.c::v7vga_extended_set_mode`
+validates BL's seven-bit mode number before using its independent bit-7
+preserve-memory flag. This matches standalone SoftPC T70 S10 (`62eec11`,
+source `O:/repos.hobby/softpc/src/app-softpc/softpc.new/base/video/v7_video.c`);
+original OpenNT validates the unmasked byte and rejects E7h. Retain the
+original mode setup, banking and clear/preserve algorithms; no guest or
+profile-specific branch is added. The actual BIOS regression is
+`tests/observation/verify-video7-mode-flags.ps1`: the affected 67/E7 pair,
+pixel preservation/clearing and invalid requests. Both focused acceptance and
+the optional all-mode sweep passed locally: 16 legal modes with/without bit 7
+(32 settings), plus preserve/clear and two invalid requests.
+Source hashes, baseline/fixed build inputs and real Win95 256-colour readback
+are retained under `O:/assets/win95-ntvdm-research/display256/hostfix`.
+This is an owner-directed source integration; coherent package publication
+and the active packet's remaining gates are not claimed by this record.
+
+MVDM-HOST-DIV-454 (T460 S3 candidate): original `wow32/wuclip.c` and
+`wuser31.c` adapt only their public Clipboard HWND operands/results through
+the existing worker object table and its already published original shared
+window observation. Modern USER cannot consume the original NT4
+index/uniqueness token. The original registered full-handle callback retains
+that representation for all other WOW consumers. A returned native window has
+a guest alias only after its exact current identity is in either existing
+publication; foreign or retired identities are never truncated, proxied or
+assigned a new row. This adds no Clipboard owner, cache or scheduler. Details
+and lifetime evidence are in `docs/etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md`.
+
+MVDM-HOST-DIV-461 (T460 S3 candidate): original
+`softpc.new/base/keymouse/keyba.c::KbdEOIHook` retired the single 8042 output
+slot as soon as IRQ1 was acknowledged.  That assumes the normal port-60-read
+then EOI order, but Win95 VKD/VPICD can EOI first and thereby loses the unread
+make code.  Two controller-local facts retain the existing single slot until
+both its actual port-60 consumption and its normal IRQ1 EOI have happened.
+Status-port reads, PIC-reset cancellation, direct controller replies, the
+original delayed IRQ path, scan queue and guest keyboard driver retain their
+separate contracts.  The actual production controller/PIC fixture covers both
+orders and the source/ownership matrix is
+`docs/etc/evidence/m0-t460-s3-keyboard-early-eoi-plan.md`.
+
+MVDM-HOST-DIV-460 (T460 S3 candidate): original
+`softpc.new/base/system/ica.c::SWPIC_outb` ICW1 clears the selected PIC's
+IRR/ISR/count state without retiring device-side EOI ownership.  In the NTVDM
+host, timer, keyboard, RTC and mouse devices use the existing
+`host_EOI_hook(irq, -1)` cancellation contract to release that ownership; a
+stranded timer `EoiPending` otherwise blocks later IRQ0 delivery.  Snapshot
+the original adapter's IRR|ISR while holding its existing ICA lock, retain the
+original state-reset sequence, and issue one existing cancellation notification per
+retired line before unlock.  New work requeued synchronously by a device
+callback is post-reset work, not a resurrected snapshot.  No timer state,
+IRQ, guest, Win95-specific branch or alternate PIC implementation is added.
+The independent source/contract matrix and required pending/in-service,
+cascade, repeated-reset and device regression evidence are in
+`docs/etc/evidence/m0-t460-s3-pic-eoi-reset-plan.md`.
+
 MVDM-HOST-DIV-453 (T460 S2): for selected original
 `wow32/wuclip.c::WU32SetClipboardData` text-like formats, preserve the
 original guest-to-host copy and original cache owner only after public USER
@@ -1124,6 +1201,7 @@ runtime-discovery inputs.  The complete per-file provenance is in
 
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
+| MVDM-HOST-DIV-461 | Retire a single 8042 scan-output slot after its normal delivery. | The original NT path treats PIC EOI as if port 60 had already been read; early EOI by VKD/VPICD overwrites the unread byte. | Retain two per-slot observations and run the existing `continue_output` only when both the actual port-60 read and the normal EOI occur. Status reads and reset cancellation are not data consumption/normal EOI. | `softpc.new/base/keymouse/keyba.c`; [T460 S3 keyboard plan](../../docs/etc/evidence/m0-t460-s3-keyboard-early-eoi-plan.md) |
 | MVDM-HOST-DIV-320 | Overlay a word with named low/high bytes for original port I/O and device registers. | The original non-CPU30 union always orders high then low; selected x86 CCPU40 needs host-little-endian layout when original ios.c assigns X then reads byte.low/high. An external facade cannot change this C union layout. | Owner-supplied LITTLEND conditional selects low then high, retaining the other layout and original algorithms. Scalar and repeated-word original I/O dispatch is covered by ccpu_bounded_execution_fixture; no CPU30 profile is enabled. | `softpc.new/host/inc/host_cpu.h`; [S9 evidence](../../docs/etc/evidence/m0-t423-s9-conpty-migration.md) |
 | MVDM-HOST-DIV-321 | Retire stale host keyboard IRQ at original 6805/8042 reset. | Original reset clears the device queue but the standalone delayed IRQ/PIC request remains; on DOS/native return the same key can re-enter the guest after it was returned to native input. | A one-call mirror hook delegates retirement of the host delayed/PIC request only when the 8042 output slot carries a user-key origin; device-internal responses, original keyboard flags, scan, BIOS and command semantics remain unchanged. | `softpc.new/base/keymouse/keyba.c`; `ntvdm-exe/softpc/mvdm_keyboard_reset.c`; [S16 evidence](../../docs/etc/evidence/m0-t423-s16-typeahead-handoff.md) |
 | MVDM-HOST-DIV-319 | Complete redundant shared WOWEXEC without starting another task. | Standalone asynchronous launch needs to distinguish this original successful no-op from failed initialization; ExitVDM alone carries no reason. | One call before the unchanged original ExitVDM publishes the authenticated startup acknowledgement through the DLL binding; original classification, completion and error cleanup remain owned here. | `wow32/wkman.c`; `../wow32-dll/source/wow_user_registration_bridge.c`; [S8 evidence](../../docs/etc/evidence/m0-t423-s8-gui-launch-wait.md) |

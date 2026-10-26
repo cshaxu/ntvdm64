@@ -368,16 +368,22 @@ static BOOL WINAPI registered_cleanup(HANDLE instance, DWORD task,
 static DWORD WINAPI registered_full_handle(WORD handle)
 {
     wow_user_runtime_thread *binding = wow_user_runtime_current();
-    HWND window;
 
     if (!binding || !binding->thread || !binding->thread->ppi ||
             !binding->thread->ppi->objects) {
         unsupported_void();
         return 0;
     }
-    window = (HWND)(ULONG_PTR)wow_user_full_handle(binding->thread->ppi->objects, handle);
-    registration_trace("GetFullUserHandle", (DWORD)(ULONG_PTR)window);
-    return (DWORD)(ULONG_PTR)window;
+    /* This is the original all-WOW conversion callback.  Its value is the
+     * NT4 shared USER index/uniqueness token, not a public native HWND.
+     * A public-USER caller must use an explicitly scoped adapter rather than
+     * changing every original FULLHWND32 consumer (messages, DDE, dialogs)
+     * to a different representation. */
+    {
+        DWORD value = wow_user_full_handle(binding->thread->ppi->objects, handle);
+        registration_trace("GetFullUserHandle", value);
+        return value;
+    }
 }
 
 VOID WINAPI wow_user_register_wow_exec(HANDLE window)

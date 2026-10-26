@@ -8,6 +8,8 @@ param(
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
 $ErrorActionPreference='Stop'
+$CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
+$Observer=(Resolve-Path -LiteralPath $Observer).Path
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Evidence must be below build/'}

@@ -1680,6 +1680,13 @@ static void check_win_size(register int height)
     else
        width = CGA_WIN_WIDTH;
 
+#ifdef V7VGA
+    /* DIVERGENCE(VIDEO7-PACKED-SURFACE): SoftPC's selected packed
+     * painter emits one pixel per byte, without VGA pixel doubling. */
+    if (paint_screen == nt_paint_funcs->v7vga_hi_graph)
+        width = get_bytes_per_line();
+#endif
+
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Resize window */
 
     if (sc.ModeType == TEXT)

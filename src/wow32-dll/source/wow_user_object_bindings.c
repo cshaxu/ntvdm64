@@ -119,11 +119,6 @@ BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
     return refresh_graph(callback_window, NULL, 0);
 }
 
-BOOL WINAPI wow_user_window_refresh_return(HWND returned_window)
-{
-    return refresh_graph(NULL, &returned_window, 1);
-}
-
 BOOL WINAPI wow_user_window_refresh_payload(HWND callback_window,
     const HWND *payload, ULONG count)
 {
@@ -142,10 +137,65 @@ HWND WINAPI wow_user_window_native_handle(HWND window)
             !binding->thread->ppi->objects) {
         SetLastError(ERROR_INVALID_STATE); return NULL;
     }
-    /* Original HWND32 is a signed SHORT. Use the same retained table owner
-     * as discovery; never sample a short carrier as a full generation. */
     return (HWND)(ULONG_PTR)wow_user_full_handle(
         binding->thread->ppi->objects, LOWORD(window));
+}
+
+HWND WINAPI wow_user_window_public_handle(HWND window)
+{
+    wow_user_runtime_thread *binding;
+    ULONG full;
+    if (!window) return NULL;
+    /* This is deliberately narrower than wow_user_window_native_handle().
+     * A public modern USER boundary accepts only the original HWND32 carrier:
+     * either zero-extended or sign-extended from a 16-bit guest HWND.  Letting
+     * an arbitrary full native HWND pass through would hide a caller which
+     * escaped the sole identity authority (the worker's published table). */
+    if ((ULONG)(ULONG_PTR)window != LOWORD(window) &&
+            (LONG)(LONG_PTR)window != (LONG)(SHORT)LOWORD(window)) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return NULL;
+    }
+    binding = wow_user_runtime_current();
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        SetLastError(ERROR_INVALID_STATE); return NULL;
+    }
+    /* MVDM-HOST-DIV-454: only a public modern USER call needs this live
+     * HWND; every original conversion continues to use native_handle above. */
+    full = (ULONG)(ULONG_PTR)wow_user_window_full_handle(
+        binding->thread->ppi->objects, LOWORD(window));
+    if (full) return (HWND)(ULONG_PTR)full;
+    /* A public Clipboard return can legitimately be an externally observed
+     * window.  It was admitted only through refresh_payload(), which committed
+     * this exact full HWND into the existing page-domain view.  Reuse that
+     * same snapshot on the reverse public boundary so a returned viewer can
+     * be supplied to the next original ChangeClipboardChain call.  This is
+     * deliberately not used by the general original HWND conversion path. */
+    full = mvdm_softpc_wow_page_domain_window_handle(LOWORD(window));
+    return (HWND)(ULONG_PTR)full;
+}
+
+HWND WINAPI wow_user_window_public_guest_handle(HWND window)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    ULONG full;
+    HWND guest;
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) return NULL;
+    if (!window) return NULL;
+    /* A public USER result can name another process's window.  The existing
+     * graph transaction is the sole shared-view publisher: refresh this typed
+     * result before lookup, then accept only its precise committed generation.
+     * This reuses original-style observed HWND identity, rather than either
+     * fabricating an alias or truncating the host's native value. */
+    if (!wow_user_window_refresh_payload(NULL, &window, 1u)) return NULL;
+    guest = wow_user_window_guest_handle(binding->thread->ppi->objects, window);
+    if (guest) return guest;
+    full = mvdm_softpc_wow_page_domain_window_handle(LOWORD(window));
+    if (full == (ULONG)(ULONG_PTR)window)
+        return (HWND)(ULONG_PTR)LOWORD(window);
+    return NULL;
 }
 
 static ULONG position_roots(const WINDOWPOS *position, HWND *roots)
@@ -670,4 +720,21 @@ HWND WINAPI wow_user_window_full_handle(wow_user_object_table *table,
         return NULL;
     }
     return table->windows[index];
+}
+
+HWND WINAPI wow_user_window_guest_handle(wow_user_object_table *table,
+    HWND window)
+{
+    WORD index;
+    wow_cleanup_handle *entry;
+    if (!table || !window) return NULL;
+    /* The existing publication table is indexed by the original short USER
+     * handle.  Verify the whole native identity before returning that index:
+     * a foreign HWND with the same low word is not a guest handle. */
+    index = LOWORD(window);
+    if (!index || index == 0xffffu) return NULL;
+    entry = &table->entries[index];
+    if (entry->bType != TYPE_WINDOW || !entry->phead ||
+            table->windows[index] != window) return NULL;
+    return (HWND)(ULONG_PTR)index;
 }
