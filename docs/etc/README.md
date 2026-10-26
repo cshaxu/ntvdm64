@@ -128,6 +128,10 @@ records the real shared-desktop `CF_TEXT`/`CF_DIB` transfer, delayed-render,
 replacement, callback-return and task-loss evidence; it changes no product
 image or guest media.
 
+[T460 closure](../history/m0-t460-closure.md) closes the Clipboard candidate,
+records the published ten-image and device-repair evidence, and leaves DDE as
+an explicit later Queue capability.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

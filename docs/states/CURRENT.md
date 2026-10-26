@@ -2,7 +2,12 @@
 
 ## Current Work
 
-**Active: M0 T460 S4**
+**No active M/T/S packet.** M0 T460 is closed; see the
+[T460 closure](../history/m0-t460-closure.md). Queue item 1, WOW32 shell and
+layered Registry, is the next unadmitted candidate.
+
+The retained T460 details below are archival closure context, not authority to
+start or continue an implementation packet.
 
 Owner requests standalone Win95 launch/path toolkits on 2026-10-25, based on
 copies of win31-launch/win31-path. Admit tools/win95-launch, tools/win95-path,
@@ -59,7 +64,7 @@ complete product gate and WINMINE/SOL probes pass; its ten images are published
 to `assets/release` and `O:\winnt\system32` with matching SHA-256 manifests.
 S3 is closed at `5e2e8bfaf`; S4 now owns the remaining selected-format and
 full lifetime acceptance, without reopening S3's completed boundaries.
-## Active Packet
+## Archived T460 Packet
 
 ### M0 T460 S4 — Clipboard complete selected-format and lifetime acceptance
 
@@ -223,6 +228,8 @@ and `.ccache` remain reusable caches and are never task evidence roots.
 
 ## Recent M0 Closures
 
+- [T460](../history/m0-t460-closure.md): WOW32 Clipboard selected-format and
+  lifetime acceptance, with project-owned PIC and keyboard device repairs.
 - [T454](../history/m0-t454-closure.md): WOW32 resource discovery and loading.
 - [T453](../history/m0-t453-closure.md): files, directories, environment and OEM.
 - T452: modules, memory and aliases.
@@ -233,6 +240,6 @@ and `.ccache` remain reusable caches and are never task evidence roots.
 
 ## Recent Governance
 
-T454 S4 added only acceptance evidence and closure records. Its S3 product
-delivery remains the current verified release; S4 changed no product source,
-guest media or release asset.
+T460 closure records a current-package metadata comparison and a sealed
+source-identical Clipboard witness. Its S4 acceptance changed no product image
+or guest media; the later independent package/tool audit is `c1729f5a9`.
