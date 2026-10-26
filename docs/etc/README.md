@@ -55,6 +55,10 @@ inventing a bulk-import phase or silently treating runtime verification as done.
 records why the selected original execution owners remain primary and which
 small session/kernel-resource carriers cannot be replaced by a same-named file.
 
+[T473 S2 DOS/COMMAND/XMS reconciliation](evidence/m0-t473-s2-dos-command-xms-reconciliation.md)
+confirms the formerly duplicated XMS parser was already removed and bounds the
+remaining lease/native-child carriers to transport and retirement only.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
