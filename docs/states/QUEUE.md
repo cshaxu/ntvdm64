@@ -16,8 +16,7 @@ active-packet transition does not renumber later candidate identities.
 
 | Remaining stable order | Candidate implementation package | Proposal |
 | --- | --- | --- |
-| 1 | Existing WOW window drawing residue — reproduce WINMINE's owner-reported pixels below the menu, identify the actual painter and client/non-client boundary, then repair the proved cause without cosmetic masking or guest changes. | [Proposal](../proposals/proposal-wow-window-drawing-residue-001.md) |
-| 2 | WOW32 everyday three-application usability acceptance — verify correct display, interaction, ordinary file operations and cleanup before optional service completion; not whole-provider acceptance. | [Proposal](../proposals/proposal-wow32-everyday-usability-001.md) |
+| 1 | WOW32 everyday three-application usability acceptance — verify correct display, interaction, ordinary file operations and cleanup before optional service completion; not whole-provider acceptance. | [Proposal](../proposals/proposal-wow32-everyday-usability-001.md) |
 | 3 | WOW32 WOW hard-error responses — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-hard-error-responses-001.md) |
 | 4 | WOW32 DDE — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-dde-001.md) |
 | 5 | WOW32 sound and multimedia — complete this original-owner capability with guest, failure and cleanup tests; inherit the shared program gates. | [Proposal](../proposals/proposal-wow32-sound-multimedia-001.md) |

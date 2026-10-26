@@ -153,6 +153,11 @@ formal builds and the published coherent-package gate.
 defines the sole façade's atomic persistence, tombstone and cross-worker
 serialization boundary before implementation.
 
+[T462 S1 WOW window-residue attribution](evidence/m0-t462-s1-window-residue-attribution.md)
+records the exact private-desktop no-input WINMINE witness, the rejected
+environment/container false leads and the finite no-repair decision pending a
+reproduced full-frame residual.
+
 [T454 S1 resource owner matrix](evidence/m0-t454-s1-resource-owner-matrix.md)
 records the finite original lookup/load/lock/free ownership, caller census,
 limits and S2/S3 handoff; it is static evidence, not runtime acceptance.

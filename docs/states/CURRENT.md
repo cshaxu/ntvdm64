@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T462 S1**
+**Active: M0 T463 S1**
 
 T460 is closed at `5f12610eb`; its owner-approved Win95 Start Menu
 PIF-template provenance repair is retained in its closure record. `books/` is
@@ -14,26 +14,35 @@ the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
 the smallest source-shaped binding and no guest modification or rebuild.
 ## Active Packet
 
-### M0 T462 S1 — WOW window drawing-residue attribution
+### M0 T463 S1 — WOW32 everyday usability baseline
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T462 S1, Ordinary Mode; single-agent source attribution and review. |
-| Admission And Approval | Owner-approved automatic sequential WOW32 queue advance after T461 closure. |
-| Objective | Reproduce the reported WOW residual strip and identify its actual painter and client/non-client boundary before any repair. |
-| Non-goals | No cosmetic masking, caption padding, guest change, style-demo reuse, global theme change or production runtime repair. |
-| Reference Baseline | [Drawing-residue proposal](../proposals/proposal-wow-window-drawing-residue-001.md), T461 S3 published baseline and minimum-diff governance. |
-| Files And ABI Surface | Read-only audit of WOW USER message/DC paths and window-view projection; no admitted ABI change. |
+| Identifier Mode | M0 T463 S1, Ordinary Mode; single-agent baseline and prerequisite ledger. |
+| Admission And Approval | Automatic advance after T462's bounded no-repair result. |
+| Objective | Freeze one ordinary package and the WINMINE/SOL/WRITE everyday baseline before any repair. |
+| Non-goals | No guest change, broad provider claim, cosmetic workaround or speculative runtime repair. |
+| Reference Baseline | [Everyday-usability proposal](../proposals/proposal-wow32-everyday-usability-001.md), minimum-diff governance and T462 evidence. |
+| Files And ABI Surface | Source/package/guest/configuration inventory and checked-in observation tooling only; no admitted runtime ABI change. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Retained reproducible capture plus message/DC/geometry attribution, including client and non-client transitions. |
-| Expected Markers | Exact affected strip, responsible painter, DC origin/clip and client boundary are evidenced rather than inferred from screenshot resemblance. |
-| Asset Needs | Build-owned T462 evidence only; existing product package and guest media read-only. |
-| Reporting Requirements | Inputs, procedure, observation, causal interpretation, uncertainty and finite S2 handoff. |
-| Stop Conditions | Need for an unapproved runtime component, guest edit, cosmetic workaround or unsupported causal conclusion. |
-| Exit Criteria | Bounded source/trace attribution and a source-shaped repair admission decision. |
+| Verification | Hash ledger, application-by-application first failing call or valid behaviour witness, and explicit deferred-family ledger. |
+| Expected Markers | No application is passed merely because a window or process exists. |
+| Asset Needs | Build-owned T463 evidence only; existing product package and guest media read-only. |
+| Reporting Requirements | Inputs, procedure, observed behaviour, source owner for each failure and finite S2 handoff. |
+| Stop Conditions | Need for a guest edit, unsupported causal conclusion or a repair not tied to an actual failing call. |
+| Exit Criteria | One frozen baseline and a bounded, source-owned S2 repair/acceptance plan. |
 | Original Owner Request | 自动准入后续 WOW32 T；按最小镜像 diff、最大原版复通执行。 |
 | Similar-Issue Sweep | Client painting, non-client painting/activation, menu/hover, expose and move/resize transitions. |
-| Candidate Proposal | [Existing WOW window drawing residue](../proposals/proposal-wow-window-drawing-residue-001.md). |
+| Candidate Proposal | [WOW32 everyday usability](../proposals/proposal-wow32-everyday-usability-001.md). |
+
+## T462 Closure Record
+
+T462 S1 closes as a bounded no-repair attribution result.  The [retained
+evidence](../etc/evidence/m0-t462-s1-window-residue-attribution.md) proves a
+current private-desktop, no-input WINMINE window and board frame, but not the
+historical residual strip.  Source review identifies no normal-path painter to
+change; therefore the smallest correct image diff is zero.  A future recurrence
+must retain its full frame and owning HWND before any repair admission.
 
 T461 S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
 evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
@@ -178,6 +187,11 @@ evidence roots.
 T461 S3 may use only `build/t461-s3` for disposable persistence/concurrency
 evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
 Stable `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+
+T462 S1 may use only `build/t462-s1` for disposable read-only window/paint
+attribution evidence, with a 30-minute phase, 2-GiB size and 10-minute
+no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
+are never task evidence roots.
 
 T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
 fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
