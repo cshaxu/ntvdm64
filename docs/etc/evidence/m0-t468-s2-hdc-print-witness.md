@@ -94,3 +94,27 @@ provider, production source, or runtime policy was changed.  This leaves the
 device-capability normal/failure endpoint for the later S3 failure-and-
 retirement package, where a reliably observable selected provider can be
 admitted without widening the original owner boundary.
+
+## PrintDlg default-data witness
+
+`tests/observation/win16_printdlg_default_probe.asm` calls original
+`COMMDLG.PrintDlg` ordinal 20 with the documented `PD_RETURNDEFAULT` contract:
+the incoming `hDevMode` and `hDevNames` handles are null, so the original
+`WCD32PrintDlg` path obtains and converts default data without presenting a
+dialog.  The probe records the guest boolean and original extended error after
+the call.  This is intentionally a real 16-bit `PRINTDLGDATA16` invocation,
+not a native `comdlg32` substitute.
+
+The owned private-desktop result
+`build/t468-s2/printdlg-default-r1` reports normal observer exit and:
+
+```text
+PASS original Win16 PrintDlg PD_RETURNDEFAULT witness
+result=1; extendedError=0
+```
+
+This proves the selected default-data conversion and return edge only.  It
+does not claim interactive print-dialog cancellation, hook reentrancy, or
+returned-DC retirement; those remain in the bounded S3 failure/retirement
+scope rather than being silently treated as covered by the noninteractive
+path.
