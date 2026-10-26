@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T469 S3**
+**Active: M0 T470 S1**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -21,26 +21,26 @@ ten-image package remains `build/t467-s3/package-r2` and guest media is unchange
 
 ## Active Packet
 
-### M0 T469 S3 — COMM retained-route acceptance
+### M0 T470 S1 — WOW32 ToolHelp/debugger owner inventory
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T469 S3, Ordinary Mode. |
-| Admission And Approval | Automatic sequential admission after [S2 closure](../history/m0-t469-s2-closure.md), under the owner-approved automatic S/T sequence. |
-| Objective | Exercise one coherent retained original COMM group: real external unavailable behavior, controller-local normal behavior, and source-defined task/close cleanup limits. |
-| Non-goals | Guest change/rebuild; serial provider, virtual-port pair, polling loop, callback/task manager, inferred hardware success, or speculative cleanup rewrite. |
-| Reference Baseline | [S2 disposition](../etc/evidence/m0-t469-s2-comm-source-disposition.md), S1 owner matrix, existing device boundary and current package. |
-| Files And ABI Surface | Existing original COMM owner and checked-in DOS/WOW observation fixtures; no new production ABI. |
+| Identifier Mode | M0 T470 S1, Ordinary Mode. |
+| Admission And Approval | Automatic sequential admission after [T469 closure](../history/m0-t469-closure.md), under the owner-approved automatic S/T sequence. |
+| Objective | Establish original-owner, caller, ABI, host-boundary and retirement inventory for selected WOW32 ToolHelp and debugger interfaces before admitting a mirror or adapter change. |
+| Non-goals | Guest change/rebuild; debugger replacement, new task scheduler, synthetic debug provider, or implementation before owner/lifecycle closure. |
+| Reference Baseline | [ToolHelp/debugger proposal](../proposals/proposal-wow32-toolhelp-debugger-001.md), WOW32 minimum-diff admission governance and current hash-matched package. |
+| Files And ABI Surface | Original ToolHelp/debugger entries and current public host seams, to be inventoried; no new ABI admitted. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Run checked-in original external COM open/timeout and controller loopback witnesses together; add no synthetic provider or guest change. |
-| Expected Markers | Real COM3 unavailable result, controller-local original transmit/receive result, source-defined cleanup disposition and no policy substitution. |
-| Asset Needs | Current package, existing COM3 and checked-in fixtures; guest inputs remain immutable. |
-| Reporting Requirements | Exact runs, provider facts, retained limits and no-release rationale. |
-| Stop Conditions | Need for guest change, virtual provider, new async/callback manager, hidden retry/polling policy, or a new observable semantic concession. |
-| Exit Criteria | Coherent retained-route group passes and every unavailable/untestable edge remains a non-pass. |
+| Verification | Produce a finite entry/caller/state/ownership matrix and classify each seam as original retained, existing public host binding, bounded correction candidate or excluded. |
+| Expected Markers | One owner per mechanism, no untracked private-structure assumption, explicit normal/failure/retirement edges and no implementation claim. |
+| Asset Needs | Source trees and existing package/evidence only; guest inputs remain immutable. |
+| Reporting Requirements | Exact source/caller records, dependency closure and any candidate implementation boundary. |
+| Stop Conditions | Need for guest change, a second debugger/provider, unbounded private USER/NT assumptions, or a new observable semantic concession. |
+| Exit Criteria | Complete bounded inventory that supports or rejects a minimal-diff S2 implementation plan. |
 | Original Owner Request | Automatically proceed through the ordered WOW32 candidates after each bounded closure. |
 | Similar-Issue Sweep | COM open/close, DCB/timeouts, synchronous and pending I/O, event/cancel, task loss, external device and stale callback. |
-| Candidate Proposal | [WOW32 COMM](../proposals/proposal-wow32-comm-001.md). |
+| Candidate Proposal | [WOW32 ToolHelp/debugger](../proposals/proposal-wow32-toolhelp-debugger-001.md). |
 
 ## S1 Closure Record
 
@@ -78,7 +78,14 @@ operation and task-loss disposition work.
 
 S2 closed the original-correction search at the
 [source disposition](../etc/evidence/m0-t469-s2-comm-source-disposition.md).
-S3 owns only the retained original-route acceptance group.
+S3 closed the retained original-route group at its
+[acceptance record](../etc/evidence/m0-t469-s3-comm-retained-route.md).
+
+## T469 Closure Record
+
+T469 closed the selected original COMM scope at the
+[T469 closure](../history/m0-t469-closure.md).  Its S3 fixture linkage repair
+is test-only; production/release hashes and guest media remain unchanged.
 
 ## T463 S2 Closure Record
 

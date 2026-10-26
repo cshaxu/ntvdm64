@@ -64,6 +64,19 @@ BOOL WINAPI mock_ClearCommError(HANDLE, LPDWORD, LPCOMSTAT);
 #include <stdio.h>
 #include <string.h>
 
+/* The production composition records this optional setup diagnostic through
+ * the NTVDM termination layer.  This direct-source fixture deliberately has
+ * no worker or termination owner; retain the original provider body and make
+ * the observation inert at that test boundary. */
+void mvdm_softpc_report_setup_hardware_probe(char const *stage,
+                                             unsigned long first,
+                                             unsigned long second)
+{
+    (void)stage;
+    (void)first;
+    (void)second;
+}
+
 static DWORD mock_last_error;
 static unsigned char mock_received_byte = 'R';
 static unsigned char mock_written_byte;

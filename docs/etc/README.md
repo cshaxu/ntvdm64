@@ -1,5 +1,13 @@
 # Supporting Material
 
+[T469 S3 COMM retained-route acceptance](evidence/m0-t469-s3-comm-retained-route.md)
+records the current original-provider success-side fixture, exact environment
+non-passes, and the absence of an admitted serial substitute.
+
+[T469 S4 COMM acceptance](evidence/m0-t469-s4-comm-acceptance.md) reconciles
+the selected original COMM boundaries and closes the candidate without a
+product image change.
+
 [Win95 paging research](evidence/m0-t460-s3-win95-paging-research.md) records
 the owner-requested error-8 on/off control, recoverable configuration change
 and the unresolved WordPad/menu-enumeration acceptance boundaries.
