@@ -4,7 +4,7 @@
 
 `tools/audit/Export-MvdmWholeClosureInventory.mjs` compares every file below the selected OpenNT `base/mvdm`, OpenNT-4.5 `nt/private/mvdm`, and current `src/mvdm` roots. It hashes bytes, rejects symbolic links, permits output only below `build/`, and deliberately does not select an upstream conflict or claim runtime reachability.
 
-Runs `r20` and `r21` of the original identity inventory were byte-identical, SHA-256 `265C7323F903E6275BEC6A4B078E19AA753D3E57C7AD17AA66FDA98C51A39A11`. The corrected product-selection inventory is `build/t473-s1/mvdm-union-node-r24`, SHA-256 `F582D45B0C6FE500B6E2E906B1842B92FDCA730FF964E8D83BB7CBF8611B3D13`. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims runtime reachability.
+Runs `r20` and `r21` of the original identity inventory were byte-identical, SHA-256 `265C7323F903E6275BEC6A4B078E19AA753D3E57C7AD17AA66FDA98C51A39A11`. The corrected product-selection/disposition inventory is `build/t473-s1/mvdm-union-node-r25`, SHA-256 `B97A3DE643838B10E3167345984E22DF11A5DF2178EDCDF4C60D9F1BE46E640F`. The normalizer changes only CRLF-to-LF and trailing horizontal whitespace; it never selects an edition, changes source, or claims runtime reachability.
 
 ## Source-union facts
 
@@ -32,12 +32,17 @@ Of the 1,013 current-only paths, 836 are retained historical `.obj` files. The r
 The canonical x86 Ninja graphs contain 368 unique `src/mvdm` paths in the worker graph and 78 in the WOW32 graph. This full-graph selection includes fixture edges. The corrected product selection is 350 current MVDM source paths in `ntvdm.exe`, 16 in the separate `VDMREDIR.dll` boundary, and 78 in `wow32.dll`. `ntvdm.exe` selection is checked against its explicit original-library `/wholearchive` contract; `VDMREDIR.dll` and WOW32 are direct product object selections. The two graph-only inputs are the debugger fixture `dbg/dbg.c` and the `VDMREDIR` module definition, neither of which is silently counted as a worker source provider.
 
 The reproducible path ledger now assigns all 4,684 rows an S1 disposition:
-444 selected product sources; 2,616 immutable guest/media/build inputs; 306
-retained build artifacts; 119 tooling/build carriers; 33 unmirrored tool
-inputs; 33 unmirrored retired CPU30-monitor inputs; two retained retired-CPU30
-paths; and 1,131 unselected host-package rows explicitly queued for S2
-disposition. The latter category is a finite worklist, not a statement that
-those providers are optional or complete.
+444 selected product sources; 2,616 immutable guest/media/build inputs; 897
+declaration/build carriers; 375 retained historical artifacts; 119 tooling or
+build carriers; 33 unmirrored tool inputs; 33 unmirrored retired CPU30-monitor
+inputs; two retained retired-CPU30 paths; and 165 explicitly classified
+unselected host source/module/non-code rows. The 122 actual unselected C/ASM
+bodies have the exact family ledger linked below; this is a finite worklist,
+not a statement that any provider is optional or complete.
+
+The [unselected host-source disposition](m0-t473-s1-unselected-host-source-disposition.md)
+records each source family, its original profile or CPU40 boundary, and its
+specific re-admission condition.
 
 ## Finite S1 review worklist
 

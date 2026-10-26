@@ -78,12 +78,18 @@ async function productSelection(graph, product, label, requireWholeArchive) {
   const tokens = productLine.split(':', 2)[1].trim().split(/\s+/).slice(1).map((item) => item.toLowerCase());
   const productObjects = new Set(tokens.filter((token) => objects.has(token)));
   const linkedOriginalLibraries = tokens.filter((token) => /^original-.*\.lib$/i.test(token));
+  const wholeArchives = new Set();
   if (requireWholeArchive) {
     const workerRule = lines.find((line) => line.startsWith('  command = link.exe ') && line.includes('/out:$out'));
     if (!workerRule || !workerRule.includes('/wholearchive:original-')) throw new Error(`missing explicit original whole-archive contract: ${graph}`);
+    for (const library of linkedOriginalLibraries) {
+      if (workerRule.toLowerCase().includes(`/wholearchive:${library}`)) wholeArchives.add(library);
+    }
   }
   for (const library of linkedOriginalLibraries) {
-    for (const object of libraries.get(library) ?? []) productObjects.add(object);
+    if (!requireWholeArchive || wholeArchives.has(library)) {
+      for (const object of libraries.get(library) ?? []) productObjects.add(object);
+    }
   }
   const selected = new Set();
   for (const object of productObjects) {
@@ -112,7 +118,12 @@ function disposition(relativePath, currentFile, productLinkSelection) {
   if (relativePath.startsWith('v86/')) return 'retired-cpu30-executor';
   if (/^(bin86|build\.wrn|build\.log|build\.err|makefil0|inc)\b/.test(relativePath)) return 'tooling-or-build-carrier';
   if (relativePath.endsWith('.obj')) return 'retained-build-artifact';
-  return 'unselected-host-package-requires-s2-disposition';
+  const leaf = relativePath.split('/').at(-1).toLowerCase();
+  if (/\.(h|inc|mac|src|txt|doc|xls|prf|tt|md)$/.test(leaf) || ['makefile', 'sources', 'dirs', 'readme.md'].includes(leaf)) return 'declaration-or-build-carrier';
+  if (/\.(lib|exe|dll|pdb|res|exp|lnk|ico|rom|ram|com|sys|hlp|ppd|inf|spc|gi|cl[3-6]|skl|std|old|bar|rcv)$/.test(leaf)) return 'retained-historical-binary-or-build-artifact';
+  if (leaf.endsWith('.def')) return 'unselected-host-module-definition-requires-s2-disposition';
+  if (/\.(c|asm)$/.test(leaf)) return 'unselected-host-source-requires-s2-disposition';
+  return 'unselected-host-noncode-requires-s2-disposition';
 }
 const paths = [...new Set([...opennt.keys(), ...opennt45.keys(), ...current.keys()])].sort();
 const rows = paths.map((relativePath) => {

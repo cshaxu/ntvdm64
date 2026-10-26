@@ -34,6 +34,11 @@ the audit.
 separates actual worker/WOW compile and link selection from archive extraction,
 runtime reachability, immutable guest/media inputs and unadmitted providers.
 
+[T473 S1 unselected host-source disposition](evidence/m0-t473-s1-unselected-host-source-disposition.md)
+maps each unselected host C/ASM family to its original profile, CPU40 boundary,
+or explicit re-admission condition, leaving only the debugger package boundary
+for a further product-provider decision.
+
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole
 owner-deferred physical WRITE non-pass for T-level acceptance.
