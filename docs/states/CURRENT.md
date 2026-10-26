@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S4**
+**Active: M0 T473 S5**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T473 S4 — DOS/COMMAND/XMS execution and retirement recovery
+### M0 T473 S5 — SoftPC device-owner runtime recovery
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T473 S3, Ordinary Mode. |
-| Admission And Approval | S3 closes at [its execution lifecycle closure](../history/m0-t473-s3-closure.md); approved automatic progression admits the next finite owner group. |
-| Objective | Prove and repair, if needed, the selected original DOS/COMMAND/XMS execution, native-child delegation and retirement chain without introducing a replacement shell, command parser or XMS engine. |
-| Non-goals | Guest modification/rebuild; command-name special cases; CPU30/private-kernel revival; device, WOW32 or redirector feature expansion unless a direct DOS/COMMAND/XMS retirement dependency proves it necessary. |
-| Reference Baseline | [S3 closure](../history/m0-t473-s3-closure.md), [DOS/COMMAND/XMS source reconciliation](../etc/evidence/m0-t473-s2-dos-command-xms-reconciliation.md), source policy and unchanged T467 package. |
-| Files And ABI Surface | Selected original COMMAND/XMS/DEM sources, original Base VDM callers, bounded guest-state/native-child transport and session/worker retirement surfaces. |
+| Admission And Approval | S4 closes at [its DOS/COMMAND/XMS closure](../history/m0-t473-s4-closure.md); approved automatic progression admits the next finite owner group. |
+| Objective | Prove and repair, if needed, the selected original PIC, keyboard, mouse, VGA, BIOS and disk execution/retirement boundaries without introducing replacement device engines. |
+| Non-goals | Guest modification/rebuild; Win95-specific product behavior; CPU30/private-kernel revival; DOS/COMMAND, WOW32 or redirector feature expansion unless a direct device lifecycle dependency proves it necessary. |
+| Reference Baseline | [S4 closure](../history/m0-t473-s4-closure.md), [SoftPC-device source reconciliation](../etc/evidence/m0-t473-s2-softpc-device-reconciliation.md), source policy, approved PIC/keyboard repairs and unchanged T467 package. |
+| Files And ABI Surface | Selected original SoftPC device sources, worker input/output adapters, session-bound presentation transport and approved PIC/keyboard repair seams. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Direct and nested COMMAND native-child completion, rejection and failure return, XMS normal/rejected copy contract, task/worker retirement and repeated command path; formal x86 link/map plus focused fixtures. |
-| Expected Markers | Original command policy remains owner; one guest-state/native-child transport lifetime; no raw alias survives child retirement; no command-specific host bypass. |
+| Verification | PIC reset/EOI, keyboard read/EOI ordering, mouse state, timer/RTC, VGA text/graphics, BIOS/disk failure and worker retirement; formal x86 link/map plus focused fixtures. |
+| Expected Markers | Original device algorithms remain owner; one explicit input/output or immutable-resource transport boundary; no synthetic interrupt/device success path. |
 | Asset Needs | Pinned original sources, existing CPU40 fixtures and real worker/package runner; guest media remains immutable. |
 | Reporting Requirements | Exact caller/owner chain, normal/failure/teardown evidence, source/adapter diff, package identity and explicit later-owner handoff. |
-| Stop Conditions | Need guest change, COMSPEC/command-name special case, private kernel monitor, unpinned source, new semantic concession, or an unrelated runtime owner outside the named chain. |
-| Exit Criteria | One coherent original DOS/COMMAND/XMS route has normal/rejection/retirement evidence and no duplicate project shell/XMS policy; any production change is fully built, tested and ten-image published. |
+| Stop Conditions | Need guest change, Win95-only special case, private kernel monitor, unpinned source, new semantic concession, or an unrelated runtime owner outside the named device chain. |
+| Exit Criteria | Every selected device boundary has normal/failure/retirement ownership evidence with no duplicate device engine; any production change is fully built, tested and ten-image published. |
 | Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
-| Similar-Issue Sweep | COMMAND BOP/cmdExec, COMSPEC argument transport, stdout/pipe/redirection ownership, native-child completion, guest-state teardown, XMS descriptor/copy failure and repeated worker lifecycle. |
+| Similar-Issue Sweep | PIC IRR/ISR/EOI/reset, keyboard read/EOI/reply replacement, mouse save/restore, timer/RTC producer cancellation, VGA presentation ownership, BIOS/disk immutable-media failure and worker restart. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
 
 ## T471 Closure Record
