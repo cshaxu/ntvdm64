@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S5**
+**Active: M0 T473 S6**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -16,25 +16,25 @@ media is unchanged.
 
 ## Active Packet
 
-### M0 T473 S5 — SoftPC device-owner runtime recovery
+### M0 T473 S6 — WOW32 session and callback-owner recovery
 
 | Field | Record |
 | --- | --- |
 | Identifier Mode | M0 T473 S3, Ordinary Mode. |
-| Admission And Approval | S4 closes at [its DOS/COMMAND/XMS closure](../history/m0-t473-s4-closure.md); approved automatic progression admits the next finite owner group. |
-| Objective | Prove and repair, if needed, the selected original PIC, keyboard, mouse, VGA, BIOS and disk execution/retirement boundaries without introducing replacement device engines. |
-| Non-goals | Guest modification/rebuild; Win95-specific product behavior; CPU30/private-kernel revival; DOS/COMMAND, WOW32 or redirector feature expansion unless a direct device lifecycle dependency proves it necessary. |
-| Reference Baseline | [S4 closure](../history/m0-t473-s4-closure.md), [SoftPC-device source reconciliation](../etc/evidence/m0-t473-s2-softpc-device-reconciliation.md), source policy, approved PIC/keyboard repairs and unchanged T467 package. |
-| Files And ABI Surface | Selected original SoftPC device sources, worker input/output adapters, session-bound presentation transport and approved PIC/keyboard repair seams. |
+| Admission And Approval | S5 closes at [its SoftPC device closure](../history/m0-t473-s5-closure.md); approved automatic progression admits the next finite owner group. |
+| Objective | Prove and repair, if needed, selected original WOW32/session dispatch, public USER identity, callback nesting and retirement without reviving NT4 private USER/kernel state or adding a second message engine. |
+| Non-goals | Guest modification/rebuild; private USER layout reconstruction; host-window-style work; DOS/COMMAND, device or redirector feature expansion unless a direct WOW callback/session dependency proves it necessary. |
+| Reference Baseline | [S5 closure](../history/m0-t473-s5-closure.md), [WOW32 source reconciliation](../etc/evidence/m0-t473-s2-wow32-session-reconciliation.md), source policy and unchanged T467 package. |
+| Files And ABI Surface | Selected original WOW32 DLL sources, worker TLS/session carriers, public-USER mappings, callback/return boundary and WOW task/worker retirement. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | PIC reset/EOI, keyboard read/EOI ordering, mouse state, timer/RTC, VGA text/graphics, BIOS/disk failure and worker retirement; formal x86 link/map plus focused fixtures. |
-| Expected Markers | Original device algorithms remain owner; one explicit input/output or immutable-resource transport boundary; no synthetic interrupt/device success path. |
+| Verification | Original WOW dispatch/callback normal, rejection, nesting and cleanup paths; public HWND/menu/dialog identity; task termination/worker loss/restart; formal x86 link/map plus focused fixtures. |
+| Expected Markers | Original WOW bodies remain behavior owner; one worker-local session/TLS authority; no private USER token is treated as a public host object. |
 | Asset Needs | Pinned original sources, existing CPU40 fixtures and real worker/package runner; guest media remains immutable. |
 | Reporting Requirements | Exact caller/owner chain, normal/failure/teardown evidence, source/adapter diff, package identity and explicit later-owner handoff. |
-| Stop Conditions | Need guest change, Win95-only special case, private kernel monitor, unpinned source, new semantic concession, or an unrelated runtime owner outside the named device chain. |
-| Exit Criteria | Every selected device boundary has normal/failure/retirement ownership evidence with no duplicate device engine; any production change is fully built, tested and ten-image published. |
+| Stop Conditions | Need guest change, private USER structure assumption, unpinned source, new semantic concession, or an unrelated runtime owner outside the named WOW/session chain. |
+| Exit Criteria | One coherent original WOW/session route has normal/rejection/nesting/retirement evidence and no duplicate message/UI engine; any production change is fully built, tested and ten-image published. |
 | Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
-| Similar-Issue Sweep | PIC IRR/ISR/EOI/reset, keyboard read/EOI/reply replacement, mouse save/restore, timer/RTC producer cancellation, VGA presentation ownership, BIOS/disk immutable-media failure and worker restart. |
+| Similar-Issue Sweep | USER object mapping, menu/dialog callbacks, nested cross-boundary return, task cleanup, worker teardown, handle reuse, and host call error/last-error transfer. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
 
 ## T471 Closure Record
