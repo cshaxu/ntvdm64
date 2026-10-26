@@ -236,7 +236,11 @@ ULONG FASTCALL WWS32WSAUnhookBlockingHook(PVDMFRAME pFrame)
         RETURN((ULONG)SOCKET_ERROR);
     }
 
-    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn) ) {
+    /* DIVERGENCE(MVDM-HOST-DIV-462): the original test accidentally
+       observes the non-null WSAIsBlocking entrypoint, so an initialized
+       provider can never unhook.  Preserve the original provider predicate
+       and only reject an actual blocking call. */
+    if ( (*wsockapis[WOW_WSAISBLOCKING].lpfn)( ) ) {
         SetLastError( WSAEINPROGRESS );
         RETURN((ULONG)SOCKET_ERROR);
     }

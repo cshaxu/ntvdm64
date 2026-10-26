@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T467 S2**
+**Active: M0 T467 S3**
 
 T464 is closed at the published `0.0.464` ten-image package; [its closure](../history/m0-t464-closure.md)
 is authoritative. `books/` is expressly excluded and remains untracked pending
@@ -20,25 +20,25 @@ retained buffer owner. It changes no production or guest image.
 
 ## Active Packet
 
-### M0 T467 S2 — Winsock synchronous original bridge
+### M0 T467 S3 — Winsock asynchronous requests and task loss
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T467 S2, Ordinary Mode. |
-| Admission And Approval | Automatic progression from S1's [owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) under owner-approved automatic S/T closure. |
-| Objective | Recover/prove the selected synchronous Win16 Winsock bridge: startup, loopback sockets, conversion, blocking-hook cancellation and idle unhook. |
-| Non-goals | Guest change/rebuild or installed-tree deployment; a new socket provider, callback carrier, scheduler, socket/buffer registry, async request cancellation or task-loss implementation. |
+| Identifier Mode | M0 T467 S3, Ordinary Mode. |
+| Admission And Approval | Automatic progression from S2 under owner-approved automatic S/T closure. |
+| Objective | Recover/prove original Win16 async Winsock notification, cancellation, peer loss and task-loss cleanup. |
+| Non-goals | Guest change/rebuild; a new provider, callback carrier, scheduler, socket/buffer registry or unrelated network protocol feature. |
 | Reference Baseline | [S1 owner/lifetime inventory](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md), [Winsock proposal](../proposals/proposal-wow32-winsock-001.md), [WOW32 minimum-diff governance](../etc/operations/wow32-queue-minimal-diff-admission-governance.md), and retained T466 callback boundary. |
-| Files And ABI Surface | `wsext.c`, `wsraw.c`, `wwstbl2.h`, isolated original guest `WINSOCK.DLL`, `WSOCK32` ordinal-109 hook and existing synchronous `CallBack16` ABI. |
+| Files And ABI Surface | `wsext.c`, `wsraw.c`, async context blocks, original notification ABI and isolated `WINSOCK.DLL`. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Isolated immutable guest probe plus native loopback peer prove startup, data conversion, custom/default hook, cancel, idle unhook, errors and teardown; affected x86 build and retained package regressions. |
-| Expected Markers | One original mapping/cleanup owner; explicit `WSAEINPROGRESS` only while blocking; no socket/guest-buffer leak on failed or normal synchronous calls. |
+| Verification | Immutable real-guest/local-peer async, cancel, peer-loss and repeated-task cleanup witnesses; affected build and retained package regressions. |
+| Expected Markers | One context owner; correct completion identity/error; no socket, buffer or callback leak after cancel, loss or task exit. |
 | Asset Needs | `build/t467-s2` only for disposable evidence; archive-derived, hash-recorded original guest DLL; installed tree and guest inputs remain read-only. |
-| Reporting Requirements | Exact correction/provenance register, source/build/guest/native evidence, diff and package accounting, and bounded S3 async handoff. |
-| Stop Conditions | Need for guest/driver change, a new provider/scheduler/registry, non-source-shaped correction, or semantics outside the synchronous bridge. |
-| Exit Criteria | The synchronous original bridge passes real guest/local-loopback positive, negative and cleanup evidence; all product gates and required publication complete before S2 closure. |
-| Original Owner Request | “把这个S5做完就可以收口本T任务，然后自动准入后续wow32的T任务。” |
-| Similar-Issue Sweep | All synchronous socket entry points, hook install/unhook/cancel, startup nesting, 16/32 socket mapping, reentry pointer refresh, normal/failure socket cleanup. |
+| Reporting Requirements | Original-owner ledger, context/identity lifetime proof, build/guest/native evidence, diff/package accounting and S4 acceptance handoff. |
+| Stop Conditions | Need for guest/driver change, a provider/scheduler/registry, non-source-shaped correction, or semantics outside async lifecycle. |
+| Exit Criteria | Async notification, cancellation, peer loss and task cleanup have real guest evidence and required production verification/publication. |
+| Original Owner Request | Automatic completion of this WOW32 candidate before the next queued candidate. |
+| Similar-Issue Sweep | Every async constructor, cancellation, HWND/message identity, task cleanup, peer loss, allocation failure and stale-context reuse. |
 | Candidate Proposal | [WOW32 Winsock](../proposals/proposal-wow32-winsock-001.md). |
 
 ## T467 S1 Closure Record
@@ -48,15 +48,16 @@ matrix](../etc/evidence/m0-t467-s1-winsock-owner-matrix.md) fixes the selected
 original owners, installed-tree WINSOCK absence/archive availability, local provider
 witness and finite S2/S3 split; it changes no product or guest artifact.
 
-## T463 S1 Closure Record
+## T467 S2 Closure Record
 
-S1 freezes the exact ordinary package and its deliberately limited WINMINE,
-SOL and WRITE frontiers in the [baseline ledger](../etc/evidence/m0-t463-s1-everyday-baseline.md).
-It records that SOL Options is an observed `WOW32.DLL` failure but has no
-captured fault-to-symbol attribution yet; the source-shaped modal-dialog route
-is a lead, not a repair authorization.  S1 changes documentation only, leaves
-guest media and runtime images unchanged, and transfers the finite capture and
-owner-attribution obligation to S2.
+S2 corrects the original idle-unhook predicate in `wsext.c`: it now calls,
+rather than tests the address of, the selected `WSAIsBlocking` provider entry.
+The [S2 evidence](../etc/evidence/m0-t467-s2-synchronous-winsock-bridge.md)
+retains real immutable-guest original/fixed differential evidence, cached x86/x64
+builds, the full Product gate and matching ten-image publication. Guest media
+is unchanged; S3 owns async requests and task loss.
+
+T463 S1's scoped baseline remains in its [ledger](../etc/evidence/m0-t463-s1-everyday-baseline.md); it changed no runtime or guest image.
 
 ## T463 S2 Closure Record
 

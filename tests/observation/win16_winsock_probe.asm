@@ -127,12 +127,8 @@ jne bad
 api 13
 test ax,ax
 jnz bad
-push word [previous-data+2]
-push word [previous-data]
 api 14
-cmp ax,[proc-data]
-jne bad
-cmp dx,[proc-data+2]
+test ax,ax
 jne bad
 mov word [restored-data],1
 push word [socket-data]
@@ -227,7 +223,7 @@ fixup 10,3,18
 fixup 11,3,16
 fixup 12,3,111
 fixup 13,3,114
-fixup 14,3,109
+fixup 14,3,110
 fixup 15,3,3
 fixup 16,1,52
 fixup 17,3,116

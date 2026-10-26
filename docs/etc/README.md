@@ -154,6 +154,11 @@ records the selected original synchronous/async owners, the installed/archive
 WINSOCK boundary, native loopback provider witness, and finite
 S2/S3 handoff without adding a provider or guest artifact to a release.
 
+[T467 S2 synchronous Winsock bridge](evidence/m0-t467-s2-synchronous-winsock-bridge.md)
+records the directly composed original synchronous owner, the one corrected
+idle-unhook predicate, immutable-WINSOCK real-guest baseline/fix evidence and
+the bounded asynchronous S3 handoff.
+
 [T461 S1 Shell and layered Registry owner matrix](evidence/m0-t461-s1-shell-registry-owner-matrix.md)
 records the selected Shell service and seven Registry entries, the sole
 `NTVDM.REG` façade, its missing persistent-write/concurrency contract, and the
