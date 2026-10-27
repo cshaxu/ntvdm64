@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "7389A9AA4F47DEC1B0825DA7E7E591ED93041EB347E0F596D86C44230F3EE1AE",
+  "output_sha256": "A9A57034AFC9F3976E2C06B668ADC9176423FE8BDDEF37E888458972CF9B0EC2",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,027 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -149,5 +149,5 @@
   "control_thunk_bde_trace": "control-thunk-bde-review.md; three original inputs remain pending",
   "ccpu_call_lmsw_review": "ccpu-call-lmsw-registration-review.md; source/registration collision and historical fixture evidence",
   "debugger_extension_review": "debugger-extension-review.md; three original inputs remain pending",
-  "ddeml_registration_fault": "decoded far target differs from registered thunk; exact DS/BX/object and cause unresolved; no registration success"
+  "ddeml_registration_fault": "DMGClass GetWindowWord returned zero before registration GPF; source lineage/window identity/zero cause unresolved"
 }

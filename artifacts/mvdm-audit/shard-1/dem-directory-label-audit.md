@@ -44,15 +44,13 @@ component fixture `t230_s3_demfile_direct_import_fixture.c` uses an invalid
 real media. T420 S37's later GetMediaId volume query and padding test is a
 read-only query, not evidence of create/delete label semantics.
 
-A source-level potential read-boundary concern deserves separate proof:
+Initial source review identified a read-boundary concern (the direct-object test below subsequently confirms the body-level read):
 `demCreateLabel` loops on the pointer `while(s)`, increments the pointer, and
 breaks after its length counter exceeds 11; it does not stop on NUL. Whether a
 reachable caller can provide a sufficiently short accessible guest buffer or a
 path whose end lies at a protection boundary, and whether resulting bytes
 change observable behavior, has not been established. This is original source,
-not proof of a new divergence, crash, or vulnerability. Use a fixture with an
-explicit mock volume-label sink, bounded guard/canary and documented caller
-shape; do not modify a real volume. Preserve the row as pending.
+not proof of a new divergence, crash, or vulnerability. The subsequent guarded fixture stops before the volume-label API; real caller reachability remains pending.
 
 ## Debug diagnostic
 
@@ -65,3 +63,42 @@ in this release. This is consistent with a conditional debug-only profile,
 not evidence that message handling is fully restored or approved for removal.
 Verify the intended profile and any separately selected debug build before
 classifying. No new runtime or user-media tests were run in this audit.
+
+### Bounded source-level candidate confirmed at selected object boundary
+
+An offline 32-bit fixture directly linked a copy of the actual selected
+`demlabel.obj` after removing only `.drectve`. It created two pages, protected
+the second against access, placed caller-shaped `?:\\A\\0` at the end of
+the first page, and invoked `demCreateLabel(path[0], path+3)`. A vectored
+exception handler accepted only a read access violation at the first byte of
+the guard page and at `demCreateLabel+0x40`, the selected object's input-byte
+load. The program returned zero only upon observing that exact fault:
+
+```text
+PASS bounded label: selected object read exactly one byte beyond NUL into guarded page, before volume call
+fixture-exit=0
+```
+
+This confirms the direct original function reads beyond a short NUL-terminated
+label when the caller provides only that accessible input. The test did not
+change a volume: the fault occurred before `OemToCharA` or
+`SetVolumeLabelA`; `?` is an invalid drive fallback even if the expected fault
+were absent. Fixture supplies simple security-cookie/range-failure boundaries;
+it is not the production executable or guest address-space layout. Source and
+selected object are original; this is not a new mirror divergence. The test
+does **not** prove a real DOS caller can position a label immediately before
+an inaccessible page, or that the guest path produces a reproducible failure.
+`demCreateCommon` uses a local 260-byte bounded path copy, while
+`demFCBCommon` obtains a `GetVDMAddr` alias; their actual reachable lengths,
+alias layout and lifetime require separate source/integration proof. Keep
+label row pending and do not call this a confirmed user-visible defect.
+
+Fixture `dem-label-guard-probe.c` SHA-256
+`964537EE0181D4DA5CAEE683E9CD94F9FCC9A14FE6EA47680742BF77F074C8A2`;
+fixture exe SHA-256
+`A1128BB59E7D0999242B9BB583F08F4BF13B5A5A62DD7A31EB1E9313777D6935`;
+selected original object SHA-256
+`C6405450FFB6674BF4E91C1BE6B3AC02809B22E84E91A034873E61557E09D1C6`;
+stripped link copy SHA-256
+`83B64EEEB852D0398AA0BD0A7F2E71D429E1E7D5FA73F99FF706EE05E043C774`.
+No NTSRV, NTVDM or guest was started or modified.

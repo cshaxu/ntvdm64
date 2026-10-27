@@ -219,12 +219,12 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `8AF7B9421E42F26DB023EB98FF5887F3EB32258CF85412BF5A9AC5ADA7646023`.
+- Current `file-audit.csv` SHA-256 `716E5D37034B6E4D364FBCE9F96E7189D8128C1331848E99867E4AA3DC3CAB57`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
 
-`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `C3965C9847DAF424C91DDA4951009F8B288FCF686221EE514EACC191C3F6EBBB`.
+`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `BC4E8A42BCD755C1C9E42BAA431941F05CF77448B3DA6364D38E8E26E3B3230E`.
 
 Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, per the additional source/link comparison in `video-interface-audit.md`; no EGA runtime is claimed.
 
@@ -242,4 +242,4 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 
 `ccpu-add-mul-audit.md` records 531748 offline ADD/unsigned MUL selected-object comparisons to native x86; guest decode, parity wiring and signed multiplication remain pending.
 
-`dem-directory-label-audit.md` records directory SVC evidence, volume label mutation boundary, and conditional release debug diagnostics; a label NUL-read concern remains a static candidate.
+`dem-directory-label-audit.md` records directory SVC evidence, volume label mutation boundary, and conditional release debug diagnostics; a label NUL-overread was confirmed in the direct object, while guest reachability remains unproven.

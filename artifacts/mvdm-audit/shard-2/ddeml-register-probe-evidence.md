@@ -266,3 +266,27 @@ prove the stack was untouched after the exception, and has no successful
 registration or other binary control. Do not claim that a particular API or
 component caused the invalid argument based on this observation alone.
 Original guest remains unmodified; this fixture and its stage were cleaned up.
+
+## Win16 DMGClass window-word probe
+
+A separately named fresh-UUID W31 probe, source
+`ddeml-window-word-probe.asm` and runner `ddeml-window-word-run.ps1`,
+initialized server mode and before registration called Win16
+`FindWindow("DMGClass", NULL)` followed by `GetWindowWord(hwnd, 0)`.
+The loaded DLL hash matched the unchanged W31 DLL. Receipt
+`ddeml-window-word-w31.pre.json` SHA256
+`8A5424EA6DF9FAD85E85B164894210F4405B0FD64F64FB9BBF8375694BC8F8B0`
+records HWND=0x094c, returned word=0, DDE instance low word=0x02c0 and
+callback 17af:00ba. The independent NE probe imported KERNEL, DDEML and USER;
+its SHA256 was `BCAF2B6AA92C89D3CE7EA851BE0CD63D12C2C77F63D42FD21303D3DDB0E183C9`.
+The subsequent private-desktop observer reported the same DDEML 0001:58ef
+GPF; observer timeout evidence SHA256
+`4D1D65F53F8E07A060F4728A419156B855F6A31DB7D984583F5205105B415A78`.
+The OpenNT mirrored guest source uses DMGClass and `GWW_PAI=0` for instance
+association, but W31 DLL source lineage is unproven. FindWindow returning a
+DMGClass window does not prove that it is this instance's exact registration
+window, nor does a zero return distinguish a genuine zero from API failure.
+The observation is consistent with the inferred zero object argument; it
+does not by itself prove a product defect or its owner. The probe did not
+write window state and the original guest was unchanged. The independently
+created exe and Python import cache were removed after stage cleanup.

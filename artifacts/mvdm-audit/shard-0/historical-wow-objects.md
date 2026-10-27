@@ -1,0 +1,31 @@
+# Retained historical WOW32 objects: current-build disposition
+
+These 18 shard-0 paths are current-only precompiled COFF objects, not original source files. Frozen hashes were checked against the files and the current Ninja input closure for NTVDM, WOW32 and VDMREDIR was searched for each exact path. None is a current product input. Therefore each old object is excluded as an input; this is not an exclusion or proof of its corresponding original source or feature. In particular FastWOW remains a separate unresolved source/provider decision.
+
+Ninja graph SHA-256 identities:
+- `ntvdm.exe`: `3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83`
+- `wow32.dll`: `03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278`
+- `VDMREDIR.dll`: `3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83`
+
+| Retained object | SHA-256 |
+| --- | --- |
+| `wow32/obj/i386/fastwow.obj` | `B456B9FE334FAE746B7910C1F63543C6A8525C6DBCFAC331BE4C74C2CCCC68BA` |
+| `wow32/obj/i386/mapembed.obj` | `7019DAA2E6B4976F28450A191239B6B5613E3DC2D8645865DA91852AA9F0B6BE` |
+| `wow32/obj/i386/wcall32.obj` | `6B44D29215D07353C73B635A3C243B552E779020CC80A7080EBAA713A7842B9E` |
+| `wow32/obj/i386/wcntl32.obj` | `2A7715367BCC0AF3A02EE0642CF0D83C05FAB3EEB9420100BF6FE288720DFD02` |
+| `wow32/obj/i386/wgtext.obj` | `7E4F9D879A8FF90509F8A6FE4207A7749BC3FE1F546BA7E68726026A08D11833` |
+| `wow32/obj/i386/wkbman.obj` | `6EB879E661BF875F3B6F71ED69505A1D188BCB34AE877C92290F4E7817FADA4B` |
+| `wow32/obj/i386/wkernel.obj` | `4209DA0F2E38180FE80C84216F16143943BA735F4A34C17C89262642C3FC5675` |
+| `wow32/obj/i386/wkmem.obj` | `535A853CD0CA1EF70CDBDC191B3AF7FE68927E40BA0DD4BEB7E2F425006B11BA` |
+| `wow32/obj/i386/wmmedia1.obj` | `400CB4B10CC5FC6B5E9A75AADE4960357738B489403DB4B6FD94C9D213F62321` |
+| `wow32/obj/i386/wmsgem.obj` | `3F78A95CC7BB9D7B0E04E26A1AD7D4FCEA1C7969C3E5A051B90F5C3178289469` |
+| `wow32/obj/i386/wmtbl32.obj` | `D785BE5E9F8624B843EFC5A7B5AC1B4D47618AEB2695C0EC4FDFD6C598C766DF` |
+| `wow32/obj/i386/wow32.obj` | `7ACA974410346D5FEB165E50508E9FF0E6BD14097F72D265D5E32F91A3914CE4` |
+| `wow32/obj/i386/wow32fax.obj` | `D12B9E525621B769F337D3AC091F728A6880469A39EB560244EEE1E6AB4B4743` |
+| `wow32/obj/i386/wshell.obj` | `9CB9BEAB8302E674F995707CCEA285BE6C9F51E4266340399AF528AF9BC033A1` |
+| `wow32/obj/i386/wuclip.obj` | `DA859EC311BD8676E6920E6079BDB9FEE6A00D4EF25DDE783623F54115DA6108` |
+| `wow32/obj/i386/wuhook.obj` | `DD3C78C50062831AF167862B7DE71F06356A739C4A5D260BCDA84E9DD1A363CE` |
+| `wow32/obj/i386/wuser.obj` | `783FEFC72CF1B77E5F1FFFDA92E79FF0C651997B97183534FBF53E49960D26FD` |
+| `wow32/obj/i386/wusercli.obj` | `D6B5F4C81C78CE299B47296A802506DA60FCB6DA9A4E758A6CB175E03D2E2D3B` |
+
+The current WOW32 graph compiles its own objects under its build tree (for example `obj/mapembed.obj` from `src/mvdm/wow32/mapembed.c`). No old binary was linked or executed for this audit. Frozen unselected identity does not establish provenance of the retained objects, nor complete source or functional coverage.

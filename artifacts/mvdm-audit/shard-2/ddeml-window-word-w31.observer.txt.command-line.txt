@@ -1,0 +1,1 @@
+O:\tmp\n9a4\system32\run16.exe --wait O:\tmp\n9a4\tests/DDREG.EXE
