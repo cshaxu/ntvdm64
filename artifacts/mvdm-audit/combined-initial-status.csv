@@ -1441,8 +1441,8 @@ softpc.new/base/ccpu386/idiv.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/idiv.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/imul.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/imul.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/ccpu386/in.c,2,pending,shard-2/file-audit.csv
-softpc.new/base/ccpu386/in.h,2,pending,shard-2/file-audit.csv
+softpc.new/base/ccpu386/in.c,2,partial,shard-2/file-audit.csv
+softpc.new/base/ccpu386/in.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/inc.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/inc.h,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/into.c,3,pending,shard-3/file-review.csv
@@ -1505,8 +1505,8 @@ softpc.new/base/ccpu386/ntthread.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/ntthread.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/or.c,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/or.h,1,full,shard-1/file-audit.csv
-softpc.new/base/ccpu386/out.c,2,pending,shard-2/file-audit.csv
-softpc.new/base/ccpu386/out.h,2,pending,shard-2/file-audit.csv
+softpc.new/base/ccpu386/out.c,2,partial,shard-2/file-audit.csv
+softpc.new/base/ccpu386/out.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/pigger_c.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/pop.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/pop.h,1,pending,shard-1/file-audit.csv
@@ -1896,7 +1896,7 @@ softpc.new/base/inc/hunter.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/hwvga.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/ica.h,0,partial,shard-0/review.csv
 softpc.new/base/inc/idetect.h,0,pending,shard-0/review.csv
-softpc.new/base/inc/ios.h,0,pending,shard-0/review.csv
+softpc.new/base/inc/ios.h,0,partial,shard-0/review.csv
 softpc.new/base/inc/ipx.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/j_c_lang.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/jcgensyn.h,1,pending,shard-1/file-audit.csv
@@ -1982,7 +1982,7 @@ softpc.new/base/keymouse/obj/i386/ppi.obj,0,excluded,shard-0/review.csv
 softpc.new/base/keymouse/ppi.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/keymouse/sources,1,partial,shard-1/file-audit.csv
 softpc.new/base/support/get_env.c,3,pending,shard-3/file-review.csv
-softpc.new/base/support/ios.c,1,pending,shard-1/file-audit.csv
+softpc.new/base/support/ios.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/support/main.c,3,partial,shard-3/file-review.csv
 softpc.new/base/support/makefile,2,excluded,shard-2/file-audit.csv
 softpc.new/base/support/obj/_objects.mac,0,excluded,shard-0/review.csv

@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "base": "e94f3fb48",
+  "counts": {
+    "pending": 2139,
+    "excluded": 2257,
+    "partial": 236,
+    "full": 52
+  },
+  "disposition_changes": 6,
+  "ios_checks": 70,
+  "qev_control_checks": 37,
+  "wrong_width_abi_rejected": true,
+  "scope": "Three actual cached objects with controlled CPU boundary; not guest privilege/device lifecycle or published-image acceptance"
+}

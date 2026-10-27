@@ -1,0 +1,2 @@
+ios_object_contract_fixture.c
+O:\repos.hobby\ntvdm64\tests\mvdm-host\ios_object_contract_fixture.c(13): error C2118: negative subscript

@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-230 partial (205 existing source-difference rows, two live uncommitted
+236 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records and two partially verified quick-event source/declaration rows), 2,257 excluded
+records, two partially verified quick-event rows and six IOS/CCPU rows), 2,257 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,145 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,139 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -164,3 +164,9 @@ the original NT provider selection and tests the actual cached queue object
 under controlled host boundaries. It partially verifies two files and
 excludes one generic alternative, without claiming full device/guest or
 published-image acceptance.
+
+The [IOS/CCPU owner checkpoint](ios-owner-review.md) adds 70 controlled
+assertions against three actual cached objects and repeats the 37-assertion
+quick-event control through shared test plumbing. Six unchanged original
+source/declaration files become partial; instruction privilege, real devices,
+concurrency/retirement and published-image equivalence remain open.

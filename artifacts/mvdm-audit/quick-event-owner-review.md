@@ -90,6 +90,13 @@ The remaining proposals and main-session native review remain open.
 
 ## Reproduction
 
+The receipt and three-row ledger checkpoint below describe the historical
+`e94f3fb48` delivery. The CLI now delegates to shared test plumbing; its
+[fresh 37-assertion control](ios-owner-qev-control-result.json) and the
+current six-row ledger gate are recorded in the [IOS checkpoint](ios-owner-review.md).
+Do not use this fixed historical delta/count check as a current whole-ledger
+gate after later legitimate dispositions, or overwrite its original receipt.
+
 Launch in the required owned background context, using modern `pwsh`:
 
 ```text
