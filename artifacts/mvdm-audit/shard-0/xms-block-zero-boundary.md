@@ -160,3 +160,12 @@ complete build provenance, the value of the stack slot in a particular run,
 or whether the returned address violates the XMS zero-size lock contract.
 The real guest service-02 DX=0 trace and observed lock-address variation are
 separate observations above. No product executable was modified.
+
+The same comparison now also locates a unique published x86 indexed-dispatch
+sequence at file offset `0x153bc0`. Its table's entry 02 contains the
+preferred-base address of the matched allocation function; the retained
+`xmsdisp.c` names entry 02 `xmsAllocBlock`. Thus published code, the service
+index recorded by the real guest witness, and the uninitialized-slot code
+are mutually consistent. This still does not measure the stack slot value or
+prove a zero-length lock address violates the guest contract; the byte-level
+dispatch correlation is not a traced instruction-by-instruction execution.

@@ -1,0 +1,81 @@
+{
+  "method": "independent Win16 probe, gated before and after first SendMessage; non-atomic ReadProcessMemory on unique owned worker",
+  "snapshots": [
+    {
+      "image": "O:\\tmp\\ndb3\\system32\\ntvdm.exe",
+      "pid": 27388,
+      "moduleBase": 1755578368,
+      "rva": "0xa6adc",
+      "wordBreakProc": 0,
+      "module": "O:\\tmp\\ndb3\\system32\\WOW32.DLL",
+      "nonAtomic": true,
+      "recordSize": 138,
+      "stage": 1
+    },
+    {
+      "image": "O:\\tmp\\ndb3\\system32\\ntvdm.exe",
+      "pid": 27388,
+      "moduleBase": 1755578368,
+      "rva": "0xa6adc",
+      "wordBreakProc": 1,
+      "module": "O:\\tmp\\ndb3\\system32\\WOW32.DLL",
+      "nonAtomic": true,
+      "recordSize": 184,
+      "stage": 2
+    }
+  ],
+  "guest_report_phases": [
+    {
+      "phase": 0,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 2,
+      "errors": 0,
+      "tabstop": 0,
+      "reset": 0
+    },
+    {
+      "phase": 48,
+      "errors": 0,
+      "tabstop": 1,
+      "reset": 0
+    },
+    {
+      "phase": 3,
+      "errors": 0,
+      "tabstop": 1,
+      "reset": 1
+    }
+  ],
+  "guest_probe_sha256": "B496F0B899CD5B84B53DB7E4F70B933D7C467FE633337760B42AB122A4D70DDF",
+  "probe_source_sha256": "7FCF2A7174810D613947A2ABAD38369314053D5C37E97AD4EA9670506E04F359",
+  "source_sha256": "251325307C9E698EE579E3493F15F93ABB6DAFE7D289F334AC3714C513566BE9",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "ninja_dll_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "base_package_dll_sha256": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83",
+  "base_and_ninja_common_sections": {
+    ".text": {
+      "rva": 4096,
+      "virtual_size": 580129,
+      "raw_size": 580608,
+      "sha256": "E2917CC9D47853D3157D6FBCF911F5C9E75E2073FE35CA505207F6F9FD30DF51"
+    },
+    ".data": {
+      "rva": 663552,
+      "virtual_size": 26932,
+      "raw_size": 16896,
+      "sha256": "5255284F964B1914BC8BF7DD4ABC82A6A586788DA48E17C9E39A0EE7CEAF2EFB"
+    }
+  },
+  "observer": "result=exited exit=0x00000000",
+  "limits": "No breakpoint at UnThunkEMMsg16 entry or return; stage binary hash after fresh package identity was not retained. Memory module was path-checked in owned stage; section correspondence was checked against pre-stage package. Snapshot is non-atomic but guest waits for host gates; no claim of later crash."
+}

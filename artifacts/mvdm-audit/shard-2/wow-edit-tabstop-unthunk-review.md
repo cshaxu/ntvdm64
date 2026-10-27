@@ -35,3 +35,31 @@ the same report SHA-256
 as the decoded receipt above. The runner itself checks report existence and
 process success, not individual semantic fields; compare the decoded report
 separately. Its stage was cleaned.
+
+## Real guest before/after worker memory observation
+
+A second independent guest probe stops at two file gates, immediately before and after its first EDIT `EM_SETTABSTOPS`. The isolated worker is identified by exact stage image path and its loaded WOW32 module is path-checked. Two non-atomic ReadProcessMemory snapshots of map-derived `W32WordBreakProc` RVA `0xa6adc` in the same PID and module base show **0 before, 1 after** the first guest SendMessage, whose guest return is 1. Guest phase 0x30 and final phase 3 report zero errors; reset returns 1 and observer reports exit 0. The guest remains at each gate while sampled; this is not a direct breakpoint at `UnThunkEMMsg16`, and no later crash was asserted.
+
+The selected Ninja WOW32 DLL and base package-c DLL have identical `.text` and `.data` raw hashes and section layouts, supporting map-RVA correspondence; their full image hashes differ. Fresh package identity creates another staged image and the staged DLL hash was not recorded before cleanup: that limits strict binary identity proof. The direct object probe separately demonstrates the nonzero unthunk branch. All identities, section hashes, PID/base and guest phases are in `tabstop-real-snapshot-evidence.json`. No original guest or product image was modified.
+
+## Second real guest snapshot and staged image identity
+
+`tabstop-snapshot-run.ps1` was adjusted to keep phase logs, snapshots and a
+copy of the actual staged DLL in its fresh build-owned output directory. A
+second isolated run at `build/t473-s10/tabstop-snapshot-verify-r3` again
+observed `W32WordBreakProc=0` before and `1` after the guest's first successful
+EM_SETTABSTOPS, in the same owned worker PID and module base; the observer
+reported normal exit. The source probe was unchanged (COM SHA-256
+`B496F0B899CD5B84B53DB7E4F70B933D7C467FE633337760B42AB122A4D70DDF`).
+
+The actual staged WOW32 DLL SHA-256 was
+`F1345987539F53009B86ACF28A3BB25EE3DC085DE2091CE1E87E8CC2FF4D6605`.
+Its `.text` and `.data` RVA, virtual/raw sizes and raw content hashes match
+both the base package DLL and the Ninja DLL used for the map: `.text`
+`E2917CC9D47853D3157D6FBCF911F5C9E75E2073FE35CA505207F6F9FD30DF51`;
+`.data` `5255284F964B1914BC8BF7DD4ABC82A6A586788DA48E17C9E39A0EE7CEAF2EFB`.
+The real snapshots are still non-atomic and not a breakpoint directly on the
+unthunk entry; the two gated observations plus matching section identities,
+source call chain and the object-level injection demonstrate observed state
+change rather than a post-change crash. Original guest and product images
+were not modified.

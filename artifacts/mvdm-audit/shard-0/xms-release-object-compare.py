@@ -47,4 +47,23 @@ for begin, end in executable:
             hits.append(pos)
         pos += 1
 assert hits == [0x1540b0], hits
+# Verify the published x86 dispatch reads service index 02 from a 12-entry
+# table and that entry points to this function. Prefer on-disk preferred-base
+# addresses; ASLR rebases both table and code together at load time.
+imagebase = struct.unpack_from('<I', image, peoff + 24 + 28)[0]
+def file_to_va(offset):
+    for i in range(count):
+        off = peoff + 24 + optsize + 40 * i
+        rva = struct.unpack_from('<I', image, off + 12)[0]
+        size, raw = struct.unpack_from('<II', image, off + 16)
+        if raw <= offset < raw + size:
+            return imagebase + rva + offset - raw
+    raise ValueError('offset is not in an image section')
+function_va = file_to_va(hits[0])
+table_offset = 0x1bb054
+table_va = file_to_va(table_offset)
+assert struct.unpack_from('<I', image, table_offset + 2 * 4)[0] == function_va
+dispatch = bytes.fromhex('8b 44 24 04 8b 04 85') + struct.pack('<I', table_va) + bytes.fromhex('ff d0 b8 01 00 00 00 c3')
+assert image.count(dispatch) == 1 and image.find(dispatch) == 0x153bc0
 print('83-byte selected function matches published executable at file offset 0x1540b0; 7 relocation fields masked')
+print('published index dispatch table entry 02 points to matched function; dispatch code at file offset 0x153bc0')

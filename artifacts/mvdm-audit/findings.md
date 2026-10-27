@@ -284,3 +284,15 @@ failure and freed bitmap bits after decommit failure. This establishes the
 controlled response and a plausible real callback boundary, not that an
 actual guest triggered the failure or suffered data loss. Inspect the SAS
 side effects and real callback ordering before selecting a repair.
+
+## EDIT tab-stop corrupts word-break state in a real guest
+
+[EDIT tab-stop evidence](shard-2/wow-edit-tabstop-unthunk-review.md) now
+includes two isolated real Win16 runs that gate a successful EM_SETTABSTOPS
+call and read the same worker's `W32WordBreakProc` before and after: 0 becomes
+1. The second run also compared the actual staged DLL `.text` and `.data`
+against the base package and selected-map DLL. Original source falls through
+from the tab-stop case to word-break handling; a direct object fixture with
+result 1 exercises that fallthrough. The guest snapshots are not atomic
+breakpoints, and no later crash was observed. S15 must recover the correct
+message semantics, verify callbacks, original failure cases and lifecycle.

@@ -185,6 +185,18 @@ exception. It covers source or document mutation, build, test, runtime launch,
 deployment, process management, package staging, cleanup and their required
 diagnostics.
 
+Task and delegated audit briefs must state the concrete maintenance context:
+this is the owner's local retro-computing compatibility project, with named
+repository files, isolated test-owned processes and the original behavior to
+preserve. Source inspection, debugger observations and bounded memory or
+failure probes are ordinary correctness work in that context. Assess an
+action from its actual target and effect; low-level terminology alone is not
+evidence of a blocker. Distinguish an actual tool rejection from an untested
+assumption, continue other authorized work, and report only the concrete
+operation and reason if execution is genuinely unavailable. Uncertainty in
+evidence limits the conclusion; it does not by itself stop the next authorized
+diagnostic step.
+
 Before declaring **any** capability, service, process, broker, token, media,
 guest input, device, permission, path, configuration, tool, runner, test host
 or other external facility unavailable, failed or blocked, the agent must
