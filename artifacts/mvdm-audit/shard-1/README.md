@@ -219,7 +219,7 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `716E5D37034B6E4D364FBCE9F96E7189D8128C1331848E99867E4AA3DC3CAB57`.
+- Current `file-audit.csv` SHA-256 `94238C54BB9217ACA58CE4C8EBD356A846D04F8D57EF8016DBC117287C004A64`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
@@ -243,3 +243,5 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 `ccpu-add-mul-audit.md` records 531748 offline ADD/unsigned MUL selected-object comparisons to native x86; guest decode, parity wiring and signed multiplication remain pending.
 
 `dem-directory-label-audit.md` records directory SVC evidence, volume label mutation boundary, and conditional release debug diagnostics; a label NUL-overread was confirmed in the direct object, while guest reachability remains unproven.
+
+`historical-wow-objects.md` records 25 retained PE-i386 objects excluded only as selected product inputs after frozen hash and three-target input-closure checks. Source capability remains independent. After this checkpoint shard-1 has 1182 rows: 1095 pending, 48 partial, 39 excluded by audit_status; one pre-existing MIPS row has pending-evidence reporting_class despite excluded audit_status.

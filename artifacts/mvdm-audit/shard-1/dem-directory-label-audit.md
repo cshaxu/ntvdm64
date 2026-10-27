@@ -102,3 +102,25 @@ selected original object SHA-256
 stripped link copy SHA-256
 `83B64EEEB852D0398AA0BD0A7F2E71D429E1E7D5FA73F99FF706EE05E043C774`.
 No NTSRV, NTVDM or guest was started or modified.
+
+### FCB caller shape follow-up
+
+The original normal FCB open/create path in `doskrnl/dos/fcbio2.asm` calls
+`TransFCB` with `OpenBuf` (declared 128 bytes), then sets DS to DOSDATA and
+SI to `WFP_START` before `SVC_DEMCREATEFCB`; the associated DOS source
+`dir2.asm` describes WFP as a NUL-terminated canonical path beginning with a
+three-character drive prefix. `demCreateFCB -> demFCBCommon` passes that
+translated name's byte 0 and offset 3 to `demCreateLabel` for volume-label
+attribute 8. This is a DOS-kernel-generated pathname in the normal FCB route,
+not evidence that an ordinary caller can pass an arbitrary raw pointer right
+up to a host guard page. A direct BOP caller or other guest modification is
+not assumed equivalent to this ordinary route.
+
+The selected map binds `Sim32pGetVDMPointer` to `host/src/sim32.c`. That
+function converts the guest address, returns `GetVideoMemory` for video, or
+`NtGetPtrToLinAddrByte` otherwise; the source warns about its pointer backing.
+This establishes the original source path, not the address/guard guarantees
+of each deployed backing or safe cross-page lifetime. No actual FCB volume
+operation or guest test was performed here. The object-level NUL overread is
+real for a tightly bounded direct input, while its normal product reachability
+and effect remain unproved.
