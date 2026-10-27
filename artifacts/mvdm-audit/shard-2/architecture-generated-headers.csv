@@ -1,0 +1,28 @@
+relative_path,sha256,original_arch,original_profile,worker_deps_exact_hits,x86_same_name_sha256,identical_to_x86
+softpc.new/host/inc/mips/pig/cpu4gen.h,11AA60613B6D85E24B0B1C747ED7FEC595239EEE4959E062F9E6C3F3FB63D9F5,mips,pig,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/pig/cpuint_c.h,B171B9BB51BF810C5E9F839A88A79A6F1EB66C37C4128069FE3E7972DA849EDE,mips,pig,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/acc_efi.h,1223E330518775A04B49D913C8FBDFF86D2EEC0C8308218640D7FA9215C72142,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/axphst_c.h,B17939A4408F920C6F6D8DE0D80C0D3CEEAF9CCD2002A76C4A6E876CDA60D3B9,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/bodge_c.h,8C712AD12B875751F96D4ACBEC88CBC6E3DABB11535950F9A561D9CC12684ADB,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/buffer_c.h,DD763E926BF4635FD288F2822364846C233118FAABCF70ECB1D10403DE0FF8D8,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/c2cpusad.h,7F3A09F96BD67856E38A263DD2C570D2CB089C4ED0546C7DCD8C0BD4C60E3621,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/chain4_c.h,1A4C090B70FB28DA21119A6CCF19371F9B5479256B18231B11437DE15D5785FA,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/contxt_c.h,30EB579C995B281E873C6501FDA356027B8B782867C65ECD8B73FF420C906C6C,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/cpnote_c.h,2CA64054160FAA4D6500C23693C42D53EEE9259A20D346C5BC2DC6A0C648C4F8,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/cpuint_c.h,B171B9BB51BF810C5E9F839A88A79A6F1EB66C37C4128069FE3E7972DA849EDE,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/cpureg_c.h,40122F36CE134BB1B98556D595BF11F3CABC9B30551C370C50F2A95CD865AE73,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/evid_c.h,8A263941FDD26A81105219C2D9189BE5452A52EF82497E774A483C2E09836631,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/misc_c.h,EF97191D02794B940D4D888DEBE84815617D48FE994FA442891DF3E1FEE0617B,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/ports_c.h,3B1A90CF411E5DFCBCDA8E18A6D4AD448B6707F02BEDC390D2FE057716DF8332,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/prot_c.h,1D79EF817D744EF2FF0CD0ADC98992406E3463C2866EA7D9EF56F66554ED233E,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/sas4gen.h,27FBE4D2CC6B0FF3657B8FFDEA1CFCF9622AFC851639894C8948C39B5AE0EBF2,mips,prod,0,ABC942914E4EA58F17D4549C3FCD6753500B012B83056B33B285C4DCEE79008B,no
+softpc.new/host/inc/mips/prod/sas_c.h,0F9683A8B850161A763859D1AD3783D7E7B18D9F14A1C7B37402E85575976E10,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/sf_c.h,8FE999A73A3F234CB819724971837B6EAD3587CD61873F1F6A84A618482A8B34,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/shift_c.h,D7E3AFF851E4AC66138F40F41504C1E15B043FBF8A1164A6B7461DB9F40CA086,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/simple_c.h,569A34BE63D1922A0FEC5965CECA4D86940AEA547B77391C795B087FE22802FC,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/trace_c.h,FAC7B430532ECE52AE2AB95638356767AE77AE079AF2768E92177D4B2C1DE9B7,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/mips/prod/xfer_c.h,7C2318C2353401B6F5086E40A4D88F570A58116427555329EAEE18637049D8C3,mips,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/ppc/pig/cpu_c.h,FD2EBB84A6F8A9C3092C619A10A701E2B0AE813B8689A0364F7E17CCA8BACAFF,ppc,pig,0,,no same-name x86 carrier
+softpc.new/host/inc/ppc/pig/cpuint_c.h,B171B9BB51BF810C5E9F839A88A79A6F1EB66C37C4128069FE3E7972DA849EDE,ppc,pig,0,,no same-name x86 carrier
+softpc.new/host/inc/ppc/prod/cpuint_c.h,B171B9BB51BF810C5E9F839A88A79A6F1EB66C37C4128069FE3E7972DA849EDE,ppc,prod,0,,no same-name x86 carrier
+softpc.new/host/inc/ppc/prod/gdpvar.h,2EEA3E1519EB72CB50AC504855ABE2EE81E0145EF588FC771900C5FE2B3B2248,ppc,prod,0,B86745E8EB9A0795CE30656366A76F4E7398C24EFA7B7320602FF0A1C3A091ED,no

@@ -8,8 +8,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
 224 partial (205 existing source-difference rows and 19 partially integrated
-build manifests), 501 excluded (documented profile, historical recipe,
-source roles or unused retained objects) and 3,959 pending. None is classified
+build manifests), 626 excluded (documented profile, historical recipe,
+source roles or unused retained objects) and 3,834 pending. None is classified
 full in this pass. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -23,6 +23,10 @@ historical recipe files only, never the capabilities of their source members.
 The [19 partial build carriers](partial-build-carriers.csv) have an explicit
 non-numeric estimate basis; executable code-retention measurements for the
 existing 205 source rows are unchanged.
+
+The [architecture-header checkpoint](architecture-header-review.md) accounts
+for 125 additional nonselected MIPS/PPC declaration variants without excluding
+their common algorithms or the selected C-VID/x86 declarations.
 
 The live hash sweep records divergence-registry changes in
 `src/mvdm/README.md` and a concurrent uncommitted `nt_bop.c` change; see
