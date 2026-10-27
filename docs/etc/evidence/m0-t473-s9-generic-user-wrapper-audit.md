@@ -360,3 +360,13 @@ fix. The `focus-fixture-r10` private-desktop window-borrow group passes, and
 `focus-visible-r7` on the actual desktop resolves the parent, then activates
 it, focuses the child and clears focus with zero fixture errors. This does not
 prove every cross-process foreground or reentrant focus scenario.
+
+
+### Current package identity recheck
+
+A subsequent read-only manifest comparison checked all ten entries in
+`assets/release/release-manifest.json` against `assets/release`,
+`O:/winnt/system32`, and `build/t473-s9/package-r10/system32`; all matched.
+`WOW32.DLL` in r1 has a different hash, so CURRENT's old r1 baseline path
+was corrected to r10. This recheck is artifact identity evidence, not a new
+runtime acceptance or permission to alter guest media.

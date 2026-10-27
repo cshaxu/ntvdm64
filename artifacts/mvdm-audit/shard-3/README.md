@@ -176,3 +176,8 @@ task-termination export and two decorated COMM aliases. Selected export
 spot checks do not prove caller ABI/semantics. The original SoftPC resource
 script is input to the build-owned generated RC and linked into NTVDM; its
 individual dialog/resource behavior still needs separately bounded witnesses.
+
+[SAS generated vector audit](sas4gen-vector-audit.md) traces both breakpoint
+tails from original initializer through the selected product object, separates
+the absence of direct textual calls from proof of unreachability, and records
+the minimal recovery decision without changing product code.

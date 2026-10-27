@@ -129,3 +129,14 @@ keyboard-driven dialog behavior and marks the separate keyboard/caret
 desktop-state fixture as a non-pass. Do not count the summary alone as
 proof that `wucaret.c` guest caret semantics were exercised. Resolve using
 the actual run inputs and focused guest/caret evidence.
+
+## CCPU SAS vector trap fallbacks
+
+Shard 3 traced original `cSasPtrs` initialization through `sas_init` to
+`Cpu.Sas`: the selected product vector contains `c_sas_touch` and
+`c_VirtualiseInstruction` fallbacks that execute a breakpoint. The product
+object relocations and disassembly establish their presence, not that a
+guest can reach them. A direct source search alone cannot exclude indexed
+indirect or generated-code use. See `shard-3/sas4gen-vector-audit.md` for
+the source chain, missing original implementation evidence and needed
+consumer/contract review; avoid replacing these with success stubs.

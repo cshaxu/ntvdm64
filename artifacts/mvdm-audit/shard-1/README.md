@@ -111,6 +111,35 @@ all other 258 carrier identities still match the frozen inputs. Frozen fields
 in `file-audit.csv` remain unchanged. Two consecutive script runs gave
 identical three CSV hashes under the same observed graph and input state.
 
-- `file-audit.csv` SHA-256 `1F8C3DEA2A6F6DF9A7E498270998292552639B408433C022F4960EABAA31E9DB`.
+- `file-audit.csv` SHA-256 at this carrier checkpoint: `1F8C3DEA2A6F6DF9A7E498270998292552639B408433C022F4960EABAA31E9DB`.
 - `carrier-review.csv` SHA-256 `FBB7FAF49AA66C0DD8400F6A8C0498D99E37F4C47CCC7E0811167EDB73C19C61`.
 - `carrier-dependency-edges.csv` SHA-256 `37FB1965DF9EBF0DB464E31CD2C4674782A71AE5A2DCD494CBF1FE2A51F17122`.
+
+
+## COMMAND and DOSX guest-family matrix
+
+`guest-command-dosx-review.csv` contains 49 distinct shard entries from
+COMMAND and DPMI/DOSX guest input families. It records exact original recipe
+references where present, source BOP callsites, deployed/mirrored guest-image
+hashes, host dispatcher owners, historical behavior evidence and unresolved
+source-to-binary linkage. Neither source filenames, linker recipes nor matching
+image hashes are treated as proof that a specific retained source generated or
+executed in that image. The DOSX executable row itself has a direct exact
+installed-byte identity. All prior pending/partial dispositions remain.
+
+A documented distinction matters: original DOSX makefile recipes assemble
+`486/dxfunc.asm`, `486/dxintr.asm` and `486/dxmain.asm`, whereas this shard
+contains their root-directory names. The `dxmain` prerequisite names the
+root file but its actual assembler command names the 486 file. Original VCPI
+object selection is inside `!if 0`. Neither observation by itself proves
+the corresponding alternative capability is safely excluded.
+
+The captured COMMAND and DOSX binary identities are respectively
+`908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43` and
+`C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF`.
+Two consecutive read-only regeneration runs produced identical ledger hashes;
+all frozen input fields were verified unchanged. No guest was rebuilt,
+modified or newly executed.
+
+- Current `file-audit.csv` SHA-256 `BCC06181B6B7CA3A0D288F971222DCA46784FCB72553E4F14A465E832F5D617F`.
+- `guest-command-dosx-review.csv` SHA-256 `85FA13D2011E5C6DB82340CFBDCD08D0AEF64DFC26FC40DEECC6A7368686B840`.

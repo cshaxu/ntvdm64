@@ -157,3 +157,34 @@ stack/unwind, nested callbacks, exceptions, all calling conventions, zero and
 32 arguments, and actual Win16 behavior remain unverified. The experiment
 uses the original helper body rather than modifying it, and does not establish
 that this exact adapter should be the final product integration.
+
+## Narrow candidate thunk and helper composition
+
+`build/t473-s9/callpr-chain-matrix-r1` compiled a disposable copy of the
+original thunk with only its third `i386` conditional extended for a dedicated
+x86 generic-call selection. A compile-time symbol alias directs its existing
+helper call through the tested EBX-preserving host adapter, which forwards
+to the freshly assembled original `callpr32.asm`. The normal project provider
+flags and `/O2` were retained. No product source or guest was modified.
+
+With source-shaped VDMFRAMEs and controlled host boundary stubs, this
+composition passed zero- and one-argument cases, all four source/destination
+convention flag combinations against both stdcall and cdecl three-argument
+targets (including intentionally mismatched declarations), a 32-argument
+cdecl target and propagation of one structured exception. The standalone
+helper/adapter matrix also passed a nested native call and checked host stack
+pointer preservation. These are focused host fixtures, not real guest,
+task scheduler, resource cleanup or full exception-unwind acceptance.
+
+The compiled candidate C source SHA-256 is
+`D9C2FCFD9C785085285BB39D165E5EEFB1B32EEBC76DC7945EA1D60EABC924A4`; the compiled
+fixture source SHA-256 is `6FAEA539EA700D49838BA7C6D10C115B469AA9906516EE79717F59B198BBA908`;
+the retained fixture artifact SHA-256 is `ED030CBCEC4039ABFE135EC74E0B31E06D9CE5347507CCE6DF26CC13E0B80D7B`. The fixture
+artifact differs only in final newline representation. The original helper
+source/include identities and the isolated EBX sentinel witness are recorded
+above. Reproduction requires the x86 MSVC environment, the provider graph
+flags, `/DMVDM_WOW_X86_CALLPROC32`, a local helper symbol alias to
+`wow_callproc32_guarded`, and the original MASM helper assembled from source.
+Keep the candidate entirely separate from any published product until native
+callback reentry, genuine Win16 integration, ownership cleanup and the full
+coherent package gates are complete.
