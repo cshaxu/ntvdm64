@@ -77,7 +77,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 assert original_hash in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256'])
             if proof['status'] == 'excluded':
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
-                                'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only')
+                                'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only',
+                                'historical-build-recipe-file-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -91,6 +92,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/ccpu386/c_getset.c', 'softpc.new/base/ccpu386/ccpupig.c')
                 if proof['role'] == 'historical-empty-printscreen-source-only':
                     assert prefix == 'native-source-next-role-' and path == 'softpc.new/base/comms/prt_scrn.c'
+                if proof['role'] == 'historical-build-recipe-file-only':
+                    assert prefix == 'historical-build-role-'
             else:
                 if prefix in ('native-source-role-', 'native-source-next-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
@@ -125,6 +128,22 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'historical-build-role-':
+        cohort = {p for p, r in old.items() if r['status'] == 'pending' and
+                  re.fullmatch(r'(sources|dirs|makefil\w*(\..*)?|_objects\.mac)', Path(p).name, re.I)}
+        assert cohort == set(changed) and len(cohort) == observation['reviewed_cohort_count'] == 36
+        assert len(observation['active_source_manifests']) == len(set(observation['active_source_manifests'])) == 19
+        assert not cohort.intersection(observation['active_source_manifests'])
+        for record in observation['configuration_review_inputs']:
+            assert sha(Path(record['path'])) == record['sha256']
+        for record in observation['host_graph_observations']:
+            assert sha(Path(record['path'])) == record['sha256']
+            text = Path(record['path']).read_text().replace('\\', '/').lower()
+            assert all('src/mvdm/' + p.lower() not in text for p in cohort)
+        for proof in dispositions:
+            assert proof['status'] == 'excluded' and proof['original_text_retained_percent'] == '100'
+            assert proof['restored_estimate_status'].startswith('not-applicable:')
+            assert not proof['estimated_restored_code_percent']
     if prefix == 'native-source-role-':
         reviewed = {}
         for shard, record in enumerate(observation['source_tables'], 1):
@@ -350,7 +369,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

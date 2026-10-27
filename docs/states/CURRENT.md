@@ -18,14 +18,13 @@ in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-rev
 This delivery does not close the MVDM-wide source reconciliation or establish
 that every historical test has run.
 
-The [shared-include checkpoint](../../artifacts/mvdm-audit/shared-guest-include-role-review.md)
-resolves 44 of 104 declaration/macro roles through actual include roots and
-targets. The latest [native-source checkpoint](../../artifacts/mvdm-audit/native-source-role-review.md)
-adds 36 partial integrations and two PIG test-source roles. The
-[next native checkpoint](../../artifacts/mvdm-audit/native-source-next-role-review.md)
-adds 47 partial integrations and one empty source role. The ledger retains
-1,804 pending and 319 partial paths; source/ABI
-and real guest/device proof remain open. This audit changed no runtime image.
+The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
+retain partial integration and concrete per-file obligations. The latest
+[historical recipe review](../../artifacts/mvdm-audit/historical-build-role-review.md)
+resolves 36 build-control roles without excluding their source capabilities.
+The ledger retains 1,768 pending, 319 partial, 52 full and 2,545 excluded
+physical file roles. Source/ABI and real guest/device proof remain open;
+these checkpoints changed no runtime image.
 
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
 passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;

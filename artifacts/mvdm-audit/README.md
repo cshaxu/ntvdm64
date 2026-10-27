@@ -234,3 +234,13 @@ The subsequent [main review](native-source-next-role-review.md) merges those
 other proposals as pending. Per-file source, map/graph and evidence limits are
 recorded; no new full row or runtime capability is accepted. The total ledger
 now has 1,804 pending, 319 partial, 52 full and 2,509 excluded paths.
+
+The [remaining historical recipe review](historical-build-role-review.md)
+resolves 36 physical build-control roles after checking actual configuration
+consumers separately from compiler inputs. Their listed source/capability
+obligations remain in scope. The current total is 1,768 pending, 319 partial,
+52 full and 2,545 excluded file roles; no runtime capability is newly accepted.
+
+The [native CBT metadata sample](native-cbt-info-review.md) checks 5,000
+creation callbacks without a failed native metadata query. It constrains a
+specific diagnostic hypothesis; it does not locate or waive the SOL failures.

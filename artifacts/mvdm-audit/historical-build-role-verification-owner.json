@@ -1,0 +1,9 @@
+{
+  "script_sha256": "3941B78755E234E9BD566CFDD07C957931DD8BA481F9D58FF27857801F83AF92",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\verify-historical-build-roles.ps1",
+  "checker_sha256": "B4E974643DE739D00BD53122CA9C8D69B600C3600A9D61C5DF7A677C94499F3E",
+  "pid": 12084,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\historical-build-final.stdout.txt",
+  "started": "2026-10-27T22:49:12.1781509Z",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\historical-build-final.stderr.txt"
+}

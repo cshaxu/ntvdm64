@@ -1,0 +1,8 @@
+{
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\native-cbt-info.stderr.txt",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\run-native-cbt-info.ps1",
+  "pid": 14284,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\native-cbt-info.stdout.txt",
+  "script_sha256": "562535EDB25965C671BB7B934ACBA0709E01A8FC1E8657D16F70F94131AA6CAB",
+  "started": "2026-10-27T22:47:59.4084851Z"
+}

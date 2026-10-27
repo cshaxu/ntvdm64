@@ -1,0 +1,99 @@
+{
+  "result": "pass",
+  "base": "35454cc49",
+  "candidate_count": 36,
+  "reviewed_cohort_count": 36,
+  "remaining_cohort_pending": 0,
+  "source_tables": [
+    {
+      "path": "historical-build-role-dispositions.csv",
+      "sha256": "5C11349ACF5BA976624BF5997C05147BF810FEBDFA92729E1A3E9A5EC539BAE0"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "host_graph_observations": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    }
+  ],
+  "active_source_manifests": [
+    "softpc.new/base/ccpu386/sources",
+    "softpc.new/base/bios/sources",
+    "softpc.new/base/keymouse/sources",
+    "softpc.new/base/system/sources",
+    "softpc.new/base/disks/sources",
+    "softpc.new/base/support/sources",
+    "softpc.new/base/video/sources",
+    "softpc.new/base/cvidc/sources",
+    "softpc.new/base/comms/sources",
+    "softpc.new/base/dos/sources",
+    "dos/dem/sources",
+    "dos/command/sources",
+    "vdmredir/sources",
+    "xms.486/sources",
+    "dpmi32/sources",
+    "suballoc/sources",
+    "oemuni/sources",
+    "softpc.new/host/src/sources",
+    "wow32/sources"
+  ],
+  "configuration_review_inputs": [
+    {
+      "path": "CMakeLists.txt",
+      "sha256": "0EC784FA3E9C5F2721DC8A7B0F5BA6F3B0FBA77900C1FAD71B68E42C25EACF7A"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3DD2BA6BF02F66E917F6751D6C6C6B63409D4BBC47D94A238EC73BF7FCE20099"
+    },
+    {
+      "path": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+      "sha256": "D8168FFD8919514C446F28511039F2B1122E2ABF4F41B73F06009F15779C6962"
+    },
+    {
+      "path": "tools/build/New-NativeWorkerNinja.ps1",
+      "sha256": "46901207AF9C4E1A8CA8C899D9EE23CC65B61896115BB32B4CB00E9D724BE237"
+    },
+    {
+      "path": "tools/build/New-NativeHook64Ninja.ps1",
+      "sha256": "F72AD58A628D0DD0544BB6720CD5E677B9DC70915CF9FD0C72E331506011934A"
+    }
+  ],
+  "scope": "Historical recipe file roles only; configuration consumers source-reviewed separately from compiler inputs"
+}

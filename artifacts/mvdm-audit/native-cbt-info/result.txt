@@ -1,0 +1,1 @@
+NATIVE_CBT_INFO rounds=500 created=3500 samples=5000 info_failures=0 invalid_windows=0 class_failures=0 thread_failures=0

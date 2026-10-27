@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1804,
-    "excluded": 2509,
+    "pending": 1768,
+    "excluded": 2545,
     "partial": 319,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Next native checkpoint reviews180 paths:47 partial integrations,1 original empty source file role excluded,132 remain pending. No new full capability or functional percentage is inferred."
+  "note": "36 remaining original build recipes classified by file role only; all source/provider capabilities retain their separate obligations. No runtime or guest change."
 }

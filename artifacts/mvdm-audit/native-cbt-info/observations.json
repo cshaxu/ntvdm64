@@ -1,0 +1,44 @@
+{
+  "thread_failures": 0,
+  "observed_callbacks": 5000,
+  "info_failures": 0,
+  "records": [
+    {
+      "sha256": "DC888CDAD08F4004C5E0CF89982288D1B1B389A510C2009C67E765207CFE7F66",
+      "file": "probe.c"
+    },
+    {
+      "sha256": "562535EDB25965C671BB7B934ACBA0709E01A8FC1E8657D16F70F94131AA6CAB",
+      "file": "run.ps1"
+    },
+    {
+      "sha256": "F1019AE2699E2992DAD7B80F6AFFA641A60305B496676096488787D512A9CF03",
+      "file": "result.txt"
+    },
+    {
+      "sha256": "C3609D7F6949427C865B6FA3553CB8FFBF6D3C9D4D93D5C634352454F81E0490",
+      "file": "owner.json"
+    },
+    {
+      "sha256": "8F29C45C4738B85F29B784C480DF69CBFBE7A6C00C2116A93506820EA5B4D4D3",
+      "file": "exit.json"
+    },
+    {
+      "sha256": "263D4F173C9C375B6DBF562EC965FC5588E530093D95547F1781980EF983A1D1",
+      "file": "compile.txt"
+    }
+  ],
+  "guest_changed": false,
+  "explicit_windows": 3500,
+  "executable_sha256": "7C00BA7A50403E968B5CA539BEC8377093DE48ED213BC1B2C9B547D8F6AF35F9",
+  "scope": "Native precondition sample only; no product/guest test or repair",
+  "product_source_changed": false,
+  "result": "pass",
+  "host": {
+    "ubr": 9711,
+    "build": "26300"
+  },
+  "rounds": 500,
+  "invalid_windows": 0,
+  "class_failures": 0
+}
