@@ -1,0 +1,11 @@
+# Kernel 3.1 KRNL386 guest build source candidates — shard 3
+
+The companion `kernel31-guest-owner-review.csv` identifies 20 pending shard paths with frozen/current SHA equality and concrete original make→object→KRNL386 link edges. For source files the original `makefile` dependency names the exact source, and `krnl386.lnk` explicitly includes its resulting object; `makefile:179,183-185` names link16, MASM and CL16. Two include files additionally have exact non-comment source INCLUDE paths and object/link edges. `kernel.def` is the original linker definition; `krnl386.rc` and `kernel.rcv` form the `rc16` resource chain. Original `makefile:341-350,407-414` links `kernel.exe`, applies resources and copies it to `krnl386.exe` in its 386 branch.
+
+Ten other pending shard entries lack this established KRNL386 chain: 2galloc.asm, 2gmem.asm and 2gmoreme.asm belong to the separate OBJ2/286 branch and are not claimed by the 386 link; debug kernstub.exe is a guest binary not a source; kernel.api, m.msg, newexe.h, patch.txt, qgrep.grp and state.rst require separate role/consumer proof. None has been marked excluded. `qgrep.grp` appears in map-to-symbol handling, but is not thereby a source for KRNL386 execution.
+
+The 20 entries are only `guest-build-source-file-only` candidates. Original conditions, source→distributed binary provenance and per-function behavior remain independent; guest code or image was not rebuilt or modified. This work changes neither file-review.csv nor the combined ledger.
+
+## Separate 286P guest source candidates
+
+`2galloc.asm`, `2gmem.asm`, and `2gmoreme.asm` have now been added as three bounded candidates. The original makefile separately names their assembler inputs and OBJ2 members; `krnl286.lnk` explicitly includes each object, and the `286P` branch feeds OBJ + OBJ2 to link16 via that response file. Their exact source/hash and individual line edges are in the CSV. These are historical 286 guest build source roles, not the default `386P` KRNL386 link. This neither admits a 286 profile nor excludes its guest capability, and it does not prove the current package image was built from these sources. The remaining seven earlier listed paths stay pending.

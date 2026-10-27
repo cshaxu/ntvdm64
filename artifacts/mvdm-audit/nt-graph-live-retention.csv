@@ -1,0 +1,2 @@
+relative_path,classification,original_sha256,observed_current_sha256,original_code_lines,matched_code_lines,text_retention_percent,restored_behavior_estimate,scope
+softpc.new/host/src/nt_graph.c,partial,E08E6414C0261656B67A97F839256EE4BA6565F84CE6799197F92B98436131D9,8D10D85B80703C3515A92E1761FB32018620179B9ED93FF52137161BD53233C8,1424,1415,99.37,Not established for this concurrent uncommitted candidate,"Read-only current-source observation; no acceptance, source commit or release"

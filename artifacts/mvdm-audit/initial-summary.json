@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2753,
-    "excluded": 1653,
+    "pending": 2653,
+    "excluded": 1753,
     "partial": 226,
     "full": 52
   },
@@ -36,9 +36,9 @@
     {
       "relative_path": "softpc.new/host/src/nt_graph.c",
       "frozen": "3BD567C002DEE8B356788EA3AE63FBCB2DF9302E5D7CEB386149B013CEA95EDE",
-      "current": "3B2E6D7959A93B05B3F3856E3A00E9455EE64DF489A36712643CB257FB5D3E86"
+      "current": "8D10D85B80703C3515A92E1761FB32018620179B9ED93FF52137161BD53233C8"
     }
   ],
   "complete": false,
-  "note": "Current guest-source-role checkpoint excludes 187 historical guest build source/resource host-input roles only; guest functionality/provenance remain separate. Live candidate drifts are observations, not runtime acceptance; external provider triage remains distinct."
+  "note": "Guest source-role checkpoints exclude 187 COMMAND/WRITE/DOS plus 100 Kernel31 historical guest build source/resource host-input roles only; guest functionality/provenance remain separate. Live candidate drifts are observations, not runtime acceptance; external provider triage remains distinct."
 }

@@ -1,0 +1,46 @@
+{
+  "initialCheckpoint": {
+    "exit": 1,
+    "pid": 28504,
+    "command": "-X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py artifacts/mvdm-audit/kernel31-source-role-checkpoint-result.json --base 3fd833983 --prefix kernel31-source-role- --expected-count 100",
+    "started": "2026-10-27T18:24:50.075615Z"
+  },
+  "source": {
+    "exit": 0,
+    "pid": 29260
+  },
+  "countNegative": {
+    "command": "-X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py build/t473-s10/guest-source-owner/negative-result.json --base 3fd833983 --prefix kernel31-source-role- --expected-count 99",
+    "started": "2026-10-27T18:26:34.4553394Z",
+    "exit": 1,
+    "expected": 1,
+    "pid": 13868
+  },
+  "scope": "Kernel31 historical source-role checkpoint; no guest execution",
+  "driftObservation": {
+    "pid": 7972,
+    "exit": 0,
+    "started": "2026-10-27T18:26:01.1201451Z"
+  },
+  "diffCheckExit": 0,
+  "documentation": {
+    "pid": 9620,
+    "exit": 0,
+    "started": "2026-10-27T18:26:58.3400377Z"
+  },
+  "preview": {
+    "exit": 0,
+    "pid": 5492
+  },
+  "merge": {
+    "pid": 27084,
+    "exit": 0
+  },
+  "checkpoint": {
+    "command": "-X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py artifacts/mvdm-audit/kernel31-source-role-checkpoint-result.json --base 3fd833983 --prefix kernel31-source-role- --expected-count 100",
+    "started": "2026-10-27T18:26:31.1037737Z",
+    "exit": 0,
+    "expected": 0,
+    "pid": 26912
+  }
+}

@@ -68,8 +68,8 @@ Any cleanup of displaced historical tooling remains in S18.
 
 ## Checkpoint result and limits
 
-The merged 4,684-path ledger now contains 52 full, 226 partial, 1,653 excluded
-file roles and 2,753 pending. The original frozen inventory and the full
+At checkpoint `3fd833983`, the merged 4,684-path ledger contained 52 full,
+226 partial, 1,653 excluded file roles and 2,753 pending. The original frozen inventory and the full
 source/declaration evidence are unchanged. Retained source estimates for the
 partial rows are unchanged. This checkpoint changes no product or guest
 bytes and runs no guest build or runtime acceptance. S10 remains open for
@@ -81,3 +81,7 @@ resolved a missing condition on one include edge. The retained
 bounded change and unchanged unrelated rows; documentation governance and
 `git diff --check` also passed. The [background run record](guest-source-role-runs.json)
 retains process IDs and exit results for this source-only delivery.
+
+The [Kernel 3.1 successor](kernel31-source-role-review.md) records subsequent
+classifications separately; the counts and results above describe this
+checkpoint rather than overriding the current merged index.

@@ -1,0 +1,9 @@
+# KERNEL31 historical guest-input owner review — shard 1
+
+`kernel31-guest-owner-review.csv` covers all 28 pending source/declaration/resource rows in this family, with frozen and independently checked OpenNT hashes, exact guest target, dependency chain, selection condition and limit. Twenty-four have candidate classification `historical-guest-build-source-file-only`, with zero host target inputs in the earlier four-target review; four remain pending. No main ledger or guest changed.
+
+The original makefile selects 386 retail/debug as NT's default and distinguishes `OBJ / OBJ3` for `386P` from `OBJ / OBJ2` for `286P`; the matching `krnl386.lnk` and `krnl286.lnk` were checked. Its `$(ASM)` is MASM with historical include flags; the `386P` kernel target links with link16, applies `krnl386.res` using rc16 and fixexe; it is later copied to krnl386.exe. Each source candidate must have both an explicit assembly dependency and its corresponding object in the appropriate link response. `2gcompac.asm` and `2protect.asm` are explicitly 286P-only historical inputs; they are not claimed to participate in the default KRNL386.
+
+`kernel.inc`, `pdb.inc` and `gpcont.inc` have actual include sites in selected assembler inputs; `winkern.inc` is included by `kernel.inc`. The USA strings file enters only under !LANG / !COUNTRY / !DBCS via copy to strings.asm and compilation to strings.obj. `swappro/swap.c` is separately linked/bound to SWAP.EXE by its own historical makefile, not to KRNL386. The checked-in `krnl286.rc`, `log.slm`, `swappro/swap.doc`, and `w32sys.asm` are retained pending: their precise active guest input route is not established by this 386 link chain.
+
+Candidates exclude only the historical files as modern host build inputs. These results do not prove behavior, individual code execution, all preprocessor branches, or that installed immutable binaries were generated from these sources. No guest rebuild or runtime test was performed.

@@ -1,0 +1,65 @@
+{
+  "result": "pass",
+  "candidate_count": 100,
+  "shards": {
+    "0": 26,
+    "1": 24,
+    "2": 27,
+    "3": 23
+  },
+  "source_tables": [
+    {
+      "path": "shard-0/kernel31-guest-owner-review.csv",
+      "sha256": "280D0E8D40825580C264F50DA44E93583E979BAC2BF8620C466EAA7F5B7FD846"
+    },
+    {
+      "path": "shard-1/kernel31-guest-owner-review.csv",
+      "sha256": "BCA116285AF7CFFDBA1564F248C4E9535E21189DC11FEF7AF04F504E080D3D5A"
+    },
+    {
+      "path": "shard-2/kernel31-guest-owner-review.csv",
+      "sha256": "B2173F399418823810E37E1782A124309ABDF596F50EA288C3B7806FEBF4BF70"
+    },
+    {
+      "path": "shard-3/kernel31-guest-owner-review.csv",
+      "sha256": "857B0CA7B005F45105A26C746C9439B4DA9154C0A889508D7B206C70E7BFE56F"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-inputs.txt",
+      "sha256": "87E217899970FD26D464DE8693316FD96B485C942CD5BA1E5BFC916AE3B913D4",
+      "kind": "inputs",
+      "graph": "worker",
+      "valid_blocks": null,
+      "lines": 941
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "valid_blocks": 632,
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "valid_blocks": null,
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "valid_blocks": 229,
+      "lines": 15249
+    }
+  ],
+  "skipped": [],
+  "product_changed": false,
+  "guest_changed": false
+}
