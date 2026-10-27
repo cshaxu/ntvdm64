@@ -4,9 +4,9 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 957,
+    "pending": 953,
     "partial": 48,
-    "excluded": 84
+    "excluded": 88
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -23,8 +23,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "80581E89CA7210B7DC351A78DCE5828FB0A56B14556484B8CDEE945ECADC3836",
-  "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 957 rows remain pending. Excluded inactive host bodies/build artifacts do not exclude guest features. Matching lines are not restored percentage.",
+  "output_sha256": "AE61FC814B18FD127060F54ADBDB65A5E68530A6ADDEF78A09FF7A6AC7A825E9",
+  "limitations": "48 mirror-different rows remain partial; 953 entries pending. Exclusions apply to provably excluded file roles, not guest or related features; standalone component absence is not overall exclusion. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -173,5 +173,6 @@
   "wow_callback_memory_helpers": "wow-callback-memory-helpers-review.md; registration and historical W32InitDlg fixture distinguished from other callbacks",
   "wow_sound_beep": "wow-sound-beep-review.md; original thunk route and native sound owner, runtime evidence missing",
   "wow_multimedia_inactive_body": "wow-multimedia-inactive-body-review.md; excluded inactive wmmedia1 bodies only, multimedia capability separately unresolved",
-  "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md; real isolated guest tabstop return 1 and same-worker map-derived pointer 0 -> 1, no entry breakpoint"
+  "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md; real isolated guest tabstop return 1 and same-worker map-derived pointer 0 -> 1, no entry breakpoint",
+  "unselected_host_disposition": "unselected-host-role-disposition.csv/.md: corrected to 4 file-role-only exclusions, 21 capability work items"
 }

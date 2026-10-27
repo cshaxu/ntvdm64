@@ -1,0 +1,26 @@
+relative_path,sha256,disposition,role_and_origin
+bde/bde.def,CFB2DEEB3C42A282C4CF19AA8CF13D3408B007CEB42DC21C1B098E0B7DA16979,pending,"bde/sources:41,56 builds independent BDE debugger-extension DLL; definition describes its exports"
+bde/data.c,5DA2D4E3CD95333273F4C136686F91774685BB017AAD14E59E1316C45A601F16,pending,bde/sources:83-90 selects debugger callback/global state for separate BDE extension
+bde/disasm.c,8A59C16E5EDD056761B3FABCD2D67C07F2FB896B0128B8F82DAB2EF3B9336417,pending,bde/sources:83-90 selects disassembler called by bdecmds u command in separate BDE extension
+fax/wowfax/wowfax.def,4C62075FC119FF7C44CBDC554470F044C102BCBC420F8CD3CD4B9F0C12A4F983,pending,fax/wowfax/sources:28-30 selects optional WOW fax GDI driver and its definition
+fax/wowfaxui/wfsheets.c,C43B25CB761CD8A3CA6DD95C3E4707B9A118544A1BCBC014CA5C780A40F0AAC6,pending,"fax/wowfaxui/sources:28-30,52-55 selects optional separate fax UI DLL sheets"
+fax/wowfaxui/wowfaxui.c,D96BF03EBD449B537C25E0126529AF008E5ECC8D7421658497FE35FDE4261CA4,pending,"fax/wowfaxui/sources:28-30,52-55 selects optional separate fax UI DLL entry"
+ieuvddex/help.c,F27DDDEE55C29F080A4679BC1653384C28147961D497D04F2A7F85C89F3F13E4,pending,ieuvddex/sources:31-47 selects help in separate debugger-extension DLL
+ieuvddex/trace.c,B1F435775188A93D9BDD20CFDF4DE08E0194D6AA86B695F092336E441A6B9143,pending,"ieuvddex/sources:31-47 selects debugger-extension trace, called by procdep.c"
+softpc.new/base/debug/markfrom,D0734FC35CF6B2E8D8718217978651FDAE23BF9E283F57874FFE864F8D998B83,pending,original debugger icon pixel table; non-runtime debugger resource
+softpc.new/bios/dosmsg.cmd,A7B1387FC13FD1F954CB569755D6211914B6221BB690B6C6E91DCEAED2B23A04,excluded-file-role-only,"original firmware build script invokes buildidx and nosrvbld, not a host runtime provider"
+softpc.new/bios/sysimes.asm,C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A,pending,"softpc.new/bios/makefile:55,78 selects guest BIOS build input; immutable-guest rule prohibits rebuild"
+softpc.new/debugger/vdmdebug.c,38A25FA9784C466C56EE7024B33DFB7E3A419E6E415AEDBB92AF32F61FA24C77,pending,softpc.new/debugger/sources:35-46 selects independent debugger program and pipe server
+softpc.new/host/link/res.cmd,8C76221725812E8827B156E24272E932FF0312065AE871A6D60EB8CBB2AC9375,excluded-file-role-only,original host resource compilation/conversion script; not selected runtime body
+softpc.new/host/src/nt_hfx.c,61514C95E1A9F3A3E491A262AFF92C1D2E1F5DFB73DBC607FD1EE29F0359C371,pending,S1 source disposition: not in original i386 manifest; no current CPU40 host input
+softpc.new/roms/bios4.asm,E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB,pending,original BIOS ROM source; immutable guest firmware policy excludes rebuild and host linkage
+vdd/samples/adlibvdd/adlibvdd.def,B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED,pending,original sample ADLIBVDD DLL export definition; samples/adlibvdd/sources:8-10 selects separate sample DLL
+vdd/samples/mscdex/vdd/vcdex.rc,1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F,pending,"samples/mscdex/vdd/sources:6-8,19 selects version resource of separate sample VCDEX DLL"
+vdmdbg/vdmdbg.def,2C104E9E79BBB49447A004E8FB54651CEBFC4158A7472BD3A151DEE920047758,pending,"vdmdbg/sources:16,31 builds separate debugger interface DLL; definition is its export contract"
+vdmexts/i386/vdmtib.c,F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8,pending,"vdmexts/sources:28,30,44 selects i386 debugger extension command implementation"
+vdmexts/vdmexts.def,A48B01B490F2B55A58989BFFFB2F850472B7700E50E2A5DE0483BA7186CD8394,pending,"vdmexts/sources:28,30 builds external debugger extension DLL; definition is its export contract"
+vdmutils/pifedit/pif.def,79A710528DAFFA77FAEF458E590F2583A3F5954AE206B6B6F3EABED809441629,pending,PIFEDIT independent utility module definition; pifedit/sources:4-12 selects utility library rather than worker
+vdmutils/pifedit/pifedit.c,FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278,pending,"pifedit/sources:4-12 selects separate utility library, not current worker PIF execution path"
+wow32/obj/i386/precomp.pch,4EC9ECFBC996E35BB81AB3B502389A4DE2293CF736C53C14023C353F32BC35CF,excluded-file-role-only,"retained historical i386 precompiled header, not current graph input or independent runtime"
+wow32/wctlm32.c,E5C1218929F64A5BB1C2227AB1903E095E0DB50E3A1F44DBB4AD4A028579B8CA,excluded-file-role-only,"incomplete unselected control thunk fragment: starts with bare cases and placeholder lines, absent original WOW32 sources; selected reverse control conversion has separate owners"
+wow32/wddeml32.c,13DB1E133CBB9BE8037FE9A57B1CF637F744EF23C9277697C096486BDE3A8C2C,pending,"original DDEML public API/callback thunk provider unselected; actual DDE registration guest GPF and identity remain unresolved, requires bounded DDE package investigation"

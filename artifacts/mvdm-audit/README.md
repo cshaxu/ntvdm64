@@ -7,8 +7,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-205 partial (all raw mirror differences), 390 excluded (documented profile,
-source roles or unused retained objects) and 4,089 pending. None is classified
+205 partial (all raw mirror differences), 401 excluded (documented profile,
+source roles or unused retained objects) and 4,078 pending. None is classified
 full in this pass. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -16,10 +16,11 @@ and [shard 3](shard-3/historical-wow-objects.md).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 
-One frozen path, `src/mvdm/README.md`, changed after freezing to correct
-obsolete publication wording and remove duplicate rows; see
-`initial-summary.json`. No product source or guest media was changed in this
-review. `frozen-external-audit-rows.csv` preserves 42,963 extra WOW audit
+The live hash sweep records divergence-registry changes in
+`src/mvdm/README.md` and a concurrent uncommitted `nt_bop.c` change; see
+`initial-summary.json`. The latter is an observed baseline drift, not an
+accepted runtime repair from this audit. This review changed no product
+source or guest media. `frozen-external-audit-rows.csv` preserves 42,963 extra WOW audit
 paths outside the MVDM union for relevance and dependency review.
 
 Review breadth differs by shard. Shard 0 has metadata for 62 diff files, nine
@@ -75,3 +76,5 @@ identifies the directory-reset service and its selected DEM fallback.
 Further history-only output reviews are [shard 1](shard-1/historical-object-batch.md), [shard 2](shard-2/historical-i386-artifacts-review.md), and [shard 3](shard-3/historical-i386-binaries-review.md); each excludes the retained file, not its capability.
 
 The dormant original [multimedia host body](shard-2/wow-multimedia-inactive-body-review.md) is excluded as a source-file body, not as a guest multimedia capability.
+
+The focused unselected-source records are [shard 0](shard-0/nonruntime-source-disposition.md), [shard 1](shard-1/unselected-finite-worklist.md), [shard 2](shard-2/unselected-host-role-disposition.md), and [shard 3](shard-3/unselected-host-tooling-disposition.md). Independent component nonselection alone is not a capability exclusion.

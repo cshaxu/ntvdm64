@@ -8,20 +8,20 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | `declaration-or-build-carrier` | 856 |
 | `selected-product-source` | 292 |
 | `retained-build-artifact` | 0 |
-| `unselected-host-source-requires-s2-disposition` | 110 |
+| `unselected-host-source-requires-s2-disposition` | 102 |
 | `tooling-or-build-carrier` | 108 |
 | `retained-historical-binary-or-build-artifact` | 35 |
 | `unmirrored-tool-build-input` | 33 |
-| `unselected-host-noncode-requires-s2-disposition` | 25 |
+| `unselected-host-noncode-requires-s2-disposition` | 22 |
 | `unselected-host-module-definition-requires-s2-disposition` | 17 |
 
 | Frozen product selection | Pending paths |
 | --- | ---: |
-| `not-product-selected` | 3797 |
+| `not-product-selected` | 3786 |
 | `ntvdm-product` | 234 |
 | `wow32-product` | 45 |
 | `vdmredir-product` | 13 |
 
-The 2,613 immutable-guest-or-guest-build-input rows require explicit distinction between deployed guest inputs, source/build provenance, and unused resource/tooling; guest immutability is not evidence that any capability works. The 293 selected-product-source rows require actual owner, dispatch, lifecycle and behavior reconciliation. Build carriers, historical binary artifacts and unselected host-source rows require a role/closure decision rather than automatic exclusion. Counts overlap across the two tables and must not be added.
+The 2,613 immutable-guest-or-guest-build-input rows require explicit distinction between deployed guest inputs, source/build provenance, and unused resource/tooling; guest immutability is not evidence that any capability works. The 292 selected-product-source rows require actual owner, dispatch, lifecycle and behavior reconciliation. Build carriers, historical binary artifacts and unselected host-source rows require a role/closure decision rather than automatic exclusion. Counts overlap across the two tables and must not be added.
 
 The separate 42,963 external audit rows are not included here; they remain subject to relevance and owner-boundary review. Mirror-different files already classified partial still require semantic proof and recovery work. Current selection must be rechecked against actual graphs and maps because earlier frozen claims have known discrepancies.

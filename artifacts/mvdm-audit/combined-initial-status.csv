@@ -1269,7 +1269,7 @@ oemuni/obj/i386/process.obj,1,excluded,shard-1/file-audit.csv
 oemuni/oem.h,0,pending,shard-0/review.csv
 oemuni/process.c,2,partial,shard-2/file-audit.csv
 oemuni/sources,3,pending,shard-3/file-review.csv
-oemuni/toemuni.c,3,pending,shard-3/file-review.csv
+oemuni/toemuni.c,3,excluded,shard-3/file-review.csv
 README.md,1,pending,shard-1/file-audit.csv
 sim16/incs.inc,3,pending,shard-3/file-review.csv
 sim16/makefile,1,pending,shard-1/file-audit.csv
@@ -1753,7 +1753,7 @@ softpc.new/base/cvidc/vglob_c.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/cvidc/xchg_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/xfer_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/xlat_c.h,0,pending,shard-0/review.csv
-softpc.new/base/dasm386/build.c,3,pending,shard-3/file-review.csv
+softpc.new/base/dasm386/build.c,3,excluded,shard-3/file-review.csv
 softpc.new/base/dasm386/dasm386.c,2,excluded,shard-2/file-audit.csv
 softpc.new/base/dasm386/decode.c,2,excluded,shard-2/file-audit.csv
 softpc.new/base/dasm386/makefile,3,pending,shard-3/file-review.csv
@@ -2075,7 +2075,7 @@ softpc.new/bios/biosbop.inc,1,pending,shard-1/file-audit.csv
 softpc.new/bios/biosseg.inc,0,pending,shard-0/review.csv
 softpc.new/bios/biostruc.inc,2,pending,shard-2/file-audit.csv
 softpc.new/bios/devmark.inc,2,pending,shard-2/file-audit.csv
-softpc.new/bios/dosmsg.cmd,2,pending,shard-2/file-audit.csv
+softpc.new/bios/dosmsg.cmd,2,excluded,shard-2/file-audit.csv
 softpc.new/bios/makefile,1,pending,shard-1/file-audit.csv
 softpc.new/bios/msbio.cl3,1,pending,shard-1/file-audit.csv
 softpc.new/bios/msbio.cl4,1,pending,shard-1/file-audit.csv
@@ -2098,9 +2098,9 @@ softpc.new/bios/sysconf.asm,3,pending,shard-3/file-review.csv
 softpc.new/bios/sysimes.asm,2,pending,shard-2/file-audit.csv
 softpc.new/bios/sysinit1.asm,3,pending,shard-3/file-review.csv
 softpc.new/bios/sysinit2.asm,1,pending,shard-1/file-audit.csv
-softpc.new/convert/convert.c,0,pending,shard-0/review.csv
+softpc.new/convert/convert.c,0,excluded,shard-0/review.csv
 softpc.new/convert/sources,1,pending,shard-1/file-audit.csv
-softpc.new/dat2obj/dat2obj.c,3,pending,shard-3/file-review.csv
+softpc.new/dat2obj/dat2obj.c,3,excluded,shard-3/file-review.csv
 softpc.new/dat2obj/makefile,1,pending,shard-1/file-audit.csv
 softpc.new/dat2obj/sources,3,pending,shard-3/file-review.csv
 softpc.new/data/bios1.rom,2,pending,shard-2/file-audit.csv
@@ -2296,7 +2296,7 @@ softpc.new/host/inc/winsigni.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/xmsexp.h,3,pending,shard-3/file-review.csv
 softpc.new/host/link/makefile,3,pending,shard-3/file-review.csv
 softpc.new/host/link/nt_uis.h,1,pending,shard-1/file-audit.csv
-softpc.new/host/link/res.cmd,2,pending,shard-2/file-audit.csv
+softpc.new/host/link/res.cmd,2,excluded,shard-2/file-audit.csv
 softpc.new/host/link/resource.rc,1,pending,shard-1/file-audit.csv
 softpc.new/host/link/softerr.ico,3,pending,shard-3/file-review.csv
 softpc.new/host/link/softpc.def,3,pending,shard-3/file-review.csv
@@ -2409,7 +2409,7 @@ softpc.new/host/src/sources,2,pending,shard-2/file-audit.csv
 softpc.new/host/src/stf_conf.c,0,pending,shard-0/review.csv
 softpc.new/host/src/stubs.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/x86_emm.c,2,excluded,shard-2/file-audit.csv
-softpc.new/obj.vdm/c_regs.c,3,pending,shard-3/file-review.csv
+softpc.new/obj.vdm/c_regs.c,3,excluded,shard-3/file-review.csv
 softpc.new/obj.vdm/cdefine.inc,3,pending,shard-3/file-review.csv
 softpc.new/obj.vdm/makefile,1,pending,shard-1/file-audit.csv
 softpc.new/obj.vdm/makefile.std,2,pending,shard-2/file-audit.csv
@@ -2441,7 +2441,7 @@ suballoc/sources,2,pending,shard-2/file-audit.csv
 suballoc/suballcp.h,1,pending,shard-1/file-audit.csv
 suballoc/suballoc.c,2,pending,shard-2/file-audit.csv
 suballoc/suballoc.txt,2,pending,shard-2/file-audit.csv
-suballoc/tsa.c,0,pending,shard-0/review.csv
+suballoc/tsa.c,0,excluded,shard-0/review.csv
 tools16/buildidx.exe,0,pending,shard-0/review.csv
 tools16/buildmsg.exe,1,pending,shard-1/file-audit.csv
 tools16/c1.err,1,pending,shard-1/file-audit.csv
@@ -4391,7 +4391,7 @@ wow32/obj/i386/callpr32.obj,2,excluded,shard-2/file-audit.csv
 wow32/obj/i386/fastwow.obj,0,excluded,shard-0/review.csv
 wow32/obj/i386/mapembed.obj,0,excluded,shard-0/review.csv
 wow32/obj/i386/precomp.obj,1,excluded,shard-1/file-audit.csv
-wow32/obj/i386/precomp.pch,2,pending,shard-2/file-audit.csv
+wow32/obj/i386/precomp.pch,2,excluded,shard-2/file-audit.csv
 wow32/obj/i386/waccel.obj,2,excluded,shard-2/file-audit.csv
 wow32/obj/i386/walias.obj,3,excluded,shard-3/file-review.csv
 wow32/obj/i386/walloc16.obj,1,excluded,shard-1/file-audit.csv
@@ -4488,7 +4488,7 @@ wow32/wcntl32.c,3,partial,shard-3/file-review.csv
 wow32/wcntl32.h,0,pending,shard-0/review.csv
 wow32/wcommdlg.c,0,partial,shard-0/review.csv
 wow32/wcommdlg.h,3,pending,shard-3/file-review.csv
-wow32/wctlm32.c,2,pending,shard-2/file-audit.csv
+wow32/wctlm32.c,2,excluded,shard-2/file-audit.csv
 wow32/wctlm32.h,1,pending,shard-1/file-audit.csv
 wow32/wcurcash.c,1,pending,shard-1/file-audit.csv
 wow32/wcurcash.h,3,pending,shard-3/file-review.csv
@@ -4662,7 +4662,7 @@ wow32/wuwind.h,1,pending,shard-1/file-audit.csv
 wow32/wwstbl2.h,3,pending,shard-3/file-review.csv
 xms.486/alpha/sources,3,pending,shard-3/file-review.csv
 xms.486/i386/sources,3,pending,shard-3/file-review.csv
-xms.486/i386/xmsmem86.c,0,pending,shard-0/review.csv
+xms.486/i386/xmsmem86.c,0,excluded,shard-0/review.csv
 xms.486/makefile,2,pending,shard-2/file-audit.csv
 xms.486/mips/sources,2,pending,shard-2/file-audit.csv
 xms.486/obj/_objects.mac,0,pending,shard-0/review.csv

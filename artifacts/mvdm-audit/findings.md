@@ -296,3 +296,14 @@ from the tab-stop case to word-break handling; a direct object fixture with
 result 1 exercises that fallthrough. The guest snapshots are not atomic
 breakpoints, and no later crash was observed. S15 must recover the correct
 message semantics, verify callbacks, original failure cases and lifecycle.
+
+## Standalone component and source-role distinction
+
+The concentrated unselected-source review corrects a former S1 attribution:
+SIM16/SIM32 are remote packet/memory tools, not alternate CPU executors.
+The per-shard finite worklists retain their actual transport, debugger and
+tool responsibilities for further review. Separate BDE, fax, VDD and PIF
+components are likewise not excluded solely because they are absent from
+the worker graph. This batch newly excludes only eleven files with specific
+test/build/artifact or alternate-profile reasons; no guest-visible feature
+is declared restored by that decision.

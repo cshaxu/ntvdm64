@@ -1,18 +1,23 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 4089,
+    "pending": 4078,
     "partial": 205,
-    "excluded": 390
+    "excluded": 401
   },
   "unique_and_partition_verified": true,
   "live_source_hash_drift": [
     {
       "relative_path": "README.md",
       "frozen": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
-      "current": "A2DB8B59C71A51982872DC23211B960E312D494E343875753561FF2C6D7E56A2"
+      "current": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_bop.c",
+      "frozen": "C10228895446D6193AE6FD0215F5B93299359858DA1F7DD0626AC7CBB7E70153",
+      "current": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
     }
   ],
   "complete": false,
-  "note": "pending remains unresolved; external audit relevance not reconciled; README drift includes divergence-registry metadata corrections"
+  "note": "pending remains unresolved; external relevance is incomplete; README registry drift and concurrent uncommitted nt_bop.c change are recorded observations, not accepted runtime verification"
 }
