@@ -9,8 +9,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 224 partial (205 existing source-difference rows and 19 partially integrated
 build manifests), 626 excluded (documented profile, historical recipe,
-source roles or unused retained objects) and 3,834 pending. None is classified
-full in this pass. Exclusion of an object or provider does not prove its guest
+source roles or unused retained objects), 11 full selected leaf files and
+3,823 pending. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
@@ -90,3 +90,8 @@ Further history-only output reviews are [shard 1](shard-1/historical-object-batc
 The dormant original [multimedia host body](shard-2/wow-multimedia-inactive-body-review.md) is excluded as a source-file body, not as a guest multimedia capability.
 
 The focused unselected-source records are [shard 0](shard-0/nonruntime-source-disposition.md), [shard 1](shard-1/unselected-finite-worklist.md), [shard 2](shard-2/unselected-host-role-disposition.md), and [shard 3](shard-3/unselected-host-tooling-disposition.md). Independent component nonselection alone is not a capability exclusion.
+
+The first [11 full selected leaf contracts](full-selected-leaf.csv) combine
+unchanged original source, actual published code/decoder targets and
+[real guest positive and negative evidence](ccpu-sign-flags-contracts.md).
+Their status does not close the broader CPU decoder or execution owners.

@@ -1,0 +1,181 @@
+{
+  "result": "pass",
+  "image_sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+  "checker_sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64",
+  "decoder_object_sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986",
+  "globals": {
+    "_CCPU_WR": 5980252,
+    "_CCPU_GR": 8441856,
+    "_CCPU_FLAGS": 8441696,
+    "_CCPU_BR": 5980284
+  },
+  "functions": [
+    {
+      "name": "cbw",
+      "object_sha256": "DCC35EFADD8110F38F8DDE21ACDD8A4830E5F147332A618D92DEB687ACF0C494",
+      "bytes": 21,
+      "absolute_relocations": 2,
+      "code_match_vas": [
+        4344176
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263258,
+          "target_va": 4344176
+        }
+      ]
+    },
+    {
+      "name": "cwde",
+      "object_sha256": "74052BF3006958A93F65104DC9653710DEFCE1D1D6B2FCAE92DF0641829C8B01",
+      "bytes": 32,
+      "absolute_relocations": 2,
+      "code_match_vas": [
+        4344544
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263268,
+          "target_va": 4344544
+        }
+      ]
+    },
+    {
+      "name": "cwd",
+      "object_sha256": "0F1B3ABE9929C3C3158DD09252BE2688046E620EF8251D9C7CA44CF173036D72",
+      "bytes": 31,
+      "absolute_relocations": 2,
+      "code_match_vas": [
+        4344512
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263287,
+          "target_va": 4344512
+        }
+      ]
+    },
+    {
+      "name": "cdq",
+      "object_sha256": "06FF602DF1F473BB1FF8856A8881ECDB242A5604CE92DA31EE04D7AA8B0B6AA3",
+      "bytes": 20,
+      "absolute_relocations": 2,
+      "code_match_vas": [
+        4344208
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263297,
+          "target_va": 4344208
+        }
+      ]
+    },
+    {
+      "name": "lahf",
+      "object_sha256": "8FD0B9E26855DAB6D13E82CE57BA15368378B06B8BFC670383C28AE001641D2C",
+      "bytes": 52,
+      "absolute_relocations": 6,
+      "code_match_vas": [
+        4349344
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263496,
+          "target_va": 4349344
+        }
+      ]
+    },
+    {
+      "name": "sahf",
+      "object_sha256": "81B88DE17E01CFC00521F657DBFBCF529CD5CB599B1CB1936B2140374C92BF78",
+      "bytes": 67,
+      "absolute_relocations": 6,
+      "code_match_vas": [
+        4353600
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4263486,
+          "target_va": 4353600
+        }
+      ]
+    },
+    {
+      "name": "stc",
+      "object_sha256": "959F3D2D8EC5A538EC7D0E794AEBA967BF9C6A1F0547BC76E2E23EFDA103E1C3",
+      "bytes": 11,
+      "absolute_relocations": 1,
+      "code_match_vas": [
+        4355392
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4284793,
+          "target_va": 4355392
+        }
+      ]
+    },
+    {
+      "name": "clc",
+      "object_sha256": "D7B8FDFBE2BBE4AA82EA0D3EA4244B093E0EB34D5823BC3D234EE4A3A17270D2",
+      "bytes": 11,
+      "absolute_relocations": 1,
+      "code_match_vas": [
+        4341819,
+        4344240
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4284783,
+          "target_va": 4344240
+        }
+      ]
+    },
+    {
+      "name": "cmc",
+      "object_sha256": "1954D604EE49554CB2E0AA4B55616A105792187177AE92DFDA5E34714E82D067",
+      "bytes": 17,
+      "absolute_relocations": 2,
+      "code_match_vas": [
+        4344304
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4281494,
+          "target_va": 4344304
+        }
+      ]
+    },
+    {
+      "name": "std",
+      "object_sha256": "CD42E3AB7EBF56FCE7E2EBB90CE4A54E3B40D522B6F0882F8D1980E812507DCB",
+      "bytes": 11,
+      "absolute_relocations": 1,
+      "code_match_vas": [
+        4355408
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4284848,
+          "target_va": 4355408
+        }
+      ]
+    },
+    {
+      "name": "cld",
+      "object_sha256": "7DDEAFE423128D006E600063AFF0CA83F6977EDC98611B38E97CC57B73A13F94",
+      "bytes": 11,
+      "absolute_relocations": 1,
+      "code_match_vas": [
+        4344256
+      ],
+      "decoder_calls": [
+        {
+          "call_va": 4284838,
+          "target_va": 4344256
+        }
+      ]
+    }
+  ],
+  "limitation": "Code/call correspondence only; guest behavior is a separate test"
+}

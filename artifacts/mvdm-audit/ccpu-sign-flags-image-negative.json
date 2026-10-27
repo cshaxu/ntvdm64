@@ -1,0 +1,6 @@
+{
+  "pid": 27444,
+  "rejected": true,
+  "exit": 1,
+  "expected": "reject x86 image without selected CCPU bodies"
+}

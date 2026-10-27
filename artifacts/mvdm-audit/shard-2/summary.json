@@ -4,9 +4,10 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 883,
+    "pending": 882,
     "excluded": 151,
-    "partial": 55
+    "partial": 55,
+    "full": 1
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -23,8 +24,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "26D40D9FDDB9B19BE25CAFC37F882390C8D290DD95BCC70B5B6CDAB92F53EBAA",
-  "limitations": "55 partial entries: 48 mirror-different sources plus seven unchanged generation manifests integrated only as source lists; 883 entries pending. File-role/platform exclusions do not decide guest or shared algorithm capability. Matching lines are not restored percentage.",
+  "output_sha256": "3432AB3DD7B34B3C25407944360426F5F74B97B7D43D7B6FF8147775CE333276",
+  "limitations": "One full selected STD leaf; 55 partial entries (48 mirror-different and seven source-list carriers); 882 pending. File/leaf classifications do not close decoder, CPU, guest or related features.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -176,5 +177,6 @@
   "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md; real isolated guest tabstop return 1 and same-worker map-derived pointer 0 -> 1, no entry breakpoint",
   "unselected_host_disposition": "unselected-host-role-disposition.csv/.md: corrected to 4 file-role-only exclusions, 21 capability work items",
   "build_recipe_review": "build-recipe-consumption-review.csv/.md: 36 file-role exclusions, seven original source lists partially integrated at generation time",
-  "architecture_header_review": "architecture-generated-headers.csv/.md: 27 nonselected MIPS/PPC generated header variants, x86 carrier and cached deps crosschecked"
+  "architecture_header_review": "architecture-generated-headers.csv/.md: 27 nonselected MIPS/PPC generated header variants, x86 carrier and cached deps crosschecked",
+  "ccpu_std_contract": "ccpu-std-contract-review.md; full selected STD leaf, verified emitted body/decoder and real guest flags/reverse copy; prefixes and other owners remain open"
 }

@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "paths": 4684,
+  "counts": {
+    "pending": 3823,
+    "excluded": 626,
+    "partial": 224,
+    "full": 11
+  },
+  "full_leaf_paths": [
+    "softpc.new/base/ccpu386/cbw.c",
+    "softpc.new/base/ccpu386/cdq.c",
+    "softpc.new/base/ccpu386/clc.c",
+    "softpc.new/base/ccpu386/cld.c",
+    "softpc.new/base/ccpu386/cmc.c",
+    "softpc.new/base/ccpu386/cwd.c",
+    "softpc.new/base/ccpu386/cwde.c",
+    "softpc.new/base/ccpu386/lahf.c",
+    "softpc.new/base/ccpu386/sahf.c",
+    "softpc.new/base/ccpu386/stc.c",
+    "softpc.new/base/ccpu386/std.c"
+  ],
+  "source_drift": [
+    {
+      "relative_path": "README.md",
+      "current_sha256": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_bop.c",
+      "current_sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    }
+  ],
+  "coherent_ten_images_unchanged": true,
+  "owned_stages_absent": true,
+  "scope": "Source/ledger and retained actual guest/image evidence; not full product regression"
+}
