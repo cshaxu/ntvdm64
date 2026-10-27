@@ -1,0 +1,43 @@
+{
+  "no_progress_minutes": 10,
+  "started": "2026-10-27T20:57:32.3525301Z",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/build-x86.stderr.txt",
+  "inputs": [
+    {
+      "sha256": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE",
+      "path": "src/mvdm/dpmi32/modesw.c"
+    },
+    {
+      "sha256": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA",
+      "path": "src/mvdm/softpc.new/base/video/v7_ports.c"
+    },
+    {
+      "sha256": "E4237ED746FBFFBF1F1CBA86212D52BB352AE84BEB411FA600A492501A7BF01A",
+      "path": "src/mvdm/softpc.new/base/video/vga_mode.c"
+    },
+    {
+      "sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD",
+      "path": "src/mvdm/softpc.new/host/src/nt_bop.c"
+    },
+    {
+      "sha256": "8D10D85B80703C3515A92E1761FB32018620179B9ED93FF52137161BD53233C8",
+      "path": "src/mvdm/softpc.new/host/src/nt_graph.c"
+    },
+    {
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja"
+    },
+    {
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "path": "build/.ninja/msvc-x86-release/wow32/build.ninja"
+    }
+  ],
+  "phase_size_gib": 3,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/build-x86.stdout.txt",
+  "exit": 0,
+  "command": "cmd.exe /d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/build-x86.cmd\"\"",
+  "source_commit": "8197f9de3",
+  "phase_minutes": 60,
+  "pid": 20624,
+  "finished": "2026-10-27T20:57:46.5454670Z"
+}

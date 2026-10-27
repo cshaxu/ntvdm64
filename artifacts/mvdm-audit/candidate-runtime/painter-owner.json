@@ -1,0 +1,10 @@
+{
+  "pid": 576,
+  "started": "2026-10-27T21:26:12.7219472Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-video7-packed-painter.ps1\" -OutputRoot build/t473-s10/candidate-validation/video7-painter-r1 -VsDevCmd \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\"",
+  "script_sha256": "D4E2F5CA3E2BF6431AE99D96B296525979C0C5C814A84782FD03A38A25841DA1",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/painter.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/painter.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:26:21.2820725Z"
+}

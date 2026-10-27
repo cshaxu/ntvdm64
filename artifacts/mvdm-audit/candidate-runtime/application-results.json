@@ -1,0 +1,38 @@
+[
+  {
+    "name": "mine",
+    "pid": 21892,
+    "started": "2026-10-27T21:24:57.8066649Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-mine-gameplay.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\mine-r1 -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\mine.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\mine.stderr.txt",
+    "script_sha256": "544BA594184974E8EA1EDB2E76606BA5FD7ACC68553C41D430929FB4B811BB00",
+    "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+    "exit": 0,
+    "finished": "2026-10-27T21:25:20.6560972Z"
+  },
+  {
+    "name": "sol",
+    "pid": 5500,
+    "started": "2026-10-27T21:25:20.6680677Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-gameplay.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-r1 -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol.stderr.txt",
+    "script_sha256": "D366C7B1AD8F905C79937270C2F853ED30A8BD124AAC534F14CA9CE30832E19E",
+    "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+    "exit": 0,
+    "finished": "2026-10-27T21:25:32.6959732Z"
+  },
+  {
+    "name": "sol-options",
+    "pid": 13668,
+    "started": "2026-10-27T21:25:32.7051795Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-options-r1",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-options.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-options.stderr.txt",
+    "script_sha256": "57D67920A198949860DCCC8C458D128C69C705A7C4996DC9D8D3B62776C30801",
+    "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+    "exit": 1,
+    "finished": "2026-10-27T21:26:59.8468099Z"
+  }
+]

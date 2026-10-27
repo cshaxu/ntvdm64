@@ -1,0 +1,35 @@
+{
+  "pid": 6004,
+  "started": "2026-10-27T21:01:59.4251353Z",
+  "result": "pass",
+  "runs": [
+    {
+      "started": "2026-10-27T21:01:59.5110658Z",
+      "stage": "remaining",
+      "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\remaining.stderr.txt",
+      "command": "cmd.exe /d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-remaining-x86.cmd\"\"",
+      "exit": 0,
+      "pid": 30364,
+      "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\remaining.stdout.txt"
+    },
+    {
+      "started": "2026-10-27T21:02:07.3902938Z",
+      "stage": "incremental",
+      "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\incremental.stderr.txt",
+      "command": "cmd.exe /d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-x86.cmd\"\"",
+      "exit": 0,
+      "pid": 30576,
+      "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\incremental.stdout.txt"
+    },
+    {
+      "started": "2026-10-27T21:02:17.6906754Z",
+      "stage": "stage",
+      "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\stage.stderr.txt",
+      "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/build/Stage-System32ProductPackage.ps1 -BaselineRoot O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c -BuildCache O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker -Wow32 O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll -OutputRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -NativeHook O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\nthook32.dll -NativeHook64 O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\nthook64.dll -NativeWorker O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\ntvwm.exe -NativeFrontend O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\ntcon.exe -NativeMonitor O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\ntmon.exe -NativeLauncher O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\run16.exe -NativeService O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\ntsrv.exe",
+      "exit": 0,
+      "pid": 33408,
+      "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\stage.stdout.txt"
+    }
+  ],
+  "finished": "2026-10-27T21:02:24.9320061Z"
+}

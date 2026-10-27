@@ -1,0 +1,5 @@
+7788 WindowCreate atom=C3DC result=0449012A error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=02CF0000 tid=15404 actualMenu=6A590B8D
+7788 WindowCreate atom=C34C result=00CA0554 error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=00CF0000 tid=15404 actualMenu=00000000
+7788 WindowCreate atom=C3E5 result=039507BA error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=02CF0000 tid=21464 actualMenu=592C02A9
+7788 WindowCreate atom=C30E result=00890B4A error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=40800003 tid=21464 actualMenu=00000000
+7788 WindowCreate atom=8002 result=00000000 error=5023 bindingError=5023 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=21464 actualMenu=00000000

@@ -1,0 +1,9 @@
+# Shared guest include follow-up — shard 1
+
+This follow-up covers the 23 paths marked pending in `shared-guest-include-owner-review.csv`. Six now have positive original guest source/include resolution and linked target evidence and are candidates for `excluded` **file roles only**; the other 17 retain pending with per-file precise evidence and next question in `shared-guest-include-followup.csv`. All candidate source identity and fresh host dependency checks remain those of the prior review. No files, guest functionality, host ABI or current installed-image behavior are excluded.
+
+The exact consumer paths are DRWATSON's `drwatson.c` and `getsym.c` with its CL16 `-I../inc` for WOW16 io.h/stdarg.h/stdio.h; WRITE's linked `commdlg.obj` for WOW16 commdlg.h; WFWNET's linked `print.obj` → `locals.h` → spl_wnt.h; and SOUND's linked sound.asm for windefs.inc. For WFWNET and SOUND, the recorded path applies to the normal makefile `!ifdef INCLUDE` branch; externally supplied INCLUDE must be treated separately. Local same-name shadows were checked absent. Current worker/WOW Ninja dependency evidence is carried from the prior review and is not treated as sufficient alone.
+
+The real `drwatson.c` `<stdarg.h>` include resolves to `wow16/inc/stdarg.h` through the original Sherlock search path and does not prove the unrelated `dos/v86/h/stdarg.h` was consumed. Likewise WRITE's `<time.h>` uses its `wow16/inc` search root, not `dos/v86/h/time.h`. Historical `drivinit.h` references in `metarec.c`/`diachgpr.c` were found, but the reviewed GDI/WRITE object lists do not select those source objects; the file remains pending rather than being dismissed on nonselection. Other unresolved rows retain the previous exact original include sample or specific search-path/conditional question.
+
+No original guest or product was built or modified, no runtime ran and no existing ledger was changed.

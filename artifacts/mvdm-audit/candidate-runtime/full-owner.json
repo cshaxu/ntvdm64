@@ -1,0 +1,40 @@
+{
+  "exit": 0,
+  "pid": 14888,
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File build/t473-s10/candidate-validation/run-full.ps1",
+  "finished": "2026-10-27T21:11:55.8881785Z",
+  "started": "2026-10-27T21:06:23.3461362Z",
+  "inputs": [
+    {
+      "path": "tools/audit/Invoke-ProductVerification.ps1",
+      "sha256": "8431278582DB463766514AF2EE8E729FE08A4134B39869902614B703D3A24765"
+    },
+    {
+      "path": "tools/audit/Verify-CommandExitStatus.ps1",
+      "sha256": "6B1F28F0C2EABE62326C68D50E88B1F011B8A1E9632E834B3F241C59192A5C3D"
+    },
+    {
+      "path": "tests/observation/isolated_package_cleanup.ps1",
+      "sha256": "B241A8F794525BF2A52E3A2C2F4AA9F541A1AFF774D1548FF34696FF44C917E9"
+    },
+    {
+      "path": "build/.ninja/console-observers-x64/console-startup-observer.exe",
+      "sha256": "4A73E58F555EBCBEBA37DB9F10EEC580A8160CD0C3D95F1F5ECE911110D4BCC7"
+    },
+    {
+      "path": "build/.ninja/console-observers-x64/worker-window-snapshot.exe",
+      "sha256": "6D754DF6BE4BC7CAC54BE1B30F1F253C7E5085225110BA583F5B0EDDC170AC34"
+    },
+    {
+      "path": "build/.ninja/console-observers-x64/terminal-observer.exe",
+      "sha256": "6609041F034FA3F0E2247D79ED973267B903AFB8C7629CDA09301F05E9137F24"
+    },
+    {
+      "path": "build/t473-s10/candidate-validation/package/product-system32-manifest.json",
+      "sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE"
+    }
+  ],
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/full.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/full.stderr.txt",
+  "token_context": "desktop-capable unsandboxed modern pwsh, same launch as retained S10 success"
+}

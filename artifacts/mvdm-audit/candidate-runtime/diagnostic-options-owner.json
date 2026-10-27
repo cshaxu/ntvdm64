@@ -1,0 +1,11 @@
+{
+  "pid": 4360,
+  "started": "2026-10-27T21:34:47.5970420Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-diagnostic-options.ps1",
+  "script_sha256": "F2CF0F81BC740CA470762033171372C9FF60998C357D0FCAC83BE053EA710554",
+  "exit": 0,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/diagnostic-options.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/diagnostic-options.stderr.txt",
+  "publishable": false,
+  "finished": "2026-10-27T21:35:03.2796598Z"
+}

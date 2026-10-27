@@ -1,0 +1,10 @@
+{
+  "pid": 16456,
+  "started": "2026-10-27T21:33:59.6352358Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-creation-diagnostic.ps1",
+  "script_sha256": "B316A34AE110AC7ED7C480B631733527F4D62A211B8D2276DCE40A74E5BD263E",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/creation-build.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/creation-build.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:34:25.4223017Z"
+}

@@ -1,0 +1,3 @@
+SOL options: command=1003
+SOL options: modal dialog did not appear
+SOL options: launcher did not finish after owned close

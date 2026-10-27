@@ -1,0 +1,9 @@
+{
+  "pid": 20336,
+  "started": "2026-10-27T21:37:57.9404121Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/governance/Test-DocumentationRelativeLinks.ps1",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/links-final.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/links-final.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:38:37.5870724Z"
+}

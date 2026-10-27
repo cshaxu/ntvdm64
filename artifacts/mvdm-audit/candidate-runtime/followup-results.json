@@ -1,0 +1,26 @@
+[
+  {
+    "name": "baseline-options-r1",
+    "pid": 20548,
+    "started": "2026-10-27T21:27:22.7828151Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\baseline-options-r1",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\baseline-options-r1.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\baseline-options-r1.stderr.txt",
+    "script_sha256": "57D67920A198949860DCCC8C458D128C69C705A7C4996DC9D8D3B62776C30801",
+    "package_manifest_sha256": "87A8FB8F6CCFDA36FC238AAC2F4337252EACDB5EB7607DF8B158AE206CC49ADA",
+    "exit": 0,
+    "finished": "2026-10-27T21:27:37.2528016Z"
+  },
+  {
+    "name": "candidate-write-r1",
+    "pid": 6824,
+    "started": "2026-10-27T21:27:37.2647858Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-write-lifecycle.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-write-r1",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-write-r1.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-write-r1.stderr.txt",
+    "script_sha256": "D091CB7E3E22E95818959A1A4F06E23B9BD44398F15A645E6465F29150C2FBB1",
+    "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+    "exit": 0,
+    "finished": "2026-10-27T21:27:50.5725657Z"
+  }
+]

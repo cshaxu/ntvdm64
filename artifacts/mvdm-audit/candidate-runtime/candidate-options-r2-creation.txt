@@ -1,0 +1,16 @@
+17108 WindowCreate atom=C299 result=00B30250 error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=02CF0000 tid=21532 actualMenu=14AF0299
+17108 WindowCreate atom=C343 result=0192044E error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=00CF0000 tid=21532 actualMenu=00000000
+17108 WindowCreate atom=C14F result=01AA0680 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=02CF0000 tid=30304 actualMenu=6A800B8D
+17108 WindowCreate atom=C3C9 result=015205C2 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=40800003 tid=30304 actualMenu=00000000
+17108 WindowCreate atom=8002 result=07990150 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=30304 actualMenu=00000000
+17108 WindowCreate atom=C018 result=01880256 error=0 bindingError=0 claimed=1 menu=000003E7 instance=17CF1746 style=50000007 tid=30304 actualMenu=000003E7
+17108 WindowCreate atom=C018 result=024F0A00 error=0 bindingError=0 claimed=1 menu=0000012C instance=17CF1746 style=50030004 tid=30304 actualMenu=0000012C
+17108 WindowCreate atom=C018 result=01BD050C error=0 bindingError=0 claimed=1 menu=0000012D instance=17CF1746 style=50000004 tid=30304 actualMenu=0000012D
+17108 WindowCreate atom=C018 result=0454012A error=0 bindingError=0 claimed=1 menu=0000FFFF instance=17CF1746 style=50020007 tid=30304 actualMenu=0000FFFF
+17108 WindowCreate atom=C018 result=01F70720 error=0 bindingError=0 claimed=1 menu=0000012E instance=17CF1746 style=50030004 tid=30304 actualMenu=0000012E
+17108 WindowCreate atom=C018 result=088608DC error=0 bindingError=0 claimed=1 menu=0000012F instance=17CF1746 style=50000004 tid=30304 actualMenu=0000012F
+17108 WindowCreate atom=C018 result=0162022C error=0 bindingError=0 claimed=1 menu=00000130 instance=17CF1746 style=50000004 tid=30304 actualMenu=00000130
+17108 WindowCreate atom=C018 result=03A708EA error=0 bindingError=0 claimed=1 menu=00000131 instance=17CF1746 style=50030003 tid=30304 actualMenu=00000131
+17108 WindowCreate atom=C018 result=01E00114 error=0 bindingError=0 claimed=1 menu=00000132 instance=17CF1746 style=50010003 tid=30304 actualMenu=00000132
+17108 WindowCreate atom=C018 result=02CA0A20 error=0 bindingError=0 claimed=1 menu=00000133 instance=17CF1746 style=50010003 tid=30304 actualMenu=00000133
+17108 WindowCreate atom=C018 result=00000000 error=5023 bindingError=5023 claimed=1 menu=00000134 instance=17CF1746 style=50010003 tid=30304 actualMenu=00000000

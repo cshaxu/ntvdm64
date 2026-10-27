@@ -1,0 +1,9 @@
+{
+  "pid": 6712,
+  "started": "2026-10-27T21:37:57.8984767Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File tools/governance/Verify-DocumentationGovernance.ps1",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/governance-final.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/governance-final.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:38:37.5765481Z"
+}

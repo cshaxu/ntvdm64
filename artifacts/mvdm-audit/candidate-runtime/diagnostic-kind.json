@@ -1,0 +1,8 @@
+{
+  "productionProviderChanged": false,
+  "kind": "diagnostic-only",
+  "guestChanged": false,
+  "normalProviderSha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "publishable": false,
+  "observation": "Trace SetLastError(5023) with unmodified argument/result, three project-owned exact source copies"
+}

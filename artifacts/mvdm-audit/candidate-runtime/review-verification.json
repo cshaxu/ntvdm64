@@ -1,0 +1,9 @@
+{
+  "result": "pass",
+  "evidence_files": 39,
+  "source_identities": 8,
+  "followup_paths": 50,
+  "candidate_publication_qualified": false,
+  "S10_complete": false,
+  "scope": "Integrity and consistency of recorded outcomes; not a substitute for their behavior assertions"
+}

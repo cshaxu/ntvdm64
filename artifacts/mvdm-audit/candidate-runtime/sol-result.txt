@@ -1,0 +1,1 @@
+PASS SOL geometry-limited integration: startup, command readiness, normal close and run16 completion; deal/draw coordinates are not applicable at the actual host maximum tracking size

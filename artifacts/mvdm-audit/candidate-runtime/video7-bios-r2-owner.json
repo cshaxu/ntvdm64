@@ -1,0 +1,10 @@
+{
+  "pid": 19188,
+  "started": "2026-10-27T21:29:15.0714154Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-video7-bios.ps1",
+  "script_sha256": "842E7E05AA9F818581BA259C3623F43CD313D224DC8C4A31C0CA1777F1D8A5A2",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/video7-bios-r2.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/video7-bios-r2.stderr.txt",
+  "exit": 1,
+  "finished": "2026-10-27T21:29:21.5375973Z"
+}

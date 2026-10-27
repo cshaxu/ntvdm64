@@ -1,0 +1,11 @@
+{
+  "pid": 29064,
+  "started": "2026-10-27T21:30:14.9788680Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-video7-bios.ps1",
+  "script_sha256": "CDEB2613712C742B132C24228BD979FB90DA9E05436B0100031C981565B8E6A1",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/video7-bios-r3.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/video7-bios-r3.stderr.txt",
+  "exit": 0,
+  "geometry": "existing observer SHORT_HISTORY private-console font/viewport fixture",
+  "finished": "2026-10-27T21:30:21.1983517Z"
+}

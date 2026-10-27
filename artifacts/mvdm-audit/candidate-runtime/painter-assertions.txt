@@ -1,0 +1,1 @@
+PASS actual packed painter: 640x480, pitched rows, clipped damage, source end, invalid input, guards

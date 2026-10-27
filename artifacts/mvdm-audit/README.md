@@ -190,3 +190,15 @@ The [shared-include checkpoint](shared-guest-include-role-review.md) resolves
 44 of 104 declaration/macro roles through original include roots and targets,
 distinguishing native SDK names and real local shadows. Sixty files retain
 specific unresolved consumers or profile boundaries; no API is excluded.
+
+The subsequent shared-include proposals for [shard 1](shard-1/shared-guest-include-followup.md),
+[shard 2](shard-2/shared-guest-include-followup.md) and
+[shard 3](shard-3/shared-guest-include-followup.md) retain exact per-file
+questions and ten additional file-role candidates. They are review proposals,
+not merged dispositions or additional restored capabilities.
+
+The [current-source candidate review](candidate-runtime-review.md) records
+the completed build, selected Full, game, WRITE and Video7 checks, alongside
+two failed SOL Options witnesses and two passing accepted-baseline controls.
+The diagnostic-only observation does not fix or waive those production
+failures; candidate publication remains unqualified.

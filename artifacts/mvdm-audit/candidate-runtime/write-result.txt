@@ -1,0 +1,1 @@
+PASS WRITE normal close followed by clean restart and second normal close

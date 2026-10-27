@@ -1,0 +1,245 @@
+{
+  "kind": "candidate-review-not-release",
+  "result": "publication-not-qualified",
+  "records": [
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-x86-owner.json",
+      "file": "build-x86-owner.json",
+      "sha256": "FB7746B8AF1AB2AC3993ACC660A39626F7B816B198753CD0B2AAECFA4074B7B7"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-stage-result.json",
+      "file": "build-stage-result.json",
+      "sha256": "76F33B5A0860AEA3FE431DBED4872504CEB0B0FD8987CB8D16B888C0F13219DC"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\full-owner.json",
+      "file": "full-owner.json",
+      "sha256": "54CDF330DF34D333F4DEBCA7619DE76FB5AB567485E53FCF8EA24D0028A1D819"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\application-results.json",
+      "file": "application-results.json",
+      "sha256": "1E1BFD74B776AD0651B8E584F782F8B81A1E9F4DF85EC1F85B69AF98E7949811"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\followup-results.json",
+      "file": "followup-results.json",
+      "sha256": "A1A497DE24F8394CBEF8E58E38C4F6F1DDEBC54C44DE6E4EAB10A6C27B505461"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\followup-r2-results.json",
+      "file": "followup-r2-results.json",
+      "sha256": "2BB690209C8FF59184E7618F80210CFE964E1C265E6CDD7035413B1272A02EE1"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\painter-owner.json",
+      "file": "painter-owner.json",
+      "sha256": "1AEEA0AA8AD290E4BEA27263A3C9E2B1B6739363B7CB48F44AB46B63009034D9"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r1-owner.json",
+      "file": "video7-bios-r1-owner.json",
+      "sha256": "445CAC220954413E3E9BB68B3717BDCE0C17E8EC2356EBCBF921797A439CA40E"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r2-owner.json",
+      "file": "video7-bios-r2-owner.json",
+      "sha256": "17BBE058E8EB6B766A806C3BC0DA61BD71752C1BF62E37F7B51044A7D6076CDD"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r3-owner.json",
+      "file": "video7-bios-r3-owner.json",
+      "sha256": "2270EC32D7BA103302C82D4EB25CD25BDC6B185C582C9CAC25C02E631BC34656"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-owner.json",
+      "file": "diagnostic-options-owner.json",
+      "sha256": "252003CD57B4FC748543F04ABCA97E85B8F83E1D6FC174548C72DA5363416039"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-build-owner.json",
+      "file": "creation-build-owner.json",
+      "sha256": "C3A02E41842FF6A19900225D5935999589912A19188E1691B40AD60E0C7CA330"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package\\product-system32-manifest.json",
+      "file": "candidate-manifest.json",
+      "sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\mine-r1\\result.txt",
+      "file": "mine-result.txt",
+      "sha256": "C3287D42C4DEFFB9AC68A6BEE28CCF6258F354EEAC3BA9BF7A82FD1B643A09F8"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-r1\\result.txt",
+      "file": "sol-result.txt",
+      "sha256": "47575F62A26C8449B65845CF70500D6C2EF85279D70199696CCF4BFDB39A7A38"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-write-r1\\result.txt",
+      "file": "write-result.txt",
+      "sha256": "21BCC25061B068CFA70FD02EDA7F5BF6CD0576E2210791744253F64B82514F3A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-painter-r1\\result.json",
+      "file": "painter-result.json",
+      "sha256": "43E45111E411CB8129E3D8A44A3C34733D11280CD618205B2084FCC9B4DD5CB7"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-painter-r1\\test.txt",
+      "file": "painter-assertions.txt",
+      "sha256": "85186E71AE33D5081EDF346F2316111AC4D11A71726F5F32EFFE7FA6C1549F76"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r2\\result.json",
+      "file": "bios-r2-result.json",
+      "sha256": "343C100A37962A2C7B749320A9F7841852F7C4C2E8F83B03F983C60B05B4E2BE"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r3\\result.json",
+      "file": "bios-r3-result.json",
+      "sha256": "15DB1644FAE7E9384BF46BC3FCE2F9F1A28454B3A41E489B63C18F02E412B605"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\video7-bios-r3\\observer.txt.console.txt",
+      "file": "bios-r3-console.txt",
+      "sha256": "9C8D7BF71BE944F3C8F9FA4C627F8573EDF81D29D9076A72F49E68553A3C9A55"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-options-r1\\probe.txt",
+      "file": "candidate-options-r1.txt",
+      "sha256": "5FAB01243BEA7744F2870C975D29A6D77FA9C6EB31DF31A0F846BCB75629A83A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r2\\probe.txt",
+      "file": "candidate-options-r2.txt",
+      "sha256": "5FAB01243BEA7744F2870C975D29A6D77FA9C6EB31DF31A0F846BCB75629A83A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\baseline-options-r1\\probe.txt",
+      "file": "baseline-options-r1.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\baseline-options-r2\\probe.txt",
+      "file": "baseline-options-r2.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r1\\probe.txt",
+      "file": "diagnostic-options.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-diagnostic\\result.json",
+      "file": "diagnostic-kind.json",
+      "sha256": "34AD621D870AE9861643855735049CB03460340EBE574BA76F4969CE433DE040"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-full-r1\\timings.json",
+      "file": "full-timings.json",
+      "sha256": "3176572B081A45E7899FD3467E94B040D4869203B1927A50467C9A969C9310D1"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\sol-options-r1\\windows.txt",
+      "source_sha256": "B3B76AE9F6BCA5232A9EF34BBA9ACDA69DA28FF2D76694FBAE167E43651A184A",
+      "file": "candidate-options-r1-creation.txt",
+      "sha256": "FE0E58B08357F8A74723A1C8CD0C212DC08509319B0096D5815C43E6D508687B",
+      "extraction": "exact WindowCreate or DiagnosticInvalidState lines"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r2\\windows.txt",
+      "source_sha256": "BCCF7AA55945F1A820504B13594B692655B2B1BFEC7A0AA59CC296B17B942D8D",
+      "file": "candidate-options-r2-creation.txt",
+      "sha256": "4E044BE28D64BFFDF30158F208AA1F61FDF1434D5B81A5F7FFE07AAAF4A3876A",
+      "extraction": "exact WindowCreate or DiagnosticInvalidState lines"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-full.ps1",
+      "file": "run-full.ps1",
+      "sha256": "7E018DD5C37462B64F5257CB55D335D5C858E63A61E4F666A61ACAA9FC8C4706"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-applications.ps1",
+      "file": "run-applications.ps1",
+      "sha256": "6658DBC919D1C4A65B8B6CFBFD8FDAFF9BCEC886F745BE0282A4793823DC3AF4"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-followup.ps1",
+      "file": "run-followup.ps1",
+      "sha256": "7471F8D531ABFBD1A6A618AB66DA60B7D8EB5B08C6445E4A9CBEAF3994A8A443"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-followup-r2.ps1",
+      "file": "run-followup-r2.ps1",
+      "sha256": "FD9EEE776513B4420B0680640D119E473D5646568C9072811A03D491BA1F5A3B",
+      "source_sha256": "6F8CF1A79C33345CD4026B1E9AD3F47DE838FF55C9717F14DF07C91B855F8FC5",
+      "archive_transform": "Remove one trailing empty line from archived script only; executed script hash retained in source_sha256 and owner record"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-video7-bios-r1.ps1",
+      "file": "run-video7-bios-r1.ps1",
+      "sha256": "BF85B184EBD94C217526F9B76B5EA96C3461CEBA32BEDBC02ED1F9AB6B455CDB"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-video7-bios-r2.ps1",
+      "file": "run-video7-bios-r2.ps1",
+      "sha256": "842E7E05AA9F818581BA259C3623F43CD313D224DC8C4A31C0CA1777F1D8A5A2"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-video7-bios.ps1",
+      "file": "run-video7-bios.ps1",
+      "sha256": "CDEB2613712C742B132C24228BD979FB90DA9E05436B0100031C981565B8E6A1"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-creation-diagnostic.ps1",
+      "file": "build-creation-diagnostic.ps1",
+      "sha256": "B316A34AE110AC7ED7C480B631733527F4D62A211B8D2276DCE40A74E5BD263E"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-diagnostic-options.ps1",
+      "file": "run-diagnostic-options.ps1",
+      "sha256": "F2CF0F81BC740CA470762033171372C9FF60998C357D0FCAC83BE053EA710554"
+    }
+  ],
+  "sources": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\modesw.c",
+      "Hash": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\video\\v7_ports.c",
+      "Hash": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\video\\vga_mode.c",
+      "Hash": "E4237ED746FBFFBF1F1CBA86212D52BB352AE84BEB411FA600A492501A7BF01A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "Hash": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "Hash": "8D10D85B80703C3515A92E1761FB32018620179B9ED93FF52137161BD53233C8"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_creation_binding.c",
+      "Hash": "75BA77D9F8515E6C0CCFF870A5B83554479725C600E061BED081133C39D5CFB5"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+      "Hash": "9E8597A90A0C62FC05DB2E48B00F2D10D1E9C394035AB0CDA59B154B4231835E"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_object_bindings.c",
+      "Hash": "30B25028B34B2553D42A38A9671F6E38C87CCD4D3960D6FFAEE691F2E366BCFD"
+    }
+  ],
+  "guest_changed": false,
+  "installed_changed": false,
+  "diagnostic_publishable": false,
+  "scope": "Individual tests as recorded; not whole-T acceptance"
+}

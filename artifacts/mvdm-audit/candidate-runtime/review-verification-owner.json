@@ -1,0 +1,10 @@
+{
+  "pid": 4584,
+  "started": "2026-10-27T21:39:38.0468529Z",
+  "command": "C:\\Program Files\\Python313\\python.exe -B -X utf8 O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\verify-review.py",
+  "script_sha256": "B7E1C4B01D20D993F62ADAA29CD188A9EFAD64A838AFD483AB691FB0466B044A",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/review-final-r3.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/review-final-r3.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:39:38.3762413Z"
+}

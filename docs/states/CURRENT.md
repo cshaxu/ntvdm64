@@ -23,6 +23,10 @@ resolves 44 of 104 declaration/macro roles through actual include roots and
 targets. The ledger retains 1,890 pending and 236 partial paths; source/ABI
 and real guest/device proof remain open. This audit changed no runtime image.
 
+The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
+passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;
+accepted-baseline controls pass. It is not published or qualified for release.
+
 ## Active Packet
 
 ### M0 T473 S10 — MVDM whole-source reconciliation
