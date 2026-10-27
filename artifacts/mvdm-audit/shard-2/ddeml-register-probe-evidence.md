@@ -44,3 +44,38 @@ unverified. The callback marker itself uses DOS I/O and could perturb
 reentrancy; absence is not conclusive. No final receipt proves which DLL
 was loaded. There is still no matched server-mode no-register or real peer
 control, so this does not isolate the problem to a product component.
+
+## Server-mode control and callback-I/O control
+
+The `NO_REGISTER_CONTROL` build (SHA256
+`46170F839B4226BEA9C7F57E1E56512DD00DCA7553A25A4E9C740679944DD63F`)
+uses the same server initialization, callback thunk and string operations but
+skips registration and unregistration. `ddeml-control-w31.result.json` records
+normal exit, the loaded W31 module path and matching hash, init=0, nonzero
+instance and service, free=1, uninitialize=1; registration fields remain
+0xffffffff sentinels. The initial runner assertion mistakenly interpreted
+0xffffffff as signed -1 and falsely reported failure after saving the receipt;
+its comparison was corrected to `[uint32]::MaxValue` and the saved receipt
+was rechecked against the corrected condition. It was not rerun under the
+corrected script. This control does not prove registration or callback behavior.
+
+The separately retained registration pre-call receipt records the actual
+loaded app-local DLL SHA256 `6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B`,
+init=0, nonzero instance and service. W31 binary NE names resolve ordinals
+2/3/21/22/27 respectively to DDEINITIALIZE, DDEUNINITIALIZE,
+DDECREATESTRINGHANDLE, DDEFREESTRINGHANDLE and DDENAMESERVICE. Header
+`wow16/inc/ddeml.h` defines the four handles as 32-bit and FAR PASCAL;
+the probe pushes parameters left-to-right with each DWORD high word first,
+uses 14 argument bytes for DdeNameService, and its eight-argument callback
+uses `retf 28`. These are source/NE checks, not a dynamic stack validation.
+
+A further registration probe removed all DOS I/O from the callback and retained
+only in-memory counting. Its SHA256 was
+`77D8880018E5B00775FF0949F1D38529BC91820F25630C2B8B6FB0B21CB67C87`;
+`ddeml-register-w31.pre.json` confirms the module and pre-call inputs and
+`ddeml-register-w31.stage.bin` again records 09 before the far call. The
+observer again timed out. No post-call receipt was written, so the memory
+callback count was not observable and the call cannot be claimed entered.
+This removes callback DOS I/O as a necessary condition for the observed
+probe timeout, but does not isolate a product bug or validate the callback
+thunk. All test stages and processes were cleaned up; no guest was modified.

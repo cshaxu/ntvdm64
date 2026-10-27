@@ -219,5 +219,7 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `C67BC355D130D82DF4BA797CE24B79203490C7B26733A5AD7FABAD0DFF1FCD98`.
+- Current `file-audit.csv` SHA-256 `7C087BAA0293DE1DDD8366E08B8A8A0A2FFCB9609E6C6648DCB8A904B388A5E6`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
+
+`codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.

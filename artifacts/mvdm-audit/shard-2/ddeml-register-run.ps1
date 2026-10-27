@@ -24,6 +24,14 @@ try {
  $proc=[Diagnostics.Process]::Start($start);$null=$proc.Handle
  if(!$proc.WaitForExit(45000)){throw 'Observer did not finish within test supervisory bound'}
  $stageFile=Join-Path $tests 'DSTAGE.BIN';if(Test-Path -LiteralPath $stageFile){Copy-Item -LiteralPath $stageFile -Destination (Join-Path $PSScriptRoot "ddeml-register-$Case.stage.bin") -Force}
+ $preFile=Join-Path $tests 'DPRE.BIN';if(Test-Path -LiteralPath $preFile){Copy-Item -LiteralPath $preFile -Destination (Join-Path $PSScriptRoot "ddeml-register-$Case.pre.bin") -Force}
+ if(Test-Path -LiteralPath $preFile){
+  $pre=[IO.File]::ReadAllBytes($preFile);if($pre.Length -ne 300 -or [Text.Encoding]::ASCII.GetString($pre,0,4) -ne 'DDR1'){throw 'invalid pre-call receipt'}
+  $end=[array]::IndexOf($pre,[byte]0,40);if($end -lt 40){throw 'invalid pre-call path'}
+  $prePath=[Text.Encoding]::ASCII.GetString($pre,40,$end-40)
+  $preRecord=[ordered]@{modulePath=$prePath;resolvedFileSha256=if(Test-Path -LiteralPath $prePath){Get-IsolatedFileSha256 $prePath}else{$null};inputSha256=$expected[$Case];init=[BitConverter]::ToUInt16($pre,8);instance=[BitConverter]::ToUInt32($pre,10);service=[BitConverter]::ToUInt32($pre,14);probeSha256=Get-IsolatedFileSha256 $probe}
+  $preRecord|ConvertTo-Json|Set-Content (Join-Path $PSScriptRoot "ddeml-register-$Case.pre.json") -Encoding utf8
+ }
  $proc.Refresh();if($proc.ExitCode){throw "Observer process failed: $($proc.ExitCode)"}
  if((Get-Content -LiteralPath $log -Raw) -notmatch '(?m)^result=exited\s*$'){throw 'Observer did not report process exit'}
  $resultFile=Join-Path $tests 'DREG.BIN'

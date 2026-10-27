@@ -46,3 +46,7 @@ modern host or differently located adapter supplies a capability.
 The first separately traced external provider row is the WINMM callback
 layout: see `external-winmm-callback-boundary.md`. It remains pending
 behavioral and compatibility verification.
+
+Shard 0 additionally records historical link-response and include evidence for
+28 pending COMMAND guest files in `shard-0/command-guest-build-evidence.csv`;
+this does not identify or validate the deployed guest binary.

@@ -70,6 +70,29 @@ dw 0xffff,0
  pop bx
  pop ax
 %endmacro
+%macro capture 0
+ push ax
+ push bx
+ push cx
+ push dx
+ mov dx,pre_name-data
+ xor cx,cx
+ mov ah,0x3c
+ int 0x21
+ jc %%done
+ mov bx,ax
+ mov dx,report_start-data
+ mov cx,report_end-report_start
+ mov ah,0x40
+ int 0x21
+ mov ah,0x3e
+ int 0x21
+%%done:
+ pop dx
+ pop cx
+ pop bx
+ pop ax
+%endmacro
 align 16,db 0
 code:
 api 1
@@ -128,6 +151,9 @@ api 1
  mov [service_hi-data],dx
  or ax,dx
  jz uninit
+%ifdef NO_REGISTER_CONTROL
+ jmp free_only
+%endif
  push word [instance+2-data]
  push word [instance-data]
  push word [service_hi-data]
@@ -136,6 +162,7 @@ api 1
  push word 0
  push word 1
  mark 9
+ capture
  api 8
  mark 5
  mov [register_lo-data],ax
@@ -155,6 +182,7 @@ api 1
  mov [unregister_hi-data],dx
  mov ax,[callback_count-data]
  mov [unregister_count-data],ax
+free_only:
  push word [instance+2-data]
  push word [instance-data]
  push word [service_hi-data]
@@ -199,7 +227,6 @@ fatal:
 dde_callback:
  push bp
  mov bp,sp
- mark 10
  inc word [callback_count-data]
  mov ax,[ss:bp+32]
  cmp word [first_type-data],0
@@ -261,6 +288,7 @@ callback_ptr: dd 0
 task_instance: dw 0
 file: dw 0
 module_name: db 'DDEML',0
+pre_name: db 'DPRE.BIN',0
 stage_name: db 'DSTAGE.BIN',0
 stage_value: db 0
 service_name: db 'S10DDEPROBE',0
