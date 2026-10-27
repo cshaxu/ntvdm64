@@ -1,0 +1,1118 @@
+[
+  {
+    "relative_path": "dos/command/cmd.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/command/cmdconf.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-158"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-158": [
+        {
+          "line": 1395,
+          "summary": "| MVDM-HOST-DIV-158 | Expand original CONFIG.NT/AUTOEXEC.NT `%SystemRoot%` paths and write their synthesized COUNTRY/SHELL lines. | NT4 uses its installed Windows directory; the product must instead use the app-selected immutable MVDM system root and must not depend on host insta"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/command/cmdexec.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-109",
+      "MVDM-HOST-DIV-111",
+      "MVDM-HOST-DIV-112",
+      "MVDM-HOST-DIV-149",
+      "MVDM-HOST-DIV-196",
+      "MVDM-HOST-DIV-327"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-109": [
+        {
+          "line": 1368,
+          "summary": "| MVDM-HOST-DIV-109 | Start the original COMMAND child-execution worker under the correct x86/x64 callback and session contract. | `cmdCreateProcess` is a `void`, cdecl no-argument worker but historical source casts it to `LPTHREAD_START_ROUTINE`; x64 masks the mismatch and the r"
+        }
+      ],
+      "MVDM-HOST-DIV-111": [
+        {
+          "line": 1369,
+          "summary": "| MVDM-HOST-DIV-111 | Retain COMMAND's SCSINFO, `SCS_ToSync`, `SCS_Is_Dos_Binary`, and `SCS_FDACCESS` source field addresses. | NT4 retained `GetVDMAddr` process aliases and derived real-mode values by truncating those host pointers; neither representation is safe across current "
+        }
+      ],
+      "MVDM-HOST-DIV-112": [
+        {
+          "line": 1370,
+          "summary": "| MVDM-HOST-DIV-112 | State original COMMAND binary/registry calls with their public Win32 parameter types. | RegQueryValueEx requires LPBYTE and GetBinaryType requires LPDWORD rather than LPLONG. | Preserve original ULONG lengths, commands, registry bytes, classification and 128"
+        }
+      ],
+      "MVDM-HOST-DIV-149": [
+        {
+          "line": 1354,
+          "summary": "| MVDM-HOST-DIV-149 | Start a 32-bit COMMAND child with the original selected standard-stream endpoints. | NT4 temporarily changed its dedicated `ntvdm.exe` process-wide standard handles before `CreateProcess`; the current app owns those streams independently even in the admitted"
+        }
+      ],
+      "MVDM-HOST-DIV-196": [
+        {
+          "line": 1431,
+          "summary": "| MVDM-HOST-DIV-196 | Let original `cmdExec32` and its detached `cmdCreateProcess` worker retain the command, environment and standard-handle inputs needed by the original process lifecycle. | NT4 kept durable `GetVDMAddr` process aliases in globals until the detached worker cons"
+        }
+      ],
+      "MVDM-HOST-DIV-327": [
+        {
+          "line": 676,
+          "summary": "MVDM-HOST-DIV-327 (T430 S2): protected-mode CALL gate, outer RETF and"
+        },
+        {
+          "line": 1407,
+          "summary": "| MVDM-HOST-DIV-327 | Attribute the original COMMAND first-WOW classification boundary while diagnosing the post-copy Windows 3.1 Setup handoff. | The normal Setup page can only show a quiescent real-mode machine; it cannot distinguish an absent `KRNL286.EXE` classification from "
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/dem/dem.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-005",
+      "MVDM-HOST-DIV-006",
+      "MVDM-HOST-DIV-007"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-005": [
+        {
+          "line": 1275,
+          "summary": "| MVDM-HOST-DIV-005 | Retain the NTDOS DTA far-address cell and use its current target for DEM search/FCB I/O. | The original `pulDTALocation` is a persistent native pointer, and DTA bytes must not outlive a guest-memory lease. | Preserve DS:AX and its four-byte far-address cell "
+        }
+      ],
+      "MVDM-HOST-DIV-006": [
+        {
+          "line": 1276,
+          "summary": "| MVDM-HOST-DIV-006 | Retain the current DOS PDB scalar for DEM file/find and SoftPC disk/floppy ownership. | The original `pusCurrentPDB` is a persistent native pointer; its two-byte guest value must not survive a callback as host memory. | Preserve DS:DX as a numeric descriptor"
+        }
+      ],
+      "MVDM-HOST-DIV-007": [
+        {
+          "line": 1277,
+          "summary": "| MVDM-HOST-DIV-007 | Retain the DEM SFT chain and implement VDD SFT/JFT handle operations. | The original persists `pSFTHead` and returns direct guest aliases that WOW writes after the call; its 32-bit `SFT_NTHandle` also truncates x64 handles. | Keep the SFT head as numeric DS:"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/dem/demdasd.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-107"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-107": [
+        {
+          "line": 1367,
+          "summary": "| MVDM-HOST-DIV-107 | Represent the DOS Drive Parameter Block next link in its guest-defined 16:16 form. | The original `struct A_DPB *` is a 32-bit x86 process-pointer coincidence; on x64 it widens the packet and corrupts the following DOS fields. | Keep the original field order"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/dem/demfcb.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-005"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-005": [
+        {
+          "line": 1275,
+          "summary": "| MVDM-HOST-DIV-005 | Retain the NTDOS DTA far-address cell and use its current target for DEM search/FCB I/O. | The original `pulDTALocation` is a persistent native pointer, and DTA bytes must not outlive a guest-memory lease. | Preserve DS:AX and its four-byte far-address cell "
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/dem/demsrch.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-005",
+      "MVDM-HOST-DIV-360",
+      "MVDM-HOST-DIV-362"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-005": [
+        {
+          "line": 1275,
+          "summary": "| MVDM-HOST-DIV-005 | Retain the NTDOS DTA far-address cell and use its current target for DEM search/FCB I/O. | The original `pulDTALocation` is a persistent native pointer, and DTA bytes must not outlive a guest-memory lease. | Preserve DS:AX and its four-byte far-address cell "
+        }
+      ],
+      "MVDM-HOST-DIV-360": [
+        {
+          "line": 179,
+          "summary": "MVDM-HOST-DIV-360 (T448 S12 checkpoint): when `demsrch.c::FileFindClose`"
+        }
+      ],
+      "MVDM-HOST-DIV-362": [
+        {
+          "line": 163,
+          "summary": "MVDM-HOST-DIV-362 (T448 S12 candidate): on directory-buffer reclamation,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/init.asm",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dpmi32/dpmi32p.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dpmi32/dpmimemr.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-224"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-224": [
+        {
+          "line": 1250,
+          "summary": "| MVDM-HOST-DIV-224 | Route CPU40 DPMI extended-memory allocation through the original shared XMS suballocator. | CPU40 XMS reserves the complete extended linear range, leaving the generic VDM allocator correctly empty when DOSX requests memory. | Use the existing RISC shared-XMS"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "dpmi32/dpmimscr.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "inc/dbgexp.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-294"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-294": [
+        {
+          "line": 951,
+          "summary": "MVDM-HOST-DIV-294: the worker import declarations in `inc/softpc.h`,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "inc/demexp.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-294"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-294": [
+        {
+          "line": 951,
+          "summary": "MVDM-HOST-DIV-294: the worker import declarations in `inc/softpc.h`,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "inc/memapi.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-294"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-294": [
+        {
+          "line": 951,
+          "summary": "MVDM-HOST-DIV-294: the worker import declarations in `inc/softpc.h`,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/bios/equipmnt.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-325"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-325": [
+        {
+          "line": 698,
+          "summary": "MVDM-HOST-DIV-325 (T429 S2): `softpc.new/base/ccpu386/c_main.c::DECODE`"
+        },
+        {
+          "line": 1406,
+          "summary": "| MVDM-HOST-DIV-325 | Attribute original Windows 3.1 Setup serial/parallel hardware-probe boundaries in the CCPU40 host. | Setup's hardware-collection stall occurs before any delivery PATCH finalizer, but the visual UI cannot distinguish a BIOS `INT 14h`/`INT 17h` loop from a hos"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/bios/virtual.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-087"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-087": [
+        {
+          "line": 1356,
+          "summary": "| MVDM-HOST-DIV-087 | Invoke the original VM-instance cleanup and host stream-display update providers. | The split selected source layout carries neither historical declaration carrier, so NT4-era implicit `int` calls cannot validate their `void`/pointer-width ABI on x86 or x64."
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_bsic.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_debug.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-282"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-282": [
+        {
+          "line": 1033,
+          "summary": "MVDM-HOST-DIV-282: existing CCPU `c_debug.c/.h`, `c_main.c` and `c_tsksw.c`"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/ccpusas4.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-036",
+      "MVDM-HOST-DIV-055",
+      "MVDM-HOST-DIV-097"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-036": [
+        {
+          "line": 1306,
+          "summary": "| MVDM-HOST-DIV-036 | Resolve an Intel physical byte to CCPU backing memory. | The original CCPU assumes every physical address is an offset in one native `Start_of_M_area` block; an admitted external host-page span must instead remain live through its session-owned mapping ident"
+        }
+      ],
+      "MVDM-HOST-DIV-055": [
+        {
+          "line": 1314,
+          "summary": "| MVDM-HOST-DIV-055 | Store the selected SAS physical-memory capacity. | The original CPU_40 declaration used the host-sized `IHPE` alias, although the value is produced from a physical-address input and returned through the fixed-width `TYPE_sas_memory_size` interface. On x64 th"
+        }
+      ],
+      "MVDM-HOST-DIV-097": [
+        {
+          "line": 1344,
+          "summary": "| MVDM-HOST-DIV-097 | Resolve the original EMS page-frame physical alias before normal CCPU/SAS backing lookup. | NT4 kernel VDM performed this physical remap outside CCPU; without it a selected SoftPC build sees the frame address rather than the EMS backing page. | Preserve norm"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/popf.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-076"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-076": [
+        {
+          "line": 1323,
+          "summary": "| MVDM-HOST-DIV-076 | Retain exact native C variadic call contracts at selected original SoftPC call sites. | The NT4 compiler accepted implicit `printf`/`sprintf` declarations. On x64, a variadic call must see its real declaration; the original host already supplies the selected"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/comms/printer_.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-325"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-325": [
+        {
+          "line": 698,
+          "summary": "MVDM-HOST-DIV-325 (T429 S2): `softpc.new/base/ccpu386/c_main.c::DECODE`"
+        },
+        {
+          "line": 1406,
+          "summary": "| MVDM-HOST-DIV-325 | Attribute original Windows 3.1 Setup serial/parallel hardware-probe boundaries in the CCPU40 host. | Setup's hardware-collection stall occurs before any delivery PATCH finalizer, but the visual UI cannot distinguish a BIOS `INT 14h`/`INT 17h` loop from a hos"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/cvidc/evidgen.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-156"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-156": [
+        {
+          "line": 1391,
+          "summary": "| MVDM-HOST-DIV-156 | Recover the omitted generated CCPU-to-C-VID vector binder. | The retained CCPU40 manifests contain original slot metadata but omit the historical generated assembly unit; generic include order also selected an incompatible CCPU vector layout for the shared c"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/cvidc/j_c_lang.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/dos/emm_mngr.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-061"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-061": [
+        {
+          "line": 1320,
+          "summary": "| MVDM-HOST-DIV-061 | Declare the allocator used by the original EMM manager. | NT4 included its allocator declaration only under MONITOR, while the selected CCPU graph still reaches host_malloc. | Include the standard allocator declaration; original long storage IDs, declaration"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/inc/ckmalloc.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/inc/egacpu.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-062"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-062": [
+        {
+          "line": 1321,
+          "summary": "| MVDM-HOST-DIV-062 | Retain only the selected generated-global view. | The earlier x64 callback typing is retired: x86 restores OpenNT's generic `IHP` callback carriers in `evidgen.h`. The remaining generated `VGAGLOBALSETTINGS` versus `VGA_GLOBALS` view selection is a distinct "
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/inc/ica.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-146"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-146": [
+        {
+          "line": 1283,
+          "summary": "| MVDM-HOST-DIV-146 | Deliver a keyboard-controller output-port reset pulse to the selected CCPU40 executor. | The original non-CPU30 branch writes CCPU's private `cpu_interrupt_map` directly and calls the historical host wake hook. This composition intentionally keeps that priva"
+        },
+        {
+          "line": 1313,
+          "summary": "| MVDM-HOST-DIV-146 | Let the historical ICA header publish its non-CCPU interrupt-map bit macros. | The original combined CCPU40 build also defined `CPU_30_STYLE`, using it incidentally to suppress `CPU_HW_INT` before CCPU's distinct event enum. The product no longer defines the"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/support/terminat.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-356"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-356": [
+        {
+          "line": 207,
+          "summary": "MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/system/illegalp.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-328"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-328": [
+        {
+          "line": 1408,
+          "summary": "| MVDM-HOST-DIV-328 | Attribute the original real-mode #UD frame and its short preceding execution window during Win3.1 Setup diagnosis. | A host dialog proves invalid execution but not whether DOSX/KRNL286 supplied a corrupt return frame before protected mode begins. | Immediate"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/video/ega_vide.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/video/ega_writ.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-074",
+      "MVDM-HOST-DIV-088",
+      "MVDM-HOST-DIV-136"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-074": [
+        {
+          "line": 1330,
+          "summary": "| MVDM-HOST-DIV-074 | Declare the selected EVID word-fill glue callback in the original EGA write handler table. | The original declaration says `IU8` while both `fill_word_ev_glue` and the selected `MEM_HANDLERS` slot use `IU16`; historical unprototyped table initialization mask"
+        }
+      ],
+      "MVDM-HOST-DIV-088": [
+        {
+          "line": 1357,
+          "summary": "| MVDM-HOST-DIV-088 | Publish the selected C-video EVID handler-table and selector contracts. | The original generic `MEM_HANDLERS` table erases the concrete EVID callback signatures, leaving its move-slot initializer incompatible; the selected writers/markers also call original "
+        }
+      ],
+      "MVDM-HOST-DIV-136": [
+        {
+          "line": 1389,
+          "summary": "| MVDM-HOST-DIV-136 | Publish original EGA write-provider parameter contracts. | The original writer tables used empty K&R declarations at local and imported provider boundaries, so modern MSVC could not check the selected value/offset/count forms. | Keep bodies and table order u"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/base/video/gfx_updt.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-087",
+      "MVDM-HOST-DIV-088",
+      "MVDM-HOST-DIV-135"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-087": [
+        {
+          "line": 1356,
+          "summary": "| MVDM-HOST-DIV-087 | Invoke the original VM-instance cleanup and host stream-display update providers. | The split selected source layout carries neither historical declaration carrier, so NT4-era implicit `int` calls cannot validate their `void`/pointer-width ABI on x86 or x64."
+        }
+      ],
+      "MVDM-HOST-DIV-088": [
+        {
+          "line": 1357,
+          "summary": "| MVDM-HOST-DIV-088 | Publish the selected C-video EVID handler-table and selector contracts. | The original generic `MEM_HANDLERS` table erases the concrete EVID callback signatures, leaving its move-slot initializer incompatible; the selected writers/markers also call original "
+        }
+      ],
+      "MVDM-HOST-DIV-135": [
+        {
+          "line": 1388,
+          "summary": "| MVDM-HOST-DIV-135 | State the selected original C-VID mark callback result contract. | The historic `UPDATE_ALG` table declared `boolean` results although all selected CGA/EGA mark providers are `VOID` and every reached caller discards that result. The old casts obscure the act"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/inc/nt_inthk.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_aorc.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_cprgs.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-151"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-151": [
+        {
+          "line": 1292,
+          "summary": "| MVDM-HOST-DIV-151 | Select the original generated-CCPU access-vector initializer for CPU40. | `nt_cprgs.c` historically gates that CCPU initializer on `CPU_30_STYLE`; without the retired macro, CPU40 falls into a different legacy register-state implementation that requires CPU3"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_cpu.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-030",
+      "MVDM-HOST-DIV-048",
+      "MVDM-HOST-DIV-150",
+      "MVDM-HOST-DIV-153",
+      "MVDM-HOST-DIV-356"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-030": [
+        {
+          "line": 1301,
+          "summary": "| MVDM-HOST-DIV-030 | Provide the original `host_start_cpu`/`host_simulate` source in a CCPU static link. | `nt_cpu.c` carries two host memory globals that duplicate CCPU SAS definitions; they are not used in its CCPU branch and make the original host wrapper un-linkable beside `"
+        }
+      ],
+      "MVDM-HOST-DIV-048": [
+        {
+          "line": 1350,
+          "summary": "| MVDM-HOST-DIV-048 | Bind the selected CCPU control fields through their generated GDP names. | The historical non-PROD `GdpOffsetFromName` assertion is unavailable in the selected source set, and hard-coded packed offsets obscure the original field contract. | Retain the origin"
+        }
+      ],
+      "MVDM-HOST-DIV-150": [
+        {
+          "line": 1291,
+          "summary": "| MVDM-HOST-DIV-150 | Select the original CPU40 recursive-emulation vector. | In the selected CPU40 CCPU profile, original `host_cpu.h` maps `host_simulate()` to `host_simulate_func`, while this historical host source also defines a direct function of that macro name. | Retain th"
+        }
+      ],
+      "MVDM-HOST-DIV-153": [
+        {
+          "line": 1295,
+          "summary": "| MVDM-HOST-DIV-153 | Preserve original BIOS BOP FE unsimulate entry. | CPU40 CCPU owns the actual `c_cpu_unsimulate` execution unwind, while original BIOS retains the historic `host_unsimulate` public spelling. | Publish only the original-name bridge to the selected CCPU provide"
+        }
+      ],
+      "MVDM-HOST-DIV-356": [
+        {
+          "line": 207,
+          "summary": "MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_eoi.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_fdisk.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-006",
+      "MVDM-HOST-DIV-111"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-006": [
+        {
+          "line": 1276,
+          "summary": "| MVDM-HOST-DIV-006 | Retain the current DOS PDB scalar for DEM file/find and SoftPC disk/floppy ownership. | The original `pusCurrentPDB` is a persistent native pointer; its two-byte guest value must not survive a callback as host memory. | Preserve DS:DX as a numeric descriptor"
+        }
+      ],
+      "MVDM-HOST-DIV-111": [
+        {
+          "line": 1369,
+          "summary": "| MVDM-HOST-DIV-111 | Retain COMMAND's SCSINFO, `SCS_ToSync`, `SCS_Is_Dos_Binary`, and `SCS_FDACCESS` source field addresses. | NT4 retained `GetVDMAddr` process aliases and derived real-mode values by truncating those host pointers; neither representation is safe across current "
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_graph.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-314",
+      "MVDM-HOST-DIV-318",
+      "MVDM-HOST-DIV-322",
+      "MVDM-HOST-DIV-326"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-314": [
+        {
+          "line": 802,
+          "summary": "MVDM-HOST-DIV-314: `softpc.new/host/src/nt_graph.c` copies resolved text"
+        }
+      ],
+      "MVDM-HOST-DIV-318": [
+        {
+          "line": 745,
+          "summary": "MVDM-HOST-DIV-318 (retained mouse integration, T425 S8 route repair): original `nt_event.c`"
+        }
+      ],
+      "MVDM-HOST-DIV-322": [
+        {
+          "line": 707,
+          "summary": "MVDM-HOST-DIV-322 (T425 S8): CCPU Window presentation uses software"
+        }
+      ],
+      "MVDM-HOST-DIV-326": [
+        {
+          "line": 684,
+          "summary": "MVDM-HOST-DIV-326 (T429 S5): software text mouse flush retains"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_hosts.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-263",
+      "MVDM-HOST-DIV-272"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-263": [
+        {
+          "line": 1362,
+          "summary": "| MVDM-HOST-DIV-263 | Adapt the selected original stream-I/O Console mode to the public modern Console. | The standalone text-mode worker remains in stream I/O while the original Console Server path later enables mouse/window records. Modern QuickEdit can consume a physical click"
+        }
+      ],
+      "MVDM-HOST-DIV-272": [
+        {
+          "line": 1111,
+          "summary": "MVDM-HOST-DIV-272: `dpmi32/xmem.c::DpmiReallocateXmem` tests the original"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_inthk.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-307",
+      "MVDM-HOST-DIV-308",
+      "MVDM-HOST-DIV-309"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-307": [],
+      "MVDM-HOST-DIV-308": [],
+      "MVDM-HOST-DIV-309": []
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_rez.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-133"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-133": [
+        {
+          "line": 1379,
+          "summary": "| MVDM-HOST-DIV-133 | Keep the original resource-write retry inside the app-selected firmware root. | After `host_find_file` had resolved an existing resource, the NT4 retry used only the bare name and could create/write a same-named file in the process current directory. The cur"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_thred.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-100"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-100": [
+        {
+          "line": 1365,
+          "summary": "| MVDM-HOST-DIV-100 | Notify the selected CCPU executor when an original SoftPC application thread starts or exits. | The original `ntthread.h` provider carrier was omitted by the owner-rooted host source, causing implicit `int` calls on both architectures; its unrelated `jmp_buf"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/nt_unix.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-033",
+      "MVDM-HOST-DIV-037",
+      "MVDM-HOST-DIV-208"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-033": [
+        {
+          "line": 1304,
+          "summary": "| MVDM-HOST-DIV-033 | Read CRT system-error text from `_sys_errlist`/`_sys_nerr`. | Modern UCRT removed those exported storage symbols. | Preserve `host_get_system_error`'s original `char *` text contract with public `strerror`; only the unavailable CRT-storage access changes. | "
+        }
+      ],
+      "MVDM-HOST-DIV-037": [
+        {
+          "line": 1307,
+          "summary": "| MVDM-HOST-DIV-037 | Locate original SoftPC ROM/CMOS resources through `host_find_file`. | The original body hardcodes the NT system directory, which is neither the project firmware package nor a portable product installation boundary. | Preserve the original function name, ANSI"
+        }
+      ],
+      "MVDM-HOST-DIV-208": [
+        {
+          "line": 1440,
+          "summary": "| MVDM-HOST-DIV-208 | Wake the original SoftPC CPU from its short idle wait when host activity arrives. | The original NT4 `PulseEvent` notification can be lost on modern Win32 when activity arrives immediately before the CPU marks itself waiting. | Retain the original auto-reset"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "softpc.new/host/src/sim32.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-147",
+      "MVDM-HOST-DIV-177"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-147": [
+        {
+          "line": 1284,
+          "summary": "| MVDM-HOST-DIV-147 | Provide the historical shared SoftPC support definitions. | `xt.c`'s CCPU/non-CPU30 declaration block is an obsolete monitor-owned duplicate of CCPU40 register, descriptor and machine-status state; selected CCPU40 owns that state privately in `c_main.c`. | R"
+        },
+        {
+          "line": 1352,
+          "summary": "| MVDM-HOST-DIV-147 | Preserve the selected CCPU40 SAS-allocation failure path without ending an enclosing host process. | The retained `sim32.c` failure path can be reached while a bounded session is active; its historical `ExitProcess` cannot be used by that session boundary. |"
+        }
+      ],
+      "MVDM-HOST-DIV-177": [
+        {
+          "line": 1271,
+          "summary": "| MVDM-HOST-DIV-177 | Diagnose the original `demOpen` canonical pathname and scalar file result during fixed-container permanent-COMMAND bootstrap recovery. | T353 proves the original command open fails but not whether NTDOS reached the default or `cmdconf`-generated shell pathna"
+        },
+        {
+          "line": 1286,
+          "summary": "| MVDM-HOST-DIV-177 | Translate a SIM32 protected-mode selector:offset into a numeric guest-linear address. | The original SIM32 body uses the CPU30 `DESCR/read_descriptor` carrier, while CPU40 keeps compatible descriptor decoding inside its execution core. | Preserve the caller'"
+        },
+        {
+          "line": 1417,
+          "summary": "| MVDM-HOST-DIV-177 | Attribute the complete already-reached original COMMAND table-call cohort. | A durable post-`MS_bop_4` return record is absent, while the final console screen cannot identify whether original `CmdDispatch`, its `PFNSVC` table call, `cmdSetInfo`, or the scala"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "vdmredir/vrnmpipe.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-167",
+      "MVDM-HOST-DIV-276",
+      "MVDM-HOST-DIV-277"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-167": [
+        {
+          "line": 1413,
+          "summary": "| MVDM-HOST-DIV-167 | Retain the original async named-pipe request's guest buffer and result locations until host I/O completes. | NT4 stored durable flat `GetVDMAddr` aliases and passed its guest buffer to an asynchronous worker. A session guest lease cannot cross the BOP or wor"
+        }
+      ],
+      "MVDM-HOST-DIV-276": [
+        {
+          "line": 1080,
+          "summary": "MVDM-HOST-DIV-276: OEM short paths use complete Unicode queries and actual"
+        }
+      ],
+      "MVDM-HOST-DIV-277": [
+        {
+          "line": 1069,
+          "summary": "MVDM-HOST-DIV-277: `oemuni/process.c::GetEnvironmentVariableOem` saturates"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/walias.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-341"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-341": [
+        {
+          "line": 541,
+          "summary": "MVDM-HOST-DIV-341 retrospectively registers the already selected GDI handle"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wcommdlg.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-335",
+      "MVDM-HOST-DIV-349"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-335": [
+        {
+          "line": 624,
+          "summary": "MVDM-HOST-DIV-335 (T447 S2): rename only wcommdlg.c's three native Hook"
+        }
+      ],
+      "MVDM-HOST-DIV-349": [
+        {
+          "line": 365,
+          "summary": "MVDM-HOST-DIV-349 registers the S4 call-owned conversion transaction against"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/winsockp.h",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wkglobal.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wklocal.c",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wmsg16.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-344",
+      "MVDM-HOST-DIV-345",
+      "MVDM-HOST-DIV-346",
+      "MVDM-HOST-DIV-347",
+      "MVDM-HOST-DIV-353"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-344": [
+        {
+          "line": 466,
+          "summary": "MVDM-HOST-DIV-344 (bounded S4 P13 delivery) registers the COPYDATA/caller group"
+        }
+      ],
+      "MVDM-HOST-DIV-345": [
+        {
+          "line": 444,
+          "summary": "MVDM-HOST-DIV-345 registers the S4 original construction/release cohort against"
+        }
+      ],
+      "MVDM-HOST-DIV-346": [
+        {
+          "line": 422,
+          "summary": "MVDM-HOST-DIV-346 registers the complete reverse/native-buffer constructor"
+        }
+      ],
+      "MVDM-HOST-DIV-347": [
+        {
+          "line": 404,
+          "summary": "MVDM-HOST-DIV-347 registers the complete S4 parameter-map ownership cohort"
+        }
+      ],
+      "MVDM-HOST-DIV-353": [
+        {
+          "line": 305,
+          "summary": "MVDM-HOST-DIV-353 registers the S4 WM_DDE_INITIATE publication-progress"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wole2.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-450"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-450": [
+        {
+          "line": 126,
+          "summary": "MVDM-HOST-DIV-450 (T452 S2): retain original WOW32 KERNEL k49's module versus"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wow32.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-259",
+      "MVDM-HOST-DIV-296",
+      "MVDM-HOST-DIV-337",
+      "MVDM-HOST-DIV-348",
+      "MVDM-HOST-DIV-356"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-259": [
+        {
+          "line": 1264,
+          "summary": "| MVDM-HOST-DIV-259 | Select the WOW32 Windows and system directories during provider initialization. | Original NT4 host-directory calls resolve the modern host installation rather than the app-selected immutable product media. | Use the shared `NtvdmGetWindowsDirectoryA` / `Ntv"
+        }
+      ],
+      "MVDM-HOST-DIV-296": [
+        {
+          "line": 934,
+          "summary": "MVDM-HOST-DIV-296: `wow32/wow32.c` routes the two original LPFNW32 calls"
+        }
+      ],
+      "MVDM-HOST-DIV-337": [
+        {
+          "line": 597,
+          "summary": "MVDM-HOST-DIV-337 (T447 S2, owner-approved original-host exception):"
+        }
+      ],
+      "MVDM-HOST-DIV-348": [
+        {
+          "line": 386,
+          "summary": "MVDM-HOST-DIV-348 registers the S4 original callback-abort ownership group"
+        }
+      ],
+      "MVDM-HOST-DIV-356": [
+        {
+          "line": 207,
+          "summary": "MVDM-HOST-DIV-356 (T448 S3 candidate): retain original SoftPC terminate,"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wow32.def",
+    "divergence_ids": [],
+    "registry_matches": {},
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wreldc.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-455"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-455": [
+        {
+          "line": 44,
+          "summary": "MVDM-HOST-DIV-455 (T473 S9 delivered baseline; S9 remains open): the three original WOW DC acquisition"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wsext.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-462",
+      "MVDM-HOST-DIV-463"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-462": [
+        {
+          "line": 1217,
+          "summary": "| MVDM-HOST-DIV-462 | Restore a task's default Win16 Winsock blocking hook after a nonblocking operation. | Original `WWS32WSAUnhookBlockingHook` tests the non-null native `WSAIsBlocking` function pointer rather than calling it, so every initialized provider falsely returns `WSAE"
+        }
+      ],
+      "MVDM-HOST-DIV-463": [
+        {
+          "line": 1216,
+          "summary": "| MVDM-HOST-DIV-463 | Preserve original Win16 asynchronous database-query ownership through cancellation and task rundown. | The selected original WOW32 source returns `WSAEINVAL` from `WSACancelAsyncRequest`, records no creator task serial and tests the wrong allocation result i"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wumsg.h",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-344"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-344": [
+        {
+          "line": 466,
+          "summary": "MVDM-HOST-DIV-344 (bounded S4 P13 delivery) registers the COPYDATA/caller group"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wuser.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-275",
+      "MVDM-HOST-DIV-295",
+      "MVDM-HOST-DIV-455"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-275": [
+        {
+          "line": 1086,
+          "summary": "MVDM-HOST-DIV-275: `oemuni/{file.c,process.c}` bounds current/search/system/"
+        }
+      ],
+      "MVDM-HOST-DIV-295": [
+        {
+          "line": 942,
+          "summary": "MVDM-HOST-DIV-295: `wow32/wuser.c::WU32LoadBitmap` retains original"
+        }
+      ],
+      "MVDM-HOST-DIV-455": [
+        {
+          "line": 44,
+          "summary": "MVDM-HOST-DIV-455 (T473 S9 delivered baseline; S9 remains open): the three original WOW DC acquisition"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "wow32/wuser31.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-454",
+      "MVDM-HOST-DIV-455"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-454": [
+        {
+          "line": 54,
+          "summary": "MVDM-HOST-DIV-454 (T460 S3 candidate): original `wow32/wuclip.c` and"
+        }
+      ],
+      "MVDM-HOST-DIV-455": [
+        {
+          "line": 44,
+          "summary": "MVDM-HOST-DIV-455 (T473 S9 delivered baseline; S9 remains open): the three original WOW DC acquisition"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "xms.486/xmsblock.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-077"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-077": [
+        {
+          "line": 1333,
+          "summary": "| MVDM-HOST-DIV-077 | Process the original XMS move descriptor and forward-copy its guest byte range. | The original 32-bit process model obtains `SS:BP` and the source/destination linear values as raw `PBYTE` aliases, then truncates those aliases through `ULONG`/`DWORD`. Neither"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  },
+  {
+    "relative_path": "xms.486/xmsmemr.c",
+    "divergence_ids": [
+      "MVDM-HOST-DIV-271"
+    ],
+    "registry_matches": {
+      "MVDM-HOST-DIV-271": [
+        {
+          "line": 1118,
+          "summary": "MVDM-HOST-DIV-271: `xms.486/xmsmemr.c` restores original SAS commit/decommit"
+        }
+      ]
+    },
+    "limitation": "ID may collide; validate entry against path and call site. Match is not proof of behavior."
+  }
+]

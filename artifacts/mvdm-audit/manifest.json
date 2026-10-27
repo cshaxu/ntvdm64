@@ -1,0 +1,21 @@
+{
+  "source": "build/t473-s9/cross-audit-r5/file-reconciliation.csv",
+  "source_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
+  "source_rows": 4684,
+  "unique_paths": 4684,
+  "partition": "SHA256(relative_path UTF-8), first 8 bytes as unsigned big-endian integer modulo 4",
+  "partition_counts": {
+    "0": 1245,
+    "1": 1182,
+    "2": 1089,
+    "3": 1168
+  },
+  "universe": "frozen MVDM union only; external audit rows require separately traced relevance",
+  "classification_rule": "diff => partial; identical => pending until selected, linked, dispatched and verified; excluded requires role and source evidence",
+  "external_audit_rows": {
+    "file": "frozen-external-audit-rows.csv",
+    "rows": 42963,
+    "sha256": "949D696E96F088A69EA437A41F15A09D50C8218BA29983A15A7B31E25AF95623",
+    "disposition": "pending relevance and owner review; outside the four source-union partitions"
+  }
+}

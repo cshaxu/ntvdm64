@@ -36,16 +36,20 @@ the optional all-mode sweep passed locally: 16 legal modes with/without bit 7
 (32 settings), plus preserve/clear and two invalid requests.
 Source hashes, baseline/fixed build inputs and real Win95 256-colour readback
 are retained under `O:/assets/win95-ntvdm-research/display256/hostfix`.
-This is an owner-directed source integration; coherent package publication
-and the active packet's remaining gates are not claimed by this record.
+The T460 S3 coherent package subsequently included this source and was
+published; see `docs/history/m0-t460-closure.md` and the frozen-source record
+in `docs/etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md`. The historical
+mode sweep is not a claim that it was rerun against every later package.
 
-MVDM-HOST-DIV-455 (T473 S9 candidate): the three original WOW DC acquisition
+MVDM-HOST-DIV-455 (T473 S9 delivered baseline; S9 remains open): the three original WOW DC acquisition
 thunks pass the acquired native HWND to the original `StoreDC` cache. Modern
 USER handles are not NT4 sign-extended HWNDs; resolving again at deferred
 release could select a recycled window. Original cache search, delayed release,
 GDI aliases and cleanup remain intact. See the S9 wrapper audit for the caller
-trace and pending failure, callback, handle-reuse and release verification.
-This unverified candidate does not authorize publication.
+trace, actual thunk and cache fixtures, HWND reuse and normal guest paths.
+The r10 ten-image package was published after Product and Control gates and
+application probes. Acquisition-induced reentry and every failure path remain
+unproved; see the evidence record for the exact scope.
 
 MVDM-HOST-DIV-454 (T460 S3 candidate): original `wow32/wuclip.c` and
 `wuser31.c` adapt only their public Clipboard HWND operands/results through
@@ -58,7 +62,7 @@ publication; foreign or retired identities are never truncated, proxied or
 assigned a new row. This adds no Clipboard owner, cache or scheduler. Details
 and lifetime evidence are in `docs/etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md`.
 
-MVDM-HOST-DIV-461 (T460 S3 candidate): original
+MVDM-HOST-DIV-461 (T460 S3 delivered): original
 `softpc.new/base/keymouse/keyba.c::KbdEOIHook` retired the single 8042 output
 slot as soon as IRQ1 was acknowledged.  That assumes the normal port-60-read
 then EOI order, but Win95 VKD/VPICD can EOI first and thereby loses the unread
@@ -1261,9 +1265,6 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-297 | Resolve WOW's bare package `SYSTEM.INI` argument through the selected worker system root. | Original USER16 calls the original WOW private-profile thunk with the bare name `SYSTEM.INI`. NT4 resolves that name through the installed VDM system profile; modern Win32 otherwise redirects it to `C:\\Windows\\SYSTEM.INI`, outside the selected product package. | Retain the original private-profile APIs, defaults, errors, and arbitrary caller path behavior. Only an exact case-insensitive bare `SYSTEM.INI` argument is replaced by the existing session-rooted `system.ini` file; the original guest `USER.EXE` is not modified. | `wow32/wkernel.c`; `../ntvdm-exe/softpc/{include/mvdm_softpc_firmware.h,mvdm_softpc_firmware.c}` |
 | MVDM-HOST-DIV-260 | Supply the standalone WOW KnownDLL bootstrap policy when NT4's product-global WOW registry key is absent. | The selected immutable Win16 media provides `COMMDLG.DLL` and `OLECLI.DLL` in its system directory, but an empty KnownDLL list makes the original loader search the package root then the modern host Windows installation. | With no WOW key, seed only those two admitted package members into the unchanged original allocation/parser; a present key and its value retain the original registry path. | `wow32/wkman.c`; selected `system32/{COMMDLG.DLL,OLECLI.DLL}` media manifest |
 | MVDM-HOST-DIV-262 | Materialize a projected Win16 class's original menu before public native-window creation. | The class menu is a Win16 resource name paired with a packed `HMODINST32` identity. Public `RegisterClassA` cannot resolve that identity as a native module, so the created native window otherwise has no `HMENU`. | Keep original `WU32LoadMenu` resource discovery, conversion and lock lifetime. At the existing class-window boundary, invoke the unavailable private output callback with the already converted Unicode template; its `ADAPTER-WOW-020` implementation uses public `LoadMenuIndirectW` only and never publishes the packed identity. | `wow32/wuwind.c`; `../ntvdm/wow/{include/wow_private_user_compat.h,wow_private_user_compat.c}` |
-| MVDM-HOST-DIV-227 | Supply the original WOW/DOSX `SEL_BIOSDATA` cache to CPU40. | CPU40 treated protected selector `0040h` as an ordinary LDT descriptor, but original DOSX reserves it as a fixed BIOS-data carrier. | Select the original `dxboot.asm` base `0x400`, 64-KiB writable ring-3 data cache for selector `0040h`. | `softpc.new/base/ccpu386/c_seg.c` |
-| MVDM-HOST-DIV-228 | Permit the original writable WOW DOSX `DXCODE` carrier. | The source executes its documented self-modifying initialization through selector `00CFh`; CCPU had made every protected code cache read-only. | Retain writability only for the original `SEL_DXCODE|STD_RING` cache while preserving normal protected-code write protection. | `softpc.new/base/ccpu386/c_seg.c` |
-| MVDM-HOST-DIV-229 | Restore the source-defined BOP `FDh` real-mode transition in the CPU40 product topology. | The CCPU graph compiled the BIOS BOP table without its monitor-gated `FDh` entry, so the original WOW DOSX five-word continuation frame fell through `illegal_bop` and later returned through poisoned stack storage. | Select the original BIOS table entry for x86 and restore the identical DOSX frame transfer in the existing CPU40 DPMI mode-switch owner, loading cached real-mode segments only after PE is clear. | `dpmi32/modesw.c`, `tools/build/New-T310OriginalSoftpcNinja.ps1` |
 | MVDM-HOST-DIV-171 | Write the original local computer/user result directly through `LPSTR_FROM_WORDS(ES:DI)`. | The historical x86 host alias has no explicit lifetime and cannot safely cross the current session boundary; the selected public NetAPI carrier returns the user name as Unicode without the historical global `UNICODE` compile setting. | Preserve the original public calls, character-capacity gate and register/status order; replace only the bounded copies with the worker lease. The added OEM conversion also checks positive declared capacity in bytes including NUL and returns existing `NERR_BufTooSmall` before writing; BX=0 remains unchecked. DIV-361 separately corrects the CX=0 underflow. Lease refusal returns `ERROR_INVALID_ADDRESS`. | `vdmredir/vrnetapi.c`; `../vdmredir-dll/include/mvdm_redirector_guest_copy.h`; `../vdmredir-dll/source/mvdm_redirector_guest_copy.c` |
 | MVDM-HOST-DIV-172 | Use `VrRemoteApi`'s locally synthesized computer name as the server name for the original RAP branch. | The original source explicitly copied the Unicode `NetWkstaGetInfo` result with `strcpy`, which is not a valid modern C string conversion. | Preserve the fixed local OEM temporary, `NetApiBufferFree`, and original later RAP branch; convert only the public Unicode result through `WideCharToMultiByte(CP_OEMCP)`. Conversion failure releases the original local allocation and returns `ERROR_INVALID_DATA`. | `vdmredir/vrremote.c` |
 | MVDM-HOST-DIV-176 | Write the original `I_CDNames` trio of guest far-pointer destinations after obtaining public workstation/user values. | The original treats the packed guest structure and all three targets as durable flat aliases. That crosses the current session boundary without a lease and is invalid on x64. | Keep original NetAPI calls, ANSI conversion, upper-casing and no-return-code behavior. The Redirector adapter reads each destination after the preceding write, clears each non-null target and copies through bounded leases, including destinations aliasing later pointer fields. | `vdmredir/vrnetapi.c`; `../vdmredir-dll/{include/mvdm_redirector_guest_copy.h,source/mvdm_redirector_guest_copy.c}` |

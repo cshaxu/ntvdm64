@@ -1,0 +1,18 @@
+{
+  "total": 4684,
+  "counts": {
+    "pending": 4436,
+    "partial": 205,
+    "excluded": 43
+  },
+  "unique_and_partition_verified": true,
+  "live_source_hash_drift": [
+    {
+      "relative_path": "README.md",
+      "frozen": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
+      "current": "B87FB4E99A78350613B0AFA870569C306E400355ACBBCB4AEFAF10C15C024E21"
+    }
+  ],
+  "complete": false,
+  "note": "pending remains unresolved; external audit relevance not reconciled"
+}

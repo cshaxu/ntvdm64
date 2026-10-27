@@ -1,0 +1,76 @@
+{
+  "MVDM-HOST-DIV-222": [
+    {
+      "line": 1248,
+      "summary": "Adapt the original `53:01` register-frame handoff to CCPU segment-cache semantics."
+    },
+    {
+      "line": 1410,
+      "summary": "Enter a CPU40 INT33 direct guest callback at the registered first instruction."
+    }
+  ],
+  "MVDM-HOST-DIV-176": [
+    {
+      "line": 1270,
+      "summary": "Write the original `I_CDNames` trio of guest far-pointer destinations after obtaining public workstation/user values."
+    },
+    {
+      "line": 1416,
+      "summary": "Bind original SoftPC graphics DIB output without the NT4 Console Server graphics-buffer protocol."
+    }
+  ],
+  "MVDM-HOST-DIV-177": [
+    {
+      "line": 1271,
+      "summary": "Diagnose the original `demOpen` canonical pathname and scalar file result during fixed-container permanent-COMMAND bootstrap recovery."
+    },
+    {
+      "line": 1286,
+      "summary": "Translate a SIM32 protected-mode selector:offset into a numeric guest-linear address."
+    },
+    {
+      "line": 1417,
+      "summary": "Attribute the complete already-reached original COMMAND table-call cohort."
+    }
+  ],
+  "MVDM-HOST-DIV-146": [
+    {
+      "line": 1283,
+      "summary": "Deliver a keyboard-controller output-port reset pulse to the selected CCPU40 executor."
+    },
+    {
+      "line": 1313,
+      "summary": "Let the historical ICA header publish its non-CCPU interrupt-map bit macros."
+    }
+  ],
+  "MVDM-HOST-DIV-147": [
+    {
+      "line": 1284,
+      "summary": "Provide the historical shared SoftPC support definitions."
+    },
+    {
+      "line": 1352,
+      "summary": "Preserve the selected CCPU40 SAS-allocation failure path without ending an enclosing host process."
+    }
+  ],
+  "MVDM-HOST-DIV-148": [
+    {
+      "line": 1353,
+      "summary": "Compile the original LIM byte/word/string writeback bodies needed when CCPU40 encounters `SAS_MM_LIM`."
+    },
+    {
+      "line": 1396,
+      "summary": "Bind static original Registry reads to a private layered handle."
+    }
+  ],
+  "MVDM-HOST-DIV-203": [
+    {
+      "line": 1419,
+      "summary": "Observe the original CCPU `BOP FE` CPU-unwind boundary."
+    },
+    {
+      "line": 1435,
+      "summary": "Distinguish a returned original Base VDM record from a post-command DOS error before selecting the next owner repair."
+    }
+  ]
+}

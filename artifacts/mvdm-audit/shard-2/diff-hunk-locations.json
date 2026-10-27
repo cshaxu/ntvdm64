@@ -1,0 +1,3701 @@
+[
+  {
+    "path": "dos/command/cmddata.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddata.c",
+    "original_sha256": "937C134E46B5C714B9106D85FD0250B88FCA5958E69A1E60FDEAB558D4F4F8D2",
+    "current_sha256": "5CBC229764ACEB417000A7FBCE75A016CFCCCC2546EEA726670CD008A50A2E37",
+    "original_line_count": 51,
+    "current_line_count": 48,
+    "hunks": [
+      {
+        "kind": "delete",
+        "original_start": 19,
+        "original_end": 20,
+        "current_start": 19,
+        "current_end": 18
+      },
+      {
+        "kind": "delete",
+        "original_start": 47,
+        "original_end": 47,
+        "current_start": 45,
+        "current_end": 44
+      }
+    ]
+  },
+  {
+    "path": "dos/command/cmdpif.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.c",
+    "original_sha256": "6D3AAC795C1C6275695E0B4B72DCBDBF7206456F27E07A11BC28BF5CE3438A9B",
+    "current_sha256": "2228973DBE7DB1900B234C2FE84BE90ACF446F4A4911AB98099CA4A92DC4D6F6",
+    "original_line_count": 289,
+    "current_line_count": 293,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 20,
+        "original_end": 19,
+        "current_start": 20,
+        "current_end": 20
+      },
+      {
+        "kind": "replace",
+        "original_start": 263,
+        "original_end": 263,
+        "current_start": 264,
+        "current_end": 267
+      }
+    ]
+  },
+  {
+    "path": "dos/command/cmdredir.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdredir.c",
+    "original_sha256": "A403F15BA9EC33AF85AB38AAA7C4FEA301016C4BB09A1CCBD3ADEE71A07DCC49",
+    "current_sha256": "C583C3872A532DF9F679EE35012624A636CC3D345CD0C07C7700C3966D065FE3",
+    "original_line_count": 664,
+    "current_line_count": 676,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 15,
+        "original_end": 14,
+        "current_start": 15,
+        "current_end": 26
+      },
+      {
+        "kind": "replace",
+        "original_start": 383,
+        "original_end": 383,
+        "current_start": 395,
+        "current_end": 395
+      },
+      {
+        "kind": "replace",
+        "original_start": 385,
+        "original_end": 385,
+        "current_start": 397,
+        "current_end": 397
+      },
+      {
+        "kind": "replace",
+        "original_start": 509,
+        "original_end": 509,
+        "current_start": 521,
+        "current_end": 521
+      },
+      {
+        "kind": "replace",
+        "original_start": 511,
+        "original_end": 511,
+        "current_start": 523,
+        "current_end": 523
+      }
+    ]
+  },
+  {
+    "path": "dos/dem/dem.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+    "original_sha256": "2573DA2DBF964C5E75102145B031766113CFC4E914DC00F0D80FDC6D98F5A2DE",
+    "current_sha256": "C808AC6C148C8000F2115F6298270316AE86E29E384678031657025B7AC2AA42",
+    "original_line_count": 76,
+    "current_line_count": 82,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 9,
+        "original_end": 8,
+        "current_start": 9,
+        "current_end": 9
+      },
+      {
+        "kind": "insert",
+        "original_start": 43,
+        "original_end": 42,
+        "current_start": 44,
+        "current_end": 48
+      },
+      {
+        "kind": "replace",
+        "original_start": 44,
+        "original_end": 44,
+        "current_start": 50,
+        "current_end": 50
+      }
+    ]
+  },
+  {
+    "path": "dos/dem/demdisp.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+    "original_sha256": "7EA3A829E3F8AAD2DFE644D101CABAFF514DE25909DB937675FC323DFCE8FE3C",
+    "current_sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256",
+    "original_line_count": 245,
+    "current_line_count": 256,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 13,
+        "original_end": 12,
+        "current_start": 13,
+        "current_end": 13
+      },
+      {
+        "kind": "replace",
+        "original_start": 165,
+        "original_end": 166,
+        "current_start": 166,
+        "current_end": 167
+      },
+      {
+        "kind": "insert",
+        "original_start": 241,
+        "original_end": 240,
+        "current_start": 242,
+        "current_end": 251
+      }
+    ]
+  },
+  {
+    "path": "dos/dem/demfile.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+    "original_sha256": "701C7CE94B6317F23D73D847C681338DDB522D0216CF6373713E542C34236620",
+    "current_sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20",
+    "original_line_count": 1160,
+    "current_line_count": 1215,
+    "hunks": [
+      {
+        "kind": "delete",
+        "original_start": 23,
+        "original_end": 23,
+        "current_start": 23,
+        "current_end": 22
+      },
+      {
+        "kind": "insert",
+        "original_start": 28,
+        "original_end": 27,
+        "current_start": 27,
+        "current_end": 53
+      },
+      {
+        "kind": "insert",
+        "original_start": 158,
+        "original_end": 157,
+        "current_start": 184,
+        "current_end": 186
+      },
+      {
+        "kind": "replace",
+        "original_start": 164,
+        "original_end": 164,
+        "current_start": 193,
+        "current_end": 204
+      },
+      {
+        "kind": "insert",
+        "original_start": 600,
+        "original_end": 599,
+        "current_start": 640,
+        "current_end": 642
+      },
+      {
+        "kind": "replace",
+        "original_start": 604,
+        "original_end": 604,
+        "current_start": 647,
+        "current_end": 658
+      },
+      {
+        "kind": "insert",
+        "original_start": 910,
+        "original_end": 909,
+        "current_start": 964,
+        "current_end": 964
+      },
+      {
+        "kind": "replace",
+        "original_start": 914,
+        "original_end": 916,
+        "current_start": 969,
+        "current_end": 970
+      },
+      {
+        "kind": "replace",
+        "original_start": 947,
+        "original_end": 947,
+        "current_start": 1001,
+        "current_end": 1002
+      },
+      {
+        "kind": "replace",
+        "original_start": 1039,
+        "original_end": 1041,
+        "current_start": 1094,
+        "current_end": 1095
+      },
+      {
+        "kind": "replace",
+        "original_start": 1109,
+        "original_end": 1111,
+        "current_start": 1163,
+        "current_end": 1164
+      },
+      {
+        "kind": "replace",
+        "original_start": 1131,
+        "original_end": 1131,
+        "current_start": 1184,
+        "current_end": 1186
+      }
+    ]
+  },
+  {
+    "path": "dpmi32/dpmiint.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+    "original_sha256": "D0607F266B8C6EE0556AF13FF9260C7C07DF8C0DC05AB25B37567430FB28A4AA",
+    "current_sha256": "F7FF2FC0686C67D3AD767A2D6CA91CCD45A1DD1381C902F4B7D27726AA74B94C",
+    "original_line_count": 1383,
+    "current_line_count": 1522,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 43,
+        "original_end": 42,
+        "current_start": 43,
+        "current_end": 43
+      },
+      {
+        "kind": "delete",
+        "original_start": 68,
+        "original_end": 68,
+        "current_start": 69,
+        "current_end": 68
+      },
+      {
+        "kind": "replace",
+        "original_start": 87,
+        "original_end": 87,
+        "current_start": 87,
+        "current_end": 87
+      },
+      {
+        "kind": "replace",
+        "original_start": 97,
+        "original_end": 97,
+        "current_start": 97,
+        "current_end": 97
+      },
+      {
+        "kind": "replace",
+        "original_start": 104,
+        "original_end": 104,
+        "current_start": 104,
+        "current_end": 104
+      },
+      {
+        "kind": "delete",
+        "original_start": 128,
+        "original_end": 128,
+        "current_start": 128,
+        "current_end": 127
+      },
+      {
+        "kind": "replace",
+        "original_start": 232,
+        "original_end": 232,
+        "current_start": 231,
+        "current_end": 233
+      },
+      {
+        "kind": "insert",
+        "original_start": 387,
+        "original_end": 386,
+        "current_start": 388,
+        "current_end": 429
+      },
+      {
+        "kind": "delete",
+        "original_start": 389,
+        "original_end": 389,
+        "current_start": 432,
+        "current_end": 431
+      },
+      {
+        "kind": "replace",
+        "original_start": 391,
+        "original_end": 394,
+        "current_start": 433,
+        "current_end": 434
+      },
+      {
+        "kind": "insert",
+        "original_start": 521,
+        "original_end": 520,
+        "current_start": 561,
+        "current_end": 577
+      },
+      {
+        "kind": "insert",
+        "original_start": 524,
+        "original_end": 523,
+        "current_start": 581,
+        "current_end": 590
+      },
+      {
+        "kind": "insert",
+        "original_start": 607,
+        "original_end": 606,
+        "current_start": 674,
+        "current_end": 681
+      },
+      {
+        "kind": "insert",
+        "original_start": 676,
+        "original_end": 675,
+        "current_start": 751,
+        "current_end": 751
+      },
+      {
+        "kind": "insert",
+        "original_start": 685,
+        "original_end": 684,
+        "current_start": 761,
+        "current_end": 765
+      },
+      {
+        "kind": "insert",
+        "original_start": 763,
+        "original_end": 762,
+        "current_start": 844,
+        "current_end": 846
+      },
+      {
+        "kind": "insert",
+        "original_start": 788,
+        "original_end": 787,
+        "current_start": 872,
+        "current_end": 872
+      },
+      {
+        "kind": "insert",
+        "original_start": 856,
+        "original_end": 855,
+        "current_start": 941,
+        "current_end": 943
+      },
+      {
+        "kind": "replace",
+        "original_start": 859,
+        "original_end": 859,
+        "current_start": 947,
+        "current_end": 947
+      },
+      {
+        "kind": "insert",
+        "original_start": 890,
+        "original_end": 889,
+        "current_start": 978,
+        "current_end": 979
+      },
+      {
+        "kind": "insert",
+        "original_start": 961,
+        "original_end": 960,
+        "current_start": 1051,
+        "current_end": 1057
+      },
+      {
+        "kind": "insert",
+        "original_start": 962,
+        "original_end": 961,
+        "current_start": 1059,
+        "current_end": 1063
+      },
+      {
+        "kind": "insert",
+        "original_start": 997,
+        "original_end": 996,
+        "current_start": 1099,
+        "current_end": 1100
+      },
+      {
+        "kind": "insert",
+        "original_start": 1005,
+        "original_end": 1004,
+        "current_start": 1109,
+        "current_end": 1115
+      },
+      {
+        "kind": "replace",
+        "original_start": 1167,
+        "original_end": 1167,
+        "current_start": 1278,
+        "current_end": 1278
+      },
+      {
+        "kind": "replace",
+        "original_start": 1174,
+        "original_end": 1174,
+        "current_start": 1285,
+        "current_end": 1285
+      },
+      {
+        "kind": "replace",
+        "original_start": 1201,
+        "original_end": 1201,
+        "current_start": 1312,
+        "current_end": 1312
+      },
+      {
+        "kind": "replace",
+        "original_start": 1208,
+        "original_end": 1208,
+        "current_start": 1319,
+        "current_end": 1319
+      },
+      {
+        "kind": "insert",
+        "original_start": 1266,
+        "original_end": 1265,
+        "current_start": 1377,
+        "current_end": 1381
+      },
+      {
+        "kind": "replace",
+        "original_start": 1270,
+        "original_end": 1270,
+        "current_start": 1386,
+        "current_end": 1409
+      }
+    ]
+  },
+  {
+    "path": "dpmi32/i386/dpmi386.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmi386.c",
+    "original_sha256": "E47BD6F7A1F48BA94022C9D5ED78714C269F751737F8F69711FC44C06523F8F0",
+    "current_sha256": "B66A8E333D2944E6B140947AE97FC5EAF7432F1C46AE0830759BADF36FF86103",
+    "original_line_count": 386,
+    "current_line_count": 407,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 30,
+        "original_end": 29,
+        "current_start": 30,
+        "current_end": 38
+      },
+      {
+        "kind": "insert",
+        "original_start": 342,
+        "original_end": 341,
+        "current_start": 351,
+        "current_end": 352
+      },
+      {
+        "kind": "insert",
+        "original_start": 366,
+        "original_end": 365,
+        "current_start": 377,
+        "current_end": 379
+      },
+      {
+        "kind": "insert",
+        "original_start": 369,
+        "original_end": 368,
+        "current_start": 383,
+        "current_end": 387
+      },
+      {
+        "kind": "replace",
+        "original_start": 374,
+        "original_end": 374,
+        "current_start": 393,
+        "current_end": 395
+      }
+    ]
+  },
+  {
+    "path": "dpmi32/modesw.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+    "original_sha256": "AA7157E2A39FEAD41E42E87F87E332E9464BF69A668671DE976C69637CE06A67",
+    "current_sha256": "4BBFF6CB6021A4839B6616169529BCCA76510F98B82CA9665F03637E4654ED22",
+    "original_line_count": 120,
+    "current_line_count": 312,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 26,
+        "original_end": 25,
+        "current_start": 26,
+        "current_end": 178
+      },
+      {
+        "kind": "insert",
+        "original_start": 64,
+        "original_end": 63,
+        "current_start": 217,
+        "current_end": 227
+      },
+      {
+        "kind": "delete",
+        "original_start": 66,
+        "original_end": 67,
+        "current_start": 230,
+        "current_end": 229
+      },
+      {
+        "kind": "replace",
+        "original_start": 69,
+        "original_end": 72,
+        "current_start": 231,
+        "current_end": 242
+      },
+      {
+        "kind": "insert",
+        "original_start": 74,
+        "original_end": 73,
+        "current_start": 244,
+        "current_end": 246
+      },
+      {
+        "kind": "insert",
+        "original_start": 113,
+        "original_end": 112,
+        "current_start": 286,
+        "current_end": 286
+      },
+      {
+        "kind": "insert",
+        "original_start": 119,
+        "original_end": 118,
+        "current_start": 293,
+        "current_end": 306
+      },
+      {
+        "kind": "insert",
+        "original_start": 120,
+        "original_end": 119,
+        "current_start": 308,
+        "current_end": 311
+      }
+    ]
+  },
+  {
+    "path": "dpmi32/vxd.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\vxd.c",
+    "original_sha256": "C42DB46A3E7F985B83988668778613BA497B0A940F2AEF4E0A2E082E54D8DD3A",
+    "current_sha256": "240AF56E0A6644E1E4465BE781858FB7BBBE581AD062B7B62ED0BCA7F3436C22",
+    "original_line_count": 136,
+    "current_line_count": 136,
+    "hunks": []
+  },
+  {
+    "path": "dpmi32/xmem.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+    "original_sha256": "50BABB31BCD739318E189E88567ED27D6C89AF908B8B590BBEB3E8F1377D13D5",
+    "current_sha256": "FC05182AA46C78DEE2A963D5D10A83DEB8B34D84114725D6F0D5D334B0FA29B0",
+    "original_line_count": 333,
+    "current_line_count": 334,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 197,
+        "original_end": 197,
+        "current_start": 197,
+        "current_end": 197
+      },
+      {
+        "kind": "replace",
+        "original_start": 210,
+        "original_end": 210,
+        "current_start": 210,
+        "current_end": 211
+      }
+    ]
+  },
+  {
+    "path": "inc/softpc.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\softpc.h",
+    "original_sha256": "1E6FBD5F67AA04749D7896BD0109FE45DAA22E691839D1261BBC3F039924BD9B",
+    "current_sha256": "04DAD85BEA7E01954C337FE3A3DC700E8BD7407B60F01EB2393F6055A2BDF8F3",
+    "original_line_count": 651,
+    "current_line_count": 656,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 1,
+        "original_end": 0,
+        "current_start": 1,
+        "current_end": 3
+      },
+      {
+        "kind": "replace",
+        "original_start": 114,
+        "original_end": 114,
+        "current_start": 117,
+        "current_end": 117
+      },
+      {
+        "kind": "replace",
+        "original_start": 124,
+        "original_end": 124,
+        "current_start": 127,
+        "current_end": 127
+      },
+      {
+        "kind": "replace",
+        "original_start": 190,
+        "original_end": 190,
+        "current_start": 193,
+        "current_end": 193
+      },
+      {
+        "kind": "insert",
+        "original_start": 195,
+        "original_end": 194,
+        "current_start": 198,
+        "current_end": 198
+      },
+      {
+        "kind": "replace",
+        "original_start": 205,
+        "original_end": 205,
+        "current_start": 209,
+        "current_end": 209
+      },
+      {
+        "kind": "insert",
+        "original_start": 210,
+        "original_end": 209,
+        "current_start": 214,
+        "current_end": 214
+      },
+      {
+        "kind": "replace",
+        "original_start": 215,
+        "original_end": 217,
+        "current_start": 220,
+        "current_end": 222
+      },
+      {
+        "kind": "replace",
+        "original_start": 222,
+        "original_end": 222,
+        "current_start": 227,
+        "current_end": 227
+      },
+      {
+        "kind": "replace",
+        "original_start": 237,
+        "original_end": 237,
+        "current_start": 242,
+        "current_end": 242
+      },
+      {
+        "kind": "replace",
+        "original_start": 380,
+        "original_end": 380,
+        "current_start": 385,
+        "current_end": 385
+      },
+      {
+        "kind": "replace",
+        "original_start": 384,
+        "original_end": 384,
+        "current_start": 389,
+        "current_end": 389
+      },
+      {
+        "kind": "replace",
+        "original_start": 388,
+        "original_end": 388,
+        "current_start": 393,
+        "current_end": 393
+      },
+      {
+        "kind": "replace",
+        "original_start": 392,
+        "original_end": 392,
+        "current_start": 397,
+        "current_end": 397
+      },
+      {
+        "kind": "replace",
+        "original_start": 396,
+        "original_end": 396,
+        "current_start": 401,
+        "current_end": 401
+      },
+      {
+        "kind": "replace",
+        "original_start": 398,
+        "original_end": 398,
+        "current_start": 403,
+        "current_end": 403
+      },
+      {
+        "kind": "replace",
+        "original_start": 400,
+        "original_end": 400,
+        "current_start": 405,
+        "current_end": 405
+      },
+      {
+        "kind": "replace",
+        "original_start": 402,
+        "original_end": 402,
+        "current_start": 407,
+        "current_end": 407
+      },
+      {
+        "kind": "replace",
+        "original_start": 404,
+        "original_end": 408,
+        "current_start": 409,
+        "current_end": 413
+      },
+      {
+        "kind": "replace",
+        "original_start": 419,
+        "original_end": 419,
+        "current_start": 424,
+        "current_end": 424
+      },
+      {
+        "kind": "replace",
+        "original_start": 423,
+        "original_end": 423,
+        "current_start": 428,
+        "current_end": 428
+      },
+      {
+        "kind": "replace",
+        "original_start": 427,
+        "original_end": 427,
+        "current_start": 432,
+        "current_end": 432
+      },
+      {
+        "kind": "replace",
+        "original_start": 431,
+        "original_end": 431,
+        "current_start": 436,
+        "current_end": 436
+      },
+      {
+        "kind": "replace",
+        "original_start": 435,
+        "original_end": 435,
+        "current_start": 440,
+        "current_end": 440
+      },
+      {
+        "kind": "replace",
+        "original_start": 439,
+        "original_end": 439,
+        "current_start": 444,
+        "current_end": 444
+      },
+      {
+        "kind": "replace",
+        "original_start": 441,
+        "original_end": 441,
+        "current_start": 446,
+        "current_end": 446
+      },
+      {
+        "kind": "replace",
+        "original_start": 443,
+        "original_end": 443,
+        "current_start": 448,
+        "current_end": 448
+      },
+      {
+        "kind": "replace",
+        "original_start": 445,
+        "original_end": 445,
+        "current_start": 450,
+        "current_end": 450
+      },
+      {
+        "kind": "replace",
+        "original_start": 447,
+        "original_end": 451,
+        "current_start": 452,
+        "current_end": 456
+      },
+      {
+        "kind": "replace",
+        "original_start": 480,
+        "original_end": 480,
+        "current_start": 485,
+        "current_end": 485
+      },
+      {
+        "kind": "replace",
+        "original_start": 559,
+        "original_end": 577,
+        "current_start": 564,
+        "current_end": 582
+      },
+      {
+        "kind": "replace",
+        "original_start": 599,
+        "original_end": 602,
+        "current_start": 604,
+        "current_end": 607
+      },
+      {
+        "kind": "replace",
+        "original_start": 606,
+        "original_end": 609,
+        "current_start": 611,
+        "current_end": 614
+      },
+      {
+        "kind": "replace",
+        "original_start": 626,
+        "original_end": 626,
+        "current_start": 631,
+        "current_end": 631
+      }
+    ]
+  },
+  {
+    "path": "oemuni/process.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\process.c",
+    "original_sha256": "38C9125F9F3C43F32F696616E565E63B8F056DA7EC264D980A5E5278CC640468",
+    "current_sha256": "FCF8695132E69E1612C08114A52938529131B951673291CC9C4CCEFF82C862B1",
+    "original_line_count": 916,
+    "current_line_count": 1019,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 14,
+        "original_end": 13,
+        "current_start": 14,
+        "current_end": 14
+      },
+      {
+        "kind": "replace",
+        "original_start": 34,
+        "original_end": 34,
+        "current_start": 35,
+        "current_end": 40
+      },
+      {
+        "kind": "replace",
+        "original_start": 44,
+        "original_end": 48,
+        "current_start": 50,
+        "current_end": 52
+      },
+      {
+        "kind": "replace",
+        "original_start": 50,
+        "original_end": 51,
+        "current_start": 54,
+        "current_end": 57
+      },
+      {
+        "kind": "replace",
+        "original_start": 53,
+        "original_end": 53,
+        "current_start": 59,
+        "current_end": 65
+      },
+      {
+        "kind": "replace",
+        "original_start": 85,
+        "original_end": 85,
+        "current_start": 97,
+        "current_end": 101
+      },
+      {
+        "kind": "replace",
+        "original_start": 95,
+        "original_end": 99,
+        "current_start": 111,
+        "current_end": 113
+      },
+      {
+        "kind": "replace",
+        "original_start": 101,
+        "original_end": 102,
+        "current_start": 115,
+        "current_end": 118
+      },
+      {
+        "kind": "replace",
+        "original_start": 104,
+        "original_end": 104,
+        "current_start": 120,
+        "current_end": 126
+      },
+      {
+        "kind": "replace",
+        "original_start": 140,
+        "original_end": 140,
+        "current_start": 162,
+        "current_end": 166
+      },
+      {
+        "kind": "replace",
+        "original_start": 144,
+        "original_end": 144,
+        "current_start": 170,
+        "current_end": 170
+      },
+      {
+        "kind": "replace",
+        "original_start": 195,
+        "original_end": 195,
+        "current_start": 221,
+        "current_end": 226
+      },
+      {
+        "kind": "replace",
+        "original_start": 204,
+        "original_end": 204,
+        "current_start": 235,
+        "current_end": 235
+      },
+      {
+        "kind": "replace",
+        "original_start": 208,
+        "original_end": 208,
+        "current_start": 239,
+        "current_end": 241
+      },
+      {
+        "kind": "replace",
+        "original_start": 210,
+        "original_end": 210,
+        "current_start": 243,
+        "current_end": 248
+      },
+      {
+        "kind": "insert",
+        "original_start": 218,
+        "original_end": 217,
+        "current_start": 256,
+        "current_end": 257
+      },
+      {
+        "kind": "replace",
+        "original_start": 223,
+        "original_end": 224,
+        "current_start": 263,
+        "current_end": 265
+      },
+      {
+        "kind": "insert",
+        "original_start": 230,
+        "original_end": 229,
+        "current_start": 271,
+        "current_end": 275
+      },
+      {
+        "kind": "replace",
+        "original_start": 263,
+        "original_end": 263,
+        "current_start": 309,
+        "current_end": 313
+      },
+      {
+        "kind": "replace",
+        "original_start": 272,
+        "original_end": 276,
+        "current_start": 322,
+        "current_end": 323
+      },
+      {
+        "kind": "replace",
+        "original_start": 278,
+        "original_end": 279,
+        "current_start": 325,
+        "current_end": 328
+      },
+      {
+        "kind": "replace",
+        "original_start": 281,
+        "original_end": 281,
+        "current_start": 330,
+        "current_end": 336
+      },
+      {
+        "kind": "replace",
+        "original_start": 605,
+        "original_end": 605,
+        "current_start": 660,
+        "current_end": 669
+      },
+      {
+        "kind": "insert",
+        "original_start": 610,
+        "original_end": 609,
+        "current_start": 674,
+        "current_end": 674
+      },
+      {
+        "kind": "insert",
+        "original_start": 613,
+        "original_end": 612,
+        "current_start": 678,
+        "current_end": 678
+      },
+      {
+        "kind": "insert",
+        "original_start": 617,
+        "original_end": 616,
+        "current_start": 683,
+        "current_end": 688
+      },
+      {
+        "kind": "replace",
+        "original_start": 618,
+        "original_end": 618,
+        "current_start": 690,
+        "current_end": 690
+      },
+      {
+        "kind": "insert",
+        "original_start": 626,
+        "original_end": 625,
+        "current_start": 698,
+        "current_end": 699
+      },
+      {
+        "kind": "replace",
+        "original_start": 629,
+        "original_end": 629,
+        "current_start": 703,
+        "current_end": 706
+      },
+      {
+        "kind": "insert",
+        "original_start": 635,
+        "original_end": 634,
+        "current_start": 712,
+        "current_end": 719
+      },
+      {
+        "kind": "insert",
+        "original_start": 804,
+        "original_end": 803,
+        "current_start": 889,
+        "current_end": 890
+      },
+      {
+        "kind": "insert",
+        "original_start": 806,
+        "original_end": 805,
+        "current_start": 893,
+        "current_end": 895
+      },
+      {
+        "kind": "insert",
+        "original_start": 821,
+        "original_end": 820,
+        "current_start": 911,
+        "current_end": 916
+      },
+      {
+        "kind": "replace",
+        "original_start": 857,
+        "original_end": 857,
+        "current_start": 953,
+        "current_end": 953
+      },
+      {
+        "kind": "replace",
+        "original_start": 860,
+        "original_end": 861,
+        "current_start": 956,
+        "current_end": 960
+      },
+      {
+        "kind": "replace",
+        "original_start": 877,
+        "original_end": 877,
+        "current_start": 976,
+        "current_end": 978
+      },
+      {
+        "kind": "replace",
+        "original_start": 879,
+        "original_end": 879,
+        "current_start": 980,
+        "current_end": 980
+      },
+      {
+        "kind": "delete",
+        "original_start": 885,
+        "original_end": 889,
+        "current_start": 986,
+        "current_end": 985
+      },
+      {
+        "kind": "replace",
+        "original_start": 892,
+        "original_end": 892,
+        "current_start": 988,
+        "current_end": 988
+      },
+      {
+        "kind": "replace",
+        "original_start": 894,
+        "original_end": 895,
+        "current_start": 990,
+        "current_end": 994
+      },
+      {
+        "kind": "replace",
+        "original_start": 897,
+        "original_end": 899,
+        "current_start": 996,
+        "current_end": 996
+      },
+      {
+        "kind": "insert",
+        "original_start": 906,
+        "original_end": 905,
+        "current_start": 1003,
+        "current_end": 1003
+      },
+      {
+        "kind": "insert",
+        "original_start": 908,
+        "original_end": 907,
+        "current_start": 1006,
+        "current_end": 1006
+      },
+      {
+        "kind": "insert",
+        "original_start": 910,
+        "original_end": 909,
+        "current_start": 1009,
+        "current_end": 1012
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/bios/reset.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+    "original_sha256": "46E2507AD47182125ED59206780763C5DADF6EA752A43D4D946451DE1024D90B",
+    "current_sha256": "EDE3217E7C3830601A7F95D557DA9011A15250902F8C468241C738B605055D3B",
+    "original_line_count": 1118,
+    "current_line_count": 1123,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 619,
+        "original_end": 619,
+        "current_start": 619,
+        "current_end": 622
+      },
+      {
+        "kind": "replace",
+        "original_start": 621,
+        "original_end": 621,
+        "current_start": 624,
+        "current_end": 624
+      },
+      {
+        "kind": "replace",
+        "original_start": 683,
+        "original_end": 683,
+        "current_start": 686,
+        "current_end": 688
+      },
+      {
+        "kind": "replace",
+        "original_start": 685,
+        "original_end": 685,
+        "current_start": 690,
+        "current_end": 690
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/c_debug.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_debug.c",
+    "original_sha256": "56CF805A5A78FE257F4337F94B55AEC634F6D7D6139296993623FA08A0655E91",
+    "current_sha256": "4E39100587D5D94ED39321BBA8335F4DB6B82CA8DCAD477A4B6F011CEC778A3C",
+    "original_line_count": 386,
+    "current_line_count": 390,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 74,
+        "original_end": 73,
+        "current_start": 74,
+        "current_end": 75
+      },
+      {
+        "kind": "insert",
+        "original_start": 270,
+        "original_end": 269,
+        "current_start": 272,
+        "current_end": 272
+      },
+      {
+        "kind": "insert",
+        "original_start": 343,
+        "original_end": 342,
+        "current_start": 346,
+        "current_end": 346
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/c_reg.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+    "original_sha256": "54BAC68DAF938CC40DC69FB2B4277F7AE535DAEBEA6A8A5A70F3113D30CAA48C",
+    "current_sha256": "D9BBC34913D015C386C354967D82F31ED53D87487EBFC183684EEE338FD4C150",
+    "original_line_count": 1879,
+    "current_line_count": 1883,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 39,
+        "original_end": 38,
+        "current_start": 39,
+        "current_end": 42
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/call.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+    "original_sha256": "CE5F56EA27239D0C85243CEE23E01DE34B1F82D3BA92ECED687E2B3BD90A2A94",
+    "current_sha256": "EA0E61F2EB649A8C4109611091DB3CF5D98E0600A425B31784591E9316AE2B0C",
+    "original_line_count": 357,
+    "current_line_count": 406,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 29,
+        "original_end": 28,
+        "current_start": 29,
+        "current_end": 36
+      },
+      {
+        "kind": "insert",
+        "original_start": 76,
+        "original_end": 75,
+        "current_start": 84,
+        "current_end": 84
+      },
+      {
+        "kind": "insert",
+        "original_start": 80,
+        "original_end": 79,
+        "current_start": 89,
+        "current_end": 131
+      },
+      {
+        "kind": "replace",
+        "original_start": 200,
+        "original_end": 203,
+        "current_start": 252,
+        "current_end": 252
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/lmsw.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lmsw.c",
+    "original_sha256": "8BC5BAD26249B91C1CC9B3BE756575C081B2DA322BB8DCC7E9F554D4F68A4E96",
+    "current_sha256": "1B802987E70E5074EA5D777F76BCF5C12A41290D58D172173D44005EB5D2B8BC",
+    "original_line_count": 56,
+    "current_line_count": 66,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 26,
+        "original_end": 25,
+        "current_start": 26,
+        "current_end": 26
+      },
+      {
+        "kind": "insert",
+        "original_start": 51,
+        "original_end": 50,
+        "current_start": 52,
+        "current_end": 57
+      },
+      {
+        "kind": "insert",
+        "original_start": 56,
+        "original_end": 55,
+        "current_start": 63,
+        "current_end": 65
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/localfm.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\localfm.c",
+    "original_sha256": "5DBB2BD74E82D5B87910DB81F1411610C84A2D57A553E8CB78080871D19835DF",
+    "current_sha256": "746FBFFDD7C678F46A4F87FEA72F80A7F3B80CF442F7FB6009280090CA10E0CE",
+    "original_line_count": 9,
+    "current_line_count": 15,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 4,
+        "original_end": 4,
+        "current_start": 4,
+        "current_end": 10
+      },
+      {
+        "kind": "replace",
+        "original_start": 6,
+        "original_end": 6,
+        "current_start": 12,
+        "current_end": 13
+      },
+      {
+        "kind": "delete",
+        "original_start": 8,
+        "original_end": 8,
+        "current_start": 15,
+        "current_end": 14
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/ntthread.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ntthread.c",
+    "original_sha256": "3FD33DC3055AC59E0958A8335C9F3D3155D36D76AC1E178C7DD1E4232DEB5528",
+    "current_sha256": "DCAE84898221AE9AAAEA99688874752B1FB56ED6E13BEB420A8177211E648747",
+    "original_line_count": 253,
+    "current_line_count": 274,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 187,
+        "original_end": 186,
+        "current_start": 187,
+        "current_end": 202
+      },
+      {
+        "kind": "replace",
+        "original_start": 223,
+        "original_end": 223,
+        "current_start": 239,
+        "current_end": 243
+      },
+      {
+        "kind": "replace",
+        "original_start": 229,
+        "original_end": 229,
+        "current_start": 249,
+        "current_end": 250
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/sascdef.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c",
+    "original_sha256": "B8B7832D02BD8F4161E1F71DF2968051609DA065F4DA8287A65E6B14B38A749C",
+    "current_sha256": "0EC6AFC6E8FC2086639044D1ADB3460EDFE36B265C6B0CBFEB89391901870BE9",
+    "original_line_count": 142,
+    "current_line_count": 146,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 131,
+        "original_end": 131,
+        "current_start": 131,
+        "current_end": 135
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/zfrsrvd.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\zfrsrvd.c",
+    "original_sha256": "3BEAF1EC7CA8AC2092BB88DE4597A19DE8AECDD564FA2B55CCB1A4009041E961",
+    "current_sha256": "1CDAA787DB8DC62D01DD37347B528C7E5EC515BACBEBEAA9F89DA5E5302D5E88",
+    "original_line_count": 4871,
+    "current_line_count": 4877,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 24,
+        "original_end": 23,
+        "current_start": 24,
+        "current_end": 24
+      },
+      {
+        "kind": "insert",
+        "original_start": 26,
+        "original_end": 25,
+        "current_start": 27,
+        "current_end": 28
+      },
+      {
+        "kind": "replace",
+        "original_start": 40,
+        "original_end": 40,
+        "current_start": 43,
+        "current_end": 45
+      },
+      {
+        "kind": "insert",
+        "original_start": 83,
+        "original_end": 82,
+        "current_start": 88,
+        "current_end": 89
+      },
+      {
+        "kind": "replace",
+        "original_start": 4806,
+        "original_end": 4807,
+        "current_start": 4813,
+        "current_end": 4813
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/cvidc/ev_glue.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
+    "original_sha256": "A12DDFD55DBD3B4426FF20075C46A665C6A30C6A955F24F6AB4872FB4895E935",
+    "current_sha256": "7849FA7719B5A46FCAA4548F180589AF29CF84ECF24AF4E3D59FA7FCD58F7AFE",
+    "original_line_count": 803,
+    "current_line_count": 814,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 19,
+        "original_end": 18,
+        "current_start": 19,
+        "current_end": 20
+      },
+      {
+        "kind": "insert",
+        "original_start": 30,
+        "original_end": 29,
+        "current_start": 32,
+        "current_end": 35
+      },
+      {
+        "kind": "replace",
+        "original_start": 51,
+        "original_end": 51,
+        "current_start": 57,
+        "current_end": 61
+      },
+      {
+        "kind": "insert",
+        "original_start": 765,
+        "original_end": 764,
+        "current_start": 775,
+        "current_end": 775
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/inc/gmi.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gmi.h",
+    "original_sha256": "828D5E4399C5CC396367373E96C4D6785AC0026F50467176F30A977AFE01919A",
+    "current_sha256": "9EDED1CD3AAD99A03283EF78C1C1CABF4D4C817BD15F256FF2FCE8AB852A667E",
+    "original_line_count": 84,
+    "current_line_count": 95,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 19,
+        "original_end": 18,
+        "current_start": 19,
+        "current_end": 28
+      },
+      {
+        "kind": "insert",
+        "original_start": 26,
+        "original_end": 25,
+        "current_start": 36,
+        "current_end": 36
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/inc/host.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host.h",
+    "original_sha256": "7777D03C1AB2BE0F278941A5D0085847C209DA5B7984E05FDBCB8AA2885A495B",
+    "current_sha256": "22C1B555E429F3DF096B2D18AA6AB66FE9B42495B9F16D307639095ED239CB14",
+    "original_line_count": 63,
+    "current_line_count": 66,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 50,
+        "original_end": 50,
+        "current_start": 50,
+        "current_end": 53
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/inc/timeval.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timeval.h",
+    "original_sha256": "49AB8B88C971A9DA3D0CADC974F04F6C329AEF23C25EFD8BFD7E3D50B1A8DFC0",
+    "current_sha256": "D3E9D4D135121B7F39A100CE06A18DBEB763A9B22E91F668DB855BC17BDD196F",
+    "original_line_count": 66,
+    "current_line_count": 66,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 57,
+        "original_end": 57,
+        "current_start": 57,
+        "current_end": 57
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/keymouse/mouse_io.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+    "original_sha256": "1AA3CBD915EB31FA37D4A0B7E0310F77612D39C45D3F552B78CA68B3CE9A3439",
+    "current_sha256": "520A8B6939DFE2CF3FDA8AD30AF623E42D795BB470654A7E14B672BD8030533C",
+    "original_line_count": 6664,
+    "current_line_count": 6718,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 109,
+        "original_end": 108,
+        "current_start": 109,
+        "current_end": 109
+      },
+      {
+        "kind": "replace",
+        "original_start": 163,
+        "original_end": 164,
+        "current_start": 164,
+        "current_end": 168
+      },
+      {
+        "kind": "insert",
+        "original_start": 2382,
+        "original_end": 2381,
+        "current_start": 2386,
+        "current_end": 2388
+      },
+      {
+        "kind": "delete",
+        "original_start": 2612,
+        "original_end": 2612,
+        "current_start": 2619,
+        "current_end": 2618
+      },
+      {
+        "kind": "replace",
+        "original_start": 2641,
+        "original_end": 2641,
+        "current_start": 2647,
+        "current_end": 2648
+      },
+      {
+        "kind": "replace",
+        "original_start": 2950,
+        "original_end": 2950,
+        "current_start": 2957,
+        "current_end": 2959
+      },
+      {
+        "kind": "replace",
+        "original_start": 2996,
+        "original_end": 2996,
+        "current_start": 3005,
+        "current_end": 3006
+      },
+      {
+        "kind": "insert",
+        "original_start": 3053,
+        "original_end": 3052,
+        "current_start": 3063,
+        "current_end": 3065
+      },
+      {
+        "kind": "insert",
+        "original_start": 3077,
+        "original_end": 3076,
+        "current_start": 3090,
+        "current_end": 3094
+      },
+      {
+        "kind": "replace",
+        "original_start": 3310,
+        "original_end": 3310,
+        "current_start": 3328,
+        "current_end": 3329
+      },
+      {
+        "kind": "insert",
+        "original_start": 3316,
+        "original_end": 3315,
+        "current_start": 3335,
+        "current_end": 3335
+      },
+      {
+        "kind": "insert",
+        "original_start": 3321,
+        "original_end": 3320,
+        "current_start": 3341,
+        "current_end": 3341
+      },
+      {
+        "kind": "insert",
+        "original_start": 3702,
+        "original_end": 3701,
+        "current_start": 3723,
+        "current_end": 3723
+      },
+      {
+        "kind": "insert",
+        "original_start": 3721,
+        "original_end": 3720,
+        "current_start": 3743,
+        "current_end": 3748
+      },
+      {
+        "kind": "replace",
+        "original_start": 5227,
+        "original_end": 5227,
+        "current_start": 5255,
+        "current_end": 5259
+      },
+      {
+        "kind": "insert",
+        "original_start": 5238,
+        "original_end": 5237,
+        "current_start": 5270,
+        "current_end": 5270
+      },
+      {
+        "kind": "delete",
+        "original_start": 5241,
+        "original_end": 5241,
+        "current_start": 5274,
+        "current_end": 5273
+      },
+      {
+        "kind": "insert",
+        "original_start": 5243,
+        "original_end": 5242,
+        "current_start": 5275,
+        "current_end": 5276
+      },
+      {
+        "kind": "replace",
+        "original_start": 5250,
+        "original_end": 5250,
+        "current_start": 5284,
+        "current_end": 5285
+      },
+      {
+        "kind": "insert",
+        "original_start": 5252,
+        "original_end": 5251,
+        "current_start": 5287,
+        "current_end": 5289
+      },
+      {
+        "kind": "insert",
+        "original_start": 5301,
+        "original_end": 5300,
+        "current_start": 5339,
+        "current_end": 5339
+      },
+      {
+        "kind": "insert",
+        "original_start": 5312,
+        "original_end": 5311,
+        "current_start": 5351,
+        "current_end": 5351
+      },
+      {
+        "kind": "replace",
+        "original_start": 5351,
+        "original_end": 5351,
+        "current_start": 5391,
+        "current_end": 5393
+      },
+      {
+        "kind": "insert",
+        "original_start": 5370,
+        "original_end": 5369,
+        "current_start": 5412,
+        "current_end": 5412
+      },
+      {
+        "kind": "insert",
+        "original_start": 5375,
+        "original_end": 5374,
+        "current_start": 5418,
+        "current_end": 5418
+      },
+      {
+        "kind": "insert",
+        "original_start": 5435,
+        "original_end": 5434,
+        "current_start": 5479,
+        "current_end": 5487
+      },
+      {
+        "kind": "replace",
+        "original_start": 6619,
+        "original_end": 6623,
+        "current_start": 6672,
+        "current_end": 6672
+      },
+      {
+        "kind": "replace",
+        "original_start": 6625,
+        "original_end": 6625,
+        "current_start": 6674,
+        "current_end": 6679
+      },
+      {
+        "kind": "replace",
+        "original_start": 6627,
+        "original_end": 6627,
+        "current_start": 6681,
+        "current_end": 6681
+      },
+      {
+        "kind": "replace",
+        "original_start": 6629,
+        "original_end": 6629,
+        "current_start": 6683,
+        "current_end": 6683
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/system/idetect.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+    "original_sha256": "B93EB0784830446B53EEADB4B4F2DC5506787CD5313B313ECFC1EC14C5B7D160",
+    "current_sha256": "E0D575A2FF8F64E9D07E1C8AC06D9B4CBEEE4A35986271B4D94854136A6FD137",
+    "original_line_count": 505,
+    "current_line_count": 505,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 215,
+        "original_end": 215,
+        "current_start": 215,
+        "current_end": 215
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/video/egwrtm12.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\egwrtm12.c",
+    "original_sha256": "826AA1A6F685F7DC0D8B4362F3EB83899697D8A6E2A555739FF61E2388D254A1",
+    "current_sha256": "65C7618E23B74DAAE9094E2131A3811945971F8C59EB765A7BA41D24A3C5B98A",
+    "original_line_count": 1218,
+    "current_line_count": 1242,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 156,
+        "original_end": 156,
+        "current_start": 156,
+        "current_end": 159
+      },
+      {
+        "kind": "insert",
+        "original_start": 164,
+        "original_end": 163,
+        "current_start": 167,
+        "current_end": 173
+      },
+      {
+        "kind": "insert",
+        "original_start": 204,
+        "original_end": 203,
+        "current_start": 214,
+        "current_end": 214
+      },
+      {
+        "kind": "replace",
+        "original_start": 205,
+        "original_end": 215,
+        "current_start": 216,
+        "current_end": 228
+      },
+      {
+        "kind": "replace",
+        "original_start": 256,
+        "original_end": 256,
+        "current_start": 269,
+        "current_end": 269
+      },
+      {
+        "kind": "insert",
+        "original_start": 412,
+        "original_end": 411,
+        "current_start": 425,
+        "current_end": 429
+      },
+      {
+        "kind": "insert",
+        "original_start": 654,
+        "original_end": 653,
+        "current_start": 672,
+        "current_end": 673
+      },
+      {
+        "kind": "insert",
+        "original_start": 1028,
+        "original_end": 1027,
+        "current_start": 1048,
+        "current_end": 1049
+      },
+      {
+        "kind": "insert",
+        "original_start": 1216,
+        "original_end": 1215,
+        "current_start": 1238,
+        "current_end": 1239
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/base/video/video.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+    "original_sha256": "664F399F40C4FAFCD850E2CBC166FA632BE5DDF7CC1F0D6BBCFAA017BEC4ED31",
+    "current_sha256": "D10D5F937BF49A3D383D5B618B3285E848F96760D88A116F77A1DA75E4952FF0",
+    "original_line_count": 2861,
+    "current_line_count": 2864,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 90,
+        "original_end": 89,
+        "current_start": 90,
+        "current_end": 92
+      },
+      {
+        "kind": "replace",
+        "original_start": 1511,
+        "original_end": 1511,
+        "current_start": 1514,
+        "current_end": 1514
+      },
+      {
+        "kind": "replace",
+        "original_start": 1579,
+        "original_end": 1579,
+        "current_start": 1582,
+        "current_end": 1582
+      },
+      {
+        "kind": "replace",
+        "original_start": 2042,
+        "original_end": 2042,
+        "current_start": 2045,
+        "current_end": 2045
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/inc/cfpu_def.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+    "original_sha256": "FE3BB4A06759E1CBEF74BFF327661F9649C92FB2490CDC751BC625A8170D3D4F",
+    "current_sha256": "7D4E3BE111C8D66AF271EDFCA1866B44F16D0836C4E26B108074E1E58457FF12",
+    "original_line_count": 215,
+    "current_line_count": 250,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 18,
+        "original_end": 18,
+        "current_start": 18,
+        "current_end": 25
+      },
+      {
+        "kind": "insert",
+        "original_start": 22,
+        "original_end": 21,
+        "current_start": 29,
+        "current_end": 29
+      },
+      {
+        "kind": "insert",
+        "original_start": 25,
+        "original_end": 24,
+        "current_start": 33,
+        "current_end": 37
+      },
+      {
+        "kind": "insert",
+        "original_start": 28,
+        "original_end": 27,
+        "current_start": 41,
+        "current_end": 41
+      },
+      {
+        "kind": "insert",
+        "original_start": 31,
+        "original_end": 30,
+        "current_start": 45,
+        "current_end": 48
+      },
+      {
+        "kind": "insert",
+        "original_start": 33,
+        "original_end": 32,
+        "current_start": 51,
+        "current_end": 51
+      },
+      {
+        "kind": "insert",
+        "original_start": 38,
+        "original_end": 37,
+        "current_start": 57,
+        "current_end": 58
+      },
+      {
+        "kind": "replace",
+        "original_start": 39,
+        "original_end": 39,
+        "current_start": 60,
+        "current_end": 63
+      },
+      {
+        "kind": "insert",
+        "original_start": 44,
+        "original_end": 43,
+        "current_start": 68,
+        "current_end": 72
+      },
+      {
+        "kind": "insert",
+        "original_start": 46,
+        "original_end": 45,
+        "current_start": 75,
+        "current_end": 75
+      },
+      {
+        "kind": "insert",
+        "original_start": 55,
+        "original_end": 54,
+        "current_start": 85,
+        "current_end": 86
+      },
+      {
+        "kind": "replace",
+        "original_start": 56,
+        "original_end": 56,
+        "current_start": 88,
+        "current_end": 91
+      },
+      {
+        "kind": "replace",
+        "original_start": 128,
+        "original_end": 132,
+        "current_start": 163,
+        "current_end": 167
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/inc/nt_fdisk.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fdisk.h",
+    "original_sha256": "D681EB7FC45DEDCC5501CB43516A8E9D1C7D94D6F70EBBF72517364134FE1C87",
+    "current_sha256": "B846AFEDCB0B139A0DD55BBDA98B9D8DAF66FA85E54AFDC36A58A8BEEFBD8A6F",
+    "original_line_count": 17,
+    "current_line_count": 16,
+    "hunks": [
+      {
+        "kind": "delete",
+        "original_start": 6,
+        "original_end": 6,
+        "current_start": 6,
+        "current_end": 5
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/config.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+    "original_sha256": "2A87D13D633E62B7BDA2D982127FEEA19B20B5A779FF1E384966C2EB3CE6DDFA",
+    "current_sha256": "B876FE8DA0BA1A2FBB995D069D7989A07D5825938574079A957C04D8C0B70D27",
+    "original_line_count": 1293,
+    "current_line_count": 1298,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 26,
+        "original_end": 25,
+        "current_start": 26,
+        "current_end": 26
+      },
+      {
+        "kind": "insert",
+        "original_start": 497,
+        "original_end": 496,
+        "current_start": 498,
+        "current_end": 499
+      },
+      {
+        "kind": "replace",
+        "original_start": 506,
+        "original_end": 506,
+        "current_start": 509,
+        "current_end": 513
+      },
+      {
+        "kind": "delete",
+        "original_start": 532,
+        "original_end": 533,
+        "current_start": 539,
+        "current_end": 538
+      },
+      {
+        "kind": "replace",
+        "original_start": 826,
+        "original_end": 826,
+        "current_start": 831,
+        "current_end": 831
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/copy_fnc.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+    "original_sha256": "320D697E9969CF146D5B0F94813AA62B501B0EEFEFF31806B22D463912965518",
+    "current_sha256": "DF1648827C9BCF847494C00DAB526821BDD52EA451AB7440CFBD4E9543C60555",
+    "original_line_count": 195,
+    "current_line_count": 196,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 115,
+        "original_end": 115,
+        "current_start": 115,
+        "current_end": 116
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_com.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+    "original_sha256": "56D39E89F2E077350AD07B77651224A0162314FCED5ABB498279B486F35AFB32",
+    "current_sha256": "3DD6E95BE2B9A14B1D7659F192673673B719B53D21C2D6FD42F26BD8485D5245",
+    "original_line_count": 2206,
+    "current_line_count": 2213,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 33,
+        "original_end": 32,
+        "current_start": 33,
+        "current_end": 33
+      },
+      {
+        "kind": "insert",
+        "original_start": 346,
+        "original_end": 345,
+        "current_start": 347,
+        "current_end": 347
+      },
+      {
+        "kind": "insert",
+        "original_start": 354,
+        "original_end": 353,
+        "current_start": 356,
+        "current_end": 357
+      },
+      {
+        "kind": "delete",
+        "original_start": 1081,
+        "original_end": 1082,
+        "current_start": 1085,
+        "current_end": 1084
+      },
+      {
+        "kind": "replace",
+        "original_start": 1084,
+        "original_end": 1084,
+        "current_start": 1086,
+        "current_end": 1090
+      },
+      {
+        "kind": "replace",
+        "original_start": 1086,
+        "original_end": 1088,
+        "current_start": 1092,
+        "current_end": 1094
+      },
+      {
+        "kind": "insert",
+        "original_start": 1091,
+        "original_end": 1090,
+        "current_start": 1097,
+        "current_end": 1097
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_emm.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_emm.c",
+    "original_sha256": "D51310AF362E60023FEB59C89AFB21FF6FAE8E1BB74AE8614231F4EC3A001729",
+    "current_sha256": "ED9E716D8D981D8A1174696B014C1DB36504ECC30A617A02C97E5214C1E25839",
+    "original_line_count": 817,
+    "current_line_count": 911,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 60,
+        "original_end": 59,
+        "current_start": 60,
+        "current_end": 68
+      },
+      {
+        "kind": "insert",
+        "original_start": 129,
+        "original_end": 128,
+        "current_start": 138,
+        "current_end": 212
+      },
+      {
+        "kind": "replace",
+        "original_start": 310,
+        "original_end": 310,
+        "current_start": 394,
+        "current_end": 394
+      },
+      {
+        "kind": "replace",
+        "original_start": 588,
+        "original_end": 588,
+        "current_start": 672,
+        "current_end": 673
+      },
+      {
+        "kind": "replace",
+        "original_start": 612,
+        "original_end": 612,
+        "current_start": 697,
+        "current_end": 698
+      },
+      {
+        "kind": "replace",
+        "original_start": 636,
+        "original_end": 636,
+        "current_start": 722,
+        "current_end": 723
+      },
+      {
+        "kind": "replace",
+        "original_start": 708,
+        "original_end": 710,
+        "current_start": 795,
+        "current_end": 800
+      },
+      {
+        "kind": "replace",
+        "original_start": 741,
+        "original_end": 742,
+        "current_start": 831,
+        "current_end": 835
+      },
+      {
+        "kind": "insert",
+        "original_start": 818,
+        "original_end": 817,
+        "current_start": 911,
+        "current_end": 911
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_mem.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+    "original_sha256": "55832EE249E18683E6D80C582AC8DFF47318A5D467D1B1017777FC961BDCCF5E",
+    "current_sha256": "6ABEA408AEF77B1B45C87065F14D56FF046D87C0B52CBFA2534011DB0270D1B1",
+    "original_line_count": 1456,
+    "current_line_count": 1475,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 24,
+        "original_end": 23,
+        "current_start": 24,
+        "current_end": 26
+      },
+      {
+        "kind": "insert",
+        "original_start": 42,
+        "original_end": 41,
+        "current_start": 45,
+        "current_end": 46
+      },
+      {
+        "kind": "insert",
+        "original_start": 252,
+        "original_end": 251,
+        "current_start": 257,
+        "current_end": 263
+      },
+      {
+        "kind": "insert",
+        "original_start": 286,
+        "original_end": 285,
+        "current_start": 298,
+        "current_end": 300
+      },
+      {
+        "kind": "insert",
+        "original_start": 935,
+        "original_end": 934,
+        "current_start": 950,
+        "current_end": 950
+      },
+      {
+        "kind": "replace",
+        "original_start": 957,
+        "original_end": 957,
+        "current_start": 973,
+        "current_end": 975
+      },
+      {
+        "kind": "insert",
+        "original_start": 959,
+        "original_end": 958,
+        "current_start": 977,
+        "current_end": 977
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_mouse.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+    "original_sha256": "A73C0572FA1E44326D26B2F4D47C15BFF768B031FCA16DCFD789A35E65E0E48B",
+    "current_sha256": "62492FCA31945777C67385BED503829A5A740BEA99877E1938B74848EA549CB8",
+    "original_line_count": 2630,
+    "current_line_count": 2662,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 33,
+        "original_end": 32,
+        "current_start": 33,
+        "current_end": 42
+      },
+      {
+        "kind": "replace",
+        "original_start": 119,
+        "original_end": 120,
+        "current_start": 129,
+        "current_end": 132
+      },
+      {
+        "kind": "insert",
+        "original_start": 327,
+        "original_end": 326,
+        "current_start": 339,
+        "current_end": 345
+      },
+      {
+        "kind": "replace",
+        "original_start": 413,
+        "original_end": 414,
+        "current_start": 432,
+        "current_end": 438
+      },
+      {
+        "kind": "insert",
+        "original_start": 547,
+        "original_end": 546,
+        "current_start": 571,
+        "current_end": 574
+      },
+      {
+        "kind": "insert",
+        "original_start": 561,
+        "original_end": 560,
+        "current_start": 589,
+        "current_end": 593
+      },
+      {
+        "kind": "delete",
+        "original_start": 573,
+        "original_end": 573,
+        "current_start": 606,
+        "current_end": 605
+      },
+      {
+        "kind": "replace",
+        "original_start": 2486,
+        "original_end": 2486,
+        "current_start": 2518,
+        "current_end": 2518
+      },
+      {
+        "kind": "replace",
+        "original_start": 2504,
+        "original_end": 2504,
+        "current_start": 2536,
+        "current_end": 2536
+      }
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_vga.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+    "original_sha256": "81DB9F2E415E58C21B0A10110D03D0F16532C2150ABA84FEB2CAB8F74627EE6D",
+    "current_sha256": "CCB324645A0C90922C837FC9C33207A765F38A2EF97ADD00D343F10593231E2F",
+    "original_line_count": 2188,
+    "current_line_count": 2197,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 1350,
+        "original_end": 1350,
+        "current_start": 1350,
+        "current_end": 1354
+      },
+      {
+        "kind": "insert",
+        "original_start": 1355,
+        "original_end": 1354,
+        "current_start": 1359,
+        "current_end": 1363
+      }
+    ]
+  },
+  {
+    "path": "wow32/isvwow.h",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\isvwow.h",
+    "original_sha256": "3B8357D8FA20CFBEBCF5307D0ABF0471AD93D1C74CD2C9BBE2EA42E9D2F4E132",
+    "current_sha256": "476DCE640711C1D05DB167E9DC137670AAD1DD96B6F99AAC65F040BCA869891F",
+    "original_line_count": 85,
+    "current_line_count": 86,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 23,
+        "original_end": 23,
+        "current_start": 23,
+        "current_end": 24
+      }
+    ]
+  },
+  {
+    "path": "wow32/wdos.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdos.c",
+    "original_sha256": "E87B5CB3825ED937266C3BADD287EFD03CEC3AF0C26ACB32CCC86D71FA47F314",
+    "current_sha256": "36F0F6E2BD5F4DBB11297FEDE065D5F67A106642DB81D9EA8F0413983442D29B",
+    "original_line_count": 823,
+    "current_line_count": 824,
+    "hunks": [
+      {
+        "kind": "replace",
+        "original_start": 15,
+        "original_end": 15,
+        "current_start": 15,
+        "current_end": 16
+      }
+    ]
+  },
+  {
+    "path": "wow32/wkernel.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+    "original_sha256": "C07F5E981D65F6911419990292FD3466D487FD79FF52B4819BB9905F808E68BD",
+    "current_sha256": "DAFC1E3A472DD55458CB41D216DF25ACBE11BAD68EE4BD8D8E90E8FF554DA998",
+    "original_line_count": 816,
+    "current_line_count": 859,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 19,
+        "original_end": 18,
+        "current_start": 19,
+        "current_end": 33
+      },
+      {
+        "kind": "insert",
+        "original_start": 129,
+        "original_end": 128,
+        "current_start": 144,
+        "current_end": 144
+      },
+      {
+        "kind": "insert",
+        "original_start": 132,
+        "original_end": 131,
+        "current_start": 148,
+        "current_end": 148
+      },
+      {
+        "kind": "insert",
+        "original_start": 139,
+        "original_end": 138,
+        "current_start": 156,
+        "current_end": 158
+      },
+      {
+        "kind": "replace",
+        "original_start": 141,
+        "original_end": 141,
+        "current_start": 161,
+        "current_end": 161
+      },
+      {
+        "kind": "replace",
+        "original_start": 162,
+        "original_end": 162,
+        "current_start": 182,
+        "current_end": 182
+      },
+      {
+        "kind": "insert",
+        "original_start": 393,
+        "original_end": 392,
+        "current_start": 413,
+        "current_end": 413
+      },
+      {
+        "kind": "insert",
+        "original_start": 397,
+        "original_end": 396,
+        "current_start": 418,
+        "current_end": 418
+      },
+      {
+        "kind": "insert",
+        "original_start": 405,
+        "original_end": 404,
+        "current_start": 427,
+        "current_end": 429
+      },
+      {
+        "kind": "replace",
+        "original_start": 431,
+        "original_end": 431,
+        "current_start": 456,
+        "current_end": 456
+      },
+      {
+        "kind": "replace",
+        "original_start": 461,
+        "original_end": 461,
+        "current_start": 486,
+        "current_end": 486
+      },
+      {
+        "kind": "replace",
+        "original_start": 523,
+        "original_end": 523,
+        "current_start": 548,
+        "current_end": 548
+      },
+      {
+        "kind": "insert",
+        "original_start": 717,
+        "original_end": 716,
+        "current_start": 742,
+        "current_end": 743
+      },
+      {
+        "kind": "insert",
+        "original_start": 724,
+        "original_end": 723,
+        "current_start": 751,
+        "current_end": 753
+      },
+      {
+        "kind": "replace",
+        "original_start": 730,
+        "original_end": 730,
+        "current_start": 760,
+        "current_end": 760
+      },
+      {
+        "kind": "insert",
+        "original_start": 748,
+        "original_end": 747,
+        "current_start": 778,
+        "current_end": 778
+      },
+      {
+        "kind": "replace",
+        "original_start": 750,
+        "original_end": 750,
+        "current_start": 781,
+        "current_end": 793
+      },
+      {
+        "kind": "replace",
+        "original_start": 753,
+        "original_end": 753,
+        "current_start": 796,
+        "current_end": 796
+      },
+      {
+        "kind": "replace",
+        "original_start": 756,
+        "original_end": 759,
+        "current_start": 799,
+        "current_end": 802
+      }
+    ]
+  },
+  {
+    "path": "wow32/wmdisp32.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+    "original_sha256": "4A9004C1F57AF28280D0176AFD72CAE76A7FBAE90FFB758426C287435E5912D4",
+    "current_sha256": "6E4632F55695176E6C8D7C53E4DE5913358D4B8546E778D6D864E202EF8D623D",
+    "original_line_count": 2602,
+    "current_line_count": 2701,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 19,
+        "original_end": 18,
+        "current_start": 19,
+        "current_end": 22
+      },
+      {
+        "kind": "replace",
+        "original_start": 23,
+        "original_end": 23,
+        "current_start": 27,
+        "current_end": 28
+      },
+      {
+        "kind": "insert",
+        "original_start": 39,
+        "original_end": 38,
+        "current_start": 44,
+        "current_end": 44
+      },
+      {
+        "kind": "replace",
+        "original_start": 40,
+        "original_end": 40,
+        "current_start": 46,
+        "current_end": 49
+      },
+      {
+        "kind": "insert",
+        "original_start": 52,
+        "original_end": 51,
+        "current_start": 61,
+        "current_end": 61
+      },
+      {
+        "kind": "insert",
+        "original_start": 130,
+        "original_end": 129,
+        "current_start": 140,
+        "current_end": 140
+      },
+      {
+        "kind": "insert",
+        "original_start": 197,
+        "original_end": 196,
+        "current_start": 208,
+        "current_end": 210
+      },
+      {
+        "kind": "insert",
+        "original_start": 198,
+        "original_end": 197,
+        "current_start": 212,
+        "current_end": 214
+      },
+      {
+        "kind": "insert",
+        "original_start": 243,
+        "original_end": 242,
+        "current_start": 260,
+        "current_end": 260
+      },
+      {
+        "kind": "insert",
+        "original_start": 249,
+        "original_end": 248,
+        "current_start": 267,
+        "current_end": 271
+      },
+      {
+        "kind": "insert",
+        "original_start": 430,
+        "original_end": 429,
+        "current_start": 453,
+        "current_end": 455
+      },
+      {
+        "kind": "insert",
+        "original_start": 448,
+        "original_end": 447,
+        "current_start": 474,
+        "current_end": 474
+      },
+      {
+        "kind": "insert",
+        "original_start": 456,
+        "original_end": 455,
+        "current_start": 483,
+        "current_end": 483
+      },
+      {
+        "kind": "replace",
+        "original_start": 462,
+        "original_end": 462,
+        "current_start": 490,
+        "current_end": 490
+      },
+      {
+        "kind": "replace",
+        "original_start": 469,
+        "original_end": 469,
+        "current_start": 497,
+        "current_end": 497
+      },
+      {
+        "kind": "replace",
+        "original_start": 478,
+        "original_end": 478,
+        "current_start": 506,
+        "current_end": 507
+      },
+      {
+        "kind": "insert",
+        "original_start": 480,
+        "original_end": 479,
+        "current_start": 509,
+        "current_end": 509
+      },
+      {
+        "kind": "insert",
+        "original_start": 481,
+        "original_end": 480,
+        "current_start": 511,
+        "current_end": 511
+      },
+      {
+        "kind": "replace",
+        "original_start": 487,
+        "original_end": 487,
+        "current_start": 518,
+        "current_end": 518
+      },
+      {
+        "kind": "delete",
+        "original_start": 494,
+        "original_end": 497,
+        "current_start": 525,
+        "current_end": 524
+      },
+      {
+        "kind": "replace",
+        "original_start": 517,
+        "original_end": 518,
+        "current_start": 544,
+        "current_end": 544
+      },
+      {
+        "kind": "replace",
+        "original_start": 536,
+        "original_end": 570,
+        "current_start": 562,
+        "current_end": 564
+      },
+      {
+        "kind": "replace",
+        "original_start": 659,
+        "original_end": 661,
+        "current_start": 653,
+        "current_end": 658
+      },
+      {
+        "kind": "insert",
+        "original_start": 667,
+        "original_end": 666,
+        "current_start": 664,
+        "current_end": 664
+      },
+      {
+        "kind": "insert",
+        "original_start": 676,
+        "original_end": 675,
+        "current_start": 674,
+        "current_end": 674
+      },
+      {
+        "kind": "insert",
+        "original_start": 679,
+        "original_end": 678,
+        "current_start": 678,
+        "current_end": 678
+      },
+      {
+        "kind": "replace",
+        "original_start": 685,
+        "original_end": 685,
+        "current_start": 685,
+        "current_end": 688
+      },
+      {
+        "kind": "insert",
+        "original_start": 688,
+        "original_end": 687,
+        "current_start": 691,
+        "current_end": 691
+      },
+      {
+        "kind": "replace",
+        "original_start": 690,
+        "original_end": 690,
+        "current_start": 694,
+        "current_end": 694
+      },
+      {
+        "kind": "replace",
+        "original_start": 730,
+        "original_end": 731,
+        "current_start": 734,
+        "current_end": 740
+      },
+      {
+        "kind": "replace",
+        "original_start": 818,
+        "original_end": 818,
+        "current_start": 827,
+        "current_end": 827
+      },
+      {
+        "kind": "replace",
+        "original_start": 925,
+        "original_end": 925,
+        "current_start": 934,
+        "current_end": 934
+      },
+      {
+        "kind": "replace",
+        "original_start": 937,
+        "original_end": 937,
+        "current_start": 946,
+        "current_end": 946
+      },
+      {
+        "kind": "replace",
+        "original_start": 1455,
+        "original_end": 1456,
+        "current_start": 1464,
+        "current_end": 1468
+      },
+      {
+        "kind": "insert",
+        "original_start": 1469,
+        "original_end": 1468,
+        "current_start": 1481,
+        "current_end": 1481
+      },
+      {
+        "kind": "insert",
+        "original_start": 1486,
+        "original_end": 1485,
+        "current_start": 1499,
+        "current_end": 1499
+      },
+      {
+        "kind": "replace",
+        "original_start": 1498,
+        "original_end": 1498,
+        "current_start": 1512,
+        "current_end": 1514
+      },
+      {
+        "kind": "insert",
+        "original_start": 1515,
+        "original_end": 1514,
+        "current_start": 1531,
+        "current_end": 1531
+      },
+      {
+        "kind": "replace",
+        "original_start": 1519,
+        "original_end": 1520,
+        "current_start": 1536,
+        "current_end": 1538
+      },
+      {
+        "kind": "replace",
+        "original_start": 1526,
+        "original_end": 1532,
+        "current_start": 1544,
+        "current_end": 1545
+      },
+      {
+        "kind": "replace",
+        "original_start": 1536,
+        "original_end": 1538,
+        "current_start": 1549,
+        "current_end": 1549
+      },
+      {
+        "kind": "replace",
+        "original_start": 1542,
+        "original_end": 1546,
+        "current_start": 1553,
+        "current_end": 1561
+      },
+      {
+        "kind": "insert",
+        "original_start": 1681,
+        "original_end": 1680,
+        "current_start": 1696,
+        "current_end": 1696
+      },
+      {
+        "kind": "insert",
+        "original_start": 1685,
+        "original_end": 1684,
+        "current_start": 1701,
+        "current_end": 1702
+      },
+      {
+        "kind": "insert",
+        "original_start": 1687,
+        "original_end": 1686,
+        "current_start": 1705,
+        "current_end": 1705
+      },
+      {
+        "kind": "replace",
+        "original_start": 1693,
+        "original_end": 1693,
+        "current_start": 1712,
+        "current_end": 1712
+      },
+      {
+        "kind": "insert",
+        "original_start": 1701,
+        "original_end": 1700,
+        "current_start": 1720,
+        "current_end": 1720
+      },
+      {
+        "kind": "replace",
+        "original_start": 1712,
+        "original_end": 1712,
+        "current_start": 1732,
+        "current_end": 1732
+      },
+      {
+        "kind": "replace",
+        "original_start": 1731,
+        "original_end": 1731,
+        "current_start": 1751,
+        "current_end": 1752
+      },
+      {
+        "kind": "replace",
+        "original_start": 1741,
+        "original_end": 1741,
+        "current_start": 1762,
+        "current_end": 1762
+      },
+      {
+        "kind": "replace",
+        "original_start": 1778,
+        "original_end": 1778,
+        "current_start": 1799,
+        "current_end": 1802
+      },
+      {
+        "kind": "replace",
+        "original_start": 1781,
+        "original_end": 1781,
+        "current_start": 1805,
+        "current_end": 1809
+      },
+      {
+        "kind": "insert",
+        "original_start": 1837,
+        "original_end": 1836,
+        "current_start": 1865,
+        "current_end": 1867
+      },
+      {
+        "kind": "replace",
+        "original_start": 1956,
+        "original_end": 1958,
+        "current_start": 1987,
+        "current_end": 1991
+      },
+      {
+        "kind": "replace",
+        "original_start": 1978,
+        "original_end": 1982,
+        "current_start": 2011,
+        "current_end": 2020
+      },
+      {
+        "kind": "insert",
+        "original_start": 1984,
+        "original_end": 1983,
+        "current_start": 2022,
+        "current_end": 2025
+      },
+      {
+        "kind": "replace",
+        "original_start": 2021,
+        "original_end": 2023,
+        "current_start": 2063,
+        "current_end": 2067
+      },
+      {
+        "kind": "replace",
+        "original_start": 2038,
+        "original_end": 2038,
+        "current_start": 2082,
+        "current_end": 2082
+      },
+      {
+        "kind": "replace",
+        "original_start": 2058,
+        "original_end": 2062,
+        "current_start": 2102,
+        "current_end": 2113
+      },
+      {
+        "kind": "replace",
+        "original_start": 2105,
+        "original_end": 2107,
+        "current_start": 2156,
+        "current_end": 2160
+      },
+      {
+        "kind": "replace",
+        "original_start": 2132,
+        "original_end": 2132,
+        "current_start": 2185,
+        "current_end": 2185
+      },
+      {
+        "kind": "replace",
+        "original_start": 2151,
+        "original_end": 2155,
+        "current_start": 2204,
+        "current_end": 2214
+      },
+      {
+        "kind": "replace",
+        "original_start": 2196,
+        "original_end": 2198,
+        "current_start": 2255,
+        "current_end": 2259
+      },
+      {
+        "kind": "replace",
+        "original_start": 2218,
+        "original_end": 2222,
+        "current_start": 2279,
+        "current_end": 2287
+      },
+      {
+        "kind": "replace",
+        "original_start": 2375,
+        "original_end": 2375,
+        "current_start": 2440,
+        "current_end": 2440
+      },
+      {
+        "kind": "replace",
+        "original_start": 2394,
+        "original_end": 2394,
+        "current_start": 2459,
+        "current_end": 2459
+      },
+      {
+        "kind": "replace",
+        "original_start": 2451,
+        "original_end": 2454,
+        "current_start": 2516,
+        "current_end": 2526
+      },
+      {
+        "kind": "insert",
+        "original_start": 2459,
+        "original_end": 2458,
+        "current_start": 2531,
+        "current_end": 2531
+      },
+      {
+        "kind": "insert",
+        "original_start": 2461,
+        "original_end": 2460,
+        "current_start": 2534,
+        "current_end": 2538
+      },
+      {
+        "kind": "insert",
+        "original_start": 2462,
+        "original_end": 2461,
+        "current_start": 2540,
+        "current_end": 2543
+      },
+      {
+        "kind": "delete",
+        "original_start": 2464,
+        "original_end": 2464,
+        "current_start": 2546,
+        "current_end": 2545
+      },
+      {
+        "kind": "insert",
+        "original_start": 2471,
+        "original_end": 2470,
+        "current_start": 2552,
+        "current_end": 2554
+      },
+      {
+        "kind": "insert",
+        "original_start": 2472,
+        "original_end": 2471,
+        "current_start": 2556,
+        "current_end": 2557
+      },
+      {
+        "kind": "replace",
+        "original_start": 2474,
+        "original_end": 2474,
+        "current_start": 2560,
+        "current_end": 2561
+      },
+      {
+        "kind": "insert",
+        "original_start": 2476,
+        "original_end": 2475,
+        "current_start": 2563,
+        "current_end": 2563
+      },
+      {
+        "kind": "insert",
+        "original_start": 2477,
+        "original_end": 2476,
+        "current_start": 2565,
+        "current_end": 2565
+      },
+      {
+        "kind": "replace",
+        "original_start": 2488,
+        "original_end": 2488,
+        "current_start": 2577,
+        "current_end": 2581
+      },
+      {
+        "kind": "replace",
+        "original_start": 2492,
+        "original_end": 2505,
+        "current_start": 2585,
+        "current_end": 2603
+      },
+      {
+        "kind": "insert",
+        "original_start": 2517,
+        "original_end": 2516,
+        "current_start": 2615,
+        "current_end": 2615
+      },
+      {
+        "kind": "replace",
+        "original_start": 2522,
+        "original_end": 2522,
+        "current_start": 2621,
+        "current_end": 2622
+      },
+      {
+        "kind": "replace",
+        "original_start": 2528,
+        "original_end": 2528,
+        "current_start": 2628,
+        "current_end": 2628
+      },
+      {
+        "kind": "delete",
+        "original_start": 2534,
+        "original_end": 2534,
+        "current_start": 2634,
+        "current_end": 2633
+      },
+      {
+        "kind": "replace",
+        "original_start": 2541,
+        "original_end": 2541,
+        "current_start": 2640,
+        "current_end": 2640
+      }
+    ]
+  },
+  {
+    "path": "wow32/wmsgem.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgem.c",
+    "original_sha256": "88D05E4770453621472704E90EDCEFD6AD18B618528B4166DA3A9BA1EA1A3619",
+    "current_sha256": "251325307C9E698EE579E3493F15F93ABB6DAFE7D289F334AC3714C513566BE9",
+    "original_line_count": 288,
+    "current_line_count": 293,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 138,
+        "original_end": 137,
+        "current_start": 138,
+        "current_end": 139
+      },
+      {
+        "kind": "insert",
+        "original_start": 158,
+        "original_end": 157,
+        "current_start": 160,
+        "current_end": 161
+      },
+      {
+        "kind": "replace",
+        "original_start": 243,
+        "original_end": 243,
+        "current_start": 247,
+        "current_end": 248
+      }
+    ]
+  },
+  {
+    "path": "wow32/wowhooks.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+    "original_sha256": "345220990242CDE0890884F478BEF8622C2FC537C9E6200FA9B289145BE0CC67",
+    "current_sha256": "63F92BB51C6CBAB216E23E97538BF52BE489742675F8FF7FD278109248409ECD",
+    "original_line_count": 1997,
+    "current_line_count": 2089,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 13,
+        "original_end": 12,
+        "current_start": 13,
+        "current_end": 14
+      },
+      {
+        "kind": "replace",
+        "original_start": 78,
+        "original_end": 80,
+        "current_start": 80,
+        "current_end": 83
+      },
+      {
+        "kind": "replace",
+        "original_start": 458,
+        "original_end": 458,
+        "current_start": 461,
+        "current_end": 462
+      },
+      {
+        "kind": "replace",
+        "original_start": 570,
+        "original_end": 570,
+        "current_start": 574,
+        "current_end": 574
+      },
+      {
+        "kind": "replace",
+        "original_start": 573,
+        "original_end": 573,
+        "current_start": 577,
+        "current_end": 581
+      },
+      {
+        "kind": "insert",
+        "original_start": 593,
+        "original_end": 592,
+        "current_start": 601,
+        "current_end": 601
+      },
+      {
+        "kind": "insert",
+        "original_start": 596,
+        "original_end": 595,
+        "current_start": 605,
+        "current_end": 605
+      },
+      {
+        "kind": "insert",
+        "original_start": 600,
+        "original_end": 599,
+        "current_start": 610,
+        "current_end": 610
+      },
+      {
+        "kind": "replace",
+        "original_start": 615,
+        "original_end": 615,
+        "current_start": 626,
+        "current_end": 626
+      },
+      {
+        "kind": "insert",
+        "original_start": 633,
+        "original_end": 632,
+        "current_start": 644,
+        "current_end": 645
+      },
+      {
+        "kind": "insert",
+        "original_start": 635,
+        "original_end": 634,
+        "current_start": 648,
+        "current_end": 653
+      },
+      {
+        "kind": "replace",
+        "original_start": 658,
+        "original_end": 658,
+        "current_start": 677,
+        "current_end": 681
+      },
+      {
+        "kind": "insert",
+        "original_start": 701,
+        "original_end": 700,
+        "current_start": 724,
+        "current_end": 724
+      },
+      {
+        "kind": "replace",
+        "original_start": 786,
+        "original_end": 786,
+        "current_start": 810,
+        "current_end": 810
+      },
+      {
+        "kind": "insert",
+        "original_start": 837,
+        "original_end": 836,
+        "current_start": 861,
+        "current_end": 861
+      },
+      {
+        "kind": "insert",
+        "original_start": 838,
+        "original_end": 837,
+        "current_start": 863,
+        "current_end": 867
+      },
+      {
+        "kind": "replace",
+        "original_start": 884,
+        "original_end": 884,
+        "current_start": 914,
+        "current_end": 914
+      },
+      {
+        "kind": "replace",
+        "original_start": 887,
+        "original_end": 887,
+        "current_start": 917,
+        "current_end": 919
+      },
+      {
+        "kind": "replace",
+        "original_start": 890,
+        "original_end": 895,
+        "current_start": 922,
+        "current_end": 935
+      },
+      {
+        "kind": "insert",
+        "original_start": 926,
+        "original_end": 925,
+        "current_start": 966,
+        "current_end": 966
+      },
+      {
+        "kind": "replace",
+        "original_start": 1009,
+        "original_end": 1009,
+        "current_start": 1050,
+        "current_end": 1050
+      },
+      {
+        "kind": "replace",
+        "original_start": 1063,
+        "original_end": 1063,
+        "current_start": 1104,
+        "current_end": 1108
+      },
+      {
+        "kind": "replace",
+        "original_start": 1097,
+        "original_end": 1097,
+        "current_start": 1142,
+        "current_end": 1142
+      },
+      {
+        "kind": "insert",
+        "original_start": 1102,
+        "original_end": 1101,
+        "current_start": 1147,
+        "current_end": 1147
+      },
+      {
+        "kind": "insert",
+        "original_start": 1103,
+        "original_end": 1102,
+        "current_start": 1149,
+        "current_end": 1165
+      },
+      {
+        "kind": "insert",
+        "original_start": 1123,
+        "original_end": 1122,
+        "current_start": 1186,
+        "current_end": 1189
+      },
+      {
+        "kind": "replace",
+        "original_start": 1151,
+        "original_end": 1151,
+        "current_start": 1218,
+        "current_end": 1218
+      },
+      {
+        "kind": "insert",
+        "original_start": 1181,
+        "original_end": 1180,
+        "current_start": 1248,
+        "current_end": 1248
+      },
+      {
+        "kind": "insert",
+        "original_start": 1182,
+        "original_end": 1181,
+        "current_start": 1250,
+        "current_end": 1250
+      },
+      {
+        "kind": "insert",
+        "original_start": 1230,
+        "original_end": 1229,
+        "current_start": 1299,
+        "current_end": 1302
+      },
+      {
+        "kind": "replace",
+        "original_start": 1243,
+        "original_end": 1243,
+        "current_start": 1316,
+        "current_end": 1316
+      },
+      {
+        "kind": "insert",
+        "original_start": 1249,
+        "original_end": 1248,
+        "current_start": 1322,
+        "current_end": 1322
+      },
+      {
+        "kind": "insert",
+        "original_start": 1250,
+        "original_end": 1249,
+        "current_start": 1324,
+        "current_end": 1324
+      },
+      {
+        "kind": "replace",
+        "original_start": 1439,
+        "original_end": 1439,
+        "current_start": 1514,
+        "current_end": 1515
+      },
+      {
+        "kind": "insert",
+        "original_start": 1452,
+        "original_end": 1451,
+        "current_start": 1528,
+        "current_end": 1528
+      },
+      {
+        "kind": "insert",
+        "original_start": 1468,
+        "original_end": 1467,
+        "current_start": 1545,
+        "current_end": 1547
+      },
+      {
+        "kind": "replace",
+        "original_start": 1485,
+        "original_end": 1485,
+        "current_start": 1565,
+        "current_end": 1566
+      },
+      {
+        "kind": "insert",
+        "original_start": 1550,
+        "original_end": 1549,
+        "current_start": 1631,
+        "current_end": 1631
+      },
+      {
+        "kind": "insert",
+        "original_start": 1682,
+        "original_end": 1681,
+        "current_start": 1764,
+        "current_end": 1766
+      },
+      {
+        "kind": "replace",
+        "original_start": 1724,
+        "original_end": 1724,
+        "current_start": 1809,
+        "current_end": 1811
+      },
+      {
+        "kind": "insert",
+        "original_start": 1746,
+        "original_end": 1745,
+        "current_start": 1833,
+        "current_end": 1833
+      },
+      {
+        "kind": "insert",
+        "original_start": 1781,
+        "original_end": 1780,
+        "current_start": 1869,
+        "current_end": 1872
+      }
+    ]
+  },
+  {
+    "path": "wow32/wuclip.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+    "original_sha256": "C386AF38376945CB4FD141D878BCA8EF5140B15DCCC9695A0ADCB0941FBB0083",
+    "current_sha256": "3B30B2AF4F1BBB588C051C15D03FBF9C7E1E299FFEA02BB4BCC74A74DF6C10FA",
+    "original_line_count": 1245,
+    "current_line_count": 1322,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 17,
+        "original_end": 16,
+        "current_start": 17,
+        "current_end": 17
+      },
+      {
+        "kind": "insert",
+        "original_start": 32,
+        "original_end": 31,
+        "current_start": 33,
+        "current_end": 63
+      },
+      {
+        "kind": "insert",
+        "original_start": 60,
+        "original_end": 59,
+        "current_start": 92,
+        "current_end": 92
+      },
+      {
+        "kind": "replace",
+        "original_start": 64,
+        "original_end": 67,
+        "current_start": 97,
+        "current_end": 102
+      },
+      {
+        "kind": "insert",
+        "original_start": 94,
+        "original_end": 93,
+        "current_start": 129,
+        "current_end": 135
+      },
+      {
+        "kind": "replace",
+        "original_start": 465,
+        "original_end": 465,
+        "current_start": 507,
+        "current_end": 508
+      },
+      {
+        "kind": "replace",
+        "original_start": 489,
+        "original_end": 489,
+        "current_start": 532,
+        "current_end": 533
+      },
+      {
+        "kind": "insert",
+        "original_start": 631,
+        "original_end": 630,
+        "current_start": 675,
+        "current_end": 675
+      },
+      {
+        "kind": "replace",
+        "original_start": 635,
+        "original_end": 637,
+        "current_start": 680,
+        "current_end": 684
+      },
+      {
+        "kind": "replace",
+        "original_start": 867,
+        "original_end": 868,
+        "current_start": 914,
+        "current_end": 924
+      },
+      {
+        "kind": "replace",
+        "original_start": 927,
+        "original_end": 927,
+        "current_start": 983,
+        "current_end": 986
+      },
+      {
+        "kind": "insert",
+        "original_start": 963,
+        "original_end": 962,
+        "current_start": 1022,
+        "current_end": 1022
+      },
+      {
+        "kind": "replace",
+        "original_start": 967,
+        "original_end": 967,
+        "current_start": 1027,
+        "current_end": 1031
+      },
+      {
+        "kind": "insert",
+        "original_start": 1071,
+        "original_end": 1070,
+        "current_start": 1135,
+        "current_end": 1135
+      },
+      {
+        "kind": "insert",
+        "original_start": 1079,
+        "original_end": 1078,
+        "current_start": 1144,
+        "current_end": 1150
+      },
+      {
+        "kind": "insert",
+        "original_start": 1189,
+        "original_end": 1188,
+        "current_start": 1261,
+        "current_end": 1265
+      }
+    ]
+  },
+  {
+    "path": "wow32/wudlg.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
+    "original_sha256": "8A0DFCB7CBFEA232C491FD9249C10048946F9F0D0E0B4120227DCCD6AB37109E",
+    "current_sha256": "1032565DBC656936FE8E0CE6144532E9CEA2699D402E848D59E850C1DB08420B",
+    "original_line_count": 1489,
+    "current_line_count": 1506,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 16,
+        "original_end": 15,
+        "current_start": 16,
+        "current_end": 17
+      },
+      {
+        "kind": "replace",
+        "original_start": 29,
+        "original_end": 29,
+        "current_start": 31,
+        "current_end": 34
+      },
+      {
+        "kind": "insert",
+        "original_start": 86,
+        "original_end": 85,
+        "current_start": 91,
+        "current_end": 91
+      },
+      {
+        "kind": "insert",
+        "original_start": 152,
+        "original_end": 151,
+        "current_start": 158,
+        "current_end": 158
+      },
+      {
+        "kind": "insert",
+        "original_start": 161,
+        "original_end": 160,
+        "current_start": 168,
+        "current_end": 172
+      },
+      {
+        "kind": "replace",
+        "original_start": 1077,
+        "original_end": 1077,
+        "current_start": 1089,
+        "current_end": 1090
+      },
+      {
+        "kind": "insert",
+        "original_start": 1090,
+        "original_end": 1089,
+        "current_start": 1103,
+        "current_end": 1103
+      },
+      {
+        "kind": "insert",
+        "original_start": 1116,
+        "original_end": 1115,
+        "current_start": 1130,
+        "current_end": 1132
+      }
+    ]
+  },
+  {
+    "path": "wow32/wuman.c",
+    "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+    "original_sha256": "D96FC214141973B12045669AE2A0D21CF4040AB928BE1A309AD687456B473698",
+    "current_sha256": "FD996581326F266C6EC80905FA087BE22435E9254DD7382B67F626CE902A6500",
+    "original_line_count": 287,
+    "current_line_count": 289,
+    "hunks": [
+      {
+        "kind": "insert",
+        "original_start": 16,
+        "original_end": 15,
+        "current_start": 16,
+        "current_end": 16
+      },
+      {
+        "kind": "delete",
+        "original_start": 94,
+        "original_end": 94,
+        "current_start": 95,
+        "current_end": 94
+      },
+      {
+        "kind": "replace",
+        "original_start": 122,
+        "original_end": 122,
+        "current_start": 122,
+        "current_end": 122
+      },
+      {
+        "kind": "replace",
+        "original_start": 129,
+        "original_end": 129,
+        "current_start": 129,
+        "current_end": 131
+      }
+    ]
+  }
+]

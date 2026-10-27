@@ -1,0 +1,13 @@
+{
+  "source_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
+  "shard": 1,
+  "files": 1182,
+  "status": {
+    "待核验": 1121,
+    "部分复通": 48,
+    "整体排除": 13
+  },
+  "identity_mismatches": [],
+  "diff_sources": 48,
+  "classification_limitation": "Most rows need per-package connection and behavioral evidence; guest non-link status does not imply guest capability is restored."
+}
