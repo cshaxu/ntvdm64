@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-228 partial (205 existing source-difference rows, two live uncommitted
+230 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records), 2,256 excluded
+records and two partially verified quick-event source/declaration rows), 2,257 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,148 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,145 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -93,7 +93,7 @@ this does not identify or validate the deployed guest binary.
 A separate pending relevance census for the external rasprint tree is in
 `external-rasprint-boundary.md`; it does not bulk-exclude driver resources.
 
-All 205 current partial paths have a reproducible source-text retention
+The 205 baseline source-difference paths have a reproducible source-text retention
 metric in `partial-code-retention.csv`; its limitations are in
 `partial-code-retention.md`. It is not a functional completeness percentage.
 
@@ -158,3 +158,9 @@ The [108 support-source roles](wow16-support-source-role-review.md) retain
 WIN87EM target conditions and distinguish DDEML native tests. The same
 record indexes 454 pending native-owner proposals without claiming their
 functional closure or changing those statuses.
+
+The [quick-event owner checkpoint](quick-event-owner-review.md) establishes
+the original NT provider selection and tests the actual cached queue object
+under controlled host boundaries. It partially verifies two files and
+excludes one generic alternative, without claiming full device/guest or
+published-image acceptance.

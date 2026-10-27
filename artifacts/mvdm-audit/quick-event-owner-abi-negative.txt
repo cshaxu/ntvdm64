@@ -1,0 +1,2 @@
+qevnt_object_contract_fixture.c
+O:\repos.hobby\ntvdm64\tests\mvdm-host\qevnt_object_contract_fixture.c(13): error C2118: negative subscript

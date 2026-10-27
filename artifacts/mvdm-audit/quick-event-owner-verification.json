@@ -1,0 +1,14 @@
+{
+  "result": "pass",
+  "base": "308d2e0b7",
+  "counts": {
+    "pending": 2145,
+    "excluded": 2257,
+    "partial": 230,
+    "full": 52
+  },
+  "disposition_changes": 3,
+  "fixture_checks": 37,
+  "wrong_width_abi_rejected": true,
+  "scope": "Actual cached object under controlled host boundaries; not guest/device clock, full provider or published-image acceptance"
+}
