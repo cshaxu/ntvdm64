@@ -62,13 +62,13 @@ the existing grouping.
 
 ## SoftPC overwrite owner needs fresh trace
 
-The prior S1 unselected-source disposition describes an ntstubs.c
-`sas_overwrite_memory` leaf. Current worker map instead attributes
-`_sas_overwrite_memory` to `original-softpc-cvidc:accessfn.obj` and
-`_c_sas_overwrite_memory` to `original-ccpu386:ccpusas4.obj`; it does not
-by itself show extraction of the ntstubs.c wrapper. Compare actual callers,
-semantics and conditional selections before deciding equivalence or
-exclusion. This is an audit mismatch, not an asserted runtime defect.
+The S1 unselected-source disposition describes an ntstubs.c wrapper, but the
+r10 map and selected source identify `accessfn.c` as the wrapper, forwarding
+through the C-VID SAS vector to the same original CCPU no-cache-invalidation
+leaf. See `shard-0/sas-overwrite-provider-audit.md`. DIV-092's stale direct-call
+attribution was corrected; DIV-189 records the vector binding. Early calls,
+individual runtime callers and guest behavior remain unverified. This is an
+audit mismatch, not an asserted runtime defect.
 
 ## DDEML original provider boundary
 

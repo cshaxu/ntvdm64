@@ -201,6 +201,22 @@ ignored event-thread join failure as a conditional risk and sets finite
 actual-body and real-worker verification conditions before deletion or final
 retention. No runtime or guest change, new fixture or new execution occurred.
 
-Current `file-audit.csv` SHA-256 `FFDF74A6471FBF501B110D6F7D21B1CFA944C3583BAE4A113FE7E355B75F4B75`.
+At the DIV-147 checkpoint, `file-audit.csv` SHA-256 was `FFDF74A6471FBF501B110D6F7D21B1CFA944C3583BAE4A113FE7E355B75F4B75`.
 Current `selected-diff-register-audit.csv` SHA-256 `67B7FE6EE027EB6D220B7430B3C99EFD5F2879D9509B00489096D131E9895A8A`.
 Current `owner-review.csv` SHA-256 `46FA0A8B496CE6635BA51E5D95035602C3E06F9CD5F12B9BA7A0A0900F8388C5`.
+
+
+## Standalone tool ownership and Console code-page boundary
+
+`standalone-tool-chain-audit.md` details the original separate GRAFTABL,
+PIFEDIT and WIN launch tools and the limits of current replacements. In
+particular, the GRAFTABL output-code-page transfer across NTVWM's separate
+Console to the NTCON authority is a source-level candidate, not a reproduced
+failure; its safe verification and source-owned boundary are specified.
+Original PIFEDIT's interactive behavior is not assumed equivalent to the
+separate PIF.EXE format utility, and the current addon/installed PIF hashes
+require a deployment-policy check before any conclusion. All three paths
+remain pending; no tool was compiled or run.
+
+- Current `file-audit.csv` SHA-256 `C67BC355D130D82DF4BA797CE24B79203490C7B26733A5AD7FABAD0DFF1FCD98`.
+- Current `unselected-source-review.csv` SHA-256 `452727220AFBAEA503DC27E80294E5B335EF8C005A6F6DECF59734AE5F33F3E7`.

@@ -1,0 +1,134 @@
+{
+  "dll": "src/mvdm/wow16/ddeml/debug/DDEML.DLL",
+  "dll_sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+  "map": "src/mvdm/wow16/ddeml/debug/ddeml.map",
+  "map_sha256": "2939F61A55A1A8784AF96E515AA3B77F24622D948855AE61F019952026B7BE8B",
+  "comparison": [
+    {
+      "name": "DDEINITIALIZE",
+      "ordinal": 2,
+      "ne_entry": [
+        2,
+        16
+      ],
+      "map_matches": [
+        {
+          "line": 60,
+          "segment": 2,
+          "offset": 16
+        },
+        {
+          "line": 145,
+          "segment": 2,
+          "offset": 16
+        },
+        {
+          "line": 465,
+          "segment": 2,
+          "offset": 16
+        }
+      ]
+    },
+    {
+      "name": "DDEUNINITIALIZE",
+      "ordinal": 3,
+      "ne_entry": [
+        2,
+        1411
+      ],
+      "map_matches": [
+        {
+          "line": 72,
+          "segment": 2,
+          "offset": 1411
+        },
+        {
+          "line": 157,
+          "segment": 2,
+          "offset": 1411
+        },
+        {
+          "line": 469,
+          "segment": 2,
+          "offset": 1411
+        }
+      ]
+    },
+    {
+      "name": "DDECLIENTTRANSACTION",
+      "ordinal": 11,
+      "ne_entry": [
+        2,
+        8760
+      ],
+      "map_matches": [
+        {
+          "line": 47,
+          "segment": 2,
+          "offset": 8760
+        },
+        {
+          "line": 132,
+          "segment": 2,
+          "offset": 8760
+        },
+        {
+          "line": 479,
+          "segment": 2,
+          "offset": 8760
+        }
+      ]
+    },
+    {
+      "name": "DDEPOSTHOOKPROC",
+      "ordinal": 35,
+      "ne_entry": [
+        2,
+        21941
+      ],
+      "map_matches": [
+        {
+          "line": 64,
+          "segment": 2,
+          "offset": 21941
+        },
+        {
+          "line": 149,
+          "segment": 2,
+          "offset": 21941
+        },
+        {
+          "line": 536,
+          "segment": 2,
+          "offset": 21941
+        }
+      ]
+    },
+    {
+      "name": "DDESENDHOOKPROC",
+      "ordinal": 34,
+      "ne_entry": [
+        2,
+        21688
+      ],
+      "map_matches": [
+        {
+          "line": 69,
+          "segment": 2,
+          "offset": 21688
+        },
+        {
+          "line": 154,
+          "segment": 2,
+          "offset": 21688
+        },
+        {
+          "line": 535,
+          "segment": 2,
+          "offset": 21688
+        }
+      ]
+    }
+  ],
+  "scope": "Matching five export segment offsets establishes structural consistency, not binary-to-source proof or runtime path execution."
+}

@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "DF999ACFC53C89D30D5726868A1CD5D00D2160D92A953BB01CEDECB815064CF6",
+  "output_sha256": "AD4C3049651893304187C2324021E04BE67EFF2C68670B2E6A3D74F6B975708C",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,027 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -128,5 +128,21 @@
     "evidence": "ddeml-init-evidence.json",
     "sha256": "848F042A90AB107795B280D639D488371D4809FEB7BF1DFE2214A794A9CF9027",
     "limits": "Single task client-only reserved-error, init/reinit/uninit; no callback counting, transactions, task loss or original source/binary identity proof."
+  },
+  "ddeml_guest_owner_review": {
+    "rows": [
+      "wow16/ddeml/dmgdde.c",
+      "wow16/ddeml/dmgmon.c",
+      "wow16/ddeml/register.c",
+      "wow16/ddeml/heapwach.c",
+      "wow16/ddeml/heapwach.h",
+      "wow16/ddeml/ddemlp.h",
+      "wow16/ddeml/debug/ddeml.obj",
+      "wow16/ddeml/debug/dmgwndp.obj",
+      "wow16/ddeml/debug/dmgutil.obj"
+    ],
+    "owner_review_sha256": "3BFE21AA83394D8D40E2AE3C8A0BB133987C931E93316BCDBDD24D0418F25016",
+    "map_correspondence_sha256": "118A3EE9A9EEAE374E3C42F5AE64F9802A7AF045ED1DB840EA8E75C9EB548B9F",
+    "limits": "Five NE/map export locations match; exact object/source-to-binary and transaction, monitor, callback and task-loss behavior not proven."
   }
 }

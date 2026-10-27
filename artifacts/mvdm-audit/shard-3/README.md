@@ -181,3 +181,9 @@ individual dialog/resource behavior still needs separately bounded witnesses.
 tails from original initializer through the selected product object, separates
 the absence of direct textual calls from proof of unreachability, and records
 the minimal recovery decision without changing product code.
+
+[ForceDOS original-owner audit](forcedos-original-owner-audit.md) traces the
+standalone NT4 utility and its original creation-flag and descendant-DOS
+semantics. The current absence of an observed flag producer is a recovery
+candidate, not a dynamic failure or proof that the separate PIF path is
+equivalent. All four shard ForceDOS inputs remain pending.
