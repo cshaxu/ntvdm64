@@ -17,7 +17,7 @@ if ((Get-FileHash "$cache/ntvdm.exe").Hash -ne (Get-FileHash $baselinePath).Hash
     throw 'Formal cache differs from selected package'
 }
 $graph=Get-Content "$cache/build.ninja" -Raw
-$match=[regex]::Match($graph,'(?m)^build ntvdm\.exe[^\r\n]*: worker_link (?<inputs>[^\r\n]+)')
+$match=[regex]::Match($graph,'(?m)^build ntvdm\.exe[^\r\n]*: worker_link (?<inputs>[^\r\n|]+)')
 if (!$match.Success) { throw 'Missing formal NTVDM link edge' }
 $inputs=@($match.Groups['inputs'].Value.Trim() -split '\s+' | ForEach-Object {
     $path=Join-Path $cache $_

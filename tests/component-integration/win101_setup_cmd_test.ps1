@@ -54,6 +54,8 @@ function Invoke-Setup([string]$Media, [string]$Install, [int]$ExitCode) {
     $body = @"
 @echo off
 if not exist "%~1" exit /b 91
+if not exist "%~dp1CONFIG.NT" exit /b 93
+findstr /r /i /c:"^[ ]*dosonly[ ]*$" "%~dp1CONFIG.NT" >nul && exit /b 92
 if not "%WIN101_TEST_EXIT%"=="0" exit /b %WIN101_TEST_EXIT%
 mkdir "%WIN101_TEST_INSTALL%" >nul 2>nul
 for %%F in (WIN.COM WIN100.BIN WIN100.OVL SETUP.EXE) do type nul > "%WIN101_TEST_INSTALL%\%%F"
@@ -137,12 +139,21 @@ foreach ($name in @('WIN101.PIF','CONFIG.NT','AUTOEXEC.NT','WIN.CMD','SETVER.EXE
 foreach ($name in @('WIN.PIF','CONFIG.NT','AUTOEXEC.NT')) {
     if (!(Test-Path -LiteralPath (Join-Path $install $name) -PathType Leaf)) { throw "installed root missing $name" }
 }
+foreach ($name in @('PATCH\CONFIG.NT','CONFIG.NT')) {
+    $config = Get-Content -LiteralPath (Join-Path $install $name) -Raw
+    if ($config -match '(?im)^\s*dosonly\s*$') { throw "Installed profile unexpectedly enables DOSONLY: $name" }
+    if ($config -notmatch '(?im)^\s*device=.*SETVER\.EXE\s*$') { throw "Installed profile lost SETVER: $name" }
+}
 $installedPif=& (Join-Path $release 'PIF.EXE') show (Join-Path $install 'PATCH\WIN101.PIF')
 if ($LASTEXITCODE -ne 0 -or $installedPif -notcontains 'STANDARD.CLOSE_ON_EXIT=YES') {
     throw 'installed Windows launch PIF must be valid and CloseOnExit'
 }
 if ((Get-Content -LiteralPath (Join-Path $install 'PATCH\WIN.CMD') -Raw) -notmatch '(?im)^call run16 ') {
     throw 'installed WIN.CMD does not resolve run16 through PATH'
+}
+$winCmd = Get-Content -LiteralPath (Join-Path $install 'PATCH\WIN.CMD') -Raw
+if ($winCmd -notmatch '(?im)^set "TEMP=%~dp0TEMP"' -or $winCmd -match '(?i)SystemRoot%\\Temp') {
+    throw 'Installed launcher must use its own TEMP directory, not the host Windows directory'
 }
 [IO.File]::WriteAllText((Join-Path $patch 'KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
 $unapplyOutput = Invoke-Unapply $media

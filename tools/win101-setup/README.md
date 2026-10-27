@@ -17,6 +17,12 @@ CloseOnExit, so each separate PIF session returns to its calling script when
 the target terminates.
 After Setup, enter its actual installed directory to generate the
 self-contained installed `PATCH\WIN.CMD` profile.
+Both the transient Setup profile and installed profile leave DOSONLY disabled;
+both retain the dedicated SETVER device. The original interactive Setup and
+installed Windows must be tested on the selected runtime before deployment.
+Their temporary directory is under the corresponding `PATCH\TEMP`, rather than
+the host Windows installation. Setup removes its temporary directory only when
+it is empty; the installed launcher creates its own directory as needed.
 
 Repeat application accepts only the already-installed driver plus its retained
 backup; it refuses a conflicting backup/current pair. No PowerShell script,

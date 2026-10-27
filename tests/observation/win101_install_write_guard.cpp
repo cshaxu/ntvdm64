@@ -10,7 +10,7 @@ typedef NTSTATUS (NTAPI *OpenFn)(PHANDLE,ACCESS_MASK,POBJECT_ATTRIBUTES,PIO_STAT
 typedef NTSTATUS (NTAPI *WriteFn)(HANDLE,HANDLE,PVOID,PVOID,PIO_STATUS_BLOCK,PVOID,ULONG,PLARGE_INTEGER,PULONG);
 typedef NTSTATUS (NTAPI *SetFn)(HANDLE,PIO_STATUS_BLOCK,PVOID,ULONG,FILE_INFORMATION_CLASS);
 static CreateFn real_create; static OpenFn real_open; static WriteFn real_write; static SetFn real_set;
-static std::wstring root, install_target;
+static std::wstring root, install_target, stage_target, media_target;
 static HANDLE log_handle=INVALID_HANDLE_VALUE;
 static __declspec(thread) bool nested;
 static std::wstring handle_name(HANDLE h) {
@@ -36,7 +36,13 @@ static bool owned(const std::wstring& p) {
     bool destination=!install_target.empty() && p.size()>=install_target.size() &&
         !_wcsnicmp(p.c_str(),install_target.c_str(),install_target.size()) &&
         (p.size()==install_target.size() || p[install_target.size()]==L'\\');
-    return staging || destination;
+    bool stage=!stage_target.empty() && p.size()>=stage_target.size() &&
+        !_wcsnicmp(p.c_str(),stage_target.c_str(),stage_target.size()) &&
+        (p.size()==stage_target.size() || p[stage_target.size()]==L'\\');
+    bool media=!media_target.empty() && p.size()>=media_target.size() &&
+        !_wcsnicmp(p.c_str(),media_target.c_str(),media_target.size()) &&
+        (p.size()==media_target.size() || p[media_target.size()]==L'\\');
+    return staging || destination || stage || media;
 }
 static bool device(const std::wstring& p) {
     return prefix(p,L"\\Device\\NamedPipe\\") || prefix(p,L"\\Device\\ConDrv\\") ||
@@ -121,7 +127,21 @@ static void __cdecl initialize_guard() {
         if(n>=32768)ExitProcess(127);
         install_target=normalize(std::wstring(env,n));
         // Owner's S3 installation destination only, not a generic write grant.
-        if(_wcsicmp(install_target.c_str(),normalize(L"O:\\win101").c_str()))ExitProcess(127);
+        if(_wcsicmp(install_target.c_str(),normalize(L"O:\\win101").c_str()) &&
+           _wcsicmp(install_target.c_str(),normalize(L"O:\\win101t").c_str()))ExitProcess(127);
+    }
+    n=GetEnvironmentVariableW(L"WIN101_GUARD_STAGE",env,32768);
+    if(n) {
+        if(n>=32768)ExitProcess(127);
+        stage_target=normalize(std::wstring(env,n));
+        if(!prefix(stage_target,L"O:\\tmp\\n") || stage_target.size()!=11 ||
+           GetFileAttributesW((stage_target+L"\\.ntvdm64-test-stage.json").c_str())==INVALID_FILE_ATTRIBUTES)ExitProcess(127);
+    }
+    n=GetEnvironmentVariableW(L"WIN101_GUARD_MEDIA",env,32768);
+    if(n) {
+        if(n>=32768)ExitProcess(127);
+        media_target=normalize(std::wstring(env,n));
+        if(_wcsicmp(media_target.c_str(),normalize(L"O:\\tmp\\w101m").c_str()))ExitProcess(127);
     }
     HMODULE nt=GetModuleHandleW(L"ntdll.dll");
     real_create=(CreateFn)GetProcAddress(nt,"NtCreateFile"); real_open=(OpenFn)GetProcAddress(nt,"NtOpenFile");

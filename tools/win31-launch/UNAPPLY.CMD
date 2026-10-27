@@ -18,15 +18,22 @@ for %%F in (HASH.EXE) do if not exist "%RELEASE%\%%F" (
   set "RESULT=3"
   goto done
 )
-call :verify_binary "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mismatch
+call :verify_binary "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A || goto mismatch
 call :verify_binary "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mismatch
+set "PATCH=%TARGET%\PATCH"
+if exist "%PATCH%\SYSTEM.INI.BAK" call :verify_system_config || goto mismatch
+if exist "%PATCH%\SYSTEM.INI.SHA256" if not exist "%PATCH%\SYSTEM.INI.BAK" goto mismatch
 echo Restore: KRNL386.EXE =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\KRNL386.EXE.BAK" "%TARGET%\SYSTEM\KRNL386.EXE" >nul || goto mutation_failure
 echo Restore: WIN386.EXE =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\WIN386.EXE.BAK" "%TARGET%\SYSTEM\WIN386.EXE" >nul || goto mutation_failure
 echo Restore: MOUSE.DRV =^> %TARGET%\SYSTEM
 move /y "%TARGET%\SYSTEM\MOUSE.DRV.BAK" "%TARGET%\SYSTEM\MOUSE.DRV" >nul || goto mutation_failure
-set "PATCH=%TARGET%\PATCH"
+if exist "%PATCH%\SYSTEM.INI.BAK" (
+  echo Restore: SYSTEM.INI =^> %TARGET%
+  move /y "%PATCH%\SYSTEM.INI.BAK" "%TARGET%\SYSTEM.INI" >nul || goto mutation_failure
+  del /q "%PATCH%\SYSTEM.INI.SHA256" 2>nul
+)
 if exist "%PATCH%\" (
   rem These six names are created only by APPLY.CMD. Preserve all other owner content.
   for %%F in (CONFIG.NT AUTOEXEC.NT WINSTD.PIF WIN386.PIF WINSTD.CMD WIN386.CMD) do if exist "%PATCH%\%%F" (
@@ -44,6 +51,15 @@ for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1"') do set "CURRENT=%%H"
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
 if /I not "%CURRENT%"=="%CANDIDATE%" exit /b 1
 if /I not "%BACKUP%"=="%RETAIL%" exit /b 1
+exit /b 0
+
+:verify_system_config
+if not exist "%PATCH%\SYSTEM.INI.SHA256" exit /b 1
+set "CONFIG_CURRENT=" & set "CONFIG_EXPECTED="
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM.INI"') do set "CONFIG_CURRENT=%%H"
+set /p "CONFIG_EXPECTED=" < "%PATCH%\SYSTEM.INI.SHA256"
+if not defined CONFIG_CURRENT exit /b 1
+if /I not "%CONFIG_CURRENT%"=="%CONFIG_EXPECTED%" exit /b 1
 exit /b 0
 
 :mismatch

@@ -4,6 +4,9 @@ set "PATCH=%~dp0"
 set "PATCH=%PATCH:~0,-1%"
 for %%I in ("%PATCH%\..") do set "MEDIA=%%~fI"
 set "RESULT=1"
+set "TEMP=%PATCH%\TEMP"
+set "TMP=%TEMP%"
+if not exist "%TEMP%\" mkdir "%TEMP%" || goto work_failure
 
 for %%F in (PIF.EXE HASH.EXE SETVER.EXE) do if not exist "%PATCH%\%%F" goto missing_tool
 if not defined RUN16 (
@@ -27,13 +30,12 @@ for %%F in (SETUP.EXE SETUP.LBL KERNEL.EXE USER.EXE GDI.EXE DISK1 DISK2 DISK3 DI
   echo dos=high, umb
   echo device=%%SystemRoot%%\system32\himem.sys
   echo files=128
-  echo dosonly
   echo device=%PATCH%\SETVER.EXE
 ) || goto work_failure
 >"%PATCH%\AUTOEXEC.NT" (
   echo @echo off
-  echo SET TEMP=%%SystemRoot%%\Temp
-  echo SET TMP=%%SystemRoot%%\Temp
+  echo SET TEMP=%PATCH%\TEMP
+  echo SET TMP=%PATCH%\TEMP
   echo SET PATH=%MEDIA%;%%SystemRoot%%\system32
 ) || goto work_failure
 "%PATCH%\PIF.EXE" create "%PATCH%\SETUP.PIF" --title "Windows 1.01 Setup" --program "%MEDIA%\SETUP.EXE" --directory "%MEDIA%" --arguments "" --config "%PATCH%\CONFIG.NT" --autoexec "%PATCH%\AUTOEXEC.NT" --close-on-exit || goto work_failure
@@ -62,13 +64,12 @@ copy /y "%PATCH%\SETVER.EXE" "%ROOT%\PATCH\SETVER.EXE" >nul || exit /b 1
   echo dos=high, umb
   echo device=%%SystemRoot%%\system32\himem.sys
   echo files=128
-  echo dosonly
   echo device=%ROOT%\PATCH\SETVER.EXE
 ) || exit /b 1
 >"%ROOT%\PATCH\AUTOEXEC.NT" (
   echo @echo off
-  echo SET TEMP=%%SystemRoot%%\Temp
-  echo SET TMP=%%SystemRoot%%\Temp
+  echo SET TEMP=%ROOT%\PATCH\TEMP
+  echo SET TMP=%ROOT%\PATCH\TEMP
   echo SET PATH=%ROOT%;%%SystemRoot%%\system32
 ) || exit /b 1
 "%PATCH%\PIF.EXE" create "%ROOT%\PATCH\WIN101.PIF" --title "Windows 1.01" --program "%ROOT%\WIN.COM" --directory "%ROOT%" --arguments "" --config "%ROOT%\PATCH\CONFIG.NT" --autoexec "%ROOT%\PATCH\AUTOEXEC.NT" --close-on-exit || exit /b 1
@@ -81,8 +82,9 @@ if exist "%ROOT%\SETUP.EXE" "%PATCH%\PIF.EXE" create "%ROOT%\SETUP.PIF" --title 
   echo setlocal EnableExtensions DisableDelayedExpansion
   echo where /q run16
   echo if errorlevel 1 ^(echo Cannot find run16 in PATH.^& exit /b 2^)
-  echo set "TEMP=%%SystemRoot%%\Temp"
-  echo set "TMP=%%SystemRoot%%\Temp"
+  echo set "TEMP=%%~dp0TEMP"
+  echo set "TMP=%%TEMP%%"
+  echo if not exist "%%TEMP%%\" mkdir "%%TEMP%%" ^|^| exit /b 4
   echo pushd "%%~dp0.." ^|^| exit /b 3
   echo call run16 "%%~dp0WIN101.PIF"
   echo set "WIN101_RESULT=%%errorlevel%%"
@@ -103,6 +105,7 @@ set "RESULT=1"
 
 :cleanup
 del /q "%PATCH%\SETUP.PIF" "%PATCH%\CONFIG.NT" "%PATCH%\AUTOEXEC.NT" 2>nul
+rmdir "%PATCH%\TEMP" 2>nul
 echo Setup exit code: %RESULT%
 pause
 exit /b %RESULT%

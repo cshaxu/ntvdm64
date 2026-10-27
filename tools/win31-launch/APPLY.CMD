@@ -25,7 +25,8 @@ if not exist "%PATCH%\TEMP\" (
   echo New: TEMP =^> %PATCH%
   mkdir "%PATCH%\TEMP" || (echo Could not create "%PATCH%\TEMP".& set "RESULT=4"& goto done)
 )
-call :backup_retail "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181 || goto mutation_failure
+call :install_system_config || goto mutation_failure
+call :backup_retail "%TARGET%\SYSTEM\KRNL386.EXE" FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980 75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A || goto mutation_failure
 call :backup_retail "%TARGET%\SYSTEM\WIN386.EXE" 6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5 C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8 || goto mutation_failure
 "%~dp0PATCH386.EXE" --apply --krnl "%TARGET%\SYSTEM\KRNL386.EXE" --win386 "%TARGET%\SYSTEM\WIN386.EXE" || goto mutation_failure
 call :install_mouse || goto mutation_failure
@@ -34,7 +35,6 @@ call :announce_profile "%PATCH%\CONFIG.NT"
   echo dos=high, umb
   echo device=%%SystemRoot%%\system32\himem.sys
   echo files=128
-  echo dosonly
 )
 call :announce_profile "%PATCH%\AUTOEXEC.NT"
 >"%PATCH%\AUTOEXEC.NT" (
@@ -81,8 +81,7 @@ set "RESULT=0"
 goto done
 
 :backup_retail
-set "CURRENT=" & set "BACKUP=" & set "LEGACY=" & set "RETAIL=%~2" & set "CANDIDATE=%~3"
-for %%I in ("%~1") do set "LEGACY=%PATCH%\%%~nI.ORIG"
+set "CURRENT=" & set "BACKUP=" & set "RETAIL=%~2" & set "CANDIDATE=%~3"
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1"') do set "CURRENT=%%H"
 if not defined CURRENT exit /b 1
 if /I "%CURRENT%"=="%RETAIL%" (
@@ -91,25 +90,12 @@ if /I "%CURRENT%"=="%RETAIL%" (
     call :require_retail_backup "%~1.BAK" || exit /b 1
     exit /b 0
   )
-  if exist "%LEGACY%" (
-    for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
-    call :require_retail_backup "%LEGACY%" || exit /b 1
-    echo Replace: %~nx1 =^> %TARGET%\SYSTEM
-    move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
-    exit /b 0
-  )
   echo Replace: %~nx1 =^> %TARGET%\SYSTEM
   move /y "%~1" "%~1.BAK" >nul || exit /b 1
   copy /y "%~1.BAK" "%~1" >nul || exit /b 1
   exit /b 0
 )
 if /I not "%CURRENT%"=="%CANDIDATE%" (echo Unsupported installed binary: %~1& exit /b 1)
-if not exist "%~1.BAK" if exist "%LEGACY%" (
-  for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%LEGACY%"') do set "BACKUP=%%H"
-  call :require_retail_backup "%LEGACY%" || exit /b 1
-  echo Replace: %~nx1 =^> %TARGET%\SYSTEM
-  move /y "%LEGACY%" "%~1.BAK" >nul || exit /b 1
-)
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%~1.BAK"') do set "BACKUP=%%H"
 if /I not "%BACKUP%"=="%RETAIL%" (echo Patched binary lacks retail recovery copy: %~1.BAK& exit /b 1)
 exit /b 0
@@ -145,6 +131,49 @@ if /I not "%CURRENT%"=="%RELEASE_HASH%" (
   echo Refusing to overwrite an unrecognised installed mouse driver.
   exit /b 1
 )
+exit /b 0
+
+:install_system_config
+set "CONFIG_BACKUP=%PATCH%\SYSTEM.INI.BAK"
+set "CONFIG_HASH=%PATCH%\SYSTEM.INI.SHA256"
+set "CONFIG_WORK=%PATCH%\SYSTEM.INI.TMP"
+set "CONFIG_NEW="
+if exist "%CONFIG_WORK%" (echo Existing SYSTEM.INI temporary file blocks preparation.& exit /b 1)
+if exist "%CONFIG_BACKUP%" (
+  if not exist "%CONFIG_HASH%" (echo SYSTEM.INI recovery record is incomplete.& exit /b 1)
+  call :verify_system_config || exit /b 1
+) else (
+  if exist "%CONFIG_HASH%" (echo SYSTEM.INI recovery record is incomplete.& exit /b 1)
+  copy /y "%TARGET%\SYSTEM.INI" "%CONFIG_BACKUP%" >nul || exit /b 1
+  set "CONFIG_NEW=1"
+)
+copy /y "%TARGET%\SYSTEM.INI" "%CONFIG_WORK%" >nul || (if defined CONFIG_NEW del /q "%CONFIG_BACKUP%" 2>nul & exit /b 1)
+"%~dp0PATCH386.EXE" --config "%TARGET%\SYSTEM.INI"
+if errorlevel 1 (
+  call :rollback_system_config
+  exit /b 1
+)
+set "CONFIG_CURRENT="
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM.INI"') do set "CONFIG_CURRENT=%%H"
+if not defined CONFIG_CURRENT (call :rollback_system_config & exit /b 1)
+>"%CONFIG_HASH%" echo %CONFIG_CURRENT%
+if errorlevel 1 (call :rollback_system_config & exit /b 1)
+del /q "%CONFIG_WORK%" 2>nul
+echo Configure: SYSTEM.INI =^> %TARGET%
+exit /b 0
+
+:rollback_system_config
+copy /y "%CONFIG_WORK%" "%TARGET%\SYSTEM.INI" >nul || exit /b 1
+del /q "%CONFIG_WORK%" 2>nul
+if defined CONFIG_NEW del /q "%CONFIG_BACKUP%" "%CONFIG_HASH%" 2>nul
+exit /b 0
+
+:verify_system_config
+set "CONFIG_CURRENT=" & set "CONFIG_EXPECTED="
+for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%TARGET%\SYSTEM.INI"') do set "CONFIG_CURRENT=%%H"
+set /p "CONFIG_EXPECTED=" < "%CONFIG_HASH%"
+if not defined CONFIG_CURRENT exit /b 1
+if /I not "%CONFIG_CURRENT%"=="%CONFIG_EXPECTED%" (echo SYSTEM.INI changed since preparation.& exit /b 1)
 exit /b 0
 
 :announce_profile

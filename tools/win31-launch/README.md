@@ -25,13 +25,24 @@ The command files resolve `run16` through `PATH`; they contain no fixed drive,
 repository, package, or media path.  There is deliberately no generic
 `WIN.CMD`, `START.CMD`, or `WIN31.PIF` alias.
 
-`PATCH386.EXE` has one purpose: it verifies and transforms the two already
-approved `KRNL386.EXE`/`WIN386.EXE` identities.  It neither creates backups
-nor touches drivers, PIFs, configuration, or launch commands.  `APPLY.CMD`
-owns those ordinary file operations.  The corresponding source belongs in
+`PATCH386.EXE` verifies and transforms the supported
+`KRNL386.EXE`/`WIN386.EXE` identities.  The kernel adaptation also clears its
+MZ `e_lfanew` field so DOS-only-off launches use its DOS startup stub. This
+changes how host image-inspection tools classify the kernel. Both generated
+profiles use DOSONLY=0. `PATCH386.EXE` also provides the bounded SYSTEM.INI
+transformation described below; `APPLY.CMD` owns backups, driver replacement,
+profiles, and launch commands. The corresponding source belongs in
 `src/addon/win31-launch/`.  Build-only candidate derivation may use
 build-owned files, but neither templates nor PowerShell sources are installed
 below `PATCH`.
+
+The tool also prepares the installed `SYSTEM.INI` `[386Enh]` section: it
+removes permanent-swap settings, disables paging and direct disk access, and
+disables COM1–COM4 IRQs for the NTVDM host. Other INI entries are preserved.
+`PATCH\SYSTEM.INI.BAK` holds the prior configuration and
+`PATCH\SYSTEM.INI.SHA256` records the prepared file's identity. Repeat apply
+and unapply refuse to overwrite later edits to `SYSTEM.INI`; unapply restores
+the saved configuration when its current identity still matches.
 
 Open `APPLY.CMD`, enter the installed root once when prompted, and leave the
 window open to read the final exit code.  The command file itself has no
@@ -51,8 +62,7 @@ binary identities and requires the adjacent `.BAK` files before moving each
 backup back into place. Mouse restoration does not depend on the current or
 released driver version. It deletes only the six
 tool-owned launch-profile files under `PATCH`; any other `PATCH` content is
-preserved. Older compatible `PATCH\*.ORIG` recovery copies are migrated to
-their adjacent `.BAK` locations by a successful later `APPLY.CMD`.
+preserved.
 
 `/3` means Windows 3.1's 386 enhanced mode.  The tool can prepare that profile
 and its approved candidate image; it does not claim that enhanced mode is
