@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "80C7CCCAB1D260A524313D08347C754B3CCDC401D8CBE485090DD14F8B6D7667",
+  "output_sha256": "4CDC8B0E1D41F14C2BAEB7ECB44062CB63883D7699BAB196C5DA92FDB9AA6C1F",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -165,5 +165,6 @@
   "wow_kernel_profile_module": "wow-kernel-profile-module-review.md; DIV-297 registration differs from actual session shadow; validation pending",
   "wow_user_init_domain": "wow-user-init-domain-review.md; original USER final init and session domain, lifecycle runtime evidence bounded",
   "wow_resource_template_lifecycle": "wow-resource-template-lifecycle-review.md; identical source remains pending, caller failure candidate not reproduced",
-  "wow_comm_port_lifecycle": "wow-comm-port-lifecycle-review.md; DOS nt_com fixture does not prove WOW USER PortTab behavior"
+  "wow_comm_port_lifecycle": "wow-comm-port-lifecycle-review.md; DOS nt_com fixture does not prove WOW USER PortTab behavior",
+  "wow_scrollbar_message": "wow-scrollbar-message-review.md; bidirectional conversion and call-local lifetime reviewed, real branch witness pending"
 }

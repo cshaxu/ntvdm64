@@ -68,3 +68,6 @@ findings by approved stage while keeping unresolved inventory in S10 scope.
 
 The [additional historical-build cohort](shard-0/historical-objects-reconciliation.md)
 excludes 75 verified retained output files as current product inputs only.
+
+The [kernel VDM boundary trace](external-kernel-vdm-boundary.md) separately
+identifies the directory-reset service and its selected DEM fallback.

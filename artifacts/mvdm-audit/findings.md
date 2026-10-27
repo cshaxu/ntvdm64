@@ -263,3 +263,13 @@ through to the host profile API. DIV-297 previously described the selected
 root file as the direct API input; its registry now reflects the actual path.
 Write persistence, host mapping on failure, and worker teardown remain
 unverified, so this is a documented contract gap, not a proven runtime bug.
+
+## External kernel VDM directory reset boundary
+
+[Kernel VDM source and owner trace](external-kernel-vdm-boundary.md) separates
+the unselected privileged executor from `VdmQueryDirectoryFile`. The current
+DEM caller retains its filename-based fallback when the typed query service
+is unavailable; source search finds a test binding but no product binding.
+Whether the fast branch is reached and whether fallback preserves each observable
+search result under mutation remain unproved. This is not a claim that normal
+DOS directory enumeration fails.
