@@ -1,0 +1,603 @@
+{
+  "candidates": 28,
+  "inputs": [
+    {
+      "relative_path": "wow16/user/makefile",
+      "sha256": "7BCA4F72F3CDDC7344EE3B6A09DDA1F72BC96D84364E36C064535DFD213D0CC4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\makefile"
+    },
+    {
+      "relative_path": "wow16/user/k/daytona/userk.lrf",
+      "sha256": "345B98775C61B83DEEADAF869459549E17371A1E0546E81F0996FDC65B59FFA0",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\user\\k\\daytona\\userk.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/gdi/makefile",
+      "sha256": "1868F7AD348A492ACDEF374C7B535B9AB0AB2BCFE894CB1C02232AA089B796F0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\makefile"
+    },
+    {
+      "relative_path": "wow16/gdi/gdi.lrf",
+      "sha256": "D1D2CFD26519BE43719FE668E90E51AF31790FC856C5BA9973741DD2575970B3",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\gdi.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/system/makefile",
+      "sha256": "5612B1329655BD6D171F4EBAF62BFAA0C3F4D9764CFEE6F1D9F54628BF6FD1BC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\system\\makefile"
+    },
+    {
+      "relative_path": "wow16/system/system.lrf",
+      "sha256": "CD6A2239FF01CAE1161B4BD685B1245CB915CB6E7551325911996800B0F989AF",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\system\\system.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/makefile",
+      "sha256": "14A637EF74E864245AED77EBC271F71D56CD4183622DD17E3D56FAEC4DC8077E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/comm.lrf",
+      "sha256": "AFA0B5F895D48BBA01C9D220E51136EA4FD5BA1241A9BBA13780A7A40F333C6D",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\comm\\comm.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/drivers/sound/makefile",
+      "sha256": "655D4DAB686593459CB54EF4305EB348CB3DC812B02B61A05A4DE049B392B340",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\sound\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/sound/sound.lrf",
+      "sha256": "52B82E03C0A64A596921CBBDF6F7F3C433CB463F9A476EE975C0AABA303F2CEF",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\sound\\sound.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/makefile",
+      "sha256": "54658EB605886A0F11EF8F3D351CF3E04DB0A63152413774CC5CC1637ACA4CF3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/keyboard.lrf",
+      "sha256": "ED6EF06EFBD98051437135F45529EB057246ABBECF10EAF6D8DD9A7230585A93",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\keyboard.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/drivers/mouse/makefile",
+      "sha256": "88400DF39F5F0B7D273F598A7DF3D6152F611A7819AC1434CEC983FB200E8D72",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\mouse\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/mouse/mouse.lrf",
+      "sha256": "D96E4CDBC836149595651E2A3EC235CE42E090148D955F2B8F854F35B25FA140",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\mouse.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/drivers/display/makefile",
+      "sha256": "C234E06726D09F113BCE364366B704446FB7EBE5E4C549E8F89CCBECBFA50E19",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\display\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/display/display.lrf",
+      "sha256": "B06BBBC02513965D7DE17ECD1A9389082E9EF81DD0F49790FC0871E10ECAB372",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\display\\display.lrf",
+      "provenance": "admitted supplemental historical guest input only"
+    },
+    {
+      "relative_path": "wow16/mmsystem/makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\makefile"
+    },
+    {
+      "relative_path": "wow16/user/user.asm",
+      "sha256": "97FB8148DAD9B570E2204F951686CE4DF8B517D85B377F48D043EAF4BFA29718",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user.asm"
+    },
+    {
+      "relative_path": "wow16/user/user1a.asm",
+      "sha256": "53A4B178118DFDA4E845694E316478C756503E7020FDEFBE536629613574A843",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user1a.asm"
+    },
+    {
+      "relative_path": "wow16/user/user2.asm",
+      "sha256": "F3A510E52D8C78103172A59C8BB5270012D94F415501F24CCA072ADC0A2467AB",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user2.asm"
+    },
+    {
+      "relative_path": "wow16/user/user2a.asm",
+      "sha256": "CEFD2BA18BCB5B92A8D26FA6DEFA8088F9F43A5FDDF6808CC9B8EA040473B150",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user2a.asm"
+    },
+    {
+      "relative_path": "wow16/user/user3.asm",
+      "sha256": "CBFD076A25CA01F2EEF452540D3D8AA6EF2794AE58255E1EDD08E6FA0EFA9871",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user3.asm"
+    },
+    {
+      "relative_path": "wow16/user/user3a.asm",
+      "sha256": "B50C83799C49E4A36A1D88ECAD6FC25EEF76B959D460A86770E15A6A52F22390",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user3a.asm"
+    },
+    {
+      "relative_path": "wow16/user/user4.asm",
+      "sha256": "34C30B0866BC7F0DCDA14833CF98DC14C726967EA68288CBF2DB1664F75BA0D7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user4.asm"
+    },
+    {
+      "relative_path": "wow16/user/winrect.asm",
+      "sha256": "0F4B8E6DB230E2B8384230792A0CDD3796C14559025A43CBB24CD370377819F5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winrect.asm"
+    },
+    {
+      "relative_path": "wow16/user/layer.asm",
+      "sha256": "699051E8AB661606BD62C1A772288976DAE2632B4EDE01E9C0763B68DB915942",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\layer.asm"
+    },
+    {
+      "relative_path": "wow16/user/msglayer.asm",
+      "sha256": "B3B156B8B1770EF9F9DF7E3E2F483D279B20BBCAD9FA337A5938E983E3EA0AEC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\msglayer.asm"
+    },
+    {
+      "relative_path": "wow16/user/init.c",
+      "sha256": "B5DB0214A5E50BA9972DE49B0B86718AF3E880DA69FB7E709EA57B49490ADD2D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\init.c"
+    },
+    {
+      "relative_path": "wow16/user/rmload.c",
+      "sha256": "8D96C263DB2C272ED5577667CC9C214543945EA210D278C5404F808E49B150E3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\rmload.c"
+    },
+    {
+      "relative_path": "wow16/user/wsprintf.c",
+      "sha256": "F58AFBD56AB824442609F098D2B7F8709E978A61A51A195DB874E28AEA2130E7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\wsprintf.c"
+    },
+    {
+      "relative_path": "wow16/user/wclass.asm",
+      "sha256": "B55D29A63D081E739140F3DCBA33BC328C2AAE1C8DA6313415833CFB877FE2F6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\wclass.asm"
+    },
+    {
+      "relative_path": "wow16/user/fastres.c",
+      "sha256": "64D7D2460CBED3DDAAAE69338515FC8C8D1881AB5E0E5C77486D46BFBD187B37",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\fastres.c"
+    },
+    {
+      "relative_path": "wow16/user/wowcomm.c",
+      "sha256": "08A2371890362F7DCFF4CD9D5E80A886EE9BF2C41A628CD57C4CD44F09FEE4F7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\wowcomm.c"
+    },
+    {
+      "relative_path": "wow16/user/usercli.asm",
+      "sha256": "4240D6F792E39C8DB65158E626BFE0F127FEE09351DA476CDF5A280E9AFDFC20",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\usercli.asm"
+    },
+    {
+      "relative_path": "wow16/user/wsphelp.asm",
+      "sha256": "76E5B4D5EF55A5A32F4AFD580DA604799136094C4E9DD26C60A9BE0B6B7F3B76",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\wsphelp.asm"
+    },
+    {
+      "relative_path": "wow16/user/net.c",
+      "sha256": "80D86BFDDF1E4F83CE2F45D4DA94872A721866A68F94E03208A811C3EAA20861",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\net.c"
+    },
+    {
+      "relative_path": "wow16/user/winnet.asm",
+      "sha256": "199A4A47A2B6B837443498FE008E23C1D800AF11413CDF14C3E7A4FC1A3FEDB1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winnet.asm"
+    },
+    {
+      "relative_path": "wow16/user/inuserds.c",
+      "sha256": "FC0F5AFBCF33F0A9B8754024F1E218B52998062D500C590A6B2E1F9CA41A54D1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\inuserds.c"
+    },
+    {
+      "relative_path": "wow16/user/intds.asm",
+      "sha256": "030BBDCF399D54863226796F9B8C7CE7A6247F07373239C3E8B998EAEB798C92",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\intds.asm"
+    },
+    {
+      "relative_path": "wow16/user/drvr.c",
+      "sha256": "EB3DEA8AFC570BF9662AB858C58389E41D7E9BDE214DD01B98026E69188351F3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\drvr.c"
+    },
+    {
+      "relative_path": "wow16/user/drvrrare.c",
+      "sha256": "7919FCE471F3C695655E6FAD37B1EBAB17A01D860A37F43DA3C64179A219CA4C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\drvrrare.c"
+    },
+    {
+      "relative_path": "wow16/user/winq.asm",
+      "sha256": "8728A0103651C611D65B3F5585BAAAA8F9D0CE65EC771F5D1EF16D8345493D76",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winq.asm"
+    },
+    {
+      "relative_path": "wow16/user/debug.c",
+      "sha256": "AF9ACC1D13BE5718E91EEF186949035AF11450CABBE5FA7F1E69EEC0CCCCA7DD",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\debug.c"
+    },
+    {
+      "relative_path": "wow16/user/winlang.asm",
+      "sha256": "17FAEC33C8B57C5FDB833A5CC0550EB03B2F0BB76F9BEF75008C05F0D145E33B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winlang.asm"
+    },
+    {
+      "relative_path": "wow16/user/winstr.asm",
+      "sha256": "8655A3A61ED6558328B06B892C26FA107F12C653DCCFCB7F119C34122B2EB1E4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winstr.asm"
+    },
+    {
+      "relative_path": "wow16/user/winstack.asm",
+      "sha256": "62977F4376E6D492916A8C6859B2220AAC12D5FDA6231666102155228DC5FF07",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winstack.asm"
+    },
+    {
+      "relative_path": "wow16/user/helpcall.c",
+      "sha256": "B0536BF2CF46ED165693DA51525C5653E3CED91C6EACB4BA7E1EE6047745FA25",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\helpcall.c"
+    },
+    {
+      "relative_path": "wow16/user/winhook.asm",
+      "sha256": "B93E07711967DCD26E07B46CF02D4051D70A98293910FB68B09ADC0549AFA229",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winhook.asm"
+    },
+    {
+      "relative_path": "wow16/user/winmisc2.asm",
+      "sha256": "494292FE160E788A40C765EEEABBFF9D1148DDE56E831790F1B9826F5579BC81",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\winmisc2.asm"
+    },
+    {
+      "relative_path": "wow16/user/rmcreate.c",
+      "sha256": "52D0D2DFA3C22779BA8E1809542A8F5FD1C2A15EA2AB00375AD446C76AA27BD4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\rmcreate.c"
+    },
+    {
+      "relative_path": "wow16/gdi/gdi.asm",
+      "sha256": "D64FA58C7AE7B6FBC84B25F4BC60C08D5D8453ACB1C9FE769F201FC5B6D213B2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdi.asm"
+    },
+    {
+      "relative_path": "wow16/gdi/layer.asm",
+      "sha256": "A54A6F521A46B4AA2249459A2C7D2288CB08057C668A59315AE69063FB0BAB28",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\layer.asm"
+    },
+    {
+      "relative_path": "wow16/gdi/muldiv.asm",
+      "sha256": "2A558E5C50B8434FD739EF429E5751A115F4E28048BEB7886A122C6E42C87A0E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\muldiv.asm"
+    },
+    {
+      "relative_path": "wow16/gdi/fontres.c",
+      "sha256": "6026473FF32330D94DD7388DF828EABFB20AB47DB19B54C5E9558CD219761E97",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\fontres.c"
+    },
+    {
+      "relative_path": "wow16/gdi/sort.asm",
+      "sha256": "4650211A277E8F5E3A1956243E024770D586A8CA27971C14AFD3374E47A5B99A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\sort.asm"
+    },
+    {
+      "relative_path": "wow16/system/system.asm",
+      "sha256": "423E3A8D220339E43FEB603B8458E7F939745DC258E0E31F7BD539F6C257F53D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\system\\system.asm"
+    },
+    {
+      "relative_path": "wow16/system/timer.asm",
+      "sha256": "8BC8EBB79D50901330572AF95833BABA7CB631D90447AE215FF4806ADA6FB8B8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\system\\timer.asm"
+    },
+    {
+      "relative_path": "wow16/drivers/sound/sound.asm",
+      "sha256": "EB4428F4D317591F5683AF9C035C611BC88E14F90A5F71F7E166F754FFE02A23",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\sound\\sound.asm"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/keyboard.asm",
+      "sha256": "279D4BF8DE3DBC9849651D93DC1EC5E824A1830506242C5AC1642DF701916C75",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\keyboard.asm"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/kbdlocal.asm",
+      "sha256": "3A0BB0791AF49A15936ED8DDC6AFB41CE1993081A2FE7F4AC965F0EFFC3A4AED",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\kbdlocal.asm"
+    },
+    {
+      "relative_path": "wow16/drivers/mouse/mouse.asm",
+      "sha256": "FCAA2B2421DB21F0B86B5FCC9CD8658436E3E32F575825F16B48BDB1B21FC7BB",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\mouse\\mouse.asm"
+    },
+    {
+      "relative_path": "wow16/drivers/display/display.asm",
+      "sha256": "8DAA82330DDBEB3581CCB8E54B822CD72A2DA96DB0029CC50E68FA6A42DE1C1D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\display\\display.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/libentry.asm",
+      "sha256": "4362E91DF3A24339BB17F913F6971B34A13F807CE1137605FD59DF78D24C154D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\libentry.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/init.c",
+      "sha256": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\init.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/time.c",
+      "sha256": "C24E15195853D6CCDEC8391F1AE5F6D19CB8FFD1658266FC0C901CAFE140156F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\time.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/joy.c",
+      "sha256": "EFDD582206D0B7518FCBBD4C5D0C0ED0930904D5B8A1888CA1797A939DA7CD60",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\joy.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/sound.c",
+      "sha256": "AA8BF1595BA1483C8AB137E5F3A69DF3496EEC92E8B01C1ECAC1C4040AA31F3E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\sound.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/wave.c",
+      "sha256": "6DFBFB59A59D80B976457CEE673BFEA91B1C44D955350A93A806272C9A82B708",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\wave.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/midi.c",
+      "sha256": "079F4A41C7A25B9E1B8AC74405B0CB49000A3BC0351A16118C75CB293FB954D2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\midi.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mci.c",
+      "sha256": "30B8B5274DCEA32EA205496DAF59858150C9B3C67BD94727981B86AF515B1C06",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mci.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mcisys.c",
+      "sha256": "3F8E8DF9C5331456FC21F7390D618E240D92BA7BA668B976E8B4E7E5C6DE6632",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mcisys.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mciparse.c",
+      "sha256": "AF4699758A6865AC9596C01700029252A67BC72DBC1C5B3BED2A7E676BB67CFC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mciparse.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/drvproc.c",
+      "sha256": "45CBB59262A8BB5DA3F98E75C9F5CA9CD48B27F3462E829A06312226B5144619",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvproc.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmwnd.c",
+      "sha256": "DC78C36AFA254CC3A587B21B9E141444DB573C77E8A626E144A6F3B89841D172",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmwnd.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/auxout.c",
+      "sha256": "7124709E7DE9DEEA911466B02B005DAF2C95E49DD4524A48C454376B87E6811E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\auxout.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/debug.asm",
+      "sha256": "D8734DEEEC1D3AAF2A52E259DAA26487215068205E217BF3D1E3C92C48664D80",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\debug.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/drvr31.asm",
+      "sha256": "68549A548BE4376285FE98DF08FBD6269013F01340640835FBBE91F9E990CAF3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvr31.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/taska.asm",
+      "sha256": "97EA600E0849CA0586530B56ED9E0D9C026490C9910AF2CB5218BF5065A98EC6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\taska.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/thunks.asm",
+      "sha256": "EE87A38E0BDB0D571FDA83F5E003F7267E927FE47034DE3A808822B611B79C53",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\thunks.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/task.c",
+      "sha256": "836AC825838C0660FA61DC1BED39E0A9868583D3F35D3181A4FDE947C322303C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\task.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/bwinexec.asm",
+      "sha256": "7E96BFECCAE01A727D016C498B96E74261D9936C1E7A8A03BC2D8FDFE23BB362",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\bwinexec.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/comm.asm",
+      "sha256": "F17CF7F6DB0870F41E9620B7A18B699471D32598D18219F499035ED70D5B5654",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\comm.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/stack.asm",
+      "sha256": "2254EDD89933F7A869DB2E98DCE5CF58BA44CE20A490B014202224CED478BB6F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\stack.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/heap.asm",
+      "sha256": "23C7A09DCFF5B3FDE97B3F6DF1282ADBE7605EFCF63CBA20F3070390354A5699",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\heap.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/dpmipage.asm",
+      "sha256": "970EA61891D566460D93F916DE06F5A2774C0C74F230B208FFC97AFB6DDA9EC9",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\dpmipage.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmio.c",
+      "sha256": "BFD9D3EB6D485F74E1E834EB51918FC65493665FDD14E8E88B5C3BA4414D2579",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmio.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmioriff.c",
+      "sha256": "4D35329C338F71D0EB95A30127BBA391F58E35A0B97E1CDDE6F6656B11196328",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmioriff.c"
+    },
+    {
+      "relative_path": "wow16/mmsystem/hmemcpy.asm",
+      "sha256": "DED6D9E5893E559FE2D65DF96ED0FB2F4CD21C360CEE62B603F666B7F499AFAB",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\hmemcpy.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/dosa.asm",
+      "sha256": "C4D66819D8971D2FD64C53B914FB3B1C0C44783C504C33393E2E3A8E1B181F44",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\dosa.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/isr.asm",
+      "sha256": "DDCEEDDAAE67DBE2CD56ECFA60683DE48549FEB7A54283EE740BA7BA205D83AE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\isr.asm"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mixer.c",
+      "sha256": "FFE637F8BA38F29E6A452EA9F88E2FC3C3F71C1FC1F1136E232283C73BB77AFF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mixer.c"
+    },
+    {
+      "relative_path": "wow16/drivers/display/config.asm",
+      "sha256": "5459EDDFD40B6196F2B4B5219EFD816CEB10E252CA8CEF04C7F90220E8AD8F7C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\display\\config.asm"
+    },
+    {
+      "relative_path": "wow16/user/user.inc",
+      "sha256": "1CD171111DCF89C3997F665EBE47E50628B0476A12F75DFFD4FD3158E2151E47",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user.inc"
+    },
+    {
+      "relative_path": "wow16/user/user.api",
+      "sha256": "FE2D26BB4D9CAF0AEEC6CDBC3F45D8A6EF5A9A8FB6612049A20FC8037B550C9A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user.api"
+    },
+    {
+      "relative_path": "wow16/user/msglayer.inc",
+      "sha256": "77422E462ED6FAB2603B9FA5353671302CCC2DEEC969E8A76CFBDD9E9D1ED423",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\msglayer.inc"
+    },
+    {
+      "relative_path": "wow16/user/messages.api",
+      "sha256": "AD5E6B310AF93DD827985727B3FB5FC810166DF064E61C3B7EA08A542528A0A0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\messages.api"
+    },
+    {
+      "relative_path": "wow16/user/user.h",
+      "sha256": "BE35D5E31717141F1B32EB6104133613B87AD27C4A39255165070C37E7035F68",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\user.h"
+    },
+    {
+      "relative_path": "wow16/user/ks386p.inc",
+      "sha256": "9B7159CDAA32AFDBBA172239A51012D3704DC09460E100AF2FD2C2471C9E373B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\ks386p.inc"
+    },
+    {
+      "relative_path": "wow16/user/netdlg.h",
+      "sha256": "A8FF1D690E988DB5A134B5AC1A5283B9B57FBD61C0288F029E698628CE1A553C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\netdlg.h"
+    },
+    {
+      "relative_path": "wow16/gdi/metacons.inc",
+      "sha256": "9502A3D63ADFBE36A715CBC268653BCEA2F9EB7172B56E5C45E042B81D3A6CE5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\metacons.inc"
+    },
+    {
+      "relative_path": "wow16/gdi/gdi.api",
+      "sha256": "EBF8E7B1AAF9C7C4826137B503B8DAD59AD41878C9B66D62A22E753157A96322",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdi.api"
+    },
+    {
+      "relative_path": "wow16/gdi/gdimacro.inc",
+      "sha256": "4394D2C1686E42EF7C65E67B9D77CA8F5B8FF2C55713037A7ED474FA707F9883",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdimacro.inc"
+    },
+    {
+      "relative_path": "wow16/gdi/gdimem.inc",
+      "sha256": "EED4AA0C24762992161155E1AA7F59ECA85F1CFDA055C643119929076CE71C74",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdimem.inc"
+    },
+    {
+      "relative_path": "wow16/system/system.inc",
+      "sha256": "1273C5EAAD79946269D91EB446BB6D5CD0F7CCD964E4C83BDAAA166A7B5C8F5C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\system\\system.inc"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmsysi.h",
+      "sha256": "72AABC31C6BA05EB1C04103E6CE6D9868F555AE267EBC553CB4271A03372A9A7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmsysi.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/drvr.h",
+      "sha256": "B51A6AB4C04F01B609A4456E3A684A72F3A52E77D75FF74E79E8E3C717CEDEB2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvr.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/thunks.h",
+      "sha256": "F0924CA742A5D31954383C95479FEAA09FA6A9F1154CEF53FFFBE33A808D991E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\thunks.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/playwav.h",
+      "sha256": "4C0B8AEAB8D49684C695EE0D8AC89402C2DF51EF5CA0AB2E633DCD89E11AE997",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\playwav.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmioi.h",
+      "sha256": "E954D07A6CD49B0D199EF1512098930365C9E0B7FB4F33472842AC1FC35A90AF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmioi.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmtask/mmtask.h",
+      "sha256": "73CCDBFF8CADB64855EF926BDD6542D611D5FBD8026938620E516CC1638FD1E5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmtask\\mmtask.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/int31.inc",
+      "sha256": "0DE2D446C1E62CB28CD0266341CB5B7A25B834B6F4336F5619D6C58FE436511B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\int31.inc"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mmreg.h",
+      "sha256": "CC9133B008902FBEF2FBE14E19E9AF3F5C1C904C6DA2043E746A54B9A1EA7F9C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmreg.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/msmixmgr.y",
+      "sha256": "44C34F62F7949F2B5E95DF392AE1016258B39EA8F3F745D7808ACBE63CE5EB43",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\msmixmgr.y"
+    },
+    {
+      "relative_path": "wow16/mmsystem/idrv.h",
+      "sha256": "8294F0865DA1772734D41C9594EFD0EDF83AA9530EF83F55C0A75C2252675708",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\idrv.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/mixmgri.h",
+      "sha256": "BD7E612B493751D7E9FFF085B145B59BBC4242E576AF994F8C2D97C4D7C53B84",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mixmgri.h"
+    },
+    {
+      "relative_path": "wow16/mmsystem/debug.h",
+      "sha256": "C8563B7A551098F90317EE064E9ADBB50A72C5C7408F8EED4284E26D4CA1F698",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\debug.h"
+    },
+    {
+      "relative_path": "wow16/user/iuser.inc",
+      "sha256": "8669936AD3943915F22D391D91376DF9F747D31BC8DECB1A5843A20031B2E9D5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\iuser.inc"
+    },
+    {
+      "relative_path": "wow16/user/iuser.h",
+      "sha256": "CED0FE1D0C111FC5013052EC29777E9FFBE31FB24437CE46C09DB2A402792718",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\user\\iuser.h"
+    }
+  ]
+}

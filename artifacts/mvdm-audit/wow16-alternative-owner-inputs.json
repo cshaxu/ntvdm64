@@ -1,0 +1,123 @@
+{
+  "result": "pass",
+  "inputs": [
+    {
+      "relative_path": "wow16/commdlg/makefile",
+      "current_sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\commdlg\\makefile",
+      "original_sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/lib/libh.lib",
+      "current_sha256": "6729E396014D37921B0B331CD0F9A3A821ABB725FD2EE0E795D71B0E4B627E9C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\libh.lib",
+      "original_sha256": "6729E396014D37921B0B331CD0F9A3A821ABB725FD2EE0E795D71B0E4B627E9C",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/gdi/gdi16.h",
+      "current_sha256": "E9799F73DF1406E4966F54BB17D0BB8502580BEBF8E69B935384969223BCF3CF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdi16.h",
+      "original_sha256": "E9799F73DF1406E4966F54BB17D0BB8502580BEBF8E69B935384969223BCF3CF",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/gdi/meta.c",
+      "current_sha256": "1F4603B822661DE7AC7A13597D1A1B72CD280F574718B0128F0123C0D008EA64",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\meta.c",
+      "original_sha256": "1F4603B822661DE7AC7A13597D1A1B72CD280F574718B0128F0123C0D008EA64",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/gdi/metasup.c",
+      "current_sha256": "3B90E8622C1263CCFD8A59F7F814B03D68C7074FA7C10BD9FE425D31CD0FEDE5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\metasup.c",
+      "original_sha256": "3B90E8622C1263CCFD8A59F7F814B03D68C7074FA7C10BD9FE425D31CD0FEDE5",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/gdi/makefile",
+      "current_sha256": "1868F7AD348A492ACDEF374C7B535B9AB0AB2BCFE894CB1C02232AA089B796F0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\makefile",
+      "original_sha256": "1868F7AD348A492ACDEF374C7B535B9AB0AB2BCFE894CB1C02232AA089B796F0",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/gdi/gdi.asm",
+      "current_sha256": "D64FA58C7AE7B6FBC84B25F4BC60C08D5D8453ACB1C9FE769F201FC5B6D213B2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdi.asm",
+      "original_sha256": "D64FA58C7AE7B6FBC84B25F4BC60C08D5D8453ACB1C9FE769F201FC5B6D213B2",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow32/wgmeta.c",
+      "current_sha256": "213B4AA2F1F7A11AC310D7152027DA2DA0EA804B9EFEB6FEFC0CF609CE3D5260",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
+      "original_sha256": "213B4AA2F1F7A11AC310D7152027DA2DA0EA804B9EFEB6FEFC0CF609CE3D5260",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow32/wgtbl2.h",
+      "current_sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgtbl2.h",
+      "original_sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/toolhelp/makefile",
+      "current_sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\makefile",
+      "original_sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/toolhelp/class1.c",
+      "current_sha256": "E169C1080CCBD6A99C2E66E81EDEE1D14BE4D746E78FA96C16FAF9327CC67A8E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\class1.c",
+      "original_sha256": "E169C1080CCBD6A99C2E66E81EDEE1D14BE4D746E78FA96C16FAF9327CC67A8E",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/toolhelp/class2.asm",
+      "current_sha256": "CDB243EDC9DE41338034740501DE349ADC4AD2FC29A324644DCE24E01AC8A994",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\class2.asm",
+      "original_sha256": "CDB243EDC9DE41338034740501DE349ADC4AD2FC29A324644DCE24E01AC8A994",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow16/toolhelp/ththunks.asm",
+      "current_sha256": "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\ththunks.asm",
+      "original_sha256": "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow32/wthtbl2.h",
+      "current_sha256": "830B724673E5B94B3D48D33E21FCAAA374DF3161D191ECC4B76E46387EF9817F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wthtbl2.h",
+      "original_sha256": "830B724673E5B94B3D48D33E21FCAAA374DF3161D191ECC4B76E46387EF9817F",
+      "whole_file_identical": true
+    },
+    {
+      "relative_path": "wow32/wow32.c",
+      "current_sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_sha256": "1DFE9900E6DA3BF0E2984C3DF42BDD155B177CFE7707BB24E1324037147D292A",
+      "whole_file_identical": false
+    },
+    {
+      "relative_path": "wow32/wow32.h",
+      "current_sha256": "06148A93A63FAF7FC5480E4C9F80C98DDFE6E2A0A782EAFE6A6FD1CCDD46DE27",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
+      "original_sha256": "06148A93A63FAF7FC5480E4C9F80C98DDFE6E2A0A782EAFE6A6FD1CCDD46DE27",
+      "whole_file_identical": true
+    }
+  ],
+  "unimplemented_function": {
+    "name": "WOW32UnimplementedAPI",
+    "original_and_current_body_identical": true,
+    "body_sha256": "B2595CEFA8A1410843203844E3950AA3370FA2492047EEC4B4CEEB66041B134F"
+  },
+  "scope": "Source identity and exact selected function body only; no original guest dispatch or runtime acceptance"
+}

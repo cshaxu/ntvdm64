@@ -1,0 +1,65 @@
+{
+  "result": "pass",
+  "candidate_count": 103,
+  "shards": {
+    "0": 28,
+    "1": 29,
+    "2": 28,
+    "3": 18
+  },
+  "source_tables": [
+    {
+      "path": "shard-0/wow16-core-guest-owner-review.csv",
+      "sha256": "E563F2202E5FDB80B514832C74D3227798B4557732C9491E778887A93D73E76B"
+    },
+    {
+      "path": "shard-1/guest-extension-owner-review.csv",
+      "sha256": "9EA7FD255F7205342562C8B87FA012259480EC497AE5C49C281A73EEB75C845F"
+    },
+    {
+      "path": "shard-2/guest-extension-owner-review.csv",
+      "sha256": "887D57D2A1E99F401BC37C91DF556BA3DF1EFE651A7EC812AE76B77A626462F6"
+    },
+    {
+      "path": "shard-3/guest-extension-owner-review.csv",
+      "sha256": "5BCA46958D21F82576B066E5F8296783498BA05FD6BFF2BB2CDFECFDADB7A288"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-inputs.txt",
+      "sha256": "87E217899970FD26D464DE8693316FD96B485C942CD5BA1E5BFC916AE3B913D4",
+      "kind": "inputs",
+      "graph": "worker",
+      "valid_blocks": null,
+      "lines": 941
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "valid_blocks": 632,
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "valid_blocks": null,
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "valid_blocks": 229,
+      "lines": 15249
+    }
+  ],
+  "skipped": [],
+  "product_changed": false,
+  "guest_changed": false
+}
