@@ -228,3 +228,9 @@ The [failure-only creation observation](creation-negative-only-review.md)
 removes success-path error interception and passes one isolated Options
 observation. No failure branch was captured; the production failure remains
 unresolved and the diagnostic is not publishable.
+
+The subsequent [main review](native-source-next-role-review.md) merges those
+47 partial integrations and one empty original file role, retaining all 132
+other proposals as pending. Per-file source, map/graph and evidence limits are
+recorded; no new full row or runtime capability is accepted. The total ledger
+now has 1,804 pending, 319 partial, 52 full and 2,509 excluded paths.

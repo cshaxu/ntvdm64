@@ -1,0 +1,9 @@
+{
+  "started": "2026-10-27T22:41:09.8119782Z",
+  "pid": 28864,
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\native-next-final.stderr.txt",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\verify-native-next-roles.ps1",
+  "checker_sha256": "4CE6F3A19B8B2AEA641EDA9C575EA84ADEE75B9EED145DA6F98D8B196E564D71",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\native-next-final.stdout.txt",
+  "script_sha256": "E9ADF300C93E6A6BE40990FE4E4CEB1B865E52FBD35AB1EF84B9377A94841D5B"
+}

@@ -28,3 +28,13 @@ candidate or establish a timing, CPU, handle-reuse or instrumentation cause.
 Do not discard the retained production failures or remove publication guards
 on this basis. The next causal comparison must preserve the ordinary provider
 or independently reproduce a specific violated identity/state contract.
+
+A subsequent [ordinary production control](creation-negative-only/ordinary-control-r3-observations.json)
+also passed Options, close and parent recovery without any diagnostic DLL or
+worker replacement. It used the retained candidate manifest and checked-in
+runner. There was no bindingError=5023 in its creation trace. The two earlier
+production failures remain valid, but production failure is not universal
+across these observations and cannot be attributed to instrumentation alone.
+The complete parent environment was not frozen across runs; do not infer a
+proven timing, handle-reuse or other cause from this difference. The candidate
+remains unqualified until the failed invariant is understood and verified.

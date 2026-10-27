@@ -1,0 +1,27 @@
+{
+  "candidate_qualified": false,
+  "records": [
+    {
+      "file": "ordinary-control-r3-result.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "file": "ordinary-control-r3-owner.json",
+      "sha256": "55682A7D6412F94A58AFB55203A5E6934CF9F784E7F3CEDCED6CAF2EEF8FBCBD"
+    },
+    {
+      "file": "ordinary-control-r3-exit.json",
+      "sha256": "B8FED32DB1FC4CBFA354005CD5620C553932C59067F6ACAD2DC78C55F11B519B"
+    }
+  ],
+  "kind": "ordinary-production-candidate-control",
+  "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+  "result": "pass",
+  "scope": "Same retained production candidate and checked-in runner, no diagnostic provider; parent environment not frozen; no cause or repair is established",
+  "earlier_two_failures_retained": true,
+  "trace": {
+    "sha256": "2CAC2DFE90B82EED77D358F0D7B01CD002026038EE6027AD7DF50FF0B7FC030F",
+    "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r3\\windows.txt",
+    "creation_error_5023_count": 0
+  }
+}

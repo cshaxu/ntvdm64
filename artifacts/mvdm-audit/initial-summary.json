@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1852,
-    "excluded": 2508,
-    "partial": 272,
+    "pending": 1804,
+    "excluded": 2509,
+    "partial": 319,
     "full": 52
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Native-source checkpoint reviews90 paths:36 partial integrations,2 original PIG test file roles excluded,52 remain pending. Original-text retention is100 percent for this batch; no functional coverage percentage or new full capability is inferred."
+  "note": "Next native checkpoint reviews180 paths:47 partial integrations,1 original empty source file role excluded,132 remain pending. No new full capability or functional percentage is inferred."
 }

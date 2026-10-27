@@ -1,0 +1,73 @@
+{
+  "result": "pass",
+  "base": "536087158",
+  "cohort_base": "ecd4a604a",
+  "candidate_count": 48,
+  "reviewed_cohort_count": 180,
+  "remaining_cohort_pending": 132,
+  "source_tables": [
+    {
+      "path": "shard-1/native-pending-followup-2.csv",
+      "sha256": "58ACF7DBDEB7EB68DE277E20BFB73DA60B05D9D14754CB45483D974077253EFB"
+    },
+    {
+      "path": "shard-2/native-pending-followup-2.csv",
+      "sha256": "C2CB6C0364A5D4158F5454CBD368BAF31761153B3BC3749752065C78E779DAA3"
+    },
+    {
+      "path": "shard-3/native-pending-followup-2.csv",
+      "sha256": "651A01EDED6865DDF17A9773444F530D22779F2B980992E11DA92FD710C488B0"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "host_graph_observations": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    }
+  ],
+  "compiled_empty_object": {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\comms\\prt_scrn.obj",
+    "sha256": "AB13E7C333D2B833B13012ED1782DC29A9EADD9928F85FE1953A82CDB80D799F"
+  },
+  "selected_product_map": {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+    "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+  },
+  "scope": "Main-reviewed source integration and empty file role; no new functional acceptance"
+}

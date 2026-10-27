@@ -77,7 +77,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 assert original_hash in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256'])
             if proof['status'] == 'excluded':
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
-                                'historical-cpu-test-source-only')
+                                'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -89,8 +89,10 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-cpu-test-source-only':
                     assert prefix == 'native-source-role-' and path in (
                         'softpc.new/base/ccpu386/c_getset.c', 'softpc.new/base/ccpu386/ccpupig.c')
+                if proof['role'] == 'historical-empty-printscreen-source-only':
+                    assert prefix == 'native-source-next-role-' and path == 'softpc.new/base/comms/prt_scrn.c'
             else:
-                if prefix == 'native-source-role-':
+                if prefix in ('native-source-role-', 'native-source-next-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -176,6 +178,55 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 size = struct.unpack_from('<I', data, offset + 16)[0]
                 flags = struct.unpack_from('<I', data, offset + 36)[0]
                 assert not size or not flags & (0x20 | 0x20000000)
+    if prefix == 'native-source-next-role-':
+        cohort_old = {r['relative_path']: r for r in original_rows(merged_path, observation['cohort_base'])}
+        reviewed = {}
+        for shard, record in enumerate(observation['source_tables'], 1):
+            proposal = rows(A / f'shard-{shard}/native-pending-owner-review.csv')
+            cohort = sorted(r['relative_path'] for r in proposal if cohort_old[r['relative_path']]['status'] == 'pending')[30:90]
+            batch = rows(A / record['path'])
+            assert sorted(r['relative_path'] for r in batch) == cohort and len(batch) == 60
+            for item in batch:
+                name = item['relative_path']
+                assert name not in reviewed and int(old[name]['shard']) == shard
+                assert sha(Path('src/mvdm') / name) == item['current_sha256'] == item['frozen_sha256']
+                assert sha(Path(item['original_path'])) == item['original_sha256'] == item['current_sha256']
+                reviewed[name] = item
+        accepted = {p for p, r in reviewed.items() if r['proposal_status'] in ('partial', 'excluded-file-role-only')}
+        assert accepted == set(changed) and len(reviewed) == observation['reviewed_cohort_count'] == 180
+        assert len(reviewed.keys() - accepted) == observation['remaining_cohort_pending'] == 132
+        assert all(merged[p]['status'] == 'pending' for p in reviewed.keys() - accepted)
+        for record in observation['host_graph_observations']:
+            assert sha(Path(record['path'])) == record['sha256']
+        map_record = observation['selected_product_map']
+        assert sha(Path(map_record['path'])) == map_record['sha256']
+        selected_map = Path(map_record['path']).read_text().lower()
+        dependencies = '\n'.join(Path(r['path']).read_text().replace('\\', '/').lower()
+                                 for r in observation['host_input_observations'])
+        graph = Path(observation['host_graph_observations'][0]['path']).read_text().replace('\\', '/').lower()
+        for name, proof in changed.items():
+            if name.endswith('.h'):
+                assert 'src/mvdm/' + name.lower() in dependencies
+            elif proof['status'] == 'partial':
+                obj = Path(name).stem.lower() + '.obj'
+                assert ':' + obj in selected_map and 'src/mvdm/' + name.lower() in graph
+            assert proof['original_text_retained_percent'] == '100'
+            assert not proof['estimated_restored_code_percent']
+            assert proof['restored_estimate_status'].startswith('unmeasurable:')
+        empty = observation['compiled_empty_object']
+        data = Path(empty['path']).read_bytes()
+        assert sha(Path(empty['path'])) == empty['sha256']
+        machine, sections = struct.unpack_from('<HH', data)
+        assert machine == 0x14c and 0 < sections < 32 and struct.unpack_from('<H', data, 16)[0] == 0
+        for i in range(sections):
+            offset = 20 + i * 40
+            size = struct.unpack_from('<I', data, offset + 16)[0]
+            flags = struct.unpack_from('<I', data, offset + 36)[0]
+            assert not size or not flags & (0x20 | 0x20000000)
+        empty_name = 'softpc.new/base/comms/prt_scrn.c'
+        empty_text = (Path('src/mvdm') / empty_name).read_text()
+        assert not re.sub(r'/\*.*?\*/', '', empty_text, flags=re.S).strip()
+        assert 'bios4.rom' in empty_text and 'src/mvdm/' + empty_name in graph
     if prefix in ('guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-'):
         generated = prefix == 'generated-message-role-'
         shared = prefix == 'shared-guest-include-role-'
@@ -272,7 +323,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
         assert sha(path) == record['sha256'] and '(STALE)' not in path.read_text()
         text = path.read_text().replace('\\', '/').lower()
         for relative in changed:
-            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] != 'historical-cpu-test-source-only':
+            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] not in ('historical-cpu-test-source-only', 'historical-empty-printscreen-source-only'):
                 assert 'src/mvdm/' + relative.lower() not in text, relative
     for row in rows(A / 'full-selected-leaf.csv') + rows(A / 'full-selected-declarations.csv'):
         assert merged[row['relative_path']]['status'] == 'full'
@@ -299,7 +350,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

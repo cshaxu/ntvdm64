@@ -1,0 +1,9 @@
+{
+  "pid": 15668,
+  "started": "2026-10-27T22:39:20.5500430Z",
+  "script_sha256": "57D67920A198949860DCCC8C458D128C69C705A7C4996DC9D8D3B62776C30801",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r3",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r3.stderr.txt",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\candidate-options-r3.stdout.txt",
+  "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE"
+}
