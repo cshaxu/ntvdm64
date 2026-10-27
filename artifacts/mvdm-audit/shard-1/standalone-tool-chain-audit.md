@@ -7,7 +7,7 @@ Shard 1 owns `vdmutils/graftabl/graftabl.c`, `vdmutils/pifedit/pifsubs.c`, and
 executables, not NTVDM worker-object providers. The project architecture
 explicitly identifies `graftabl`, `pifedit` and `win` as original standalone
 MVDM tools; absence from the worker link is therefore not an exclusion of
-their observable functionality. No tool was compiled or run in this review.
+their observable functionality. The original tools were not compiled or run; a separately authored native code-page probe was compiled and run as described below.
 
 ## GRAFTABL and Console output code page
 
@@ -30,7 +30,43 @@ subsequent uses. Separately, bound NTVDM's `MvdmGetConsoleOutputCP` sends
 Console. `tests/app/console_client_test.c` verifies a bound frontend query,
 not a native-CUI-to-DOS code-page change followed by ownership transfer.
 
-This is a **source-level gap candidate**, not a reproduced defect: other
+### Follow-up: original and current process/IO path (source review)
+
+* Original `src/mvdm/dos/command/cmdexec.c::cmdCreateProcess` forwards
+  standard handles and calls `CreateProcess` with `CREATE_SUSPENDED` and
+  `CREATE_DEFAULT_ERROR_MODE`, without `CREATE_NEW_CONSOLE`: the native CUI
+  child normally shares the caller's Console and its output code page. This
+  conclusion applies to that path, not every original launch scenario.
+* Current `src/ntsrv-exe/opennt/source/worker_registry.c` starts the text
+  NTVWM carrier with `CREATE_NEW_CONSOLE` and hides its window. Current
+  `src/ntvwm-exe/execution.c::launch_request` invokes
+  `run16_native_launch_start_suspended`; `src/common/native_process.c` calls
+  `CreateProcessW` without `CREATE_NEW_CONSOLE` or `DETACHED_PROCESS`, so the
+  native CUI target normally joins the carrier's Console. Standard-handle
+  redirection does not itself move a process to another Console.
+* `src/ntvwm-exe/presentation.c` takes the output-page sample indirectly via
+  `ntvwm_capture_begin` and publishes Unicode screen cells; the publication
+  object and the Console I/O opcode contain no output-page setter. The
+  sample is not proof of copying the page to NTCON: repository-wide search of
+  the NTVWM source found only the assignments and checks in
+  `console_state.c`, not a setter or later consumer of those two fields.
+* When an NTVDM session is bound, `console_client.c::console_code_page`
+  asks NTCON for `CONSOLE_IO_CODE_PAGE`; `console_frontend.c` responds by
+  `GetConsoleOutputCP` for output. The unbound fallback queries the local
+  Console, so it cannot be treated as evidence about a bound DOS session.
+  The existing `console_client_test.c` 437/850 check changes the test's own
+  Console and proves the getter, not cross-carrier propagation or survival.
+
+These are current-source findings, not fresh process or runtime observations.
+The exact linkage from a later guest code-page consumer to the bound getter,
+identity of both Consoles in a live session, initialization/handoff effects,
+and whether externally supplied GRAFTABL can run remain to be demonstrated.
+A conclusive test must directly record each Console identity and code page,
+including the output-page setter's return value, before and after return to
+DOS and with a no-change control; a Unicode frame alone is not that test.
+
+The **carrier code-page mismatch is reproduced** below; a guest-visible
+functional defect is still a candidate, because other
 initialization, an external Console configuration, or another path may affect
 observability. Validate an isolated root COMMAND -> native CUI code-page
 change -> COMMAND consumer with before/after pages, error and exit ordering,
@@ -41,6 +77,50 @@ original tool without changing guest. If a discrepancy is proved, preserve
 original one-Console semantics through the existing frontend/worker lifecycle
 and protocol, with one explicit code-page authority; do not introduce a
 parallel shell/parser. Further implementation requires the owning S packet.
+
+### Isolated native-CUI transition witness (2026-10-26)
+
+A fresh short physical stage made by `New-PhysicalRuntimeStage` copied the
+S9 `build/t473-s9/package-r10` package, with unmodified COMMAND.COM. On a
+private desktop the existing `console-startup-observer` ran
+`run16 COMMAND.COM`, then injected `CPTEST control1`, `CPTEST set`,
+`CPTEST control2`, and `exit` after the preceding visible markers. The
+independent CUI probe source and exact runner are archived alongside this
+note as `codepage-carrier-probe.c` and `codepage-carrier-run.ps1`. CPTEST
+queries its inherited Console, optionally calls `SetConsoleOutputCP`, then
+attaches to the sole isolated NTCON process to query its actual Console.
+The helper refuses to identify NTCON when multiple processes match. The run
+used a desktop-capable execution context and a checked-in observer/helper;
+the process token integrity and supervising parent PID were not recorded.
+
+```text
+mode=control1 prior=437 requested=850 changed=0 hidden=437 ntcon_pid=29724 attached=1 frontend=437 error=0
+mode=set prior=437 requested=850 changed=1 hidden=850 ntcon_pid=29724 attached=1 frontend=437 error=0
+mode=control2 prior=850 requested=437 changed=0 hidden=850 ntcon_pid=29724 attached=1 frontend=437 error=0
+observer exit=0; result=exited; exit=0x00000000
+scripted-console-input=delivered; all three next markers ready
+```
+
+Thus the control starts with both Consoles at 437; the setter succeeded and
+changed the native carrier to 850 while the frontend stayed at 437; a later
+native child still saw 850. This proves an actual state mismatch and native
+carrier persistence for this existing-Console observer scenario. It does not
+prove that guest COMMAND itself reads this value, that GRAFTABL is installed
+or launches successfully, that a particular guest character renders wrongly,
+or that the sole-member/new-Console scenario behaves identically. The probe
+reads the frontend during the setter's lifetime and again from a subsequent
+native child; it is not a direct DOS-side code-page query. No product or guest
+file was modified. The test-owned stage and scoped processes were cleaned.
+
+SHA-256 identities: probe exe
+`9F917B2C64FE837B7F9B1B623018100CBF98CC311C9ACBFFA816776D909B5AFF`;
+NTVWM `11AF2D426A4F4B9A19197500E374AABBD9C01203B4137577A6ECFAE86849336D`;
+NTCON `963F4EB8F531AE8223CB191EE0A0A73ADB2677F55BB38EB42F471ED1B4326298`;
+COMMAND.COM `908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43`;
+observer `4A73E58F555EBCBEBA37DB9F10EEC580A8160CD0C3D95F1F5ECE911110D4BCC7`;
+runner `F50EC6C84FB7AE57366278FE7D22604688829E6B122BBEA9E3C163B9E699FA4B`.
+An earlier restricted-token attempt returned `not-started` at private desktop
+creation; it is runner setup evidence only, not a product result.
 
 ## PIF editor versus PIF utility
 

@@ -42,3 +42,7 @@ or discarded; each requires relevance and current-owner analysis. The
 accompanying summary records the exact source-catalog hash and the narrow
 local-path comparison; a missing same-shaped path is not proof that no
 modern host or differently located adapter supplies a capability.
+
+The first separately traced external provider row is the WINMM callback
+layout: see `external-winmm-callback-boundary.md`. It remains pending
+behavioral and compatibility verification.
