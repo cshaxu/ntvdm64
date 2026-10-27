@@ -1,0 +1,9 @@
+#include <windows.h>
+#include <tlhelp32.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <wchar.h>
+static DWORD find_ntcon(void){PROCESSENTRY32 e={0};HANDLE s;DWORD pid=0,n=0;e.dwSize=sizeof e;s=CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);if(s==INVALID_HANDLE_VALUE)return 0;if(Process32First(s,&e))do{if(!_stricmp(e.szExeFile,"ntcon.exe")){pid=e.th32ProcessID;++n;}}while(Process32Next(s,&e));CloseHandle(s);return n==1?pid:0;}
+static unsigned inspect(void){HANDLE h=CreateFileW(L"CONOUT$",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);CONSOLE_SCREEN_BUFFER_INFO b;WCHAR *p;DWORD n,total;unsigned x=0;if(h==INVALID_HANDLE_VALUE)return 0;if(!GetConsoleScreenBufferInfo(h,&b)){CloseHandle(h);return 0;}total=(DWORD)b.dwSize.X*(DWORD)b.dwSize.Y;p=calloc(total+1,sizeof(WCHAR));if(p&&ReadConsoleOutputCharacterW(h,p,total,(COORD){0,0},&n)){for(DWORD i=0;i+8<n;i++)if(wcsncmp(p+i,L"CPTEXT1:",8)==0 || wcsncmp(p+i,L"CPTEXT2:",8)==0)x=p[i+8];}free(p);CloseHandle(h);return x;}
+int main(int argc,char **argv){char *path=getenv("CP_PROBE_FILE"); FILE *f; UINT prior=GetConsoleOutputCP(),next=prior==850?437:850,hidden,front=0,glyph=0; DWORD pid=find_ntcon(),err=0; BOOL changed=FALSE,attached=FALSE; const char *mode=argc>1?argv[1]:"control";if(!path||!(f=fopen(path,"a")))return 3;if(!strcmp(mode,"set"))changed=SetConsoleOutputCP(next);hidden=GetConsoleOutputCP();printf("CPPROBE-%s\n",mode);fflush(stdout);if(pid&&FreeConsole()){attached=AttachConsole(pid);if(attached){front=GetConsoleOutputCP();glyph=inspect();}else err=GetLastError();}else err=GetLastError();fprintf(f,"mode=%s prior=%u requested=%u changed=%d hidden=%u ntcon_pid=%lu attached=%d frontend=%u glyph=U+%04X error=%lu\n",mode,prior,next,changed,hidden,(unsigned long)pid,attached,front,glyph,(unsigned long)err);fclose(f);return !prior||!attached||!front||(!strcmp(mode,"set")&&!changed);}

@@ -65,10 +65,9 @@ A conclusive test must directly record each Console identity and code page,
 including the output-page setter's return value, before and after return to
 DOS and with a no-change control; a Unicode frame alone is not that test.
 
-The **carrier code-page mismatch is reproduced** below; a guest-visible
-functional defect is still a candidate, because other
-initialization, an external Console configuration, or another path may affect
-observability. Validate an isolated root COMMAND -> native CUI code-page
+The **carrier code-page mismatch and one DOS text-output consequence are
+reproduced** below. Other initialization, external Console configuration, and
+other output paths can affect observability. Validate an isolated root COMMAND -> native CUI code-page
 change -> COMMAND consumer with before/after pages, error and exit ordering,
 plus the same carrier without a page change; do not change the user's live
 Console. Trace identity and persistence for both parent-existing Console and
@@ -121,6 +120,55 @@ observer `4A73E58F555EBCBEBA37DB9F10EEC580A8160CD0C3D95F1F5ECE911110D4BCC7`;
 runner `F50EC6C84FB7AE57366278FE7D22604688829E6B122BBEA9E3C163B9E699FA4B`.
 An earlier restricted-token attempt returned `not-started` at private desktop
 creation; it is runner setup evidence only, not a product result.
+
+### DOS output observation after native code-page change (2026-10-26)
+
+An independent tiny `.COM` fixture uses DOS `INT 21h/AH=40h` to write an
+ASCII marker, byte `9B`, and a newline. Before/after fixtures have distinct
+`CPTEXT1:` and `CPTEXT2:` markers and otherwise identical behavior. They are
+not changes to COMMAND.COM or the product guest. `codepage-guest-observer.c`
+is a native CUI probe that records its carrier CP, optionally calls
+`SetConsoleOutputCP`, then attaches to the uniquely identified isolated NTCON
+and reads its actual output CP and Unicode Console cells. It scans the last
+`CPTEXT1:` or `CPTEXT2:` cell marker; marker and subsequent character must be
+on one screen line. The exact runner is `codepage-guest-run.ps1`. It stages
+the S9 package through the checked-in physical-stage helper and uses the
+same private-desktop observer; the prior section records package identities.
+
+```text
+control1: hidden=437, frontend=437, glyph=U+00A2
+set:      hidden=850, SetConsoleOutputCP success, frontend=437, glyph=U+00A2
+control2: hidden=850, frontend=437, glyph=U+00A2
+```
+
+The observer records distinct visible `CPTEXT1:` and `CPTEXT2:` markers, and
+all input gates through the second fixture as ready. Its final screen dump
+contains `CPTEXT1:` and later `CPTEXT2:` followed by the later control marker.
+Thus the second probe's last-marker scan observes the later DOS output, after
+the native code-page change and before the isolated session is torn down.
+Byte 9B maps to U+00A2 in CP437 and U+00F8 in CP850. The displayed DOS
+character therefore follows the unchanged frontend CP437, not the successfully
+selected carrier CP850. This demonstrates a guest-output consequence of the
+separate Console state for this scenario; it does not execute GRAFTABL itself,
+prove the original NT4 run empirically, or cover all encodings, output paths,
+root/new-Console creation, or guest applications.
+
+The runner deliberately waits for an impossible final input marker so that
+`exit` cannot race with the last control's read; the observer reports
+`result=timeout` and `scripted-console-input=failed` at that deliberate
+35-second test deadline. This is a **test-observer timeout**, not proof that
+the product was unable to exit. Its runner exits zero despite this observer
+result; the success claim above depends only on the recorded earlier steps,
+not on exit status. Scope cleanup terminated its own temporary processes.
+A previous attempt used immediate exit and lost the final read; another tried
+writing the completion marker directly to NTCON and the marker was overwritten;
+neither establishes product failure. No product or original guest file changed.
+
+Hashes: before COM
+`7A8219C57594E6CD8C9971D7C5D79B219DDD7DB8B1F5DD2F1C4B8E82C19930B3`;
+after COM `054078E8FB21ABA0BEC42459C8E3F950DCD5244EE27FA0AD7BE4EA9B82546AB1`;
+native probe `DDD068AA9B817078E5FBF9ECF173B5CE05F40324D29EE89E147903DD2FC7E0E0`;
+runner `38CA72D58DE9FA30A435CA06E3B50A5B63CAB488825029E38107A8FEEA0F648A`.
 
 ## PIF editor versus PIF utility
 

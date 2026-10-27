@@ -28,3 +28,19 @@ and uninitialized. That is a launch/loader/init control, not server-mode or
 registration control. No new debug-DLL run or transaction test was performed.
 The runner's finally block completed its isolated process/stage cleanup on both
 runs. No original guest or product source was modified. Retain pending status.
+
+## Call-boundary follow-up
+
+The next isolated run used probe SHA256
+`73126159486E3322C162A60A342CB60C1B4191DBEB47BFAF734291675D2DC04C`.
+It wrote marker 09 after all `DdeNameService` arguments were pushed and
+immediately before the NE far call instruction. A callback-entry marker 10
+and return marker 05 were added; neither was observed. The timeout observer
+is `ddeml-register-w31.observer.txt` and the copied stage byte is in
+`ddeml-register-w31.stage.bin`. This proves the probe reached the call site,
+not that the callee or callback actually executed: control transfer,
+MakeProcInstance callback execution, and stage-writing behavior remain
+unverified. The callback marker itself uses DOS I/O and could perturb
+reentrancy; absence is not conclusive. No final receipt proves which DLL
+was loaded. There is still no matched server-mode no-register or real peer
+control, so this does not isolate the problem to a product component.

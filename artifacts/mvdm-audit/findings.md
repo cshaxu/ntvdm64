@@ -175,3 +175,20 @@ installed in current slots; the original name table itself has not been found
 as a runtime index consumer. Numeric/indirect/compiled consumers must be
 traced before asserting misdispatch or treating the fields as unreachable.
 See `shard-3/sas-vector-fields.csv` and `shard-3/sas4gen-vector-audit.md`.
+
+## Cross-worker console codepage and ForceDOS propagation
+
+The current native-CUI and NTCON console carriers have independently
+observable codepages after a native child changes its output codepage. The
+separate DOS-output witness and its exact observation limits are recorded in
+`shard-1/standalone-tool-chain-audit.md`; identify the original console owner
+and prove a repair with both guest and native output rather than adding a
+second independent codepage owner.
+
+`CREATE_FORCEDOS` is a separate original startup contract. The selected
+one-hop native-context consumer rejects its bit even though the service value
+codec preserves the bit in focused fixtures; see
+`shard-3/forcedos-original-owner-audit.md`. This is an evidenced boundary gap,
+not a complete guest reproduction. Recover the original Win16/OS2 NE
+classification and nested semantics with existing transport, then verify
+real execution and teardown in its corresponding implementation stage.

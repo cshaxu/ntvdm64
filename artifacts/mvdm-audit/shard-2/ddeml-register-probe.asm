@@ -135,6 +135,7 @@ api 1
  push word 0
  push word 0
  push word 1
+ mark 9
  api 8
  mark 5
  mov [register_lo-data],ax
@@ -198,6 +199,7 @@ fatal:
 dde_callback:
  push bp
  mov bp,sp
+ mark 10
  inc word [callback_count-data]
  mov ax,[ss:bp+32]
  cmp word [first_type-data],0

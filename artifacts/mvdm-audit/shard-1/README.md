@@ -212,12 +212,12 @@ Current `owner-review.csv` SHA-256 `46FA0A8B496CE6635BA51E5D95035602C3E06F9CD5F1
 PIFEDIT and WIN launch tools and the limits of current replacements. In
 particular, the GRAFTABL output-code-page transfer across NTVWM's separate
 Console to the NTCON authority is a reproduced carrier-state mismatch;
-actual guest-visible impact remains unverified. Its source-owned boundary and
-isolated native-CUI control are documented.
+a DOS byte-output consequence is also observed in an isolated controlled case.
+Actual GRAFTABL execution and original NT4 behavior remain unverified.
 Original PIFEDIT's interactive behavior is not assumed equivalent to the
 separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
 - Current `file-audit.csv` SHA-256 `C67BC355D130D82DF4BA797CE24B79203490C7B26733A5AD7FABAD0DFF1FCD98`.
-- Current `unselected-source-review.csv` SHA-256 `C5FB539CDA709F0D2C81EC5CBAE4588C7E62A344D706E1A3AB897BC84FDE8A20`.
+- Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
