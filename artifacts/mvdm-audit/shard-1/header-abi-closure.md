@@ -1,0 +1,7 @@
+# Selected CCPU leaf declaration closure (shard 1)
+
+The eight exact paths, frozen original/current SHA-256, complete declaration, two VALID dependency edges, selected leaf hash, PE decoder target and guest evidence are recorded in [header-abi-closure.csv](header-abi-closure.csv). Frozen inventory SHA-256: `F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196`. Each entire header consists of comments and exactly the single declaration shown. Both original edition hashes equal the current actual file hash.
+
+The selected worker Ninja `cc_ccpu` uses `ccpu_flags` with `/DANSI`; `base/inc/base_def.h` defines `IMPORT` as `extern`, `IPT0()` as `(void)`, `IPT3` as typed arguments; `host/inc/insignia.h` defines `IU32` as unsigned long and `IUM8` as unsigned char. The selected `ccpu_flags` contain no `/Gz`, `/Gr` or `/Gd` override: MSVC x86 therefore uses its default `__cdecl` for these ordinary unannotated C declarations. See the worker Ninja flags and actual per-object VALID cached dependencies. Existing `full-selected-leaf.csv` ties each declaration to compiled leaf, released PE bytes/actual decoder targets and sign/flags or ALU guest positive/negative evidence. These cached dependency and prior execution records are historical evidence, not a new build or fresh run.
+
+Classification full/100 applies solely to the complete selected header declaration, not to the entire decoder, CPU, invalid prefixes, other default sizes, or lifecycle. The signature has no extra unverified header interfaces; these wider features remain independently audited.

@@ -1,0 +1,55 @@
+{
+  "result": "pass",
+  "paths": 4684,
+  "counts": {
+    "pending": 2948,
+    "excluded": 1466,
+    "partial": 224,
+    "full": 46
+  },
+  "new_full_declarations": [
+    "softpc.new/base/ccpu386/adc.h",
+    "softpc.new/base/ccpu386/add.h",
+    "softpc.new/base/ccpu386/and.h",
+    "softpc.new/base/ccpu386/cbw.h",
+    "softpc.new/base/ccpu386/cdq.h",
+    "softpc.new/base/ccpu386/clc.h",
+    "softpc.new/base/ccpu386/cld.h",
+    "softpc.new/base/ccpu386/cmc.h",
+    "softpc.new/base/ccpu386/cmp.h",
+    "softpc.new/base/ccpu386/cwd.h",
+    "softpc.new/base/ccpu386/cwde.h",
+    "softpc.new/base/ccpu386/dec.h",
+    "softpc.new/base/ccpu386/inc.h",
+    "softpc.new/base/ccpu386/lahf.h",
+    "softpc.new/base/ccpu386/neg.h",
+    "softpc.new/base/ccpu386/or.h",
+    "softpc.new/base/ccpu386/sahf.h",
+    "softpc.new/base/ccpu386/sbb.h",
+    "softpc.new/base/ccpu386/stc.h",
+    "softpc.new/base/ccpu386/std.h",
+    "softpc.new/base/ccpu386/sub.h",
+    "softpc.new/base/ccpu386/test.h",
+    "softpc.new/base/ccpu386/xor.h"
+  ],
+  "full_executable_leaves": 23,
+  "full_single_declarations": 23,
+  "source_drift": [
+    {
+      "relative_path": "README.md",
+      "current_sha256": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+    },
+    {
+      "relative_path": "dpmi32/modesw.c",
+      "current_sha256": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_bop.c",
+      "current_sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    }
+  ],
+  "compile_normal": true,
+  "compile_incompatible_signature_rejected": true,
+  "product_or_guest_changed": false,
+  "scope": "Declaration ABI closure backed by prior real provider execution; not new instruction or whole CPU coverage"
+}

@@ -4,10 +4,10 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 684,
+    "pending": 680,
     "excluded": 348,
     "partial": 55,
-    "full": 2
+    "full": 6
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -24,8 +24,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "88665AC1BEEEE0FC439D5976B12E999356CBDBAFE233BD6A9B6BF947AE528B53",
-  "limitations": "Full leaf entries do not establish broader features. Guest grouping is source-family and identity evidence only; source-to-image lineage and behavior remain independently pending.",
+  "output_sha256": "AB0C5C2439DCA77ACBFA29C852F12A7D3F6E42FE0B73EBC981DD8801C3F89904",
+  "limitations": "Six full selected leaves/declarations; 55 partial. Full leaf/header classifications do not close decoder, CPU, guest or related features.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -182,5 +182,6 @@
   "ccpu_dec_contract": "alu-dec-oracle-contract.md and ccpu-alu evidence; full selected DEC leaf, 8-bit exhaustive and wider sampled",
   "guest_ddeml_test_build": "guest-ddeml-test-build-review.csv/.md; four historical guest test recipe inputs excluded by role, 12 source/resource/support entries remain pending",
   "guest_remaining_groups": "guest-remaining-target-groups.csv/.md; all 606 remaining pre-review entries grouped, only guest intermediate/build recipe roles excluded",
-  "guest_intermediate_format": "guest-intermediate-format-audit.csv/.md: 156 OMF fully framed, 5 maps, 10 symbol signatures, 8 linker response files"
+  "guest_intermediate_format": "guest-intermediate-format-audit.csv/.md: 156 OMF fully framed, 5 maps, 10 symbol signatures, 8 linker response files",
+  "header_abi_closure": "header-abi-closure.csv/.md; four selected single-declaration headers full in x86 CPU40 ANSI/cdecl only"
 }
