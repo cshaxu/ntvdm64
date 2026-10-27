@@ -7,14 +7,14 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-236 partial (205 existing source-difference rows, two live uncommitted
+236 partial (205 existing source-difference rows, two live
 source candidates, 19 partially integrated build manifests and two export-source
-records, two partially verified quick-event rows and six IOS/CCPU rows), 2,386 excluded
+records, two partially verified quick-event rows and six IOS/CCPU rows), 2,462 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,010 pending.
+52 full files (26 executable leaves and 26 declarations) and 1,934 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the declaration/resource checkpoint below, not a prior snapshot's fixed counts.
+the generated-message checkpoint below, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -179,3 +179,9 @@ reviews 434 exact pending DOS/WOW16 paths and resolves 129 positive historical
 guest/tool input roles. Its other 305 paths remain pending, including actual
 host declarations, dual-purpose GDI, CTL3D profiles and ambiguous include roots.
 Guest capability, current-image lineage and runtime proof remain separate.
+
+The [generated-message/artifact checkpoint](generated-message-role-review.md)
+resolves 76 historical file roles through actual MASM macros, original build
+recipes and bounded SYM/OMF/PCH/text observations. It separates generated
+source from binary artifacts and explicitly retains unproved image lineage;
+no corresponding message, debugging, VDD or DPMI capability is excluded.

@@ -18,10 +18,10 @@ in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-rev
 This delivery does not close the MVDM-wide source reconciliation or establish
 that every historical test has run.
 
-The [declaration/resource checkpoint](../../artifacts/mvdm-audit/guest-declaration-resource-role-review.md)
-resolves 129 original input roles from 434 reviewed paths. The ledger retains
-2,010 pending and 236 partial paths; shared-header ownership and real guest/
-device behavior remain open. This checkpoint changed no runtime/guest image.
+The [message/artifact checkpoint](../../artifacts/mvdm-audit/generated-message-role-review.md)
+resolves 76 historical file roles through macro, recipe and format evidence.
+The ledger retains 1,934 pending and 236 partial paths; shared-header ownership
+and real guest/device behavior remain open. No runtime/guest image changed.
 
 ## Active Packet
 

@@ -5,7 +5,10 @@ import csv
 import hashlib
 import io
 import json
+import re
+import runpy
 import subprocess
+import zipfile
 from pathlib import Path
 
 A = Path('artifacts/mvdm-audit')
@@ -72,7 +75,13 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             else:
                 assert original_hash in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256'])
             if proof['status'] == 'excluded':
-                assert proof['role'] in ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only') and current_hash == original_hash
+                legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only')
+                artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
+                                  'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
+                                  'historical-generated-message-artifact-only')
+                assert proof['role'] in legacy_roles + artifact_roles and current_hash == original_hash
+                if proof['role'] in artifact_roles:
+                    assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-guest-library-build-artifact-only':
                     assert prefix == 'guest-library-role-' and path.lower().endswith('.lib')
             else:
@@ -106,10 +115,12 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
-    if prefix == 'guest-declaration-resource-role-':
+    if prefix in ('guest-declaration-resource-role-', 'generated-message-role-'):
+        generated = prefix == 'generated-message-role-'
         extensions = {'.h', '.inc', '.mac', '.rc', '.rcv', '.dlg', '.bmp', '.ico', '.cur', '.bms', '.def', '.msg', '.skl', '.ext'}
         cohort = {p for p, r in old.items() if r['status'] == 'pending'
-                  and p.startswith(('dos/', 'wow16/')) and Path(p).suffix.lower() in extensions}
+                  and (re.search(r'\.(CL[0-9A-Z]|CTL|pch|sym|OBJ|tmp)$', p, re.I) if generated
+                       else p.startswith(('dos/', 'wow16/')) and Path(p).suffix.lower() in extensions)}
         reviewed = {}
         for shard, record in enumerate(observation['source_tables']):
             for row in rows(A / record['path']):
@@ -119,11 +130,42 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 originals = [Path(p.strip()) for p in row['original_path'].split(';')]
                 assert any(p.is_file() and sha(p) == row['sha256'] for p in originals)
                 reviewed[path] = row
-        assert set(reviewed) == cohort and len(cohort) == observation['reviewed_cohort_count'] == 434
+        assert set(reviewed) == cohort and len(cohort) == observation['reviewed_cohort_count'] == (76 if generated else 434)
         accepted = {p for p, r in reviewed.items() if r['proposal_status'] in ('excluded', 'excluded-file-role-only')}
+        if generated:
+            overrides = {r['relative_path']: r for r in observation['main_overrides']}
+            assert set(overrides) == cohort - accepted and all(r['basis'] for r in overrides.values())
+            accepted |= set(overrides)
         assert accepted == set(changed)
-        assert len(cohort - accepted) == observation['remaining_cohort_pending'] == 305
+        assert len(cohort - accepted) == observation['remaining_cohort_pending'] == (0 if generated else 305)
         assert all(merged[p]['status'] == 'pending' for p in cohort - accepted)
+    if prefix == 'generated-message-role-':
+        format_path = A / observation['format_observations_path']
+        assert sha(format_path) == observation['format_observations_sha256']
+        formats = json.loads(format_path.read_text())
+        script = A / 'generated-message-format-observations.py'
+        assert formats['script_sha256'] == sha(script) and formats['paths'] == 76
+        for record in formats['references']:
+            assert sha(Path(record['path'])) == record['sha256']
+        readers = runpy.run_path(str(script))
+        assert {r['relative_path'] for r in formats['records']} == set(changed)
+        for record in formats['records']:
+            path = Path('src/mvdm') / record['relative_path']
+            assert record['observation'] == 'pass' and sha(path) == record['sha256']
+            if record['format'] in ('empirical-16-bit-SYM', 'OMF'):
+                reader = 'inspect_sym' if record['format'] == 'empirical-16-bit-SYM' else 'inspect_omf'
+                assert readers[reader](path.read_bytes()) == record['details']
+            if 'compared_source_sha256' in record:
+                assert sha(Path(record['compared_source'])) == record['compared_source_sha256']
+        archive = Path(observation['archive_path'])
+        assert sha(archive) == observation['archive_sha256']
+        with zipfile.ZipFile(archive) as z:
+            archive_hashes = {hashlib.sha256(z.read(i)).hexdigest().upper() for i in z.infolist() if not i.is_dir()}
+        package_hashes = set()
+        for record in observation['package_files']:
+            assert sha(Path(record['path'])) == record['sha256']
+            package_hashes.add(record['sha256'])
+        assert all(r['sha256'] not in archive_hashes | package_hashes for r in dispositions)
     if prefix == 'guest-library-role-':
         assert observation['archive_count'] == 27 and observation['macro_source_count'] == 1
         assert sha(A / 'guest-library-format-observations.csv') == observation['format_observations_sha256']
@@ -190,7 +232,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

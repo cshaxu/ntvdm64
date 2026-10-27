@@ -1,0 +1,311 @@
+{
+  "result": "pass",
+  "base": "4837d3893",
+  "candidate_count": 76,
+  "reviewed_cohort_count": 76,
+  "remaining_cohort_pending": 0,
+  "source_tables": [
+    {
+      "path": "shard-0/generated-message-artifact-owner-review.csv",
+      "sha256": "543BE067306C718119947A7411CF19584242430E3F21E9B6D8FC96FE1717E7BA"
+    },
+    {
+      "path": "shard-1/generated-message-artifact-owner-review.csv",
+      "sha256": "1A4B1707826D0F06C83F94FE321E9CC6F802718CCBC0A021375585C6CC26E899"
+    },
+    {
+      "path": "shard-2/generated-message-artifact-owner-review.csv",
+      "sha256": "3C43A403903B12D5BF44DF2A0E66E855AFBB4616860782748C1EA0BEBC811C3F"
+    },
+    {
+      "path": "shard-3/generated-message-artifact-owner-review.csv",
+      "sha256": "20AD46F70027B3D4EB02C12989475B642630C7D0B34BDB17D3A318CA2DA73F8D"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\generated-message-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\generated-message-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\generated-message-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\generated-message-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "format_observations_path": "generated-message-format-observations.json",
+  "format_observations_sha256": "C03F5E8A57619CE3AC1E6D52E2564C3FBC4F686E7D045FB94F2775762399B82F",
+  "main_overrides": [
+    {
+      "relative_path": "wow16/regedit/debug/regedt16.sym",
+      "prior_proposal": "pending",
+      "basis": "wow16/regedit/makefile:113-129 DODEBUG enters debug and mapsym regedt16.map; this file is binary and its symbol format/content identity has not been validated; main format witness using original empirical sprof SYM layout: REGEDT16, 2 segments and 194 bounded symbols; original-generation/image-copy lineage remains unproved."
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CL3",
+      "prior_proposal": "pending",
+      "basis": "command.skl:16,19 class3/class4; buildmsg.c:406-430 creates CL<class> filename and exact directive shapes, makefile:28-31 original generator invocation. Retained generated text role is established; selected resident consumer is NOT established. No source-to-current-image claim."
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CTL",
+      "prior_proposal": "pending",
+      "basis": "command/tdata.asm:1060 and tprintf.asm:80 MSG_UTILNAME COMMAND -> sysmsg.inc:387 INCLUDE &utilname.CTL; command/makefile:341-354,458-466 source dependencies -> link16:531; generation makefile:28-31 and buildmsg.c:331-335."
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/MSDOS.CL3",
+      "prior_proposal": "pending",
+      "basis": "dos/msdosme.asm includes dosmes.inc; dosmes.inc:73 includes yesno.asm, inc/yesno.asm:3 includes msdos.cl3; makefile:78-94 msdosme.obj dependencies then NTDOS link. A make dependency alone is not the proof: actual include chain is traced."
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddes16.sym",
+      "prior_proposal": "pending",
+      "basis": "Binary prefix 7808000001000a00990002000b001e074444455354525300; exact original generation recipe and target identity still require tracing.; main format witness using original empirical sprof SYM layout: DDESTRS, 2 segments and 198 bounded symbols; original-generation/image-copy lineage remains unproved."
+    },
+    {
+      "relative_path": "wow16/ole/server/debug/olesvr.sym",
+      "prior_proposal": "pending",
+      "basis": "ole/server/makefile:75-85 link16 olesvr.dll/map; mapsym olesvr -> olesvr.sym; historical binplace; debug subdirectory copy relation not established; binary header prefix=e502000004000a00970005000b001c064f4c455356520600; main format witness using original empirical sprof SYM layout: OLESVR, 5 segments and 161 bounded symbols; original-generation/image-copy lineage remains unproved."
+    }
+  ],
+  "archive_path": "assets/winnt.zip",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "package_files": [
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\autoexec.nt",
+      "sha256": "02FE323BF5AF799E3117EBDC6138B7EAFE14D0453ECB06855D18B2C2E21B9D28"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\COMM.DRV",
+      "sha256": "EE589C26791B66742F7B5E183A44C56A13053DC584B0DCA3FCC20CD87BDCA69E"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\COMMAND.COM",
+      "sha256": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\COMMDLG.DLL",
+      "sha256": "54A7981C5667BDE19F0D703580D40A448A0BDEC010FEFFA153004EF4870DC0D4"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\config.nt",
+      "sha256": "B321E1D6FDC48D7C3F9F04109F8CFB9B83E0389D222CBBBD69168B6C3A35D8BB"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\COUNTRY.SYS",
+      "sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\demo.exe",
+      "sha256": "24F81683EF56D977E648BBB0F6DF1F4061D7D9B883719BF6087F7C2F2DD4F638"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\DOSX.EXE",
+      "sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\dumpbin.exe",
+      "sha256": "D9217BB97BADB3DFB217FD7CCFAFF810B6A27C9A4AF017E9CD50CD3BA6E0DD92"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\EGA.CPI",
+      "sha256": "30F809477737650B3005EA1EFD3BBD44DE439891036DB000372F63A6C0B1FE7A"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\FASTOPEN.EXE",
+      "sha256": "69DABBDB754B358AC4FE4B22DE04C0E4C93076816F14BB0730CAA9FD223996FC"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\GDI.EXE",
+      "sha256": "DFD5DC0236CAD81BE49070AC00CAE78891985AF395FA92755A621BD9C82BF3CE"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\GRAPHICS.COM",
+      "sha256": "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\GRAPHICS.PRO",
+      "sha256": "B734F750A473F83D33AA773FE3D6C7BCDD209D97339F37B03B8C5F3F8EED890B"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\HASH.EXE",
+      "sha256": "CE17C834B092348F95093EFD33B4A80B74C6EE82C462C7D73ABFC37306887CCC"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\HIMEM.SYS",
+      "sha256": "08AA2C47D835460ED3067FA7D6F8A3B37EDECA524AD102B0588FDD1BF389CE08"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\KB16.COM",
+      "sha256": "9C432EA71E0E11BFB2EDF9166C862826115EC4CDF8439F986A5ED71D9A3AF3B9"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\KEYBOARD.DRV",
+      "sha256": "C34D7D8D71453DD7567C6DB28958A0D4D11E4B198CFC436F4D430D93A5A3584C"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\KEYBOARD.SYS",
+      "sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\KPROBE.BAT",
+      "sha256": "87BA2F0FAC05828C35B9EB9BFDC5D651BED157512D501B23916B0E6CF20A16C8"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\KRNL386.EXE",
+      "sha256": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\LNK.EXE",
+      "sha256": "B27F657281EB00BCA30314014AF20FE5D7E3ADB2E190934CB292A20F523E0B60"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\LOADFIX.COM",
+      "sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\MEM.EXE",
+      "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\MOUSE.DRV",
+      "sha256": "2FA5611BB18EDD9C0F35E0A6B479B9D9DB17549AED811AB692BD79C3E899F890"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\mscdexnt.exe",
+      "sha256": "B3151A2DFE4A67A6C2E6113071D1F1C713BB78A04ADEA986FE01540EB96762D0"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntcon.exe",
+      "sha256": "A26389C6B2A9C9D11A524372487581ECAA3201141199708D4E55F92D2BB75050"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\NTDOS.SYS",
+      "sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\nthook32-LICENSE.txt",
+      "sha256": "B301808B732CFAA60DF2B4B422D78CD97D2A15058B207E7E33F0535BA5170DD6"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\nthook32.dll",
+      "sha256": "B03FD4950FD54ECD5E39DF32BD4919D985B32E22F17C7D1E0A8C07B430B86935"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\nthook64.dll",
+      "sha256": "50DA1504B86D9945995848C28D40D110C74E51F7791CF6EBBF3319011804B068"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\NTIO.SYS",
+      "sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntmon.exe",
+      "sha256": "D6A36563C9E1FDF54E90C1B069B655684816B794D6E7B4E5A34B2B99AF682962"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntsrv.exe",
+      "sha256": "5343F1F8A017FFF0A9D7EA58B2F5484DC382E7C59562D37D1F8BD9BAF965FD06"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntvdm.exe",
+      "sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntvwm.exe",
+      "sha256": "CE60E28AE10E56B409BD21F5598BA5C2EC5D2CDEC1B0F0B8366278CC4B5B6D1C"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntw16s32.dll",
+      "sha256": "71C95F15724BAA01C5286D82E0496D8F256413190B9742F32B988DA104A317CE"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntw16s64.dll",
+      "sha256": "D24D6338F38BBFA22745114C7DECF8E3DA1BBE8898D6F8AFC4582E3D5E192B41"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\OLECLI.DLL",
+      "sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\PIF.EXE",
+      "sha256": "A2C96803CD833FB858017F3F28DFBA9CD7F6152D5513DA2B8BC9825183F06DFC"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\REDIR.EXE",
+      "sha256": "B6E9FAD30A5423EAD9ECB45C8E28197EA62A39187D36241F9018DB82FACAC3A7"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\run16.exe",
+      "sha256": "2A5AC5D45BF8C0BA0379AB69FD9010A1ADD10DE8E42160B3D1BBF1B4660B5DE1"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\run16s.exe",
+      "sha256": "167CC44E5EA78A987DA960F585A1990EEAAFB74F3399CF398EEEF55639711346"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\setver.exe",
+      "sha256": "7D8B0765C302358117186D93283AB70D2D0DC72852757AFB4CFEECA69FD74653"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\SHELL.DLL",
+      "sha256": "B5C132C76B5106BE713B2E1B1E519EC9F540A39FCB8EFCA5CCAA42F16ECCA04F"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\SOUND.DRV",
+      "sha256": "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\SYSTEM.DRV",
+      "sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\USER.EXE",
+      "sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\VDMREDIR.DLL",
+      "sha256": "52804FA2C0FC724C120E3426CC6D6BE78B34A6014115AAD7C2AEB6FFC0C6A9BE"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\VGA.DRV",
+      "sha256": "943C2E3499E64157D11C81C85DB7586E13AF623044880876B390FBFCFAC3CFB6"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\WFWNET.DRV",
+      "sha256": "4C321D43511F845EC1A95518507133D1CF4CF3993BAE422037DBA95CE6258CCA"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\WINSPOOL.EXE",
+      "sha256": "E4E787340F124476090ED0F22837D7D7ACAB37FD7BBE49DB46CAE9AC4944D535"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\WOW32.DLL",
+      "sha256": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\WOWEXEC.EXE",
+      "sha256": "38EF366EB55AECC63183F32493B837CB4BDF059D969DD27185FCE6266CDC074D"
+    }
+  ],
+  "excluded_whole_file_hashes_absent_from_archive_and_package": true,
+  "scope": "Source/format and historical artifact roles only, no runtime or guest acceptance"
+}

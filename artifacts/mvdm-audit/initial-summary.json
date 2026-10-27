@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2010,
-    "excluded": 2386,
+    "pending": 1934,
+    "excluded": 2462,
     "partial": 236,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Declaration/resource cohort: 434 exact pending paths reviewed, 129 positive historical guest/tool input roles excluded, 305 retained pending. No guest capability exclusion or runtime change; previous source-retention and controlled-object limits remain."
+  "note": "Generated-message/artifact checkpoint resolves 76 historical file roles:59 MASM message/control texts,11 symbol metadata files,2 OMF objects,2 host PCH files and2 text temporaries. No capability exclusion or runtime/guest change; original semantic obligations remain."
 }

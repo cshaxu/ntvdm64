@@ -1,0 +1,1081 @@
+{
+  "result": "observed",
+  "base": "4837d3893",
+  "paths": 76,
+  "script_sha256": "5E06B666366E00177AE26126617F593EFF16DA8357FB2DDD2D30E7636CCD4F97",
+  "references": [
+    {
+      "path": "O:\\repos.external\\OpenNT\\sdktools\\sprof\\sym16.h",
+      "sha256": "E423D8CF4F59509ECCEE5C56A0AB584B0DD6C41409572C0C1BAF92EBC5F70B67"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\sdktools\\sprof\\sym16.c",
+      "sha256": "B765A6E4D9BD3C00FFAD037560407CD2552E6B2071F99F5167085908116A37F2"
+    }
+  ],
+  "records": [
+    {
+      "relative_path": "bin86/ctl3dv2.sym",
+      "sha256": "7B0A89B4F21C4CECD344C38F25DE8951FE1E4E57B26D067F090754430DD0B6D9",
+      "bytes": 2068,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "CTL3DV2",
+        "segments": [
+          {
+            "offset": 128,
+            "name": "WEP_TEXT",
+            "number": 1,
+            "symbols": 1,
+            "parsed_end": 163,
+            "next": 176,
+            "uninterpreted_word": 35
+          },
+          {
+            "offset": 176,
+            "name": "_TEXT",
+            "number": 2,
+            "symbols": 58,
+            "parsed_end": 1089,
+            "next": 1216,
+            "uninterpreted_word": 913
+          },
+          {
+            "offset": 1216,
+            "name": "INIT_TEXT",
+            "number": 3,
+            "symbols": 11,
+            "parsed_end": 1420,
+            "next": 1456,
+            "uninterpreted_word": 204
+          },
+          {
+            "offset": 1456,
+            "name": "DGROUP",
+            "number": 4,
+            "symbols": 43,
+            "parsed_end": 1973,
+            "next": 128,
+            "uninterpreted_word": 517
+          }
+        ],
+        "symbols": 113,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/append/APPEND.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/append/APPEND.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/append/APPEND.CLA",
+      "sha256": "3644227AD23ABDE4E58F4C7C50FD26812E7526408823CCAF756CCB24658644E4",
+      "bytes": 7053,
+      "format": "MASM-message-or-control-text",
+      "lines": 217,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/append/APPEND.CLB",
+      "sha256": "17CDB69C2E6F1358CD473F0F0CB6A273E5CFF464FF81F317C64A72BC25AF503E",
+      "bytes": 1940,
+      "format": "MASM-message-or-control-text",
+      "lines": 73,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/append/APPEND.CTL",
+      "sha256": "C8135C859384A180AA9E1D97A713E07661DB1675529794F649115A3F6E9F7C66",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CL1",
+      "sha256": "9162C031D609799ABCFBB8B2C0808AAD8A8E52E2F8402CF543B692482D050F9D",
+      "bytes": 2000,
+      "format": "MASM-message-or-control-text",
+      "lines": 77,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CL3",
+      "sha256": "DF7CA28570386425254FC078AE37F5469CCF566FCEBD63F50221DA5C118BC92A",
+      "bytes": 1176,
+      "format": "MASM-message-or-control-text",
+      "lines": 49,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CL4",
+      "sha256": "EA9453CF4538ED99DEC5BE95A80283B1BA7A4F870E3CE9A56D48299300805E2D",
+      "bytes": 1173,
+      "format": "MASM-message-or-control-text",
+      "lines": 49,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CLF",
+      "sha256": "BF0BC8A8548C06987EF3EA9157962B3D183FE5FE8C2627C8AABEDF470588D8EE",
+      "bytes": 49194,
+      "format": "MASM-message-or-control-text",
+      "lines": 1421,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/COMMAND.CTL",
+      "sha256": "4D383BB90E7A065EA209E15E1D08E0FEE41138659102436F333A5540DDD919AB",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CLA",
+      "sha256": "989FC2597C9D20F9BE1089ED2333A3A3ECBB1B6F5513A4AFA19060939AFD751C",
+      "bytes": 6078,
+      "format": "MASM-message-or-control-text",
+      "lines": 179,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CLB",
+      "sha256": "4C8D2DB2647085D3DE8BDF063E13C098202DB121D48E4C6C6EFD7A704E60F2BB",
+      "bytes": 4247,
+      "format": "MASM-message-or-control-text",
+      "lines": 146,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CLC",
+      "sha256": "EE71D8DB58A68223A5BE43456DA01AA47744F7B28F859BC91FF8D11A2F7EEBF4",
+      "bytes": 4784,
+      "format": "MASM-message-or-control-text",
+      "lines": 169,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CLD",
+      "sha256": "FAA87620B97BBF8742A93F22CB7271A30FFE893577D6918CF9F65229AEAAF99C",
+      "bytes": 7671,
+      "format": "MASM-message-or-control-text",
+      "lines": 257,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/debug/DEBUG.CTL",
+      "sha256": "67FE1A0FFF7CB5DDCA3DB624E4B469CB5B4FBE0092D73303D2B3FCC5491FA626",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CLA",
+      "sha256": "3EF9A6A92BB73DB915244E923A2D40FA5632133EE727489F21CDE16A7F8BE6B0",
+      "bytes": 4559,
+      "format": "MASM-message-or-control-text",
+      "lines": 138,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CLB",
+      "sha256": "C5811A1A95E825D86F06EE132132EE40E243AFC90C6BBB2E882E64E7973CD1AB",
+      "bytes": 4149,
+      "format": "MASM-message-or-control-text",
+      "lines": 145,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CLC",
+      "sha256": "43FE22F13FF087472DA7966798E7CCD802D530511508579D5263EB3D30E3318E",
+      "bytes": 4077,
+      "format": "MASM-message-or-control-text",
+      "lines": 145,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/edlin/EDLIN.CTL",
+      "sha256": "4D383BB90E7A065EA209E15E1D08E0FEE41138659102436F333A5540DDD919AB",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/EXE2BIN.CL1",
+      "sha256": "011B1F1B2BE4F8B182F773C71556ED6417E1DB9CF904D118A2E43F06B8C4CD74",
+      "bytes": 2960,
+      "format": "MASM-message-or-control-text",
+      "lines": 109,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/EXE2BIN.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/EXE2BIN.CLA",
+      "sha256": "2C716BE1254939969BFE7C5EC5A1335CBA661DBE10077C374A6B8AD15D296C56",
+      "bytes": 2829,
+      "format": "MASM-message-or-control-text",
+      "lines": 97,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/EXE2BIN.CLB",
+      "sha256": "908E74A72C621FA0971E090EE43CA6BA13FB34FE2CA7FE935C2CB9FEA8F209D8",
+      "bytes": 2929,
+      "format": "MASM-message-or-control-text",
+      "lines": 105,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/EXE2BIN.CTL",
+      "sha256": "C8135C859384A180AA9E1D97A713E07661DB1675529794F649115A3F6E9F7C66",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CLA",
+      "sha256": "32ADE7D98D87DB21F28B5E933BD747A590CD7B6734FEB796FD84FA1716987D7E",
+      "bytes": 3935,
+      "format": "MASM-message-or-control-text",
+      "lines": 124,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CLB",
+      "sha256": "BA2A2500959B7D9E35F23640434A3B7DD6DC1422B96F8DDA78A101042925BDD0",
+      "bytes": 3053,
+      "format": "MASM-message-or-control-text",
+      "lines": 105,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CLC",
+      "sha256": "E94AD43EA4EC9A42CEC22BADD3FFF3427D0C5E42B71DA631D3AB220EF69672CD",
+      "bytes": 3006,
+      "format": "MASM-message-or-control-text",
+      "lines": 105,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/graphics/GRAPHICS.CTL",
+      "sha256": "4D383BB90E7A065EA209E15E1D08E0FEE41138659102436F333A5540DDD919AB",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/KEYB.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/KEYB.CL2",
+      "sha256": "62655CDB15636D32D574175B9162C330900919DCBFA5921BA320F0EC59FA6F7E",
+      "bytes": 2996,
+      "format": "MASM-message-or-control-text",
+      "lines": 109,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/KEYB.CLA",
+      "sha256": "C89587685CBB1C31F63DACE31DA148D47CB5F372DDB41535BCA884462DB8491D",
+      "bytes": 7765,
+      "format": "MASM-message-or-control-text",
+      "lines": 241,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/KEYB.CTL",
+      "sha256": "BA2377DB92A83423DF0B4D56D8934498A1B74306F7C94AEFAE47D2744FDA0D0C",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/MEM.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/MEM.CL2",
+      "sha256": "4D7DEBFFAFF48325ED12F0657E2BC1201E9A110BC0D51D7A50275C8EB2C148C7",
+      "bytes": 1281,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/MEM.CLA",
+      "sha256": "68517A4AA39F771C08BB74D2AA832B2F054092C154446B42EAAB9098A8AF1486",
+      "bytes": 14395,
+      "format": "MASM-message-or-control-text",
+      "lines": 452,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/MEM.CLB",
+      "sha256": "5D4DB960EFFEB0E509A07F73A6878F58CB17C7DE91F89210D6ACE1337874A755",
+      "bytes": 5122,
+      "format": "MASM-message-or-control-text",
+      "lines": 176,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/MEM.CTL",
+      "sha256": "C8135C859384A180AA9E1D97A713E07661DB1675529794F649115A3F6E9F7C66",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/nlsfunc/NLSFUNC.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "bytes": 1284,
+      "format": "MASM-message-or-control-text",
+      "lines": 53,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/nlsfunc/NLSFUNC.CL2",
+      "sha256": "E3B9E209FD0B8EEE6464990242B17EC0C6F97A47D44F787DAC0870A90AD260CD",
+      "bytes": 3246,
+      "format": "MASM-message-or-control-text",
+      "lines": 117,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/nlsfunc/NLSFUNC.CLA",
+      "sha256": "223934A239A0CDE905CFA3A26F5FF168C7DBBA4EB5EC82C8AE52F13D26ED26C1",
+      "bytes": 2577,
+      "format": "MASM-message-or-control-text",
+      "lines": 90,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/cmd/nlsfunc/NLSFUNC.CTL",
+      "sha256": "BA2377DB92A83423DF0B4D56D8934498A1B74306F7C94AEFAE47D2744FDA0D0C",
+      "bytes": 19,
+      "format": "MASM-message-or-control-text",
+      "lines": 1,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/bios/MSBIO.CL3",
+      "sha256": "279D5CF516A39248F910A17E02647F37737B2C4607A6CD119DC7236AFFED78E2",
+      "bytes": 1339,
+      "format": "MASM-message-or-control-text",
+      "lines": 62,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/bios/MSBIO.CL4",
+      "sha256": "3C753FF790AAD0F86A84130C8A40A23A420E8EBE842CB7DDE442C55E9A525873",
+      "bytes": 104,
+      "format": "MASM-message-or-control-text",
+      "lines": 6,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/bios/MSBIO.CL5",
+      "sha256": "A929484571F630176541F39D8C411D6E924D8CD6358E6BC395F94B23295015D2",
+      "bytes": 152,
+      "format": "MASM-message-or-control-text",
+      "lines": 7,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/MSDOS.CL1",
+      "sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153",
+      "bytes": 90,
+      "format": "MASM-message-or-control-text",
+      "lines": 6,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/MSDOS.CL2",
+      "sha256": "EB2759BC8C8DB4A665B6383EC98B53AFC98C67A41E9B8AAB309109504909711B",
+      "bytes": 100,
+      "format": "MASM-message-or-control-text",
+      "lines": 6,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/MSDOS.CL3",
+      "sha256": "E6312A30FA572B0ADA935D76C8C306856E6D4EEB561C2F67F9DEEAD57D97F475",
+      "bytes": 212,
+      "format": "MASM-message-or-control-text",
+      "lines": 18,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/MSDOS.CL4",
+      "sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9",
+      "bytes": 186,
+      "format": "MASM-message-or-control-text",
+      "lines": 7,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "dpmi32/obj/i386/precomp.pch",
+      "sha256": "BF124AE1585AA556C7254D91EC3207776E8596E09F5FD722CA1A469688F96B64",
+      "bytes": 1871380,
+      "format": "VCPCH0-prefixed-historical-PCH",
+      "limit": "Observed signature only, not a complete PCH parser or compatible compiler claim",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "softpc.new/bios/msbio.cl3",
+      "sha256": "279D5CF516A39248F910A17E02647F37737B2C4607A6CD119DC7236AFFED78E2",
+      "bytes": 1339,
+      "format": "MASM-message-or-control-text",
+      "lines": 62,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "softpc.new/bios/msbio.cl4",
+      "sha256": "3C753FF790AAD0F86A84130C8A40A23A420E8EBE842CB7DDE442C55E9A525873",
+      "bytes": 104,
+      "format": "MASM-message-or-control-text",
+      "lines": 6,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "softpc.new/bios/msbio.cl5",
+      "sha256": "A929484571F630176541F39D8C411D6E924D8CD6358E6BC395F94B23295015D2",
+      "bytes": 152,
+      "format": "MASM-message-or-control-text",
+      "lines": 7,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "softpc.new/bios/msbio.cl6",
+      "sha256": "4A23D5D9E82762B4E0FDE991C2C0347C1FE33E6097D2F1ED54DA9DD6CFBD0440",
+      "bytes": 211,
+      "format": "MASM-message-or-control-text",
+      "lines": 10,
+      "limit": "Text syntax observation; exact producer/consumer and conditional target require original source trace",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "softpc.new/bios/ntio.sym",
+      "sha256": "E84295B90068CB5FB91B461634A6B08718CBC748AA13EEF1C52934A3DB87219A",
+      "bytes": 3892,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "NTIO",
+        "segments": [
+          {
+            "offset": 48,
+            "name": "DATAGRP",
+            "number": 0,
+            "symbols": 69,
+            "parsed_end": 894,
+            "next": 1040,
+            "uninterpreted_word": 846
+          },
+          {
+            "offset": 1040,
+            "name": "BIOS_DATA_INIT",
+            "number": 55,
+            "symbols": 1,
+            "parsed_end": 1087,
+            "next": 1104,
+            "uninterpreted_word": 47
+          },
+          {
+            "offset": 1104,
+            "name": "FILLER",
+            "number": 73,
+            "symbols": 14,
+            "parsed_end": 1305,
+            "next": 1344,
+            "uninterpreted_word": 201
+          },
+          {
+            "offset": 1344,
+            "name": "SYSINITGRP",
+            "number": 157,
+            "symbols": 173,
+            "parsed_end": 3349,
+            "next": 3696,
+            "uninterpreted_word": 2005
+          },
+          {
+            "offset": 3696,
+            "name": "SPCKBDSEG",
+            "number": 1046,
+            "symbols": 1,
+            "parsed_end": 3738,
+            "next": 3744,
+            "uninterpreted_word": 42
+          },
+          {
+            "offset": 3744,
+            "name": "SPCMSESEG",
+            "number": 1275,
+            "symbols": 1,
+            "parsed_end": 3786,
+            "next": 3792,
+            "uninterpreted_word": 42
+          },
+          {
+            "offset": 3792,
+            "name": "SPCEMMSEG",
+            "number": 2077,
+            "symbols": 1,
+            "parsed_end": 3834,
+            "next": 3840,
+            "uninterpreted_word": 42
+          },
+          {
+            "offset": 3840,
+            "name": "DOS_LOAD_SEG",
+            "number": 2095,
+            "symbols": 1,
+            "parsed_end": 3885,
+            "next": 48,
+            "uninterpreted_word": 45
+          }
+        ],
+        "symbols": 261,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "vdd/samples/hpscan/hpscan16.OBJ",
+      "sha256": "89349A4CC82BC4FE9658C8A5AA0A7B6E7296403D2CC31ED10066DD2BA92CE90D",
+      "bytes": 556,
+      "format": "OMF",
+      "details": {
+        "records": 13,
+        "stored_zero_checksums": 0,
+        "inconsistent_nonzero_checksums": [],
+        "limit": "OMF record framing is not link membership, relocation validity or runtime behavior"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "vdd/samples/mscdex/tsr/mscdexnt.OBJ",
+      "sha256": "4F048262256822375E9E57CF181E2D425EE866A123273F3159FE99D7CBD1F37B",
+      "bytes": 639,
+      "format": "OMF",
+      "details": {
+        "records": 11,
+        "stored_zero_checksums": 0,
+        "inconsistent_nonzero_checksums": [],
+        "limit": "OMF record framing is not link membership, relocation validity or runtime behavior"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "vdmexts/obj/i386/precomp.pch",
+      "sha256": "2CC3F142B39363D1E811B989F036D7404987B42BE26364C38C51C38BE16ABE32",
+      "bytes": 1920892,
+      "format": "VCPCH0-prefixed-historical-PCH",
+      "limit": "Observed signature only, not a complete PCH parser or compatible compiler claim",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddes16.sym",
+      "sha256": "FBF0DB67470FDD479084425CD9EBEA9F7104F1BD7FD083658604D2AE67134390",
+      "bytes": 34692,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "DDESTRS",
+        "segments": [
+          {
+            "offset": 176,
+            "name": "CMDLN_TEXT",
+            "number": 1,
+            "symbols": 121,
+            "parsed_end": 1924,
+            "next": 33504,
+            "uninterpreted_word": 1748
+          },
+          {
+            "offset": 33504,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 77,
+            "parsed_end": 34521,
+            "next": 176,
+            "uninterpreted_word": 1017
+          }
+        ],
+        "symbols": 198,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/comm.sym",
+      "sha256": "AF33BA3E0AC4976BF7E07698E7940F2B7723877AB065A4696682C686BFE09179",
+      "bytes": 14468,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "COMM",
+        "segments": [
+          {
+            "offset": 32,
+            "name": "_INIT",
+            "number": 1,
+            "symbols": 1,
+            "parsed_end": 68,
+            "next": 528,
+            "uninterpreted_word": 36
+          },
+          {
+            "offset": 528,
+            "name": "_TEXT",
+            "number": 2,
+            "symbols": 155,
+            "parsed_end": 2373,
+            "next": 10624,
+            "uninterpreted_word": 1845
+          },
+          {
+            "offset": 10624,
+            "name": "_INTERRUPT",
+            "number": 3,
+            "symbols": 54,
+            "parsed_end": 11452,
+            "next": 14000,
+            "uninterpreted_word": 828
+          },
+          {
+            "offset": 14000,
+            "name": "DGROUP",
+            "number": 4,
+            "symbols": 32,
+            "parsed_end": 14395,
+            "next": 0,
+            "uninterpreted_word": 395
+          }
+        ],
+        "symbols": 242,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/keyboard.sym",
+      "sha256": "8D0045200467468C40CC8B4877CDDCAC40E9827FEA148393A8AF05C0C3768580",
+      "bytes": 980,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "KEYBOARD",
+        "segments": [
+          {
+            "offset": 48,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 23,
+            "parsed_end": 383,
+            "next": 864,
+            "uninterpreted_word": 335
+          },
+          {
+            "offset": 864,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 5,
+            "parsed_end": 953,
+            "next": 0,
+            "uninterpreted_word": 89
+          }
+        ],
+        "symbols": 28,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/killwow/KillWOW.sym",
+      "sha256": "F29C7EB27FF93567EE00DAA8C980DA940918A46C0711CF7568D0C4237EC480E8",
+      "bytes": 484,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "KILLWOW",
+        "segments": [
+          {
+            "offset": 160,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 5,
+            "parsed_end": 235,
+            "next": 304,
+            "uninterpreted_word": 75
+          },
+          {
+            "offset": 304,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 11,
+            "parsed_end": 450,
+            "next": 0,
+            "uninterpreted_word": 146
+          }
+        ],
+        "symbols": 16,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/ole/server/debug/olesvr.sym",
+      "sha256": "9AC8C86EFF0CC82B8CEFEEE2E525191479B23F5CD136B4E60B191CF19CD613B9",
+      "bytes": 11860,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "OLESVR",
+        "segments": [
+          {
+            "offset": 176,
+            "name": "WEP_TEXT",
+            "number": 1,
+            "symbols": 1,
+            "parsed_end": 211,
+            "next": 464,
+            "uninterpreted_word": 35
+          },
+          {
+            "offset": 464,
+            "name": "Give2GDI",
+            "number": 2,
+            "symbols": 1,
+            "parsed_end": 505,
+            "next": 640,
+            "uninterpreted_word": 41
+          },
+          {
+            "offset": 640,
+            "name": "_TEXT",
+            "number": 3,
+            "symbols": 93,
+            "parsed_end": 2165,
+            "next": 10736,
+            "uninterpreted_word": 1525
+          },
+          {
+            "offset": 10736,
+            "name": "INIT_TEXT",
+            "number": 4,
+            "symbols": 1,
+            "parsed_end": 10777,
+            "next": 10784,
+            "uninterpreted_word": 41
+          },
+          {
+            "offset": 10784,
+            "name": "DGROUP",
+            "number": 5,
+            "symbols": 65,
+            "parsed_end": 11714,
+            "next": 0,
+            "uninterpreted_word": 930
+          }
+        ],
+        "symbols": 161,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/regedit/debug/regedt16.sym",
+      "sha256": "7A4A2614DEE12E584ABE25010837C412CE66C796F12F235D20883F3DDC3133A5",
+      "bytes": 12596,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "REGEDT16",
+        "segments": [
+          {
+            "offset": 176,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 109,
+            "parsed_end": 1742,
+            "next": 11264,
+            "uninterpreted_word": 1566
+          },
+          {
+            "offset": 11264,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 85,
+            "parsed_end": 12417,
+            "next": 0,
+            "uninterpreted_word": 1153
+          }
+        ],
+        "symbols": 194,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/regedit/debug/regedt16.tmp",
+      "sha256": "07023C6810F15CFDAFBF9F07129E0F13B8EC64D4F873EB06C64D74D88B50EC01",
+      "bytes": 353,
+      "format": "retained-tmp-needs-owner-trace",
+      "prefix_hex": "4e414d4509524547454449540957494e444f574150490d0a0d0a444553435249",
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/system/system.sym",
+      "sha256": "F0AA85AE5056F4F8194287E1CD80EB509E883F1B6F305E61A55A4541BBB3B525",
+      "bytes": 2020,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "SYSTEM",
+        "segments": [
+          {
+            "offset": 32,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 15,
+            "parsed_end": 289,
+            "next": 1856,
+            "uninterpreted_word": 257
+          },
+          {
+            "offset": 1856,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 8,
+            "parsed_end": 1985,
+            "next": 0,
+            "uninterpreted_word": 129
+          }
+        ],
+        "symbols": 23,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/test/shell/wowexec.sym",
+      "sha256": "23B90E2C650F4AC5FC6B52ADFB536A587E6EEABD4520F06FAF104A20D7AD2104",
+      "bytes": 4084,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "WOWEXEC",
+        "segments": [
+          {
+            "offset": 160,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 30,
+            "parsed_end": 641,
+            "next": 3680,
+            "uninterpreted_word": 481
+          },
+          {
+            "offset": 3680,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 22,
+            "parsed_end": 4031,
+            "next": 0,
+            "uninterpreted_word": 351
+          }
+        ],
+        "symbols": 52,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/wfwnet/wfwnet.sym",
+      "sha256": "B151D13EA781D261AB29E516AA0B304BBADBE3B3A00A1343645CE15F18818442",
+      "bytes": 7300,
+      "format": "empirical-16-bit-SYM",
+      "details": {
+        "module": "WFWNET",
+        "segments": [
+          {
+            "offset": 48,
+            "name": "_TEXT",
+            "number": 1,
+            "symbols": 96,
+            "parsed_end": 1844,
+            "next": 6128,
+            "uninterpreted_word": 1796
+          },
+          {
+            "offset": 6128,
+            "name": "DGROUP",
+            "number": 2,
+            "symbols": 47,
+            "parsed_end": 7192,
+            "next": 0,
+            "uninterpreted_word": 1064
+          }
+        ],
+        "symbols": 143,
+        "limit": "Empirical 16-bit segment/symbol framing only; constants, indexes, trailing records and source-to-image lineage unproved"
+      },
+      "observation": "pass"
+    },
+    {
+      "relative_path": "wow16/write/insert.tmp",
+      "sha256": "BAF068E34FF8FAC909F8E25EF79401BE5162C91CCD12A3AE12ADBFCD53AEAF90",
+      "bytes": 296,
+      "format": "source-line-index-text",
+      "entries": 17,
+      "current_source_line_matches": 3,
+      "compared_source": "src\\mvdm\\wow16\\write\\insert.c",
+      "compared_source_sha256": "6FF4EF3B614D06B97641D51E3426D7FEA28CE0A564B738299DD48213250C6C16",
+      "limit": "Line-index syntax only; mismatched positions disprove exact current-source generation, not the historical index-text role",
+      "observation": "pass"
+    }
+  ],
+  "scope": "Read-only format observations, not capability classifications or runtime acceptance"
+}
