@@ -1,0 +1,3 @@
+# Set this directory as the GitBook content root when creating the site.
+# Navigation is defined in SUMMARY.md for portable GitBook-compatible imports.
+root: ./

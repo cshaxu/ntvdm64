@@ -4,8 +4,7 @@
 
 **Active: M0 T473 S9**
 
-`books/` is expressly excluded and remains untracked pending separate
-documentation admission.
+Owner approved `books/` as supporting audit reading, not an authority.
 
 Automatic progression: recover original WOW behavior with minimum bindings;
 no guest change.

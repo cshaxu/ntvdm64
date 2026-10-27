@@ -42,7 +42,10 @@ allocate work. Do not use one file to substitute for another.
 
 [etc/README.md](etc/README.md) indexes evidence, research, provenance,
 fixtures, operational material, migration records, and active-task supporting
-plans. These records cannot override the authorities above.
+plans. These records cannot override the authorities above. The supporting
+[DOS audit book](../books/ntvdm-dos/README.md) and
+[WOW32 audit book](../books/ntvdm-wow32/README.md) are reading guides to
+separately maintained source audits, not product acceptance evidence.
 
 ## Governance Gate
 
