@@ -69,3 +69,27 @@ source paths. Current file identities are listed below.
 - `selected-owner-review.csv` SHA-256 `BB743AA9C72F850513AB521F625CD2229354B2B1974D1F3061542FE95FE9B1AA`.
 - `owner-review.csv` SHA-256 `4904B3F8E9FFFE4522E50B27EF111C0221BB08DA8342782B86E7BAE8600C1E04`.
 - `unselected-source-review.csv` SHA-256 `8EE258AD12F8A634FE0B3ACF584E6ECC1A300C278EB1C0AAF3BB3AC375745996`.
+
+
+## Guest-family role and identity follow-up
+
+`guest-source-review.csv` covers all 625 frozen guest/guest-build rows,
+SHA-256 `58647F6E5452ABB202E55433FA2AC78AF4D8F4C77C027DE3687DE32077EF0354`.
+All current and frozen primary/alternate identities were rechecked. For all
+148 original `current-only` paths, the T301 supplement manifest and the
+actual OpenNT-src-2 source independently match current bytes. This establishes
+source provenance, not deployed binary derivation or behavior.
+
+At the checked system32 location, five of six same-name guest binaries match
+their mirrored sources: GRAPHICS.COM, COUNTRY.SYS, DOSX.EXE, VGA.DRV and
+WINSPOOL.EXE. SETVER.EXE has one 13-byte difference at offsets 0x28d–0x299:
+the installed bytes encode WIN100.BIN / 3.30. The current config.nt loads
+SETVER and autoexec.nt explicitly requests that version entry, consistent
+with intended runtime configuration; the write time is unproved. Neither
+identity equality nor that configuration attribution proves all guest
+capabilities. Other binary names have not been observed in this one directory;
+that does not establish their global absence.
+
+All 625 are excluded solely from host link by original guest/build role;
+624 remain pending and the formatting-different guest source remains partial.
+No guest file was modified, rebuilt, or executed in this review.

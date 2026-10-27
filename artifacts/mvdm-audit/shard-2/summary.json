@@ -4,9 +4,9 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 1029,
+    "pending": 1027,
     "partial": 48,
-    "excluded": 12
+    "excluded": 14
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "97B7C1FCA157D891C59824BF3FB37DED51B5D856B06D2352E2A257B2358B5830",
+  "output_sha256": "5EA7DEE5C240AE1AEE6B08862DBC8A2653BC6AE006763AC113E7665BBA814746",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,029 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -90,5 +90,14 @@
     "zero_symbol": 1,
     "evidence": "wow32-selected-link-inventory.json",
     "limits": "Direct link inputs do not prove runtime; wmmedia1 is source-disabled, guest MMSYSTEM/driver route remains unknown."
+  },
+  "pending_non_ccpu_selected_link_review": {
+    "rows_reviewed": 39,
+    "worker_map_symbol_contributors": 29,
+    "worker_no_map_symbol": 8,
+    "vdmredir_direct_inputs": 2,
+    "new_profile_exclusions": 2,
+    "evidence": "non-ccpu-selected-link-inventory.json",
+    "limits": "Sample symbols and name references are candidate call edges, not runtime or whole-capability proof; map does not prove every branch."
   }
 }

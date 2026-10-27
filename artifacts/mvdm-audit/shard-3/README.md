@@ -138,3 +138,14 @@ A closer check of T457 evidence found S4 labels the dialog witness
 “input/caret”, while S2 explicitly describes keyboard processing and records
 the caret desktop-state fixture as a non-pass. `wucaret.c` thus remains
 pending; the broad S4 label cannot replace a real caret-specific witness.
+
+## Guest input audit
+
+[Guest input and image review](guest-input-review.md) adds per-file guest
+roles, precise SHA-256 matches to the archived/installed guest images and
+strictly bounded family observations for all 656 guest-labelled rows. Twelve
+mirror rows match eleven different installed and archived guest files; this
+does not establish source-to-image lineage or full guest behavior. The ZIP
+contains the two separately staged MMSYSTEM/TOOLHELP images that were absent
+at the currently inspected System32 path. All formerly pending guest rows
+remain pending pending actual source/capability evidence.

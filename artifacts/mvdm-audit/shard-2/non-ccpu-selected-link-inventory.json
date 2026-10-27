@@ -1,0 +1,2337 @@
+{
+  "ninja": "build/.ninja/msvc-x86-release/worker/build.ninja",
+  "worker_map": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+  "worker_map_sha256": "641E5C33430445ECC73885176250194BE936549654E14864074BD0B7D92D3CE2",
+  "ntvdm_current_and_r10_sha256": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+  "vdmredir_current_and_r10_sha256": "A5FADF8EC7734DC7231544346F873D32E781C500068859677AE9166040613113",
+  "scope": "Source graph and named-map evidence only; absent map symbols are inconclusive for optimized, data-only, duplicate or empty objects. VDMREDIR direct inputs have no map witness here.",
+  "rows": [
+    {
+      "path": "dos/command/cmddisp.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/command/cmddisp.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 2,
+      "sample_map_entries": [
+        {
+          "line": 3784,
+          "entry": "0001:0014f6d0       _CmdDispatch               005506d0 f   original-mvdm-command:cmddisp.obj"
+        },
+        {
+          "line": 7682,
+          "entry": "0003:000087e0       _apfnSVCCmd                005bc7e0     original-mvdm-command:cmddisp.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-command.lib"
+      ],
+      "symbol_cross_references": {
+        "CmdDispatch": [
+          {
+            "file": "src/mvdm/inc/cmdsvc.h",
+            "line": 128,
+            "text": "BOOL CmdDispatch (ULONG);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_bop.c",
+            "line": 394,
+            "text": "IMPORT BOOL CmdDispatch(ULONG);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_bop.c",
+            "line": 397,
+            "text": "CmdDispatch((ULONG) Command);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "dos/dem/demdasd.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/dem/demdasd.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 22,
+      "sample_map_entries": [
+        {
+          "line": 3685,
+          "entry": "0001:00148b50       _demAbsRead                00549b50 f   original-mvdm-dem:demdasd.obj"
+        },
+        {
+          "line": 3686,
+          "entry": "0001:00148b60       _demAbsReadWrite           00549b60 f   original-mvdm-dem:demdasd.obj"
+        },
+        {
+          "line": 3687,
+          "entry": "0001:00148fc0       _demAbsWrite               00549fc0 f   original-mvdm-dem:demdasd.obj"
+        },
+        {
+          "line": 3688,
+          "entry": "0001:00148fd0       _demBiosDiskIoRW           00549fd0 f   original-mvdm-dem:demdasd.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-dem.lib"
+      ],
+      "symbol_cross_references": {
+        "demAbsRead": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 232,
+            "text": "VOID demAbsRead \t    (VOID);"
+          },
+          {
+            "file": "src/mvdm/dos/dem/demdisp.c",
+            "line": 141,
+            "text": "demAbsRead,\t\t//SVC_DEMABSDRD"
+          }
+        ],
+        "demAbsReadWrite": [
+          {
+            "file": "src/mvdm/dos/dem/demdasd.h",
+            "line": 270,
+            "text": "VOID demAbsReadWrite(BOOL IsWrite);"
+          }
+        ],
+        "demAbsWrite": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 233,
+            "text": "VOID demAbsWrite\t    (VOID);"
+          },
+          {
+            "file": "src/mvdm/dos/dem/demdisp.c",
+            "line": 142,
+            "text": "demAbsWrite,\t\t//SVC_DEMABSDWRT"
+          }
+        ],
+        "demBiosDiskIoRW": [
+          {
+            "file": "src/mvdm/dos/dem/demdasd.h",
+            "line": 283,
+            "text": "DWORD demBiosDiskIoRW(PBDS pbds, DWORD StartSector, DWORD Sectors,"
+          }
+        ]
+      }
+    },
+    {
+      "path": "dos/dem/demioctl.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/dem/demioctl.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 10,
+      "sample_map_entries": [
+        {
+          "line": 3755,
+          "entry": "0001:0014d420       _demIoctlChangeable        0054e420 f   original-mvdm-dem:demioctl.obj"
+        },
+        {
+          "line": 3756,
+          "entry": "0001:0014d510       _demIoctlInvalid           0054e510 f   original-mvdm-dem:demioctl.obj"
+        },
+        {
+          "line": 3757,
+          "entry": "0001:0014d530       _demIoctlDiskGeneric       0054e530 f   original-mvdm-dem:demioctl.obj"
+        },
+        {
+          "line": 3758,
+          "entry": "0001:0014dd50       _demIoctlDiskQuery         0054ed50 f   original-mvdm-dem:demioctl.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-dem.lib"
+      ],
+      "symbol_cross_references": {
+        "demIoctlChangeable": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 228,
+            "text": "VOID demIoctlChangeable     (VOID);"
+          }
+        ],
+        "demIoctlInvalid": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 229,
+            "text": "VOID demIoctlInvalid        (VOID);"
+          }
+        ],
+        "demIoctlDiskGeneric": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 234,
+            "text": "VOID demIoctlDiskGeneric    (VOID);"
+          }
+        ],
+        "demIoctlDiskQuery": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 235,
+            "text": "VOID demIoctlDiskQuery\t    (VOID);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "dos/dem/demlock.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/dem/demlock.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 1,
+      "sample_map_entries": [
+        {
+          "line": 3774,
+          "entry": "0001:0014e6d0       _demLockOper               0054f6d0 f   original-mvdm-dem:demlock.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-dem.lib"
+      ],
+      "symbol_cross_references": {
+        "demLockOper": [
+          {
+            "file": "src/mvdm/dos/dem/dem.h",
+            "line": 187,
+            "text": "VOID demLockOper        (VOID);"
+          },
+          {
+            "file": "src/mvdm/dos/dem/demdisp.c",
+            "line": 163,
+            "text": "demLockOper,               //SVC_DEMLOCKOPER"
+          }
+        ]
+      }
+    },
+    {
+      "path": "dpmi32/debug.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/dpmi/debug.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-mvdm-dpmi32.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/bios/build_id.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/bios/build_id.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 2,
+      "sample_map_entries": [
+        {
+          "line": 1951,
+          "entry": "0001:00065950       _Get_build_id              00466950 f   original-softpc-bios:build_id.obj"
+        },
+        {
+          "line": 10883,
+          "entry": "0003:000040ec       _base_name                 005b80ec     original-softpc-bios:build_id.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-bios.lib"
+      ],
+      "symbol_cross_references": {
+        "Get_build_id": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/bios.c",
+            "line": 183,
+            "text": "Get_build_id,\t/* BOP 21 */"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/bios.h",
+            "line": 249,
+            "text": "extern void Get_build_id();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/comms/printer.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/comms/printer.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 28,
+      "sample_map_entries": [
+        {
+          "line": 3600,
+          "entry": "0001:00143770       _printer_init              00544770 f   original-softpc-comms:printer.obj"
+        },
+        {
+          "line": 3601,
+          "entry": "0001:00143850       _printer_is_being_closed   00544850 f   original-softpc-comms:printer.obj"
+        },
+        {
+          "line": 3602,
+          "entry": "0001:00143b40       _printer_post              00544b40 f   original-softpc-comms:printer.obj"
+        },
+        {
+          "line": 3603,
+          "entry": "0001:00143b70       _printer_setup_table       00544b70 f   original-softpc-comms:printer.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-comms.lib"
+      ],
+      "symbol_cross_references": {
+        "printer_init": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/reset.c",
+            "line": 1017,
+            "text": "printer_init(adapter);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/printer.h",
+            "line": 32,
+            "text": "extern\tvoid printer_init(int);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/printer.h",
+            "line": 36,
+            "text": "extern\tvoid printer_init();"
+          }
+        ],
+        "printer_is_being_closed": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_lpt.c",
+            "line": 317,
+            "text": "printer_is_being_closed(adapter);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/printer.h",
+            "line": 60,
+            "text": "extern void printer_is_being_closed(int adapter);"
+          }
+        ],
+        "printer_post": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/reset.c",
+            "line": 1018,
+            "text": "printer_post(adapter);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/printer.h",
+            "line": 33,
+            "text": "extern\tvoid printer_post(int);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/printer.h",
+            "line": 37,
+            "text": "extern\tvoid printer_post();"
+          }
+        ],
+        "printer_setup_table": [
+          {
+            "file": "src/mvdm/softpc.new/base/keymouse/keybd_io.c",
+            "line": 296,
+            "text": "void printer_setup_table(sys_addr table_addr);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/keymouse/keybd_io.c",
+            "line": 2011,
+            "text": "printer_setup_table(effective_addr(KbdSeg, *pkio_table++));"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cpu/src/evid/vglob.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/vglob.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 51,
+      "sample_map_entries": [
+        {
+          "line": 2485,
+          "entry": "0001:00090140       _getVideobit_prot_mask     00491140 f   original-softpc-cvidc:vglob.obj"
+        },
+        {
+          "line": 2486,
+          "entry": "0001:00090150       _getVideochain             00491150 f   original-softpc-cvidc:vglob.obj"
+        },
+        {
+          "line": 2487,
+          "entry": "0001:00090160       _getVideodata_and_mask     00491160 f   original-softpc-cvidc:vglob.obj"
+        },
+        {
+          "line": 2488,
+          "entry": "0001:00090170       _getVideodata_xor_mask     00491170 f   original-softpc-cvidc:vglob.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "getVideobit_prot_mask": [
+          {
+            "file": "src/mvdm/softpc.new/base/ccpu386/vglob.c",
+            "line": 129,
+            "text": "getVideobit_prot_mask IFN0()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidgen.h",
+            "line": 106,
+            "text": "#define\tgetVideobit_prot_mask()\t(*(Video.GetVideobit_prot_mask))()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/ega_dump.c",
+            "line": 202,
+            "text": "getVideobit_prot_mask(),getVideodata_and_mask(),"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 188,
+            "text": "#define\tgetVideobit_prot_mask()\t\tVGLOBS->bit_prot_mask"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 268,
+            "text": "extern IU32 getVideobit_prot_mask IPT0();"
+          }
+        ],
+        "getVideochain": [
+          {
+            "file": "src/mvdm/softpc.new/base/ccpu386/vglob.c",
+            "line": 437,
+            "text": "getVideochain IFN0()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidgen.h",
+            "line": 134,
+            "text": "#define\tgetVideochain()\t(*(Video.GetVideochain))()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/ev_glue.c",
+            "line": 512,
+            "text": "chain_index = getVideochain();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/ev_glue.c",
+            "line": 523,
+            "text": "chain_index = getVideochain();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/ev_glue.c",
+            "line": 587,
+            "text": "chain = getVideochain();"
+          }
+        ],
+        "getVideodata_and_mask": [
+          {
+            "file": "src/mvdm/softpc.new/base/ccpu386/vglob.c",
+            "line": 96,
+            "text": "getVideodata_and_mask IFN0()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidgen.h",
+            "line": 103,
+            "text": "#define\tgetVideodata_and_mask()\t(*(Video.GetVideodata_and_mask))()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/ega_dump.c",
+            "line": 202,
+            "text": "getVideobit_prot_mask(),getVideodata_and_mask(),"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 182,
+            "text": "#define\tgetVideodata_and_mask()\t\tVGLOBS->data_and_mask"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 262,
+            "text": "extern IU32 getVideodata_and_mask IPT0();"
+          }
+        ],
+        "getVideodata_xor_mask": [
+          {
+            "file": "src/mvdm/softpc.new/base/ccpu386/vglob.c",
+            "line": 107,
+            "text": "getVideodata_xor_mask IFN0()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidgen.h",
+            "line": 104,
+            "text": "#define\tgetVideodata_xor_mask()\t(*(Video.GetVideodata_xor_mask))()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/ega_dump.c",
+            "line": 203,
+            "text": "getVideodata_xor_mask(),getVideolatch_xor_mask());"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 184,
+            "text": "#define\tgetVideodata_xor_mask()\t\tVGLOBS->data_xor_mask"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egacpu.h",
+            "line": 264,
+            "text": "extern IU32 getVideodata_xor_mask IPT0();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/accessfn.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/accessfn.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 103,
+      "sample_map_entries": [
+        {
+          "line": 2363,
+          "entry": "0001:0008e8a0       _PurgeLostIretHookLine     0048f8a0 f   original-softpc-cvidc:accessfn.obj"
+        },
+        {
+          "line": 2364,
+          "entry": "0001:0008e8b0       _getAF                     0048f8b0 f   original-softpc-cvidc:accessfn.obj"
+        },
+        {
+          "line": 2365,
+          "entry": "0001:0008e8c0       _getAH                     0048f8c0 f   original-softpc-cvidc:accessfn.obj"
+        },
+        {
+          "line": 2366,
+          "entry": "0001:0008e8d0       _getAL                     0048f8d0 f   original-softpc-cvidc:accessfn.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "PurgeLostIretHookLine": [
+          {
+            "file": "src/mvdm/softpc.new/host/inc/ppc/pig/c2cpusad.h",
+            "line": 174,
+            "text": "\"PurgeLostIretHookLine\","
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+            "line": 192,
+            "text": "void\t(*PurgeLostIretHookLine)\tIPT2(IU16,\tlineNum, IU32,\tdepth);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+            "line": 2397,
+            "text": "IMPORT\tvoid\tPurgeLostIretHookLine\tIPT2(IU16, lineNum, IU32, depth);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+            "line": 2398,
+            "text": "#define\tPurgeLostIretHookLine(lineNum, depth)\tPurgeLostIretHookLine(lineNum, depth)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/inc/ppc/pig/cpu4gen.h",
+            "line": 2402,
+            "text": "#define\tPurgeLostIretHookLine(lineNum, depth)\t(*(Cpu.PurgeLostIretHookLine))(lineNum, depth)"
+          }
+        ],
+        "getAF": [
+          {
+            "file": "src/mvdm/inc/monregs.h",
+            "line": 55,
+            "text": "extern ULONG  getAF(VOID);"
+          },
+          {
+            "file": "src/mvdm/inc/softpc.h",
+            "line": 289,
+            "text": "#define getAF()     ((VdmTib.VdmContext.EFlags & FLG_AUXILIARY) ? 1 : 0)"
+          },
+          {
+            "file": "src/mvdm/inc/softpc.h",
+            "line": 418,
+            "text": "extern ULONG  getAF(VOID);"
+          },
+          {
+            "file": "src/mvdm/inc/softpc.h",
+            "line": 618,
+            "text": "extern ULONG getAF(VOID);"
+          },
+          {
+            "file": "src/mvdm/vdmredir/vrdebug.c",
+            "line": 2317,
+            "text": "flags |= (WORD)getAF() << 4;"
+          }
+        ],
+        "getAH": [
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 190,
+            "text": "DosMajorCode = getAH();"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 241,
+            "text": "BOOL ReturnZero = (getAH() == 6 || getAX() == 0x0c06) && getDL() == 0xff;"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 1092,
+            "text": "BOOL ReturnDI = getAH() == 0x59;"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 1242,
+            "text": "Function = getAH();"
+          },
+          {
+            "file": "src/mvdm/inc/monregs.h",
+            "line": 24,
+            "text": "extern UCHAR  getAH(VOID);"
+          }
+        ],
+        "getAL": [
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 408,
+            "text": "if (getAL() == 0x0a) {"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 521,
+            "text": "if ((getAL() == 0) && (CurrentPmDtaAddress != CurrentDta)) {"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 1384,
+            "text": "IoctlMinor = getAL();"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 1613,
+            "text": "if (getAL() == 3) {"
+          },
+          {
+            "file": "src/mvdm/dpmi32/int21map.c",
+            "line": 1660,
+            "text": "if (getAL() == 1) LoadResult = CommandTail + 14;"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid005.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID005.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 68,
+      "sample_map_entries": [
+        {
+          "line": 3184,
+          "entry": "0001:000f4f30       _S_2246_GenericDwordMove_Fwd 004f5f30 f   original-softpc-cvidc:SEVID005.obj"
+        },
+        {
+          "line": 3185,
+          "entry": "0001:000f4f50       _S_2247_GenericByteMove_Bwd 004f5f50 f   original-softpc-cvidc:SEVID005.obj"
+        },
+        {
+          "line": 3186,
+          "entry": "0001:000f4f70       _S_2248_GenericWordMove_Bwd 004f5f70 f   original-softpc-cvidc:SEVID005.obj"
+        },
+        {
+          "line": 3187,
+          "entry": "0001:000f4f90       _S_2249_GenericDwordMove_Bwd 004f5f90 f   original-softpc-cvidc:SEVID005.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2246_GenericDwordMove_Fwd": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 36,
+            "text": "S_2246_GenericDwordMove_Fwd,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 21,
+            "text": "extern void S_2246_GenericDwordMove_Fwd IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2247_GenericByteMove_Bwd": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 33,
+            "text": "S_2247_GenericByteMove_Bwd,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 22,
+            "text": "extern void S_2247_GenericByteMove_Bwd IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2248_GenericWordMove_Bwd": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 35,
+            "text": "S_2248_GenericWordMove_Bwd,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 23,
+            "text": "extern void S_2248_GenericWordMove_Bwd IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2249_GenericDwordMove_Bwd": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 37,
+            "text": "S_2249_GenericDwordMove_Bwd"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 24,
+            "text": "extern void S_2249_GenericDwordMove_Bwd IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid012.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID012.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 68,
+      "sample_map_entries": [
+        {
+          "line": 2682,
+          "entry": "0001:000a2500       _S_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000 004a3500 f   original-softpc-cvidc:SEVID012.obj"
+        },
+        {
+          "line": 2683,
+          "entry": "0001:000a2520       _S_2471_UnchainedWordWrite_00000003_00000008_00000000 004a3520 f   original-softpc-cvidc:SEVID012.obj"
+        },
+        {
+          "line": 2684,
+          "entry": "0001:000a2540       _S_2472_UnchainedWordWrite_00000003_00000009_00000000 004a3540 f   original-softpc-cvidc:SEVID012.obj"
+        },
+        {
+          "line": 2685,
+          "entry": "0001:000a2560       _S_2473_UnchainedWordWrite_00000003_0000000e_00000000 004a3560 f   original-softpc-cvidc:SEVID012.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid011.c",
+            "line": 3739,
+            "text": "{\textern\tIUH\tS_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000()\t;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid011.c",
+            "line": 3740,
+            "text": "IUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\treturnValue\t=\tS_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000(v1,v2,v3,v4);\t}"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid011.c",
+            "line": 3771,
+            "text": "{\textern\tIUH\tS_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000()\t;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid011.c",
+            "line": 3772,
+            "text": "IUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\treturnValue\t=\tS_2470_CopyByte4PlaneUnchained_00000003_0000000f_00000000_00000000(v1,v2,v3,v4);\t}"
+          }
+        ],
+        "S_2471_UnchainedWordWrite_00000003_00000008_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 413,
+            "text": "S_2471_UnchainedWordWrite_00000003_00000008_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 338,
+            "text": "extern void S_2471_UnchainedWordWrite_00000003_00000008_00000000 IPT2(IU32, eaOff, IU16, eaVal);"
+          }
+        ],
+        "S_2472_UnchainedWordWrite_00000003_00000009_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 427,
+            "text": "S_2472_UnchainedWordWrite_00000003_00000009_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 350,
+            "text": "extern void S_2472_UnchainedWordWrite_00000003_00000009_00000000 IPT2(IU32, eaOff, IU16, eaVal);"
+          }
+        ],
+        "S_2473_UnchainedWordWrite_00000003_0000000e_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 441,
+            "text": "S_2473_UnchainedWordWrite_00000003_0000000e_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 362,
+            "text": "extern void S_2473_UnchainedWordWrite_00000003_0000000e_00000000 IPT2(IU32, eaOff, IU16, eaVal);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid014.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID014.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 68,
+      "sample_map_entries": [
+        {
+          "line": 3504,
+          "entry": "0001:0012df90       _S_2534_UnchainedWordMove_00000000_00000009_00000000_00000001 0052ef90 f   original-softpc-cvidc:SEVID014.obj"
+        },
+        {
+          "line": 3505,
+          "entry": "0001:0012dfb0       _S_2535_CopyWord4PlaneUnchained_00000000_00000009_00000000_00000001 0052efb0 f   original-softpc-cvidc:SEVID014.obj"
+        },
+        {
+          "line": 3506,
+          "entry": "0001:0012dfd0       _S_2536_UnchainedWordMove_00000000_0000000e_00000000_00000001 0052efd0 f   original-softpc-cvidc:SEVID014.obj"
+        },
+        {
+          "line": 3507,
+          "entry": "0001:0012dff0       _S_2537_CopyWordPlnByPlnUnchained_00000000_0000000e_00000000_00000001 0052eff0 f   original-softpc-cvidc:SEVID014.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2534_UnchainedWordMove_00000000_00000009_00000000_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 197,
+            "text": "S_2534_UnchainedWordMove_00000000_00000009_00000000_00000001,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 155,
+            "text": "extern void S_2534_UnchainedWordMove_00000000_00000009_00000000_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2536_UnchainedWordMove_00000000_0000000e_00000000_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 211,
+            "text": "S_2536_UnchainedWordMove_00000000_0000000e_00000000_00000001,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 167,
+            "text": "extern void S_2536_UnchainedWordMove_00000000_0000000e_00000000_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid016.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID016.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 69,
+      "sample_map_entries": [
+        {
+          "line": 2618,
+          "entry": "0001:00096ba0       _S_2598_UnchainedDwordMove_00000002_0000000e_00000000_00000001 00497ba0 f   original-softpc-cvidc:SEVID016.obj"
+        },
+        {
+          "line": 2619,
+          "entry": "0001:00096bc0       _S_2599_UnchainedDwordMove_00000002_0000000f_00000000_00000001 00497bc0 f   original-softpc-cvidc:SEVID016.obj"
+        },
+        {
+          "line": 2620,
+          "entry": "0001:00096be0       _S_2600_UnchainedByteMove_00000003_00000008_00000000_00000001 00497be0 f   original-softpc-cvidc:SEVID016.obj"
+        },
+        {
+          "line": 2621,
+          "entry": "0001:00096c00       _S_2601_CopyBytePlnByPlnUnchained_00000003_00000008_00000000_00000001 00497c00 f   original-softpc-cvidc:SEVID016.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2598_UnchainedDwordMove_00000002_0000000e_00000000_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 395,
+            "text": "S_2598_UnchainedDwordMove_00000002_0000000e_00000000_00000001"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 324,
+            "text": "extern void S_2598_UnchainedDwordMove_00000002_0000000e_00000000_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2599_UnchainedDwordMove_00000002_0000000f_00000000_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 409,
+            "text": "S_2599_UnchainedDwordMove_00000002_0000000f_00000000_00000001"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 336,
+            "text": "extern void S_2599_UnchainedDwordMove_00000002_0000000f_00000000_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2600_UnchainedByteMove_00000003_00000008_00000000_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 419,
+            "text": "S_2600_UnchainedByteMove_00000003_00000008_00000000_00000001,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 346,
+            "text": "extern void S_2600_UnchainedByteMove_00000003_00000008_00000000_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid021.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID021.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 68,
+      "sample_map_entries": [
+        {
+          "line": 2746,
+          "entry": "0001:000ac8f0       _S_2758_Chain4ByteMove_00000000_00000008_00000000 004ad8f0 f   original-softpc-cvidc:SEVID021.obj"
+        },
+        {
+          "line": 2747,
+          "entry": "0001:000ac910       _S_2759_CopyBytePlnByPlnChain4_00000000_00000008_00000000_00000000 004ad910 f   original-softpc-cvidc:SEVID021.obj"
+        },
+        {
+          "line": 2748,
+          "entry": "0001:000ac930       _S_2760_Chain4ByteMove_00000000_00000009_00000000 004ad930 f   original-softpc-cvidc:SEVID021.obj"
+        },
+        {
+          "line": 2749,
+          "entry": "0001:000ac950       _S_2761_CopyByte4PlaneChain4_00000000_00000009_00000000_00000000 004ad950 f   original-softpc-cvidc:SEVID021.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2758_Chain4ByteMove_00000000_00000008_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 477,
+            "text": "S_2758_Chain4ByteMove_00000000_00000008_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 391,
+            "text": "extern void S_2758_Chain4ByteMove_00000000_00000008_00000000 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2759_CopyBytePlnByPlnChain4_00000000_00000008_00000000_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid022.c",
+            "line": 3024,
+            "text": "{\textern\tIUH\tS_2759_CopyBytePlnByPlnChain4_00000000_00000008_00000000_00000000()\t;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid022.c",
+            "line": 3025,
+            "text": "IUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\treturnValue\t=\tS_2759_CopyBytePlnByPlnChain4_00000000_00000008_00000000_00000000(v1,v2,v3,v4);\t}"
+          }
+        ],
+        "S_2760_Chain4ByteMove_00000000_00000009_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 491,
+            "text": "S_2760_Chain4ByteMove_00000000_00000009_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 403,
+            "text": "extern void S_2760_Chain4ByteMove_00000000_00000009_00000000 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid025.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID025.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 68,
+      "sample_map_entries": [
+        {
+          "line": 2970,
+          "entry": "0001:000d0870       _S_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000 004d1870 f   original-softpc-cvidc:SEVID025.obj"
+        },
+        {
+          "line": 2971,
+          "entry": "0001:000d0890       _S_2887_Chain4ByteMove_00000002_00000009_00000000 004d1890 f   original-softpc-cvidc:SEVID025.obj"
+        },
+        {
+          "line": 2972,
+          "entry": "0001:000d08b0       _S_2888_CopyByte4PlaneChain4_00000002_00000009_00000000_00000000 004d18b0 f   original-softpc-cvidc:SEVID025.obj"
+        },
+        {
+          "line": 2973,
+          "entry": "0001:000d08d0       _S_2889_Chain4ByteMove_00000002_0000000e_00000000 004d18d0 f   original-softpc-cvidc:SEVID025.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid024.c",
+            "line": 3133,
+            "text": "{\textern\tIUH\tS_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000()\t;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid024.c",
+            "line": 3134,
+            "text": "IUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\treturnValue\t=\tS_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000(v1,v2,v3,v4);\t}"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid024.c",
+            "line": 3160,
+            "text": "{\textern\tIUH\tS_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000()\t;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/sevid024.c",
+            "line": 3161,
+            "text": "IUH\treturnValue,v1=0,v2=0,v3=0,v4=0;\treturnValue\t=\tS_2886_CopyBytePlnByPlnChain4_00000002_00000008_00000000_00000000(v1,v2,v3,v4);\t}"
+          }
+        ],
+        "S_2887_Chain4ByteMove_00000002_00000009_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 673,
+            "text": "S_2887_Chain4ByteMove_00000002_00000009_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 559,
+            "text": "extern void S_2887_Chain4ByteMove_00000002_00000009_00000000 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_2889_Chain4ByteMove_00000002_0000000e_00000000": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 687,
+            "text": "S_2889_Chain4ByteMove_00000002_0000000e_00000000,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 571,
+            "text": "extern void S_2889_Chain4ByteMove_00000002_0000000e_00000000 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sevid030.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SEVID030.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 50,
+      "sample_map_entries": [
+        {
+          "line": 3034,
+          "entry": "0001:000dc1d0       _S_3046_Chain4DwordMove_00000002_00000009_00000001 004dd1d0 f   original-softpc-cvidc:SEVID030.obj"
+        },
+        {
+          "line": 3035,
+          "entry": "0001:000dc1f0       _S_3047_Chain4DwordMove_00000002_0000000e_00000001 004dd1f0 f   original-softpc-cvidc:SEVID030.obj"
+        },
+        {
+          "line": 3036,
+          "entry": "0001:000dc210       _S_3048_Chain4DwordMove_00000002_0000000f_00000001 004dd210 f   original-softpc-cvidc:SEVID030.obj"
+        },
+        {
+          "line": 3037,
+          "entry": "0001:000dc230       _S_3049_Chain4ByteMove_00000003_00000008_00000001 004dd230 f   original-softpc-cvidc:SEVID030.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_3046_Chain4DwordMove_00000002_00000009_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 678,
+            "text": "S_3046_Chain4DwordMove_00000002_00000009_00000001"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 564,
+            "text": "extern void S_3046_Chain4DwordMove_00000002_00000009_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_3047_Chain4DwordMove_00000002_0000000e_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 692,
+            "text": "S_3047_Chain4DwordMove_00000002_0000000e_00000001"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 576,
+            "text": "extern void S_3047_Chain4DwordMove_00000002_0000000e_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_3048_Chain4DwordMove_00000002_0000000f_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 706,
+            "text": "S_3048_Chain4DwordMove_00000002_0000000f_00000001"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 588,
+            "text": "extern void S_3048_Chain4DwordMove_00000002_0000000f_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ],
+        "S_3049_Chain4ByteMove_00000003_00000008_00000001": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+            "line": 716,
+            "text": "S_3049_Chain4ByteMove_00000003_00000008_00000001,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/evidfunc.h",
+            "line": 598,
+            "text": "extern void S_3049_Chain4ByteMove_00000003_00000008_00000001 IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sinit013.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/cvidc/SINIT013.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 62,
+      "sample_map_entries": [
+        {
+          "line": 2589,
+          "entry": "0001:000938e0       _S_0415_CiSetVideofwd_str_read_addr_00000034 004948e0 f   original-softpc-cvidc:SINIT013.obj"
+        },
+        {
+          "line": 2590,
+          "entry": "0001:00093900       _S_0416_CiSetVideobwd_str_read_addr_00000035 00494900 f   original-softpc-cvidc:SINIT013.obj"
+        },
+        {
+          "line": 2591,
+          "entry": "0001:00093920       _S_0417_CiSetVideodirty_total_00000036 00494920 f   original-softpc-cvidc:SINIT013.obj"
+        },
+        {
+          "line": 2592,
+          "entry": "0001:00093940       _S_0418_CiSetVideodirty_low_00000037 00494940 f   original-softpc-cvidc:SINIT013.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-cvidc.lib"
+      ],
+      "symbol_cross_references": {
+        "S_0415_CiSetVideofwd_str_read_addr_00000034": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 59,
+            "text": "extern void  S_0415_CiSetVideofwd_str_read_addr_00000034 IFN1(IHPE, value);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 141,
+            "text": "S_0415_CiSetVideofwd_str_read_addr_00000034,"
+          }
+        ],
+        "S_0416_CiSetVideobwd_str_read_addr_00000035": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 60,
+            "text": "extern void  S_0416_CiSetVideobwd_str_read_addr_00000035 IFN1(IHPE, value);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 142,
+            "text": "S_0416_CiSetVideobwd_str_read_addr_00000035,"
+          }
+        ],
+        "S_0417_CiSetVideodirty_total_00000036": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 61,
+            "text": "extern void  S_0417_CiSetVideodirty_total_00000036 IFN1(IHPE, value);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 143,
+            "text": "S_0417_CiSetVideodirty_total_00000036,"
+          }
+        ],
+        "S_0418_CiSetVideodirty_low_00000037": [
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 62,
+            "text": "extern void  S_0418_CiSetVideodirty_low_00000037 IFN1(IHPE, value);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+            "line": 144,
+            "text": "S_0418_CiSetVideodirty_low_00000037,"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/debug/dasm.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/base-debug/dasm.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-base-trace.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/debug/ega_dump.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/base-debug/ega_dump.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-base-trace.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/debug/profile.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/base-debug/profile.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-base-trace.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/debug/trace.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/base-debug/trace.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 2,
+      "sample_map_entries": [
+        {
+          "line": 7957,
+          "entry": "0003:00145c00       _sub_io_verbose            006f9c00     original-softpc-base-trace:trace.obj"
+        },
+        {
+          "line": 7958,
+          "entry": "0003:00145c04       _io_verbose                006f9c04     original-softpc-base-trace:trace.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-base-trace.lib"
+      ],
+      "symbol_cross_references": {
+        "sub_io_verbose": [
+          {
+            "file": "src/mvdm/softpc.new/base/debug/yoda.c",
+            "line": 2653,
+            "text": "sub_io_verbose = 0L;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/yoda.c",
+            "line": 2656,
+            "text": "sub_io_verbose = cs;"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/yoda.c",
+            "line": 2658,
+            "text": "if (sub_io_verbose & DPMI_VERBOSE)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/yoda.c",
+            "line": 2732,
+            "text": "{\"map\",\tMAP_VERBOSE,\t\t&sub_io_verbose,\t0},"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/debug/yoda.c",
+            "line": 2733,
+            "text": "{\"cursor\",\tCURSOR_VERBOSE,\t\t&sub_io_verbose,\t0},"
+          }
+        ],
+        "io_verbose": [
+          {
+            "file": "src/mvdm/softpc.new/host/inc/host_trc.h",
+            "line": 22,
+            "text": "* Verbose bit masks - set the following bits in the io_verbose"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_rflop.c",
+            "line": 1202,
+            "text": "if (io_verbose & GFI_VERBOSE) {"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 280,
+            "text": "if (io_verbose & GFI_VERBOSE)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 337,
+            "text": "if (io_verbose & GFI_VERBOSE)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 392,
+            "text": "if (io_verbose & GFI_VERBOSE)"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/disks/gfi_sflp.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/disks/gfi_sflp.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-disks.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/keymouse/mouse.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/keymouse/mouse.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 18,
+      "sample_map_entries": [
+        {
+          "line": 2016,
+          "entry": "0001:00070740       _mouse_inb                 00471740 f   original-softpc-keymouse:mouse.obj"
+        },
+        {
+          "line": 2017,
+          "entry": "0001:000707e0       _mouse_init                004717e0 f   original-softpc-keymouse:mouse.obj"
+        },
+        {
+          "line": 2018,
+          "entry": "0001:00070840       _mouse_outb                00471840 f   original-softpc-keymouse:mouse.obj"
+        },
+        {
+          "line": 7882,
+          "entry": "0003:0013e59c       _button_left               006f259c     original-softpc-keymouse:mouse.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-keymouse.lib"
+      ],
+      "symbol_cross_references": {
+        "mouse_inb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/mouse.h",
+            "line": 100,
+            "text": "IMPORT void mouse_inb IPT2(io_addr, port, half_word *, value);"
+          }
+        ],
+        "mouse_init": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/reset.c",
+            "line": 1011,
+            "text": "mouse_init();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/mouse.h",
+            "line": 99,
+            "text": "IMPORT void mouse_init IPT0();"
+          }
+        ],
+        "mouse_outb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/mouse.h",
+            "line": 101,
+            "text": "IMPORT void mouse_outb IPT2(io_addr, port, half_word, value);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/keymouse/ppi.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/keymouse/ppi.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 5,
+      "sample_map_entries": [
+        {
+          "line": 2019,
+          "entry": "0001:000709d0       _ppi_inb                   004719d0 f   original-softpc-keymouse:ppi.obj"
+        },
+        {
+          "line": 2020,
+          "entry": "0001:000709f0       _ppi_init                  004719f0 f   original-softpc-keymouse:ppi.obj"
+        },
+        {
+          "line": 2021,
+          "entry": "0001:00070a30       _ppi_outb                  00471a30 f   original-softpc-keymouse:ppi.obj"
+        },
+        {
+          "line": 10923,
+          "entry": "0003:00004ca0       _gate_2_was_low            005b8ca0     original-softpc-keymouse:ppi.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-keymouse.lib"
+      ],
+      "symbol_cross_references": {
+        "ppi_inb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 31,
+            "text": "extern void ppi_inb(io_addr,half_word *);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 35,
+            "text": "extern void ppi_inb();"
+          }
+        ],
+        "ppi_init": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/reset.c",
+            "line": 824,
+            "text": "ppi_init();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 30,
+            "text": "extern void ppi_init(void);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 34,
+            "text": "extern void ppi_init();"
+          }
+        ],
+        "ppi_outb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 32,
+            "text": "extern void ppi_outb(io_addr,half_word);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/ppi.h",
+            "line": 36,
+            "text": "extern void ppi_outb();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/system/at_dma.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/system/at_dma.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 19,
+      "sample_map_entries": [
+        {
+          "line": 2111,
+          "entry": "0001:00074c70       _dmaGetAdaptor             00475c70 f   original-softpc-system:at_dma.obj"
+        },
+        {
+          "line": 2112,
+          "entry": "0001:00074c80       _dma_enquire               00475c80 f   original-softpc-system:at_dma.obj"
+        },
+        {
+          "line": 2113,
+          "entry": "0001:00074d00       _dma_inb                   00475d00 f   original-softpc-system:at_dma.obj"
+        },
+        {
+          "line": 2114,
+          "entry": "0001:00074ed0       _dma_init                  00475ed0 f   original-softpc-system:at_dma.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-system.lib"
+      ],
+      "symbol_cross_references": {
+        "dmaGetAdaptor": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vdd.c",
+            "line": 640,
+            "text": "pDmaAdp  = dmaGetAdaptor();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vdd.c",
+            "line": 733,
+            "text": "pDmaAdp  = dmaGetAdaptor();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vdd.c",
+            "line": 797,
+            "text": "pDmaAdp  = dmaGetAdaptor();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 519,
+            "text": "* BOOL dmaGetAdaptor"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 527,
+            "text": "DMA_ADAPT *dmaGetAdaptor();"
+          }
+        ],
+        "dma_enquire": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_rflop.c",
+            "line": 1568,
+            "text": "dma_enquire (DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_rflop.c",
+            "line": 1758,
+            "text": "dma_enquire (DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 282,
+            "text": "dma_enquire(DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 340,
+            "text": "dma_enquire(DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_vflop.c",
+            "line": 451,
+            "text": "dma_enquire(DMA_DISKETTE_CHANNEL, &dma_address, &dma_size);"
+          }
+        ],
+        "dma_inb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 410,
+            "text": "*\tvoid dma_inb(port, value)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 416,
+            "text": "*\t\tController chips. dma_inb() may also be called directly"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 424,
+            "text": "IMPORT VOID dma_inb IPT2(io_addr, port, half_word *, value);"
+          }
+        ],
+        "dma_init": [
+          {
+            "file": "src/mvdm/softpc.new/base/bios/reset.c",
+            "line": 1008,
+            "text": "dma_init();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 386,
+            "text": "*\tvoid dma_init()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/dma.h",
+            "line": 398,
+            "text": "IMPORT VOID dma_init IPT0();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/system/dummy_nt.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/system/dummy_nt.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 1,
+      "sample_map_entries": [
+        {
+          "line": 301,
+          "entry": "0001:00005e20       _dummy_int                 00406e20 f   original-softpc-system:dummy_nt.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-system.lib"
+      ],
+      "symbol_cross_references": {
+        "dummy_int": [
+          {
+            "file": "src/mvdm/softpc.new/roms/bios4.asm",
+            "line": 1190,
+            "text": "; Check for dummy_int in int1c vector"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/bios/bios.c",
+            "line": 122,
+            "text": "dummy_int,   \t/* BOP 01 */"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/bios.h",
+            "line": 247,
+            "text": "extern void dummy_int();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/system/qevnt.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/system/qevnt.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 18,
+      "sample_map_entries": [
+        {
+          "line": 2042,
+          "entry": "0001:00071a00       _ResetCpuQevCount          00472a00 f   original-softpc-system:qevnt.obj"
+        },
+        {
+          "line": 2043,
+          "entry": "0001:00071a90       _add_q_event_i             00472a90 f   original-softpc-system:qevnt.obj"
+        },
+        {
+          "line": 2044,
+          "entry": "0001:00071bc0       _add_q_event_t             00472bc0 f   original-softpc-system:qevnt.obj"
+        },
+        {
+          "line": 2045,
+          "entry": "0001:00071ce0       _delete_q_event            00472ce0 f   original-softpc-system:qevnt.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-system.lib"
+      ],
+      "symbol_cross_references": {
+        "add_q_event_i": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_eoi.c",
+            "line": 298,
+            "text": "DelayHandle[IrqLineNum] = add_q_event_i(DelayIrqQuickEvent,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/disks/fdisk.c",
+            "line": 785,
+            "text": "add_q_event_i(fdisk_pause, HOST_FDISK_DELAY_1, 0);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/disks/fdisk.c",
+            "line": 1362,
+            "text": "add_q_event_i (disk_int_call_back, HOST_FDISK_DELAY_2, 0);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/disks/fla.c",
+            "line": 752,
+            "text": "add_q_event_i(fla_int_call_back, HOST_FLA_DELAY, 0);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/disks/fla.c",
+            "line": 860,
+            "text": "add_q_event_i(fla_int_call_back, HOST_FLA_DELAY, 0);"
+          }
+        ],
+        "add_q_event_t": [
+          {
+            "file": "src/mvdm/softpc.new/base/comms/com.c",
+            "line": 648,
+            "text": "add_q_event_t(next_batch, MIN_COMMS_RX_QEV, adapter);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/com.c",
+            "line": 661,
+            "text": "add_q_event_t(recv_char,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/com.c",
+            "line": 1050,
+            "text": "add_q_event_t(do_wait_on_send,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/com.c",
+            "line": 1499,
+            "text": "add_q_event_t(next_batch, MIN_COMMS_RX_QEV, 0);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/printer.c",
+            "line": 296,
+            "text": "handle_for_outa_event[adapter]=add_q_event_t(lpr_state_outa_event,HOST_PRINTER_DELAY,adapter);"
+          }
+        ],
+        "delete_q_event": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_eoi.c",
+            "line": 284,
+            "text": "delete_q_event(DelayHandle[IrqLineNum]);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/printer.c",
+            "line": 366,
+            "text": "delete_q_event(handle_for_out_event[adapter]);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/comms/printer.c",
+            "line": 377,
+            "text": "delete_q_event(handle_for_outa_event[adapter]);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/quick_ev.h",
+            "line": 22,
+            "text": "extern void delete_q_event IPT1(q_ev_handle, handle);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/keymouse/keyba.c",
+            "line": 3020,
+            "text": "delete_q_event(refillDelayedHandle);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/system/timer.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/system/timer.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 56,
+      "sample_map_entries": [
+        {
+          "line": 355,
+          "entry": "0001:00005e20       _timererror                00406e20 f   original-softpc-system:timer.obj"
+        },
+        {
+          "line": 2052,
+          "entry": "0001:00072210       _CounterBufferLoaded       00473210 f   original-softpc-system:timer.obj"
+        },
+        {
+          "line": 2053,
+          "entry": "0001:000724d0       _Counting0                 004734d0 f   original-softpc-system:timer.obj"
+        },
+        {
+          "line": 2054,
+          "entry": "0001:00072580       _Counting1                 00473580 f   original-softpc-system:timer.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-system.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/base/system/timestrb.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/system/timestrb.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 3,
+      "sample_map_entries": [
+        {
+          "line": 2049,
+          "entry": "0001:00072070       _time_strobe               00473070 f   original-softpc-system:timestrb.obj"
+        },
+        {
+          "line": 11293,
+          "entry": "0003:0013e5f8       ?video_count@?1??time_strobe@@9@9 006f25f8     original-softpc-system:timestrb.obj"
+        },
+        {
+          "line": 11294,
+          "entry": "0003:0013e5fc       ?video_off@?1??time_strobe@@9@9 006f25fc     original-softpc-system:timestrb.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-system.lib"
+      ],
+      "symbol_cross_references": {
+        "time_strobe": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_timer.c",
+            "line": 443,
+            "text": "time_strobe();                      // time/date etc. (NOT time ticks)"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/cmos.h",
+            "line": 359,
+            "text": "*\t\tThis function gets called from the base routine time_strobe()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/tmstrobe.h",
+            "line": 4,
+            "text": "* Title\t: time_strobe.h"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/tmstrobe.h",
+            "line": 28,
+            "text": "*\tvoid time_strobe()"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/tmstrobe.h",
+            "line": 35,
+            "text": "extern\tvoid time_strobe();"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/base/video/vga_vide.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/video/vga_vide.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 26,
+      "sample_map_entries": [
+        {
+          "line": 2327,
+          "entry": "0001:0008aaf0       _init_vga_dac              0048baf0 f   original-softpc-video:vga_vide.obj"
+        },
+        {
+          "line": 2328,
+          "entry": "0001:0008ac70       _vga_disp_comb             0048bc70 f   original-softpc-video:vga_vide.obj"
+        },
+        {
+          "line": 2329,
+          "entry": "0001:0008aca0       _vga_disp_func             0048bca0 f   original-softpc-video:vga_vide.obj"
+        },
+        {
+          "line": 2330,
+          "entry": "0001:0008b000       _vga_func_12               0048c000 f   original-softpc-video:vga_vide.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-video.lib"
+      ],
+      "symbol_cross_references": {
+        "init_vga_dac": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egavideo.h",
+            "line": 119,
+            "text": "IMPORT VOID init_vga_dac IPT1( int, table );"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 630,
+            "text": "init_vga_dac(2);  /* 256 colour DAC table */"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 634,
+            "text": "init_vga_dac(1);  /* DACs to emulate CGA palette - RGB + Intensity*/"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 638,
+            "text": "init_vga_dac(0);  /* DACs to emulate EGA palette - RGB + rgb */"
+          }
+        ],
+        "vga_disp_comb": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/video.h",
+            "line": 130,
+            "text": "IMPORT void vga_disp_comb IPT0();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 192,
+            "text": "vga_disp_comb,\t/* Function 1A */"
+          }
+        ],
+        "vga_disp_func": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/video.h",
+            "line": 131,
+            "text": "IMPORT void vga_disp_func IPT0();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 193,
+            "text": "vga_disp_func,"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/video.c",
+            "line": 185,
+            "text": "vga_disp_func,"
+          }
+        ],
+        "vga_func_12": [
+          {
+            "file": "src/mvdm/softpc.new/base/inc/egavideo.h",
+            "line": 118,
+            "text": "IMPORT VOID vga_func_12 IPT0();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/video/ega_vide.c",
+            "line": 1794,
+            "text": "vga_func_12();\t/* Try extra VGA stuff */"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/host/src/cpucstbs.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/host/cpucstbs.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-host-roots.lib",
+        "original-softpc-host-fixture-roots.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/host/src/nt_keycd.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/host/nt_keycd.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 8,
+      "sample_map_entries": [
+        {
+          "line": 1806,
+          "entry": "0001:000598f0       _BiosKeyToInputRecord      0045a8f0 f   original-softpc-host-roots:nt_keycd.obj"
+        },
+        {
+          "line": 1807,
+          "entry": "0001:00059c10       _KeyMsgToKeyCode           0045ac10 f   original-softpc-host-roots:nt_keycd.obj"
+        },
+        {
+          "line": 6500,
+          "entry": "0003:00003840       _Scan1ToKeynum             005b7840     original-softpc-host-roots:nt_keycd.obj"
+        },
+        {
+          "line": 6501,
+          "entry": "0003:000038c8       _Scan1ToKeynumExtended     005b78c8     original-softpc-host-roots:nt_keycd.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-host-roots.lib",
+        "original-softpc-host-fixture-roots.lib"
+      ],
+      "symbol_cross_references": {
+        "BiosKeyToInputRecord": [
+          {
+            "file": "src/mvdm/softpc.new/host/inc/nt_uis.h",
+            "line": 26,
+            "text": "BOOL BiosKeyToInputRecord(PKEY_EVENT_RECORD pKeyEvent);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_event.c",
+            "line": 1821,
+            "text": "if (!BiosKeyToInputRecord(&InputRecord[i].Event.KeyEvent))  {"
+          }
+        ],
+        "KeyMsgToKeyCode": [
+          {
+            "file": "src/mvdm/softpc.new/host/inc/nt_uis.h",
+            "line": 25,
+            "text": "BYTE KeyMsgToKeyCode(PKEY_EVENT_RECORD KeyEvent);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_event.c",
+            "line": 990,
+            "text": "ATcode = KeyMsgToKeyCode(KeyEvent);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_event.c",
+            "line": 1006,
+            "text": "ATcode = KeyMsgToKeyCode(KeyEvent);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/host/src/nt_sec.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/host/nt_sec.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-host-roots.lib",
+        "original-softpc-host-fixture-roots.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "softpc.new/host/src/nt_umb.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/host/nt_umb.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 9,
+      "sample_map_entries": [
+        {
+          "line": 281,
+          "entry": "0001:00005e20       _UMBNotify                 00406e20 f   original-softpc-host-roots:nt_umb.obj"
+        },
+        {
+          "line": 1839,
+          "entry": "0001:0005b8f0       _InitUMBList               0045c8f0 f   original-softpc-host-roots:nt_umb.obj"
+        },
+        {
+          "line": 1840,
+          "entry": "0001:0005b990       _ReleaseUMB                0045c990 f   original-softpc-host-roots:nt_umb.obj"
+        },
+        {
+          "line": 1841,
+          "entry": "0001:0005ba20       _ReserveUMB                0045ca20 f   original-softpc-host-roots:nt_umb.obj"
+        }
+      ],
+      "archives": [
+        "original-softpc-host-roots.lib",
+        "original-softpc-host-fixture-roots.lib"
+      ],
+      "symbol_cross_references": {
+        "UMBNotify": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_bop.c",
+            "line": 139,
+            "text": "void UMBNotify(unsigned char);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_bop.c",
+            "line": 835,
+            "text": "UMBNotify(0);"
+          }
+        ],
+        "InitUMBList": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/config.c",
+            "line": 578,
+            "text": "InitUMBList();"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/umb.h",
+            "line": 104,
+            "text": "InitUMBList(VOID);"
+          }
+        ],
+        "ReleaseUMB": [
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_msscs.c",
+            "line": 908,
+            "text": "// this function. If that is the case, the ReleaseUMB will take"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_msscs.c",
+            "line": 912,
+            "text": "if (ReleaseUMB(UMB_OWNER_VDD,(PVOID)dwStart, count)) {"
+          },
+          {
+            "file": "src/mvdm/softpc.new/base/inc/umb.h",
+            "line": 94,
+            "text": "ReleaseUMB("
+          },
+          {
+            "file": "src/mvdm/dos/v86/dev/himem/himem.asm",
+            "line": 11,
+            "text": "; * williamh 25-Sept-1992 Added RequestUMB and ReleaseUMB"
+          },
+          {
+            "file": "src/mvdm/dos/v86/dev/himem/himem.asm",
+            "line": 166,
+            "text": "extrn\tReleaseUMB:near"
+          }
+        ],
+        "ReserveUMB": [
+          {
+            "file": "src/mvdm/xms.486/xms.c",
+            "line": 43,
+            "text": "ReserveUMB(UMB_OWNER_RAM, &Address, &Size);"
+          },
+          {
+            "file": "src/mvdm/xms.486/xmsumb.c",
+            "line": 52,
+            "text": "while (ReserveUMB(UMB_OWNER_XMS, &Address, &Size) &&"
+          },
+          {
+            "file": "src/mvdm/xms.486/xmsumb.c",
+            "line": 88,
+            "text": "ReserveUMB(UMB_OWNER_XMS, &Address, &Size)){"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_msscs.c",
+            "line": 613,
+            "text": "reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_msscs.c",
+            "line": 620,
+            "text": "reserve_umb_status = ReserveUMB(UMB_OWNER_EMM, (PVOID *)&page_frame, &size);"
+          }
+        ]
+      }
+    },
+    {
+      "path": "softpc.new/host/src/x86_emm.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/host/x86_emm.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 0,
+      "sample_map_entries": [],
+      "archives": [
+        "original-softpc-host-roots.lib",
+        "original-softpc-host-fixture-roots.lib"
+      ],
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "suballoc/suballoc.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/suballoc/suballoc.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 7,
+      "sample_map_entries": [
+        {
+          "line": 3952,
+          "entry": "0001:00159160       _AllocateChunkAt           0055a160 f   original-mvdm-host-suballoc:suballoc.obj"
+        },
+        {
+          "line": 3953,
+          "entry": "0001:00159280       _FreeChunk                 0055a280 f   original-mvdm-host-suballoc:suballoc.obj"
+        },
+        {
+          "line": 3954,
+          "entry": "0001:00159380       _SAAllocate                0055a380 f   original-mvdm-host-suballoc:suballoc.obj"
+        },
+        {
+          "line": 3955,
+          "entry": "0001:00159440       _SAFree                    0055a440 f   original-mvdm-host-suballoc:suballoc.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-host-suballoc.lib"
+      ],
+      "symbol_cross_references": {
+        "AllocateChunkAt": [
+          {
+            "file": "src/mvdm/suballoc/suballcp.h",
+            "line": 166,
+            "text": "AllocateChunkAt("
+          }
+        ],
+        "FreeChunk": [
+          {
+            "file": "src/mvdm/suballoc/suballcp.h",
+            "line": 174,
+            "text": "FreeChunk("
+          }
+        ],
+        "SAAllocate": [
+          {
+            "file": "src/mvdm/dpmi32/dpmimemr.c",
+            "line": 70,
+            "text": "Success = SAAllocate(ExtMemSA, *Size, (PULONG)Address);"
+          },
+          {
+            "file": "src/mvdm/dpmi32/dpmimemr.c",
+            "line": 79,
+            "text": "Success = SAAllocate("
+          },
+          {
+            "file": "src/mvdm/inc/suballoc.h",
+            "line": 90,
+            "text": "SAAllocate("
+          },
+          {
+            "file": "src/mvdm/suballoc/tsa.c",
+            "line": 180,
+            "text": "Success = SAAllocate("
+          },
+          {
+            "file": "src/mvdm/suballoc/tsa.c",
+            "line": 230,
+            "text": "Success = SAAllocate("
+          }
+        ],
+        "SAFree": [
+          {
+            "file": "src/mvdm/dpmi32/dpmimemr.c",
+            "line": 125,
+            "text": "Success = SAFree(ExtMemSA, *Size, (ULONG)*Address);"
+          },
+          {
+            "file": "src/mvdm/dpmi32/dpmimemr.c",
+            "line": 133,
+            "text": "Success = SAFree("
+          },
+          {
+            "file": "src/mvdm/inc/suballoc.h",
+            "line": 97,
+            "text": "SAFree("
+          },
+          {
+            "file": "src/mvdm/suballoc/tsa.c",
+            "line": 198,
+            "text": "Success = SAFree("
+          },
+          {
+            "file": "src/mvdm/suballoc/tsa.c",
+            "line": 267,
+            "text": "Success = SAFree("
+          }
+        ]
+      }
+    },
+    {
+      "path": "vdmredir/vdmredir.rc",
+      "product": "vdmredir-product",
+      "object_graph_matches": [
+        "obj/redir/vdmredir.res"
+      ],
+      "direct_source": false,
+      "map_symbol_count": null,
+      "sample_map_entries": [],
+      "archives": [],
+      "direct_dll_input": true,
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "vdmredir/vrdisp.c",
+      "product": "vdmredir-product",
+      "object_graph_matches": [
+        "obj/redir/vrdisp.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": null,
+      "sample_map_entries": [],
+      "archives": [
+        "original-mvdm-redir.lib"
+      ],
+      "direct_dll_input": true,
+      "symbol_cross_references": {}
+    },
+    {
+      "path": "xms.486/xmsdisp.c",
+      "product": "ntvdm-product",
+      "object_graph_matches": [
+        "obj/xms/xmsdisp.obj"
+      ],
+      "direct_source": false,
+      "map_symbol_count": 2,
+      "sample_map_entries": [
+        {
+          "line": 3816,
+          "entry": "0001:001533e0       _XMSDispatch               005543e0 f   original-mvdm-xms:xmsdisp.obj"
+        },
+        {
+          "line": 7691,
+          "entry": "0003:00008854       _apfnXMSSvc                005bc854     original-mvdm-xms:xmsdisp.obj"
+        }
+      ],
+      "archives": [
+        "original-mvdm-xms.lib"
+      ],
+      "symbol_cross_references": {
+        "XMSDispatch": [
+          {
+            "file": "src/mvdm/inc/xmsexp.h",
+            "line": 15,
+            "text": "extern BOOL XMSDispatch(ULONG iXMSSvc);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/inc/xmsexp.h",
+            "line": 15,
+            "text": "extern BOOL XMSDispatch(ULONG iXMSSvc);"
+          },
+          {
+            "file": "src/mvdm/softpc.new/host/src/nt_bop.c",
+            "line": 363,
+            "text": "XMSDispatch(service);"
+          }
+        ]
+      }
+    }
+  ],
+  "reference_limit": "Text occurrences are candidate call or registration references only, not proven executed call edges; source-body and conditional review remains necessary."
+}

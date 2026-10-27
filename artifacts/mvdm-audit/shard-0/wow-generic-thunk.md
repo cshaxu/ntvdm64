@@ -83,3 +83,51 @@ probe.exe
 
 Use the pinned include identified above; do not link an existing prebuilt
 `callpr32.obj` or interpret this host-only fixture as a guest acceptance.
+
+## Selected production thunk controlled witness
+
+`build/t473-s9/callpr-product-probe-r1` links the actual cached production
+`wow32/obj/wkgthunk.obj` (SHA-256 `50E3000F28A6A6C943B7B521BDCD39E6DF1B61D2EC8C07A42C1D8599811C83B5`) and
+an independently compiled copy of the original assembly helper (SHA-256
+`D981FAA8BDFC3B5A7482E2761107EB1CFEAACB73A57E97D555E76FA803A05967`). It supplies
+a source-shaped VDMFRAME, a valid three-word ICALLPROC32 and isolated host
+callbacks. The fixture has local host-boundary stubs; the pointer-conversion
+mask is zero and unexpected unrelated stub calls terminate with distinct
+errors. It is not a guest or scheduler fixture.
+
+Using the same argument payload and expected value 10, a normal `__stdcall`
+target returned through the selected original thunk and the subprocess
+exited 0. With a `__cdecl` target while the thunk request advertises stdcall,
+the subprocess printed the pre-call witness but did not return from the thunk
+and exited `0xC0000409`. A separate control calling the original x86 helper
+with the same target and source-Pascal-reordered arguments returned 10 and
+exited 0. This is a controlled host reproduction through the actual selected
+original thunk object, not an end-to-end Win16 application or proof that
+every calling-convention mismatch fails. The first run used an incorrect
+expected result of 14; its normal case returned 10 and failed the assertion.
+The rerun corrected the assertion to the actual source-Pascal argument order.
+
+Fixture artifact SHA-256
+`16F4606C4D285391CEA3D2102F230D81D83D84D5AE4E2B3D23946C5C78E2F3C9`. The compiled
+fixture SHA-256 was `23963EE529A0438003A51CB41CD97CC5B292C9B277C01C1B345F0177C9AAE4BA`;
+the retained artifact differs only by a final blank line. Build
+with the WOW32 graph cflags, x86 MSVC and `/O2 /Gy`; link its object with the
+selected `wkgthunk.obj`, freshly assembled original helper, system imports
+and `legacy_stdio_definitions.lib`. Run each of `normal`, `mismatch`, and
+`original` in an independent owned process; normal is invoked without an
+argument. The mismatch run is deliberately expected to terminate abnormally.
+
+## Candidate narrow integration, not implemented
+
+The source has three `#ifdef i386` regions: the first two surround x87
+save/restore in `WK32LoadLibraryEx32`, while the third selects the assembly
+helper for `WK32ICallProc32`. A possible minimal recovery is a dedicated
+build-time selection at only the third conditional plus compilation/linking
+of the original x86 helper, retaining the original argument conversion and
+source-Pascal reversal. This is a proposed mirror divergence, not a global
+architecture switch. Before applying it, review the helper's saved-register
+ABI, original macro include provenance, debugger/exception unwinding, all
+source/destination cdecl combinations, 0/1/32 argument bounds and pointer
+conversion/guest-memory lifetime. Verify both a real thunk-body host fixture
+and unchanged guest integration, then perform the coherent package gate.
+No compatibility change or runtime implementation has been made here.

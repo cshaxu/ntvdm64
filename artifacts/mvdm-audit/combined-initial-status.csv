@@ -2304,7 +2304,7 @@ softpc.new/host/link/softpc.ico,3,pending,shard-3/file-review.csv
 softpc.new/host/link/sources,2,pending,shard-2/file-audit.csv
 softpc.new/host/src/config.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/copy_fnc.c,2,partial,shard-2/file-audit.csv
-softpc.new/host/src/cpucstbs.c,2,pending,shard-2/file-audit.csv
+softpc.new/host/src/cpucstbs.c,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/fprt.c,0,pending,shard-0/review.csv
 softpc.new/host/src/makefile,2,pending,shard-2/file-audit.csv
 softpc.new/host/src/makefile.inc,2,pending,shard-2/file-audit.csv
@@ -2408,7 +2408,7 @@ softpc.new/host/src/sim32.c,0,partial,shard-0/review.csv
 softpc.new/host/src/sources,2,pending,shard-2/file-audit.csv
 softpc.new/host/src/stf_conf.c,0,pending,shard-0/review.csv
 softpc.new/host/src/stubs.c,1,partial,shard-1/file-audit.csv
-softpc.new/host/src/x86_emm.c,2,pending,shard-2/file-audit.csv
+softpc.new/host/src/x86_emm.c,2,excluded,shard-2/file-audit.csv
 softpc.new/obj.vdm/c_regs.c,3,pending,shard-3/file-review.csv
 softpc.new/obj.vdm/cdefine.inc,3,pending,shard-3/file-review.csv
 softpc.new/obj.vdm/makefile,1,pending,shard-1/file-audit.csv
