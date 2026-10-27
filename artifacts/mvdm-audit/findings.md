@@ -9,12 +9,11 @@ Inline-only collisions still require a separate source sweep.
 
 `MVDM-HOST-DIV-222` identifies both `dpmi32/modesw.c` 53:01
 protected-mode entry and `softpc.new/base/keymouse/mouse_io.c` INT33
-direct-callback handling. Both have separate rows in `src/mvdm/README.md`
-(lines 1248 and 1413 at this audit). `MVDM-HOST-DIV-230` appears in
-`dpmi32/modesw.c` at the real-mode context branch while its registry row
-describes `softpc.new/base/ccpu386/ccpusas4.c` HMA observation. `MVDM-HOST-DIV-274` also labels both `oemuni/file.c` OEM path sizing
-and `softpc.new/host/src/nt_mouse.c` cursor publication, while the registry
-currently describes only the former. `MVDM-HOST-DIV-327` also occurs on CCPU `lmsw.c` and COMMAND
+direct-callback handling; both have separate registry rows. The distinct
+`MVDM-HOST-DIV-230` real-mode cache and HMA observer behaviors and
+`MVDM-HOST-DIV-274` OEM sizing and mouse cursor publication behaviors have
+also since been recorded separately in the registry, retaining the duplicate
+identifiers. `MVDM-HOST-DIV-327` also occurs on CCPU `lmsw.c` and COMMAND
 `cmdexec.c` observation paths, and in a separate protected-mode entry in the
 register; determine whether the numbers describe one cohort or collisions.
 The LMSW witness has since been explicitly added to the COMMAND witness row;
@@ -50,6 +49,18 @@ comments describe default-off observations, but the absence of registry
 entries is a traceability gap, not proof of behavioral change. Trace their
 original admission and remove or register them only after checking the
 actual call sites, activation conditions and diagnostic use.
+
+## BOP 59 diagnostic reads exceed original behavior
+
+`shard-1/bop9-diagnostic-guest-read-audit.md` and its source-linked fixture
+compare the frozen original and current `MS_bop_9`: for a returning original
+handler, the former performs zero guest reads and the latter performs eight
+even with the diagnostic reporter modeled disabled. The handler still receives
+the same AX in this fixture. This proves an additional memory-access boundary,
+not a real device side effect or crash. The implementation group must remove
+or safely gate the extra observations and test original handler/AX semantics;
+DIV-258 now describes the actual current behavior rather than claiming that
+only existing scalars are copied.
 
 The later source-location audit registers DIV-305 and DIV-307/308/309.
 DIV-306 and DIV-308 include descriptor reads and far-transfer translation

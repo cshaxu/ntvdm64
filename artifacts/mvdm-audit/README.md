@@ -13,6 +13,8 @@ full in this pass. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
+The [pending-role census](pending-role-census.md) separates initial inventory
+hints from final dispositions; it does not remove any pending path from scope.
 
 One frozen path, `src/mvdm/README.md`, changed after freezing to correct
 obsolete publication wording and remove duplicate rows; see

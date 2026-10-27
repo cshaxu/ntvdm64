@@ -62,10 +62,16 @@ cached FastBOP selector continues to be recognized ahead of normal CALLF
 descriptor checks. This makes selector reuse a concrete conditional source
 path, not just a hypothetical reset concern.
 
-The actual endpoint index and guest table limit, the list's contents at that
-index, and whether the immutable W31 runtime binary follows this exact OpenNT
-guest source are not established by this trace. The host chooses from the
-highest free shadow index, so ordinary workloads may not reach it. Confirm
-those conditions in a real guest observation before asserting an observed
-collision or choosing a guest-allocation fix. Preserve the independently
-owned guest source and binaries unchanged.
+The actual guest table limit, list contents at that index and whether the
+immutable W31 runtime binary follows this exact OpenNT guest source are not
+established by the static trace. Subsequent independent Win16 observations
+are recorded in [the real guest audit](../shard-3/fast-bop-real-guest-audit.md):
+two isolated runs obtained endpoint `FFF7:0010`, each allocated 8,035
+selectors before normal allocation returned zero, and neither the complete
+selector nor its index collided with the endpoint. This observed allocation
+path therefore does not demonstrate the predicted collision. Each release
+was attempted, but individual release success or reallocation was not
+verified; actual loaded guest image identity was also not independently
+confirmed by the observer. Direct descriptor mutation, other configurations,
+task reuse and restart remain separate unresolved boundaries. Do not claim a
+collision or prescribe a guest-allocation fix from the static hypothesis.
