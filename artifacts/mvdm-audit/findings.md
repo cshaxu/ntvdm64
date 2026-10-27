@@ -71,6 +71,9 @@ the current path from reaching its original dispatch. The fault is injected,
 not a demonstrated real guest exception. These three paths should be reviewed
 as one diagnostic-access cohort, with distinct original handlers and tests;
 disabled output is not evidence that caller-side memory sampling is disabled.
+The bounded [diagnostic-access inventory](shard-1/diagnostic-guest-access-inventory.md)
+also identifies BOP 06 and INT 31 mapping candidates; its pattern search is
+not an exhaustive proof across every helper or macro.
 
 The later source-location audit registers DIV-305 and DIV-307/308/309.
 DIV-306 and DIV-308 include descriptor reads and far-transfer translation
