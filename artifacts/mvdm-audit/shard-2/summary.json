@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "5EA7DEE5C240AE1AEE6B08862DBC8A2653BC6AE006763AC113E7665BBA814746",
+  "output_sha256": "095D46186E2546609B73674AAC0ACEC2C15004799FAAE7169265155912BC0D7C",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,029 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -99,5 +99,13 @@
     "new_profile_exclusions": 2,
     "evidence": "non-ccpu-selected-link-inventory.json",
     "limits": "Sample symbols and name references are candidate call edges, not runtime or whole-capability proof; map does not prove every branch."
+  },
+  "guest_role_identity_review": {
+    "rows": 622,
+    "matching_any_approved_zip_member": 10,
+    "current_only_unproven": 0,
+    "evidence": "guest-identity-inventory.json",
+    "limits": "Roles are initial path/extension classification; all 146 current-only guest inputs byte-match the authorized opennt-src-2 mirror source, but guest build selection, behavior, and guest-binary lineage remain pending.",
+    "current_only_source2_exact_identity": 146
   }
 }

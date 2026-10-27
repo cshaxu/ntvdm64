@@ -131,3 +131,29 @@ source/destination cdecl combinations, 0/1/32 argument bounds and pointer
 conversion/guest-memory lifetime. Verify both a real thunk-body host fixture
 and unchanged guest integration, then perform the coherent package gate.
 No compatibility change or runtime implementation has been made here.
+
+## Narrow host candidate and ABI discovery
+
+A disposable candidate changed only the `WK32ICallProc32` conditional in a
+copy of the original C source to allow a dedicated x86 helper selection;
+it retained the provider graph flags and linked the freshly assembled
+original host helper. The same selected-thunk fixture returned 10 and exited
+0 in both the normal stdcall and the previously failing mismatched cdecl
+cases. This is preliminary host-only evidence; no product file was changed.
+
+A separate register probe then found the unmodified helper clobbers EBX:
+the sentinel `12345678` became `0000000c` after three arguments. The
+original helper uses EBX as the byte count without saving it; `callconv.inc`
+`cPublicProc` does not add a saving prologue. Current x86 Windows treats EBX
+as nonvolatile. The disposable candidate's current compiled caller pops its
+saved EBX immediately after the helper, but this does not make the helper a
+generally ABI-conforming public callable. Therefore the initial passing
+candidate is not sufficient to justify direct production linking.
+
+An independent isolated naked x86 adapter that saves EBX, forwards all three
+helper parameters unchanged and restores EBX returned 14 and preserved the
+sentinel in `abi-adapter-probe.c`. This demonstrates feasibility only: its
+stack/unwind, nested callbacks, exceptions, all calling conventions, zero and
+32 arguments, and actual Win16 behavior remain unverified. The experiment
+uses the original helper body rather than modifying it, and does not establish
+that this exact adapter should be the final product integration.

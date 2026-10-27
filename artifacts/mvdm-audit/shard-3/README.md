@@ -149,3 +149,30 @@ does not establish source-to-image lineage or full guest behavior. The ZIP
 contains the two separately staged MMSYSTEM/TOOLHELP images that were absent
 at the currently inspected System32 path. All formerly pending guest rows
 remain pending pending actual source/capability evidence.
+
+## Header and build-carrier first pass
+
+For 199 pending `.h`/`.inc` inputs, `header-inclusions.csv` records the
+exact observed inclusion relationships in VALID cached Ninja deps, restricted
+to objects whose source has a product-selection row in the frozen ledger.
+There are 96 headers with 2,633 selected-source inclusion edges and 103 with
+no such observed edge. The edges show compilation dependencies, not which
+conditional declarations were active, final link extraction or runtime
+behavior. Assembly, generated carriers and non-product consumers need their
+own proof. The remaining 59 pending build/resource/binary carrier rows now
+record their role and required provenance or interface evidence.
+
+One important instance is the original `cvidc/sas4gen.h`: no selected-source
+VALID dependency names that mirror path. Eighty-four selected worker objects
+include the retained NTVDMx64 x86/prod generated carrier instead. The latter
+has additional `sas_touch`, `VirtualiseInstruction`, and `IsPageInstanceData`
+slots/declarations; the selected CCPU fallback traps for the first two. T411
+and the original-source comparison document the patch provenance. Actual
+reachability and behavior cannot be inferred from header identity alone.
+
+The historical `wow32/obj/i386/wow32.def` lists 27 exports, all present in
+the maintained source DEF; the current generated x86 DEF adds the existing
+task-termination export and two decorated COMM aliases. Selected export
+spot checks do not prove caller ABI/semantics. The original SoftPC resource
+script is input to the build-owned generated RC and linked into NTVDM; its
+individual dialog/resource behavior still needs separately bounded witnesses.

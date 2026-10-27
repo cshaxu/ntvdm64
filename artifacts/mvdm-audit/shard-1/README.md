@@ -63,7 +63,7 @@ independent `selected-owner-review.csv` evidence if regenerating.
 Consistency: 1,182 unique rows all satisfy the shard rule; 73 selected-review
 paths exactly equal the selected pending paths; 48 owner-review paths equal the
 partial paths and 34 unselected-review paths equal the scoped unselected host
-source paths. Current file identities are listed below.
+source paths. File identities at that checkpoint are listed below; the later carrier section records subsequent changes.
 
 - `file-audit.csv` SHA-256 `FE444C8FC68428C46979CA502C421A18368D1A8E5AE13883154C6530CC20E04D`.
 - `selected-owner-review.csv` SHA-256 `BB743AA9C72F850513AB521F625CD2229354B2B1974D1F3061542FE95FE9B1AA`.
@@ -93,3 +93,24 @@ that does not establish their global absence.
 All 625 are excluded solely from host link by original guest/build role;
 624 remain pending and the formatting-different guest source remains partial.
 No guest file was modified, rebuilt, or executed in this review.
+
+## Declaration and build-carrier follow-up
+
+`carrier-review.csv` records all 259 pending declaration/build/tool carrier
+rows. `carrier-dependency-edges.csv` records 2,898 current Ninja dependency
+edges from selected product-source objects to 100 of those carriers; all
+recorded dependencies were reported VALID by Ninja. The literal-include
+candidates use basename matching and need separate include-path and condition
+resolution. Their 90 carrier count overlaps the resolved set; it is not an
+additional coverage total. Dependencies prove compilation inputs, not function
+reachability or behavioral equivalence. All 259 rows remain pending.
+
+`src/mvdm/README.md` changed after the frozen inventory because the main
+session updated a divergence record. The carrier ledger records both hashes;
+all other 258 carrier identities still match the frozen inputs. Frozen fields
+in `file-audit.csv` remain unchanged. Two consecutive script runs gave
+identical three CSV hashes under the same observed graph and input state.
+
+- `file-audit.csv` SHA-256 `1F8C3DEA2A6F6DF9A7E498270998292552639B408433C022F4960EABAA31E9DB`.
+- `carrier-review.csv` SHA-256 `FBB7FAF49AA66C0DD8400F6A8C0498D99E37F4C47CCC7E0811167EDB73C19C61`.
+- `carrier-dependency-edges.csv` SHA-256 `37FB1965DF9EBF0DB464E31CD2C4674782A71AE5A2DCD494CBF1FE2A51F17122`.
