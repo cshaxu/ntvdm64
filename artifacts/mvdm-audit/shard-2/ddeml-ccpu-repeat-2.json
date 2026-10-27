@@ -1,0 +1,185 @@
+{
+  "pid": 20824,
+  "nonAtomic": true,
+  "quiescedDiagnostic": false,
+  "image": "O:\\tmp\\n3b3\\system32\\ntvdm.exe",
+  "base": "0x8c0000",
+  "ip": "0xaeb7",
+  "cr": [
+    "0x80000011",
+    "0x0",
+    "0x0",
+    "0x900000"
+  ],
+  "cpuFlags": {
+    "if": 0,
+    "vm": 0,
+    "iopl": 3,
+    "cpl": 3
+  },
+  "registers": [
+    "0x0",
+    "0xa3a",
+    "0x0",
+    "0x31f",
+    "0xe82",
+    "0xec2",
+    "0xa3a",
+    "0xe88"
+  ],
+  "segments": [
+    {
+      "selector": "0x17f",
+      "big": 0,
+      "base": "0x146c00",
+      "limit": "0xfff"
+    },
+    {
+      "selector": "0x21f",
+      "big": 0,
+      "base": "0x8920",
+      "limit": "0xbb1f"
+    },
+    {
+      "selector": "0x17f",
+      "big": 0,
+      "base": "0x146c00",
+      "limit": "0xfff"
+    },
+    {
+      "selector": "0x237",
+      "big": 0,
+      "base": "0x161e0",
+      "limit": "0x101f"
+    },
+    {
+      "selector": "0x0",
+      "big": 0,
+      "base": "0x0",
+      "limit": "0x0"
+    },
+    {
+      "selector": "0x0",
+      "big": 0,
+      "base": "0x0",
+      "limit": "0x0"
+    }
+  ],
+  "hostTimerDiagnostic": {
+    "_TimerEventUSec": "59 9d 44 36 04 00 00 00",
+    "_CurrHeartBeat": "41 87 44 36 04 00 00 00",
+    "_LastTimeCounterZero": "aa 46 00 00 4c 48 04 00",
+    "_ticks_blocked": "00 00 00 00",
+    "_timer_int_enabled": "01 00 00 00",
+    "_timers": "03 00 00 00 00 00 00 00 03 00 00 00 00 36 93 00 c0 47 93 00 00 00 00 00 20 6e 8c 00 10 32 93 00 80 3e 93 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 aa 46 00 00 d9 1e 05 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 02 00 00 00 00 80 00 00 00 80 00 00 00 00 01 00 01 00 00 00 ff ff ff ff 02 00 00 00 00 00 00 00 01 00 00 00"
+  },
+  "commandDelivery": {
+    "_IsFirstCall": 0,
+    "_DosEnvCreated": 0,
+    "_cchVDMEnv32": 3967,
+    "VDMInfo": {
+      "environmentBytes": 0,
+      "desktopBytes": 0,
+      "titleBytes": 0,
+      "reservedBytes": 0,
+      "commandBytes": 0,
+      "applicationBytes": 0,
+      "pifBytes": 0,
+      "directoryBytes": 0,
+      "state": 0
+    }
+  },
+  "textGeometry": {
+    "_now_width": 50,
+    "_now_height": 80,
+    "physical": {
+      "biosMode": 3,
+      "biosColumns": 80,
+      "biosRows": 28,
+      "biosCharHeight": 14
+    },
+    "currentLinear": {
+      "biosMode": 3,
+      "biosColumns": 80,
+      "biosRows": 28,
+      "biosCharHeight": 14
+    }
+  },
+  "serialAdapters": [
+    {
+      "adapter": 0,
+      "type": 0,
+      "rx": 0,
+      "dcbValid": 0
+    },
+    {
+      "adapter": 1,
+      "type": 0,
+      "rx": 0,
+      "dcbValid": 0
+    },
+    {
+      "adapter": 2,
+      "type": 0,
+      "rx": 0,
+      "dcbValid": 0
+    },
+    {
+      "adapter": 3,
+      "type": 0,
+      "rx": 0,
+      "dcbValid": 0
+    }
+  ],
+  "code": {
+    "linear": "0x137d7",
+    "bytes": [
+      "eb 03 c4 c4 51 2e 8e 1e 30 00 33 c0 87 06 21 05 a9 02 00 75 25 58 3b 06 28 02 75 40 5b 5d 83 fb 00 75 20 5f 5e 58 5a 1f 0f a9 0f a1 59 07 8b 5e 0a c1 e3 02 81 c3 7e ad ff e3 9c 58 0d 00 01 50 9d eb d2 8b f5 8b ec 8c d0 8e c0 8e d8 8b 46 18 03 db 2e ff a7 fe ac 8b ee cc eb c7 e9 5c d4 8b",
+      [
+        {
+          "pde": "0x901027",
+          "pte": "0x13067"
+        }
+      ]
+    ]
+  },
+  "stack": {
+    "linear": "0x147a82",
+    "bytes": [
+      "bf 17 00 00 c2 0e 00 00 00 00 01 00 1f 03 3a 0a 6e 17 00 00 00 00 58 55 7f 17 a8 0e 7f 01 00 00 00 00 00 00 00 00 bf 17 00 00 c2 0e 86 53 ee 0e 88 0e 00 00 37 02 00 00 00 00 00 00 7f 01 b7 01 e2 0e e6 1f 37 03 77 02 00 00 0e 00 a2 6e 1f 02 00 00 08 80 00 00 35 06 37 02 ee 0e 7f 01 7f 17",
+      [
+        {
+          "pde": "0x901027",
+          "pte": "0x147067"
+        }
+      ]
+    ]
+  },
+  "retailTimerDiagnostic": {
+    "unavailable": "nonpresent PDE"
+  },
+  "textMemory": {
+    "physical": [],
+    "paged": [],
+    "egaStride4": [],
+    "egaStride8": []
+  },
+  "_EGA_planes": "20 d0 d9 04",
+  "_Video_mode": "03 00 00 00",
+  "_Currently_emulated_video_mode": "03 00 00 00",
+  "_IdleDisabledFromPIF": "00 00 00 00",
+  "_IdleNoActivity": "00 00 00 00",
+  "_ienabled": "01 00 00 00",
+  "display": {
+    "modeChangeRequired": 1,
+    "bytesPerLine": 160,
+    "charsPerLine": 80,
+    "charWidth": 8,
+    "charHeight": 14,
+    "screenStart": 0,
+    "screenHeightRaw": 391,
+    "screenPointer": 0,
+    "screenLength": 4480,
+    "displayDisabled": 0
+  }
+}

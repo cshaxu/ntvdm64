@@ -1,1 +1,1 @@
-O:\tmp\na94\system32\run16.exe --wait O:\tmp\na94\tests/DDREG.EXE
+O:\tmp\n3b3\system32\run16.exe --wait O:\tmp\n3b3\tests/DDREG.EXE

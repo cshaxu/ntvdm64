@@ -219,7 +219,11 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `7C087BAA0293DE1DDD8366E08B8A8A0A2FFCB9609E6C6648DCB8A904B388A5E6`.
+- Current `file-audit.csv` SHA-256 `D0A63C7410EDAF6909D39BE06BDC269C4B458E6520C5D6245CE4DC2911059F7F`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
+
+`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `C187F03351CB6A23B3E0A1091835B389A99FE73C1544F5698B6E8C4AA87CDD76`.
+
+Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, per the additional source/link comparison in `video-interface-audit.md`; no EGA runtime is claimed.

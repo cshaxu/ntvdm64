@@ -50,3 +50,6 @@ behavioral and compatibility verification.
 Shard 0 additionally records historical link-response and include evidence for
 28 pending COMMAND guest files in `shard-0/command-guest-build-evidence.csv`;
 this does not identify or validate the deployed guest binary.
+
+A separate pending relevance census for the external rasprint tree is in
+`external-rasprint-boundary.md`; it does not bulk-exclude driver resources.
