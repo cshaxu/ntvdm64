@@ -1,0 +1,51 @@
+{
+  "sourceCheck": {
+    "exit": 0,
+    "pid": 26320
+  },
+  "graphs": [
+    {
+      "name": "worker-inputs",
+      "exit": 0,
+      "started": "2026-10-27T18:09:40.6547457Z",
+      "pid": 25320
+    },
+    {
+      "name": "worker-deps",
+      "exit": 0,
+      "started": "2026-10-27T18:09:40.7130581Z",
+      "pid": 5020
+    },
+    {
+      "name": "wow32-inputs",
+      "exit": 0,
+      "started": "2026-10-27T18:09:40.7401878Z",
+      "pid": 30344
+    },
+    {
+      "name": "wow32-deps",
+      "exit": 0,
+      "started": "2026-10-27T18:09:40.7734526Z",
+      "pid": 32704
+    }
+  ],
+  "documentation": {
+    "exit": 0,
+    "started": "2026-10-27T18:17:08.3513389Z",
+    "pid": 20864
+  },
+  "scope": "Read-only S10 source-role checkpoint, no runtime or guest acceptance",
+  "checkpoint": {
+    "started": "2026-10-27T18:16:50.5701497Z",
+    "command": "-X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py artifacts/mvdm-audit/guest-source-role-checkpoint-result.json",
+    "pid": 30708,
+    "exit": 0
+  },
+  "diffCheckExit": 0,
+  "preview": {
+    "started": "2026-10-27T18:16:39.3030316Z",
+    "command": "-X utf8 build/t473-s10/guest-source-owner/preview.py",
+    "pid": 2676,
+    "exit": 0
+  }
+}

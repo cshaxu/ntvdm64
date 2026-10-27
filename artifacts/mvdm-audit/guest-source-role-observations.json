@@ -1,0 +1,73 @@
+{
+  "result": "pass",
+  "candidate_count": 187,
+  "shards": {
+    "0": 67,
+    "1": 48,
+    "2": 32,
+    "3": 40
+  },
+  "source_tables": [
+    {
+      "path": "shard-0/guest-source-active-edges.csv",
+      "sha256": "9359526C54671F0D7CE75021B8F18555C05A217CC55A11BDEE5F33640E73E1C0"
+    },
+    {
+      "path": "shard-1/guest-source-owner-review.csv",
+      "sha256": "FEC1789263BD66A9474F0614D651976B25CA2048A2525CD0F44224A7236ABC66"
+    },
+    {
+      "path": "shard-1/guest-write-owner-review.csv",
+      "sha256": "CD31CAFEE8F81870B83CB3FE0CA4389FAFFC646375F56CADF745403B8E738585"
+    },
+    {
+      "path": "shard-2/write-guest-owner-review.csv",
+      "sha256": "B1D2B3911345A84BFFF28327C119ED1080BC59C2CE4BAACC48575F22427E1137"
+    },
+    {
+      "path": "shard-3/guest-source-active-edges.csv",
+      "sha256": "23C98AB478973F74D0F5D886F1419ADE47804F358073A1826F9FD01097D5A00A"
+    },
+    {
+      "path": "shard-3/write-guest-owner-review.csv",
+      "sha256": "51A0139272BCE147AAF82A490D2911B7242632BC594458E01378B47FB4C403A4"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-inputs.txt",
+      "sha256": "87E217899970FD26D464DE8693316FD96B485C942CD5BA1E5BFC916AE3B913D4",
+      "kind": "inputs",
+      "graph": "worker",
+      "valid_blocks": null,
+      "lines": 941
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "valid_blocks": 632,
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "valid_blocks": null,
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "valid_blocks": 229,
+      "lines": 15249
+    }
+  ],
+  "skipped": [],
+  "product_changed": false,
+  "guest_changed": false
+}

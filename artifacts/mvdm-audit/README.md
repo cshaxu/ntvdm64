@@ -8,15 +8,19 @@ used the disjoint frozen path shards described by `manifest.json`.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
 226 partial (205 existing source-difference rows, two live uncommitted
-source candidates and 19 partially integrated build manifests), 1,466 excluded
+source candidates and 19 partially integrated build manifests), 1,653 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,940 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,753 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
+
+The [187 historical guest source-role dispositions](guest-source-role-review.md)
+trace original guest compile/link/include/resource edges. They exclude host
+input roles only; guest functionality and image provenance remain separate.
 
 The [build-carrier review](build-carrier-review.md) distinguishes configuration
 reads from Ninja execution dependencies. Its 100 additional exclusions concern

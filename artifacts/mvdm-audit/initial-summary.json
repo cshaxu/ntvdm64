@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2940,
-    "excluded": 1466,
+    "pending": 2753,
+    "excluded": 1653,
     "partial": 226,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Live candidate drifts are observations, not runtime acceptance; two newly modified original video sources are partial under mirror-diff rule; external provider triage remains distinct."
+  "note": "Current guest-source-role checkpoint excludes 187 historical guest build source/resource host-input roles only; guest functionality/provenance remain separate. Live candidate drifts are observations, not runtime acceptance; external provider triage remains distinct."
 }

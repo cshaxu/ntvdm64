@@ -1,0 +1,1379 @@
+{
+  "result": "pass",
+  "candidate_paths": 67,
+  "inputs": [
+    {
+      "relative_path": "dos/v86/cmd/command/makefile",
+      "sha256": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4",
+      "original_sha256": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/command.lnk",
+      "sha256": "516B5E9B4C836B9820CB0869D7FD56062812D9607C81382BA39A93FE814FCE23",
+      "original_sha256": "516B5E9B4C836B9820CB0869D7FD56062812D9607C81382BA39A93FE814FCE23",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\command.lnk",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/make.inc",
+      "sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+      "original_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\make.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/command1.asm",
+      "sha256": "192571809B9F992E6DD4615A15F658BC98EE9B43CC3B9A566E87300638452B2B",
+      "original_sha256": "192571809B9F992E6DD4615A15F658BC98EE9B43CC3B9A566E87300638452B2B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\command1.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/comsw.asm",
+      "sha256": "43F3757904BB55DAC57A79ABEF63BC90F1479761D1F64AF402BBF0830204BF1A",
+      "original_sha256": "43F3757904BB55DAC57A79ABEF63BC90F1479761D1F64AF402BBF0830204BF1A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\comsw.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/comequ.asm",
+      "sha256": "EB45570D3E73748917E56E2C0445476DCCF57ED5CC5ED1C7513822BA4D1AF0F3",
+      "original_sha256": "EB45570D3E73748917E56E2C0445476DCCF57ED5CC5ED1C7513822BA4D1AF0F3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\comequ.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/envdata.asm",
+      "sha256": "B55150344EBF7726FB563EACE884F2550C65B8618B52E47EF9132A78E3E0CB23",
+      "original_sha256": "B55150344EBF7726FB563EACE884F2550C65B8618B52E47EF9132A78E3E0CB23",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\envdata.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/command2.asm",
+      "sha256": "086A7C72A4C9FBAAFA59501C85EBE3350E47FC865BB502EF2E57FF3E6C785F65",
+      "original_sha256": "086A7C72A4C9FBAAFA59501C85EBE3350E47FC865BB502EF2E57FF3E6C785F65",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\command2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/copy.asm",
+      "sha256": "10DE61FD6FB514A2DBF7C133D0AA600346A519FABA9A2F3B7A3615F281500817",
+      "original_sha256": "10DE61FD6FB514A2DBF7C133D0AA600346A519FABA9A2F3B7A3615F281500817",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\copy.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/comseg.asm",
+      "sha256": "14EDE618CFBCBA077BB368574AF6A1FC56BB07535980D95D8BA146C9BCE9E4E3",
+      "original_sha256": "14EDE618CFBCBA077BB368574AF6A1FC56BB07535980D95D8BA146C9BCE9E4E3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\comseg.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/copypr1.asm",
+      "sha256": "AF82E6AA29923B6D8B3BE87D83FB7FF4CE790D256451FE75F8628F8AC00BCEAB",
+      "original_sha256": "AF82E6AA29923B6D8B3BE87D83FB7FF4CE790D256451FE75F8628F8AC00BCEAB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\copypr1.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/copypr2.asm",
+      "sha256": "8519FDC7F922E5DFBF1A0C4C33D578E1F72C0517572F4ECE6546E14B160E15EE",
+      "original_sha256": "8519FDC7F922E5DFBF1A0C4C33D578E1F72C0517572F4ECE6546E14B160E15EE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\copypr2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/cparse.asm",
+      "sha256": "1A355A2D1194D98B26BF448B1E85A522EA5A0E8DED4071AA11F0D69C2895D5A0",
+      "original_sha256": "1A355A2D1194D98B26BF448B1E85A522EA5A0E8DED4071AA11F0D69C2895D5A0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\cparse.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/init.asm",
+      "sha256": "D5A4C9A46C8E6D3A4C28CF525DB6524279602957C95690AE2FC511F367DF92F6",
+      "original_sha256": "3D69D0C82789BA5EB359794096AB215AFE4F705CBA35CA211948E93923E8FD16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\init.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/iparse.asm",
+      "sha256": "212D981C0338012FE96849A7EA569BEA2172D267BEEB57415D702D603E7D2E7E",
+      "original_sha256": "212D981C0338012FE96849A7EA569BEA2172D267BEEB57415D702D603E7D2E7E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\iparse.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/parse2.asm",
+      "sha256": "D885DE9709A598F2E1B635986A7CEDF6D2AE00321155CF4E465D360B114DA283",
+      "original_sha256": "D885DE9709A598F2E1B635986A7CEDF6D2AE00321155CF4E465D360B114DA283",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\parse2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/path1.asm",
+      "sha256": "A6846CDF08EB4FA77B0E2A0184938E6CC3AC3D781B5C8C0465398ED9C59FA48B",
+      "original_sha256": "A6846CDF08EB4FA77B0E2A0184938E6CC3AC3D781B5C8C0465398ED9C59FA48B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\path1.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/path2.asm",
+      "sha256": "C230A86460F0677B0B51A1657428161F1C3F05D1857C6573CFC4132457C398D3",
+      "original_sha256": "C230A86460F0677B0B51A1657428161F1C3F05D1857C6573CFC4132457C398D3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\path2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/rdata.asm",
+      "sha256": "FE8798D9765C1DF48121DE66840452F699B2EE55FA1923068BCCFA15520057AF",
+      "original_sha256": "350CB74DA4D43313CF7CE0F9BDB957CEFA5759EF32F439F8A83102F0162ED441",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\rdata.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/stub.asm",
+      "sha256": "8A6146E1FC68D7899776F03093860CFB0F323DCCE3A26AAF6E25FF7D396513DF",
+      "original_sha256": "650B4C89FE06E647F461BD2F5B634C2CF5E850B772BDE6AB902C96FBF862C7F4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\stub.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/rucode.asm",
+      "sha256": "245D7F359483D57345876B5A62F2F671A4AB271D4B1A3F8C0A44C0335052EE9F",
+      "original_sha256": "245D7F359483D57345876B5A62F2F671A4AB271D4B1A3F8C0A44C0335052EE9F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\rucode.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tbatch.asm",
+      "sha256": "5222E3C6E530E5DAF381934C1E4ED7CC959640D3363E7DE21CCE5BC817F3D1ED",
+      "original_sha256": "5222E3C6E530E5DAF381934C1E4ED7CC959640D3363E7DE21CCE5BC817F3D1ED",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tbatch.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tbatch2.asm",
+      "sha256": "A347CC53C8DB8D9E54E2783E510FE52D2D816F108CCB7005F47C5ACC97E661E6",
+      "original_sha256": "A347CC53C8DB8D9E54E2783E510FE52D2D816F108CCB7005F47C5ACC97E661E6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tbatch2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/dir.asm",
+      "sha256": "00923F40298347AC15F2EEC25FD958B7B2BABDD630AE2530DF086F03D8DC0E9E",
+      "original_sha256": "00923F40298347AC15F2EEC25FD958B7B2BABDD630AE2530DF086F03D8DC0E9E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\dir.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/ifequ.asm",
+      "sha256": "658D692385D05F90D21F5212A4E3F4DD95717EEFA9C6A2BD44CA2E97A4CDA3BE",
+      "original_sha256": "658D692385D05F90D21F5212A4E3F4DD95717EEFA9C6A2BD44CA2E97A4CDA3BE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\ifequ.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tcmd1b.asm",
+      "sha256": "F2414606B4B8A4F948BD04B9591466491A481F6F9A4C68B3EDB05707D6AEF538",
+      "original_sha256": "F2414606B4B8A4F948BD04B9591466491A481F6F9A4C68B3EDB05707D6AEF538",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tcmd1b.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tcmd2a.asm",
+      "sha256": "E93964B8A359112199AACA42BADE5548812BD683AFEB03C5391D79D8F80F4C83",
+      "original_sha256": "E93964B8A359112199AACA42BADE5548812BD683AFEB03C5391D79D8F80F4C83",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tcmd2a.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tcmd2b.asm",
+      "sha256": "0F964C7B6AEF2E04790C2B4F66CD5C559E9E05BEA0A91ED2ADACA08F28125280",
+      "original_sha256": "0F964C7B6AEF2E04790C2B4F66CD5C559E9E05BEA0A91ED2ADACA08F28125280",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tcmd2b.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tcode.asm",
+      "sha256": "223938EEF6BC48314805CB3C35EBBD11CD6DA10316ED09952C8F06CF9CA11377",
+      "original_sha256": "223938EEF6BC48314805CB3C35EBBD11CD6DA10316ED09952C8F06CF9CA11377",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tcode.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tdata.asm",
+      "sha256": "46D7E67ECB0CD95A59A254420AF02E6770A6B1FB9ADA49A0DA1C276EE344AF78",
+      "original_sha256": "46D7E67ECB0CD95A59A254420AF02E6770A6B1FB9ADA49A0DA1C276EE344AF78",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tdata.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tranmsg.asm",
+      "sha256": "8496A6825B370E89A3C1827B03B11697832941E35A7F65CCE6352F126F72C5A2",
+      "original_sha256": "8496A6825B370E89A3C1827B03B11697832941E35A7F65CCE6352F126F72C5A2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tranmsg.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tenv.asm",
+      "sha256": "BC67EDD71988D695D6A679AE98DC07AEE405FD9DBE319A4EEE206FC710D7DE85",
+      "original_sha256": "BC67EDD71988D695D6A679AE98DC07AEE405FD9DBE319A4EEE206FC710D7DE85",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tenv.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tenv2.asm",
+      "sha256": "46A0C1A731BB73E4AFE4D17C40F48B96F78817A18483F210FE59C2994FD0AFFD",
+      "original_sha256": "46A0C1A731BB73E4AFE4D17C40F48B96F78817A18483F210FE59C2994FD0AFFD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tenv2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tfor.asm",
+      "sha256": "93CD89114A467BCE48900D36C81897F5F739A091280C17A6560D7B953DD519AE",
+      "original_sha256": "93CD89114A467BCE48900D36C81897F5F739A091280C17A6560D7B953DD519AE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tfor.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/fordata.asm",
+      "sha256": "90544898349730457C124055DCD13C536866360F50A63FD3242C6AF823F88D0B",
+      "original_sha256": "90544898349730457C124055DCD13C536866360F50A63FD3242C6AF823F88D0B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\fordata.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tmisc1.asm",
+      "sha256": "6D9FCD49AE29B1BEC75BA82A11F7867822066156836B9FB6FAF9C2637F8AB341",
+      "original_sha256": "6D9FCD49AE29B1BEC75BA82A11F7867822066156836B9FB6FAF9C2637F8AB341",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tmisc1.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tmisc2.asm",
+      "sha256": "3C99901C307699D4BD13D5543E9E2325F2BE488FB864804CA7D32CB0A3DD1F20",
+      "original_sha256": "3C99901C307699D4BD13D5543E9E2325F2BE488FB864804CA7D32CB0A3DD1F20",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tmisc2.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tparse.asm",
+      "sha256": "6B5E17FF0428E5B9D7D87EC076EF92C2B8F6DBB8E0F09A9E325AF0C2E55BA51D",
+      "original_sha256": "6B5E17FF0428E5B9D7D87EC076EF92C2B8F6DBB8E0F09A9E325AF0C2E55BA51D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tparse.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tpipe.asm",
+      "sha256": "8212AF6332FF32FF97A743371F24E9A7C0119BD3809A870C339CE287E7005310",
+      "original_sha256": "8212AF6332FF32FF97A743371F24E9A7C0119BD3809A870C339CE287E7005310",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tpipe.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tprintf.asm",
+      "sha256": "8D26916986436081D862EAC4D9988B47F846DA6180C69D80A1A9D730FF46829E",
+      "original_sha256": "8D26916986436081D862EAC4D9988B47F846DA6180C69D80A1A9D730FF46829E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tprintf.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tspc.asm",
+      "sha256": "CAE808AF6CD1657CC41F4E83D26F67353D085D291DB2F300E9380025B41A350F",
+      "original_sha256": "CAE808AF6CD1657CC41F4E83D26F67353D085D291DB2F300E9380025B41A350F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tspc.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/tucode.asm",
+      "sha256": "33A7EF94560D9B04BB431842426CD83E79C654FFEF6B8FAFF414EDED486B7628",
+      "original_sha256": "33A7EF94560D9B04BB431842426CD83E79C654FFEF6B8FAFF414EDED486B7628",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\tucode.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/uinit.asm",
+      "sha256": "69CF155B487039A7FCADA5125E4ED99D1C41D4770A7869F77549C77E6DF1420E",
+      "original_sha256": "69CF155B487039A7FCADA5125E4ED99D1C41D4770A7869F77549C77E6DF1420E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\uinit.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/loadhi.asm",
+      "sha256": "8E1F504AECCC73C3692BCEAFC42EA0A23859992607C6BEAB9AF51E6D2EABEC92",
+      "original_sha256": "8E1F504AECCC73C3692BCEAFC42EA0A23859992607C6BEAB9AF51E6D2EABEC92",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\loadhi.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/dossym.inc",
+      "sha256": "E17A46EA59396490CEC2DCBAF1E8E48BEAE2A92F7A52A519C43F14A1E2303A36",
+      "original_sha256": "E17A46EA59396490CEC2DCBAF1E8E48BEAE2A92F7A52A519C43F14A1E2303A36",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dossym.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/syscall.inc",
+      "sha256": "23CF7F5E2E180337A0C2219AE013494E2A106103655C0D00FA8631CE9DE2E79D",
+      "original_sha256": "23CF7F5E2E180337A0C2219AE013494E2A106103655C0D00FA8631CE9DE2E79D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\syscall.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/resmsg.equ",
+      "sha256": "E9944D068CCDC0D10B6FEA4A387AA3A127388082EF05D07A146741EB2BABB49A",
+      "original_sha256": "E9944D068CCDC0D10B6FEA4A387AA3A127388082EF05D07A146741EB2BABB49A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\resmsg.equ",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/version.inc",
+      "sha256": "387730C471BBFDE2D45B08D8DF86BEBD430FE5ABB9A8EE12688F6AA141F6F7D6",
+      "original_sha256": "387730C471BBFDE2D45B08D8DF86BEBD430FE5ABB9A8EE12688F6AA141F6F7D6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\version.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/pdb.inc",
+      "sha256": "D247016C2A40694F8285FC33D193FD87DCA9DF96D50450258DA170EB16E32746",
+      "original_sha256": "D247016C2A40694F8285FC33D193FD87DCA9DF96D50450258DA170EB16E32746",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\pdb.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/sf.inc",
+      "sha256": "A7598805CFAAD479960F0891903AAAB458C975D8F14F6E1ACFE25B44F06A2093",
+      "original_sha256": "A7598805CFAAD479960F0891903AAAB458C975D8F14F6E1ACFE25B44F06A2093",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\sf.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/mult.inc",
+      "sha256": "517BC33792CC568EB350308B931AD87B75B1D42255341950FE394DF9302C48FB",
+      "original_sha256": "517BC33792CC568EB350308B931AD87B75B1D42255341950FE394DF9302C48FB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\mult.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/doscntry.inc",
+      "sha256": "CBC519145C8C29F229844FDE16FAE2EBF06B6266E01897E29B0539BD555B8A97",
+      "original_sha256": "CBC519145C8C29F229844FDE16FAE2EBF06B6266E01897E29B0539BD555B8A97",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\doscntry.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/xmm.inc",
+      "sha256": "A426A10A662EF94EC973D045CEA21E3C5A3687BFC79B7B3C02D811A35215738E",
+      "original_sha256": "A426A10A662EF94EC973D045CEA21E3C5A3687BFC79B7B3C02D811A35215738E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\xmm.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/find.inc",
+      "sha256": "7380EE0229EF50D6A2AFAA0DCECE6AB2A333217DF09234037CC4A329686D47EB",
+      "original_sha256": "7380EE0229EF50D6A2AFAA0DCECE6AB2A333217DF09234037CC4A329686D47EB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\find.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/filemode.inc",
+      "sha256": "1ED4F86E30874FD29BBF1DB7D8D7BF541B3E29F9B52E3EB9CF62B007F6C88A05",
+      "original_sha256": "1ED4F86E30874FD29BBF1DB7D8D7BF541B3E29F9B52E3EB9CF62B007F6C88A05",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\filemode.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/devsym.inc",
+      "sha256": "BBFCD2923AA6C6278ED53D21980305AE97BDF78C0CF2950E2E1AC5317A9A7DFF",
+      "original_sha256": "BBFCD2923AA6C6278ED53D21980305AE97BDF78C0CF2950E2E1AC5317A9A7DFF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\devsym.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/arena.inc",
+      "sha256": "F9038D0E38E15CD636EC229ABB33C3831F7CFD8B0B53C0C96A01B05ED42C5FBD",
+      "original_sha256": "F9038D0E38E15CD636EC229ABB33C3831F7CFD8B0B53C0C96A01B05ED42C5FBD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\arena.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/bpb.inc",
+      "sha256": "43452AD264B7242D892634F19BFCD036F8A2F1C926745466B27039E8C5F960A8",
+      "original_sha256": "43452AD264B7242D892634F19BFCD036F8A2F1C926745466B27039E8C5F960A8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\bpb.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/ioctl.inc",
+      "sha256": "5AFDC64AA6D91C4C503C9D27FE4982517F3A762B94413EE8A882A49F3736FF2F",
+      "original_sha256": "5AFDC64AA6D91C4C503C9D27FE4982517F3A762B94413EE8A882A49F3736FF2F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\ioctl.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/rombios.inc",
+      "sha256": "7D9D0098545CFF9FDB3EEF264552887D23D6EA3F175728EF5FD6F0514561EC42",
+      "original_sha256": "7D9D0098545CFF9FDB3EEF264552887D23D6EA3F175728EF5FD6F0514561EC42",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\rombios.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/vector.inc",
+      "sha256": "C7FDD8E4468D28C8ABED6C7D6E6E5E292D5DC21251821B29212EB1C61536FB12",
+      "original_sha256": "C7FDD8E4468D28C8ABED6C7D6E6E5E292D5DC21251821B29212EB1C61536FB12",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\vector.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/mshalo.asm",
+      "sha256": "5B19283A47CE00D0786D416C06FFA502D5F7A6CE73EAB5CC301CC6B345DEBCF1",
+      "original_sha256": "5B19283A47CE00D0786D416C06FFA502D5F7A6CE73EAB5CC301CC6B345DEBCF1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\mshalo.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/dirent.inc",
+      "sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+      "original_sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dirent.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/msgdcl.inc",
+      "sha256": "19D6D486F224DDEA638B566C043D949E7FBA79C011F1FEA254989C274FEFF924",
+      "original_sha256": "19D6D486F224DDEA638B566C043D949E7FBA79C011F1FEA254989C274FEFF924",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\msgdcl.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/psdata.inc",
+      "sha256": "BBDC48017D30A9B4B14289B0EA5003CF89B06CBBF2DC7930E30AAB09983997AB",
+      "original_sha256": "BBDC48017D30A9B4B14289B0EA5003CF89B06CBBF2DC7930E30AAB09983997AB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\psdata.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/parse.asm",
+      "sha256": "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656",
+      "original_sha256": "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\parse.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/intnat.inc",
+      "sha256": "E38D3C8A8B82F4D2B622A9BF276B087D2BB6E4E7FE33658354B06B33466EC970",
+      "original_sha256": "E38D3C8A8B82F4D2B622A9BF276B087D2BB6E4E7FE33658354B06B33466EC970",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\intnat.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "dos/v86/inc/dbcs.sw",
+      "sha256": "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43",
+      "original_sha256": "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dbcs.sw",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/makefile",
+      "sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+      "original_sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\makefile",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/write.lnk",
+      "sha256": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151",
+      "original_sha256": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\write.lnk",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/doslib.asm",
+      "sha256": "22612394CB6F0BCDC3C0A663041D0AB74F84AEA29C5E40603186E4C0748ECE80",
+      "original_sha256": "22612394CB6F0BCDC3C0A663041D0AB74F84AEA29C5E40603186E4C0748ECE80",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\doslib.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/d_form1.c",
+      "sha256": "56049E1382281BAC3DB2A780C7134A880EC7E2A09735E1EFB788678F89E91F43",
+      "original_sha256": "56049E1382281BAC3DB2A780C7134A880EC7E2A09735E1EFB788678F89E91F43",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\d_form1.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/format.asm",
+      "sha256": "C32CE90A3A7A3F02A0E44EA2CBA3FD79BECEED359162B7619AA95EF79D3353AF",
+      "original_sha256": "C32CE90A3A7A3F02A0E44EA2CBA3FD79BECEED359162B7619AA95EF79D3353AF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\format.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/lib.asm",
+      "sha256": "984112A28295612AC21A38D1F0E40D694F90AA0CE625FCF3EAD2C9BBEDADAD92",
+      "original_sha256": "984112A28295612AC21A38D1F0E40D694F90AA0CE625FCF3EAD2C9BBEDADAD92",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\lib.asm",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/addprm.c",
+      "sha256": "8036B996D2AAF18BDF42016D47E7C19C4C36F0D3BC3A43952B840D4931AEA770",
+      "original_sha256": "8036B996D2AAF18BDF42016D47E7C19C4C36F0D3BC3A43952B840D4931AEA770",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\addprm.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/cache.c",
+      "sha256": "B36ADF0B12D2F362FBF7F1206DD4075FEF88AD8BF42B390EF84B062F0CB40DA8",
+      "original_sha256": "B36ADF0B12D2F362FBF7F1206DD4075FEF88AD8BF42B390EF84B062F0CB40DA8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\cache.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/chngwin.c",
+      "sha256": "DFCCE220D337D11D34A27DD337B761892711B4142C9FF3F3786105337E20CBE7",
+      "original_sha256": "DFCCE220D337D11D34A27DD337B761892711B4142C9FF3F3786105337E20CBE7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\chngwin.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/clipbord.c",
+      "sha256": "2F497E581FD15D90BE3905744C4C2B62070C6028044BAE9D84C09A34D94F5AC6",
+      "original_sha256": "2F497E581FD15D90BE3905744C4C2B62070C6028044BAE9D84C09A34D94F5AC6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\clipbord.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/clipbrd2.c",
+      "sha256": "192C1E68950DB0706F099265523AF5D4626425C9B60A1BF7070FEA996CF00A14",
+      "original_sha256": "192C1E68950DB0706F099265523AF5D4626425C9B60A1BF7070FEA996CF00A14",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\clipbrd2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/clipdisp.c",
+      "sha256": "153993307F529DE5F09BC59D4F06A6C62FB71D7224B2847BA972F7C9E1AD094B",
+      "original_sha256": "153993307F529DE5F09BC59D4F06A6C62FB71D7224B2847BA972F7C9E1AD094B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\clipdisp.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/cmd.c",
+      "sha256": "C0316B267A455BD98067F43739F0A756C958144D2BC806A43B2795C2E4E2F845",
+      "original_sha256": "C0316B267A455BD98067F43739F0A756C958144D2BC806A43B2795C2E4E2F845",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\cmd.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/createww.c",
+      "sha256": "CAD0BC405F82BF8FD37E6E1003CE9A3176A22D749445C334027B45E047782A08",
+      "original_sha256": "CAD0BC405F82BF8FD37E6E1003CE9A3176A22D749445C334027B45E047782A08",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\createww.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/curskeys.c",
+      "sha256": "02E58429472B6957F9498E7DE8A7F7A71E4B6F28654A48BD88CEA8BD2E920368",
+      "original_sha256": "02E58429472B6957F9498E7DE8A7F7A71E4B6F28654A48BD88CEA8BD2E920368",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\curskeys.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/debug.c",
+      "sha256": "090B38EF38690A49D31B9F2CC528244F19B48D679BA5ECCB60A94E9C41154320",
+      "original_sha256": "090B38EF38690A49D31B9F2CC528244F19B48D679BA5ECCB60A94E9C41154320",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\debug.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/diaalert.c",
+      "sha256": "3008B8F20600447967E2D9D663ADF20B5CAE0AE98B3733BA83197FE3AEB40632",
+      "original_sha256": "3008B8F20600447967E2D9D663ADF20B5CAE0AE98B3733BA83197FE3AEB40632",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\diaalert.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/printdlg.c",
+      "sha256": "F378D48C181129A3D71B17EE2FFE4BC0C7F48FDFD37805665F69864DBEE0C2CC",
+      "original_sha256": "F378D48C181129A3D71B17EE2FFE4BC0C7F48FDFD37805665F69864DBEE0C2CC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\printdlg.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/diadiv.c",
+      "sha256": "8477B9127E8FEBA8EDCAB090F225911C82D8373E1D0DBEEC20DB858F5BFFCB08",
+      "original_sha256": "8477B9127E8FEBA8EDCAB090F225911C82D8373E1D0DBEEC20DB858F5BFFCB08",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\diadiv.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/diapara.c",
+      "sha256": "7D5368F1A2B7E467F1D5E0EF572CBF9CD8808F8BB95F169E3B8E692029CCAAB2",
+      "original_sha256": "7D5368F1A2B7E467F1D5E0EF572CBF9CD8808F8BB95F169E3B8E692029CCAAB2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\diapara.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/diarepag.c",
+      "sha256": "67A8CF2F0AE26E5A79FB58E11EEFF36580EBEF0E2E951212DE3AEDD4BCE5C197",
+      "original_sha256": "67A8CF2F0AE26E5A79FB58E11EEFF36580EBEF0E2E951212DE3AEDD4BCE5C197",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\diarepag.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/diasubs.c",
+      "sha256": "C3587E6E1061E9385078D3521913ADCB33931FAA05F435F3D6AE689831BBF20B",
+      "original_sha256": "C3587E6E1061E9385078D3521913ADCB33931FAA05F435F3D6AE689831BBF20B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\diasubs.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/d_disp.c",
+      "sha256": "A00B3F53A3A31038077B275AA474EFACA2A39166EDD9A90E67886326C77F940A",
+      "original_sha256": "A00B3F53A3A31038077B275AA474EFACA2A39166EDD9A90E67886326C77F940A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\d_disp.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/disp.c",
+      "sha256": "A8A7FB5ADCB389288D0C90772C77EE560890C7C598028381F676A5C39ABCFE13",
+      "original_sha256": "A8A7FB5ADCB389288D0C90772C77EE560890C7C598028381F676A5C39ABCFE13",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\disp.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/doc.c",
+      "sha256": "0A5087CBA747BB3FBDB68E422893BB0B4D1FE1F46D4019870C38B9CD52FD4CB5",
+      "original_sha256": "0A5087CBA747BB3FBDB68E422893BB0B4D1FE1F46D4019870C38B9CD52FD4CB5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\doc.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/doprm.c",
+      "sha256": "823BA1AD56C899B5CBDB950F76F2110D2539055C470B474B51C86F0E59D22D4C",
+      "original_sha256": "823BA1AD56C899B5CBDB950F76F2110D2539055C470B474B51C86F0E59D22D4C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\doprm.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/edit.c",
+      "sha256": "5A069B76FA47928845005DCA58C0E462488E12B989E11F9286F72195112A23B3",
+      "original_sha256": "5A069B76FA47928845005DCA58C0E462488E12B989E11F9286F72195112A23B3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\edit.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/editpgtb.c",
+      "sha256": "0A359C075D8541DA3C884F3AD764481B6E8F06797DDD29944A8E2DCA33735EB5",
+      "original_sha256": "0A359C075D8541DA3C884F3AD764481B6E8F06797DDD29944A8E2DCA33735EB5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\editpgtb.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fetch.c",
+      "sha256": "B0E943FB5D765D0289964A716F18DD0E500B5C68C61FC53D746FF609C5FA2430",
+      "original_sha256": "B0E943FB5D765D0289964A716F18DD0E500B5C68C61FC53D746FF609C5FA2430",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fetch.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/file.c",
+      "sha256": "842A8A8C4432F0BBAA00B66886EBD76CF96149460F8AAAED428B2CBDEC48749B",
+      "original_sha256": "842A8A8C4432F0BBAA00B66886EBD76CF96149460F8AAAED428B2CBDEC48749B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\file.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fileres.c",
+      "sha256": "4B8F58BA4C3D89A7F56912B5A19687CC1AF6A81D1EB98EBC766B1172E7991F9E",
+      "original_sha256": "4B8F58BA4C3D89A7F56912B5A19687CC1AF6A81D1EB98EBC766B1172E7991F9E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fileres.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fileutil.c",
+      "sha256": "642CAB428F8D1BA2D3E652F67F7750DF098481102EA55A9E6B446EFE06D0668F",
+      "original_sha256": "642CAB428F8D1BA2D3E652F67F7750DF098481102EA55A9E6B446EFE06D0668F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fileutil.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fontdlg.c",
+      "sha256": "80EF51FA1601818A8C791DC30930996836F94807ECDC74D68C28DA1219F171BA",
+      "original_sha256": "80EF51FA1601818A8C791DC30930996836F94807ECDC74D68C28DA1219F171BA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fontdlg.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fontenum.c",
+      "sha256": "8DF1E484473344870EC3353220C385251A6BFDE3FC8046FD081302E70C8BBE99",
+      "original_sha256": "8DF1E484473344870EC3353220C385251A6BFDE3FC8046FD081302E70C8BBE99",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fontenum.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fontutil.c",
+      "sha256": "2EF6249031361B5D779032368E6CA40E6F8AFB1C843553366B5B2738291CB3D7",
+      "original_sha256": "2EF6249031361B5D779032368E6CA40E6F8AFB1C843553366B5B2738291CB3D7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fontutil.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/format2.c",
+      "sha256": "A3A0207CC4D7CC2A7B9595A1E359D6B1399132692DB7B9152EC4F520E86E5D4E",
+      "original_sha256": "A3A0207CC4D7CC2A7B9595A1E359D6B1399132692DB7B9152EC4F520E86E5D4E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\format2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/heapmain.c",
+      "sha256": "DCC8C1A60B0D300F8410F84D7954E5B6572DE07BE4F8046DA5523EB314CB0D86",
+      "original_sha256": "DCC8C1A60B0D300F8410F84D7954E5B6572DE07BE4F8046DA5523EB314CB0D86",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\heapmain.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/heaprare.c",
+      "sha256": "D48BE668786891A51185B9FC20A44D913595F87B6478401B450B954BE82B8D66",
+      "original_sha256": "D48BE668786891A51185B9FC20A44D913595F87B6478401B450B954BE82B8D66",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\heaprare.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/initmmw.c",
+      "sha256": "191D79C45121830C90A88BD048A8FE13A57468AB0D83E830B9AAA9808D8AA974",
+      "original_sha256": "191D79C45121830C90A88BD048A8FE13A57468AB0D83E830B9AAA9808D8AA974",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\initmmw.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/initwin.c",
+      "sha256": "E305F8DB9272959E6F7766A03AB209D0E60CB07CD9C71F52F893C797D1E48842",
+      "original_sha256": "E305F8DB9272959E6F7766A03AB209D0E60CB07CD9C71F52F893C797D1E48842",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\initwin.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/insert.c",
+      "sha256": "6FF4EF3B614D06B97641D51E3426D7FEA28CE0A564B738299DD48213250C6C16",
+      "original_sha256": "6FF4EF3B614D06B97641D51E3426D7FEA28CE0A564B738299DD48213250C6C16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\insert.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/insert2.c",
+      "sha256": "F71925212E5625A1D7BB424C63CBF082194C82AEFE6EC6A03304A80089444549",
+      "original_sha256": "F71925212E5625A1D7BB424C63CBF082194C82AEFE6EC6A03304A80089444549",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\insert2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/insertco.c",
+      "sha256": "82336C60E7B56A8493AEB56E7173DB800DE1509BEF00DF115A995758F75A05FB",
+      "original_sha256": "82336C60E7B56A8493AEB56E7173DB800DE1509BEF00DF115A995758F75A05FB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\insertco.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/jumppage.c",
+      "sha256": "492466270E6CB451D1DA97C29948997DFB8B01C1E6EC1BB66F81FC48CAFC3173",
+      "original_sha256": "492466270E6CB451D1DA97C29948997DFB8B01C1E6EC1BB66F81FC48CAFC3173",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\jumppage.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/loadfnt2.c",
+      "sha256": "133CBED5AF13C6A41BBAF05F6CFF0D5E37D10456425B0A96B5278093DC76F81B",
+      "original_sha256": "133CBED5AF13C6A41BBAF05F6CFF0D5E37D10456425B0A96B5278093DC76F81B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\loadfnt2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/loadfont.c",
+      "sha256": "28886E6C5899449C24FEDEE1FD63442C5DBA22FC15BFCBF7F4A24E37B557071D",
+      "original_sha256": "28886E6C5899449C24FEDEE1FD63442C5DBA22FC15BFCBF7F4A24E37B557071D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\loadfont.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mainloop.c",
+      "sha256": "B4942966464098F559FA34A9EEBF3CC9BF0DE693D9DF01C7B247969E285D084C",
+      "original_sha256": "B4942966464098F559FA34A9EEBF3CC9BF0DE693D9DF01C7B247969E285D084C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mainloop.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mdoc.c",
+      "sha256": "2900C27DB7A3E88BDA67754624B0AE32C992116321F5BB9F81D71DEDC3E389AC",
+      "original_sha256": "2900C27DB7A3E88BDA67754624B0AE32C992116321F5BB9F81D71DEDC3E389AC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mdoc.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/menu.c",
+      "sha256": "69F0417C8163BC911E839C2BC78BBFC15B84E97BFD773CC1338A71519C667851",
+      "original_sha256": "69F0417C8163BC911E839C2BC78BBFC15B84E97BFD773CC1338A71519C667851",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\menu.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mglobals.c",
+      "sha256": "0B92D024E9E6DC693F9214F11F01FFDE1448AA9841C8CF4FCD930C03D304A06D",
+      "original_sha256": "0B92D024E9E6DC693F9214F11F01FFDE1448AA9841C8CF4FCD930C03D304A06D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mglobals.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mmw.c",
+      "sha256": "A3CC7629DCC1B710E79EF62340442194363C08A8B0E3B54C20B8269263F05137",
+      "original_sha256": "A3CC7629DCC1B710E79EF62340442194363C08A8B0E3B54C20B8269263F05137",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mmw.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mouse.c",
+      "sha256": "BE1B0906703948AE974D74269AD9188D8D0780B2B819350137500ACBD54D5C2B",
+      "original_sha256": "BE1B0906703948AE974D74269AD9188D8D0780B2B819350137500ACBD54D5C2B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mouse.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/open.c",
+      "sha256": "DA2CB4D6B8659F29979DC15A6A991DAA3ED613645D89BC1D21387918D0E4653C",
+      "original_sha256": "DA2CB4D6B8659F29979DC15A6A991DAA3ED613645D89BC1D21387918D0E4653C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\open.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/pageinfo.c",
+      "sha256": "10F2A678F06F630C05009FEAC9A25444A15C16E3CF5982AC6FA00A9FFD22430B",
+      "original_sha256": "10F2A678F06F630C05009FEAC9A25444A15C16E3CF5982AC6FA00A9FFD22430B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\pageinfo.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/pictdrag.c",
+      "sha256": "6249E171FD8D69E4C7E6D24C851D844A796F25BFFA331DC7CAE3D72F43698B60",
+      "original_sha256": "6249E171FD8D69E4C7E6D24C851D844A796F25BFFA331DC7CAE3D72F43698B60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\pictdrag.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/picture.c",
+      "sha256": "D0530F73787B3E460A7851EAD6831619845930D0ED7D2D49CA5E9870351C4C41",
+      "original_sha256": "D0530F73787B3E460A7851EAD6831619845930D0ED7D2D49CA5E9870351C4C41",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\picture.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/picture2.c",
+      "sha256": "25C7DE9C9F740A6F48B8BEB424C38EC6712CB79867C10B6B608EDBE8C87CEA93",
+      "original_sha256": "25C7DE9C9F740A6F48B8BEB424C38EC6712CB79867C10B6B608EDBE8C87CEA93",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\picture2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/print.c",
+      "sha256": "482A8E2D64EC26361631BAB7D623092F092482EC7918D54AC8CFCA6E69CE395D",
+      "original_sha256": "482A8E2D64EC26361631BAB7D623092F092482EC7918D54AC8CFCA6E69CE395D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\print.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/print2.c",
+      "sha256": "2E75C06914D772B74E4D75080F02B98C0C237AF71A1BA1BB7B159CFA57CD6CF4",
+      "original_sha256": "2E75C06914D772B74E4D75080F02B98C0C237AF71A1BA1BB7B159CFA57CD6CF4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\print2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/print3.c",
+      "sha256": "854566A0317CD2AB24E112BED35C10B0977259AF6D703901293F093727A26397",
+      "original_sha256": "854566A0317CD2AB24E112BED35C10B0977259AF6D703901293F093727A26397",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\print3.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/quit.c",
+      "sha256": "D38B19F9F6B819CEF9CE370B8D3B6741F35EC1110268966683007FAF191C8DE6",
+      "original_sha256": "D38B19F9F6B819CEF9CE370B8D3B6741F35EC1110268966683007FAF191C8DE6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\quit.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/rare.c",
+      "sha256": "8D9C099441F10FBBF524995059DE7EC5DB077CC75881D71C5195AA50C8D6D292",
+      "original_sha256": "8D9C099441F10FBBF524995059DE7EC5DB077CC75881D71C5195AA50C8D6D292",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\rare.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/ruler.c",
+      "sha256": "A625476A3E657466EF53609745DC08B5184D38E1528D76B50378DAA9D56EA779",
+      "original_sha256": "A625476A3E657466EF53609745DC08B5184D38E1528D76B50378DAA9D56EA779",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\ruler.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/ruler2.c",
+      "sha256": "A77236FC8CD8C52CBC19C1C1094AAE61EACE07B38C15BEA7C57FE35165929114",
+      "original_sha256": "A77236FC8CD8C52CBC19C1C1094AAE61EACE07B38C15BEA7C57FE35165929114",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\ruler2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/ruler3.c",
+      "sha256": "B6D453681227FFD48B16F8B6BE32D0E0E7FA36A61D5979AC81DD09FBBB47F5A0",
+      "original_sha256": "B6D453681227FFD48B16F8B6BE32D0E0E7FA36A61D5979AC81DD09FBBB47F5A0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\ruler3.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/running.c",
+      "sha256": "323D7DF31E93038E875158FA5FF9F69F646DAFFD7F2A33AF8B8F04F02ACB5653",
+      "original_sha256": "323D7DF31E93038E875158FA5FF9F69F646DAFFD7F2A33AF8B8F04F02ACB5653",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\running.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/screen.c",
+      "sha256": "D321BB6141C2809B42A3DA7B2ED5A329FE9E126141CD475B40E17F71D8E93B87",
+      "original_sha256": "D321BB6141C2809B42A3DA7B2ED5A329FE9E126141CD475B40E17F71D8E93B87",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\screen.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/scrnchng.c",
+      "sha256": "5E02B1978A0CAB4D3A92C876790678A0FB5EC79A9CBF1F68429BB1096D4FBF95",
+      "original_sha256": "5E02B1978A0CAB4D3A92C876790678A0FB5EC79A9CBF1F68429BB1096D4FBF95",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\scrnchng.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/scrollhz.c",
+      "sha256": "998282376D107BFAC8F88499476E1FFAA8AAAA6D9205DF187628269AC7AB5553",
+      "original_sha256": "998282376D107BFAC8F88499476E1FFAA8AAAA6D9205DF187628269AC7AB5553",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\scrollhz.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/scrollvt.c",
+      "sha256": "FBF2C1BC8CE4363912F9DD05FC62DBE1EB63BBFABF4BD334926868DE05D1F446",
+      "original_sha256": "FBF2C1BC8CE4363912F9DD05FC62DBE1EB63BBFABF4BD334926868DE05D1F446",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\scrollvt.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/search.c",
+      "sha256": "FC61F0CA3628AFC7677222B60D3DF8EC5E00E0C5F1ED434910C0E5648BC65B76",
+      "original_sha256": "FC61F0CA3628AFC7677222B60D3DF8EC5E00E0C5F1ED434910C0E5648BC65B76",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\search.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/select.c",
+      "sha256": "BEDD5B66FD1C9DC86E7DCDE907F7A491A97901DEB31557D7A0081275024AF25D",
+      "original_sha256": "BEDD5B66FD1C9DC86E7DCDE907F7A491A97901DEB31557D7A0081275024AF25D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\select.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/d_selec2.c",
+      "sha256": "358DE37D9871C983B2CFC77C7ACB9D2DC5A21F22E4743BCD12925AB7CC0B0D22",
+      "original_sha256": "358DE37D9871C983B2CFC77C7ACB9D2DC5A21F22E4743BCD12925AB7CC0B0D22",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\d_selec2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/select2.c",
+      "sha256": "F4188DA970E769DFB5F761E1B9809D39DA9373019B502AF912D8BA57F43A99DD",
+      "original_sha256": "F4188DA970E769DFB5F761E1B9809D39DA9373019B502AF912D8BA57F43A99DD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\select2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/selectsp.c",
+      "sha256": "7F6A39FEF9C26982C41097E3408DA007B3A95B9FB27398FB447CF9725A993B62",
+      "original_sha256": "7F6A39FEF9C26982C41097E3408DA007B3A95B9FB27398FB447CF9725A993B62",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\selectsp.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/trans2.c",
+      "sha256": "23B0B16D189EE2E52FB1CA6A8BA51229C092199A6479CA8D4B8F36C1176E03AB",
+      "original_sha256": "23B0B16D189EE2E52FB1CA6A8BA51229C092199A6479CA8D4B8F36C1176E03AB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\trans2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/trans3.c",
+      "sha256": "5F45B6DAF57F4BE6B8463981170E1D57A222D5CA948F30476DFDB9453A622165",
+      "original_sha256": "5F45B6DAF57F4BE6B8463981170E1D57A222D5CA948F30476DFDB9453A622165",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\trans3.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/trans4.c",
+      "sha256": "A3AA216EBFCA9E26F04B8D4EB0A7BED7F04E78213DDD7BEFA4940D5827B2B1F8",
+      "original_sha256": "A3AA216EBFCA9E26F04B8D4EB0A7BED7F04E78213DDD7BEFA4940D5827B2B1F8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\trans4.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/transbuf.c",
+      "sha256": "AA3D96FE3E523D7BCE2BE925F6D23EFCCD6AC7825A93149AB8D7B05B7C21A9D1",
+      "original_sha256": "AA3D96FE3E523D7BCE2BE925F6D23EFCCD6AC7825A93149AB8D7B05B7C21A9D1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\transbuf.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/transfer.c",
+      "sha256": "1E7E1BEFD9125303A240DC3705921C538D9B1518A7FB61F5040D589C640520AA",
+      "original_sha256": "1E7E1BEFD9125303A240DC3705921C538D9B1518A7FB61F5040D589C640520AA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\transfer.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/undo.c",
+      "sha256": "06A26A54E9FCB2BF08DCFF4CC217131C049BBB701E40B46408FA497076A303BE",
+      "original_sha256": "06A26A54E9FCB2BF08DCFF4CC217131C049BBB701E40B46408FA497076A303BE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\undo.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/util.c",
+      "sha256": "7981A317B093A1087EC16F3F0F53703F6CCADF2C42307B54A94A1A6CE0CED2E4",
+      "original_sha256": "7981A317B093A1087EC16F3F0F53703F6CCADF2C42307B54A94A1A6CE0CED2E4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\util.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/util2.c",
+      "sha256": "541BFF2A3FB990F8DABAEB779CF62ACE9387DE349988A71C77ED9EAD9957C004",
+      "original_sha256": "541BFF2A3FB990F8DABAEB779CF62ACE9387DE349988A71C77ED9EAD9957C004",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\util2.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/wwactde.c",
+      "sha256": "CEB9B83F45637D0C3244411B350CB2706EFF5EB2F57F030FD7DBC90FC80F6324",
+      "original_sha256": "CEB9B83F45637D0C3244411B350CB2706EFF5EB2F57F030FD7DBC90FC80F6324",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\wwactde.c",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/cmacros2.inc",
+      "sha256": "4FCC346A6D582DCFF0846E6CF7FDB3CD4DB5DCDDFBC4E422736CB3A5C43BF830",
+      "original_sha256": "4FCC346A6D582DCFF0846E6CF7FDB3CD4DB5DCDDFBC4E422736CB3A5C43BF830",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\cmacros2.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/mw.h",
+      "sha256": "BED9967872E0CFA74C038475FD5157E91C9BB0FF6FE4421815A14970915EC950",
+      "original_sha256": "BED9967872E0CFA74C038475FD5157E91C9BB0FF6FE4421815A14970915EC950",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\mw.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/cmddefs.h",
+      "sha256": "F820E5087849FC6740C712CFADBF0E4886D106E9BB6635ECC3470F2130ECA667",
+      "original_sha256": "F820E5087849FC6740C712CFADBF0E4886D106E9BB6635ECC3470F2130ECA667",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\cmddefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fmtdefs.h",
+      "sha256": "275F141936FB53F354DA347D159878D579A3FA27284B0B7ED11C7A81F9D7D0BC",
+      "original_sha256": "275F141936FB53F354DA347D159878D579A3FA27284B0B7ED11C7A81F9D7D0BC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fmtdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/propdefs.h",
+      "sha256": "412042BAE1415BAD5B61DC10C3A6CD0358FD617FBAE113CF4B5C8F9E47325598",
+      "original_sha256": "412042BAE1415BAD5B61DC10C3A6CD0358FD617FBAE113CF4B5C8F9E47325598",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\propdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/ch.h",
+      "sha256": "081423E80DC84FE4549E75BB808FD3C6771FB39B46DA49979280306E3913A7FA",
+      "original_sha256": "081423E80DC84FE4549E75BB808FD3C6771FB39B46DA49979280306E3913A7FA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\ch.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/docdefs.h",
+      "sha256": "C834338613F1E55B5A55CA63F8BF807B224A80A26889EC2FF2DA2C7C0F12C347",
+      "original_sha256": "C834338613F1E55B5A55CA63F8BF807B224A80A26889EC2FF2DA2C7C0F12C347",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\docdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/ffdefs.h",
+      "sha256": "D959AE490029FB734A8DAE5F927E4FA7358EC007ACCED771DD6F451077982F6A",
+      "original_sha256": "D959AE490029FB734A8DAE5F927E4FA7358EC007ACCED771DD6F451077982F6A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\ffdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/filedefs.h",
+      "sha256": "931B1ECA419547A224F2B34303752966EDFD59B93160A90176C172FB7CFA84C7",
+      "original_sha256": "931B1ECA419547A224F2B34303752966EDFD59B93160A90176C172FB7CFA84C7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\filedefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fkpdefs.h",
+      "sha256": "3F09D807A61B94514B849318C1D6CAC4E8EDAC628C6D55DC9099CDF8BD74A67E",
+      "original_sha256": "3F09D807A61B94514B849318C1D6CAC4E8EDAC628C6D55DC9099CDF8BD74A67E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fkpdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/dispdefs.h",
+      "sha256": "79131EDFE5AB2BEA334702D20ECA5B8107F06683F57EBE44F164A0054C04806B",
+      "original_sha256": "79131EDFE5AB2BEA334702D20ECA5B8107F06683F57EBE44F164A0054C04806B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\dispdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/scrndefs.h",
+      "sha256": "DFB59AC95D77F2E94D57E93686BA6EC8B5F891C7B99B6E102FE123D7A7823C52",
+      "original_sha256": "DFB59AC95D77F2E94D57E93686BA6EC8B5F891C7B99B6E102FE123D7A7823C52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\scrndefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/macro.h",
+      "sha256": "C3C27409CD6F6492C109892E868EBFC3FDFBF1DC904F6E8C0B36680C6686BD31",
+      "original_sha256": "C3C27409CD6F6492C109892E868EBFC3FDFBF1DC904F6E8C0B36680C6686BD31",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\macro.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/debug.h",
+      "sha256": "F8707AA4396244D43C4263ED9D9AC958B81E7CEE4096BCA59A6D424458781A13",
+      "original_sha256": "F8707AA4396244D43C4263ED9D9AC958B81E7CEE4096BCA59A6D424458781A13",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\debug.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/fontdefs.h",
+      "sha256": "904A3E39E4F91AD551B753A1A60E7655881E045C2905F7038E7E596BA76A9E20",
+      "original_sha256": "904A3E39E4F91AD551B753A1A60E7655881E045C2905F7038E7E596BA76A9E20",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\fontdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/str.h",
+      "sha256": "9F0C77642956BD03721BBBD4DF2EF2EF6E5273A11E21678A5D16B422805EBFCD",
+      "original_sha256": "9F0C77642956BD03721BBBD4DF2EF2EF6E5273A11E21678A5D16B422805EBFCD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\str.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/wwdefs.h",
+      "sha256": "025F59514D54AFC5925BBC0D6706233F1ADA1B8C933DBA288B6A44E1616B5983",
+      "original_sha256": "025F59514D54AFC5925BBC0D6706233F1ADA1B8C933DBA288B6A44E1616B5983",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\wwdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/dbcs.h",
+      "sha256": "6FFFB81952B772608FD10AB7F395C1F36AE81D1B480D3FD20F4B24F2710C48DF",
+      "original_sha256": "6FFFB81952B772608FD10AB7F395C1F36AE81D1B480D3FD20F4B24F2710C48DF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\dbcs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/kanji.h",
+      "sha256": "EE89149402362395E0014B4EB0D001F1F45CC41531C24CFE345FBDF107481B5F",
+      "original_sha256": "EE89149402362395E0014B4EB0D001F1F45CC41531C24CFE345FBDF107481B5F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\kanji.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/inc/cmacros.inc",
+      "sha256": "6513E20D60BE49B39A7E19A76DBCABD0A9B1D19FDBC42CF3AF24ADE57E936CCB",
+      "original_sha256": "6513E20D60BE49B39A7E19A76DBCABD0A9B1D19FDBC42CF3AF24ADE57E936CCB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\cmacros.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/cmacros3.inc",
+      "sha256": "D4A33C1A9E713378B26D5A9798F1B9820D8EC47F47F74E6E31F62845676B3366",
+      "original_sha256": "D4A33C1A9E713378B26D5A9798F1B9820D8EC47F47F74E6E31F62845676B3366",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\cmacros3.inc",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/code.h",
+      "sha256": "792F23D36D1A53B2B1F9D0537DA46E7C734A1E5D53251890FB00769141E3C94C",
+      "original_sha256": "792F23D36D1A53B2B1F9D0537DA46E7C734A1E5D53251890FB00769141E3C94C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\code.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/editdefs.h",
+      "sha256": "00E90D4C5D05F20142D71F2852E6E5503050C6B4F3C9A6255FEE0F36DB530202",
+      "original_sha256": "00E90D4C5D05F20142D71F2852E6E5503050C6B4F3C9A6255FEE0F36DB530202",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\editdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/prmdefs.h",
+      "sha256": "248184AF2CCBED6CF453FF037B40E0D0DE0E7AE0111FA1CAA8A0F69437733C70",
+      "original_sha256": "248184AF2CCBED6CF453FF037B40E0D0DE0E7AE0111FA1CAA8A0F69437733C70",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\prmdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/stcdefs.h",
+      "sha256": "582AC82BF97D20137B3E5730ECA50F261493480C0B59FE43AEB9BDF6C5952C96",
+      "original_sha256": "582AC82BF97D20137B3E5730ECA50F261493480C0B59FE43AEB9BDF6C5952C96",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\stcdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/winddefs.h",
+      "sha256": "D63937A44BF53E9C154F8F4C255C11EA2CCCCEEEE7ABA67F5BD2F7FC77291D07",
+      "original_sha256": "D63937A44BF53E9C154F8F4C255C11EA2CCCCEEEE7ABA67F5BD2F7FC77291D07",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\winddefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/obj.h",
+      "sha256": "0E27AAE89FDD078D44E05494F0FAB65AF17BD32BB456A72EDD321EE5F4FCFBB5",
+      "original_sha256": "0E27AAE89FDD078D44E05494F0FAB65AF17BD32BB456A72EDD321EE5F4FCFBB5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\obj.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/dlgdefs.h",
+      "sha256": "D4A893F19C67D9EEA06B7229F98AB2ECAE6670D7F98EDD703FFCCB49D495D8A9",
+      "original_sha256": "D4A893F19C67D9EEA06B7229F98AB2ECAE6670D7F98EDD703FFCCB49D495D8A9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\dlgdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/inc/windows.h",
+      "sha256": "F33EBE19EDC1507726822DAD71FBD26453F6917388BA5E75ECAED19A0A3AF6E5",
+      "original_sha256": "F33EBE19EDC1507726822DAD71FBD26453F6917388BA5E75ECAED19A0A3AF6E5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\windows.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/menudefs.h",
+      "sha256": "FD3DBA0F1F609F221CDFB9C2627A197EEDF43BD5037B339174DAD33E3191E7D6",
+      "original_sha256": "FD3DBA0F1F609F221CDFB9C2627A197EEDF43BD5037B339174DAD33E3191E7D6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\menudefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/printdef.h",
+      "sha256": "25EBAE47C729105A65014383656052F0E736B2C8EA2E53EDDF63289ADFF2306E",
+      "original_sha256": "25EBAE47C729105A65014383656052F0E736B2C8EA2E53EDDF63289ADFF2306E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\printdef.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/machdefs.h",
+      "sha256": "8DED08E833FE43BCD309EA5C4EB407AA156A67C04124848C71CFFABA160E1944",
+      "original_sha256": "8DED08E833FE43BCD309EA5C4EB407AA156A67C04124848C71CFFABA160E1944",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\machdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/doslib.h",
+      "sha256": "93665522DF43EB7C946BDE94745D473832734DD178AB1373566B076EE25EDEAF",
+      "original_sha256": "93665522DF43EB7C946BDE94745D473832734DD178AB1373566B076EE25EDEAF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\doslib.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/txb.h",
+      "sha256": "D8855A1011FDA7C24E4A52DD071C186912CDFEF585780A33FCD1EC3B99E54E24",
+      "original_sha256": "D8855A1011FDA7C24E4A52DD071C186912CDFEF585780A33FCD1EC3B99E54E24",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\txb.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/heapdefs.h",
+      "sha256": "CF20F4AC2CC2DD9A72CEC8BF39C9ADFEC40EC016FDFFA3277E6123CBB42F491B",
+      "original_sha256": "CF20F4AC2CC2DD9A72CEC8BF39C9ADFEC40EC016FDFFA3277E6123CBB42F491B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\heapdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/heapdata.h",
+      "sha256": "A872FFF4E3B7F38FC59F8277DE89480F3C7DCB2D35B3CFFCFA9F60B55C9FE9FA",
+      "original_sha256": "A872FFF4E3B7F38FC59F8277DE89480F3C7DCB2D35B3CFFCFA9F60B55C9FE9FA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\heapdata.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/preload.h",
+      "sha256": "4EB02A7F4C036A7B629449577F2280F4411FD43814A20E4AD72BDCA7C66066C8",
+      "original_sha256": "4EB02A7F4C036A7B629449577F2280F4411FD43814A20E4AD72BDCA7C66066C8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\preload.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/rulerdef.h",
+      "sha256": "E40DF4D260619A0DDC54874FC0927A3E3D41EA1A77C02600D55C4B05816056F5",
+      "original_sha256": "E40DF4D260619A0DDC54874FC0927A3E3D41EA1A77C02600D55C4B05816056F5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\rulerdef.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/globdefs.h",
+      "sha256": "E461E8FC2061CE0F6BAEB30E7AB83102298EAADF656BC66A361701231EA06003",
+      "original_sha256": "E461E8FC2061CE0F6BAEB30E7AB83102298EAADF656BC66A361701231EA06003",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\globdefs.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/inc/commdlg.h",
+      "sha256": "6867CAEC8B30C98E1B8315A59F804F4D79F0ED3742B0C1049DE06808E896D5EC",
+      "original_sha256": "6867CAEC8B30C98E1B8315A59F804F4D79F0ED3742B0C1049DE06808E896D5EC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\commdlg.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/bitmaps.h",
+      "sha256": "75121E09A90049B78522929EA56DA139B1F7E3930B9C1B9DD4B11711F03DC1C3",
+      "original_sha256": "75121E09A90049B78522929EA56DA139B1F7E3930B9C1B9DD4B11711F03DC1C3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\bitmaps.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/write/toolbox.h",
+      "sha256": "F527A44D0860C49A81DD1CCE07566C044B00BD43C83255B77A74F389131375DE",
+      "original_sha256": "F527A44D0860C49A81DD1CCE07566C044B00BD43C83255B77A74F389131375DE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\toolbox.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/inc/io.h",
+      "sha256": "F81A13F740240A05B48F6DC614E44E2269C6ECCA07BAE0393AB71FAB30691F32",
+      "original_sha256": "F81A13F740240A05B48F6DC614E44E2269C6ECCA07BAE0393AB71FAB30691F32",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\io.h",
+      "edition": "OpenNT"
+    },
+    {
+      "relative_path": "wow16/inc/windowsx.h",
+      "sha256": "31694552E30722D1606FDC5998723FB4B2437BFF0B51E93A2D9E60DB176D50F5",
+      "original_sha256": "31694552E30722D1606FDC5998723FB4B2437BFF0B51E93A2D9E60DB176D50F5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\windowsx.h",
+      "edition": "OpenNT"
+    }
+  ],
+  "limits": "Literal original make/link/include chains, conditional branches not evaluated; no guest build or runtime acceptance"
+}
