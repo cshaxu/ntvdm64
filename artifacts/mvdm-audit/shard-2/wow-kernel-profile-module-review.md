@@ -13,3 +13,15 @@ Scope is shard-2 `wow32/wkernel.c`, frozen reconciliation SHA-256 F73FFD45DFF44F
 `wktbl2.h` k49 calls `WK32GetModuleFileName`: real module identity is host module; an HTASK alias uses original `GetHtaskAliasProcessName`. DIV-450 preserves that selection but returns zero for nonpositive capacity and bounds the guest allocation and flush to `cch`. The T452 S2 delivery receipt records production-command alias fixture normal/exact/truncated/one/unavailable and an integrated WinMine run. That does not establish every real-module, zero-capacity, invalid alias and guest memory failure case. `m0-t452-s1-modules-memory-alias-source-matrix.md` describes further intended cases.
 
 No new behavior test was run. Existing file identity/line-count/matching heuristic and selected product evidence stay in the shard ledger; textual match is not a restored capability percentage.
+
+## Earlier controlled evidence and its limit
+
+T422 S2 E20 (`docs/etc/evidence/m0-t422-s2-user-client-lifecycle-ledger.md`)
+records a controlled real-WOW observation of the original bare-name caller,
+two selected package profile branches and no newly leaked `nvm*.tmp` after
+normal worker teardown. It also records host tests in which direct selected
+`SYSTEM.INI` paths did not preserve the intended blank profile value,
+explaining why a differently named copy is used. That historical evidence
+is positive for the reported reads and ordinary teardown; it does not
+establish writes across a worker restart, failure fallback, partial creation
+or abnormal teardown, and it is not a current-package revalidation.

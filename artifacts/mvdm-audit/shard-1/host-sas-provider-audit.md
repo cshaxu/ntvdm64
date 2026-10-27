@@ -1,0 +1,9 @@
+# Host SAS provider ownership
+
+Frozen source universe SHA-256 F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196. `softpc.new/host/src/nt_sas.c` SHA-256 077663754025071C48EC5F0BFEBBCF07E1A6BCC240153B40545EF6F3C59C8344 matches selected OpenNT original; identical bytes do not by themselves prove any product capability.
+
+`nt_sas.c` contains an original `host_sas_funcs` forward-dispatch table under HOST_SAS and a `host_as_init` under SUN_VA. Its own host_sas_init and term code is commented out. `build/.ninja/msvc-x86-release/worker/build.ninja` lists nt_sas.obj alongside `ccpusas4.obj` and `sim32.obj`, and its common command-line flags select CPU_40_STYLE and SIM32 without specifying HOST_SAS or SUN_VA. This is graph evidence only; indirect header/preprocessor definitions must still be checked before declaring the table absent.
+
+The actual selected CCPU owner `ccpusas4.c:376,424` calls `host_sas_init(size)` and `host_sas_term()`. Under CPU_40_STYLE, the implementation in `sim32.c:449-481` invokes InitIntelMemory and FreeIntelMemory, owns Start_of_M_area and length, and uses a project session escape on allocation failure. Historical `build/t448-s11-regression/wow-trace-r2/ntvdm.exe.map` attributes host_sas_init/term to sim32.obj rather than nt_sas.obj; it is not a current-package execution proof. Original source `sim32.c` is a separate audit item with its own DIV-147.
+
+Need preprocess the exact current source using the selected command and inspect current object/map; verify whether HOST_SAS / SUN_VA branches are actually inactive. Separately check selected real memory initialization, failure and release behavior and current package identity before treating this file or SAS capacity as fully proved. No direct nt_sas runtime witness or product/guest modifications were made in this review.

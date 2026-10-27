@@ -9,7 +9,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | `selected-product-source` | 293 |
 | `retained-build-artifact` | 224 |
 | `unselected-host-source-requires-s2-disposition` | 110 |
-| `tooling-or-build-carrier` | 110 |
+| `tooling-or-build-carrier` | 108 |
 | `retained-historical-binary-or-build-artifact` | 69 |
 | `unmirrored-tool-build-input` | 33 |
 | `unselected-host-noncode-requires-s2-disposition` | 25 |
@@ -17,7 +17,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 
 | Frozen product selection | Pending paths |
 | --- | ---: |
-| `not-product-selected` | 4057 |
+| `not-product-selected` | 4055 |
 | `ntvdm-product` | 234 |
 | `wow32-product` | 46 |
 | `vdmredir-product` | 13 |

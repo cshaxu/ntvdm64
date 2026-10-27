@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "7F12A7ECBF6E782CC6BD8F7790D361CEB4040B87CDAD79F6DDCCEA8DFBC9E4F8",
+  "output_sha256": "C5A4317ADF17CAF7F337BD9B853FED423C509693EEE5CC497AE5F7F6AB5A8E1B",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -162,5 +162,6 @@
   "video_write_packed_presentation": "video-write-packed-presentation-review.md; three changed selected rows remain partial",
   "wow_clipboard_format_failure": "wow-clipboard-format-failure-review.md; selected changed row partial with per-format failure candidates",
   "wow_directory_sync": "wow-directory-sync-review.md; selected changed row remains partial, real Win16 synchronization unproven",
-  "wow_kernel_profile_module": "wow-kernel-profile-module-review.md; DIV-297 registration differs from actual session shadow; validation pending"
+  "wow_kernel_profile_module": "wow-kernel-profile-module-review.md; DIV-297 registration differs from actual session shadow; validation pending",
+  "wow_user_init_domain": "wow-user-init-domain-review.md; original USER final init and session domain, lifecycle runtime evidence bounded"
 }
