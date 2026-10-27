@@ -106,6 +106,24 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'guest-declaration-resource-role-':
+        extensions = {'.h', '.inc', '.mac', '.rc', '.rcv', '.dlg', '.bmp', '.ico', '.cur', '.bms', '.def', '.msg', '.skl', '.ext'}
+        cohort = {p for p, r in old.items() if r['status'] == 'pending'
+                  and p.startswith(('dos/', 'wow16/')) and Path(p).suffix.lower() in extensions}
+        reviewed = {}
+        for shard, record in enumerate(observation['source_tables']):
+            for row in rows(A / record['path']):
+                path = row['relative_path']
+                assert path not in reviewed and int(old[path]['shard']) == shard
+                assert sha(Path('src/mvdm') / path) == row['sha256'] == frozen[path]['current_sha256']
+                originals = [Path(p.strip()) for p in row['original_path'].split(';')]
+                assert any(p.is_file() and sha(p) == row['sha256'] for p in originals)
+                reviewed[path] = row
+        assert set(reviewed) == cohort and len(cohort) == observation['reviewed_cohort_count'] == 434
+        accepted = {p for p, r in reviewed.items() if r['proposal_status'] in ('excluded', 'excluded-file-role-only')}
+        assert accepted == set(changed)
+        assert len(cohort - accepted) == observation['remaining_cohort_pending'] == 305
+        assert all(merged[p]['status'] == 'pending' for p in cohort - accepted)
     if prefix == 'guest-library-role-':
         assert observation['archive_count'] == 27 and observation['macro_source_count'] == 1
         assert sha(A / 'guest-library-format-observations.csv') == observation['format_observations_sha256']
@@ -172,7 +190,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

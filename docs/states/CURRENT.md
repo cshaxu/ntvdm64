@@ -18,10 +18,10 @@ in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-rev
 This delivery does not close the MVDM-wide source reconciliation or establish
 that every historical test has run.
 
-The [IOS/CCPU checkpoint](../../artifacts/mvdm-audit/ios-owner-review.md) adds
-70 actual-object assertions and a 37-assertion quick-event control. The ledger
-retains 2,139 pending and 236 partial paths; real guest/device behavior and
-the wider native-owner review remain open. No runtime/guest image changed.
+The [declaration/resource checkpoint](../../artifacts/mvdm-audit/guest-declaration-resource-role-review.md)
+resolves 129 original input roles from 434 reviewed paths. The ledger retains
+2,010 pending and 236 partial paths; shared-header ownership and real guest/
+device behavior remain open. This checkpoint changed no runtime/guest image.
 
 ## Active Packet
 

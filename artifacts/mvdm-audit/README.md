@@ -9,9 +9,12 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 236 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records, two partially verified quick-event rows and six IOS/CCPU rows), 2,257 excluded
+records, two partially verified quick-event rows and six IOS/CCPU rows), 2,386 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,139 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,010 pending.
+Each checkpoint's exact-delta verifier is tied to its named base/delivery;
+run historical ones in their matching checkout. The current ledger gate is
+the declaration/resource checkpoint below, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -170,3 +173,9 @@ assertions against three actual cached objects and repeats the 37-assertion
 quick-event control through shared test plumbing. Six unchanged original
 source/declaration files become partial; instruction privilege, real devices,
 concurrency/retirement and published-image equivalence remain open.
+
+The [declaration/resource checkpoint](guest-declaration-resource-role-review.md)
+reviews 434 exact pending DOS/WOW16 paths and resolves 129 positive historical
+guest/tool input roles. Its other 305 paths remain pending, including actual
+host declarations, dual-purpose GDI, CTL3D profiles and ambiguous include roots.
+Guest capability, current-image lineage and runtime proof remain separate.

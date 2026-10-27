@@ -1,0 +1,56 @@
+{
+  "result": "pass",
+  "base": "01723c610",
+  "candidate_count": 129,
+  "reviewed_cohort_count": 434,
+  "remaining_cohort_pending": 305,
+  "source_tables": [
+    {
+      "path": "shard-0/guest-declaration-resource-owner-review.csv",
+      "sha256": "B9DACC26471B78C1D09029228202AEDEC17185A609AA82FF86BE3283216DDECB"
+    },
+    {
+      "path": "shard-1/guest-declaration-resource-owner-review.csv",
+      "sha256": "FE66904C70877F500C36795A9E013641C34A471F104A8FBD765A6E6C2A7E38BE"
+    },
+    {
+      "path": "shard-2/guest-declaration-resource-owner-review.csv",
+      "sha256": "24FDCBFD49A77B8F0EB48A2D0E29894988D1E8E03E1C69F102EA90A26579E066"
+    },
+    {
+      "path": "shard-3/guest-declaration-resource-owner-review.csv",
+      "sha256": "075BFB4DB6FB6871BCC9CACB7D435EE877CFD1BEA378AA63A951C85EFC62154F"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-declaration-resource-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "kind": "inputs",
+      "graph": "worker",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\guest-declaration-resource-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-declaration-resource-owner\\wow32-inputs-r2.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-declaration-resource-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "lines": 15249
+    }
+  ],
+  "scope": "Positive original include/recipe/resource roles and current graph/dependency observations; no guest capability or runtime acceptance"
+}

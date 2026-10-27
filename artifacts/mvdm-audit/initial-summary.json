@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2139,
-    "excluded": 2257,
+    "pending": 2010,
+    "excluded": 2386,
     "partial": 236,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "IOS/CCPU port checkpoint partially verifies six exact-original source/declaration files via three actual cached objects, controlled CPU boundary and typed ABI negative. Source retention is not behavioral completeness. Runtime/guest and published package unchanged; prior boundaries remain."
+  "note": "Declaration/resource cohort: 434 exact pending paths reviewed, 129 positive historical guest/tool input roles excluded, 305 retained pending. No guest capability exclusion or runtime change; previous source-retention and controlled-object limits remain."
 }
