@@ -1,0 +1,212 @@
+{
+  "selected_ninja": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+  "map": "build/.ninja/msvc-x86-release/wow32/wow32.dll.map",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "current_and_r10_wow32_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "scope": "Object input and map symbol are link evidence, not proof of per-API execution or complete behavior.",
+  "rows": [
+    {
+      "path": "wow32/wcall32.c",
+      "object": "obj/wcall32.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 13,
+      "sample_map_entries": [
+        {
+          "line": 190,
+          "entry": "0001:000049f0       _W32EditNextWord@20        100059f0 f   wcall32.obj"
+        },
+        {
+          "line": 191,
+          "entry": "0001:00004aa0       _W32GetExpWinVer@4         10005aa0 f   wcall32.obj"
+        },
+        {
+          "line": 192,
+          "entry": "0001:00004b40       _W32GlobalAlloc16@8        10005b40 f   wcall32.obj"
+        },
+        {
+          "line": 193,
+          "entry": "0001:00004b60       _W32GlobalFree16@4         10005b60 f   wcall32.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wgfont.c",
+      "object": "obj/wgfont.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 15,
+      "sample_map_entries": [
+        {
+          "line": 525,
+          "entry": "0001:00011970       _W32EnumFontFunc@16        10012970 f   wgfont.obj"
+        },
+        {
+          "line": 526,
+          "entry": "0001:00011b70       _W32EnumFontHandler@8      10012b70 f   wgfont.obj"
+        },
+        {
+          "line": 527,
+          "entry": "0001:00011c00       _WG32AddFontResource@4     10012c00 f   wgfont.obj"
+        },
+        {
+          "line": 528,
+          "entry": "0001:00011c50       _WG32CreateFont@4          10012c50 f   wgfont.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wgmeta.c",
+      "object": "obj/wgmeta.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 11,
+      "sample_map_entries": [
+        {
+          "line": 535,
+          "entry": "0001:00012210       _HMFFromWinMetaFile@8      10013210 f   wgmeta.obj"
+        },
+        {
+          "line": 536,
+          "entry": "0001:00012270       _WG32CloseMetaFile@4       10013270 f   wgmeta.obj"
+        },
+        {
+          "line": 537,
+          "entry": "0001:000122a0       _WG32CopyMetaFile@4        100132a0 f   wgmeta.obj"
+        },
+        {
+          "line": 538,
+          "entry": "0001:00012390       _WG32CreateMetaFile@4      10013390 f   wgmeta.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wgtext.c",
+      "object": "obj/wgtext.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 12,
+      "sample_map_entries": [
+        {
+          "line": 562,
+          "entry": "0001:00013280       _WG32ExtTextOut@4          10014280 f   wgtext.obj"
+        },
+        {
+          "line": 563,
+          "entry": "0001:00013360       _WG32GetTextAlign@4        10014360 f   wgtext.obj"
+        },
+        {
+          "line": 564,
+          "entry": "0001:00013380       _WG32GetTextCharacterExtra@4 10014380 f   wgtext.obj"
+        },
+        {
+          "line": 565,
+          "entry": "0001:000133a0       _WG32GetTextColor@4        100143a0 f   wgtext.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wmmedia1.c",
+      "object": "obj/wmmedia1.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 0,
+      "sample_map_entries": []
+    },
+    {
+      "path": "wow32/wmsgsbm.c",
+      "object": "obj/wmsgsbm.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 2,
+      "sample_map_entries": [
+        {
+          "line": 358,
+          "entry": "0001:0000c5f0       _ThunkSBMMsg16@4           1000d5f0 f   wmsgsbm.obj"
+        },
+        {
+          "line": 359,
+          "entry": "0001:0000c670       _UnThunkSBMMsg16@4         1000d670 f   wmsgsbm.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wres16.c",
+      "object": "obj/wres16.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 10,
+      "sample_map_entries": [
+        {
+          "line": 260,
+          "entry": "0001:000072e0       _ConvertDialog16@16        100082e0 f   wres16.obj"
+        },
+        {
+          "line": 261,
+          "entry": "0001:00007630       _ConvertMenu16@20          10008630 f   wres16.obj"
+        },
+        {
+          "line": 262,
+          "entry": "0001:000076d0       _ConvertMenuItems16@16     100086d0 f   wres16.obj"
+        },
+        {
+          "line": 263,
+          "entry": "0001:00007830       _DestroyRes16@4            10008830 f   wres16.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wsman.c",
+      "object": "obj/wsman.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 1,
+      "sample_map_entries": [
+        {
+          "line": 692,
+          "entry": "0001:0001b390       _WS32DoBeep@4              1001c390 f   wsman.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wucomm.c",
+      "object": "obj/wucomm.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 44,
+      "sample_map_entries": [
+        {
+          "line": 773,
+          "entry": "0001:0001e860       _DCB16toDCB32@12           1001f860 f   wucomm.obj"
+        },
+        {
+          "line": 774,
+          "entry": "0001:0001ed50       _DCB32toDCB16@16           1001fd50 f   wucomm.obj"
+        },
+        {
+          "line": 775,
+          "entry": "0001:0001ef90       _DeletePortTabEntry@4      1001ff90 f   wucomm.obj"
+        },
+        {
+          "line": 776,
+          "entry": "0001:0001f0a0       _EnqueueCommWrite@12       100200a0 f   wucomm.obj"
+        }
+      ]
+    },
+    {
+      "path": "wow32/wumenu.c",
+      "object": "obj/wumenu.obj",
+      "direct_link_input": true,
+      "map_symbol_count": 20,
+      "sample_map_entries": [
+        {
+          "line": 851,
+          "entry": "0001:000220d0       _WU32AppendMenu@4          100230d0 f   wumenu.obj"
+        },
+        {
+          "line": 852,
+          "entry": "0001:00022140       _WU32ChangeMenu@4          10023140 f   wumenu.obj"
+        },
+        {
+          "line": 853,
+          "entry": "0001:000221a0       _WU32CheckMenuItem@4       100231a0 f   wumenu.obj"
+        },
+        {
+          "line": 854,
+          "entry": "0001:000221c0       _WU32CreateMenu@4          100231c0 f   wumenu.obj"
+        }
+      ]
+    }
+  ]
+}

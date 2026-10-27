@@ -8,10 +8,10 @@ equals 3. There are 1168 unique rows in `file-review.csv`.
 
 - Partial: 47; raw mirror difference is enough to require this
   reporting class, not proof that the changed behavior is missing.
-- Excluded: 12; retired CPU30 V86 executor paths only, on the
-  existing CPU40 source-policy and product-selection evidence. No claim of
-  equivalent CPU30 behavior.
-- Pending: 1109; neither identical bytes nor build selection
+- Excluded: 13; 12 retired CPU30 V86 executor paths under existing
+  CPU40 policy and one original-empty ToolHelp source. No claim of
+  equivalent CPU30 or full guest capability.
+- Pending: 1108; neither identical bytes nor build selection
   proves a fully connected original implementation. No fully restored result
   is asserted without the needed per-owner runtime evidence.
 - Diff observations: {'content-diff-or-other-line-change': 45, 'same-splitlines': 2}. `same-splitlines` is an exact
@@ -60,7 +60,7 @@ source to `ntvdm_entry.obj`, whose `_main` appears in the product map.
 All 47 stay **partial** even for the two line-ending-only cases. Their
 semantic restored-code percentages are intentionally blank: matching-line
 percentages cannot prove which original behavior is connected. The remaining
-1,109 pending rows have only inventory evidence and require substantive
+1,108 pending rows have only inventory evidence and require substantive
 owner-group investigation; this stage is not a finished three-way audit.
 
 The marker list above is a heuristic. In particular, `dpmiselr.c` has an
@@ -116,3 +116,25 @@ they simply were not invoked by the tested workload. They remain pending.
 original i386 assembler path, actual CPU40 source path and object evidence,
 real limits, and three implementation choices. It is an analysis, not
 completion or approval to restore the NT4 monitor.
+
+## Review of two original source roles
+
+`wow32/wmmedia2.c` retains original whole-file `#if 0` around historical
+structured multimedia bodies; original `wmmtbl2.h` registers only the
+separate `WMM32CallProc32` route. T466 S1/S3 document the guest mmsystem and
+WINMM ownership. This is not sufficient to establish equivalent guest/host behavior for
+each disabled operation. The row remains **pending** until the active
+MMSYSTEM/WINMM route and relevant normal, failure, callback and teardown
+semantics are traced and verified.
+
+`wow32/wthman.c` is the byte-identical original 20-line file containing only
+header/include/pragma/MODNAME and no callable implementation. Original
+`wthtbl2.h` maps ClassFirst/ClassNext to UNIMPLEMENTEDAPI. T470 S1/S2 trace
+the guest ToolHelp owner and document the supplied guest-pair query limitation.
+Exclusion means no host body is available to link; it does not imply the
+ToolHelp guest APIs are functional.
+
+A closer check of T457 evidence found S4 labels the dialog witness
+“input/caret”, while S2 explicitly describes keyboard processing and records
+the caret desktop-state fixture as a non-pass. `wucaret.c` thus remains
+pending; the broad S4 label cannot replace a real caret-specific witness.

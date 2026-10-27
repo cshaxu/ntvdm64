@@ -51,3 +51,35 @@ a particular guest program. A controlled mismatched-convention callee and
 real guest witness remain needed. `fastwow.h` and `wow32.h` also contain
 other i386-dependent branches, which is why globally adding `/Di386` is
 not a narrow helper reconnection.
+
+## Isolated host stack mismatch witness
+
+An x86-only noninteractive host experiment assembled the checked-in original
+`callpr32.asm` using pinned OpenNT `callconv.inc`, then compared that actual
+helper with the selected portable C call pattern against the same three-arg
+CDECL function deliberately declared as STDCALL. The C fixture uses `/O2
+/Oy-` and explicitly restores its stack after measuring the portable call so
+the experiment does not continue on corrupted stack. The disposable run is
+`build/t473-s9/callpr-host-compare-r1`; it exited 0 and recorded
+`portable_result=14 portable_esp_delta=-12 original_result=14
+original_esp_delta=0`. Original source SHA-256
+`03A5F10DB0449058F61822ADFA928713DFD8F5CF3F31F6A46656AFF4D4C78BE7`; original
+include SHA-256 `044E0712A074C7FD61E1A4CA04FAC1FF860F028D289C92E320B01CC9C7690BB5`;
+fixture SHA-256 `63FAA0E29894A7C74FA68E1212F016C716E37623F9863CECE677C54774426DA4`.
+
+The fixture independently reproduces the strategy difference and exercises
+the actual assembled original helper. It does not execute the original
+`WK32ICallProc32` body or a Win16 task and therefore is not a product-bug
+reproduction or end-to-end repair validation. The real selected object was
+separately preprocessed and inspected as described above.
+
+Reproduction uses the x86 Visual Studio build environment:
+
+```text
+ml /nologo /c /DDBG=0 /I<OpenNT-public-sdk-inc> /Focallpr32.obj <repo>/src/mvdm/wow32/i386/callpr32.asm
+cl /nologo /O2 /Oy- /MT /Feprobe.exe callpr-host-stack-probe.c callpr32.obj
+probe.exe
+```
+
+Use the pinned include identified above; do not link an existing prebuilt
+`callpr32.obj` or interpret this host-only fixture as a guest acceptance.

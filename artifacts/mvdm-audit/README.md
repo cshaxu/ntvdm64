@@ -7,8 +7,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Initial counts are
-205 partial (all raw mirror differences), 43 excluded (documented profile
-or source roles) and 4,436 pending. None is classified full in this initial
+205 partial (all raw mirror differences), 44 excluded (documented profile
+or source roles) and 4,435 pending. None is classified full in this initial
 pass. Exclusion of a provider does not prove its guest functionality works.
 
 One frozen path, `src/mvdm/README.md`, changed after freezing to correct
@@ -21,9 +21,9 @@ Review breadth differs by shard. Shard 0 has metadata for 62 diff files, nine
 source-level detailed reviews, initial source-manifest scans of 43 unselected
 host files and a focused generic-thunk branch analysis. Shard 1 has 48
 differential owner initial reviews, 34 unselected-role reviews and selected
-owner analysis for 48 of 73 pending product sources. Shard 2 has recovered
+owner analysis for 73 of 73 pending product sources. Shard 2 has recovered
 the previously interrupted CSV, renewed initial traces of all 48 diff files
-and checked 24 CCPU product-source linkages. Shard 3 has 47 differential,
+and checked 24 CCPU and 10 WOW32 product-source linkages. Shard 3 has 47 differential,
 23 unselected-role and 73 selected-source initial reviews, plus a FastWOW
 comparison. These investigations do not replace semantic or runtime proof.
 

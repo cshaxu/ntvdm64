@@ -114,3 +114,18 @@ graph while its reverse MCI structure thunk bodies are under original
 requires tracing actual MCI/MMCallProc32 dispatch and the guest/host data
 contract; a compiled object or ordinary sound acceptance alone does not
 prove those reverse translations or asynchronous physical-device behavior.
+
+`wow32/wmmedia1.c` likewise appears in the current link graph but its
+original aux/joystick thunk block is compiled out by `#if 0`. The original
+guest-side aux/joystick code supplies distinct paths, so determine the
+actual immutable MMSYSTEM and driver invocation before calling this a
+missing capability or a justified provider exclusion.
+
+## Caret evidence conflict
+
+T457 S4's summary labels a real dialog probe as input/caret evidence, but
+the underlying T457 S2 detailed record limits the real guest probe to
+keyboard-driven dialog behavior and marks the separate keyboard/caret
+desktop-state fixture as a non-pass. Do not count the summary alone as
+proof that `wucaret.c` guest caret semantics were exercised. Resolve using
+the actual run inputs and focused guest/caret evidence.

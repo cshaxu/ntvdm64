@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "67D638E9A106A8FAC8DB3964E08C0C40F4F29360A4E69C78D2634169A88A7DA2",
+  "output_sha256": "97B7C1FCA157D891C59824BF3FB37DED51B5D856B06D2352E2A257B2358B5830",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,029 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -83,5 +83,12 @@
     "no_map_symbol": 2,
     "evidence": "ccpu-selected-link-inventory.json",
     "limits": "Map contribution is not runtime or complete opcode behavior; SPC486-gated cmpxchg/xadd require selected-profile investigation."
+  },
+  "pending_wow32_selected_link_review": {
+    "rows": 10,
+    "map_symbol_present": 9,
+    "zero_symbol": 1,
+    "evidence": "wow32-selected-link-inventory.json",
+    "limits": "Direct link inputs do not prove runtime; wmmedia1 is source-disabled, guest MMSYSTEM/driver route remains unknown."
   }
 }
