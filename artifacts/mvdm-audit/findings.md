@@ -62,6 +62,16 @@ or safely gate the extra observations and test original handler/AX semantics;
 DIV-258 now describes the actual current behavior rather than claiming that
 only existing scalars are copied.
 
+The same family appears in INT 15 and keyboard BOP entry observations.
+`shard-1/int15-diagnostic-guest-read-audit.md` compares actual source bodies
+in the stated PROD/PM-off fixture: original zero versus current two reads.
+`shard-3/keyboard-bop-diagnostics-audit.md` links selected source and shows
+original zero versus current four reads; a mock first-read failure prevents
+the current path from reaching its original dispatch. The fault is injected,
+not a demonstrated real guest exception. These three paths should be reviewed
+as one diagnostic-access cohort, with distinct original handlers and tests;
+disabled output is not evidence that caller-side memory sampling is disabled.
+
 The later source-location audit registers DIV-305 and DIV-307/308/309.
 DIV-306 and DIV-308 include descriptor reads and far-transfer translation
 before the reporting switch. A controlled real CCPU paging/exception fixture

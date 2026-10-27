@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "501ED220360EFE09395E6253D8539E9E28CE53A11819BF4D71E1BE626507726A",
+  "output_sha256": "FF1B7344E042302105E8A1AF0190FBC2B3828ADB41D5DBD73DFBAA7983A9313B",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -156,5 +156,6 @@
   "dem_owner_review": "dem-initialization-dispatch-file-review.md; three changed selected rows remain partial",
   "dpmi_exception_mode_xmem": "dpmi-exception-mode-xmem-review.md; three selected changed rows remain partial",
   "mouse_input_callback_state": "mouse-input-callback-state-review.md; two selected changed rows remain partial",
-  "wow_message_hook_dialog_edit": "wow-message-hook-dialog-edit-review.md; four selected changed rows remain partial"
+  "wow_message_hook_dialog_edit": "wow-message-hook-dialog-edit-review.md; four selected changed rows remain partial",
+  "oemuni_process_path": "oemuni-process-path-review.md; selected changed source remains partial"
 }
