@@ -1,0 +1,82 @@
+{
+  "result": "pass",
+  "candidate_count": 181,
+  "shards": {
+    "0": 55,
+    "1": 52,
+    "2": 42,
+    "3": 30
+  },
+  "source_tables": [
+    {
+      "path": "shard-0/dos-core-guest-owner-review.csv",
+      "sha256": "5E289552075CE2F789B5A52D1B4F278ACECAFEC26913B5B5C74D89CAD8B40E08"
+    },
+    {
+      "path": "shard-1/dos-core-guest-owner-review.csv",
+      "sha256": "8EEF7F390971E4FB29B8ABED0D2164AD11C9E1931622293B37D64195BB7D857B"
+    },
+    {
+      "path": "shard-2/dos-core-guest-owner-review.csv",
+      "sha256": "A68C3A01388E898020E8C3A27A836A9458EE56F2BBBA410C70DA1EC8CABDE64D"
+    },
+    {
+      "path": "shard-3/dos-core-guest-owner-review.csv",
+      "sha256": "D0B4078C94B105A0AF63C3555CD1627E4C7C8AEE4E09B45546D9FFDDDB3071C3"
+    },
+    {
+      "path": "export-source-partial-dispositions.csv",
+      "sha256": "CCD142BC68C475A32FCBF5A9BAB61F7618954AE678F791053CA44D842553BA1C"
+    },
+    {
+      "path": "supplemental-export-definition-review.json",
+      "sha256": "5E07D515FCC2E45087FF1038E39293F8BFB0D1E2F528AE9EF96C23F8DD5F6938"
+    },
+    {
+      "path": "shard-1/export-template-profile-review.csv",
+      "sha256": "B59037D7F25BEEE740FB5D01C4235D85FD0CDB99FA3FBB92280EC73AE9364A46"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-inputs.txt",
+      "sha256": "87E217899970FD26D464DE8693316FD96B485C942CD5BA1E5BFC916AE3B913D4",
+      "kind": "inputs",
+      "graph": "worker",
+      "valid_blocks": null,
+      "lines": 941
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "valid_blocks": 632,
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "valid_blocks": null,
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "valid_blocks": 229,
+      "lines": 15249
+    }
+  ],
+  "skipped": [],
+  "product_changed": false,
+  "guest_changed": false,
+  "transitions": {
+    "pending-to-excluded": 179,
+    "pending-to-partial": 2
+  },
+  "supplement_provenance_summary_sha256": "B26B45B9920B51A71F6A06042D9BE2A18B1C1EAEA3C8314D7AF98FC1BBA384B3"
+}

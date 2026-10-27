@@ -1,0 +1,1388 @@
+{
+  "result": "pass",
+  "candidates": 55,
+  "inputs": [
+    {
+      "path": "dos/v86/make.inc",
+      "sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\make.inc",
+      "original_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/makefile",
+      "sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\makefile",
+      "original_sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdos.lnk",
+      "sha256": "828FF652663F3999F8FA75311ED31398C8E0138F93CEE86F38A6F36CA9A9D840",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msdos.lnk",
+      "original_sha256": "828FF652663F3999F8FA75311ED31398C8E0138F93CEE86F38A6F36CA9A9D840"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdata.asm",
+      "sha256": "4C9849974DE6BA9A9FAC5529C6D7C1832E3F88B53ADCEF04DFC67490FF4F7757",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msdata.asm",
+      "original_sha256": "4C9849974DE6BA9A9FAC5529C6D7C1832E3F88B53ADCEF04DFC67490FF4F7757"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/mssw.asm",
+      "sha256": "D243F21C8FF51E4368C87B97E4AD336B0B00747AE123C29E1EC079F9A066F17D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\mssw.asm",
+      "original_sha256": "D243F21C8FF51E4368C87B97E4AD336B0B00747AE123C29E1EC079F9A066F17D"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dostab.asm",
+      "sha256": "B87FFB0C02BB7941BBCF07363B22601F090DE5F26E52FE4282336710DC774BB0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dostab.asm",
+      "original_sha256": "B87FFB0C02BB7941BBCF07363B22601F090DE5F26E52FE4282336710DC774BB0"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msconst.asm",
+      "sha256": "10C27ABB77C44FA457D2B926A214A33C09F8EA83D242BD2027258EF522F519F2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msconst.asm",
+      "original_sha256": "10C27ABB77C44FA457D2B926A214A33C09F8EA83D242BD2027258EF522F519F2"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdosme.asm",
+      "sha256": "F54FEDD4C705CF1E9A8F037685E4099398E047300DDBCD50591AC5480298508E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msdosme.asm",
+      "original_sha256": "F54FEDD4C705CF1E9A8F037685E4099398E047300DDBCD50591AC5480298508E"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/abort.asm",
+      "sha256": "D24922A1D75BD941716E171179F016C1BB0EC412528046EA0C4BFB6C68ABB53C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\abort.asm",
+      "original_sha256": "D24922A1D75BD941716E171179F016C1BB0EC412528046EA0C4BFB6C68ABB53C"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/alloc.asm",
+      "sha256": "9B84454F4B4F5371C8B8DE1525D378B5108B9514BAB9215761CBCE28BA7AA249",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\alloc.asm",
+      "original_sha256": "9B84454F4B4F5371C8B8DE1525D378B5108B9514BAB9215761CBCE28BA7AA249"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/cpmio.asm",
+      "sha256": "ED409D5DEEE8A5B1764F8187CF4161C5D594B9630EE5032E8F97748B9C45E116",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\cpmio.asm",
+      "original_sha256": "ED409D5DEEE8A5B1764F8187CF4161C5D594B9630EE5032E8F97748B9C45E116"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/kstrin.asm",
+      "sha256": "87E53BBDF5C3B218EC0ECD8CB7384165CBDC094390642A230AFB2146AA46ECFC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\kstrin.asm",
+      "original_sha256": "87E53BBDF5C3B218EC0ECD8CB7384165CBDC094390642A230AFB2146AA46ECFC"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/cpmio2.asm",
+      "sha256": "BE1C1AC94665EE5A222EC215A8CB7BFA2CF9C5383168128B0DDB90EAC072A1A0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\cpmio2.asm",
+      "original_sha256": "BE1C1AC94665EE5A222EC215A8CB7BFA2CF9C5383168128B0DDB90EAC072A1A0"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dev.asm",
+      "sha256": "92B7F0452900116416E92AAA43B2EB42800878B75B00582B988925CE6AB88826",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dev.asm",
+      "original_sha256": "92B7F0452900116416E92AAA43B2EB42800878B75B00582B988925CE6AB88826"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dir2.asm",
+      "sha256": "99C0448C781C6E521524AED7B0D565CC41F3201111163FCE2D983A6207E59821",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dir2.asm",
+      "original_sha256": "99C0448C781C6E521524AED7B0D565CC41F3201111163FCE2D983A6207E59821"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/disk.asm",
+      "sha256": "E312FD70517E5101302215CBF37074B5F50EB20EFE5303A79F7C9F17376E1845",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\disk.asm",
+      "original_sha256": "E312FD70517E5101302215CBF37074B5F50EB20EFE5303A79F7C9F17376E1845"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dup.asm",
+      "sha256": "84FC63A07997B1F2E5107AF784EAA26BB827189CD92C177231AF1D8643719823",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dup.asm",
+      "original_sha256": "84FC63A07997B1F2E5107AF784EAA26BB827189CD92C177231AF1D8643719823"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcb.asm",
+      "sha256": "5CEC98077CE05B711AAFC52F1AD2C1BB72C4845DF272C4DC627355E9684D549C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\fcb.asm",
+      "original_sha256": "5CEC98077CE05B711AAFC52F1AD2C1BB72C4845DF272C4DC627355E9684D549C"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcbio.asm",
+      "sha256": "363DE101BFFCBAD8CB4FF2B0396EA29AC3E6D307019AE21D66F899DF075D435E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\fcbio.asm",
+      "original_sha256": "363DE101BFFCBAD8CB4FF2B0396EA29AC3E6D307019AE21D66F899DF075D435E"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcbio2.asm",
+      "sha256": "696F568E39CDA84E01075DDDB49DF84FFAF9F111B56150D01DA4FED206B19B5D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\fcbio2.asm",
+      "original_sha256": "696F568E39CDA84E01075DDDB49DF84FFAF9F111B56150D01DA4FED206B19B5D"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/file.asm",
+      "sha256": "09F6F2E06F14754CFE069335906D26676AB5538C7C569A33B2D62E052FCD633E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\file.asm",
+      "original_sha256": "09F6F2E06F14754CFE069335906D26676AB5538C7C569A33B2D62E052FCD633E"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/getset.asm",
+      "sha256": "EC72B7BD0FD4E84D0F592E67896123DB98F0FB2A12171356B71388BC0970AC35",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\getset.asm",
+      "original_sha256": "EC72B7BD0FD4E84D0F592E67896123DB98F0FB2A12171356B71388BC0970AC35"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/handle.asm",
+      "sha256": "C323C9D038460BC6A206D4CEF1FF2FDC47151FC3E7EA8EDA2DB4224170771321",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\handle.asm",
+      "original_sha256": "C323C9D038460BC6A206D4CEF1FF2FDC47151FC3E7EA8EDA2DB4224170771321"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/ioctl.asm",
+      "sha256": "8DC2168299012C24A663035CA655AC14169DBEE494858CBDC895E60DF7B8D8FA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\ioctl.asm",
+      "original_sha256": "8DC2168299012C24A663035CA655AC14169DBEE494858CBDC895E60DF7B8D8FA"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/lock.asm",
+      "sha256": "DA0824BC6C56E0ED73B9CCD49522C95268D5B6E86E627B50C7A7F3FA648DA3FE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\lock.asm",
+      "original_sha256": "DA0824BC6C56E0ED73B9CCD49522C95268D5B6E86E627B50C7A7F3FA648DA3FE"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/macro.asm",
+      "sha256": "F539E62F8B1317B1D97B7C664BBF0262DC16F3591614209818F44D092C06E5F0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\macro.asm",
+      "original_sha256": "F539E62F8B1317B1D97B7C664BBF0262DC16F3591614209818F44D092C06E5F0"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/macro2.asm",
+      "sha256": "4535001B614701CECE712A6D10F35F90C714D3F480A163116F3E20CC2862AA89",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\macro2.asm",
+      "original_sha256": "4535001B614701CECE712A6D10F35F90C714D3F480A163116F3E20CC2862AA89"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/misc.asm",
+      "sha256": "68EA572D52887BB36267648922ECBF63AA7B9A533B3F9F626F26882AD4550B70",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\misc.asm",
+      "original_sha256": "68EA572D52887BB36267648922ECBF63AA7B9A533B3F9F626F26882AD4550B70"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/misc2.asm",
+      "sha256": "FFEF367D852CB5CCED423C9A5C4D03C4107958F13861C434AA4C81E6AFEB7E66",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\misc2.asm",
+      "original_sha256": "FFEF367D852CB5CCED423C9A5C4D03C4107958F13861C434AA4C81E6AFEB7E66"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/mscode.asm",
+      "sha256": "59F4903BE6456362EDE5C53FA49A31805946F5411E0A6960B0A89257A5C7D569",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\mscode.asm",
+      "original_sha256": "59F4903BE6456362EDE5C53FA49A31805946F5411E0A6960B0A89257A5C7D569"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msctrlc.asm",
+      "sha256": "8D1B22B12A10EADE8B6CF83276BE13AC9E13971F3F83EEAC3961AD8B3AA9120C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msctrlc.asm",
+      "original_sha256": "8D1B22B12A10EADE8B6CF83276BE13AC9E13971F3F83EEAC3961AD8B3AA9120C"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdisp.asm",
+      "sha256": "2CE748A58C20C8619FC9BE08B8CE91F039D17E41E4343963124042264DD14985",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msdisp.asm",
+      "original_sha256": "2CE748A58C20C8619FC9BE08B8CE91F039D17E41E4343963124042264DD14985"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msinit.asm",
+      "sha256": "5B0F2E3E9FE9C083B8CF03E4307E9A90BDDACDDAD22176062C59A314B8C46620",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm",
+      "original_sha256": "5B0F2E3E9FE9C083B8CF03E4307E9A90BDDACDDAD22176062C59A314B8C46620"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/open.asm",
+      "sha256": "AFEF241B942235A59CE22F2AB5FD50CB1690C7CB244119B22204EE57521DD81C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\open.asm",
+      "original_sha256": "AFEF241B942235A59CE22F2AB5FD50CB1690C7CB244119B22204EE57521DD81C"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/origin.asm",
+      "sha256": "862C02ABB7BF5C8913C4572606D06EFA56002D57DF573F7B91B6D23E0522802E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\origin.asm",
+      "original_sha256": "862C02ABB7BF5C8913C4572606D06EFA56002D57DF573F7B91B6D23E0522802E"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/parse.asm",
+      "sha256": "9027269459EFF80277D3C4AD8B965C229C893DCAED50938DA649ED46BC21EC0F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\parse.asm",
+      "original_sha256": "9027269459EFF80277D3C4AD8B965C229C893DCAED50938DA649ED46BC21EC0F"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/path.asm",
+      "sha256": "BD111F35AD06774100F4FD0B1D299390B4A221A8FD716CA136FFAAB9D8082BE9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\path.asm",
+      "original_sha256": "BD111F35AD06774100F4FD0B1D299390B4A221A8FD716CA136FFAAB9D8082BE9"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msproc.asm",
+      "sha256": "8EF142F6940EBD00BB88A2F9FBFE73FF29842D630E96282101390E19C752C492",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm",
+      "original_sha256": "8EF142F6940EBD00BB88A2F9FBFE73FF29842D630E96282101390E19C752C492"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/exepatch.asm",
+      "sha256": "17EDE81998C879D8977C3AA685736C01B15D859FAD1465CD228C55072ECE5D59",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\exepatch.asm",
+      "original_sha256": "17EDE81998C879D8977C3AA685736C01B15D859FAD1465CD228C55072ECE5D59"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/search.asm",
+      "sha256": "9F97747F4BE83E5C0240B48C83ED2E350D46CFD8432C9176FC5AE76365E51FF3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\search.asm",
+      "original_sha256": "9F97747F4BE83E5C0240B48C83ED2E350D46CFD8432C9176FC5AE76365E51FF3"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/segcheck.asm",
+      "sha256": "6D42468CAD2D40F90A3CEBA950D173FFCF87E20AE0B5660CB8DE0DEB9689D4EF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\segcheck.asm",
+      "original_sha256": "6D42468CAD2D40F90A3CEBA950D173FFCF87E20AE0B5660CB8DE0DEB9689D4EF"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/srvcall.asm",
+      "sha256": "94476E5E9A7538ED1956B2AB6BB4751295FA9E045DC114756599F1BD16E61FA6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\srvcall.asm",
+      "original_sha256": "94476E5E9A7538ED1956B2AB6BB4751295FA9E045DC114756599F1BD16E61FA6"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/time.asm",
+      "sha256": "A29A6048533387D66B0ADF6A2EB77F8F1CDF2FE3CAA8A967E5590DE86B86EA4D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\time.asm",
+      "original_sha256": "A29A6048533387D66B0ADF6A2EB77F8F1CDF2FE3CAA8A967E5590DE86B86EA4D"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/util.asm",
+      "sha256": "8E9636BAD8D717E7E9DAA6EC3A9E36EB6563969DFAE2BF9BAB47D232BDFE4889",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\util.asm",
+      "original_sha256": "8E9636BAD8D717E7E9DAA6EC3A9E36EB6563969DFAE2BF9BAB47D232BDFE4889"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/mstable.asm",
+      "sha256": "58AEAA1CB208EA1A661F13DF7124E964E8030CB52BA5A20CA295C2BB39C59A65",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\mstable.asm",
+      "original_sha256": "58AEAA1CB208EA1A661F13DF7124E964E8030CB52BA5A20CA295C2BB39C59A65"
+    },
+    {
+      "path": "dos/v86/inc/version.inc",
+      "sha256": "387730C471BBFDE2D45B08D8DF86BEBD430FE5ABB9A8EE12688F6AA141F6F7D6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\version.inc",
+      "original_sha256": "387730C471BBFDE2D45B08D8DF86BEBD430FE5ABB9A8EE12688F6AA141F6F7D6"
+    },
+    {
+      "path": "dos/v86/inc/dosseg.inc",
+      "sha256": "B485FF060B5086A1884591163AE088F2EA0F379C22EA7ED96801AE371880749A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dosseg.inc",
+      "original_sha256": "B485FF060B5086A1884591163AE088F2EA0F379C22EA7ED96801AE371880749A"
+    },
+    {
+      "path": "dos/v86/inc/dossym.inc",
+      "sha256": "E17A46EA59396490CEC2DCBAF1E8E48BEAE2A92F7A52A519C43F14A1E2303A36",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dossym.inc",
+      "original_sha256": "E17A46EA59396490CEC2DCBAF1E8E48BEAE2A92F7A52A519C43F14A1E2303A36"
+    },
+    {
+      "path": "dos/v86/inc/sf.inc",
+      "sha256": "A7598805CFAAD479960F0891903AAAB458C975D8F14F6E1ACFE25B44F06A2093",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\sf.inc",
+      "original_sha256": "A7598805CFAAD479960F0891903AAAB458C975D8F14F6E1ACFE25B44F06A2093"
+    },
+    {
+      "path": "inc/CURDIR.INC",
+      "sha256": "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\CURDIR.INC",
+      "original_sha256": "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762"
+    },
+    {
+      "path": "dos/v86/inc/arena.inc",
+      "sha256": "F9038D0E38E15CD636EC229ABB33C3831F7CFD8B0B53C0C96A01B05ED42C5FBD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\arena.inc",
+      "original_sha256": "F9038D0E38E15CD636EC229ABB33C3831F7CFD8B0B53C0C96A01B05ED42C5FBD"
+    },
+    {
+      "path": "dos/v86/inc/vector.inc",
+      "sha256": "C7FDD8E4468D28C8ABED6C7D6E6E5E292D5DC21251821B29212EB1C61536FB12",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\vector.inc",
+      "original_sha256": "C7FDD8E4468D28C8ABED6C7D6E6E5E292D5DC21251821B29212EB1C61536FB12"
+    },
+    {
+      "path": "dos/v86/inc/devsym.inc",
+      "sha256": "BBFCD2923AA6C6278ED53D21980305AE97BDF78C0CF2950E2E1AC5317A9A7DFF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\devsym.inc",
+      "original_sha256": "BBFCD2923AA6C6278ED53D21980305AE97BDF78C0CF2950E2E1AC5317A9A7DFF"
+    },
+    {
+      "path": "dos/v86/inc/pdb.inc",
+      "sha256": "D247016C2A40694F8285FC33D193FD87DCA9DF96D50450258DA170EB16E32746",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\pdb.inc",
+      "original_sha256": "D247016C2A40694F8285FC33D193FD87DCA9DF96D50450258DA170EB16E32746"
+    },
+    {
+      "path": "dos/v86/inc/find.inc",
+      "sha256": "7380EE0229EF50D6A2AFAA0DCECE6AB2A333217DF09234037CC4A329686D47EB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\find.inc",
+      "original_sha256": "7380EE0229EF50D6A2AFAA0DCECE6AB2A333217DF09234037CC4A329686D47EB"
+    },
+    {
+      "path": "dos/v86/inc/mi.inc",
+      "sha256": "E9C3475C654C335705ED3609AB9041A8E78B3092AAD65261D7D58D74F84C0650",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\mi.inc",
+      "original_sha256": "E9C3475C654C335705ED3609AB9041A8E78B3092AAD65261D7D58D74F84C0650"
+    },
+    {
+      "path": "dos/v86/inc/doscntry.inc",
+      "sha256": "CBC519145C8C29F229844FDE16FAE2EBF06B6266E01897E29B0539BD555B8A97",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\doscntry.inc",
+      "original_sha256": "CBC519145C8C29F229844FDE16FAE2EBF06B6266E01897E29B0539BD555B8A97"
+    },
+    {
+      "path": "dos/v86/inc/fastopen.inc",
+      "sha256": "BFE2CDE39A806BB6CAB4665250C832A3643D3BE198B4D14A9C8BA5AE2342F57D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\fastopen.inc",
+      "original_sha256": "BFE2CDE39A806BB6CAB4665250C832A3643D3BE198B4D14A9C8BA5AE2342F57D"
+    },
+    {
+      "path": "dos/v86/inc/xmm.inc",
+      "sha256": "A426A10A662EF94EC973D045CEA21E3C5A3687BFC79B7B3C02D811A35215738E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\xmm.inc",
+      "original_sha256": "A426A10A662EF94EC973D045CEA21E3C5A3687BFC79B7B3C02D811A35215738E"
+    },
+    {
+      "path": "inc/VINT.INC",
+      "sha256": "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VINT.INC",
+      "original_sha256": "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7"
+    },
+    {
+      "path": "dos/v86/inc/msbdata.inc",
+      "sha256": "71FC814EB557DDAC186990C67EA55A73A5F02318A7455A072FB690F1EF4CE7BE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\msbdata.inc",
+      "original_sha256": "71FC814EB557DDAC186990C67EA55A73A5F02318A7455A072FB690F1EF4CE7BE"
+    },
+    {
+      "path": "dos/v86/inc/const2.asm",
+      "sha256": "8ED55B06E06B02B35A2DE90A41AF6FB58868EF0F4DA0F5D8527AFA88CA9D0297",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\const2.asm",
+      "original_sha256": "8ED55B06E06B02B35A2DE90A41AF6FB58868EF0F4DA0F5D8527AFA88CA9D0297"
+    },
+    {
+      "path": "dos/v86/inc/ms_data.asm",
+      "sha256": "FB4B567EF051D6A2D68ED97DF8F2DC0A233733FE29AF7EBEE9B442B6DD54C7DD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\ms_data.asm",
+      "original_sha256": "FB4B567EF051D6A2D68ED97DF8F2DC0A233733FE29AF7EBEE9B442B6DD54C7DD"
+    },
+    {
+      "path": "dos/v86/inc/lmstub.asm",
+      "sha256": "FDE4EAF4E16D3461F80FC62B53B62A5D7912C4F008F6F490546BE5B8337F5F1A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\lmstub.asm",
+      "original_sha256": "FDE4EAF4E16D3461F80FC62B53B62A5D7912C4F008F6F490546BE5B8337F5F1A"
+    },
+    {
+      "path": "dos/v86/inc/wpatch.inc",
+      "sha256": "A5218655835870F97838B703B98C4E2578301AAAC7A761C29EA751C41004BEB3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\wpatch.inc",
+      "original_sha256": "A5218655835870F97838B703B98C4E2578301AAAC7A761C29EA751C41004BEB3"
+    },
+    {
+      "path": "inc/BOP.INC",
+      "sha256": "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\BOP.INC",
+      "original_sha256": "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669"
+    },
+    {
+      "path": "dos/v86/inc/dosmac.inc",
+      "sha256": "6C6ABE9A647D14C57F97C0BD3AFAFCDEE6624F636FFF273F2D996A7B21A693C2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dosmac.inc",
+      "original_sha256": "6C6ABE9A647D14C57F97C0BD3AFAFCDEE6624F636FFF273F2D996A7B21A693C2"
+    },
+    {
+      "path": "dos/v86/inc/mshead.asm",
+      "sha256": "080CCF82E02DA9EB2F1502053CF15C74E19DC1335DDD055CD49BBFA792C5E537",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\mshead.asm",
+      "original_sha256": "080CCF82E02DA9EB2F1502053CF15C74E19DC1335DDD055CD49BBFA792C5E537"
+    },
+    {
+      "path": "dos/v86/inc/bugtyp.inc",
+      "sha256": "E61E02F48C5257D3ED0BE51E22BE6618955225AAD2DB1EF54E9A16E8331D5A20",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\bugtyp.inc",
+      "original_sha256": "E61E02F48C5257D3ED0BE51E22BE6618955225AAD2DB1EF54E9A16E8331D5A20"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dosmes.inc",
+      "sha256": "5278BFE57C6598113B6BD89A7FA69BC36423E375302266CDE4F8B02C0A593608",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dosmes.inc",
+      "original_sha256": "5278BFE57C6598113B6BD89A7FA69BC36423E375302266CDE4F8B02C0A593608"
+    },
+    {
+      "path": "dos/v86/inc/mult.inc",
+      "sha256": "517BC33792CC568EB350308B931AD87B75B1D42255341950FE394DF9302C48FB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\mult.inc",
+      "original_sha256": "517BC33792CC568EB350308B931AD87B75B1D42255341950FE394DF9302C48FB"
+    },
+    {
+      "path": "inc/DOSSVC.INC",
+      "sha256": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DOSSVC.INC",
+      "original_sha256": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3"
+    },
+    {
+      "path": "dos/v86/inc/filemode.inc",
+      "sha256": "1ED4F86E30874FD29BBF1DB7D8D7BF541B3E29F9B52E3EB9CF62B007F6C88A05",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\filemode.inc",
+      "original_sha256": "1ED4F86E30874FD29BBF1DB7D8D7BF541B3E29F9B52E3EB9CF62B007F6C88A05"
+    },
+    {
+      "path": "dos/v86/inc/cpmfcb.inc",
+      "sha256": "9CC5117113485ABEDE5C9B73ED26A291984E8B894FF239477AD228BC63319B5C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\cpmfcb.inc",
+      "original_sha256": "9CC5117113485ABEDE5C9B73ED26A291984E8B894FF239477AD228BC63319B5C"
+    },
+    {
+      "path": "dos/v86/inc/syscall.inc",
+      "sha256": "23CF7F5E2E180337A0C2219AE013494E2A106103655C0D00FA8631CE9DE2E79D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\syscall.inc",
+      "original_sha256": "23CF7F5E2E180337A0C2219AE013494E2A106103655C0D00FA8631CE9DE2E79D"
+    },
+    {
+      "path": "dos/v86/inc/ioctl.inc",
+      "sha256": "5AFDC64AA6D91C4C503C9D27FE4982517F3A762B94413EE8A882A49F3736FF2F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\ioctl.inc",
+      "original_sha256": "5AFDC64AA6D91C4C503C9D27FE4982517F3A762B94413EE8A882A49F3736FF2F"
+    },
+    {
+      "path": "dos/v86/inc/lock.inc",
+      "sha256": "2889DF10FD8228BDA5C88B1DED3E0B0404335935A980CBBCD86C6417CB25D169",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\lock.inc",
+      "original_sha256": "2889DF10FD8228BDA5C88B1DED3E0B0404335935A980CBBCD86C6417CB25D169"
+    },
+    {
+      "path": "inc/CMDSVC.INC",
+      "sha256": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\CMDSVC.INC",
+      "original_sha256": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6"
+    },
+    {
+      "path": "dos/v86/inc/dpb.inc",
+      "sha256": "78A9717B8FE123D31651D6351ADEB6789501EF273CE2476316F5D4EC7C450EC0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dpb.inc",
+      "original_sha256": "78A9717B8FE123D31651D6351ADEB6789501EF273CE2476316F5D4EC7C450EC0"
+    },
+    {
+      "path": "dos/v86/inc/bpb.inc",
+      "sha256": "43452AD264B7242D892634F19BFCD036F8A2F1C926745466B27039E8C5F960A8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\bpb.inc",
+      "original_sha256": "43452AD264B7242D892634F19BFCD036F8A2F1C926745466B27039E8C5F960A8"
+    },
+    {
+      "path": "dos/v86/inc/sysvar.inc",
+      "sha256": "851F7781C4D1C3E0D21E3FB0E2A53AF3D809D6EB93FB35584D2EA351F0BE00B8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\sysvar.inc",
+      "original_sha256": "851F7781C4D1C3E0D21E3FB0E2A53AF3D809D6EB93FB35584D2EA351F0BE00B8"
+    },
+    {
+      "path": "dos/v86/inc/fastxxxx.inc",
+      "sha256": "4C1D828FC57D051876859C18AF8686DB931215A513EA1FB760D1650D1EE3E2FB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\fastxxxx.inc",
+      "original_sha256": "4C1D828FC57D051876859C18AF8686DB931215A513EA1FB760D1650D1EE3E2FB"
+    },
+    {
+      "path": "dos/v86/inc/win386.inc",
+      "sha256": "6D76DB4CCFE544931BD6DAAD6FCA29C3F92A68EBDA1A32E1470AD2D53E5F7238",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\win386.inc",
+      "original_sha256": "6D76DB4CCFE544931BD6DAAD6FCA29C3F92A68EBDA1A32E1470AD2D53E5F7238"
+    },
+    {
+      "path": "dos/v86/inc/exe.inc",
+      "sha256": "CB88F289660AF5F35A39FE6D0BD50835AEECD19A448227798F56EA85B89BA37A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\exe.inc",
+      "original_sha256": "CB88F289660AF5F35A39FE6D0BD50835AEECD19A448227798F56EA85B89BA37A"
+    },
+    {
+      "path": "inc/DBGSVC.INC",
+      "sha256": "296A6387CFE02445E6C8D43F9F68E1FD4DFBD9D654DE3BA6460DEE54F6DFC171",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DBGSVC.INC",
+      "original_sha256": "296A6387CFE02445E6C8D43F9F68E1FD4DFBD9D654DE3BA6460DEE54F6DFC171"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/scnam.inc",
+      "sha256": "9309EBA70B5ABA0BB7CCB8278496300072C1872396D384422EE4346E48A1C44E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\scnam.inc",
+      "original_sha256": "9309EBA70B5ABA0BB7CCB8278496300072C1872396D384422EE4346E48A1C44E"
+    },
+    {
+      "path": "dos/v86/inc/cputype.inc",
+      "sha256": "34144664BDB7CE50E672B428689EB174EAFBD4455ACD7E5E8A80406A4452D439",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\cputype.inc",
+      "original_sha256": "34144664BDB7CE50E672B428689EB174EAFBD4455ACD7E5E8A80406A4452D439"
+    },
+    {
+      "path": "inc/DOSWOW.INC",
+      "sha256": "D6BD8A52BFF2980DACAB518DA8F2330DA5BB978E6C07D1846662078DA49444FB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\DOSWOW.INC",
+      "original_sha256": "D6BD8A52BFF2980DACAB518DA8F2330DA5BB978E6C07D1846662078DA49444FB"
+    },
+    {
+      "path": "dos/v86/inc/origin.inc",
+      "sha256": "EF20115EBE9C9592EB87E9B21A0EBE036592CA6CF44E389D67093A80DB3D008D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\origin.inc",
+      "original_sha256": "EF20115EBE9C9592EB87E9B21A0EBE036592CA6CF44E389D67093A80DB3D008D"
+    },
+    {
+      "path": "dos/v86/inc/int2a.inc",
+      "sha256": "A425A0ED47E3EE9264F1008D3646D17F1241BE01659AA5FFCA8F718CA5372161",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\int2a.inc",
+      "original_sha256": "A425A0ED47E3EE9264F1008D3646D17F1241BE01659AA5FFCA8F718CA5372161"
+    },
+    {
+      "path": "dos/v86/inc/dpl.asm",
+      "sha256": "8600B594E7F48696756B41B2F6F025EBB2109782D5EBCB7587C3E17BD52D504C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dpl.asm",
+      "original_sha256": "8600B594E7F48696756B41B2F6F025EBB2109782D5EBCB7587C3E17BD52D504C"
+    },
+    {
+      "path": "dos/v86/inc/copyrigh.inc",
+      "sha256": "5F5BA93635D6200394F545D20D91532DA8FF30D1EACDA0D786D79D61CD488AE7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\copyrigh.inc",
+      "original_sha256": "5F5BA93635D6200394F545D20D91532DA8FF30D1EACDA0D786D79D61CD488AE7"
+    },
+    {
+      "path": "dos/v86/inc/dbcs.sw",
+      "sha256": "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dbcs.sw",
+      "original_sha256": "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43"
+    },
+    {
+      "path": "dos/v86/inc/versiona.inc",
+      "sha256": "DF1D5B2A37FBD511701D993D7362A6CB11C3AB077BDA674A69948BF71BBB958C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\versiona.inc",
+      "original_sha256": "DF1D5B2A37FBD511701D993D7362A6CB11C3AB077BDA674A69948BF71BBB958C"
+    },
+    {
+      "path": "dos/v86/inc/buffer.inc",
+      "sha256": "0E6F472F08DF268434A3A2BDC34BC807DD856D86EB0D02FEE58886245CB0B8A9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\buffer.inc",
+      "original_sha256": "0E6F472F08DF268434A3A2BDC34BC807DD856D86EB0D02FEE58886245CB0B8A9"
+    },
+    {
+      "path": "dos/v86/inc/dirent.inc",
+      "sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\dirent.inc",
+      "original_sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE"
+    },
+    {
+      "path": "dos/v86/inc/error.inc",
+      "sha256": "4E44F0694A7DB2A15DF780A3E6BB916F5F5722ACA9F3DF8DAF4F148F0321CD8F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\error.inc",
+      "original_sha256": "4E44F0694A7DB2A15DF780A3E6BB916F5F5722ACA9F3DF8DAF4F148F0321CD8F"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/divmes.inc",
+      "sha256": "4635FF455355C3C152D361972B7A599C14D25E33EAE754F7EB983C75A8319F11",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\divmes.inc",
+      "original_sha256": "4635FF455355C3C152D361972B7A599C14D25E33EAE754F7EB983C75A8319F11"
+    },
+    {
+      "path": "dos/v86/inc/yesno.asm",
+      "sha256": "BB96EDC0C2F79EE23DEAEB5397847C62D51B8FE12EC6CBC33F5C828EFBCCE487",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\yesno.asm",
+      "original_sha256": "BB96EDC0C2F79EE23DEAEB5397847C62D51B8FE12EC6CBC33F5C828EFBCCE487"
+    },
+    {
+      "path": "dos/v86/inc/bdsize.inc",
+      "sha256": "EAF5420A062D06B200EC7E80192C5C1C7CC8957363F863891B1AFAF988D6041D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\bdsize.inc",
+      "original_sha256": "EAF5420A062D06B200EC7E80192C5C1C7CC8957363F863891B1AFAF988D6041D"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/MSDOS.CL1",
+      "sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\MSDOS.CL1",
+      "original_sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/MSDOS.CL4",
+      "sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\MSDOS.CL4",
+      "original_sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\makefile",
+      "original_sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msbio_4.lnk",
+      "sha256": "8EFCECF5E4896D96ED3BF515C078B338D4A2676A24E4C60B7F894009E856D341",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msbio_4.lnk",
+      "original_sha256": "8EFCECF5E4896D96ED3BF515C078B338D4A2676A24E4C60B7F894009E856D341"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msbio1.asm",
+      "sha256": "D72A4C94D40210EC1E814A972F23965E50139F65E6F4DF43A6E20649DD973A3F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msbio1.asm",
+      "original_sha256": "D72A4C94D40210EC1E814A972F23965E50139F65E6F4DF43A6E20649DD973A3F"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/mschar.asm",
+      "sha256": "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\mschar.asm",
+      "original_sha256": "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msend.asm",
+      "sha256": "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msend.asm",
+      "original_sha256": "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msinit.asm",
+      "sha256": "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msinit.asm",
+      "original_sha256": "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msint13.asm",
+      "sha256": "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msint13.asm",
+      "original_sha256": "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysconf.asm",
+      "sha256": "60BBA5FFC49C7C995A33819CE6BC1D3111A4A693B7972D81BB3B146F600BCD7E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\sysconf.asm",
+      "original_sha256": "60BBA5FFC49C7C995A33819CE6BC1D3111A4A693B7972D81BB3B146F600BCD7E"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysimes.asm",
+      "sha256": "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\sysimes.asm",
+      "original_sha256": "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spckbd.asm",
+      "sha256": "88B642477594DA7D51D1F20BEC5DC0AC93D9EA7C0A6B862FA69EC4C15C59C6F0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\spckbd.asm",
+      "original_sha256": "88B642477594DA7D51D1F20BEC5DC0AC93D9EA7C0A6B862FA69EC4C15C59C6F0"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spcmse_4.asm",
+      "sha256": "EB5DC7DB25A652B0F87E2247931BBD50E4911FB70236A8277B28267D19AE4F3F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\spcmse_4.asm",
+      "original_sha256": "EB5DC7DB25A652B0F87E2247931BBD50E4911FB70236A8277B28267D19AE4F3F"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spcemm.asm",
+      "sha256": "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\spcemm.asm",
+      "original_sha256": "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysinit1.asm",
+      "sha256": "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm",
+      "original_sha256": "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysinit2.asm",
+      "sha256": "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\sysinit2.asm",
+      "original_sha256": "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/biosseg.inc",
+      "sha256": "C124DCC40FD138CAE400F993F5730337EE7E23FB50A20E097B09382694F6FC91",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\biosseg.inc",
+      "original_sha256": "C124DCC40FD138CAE400F993F5730337EE7E23FB50A20E097B09382694F6FC91"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msequ.inc",
+      "sha256": "0AC3D8ACC22EDCFB6889F466DD582479CCAB9C7A29928CF55D240EBC9A863A64",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msequ.inc",
+      "original_sha256": "0AC3D8ACC22EDCFB6889F466DD582479CCAB9C7A29928CF55D240EBC9A863A64"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/biosbop.inc",
+      "sha256": "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\biosbop.inc",
+      "original_sha256": "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msgroup.inc",
+      "sha256": "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msgroup.inc",
+      "original_sha256": "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/biostruc.inc",
+      "sha256": "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\biostruc.inc",
+      "original_sha256": "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/devmark.inc",
+      "sha256": "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\devmark.inc",
+      "original_sha256": "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20"
+    },
+    {
+      "path": "dos/v86/inc/umb.inc",
+      "sha256": "DC03BE21A15F2F3E319C5E10FB7C4EC9BB8FF426B7E8C60BAA9F4EC77187D18D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\umb.inc",
+      "original_sha256": "DC03BE21A15F2F3E319C5E10FB7C4EC9BB8FF426B7E8C60BAA9F4EC77187D18D"
+    },
+    {
+      "path": "inc/SOFTPC.INC",
+      "sha256": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\SOFTPC.INC",
+      "original_sha256": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7"
+    },
+    {
+      "path": "dos/v86/inc/parse.asm",
+      "sha256": "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\parse.asm",
+      "original_sha256": "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL3",
+      "sha256": "279D5CF516A39248F910A17E02647F37737B2C4607A6CD119DC7236AFFED78E2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\MSBIO.CL3",
+      "original_sha256": "279D5CF516A39248F910A17E02647F37737B2C4607A6CD119DC7236AFFED78E2"
+    },
+    {
+      "path": "inc/XMSSVC.INC",
+      "sha256": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\XMSSVC.INC",
+      "original_sha256": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL5",
+      "sha256": "A929484571F630176541F39D8C411D6E924D8CD6358E6BC395F94B23295015D2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\MSBIO.CL5",
+      "original_sha256": "A929484571F630176541F39D8C411D6E924D8CD6358E6BC395F94B23295015D2"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL6",
+      "sha256": "4A23D5D9E82762B4E0FDE991C2C0347C1FE33E6097D2F1ED54DA9DD6CFBD0440",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\MSBIO.CL6",
+      "original_sha256": "4A23D5D9E82762B4E0FDE991C2C0347C1FE33E6097D2F1ED54DA9DD6CFBD0440"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL4",
+      "sha256": "3C753FF790AAD0F86A84130C8A40A23A420E8EBE842CB7DDE442C55E9A525873",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\MSBIO.CL4",
+      "original_sha256": "3C753FF790AAD0F86A84130C8A40A23A420E8EBE842CB7DDE442C55E9A525873"
+    },
+    {
+      "path": "inc/VDMTIB.INC",
+      "sha256": "0AD51B2FAA863F5885F9B1326B24F8038D3BEE01C04AF11B059B4CA98C254661",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\inc\\VDMTIB.INC",
+      "original_sha256": "0AD51B2FAA863F5885F9B1326B24F8038D3BEE01C04AF11B059B4CA98C254661"
+    },
+    {
+      "path": "dos/v86/inc/psdata.inc",
+      "sha256": "BBDC48017D30A9B4B14289B0EA5003CF89B06CBBF2DC7930E30AAB09983997AB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\psdata.inc",
+      "original_sha256": "BBDC48017D30A9B4B14289B0EA5003CF89B06CBBF2DC7930E30AAB09983997AB"
+    },
+    {
+      "path": "dos/v86/dev/ansi/makefile",
+      "sha256": "DF753A55DCF2551AECF16DC8C31DDEF7E41CC4C09B4C704887B6AD5ED7183CE2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "original_sha256": "DF753A55DCF2551AECF16DC8C31DDEF7E41CC4C09B4C704887B6AD5ED7183CE2"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansi.lnk",
+      "sha256": "10761EC682D1316B14FCD070D2B4A3164AA3A0C67DC353885ABC7712EE32ED45",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansi.lnk",
+      "original_sha256": "10761EC682D1316B14FCD070D2B4A3164AA3A0C67DC353885ABC7712EE32ED45"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansi.asm",
+      "sha256": "C602E995E38FA2DFEF07F76013652BF9392BB7E0BFF7A662C6E1E4585E86AEA2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansi.asm",
+      "original_sha256": "C602E995E38FA2DFEF07F76013652BF9392BB7E0BFF7A662C6E1E4585E86AEA2"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ioctl.asm",
+      "sha256": "432595F77A045E894DFFCA1FA3341399D7673085EF016725578754C0FF686A0F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ioctl.asm",
+      "original_sha256": "432595F77A045E894DFFCA1FA3341399D7673085EF016725578754C0FF686A0F"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansiinit.asm",
+      "sha256": "1FAA74362243D5677FD15B647E2D62C49F105DA8C9687DA3D9B5EACE27FEC912",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansiinit.asm",
+      "original_sha256": "1FAA74362243D5677FD15B647E2D62C49F105DA8C9687DA3D9B5EACE27FEC912"
+    },
+    {
+      "path": "dos/v86/dev/ansi/parser.asm",
+      "sha256": "EFD4F68DCC78CBED307613DE6079A0940DFA138EDE491CDCDD2E5FEE5D6BBB19",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\parser.asm",
+      "original_sha256": "EFD4F68DCC78CBED307613DE6079A0940DFA138EDE491CDCDD2E5FEE5D6BBB19"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansi.inc",
+      "sha256": "78961A6505812CA86752E6B040039F265BC5742DB4DF521AF38613C6CE0B5ACE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansi.inc",
+      "original_sha256": "78961A6505812CA86752E6B040039F265BC5742DB4DF521AF38613C6CE0B5ACE"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansivid.inc",
+      "sha256": "DE901DAA752DF43311B9E740AC05878F2A303077DD41F5EFB8DA3A90B19CF06F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansivid.inc",
+      "original_sha256": "DE901DAA752DF43311B9E740AC05878F2A303077DD41F5EFB8DA3A90B19CF06F"
+    },
+    {
+      "path": "dos/v86/inc/sysmsg.inc",
+      "sha256": "D41DC5FB8E50940CBCF356E5BA73F34ADB777D1E4053F77A0C1CF9682AA862BD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\sysmsg.inc",
+      "original_sha256": "D41DC5FB8E50940CBCF356E5BA73F34ADB777D1E4053F77A0C1CF9682AA862BD"
+    },
+    {
+      "path": "dos/v86/inc/msgdcl.inc",
+      "sha256": "19D6D486F224DDEA638B566C043D949E7FBA79C011F1FEA254989C274FEFF924",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\msgdcl.inc",
+      "original_sha256": "19D6D486F224DDEA638B566C043D949E7FBA79C011F1FEA254989C274FEFF924"
+    },
+    {
+      "path": "dos/v86/inc/msgserv.asm",
+      "sha256": "74D421E387A667A1AB23FB155C5FDF0D33981B77FD2D7D9ECF31F28FE63090EB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\msgserv.asm",
+      "original_sha256": "74D421E387A667A1AB23FB155C5FDF0D33981B77FD2D7D9ECF31F28FE63090EB"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/makefile",
+      "sha256": "031DF79E3DD9FBE2D39B3F808F83DA74882778D21E53546E0F09A99DF854CCD3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\makefile",
+      "original_sha256": "031DF79E3DD9FBE2D39B3F808F83DA74882778D21E53546E0F09A99DF854CCD3"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/keyboard.lnk",
+      "sha256": "E39A13AF777E2BFE4419DF80FE229F4972642361AFCD04510929CE74BC6E0E41",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\keyboard.lnk",
+      "original_sha256": "E39A13AF777E2BFE4419DF80FE229F4972642361AFCD04510929CE74BC6E0E41"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfnow.asm",
+      "sha256": "001C58825EA20B0D559D36443E5D14DC22AC0835E62A05E80786DDE72FA863D3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfnow.asm",
+      "original_sha256": "001C58825EA20B0D559D36443E5D14DC22AC0835E62A05E80786DDE72FA863D3"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfeof.asm",
+      "sha256": "29DE9F18625722098C4B59E2F4238A81F69BF05E31A2B2060F98301FA4B4F467",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfeof.asm",
+      "original_sha256": "29DE9F18625722098C4B59E2F4238A81F69BF05E31A2B2060F98301FA4B4F467"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfdv.asm",
+      "sha256": "684E2B40B0CF5064FB5EFAB394D25300D70162CAE799BA022094592BD296420F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfdv.asm",
+      "original_sha256": "684E2B40B0CF5064FB5EFAB394D25300D70162CAE799BA022094592BD296420F"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfsp.asm",
+      "sha256": "E15204A59D482CD69647596E7508A28A5ED887E35889C7472A6AAAF6FEF9DF59",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsp.asm",
+      "original_sha256": "E15204A59D482CD69647596E7508A28A5ED887E35889C7472A6AAAF6FEF9DF59"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfpo.asm",
+      "sha256": "2735D9EE69FBD482279FF398D7F9473A7E4558BFD84E5B8F5E57B9C288C28C2C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpo.asm",
+      "original_sha256": "2735D9EE69FBD482279FF398D7F9473A7E4558BFD84E5B8F5E57B9C288C28C2C"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfge.asm",
+      "sha256": "2775934818A04F50CF78D6B478772AE6E904F7658958CC3A0340FB5CF5392CE8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfge.asm",
+      "original_sha256": "2775934818A04F50CF78D6B478772AE6E904F7658958CC3A0340FB5CF5392CE8"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfit141.asm",
+      "sha256": "7E69B389335A92E3ABB2A2C33F899E3D2DCC23A5E2F596A447C773F8914501FA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit141.asm",
+      "original_sha256": "7E69B389335A92E3ABB2A2C33F899E3D2DCC23A5E2F596A447C773F8914501FA"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdffr189.asm",
+      "sha256": "1B2773B5DA7C81EB3BD8DD465CE75D715F5F3254E943981EF22C41CF95B0F18A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr189.asm",
+      "original_sha256": "1B2773B5DA7C81EB3BD8DD465CE75D715F5F3254E943981EF22C41CF95B0F18A"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfsg.asm",
+      "sha256": "A7E2F73ECB329BF65E77EC13F699182BE52BC1DF3678825F3CE7D6B5523CC9C1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsg.asm",
+      "original_sha256": "A7E2F73ECB329BF65E77EC13F699182BE52BC1DF3678825F3CE7D6B5523CC9C1"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfsf.asm",
+      "sha256": "DF2CA6654FB508B3D974C3AA4820BDACDB335B39FF7B9CB9128D127EFAF9F38A",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsf.asm",
+      "original_sha256": "DF2CA6654FB508B3D974C3AA4820BDACDB335B39FF7B9CB9128D127EFAF9F38A"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfdk.asm",
+      "sha256": "B8EA991FA738561E7BA76097300B3386B155D6920E8C996B60528E45E9179F1C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfdk.asm",
+      "original_sha256": "B8EA991FA738561E7BA76097300B3386B155D6920E8C996B60528E45E9179F1C"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfuk166.asm",
+      "sha256": "43C5C7A06561B0B7F10FAF1D5AB427BA775F116B59B16DC9D9A51244791C2C48",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk166.asm",
+      "original_sha256": "43C5C7A06561B0B7F10FAF1D5AB427BA775F116B59B16DC9D9A51244791C2C48"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfbe.asm",
+      "sha256": "CBA15819BD77CC0839952562DF284389AC47528A15A10133179FDACB4E086FED",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbe.asm",
+      "original_sha256": "CBA15819BD77CC0839952562DF284389AC47528A15A10133179FDACB4E086FED"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfnl.asm",
+      "sha256": "6B4C55B076EAA4F593E1936CB2A27829C89A33B6613BA5BF054603993CD910B9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfnl.asm",
+      "original_sha256": "6B4C55B076EAA4F593E1936CB2A27829C89A33B6613BA5BF054603993CD910B9"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfno.asm",
+      "sha256": "9CDAB379B425D1B6387DC584C17DF0F8CDE50E5174D455A6C437B52016AE5856",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfno.asm",
+      "original_sha256": "9CDAB379B425D1B6387DC584C17DF0F8CDE50E5174D455A6C437B52016AE5856"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfcf.asm",
+      "sha256": "E19881B1B6F61E488FCC7BD5E102DB5ACA4F3ED32CED120FE5085845514B75F0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfcf.asm",
+      "original_sha256": "E19881B1B6F61E488FCC7BD5E102DB5ACA4F3ED32CED120FE5085845514B75F0"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfla.asm",
+      "sha256": "9B4CFAF8164DE3FAEAC43F9F9BF202ED403D29207C6005913B0B2B2ED940DB7E",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfla.asm",
+      "original_sha256": "9B4CFAF8164DE3FAEAC43F9F9BF202ED403D29207C6005913B0B2B2ED940DB7E"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfsv.asm",
+      "sha256": "1C214E336BA43950997858DB9C4032DCD5AA64B7C25239DB8975587DCF2F5736",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsv.asm",
+      "original_sha256": "1C214E336BA43950997858DB9C4032DCD5AA64B7C25239DB8975587DCF2F5736"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfru091.asm",
+      "sha256": "98BF8F350364F05AC1848CDA9E7E5334CA6FC8797AA382CE85A69933A497EDE4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru091.asm",
+      "original_sha256": "98BF8F350364F05AC1848CDA9E7E5334CA6FC8797AA382CE85A69933A497EDE4"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfbr275.asm",
+      "sha256": "106EA0A19207B67120358D8A6F430A7507B92A881435F424FBEB7FCB18444EC0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr275.asm",
+      "original_sha256": "106EA0A19207B67120358D8A6F430A7507B92A881435F424FBEB7FCB18444EC0"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfbg.asm",
+      "sha256": "2A195AF1BA1C1DFF9ED09EF83B3EA6866D17DA1FC62FB9876D725B7CA1B640CA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbg.asm",
+      "original_sha256": "2A195AF1BA1C1DFF9ED09EF83B3EA6866D17DA1FC62FB9876D725B7CA1B640CA"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfcz.asm",
+      "sha256": "0A99E8A10B1E0D3F268A70746FD5CCB743305C43114A0DB3B90785AFC4487BAC",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfcz.asm",
+      "original_sha256": "0A99E8A10B1E0D3F268A70746FD5CCB743305C43114A0DB3B90785AFC4487BAC"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfgk.asm",
+      "sha256": "F539C56CD3ABBA567B9343E621595965EA1803C531A4CDDD89DFA9DFC7FC7C6C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfgk.asm",
+      "original_sha256": "F539C56CD3ABBA567B9343E621595965EA1803C531A4CDDD89DFA9DFC7FC7C6C"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfhu.asm",
+      "sha256": "148E50C81056F0A02761DEB1522D63C70F642596D6D409D55B07B661F47D8B44",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfhu.asm",
+      "original_sha256": "148E50C81056F0A02761DEB1522D63C70F642596D6D409D55B07B661F47D8B44"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfic.asm",
+      "sha256": "2D7B276A5260852D910BDE3881BAE1049B507F531A1F320D4386C5ACB6A48DFE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfic.asm",
+      "original_sha256": "2D7B276A5260852D910BDE3881BAE1049B507F531A1F320D4386C5ACB6A48DFE"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfpl1.asm",
+      "sha256": "DA897D8FA34AF8B7BCC2A65F4330C936A47F8D0B66FA7F02051ACF1EE7AB5321",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpl1.asm",
+      "original_sha256": "DA897D8FA34AF8B7BCC2A65F4330C936A47F8D0B66FA7F02051ACF1EE7AB5321"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfro.asm",
+      "sha256": "437E3D9E6A25DE52E48D82B888281D85125D7F37E0FCA01CBAAB5CD7731F05E8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfro.asm",
+      "original_sha256": "437E3D9E6A25DE52E48D82B888281D85125D7F37E0FCA01CBAAB5CD7731F05E8"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfsl.asm",
+      "sha256": "1EB9C94985C7072281DC10970C3B8EF4DCD2E62C1DB8482499BBCAA4EAC3C194",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsl.asm",
+      "original_sha256": "1EB9C94985C7072281DC10970C3B8EF4DCD2E62C1DB8482499BBCAA4EAC3C194"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfyu.asm",
+      "sha256": "C6445F970D9061375ECF1E902A380912DBB362DC2CD91AB66DEA328E35E49CBA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyu.asm",
+      "original_sha256": "C6445F970D9061375ECF1E902A380912DBB362DC2CD91AB66DEA328E35E49CBA"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdftr.asm",
+      "sha256": "B792944693A23134158FB1E7F01369B138964715837818DD963C558924971598",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdftr.asm",
+      "original_sha256": "B792944693A23134158FB1E7F01369B138964715837818DD963C558924971598"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdftr440.asm",
+      "sha256": "7F74507E4698BF08207BA4076191E88C482421CA6D67BD46D3E2B3B9A51B2ADB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdftr440.asm",
+      "original_sha256": "7F74507E4698BF08207BA4076191E88C482421CA6D67BD46D3E2B3B9A51B2ADB"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfit142.asm",
+      "sha256": "B39DBEAA2E2087E6AE07BD20590942147CDC10F01E788BEAA0E0A9902F1B5DFD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit142.asm",
+      "original_sha256": "B39DBEAA2E2087E6AE07BD20590942147CDC10F01E788BEAA0E0A9902F1B5DFD"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/keybshar.inc",
+      "sha256": "477B1416FEE9837366922BEF42693B74AAA72CD48372A01AEC9F6DEF6E04FCE3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\keybshar.inc",
+      "original_sha256": "477B1416FEE9837366922BEF42693B74AAA72CD48372A01AEC9F6DEF6E04FCE3"
+    },
+    {
+      "path": "dos/v86/inc/postequ.inc",
+      "sha256": "2D946E0466C3D05A19DA9E8B3FA8C73170152EF544E7692B75D3395C17574E62",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\postequ.inc",
+      "original_sha256": "2D946E0466C3D05A19DA9E8B3FA8C73170152EF544E7692B75D3395C17574E62"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/keybmac.inc",
+      "sha256": "F386208F589E958EF047ECE792D5EA576B64E642545EA48F14B15D585099A842",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\keybmac.inc",
+      "original_sha256": "F386208F589E958EF047ECE792D5EA576B64E642545EA48F14B15D585099A842"
+    },
+    {
+      "path": "dos/v86/dev/country/makefile",
+      "sha256": "5671E0E417E8481555997D566AB0A4A99ADCE550C8918A68C824B59E45FCE327",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\makefile",
+      "original_sha256": "5671E0E417E8481555997D566AB0A4A99ADCE550C8918A68C824B59E45FCE327"
+    },
+    {
+      "path": "dos/v86/dev/country/country.asm",
+      "sha256": "CB3B55A75C6D10092F592BBF27C176BB345DE199FB4194E7B53C4724DC7F1F9D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\country.asm",
+      "original_sha256": "CB3B55A75C6D10092F592BBF27C176BB345DE199FB4194E7B53C4724DC7F1F9D"
+    },
+    {
+      "path": "dos/v86/dev/country/mkcntry.inc",
+      "sha256": "CACB9355ED3807244468A9D21F416EBCE8BCE4AFA7E12360831A83B6B5D1A639",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\mkcntry.inc",
+      "original_sha256": "CACB9355ED3807244468A9D21F416EBCE8BCE4AFA7E12360831A83B6B5D1A639"
+    },
+    {
+      "path": "dos/v86/dev/country/nls437.inc",
+      "sha256": "FAAF5C42B52916CE07A1C44BA91C95C900FFBB7567ADE2D6A89A08134B157927",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls437.inc",
+      "original_sha256": "FAAF5C42B52916CE07A1C44BA91C95C900FFBB7567ADE2D6A89A08134B157927"
+    },
+    {
+      "path": "dos/v86/dev/country/nls737.inc",
+      "sha256": "3B654BB6D670F59D5233E569DEBAE429B21764420FF69FAA617E62C47C46B068",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls737.inc",
+      "original_sha256": "3B654BB6D670F59D5233E569DEBAE429B21764420FF69FAA617E62C47C46B068"
+    },
+    {
+      "path": "dos/v86/dev/country/nls850.inc",
+      "sha256": "C31899EE82065DACE80306467690D166021C99FAFACDE41D9664FEF643F1F483",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls850.inc",
+      "original_sha256": "C31899EE82065DACE80306467690D166021C99FAFACDE41D9664FEF643F1F483"
+    },
+    {
+      "path": "dos/v86/dev/country/nls852.inc",
+      "sha256": "A4CEDC86D3109CE0330483EDFAC94516C13A73A15E8E46FF833AA44EB3966A23",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls852.inc",
+      "original_sha256": "A4CEDC86D3109CE0330483EDFAC94516C13A73A15E8E46FF833AA44EB3966A23"
+    },
+    {
+      "path": "dos/v86/dev/country/nls855.inc",
+      "sha256": "84877AE24DA7AFE586E07E267BF90134F442558AF5B23F6D016533AFFD8D981D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls855.inc",
+      "original_sha256": "84877AE24DA7AFE586E07E267BF90134F442558AF5B23F6D016533AFFD8D981D"
+    },
+    {
+      "path": "dos/v86/dev/country/nls857.inc",
+      "sha256": "746038DA8B292819B99A177D5549C1D8B511D30EA7A4A9CC0C3B5575890185CE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls857.inc",
+      "original_sha256": "746038DA8B292819B99A177D5549C1D8B511D30EA7A4A9CC0C3B5575890185CE"
+    },
+    {
+      "path": "dos/v86/dev/country/nls860.inc",
+      "sha256": "6CABFEA4A3F07536EC5AD58548069C90C679A99719CD440F0A28E08B45521AFE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls860.inc",
+      "original_sha256": "6CABFEA4A3F07536EC5AD58548069C90C679A99719CD440F0A28E08B45521AFE"
+    },
+    {
+      "path": "dos/v86/dev/country/nls861.inc",
+      "sha256": "D7CB36B9788AE9C63184D35B1EE25AC70797C85F7D85206937760AAE642907D9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls861.inc",
+      "original_sha256": "D7CB36B9788AE9C63184D35B1EE25AC70797C85F7D85206937760AAE642907D9"
+    },
+    {
+      "path": "dos/v86/dev/country/nls862.inc",
+      "sha256": "E67423DB4F5E53C1EB238504AD100B0C53736BB456E30E6F808F37AB07FFC7DA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls862.inc",
+      "original_sha256": "E67423DB4F5E53C1EB238504AD100B0C53736BB456E30E6F808F37AB07FFC7DA"
+    },
+    {
+      "path": "dos/v86/dev/country/nls863.inc",
+      "sha256": "4DF45A50820484E96BE5FD7AE02D180D2A0AFC29CF4A4C495526FBA31137BD54",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls863.inc",
+      "original_sha256": "4DF45A50820484E96BE5FD7AE02D180D2A0AFC29CF4A4C495526FBA31137BD54"
+    },
+    {
+      "path": "dos/v86/dev/country/nls864.inc",
+      "sha256": "E9834C44CE1618E87A352FBD333872F45BED9D9E3EE39C86C20185DDFAB6BF70",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls864.inc",
+      "original_sha256": "E9834C44CE1618E87A352FBD333872F45BED9D9E3EE39C86C20185DDFAB6BF70"
+    },
+    {
+      "path": "dos/v86/dev/country/nls865.inc",
+      "sha256": "5ED30669C6854D0B5DC74CE938273E329448870ACCE495D957BB1E6001C1BECD",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls865.inc",
+      "original_sha256": "5ED30669C6854D0B5DC74CE938273E329448870ACCE495D957BB1E6001C1BECD"
+    },
+    {
+      "path": "dos/v86/dev/country/nls866.inc",
+      "sha256": "A3973F993978E56F5856583AC3975B807F981931E1E5B6D53341C361022A8E42",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls866.inc",
+      "original_sha256": "A3973F993978E56F5856583AC3975B807F981931E1E5B6D53341C361022A8E42"
+    },
+    {
+      "path": "dos/v86/dev/country/nls869.inc",
+      "sha256": "362619DBE1DDFD277E96E1392D88256698091569E00E8FFC96306608DF295CEB",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls869.inc",
+      "original_sha256": "362619DBE1DDFD277E96E1392D88256698091569E00E8FFC96306608DF295CEB"
+    },
+    {
+      "path": "dos/v86/dev/country/nls93x.inc",
+      "sha256": "C8B90BA1341DC3A6EE00B01C7971E726A03520AF199D8876909E825BFBA84F0B",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls93x.inc",
+      "original_sha256": "C8B90BA1341DC3A6EE00B01C7971E726A03520AF199D8876909E825BFBA84F0B"
+    },
+    {
+      "path": "dos/v86/dev/country/dbcs93x.inc",
+      "sha256": "E2F6CA2B4BD31363D6005ABA384F731EEF31CA8DDD5E6C3CA3E64CA8DEAC1572",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\dbcs93x.inc",
+      "original_sha256": "E2F6CA2B4BD31363D6005ABA384F731EEF31CA8DDD5E6C3CA3E64CA8DEAC1572"
+    },
+    {
+      "path": "dos/v86/dev/himem/makefile",
+      "sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "original_sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem.asm",
+      "sha256": "BFADF282D547B0B0DBC008405C4882F333C047EC235529D928E5D9CA0184E0CA",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem.asm",
+      "original_sha256": "BFADF282D547B0B0DBC008405C4882F333C047EC235529D928E5D9CA0184E0CA"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem1.asm",
+      "sha256": "375BCE3BB1D474F0F50C8564E8E9EFFB96717371F4D2A7CF3CF6FDD0FA72D108",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem1.asm",
+      "original_sha256": "375BCE3BB1D474F0F50C8564E8E9EFFB96717371F4D2A7CF3CF6FDD0FA72D108"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem2.asm",
+      "sha256": "5152B68073A26383266453EAF94970BF488E31E87F21E0E5DEEAA0F8BBFD411C",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem2.asm",
+      "original_sha256": "5152B68073A26383266453EAF94970BF488E31E87F21E0E5DEEAA0F8BBFD411C"
+    },
+    {
+      "path": "dos/v86/dev/himem/messages.asm",
+      "sha256": "D7DA918413E5594C4747DAD8D0C2D6B97D123C01A16B0C0DFEFE3BED41CF4216",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\messages.asm",
+      "original_sha256": "D7DA918413E5594C4747DAD8D0C2D6B97D123C01A16B0C0DFEFE3BED41CF4216"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem4.asm",
+      "sha256": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem4.asm",
+      "original_sha256": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem5.asm",
+      "sha256": "B4FDCA7092D350578E9E86E1DB2284B66CD7E071A9BFC9CA859DDAA6CD2C2B74",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem5.asm",
+      "original_sha256": "B4FDCA7092D350578E9E86E1DB2284B66CD7E071A9BFC9CA859DDAA6CD2C2B74"
+    },
+    {
+      "path": "dos/v86/dev/himem/himem.inc",
+      "sha256": "58F51C11AD7F8E032A71C70D4827E85F4F9C0DED2FEEF32AFCC490F12946C5AE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\himem.inc",
+      "original_sha256": "58F51C11AD7F8E032A71C70D4827E85F4F9C0DED2FEEF32AFCC490F12946C5AE"
+    },
+    {
+      "path": "dos/v86/redir/makefile",
+      "sha256": "318569C93BB478AEA0A11E078C82E2FB2D4F649D2E2CC2FB78DBFED781FDE53F",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\makefile",
+      "original_sha256": "318569C93BB478AEA0A11E078C82E2FB2D4F649D2E2CC2FB78DBFED781FDE53F"
+    },
+    {
+      "path": "dos/v86/redir/redir.asm",
+      "sha256": "A30739691C5EF462F6EEC73CA2E1F7D41495634930408AF9171014A6CD20ED60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\redir.asm",
+      "original_sha256": "A30739691C5EF462F6EEC73CA2E1F7D41495634930408AF9171014A6CD20ED60"
+    },
+    {
+      "path": "dos/v86/redir/resident.asm",
+      "sha256": "50844D93A6101B6DD64431D4842F5C4496923EB1039D071B116F148706216F98",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\resident.asm",
+      "original_sha256": "50844D93A6101B6DD64431D4842F5C4496923EB1039D071B116F148706216F98"
+    },
+    {
+      "path": "dos/v86/redir/int2a.asm",
+      "sha256": "2C71C33E1528882B115784E383108C9C47FDBF152360670141EA112EB8F65100",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\int2a.asm",
+      "original_sha256": "2C71C33E1528882B115784E383108C9C47FDBF152360670141EA112EB8F65100"
+    },
+    {
+      "path": "dos/v86/redir/int5c.asm",
+      "sha256": "38660D903B630263E68543F52A196EC3D259B820D30A3588BE401C7341C322A5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\int5c.asm",
+      "original_sha256": "38660D903B630263E68543F52A196EC3D259B820D30A3588BE401C7341C322A5"
+    },
+    {
+      "path": "dos/v86/redir/mailslot.asm",
+      "sha256": "CFD934D17C8B577C2F38C5BDD807CB0CC15AE81209B10C744415ADC1727E1073",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\mailslot.asm",
+      "original_sha256": "CFD934D17C8B577C2F38C5BDD807CB0CC15AE81209B10C744415ADC1727E1073"
+    },
+    {
+      "path": "dos/v86/redir/msgapi.asm",
+      "sha256": "8907EE4CABF3D6740B34A90F43B8638EDD80B8EA61E754E50E7FA1449B56FAB4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\msgapi.asm",
+      "original_sha256": "8907EE4CABF3D6740B34A90F43B8638EDD80B8EA61E754E50E7FA1449B56FAB4"
+    },
+    {
+      "path": "dos/v86/redir/namepipe.asm",
+      "sha256": "98126D940BB91C10620045180CA098B4ECCCE4FA9EACFD17E05CD2DAA7DDC044",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\namepipe.asm",
+      "original_sha256": "98126D940BB91C10620045180CA098B4ECCCE4FA9EACFD17E05CD2DAA7DDC044"
+    },
+    {
+      "path": "dos/v86/redir/netapis.asm",
+      "sha256": "B3D490ABC40544A1563104BE20C84F5DDA7B5672CB53CA282F3520EC1A23CF7D",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\netapis.asm",
+      "original_sha256": "B3D490ABC40544A1563104BE20C84F5DDA7B5672CB53CA282F3520EC1A23CF7D"
+    },
+    {
+      "path": "dos/v86/redir/neterror.asm",
+      "sha256": "84F0DF581618486762B45AFB81E12C83A6A3F12162A160FD132A077A0CA7BEB9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\neterror.asm",
+      "original_sha256": "84F0DF581618486762B45AFB81E12C83A6A3F12162A160FD132A077A0CA7BEB9"
+    },
+    {
+      "path": "dos/v86/redir/enumapis.inc",
+      "sha256": "7373034D858A9C34EE5BB55D78060A1E1262A8E7D4BA9E7491C26D7680A45BBE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\enumapis.inc",
+      "original_sha256": "7373034D858A9C34EE5BB55D78060A1E1262A8E7D4BA9E7491C26D7680A45BBE"
+    },
+    {
+      "path": "dos/v86/redir/segorder.inc",
+      "sha256": "2155078AB1A0BA885BF7E84F05D62B453AEFE7E6AC2828824B97ACA6C7B2FF49",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\segorder.inc",
+      "original_sha256": "2155078AB1A0BA885BF7E84F05D62B453AEFE7E6AC2828824B97ACA6C7B2FF49"
+    },
+    {
+      "path": "inc/RDRSVC.INC",
+      "sha256": "2C85BCE46D4E9655FDF5C3BD18ACE18B57D79160D9D85D1AEFAA5CFB02C143CE",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\RDRSVC.INC",
+      "original_sha256": "2C85BCE46D4E9655FDF5C3BD18ACE18B57D79160D9D85D1AEFAA5CFB02C143CE"
+    },
+    {
+      "path": "dos/v86/redir/rdrmisc.inc",
+      "sha256": "966420D2FD0B9D65375ACC72F4D08112993A27CB646E37388BAD0288C724F1A7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\rdrmisc.inc",
+      "original_sha256": "966420D2FD0B9D65375ACC72F4D08112993A27CB646E37388BAD0288C724F1A7"
+    },
+    {
+      "path": "dos/v86/redir/debugmac.inc",
+      "sha256": "78CEBEA02713B3827E4F6EC6C7B127F21FF932DB21CCBEA41B2810E3BFE54103",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\debugmac.inc",
+      "original_sha256": "78CEBEA02713B3827E4F6EC6C7B127F21FF932DB21CCBEA41B2810E3BFE54103"
+    },
+    {
+      "path": "dos/v86/redir/asmmacro.inc",
+      "sha256": "7F28CF4D7154808E674F1569A25D30174041AD16A05D994792F61E52068528D1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\asmmacro.inc",
+      "original_sha256": "7F28CF4D7154808E674F1569A25D30174041AD16A05D994792F61E52068528D1"
+    },
+    {
+      "path": "dos/v86/redir/int5c.inc",
+      "sha256": "2CEAC855D58F898A625F97143AFFFEB45BFAD6520D746FE8790F5D2A9027F4D5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\int5c.inc",
+      "original_sha256": "2CEAC855D58F898A625F97143AFFFEB45BFAD6520D746FE8790F5D2A9027F4D5"
+    },
+    {
+      "path": "dos/v86/redir/redirmsg.inc",
+      "sha256": "1C0026EA6010AB68FC13AADB30AC791A7E415541B9A965B330CEA54FD0AC6030",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\redirmsg.inc",
+      "original_sha256": "1C0026EA6010AB68FC13AADB30AC791A7E415541B9A965B330CEA54FD0AC6030"
+    },
+    {
+      "path": "dos/v86/redir/rdrint2f.inc",
+      "sha256": "A40088FEE872F93D1D8A6199C33DA40B1CB8B5CFF6EEC5B6AF194C0B467586B9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\rdrint2f.inc",
+      "original_sha256": "A40088FEE872F93D1D8A6199C33DA40B1CB8B5CFF6EEC5B6AF194C0B467586B9"
+    },
+    {
+      "path": "dos/v86/redir/localmac.inc",
+      "sha256": "1830EA0F45A6C805D7E17E53AFBC63A88F8A1C4DDCED751C335389EFB6672985",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\redir\\localmac.inc",
+      "original_sha256": "1830EA0F45A6C805D7E17E53AFBC63A88F8A1C4DDCED751C335389EFB6672985"
+    },
+    {
+      "path": "inc/VRDEFLD.INC",
+      "sha256": "8A1A7D7BD9C7C14739A469DA3EA25ADE85DA77354EAD01886780963119EDB843",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VRDEFLD.INC",
+      "original_sha256": "8A1A7D7BD9C7C14739A469DA3EA25ADE85DA77354EAD01886780963119EDB843"
+    },
+    {
+      "path": "inc/VRDLCTAB.INC",
+      "sha256": "9C0C853347FF8CFFC7D729EEE61AE856F26BC21DE466CA7237DBF5D825E12C09",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\VRDLCTAB.INC",
+      "original_sha256": "9C0C853347FF8CFFC7D729EEE61AE856F26BC21DE466CA7237DBF5D825E12C09"
+    },
+    {
+      "path": "dos/v86/dev/ansi/ANSI.CL1",
+      "sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "original": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.CL1",
+      "original_sha256": "17284F8980CAC891554180FBEDF53E295686FD268AFF103EBA3C2D967B0FF065",
+      "edition": "OpenNT-src-2",
+      "revision": "5e4619ab61c2aa76151e03973cce340be2933e61"
+    }
+  ]
+}

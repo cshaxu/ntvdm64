@@ -1,0 +1,52 @@
+{
+  "result": "pass",
+  "classification": "partial",
+  "added_export": "Sim32FlushVDMPointer",
+  "original_definition_lines": 136,
+  "retained_definition_lines": 136,
+  "source_text_retention_percent": "100.00",
+  "template_declared_names": 140,
+  "published_names": 269,
+  "matched_profile_names": 138,
+  "profile_name_ratio_percent": "98.57",
+  "missing_profile_names": [
+    "VdmQueryFreeVirtualMemory",
+    "VdmReallocateVirtualMemory"
+  ],
+  "inputs": [
+    {
+      "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.def",
+      "sha256": "98C00C3C4737108674061779A6C1E06F113C597D76536A49E0723AA617D58A7A"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.def",
+      "sha256": "09B1B928016158B2B5492C6726B0E1CE2EFBF07C4D14D0ED1C5DFDD4D0EFE362"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+      "sha256": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+      "sha256": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+    },
+    {
+      "path": "tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3DD2BA6BF02F66E917F6751D6C6C6B63409D4BBC47D94A238EC73BF7FCE20099"
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\ntvdm-cpu40.def",
+      "sha256": "A164880C0BED3452B671448E26325EE5D0A2CCBF691038C0C42C5F90CC777668"
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\published-exports.stdout.txt",
+      "sha256": "92D729478E2B7FFD756787C5DD6D60DF365DB758A9417EB89D9E3FDF9307E3DF"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\ntvdm.exe",
+      "sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6"
+    }
+  ],
+  "original_history": "9e8821856",
+  "scope": "Source/metadata/profile-name evidence, not function behavior or source admission; no product or guest changed"
+}

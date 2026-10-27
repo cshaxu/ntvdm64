@@ -1,0 +1,45 @@
+{
+  "result": "pass",
+  "scope": "Exhaustive identity accounting only; unresolved rows remain explicit",
+  "paths": 1013,
+  "counts": {
+    "not-in-supplement-manifest": 1,
+    "verified-supplemental-original": 1011,
+    "manifest-or-working-identity-differs": 1
+  },
+  "revision": "5e4619ab61c2aa76151e03973cce340be2933e61",
+  "manifest": "artifacts\\documentation-archive\\20260910\\etc\\operations\\ledgers\\m0-t301-s1-opennt-src-2-mvdm-extra-import-manifest.tsv",
+  "manifest_sha256": "84D314A2BBBE9B78304EDBFFBB92BDB7ABA6FD209010CC1FF0341AE761910EDF",
+  "csv_sha256": "A9BD43A4E844A34796968D6F7C1BDC5A8FD971E9557791944F9C9E0337A65849",
+  "source_policy": "Existing T301 mirror-completeness exception; no new source or runtime admission",
+  "unresolved": [
+    {
+      "relative_path": "README.md",
+      "ledger_status": "pending",
+      "observed_sha256": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335",
+      "frozen_sha256": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
+      "source_path": "",
+      "source_sha256": "",
+      "git_blob": "",
+      "git_match": "",
+      "manifest_disposition": "",
+      "copy_applied": "",
+      "provenance": "not-in-supplement-manifest",
+      "scope": "Source/artifact identity only; no source-definition, host build, runtime or capability admission"
+    },
+    {
+      "relative_path": "softpc.new/obj.vdm/obj/i386/ntvdm.def",
+      "ledger_status": "pending",
+      "observed_sha256": "09B1B928016158B2B5492C6726B0E1CE2EFBF07C4D14D0ED1C5DFDD4D0EFE362",
+      "frozen_sha256": "09B1B928016158B2B5492C6726B0E1CE2EFBF07C4D14D0ED1C5DFDD4D0EFE362",
+      "source_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.def",
+      "source_sha256": "98C00C3C4737108674061779A6C1E06F113C597D76536A49E0723AA617D58A7A",
+      "git_blob": "df3cc65bd8b5ea6e1209d9c20afdce46ab31819f",
+      "git_match": "raw",
+      "manifest_disposition": "already-tracked-identical",
+      "copy_applied": "no",
+      "provenance": "manifest-or-working-identity-differs",
+      "scope": "Source/artifact identity only; no source-definition, host build, runtime or capability admission"
+    }
+  ]
+}

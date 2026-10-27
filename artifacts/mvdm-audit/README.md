@@ -7,10 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-226 partial (205 existing source-difference rows, two live uncommitted
-source candidates and 19 partially integrated build manifests), 1,753 excluded
+228 partial (205 existing source-difference rows, two live uncommitted
+source candidates, 19 partially integrated build manifests and two export-source
+records), 1,932 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,653 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,472 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -25,6 +26,12 @@ input roles only; guest functionality and image provenance remain separate.
 The [100 Kernel 3.1 source roles](kernel31-source-role-review.md) separately
 trace KRNL386, historical 286P, stub/resource and SWAP tool inputs; they do not
 activate another profile or establish immutable-image derivation/behavior.
+
+The [DOS/device and export-source checkpoint](dos-core-source-role-review.md)
+adds 179 proven guest-input roles and two partial export-source records. The
+[supplemental identity reconciliation](supplemental-original-provenance.md)
+accounts for every frozen current-only path without selecting new runtime
+code; the active original export-template gap is in the S11 worklist.
 
 The [build-carrier review](build-carrier-review.md) distinguishes configuration
 reads from Ninja execution dependencies. Its 100 additional exclusions concern

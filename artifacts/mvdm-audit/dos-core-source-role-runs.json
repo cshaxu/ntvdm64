@@ -1,0 +1,50 @@
+{
+  "scope": "Read-only DOS core, supplemental provenance and export-source audit",
+  "templatePreprocess": {
+    "scope": "Declarative export-template preprocessing only, CPU40/i386; no CPU30 macro or object compilation",
+    "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /TC /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\guest-source-owner/ntvdm-cpu40.def\" /Di386 /DCPU_40_STYLE \"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src\"\"",
+    "pid": 28700,
+    "exit": 0,
+    "started": "2026-10-27T18:52:25.4387921Z"
+  },
+  "checkpoint": {
+    "started": "2026-10-27T19:04:20.1726904Z",
+    "exit": 0,
+    "pid": 18268
+  },
+  "negative": {
+    "command": "-B -X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py build/t473-s10/guest-source-owner/dos-negative-result.json --base d88b0fff8 --prefix dos-core-source-role- --expected-count 180",
+    "exit": 1,
+    "expected": 1,
+    "started": "2026-10-27T18:58:49.6337802Z",
+    "pid": 32724
+  },
+  "supplement": {
+    "exit": 0,
+    "started": "2026-10-27T18:40:44.6829241Z",
+    "pid": 2936
+  },
+  "partialDerivation": {
+    "exit": 0,
+    "pid": 15036,
+    "started": "2026-10-27T18:56:17.2164176Z"
+  },
+  "documentation": {
+    "pid": 12072,
+    "started": "2026-10-27T19:04:20.1440539Z",
+    "exit": 0
+  },
+  "source": {
+    "pid": 15424,
+    "started": "2026-10-27T18:50:43.8593893Z",
+    "exit": 0
+  },
+  "publishedExports": {
+    "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" dumpbin.exe /nologo /exports \"O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\\system32\\ntvdm.exe\"\"",
+    "pid": 2816,
+    "started": "2026-10-27T18:45:48.4742232Z",
+    "imageHash": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+    "exit": 0
+  },
+  "diffCheckExit": 0
+}
