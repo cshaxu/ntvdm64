@@ -18,6 +18,11 @@ in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-rev
 This delivery does not close the MVDM-wide source reconciliation or establish
 that every historical test has run.
 
+The [Win16 core role checkpoint](../../artifacts/mvdm-audit/wow16-core-source-role-review.md)
+resolves 85 original guest build-input roles without claiming guest capability
+closure. The merged inventory retains 2,387 pending and 228 partial paths;
+the independent 32-library format review leaves their dispositions open.
+
 ## Active Packet
 
 ### M0 T473 S10 — MVDM whole-source reconciliation

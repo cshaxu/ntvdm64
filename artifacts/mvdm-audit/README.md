@@ -9,9 +9,9 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 228 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records), 1,932 excluded
+records), 2,017 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,472 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,387 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -138,3 +138,8 @@ The [six-file loader ownership review](external-loader-owner-review.md)
 traces the original byte-return consumer through the current public loader
 and CRT bridge. It resolves source ownership without claiming actual DLL
 lifecycle acceptance or changing external/MVDM classification counts.
+
+The [Win16 core source-role review](wow16-core-source-role-review.md) resolves
+85 original guest build-input roles without excluding their capabilities.
+Its independent 32-file library inspection corrects a same-basename COFF/OMF
+inference; library dispositions and source-to-image lineage remain open.

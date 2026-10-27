@@ -1,0 +1,535 @@
+{
+  "result": "pass",
+  "paths": 32,
+  "omf_libraries": 31,
+  "macro_sources": 1,
+  "modules": 5927,
+  "records": 55858,
+  "nonzero_checksum_observations": 0,
+  "details": [
+    {
+      "relative_path": "dos/v86/lib/oldnames.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 3072,
+      "dictionary_blocks": 5,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 3072,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f20c00010001000800000000000000"
+    },
+    {
+      "relative_path": "dos/v86/lib/slibce.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 345088,
+      "dictionary_blocks": 79,
+      "segment_attributes": {
+        "use16": 2236
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 345088,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2da16d9020100680b4e00700bd20078"
+    },
+    {
+      "relative_path": "dos/v86/lib/xmm.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1536,
+      "dictionary_blocks": 2,
+      "segment_attributes": {
+        "use16": 2
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1536,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f20c00010001000800000000000000"
+    },
+    {
+      "relative_path": "dos/v86/lib/xmm/xmm.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1536,
+      "dictionary_blocks": 2,
+      "segment_attributes": {
+        "use16": 2
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1536,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f20c00010001000800000000000000"
+    },
+    {
+      "relative_path": "wow16/commdlg/commdlg.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/ddeml/ddeml.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 2048,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 2048,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/cdllcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 281088,
+      "dictionary_blocks": 71,
+      "segment_attributes": {
+        "use16": 1748
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 281088,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2e2154f02010040091a0044092c0048"
+    },
+    {
+      "relative_path": "wow16/lib/commdlg.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/gdi.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 17408,
+      "dictionary_blocks": 11,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 17408,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/kernel.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 16384,
+      "dictionary_blocks": 11,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 16384,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/keyboard.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1536,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1536,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/ldllcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 167424,
+      "dictionary_blocks": 41,
+      "segment_attributes": {
+        "use16": 1099
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 167424,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2360e9501010058061c005e06530064"
+    },
+    {
+      "relative_path": "wow16/lib/libh.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 11264,
+      "dictionary_blocks": 5,
+      "segment_attributes": {
+        "use16": 104
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 11264,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f27e0134000100d4000e00d8001c00dc"
+    },
+    {
+      "relative_path": "wow16/lib/libw.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 62464,
+      "dictionary_blocks": 89,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 62464,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2901817040100601004006210070064"
+    },
+    {
+      "relative_path": "wow16/lib/mdllcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 160768,
+      "dictionary_blocks": 41,
+      "segment_attributes": {
+        "use16": 1099
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 160768,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f22e0e9501010058061c005e06530064"
+    },
+    {
+      "relative_path": "wow16/lib/mlibcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 171008,
+      "dictionary_blocks": 41,
+      "segment_attributes": {
+        "use16": 1145
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 171008,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2be0ea20101008c06520098065a009a"
+    },
+    {
+      "relative_path": "wow16/lib/MMSYSTEM.LIB",
+      "page_bytes": 16,
+      "dictionary_offset": 9728,
+      "dictionary_blocks": 7,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 9728,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/olecli.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 4608,
+      "dictionary_blocks": 3,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 4608,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/sdllcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 156672,
+      "dictionary_blocks": 41,
+      "segment_attributes": {
+        "use16": 1102
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 156672,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f22e0e9501010058061b005e06520064"
+    },
+    {
+      "relative_path": "wow16/lib/shell.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 2048,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 2048,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/slibcew.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 166400,
+      "dictionary_blocks": 41,
+      "segment_attributes": {
+        "use16": 1148
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 166400,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f2be0ea20101008c065100980659009a"
+    },
+    {
+      "relative_path": "wow16/lib/snocrt.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1536,
+      "dictionary_blocks": 1,
+      "segment_attributes": {
+        "use16": 25
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1536,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f21400020001000c0050001000000000"
+    },
+    {
+      "relative_path": "wow16/lib/snocrtd.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 1,
+      "segment_attributes": {
+        "use16": 25
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f21400020001000c0037001000000000"
+    },
+    {
+      "relative_path": "wow16/lib/snocrtdw.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {
+        "use16": 6
+      },
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": "f21400020001000c002a001000000000"
+    },
+    {
+      "relative_path": "wow16/lib/sound.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1536,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1536,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/system.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/lib/user.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 25600,
+      "dictionary_blocks": 19,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 25600,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/mciole/olecli.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 4608,
+      "dictionary_blocks": 3,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 4608,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/ole/server/debug/olesvr.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/ole/server/retail/olesvr.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 1024,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 1024,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
+      "relative_path": "wow16/toolhelp/toolhelp.lib",
+      "page_bytes": 16,
+      "dictionary_offset": 2560,
+      "dictionary_blocks": 2,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 2560,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    }
+  ],
+  "script_sha256": "495A863CF4E3B598004EEA37087AC6E0D15C152DE328E65E7AE8429790043173",
+  "scope": "Read-only framed container observations, not full OMF/dictionary semantics or guest behavior"
+}
