@@ -1,0 +1,12 @@
+{
+  "case": "absent",
+  "moduleHandle": 0,
+  "pathLength": 0,
+  "path": "",
+  "ddeInitializeOffset": 0,
+  "ddeInitializeSelector": 0,
+  "resolvedFileSha256": null,
+  "inputSha256": null,
+  "probeSha256": "13EC02FD17B0D6DB236B901C5076D67DFD8F8571DF9B61B98A8E8365F253D8E3",
+  "originalGuestModified": false
+}

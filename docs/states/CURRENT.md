@@ -2,45 +2,40 @@
 
 ## Current Work
 
-**Active: M0 T473 S9**
+**Active: M0 T473 S10**
 
-Owner approved `books/` as supporting audit reading, not an authority.
+S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
+The owner approved the T-wide DOS16/WOW32 source reconciliation and four
+parallel audit roles; one owner/reviewer coordinates three read-only shard
+agents. Automatic S progression remains in force. `books/` is supporting
+reading, not authority. Guest media remains unchanged.
 
-Automatic progression: recover original WOW behavior with minimum bindings;
-no guest change.
-
-Owner broadened the T-wide reconciliation to both DOS16 and WOW32 audit
-inventories, with per-source full/partial/excluded disposition and measured
-partial-source estimates. Mirror differences are partial by definition;
-source coverage is not behavioral proof. The active S9 remains in progress;
-the [whole-closure proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md)
-retains this T-wide acceptance obligation without dropping its existing work.
-
-The ten-image S9 P1 package is `build/t473-s9/package-r10`; guest media is
-unchanged. T-wide audit and S9 acceptance remain open.
+The current coherent ten-image baseline is `build/t473-s9/package-r10`; its
+release manifest matches `assets/release` and `O:/winnt/system32`.
 
 ## Active Packet
 
-### M0 T473 S9 — generic public-USER wrapper identity audit
+### M0 T473 S10 — MVDM whole-source reconciliation
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S9, Ordinary Mode. |
-| Admission And Approval | [S8 closure](../history/m0-t473-s8-closure.md); automatic progression admits the next finite owner group. |
-| Objective | Audit the distinct generic public-USER wrapper family and repair only a proved HWND carrier/native identity mismatch without reconstructing private USER. |
-| Non-goals | Guest changes; host-window-style; a new message engine; DOS/COMMAND, device or redirector expansion. |
-| Reference Baseline | [S8 recovery](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md), [T463 public-HWND boundary](../etc/evidence/m0-t463-s2-sol-options-attribution.md) and T473 S8 package. |
-| Files And ABI Surface | `wow_user_task_lifecycle` generic wrappers, selected original callers and public object/view retirement. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Per-call ownership/carrier trace, normal/rejection/nested callback/destruction-reuse witness, formal link/map and focused fixtures. |
-| Expected Markers | Original WOW bodies remain owners; host USER owns HWND/resources; no private USER token becomes a host object. |
-| Asset Needs | Pinned original sources, existing CPU40 fixtures and real worker/package runner; guest media remains immutable. |
-| Reporting Requirements | Per-wrapper disposition, null/pseudo/foreign/multi-HWND matrix, lifecycle evidence, source/adapter diff and package identity. |
-| Stop Conditions | Guest change, private USER layout, unpinned source, semantic concession or unrelated owner. |
-| Exit Criteria | Each selected wrapper has a source-backed retained/repaired disposition; any production repair has coherent package delivery. |
-| Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
-| Similar-Issue Sweep | USER object mapping, menu/dialog callbacks, nested cross-boundary return, task cleanup, worker teardown, handle reuse, and host call error/last-error transfer. |
+| Identifier Mode | M0 T473 S10, Ordinary Mode with owner-approved four-role parallel audit. |
+| Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
+| Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
+| Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
+| Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
+| Files And ABI Surface | Audit ledgers in `artifacts/mvdm-audit`, source/build/link inventories and their governed evidence; no speculative runtime ABI change. |
+| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
+| Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
+| Expected Markers | Each row has justified full/partial/excluded disposition and selected original owner; every mirror diff is partial, with reproducible justified restored-code estimate or explicit unmeasurable basis. |
+| Asset Needs | Read-only DOS16/WOW32 inventories and original sources; existing build graphs, maps and noninteractive/authorized desktop probes. |
+| Reporting Requirements | Per-file evidence and unresolved capabilities; source/adapter diff and ownership accounting; 42,963 external audit rows assessed for relevance. |
+| Stop Conditions | Guest change, inaccessible original source, private host-layout assumption or new observable semantic concession. |
+| Exit Criteria | Complete reconciled ledger with no unclassified applicable path, evidence-backed exclusions and finite dependency-ordered recovery groups; no compilation or trace alone counts as functional proof. |
+| Original Owner Request | Reconnect every feasible original MVDM capability, per-file full/partial/excluded with mirror diffs partial and estimated restored proportion, then complete all required tests before T closure. |
+| Similar-Issue Sweep | Original source presence, selected profile, build/link extraction, callbacks, failure/teardown, duplicate adapters and both guest and host owner boundaries. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
+| Temporary Evidence | `build/t473-s10`, 60-minute phase, 3-GiB size and 10-minute no-progress budget; durable ledgers under `artifacts/mvdm-audit`. |
 
 ## T471 Closure Record
 
@@ -97,52 +92,23 @@ cross-worker serialization.
 
 ## S1 Closure Record
 
-T460 S1 closed the original Clipboard source/owner inventory and callback ABI
-audit. The [S1 owner matrix](../etc/evidence/m0-t460-s1-clipboard-owner-matrix.md)
-records the selected original conversion/cache owners, no autonomous
-Clipboard substitute, and finite S2 transfer/S3 delayed-render handoffs.
-This is source/composition evidence, not a runtime transfer claim.
+The [T473 baseline](../etc/evidence/m0-t473-s1-whole-closure-baseline.md) records original source and composition inventory.
 
 ## S2 Closure Record
 
-S2 repaired the bounded host-generation invalidation and rejected-handoff
-ownership seam while retaining the selected original `wuclip.c` conversion
-owners.  Two real guest/native transfer rounds, the original callback ABI and
-formal x86 graph, cached component build, all retained WOW frontiers and the
-Console-17/Window-17 product gates pass against one published ten-image
-package.  [The S2 transfer acceptance](../etc/evidence/m0-t460-s2-clipboard-transfer-acceptance.md)
-records the hashes, modern-host exceptions and finite S3 handoff.  Guest media
-is unchanged.
+The [T473 CPU40/DPMI reconciliation](../etc/evidence/m0-t473-s2-cpu40-dpmi-reconciliation.md) and companion owner records retain the per-package decisions.
 
 ## S3 Closure Record
 
-S3 closes at `5e2e8bfaf`. [Its lifetime evidence](../etc/evidence/m0-t460-s3-clipboard-deferred-lifetime.md)
-records the selected original `wuclip.c` owners, the live public-USER identity
-seam, deferred rendering, owner replacement and task-loss proof. It also
-delivers source-proven PIC ICW1 device cancellation and the keyboard
-early-EOI/read ordering repair. Five cached build stages, 24 PIC/RTC/mouse and
-46 keyboard assertions, focused Clipboard/graph/ABI routes, the complete
-product gate and isolated WINMINE/SOL probes pass. Ten matching images are
-published; guest media is unchanged. S4 retains selected-format acceptance and
-DDE handoff only.
+The [T473 CPU40 lifecycle](../etc/evidence/m0-t473-s3-cpu40-execution-lifecycle.md) records the execution and retirement boundary.
 
 ## S4 Closure Record
 
-S4 closed selected `CF_TEXT` and `CF_DIB` Clipboard-format and lifetime
-acceptance. [The S4 record](../etc/evidence/m0-t460-s4-clipboard-selected-format-acceptance.md)
-retains the original-owner audit and all normal, rejection, deferred,
-replacement, callback-return and task-loss evidence. It changed no product
-image or guest media.
+The [T473 DOS/COMMAND/XMS lifecycle](../etc/evidence/m0-t473-s4-dos-command-xms-lifecycle.md) records the selected original owner paths.
 
 ## S5 Closure Record
 
-S5 closed the owner-approved Win95 Start Menu PIF-template provenance repair
-at `5f12610eb`. [Its fixture evidence](../etc/evidence/m0-t460-s5-win95-start-menu-pif-template.md)
-proves that the plan records both the original menu source and actual
-`DOSPRMPT.PIF` template, preserves all non-dispatch template fields through
-the released PIF editor, and rejects an unrepresentable OEM PIF directory.
-No guest, runtime image or release binary changed; `books/` remains excluded
-and untracked.
+The [T473 SoftPC device lifecycle](../etc/evidence/m0-t473-s5-softpc-device-lifecycle.md) records the bounded device-owner audit.
 
 ## S7 Closure Record
 
@@ -154,6 +120,10 @@ without a runtime change; S8 owns public-USER object identity and retirement.
 S8 closes at its [public-USER evidence](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md).
 The ten-image package is published; the skipped direct completion/input
 control observation remains a non-pass. S9 owns generic wrappers.
+
+## S9 Closure Record
+
+The [T473 USER wrapper evidence](../etc/evidence/m0-t473-s9-generic-user-wrapper-audit.md) records the mapped carrier family and delivered r10 package.
 
 ## S6 Closure Record
 
@@ -263,15 +233,6 @@ temporary evidence, not reusable caches. Process inventory access was denied
 during closure; deletion requires verified quiescence and the existing
 exact-target ownership checks. Durable results are linked from the closure.
 Stable `.ninja` and `.ccache` caches remain untouched.
-
-T455 S2 may use only `build/t455-s2` for disposable evidence. Stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
-
-T455 S3 may use only `build/t455-s3` for disposable evidence. Stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
-
-T455 S4 may use only `build/t455-s4` for disposable evidence. Stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
 
 T456 S1 may use only `build/t456-s1` for disposable evidence. Stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.

@@ -370,3 +370,43 @@ A subsequent read-only manifest comparison checked all ten entries in
 `WOW32.DLL` in r1 has a different hash, so CURRENT's old r1 baseline path
 was corrected to r10. This recheck is artifact identity evidence, not a new
 runtime acceptance or permission to alter guest media.
+
+
+### Per-wrapper coverage follow-up
+
+`artifacts/mvdm-audit/s9-mapped-wrapper-index.csv` lists 61 mapped wrappers;
+all 61 have symbols in the selected WOW32 map. Test-source mentions cover all 61
+after this follow-up; a mention is an index, not proof of guest behavior.
+The real-CCPU `wrapper-coverage-r3` window-borrow fixture validates short
+carriers for Unicode window text, child-window Z-order and top-level window
+placement against actual USER observations. `focus-visible-r8` also exercises
+the short-carrier foreground call on the user desktop. Host USER refused that
+foreground request (`result=0`); the test validates the observed refusal
+and does not claim foreground success. It separately passed active and focus
+operations. The initial `wrapper-coverage-r1` failed at isolated-desktop
+creation under the restricted token (`ERROR_ACCESS_DENIED`), before the
+fixture; r2/r3 used the established user-session route and passed.
+
+The subsequent `wrapper-coverage-r5` exercises actual `DragDetect` with a
+short owned-child carrier and a queued button release; it returns false
+without hanging. This proves the cancellation path, not threshold-crossing
+drag behavior. The preceding r4 fixture failed because `GetCursorPos` was
+denied on the isolated desktop; the production drag call itself returned.
+The fixture now uses a deterministic test point and does not require global
+cursor access. `wrapper-coverage-r6` creates a real native modal dialog, publishes its
+identity, invokes `wow_native_EndDialog` with the short carrier during
+`WM_INITDIALOG`, and verifies that the modal loop returns the requested
+result. This host/CCPU witness does not itself prove a real guest modal path.
+
+
+### Real guest modal follow-up
+
+The existing independently authored `verify-wow-dialog-guest.ps1` was run
+against the published r10 package as `modal-guest-r1`; the observer reported
+normal exit and all eight DLG1 records had zero errors. Its final record
+reports two completed modal dialogs, two deferred completions and expected
+keyboard/default/cancel counts. The Win16 probe explicitly calls USER
+EndDialog. The recovered `wow_user_end_dialog` can choose original dialog
+handling instead of the native fallback, so this guest witness must not be
+misrepresented as direct execution proof of `wow_native_EndDialog`; that
+separate short-carrier native branch is covered by `wrapper-coverage-r6`.

@@ -1,0 +1,3 @@
+console-window=000000000111087C
+observer-pid=30672 console-window-owner-pid=30672 console-window-owner=O:\repos.hobby\ntvdm64\build\.ninja\observations-x64\console-startup-observer.exe
+buffer=120,9001 viewport=0,0,119,29 maximum=120,40 font=7,16

@@ -23,8 +23,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "37B593C02A80FF9A949D2EEAF6A224843266ABD3C6DE00DBB8F83C577D0A46E5",
-  "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,029 other entries remain pending; matching lines are not restored percentage.",
+  "output_sha256": "AB1AB67A8413DEDEE4E3CA8AC51BDB7C0726B4B0EE56DF0FA0759D7CA10D0A37",
+  "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,027 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -115,7 +115,13 @@
   },
   "ddeml_feasibility_review": {
     "evidence": "ddeml-implementation-options.md",
-    "sha256": "8507DDE022998551CABCBB9F791392F302B53FA7A9B6C1CAE335231742ABD87D",
+    "sha256": "71F2CEF00402A1D3AFCBF6F8EAF0B14C9CD508CFEC4363163AEF9232FF060CB9",
     "limits": "Native callback-per-instance association is an untested design candidate; guest DDEML source/binary path and task lifecycle are not demonstrated."
+  },
+  "ddeml_loader_probe": {
+    "status": "bounded-pass",
+    "evidence": "ddeml-module-path-evidence.json",
+    "sha256": "DB86FFBA55B4C6233C4CCF70A14F8F1A7D54CFA5FD992B403447809F972C25D6",
+    "limitations": "Tests no-load, absent, and two app-local loads/export lookup; DdeInitialize, DDE conversations, actual installed application path and task lifecycle untested."
   }
 }

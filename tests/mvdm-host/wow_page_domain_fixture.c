@@ -703,6 +703,19 @@ static void verify_dialog_cache(ULONG teb, wow_user_object_table *objects)
         borrow_errors - errors_before);
 }
 
+static INT_PTR CALLBACK verify_modal_end_dialog(HWND window, UINT message,
+    WPARAM wp, LPARAM lp)
+{
+    (void)wp;
+    (void)lp;
+    if (message != WM_INITDIALOG) return FALSE;
+    BORROW_CHECK(wow_user_window_refresh_payload(NULL, &window, 1));
+    BORROW_CHECK(wow_user_window_native_handle(
+        (HWND)(ULONG_PTR)LOWORD(window)) == window);
+    BORROW_CHECK(wow_native_EndDialog((HWND)(ULONG_PTR)LOWORD(window), 0x4473));
+    return TRUE;
+}
+
 static int verify_callback_scope(ULONG teb)
 {
     static wow_user_object_table objects;
@@ -762,6 +775,15 @@ static int verify_callback_scope(ULONG teb)
                 ShowWindow(parent, SW_SHOW);
                 if (ready) {
                     exercised = TRUE;
+                    {
+                        BOOL foreground = wow_native_SetForegroundWindow(
+                            (HWND)(ULONG_PTR)LOWORD(parent));
+                        fprintf(stderr, "WOW_VISIBLE_FOREGROUND_CCPU result=%d matches=%d\n",
+                            foreground, GetForegroundWindow() == parent);
+                        /* Foreground eligibility is controlled by the host.
+                         * Only a reported success promises the new foreground. */
+                        if (foreground) BORROW_CHECK(GetForegroundWindow() == parent);
+                    }
                     {
                         HWND mapped = wow_user_window_native_handle(
                             (HWND)(ULONG_PTR)LOWORD(parent));
@@ -834,6 +856,50 @@ static int verify_callback_scope(ULONG teb)
                 c_sas_dw_at(held + 48u) == (ULONG)rect.right &&
                 c_sas_dw_at(held + 52u) == (ULONG)rect.bottom);
             BORROW_CHECK(wow_user_window_refresh_graph(NULL));
+            {
+                HWND short_child = (HWND)(ULONG_PTR)LOWORD(child);
+                HWND short_first = (HWND)(ULONG_PTR)LOWORD(first);
+                WINDOWPLACEMENT placement = { sizeof(placement) };
+                WINDOWPLACEMENT after = { sizeof(after) };
+                WCHAR title[16] = {0};
+                BORROW_CHECK(wow_user_window_native_handle(short_child) == child);
+                BORROW_CHECK(wow_user_window_native_handle(short_first) == first);
+                BORROW_CHECK(wow_native_SetWindowTextW(short_child, L"Carrier"));
+                BORROW_CHECK(wow_native_GetWindowTextW(short_child, title,
+                    ARRAYSIZE(title)) == 7 && !wcscmp(title, L"Carrier"));
+                BORROW_CHECK(wow_native_BringWindowToTop(short_child));
+                BORROW_CHECK(GetWindow(child, GW_HWNDPREV) == NULL &&
+                    GetWindow(child, GW_HWNDNEXT) == sibling);
+                {
+                    POINT cursor = {0, 0};
+                    /* Exercise the real modal drag detector on this owned
+                     * child, then end it with a queued button release. */
+                    BORROW_CHECK(PostMessageW(child, WM_LBUTTONUP, 0, 0));
+                    BORROW_CHECK(!wow_native_DragDetect(short_child, cursor));
+                }
+                BORROW_CHECK(GetWindowPlacement(first, &placement));
+                placement.showCmd = SW_HIDE;
+                placement.rcNormalPosition.left = 40;
+                placement.rcNormalPosition.top = 50;
+                placement.rcNormalPosition.right = 120;
+                placement.rcNormalPosition.bottom = 130;
+                BORROW_CHECK(wow_native_SetWindowPlacement(short_first, &placement));
+                BORROW_CHECK(GetWindowPlacement(first, &after));
+                BORROW_CHECK(EqualRect(&after.rcNormalPosition,
+                    &placement.rcNormalPosition));
+                {
+                    union { DWORD alignment; WORD words[12]; } dialog = {0};
+                    INT_PTR modal_result;
+                    dialog.words[0] = (WORD)(DS_MODALFRAME & 0xffffu);
+                    dialog.words[1] = (WORD)(WS_POPUP >> 16);
+                    dialog.words[7] = 50;
+                    dialog.words[8] = 30;
+                    modal_result = DialogBoxIndirectParamW(GetModuleHandleW(NULL),
+                        (const DLGTEMPLATE *)dialog.words, first,
+                        verify_modal_end_dialog, 0);
+                    BORROW_CHECK(modal_result == 0x4473);
+                }
+            }
             dc = wow_native_GetDC((HWND)(ULONG_PTR)LOWORD(child));
             BORROW_CHECK(dc && WindowFromDC(dc) == child);
             if (dc) BORROW_CHECK(ReleaseDC(child, dc));

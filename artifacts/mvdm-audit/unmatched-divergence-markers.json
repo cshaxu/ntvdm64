@@ -1,0 +1,73 @@
+{
+  "scope": "literal MVDM-HOST-DIV markers in src/mvdm vs any mention in src/mvdm/README.md; supporting ledgers may contain alternative registration; absence is not yet proof unregistered",
+  "missing_ids": {
+    "MVDM-HOST-DIV-108": [
+      {
+        "file": "src/mvdm/dos/command/cmdmisc.c",
+        "line": 29
+      }
+    ],
+    "MVDM-HOST-DIV-231": [
+      {
+        "file": "src/mvdm/dos/dem/demfile.c",
+        "line": 647
+      },
+      {
+        "file": "src/mvdm/dos/dem/demhndl.c",
+        "line": 309
+      }
+    ],
+    "MVDM-HOST-DIV-242": [
+      {
+        "file": "src/mvdm/dpmi32/modesw.c",
+        "line": 217
+      }
+    ],
+    "MVDM-HOST-DIV-243": [
+      {
+        "file": "src/mvdm/dpmi32/modesw.c",
+        "line": 293
+      }
+    ],
+    "MVDM-HOST-DIV-303": [
+      {
+        "file": "src/mvdm/softpc.new/base/ccpu386/c_seg.c",
+        "line": 99
+      }
+    ],
+    "MVDM-HOST-DIV-305": [
+      {
+        "file": "src/mvdm/softpc.new/base/ccpu386/call.c",
+        "line": 122
+      }
+    ],
+    "MVDM-HOST-DIV-306": [
+      {
+        "file": "src/mvdm/softpc.new/base/ccpu386/c_xfer.c",
+        "line": 224
+      }
+    ],
+    "MVDM-HOST-DIV-307": [
+      {
+        "file": "src/mvdm/softpc.new/host/src/nt_inthk.c",
+        "line": 146
+      }
+    ],
+    "MVDM-HOST-DIV-308": [
+      {
+        "file": "src/mvdm/softpc.new/host/src/nt_inthk.c",
+        "line": 244
+      },
+      {
+        "file": "src/mvdm/softpc.new/base/ccpu386/c_xfer.c",
+        "line": 235
+      }
+    ],
+    "MVDM-HOST-DIV-309": [
+      {
+        "file": "src/mvdm/softpc.new/host/src/nt_inthk.c",
+        "line": 158
+      }
+    ]
+  }
+}

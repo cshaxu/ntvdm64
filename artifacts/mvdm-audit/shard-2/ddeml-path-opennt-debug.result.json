@@ -1,0 +1,12 @@
+{
+  "case": "opennt-debug",
+  "moduleHandle": 6006,
+  "pathLength": 27,
+  "path": "O:\\TMP\\N51E\\TESTS\\DDEML.DLL",
+  "ddeInitializeOffset": 16,
+  "ddeInitializeSelector": 6015,
+  "resolvedFileSha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+  "inputSha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+  "probeSha256": "CA46933B4D6748155073A760B67F774C5D5A88676F4B00C9B6815966F82B6E78",
+  "originalGuestModified": false
+}

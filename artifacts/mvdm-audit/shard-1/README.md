@@ -163,3 +163,27 @@ pending. No debugger extension was built or tested.
 
 - Current file-audit.csv SHA-256 `78A39816089C78490059C898987297500B48FF5886B8CDAF87FD90F573908C80`.
 - Current unselected-source-review.csv SHA-256 `1DC5679855C8FBCF41A03D349C50A1B35DACE620A6A6D8339C17252D5DCA2D4A`.
+
+## Selected product source divergence crosscheck
+
+`selected-diff-register-audit.csv` covers exactly all 32 shard paths with a
+frozen mirror difference and product selection. Original/current hashes were
+revalidated; each row records textual match, source marker IDs, lookup in the
+current divergence register, original owner, retained historical evidence,
+and remaining runtime/semantic limitations. Marker-string presence alone is
+not an audit of each changed hunk, justification or tested behavior.
+
+The crosscheck finds the source-only `MVDM-HOST-DIV-303` marker absent from
+`src/mvdm/README.md`; its default-disabled output observer still performs a
+call and environment lookup on protected CS loads. It does not establish a
+performance impact or authorize deletion. It also identifies a discrepancy:
+`nt_reset.c` still uses the DIV-147 close-state guard, while the register says
+former `nt_reset.c` DIV-147 entries were restored to original. The same ID is
+also applied to other source cases, so re-audit actual lifecycle and exception
+ownership before revising registration or changing the code. The `ret.c` stack
+width correction has no inline numeric marker but is described by the S1
+semantic-delta ledger. The other selected partial paths retain their existing
+non-final dispositions; no product code or guest changed.
+
+- Latest `file-audit.csv` SHA-256 `E9758C3B4260C2CA676E75789A6C80A3EC06A936E272D1B592752C4F82FA96F0`.
+- `selected-diff-register-audit.csv` SHA-256 `C095A66713598C75A92459E66EBA8978D456C47BB6D0DEAD534645FDEE98870C`.

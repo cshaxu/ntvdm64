@@ -126,3 +126,27 @@ the two vector members with counting wrappers after `sas_init`, forwarding
 to original tails only in a deliberately controlled negative case, can
 prove vector dispatch and caller attribution without changing production or
 guest; it remains supplemental to the actual-worker observer.
+
+## Full field scan and metadata distinction
+
+`sas-vector-fields.csv` indexes all 58 fields, their x86 offsets and the
+first exact lexical `Sas.<field>`/`Sas-><field>` references across repository
+C, header and assembly text. For the two breakpoint fields, references are
+only generated header macro definitions; for `IsPageInstanceData`, the only
+non-header direct field expression is the `#ifndef CCPU` YODA path already
+noted. In selected CCPU builds the public generated `sas_touch` and
+`VirtualiseInstruction` macros expand directly to the corresponding
+`c_*` symbols; under non-CCPU PROD they use the vector members; other
+non-CCPU builds declare ordinary functions. These preprocessor branches have
+different reachability and should not be conflated.
+
+The original reference `cvidc/c2cpusad.h` has a 55-name `SasVectorNames`
+table, whose last entry `IOVirtualised` is index 54; the selected generated
+x86 struct inserts `Sas_touch` at 54 and moves `IOVirtualised` to 55. This
+is a metadata-layout mismatch worth tracking, not a demonstrated runtime
+index bug. Repository source search finds no consumer of `SasVectorNames`;
+`GenerateCvidcCpuBinding.mjs` reads only the first two metadata groups,
+`CpuVectorNames` and `CpuPrivateVectorNames`, not this third SAS name list.
+The checked NTVDM export list also does not expose names `Cpu`, `Sas`,
+`c_sas_touch` or `c_VirtualiseInstruction`. Neither observation proves that
+a pointer cannot escape through another API or a dynamic module.

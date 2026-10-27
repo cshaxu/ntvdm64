@@ -40,9 +40,11 @@ pending is not a final disposition.
 
 ## Interrupt-hook markers lacking direct registry match
 
-The selected `softpc.new/host/src/nt_inthk.c` contains DIV-307, DIV-308
-and DIV-309 markers; an exact search of `src/mvdm/README.md` and the
-indexed evidence directory found no direct matching identifiers. Their
+A subsequent source-wide marker scan found ten distinct `MVDM-HOST-DIV`
+identifiers absent from `src/mvdm/README.md`, including DIV-303 in the
+CPU segment-load path and DIV-307/308/309 in interrupt-hook paths.
+`unmatched-divergence-markers.json` records all twelve source references.
+An exact identifier search in indexed documentation also found no matches. Their
 comments describe default-off observations, but the absence of registry
 entries is a traceability gap, not proof of behavioral change. Trace their
 original admission and remove or register them only after checking the
@@ -154,3 +156,22 @@ not-selected-to-input discrepancy. The VDMREDIR closure includes the
 NTVDM import-library build, so its transitive source inputs cannot be read
 as DLL object ownership. Compile selection still does not prove map
 extraction or behavior for the remaining inputs.
+
+## Host reset state registration needs ownership review
+
+`softpc.new/host/src/nt_reset.c` retains DIV-147 application-open/closed
+state and a host cleanup guard, whereas a DIV-147 registry row says its
+former reset entries were restored to original code; the same ID is also
+used for CPU declaration and SIM32/session work. Trace the current T448
+lifecycle ownership and actual call order before deciding whether this is
+necessary state, an obsolete duplicate, or a registry-description defect.
+The conflicting description is not itself proof of a runtime bug.
+
+## SAS vector projection layout
+
+Shard 3 records an original name table with 55 fields and a current generated
+58-field vector with different tail offsets. The two trap fallbacks are
+installed in current slots; the original name table itself has not been found
+as a runtime index consumer. Numeric/indirect/compiled consumers must be
+traced before asserting misdispatch or treating the fields as unreachable.
+See `shard-3/sas-vector-fields.csv` and `shard-3/sas4gen-vector-audit.md`.

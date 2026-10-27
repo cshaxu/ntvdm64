@@ -1,0 +1,21 @@
+container=console-owning-nondebug
+pid=6220
+result=exited
+exit=0x00000000
+graphics-handshake=none
+post-exit-observation-ms=0
+console-owner-observer=12256
+console-members-after-wait=1
+console-member=12256
+direct-child pid=32100 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\tmp\n1e5\system32\ntsrv.exe
+timeout-ms=40000
+milestone-input=0 milestone-waits=0 milestone-wait-ms=0
+window-key-message-count=0 window-enter-count=0
+scripted-console-input=none
+console-mouse-mode-observed=no
+console-mouse-input=none
+fixed-system-root=O:\tmp\n1e5\tests
+fixed-system-root-chars=17
+fixed-system-root-short-chars=17
+fixed-system-root-short=O:\tmp\n1e5\tests
+image-identity=unavailable

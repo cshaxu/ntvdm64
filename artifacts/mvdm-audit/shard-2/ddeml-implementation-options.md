@@ -132,3 +132,49 @@ No intercomponent control channel or independent scheduler is added.
    from the mirrored source, and use classic DDE tests only for their actual
    covered message/alias behavior. No current runtime result or feasibility
    pass is claimed by this note.
+
+
+## Initial loader-probe attempts: invalid, not product evidence
+
+An independent NE probe and a staged runner were created in this shard. The
+first PowerShell 5 attempt failed in the test harness before launch because
+`ProcessStartInfo.ArgumentList` was unavailable. Under PowerShell 7, both
+missing-DLL and application-local original-DLL attempts timed out without a
+report; these are not product failures or DDEML observations. A subsequent
+no-DLL-call baseline also timed out. Static NE review found the probe had
+incorrectly left the module count at two despite one import, and incorrectly
+set initial SS to code segment 1 instead of data segment 2. The earlier
+modules-count and baseline output are therefore invalid. The source now
+contains both structural corrections, and the runner explicitly checks guest
+exit; the corrected probe had not yet been rerun at that checkpoint. No guest/product bytes were
+changed. Observer logs are test data, not success receipts. The retained
+`invalid-ne-absent.timeout-live.txt` and `invalid-ne-w31.timeout-live.txt`
+are snapshots from those malformed-NE attempts; they are not observations
+of the corrected runs.
+
+
+## Corrected loader probe: bounded execution evidence
+
+After the structural fixes, the independently authored NE probe was parsed as
+two segments, one KERNEL import, CS=1, SS=2 and automatic data segment=2.
+The no-load baseline, SHA-256
+`13EC02FD17B0D6DB236B901C5076D67DFD8F8571DF9B61B98A8E8365F253D8E3`,
+exited zero and wrote its empty control record. The separate dynamic loader
+build, SHA-256
+`CA46933B4D6748155073A760B67F774C5D5A88676F4B00C9B6815966F82B6E78`,
+produced these isolated noninteractive results, each exiting zero:
+
+| Input | Actual observation |
+| --- | --- |
+| No DDEML in staged app or system directory | LoadLibrary returned 2; no module or export was obtained. |
+| Unmodified Win3.1 DDEML, app-local | LoadLibrary succeeded; GetModuleFileName returned the staged app-local DDEML path, whose SHA-256 was `6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B`; ordinal 2 resolved. |
+| Unmodified prebuilt OpenNT debug DDEML, app-local | LoadLibrary succeeded; returned app-local file SHA-256 `4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443`; ordinal 2 resolved. |
+
+Input identities, candidate worker/provider hashes, observer hashes, paths and
+all exit values are in `ddeml-module-path-evidence.json`; the runner copied
+the unmodified source bytes into disposable test stages, which were removed
+afterward. This proves only module loading, resolved filename/identity and
+export lookup in these exact staged routes. The probe **does not call**
+DdeInitialize, establish an instance, process a DDE transaction or verify
+task/callback lifetime. It does not establish actual O:/winnt default-path
+behavior for arbitrary applications, or justify activating WDD32 thunks.
