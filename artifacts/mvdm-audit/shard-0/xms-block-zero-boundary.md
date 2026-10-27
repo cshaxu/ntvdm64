@@ -144,3 +144,19 @@ The actual guest observation is consistent with this object code, but does
 not establish that exact object produced the release behavior. The correct
 zero-size XMS handle/lock contract and a safe original-compatible value still
 require separate evidence; do not infer valid memory or claim corruption.
+
+## Selected function compared with published image
+
+`xms-release-object-compare.py` verifies the recorded cached x86 COFF object
+and package-c NTVDM SHA-256 identities, locates the 83-byte object section
+disassembled as `_xmsAllocBlock`, and compares its bytes to executable PE
+sections with only its seven 4-byte COFF relocation fields masked. Exactly
+one match occurs at published-image file offset `0x1540b0`. This ties the
+observed zero-branch machine-code sequence to the published executable far
+more closely than the previously available nonmatching map: the retained
+register/stack-slot read and branch instructions themselves match. The
+comparison does not establish the correctness of relocated call targets, a
+complete build provenance, the value of the stack slot in a particular run,
+or whether the returned address violates the XMS zero-size lock contract.
+The real guest service-02 DX=0 trace and observed lock-address variation are
+separate observations above. No product executable was modified.
