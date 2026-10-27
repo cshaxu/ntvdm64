@@ -1,18 +1,18 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 4352,
+    "pending": 4350,
     "partial": 205,
-    "excluded": 127
+    "excluded": 129
   },
   "unique_and_partition_verified": true,
   "live_source_hash_drift": [
     {
       "relative_path": "README.md",
       "frozen": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
-      "current": "C2955505A4FAFAD5DC15337737044F652B1BD36851722565004BF32EFA76239E"
+      "current": "4A9B2729AF1C6E2F80BD0318C91A407075D01A2AB7E9B58B7D173CD8A4900028"
     }
   ],
   "complete": false,
-  "note": "pending remains unresolved; external audit relevance not reconciled"
+  "note": "pending remains unresolved; external audit relevance not reconciled; README drift includes divergence-registry metadata corrections"
 }

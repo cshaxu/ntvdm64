@@ -1594,9 +1594,9 @@ softpc.new/base/ccpu386/zfrsrvd.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/comms/com.c,3,pending,shard-3/file-review.csv
 softpc.new/base/comms/makefile,0,pending,shard-0/review.csv
 softpc.new/base/comms/obj/_objects.mac,2,pending,shard-2/file-audit.csv
-softpc.new/base/comms/obj/i386/com.obj,1,pending,shard-1/file-audit.csv
+softpc.new/base/comms/obj/i386/com.obj,1,excluded,shard-1/file-audit.csv
 softpc.new/base/comms/obj/i386/comms.lib,0,pending,shard-0/review.csv
-softpc.new/base/comms/obj/i386/printer.obj,1,pending,shard-1/file-audit.csv
+softpc.new/base/comms/obj/i386/printer.obj,1,excluded,shard-1/file-audit.csv
 softpc.new/base/comms/obj/i386/printer_.obj,3,pending,shard-3/file-review.csv
 softpc.new/base/comms/obj/i386/prt_scrn.obj,3,pending,shard-3/file-review.csv
 softpc.new/base/comms/obj/i386/rs232_io.obj,2,pending,shard-2/file-audit.csv

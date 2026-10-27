@@ -219,7 +219,7 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `D4CFB141680CFC23A2C5EDB700F09181991B52796310668CAC46973090ACBA6A`.
+- Current `file-audit.csv` SHA-256 `2AFA278658493FD2F4BA99F73362F36FC56B0E2A3811E0DEAFC969B1F22A4D48`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
@@ -246,4 +246,6 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 
 `historical-wow-objects.md` records 25 retained PE-i386 objects excluded only as selected product inputs after frozen hash and three-target input-closure checks. Source capability remains independent. After this checkpoint shard-1 has 1182 rows: 1095 pending, 48 partial, 39 excluded by audit_status; one pre-existing MIPS row has pending-evidence reporting_class despite excluded audit_status.
 
-`video-deviation-family-audit.md` records three actual VGA/Video7 diff families, original-line similarity only, selected branch and bounded evidence gaps. Current `selected-diff-register-audit.csv` SHA-256 `288FD218831711F418F93E442D888445A955313857AB2382D7941B404B7D1E28`.
+`video-deviation-family-audit.md` records three actual VGA/Video7 diff families, original-line similarity only, selected branch and bounded evidence gaps. Current `selected-diff-register-audit.csv` SHA-256 `E3702506056A1BDF9E2D6BEE12177BDAE8C918CB95BB266EF877B12CCAA9A327`.
+
+`comms-device-family-audit.md` reconciles BOP14 serial divergence and historical CTS/loopback evidence, original comment-only print-screen source, and two retained object inputs excluded.
