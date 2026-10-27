@@ -1,0 +1,8 @@
+{
+  "observation": "Observe only explicit creation failure branches; preserve arguments, return and last error; normal SetLastError success paths are unchanged",
+  "kind": "diagnostic-only",
+  "guestChanged": false,
+  "normalProviderSha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "publishable": false,
+  "productionProviderChanged": false
+}

@@ -28,6 +28,8 @@ and real guest/device proof remain open. This audit changed no runtime image.
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
 passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;
 accepted-baseline controls pass. It is not published or qualified for release.
+The [failure-only observer](../../artifacts/mvdm-audit/creation-negative-only-review.md)
+passes without reproducing the rejection; this is inconclusive, not a fix.
 
 ## Active Packet
 

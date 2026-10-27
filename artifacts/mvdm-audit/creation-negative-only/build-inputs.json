@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-negative-only\\error_observation.h",
+    "Hash": "3B1D8D709F78BBB0143C81260B04F4F6D2820CAAA86A4CC9D5E89162CDA83E36"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-creation-negative-only.ps1",
+    "Hash": "DF4A78DC3D6C4517574C6A3D6A4CE6FF0868E49540C41A6862CC4507E209EEE7"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-negative-only\\WOW32.DLL",
+    "Hash": "22854167535EB8339A8D41710E37F7BD9B953CE273C5B0D414FF4B8D543390E9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+    "Hash": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+  }
+]

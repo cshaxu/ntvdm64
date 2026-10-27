@@ -1,0 +1,135 @@
+{
+  "kind": "diagnostic-only",
+  "publishable": false,
+  "guest_changed": false,
+  "production_source_changed": false,
+  "installed_package_changed": false,
+  "records": [
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-series-results.json",
+      "file": "diagnostic-series-results.json",
+      "sha256": "2D4E615E8B23FDB7266AFEBFDE0C18C44A37FAD1F43725CB337DD4BECAFC76A0"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-series-owner.json",
+      "file": "diagnostic-series-owner.json",
+      "sha256": "FFED7F1A2AD2D531A934E40C0DA5B8BD69C8F1EF4FD0E42046992F8166478169"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r2\\probe.txt",
+      "file": "diagnostic-provider-r2.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r3\\probe.txt",
+      "file": "diagnostic-provider-r3.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-build-r4-owner.json",
+      "file": "cpl-build-owner.json",
+      "sha256": "B511CA7D29784A583BA09642743DD7F9EFBB2453BD4BF79A3E42C7396B654DE5"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4\\result.json",
+      "file": "cpl-kind.json",
+      "sha256": "F4C187E199452B1624EBC7AF5995091A8DEAC6250F300D74639A91CD7C0B1A78"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4\\inputs.json",
+      "file": "cpl-inputs.json",
+      "sha256": "E896B7B205B3DA829C571A918CE73990ABD2ED8533CDCF8B20633B5F9E1FF401"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4\\normal-inputs.json",
+      "file": "cpl-normal-cache-inputs.json",
+      "sha256": "C412188F476BF38390C0881CD8635DEB56C84AFE122A4ED495FBFFA803B4B64D"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-options-owner.json",
+      "file": "cpl-options-owner.json",
+      "sha256": "3363A3122D1596A32FDFB6366C2137FF82F856690834AB5924CEBE91DBE0D0A6"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-options-r1\\probe.txt",
+      "file": "cpl-options-result.txt",
+      "sha256": "5FAB01243BEA7744F2870C975D29A6D77FA9C6EB31DF31A0F846BCB75629A83A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-build-owner.json",
+      "file": "page-domain-build-owner.json",
+      "sha256": "03AD4EBDB6DEFAE703123FF38AE1931111DE7A89E9D6C7FCA802760E0A38E3A2"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic\\result.json",
+      "file": "page-domain-kind.json",
+      "sha256": "2BA979AED0165DE8B21C42C5AFBC7B4EB412FEDA4095AAE94E632091ABAF8086"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic\\inputs.json",
+      "file": "page-domain-inputs.json",
+      "sha256": "2CE3E682BDB71052D547A331B27A1C174854EDF26B789396E8FD34F02807164A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic\\normal-inputs.json",
+      "file": "page-domain-normal-cache-inputs.json",
+      "sha256": "B2683B0997518DABBBD5AFD675C23BD0F6AA8A0E87DE618DFCEED363C7B41FE2"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-options-owner.json",
+      "file": "page-domain-options-owner.json",
+      "sha256": "774D03009086469ABF8A045D1C760A0D8A752D895717300349C13899ABC6AC3A"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-options-r1\\probe.txt",
+      "file": "page-domain-options-result.txt",
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-cpl-comparison.ps1",
+      "file": "build-cpl-comparison.ps1",
+      "sha256": "22BD9C2F1D0CFA76A3C4AF2D199431EBE739914BEFFD0623099F85292421D275"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-cpl-options.ps1",
+      "file": "run-cpl-options.ps1",
+      "sha256": "027897FAA88EF08D23AE69BBBBF5DD88284FC9194A2F84633236DB8D4B30C926"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-page-domain-diagnostic.ps1",
+      "file": "build-page-domain-diagnostic.ps1",
+      "sha256": "FC71448D5B99BEECBE459060BE3664DF4482408D19151CF22AF9069ADBF47D89"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-page-domain-options.ps1",
+      "file": "run-page-domain-options.ps1",
+      "sha256": "198B0D29346709BD9889C664382EFC137A9C1B72236EF12E261311AE31FE45B3"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-diagnostic-series.ps1",
+      "file": "run-diagnostic-series.ps1",
+      "sha256": "8008A77C24F0626233DCE9840094D697C86581F3DD032301B68728CC579FCAB8"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4-package\\product-system32-manifest.json",
+      "file": "cpl-package-inputs.json",
+      "sha256": "07026D3F26CDA9982671DC97F38207E9F41A1CB0510B9D351EE709B1CB35A41E"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4-package\\diagnostic-manifest.json",
+      "file": "cpl-package-kind.json",
+      "sha256": "66EC63479CD9E0A14118BE593260823CC6D90E6F7D64200300FC9BEEEFACFEA2"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic-package\\product-system32-manifest.json",
+      "file": "page-domain-package-inputs.json",
+      "sha256": "E9542A25067EF2D0FD0EAD3EC7B5EC85C5CFC603986B347090A0A95309C512F2"
+    },
+    {
+      "source": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic-package\\diagnostic-manifest.json",
+      "file": "page-domain-package-kind.json",
+      "sha256": "BDA67373A787DE7F11D3A02DA22E7797F160CB14BFB79537F1FA0AD063EFF36D"
+    }
+  ],
+  "scope": "Recorded comparative observations, no root-cause or correction claim"
+}

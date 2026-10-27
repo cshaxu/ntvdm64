@@ -211,3 +211,20 @@ coverage; no row is promoted to full and no new runtime pass is claimed.
 [Exact-byte evidence storage](evidence-byte-preservation.md) records the
 core.autocrlf discrepancy and the narrow byte-preservation rule. It changes
 Git's storage of captured audit bytes, not product or guest behavior.
+
+The [diagnostic follow-up](candidate-runtime-followup-review.md) records the
+CPL ablation failure and additional error-only observation passes. None
+qualifies the production candidate or changes the retained failure verdict.
+
+The next native proposals for [shard 1](shard-1/native-pending-followup-2.md),
+[shard 2](shard-2/native-pending-followup-2.md) and
+[shard 3](shard-3/native-pending-followup-2.md) cover 180 additional paths.
+Their [identity check](native-next-proposal-verification.json) does not merge
+the 47 partial/one file-role proposals or accept functionality. The
+[selected slave-BIOS EOI finding](shard-0/slave-bios-eoi-source-review.md) is
+also a source-level S13 obligation, not a runtime diagnosis or patch.
+
+The [failure-only creation observation](creation-negative-only-review.md)
+removes success-path error interception and passes one isolated Options
+observation. No failure branch was captured; the production failure remains
+unresolved and the diagnostic is not publishable.

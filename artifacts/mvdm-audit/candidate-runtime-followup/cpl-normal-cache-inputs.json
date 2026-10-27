@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\modesw.obj",
+    "Hash": "560045D98BDAA5D2F210223383A44F53B43843ACB283D340F27B4807D1BF612D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-mvdm-dpmi32.lib",
+    "Hash": "6F9430DF15050AEB8684EB59063B4A30F3DFD9330378B7611695EAB7B5DC5905"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.lib",
+    "Hash": "951176A57C033FA7A99F9741C4C970CE485D79EF42C7D56E8D72DAC1848CC257"
+  }
+]

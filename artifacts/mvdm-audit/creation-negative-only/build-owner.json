@@ -1,0 +1,8 @@
+{
+  "started": "2026-10-27T22:33:04.0539592Z",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\negative-build.stderr.txt",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\negative-build.stdout.txt",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\prepare-negative-diagnostic.ps1",
+  "pid": 30580,
+  "script_sha256": "DC95CFAE950AAB2BAA255C3146AC5AC108B4DD26D1236BE4978F57AE302898F7"
+}

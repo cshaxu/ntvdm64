@@ -1,0 +1,8 @@
+{
+  "kind": "diagnostic-only",
+  "packageId": "d1be0f65-adb4-4ee4-ae16-f301ad3f3c90",
+  "providerSha256": "FF5C29019B310885191B5ABD4284510AFFA9205851A7AF75DBC2A3DD02C67350",
+  "publishable": false,
+  "guestChanged": false,
+  "normalCandidateProviderSha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+}

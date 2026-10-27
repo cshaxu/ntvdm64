@@ -1,0 +1,11 @@
+{
+  "pid": 15188,
+  "started": "2026-10-27T21:48:56.2547212Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-page-domain-options.ps1",
+  "script_sha256": "198B0D29346709BD9889C664382EFC137A9C1B72236EF12E261311AE31FE45B3",
+  "exit": 0,
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/page-domain-options.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/page-domain-options.stderr.txt",
+  "publishable": false,
+  "finished": "2026-10-27T21:49:11.7290495Z"
+}

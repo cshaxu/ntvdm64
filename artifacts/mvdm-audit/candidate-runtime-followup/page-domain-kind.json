@@ -1,0 +1,8 @@
+{
+  "guestChanged": false,
+  "kind": "diagnostic-only",
+  "variable": "Only rejection paths of page_domain_publish_handle log source line and current host state; all state and returns preserved",
+  "comparisonTo": "current source",
+  "publishable": false,
+  "productionCacheChanged": false
+}

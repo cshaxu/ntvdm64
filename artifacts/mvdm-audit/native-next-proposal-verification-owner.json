@@ -1,0 +1,9 @@
+{
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\followup-final.stderr.txt",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\followup-final.stdout.txt",
+  "checker_sha256": "4FA9C4B114BDAFC1210CF2483242D3590C220229B58894051002EA57B0AD2140",
+  "pid": 29580,
+  "started": "2026-10-27T22:35:56.0098505Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\verify-followup-delivery.ps1",
+  "script_sha256": "021EE29CE41D08F60DA2DC196207F110A4B1A448D6038BE72EDF92AC7AE41486"
+}

@@ -32,3 +32,13 @@ accepted capability can reuse applicable evidence; a file's presence or
 source identity alone is not execution or behavioral proof. Preserve guest
 immutability, approved host boundaries, and the user's minimum-diff policy.
 Unrelated project-wide minimization remains in the next queue package.
+
+S10's [native-source checkpoint](../../../artifacts/mvdm-audit/native-source-role-review.md)
+retains per-file S11 execution/translation and S13 BIOS obligations without
+accepting new runtime behavior. The separate
+[slave-BIOS EOI source finding](../../../artifacts/mvdm-audit/shard-0/slave-bios-eoi-source-review.md)
+belongs to S13 and still requires an actual PIC-state witness before repair;
+it is not the already delivered PIC reinitialization correction. The held
+SOL Options candidate failure remains an unclassified runtime invariant
+failure until its cause is proved, rather than being assigned to a later
+control stage merely from the application that triggers it.

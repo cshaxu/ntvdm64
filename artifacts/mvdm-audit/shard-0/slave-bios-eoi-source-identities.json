@@ -1,0 +1,34 @@
+{
+  "kind": "source-review-not-runtime-proof",
+  "records": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "Hash": "22079CB4C1E033F1D33246DA6F60F8D5E1BBA5C925EE3E9E5EA3C3FD756C7368"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "Hash": "A8345E88DB25332BDF008BDC730FFA15BDC6110ECF1A6C54ED7E59C95CA7085B"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\ios.h",
+      "Hash": "AE58169DE7AA969000F7CF4374D3D850B55D352C3D4C6EDCF52DEC0E985620A4"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "Hash": "A2C983FEEDAF8E121D0F47A1EC12C019EB826F3B8AC75655C882D6B4B1C429EA"
+    },
+    {
+      "Path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "Hash": "22079CB4C1E033F1D33246DA6F60F8D5E1BBA5C925EE3E9E5EA3C3FD756C7368"
+    },
+    {
+      "Path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "Hash": "22079CB4C1E033F1D33246DA6F60F8D5E1BBA5C925EE3E9E5EA3C3FD756C7368"
+    }
+  ],
+  "changed_source": false,
+  "changed_guest": false,
+  "followup_stage": "S13",
+  "route": "Original BIOS BOP72-74 and76-77 -> D11_int; SWPIC odd-port OCW1 semantics",
+  "map": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+}

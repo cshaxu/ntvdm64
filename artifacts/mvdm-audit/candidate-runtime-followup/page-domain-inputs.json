@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c",
+    "Hash": "A9135720530ABF9DB022CBB0DF261B3ED05B09F7F6D054BA0555A86E3CDFAE81"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic\\mvdm_softpc_wow_page_domain.c",
+    "Hash": "5C656B3E29C1B29B906388CBD18C1324935EFC0B383157B42D193DB8EDD85827"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-page-domain-diagnostic.ps1",
+    "Hash": "FC71448D5B99BEECBE459060BE3664DF4482408D19151CF22AF9069ADBF47D89"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\page-domain-diagnostic\\ntvdm.exe",
+    "Hash": "8EFAC26C9CF0775055C638D80DB304C8E0C9F27CF907953097A9C343FAAD6BD8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+    "Hash": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+  }
+]

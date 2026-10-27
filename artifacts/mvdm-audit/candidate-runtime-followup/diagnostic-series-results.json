@@ -1,0 +1,26 @@
+[
+  {
+    "name": "diagnostic-options-r2",
+    "pid": 17480,
+    "started": "2026-10-27T21:41:16.5158117Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-diagnostic-package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r2",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r2.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r2.stderr.txt",
+    "script_sha256": "57D67920A198949860DCCC8C458D128C69C705A7C4996DC9D8D3B62776C30801",
+    "package_manifest_sha256": "3A2737F401B466ED6AEEBB7FDCC39440CD15E489C23862B27FE6E77F498C09ED",
+    "exit": 0,
+    "finished": "2026-10-27T21:41:29.8625627Z"
+  },
+  {
+    "name": "diagnostic-options-r3",
+    "pid": 7784,
+    "started": "2026-10-27T21:41:29.8737284Z",
+    "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\creation-diagnostic-package -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r3",
+    "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r3.stdout.txt",
+    "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\diagnostic-options-r3.stderr.txt",
+    "script_sha256": "57D67920A198949860DCCC8C458D128C69C705A7C4996DC9D8D3B62776C30801",
+    "package_manifest_sha256": "3A2737F401B466ED6AEEBB7FDCC39440CD15E489C23862B27FE6E77F498C09ED",
+    "exit": 0,
+    "finished": "2026-10-27T21:41:42.4366547Z"
+  }
+]

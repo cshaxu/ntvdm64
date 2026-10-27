@@ -1,0 +1,8 @@
+{
+  "comparisonTo": "35424a126^",
+  "productionCacheChanged": false,
+  "publishable": false,
+  "guestChanged": false,
+  "kind": "diagnostic-only",
+  "variable": "Only the two added real-mode CPL assignments removed; complete file equals pre-354 source"
+}

@@ -1,0 +1,28 @@
+{
+  "result": "pass",
+  "paths": 180,
+  "tables": [
+    {
+      "path": "shard-1/native-pending-followup-2.csv",
+      "sha256": "58ACF7DBDEB7EB68DE277E20BFB73DA60B05D9D14754CB45483D974077253EFB"
+    },
+    {
+      "path": "shard-2/native-pending-followup-2.csv",
+      "sha256": "C2CB6C0364A5D4158F5454CBD368BAF31761153B3BC3749752065C78E779DAA3"
+    },
+    {
+      "path": "shard-3/native-pending-followup-2.csv",
+      "sha256": "651A01EDED6865DDF17A9773444F530D22779F2B980992E11DA92FD710C488B0"
+    }
+  ],
+  "proposal_counts": {
+    "partial": 47,
+    "pending": 132,
+    "excluded-file-role-only": 1
+  },
+  "ledger_changed": false,
+  "capabilities_accepted": false,
+  "diagnostic_inputs_checked": 35,
+  "candidate_qualified": false,
+  "scope": "Proposal source identity, status separation and recorded diagnostic outcomes; not behavior acceptance"
+}

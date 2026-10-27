@@ -1,0 +1,10 @@
+{
+  "pid": 28496,
+  "started": "2026-10-27T21:43:55.6295455Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-cpl-comparison.ps1",
+  "script_sha256": "22BD9C2F1D0CFA76A3C4AF2D199431EBE739914BEFFD0623099F85292421D275",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/cpl-build-r4.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation/cpl-build-r4.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:44:14.2776768Z"
+}

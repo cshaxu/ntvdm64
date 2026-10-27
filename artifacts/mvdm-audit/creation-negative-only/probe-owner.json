@@ -1,0 +1,8 @@
+{
+  "script_sha256": "FB745D7D17D9DAA78311872F5DE21ED47012672DF7295E0F91403C2A65184EE2",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\negative-options.stdout.txt",
+  "started": "2026-10-27T22:33:38.9848106Z",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\negative-options.stderr.txt",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\run-negative-only-options.ps1",
+  "pid": 31632
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\modesw.c",
+    "Hash": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4\\modesw.c",
+    "Hash": "4BBFF6CB6021A4839B6616169529BCCA76510F98B82CA9665F03637E4654ED22"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\build-cpl-comparison.ps1",
+    "Hash": "22BD9C2F1D0CFA76A3C4AF2D199431EBE739914BEFFD0623099F85292421D275"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\cpl-comparison-r4\\ntvdm.exe",
+    "Hash": "35ED396DE9A39DB89BFD0729A9FD4E9E230F74A8A6A184040DE0A5AFD8FE5836"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+    "Hash": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+  }
+]

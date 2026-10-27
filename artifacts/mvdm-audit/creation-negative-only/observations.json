@@ -1,0 +1,56 @@
+{
+  "failed_branch_records": 0,
+  "ordinary_candidate_qualified": false,
+  "result": "pass",
+  "trace": {
+    "bytes": 22463,
+    "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\negative-only-options-r1\\windows.txt",
+    "sha256": "0AAAB193C83230331F5286591E9282EC054B88B50618B7B223981C4B9CCC8D0B"
+  },
+  "guest_changed": false,
+  "publishable": false,
+  "kind": "diagnostic-only",
+  "records": [
+    {
+      "sha256": "DF4A78DC3D6C4517574C6A3D6A4CE6FF0868E49540C41A6862CC4507E209EEE7",
+      "file": "build.ps1"
+    },
+    {
+      "sha256": "FB745D7D17D9DAA78311872F5DE21ED47012672DF7295E0F91403C2A65184EE2",
+      "file": "run.ps1"
+    },
+    {
+      "sha256": "C750C31214740B7730D964DB642F7DDC37D978123B26367BFE71F1BB7C2BDE5D",
+      "file": "build-owner.json"
+    },
+    {
+      "sha256": "D07836967398017D82577FA7C2470738557DCBDE2A7CD4D3E3DF190DDCC1E0E5",
+      "file": "build-exit.json"
+    },
+    {
+      "sha256": "7389C87B5D49645810FFC6A3C59FD40D63A8E1B8E225D2ECD0CFD50D9B2FC22E",
+      "file": "probe-owner.json"
+    },
+    {
+      "sha256": "FC8BDA1A74497668B62689F94E16B573E77D695A82A79B150C56515086FCA617",
+      "file": "probe-exit.json"
+    },
+    {
+      "sha256": "B22752EF28B10FCA13803A1835A3391EFF76D3E33E825B15FBF0E3D9610A077F",
+      "file": "build-result.json"
+    },
+    {
+      "sha256": "5DCB78F234FB01D525CDDB0B7249B491DD562219A7C69E4C96C529B9D259B7F1",
+      "file": "build-inputs.json"
+    },
+    {
+      "sha256": "E398438684B366612C1D26BF48CFC27B738B6E23CC9F3ADBCEE3046864A29F0C",
+      "file": "package-inputs.json"
+    },
+    {
+      "sha256": "0D5A7258F767F73250F57B6A2763C8D5626F335D3C076BD10AE2F4F565619B98",
+      "file": "probe-result.txt"
+    }
+  ],
+  "production_source_changed": false
+}
