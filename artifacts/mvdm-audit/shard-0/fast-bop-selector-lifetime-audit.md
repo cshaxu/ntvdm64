@@ -1,0 +1,46 @@
+# CPU40 FastBOP selector lifecycle boundary
+
+The selected `dpmi32/dpmimscr.c` differs from the original portable RISC
+failure path by first asking `mvdm_softpc_fast_bop_prepare` for an endpoint.
+On success it returns ES:BX, and otherwise retains zero ES:BX/DX; original
+DPMI-in-use/no-longer-in-use interrupt hook calls remain. The selected x86
+map attributes these entrypoints to `original-mvdm-dpmi32:dpmimscr.obj`.
+DIV-310 names the CPU40 adaptation. Original x86 `DpmiGetFastBopEntry` instead
+obtains the native monitor endpoint; importing that host CS:IP into a guest
+is not a valid restoration.
+
+The adapter reserves one currently non-present CPU40 LDT slot, publishes a
+present descriptor via `DpmiSetWowLdtEntry`, stores its selector in a static
+variable, and uses that cached numeric value plus offset for redirect. The
+selected `CALLF` checks the adapter redirect before ordinary descriptor fetch.
+Source-wide search found no writer that clears or changes the static selector
+after initial assignment. Separately, the INT 2Ah compatibility branch passes
+guest-supplied selector and descriptor words to `DpmiSetWowLdtEntry`, which
+accepts an in-range not-present descriptor and writes the selected LDT slot.
+These facts do not establish that an ordinary guest frees or overwrites the
+specific reserved slot during the worker lifetime.
+
+An x86 fixture derived from the existing `fast_bop_mode_fixture.c` links the
+cached production adapter object SHA-256
+`65B1B6B0980E3E45457C9BAB0F942C81C2AC409010393CB6E71AB1553CCF3243`.
+After successful `prepare`, it clears the fixture-owned descriptor words and
+calls the real `mvdm_softpc_fast_bop_redirect` with the same selector and
+offset. The process exits 0 and prints `STALE_FAST_BOP_SELECTOR_STILL_REDIRECTS`.
+Fixture source SHA-256
+`5F06F91BBF646B8313C0349A346D82521B2EFCE9D7A6AF3CC33529BE57BD3539`;
+the executable hash is
+`50848F49F8975ADA8DE023F4758A5A3819A6D4762B85D6B299F9595FA2E65B7E`.
+This proves adapter behavior under a controlled changed LDT; its LDT setter,
+CPU and SAS are mocks. It does not execute guest INT 2Ah, CALLF, an actual
+descriptor fault, or an actual task/worker reset. No guest or product was
+modified. Existing compiler warnings concern unused mock parameters.
+
+S11's identity/lifecycle recovery group should first establish whether the
+guest's original selector allocator can publish, free or reuse this endpoint,
+including task exit and same-worker restart. If reachable, compare original
+x86 monitor ownership and required fault/callback semantics before choosing a
+single authoritative reservation/lifetime design; do not merely guard the
+test fixture or make the adapter silently intercept a reused guest selector.
+Verify the real guest transition, failed reservation, nested callbacks and
+teardown. This is a demonstrated local state-lifetime risk, not yet a proven
+user-visible crash or authorization to change compatibility semantics.

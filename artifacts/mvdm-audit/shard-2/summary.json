@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "E99D3F8F3D117AF94218B68ECD7AC9D8D40A2B912042C08E830DB72BADCFFDE9",
+  "output_sha256": "06C2483A4344219C47841C5EA709F675007480F1ACF68FB954CEE1E564D83955",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -153,5 +153,6 @@
   "historical_wow_objects": "historical-wow-objects.md; 10 current-only retained object inputs excluded; source capability unaffected",
   "wow_gdi_review": "wow-gdi-text-font-metafile-review.md; three selected source rows remain pending",
   "command_state_pif_redirection": "command-state-pif-redirection-review.md; three modified source rows remain partial",
-  "dem_owner_review": "dem-initialization-dispatch-file-review.md; three changed selected rows remain partial"
+  "dem_owner_review": "dem-initialization-dispatch-file-review.md; three changed selected rows remain partial",
+  "dpmi_exception_mode_xmem": "dpmi-exception-mode-xmem-review.md; three selected changed rows remain partial"
 }
