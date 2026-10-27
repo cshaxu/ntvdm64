@@ -7,14 +7,22 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-205 partial (all raw mirror differences), 401 excluded (documented profile,
-source roles or unused retained objects) and 4,078 pending. None is classified
+224 partial (205 existing source-difference rows and 19 partially integrated
+build manifests), 501 excluded (documented profile, historical recipe,
+source roles or unused retained objects) and 3,959 pending. None is classified
 full in this pass. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
+
+The [build-carrier review](build-carrier-review.md) distinguishes configuration
+reads from Ninja execution dependencies. Its 100 additional exclusions concern
+historical recipe files only, never the capabilities of their source members.
+The [19 partial build carriers](partial-build-carriers.csv) have an explicit
+non-numeric estimate basis; executable code-retention measurements for the
+existing 205 source rows are unchanged.
 
 The live hash sweep records divergence-registry changes in
 `src/mvdm/README.md` and a concurrent uncommitted `nt_bop.c` change; see

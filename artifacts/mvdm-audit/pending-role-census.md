@@ -5,7 +5,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | Frozen role | Pending paths |
 | --- | ---: |
 | `immutable-guest-or-guest-build-input` | 2613 |
-| `declaration-or-build-carrier` | 856 |
+| `declaration-or-build-carrier` | 737 |
 | `selected-product-source` | 292 |
 | `retained-build-artifact` | 0 |
 | `unselected-host-source-requires-s2-disposition` | 102 |
@@ -17,7 +17,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 
 | Frozen product selection | Pending paths |
 | --- | ---: |
-| `not-product-selected` | 3786 |
+| `not-product-selected` | 3667 |
 | `ntvdm-product` | 234 |
 | `wow32-product` | 45 |
 | `vdmredir-product` | 13 |

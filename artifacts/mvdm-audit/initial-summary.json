@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 4078,
-    "partial": 205,
-    "excluded": 401
+    "pending": 3959,
+    "excluded": 501,
+    "partial": 224
   },
   "unique_and_partition_verified": true,
   "live_source_hash_drift": [
