@@ -44,3 +44,28 @@ test fixture or make the adapter silently intercept a reused guest selector.
 Verify the real guest transition, failed reservation, nested callbacks and
 teardown. This is a demonstrated local state-lifetime risk, not yet a proven
 user-visible crash or authorization to change compatibility semantics.
+
+## Original WOW selector-allocation source trace
+
+The OpenNT `wow16/kernel31/ldboot.asm` calls `LDT_Init` before
+`WOWFastBopInit`. `3protect.asm::LDT_Init` builds a free-selector list using
+the `gdtdsc` guest table, and `get_sel` subsequently consumes that list.
+For an external `AllocSelector` caller, the WOW branch initializes its
+selected guest shadow entry and calls `WOW_DPMIFUNC_0C` to publish it to
+the system LDT. Meanwhile the CPU40 adapter chooses its endpoint by scanning
+the separate CPU40 LDT shadow and only publishes to that shadow via
+`DpmiSetWowLdtEntry`; that routine explicitly does not update the DOSX source
+table. Thus source-level endpoint reservation is not visibly reflected in
+the already-built `gdtdsc` free list. If the chosen index is in that list,
+ordinary later selector allocation can publish the same index, while the
+cached FastBOP selector continues to be recognized ahead of normal CALLF
+descriptor checks. This makes selector reuse a concrete conditional source
+path, not just a hypothetical reset concern.
+
+The actual endpoint index and guest table limit, the list's contents at that
+index, and whether the immutable W31 runtime binary follows this exact OpenNT
+guest source are not established by this trace. The host chooses from the
+highest free shadow index, so ordinary workloads may not reach it. Confirm
+those conditions in a real guest observation before asserting an observed
+collision or choosing a guest-allocation fix. Preserve the independently
+owned guest source and binaries unchanged.
