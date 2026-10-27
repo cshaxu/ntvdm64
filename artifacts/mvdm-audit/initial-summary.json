@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2284,
-    "excluded": 2120,
+    "pending": 2256,
+    "excluded": 2148,
     "partial": 228,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Guest role checkpoints exclude historical inputs only, not guest capabilities. The Win16 extension checkpoint adds 103 exact-original guest source/resource roles; neither it nor previous source-role checkpoints establishes guest execution. The two partial export-source records remain open. Source provenance, interface names and behavioral recovery remain distinct; live candidate drifts are not runtime acceptance."
+  "note": "Guest role checkpoints exclude historical inputs only, not guest capabilities. The library checkpoint adds 27 historical guest archive roles and one macro-source role, leaving four unconfirmed guest libraries pending; no guest capability is accepted. The two partial export-source records remain open. Source provenance, interface names and behavioral recovery remain distinct; live candidate drifts are not runtime acceptance."
 }

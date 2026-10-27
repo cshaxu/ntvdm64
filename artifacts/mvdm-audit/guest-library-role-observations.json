@@ -1,0 +1,151 @@
+{
+  "result": "pass",
+  "candidate_count": 28,
+  "archive_count": 27,
+  "macro_source_count": 1,
+  "unresolved": [
+    "dos/v86/lib/oldnames.lib",
+    "dos/v86/lib/slibce.lib",
+    "wow16/lib/cdllcew.lib",
+    "wow16/lib/snocrtdw.lib"
+  ],
+  "original_recipe_inputs": [
+    {
+      "relative_path": "dos/v86/cmd/append/append.asm",
+      "sha256": "1F1538CB6307D8B67EAF46FFA5C3134C15D6FB884225D9FBF1F02046ABFA078D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\append\\append.asm"
+    },
+    {
+      "relative_path": "dos/v86/lib/xmm/makefile",
+      "sha256": "2B0369A11D112C8C5D6C09D11A65A5F3EF0D17CE4D8DF26136D1AFBCB74B705F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\lib\\xmm\\makefile"
+    },
+    {
+      "relative_path": "wow16/rasapi16/makefile",
+      "sha256": "31404923FB8B2BEA3811701BC650D682D4390EE16738AA0EC58418C7D2E484EB",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\makefile"
+    },
+    {
+      "relative_path": "wow16/rasapi16/rasapi16.lrf",
+      "sha256": "715B04F6D64545FDCDAC302002F36657DF9B39600BDF316607CF50F104248D49",
+      "original_path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\rasapi16.lrf"
+    },
+    {
+      "relative_path": "wow16/lib/makefile",
+      "sha256": "8804E8BF3409DF79EEEF188B0487451EA01550E25D709875241AC313F820099A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\makefile"
+    },
+    {
+      "relative_path": "wow16/mciole/makefile",
+      "sha256": "7B7D5350B85A364B0C21B9AB370A33DFA5C792FA88CD411CC686D03269F4EDBA",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\makefile"
+    },
+    {
+      "relative_path": "wow16/ole/server/makefile",
+      "sha256": "040ECF946AE5F0FFBBC946C70637801210FDBFE01533E5CC66D0C85133665009",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\makefile"
+    },
+    {
+      "relative_path": "wow16/commdlg/makefile",
+      "sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\commdlg\\makefile"
+    },
+    {
+      "relative_path": "wow16/ddeml/makefile",
+      "sha256": "8D8A1CBA40DB55B3C43FB97C5624877FC7084559AF568EFEABC6D58E3AFEE582",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\makefile"
+    },
+    {
+      "relative_path": "wow16/write/makefile",
+      "sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\makefile"
+    },
+    {
+      "relative_path": "wow16/write/write.lnk",
+      "sha256": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\write\\write.lnk"
+    },
+    {
+      "relative_path": "wow16/test/hello/makefile",
+      "sha256": "4EF6E86C6089EA05DBC890B379AE822C3A9025FF2E3FADDC886CD96294D7DB3B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\test\\hello\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/display/makefile",
+      "sha256": "C234E06726D09F113BCE364366B704446FB7EBE5E4C549E8F89CCBECBFA50E19",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\display\\makefile"
+    },
+    {
+      "relative_path": "wow16/drivers/keyboard/makefile",
+      "sha256": "54658EB605886A0F11EF8F3D351CF3E04DB0A63152413774CC5CC1637ACA4CF3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\makefile"
+    },
+    {
+      "relative_path": "wow16/mmsystem/makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\makefile"
+    },
+    {
+      "relative_path": "wow16/timer/makefile",
+      "sha256": "3A98A2B07A68CE4BAD5FAC4D592480D6FA77C0CEB14F5F2E2AF692419C5B7112",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\timer\\makefile"
+    },
+    {
+      "relative_path": "wow16/toolhelp/makefile",
+      "sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\makefile"
+    }
+  ],
+  "source_tables": [
+    {
+      "path": "shard-1/guest-library-role-review.csv",
+      "sha256": "0E9076D2AAC69230BA7661107866E5B6E454A6A714747E0674EA0FC5F40CE4A7"
+    },
+    {
+      "path": "shard-2/guest-library-role-review.csv",
+      "sha256": "9B5C7CF787F0D89ABACE86AFF8F91C13104A4CFDD280CDB9FB6E6DA74EE5B30C"
+    },
+    {
+      "path": "shard-3/guest-library-role-review.csv",
+      "sha256": "78FC983764A66A71E748C5D580C34E6BE0E6B6C0D85F5F346CC5CA2E67B26A8C"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-inputs.txt",
+      "sha256": "87E217899970FD26D464DE8693316FD96B485C942CD5BA1E5BFC916AE3B913D4",
+      "kind": "inputs",
+      "graph": "worker",
+      "valid_blocks": null,
+      "lines": 941
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\worker-deps.txt",
+      "sha256": "B0E1045F59CA9D067EE5D240C7FDE7F4372EC663D45061A51D9DD576CE396FDB",
+      "kind": "deps",
+      "graph": "worker",
+      "valid_blocks": 632,
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "kind": "inputs",
+      "graph": "wow32",
+      "valid_blocks": null,
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\guest-source-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "kind": "deps",
+      "graph": "wow32",
+      "valid_blocks": 229,
+      "lines": 15249
+    }
+  ],
+  "format_observations_sha256": "FD6E7D814972E89B6B21609FBF9DDF5C48795FDB49DD6F5DAD29B2AA047E7D85",
+  "format_details_sha256": "92F43466823BB0A3E2EB6B51B90EAEEB70D56729840AA6C516E103002970B5E1",
+  "product_changed": false,
+  "guest_changed": false
+}

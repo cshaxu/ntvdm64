@@ -1,4 +1,4 @@
-"""Reproduce the frozen pending guest-library container observations.
+"""Reproduce the frozen DOS/Win16 guest-library container observations.
 
 Run from the repository root. This inspects retained files only; it does not
 link them, validate dictionary/trailer semantics, or execute guest code.
@@ -7,7 +7,7 @@ import collections,csv,hashlib,json,struct
 from pathlib import Path
 A=Path('artifacts/mvdm-audit');M=Path('src/mvdm')
 def rows(p):return list(csv.DictReader(p.open(encoding='utf-8-sig',newline='')))
-selected=[r for r in rows(A/'combined-initial-status.csv') if r['status']=='pending' and r['relative_path'].lower().endswith('.lib')]
+selected=[r for r in rows(A/'frozen-file-reconciliation.csv') if r['relative_path'].startswith(('dos/v86/','wow16/')) and r['relative_path'].lower().endswith('.lib')]
 assert len(selected)==32
 frozen={r['relative_path']:r for r in rows(A/'frozen-file-reconciliation.csv')}
 out=[];detail=[]

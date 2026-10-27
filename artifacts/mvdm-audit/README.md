@@ -9,9 +9,9 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 228 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records), 2,120 excluded
+records), 2,148 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,284 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,256 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -148,3 +148,8 @@ The [103 extension/core roles](wow16-extension-source-role-review.md) add
 exact guest build edges and recover LIBH's macro-qualified consumer. The
 same review distinguishes dual-purpose metafile code and original ToolHelp
 unimplemented thunks from actual missing product functionality.
+
+The [guest-library role checkpoint](guest-library-role-review.md) resolves
+27 exact-original archives and one macro-source input, retaining four
+unconfirmed library paths. Source membership and runtime behavior remain
+distinct; the format reproducer preserves the full frozen 32-file cohort.

@@ -110,6 +110,22 @@
       "trailer_prefix": ""
     },
     {
+      "relative_path": "wow16/lib/MMSYSTEM.LIB",
+      "page_bytes": 16,
+      "dictionary_offset": 9728,
+      "dictionary_blocks": 7,
+      "segment_attributes": {},
+      "checksum_observations": [],
+      "padding_observations": [
+        {
+          "offset": 9728,
+          "bytes": 0,
+          "nonzero": 0
+        }
+      ],
+      "trailer_prefix": ""
+    },
+    {
       "relative_path": "wow16/lib/cdllcew.lib",
       "page_bytes": 16,
       "dictionary_offset": 281088,
@@ -278,22 +294,6 @@
         }
       ],
       "trailer_prefix": "f2be0ea20101008c06520098065a009a"
-    },
-    {
-      "relative_path": "wow16/lib/MMSYSTEM.LIB",
-      "page_bytes": 16,
-      "dictionary_offset": 9728,
-      "dictionary_blocks": 7,
-      "segment_attributes": {},
-      "checksum_observations": [],
-      "padding_observations": [
-        {
-          "offset": 9728,
-          "bytes": 0,
-          "nonzero": 0
-        }
-      ],
-      "trailer_prefix": ""
     },
     {
       "relative_path": "wow16/lib/olecli.lib",
@@ -530,6 +530,6 @@
       "trailer_prefix": ""
     }
   ],
-  "script_sha256": "495A863CF4E3B598004EEA37087AC6E0D15C152DE328E65E7AE8429790043173",
+  "script_sha256": "39228CD8200AA317A9A8E8DAD0B9A46AC36C1E55BAE2508D910E3C1971151A49",
   "scope": "Read-only framed container observations, not full OMF/dictionary semantics or guest behavior"
 }

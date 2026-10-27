@@ -72,7 +72,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             else:
                 assert original_hash in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256'])
             if proof['status'] == 'excluded':
-                assert proof['role'] == 'historical-guest-build-source-file-only' and current_hash == original_hash
+                assert proof['role'] in ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only') and current_hash == original_hash
+                if proof['role'] == 'historical-guest-library-build-artifact-only':
+                    assert prefix == 'guest-library-role-' and path.lower().endswith('.lib')
             else:
                 assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
                 assert (current_hash != original_hash) == (proof['role'] == 'active-export-declaration-mirror-diff')
@@ -104,6 +106,33 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'guest-library-role-':
+        assert observation['archive_count'] == 27 and observation['macro_source_count'] == 1
+        assert sha(A / 'guest-library-format-observations.csv') == observation['format_observations_sha256']
+        assert sha(A / 'guest-library-format-observations.json') == observation['format_details_sha256']
+        formats = {r['relative_path']: r for r in rows(A / 'guest-library-format-observations.csv')}
+        details = json.loads((A / 'guest-library-format-observations.json').read_text())
+        assert details['result'] == 'pass' and details['paths'] == len(formats) == 32
+        assert details['script_sha256'] == sha(A / 'guest-library-format-observations.py')
+        assert details['nonzero_checksum_observations'] == 0
+        assert set(observation['unresolved']) == set(formats) - set(changed)
+        for path, proof in changed.items():
+            fmt = formats[path]
+            assert fmt['sha256'] == proof['sha256'] and fmt['checksum_nonzero_mismatches'] == '0'
+            if proof['role'] == 'historical-guest-library-build-artifact-only':
+                assert fmt['library_end'] == 'True' and int(fmt['modules']) > 0
+                assert fmt['format'] == 'OMF LIBHDR/module framing/LIBEND/dictionary bounds'
+            else:
+                assert path == 'dos/v86/cmd/append/sysmac.lib' and fmt['modules'] == '0'
+        supplements = {r['relative_path']: r for r in rows(A / 'supplemental-original-provenance.csv')}
+        for record in observation['original_recipe_inputs']:
+            path = record['relative_path']
+            assert sha(Path('src/mvdm') / path) == record['sha256'] == frozen[path]['current_sha256']
+            assert sha(Path(record['original_path'])) == record['sha256']
+            if record['sha256'] not in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256']):
+                source = supplements[path]
+                assert frozen[path]['upstream_origin'] == 'current-only' and source['provenance'] == 'verified-supplemental-original'
+                assert source['source_sha256'] == record['sha256'] and Path(source['source_path']) == Path(record['original_path'])
     if prefix == 'dos-core-source-role-':
         definition = json.loads((A / 'supplemental-export-definition-review.json').read_text())
         assert definition['result'] == 'pass' and definition['template_declared_names'] == 140 and definition['matched_profile_names'] == 138
@@ -143,7 +172,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)
