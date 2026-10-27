@@ -157,3 +157,52 @@ bounded native stack/context reader for the exact worker, preserve dialog
 text and process provenance, and distinguish an independently authored probe
 fault from a genuine original guest DDE path. Do not dismiss the dialog or
 invent a result.
+
+## UUID-isolated GPF, direct thunk control, and captured fault fields
+
+With the published `build/package-uuid/package-c` copied via
+`New-PhysicalRuntimeStage -FreshPackageIdentity`, the separately authored test
+loaded unchanged W31 DDEML (`6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B`).
+Before registration its receipt logged MakeProcInstance callback 17af:00ba.
+The private-desktop timeout observer reported General Protection Fault in
+DDEML 0001:58ef. That NE segment-1 address maps to file offset 0x60ef; bytes
+`ff 5f 04` decode as `call far [bx+4]`. The argument-push neighborhood is
+consistent with a DDE callback but does not prove source lineage or the
+contents of the pointer operand.
+
+The independent `NO_REGISTER_CONTROL` plus `SELF_CALLBACK_CONTROL` binary
+SHA256 `058077E3B9B803E508E57356DDD15843442ED94B2F0CF781038260AB5841274F`
+called the test-created MakeProcInstance thunk with a full 28-byte argument
+frame; callbackCount=1, server initialization and clean teardown succeeded.
+Receipt SHA256
+`691F40726D185987BF05E285951DB5C241F3FA7562896F9918D96AF92B4EEAE3`.
+This is a direct-call control, not proof that DDEML saved the same pointer or
+that cross-module callback and nested message delivery work.
+
+A second UUID-isolated registration run explicitly enabled the existing
+opt-in `MVDM_WOW_CALLBACK_CPU_TRACE_PATH` and selector filter `17af`.
+The trace SHA256
+`93217B371BA32B72D81F79EA1FE27A09D9012139357235DA7F6AEF69CE2D3079`
+records vector 0d, error 0271, source 177f:58ef and bytes `ff5f04...`;
+the matching private-desktop GPF observer SHA256 is
+`E3146CCD70FD47B0E513E9BFBEB07BB3445199D07718DFD04E2F8600BCED0EC6`.
+The pre-call module/thunk receipt SHA256 is
+`AE52F6DA74D228D9A6F17D6B6FDD0559485D11F43CB38EC9103CF96125BC4D32`.
+There is no `far-call` record for selector 17af; this witness filters after
+operand decoding, so absence does not distinguish a fault before decoding,
+a different target, or other trace limitations.
+
+`ccpu386/c_xcptn.c:252` constructs an ordinary GP error code as
+`(selector & 0xfffc) | EXT`. Under that ordinary-selector interpretation,
+0271 means selector bits 0270 plus EXT=1, TI=0 (GDT). `GP_INT` has a separate
+IDT construction path; the recorded dispatch does not record which GP branch
+or xcode produced this error. It is therefore not proven that 0270 was the
+far-call target or an invalid descriptor rather than some other selected
+segment. The DPMI saved frame records CS:EIP, SS:ESP, flags and error, not the
+fault-time DS, BX or `[DS:BX+4]`. The later CPU snapshot is already inside
+exception/host-dialog handling and is not the fault context. The available
+read-only tools and this log cannot reconstruct those missing values; a
+fault-time breakpoint/diagnostic or an independently authored exception
+handler with a validated control would be required. No such result is claimed.
+No guest files or product source were modified, and only processes belonging
+to the independent stage were cleaned up.

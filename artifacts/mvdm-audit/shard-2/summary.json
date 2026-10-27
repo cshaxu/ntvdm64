@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "EEB54C337EF31DFF5BB9B71277ED33A056EC6046C8BD23D1C3DA3C4C8C9E4DBB",
+  "output_sha256": "552A6C02E86AFEBF4846D846CFF3E7DDED8DD8C2597FF401B3A6397F70ADF038",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,027 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -148,5 +148,6 @@
   "ddeml_registration_trace": "ddeml-register-transaction-trace.md; source-only; no new registration or transaction runtime proof",
   "control_thunk_bde_trace": "control-thunk-bde-review.md; three original inputs remain pending",
   "ccpu_call_lmsw_review": "ccpu-call-lmsw-registration-review.md; source/registration collision and historical fixture evidence",
-  "debugger_extension_review": "debugger-extension-review.md; three original inputs remain pending"
+  "debugger_extension_review": "debugger-extension-review.md; three original inputs remain pending",
+  "ddeml_registration_fault": "ddeml-register-probe-evidence.md; W31 call-site GPF, fault operand unresolved; no registration success"
 }

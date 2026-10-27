@@ -47,3 +47,13 @@ transactions, monitor mode, nested callbacks, instance/task shutdown and
 optional debug profile identification, paired with exact immutable guest
 identity. Examine source lineage before using line-level guest source or map
 to characterize an installed binary. Never patch or rebuild the guest.
+
+## Subsequent registration-specific witness
+
+The independently authored registration probe and its no-register/direct-thunk
+controls are recorded in `ddeml-register-probe-evidence.md`. A W31 guest
+registration attempt reaches a reported GPF at DDEML 0001:58ef (`call far
+[bx+4]`); actual fault-time pointer and root cause remain unproven. It is not
+a successful registration, atom-lifetime or transaction witness. The W31
+binary is not proved to be built from this original `register.c`; retain the
+row pending and do not infer a guest source defect or product defect from it.

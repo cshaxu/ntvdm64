@@ -26,7 +26,7 @@ try {
     if($LASTEXITCODE){throw 'Independent DC probe assembly failed'}
     Get-FileHash $source,"$root\DCPROBE.EXE",$observer,"$package\system32\WOW32.DLL" |
         Export-Csv -NoTypeInformation "$root\inputs.csv"
-    $runtime=New-PhysicalRuntimeStage $package
+    $runtime=New-PhysicalRuntimeStage $package -FreshPackageIdentity
     $scope=New-IsolatedPackageScope $runtime
     $null=New-Item -ItemType Directory -Force -Path "$runtime\tests"
     Copy-Item "$root\DCPROBE.EXE" "$runtime\tests\DCPROBE.EXE"

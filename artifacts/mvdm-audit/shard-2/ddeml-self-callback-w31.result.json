@@ -1,0 +1,23 @@
+{
+  "case": "w31",
+  "moduleHandle": 6031,
+  "pathLength": 27,
+  "init": 0,
+  "instance": 131776,
+  "service": 49338,
+  "register": 4294967295,
+  "unregister": 4294967295,
+  "free": 1,
+  "uninit": 1,
+  "callbackCount": 1,
+  "registerCount": 65535,
+  "unregisterCount": 65535,
+  "firstType": 0,
+  "lastType": 0,
+  "modulePath": "O:\\TMP\\N6E0\\TESTS\\DDEML.DLL",
+  "resolvedFileSha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+  "inputSha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+  "probeSha256": "058077E3B9B803E508E57356DDD15843442ED94B2F0CF781038260AB5841274F",
+  "scope": "direct test thunk call, server-mode init, string create/free, uninitialize; no registration or transaction",
+  "originalGuestModified": false
+}

@@ -51,6 +51,18 @@ entries is a traceability gap, not proof of behavioral change. Trace their
 original admission and remove or register them only after checking the
 actual call sites, activation conditions and diagnostic use.
 
+The later source-location audit registers DIV-305 and DIV-307/308/309.
+DIV-306 and DIV-308 include descriptor reads and far-transfer translation
+before the reporting switch. A controlled real CCPU paging/exception fixture
+reproduced a semantic difference with logging disabled: the original OpenNT
+far-transfer source returns #GP(8), while the current selected source returns
+#PF with CR2=0x0fff for the same cross-page descriptor. The first extra read
+belongs to DIV-306; DIV-308 has not yet executed at that fault. See
+`shard-3/cpu-far-diagnostic-audit.md` for exact state and bounds. Recover
+original exception ordering in the S11 execution-foundation group and test
+both disabled/enabled diagnostics, normal transfers and guest entry. The JSON
+is a historical scan, not an up-to-date list of missing entries.
+
 ## Fast WOW provider requires corrected attribution
 
 `wow32/i386/fastwow.asm` is identified by its source and `fastwow.h` as

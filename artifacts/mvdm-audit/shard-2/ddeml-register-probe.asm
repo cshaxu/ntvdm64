@@ -123,6 +123,13 @@ api 1
  mov [callback_ptr+2-data],dx
  or ax,dx
  jz report
+%ifdef SELF_CALLBACK_CONTROL
+%rep 14
+ push word 0
+%endrep
+ call far [callback_ptr-data]
+ mark 11
+%endif
  push ds
  push word instance-data
  push word [callback_ptr+2-data]
@@ -162,7 +169,15 @@ api 1
  push word 0
  push word 1
  mark 9
+ push ax
+ mov ax,[callback_ptr-data]
+ mov [first_type-data],ax
+ mov ax,[callback_ptr+2-data]
+ mov [last_type-data],ax
+ pop ax
  capture
+ mov word [first_type-data],0
+ mov word [last_type-data],0
  api 8
  mark 5
  mov [register_lo-data],ax
