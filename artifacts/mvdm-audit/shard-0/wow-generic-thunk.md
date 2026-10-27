@@ -188,3 +188,45 @@ flags, `/DMVDM_WOW_X86_CALLPROC32`, a local helper symbol alias to
 Keep the candidate entirely separate from any published product until native
 callback reentry, genuine Win16 integration, ownership cleanup and the full
 coherent package gates are complete.
+
+## Isolated real Win16 mismatch and nested-callback witness
+
+The published r10 package and a candidate package were run in separate
+short-lived physical test stages with the same independently authored
+`win16_generic_probe.asm` NE and the same test native DLL. The native test
+source is the existing `wow_generic_callback_probe.c`, with only
+`RunGenericProbe` changed from `WINAPI` to `__cdecl`; its export name remains
+`RunGenericProbe`. Thus the original guest `CallProc32W` path requests the
+stdcall-style call while its native target is deliberately cdecl, including
+a real guest callback which recursively makes the same generic call. No
+original guest image was rebuilt or modified.
+
+Baseline `callpr-guest-baseline-r3` used WOW32 SHA-256
+`C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58`;
+the observer reported launcher exit `0x0000042b` and the guest wrote only
+its phase-0 record. The callback trace shows the outer and inner original
+`RET_WOWCALLBACK16` entries and the inner return, after which the witness
+did not reach phase 1. This result does not independently identify the
+worker exception code.
+
+Candidate `callpr-guest-candidate-r4` used only the isolated candidate WOW32
+SHA-256 `0106820C05D562D15217E6700B95936821A1C05B69FF9363BD2A746C0F9D74E3`;
+launcher exit was `0x00000000`. All three `GEN1` records had zero errors;
+phase 1 and phase 2 both recorded Pascal callbacks 3, cdecl callbacks 1 and
+recursive native entry 1, while the final record verified three original
+resource releases. The independent NE SHA-256
+`0205A143D10DCCF29449D3947338D457A89099BD608D7C8C09C99CFA7AD19B80` and
+native DLL SHA-256
+`A0EF755F68021D217CC26568CEE1E87D94B7BFD715E2530E93F08B193E8BE320`
+were identical in the two runs. Candidate r3 also passed but compiled a DLL
+with a different file hash; r4 explicitly reused the exact baseline DLL.
+The two isolated physical test roots differ, so this is a focused differential
+witness, not proof of every application or failure path. The first baseline
+attempt r1 failed before guest execution due a test export-link error; r2
+stopped before guest execution because a live installed NTSRV held the
+shared control endpoint. Neither is reported as a product pass or failure.
+
+The local candidate remains uncommitted production code and is not deployed.
+Full original-helper ABI review, broader guest conventions, exceptional task
+cleanup, complete cached build and coherent product regression remain needed
+before any default publication.

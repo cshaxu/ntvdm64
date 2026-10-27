@@ -1,0 +1,24 @@
+{
+  "targets": [
+    {
+      "target": "ntvdm",
+      "graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "graph_sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "transitive_mvdm_inputs": 351
+    },
+    {
+      "target": "wow32",
+      "graph": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "transitive_mvdm_inputs": 78
+    },
+    {
+      "target": "vdmredir",
+      "graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "graph_sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "transitive_mvdm_inputs": 367
+    }
+  ],
+  "discrepancy_count": 1,
+  "definition": "transitive build input mismatch only; not evidence of linked or executed code"
+}

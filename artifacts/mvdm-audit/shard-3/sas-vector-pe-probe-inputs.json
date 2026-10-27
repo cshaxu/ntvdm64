@@ -1,0 +1,11 @@
+{
+  "sha256": {
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map": "641E5C33430445ECC73885176250194BE936549654E14864074BD0B7D92D3CE2",
+    "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h": "ABC942914E4EA58F17D4549C3FCD6753500B012B83056B33B285C4DCEE79008B",
+    "src/mvdm/softpc.new/base/ccpu386/sascdef.c": "0EC6AFC6E8FC2086639044D1ADB3460EDFE36B265C6B0CBFEB89391901870BE9",
+    "src/mvdm/softpc.new/base/cvidc/sas4gen.h": "ECDA9CC4909EC3B945F90441A1EC441ADAF807DCF6F419523C80C334E87067A0",
+    "artifacts/mvdm-audit/shard-3/sas-vector-pe-probe.py": "43A607E32A954375DB7612AD13FBF80B797BA9542C0D487C806BAE912848811A"
+  },
+  "read_only": "Probe only reads sources and PE; no runtime, guest, product or input file modified."
+}

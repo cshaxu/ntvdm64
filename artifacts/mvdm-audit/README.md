@@ -7,8 +7,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Initial counts are
-205 partial (all raw mirror differences), 46 excluded (documented profile
-or source roles) and 4,433 pending. None is classified full in this initial
+205 partial (all raw mirror differences), 47 excluded (documented profile
+or source roles) and 4,432 pending. None is classified full in this initial
 pass. Exclusion of a provider does not prove its guest functionality works.
 
 One frozen path, `src/mvdm/README.md`, changed after freezing to correct

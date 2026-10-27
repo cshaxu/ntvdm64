@@ -82,3 +82,47 @@ handler, so process termination is not asserted without a runtime witness.
 The original reference header remains **pending** under the T-wide
 source/capability reconciliation. No product, guest or installed file was
 modified by this audit.
+
+## Product-binary vector layout and noninteractive probe design
+
+The selected PE32 `SasVector` has 58 pointer-sized fields. In the generated
+x86 layout the zero-based indices / byte offsets are: `Sas_touch` 54 /
+0xd8, `SasVirtualiseInstruction` 56 / 0xe0, and `IsPageInstanceData`
+57 / 0xe4. `sas-vector-pe-probe.py` independently parses the exact r10
+NTVDM PE sections, reads the `cSasPtrs` initializer using product map
+symbols, verifies both first two slots point at a breakpoint instruction and
+checks the third is zero. The two named functions are COMDAT-folded to the
+same address (`0x5781e0` before PE relocation); `EDL_fast_bop` is distinct.
+The recorded JSON is a **static binary proof**, not a runtime-use result.
+The linked image's `sas_init` copies 58 DWORDs from that initializer into
+`Sas`, and the vector binder publishes its address.
+
+A one-pass dumpbin disassembly of the exact hash-matched NTVDM image found no
+absolute instruction references to the three tail field addresses, no direct
+call/jump to the merged fallback address, and no obvious register-indirect
+call with displacement 0xd8/0xe0/0xe4. It found the `Sas` address in its
+initializer copy and vector publication. This bounded textual/binary
+observation does not eliminate two-stage indirect loads, computed indices,
+other DLL consumers, alternate process images, or uncovered modes. The
+large disassembly was temporary and removed; the PE probe and JSON are
+retained.
+
+A noninteractive **reachability** witness should reuse the existing private
+worker/guest observer and `tests/observation/wow_sol_options_probe.c`'s
+`DebugActiveProcess`/`WaitForDebugEvent` lifecycle, against one fully staged
+and hash-pinned package. Attach only to the observer-owned `ntvdm.exe`;
+handle the debugger's initial synthetic breakpoint separately; compare each
+subsequent first-chance breakpoint against that process's relocated NTVDM
+module base plus the map RVA. Log process/thread IDs, exception address,
+x86 stack/return address, current image hash and workload, preserve the
+existing exception disposition, detach and verify normal termination.
+Because both tails fold to one address, a hit proves at least one tail was
+entered, while per-tail attribution needs the return call site/arguments or
+a separately compiled test-only vector wrapper. No hit proves only those
+attached workload intervals. An attach after process creation cannot cover
+early worker startup; do not report full-lifetime non-reachability without
+an explicit pre-start attach mechanism. A test-only fixture that replaces
+the two vector members with counting wrappers after `sas_init`, forwarding
+to original tails only in a deliberately controlled negative case, can
+prove vector dispatch and caller attribution without changing production or
+guest; it remains supplemental to the actual-worker observer.

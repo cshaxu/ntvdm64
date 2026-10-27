@@ -1,0 +1,2 @@
+relative_path,frozen_product_link_selection,current_transitive_inputs,observation,next_proof
+dbg/dbg.c,not-product-selected,ntvdm;vdmredir,Frozen inventory says not-product-selected; current Ninja target closure includes source. Compilation is not linker extraction or execution.,"Inspect actual object/map, selected preprocessor, source role, and runtime evidence."

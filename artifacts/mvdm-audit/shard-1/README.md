@@ -7,7 +7,8 @@ bytes of UTF-8 `relative_path` modulo four equals one. All input and original
 identities were rehashed with no mismatch at this review.
 
 - 1,182 unique paths: 48 mirror differences reported partial, 13 retired
-  CPU30 executor paths excluded under source policy, and 1,121 pending.
+  CPU30 executor paths plus one empty MIPS-only debugger help excluded under
+  the x86 profile, and 1,120 pending.
 - `file-audit.csv` records every row, source/build identity, source roles,
   old evidence and missing proof. Its matching-line measure is not an
   executable-code restoration or behavioral acceptance percentage.
@@ -55,7 +56,7 @@ MMCallProc32 route does not by itself prove all MCI behavior. Original
 `prt_scrn.c` states PrintScreen moved to bios4.rom; that immutable firmware's
 identity and behavior are separate evidence obligations.
 
-The overall pending count remains 1,121; reviewed pending is not accepted.
+The pending count at the selected-source checkpoint was 1,121; reviewed pending is not accepted. The current count after excluding the empty MIPS-only variant is 1,120.
 `audit.py` recreates the preliminary CSV and overwrites manually added
 selected-source evidence in `file-audit.csv`; preserve and reapply the
 independent `selected-owner-review.csv` evidence if regenerating.
@@ -143,3 +144,22 @@ modified or newly executed.
 
 - Current `file-audit.csv` SHA-256 `BCC06181B6B7CA3A0D288F971222DCA46784FCB72553E4F14A465E832F5D617F`.
 - `guest-command-dosx-review.csv` SHA-256 `85FA13D2011E5C6DB82340CFBDCD08D0AEF64DFC26FC40DEECC6A7368686B840`.
+
+
+## Unconnected debugger and cursor ownership follow-up
+
+`cursor-cache-trace.md` compares the unselected original wcurcash name/type/
+instance cache with the selected original wuman -> wcuricon lookup and
+resource/task retirement. It identifies the concrete user-visible equality
+and cleanup boundaries still requiring tests; T458's statement that
+wcurcash was selected conflicts with the current original manifest and map.
+
+`debugger-extension-trace.md` separates selected original worker dbg.c from
+BDE, IEUVDDEX and VDMEXTS external debugger-extension DLLs. It identifies a
+frozen product-link misclassification of dbg.c and records exact private TEB/
+VDM_TIB risks. The empty MIPS-only ieuvddex/mips/helpp.c is excluded from the
+x86 profile; its distinct i386 counterpart and debugging functionality remain
+pending. No debugger extension was built or tested.
+
+- Current file-audit.csv SHA-256 `78A39816089C78490059C898987297500B48FF5886B8CDAF87FD90F573908C80`.
+- Current unselected-source-review.csv SHA-256 `1DC5679855C8FBCF41A03D349C50A1B35DACE620A6A6D8339C17252D5DCA2D4A`.

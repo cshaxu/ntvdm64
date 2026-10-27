@@ -1,0 +1,22 @@
+{
+  "ntvdm_sha256": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+  "map_symbols": {
+    "_cSasPtrs": "0x5b41b8",
+    "_c_sas_touch": "0x5781e0",
+    "_c_VirtualiseInstruction": "0x5781e0",
+    "_EDL_fast_bop": "0x5781d0"
+  },
+  "fields_count": 58,
+  "indices": {
+    "Sas_touch": 54,
+    "SasVirtualiseInstruction": 56,
+    "IsPageInstanceData": 57
+  },
+  "vector_values": {
+    "Sas_touch": "0x5781e0",
+    "SasVirtualiseInstruction": "0x5781e0",
+    "IsPageInstanceData": "0x0"
+  },
+  "result": "STATIC_PE_VECTOR_POINTERS_AND_BREAKPOINT_OPCODE_OK",
+  "limitation": "Static PE inspection only; no claim about dynamic invocation, actual relocated addresses or application execution."
+}

@@ -140,3 +140,17 @@ guest can reach them. A direct source search alone cannot exclude indexed
 indirect or generated-code use. See `shard-3/sas4gen-vector-audit.md` for
 the source chain, missing original implementation evidence and needed
 consumer/contract review; avoid replacing these with success stubs.
+
+## Product build selection inventory correction
+
+`dbg/dbg.c` is reported as not-product-selected by the frozen inventory and
+the S1 disposition calls it fixture-only. Current `ntvdm.exe` transitive
+Ninja inputs include it; the product map attributes `DBGDispatch`, `DBGInit`
+and related symbols to `debugger-bindings:dbg.obj`. Thus the earlier selection
+claim is stale. `graph-selection-discrepancies.csv` is a systematic
+comparison of the 4,684 frozen paths with the actual `ntvdm.exe`,
+`WOW32.DLL` and `VDMREDIR.dll` transitive Ninja inputs; this was the only
+not-selected-to-input discrepancy. The VDMREDIR closure includes the
+NTVDM import-library build, so its transitive source inputs cannot be read
+as DLL object ownership. Compile selection still does not prove map
+extraction or behavior for the remaining inputs.
