@@ -202,7 +202,7 @@ actual-body and real-worker verification conditions before deletion or final
 retention. No runtime or guest change, new fixture or new execution occurred.
 
 At the DIV-147 checkpoint, `file-audit.csv` SHA-256 was `FFDF74A6471FBF501B110D6F7D21B1CFA944C3583BAE4A113FE7E355B75F4B75`.
-Current `selected-diff-register-audit.csv` SHA-256 `67B7FE6EE027EB6D220B7430B3C99EFD5F2879D9509B00489096D131E9895A8A`.
+At the DIV-147 checkpoint `selected-diff-register-audit.csv` SHA-256 was `67B7FE6EE027EB6D220B7430B3C99EFD5F2879D9509B00489096D131E9895A8A`.
 Current `owner-review.csv` SHA-256 `46FA0A8B496CE6635BA51E5D95035602C3E06F9CD5F12B9BA7A0A0900F8388C5`.
 
 
@@ -219,7 +219,7 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `94238C54BB9217ACA58CE4C8EBD356A846D04F8D57EF8016DBC117287C004A64`.
+- Current `file-audit.csv` SHA-256 `D4CFB141680CFC23A2C5EDB700F09181991B52796310668CAC46973090ACBA6A`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
@@ -245,3 +245,5 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 `dem-directory-label-audit.md` records directory SVC evidence, volume label mutation boundary, and conditional release debug diagnostics; a label NUL-overread was confirmed in the direct object, while guest reachability remains unproven.
 
 `historical-wow-objects.md` records 25 retained PE-i386 objects excluded only as selected product inputs after frozen hash and three-target input-closure checks. Source capability remains independent. After this checkpoint shard-1 has 1182 rows: 1095 pending, 48 partial, 39 excluded by audit_status; one pre-existing MIPS row has pending-evidence reporting_class despite excluded audit_status.
+
+`video-deviation-family-audit.md` records three actual VGA/Video7 diff families, original-line similarity only, selected branch and bounded evidence gaps. Current `selected-diff-register-audit.csv` SHA-256 `288FD218831711F418F93E442D888445A955313857AB2382D7941B404B7D1E28`.

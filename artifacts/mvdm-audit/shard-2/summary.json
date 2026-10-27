@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "F51AF04E7B4A398917AE1C9C59DB17040B53FA74818A385DB8ECAC63B3D4F3B7",
+  "output_sha256": "1A59DD406BB82D206F30DBBD21E3E92FE1B64AB271A8640960DF980A5ADC270B",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -151,5 +151,6 @@
   "debugger_extension_review": "debugger-extension-review.md; three original inputs remain pending",
   "ddeml_registration_fault": "DMGClass GetWindowWord returned zero before registration GPF; source lineage/window identity/zero cause unresolved",
   "historical_wow_objects": "historical-wow-objects.md; 10 current-only retained object inputs excluded; source capability unaffected",
-  "wow_gdi_review": "wow-gdi-text-font-metafile-review.md; three selected source rows remain pending"
+  "wow_gdi_review": "wow-gdi-text-font-metafile-review.md; three selected source rows remain pending",
+  "command_state_pif_redirection": "command-state-pif-redirection-review.md; three modified source rows remain partial"
 }
