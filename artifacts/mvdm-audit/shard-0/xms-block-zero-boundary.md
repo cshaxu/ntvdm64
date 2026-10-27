@@ -53,3 +53,28 @@ behavior before deciding whether there is a runtime defect. Run r1 accidentally
 assembled the EMS probe instead and failed the XMS marker check; it is a
 harness failure, not an XMS observation. The r2 source and COM identities
 above distinguish the valid run.
+
+## Guest lifecycle and existing host-entry witness
+
+A second independent COM, `xms-zero-lifecycle-probe.asm`, repeated the zero
+allocation and then requested handle information, a same-size (zero) resize
+and free. On the same isolated package identity, the guest output was
+`ZERO AX=0001 BX=A500 DX=A513`, `INFO AX=0001 BX=001F DX=0000`,
+`REALLOC AX=0001` and `FREE AX=0001`; the observer reported exit 0.
+The zero-size handle reports zero size and all three later guest calls report
+success. The COM SHA-256 is
+`91CA42B4FC98EB5D9DF9147A77DB9B20471FA5C3C46ADDB6C8F35DA82285D60F`;
+source SHA-256 is `DB4082F457E498F0998B8A376C32C37689BAB5AF852AC2DF969DDF7372E4F7DF`.
+
+The run explicitly enabled the existing `MVDM_WIN31_SETUP_XMS_TRACE_PATH`
+entry witness. Its recorded host BOP row is `xms service=02 ax=0000 bx=a513
+cx=001f dx=0000`, establishing that the actual host XMS allocation service
+received DX=0 for the independently initiated request. The witness records
+inputs before `XMSDispatch`, not the host local value or return. The guest
+lifecycle does not inspect the handle's underlying base and cannot rule out
+an erroneous base or later effects. Same-size resize's success is consistent
+with the retained guest-source early return, but does not prove that source
+was used to build the installed binary. No original guest or product image
+was changed. Further assessment requires the original XMS contract, host
+return and allocation-state observation, including repeated requests and
+subsequent nonzero allocations.

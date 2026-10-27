@@ -4,9 +4,9 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 958,
+    "pending": 957,
     "partial": 48,
-    "excluded": 83
+    "excluded": 84
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -23,8 +23,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "497F257DFCFF339E506D727894D50AD8F74CC6BDF97C2E8FAA726F7BE34B97E5",
-  "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 958 rows remain pending. Excluded build artifacts do not exclude source or guest features. Matching lines are not restored percentage.",
+  "output_sha256": "C2D795DBF47C10CB5B6749255445F7E933F4EE0F5DBE570E145667AF1E3257B7",
+  "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 957 rows remain pending. Excluded inactive host bodies/build artifacts do not exclude guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -171,5 +171,6 @@
   "wow_menu_owner_lifecycle": "wow-menu-owner-lifecycle-review.md; selected original thunks with bounded fixtures and guest evidence; pending full scope",
   "suballoc_xms_failure": "suballoc-xms-callback-failure-review.md; injected failure observation and actual selected XMS callbacks separated",
   "wow_callback_memory_helpers": "wow-callback-memory-helpers-review.md; registration and historical W32InitDlg fixture distinguished from other callbacks",
-  "wow_sound_beep": "wow-sound-beep-review.md; original thunk route and native sound owner, runtime evidence missing"
+  "wow_sound_beep": "wow-sound-beep-review.md; original thunk route and native sound owner, runtime evidence missing",
+  "wow_multimedia_inactive_body": "wow-multimedia-inactive-body-review.md; excluded inactive wmmedia1 bodies only, multimedia capability separately unresolved"
 }

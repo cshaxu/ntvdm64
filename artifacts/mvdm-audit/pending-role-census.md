@@ -6,7 +6,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | --- | ---: |
 | `immutable-guest-or-guest-build-input` | 2613 |
 | `declaration-or-build-carrier` | 856 |
-| `selected-product-source` | 293 |
+| `selected-product-source` | 292 |
 | `retained-build-artifact` | 0 |
 | `unselected-host-source-requires-s2-disposition` | 110 |
 | `tooling-or-build-carrier` | 108 |
@@ -19,7 +19,7 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | --- | ---: |
 | `not-product-selected` | 3797 |
 | `ntvdm-product` | 234 |
-| `wow32-product` | 46 |
+| `wow32-product` | 45 |
 | `vdmredir-product` | 13 |
 
 The 2,613 immutable-guest-or-guest-build-input rows require explicit distinction between deployed guest inputs, source/build provenance, and unused resource/tooling; guest immutability is not evidence that any capability works. The 293 selected-product-source rows require actual owner, dispatch, lifecycle and behavior reconciliation. Build carriers, historical binary artifacts and unselected host-source rows require a role/closure decision rather than automatic exclusion. Counts overlap across the two tables and must not be added.
