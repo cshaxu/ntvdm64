@@ -8,7 +8,7 @@ param(
     [Parameter(Mandatory)][string]$RetailKrnl386
 )
 $ErrorActionPreference = 'Stop'
-$repo = (Resolve-Path "$PSScriptRoot/../..").Path
+$repo = (Resolve-Path "$PSScriptRoot/../../..").Path
 if(!$MediaRoot) {$MediaRoot = Read-Host 'Original Windows 3.1 installation media directory'}
 if(!$MediaRoot) {throw 'No installation media directory supplied'}
 $media = (Resolve-Path -LiteralPath $MediaRoot).Path.TrimEnd('\')
@@ -32,10 +32,10 @@ function HashBytes([byte[]]$bytes) {
 $files = @{}
 $files['MOUSE31.DRV'] = [IO.File]::ReadAllBytes($driver)
 $files['PATCHSET.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $Patchset).Path)
-$files['README.TXT'] = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'README.txt'))
+$files['README.TXT'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/README.txt'))
 $files['KRNL386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedKrnl386).Path)
 $files['KRNL386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailKrnl386).Path)
-$files['SETUP.CMD'] = [IO.File]::ReadAllBytes((Join-Path $PSScriptRoot 'setup.cmd.template'))
+$files['SETUP.CMD'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/SETUP.CMD'))
 $files['WIN386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedWin386).Path)
 $files['WIN386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailWin386).Path)
 
@@ -55,7 +55,10 @@ if(Test-Path -LiteralPath $patch) {
         # to repair/repackage; every other unknown PATCH file remains guarded.
         if($relative -like 'TEMP\*') {continue}
         if($relative -ne 'addon-files.json' -and !$owned.ContainsKey($relative)) {
-            throw "Preserve unknown existing PATCH payload: $relative"
+            if(!$files.ContainsKey($relative) -or
+                (Get-FileHash -LiteralPath $item.FullName).Hash -ne (HashBytes $files[$relative])) {
+                throw "Preserve unknown existing PATCH payload: $relative"
+            }
         }
     }
 }

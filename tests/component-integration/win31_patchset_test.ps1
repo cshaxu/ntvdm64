@@ -41,12 +41,12 @@ if($patchsetText -match '(?i)[a-z]:\\') {throw 'PATCHSET retains a hard-coded dr
 
 & (Join-Path $build 'package/PATCHSET.EXE') --win31 (Join-Path $build 'installed')
 if($LASTEXITCODE -ne 0) {throw "PATCHSET failed: $LASTEXITCODE"}
-& (Join-Path $repo 'tests/component-integration/win31_launch_profile_test.ps1') -InstallRoot (Join-Path $build 'installed') -ProfileDirectory (Join-Path $build 'installed/PATCH')
+& (Join-Path $repo 'tests/component-integration/win31_launch_profile_test.ps1') -InstallRoot (Join-Path $build 'installed') -ProfileDirectory (Join-Path $build 'installed/PATCH') -SetupMode
 & (Join-Path $repo 'tests/component-integration/win31_setup_package_test.ps1') -PackageRoot (Join-Path $build 'media') -InstallRoot (Join-Path $build 'installed') -RepositoryRoot $repo
 
 $krnlBefore = (Get-FileHash -LiteralPath $retailKrnl).Hash
 $krnlAfter = (Get-FileHash -LiteralPath (Join-Path $build 'installed/SYSTEM/KRNL386.EXE')).Hash
-if($krnlBefore -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980' -or $krnlAfter -ne '88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181') {throw 'PATCHSET did not apply the checked KRNL386 candidate'}
+if($krnlBefore -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980' -or $krnlAfter -ne '75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A') {throw 'PATCHSET did not apply the checked KRNL386 candidate'}
 if((Get-FileHash -LiteralPath (Join-Path $build 'installed/PATCH/KRNL386.ORIG')).Hash -ne $krnlBefore) {throw 'PATCHSET did not preserve KRNL386.ORIG'}
 if((Get-Content -LiteralPath (Join-Path $build 'installed/SYSTEM.INI') -Raw) -notmatch '(?im)^mouse\.drv=.*\\PATCH\\MOUSE31\.DRV\s*$') {
     throw 'PATCHSET did not select the installed mouse driver'

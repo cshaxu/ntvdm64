@@ -23,7 +23,7 @@
 #define WIN386_RETAIL_SHA256 "6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5"
 #define WIN386_PATCHED_SHA256 "C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8"
 #define KRNL386_RETAIL_SHA256 "FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980"
-#define KRNL386_PATCHED_SHA256 "88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181"
+#define KRNL386_PATCHED_SHA256 "75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A"
 
 static int fail(const wchar_t *message)
 {
@@ -395,7 +395,7 @@ static BOOL install_binary_adaptation(const wchar_t *root, const wchar_t *patch,
 
 static BOOL finalize_win31(const wchar_t *root, const wchar_t *package)
 {
-    wchar_t patch[MAX_PATH], path[MAX_PATH], config[MAX_PATH], autoexec[MAX_PATH];
+    wchar_t patch[MAX_PATH], path[MAX_PATH], config[MAX_PATH], autoexec[MAX_PATH], temp[MAX_PATH];
     wchar_t program[MAX_PATH], driver[MAX_PATH], ini[MAX_PATH], ini_backup[MAX_PATH];
     BYTE *template = NULL;
     DWORD template_bytes = 0;
@@ -403,9 +403,8 @@ static BOOL finalize_win31(const wchar_t *root, const wchar_t *package)
         L"REM Windows 3.1 private DOS profile\r\n"
         L"dos=high, umb\r\n"
         L"device=%SystemRoot%\\system32\\himem.sys\r\n"
-        L"files=128\r\n"
-        L"dosonly\r\n";
-    wchar_t auto_text[2 * MAX_PATH + 256];
+        L"files=128\r\n";
+    wchar_t auto_text[4 * MAX_PATH + 256];
     wchar_t command[2 * MAX_PATH + 256];
     const wchar_t *stale[] = {
         L"configure-launch.ps1", L"run-setup.ps1", L"addon-files.json",
@@ -436,12 +435,13 @@ static BOOL finalize_win31(const wchar_t *root, const wchar_t *package)
         !join_path(ini_backup, ARRAYSIZE(ini_backup), patch, L"SYSTEM.INI.ORIG") ||
         !copy_if_missing(ini, ini_backup) ||
         !patch_system_ini(root, driver)) return FALSE;
-    if (!join_path(config, ARRAYSIZE(config), patch, L"CONFIG.NT") ||
+    if (!join_path(temp, ARRAYSIZE(temp), patch, L"TEMP") || !make_directory(temp) ||
+        !join_path(config, ARRAYSIZE(config), patch, L"CONFIG.NT") ||
         !join_path(autoexec, ARRAYSIZE(autoexec), patch, L"AUTOEXEC.NT") ||
         !write_text(config, config_text) ||
         swprintf_s(auto_text, ARRAYSIZE(auto_text),
-                   L"@echo off\r\nSET TEMP=%%SystemRoot%%\\Temp\r\nSET TMP=%%SystemRoot%%\\Temp\r\n"
-                   L"SET PATH=%ls;%ls\\SYSTEM;%%SystemRoot%%\\system32\r\n", root, root) < 0 ||
+                   L"@echo off\r\nSET TEMP=%ls\r\nSET TMP=%ls\r\n"
+                   L"SET PATH=%ls;%ls\\SYSTEM;%%SystemRoot%%\\system32\r\n", temp, temp, root, root) < 0 ||
         !write_text(autoexec, auto_text) ||
         !join_path(program, ARRAYSIZE(program), root, L"WIN.COM") ||
         !read_resource_template(&template, &template_bytes)) return FALSE;
@@ -453,11 +453,13 @@ static BOOL finalize_win31(const wchar_t *root, const wchar_t *package)
         !write_bytes(path, template, template_bytes)) goto done;
     if (swprintf_s(command, ARRAYSIZE(command),
                    L"@echo off\r\nsetlocal\r\nwhere run16 >nul 2>nul || exit /b 2\r\n"
+                   L"set \"TEMP=%%~dp0TEMP\"\r\nset \"TMP=%%TEMP%%\"\r\nif not exist \"%%TEMP%%\\\" mkdir \"%%TEMP%%\" || exit /b 4\r\n"
                    L"pushd \"%%~dp0..\" || exit /b 3\r\ncall run16 \"%%~dp0WINSTD.PIF\"\r\n"
                    L"set result=%%errorlevel%%\r\npopd\r\nexit /b %%result%%\r\n") < 0 ||
         !join_path(path, ARRAYSIZE(path), patch, L"WINSTD.CMD") || !write_text(path, command)) goto done;
     if (swprintf_s(command, ARRAYSIZE(command),
                    L"@echo off\r\nsetlocal\r\nwhere run16 >nul 2>nul || exit /b 2\r\n"
+                   L"set \"TEMP=%%~dp0TEMP\"\r\nset \"TMP=%%TEMP%%\"\r\nif not exist \"%%TEMP%%\\\" mkdir \"%%TEMP%%\" || exit /b 4\r\n"
                    L"pushd \"%%~dp0..\" || exit /b 3\r\ncall run16 \"%%~dp0WIN386.PIF\"\r\n"
                    L"set result=%%errorlevel%%\r\npopd\r\nexit /b %%result%%\r\n") < 0 ||
         !join_path(path, ARRAYSIZE(path), patch, L"WIN386.CMD") || !write_text(path, command)) goto done;

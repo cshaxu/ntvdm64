@@ -667,7 +667,7 @@ draw_v7ptr()
 			(extensions_controller.ptr_horiz_posn_hi.as_bfld.ptr_horiz_position << 8);
 
 
-		if (get_seq_chain4_mode() && get_chain4_mode())
+		if (get_256_colour_mode() && get_seq_chain4_mode())
 		{
 			/*
 			 * In the extended 256 col modes we seem to need to halve

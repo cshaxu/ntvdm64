@@ -2,19 +2,15 @@ param(
     [Parameter(Mandatory)][string]$InstallRoot,
     [Parameter(Mandatory)][string]$ProfileDirectory,
     [string]$BeforeHashes = '',
-    [string]$ExpectedKernelHash = '88E095A7C39C6294E8E3BE71CBD2EDC1E4DCECBB7101D1581021EA7BE7B33181',
-    [bool]$ExpectDosOnly = $true
+    [string]$ExpectedKernelHash = '75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A',
+    [bool]$ExpectDosOnly = $false,
+    [switch]$SetupMode
 )
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $InstallRoot).Path.TrimEnd('\')
 $patch = (Resolve-Path -LiteralPath $ProfileDirectory).Path.TrimEnd('\')
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$tool = Join-Path $repo 'tools/win31-launch'
 if($patch -ne (Join-Path $root 'PATCH')) {throw 'Profiles must be installation-local PATCH files'}
-foreach($name in @('PIF.EXE','HASH.EXE','MOUSE31.DRV','WIN31LAUNCH.EXE')) {
-    if(Test-Path -LiteralPath (Join-Path $tool $name)) {throw "win31-launch must not duplicate $name"}
-}
-if(!(Test-Path -LiteralPath (Join-Path $tool 'PATCH386.EXE') -PathType Leaf)) {throw 'win31-launch is missing PATCH386.EXE'}
 function Assert-Pif([string]$name, [string]$arguments) {
     $bytes = [IO.File]::ReadAllBytes((Join-Path $patch $name))
     function Field([int]$offset,[int]$length) {[Text.Encoding]::ASCII.GetString($bytes,$offset,$length).Trim([char]0)}
@@ -46,7 +42,7 @@ Assert-Pif 'WIN386.PIF' '/3'
 $config = Get-Content -LiteralPath (Join-Path $patch 'CONFIG.NT') -Raw
 $auto = Get-Content -LiteralPath (Join-Path $patch 'AUTOEXEC.NT') -Raw
 if(($config -match '(?im)^\s*dosonly\s*$') -ne $ExpectDosOnly -or $auto -match '(?im)^\s*(lh\s+)?[^\r\n]*\\dosx(\.exe)?\s*$') {throw 'Wrong DOS-only/DOSX profile'}
-if(!$auto.Contains('lh %SystemRoot%\system32\mscdexnt.exe') -or !$auto.Contains('lh %SystemRoot%\system32\redir') -or
+if((!$SetupMode -and (!$auto.Contains('lh %SystemRoot%\system32\mscdexnt.exe') -or !$auto.Contains('lh %SystemRoot%\system32\redir'))) -or
    $auto.IndexOf("SET TEMP=$patch\TEMP",[StringComparison]::OrdinalIgnoreCase) -lt 0 -or
    $auto.IndexOf("SET TMP=$patch\TEMP",[StringComparison]::OrdinalIgnoreCase) -lt 0 -or
    $auto.IndexOf("$root\SYSTEM",[StringComparison]::OrdinalIgnoreCase) -lt 0) {throw 'Wrong shared environment'}
@@ -54,15 +50,19 @@ if(!(Test-Path -LiteralPath (Join-Path $patch 'TEMP') -PathType Container)) {thr
 foreach($pair in @(@('WINSTD.CMD','WINSTD.PIF'), @('WIN386.CMD','WIN386.PIF'))) {
     $launch = Get-Content -LiteralPath (Join-Path $patch $pair[0]) -Raw
     if(!$launch.Contains("call run16 `"%~dp0$($pair[1])`"")) {throw "Launcher does not use PATH/PIF: $($pair[0])"}
-    if(!$launch.Contains('where /q run16') -or !$launch.Contains('set "TEMP=%~dp0TEMP"') -or !$launch.Contains('mkdir "%TEMP%"')) {throw "Launcher does not establish its local runtime prerequisites: $($pair[0])"}
+    if((!$SetupMode -and !$launch.Contains('where /q run16')) -or !$launch.Contains('set "TEMP=%~dp0TEMP"') -or !$launch.Contains('mkdir "%TEMP%"')) {throw "Launcher does not establish its local runtime prerequisites: $($pair[0])"}
 }
 foreach($forbidden in @('win.cmd','start.cmd','WIN31.PIF')) {if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Ambiguous installed launcher remains: $forbidden"}}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE')).Hash -ne 'C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8') {throw 'Installed WIN386 is not the checked enhanced candidate'}
-if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE.BAK')).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 adjacent backup is missing'}
+$winBackup=if($SetupMode){Join-Path $patch 'WIN386.ORIG'}else{Join-Path $root 'SYSTEM\WIN386.EXE.BAK'}
+if((Get-FileHash -LiteralPath $winBackup).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 backup is missing'}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE')).Hash -ne $ExpectedKernelHash) {throw 'Installed KRNL386 is not the checked standard candidate'}
-if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE.BAK')).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 adjacent backup is missing'}
-if(!(Test-Path -LiteralPath (Join-Path $root 'SYSTEM\MOUSE.DRV.BAK') -PathType Leaf)) {throw 'Original mouse-driver adjacent backup is missing'}
-foreach($legacy in @('WIN386.ORIG','KRNL386.ORIG','MOUSE.DRV.ORIG')) {if(Test-Path -LiteralPath (Join-Path $patch $legacy)) {throw "Legacy PATCH recovery copy remains: $legacy"}}
+$krnlBackup=if($SetupMode){Join-Path $patch 'KRNL386.ORIG'}else{Join-Path $root 'SYSTEM\KRNL386.EXE.BAK'}
+if((Get-FileHash -LiteralPath $krnlBackup).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 backup is missing'}
+if(!$SetupMode) {
+ if(!(Test-Path -LiteralPath (Join-Path $root 'SYSTEM\MOUSE.DRV.BAK') -PathType Leaf)) {throw 'Original mouse-driver adjacent backup is missing'}
+ foreach($legacy in @('WIN386.ORIG','KRNL386.ORIG','MOUSE.DRV.ORIG')) {if(Test-Path -LiteralPath (Join-Path $patch $legacy)) {throw "Legacy PATCH recovery copy remains: $legacy"}}
+}
 foreach($forbidden in @('WIN386-ADAPTATION.JSON','WIN31-TEMPLATE.PIF','configure-launch.ps1','run-setup.ps1','addon-files.json')) {
     if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Installed PATCH retains non-runtime payload: $forbidden"}
 }

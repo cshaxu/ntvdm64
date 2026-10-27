@@ -84,6 +84,13 @@
 extern int  ega_int_enable;
 #endif
 
+#ifdef V7VGA
+/* DIVERGENCE(VIDEO7-DAC-WIDTH): SoftPC selects 6- or 8-bit DAC components. */
+extern int DAC_data_bits;
+#else
+#define DAC_data_bits 6
+#endif
+
 extern byte  *video_copy;
 
 static int flush_count = 0;	 /*count of graphic ticks since last flush*/
@@ -1382,7 +1389,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
             if(get_256_colour_mode())
             {
 #ifdef V7VGA
-                if (get_seq_chain4_mode() && get_chain4_mode())
+                if (get_seq_chain4_mode())
                 {
                     paint_screen = nt_paint_funcs->v7vga_hi_graph;
                     (*nt_init_funcs->vga_hi_graph)();
@@ -1762,9 +1769,12 @@ void set_the_vlt(void)
 
                 vga_color[i].peFlags = 0;
 
-                vga_color[i].peRed = (BYTE) (DAC[ind].red * 4);
-                vga_color[i].peGreen = (BYTE) (DAC[ind].green * 4);
-                vga_color[i].peBlue = (BYTE) (DAC[ind].blue * 4);
+                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].red : DAC[ind].red * 4);
+                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].green : DAC[ind].green * 4);
+                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].blue : DAC[ind].blue * 4);
             }
 
             /*..................... Apply new colours to output palette */
@@ -1822,9 +1832,12 @@ void set_the_vlt(void)
                 /*........................ Construct next palette entry */
 
                 vga_color[i].peFlags = 0;
-                vga_color[i].peRed = (BYTE) (DAC[ind].red * 4);
-                vga_color[i].peGreen = (BYTE) (DAC[ind].green * 4);
-                vga_color[i].peBlue = (BYTE) (DAC[ind].blue * 4);
+                vga_color[i].peRed = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].red : DAC[ind].red * 4);
+                vga_color[i].peGreen = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].green : DAC[ind].green * 4);
+                vga_color[i].peBlue = (BYTE)(DAC_data_bits == 8 ?
+                    DAC[ind].blue : DAC[ind].blue * 4);
             }
 
             SetPaletteEntries(sc.ColPalette, 0, VGA_DAC_SIZE, &vga_color[0]);

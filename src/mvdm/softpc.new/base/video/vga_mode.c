@@ -470,12 +470,17 @@ boolean	choose_vga_display_mode()
 	 * anything the EGA does.
 	 */
 
-	if( get_chain4_mode() )
+	/* Packed V7 scanout keeps byte units when CPU chain4 is disabled. */
+	if( get_chain4_mode()
+#ifdef V7VGA
+		|| (get_256_colour_mode() && get_seq_chain4_mode())
+#endif
+	)
 	{
 		set_offset_per_line_recal(get_actual_offset_per_line() << 2);
 	}
 	else
-		if( get_memory_chained() )
+		if( get_memory_chained() && !get_256_colour_mode() )
 		{
 			set_offset_per_line_recal(get_actual_offset_per_line() << 1);
 		}
@@ -502,7 +507,7 @@ boolean	choose_vga_display_mode()
 						+ get_screen_length() > 4*EGA_PLANE_DISP_SIZE );
 		}
 		else
-			if ( get_memory_chained() )
+			if ( get_memory_chained() && !get_256_colour_mode() )
 			{
 				set_screen_can_wrap( (get_screen_start()<<1)
 							+ get_screen_length() > 2*EGA_PLANE_DISP_SIZE );

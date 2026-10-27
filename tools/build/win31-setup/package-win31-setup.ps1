@@ -9,7 +9,7 @@ param(
     [string]$PreviousManifest = ''
 )
 $ErrorActionPreference = 'Stop'
-$repo = (Resolve-Path "$PSScriptRoot/../..").Path
+$repo = (Resolve-Path "$PSScriptRoot/../../..").Path
 
 # The only available source PIF is a functional historical profile and may
 # therefore contain the path of its former installation.  PATCHSET overwrites

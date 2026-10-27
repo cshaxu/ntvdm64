@@ -520,9 +520,10 @@ Return Value:
         // VdmRedir is loaded: do it
         //
 
+        /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */
         VrDispatch((ULONG)(*Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
                                                1,
-                                               (UCHAR)(getMSW() & MSW_PE ? TRUE : FALSE)
+                                               (UCHAR)((getMSW() & MSW_PE) && !getVM())
                                                )));
         break;
 
@@ -663,7 +664,8 @@ void ISV_DispatchCall (void);
 void MS_bop_8 (void)
 {
     ULONG iFunc;
-    UCHAR uchMode = getMSW() & MSW_PE ? TRUE : FALSE;
+    /* DIVERGENCE(MVDM-HOST-DIV-466): V86 addresses use real-mode segments. */
+    UCHAR uchMode = (UCHAR)((getMSW() & MSW_PE) && !getVM());
 
 
     // Get the Function Number

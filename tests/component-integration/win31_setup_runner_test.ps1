@@ -31,5 +31,6 @@ if(!(Test-Path -LiteralPath $log)) {throw 'SETUP.CMD did not invoke PATH run16'}
 if((Get-Content -LiteralPath $log -Raw).Trim() -ne 'command /c SETUP.EXE') {throw 'SETUP.CMD did not launch the DOS COMMAND setup entry'}
 $entry = Get-Content -LiteralPath "$package\PATCH\SETUP.CMD" -Raw
 if($entry -match '(?i)powershell|\.ps1|SETUP\.PIF') {throw 'SETUP.CMD retains a PowerShell or Win16-installer dependency'}
-foreach($name in @('SETUP.PIF','CONFIG.NT','AUTOEXEC.NT','WORK','TEMP')) {if(Test-Path -LiteralPath "$package\PATCH\$name") {throw "SETUP.CMD unexpectedly generated a setup artifact: $name"}}
-'PASS SETUP.CMD invokes PATH run16 on DOS COMMAND /c SETUP.EXE, preserves its result and creates no scratch payload'
+foreach($name in @('SETUP.PIF','CONFIG.NT','AUTOEXEC.NT','WORK')) {if(Test-Path -LiteralPath "$package\PATCH\$name") {throw "SETUP.CMD unexpectedly generated a setup artifact: $name"}}
+if(Test-Path -LiteralPath "$package\PATCH\TEMP") {throw 'Empty Setup temporary directory was not removed'}
+'PASS SETUP.CMD invokes PATH run16 on DOS COMMAND /c SETUP.EXE, preserves its result and uses package-local TEMP'

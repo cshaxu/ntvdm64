@@ -163,6 +163,10 @@ Routine Description:
 
     mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
+#ifndef i386
+    /* CPU40 keeps CPL independently of CR0; real mode executes at CPL 0. */
+    setCPL(0);
+#endif
     mvdm_softpc_fast_bop_sync_mode();
     setDS(DsSelector);
     load_pseudo_descr(CPU40_DS_REG);
@@ -224,6 +228,10 @@ Return Value:
      * CCPU real-mode cache path. */
     mvdm_softpc_wow_page_domain_leave_protected();
     setMSW(getMSW() & ~MSW_PE);
+#ifndef i386
+    /* Match the real-mode privilege before executing the DOSX continuation. */
+    setCPL(0);
+#endif
     mvdm_softpc_fast_bop_sync_mode();
     setCS(DosxRmCodeSegment);
 

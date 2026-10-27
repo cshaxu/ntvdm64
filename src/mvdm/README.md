@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-466: BOP 57 and BOP 58 pass the actual segment-address
+mode to SIM32: PE with VM clear selects descriptors; real and V86 execution
+select segment arithmetic. The original PE-only decision mistakes V86 for
+protected mode. This changes neither SIM32's explicit-mode contract nor the
+redirector and ISV dispatch algorithms. Focused and Windows 3.1 enhanced-mode
+validation are required before delivery.
+
 DIVERGENCE(VIDEO7-PACKED-SURFACE), owner-authorized on 2026-10-25 after
 the test publication displayed a 1280x480 mostly empty DIB for a 640x480
 guest desktop. `host/src/nt_graph.c::check_win_size` uses the selected packed
