@@ -86,6 +86,15 @@ precise mock boundary. Whether a real session can reach that failure is not
 yet established. Review both providers as a single lifecycle group, preserving
 the distinction between native cleanup and guest-counter failure.
 
+## Clipboard formats require per-format failure and ownership tests
+
+`shard-2/wow-clipboard-format-failure-review.md` separates the T460
+CF_TEXT/CF_DIB witnesses from unverified CF_HDROP, metafile-picture and OLE
+descriptor rejection paths. The original `CopyDropFilesFrom16` also has a
+source-level uninitialized-result path when `GlobalLock16` fails. No failure
+injection or runtime leak has yet been demonstrated; preserve format-specific
+ownership and nested handles when designing the tests and any recovery.
+
 The later source-location audit registers DIV-305 and DIV-307/308/309.
 DIV-306 and DIV-308 include descriptor reads and far-transfer translation
 before the reporting switch. A controlled real CCPU paging/exception fixture

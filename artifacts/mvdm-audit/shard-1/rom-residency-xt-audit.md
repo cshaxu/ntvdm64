@@ -1,0 +1,15 @@
+# ROM residency and CPU register ownership
+
+Frozen reconciliation SHA256 F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196; `rom.c` and `xt.c` remain partial mirror diff. Similarity does not establish behavior. No product or guest changed.
+
+## ROM: selected branch and actual source
+
+Original `rom_init` generic path fills ROM, calls `read_video_rom`, then reads BIOS1/BIOS2 and protects them in SAS. NTVDM+X86GFX original path assumes resident content and maps SAS ROM. Current `rom.c` DIV-165 selects original generic branch using `MVDM_SOFTPC_RECOVER_ROM_RESIDENCY`; `tools/build/New-T310OriginalSoftpcNinja.ps1:922` applies this to rom.c and `build/.ninja/pkg-uuid-x86/worker/build.ninja` shows a historical generated graph. `ccpusas4.c:414` invokes rom_init. This is preserved original ROM sequencing under a modern selection, not a second BIOS algorithm.
+
+The inline DIV-165 comment says `host_find_file` is part of ROM loading, but current `nt_rez.c:70` branches on ROMS_REZ_ID directly to `mvdm_softpc_firmware_read_embedded_rom`, bypassing host_find_file. The latter looks up only bios1.rom, bios4.rom and v7vga.rom as RT_RCDATA in the main module. Source of bytes is the embedded resource, not a disk firmware root. The common `host_find_file` still exists for non-ROM resources. The DIV-165 registry has been corrected to describe the embedded provider; the inline source comment remains inaccurate. Preserve selection, copy and protection roles.
+
+On absent resource, oversized resource or resource load failure the helper returns 0; `read_rom` skips copy, `rom_init` ignores its return and continues. This source-level failure direction is proven; whether a valid production executable can lack a resource or any later owner reliably stops the worker is not. Historical S24 DOS witness checks one byte at F000:FFF0 is neither 00 nor FF; it does not cover all ROM contents, write protection, missing-resource handling or current release. `tests/session/softpc_firmware_resource_fixture.c` checks unknown name fails, not absent one of the three required embedded resources in the actual worker. Candidate: test missing/bad required resource with exact worker graph and verify deterministic original-compatible failure instead of silent success; choose fix only after establishing actual outer owner and expected contract.
+
+## xt.c: state owners
+
+DIV-147 removes the historical CCPU/non-CPU30 global register block for selected CPU40; DIV-155 similarly excludes xt.c parity table. Current CCPU `c_main.c:490` defines its own pf_table. The original conditional and selected graph must be checked against actual symbol maps and tests before asserting zero duplicate consumers; absence of a body in xt.c alone is not semantic proof. The earlier S4 system package report and S24 guest witness are historical package evidence, not all CPU register/fault lifecycle evidence. Remaining test: current selected x86 object/symbol providers, parity and register/control transitions including reset and nested execution; don't add second state owner.
