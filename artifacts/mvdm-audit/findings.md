@@ -253,3 +253,13 @@ codec preserves the bit in focused fixtures; see
 not a complete guest reproduction. Recover the original Win16/OS2 NE
 classification and nested semantics with existing transport, then verify
 real execution and teardown in its corresponding implementation stage.
+
+## WOW SYSTEM.INI shadow contract
+
+`shard-2/wow-kernel-profile-module-review.md` traces the original private
+profile thunks to a session-owned temporary copy for the exact bare
+`SYSTEM.INI` name. If shadow setup fails, the caller passes the bare name
+through to the host profile API. DIV-297 previously described the selected
+root file as the direct API input; its registry now reflects the actual path.
+Write persistence, host mapping on failure, and worker teardown remain
+unverified, so this is a documented contract gap, not a proven runtime bug.
