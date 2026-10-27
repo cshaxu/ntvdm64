@@ -1,0 +1,9 @@
+# WOW SOUND DoBeep thunk
+
+Shard 2 `wow32/wsman.c`: frozen reconciliation SHA-256 F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196; OpenNT/OpenNT45/current source SHA-256 3481808A0C62754B72B5338680FB7E1A5DFC81722996CBF81400B2963771A913. Product object/map selection appears in `wow32-selected-link-inventory.json`; unchanged source and linked symbol do not establish real guest behavior. No product/guest modification or new runtime execution.
+
+Original `wow16/drivers/sound/sound.def` exports DOBEEP ordinal 17 and `sound.asm` emits `SoundThunk DOBEEP`. WOW32 `wstbl2.h` dispatches MOD_SOUND DOBEEP to the selected `WS32DoBeep`, whose entire implementation passes `MessageBeep(0)` to native Windows and returns its BOOL as ULONG; it retains no per-call allocation, guest pointer, native sound handle, or owned callback requiring local teardown. Actual audio and its timing are host resources. This is the original thunk route, not proof that a given installed SOUND guest module is byte-identical to the source or was loaded.
+
+The same original `wstbl2.h` assigns its other listed SOUND entries to `UNIMPLEMENTEDAPI`. This is a definite source/table disposition, not a claim that every 16-bit sound-producing path or DOS hardware audio is unimplemented. Actual installed guest module selection and entry behavior must be determined separately.
+
+No targeted runtime receipt was located here. A bounded witness should identify the actual loaded SOUND module by path/hash, invoke ordinal 17 from an independently authored Win16 test, record invocation and return with and without a valid host sound service, and retire the task without interpreting audio silence alone as a failure. Other SOUND ordinals and audio behavior need their own explicit original-contract decision; source-list presence cannot classify them as fully restored.

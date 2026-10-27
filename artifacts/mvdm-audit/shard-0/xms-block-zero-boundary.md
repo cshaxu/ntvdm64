@@ -26,3 +26,30 @@ guest probe plus controlled host entry, with exact return and allocation
 state, comparing original contract before selecting any host correction.
 The `ALLOC` zero path and the decommit-failure bookkeeping are separate
 questions. No original guest, product code or runtime image was changed.
+
+## Independent guest observation
+
+An independent DOS COM built from `xms-zero-probe.asm` called INT 2Fh 4300/4310
+to obtain the installed XMS entry, then invoked XMS function 09h with DX=0.
+On isolated package-c, the guest printed `ZERO AX=0001 BX=A500 DX=A513` and
+`XMS ZERO PROBE DONE`; the observer reported normal exit 0. The probe attempts
+to free a returned success handle but does not inspect that free's result or
+the underlying base. The guest COM SHA-256 was
+`E1BB58D3785E95D18051D1886189FF3D974BFF9B415A75EB19632F37A3AA98A0`;
+the source SHA-256 was
+`5CA49626F8EF6BAE67D07FB82C5E321852321DDD016FD073E0C8D0791CA4C0DA`.
+The isolated PIF config loads package HIMEM.SYS, whose package SHA-256 is
+`08AA2C47D835460ED3067FA7D6F8A3B37EDECA524AD102B0588FDD1BF389CE08`;
+NTVDM SHA-256 is `01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6`.
+The stage was owned and cleaned by the existing isolated package machinery;
+no installed or original guest image was modified.
+
+This proves a zero-size request returned success in this one profile, not
+that the host source candidate was reached, that the returned handle/base is
+valid, or that the observed result complies with the intended XMS contract.
+HIMEM's selected binary is not yet tied to the retained source. Verify the
+actual host entry, returned base, handle information, free result and repeat
+behavior before deciding whether there is a runtime defect. Run r1 accidentally
+assembled the EMS probe instead and failed the XMS marker check; it is a
+harness failure, not an XMS observation. The r2 source and COM identities
+above distinguish the valid run.
