@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "3D170042DE0D5F8657684CC4114CA924A9708766E41257C7F4A311788AE96D00",
+  "output_sha256": "A15087E6E600989030C8D5FF608E177D52624CAB36D1D0848B3403AA3DEF2A45",
   "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 958 rows remain pending. Excluded build artifacts do not exclude source or guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -169,5 +169,6 @@
   "wow_scrollbar_message": "wow-scrollbar-message-review.md; bidirectional conversion and call-local lifetime reviewed, real branch witness pending",
   "historical_i386_batch": "historical-i386-artifacts-review.md and historical-i386-artifacts.csv; 59 artifacts excluded only as inspected graph inputs and verbatim package files",
   "wow_menu_owner_lifecycle": "wow-menu-owner-lifecycle-review.md; selected original thunks with bounded fixtures and guest evidence; pending full scope",
-  "suballoc_xms_failure": "suballoc-xms-callback-failure-review.md; injected failure observation and actual selected XMS callbacks separated"
+  "suballoc_xms_failure": "suballoc-xms-callback-failure-review.md; injected failure observation and actual selected XMS callbacks separated",
+  "wow_callback_memory_helpers": "wow-callback-memory-helpers-review.md; registration and historical W32InitDlg fixture distinguished from other callbacks"
 }
