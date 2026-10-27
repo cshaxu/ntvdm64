@@ -7,17 +7,17 @@ This is a planning census, not a full/partial/excluded classification or a claim
 | `immutable-guest-or-guest-build-input` | 2613 |
 | `declaration-or-build-carrier` | 856 |
 | `selected-product-source` | 293 |
-| `retained-build-artifact` | 224 |
+| `retained-build-artifact` | 164 |
 | `unselected-host-source-requires-s2-disposition` | 110 |
 | `tooling-or-build-carrier` | 108 |
-| `retained-historical-binary-or-build-artifact` | 69 |
+| `retained-historical-binary-or-build-artifact` | 54 |
 | `unmirrored-tool-build-input` | 33 |
 | `unselected-host-noncode-requires-s2-disposition` | 25 |
 | `unselected-host-module-definition-requires-s2-disposition` | 17 |
 
 | Frozen product selection | Pending paths |
 | --- | ---: |
-| `not-product-selected` | 4055 |
+| `not-product-selected` | 3980 |
 | `ntvdm-product` | 234 |
 | `wow32-product` | 46 |
 | `vdmredir-product` | 13 |

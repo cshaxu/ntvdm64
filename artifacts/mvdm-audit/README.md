@@ -7,8 +7,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-205 partial (all raw mirror differences), 131 excluded (documented profile,
-source roles or unused retained objects) and 4,348 pending. None is classified
+205 partial (all raw mirror differences), 206 excluded (documented profile,
+source roles or unused retained objects) and 4,273 pending. None is classified
 full in this pass. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -65,3 +65,6 @@ metric in `partial-code-retention.csv`; its limitations are in
 
 The [provisional recovery worklist](recovery-worklist.md) groups evidenced
 findings by approved stage while keeping unresolved inventory in S10 scope.
+
+The [additional historical-build cohort](shard-0/historical-objects-reconciliation.md)
+excludes 75 verified retained output files as current product inputs only.
