@@ -1,0 +1,6 @@
+{
+  "exit": 1,
+  "pid": 9808,
+  "rejected": "wrong x86 WOW32 image lacks CCPU bodies",
+  "result": "pass"
+}

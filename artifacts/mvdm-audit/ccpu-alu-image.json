@@ -1,0 +1,598 @@
+{
+  "result": "pass",
+  "image_sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+  "checker_sha256": "9D601718C60321458B219D3920E56516789F76783D310A1B077D3CB427F370D5",
+  "parser_sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64",
+  "decoder_object_sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986",
+  "globals": {
+    "_CCPU_WR": 5980252,
+    "_CCPU_GR": 8441856,
+    "_CCPU_FLAGS": 8441696,
+    "_CCPU_BR": 5980284,
+    "_pf_table": 5980320
+  },
+  "functions": [
+    {
+      "name": "add",
+      "object_sha256": "6E556CE87571D6814482DD4C15C99896AAD39FB26F711122131A820AED4248A7",
+      "bytes": 169,
+      "absolute_relocations": 7,
+      "function_va": 4342304,
+      "decoder_references": [
+        {
+          "reference_va": 4234717,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4234727,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4234737,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4234747,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4234757,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4234767,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4255051,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4255234,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        },
+        {
+          "reference_va": 4256165,
+          "kind": "function_pointer",
+          "target_va": 4342304
+        }
+      ]
+    },
+    {
+      "name": "adc",
+      "object_sha256": "222D65CC3477B35E223437504385F17BC8353C89336E857247D0109C9C59722B",
+      "bytes": 183,
+      "absolute_relocations": 8,
+      "function_va": 4342112,
+      "decoder_references": [
+        {
+          "reference_va": 4245633,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4245643,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4245653,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4245663,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4245673,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4245683,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4255079,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4255248,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        },
+        {
+          "reference_va": 4256179,
+          "kind": "function_pointer",
+          "target_va": 4342112
+        }
+      ]
+    },
+    {
+      "name": "and",
+      "object_sha256": "73FF976D69A1CDF97F839F76729932B754D406E4E5D54E20E8EF9ABD89C4453B",
+      "bytes": 105,
+      "absolute_relocations": 7,
+      "function_va": 4342480,
+      "decoder_references": [
+        {
+          "reference_va": 4245753,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4245763,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4245773,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4245783,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4245793,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4245803,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4255107,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4255262,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        },
+        {
+          "reference_va": 4256193,
+          "kind": "function_pointer",
+          "target_va": 4342480
+        }
+      ]
+    },
+    {
+      "name": "cmp",
+      "object_sha256": "7C55B3F513D40900DB14DF0FE709CE6E7DFF5D5B83814FD151B671A32B4D48DA",
+      "bytes": 167,
+      "absolute_relocations": 7,
+      "function_va": 4344336,
+      "decoder_references": [
+        {
+          "reference_va": 4248340,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4248350,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4248683,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4249032,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4249291,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4249304,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4249314,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4255149,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4256076,
+          "kind": "function_pointer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4257155,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4257451,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4267534,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4268141,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4268695,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4271443,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4271811,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        },
+        {
+          "reference_va": 4272128,
+          "kind": "relative_transfer",
+          "target_va": 4344336
+        }
+      ]
+    },
+    {
+      "name": "dec",
+      "object_sha256": "8EC3697DD467E4FB0110CE1F330C78D147E93CB17F6154844065DC69D693C622",
+      "bytes": 123,
+      "absolute_relocations": 6,
+      "function_va": 4344832,
+      "decoder_references": [
+        {
+          "reference_va": 4249341,
+          "kind": "function_pointer",
+          "target_va": 4344832
+        },
+        {
+          "reference_va": 4284934,
+          "kind": "function_pointer",
+          "target_va": 4344832
+        },
+        {
+          "reference_va": 4285275,
+          "kind": "function_pointer",
+          "target_va": 4344832
+        }
+      ]
+    },
+    {
+      "name": "inc",
+      "object_sha256": "339C7E08445437710AD14CC8225CB8CC06B4ABA443B338A97F2AA0DAFAFA512A",
+      "bytes": 117,
+      "absolute_relocations": 6,
+      "function_va": 4347184,
+      "decoder_references": [
+        {
+          "reference_va": 4249334,
+          "kind": "function_pointer",
+          "target_va": 4347184
+        },
+        {
+          "reference_va": 4284927,
+          "kind": "function_pointer",
+          "target_va": 4347184
+        },
+        {
+          "reference_va": 4285268,
+          "kind": "function_pointer",
+          "target_va": 4347184
+        }
+      ]
+    },
+    {
+      "name": "neg",
+      "object_sha256": "6C593857D573C58CF2A547ECFF3A40CBCDE28A159E89771DEDFF3E349957111C",
+      "bytes": 129,
+      "absolute_relocations": 7,
+      "function_va": 4351232,
+      "decoder_references": [
+        {
+          "reference_va": 4282147,
+          "kind": "function_pointer",
+          "target_va": 4351232
+        },
+        {
+          "reference_va": 4284164,
+          "kind": "function_pointer",
+          "target_va": 4351232
+        }
+      ]
+    },
+    {
+      "name": "or",
+      "object_sha256": "8858A79EB8967EFADFFC3BC025A1717625E41F7C9887340DB3A6AF49CC213022",
+      "bytes": 105,
+      "absolute_relocations": 7,
+      "function_va": 4351520,
+      "decoder_references": [
+        {
+          "reference_va": 4234852,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4234862,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4234872,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4234882,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4234892,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4234902,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4255065,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4255241,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        },
+        {
+          "reference_va": 4256172,
+          "kind": "function_pointer",
+          "target_va": 4351520
+        }
+      ]
+    },
+    {
+      "name": "sbb",
+      "object_sha256": "99449EEB32925CA643E2C5F8D6FD9E4FC6EFD2A1C0F4753D3EEC99EE7416BB73",
+      "bytes": 170,
+      "absolute_relocations": 8,
+      "function_va": 4353824,
+      "decoder_references": [
+        {
+          "reference_va": 4245693,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4245703,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4245713,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4245723,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4245733,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4245743,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4255093,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4255255,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        },
+        {
+          "reference_va": 4256186,
+          "kind": "function_pointer",
+          "target_va": 4353824
+        }
+      ]
+    },
+    {
+      "name": "sub",
+      "object_sha256": "CBC293C23C2A7B82B9EF27C922191A88103A4915A9D128B27CAB721BEF0094A8",
+      "bytes": 164,
+      "absolute_relocations": 7,
+      "function_va": 4355456,
+      "decoder_references": [
+        {
+          "reference_va": 4245823,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4245830,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4245840,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4245850,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4245860,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4245870,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4255121,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4255269,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        },
+        {
+          "reference_va": 4256200,
+          "kind": "function_pointer",
+          "target_va": 4355456
+        }
+      ]
+    },
+    {
+      "name": "test",
+      "object_sha256": "9D47AC4A8F5C520D56FB24865F80B4102423E3E28C68AE1E0E15412BBE3BFFBD",
+      "bytes": 99,
+      "absolute_relocations": 7,
+      "function_va": 4355632,
+      "decoder_references": [
+        {
+          "reference_va": 4257464,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        },
+        {
+          "reference_va": 4257803,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        },
+        {
+          "reference_va": 4268930,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        },
+        {
+          "reference_va": 4269004,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        },
+        {
+          "reference_va": 4281578,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        },
+        {
+          "reference_va": 4282789,
+          "kind": "function_pointer",
+          "target_va": 4355632
+        }
+      ]
+    },
+    {
+      "name": "xor",
+      "object_sha256": "A6BE343982BC93377F62274D186E18B2F457AF8DE45EF0BF9453530476FC19F0",
+      "bytes": 105,
+      "absolute_relocations": 7,
+      "function_va": 4356048,
+      "decoder_references": [
+        {
+          "reference_va": 4245890,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4246248,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4246906,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4247248,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4247857,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4247954,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4255135,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4255276,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        },
+        {
+          "reference_va": 4256207,
+          "kind": "function_pointer",
+          "target_va": 4356048
+        }
+      ]
+    }
+  ],
+  "decoder_function_bytes": 55972,
+  "decoder_function_va": 4234240,
+  "decoder_relocations": 6531,
+  "limitation": "Code/binding correspondence; behavior and indirect call flow are separately audited"
+}

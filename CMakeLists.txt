@@ -17,6 +17,11 @@ set(CMAKE_C_COMPILER_LAUNCHER "${NTVDM_COMPILER_LAUNCHER}" CACHE STRING "Reposit
 set(CMAKE_CXX_COMPILER_LAUNCHER "${NTVDM_COMPILER_LAUNCHER}" CACHE STRING "Repository-local optional cache" FORCE)
 set(CMAKE_MSVC_RUNTIME_LIBRARY MultiThreaded)
 include(tests/build/wow-message-probes.cmake)
+if(NTVDM_ARCHITECTURE STREQUAL "x86")
+  add_executable(ccpu-alu-oracle EXCLUDE_FROM_ALL tests/observation/ccpu_alu_oracle.c)
+  target_compile_options(ccpu-alu-oracle PRIVATE /W4 /WX)
+  target_compile_definitions(ccpu-alu-oracle PRIVATE _CRT_SECURE_NO_WARNINGS)
+endif()
 
 # The original source-manifest composition remains its existing owner. CMake
 # selects stable subtrees and exposes their real Ninja targets, not a second

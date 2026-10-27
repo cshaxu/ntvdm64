@@ -1,0 +1,304 @@
+{
+  "result": "pass",
+  "records": 1086848,
+  "files": [
+    {
+      "name": "ADC0_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "F5F05E2BAD4A4D90A407A1CF65C70E1C7A16510F7D82F0505FEEDBE47E405B84"
+    },
+    {
+      "name": "ADC0_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "27ECA9ACE58AF18168E5D7E48E16CF6F775E09469EE2A273FC868997C5E78732"
+    },
+    {
+      "name": "ADC0_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "FEB5A6D92D62378FA56E91DFCDD241C0C7E6571F2C601CB129F944A551042A8F"
+    },
+    {
+      "name": "ADC1_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "A4A896AEEAB79862165D6B687123C1254EB2E99C4279CAA3BD9992FB3F88D443"
+    },
+    {
+      "name": "ADC1_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "5A903760088CAA5A55D97BBF6A0E5B9FD17A0A0B61E818F15130952B24B80255"
+    },
+    {
+      "name": "ADC1_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "30FF37F1CA40F17193B0EFB84D880E9E2273CE1242827963351154DDA1D5DB54"
+    },
+    {
+      "name": "ADD16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "F5F05E2BAD4A4D90A407A1CF65C70E1C7A16510F7D82F0505FEEDBE47E405B84"
+    },
+    {
+      "name": "ADD32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "27ECA9ACE58AF18168E5D7E48E16CF6F775E09469EE2A273FC868997C5E78732"
+    },
+    {
+      "name": "ADD8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "FEB5A6D92D62378FA56E91DFCDD241C0C7E6571F2C601CB129F944A551042A8F"
+    },
+    {
+      "name": "AND16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "523DA8E63A73E81233145218F08935AA4ECD494E5B27D3474BA06907956CBC85"
+    },
+    {
+      "name": "AND32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "45C1190430AFB5E124FF4DDD0F03123E5FD56A88F2D7E467635ED131EA45E49B"
+    },
+    {
+      "name": "AND8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "B60AD6DF58EEB22184F47D7AA32C17121B162B7F1904AAF7EC374060CECA5D00"
+    },
+    {
+      "name": "CMP16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "F261B86E11BAD44AB45EC47FC2628FC88C9B46896E3C21A17C9027E150EF637A"
+    },
+    {
+      "name": "CMP32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "751F884BA397ABC8C9DB3FAE5C93A2B6BE087BC7A263D0F26FEF55DF2AE0589E"
+    },
+    {
+      "name": "CMP8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "A5D3399F08D7DB0B025CACD1F3CB95BF4AF7BC46A09F04E74488CFB9EA034AE8"
+    },
+    {
+      "name": "DEC0_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "BDF7180A5747BD2FAE66EF8394B3D8DC131C5CCA3FD9EE76A96D459B271BF398"
+    },
+    {
+      "name": "DEC0_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "06E5F791905D6D1C3FE2F7F73469F2CAE205BBB8964E3E6D4EA7640DF6E54D87"
+    },
+    {
+      "name": "DEC0_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "C2DFCF41D78D5BE1BEEC64294353E5F0E4B6ECE2B609CD6596D6474BF00DC574"
+    },
+    {
+      "name": "DEC1_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "5E298C98474D4E87CD1AACAB8AD58E8A6A80D9683B4A5EE5132B5C9FD6021838"
+    },
+    {
+      "name": "DEC1_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "F9A5F7C4F592C7BB08EDF1AE53F1277CE185A79BFF82416155D65AD8AAF1C08F"
+    },
+    {
+      "name": "DEC1_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "0A8A055F337281679A9DCCB5836A7D3DD3C6177AD4D8EA6C265B8B836F2594E0"
+    },
+    {
+      "name": "INC0_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "CF65D6104CE51A171F4201E12784D00B97D5595F18EAB950AB7EAD0DFBC0BC8D"
+    },
+    {
+      "name": "INC0_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "D534B88C9C997F88441B05E05E326AF94B0811AC87929B531410D340086FF3DD"
+    },
+    {
+      "name": "INC0_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "A84C26FF48BAB9FDD0D70F65D3D8474AF077EDF4671EBD5C607CEA2EA2948CB9"
+    },
+    {
+      "name": "INC1_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "C29A4156CD9CE0BA7037A8928C98B0B1CDA3D33A5D51E7A895A76531D67EBFBF"
+    },
+    {
+      "name": "INC1_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "394DB1E78CCA7A1052392B7426DA852245292B7DB3E9EA753012D8C9C7C1F3F2"
+    },
+    {
+      "name": "INC1_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "2D27C7BD2F32BA85257D1472F2AFD7BFA239E14DFF65502EBB0A9C2B48659B12"
+    },
+    {
+      "name": "NEG16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "4290F8D071DDA07366344AEC7BB7967E9C917155FA85498C433348B5DD9DEDBB"
+    },
+    {
+      "name": "NEG32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "99EF8F15EB89D408640124872E0C56D0AB3192D37AF02003EF4EAEF2AC53A22F"
+    },
+    {
+      "name": "NEG8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "1AC3A0DA1615861390EF19FC2271A1A9CAE5D253417D808051F3BBA7DD067764"
+    },
+    {
+      "name": "OR16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "DF751D8F85A7580B4DF5E14E939603DBF4FB42B88D053AC93998578F676BEF85"
+    },
+    {
+      "name": "OR32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "C0C292AC6D2DD7C36D393D44718ED53820CAB1D8F62AD494997EB8281EF5BF15"
+    },
+    {
+      "name": "OR8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "0619B905DE7B612008C69BA2E578D0F4EB2165855DFDFCDA22976CF1091EDCCE"
+    },
+    {
+      "name": "SBB0_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "B324650BBE8849FA30EA43F3776338D4325A4B74F113A198E1BD2053B1031558"
+    },
+    {
+      "name": "SBB0_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "A8FAF79CF8D898220F5FFB460DAF44BCA0A787BF2C3FBEF885DBB9AA56927FBE"
+    },
+    {
+      "name": "SBB0_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "863366C688A0037E2690599A38353BD775D2049A48B41E49BCD3AC817FF86C05"
+    },
+    {
+      "name": "SBB1_16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "D84E5C0A5E5DA0D795D80207B9B647B54FE4C3D12135BC4646D0CE7808B9E11F"
+    },
+    {
+      "name": "SBB1_32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "6A9AB729846FE487C0AE7BBA38B82FE972808D6DC5E6AAED42D9F1CED46B42B3"
+    },
+    {
+      "name": "SBB1_8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "1E9A38C3E57234296C14CA59F085B0C00EA4D3F2AFE4ED10D5DD56AE2CB013C4"
+    },
+    {
+      "name": "SUB16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "B324650BBE8849FA30EA43F3776338D4325A4B74F113A198E1BD2053B1031558"
+    },
+    {
+      "name": "SUB32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "A8FAF79CF8D898220F5FFB460DAF44BCA0A787BF2C3FBEF885DBB9AA56927FBE"
+    },
+    {
+      "name": "SUB8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "863366C688A0037E2690599A38353BD775D2049A48B41E49BCD3AC817FF86C05"
+    },
+    {
+      "name": "TEST16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "9E23D3CDB69C5B34297005DE663E82506C45BCA05C332E5248F67F1DFF3A9A03"
+    },
+    {
+      "name": "TEST32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "02CC99E7673D9865069D9B833960C3FD4120ED6764191DF99FFD7DF23A5B50DA"
+    },
+    {
+      "name": "TEST8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "2B458A0BB741B113A86E72562BC4298748B7AC1D50232B36C5B1D70B6462C26D"
+    },
+    {
+      "name": "XOR16.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "D15D709ECA2ADA590C0426640AEAB4687CCA0F7F122C45BDF4367F7A486E3BAC"
+    },
+    {
+      "name": "XOR32.BIN",
+      "records": 1196,
+      "bytes": 16744,
+      "sha256": "EB43D5F9DABC741991731FEF2C70D9513CA12DBDA4A53DBEEF41EF0483BEDC23"
+    },
+    {
+      "name": "XOR8.BIN",
+      "records": 65536,
+      "bytes": 917504,
+      "sha256": "24BF9BF70FF339FC2351EAC8CD4D458911FD59605B548ADBEC3C496637946A3A"
+    }
+  ],
+  "known_first_records_checked": [
+    "ADD8.BIN",
+    "ADC1_8.BIN",
+    "DEC0_8.BIN",
+    "DEC1_8.BIN",
+    "INC1_8.BIN",
+    "NEG8.BIN",
+    "TEST8.BIN"
+  ],
+  "normalization": "width-normalized operands/results; defined flags plus original logical AF0; CMP/TEST do not write destination"
+}

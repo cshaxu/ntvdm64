@@ -4,10 +4,10 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 882,
+    "pending": 881,
     "excluded": 151,
     "partial": 55,
-    "full": 1
+    "full": 2
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -24,8 +24,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "3432AB3DD7B34B3C25407944360426F5F74B97B7D43D7B6FF8147775CE333276",
-  "limitations": "One full selected STD leaf; 55 partial entries (48 mirror-different and seven source-list carriers); 882 pending. File/leaf classifications do not close decoder, CPU, guest or related features.",
+  "output_sha256": "5CE819F8F905F7DADEF0507308F36B69C0157979E910FE6AE9775DBF632F033E",
+  "limitations": "Two full selected STD/DEC leaves; 55 partial entries (48 mirror-different sources and seven generation manifests); 881 pending. Full leaf classifications do not close decoder, CPU, guest or related features.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -178,5 +178,6 @@
   "unselected_host_disposition": "unselected-host-role-disposition.csv/.md: corrected to 4 file-role-only exclusions, 21 capability work items",
   "build_recipe_review": "build-recipe-consumption-review.csv/.md: 36 file-role exclusions, seven original source lists partially integrated at generation time",
   "architecture_header_review": "architecture-generated-headers.csv/.md: 27 nonselected MIPS/PPC generated header variants, x86 carrier and cached deps crosschecked",
-  "ccpu_std_contract": "ccpu-std-contract-review.md; full selected STD leaf, verified emitted body/decoder and real guest flags/reverse copy; prefixes and other owners remain open"
+  "ccpu_std_contract": "ccpu-std-contract-review.md; full selected STD leaf, verified emitted body/decoder and real guest flags/reverse copy; prefixes and other owners remain open",
+  "ccpu_dec_contract": "alu-dec-oracle-contract.md and ccpu-alu evidence; full selected DEC leaf, 8-bit exhaustive and wider sampled"
 }
