@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-399 partial, 2,545 excluded physical file roles,
-52 full files (26 executable leaves and 26 declarations) and 1,688 pending.
+408 partial, 2,546 excluded physical file roles,
+52 full files (26 executable leaves and 26 declarations) and 1,678 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the CCPU foundation checkpoint, not a prior snapshot's fixed counts.
+the CCPU control checkpoint, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -23,6 +23,9 @@ partial integrations, with no new full acceptance or candidate qualification.
 The [remaining CCPU C-source review](ccpu-remaining-c-source-review.md) covers
 all 22 still-pending C files, distinguishing 13 mapped source roles from
 six inactive 486 bodies and three alternative/inline roles.
+The [control guest checkpoint](ccpu-control-review.md) subsequently resolves
+ten of those roles: nine partial owners and the unused standalone NOP helper
+file, with the original inline NOP instruction retained and tested.
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

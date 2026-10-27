@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 120,
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /W4 /I\"O:\\repos.hobby\\ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-control-followup\\sign-flags/pif.obj\" /Fe\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-control-followup\\sign-flags/pif-builder.exe\" \"O:\\repos.hobby\\ntvdm64\\tests\\observation/ems_pif_builder.c\"\"",
+  "pid": 15492,
+  "start": "2026-10-27T23:43:16.3191782Z"
+}

@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "pid": 16488,
+  "arguments": "-B -X utf8 artifacts/mvdm-audit/ccpu-control-role-merge.py",
+  "diagnostic_budget_seconds": 120,
+  "started": "2026-10-27T23:46:39.2466183Z"
+}

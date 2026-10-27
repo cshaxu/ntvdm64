@@ -1,0 +1,8 @@
+Exception: O:\repos.hobby\ntvdm64\tests\observation\verify-ccpu-sign-flags-guest.ps1:75
+Line |
+  75 |     throw 'CPU40 control/exception guest workload did not complete'
+     |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | CPU40 control/exception guest workload did
+     | not complete
+
+

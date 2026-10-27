@@ -1,0 +1,7 @@
+{
+  "start": "2026-10-27T23:41:48.6249094Z",
+  "timeoutSeconds": 30,
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_control_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-control-r2\\run/EMSPROBE.COM\"",
+  "pid": 29144,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe"
+}

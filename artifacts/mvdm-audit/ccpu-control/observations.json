@@ -1,0 +1,87 @@
+{
+  "guest_originals_changed": false,
+  "first_nonpass": "Guest exited zero but long result line was clipped in the 53-column captured viewport; final probe uses three short lines and was independently rerun",
+  "result": "pass",
+  "production_changed": false,
+  "scope": "Real DOS CPU40 control/instruction exception paths, binary decoder correspondence and test-runner regression; not protected privilege or all operand/lifecycle cases",
+  "cases": [
+    {
+      "context": {
+        "private_desktop": true,
+        "parent_pid": 17156,
+        "script_sha256": "A11E22E144557D5F088F859203791EBBD1D3ABCFD09689932FEFB539D074BB2B",
+        "token_class": "medium",
+        "integrity_sid": "S-1-16-8192",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+      },
+      "runner_exit": 1,
+      "expected": "non-pass",
+      "name": "initial-narrow-nonpass"
+    },
+    {
+      "context": {
+        "private_desktop": true,
+        "parent_pid": 10608,
+        "script_sha256": "FCFA596D72CF3F32426DB9560C557A3622F0D570B43EB617DF3F869632A40904",
+        "integrity_sid": "S-1-16-8192",
+        "token_class": "medium",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+      },
+      "runner_exit": 0,
+      "expected": "pass",
+      "name": "baseline"
+    },
+    {
+      "context": {
+        "integrity_sid": "S-1-16-8192",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "private_desktop": true,
+        "token_class": "medium",
+        "parent_pid": 24748,
+        "script_sha256": "FCFA596D72CF3F32426DB9560C557A3622F0D570B43EB617DF3F869632A40904"
+      },
+      "runner_exit": 0,
+      "expected": "pass",
+      "name": "negative"
+    },
+    {
+      "context": {
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "private_desktop": true,
+        "parent_pid": 30048,
+        "token_class": "medium",
+        "script_sha256": "FCFA596D72CF3F32426DB9560C557A3622F0D570B43EB617DF3F869632A40904",
+        "integrity_sid": "S-1-16-8192"
+      },
+      "runner_exit": 0,
+      "expected": "pass",
+      "name": "candidate"
+    },
+    {
+      "context": {
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "token_class": "medium",
+        "parent_pid": 33412,
+        "integrity_sid": "S-1-16-8192",
+        "private_desktop": true,
+        "script_sha256": "FCFA596D72CF3F32426DB9560C557A3622F0D570B43EB617DF3F869632A40904"
+      },
+      "runner_exit": 0,
+      "expected": "pass",
+      "name": "sign-flags"
+    },
+    {
+      "context": {
+        "parent_pid": 30964,
+        "script_sha256": "FCFA596D72CF3F32426DB9560C557A3622F0D570B43EB617DF3F869632A40904",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "token_class": "medium",
+        "integrity_sid": "S-1-16-8192",
+        "private_desktop": true
+      },
+      "runner_exit": 0,
+      "expected": "pass",
+      "name": "sign-flags-negative"
+    }
+  ]
+}

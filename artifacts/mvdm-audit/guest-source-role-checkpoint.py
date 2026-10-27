@@ -78,7 +78,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             if proof['status'] == 'excluded':
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
                                 'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only',
-                                'historical-build-recipe-file-only')
+                                'historical-build-recipe-file-only', 'historical-inline-helper-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -94,8 +94,10 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'native-source-next-role-' and path == 'softpc.new/base/comms/prt_scrn.c'
                 if proof['role'] == 'historical-build-recipe-file-only':
                     assert prefix == 'historical-build-role-'
+                if proof['role'] == 'historical-inline-helper-source-only':
+                    assert prefix == 'ccpu-control-role-' and path == 'softpc.new/base/ccpu386/nop.c'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -128,6 +130,40 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'ccpu-control-role-':
+        expected = {'cli', 'clts', 'wait', 'rsrvd', 'div', 'lidt', 'sidt', 'jcxz', 'str', 'nop'}
+        assert set(changed) == {'softpc.new/base/ccpu386/' + n + '.c' for n in expected}
+        evidence = A / 'ccpu-control'
+        for record in json.loads((evidence / 'records.json').read_text(encoding='utf-8-sig')):
+            assert sha(evidence / record['file']) == record['sha256']
+        guest = json.loads((evidence / 'observations.json').read_text(encoding='utf-8-sig'))
+        assert guest['result'] == 'pass' and not guest['production_changed'] and not guest['guest_originals_changed']
+        assert {r['name'] for r in guest['cases']} == {'initial-narrow-nonpass', 'baseline', 'negative', 'candidate', 'sign-flags', 'sign-flags-negative'}
+        for case in guest['cases']:
+            assert case['context']['integrity_sid'] == 'S-1-16-8192' and case['context']['private_desktop'] is True
+            expected_exit = 1 if case['name'] == 'initial-narrow-nonpass' else 0
+            assert case['runner_exit'] == expected_exit
+            root = evidence / case['name']
+            if expected_exit:
+                continue
+            for row in rows(root / 'inputs.csv'):
+                assert sha(Path(row['Path'])) == row['Hash']
+            report = (root / 'observer.txt').read_text(encoding='utf-8-sig')
+            console = (root / 'observer.txt.console.txt').read_text(encoding='utf-8-sig')
+            negative = case['name'] in ('negative', 'sign-flags-negative')
+            assert 'result=exited' in report and ('exit=0x00000001' if negative else 'exit=0x00000000') in report
+            if case['name'] in ('baseline', 'candidate'):
+                assert all(s in console for s in ('CCPU CONTROL PASS', 'NOP32 CLI32 CLTS4 WAIT4 IDT16', 'DIVFAULT6 JCXZ4 STRFAULT1 RSRVD5'))
+            if negative:
+                assert 'FAIL phase=A' in console and 'CCPU CONTROL PASS' not in console
+        image = json.loads((evidence / 'image/result.json').read_text())
+        assert image['result'] == 'pass' and image['executable_sections_equal'] is True and len(image['functions']) == 14
+        assert image['checker_sha256'] == sha(Path('tests/observation/verify_ccpu_control_image.py'))
+        assert image['parser_sha256'] == sha(Path('tests/observation/verify_ccpu_sign_flag_image.py'))
+        assert json.loads((evidence / 'image/wrong.completion.json').read_text(encoding='utf-8-sig'))['exit'] == 1
+        for proof in dispositions:
+            assert proof['original_text_retained_percent'] == '100' and not proof['estimated_restored_code_percent']
+            assert proof['status'] == ('excluded' if Path(proof['relative_path']).stem == 'nop' else 'partial')
     if prefix == 'ccpu-foundation-role-':
         observed = json.loads((A / 'ccpu-foundation-observations.json').read_text())
         actual = runpy.run_path(str(A / 'ccpu-foundation-observer.py'))['inspect']()
@@ -379,7 +415,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
         assert sha(path) == record['sha256'] and '(STALE)' not in path.read_text()
         text = path.read_text().replace('\\', '/').lower()
         for relative in changed:
-            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] not in ('historical-cpu-test-source-only', 'historical-empty-printscreen-source-only'):
+            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] not in ('historical-cpu-test-source-only', 'historical-empty-printscreen-source-only', 'historical-inline-helper-source-only'):
                 assert 'src/mvdm/' + relative.lower() not in text, relative
     for row in rows(A / 'full-selected-leaf.csv') + rows(A / 'full-selected-declarations.csv'):
         assert merged[row['relative_path']]['status'] == 'full'
@@ -406,7 +442,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\tests\observation\verify_ccpu_control_image.py", line 90, in <module>
+    main()
+    ~~~~^^
+  File "O:\repos.hobby\ntvdm64\tests\observation\verify_ccpu_control_image.py", line 25, in main
+    assert image.base == cached.base and image.code == cached.code
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

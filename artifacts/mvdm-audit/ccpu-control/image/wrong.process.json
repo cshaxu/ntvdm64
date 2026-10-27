@@ -1,0 +1,8 @@
+{
+  "diagnostic_budget_seconds": 60,
+  "pid": 13100,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "expected_exit": 1,
+  "started": "2026-10-27T23:44:45.2928657Z",
+  "arguments": "-B -X utf8 tests/observation/verify_ccpu_control_image.py --worker-build build/.ninja/msvc-x86-release/worker --image build/t473-s10/neg64-native-r2/run/fixture.exe --output build/t473-s10/ccpu-control-image/wrong-result.json"
+}

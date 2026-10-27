@@ -1,0 +1,225 @@
+{
+  "result": "pass",
+  "image_sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D",
+  "map_sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B",
+  "cached_worker_sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C",
+  "executable_sections_equal": true,
+  "checker_sha256": "941C5FFAFCFB06BC6B12CC3C4BDBC386B4A9F54BD011C1D35B41B9DC7833B50D",
+  "parser_sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64",
+  "decoder_object_sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986",
+  "decoder_bytes": 55972,
+  "functions": [
+    {
+      "name": "CLI",
+      "function_va": 4344272,
+      "body_bytes": 11,
+      "masked_relocation_words": 1,
+      "object_sha256": "EBBEAA1EE1DB871FD74556EA81748940FD2FF539259FE91F153930DA517D0632",
+      "source_sha256": "3F044715990199F959EC05A8A18C98B084956F43F39F2F172705F6FDECB80018",
+      "decoder_references": [
+        {
+          "reference_va": 4284829,
+          "relocation_kind": 20
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "CLTS",
+      "function_va": 4344288,
+      "body_bytes": 8,
+      "masked_relocation_words": 1,
+      "object_sha256": "093209C9F961B45B16956D9F7E657C5816BF857A8630239A266F9FF56D6EC43A",
+      "source_sha256": "7021E4711BED42BBA118D565707C6735735068119C5030F54A79AC704BB28533",
+      "decoder_references": [
+        {
+          "reference_va": 4237320,
+          "relocation_kind": 20
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "WAIT",
+      "function_va": 4223152,
+      "body_bytes": 3,
+      "masked_relocation_words": 0,
+      "object_sha256": "A3EB299655DE1F5792707DD324099E21D8E68B796FE749644BFB5FB704FED599",
+      "source_sha256": "26DCDA8641EFF26A1D23F14E204CAAAFC17BB06EE9E04E8AC0ACF676D8586991",
+      "decoder_references": [
+        {
+          "reference_va": 4263335,
+          "relocation_kind": 20
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "RSRVD",
+      "function_va": 4223152,
+      "body_bytes": 3,
+      "masked_relocation_words": 0,
+      "object_sha256": "77DD0E1122608602234D687516E84965F68B7E39662128C586834EB2D0ACEEFC",
+      "source_sha256": "38F3D99BC6CDDCECC4A2D66CF63746746A4F6774386C94391EC7FB70582DB295",
+      "decoder_references": [
+        {
+          "reference_va": 4237292,
+          "relocation_kind": 20
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "DIV8",
+      "function_va": 4345264,
+      "body_bytes": 127,
+      "masked_relocation_words": 11,
+      "object_sha256": "8E79EB61EF64456551EF98275D374C86BA3EE91687B62D0263763FF7BF8451AE",
+      "source_sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007",
+      "decoder_references": [
+        {
+          "reference_va": 4282441,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "DIV16",
+      "function_va": 4344960,
+      "body_bytes": 140,
+      "masked_relocation_words": 12,
+      "object_sha256": "8E79EB61EF64456551EF98275D374C86BA3EE91687B62D0263763FF7BF8451AE",
+      "source_sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007",
+      "decoder_references": [
+        {
+          "reference_va": 4284742,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "DIV32",
+      "function_va": 4345104,
+      "body_bytes": 152,
+      "masked_relocation_words": 13,
+      "object_sha256": "8E79EB61EF64456551EF98275D374C86BA3EE91687B62D0263763FF7BF8451AE",
+      "source_sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007",
+      "decoder_references": [
+        {
+          "reference_va": 4284747,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "LIDT16",
+      "function_va": 4349808,
+      "body_bytes": 27,
+      "masked_relocation_words": 2,
+      "object_sha256": "047C72A0155B2C8700AFC142856FEBF5BD25A26619BF1955DA18EA54AD7D25D9",
+      "source_sha256": "00305675F2235C4211471587A50A2F45C02BC93BC4FAEBCD857E4A96CC045FCB",
+      "decoder_references": [
+        {
+          "reference_va": 4235627,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "LIDT32",
+      "function_va": 4349840,
+      "body_bytes": 22,
+      "masked_relocation_words": 2,
+      "object_sha256": "047C72A0155B2C8700AFC142856FEBF5BD25A26619BF1955DA18EA54AD7D25D9",
+      "source_sha256": "00305675F2235C4211471587A50A2F45C02BC93BC4FAEBCD857E4A96CC045FCB",
+      "decoder_references": [
+        {
+          "reference_va": 4235632,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "SIDT16",
+      "function_va": 4355328,
+      "body_bytes": 22,
+      "masked_relocation_words": 2,
+      "object_sha256": "7A0165BFAC78CD008953759DFAABB6BBC3441C7D293E0ADD863AD49FC7AF471A",
+      "source_sha256": "D6882F92A0171EBD6F5137D401E2AF4F89C0E854F0349D51650096D755B1A9A0",
+      "decoder_references": [
+        {
+          "reference_va": 4235320,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "SIDT32",
+      "function_va": 4355328,
+      "body_bytes": 22,
+      "masked_relocation_words": 2,
+      "object_sha256": "7A0165BFAC78CD008953759DFAABB6BBC3441C7D293E0ADD863AD49FC7AF471A",
+      "source_sha256": "D6882F92A0171EBD6F5137D401E2AF4F89C0E854F0349D51650096D755B1A9A0",
+      "decoder_references": [
+        {
+          "reference_va": 4235325,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "JCXZ",
+      "function_va": 4348576,
+      "body_bytes": 16,
+      "masked_relocation_words": 2,
+      "object_sha256": "D561A3D9D8842FBEAA21C17EB5064DA6411836F23F5F109FE58C35B2F276CE90",
+      "source_sha256": "DBC17E4A01510661AC3A9C2E4E4853BA11F22C945F8AEE3707E47A2DF76BFAA0",
+      "decoder_references": [
+        {
+          "reference_va": 4279331,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "JECXZ",
+      "function_va": 4348592,
+      "body_bytes": 14,
+      "masked_relocation_words": 2,
+      "object_sha256": "D561A3D9D8842FBEAA21C17EB5064DA6411836F23F5F109FE58C35B2F276CE90",
+      "source_sha256": "DBC17E4A01510661AC3A9C2E4E4853BA11F22C945F8AEE3707E47A2DF76BFAA0",
+      "decoder_references": [
+        {
+          "reference_va": 4279336,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "See separate control guest assertions"
+    },
+    {
+      "name": "STR",
+      "function_va": 4355440,
+      "body_bytes": 14,
+      "masked_relocation_words": 1,
+      "object_sha256": "E32407791C27F55F6C59793C0BE45D1087CAB052CB026BBADAC0DB539CEB84CA",
+      "source_sha256": "09F56D9113CDCD647F125999D65669389DE9CA626498F9B2A84C330AD8CBEDE0",
+      "decoder_references": [
+        {
+          "reference_va": 4235120,
+          "relocation_kind": 6
+        }
+      ],
+      "guest_scope": "Real-mode rejection only; helper not entered"
+    }
+  ],
+  "unused_nop_helper_object_sha256": "1F155FC0FB4722C5010C44A2B9B456C27EAC5899728E2C6FC2A680C82E362D7A",
+  "limitation": "Code bindings only; no privilege, operand, exception or lifecycle proof without guest evidence"
+}

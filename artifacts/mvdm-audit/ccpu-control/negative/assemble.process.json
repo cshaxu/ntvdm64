@@ -1,0 +1,7 @@
+{
+  "pid": 4632,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_control_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-control-followup\\negative/EMSPROBE.COM\" -DCPU_PROBE_NEGATIVE_ORACLE=1",
+  "timeoutSeconds": 30,
+  "start": "2026-10-27T23:42:52.8840186Z"
+}

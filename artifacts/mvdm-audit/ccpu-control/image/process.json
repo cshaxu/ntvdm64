@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-27T23:43:19.2971327Z",
+  "diagnostic_budget_seconds": 120,
+  "pid": 22396,
+  "arguments": "-B -X utf8 tests/observation/verify_ccpu_control_image.py --worker-build build/.ninja/msvc-x86-release/worker --image build/t473-s10/candidate-validation/package/system32/ntvdm.exe --output build/t473-s10/ccpu-control-image/result.json"
+}

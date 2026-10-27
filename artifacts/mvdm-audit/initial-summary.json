@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1688,
-    "excluded": 2545,
-    "partial": 399,
+    "pending": 1678,
+    "excluded": 2546,
+    "partial": 408,
     "full": 52
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Nine original CPU foundation source/header integrations are partial; no new full acceptance, mirror change or runtime image."
+  "note": "Nine CPU control owners partial after real-guest/code witnesses; unused standalone NOP helper excluded without excluding the original inline instruction; no new full/source/runtime change."
 }

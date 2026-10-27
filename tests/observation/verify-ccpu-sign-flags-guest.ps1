@@ -5,7 +5,8 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [Parameter(Mandatory)][string]$BuildRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe',
- [switch]$NegativeOracle)
+ [switch]$NegativeOracle,
+ [ValidateSet('SignFlags','Control')][string]$Workload='SignFlags')
 # Independent COM exercises selected CPU40 sign-extension and flag instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
@@ -29,13 +30,14 @@ try{
  if($label -ne 'S-1-16-8192'){throw "Expected desktop-capable medium token, got $label"}
  @{parent_pid=$PID;host_path=(Get-Process -Id $PID).Path;integrity_sid=$label;token_class='medium';script_sha256=(Get-FileHash $PSCommandPath).Hash;private_desktop=$true}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $line='-f bin "'+$PSScriptRoot+'/ccpu_sign_flag_probe.asm" -o "'+$root+'/EMSPROBE.COM"'
+ $probe=Join-Path $PSScriptRoot $(if($Workload -eq 'Control'){'ccpu_control_probe.asm'}else{'ccpu_sign_flag_probe.asm'})
+ $line='-f bin "'+$probe+'" -o "'+$root+'/EMSPROBE.COM"'
  if($NegativeOracle){$line+=' -DCPU_PROBE_NEGATIVE_ORACLE=1'}
  $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$assembler;command=$line;timeoutSeconds=30}|ConvertTo-Json|Set-Content "$root/assemble.process.json"
  if(!$p.WaitForExit(30000)){taskkill.exe /PID $p.Id /T /F;throw 'Owned assembler deadline'}
  $p.WaitForExit();$code=$p.ExitCode;$p.Dispose();$code|Set-Content "$root/assemble.exit.txt";if($code){throw 'Independent COM assembly failed'}
- Get-FileHash $PSCommandPath,"$PSScriptRoot/ccpu_sign_flag_probe.asm","$root/EMSPROBE.COM",$Observer,$LogonHelper,$assembler|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ Get-FileHash $PSCommandPath,$probe,"$root/EMSPROBE.COM",$Observer,$LogonHelper,$assembler|Export-Csv -NoTypeInformation "$root/inputs.csv"
  $stage=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path;$scope=New-IsolatedPackageScope $stage
  $tests=Join-Path $stage tests;$null=New-Item -ItemType Directory $tests -Force
  # Reuse the existing test PIF producer: original no-PIF defaults deliberately
@@ -66,12 +68,18 @@ try{
  $report=Get-Content "$root/observer.txt" -Raw
  $console=Get-Content "$root/observer.txt.console.txt" -Raw
  if($observerProcess.ExitCode -or $report -notmatch 'result=exited'){throw 'CPU40 guest observation did not complete'}
- if($NegativeOracle){
+ if($Workload -eq 'Control'){
+  if($NegativeOracle){
+   if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'CCPU CONTROL FAIL phase=A' -or $console -match 'CCPU CONTROL PASS'){throw 'Deliberately wrong control oracle was not rejected'}
+  }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'CCPU CONTROL PASS' -or $console -notmatch 'NOP32 CLI32 CLTS4 WAIT4 IDT16' -or $console -notmatch 'DIVFAULT6 JCXZ4 STRFAULT1 RSRVD5'){
+   throw 'CPU40 control/exception guest workload did not complete'
+  }
+ }elseif($NegativeOracle){
   if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'CCPU SIGN FLAGS FAIL phase=A' -or $console -match 'CCPU SIGN FLAGS REVERSE COPY PASS'){throw 'Deliberately wrong CWDE oracle was not rejected'}
  }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'CCPU SIGN PASS cases=524288' -or $console -notmatch 'CCPU CDQ BOUNDARIES PASS cases=8' -or $console -notmatch 'CCPU FLAGS PASS cases=114688' -or $console -notmatch 'CCPU SIGN FLAGS REVERSE COPY PASS'){throw 'CPU40 guest instruction workload did not complete'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Probe inputs changed'}}
- if($NegativeOracle){'PASS deliberately wrong CWDE expectation rejected; guest exit=1; no success marker'|Set-Content "$root/result.txt"}
- else{'PASS independent COM -> original CPU40 decoder/sign-extension/flag owners; normal launcher exit; no original guest modification'|Set-Content "$root/result.txt"}
+ if($NegativeOracle){"PASS deliberately wrong $Workload expectation rejected; guest exit=1; no success marker"|Set-Content "$root/result.txt"}
+ else{"PASS independent COM -> original CPU40 $Workload owners; normal launcher exit; no original guest modification"|Set-Content "$root/result.txt"}
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";1|Set-Content "$root/exit.txt";exit 1}
 finally{

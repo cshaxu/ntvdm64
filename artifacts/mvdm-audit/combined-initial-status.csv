@@ -1404,9 +1404,9 @@ softpc.new/base/ccpu386/clc.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/clc.h,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/cld.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/cld.h,1,full,shard-1/file-audit.csv
-softpc.new/base/ccpu386/cli.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/cli.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/cli.h,3,partial,shard-3/file-review.csv
-softpc.new/base/ccpu386/clts.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/clts.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/clts.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/cmc.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/cmc.h,2,full,shard-2/file-audit.csv
@@ -1426,7 +1426,7 @@ softpc.new/base/ccpu386/das.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/das.h,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/dec.c,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/dec.h,3,full,shard-3/file-review.csv
-softpc.new/base/ccpu386/div.c,1,pending,shard-1/file-audit.csv
+softpc.new/base/ccpu386/div.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/div.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/enter.c,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/enter.h,2,partial,shard-2/file-audit.csv
@@ -1455,7 +1455,7 @@ softpc.new/base/ccpu386/invlpg.c,0,pending,shard-0/review.csv
 softpc.new/base/ccpu386/invlpg.h,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/iret.c,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/iret.h,3,partial,shard-3/file-review.csv
-softpc.new/base/ccpu386/jcxz.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/jcxz.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/jcxz.h,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/jmp.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/jmp.h,3,partial,shard-3/file-review.csv
@@ -1471,7 +1471,7 @@ softpc.new/base/ccpu386/leave.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/leave.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/lgdt.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/lgdt.h,1,partial,shard-1/file-audit.csv
-softpc.new/base/ccpu386/lidt.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/lidt.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/lidt.h,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/lldt.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/lldt.h,0,partial,shard-0/review.csv
@@ -1496,7 +1496,7 @@ softpc.new/base/ccpu386/mul.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/neg.c,1,full,shard-1/file-audit.csv
 softpc.new/base/ccpu386/neg.h,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/newnpx.h,2,pending,shard-2/file-audit.csv
-softpc.new/base/ccpu386/nop.c,3,pending,shard-3/file-review.csv
+softpc.new/base/ccpu386/nop.c,3,excluded,shard-3/file-review.csv
 softpc.new/base/ccpu386/nop.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/not.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/not.h,0,full,shard-0/review.csv
@@ -1530,7 +1530,7 @@ softpc.new/base/ccpu386/rol.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/rol.h,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/ror.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/ror.h,1,partial,shard-1/file-audit.csv
-softpc.new/base/ccpu386/rsrvd.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/rsrvd.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/rsrvd.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/sahf.c,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/sahf.h,1,full,shard-1/file-audit.csv
@@ -1551,7 +1551,7 @@ softpc.new/base/ccpu386/shr.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/shr.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/shrd.c,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/shrd.h,1,partial,shard-1/file-audit.csv
-softpc.new/base/ccpu386/sidt.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/sidt.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/sidt.h,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/sldt.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/sldt.h,0,partial,shard-0/review.csv
@@ -1564,7 +1564,7 @@ softpc.new/base/ccpu386/std.c,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/std.h,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/sti.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/sti.h,2,partial,shard-2/file-audit.csv
-softpc.new/base/ccpu386/str.c,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/str.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/str.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/stubs.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/sub.c,1,full,shard-1/file-audit.csv
@@ -1577,7 +1577,7 @@ softpc.new/base/ccpu386/verr.h,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/verw.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/verw.h,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/vglob.c,0,pending,shard-0/review.csv
-softpc.new/base/ccpu386/wait.c,1,pending,shard-1/file-audit.csv
+softpc.new/base/ccpu386/wait.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/wait.h,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/wbinvd.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/wbinvd.h,2,pending,shard-2/file-audit.csv

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\tests\observation\verify_ccpu_control_image.py", line 85, in <module>
+    main()
+    ~~~~^^
+  File "O:\repos.hobby\ntvdm64\tests\observation\verify_ccpu_control_image.py", line 22, in main
+    assert sha(image.data) == sha((args.worker_build / 'ntvdm.exe').read_bytes()), 'Map must belong to this exact worker image'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Map must belong to this exact worker image

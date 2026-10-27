@@ -1,0 +1,37 @@
+[
+  {
+    "file": "merge.completion.json",
+    "sha256": "2718728C8B70CE22EC2B545EF6348A2F7556706D9990E4DB21925C3E85F7ECA7",
+    "bytes": 66
+  },
+  {
+    "file": "merge.process.json",
+    "sha256": "9041F1770A5EE72A72A38D6D5E99018F0520712428BBCAC598B9A1984452EE80",
+    "bytes": 239
+  },
+  {
+    "file": "merge.stdout.txt",
+    "sha256": "8234F06716AF75BFFE7F1C659A24D84EFBE2F826A60F888D02D233F4C9A0B116",
+    "bytes": 384
+  },
+  {
+    "file": "verify.completion.json",
+    "sha256": "29F4DFAC2982360CABD77CFC1CD806995858312857601A3F2CF724A3BF17B562",
+    "bytes": 66
+  },
+  {
+    "file": "verify.process.json",
+    "sha256": "6EA52165A48EA0E9F2E79BB0FB4A79B466B494BDA6BD7A996569828C255EBE44",
+    "bytes": 378
+  },
+  {
+    "file": "verify.stderr.txt",
+    "sha256": "189226F012AFE78998A43626E27CAF759B021C5FEFBDF44C2308E0F33C050D04",
+    "bytes": 115
+  },
+  {
+    "file": "verify.stdout.txt",
+    "sha256": "BF27EA78803DC75ED7312AFD9D64DFCD35418D9FAC4475FBD2DE0591F926DC0E",
+    "bytes": 599
+  }
+]

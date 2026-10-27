@@ -1,0 +1,3 @@
+# buffer=53,9001 viewport=0,0,52,14
+[0] CCPU CONTROL PASS nop=32 cli=32 clts=4 wait=4 idt=16
+[1] 1 reserved=5

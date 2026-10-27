@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 300,
+  "pid": 10608,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-sign-flags-guest.ps1\" -Workload Control -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\" -Observer \"O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe\" -LogonHelper \"O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-control-r2\\run\"",
+  "started": "2026-10-27T23:41:47.5675696Z"
+}
