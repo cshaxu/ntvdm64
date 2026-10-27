@@ -1,0 +1,15 @@
+{
+  "time_budget_minutes": 5,
+  "pid": 11488,
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\prepare-sol-claim-watch.ps1",
+  "started": "2026-10-27T23:00:40.5214689Z",
+  "helper_sha256": "CC53B2AB21A037AFEA5AC6D949A4E689F9D04E1C823BFCA82EAEABF56BB1764D",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-claim-watch.stderr.txt",
+  "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-claim-watch.stdout.txt",
+  "no_progress_minutes": 2,
+  "size_budget_gib": 1,
+  "script_sha256": "B5D723B468F439B40E4FB3F0620250DA2CDC6B4553A84D65591AA3E2581103EC",
+  "directory": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-claim-watch",
+  "original_probe_sha256": "FEEA202026BD06EA22E5BC077267FFBAACBC8A14C6B58CAF92123BD4E8863ECB"
+}

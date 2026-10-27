@@ -1,0 +1,34 @@
+[
+  {
+    "Path": "build/t473-s10/sol-error-watch",
+    "Owner": "M0 T473 S10 root",
+    "Files": 11,
+    "Bytes": 283070,
+    "InventorySha256": "22DAF8FDAAB44A64A8814D3F262F3B4C3CED920E405247633F9699120800E4AE",
+    "Applied": false
+  },
+  {
+    "Path": "build/t473-s10/sol-error-watch-r2",
+    "Owner": "M0 T473 S10 root",
+    "Files": 9,
+    "Bytes": 301707,
+    "InventorySha256": "DD4A016236A72EE9699A6B5AA8A6D97EA2C780EAF7C16DD6591B05A2C2138036",
+    "Applied": false
+  },
+  {
+    "Path": "build/t473-s10/sol-claim-watch",
+    "Owner": "M0 T473 S10 root",
+    "Files": 9,
+    "Bytes": 385959,
+    "InventorySha256": "B30F9B53F6B97C7BA99DE1988403BD9B3D48AC366B3384AA7484473B28DC39B9",
+    "Applied": false
+  },
+  {
+    "Path": "build/t473-s10/native-cbt-info",
+    "Owner": "M0 T473 S10 root",
+    "Files": 4,
+    "Bytes": 136000,
+    "InventorySha256": "C554C6D56ED0893948AD5EDFCDA66B7CFAFD61358D56EDB9024C0DD494378CE9",
+    "Applied": false
+  }
+]

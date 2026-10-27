@@ -1,0 +1,41 @@
+{
+  "product_source_changed": false,
+  "scope": "Preprocessor selection only; not ABI or runtime acceptance",
+  "records": [
+    {
+      "file": "run.ps1",
+      "sha256": "2D8BEB9FB8B95AF786400A2FB5D637CC0AD3AD4AEA3048223EED4E547F9FBB53"
+    },
+    {
+      "file": "original-command.txt",
+      "sha256": "E303691B06042BB2889DA18D0C90CB6291A8B4154654D65DDD9E4191607E7B3B"
+    },
+    {
+      "file": "preprocess-command.txt",
+      "sha256": "84736AC51416E213D3552BB8B636D62F7A2BE5F592D34AD8E724F58037CCB6DC"
+    },
+    {
+      "file": "normal-cache-inputs.json",
+      "sha256": "58C766F6F9DB259A3E352F418EA86ECC57F0EA819CF4EFA365D0DD7B0885998E"
+    },
+    {
+      "file": "compiler-inputs.json",
+      "sha256": "B72FA070860D9C5ADBBF653957C85A93829ADD4E0C9034EF53AD6F5BD92406E6"
+    },
+    {
+      "file": "result.json",
+      "sha256": "CC95D8EA7846A764B0EE53B9FB9A10065682416E6EA3A3A395681D2E8544DADD"
+    },
+    {
+      "file": "owner.json",
+      "sha256": "E73170E859562120DD7E5A7AFE565DEE64736033E6DF4B89C06577C97AF26F72"
+    },
+    {
+      "file": "exit.json",
+      "sha256": "07F5EB1FC30160355854C1B10FBEF57ABD1D379D349AC469A38D2B695CED2272"
+    }
+  ],
+  "guest_changed": false,
+  "cached_product_changed": false,
+  "preprocessor_output_sha256": "E549C5583D797EEA65BFFC76C9B69523DAE91767A90D9578AAFD6E7F80D8142E"
+}

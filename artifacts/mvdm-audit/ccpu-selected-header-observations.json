@@ -1,0 +1,16 @@
+{
+  "result": "pass",
+  "base": "9ca2db194",
+  "cohort_headers": 96,
+  "headers_seen": 74,
+  "headers_with_emitted_tokens": 71,
+  "scope": "Compiler-selected declarations of a selected decoder; not behavior acceptance",
+  "preprocessor_output": {
+    "path": "build\\t473-s10\\ccpu-selected-preprocessing\\c_main.i",
+    "sha256": "E549C5583D797EEA65BFFC76C9B69523DAE91767A90D9578AAFD6E7F80D8142E"
+  },
+  "table_sha256": "BD1BA065644EA73531D8C868F6BFD833DB056FF5532F83997DED940A6B6A07BE",
+  "script_sha256": "BFC17A8F0F3C3CC086D92C6A04E79A72C1621675BEA180DA19F9E8B0719174AF",
+  "product_source_changed": false,
+  "guest_changed": false
+}

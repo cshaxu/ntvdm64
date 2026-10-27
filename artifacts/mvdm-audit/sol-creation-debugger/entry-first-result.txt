@@ -1,0 +1,20 @@
+SOL options: command=1003
+SOL error-watch: verified public entry module=KERNEL32.DLL rva=00014f00 address=75274f00
+SOL options: wow32-module=O:\tmp\n60b\system32\WOW32.DLL
+SOL error-watch: armed=1 tid=24740
+SOL error-watch: CAPTURED_5023 tid=24740 public-caller=00d6893d visits=71
+SOL options: fault-module=ntvdm.exe base=00C00000 size=4542464 rva=0016893d
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=00d6893d
+SOL options: fault-module=ntvdm.exe base=00C00000 size=4542464 rva=0016893d
+SOL options: code-region base=00D68000 size=143360 state=1000 protect=20 type=1000000 bytes@pc=8b4b0485c97541a1c0fdfd00bfc0fdfd
+SOL options: stack[2]=688a7822
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=00057822
+SOL options: stack[3]=76f4d0fa
+SOL options: fault-module=ntdll.dll base=76F10000 size=1835008 rva=0003d0fa
+SOL options: stack[4]=688a90d9
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=000590d9
+SOL options: stack-words esp=0593eec0 00d6893d 0000139f 05640170 00000008 0593ef94 00000008 05640238 051e0ff0 0131a958 00000000 05640fe8 0146021a 00000008 00000000 0131a958 00000490
+SOL options: fault-module=ntvdm.exe base=00C00000 size=4542464 rva=0016893d
+SOL options: launcher did not finish after owned close

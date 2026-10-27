@@ -95,7 +95,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-build-recipe-file-only':
                     assert prefix == 'historical-build-role-'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -128,6 +128,31 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'selected-ccpu-header-role-':
+        cohort=sorted(p for p,r in old.items() if r['status']=='pending' and
+                      p.startswith('softpc.new/base/ccpu386/') and p.endswith('.h'))
+        assert len(cohort)==observation['reviewed_cohort_count']==96
+        table_path=A/'ccpu-selected-header-observations.csv'
+        selection=rows(table_path)
+        inspector=runpy.run_path(str(A/'ccpu-selected-header-extractor.py'))
+        pp=observation['preprocessor_output']
+        assert sha(Path(pp['path']))==pp['sha256']
+        actual,seen=inspector['inspect_output'](Path(pp['path']),cohort)
+        assert len(seen)==74
+        for first,second in zip(selection,actual):
+            assert first=={k:str(v) for k,v in second.items()}
+        assert len(selection)==len(actual)==96
+        selected={r['relative_path'] for r in selection if int(r['selected_nonblank_lines'])>0}
+        assert selected==set(changed) and len(selected)==71
+        assert all(merged[p]['status']=='pending' for p in set(cohort)-selected)
+        for record in observation['normal_cache_inputs']:
+            assert sha(Path(record['Path']))==record['Hash']
+        for record in observation['configuration_review_inputs']:
+            assert sha(Path(record['path']))==record['sha256']
+        for proof in dispositions:
+            assert proof['status']=='partial' and proof['original_text_retained_percent']=='100'
+            assert not proof['estimated_restored_code_percent']
+            assert proof['restored_estimate_status'].startswith('unmeasurable:')
     if prefix == 'historical-build-role-':
         cohort = {p for p, r in old.items() if r['status'] == 'pending' and
                   re.fullmatch(r'(sources|dirs|makefil\w*(\..*)?|_objects\.mac)', Path(p).name, re.I)}
@@ -369,7 +394,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

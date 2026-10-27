@@ -1,0 +1,9 @@
+{
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\verify-selected-ccpu-header-roles.ps1",
+  "pid": 5516,
+  "started": "2026-10-27T23:16:50.8389881Z",
+  "script_sha256": "66883482EDBE921B010F39B63823700054826B67E70BEBB78122B6331D643233",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\selected-ccpu-header-final-r3.stdout.txt",
+  "checker_sha256": "B73CBC27B11883AD1E1E44A09BC2CCBCB7C19D845EE38E024697C335D7B1E917",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\selected-ccpu-header-final-r3.stderr.txt"
+}

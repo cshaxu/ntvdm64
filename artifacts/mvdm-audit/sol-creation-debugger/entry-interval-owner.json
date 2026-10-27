@@ -1,0 +1,15 @@
+{
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-error-watch-r2.stderr.txt",
+  "size_budget_gib": 1,
+  "original_probe_sha256": "FEEA202026BD06EA22E5BC077267FFBAACBC8A14C6B58CAF92123BD4E8863ECB",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\prepare-sol-error-watch.ps1 -Suffix -r2",
+  "time_budget_minutes": 5,
+  "no_progress_minutes": 2,
+  "helper_sha256": "015BA51058A4FA5F2CD94EFB56E4C7CD2A840AFA411A1DB1E31549496A546CBD",
+  "directory": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-error-watch-r2",
+  "started": "2026-10-27T22:56:46.6358626Z",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\sol-error-watch-r2.stdout.txt",
+  "package_manifest_sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE",
+  "script_sha256": "9F79BAE46488D1CB1B25916A9479AE9524A3725DDEF3DE7C83EF5627D10A654D",
+  "pid": 12124
+}

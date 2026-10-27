@@ -244,3 +244,11 @@ obligations remain in scope. The current total is 1,768 pending, 319 partial,
 The [native CBT metadata sample](native-cbt-info-review.md) checks 5,000
 creation callbacks without a failed native metadata query. It constrains a
 specific diagnostic hypothesis; it does not locate or waive the SOL failures.
+
+The [selected CCPU declaration checkpoint](selected-ccpu-header-role-review.md)
+uses the actual production preprocessor output to classify 71 original
+declaration slices as partial; 25 other headers remain pending. The current
+ledger is 1,697 pending, 390 partial, 52 full and 2,545 excluded file roles.
+The separate [SOL debugger observations](sol-creation-debugger-review.md)
+distinguish sentinel error writes from actual failure branches; none qualifies
+the held candidate or selects a repair.

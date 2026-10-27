@@ -1,0 +1,122 @@
+{
+  "production_source_changed": false,
+  "publishable": false,
+  "scope": "Debugger attribution only, all complete invocations non-pass; no selected repair or release qualification",
+  "records": [
+    {
+      "file": "prepare-entry-first.ps1",
+      "sha256": "B45CE829CF0C0CCBB2DDAAD6FB6869109777777C24660094A01AD8DD800DCA53"
+    },
+    {
+      "file": "entry-first-helper.inc",
+      "sha256": "0C199559527C4B8A8D4D5FCF6A9970D947B467A0C820B5514553B694D5E7618C"
+    },
+    {
+      "file": "entry-first-result.txt",
+      "sha256": "7D3DCB4A608393713A30A6E98F32855CD4BE1A8F7A2CB8CBBF6AD13A349996C3"
+    },
+    {
+      "file": "entry-first-owner.json",
+      "sha256": "FA82327DEF69467A1AC54494940559F86258BC53647FE95524D061DDB354B006"
+    },
+    {
+      "file": "entry-first-exit.json",
+      "sha256": "4ACB276E5DEF392D352372E4D00CC9F8BD559114D6B1E4BAE00F9DE616C1838C"
+    },
+    {
+      "file": "prepare-entry-interval.ps1",
+      "sha256": "9F79BAE46488D1CB1B25916A9479AE9524A3725DDEF3DE7C83EF5627D10A654D"
+    },
+    {
+      "file": "entry-interval-helper.inc",
+      "sha256": "015BA51058A4FA5F2CD94EFB56E4C7CD2A840AFA411A1DB1E31549496A546CBD"
+    },
+    {
+      "file": "entry-interval-result.txt",
+      "sha256": "E9184536886A0D8DCDDF9576B1134834D9A707864AE272DE5D0D85836E11F4D8"
+    },
+    {
+      "file": "entry-interval-owner.json",
+      "sha256": "C693989F7B62E092D518928AE7E9742C57E9852905C20291CAE82B4D706AF3BA"
+    },
+    {
+      "file": "entry-interval-exit.json",
+      "sha256": "EE4BEAB81917F43CB96BB96A668E3DED2C8FB62FD3878DC06C3755633D84BE53"
+    },
+    {
+      "file": "prepare-claim-failure.ps1",
+      "sha256": "B5D723B468F439B40E4FB3F0620250DA2CDC6B4553A84D65591AA3E2581103EC"
+    },
+    {
+      "file": "claim-failure-helper.inc",
+      "sha256": "CC53B2AB21A037AFEA5AC6D949A4E689F9D04E1C823BFCA82EAEABF56BB1764D"
+    },
+    {
+      "file": "claim-failure-result.txt",
+      "sha256": "57EE3C27912C62413EC13472B7A758C460CC5080360088BA7ACCA56D0A69E393"
+    },
+    {
+      "file": "claim-failure-owner.json",
+      "sha256": "EE9C9AB4260F8640AEFF089F94759629E4E40B4E7D4527223C9924F28E13EF4C"
+    },
+    {
+      "file": "claim-failure-exit.json",
+      "sha256": "DC32F7653EECD58F0236DA5B6C5F5E3D93F8DE9BC27BAABC9FA8B6BA3E8FF91F"
+    },
+    {
+      "file": "claim-disassembly.txt",
+      "sha256": "31A5F255BE38E7D17C4F3ABF4C951E6AB28340E98575258495AC2B1271CA74F7"
+    },
+    {
+      "file": "claim-inputs.json",
+      "sha256": "DE47C92D1E02E769E3AD3280AF7F97FC4660E59E31A8CCAD0CD7A2B29CD72C1A"
+    },
+    {
+      "file": "disassemble.ps1",
+      "sha256": "B451E71FA8939B83A2225B9EC13EBBBFB97F1619E92208848035ACDB5D1A003D"
+    },
+    {
+      "file": "candidate-package-inputs.json",
+      "sha256": "641C009B5A4D8137D90C3BBD965C96CB918D83E1C674F312A3B3E703310335BE"
+    },
+    {
+      "sha256": "B6FC1E705AA13F0303B0E2F7851F4245B25A34767FF0F1855EAD69546D143E16",
+      "file": "cleanup-manifest-used.json"
+    },
+    {
+      "sha256": "8796DF3C2ECB8A7FBF8F0DCD7CC203EE4B119BA04C489BB7D879FF2925AB7FD0",
+      "file": "cleanup-preview.json"
+    },
+    {
+      "sha256": "6B1191699B9C647BCA67B58F3B1AA76D6922EEC7BE1EB7D5155F2DDCB170BB17",
+      "file": "cleanup-result.json"
+    },
+    {
+      "sha256": "8E2C5FF256787723839D4ABD6338920D5E92323632BF6A0D5F9026760FC4C876",
+      "file": "cleanup-correction.json"
+    }
+  ],
+  "guest_changed": false,
+  "integrity_measurement": "Established desktop-capable launch used; an independent numeric integrity measurement was not retained for these runs",
+  "runs": [
+    {
+      "source_verified": true,
+      "exit": 1,
+      "result": "non-pass",
+      "run": "entry-first"
+    },
+    {
+      "source_verified": true,
+      "exit": 1,
+      "result": "non-pass",
+      "run": "entry-interval"
+    },
+    {
+      "source_verified": true,
+      "exit": 1,
+      "result": "non-pass",
+      "run": "claim-failure"
+    }
+  ],
+  "cleanup_claim_correction": "The used manifest contained an invalid pre-deletion process-scan absence claim; cleanup-correction.json supersedes that claim. Original actual inputs are retained. Terminal owned job handles, exact safety preflight and post-deletion observation are separately recorded."
+}

@@ -1,0 +1,210 @@
+
+Dump of file O:\repos.hobby\ntvdm64\build\t473-s10\candidate-validation\package\system32\WOW32.DLL
+
+File Type: DLL
+
+  10072AC0: 55                 push        ebp
+  10072AC1: 8B EC              mov         ebp,esp
+  10072AC3: 6A FE              push        0FFFFFFFEh
+  10072AC5: 68 80 BA 09 10     push        1009BA80h
+  10072ACA: 68 30 89 07 10     push        10078930h
+  10072ACF: 64 A1 00 00 00 00  mov         eax,dword ptr fs:[00000000h]
+  10072AD5: 50                 push        eax
+  10072AD6: 83 EC 3C           sub         esp,3Ch
+  10072AD9: A1 00 58 0A 10     mov         eax,dword ptr ds:[100A5800h]
+  10072ADE: 31 45 F8           xor         dword ptr [ebp-8],eax
+  10072AE1: 33 C5              xor         eax,ebp
+  10072AE3: 89 45 E4           mov         dword ptr [ebp-1Ch],eax
+  10072AE6: 53                 push        ebx
+  10072AE7: 56                 push        esi
+  10072AE8: 57                 push        edi
+  10072AE9: 50                 push        eax
+  10072AEA: 8D 45 F0           lea         eax,[ebp-10h]
+  10072AED: 64 A3 00 00 00 00  mov         dword ptr fs:[00000000h],eax
+  10072AF3: 8B 55 0C           mov         edx,dword ptr [ebp+0Ch]
+  10072AF6: 89 55 C8           mov         dword ptr [ebp-38h],edx
+  10072AF9: 8B 5D 08           mov         ebx,dword ptr [ebp+8]
+  10072AFC: 89 5D B4           mov         dword ptr [ebp-4Ch],ebx
+  10072AFF: 8B 45 14           mov         eax,dword ptr [ebp+14h]
+  10072B02: 89 45 C0           mov         dword ptr [ebp-40h],eax
+  10072B05: 8B 75 18           mov         esi,dword ptr [ebp+18h]
+  10072B08: 89 75 BC           mov         dword ptr [ebp-44h],esi
+  10072B0B: 8B 0D A8 6F 0A 10  mov         ecx,dword ptr ds:[100A6FA8h]
+  10072B11: 64 A1 2C 00 00 00  mov         eax,dword ptr fs:[0000002Ch]
+  10072B17: 8B 04 88           mov         eax,dword ptr [eax+ecx*4]
+  10072B1A: 8B B8 C8 00 00 00  mov         edi,dword ptr [eax+000000C8h]
+  10072B20: 89 7D B8           mov         dword ptr [ebp-48h],edi
+  10072B23: C7 06 00 00 00 00  mov         dword ptr [esi],0
+  10072B29: 85 FF              test        edi,edi
+  10072B2B: 0F 84 B3 01 00 00  je          10072CE4
+  10072B31: 8B 47 4C           mov         eax,dword ptr [edi+4Ch]
+  10072B34: 3B 45 10           cmp         eax,dword ptr [ebp+10h]
+  10072B37: 0F 85 A7 01 00 00  jne         10072CE4
+  10072B3D: 83 7F 28 00        cmp         dword ptr [edi+28h],0
+  10072B41: 0F 85 9D 01 00 00  jne         10072CE4
+  10072B47: 8B 4F 04           mov         ecx,dword ptr [edi+4]
+  10072B4A: 8B 42 04           mov         eax,dword ptr [edx+4]
+  10072B4D: 3B 41 04           cmp         eax,dword ptr [ecx+4]
+  10072B50: 0F 85 8E 01 00 00  jne         10072CE4
+  10072B56: 0F B7 77 1C        movzx       esi,word ptr [edi+1Ch]
+  10072B5A: 6A E0              push        0FFFFFFE0h
+  10072B5C: 53                 push        ebx
+  10072B5D: FF 15 3C F7 08 10  call        dword ptr ds:[1008F73Ch]
+  10072B63: 66 3B C6           cmp         ax,si
+  10072B66: 0F 85 78 01 00 00  jne         10072CE4
+  10072B6C: 8B 57 04           mov         edx,dword ptr [edi+4]
+  10072B6F: 8B 4D C8           mov         ecx,dword ptr [ebp-38h]
+  10072B72: F6 42 2C 40        test        byte ptr [edx+2Ch],40h
+  10072B76: 74 11              je          10072B89
+  10072B78: F6 41 2C 40        test        byte ptr [ecx+2Ch],40h
+  10072B7C: 74 0B              je          10072B89
+  10072B7E: 8B 01              mov         eax,dword ptr [ecx]
+  10072B80: 85 C0              test        eax,eax
+  10072B82: 74 05              je          10072B89
+  10072B84: 83 C0 20           add         eax,20h
+  10072B87: EB 02              jmp         10072B8B
+  10072B89: 8B C1              mov         eax,ecx
+  10072B8B: 8B 00              mov         eax,dword ptr [eax]
+  10072B8D: 3B 02              cmp         eax,dword ptr [edx]
+  10072B8F: 0F 85 4F 01 00 00  jne         10072CE4
+  10072B95: C7 47 28 01 00 00  mov         dword ptr [edi+28h],1
+            00
+  10072B9C: 89 5F 24           mov         dword ptr [edi+24h],ebx
+  10072B9F: 8D 47 54           lea         eax,[edi+54h]
+  10072BA2: 8D 57 50           lea         edx,[edi+50h]
+  10072BA5: 8D 77 48           lea         esi,[edi+48h]
+  10072BA8: 50                 push        eax
+  10072BA9: 52                 push        edx
+  10072BAA: 56                 push        esi
+  10072BAB: 6A 01              push        1
+  10072BAD: FF 77 4C           push        dword ptr [edi+4Ch]
+  10072BB0: FF 77 0C           push        dword ptr [edi+0Ch]
+  10072BB3: 8D 47 44           lea         eax,[edi+44h]
+  10072BB6: 50                 push        eax
+  10072BB7: FF 77 08           push        dword ptr [edi+8]
+  10072BBA: 51                 push        ecx
+  10072BBB: 53                 push        ebx
+  10072BBC: E8 9F 07 00 00     call        10073360
+  10072BC1: 85 C0              test        eax,eax
+  10072BC3: 75 10              jne         10072BD5
+  10072BC5: FF 15 D0 F5 08 10  call        dword ptr ds:[1008F5D0h]
+  10072BCB: 89 47 40           mov         dword ptr [edi+40h],eax
+  10072BCE: 33 C0              xor         eax,eax
+  10072BD0: E9 14 01 00 00     jmp         10072CE9
+  10072BD5: 33 C0              xor         eax,eax
+  10072BD7: 39 47 2C           cmp         dword ptr [edi+2Ch],eax
+  10072BDA: 0F 94 C0           sete        al
+  10072BDD: 50                 push        eax
+  10072BDE: FF 36              push        dword ptr [esi]
+  10072BE0: E8 EB 52 FE FF     call        10057ED0
+  10072BE5: 85 C0              test        eax,eax
+  10072BE7: 75 27              jne         10072C10
+  10072BE9: FF 15 D0 F5 08 10  call        dword ptr ds:[1008F5D0h]
+  10072BEF: FF 77 54           push        dword ptr [edi+54h]
+  10072BF2: FF 77 50           push        dword ptr [edi+50h]
+  10072BF5: FF 36              push        dword ptr [esi]
+  10072BF7: 89 47 40           mov         dword ptr [edi+40h],eax
+  10072BFA: 53                 push        ebx
+  10072BFB: E8 90 0C 00 00     call        10073890
+  10072C00: FF 77 40           push        dword ptr [edi+40h]
+  10072C03: FF 15 6C F5 08 10  call        dword ptr ds:[1008F56Ch]
+  10072C09: 33 C0              xor         eax,eax
+  10072C0B: E9 D9 00 00 00     jmp         10072CE9
+  10072C10: 83 7F 30 00        cmp         dword ptr [edi+30h],0
+  10072C14: 0F 84 87 00 00 00  je          10072CA1
+  10072C1A: 8B 47 34           mov         eax,dword ptr [edi+34h]
+  10072C1D: 89 45 D8           mov         dword ptr [ebp-28h],eax
+  10072C20: 8B 47 38           mov         eax,dword ptr [edi+38h]
+  10072C23: 89 45 DC           mov         dword ptr [ebp-24h],eax
+  10072C26: 8B 47 3C           mov         eax,dword ptr [edi+3Ch]
+  10072C29: 89 45 E0           mov         dword ptr [ebp-20h],eax
+  10072C2C: 8D 45 D8           lea         eax,[ebp-28h]
+  10072C2F: 50                 push        eax
+  10072C30: FF 36              push        dword ptr [esi]
+  10072C32: E8 19 53 FE FF     call        10057F50
+  10072C37: 85 C0              test        eax,eax
+  10072C39: 74 AE              je          10072BE9
+  10072C3B: 83 7F 30 00        cmp         dword ptr [edi+30h],0
+  10072C3F: 74 60              je          10072CA1
+  10072C41: 33 F6              xor         esi,esi
+  10072C43: 89 75 C4           mov         dword ptr [ebp-3Ch],esi
+  10072C46: 8D 45 CC           lea         eax,[ebp-34h]
+  10072C49: 50                 push        eax
+  10072C4A: E8 01 BF FE FF     call        1005EB50
+  10072C4F: 85 C0              test        eax,eax
+  10072C51: 74 23              je          10072C76
+  10072C53: 89 75 FC           mov         dword ptr [ebp-4],esi
+  10072C56: FF 77 3C           push        dword ptr [edi+3Ch]
+  10072C59: FF 77 38           push        dword ptr [edi+38h]
+  10072C5C: FF 77 34           push        dword ptr [edi+34h]
+  10072C5F: 53                 push        ebx
+  10072C60: E8 0B BE FF FF     call        1006EA70
+  10072C65: 8B F0              mov         esi,eax
+  10072C67: 89 75 C4           mov         dword ptr [ebp-3Ch],esi
+  10072C6A: C7 45 FC FE FF FF  mov         dword ptr [ebp-4],0FFFFFFFEh
+            FF
+  10072C71: E8 21 00 00 00     call        10072C97
+  10072C76: 85 F6              test        esi,esi
+  10072C78: 75 27              jne         10072CA1
+  10072C7A: FF 15 D0 F5 08 10  call        dword ptr ds:[1008F5D0h]
+  10072C80: FF 77 54           push        dword ptr [edi+54h]
+  10072C83: FF 77 50           push        dword ptr [edi+50h]
+  10072C86: FF 77 48           push        dword ptr [edi+48h]
+  10072C89: E9 69 FF FF FF     jmp         10072BF7
+  10072C8E: 8B 7D B8           mov         edi,dword ptr [ebp-48h]
+  10072C91: 8B 75 C4           mov         esi,dword ptr [ebp-3Ch]
+  10072C94: 8B 5D B4           mov         ebx,dword ptr [ebp-4Ch]
+  10072C97: 8D 45 CC           lea         eax,[ebp-34h]
+  10072C9A: 50                 push        eax
+  10072C9B: E8 00 C1 FE FF     call        1005EDA0
+  10072CA0: C3                 ret
+  10072CA1: 8B 75 C0           mov         esi,dword ptr [ebp-40h]
+  10072CA4: 89 1E              mov         dword ptr [esi],ebx
+  10072CA6: 53                 push        ebx
+  10072CA7: E8 14 37 FE FF     call        100563C0
+  10072CAC: 89 46 04           mov         dword ptr [esi+4],eax
+  10072CAF: 8B 4F 50           mov         ecx,dword ptr [edi+50h]
+  10072CB2: 89 4E 08           mov         dword ptr [esi+8],ecx
+  10072CB5: 8B 4F 54           mov         ecx,dword ptr [edi+54h]
+  10072CB8: 89 4E 0C           mov         dword ptr [esi+0Ch],ecx
+  10072CBB: 85 C0              test        eax,eax
+  10072CBD: 75 1C              jne         10072CDB
+  10072CBF: FF 15 D0 F5 08 10  call        dword ptr ds:[1008F5D0h]
+  10072CC5: 89 47 40           mov         dword ptr [edi+40h],eax
+  10072CC8: FF 77 54           push        dword ptr [edi+54h]
+  10072CCB: FF 77 50           push        dword ptr [edi+50h]
+  10072CCE: FF 77 48           push        dword ptr [edi+48h]
+  10072CD1: 53                 push        ebx
+  10072CD2: E8 B9 0B 00 00     call        10073890
+  10072CD7: 33 C0              xor         eax,eax
+  10072CD9: EB 0E              jmp         10072CE9
+  10072CDB: 8B 45 BC           mov         eax,dword ptr [ebp-44h]
+  10072CDE: C7 00 01 00 00 00  mov         dword ptr [eax],1
+  10072CE4: B8 01 00 00 00     mov         eax,1
+  10072CE9: 8B 4D F0           mov         ecx,dword ptr [ebp-10h]
+  10072CEC: 64 89 0D 00 00 00  mov         dword ptr fs:[00000000h],ecx
+            00
+  10072CF3: 59                 pop         ecx
+  10072CF4: 5F                 pop         edi
+  10072CF5: 5E                 pop         esi
+  10072CF6: 5B                 pop         ebx
+  10072CF7: 8B 4D E4           mov         ecx,dword ptr [ebp-1Ch]
+  10072CFA: 33 CD              xor         ecx,ebp
+  10072CFC: E8 11 4B 00 00     call        10077812
+  10072D01: 8B E5              mov         esp,ebp
+  10072D03: 5D                 pop         ebp
+  10072D04: C2 14 00           ret         14h
+  10072D07: CC                 int         3
+  10072D08: CC                 int         3
+  10072D09: CC                 int         3
+  10072D0A: CC                 int         3
+  10072D0B: CC                 int         3
+  10072D0C: CC                 int         3
+  10072D0D: CC                 int         3
+  10072D0E: CC                 int         3
+  10072D0F: CC                 int         3
+  10072D10: 55                 push        ebp
+
+  Summary
+
+       8E000 .text

@@ -1,0 +1,88 @@
+{
+  "result": "pass",
+  "base": "9ca2db194",
+  "candidate_count": 71,
+  "reviewed_cohort_count": 96,
+  "remaining_cohort_pending": 25,
+  "source_tables": [
+    {
+      "path": "ccpu-selected-header-observations.csv",
+      "sha256": "BD1BA065644EA73531D8C868F6BFD833DB056FF5532F83997DED940A6B6A07BE"
+    }
+  ],
+  "preprocessor_output": {
+    "path": "build\\t473-s10\\ccpu-selected-preprocessing\\c_main.i",
+    "sha256": "E549C5583D797EEA65BFFC76C9B69523DAE91767A90D9578AAFD6E7F80D8142E"
+  },
+  "normal_cache_inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+      "Hash": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+      "Hash": "A429F3708C78B2C7D553BEB66AC5391CBDC3ADC6FF576F130B80AE1989A958E8"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "Hash": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "Hash": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    }
+  ],
+  "configuration_review_inputs": [
+    {
+      "path": "artifacts/mvdm-audit/ccpu-selected-header-extractor.py",
+      "sha256": "BFC17A8F0F3C3CC086D92C6A04E79A72C1621675BEA180DA19F9E8B0719174AF"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/ccpu386/c_main.c",
+      "sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC"
+    },
+    {
+      "path": "build/t473-s10/ccpu-selected-preprocessing/original-command.txt",
+      "sha256": "E303691B06042BB2889DA18D0C90CB6291A8B4154654D65DDD9E4191607E7B3B"
+    },
+    {
+      "path": "build/t473-s10/ccpu-selected-preprocessing/preprocess-command.txt",
+      "sha256": "84736AC51416E213D3552BB8B636D62F7A2BE5F592D34AD8E724F58037CCB6DC"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "scope": "Compiler-selected declaration integration only; no new functional acceptance"
+}

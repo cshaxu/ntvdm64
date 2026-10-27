@@ -1,0 +1,7 @@
+SOL options: command=1003
+SOL claim-watch: exact failure instructions verified=1 module=68850000
+SOL options: wow32-module=O:\tmp\ne6c\system32\WOW32.DLL
+SOL claim-watch: armed=1 tid=32148
+SOL error-watch: completed armed=1 visits=0 no-claim-failure
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: launcher did not finish after owned close

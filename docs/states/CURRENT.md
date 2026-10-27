@@ -20,9 +20,9 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[historical recipe review](../../artifacts/mvdm-audit/historical-build-role-review.md)
-resolves 36 build-control roles without excluding their source capabilities.
-The ledger retains 1,768 pending, 319 partial, 52 full and 2,545 excluded
+[CCPU declaration review](../../artifacts/mvdm-audit/selected-ccpu-header-role-review.md)
+adds 71 partial declaration slices from actual compiler-selected tokens.
+The ledger retains 1,697 pending, 390 partial, 52 full and 2,545 excluded
 physical file roles. Source/ABI and real guest/device proof remain open;
 these checkpoints changed no runtime image.
 

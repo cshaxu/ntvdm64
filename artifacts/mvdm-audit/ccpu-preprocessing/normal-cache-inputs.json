@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+    "Hash": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+    "Hash": "A429F3708C78B2C7D553BEB66AC5391CBDC3ADC6FF576F130B80AE1989A958E8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+    "Hash": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+  }
+]

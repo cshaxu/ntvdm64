@@ -1,0 +1,10 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package\\system32\\WOW32.DLL",
+    "Hash": "70FA7F9119CE0AA3B9C4CB29F952C20CFE95D3D43EBBFADD9BE6C3BD5B888462"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+    "Hash": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+  }
+]

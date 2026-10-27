@@ -1,0 +1,37 @@
+{
+  "retained": "CCPU preprocessing output and candidate/accepted packages remain active inputs",
+  "targets": [
+    {
+      "reason": "Completed owned diagnostic phase; durable results, source, hashes and limitations retained; original runner handles joined",
+      "owner": "M0 T473 S10 root",
+      "path": "build/t473-s10/sol-error-watch",
+      "inventorySha256": "22DAF8FDAAB44A64A8814D3F262F3B4C3CED920E405247633F9699120800E4AE"
+    },
+    {
+      "reason": "Completed owned diagnostic phase; durable results, source, hashes and limitations retained; original runner handles joined",
+      "owner": "M0 T473 S10 root",
+      "path": "build/t473-s10/sol-error-watch-r2",
+      "inventorySha256": "DD4A016236A72EE9699A6B5AA8A6D97EA2C780EAF7C16DD6591B05A2C2138036"
+    },
+    {
+      "reason": "Completed owned diagnostic phase; durable results, source, hashes and limitations retained; original runner handles joined",
+      "owner": "M0 T473 S10 root",
+      "path": "build/t473-s10/sol-claim-watch",
+      "inventorySha256": "B30F9B53F6B97C7BA99DE1988403BD9B3D48AC366B3384AA7484473B28DC39B9"
+    },
+    {
+      "reason": "Completed owned diagnostic phase; durable results, source, hashes and limitations retained; original runner handles joined",
+      "owner": "M0 T473 S10 root",
+      "path": "build/t473-s10/native-cbt-info",
+      "inventorySha256": "C554C6D56ED0893948AD5EDFCDA66B7CFAFD61358D56EDB9024C0DD494378CE9"
+    }
+  ],
+  "process_observation": "No executable under the four exact diagnostic trees remains active; all four supervising results are terminal",
+  "reviewedFiles": [
+    {
+      "reason": "Owned temporary diagnostic helper source; exact source/identity preserved in artifacts/mvdm-audit; no user configuration or original media",
+      "path": "build/t473-s10/sol-error-watch/observer-helper-r1.inc",
+      "sha256": "0C199559527C4B8A8D4D5FCF6A9970D947B467A0C820B5514553B694D5E7618C"
+    }
+  ]
+}

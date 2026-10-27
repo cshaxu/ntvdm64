@@ -1,0 +1,75 @@
+SOL options: command=1003
+SOL error-watch: verified public entry module=KERNEL32.DLL rva=00014f00 address=75274f00
+SOL options: wow32-module=O:\tmp\nb08\system32\WOW32.DLL
+SOL error-watch: armed=1 tid=28220
+SOL error-watch: WRITE_5023 tid=28220 public-caller=001d893d visits=59 ordinal=1
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016893d
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=001d893d
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016893d
+SOL options: code-region base=001D8000 size=143360 state=1000 protect=20 type=1000000 bytes@pc=8b4b0485c97541a1c0fd4400bfc0fd44
+SOL options: stack[2]=688a7822
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=00057822
+SOL options: stack[3]=76f4d0fa
+SOL options: fault-module=ntdll.dll base=76F10000 size=1835008 rva=0003d0fa
+SOL options: stack[4]=688a90d9
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=000590d9
+SOL options: stack-words esp=0500ed38 001d893d 0000139f 04ac7f28 00000008 0500ee0c 00000008 00bf49e0 04b2de20 00c84378 00000000 05030f58 03f208d0 00000008 00000000 00c84378 00000490
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016893d
+SOL error-watch: WRITE_5023 tid=28220 public-caller=001dc56b visits=67 ordinal=9
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016c56b
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=001dc56b
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016c56b
+SOL options: code-region base=001DC000 size=126976 state=1000 protect=20 type=1000000 bytes@pc=8b4424345d5f5e5b83c45cc36a57ff15
+SOL options: stack[2]=001d8bda
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168bda
+SOL options: stack[3]=688a7822
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=00057822
+SOL options: stack[4]=76f4d0fa
+SOL options: fault-module=ntdll.dll base=76F10000 size=1835008 rva=0003d0fa
+SOL options: stack[5]=688a90d9
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=000590d9
+SOL options: stack-words esp=0500ecb4 001dc56b 0000139f 00000008 00c84378 00000000 0000ffff 00000000 04ac8350 05070f60 00c7e2f8 00000028 00000008 00c84420 001fcd18 0000139f 00000001
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0016c56b
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=0018cd18
+SOL error-watch: WRITE_5023 tid=28220 public-caller=001d7cf2 visits=68 ordinal=10
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00167cf2
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=001d7cf2
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00167cf2
+SOL options: code-region base=001D7000 size=147456 state=1000 protect=20 type=1000000 bytes@pc=8b4424145b5f5e83c40cc3cccccc83ec
+SOL options: stack[2]=001d8cd5
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168cd5
+SOL options: stack[3]=688a7822
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=00057822
+SOL options: stack[4]=76f4d0fa
+SOL options: fault-module=ntdll.dll base=76F10000 size=1835008 rva=0003d0fa
+SOL options: stack[5]=688a90d9
+SOL options: fault-module=WOW32.DLL base=68850000 size=737280 rva=000590d9
+SOL options: stack-words esp=0500ed1c 001d7cf2 0000139f 75283640 00bf4d28 00000490 80a9f000 80aa8000 00000001 001d8cd5 04ac7f28 00000008 0500ee0c 00000008 00bf49e0 04b2de20 00c84378
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00167cf2
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00023640
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168cd5
+SOL error-watch: WRITE_5023 tid=28220 public-caller=001d8a04 visits=3882 ordinal=282
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168a04
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=0001000b
+SOL options: code-region base=00010000 size=393216 state=10000 protect=1 type=0 bytes@pc=
+SOL options: stack-words esp=0500e4b0 001d8a04 0000139f 05132bc0 0000000c 0500e584 0000000c 05133c58 04b2de20 04b2cd20 00000000 050b2fa0 0076114e 80aa8000 00000009 04b2cdd4 00000490
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168a04
+SOL error-watch: WRITE_5023 tid=28220 public-caller=001d8a75 visits=3883 ordinal=283
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168a75
+SOL options: stack[0]=75274f00
+SOL options: fault-module=KERNEL32.DLL base=75260000 size=983040 rva=00014f00
+SOL options: stack[1]=0001000b
+SOL options: code-region base=00010000 size=393216 state=10000 protect=1 type=0 bytes@pc=
+SOL options: stack-words esp=0500e4b0 001d8a75 0000139f 05132bc0 0000000c 0500e584 0000000c 05133c58 04b2de20 04b2cd20 00000000 050b2fa0 0076114e 80aa8000 00000009 04b2cdd4 00000490
+SOL options: fault-module=ntvdm.exe base=00070000 size=4542464 rva=00168a75
+SOL error-watch: completed armed=1 visits=25887 writes_5023=1270 unique_callers=5
+SOL options: modal dialog did not appear
+SOL options: launcher did not finish after owned close

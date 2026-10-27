@@ -1,0 +1,12 @@
+{
+  "no_progress_minutes": 2,
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\preprocess-selected-ccpu.ps1",
+  "script_sha256": "2D8BEB9FB8B95AF786400A2FB5D637CC0AD3AD4AEA3048223EED4E547F9FBB53",
+  "time_budget_minutes": 10,
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-preprocessing.stderr.txt",
+  "directory": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-selected-preprocessing",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-preprocessing.stdout.txt",
+  "pid": 33136,
+  "started": "2026-10-27T23:01:59.9626210Z",
+  "size_budget_gib": 1
+}
