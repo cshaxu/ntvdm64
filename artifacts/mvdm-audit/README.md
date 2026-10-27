@@ -17,13 +17,15 @@ obsolete publication wording and remove duplicate rows; see
 review. `frozen-external-audit-rows.csv` preserves 42,963 extra WOW audit
 paths outside the MVDM union for relevance and dependency review.
 
-Review breadth differs by shard. Shard 0 has metadata for 62 diff files, five
-source-level detailed reviews and initial source-manifest scans of 43
-unselected host files. Shard 1 has 48 differential owner initial reviews
-and 34 unselected-role reviews. Shard 2 recovered its interrupted CSV and
-has 23 of 48 differential files with detailed trace; the remaining 25
-require renewed review. Shard 3 has 47 differential and 23 unselected-role
-initial reviews. These are not equivalent to full semantic and test proof.
+Review breadth differs by shard. Shard 0 has metadata for 62 diff files, nine
+source-level detailed reviews, initial source-manifest scans of 43 unselected
+host files and a focused generic-thunk branch analysis. Shard 1 has 48
+differential owner initial reviews, 34 unselected-role reviews and selected
+owner analysis for 48 of 73 pending product sources. Shard 2 has recovered
+the previously interrupted CSV, renewed initial traces of all 48 diff files
+and checked 24 CCPU product-source linkages. Shard 3 has 47 differential,
+23 unselected-role and 73 selected-source initial reviews, plus a FastWOW
+comparison. These investigations do not replace semantic or runtime proof.
 
 Read `findings.md` for actionable cross-group discrepancies. Source-line
 matching percentages in the frozen input are textual heuristics, not the

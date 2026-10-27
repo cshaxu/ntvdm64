@@ -1,0 +1,652 @@
+{
+  "map": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+  "map_sha256": "641E5C33430445ECC73885176250194BE936549654E14864074BD0B7D92D3CE2",
+  "binary_sha256": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+  "published_candidate_sha256": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+  "evidence_limit": "A map member/symbol proves linking only; not all opcodes or branch behavior, and name-only decoder matches need manual review.",
+  "rows": [
+    {
+      "path": "softpc.new/base/ccpu386/aam.c",
+      "object": "obj/ccpu/aam.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          639,
+          "0001:00022d60       _AAM                       00423d60 f   original-ccpu386:aam.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          3700,
+          "case 0xd4:   /* T2 AAM Ib */"
+        ],
+        [
+          3701,
+          "inst32 = AAM;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/bound.c",
+      "object": "obj/ccpu/bound.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          645,
+          "0001:000230a0       _BOUND                     004240a0 f   original-ccpu386:bound.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          2124,
+          "case 0x62:   /* T6 BOUND Gv Ma */"
+        ],
+        [
+          2132,
+          "BOUND(ops[0].sng, ops[1].mlt, 16);"
+        ],
+        [
+          2140,
+          "BOUND(ops[0].sng, ops[1].mlt, 32);"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/bts.c",
+      "object": "obj/ccpu/bts.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          651,
+          "0001:00023210       _BTS                       00424210 f   original-ccpu386:bts.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1551,
+          "case  0xab:   /* T5 BTS Ev Gv */"
+        ],
+        [
+          1552,
+          "instp32328 = BTS;"
+        ],
+        [
+          1713,
+          "case 5:   /* T5 BTS Ev Ib */   instp32328 = BTS;   goto TYPEC1;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_tlb.c",
+      "object": "obj/ccpu/c_tlb.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 10,
+      "sample_map_lines": [
+        [
+          557,
+          "0001:00007e80       _flush_tlb                 00408e80 f   original-ccpu386:c_tlb.obj"
+        ],
+        [
+          558,
+          "0001:00007ec0       _lin2phy                   00408ec0 f   original-ccpu386:c_tlb.obj"
+        ],
+        [
+          559,
+          "0001:00008200       _test_tlb                  00409200 f   original-ccpu386:c_tlb.obj"
+        ]
+      ],
+      "decoder_refs": []
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmpxchg.c",
+      "object": "obj/ccpu/cmpxchg.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 0,
+      "sample_map_lines": [],
+      "decoder_refs": [
+        [
+          1274,
+          "note_486_instruction(\"A-step CMPXCHG\");"
+        ],
+        [
+          1602,
+          "case  0xb0:   /* T5 CMPXCHG Eb Gb */"
+        ],
+        [
+          1605,
+          "note_486_instruction(\"CMPXCHG Eb Gb\");"
+        ],
+        [
+          1620,
+          "case  0xb1:   /* T5 CMPXCHG Ev Gv */"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/das.c",
+      "object": "obj/ccpu/das.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          666,
+          "0001:000238a0       _DAS                       004248a0 f   original-ccpu386:das.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1908,
+          "case 0x2f:   /* T0 DAS */"
+        ],
+        [
+          1909,
+          "DAS();"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/dec.c",
+      "object": "obj/ccpu/dec.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          667,
+          "0001:00023920       _DEC                       00424920 f   original-ccpu386:dec.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          2055,
+          "case 0x48:   /* T1 DEC Hv */"
+        ],
+        [
+          2063,
+          "instp328 = DEC;"
+        ],
+        [
+          4304,
+          "case 1:   /* T1 DEC Eb */   instp328 = DEC;   goto TYPEF6_3;"
+        ],
+        [
+          4317,
+          "case 1:   /* T1 DEC Ev */   instp328 = DEC;   goto TYPEF7_3;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/imul.c",
+      "object": "obj/ccpu/imul.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 5,
+      "sample_map_lines": [
+        [
+          676,
+          "0001:00023f10       _IMUL16                    00424f10 f   original-ccpu386:imul.obj"
+        ],
+        [
+          677,
+          "0001:00023f90       _IMUL16T                   00424f90 f   original-ccpu386:imul.obj"
+        ],
+        [
+          678,
+          "0001:00024010       _IMUL32                    00425010 f   original-ccpu386:imul.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1580,
+          "case  0xaf:   /* T5 IMUL Gv Ev */"
+        ],
+        [
+          2196,
+          "case 0x69:   /* T7 IMUL Gv Ev Iv */"
+        ],
+        [
+          2232,
+          "case 0x6b:   /* T7 IMUL Gv Ev Ib */"
+        ],
+        [
+          4145,
+          "case 5:   /* T5 IMUL Fal Eb */   instp3232 = IMUL8;   goto TYPEF6_4;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/in.c",
+      "object": "obj/ccpu/in.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 3,
+      "sample_map_lines": [
+        [
+          681,
+          "0001:00024190       _IN16                      00425190 f   original-ccpu386:in.obj"
+        ],
+        [
+          682,
+          "0001:000241c0       _IN32                      004251c0 f   original-ccpu386:in.obj"
+        ],
+        [
+          683,
+          "0001:00024220       _IN8                       00425220 f   original-ccpu386:in.obj"
+        ]
+      ],
+      "decoder_refs": []
+    },
+    {
+      "path": "softpc.new/base/ccpu386/jmp.c",
+      "object": "obj/ccpu/jmp.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 3,
+      "sample_map_lines": [
+        [
+          690,
+          "0001:000247e0       _JMPF                      004257e0 f   original-ccpu386:jmp.obj"
+        ],
+        [
+          691,
+          "0001:00024910       _JMPN                      00425910 f   original-ccpu386:jmp.obj"
+        ],
+        [
+          692,
+          "0001:00024950       _JMPR                      00425950 f   original-ccpu386:jmp.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          3934,
+          "case 0xe9:   /* T2 JMP Jv */"
+        ],
+        [
+          3938,
+          "case 0xea:   /* T2 JMP Ap */"
+        ],
+        [
+          3942,
+          "case 0xeb:   /* T2 JMP Jb */"
+        ],
+        [
+          4363,
+          "case 4:   /* T2 JMP  Ev */"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lsl.c",
+      "object": "obj/ccpu/lsl.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 3,
+      "sample_map_lines": [
+        [
+          726,
+          "0001:00024ee0       _LSL                       00425ee0 f   original-ccpu386:lsl.obj"
+        ],
+        [
+          8862,
+          "0001:00024f90       $LN32                      00425f90     original-ccpu386:lsl.obj"
+        ],
+        [
+          8863,
+          "0001:00024f9c       $LN31                      00425f9c     original-ccpu386:lsl.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1219,
+          "case  0x03:   /* T5 LSL Gv Ew */"
+        ],
+        [
+          1220,
+          "instp3232 = LSL;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ltr.c",
+      "object": "obj/ccpu/ltr.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          727,
+          "0001:00024fc0       _LTR                       00425fc0 f   original-ccpu386:ltr.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1086,
+          "case 3:   /* T2 LTR Ew */"
+        ],
+        [
+          1089,
+          "inst32 = LTR;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/movsx.c",
+      "object": "obj/ccpu/movsx.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          733,
+          "0001:000250e0       _MOVSX                     004260e0 f   original-ccpu386:movsx.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1752,
+          "case  0xbe:   /* T4 MOVSX Gv Eb */"
+        ],
+        [
+          1759,
+          "MOVSX(&ops[0].sng, ops[1].sng, 8);"
+        ],
+        [
+          1767,
+          "MOVSX(&ops[0].sng, ops[1].sng, 8);"
+        ],
+        [
+          1772,
+          "case  0xbf:   /* T4 MOVSX Gd Ew */"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/out.c",
+      "object": "obj/ccpu/out.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 3,
+      "sample_map_lines": [
+        [
+          739,
+          "0001:000252c0       _OUT16                     004262c0 f   original-ccpu386:out.obj"
+        ],
+        [
+          740,
+          "0001:000252e0       _OUT32                     004262e0 f   original-ccpu386:out.obj"
+        ],
+        [
+          741,
+          "0001:00025320       _OUT8                      00426320 f   original-ccpu386:out.obj"
+        ]
+      ],
+      "decoder_refs": []
+    },
+    {
+      "path": "softpc.new/base/ccpu386/pop.c",
+      "object": "obj/ccpu/pop.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 2,
+      "sample_map_lines": [
+        [
+          743,
+          "0001:000253b0       _POP                       004263b0 f   original-ccpu386:pop.obj"
+        ],
+        [
+          744,
+          "0001:000253d0       _POP_SR                    004263d0 f   original-ccpu386:pop.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          457,
+          "[2] = 'POP' displacement. (0=None,"
+        ],
+        [
+          460,
+          "Set by POP used by [ESP] addressing modes. */"
+        ],
+        [
+          1028,
+          "case 0x07:   /* T3 POP Pw */"
+        ],
+        [
+          1035,
+          "/* locally update IP - interrupts are supressed after POP SS */"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/push.c",
+      "object": "obj/ccpu/push.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 2,
+      "sample_map_lines": [
+        [
+          749,
+          "0001:00025580       _PUSH                      00426580 f   original-ccpu386:push.obj"
+        ],
+        [
+          750,
+          "0001:000255a0       _PUSH_SR                   004265a0 f   original-ccpu386:push.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1019,
+          "case 0x06:   /* T2 PUSH Pw */"
+        ],
+        [
+          1466,
+          "case  0xa0:   /* T2 PUSH Qw */"
+        ],
+        [
+          2066,
+          "case 0x50:   /* T2 PUSH Hv */"
+        ],
+        [
+          2084,
+          "PUSH(ops[0].sng);"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/pushf.c",
+      "object": "obj/ccpu/pushf.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          752,
+          "0001:00025630       _PUSHF                     00426630 f   original-ccpu386:pushf.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          2886,
+          "case 0x9c:   /* T0 PUSHF */"
+        ],
+        [
+          2889,
+          "PUSHF();"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/rol.c",
+      "object": "obj/ccpu/rol.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          757,
+          "0001:00025a40       _ROL                       00426a40 f   original-ccpu386:rol.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          3303,
+          "case 0:   /* T5 ROL Eb Ib */   instp32328 = ROL;   goto TYPE80_0;"
+        ],
+        [
+          3318,
+          "case 0:   /* T5 ROL Ev Ib */   instp32328 = ROL;   break;"
+        ],
+        [
+          3598,
+          "case 0:   /* T5 ROL Eb I1 */   instp32328 = ROL;   break;"
+        ],
+        [
+          3619,
+          "case 0:   /* T5 ROL Ev I1 */   instp32328 = ROL;   break;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/shl.c",
+      "object": "obj/ccpu/shl.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          780,
+          "0001:00025f00       _SHL                       00426f00 f   original-ccpu386:shl.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          3307,
+          "case 4:   /* T5 SHL Eb Ib */   instp32328 = SHL;   goto TYPE80_0;"
+        ],
+        [
+          3309,
+          "case 6:   /* T5 SHL Eb Ib */   instp32328 = SHL;   goto TYPE80_0;"
+        ],
+        [
+          3322,
+          "case 4:   /* T5 SHL Ev Ib */   instp32328 = SHL;   break;"
+        ],
+        [
+          3324,
+          "case 6:   /* T5 SHL Ev Ib */   instp32328 = SHL;   break;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/std.c",
+      "object": "obj/ccpu/std.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          789,
+          "0001:00026270       _STD                       00427270 f   original-ccpu386:std.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          4295,
+          "case 0xfd:   /* T0 STD */"
+        ],
+        [
+          4296,
+          "STD();"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sti.c",
+      "object": "obj/ccpu/sti.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          790,
+          "0001:00026280       _STI                       00427280 f   original-ccpu386:sti.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          2448,
+          "save_last_xcptn_details(\"STI/POPF blindspot\\n\", 0, 0, 0, 0, 0);"
+        ],
+        [
+          2453,
+          "save_last_xcptn_details(\"STI/POPF problem\\n\", 0, 0, 0, 0, 0);"
+        ],
+        [
+          3785,
+          "save_last_xcptn_details(\"STI/POPF blindspot\\n\", 0, 0, 0, 0, 0);"
+        ],
+        [
+          3790,
+          "save_last_xcptn_details(\"STI/POPF problem\\n\", 0, 0, 0, 0, 0);"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/verr.c",
+      "object": "obj/ccpu/verr.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 3,
+      "sample_map_lines": [
+        [
+          794,
+          "0001:000263c0       _VERR                      004273c0 f   original-ccpu386:verr.obj"
+        ],
+        [
+          8866,
+          "0001:00026440       $LN32                      00427440     original-ccpu386:verr.obj"
+        ],
+        [
+          8867,
+          "0001:0002644c       $LN31                      0042744c     original-ccpu386:verr.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1092,
+          "case 4:   /* T2 VERR Ew */   inst32 = VERR;   goto TYPE0F00_2;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/verw.c",
+      "object": "obj/ccpu/verw.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 1,
+      "sample_map_lines": [
+        [
+          795,
+          "0001:00026460       _VERW                      00427460 f   original-ccpu386:verw.obj"
+        ]
+      ],
+      "decoder_refs": [
+        [
+          1093,
+          "case 5:   /* T2 VERW Ew */   inst32 = VERW;   goto TYPE0F00_2;"
+        ]
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xadd.c",
+      "object": "obj/ccpu/xadd.obj",
+      "archive": "original-ccpu386.lib",
+      "object_in_map": 0,
+      "sample_map_lines": [],
+      "decoder_refs": [
+        [
+          1781,
+          "case  0xc0:   /* T8 XADD Eb Gb */"
+        ],
+        [
+          1784,
+          "note_486_instruction(\"XADD Eb Gb\");"
+        ],
+        [
+          1791,
+          "XADD(&ops[0].sng, &ops[1].sng, 8);"
+        ],
+        [
+          1800,
+          "case  0xc1:   /* T8 XADD Ev Gv */"
+        ]
+      ]
+    }
+  ]
+}

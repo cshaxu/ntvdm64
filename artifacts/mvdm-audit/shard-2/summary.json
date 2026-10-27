@@ -23,8 +23,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "C2F13CB77C57EE272B46CA9E80BD1ED096BDF82E87CAF5EE3B73C9717FD30886",
-  "limitations": "pending is not a final allowed disposition; partial does not prove original functionality; guest no-host-link role is not guest runtime acceptance; textual line similarity is not restored-code proportion.",
+  "output_sha256": "67D638E9A106A8FAC8DB3964E08C0C40F4F29360A4E69C78D2634169A88A7DA2",
+  "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,029 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -48,8 +48,40 @@
     "softpc.new/base/ccpu386/ntthread.c",
     "softpc.new/base/ccpu386/sascdef.c",
     "softpc.new/base/ccpu386/zfrsrvd.c",
-    "softpc.new/base/cvidc/ev_glue.c"
+    "softpc.new/base/cvidc/ev_glue.c",
+    "softpc.new/base/inc/gmi.h",
+    "softpc.new/base/inc/host.h",
+    "softpc.new/base/inc/timeval.h",
+    "softpc.new/base/keymouse/mouse_io.c",
+    "softpc.new/base/system/idetect.c",
+    "softpc.new/base/video/egwrtm12.c",
+    "softpc.new/base/video/video.c",
+    "softpc.new/host/inc/cfpu_def.h",
+    "softpc.new/host/inc/nt_fdisk.h",
+    "softpc.new/host/src/config.c",
+    "softpc.new/host/src/copy_fnc.c",
+    "softpc.new/host/src/nt_com.c",
+    "softpc.new/host/src/nt_emm.c",
+    "softpc.new/host/src/nt_mem.c",
+    "softpc.new/host/src/nt_mouse.c",
+    "softpc.new/host/src/nt_vga.c",
+    "wow32/isvwow.h",
+    "wow32/wdos.c",
+    "wow32/wkernel.c",
+    "wow32/wmdisp32.c",
+    "wow32/wmsgem.c",
+    "wow32/wowhooks.c",
+    "wow32/wuclip.c",
+    "wow32/wudlg.c",
+    "wow32/wuman.c"
   ],
   "rebuild": "atomic reconstruction from frozen ledger and first 411 intact rows after CSV quoting error",
-  "integrity": "1089 rows, all columns, unique paths, exact frozen source fields, shard predicate and live-hash drift checked"
+  "integrity": "1089 rows; unique paths, column count, frozen fields, partition predicate and 48 partial trace entries verified",
+  "pending_ccpu_selected_link_review": {
+    "rows": 24,
+    "map_symbol_present": 22,
+    "no_map_symbol": 2,
+    "evidence": "ccpu-selected-link-inventory.json",
+    "limits": "Map contribution is not runtime or complete opcode behavior; SPC486-gated cmpxchg/xadd require selected-profile investigation."
+  }
 }

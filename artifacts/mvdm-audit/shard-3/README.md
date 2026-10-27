@@ -94,3 +94,25 @@ three-way disposition. Selected findings:
 - Three BIOS assembler sources are firmware-construction inputs. Their role
   does not prove that the distributed immutable BIOS supplies their behavior;
   no guest rebuild or patch is authorized.
+
+## Selected-source first-pass reconciliation
+
+All 73 pending rows labelled selected product source now record a source
+owner, relevant product-map observation, coherent r10 image identity where
+available, and the remaining behavioral proof. The 34 CCPU rows include 29
+objects whose exact original-ccpu386 archive/object names occur in the worker
+map; the other 39 rows include 28 matching object names, eight without a
+matching selected-binary map symbol and three VDMREDIR rows for which this
+review did not locate a VDMREDIR map. These are symbol observations, not
+proof of full archive extraction, original dispatch or guest behavior.
+
+In particular, under the selected `SPC386` graph, original `c_main.c` sends
+BSWAP and WBINVD to Int6 unless `SPC486` is selected; original opcode 0x90
+handles NOP directly with `break`. The missing BSWAP, WBINVD and NOP object
+map symbols therefore require a profile/behavior decision, not a claim that
+they simply were not invoked by the tested workload. They remain pending.
+
+[Fast WOW comparative audit](fastwow-comparative-audit.md) documents the
+original i386 assembler path, actual CPU40 source path and object evidence,
+real limits, and three implementation choices. It is an analysis, not
+completion or approval to restore the NT4 monitor.

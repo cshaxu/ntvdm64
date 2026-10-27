@@ -37,3 +37,26 @@ Consistency checks: 48 owner-review paths equal exactly the 48 initial partial
 paths; 34 unselected-review paths equal exactly the 34 frozen unselected-host
 source paths; all 1,182 paths obey the shard function. No source identities
 changed since freeze.
+
+## Selected-source follow-up
+
+`selected-owner-review.csv` separately examines 48 of the 73 product-selected
+pending source paths: six WOW resource/memory/spool/fax sources, twelve C-VID
+sources, and thirty CCPU sources. Each row identifies the current matching
+product image and link-map hash, representative map symbol where available,
+source-level owner, historical evidence, and remaining proof. The thirty CPU
+rows include `invd.c`, which is compiled but has no selected INVD body under
+the non-SPC486 profile. No row is promoted to full merely from link presence.
+
+The other 25 product-selected paths are not yet individually reviewed. The
+overall pending count remains 1,121; a reviewed pending row is not an accepted
+row. `audit.py` recreates the preliminary CSV and would overwrite the manually
+added selected-source evidence in `file-audit.csv`; preserve the separate
+`selected-owner-review.csv` if regenerating and reapply its evidence.
+
+Consistency check: all 1,182 rows remain unique and in shard 1; selected
+review has 48 unique paths, partial-source owner review has 48, unselected
+source role review has 34. Current `file-audit.csv` SHA-256 is
+`F08E4D54D09FADC2A0768B354DB511D29E02A62DD350934B9818F427BF779A1E`;
+`selected-owner-review.csv` SHA-256 is
+`CF35402AFAED93B37D8CE7977364B2E6451DB5F8202E0480C8A49F8A226CE682`.

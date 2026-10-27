@@ -96,3 +96,21 @@ but the separate original fax GDI driver and UI modules are not established
 as deployed. Existing print acceptance explicitly did not cover fax install.
 Source suggests an initialization risk in the install path; it has not been
 reproduced and requires further original-source and path evidence.
+
+## CPU profile and compiled-source distinction
+
+Shard 1 found `base/ccpu386/invd.c` in the selected compilation inventory,
+but its implementation is conditional on `SPC486` and the current SPC386
+profile dispatches the corresponding opcodes to the original invalid-opcode
+path. Compilation of the file is not proof of a 486 instruction provider.
+The target CPU capability and guest compatibility contract must be checked
+before excluding that implementation or enabling an alternate CPU profile.
+
+## Multimedia structure translation selection
+
+Shard 1 reports that `wow32/wmmstru2.c` is present in the selected build
+graph while its reverse MCI structure thunk bodies are under original
+`#if 0` and do not appear as object symbols in the current map. This
+requires tracing actual MCI/MMCallProc32 dispatch and the guest/host data
+contract; a compiled object or ordinary sound acceptance alone does not
+prove those reverse translations or asynchronous physical-device behavior.
