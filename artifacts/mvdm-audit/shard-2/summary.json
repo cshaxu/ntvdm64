@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "711FE98D41E2866DA40327CB982CA73D005D7D499EDFB56863C06DE0A12CCFA0",
+  "output_sha256": "3D170042DE0D5F8657684CC4114CA924A9708766E41257C7F4A311788AE96D00",
   "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 958 rows remain pending. Excluded build artifacts do not exclude source or guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -167,5 +167,7 @@
   "wow_resource_template_lifecycle": "wow-resource-template-lifecycle-review.md; identical source remains pending, caller failure candidate not reproduced",
   "wow_comm_port_lifecycle": "wow-comm-port-lifecycle-review.md; DOS nt_com fixture does not prove WOW USER PortTab behavior",
   "wow_scrollbar_message": "wow-scrollbar-message-review.md; bidirectional conversion and call-local lifetime reviewed, real branch witness pending",
-  "historical_i386_batch": "historical-i386-artifacts-review.md and historical-i386-artifacts.csv; 59 artifacts excluded only as inspected graph inputs and verbatim package files"
+  "historical_i386_batch": "historical-i386-artifacts-review.md and historical-i386-artifacts.csv; 59 artifacts excluded only as inspected graph inputs and verbatim package files",
+  "wow_menu_owner_lifecycle": "wow-menu-owner-lifecycle-review.md; selected original thunks with bounded fixtures and guest evidence; pending full scope",
+  "suballoc_xms_failure": "suballoc-xms-callback-failure-review.md; injected failure observation and actual selected XMS callbacks separated"
 }

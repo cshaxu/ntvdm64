@@ -273,3 +273,14 @@ is unavailable; source search finds a test binding but no product binding.
 Whether the fast branch is reached and whether fallback preserves each observable
 search result under mutation remain unproved. This is not a claim that normal
 DOS directory enumeration fails.
+
+## XMS suballocation failure ownership
+
+[Suballocator callback audit](shard-2/suballoc-xms-callback-failure-review.md)
+identifies the selected CPU40 XMS path's VdmCommit/DeCommit callbacks, which
+can report actual host API failure. A fresh original-source fixture with
+injected callback errors observes partial committed pages after allocation
+failure and freed bitmap bits after decommit failure. This establishes the
+controlled response and a plausible real callback boundary, not that an
+actual guest triggered the failure or suffered data loss. Inspect the SAS
+side effects and real callback ordering before selecting a repair.
