@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "base": "8197f9de3",
+  "counts": {
+    "pending": 1890,
+    "excluded": 2506,
+    "partial": 236,
+    "full": 52
+  },
+  "source_role_changes": 44,
+  "unrelated_shard_rows_unchanged": true,
+  "frozen_inventory_unchanged": true,
+  "product_or_guest_changed_by_checkpoint": false,
+  "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance"
+}

@@ -9,12 +9,12 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 236 partial (205 existing source-difference rows, two live
 source candidates, 19 partially integrated build manifests and two export-source
-records, two partially verified quick-event rows and six IOS/CCPU rows), 2,462 excluded
+records, two partially verified quick-event rows and six IOS/CCPU rows), 2,506 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 1,934 pending.
+52 full files (26 executable leaves and 26 declarations) and 1,890 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the generated-message checkpoint below, not a prior snapshot's fixed counts.
+the shared-include checkpoint below, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -185,3 +185,8 @@ resolves 76 historical file roles through actual MASM macros, original build
 recipes and bounded SYM/OMF/PCH/text observations. It separates generated
 source from binary artifacts and explicitly retains unproved image lineage;
 no corresponding message, debugging, VDD or DPMI capability is excluded.
+
+The [shared-include checkpoint](shared-guest-include-role-review.md) resolves
+44 of 104 declaration/macro roles through original include roots and targets,
+distinguishing native SDK names and real local shadows. Sixty files retain
+specific unresolved consumers or profile boundaries; no API is excluded.

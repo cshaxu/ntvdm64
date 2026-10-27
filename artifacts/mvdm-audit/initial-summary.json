@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1934,
-    "excluded": 2462,
+    "pending": 1890,
+    "excluded": 2506,
     "partial": 236,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Generated-message/artifact checkpoint resolves 76 historical file roles:59 MASM message/control texts,11 symbol metadata files,2 OMF objects,2 host PCH files and2 text temporaries. No capability exclusion or runtime/guest change; original semantic obligations remain."
+  "note": "Shared-include checkpoint reviews104 exact pending headers/macros, resolves44 historical guest input roles through original include roots and targets, retains60 unresolved paths. No source/guest or capability changes; native SDK basename and guest-copy ownership are distinct."
 }

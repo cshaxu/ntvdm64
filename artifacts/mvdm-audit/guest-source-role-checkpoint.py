@@ -115,11 +115,14 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
-    if prefix in ('guest-declaration-resource-role-', 'generated-message-role-'):
+    if prefix in ('guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-'):
         generated = prefix == 'generated-message-role-'
+        shared = prefix == 'shared-guest-include-role-'
+        expected_reviewed, expected_remaining = (76, 0) if generated else (104, 60) if shared else (434, 305)
         extensions = {'.h', '.inc', '.mac', '.rc', '.rcv', '.dlg', '.bmp', '.ico', '.cur', '.bms', '.def', '.msg', '.skl', '.ext'}
         cohort = {p for p, r in old.items() if r['status'] == 'pending'
                   and (re.search(r'\.(CL[0-9A-Z]|CTL|pch|sym|OBJ|tmp)$', p, re.I) if generated
+                       else p.startswith(('wow16/inc/', 'dos/v86/h/', 'dos/v86/inc/')) and Path(p).suffix.lower() in ('.h', '.inc', '.mac') if shared
                        else p.startswith(('dos/', 'wow16/')) and Path(p).suffix.lower() in extensions)}
         reviewed = {}
         for shard, record in enumerate(observation['source_tables']):
@@ -130,15 +133,18 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 originals = [Path(p.strip()) for p in row['original_path'].split(';')]
                 assert any(p.is_file() and sha(p) == row['sha256'] for p in originals)
                 reviewed[path] = row
-        assert set(reviewed) == cohort and len(cohort) == observation['reviewed_cohort_count'] == (76 if generated else 434)
+        assert set(reviewed) == cohort and len(cohort) == observation['reviewed_cohort_count'] == expected_reviewed
         accepted = {p for p, r in reviewed.items() if r['proposal_status'] in ('excluded', 'excluded-file-role-only')}
         if generated:
             overrides = {r['relative_path']: r for r in observation['main_overrides']}
             assert set(overrides) == cohort - accepted and all(r['basis'] for r in overrides.values())
             accepted |= set(overrides)
         assert accepted == set(changed)
-        assert len(cohort - accepted) == observation['remaining_cohort_pending'] == (0 if generated else 305)
+        assert len(cohort - accepted) == observation['remaining_cohort_pending'] == expected_remaining
         assert all(merged[p]['status'] == 'pending' for p in cohort - accepted)
+        if shared:
+            for record in observation['host_graph_observations']:
+                assert sha(Path(record['path'])) == record['sha256']
     if prefix == 'generated-message-role-':
         format_path = A / observation['format_observations_path']
         assert sha(format_path) == observation['format_observations_sha256']
@@ -232,7 +238,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

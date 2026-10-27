@@ -1,0 +1,9 @@
+# Shared guest include owner review — shard 3
+
+All 29 currently pending assigned paths have current hashes equal to frozen hashes; each recorded absolute original path was directly verified against the authorized comparison or T301 supplemental identity. Twelve historical guest declaration file-role exclusions are candidates, backed by actual include edges, original search roots and linked guest targets. This does not exclude guest capability, establish shipped image provenance or prove runtime behavior.
+
+The selected host worker and WOW32 Ninja cflags (`worker/build.ninja:4`, `wow32/build.ninja:5`) and their forced includes do not name `wow16/inc`. For example, WOW32 `wcommdlg.c:26` includes the same `cderr.h` basename through host roots, whereas original WRITE `printdlg.c:38` uses the `wow16/inc` CL16 root. The same distinction applies to `windows.h`: a shared spelling alone is not a shared file. This states the observed generated configurations, not arbitrary environment overrides. Original USER RC follows the default non-USEBUILD/non-preexisting-INCLUDE branch, and WRITE `penwin.h` follows its explicit PENWIN branch. Alternate profiles remain unasserted.
+
+Seventeen entries remain pending. WRITE and MMSYSTEM each contain a local `debug.h`, so their quoted includes do not establish the shared header consumer. C-library headers need the actual original compiler search path; `dos/v86/inc/smifssym.inc` has makefile dependency declarations but needs a live INCLUDE and target branch; `rom.inc` has an exact kernel include chain, but the relevant 286/386 target object linkage still needs verification. The CSV retains other specific edges and remaining work. A cached dependency absence is not proof of non-use.
+
+No original tool was run; no product source, existing ledger, guest, other shard or runtime process was changed.
