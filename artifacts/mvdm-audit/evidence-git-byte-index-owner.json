@@ -1,0 +1,10 @@
+{
+  "pid": 27480,
+  "started": "2026-10-27T22:13:48.2185566Z",
+  "command": "C:\\Program Files\\Python313\\python.exe -B -X utf8 O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\audit-evidence-index-bytes.py",
+  "script_sha256": "2ABB24825FF0907B1BB59685F03BFF19EBE252D0C01F044ED66F610FA06B927D",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/evidence-index-bytes.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/evidence-index-bytes.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T22:13:50.2252545Z"
+}

@@ -1,0 +1,80 @@
+{
+  "result": "pass",
+  "base": "ecd4a604a",
+  "candidate_count": 38,
+  "reviewed_cohort_count": 90,
+  "remaining_cohort_pending": 52,
+  "source_tables": [
+    {
+      "path": "shard-1/native-pending-followup.csv",
+      "sha256": "9F624B8D8EA46FCB1DA652A8336B82E31BBCA5EB580B894DEAEF207D365059F6"
+    },
+    {
+      "path": "shard-2/native-pending-followup.csv",
+      "sha256": "DCE3BA721F08BD89C67BDE946AB614D9CF5A17C815B347FDC1B10805D04068B5"
+    },
+    {
+      "path": "shard-3/native-pending-followup.csv",
+      "sha256": "9C893BDF2708525CE24253DA31A5CCF97331383262110D0958DC4CF8BC82D790"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "host_graph_observations": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "scope": "Observed explicit include/forced-header roots, not a claim about every possible qualified include or alternate profile"
+    }
+  ],
+  "scope": "Per-file source integration and explicit unmeasurable functional extent; no new runtime acceptance",
+  "compiled_empty_objects": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_getset.c",
+      "object_path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_getset.obj",
+      "object_sha256": "71250F6E4FECC984202210179C1AE53BC61B2CA8E7D938A00C475130D890BBCF",
+      "report_path": "native-source-c_getset-symbols.txt",
+      "report_sha256": "8BC46A4114D771AA2F4BAFBAD7C89FCBA2E461B426B8E97097DDB805AF9503CC"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/ccpupig.c",
+      "object_path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\ccpupig.obj",
+      "object_sha256": "F48FCB79FACFB4F86C51F964331F6CAAC759613E691783AF56AF2BCE70D59CCC",
+      "report_path": "native-source-ccpupig-symbols.txt",
+      "report_sha256": "4B498E7E2E084656D38470C32AB208A4AB23ED98E6AFC3FFCF679B5FAB51B041"
+    }
+  ]
+}

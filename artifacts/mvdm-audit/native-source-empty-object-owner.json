@@ -1,0 +1,10 @@
+{
+  "pid": 26220,
+  "started": "2026-10-27T21:54:37.7704887Z",
+  "command": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe -NoProfile -ExecutionPolicy Bypass -File O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\inspect-pig-objects.ps1",
+  "script_sha256": "0508D5B7DE888DE8D34E915ABA8B92B8DF7B9838AF7F0019BCFA589F3F908E3D",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/pig-objects.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/pig-objects.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T21:54:49.7957781Z"
+}

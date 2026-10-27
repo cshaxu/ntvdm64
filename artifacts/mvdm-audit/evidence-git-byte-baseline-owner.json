@@ -1,0 +1,10 @@
+{
+  "pid": 26432,
+  "started": "2026-10-27T22:09:24.0526115Z",
+  "command": "C:\\Program Files\\Python313\\python.exe -B -X utf8 O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\audit-evidence-git-bytes.py",
+  "script_sha256": "CF135DD071245A756F30E609CCA15FA568071FE5673EBE1C93DBA733BFC433D0",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/evidence-git-bytes.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/evidence-git-bytes.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T22:09:38.6226047Z"
+}

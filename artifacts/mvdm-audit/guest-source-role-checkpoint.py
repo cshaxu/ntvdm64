@@ -7,6 +7,7 @@ import io
 import json
 import re
 import runpy
+import struct
 import subprocess
 import zipfile
 from pathlib import Path
@@ -75,7 +76,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             else:
                 assert original_hash in (frozen[path]['opennt_sha256'], frozen[path]['opennt45_sha256'])
             if proof['status'] == 'excluded':
-                legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only')
+                legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
+                                'historical-cpu-test-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -84,9 +86,15 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-guest-library-build-artifact-only':
                     assert prefix == 'guest-library-role-' and path.lower().endswith('.lib')
+                if proof['role'] == 'historical-cpu-test-source-only':
+                    assert prefix == 'native-source-role-' and path in (
+                        'softpc.new/base/ccpu386/c_getset.c', 'softpc.new/base/ccpu386/ccpupig.c')
             else:
-                assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
-                assert (current_hash != original_hash) == (proof['role'] == 'active-export-declaration-mirror-diff')
+                if prefix == 'native-source-role-':
+                    assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                else:
+                    assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
+                    assert (current_hash != original_hash) == (proof['role'] == 'active-export-declaration-mirror-diff')
             assert proof['original_edge'] and proof['limits']
     counts = dict(collections.Counter(r['status'] for r in merged.values()))
     expected_counts = collections.Counter(r['status'] for r in old.values())
@@ -115,6 +123,59 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'native-source-role-':
+        reviewed = {}
+        for shard, record in enumerate(observation['source_tables'], 1):
+            proposal = rows(A / f'shard-{shard}/native-pending-owner-review.csv')
+            cohort = sorted(r['relative_path'] for r in proposal if old[r['relative_path']]['status'] == 'pending')[:30]
+            batch = rows(A / record['path'])
+            assert sorted(r['relative_path'] for r in batch) == cohort and len(batch) == 30
+            for row in batch:
+                path = row['relative_path']
+                assert path not in reviewed and int(merged[path]['shard']) == shard
+                assert sha(Path('src/mvdm') / path) == row['current_sha256'] == row['frozen_sha256']
+                originals = [Path(p.strip()) for p in row['original_path'].split(';')]
+                assert any(p.is_file() and sha(p) == row['original_sha256'] for p in originals)
+                assert row['original_sha256'] == row['current_sha256']
+                reviewed[path] = row
+        accepted = {p for p, r in reviewed.items() if r['proposal_status'] in ('partial', 'excluded-file-role-only')}
+        assert accepted == set(changed) and len(reviewed) == observation['reviewed_cohort_count'] == 90
+        assert len(reviewed.keys() - accepted) == observation['remaining_cohort_pending'] == 52
+        assert all(merged[p]['status'] == 'pending' for p in reviewed.keys() - accepted)
+        for path in ('softpc.new/base/ccpu386/c_getset.c', 'softpc.new/base/ccpu386/ccpupig.c'):
+            text = (Path('src/mvdm') / path).read_text()
+            assert re.search(r'#\s*if(?:def\s+PIG|\s+defined\(PIG\))', text)
+        for record in observation['host_graph_observations']:
+            graph = Path(record['path'])
+            assert sha(graph) == record['sha256']
+            text = graph.read_text()
+            flags = [line for line in text.splitlines()
+                     if line.startswith(('host_cflags = ', 'cflags = ', 'ccpu_flags = '))]
+            assert flags and all('/DCPU_40_STYLE' in line and
+                                 not re.search(r'/DPIG(?:\s|=|$)', line) for line in flags)
+            assert all(not re.search(r'/DPIG(?:\s|=|$)', line) for line in text.splitlines()
+                       if line.startswith('release_cflags = '))
+            if any(line.startswith('ccpu_flags = ') for line in flags):
+                rule = re.search(r'(?m)^rule cc_ccpu\r?\n([^\n]+)', text)
+                assert rule and '$ccpu_flags' in rule[1] and '$release_cflags' in rule[1]
+                assert all(f'build obj/ccpu/{name}.obj: cc_ccpu ' in text
+                           for name in ('c_getset', 'ccpupig'))
+        objects = observation['compiled_empty_objects']
+        assert {r['relative_path'] for r in objects} == {
+            'softpc.new/base/ccpu386/c_getset.c', 'softpc.new/base/ccpu386/ccpupig.c'}
+        for record in objects:
+            obj = Path(record['object_path'])
+            assert sha(obj) == record['object_sha256']
+            assert sha(A / record['report_path']) == record['report_sha256']
+            data = obj.read_bytes()
+            machine, sections = struct.unpack_from('<HH', data)
+            optional = struct.unpack_from('<H', data, 16)[0]
+            assert machine == 0x14c and 0 < sections < 32 and optional == 0
+            for i in range(sections):
+                offset = 20 + i * 40
+                size = struct.unpack_from('<I', data, offset + 16)[0]
+                flags = struct.unpack_from('<I', data, offset + 36)[0]
+                assert not size or not flags & (0x20 | 0x20000000)
     if prefix in ('guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-'):
         generated = prefix == 'generated-message-role-'
         shared = prefix == 'shared-guest-include-role-'
@@ -211,7 +272,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
         assert sha(path) == record['sha256'] and '(STALE)' not in path.read_text()
         text = path.read_text().replace('\\', '/').lower()
         for relative in changed:
-            if changed[relative]['status'] == 'excluded':
+            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] != 'historical-cpu-test-source-only':
                 assert 'src/mvdm/' + relative.lower() not in text, relative
     for row in rows(A / 'full-selected-leaf.csv') + rows(A / 'full-selected-declarations.csv'):
         assert merged[row['relative_path']]['status'] == 'full'
@@ -238,7 +299,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

@@ -7,14 +7,14 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-236 partial (205 existing source-difference rows, two live
+272 partial (205 existing source-difference rows, two live
 source candidates, 19 partially integrated build manifests and two export-source
-records, two partially verified quick-event rows and six IOS/CCPU rows), 2,506 excluded
+records, two partially verified quick-event rows, six IOS/CCPU rows and 36 native-source integrations), 2,508 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 1,890 pending.
+52 full files (26 executable leaves and 26 declarations) and 1,852 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the shared-include checkpoint below, not a prior snapshot's fixed counts.
+the native-source checkpoint below, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -202,3 +202,12 @@ the completed build, selected Full, game, WRITE and Video7 checks, alongside
 two failed SOL Options witnesses and two passing accepted-baseline controls.
 The diagnostic-only observation does not fix or waive those production
 failures; candidate publication remains unqualified.
+
+The [native-source checkpoint](native-source-role-review.md) reviews 90 more
+paths, records 36 partial integrations and two original PIG test-source roles,
+and retains 52 concrete unresolved files. Text retention is not behavior
+coverage; no row is promoted to full and no new runtime pass is claimed.
+
+[Exact-byte evidence storage](evidence-byte-preservation.md) records the
+core.autocrlf discrepancy and the narrow byte-preservation rule. It changes
+Git's storage of captured audit bytes, not product or guest behavior.

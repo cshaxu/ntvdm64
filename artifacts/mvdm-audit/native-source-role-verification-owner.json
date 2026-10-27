@@ -1,0 +1,10 @@
+{
+  "pid": 21192,
+  "started": "2026-10-27T22:02:45.9671424Z",
+  "command": "C:\\Program Files\\Python313\\python.exe -B -X utf8 artifacts/mvdm-audit/guest-source-role-checkpoint.py build/t473-s10/native-source-checkpoint-r3.json --base ecd4a604a --prefix native-source-role- --expected-count 38",
+  "script_sha256": "E6DE7AAB2DB4DACE36360E15E7E03C9100EE88D997B1B60A5E68CD1F12A65D8D",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/native-checkpoint-r3.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10/native-checkpoint-r3.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-27T22:02:49.3889035Z"
+}

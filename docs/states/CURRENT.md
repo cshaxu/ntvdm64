@@ -20,7 +20,9 @@ that every historical test has run.
 
 The [shared-include checkpoint](../../artifacts/mvdm-audit/shared-guest-include-role-review.md)
 resolves 44 of 104 declaration/macro roles through actual include roots and
-targets. The ledger retains 1,890 pending and 236 partial paths; source/ABI
+targets. The latest [native-source checkpoint](../../artifacts/mvdm-audit/native-source-role-review.md)
+adds 36 partial integrations and two PIG test-source roles. The ledger retains
+1,852 pending and 272 partial paths; source/ABI
 and real guest/device proof remain open. This audit changed no runtime image.
 
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)

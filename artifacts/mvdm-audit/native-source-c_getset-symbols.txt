@@ -1,0 +1,26 @@
+Microsoft (R) COFF/PE Dumper Version 14.43.34809.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker\obj\ccpu\c_getset.obj
+
+File Type: COFF OBJECT
+
+COFF SYMBOL TABLE
+000 010487F9 ABS    notype       Static       | @comp.id
+001 80010191 ABS    notype       Static       | @feat.00
+002 00000003 ABS    notype       Static       | @vol.md
+003 00000000 SECT1  notype       Static       | .drectve
+    Section length   2F, #relocs    0, #linenums    0, checksum        0
+005 00000000 SECT2  notype       Static       | .debug$S
+    Section length   A4, #relocs    0, #linenums    0, checksum        0
+007 00000000 SECT3  notype       Static       | .chks64
+    Section length   18, #relocs    0, #linenums    0, checksum        0
+
+String Table Size = 0x0 bytes
+
+  Summary
+
+          18 .chks64
+          A4 .debug$S
+          2F .drectve
