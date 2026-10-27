@@ -1,7 +1,7 @@
-# Package-scoped NTSRV candidate: independent review in progress
+# Package-scoped NTSRV: independent review and delivery
 
-The parallel implementation is still in progress; these are review points
-against the listed file hashes, not acceptance of its final code. UUID is an
+The initial review points below describe an earlier candidate; the delivery
+and retained verification section records the later reviewed package. UUID is an
 endpoint partition and package consistency value, not a security credential
 against another process in the same logon session. The existing RPC policy
 continues to authorize the peer's session, token and real process.

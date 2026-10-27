@@ -219,12 +219,12 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `4D652F04B0392F7EA304AA76151BE125796B6D4326799863481127CE5E07CD7A`.
+- Current `file-audit.csv` SHA-256 `8AF7B9421E42F26DB023EB98FF5887F3EB32258CF85412BF5A9AC5ADA7646023`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
 
-`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `4CBA9C5B1FF1BD3217A8D5DBCFB1F375513C35861039CAB6713AADAFFE45B956`.
+`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `C3965C9847DAF424C91DDA4951009F8B288FCF686221EE514EACC191C3F6EBBB`.
 
 Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, per the additional source/link comparison in `video-interface-audit.md`; no EGA runtime is claimed.
 
@@ -241,3 +241,5 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 `ccpu-flag-cdq-audit.md` records 116448 offline native-oracle cases across STC, LAHF and CDQ; integrated guest decode and lifecycle remain pending.
 
 `ccpu-add-mul-audit.md` records 531748 offline ADD/unsigned MUL selected-object comparisons to native x86; guest decode, parity wiring and signed multiplication remain pending.
+
+`dem-directory-label-audit.md` records directory SVC evidence, volume label mutation boundary, and conditional release debug diagnostics; a label NUL-read concern remains a static candidate.

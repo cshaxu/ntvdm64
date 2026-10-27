@@ -155,10 +155,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-T473 S9 is the current coherent ten-image delivery. Its release identity is
+The current coherent ten-image delivery is the S10 package-isolation baseline
+`build/package-uuid/package-c`. Its release identity is
 `assets/release/release-manifest.json`; all ten files are hash-equal to
-`O:\winnt\system32` and `build/t473-s9/package-r10/system32`. Guest media remains
-unchanged.
+`O:\winnt\system32` and the tested package. Guest media remains unchanged.
 
 ## Temporary Evidence
 

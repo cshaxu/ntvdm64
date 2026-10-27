@@ -1,0 +1,28 @@
+{
+  "pid": 26628,
+  "image": "O:\\tmp\\n85f\\system32\\ntvdm.exe",
+  "nonAtomic": true,
+  "traceSourceSS": "0x1797",
+  "traceSourceSP": "0x5322",
+  "expectedFaultFrameWords": [
+    "0x1770",
+    "0xc7",
+    "0x271",
+    "0x58ef",
+    "0x177f",
+    "0x3202",
+    "0x5322",
+    "0x1797"
+  ],
+  "sourceSSDescriptor": [
+    "0xe3806edf",
+    "0xf303"
+  ],
+  "stackBase": "0x3e380",
+  "stackLimit": "0x6edf",
+  "derivedBP": "0x534c",
+  "derivedBPMethod": "SP + 0x0e local bytes + 28 pushed callback argument bytes, inferred from W31 DDEML disassembly",
+  "paiStackOffset": "0x536c",
+  "paiWord": "0x0",
+  "limits": "post-fault read; inferred BP assumes exact uninterrupted shown frame and no hidden pushes; stack may have been modified; requires controls"
+}

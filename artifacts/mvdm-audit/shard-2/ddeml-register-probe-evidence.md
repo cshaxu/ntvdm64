@@ -243,3 +243,26 @@ It is not evidence of actual object contents or corruption. A further validated
 fault-time DS/BX capture and descriptor translation is required for that
 conclusion. No original guest or product source was modified; temporary
 fixture processes were scoped and cleaned up.
+
+## Fault stack observation (post-fault, inferred frame)
+
+Fresh UUID isolated registration probe again recorded vector 0d at DDEML
+177f:58ef, saved SS:SP 1797:5322. The saved trace and pre-call identity
+receipt have been retained under `ddeml-register-faultstack-w31.*`; the
+previous tracked selector0270 evidence was restored from its HEAD bytes.
+A read-only guest stack observation during the modal-error state is
+`ddeml-fault-stack-observation.json` SHA256
+`02177C58C63C41B2C680A2A324E4E82801E4053B639B3136AD890982C42C35D6`;
+trace SHA256 `14B826041A529DC4D75B19B44411CA57C97EF781FDB226D36FC94DC106ACFC8C`.
+
+The W31 binary's routine begins at 5832 with `push bp; mov bp,sp; sub sp,0e`;
+its callback call pushes 28 bytes before 58ef. Assuming the saved guest SP and
+that exact uninterrupted frame, BP is inferred as 534c and the routine's
+`[bp+20]` argument is at SS:536c. The non-atomic post-fault read resolved that
+word to zero; the instruction at 58bf loads BX from that word before issuing
+the far call. This supports a hypothesis of BX=0 and an invalid instance
+argument on this run. It does not capture fault-time BX/DS directly, does not
+prove the stack was untouched after the exception, and has no successful
+registration or other binary control. Do not claim that a particular API or
+component caused the invalid argument based on this observation alone.
+Original guest remains unmodified; this fixture and its stage were cleaned up.
