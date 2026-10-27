@@ -62,3 +62,6 @@ A separate pending relevance census for the external rasprint tree is in
 All 205 current partial paths have a reproducible source-text retention
 metric in `partial-code-retention.csv`; its limitations are in
 `partial-code-retention.md`. It is not a functional completeness percentage.
+
+The [provisional recovery worklist](recovery-worklist.md) groups evidenced
+findings by approved stage while keeping unresolved inventory in S10 scope.

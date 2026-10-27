@@ -139,14 +139,18 @@ marking the provider excluded based on private API absence alone.
 
 ## Generic thunk x86 helper selection
 
-The original `wow32/i386/sources` explicitly selects `callpr32.asm` along
-with `fastwow.asm`; the helper copies arguments and restores the x86 stack
-for `wkgthunk.c::WK32ICallProc32`. The current WOW32 build graph and map
-do not name that helper, while the selected original C file also contains
-a non-i386 fallback. The compiler-selected branch, actual x86 call path,
-and equivalence for Pascal/cdecl and callee cleanup require a focused
-comparison with existing real-guest generic-thunk tests. The old generic
-`!IF 0` rationale cannot establish that this helper is unnecessary.
+The original `wow32/i386/sources` selects `callpr32.asm`; the current x86
+product instead compiles the portable C branch. A controlled call through the
+actual selected `wkgthunk.obj` fails with a mismatched cdecl callee, while the
+original assembly helper returns and restores the stack. A separate Win16
+probe exercising a nested callback failed on the baseline and passed with a
+locally composed candidate using the original helper and an EBX-preserving
+adapter. See `shard-0/wow-generic-thunk.md` for source identities and the
+limits of each witness. The helper itself clobbers nonvolatile EBX, so direct
+linking without an ABI boundary is insufficient. Recover this as part of the
+WOW execution group; wider calling conventions, exceptions, task cleanup and
+coherent package regressions remain unverified. The old generic `!IF 0`
+rationale does not justify excluding this helper.
 
 ## WOWFAX components
 
