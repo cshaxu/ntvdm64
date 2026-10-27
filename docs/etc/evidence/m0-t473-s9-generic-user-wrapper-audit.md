@@ -27,6 +27,16 @@ The requested restored-code estimates remain pending semantic, selection and
 runtime review. The extra non-text/build-recipe difference has no line estimate.
 These are initial inventory results, not completion or runtime evidence.
 
+In `cross-audit-r5`, 35 of those pending rows are now explicitly classified as
+excluded from the product: 33 unmirrored `v86/monitor` and `v86/scaffold`
+inputs and two retained `v86/util` inputs. The existing source policy rejects
+the retired CPU_30_STYLE kernel-VDM executor while selecting original CCPU40;
+the product-link inventory also shows these exact rows are not selected. This
+is an authority-backed role exclusion, not a claim that their functions were
+restored by another implementation. The remaining counts are 205 partial and
+4,444 pending. The revised per-file ledger SHA-256 is
+`F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196`.
+
 ## First source result
 
 S8 deliberately did not change the generic wrappers in

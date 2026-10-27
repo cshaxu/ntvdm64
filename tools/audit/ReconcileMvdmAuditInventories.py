@@ -84,6 +84,11 @@ def main():
         current_hash = row['current_sha256']
         original_hashes = {row['opennt_sha256'], row['opennt45_sha256']} - {''}
         diff = bool(current_hash and original_hashes and current_hash not in original_hashes)
+        excluded_cpu30 = (
+            key.startswith('v86/') and
+            row['audit_disposition'] in {
+                'unmirrored-retired-cpu30-executor', 'retired-cpu30-executor'} and
+            row['product_link_selection'] == 'not-product-selected')
         selected = 'unresolved'
         percent = denominator = method = ''
         if diff:
@@ -104,7 +109,11 @@ def main():
             **row, 'dos_catalog_rows': len(dos.get(key, [])),
             'wow_catalog_rows': len(candidates),
             'wow_source_ids': ';'.join(sorted({item['id'] for item in candidates})),
-            'reporting_class': 'partial-mirror-diff' if diff else 'pending-evidence',
+            'reporting_class': ('partial-mirror-diff' if diff else
+                'excluded-cpu30' if excluded_cpu30 else 'pending-evidence'),
+            'classification_basis': ('docs/etc/operations/policy/source-policy.md:CPU_30_STYLE;'
+                'docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md'
+                if excluded_cpu30 and not diff else ''),
             'selected_comparison_edition': selected, 'original_line_count': denominator,
             'original_line_similarity_pct': percent, 'similarity_method': method,
             # Similar text may be unlinked or unreachable; changed text may
