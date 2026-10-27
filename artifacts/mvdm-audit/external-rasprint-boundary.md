@@ -25,3 +25,9 @@ font or provider. Existing T468 printing witnesses must be checked for each
 claimed semantic result; source-selection, a spooler export or one successful
 printer does not establish all devices. The entire 14,304-row group remains
 pending relevance assessment and is not silently excluded from the audit.
+
+The later external triage checks both editions: OpenNT-4.5 also contributes
+14,304 rasprint paths under `nt/private/ntos/w32/ntgdi/printers/rasprint`.
+Thus this earlier suffix census describes the named OpenNT prefix, not the
+combined 28,608 edition-specific rasprint IDs. See
+`external-obligation-triage.md` for the complete denominator and boundaries.

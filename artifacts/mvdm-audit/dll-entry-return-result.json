@@ -1,0 +1,77 @@
+{
+  "result": "pass",
+  "inputs": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "35595FF8BE827CC2E8823D6A5C662812318ECA6C3298D700697B8EF5888149A8",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-dll-entry-bridge.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "CCE873A110D7ADC9858B78C2F4ABB960AC36180E739F97989379B1568ADAC44F",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "B019ADA4C13A7C5EB742ED974C564D10CEDAE3AE2317CBC92BB3F6EF5DEF3F3D",
+      "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dll-entry-return-probe.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "740A49A2B0625AAC12CD8FE6B5473AB35F55433767034ACACD4921E651F1DA73",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\candidate-bridge.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "9C7F88211995891473F0198F90D5A595F389F201CFE3506786332A67BB54ADD1",
+      "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\verify-dll-entry-return.ps1"
+    }
+  ],
+  "runs": [
+    {
+      "ended": "2026-10-27T17:52:10.9641965Z",
+      "name": "actual-build",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /W4 /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2/\" /Fe\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\actual.exe\" \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dll-entry-return-probe.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj\" /DEXPECT_LEGACY_WIDE_RETURN\"",
+      "started": "2026-10-27T17:52:04.8746989Z",
+      "exit": 0,
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 33088
+    },
+    {
+      "ended": "2026-10-27T17:52:11.2379729Z",
+      "name": "actual",
+      "command": " ",
+      "started": "2026-10-27T17:52:11.1144977Z",
+      "exit": 0,
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\actual.exe",
+      "pid": 17296
+    },
+    {
+      "ended": "2026-10-27T17:52:16.7696579Z",
+      "name": "candidate-build",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /W4 /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2/\" /Fe\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\candidate.exe\" \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dll-entry-return-probe.c\" \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\candidate-bridge.c\"\"",
+      "started": "2026-10-27T17:52:11.2675695Z",
+      "exit": 0,
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 3992
+    },
+    {
+      "ended": "2026-10-27T17:52:17.0110980Z",
+      "name": "candidate",
+      "command": " ",
+      "started": "2026-10-27T17:52:16.9063709Z",
+      "exit": 0,
+      "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dll-entry-return-r2\\candidate.exe",
+      "pid": 29452
+    }
+  ],
+  "actual": "attach=a55a0001 false_attach=a55a0000 thread_false=a55a0000 detach_false=a55a0000 cleanups=2\r\nCONFIRMED actual bridge propagates non-return EAX bits from BOOLEAN\r\n",
+  "candidate": "attach=00000001 false_attach=00000000 thread_false=00000000 detach_false=00000000 cleanups=2\r\nPASS typed BOOLEAN bridge returns false and preserves cleanup\r\n",
+  "product_changed": false,
+  "scope": "Controlled valid BOOLEAN provider at actual selected bridge; not original heap failure or real DLL loader acceptance"
+}

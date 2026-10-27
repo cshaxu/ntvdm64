@@ -1,0 +1,6 @@
+frozen_id,edition,original_path,original_sha256,selected_host_graph_exact_path,bounded_disposition,role_and_remaining
+SRC:807cf08e608bb900add1,OpenNT,windows/core/ntgdi/displays/vga/sources,C84CE13EBA3EA41CD82F7C44042D8E072C7665AF21FAFA73EEE2FA3AE0FD4F3A,False,provider-recipe-only,NT4 VGA GDI_DRIVER recipe; host display provider is modern Windows
+SRC:1987e611c8a68bf0f0fe,OpenNT,windows/core/ntuser/kbd/tmp/kbdus/sources,E07E2FA621CD5F0017CB0DBD499E1C0D476E3AA650B7B4E0E1026F436B97CB02,False,provider-recipe-only,NT4 kbdus DYNLINK layout provider recipe; host keyboard layout is modern Windows
+SRC:207f9a0e0675ec3b8a29,OpenNT,windows/core/ntuser/kbd/all_kbds/kbdus.txt,B13D82EEBE467D98C4EC24D51B83F4E763760FDD31BF96937DDD450777D5076C,False,provider-data-candidate,"US layout generator input, not itself a runtime DLL; layout semantics separately pending"
+SRC:b2f813eba17058fa82cb,OpenNT,windows/core/ntgdi/fonts/trmn/sources,5643EDBBEAA505AF09F23EDDCE7BB16D741773D824948865D609A22DC85584AE,False,provider-recipe-only,NT4 tmsre32 FON resource DYNLINK recipe; modern host font provider
+SRC:be7be20851d06906423f,OpenNT,windows/core/ntgdi/fonts/8514sys.fon,DC7E1C9BB168E22B7A8B1A10C5D9555D71EA8486DC0D628FA17D117698BAE61B,False,resource-pending,NT4 8514 system font binary: exact runtime or build data consumption requires hash/provenance verification

@@ -1,0 +1,7 @@
+id,edition,original_path,actual_sha256,bounded_role
+SRC:315ee4815d394e966897,OpenNT,windows/core/ntgdi/printers/dirs,4FC91DAC1BF4CFF6FFE260C87795979804021F4005D1147D4646656A959196F1,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability
+SRC:1c4c33b74367910b65a1,OpenNT,windows/core/ntgdi/printers/psprint/pscript/sources,438B2E1B74124EDB983DC8632B12A7699AEC862C2916D94231D74417AE63F764,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability
+SRC:695490168007e855d1c3,OpenNT,windows/core/ntgdi/printers/rasprint/rasdd/sources,899A9D1B4A66C298E41C4A9179623F01B9741F04659F359E69ABD540260D4703,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability
+SRC:c45c4583f85e68f9d2b6,OpenNT-4.5,nt/private/ntos/w32/ntgdi/printers/dirs,1BC285B0FC17E22FD1AE60F2E2F22B811667C8E3FD0D9B367E593D67893D079F,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability
+SRC:4911c2124a350ebe2921,OpenNT-4.5,nt/private/ntos/w32/ntgdi/printers/psprint/pscript/sources,438B2E1B74124EDB983DC8632B12A7699AEC862C2916D94231D74417AE63F764,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability
+SRC:d2457898ad48c8789ae5,OpenNT-4.5,nt/private/ntos/w32/ntgdi/printers/rasprint/rasdd/sources,899A9D1B4A66C298E41C4A9179623F01B9741F04659F359E69ABD540260D4703,NT4 provider build descriptor; not a WOW32 runtime input; does not exclude capability

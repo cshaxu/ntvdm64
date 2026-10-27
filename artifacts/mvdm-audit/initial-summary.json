@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2942,
+    "pending": 2940,
     "excluded": 1466,
-    "partial": 224,
+    "partial": 226,
     "full": 52
   },
   "unique_and_partition_verified": true,
@@ -19,11 +19,26 @@
       "current": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
     },
     {
+      "relative_path": "softpc.new/base/video/v7_ports.c",
+      "frozen": "D02575BD0594F9CCC3A23AD7ED0EB208EC7C1414EEFFD558DD1CE6B648F1991B",
+      "current": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA"
+    },
+    {
+      "relative_path": "softpc.new/base/video/vga_mode.c",
+      "frozen": "D0EA64BA445B8A7C8CB4B11963CECE808793B0595183F8BE7F115C060EB1F0D9",
+      "current": "E4237ED746FBFFBF1F1CBA86212D52BB352AE84BEB411FA600A492501A7BF01A"
+    },
+    {
       "relative_path": "softpc.new/host/src/nt_bop.c",
       "frozen": "C10228895446D6193AE6FD0215F5B93299359858DA1F7DD0626AC7CBB7E70153",
       "current": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_graph.c",
+      "frozen": "3BD567C002DEE8B356788EA3AE63FBCB2DF9302E5D7CEB386149B013CEA95EDE",
+      "current": "3B2E6D7959A93B05B3F3856E3A00E9455EE64DF489A36712643CB257FB5D3E86"
     }
   ],
   "complete": false,
-  "note": "pending remains unresolved; external relevance is incomplete; live README, modesw.c and nt_bop.c drift is recorded, not runtime acceptance by this ALU audit"
+  "note": "Live candidate drifts are observations, not runtime acceptance; two newly modified original video sources are partial under mirror-diff rule; external provider triage remains distinct."
 }

@@ -2064,9 +2064,9 @@ softpc.new/base/video/obj/i386/video.lib,0,excluded,shard-0/review.csv
 softpc.new/base/video/obj/i386/video.obj,2,excluded,shard-2/file-audit.csv
 softpc.new/base/video/obj/i386/video_io.obj,0,excluded,shard-0/review.csv
 softpc.new/base/video/sources,2,partial,shard-2/file-audit.csv
-softpc.new/base/video/v7_ports.c,0,pending,shard-0/review.csv
+softpc.new/base/video/v7_ports.c,0,partial,shard-0/review.csv
 softpc.new/base/video/v7_video.c,1,partial,shard-1/file-audit.csv
-softpc.new/base/video/vga_mode.c,0,pending,shard-0/review.csv
+softpc.new/base/video/vga_mode.c,0,partial,shard-0/review.csv
 softpc.new/base/video/vga_prts.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/video/vga_vide.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/video/video.c,2,partial,shard-2/file-audit.csv

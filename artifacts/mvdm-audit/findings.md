@@ -1,5 +1,16 @@
 # Cross-shard findings (in progress)
 
+## DLL entry return width
+
+The [DLL-entry return audit](dll-entry-boolean-return.md) finds the generated
+CRT bridge declaring original BOOLEAN as int. An actual-object controlled
+provider witness proves unspecified high EAX bits can turn an AL false return
+into nonzero; the test-only correctly typed declaration normalizes it. The
+published bridge body is matched separately with call relocations masked.
+This does not prove actual original heap-failure manifestation or full loader
+failure recovery. S11 owns the one-declaration project fix and real DLL/WOW
+lifecycle acceptance; no mirror/guest change is needed.
+
 ## Divergence identifiers are not unique
 
 A mechanical registry-table sweep found seven repeated IDs with distinct

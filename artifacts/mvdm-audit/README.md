@@ -7,10 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-224 partial (205 existing source-difference rows and 19 partially integrated
-build manifests), 1,466 excluded (documented profile, historical recipe,
-source roles or unused retained objects), 52 full files (26 executable
-leaves and 26 declarations) and 2,942 pending. Exclusion of an object or provider does not prove its guest
+226 partial (205 existing source-difference rows, two live uncommitted
+source candidates and 19 partially integrated build manifests), 1,466 excluded
+(documented profile, historical recipe, source roles or unused retained objects),
+52 full files (26 executable leaves and 26 declarations) and 2,940 pending.
+Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
@@ -28,12 +29,17 @@ The [architecture-header checkpoint](architecture-header-review.md) accounts
 for 125 additional nonselected MIPS/PPC declaration variants without excluding
 their common algorithms or the selected C-VID/x86 declarations.
 
-The live hash sweep records divergence-registry changes in
-`src/mvdm/README.md`, `dpmi32/modesw.c` and `nt_bop.c`; see
-`initial-summary.json`. These are observed baseline drifts, not
-accepted runtime repairs from this ALU audit. This review changed no product
+The live hash sweep records the six source/registry drifts listed in
+`initial-summary.json`; the [live candidate observation](live-candidate-source-observation.md)
+accounts for two newly modified original video sources. These are observed
+baseline drifts, not accepted runtime repairs from this audit. This review changed no product
 source or guest media. `frozen-external-audit-rows.csv` preserves 42,963 extra WOW audit
 paths outside the MVDM union for relevance and dependency review.
+
+The [complete external triage](external-obligation-triage.md) joins all
+42,963 IDs to their source-audit roles and actual pinned Git indexes. It
+separates 36,736 device-context, 6,134 host-envelope and 93 explicit-boundary
+rows; only nine reviewed recipe file roles are excluded, not their features.
 
 Review breadth differs by shard. Shard 0 has metadata for 62 diff files, nine
 source-level detailed reviews, initial source-manifest scans of 43 unselected

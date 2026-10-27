@@ -1,0 +1,58 @@
+{
+  "result": "pass",
+  "mvdm_paths": 4684,
+  "counts": {
+    "pending": 2940,
+    "excluded": 1466,
+    "partial": 226,
+    "full": 52
+  },
+  "external_identities": 42963,
+  "external_tiers": {
+    "host-envelope-unresolved": 6134,
+    "device-context-dependency-gated": 36736,
+    "explicit-boundary-review": 93
+  },
+  "external_recipe_file_exclusions": 9,
+  "external_pending_contracts": 42954,
+  "controlled_boolean_abi_witness": true,
+  "published_bridge_body_correspondence": true,
+  "live_candidate_partial_rows": [
+    "softpc.new/base/video/v7_ports.c",
+    "softpc.new/base/video/vga_mode.c"
+  ],
+  "source_drift": [
+    {
+      "relative_path": "README.md",
+      "frozen": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
+      "current": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+    },
+    {
+      "relative_path": "dpmi32/modesw.c",
+      "frozen": "4BBFF6CB6021A4839B6616169529BCCA76510F98B82CA9665F03637E4654ED22",
+      "current": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+    },
+    {
+      "relative_path": "softpc.new/base/video/v7_ports.c",
+      "frozen": "D02575BD0594F9CCC3A23AD7ED0EB208EC7C1414EEFFD558DD1CE6B648F1991B",
+      "current": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA"
+    },
+    {
+      "relative_path": "softpc.new/base/video/vga_mode.c",
+      "frozen": "D0EA64BA445B8A7C8CB4B11963CECE808793B0595183F8BE7F115C060EB1F0D9",
+      "current": "E4237ED746FBFFBF1F1CBA86212D52BB352AE84BEB411FA600A492501A7BF01A"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_bop.c",
+      "frozen": "C10228895446D6193AE6FD0215F5B93299359858DA1F7DD0626AC7CBB7E70153",
+      "current": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_graph.c",
+      "frozen": "3BD567C002DEE8B356788EA3AE63FBCB2DF9302E5D7CEB386149B013CEA95EDE",
+      "current": "3B2E6D7959A93B05B3F3856E3A00E9455EE64DF489A36712643CB257FB5D3E86"
+    }
+  ],
+  "product_or_guest_changes_by_this_checkpoint": false,
+  "scope": "Source triage and controlled ABI evidence; no real original heap-failure, complete loader acceptance or T closure"
+}

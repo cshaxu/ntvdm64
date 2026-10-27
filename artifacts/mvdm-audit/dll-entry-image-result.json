@@ -1,0 +1,22 @@
+{
+  "result": "pass",
+  "object_sha256": "CCE873A110D7ADC9858B78C2F4ABB960AC36180E739F97989379B1568ADAC44F",
+  "image_sha256": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83",
+  "function_bytes": 50,
+  "matched_image_va": 268924176,
+  "masked_relative_calls": [
+    {
+      "offset": 14,
+      "symbol": "_W32DllInitialize@12"
+    },
+    {
+      "offset": 35,
+      "symbol": "_wow_registry_binding_shutdown@0"
+    },
+    {
+      "offset": 40,
+      "symbol": "_wow_bitmap_bindings_shutdown@0"
+    }
+  ],
+  "scope": "Complete bridge body with call relocations masked; not original attach failure or full loader behavior"
+}

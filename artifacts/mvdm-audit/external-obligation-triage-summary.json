@@ -1,0 +1,64 @@
+{
+  "result": "pass",
+  "external_rows": 42963,
+  "tiers": {
+    "host-envelope-unresolved": 6134,
+    "device-context-dependency-gated": 36736,
+    "explicit-boundary-review": 93
+  },
+  "dispositions": {
+    "pending-specific-contract-review": 42954,
+    "excluded-provider-recipe-file-only": 9
+  },
+  "dos_catalog_rows": 3520,
+  "dos_outside_mvdm_rows": 0,
+  "original_git_index_identities_verified": 42963,
+  "original_working_content_rehashed": 9,
+  "reviewed_recipe_ids": [
+    "SRC:1987e611c8a68bf0f0fe",
+    "SRC:1c4c33b74367910b65a1",
+    "SRC:315ee4815d394e966897",
+    "SRC:4911c2124a350ebe2921",
+    "SRC:695490168007e855d1c3",
+    "SRC:807cf08e608bb900add1",
+    "SRC:b2f813eba17058fa82cb",
+    "SRC:c45c4583f85e68f9d2b6",
+    "SRC:d2457898ad48c8789ae5"
+  ],
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\frozen-external-audit-rows.csv",
+      "sha256": "949D696E96F088A69EA437A41F15A09D50C8218BA29983A15A7B31E25AF95623"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\source-coverage.csv",
+      "sha256": "80EE52BB0023B2B9CF45A2E30700C4BA0C345C815BB7ED6E3A0493C642B81F1E"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam_registry.py",
+      "sha256": "8B81E5B170680BEC3887992A5523B4A02207ADA2BCF02BF3CFFED8978248A30A"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-scope.json",
+      "sha256": "B5AC71F12855EA642F977D92139FB2EBB39210D03F8A0FDE18B7C453AE415E47"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\source-file-catalog.csv",
+      "sha256": "7DAC7F535A737988BE4B3D859C82D58C89EE54E4C3207B529E0875FE29A76938"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\external-priority-boundaries.csv",
+      "sha256": "8F3D3C74A5215F05C5E10F907ED7F68C86B76FA9BBEE568EE21E875B8A5710F6"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tools\\audit\\TriageMvdmExternalObligations.py",
+      "sha256": "A799A4773349918135C7CD0F16C184B9FB1C7C19E0BEC599FC8999BD9F57ABA0"
+    }
+  ],
+  "limits": [
+    "Triage is not a call graph, runtime acceptance or bulk provider exclusion.",
+    "Git identities do not attest all current working file contents.",
+    "Context rows require a specific dependency before runtime admission; unknown relevance remains explicit.",
+    "Nine recipe file-role exclusions do not exclude guest or device functionality."
+  ]
+}
