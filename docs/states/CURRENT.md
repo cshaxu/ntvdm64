@@ -10,8 +10,15 @@ documentation admission.
 Automatic progression: recover original WOW behavior with minimum bindings;
 no guest change.
 
-The published ten-image package is `build/t473-s8/package-r3`; guest media is
-unchanged.
+Owner broadened the T-wide reconciliation to both DOS16 and WOW32 audit
+inventories, with per-source full/partial/excluded disposition and measured
+partial-source estimates. Mirror differences are partial by definition;
+source coverage is not behavioral proof. The active S9 remains in progress;
+the [whole-closure proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md)
+retains this T-wide acceptance obligation without dropping its existing work.
+
+The ten-image S9 P1 package is `build/t473-s9/package-r10`; guest media is
+unchanged. T-wide audit and S9 acceptance remain open.
 
 ## Active Packet
 
@@ -42,24 +49,12 @@ T471 closes at [its closure](../history/m0-t471-closure.md): same-artifact
 application/concurrency/abnormal evidence passed, while physical WRITE input
 remains the explicitly approved non-pass. No runtime or guest bytes changed.
 
-## T469 S1 Closure Record
-
-S1 completed the original COMM owner and endpoint map at the
-[S1 closure](../history/m0-t469-s1-closure.md). S2 owns only source-shaped
-operation and task-loss disposition work.
-
-## T469 S2 Closure Record
-
-S2 closed the original-correction search at the
-[source disposition](../etc/evidence/m0-t469-s2-comm-source-disposition.md).
-S3 closed the retained original-route group at its
-[acceptance record](../etc/evidence/m0-t469-s3-comm-retained-route.md).
-
 ## T469 Closure Record
 
-T469 closed the selected original COMM scope at the
-[T469 closure](../history/m0-t469-closure.md).  Its S3 fixture linkage repair
-is test-only; production/release hashes and guest media remain unchanged.
+T469 COMM records: [S1](../history/m0-t469-s1-closure.md),
+[S2](../etc/evidence/m0-t469-s2-comm-source-disposition.md),
+[S3](../etc/evidence/m0-t469-s3-comm-retained-route.md),
+[closure](../history/m0-t469-closure.md). No guest bytes changed.
 
 ## T463 S2 Closure Record
 

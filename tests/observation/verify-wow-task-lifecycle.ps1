@@ -846,7 +846,7 @@ if ($Case -eq 'window-borrow' -and
     throw 'Shared window borrow lost retained class/words or released storage prematurely'
 }
 if ($Case -eq 'window-borrow' -and
-    !($fixtureOutput -match '^WOW_NATIVE_CLASS_CCPU errors=0 projected=9 native_pointers=0 released=1$')) {
+    !($fixtureOutput -match '^WOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1$')) {
     throw 'Native class shared projection leaked native identities, duplicated storage or failed release'
 }
 if ($Case -eq 'window-borrow' -and

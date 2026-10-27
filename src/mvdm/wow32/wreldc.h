@@ -35,7 +35,8 @@ extern INT  iReleasedDCs;
 
 BOOL ReleaseCachedDCs(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16,
                             HWND hwnd32, UINT flSearch);
-BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16);
+/* DIVERGENCE(MVDM-HOST-DIV-455): preserve the actual host HWND at acquisition. */
+BOOL StoreDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16, HWND hwnd32);
 BOOL CacheReleasedDC(HAND16 htask16, HAND16 hwnd16, HAND16 hdc16);
 BOOL FreeCachedDCs(HAND16 htask16);
 

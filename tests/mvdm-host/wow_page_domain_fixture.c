@@ -24,6 +24,27 @@
 #include "wow32-dll/include/wow_cleanup_bindings.h"
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
+#include "ntvdm-exe/wow/include/wow_gdi_alias.h"
+#include "opennt-abi/host-compat/include/nt.h"
+
+extern BOOL WINAPI StoreDC(WORD, WORD, WORD, HWND);
+extern BOOL WINAPI CacheReleasedDC(WORD, WORD, WORD);
+extern BOOL WINAPI ReleaseCachedDCs(WORD, WORD, WORD, HWND, UINT);
+extern BOOL WINAPI FreeCachedDCs(WORD);
+extern INT iReleasedDCs;
+extern HANDLE hWOWHeapSmall;
+extern BOOL WINAPI CreateSmallHeap(void);
+/* Read the original cache representation; no test-side cache is created. */
+typedef struct fixture_dc_cache {
+    struct fixture_dc_cache *next;
+    BYTE state;
+    WORD task, window, dc;
+    HWND native_window;
+} fixture_dc_cache;
+extern fixture_dc_cache *lpDCCache;
+extern ULONG WINAPI WU32GetWindowDC(void *);
+extern ULONG WINAPI WU32GetDCEx(void *);
+extern ULONG WINAPI WU32GetDC(void *);
 
 extern BOOL WINAPI WOWCallback16Ex(DWORD, DWORD, DWORD, PVOID, PDWORD);
 
@@ -279,6 +300,7 @@ static void verify_native_mutation_group(ULONG delta)
 {
     WNDCLASSA wc = {0};
     HWND parent = NULL, child = NULL, peer = NULL, scrollbar = NULL, popup = NULL;
+    HWND short_parent, short_child, short_scrollbar;
     ULONG child_class, peer_class;
     DWORD previous_style;
     RECT before, after;
@@ -302,9 +324,62 @@ static void verify_native_mutation_group(ULONG delta)
     }
     BORROW_CHECK(parent && child && peer && scrollbar && popup);
     if (parent && child && peer && scrollbar && popup) {
+        short_parent = (HWND)(ULONG_PTR)LOWORD(parent);
+        short_child = (HWND)(ULONG_PTR)LOWORD(child);
+        short_scrollbar = (HWND)(ULONG_PTR)LOWORD(scrollbar);
         (void)wow_native_ShowWindow(parent, SW_SHOWNOACTIVATE);
         child_class = verify_mutated_window(child, delta);
         peer_class = verify_mutated_window(peer, delta);
+        /* Original thunk passes a short carrier; recovered dialog and combo
+         * clients may already hold the complete native HWND. */
+        (void)wow_native_EnableWindow(short_child, FALSE);
+        BORROW_CHECK(!IsWindowEnabled(child));
+        (void)wow_native_EnableWindow(child, TRUE);
+        BORROW_CHECK(IsWindowEnabled(child));
+        {
+            RECT client_expected, client_actual, window_expected, window_actual;
+            char name[80];
+            HANDLE value = (HANDLE)(ULONG_PTR)0x1234u;
+            HDC dc;
+            BORROW_CHECK(wow_native_GetParent(short_child) == parent);
+            BORROW_CHECK(GetClientRect(child, &client_expected) &&
+                wow_native_GetClientRect(short_child, &client_actual) &&
+                EqualRect(&client_expected, &client_actual));
+            BORROW_CHECK(GetWindowRect(child, &window_expected) &&
+                wow_native_GetWindowRect(short_child, &window_actual) &&
+                EqualRect(&window_expected, &window_actual));
+            BORROW_CHECK(wow_native_GetClassNameA(short_child, name, sizeof(name)) > 0 &&
+                !strcmp(name, wc.lpszClassName));
+            BORROW_CHECK(wow_native_SetPropA(short_child, "S9-prop", value));
+            BORROW_CHECK(wow_native_GetPropA(short_child, "S9-prop") == value);
+            BORROW_CHECK(wow_native_RemovePropA(short_child, "S9-prop") == value);
+            BORROW_CHECK(!wow_native_GetPropA(short_child, "S9-prop"));
+            {
+                ATOM atom = GlobalAddAtomA("S9-atom-property");
+                BORROW_CHECK(atom != 0);
+                if (atom) {
+                    LPCSTR key = MAKEINTATOM(atom);
+                    BORROW_CHECK(wow_native_SetPropA(short_child, key, value));
+                    BORROW_CHECK(wow_native_GetPropA(short_child, key) == value);
+                    BORROW_CHECK(wow_native_RemovePropA(short_child, key) == value);
+                    BORROW_CHECK(GlobalDeleteAtom(atom) == 0);
+                }
+            }
+            SetRect(&window_actual, 11, 22, 33, 44);
+            BORROW_CHECK(!wow_native_GetWindowRect((HWND)(ULONG_PTR)0x12345678u,
+                &window_actual));
+            BORROW_CHECK(window_actual.left == 11 && window_actual.top == 22 &&
+                window_actual.right == 33 && window_actual.bottom == 44);
+            BORROW_CHECK(!wow_native_SetPropA((HWND)(ULONG_PTR)0x12345678u,
+                "S9-invalid", value));
+            (void)wow_native_FlashWindow(short_child, FALSE);
+            dc = GetDC(child);
+            BORROW_CHECK(dc != NULL);
+            if (dc) {
+                BORROW_CHECK(wow_native_ExcludeUpdateRgn(dc, short_child) != ERROR);
+                BORROW_CHECK(ReleaseDC(child, dc));
+            }
+        }
         previous_style = GetClassLongA(child, GCL_STYLE);
         BORROW_CHECK(wow_user_set_class_longA(child, GCL_STYLE,
             previous_style ^ CS_DBLCLKS) == previous_style);
@@ -312,10 +387,10 @@ static void verify_native_mutation_group(ULONG delta)
         BORROW_CHECK(verify_mutated_window(child, delta) == child_class);
         BORROW_CHECK(verify_mutated_window(peer, delta) == peer_class);
 
-        BORROW_CHECK(wow_native_ShowOwnedPopups(parent, FALSE));
+        BORROW_CHECK(wow_native_ShowOwnedPopups(short_parent, FALSE));
         BORROW_CHECK(!IsWindowVisible(popup));
         (void)verify_mutated_window(popup, delta);
-        BORROW_CHECK(wow_native_ShowOwnedPopups(parent, TRUE));
+        BORROW_CHECK(wow_native_ShowOwnedPopups(short_parent, TRUE));
         BORROW_CHECK(IsWindowVisible(popup));
         (void)verify_mutated_window(popup, delta);
         BORROW_CHECK(wow_user_set_class_longA(child, GCL_STYLE, previous_style) ==
@@ -323,28 +398,28 @@ static void verify_native_mutation_group(ULONG delta)
         BORROW_CHECK(verify_mutated_window(peer, delta) == peer_class);
 
         BORROW_CHECK(GetWindowRect(child, &before));
-        BORROW_CHECK(wow_native_ScrollWindow(parent, 3, 4, NULL, NULL));
+        BORROW_CHECK(wow_native_ScrollWindow(short_parent, 3, 4, NULL, NULL));
         BORROW_CHECK(GetWindowRect(child, &after));
         BORROW_CHECK(after.left == before.left + 3 && after.top == before.top + 4);
         (void)verify_mutated_window(child, delta);
         before = after;
-        BORROW_CHECK(wow_native_ScrollWindowEx(parent, -2, 5, NULL, NULL, NULL,
+        BORROW_CHECK(wow_native_ScrollWindowEx(short_parent, -2, 5, NULL, NULL, NULL,
             NULL, SW_SCROLLCHILDREN | SW_INVALIDATE) != ERROR);
         BORROW_CHECK(GetWindowRect(child, &after));
         BORROW_CHECK(after.left == before.left - 2 && after.top == before.top + 5);
         (void)verify_mutated_window(child, delta);
 
-        BORROW_CHECK(wow_native_ShowScrollBar(parent, SB_BOTH, TRUE));
+        BORROW_CHECK(wow_native_ShowScrollBar(short_parent, SB_BOTH, TRUE));
         BORROW_CHECK((GetWindowLongA(parent, GWL_STYLE) & (WS_HSCROLL | WS_VSCROLL)) ==
             (WS_HSCROLL | WS_VSCROLL));
         (void)verify_mutated_window(parent, delta);
-        BORROW_CHECK(wow_native_SetScrollRange(parent, SB_HORZ, 0, 100, FALSE));
-        (void)wow_native_SetScrollPos(parent, SB_HORZ, 7, FALSE);
+        BORROW_CHECK(wow_native_SetScrollRange(short_parent, SB_HORZ, 0, 100, FALSE));
+        (void)wow_native_SetScrollPos(short_parent, SB_HORZ, 7, FALSE);
         BORROW_CHECK(GetScrollPos(parent, SB_HORZ) == 7);
-        BORROW_CHECK(wow_native_SetScrollRange(parent, SB_HORZ, 0, 0, FALSE));
+        BORROW_CHECK(wow_native_SetScrollRange(short_parent, SB_HORZ, 0, 0, FALSE));
         BORROW_CHECK(!(GetWindowLongA(parent, GWL_STYLE) & WS_HSCROLL));
         (void)verify_mutated_window(parent, delta);
-        BORROW_CHECK(wow_native_ShowScrollBar(parent, SB_BOTH, FALSE));
+        BORROW_CHECK(wow_native_ShowScrollBar(short_parent, SB_BOTH, FALSE));
         (void)verify_mutated_window(parent, delta);
         {
             SCROLLINFO info = {sizeof(info), SIF_RANGE | SIF_PAGE | SIF_POS,
@@ -358,24 +433,26 @@ static void verify_native_mutation_group(ULONG delta)
             unsigned erase_before = mutation_erase_calls;
             unsigned scroll_before = mutation_scroll_calls;
             mutation_callout_expected = TRUE;
-            BORROW_CHECK(wow_native_SetScrollInfo(child, SB_CTL, &info, FALSE) == 77);
+            BORROW_CHECK(wow_native_SetScrollInfo(short_child, SB_CTL, &info, FALSE) == 77);
             BORROW_CHECK(GetLastError() == 0x7448);
             BORROW_CHECK(mutation_scroll_calls == scroll_before + 1);
-            BORROW_CHECK(wow_native_SetScrollInfo(scrollbar, SB_CTL, &info, FALSE) == 17);
+            BORROW_CHECK(wow_native_SetScrollInfo(short_scrollbar, SB_CTL, &info, FALSE) == 17);
             BORROW_CHECK(GetScrollInfo(scrollbar, SB_CTL, &observed) &&
                 observed.nMin == 0 && observed.nMax == 100 &&
                 observed.nPage == 10 && observed.nPos == 17);
-            BORROW_CHECK(wow_native_InvalidateRect(child, NULL, TRUE));
-            dc = wow_native_BeginPaint(child, &paint);
+            BORROW_CHECK(wow_native_InvalidateRect(short_child, NULL, TRUE));
+            dc = wow_native_BeginPaint(short_child, &paint);
             BORROW_CHECK(dc != NULL && mutation_erase_calls > erase_before);
-            if (dc) BORROW_CHECK(wow_native_EndPaint(child, &paint));
+            if (dc) BORROW_CHECK(wow_native_EndPaint(short_child, &paint));
             mutation_callout_expected = FALSE;
             BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
-            BORROW_CHECK(wow_native_CreateCaret(child, NULL, 1, 8));
+            BORROW_CHECK(wow_native_CreateCaret(short_child, NULL, 1, 8));
             BORROW_CHECK(wow_native_SetCaretPos(2, 3));
             BORROW_CHECK(GetCaretPos(&caret) && caret.x == 2 && caret.y == 3);
-            BORROW_CHECK(wow_native_ShowCaret(child));
-            BORROW_CHECK(wow_native_HideCaret(child));
+            BORROW_CHECK(wow_native_ShowCaret(short_child));
+            BORROW_CHECK(wow_native_HideCaret(short_child));
+            BORROW_CHECK(wow_native_ShowCaret(NULL));
+            BORROW_CHECK(wow_native_HideCaret(NULL));
             BORROW_CHECK(wow_native_DestroyCaret());
             {
                 HCURSOR cursor = GetCursor();
@@ -390,24 +467,56 @@ static void verify_native_mutation_group(ULONG delta)
             fprintf(stderr, "WOW_CONTROL_NATIVE_RETURN_CCPU errors=%u paint=1 scroll=1 caret=1 lock=1\n",
                 borrow_errors - errors_before);
         }
-        BORROW_CHECK(wow_native_SetScrollRange(scrollbar, SB_CTL, 0, 50, FALSE));
-        (void)wow_native_SetScrollPos(scrollbar, SB_CTL, 8, FALSE);
+        BORROW_CHECK(wow_native_SetScrollRange(short_scrollbar, SB_CTL, 0, 50, FALSE));
+        (void)wow_native_SetScrollPos(short_scrollbar, SB_CTL, 8, FALSE);
         BORROW_CHECK(GetScrollPos(scrollbar, SB_CTL) == 8);
-        BORROW_CHECK(wow_native_EnableScrollBar(scrollbar, SB_CTL, ESB_DISABLE_BOTH));
+        {
+            int minimum = -1, maximum = -1;
+            RECT update;
+            HRGN region = CreateRectRgn(0, 0, 0, 0);
+            BORROW_CHECK(wow_native_GetScrollPos(short_scrollbar, SB_CTL) == 8);
+            BORROW_CHECK(wow_native_GetScrollRange(short_scrollbar, SB_CTL,
+                &minimum, &maximum) && minimum == 0 && maximum == 50);
+            BORROW_CHECK(region != NULL);
+            BORROW_CHECK(wow_native_InvalidateRect(short_child, NULL, FALSE));
+            BORROW_CHECK(wow_native_GetUpdateRect(short_child, &update, FALSE));
+            BORROW_CHECK(wow_native_GetUpdateRgn(short_child, region, FALSE) != ERROR);
+            BORROW_CHECK(wow_native_ValidateRgn(short_child, NULL));
+            BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
+            BORROW_CHECK(wow_native_InvalidateRgn(short_child, NULL, FALSE));
+            BORROW_CHECK(wow_native_ValidateRect(short_child, NULL));
+            BORROW_CHECK(!GetUpdateRect(child, NULL, FALSE));
+            if (region) BORROW_CHECK(DeleteObject(region));
+        }
+        BORROW_CHECK(wow_native_EnableScrollBar(short_scrollbar, SB_CTL, ESB_DISABLE_BOTH));
         BORROW_CHECK(!IsWindowEnabled(scrollbar));
         (void)verify_mutated_window(scrollbar, delta);
-        BORROW_CHECK(wow_native_EnableScrollBar(scrollbar, SB_CTL, ESB_ENABLE_BOTH));
+        BORROW_CHECK(wow_native_EnableScrollBar(short_scrollbar, SB_CTL, ESB_ENABLE_BOTH));
         BORROW_CHECK(IsWindowEnabled(scrollbar));
         (void)verify_mutated_window(scrollbar, delta);
-        BORROW_CHECK(wow_native_CloseWindow(parent));
+        {
+            CHAR text[32] = {0};
+            DWORD style = GetClassLongA(child, GCL_STYLE);
+            BORROW_CHECK(wow_native_SetWindowTextA(short_child, "Narrow text"));
+            BORROW_CHECK(wow_native_GetWindowTextA(short_child, text, sizeof(text)) ==
+                (int)strlen("Narrow text") && !strcmp(text, "Narrow text"));
+            BORROW_CHECK(wow_native_GetWindowTextLengthA(short_child) ==
+                (int)strlen("Narrow text"));
+            BORROW_CHECK(wow_native_SetClassLongA(short_child, GCL_STYLE,
+                style ^ CS_DBLCLKS) == style);
+            BORROW_CHECK(GetClassLongA(child, GCL_STYLE) == (style ^ CS_DBLCLKS));
+            BORROW_CHECK(wow_native_SetClassLongA(short_child, GCL_STYLE, style) ==
+                (style ^ CS_DBLCLKS));
+        }
+        BORROW_CHECK(wow_native_CloseWindow(short_parent));
         BORROW_CHECK(IsIconic(parent));
         (void)verify_mutated_window(parent, delta);
         (void)wow_native_ArrangeIconicWindows(GetDesktopWindow());
         (void)verify_mutated_window(parent, delta);
-        BORROW_CHECK(wow_native_OpenIcon(parent));
+        BORROW_CHECK(wow_native_OpenIcon(short_parent));
         BORROW_CHECK(!IsIconic(parent));
         (void)verify_mutated_window(parent, delta);
-        BORROW_CHECK(wow_native_OpenIcon(parent)); /* Already restored. */
+        BORROW_CHECK(wow_native_OpenIcon(short_parent)); /* Already restored. */
         BORROW_CHECK(!wow_native_SetScrollRange(NULL, SB_HORZ, 0, 10, FALSE));
         BORROW_CHECK(wow_native_ScrollWindowEx(NULL, 1, 1, NULL, NULL, NULL, NULL, 0) == ERROR);
         BORROW_CHECK(verify_mutated_window(child, delta) == child_class);
@@ -626,12 +735,18 @@ static int verify_callback_scope(ULONG teb)
             100, 120, 80, 80, NULL, NULL, GetModuleHandle(NULL), NULL);
         HWND child = CreateWindowA("STATIC", "Child", WS_CHILD,
             1, 2, 16, 16, first, (HMENU)71, GetModuleHandle(NULL), NULL);
+        HWND sibling = CreateWindowA("STATIC", "Sibling", WS_CHILD,
+            2, 3, 16, 16, second, (HMENU)72, GetModuleHandle(NULL), NULL);
         ULONG held = 0, parent = 0, delta = c_sas_dw_at(teb + 0x60u);
         RECT rect;
         HDWP positions;
+        HDC dc;
+        WORD dc_alias;
+        fixture_dc_cache *dc_entry;
+        BYTE dc_frame[52];
         unsigned before = borrow_errors;
-        BORROW_CHECK(first && second && child);
-        if (first && second && child) {
+        BORROW_CHECK(first && second && child && sibling);
+        if (first && second && child && sibling) {
             BORROW_CHECK(wow_user_set_window_longA(child, GWL_ID, 91) == 71);
             held = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)child);
             BORROW_CHECK(held && c_sas_dw_at(held + 104u) == 91u);
@@ -639,7 +754,8 @@ static int verify_callback_scope(ULONG teb)
             parent = mvdm_softpc_wow_page_domain_borrow_window((ULONG)(ULONG_PTR)second);
             BORROW_CHECK(parent && held && c_sas_dw_at(held + 24u) == parent + delta);
             positions = BeginDeferWindowPos(1);
-            if (positions) positions = DeferWindowPos(positions, child, NULL,
+            if (positions) positions = wow_native_DeferWindowPos(positions,
+                (HWND)(ULONG_PTR)LOWORD(child), (HWND)(ULONG_PTR)0x1234,
                 7, 9, 28, 30, SWP_NOZORDER | SWP_NOACTIVATE);
             BORROW_CHECK(positions && wow_native_EndDeferWindowPos(positions));
             BORROW_CHECK(GetWindowRect(child, &rect));
@@ -647,10 +763,124 @@ static int verify_callback_scope(ULONG teb)
                 c_sas_dw_at(held + 44u) == (ULONG)rect.top &&
                 c_sas_dw_at(held + 48u) == (ULONG)rect.right &&
                 c_sas_dw_at(held + 52u) == (ULONG)rect.bottom);
+            BORROW_CHECK(wow_user_window_refresh_graph(NULL));
+            dc = wow_native_GetDC((HWND)(ULONG_PTR)LOWORD(child));
+            BORROW_CHECK(dc && WindowFromDC(dc) == child);
+            if (dc) BORROW_CHECK(ReleaseDC(child, dc));
+            dc = wow_native_GetWindowDC((HWND)(ULONG_PTR)LOWORD(child));
+            BORROW_CHECK(dc && WindowFromDC(dc) == child);
+            if (dc) BORROW_CHECK(ReleaseDC(child, dc));
+            dc = wow_native_GetDCEx((HWND)(ULONG_PTR)LOWORD(child), NULL,
+                DCX_CACHE);
+            BORROW_CHECK(dc && WindowFromDC(dc) == child);
+            if (dc) BORROW_CHECK(ReleaseDC(child, dc));
+            dc = wow_native_GetDC(NULL);
+            BORROW_CHECK(dc != NULL);
+            if (dc) BORROW_CHECK(ReleaseDC(NULL, dc));
+            dc = wow_native_GetDC((HWND)(ULONG_PTR)LOWORD(child));
+            dc_alias = mvdm_wow_gdi_handle_from_native(dc);
+            BORROW_CHECK(dc && dc_alias && !iReleasedDCs);
+            BORROW_CHECK(hWOWHeapSmall || CreateSmallHeap());
+            if (dc && dc_alias && hWOWHeapSmall) {
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias, child));
+                for (dc_entry = lpDCCache; dc_entry && dc_entry->dc != dc_alias;
+                        dc_entry = dc_entry->next) {}
+                BORROW_CHECK(dc_entry && dc_entry->native_window == child &&
+                    dc_entry->window == LOWORD(child));
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                BORROW_CHECK(iReleasedDCs == 1);
+                BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(child), 0,
+                    NULL, 1));
+                BORROW_CHECK(!iReleasedDCs &&
+                    mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+            }
+            dc = wow_native_GetDC((HWND)(ULONG_PTR)LOWORD(child));
+            dc_alias = mvdm_wow_gdi_handle_from_native(dc);
+            BORROW_CHECK(dc && dc_alias);
+            if (dc && dc_alias && hWOWHeapSmall) {
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(child), dc_alias, child));
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                BORROW_CHECK(FreeCachedDCs(0x4321u));
+                BORROW_CHECK(!iReleasedDCs &&
+                    mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+            }
+            /* The compiled original VDMFRAME has task at offset 0 and
+             * bArgs at 42; GETWINDOWDC16 is a WORD, GETDCEX16 is
+             * DWORD flags, WORD region, WORD window. */
+            ZeroMemory(dc_frame, sizeof(dc_frame));
+            { WORD task16 = 0x4321u, window16 = LOWORD(child);
+              memcpy(dc_frame, &task16, sizeof(task16));
+              memcpy(dc_frame + 42, &window16, sizeof(window16)); }
+            dc_alias = (WORD)WU32GetWindowDC(dc_frame);
+            dc = mvdm_wow_gdi_handle_to_native(dc_alias);
+            BORROW_CHECK(dc_alias && dc != INVALID_HANDLE_VALUE && WindowFromDC(dc) == child);
+            if (dc_alias) {
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(child), 0, NULL, 1));
+            }
+            ZeroMemory(dc_frame + 42, sizeof(dc_frame) - 42);
+            { DWORD flags = DCX_CACHE; WORD window16 = LOWORD(child);
+              memcpy(dc_frame + 42, &flags, sizeof(flags));
+              memcpy(dc_frame + 48, &window16, sizeof(window16)); }
+            dc_alias = (WORD)WU32GetDCEx(dc_frame);
+            dc = mvdm_wow_gdi_handle_to_native(dc_alias);
+            BORROW_CHECK(dc_alias && dc != INVALID_HANDLE_VALUE && WindowFromDC(dc) == child);
+            if (dc_alias) {
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                BORROW_CHECK(FreeCachedDCs(0x4321u));
+            }
+            /* The original GetDC additionally reads the task's compatibility
+             * flags through the project-owned WOW32Reserved TLS field. */
+            {
+                ULONG task_storage[32] = {0};
+                POPENNT_SUPPORT_TEB thread_teb = opennt_support_current_teb();
+                PVOID saved_task = thread_teb->WOW32Reserved;
+                WORD window16 = LOWORD(child);
+                ZeroMemory(dc_frame + 42, sizeof(dc_frame) - 42);
+                memcpy(dc_frame + 42, &window16, sizeof(window16));
+                thread_teb->WOW32Reserved = task_storage;
+                dc_alias = (WORD)WU32GetDC(dc_frame);
+                thread_teb->WOW32Reserved = saved_task;
+                dc = mvdm_wow_gdi_handle_to_native(dc_alias);
+                BORROW_CHECK(dc_alias && dc != INVALID_HANDLE_VALUE &&
+                    WindowFromDC(dc) == child);
+                if (dc_alias) {
+                    BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                    BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(child), 0, NULL, 1));
+                }
+                task_storage[7] = 0x00000002u; /* WOWCF_UNIQUEHDCHWND */
+                thread_teb->WOW32Reserved = task_storage;
+                dc_alias = (WORD)WU32GetDC(dc_frame);
+                thread_teb->WOW32Reserved = saved_task;
+                BORROW_CHECK(dc_alias && (dc_alias & 1u));
+                if (dc_alias) {
+                    BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
+                    BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(child), 0, NULL, 1));
+                }
+                task_storage[7] = 0;
+                task_storage[8] = 0x10000000u; /* WOWCFEX_FIXDCFONT4MENUSIZE */
+                ZeroMemory(dc_frame + 42, sizeof(dc_frame) - 42);
+                thread_teb->WOW32Reserved = task_storage;
+                dc_alias = (WORD)WU32GetDC(dc_frame);
+                thread_teb->WOW32Reserved = saved_task;
+                BORROW_CHECK(dc_alias && task_storage[13] == dc_alias);
+                if (dc_alias) {
+                    BORROW_CHECK(CacheReleasedDC(0x4321u, 0, dc_alias));
+                    BORROW_CHECK(ReleaseCachedDCs(0x4321u, 0, 0, NULL, 1));
+                }
+            }
+            positions = BeginDeferWindowPos(1);
+            if (positions) positions = wow_native_DeferWindowPos(positions,
+                (HWND)(ULONG_PTR)LOWORD(child), (HWND)(ULONG_PTR)LOWORD(sibling),
+                0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+            BORROW_CHECK(positions && wow_native_EndDeferWindowPos(positions));
+            BORROW_CHECK(GetWindow(sibling, GW_HWNDNEXT) == child);
         }
         if (held) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(held));
         if (parent) BORROW_CHECK(mvdm_softpc_wow_page_domain_release_window(parent));
         if (child) BORROW_CHECK(wow_native_DestroyWindow(child));
+        if (sibling) BORROW_CHECK(wow_native_DestroyWindow(sibling));
         if (first) BORROW_CHECK(wow_native_DestroyWindow(first));
         if (second) BORROW_CHECK(wow_native_DestroyWindow(second));
         fprintf(stderr, "WOW_GRAPH_NATIVE_MUTATION_CCPU errors=%u child_id=1 reparent=1 deferred_geometry=1\n",
@@ -1031,6 +1261,9 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
         HWND old = NULL, window = NULL, desktop = GetDesktopWindow();
         ULONG old_full = 0, full = 0, held = 0, fresh = 0, previous, actual[3];
         ULONG retired = 0;
+        ULONG dc_original = 0;
+        WORD dc_alias = 0;
+        fixture_dc_cache *dc_entry = NULL;
         unsigned attempts = 0;
         ULONGLONG started;
         HHOOK reservation = mode ? NULL : SetWindowsHookExA(WH_CBT,
@@ -1046,6 +1279,20 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
         held = mvdm_softpc_wow_page_domain_borrow_window(old_full);
         BORROW_CHECK(held != 0);
         if (!held) { DestroyWindow(old); UnhookWindowsHookEx(reservation); continue; }
+        if (mode) {
+            HDC dc = wow_native_GetDC(old);
+            BORROW_CHECK(hWOWHeapSmall || CreateSmallHeap());
+            dc_alias = mvdm_wow_gdi_handle_from_native(dc);
+            BORROW_CHECK(dc && dc_alias && hWOWHeapSmall);
+            if (dc && dc_alias && hWOWHeapSmall) {
+                dc_original = old_full;
+                BORROW_CHECK(StoreDC(0x4321u, LOWORD(old_full), dc_alias, old));
+                BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(old_full), dc_alias));
+                for (dc_entry = lpDCCache; dc_entry && dc_entry->dc != dc_alias;
+                        dc_entry = dc_entry->next) {}
+                BORROW_CHECK(dc_entry && dc_entry->native_window == old);
+            }
+        }
         BORROW_CHECK(mvdm_softpc_wow_page_domain_exchange_window_word(
             held, 0, 0xabcdef12u, &previous));
         BORROW_CHECK(DestroyWindow(old));
@@ -1072,6 +1319,14 @@ static void verify_managed_slot_reuse(wow_task_order_thread *thread)
             reservation = NULL;
         }
         BORROW_CHECK(window && LOWORD(full) == LOWORD(old_full) && full != old_full);
+        if (mode && dc_original) {
+            BORROW_CHECK(old_full == dc_original && window &&
+                LOWORD(full) == LOWORD(dc_original) && full != dc_original);
+            BORROW_CHECK(dc_entry && (ULONG)(ULONG_PTR)dc_entry->native_window == dc_original);
+            BORROW_CHECK(ReleaseCachedDCs(0x4321u, LOWORD(dc_original), 0, NULL, 1));
+            BORROW_CHECK(!iReleasedDCs && IsWindow(window) &&
+                mvdm_wow_gdi_handle_to_native(dc_alias) == INVALID_HANDLE_VALUE);
+        }
         if (window && LOWORD(full) == LOWORD(old_full) && full != old_full) {
             /* Dialog roots reach this same producer with no CLS. This mode
              * tests that storage contract, not a guest dialog implementation. */

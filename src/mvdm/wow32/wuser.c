@@ -1058,6 +1058,7 @@ ULONG FASTCALL WU32GetCapture(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 {
     ULONG ul;
+    HWND hwnd32;
     register PGETDC16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
@@ -1069,9 +1070,10 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 
     CURRENTPTD()->ulLastDesktophDC = 0;
     
-    ul = GETHDC16(GetDC(
-    HWND32(parg16->f1)
-    ));
+    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
+    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
+    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
+    ul = GETHDC16(wow_native_GetDC(hwnd32));
 
     if (ul) {
 // Some apps such as MSWORKS and MS PUBLISHER use some wizard code that accepts
@@ -1101,7 +1103,7 @@ ULONG FASTCALL WU32GetDC(PVDMFRAME pFrame)
 	
 	
 	
-        StoreDC(htask16, parg16->f1, (HAND16)ul);
+        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
     }
 
     FREEARGPTR(parg16);

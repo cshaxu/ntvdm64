@@ -39,6 +39,14 @@ are retained under `O:/assets/win95-ntvdm-research/display256/hostfix`.
 This is an owner-directed source integration; coherent package publication
 and the active packet's remaining gates are not claimed by this record.
 
+MVDM-HOST-DIV-455 (T473 S9 candidate): the three original WOW DC acquisition
+thunks pass the acquired native HWND to the original `StoreDC` cache. Modern
+USER handles are not NT4 sign-extended HWNDs; resolving again at deferred
+release could select a recycled window. Original cache search, delayed release,
+GDI aliases and cleanup remain intact. See the S9 wrapper audit for the caller
+trace and pending failure, callback, handle-reuse and release verification.
+This unverified candidate does not authorize publication.
+
 MVDM-HOST-DIV-454 (T460 S3 candidate): original `wow32/wuclip.c` and
 `wuser31.c` adapt only their public Clipboard HWND operands/results through
 the existing worker object table and its already published original shared

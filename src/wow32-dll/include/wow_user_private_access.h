@@ -39,6 +39,15 @@ BOOL WINAPI wow_native_SetWindowContextHelpId(HWND, DWORD);
 BOOL WINAPI wow_native_SetCursorPos(int, int);
 int WINAPI wow_native_ShowCursor(BOOL);
 BOOL WINAPI wow_native_DragDetect(HWND, POINT);
+BOOL WINAPI wow_native_FlashWindow(HWND, BOOL);
+int WINAPI wow_native_ExcludeUpdateRgn(HDC, HWND);
+HANDLE WINAPI wow_native_GetPropA(HWND, LPCSTR);
+BOOL WINAPI wow_native_SetPropA(HWND, LPCSTR, HANDLE);
+HANDLE WINAPI wow_native_RemovePropA(HWND, LPCSTR);
+int WINAPI wow_native_GetClassNameA(HWND, LPSTR, int);
+BOOL WINAPI wow_native_GetClientRect(HWND, LPRECT);
+BOOL WINAPI wow_native_GetWindowRect(HWND, LPRECT);
+HWND WINAPI wow_native_GetParent(HWND);
 HWND WINAPI wow_native_SetFocus(HWND w);
 HWND WINAPI wow_native_SetCapture(HWND);
 BOOL WINAPI wow_native_ReleaseCapture(void);
@@ -48,6 +57,7 @@ BOOL WINAPI wow_native_EndDialog(HWND w, INT_PTR result);
 HWND WINAPI wow_native_SetParent(HWND w, HWND parent);
 BOOL WINAPI wow_native_SetWindowPlacement(HWND w, const WINDOWPLACEMENT *placement);
 LONG WINAPI wow_native_SetWindowLongA(HWND w, int index, LONG value);
+HDWP WINAPI wow_native_DeferWindowPos(HDWP, HWND, HWND, int, int, int, int, UINT);
 BOOL WINAPI wow_native_EndDeferWindowPos(HDWP positions);
 UINT WINAPI wow_native_ArrangeIconicWindows(HWND w);
 BOOL WINAPI wow_native_CloseWindow(HWND w);
@@ -58,9 +68,15 @@ int WINAPI wow_native_ScrollWindowEx(HWND w, int dx, int dy, const RECT *area, c
 BOOL WINAPI wow_native_ShowScrollBar(HWND w, int bar, BOOL show);
 BOOL WINAPI wow_native_SetScrollRange(HWND w, int bar, int minimum, int maximum, BOOL redraw);
 int WINAPI wow_native_SetScrollPos(HWND w, int bar, int position, BOOL redraw);
+int WINAPI wow_native_GetScrollPos(HWND, int);
+BOOL WINAPI wow_native_GetScrollRange(HWND, int, LPINT, LPINT);
 BOOL WINAPI wow_native_EnableScrollBar(HWND w, UINT bar, UINT arrows);
 /* Recovered EDIT native leaves share the existing callout/return owner. */
 HDC WINAPI wow_native_BeginPaint(HWND, LPPAINTSTRUCT);
+HDC WINAPI wow_native_GetDC(HWND);
+HDC WINAPI wow_native_GetWindowDC(HWND);
+HDC WINAPI wow_native_GetDCEx(HWND, HRGN, DWORD);
+HWND WINAPI wow_user_window_native_handle(HWND);
 BOOL WINAPI wow_native_EndPaint(HWND, const PAINTSTRUCT *);
 int WINAPI wow_native_SetScrollInfo(HWND, int, LPCSCROLLINFO, BOOL);
 BOOL WINAPI wow_native_CreateCaret(HWND, HBITMAP, int, int);
@@ -69,6 +85,11 @@ BOOL WINAPI wow_native_SetCaretPos(int, int);
 BOOL WINAPI wow_native_HideCaret(HWND);
 BOOL WINAPI wow_native_ShowCaret(HWND);
 BOOL WINAPI wow_native_InvalidateRect(HWND, const RECT *, BOOL);
+BOOL WINAPI wow_native_InvalidateRgn(HWND, HRGN, BOOL);
+BOOL WINAPI wow_native_ValidateRect(HWND, const RECT *);
+BOOL WINAPI wow_native_ValidateRgn(HWND, HRGN);
+BOOL WINAPI wow_native_GetUpdateRect(HWND, LPRECT, BOOL);
+int WINAPI wow_native_GetUpdateRgn(HWND, HRGN, BOOL);
 BOOL WINAPI wow_native_UpdateWindow(HWND);
 BOOL WINAPI wow_native_RedrawWindow(HWND, const RECT *, HRGN, UINT);
 HCURSOR WINAPI wow_native_SetCursor(HCURSOR);
@@ -145,6 +166,7 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define DestroyWindow wow_native_DestroyWindow
 #define SetParent wow_native_SetParent
 #define SetWindowPlacement wow_native_SetWindowPlacement
+#define DeferWindowPos wow_native_DeferWindowPos
 #define EndDeferWindowPos wow_native_EndDeferWindowPos
 #define ArrangeIconicWindows wow_native_ArrangeIconicWindows
 #define CloseWindow wow_native_CloseWindow
@@ -155,7 +177,34 @@ int WINAPI wow_native_EnumPropsA(HWND, PROPENUMPROCA);
 #define ShowScrollBar wow_native_ShowScrollBar
 #define SetScrollRange wow_native_SetScrollRange
 #define SetScrollPos wow_native_SetScrollPos
+#define GetScrollRange wow_native_GetScrollRange
+#define GetScrollPos wow_native_GetScrollPos
 #define EnableScrollBar wow_native_EnableScrollBar
+#define BeginPaint wow_native_BeginPaint
+#define EndPaint wow_native_EndPaint
+#define InvalidateRect wow_native_InvalidateRect
+#define InvalidateRgn wow_native_InvalidateRgn
+#define ValidateRect wow_native_ValidateRect
+#define ValidateRgn wow_native_ValidateRgn
+#define GetUpdateRect wow_native_GetUpdateRect
+#define GetUpdateRgn wow_native_GetUpdateRgn
+#define DragDetect wow_native_DragDetect
+#if defined(WOW_USER_PRIVATE_REDIRECT)
+#define FlashWindow wow_native_FlashWindow
+#define ExcludeUpdateRgn wow_native_ExcludeUpdateRgn
+#define GetPropA wow_native_GetPropA
+#define SetPropA wow_native_SetPropA
+#define RemovePropA wow_native_RemovePropA
+#define GetClassNameA wow_native_GetClassNameA
+#define GetClientRect wow_native_GetClientRect
+#define GetWindowRect wow_native_GetWindowRect
+#define GetParent wow_native_GetParent
+#endif
+#define CreateCaret wow_native_CreateCaret
+#define DestroyCaret wow_native_DestroyCaret
+#define SetCaretPos wow_native_SetCaretPos
+#define HideCaret wow_native_HideCaret
+#define ShowCaret wow_native_ShowCaret
 #define UpdateWindow wow_native_UpdateWindow
 #define RedrawWindow wow_native_RedrawWindow
 #define GetWindowTextA wow_native_GetWindowTextA

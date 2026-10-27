@@ -45,6 +45,28 @@ edition conflict decisions and source identities; do not silently combine
 incompatible alternatives. Reuse existing provenance and package ledgers,
 then independently reconcile them with actual files and build artifacts.
 
+Owner clarification: reconcile this entire T against both read-only
+`ntvdm64-dos16-audit` and `ntvdm64-wow32-audit` inventories and their seam
+contracts. Static audit closure is not product or runtime acceptance. For
+every source file, record one of fully restored, partially restored, or wholly
+excluded, alongside role, selected edition, source and build identities,
+actual link/dispatch evidence, behavioral evidence, and the specific missing
+or excluded capability. A retained mirror diff always means the file is
+partially restored under this reporting rule, even if the affected behavior
+has passed its tests. Keep source-difference evidence separate from verified
+runtime capability; identical source alone does not prove execution.
+
+Estimate the restored-code proportion for each partial file using a stated,
+reproducible source-line denominator and comparison method, recording the
+edition and unknown or unmeasurable cases explicitly. This is a source-coverage
+estimate, not a behavioral completion percentage. Do not assign a numerical
+percentage when mapping or the original denominator is not established.
+Completely restored and excluded classifications also require evidence of
+actual connection and disposition, respectively, not merely file presence.
+All recoverable original logic remains in this T, with integrated tests and
+the full delivery gates required before T closure. Guest immutability and
+previously approved host-semantic boundaries remain in force.
+
 For every original package and path, establish:
 
 - upstream identity and role; whether the file is absent, complete, cropped,

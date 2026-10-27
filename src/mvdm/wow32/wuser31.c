@@ -113,17 +113,21 @@ ULONG FASTCALL WU32GetCursor(PVDMFRAME pFrame)
 ULONG FASTCALL WU32GetDCEx(PVDMFRAME pFrame)
 {
     ULONG ul;
+    HWND hwnd32;
     register PGETDCEX16 parg16;
     HAND16 htask16 = pFrame->wTDB;
 
     GETARGPTR(pFrame, sizeof(GETDCEX16), parg16);
 
-    ul = GETHDC16(GetDCEx(HWND32(parg16->f1),
+    /* DIVERGENCE(MVDM-HOST-DIV-455): acquire and cache the same HWND. */
+    hwnd32 = wow_user_window_native_handle(HWND32(parg16->f1));
+    if (parg16->f1 && !hwnd32) { FREEARGPTR(parg16); RETURN(0); }
+    ul = GETHDC16(wow_native_GetDCEx(hwnd32,
                           HRGN32(parg16->f2),
                           DWORD32(parg16->f3)));
 
     if (ul)
-        StoreDC(htask16, parg16->f1, (HAND16)ul);
+        StoreDC(htask16, parg16->f1, (HAND16)ul, hwnd32);
 
     FREEARGPTR(parg16);
 
