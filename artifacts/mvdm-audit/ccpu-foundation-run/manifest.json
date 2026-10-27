@@ -61,6 +61,26 @@
       "sha256": "BF0103F90855AAF8904D532B850219931DCEDDE17369AD5B0D2112F405D1BF9A"
     },
     {
+      "file": "source-review-verify.completion.json",
+      "bytes": 66,
+      "sha256": "E1CA040AF774BBD77EE568EE5030DCF35CB21AF95C7CB244EB8E5312B77A7DDD"
+    },
+    {
+      "file": "source-review-verify.process.json",
+      "bytes": 386,
+      "sha256": "EDFD54E7EE34BE25F5375226E62B559CBF73FA904035D330F2733068ED28FF9C"
+    },
+    {
+      "file": "source-review-verify.stderr.txt",
+      "bytes": 115,
+      "sha256": "189226F012AFE78998A43626E27CAF759B021C5FEFBDF44C2308E0F33C050D04"
+    },
+    {
+      "file": "source-review-verify.stdout.txt",
+      "bytes": 583,
+      "sha256": "5802AA40B5F2FCA873EF1AC1D0AE6841B7CC11320FB14C0F7EE6D4ED369D8252"
+    },
+    {
       "file": "verify.completion.json",
       "bytes": 66,
       "sha256": "256CC7501585F7C1A722C6B7E3BD8E029F1FA4F6DE28F73F32412D32FF73D37E"
@@ -85,6 +105,6 @@
   "first_merge_reason": "Observer script identity was absolute when executed directly, relative under runpy; corrected to resolved path and replayed",
   "final_result": "pass",
   "production_changed": false,
-  "scope": "Owned read-only build metadata observation and nine-row partial-integration reconciliation",
+  "scope": "Owned read-only build metadata observation, nine-row partial integration and complete 22-file remaining CCPU C-source review",
   "guest_changed": false
 }

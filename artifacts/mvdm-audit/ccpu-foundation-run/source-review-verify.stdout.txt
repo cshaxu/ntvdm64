@@ -1,0 +1,4 @@
+{"result": "pass", "base": "094c0cd96", "counts": {"pending": 1688, "excluded": 2545, "partial": 399, "full": 52}, "source_role_changes": 9, "unrelated_shard_rows_unchanged": true, "frozen_inventory_unchanged": true, "product_or_guest_changed_by_checkpoint": false, "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance"}
+Documentation governance verification passed.
+Documentation relative-link verification passed.
+PASS nine foundation partial integrations; 52 full unchanged; candidate and accepted images unchanged

@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "Hash": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "3DD2BA6BF02F66E917F6751D6C6C6B63409D4BBC47D94A238EC73BF7FCE20099"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+    "Hash": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+    "Hash": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\vglob.c",
+    "Hash": "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+  }
+]

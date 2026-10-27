@@ -30,6 +30,8 @@ The [CCPU foundation review](../../artifacts/mvdm-audit/ccpu-core-source-review.
 adds 631,410 actual-object NEG64 cases, ABI/oracle negatives and candidate
 signed-caller code correspondence. Nine foundation files are partial after
 33 linked-function checks; guest decoder/fault acceptance remains open.
+The [remaining CPU C-source review](../../artifacts/mvdm-audit/ccpu-remaining-c-source-review.md)
+traces all 22 pending files; their dispositions remain open.
 
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
 passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;

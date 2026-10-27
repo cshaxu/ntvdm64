@@ -20,6 +20,9 @@ The [CCPU foundation review](ccpu-core-source-review.md) adds original source
 contracts and an actual-object NEG64 witness with signed-caller image checks.
 Its [nine-row checker result](ccpu-foundation-role-verification.json) records
 partial integrations, with no new full acceptance or candidate qualification.
+The [remaining CCPU C-source review](ccpu-remaining-c-source-review.md) covers
+all 22 still-pending C files, distinguishing 13 mapped source roles from
+six inactive 486 bodies and three alternative/inline roles.
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 
