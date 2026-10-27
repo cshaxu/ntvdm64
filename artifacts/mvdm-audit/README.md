@@ -9,9 +9,9 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 228 partial (205 existing source-difference rows, two live uncommitted
 source candidates, 19 partially integrated build manifests and two export-source
-records), 2,148 excluded
+records), 2,256 excluded
 (documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 2,256 pending.
+52 full files (26 executable leaves and 26 declarations) and 2,148 pending.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -153,3 +153,8 @@ The [guest-library role checkpoint](guest-library-role-review.md) resolves
 27 exact-original archives and one macro-source input, retaining four
 unconfirmed library paths. Source membership and runtime behavior remain
 distinct; the format reproducer preserves the full frozen 32-file cohort.
+
+The [108 support-source roles](wow16-support-source-role-review.md) retain
+WIN87EM target conditions and distinguish DDEML native tests. The same
+record indexes 454 pending native-owner proposals without claiming their
+functional closure or changing those statuses.

@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2256,
-    "excluded": 2148,
+    "pending": 2148,
+    "excluded": 2256,
     "partial": 228,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Guest role checkpoints exclude historical inputs only, not guest capabilities. The library checkpoint adds 27 historical guest archive roles and one macro-source role, leaving four unconfirmed guest libraries pending; no guest capability is accepted. The two partial export-source records remain open. Source provenance, interface names and behavioral recovery remain distinct; live candidate drifts are not runtime acceptance."
+  "note": "Guest role checkpoints exclude historical inputs only, not guest capabilities. The support-source checkpoint adds 108 exact-original historical guest build inputs. Conditional guest variants and native test sources remain distinct; no guest capability is accepted. The two partial export-source records remain open. Source provenance, interface names and behavioral recovery remain distinct; live candidate drifts are not runtime acceptance."
 }

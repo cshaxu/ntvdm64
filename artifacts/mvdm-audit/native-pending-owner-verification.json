@@ -1,0 +1,24 @@
+{
+  "result": "pass",
+  "pending_rows": 454,
+  "source_tables": [
+    {
+      "path": "artifacts/mvdm-audit/shard-1/native-pending-owner-review.csv",
+      "sha256": "380DD3595754281DE07644AFA3A3FE307D4390D93379CCFC7B85F96800ECDBAA",
+      "rows": 164
+    },
+    {
+      "path": "artifacts/mvdm-audit/shard-2/native-pending-owner-review.csv",
+      "sha256": "D3D97A099C86FC184E6AC305507D90F643A51CE0CA4E0D9182ACB083BA4C0A3B",
+      "rows": 137
+    },
+    {
+      "path": "artifacts/mvdm-audit/shard-3/native-pending-owner-review.csv",
+      "sha256": "34EF912C51FF1F6D31D316D2B2C32C600AC2AFFEFBBAACC75BD9D1D63A7D8785",
+      "rows": 153
+    }
+  ],
+  "main_native_shard_review_complete": false,
+  "ledger_changes": 0,
+  "scope": "Identity, exact cohort, partition and pending status only; not call-graph or behavior acceptance"
+}

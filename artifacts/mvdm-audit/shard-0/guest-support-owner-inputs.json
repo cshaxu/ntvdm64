@@ -1,0 +1,445 @@
+{
+  "candidates": 20,
+  "inputs": [
+    {
+      "relative_path": "wow16/ddeml/makefile",
+      "sha256": "8D8A1CBA40DB55B3C43FB97C5624877FC7084559AF568EFEABC6D58E3AFEE582",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\makefile"
+    },
+    {
+      "relative_path": "wow16/regedit/makefile",
+      "sha256": "6255669DED8680CF24DA6D74B49366D2F7F5AD08871CB95DE26A46D42DB339FD",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\makefile"
+    },
+    {
+      "relative_path": "wow16/sherlock/makefile",
+      "sha256": "D4E0A78455E5C688D42A7D96E8C012A39074F18A3411FA23A917809A8B7199D7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\makefile"
+    },
+    {
+      "relative_path": "wow16/sherlock/sherlock.lnk",
+      "sha256": "9E46D10CA2E4FC1348461FF02282D3724CF21DE50C6B5D9531E125D0A576D19F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\sherlock.lnk"
+    },
+    {
+      "relative_path": "wow16/win87em/makefile",
+      "sha256": "B76EC6E35F2C1285EF0C0930C4D534CA0E0A7533F8F4C3B4E53725ABE3C907A4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\makefile"
+    },
+    {
+      "relative_path": "wow16/ddeml/ddeml.c",
+      "sha256": "DB5E05EC3476AAD827158EE92C97BCF499D5E16AFE6CDBAB8B232210EA100DE6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\ddeml.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgdb.c",
+      "sha256": "A1F7DF43D0CE8CDEF64271E778FD1E2D5D55CE7CE92DF7E8508E1ABB175E5B71",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgdb.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmghsz.c",
+      "sha256": "057B6E90ED65A296EF1151A02C5E5B8319D7EA5DD2A1904667ACD6BAF25562A3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmghsz.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgmon.c",
+      "sha256": "CC5F2FC70DB0A2FB0BFED3F5EF6B43EDAD78F9CB90E4AB7E8C9662F3FBFF0925",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgmon.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/heapwach.c",
+      "sha256": "0B51F04C635C8EA08914EA98D67D4111D66C38F1200AC187B073D7A30682D813",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\heapwach.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/stdptcl.c",
+      "sha256": "742CF96C570E94DF2F809012D212D2336901DCCB215AB4BB00BB335DFA3D4037",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\stdptcl.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgwndp.c",
+      "sha256": "90ED7BA26029BA4B2DDA2CD4BC6F857BF6A6150C6F8F97D9FE2CE02A89283875",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgwndp.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgdde.c",
+      "sha256": "E9B8D0EE1E58CBB1944171704C735D35D8DE41A9D366B25DB06094BE1CE40505",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgdde.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgq.c",
+      "sha256": "254D37CE3990229730DBBFC3CB97C2D32F2EEF2D514385ABC08B49F77F825E0B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgq.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgmem.c",
+      "sha256": "94DBD9D00A8D907FE86EECCAF066E880FF5763381527979D0B5F35AC9B90EDB8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgmem.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/hdata.c",
+      "sha256": "CCB5DAE526BF31363AAE403A71E57EC90ADB9D621700B3BA3677E3B38D5317A8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\hdata.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/stdinit.c",
+      "sha256": "38F32F7FBD08BE627168E1F7E8FE743998621D0239D04800C9A47A3EBD53174B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\stdinit.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/register.c",
+      "sha256": "9B47A313BC08E784C7DDD277030D19AA61F8D5C86314C28272A0F51ED923FEF2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\register.c"
+    },
+    {
+      "relative_path": "wow16/ddeml/libentry.asm",
+      "sha256": "D7192246DC23DD582D7CE738D895D74A7138AF102CE91A1C85DF5AEE0305DC4D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\libentry.asm"
+    },
+    {
+      "relative_path": "wow16/ddeml/dmgutil.asm",
+      "sha256": "904EECC648B94E093D6AD06AD116255CEBCCB61484141FA6F54F978A71374B8C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\dmgutil.asm"
+    },
+    {
+      "relative_path": "wow16/regedit/cutils1.c",
+      "sha256": "470AFCD374EBA8B8142B23370F7BFA80DC3C11738CB62F094A044CB35D64405D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\cutils1.c"
+    },
+    {
+      "relative_path": "wow16/regedit/merge.c",
+      "sha256": "2989D1B65B4480FC47536768A030222A1D842018A8B67FF0EFE61C7E7AE9BF09",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\merge.c"
+    },
+    {
+      "relative_path": "wow16/regedit/dbase.c",
+      "sha256": "EAAE44AFD90F1DF6B28B3FA12AD8961602B2A6A9644A77D0E860C02911F95FEC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\dbase.c"
+    },
+    {
+      "relative_path": "wow16/regedit/utils1.c",
+      "sha256": "837B4DC17085C9798EF36BB8D94EE4C81CF0033924B9FB1288BB5BB7131BB37C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\utils1.c"
+    },
+    {
+      "relative_path": "wow16/regedit/regporte.c",
+      "sha256": "D069E2DF7307AC741AC03DED5234CF776483506FEC3AEECD66310E00251EA506",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regporte.c"
+    },
+    {
+      "relative_path": "wow16/regedit/regthunk.c",
+      "sha256": "7B513FDC686EB8291B6E67651D09FFE0DE52B87111C5CFE872651C5CD5F0F81C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regthunk.c"
+    },
+    {
+      "relative_path": "wow16/regedit/regmain.c",
+      "sha256": "F2FAB63F8E6ABA01351A8A858B31C1A78B366951DDFC4F85FA65E506DD123E68",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regmain.c"
+    },
+    {
+      "relative_path": "wow16/regedit/regedit.c",
+      "sha256": "8C9887F2ABAB83D64B39FDFF545D45828E787A7682A0DCD5A3AB392760ED22B3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regedit.c"
+    },
+    {
+      "relative_path": "wow16/regedit/filename.c",
+      "sha256": "A46F359E851AC4F9AB7F8F309EB5B57BA64C4D7819DF4B12121C7F63B56C6003",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\filename.c"
+    },
+    {
+      "relative_path": "wow16/regedit/sdkreged.c",
+      "sha256": "0AA9D23FF8F145314EAA70C354C1E52A05E1074278BFA2009403A4E850D2552E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\sdkreged.c"
+    },
+    {
+      "relative_path": "wow16/regedit/sdbase.c",
+      "sha256": "25DC9E8BDFEC9A7F158E5F93D74EE1251CF672C50393FC5F4D464B91479CC062",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\sdbase.c"
+    },
+    {
+      "relative_path": "wow16/regedit/virt.c",
+      "sha256": "0AAA3F8CD1A14A494629B708C9EDD0C4452D5570C1AF3B31033690DEA57F8B4B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\virt.c"
+    },
+    {
+      "relative_path": "wow16/sherlock/drwatson.c",
+      "sha256": "CE1F673F515C97C66B971659DBA3ABB3EDF20ABBF2A47B4C0CF0D4C6B5C28D6E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\drwatson.c"
+    },
+    {
+      "relative_path": "wow16/sherlock/disasm.c",
+      "sha256": "59848E5F5BF3EBEB8C2A4C9919464A129D95D9F1E6D5D6BFF7CCC9989A2399B0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\disasm.c"
+    },
+    {
+      "relative_path": "wow16/sherlock/getsym.c",
+      "sha256": "4B665DA0B3DF8BCA5F0FC8FC7FE8F7FED36098EE922740C1C390B133B410AA21",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\getsym.c"
+    },
+    {
+      "relative_path": "wow16/sherlock/watson.asm",
+      "sha256": "536116404CBAD981EB711B6BD4DA074C0C3B3DD4BE6DB53EE8F9BB442D1CA3A1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\watson.asm"
+    },
+    {
+      "relative_path": "wow16/sherlock/error.c",
+      "sha256": "36F584C497F42E03A87AC56B25F459D35BF1EC6690D2030617E8C583E20D7509",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\error.c"
+    },
+    {
+      "relative_path": "wow16/win87em/emulator.asm",
+      "sha256": "3835F5D7023D00BF0E6AA45E1AAA5A70411917A7DF99E3CC9EA1B7D932CA842E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emulator.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emoemwin.asm",
+      "sha256": "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emoemwin.asm"
+    },
+    {
+      "relative_path": "wow16/ddeml/ddemlp.h",
+      "sha256": "EF8C4B8CE7933A4A6FB6BBF3885AA9FB94BBA61E2910BEC38985C75CFCB3BE41",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\ddemlp.h"
+    },
+    {
+      "relative_path": "wow16/ddeml/verddeml.h",
+      "sha256": "61A608E5BDFFDC44465570AA48F35D0CE26F7939EFD844D9AF583C99C04CA195",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\verddeml.h"
+    },
+    {
+      "relative_path": "wow16/ddeml/heapwach.h",
+      "sha256": "9FAA8D1E5E65F9ED4964FA5F042F234350A7D0DBC4407F7053246920BA6340B9",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ddeml\\heapwach.h"
+    },
+    {
+      "relative_path": "wow16/regedit/common.h",
+      "sha256": "196AA8C0AF50347A66A23B5A23B9620C140FFD1A7DE6F73E53C4C2E223ACA438",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\common.h"
+    },
+    {
+      "relative_path": "wow16/regedit/regedit.h",
+      "sha256": "FDA52A6E18205CB8A6B4C29E3CBD9C4F88A23623EE469BEE8D020FA03C419808",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regedit.h"
+    },
+    {
+      "relative_path": "wow16/regedit/regdef.h",
+      "sha256": "4031C09A7CEE4B495466AEAD0602B20CF7CE65DB289997516350FE85769047D9",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regdef.h"
+    },
+    {
+      "relative_path": "wow16/regedit/reg1632.h",
+      "sha256": "1E56B04604D629A08AD33614D0175829E7D570DC405512C498D2592CDA6CF6C4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\reg1632.h"
+    },
+    {
+      "relative_path": "wow16/regedit/regporte.h",
+      "sha256": "96CEFC1BAE46D2646175456A159C63FB0756EB5730278165C701E87C2970663D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regporte.h"
+    },
+    {
+      "relative_path": "wow16/regedit/regresid.h",
+      "sha256": "38812F6E17022320A6C83E9B2201AE7F4F0FF956E7A847018FA2216D3F5EFEF8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regresid.h"
+    },
+    {
+      "relative_path": "wow16/regedit/sdkreged.h",
+      "sha256": "017FBEAFE0B7220F60FD2BA34D64678E2BB115209C74477289A7194C68F966B0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\sdkreged.h"
+    },
+    {
+      "relative_path": "wow16/sherlock/disasm.h",
+      "sha256": "663107805F2B5FE0A85ADC79175A04C0E203306A3BD0EC9E599B79184E572DAE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\disasm.h"
+    },
+    {
+      "relative_path": "wow16/sherlock/drwatson.h",
+      "sha256": "6137591E8F9D0D97F61DB5B43F9AA530531E61A70482DC25D1929612204DCF77",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\drwatson.h"
+    },
+    {
+      "relative_path": "wow16/sherlock/str.h",
+      "sha256": "D1DAA28C0634A715485D7D3E17906D06E99684042847472C9223265185A27EDF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\str.h"
+    },
+    {
+      "relative_path": "wow16/win87em/emulator.hst",
+      "sha256": "36EC64D7B1FD944F7EA00839CE01F8C89B114A88A42AB532E6656B456851EE9E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emulator.hst"
+    },
+    {
+      "relative_path": "wow16/win87em/emulator.inc",
+      "sha256": "906F258588C5DB8E8ECECCE6D77979D35904EF695D1BC96F00287E5E8BB301C0",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emulator.inc"
+    },
+    {
+      "relative_path": "wow16/win87em/emdoc.asm",
+      "sha256": "49B7E2F0937C594729363DF9266580502CD3FC41D2618CE8889DE64F03C6AA26",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emdoc.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emintern.asm",
+      "sha256": "91C36A234F3CE64470D120C6761934DA7FAC7E6E06D2EF03C5F397607E4DF9EA",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emintern.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emthread.asm",
+      "sha256": "595E3A34AF4AE44F18C4E75DF93C8B690270A89329B1C1D5DBFB99D68FBBF414",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emthread.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emxenix.asm",
+      "sha256": "0E9EAE21570A978DC783C39BBB24BE8EDA37ED83326C4ADDA24A1B3EC37E1A23",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emxenix.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emwin.asm",
+      "sha256": "9D2EAAD23AEF12F4235869AB6153DF95CE36F223E19A67A4FEDD2ACE76CAD616",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emwin.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emdos.asm",
+      "sha256": "E83720456902F5B30DCE8F0CF8D1668DDC2859A1DE601287F4A97B67812B93E7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emdos.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emstack.asm",
+      "sha256": "8AD6F23D6817322CBF229B4B427300B1E15800D5740DE84DDD18BCC854A43EAC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emstack.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emexcept.asm",
+      "sha256": "8CBB8FFE8FD1A78F76BA4CD1939C495E8E208BA93CB4EFDE9C0C4A32A2E6000E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emexcept.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emerror.asm",
+      "sha256": "A4D9676B14B75E5839703DE9115125332A7C8396257BC21841DA68E0A4C2CFD7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emerror.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emspec.asm",
+      "sha256": "51C12A968D906ECA09E3335E01DBA1422CEE4FDE7D3629A1F047A024AF181F24",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emspec.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfixfly.asm",
+      "sha256": "8ADCC62C81688964DF30745BD6F9755895AFA1E581FA3ACFBED59BE6788CE338",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfixfly.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emdisp.asm",
+      "sha256": "43BF437ABCCB80F6E61B7B71030120601ED915380A36398756A68E2342C49471",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emdisp.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emconst.asm",
+      "sha256": "E1FDB1F8517C01E453111F603D4010A594D01C3AEDE4EC84A07A98935344884F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emconst.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/em386.asm",
+      "sha256": "1A7B260787C74BCB94748D98744C068DD8AB01371D10E0829A03F4F58924A2E6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\em386.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emmain.asm",
+      "sha256": "6C3054DBC23509F54F8B525AA9575587FB3F97B8D03FDFB6D0331247B51583BE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emmain.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emdecode.asm",
+      "sha256": "C7C9767DB3C0C03F447B92BAFC507C78C9B967E87990B284DE6D5604EA3B2E4A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emdecode.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emarith.asm",
+      "sha256": "C8B8F3D12EB24304C049FCAFE753785BBC7E8F45DD409EDBBF9AEF2FBC3D6E44",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emarith.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfadd.asm",
+      "sha256": "F34556CA42012ED2884AAAB0DD2D294B848C84FAEDE37FABC89FE87E285CBC2F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfadd.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfmul.asm",
+      "sha256": "94183DF0F5DBB4686AA386CD9A8FDD38E65F0FA983D183DC917F64E1CFFFF1F1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfmul.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfdiv.asm",
+      "sha256": "B0976970B0389281B92BBEA83F59ECE1518CA2EC45AC803D7624766F17237D03",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfdiv.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emnormal.asm",
+      "sha256": "A3DE3628BB192DBEFABC4B1BB2F2554BF053B50293BF7CB9EEDCA049841F07D3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emnormal.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emlssng.asm",
+      "sha256": "8177646933E44AC13B6A25AA410F62AF8054D3A2E2F33196F94A6F5763CB2E50",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emlssng.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emlsdbl.asm",
+      "sha256": "FB5643A1AA65DCDBC054C7A3D3BD1F23AD08FBF529149681A3C1D2BBA59EACFE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emlsdbl.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emlsint.asm",
+      "sha256": "C470DAC2D280BCC35754828DB3024185CFE9DB2C8228CB6D908815F636CFE294",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emlsint.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emlsquad.asm",
+      "sha256": "2FA68B337CCF90D3F1ECE59A7733750161F26AC564D4356E5EA58B56B36E4407",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emlsquad.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfrndi.asm",
+      "sha256": "CC9C8F1880360F5B045C842FD870BF3BC74ACD56127E4076768DD3C8BCB44DA3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfrndi.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emlstmp.asm",
+      "sha256": "94AB7C2AC6EEF44189D58D8FBD5F5B3A620257D82AEDE63BEA690684F03D2E80",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emlstmp.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfmisc.asm",
+      "sha256": "3C0E1A19DD8D813DEAA6D0C874B4B933ECDF962F3B5F2BFA89F84AF563B6DA82",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfmisc.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfcom.asm",
+      "sha256": "9B39B4232924A40D332D0D94C072C53E004E9D334B3C83FB22CA6B2C8C48C156",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfcom.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfconst.asm",
+      "sha256": "D87EEF77F31249270C44629919541BDE74BDED54F4B973E06400B3A7881C5487",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfconst.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emnew.asm",
+      "sha256": "876EF966396DFFD72351C5FE28C7BEC2E4E312B20E1E24C7D5DAAD299071C128",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emnew.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfprem.asm",
+      "sha256": "4A1A1AAC0BEE68DCAF4BC962607EB267AD4124CA7B7766C812BE2943FB079606",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfprem.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emfsqrt.asm",
+      "sha256": "B387151BED0B1EC3CDE7A8B6424E9926999F3F6584C9E7785532A26B1BC9FA2D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emfsqrt.asm"
+    },
+    {
+      "relative_path": "wow16/win87em/emftran.asm",
+      "sha256": "6D4B2356737A603AB3F849B2B4CA01AC5D75D105405E93F65871E0A893CCB264",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\win87em\\emftran.asm"
+    }
+  ]
+}

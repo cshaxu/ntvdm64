@@ -33,6 +33,7 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | [DLC completion event](shard-1/vdmredir-dlc-completion-event-audit.md) | Original source checks the wrong event after the second creation; provider availability and actual failure path remain unproved. Test cleanup, worker thread and response on injected creation failure before correction. |
 | S17 | [BDE extension](shard-0/bde-debugger-extension-audit.md) | Original standalone debugger-extension command chain is identified; product scope and whether its context/symbol dependencies are recoverable remain to be decided. Do not equate it with all debugger functionality. |
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
+| S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
 S18 removes only providers actually displaced by verified recoveries. S19
 reconciles every applicable path and runs the complete product and capability

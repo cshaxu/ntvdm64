@@ -18,10 +18,10 @@ in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-rev
 This delivery does not close the MVDM-wide source reconciliation or establish
 that every historical test has run.
 
-The [guest-library checkpoint](../../artifacts/mvdm-audit/guest-library-role-review.md)
-resolves 27 archive and one macro-source roles after the Win16 source groups,
-without claiming capability closure. The inventory retains 2,256 pending and
-228 partial paths; four guest libraries still require a precise owner edge.
+The [support-source checkpoint](../../artifacts/mvdm-audit/wow16-support-source-role-review.md)
+adds 108 historical guest input roles with explicit target conditions, without
+claiming capability closure. The inventory retains 2,148 pending and 228 partial
+paths; 454 native-owner proposals still require main review and behavior proof.
 
 ## Active Packet
 

@@ -1,0 +1,40 @@
+{
+  "selection_run": {
+    "pid": 20888,
+    "started": "2026-10-27T19:54:41.8742684Z",
+    "exit": 0,
+    "ninja": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\ninja.exe"
+  },
+  "targets": [
+    "ntvdm.exe",
+    "cvidc-vector-binding-fixture.exe"
+  ],
+  "scope": "Ninja selection and unused scaffold; no runtime behavior claim",
+  "selected_inputs_sha256": "BF5525A3AC939C22D1D0C2463D3E57788A666A4BFE1FF9CF7D134187A045916E",
+  "inputs": [
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "3DD2BA6BF02F66E917F6751D6C6C6B63409D4BBC47D94A238EC73BF7FCE20099"
+    },
+    {
+      "path": "tools/build/GenerateCvidcVectorProviderStubs.mjs",
+      "sha256": "94A53919E863D9E712E14447E883EE65E07D15754C68D33F9270231F7C670E5B"
+    },
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "4A5AB925EB0110AE6A064A65702CB4DD894FED92D3A536DBD48F47F82264A21F"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    }
+  ],
+  "scaffold_in_selected_inputs": false,
+  "query_run": {
+    "exit": 0,
+    "pid": 10664,
+    "started": "2026-10-27T19:54:52.6038726Z",
+    "ninja": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\ninja.exe"
+  },
+  "query": "obj/tests/cvidc_vector_provider_stubs.obj:\r\n  input: cc\r\n    generated/cvidc_vector_provider_stubs.c\r\n  outputs:\r\n"
+}
