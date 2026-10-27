@@ -118,3 +118,8 @@ the number of verified instructions or close a broader CPU contract.
 The [NOT/XCHG/LEA pointer contracts](ccpu-transfer-contracts.md) add
 3,276,800 actual guest checks and three complete source/declaration pairs.
 The 486 profile findings remain a finite S11 recovery group, not an exclusion.
+
+The [six-file loader ownership review](external-loader-owner-review.md)
+traces the original byte-return consumer through the current public loader
+and CRT bridge. It resolves source ownership without claiming actual DLL
+lifecycle acceptance or changing external/MVDM classification counts.
