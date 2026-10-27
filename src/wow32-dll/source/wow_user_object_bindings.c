@@ -141,6 +141,35 @@ HWND WINAPI wow_user_window_native_handle(HWND window)
         binding->thread->ppi->objects, LOWORD(window));
 }
 
+HWND WINAPI wow_user_window_owned_handle(HWND window, BOOL allow_null)
+{
+    wow_user_runtime_thread *binding;
+    HWND full;
+    ULONG value;
+    if (!window) {
+        if (allow_null) return NULL;
+        SetLastError(ERROR_INVALID_WINDOW_HANDLE);
+        return NULL;
+    }
+    binding = wow_user_runtime_current();
+    if (!binding || !binding->thread || !binding->thread->ppi ||
+            !binding->thread->ppi->objects) {
+        SetLastError(ERROR_INVALID_STATE);
+        return NULL;
+    }
+    full = wow_user_window_full_handle(binding->thread->ppi->objects,
+        LOWORD(window));
+    if (!full) return NULL;
+    value = (ULONG)(ULONG_PTR)window;
+    if (value != LOWORD(window) &&
+            (LONG)(LONG_PTR)window != (LONG)(SHORT)LOWORD(window) &&
+            window != full) {
+        SetLastError(ERROR_INVALID_PARAMETER);
+        return NULL;
+    }
+    return full;
+}
+
 HWND WINAPI wow_user_window_public_handle(HWND window)
 {
     wow_user_runtime_thread *binding;

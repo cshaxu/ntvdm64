@@ -42,6 +42,12 @@ DWORD WINAPI wow_user_full_handle(wow_user_object_table *, WORD);
 /* Original WOW conversion projection. Short forms consume the existing
  * index/uniqueness representation, never a new native sample. */
 HWND WINAPI wow_user_window_native_handle(HWND);
+/* Resolve a current-worker window at a modern USER ownership boundary.
+ * The caller may provide the original signed/zero-extended HWND32 carrier or
+ * the exact currently published full HWND.  NULL is preserved only when the
+ * particular native API admits it.  Unlike the Clipboard-specific public
+ * resolver, this never admits an externally observed window. */
+HWND WINAPI wow_user_window_owned_handle(HWND, BOOL allow_null);
 /* Public modern USER boundary only. A short guest carrier resolves to a live
  * owned table entry or to the already committed shared-window observation;
  * no caller may reuse this as a general original conversion helper. */

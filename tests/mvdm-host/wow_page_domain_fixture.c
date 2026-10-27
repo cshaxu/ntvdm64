@@ -686,6 +686,18 @@ static int verify_callback_scope(ULONG teb)
             (HWND)(ULONG_PTR)LOWORD(window)) == window);
         BORROW_CHECK(wow_user_window_public_handle(
             (HWND)(LONG_PTR)(SHORT)LOWORD(window)) == window);
+        /* Menu and dialog ownership operations use the same worker-owned
+         * identity, but deliberately do not inherit Clipboard's external
+         * observation exception. */
+        BORROW_CHECK(wow_user_window_owned_handle(
+            (HWND)(ULONG_PTR)LOWORD(window), FALSE) == window);
+        BORROW_CHECK(wow_user_window_owned_handle(
+            (HWND)(LONG_PTR)(SHORT)LOWORD(window), FALSE) == window);
+        BORROW_CHECK(wow_user_window_owned_handle(window, FALSE) == window);
+        SetLastError(0);
+        BORROW_CHECK(wow_user_window_owned_handle(
+            (HWND)((ULONG_PTR)window ^ 0x10000u), FALSE) == NULL &&
+            GetLastError() == ERROR_INVALID_PARAMETER);
         SetLastError(0);
         BORROW_CHECK(wow_user_window_public_handle(window) == NULL &&
             GetLastError() == ERROR_INVALID_PARAMETER);
@@ -705,6 +717,8 @@ static int verify_callback_scope(ULONG teb)
                 (HWND)(ULONG_PTR)LOWORD(observed));
             BORROW_CHECK(wow_user_window_public_handle(
                 (HWND)(ULONG_PTR)LOWORD(observed)) == observed);
+            BORROW_CHECK(wow_user_window_owned_handle(
+                (HWND)(ULONG_PTR)LOWORD(observed), FALSE) == NULL);
             BORROW_CHECK(IsWindow(observed) && DestroyWindow(observed));
             BORROW_CHECK(wow_user_window_refresh_graph(NULL));
             BORROW_CHECK(wow_user_window_public_guest_handle(observed) == NULL);
@@ -3688,7 +3702,7 @@ static int verify_native_class_projection(ULONG teb)
     verify_failed_menu_reclamation(c_sas_dw_at(teb + 0x60u));
 #endif
     verify_observed_words_enrollment();
-    fprintf(stderr, "WOW_NATIVE_CLASS_CCPU errors=%u projected=%u native_pointers=0 released=1\n",
+    fprintf(stderr, "WOW_NATIVE_CLASS_CCPU errors=%u projected=%u owned_handle=1 native_pointers=0 released=1\n",
         borrow_errors - before, projected);
     return borrow_errors == before;
 }
@@ -4063,16 +4077,24 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     published = wow_user_window_publish(process->objects, window, &window_record, &thread);
     if (!published || !wow_user_runtime_enter(&binding)) goto cleanup;
     menu_callouts = menu_locked_callouts = 0;
-    if (!wow_menu_native_SetMenu(window, root) || !binding.exclusive_held ||
+    if (!wow_menu_native_SetMenu((HWND)(ULONG_PTR)LOWORD(window), root) ||
+            wow_menu_native_GetMenu((HWND)(ULONG_PTR)LOWORD(window)) != root ||
+            !binding.exclusive_held ||
             !menu_callouts || menu_locked_callouts ||
             c_sas_dw_at(c_sas_dw_at(handles + LOWORD(window) * 16u) - delta + 104u)
                 != root_client + delta) goto cleanup;
     step = "draw-menu-callout";
-    if (!wow_menu_native_DrawMenuBar(window) || !binding.exclusive_held ||
+    if (!wow_menu_native_DrawMenuBar((HWND)(ULONG_PTR)LOWORD(window)) || !binding.exclusive_held ||
             menu_locked_callouts) goto cleanup;
+    step = "highlight-short-window-carrier";
+    if (!wow_menu_native_HiliteMenuItem((HWND)(ULONG_PTR)LOWORD(window), root,
+            0u, MF_BYPOSITION | MF_HILITE) || !binding.exclusive_held ||
+            !wow_menu_native_HiliteMenuItem((HWND)(ULONG_PTR)LOWORD(window), root,
+            0u, MF_BYPOSITION | MF_UNHILITE) || !binding.exclusive_held)
+        goto cleanup;
     step = "private-system-menu-observation-and-revert";
     {
-        HMENU system_menu = wow_menu_native_GetSystemMenu(window, FALSE);
+        HMENU system_menu = wow_menu_native_GetSystemMenu((HWND)(ULONG_PTR)LOWORD(window), FALSE);
         if (!system_menu || !binding.exclusive_held ||
                 process->objects->entries[LOWORD(system_menu)].bType != TYPE_MENU ||
                 process->objects->entries[LOWORD(system_menu)].pOwner)
@@ -4080,11 +4102,11 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         /* Querying a second time from another task is not proof that this
          * task allocated the private native copy. Revert remains USER-owned. */
         task.hTaskWow = 0x9876u;
-        if (wow_menu_native_GetSystemMenu(window, FALSE) != system_menu ||
+        if (wow_menu_native_GetSystemMenu((HWND)(ULONG_PTR)LOWORD(window), FALSE) != system_menu ||
                 process->objects->entries[LOWORD(system_menu)].pOwner)
             goto cleanup;
         task.hTaskWow = 0x4321u;
-        if (wow_menu_native_GetSystemMenu(window, TRUE) != NULL ||
+        if (wow_menu_native_GetSystemMenu((HWND)(ULONG_PTR)LOWORD(window), TRUE) != NULL ||
                 !binding.exclusive_held || IsMenu(system_menu) ||
                 process->objects->entries[LOWORD(system_menu)].bType != TYPE_FREE)
             goto cleanup;
@@ -4098,7 +4120,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     menu_tracking_callbacks = 0;
     {
         BOOL tracked = wow_menu_native_TrackPopupMenu(alias, TPM_RETURNCMD,
-            0, 0, 0, window, NULL);
+            0, 0, 0, (HWND)(ULONG_PTR)LOWORD(window), NULL);
         cancel_menu_tracking = FALSE;
         if (tracked || menu_tracking_callbacks != 1 || menu_locked_callouts ||
                 !binding.exclusive_held) goto cleanup;
@@ -4134,7 +4156,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
             wow_menu_native_CheckMenuItem(alias, 71u, MF_CHECKED) == (DWORD)-1 ||
             !binding.exclusive_held) goto cleanup;
     step = "post-tracking-detach";
-    if (!wow_menu_native_SetMenu(window, NULL) || !binding.exclusive_held ||
+    if (!wow_menu_native_SetMenu((HWND)(ULONG_PTR)LOWORD(window), NULL) || !binding.exclusive_held ||
             !wow_user_runtime_leave(&binding)) goto cleanup;
     step = "post-tracking-retirement";
     if (!retire_menu_fixture_window(process->objects, window, &window_record))
@@ -4180,7 +4202,8 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
                 window_class.hInstance, NULL);
             if (!window) goto cleanup;
             published = wow_user_window_publish(process->objects, window, &window_record, &thread);
-            if (!published || !wow_menu_native_refresh_window(window)) goto cleanup;
+            if (!published || !wow_menu_native_refresh_window(window) ||
+                    !wow_menu_native_refresh_window((HWND)(ULONG_PTR)LOWORD(window))) goto cleanup;
             terminal_menu_objects = process->objects;
             terminal_menu_window = &window_record;
             terminal_menu_failed = FALSE;

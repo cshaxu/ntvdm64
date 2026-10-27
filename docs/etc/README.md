@@ -72,6 +72,11 @@ traces the retained original callback and task-termination owners through the
 single worker TLS and BaseSrv ticket boundary, without promoting a fixture or
 stale build cache to current-package acceptance.
 
+[T473 S8 public USER identity and retirement recovery](evidence/m0-t473-s8-public-user-identity-recovery.md)
+records the selected original menu/dialog HWND32-to-owned-HWND boundary, its
+focused and control-fixture evidence, coherent publication, and the one
+explicitly retained final control-observer non-pass.
+
 [T473 S2 Redirector/monitor reconciliation](evidence/m0-t473-s2-redirector-monitor-reconciliation.md)
 finishes the source-owner sweep with bounded async-copy, monitor, VDD and
 debugger boundaries instead of private-subsystem substitutions.

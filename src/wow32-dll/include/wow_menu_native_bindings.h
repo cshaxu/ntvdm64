@@ -4,6 +4,7 @@
 
 HMENU WINAPI wow_menu_native_CreateMenu(void);
 HMENU WINAPI wow_menu_native_CreatePopupMenu(void);
+HMENU WINAPI wow_menu_native_GetMenu(HWND);
 HMENU WINAPI wow_menu_native_GetSystemMenu(HWND, BOOL);
 BOOL WINAPI wow_menu_native_DestroyMenu(HMENU);
 BOOL WINAPI wow_menu_native_AppendMenuA(HMENU, UINT, UINT_PTR, LPCSTR);
@@ -30,6 +31,7 @@ BOOL WINAPI wow_menu_native_refresh_message(UINT, WPARAM, LPARAM);
 #if defined(WOW_USER_PRIVATE_REDIRECT) || defined(WOW_ORIGINAL_MENU_CLIENT)
 #define CreateMenu wow_menu_native_CreateMenu
 #define CreatePopupMenu wow_menu_native_CreatePopupMenu
+#define GetMenu wow_menu_native_GetMenu
 #define GetSystemMenu wow_menu_native_GetSystemMenu
 #define DestroyMenu wow_menu_native_DestroyMenu
 #define AppendMenuA wow_menu_native_AppendMenuA

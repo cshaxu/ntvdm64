@@ -2,6 +2,7 @@
 #include "wow_native_text_descriptor.h"
 #include <stddef.h>
 #include "wow_task_order_bindings.h"
+#include "wow_user_object_bindings.h"
 
 /* Current inspected x86 USER dialog calls enter a17-slot win32u service.
  * The old NtUserCreateWindowEx declaration has14 slots and is not its ABI.
@@ -132,8 +133,15 @@ HWND WINAPI wow_dialog_native_create_window(DWORD ex_style, ATOM class_atom,
 {
     const wow_native_text_descriptor *atom;
     wow_native_text_descriptor native_title;
+    HWND native_parent;
     if (!class_atom) { SetLastError(ERROR_INVALID_PARAMETER); return NULL; }
     if (!wow_dialog_native_ready()) return NULL;
+    /* Original dialog creation retains HWND32 for the parent.  The native
+     * dialog service owns the actual HWND relationship, so resolve this one
+     * published current-worker identity at the boundary rather than letting
+     * win32u interpret a legacy carrier. */
+    native_parent = wow_user_window_owned_handle(parent, TRUE);
+    if (parent && !native_parent) return NULL;
     atom = (const wow_native_text_descriptor *)(ULONG_PTR)class_atom;
     if (title) wow_native_text_capture(&native_title, title);
     /* No text conversion: bAnsi describes the counted title, independently
@@ -143,6 +151,6 @@ HWND WINAPI wow_dialog_native_create_window(DWORD ex_style, ATOM class_atom,
      * Native slots14/16/17 are zero as in the inspected dialog call form.
      * Resolve no internal function address and introduce no syscall number. */
     return native_create_window(ex_style, atom, atom, title ? &native_title : NULL,
-        style, x, y, width, height, parent, menu, module, parameter,
+        style, x, y, width, height, native_parent, menu, module, parameter,
         0, (DWORD)LOWORD(version), 0, 0);
 }

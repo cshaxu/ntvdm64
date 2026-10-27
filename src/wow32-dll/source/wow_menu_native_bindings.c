@@ -129,16 +129,40 @@ static HMENU menu_create(BOOL popup)
 HMENU WINAPI wow_menu_native_CreateMenu(void) { return menu_create(FALSE); }
 HMENU WINAPI wow_menu_native_CreatePopupMenu(void) { return menu_create(TRUE); }
 
+HMENU WINAPI wow_menu_native_GetMenu(HWND window)
+{
+    wow_user_runtime_thread *binding = menu_context();
+    wow_user_native_call call;
+    HWND full;
+    HMENU result = NULL;
+    BOOL restored;
+    DWORD error;
+    if (!binding || !(full = wow_user_window_owned_handle(window, FALSE))) return NULL;
+    if (!wow_user_native_call_begin(&call, full)) return NULL;
+    __try { result = GetMenu(full); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    if (!restored) return NULL;
+    if (!wow_menu_native_refresh_window(full))
+        wow_user_native_call_failed("publish-window-menu-query", GetLastError());
+    SetLastError(error);
+    return result;
+}
+
 HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
 {
     wow_user_runtime_thread *binding = menu_context();
     wow_user_native_call call;
+    HWND full;
     HMENU result = NULL;
     BOOL restored;
     DWORD error;
-    if (!binding) return NULL;
-    if (!wow_user_native_call_begin(&call, window)) return NULL;
-    __try { result = GetSystemMenu(window, revert); }
+    if (!binding || !(full = wow_user_window_owned_handle(window, FALSE))) return NULL;
+    if (!wow_user_native_call_begin(&call, full)) return NULL;
+    __try { result = GetSystemMenu(full, revert); }
     __finally {
         error = GetLastError();
         restored = wow_user_native_call_end(&call);
@@ -147,7 +171,7 @@ HMENU WINAPI wow_menu_native_GetSystemMenu(HWND window, BOOL revert)
     if (!restored) return NULL;
     {
         DWORD owner = 0;
-        GetWindowThreadProcessId(window, &owner);
+        GetWindowThreadProcessId(full, &owner);
         if (!menu_publish(binding, result, FALSE, owner == GetCurrentProcessId()))
             wow_user_native_call_failed("publish-system-menu", GetLastError());
     }
@@ -163,9 +187,12 @@ BOOL WINAPI wow_menu_native_##name args \
 { \
     wow_user_runtime_thread *binding = menu_context(); \
     wow_user_native_call call; \
-    BOOL result = FALSE, restored; DWORD error; \
+    HWND full; BOOL result = FALSE, restored; DWORD error; \
     if (!binding || !(menu = menu_resolve(binding, menu)) || \
             !menu_refresh(binding, menu)) return FALSE; \
+    full = wow_user_window_owned_handle(window, TRUE); \
+    if (window && !full) return FALSE; \
+    window = full; \
     if (!wow_user_native_call_begin(&call, window)) return FALSE; \
     __try { result = name native_args; } \
     __finally { \
@@ -190,11 +217,12 @@ BOOL WINAPI wow_menu_native_DrawMenuBar(HWND window)
 {
     wow_user_runtime_thread *binding = menu_context();
     wow_user_native_call call;
+    HWND full;
     BOOL result = FALSE, restored;
     DWORD error;
-    if (!binding) return FALSE;
-    if (!wow_user_native_call_begin(&call, window)) return FALSE;
-    __try { result = DrawMenuBar(window); }
+    if (!binding || !(full = wow_user_window_owned_handle(window, FALSE))) return FALSE;
+    if (!wow_user_native_call_begin(&call, full)) return FALSE;
+    __try { result = DrawMenuBar(full); }
     __finally {
         error = GetLastError();
         restored = wow_user_native_call_end(&call);
@@ -249,11 +277,33 @@ MENU_MUTATION(DWORD, CheckMenuItem, (HMENU menu, UINT item, UINT flags),
     (menu, item, flags), (DWORD)-1, NULL)
 MENU_MUTATION(BOOL, EnableMenuItem, (HMENU menu, UINT item, UINT flags),
     (menu, item, flags), (BOOL)-1, NULL)
-MENU_MUTATION(BOOL, HiliteMenuItem, (HWND window, HMENU menu, UINT item, UINT flags),
-    (window, menu, item, flags), FALSE, window)
 MENU_MUTATION(BOOL, SetMenuItemBitmaps, (HMENU menu, UINT item, UINT flags, HBITMAP off, HBITMAP on),
     (menu, item, flags, off, on), FALSE, NULL)
 #undef MENU_MUTATION
+
+BOOL WINAPI wow_menu_native_HiliteMenuItem(HWND window, HMENU menu,
+    UINT item, UINT flags)
+{
+    wow_user_runtime_thread *binding = menu_context();
+    wow_user_native_call call;
+    HWND full;
+    BOOL result = FALSE, restored;
+    DWORD error;
+    if (!binding || !(full = wow_user_window_owned_handle(window, FALSE)) ||
+            !(menu = menu_resolve(binding, menu))) return FALSE;
+    if (!wow_user_native_call_begin(&call, full)) return FALSE;
+    __try { result = HiliteMenuItem(full, menu, item, flags); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    if (!restored) return FALSE;
+    if (IsMenu(menu) && !menu_refresh(binding, menu))
+        wow_user_native_call_failed("publish-menu-highlight", GetLastError());
+    SetLastError(error);
+    return result;
+}
 
 BOOL WINAPI wow_menu_native_refresh_window(HWND window)
 {
@@ -267,12 +317,18 @@ BOOL WINAPI wow_menu_native_refresh_window(HWND window)
     entered = !binding->exclusive_held;
     if (entered && !wow_user_runtime_enter(binding)) return FALSE;
     __try {
-        full = wow_user_window_full_handle(binding->thread->ppi->objects, LOWORD(window));
-        if (!full || !GetWindowInfo(window, &info)) __leave;
+        /* The published object table is the sole HWND identity authority at
+         * this adapter boundary.  `window` may still be the original short
+         * USER carrier; after resolving it, every native query must use the
+         * exact published full HWND.  Mixing the two could query an arbitrary
+         * host window sharing this carrier's low word, then publish that
+         * window's menu under the owned identity. */
+        full = wow_user_window_owned_handle(window, FALSE);
+        if (!full || !GetWindowInfo(full, &info)) __leave;
         if ((info.dwStyle & (WS_CHILD | WS_POPUP)) == WS_CHILD) {
             result = TRUE; __leave;
         }
-        menu = GetMenu(window);
+        menu = GetMenu(full);
         /* Commit the WND edge before collecting detached menus. Calling
          * menu_refresh here would collect while the old WND still refers
          * to the old menu. */
@@ -292,23 +348,27 @@ BOOL WINAPI wow_menu_native_SetMenu(HWND window, HMENU menu)
 {
     wow_user_runtime_thread *binding = menu_context();
     wow_user_native_call call;
+    HWND full;
     BOOL result = FALSE, restored;
     DWORD error;
-    if (!binding || (menu && !(menu = menu_resolve(binding, menu)))) return FALSE;
+    if (!binding || !(full = wow_user_window_owned_handle(window, FALSE)) ||
+            (menu && !(menu = menu_resolve(binding, menu)))) return FALSE;
     /* Original mnapi.c::xxxSetMenu associates the menu before
      * xxxRedrawFrame. Native USER may likewise call the window while
      * recalculating its frame. Follow the existing USER callout contract:
      * release only an inherited data lock, never WOW task ownership, and
      * restore it even when the native call unwinds. */
-    if (!wow_user_native_call_begin(&call, window)) return FALSE;
+    if (!wow_user_native_call_begin(&call, full)) return FALSE;
     __try {
-        result = SetMenu(window, menu);
+        result = SetMenu(full, menu);
     } __finally {
         error = GetLastError();
         restored = wow_user_native_call_end(&call);
         if (restored) SetLastError(error);
     }
     if (!restored) return FALSE;
+    if (result && !wow_menu_native_refresh_window(full))
+        wow_user_native_call_failed("publish-window-menu-mutation", GetLastError());
     SetLastError(error);
     return result;
 }
