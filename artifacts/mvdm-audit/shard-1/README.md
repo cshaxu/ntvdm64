@@ -219,11 +219,19 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `D0A63C7410EDAF6909D39BE06BDC269C4B458E6520C5D6245CE4DC2911059F7F`.
+- Current `file-audit.csv` SHA-256 `8927F05BF4E6278E4DEAF627368D43BDAD9935884B8215B5CC54CF5E46B1B6E4`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
 
-`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `C187F03351CB6A23B3E0A1091835B389A99FE73C1544F5698B6E8C4AA87CDD76`.
+`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `9F5FC7C02DADAFE6BA95E9446A947A6027426CC974DEE875190B56F30316E69F`.
 
 Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, per the additional source/link comparison in `video-interface-audit.md`; no EGA runtime is claimed.
+
+`unexpected-interrupt-audit.md` traces BOP 02 / illegal-op to original PIC masks and BDA cause; component fixture has its own stub and cannot count as provider test. Entry remains pending.
+
+`video-interface-audit.md` records the isolated port attempt as non-passing: observer timed out without output; a prepared second run did not start because other project processes were present.
+
+`ccpu-decimal-adjust-audit.md` records an offline 524288-case direct selected AAA/AAS object comparison to native 32-bit CPU; guest decode and lifecycle remain pending.
+
+`ccpu-sub-xor-audit.md` records 531748 bounded direct production-object comparisons to native x86, with integrated decode and parity-table wiring still pending.

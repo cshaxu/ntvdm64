@@ -19,7 +19,6 @@ $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $physical=(Resolve-Path $ProcessPackageRoot).Path
 $testScope=New-IsolatedPackageScope $physical $PackageRoot
 if($LogPrefix -notmatch '^[a-z0-9-]+$'){throw 'Invalid log prefix'}
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled by this test'}
 $paths=@()
 $physicalBinary=Get-PackageBinaryRoot $physical
 $launchBinary=Get-PackageBinaryRoot $PackageRoot

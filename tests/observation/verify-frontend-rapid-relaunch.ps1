@@ -11,14 +11,12 @@ $ReportPath=[IO.Path]::GetFullPath($ReportPath)
 if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $ReportPath)) {
     throw 'Require a fresh build-root report'
 }
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count) {
-    throw 'An existing broker must not be controlled'
-}
 # The outer native CMD waits for each real launcher and immediately launches
 # the next request. No input pacing or delay masks the acquisition race.
 # DOS /C and native /C exercise real startup/completion, not interactive input.
 $batch=[IO.Path]::ChangeExtension($ReportPath,'.cmd')
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
+Assert-NoConflictingPackageBroker (Join-Path (Get-PackageBinaryRoot $PackageRoot) 'ntsrv.exe')
 $binary=Get-PackageBinaryRoot $PackageRoot
 $launcher='"'+(Join-Path $binary 'run16.exe')+'"'
 $lines=@('@echo off')

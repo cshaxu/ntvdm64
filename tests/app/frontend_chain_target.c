@@ -25,8 +25,8 @@ static BOOL dos_records(PCWSTR report, unsigned stage, PCWSTR phase)
     DWORD error; BOOL ok = FALSE;
     unsigned char version[APP_VERSION_BYTES] = APP_VERSION;
     if (!broker_rpc_capture_scope(&scope)) return FALSE;
-    swprintf_s(endpoint, ARRAYSIZE(endpoint), L"ntvdm-basesrv-%lu-%08lx-%08lx",
-        scope.session, (ULONG)scope.logon.HighPart, (ULONG)scope.logon.LowPart);
+    swprintf_s(endpoint, ARRAYSIZE(endpoint), BROKER_RPC_ENDPOINT_FORMAT,
+        scope.session, (ULONG)scope.logon.HighPart, (ULONG)scope.logon.LowPart, scope.package_id);
     error = RpcStringBindingComposeW(NULL, (RPC_WSTR)L"ncalrpc", NULL,
         (RPC_WSTR)endpoint, NULL, &text);
     if (!error) error = RpcBindingFromStringBindingW(text, &binding);

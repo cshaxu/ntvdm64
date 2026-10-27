@@ -121,8 +121,8 @@ DWORD OpenNtBaseClientConnectCurrentTimeout(DWORD milliseconds)
     if(!milliseconds)return ERROR_TIMEOUT;
     if (client.connection) return ERROR_ALREADY_EXISTS;
     if (!broker_rpc_capture_scope(&scope)) return GetLastError();
-    wsprintfW(endpoint,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
-        (ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    wsprintfW(endpoint,BROKER_RPC_ENDPOINT_FORMAT,scope.session,
+        (ULONG)scope.logon.HighPart,scope.logon.LowPart,scope.package_id);
     /* Preserve this source-shaped client's historical binding-failure result;
      * the neutral mechanism itself returns the precise RPC status. */
     if(common_rpc_bind_local(endpoint,&client.binding))goto done;

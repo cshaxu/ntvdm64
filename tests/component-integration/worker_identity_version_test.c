@@ -32,8 +32,8 @@ int wmain(int argc, WCHAR **argv)
     if ((argc != 2 && argc != 3) || !broker_rpc_capture_scope(&scope)) return 2;
     if(RpcIfInqId(Client_vdm_service_v65_0_c_ifspec,&interface_id) ||
         interface_id.VersMajor!=APP_PROTOCOL_VERSION || interface_id.VersMinor!=0)return 2;
-    swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",
-        scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    swprintf_s(endpoint,128,BROKER_RPC_ENDPOINT_FORMAT,
+        scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart,scope.package_id);
     if (RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,
         (RPC_WSTR)endpoint,NULL,&text)) goto done;
     if (RpcBindingFromStringBindingW(text,&binding)) goto done;

@@ -11,7 +11,6 @@ $ReportPrefix=[IO.Path]::GetFullPath($ReportPrefix)
 $build=(Resolve-Path "$PSScriptRoot/../../build").Path+'\'
 if(!$ReportPrefix.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)){throw 'Evidence must remain under build'}
 $null=New-Item -ItemType Directory -Force -Path ([IO.Path]::GetDirectoryName($ReportPrefix))
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'Existing service must not be controlled'}
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $testScope=New-IsolatedPackageScope $PackageRoot $LaunchRoot
 if($LaunchRoot){$PackageRoot=$LaunchRoot}

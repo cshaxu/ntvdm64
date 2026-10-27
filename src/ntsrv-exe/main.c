@@ -956,8 +956,8 @@ int main(void)
     WCHAR endpoint[128];
     RPC_STATUS result;
     if (!broker_rpc_capture_scope(&scope)) return (int)GetLastError();
-    swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
-        (ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    swprintf_s(endpoint,128,BROKER_RPC_ENDPOINT_FORMAT,scope.session,
+        (ULONG)scope.logon.HighPart,scope.logon.LowPart,scope.package_id);
     /* ncalrpc's endpoint binding is exclusive. Duplicate startup never
      * dispatches or pretends to be ready; caller must authenticate the owner. */
     result=RpcServerUseProtseqEpW((RPC_WSTR)L"ncalrpc",RPC_C_PROTSEQ_MAX_REQS_DEFAULT,(RPC_WSTR)endpoint,NULL);

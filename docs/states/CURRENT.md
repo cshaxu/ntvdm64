@@ -10,8 +10,13 @@ parallel audit roles; one owner/reviewer coordinates three read-only shard
 agents. Automatic S progression remains in force. `books/` is supporting
 reading, not authority. Guest media remains unchanged.
 
-The current coherent ten-image baseline is `build/t473-s9/package-r10`; its
-release manifest matches `assets/release` and `O:/winnt/system32`.
+The current coherent ten-image baseline is `build/package-uuid/package-c`;
+its manifest matches `assets/release` and `O:/winnt/system32`. The owner
+assigned package-scoped NTSRV isolation to S10. Its implementation and
+selected product, control, multi-package and application probes are recorded
+in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
+This delivery does not close the MVDM-wide source reconciliation or establish
+that every historical test has run.
 
 ## Active Packet
 
@@ -24,7 +29,7 @@ release manifest matches `assets/release` and `O:/winnt/system32`.
 | Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
 | Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
 | Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
-| Files And ABI Surface | Audit ledgers in `artifacts/mvdm-audit`, source/build/link inventories and their governed evidence; no speculative runtime ABI change. |
+| Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package identity, existing RPC endpoint and staging changes. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
 | Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
 | Expected Markers | Each row has justified full/partial/excluded disposition and selected original owner; every mirror diff is partial, with reproducible justified restored-code estimate or explicit unmeasurable basis. |

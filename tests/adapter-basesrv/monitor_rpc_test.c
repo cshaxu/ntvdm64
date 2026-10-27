@@ -94,8 +94,8 @@ static RPC_BINDING_HANDLE bind_server(const broker_rpc_scope *scope)
     RPC_WSTR text=NULL;
     RPC_BINDING_HANDLE binding=NULL;
     RPC_STATUS status;
-    swprintf_s(endpoint,ARRAYSIZE(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",scope->session,
-        (ULONG)scope->logon.HighPart,(ULONG)scope->logon.LowPart);
+    swprintf_s(endpoint,ARRAYSIZE(endpoint),BROKER_RPC_ENDPOINT_FORMAT,scope->session,
+        (ULONG)scope->logon.HighPart,(ULONG)scope->logon.LowPart,scope->package_id);
     status=RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text);
     if (status==RPC_S_OK) status=RpcBindingFromStringBindingW(text,&binding);
     if (text) RpcStringFreeW(&text);

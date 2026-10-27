@@ -9,6 +9,35 @@ function Get-IsolatedFileSha256([string]$LiteralPath) {
     try {return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-','')}
     finally {$stream.Dispose();$algorithm.Dispose()}
 }
+function Get-IsolatedPackageIdentity([string]$Image) {
+    if(-not ('NtvdmTestPackageIdentity' -as [type])) {
+        Add-Type -TypeDefinition @'
+using System;
+using System.Runtime.InteropServices;
+public static class NtvdmTestPackageIdentity {
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode, SetLastError=true)] static extern IntPtr LoadLibraryExW(string p, IntPtr f, uint flags);
+    [DllImport("kernel32.dll", CharSet=CharSet.Unicode)] static extern IntPtr FindResourceW(IntPtr m, string n, IntPtr t);
+    [DllImport("kernel32.dll")] static extern uint SizeofResource(IntPtr m, IntPtr r);
+    [DllImport("kernel32.dll")] static extern IntPtr LoadResource(IntPtr m, IntPtr r);
+    [DllImport("kernel32.dll")] static extern IntPtr LockResource(IntPtr r);
+    [DllImport("kernel32.dll")] static extern bool FreeLibrary(IntPtr m);
+    public static string Read(string p) {
+        IntPtr m=LoadLibraryExW(p, IntPtr.Zero, 0x22);
+        if(m==IntPtr.Zero)return null;
+        try {
+            IntPtr r=FindResourceW(m,"NTVDM_PACKAGE_ID",(IntPtr)10);
+            if(r==IntPtr.Zero || SizeofResource(m,r)!=16)return null;
+            IntPtr value=LockResource(LoadResource(m,r));
+            if(value==IntPtr.Zero)return null;
+            byte[] bytes=new byte[16]; Marshal.Copy(value,bytes,0,16);
+            return BitConverter.ToString(bytes).Replace("-","");
+        } finally { FreeLibrary(m); }
+    }
+}
+'@
+    }
+    return [NtvdmTestPackageIdentity]::Read($Image)
+}
 function Get-PhysicalRuntimeStageRoot {
     return 'O:\tmp'
 }
@@ -22,7 +51,8 @@ function Test-PhysicalRuntimeStage([string]$Path) {
 function New-PhysicalRuntimeStage([string]$PackageRoot,
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe'),
-    [string[]]$TopLevelNames=@()) {
+    [string[]]$TopLevelNames=@(),
+    [switch]$FreshPackageIdentity) {
     if(!$RuntimeImages.Count){throw 'At least one runtime image is required'}
     $source = (Resolve-Path -LiteralPath $PackageRoot).Path
     $build = (Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path + '\'
@@ -85,6 +115,35 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
             # break the ownership check before any product case starts.
             $null = Copy-Item -LiteralPath $_.FullName -Destination $stage -Recurse -Force
         }
+        if($FreshPackageIdentity) {
+            # Copying a package deliberately preserves its UUID. Concurrent
+            # tests that require a different broker must opt in to creating a
+            # complete new test package, without touching the source package.
+            $manifest=Join-Path $stage 'product-system32-manifest.json'
+            $rows=@((Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json))
+            $expected=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
+                'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+            if($rows.Count -ne $expected.Count -or
+               @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $expected.Count) {
+                throw 'Fresh identity requires the complete ten-image manifest'
+            }
+            $binary=Get-PackageBinaryRoot $stage
+            $identity=[guid]::NewGuid()
+            foreach($name in $expected) {
+                $row=@($rows | Where-Object {$_.Name -eq $name})
+                if($row.Count -ne 1 -or $row[0].RelativePath -ne ('system32\'+$name)) {
+                    throw "Invalid package manifest entry: $name"
+                }
+                $path=Join-Path $binary $name
+                if((Get-IsolatedFileSha256 $path) -ne $row[0].Sha256) {
+                    throw "Package input differs from manifest: $name"
+                }
+                & "$script:IsolatedPackageCleanupRoot/../../tools/build/Set-PackageIdentity.ps1" -Image $path -PackageId $identity
+                $row[0].PackageId=$identity.ToString()
+                $row[0].Sha256=Get-IsolatedFileSha256 $path
+            }
+            $rows | ConvertTo-Json | Set-Content -LiteralPath $manifest -Encoding UTF8
+        }
         $marker = [ordered]@{
             schema = 1
             source = $source
@@ -115,6 +174,13 @@ function Remove-PhysicalRuntimeStage([string]$Stage) {
             throw 'Test stage binary identity changed; preserve it for diagnosis'
         }
     }
+    # A surviving broker keeps its image open; reject before recursive
+    # removal so an active stage is not left partially deleted.
+    $prefix=$root.TrimEnd('\')+'\'
+    $active=@(Get-CimInstance Win32_Process | Where-Object {
+        $_.ExecutablePath -and $_.ExecutablePath.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)
+    })
+    if($active.Count){throw 'Test stage still has running processes; stop the owned scope before removal'}
     Remove-Item -LiteralPath $root -Recurse -Force
 }
 function Get-PackageBinaryRoot([string]$PackageRoot) {
@@ -131,6 +197,24 @@ function Get-PackageBinaryRoot([string]$PackageRoot) {
     }
     return $PackageRoot
 }
+function Assert-NoConflictingPackageBroker([string]$BrokerImage) {
+    # A different verified UUID has a different endpoint. Unknown or equal
+    # identity remains a conflict; never adopt or stop another test's broker.
+    $ownIdentity=Get-IsolatedPackageIdentity $BrokerImage
+    foreach($brokerRow in @(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'")){
+        $brokerProcess=$null
+        try {
+            try {$brokerProcess=[Diagnostics.Process]::GetProcessById($brokerRow.ProcessId)}catch [ArgumentException]{continue}
+            $null=$brokerProcess.Handle
+            if(!$brokerProcess.HasExited){
+                $otherIdentity=if($brokerRow.ExecutablePath) {Get-IsolatedPackageIdentity $brokerRow.ExecutablePath}else{$null}
+                if(!$ownIdentity -or !$otherIdentity -or $ownIdentity -eq $otherIdentity){
+                    throw "Existing live broker $($brokerRow.ProcessId) $($brokerRow.ExecutablePath); no test ownership"
+                }
+            }
+        }finally{if($brokerProcess){$brokerProcess.Dispose()}}
+    }
+}
 function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
     $physical=(Resolve-Path $PackageRoot).Path
     $build=(Resolve-Path "${script:IsolatedPackageCleanupRoot}/../../build").Path+'\'
@@ -138,19 +222,9 @@ function New-IsolatedPackageScope([string]$PackageRoot,[string]$LaunchRoot='') {
        !(Test-PhysicalRuntimeStage $physical)){
         throw 'Test cleanup requires a repository-build package'
     }
-    # WMI may briefly retain a terminated row. Pin the actual process before
-    # deciding whether the shared endpoint is occupied; never waive a live
-    # service or retry a failed product case into a pass.
-    foreach($brokerRow in @(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'")){
-        $brokerProcess=$null
-        try {
-            try {$brokerProcess=[Diagnostics.Process]::GetProcessById($brokerRow.ProcessId)}catch [ArgumentException]{continue}
-            $null=$brokerProcess.Handle
-            if(!$brokerProcess.HasExited){throw "Existing live broker $($brokerRow.ProcessId) $($brokerRow.ExecutablePath); no test ownership"}
-        }finally{if($brokerProcess){$brokerProcess.Dispose()}}
-    }
-    $paths=@()
     $binary=Get-PackageBinaryRoot $physical
+    Assert-NoConflictingPackageBroker (Join-Path $binary 'ntsrv.exe')
+    $paths=@()
     $launchBinary=if($LaunchRoot){Get-PackageBinaryRoot $LaunchRoot}else{''}
     foreach($name in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')){
         $file=Join-Path $binary $name

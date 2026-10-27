@@ -11,9 +11,9 @@ $ReportPath=[IO.Path]::GetFullPath($ReportPath)
 if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $ReportPath)) {
     throw 'Require a fresh build-root report'
 }
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled'}
 $batch=[IO.Path]::ChangeExtension($ReportPath,'.cmd')
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
+Assert-NoConflictingPackageBroker (Join-Path (Get-PackageBinaryRoot $PackageRoot) 'ntsrv.exe')
 $launcher='"'+(Join-Path (Get-PackageBinaryRoot $PackageRoot) 'run16.exe')+'"'
 $lines=@('@echo off')
 for($round=1;$round -le $Rounds;$round++) {

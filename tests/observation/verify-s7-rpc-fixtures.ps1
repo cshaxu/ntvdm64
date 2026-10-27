@@ -12,6 +12,11 @@ $ErrorActionPreference='Stop'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
 $PackageRoot=(Resolve-Path -LiteralPath $PackageRoot).Path
+$manifestPath=Join-Path (Split-Path $PackageRoot -Parent) 'product-system32-manifest.json'
+$manifestRows=@((Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json))
+$packageIds=@($manifestRows | Select-Object -ExpandProperty PackageId -Unique)
+if($packageIds.Count -ne 1){throw 'A coherent package identity is required'}
+$packageId=[guid]$packageIds[0]
 $ReportPrefix=[IO.Path]::GetFullPath($ReportPrefix)
 $build=(Resolve-Path (Join-Path $PSScriptRoot '../../build')).Path+'\'
 if(!$ReportPrefix.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)) {
@@ -32,10 +37,16 @@ foreach($case in $Cases) {
         $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
         if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh admitted worker fixture'}
         $null=New-Item -ItemType Directory -Path $casePackageRoot
-        foreach($name in @($image,'ntsrv.exe','ntcon.exe')) {
+        # RPC identity validation requires the complete matching package even
+        # in this test-only worker substitution. Preserve the real siblings;
+        # the deliberately substituted worker below remains the test peer.
+        $siblings=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
+            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+        foreach($name in @(@($image)+$siblings | Select-Object -Unique)) {
             Copy-Item -LiteralPath (Join-Path $PackageRoot $name) -Destination $casePackageRoot
         }
-        Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe')
+        & "$PSScriptRoot/../../tools/build/Set-PackageIdentity.ps1" -Image (Join-Path $casePackageRoot $image) -PackageId $packageId
+        Copy-Item -LiteralPath (Join-Path $casePackageRoot $image) -Destination (Join-Path $casePackageRoot 'ntvdm.exe') -Force
     }
     if($case -in @('startup-rejections','native-io-error')) {
         # This fixture deliberately replaces the frontend with an adversarial
@@ -46,14 +57,16 @@ foreach($case in $Cases) {
         $casePackageRoot=$ReportPrefix+'-'+$case+'-package\system32'
         if(Test-Path -LiteralPath $casePackageRoot){throw 'Require a fresh rejection fixture package'}
         $null=New-Item -ItemType Directory -Path $casePackageRoot
-        $inputs=@($image,'ntsrv.exe');if($case -eq 'native-io-error'){$inputs+='ntcon.exe'}
-        foreach($name in $inputs) {
+        $inputs=@($image,'run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
+            'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+        foreach($name in @($inputs | Select-Object -Unique)) {
             $source=Join-Path $PackageRoot $name
             $destination=Join-Path $casePackageRoot $name
             Copy-Item -LiteralPath $source -Destination $destination
             if((Get-FileHash -LiteralPath $source).Hash -ne
                (Get-FileHash -LiteralPath $destination).Hash){throw 'Rejection fixture input identity mismatch'}
         }
+        & "$PSScriptRoot/../../tools/build/Set-PackageIdentity.ps1" -Image (Join-Path $casePackageRoot $image) -PackageId $packageId
     }
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false

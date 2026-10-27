@@ -21,8 +21,8 @@ int main(int argc,char **argv)
     DWORD error=0,duration=argc>2?strtoul(argv[2],NULL,10):0;
     ULONGLONG deadline;
     if (argc<2 || !broker_rpc_capture_scope(&scope)) return 2;
-    swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
-        (ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    swprintf_s(endpoint,128,BROKER_RPC_ENDPOINT_FORMAT,scope.session,
+        (ULONG)scope.logon.HighPart,scope.logon.LowPart,scope.package_id);
     if (RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text) ||
         RpcBindingFromStringBindingW(text,&binding) ||
         RpcBindingSetAuthInfoW(binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE)) return 3;

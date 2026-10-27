@@ -8,6 +8,21 @@
 #include "common/codec/native_launch.h"
 
 PVOID CsrPortHeap;
+/* Adversarial peers still need a complete coherent package: RPC identity is
+ * validated before the broker or its test replacement can bind. */
+static BOOL copy_package_siblings(PCWSTR source,PCWSTR destination)
+{
+    static const WCHAR *const names[]={L"run16.exe",L"ntsrv.exe",L"ntcon.exe",
+        L"ntvdm.exe",L"ntvwm.exe",L"ntmon.exe",L"WOW32.DLL",L"VDMREDIR.DLL",
+        L"nthook32.dll",L"nthook64.dll"};
+    WCHAR input[MAX_PATH],output[MAX_PATH];size_t i;
+    for(i=0;i<ARRAYSIZE(names);++i) {
+        if(swprintf_s(input,ARRAYSIZE(input),L"%ls%ls",source,names[i])<0 ||
+           swprintf_s(output,ARRAYSIZE(output),L"%ls\\%ls",destination,names[i])<0 ||
+           !CopyFileW(input,output,FALSE))return FALSE;
+    }
+    return TRUE;
+}
 static int identity_role(PCWSTR label)
 {
     WCHAR text[64],*end;HANDLE owner=NULL,capability;
@@ -102,6 +117,7 @@ static int startup_failures(void)
      * Keep the rejection-provider substitute at that same layout boundary. */
     wcscat_s(package,ARRAYSIZE(package),L"\\system32");
     if(!CreateDirectoryW(package,NULL) && GetLastError()!=ERROR_ALREADY_EXISTS)return 84;
+    if(!copy_package_siblings(source,package))return 84;
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntcon.exe",package);
     if(!CopyFileW(self,image,FALSE))return 84;
     wcscat_s(source,ARRAYSIZE(source),L"ntsrv.exe");
@@ -250,14 +266,15 @@ static int native_io_error(void)
     if(!CreateDirectoryW(directory,NULL))return 84;
     wcscat_s(directory,ARRAYSIZE(directory),L"\\system32");
     if(!CreateDirectoryW(directory,NULL))return 84;
+    if(!copy_package_siblings(source,directory))return 84;
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntvwm.exe",directory);
-    if(!CopyFileW(self,image,TRUE))return 84;
+    if(!CopyFileW(self,image,FALSE))return 84;
     wcscat_s(source,ARRAYSIZE(source),L"ntcon.exe");
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntcon.exe",directory);
-    if(!CopyFileW(source,image,TRUE))return 84;
+    if(!CopyFileW(source,image,FALSE))return 84;
     slash=wcsrchr(source,L'\\');wcscpy_s(slash+1,ARRAYSIZE(source)-(size_t)(slash+1-source),L"ntsrv.exe");
     swprintf_s(image,ARRAYSIZE(image),L"%ls\\ntsrv.exe",directory);
-    if(!CopyFileW(source,image,TRUE))return 84;
+    if(!CopyFileW(source,image,FALSE))return 84;
     CsrPortHeap=HeapCreate(0,0,0);if(!CsrPortHeap)return 1;
     error=OpenNtBaseClientConnectCurrent();
     if(error!=RPC_S_SERVER_UNAVAILABLE)goto done;

@@ -19,6 +19,12 @@ from the T objective through renumbering.
 | S18 | Remove local providers and selections displaced by this T's original recoveries; report mirror and non-original footprint separately. |
 | S19 | Re-audit full source and composition, complete all required product and capability regressions, publish, commit and push for T acceptance. |
 
+The owner also assigned package-scoped NTSRV isolation to S10. Its reviewed
+candidate passed selected independent-package, DOS, native CUI, WOW and
+control gates and was published as the coherent ten-image baseline; see
+`artifacts/mvdm-audit/package-isolation-review.md`. This delivery does not
+close the remaining S10 source audit or T-wide recovery and regression gates.
+
 Each implementation stage covers original entry, initialization, behavior,
 callbacks, failures and retirement, with original-source traceability and
 necessary normal, negative and teardown tests. An unchanged previously

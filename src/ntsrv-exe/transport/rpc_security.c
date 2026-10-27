@@ -2,6 +2,69 @@
  * policy owner; NT4 CSR port/process internals are not recreated here. */
 #include "rpc_security.h"
 #include <rpcasync.h>
+#include <string.h>
+#include <wchar.h>
+
+/* This code may execute in an injected Hook DLL. The package identity belongs
+ * to the module containing the RPC client, never to the native host EXE. */
+static BOOL broker_package_identity(WCHAR output[BROKER_PACKAGE_ID_HEX_CHARS+1u])
+{
+    static const WCHAR hex[]=L"0123456789abcdef";
+    static const WCHAR *const components[]={
+        L"run16.exe",L"ntsrv.exe",L"ntcon.exe",L"ntvdm.exe",L"ntvwm.exe",
+        L"ntmon.exe",L"WOW32.DLL",L"VDMREDIR.DLL",L"nthook32.dll",L"nthook64.dll"
+    };
+    HMODULE module=NULL;
+    HRSRC resource;
+    HGLOBAL loaded;
+    const unsigned char *bytes;
+    WCHAR path[32768],*separator;
+    unsigned i,nonzero=0;
+    if (!GetModuleHandleExW(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS |
+            GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+            (LPCWSTR)(ULONG_PTR)&broker_rpc_capture_scope,&module)) return FALSE;
+    resource=FindResourceW(module,BROKER_PACKAGE_RESOURCE,MAKEINTRESOURCEW(10));
+    if (!resource) { SetLastError(ERROR_INVALID_DATA);return FALSE; }
+    if (SizeofResource(module,resource)!=16u) { SetLastError(ERROR_INVALID_DATA);return FALSE; }
+    loaded=LoadResource(module,resource);
+    bytes=loaded ? (const unsigned char *)LockResource(loaded) : NULL;
+    if (!bytes) { SetLastError(ERROR_INVALID_DATA);return FALSE; }
+    for (i=0;i<16u;++i) {
+        nonzero|=bytes[i];output[2u*i]=hex[bytes[i]>>4];output[2u*i+1u]=hex[bytes[i]&15u];
+    }
+    output[BROKER_PACKAGE_ID_HEX_CHARS]=0;
+    if (!nonzero) { SetLastError(ERROR_INVALID_DATA);return FALSE; }
+    /* Reject a mixed or incomplete package before it binds to any server.
+     * DATAFILE loading reads resources only; no component code is executed. */
+    {
+        DWORD length=GetModuleFileNameW(module,path,(DWORD)(sizeof(path)/sizeof(path[0])));
+        if (!length)return FALSE;
+        if (length>=sizeof(path)/sizeof(path[0])) { SetLastError(ERROR_INSUFFICIENT_BUFFER);return FALSE; }
+    }
+    separator=wcsrchr(path,L'\\');
+    if (!separator) { SetLastError(ERROR_BAD_PATHNAME);return FALSE; }
+    for (i=0;i<sizeof(components)/sizeof(components[0]);++i) {
+        HMODULE image;
+        HRSRC item;
+        HGLOBAL data;
+        const unsigned char *identity;
+        size_t used=(size_t)(separator+1-path);
+        if (used+wcslen(components[i])+1u>sizeof(path)/sizeof(path[0])) {
+            SetLastError(ERROR_INSUFFICIENT_BUFFER);return FALSE;
+        }
+        wcscpy_s(separator+1,sizeof(path)/sizeof(path[0])-used,components[i]);
+        image=LoadLibraryExW(path,NULL,LOAD_LIBRARY_AS_DATAFILE | LOAD_LIBRARY_AS_IMAGE_RESOURCE);
+        if (!image) return FALSE;
+        item=FindResourceW(image,BROKER_PACKAGE_RESOURCE,MAKEINTRESOURCEW(10));
+        data=item && SizeofResource(image,item)==16u ? LoadResource(image,item) : NULL;
+        identity=data ? (const unsigned char *)LockResource(data) : NULL;
+        if (!identity || memcmp(identity,bytes,16u)) {
+            FreeLibrary(image);SetLastError(ERROR_REVISION_MISMATCH);return FALSE;
+        }
+        FreeLibrary(image);
+    }
+    return TRUE;
+}
 
 RPC_STATUS broker_rpc_peer_process(const broker_rpc_scope *scope,
     RPC_BINDING_HANDLE binding, HANDLE process, DWORD *pid)
@@ -45,6 +108,10 @@ BOOL broker_rpc_capture_scope(broker_rpc_scope *scope)
     ZeroMemory(scope,sizeof(*scope));
     if (!OpenProcessToken(GetCurrentProcess(),TOKEN_QUERY,&token)) return FALSE;
     result=token_scope(token,scope);
+    if (result && !broker_package_identity(scope->package_id)) {
+        scope->valid=FALSE;
+        result=FALSE;
+    }
     error=GetLastError();
     CloseHandle(token);
     SetLastError(error);

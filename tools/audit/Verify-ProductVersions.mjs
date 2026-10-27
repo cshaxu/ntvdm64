@@ -9,6 +9,10 @@ const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,
 const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
 const runtimeBinary=fs.existsSync(path.join(runtime,'system32','run16.exe'))?path.join(runtime,'system32'):runtime;
+const manifest=JSON.parse(fs.readFileSync(path.join(runtime,'product-system32-manifest.json'),'utf8'));
+const packageIds=[...new Set(manifest.map(row=>row.PackageId))];
+assert.equal(packageIds.length,1,'Runtime package must have one identity');
+const packageId=packageIds[0];
 const serviceImage=fs.readFileSync(path.join(product,'ntsrv.exe'));
 const serviceMachine=serviceImage.readUInt16LE(serviceImage.readUInt32LE(60)+4);
 assert([0x14c,0x8664].includes(serviceMachine),'Selected service machine');
@@ -61,7 +65,16 @@ try {
     }
 } finally {fs.closeSync(compileLog);}
 for (const [name] of variants) {
-    const server=spawn(path.join(build,`${name}.exe`),[],{cwd:build,windowsHide:true,
+    // The mutated server must belong to the same complete test package as
+    // its clients. It is a uniquely named fixture and never replaces ntsrv.
+    const serverFixture=path.join(runtimeBinary,`version-negative-${name}.exe`);
+    assert(!fs.existsSync(serverFixture),`Refuse to replace ${serverFixture}`);
+    fs.copyFileSync(path.join(build,`${name}.exe`),serverFixture);
+    const stamp=spawnSync(process.env.OPENNT_VERSION_PWSH || 'pwsh.exe',['-NoProfile','-ExecutionPolicy','Bypass','-File',
+        path.join(root,'tools/build/Set-PackageIdentity.ps1'),'-Image',serverFixture,
+        '-PackageId',packageId],{windowsHide:true,encoding:'utf8'});
+    if(stamp.status!==0){fs.rmSync(serverFixture,{force:true});throw Error(`Cannot stamp ${name}: ${stamp.error?.message || stamp.stderr}`);}
+    const server=spawn(serverFixture,[],{cwd:build,windowsHide:true,
         env:process.env,stdio:['ignore','pipe','pipe']});
     let output='',timer;
     const done=new Promise(resolve=>server.once('close',resolve));
@@ -84,6 +97,7 @@ for (const [name] of variants) {
     } finally {
         clearTimeout(timer);if(server.exitCode===null)server.kill();await done;
         fs.writeFileSync(path.join(logs,`${name}-server.log`),output);
+        fs.rmSync(serverFixture,{force:true});
     }
     console.log(`PASS ${name}: launcher and worker reject before task delivery, no launcher retry`);
 }

@@ -63,8 +63,8 @@ static BOOL bind_basesrv(MONITOR_STATE *state)
     WCHAR endpoint[128];
     RPC_STATUS rpc;
     if (!broker_rpc_capture_scope(&state->scope)) return FALSE;
-    swprintf_s(endpoint,_countof(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",state->scope.session,
-        (ULONG)state->scope.logon.HighPart,(ULONG)state->scope.logon.LowPart);
+    swprintf_s(endpoint,_countof(endpoint),BROKER_RPC_ENDPOINT_FORMAT,state->scope.session,
+        (ULONG)state->scope.logon.HighPart,(ULONG)state->scope.logon.LowPart,state->scope.package_id);
     rpc=common_rpc_bind_local(endpoint,&state->binding);
     if (rpc!=RPC_S_OK) { SetLastError(rpc); return FALSE; }
     /* A system_handle must be a real, duplicable client handle.  The BaseSrv

@@ -17,7 +17,8 @@ and `softpc.new/host/src/nt_mouse.c` cursor publication, while the registry
 currently describes only the former. `MVDM-HOST-DIV-327` also occurs on CCPU `lmsw.c` and COMMAND
 `cmdexec.c` observation paths, and in a separate protected-mode entry in the
 register; determine whether the numbers describe one cohort or collisions.
-Identity
+The LMSW witness has since been explicitly added to the COMMAND witness row;
+its collision with the separate stack fix remains. Identity
 by ID alone is therefore ambiguous; resolve by source path and call site,
 then assign and cross-reference distinct IDs when the exact historical
 ownership and all consumers have been reconciled. This is a documentation

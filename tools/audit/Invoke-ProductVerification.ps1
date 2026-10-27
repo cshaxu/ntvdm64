@@ -212,11 +212,15 @@ try {
         # These native fixtures create the service through their executable's
         # sibling path. Use the real System32 package layout, not the flat
         # linker cache (whose service would derive the wrong Windows root).
+        $packageRows=@((Get-Content -LiteralPath (Join-Path $runtime 'product-system32-manifest.json') -Raw | ConvertFrom-Json))
+        $packageIds=@($packageRows | Select-Object -ExpandProperty PackageId -Unique)
+        if($packageIds.Count -ne 1){throw 'Control fixtures require one package identity'}
         foreach($fixture in @('frontend-request-client-test.exe','broker-frontend-bootstrap-test.exe',
             'monitor-rpc-test.exe','native-gui-startup-probe.exe')){
             $input=if($fixture -eq 'monitor-rpc-test.exe' -and $MonitorRpc){$MonitorRpc}else{Join-Path $cache $fixture};$output=Join-Path $runtimeBinary $fixture
             Copy-Item -LiteralPath $input -Destination $output -Force
             if((Get-IsolatedFileSha256 $input) -ne (Get-IsolatedFileSha256 $output)){throw 'Control fixture copy mismatch'}
+            & "$repo/tools/build/Set-PackageIdentity.ps1" -Image $output -PackageId ([guid]$packageIds[0])
         }
         Invoke-Gate 'rpc' {
             # native-command/native-registry are in-process archive cases,
@@ -240,14 +244,15 @@ try {
                 # Restore the incoming environment even if Node throws or
                 # reports a failed negative; never strip a caller's values.
                 $versionNames=@('OPENNT_BROKER_PRODUCT_BUILD','OPENNT_VERSION_TEST_BUILD',
-                    'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME')
+                    'OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME','OPENNT_VERSION_PWSH')
                 $versionSaved=@{}
                 foreach($name in $versionNames){$versionSaved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
                 try {
-                    $env:OPENNT_BROKER_PRODUCT_BUILD=if($NativeService){Split-Path $NativeService -Parent}else{$cache}
+                    $env:OPENNT_BROKER_PRODUCT_BUILD=if($versionSaved.OPENNT_BROKER_PRODUCT_BUILD){$versionSaved.OPENNT_BROKER_PRODUCT_BUILD}elseif($NativeService){Split-Path $NativeService -Parent}else{$cache}
                     $env:OPENNT_VERSION_TEST_BUILD="$log/version-negative"
                     $env:OPENNT_VERSION_TEST_LOGS="$log/version-negative/logs"
                     $env:OPENNT_VERSION_TEST_RUNTIME=$runtime
+                    $env:OPENNT_VERSION_PWSH=(Get-Process -Id $PID).Path
                     & $Node "$repo/tools/audit/Verify-ProductVersions.mjs"
                     if($LASTEXITCODE){throw 'Version negative gate failed'}
                 }finally{
@@ -277,7 +282,7 @@ try {
             Invoke-Gate 'cooked-return' {& "$repo/tests/observation/verify-frontend-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/cooked-return.txt"}
             Invoke-Gate 'rapid-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-relaunch.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/rapid.txt"}
             Invoke-Gate 'interactive-relaunch' {& "$repo/tests/observation/verify-frontend-rapid-interactive.ps1" -Observer $observerPath -PackageRoot $runtime -ReportPath "$log/interactive.txt"}
-            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc $(if($MonitorRpc){$MonitorRpc}else{"$cache/monitor-rpc-test.exe"}) -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
+            Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc (Join-Path $runtimeBinary 'monitor-rpc-test.exe') -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
             Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}

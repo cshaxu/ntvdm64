@@ -17,8 +17,8 @@ static void observe_created(HANDLE child,DWORD flags)
     WCHAR endpoint[128];uint64_t identity=0;
     DWORD saved=GetLastError();
     if(!broker_rpc_capture_scope(&scope))goto done;
-    swprintf_s(endpoint,ARRAYSIZE(endpoint),L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,
-        (ULONG)scope.logon.HighPart,(ULONG)scope.logon.LowPart);
+    swprintf_s(endpoint,ARRAYSIZE(endpoint),BROKER_RPC_ENDPOINT_FORMAT,scope.session,
+        (ULONG)scope.logon.HighPart,(ULONG)scope.logon.LowPart,scope.package_id);
     if(common_rpc_bind_local(endpoint,&client.binding)!=RPC_S_OK)goto done;
     client.process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|SYNCHRONIZE,FALSE,GetCurrentProcessId());
     if(client.process)(void)common_rpc_observe_native_creation_bounded(&client,child,flags,&identity);

@@ -54,7 +54,7 @@ int main(int argc,char **argv)
     int abandon=argc==2 && !strcmp(argv[1],"--abandon");
     ULONG expectedFirst=argc==2 && !strcmp(argv[1],"--existing")?0:1;
     REQUIRE(process && broker_rpc_capture_scope(&scope));
-    swprintf_s(endpoint,128,L"ntvdm-basesrv-%lu-%08lx-%08lx",scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart);
+    swprintf_s(endpoint,128,BROKER_RPC_ENDPOINT_FORMAT,scope.session,(ULONG)scope.logon.HighPart,scope.logon.LowPart,scope.package_id);
     REQUIRE(!RpcStringBindingComposeW(NULL,(RPC_WSTR)L"ncalrpc",NULL,(RPC_WSTR)endpoint,NULL,&text));
     REQUIRE(!RpcBindingFromStringBindingW(text,&binding));
     REQUIRE(!RpcBindingSetAuthInfoW(binding,NULL,RPC_C_AUTHN_LEVEL_PKT_PRIVACY,RPC_C_AUTHN_WINNT,NULL,RPC_C_AUTHZ_NONE));

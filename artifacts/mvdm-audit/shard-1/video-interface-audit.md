@@ -79,3 +79,26 @@ actual observable default-VGA call to the dummy. The fixed VGA selection is
 source and selected-link evidence, not an independently instrumented runtime
 trace. No EGA guest test or upstream runtime comparison was performed, so
 retain pending rather than claim either complete equivalence or a new defect.
+
+## Isolated port probe attempt, not a passing runtime witness
+
+A separately authored `video-port-probe.asm` assembles to DOS `VPORT.COM`,
+performs mode 3, emits BIOS INT10 teletype `B`, reads port 0x3C2 and prints
+its value with `VPORT=`. This fixture does not alter the installed guest.
+Its COM SHA-256 is
+`A44A7C7D0FD770DC2CF9FC16914C1DDEBC065800C1FD732B19E8D3D41388B30E`.
+The first archived runner, `video-port-run-first.ps1`, used S9 package-r10,
+the standard short physical test stage, private desktop observer and
+`COMMAND.COM /c VPORT.COM`. On this attempt observer reported
+`result=timeout` after its 35-second deadline and an empty screen, despite
+the wrapper process returning zero; this is **not** a successful port, BIOS,
+or product-exit test and does not locate the failure. The owned isolated
+stage and its processes were cleaned.
+
+A second runner, `video-port-run-prepared.ps1`, instead uses the earlier
+successful interactive COMMAND prompt and screen-gated input mechanism. Its
+preflight detected other project processes and declined to start, without
+modifying or terminating them. No second runtime result exists. Do not infer
+port values or handler reachability from either attempt. Later continuation
+must reconstruct the known-good test route, verify process ownership, and use
+a fresh result path.

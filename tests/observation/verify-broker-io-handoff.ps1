@@ -16,7 +16,6 @@ if(!$prefix.StartsWith($build,[StringComparison]::OrdinalIgnoreCase)) {
 }
 if(!(Test-Path (Split-Path $prefix -Parent))) {throw 'Declare/create the build run root first'}
 if(Test-Path "$prefix.observer") {throw 'Preserve existing run evidence; choose a fresh prefix'}
-if(Get-Process ntsrv -ErrorAction SilentlyContinue) {throw 'An existing broker must finish before this isolated probe'}
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
 # The 16-bit guest sees its launch path.  A deep Ninja/evidence path can fail
 # before worker registration and thereby masquerade as a broker failure; use

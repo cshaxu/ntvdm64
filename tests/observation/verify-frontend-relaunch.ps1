@@ -10,11 +10,11 @@ $ReportPath=[IO.Path]::GetFullPath($ReportPath)
 if(!$ReportPath.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $ReportPath)){
     throw 'Require a fresh build-root report'
 }
-if(@(Get-CimInstance Win32_Process -Filter "Name='ntsrv.exe'").Count){throw 'An existing broker must not be controlled'}
 $start=[Diagnostics.ProcessStartInfo]::new((Resolve-Path $Observer).Path)
 $start.UseShellExecute=$false;$start.WindowStyle=[Diagnostics.ProcessWindowStyle]::Hidden
 $start.EnvironmentVariables['MVDM_OBSERVER_PRIVATE_DESKTOP']='1'
 . "$PSScriptRoot/isolated_package_cleanup.ps1"
+Assert-NoConflictingPackageBroker (Join-Path (Get-PackageBinaryRoot $PackageRoot) 'ntsrv.exe')
 $binary=Get-PackageBinaryRoot $PackageRoot
 $launcher='"'+(Join-Path $binary 'run16.exe')+'"'
 # Match the owner workflow: guest media are in System32, so bare names are

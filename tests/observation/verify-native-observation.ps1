@@ -16,13 +16,12 @@ $physical=(Resolve-Path $RuntimeRoot).Path
 $scope=New-IsolatedPackageScope $physical
 $log=[IO.Path]::GetFullPath($LogRoot)
 if(!$log.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $log)){throw 'Fresh build evidence required'}
-if(Test-Path Z:\){throw 'Z: occupied'}
 New-Item -ItemType Directory -Path $log|Out-Null
 $fixture=Join-Path $physical 'tests\OBS';New-Item -ItemType Directory -Path $fixture -Force|Out-Null
 Copy-Item -LiteralPath (Resolve-Path $Probe).Path -Destination (Join-Path $fixture 'P.EXE')
 $probeTool=(Resolve-Path $MonitorRpc).Path;$observerPath=(Resolve-Path $Observer).Path
 $oldPrivate=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
-$events=@();$observerProcess=$null;$childProcess=$null;$mapped=$false
+$events=@();$observerProcess=$null;$childProcess=$null
 function Read-Trace([int]$WorkerId,[string]$Name) {
  $text=& $probeTool --trace-json $WorkerId
  if($LASTEXITCODE){throw 'Actual trace RPC failed'}
@@ -30,19 +29,17 @@ function Read-Trace([int]$WorkerId,[string]$Name) {
  return (($text -join "`n")|ConvertFrom-Json)
 }
 try {
- subst.exe Z: $physical;if($LASTEXITCODE){throw 'subst failed'};$mapped=$true
- $scope.Paths+=@($scope.Paths|ForEach-Object {Join-Path 'Z:\' $_.Substring($physical.Length+1)})
  $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
  $prefix='Local\native-trace-'+[guid]::NewGuid().ToString('N')
  foreach($suffix in @('ready','root','child','root-host','root-done','root-resume')) {
   $events+=,[Threading.EventWaitHandle]::new($false,[Threading.EventResetMode]::ManualReset,"$prefix-$suffix")
  }
- $report=Join-Path $log 'observer.txt';$journal='Z:\tests\OBS\J.TXT'
+ $report=Join-Path $log 'observer.txt';$journal=Join-Path $fixture 'J.TXT'
  if(Test-Path (Join-Path $fixture 'J.TXT')){Remove-Item -LiteralPath (Join-Path $fixture 'J.TXT')}
  # The unhooked harness host owns the borrowed visible Console until the
  # test ends. Direct completion must not accidentally close the test Console.
  $hostMode=if($Case -eq 'ShortChild'){'host-fast'}elseif($Case -eq 'SuspendedChild'){'host-suspended'}elseif($Case -eq 'Concurrent'){'host-concurrent'}elseif($Case -eq 'CmdNested'){'host-cmd'}else{'host'}
- $arguments=@('Z:\tests\OBS\P.EXE','Z:\',$report,$hostMode,
+ $arguments=@((Join-Path $fixture 'P.EXE'),$physical,$report,$hostMode,
   "$prefix-ready","$prefix-root","$prefix-child",$journal,'--observation-timeout-ms','20000')
  $observerProcess=Start-Process -FilePath $observerPath -ArgumentList $arguments -WindowStyle Hidden -PassThru
  if(!$events[0].WaitOne(10000)){throw 'Actual controlled child did not enter'}
@@ -103,7 +100,7 @@ try {
  $created=Read-Trace $worker.pid 'created'
  if($CaptureWow) {
   $wowReport=Join-Path $log 'wow-startup.txt'
-  & $observerPath 'Z:\system32\run16.exe' 'Z:\' $wowReport 'Z:\system32\WINMINE.EXE' --observation-timeout-ms 10000
+  & $observerPath (Join-Path $physical 'system32\run16.exe') $physical $wowReport (Join-Path $physical 'system32\WINMINE.EXE') --observation-timeout-ms 10000
   if($LASTEXITCODE -or (Get-Content $wowReport -Raw) -notmatch '(?m)^exit=0x00000000\r?$'){
    throw 'Companion Win16 startup failed'
   }
@@ -156,7 +153,7 @@ try {
   # Before the initial thread runs, MainModule may not exist. The unique
   # CreateProcess witness plus authenticated retained-object image is the
   # ownership evidence; don't make absence of user-mode LDR data a failure.
-  if($child[0].image -notin @('Z:\tests\OBS\P.EXE',(Join-Path $fixture 'P.EXE'))){throw 'Child identity mismatch'}
+  if($child[0].image -ne (Join-Path $fixture 'P.EXE')){throw 'Child identity mismatch'}
  }
  if($Case -eq 'SuspendedChild') {
   if(!($child[0].flags -band 4) -or @($lines|Where-Object {$_ -match '^CHILD '}).Count){throw 'Caller suspended flag/entry boundary changed'}
@@ -201,5 +198,5 @@ try {
  if($observerProcess){if(!$observerProcess.HasExited){$observerProcess.Kill();$null=$observerProcess.WaitForExit(5000)};$observerProcess.Dispose()}
  foreach($event in $events){$event.Dispose()}
  $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$oldPrivate
- try {Stop-IsolatedPackageScope $scope} finally {if($mapped){subst.exe Z: /d}}
+ Stop-IsolatedPackageScope $scope
 }

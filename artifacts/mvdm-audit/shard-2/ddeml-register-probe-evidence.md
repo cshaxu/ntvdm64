@@ -128,3 +128,32 @@ this interval; the host may be executing or waiting while the guest CPU state
 is held. It does not distinguish nested callback, host wait, infinite loop,
 or any particular API and does not prove reentrancy. The test worker and
 temporary probe were cleaned up; the original guest was not modified.
+
+## Retained v2 host stack: hard-error dialog
+
+The already retained `ddeml-register-w31-staged-v2.observer.txt` reports
+NTVDM PID 14100 with executable base 0x00f00000 and thread 29892 frame 4
+PC 0x010761ca. Its product image is the r10 NTVDM, identical in hash to the
+msvc-x86-release image paired with the map (SHA256
+`D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5`).
+RVA 0x1761ca lies in `_mvdm_wow_hard_error_present`, whose map interval is
+0x175f90 through before 0x176290. Disassembly of the exact mapped image shows
+that address immediately follows an indirect CALL through IAT RVA 0x18b46c;
+the image import table identifies this slot as `DialogBoxIndirectParamW`.
+Source `src/ntvdm-exe/win32/wow_hard_error_dialog.c` constructs and invokes
+that modal dialog for recognized WOW hard errors. This is strong retained
+stack evidence that the sampled worker thread was within the dialog call when
+the observer captured it, rather than proof that DdeNameService itself was
+blocked in its implementation. No UI interaction was used.
+
+The retained observer has frames but not the hard-error arguments or dialog
+text; earlier guest CCPU snapshots do not expose those native arguments.
+We therefore cannot identify the error code, offending module, call-site,
+original trigger, or whether the independent probe or product caused it.
+Host stack unwinding itself has ordinary limitations, and the saved trace is
+one snapshot from v2; do not infer all runs had the same error. A future
+owned isolated run needs read-only same-desktop window enumeration or a
+bounded native stack/context reader for the exact worker, preserve dialog
+text and process provenance, and distinguish an independently authored probe
+fault from a genuine original guest DDE path. Do not dismiss the dialog or
+invent a result.

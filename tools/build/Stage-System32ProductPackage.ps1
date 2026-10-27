@@ -10,7 +10,8 @@ param(
     [string]$NativeMonitor='',
     [string]$NativeLauncher='',
     [string]$NativeService,
-    [Parameter(Mandatory)][string]$NativeWorker
+    [Parameter(Mandatory)][string]$NativeWorker,
+    [guid]$PackageId = [guid]::NewGuid()
 )
 $ErrorActionPreference='Stop'
 function Get-StageFileSha256([string]$LiteralPath) {
@@ -29,10 +30,19 @@ $baseline=(Resolve-Path -LiteralPath $BaselineRoot).Path
 $cache=(Resolve-Path -LiteralPath $BuildCache).Path
 $wow=(Resolve-Path -LiteralPath $Wow32).Path
 $output=[IO.Path]::GetFullPath($OutputRoot)
+if($PackageId -eq [guid]::Empty){throw 'Package identity must not be empty'}
 $build=(Resolve-Path -LiteralPath "$PSScriptRoot/../../build").Path+'\'
 if(!$output.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or
    (Test-Path -LiteralPath $output)){throw 'Require a fresh repository-build staging root'}
+$manifestPath=Join-Path $output 'product-system32-manifest.json'
+$manifestTemporary=Join-Path $output 'product-system32-manifest.json.pending'
+$stageComplete=$false
+try {
 Copy-Item -LiteralPath $baseline -Destination $output -Recurse
+# A copied baseline manifest describes different bytes and cannot certify this
+# candidate. A failed partial copy is handled by the finally block below.
+if(Test-Path -LiteralPath $manifestPath){Remove-Item -LiteralPath $manifestPath -Force}
+if(Test-Path -LiteralPath $manifestTemporary){Remove-Item -LiteralPath $manifestTemporary -Force}
 $system=Join-Path $output 'system32'
 if(!(Test-Path -LiteralPath $system -PathType Container)){throw 'Baseline lacks original system32 media'}
 $names=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL')
@@ -67,12 +77,14 @@ $manifest=foreach($name in $names){
     if([BitConverter]::ToUInt16($bytes,$pe+4) -ne $expectedMachine){throw "Wrong PE machine input: $name"}
     $destination=Join-Path $system $name
     Copy-Item -LiteralPath $source -Destination $destination -Force
-    $hash=Get-StageFileSha256 $source
-    if((Get-StageFileSha256 $destination) -ne $hash){throw 'Staging hash mismatch'}
+    $sourceHash=Get-StageFileSha256 $source
+    if((Get-StageFileSha256 $destination) -ne $sourceHash){throw 'Staging copy hash mismatch'}
+    & "$PSScriptRoot/Set-PackageIdentity.ps1" -Image $destination -PackageId $PackageId
+    $hash=Get-StageFileSha256 $destination
     # Exact redundant product files only, in the already checked fresh tree.
     $flat=Join-Path $output $name
     if(Test-Path -LiteralPath $flat){Remove-Item -LiteralPath $flat}
-    [pscustomobject]@{Name=$name;RelativePath=('system32\'+$name);Sha256=$hash;Machine=$expectedMachine}
+    [pscustomobject]@{Name=$name;RelativePath=('system32\'+$name);Sha256=$hash;Machine=$expectedMachine;PackageId=$PackageId.ToString();InputSha256=$sourceHash}
 }
 $flatRegistry=Join-Path $output 'NTVDM.REG'
 $registry=Join-Path $system 'NTVDM.REG'
@@ -82,8 +94,19 @@ if(Test-Path -LiteralPath $flatRegistry){
         Remove-Item -LiteralPath $flatRegistry
     }else{Move-Item -LiteralPath $flatRegistry -Destination $registry}
 }
-$manifest|ConvertTo-Json|Set-Content -LiteralPath (Join-Path $output 'product-system32-manifest.json')
 if($NativeHook){
     Copy-Item -LiteralPath "$PSScriptRoot/../../src/nthook32-dll/detours/LICENSE.md" -Destination (Join-Path $system 'nthook32-LICENSE.txt')
 }
+# Publish the completion manifest only after every required staging operation.
+$manifest|ConvertTo-Json|Set-Content -LiteralPath $manifestTemporary
+Move-Item -LiteralPath $manifestTemporary -Destination $manifestPath
+$stageComplete=$true
 'PASS staged coherent system32 host package; explicitly selected native images verified; baseline media/configuration retained'
+} finally {
+    if(!$stageComplete){
+        # Only these exact generated files in the validated fresh output are
+        # removed; preserve all other partial output for diagnosis.
+        if(Test-Path -LiteralPath $manifestPath){Remove-Item -LiteralPath $manifestPath -Force}
+        if(Test-Path -LiteralPath $manifestTemporary){Remove-Item -LiteralPath $manifestTemporary -Force}
+    }
+}
