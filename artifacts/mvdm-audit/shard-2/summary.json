@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "DAB4CAE572957D8C6915BCE30FA67C72D4C25C30CD72FB779749461110D75660",
+  "output_sha256": "80C7CCCAB1D260A524313D08347C754B3CCDC401D8CBE485090DD14F8B6D7667",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -164,5 +164,6 @@
   "wow_directory_sync": "wow-directory-sync-review.md; selected changed row remains partial, real Win16 synchronization unproven",
   "wow_kernel_profile_module": "wow-kernel-profile-module-review.md; DIV-297 registration differs from actual session shadow; validation pending",
   "wow_user_init_domain": "wow-user-init-domain-review.md; original USER final init and session domain, lifecycle runtime evidence bounded",
-  "wow_resource_template_lifecycle": "wow-resource-template-lifecycle-review.md; identical source remains pending, caller failure candidate not reproduced"
+  "wow_resource_template_lifecycle": "wow-resource-template-lifecycle-review.md; identical source remains pending, caller failure candidate not reproduced",
+  "wow_comm_port_lifecycle": "wow-comm-port-lifecycle-review.md; DOS nt_com fixture does not prove WOW USER PortTab behavior"
 }
