@@ -1,0 +1,270 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/not.c",
+      "sha256": "5A9167E678094855463F96F0FF6D959CBB3F2D356AF3C94AB74C9F4BA6BF68F8"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/not.h",
+      "sha256": "8A3CB20A8E512EA11BC353701165606833D83B408B90E0AB070E85924E08C784"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/xchg.c",
+      "sha256": "E5A2FD36C18FDD3D833EEF70B16AB653B49513E9D0767AFB1478EFCA54045F19"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/xchg.h",
+      "sha256": "B12F6F0AB67CE7A232459BE61A8B379D4387CD144470353685663A1F8BBA6386"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/lea.c",
+      "sha256": "F1577B3DEC150B5112803DF1C1E1C41ED8FAA3BAA1552FFD231E22DA541EA486"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/lea.h",
+      "sha256": "3B8028AB680EFF1CD767238A29999BCE219C40B3B4686CD2CC4E22E899554099"
+    }
+  ],
+  "cases": [
+    {
+      "case": "r1",
+      "runner_context": {
+        "parent_pid": 7132,
+        "script_sha256": "C51110A3D6159EC76AE8F9ACEC2C62D44DD3E437350CBA3D8C603A74E57832DC",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "integrity_sid": "S-1-16-8192",
+        "token_class": "medium",
+        "private_desktop": true
+      },
+      "inputs": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "C51110A3D6159EC76AE8F9ACEC2C62D44DD3E437350CBA3D8C603A74E57832DC",
+          "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-transfer-guest.ps1"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "9AD65EF3876229709FB6838B9C6B0CCDCD71A5167C9851E1093E83B74CCE9757",
+          "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_transfer_probe.asm"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "0A207A6BF8BCFB38A6D7D8067E47671458C0F15F410C77C0205528EC13C9D8E7",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\transfer-guest-r1\\EMSPROBE.COM"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A8FD30EC72F5CA28F46FC03E649D7B9608D083B629B798AFC85C786A36790022",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "89BF354A203F4074B63F05FBD8DF7F65CF05EECFE7B98E18EBC81083819A6B66",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+          "Path": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe"
+        }
+      ],
+      "runtime": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43",
+          "Path": "O:\\tmp\\n022\\system32\\COMMAND.COM"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A26389C6B2A9C9D11A524372487581ECAA3201141199708D4E55F92D2BB75050",
+          "Path": "O:\\tmp\\n022\\system32\\ntcon.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "B03FD4950FD54ECD5E39DF32BD4919D985B32E22F17C7D1E0A8C07B430B86935",
+          "Path": "O:\\tmp\\n022\\system32\\nthook32.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "50DA1504B86D9945995848C28D40D110C74E51F7791CF6EBBF3319011804B068",
+          "Path": "O:\\tmp\\n022\\system32\\nthook64.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "D6A36563C9E1FDF54E90C1B069B655684816B794D6E7B4E5A34B2B99AF682962",
+          "Path": "O:\\tmp\\n022\\system32\\ntmon.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "5343F1F8A017FFF0A9D7EA58B2F5484DC382E7C59562D37D1F8BD9BAF965FD06",
+          "Path": "O:\\tmp\\n022\\system32\\ntsrv.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+          "Path": "O:\\tmp\\n022\\system32\\ntvdm.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "CE60E28AE10E56B409BD21F5598BA5C2EC5D2CDEC1B0F0B8366278CC4B5B6D1C",
+          "Path": "O:\\tmp\\n022\\system32\\ntvwm.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "2A5AC5D45BF8C0BA0379AB69FD9010A1ADD10DE8E42160B3D1BBF1B4660B5DE1",
+          "Path": "O:\\tmp\\n022\\system32\\run16.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "52804FA2C0FC724C120E3426CC6D6BE78B34A6014115AAD7C2AEB6FFC0C6A9BE",
+          "Path": "O:\\tmp\\n022\\system32\\VDMREDIR.DLL"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83",
+          "Path": "O:\\tmp\\n022\\system32\\WOW32.DLL"
+        }
+      ],
+      "observer": "container=console-owning-nondebug\npid=19808\nresult=exited\nexit=0x00000000\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=2092\nconsole-members-after-wait=2\nconsole-member=29584\nconsole-member=2092\ndirect-child pid=14784 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n022\\system32\\ntsrv.exe\ntimeout-ms=45000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n022\\tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\n022\\tests\nimage-identity=unavailable\n",
+      "console": "# buffer=53,9001 viewport=0,0,52,14\n[0] CCPU NOT XCHG LEA PASS checks=3276800\n",
+      "result": "PASS independent COM -> original CPU40 decoder/NOT/XCHG/LEA owners; normal launcher exit; no original guest modification\n",
+      "observer_process": {
+        "timeoutSeconds": 55,
+        "start": "2026-10-27T17:38:09.6736622Z",
+        "arguments": [
+          "O:\\tmp\\n022/system32/run16.exe",
+          "O:\\tmp\\n022\\tests",
+          "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\transfer-guest-r1/observer.txt",
+          "--wait",
+          "O:\\tmp\\n022\\tests/E30.PIF",
+          "--observation-timeout-ms",
+          "45000"
+        ],
+        "pid": 28804
+      }
+    },
+    {
+      "case": "negative-r1",
+      "runner_context": {
+        "integrity_sid": "S-1-16-8192",
+        "token_class": "medium",
+        "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "script_sha256": "C51110A3D6159EC76AE8F9ACEC2C62D44DD3E437350CBA3D8C603A74E57832DC",
+        "parent_pid": 10792,
+        "private_desktop": true
+      },
+      "inputs": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "C51110A3D6159EC76AE8F9ACEC2C62D44DD3E437350CBA3D8C603A74E57832DC",
+          "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-transfer-guest.ps1"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "9AD65EF3876229709FB6838B9C6B0CCDCD71A5167C9851E1093E83B74CCE9757",
+          "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_transfer_probe.asm"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A438A911918A6E0E34338DB59D9089E53C68F12D5F04835271E0D641C1606AEC",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\transfer-guest-negative-r1\\EMSPROBE.COM"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A8FD30EC72F5CA28F46FC03E649D7B9608D083B629B798AFC85C786A36790022",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "89BF354A203F4074B63F05FBD8DF7F65CF05EECFE7B98E18EBC81083819A6B66",
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8",
+          "Path": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe"
+        }
+      ],
+      "runtime": [
+        {
+          "Algorithm": "SHA256",
+          "Hash": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43",
+          "Path": "O:\\tmp\\n6b5\\system32\\COMMAND.COM"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "A26389C6B2A9C9D11A524372487581ECAA3201141199708D4E55F92D2BB75050",
+          "Path": "O:\\tmp\\n6b5\\system32\\ntcon.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "B03FD4950FD54ECD5E39DF32BD4919D985B32E22F17C7D1E0A8C07B430B86935",
+          "Path": "O:\\tmp\\n6b5\\system32\\nthook32.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "50DA1504B86D9945995848C28D40D110C74E51F7791CF6EBBF3319011804B068",
+          "Path": "O:\\tmp\\n6b5\\system32\\nthook64.dll"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "D6A36563C9E1FDF54E90C1B069B655684816B794D6E7B4E5A34B2B99AF682962",
+          "Path": "O:\\tmp\\n6b5\\system32\\ntmon.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "5343F1F8A017FFF0A9D7EA58B2F5484DC382E7C59562D37D1F8BD9BAF965FD06",
+          "Path": "O:\\tmp\\n6b5\\system32\\ntsrv.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+          "Path": "O:\\tmp\\n6b5\\system32\\ntvdm.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "CE60E28AE10E56B409BD21F5598BA5C2EC5D2CDEC1B0F0B8366278CC4B5B6D1C",
+          "Path": "O:\\tmp\\n6b5\\system32\\ntvwm.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "2A5AC5D45BF8C0BA0379AB69FD9010A1ADD10DE8E42160B3D1BBF1B4660B5DE1",
+          "Path": "O:\\tmp\\n6b5\\system32\\run16.exe"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "52804FA2C0FC724C120E3426CC6D6BE78B34A6014115AAD7C2AEB6FFC0C6A9BE",
+          "Path": "O:\\tmp\\n6b5\\system32\\VDMREDIR.DLL"
+        },
+        {
+          "Algorithm": "SHA256",
+          "Hash": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83",
+          "Path": "O:\\tmp\\n6b5\\system32\\WOW32.DLL"
+        }
+      ],
+      "observer": "container=console-owning-nondebug\npid=32836\nresult=exited\nexit=0x00000001\ngraphics-handshake=none\npost-exit-observation-ms=0\nconsole-owner-observer=28584\nconsole-members-after-wait=2\nconsole-member=26632\nconsole-member=28584\ndirect-child pid=31172 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\\tmp\\n6b5\\system32\\ntsrv.exe\ntimeout-ms=45000\nmilestone-input=0 milestone-waits=0 milestone-wait-ms=0\nwindow-key-message-count=0 window-enter-count=0\nscripted-console-input=none\nconsole-mouse-mode-observed=no\nconsole-mouse-input=none\nfixed-system-root=O:\\tmp\\n6b5\\tests\nfixed-system-root-chars=17\nfixed-system-root-short-chars=17\nfixed-system-root-short=O:\\tmp\\n6b5\\tests\nimage-identity=unavailable\n",
+      "console": "# buffer=53,9001 viewport=0,0,52,14\n[0] CCPU TRANSFER FAIL phase=1\n",
+      "result": "PASS deliberately wrong NOT expectation rejected; guest exit=1; no success marker\n",
+      "observer_process": {
+        "start": "2026-10-27T17:38:27.6437490Z",
+        "arguments": [
+          "O:\\tmp\\n6b5/system32/run16.exe",
+          "O:\\tmp\\n6b5\\tests",
+          "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\transfer-guest-negative-r1/observer.txt",
+          "--wait",
+          "O:\\tmp\\n6b5\\tests/E30.PIF",
+          "--observation-timeout-ms",
+          "45000"
+        ],
+        "pid": 7176,
+        "timeoutSeconds": 55
+      }
+    }
+  ],
+  "limitations": [
+    "Real-mode 16-bit default with explicit 32-bit operand/address prefixes, not protected default modes.",
+    "Every low16 input with two upper sentinels; not exhaustive paired32 inputs.",
+    "Guest memory fault/atomicity/address decoder semantics and worker teardown remain independently audited."
+  ]
+}

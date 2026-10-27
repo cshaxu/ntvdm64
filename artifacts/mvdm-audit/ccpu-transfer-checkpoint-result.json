@@ -1,0 +1,52 @@
+{
+  "result": "pass",
+  "paths": 4684,
+  "counts": {
+    "pending": 2942,
+    "excluded": 1466,
+    "partial": 224,
+    "full": 52
+  },
+  "new_full_files": [
+    "softpc.new/base/ccpu386/lea.c",
+    "softpc.new/base/ccpu386/lea.h",
+    "softpc.new/base/ccpu386/not.c",
+    "softpc.new/base/ccpu386/not.h",
+    "softpc.new/base/ccpu386/xchg.c",
+    "softpc.new/base/ccpu386/xchg.h"
+  ],
+  "full_executable_leaves": 26,
+  "full_declarations": 26,
+  "actual_guest_checks": 3276800,
+  "positive_and_negative_guest": true,
+  "image_and_wrong_image_control": true,
+  "owned_stages_absent": true,
+  "ten_images_unchanged": true,
+  "source_drift": [
+    {
+      "relative_path": "README.md",
+      "current_sha256": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+    },
+    {
+      "relative_path": "dpmi32/modesw.c",
+      "current_sha256": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+    },
+    {
+      "relative_path": "softpc.new/base/video/v7_ports.c",
+      "current_sha256": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA"
+    },
+    {
+      "relative_path": "softpc.new/base/video/vga_mode.c",
+      "current_sha256": "F5F2C3150C6B3D41B49D34D901208F0AEE74603758BFF7EFA6A8B543E485F714"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_bop.c",
+      "current_sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_graph.c",
+      "current_sha256": "3B2E6D7959A93B05B3F3856E3A00E9455EE64DF489A36712643CB257FB5D3E86"
+    }
+  ],
+  "scope": "Complete selected pure pointer leaf/declaration contracts; not all32bit inputs or whole decoder/CPU/lifecycle"
+}

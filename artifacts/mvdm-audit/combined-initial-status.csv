@@ -1465,8 +1465,8 @@ softpc.new/base/ccpu386/lahf.c,1,full,shard-1/file-audit.csv
 softpc.new/base/ccpu386/lahf.h,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/lar.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/lar.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/ccpu386/lea.c,0,pending,shard-0/review.csv
-softpc.new/base/ccpu386/lea.h,2,pending,shard-2/file-audit.csv
+softpc.new/base/ccpu386/lea.c,0,full,shard-0/review.csv
+softpc.new/base/ccpu386/lea.h,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/leave.c,1,pending,shard-1/file-audit.csv
 softpc.new/base/ccpu386/leave.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/ccpu386/lgdt.c,1,pending,shard-1/file-audit.csv
@@ -1498,8 +1498,8 @@ softpc.new/base/ccpu386/neg.h,2,full,shard-2/file-audit.csv
 softpc.new/base/ccpu386/newnpx.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/nop.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/nop.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/ccpu386/not.c,3,pending,shard-3/file-review.csv
-softpc.new/base/ccpu386/not.h,0,pending,shard-0/review.csv
+softpc.new/base/ccpu386/not.c,3,full,shard-3/file-review.csv
+softpc.new/base/ccpu386/not.h,0,full,shard-0/review.csv
 softpc.new/base/ccpu386/ntstubs.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/ntthread.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/ntthread.h,1,partial,shard-1/file-audit.csv
@@ -1583,8 +1583,8 @@ softpc.new/base/ccpu386/wbinvd.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/wbinvd.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/xadd.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/xadd.h,0,pending,shard-0/review.csv
-softpc.new/base/ccpu386/xchg.c,0,pending,shard-0/review.csv
-softpc.new/base/ccpu386/xchg.h,1,pending,shard-1/file-audit.csv
+softpc.new/base/ccpu386/xchg.c,0,full,shard-0/review.csv
+softpc.new/base/ccpu386/xchg.h,1,full,shard-1/file-audit.csv
 softpc.new/base/ccpu386/xlat.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/xlat.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/ccpu386/xor.c,1,full,shard-1/file-audit.csv

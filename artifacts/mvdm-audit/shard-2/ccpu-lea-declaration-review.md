@@ -1,0 +1,13 @@
+# CCPU LEA declaration and leaf boundary
+
+Of NOT/LEA/XCHG/JCXZ source and header paths, this shard owns only `softpc.new/base/ccpu386/lea.h` (SHA-256 3B8028AB680EFF1CD767238A29999BCE219C40B3B4686CD2CC4E22E899554099, original/OpenNT45/current identical). It contains only `IMPORT VOID LEA IPT2(IU32 *, pop1, IU32, op2)`, expanding in selected `/DANSI` profile to `extern void LEA(IU32 *pop1, IU32 op2)` with default x86 cdecl. Current deps snapshot records exact path for both `obj/ccpu/c_main.obj` and `obj/ccpu/lea.obj` as VALID. The original source/implementation belongs to shard 0 and was read-only.
+
+Original `lea.c::LEA` only writes `*pop1=op2`. `c_main.c:2744-2761` handles opcode 8D by fetching ModRM, selecting USE16 or USE32 destination, calling D_M/F_M to obtain the address operand, invoking LEA, and P_Gw/P_Gd to write the result. Flag preservation follows from the leaf body; address decoding, register-vs-memory encoding validity, destination width and fault behavior are decoder/operand owners, not the leaf. Ninja emits lea.obj and selected map names `_LEA`; that map cannot alone prove correspondence to the exact tested deployed image.
+
+For finite selected header/leaf evidence: verify complete lea.obj body and decoder call sites in the tested PE, then run independent guest checks with different effective address inputs, operand/address widths and destinations; preserve flags. Tests of 16/32 addressing and wrap, and invalid ModRM should be separately attributed to decoder/address owner. A real guest pass alone does not prove every page, fault or invalid-prefix condition. Keep this header pending until evidence is available; no product/guest modifications or execution here.
+
+## Independent selected declaration disposition
+
+Current `lea.obj`, `c_main.obj` and package-c NTVDM SHA-256 match `ccpu-transfer-image.json`; its complete 11-byte LEA body appears in the tested PE, and both decoder relative-transfer targets resolve to that body. The actual guest `ccpu-transfer-guest.json` reports all four operand/address-size combinations, varied base/index/displacement, wrap, flags and non-dereference checks as part of 3,276,800 total group checks. Its wrong-NOT expectation is a group harness negative control, not a separate LEA failure case.
+
+The header contains only the one exact typed declaration, selected under ANSI/default x86 cdecl; both actual consumers' cached exact dependencies are VALID. Together these establish its selected declaration contract: full/100 for this file only. The 32-bit space is sampled; invalid encodings, prefix/fault and protected default modes remain decoder/other owners.

@@ -9,8 +9,8 @@ used the disjoint frozen path shards described by `manifest.json`.
 reasoning and limitations are in each shard directory. Current counts are
 224 partial (205 existing source-difference rows and 19 partially integrated
 build manifests), 1,466 excluded (documented profile, historical recipe,
-source roles or unused retained objects), 46 full files (23 executable
-leaves and 23 declarations) and 2,948 pending. Exclusion of an object or provider does not prove its guest
+source roles or unused retained objects), 52 full files (26 executable
+leaves and 26 declarations) and 2,942 pending. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
@@ -91,7 +91,7 @@ The dormant original [multimedia host body](shard-2/wow-multimedia-inactive-body
 
 The focused unselected-source records are [shard 0](shard-0/nonruntime-source-disposition.md), [shard 1](shard-1/unselected-finite-worklist.md), [shard 2](shard-2/unselected-host-role-disposition.md), and [shard 3](shard-3/unselected-host-tooling-disposition.md). Independent component nonselection alone is not a capability exclusion.
 
-The [23 full selected leaf contracts](full-selected-leaf.csv) combine
+The [26 full selected leaf contracts](full-selected-leaf.csv) combine
 unchanged original source, actual published code/decoder targets and
 [real guest positive and negative evidence](ccpu-sign-flags-contracts.md).
 Their status does not close the broader CPU decoder or execution owners.
@@ -105,6 +105,10 @@ historical guest objects, symbols/listings and recipes from source and runtime
 capability. Guest sources, resources, libraries and unproved binary lineage
 remain explicitly in scope; no original guest was rebuilt.
 
-The [23 full selected declaration files](full-selected-declarations.csv)
+The [26 full selected declaration files](full-selected-declarations.csv)
 have a [separate ABI closure](ccpu-leaf-header-abi.md); they do not double
 the number of verified instructions or close a broader CPU contract.
+
+The [NOT/XCHG/LEA pointer contracts](ccpu-transfer-contracts.md) add
+3,276,800 actual guest checks and three complete source/declaration pairs.
+The 486 profile findings remain a finite S11 recovery group, not an exclusion.

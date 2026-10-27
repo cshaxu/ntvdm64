@@ -1,0 +1,7 @@
+{
+  "stderr": "Traceback (most recent call last):\r\n  File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify_ccpu_transfer_image.py\", line 65, in <module>\r\n    main()\r\n    ~~~~^^\r\n  File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify_ccpu_transfer_image.py\", line 24, in main\r\n    assert len(matches) == 1\r\n           ^^^^^^^^^^^^^^^^^\r\nAssertionError\r\n",
+  "rejected": "Wrong x86 image lacks selected CCPU decoder",
+  "exit": 1,
+  "pid": 12228,
+  "result": "pass"
+}

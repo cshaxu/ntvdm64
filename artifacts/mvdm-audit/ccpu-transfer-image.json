@@ -1,0 +1,102 @@
+{
+  "result": "pass",
+  "image_sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+  "functions": [
+    {
+      "name": "not",
+      "object_sha256": "09095EC48FC03E9A1EAF6BDE5A14E40DFCBDD2040E5D5C3C5384AC9A2938380D",
+      "bytes": 7,
+      "body_match_vas": [
+        4351376
+      ],
+      "decoder_references": [
+        {
+          "reference_va": 4282134,
+          "kind": "relative_transfer",
+          "target_va": 4351376
+        },
+        {
+          "reference_va": 4283674,
+          "kind": "relative_transfer",
+          "target_va": 4351376
+        },
+        {
+          "reference_va": 4283862,
+          "kind": "relative_transfer",
+          "target_va": 4351376
+        },
+        {
+          "reference_va": 4283900,
+          "kind": "relative_transfer",
+          "target_va": 4351376
+        },
+        {
+          "reference_va": 4284138,
+          "kind": "relative_transfer",
+          "target_va": 4351376
+        }
+      ]
+    },
+    {
+      "name": "xchg",
+      "object_sha256": "B72216C94A3B85E4BAB270BA77B87907CA94E356D7D4F824A8EADD0D2FBFA945",
+      "bytes": 19,
+      "body_match_vas": [
+        4356016
+      ],
+      "decoder_references": [
+        {
+          "reference_va": 4258768,
+          "kind": "relative_transfer",
+          "target_va": 4356016
+        },
+        {
+          "reference_va": 4259211,
+          "kind": "relative_transfer",
+          "target_va": 4356016
+        },
+        {
+          "reference_va": 4259583,
+          "kind": "relative_transfer",
+          "target_va": 4356016
+        },
+        {
+          "reference_va": 4263153,
+          "kind": "relative_transfer",
+          "target_va": 4356016
+        },
+        {
+          "reference_va": 4263209,
+          "kind": "relative_transfer",
+          "target_va": 4356016
+        }
+      ]
+    },
+    {
+      "name": "lea",
+      "object_sha256": "3899E53EC51E251F4C43ED09C135E93DFA8F4BCE9CC20A12FC27058A425BBA9B",
+      "bytes": 11,
+      "body_match_vas": [
+        4349632
+      ],
+      "decoder_references": [
+        {
+          "reference_va": 4262020,
+          "kind": "relative_transfer",
+          "target_va": 4349632
+        },
+        {
+          "reference_va": 4262091,
+          "kind": "relative_transfer",
+          "target_va": 4349632
+        }
+      ]
+    }
+  ],
+  "checker_sha256": "9B9F1A6CC89D79CFC1BE78BA7F9F84A7DD9B1BF62B76D33EC075C8871E25877E",
+  "parser_sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64",
+  "decoder_object_sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986",
+  "decoder_function_bytes": 55972,
+  "decoder_relocations": 6531,
+  "limitation": "Code/reference evidence only; actual behavior is tested separately"
+}

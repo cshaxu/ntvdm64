@@ -1,0 +1,5 @@
+# NOT selected leaf independent review
+
+Original `not.c` has one complete operation `*pop1 = ~*pop1`, no separate flags, allocation or callback; its pointer is the decoder's valid local operand. The source SHA `5A9167E678094855463F96F0FF6D959CBB3F2D356AF3C94AB74C9F4BA6BF68F8` matches frozen original and guest evidence. Published package-c NTVDM SHA `01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6` matches image evidence; the latter matches the full 7-byte NOT body and all recorded decoder transfer targets. Real guest r1 recorded the 3,276,800 overall NOT/XCHG/LEA checks and success; a separate wrong-NOT expectation failed as intended. Probe covers NOT register/aligned/unaligned memory at three widths, low-word exhaustive with two upper sentinels, guards and arithmetic/DF flags.
+
+The complete selected pure NOT leaf is full/100% by source reasoning and bounded real evidence. This is **not** exhaustive all 32-bit values or proof of decoder prefix/fault/atomicity, other CPU modes, asynchronous execution or lifecycle. No product or guest changed; this independent review did not rerun the test.
