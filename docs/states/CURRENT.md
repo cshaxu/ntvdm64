@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S8**
+**Active: M0 T473 S9**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
@@ -10,28 +10,28 @@ documentation admission.
 Automatic progression: recover original WOW behavior with minimum bindings;
 no guest change.
 
-The published ten-image package remains `build/t467-s3/package-r2`; guest
-media is unchanged.
+The published ten-image package is `build/t473-s8/package-r3`; guest media is
+unchanged.
 
 ## Active Packet
 
-### M0 T473 S8 — WOW32 public-USER identity and retirement recovery
+### M0 T473 S9 — generic public-USER wrapper identity audit
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S8, Ordinary Mode. |
-| Admission And Approval | [S7 closure](../history/m0-t473-s7-closure.md); automatic progression admits the next finite owner group. |
-| Objective | Prove and repair, if needed, public HWND/menu/dialog identity, ownership and retirement through selected original WOW32 callers without private USER reconstruction. |
+| Identifier Mode | M0 T473 S9, Ordinary Mode. |
+| Admission And Approval | [S8 closure](../history/m0-t473-s8-closure.md); automatic progression admits the next finite owner group. |
+| Objective | Audit the distinct generic public-USER wrapper family and repair only a proved HWND carrier/native identity mismatch without reconstructing private USER. |
 | Non-goals | Guest changes; host-window-style; a new message engine; DOS/COMMAND, device or redirector expansion. |
-| Reference Baseline | [S7 audit](../etc/evidence/m0-t473-s7-wow-session-callback-audit.md), [T463 public-HWND boundary](../etc/evidence/m0-t463-s2-sol-options-attribution.md) and unchanged T467 package. |
-| Files And ABI Surface | Selected original `wu*`/menu/dialog callers, public-USER object/view bindings and task/window retirement. |
+| Reference Baseline | [S8 recovery](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md), [T463 public-HWND boundary](../etc/evidence/m0-t463-s2-sol-options-attribution.md) and T473 S8 package. |
+| Files And ABI Surface | `wow_user_task_lifecycle` generic wrappers, selected original callers and public object/view retirement. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
-| Verification | Original/public mapping normal, rejection, nested callback, destruction/reuse and worker cleanup; formal link/map plus focused fixtures. |
-| Expected Markers | Original WOW bodies remain owners; native USER owns HWND/resources; no private USER token becomes a host object. |
+| Verification | Per-call ownership/carrier trace, normal/rejection/nested callback/destruction-reuse witness, formal link/map and focused fixtures. |
+| Expected Markers | Original WOW bodies remain owners; host USER owns HWND/resources; no private USER token becomes a host object. |
 | Asset Needs | Pinned original sources, existing CPU40 fixtures and real worker/package runner; guest media remains immutable. |
-| Reporting Requirements | Caller/owner chain, normal/failure/retirement evidence, source/adapter diff and package identity. |
+| Reporting Requirements | Per-wrapper disposition, null/pseudo/foreign/multi-HWND matrix, lifecycle evidence, source/adapter diff and package identity. |
 | Stop Conditions | Guest change, private USER layout, unpinned source, semantic concession or unrelated owner. |
-| Exit Criteria | One coherent object/retirement route has lifecycle evidence; a production change receives full package delivery. |
+| Exit Criteria | Each selected wrapper has a source-backed retained/repaired disposition; any production repair has coherent package delivery. |
 | Original Owner Request | Recover complete original MVDM composition with minimum non-original footprint and no capability loss. |
 | Similar-Issue Sweep | USER object mapping, menu/dialog callbacks, nested cross-boundary return, task cleanup, worker teardown, handle reuse, and host call error/last-error transfer. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
@@ -155,6 +155,12 @@ and untracked.
 S7 closed at [its session/callback ownership audit](../etc/evidence/m0-t473-s7-wow-session-callback-audit.md)
 without a runtime change; S8 owns public-USER object identity and retirement.
 
+## S8 Closure Record
+
+S8 closes at its [public-USER evidence](../etc/evidence/m0-t473-s8-public-user-identity-recovery.md).
+The ten-image package is published; the skipped direct completion/input
+control observation remains a non-pass. S9 owns generic wrappers.
+
 ## S6 Closure Record
 
 S6 was a no-runtime [status-sequence correction](../etc/evidence/m0-t473-s6-status-sequence-correction.md);
@@ -180,9 +186,9 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-T467 S3 is the current coherent ten-image delivery. Its release identity is
+T473 S8 is the current coherent ten-image delivery. Its release identity is
 `assets/release/release-manifest.json`; all ten files are hash-equal to
-`O:\winnt\system32` and `build/t467-s3/package-r2/SYSTEM32`. Guest media remains
+`O:\winnt\system32` and `build/t473-s8/package-r3/system32`. Guest media remains
 unchanged.
 
 ## Temporary Evidence
@@ -204,7 +210,7 @@ T471 S2/S3 may use only `build/t471-s2` for disposable acceptance evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T473 S1/S8 may use only `build/t473-s1` for disposable closure-ledger and
+T473 S1/S9 may use only `build/t473-s9` for disposable closure-ledger and
 WOW-session evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
