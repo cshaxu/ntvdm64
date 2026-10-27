@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\ccpu-foundation-role-merge.py", line 15, in <module>
+    assert observed == json.loads((A / 'ccpu-foundation-observations.json').read_text())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

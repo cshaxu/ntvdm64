@@ -22,13 +22,14 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [CCPU declaration review](../../artifacts/mvdm-audit/selected-ccpu-header-role-review.md)
 adds 71 partial declaration slices from actual compiler-selected tokens.
-The ledger retains 1,697 pending, 390 partial, 52 full and 2,545 excluded
+The ledger retains 1,688 pending, 399 partial, 52 full and 2,545 excluded
 physical file roles. Source/ABI and real guest/device proof remain open;
 these checkpoints changed no runtime image.
 
 The [CCPU foundation review](../../artifacts/mvdm-audit/ccpu-core-source-review.md)
 adds 631,410 actual-object NEG64 cases, ABI/oracle negatives and candidate
-signed-caller code correspondence; guest decoder/fault acceptance remains open.
+signed-caller code correspondence. Nine foundation files are partial after
+33 linked-function checks; guest decoder/fault acceptance remains open.
 
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
 passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;

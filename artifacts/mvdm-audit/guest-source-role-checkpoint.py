@@ -95,7 +95,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-build-recipe-file-only':
                     assert prefix == 'historical-build-role-'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -128,6 +128,18 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'ccpu-foundation-role-':
+        observed = json.loads((A / 'ccpu-foundation-observations.json').read_text())
+        actual = runpy.run_path(str(A / 'ccpu-foundation-observer.py'))['inspect']()
+        assert observed == actual and len(actual['records']) == 6
+        assert sum(len(r['functions']) for r in actual['records']) == 33
+        paths = {r['relative_path'] for r in actual['records']}
+        paths.update(h['relative_path'] for r in actual['records'] for h in r['headers'])
+        assert paths == set(changed) and len(paths) == 9
+        for proof in dispositions:
+            assert proof['status'] == 'partial' and proof['original_text_retained_percent'] == '100'
+            assert not proof['estimated_restored_code_percent']
+            assert proof['restored_estimate_status'].startswith('unmeasurable:')
     if prefix == 'selected-ccpu-header-role-':
         cohort=sorted(p for p,r in old.items() if r['status']=='pending' and
                       p.startswith('softpc.new/base/ccpu386/') and p.endswith('.h'))
@@ -394,7 +406,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

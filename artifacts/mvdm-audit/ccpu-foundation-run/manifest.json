@@ -1,0 +1,90 @@
+{
+  "records": [
+    {
+      "file": "deps.completion.json",
+      "bytes": 66,
+      "sha256": "CB6C5D82A9A3FC583A55EE0D36EAC9C151CA505D23728E3D4C2DFDD33C847FE4"
+    },
+    {
+      "file": "deps.process.json",
+      "bytes": 468,
+      "sha256": "18E97A41AAAE9532ED861CE23EB5D92FB8841A26F913DD78C082DE2ED6814564"
+    },
+    {
+      "file": "merge-r2.completion.json",
+      "bytes": 66,
+      "sha256": "F86610381934841382845563EFE05167AA56C7BFA70F02B70B55A4822094F4AC"
+    },
+    {
+      "file": "merge-r2.process.json",
+      "bytes": 364,
+      "sha256": "9FFC439B99A89CD32A89BC68C173D1D78DE757767329DC9A010E11E5BC60636D"
+    },
+    {
+      "file": "merge-r2.ps1",
+      "bytes": 264,
+      "sha256": "6F5A7EFF992590261FA3B6475DBB7AC0E002E7E6098675B7D67A3CA68583C8CF"
+    },
+    {
+      "file": "merge-r2.stdout.txt",
+      "bytes": 434,
+      "sha256": "E684D02B7F9B4C94D10A632841F621FCBF420F06F2211D77DE54C1DA9E9CE5A1"
+    },
+    {
+      "file": "merge.completion.json",
+      "bytes": 66,
+      "sha256": "EEF0A997891D19E151CD5D7B94A1389431B9E8BC4A4BFB81DE3B8750081FC5ED"
+    },
+    {
+      "file": "merge.process.json",
+      "bytes": 242,
+      "sha256": "F6BC9B6CFB7610BA605F8374A9526C26157CFFA2DF150A54AD121DECA606A6BD"
+    },
+    {
+      "file": "merge.stderr.txt",
+      "bytes": 338,
+      "sha256": "031D0E339DD63CC295924BD1D32325B332F80B9CEDCEDD05D1FF754A117C50E9"
+    },
+    {
+      "file": "observer.completion.json",
+      "bytes": 66,
+      "sha256": "F9C837C1322D74B8DFB85C1264678D51B73C16E16B0C939CEECD5A0756CB2A50"
+    },
+    {
+      "file": "observer.process.json",
+      "bytes": 239,
+      "sha256": "BE764F9F92FDC94501C0FC84DE6F45D19DE8D06EBCF59631B88E45FE2C774D8C"
+    },
+    {
+      "file": "observer.stdout.txt",
+      "bytes": 51,
+      "sha256": "BF0103F90855AAF8904D532B850219931DCEDDE17369AD5B0D2112F405D1BF9A"
+    },
+    {
+      "file": "verify.completion.json",
+      "bytes": 66,
+      "sha256": "256CC7501585F7C1A722C6B7E3BD8E029F1FA4F6DE28F73F32412D32FF73D37E"
+    },
+    {
+      "file": "verify.process.json",
+      "bytes": 387,
+      "sha256": "ABD0C4EA91D7ED668A6F83F13DCE8C99B82FDEF1F187F732E553AFFD46339975"
+    },
+    {
+      "file": "verify.stderr.txt",
+      "bytes": 115,
+      "sha256": "189226F012AFE78998A43626E27CAF759B021C5FEFBDF44C2308E0F33C050D04"
+    },
+    {
+      "file": "verify.stdout.txt",
+      "bytes": 583,
+      "sha256": "5802AA40B5F2FCA873EF1AC1D0AE6841B7CC11320FB14C0F7EE6D4ED369D8252"
+    }
+  ],
+  "first_merge_failed_before_ledger_mutation": true,
+  "first_merge_reason": "Observer script identity was absolute when executed directly, relative under runpy; corrected to resolved path and replayed",
+  "final_result": "pass",
+  "production_changed": false,
+  "scope": "Owned read-only build metadata observation and nine-row partial-integration reconciliation",
+  "guest_changed": false
+}

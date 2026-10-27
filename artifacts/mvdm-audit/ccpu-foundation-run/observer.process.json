@@ -1,0 +1,7 @@
+{
+  "pid": 14864,
+  "started": "2026-10-27T23:31:31.7036432Z",
+  "arguments": "-B -X utf8 artifacts/mvdm-audit/ccpu-foundation-observer.py",
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "diagnostic_budget_seconds": 60
+}

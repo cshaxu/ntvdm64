@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\ninja.exe",
+  "arguments": "-C build/.ninja/msvc-x86-release/worker -t deps obj/ccpu/c_addr.obj obj/ccpu/c_bsic.obj obj/ccpu/c_intr.obj obj/ccpu/c_neg64.obj obj/ccpu/c_prot.obj obj/ccpu/c_stack.obj",
+  "pid": 33368,
+  "diagnostic_budget_seconds": 60,
+  "started": "2026-10-27T23:31:22.7948054Z"
+}

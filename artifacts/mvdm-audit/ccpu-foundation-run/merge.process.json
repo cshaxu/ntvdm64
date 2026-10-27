@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-27T23:32:02.3581978Z",
+  "pid": 23676,
+  "diagnostic_budget_seconds": 120,
+  "arguments": "-B -X utf8 artifacts/mvdm-audit/ccpu-foundation-role-merge.py"
+}

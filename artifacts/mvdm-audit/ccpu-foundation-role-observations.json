@@ -1,0 +1,42 @@
+{
+  "result": "pass",
+  "base": "094c0cd96",
+  "candidate_count": 9,
+  "source_tables": [
+    {
+      "path": "ccpu-foundation-observations.json",
+      "sha256": "4E89B2D780C5C92BA9AB5A28ABF0E61084FFE789421594EBF94FC93A08CDD4BF"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "scope": "Partial original source integration, not complete guest capability acceptance"
+}

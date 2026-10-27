@@ -5,7 +5,15 @@ new CPU profile. The [nine source identities](ccpu-neg64/source-identities.json)
 match both frozen original editions and the current mirror. No production,
 guest, library, build graph, release or ledger bytes change. Original source
 text retention is 100 percent; this is not a semantic restoration percentage.
-All nine roles remain pending until their required evidence is reconciled.
+The subsequent [nine dispositions](ccpu-foundation-role-dispositions.csv)
+record partial source integration; complete guest acceptance remains open.
+The [foundation observation](ccpu-foundation-observations.json) checks six
+explicit compiler edges, original archive membership, VALID dependency blocks,
+three original headers and 33 map-owned emitted functions. It compares every
+nonrelocated function byte at the actual map address against the selected
+COFF object. This does not validate every relocation target or establish
+that the guest exercised a function. The common ledger checker independently
+replays this observation; only these nine pending rows become partial.
 
 ## Source review and finite outstanding evidence
 
@@ -82,6 +90,10 @@ before inspecting an image. The corrected `system32/ntvdm.exe` invocation
 passed. This was a test-launch error, not a runtime regression.
 
 No mirror diff is introduced and no file is promoted to full on these native
-results. S10 still owns the per-file reconciliation; the approved S11 CPU
+results or object observations. The resulting ledger has 1,688 pending, 399
+partial, 52 full and 2,545 excluded physical roles. A first replay comparison
+found relative versus absolute observer-script identity paths; canonicalizing
+that input corrected the reproducibility error before any ledger mutation.
+S10 still owns the per-file reconciliation; the approved S11 CPU
 stage owns the behavioral obligations above. The candidate SOL Options
 failure remains unexplained and publication remains unqualified.

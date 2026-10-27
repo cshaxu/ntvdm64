@@ -1,0 +1,350 @@
+{
+  "result": "pass",
+  "records": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_addr.c",
+      "sha256": "C60E097B1CCAF789C1B37098085E337118E765A357ACD0950CE01C5A08AB129A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_addr.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_addr.obj",
+      "object_sha256": "34B63F6FB9A8DC7A0592C6D1284347A176F04FC2E5A410737924A7A702F61BF5",
+      "compile_edge": "build obj/ccpu/c_addr.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_addr.c",
+      "dependency_block": "obj/ccpu/c_addr.obj: #deps 23, deps mtime 8147602772389450 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_mem.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/fault.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_address_add",
+          "va": 4298224,
+          "bytes": 21,
+          "relocation_words": 1,
+          "nonrelocated_bytes_matched": 17
+        },
+        {
+          "symbol": "_d_mem",
+          "va": 4298256,
+          "bytes": 1708,
+          "relocation_words": 120,
+          "nonrelocated_bytes_matched": 1228
+        },
+        {
+          "symbol": "_limit_check",
+          "va": 4299968,
+          "bytes": 211,
+          "relocation_words": 9,
+          "nonrelocated_bytes_matched": 175
+        }
+      ],
+      "headers": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_bsic.c",
+      "sha256": "F02ABB067552707B136E6FA87AC3DD8096A468D3DA947699802FD9A1EDA29A8B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_bsic.obj",
+      "object_sha256": "F7E947B4C573BC1E41BB4B2D8BA32384CAF0A0F078C68D18503DC3E5946601BA",
+      "compile_edge": "build obj/ccpu/c_bsic.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_bsic.c",
+      "dependency_block": "obj/ccpu/c_bsic.obj: #deps 21, deps mtime 8147602776207085 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_page.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_c_getEFLAGS",
+          "va": 4226592,
+          "bytes": 110,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 58
+        },
+        {
+          "symbol": "_c_setEFLAGS",
+          "va": 4226704,
+          "bytes": 192,
+          "relocation_words": 15,
+          "nonrelocated_bytes_matched": 132
+        },
+        {
+          "symbol": "_descriptor_super_type",
+          "va": 4226896,
+          "bytes": 72,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 52
+        },
+        {
+          "symbol": "_do_multiple_shiftrot_of",
+          "va": 4226976,
+          "bytes": 84,
+          "relocation_words": 8,
+          "nonrelocated_bytes_matched": 52
+        },
+        {
+          "symbol": "_getFLAGS",
+          "va": 4227072,
+          "bytes": 93,
+          "relocation_words": 11,
+          "nonrelocated_bytes_matched": 49
+        },
+        {
+          "symbol": "_read_descriptor_linear",
+          "va": 4227168,
+          "bytes": 104,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 96
+        },
+        {
+          "symbol": "_selector_is_null",
+          "va": 4227280,
+          "bytes": 22,
+          "relocation_words": 0,
+          "nonrelocated_bytes_matched": 22
+        },
+        {
+          "symbol": "_selector_outside_GDT",
+          "va": 4227312,
+          "bytes": 61,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 53
+        },
+        {
+          "symbol": "_selector_outside_GDT_LDT",
+          "va": 4227376,
+          "bytes": 100,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 80
+        },
+        {
+          "symbol": "_setFLAGS",
+          "va": 4227488,
+          "bytes": 162,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 110
+        }
+      ],
+      "headers": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_intr.c",
+      "sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_intr.obj",
+      "object_sha256": "B7BCC7FD0C305536A8B638A567B2A46ECFDB75BEDD0070EDE7E7540BBCC04210",
+      "compile_edge": "build obj/ccpu/c_intr.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_intr.c",
+      "dependency_block": "obj/ccpu/c_intr.obj: #deps 28, deps mtime 8147602781220893 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_intr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_mem.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_page.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_tsksw.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xfer.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/ccpusas4.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/fault.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_do_intrupt",
+          "va": 4300192,
+          "bytes": 1375,
+          "relocation_words": 109,
+          "nonrelocated_bytes_matched": 939
+        }
+      ],
+      "headers": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_neg64.c",
+      "sha256": "222AA1E94318D59A0CBBDC32B43C68C9C09CE06C8962EAA185D789C32CADAB33",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_neg64.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_neg64.obj",
+      "object_sha256": "16871E8158CD7CE27D92585E348B4E3065B32BADCC86724E7E0979E9F664B538",
+      "compile_edge": "build obj/ccpu/c_neg64.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_neg64.c",
+      "dependency_block": "obj/ccpu/c_neg64.obj: #deps 21, deps mtime 8147602777217625 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_neg64.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_neg64",
+          "va": 4395344,
+          "bytes": 32,
+          "relocation_words": 0,
+          "nonrelocated_bytes_matched": 32
+        }
+      ],
+      "headers": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_neg64.h",
+          "sha256": "03484D5C7E59D9A25B1E466CC78D411836F9A52E7D893A056D4842167D328D1C"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_prot.c",
+      "sha256": "A8AF9FA354D7A293045E95AF706957130173E5319683EE6A1070F9285458B8F5",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_prot.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_prot.obj",
+      "object_sha256": "9C2FB5425715D28C291107F255632CA514001365832A605EE13184614080584D",
+      "compile_edge": "build obj/ccpu/c_prot.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_prot.c",
+      "dependency_block": "obj/ccpu/c_prot.obj: #deps 22, deps mtime 8147602778431791 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_page.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/fault.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_check_SS",
+          "va": 4388480,
+          "bytes": 141,
+          "relocation_words": 7,
+          "nonrelocated_bytes_matched": 113
+        },
+        {
+          "symbol": "_get_stack_selector_from_TSS",
+          "va": 4388624,
+          "bytes": 158,
+          "relocation_words": 6,
+          "nonrelocated_bytes_matched": 134
+        },
+        {
+          "symbol": "_load_data_seg_new_privilege",
+          "va": 4388784,
+          "bytes": 107,
+          "relocation_words": 10,
+          "nonrelocated_bytes_matched": 67
+        },
+        {
+          "symbol": "_validate_SS_on_stack_change",
+          "va": 4388896,
+          "bytes": 144,
+          "relocation_words": 7,
+          "nonrelocated_bytes_matched": 116
+        },
+        {
+          "symbol": "_validate_TSS",
+          "va": 4389040,
+          "bytes": 144,
+          "relocation_words": 6,
+          "nonrelocated_bytes_matched": 120
+        }
+      ],
+      "headers": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_prot.h",
+          "sha256": "35474895B189C0A682F7B014698EE39E1D6954FCF8DE88EBB26BB1F1628B9E19"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_stack.c",
+      "sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_stack.obj",
+      "object_sha256": "0E9D339981882AEC7409A618D27975E20A954B09E8C05122E63A72590D2A55C2",
+      "compile_edge": "build obj/ccpu/c_stack.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_stack.c",
+      "dependency_block": "obj/ccpu/c_stack.obj: #deps 24, deps mtime 8147602781767114 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_addr.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_bsic.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_main.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_page.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_prot.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_reg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_seg.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_stack.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_tlb.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/c_xcptn.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/fault.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "functions": [
+        {
+          "symbol": "_GetStackPointer",
+          "va": 4389184,
+          "bytes": 24,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 12
+        },
+        {
+          "symbol": "_byte_change_SP",
+          "va": 4389216,
+          "bytes": 35,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 23
+        },
+        {
+          "symbol": "_change_SP",
+          "va": 4389264,
+          "bytes": 48,
+          "relocation_words": 4,
+          "nonrelocated_bytes_matched": 32
+        },
+        {
+          "symbol": "_get_current_BP",
+          "va": 4389312,
+          "bytes": 24,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 12
+        },
+        {
+          "symbol": "_set_current_BP",
+          "va": 4389344,
+          "bytes": 33,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 21
+        },
+        {
+          "symbol": "_set_current_SP",
+          "va": 4389392,
+          "bytes": 33,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 21
+        },
+        {
+          "symbol": "_spop",
+          "va": 4389440,
+          "bytes": 125,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 73
+        },
+        {
+          "symbol": "_spush",
+          "va": 4389568,
+          "bytes": 179,
+          "relocation_words": 17,
+          "nonrelocated_bytes_matched": 111
+        },
+        {
+          "symbol": "_spush16",
+          "va": 4389760,
+          "bytes": 135,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 83
+        },
+        {
+          "symbol": "_tpop",
+          "va": 4389904,
+          "bytes": 110,
+          "relocation_words": 8,
+          "nonrelocated_bytes_matched": 78
+        },
+        {
+          "symbol": "_validate_new_stack_space",
+          "va": 4390016,
+          "bytes": 182,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 162
+        },
+        {
+          "symbol": "_validate_stack_exists",
+          "va": 4390208,
+          "bytes": 249,
+          "relocation_words": 19,
+          "nonrelocated_bytes_matched": 173
+        },
+        {
+          "symbol": "_validate_stack_space",
+          "va": 4390464,
+          "bytes": 249,
+          "relocation_words": 18,
+          "nonrelocated_bytes_matched": 177
+        }
+      ],
+      "headers": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_stack.h",
+          "sha256": "323384E4437FA1BBA94994F6CD5A762BC74C9D35EB03D6966AC8DF235E165F75"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\t473-s10\\ccpu-foundation\\deps.txt",
+      "sha256": "F872FBEDBEFA699C1FC0200E8FE5E56DC1C21AA53B5A9FD3F5DE9282DCD81921"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\ccpu-foundation-observer.py",
+      "sha256": "5FB8125702A816194ABF2077A6E0533346048D4712A6A6A896052FDDD108743F"
+    }
+  ],
+  "scope": "Original source, VALID dependency, archive selection and map-bound nonrelocated function-byte correspondence; not guest execution or relocation-target validation"
+}

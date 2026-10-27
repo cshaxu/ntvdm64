@@ -1,0 +1,7 @@
+{
+  "pid": 14000,
+  "started": "2026-10-27T23:32:14.5990037Z",
+  "diagnostic_budget_seconds": 120,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-foundation\\merge-r2.ps1\"",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}
