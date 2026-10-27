@@ -4,8 +4,8 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 881,
-    "excluded": 151,
+    "pending": 684,
+    "excluded": 348,
     "partial": 55,
     "full": 2
   },
@@ -24,8 +24,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "5CE819F8F905F7DADEF0507308F36B69C0157979E910FE6AE9775DBF632F033E",
-  "limitations": "Two full selected STD/DEC leaves; 55 partial entries (48 mirror-different sources and seven generation manifests); 881 pending. Full leaf classifications do not close decoder, CPU, guest or related features.",
+  "output_sha256": "88665AC1BEEEE0FC439D5976B12E999356CBDBAFE233BD6A9B6BF947AE528B53",
+  "limitations": "Full leaf entries do not establish broader features. Guest grouping is source-family and identity evidence only; source-to-image lineage and behavior remain independently pending.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -179,5 +179,8 @@
   "build_recipe_review": "build-recipe-consumption-review.csv/.md: 36 file-role exclusions, seven original source lists partially integrated at generation time",
   "architecture_header_review": "architecture-generated-headers.csv/.md: 27 nonselected MIPS/PPC generated header variants, x86 carrier and cached deps crosschecked",
   "ccpu_std_contract": "ccpu-std-contract-review.md; full selected STD leaf, verified emitted body/decoder and real guest flags/reverse copy; prefixes and other owners remain open",
-  "ccpu_dec_contract": "alu-dec-oracle-contract.md and ccpu-alu evidence; full selected DEC leaf, 8-bit exhaustive and wider sampled"
+  "ccpu_dec_contract": "alu-dec-oracle-contract.md and ccpu-alu evidence; full selected DEC leaf, 8-bit exhaustive and wider sampled",
+  "guest_ddeml_test_build": "guest-ddeml-test-build-review.csv/.md; four historical guest test recipe inputs excluded by role, 12 source/resource/support entries remain pending",
+  "guest_remaining_groups": "guest-remaining-target-groups.csv/.md; all 606 remaining pre-review entries grouped, only guest intermediate/build recipe roles excluded",
+  "guest_intermediate_format": "guest-intermediate-format-audit.csv/.md: 156 OMF fully framed, 5 maps, 10 symbol signatures, 8 linker response files"
 }

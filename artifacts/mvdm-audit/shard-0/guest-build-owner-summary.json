@@ -1,0 +1,351 @@
+{
+  "paths": 712,
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "roles": {
+    "guest-resource-or-unresolved-carrier": 99,
+    "guest-build-recipe": 29,
+    "guest-binary-or-library": 26,
+    "guest-build-intermediate": 197,
+    "guest-source": 224,
+    "guest-declaration": 137
+  },
+  "owner_groups": {
+    "dos/v86/cmd/append": 5,
+    "dos/v86/cmd/command": 28,
+    "dos/v86/cmd/debug": 12,
+    "dos/v86/cmd/edlin": 6,
+    "dos/v86/cmd/exe2bin": 5,
+    "dos/v86/cmd/fastopen": 2,
+    "dos/v86/cmd/graphics": 12,
+    "dos/v86/cmd/keyb": 16,
+    "dos/v86/cmd/loadfix": 1,
+    "dos/v86/cmd/mem": 7,
+    "dos/v86/cmd/nlsfunc": 5,
+    "dos/v86/cmd/qbasic": 1,
+    "dos/v86/cmd/setver": 2,
+    "dos/v86/cmd/share": 3,
+    "dos/v86": 95,
+    "dos/v86/doskrnl": 39,
+    "dpmi/DOSX": 22,
+    "wow16/commdlg": 22,
+    "wow16/ctl3dv2": 4,
+    "wow16/ddeml": 24,
+    "wow16/drivers": 24,
+    "wow16/gdi": 4,
+    "wow16/inc": 20,
+    "wow16/kernel31": 71,
+    "wow16/killwow": 5,
+    "wow16/lib": 5,
+    "wow16/makefile": 1,
+    "wow16/mciole": 4,
+    "wow16/mmsystem": 31,
+    "wow16/ole": 20,
+    "wow16/rasapi16": 4,
+    "wow16/regedit": 7,
+    "wow16/shell": 3,
+    "wow16/sherlock": 4,
+    "wow16/system": 3,
+    "wow16/test": 10,
+    "wow16/timer": 7,
+    "wow16/toolhelp": 19,
+    "wow16/user": 30,
+    "wow16/wfwnet": 9,
+    "wow16/win87em": 18,
+    "wow16/winoldap": 3,
+    "wow16/winsock": 5,
+    "wow16/winspool": 3,
+    "wow16/wowdeb": 3,
+    "wow16/write": 88
+  },
+  "with_recipe": 712,
+  "with_literal_recipe_mention": 485,
+  "archive_exact_match_rows": 11,
+  "package_exact_match_rows": 6,
+  "recipes": [
+    {
+      "path": "dos/v86/cmd/append/makefile",
+      "sha256": "2162525F2C18DEF70C050BC2843127881A4C4E0B7045533412B3A97D1E83D324"
+    },
+    {
+      "path": "dos/v86/cmd/command/makefile",
+      "sha256": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4"
+    },
+    {
+      "path": "dos/v86/cmd/debug/makefile",
+      "sha256": "996256A7614656D9FABE197EC37DDA2A89C8BEDDC71A050614A442DF2BF91D74"
+    },
+    {
+      "path": "dos/v86/cmd/edlin/makefile",
+      "sha256": "D65923831D872F4F9EECE055F72573E08CC4E853B74FEC20F54936045D9746B8"
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/makefile",
+      "sha256": "70C345A1F7E3F763D5524F95DC35BC13A26D8A06A820DF48910F49274174FBB5"
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/makefile",
+      "sha256": "83797FAE562C4609D627DC1D334D4ED35D73DFB9240E4B9464FA05C50A3A3B89"
+    },
+    {
+      "path": "dos/v86/cmd/graphics/makefile",
+      "sha256": "100B5334A762451551344507C57BDD8A57CABFC9B1D417593E469827FB79EC4A"
+    },
+    {
+      "path": "dos/v86/cmd/keyb/makefile",
+      "sha256": "05C82B9A6A0502ADC978663C6289F012EBCF804F3F6A5CD2B645E6E9855A8ECC"
+    },
+    {
+      "path": "dos/v86/cmd/loadfix/makefile",
+      "sha256": "B5636050526F8A8F97147ED9BB43F7C18BFBF297E3D4E56A43EC1A25AA221959"
+    },
+    {
+      "path": "dos/v86/cmd/mem/makefile",
+      "sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE"
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/makefile",
+      "sha256": "A6D9ADB0B5B2F0FDC0BF26200A92E2F0F9913DABEA481B1B5D522498752693F5"
+    },
+    {
+      "path": "dos/v86/cmd/qbasic/makefile",
+      "sha256": "3DF0EC2D79AC0458617C7C67B217517223DE1D9B71CEBDCAE2E6609C974C9048"
+    },
+    {
+      "path": "dos/v86/cmd/setver/makefile",
+      "sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF"
+    },
+    {
+      "path": "dos/v86/cmd/share/makefile",
+      "sha256": "0D81BC47E24DF4FA4EDB2D4B79DBDBE8EFF0CB288D790FB6EA7B2F41DD991ED4"
+    },
+    {
+      "path": "dos/v86/dev/ansi/makefile",
+      "sha256": "DF753A55DCF2551AECF16DC8C31DDEF7E41CC4C09B4C704887B6AD5ED7183CE2"
+    },
+    {
+      "path": "dos/v86/dev/country/makefile",
+      "sha256": "5671E0E417E8481555997D566AB0A4A99ADCE550C8918A68C824B59E45FCE327"
+    },
+    {
+      "path": "dos/v86/dev/himem/makefile",
+      "sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2"
+    },
+    {
+      "path": "dos/v86/dev/keyboard/makefile",
+      "sha256": "031DF79E3DD9FBE2D39B3F808F83DA74882778D21E53546E0F09A99DF854CCD3"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/makefile",
+      "sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E"
+    },
+    {
+      "path": "dos/v86/makefile",
+      "sha256": "A684A6ACC34D118EF03C0E3182811C7F0726DCFD9D4010A76D665A3440CA5194"
+    },
+    {
+      "path": "dos/v86/lib/xmm/makefile",
+      "sha256": "2B0369A11D112C8C5D6C09D11A65A5F3EF0D17CE4D8DF26136D1AFBCB74B705F"
+    },
+    {
+      "path": "dos/v86/messages/makefile",
+      "sha256": "867A421CC0F0859E769B4A521CA44B70F74781763E358016C025B43D89859FD4"
+    },
+    {
+      "path": "dos/v86/redir/makefile",
+      "sha256": "318569C93BB478AEA0A11E078C82E2FB2D4F649D2E2CC2FB78DBFED781FDE53F"
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/makefile",
+      "sha256": "471DBE9C8C39A60DE2A37B73200EA2D653C7A0A99BEDCD3DC46AF67AC5A8570B"
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/sources",
+      "sha256": "DE09316C809C358B6031A8B81B6984598D21E277D661C1D04990D9F2DF641D09"
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/makefile",
+      "sha256": "34A1B39B572F1441EB556128C5C81537AA409AAFA7930335ABF9A4CD92093050"
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/sources",
+      "sha256": "3F6DC74093E2AE5274CB5E03BF30FEF813BAEE5C9967BF80E1B2198953C4F17C"
+    },
+    {
+      "path": "dpmi/makefile",
+      "sha256": "6F2E99255A4906DAF8734F4529341C8123D2B39615FB282A3C81104E85E2AAD9"
+    },
+    {
+      "path": "wow16/commdlg/makefile",
+      "sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36"
+    },
+    {
+      "path": "wow16/makefile",
+      "sha256": "7C69DE49BDBB7CA9FDF5705CEE3B4360AC0965A95360059FB443176225FA54FA"
+    },
+    {
+      "path": "wow16/ddeml/makefile",
+      "sha256": "8D8A1CBA40DB55B3C43FB97C5624877FC7084559AF568EFEABC6D58E3AFEE582"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/makefile",
+      "sha256": "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/sources",
+      "sha256": "B57136A2889AD2F792E52DA93CD12665932CE00F63B55164A7D0D84401C910F7"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/makefile",
+      "sha256": "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/sources",
+      "sha256": "8F0A9EAEFB415FE22BDDF392459C0ADA6E2CFEE7BC961AB8C19FFAC44E852CCD"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/makefile",
+      "sha256": "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/sources",
+      "sha256": "0F654766B7FD12AE9EF3785F03CD5273B3EC4B737C864E4242EF6788C30CDD1D"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/makefile",
+      "sha256": "26957856E8A7F42A1740419CF3451497129F1D8284301D42F1A89EE13DD5A459"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/sources",
+      "sha256": "0BAB2B9A9EBFBEE7970F318E430B44A72986839C6F499E3C04B9B7299012BB48"
+    },
+    {
+      "path": "wow16/drivers/comm/makefile",
+      "sha256": "14A637EF74E864245AED77EBC271F71D56CD4183622DD17E3D56FAEC4DC8077E"
+    },
+    {
+      "path": "wow16/drivers/display/makefile",
+      "sha256": "C234E06726D09F113BCE364366B704446FB7EBE5E4C549E8F89CCBECBFA50E19"
+    },
+    {
+      "path": "wow16/drivers/keyboard/makefile",
+      "sha256": "54658EB605886A0F11EF8F3D351CF3E04DB0A63152413774CC5CC1637ACA4CF3"
+    },
+    {
+      "path": "wow16/drivers/mouse/makefile",
+      "sha256": "88400DF39F5F0B7D273F598A7DF3D6152F611A7819AC1434CEC983FB200E8D72"
+    },
+    {
+      "path": "wow16/drivers/sound/makefile",
+      "sha256": "655D4DAB686593459CB54EF4305EB348CB3DC812B02B61A05A4DE049B392B340"
+    },
+    {
+      "path": "wow16/gdi/makefile",
+      "sha256": "1868F7AD348A492ACDEF374C7B535B9AB0AB2BCFE894CB1C02232AA089B796F0"
+    },
+    {
+      "path": "wow16/kernel31/makefile",
+      "sha256": "5DDCC52BB834D447E75D85D5720FFA52968D63912A718A8769AFB8555155E247"
+    },
+    {
+      "path": "wow16/killwow/makefile",
+      "sha256": "6F81DAA8F5E5B79E69E473A7C023AE65EDBD3BF822E473FB4850935E1DE29D91"
+    },
+    {
+      "path": "wow16/lib/makefile",
+      "sha256": "8804E8BF3409DF79EEEF188B0487451EA01550E25D709875241AC313F820099A"
+    },
+    {
+      "path": "wow16/mciole/makefile",
+      "sha256": "7B7D5350B85A364B0C21B9AB370A33DFA5C792FA88CD411CC686D03269F4EDBA"
+    },
+    {
+      "path": "wow16/mmsystem/makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1"
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/makefile",
+      "sha256": "56354D05A85F6AAF050217ED0D56FBB7C9EDB663A35ED9A8298FEBF4014555B8"
+    },
+    {
+      "path": "wow16/ole/client/makefile",
+      "sha256": "42A19F54364CF6FEE49047DA225A702FADFF759541E37143B298F3A2EC7C0B58"
+    },
+    {
+      "path": "wow16/ole/server/makefile",
+      "sha256": "040ECF946AE5F0FFBBC946C70637801210FDBFE01533E5CC66D0C85133665009"
+    },
+    {
+      "path": "wow16/rasapi16/makefile",
+      "sha256": "31404923FB8B2BEA3811701BC650D682D4390EE16738AA0EC58418C7D2E484EB"
+    },
+    {
+      "path": "wow16/regedit/makefile",
+      "sha256": "6255669DED8680CF24DA6D74B49366D2F7F5AD08871CB95DE26A46D42DB339FD"
+    },
+    {
+      "path": "wow16/shell/makefile",
+      "sha256": "0173A4E779E5DBF3114D315E20620192F3883B4169C835FA854FB74656DFE8B6"
+    },
+    {
+      "path": "wow16/sherlock/makefile",
+      "sha256": "D4E0A78455E5C688D42A7D96E8C012A39074F18A3411FA23A917809A8B7199D7"
+    },
+    {
+      "path": "wow16/system/makefile",
+      "sha256": "5612B1329655BD6D171F4EBAF62BFAA0C3F4D9764CFEE6F1D9F54628BF6FD1BC"
+    },
+    {
+      "path": "wow16/test/makefile",
+      "sha256": "C0265E320C182A13B879D6C0B651CFE4FECE50EB663527A8902BA6AB14B71428"
+    },
+    {
+      "path": "wow16/test/shell/makefile",
+      "sha256": "9CFA907EB667AF36C3A7A01D7DABD88E37FFAF2A6854C89922B9B2812C64FB3A"
+    },
+    {
+      "path": "wow16/timer/makefile",
+      "sha256": "3A98A2B07A68CE4BAD5FAC4D592480D6FA77C0CEB14F5F2E2AF692419C5B7112"
+    },
+    {
+      "path": "wow16/toolhelp/makefile",
+      "sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941"
+    },
+    {
+      "path": "wow16/user/makefile",
+      "sha256": "7BCA4F72F3CDDC7344EE3B6A09DDA1F72BC96D84364E36C064535DFD213D0CC4"
+    },
+    {
+      "path": "wow16/wfwnet/makefile",
+      "sha256": "F968A26DB06E9E2C3619A201E016A0AFB14C0A5AC19A2A8C8221831A888C4B4C"
+    },
+    {
+      "path": "wow16/win87em/makefile",
+      "sha256": "B76EC6E35F2C1285EF0C0930C4D534CA0E0A7533F8F4C3B4E53725ABE3C907A4"
+    },
+    {
+      "path": "wow16/winoldap/makefile",
+      "sha256": "79F795410CF3130439EED2572E2581B8D4224CE2881EC266248289AE2DF11378"
+    },
+    {
+      "path": "wow16/winsock/makefile",
+      "sha256": "0B595D22AC1D238437884F03E3EE0BC1027DFBB80BC018D32D2EC9B67FD9F5B0"
+    },
+    {
+      "path": "wow16/winspool/makefile",
+      "sha256": "05328803A15BCECAFBA9B5E799BF4911259D0C5A2D97BB1488289F5B5D3869E4"
+    },
+    {
+      "path": "wow16/wowdeb/makefile",
+      "sha256": "8BD02AD8A2DD996C0ACDCC0B78C32F2229B61A471A5B0FF128F8733456CA6ED0"
+    },
+    {
+      "path": "wow16/write/makefile",
+      "sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83"
+    }
+  ],
+  "limitation": "Static provenance/consumer census only; no full/excluded capability conclusions"
+}

@@ -1,0 +1,3770 @@
+[
+  {
+    "relative_path": "dos/v86/cmd/append/append.OBJ",
+    "records": 99,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/command1.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/command2.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/copy.OBJ",
+    "records": 64,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/copypr1.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/copypr2.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/cparse.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/dir.OBJ",
+    "records": 73,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/init.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/iparse.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/loadhi.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/parse2.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/path1.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/path2.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/rdata.OBJ",
+    "records": 68,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/rucode.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/stub.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tbatch.OBJ",
+    "records": 65,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tbatch2.OBJ",
+    "records": 49,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tcmd1b.OBJ",
+    "records": 52,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tcmd2a.OBJ",
+    "records": 55,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tcmd2b.OBJ",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tcode.OBJ",
+    "records": 68,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tdata.OBJ",
+    "records": 213,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tenv.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tenv2.OBJ",
+    "records": 52,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tfor.OBJ",
+    "records": 44,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tmisc1.OBJ",
+    "records": 42,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tmisc2.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tparse.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tpipe.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tprintf.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tspc.OBJ",
+    "records": 42,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/tucode.OBJ",
+    "records": 52,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/command/uinit.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debasm.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debcom1.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debcom2.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debcom3.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debconst.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debdata.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debems.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/deberr.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debmes.OBJ",
+    "records": 159,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debuasm.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/debug/debug.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/edlin/edlcmd1.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/edlin/edlcmd2.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/edlin/edlin.OBJ",
+    "records": 51,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/edlin/edlmes.OBJ",
+    "records": 95,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/edlin/edlparse.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/exe2bin/display.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/exe2bin/e2binit.OBJ",
+    "records": 77,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/fastopen/fastopen.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/graphics.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grbwprt.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grcolprt.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grcpsd.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grctrl.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grinst.OBJ",
+    "records": 70,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grint2fh.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grload.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grload2.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grload3.OBJ",
+    "records": 11,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grparms.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grparse.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/graphics/grpattrn.OBJ",
+    "records": 113,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/COMMSUBS.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYB.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBCMD.OBJ",
+    "records": 77,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBCPSD.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBI2F.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBI9.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBI9C.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/KEYBTBBL.OBJ",
+    "records": 11,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/keyb/PARSER.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/loadfix/loadfix.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/_msgret.OBJ",
+    "records": 103,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/_parse.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/chkvdisk.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/mem.obj",
+    "records": 39,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/membase.obj",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/memctrlc.obj",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/memex.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/mem/submsg.obj",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/nlsfunc/nlsfunc.OBJ",
+    "records": 53,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/nlsfunc/nlsparm.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/setver/device.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/setver/dos.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/setver/parse.obj",
+    "records": 35,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/setver/setver.obj",
+    "records": 55,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/cmd/share/share.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/ansi/ansi.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/ansi/ansiinit.OBJ",
+    "records": 42,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/ansi/ioctl.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/ansi/parser.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/country/country.OBJ",
+    "records": 2235,
+    "stored_zero_checksums": 9,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/himem.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/himem1.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/himem2.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/himem4.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/himem5.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/himem/messages.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFBE.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFBG.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFBR275.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFCF.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFCZ.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFDK.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFDV.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFEOF.OBJ",
+    "records": 6,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFFR189.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFGE.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFGK.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFHU.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFIC.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFIT141.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFIT142.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFLA.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFNL.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFNO.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFNOW.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFPL1.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFPO.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFRO.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFRU091.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFSF.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFSG.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFSL.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFSP.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFSV.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFTR.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFTR440.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFUK166.OBJ",
+    "records": 7,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/dev/keyboard/KDFYU.OBJ",
+    "records": 8,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/msbio1.OBJ",
+    "records": 65,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/mschar.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/msend.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/msinit.OBJ",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/msint13.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/spcemm.OBJ",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/spckbd.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/spcmse_4.OBJ",
+    "records": 133,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/sysconf.OBJ",
+    "records": 131,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/sysimes.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/sysinit1.OBJ",
+    "records": 71,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/bios/sysinit2.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/abort.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/alloc.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/cpmio.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/cpmio2.OBJ",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/dev.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/dir2.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/disk.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/dup.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/exepatch.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/fcb.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/fcbio.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/fcbio2.OBJ",
+    "records": 49,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/file.OBJ",
+    "records": 52,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/getset.OBJ",
+    "records": 43,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/handle.OBJ",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/ioctl.OBJ",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/lock.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/macro.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/macro2.OBJ",
+    "records": 61,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/misc.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/misc2.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/mscode.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msctrlc.OBJ",
+    "records": 58,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msdata.OBJ",
+    "records": 114,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msdisp.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msdosme.OBJ",
+    "records": 55,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msinit.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/msproc.OBJ",
+    "records": 61,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/mstable.OBJ",
+    "records": 416,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/open.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/origin.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/parse.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/path.OBJ",
+    "records": 42,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/search.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/segcheck.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/srvcall.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/time.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/doskrnl/dos/util.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/lib/xmm/xmm.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/int2a.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/int5c.obj",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/mailslot.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/msgapi.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/namepipe.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/netapis.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/neterror.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/redir.obj",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dos/v86/redir/obj/resident.obj",
+    "records": 35,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxboot.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxbug.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxdisk.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxdma.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxemm.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxemm2.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxend.OBJ",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxendpm.OBJ",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxfind.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxfunc.OBJ",
+    "records": 44,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxini.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxint31.OBJ",
+    "records": 65,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxintr.OBJ",
+    "records": 116,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxmain.OBJ",
+    "records": 61,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxmmgr.OBJ",
+    "records": 68,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxmsg.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxnetbio.OBJ",
+    "records": 58,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxoem.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxrom.OBJ",
+    "records": 3,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxstrt.OBJ",
+    "records": 73,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/dxutil.OBJ",
+    "records": 48,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "dpmi/486/ntnpxem.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/commdlg/commdlg.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/commdlg/dlgs.obj",
+    "records": 25,
+    "stored_zero_checksums": 25,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/commdlg/font.obj",
+    "records": 101,
+    "stored_zero_checksums": 101,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/commdlg/parse.obj",
+    "records": 27,
+    "stored_zero_checksums": 27,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/commdlg/start.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/ddeml.obj",
+    "records": 119,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgdb.obj",
+    "records": 39,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgdde.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmghsz.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgmem.obj",
+    "records": 60,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgmon.obj",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgq.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgutil.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/dmgwndp.obj",
+    "records": 53,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/hdata.obj",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/heapwach.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/libentry.obj",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/register.obj",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/stdinit.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ddeml/debug/stdptcl.obj",
+    "records": 41,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/ccom.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/commmsg.OBJ",
+    "records": 9,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/ibmcom.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/ibmint.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/ibmlpt.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/comm/ibmsetup.OBJ",
+    "records": 87,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/display/config.OBJ",
+    "records": 6,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/display/display.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/keyboard/kbdlocal.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/keyboard/keyboard.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/mouse/mouse.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/drivers/sound/sound.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/gdi/fontres.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/gdi/gdi.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/gdi/layer.OBJ",
+    "records": 54,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/gdi/muldiv.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/gdi/sort.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3gacheck.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3galloc.OBJ",
+    "records": 43,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3gcompac.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3ginterf.OBJ",
+    "records": 74,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3glru.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3gmem.OBJ",
+    "records": 44,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3gmemini.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3gmoreme.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/3protect.OBJ",
+    "records": 70,
+    "stored_zero_checksums": 3,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/atom.OBJ",
+    "records": 36,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/context.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/diag.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/disasm.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/diskio.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/dosinit.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/emsmisc.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/enable.OBJ",
+    "records": 35,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/error.obj",
+    "records": 41,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/gpcont.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/gpfix.OBJ",
+    "records": 46,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/handle.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/hmem.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/i21entry.OBJ",
+    "records": 85,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/i21file.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/i21task.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/int24.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/intnn.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/kdata.OBJ",
+    "records": 93,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/kdataend.OBJ",
+    "records": 20,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/kthunks.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lacheck.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lalloc.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/layer.OBJ",
+    "records": 229,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lcompact.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ld.OBJ",
+    "records": 50,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldappl.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldaux.OBJ",
+    "records": 45,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldboot.OBJ",
+    "records": 84,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldcache.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lddebug.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldfastb.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldfile.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldheader.OBJ",
+    "records": 46,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldint.OBJ",
+    "records": 63,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldopen.OBJ",
+    "records": 56,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldreloc.OBJ",
+    "records": 67,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldseg.OBJ",
+    "records": 40,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldself.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldstack.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ldutil.OBJ",
+    "records": 50,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lhandle.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/linterf.OBJ",
+    "records": 74,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lstring.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/lzexp.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/mapdata.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/miscapi.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/module.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/patch.OBJ",
+    "records": 133,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/reboot.OBJ",
+    "records": 41,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/resaux.OBJ",
+    "records": 51,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/rip.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/ripaux.OBJ",
+    "records": 40,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/rom.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/stack.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/strings.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/task.OBJ",
+    "records": 56,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/tasking.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/userpro.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/winexec.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/wow16cal.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/debug3/wowdeb.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3gacheck.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3galloc.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3gcompac.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3ginterf.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3glru.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3gmem.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3gmemini.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3gmoreme.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/3protect.OBJ",
+    "records": 56,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/atom.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/context.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/diag.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/disasm.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/diskio.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/dosinit.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/emsmisc.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/enable.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/error.obj",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/gpcont.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/gpfix.OBJ",
+    "records": 46,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/handle.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/hmem.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/i21entry.OBJ",
+    "records": 85,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/i21file.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/i21task.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/int24.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/intnn.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/kdata.OBJ",
+    "records": 92,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/kdataend.OBJ",
+    "records": 20,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/kthunks.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lacheck.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lalloc.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/layer.OBJ",
+    "records": 211,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lcompact.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ld.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldappl.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldaux.OBJ",
+    "records": 36,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldboot.OBJ",
+    "records": 63,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldcache.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lddebug.OBJ",
+    "records": 31,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldfastb.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldfile.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldheader.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldint.OBJ",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldopen.OBJ",
+    "records": 53,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldreloc.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldseg.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldself.OBJ",
+    "records": 28,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldstack.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ldutil.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lhandle.OBJ",
+    "records": 21,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/linterf.OBJ",
+    "records": 34,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lstring.OBJ",
+    "records": 32,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/lzexp.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/mapdata.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/miscapi.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/module.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/patch.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/reboot.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/resaux.OBJ",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/rip.obj",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/ripaux.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/rom.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/stack.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/strings.OBJ",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/task.OBJ",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/tasking.OBJ",
+    "records": 27,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/userpro.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/winexec.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/wow16cal.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/kernel31/retail3/wowdeb.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/killwow/killwow.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/lib/libentry.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mciole/libinit.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mciole/mciole.obj",
+    "records": 52,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/auxout.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/bwinexec.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/comm.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/debug.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/dosa.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/dpmipage.obj",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/drvproc.obj",
+    "records": 49,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/drvr31.obj",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/heap.obj",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/hmemcpy.obj",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/init.obj",
+    "records": 99,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/isr.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/joy.obj",
+    "records": 50,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/libentry.obj",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mci.obj",
+    "records": 114,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mciparse.obj",
+    "records": 74,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mcisys.obj",
+    "records": 88,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/midi.obj",
+    "records": 90,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mixer.obj",
+    "records": 97,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mmio.obj",
+    "records": 73,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mmioriff.obj",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mmsex.obj",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/mmwnd.obj",
+    "records": 35,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/playwav.obj",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/sound.obj",
+    "records": 50,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/stack.obj",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/task.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/taska.obj",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/thunks.obj",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/time.obj",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/debug/wave.obj",
+    "records": 58,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/mmsystem/mmtask/mmtask.OBJ",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/block.obj",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/doc.obj",
+    "records": 45,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/give2gdi.obj",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/item.obj",
+    "records": 90,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/olesvr.obj",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/srvr.obj",
+    "records": 56,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/srvrmain.obj",
+    "records": 62,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/ole/server/debug/utils.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/rasapi16/rasapi16.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/cutils1.obj",
+    "records": 65,
+    "stored_zero_checksums": 65,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/dbase.obj",
+    "records": 47,
+    "stored_zero_checksums": 47,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/filename.obj",
+    "records": 35,
+    "stored_zero_checksums": 35,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/merge.obj",
+    "records": 47,
+    "stored_zero_checksums": 47,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/regedit.obj",
+    "records": 71,
+    "stored_zero_checksums": 71,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/regmain.obj",
+    "records": 75,
+    "stored_zero_checksums": 75,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/regporte.obj",
+    "records": 65,
+    "stored_zero_checksums": 65,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/regthunk.obj",
+    "records": 28,
+    "stored_zero_checksums": 28,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/sdbase.obj",
+    "records": 61,
+    "stored_zero_checksums": 61,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/sdkreged.obj",
+    "records": 76,
+    "stored_zero_checksums": 76,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/utils1.obj",
+    "records": 32,
+    "stored_zero_checksums": 32,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/regedit/debug/virt.obj",
+    "records": 63,
+    "stored_zero_checksums": 63,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/shell/dragdrop.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/shell/shell.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/sherlock/disasm.obj",
+    "records": 102,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/sherlock/drwatson.obj",
+    "records": 120,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/sherlock/error.obj",
+    "records": 21,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/sherlock/getsym.obj",
+    "records": 21,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/sherlock/watson.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/system/system.OBJ",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/system/timer.OBJ",
+    "records": 23,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/test/shell/pmdos.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/test/shell/wowexec.obj",
+    "records": 59,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/test/shell/wowexfax.obj",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/api.obj",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/libinit.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/local.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/math.obj",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/startend.obj",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/timer/debug/timer.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/dllentry.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/global.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/helper.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/int1.obj",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/int2.OBJ",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/krnlpeek.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/local.obj",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/memman.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/memory.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/module.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/notify1.obj",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/notify2.OBJ",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/signal.obj",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/stack1.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/stack2.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/task1.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/task2.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/terminat.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/ththunks.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/timer.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/toolhelp.obj",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/usergdi1.obj",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/usergdi2.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/walk286.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/toolhelp/walk386.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/debug.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/drvr.obj",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/drvrrare.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/fastres.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/helpcall.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/init.obj",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/intds.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/inuserds.obj",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/layer.OBJ",
+    "records": 59,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/msglayer.OBJ",
+    "records": 13,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/net.obj",
+    "records": 44,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/rmcreate.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/rmload.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user.OBJ",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user1a.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user2.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user2a.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user3.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user3a.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/user4.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/usercli.OBJ",
+    "records": 17,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wclass.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winhook.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winlang.OBJ",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winmisc2.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winnet.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winq.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winrect.OBJ",
+    "records": 50,
+    "stored_zero_checksums": 2,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winstack.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/winstr.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wowcomm.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wowk.OBJ",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wowkr.OBJ",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wsphelp.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/user/k/daytona/wsprintf.obj",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/ints.OBJ",
+    "records": 19,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/lfn.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/libentry.OBJ",
+    "records": 14,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/misc.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/print.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/to32.obj",
+    "records": 48,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wfwnet/wfwnet.obj",
+    "records": 54,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/winoldap/winoldap.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/winsock/winsock.OBJ",
+    "records": 16,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/winspool/winspool.OBJ",
+    "records": 18,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/wowdeb/wowdeb.obj",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/addprm.obj",
+    "records": 31,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/cache.obj",
+    "records": 29,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/chngwin.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/clipbord.obj",
+    "records": 39,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/clipbrd2.obj",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/clipdisp.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/cmd.obj",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/commdlg.obj",
+    "records": 36,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/createww.obj",
+    "records": 37,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/curskeys.obj",
+    "records": 35,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/debug.obj",
+    "records": 15,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/diaalert.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/diadiv.obj",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/diapara.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/diarepag.obj",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/diasubs.obj",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/disp.obj",
+    "records": 44,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/doc.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/doprm.obj",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/doslib.OBJ",
+    "records": 12,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/edit.obj",
+    "records": 39,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/editpgtb.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fetch.obj",
+    "records": 30,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/file.obj",
+    "records": 46,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fileres.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fileutil.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fontdlg.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fontenum.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/fontutil.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/format.OBJ",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/format2.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/heapmain.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/heaprare.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/initmmw.obj",
+    "records": 47,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/initwin.obj",
+    "records": 39,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/insert.obj",
+    "records": 46,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/insert2.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/insertco.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/jumppage.obj",
+    "records": 24,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/lib.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/loadfnt2.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/loadfont.obj",
+    "records": 33,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/mainloop.obj",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/mdoc.obj",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/menu.obj",
+    "records": 42,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/mglobals.obj",
+    "records": 53,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/mmw.obj",
+    "records": 36,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/mouse.obj",
+    "records": 34,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/obj.obj",
+    "records": 102,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/obj2.obj",
+    "records": 88,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/obj3.obj",
+    "records": 71,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/objmini.OBJ",
+    "records": 10,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/objpsp.obj",
+    "records": 42,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/objreg.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/open.obj",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/pageinfo.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/pictdrag.obj",
+    "records": 48,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/picture.obj",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/picture2.obj",
+    "records": 26,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/print.obj",
+    "records": 40,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/print2.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/print3.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/printdlg.obj",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/quit.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/rare.obj",
+    "records": 25,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/ruler.obj",
+    "records": 54,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/ruler2.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/ruler3.obj",
+    "records": 20,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/running.obj",
+    "records": 39,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/screen.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/scrnchng.obj",
+    "records": 38,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/scrollhz.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/scrollvt.obj",
+    "records": 34,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/search.obj",
+    "records": 65,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/select.obj",
+    "records": 32,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/select2.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/selectsp.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/trans2.obj",
+    "records": 50,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/trans3.obj",
+    "records": 46,
+    "stored_zero_checksums": 1,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/trans4.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/transbuf.obj",
+    "records": 21,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/transfer.obj",
+    "records": 22,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/undo.obj",
+    "records": 28,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/util.obj",
+    "records": 27,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/util2.obj",
+    "records": 29,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  },
+  {
+    "relative_path": "wow16/write/wwactde.obj",
+    "records": 23,
+    "stored_zero_checksums": 0,
+    "nonzero_checksum_mismatches": []
+  }
+]

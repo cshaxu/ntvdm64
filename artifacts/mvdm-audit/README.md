@@ -8,9 +8,9 @@ used the disjoint frozen path shards described by `manifest.json`.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
 224 partial (205 existing source-difference rows and 19 partially integrated
-build manifests), 626 excluded (documented profile, historical recipe,
+build manifests), 1,466 excluded (documented profile, historical recipe,
 source roles or unused retained objects), 23 full selected leaf files and
-3,811 pending. Exclusion of an object or provider does not prove its guest
+2,971 pending. Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
@@ -99,3 +99,8 @@ Their status does not close the broader CPU decoder or execution owners.
 The [twelve arithmetic/logic source contracts](ccpu-alu-contracts.md) add
 native-reference data and 3,260,544 actual guest instruction checks across
 register and memory forms. Their full status leaves decoder/fault owners open.
+
+The [guest-build checkpoint](guest-build-reconciliation.md) separates 840
+historical guest objects, symbols/listings and recipes from source and runtime
+capability. Guest sources, resources, libraries and unproved binary lineage
+remain explicitly in scope; no original guest was rebuilt.
