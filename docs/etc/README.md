@@ -77,6 +77,10 @@ records the selected original menu/dialog HWND32-to-owned-HWND boundary, its
 focused and control-fixture evidence, coherent publication, and the one
 explicitly retained final control-observer non-pass.
 
+[T473 S9 generic public USER wrapper audit](evidence/m0-t473-s9-generic-user-wrapper-audit.md)
+records the first source-proven HWND32 wrapper cohort and its required
+parameter-by-parameter identity proof before any generic-wrapper repair.
+
 [T473 S2 Redirector/monitor reconciliation](evidence/m0-t473-s2-redirector-monitor-reconciliation.md)
 finishes the source-owner sweep with bounded async-copy, monitor, VDD and
 debugger boundaries instead of private-subsystem substitutions.

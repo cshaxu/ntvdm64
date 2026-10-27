@@ -1233,6 +1233,54 @@ type WINAPI wow_native_##name params \
 #define WOW_NATIVE_CALL(type, name, params, args, failed) \
     WOW_NATIVE_CALL_TARGET(type, name, params, args, failed, w)
 
+/* The selected original 16-bit USER cohort passes HWND32 directly to USER,
+ * while native-only adapters already hold a complete host HWND.  The original
+ * conversion maps only narrow carriers through the published object table and
+ * preserves an already-full host value.  This is intentionally not S8's
+ * strict owned-only menu/dialog boundary: generic wrappers have distinct
+ * external and pseudo-handle contracts, admitted below per original caller. */
+static BOOL native_window_argument(HWND window, BOOL allow_null, HWND *native)
+{
+    if (!native) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    if (!window) {
+        if (!allow_null) { SetLastError(ERROR_INVALID_WINDOW_HANDLE); return FALSE; }
+        *native = NULL;
+        return TRUE;
+    }
+    *native = wow_user_window_native_handle(window);
+    return *native != NULL;
+}
+
+static BOOL native_zorder_argument(HWND after, HWND *native)
+{
+    /* These are USER commands, not 16-bit object carriers. HWND_BOTTOM is
+     * numerically a plausible low word, so recognize it before conversion. */
+    if (after == HWND_TOP || after == HWND_BOTTOM || after == HWND_TOPMOST ||
+            after == HWND_NOTOPMOST) {
+        *native = after;
+        return TRUE;
+    }
+    return native_window_argument(after, TRUE, native);
+}
+
+#define WOW_NATIVE_MAPPED_CALL(type, name, params, args, failed, allow_null, window_result) \
+type WINAPI wow_native_##name params \
+{ \
+    wow_user_native_call call; \
+    HWND native; \
+    type result; BOOL restored; DWORD error = GetLastError(); \
+    if (!native_window_argument(w, allow_null, &native)) return failed; \
+    if (!wow_user_native_call_begin(&call, native)) return failed; \
+    SetLastError(error); \
+    __try { result = name args; call.returned_window = (window_result); } \
+    __finally { \
+        error = GetLastError(); \
+        restored = wow_user_native_call_end(&call); \
+        if (restored) SetLastError(error); \
+    } \
+    return restored ? result : failed; \
+}
+
 /* A successful DestroyWindow returns after native USER has consumed the
  * target identity.  The original owner returns that BOOL; it does not ask an
  * adapter to re-enumerate the desktop or re-borrow a window which no longer
@@ -1254,9 +1302,11 @@ type WINAPI wow_native_##name params \
     return restored ? result : failed; \
 }
 WOW_NATIVE_CALL(BOOL, BringWindowToTop, (HWND w), (w), FALSE)
-WOW_NATIVE_CALL(BOOL, SetWindowPos, (HWND w, HWND after, int x, int y, int cx, int cy, UINT flags), (w, after, x, y, cx, cy, flags), FALSE)
-WOW_NATIVE_CALL(BOOL, MoveWindow, (HWND w, int x, int y, int cx, int cy, BOOL paint), (w, x, y, cx, cy, paint), FALSE)
-WOW_NATIVE_CALL(BOOL, ShowWindow, (HWND w, int show), (w, show), FALSE)
+WOW_NATIVE_MAPPED_CALL(BOOL, MoveWindow,
+    (HWND w, int x, int y, int cx, int cy, BOOL paint),
+    (native, x, y, cx, cy, paint), FALSE, FALSE, NULL)
+WOW_NATIVE_MAPPED_CALL(BOOL, ShowWindow, (HWND w, int show), (native, show),
+    FALSE, FALSE, NULL)
 /* wuwind.c::WU32EnableWindow deliberately passes HWND32: an original 16-bit
  * USER carrier, not a public HWND.  NT4 USER accepted that carrier directly;
  * modern USER must receive the one live public identity already published by
@@ -1281,7 +1331,8 @@ BOOL WINAPI wow_native_EnableWindow(HWND w, BOOL enable)
     }
     return restored ? result : FALSE;
 }
-WOW_NATIVE_CALL_RESULT(HWND, SetActiveWindow, (HWND w), (w), NULL, w, result)
+WOW_NATIVE_MAPPED_CALL(HWND, SetActiveWindow, (HWND w), (native), NULL, TRUE,
+    result)
 WOW_NATIVE_CALL(BOOL, SetForegroundWindow, (HWND w), (w), FALSE)
 WOW_NATIVE_CALL(BOOL, SetWindowContextHelpId, (HWND w, DWORD id), (w, id), FALSE)
 WOW_NATIVE_CALL_TARGET(BOOL, SetCursorPos, (int x, int y), (x, y), FALSE, NULL)
@@ -1289,13 +1340,50 @@ WOW_NATIVE_CALL_TARGET(int, ShowCursor, (BOOL show), (show), 0, NULL)
 /* Original ListBox keeps selection/WM_BEGINDRAG policy. Native USER owns
  * capture and the modal input wait; callbacks use this shared boundary. */
 WOW_NATIVE_CALL(BOOL, DragDetect, (HWND w, POINT point), (w, point), FALSE)
-WOW_NATIVE_CALL_RESULT(HWND, SetFocus, (HWND w), (w), NULL, w, result)
+WOW_NATIVE_MAPPED_CALL(HWND, SetFocus, (HWND w), (native), NULL, TRUE, result)
 /* capture.c sends WM_CAPTURECHANGED to the previous capture, not w. */
-WOW_NATIVE_CALL_RESULT(HWND, SetCapture, (HWND w), (w), NULL, GetCapture(), result)
+WOW_NATIVE_MAPPED_CALL(HWND, SetCapture, (HWND w), (native), NULL, FALSE,
+    GetCapture())
 WOW_NATIVE_CALL_TARGET(BOOL, ReleaseCapture, (void), (), FALSE, GetCapture())
 WOW_NATIVE_DESTROY_WINDOW(BOOL, DestroyWindow, (HWND w), (w), FALSE, w)
 WOW_NATIVE_CALL(BOOL, EndDialog, (HWND w, INT_PTR result_value), (w, result_value), FALSE)
-WOW_NATIVE_CALL_RESULT(HWND, SetParent, (HWND w, HWND parent), (w, parent), NULL, w, result)
+HWND WINAPI wow_native_SetParent(HWND w, HWND parent)
+{
+    wow_user_native_call call;
+    HWND native, native_parent, result = NULL;
+    BOOL restored;
+    DWORD error = GetLastError();
+    if (!native_window_argument(w, FALSE, &native) ||
+            !native_window_argument(parent, TRUE, &native_parent)) return NULL;
+    if (!wow_user_native_call_begin(&call, native)) return NULL;
+    SetLastError(error);
+    __try { result = SetParent(native, native_parent); call.returned_window = result; }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    return restored ? result : NULL;
+}
+BOOL WINAPI wow_native_SetWindowPos(HWND w, HWND after, int x, int y, int cx,
+    int cy, UINT flags)
+{
+    wow_user_native_call call;
+    HWND native, native_after;
+    BOOL result = FALSE, restored;
+    DWORD error = GetLastError();
+    if (!native_window_argument(w, FALSE, &native) ||
+            !native_zorder_argument(after, &native_after)) return FALSE;
+    if (!wow_user_native_call_begin(&call, native)) return FALSE;
+    SetLastError(error);
+    __try { result = SetWindowPos(native, native_after, x, y, cx, cy, flags); }
+    __finally {
+        error = GetLastError();
+        restored = wow_user_native_call_end(&call);
+        if (restored) SetLastError(error);
+    }
+    return restored ? result : FALSE;
+}
 WOW_NATIVE_CALL(BOOL, SetWindowPlacement, (HWND w, const WINDOWPLACEMENT *placement), (w, placement), FALSE)
 WOW_NATIVE_CALL_RESULT(LONG, SetWindowLongA, (HWND w, int index, LONG value),
     (w, index, value), 0, w, index == GWL_HWNDPARENT ? (HWND)result : NULL)
@@ -1388,6 +1476,7 @@ WOW_NATIVE_MESSAGE(DefFrameProcA, (HWND w, HWND client, UINT message, WPARAM wp,
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageA, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 WOW_NATIVE_CALL_TARGET(LRESULT, DispatchMessageW, (const MSG *message), (message), 0, message ? message->hwnd : NULL)
 #undef WOW_NATIVE_CALL
+#undef WOW_NATIVE_MAPPED_CALL
 #undef WOW_NATIVE_DESTROY_WINDOW
 #undef WOW_NATIVE_CALL_TARGET
 #undef WOW_NATIVE_CALL_RESULT

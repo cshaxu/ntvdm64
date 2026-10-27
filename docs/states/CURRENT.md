@@ -186,9 +186,9 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-T473 S8 is the current coherent ten-image delivery. Its release identity is
+T473 S9 is the current coherent ten-image delivery. Its release identity is
 `assets/release/release-manifest.json`; all ten files are hash-equal to
-`O:\winnt\system32` and `build/t473-s8/package-r3/system32`. Guest media remains
+`O:\winnt\system32` and `build/t473-s9/package-r1/system32`. Guest media remains
 unchanged.
 
 ## Temporary Evidence

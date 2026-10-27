@@ -3838,7 +3838,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     wow_task_order_thread thread = {0};
     wow_task_order_entry task = {0};
     HMENU root = NULL, child = NULL, alias;
-    HWND window = NULL;
+    HWND window = NULL, short_window;
     wow_cleanup_window window_record = {0};
     WNDCLASSA window_class = {0};
     BOOL published = FALSE;
@@ -4076,6 +4076,26 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     if (!window) goto cleanup;
     published = wow_user_window_publish(process->objects, window, &window_record, &thread);
     if (!published || !wow_user_runtime_enter(&binding)) goto cleanup;
+    /* These are the exact HWND32-shaped original wuwind/wuser operations
+     * admitted by T473 S9.  A current full handle remains a separate native
+     * adapter contract; this witness proves that the low-word carrier reaches
+     * the published window and that Z-order commands are not misread as an
+     * object whose low word happens to be 0 or 1. */
+    short_window = (HWND)(ULONG_PTR)LOWORD(window);
+    step = "short-window-wrapper-identity";
+    if (!wow_native_MoveWindow(short_window, 4, 6, 240, 160, FALSE) ||
+            !wow_native_SetWindowPos(short_window, HWND_TOP, 0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE) ||
+            !wow_native_SetWindowPos(short_window, HWND_BOTTOM, 0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE) ||
+            !wow_native_SetWindowPos(short_window, HWND_TOPMOST, 0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE) ||
+            !wow_native_SetWindowPos(short_window, HWND_NOTOPMOST, 0, 0, 0, 0,
+                SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE)) goto cleanup;
+    (void)wow_native_ShowWindow(short_window, SW_SHOWNOACTIVATE);
+    if (!IsWindowVisible(window)) goto cleanup;
+    (void)wow_native_SetCapture(short_window);
+    if (GetCapture() != window || !wow_native_ReleaseCapture()) goto cleanup;
     menu_callouts = menu_locked_callouts = 0;
     if (!wow_menu_native_SetMenu((HWND)(ULONG_PTR)LOWORD(window), root) ||
             wow_menu_native_GetMenu((HWND)(ULONG_PTR)LOWORD(window)) != root ||
