@@ -1,0 +1,18 @@
+{
+  "case": "opennt-debug",
+  "moduleHandle": 6031,
+  "pathLength": 27,
+  "invalidReserved": 16390,
+  "init": 0,
+  "instance": 147072,
+  "reinit": 0,
+  "reinitInstance": 147072,
+  "uninit": 1,
+  "secondUninit": 0,
+  "modulePath": "O:\\TMP\\NFC0\\TESTS\\DDEML.DLL",
+  "resolvedFileSha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+  "inputSha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+  "probeSha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+  "scope": "one process, synchronous init/reinit/teardown; no DDE transactions requested; callback invocation not instrumented",
+  "originalGuestModified": false
+}

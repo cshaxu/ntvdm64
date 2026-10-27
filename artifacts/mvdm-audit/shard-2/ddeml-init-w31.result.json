@@ -1,0 +1,18 @@
+{
+  "case": "w31",
+  "moduleHandle": 6031,
+  "pathLength": 27,
+  "invalidReserved": 16390,
+  "init": 0,
+  "instance": 131776,
+  "reinit": 0,
+  "reinitInstance": 131776,
+  "uninit": 1,
+  "secondUninit": 0,
+  "modulePath": "O:\\TMP\\N2B3\\TESTS\\DDEML.DLL",
+  "resolvedFileSha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+  "inputSha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+  "probeSha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+  "scope": "one process, synchronous init/reinit/teardown; no DDE transactions requested; callback invocation not instrumented",
+  "originalGuestModified": false
+}

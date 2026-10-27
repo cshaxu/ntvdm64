@@ -33,3 +33,12 @@ requested functional restored-code percentage. Calculate and justify the
 latter only when original owner, selected edition and actual behavior are
 known. Regenerate the combined index after any shard changes and verify
 uniqueness, shard ownership and frozen identity before relying on counts.
+
+`external-priority-boundaries.csv` retains the original audit's 93 explicit
+non-MVDM boundary rows, including its reasons and reviewed slices. The
+remaining 42,870 external rows were still marked provider-membership pending
+by that audit. Neither category is automatically admitted as product code
+or discarded; each requires relevance and current-owner analysis. The
+accompanying summary records the exact source-catalog hash and the narrow
+local-path comparison; a missing same-shaped path is not proof that no
+modern host or differently located adapter supplies a capability.

@@ -187,3 +187,20 @@ non-final dispositions; no product code or guest changed.
 
 - Latest `file-audit.csv` SHA-256 `E9758C3B4260C2CA676E75789A6C80A3EC06A936E272D1B592752C4F82FA96F0`.
 - `selected-diff-register-audit.csv` SHA-256 `C095A66713598C75A92459E66EBA8978D456C47BB6D0DEAD534645FDEE98870C`.
+
+## DIV-147 lifecycle close-cohort audit
+
+`div147-host-close-audit.md` traces the original host close and terminate
+callers, NTSRV/worker-base authorization and actual standalone versus
+fixture-longjmp paths. It recommends retaining the existing local guard
+provisionally: service authorization serializes cleanup owners but permits
+same-thread reentry, and a fixture escape source path enters host close twice.
+Neither the current auth fixture nor its host-close stub proves real resource
+cleanup, partial-init or failure safety. The record identifies a silently
+ignored event-thread join failure as a conditional risk and sets finite
+actual-body and real-worker verification conditions before deletion or final
+retention. No runtime or guest change, new fixture or new execution occurred.
+
+Current `file-audit.csv` SHA-256 `FFDF74A6471FBF501B110D6F7D21B1CFA944C3583BAE4A113FE7E355B75F4B75`.
+Current `selected-diff-register-audit.csv` SHA-256 `67B7FE6EE027EB6D220B7430B3C99EFD5F2879D9509B00489096D131E9895A8A`.
+Current `owner-review.csv` SHA-256 `46FA0A8B496CE6635BA51E5D95035602C3E06F9CD5F12B9BA7A0A0900F8388C5`.

@@ -1,0 +1,9 @@
+{
+  "catalog_path": "O:/repos.hobby/ntvdm64-wow32-audit/management/source-coverage.csv",
+  "catalog_sha256": "80EE52BB0023B2B9CF45A2E30700C4BA0C345C815BB7ED6E3A0493C642B81F1E",
+  "external_paths": 42963,
+  "upstream_explicit_boundary_records": 93,
+  "upstream_pending_provider_membership": 42870,
+  "direct_project_candidate_rows": 0,
+  "limitation": "Audit source classifications are initial relevance hints, not automatically MVDM obligations, runtime evidence or exclusion decisions."
+}

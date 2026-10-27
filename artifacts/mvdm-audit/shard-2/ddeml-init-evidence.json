@@ -1,0 +1,43 @@
+{
+  "scope": "one Win16 task, static guest DDEML import, invalid reserved field, one instance init, same-instance reinit, uninit and repeated uninit; no DDE transaction requested and callback invocation not instrumented",
+  "source_sha256": "4F1C6D8A6B725708A1D841920D2EF6EB3416268D8404E0ACF496DDE59E449B5A",
+  "runner_sha256": "FF9509E807347FA6342E65536FADCB642B4D8F441E673B3D65A416421342B456",
+  "ntvdm_sha256": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5",
+  "wow32_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "runs": [
+    {
+      "case": "w31",
+      "probe_sha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+      "input_sha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+      "resolved_sha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+      "guest_exit_code": "0x00000000",
+      "reserved_error": 16390,
+      "init_error": 0,
+      "instance": 131776,
+      "reinit_error": 0,
+      "reinit_instance": 131776,
+      "uninit": 1,
+      "second_uninit": 0,
+      "module_path": "O:\\TMP\\N2B3\\TESTS\\DDEML.DLL",
+      "observer_sha256": "CEFF539958811BDD629A5E95ADFD27A48D9AC8A9D45141E32375C123FD77932F",
+      "receipt_sha256": "89EF46D9C2B176A6825D0855D91BFF4BD0F4A2EF9AB868D5E608D7851EA9988F"
+    },
+    {
+      "case": "opennt-debug",
+      "probe_sha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+      "input_sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+      "resolved_sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+      "guest_exit_code": "0x00000000",
+      "reserved_error": 16390,
+      "init_error": 0,
+      "instance": 147072,
+      "reinit_error": 0,
+      "reinit_instance": 147072,
+      "uninit": 1,
+      "second_uninit": 0,
+      "module_path": "O:\\TMP\\NFC0\\TESTS\\DDEML.DLL",
+      "observer_sha256": "9BDF7C0324C2328A3324F1BC3D736A629E52736A58CFB4E80A6A056688635150",
+      "receipt_sha256": "C98F5CF3E70253031DE895F056EBA3F68358EDA0CAB6815D9CC24F110461DC92"
+    }
+  ]
+}

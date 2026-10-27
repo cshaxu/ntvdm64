@@ -178,3 +178,36 @@ export lookup in these exact staged routes. The probe **does not call**
 DdeInitialize, establish an instance, process a DDE transaction or verify
 task/callback lifetime. It does not establish actual O:/winnt default-path
 behavior for arbitrary applications, or justify activating WDD32 thunks.
+
+
+## Real guest DDEML initialization and retirement witness
+
+An independently authored Win16 NE test statically imports `DDEML` and
+KERNEL, confirms the loaded module pathname and SHA-256, then makes one
+invalid-reserved-argument initialization, one normal client-only
+initialization, one reinitialization of the same instance, one uninitialize
+and one repeated uninitialize. No DDE transaction is requested. The
+callback is a no-op; whether it is invoked is not instrumented.
+
+Two independent immutable app-local DLL inputs were tested in disposable
+physical stages against the r10 worker/WOW32 package. Both inputs produced:
+
+- reserved=1 rejected with `0x4006` and no reported successful initialization;
+- valid initialization returned 0 with a nonzero instance;
+- same-instance reinitialization returned 0 with that same instance ID;
+- first uninitialize returned 1 and the second returned 0;
+- guest process exited zero, with loaded file SHA-256 equal to its staged input.
+
+The exact two input/loaded hashes, instance values, observer and receipt
+hashes, probe/runner hashes and r10 package hashes are in
+`ddeml-init-evidence.json`. Original guest input was only copied byte-for-byte
+to disposable stages; no guest source or product was changed.
+
+This establishes a bounded real initialization/reinitialization/teardown
+route for two existing guest DDEML binaries with current WOW32. It is
+consistent with the independently observed absence of `wddeml32.c` from
+the selected build, but does not prove those binaries' exact source lineage
+or every internal call. It does not establish callbacks, DDE conversations,
+peer interoperability, nested tasks, abrupt task loss, resource-leak freedom
+or the separate public-API callback-association candidate. The probe callback
+contains no behavioral assertion and was not instrumented for invocation.

@@ -150,3 +150,29 @@ index bug. Repository source search finds no consumer of `SasVectorNames`;
 The checked NTVDM export list also does not expose names `Cpu`, `Sas`,
 `c_sas_touch` or `c_VirtualiseInstruction`. Neither observation proves that
 a pointer cannot escape through another API or a dynamic module.
+
+## Isolated execution witness and its limit
+
+The existing `tests/mvdm-host/ccpu_bounded_execution_fixture.c` was copied
+to an isolated build-owned test source and changed by
+`sas-vector-runtime-fixture.patch`. After original `sas_init` the fixture
+saves the two actual vector entries, independently invokes both fallback
+addresses in SEH as negative controls, installs counting wrappers that would
+forward any vector call to the original breakpoint, and runs the original
+fixture's bounded SAS scalar/string/move/fill, A20, and external physical
+page mapping operations. Both controls raised `EXCEPTION_BREAKPOINT`, the
+bounded portion exited zero and reported `touch=0 virtualise=0`; identities
+and exact limitations are in `sas-vector-runtime-result.json`. The original
+vectors were restored before SAS teardown. This does not detect calls that
+bypass the vector via the CCPU direct macros, cover initialization before
+wrapper install, run an actual guest application, or prove all paths safe.
+
+An earlier version continued into the full original fixture and failed at
+its unrelated timer/PIC INTACK check (`vector=-1`); that is recorded as a
+non-pass and was not converted into a successful full fixture. The narrow
+SAS witness stops before CPU/PIC initialization. Fixture links required the
+existing `opennt-base-client.lib` plus a test-only `CsrPortHeap` declaration
+and used the existing `/FORCE:multiple` test seams; it is not the shipped
+NTVDM executable. Logs, binaries and derived complete source are disposable
+under `build/t473-s10/shard-3-sas-vector/`; only the minimal test patch and
+results are retained here. No product or guest file was modified.

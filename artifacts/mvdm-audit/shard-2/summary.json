@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "AB1AB67A8413DEDEE4E3CA8AC51BDB7C0726B4B0EE56DF0FA0759D7CA10D0A37",
+  "output_sha256": "DF999ACFC53C89D30D5726868A1CD5D00D2160D92A953BB01CEDECB815064CF6",
   "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,027 other entries remain pending; matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -115,7 +115,7 @@
   },
   "ddeml_feasibility_review": {
     "evidence": "ddeml-implementation-options.md",
-    "sha256": "71F2CEF00402A1D3AFCBF6F8EAF0B14C9CD508CFEC4363163AEF9232FF060CB9",
+    "sha256": "10E7E4E7758245002E22A51D833570B39CBC9599F2924675E04A85E84411A1CD",
     "limits": "Native callback-per-instance association is an untested design candidate; guest DDEML source/binary path and task lifecycle are not demonstrated."
   },
   "ddeml_loader_probe": {
@@ -123,5 +123,10 @@
     "evidence": "ddeml-module-path-evidence.json",
     "sha256": "DB86FFBA55B4C6233C4CCF70A14F8F1A7D54CFA5FD992B403447809F972C25D6",
     "limitations": "Tests no-load, absent, and two app-local loads/export lookup; DdeInitialize, DDE conversations, actual installed application path and task lifecycle untested."
+  },
+  "ddeml_initialization_witness": {
+    "evidence": "ddeml-init-evidence.json",
+    "sha256": "848F042A90AB107795B280D639D488371D4809FEB7BF1DFE2214A794A9CF9027",
+    "limits": "Single task client-only reserved-error, init/reinit/uninit; no callback counting, transactions, task loss or original source/binary identity proof."
   }
 }

@@ -1,0 +1,69 @@
+--- ccpu_bounded_execution_fixture.c
++++ sas-vector-runtime-fixture.c
+@@ -20,6 +20,17 @@
+ #include "c_page.h"
+ #include "c_tlb.h"
+ 
++/* Isolated audit fixture: count the two vector entries while preserving
++ * their original breakpoint behavior if reached. This is not product code. */
++static unsigned audit_touch_calls, audit_virtualise_calls;
++static IU8 *(*audit_touch_original)(IU32, IU32);
++static IU32 (*audit_virtualise_original)(IU32, IUH, IU32, IU32);
++static IU8 *audit_touch(IU32 address, IU32 length)
++{ ++audit_touch_calls; return audit_touch_original(address, length); }
++static IU32 audit_virtualise(IU32 ip, IUH size, IU32 address, IU32 data)
++{ ++audit_virtualise_calls; return audit_virtualise_original(ip,size,address,data); }
++
++PVOID CsrPortHeap; /* Test-only unresolved fixture link carrier; not used by this probe. */
+ static half_word port_bytes[4];
+ static unsigned port_writes;
+ static void fixture_port_outb(io_addr port, half_word value)
+@@ -511,6 +522,21 @@
+     if (!session_activate(&physical_owner) ||
+         !session_thread_bind(&physical_owner)) return 1;
+     sas_init(UINT32_C(0x00200000));
++    /* Confirm the real linked defaults produce EXCEPTION_BREAKPOINT. */
++    {
++        unsigned seen=0;
++        audit_touch_original=Sas.Sas_touch;
++        audit_virtualise_original=Sas.SasVirtualiseInstruction;
++        if (!audit_touch_original || !audit_virtualise_original) return 1;
++        __try { (void)audit_touch_original(0, 0); }
++        __except (fixture_breakpoint_filter(GetExceptionCode())) { ++seen; }
++        __try { (void)audit_virtualise_original(0, 0, 0, 0); }
++        __except (fixture_breakpoint_filter(GetExceptionCode())) { ++seen; }
++        if (seen != 2) return 1;
++        Sas.Sas_touch=audit_touch;
++        Sas.SasVirtualiseInstruction=audit_virtualise;
++        fprintf(stderr, "SAS_AUDIT_CONTROL_BREAKS=%u\n",seen);
++    }
+     if (Sas.Sas_hw_at != cSasPtrs.Sas_hw_at ||
+         Sas.Sas_store != cSasPtrs.Sas_store ||
+         Sas.SasPtrToPhysAddrByte != cSasPtrs.SasPtrToPhysAddrByte ||
+@@ -653,6 +679,14 @@
+         }
+         (void)VirtualFree(external_page, 0u, MEM_RELEASE);
+     }
++    /* Bounded SAS-only witness: no claim about later PIC/guest execution. */
++    fprintf(stderr, "SAS_AUDIT_BOUNDED touch=%u virtualise=%u\n",
++        audit_touch_calls, audit_virtualise_calls);
++    if (audit_touch_calls || audit_virtualise_calls) return 1;
++    Sas.Sas_touch=audit_touch_original;
++    Sas.SasVirtualiseInstruction=audit_virtualise_original;
++    sas_term();
++    return 0;
+     fputs("cpu-init\n", stderr);
+     c_cpu_init();
+     {
+@@ -842,6 +876,11 @@
+         sas_term();
+         return 1;
+     }
++    fprintf(stderr, "SAS_AUDIT_COUNTS touch=%u virtualise=%u\n",
++        audit_touch_calls, audit_virtualise_calls);
++    if (audit_touch_calls || audit_virtualise_calls) return 1;
++    Sas.Sas_touch=audit_touch_original;
++    Sas.SasVirtualiseInstruction=audit_virtualise_original;
+     sas_term();
+     return 0;
+ }

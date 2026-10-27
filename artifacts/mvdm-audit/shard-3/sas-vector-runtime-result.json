@@ -1,0 +1,19 @@
+{
+  "inputs": {
+    "tests/mvdm-host/ccpu_bounded_execution_fixture.c": "0324C8593240DFC4B1248625075A22576CAEA8F2367A6856DE74008A33E35627",
+    "artifacts/mvdm-audit/shard-3/sas-vector-runtime-fixture.patch": "6DC00A97A65CFA1EA4634AD06E448860785A7EC62B154F21378A256D00A326CF",
+    "build/t473-s10/shard-3-sas-vector/sas-vector-runtime-fixture.c": "6C122B7264A3CC10EECE8A62C9136BA2342CEA659303E3D87A7C6ED969C95378",
+    "build/t473-s10/shard-3-sas-vector/sas-vector-runtime-fixture.exe": "5BDCD47A4E1DEE7BFF69571DEC56851E507E163727796B3507C6A67A48CC94AC",
+    "build/.ninja/msvc-x86-release/worker/ntvdm.exe": "D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5"
+  },
+  "controls": "two directly invoked fallback functions raised EXCEPTION_BREAKPOINT, both handled only in isolated fixture",
+  "bounded_witness": "selected SAS initialization, memory scalar/load/store/move/fill, A20 and external physical-page binding; counter touch=0 virtualise=0",
+  "process_exit": 0,
+  "limitations": [
+    "counter wrappers intercept vector calls only, not direct CCPU macro calls",
+    "observation begins after sas_init, ends before cpu-init",
+    "does not exercise actual production worker or guest workloads",
+    "fixture uses test seams and /FORCE:multiple link; production behavior not proven",
+    "an earlier broader fixture run failed at PIC acknowledgement (vector=-1); no full fixture pass claimed"
+  ]
+}
