@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "C2D795DBF47C10CB5B6749255445F7E933F4EE0F5DBE570E145667AF1E3257B7",
+  "output_sha256": "B7AA6D49D535649DF711CD5A3D6DA189CC8F7B5A1B67485674F48B50D0DB3051",
   "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 957 rows remain pending. Excluded inactive host bodies/build artifacts do not exclude guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -172,5 +172,6 @@
   "suballoc_xms_failure": "suballoc-xms-callback-failure-review.md; injected failure observation and actual selected XMS callbacks separated",
   "wow_callback_memory_helpers": "wow-callback-memory-helpers-review.md; registration and historical W32InitDlg fixture distinguished from other callbacks",
   "wow_sound_beep": "wow-sound-beep-review.md; original thunk route and native sound owner, runtime evidence missing",
-  "wow_multimedia_inactive_body": "wow-multimedia-inactive-body-review.md; excluded inactive wmmedia1 bodies only, multimedia capability separately unresolved"
+  "wow_multimedia_inactive_body": "wow-multimedia-inactive-body-review.md; excluded inactive wmmedia1 bodies only, multimedia capability separately unresolved",
+  "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md; nonzero result fallthrough candidate, reachability not established"
 }

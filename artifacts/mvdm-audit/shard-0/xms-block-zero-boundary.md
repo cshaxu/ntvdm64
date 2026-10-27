@@ -78,3 +78,26 @@ was used to build the installed binary. No original guest or product image
 was changed. Further assessment requires the original XMS contract, host
 return and allocation-state observation, including repeated requests and
 subsequent nonzero allocations.
+
+## Zero-size lock address in two isolated workers
+
+A third independent guest probe additionally locked and unlocked the
+zero-size handle before querying, resizing and freeing it. Two isolated
+package-c runs used exactly the same COM SHA-256
+`7D0B9C7B3B76254E377314A35665C16DBAF8665A761915FE3518DEDC71D9FC80`
+and source `xms-zero-lock-probe.asm` SHA-256
+`E55BF58E8AAE9EFC3392B33B96DDB5CB3501FCE57603E5413207E9D5D59E5273`.
+Both exited successfully and their existing host entry witness recorded XMS
+service 02 with DX=0. Allocation, lock, info, equal-size resize and free
+reported success; the info size was zero. The first lock returned DX:BX
+`020E:2800` and the second `0287:0C00`.
+
+These are observed guest-visible, process-dependent addresses for a zero-size
+block, consistent with but not proof of the uninitialized local's exact
+influence. The XMS contract for locking a zero-size block, actual pool bounds,
+source-to-binary equivalence of the guest and the host return value remain
+unverified. No read or write through those addresses was attempted. Do not
+claim data corruption or decide a fix from address variation alone. The
+retained `himem4.asm` source makes zero-length free bypass the host-free
+service; the measured free return does not prove the installed binary's exact
+source or a host deallocation call.
