@@ -4,9 +4,9 @@
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "file_count": 1089,
   "decision_counts": {
-    "pending": 1017,
+    "pending": 958,
     "partial": 48,
-    "excluded": 24
+    "excluded": 83
   },
   "role_counts": {
     "unselected-host-module-definition-requires-s2-disposition": 6,
@@ -23,8 +23,8 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "4CDC8B0E1D41F14C2BAEB7ECB44062CB63883D7699BAB196C5DA92FDB9AA6C1F",
-  "limitations": "All 48 partial files have source-level call/owner and evidence pointers, but these are initial trace notes with explicitly open behavioral boundaries, not full semantic completion. 1,017 other entries remain pending; matching lines are not restored percentage.",
+  "output_sha256": "711FE98D41E2866DA40327CB982CA73D005D7D499EDFB56863C06DE0A12CCFA0",
+  "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 958 rows remain pending. Excluded build artifacts do not exclude source or guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
     "dos/command/cmdpif.c",
@@ -166,5 +166,6 @@
   "wow_user_init_domain": "wow-user-init-domain-review.md; original USER final init and session domain, lifecycle runtime evidence bounded",
   "wow_resource_template_lifecycle": "wow-resource-template-lifecycle-review.md; identical source remains pending, caller failure candidate not reproduced",
   "wow_comm_port_lifecycle": "wow-comm-port-lifecycle-review.md; DOS nt_com fixture does not prove WOW USER PortTab behavior",
-  "wow_scrollbar_message": "wow-scrollbar-message-review.md; bidirectional conversion and call-local lifetime reviewed, real branch witness pending"
+  "wow_scrollbar_message": "wow-scrollbar-message-review.md; bidirectional conversion and call-local lifetime reviewed, real branch witness pending",
+  "historical_i386_batch": "historical-i386-artifacts-review.md and historical-i386-artifacts.csv; 59 artifacts excluded only as inspected graph inputs and verbatim package files"
 }

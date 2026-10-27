@@ -1,0 +1,24 @@
+{
+  "targets": {
+    "ntvdm": {
+      "directory": "build/.ninja/msvc-x86-release/worker",
+      "target": "ntvdm.exe",
+      "ninja_inputs_sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C"
+    },
+    "wow32": {
+      "directory": "build/.ninja/msvc-x86-release/wow32",
+      "target": "wow32.dll",
+      "ninja_inputs_sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276"
+    },
+    "vdmredir": {
+      "directory": "build/.ninja/msvc-x86-release/worker",
+      "target": "VDMREDIR.dll",
+      "ninja_inputs_sha256": "C653E688DFE76D508ABECC63B72CCA20B52E2E66901433FD91B970F59A337BD2"
+    }
+  },
+  "package": "build/package-uuid/package-c",
+  "package_file_count": 83,
+  "total": 58,
+  "excluded": 58,
+  "pending": []
+}

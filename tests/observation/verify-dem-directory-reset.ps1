@@ -24,7 +24,7 @@ if($LASTEXITCODE){throw 'Compile failed'}
 $generator=Get-Content (Join-Path $repo 'tools/build/New-T310OriginalSoftpcNinja.ps1') -Raw
 $closure=[regex]::Match($generator,'(?m)^\$fixtureHostLibraries = ''([^'']+)''')
 if(!$closure.Success){throw 'Selected fixture closure absent'}
-$extraClosure=[regex]::Match($generator,"(?m)^\`$fixtureHostLibraries \+= '([^']+)'$")
+$extraClosure=[regex]::Match($generator,"(?m)^\`$fixtureHostLibraries \+= '([^']+)'\r?$")
 if(!$extraClosure.Success){throw 'Selected fixture additional closure absent'}
 $dependencies=@('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_host_fixture_seams.obj')+
     $closure.Groups[1].Value.Split(' ')+$extraClosure.Groups[1].Value.Trim().Split(' ')+@('common-root.lib','common-rpc.lib',

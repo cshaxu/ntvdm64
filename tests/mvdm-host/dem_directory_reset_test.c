@@ -43,6 +43,20 @@ static void dispose(FFINDLIST *entry)
     memset(entry, 0, sizeof(*entry));
 }
 
+/* GetHandleInformation can raise STATUS_INVALID_HANDLE for a closed handle.
+ * Treat only that exception as the same closed-handle result. */
+static int is_closed_handle(HANDLE handle)
+{
+    DWORD flags;
+    __try {
+        return !GetHandleInformation(handle, &flags) &&
+            GetLastError() == ERROR_INVALID_HANDLE;
+    } __except (GetExceptionCode() == 0xC0000008L ?
+        EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) {
+        return 1;
+    }
+}
+
 static void scenario(int mutation)
 {
     FFINDLIST entry;
@@ -50,7 +64,6 @@ static void scenario(int mutation)
     SRCHBUF fcb;
     WCHAR pattern[MAX_PATH], remembered[MAX_PATH], other[MAX_PATH], hint[MAX_PATH];
     HANDLE closed;
-    DWORD flags;
     NTSTATUS status;
     memset(&entry, 0, sizeof(entry));
     check("create AAA", create_file(L"AAA.TST"));
@@ -84,8 +97,7 @@ static void scenario(int mutation)
         !memcmp(entry.RestartHint.Name, hint, entry.RestartHint.Length));
     check("reclamation preserves errors and reopens normal end",
         entry.LastQueryStatus == (mutation == 0 ? STATUS_UNSUCCESSFUL : STATUS_SUCCESS));
-    check("close releases actual handle", !GetHandleInformation(closed, &flags) &&
-        GetLastError() == ERROR_INVALID_HANDLE);
+    check("close releases actual handle", is_closed_handle(closed));
     check("close releases original buffer ownership", NumDirectoryHandle == 0 &&
         NumFindBuffer == 0 && !entry.FindBufferBase && !entry.FindBufferNext);
     if (mutation == 1) {
