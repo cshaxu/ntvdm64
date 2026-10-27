@@ -75,6 +75,17 @@ The bounded [diagnostic-access inventory](shard-1/diagnostic-guest-access-invent
 also identifies BOP 06 and INT 31 mapping candidates; its pattern search is
 not an exhaustive proof across every helper or macro.
 
+## Disk-close counter failure leaves partial retirement
+
+The selected floppy and fdisk close implementations close and invalidate their
+native handles before a fallible guest SCS counter update. An actual-object
+fixture with a failed-update seam confirms that both report failure while the
+native open counts remain unchanged; floppy also retains its prior owner and
+lock. See `shard-3/disk-close-failure-audit.md` for layout checks and the
+precise mock boundary. Whether a real session can reach that failure is not
+yet established. Review both providers as a single lifecycle group, preserving
+the distinction between native cleanup and guest-counter failure.
+
 The later source-location audit registers DIV-305 and DIV-307/308/309.
 DIV-306 and DIV-308 include descriptor reads and far-transfer translation
 before the reporting switch. A controlled real CCPU paging/exception fixture

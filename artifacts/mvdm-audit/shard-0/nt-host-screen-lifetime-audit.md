@@ -35,3 +35,27 @@ DOS, shared/aliased standard handles and graphics transitions. A later repair
 must preserve pipe EOF and independently owned DOS-record handles, and test
 the source entry plus actual redirected guest lifecycle. The project-owned
 mirror has not been changed in this review.
+
+## Broker startup scope and reachable uses
+
+The current NTSRV worker path clears `STARTF_USESTDHANDLES`, nulls the three
+startup standard-handle fields and passes `bInheritHandles=FALSE` to
+`CreateProcessW`. DOS workers are launched with `DETACHED_PROCESS`; WOW uses
+`CREATE_NO_WINDOW`. Command records, not this startup structure, own the
+submitted DOS streams. Consequently the fixture's hypothetical inherited
+pipe is not evidence that an ordinary current NTSRV-launched worker receives
+that pipe as its process stdout. The detached process's actual standard-handle
+values at `InitScreenDesc`, including possible NULL/invalid values, still need
+direct observation; they cannot be inferred solely from the caller's redirected
+`run16` handles.
+
+The `IDM_POINTER` menu event invokes `MouseDisplay` when `bPointerOff` is set;
+the fullscreen path can also invoke it under that condition. The graphics
+buffer close path explicitly assigns `sc.OutputHandle` to the active field
+before its own `MouseDisplay`. These are source call paths, not a demonstrated
+ordering from initial worker startup. The console client represents endpoint
+identity with duplicated event handles and checks output ownership before
+falling back to `GetConsoleScreenBufferInfo`; it does not make an arbitrary
+closed value a valid output. Any live witness must correlate actual startup
+handles, current active field, first update and the user-visible event in the
+same isolated worker rather than reuse the fixture's made-up handle values.
