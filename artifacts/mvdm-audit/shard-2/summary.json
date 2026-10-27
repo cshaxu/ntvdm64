@@ -23,7 +23,7 @@
     "retired-cpu30-executor": 1
   },
   "live_hash_drift": [],
-  "output_sha256": "0E95E25684DF2B14C37EB7EF2F3E734F096DDD6472A9A2654658CF944C1F1229",
+  "output_sha256": "F7F4C46D9CC3895F6997D862BBCBBF4333A5E779854B3B77E1A74C1AEA451361",
   "limitations": "All 48 partial files have initial source-level evidence with open behavioral boundaries; 957 rows remain pending. Excluded inactive host bodies/build artifacts do not exclude guest features. Matching lines are not restored percentage.",
   "detailed_reviewed_partial_files": [
     "dos/command/cmddata.c",
@@ -173,5 +173,5 @@
   "wow_callback_memory_helpers": "wow-callback-memory-helpers-review.md; registration and historical W32InitDlg fixture distinguished from other callbacks",
   "wow_sound_beep": "wow-sound-beep-review.md; original thunk route and native sound owner, runtime evidence missing",
   "wow_multimedia_inactive_body": "wow-multimedia-inactive-body-review.md; excluded inactive wmmedia1 bodies only, multimedia capability separately unresolved",
-  "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md and tabstop-object-evidence.json; compiled-object fallthrough reproduced on injected nonzero result, guest reachability unknown"
+  "wow_edit_tabstop_unthunk": "wow-edit-tabstop-unthunk-review.md; selected object injected nonzero fallthrough and real guest returned 1 independently observed; guest host-side state unsampled"
 }

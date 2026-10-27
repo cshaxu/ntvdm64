@@ -125,3 +125,22 @@ return, the zero-size lock contract, validity of the zero-size address, data
 corruption, or all allocation/cleanup behavior. Test did not dereference the
 zero-size address. The runner used an isolated owned stage, explicitly
 enabled existing tracing and did not change existing guest or product images.
+
+## Selected object zero-size code path
+
+The current cached x86 `obj/xms/xmsblock.obj` SHA-256
+`76D1E79FDE8F824EA36891E55816BAF461F9E25964CF1295E7826EDE3BCC63EF`
+was independently disassembled with `objdump -d`. In `_xmsAllocBlock`,
+`push ecx` reserves the local slot; after `getDX`, zero skips the call that
+writes the output slot and jumps to the code that reads `[esp]`, shifts it
+right by 10 and passes its low word to the `setAX` call. For nonzero requests
+the same slot is passed as the allocator output. Thus in this specific cached
+object the zero request converts an uninitialized stack slot into its result;
+this is stronger than source analysis alone.
+
+The cached object is not independently tied byte-for-byte to the released
+NTVDM image, and the guest entry trace does not log host return or the C local.
+The actual guest observation is consistent with this object code, but does
+not establish that exact object produced the release behavior. The correct
+zero-size XMS handle/lock contract and a safe original-compatible value still
+require separate evidence; do not infer valid memory or claim corruption.

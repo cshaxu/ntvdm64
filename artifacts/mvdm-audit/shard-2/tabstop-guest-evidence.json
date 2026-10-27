@@ -1,0 +1,52 @@
+{
+  "probe_source_sha256": "6A2EAB578F6444B4AA1B5AB2F97062A202F0E87C4C3153B7A845E973E5E338DF",
+  "probe_binary_sha256": "B598AEA6CDDC60245F164F29696555BBC8C413C87D72FCACB8A87B29B9797ECC",
+  "report_sha256": "676E32A8E3276DA00BEE887C149737DC676C42A0DE7B0A4D65566E3E8835CA80",
+  "base_package_wow32_sha256": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83",
+  "base_package_ntvdm_sha256": "01A5B459072CA23F49AA43285580BD9017395C936F9DA8B2F18EE7223A52D1F6",
+  "observer_sha256": "A5C0304E6BE25F7C6F1D76211D0ED1600A6DF6915C5CBE3940DF023ABB6C24C3",
+  "observer_result": "exited",
+  "records": [
+    {
+      "phase": 0,
+      "errors": 0,
+      "task": 6079,
+      "word_calls": 0,
+      "word_nested": 0,
+      "word_actions": 0,
+      "tabstop_result": 0,
+      "reset_result": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "task": 6079,
+      "word_calls": 0,
+      "word_nested": 0,
+      "word_actions": 0,
+      "tabstop_result": 0,
+      "reset_result": 0
+    },
+    {
+      "phase": 2,
+      "errors": 0,
+      "task": 6079,
+      "word_calls": 3,
+      "word_nested": 3,
+      "word_actions": 7,
+      "tabstop_result": 0,
+      "reset_result": 0
+    },
+    {
+      "phase": 3,
+      "errors": 0,
+      "task": 6079,
+      "word_calls": 3,
+      "word_nested": 3,
+      "word_actions": 7,
+      "tabstop_result": 1,
+      "reset_result": 1
+    }
+  ],
+  "interpretation": "Actual Win16 USER SendMessage guest return is 1 for both nonempty and reset EDIT EM_SETTABSTOPS. Host return before unthunk, actual execution in UnThunkEMMsg16 and host wordbreak global are not observed. Independent disposable guest only; no original guest modified. FreshPackageIdentity isolates staged package."
+}
