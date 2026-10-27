@@ -24,3 +24,21 @@ Actual results, recorded in `build/t473-s10/shard-3-ccpu/far-{original,current}-
 - Current: vector 14 (#PF), page error 0, CR2 `0x00000fff`, process status 14.
 
 The current fault at 0xfff arises from the cross-page dword read's original helper check; earlier source reasoning that it would report 0xffb was a hypothesis, not an observed address. The difference is now directly reproduced in actual original CCPU paging, descriptor validation and exception machinery, with logger disabled. The first unconditional extra dword belongs to the DIV-306 reporter argument evaluation; DIV-308's duplicate read/translation remains independently unconditional but is not reached in this particular test. This demonstrates a concrete regression in `c_xfer.c`; the responsible specific diagnostic calls require correction and regression coverage. The probe does not prove all other cases, nor does it alter any original guest or production source.
+
+## Isolated corrective candidate, diagnostic modes and valid control
+
+The test-only candidate (`cpu-far-diagnostic-candidate.patch` SHA-256 `B4D44D9B9E75E523004D2C531C853812F935FD1B6EDAE87C2729EE8448EDA6D0`; candidate source SHA-256 `00990C57D08CF62140C06867A9B7ED4CABE10C9DA0A5330F627C21FF90834B6B`; isolated candidate object `299F0D40799A0AD8EEC96FB68A161B1703A9A341D1690CCCCCDCC244C55C93D8`) removes the extra descriptor-domain argument reads and fetch-translation block, preserving original code and the existing AR-only far-call reporter. It deliberately removes the descriptor-domain and fetch-translation debug records; this is a behavior/diagnostic tradeoff, not a production fix. A gate only around those reads would still permit enabled diagnostics to change CPU exception order. No production file or guest changed.
+
+`ccpu-far-exception-probe.c` SHA-256 `2032B672991D3C05C289C9C58BEA4C2625619B9929AE7470DDA8B122B5C1124A` was extended to run logger off, enabled for selector 0x0008, enabled for nonmatching selector 0x0010, and a valid mapped cross-page descriptor control. Actual CCPU support objects, original c_xfer, selected current c_xfer and test-only candidate c_xfer were compared:
+
+| Scenario | Original | Current | Test candidate |
+| --- | --- | --- | --- |
+| Invalid descriptor, trace off | #GP 13 / error 8 | #PF 14 / CR2 0xfff | #GP 13 / error 8 |
+| Invalid descriptor, trace match | #GP 13 / error 8 | #PF 14 / CR2 0xfff | #GP 13 / error 8 |
+| Invalid descriptor, trace mismatch | #GP 13 / error 8 | #PF 14 / CR2 0xfff | #GP 13 / error 8 |
+| Valid control: PTE0=0x13003, PTE1=0x12003, AR=0x9b | no fault | no fault | no fault |
+
+Control process code 42 denotes returned normally without fault. The first provisional control run's printed constant `pte0`/`ar` fields were wrong even though the fixture had installed the right table and AR; the fixture print was corrected and the complete 3x4 matrix rerun, with the values above. These are focused CPU validation tests, not entire product or arbitrary paging cases. On the tested error path, DIV-306's argument reads trigger the fault before DIV-308 can run; no independent DIV-308 fault has yet been demonstrated. Current production remains unfixed.
+
+The retained patch normalizes line endings for review; the candidate source
+and object hashes above are the exact bytes used by the test.

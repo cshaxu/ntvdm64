@@ -219,12 +219,12 @@ separate PIF.EXE format utility, and the current addon/installed PIF hashes
 require a deployment-policy check before any conclusion. All three paths
 remain pending; the independent code-page probe ran, but no original tool was built or run.
 
-- Current `file-audit.csv` SHA-256 `B19F3A95BD9A73D27795BC118118EE9CBA8274902AD598EEF5E30A0E01C71AEE`.
+- Current `file-audit.csv` SHA-256 `4D652F04B0392F7EA304AA76151BE125796B6D4326799863481127CE5E07CD7A`.
 - Current `unselected-source-review.csv` SHA-256 `F25636073E1847DEB308859F5B0CCBC3561FE57A33C3901C44EBFF0CA5B01ACD`.
 
 `codepage-handoff-design.md` records the original ordinary CUI Console contract, a candidate lease-bound state synchronization design, unresolved concurrent external mutation boundary and acceptance matrix. Three related GRAFTABL build carriers were reviewed and remain pending provenance.
 
-`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `AB69FEA692A684B86C9EB60ECE404814A18570C98394F895CEEE815F61AAC7A0`.
+`video-interface-audit.md` traces GVI adapter reset, BIOS BOP 10 video dispatch and the selected original EGA switch-sense dummy. All remain pending behavior-level evidence; no fresh runtime test was run. Current `selected-owner-review.csv` SHA-256 `4CBA9C5B1FF1BD3217A8D5DBCFB1F375513C35861039CAB6713AADAFFE45B956`.
 
 Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, per the additional source/link comparison in `video-interface-audit.md`; no EGA runtime is claimed.
 
@@ -239,3 +239,5 @@ Default VGA 0x3C2 dispatch is distinct from conditional EGA switch-sense dummy, 
 `ccpu-cmp-neg-audit.md` records 431679 bounded actual CMP/NEG object comparisons to native x86; integrated decode, memory/string behavior and parity wiring remain pending.
 
 `ccpu-flag-cdq-audit.md` records 116448 offline native-oracle cases across STC, LAHF and CDQ; integrated guest decode and lifecycle remain pending.
+
+`ccpu-add-mul-audit.md` records 531748 offline ADD/unsigned MUL selected-object comparisons to native x86; guest decode, parity wiring and signed multiplication remain pending.

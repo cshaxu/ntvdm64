@@ -53,3 +53,7 @@ this does not identify or validate the deployed guest binary.
 
 A separate pending relevance census for the external rasprint tree is in
 `external-rasprint-boundary.md`; it does not bulk-exclude driver resources.
+
+All 205 current partial paths have a reproducible source-text retention
+metric in `partial-code-retention.csv`; its limitations are in
+`partial-code-retention.md`. It is not a functional completeness percentage.

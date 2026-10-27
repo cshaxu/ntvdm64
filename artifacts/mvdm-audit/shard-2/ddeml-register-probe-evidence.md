@@ -206,3 +206,40 @@ fault-time breakpoint/diagnostic or an independently authored exception
 handler with a validated control would be required. No such result is claimed.
 No guest files or product source were modified, and only processes belonging
 to the independent stage were cleaned up.
+
+## Decoded CALLF target and bounded physical scan
+
+With the existing CALLF diagnostic filtered to selector 0270, a new
+fresh-UUID package run loaded the unchanged W31 DDEML and pre-call reported
+callback thunk 17af:00ba (`ddeml-register-selector0270-w31.pre.json`, SHA256
+`CB7D545D920521559A9DEC01ACD9561BA129DCD86A0079073B7E14AA6ADDAE6C`).
+Its trace (`ddeml-register-selector0270-w31.callback-trace.txt`, SHA256
+`8F046082B0F242618FB598DF7DD15A9927FA83262CF6F43524A5A89A6F5652B0`)
+records `far-call selector=0270 offset=00000005 caller=177f:000058f2`, with
+caller bytes containing `ff5f04` at 58ef, then vector 0d error 0271 at
+177f:58ef. The CALLF witness runs after operand decode and before far target
+validation; this establishes the decoded far destination 0270:0005 is not
+the callback value 17af:00ba recorded before registration. Its logged
+source/shadow descriptors describe the caller CS in LDT, not the target
+selector's GDT descriptor. It does not establish why the operand differed.
+
+Independent offline disassembly of the identity-verified W31 DLL maps ordinal
+2 to 0001:0010, whose initialization path eventually stores the callback
+parameter words into an instance structure at `[bx+4]` and `[bx+6]`
+(0001:01d6–01df). The source lineage of the binary remains unproven. No
+fault-time DS, BX or object identity was captured, so it remains possible
+that the wrong structure was selected, its callback was overwritten, or the
+probe/API interaction was wrong; the trace cannot choose among them.
+
+A read-only scan (`ddeml-guest-pointer-scan.py`, result
+`ddeml-guest-pointer-scan.json` SHA256
+`3E814F54A80C62F2ADB57395FFC0C0E165EB6940F83DFE1427C4D66704779D0F`)
+was taken on a separate run of the same fixture while the error dialog was
+present. It searched physical backing for the expected thunk and decoded
+fault destination patterns, yielding two and one candidate matches. This was
+non-atomic, 5,616 pages could not be read, patterns can occur accidentally or
+be stale, and physical addresses have not been related to fault-time DS:BX.
+It is not evidence of actual object contents or corruption. A further validated
+fault-time DS/BX capture and descriptor translation is required for that
+conclusion. No original guest or product source was modified; temporary
+fixture processes were scoped and cleaned up.

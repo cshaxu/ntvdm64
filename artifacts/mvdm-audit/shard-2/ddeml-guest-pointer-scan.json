@@ -1,0 +1,26 @@
+{
+  "pid": 31896,
+  "image": "O:\\tmp\\n3da\\system32\\ntvdm.exe",
+  "nonAtomic": true,
+  "guestBackingLength": 26214400,
+  "unreadablePages": 5616,
+  "note": "physical raw scan only; matches may be accidental or stale; not a guest logical/DS:BX resolution",
+  "hits": {
+    "expected_thunk": [
+      {
+        "physical": "0x3e4d0",
+        "context": "c0020200ba00af17961700004444454d"
+      },
+      {
+        "physical": "0x4bd64",
+        "context": "00000000ba00af17b801a7174c00a717"
+      }
+    ],
+    "fault_target": [
+      {
+        "physical": "0x4baa4",
+        "context": "00000000050070020000000000000000"
+      }
+    ]
+  }
+}
