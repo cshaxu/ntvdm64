@@ -1,0 +1,56 @@
+[
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_addr.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "C60E097B1CCAF789C1B37098085E337118E765A357ACD0950CE01C5A08AB129A",
+    "current_sha256": "C60E097B1CCAF789C1B37098085E337118E765A357ACD0950CE01C5A08AB129A"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_bsic.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "F02ABB067552707B136E6FA87AC3DD8096A468D3DA947699802FD9A1EDA29A8B",
+    "current_sha256": "F02ABB067552707B136E6FA87AC3DD8096A468D3DA947699802FD9A1EDA29A8B"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_intr.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A",
+    "current_sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_neg64.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "222AA1E94318D59A0CBBDC32B43C68C9C09CE06C8962EAA185D789C32CADAB33",
+    "current_sha256": "222AA1E94318D59A0CBBDC32B43C68C9C09CE06C8962EAA185D789C32CADAB33"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_neg64.h",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "03484D5C7E59D9A25B1E466CC78D411836F9A52E7D893A056D4842167D328D1C",
+    "current_sha256": "03484D5C7E59D9A25B1E466CC78D411836F9A52E7D893A056D4842167D328D1C"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_prot.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "A8AF9FA354D7A293045E95AF706957130173E5319683EE6A1070F9285458B8F5",
+    "current_sha256": "A8AF9FA354D7A293045E95AF706957130173E5319683EE6A1070F9285458B8F5"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_prot.h",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "35474895B189C0A682F7B014698EE39E1D6954FCF8DE88EBB26BB1F1628B9E19",
+    "current_sha256": "35474895B189C0A682F7B014698EE39E1D6954FCF8DE88EBB26BB1F1628B9E19"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_stack.c",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292",
+    "current_sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292"
+  },
+  {
+    "relative_path": "softpc.new/base/ccpu386/c_stack.h",
+    "upstream_origin": "both-identical",
+    "opennt_sha256": "323384E4437FA1BBA94994F6CD5A762BC74C9D35EB03D6966AC8DF235E165F75",
+    "current_sha256": "323384E4437FA1BBA94994F6CD5A762BC74C9D35EB03D6966AC8DF235E165F75"
+  }
+]

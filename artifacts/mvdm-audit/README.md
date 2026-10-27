@@ -7,18 +7,18 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-272 partial (205 existing source-difference rows, two live
-source candidates, 19 partially integrated build manifests and two export-source
-records, two partially verified quick-event rows, six IOS/CCPU rows and 36 native-source integrations), 2,508 excluded
-(documented profile, historical recipe, source roles or unused retained objects),
-52 full files (26 executable leaves and 26 declarations) and 1,852 pending.
+390 partial, 2,545 excluded physical file roles,
+52 full files (26 executable leaves and 26 declarations) and 1,697 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the native-source checkpoint below, not a prior snapshot's fixed counts.
+the compiler-selected CCPU declaration checkpoint, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
 and [shard 3](shard-3/historical-wow-objects.md).
+The [CCPU foundation review](ccpu-core-source-review.md) adds original source
+contracts and an actual-object NEG64 witness with signed-caller image checks;
+it does not promote pending roles or qualify the held runtime candidate.
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

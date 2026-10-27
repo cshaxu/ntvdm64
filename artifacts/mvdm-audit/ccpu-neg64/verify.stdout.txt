@@ -1,0 +1,4 @@
+{"result": "pass", "base": "9ca2db194", "counts": {"pending": 1697, "excluded": 2545, "partial": 390, "full": 52}, "source_role_changes": 71, "unrelated_shard_rows_unchanged": true, "frozen_inventory_unchanged": true, "product_or_guest_changed_by_checkpoint": false, "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance"}
+Documentation governance verification passed.
+Documentation relative-link verification passed.
+PASS NEG64 native evidence, exact inputs, existing ledger and documentation gates

@@ -1,0 +1,45 @@
+{
+  "result": "pass",
+  "object_sha256": "16871E8158CD7CE27D92585E348B4E3065B32BADCC86724E7E0979E9F664B538",
+  "function_bytes": 32,
+  "function_sha256": "730C6690BEEFCCE42BFBEFD7B6AB9476D3B4E3B13790A21D8F49E766F8D06CA0",
+  "relocated_dependencies": 0,
+  "images": [
+    {
+      "role": "worker",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "image_sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D",
+      "neg64_va": 4395344,
+      "callers": [
+        {
+          "name": "mul64",
+          "object_sha256": "CBE4E760B2BE91A6ACBDC97C6866387ACC2E75D7E81EC8B141B5487D17E0C03F",
+          "function_va": 4395088,
+          "neg64_call_vas": [
+            4395150
+          ]
+        },
+        {
+          "name": "div64",
+          "object_sha256": "6B9A91FAE213817D2D6DE6E30859C698B00E2F75C0F71D48E448A3D8B4A190B8",
+          "function_va": 4394800,
+          "neg64_call_vas": [
+            4394823,
+            4394871,
+            4394918
+          ]
+        }
+      ]
+    },
+    {
+      "role": "fixture",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\neg64-native-r2\\run\\fixture.exe",
+      "image_sha256": "038CD3A6D86F6BE542F3186D9C3B13790C527F454A50EAB64FB17ED0C66357F7",
+      "neg64_va": 4199184,
+      "callers": []
+    }
+  ],
+  "checker_sha256": "4E71DBF7FF8E013A0D449434A9EE5333C254E100B5C3E0D1C25966CB892D5EDE",
+  "parser_sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64",
+  "limitation": "Selected code and signed-helper calls only; guest decoder and arithmetic faults remain separate"
+}

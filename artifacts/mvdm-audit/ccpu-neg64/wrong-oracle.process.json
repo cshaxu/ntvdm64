@@ -1,0 +1,7 @@
+{
+  "pid": 21220,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\neg64-native-r2\\run/fixture.exe",
+  "started": "2026-10-27T23:28:26.2721235Z",
+  "diagnostic_deadline_seconds": 60,
+  "arguments": "--wrong-oracle"
+}

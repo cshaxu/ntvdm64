@@ -1,0 +1,135 @@
+{
+  "ledger_changed": false,
+  "source_text_retention": "All nine reviewed originals match the frozen original hashes; semantic restoration proportion is not inferred from byte identity",
+  "records": [
+    {
+      "file": "behavior.process.json",
+      "bytes": 216,
+      "sha256": "EE77CA161C7A7E1736BB37D5F9F3FBF70B1F4B8443ADBC5BFFC373F8AAF389D4"
+    },
+    {
+      "file": "behavior.stdout.txt",
+      "bytes": 86,
+      "sha256": "E7C08629B5CB0092195B21FEF9C832520E66DD82FF95A960D109A6F94ED5D5EB"
+    },
+    {
+      "file": "completion.json",
+      "bytes": 66,
+      "sha256": "15833E84944D828B628D398BACD099CE4D74836FBDC37E9506486C74F3C4514A"
+    },
+    {
+      "file": "image-result.json",
+      "bytes": 1687,
+      "sha256": "234D9B50376CAEFE18D04875793FDAE23BA158A662981497FC2005877B5A9B2F"
+    },
+    {
+      "file": "image.completion.json",
+      "bytes": 66,
+      "sha256": "484FD150195395670DA31EE03B81CDEF051A21B1953707CEF90B6CD9FFA87CC4"
+    },
+    {
+      "file": "image.process.json",
+      "bytes": 473,
+      "sha256": "7155AD77252E456FF96C838546B58650BB94EE1EF883020B91C5D0E450887910"
+    },
+    {
+      "file": "inputs.json",
+      "bytes": 1464,
+      "sha256": "CA77F1472B9E22391C306B2A579E654C9C2FB4E2E706791B583F11B3BD2D4111"
+    },
+    {
+      "file": "link.cmd",
+      "bytes": 512,
+      "sha256": "32703AA9A554BC3E15A9EAE80B239BA76165BB9314C8086A2770EF94F0B015E4"
+    },
+    {
+      "file": "link.process.json",
+      "bytes": 260,
+      "sha256": "4C0B53C40CC75860FA072654B859182DB0BF205A3EB70A3D94568A78FF049DC9"
+    },
+    {
+      "file": "normal-cache-inputs.json",
+      "bytes": 581,
+      "sha256": "97725F37E6613E59B2DAE779FD5F7E7A8CADDE27B096F6975849AF528F729049"
+    },
+    {
+      "file": "normal.cmd",
+      "bytes": 2534,
+      "sha256": "6DC0A04699F1948F36A23A89F54542C2F3483C232AB3266F47DAF8F3AA59BBB7"
+    },
+    {
+      "file": "normal.process.json",
+      "bytes": 262,
+      "sha256": "E6E2ABB8EF0AE3FE89370CC94684D106224895D9D1F74581B69CCD2F34281364"
+    },
+    {
+      "file": "process.json",
+      "bytes": 438,
+      "sha256": "24054508176A59A6438ECFDA7C55FA397BDC5796CFE7F7E4583A807429BD44BC"
+    },
+    {
+      "file": "result.json",
+      "bytes": 1094,
+      "sha256": "5996E1AC009BEEF00072B48E149E38EF68658B1A86A26392322C22182FB2C312"
+    },
+    {
+      "file": "source-identities.json",
+      "bytes": 2628,
+      "sha256": "07E92082A8154E4C439B78C76A847359E48FD413894A7C7356718CBE2CEFC6E2"
+    },
+    {
+      "file": "verify.completion.json",
+      "bytes": 66,
+      "sha256": "D4848543EC94ADA07CC035BA4E5772033A6425CB3A0A8E3A93CCE443DD8949CC"
+    },
+    {
+      "file": "verify.process.json",
+      "bytes": 361,
+      "sha256": "01B64CDC8D5D7CB55204E3406679CEF8199070234C22DC657F14D6F508448606"
+    },
+    {
+      "file": "verify.ps1",
+      "bytes": 1379,
+      "sha256": "06572D519ADCB5359F9C70A00F1272DEAEC98DE77DD29690797A9156D10485F3"
+    },
+    {
+      "file": "verify.stderr.txt",
+      "bytes": 230,
+      "sha256": "3D3E78E3419535DC90710799D778AEFE8DC100960B4B5615503CB28691C743E0"
+    },
+    {
+      "file": "verify.stdout.txt",
+      "bytes": 564,
+      "sha256": "F1C1F21FF6690C4DDDABD9030075F53F130C0AFEFE0733999A4F92772FF6B881"
+    },
+    {
+      "file": "wrong-abi-rejection.txt",
+      "bytes": 176,
+      "sha256": "BE330CD30132B78A14CFEFA6F74DBC87431559E79FD88D4487F295739AFBC248"
+    },
+    {
+      "file": "wrong-abi.cmd",
+      "bytes": 2562,
+      "sha256": "C1DB329E272CB1BBA35CF4F2E91C724738025C5485A134625967484E35141FAD"
+    },
+    {
+      "file": "wrong-abi.process.json",
+      "bytes": 266,
+      "sha256": "97A504E2C605BD31030CE323453803495A69ED2282C7E446CD08EB3071293E38"
+    },
+    {
+      "file": "wrong-oracle.process.json",
+      "bytes": 231,
+      "sha256": "C81CE17F5D19632329261776C51E77D8357CA2147A6F034AC6B83AE8DABA1CE4"
+    },
+    {
+      "file": "wrong-oracle.stdout.txt",
+      "bytes": 100,
+      "sha256": "750CE8B0ECBFA0BBBC1C34E47710300700304D0D4949B24C250BA9D992BCDC2A"
+    }
+  ],
+  "production_changed": false,
+  "first_image_attempt": "Wrong package path; FileNotFoundError before image inspection, then corrected to package/system32. Not a product failure.",
+  "result": "pass",
+  "guest_changed": false
+}
