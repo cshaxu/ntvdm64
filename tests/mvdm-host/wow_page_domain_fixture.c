@@ -276,10 +276,17 @@ static ULONG verify_mutated_window(HWND window, ULONG delta)
 }
 
 static BOOL mutation_callout_expected;
-static unsigned mutation_erase_calls, mutation_scroll_calls;
+static BOOL mutation_dc_reentry_expected;
+static unsigned mutation_erase_calls, mutation_scroll_calls, mutation_dc_reentry_calls;
 static LRESULT CALLBACK mutation_window_proc(HWND window, UINT message,
     WPARAM wp, LPARAM lp)
 {
+    if (mutation_dc_reentry_expected && message == WM_ENABLE) {
+        HDC dc = wow_native_GetDC(window);
+        BORROW_CHECK(dc && WindowFromDC(dc) == window);
+        if (dc) BORROW_CHECK(ReleaseDC(window, dc));
+        ++mutation_dc_reentry_calls;
+    }
     if (mutation_callout_expected &&
             (message == WM_ERASEBKGND || message == SBM_SETSCROLLINFO)) {
         wow_user_runtime_thread *runtime = wow_user_runtime_current();
@@ -332,10 +339,14 @@ static void verify_native_mutation_group(ULONG delta)
         peer_class = verify_mutated_window(peer, delta);
         /* Original thunk passes a short carrier; recovered dialog and combo
          * clients may already hold the complete native HWND. */
+        mutation_dc_reentry_expected = TRUE;
+        mutation_dc_reentry_calls = 0;
         (void)wow_native_EnableWindow(short_child, FALSE);
         BORROW_CHECK(!IsWindowEnabled(child));
         (void)wow_native_EnableWindow(child, TRUE);
         BORROW_CHECK(IsWindowEnabled(child));
+        mutation_dc_reentry_expected = FALSE;
+        BORROW_CHECK(mutation_dc_reentry_calls == 2);
         {
             RECT client_expected, client_actual, window_expected, window_actual;
             char name[80];
@@ -723,6 +734,65 @@ static int verify_callback_scope(ULONG teb)
         BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
         return 0;
     }
+    {
+        char visible_mode[2];
+        if (GetEnvironmentVariableA("MVDM_WOW_VISIBLE_FOCUS_PROBE",
+                visible_mode, sizeof(visible_mode)) == 1 && visible_mode[0] == '1') {
+            HWND previous_foreground = GetForegroundWindow();
+            HWND parent = CreateWindowA("STATIC", "WOW focus probe", WS_OVERLAPPEDWINDOW,
+                40, 40, 200, 120, NULL, NULL, GetModuleHandle(NULL), NULL);
+            HWND child = parent ? CreateWindowA("EDIT", "", WS_CHILD | WS_VISIBLE,
+                8, 8, 120, 24, parent, NULL, GetModuleHandle(NULL), NULL) : NULL;
+            unsigned before = borrow_errors;
+            BOOL exercised = FALSE;
+            BORROW_CHECK(parent && child);
+            if (parent && child) {
+                BOOL ready;
+                /* These test windows are created directly by the host, bypassing
+                   the production creation path that publishes their identities. */
+                {
+                    HWND created[2] = { parent, child };
+                    ready = wow_user_window_refresh_payload(NULL, created, 2);
+                }
+                BORROW_CHECK(ready);
+                BORROW_CHECK(wow_user_window_native_handle(
+                    (HWND)(ULONG_PTR)LOWORD(parent)) == parent);
+                BORROW_CHECK(wow_user_window_native_handle(
+                    (HWND)(ULONG_PTR)LOWORD(child)) == child);
+                ShowWindow(parent, SW_SHOW);
+                if (ready) {
+                    exercised = TRUE;
+                    {
+                        HWND mapped = wow_user_window_native_handle(
+                            (HWND)(ULONG_PTR)LOWORD(parent));
+                        fprintf(stderr, "WOW_VISIBLE_FOCUS_MAP parent=%p mapped=%p live=%d error=%lu\n",
+                            parent, mapped, IsWindow(mapped), GetLastError());
+                    }
+                    fprintf(stderr, "WOW_VISIBLE_FOCUS_STEP active\n");
+                    (void)wow_native_SetActiveWindow((HWND)(ULONG_PTR)LOWORD(parent));
+                    BORROW_CHECK(GetActiveWindow() == parent);
+                    fprintf(stderr, "WOW_VISIBLE_FOCUS_STEP focus\n");
+                    (void)wow_native_SetFocus((HWND)(ULONG_PTR)LOWORD(child));
+                    BORROW_CHECK(GetFocus() == child);
+                    fprintf(stderr, "WOW_VISIBLE_FOCUS_STEP clear\n");
+                    (void)wow_native_SetFocus(NULL);
+                    BORROW_CHECK(GetFocus() == NULL);
+                    (void)wow_native_SetActiveWindow(NULL);
+                }
+            }
+            if (parent) BORROW_CHECK(DestroyWindow(parent));
+            if (previous_foreground && IsWindow(previous_foreground))
+                (void)SetForegroundWindow(previous_foreground);
+            BORROW_CHECK(UnhookWindowsHookEx(terminal));
+            BORROW_CHECK(wow_user_runtime_unbind(&runtime_binding));
+            if (exercised)
+                fprintf(stderr, "WOW_VISIBLE_FOCUS_CCPU errors=%u short_active=1 short_focus=1 clear_focus=1\n",
+                    borrow_errors - before);
+            else fprintf(stderr, "WOW_VISIBLE_FOCUS_DIAGNOSTIC_ONLY errors=%u\n",
+                borrow_errors - before);
+            return borrow_errors == before;
+        }
+    }
     BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     callback_teb = teb;
     verify_native_mutation_group(c_sas_dw_at(teb + 0x60u));
@@ -829,6 +899,29 @@ static int verify_callback_scope(ULONG teb)
             if (dc_alias) {
                 BORROW_CHECK(CacheReleasedDC(0x4321u, LOWORD(child), dc_alias));
                 BORROW_CHECK(FreeCachedDCs(0x4321u));
+            }
+            {
+                HRGN clip = CreateRectRgn(0, 0, 8, 8);
+                WORD region16 = mvdm_wow_gdi_handle_from_native(clip);
+                DWORD flags = DCX_CACHE | DCX_INTERSECTRGN;
+                WORD window16 = LOWORD(child);
+                BORROW_CHECK(clip && region16);
+                ZeroMemory(dc_frame + 42, sizeof(dc_frame) - 42);
+                memcpy(dc_frame + 42, &flags, sizeof(flags));
+                memcpy(dc_frame + 46, &region16, sizeof(region16));
+                memcpy(dc_frame + 48, &window16, sizeof(window16));
+                dc_alias = clip && region16 ? (WORD)WU32GetDCEx(dc_frame) : 0;
+                dc = mvdm_wow_gdi_handle_to_native(dc_alias);
+                BORROW_CHECK(dc_alias && dc != INVALID_HANDLE_VALUE &&
+                    WindowFromDC(dc) == child);
+                if (dc_alias) {
+                    BORROW_CHECK(CacheReleasedDC(0x4321u, window16, dc_alias));
+                    BORROW_CHECK(FreeCachedDCs(0x4321u));
+                } else if (clip) {
+                    /* Failed acquisition did not transfer region ownership. */
+                    BORROW_CHECK(DeleteObject(clip));
+                }
+                if (region16) mvdm_wow_gdi_handle_retire(region16);
             }
             /* The original GetDC additionally reads the task's compatibility
              * flags through the project-owned WOW32Reserved TLS field. */
@@ -5467,6 +5560,16 @@ guest_window_failure:
 #endif
     passed=1;goto done;
 #endif
+    {
+        char visible_mode[2];
+        if (GetEnvironmentVariableA("MVDM_WOW_VISIBLE_FOCUS_PROBE",
+                visible_mode, sizeof(visible_mode)) == 1 && visible_mode[0] == '1') {
+            stage = "visible-focus";
+            if (!verify_callback_scope(teb)) goto done;
+            passed = 1;
+            goto done;
+        }
+    }
     stage = "production-class-registration";
     if (!verify_class_registration(teb)) goto done;
     stage = "native-class-projection";
@@ -5792,6 +5895,12 @@ int main(int argc, char **argv)
     HDESK desktop;
     HANDLE thread;
     DWORD result = 3;
+    {
+        char visible_mode[2];
+        if (GetEnvironmentVariableA("MVDM_WOW_VISIBLE_FOCUS_PROBE",
+                visible_mode, sizeof(visible_mode)) == 1 && visible_mode[0] == '1')
+            return run_fixture();
+    }
     wsprintfW(name, L"T447Graph-%lu", GetCurrentProcessId());
     desktop = CreateDesktopW(name, NULL, NULL, 0, GENERIC_ALL, NULL);
     if (!desktop) {

@@ -234,6 +234,12 @@ original cache. `dc-compat-r1` additionally exercises both the original
 `WOWCF_UNIQUEHDCHWND` handle-bit rule and the null-window
 `WOWCFEX_FIXDCFONT4MENUSIZE` task-state rule. The fixture is not an actual
 guest application and does not prove acquisition-time callback/reentry.
+`dc-reentry-r2` adds actual `GetDC` acquisition/release inside both synchronous
+`WM_ENABLE` callbacks produced by `wow_native_EnableWindow`, and executes the
+original `WU32GetDCEx` with a GDI-aliased `DCX_INTERSECTRGN` region. The two
+callback entries and region-backed acquisition pass. This proves a nested DC
+call made from a native callback, not that GetDC itself generated a guest
+callback, nor every region failure or reentrant destruction case.
 `dc-guest-r1` runs the independently authored `win16_dc_probe.asm` against
 the unchanged guest in package r8: a real Win16 task creates a window and
 successfully calls GetDC, GetWindowDC, GetDCEx and screen GetDC, followed by
@@ -339,3 +345,18 @@ its temporary stage cleanup also encountered a locked DLL. The subsequent
 negative because its flat service cache did not contain `service.h`. Those
 are recorded as failed runs, not product passes. The completed r3 run does
 not establish gameplay acceptance or settle the outstanding DC cache audit.
+
+
+### Visible focus fixture identity prerequisite
+
+The real-desktop `focus-visible-r6` attempt failed before proving the product
+path: its directly created host windows had not passed through the worker's
+creation identity publication. Its parent was a full HWND while
+the low-word lookup returned only the truncated carrier, and native return
+publication rejected that invalid target. The fixture now explicitly publishes
+the two direct-host-created windows before showing them and asserts that both
+short carriers resolve to their full HWNDs. This is test setup, not a runtime
+fix. The `focus-fixture-r10` private-desktop window-borrow group passes, and
+`focus-visible-r7` on the actual desktop resolves the parent, then activates
+it, focuses the child and clears focus with zero fixture errors. This does not
+prove every cross-process foreground or reentrant focus scenario.

@@ -77,6 +77,8 @@ records the selected original menu/dialog HWND32-to-owned-HWND boundary, its
 focused and control-fixture evidence, coherent publication, and the one
 explicitly retained final control-observer non-pass.
 
+[T473 whole recovery stage plan](operations/m0-t473-whole-recovery-stage-plan.md)
+
 [T473 S9 generic public USER wrapper audit](evidence/m0-t473-s9-generic-user-wrapper-audit.md)
 records the first source-proven HWND32 wrapper cohort and its required
 parameter-by-parameter identity proof before any generic-wrapper repair.
