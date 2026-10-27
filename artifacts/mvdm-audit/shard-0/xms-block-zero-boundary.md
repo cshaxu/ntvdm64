@@ -101,3 +101,27 @@ claim data corruption or decide a fix from address variation alone. The
 retained `himem4.asm` source makes zero-length free bypass the host-free
 service; the measured free return does not prove the installed binary's exact
 source or a host deallocation call.
+
+## Zero-to-one-kilobyte guest transition
+
+A further isolated package-c probe locks a zero-size handle, unlocks it, then
+asks XMS function 0Fh to grow it to 1 KB, queries size and frees it. The
+independently authored `xms-zero-grow-probe.asm` SHA-256 is
+`F38141CC419C1DA907D9C27BE4DDD9712F91201D16F33742D0281BBE5AC789A9`;
+the test COM SHA-256 is
+`7A909C5DA398256BF5E5D394CA3E31C4F74ABA781E32F6E45A696D16FB9A89EA`.
+Guest output reports zero allocation success, lock address `00E9:5800`,
+zero-size info success, grow success, resulting size 1 KB and free success;
+the observer reports normal exit. The explicitly enabled host entry witness
+records service 02 with DX=0, then service 0B with old AX=3A56 KB, DX=0 and
+new BX=1 KB, followed by service 03 with AX=0440 KB and DX=1 KB. The first
+address is exactly 3A56 KB, linking the guest-visible lock value to the
+original address supplied at reallocation; the final free uses a different
+1 KB base.
+
+This is an actual reached zero-to-nonzero guest transition, not merely an
+allocator mock. It does not prove what value the C local held at the host
+return, the zero-size lock contract, validity of the zero-size address, data
+corruption, or all allocation/cleanup behavior. Test did not dereference the
+zero-size address. The runner used an isolated owned stage, explicitly
+enabled existing tracing and did not change existing guest or product images.

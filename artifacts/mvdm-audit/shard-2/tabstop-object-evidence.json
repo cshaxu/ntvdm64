@@ -1,0 +1,35 @@
+{
+  "inputs": {
+    "source": {
+      "path": "src/mvdm/wow32/wmsgem.c",
+      "sha256": "251325307C9E698EE579E3493F15F93ABB6DAFE7D289F334AC3714C513566BE9"
+    },
+    "product_object": {
+      "path": "build/.ninja/msvc-x86-release/wow32/obj/wmsgem.obj",
+      "sha256": "46C37B644DED00183C1EF5AFB8A51BD1B9229040D2800A695CFFB2159A0AF6F9"
+    },
+    "probe_source": {
+      "path": "artifacts\\mvdm-audit\\shard-2\\tabstop-object-probe.c",
+      "sha256": "75E41F6DCB96576B8E2190363A1A3041345050707ACCF014533314144A619C7F"
+    },
+    "generated_types": {
+      "path": "artifacts\\mvdm-audit\\shard-2\\tabstop-object-types.h",
+      "sha256": "FF83C8E60BBF088442BC5B9616F12FCC903E74BBC2334BB33A557348603034FC",
+      "note": "Retained types whitespace-normalized after compilation; compiled input SHA-256 F7F7340FCA28689DC532D265F7B82A924A323D353E27538963A662254E242DC1; tokens unchanged."
+    },
+    "probe_exe": {
+      "path": "build/t473-s10-tabstop-object/probe.exe",
+      "sha256": "FF9E30402274A5BEEDCCC07A8E706C2A09E85DC3E8B1A590D3DF5E58759A84D0"
+    },
+    "link_map": {
+      "path": "build/t473-s10-tabstop-object/probe.map",
+      "sha256": "58D86FDE80011AB157F0E19462BF0E8A68B41E44B576D8DDD4C3A5B97476CDE5"
+    }
+  },
+  "output": [
+    "ZERO callbacks=0 return=0 proc=00000000",
+    "ONE callbacks=1 return=1 proc=00000001"
+  ],
+  "exit_code": 0,
+  "limitations": "Production-built object directly linked; /FORCE:UNRESOLVED with unreached branches. CallBack16 replaced by recording stub returning FALSE, no actual guest or host EDIT message executed. Input object artifact currentness beyond recorded source/object hashes and selected build provenance not independently proven."
+}
