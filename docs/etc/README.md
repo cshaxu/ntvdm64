@@ -67,9 +67,28 @@ owners while bounding project code to input, snapshot and resource transport.
 separates the selected original DLL from its narrow parent-worker ABI and
 keeps incomplete USER behavior visible as a runtime, rather than source, gap.
 
+[T473 S7 WOW32 session/callback audit](evidence/m0-t473-s7-wow-session-callback-audit.md)
+traces the retained original callback and task-termination owners through the
+single worker TLS and BaseSrv ticket boundary, without promoting a fixture or
+stale build cache to current-package acceptance.
+
 [T473 S2 Redirector/monitor reconciliation](evidence/m0-t473-s2-redirector-monitor-reconciliation.md)
 finishes the source-owner sweep with bounded async-copy, monitor, VDD and
 debugger boundaries instead of private-subsystem substitutions.
+
+[T473 S3 CPU40 execution lifecycle](evidence/m0-t473-s3-cpu40-execution-lifecycle.md)
+records the retained original CPU40 execution/termination bracket and its
+bounded worker-session adaptation.
+
+[T473 S4 DOS command/XMS lifecycle](evidence/m0-t473-s4-dos-command-xms-lifecycle.md)
+records retained command/XMS owners and their finite worker/session boundaries.
+
+[T473 S5 SoftPC device lifecycle](evidence/m0-t473-s5-softpc-device-lifecycle.md)
+records selected original device owners and the two narrow existing-flow repairs.
+
+[T473 S6 status-sequence correction](evidence/m0-t473-s6-status-sequence-correction.md)
+records the no-runtime administrative closure required before the independent
+WOW32 session/callback audit can occupy S7.
 
 [T471 S4 aggregate review](evidence/m0-t471-s4-aggregate-review.md) records
 the unchanged installed/package identity, S1--S3 reconciliation and the sole

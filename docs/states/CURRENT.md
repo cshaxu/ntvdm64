@@ -2,29 +2,28 @@
 
 ## Current Work
 
-**Active: M0 T473 S6**
+**Active: M0 T473 S7**
 
 `books/` is expressly excluded and remains untracked pending separate
 documentation admission.
 
-Automatic progression is approved. Completed work follows
-the read-only `ntvdm64-wow32-audit`: recover selected original behavior with
-the smallest source-shaped binding and no guest modification or rebuild.
+Automatic progression: recover original WOW behavior with minimum bindings;
+no guest change.
 
 The published ten-image package remains `build/t467-s3/package-r2`; guest
 media is unchanged.
 
 ## Active Packet
 
-### M0 T473 S6 — WOW32 session and callback-owner recovery
+### M0 T473 S7 — WOW32 session and callback-owner recovery
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S6, Ordinary Mode. |
+| Identifier Mode | M0 T473 S7, Ordinary Mode. |
 | Admission And Approval | S5 closes at [its SoftPC device closure](../history/m0-t473-s5-closure.md); approved automatic progression admits the next finite owner group. |
 | Objective | Prove and repair, if needed, selected original WOW32/session dispatch, public USER identity, callback nesting and retirement without reviving NT4 private USER/kernel state or adding a second message engine. |
 | Non-goals | Guest modification/rebuild; private USER layout reconstruction; host-window-style work; DOS/COMMAND, device or redirector feature expansion unless a direct WOW callback/session dependency proves it necessary. |
-| Reference Baseline | [S5 closure](../history/m0-t473-s5-closure.md), [WOW32 source reconciliation](../etc/evidence/m0-t473-s2-wow32-session-reconciliation.md), source policy and unchanged T467 package. |
+| Reference Baseline | [S5 closure](../history/m0-t473-s5-closure.md), [WOW32 source reconciliation](../etc/evidence/m0-t473-s2-wow32-session-reconciliation.md), [S7 owner audit](../etc/evidence/m0-t473-s7-wow-session-callback-audit.md), source policy and unchanged T467 package. |
 | Files And ABI Surface | Selected original WOW32 DLL sources, worker TLS/session carriers, public-USER mappings, callback/return boundary and WOW task/worker retirement. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules. |
 | Verification | Original WOW dispatch/callback normal, rejection, nesting and cleanup paths; public HWND/menu/dialog identity; task termination/worker loss/restart; formal x86 link/map plus focused fixtures. |
@@ -151,6 +150,11 @@ the released PIF editor, and rejects an unrepresentable OEM PIF directory.
 No guest, runtime image or release binary changed; `books/` remains excluded
 and untracked.
 
+## S6 Closure Record
+
+S6 was a no-runtime [status-sequence correction](../etc/evidence/m0-t473-s6-status-sequence-correction.md);
+S7 owns the WOW32 session/callback audit.
+
 ## T459 Closure Record
 
 W18 is closed in [the T459 closure](../history/m0-t459-closure.md). It
@@ -195,7 +199,8 @@ T471 S2/S3 may use only `build/t471-s2` for disposable acceptance evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T473 S1 may use only `build/t473-s1` for disposable closure-ledger evidence,
+T473 S1/S7 may use only `build/t473-s1` for disposable closure-ledger and
+WOW-session evidence,
 with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
