@@ -1,6 +1,11 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 70 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 74 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [dpmi-buffer-state](shard-0/dpmi-buffer-state-review.md): [observer](shard-0/dpmi-buffer-state-observer.py), [receipt](shard-0/dpmi-buffer-state-observations.json).
+- [guest-write-supplement](shard-1/guest-write-supplement-review.md): [observer](shard-1/guest-write-supplement-observer.py), [receipt](shard-1/guest-write-supplement-observations.json).
+- [dosx-guest-build](shard-2/dosx-guest-build-review.md): [observer](shard-2/dosx-guest-build-observer.py), [receipt](shard-2/dosx-guest-build-observations.json).
+- [dos-inc-role](shard-3/dos-inc-role-review.md): [observer](shard-3/dos-inc-role-observer.py), [receipt](shard-3/dos-inc-role-observations.json).
 
 - [ccpu-shld-image](shard-0/ccpu-shld-image-review.md): [observer](shard-0/ccpu-shld-image-observer.py), [receipt](shard-0/ccpu-shld-image-observations.json).
 - [guest-graphics-owner](shard-1/guest-graphics-owner-review.md): [observer](shard-1/guest-graphics-owner-observer.py), [receipt](shard-1/guest-graphics-owner-observations.json).

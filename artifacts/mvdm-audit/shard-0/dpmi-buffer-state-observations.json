@@ -1,0 +1,65 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "dpmi32/buffer.c",
+      "sha256": "6123C2ACEFA990BE5BF87600A232A32FEB1B7435EA0C2F346AA174B56CA37ABC",
+      "wow_source_ids": "SRC:b38fc76a686c67703a43;SRC:d5d879cd7cf7d13e9e41",
+      "edge": "build obj/dpmi/buffer.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/buffer.c",
+      "bindings": [
+        {
+          "name": "_DpmiAllocateBuffer",
+          "va": 5611712,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:buffer.obj",
+          "bytes": 99,
+          "relocation_words": 6
+        },
+        {
+          "name": "_DpmiMapAndCopyBuffer",
+          "va": 5611952,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:buffer.obj",
+          "bytes": 171,
+          "relocation_words": 10
+        },
+        {
+          "name": "_DpmiUnmapAndCopyBuffer",
+          "va": 5612816,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:buffer.obj",
+          "bytes": 79,
+          "relocation_words": 5
+        }
+      ]
+    },
+    {
+      "path": "dpmi32/savestat.c",
+      "sha256": "76864B5F6C852820722D123395E49DA43FD206F2420DD38D00D1CE911B1D7E42",
+      "wow_source_ids": "SRC:78f1bb781853102dd977;SRC:9f505b4557dbe5abf499",
+      "edge": "build obj/dpmi/savestat.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/savestat.c",
+      "bindings": [
+        {
+          "name": "_DpmiSaveSegmentsAndStack",
+          "va": 5611632,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:savestat.obj",
+          "bytes": 73,
+          "relocation_words": 8
+        },
+        {
+          "name": "_DpmiRestoreSegmentsAndStack",
+          "va": 5611552,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:savestat.obj",
+          "bytes": 79,
+          "relocation_words": 8
+        }
+      ]
+    }
+  ],
+  "image_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "limits": "Selected source/object/image bindings, not guest mapping, nested state, failures or cleanup."
+}

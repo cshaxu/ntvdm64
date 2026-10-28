@@ -49,6 +49,9 @@ the deployed-versus-source WRITE image distinction and guest feature obligations
 The [SHLD and guest tools checkpoint](parallel-shld-tools-role-review.md) binds
 the CPU body and GRAPHICS image while retaining their runtime obligations.
 
+The [DPMI buffer/state checkpoint](shard-0/dpmi-buffer-state-review.md) binds
+the original translation owners while retaining guest and failure obligations.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 
@@ -77,7 +80,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 70 independently replayed investigations; proposed dispositions remain pending.
+retain 74 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "3e779bb74",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-0/dpmi-buffer-state-observations.json",
+      "sha256": "EB859E5CE4D90087EAB43C7AB68C9D768998B048FAD9E865789F11A2FE50E0BC"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source and object/image identity; no guest runtime acceptance"
+}

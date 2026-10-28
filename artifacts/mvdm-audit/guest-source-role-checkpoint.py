@@ -224,7 +224,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'parallel-shld-tools-role-':
+                if prefix == 'shard0-dpmi-buffer-state-role-':
+                    assert path in ('dpmi32/buffer.c', 'dpmi32/savestat.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'parallel-shld-tools-role-':
                     assert ((path == 'softpc.new/base/ccpu386/shld.c' and proof['role'] == 'selected-native-source-partial') or
                             (path == 'dos/v86/cmd/graphics/GRAPHICS.COM' and proof['role'] == 'selected-guest-image-partial')) and current_hash == original_hash
                 elif prefix in ('parallel-guest-delivery-role-', 'parallel-gdi-ctl3d-role-'):

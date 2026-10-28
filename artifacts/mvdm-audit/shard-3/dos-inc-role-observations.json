@@ -1,0 +1,142 @@
+{
+  "inc/dbcs.sw": {
+    "current": {
+      "size": 385,
+      "sha256": "7b86c933d33473fe03aa995258a113d53419545970d472afea1a1b6f2c9cbc43"
+    },
+    "opennt": {
+      "size": 385,
+      "sha256": "7b86c933d33473fe03aa995258a113d53419545970d472afea1a1b6f2c9cbc43"
+    },
+    "opennt45": {
+      "size": 385,
+      "sha256": "7b86c933d33473fe03aa995258a113d53419545970d472afea1a1b6f2c9cbc43"
+    }
+  },
+  "inc/msghan.inc": {
+    "current": {
+      "size": 6390,
+      "sha256": "35112eae8ba696585315aa4f0de05910817eb9c3a4300b1435e785fc42b47475"
+    },
+    "opennt": {
+      "size": 6390,
+      "sha256": "35112eae8ba696585315aa4f0de05910817eb9c3a4300b1435e785fc42b47475"
+    },
+    "opennt45": {
+      "size": 6390,
+      "sha256": "35112eae8ba696585315aa4f0de05910817eb9c3a4300b1435e785fc42b47475"
+    }
+  },
+  "inc/msgserv.sa": {
+    "current": {
+      "size": 114075,
+      "sha256": "7278011c48813742e0f6f6d6882e3c88cc3c7f27283e8d5a9084d72956d07257"
+    },
+    "opennt": {
+      "size": 114075,
+      "sha256": "7278011c48813742e0f6f6d6882e3c88cc3c7f27283e8d5a9084d72956d07257"
+    },
+    "opennt45": {
+      "size": 114075,
+      "sha256": "7278011c48813742e0f6f6d6882e3c88cc3c7f27283e8d5a9084d72956d07257"
+    }
+  },
+  "inc/mshead.asm": {
+    "current": {
+      "size": 1503,
+      "sha256": "080ccf82e02da9eb2f1502053cf15c74e19dc1335ddd055cd49bbfa792c5e537"
+    },
+    "opennt": {
+      "size": 1503,
+      "sha256": "080ccf82e02da9eb2f1502053cf15c74e19dc1335ddd055cd49bbfa792c5e537"
+    },
+    "opennt45": {
+      "size": 1503,
+      "sha256": "080ccf82e02da9eb2f1502053cf15c74e19dc1335ddd055cd49bbfa792c5e537"
+    }
+  },
+  "inc/mstable.asm": {
+    "current": {
+      "size": 231,
+      "sha256": "dcb97a65eec51268628473257eb830c5d65c7381110e346158b544211669289d"
+    },
+    "opennt": {
+      "size": 231,
+      "sha256": "dcb97a65eec51268628473257eb830c5d65c7381110e346158b544211669289d"
+    },
+    "opennt45": {
+      "size": 231,
+      "sha256": "dcb97a65eec51268628473257eb830c5d65c7381110e346158b544211669289d"
+    }
+  },
+  "inc/msgserv.asm": {
+    "current": {
+      "size": 124914,
+      "sha256": "74d421e387a667a1ab23fb155c5fdf0d33981b77fd2d7d9ecf31f28fe63090eb"
+    },
+    "opennt": {
+      "size": 124914,
+      "sha256": "74d421e387a667a1ab23fb155c5fdf0d33981b77fd2d7d9ecf31f28fe63090eb"
+    },
+    "opennt45": {
+      "size": 124914,
+      "sha256": "74d421e387a667a1ab23fb155c5fdf0d33981b77fd2d7d9ecf31f28fe63090eb"
+    }
+  },
+  "doskrnl/dos/mstable.asm": {
+    "current": {
+      "size": 21852,
+      "sha256": "58aeaa1cb208ea1a661f13df7124e964e8030cb52ba5a20ca295c2bb39c59a65"
+    },
+    "opennt": {
+      "size": 21852,
+      "sha256": "58aeaa1cb208ea1a661f13df7124e964e8030cb52ba5a20ca295c2bb39c59a65"
+    },
+    "opennt45": {
+      "size": 21852,
+      "sha256": "58aeaa1cb208ea1a661f13df7124e964e8030cb52ba5a20ca295c2bb39c59a65"
+    }
+  },
+  "doskrnl/dos/msconst.asm": {
+    "current": {
+      "size": 9355,
+      "sha256": "10c27abb77c44fa457d2b926a214a33c09f8ea83d242bd2027258ef522f519f2"
+    },
+    "opennt": {
+      "size": 9355,
+      "sha256": "10c27abb77c44fa457d2b926a214a33c09f8ea83d242bd2027258ef522f519f2"
+    },
+    "opennt45": {
+      "size": 9355,
+      "sha256": "10c27abb77c44fa457d2b926a214a33c09f8ea83d242bd2027258ef522f519f2"
+    }
+  },
+  "cmd/command/makefile": {
+    "current": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt45": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    }
+  },
+  "doskrnl/dos/makefile": {
+    "current": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    },
+    "opennt": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    },
+    "opennt45": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    }
+  }
+}

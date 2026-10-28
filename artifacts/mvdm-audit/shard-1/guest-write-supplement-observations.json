@@ -1,0 +1,110 @@
+{
+  "result": "pass",
+  "ledger_sha256": "22D04A48F720B2C3DB74AB53F232185874ECC71AF9DFBBDFE9DFAA0811E5AECE",
+  "entries": [
+    {
+      "path": "wow16/write/aaa.c",
+      "sha256": "D74AB14C050E03B3284D9667A84A4BF5C49F9279B3B2751C62156DEBBDFD245C",
+      "catalog_ids": "SRC:e1d8eb528c9a5d4c1bf4;SRC:e851b6dfff2ae8cdd64b",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/center.bms",
+      "sha256": "52FD44C817046958D1A7610EBE9F5C51F9B2EEDB7E0E29D9E5698018AB10517F",
+      "catalog_ids": "SRC:b80e7f12116019ba2279;SRC:f7cab75dc3954a6fc7a4",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/editftn.c",
+      "sha256": "9EEAD907D51FAFAB49F530DA577564C7A98D3EC8835C9C68C2D36E3425913F2A",
+      "catalog_ids": "SRC:275f409d7f7570e3b634;SRC:8148e8dea73647f8ef32",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/edm.edm",
+      "sha256": "03DEF808FAF8F7F101AE4FA50D413AF4CEB01B2EA4F89F5F4FCF317836709ABB",
+      "catalog_ids": "SRC:37d342dd7dfe549c681e;SRC:98007af451351fe28168",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/globdefs.itl",
+      "sha256": "1A478A8E4938B396F8469E6E61EE6629F01F19743D39B88DE7E8D71DCEC09EBD",
+      "catalog_ids": "SRC:2c286463bfcfb41f0b52;SRC:7ed6a455430c9e2c8acf",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/kmakend.bat",
+      "sha256": "261E1F9CE899FCF29FDA9232AD647DA3167E0E72F8397D281BE297164730558C",
+      "catalog_ids": "SRC:32fb1e74ea419bf75753;SRC:888d4417799c52ec05d8",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/ltabbtn.bms",
+      "sha256": "9D06DC2C674D59ACF8C0D5E004A84BC267705D7723FD14B0CF1752E605116736",
+      "catalog_ids": "SRC:30cb7e6c7ff5c0956778;SRC:97e155a661af468dcf76",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/write/write.sed",
+      "sha256": "94DBA12F26FF932FA88C2BB3212C1E9FBEB888E3BA3B6DE03412255DC5391AEC",
+      "catalog_ids": "SRC:77b71233eeaa1a0a5f64;SRC:e2685e3e9be7f3c84605",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "original_context": [
+    {
+      "path": "src\\mvdm\\wow16\\write\\makefile",
+      "sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\write\\write.lnk",
+      "sha256": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\write\\write.rc",
+      "sha256": "844A7F4AC20BF3BE1E1985BA557ED986C427D8A4316B8A3509EECAA1C4957D66"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\write\\readme.txt",
+      "sha256": "8ADB97E346F028F09C171FE49551CAD1FCEE0BB81A1B17C5262A7E64C0ECCC33"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\write\\kmake.bat",
+      "sha256": "8CF92ADA575BC813E7F973190D31D29849CC397CEA6706D63D6F5038FDA5F6DC"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source_path": "src\\mvdm\\wow16\\write\\WRITE.EXE",
+    "source_sha256": "08EE1659788880FB593815FF9609BFE76743C1182D05E6702764BF3DFF68B30B",
+    "archive_member": "WINNT/WRITE.EXE",
+    "archive_sha256": "EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A",
+    "source_equals_archive": false
+  },
+  "limitations": "Original recipe and four host graph observations only; no guest execution, resource lineage, legacy selection exhaustiveness or arbitrary media inventory."
+}
