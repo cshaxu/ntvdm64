@@ -1,0 +1,57 @@
+{
+  "sha256": {
+    "wow32/wcurcash.c": {
+      "current": "ED9FA5EE3EB6CE9059D58F21DEA3A7416B0229678F7F62918DE02A2CF78D0E61",
+      "opennt": "ED9FA5EE3EB6CE9059D58F21DEA3A7416B0229678F7F62918DE02A2CF78D0E61",
+      "opennt45": "ED9FA5EE3EB6CE9059D58F21DEA3A7416B0229678F7F62918DE02A2CF78D0E61"
+    },
+    "wow32/wcurcash.h": {
+      "current": "159B3E0683659F36F567E5C7878BBADB82F6DFBBCC180EAECA1487BAEF229231",
+      "opennt": "159B3E0683659F36F567E5C7878BBADB82F6DFBBCC180EAECA1487BAEF229231",
+      "opennt45": "159B3E0683659F36F567E5C7878BBADB82F6DFBBCC180EAECA1487BAEF229231"
+    },
+    "wow32/wcuricon.c": {
+      "current": "5F654AB2A98B2925474DFFD49C5A3ABAAEFACF6193375AF3794E70731C4E8673",
+      "opennt": "5F654AB2A98B2925474DFFD49C5A3ABAAEFACF6193375AF3794E70731C4E8673",
+      "opennt45": "5F654AB2A98B2925474DFFD49C5A3ABAAEFACF6193375AF3794E70731C4E8673"
+    },
+    "wow32/wcuricon.h": {
+      "current": "34064BBF8E47655EA4A92A3C9D26A6BEFBCA2A8497AF3F82FA557BBAEC29CE81",
+      "opennt": "34064BBF8E47655EA4A92A3C9D26A6BEFBCA2A8497AF3F82FA557BBAEC29CE81",
+      "opennt45": "34064BBF8E47655EA4A92A3C9D26A6BEFBCA2A8497AF3F82FA557BBAEC29CE81"
+    },
+    "wow32/wucursor.c": {
+      "current": "78943C10AFECBBDEDD57408A5417A2D342D5A0A5DD354B321C773BD18916AF31",
+      "opennt": "78943C10AFECBBDEDD57408A5417A2D342D5A0A5DD354B321C773BD18916AF31",
+      "opennt45": "78943C10AFECBBDEDD57408A5417A2D342D5A0A5DD354B321C773BD18916AF31"
+    },
+    "wow32/wuser.c": {
+      "current": "52FB57288855AE2B7809ED18553A65B3368063253DBAE19C8D7E894E1829B191",
+      "opennt": "CE33E8634D085F9CA27AD331560E5321C3FED2EE8552CE0D00FDA25AF0A74B62",
+      "opennt45": "CE33E8634D085F9CA27AD331560E5321C3FED2EE8552CE0D00FDA25AF0A74B62"
+    },
+    "wow32/sources": {
+      "current": "D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36",
+      "opennt": "D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36",
+      "opennt45": "D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36"
+    }
+  },
+  "ninja_lines": [
+    "72:build obj/wucursor.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wucursor.c",
+    "79:build obj/wuser.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wuser.c",
+    "88:build obj/wcuricon.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wcuricon.c"
+  ],
+  "legacy_name_references": [
+    "src/mvdm\\wow32\\wcurcash.c:127:VOID W32DeleteCursorIconCash (HICON16 hRes16)",
+    "src/mvdm\\wow32\\wcurcash.c:162:VOID W32DeleteCursorIconCashForTask ()",
+    "src/mvdm\\wow32\\wcurcash.c:23:HICON16 W32CheckWOWCashforIconCursors(VPVOID pData, WORD ResType)",
+    "src/mvdm\\wow32\\wcurcash.c:34:    hIcon16 = W32FindCursorIcon (parg16->hInst, psz, ResType, &hRes16);",
+    "src/mvdm\\wow32\\wcurcash.c:56:HICON16 W32FindCursorIcon (WORD hInst, LPSTR psz, WORD ResType, HICON16 *phRes16)",
+    "src/mvdm\\wow32\\wcurcash.c:85:BOOL W32AddCursorIconCash (WORD hInst, LPSTR psz1, HICON16 hIcon16, HICON16 hRes16, WORD ResType)",
+    "src/mvdm\\wow32\\wcurcash.h:27:HICON16 W32CheckWOWCashforIconCursors(VPVOID pData, WORD ResType);",
+    "src/mvdm\\wow32\\wcurcash.h:28:BOOL    W32AddCursorIconCash (WORD hInst, LPSTR psz1, HICON16 hIcon16, HICON16 hRes16, WORD ResType);",
+    "src/mvdm\\wow32\\wcurcash.h:29:HICON16 W32FindCursorIcon (WORD hInst, LPSTR psz, WORD ResType, HICON16 *phRes16);",
+    "src/mvdm\\wow32\\wcurcash.h:30:VOID    W32DeleteCursorIconCash (HICON16 hRes16);",
+    "src/mvdm\\wow32\\wcurcash.h:31:VOID    W32DeleteCursorIconCashForTask ();"
+  ]
+}

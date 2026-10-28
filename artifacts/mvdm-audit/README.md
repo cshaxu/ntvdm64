@@ -41,6 +41,10 @@ distinguishes export and dispatch observations from guest reachability.
 Its [remaining guest inventory](nine-way/part-8/guest-family-inventory-review.md)
 and [external raster resources](nine-way/part-8/rasprint-mini-review.md)
 retain unresolved provider and relevance decisions.
+The [cursor/icon alias review](cross-369/cursor-cache-disposition.md) and
+[DDEML thunk review](cross-369/ddeml-thunk-disposition.md) compare selected
+original providers with historical alternatives; role recommendations remain
+subject to coordinator disposition and do not close runtime obligations.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
