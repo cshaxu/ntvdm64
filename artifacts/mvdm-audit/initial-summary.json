@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1091,
-    "excluded": 2803,
+    "pending": 1079,
+    "excluded": 2815,
     "partial": 737,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original USER and TIMER guest images partial; loading, callbacks and lifecycle remain open."
+  "note": "Twelve original DOSX guest build-file roles excluded; protected-mode behavior remains in scope."
 }

@@ -1,0 +1,106 @@
+{
+  "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "graph_sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+  "files": [
+    {
+      "name": "bswap.h",
+      "sha256": "e3a8af0917fbe1324ebcfec90f899dd5bf463884911662fdba8fd9cc60d0208a",
+      "reference_hashes": [
+        "e3a8af0917fbe1324ebcfec90f899dd5bf463884911662fdba8fd9cc60d0208a",
+        "e3a8af0917fbe1324ebcfec90f899dd5bf463884911662fdba8fd9cc60d0208a"
+      ],
+      "guard_only": false,
+      "line_count": 11,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\bswap.c:25",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c:167"
+      ],
+      "valid_worker_objects": [
+        "obj/ccpu/bswap.obj"
+      ]
+    },
+    {
+      "name": "c-files",
+      "sha256": "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2",
+      "reference_hashes": [
+        "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2",
+        "eaa7ea6f06c5df0f7938b14d245fea15bbe89a418d6b265498269bb09122e9d2"
+      ],
+      "guard_only": false,
+      "line_count": 129,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "ccpudefs.inc",
+      "sha256": "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8",
+      "reference_hashes": [
+        "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8",
+        "5aeaaa72f958ef891628c267ee4849a0203c25af0fbe67b3fdc890b75dfb3fd8"
+      ],
+      "guard_only": false,
+      "line_count": 1,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "gdpvar.h",
+      "sha256": "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+      "reference_hashes": [
+        "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec",
+        "a8fc9f81af3c06eb4263cc5acb3005a41f849677cba4d09ae171ab450f7fb3ec"
+      ],
+      "guard_only": false,
+      "line_count": 1858,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\src\\nt_bop.c:12",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c:35",
+        "src\\mvdm\\softpc.new\\host\\inc\\ppc\\pig\\cpu4gen.h:9",
+        "src\\mvdm\\softpc.new\\host\\inc\\ppc\\prod\\cpu4gen.h:9",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\pig\\cpu4gen.h:9",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpu4gen.h:9",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h:9",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c:36",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c:44",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c:14",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\vglob.c:21",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c:31",
+        "src\\mvdm\\softpc.new\\base\\debug\\yoda.c:480",
+        "src\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\ev_glue.c:29",
+        "src\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\vglob.c:21"
+      ],
+      "valid_worker_objects": [
+        "obj/ccpu/sasCdef.obj"
+      ]
+    },
+    {
+      "name": "invd.c",
+      "sha256": "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
+      "reference_hashes": [
+        "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
+        "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e"
+      ],
+      "guard_only": false,
+      "line_count": 33,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "invd.h",
+      "sha256": "402398e18f19d32b9e8298cc0ab17d8bca2af426280a8bdbfbead17dcf52a7dc",
+      "reference_hashes": [
+        "402398e18f19d32b9e8298cc0ab17d8bca2af426280a8bdbfbead17dcf52a7dc",
+        "402398e18f19d32b9e8298cc0ab17d8bca2af426280a8bdbfbead17dcf52a7dc"
+      ],
+      "guard_only": false,
+      "line_count": 8,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c:169",
+        "src\\mvdm\\softpc.new\\base\\ccpu386\\invd.c:25"
+      ],
+      "valid_worker_objects": [
+        "obj/ccpu/invd.obj"
+      ]
+    }
+  ]
+}

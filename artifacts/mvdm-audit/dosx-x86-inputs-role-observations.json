@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "5eb969391",
+  "candidate_count": 12,
+  "source_tables": [
+    {
+      "path": "shard-0/dosx-x86-inputs-observations.json",
+      "sha256": "7DAAFD6933675B9D9A2AAADE3175B89A6A2B730F618F1475450284CBFAFE49DC"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original guest build inputs only; no DOSX runtime acceptance"
+}

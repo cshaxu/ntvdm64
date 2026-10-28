@@ -594,4 +594,8 @@ The [guest package image family](shard-0/guest-package-image-family-review.md) c
 
 The [USER and timer image review](guest-user-timer-image-role-review.md) records bounded installed/archive identities and NE timer exports. [Win16 common headers](shard-1/win16-common-headers-review.md) and [GDI/dialog inputs](shard-3/wow-gdi-dialog-input-role-review.md) remain source/build evidence, not guest runtime proof.
 
+The [DOSX x86 input cohort](shard-0/dosx-x86-inputs-review.md) reconciles twelve historical guest-build roles while retaining all DPMI and protected-mode runtime obligations.
+
+Additional reviews cover [486 profile source gates](shard-1/ccpu-486-family-review.md), [original debugger tools](shard-2/debugger-tools-family-review.md) and [Win16 debug declarations](shard-3/wow-debug-input-role-review.md). Current nonselection or original unimplemented entries do not establish full feature recovery.
+
 The [DOS kernel build records](shard-1/dos-kernel-build-family-review.md), [DDEML test/version inputs](shard-2/ddeml-test-version-review.md) and [WOW USER guest inputs](shard-3/wow-user-guest-input-role-review.md) distinguish historical recipes from actual guest runtime evidence.
