@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm/dos/dem/demfcb.c",
+    "sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155"
+  },
+  {
+    "path": "O:/repos.external/OpenNT/base/mvdm/dos/dem/demfcb.c",
+    "sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670"
+  },
+  {
+    "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/dos/dem/demfcb.c",
+    "sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670"
+  },
+  {
+    "path": "src/mvdm/dos/v86/doskrnl/dos/fcbio.asm",
+    "sha256": "363DE101BFFCBAD8CB4FF2B0396EA29AC3E6D307019AE21D66F899DF075D435E"
+  },
+  {
+    "path": "tests/observation/dem_capability.asm",
+    "sha256": "A87B8FD6E9F34CB8A426573A4BE2ED7DE4A851D6E9DDD92C5520DA1E28885A18"
+  },
+  {
+    "path": "docs/etc/evidence/m0-t420-s33-dem-capability-closure.md",
+    "sha256": "A439A1DDB84BD0CB8CBAA9527571EE3E14D436D31DC2C1D041ACF276FC9BC0F5"
+  }
+]

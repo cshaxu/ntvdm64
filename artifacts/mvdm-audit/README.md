@@ -180,6 +180,9 @@ the remaining historical decisions still require the same quality audit.
 The [historical residual guest census](nine-way/part-1/guest-excluded-residual-evidence.json)
 is pinned to revision `b8aaf0870`; it includes rows since reopened and is
 evidence for further per-file review, not the present excluded count.
+The [guest physical-role recheck](nine-way/part-1/latest-guest-role-recheck.md)
+pins a later census, with SYSVER inputs subsequently reopened and remaining
+recipe, tooling and artifact roles requiring their recorded capability boundaries.
 The [other-shard correction](classification-scope-correction-other-verification.json)
 reopens another 564 guest-input-only decisions on the same basis.
 An [additional frozen sample](nine-way/part-8/existing-classifications-uncovered-r2-review.md)
@@ -816,3 +819,5 @@ Pre-partition reviews also record [ROM/CMOS resource identity](shard-1/rom-cmos-
 Additional reviews cover [486 profile source gates](shard-1/ccpu-486-family-review.md), [original debugger tools](shard-2/debugger-tools-family-review.md) and [Win16 debug declarations](shard-3/wow-debug-input-role-review.md). Current nonselection or original unimplemented entries do not establish full feature recovery.
 
 The [DOS kernel build records](shard-1/dos-kernel-build-family-review.md), [DDEML test/version inputs](shard-2/ddeml-test-version-review.md) and [WOW USER guest inputs](shard-3/wow-user-guest-input-role-review.md) distinguish historical recipes from actual guest runtime evidence.
+
+The [pending role recommendations](nine-way/part-2/sufficient-file-role-recommendations.md) distinguish recipe evidence from whole-capability exclusions. The [FCB open review](nine-way/part-8/dem-fcb-open-review.md) records original-source failure candidates without claiming guest reproduction; S13 owns their controlled validation.

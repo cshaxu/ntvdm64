@@ -1,0 +1,5555 @@
+{
+  "head": "af4deca6f76f53ab31935edb6da0593daad8c13e",
+  "aggregate_sha256": "985d5fa13f841d191825430be61fac1edabede1d3af5685ea26ae1c466c4e24a",
+  "rows": [
+    {
+      "path": "dos/v86/cmd/command/command.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/command.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/command1.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/command2.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/copy.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/copypr1.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/copypr2.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/cparse.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/dir.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/init.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/iparse.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/loadhi.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/makefil0",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/parse2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/path1.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/path2.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/rdata.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/rucode.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/stub.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tbatch.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tbatch2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tcmd1b.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tcmd2a.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tcmd2b.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tcode.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tdata.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tenv.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tenv2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tfor.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tmisc1.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tmisc2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tparse.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tpipe.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tprintf.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tspc.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/tucode.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/command/uinit.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debasm.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debcom1.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debcom2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debcom3.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debconst.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debdata.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debems.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/deberr.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debmes.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debuasm.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debug.lnk",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/DEBUG.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/debug.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.fal",
+      "shard": "1",
+      "role": "other-manual-review",
+      "hashes": [
+        "c7b109c2489db90e93cbafdb1e1175ac7101a2f812a46e4cdb66c6e54b85c10d",
+        "0ab49b5d636f7226377501c72b9b2fd70134219a17f8e6f61341175f4ffdcad4",
+        "0ab49b5d636f7226377501c72b9b2fd70134219a17f8e6f61341175f4ffdcad4"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.tru",
+      "shard": "1",
+      "role": "other-manual-review",
+      "hashes": [
+        "8a15b84bf2f146b7ab6a9e5d6490a97943ef93098687ea67afaadd0a023500bd",
+        "7c039228859d6820299183c45b8af7b4f0cc78656f69fa3021bd866dfef33ece",
+        "7c039228859d6820299183c45b8af7b4f0cc78656f69fa3021bd866dfef33ece"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlcmd1.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlcmd2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlin.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/EDLIN.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlin.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlmes.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/edlparse.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/edlin/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/display.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/e2binit.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/exe2bin.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/EXE2BIN.MAP",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/fastopen.lnk",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/FASTOPEN.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/fastopen.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/GRAPHICS.EXC",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/graphics.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/graphics.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/graphics.tag",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grbwprt.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grcolprt.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grcpsd.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grctrl.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grinst.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grint2fh.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grload.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grload2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grload3.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grparms.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grparse.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grpattrn.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/COMMSUBS.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/kb16.map",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/keyb.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYB.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBCMD.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBCPSD.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBI2F.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBI9.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBI9C.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/KEYBTBBL.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/keyb/PARSER.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/loadfix/loadfix.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/loadfix/loadfix.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/loadfix/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/_msgret.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/_parse.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/chkvdisk.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/mem.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/mem.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/membase.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/memctrlc.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/memex.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/mem/submsg.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/nlsfunc.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/nlsparm.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/qbasic/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/device.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/dos.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/parse.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/share/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/share/share.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/share/share.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/cmd/share/share.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansi.lnk",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/ANSI.MAP",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansi.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/ansiinit.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/ioctl.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/ansi/parser.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/country/country.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/country/country.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/country/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem1.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem4.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/himem5.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/himem/messages.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFBE.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFBG.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFBR275.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFCF.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFCZ.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFDK.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFDV.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFEOF.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFFR189.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFGE.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFGK.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFHU.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFIC.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFIT141.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFIT142.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFLA.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFNL.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFNO.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFNOW.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFPL1.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFPO.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFRO.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFRU091.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFSF.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFSG.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFSL.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFSP.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFSV.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFTR.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFTR440.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFUK166.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KDFYU.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/keyboard.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/KEYBOARD.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/dev/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msbio.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msbio1.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msbio_4.lnk",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/mschar.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msend.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msinit.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/msint13.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/ntio.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/ntio.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spcemm.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spckbd.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/spcmse_4.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysconf.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysimes.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysinit1.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/sysinit2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/abort.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/alloc.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/cpmio.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/cpmio2.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dev.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dir2.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/disk.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dos.tag",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/dup.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/exepatch.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcb.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcbio.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/fcbio2.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/file.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/getset.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/handle.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/ioctl.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/lock.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/macro.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/macro2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/misc.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/misc2.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/mscode.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msctrlc.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdata.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdisp.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdos.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msdosme.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msinit.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/msproc.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/mstable.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/NTDOS.MAP",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/ntdos.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/open.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/origin.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/parse.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/path.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/search.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/segcheck.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/srvcall.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/time.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/util.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/doskrnl/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/lib/xmm.lib",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/lib/xmm/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/lib/xmm/xmm.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/messages/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/messages/state.rst",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/int2a.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/int5c.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/mailslot.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/msgapi.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/namepipe.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/netapis.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/neterror.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/redir.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/redir.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/redir/obj/resident.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "8334d105e32b99f253ce3c8585e93e9f50af5c2b16052291f34ba53ff095a277",
+        "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b",
+        "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/sources",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6928a6386316137c01e614f805e6765204aed2f3acfe312b95c6048308caeb3d",
+        "de09316c809c358b6031a8b81b6984598d21e277d661c1d04990d9f2df641d09",
+        "de09316c809c358b6031a8b81b6984598d21e277d661c1d04990d9f2df641d09"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/getsize/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7775749a262bd1b60de2f5a45956c9aee411727eda04bb57cf34a402441065a3",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/getsize/sources",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ed2b692983e70bfbf19fae11c0cf70b3271f4ef7e89012222a0b2669498bf92f",
+        "223487a6e344cfba49138096f74ca7bd5a52da18564120ce575f957475021aa1",
+        "223487a6e344cfba49138096f74ca7bd5a52da18564120ce575f957475021aa1"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c7c8aa7103b818b037b731f294412a85a36a2ef697517f7152bef8de17d757ce",
+        "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163",
+        "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.def",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "cffd9fd2d0a2c01759dab1a0b68c37065f30cd053a9dcc7fb96533aa1b68debe",
+        "364bba7cb75e4e54c9f2ac8454c633b06c73c3b7dc5cbe5e7ed5c48b05a30116",
+        "364bba7cb75e4e54c9f2ac8454c633b06c73c3b7dc5cbe5e7ed5c48b05a30116"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/makefile",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7775749a262bd1b60de2f5a45956c9aee411727eda04bb57cf34a402441065a3",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/sources",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "d9131f8867c39476d6afdf35623c408704386b25ebe5901b2496b7bb0aeb8293",
+        "3f6dc74093e2ae5274cb5e03bf30fef813baee5c9967bf80e1b2198953c4f17c",
+        "3f6dc74093e2ae5274cb5e03bf30fef813baee5c9967bf80e1b2198953c4f17c"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1c087ce71a9b97b23543d4747815ab44806e90e847808720d1c5e6cd83d64ae6",
+        "7a5e4536964d312c24af6f11ba387b6845c92e089a08d843f72a52c36f0956ff",
+        "7a5e4536964d312c24af6f11ba387b6845c92e089a08d843f72a52c36f0956ff"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/makefile",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "2af46f348b9f8327a02d457f6787b9720b65a01c496ed2a1c379124876b54f44",
+        "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b",
+        "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "3e0766296c56c07d863a591a34a09622d6b09b0dc919d41962de14e356a809db",
+        "d9db191e7ce80787c281995f285f1bebc8607f85c47c3a623284c75c950fc23b",
+        "d9db191e7ce80787c281995f285f1bebc8607f85c47c3a623284c75c950fc23b"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c4e080dbbf233303adfdedd64f1c77ea8716e4b56ded72a3fde2798589c1b31e",
+        "3b3dd85fbef2a022380291ba57959db1db913fdbaf6a6e61271b82d6c4533b22",
+        "3b3dd85fbef2a022380291ba57959db1db913fdbaf6a6e61271b82d6c4533b22"
+      ]
+    },
+    {
+      "path": "wow16/commdlg/commdlg.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/commdlg.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/commdlg.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/commdlg.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/dlgs.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/font.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/parse.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/commdlg/start.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.doc",
+      "shard": "2",
+      "role": "other-manual-review",
+      "hashes": [
+        "b9faa5a532a7604ed95715745e8f23cd3e23dcacae079bcd74ab2ff0d4942b49",
+        "b9faa5a532a7604ed95715745e8f23cd3e23dcacae079bcd74ab2ff0d4942b49",
+        "b9faa5a532a7604ed95715745e8f23cd3e23dcacae079bcd74ab2ff0d4942b49"
+      ]
+    },
+    {
+      "path": "wow16/ctl3dv2/readme.txt",
+      "shard": "2",
+      "role": "other-manual-review",
+      "hashes": [
+        "c27d5b7a4ef21d9d3092803b7369e4dba1e3a41293e36f2ab0c8754f46626470",
+        "7fce264469f2bacc16c0e1aa24429add3632db7e24c46cff01df40b44c19d5ec",
+        "7fce264469f2bacc16c0e1aa24429add3632db7e24c46cff01df40b44c19d5ec"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/ddeml.lib",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/ddeml.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/ddeml.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/ddeml.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgdb.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgdde.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmghsz.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgmem.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgmon.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgq.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgutil.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/dmgwndp.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/hdata.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/heapwach.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/libentry.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/register.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/stdinit.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/debug/stdptcl.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ddeml/tests/ddes16.sym",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390",
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390",
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/cmdln.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "a0070d519d58bc6b6a0cba989c35b34593d2e19f6180040217a52d1791e3eaae",
+        "6025a70936ca068dc29af3fa582b3c43ac80eb1b054c73528e9e710f2d508c2b",
+        "6025a70936ca068dc29af3fa582b3c43ac80eb1b054c73528e9e710f2d508c2b"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.c",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6d5a13be1c0f35fa7471976466559f10b3cf37ba030f5bd32c390d42b4022508",
+        "2fc3e045ec764cb46f31e3ff11ee20f791a39bb0175898160c915387abba9301",
+        "2fc3e045ec764cb46f31e3ff11ee20f791a39bb0175898160c915387abba9301"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "cef25c314d9c77544970c9fac6dfd255743def0ea08eb12cf5e5cb2610657986",
+        "9e827322a7b8d14f9fce9e098fadb2688ec8dd199a1626b2336b951fd1b0b982",
+        "9e827322a7b8d14f9fce9e098fadb2688ec8dd199a1626b2336b951fd1b0b982"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1d61161efdcc5f79466de7c2addad32c247b4e5e7038823fcf3c5157d7c0df87",
+        "549a8a3a652d03b70b811eda123e01b436601af6a633df549894c2e2ca8aa7a2",
+        "549a8a3a652d03b70b811eda123e01b436601af6a633df549894c2e2ca8aa7a2"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c945b4ebf321e4ff73279e5c467a51e06001d40e164865287df1f10a78f6784c",
+        "998857e0cc117e58b192b821526cbffd713c66eeeb36f147e4faa8a88c9796a8",
+        "998857e0cc117e58b192b821526cbffd713c66eeeb36f147e4faa8a88c9796a8"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.h",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "58742cc393db3fef99bde042944d7f36eb23a9800e0d25763a5599e7bb4f7135",
+        "f8715e8cea182d1d0543c2a78621129844c680833c31c7375c221a347864bfe8",
+        "f8715e8cea182d1d0543c2a78621129844c680833c31c7375c221a347864bfe8"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/makefile.dos",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7d9727f488d25a392902786a4a89bb4c084dde605304b6f043b3d2d49f787076",
+        "2d363df8d68e84c6edd10c8450ae3ed3a9c0e459d6a89807ea725dcb9823b67a",
+        "2d363df8d68e84c6edd10c8450ae3ed3a9c0e459d6a89807ea725dcb9823b67a"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/mk.cmd",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "f282ee16dba18e3d52565c0bba3f2f82ef34c5849ff128f83eff3a5f0bc05c33",
+        "676f87e81abdc9ca8a22e0b29aa22f3847e7597a21694ae83103e91a45ddb621",
+        "676f87e81abdc9ca8a22e0b29aa22f3847e7597a21694ae83103e91a45ddb621"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/mk4dos.cmd",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/server.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c538af79f31be3867810cd7d72df90ad1d9bc1738d4f4945960564830aeed6c8",
+        "ae9a7d42428f1e4f75f7a697bf4e8b626f0387ddf1c2c0909209d8c8786c5b77",
+        "ae9a7d42428f1e4f75f7a697bf4e8b626f0387ddf1c2c0909209d8c8786c5b77"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7199fca1b256df63bb96e9d8c2114beae6ec80d7ae4102ba86c518e8f242cc7d",
+        "b57136a2889ad2f792e52da93cd12665932ce00f63b55164a7d0d84401c910f7",
+        "b57136a2889ad2f792e52da93cd12665932ce00f63b55164a7d0d84401c910f7"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/wrapper.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e43838bc8a3b50975285d8ed40e786a6ea3005898073f98b7ff8323165ae2d9c",
+        "0dab959cd3bc0edc45305a4c9dcfc8b2bee7c12c40b921d3a66dbc044cf9d551",
+        "0dab959cd3bc0edc45305a4c9dcfc8b2bee7c12c40b921d3a66dbc044cf9d551"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dde.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "39cc6069daf5054077476ba65a5ee504f2727df3162dd4e16ab3c455c209ff44",
+        "5a43cf63d514ae151f2254e8b17c1de13f98f979754497b8436db2dafed58bd2",
+        "5a43cf63d514ae151f2254e8b17c1de13f98f979754497b8436db2dafed58bd2"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.h",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "3c53fcf37d35bee5d9339adec70af72e3a2c90eb78373fa59af1dddad4813466",
+        "01160766793606c92e047a95e989e9541c9bcfb4ff79724d6e15bff7357d4786",
+        "01160766793606c92e047a95e989e9541c9bcfb4ff79724d6e15bff7357d4786"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.ico",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693",
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693",
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dialog.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "043879ba6129a3dea9628f755feaebe9d1197e0ab40da72c9956533b5f0d2897",
+        "d0b07020054be6c690ab96aa8000060acd2e713345e12dfecdb74eebccf66151",
+        "d0b07020054be6c690ab96aa8000060acd2e713345e12dfecdb74eebccf66151"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "350c9c7fbce7471f05725e9a4cb294286183b093249423e50acd8ff7391a39a5",
+        "88f0a18f99ac221d8d6e59e8dc18cb3fb79852f98fabfd826de72a82bd4b7be5",
+        "88f0a18f99ac221d8d6e59e8dc18cb3fb79852f98fabfd826de72a82bd4b7be5"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "8582946e93ca22d6b2ea4a82d66301b84dcbd610902ac71be72fb09360fcb3e7",
+        "36324599a934fd0ada67d72e0187f590c4f959ca8559f1587ba9e605b3e1ff47",
+        "36324599a934fd0ada67d72e0187f590c4f959ca8559f1587ba9e605b3e1ff47"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/makefile",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/makefile.dos",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6df3c6343d36a29510277d9504ccebf47afc15148d5fea08845cd817f970859e",
+        "63b9b5b9c52e85d81904141dfd1354015e21262c5da87a7d1603053fefb50653",
+        "63b9b5b9c52e85d81904141dfd1354015e21262c5da87a7d1603053fefb50653"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "f294899ab6db34c8938b7a22b34b8d71eb321ab14ccfbbbe28540abb0cfd373a",
+        "8f0a9eaefb415fe22bddf392459c0ada6e2cfee7bc961ab8c19ffac44e852ccd",
+        "8f0a9eaefb415fe22bddf392459c0ada6e2cfee7bc961ab8c19ffac44e852ccd"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/ddemo.def",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1fda8561386bd484cd27a83b409f54db6945e9fec2b863f53baef2cd865a614b",
+        "b5aa923f34dd0712464644ae03a65e82a8ff4a6547b75e23e5e2c633232de6b2",
+        "b5aa923f34dd0712464644ae03a65e82a8ff4a6547b75e23e5e2c633232de6b2"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/makefile.dos",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "a1c959874fe76416bc3a2a03359866c45cd211d47c2803cc6d9cd2f7c7e7d96a",
+        "ca41caacfb881d934f723ec75ef7aaeee430fe47be052322bdd799676f180479",
+        "ca41caacfb881d934f723ec75ef7aaeee430fe47be052322bdd799676f180479"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "2f4b9e8bee7ea330e8b9ccfeb40c1aa74f17c9fb194a52e5b3f0d11a4f415e3c",
+        "0f654766b7fd12ae9ef3785f03cd5273b3ec4b737c864e4242ef6788c30cdd1d",
+        "0f654766b7fd12ae9ef3785f03cd5273b3ec4b737c864e4242ef6788c30cdd1d"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/dirs",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "754b33790d0633685ffb1818d380e9c2ccda30166dcc0fd99e92556be2a5c589",
+        "1bbebb4fba6b053cd8c5b6e3ad17de058b324ec3408cf13a203d5eeb0d23a7c6",
+        "1bbebb4fba6b053cd8c5b6e3ad17de058b324ec3408cf13a203d5eeb0d23a7c6"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/makedos.bat",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "75d9f72c27f95412f62f1ce8c8ef00037ca161f3f4a0f6317e96eca5a1109d42",
+        "408ef2b4817f0b0381daf6545196cd8a2969103b7f4ca2c87f29129f217ae9bb",
+        "408ef2b4817f0b0381daf6545196cd8a2969103b7f4ca2c87f29129f217ae9bb"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/makefile.dos",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "943e1784beed367fa78ac3a3638878c98b6248123214d2e83c8662473373b0a0",
+        "5b5e8ff82b3f34b0e1940c0850e064858580e28e212011f1129063ad09d39934",
+        "5b5e8ff82b3f34b0e1940c0850e064858580e28e212011f1129063ad09d39934"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/server.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c15962947795d118ae49dcf1bc81bdd6dde8ee98b56fed9161317d60fb6b2616",
+        "5a4e4b5b52498974326e5f91fddec18cb210bae7b62f4ef7e16978765b0253aa",
+        "5a4e4b5b52498974326e5f91fddec18cb210bae7b62f4ef7e16978765b0253aa"
+      ]
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/sources",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "b1ae69ad79d84c65e4e89341564a74ea2fa4f52e8d9e116701bfdc64beb6e874",
+        "0bab2b9a9ebfbee7970f318e430b44a72986839c6f499e3c04b9b7299012bb48",
+        "0bab2b9a9ebfbee7970f318e430b44a72986839c6f499e3c04b9b7299012bb48"
+      ]
+    },
+    {
+      "path": "wow16/drivers/comm/ccom.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/comm.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/comm.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/comm.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/commmsg.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/ibmcom.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/ibmint.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/ibmlpt.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/ibmsetup.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/comm/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/config.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/display.lrf",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/display.LST",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/display.map",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/display.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/display.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/vga.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/display/vga.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/kbdlocal.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/keyboard.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/keyboard.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/keyboard.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/keyboard.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/keyboard/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/mouse.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/mouse.LST",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/mouse.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/mouse.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/mouse/mouse.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/sound/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/sound/sound.lrf",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/sound/sound.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/sound/sound.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/drivers/sound/sound.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/fontres.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/gdi.lrf",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/gdi.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/gdi.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/gdi.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/layer.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/muldiv.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/gdi/sort.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3gacheck.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3galloc.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3gcompac.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3ginterf.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3glru.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3gmem.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3gmemini.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3gmoreme.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/3protect.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/atom.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/context.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/diag.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/disasm.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/diskio.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/dosinit.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/emsmisc.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/enable.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/error.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/gpcont.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/gpfix.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/handle.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/hmem.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/i21entry.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/i21file.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/i21task.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/int24.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/intnn.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/kdata.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/kdataend.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/kernel.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/kernel.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/krnl386.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/krnl386.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/kthunks.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lacheck.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lalloc.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/layer.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lcompact.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ld.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldappl.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldaux.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldboot.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldcache.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lddebug.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldfastb.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldfile.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldheader.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldint.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldopen.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldreloc.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldseg.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldself.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldstack.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ldutil.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lhandle.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/linterf.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lstring.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/lzexp.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/mapdata.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/miscapi.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/module.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/patch.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/reboot.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/resaux.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/rip.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/ripaux.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/rom.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/stack.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/strings.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/task.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/tasking.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/userpro.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/winexec.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/wow16cal.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/debug3/wowdeb.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/krnl286.lnk",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/krnl386.lnk",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3gacheck.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3galloc.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3gcompac.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3ginterf.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3glru.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3gmem.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3gmemini.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3gmoreme.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/3protect.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/atom.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/context.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/diag.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/disasm.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/diskio.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/dosinit.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/emsmisc.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/enable.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/error.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/gpcont.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/gpfix.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/handle.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/hmem.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/i21entry.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/i21file.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/i21task.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/int24.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/intnn.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kdata.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kdataend.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kernel.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kernel.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/krnl386.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/krnl386.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kthunks.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lacheck.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lalloc.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/layer.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lcompact.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ld.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldappl.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldaux.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldboot.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldcache.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lddebug.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldfastb.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldfile.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldheader.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldint.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldopen.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldreloc.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldseg.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldself.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldstack.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ldutil.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lhandle.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/linterf.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lstring.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/lzexp.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/mapdata.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/miscapi.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/module.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/patch.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/reboot.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/resaux.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/rip.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/ripaux.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/rom.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/stack.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/strings.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/task.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/tasking.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/userpro.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/winexec.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/wow16cal.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/wowdeb.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/kernel31/swappro/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/killwow/killwow.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/killwow/KillWOW.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/killwow/killwow.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/killwow/KillWOW.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/killwow/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/commdlg.lib",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/gdi.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/kernel.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/keyboard.lib",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/libentry.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/mdllcew.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/mlibcew.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/MMSYSTEM.LIB",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/olecli.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/sdllcew.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/shell.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/slibcew.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/snocrt.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/snocrtd.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/sound.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/system.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/lib/user.lib",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mciole/libinit.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mciole/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mciole/mciole.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mciole/mciole16.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mciole/mciole16.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/auxout.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/bwinexec.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/comm.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/debug.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/dosa.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/dpmipage.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/drvproc.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/drvr31.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/heap.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/hmemcpy.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/init.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/isr.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/joy.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/libentry.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mci.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mciparse.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mcisys.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/midi.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mixer.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mmio.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mmioriff.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mmsex.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/mmwnd.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/playwav.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/sound.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/stack.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/task.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/taska.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/thunks.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/time.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/debug/wave.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmsystem.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmsystem.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/mmtask.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/mmtask.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/mmtask.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/client/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/client/mk.cmd",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/block.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/doc.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/give2gdi.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/item.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/olesvr.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/olesvr.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/olesvr.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/srvr.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/srvrmain.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/debug/utils.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/retail/olesvr.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/retail/olesvr.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/ole/server/retail/olesvr.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/rasapi16/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.lrf",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.map",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/cutils1.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/dbase.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/filename.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/merge.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regedit.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regedt16.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regedt16.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regedt16.tmp",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regmain.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regporte.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/regthunk.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/sdbase.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/sdkreged.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/utils1.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/debug/virt.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/regedit/msvc.pdb",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/dragdrop.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/shell.lrf",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/shell.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/shell.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/shell/shell.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/disasm.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/drwatson.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/drwatson.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/drwatson.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/error.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/getsym.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/sherlock.lnk",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/watson.lst",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/sherlock/watson.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/hpsystem.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/system.lnk",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/system.map",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/system.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/system.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/system/timer.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/hello/hello.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "d1a7bb3b31ae95d42f7229c3d2c607ad3f06c0e254d77a37a73c998e8643cdaa",
+        "d5b755b276ab391c46e5364d2a4cdb8d3a3f8f19ddaf2953b68281316e9d9a4a",
+        "d5b755b276ab391c46e5364d2a4cdb8d3a3f8f19ddaf2953b68281316e9d9a4a"
+      ]
+    },
+    {
+      "path": "wow16/test/hello/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "95f3fc50d2e9d008b165fab5830e320f7ac109812ac001e805ec26a0886affdd",
+        "4ef6e86c6089ea05dbc890b379ae822c3a9025ff2e3faddc886cd96294d7db3b",
+        "4ef6e86c6089ea05dbc890b379ae822c3a9025ff2e3faddc886cd96294d7db3b"
+      ]
+    },
+    {
+      "path": "wow16/test/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/pmdos.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/wowexec.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/wowexec.map",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/wowexec.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/wowexec.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/test/shell/wowexfax.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/api.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/libinit.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/local.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/math.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/startend.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/debug/timer.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/timer.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/timer/timer.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/dllentry.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/global.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/helper.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/int1.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/int2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/krnlpeek.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/local.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/memman.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/memory.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/module.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/notify1.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/notify2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/signal.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/stack1.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/stack2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/task1.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/task2.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/terminat.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/ththunks.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/timer.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.lib",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/usergdi1.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/usergdi2.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/walk286.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/toolhelp/walk386.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/debug.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/drvr.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/drvrrare.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/fastres.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/helpcall.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/init.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/intds.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/inuserds.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/layer.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/msglayer.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/net.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/rmcreate.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/rmload.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user.sym",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user1a.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user2a.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user3.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user3a.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/user4.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/usercli.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/userk.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wclass.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winhook.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winlang.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winmisc2.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winnet.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winq.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winrect.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winstack.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/winstr.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wowcomm.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wowk.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wowkr.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wsphelp.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/k/daytona/wsprintf.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/user/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/ints.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/lfn.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/libentry.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/misc.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/print.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/to32.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.lrf",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.sym",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/win87em/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winoldap/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winoldap/winoldap.lrf",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winoldap/winoldap.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winoldap/winoldap.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winoldap/winoldap.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winsock/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winsock/winsock.lrf",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winsock/winsock.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winsock/winsock.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winsock/winsock.sym",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/winspool.lrf",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/winspool.LST",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/winspool.map",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/winspool.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/winspool/winspool.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/wowdeb/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "36174388f471174a03eb0ac82e591208828f50361818ed9074b15c602184e6ff",
+        "8bd02ad8a2dd996c0acdcc0b78c32f2229b61a471a5b0ff128f8733456ca6ed0",
+        "8bd02ad8a2dd996c0acdcc0b78c32f2229b61a471a5b0ff128f8733456ca6ed0"
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.lrf",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6747e2bba02f7eda47dd602867cb97bdaea173111f7f985e8fd04ca5157d8402",
+        null,
+        null
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.map",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ede99072a3703dbd58d10b8209c1e4f557b4b33b44d5aa1365243fec1f834d0d",
+        "e1fb1285dced0db81494455612b8870aec9cffab9cf9815cf5a19f2f3db50153",
+        "e1fb1285dced0db81494455612b8870aec9cffab9cf9815cf5a19f2f3db50153"
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.obj",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e379cd3ae437c4f52f24f92c73ea33d08312a8876945ad735cb832494fc048f8",
+        null,
+        null
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "224d8d353f5afe9e2e223d552ec719fb0aa30986708bc5c88b0382fe1fd4b529",
+        "4598fe536f544e7e0adf66ed715137650226605dd8b86c747a76acc45418a964",
+        "4598fe536f544e7e0adf66ed715137650226605dd8b86c747a76acc45418a964"
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.rcv",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e7bf41ff96bd995ba90bba22991704bd68e308709ecd9fba18e25bfd484fab6b",
+        "2421ece41d9ae785de138d56704c39329fc75a637ccf3e4ac493b12cc2bf7a79",
+        "2421ece41d9ae785de138d56704c39329fc75a637ccf3e4ac493b12cc2bf7a79"
+      ]
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.sym",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41",
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41",
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41"
+      ]
+    },
+    {
+      "path": "wow16/write/addprm.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/cache.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/chngwin.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/clipbord.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/clipbrd2.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/clipdisp.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/cmd.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/commdlg.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/createww.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/curskeys.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/debug.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/diaalert.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/diadiv.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/diapara.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/diarepag.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/diasubs.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/disp.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/doc.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/doprm.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/doslib.OBJ",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/edit.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/editpgtb.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fetch.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/file.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fileres.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fileutil.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fontdlg.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fontenum.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/fontutil.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/format.OBJ",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/format2.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/heapmain.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/heaprare.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/initmmw.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/initwin.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/insert.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/insert.tmp",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/insert2.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/insertco.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/jumppage.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/kmake.bat",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/lib.OBJ",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/loadfnt2.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/loadfont.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/mainloop.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/mdoc.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/menu.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/mglobals.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/mmw.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/mouse.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/obj.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/obj2.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/obj3.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/objmini.OBJ",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/objpsp.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/objreg.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/open.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/pageinfo.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/pictdrag.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/picture.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/picture2.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/print.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/print2.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/print3.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/printdlg.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/quit.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/rare.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/ruler.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/ruler2.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/ruler3.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/running.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/screen.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/scrnchng.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/scrollhz.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/scrollvt.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/search.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/select.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/select2.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/selectsp.obj",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/state.rst",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/trans2.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/trans3.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/trans4.obj",
+      "shard": "2",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/transbuf.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/transfer.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/undo.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/util.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/util2.obj",
+      "shard": "0",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/write.lnk",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/write.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/write.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/write16.map",
+      "shard": "3",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/write16.sym",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    },
+    {
+      "path": "wow16/write/wwactde.obj",
+      "shard": "1",
+      "role": "historical-artifact",
+      "hashes": []
+    }
+  ],
+  "limits": "Git revision snapshot for project files; external original hashes read current filesystem. Physical file roles are not exclusion of guest capabilities."
+}

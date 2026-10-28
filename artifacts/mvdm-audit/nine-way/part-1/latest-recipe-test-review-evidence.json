@@ -1,0 +1,1808 @@
+{
+  "head": "af4deca6f76f53ab31935edb6da0593daad8c13e",
+  "aggregate_sha256": "985d5fa13f841d191825430be61fac1edabede1d3af5685ea26ae1c466c4e24a",
+  "census_sha256": "c76d6393d00150e91735719e5cb15b451ef374b6ddc3e144e575acbedee13e0d",
+  "rows": [
+    {
+      "path": "dos/v86/cmd/command/makefil0",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "f8347ce6ce5acad2246c0daab1eb85e9047438dc572cc91b02f4e7bd2bc7e9c8",
+        "310936180e14b62152534b0f1f6d78f15153a21f80a9111211497befae32cb64",
+        "310936180e14b62152534b0f1f6d78f15153a21f80a9111211497befae32cb64"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 11,
+      "prior_basis": "  historical-build-recipe-file-only; Builds COUNTRY/buildmsg.exe from buildmsg.c with cl16/forcedos link    No guest/tool rebuild; COMMAND source, locale messages and immutable executable lineage remain independently reviewed; file-only build-role exclusion, not runtime capability completion or exclusion ",
+      "prior_evidence": "  historical-build-role-dispositions.csv; historical-build-role-review.md"
+    },
+    {
+      "path": "dos/v86/cmd/command/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "b10b46c5ad9a95d01e0fd8bb19c8e49517dad50623e841a58393bdeeee5d87eb",
+        "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4",
+        "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 536,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86/cmd/command; no execution success inferred.   ",
+      "prior_evidence": "Historical link response and source hashes: artifacts/mvdm-audit/shard-0/command-guest-build-evidence.csv; guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/cmd/debug/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "ed6688c02169e98c7c1231068172a094f193fcbf8a06e663a51ad68e10eccfbb",
+        "996256a7614656d9fabe197ec37dda2a89c8beddc71a050614a442df2bf91d74",
+        "996256a7614656d9fabe197ec37dda2a89c8beddc71a050614a442df2bf91d74"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 225,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/edlin/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "507a0616a4b0369bf700be0950b5d770f1486f769ca040ec03ddaec289b0a61e",
+        "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8",
+        "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 104,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/cmd/exe2bin/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "9faf79637ceebacfd08dfa642800326415218e6c31a4f7bec7c764ae51f30dd0",
+        "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5",
+        "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 65,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/cmd/fastopen/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "bdb1d8b2cfed9943bb412be983eb17805b6e2cf0832e83d25db7f9b5f5aebd66",
+        "83797fae562c4609d627dc1d334d4ed35d73dfb9240e4b9464fa05c50a3a3b89",
+        "83797fae562c4609d627dc1d334d4ed35d73dfb9240e4b9464fa05c50a3a3b89"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 33,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/cmd/graphics/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "5ffc749fe5d4ae6ab4bbafa3eda636195e5f7c7ec723b63255b0b982797bd075",
+        "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a",
+        "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 78,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/keyb/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "2cdc6e8156a1e3d20245e133e0d4f0c094cc22f122ede80ad2edc937832886d5",
+        "05c82b9a6a0502adc978663c6289f012ebcf804f3f6a5cd2b645e6e9855a8ecc",
+        "05c82b9a6a0502adc978663c6289f012ebcf804f3f6a5cd2b645e6e9855a8ecc"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 89,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/cmd/loadfix/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "878b515937bb7f50bcaea5c71494840a3907617c8e15d667ba8d79f844a55901",
+        "b5636050526f8a8f97147ed9bb43f7c18bfbf297e3d4e56a43ec1a25aa221959",
+        "b5636050526f8a8f97147ed9bb43f7c18bfbf297e3d4e56a43ec1a25aa221959"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 35,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "8df3f3de6c2770a793b0786c37f44c18a4f868d168b7cd6dc8e0c2727d3dd8fc",
+        "211dc97febace0c93af19b739d28201d17544c760c711d182f2ea02028f1d9ce",
+        "211dc97febace0c93af19b739d28201d17544c760c711d182f2ea02028f1d9ce"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 76,
+      "prior_basis": "   Original NMAKE aggregate text invokes $(MAKE) across DOS utility build directories; only the historical recipe file is excluded.    DOS utility sources, guest identity and behavior remain independently audited.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/mem/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "80e1515fbc4e6ef5a53e3ac50c02d3fcda62815916fd29ef403fcae44615d9a4",
+        "5723c2ca43ae5adfff9cd5fd6c2c1ef4bedc8ccee7cbfc878f4a43a31b86b8de",
+        "5723c2ca43ae5adfff9cd5fd6c2c1ef4bedc8ccee7cbfc878f4a43a31b86b8de"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 81,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86/cmd/mem; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "031af665a40b8ba7a1ba8cab403ddc8e143d9bfa4a45f2e6b62102eaa72ff3d4",
+        "a6d9adb0b5b2f0fdc0bf26200a92e2f0f9913dabea481b1b5d522498752693f5",
+        "a6d9adb0b5b2f0fdc0bf26200a92e2f0f9913dabea481b1b5d522498752693f5"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 57,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/qbasic/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "c3f279a73c4fec5bc34f68f824b3fb531c31df95ba6722ce563fc961ce79811a",
+        "3df0ec2d79ac0458617c7c67b217517223de1d9b71cebdcae2e6609c974c9048",
+        "3df0ec2d79ac0458617c7c67b217517223de1d9b71cebdcae2e6609c974c9048"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 26,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/cmd/setver/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "4ad25b1f140a48c144b14c4b5679a05c162ab77efe9dcfbc18424a5196b6a757",
+        "b2b3833b81aebd0e68612149699dc35306f65e9c3d3ce11e361b898ac24caeaf",
+        "b2b3833b81aebd0e68612149699dc35306f65e9c3d3ce11e361b898ac24caeaf"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 63,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/cmd/share/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "4e0b8ab0eedce639640b7226f3cea5be7bcf2779c6a3b6bae10f911dfebb7f46",
+        "0d81bc47e24df4fa4edb2d4b79dbdbe8eff0cb288d790fb6ea7b2f41dd991ed4",
+        "0d81bc47e24df4fa4edb2d4b79dbdbe8eff0cb288d790fb6ea7b2f41dd991ed4"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 33,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/dev/ansi/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "55f5ee3ce0062cd6b3392ca7280fab0c0ead3d98118dd08af63d9a9b5d98ec5d",
+        "df753a55dcf2551aecf16dc8c31ddef7e41cc4c09b4c704887b6ad5ed7183ce2",
+        "df753a55dcf2551aecf16dc8c31ddef7e41cc4c09b4c704887b6ad5ed7183ce2"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 79,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/dev/country/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "01c3b56db230c72e1faeef5172ca8696b249fee78e76594698f247cbd13350a7",
+        "5671e0e417e8481555997d566ab0a4a99adce550c8918a68c824b59e45fce327",
+        "5671e0e417e8481555997d566ab0a4a99adce550c8918a68c824b59e45fce327"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 24,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/dev/himem/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "e0d9aa6a9ebddcd763ffc01b220fcb6089217dfc4f5323c08d28a04fadfcdb20",
+        "4bcad509bad1cba600c444b0682fc3a8ae3c112fccd97ccba4b57cd17b6583c2",
+        "4bcad509bad1cba600c444b0682fc3a8ae3c112fccd97ccba4b57cd17b6583c2"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 61,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/dev/keyboard/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "111382d04a315b124b7525e8465085c994b934669d89886d98c75a74ae3a6ad3",
+        "031df79e3dd9fbe2d39b3f808f83da74882778d21e53546e0f09a99df854ccd3",
+        "031df79e3dd9fbe2d39b3f808f83da74882778d21e53546e0f09a99df854ccd3"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 128,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/dev/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "fa941746f3d0432020e5193eb4abc31d972085c61a28fc799f1b34df7812746a",
+        "1fe98a388d6d8abfeb401496803eafc5ab733608b44a0b50232e0589b9d4f5ea",
+        "1fe98a388d6d8abfeb401496803eafc5ab733608b44a0b50232e0589b9d4f5ea"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 32,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "505a6b09ebe6820ddeed44f5dbbb905bac2941dedb4b80bbb63f058587ff7f54",
+        "03c54d48fdf24eece3b664a0a6c625dd649a5ef423173a80f9dfc36be025ddf8",
+        "03c54d48fdf24eece3b664a0a6c625dd649a5ef423173a80f9dfc36be025ddf8"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 92,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "04c74ed26cead4b3ef410ff802872e6dd34f7ed88c9c7e8d9f2cc1689b6cef91",
+        "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e",
+        "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 323,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/doskrnl/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "61a449b7b5d14b09613ef7b08324aa5a8b78fa286d326a78fd44181813c04ab9",
+        "a9e4df903ea2931fd56eba74c5176f173a4d0cfedaf5ba7af3eb0db0b1152a05",
+        "a9e4df903ea2931fd56eba74c5176f173a4d0cfedaf5ba7af3eb0db0b1152a05"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 24,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/lib/xmm/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "52fae2b868d9f0316c21119e1fbc056961c4ebc793051bb4742541701e3ed7c5",
+        "2b0369a11d112c8c5d6c09d11a65a5f3ef0d17ce4d8df26136d1afbcb74b705f",
+        "2b0369a11d112c8c5d6c09d11a65a5f3ef0d17ce4d8df26136d1afbcb74b705f"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 38,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "403170ee8111b3fc1d3d353b5390170f18c2f73a5d2855f4bd245859fc7b62e8",
+        "a684a6acc34d118ef03c0e3182811c7f0726dcfd9d4010a76d665a3440ca5194",
+        "a684a6acc34d118ef03c0e3182811c7f0726dcfd9d4010a76d665a3440ca5194"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 34,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/messages/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "4d988bf3529305fc728a46b62755430cd12acaf031aa66628b90bb4b74b8ae7b",
+        "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4",
+        "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 14,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/redir/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "6e50c1e83be73a673e5bc56172ad0930b341606affa8007c3a7e85b8c3efe49c",
+        "318569c93bb478aea0a11e078c82e2fb2d4f649d2e2cc2fb78dbfed781fde53f",
+        "318569c93bb478aea0a11e078c82e2fb2d4f649d2e2cc2fb78dbfed781fde53f"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 223,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "8334d105e32b99f253ce3c8585e93e9f50af5c2b16052291f34ba53ff095a277",
+        "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b",
+        "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 9,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/sources",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6928a6386316137c01e614f805e6765204aed2f3acfe312b95c6048308caeb3d",
+        "de09316c809c358b6031a8b81b6984598d21e277d661c1d04990d9f2df641d09",
+        "de09316c809c358b6031a8b81b6984598d21e277d661c1d04990d9f2df641d09"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 14,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/tools/src/getsize/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7775749a262bd1b60de2f5a45956c9aee411727eda04bb57cf34a402441065a3",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/tools/src/getsize/sources",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ed2b692983e70bfbf19fae11c0cf70b3271f4ef7e89012222a0b2669498bf92f",
+        "223487a6e344cfba49138096f74ca7bd5a52da18564120ce575f957475021aa1",
+        "223487a6e344cfba49138096f74ca7bd5a52da18564120ce575f957475021aa1"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 14,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c7c8aa7103b818b037b731f294412a85a36a2ef697517f7152bef8de17d757ce",
+        "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163",
+        "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 2374,
+      "prior_basis": "  historical-guest-build-input-only; Original tool source consumed by a historical guest build    Guest instruction or device behavior, image provenance, failures and lifecycle remain unproved. ",
+      "prior_evidence": "  parallel-shld-tools-role-review.md; shard-2/dos-v86-build-tools-observations.json"
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.def",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "cffd9fd2d0a2c01759dab1a0b68c37065f30cd053a9dcc7fb96533aa1b68debe",
+        "364bba7cb75e4e54c9f2ac8454c633b06c73c3b7dc5cbe5e7ed5c48b05a30116",
+        "364bba7cb75e4e54c9f2ac8454c633b06c73c3b7dc5cbe5e7ed5c48b05a30116"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 1,
+      "prior_basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; h2inc.mak:3,10-12 explicitly consumes h2inc.def in h2inc.exe link then OS/2 bind; independent historical build utility, not current host runtime or guest execution  "
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/makefile",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7775749a262bd1b60de2f5a45956c9aee411727eda04bb57cf34a402441065a3",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050",
+        "34a1b39b572f1441eb556128c5c81537aa409aafa7930335abf9a4cd92093050"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/sources",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "d9131f8867c39476d6afdf35623c408704386b25ebe5901b2496b7bb0aeb8293",
+        "3f6dc74093e2ae5274cb5e03bf30fef813baee5c9967bf80e1b2198953c4f17c",
+        "3f6dc74093e2ae5274cb5e03bf30fef813baee5c9967bf80e1b2198953c4f17c"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 14,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1c087ce71a9b97b23543d4747815ab44806e90e847808720d1c5e6cd83d64ae6",
+        "7a5e4536964d312c24af6f11ba387b6845c92e089a08d843f72a52c36f0956ff",
+        "7a5e4536964d312c24af6f11ba387b6845c92e089a08d843f72a52c36f0956ff"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 184,
+      "prior_basis": "  historical-guest-build-input-only; Original tool source consumed by a historical guest build    Guest instruction or device behavior, image provenance, failures and lifecycle remain unproved. ",
+      "prior_evidence": "  parallel-shld-tools-role-review.md; shard-2/dos-v86-build-tools-observations.json"
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/makefile",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "2af46f348b9f8327a02d457f6787b9720b65a01c496ed2a1c379124876b54f44",
+        "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b",
+        "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 9,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "3e0766296c56c07d863a591a34a09622d6b09b0dc919d41962de14e356a809db",
+        "d9db191e7ce80787c281995f285f1bebc8607f85c47c3a623284c75c950fc23b",
+        "d9db191e7ce80787c281995f285f1bebc8607f85c47c3a623284c75c950fc23b"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 14,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c4e080dbbf233303adfdedd64f1c77ea8716e4b56ded72a3fde2798589c1b31e",
+        "3b3dd85fbef2a022380291ba57959db1db913fdbaf6a6e61271b82d6c4533b22",
+        "3b3dd85fbef2a022380291ba57959db1db913fdbaf6a6e61271b82d6c4533b22"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 71,
+      "prior_basis": "  historical-guest-build-input-only; Original tool source consumed by a historical guest build    Guest instruction or device behavior, image provenance, failures and lifecycle remain unproved. ",
+      "prior_evidence": "  parallel-shld-tools-role-review.md; shard-2/dos-v86-build-tools-observations.json"
+    },
+    {
+      "path": "wow16/commdlg/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "710abdadc751db4e36b2a3786f05db4b70908a70ede66b1d2e9545bf513ee564",
+        "118c94655faa068fd0027de8bbfef0bebec53a8d26b213268d80bc86981a5d36",
+        "118c94655faa068fd0027de8bbfef0bebec53a8d26b213268d80bc86981a5d36"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 156,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/commdlg; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/ddeml/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "e9b68e083a88cda6e7e59e28e53840e05c6e1a9e37a4d822b1ec6644fbcd069f",
+        "8d8a1cba40db55b3c43fb97c5624877fc7084559af568efeabc6d58e3afee582",
+        "8d8a1cba40db55b3c43fb97c5624877fc7084559af568efeabc6d58e3afee582"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 143,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddes16.sym",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390",
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390",
+        "fbf0db67470fdd479084425cd9ebea9f7104f1bd7fd083658604d2ae67134390"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 231,
+      "prior_basis": " historical-symbol-artifact-only; Binary prefix 7808000001000a00990002000b001e074444455354525300; exact original generation recipe and target identity still require tracing.; main format witness using original empirical sprof SYM layout: DDESTRS, 2 segments and 198 bounded symbols; original-generation/image-copy lineage remains unproved.; Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.  Historical carrier format or role not independently established; extension alone is insufficient.; generated-message-role-dispositions.csv; shard-3/generated-message-artifact-owner-review.csv; Binary prefix 7808000001000a00990002000b001e074444455354525300; exact original generation recipe and target identity still require tracing.; main format witness using original empirical sprof SYM layout: DDESTRS, 2 segments and 198 bounded symbols; original-generation/image-copy lineage remains unproved.    Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/cmdln.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "a0070d519d58bc6b6a0cba989c35b34593d2e19f6180040217a52d1791e3eaae",
+        "6025a70936ca068dc29af3fa582b3c43ac80eb1b054c73528e9e710f2d508c2b",
+        "6025a70936ca068dc29af3fa582b3c43ac80eb1b054c73528e9e710f2d508c2b"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 990,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDESTRS stress application build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.c",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6d5a13be1c0f35fa7471976466559f10b3cf37ba030f5bd32c390d42b4022508",
+        "2fc3e045ec764cb46f31e3ff11ee20f791a39bb0175898160c915387abba9301",
+        "2fc3e045ec764cb46f31e3ff11ee20f791a39bb0175898160c915387abba9301"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 1856,
+      "prior_basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "prior_evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "cef25c314d9c77544970c9fac6dfd255743def0ea08eb12cf5e5cb2610657986",
+        "9e827322a7b8d14f9fce9e098fadb2688ec8dd199a1626b2336b951fd1b0b982",
+        "9e827322a7b8d14f9fce9e098fadb2688ec8dd199a1626b2336b951fd1b0b982"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 287,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDESTRS stress application build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1d61161efdcc5f79466de7c2addad32c247b4e5e7038823fcf3c5157d7c0df87",
+        "549a8a3a652d03b70b811eda123e01b436601af6a633df549894c2e2ca8aa7a2",
+        "549a8a3a652d03b70b811eda123e01b436601af6a633df549894c2e2ca8aa7a2"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "prior_evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c945b4ebf321e4ff73279e5c467a51e06001d40e164865287df1f10a78f6784c",
+        "998857e0cc117e58b192b821526cbffd713c66eeeb36f147e4faa8a88c9796a8",
+        "998857e0cc117e58b192b821526cbffd713c66eeeb36f147e4faa8a88c9796a8"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 106,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDESTRS stress application build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.h",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "58742cc393db3fef99bde042944d7f36eb23a9800e0d25763a5599e7bb4f7135",
+        "f8715e8cea182d1d0543c2a78621129844c680833c31c7375c221a347864bfe8",
+        "f8715e8cea182d1d0543c2a78621129844c680833c31c7375c221a347864bfe8"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 19,
+      "prior_basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "prior_evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/makefile.dos",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7d9727f488d25a392902786a4a89bb4c084dde605304b6f043b3d2d49f787076",
+        "2d363df8d68e84c6edd10c8450ae3ed3a9c0e459d6a89807ea725dcb9823b67a",
+        "2d363df8d68e84c6edd10c8450ae3ed3a9c0e459d6a89807ea725dcb9823b67a"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 50,
+      "prior_basis": "  Historical guest test build recipe only; current product does not rebuild immutable guest. Exclusion is for recipe as product input, not DDE capability, test source or user-facing functionality.    Recipe identity/source mapping is static; original test executables are not identified in current package. Do not rebuild original guest. ",
+      "prior_evidence": "  Source and original makefile.dos/sources role traced; checked package-c system32 and assets/winnt.zip: no named DDEMLCL/DDEMLSV/DDESTRS sample executable. No source-to-deployed sample binary identity or execution established."
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/mk.cmd",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "f282ee16dba18e3d52565c0bba3f2f82ef34c5849ff128f83eff3a5f0bc05c33",
+        "676f87e81abdc9ca8a22e0b29aa22f3847e7597a21694ae83103e91a45ddb621",
+        "676f87e81abdc9ca8a22e0b29aa22f3847e7597a21694ae83103e91a45ddb621"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 1,
+      "prior_basis": "  Historical guest test build recipe only; current product does not rebuild immutable guest. Exclusion is for recipe as product input, not DDE capability, test source or user-facing functionality.    Recipe identity/source mapping is static; original test executables are not identified in current package. Do not rebuild original guest. ",
+      "prior_evidence": "  Source and original makefile.dos/sources role traced; checked package-c system32 and assets/winnt.zip: no named DDEMLCL/DDEMLSV/DDESTRS sample executable. No source-to-deployed sample binary identity or execution established."
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/mk4dos.cmd",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "prior_evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/server.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c538af79f31be3867810cd7d72df90ad1d9bc1738d4f4945960564830aeed6c8",
+        "ae9a7d42428f1e4f75f7a697bf4e8b626f0387ddf1c2c0909209d8c8786c5b77",
+        "ae9a7d42428f1e4f75f7a697bf4e8b626f0387ddf1c2c0909209d8c8786c5b77"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 1372,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDESTRS stress application build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "7199fca1b256df63bb96e9d8c2114beae6ec80d7ae4102ba86c518e8f242cc7d",
+        "b57136a2889ad2f792e52da93cd12665932ce00f63b55164a7d0d84401c910f7",
+        "b57136a2889ad2f792e52da93cd12665932ce00f63b55164a7d0d84401c910f7"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 24,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/wrapper.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e43838bc8a3b50975285d8ed40e786a6ea3005898073f98b7ff8323165ae2d9c",
+        "0dab959cd3bc0edc45305a4c9dcfc8b2bee7c12c40b921d3a66dbc044cf9d551",
+        "0dab959cd3bc0edc45305a4c9dcfc8b2bee7c12c40b921d3a66dbc044cf9d551"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 80,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDESTRS stress application build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dde.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "39cc6069daf5054077476ba65a5ee504f2727df3162dd4e16ab3c455c209ff44",
+        "5a43cf63d514ae151f2254e8b17c1de13f98f979754497b8436db2dafed58bd2",
+        "5a43cf63d514ae151f2254e8b17c1de13f98f979754497b8436db2dafed58bd2"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 644,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.h",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "3c53fcf37d35bee5d9339adec70af72e3a2c90eb78373fa59af1dddad4813466",
+        "01160766793606c92e047a95e989e9541c9bcfb4ff79724d6e15bff7357d4786",
+        "01160766793606c92e047a95e989e9541c9bcfb4ff79724d6e15bff7357d4786"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 258,
+      "prior_basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "prior_evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.ico",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693",
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693",
+        "db12d306d93cc54a65cdb87397e3d7e1f49b1a4ac085744088355f985d709693"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": " Original historical declaration/resource/tool input role: wow16/ddeml/tests/src/client/ddemlcl.rc:11 icon -> makefile.dos:17-20 rc ddemlcl.res -> :39-42 ddemlcl.exe test guest; WIN31 conditional [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Guest sample source/resource/module definition or test support retained pending: original build role established but no exact original source-to-existing sample executable correspondence or behavioral result.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/ddeml/tests/src/client/ddemlcl.rc:11 icon -> makefile.dos:17-20 rc ddemlcl.res -> :39-42 ddemlcl.exe test guest; WIN31 conditional [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "prior_evidence": "  Source and original makefile.dos/sources role traced; checked package-c system32 and assets/winnt.zip: no named DDEMLCL/DDEMLSV/DDESTRS sample executable. No source-to-deployed sample binary identity or execution established."
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dialog.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "043879ba6129a3dea9628f755feaebe9d1197e0ab40da72c9956533b5f0d2897",
+        "d0b07020054be6c690ab96aa8000060acd2e713345e12dfecdb74eebccf66151",
+        "d0b07020054be6c690ab96aa8000060acd2e713345e12dfecdb74eebccf66151"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 41,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.c",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "350c9c7fbce7471f05725e9a4cb294286183b093249423e50acd8ff7391a39a5",
+        "88f0a18f99ac221d8d6e59e8dc18cb3fb79852f98fabfd826de72a82bd4b7be5",
+        "88f0a18f99ac221d8d6e59e8dc18cb3fb79852f98fabfd826de72a82bd4b7be5"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 686,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "8582946e93ca22d6b2ea4a82d66301b84dcbd610902ac71be72fb09360fcb3e7",
+        "36324599a934fd0ada67d72e0187f590c4f959ca8559f1587ba9e605b3e1ff47",
+        "36324599a934fd0ada67d72e0187f590c4f959ca8559f1587ba9e605b3e1ff47"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 83,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/makefile",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/makefile.dos",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6df3c6343d36a29510277d9504ccebf47afc15148d5fea08845cd817f970859e",
+        "63b9b5b9c52e85d81904141dfd1354015e21262c5da87a7d1603053fefb50653",
+        "63b9b5b9c52e85d81904141dfd1354015e21262c5da87a7d1603053fefb50653"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 48,
+      "prior_basis": "historical-build-recipe-file-only; Original Win16 DDE stress/demo client or server compiler/resource/link recipe; wow16/ddeml/tests/src/client/makefile.dos    No original guest/test binary is rebuilt; DDE behavior, original test sources and current acceptance remain separate obligations; file-only build-role exclusion, not runtime capability completion or exclusion   ",
+      "prior_evidence": "historical-build-role-dispositions.csv; historical-build-role-review.md  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": "historical-build-recipe-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "f294899ab6db34c8938b7a22b34b8d71eb321ab14ccfbbbe28540abb0cfd373a",
+        "8f0a9eaefb415fe22bddf392459c0ada6e2cfee7bc961ab8c19ffac44e852ccd",
+        "8f0a9eaefb415fe22bddf392459c0ada6e2cfee7bc961ab8c19ffac44e852ccd"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 29,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/ddemo.def",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "1fda8561386bd484cd27a83b409f54db6945e9fec2b863f53baef2cd865a614b",
+        "b5aa923f34dd0712464644ae03a65e82a8ff4a6547b75e23e5e2c633232de6b2",
+        "b5aa923f34dd0712464644ae03a65e82a8ff4a6547b75e23e5e2c633232de6b2"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 17,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/makefile.dos",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "a1c959874fe76416bc3a2a03359866c45cd211d47c2803cc6d9cd2f7c7e7d96a",
+        "ca41caacfb881d934f723ec75ef7aaeee430fe47be052322bdd799676f180479",
+        "ca41caacfb881d934f723ec75ef7aaeee430fe47be052322bdd799676f180479"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 24,
+      "prior_basis": "     No original guest/test binary is rebuilt; DDE behavior, original test sources and current acceptance remain separate obligations; file-only build-role exclusion, not runtime capability completion or exclusion  ",
+      "prior_evidence": "historical-build-role-dispositions.csv; historical-build-role-review.md  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": "historical-build-recipe-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/sources",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "2f4b9e8bee7ea330e8b9ccfeb40c1aa74f17c9fb194a52e5b3f0d11a4f415e3c",
+        "0f654766b7fd12ae9ef3785f03cd5273b3ec4b737c864e4242ef6788c30cdd1d",
+        "0f654766b7fd12ae9ef3785f03cd5273b3ec4b737c864e4242ef6788c30cdd1d"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 19,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/dirs",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "754b33790d0633685ffb1818d380e9c2ccda30166dcc0fd99e92556be2a5c589",
+        "1bbebb4fba6b053cd8c5b6e3ad17de058b324ec3408cf13a203d5eeb0d23a7c6",
+        "1bbebb4fba6b053cd8c5b6e3ad17de058b324ec3408cf13a203d5eeb0d23a7c6"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 4,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/ddeml; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/makedos.bat",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "75d9f72c27f95412f62f1ce8c8ef00037ca161f3f4a0f6317e96eca5a1109d42",
+        "408ef2b4817f0b0381daf6545196cd8a2969103b7f4ca2c87f29129f217ae9bb",
+        "408ef2b4817f0b0381daf6545196cd8a2969103b7f4ca2c87f29129f217ae9bb"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 11,
+      "prior_basis": "  Historical guest test build recipe only; current product does not rebuild immutable guest. Exclusion is for recipe as product input, not DDE capability, test source or user-facing functionality.    Recipe identity/source mapping is static; original test executables are not identified in current package. Do not rebuild original guest. ",
+      "prior_evidence": "  Source and original makefile.dos/sources role traced; checked package-c system32 and assets/winnt.zip: no named DDEMLCL/DDEMLSV/DDESTRS sample executable. No source-to-deployed sample binary identity or execution established."
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459",
+        "26957856e8a7f42a1740419cf3451497129f1d8284301d42f1a89ee13dd5a459"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 6,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/makefile.dos",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "943e1784beed367fa78ac3a3638878c98b6248123214d2e83c8662473373b0a0",
+        "5b5e8ff82b3f34b0e1940c0850e064858580e28e212011f1129063ad09d39934",
+        "5b5e8ff82b3f34b0e1940c0850e064858580e28e212011f1129063ad09d39934"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 36,
+      "prior_basis": "     No original guest/test binary is rebuilt; DDE behavior, original test sources and current acceptance remain separate obligations; file-only build-role exclusion, not runtime capability completion or exclusion  ",
+      "prior_evidence": "historical-build-role-dispositions.csv; historical-build-role-review.md  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/mk4dos.cmd",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "9bd12ad673ddc15d60efad9e5f85fea9d39766bb8ae4d57f4db352c63f80a35c",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13",
+        "c85116e2ece31afcde0d08e1b5d5432725ffc9112736dd44c18b228106a37b13"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 13,
+      "prior_basis": "historical-build-recipe-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/server.h",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "c15962947795d118ae49dcf1bc81bdd6dde8ee98b56fed9161317d60fb6b2616",
+        "5a4e4b5b52498974326e5f91fddec18cb210bae7b62f4ef7e16978765b0253aa",
+        "5a4e4b5b52498974326e5f91fddec18cb210bae7b62f4ef7e16978765b0253aa"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 157,
+      "prior_basis": "historical-guest-build-source-file-only; Original independent DDEML client/server or DDEMO sample build input    Physical test/sample file role only; retain DDE capability, guest execution, conversations, callbacks, teardown and future tests.   ",
+      "prior_evidence": "shard-0/ddeml-test-input-review.md; shard-0/ddeml-test-input-observations.json  "
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/sources",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "b1ae69ad79d84c65e4e89341564a74ea2fa4f52e8d9e116701bfdc64beb6e874",
+        "0bab2b9a9ebfbee7970f318e430b44a72986839c6f499e3c04b9b7299012bb48",
+        "0bab2b9a9ebfbee7970f318e430b44a72986839c6f499e3c04b9b7299012bb48"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 25,
+      "prior_basis": "  Historical guest test build recipe only; current product does not rebuild immutable guest. Exclusion is for recipe as product input, not DDE capability, test source or user-facing functionality.    Recipe identity/source mapping is static; original test executables are not identified in current package. Do not rebuild original guest. ",
+      "prior_evidence": "  Source and original makefile.dos/sources role traced; checked package-c system32 and assets/winnt.zip: no named DDEMLCL/DDEMLSV/DDESTRS sample executable. No source-to-deployed sample binary identity or execution established."
+    },
+    {
+      "path": "wow16/drivers/comm/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "3118ac2851dd3c68d2ab4ff4327b618920fdcd07678b3fd47305418f943e9c3f",
+        "14a637ef74e864245aed77ebc271f71d56cd4183622dd17e3d56faec4dc8077e",
+        "14a637ef74e864245aed77ebc271f71d56cd4183622dd17e3d56faec4dc8077e"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 127,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/drivers/display/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "afa821b685a4794965b5c912e12e5b34c1ddd280522130d0b4ca7b8bb092efb9",
+        "c234e06726d09f113bce364366b704446fb7ebe5e4c549e8f89ccbecbfa50e19",
+        "c234e06726d09f113bce364366b704446fb7ebe5e4c549e8f89ccbecbfa50e19"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 121,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/drivers/keyboard/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "228a8d33e70081a4cc62879176ac517f71a73e6c37a4eeddb733f5e67a443f06",
+        "54658eb605886a0f11ef8f3d351cf3e04db0a63152413774cc5cc1637aca4cf3",
+        "54658eb605886a0f11ef8f3d351cf3e04db0a63152413774cc5cc1637aca4cf3"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 114,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/drivers/mouse/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "378e09cfdf65720706366ff884d368871cf3f78ef740202933284ecffb67bbb7",
+        "88400df39f5f0b7d273f598a7df3d6152f611a7819ac1434cec983fb200e8d72",
+        "88400df39f5f0b7d273f598a7df3d6152f611a7819ac1434cec983fb200e8d72"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 110,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/drivers/sound/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "33497a2f4d2e80633c5f9c02b7ee85227d11503e33bfba28fef8b10a03b09ef6",
+        "655d4dab686593459cb54ef4305eb348cb3dc812b02b61a05a4de049b392b340",
+        "655d4dab686593459cb54ef4305eb348cb3dc812b02b61a05a4de049b392b340"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 109,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/gdi/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "8d11bb8d61600c51800a92e6f05f5e1198fea623198b7db7d1853c21705b516c",
+        "1868f7ad348a492acdef374c7b535b9ab0ab2bcfe894cb1c02232aa089b796f0",
+        "1868f7ad348a492acdef374c7b535b9ab0ab2bcfe894cb1c02232aa089b796f0"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 126,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/kernel31/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "fe963df15379c01e5cc725e10d861d0a605fc1dbb7944915b3e202f9f1203292",
+        "5ddcc52bb834d447e75d85d5720ffa52968d63912a718a8769afb8555155e247",
+        "5ddcc52bb834d447e75d85d5720ffa52968d63912a718a8769afb8555155e247"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 836,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/kernel31/swappro/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "66ffcbde732b5955b67fc9063c1977cf097874596f7c17978828b510bfaa8bd9",
+        "6d368071e3cfb975f5607e74341ca57a12659abc2b2da79a04e0412bcd6c9e5f",
+        "6d368071e3cfb975f5607e74341ca57a12659abc2b2da79a04e0412bcd6c9e5f"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 15,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/killwow/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "7672a1ac963b40fdf81009f1f18fc5c06dfd69b37d46f690f9875e9735b66822",
+        "6f81daa8f5e5b79e69e473a7c023ae65edbd3bf822e473fb4850935e1de29d91",
+        "6f81daa8f5e5b79e69e473a7c023ae65edbd3bf822e473fb4850935e1de29d91"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 121,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/lib/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "aee4b3ea901afd842671134c916a9140f015902e72220e9686ac9525f4e0fc46",
+        "8804e8bf3409df79eeef188b0487451ea01550e25d709875241ac313f820099a",
+        "8804e8bf3409df79eeef188b0487451ea01550e25d709875241ac313f820099a"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 68,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/lib; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "0453aacc8bf94713f9f06dbb12ea1fc20117a641e0e2658dc555a2070f73ec87",
+        "7c69de49bdbb7ca9fdf5705cee3b4360ac0965a95360059fb443176225fa54fa",
+        "7c69de49bdbb7ca9fdf5705cee3b4360ac0965a95360059fb443176225fa54fa"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 134,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/makefile; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/mciole/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "2f4b531701d26b836226f2c1bc69443ee25690f73ef31c28d6c9f65cf084ccc8",
+        "7b7d5350b85a364b0c21b9ab370a33dfa5c792fa88cd411cc686d03269f4edba",
+        "7b7d5350b85a364b0c21b9ab370a33dfa5c792fa88cd411cc686d03269f4edba"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 85,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/mmsystem/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "25d333a8aa74ff56440ab02dd2bfc0e261f15996acbeeef32e1e2226840b8f22",
+        "c2d398cc825dd29eb8e93cd93baa0ae234669d8ea5af81b0c88f5f868d06eae1",
+        "c2d398cc825dd29eb8e93cd93baa0ae234669d8ea5af81b0c88f5f868d06eae1"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 261,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "2702cb80dc4889adc953fdef82e52dad1a4733f193bc5607f079f47150802009",
+        "56354d05a85f6aaf050217ed0d56fbb7c9edb663a35ed9a8298febf4014555b8",
+        "56354d05a85f6aaf050217ed0d56fbb7c9edb663a35ed9a8298febf4014555b8"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 126,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/mmsystem; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/ole/client/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "4169005e01a22eb5c47875decd872f5ba1e41216f9a9377cd92a70bc037b96d9",
+        "42a19f54364cf6fee49047da225a702fadff759541e37143b298f3a2ec7c0b58",
+        "42a19f54364cf6fee49047da225a702fadff759541e37143b298f3a2ec7c0b58"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 169,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/ole/client/mk.cmd",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "9835aa7c3b8cf16f3e910b8373365abee83fb5eb2693732006710c190693e206",
+        "b64ea57a825bd1c3d23d6f6d4674d202da7b094a8852243333f009a080c1ab00",
+        "b64ea57a825bd1c3d23d6f6d4674d202da7b094a8852243333f009a080c1ab00"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 55,
+      "prior_basis": "  historical-guest-build-input-only; Historical nmake build script    OLE runtime and actual image provenance remain open. ",
+      "prior_evidence": "  parallel-guest-resource-role-review.md; shard-2/win16-oleclient-guest-observations.json"
+    },
+    {
+      "path": "wow16/ole/server/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "04d7d06e8ad313cc8f738a7da7751582f43aa90bf4c32244271b0a97775e1b18",
+        "040ecf946ae5f0ffbbc946c70637801210fdbfe01533e5cc66d0c85133665009",
+        "040ecf946ae5f0ffbbc946c70637801210fdbfe01533e5cc66d0c85133665009"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 95,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/rasapi16/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "010920859b07963285e20412587e8123a8a8016c50efaebc1f962749e6f7f669",
+        "31404923fb8b2bea3811701bc650d682d4390ee16738aa0ec58418c7d2e484eb",
+        "31404923fb8b2bea3811701bc650d682d4390ee16738aa0ec58418c7d2e484eb"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 89,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/regedit/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "359d6edde9993a9e2f5349cf6ef66f783fa41448961ad2900d214a88a703327d",
+        "6255669ded8680cf24da6d74b49366d2f7f5ad08871cb95de26a46d42db339fd",
+        "6255669ded8680cf24da6d74b49366d2f7f5ad08871cb95de26a46d42db339fd"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 211,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/shell/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "948922a482beea168793a9d321ab440a8fb83869dd87a671964c5157f63c6b60",
+        "0173a4e779e5dbf3114d315e20620192f3883b4169c835fa854fb74656dfe8b6",
+        "0173a4e779e5dbf3114d315e20620192f3883b4169c835fa854fb74656dfe8b6"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 104,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/sherlock/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "961010c1f007a64987e22ba81d0328d734465d2fa778a8d06e7c39828ae24dc4",
+        "d4e0a78455e5c688d42a7d96e8c012a39074f18a3411fa23a917809a8b7199d7",
+        "d4e0a78455e5c688d42a7d96e8c012a39074f18a3411fa23a917809a8b7199d7"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 77,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/system/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "b3923793a2eebac52f7abce3ec89dd1ebc57e2bc8bb229c08020d43a3f67046b",
+        "5612b1329655bd6d171f4ebaf62bfaa0c3f4d9764cfee6f1d9f54628bf6fd1bc",
+        "5612b1329655bd6d171f4ebaf62bfaa0c3f4d9764cfee6f1d9f54628bf6fd1bc"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 116,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/test/hello/hello.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "d1a7bb3b31ae95d42f7229c3d2c607ad3f06c0e254d77a37a73c998e8643cdaa",
+        "d5b755b276ab391c46e5364d2a4cdb8d3a3f8f19ddaf2953b68281316e9d9a4a",
+        "d5b755b276ab391c46e5364d2a4cdb8d3a3f8f19ddaf2953b68281316e9d9a4a"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 12,
+      "prior_basis": " Original historical declaration/resource/tool input role: wow16/test/hello/makefile:93-98 rc16 hello.rc -> hello.res; link16 hello.lrf -> HELLO.EXE; rc16 applies resource; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/test/hello/makefile:93-98 rc16 hello.rc -> hello.res; link16 hello.lrf -> HELLO.EXE; rc16 applies resource  "
+    },
+    {
+      "path": "wow16/test/hello/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "95f3fc50d2e9d008b165fab5830e320f7ac109812ac001e805ec26a0886affdd",
+        "4ef6e86c6089ea05dbc890b379ae822c3a9025ff2e3faddc886cd96294d7db3b",
+        "4ef6e86c6089ea05dbc890b379ae822c3a9025ff2e3faddc886cd96294d7db3b"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 99,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/test/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "885a4d246902f2e027f101a509e353405304561d5049c630fa9226ff22dee496",
+        "c0265e320c182a13b879d6c0b651cfe4fece50eb663527a8902ba6ab14b71428",
+        "c0265e320c182a13b879d6c0b651cfe4fece50eb663527a8902ba6ab14b71428"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 18,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/test; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/test/shell/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "3162bb5406c2621e67456e8a5d39dbc3130266f961064d1eb0c0f3853c7c96da",
+        "9cfa907eb667af36c3a7a01d7dabd88e37ffaf2a6854c89922b9b2812c64fb3a",
+        "9cfa907eb667af36c3a7a01d7dabd88e37ffaf2a6854c89922b9b2812c64fb3a"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 124,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/timer/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "2f03198b88d511774b044a6b8a117069a99284eff9e996bc076fda73bef0fd05",
+        "3a98a2b07a68ce4bad5fac4d592480d6fa77c0ceb14f5f2e2af692419c5b7112",
+        "3a98a2b07a68ce4bad5fac4d592480d6fa77c0ceb14f5f2e2af692419c5b7112"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 138,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/toolhelp/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "411e552bb65b06f1631e38a5217e9828d43310d6240d66e50b5b28ac0b060a04",
+        "015b38918e45c957b4e29720e9c183090bed2ba30671105e50877dc679466941",
+        "015b38918e45c957b4e29720e9c183090bed2ba30671105e50877dc679466941"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 168,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/toolhelp; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/user/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "e12bd685070c4b69430db8e7cc8660ef7dd088997d6f5b0ebfe117c0c57a4416",
+        "7bca4f72f3cddc7344ee3b6a09dda1f72bc96d84364e36c064535dfd213d0cc4",
+        "7ec3e952f2e10e4352b7324aa885265f1af8926660c16fa76a1862dd227f9648"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 272,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/wfwnet/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "d884a68817ffc60a9aac5fcb9546fa35852be8b5462c74d61590c8b903145b7f",
+        "f968a26db06e9e2c3619a201e016a0afb14c0a5ac19a2a8c8221831a888c4b4c",
+        "f968a26db06e9e2c3619a201e016a0afb14c0a5ac19a2a8c8221831a888c4b4c"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 140,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    },
+    {
+      "path": "wow16/win87em/makefile",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "53ef47fb550414b653ed9f41473c66fded0c3072b069f5cd643434cc20d05185",
+        "b76ec6e35f2c1285ef0c0930c4d534ca0e0a7533f8f4c3b4e53725abe3c907a4",
+        "b76ec6e35f2c1285ef0c0930c4d534ca0e0a7533f8f4c3b4e53725abe3c907a4"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 720,
+      "prior_basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/winoldap/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "1a250a87dbe287efc07cae9f7f108005de05fc5faeb9ba1c8e550b8f8dd9c832",
+        "79f795410cf3130439eed2572e2581b8d4224ce2881ec266248289ae2df11378",
+        "79f795410cf3130439eed2572e2581b8d4224ce2881ec266248289ae2df11378"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 111,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/winsock/makefile",
+      "shard": "0",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "c397a2481a9b4f7a5d903c0d0cf88fdf360ec4e9c4fa8b02cf0862489e2ea49b",
+        "0b595d22ac1d238437884f03e3ee0bc1027dfbb80bc018d32d2ec9b67fd9f5b0",
+        "0b595d22ac1d238437884f03e3ee0bc1027dfbb80bc018d32d2ec9b67fd9f5b0"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 107,
+      "prior_basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/winsock; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/winspool/makefile",
+      "shard": "3",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "b585a5735ced1bc3f86729e92643a09296b6346a8a8bc36acc7a28cc6433684a",
+        "05328803a15bcecafba9b5e799bf4911259d0c5a2d97bb1488289f5b5d3869e4",
+        "05328803a15bcecafba9b5e799bf4911259d0c5a2d97bb1488289f5b5d3869e4"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 108,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/wowdeb/makefile",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "36174388f471174a03eb0ac82e591208828f50361818ed9074b15c602184e6ff",
+        "8bd02ad8a2dd996c0acdcc0b78c32f2229b61a471a5b0ff128f8733456ca6ed0",
+        "8bd02ad8a2dd996c0acdcc0b78c32f2229b61a471a5b0ff128f8733456ca6ed0"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 120,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.lrf",
+      "shard": "3",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "6747e2bba02f7eda47dd602867cb97bdaea173111f7f985e8fd04ca5157d8402",
+        null,
+        null
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 5,
+      "prior_basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "prior_evidence": " artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md "
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.map",
+      "shard": "0",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ede99072a3703dbd58d10b8209c1e4f557b4b33b44d5aa1365243fec1f834d0d",
+        "e1fb1285dced0db81494455612b8870aec9cffab9cf9815cf5a19f2f3db50153",
+        "e1fb1285dced0db81494455612b8870aec9cffab9cf9815cf5a19f2f3db50153"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 141,
+      "prior_basis": "historical guest linker/assembler listing; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/wowdeb; no execution success inferred.   ",
+      "prior_evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md  "
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.obj",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e379cd3ae437c4f52f24f92c73ea33d08312a8876945ad735cb832494fc048f8",
+        null,
+        null
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 26,
+      "prior_basis": "  historical guest intermediate or symbol/link output excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Framing validates record shape, not provenance, build linkage or semantic correctness; nonzero checksum may reflect omitted/disabled checksum. Full details: guest-intermediate-format-audit.csv. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof. Format checked: OMF framed THEADR/LHEADR to MODEND; first=80 last=8A. Recipe candidates: src/mvdm/wow16/wowdeb/makefile; src/mvdm/wow16/wowdeb/Makefile."
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.rc",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "224d8d353f5afe9e2e223d552ec719fb0aa30986708bc5c88b0382fe1fd4b529",
+        "4598fe536f544e7e0adf66ed715137650226605dd8b86c747a76acc45418a964",
+        "4598fe536f544e7e0adf66ed715137650226605dd8b86c747a76acc45418a964"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 4,
+      "prior_basis": " Original historical declaration/resource/tool input role: wow16/wowdeb/makefile:81-82,116-120 wowdeb.rc -> rc16 wowdeb.res -> link16 wowdeb.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/wowdeb/makefile:81-82,116-120 wowdeb.rc -> rc16 wowdeb.res -> link16 wowdeb.exe  "
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.rcv",
+      "shard": "2",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "e7bf41ff96bd995ba90bba22991704bd68e308709ecd9fba18e25bfd484fab6b",
+        "2421ece41d9ae785de138d56704c39329fc75a637ccf3e4ac493b12cc2bf7a79",
+        "2421ece41d9ae785de138d56704c39329fc75a637ccf3e4ac493b12cc2bf7a79"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 21,
+      "prior_basis": " Original historical declaration/resource/tool input role: wowdeb/makefile:116-120 wowdeb.rcv -> wowdeb.res -> link16 and rc16 wowdeb.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wowdeb/makefile:116-120 wowdeb.rcv -> wowdeb.res -> link16 and rc16 wowdeb.exe    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "prior_evidence": "  Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.sym",
+      "shard": "1",
+      "role": "test-or-build-tool",
+      "hashes": [
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41",
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41",
+        "ced464218f2e175d173d12a540c16df7229e088e163f82b6e0298fb337b5fd41"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 10,
+      "prior_basis": " Verified guest object or listing/symbol file role, no exact host input nor whole-file package/archive match; guest functionality and source remain independently in scope.    Underlying guest source, image lineage and executable capability remain separate audit obligations; other builds/debugger delivery not judged.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-intermediate-format-review.csv and .md: original build artifact role, frozen identity and current host/package/archive checks  "
+    },
+    {
+      "path": "wow16/write/kmake.bat",
+      "shard": "2",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "811a5b44e72dacdf0c68191d83ea4ecb1b780c42d8828912b242165a094d1cc9",
+        "8cf92ada575bc813e7f973190d31d29849cc397cea6706d63d6f5038fda5f6dc",
+        "8cf92ada575bc813e7f973190d31d29849cc397cea6706d63d6f5038fda5f6dc"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 56,
+      "prior_basis": "  historical-guest-build-input-only; Historical guest build/setup script    Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open. ",
+      "prior_evidence": "  parallel-debug-write-role-review.md; shard-2/win16-write-guest-observations.json"
+    },
+    {
+      "path": "wow16/write/makefile",
+      "shard": "1",
+      "role": "build-recipe-or-script",
+      "hashes": [
+        "fecd493effc21cf1e7efd904443d4d284a1455f854685aa2ddebc03afa8b5fef",
+        "d5eb390f308326d42ecb1b81ec13136c8ae01c1adf2623d64a45d489be60ad83",
+        "d5eb390f308326d42ecb1b81ec13136c8ae01c1adf2623d64a45d489be60ad83"
+      ],
+      "source_exists": true,
+      "is_directory": false,
+      "line_count": 405,
+      "prior_basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "prior_evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred  "
+    }
+  ],
+  "limits": "Project rows and files pinned to Git revision; external references read current filesystem; no runtime proof."
+}
