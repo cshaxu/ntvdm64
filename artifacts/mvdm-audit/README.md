@@ -575,3 +575,7 @@ Additional bounded reviews cover [SoftPC host declarations](shard-1/softpc-host-
 The [host declaration dependency cohort](shard-0/softpc-host-headers-review.md) binds a dependent worker body for each of 13 selected headers; three other candidates remain pending. This is not device behavior acceptance.
 
 Parallel source reviews add [DOS locale data](shard-1/dos-locale-family-review.md), [COMMDLG resource identity](shard-2/commdlg-ne-resource-review.md), and [SYSTEM driver variants](shard-3/wow-system-variants-role-review.md). Matching resources and guest binaries do not prove guest execution or source-to-image provenance.
+
+The [shared MVDM declaration family](shard-0/mvdm-inc-header-family-review.md) links selected dependent objects to the three published NTVDM, VDMREDIR and WOW32 images; behavioral obligations remain open.
+
+The [DOS guest header family](shard-1/dos-header-family-review.md), [multimedia source family](shard-2/multimedia-family-owner-review.md) and [TOOLHELP inputs](shard-3/toolhelp-guest-input-role-review.md) record selected guest build chains and unresolved image, provider and runtime boundaries.

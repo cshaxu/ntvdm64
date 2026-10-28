@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'shard0-host-headers-owner-role-':
+                if prefix == 'mvdm-inc-header-owner-role-':
+                    assert path in {'inc/' + n for n in ('apistruc.h', 'bop.h', 'dbgsvc.h', 'doswow.h', 'exterr.h', 'netb.h', 'sharewow.h', 'vrdlctab.h', 'vrmisc.h', 'vrmslot.h', 'vrnetapi.h', 'wowclip.h', 'wowcmdlg.h', 'wowinfo.h', 'wowth.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'shard0-host-headers-owner-role-':
                     assert path in {'softpc.new/host/inc/' + n for n in ('error.h', 'host_gfx.h', 'hostsync.h', 'nt_cgalt.h', 'nt_com.h', 'nt_det.h', 'nt_egalt.h', 'nt_extra.h', 'nt_graph.h', 'nt_mem.h', 'nt_timer.h', 'nt_uis.h', 'ntcheese.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'softpc-host-header-owner-role-':
                     assert path in {'softpc.new/host/inc/' + n for n in ('host_rrr.h', 'host_trc.h', 'nt_eoi.h', 'nt_pif.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

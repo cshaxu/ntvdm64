@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "812e38e2e",
+  "candidate_count": 15,
+  "source_tables": [
+    {
+      "path": "shard-0/mvdm-inc-header-family-observations.json",
+      "sha256": "2E9B1886B4CF67A45525B805D7B4BF3DD535EC2A927CFCD0DCCBAB3234BFE90B"
+    },
+    {
+      "path": "shard-0/mvdm-inc-header-owner-observations.json",
+      "sha256": "97D7D03FADAF74A57C3A35C01811445100754345315303291CFABC19E1DE344A"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected shared declarations, not guest or device acceptance"
+}

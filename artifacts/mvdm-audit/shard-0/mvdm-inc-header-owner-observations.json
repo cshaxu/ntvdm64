@@ -1,0 +1,227 @@
+{
+  "result": "pass",
+  "family_sha256": "2E9B1886B4CF67A45525B805D7B4BF3DD535EC2A927CFCD0DCCBAB3234BFE90B",
+  "selected": [
+    {
+      "path": "inc/apistruc.h",
+      "dependency": "worker/obj/redir/vrmslot.obj",
+      "object_sha256": "1B6C15A3F5BF6104094BB1CC18697FEEAF780F5F2426F6E6E3AD635074D1C21C",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDeleteMailslot",
+        "va": 268439552,
+        "function": true,
+        "owner": "vrmslot.obj",
+        "bytes": 276,
+        "relocation_words": 20
+      }
+    },
+    {
+      "path": "inc/bop.h",
+      "dependency": "worker/obj/mvdm-debugger/dbg.obj",
+      "object_sha256": "C4BA30469375AABA23DF15375B5F1794350B1F19A0DA312F5AF69185AF2B76E4",
+      "component": "worker",
+      "binding": {
+        "name": "_DBGDispatch",
+        "va": 5730528,
+        "function": true,
+        "owner": "debugger-bindings:dbg.obj",
+        "bytes": 2796,
+        "relocation_words": 130
+      }
+    },
+    {
+      "path": "inc/dbgsvc.h",
+      "dependency": "worker/obj/dem/demmisc.obj",
+      "object_sha256": "BC2508AC6DE405587DAEB38E6903202B1149B5ED5DA09ABE44542C2237177A9E",
+      "component": "worker",
+      "binding": {
+        "name": "_SignalSegmentNotice",
+        "va": 5566976,
+        "function": true,
+        "owner": "original-mvdm-dem:demmisc.obj",
+        "bytes": 353,
+        "relocation_words": 10
+      }
+    },
+    {
+      "path": "inc/doswow.h",
+      "dependency": "worker/obj/dem/dem.obj",
+      "object_sha256": "5E82CA48ABC16F819F0536F56A72BCA408A0A4A0905CDD4D4B0F6A22F23E40E6",
+      "component": "worker",
+      "binding": {
+        "name": "_DemInit",
+        "va": 5550256,
+        "function": true,
+        "owner": "original-mvdm-dem:dem.obj",
+        "bytes": 156,
+        "relocation_words": 7
+      }
+    },
+    {
+      "path": "inc/exterr.h",
+      "dependency": "worker/obj/dem/demhndl.obj",
+      "object_sha256": "706D3670AF83AA52497EEF567E78927AFA3658546BBA039CFAF7BFE724A31EC6",
+      "component": "worker",
+      "binding": {
+        "name": "_demChgFilePtr",
+        "va": 5551696,
+        "function": true,
+        "owner": "original-mvdm-dem:demhndl.obj",
+        "bytes": 114,
+        "relocation_words": 10
+      }
+    },
+    {
+      "path": "inc/netb.h",
+      "dependency": "worker/obj/redir/vrdisp.obj",
+      "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDispatch",
+        "va": 268447344,
+        "function": true,
+        "owner": "vrdisp.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "inc/sharewow.h",
+      "dependency": "wow32/obj/wkman.obj",
+      "object_sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699",
+      "component": "wow32",
+      "binding": {
+        "name": "_WK32KernelTrace@4",
+        "va": 268487552,
+        "function": true,
+        "owner": "wkman.obj",
+        "bytes": 8,
+        "relocation_words": 0
+      }
+    },
+    {
+      "path": "inc/vrdlctab.h",
+      "dependency": "worker/obj/redir/vrdisp.obj",
+      "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDispatch",
+        "va": 268447344,
+        "function": true,
+        "owner": "vrdisp.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "inc/vrmisc.h",
+      "dependency": "worker/obj/redir/vrdisp.obj",
+      "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDispatch",
+        "va": 268447344,
+        "function": true,
+        "owner": "vrdisp.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "inc/vrmslot.h",
+      "dependency": "worker/obj/redir/vrdisp.obj",
+      "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDispatch",
+        "va": 268447344,
+        "function": true,
+        "owner": "vrdisp.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "inc/vrnetapi.h",
+      "dependency": "worker/obj/redir/vrdisp.obj",
+      "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+      "component": "redir",
+      "binding": {
+        "name": "_VrDispatch",
+        "va": 268447344,
+        "function": true,
+        "owner": "vrdisp.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "inc/wowclip.h",
+      "dependency": "wow32/obj/mapembed.obj",
+      "object_sha256": "53FCECA9DDBBBC6F02F203922A16AAA2556F58DC87F2A0054B07F6036130C025",
+      "component": "wow32",
+      "binding": {
+        "name": "_IsWinIniHelper@4",
+        "va": 268439552,
+        "function": true,
+        "owner": "mapembed.obj",
+        "bytes": 203,
+        "relocation_words": 8
+      }
+    },
+    {
+      "path": "inc/wowcmdlg.h",
+      "dependency": "wow32/obj/mapembed.obj",
+      "object_sha256": "53FCECA9DDBBBC6F02F203922A16AAA2556F58DC87F2A0054B07F6036130C025",
+      "component": "wow32",
+      "binding": {
+        "name": "_IsWinIniHelper@4",
+        "va": 268439552,
+        "function": true,
+        "owner": "mapembed.obj",
+        "bytes": 203,
+        "relocation_words": 8
+      }
+    },
+    {
+      "path": "inc/wowinfo.h",
+      "dependency": "wow32/obj/mapembed.obj",
+      "object_sha256": "53FCECA9DDBBBC6F02F203922A16AAA2556F58DC87F2A0054B07F6036130C025",
+      "component": "wow32",
+      "binding": {
+        "name": "_IsWinIniHelper@4",
+        "va": 268439552,
+        "function": true,
+        "owner": "mapembed.obj",
+        "bytes": 203,
+        "relocation_words": 8
+      }
+    },
+    {
+      "path": "inc/wowth.h",
+      "dependency": "wow32/obj/mapembed.obj",
+      "object_sha256": "53FCECA9DDBBBC6F02F203922A16AAA2556F58DC87F2A0054B07F6036130C025",
+      "component": "wow32",
+      "binding": {
+        "name": "_IsWinIniHelper@4",
+        "va": 268439552,
+        "function": true,
+        "owner": "mapembed.obj",
+        "bytes": 203,
+        "relocation_words": 8
+      }
+    }
+  ],
+  "release_sha256": {
+    "worker": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+    "redir": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+    "wow32": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+  },
+  "map_sha256": {
+    "worker": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+    "redir": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0",
+    "wow32": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+  },
+  "scope": "One dependent relocation-masked body per header; no proof of individual declarations or runtime behavior"
+}

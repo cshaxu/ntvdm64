@@ -1,0 +1,313 @@
+{
+  "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "graph_sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+  "files": [
+    {
+      "path": "h/float.h",
+      "sha256": "386d2dd80397de6a2cb9ab66743878167b253b11f57b19bc6ef00089f03d94ba",
+      "original_hashes": [
+        "386d2dd80397de6a2cb9ab66743878167b253b11f57b19bc6ef00089f03d94ba",
+        "386d2dd80397de6a2cb9ab66743878167b253b11f57b19bc6ef00089f03d94ba"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\float.h",
+          "line": 2,
+          "text": "*float.h - constants for floating point values"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "h/graph.h",
+      "sha256": "3a2d85ce58b3c9009e0c57727a84962e167a3f2168c778377a1bffc4a35875c3",
+      "original_hashes": [
+        "3a2d85ce58b3c9009e0c57727a84962e167a3f2168c778377a1bffc4a35875c3",
+        "3a2d85ce58b3c9009e0c57727a84962e167a3f2168c778377a1bffc4a35875c3"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\graph.h",
+          "line": 2,
+          "text": "*graph.h - declare constants and functions for graphics library"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "h/math.h",
+      "sha256": "4df668bf2766dcade39669a9a4dc5280ff7a8c573af5a71ac8a00f725b93d825",
+      "original_hashes": [
+        "4df668bf2766dcade39669a9a4dc5280ff7a8c573af5a71ac8a00f725b93d825",
+        "4df668bf2766dcade39669a9a4dc5280ff7a8c573af5a71ac8a00f725b93d825"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\math.h",
+          "line": 2,
+          "text": "*math.h - definitions and declarations for math library"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "h/search.h",
+      "sha256": "2d476b5f3629ab2126835923b724310fed71d0cd5b84408f4c2ed9109358d34a",
+      "original_hashes": [
+        "2d476b5f3629ab2126835923b724310fed71d0cd5b84408f4c2ed9109358d34a",
+        "2d476b5f3629ab2126835923b724310fed71d0cd5b84408f4c2ed9109358d34a"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\search.h",
+          "line": 2,
+          "text": "*search.h - declarations for searcing/sorting routines"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "h/stdarg.h",
+      "sha256": "1375a4706d03a1258c7f75f786abdd645c15b646f1c131f19400be91a1e19ca3",
+      "original_hashes": [
+        "1375a4706d03a1258c7f75f786abdd645c15b646f1c131f19400be91a1e19ca3",
+        "1375a4706d03a1258c7f75f786abdd645c15b646f1c131f19400be91a1e19ca3"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\stdarg.h",
+          "line": 2,
+          "text": "*stdarg.h - defines ANSI-style macros for variable argument functions"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "h/time.h",
+      "sha256": "9b26227e1f2edaa5e428f08d62baf0c686d89b8d6c0046ce5a3b918c5675b561",
+      "original_hashes": [
+        "9b26227e1f2edaa5e428f08d62baf0c686d89b8d6c0046ce5a3b918c5675b561",
+        "9b26227e1f2edaa5e428f08d62baf0c686d89b8d6c0046ce5a3b918c5675b561"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\h\\time.h",
+          "line": 2,
+          "text": "*time.h - definitions/declarations for time routines"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "inc/chkcpu.inc",
+      "sha256": "4dfc656e6f53f0d5c93ea41ead580c46fc0c725f5c0567edcb7465a2dd2a248e",
+      "original_hashes": [
+        "4dfc656e6f53f0d5c93ea41ead580c46fc0c725f5c0567edcb7465a2dd2a248e",
+        "4dfc656e6f53f0d5c93ea41ead580c46fc0c725f5c0567edcb7465a2dd2a248e"
+      ],
+      "text_references": [],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "inc/macro.def",
+      "sha256": "8ef6549f60a45f73de1eb7f0873ab876672cc8464ea1518288854fb6e1de5db3",
+      "original_hashes": [
+        "8ef6549f60a45f73de1eb7f0873ab876672cc8464ea1518288854fb6e1de5db3",
+        "8ef6549f60a45f73de1eb7f0873ab876672cc8464ea1518288854fb6e1de5db3"
+      ],
+      "text_references": [],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "inc/mft.inc",
+      "sha256": "db88d3407feb7d284812f9a4a0258c18cfa31c6625276116efb5f0625f561d8f",
+      "original_hashes": [
+        "db88d3407feb7d284812f9a4a0258c18cfa31c6625276116efb5f0625f561d8f",
+        "db88d3407feb7d284812f9a4a0258c18cfa31c6625276116efb5f0625f561d8f"
+      ],
+      "text_references": [],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "inc/parse.asm",
+      "sha256": "6924dc79c6eab811d5c0c08992adf2f2726b36078a466b8dd2b6e3e7fd07d656",
+      "original_hashes": [
+        "6924dc79c6eab811d5c0c08992adf2f2726b36078a466b8dd2b6e3e7fd07d656",
+        "6924dc79c6eab811d5c0c08992adf2f2726b36078a466b8dd2b6e3e7fd07d656"
+      ],
+      "text_references": [
+        {
+          "file": "src\\mvdm\\dos\\v86\\inc\\psdata.inc",
+          "line": 482,
+          "text": "; In routine SYSPARSE (parse.asm), $P_FileSp_Char is reinitialized using"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\inc\\_parse.asm",
+          "line": 51,
+          "text": "include parse.asm               ; include the parser"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\makefile",
+          "line": 49,
+          "text": "$(inc)\\parse.asm $(inc)\\psdata.inc $(inc)\\smifssym.inc \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\sysconf.asm",
+          "line": 236,
+          "text": "include parse.asm\t\t;together with psdata.inc"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makefile",
+          "line": 252,
+          "text": "parse.obj parse.lst: parse.asm $(inc)/DEVSYM.INC $(inc)/DOSSYM.INC \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+          "line": 66,
+          "text": "$(inc)\\parse.asm          \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\dev\\ansi\\parser.asm",
+          "line": 93,
+          "text": "INCLUDE     PARSE.ASM       ; Parsing code"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\append\\append.asm",
+          "line": 3552,
+          "text": "include parse.asm\t\t\t; include the parser code"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\append\\makefile",
+          "line": 35,
+          "text": "$(inc)\\parse.asm \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\iparse.asm",
+          "line": 36,
+          "text": ";AD054; INCLUDE parse.asm\t\t;AN000;"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+          "line": 143,
+          "text": "$(inc)\\parse.asm         \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+          "line": 439,
+          "text": "$(inc)\\parse.asm         \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\parse2.asm",
+          "line": 7,
+          "text": ";\tSCCSID = @(#)parse.asm\t1.1 85/05/14"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\parse2.asm",
+          "line": 8,
+          "text": ";\tSCCSID = @(#)parse.asm\t1.1 85/05/14"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\parse2.asm",
+          "line": 21,
+          "text": "break <Parse.Asm>"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\parse2.asm",
+          "line": 23,
+          "text": ";    PARSE.ASM contains the routines to perform command line parsing."
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\tparse.asm",
+          "line": 58,
+          "text": "INCLUDE parse.asm\t\t;AN000;"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\command\\tspc.asm",
+          "line": 461,
+          "text": "; Data declarations taken out of parse.asm"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\edlin\\edlparse.asm",
+          "line": 37,
+          "text": ";     ROUTINE: PARSE.ASM - THIS IS THE PARSER CODE."
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\edlin\\edlparse.asm",
+          "line": 169,
+          "text": "include version.inc  ; parse.asm include psdata.inc which needs defs from here"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\edlin\\edlparse.asm",
+          "line": 170,
+          "text": "include parse.asm\t\t\t\t;an000;parser"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\edlin\\makefile",
+          "line": 95,
+          "text": "$(inc)\\parse.asm"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\exe2bin\\e2binit.asm",
+          "line": 496,
+          "text": "INCLUDE PARSE.ASM"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\exe2bin\\makefile",
+          "line": 56,
+          "text": "$(inc)\\parse.asm          \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grparse.asm",
+          "line": 90,
+          "text": "INCLUDE PARSE.ASM\t       ;; parser code\t\t\t\t;AN000;"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\graphics\\makefile",
+          "line": 40,
+          "text": "grcpsd.obj: grparse.asm makefile $(inc)\\parse.asm"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\keyb\\makefile",
+          "line": 72,
+          "text": "$(com)\\parse.asm \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\keyb\\parser.asm",
+          "line": 122,
+          "text": "INCLUDE\tPARSE.ASM\t; Parsing code"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\mem\\makefile",
+          "line": 37,
+          "text": "$(inc)\\parse.asm                \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\mem\\_parse.asm",
+          "line": 69,
+          "text": "include parse.asm\t\t; include the parser"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\nlsfunc\\makefile",
+          "line": 49,
+          "text": "$(inc)\\parse.asm          \\"
+        },
+        {
+          "file": "src\\mvdm\\dos\\v86\\cmd\\nlsfunc\\nlsparm.asm",
+          "line": 149,
+          "text": "INCLUDE PARSE.ASM"
+        }
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "path": "inc/smdossym.inc",
+      "sha256": "e62331e76bcf0513bbd6cbc35a4914cbb83c71ed2e6cc028f1a4407561c0fe1f",
+      "original_hashes": [
+        "e62331e76bcf0513bbd6cbc35a4914cbb83c71ed2e6cc028f1a4407561c0fe1f",
+        "e62331e76bcf0513bbd6cbc35a4914cbb83c71ed2e6cc028f1a4407561c0fe1f"
+      ],
+      "text_references": [],
+      "valid_worker_objects": []
+    }
+  ]
+}
