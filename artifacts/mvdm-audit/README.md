@@ -156,6 +156,8 @@ The [classification scope correction](classification-scope-correction-verificati
 reopens 241 overall decisions where the retained evidence established only a
 host-input role or guest-image identity. Scoped evidence remains available;
 the remaining historical decisions still require the same quality audit.
+The [other-shard correction](classification-scope-correction-other-verification.json)
+reopens another 564 guest-input-only decisions on the same basis.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 

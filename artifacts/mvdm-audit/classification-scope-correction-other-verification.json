@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "base": "fb85f484c",
+  "reopened": 564,
+  "counts": {
+    "pending": 1839,
+    "excluded": 2026,
+    "partial": 766,
+    "full": 53
+  },
+  "scope": "Conservative correction of insufficient overall dispositions; no source, runtime or guest change",
+  "evidence_sha256": {
+    "artifacts\\mvdm-audit\\nine-way\\part-1\\other-guest-excluded-scope-evidence.json": "711925934EFECC8082BEB6EE9020DDF9351C9A0CC6FD8925CE9EF9530E780E7D"
+  }
+}
