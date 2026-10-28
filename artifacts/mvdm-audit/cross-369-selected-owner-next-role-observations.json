@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "base": "5a6d54336",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "cross-369/palette-header-observations.json",
+      "sha256": "CF8EBCC15434E2295FCF9ACC3573A4C6008FE9F999ADADB0CA39B113D4014BF1"
+    },
+    {
+      "path": "cross-369/kernel-memory-header-observations.json",
+      "sha256": "2D15892965C446F7D4B86F7FC501FB7CD06436AD6D3309915AAE08D1AED03011"
+    },
+    {
+      "path": "cross-369/resource-interface-observations.json",
+      "sha256": "1A030DF15A29F0CE20DB7E1530815D7CC493BC3D1201FAABB51D62818B7B7E63"
+    },
+    {
+      "path": "cross-369/winsock-table-observations.json",
+      "sha256": "AA346A30506FE269C8CF0463DE490977A7EAA0D87BC2CC9D160C35DC9FCFAA41"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}

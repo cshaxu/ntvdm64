@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'cross-369-selected-owner-role-':
+                if prefix == 'cross-369-selected-owner-next-role-':
+                    assert path in {'wow32/' + n for n in ('wgpal.h', 'wkmem.h', 'wres32.h', 'wwstbl2.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'cross-369-selected-owner-role-':
                     assert path in {'wow32/' + n for n in ('wcall16.h', 'wcall32.h', 'wkfileio.h', 'wmsgcb.h', 'wmsglb.h', 'wole2.h', 'wow32fax.c', 'wshell.h', 'wshltbl.h', 'wspool.h', 'wthtbl.h', 'wthtbl2.h', 'wumenu.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'nine-part1-bin86-image-role-':
                     assert path in ('bin86/ctl3dv2.dll', 'bin86/i386/win87em.dll', 'bin86/lanman.drv', 'bin86/lzexpand.dll', 'bin86/netapi.dll', 'bin86/olecli.dll', 'bin86/pmspl.dll', 'bin86/ver.dll', 'bin86/winhelp.exe') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
