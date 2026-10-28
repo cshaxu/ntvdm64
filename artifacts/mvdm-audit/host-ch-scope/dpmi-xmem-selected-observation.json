@@ -1,0 +1,8 @@
+{
+  "object_sha256": "E2A12D8FB9485616AAF4170FEBA72DE5DC79C79B2537540F24EF7E20B5DF84CB",
+  "source_sha256": "FC05182AA46C78DEE2A963D5D10A83DEB8B34D84114725D6F0D5D334B0FA29B0",
+  "fixture_sha256": "AD5110DC81495C6B0778AADCDC23A4F2B6289C5944C9D2057A8AB243D6184AB3",
+  "exe_sha256": "7ADA242FE43F4F7EC5EF48233A8B0C607A0157BB82D38755AC88B4D91639B5C9",
+  "exit": 0,
+  "output": "XM case=0 realloc_cf=1 calls=1 handle_same=1\nXM case=0 free_cf=0 calls=1 addr=00040000 size=00001000\nXM case=1 realloc_cf=0 calls=1 handle_same=1\nXM case=1 free_cf=0 calls=1 addr=00050000 size=00002000\nXM case=2 realloc_cf=0 calls=1 handle_same=1\nXM case=2 free_cf=1 calls=1 addr=00050000 size=00002000\nXM case=2 retry_cf=0 calls=2\n"
+}

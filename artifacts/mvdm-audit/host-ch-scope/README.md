@@ -124,6 +124,8 @@ The [suballocator private-header review](dos-suballocator-private-header-review.
 
 The [selected suballocator object fixture](suballoc-selected-object-review.md) runs normal controls and injected callback failures against the current cached worker object; the injected failure observations are not real guest or installed-image acceptance.
 
+The [DPMI XMEM selected-object fixture](dpmi-xmem-selected-review.md) checks controlled allocation, reallocation and free-failure branches with fake register/provider boundaries; actual XMS pool, guest movement and task lifecycle remain S11/S12 work.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.md) classify four physical non-x86 host-register headers; guest CPU/FPU and generated-vector behavior remain separate obligations.
