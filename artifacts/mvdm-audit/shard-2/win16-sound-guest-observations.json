@@ -1,0 +1,39 @@
+{
+  "result": "pass",
+  "relative_path": "wow16/drivers/sound/sound.drv",
+  "hashes": [
+    "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801",
+    "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801",
+    "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801"
+  ],
+  "dos_catalog_rows": "1",
+  "wow_catalog_rows": "2",
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\sound\\makefile",
+      "sha256": "655D4DAB686593459CB54EF4305EB348CB3DC812B02B61A05A4DE049B392B340"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\sound\\sound.def",
+      "sha256": "19DD3320243E759DD32B822756AC6840FE897194E9AE96ABCB6EEBFB4B891E98"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\sound\\sound.asm",
+      "sha256": "EB4428F4D317591F5683AF9C035C611BC88E14F90A5F71F7E166F754FFE02A23"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wstbl2.h",
+      "sha256": "D3AEA894092DC6AFC33701CFBCCEFF6297234E9E67185B09EA4FCFDB7C478B5E"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wsman.c",
+      "sha256": "3481808A0C62754B72B5338680FB7E1A5DFC81722996CBF81400B2963771A913"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/SOUND.DRV",
+  "image_sha256": "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801",
+  "installed_path": "O:\\winnt\\system32\\SOUND.DRV",
+  "installed_sha256": "D5932CBD4E0155A07D4D0F64C0F8AFCDC3AEFE90E06E7265C6651B10C2F03801",
+  "scope": "Guest image identity and source-level dispatch; no live module selection or audio witness"
+}

@@ -1,6 +1,6 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 28 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 33 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).
@@ -30,3 +30,8 @@ The coordinator independently replayed all 28 observers against their retained J
 - [win16-timer-guest](shard-2/win16-timer-guest-review.md): [observer](shard-2/win16-timer-guest-observer.py), [receipt](shard-2/win16-timer-guest-observations.json).
 - [multimedia-guest-abi](shard-3/multimedia-guest-abi-role-review.md): [observer](shard-3/multimedia-guest-abi-observer.py), [receipt](shard-3/multimedia-guest-abi-observations.json).
 - [shell-thunk](shard-3/shell-thunk-role-review.md): [observer](shard-3/shell-thunk-observer.py), [receipt](shard-3/shell-thunk-observations.json).
+- [wow-embedding](shard-1/wow-embedding-review.md): [observer](shard-1/wow-embedding-observer.py), [receipt](shard-1/wow-embedding-observations.json).
+- [win16-mciole-guest](shard-2/win16-mciole-guest-review.md): [observer](shard-2/win16-mciole-guest-observer.py), [receipt](shard-2/win16-mciole-guest-observations.json).
+- [win16-sound-guest](shard-2/win16-sound-guest-review.md): [observer](shard-2/win16-sound-guest-observer.py), [receipt](shard-2/win16-sound-guest-observations.json).
+- [keyboard-abi](shard-3/keyboard-abi-role-review.md): [observer](shard-3/keyboard-abi-observer.py), [receipt](shard-3/keyboard-abi-observations.json).
+- [xms-service](shard-3/xms-service-role-review.md): [observer](shard-3/xms-service-observer.py), [receipt](shard-3/xms-service-observations.json).

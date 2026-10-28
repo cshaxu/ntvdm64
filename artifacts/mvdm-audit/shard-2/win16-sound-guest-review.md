@@ -1,0 +1,7 @@
+# Shard 2: Win16 SOUND driver identity and dispatch
+
+The pending `wow16/drivers/sound/sound.drv` has identical SHA-256 in the current source tree, both original trees, `assets/winnt.zip` member `WINNT/SYSTEM32/SOUND.DRV`, and `O:/winnt/system32/SOUND.DRV`. It is a **partial** candidate: this confirms identity and delivery, not live module selection or behavior. The companion read-only observer and JSON record the evidence.
+
+The original driver recipe links the guest object, definition and resource. Its `sound.def` exports `DOBEEP` at ordinal 17 and `sound.asm` emits its `SoundThunk`; the original WOW32 dispatch table selects `WS32DoBeep`, which calls the host `MessageBeep(0)`. The earlier `wow-sound-beep-review.md` records selected product linkage and explains that other listed sound ordinals use `UNIMPLEMENTEDAPI` in that original table. These source and identity observations do not prove the displayed binary came from that recipe, that a particular guest actually loaded it, or that audible output, timing and teardown work.
+
+The existing manifest import evidence for WINMINE references SOUND, but a static import is not a live resolved module witness. Keep real loading, the observed beep return, host audio and other ordinal behavior open; do not infer DOS audio capability or blanket completeness from this finding. Replay `python artifacts/mvdm-audit/shard-2/win16-sound-guest-observer.py` and compare the JSON. No guest, product, installation, shared ledger or build tree was changed or executed.

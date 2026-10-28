@@ -1,0 +1,48 @@
+{
+  "inc/xmssvc.h": {
+    "current": "e2661ecf606b903e4c3053c4e6fe8197f4f4b15dde81393fb6fd508f09bccebe",
+    "opennt": "e2661ecf606b903e4c3053c4e6fe8197f4f4b15dde81393fb6fd508f09bccebe",
+    "opennt45": "e2661ecf606b903e4c3053c4e6fe8197f4f4b15dde81393fb6fd508f09bccebe"
+  },
+  "inc/XMSSVC.INC": {
+    "current": "430de6a636d6f8b3d94ed7ae36c6bb663e14a6f3dd59df236d395564840a63db",
+    "opennt": "430de6a636d6f8b3d94ed7ae36c6bb663e14a6f3dd59df236d395564840a63db",
+    "opennt45": "430de6a636d6f8b3d94ed7ae36c6bb663e14a6f3dd59df236d395564840a63db"
+  },
+  "xms.486/xmsdisp.c": {
+    "current": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+    "opennt": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+    "opennt45": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01"
+  },
+  "xms.486/xmsblock.c": {
+    "current": "05b6b3b21e5249c02883abcfe61ab6ca0fe6aab6daa6f784dd838932d3e37dfa",
+    "opennt": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+    "opennt45": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391"
+  },
+  "xms.486/xms.c": {
+    "current": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+    "opennt": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+    "opennt45": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75"
+  },
+  "dos/v86/dev/himem/himem4.asm": {
+    "current": "0eae030990a2ee242e94f0ab0d49248d4c0de4cff8cdaf5ff7e355c5939809f2",
+    "opennt": "0eae030990a2ee242e94f0ab0d49248d4c0de4cff8cdaf5ff7e355c5939809f2",
+    "opennt45": "0eae030990a2ee242e94f0ab0d49248d4c0de4cff8cdaf5ff7e355c5939809f2"
+  },
+  "softpc.new/host/src/nt_bop.c": {
+    "current": "ce9aafc3b82348e87ae2b2f13c30472d04c90198d27b0467d435cb5a6ced8ffd",
+    "opennt": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+    "opennt45": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00050470       _MS_bop_2                  00451470 f   original-softpc-host-roots:nt_bop.obj",
+      " 0001:001537c0       _XMSDispatch               005547c0 f   original-mvdm-xms:xmsdisp.obj",
+      " 0001:001537e0       _XMSInit                   005547e0 f   original-mvdm-xms:xms.obj",
+      " 0001:00153cb0       _xmsAllocBlock             00554cb0 f   original-mvdm-xms:xmsblock.obj",
+      " 0001:00153d10       _xmsFreeBlock              00554d10 f   original-mvdm-xms:xmsblock.obj",
+      " 0001:00153e60       _xmsReallocBlock           00554e60 f   original-mvdm-xms:xmsblock.obj"
+    ]
+  }
+}

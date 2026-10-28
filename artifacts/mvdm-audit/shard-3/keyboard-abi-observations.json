@@ -1,0 +1,46 @@
+{
+  "inc/WOWKBD.INC": {
+    "current": "638e7096a7b69117e8400f3f96232a18691292b41d2ca63873d61f248a7d6f79",
+    "opennt": "638e7096a7b69117e8400f3f96232a18691292b41d2ca63873d61f248a7d6f79",
+    "opennt45": "638e7096a7b69117e8400f3f96232a18691292b41d2ca63873d61f248a7d6f79"
+  },
+  "wow16/drivers/keyboard/keyboard.asm": {
+    "current": "279d4bf8de3dbc9849651d93dc1ec5e824a1830506242c5ac1642df701916c75",
+    "opennt": "279d4bf8de3dbc9849651d93dc1ec5e824a1830506242c5ac1642df701916c75",
+    "opennt45": "279d4bf8de3dbc9849651d93dc1ec5e824a1830506242c5ac1642df701916c75"
+  },
+  "wow16/drivers/keyboard/kbdlocal.asm": {
+    "current": "3a0bb0791af49a15936ed8ddc6afb41ce1993081a2fe7f4ac965f0effc3a4aed",
+    "opennt": "3a0bb0791af49a15936ed8ddc6afb41ce1993081a2fe7f4ac965f0effc3a4aed",
+    "opennt45": "3a0bb0791af49a15936ed8ddc6afb41ce1993081a2fe7f4ac965f0effc3a4aed"
+  },
+  "wow16/drivers/keyboard/keyboard.def": {
+    "current": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b",
+    "opennt": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b",
+    "opennt45": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+  },
+  "wow32/wkbdtbl2.h": {
+    "current": "b00166f7abf269442fa1aa4b5c07ab1c08ab126c15e886dd654f519fbeabb0eb",
+    "opennt": "b00166f7abf269442fa1aa4b5c07ab1c08ab126c15e886dd654f519fbeabb0eb",
+    "opennt45": "b00166f7abf269442fa1aa4b5c07ab1c08ab126c15e886dd654f519fbeabb0eb"
+  },
+  "wow32/wkbman.c": {
+    "current": "d5d728a2e7527814343bd2470bce98ca9028796ff7e404c7fe7b57abbcfe4367",
+    "opennt": "d5d728a2e7527814343bd2470bce98ca9028796ff7e404c7fe7b57abbcfe4367",
+    "opennt45": "d5d728a2e7527814343bd2470bce98ca9028796ff7e404c7fe7b57abbcfe4367"
+  },
+  "wow32/wowtbl.c": {
+    "current": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt45": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960"
+  },
+  "map": {
+    "sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+    "lines": [
+      " 0001:000136d0       _WKB32GetKeyNameText@4     100146d0 f   wkbman.obj",
+      " 0001:00013740       _WKB32MapVirtualKey@4      10014740 f   wkbman.obj",
+      " 0001:00013850       _WKB32ToAscii@4            10014850 f   wkbman.obj",
+      " 0001:000138b0       _WKB32VkKeyScan@4          100148b0 f   wkbman.obj"
+    ]
+  }
+}

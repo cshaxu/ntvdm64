@@ -1,0 +1,218 @@
+{
+  "result": "pass",
+  "source": "wow32/mapembed.c",
+  "source_sha256": "55C13643489F5BCC9419CE0341ACCB284F946D8D75352527A3B9181DFEB4A385",
+  "catalog_ids": "SRC:285cf31989bc8697e838;SRC:62c4394d9714721b081d",
+  "build_edge": "build obj/mapembed.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/mapembed.c",
+  "functions": [
+    {
+      "name": "_IsWinIniHelper@4",
+      "va": 268439552,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 203,
+      "relocation_words": 8
+    },
+    {
+      "name": "_SetLastTimeUpdated@0",
+      "va": 268439760,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 12,
+      "relocation_words": 2
+    },
+    {
+      "name": "_UpdateClassesRootSubKey@8",
+      "va": 268439776,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 340,
+      "relocation_words": 12
+    },
+    {
+      "name": "_UpdateEmbeddingAllKeys@0",
+      "va": 268440128,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 830,
+      "relocation_words": 33
+    },
+    {
+      "name": "_UpdateEmbeddingKey@4",
+      "va": 268440960,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 740,
+      "relocation_words": 31
+    },
+    {
+      "name": "_WasSectionRecentlyUpdated@0",
+      "va": 268441712,
+      "function": true,
+      "owner": "mapembed.obj",
+      "bytes": 22,
+      "relocation_words": 2
+    }
+  ],
+  "registry_edges": [
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_create_key@12",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_set_value@20",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_create_key@12",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_set_value@20",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateClassesRootSubKey@8",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_enum_key@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_open_key@12",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingAllKeys@0",
+      "target": "_wow_registry_enum_key@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_open_key@12",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_query_value@16",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_UpdateEmbeddingKey@4",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\mapembed.c",
+      "sha256": "55C13643489F5BCC9419CE0341ACCB284F946D8D75352527A3B9181DFEB4A385"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.c",
+      "sha256": "55C13643489F5BCC9419CE0341ACCB284F946D8D75352527A3B9181DFEB4A385"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\mapembed.c",
+      "sha256": "55C13643489F5BCC9419CE0341ACCB284F946D8D75352527A3B9181DFEB4A385"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\mapembed.obj",
+      "sha256": "53FCECA9DDBBBC6F02F203922A16AAA2556F58DC87F2A0054B07F6036130C025"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkernel.c",
+      "sha256": "DAFC1E3A472DD55458CB41D216DF25ACBE11BAD68EE4BD8D8E90E8FF554DA998"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    }
+  ],
+  "limitations": "Static image and registry relocation only; no live guest OLE, registry persistence, native profile mapping, failure injection or cross-task timing proof."
+}
