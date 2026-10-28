@@ -26,6 +26,7 @@ file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.
+All 197 frozen mirror-different roles have a [current text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md): 196 measured code files and one non-code build input. This does not establish behavioral coverage.
 [Parallel source reviews](../../artifacts/mvdm-audit/README.md) include DOS,
 C-VID and WOW GDI bindings; execution and lifecycle obligations remain open.
 The [Video7 mouse-range candidate](../../artifacts/mvdm-audit/video7-pointer-review.md)
@@ -81,22 +82,12 @@ T469 COMM records: [S1](../history/m0-t469-s1-closure.md),
 
 ## T463 S2 Closure Record
 
-S2 closes at the one mapped public-USER boundary in
-`wow_native_EnableWindow`: original `wuwind.c::WU32EnableWindow` supplies an
-`HWND32` carrier, so the binding now resolves the existing worker-published
-public HWND before it calls modern USER. The [attribution and delivery
-record](../etc/evidence/m0-t463-s2-sol-options-attribution.md) retains the
-first-chance CoreMessaging fault, eliminated alternatives, the private-desktop
-SOL Options/close/parent-recovery witness and the final Full product gate.
-All ten selected images are published with matching release/installed hashes;
-guest media remains unchanged. S3 alone owns normal/restart/multiple-task and
-scoped abnormal-cleanup acceptance.
+The [T463 S2 record](../etc/evidence/m0-t463-s2-sol-options-attribution.md)
+retains the public HWND binding, SOL witness and Full gate. S3 owns remaining
+task lifecycle acceptance.
 
-T461 S3 closes at the reviewed durable-overlay delivery.  [Its acceptance
-evidence](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
-records the parent-owned commit/rollback contract, concurrent writer fixture,
-formal graphs and complete Product gate.  It changes only `ntvdm.exe`; guest
-media and the S2 raw-key/token boundary remain unchanged.
+The [T461 S3 record](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
+retains the durable-overlay delivery and its acceptance evidence.
 
 ## S10 Current P — add-on ownership and Win3.1 Setup
 

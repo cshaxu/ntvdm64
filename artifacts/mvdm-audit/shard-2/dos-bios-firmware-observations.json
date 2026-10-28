@@ -1,0 +1,113 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/bios/biostruc.inc",
+      "hashes": [
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E",
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E",
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/bios/devmark.inc",
+      "hashes": [
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20",
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20",
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/bios/msgroup.inc",
+      "hashes": [
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967",
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967",
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/bios/sysimes.asm",
+      "hashes": [
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A",
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A",
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/data/bios1.rom",
+      "hashes": [
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/roms/bios2.rom",
+      "hashes": [
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838",
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838",
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/roms/bios4.asm",
+      "hashes": [
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB",
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB",
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\makefile",
+      "sha256": "F04EAE991E915389168DCD4C1BA40C5EE11BD83CFFE190F3A55BA2EC13B437FB"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\msbio.lnk",
+      "sha256": "9A163DEAD32E6F7BED5BD283B0B8D68FA28A4DC21C54C5A98E69DDA4C0BD9B58"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\msinit.asm",
+      "sha256": "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\sysinit1.asm",
+      "sha256": "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\mschar.asm",
+      "sha256": "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "sha256": "82A19620DE7F793D52C6842FF1B58CD1E4827207D11561895C3E03ED44A24D5C"
+    }
+  ],
+  "selected_bios1_path": "src\\mvdm\\softpc.new\\roms\\bios1.rom",
+  "selected_bios1_sha256": "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+  "generated_rc_sha256": "EE33688A792A32C63ABE61CEAC07BF74F51BBC13639DEEE8FE11C5C6C7F322FD",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_ntio": [
+    {
+      "member": "WINNT/SYSTEM32/NTIO.SYS",
+      "sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937"
+    }
+  ],
+  "installed_ntio_sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+  "scope": "Historical NTIO inputs and current firmware resource selection, not guest or embedded-image execution proof"
+}
