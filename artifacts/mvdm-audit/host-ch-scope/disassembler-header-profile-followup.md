@@ -1,0 +1,15 @@
+# Disassembler headers: selected object dependency check
+
+This follows `disassembler-legacy-ui-pending-review.md`. It compares three pending physical headers with the original disassembler target and the captured x86 release profile; no product, guest, or shared ledger was changed.
+
+Original `base/dasm386/sources:27-29,53-61` names `dasm386` and selects `dasm386.c`, `build.c`, `decode.c` for PPC, Alpha and MIPS; its i386 sources list is empty. `dasm386.c:49-51` includes `decode.h`, `dasm.h`, `d_oper.h`, and `decode.c:98-100` includes `decode.h` and `d_oper.h`. The current source's hashes match the corresponding frozen OpenNT inventory for all three headers. This comparison concerns the physical original target, not disassembly in every original profile.
+
+Additional original consumers are not unconditional: `base/debug/trace.c:59-64` includes `decode.h` and `dasm.h` under `!PROD && SPC386`; `base/ccpu386/ccpupig.c:16,29-31` does so under `PIG`; `base/debug/yoda.c:1029` sits in its debug body. The captured x86 worker Ninja graph compiles `trace.obj`, `yoda.obj` and `ccpupig.obj`. On 2026-10-28, `ninja -C build/.ninja/msvc-x86-release/worker -t deps obj/base-debug/trace.obj obj/base-debug/yoda.obj obj/ccpu/ccpupig.obj` reported all three dependency entries VALID, with no exact `dasm.h`, `decode.h`, or `d_oper.h` entries. Existing `debug-alternate-provider-review.md` further distinguishes a compiled YODA object from the actually linked PROD stub; these observations do not demonstrate an alternative live disassembler.
+
+| Physical file | Current role conclusion | Recommendation |
+| --- | --- | --- |
+| `base/inc/d_oper.h` | Original non-i386 decoder operand declarations; no hit in those three current dependencies. | **Scoped physical exclusion candidate** for the recorded x86 release profile if the ledger explicitly retains original disassembler functionality as unresolved; otherwise pending. |
+| `base/inc/dasm.h` | Original disassembler API/private declarations; debug/PIG source references are conditional and absent from those selected object dependencies. | Same scoped candidate; no partial/full behavior claim. |
+| `base/inc/decode.h` | Original disassembler decoder declarations; same conditional consumers and selected-dependency observation. | Same scoped candidate; no partial/full behavior claim. |
+
+Before claiming the original disassembler or interactive debugger recovered, identify the actual supported debugger owner, original profile applicability, input/address semantics and test decoding of representative 16/32-bit instructions, invalid encodings and memory/address boundaries. A valid Ninja dependency record is a compiled-object observation, not proof about all possible consumers, target configurations, assembly/generated inputs or the installed release image. Consequently global exclusion or promotion to partial/full is not supported by this evidence. Reproduce using the Ninja command above and `rg -n '#\s*include\s*[<\"](d_oper|dasm|decode)\.h[>\"]' src/mvdm/softpc.new`.

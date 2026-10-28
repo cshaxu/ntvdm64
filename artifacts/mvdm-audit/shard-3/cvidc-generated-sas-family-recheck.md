@@ -1,5 +1,7 @@
 # C-VID generated SAS and vector carriers
 
+Coordinator update: `cvidc/sas_c.h` is now classified as an unselected physical enum carrier in the observed CPU40 profile. Selected SAS behavior and the distinct vector/layout questions remain open. The pending wording for this row below describes the earlier snapshot.
+
 The current host-candidate inventory snapshot identifies the four exact `base/cvidc` paths below as pending. These are original generated/interface artifacts, not guest binaries. Their current bytes match the corresponding OpenNT files. Existing captured Ninja dependencies, selected object maps and prior evidence are described in `sas4gen-vector-audit.md`, `../host-ch-scope/ccpu-evidgen-review.md` and `cvidc-generated-carriers-role-review.md`; no new runtime test or product/guest change was made.
 
 | File | Original and actual selected path | Bounded ledger recommendation |
