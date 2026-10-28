@@ -1,0 +1,87 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/mmsystem/messages/usa/mci.rc",
+      "hashes": [
+        "0DF6013A9080EF9F546B65A30E7976285B086456413AE3C301222BF026D19FD1",
+        "0DF6013A9080EF9F546B65A30E7976285B086456413AE3C301222BF026D19FD1",
+        "0DF6013A9080EF9F546B65A30E7976285B086456413AE3C301222BF026D19FD1"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/mmsystem/messages/usa/mmtask.rc",
+      "hashes": [
+        "23FF18144C07FB6A1510DBC8EC97B1F8AA7D71E25A8CBE8276978AFD29E7FDAE",
+        "23FF18144C07FB6A1510DBC8EC97B1F8AA7D71E25A8CBE8276978AFD29E7FDAE",
+        "23FF18144C07FB6A1510DBC8EC97B1F8AA7D71E25A8CBE8276978AFD29E7FDAE"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/mmsystem/mmsystem.rc",
+      "hashes": [
+        "D6A328E813A38E64C5CE871F6A3F3D544136F084449DA7CD78B2F17E58C3D374",
+        "D6A328E813A38E64C5CE871F6A3F3D544136F084449DA7CD78B2F17E58C3D374",
+        "D6A328E813A38E64C5CE871F6A3F3D544136F084449DA7CD78B2F17E58C3D374"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/mmtask.asm",
+      "hashes": [
+        "AD9436F2B6F661C99F812524AE6C468A021D05DF28DB7532205F4D91C60BC2B3",
+        "AD9436F2B6F661C99F812524AE6C468A021D05DF28DB7532205F4D91C60BC2B3",
+        "AD9436F2B6F661C99F812524AE6C468A021D05DF28DB7532205F4D91C60BC2B3"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/mmsystem/timea.asm",
+      "hashes": [
+        "6CC01772F84FD3B1875170472EA379387C5443C8D61D0194CA3C21DD5C7F9CC2",
+        "6CC01772F84FD3B1875170472EA379387C5443C8D61D0194CA3C21DD5C7F9CC2",
+        "6CC01772F84FD3B1875170472EA379387C5443C8D61D0194CA3C21DD5C7F9CC2"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\mmtask\\makefile",
+      "sha256": "56354D05A85F6AAF050217ED0D56FBB7C9EDB663A35ED9A8298FEBF4014555B8"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\task.c",
+      "sha256": "836AC825838C0660FA61DC1BED39E0A9868583D3F35D3181A4FDE947C322303C"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "images": [
+    {
+      "name": "MMSYSTEM.DLL",
+      "member": "WINNT/SYSTEM32/MMSYSTEM.DLL",
+      "archive_sha256": "080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A",
+      "source_sha256": "080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A",
+      "installed_sha256": ""
+    },
+    {
+      "name": "MMTASK.TSK",
+      "member": "",
+      "archive_sha256": "",
+      "source_sha256": "76D14010567C7B8FDFBBFED716819B32622977768AB4B14B354CE2471172A2DB",
+      "installed_sha256": ""
+    }
+  ],
+  "scope": "Historical USA resource/build edges and archive identities, not active language, module load or behavior"
+}

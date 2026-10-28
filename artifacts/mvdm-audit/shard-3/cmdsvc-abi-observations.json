@@ -1,0 +1,85 @@
+{
+  "inc/CMDSVC.INC": {
+    "current": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6",
+    "opennt": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6",
+    "opennt45": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6"
+  },
+  "inc/cmdsvc.h": {
+    "current": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "opennt": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624",
+    "opennt45": "c22d682422e2ac3200bdae808a5309b57a7a0402df2a3aa6199502d911ff6624"
+  },
+  "dos/v86/cmd/command/tcode.asm": {
+    "current": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377",
+    "opennt": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377",
+    "opennt45": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377"
+  },
+  "dos/command/cmddisp.c": {
+    "current": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+    "opennt": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+    "opennt45": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6"
+  },
+  "dos/command/cmdmisc.c": {
+    "current": "9659c54a7151ea69428dbe56ab8902723f6bd1fce46efd377850711b0f7d6d4b",
+    "opennt": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+    "opennt45": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281"
+  },
+  "softpc.new/host/src/nt_bop.c": {
+    "current": "ce9aafc3b82348e87ae2b2f13c30472d04c90198d27b0467d435cb5a6ced8ffd",
+    "opennt": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+    "opennt45": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+  },
+  "service_constants": {
+    "asm": {
+      "SVC_CMDEXITVDM": "0",
+      "SVC_CMDGETNEXTCMD": "1",
+      "SVC_CMDCOMSPEC": "2",
+      "SVC_CMDSAVEWORLD": "3",
+      "SVC_CMDGETCURDIR": "4",
+      "SVC_CMDSETINFO": "5",
+      "SVC_GETSTDHANDLE": "6",
+      "SVC_CMDCHECKBINARY": "7",
+      "SVC_CMDEXEC": "8",
+      "SVC_CMDINITCONSOLE": "9",
+      "SVC_EXECCOMSPEC32": "10",
+      "SVC_RETURNEXITCODE": "11",
+      "SVC_GETCONFIGSYS": "12",
+      "SVC_GETAUTOEXECBAT": "13",
+      "SVC_GETKBDLAYOUT": "14",
+      "SVC_GETINITENVIRONMENT": "15",
+      "SVC_GETSTARTINFO": "16",
+      "SVC_CMDLASTSVC": "17"
+    },
+    "c": {
+      "SVC_CMDEXITVDM": "0",
+      "SVC_CMDGETNEXTCMD": "1",
+      "SVC_CMDCOMSPEC": "2",
+      "SVC_CMDSAVEWORLD": "3",
+      "SVC_CMDGETCURDIR": "4",
+      "SVC_CMDSETINFO": "5",
+      "SVC_GETSTDHANDLE": "6",
+      "SVC_CMDCHECKBINARY": "7",
+      "SVC_CMDEXEC": "8",
+      "SVC_CMDINITCONSOLE": "9",
+      "SVC_EXECCOMSPEC32": "10",
+      "SVC_RETURNEXITCODE": "11",
+      "SVC_GETCONFIGSYS": "12",
+      "SVC_GETAUTOEXECBAT": "13",
+      "SVC_GETKBDLAYOUT": "14",
+      "SVC_GETINITENVIRONMENT": "15",
+      "SVC_GETSTARTINFO": "16",
+      "SVC_CMDLASTSVC": "17"
+    },
+    "equal": true
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00050510       _MS_bop_4                  00451510 f   original-softpc-host-roots:nt_bop.obj",
+      " 0001:0005a9c0       _cmdExitVDM                0045b9c0 f   original-mvdm-command:cmdexit.obj",
+      " 0001:0014fab0       _CmdDispatch               00550ab0 f   original-mvdm-command:cmddisp.obj",
+      " 0001:00150b00       _cmdGetNextCmd             00551b00 f   original-mvdm-command:cmdmisc.obj",
+      " 0001:001524a0       _cmdReturnExitCode         005534a0 f   original-mvdm-command:cmdexec.obj"
+    ]
+  }
+}

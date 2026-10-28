@@ -1,6 +1,6 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 33 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 35 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).
@@ -35,3 +35,5 @@ The coordinator independently replayed all 33 observers against their retained J
 - [win16-sound-guest](shard-2/win16-sound-guest-review.md): [observer](shard-2/win16-sound-guest-observer.py), [receipt](shard-2/win16-sound-guest-observations.json).
 - [keyboard-abi](shard-3/keyboard-abi-role-review.md): [observer](shard-3/keyboard-abi-observer.py), [receipt](shard-3/keyboard-abi-observations.json).
 - [xms-service](shard-3/xms-service-role-review.md): [observer](shard-3/xms-service-observer.py), [receipt](shard-3/xms-service-observations.json).
+- [win16-mmsystem-guest](shard-2/win16-mmsystem-guest-review.md): [observer](shard-2/win16-mmsystem-guest-observer.py), [receipt](shard-2/win16-mmsystem-guest-observations.json).
+- [cmdsvc-abi](shard-3/cmdsvc-abi-role-review.md): [observer](shard-3/cmdsvc-abi-observer.py), [receipt](shard-3/cmdsvc-abi-observations.json).
