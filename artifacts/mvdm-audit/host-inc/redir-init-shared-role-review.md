@@ -1,0 +1,15 @@
+# Redirector initialization and remote declaration roles
+
+Current original-mirror headers below match OpenNT by SHA-256. Classification recommendations address the exact host declaration and existing selected-code role, not full subsystem behavior; no shared ledger was modified.
+
+## `inc/vrinit.h`: partial candidate
+
+SHA-256 `13FA0AA17EA85C2E9D0A48FFA72626C46CC1C53DECAD3DC4EDCBDD1FA7034939`. `vdmredir/vrinit.c`, `vrdisp.c`, `vrdll.c`, `vrnmpipe.c` and `vrnetb.c` include this declaration of redirector initialization, completion queue and interrupt services. The original NetBIOS post queues a disposition and raises an interrupt; the original redirector service consumes completion on the guest callback path. `shard-3/redir-async-role-review.md` provides selected-provider/map evidence and describes a historical T420 S20 real async guest completion followed by COMMAND progress. Recommend partial for the observed provider/selected declaration role. Do not count the versioned witness as current release verification or proof of every service. Queue allocation failure, late completion versus critical-section deletion, worker/task death and initialization rollback remain open; the static null-head or teardown hypotheses in that report are not asserted as reproduced failures.
+
+## `inc/vrdefld.h`: partial candidate
+
+SHA-256 `E15089BF59F6F69FB39C2BC35D79D40DA4B5AD2C9ED9401E955607FF5692B9BA`. This packed `VDM_LOAD_INFO` ABI contains the DLC window address and redirector initialization flag. `vrinit.c` includes it and, after establishing VDD hooks and queue state, writes the flag at the corresponding guest CS offset; `dos/v86/redir/resident.asm` includes the related assembler definition and reads `VdmWindowAddr.VrInitialized`. `vrdlc5c.c` also includes the header for the DLC window address; approved DLC exclusion is not an exclusion of the initialization flag or all redirector operations. The selected provider and the versioned S20 guest redirector witnesses above support a bounded partial declaration role, not proof of every layout consumer, guest binary provenance, guest-pointer lifetime, failed hook installation or teardown ordering. Audit paired `vrdefld.inc`, exact structure packing, actual image identity and lifecycle before stronger claims.
+
+## `inc/vrremote.h`: partial candidate with explicit remote-transport exclusion
+
+SHA-256 `E2214353D522AA44FB3BB2B2CD0918D51F5FC0A300E3643BB53090842D3D1819`. `vrnetapi.c` and `vrremote.c` include the header, and `shard-3/remote-rap-role-review.md` records original conversion bodies and their selected linkage, with project `RxpTransactSmb` unavailable provider. Existing approved exception excludes remote RAP transport; this is not proof of functioning remote RAP and must not erase local NetAPI, named-pipe or NetBIOS capabilities. The conversion declarations and selected retained host bodies support a partial file-role candidate while the excluded transport remains explicitly unsupported. Full guest-visible failure mapping, buffer lifecycle and current release identity remain unverified. The historical selected-map evidence is not a fresh run.
