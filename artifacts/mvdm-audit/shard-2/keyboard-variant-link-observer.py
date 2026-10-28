@@ -1,0 +1,12 @@
+import csv,hashlib,json,re,zipfile
+from pathlib import Path
+A=Path('artifacts/mvdm-audit'); M=Path('src/mvdm'); R=M/'dos/v86/dev/keyboard'; O=(Path('O:/repos.external/OpenNT/base/mvdm'),Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm')); names=('kdfbr.asm','kdfit.asm','kdfru092.asm','kdfyc116.asm','kdfyc117.asm')
+def sha(d):return hashlib.sha256(d).hexdigest().upper()
+def inspect():
+ f={x['relative_path']:x for x in csv.DictReader((A/'frozen-file-reconciliation.csv').open(encoding='utf-8-sig'))};l={x['relative_path']:x for x in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig'))}; recipe=(R/'makefile').read_text(encoding='latin1');lnk=(R/'keyboard.lnk').read_text(encoding='latin1');head=(R/'kdfnow.asm').read_text(encoding='latin1');mp=(R/'KEYBOARD.map').read_text(encoding='latin1');rows=[]
+ for name in names:
+  rel='dos/v86/dev/keyboard/'+name; d=(M/rel).read_bytes();hashes=[sha((root/rel).read_bytes()) for root in (M,*O)]; assert hashes==[f[rel]['current_sha256'],f[rel]['opennt_sha256'],f[rel]['opennt45_sha256']] and l[rel]['shard']=='2' and l[rel]['status']=='pending';syms=re.findall(r'(?im)^\s*PUBLIC\s+(\w+)',d.decode('latin1'));stem=Path(name).stem.upper(); assert not re.search(r'(?im)^\s*'+stem+r'\.OBJ\s*:',recipe) and not re.search(r'(?i)\b'+stem+r'\.OBJ\b',lnk);rows.append(dict(source=rel,hashes=hashes,public_symbols=sorted(set(syms))))
+ assert all(x in lnk.upper() for x in ('KDFBR275.OBJ','KDFIT141.OBJ','KDFIT142.OBJ','KDFRU091.OBJ'));assert all(x in head.upper() for x in ('BR_LOGIC','IT1_LOGIC','IT2_LOGIC','RU1_LOGIC'));assert all(x in mp.upper() for x in ('BR_LOGIC','IT1_LOGIC','IT2_LOGIC','RU1_LOGIC')); assert all(x not in mp.upper() for x in ('YC1_LOGIC','YC2_LOGIC','RU2_LOGIC'))
+ z=zipfile.ZipFile('assets/winnt.zip');member=next(x for x in z.infolist() if x.filename.lower()=='winnt/system32/keyboard.sys');pack=sha(z.read(member));assert pack==sha((R/'KEYBOARD.SYS').read_bytes())==sha(Path('O:/winnt/system32/KEYBOARD.SYS').read_bytes())
+ return dict(result='pass',files=rows,recipe_sha256=sha((R/'makefile').read_bytes()),link_sha256=sha((R/'keyboard.lnk').read_bytes()),header_sha256=sha((R/'kdfnow.asm').read_bytes()),map_sha256=sha((R/'KEYBOARD.map').read_bytes()),keyboard_sha256=pack,archive_sha256=sha(Path('assets/winnt.zip').read_bytes()),scope='Selected historical link recipe and image identity only; map lineage and keyboard behavior unproven')
+if __name__=='__main__':print(json.dumps(inspect(),indent=2))

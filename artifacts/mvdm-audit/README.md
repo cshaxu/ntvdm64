@@ -549,3 +549,5 @@ remain open; object identity is not behavioral acceptance.
 
 The [C-VID vector review](cvidc-vector-role-review.md) resolves 692 initial
 image pointers to original generated owners; runtime selection remains open.
+
+Recent bounded reviews cover [WOW shell, hook and subclass bodies](shard-0/wow-shell-hook-image-review.md), [file-cache flush](shard-1/wow-file-cache-flush-review.md), [keyboard variant selection](shard-2/keyboard-variant-link-review.md), and [DIB mapping providers](shard-3/wow-dib-selected-mapping-provider-review.md). These are source and image evidence, not end-to-end acceptance; their remaining obligations are recorded in the recovery worklist.

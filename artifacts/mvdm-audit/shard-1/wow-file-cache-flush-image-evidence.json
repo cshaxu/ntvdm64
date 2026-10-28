@@ -1,0 +1,236 @@
+{
+  "object": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkfileio.obj",
+  "object_sha256": "4a3455d0adcaa26fbdee4910bd9dfad96aa9670e934e129f2f9116a637fe3688",
+  "sections": [
+    {
+      "section": 15,
+      "name": "FlushMapFileCaches",
+      "size": 171,
+      "relocation_count": 8,
+      "images": [
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+          "sha256": "c97c512c6f6bd6f16a6fb68f340760f551cd2186b5262b1a6ae892fc8a06bc58",
+          "file_offset": 98720,
+          "relocations": [
+            {
+              "offset": 63,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "5dffffff"
+            },
+            {
+              "offset": 93,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        },
+        {
+          "path": "O:\\winnt\\system32\\wow32.dll",
+          "sha256": "ff5aad62b628f0af28df23255d97059abf089cbba9226ce46091412f4093e431",
+          "file_offset": 98720,
+          "relocations": [
+            {
+              "offset": 63,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "5dffffff"
+            },
+            {
+              "offset": 93,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": 17,
+      "name": "FreeMapFileCache",
+      "size": 113,
+      "relocation_count": 4,
+      "images": [
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+          "sha256": "c97c512c6f6bd6f16a6fb68f340760f551cd2186b5262b1a6ae892fc8a06bc58",
+          "file_offset": 98896,
+          "relocations": [
+            {
+              "offset": 6,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "e6feffff"
+            },
+            {
+              "offset": 40,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        },
+        {
+          "path": "O:\\winnt\\system32\\wow32.dll",
+          "sha256": "ff5aad62b628f0af28df23255d97059abf089cbba9226ce46091412f4093e431",
+          "file_offset": 98896,
+          "relocations": [
+            {
+              "offset": 6,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "e6feffff"
+            },
+            {
+              "offset": 40,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": 37,
+      "name": "W32MapViewOfFile",
+      "size": 133,
+      "relocation_count": 5,
+      "images": [
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+          "sha256": "c97c512c6f6bd6f16a6fb68f340760f551cd2186b5262b1a6ae892fc8a06bc58",
+          "file_offset": 100608,
+          "relocations": [
+            {
+              "offset": 40,
+              "symbol": "__imp__CreateFileMappingA@24",
+              "type": 6,
+              "encoded": "78f50810"
+            },
+            {
+              "offset": 62,
+              "symbol": "__imp__MapViewOfFile@20",
+              "type": 6,
+              "encoded": "88f50810"
+            },
+            {
+              "offset": 121,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        },
+        {
+          "path": "O:\\winnt\\system32\\wow32.dll",
+          "sha256": "ff5aad62b628f0af28df23255d97059abf089cbba9226ce46091412f4093e431",
+          "file_offset": 100608,
+          "relocations": [
+            {
+              "offset": 40,
+              "symbol": "__imp__CreateFileMappingA@24",
+              "type": 6,
+              "encoded": "78f50810"
+            },
+            {
+              "offset": 62,
+              "symbol": "__imp__MapViewOfFile@20",
+              "type": 6,
+              "encoded": "88f50810"
+            },
+            {
+              "offset": 121,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": 39,
+      "name": "WK32FileClose",
+      "size": 178,
+      "relocation_count": 6,
+      "images": [
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+          "sha256": "c97c512c6f6bd6f16a6fb68f340760f551cd2186b5262b1a6ae892fc8a06bc58",
+          "file_offset": 100752,
+          "relocations": [
+            {
+              "offset": 102,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        },
+        {
+          "path": "O:\\winnt\\system32\\wow32.dll",
+          "sha256": "ff5aad62b628f0af28df23255d97059abf089cbba9226ce46091412f4093e431",
+          "file_offset": 100752,
+          "relocations": [
+            {
+              "offset": 102,
+              "symbol": "__imp__CloseHandle@4",
+              "type": 6,
+              "encoded": "d4f50810"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section": 57,
+      "name": "WK32FileRead",
+      "size": 748,
+      "relocation_count": 36,
+      "images": [
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+          "sha256": "c97c512c6f6bd6f16a6fb68f340760f551cd2186b5262b1a6ae892fc8a06bc58",
+          "file_offset": 103120,
+          "relocations": [
+            {
+              "offset": 153,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "d3edffff"
+            },
+            {
+              "offset": 179,
+              "symbol": "_W32MapViewOfFile@8",
+              "type": 20,
+              "encoded": "79f5ffff"
+            }
+          ]
+        },
+        {
+          "path": "O:\\winnt\\system32\\wow32.dll",
+          "sha256": "ff5aad62b628f0af28df23255d97059abf089cbba9226ce46091412f4093e431",
+          "file_offset": 103120,
+          "relocations": [
+            {
+              "offset": 153,
+              "symbol": "_FindMapFileCache@4",
+              "type": 20,
+              "encoded": "d3edffff"
+            },
+            {
+              "offset": 179,
+              "symbol": "_W32MapViewOfFile@8",
+              "type": 20,
+              "encoded": "79f5ffff"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

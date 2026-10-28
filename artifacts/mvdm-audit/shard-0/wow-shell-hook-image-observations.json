@@ -1,0 +1,277 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow32/wshell.c",
+      "hashes": [
+        "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40",
+        "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40",
+        "1DAA7860C95A0E374566B900D2DA01E7459E7B88C0DFBE8E84B23F68BDF3AD40"
+      ],
+      "edge": "build obj/wshell.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wshell.c",
+      "object_sha256": "4F0BE579B4085545EDDB5A690C075DF084D5DE1249720223208B3EDEF6FB6612",
+      "bindings": [
+        {
+          "name": "_ConvertToWin31Error@4",
+          "va": 268551072,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 156,
+          "relocation_words": 6
+        },
+        {
+          "name": "_CopyDropFilesFrom16@4",
+          "va": 268551232,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 152,
+          "relocation_words": 7
+        },
+        {
+          "name": "_CopyDropFilesFrom32@4",
+          "va": 268551392,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 246,
+          "relocation_words": 10
+        },
+        {
+          "name": "_DropFilesHandler@12",
+          "va": 268551648,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 703,
+          "relocation_words": 24
+        },
+        {
+          "name": "_Remove_Classes@4",
+          "va": 268552352,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 162,
+          "relocation_words": 7
+        },
+        {
+          "name": "_W32ShellExecuteCallBack@8",
+          "va": 268552528,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 136,
+          "relocation_words": 9
+        },
+        {
+          "name": "_WOWRegDeleteKey@8",
+          "va": 268552672,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 287,
+          "relocation_words": 11
+        },
+        {
+          "name": "_WS32DoEnvironmentSubst@4",
+          "va": 268552960,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 138,
+          "relocation_words": 8
+        },
+        {
+          "name": "_WS32DragAcceptFiles@4",
+          "va": 268553104,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 25,
+          "relocation_words": 1
+        },
+        {
+          "name": "_WS32DragFinish@4",
+          "va": 268553136,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 34,
+          "relocation_words": 2
+        },
+        {
+          "name": "_WS32DragQueryFile@4",
+          "va": 268553184,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 106,
+          "relocation_words": 5
+        },
+        {
+          "name": "_WS32ExtractIcon@4",
+          "va": 268553296,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 102,
+          "relocation_words": 4
+        },
+        {
+          "name": "_WS32FindExecutable@4",
+          "va": 268553408,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 123,
+          "relocation_words": 6
+        },
+        {
+          "name": "_WS32RegCloseKey@4",
+          "va": 268553536,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 33,
+          "relocation_words": 2
+        },
+        {
+          "name": "_WS32RegCreateKey@4",
+          "va": 268553584,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 171,
+          "relocation_words": 9
+        },
+        {
+          "name": "_WS32RegDeleteKey@4",
+          "va": 268553760,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 135,
+          "relocation_words": 8
+        },
+        {
+          "name": "_WS32RegEnumKey@4",
+          "va": 268553904,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 85,
+          "relocation_words": 5
+        },
+        {
+          "name": "_WS32RegOpenKey@4",
+          "va": 268554000,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 175,
+          "relocation_words": 9
+        },
+        {
+          "name": "_WS32RegQueryValue@4",
+          "va": 268554176,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 483,
+          "relocation_words": 20
+        },
+        {
+          "name": "_WS32RegSetValue@4",
+          "va": 268554672,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 186,
+          "relocation_words": 10
+        },
+        {
+          "name": "_WS32ShellAbout@4",
+          "va": 268554864,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 76,
+          "relocation_words": 4
+        },
+        {
+          "name": "_WS32ShellExecute@4",
+          "va": 268554944,
+          "function": true,
+          "owner": "wshell.obj",
+          "bytes": 108,
+          "relocation_words": 6
+        }
+      ]
+    },
+    {
+      "path": "wow32/wsubcls.c",
+      "hashes": [
+        "B37021CB2A0480F3ACA685EFB8006B32D31B0FE073B6B3FC9B99F05764679E4B",
+        "B37021CB2A0480F3ACA685EFB8006B32D31B0FE073B6B3FC9B99F05764679E4B",
+        "B37021CB2A0480F3ACA685EFB8006B32D31B0FE073B6B3FC9B99F05764679E4B"
+      ],
+      "edge": "build obj/wsubcls.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wsubcls.c",
+      "object_sha256": "8F56732C11B0CBF7F92C35F560CF06C6CE3B44FAC1D037B8E128E298510C463D",
+      "bindings": [
+        {
+          "name": "_GetThunkWindowProc@16",
+          "va": 268614704,
+          "function": true,
+          "owner": "wsubcls.obj",
+          "bytes": 440,
+          "relocation_words": 19
+        },
+        {
+          "name": "_IsThunkWindowProc@8",
+          "va": 268615152,
+          "function": true,
+          "owner": "wsubcls.obj",
+          "bytes": 82,
+          "relocation_words": 2
+        }
+      ]
+    },
+    {
+      "path": "wow32/wuhook.c",
+      "hashes": [
+        "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2",
+        "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2",
+        "A4F31EE8CC2258FB177471647066238F7BB406B2466DCA0249F4D6E6A98022B2"
+      ],
+      "edge": "build obj/wuhook.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wuhook.c",
+      "object_sha256": "252DA3E124A6FBCC145F35A0639983AD70C1D7A441BAF7EE5727C1E5FE468A82",
+      "bindings": [
+        {
+          "name": "_WU32CallNextHookEx@4",
+          "va": 268577712,
+          "function": true,
+          "owner": "wuhook.obj",
+          "bytes": 100,
+          "relocation_words": 2
+        },
+        {
+          "name": "_WU32SetWindowsHookEx@4",
+          "va": 268577824,
+          "function": true,
+          "owner": "wuhook.obj",
+          "bytes": 163,
+          "relocation_words": 6
+        },
+        {
+          "name": "_WU32SetWindowsHookInternal@4",
+          "va": 268578000,
+          "function": true,
+          "owner": "wuhook.obj",
+          "bytes": 265,
+          "relocation_words": 9
+        },
+        {
+          "name": "_WU32UnhookWindowsHook@4",
+          "va": 268578272,
+          "function": true,
+          "owner": "wuhook.obj",
+          "bytes": 28,
+          "relocation_words": 2
+        },
+        {
+          "name": "_WU32UnhookWindowsHookEx@4",
+          "va": 268578304,
+          "function": true,
+          "owner": "wuhook.obj",
+          "bytes": 25,
+          "relocation_words": 2
+        }
+      ]
+    }
+  ],
+  "release_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "cached_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "limits": "Object body bindings only; guest dispatch, callback reentrancy, handles and teardown remain unverified."
+}
