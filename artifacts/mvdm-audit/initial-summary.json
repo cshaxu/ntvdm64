@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1392,
+    "pending": 1390,
     "excluded": 2656,
-    "partial": 583,
+    "partial": 585,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original WOW heap, memory and spool owners are partial; failures, shared identities and teardown remain open."
+  "note": "Embedding source and Win16 sound image are partial; guest execution and host lifecycle remain open."
 }

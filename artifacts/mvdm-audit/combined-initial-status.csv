@@ -2998,7 +2998,7 @@ wow16/drivers/mouse/mouse.sym,0,excluded,shard-0/review.csv
 wow16/drivers/sound/makefile,2,excluded,shard-2/file-audit.csv
 wow16/drivers/sound/sound.asm,0,excluded,shard-0/review.csv
 wow16/drivers/sound/sound.def,2,excluded,shard-2/file-audit.csv
-wow16/drivers/sound/sound.drv,2,pending,shard-2/file-audit.csv
+wow16/drivers/sound/sound.drv,2,partial,shard-2/file-audit.csv
 wow16/drivers/sound/sound.lrf,1,excluded,shard-1/file-audit.csv
 wow16/drivers/sound/sound.map,3,excluded,shard-3/file-review.csv
 wow16/drivers/sound/sound.OBJ,3,excluded,shard-3/file-review.csv
@@ -4384,7 +4384,7 @@ wow32/isvwow.h,2,partial,shard-2/file-audit.csv
 wow32/isz.h,0,pending,shard-0/review.csv
 wow32/makefile,0,excluded,shard-0/review.csv
 wow32/makefile.inc,2,excluded,shard-2/file-audit.csv
-wow32/mapembed.c,1,pending,shard-1/file-audit.csv
+wow32/mapembed.c,1,partial,shard-1/file-audit.csv
 wow32/mapembed.h,0,pending,shard-0/review.csv
 wow32/obj/_objects.mac,2,excluded,shard-2/file-audit.csv
 wow32/obj/i386/callpr32.obj,2,excluded,shard-2/file-audit.csv

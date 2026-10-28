@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [embedding and Win16 sound checkpoint](parallel-embedding-sound-role-review.md)
+retains guest execution and lifecycle boundaries.
+
 The [WOW heap, memory and spool checkpoint](parallel-wow-memory-spool-role-review.md)
 retains their guest behavior, shared handle and failure boundaries.
 

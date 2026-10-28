@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "12ea7a5c1",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-embedding-observations.json",
+      "sha256": "E0C9AAB4A2C01C2AD4F097D8C8F7133DDB93991DAF74920E2B5B761DA95E3872"
+    },
+    {
+      "path": "shard-2/win16-sound-guest-observations.json",
+      "sha256": "BD0D7EDD3E5AD04CB5B1CA6108A47144907D423E11A843B7FA78EC1DC7C4CE80"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source/image binding only; no guest behavior acceptance"
+}
