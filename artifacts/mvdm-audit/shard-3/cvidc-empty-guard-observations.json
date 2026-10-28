@@ -1,0 +1,87 @@
+{
+  "add_c.h": {
+    "current": "bdfdef60fa4638fd94c3e45818d694059ba9954032eca0d48f2f53531700b16c",
+    "opennt": "bdfdef60fa4638fd94c3e45818d694059ba9954032eca0d48f2f53531700b16c",
+    "opennt45": "bdfdef60fa4638fd94c3e45818d694059ba9954032eca0d48f2f53531700b16c",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "bswap_c.h": {
+    "current": "99c5aa2603e3730857fd2a9404ef71f66231d3dbb5ca8732b61a265aed184cd2",
+    "opennt": "99c5aa2603e3730857fd2a9404ef71f66231d3dbb5ca8732b61a265aed184cd2",
+    "opennt45": "99c5aa2603e3730857fd2a9404ef71f66231d3dbb5ca8732b61a265aed184cd2",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "cmp_c.h": {
+    "current": "3658654df938ad4dfd3ed511515a916bce9bf3135da465f4fb541c9e52e13fb6",
+    "opennt": "3658654df938ad4dfd3ed511515a916bce9bf3135da465f4fb541c9e52e13fb6",
+    "opennt45": "3658654df938ad4dfd3ed511515a916bce9bf3135da465f4fb541c9e52e13fb6",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "copies_c.h": {
+    "current": "f6f31a25c46bf20ac74bf07801d45274117eb3f2f5b73d3f876fe6add94cb6f4",
+    "opennt": "f6f31a25c46bf20ac74bf07801d45274117eb3f2f5b73d3f876fe6add94cb6f4",
+    "opennt45": "f6f31a25c46bf20ac74bf07801d45274117eb3f2f5b73d3f876fe6add94cb6f4",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "fmevid_c.h": {
+    "current": "aa6cbf061e3438ba61789305e72b88ac37ec064f69080e96b90da2be2d83613b",
+    "opennt": "aa6cbf061e3438ba61789305e72b88ac37ec064f69080e96b90da2be2d83613b",
+    "opennt45": "aa6cbf061e3438ba61789305e72b88ac37ec064f69080e96b90da2be2d83613b",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "gdmain_c.h": {
+    "current": "6d16138cbd11cc2dff28ecc87cc9ae8481724e8b7e5bf9dadadaeb443630d505",
+    "opennt": "6d16138cbd11cc2dff28ecc87cc9ae8481724e8b7e5bf9dadadaeb443630d505",
+    "opennt45": "6d16138cbd11cc2dff28ecc87cc9ae8481724e8b7e5bf9dadadaeb443630d505",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "gicvid_c.h": {
+    "current": "2dcff6f2ed59c96e2992d6ae1c0bb9e182f4a67f3c743035cfc12a282762f6a9",
+    "opennt": "2dcff6f2ed59c96e2992d6ae1c0bb9e182f4a67f3c743035cfc12a282762f6a9",
+    "opennt45": "2dcff6f2ed59c96e2992d6ae1c0bb9e182f4a67f3c743035cfc12a282762f6a9",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "idmain_c.h": {
+    "current": "1c1be6c62915a5d7ad7b7f3bbfcce45ec6a18959bcbe78246ba19b820a962a71",
+    "opennt": "1c1be6c62915a5d7ad7b7f3bbfcce45ec6a18959bcbe78246ba19b820a962a71",
+    "opennt45": "1c1be6c62915a5d7ad7b7f3bbfcce45ec6a18959bcbe78246ba19b820a962a71",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "logic_c.h": {
+    "current": "61969c5792b71a99b49aee9e0a5b09db737b543611e0be9923f86f38012b18e1",
+    "opennt": "61969c5792b71a99b49aee9e0a5b09db737b543611e0be9923f86f38012b18e1",
+    "opennt45": "61969c5792b71a99b49aee9e0a5b09db737b543611e0be9923f86f38012b18e1",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "move_c.h": {
+    "current": "731326922805d1259ac2ac4caea119e3e9931f600278b82966b4647d5d08035a",
+    "opennt": "731326922805d1259ac2ac4caea119e3e9931f600278b82966b4647d5d08035a",
+    "opennt45": "731326922805d1259ac2ac4caea119e3e9931f600278b82966b4647d5d08035a",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "nanoe_c.h": {
+    "current": "57e8831780cde35f843857cd6ee4fb0398d6973f56a7600f202fb159b7b2155e",
+    "opennt": "57e8831780cde35f843857cd6ee4fb0398d6973f56a7600f202fb159b7b2155e",
+    "opennt45": "57e8831780cde35f843857cd6ee4fb0398d6973f56a7600f202fb159b7b2155e",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "unchn_c.h": {
+    "current": "2c5e37ab6d10f385120cefb2144301fabe8cb74f560ba8b0b140314ce9852cbb",
+    "opennt": "2c5e37ab6d10f385120cefb2144301fabe8cb74f560ba8b0b140314ce9852cbb",
+    "opennt45": "2c5e37ab6d10f385120cefb2144301fabe8cb74f560ba8b0b140314ce9852cbb",
+    "guard_only": true,
+    "normalized_dep_lines": []
+  },
+  "_dependency_snapshot_sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313"
+}

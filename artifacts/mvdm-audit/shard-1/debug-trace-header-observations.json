@@ -1,0 +1,80 @@
+{
+  "result": "pass",
+  "ledger_sha256": "9AC25CC7F3534FC69276E85D998DFAC2D89A909CB1792FC7AD76E27F9288883A",
+  "entries": [
+    {
+      "path": "softpc.new/base/inc/d_inst.h",
+      "sha256": "5C26EFCCE64E3A2BD0F6D64CA53775E6C6A4F016873E15CBFDA98148439EDFA3",
+      "catalog_ids": "SRC:7b6c6f564a628cb5179f;SRC:84d6eeb69c8145ba26d0",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "softpc.new/base/inc/dsktrace.h",
+      "sha256": "F5E99686A7C84D8A1B1B25DB57C35D459C88C1B6DEC395C332F027647474D082",
+      "catalog_ids": "SRC:723b3de1977d8fa7aa64;SRC:c24c6ac8c9423316abd7",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/diskbios.obj",
+          "raw": "../../../../src/mvdm/softpc.new/base/inc/dsktrace.h",
+          "resolved": "o:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc/dsktrace.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fdisk.obj",
+          "raw": "../../../../src/mvdm/softpc.new/base/inc/dsktrace.h",
+          "resolved": "o:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc/dsktrace.h"
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/inc/harness.h",
+      "sha256": "8F989D1FB417BAF5A51A7EAE1C1B0F810876BCDED3AF3EC801EC051F27AD7A77",
+      "catalog_ids": "SRC:01c5e4111b5517a9d553;SRC:9c193948bb3f57274179",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "softpc.new/base/inc/hosthunt.h",
+      "sha256": "2AF5FFE292725C250F8CE2DF821B4C8B9996D89958F144DCACD8D405CA633FE2",
+      "catalog_ids": "SRC:5956d4c48b0e8e5f10ae;SRC:5e9ccc1e5afd0846a2bd",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "softpc.new/base/inc/hunter.h",
+      "sha256": "92958F20AD0E03E8423EB190F0793813E02A752B1820E94AFF01049573475EDF",
+      "catalog_ids": "SRC:9c45ff7ecf9b2bf162d4;SRC:ef31f9e8bcada74e7bfd",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/reset.obj",
+          "raw": "../../../../src/mvdm/softpc.new/base/inc/hunter.h",
+          "resolved": "o:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc/hunter.h"
+        }
+      ]
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "VALID Ninja dependencies for four checked trees only; header activity, other profiles, generated references and debug behavior are not implied by dependency presence or absence."
+}

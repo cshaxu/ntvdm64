@@ -1,0 +1,53 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow32/wmmedia.h",
+      "hashes": [
+        "7B2E07AC7DA3864922A65586539C19945344ED04DF1D53D26E38119102A69801",
+        "7B2E07AC7DA3864922A65586539C19945344ED04DF1D53D26E38119102A69801",
+        "7B2E07AC7DA3864922A65586539C19945344ED04DF1D53D26E38119102A69801"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wmmedia.h"
+    },
+    {
+      "path": "wow32/wmmtbl2.h",
+      "hashes": [
+        "C48E5FC47DF9AC3A0FF72754E1253AF3C65DA102E4CA6B5EF5451A754E954EE5",
+        "C48E5FC47DF9AC3A0FF72754E1253AF3C65DA102E4CA6B5EF5451A754E954EE5",
+        "C48E5FC47DF9AC3A0FF72754E1253AF3C65DA102E4CA6B5EF5451A754E954EE5"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wmmtbl2.h"
+    },
+    {
+      "path": "wow32/wmtbl32.h",
+      "hashes": [
+        "C64CFBDD5B28DB353FD24EDD971044FE8F086D86B40AAFFD648FFCFE4C653AFB",
+        "C64CFBDD5B28DB353FD24EDD971044FE8F086D86B40AAFFD648FFCFE4C653AFB",
+        "C64CFBDD5B28DB353FD24EDD971044FE8F086D86B40AAFFD648FFCFE4C653AFB"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wmtbl32.h"
+    }
+  ],
+  "normalized_deps_object": "obj/wowtbl.obj",
+  "compile_edges": [
+    "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c",
+    "build obj/wmmedia.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmmedia.c",
+    "build obj/wmtbl32.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmtbl32.c"
+  ],
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "map_symbols": [
+    "0001:0002b0b0       _wow_original_WMM32CallProc32@4 1002c0b0 f   wmmedia.obj",
+    "0001:00070fd0       _WMM32CallProc32@4         10071fd0 f   wow_user_native_extension.obj",
+    "0003:00001ec8       _aw32Msg                   100a3ec8     wmtbl32.obj"
+  ],
+  "extension_sha256": "93D840A9ECE0BE6FE0AFC6FA0597E23CFC2182359CE2BA4BE6E4848D97B6FA54",
+  "scope": "Normalized dependency, source and map snapshot; no linked table relocation, live API or callback lifetime proof"
+}

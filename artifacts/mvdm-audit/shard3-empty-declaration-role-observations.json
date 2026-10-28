@@ -1,0 +1,14 @@
+{
+  "result": "pass",
+  "base": "a1cd20ec4",
+  "candidate_count": 12,
+  "source_tables": [
+    {
+      "path": "shard-3/cvidc-empty-guard-observations.json",
+      "sha256": "5160F4E6A511A01BA14D6163B7D3D06290F41E1664F1EBE4E9A914ACD10A14DF"
+    }
+  ],
+  "host_input_observations": [],
+  "guard_reference_lines": 72,
+  "scope": "Empty physical guard roles only; no feature or guest behavior exclusion"
+}

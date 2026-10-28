@@ -1,0 +1,169 @@
+{
+  "result": "pass",
+  "ledger_sha256": "B271653B29234329544ADF793D576B2FA6D7E10D2FC8D6F477961C9CD0FAB351",
+  "excluded_count": 2727,
+  "candidate_hits": [
+    {
+      "path": "softpc.new/base/ccpu386/c_getset.c",
+      "shard": "3",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpupig.c",
+      "shard": "3",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpupig.h",
+      "shard": "1",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": false,
+          "deps": true
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/nop.c",
+      "shard": "3",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/comms/prt_scrn.c",
+      "shard": "1",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/host/src/cpucstbs.c",
+      "shard": "2",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/host/src/nt_sas.c",
+      "shard": "1",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/host/src/nt_sec.c",
+      "shard": "2",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/host/src/nt_yoda.c",
+      "shard": "3",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/host/src/x86_emm.c",
+      "shard": "2",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/worker",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "wow32/wgman.c",
+      "shard": "0",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/wow32",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "wow32/wmmedia1.c",
+      "shard": "2",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/wow32",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    },
+    {
+      "path": "wow32/wthman.c",
+      "shard": "3",
+      "matches": [
+        {
+          "root": "build/.ninja/msvc-x86-release/wow32",
+          "graph": true,
+          "deps": false
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "root": "build/.ninja/msvc-x86-release/worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "root": "build/.ninja/msvc-x86-release/wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "root": "build/.ninja/msvc-x64-release/frontend",
+      "graph_sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "root": "build/.ninja/msvc-x64-release/service",
+      "graph_sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limits": "Normalized path substring candidates in four cached graphs/dependency outputs, not proof of object extraction, preprocessor activity, all build profiles or feature status."
+}

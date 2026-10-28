@@ -62,6 +62,11 @@ The [WOW USER declaration checkpoint](wow-user-header-role-review.md) records
 five selected headers as partial, not full guest behavior.
 The [guest-input dependency recheck](recent-guest-input-dependency-review.md)
 rechecks relative Ninja paths for 37 recent file-role exclusions.
+The [excluded-role sweep](excluded-dependency-sweep.md) inventories 13 graph
+or dependency hits among 2,727 excluded roles at its recorded baseline; each
+hit still needs its individual selection and content rationale verified.
+The [additional empty guards](shard-3/cvidc-empty-guard-role-review.md) exclude
+twelve file roles without excluding CPU or video functionality.
 
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
@@ -91,7 +96,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 84 independently replayed investigations; proposed dispositions remain pending.
+retain 87 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded
