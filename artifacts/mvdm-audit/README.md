@@ -55,6 +55,11 @@ The [selected CMOS and ROM owner review](nine-way/part-5/cmos-rom-semantic-recon
 and [WOW fax review](cross-369/fax-provider-disposition.md) retain their
 specific published bindings and identify untested failure paths for S13 and
 S16/S17 respectively.
+The [DOSX transition review](nine-way/part-2/dosx-transition-semantic-reconciliation.md)
+traces the guest continuation frame into the selected host adapter. The
+[MCI converter review](cross-369/mci-converter-disposition.md) distinguishes
+the inactive historical converter from the separate guest multimedia route;
+neither report claims current end-to-end device behavior is verified.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

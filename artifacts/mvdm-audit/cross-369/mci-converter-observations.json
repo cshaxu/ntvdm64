@@ -1,0 +1,65 @@
+{
+  "sha256": {
+    "wow32/wmmstru2.c": {
+      "current": "F96AE87C3F0290B72C838B174B8EFBE82BD727290451BA99650ECC85BF738632",
+      "opennt": "F96AE87C3F0290B72C838B174B8EFBE82BD727290451BA99650ECC85BF738632",
+      "opennt45": "F96AE87C3F0290B72C838B174B8EFBE82BD727290451BA99650ECC85BF738632"
+    },
+    "wow32/wmmstruc.h": {
+      "current": "8C8C764F500C47689F5D97C485E8D81C6361130C6CE744A3DBE8D2D26C1EAF5B",
+      "opennt": "8C8C764F500C47689F5D97C485E8D81C6361130C6CE744A3DBE8D2D26C1EAF5B",
+      "opennt45": "8C8C764F500C47689F5D97C485E8D81C6361130C6CE744A3DBE8D2D26C1EAF5B"
+    },
+    "wow32/wmmedia2.c": {
+      "current": "4A2A6E5E6C6E7172CB3FEA4BB9035A18C7C5A292618B9EB507B71AE9F7D76856",
+      "opennt": "4A2A6E5E6C6E7172CB3FEA4BB9035A18C7C5A292618B9EB507B71AE9F7D76856",
+      "opennt45": "4A2A6E5E6C6E7172CB3FEA4BB9035A18C7C5A292618B9EB507B71AE9F7D76856"
+    },
+    "wow32/wmmedia.c": {
+      "current": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08",
+      "opennt": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08",
+      "opennt45": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    "wow16/mmsystem/mci.c": {
+      "current": "30B8B5274DCEA32EA205496DAF59858150C9B3C67BD94727981B86AF515B1C06",
+      "opennt": "30B8B5274DCEA32EA205496DAF59858150C9B3C67BD94727981B86AF515B1C06",
+      "opennt45": "30B8B5274DCEA32EA205496DAF59858150C9B3C67BD94727981B86AF515B1C06"
+    },
+    "wow16/mmsystem/init.c": {
+      "current": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D",
+      "opennt": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D",
+      "opennt45": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D"
+    }
+  },
+  "object_sha256": "CA8309FB8DB04C1E1E85BA7EEB471E9A4E770E3799F307BA32105F500C2D5764",
+  "symbol_table": [
+    "",
+    "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmmstru2.obj:     file format pe-i386",
+    "",
+    "SYMBOL TABLE:",
+    "[  0](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x010487f9 @comp.id",
+    "[  1](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x80010191 @feat.00",
+    "[  2](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000003 @vol.md",
+    "[  3](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .drectve",
+    "AUX scnlen 0x2f nreloc 0 nlnno 0",
+    "[  5](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug$S",
+    "AUX scnlen 0x9c nreloc 0 nlnno 0",
+    "[  7](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrAddOpenNamedPipeInfo",
+    "[  8](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrRemoveOpenNamedPipeInfo",
+    "[  9](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrReadNamedPipe",
+    "[ 10](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrWriteNamedPipe",
+    "[ 11](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrCancelPipeIo",
+    "[ 12](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrIsNamedPipeName",
+    "[ 13](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrIsNamedPipeHandle",
+    "[ 14](sec  0)(fl 0x00)(ty    0)(scl   2) (nx 0) 0x00000004 _VrConvertLocalNtPipeName",
+    "[ 15](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .chks64",
+    "AUX scnlen 0x18 nreloc 0 nlnno 0",
+    "",
+    ""
+  ],
+  "selected_deps": [
+    "obj/wmmstru2.obj: #deps 126, deps mtime 8147760940071598 (VALID)",
+    "../../../../src/mvdm/wow32/precomp.h",
+    "../../../../src/mvdm/wow32/wmmstruc.h"
+  ]
+}
