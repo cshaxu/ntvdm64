@@ -8,6 +8,8 @@ compositor; this is not evidence that the guest mouse driver is absent.
 The candidate adapts `src/app-softpc/compat/v7_pointer.c` from the sibling
 SoftPC checkout (SHA-256
 `1C0F8893DAC407575D00D40191A50CEBF2E267E1C75539FFB59CCF8E78B1F5B2`).
+The source file was clean at SoftPC commit
+`844c7e17964a93d731b7be4c2829ed4464f25efa` when rechecked.
 The worker owns the indexed surface, backing pixels and the bitmap lock.
 Original V7 register and guest behavior remain in place. The source mirror
 changes are marked `VIDEO7-POINTER-ENABLE` (operator precedence) and

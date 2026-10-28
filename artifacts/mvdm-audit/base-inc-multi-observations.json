@@ -1,0 +1,1142 @@
+{
+  "result": "pass",
+  "base": "11c1c5abf",
+  "pending_cohort": 141,
+  "selected_headers": 30,
+  "nonselected_headers_still_pending": 111,
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/inc/cga.h",
+      "sha256": "683848966F4B5CB5667B9AE0AE140D9E08ADCB62060BC77695DB844C34B71B0B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:23c378e0b59f16b0e49f;SRC:b18f32890ee9db48aa99",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/cga.h",
+          "source_sha256": "683848966F4B5CB5667B9AE0AE140D9E08ADCB62060BC77695DB844C34B71B0B",
+          "translation_unit": "keymouse_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 27,
+          "selected_text_sha256": "11460294E771B53554EC80111C699C3BB63AE427C2678A0841750EE423983324",
+          "selected_excerpt": "typedef union | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/cga.h",
+          "source_sha256": "683848966F4B5CB5667B9AE0AE140D9E08ADCB62060BC77695DB844C34B71B0B",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 27,
+          "selected_text_sha256": "11460294E771B53554EC80111C699C3BB63AE427C2678A0841750EE423983324",
+          "selected_excerpt": "typedef union | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/cga.h",
+          "source_sha256": "683848966F4B5CB5667B9AE0AE140D9E08ADCB62060BC77695DB844C34B71B0B",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 27,
+          "selected_text_sha256": "11460294E771B53554EC80111C699C3BB63AE427C2678A0841750EE423983324",
+          "selected_excerpt": "typedef union | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/cmos.h",
+      "sha256": "EF4DAE92C641B3DBEB7AAAB67C3F49E1DA9D01D2473D2B96FBECE0121B235F99",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cmos.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:b78a0b6053edc79cb429;SRC:f40869ecc533311f74b3",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/cmos.h",
+          "source_sha256": "EF4DAE92C641B3DBEB7AAAB67C3F49E1DA9D01D2473D2B96FBECE0121B235F99",
+          "translation_unit": "bios_rtc_bios",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 17,
+          "selected_text_sha256": "F0563C57998452F1C27A37F49DF762D2E589CEFA2CB0729D7F073A0522A9864C",
+          "selected_excerpt": "extern void cmos_init (void); | extern void cmos_io_attach (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/cntlbop.h",
+      "sha256": "B14316FBD29FEE3D582CD88C0B869E46EA01C41964FC1A4BFCA87742DB2A09CB",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cntlbop.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:238f525f21f332b296ec;SRC:a94c2036fab223c4a78b",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/cntlbop.h",
+          "source_sha256": "B14316FBD29FEE3D582CD88C0B869E46EA01C41964FC1A4BFCA87742DB2A09CB",
+          "translation_unit": "bios_bios",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 7,
+          "selected_text_sha256": "6F487B958B61F2C2A6698D602AB8232927C31C2FC0130868CC75B2B59B7934D1",
+          "selected_excerpt": "typedef struct | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/cpu.h",
+      "sha256": "C368CCEAFA5739F4592ECC1E62E4F6D02B788B0772DBD0A8F7E09C8C7C1CECBE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5a0743b6b7764afc00da;SRC:b8b6fd82ffb0bdcca89f",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/cpu.h",
+          "source_sha256": "C368CCEAFA5739F4592ECC1E62E4F6D02B788B0772DBD0A8F7E09C8C7C1CECBE",
+          "translation_unit": "bios_bios",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 115,
+          "selected_text_sha256": "F7B68D0829AAABB6A7780A3CB71D32C9DDCDB79E960F89890AE556062941462F",
+          "selected_excerpt": "extern void host_set_hw_int (void); | extern void host_clear_hw_int (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/egagraph.h",
+      "sha256": "20C58D8FB126135214410B44CDA85A9FB57C7644088E820CE979AD37E7681A39",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egagraph.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:75cc60b6cf5e9924804f;SRC:c64d75c48aefba7cfd15",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/egagraph.h",
+          "source_sha256": "20C58D8FB126135214410B44CDA85A9FB57C7644088E820CE979AD37E7681A39",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 60,
+          "selected_text_sha256": "F838708BF8C4E4F74CEBB2E1422C2E896C5B2E09939446B4319A2DFC6550DAB4",
+          "selected_excerpt": "typedef\tunion { | IU8\tas_byte;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/egagraph.h",
+          "source_sha256": "20C58D8FB126135214410B44CDA85A9FB57C7644088E820CE979AD37E7681A39",
+          "translation_unit": "video_v7_ports",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 60,
+          "selected_text_sha256": "F838708BF8C4E4F74CEBB2E1422C2E896C5B2E09939446B4319A2DFC6550DAB4",
+          "selected_excerpt": "typedef\tunion { | IU8\tas_byte;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/egagraph.h",
+          "source_sha256": "20C58D8FB126135214410B44CDA85A9FB57C7644088E820CE979AD37E7681A39",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 60,
+          "selected_text_sha256": "F838708BF8C4E4F74CEBB2E1422C2E896C5B2E09939446B4319A2DFC6550DAB4",
+          "selected_excerpt": "typedef\tunion { | IU8\tas_byte;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/egamode.h",
+      "sha256": "56C76D5816DD61EBC92666504E7C530A85F30A201C9D0D317056BFC3D0D4C807",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egamode.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:4450ab9f929e1d821a8c;SRC:f0fceed54e1ef6a8809b",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/egamode.h",
+          "source_sha256": "56C76D5816DD61EBC92666504E7C530A85F30A201C9D0D317056BFC3D0D4C807",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 3,
+          "selected_text_sha256": "91312880F5CE69F3DD59495FF69BF393603F7438FE6D87434C58A9659A2F2DA0",
+          "selected_excerpt": "extern\tIBOOL\t(*choose_display_mode)(); | extern\tIBOOL\tchoose_ega_display_mode();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/egaports.h",
+      "sha256": "9258473BC4F8C375852C51EA8D7EB71A0163E503BD371F779B78EEB6227146AF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaports.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:1ee2e81b330715b12f08;SRC:426e1ac780b30e8c7ffb",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/egaports.h",
+          "source_sha256": "9258473BC4F8C375852C51EA8D7EB71A0163E503BD371F779B78EEB6227146AF",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "7762C31E76D97183B42B2F14D643A96D59B9A80E2FF1158F597526F47F07ECE8",
+          "selected_excerpt": "extern void ega_write_init (void); | extern void ega_write_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/egaports.h",
+          "source_sha256": "9258473BC4F8C375852C51EA8D7EB71A0163E503BD371F779B78EEB6227146AF",
+          "translation_unit": "video_v7_ports",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "7762C31E76D97183B42B2F14D643A96D59B9A80E2FF1158F597526F47F07ECE8",
+          "selected_excerpt": "extern void ega_write_init (void); | extern void ega_write_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/egaports.h",
+          "source_sha256": "9258473BC4F8C375852C51EA8D7EB71A0163E503BD371F779B78EEB6227146AF",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "7762C31E76D97183B42B2F14D643A96D59B9A80E2FF1158F597526F47F07ECE8",
+          "selected_excerpt": "extern void ega_write_init (void); | extern void ega_write_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/egaread.h",
+      "sha256": "D7A32E28259B5C25146A9E83FEEAE102BE6815D937209A23C5CCF292AA1C0DAC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaread.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:eab2051fa204450338e4;SRC:f31a2fb8c0507dfbbbf6",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/egaread.h",
+          "source_sha256": "D7A32E28259B5C25146A9E83FEEAE102BE6815D937209A23C5CCF292AA1C0DAC",
+          "translation_unit": "video_v7_ports",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "2F79F0952C2FA0364D677E5330BE498B7383BFB3C3B4116CDB565C5A48027B9F",
+          "selected_excerpt": "extern void ega_read_init(void); | extern void ega_read_term(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/fla.h",
+      "sha256": "8C4947414BF23F36A15455AE03031D8AC907D4B55569F5E114790C45820F2F9E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\fla.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:43dd94afbea9439f6815;SRC:95ae1af6f1faa2ce86c7",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/fla.h",
+          "source_sha256": "8C4947414BF23F36A15455AE03031D8AC907D4B55569F5E114790C45820F2F9E",
+          "translation_unit": "system_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 5,
+          "selected_text_sha256": "3E8361630ED219959A49BFC5593683A6120BD533375945F7119CC1DF0C8848CE",
+          "selected_excerpt": "extern IBOOL fla_busy; | extern IBOOL fla_ndma;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/fla.h",
+          "source_sha256": "8C4947414BF23F36A15455AE03031D8AC907D4B55569F5E114790C45820F2F9E",
+          "translation_unit": "disks_gfi",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 5,
+          "selected_text_sha256": "3E8361630ED219959A49BFC5593683A6120BD533375945F7119CC1DF0C8848CE",
+          "selected_excerpt": "extern IBOOL fla_busy; | extern IBOOL fla_ndma;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/ga_defs.h",
+      "sha256": "853220F9C349FE6C9CA3A0C05A21CC7EA3E97B5E8F8F65CBB846890F87D500B3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ga_defs.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:2ca744baaf9fdf14baf5;SRC:788f1af817cb20843e3a",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/ga_defs.h",
+          "source_sha256": "853220F9C349FE6C9CA3A0C05A21CC7EA3E97B5E8F8F65CBB846890F87D500B3",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 19,
+          "selected_text_sha256": "F751F49486EA825E179E731B981B5BF53E73DA3BE851F5DEFA868ED901D163F0",
+          "selected_excerpt": "extern IHP Gdp; | extern unsigned long EasVal;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/ga_mark.h",
+      "sha256": "EF6896BC3D419EC7CD6C4946EBFC8862FEF20B30FFB8BDD0E291AA9F95799A9D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ga_mark.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:1bc3d493a26a7bfebdef;SRC:f9d2fb33dab8db387cef",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/ga_mark.h",
+          "source_sha256": "EF6896BC3D419EC7CD6C4946EBFC8862FEF20B30FFB8BDD0E291AA9F95799A9D",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 53,
+          "selected_text_sha256": "E9BA42653C18D51512CFFE8B6F5DB3E857C85655AFEE214E5EDF7252C9BBC417",
+          "selected_excerpt": "extern void _mark_byte_nch (IU32 eaOff); | extern void _mark_word_nch (IU32 eaOff);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/gfi.h",
+      "sha256": "AE7B3DC66F9D618A841068E0E730C79751A7E496E223CF1D01EF0C4505E54A9D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfi.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:18d63071c9b048becc1d;SRC:5d1da86a4f04c824e3e4",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/gfi.h",
+          "source_sha256": "AE7B3DC66F9D618A841068E0E730C79751A7E496E223CF1D01EF0C4505E54A9D",
+          "translation_unit": "disks_gfi",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 41,
+          "selected_text_sha256": "9D5AB6540C9D862C7983113B8607AA59380124FB1117AC16F23155E904A923D3",
+          "selected_excerpt": "typedef unsigned char FDC_CMD_BLOCK; | typedef unsigned char FDC_RESULT_BLOCK;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/gfitest.h",
+      "sha256": "A6C81D867EECED198C856C04E95F5606B10281149D22E39A1C6D21083B0CD75A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gfitest.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:7008383c743132ef8923;SRC:bddc4501be027f4c6817",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/gfitest.h",
+          "source_sha256": "A6C81D867EECED198C856C04E95F5606B10281149D22E39A1C6D21083B0CD75A",
+          "translation_unit": "disks_gfi",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 7,
+          "selected_text_sha256": "2C1759B8F1F0CD1315D48444D23603739AEDB3A92FDAA041BFA93D12D1C3D6FE",
+          "selected_excerpt": "extern int gfi_test_command (FDC_CMD_BLOCK * command_block, FDC_RESULT_BLOCK * result_block); | extern int gfi_test_drive_on (int drive);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/gvi.h",
+      "sha256": "C4DFBF2BB2D6E8D79E9FD607F6AB50B149A5EDB2768B25D2475002E2E9940716",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gvi.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:22ba4f281dffed06e15b;SRC:3188677de8095aac55b1",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/gvi.h",
+          "source_sha256": "C4DFBF2BB2D6E8D79E9FD607F6AB50B149A5EDB2768B25D2475002E2E9940716",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 59,
+          "selected_text_sha256": "A6B8BB04687700D6D17A0DBBE93128B9DCC02D2A7215789D63E9C7328B3B17A9",
+          "selected_excerpt": "extern\tvoid\tgvi_init (IU8 v_adapter); | extern\tvoid\tgvi_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/gvi.h",
+          "source_sha256": "C4DFBF2BB2D6E8D79E9FD607F6AB50B149A5EDB2768B25D2475002E2E9940716",
+          "translation_unit": "video_v7_ports",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 59,
+          "selected_text_sha256": "A6B8BB04687700D6D17A0DBBE93128B9DCC02D2A7215789D63E9C7328B3B17A9",
+          "selected_excerpt": "extern\tvoid\tgvi_init (IU8 v_adapter); | extern\tvoid\tgvi_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/gvi.h",
+          "source_sha256": "C4DFBF2BB2D6E8D79E9FD607F6AB50B149A5EDB2768B25D2475002E2E9940716",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 59,
+          "selected_text_sha256": "A6B8BB04687700D6D17A0DBBE93128B9DCC02D2A7215789D63E9C7328B3B17A9",
+          "selected_excerpt": "extern\tvoid\tgvi_init (IU8 v_adapter); | extern\tvoid\tgvi_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/gvi.h",
+          "source_sha256": "C4DFBF2BB2D6E8D79E9FD607F6AB50B149A5EDB2768B25D2475002E2E9940716",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 59,
+          "selected_text_sha256": "A6B8BB04687700D6D17A0DBBE93128B9DCC02D2A7215789D63E9C7328B3B17A9",
+          "selected_excerpt": "extern\tvoid\tgvi_init (IU8 v_adapter); | extern\tvoid\tgvi_term (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/host_nls.h",
+      "sha256": "59A01BEA1D8B7960F22093A61B4E0B1554393406B339DD182EF5DFF5B9E88BFC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_nls.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:317d3b4a5965faa45f2e;SRC:bcc1d32b7618c4065a6d",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/host_nls.h",
+          "source_sha256": "59A01BEA1D8B7960F22093A61B4E0B1554393406B339DD182EF5DFF5B9E88BFC",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "34831665158811684FF9562003FE075FD6B4123D3ACDC00568CBA68DD26BA963",
+          "selected_excerpt": "extern void  host_nls_get_msg \t\t(int msg_num, CHAR * msg_buff, int buff_len); | typedef struct {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/idetect.h",
+      "sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\idetect.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:3fec916657db12d6f5ed;SRC:4ee7fb6bca5b0e4abd7b",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "keymouse_keyba",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "system_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "host_nt_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/idetect.h",
+          "source_sha256": "204AA44F2D86E2A38ECCBFC0BFBCF838252B101B2B085992CC9FBF744D41B799",
+          "translation_unit": "comms_rs232_io",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "F5FB4D1C1DCC82D23C2DB2DD59981001BE2C0FA38E3578EB5E821D8EF1C835F7",
+          "selected_excerpt": "void    idetect(); | void    idle_set();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/keyba.h",
+      "sha256": "619A9BE301EB3A4CA8632D2F2459413E8285C4796E3DE35E20ABA2488AA7A0B9",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\keyba.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5fcd4adea40ab0ff10e4;SRC:db6eb0b4722d617b1b3b",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/keyba.h",
+          "source_sha256": "619A9BE301EB3A4CA8632D2F2459413E8285C4796E3DE35E20ABA2488AA7A0B9",
+          "translation_unit": "keymouse_keyba",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 9,
+          "selected_text_sha256": "218E76D97A6B68F60F2E91958D5360998B0A9602A76B71261F00768E77F12342",
+          "selected_excerpt": "extern void kbd_inb (IU16 port, IU8 * val); | extern void kbd_outb (IU16 port, IU8 val);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/keyboard.h",
+      "sha256": "1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\keyboard.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5f05c1b9d26992645737;SRC:844c239f62d03468b023",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/keyboard.h",
+          "source_sha256": "1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E",
+          "translation_unit": "keymouse_keyba",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 10,
+          "selected_text_sha256": "69EED1E7D1E99724B1C92E235117B5AF4B18DF94F1A1734D9E19A3D268191ED0",
+          "selected_excerpt": "typedef struct | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/mouse.h",
+      "sha256": "F63C726698057991EEFF3B172C4B4BDD7E5948E00BFFE15782C37293A21132CE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mouse.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:3510f34922fb8631758c;SRC:71010b6b9ebee7d6d5d7",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/mouse.h",
+          "source_sha256": "F63C726698057991EEFF3B172C4B4BDD7E5948E00BFFE15782C37293A21132CE",
+          "translation_unit": "keymouse_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 5,
+          "selected_text_sha256": "04EC59F267D8554A3A2AA44E0E63BB17D408B19B609FA8A89E9BE011210C309F",
+          "selected_excerpt": "extern void mouse_init (void); | extern void mouse_inb (IU16 port, IU8 * value);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/mouse_io.h",
+      "sha256": "6387D3317FAAA0AB35C3652ABC52283601A996BCB0F3019234A2CDB246A6662A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\mouse_io.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:944a15d4dabf0a26f317;SRC:e2a9381e6fa7e570b5ef",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/mouse_io.h",
+          "source_sha256": "6387D3317FAAA0AB35C3652ABC52283601A996BCB0F3019234A2CDB246A6662A",
+          "translation_unit": "keymouse_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 171,
+          "selected_text_sha256": "9408884A7273A3B9502A39A74D0A0EEDF21AEFC5E8F63AB75E75CC4B5191D648",
+          "selected_excerpt": "extern IBOOL mouse_tester(); | typedef IU32 MOUSE_BIT_ADDRESS;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/mouse_io.h",
+          "source_sha256": "6387D3317FAAA0AB35C3652ABC52283601A996BCB0F3019234A2CDB246A6662A",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 171,
+          "selected_text_sha256": "9408884A7273A3B9502A39A74D0A0EEDF21AEFC5E8F63AB75E75CC4B5191D648",
+          "selected_excerpt": "extern IBOOL mouse_tester(); | typedef IU32 MOUSE_BIT_ADDRESS;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/ppi.h",
+      "sha256": "7967AE65E76CB00E58F350E87CD115B6ED7A97C81FF96E3B528F9740D3378612",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:745acc9448c244ee527b;SRC:ddd3563243fec0f4afe0",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/ppi.h",
+          "source_sha256": "7967AE65E76CB00E58F350E87CD115B6ED7A97C81FF96E3B528F9740D3378612",
+          "translation_unit": "keymouse_keyba",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 3,
+          "selected_text_sha256": "2CEC08707DFB3331A086D530AE1FF0E7E95C00C902E9C4F6EEF0D643BAF8A353",
+          "selected_excerpt": "extern void ppi_init(void); | extern void ppi_inb(IU16,IU8 *);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/quick_ev.h",
+      "sha256": "C59FEC315058B2CC03394D02D9C3756350357F7EB8CB48A541E56AAE1B7939A2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\quick_ev.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5a57cd352f2c833ea5a3;SRC:9c61066887b81f5376e2",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/quick_ev.h",
+          "source_sha256": "C59FEC315058B2CC03394D02D9C3756350357F7EB8CB48A541E56AAE1B7939A2",
+          "translation_unit": "keymouse_keyba",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "576BFE367FAAEBC6059DF47DD61CC3D6E8D7E1C5A3D7D1A2025A567E6C2D04B0",
+          "selected_excerpt": "typedef void (*Q_CALLBACK_FN) (long parm); | extern void q_event_init (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/quick_ev.h",
+          "source_sha256": "C59FEC315058B2CC03394D02D9C3756350357F7EB8CB48A541E56AAE1B7939A2",
+          "translation_unit": "system_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "576BFE367FAAEBC6059DF47DD61CC3D6E8D7E1C5A3D7D1A2025A567E6C2D04B0",
+          "selected_excerpt": "typedef void (*Q_CALLBACK_FN) (long parm); | extern void q_event_init (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/quick_ev.h",
+          "source_sha256": "C59FEC315058B2CC03394D02D9C3756350357F7EB8CB48A541E56AAE1B7939A2",
+          "translation_unit": "host_nt_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 11,
+          "selected_text_sha256": "576BFE367FAAEBC6059DF47DD61CC3D6E8D7E1C5A3D7D1A2025A567E6C2D04B0",
+          "selected_excerpt": "typedef void (*Q_CALLBACK_FN) (long parm); | extern void q_event_init (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/rs232.h",
+      "sha256": "80DDF84CDDE4D7E5544210A489A103B2850A38F9F3A285199EB07AC8DE4E7779",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rs232.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:1cf9048c8fe0fc3c4a06;SRC:a7c7cf70d1dd2b9fa579",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/rs232.h",
+          "source_sha256": "80DDF84CDDE4D7E5544210A489A103B2850A38F9F3A285199EB07AC8DE4E7779",
+          "translation_unit": "comms_rs232_io",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 90,
+          "selected_text_sha256": "E5B3851318EC3BAAA464E9B4762C1DF143F5CD062949DE55AEB33777DAE519AA",
+          "selected_excerpt": "typedef IU8 BUFFER_REG; | typedef union {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/rtc_bios.h",
+      "sha256": "EF200BC2174E6BDA4010095C1E7615E55A57EEAAA6A7F37F2484AFA435414F13",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rtc_bios.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:9560b227da5774ae6103;SRC:b67ae06dc1baee2e8398",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/rtc_bios.h",
+          "source_sha256": "EF200BC2174E6BDA4010095C1E7615E55A57EEAAA6A7F37F2484AFA435414F13",
+          "translation_unit": "bios_rtc_bios",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 7,
+          "selected_text_sha256": "9BD991A7ECD24E239127185C7DEC2E816EB7C406638C1A7257D111AF5AFCF9DF",
+          "selected_excerpt": "typedef\tunion\t{ | IU32\ttotal;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/timestmp.h",
+      "sha256": "B7F26A48BC185445A4A30BDC3CC3DB597DC706B0148B34EA97BE7F29C273EDF1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timestmp.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:8466d65e77d756130979;SRC:fac3c0c8ec0ff1ae1e45",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/timestmp.h",
+          "source_sha256": "B7F26A48BC185445A4A30BDC3CC3DB597DC706B0148B34EA97BE7F29C273EDF1",
+          "translation_unit": "host_nt_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "60CDC6E84FE967576CD637CB34F453053615AACBB71616541A28B46949E36263",
+          "selected_excerpt": "typedef struct { | IUH data[2];",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/tmstrobe.h",
+      "sha256": "218C4F4841DA5180D2140C1179A555DD4B33BDFEBF04FE76B3A0F245E17F6CA4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\tmstrobe.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:86654f1acabe88949755;SRC:e9ad6f486730084fd128",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/tmstrobe.h",
+          "source_sha256": "218C4F4841DA5180D2140C1179A555DD4B33BDFEBF04FE76B3A0F245E17F6CA4",
+          "translation_unit": "host_nt_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 2,
+          "selected_text_sha256": "BBCC7C1F6A45F181E05AF961C9ABB1910C315F985E1EE528F72A2DE27F909D6F",
+          "selected_excerpt": "extern\tvoid time_strobe(); | extern\tvoid callback();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/trace.h",
+      "sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\trace.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:873529275c92a97f13b0;SRC:f52fa5fc67f3f525fdab",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "keymouse_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "system_ica",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "system_timer",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "disks_gfi",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/trace.h",
+          "source_sha256": "D70092A47D833C0EC3D859EBE7963FEB374F5F0ABB9288A03F9FFEA7198B275F",
+          "translation_unit": "comms_rs232_io",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 6,
+          "selected_text_sha256": "77FF7123BE97147C55EE5561F3433CA63D8EF96BA0EC1C993A6C734181B8FE3C",
+          "selected_excerpt": "extern void trace(char *, int); | extern void trace_init(void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/vgaports.h",
+      "sha256": "7D2C9CEADD144EA014757549AB83E8FF8E28B6E92C11F0CD379119D07C0BD2F2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:9dfa2f52e96c7afa762e;SRC:e097e630f9d2800b4649",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/vgaports.h",
+          "source_sha256": "7D2C9CEADD144EA014757549AB83E8FF8E28B6E92C11F0CD379119D07C0BD2F2",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 793,
+          "selected_text_sha256": "80C8FEEF715351B5C452CBE9B255C208CA42CD9BFB3D081287506187A79DCC36",
+          "selected_excerpt": "typedef\tunion | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/vgaports.h",
+          "source_sha256": "7D2C9CEADD144EA014757549AB83E8FF8E28B6E92C11F0CD379119D07C0BD2F2",
+          "translation_unit": "video_v7_ports",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 793,
+          "selected_text_sha256": "80C8FEEF715351B5C452CBE9B255C208CA42CD9BFB3D081287506187A79DCC36",
+          "selected_excerpt": "typedef\tunion | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/video.h",
+      "sha256": "3E701855E34A3BA9834C84AB39DA5350FF375195AACEA0D79692FBA24E2B1059",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:352db2502141f3c7f49a;SRC:c26bf22eb17f941c9ed4",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/video.h",
+          "source_sha256": "3E701855E34A3BA9834C84AB39DA5350FF375195AACEA0D79692FBA24E2B1059",
+          "translation_unit": "keymouse_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 61,
+          "selected_text_sha256": "7A6EF254E87D91C5048F0E3AD2ABA93FA825461363BE7F4466673762AF2701AE",
+          "selected_excerpt": "extern IU8 Video_mode; | extern IU32 video_pc_low_regen,video_pc_high_regen;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/video.h",
+          "source_sha256": "3E701855E34A3BA9834C84AB39DA5350FF375195AACEA0D79692FBA24E2B1059",
+          "translation_unit": "video_gfx_updt",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 61,
+          "selected_text_sha256": "7A6EF254E87D91C5048F0E3AD2ABA93FA825461363BE7F4466673762AF2701AE",
+          "selected_excerpt": "extern IU8 Video_mode; | extern IU32 video_pc_low_regen,video_pc_high_regen;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/video.h",
+          "source_sha256": "3E701855E34A3BA9834C84AB39DA5350FF375195AACEA0D79692FBA24E2B1059",
+          "translation_unit": "host_nt_graph",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 61,
+          "selected_text_sha256": "7A6EF254E87D91C5048F0E3AD2ABA93FA825461363BE7F4466673762AF2701AE",
+          "selected_excerpt": "extern IU8 Video_mode; | extern IU32 video_pc_low_regen,video_pc_high_regen;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/inc/video.h",
+          "source_sha256": "3E701855E34A3BA9834C84AB39DA5350FF375195AACEA0D79692FBA24E2B1059",
+          "translation_unit": "host_nt_mouse",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 61,
+          "selected_text_sha256": "7A6EF254E87D91C5048F0E3AD2ABA93FA825461363BE7F4466673762AF2701AE",
+          "selected_excerpt": "extern IU8 Video_mode; | extern IU32 video_pc_low_regen,video_pc_high_regen;",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/virtual.h",
+      "sha256": "D4576F40B4C22A3F83BBB76CD07DB800275C0C61154983966B67EA3AAFBBA976",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\virtual.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:4ee6144cfd22210e14c3;SRC:957ea01b77d3bfadd293",
+      "selections": [
+        {
+          "relative_path": "softpc.new/base/inc/virtual.h",
+          "source_sha256": "D4576F40B4C22A3F83BBB76CD07DB800275C0C61154983966B67EA3AAFBBA976",
+          "translation_unit": "bios_bios",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 8,
+          "selected_text_sha256": "DB16FC1D5F7ACCFD6FC99916A7D1652C573CA2E11CD4DC684C70C02AE72C5607",
+          "selected_excerpt": "typedef void (*NIDDB_CR_CALLBACK) (IHP * orig_handle); | typedef void (*NIDDB_TM_CALLBACK) (void);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ],
+      "original_text_retained_percent": "100"
+    }
+  ],
+  "units": [
+    {
+      "unit": "bios_bios",
+      "sha256": "9D539AEB35A2D9533658A18C2D3FAF86EDE519C11D8A4D176F87B85D44DD85F0",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/bios_bios.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /DMONITOR /O2 /Foobj/bios/bios.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/bios.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /DMONITOR /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/bios_bios.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/bios.c"
+    },
+    {
+      "unit": "bios_rtc_bios",
+      "sha256": "7187BE2604D2DA2A3124A376A4020013B948CC5B381C13EFEED9673E11D9C43C",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/bios_rtc_bios.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/bios/rtc_bios.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/rtc_bios.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/bios_rtc_bios.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/rtc_bios.c"
+    },
+    {
+      "unit": "keymouse_keyba",
+      "sha256": "1D6FDEE463A52E35993D51B3A02DF9FEAB0F6AD9B7A905AC4DB2984BCA02B618",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/keymouse_keyba.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/keymouse/keyba.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/keyba.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/keymouse_keyba.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/keyba.c"
+    },
+    {
+      "unit": "keymouse_mouse",
+      "sha256": "29A76A64A70CBC0A84E40C248B3DFBA0C9A6D38F77F14F183118A057C7111401",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/keymouse_mouse.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/keymouse/mouse.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/mouse.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/keymouse_mouse.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/mouse.c"
+    },
+    {
+      "unit": "system_ica",
+      "sha256": "73FD3090F6816F20E8751F3E5ECEDF9B6E84B086E8048647359AF7440B9E2282",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/system_ica.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/system/ica.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/ica.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/system_ica.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/ica.c"
+    },
+    {
+      "unit": "system_timer",
+      "sha256": "C4451BD9C7C88F795BB73F8B0DE81F6F33DB240D1423FF14EE7F5406BA7E32C8",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/system_timer.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/system/timer.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/timer.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/system_timer.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/timer.c"
+    },
+    {
+      "unit": "disks_gfi",
+      "sha256": "9C6A28CE81D2D8ABA3464664C9436FD59FF1220E4B6564252878EE47E02CB5CC",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/disks_gfi.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/disks/gfi.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/disks_gfi.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi.c"
+    },
+    {
+      "unit": "video_gfx_updt",
+      "sha256": "EAC26999F2C53245E0E32FC0285FB4DC070DA8C2B181AAE77CAB410F084E7CF7",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/video_gfx_updt.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated\" /O2 /Foobj/video/gfx_updt.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/gfx_updt.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/video_gfx_updt.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/gfx_updt.c"
+    },
+    {
+      "unit": "video_v7_ports",
+      "sha256": "992D78E9BCBCC32E811C5A6C66F6992C5E25F25506E90671E079BF47C5124B6B",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/video_v7_ports.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated\" /O2 /Foobj/video/v7_ports.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/v7_ports.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /I \"O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/video_v7_ports.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/v7_ports.c"
+    },
+    {
+      "unit": "host_nt_timer",
+      "sha256": "67121274C679A4BB840B1F4B244A617D6E8AEA728809730D6C09F5017F8A212B",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_timer.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /FI \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc/ntexapi.h\" /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/thread_start_compat.h\" /O2 /Foobj/host/nt_timer.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_timer.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /FI \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc/ntexapi.h\" /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/thread_start_compat.h\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_timer.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_timer.c"
+    },
+    {
+      "unit": "host_nt_graph",
+      "sha256": "CD8E81DA43382D561810E6AF6B0357B9D44AFB38A2494E33985CDAFA1D343BE6",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_graph.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Foobj/host/nt_graph.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_graph.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_graph.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_graph.c"
+    },
+    {
+      "unit": "host_nt_mouse",
+      "sha256": "797EE00FE4B1B386CCACACAA2E606583F0A31ECBE06DB1011C1604A448F9D1B9",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_mouse.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Foobj/host/nt_mouse.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_mouse.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/host_nt_mouse.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_mouse.c"
+    },
+    {
+      "unit": "comms_rs232_io",
+      "sha256": "E77B4C55C9E289E2032A4AE43841BADDDA4210789B0E84F9D03304E4655DE433",
+      "output": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/comms_rs232_io.i",
+      "original_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /Foobj/comms/rs232_io.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/rs232_io.c",
+      "preprocess_command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\base-inc-multi-r68/comms_rs232_io.i\" O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/rs232_io.c"
+    }
+  ],
+  "deps_sha256": "A16F86C81B801D2F8C298EFEAC08B16C90BD744C9F670CF799B101CC0DB42A5C",
+  "tool_sha256": "7EF20518B07B2394C6BE7F13F7A07B7AD4176721C7B7B4BE152049D96E1E15F6",
+  "scope": "Thirteen selected device/video preprocessing contexts; not full ABI, lifecycle or behavior proof",
+  "cache_inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\bios.obj",
+      "Hash": "8D6A49949BE5318A23A9E74E654FC2829D841A00FE345A346B074A96D3B81FD9"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\rtc_bios.obj",
+      "Hash": "8D8E9E8688DB14B8038FE20D9F6804D17A7CAA9F1F84C796B10198B04D8C244A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\keymouse\\keyba.obj",
+      "Hash": "E20D49B777AE32B2AFF406E4C8CE6AF298A0134A9EEAEF1169A6E28CA585DFBD"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\keymouse\\mouse.obj",
+      "Hash": "0B65378044695511D31FF826B3994E2555B632332D800FE0B6D4AFD60CD36D8F"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\ica.obj",
+      "Hash": "400DE99034F40211C34EAEC7734AE5F7245285566D4CFB573BFFAA5392105E43"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\timer.obj",
+      "Hash": "0933FBD30FCF8F2C05993D6F440F9554BBC774C551E38CCFDAFC2D9D6C2FE8B7"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi.obj",
+      "Hash": "70AF076AC92CD039053FBE5806CC4BC62DFAFEF20D80B0981FB7B5538825295A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\video\\gfx_updt.obj",
+      "Hash": "BE88DE85909AFF3D70C89C698C2B4A44774E72A8BE1CA87799591597A1DF3425"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\video\\v7_ports.obj",
+      "Hash": "82F1C8557F8A08389A0DF758DD5F01D43EA5A5F738399AEEE6791A5470ED9F6A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_timer.obj",
+      "Hash": "873A7BF12DAAFAFAC1177DE203E709054870CED7E07874946EFE63B602737815"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_graph.obj",
+      "Hash": "5B457B1EBEDF5145EC6BCE3BCD373642538AEC2B57FF24CF76DF6795D62A7F8D"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_mouse.obj",
+      "Hash": "0BB8CA4E37C836582C0B1B53A95267D55560626FF780EB327BE83E9B4F2B29BB"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\comms\\rs232_io.obj",
+      "Hash": "26501C5F4B2B565ABBE51195B952C2AF0F66F8462B9FC4B23AF3ABA37671CD62"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "Hash": "33172BD6AB0729062761F3E51987F029998DE7AD92705A701882EF9B3DF79F72"
+    }
+  ]
+}
