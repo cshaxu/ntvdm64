@@ -1,6 +1,9 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 51 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 53 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [cvidc-sascdef](shard-0/cvidc-sascdef-review.md): [observer](shard-0/cvidc-sascdef-observer.py), [receipt](shard-0/cvidc-sascdef-observations.json).
+- [win16-driver-resource](shard-2/win16-driver-resource-review.md): [observer](shard-2/win16-driver-resource-observer.py), [receipt](shard-2/win16-driver-resource-observations.json).
 
 - [ccpu-stack-instruction-image](shard-1/ccpu-stack-instruction-image-review.md): [observer](shard-1/ccpu-stack-instruction-image-observer.py), [receipt](shard-1/ccpu-stack-instruction-image-observations.json).
 - [win16-oleclient-guest](shard-2/win16-oleclient-guest-review.md): [observer](shard-2/win16-oleclient-guest-observer.py), [receipt](shard-2/win16-oleclient-guest-observations.json).

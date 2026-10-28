@@ -1,0 +1,77 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/drivers/display/config.LST",
+      "hashes": [
+        "46504B4494FF94A94C152D579B46337325A620B455185DB0B4A58174902B4465",
+        "",
+        ""
+      ],
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "0"
+    },
+    {
+      "path": "wow16/drivers/display/display.rc",
+      "hashes": [
+        "34E98ADEA5F0BC3C3723E6C07C5A632AD507787F28CACC403860C53C4A064EBB",
+        "34E98ADEA5F0BC3C3723E6C07C5A632AD507787F28CACC403860C53C4A064EBB",
+        "34E98ADEA5F0BC3C3723E6C07C5A632AD507787F28CACC403860C53C4A064EBB"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/drivers/display/DISPLAY.RES",
+      "hashes": [
+        "C7B404B5F471B15EB384865AB67442F20786A90A02E16D833F1296B132FF6720",
+        "C7B404B5F471B15EB384865AB67442F20786A90A02E16D833F1296B132FF6720",
+        "C7B404B5F471B15EB384865AB67442F20786A90A02E16D833F1296B132FF6720"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/drivers/keyboard/keyboard.rcv",
+      "hashes": [
+        "85B7A4631DCEBAD2E0F195E1EA98018C82CB807799F9652C3B7BE79DEA73C6FB",
+        "85B7A4631DCEBAD2E0F195E1EA98018C82CB807799F9652C3B7BE79DEA73C6FB",
+        "85B7A4631DCEBAD2E0F195E1EA98018C82CB807799F9652C3B7BE79DEA73C6FB"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\display\\makefile",
+      "sha256": "C234E06726D09F113BCE364366B704446FB7EBE5E4C549E8F89CCBECBFA50E19"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\keyboard\\makefile",
+      "sha256": "54658EB605886A0F11EF8F3D351CF3E04DB0A63152413774CC5CC1637ACA4CF3"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\keyboard\\keyboard.rc",
+      "sha256": "85AE02330E6FA0D472A448E3186D75B3AAA11CDFC68E71916FDAD9CABCF65DF0"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "images": [
+    {
+      "name": "VGA.DRV",
+      "archive_member": "WINNT/SYSTEM32/VGA.DRV",
+      "archive_sha256": "943C2E3499E64157D11C81C85DB7586E13AF623044880876B390FBFCFAC3CFB6",
+      "source_sha256": "943C2E3499E64157D11C81C85DB7586E13AF623044880876B390FBFCFAC3CFB6",
+      "installed_sha256": "943C2E3499E64157D11C81C85DB7586E13AF623044880876B390FBFCFAC3CFB6"
+    },
+    {
+      "name": "KEYBOARD.DRV",
+      "archive_member": "WINNT/SYSTEM32/KEYBOARD.DRV",
+      "archive_sha256": "C34D7D8D71453DD7567C6DB28958A0D4D11E4B198CFC436F4D430D93A5A3584C",
+      "source_sha256": "C34D7D8D71453DD7567C6DB28958A0D4D11E4B198CFC436F4D430D93A5A3584C",
+      "installed_sha256": "C34D7D8D71453DD7567C6DB28958A0D4D11E4B198CFC436F4D430D93A5A3584C"
+    }
+  ],
+  "scope": "Historical guest driver resource role and image identities, not runtime or image provenance"
+}

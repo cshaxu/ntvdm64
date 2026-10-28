@@ -1,0 +1,12 @@
+{
+  "source_sha256": {
+    "src\\mvdm\\softpc.new\\base\\cvidc\\sascdef.c": "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474",
+    "src\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c": "0ec6afc6e8fc2086639044d1adb3460edfe36b265c6b0cbfeb89391901870be9"
+  },
+  "manifest_sha256": "420da6efc08ca99c6b8190d0c6c283c204517cb43e379bb570bced65fd18c5c2",
+  "map_sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+  "selected_profile": "CCPU40",
+  "symbol_lines": [
+    "0003:000001b8       _cSasPtrs                  005b41b8     original-ccpu386:sasCdef.obj"
+  ]
+}
