@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "start": "2026-10-28T02:00:41.4414628Z",
+  "pid": 15396,
+  "command": "\"O:\\tmp\\n170\\tests\" --close-on-exit",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-guest\\baseline/pif-builder.exe"
+}

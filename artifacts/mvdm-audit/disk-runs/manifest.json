@@ -1,0 +1,962 @@
+[
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/build.stderr.txt"
+  },
+  {
+    "bytes": 31,
+    "sha256": "F944EC29ED5C56402BAD3F40566E25D9CAA796EFD944A1E02E57746D3764CA76",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/build.stdout.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/negative-abi.stderr.txt"
+  },
+  {
+    "bytes": 138,
+    "sha256": "83BB46DAE2499E3DAB2342AA0F9E213F61F04B2474EC39DB328C420BAF1C5E7B",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/negative-abi.stdout.txt"
+  },
+  {
+    "bytes": 4695,
+    "sha256": "D8121384018CA4AFC8EBF36E571740BF6FCE0D85F41DE94C28005D112E6BFDEE",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/result.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/run.stderr.txt"
+  },
+  {
+    "bytes": 55,
+    "sha256": "C1724B306B8AB05981DE06D9FA6C3720EB2FDCCBFBB8525EC77D2B383CA472E3",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/run.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "2D920337F245E6C6BA5ADAF613DF05FD7098C4E6FAADC447626FBD666116270A",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/supervisor.completion.json"
+  },
+  {
+    "bytes": 462,
+    "sha256": "3F113699D7A1703256C85C9AACCE75C32A3925ECF838CF21778A46106D91D448",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/supervisor.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/supervisor.stderr.txt"
+  },
+  {
+    "bytes": 4695,
+    "sha256": "D8121384018CA4AFC8EBF36E571740BF6FCE0D85F41DE94C28005D112E6BFDEE",
+    "path": "artifacts/mvdm-audit/disk-runs/gfi-object-contract/supervisor.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "08BB1E5770B17BC96EC79229736E1DB474E88F6C4BCC40B06273E343C73500E5",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "2FEDB51900CB0CD73B755065BF8580B2532A433C87797D01D2809C84934969DB",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/image.completion.json"
+  },
+  {
+    "bytes": 267,
+    "sha256": "49C84185F2DC2827FFE90EE855D19EA6A41874E0540D4BDD4D7E3CBBFB34DBB2",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/image.stderr.txt"
+  },
+  {
+    "bytes": 73,
+    "sha256": "71F3A601E8DC7AC4C5FAC7056AD015D70BB4BE7B86269AD47F743163939E088C",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "27071FDBB3B7624F9056C3923231EF135AA05C1A02D819710924450786F9C48B",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios.completion.json"
+  },
+  {
+    "bytes": 466,
+    "sha256": "D0BCD8D037ADBEE33EE4ED6F9C65CA232048690C280466E20B10480D5234CFD0",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios.stderr.txt"
+  },
+  {
+    "bytes": 5185,
+    "sha256": "17B283CCAACFF083500DED4A45FB09D18ED8C395953D53979AD4B1E32C5E3AEE",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios.stdout.txt"
+  },
+  {
+    "bytes": 361,
+    "sha256": "0714795D4A18340B798FD2BEE065E4F5DFE48B8FDF070A8476260426A44EBA88",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/process.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "3AAF31E34FE13E991DA9E44955AE2F33B5E41F8B349380673F480556D3F5EE75",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt.completion.json"
+  },
+  {
+    "bytes": 470,
+    "sha256": "549CB707617BA362D7AFBED78268CB7CD8E4011EB3DBE2D04096B99A4AAFC467",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt.stderr.txt"
+  },
+  {
+    "bytes": 3203,
+    "sha256": "74A0B329696D7B37926D1F76E92F207624237C4FF071E2E030F149D448123E1D",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt.stdout.txt"
+  },
+  {
+    "bytes": 1447,
+    "sha256": "541DE4E6878B379CCAE971A4E53FD0FEC08D918864DCEE7B20964928C6AC9331",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/stderr.txt"
+  },
+  {
+    "bytes": 592,
+    "sha256": "A3087BA639B160CE86BF263B1F4DAC8547DA651F9B858434F49538DA7FF1D0D5",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/stdout.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/build.stderr.txt"
+  },
+  {
+    "bytes": 31,
+    "sha256": "62AA50DB9890EB3D00488A23CB0851675086930FBDE51B2461F9CF406FCC3EEC",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/build.stdout.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/negative-abi.stderr.txt"
+  },
+  {
+    "bytes": 138,
+    "sha256": "3A937F1AA41A1A98DC5D7FC8DE9C93617F808E123C08F92ACACE18A551BF7A52",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/negative-abi.stdout.txt"
+  },
+  {
+    "bytes": 5185,
+    "sha256": "17B283CCAACFF083500DED4A45FB09D18ED8C395953D53979AD4B1E32C5E3AEE",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/result.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/run.stderr.txt"
+  },
+  {
+    "bytes": 55,
+    "sha256": "226EF948C2A19F5328A16A96D2D603A2A217457242E11B75416FE8FB642F6322",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/ios/run.stdout.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/build.stderr.txt"
+  },
+  {
+    "bytes": 33,
+    "sha256": "35161E8B4ED21B9532B8352D3BA819BDE5F9F47F13A32005964EB03A8E7C3F17",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/build.stdout.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/negative-abi.stderr.txt"
+  },
+  {
+    "bytes": 142,
+    "sha256": "E78CAD818D4DFCA3CC7D1FC44181F75991847136351E20D1C8C41ACF50E3DB1F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/negative-abi.stdout.txt"
+  },
+  {
+    "bytes": 3203,
+    "sha256": "74A0B329696D7B37926D1F76E92F207624237C4FF071E2E030F149D448123E1D",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/result.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/run.stderr.txt"
+  },
+  {
+    "bytes": 56,
+    "sha256": "BC978F712B93CF655E0502FE942D82A81BF11F53C6A48130B8D595512F643E6F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-owner-review/qevnt/run.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "66181A2EE4B84DB72E43372AF0D55134368A3DE62A79AA1A9FD581CBE6A31D80",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative.completion.json"
+  },
+  {
+    "bytes": 748,
+    "sha256": "8D7A141D7FA543C813210749EE0E61116A4D330840ECD5E7BAD5BC593A087DBD",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "9C765F494147F66E829A5FAF71384EC4EF44193E5D53676129D17E13228D38E3",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline.completion.json"
+  },
+  {
+    "bytes": 723,
+    "sha256": "143DF9141783332F6AAF484793F1B2D66445446B81B050394B855F63B5FB1234",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "684282E86DA681C7158AEFB067B396079B834467889734F2946E90863FEAF536",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative.completion.json"
+  },
+  {
+    "bytes": 765,
+    "sha256": "C83F95F4272C35960FD3BA4C1FD0D2F42A927E5BA3FDE583784A04FE7DDE44B7",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "E00FD1EA3A9F64683D2C5680CF9C5681FF8898C50772BA220D80B03A2A589C67",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate.completion.json"
+  },
+  {
+    "bytes": 739,
+    "sha256": "C82B307BF3ADAC3D5A0C0FE711F51738EBED8069F862D3516A5496A5DC513F85",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "212F82736B5CAE26854D63D9D09EC781BFC38203B0CBE3C8541BDF1F7A16E36F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/completion.json"
+  },
+  {
+    "bytes": 354,
+    "sha256": "C2441AAB06B191B639B51DB2CAA52431A2BE4AFC16B2D31CD8D0233ABAC3CF54",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/process.json"
+  },
+  {
+    "bytes": 1675,
+    "sha256": "79F9F7679C87A611BF9E97E1F789FA13209D4D4913093E235940F652483E8023",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/stderr.txt"
+  },
+  {
+    "bytes": 56,
+    "sha256": "AF32361FD7316E1287DE995899072DE6B1DA4FC521ADEE17847FD33F91E9F2D4",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/assemble.exit.txt"
+  },
+  {
+    "bytes": 443,
+    "sha256": "FA2E0B24AB3210A57ABB65C396747051DD24319596DC37FCF78AEC0B0075F6B4",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/exit.txt"
+  },
+  {
+    "bytes": 995,
+    "sha256": "B8213C983369F03946A2C9017E975CDE0481722235F626FA49C75DD8CE3F0D6A",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.exit.txt"
+  },
+  {
+    "bytes": 368,
+    "sha256": "8EFAB8DE52FB85853225A863B8EEF9934C5B3D78095AA538095FC5B8EDBEECD7",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.process.json"
+  },
+  {
+    "bytes": 704,
+    "sha256": "B328AE2F524BEBDB503D9C368DFA7A8A1C10A275AC27BF2446838B450F08F4DB",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "91F6EBC1012F3982373C22CDB0B87DAD398840890E5D2D61BFDDA3216D0A53AD",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 91,
+    "sha256": "5F6BBCD125D86E78396116ECF3971AC33BF173A0B69402A925C018CC17995B7D",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "BAA273AE6E037536C8F3CDB0BE67E067D32CE9F3058D6B3E67C0878C8AD97FB5",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-build.exit.txt"
+  },
+  {
+    "bytes": 588,
+    "sha256": "D64C90EC0AE60D93A421F6BDEC63F58E787F9BAAB726CA7C621B82003D1732E8",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 244,
+    "sha256": "36DF1C707C4E6890B617DBF1C3CC62B7359E4EF47353EF9B3A01D1E257C2B70E",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "A5285721BCF9DC9F89AABD28FE8B4EB62CDC53A7225B240F811E9B1987967D01",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/profile-inputs.csv"
+  },
+  {
+    "bytes": 111,
+    "sha256": "DDD15AF9DBB741C47EF0FAF0B7C04C9E88DC642BE8632D5282D264FAFC6F653F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "E6B6325BCA212AC81ADE227B63F9B41ECC37428434A8AE711A7F7B1CFAC38BA4",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "789289128D4C9E7570BCAC1D39FADA3137E4A941F6DD6D2D8BC32883BCB67EBE",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "35E685F5A604E630CC70525B1B91EBFE58B44BB82FF1886A60425EE029FAD600",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 483,
+    "sha256": "EAA714C21C55CE44C183B323809411EC11B642209ADBD7AFF896DED95C7579FF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/exit.txt"
+  },
+  {
+    "bytes": 1004,
+    "sha256": "03FA94C44BC010D7285604D82947783C4BA95357FE779DC727E48584817579B9",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 377,
+    "sha256": "E88A540B000D63F4F0DF993B0E31A6608645F281231BE4A229D27CD869013352",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "AE0DC4C81ED6EEDDC716D1484BD9B8C8859240496AFB235CEB95E7C8D869D13A",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "DB186D130FD7D0D7A950B160F36EEB04933A3090337A19629FC4BF717572CB64",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 80,
+    "sha256": "042873F7ED4D4C6F467903833D1FEB802189720432F3390FBA835A66315B1394",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "28CAFFBCF11F96D8F0A0232456C36D90985F1ACEA1CA7CAEB0FA99179878A415",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 606,
+    "sha256": "ACB426EB8E6E372826D66E8FE7458CD2B65FBDB128E4D6341BFD14B24A171128",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 253,
+    "sha256": "29101E1900277DDDA2811749ABDECB366A3B266A963FD4B612A5E02AFC991E18",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "B36093DEB67609DE61AA35A069D963209A92898EE3B93317371DD76B7C969743",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 89,
+    "sha256": "72B1C90A495A358DB8C969D9CDD5295C56CBA7707E19B26F847F0E9A7DD0B6E6",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "4DF54EE3434CABF9E061D20EF1805F8A6A0600F54CDF8C5EA9356410BCB7CB5D",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "15B791C5908EAE5E372E53704FC8D949478A2E722892EAE28D3EF4F81CF8081A",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "A94648E124BC3F7FB9293CF75DC53C88ACE16FE11786ACDC1FFD44D28AE8F204",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/baseline-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/assemble.exit.txt"
+  },
+  {
+    "bytes": 445,
+    "sha256": "53987C20A234431891FA7B59D99CDA47B4F20B5B01D3EA6A1A9800DB180E579F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/exit.txt"
+  },
+  {
+    "bytes": 996,
+    "sha256": "C8E744A4322F6D56E9E9673F22D43450C885A4D2FEC9597454D6FC409A84B149",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.exit.txt"
+  },
+  {
+    "bytes": 369,
+    "sha256": "59F45B58B52C27EFDD696295AEBB043EED721BF02F5DAFD7CD3DF8109FE42FA7",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "77F01C11B80D71F01E507C5BB5909B451D29AEA3E6900BF77E064BC2A759FDA5",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "606DCEC4E7EE8AD510FD2E8701460C0077D90A3ECA9A27966819CBE3107508FB",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 91,
+    "sha256": "5F6BBCD125D86E78396116ECF3971AC33BF173A0B69402A925C018CC17995B7D",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "52B8E64AF6F28A8E2D3D74AEDFCAB7B0F979A5EB3E4B5D948D009D647EC93230",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-build.exit.txt"
+  },
+  {
+    "bytes": 590,
+    "sha256": "C5195B268228819CB81BAC04A6CCFE355103778F254F1234FA19FBC598144CDF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 245,
+    "sha256": "14CD5287AC7E94790E822F0237462DA51E08579B4A4657AAD59139B861E7A263",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "9977096700267A3FF8CF8F74C06ACFB1D3C768CD6D846E2015EC4A2AD88E7ECE",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/profile-inputs.csv"
+  },
+  {
+    "bytes": 111,
+    "sha256": "DDD15AF9DBB741C47EF0FAF0B7C04C9E88DC642BE8632D5282D264FAFC6F653F",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/result.txt"
+  },
+  {
+    "bytes": 333,
+    "sha256": "CB15593D87E77C7DA9A3003B9F1597A69F5C84261C5F1A214201D137D3C2B390",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "03E830F4557216FEA11D44C4580FF1947B549F1F6B0DEFCE61CEF46904B91836",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "BDBA9600D2FAED1378FB4C3CBC488DE300D34A8D6668C22B9F3CA03076315B9A",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 483,
+    "sha256": "C90F3400671265ECC179D345B138DF06957DD93D466F93A9D88EC30198DF5311",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/exit.txt"
+  },
+  {
+    "bytes": 1005,
+    "sha256": "DD84055D7FCF17EFF6CFEA8B2FBC13D903DEED56674E1806356C8914D76B5415",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 378,
+    "sha256": "8B916117DF2B1EC301708C8C020604DC313CC3B495866FF9137F90174BF8E0E6",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.process.json"
+  },
+  {
+    "bytes": 704,
+    "sha256": "B68A76269A2F09F1D9E80BD4785A6B0266CC6DCC0A117AB4EB6B1F1979AACE28",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "DC6B917C9CA93E3DFABA7E2AA03CF3D8BC9DE2CBA455B059715362BCC3F2179A",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 80,
+    "sha256": "042873F7ED4D4C6F467903833D1FEB802189720432F3390FBA835A66315B1394",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "FAFCB4CA5EE79A15300F765A8E5CE99442154149C91AB716D1C65E73CBB8377C",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 608,
+    "sha256": "7CABAB6D9CF280A78B4DC2776CDA4C0778DF83A11E82FC937715248FEE248EBD",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 254,
+    "sha256": "C1062375F3210FD92986CA102AE83319E026E5E84C48EE22259595C2D829D163",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "D0862AD230513622D612F73996ED6145F8872E10384606665F090BFEE84C1E4E",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 89,
+    "sha256": "72B1C90A495A358DB8C969D9CDD5295C56CBA7707E19B26F847F0E9A7DD0B6E6",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "269F57095A68D1620B6088D9AA72AC61363C577CA7448E87EA1E07EFA478A2F9",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "C6EBFFFA0B578055D0A16AA2E9711315AC1C270BC99024E05E50A47382353947",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "026DB562C20C2535F847859A80BBFACEDA57D48C147BD66CD1788FE7E461D363",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-guest/candidate-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "3FC435E55F65BDB8A55A56EB7C2E183272AD06F451010996F281CAD93A168D49",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "09D1094F440AA31F7EAB65904EF910CA1F3B868371C85A1AFA54825BD6E36584",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/image.completion.json"
+  },
+  {
+    "bytes": 267,
+    "sha256": "01D5E4A02A4EAC0ADAFF8FF5D1BAC0B35557BC971D3E1FD5909C67C31B28B7DC",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/image.stderr.txt"
+  },
+  {
+    "bytes": 73,
+    "sha256": "71F3A601E8DC7AC4C5FAC7056AD015D70BB4BE7B86269AD47F743163939E088C",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "D99AE44991CC0D60F24E4EE53431E3DEBB5C53A906EB9E28AEA9C3560FB3E696",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/merge.completion.json"
+  },
+  {
+    "bytes": 270,
+    "sha256": "03343ED15E0CE4529030B320C627F8078F98A6BFC34888CE9CBB679C02A17709",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/merge.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/merge.stderr.txt"
+  },
+  {
+    "bytes": 383,
+    "sha256": "05F91A977EBE710876CAE0635DBDC19F328F5B2E2DFB389E8CD1DE6569C94EE2",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/merge.stdout.txt"
+  },
+  {
+    "bytes": 359,
+    "sha256": "72C40AE193FCC409ADB000FF5951BFE1485DDDB25023FAA6317F9906B725C495",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/process.json"
+  },
+  {
+    "bytes": 1130,
+    "sha256": "A646FD1B78E379A38029AF6DE116B016B87B77BF8A1298B96A01056B2418032E",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/stderr.txt"
+  },
+  {
+    "bytes": 456,
+    "sha256": "A4CC6C4EDB82B3F3BA8802007E33767274C6F9E31430E5F00A561BBA47D52724",
+    "path": "artifacts/mvdm-audit/disk-runs/disk-role-final/stdout.txt"
+  }
+]

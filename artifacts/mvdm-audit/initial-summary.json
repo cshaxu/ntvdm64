@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1568,
+    "pending": 1561,
     "excluded": 2634,
-    "partial": 429,
+    "partial": 436,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Complete original dummy_int leaf accepted; five original NT system integrations partial; generic CMOS alternative and prior PIC source revision excluded as physical roles only; no guest or runtime image changes."
+  "note": "Seven original disk source integrations partial with bounded object/guest evidence; three guarded remote/diagnostic profiles remain pending. No production source, guest or runtime image changed."
 }

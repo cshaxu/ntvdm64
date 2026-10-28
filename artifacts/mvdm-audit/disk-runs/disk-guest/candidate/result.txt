@@ -1,0 +1,1 @@
+PASS independent COM -> original CPU40 DiskReset owners; normal launcher exit; no original guest modification

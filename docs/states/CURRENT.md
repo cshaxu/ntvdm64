@@ -19,10 +19,10 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[system review](../../artifacts/mvdm-audit/system-native-role-review.md) adds eight
-roles, 77 image-bound functions and ten real-guest/oracle contracts.
-The ledger has 1,568 pending, 429 partial, 53 full and 2,634 excluded physical
-file roles. Only the complete no-state dummy leaf gains full status; no runtime image changed.
+[disk review](../../artifacts/mvdm-audit/disk-native-role-review.md) adds seven
+partial owners, 102 image-bound functions and four real-guest/oracle contracts.
+The ledger has 1,561 pending, 436 partial, 53 full and 2,634 excluded physical
+file roles. Three remote/diagnostic disk profiles remain pending; no runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1\" -Contract gfi -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract\"",
+  "pid": 9284,
+  "diagnostic_budget_seconds": 180,
+  "started": "2026-10-28T01:58:55.5021677Z"
+}

@@ -1,0 +1,18 @@
+{"result": "pass", "sources": 10, "functions": 102, "vector_slots": 47}
+      "diagnostic_budget_ms": 30000
+    }
+  ],
+  "checks": 70,
+  "callbacks": 78,
+  "fixture_sha256": "8B95B172082671CAF5B4700701F98E8FF21D46725B7E8D4326C6E09B06567684",
+  "finished": "2026-10-28T01:59:52.9117640Z"
+}
+      "diagnostic_budget_ms": 30000
+    }
+  ],
+  "checks": 37,
+  "callbacks": 8,
+  "fixture_sha256": "82565A0DAB2DF2DA48159A00D4D6662D9CCEE4725367FCB6724243D94B544590",
+  "finished": "2026-10-28T02:00:04.3778570Z"
+}
+PASS disk image and unchanged IOS/quick-event shared-runner controls

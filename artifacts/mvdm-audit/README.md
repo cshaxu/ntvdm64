@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-429 partial, 2,634 excluded physical file roles,
-53 full files (27 executable leaves and 26 declarations) and 1,568 pending.
+436 partial, 2,634 excluded physical file roles,
+53 full files (27 executable leaves and 26 declarations) and 1,561 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the system-provider checkpoint, not a prior snapshot's fixed counts.
+the disk-provider checkpoint, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -45,7 +45,11 @@ more roles through the original NT recipe, 77 mapped functions, ten real
 guest/oracle contracts and 24 native PIC assertions. Only the complete
 no-state dummy leaf becomes full; five devices remain partial and two
 alternative/revision files are excluded without excluding their capabilities.
-Its current gate is [delivery verification](system-native-delivery-verification.ps1).
+The [disk-provider review](disk-native-role-review.md) adds seven partial
+owners, 102 image-bound functions, 47 actual BIOS initializer targets, 433
+controlled GFI assertions and four real guest reset/oracle contracts. Three
+remote/diagnostic profiles remain pending; real-media lifecycles stay open.
+Its current gate is [delivery verification](disk-native-delivery-verification.ps1).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

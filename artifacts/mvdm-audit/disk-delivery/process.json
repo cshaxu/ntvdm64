@@ -1,0 +1,7 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 21048,
+  "diagnostic_budget_seconds": 240,
+  "started": "2026-10-28T02:04:18.3637750Z",
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\disk-native-delivery-verification.ps1\""
+}

@@ -41,6 +41,14 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
+The [disk-provider checkpoint](disk-native-role-review.md) leaves S12/S13
+the original BIOS/controller group: configured geometry and real read/write/
+verify/format, DMA/byte-word boundaries, command/result phases, interrupt and
+reset ordering, media/provider changes, failure and retirement. Keep the
+separate proven host-counter close transition. SLAVEPC serial/FDC transport
+and non-PROD diagnostic selection need explicit original-profile dispositions;
+all three remain pending rather than treating guarded code as lost capability.
+
 The [system-provider checkpoint](system-native-role-review.md) leaves S13 a
 finite device group: DMA byte/word transfers, masks, auto-init, decrement/page
 wrap, LIM and reset/failure; RTC alarm/calendar/format, register-C concurrency

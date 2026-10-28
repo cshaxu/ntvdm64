@@ -1,0 +1,7 @@
+{
+  "pid": 15148,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "diagnostic_budget_seconds": 180,
+  "started": "2026-10-28T01:59:38.9884992Z",
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\disk-image-observer.py\""
+}

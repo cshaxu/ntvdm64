@@ -1,0 +1,87 @@
+{
+  "started": "2026-10-28T01:58:56.2424073Z",
+  "owner_pid": 9284,
+  "result": "pass",
+  "contract": "gfi",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract\\gfi-object-contract.exe",
+  "inputs": [
+    {
+      "sha256": "4608279A4058E6D6C98062A89470B3161ED04316E5487C41239FAE552CD7CCDF",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1"
+    },
+    {
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+    },
+    {
+      "sha256": "DB2EB940F0451B9950A29E1F63B10E9A07E3E4E393AB9697FC5D42DEEF4A579A",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\gfi_object_contract_fixture.c"
+    },
+    {
+      "sha256": "0B332182C606CFEF8B0788B50866B9E13ACD389445A52F60F3CB65CAF8F916E6",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\disks\\gfi.c"
+    },
+    {
+      "sha256": "70AF076AC92CD039053FBE5806CC4BC62DFAFEF20D80B0981FB7B5538825295A",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi.obj"
+    },
+    {
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+    },
+    {
+      "sha256": "16008682AF1A1770658FA6C70797E7B92BBD041E44D23B8759B05F71A91564EB",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h"
+    },
+    {
+      "sha256": "C5B376F59D45DDB6CA36AA66E96E095203A261B125BD6A34247D6C88E98CB111",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\xt.h"
+    },
+    {
+      "sha256": "A181E9DDDDF9CBEEFF03B63F733D282455B2F21B578C6C9CF772BF726B41D064",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\bios.h"
+    },
+    {
+      "sha256": "6C12B5C1BD7102C46D3E5B86795DCCE8610E7B9ADAEAD907BA031E9F9BF40034",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\config.h"
+    },
+    {
+      "sha256": "AE7B3DC66F9D618A841068E0E730C79751A7E496E223CF1D01EF0C4505E54A9D",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\gfi.h"
+    },
+    {
+      "sha256": "C98B5DCE462644BE9D7EEFF4600FF8BED190B97111FD362469E7A3B3078BF820",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi_mpty.obj"
+    },
+    {
+      "sha256": "9E56716B323DB2E45AFB5D780C0A84693311D7BAF33E91518593F754D58843BB",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c"
+    }
+  ],
+  "runs": [
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\gfi_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi_mpty.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract\\gfi-object-contract.exe\" /link kernel32.lib\"",
+      "kind": "build",
+      "exit": 0,
+      "pid": 12676
+    },
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_GFI_EXPECT_TABLE_BYTES=4 /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\gfi_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\gfi-object-contract\\negative-abi.obj\"\"",
+      "kind": "negative-abi-compile",
+      "exit": 2,
+      "pid": 11736
+    },
+    {
+      "diagnostic_budget_ms": 30000,
+      "kind": "fixture",
+      "exit": 0,
+      "pid": 16760
+    }
+  ],
+  "checks": 433,
+  "callbacks": 8,
+  "fixture_sha256": "B0432CDF29E6CFF176F3F3E497DF52B47F4B91251246D1DBA9512F526F7E256D",
+  "finished": "2026-10-28T01:59:08.6564057Z"
+}

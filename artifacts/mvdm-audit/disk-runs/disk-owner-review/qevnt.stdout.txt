@@ -1,0 +1,63 @@
+{
+  "started": "2026-10-28T01:59:53.8457810Z",
+  "owner_pid": 15856,
+  "result": "pass",
+  "contract": "qevnt",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-owner-review\\qevnt",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-owner-review\\qevnt\\qevnt-object-contract.exe",
+  "inputs": [
+    {
+      "sha256": "4608279A4058E6D6C98062A89470B3161ED04316E5487C41239FAE552CD7CCDF",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1"
+    },
+    {
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+    },
+    {
+      "sha256": "164F2B28EADDD9AA8FD04D06035A54516D6F329856A63DFF6D967B7AD40DD88F",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\qevnt_object_contract_fixture.c"
+    },
+    {
+      "sha256": "3E0D97D17BCC4C107B5173BF38868C79AB68D3042D29472A1A7259364DA2947C",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\system\\qevnt.c"
+    },
+    {
+      "sha256": "5C08479B0FDCCC5D09EFE70F6722C3DE6183167C6D13B3BEB6247295C72B868F",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\qevnt.obj"
+    },
+    {
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+    },
+    {
+      "sha256": "615B5FD2935A485AFF2120A5455CEB558AB4C6BAEB4806570D12EEDC682980B5",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_qev.h"
+    }
+  ],
+  "runs": [
+    {
+      "exit": 0,
+      "kind": "build",
+      "pid": 33608,
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\qevnt_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\system\\qevnt.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-owner-review\\qevnt\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-owner-review\\qevnt\\qevnt-object-contract.exe\" /link kernel32.lib\""
+    },
+    {
+      "exit": 2,
+      "kind": "negative-abi-compile",
+      "pid": 7632,
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_QEV_EXPECT_HANDLE_BYTES=4 \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\qevnt_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-owner-review\\qevnt\\negative-abi.obj\"\""
+    },
+    {
+      "exit": 0,
+      "kind": "fixture",
+      "pid": 16156,
+      "diagnostic_budget_ms": 30000
+    }
+  ],
+  "checks": 37,
+  "callbacks": 8,
+  "fixture_sha256": "82565A0DAB2DF2DA48159A00D4D6662D9CCEE4725367FCB6724243D94B544590",
+  "finished": "2026-10-28T02:00:04.3778570Z"
+}

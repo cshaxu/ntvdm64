@@ -14,7 +14,11 @@ start:
     mov ah, 00h
     mov dl, 80h
     int 13h
+%ifdef CPU_PROBE_NEGATIVE_ORACLE
+    jnc fail_reset             ; deliberately wrong reset carry expectation
+%else
     jc fail_reset
+%endif
 
     mov dx, success_text
     jmp short emit

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "2d9a08911",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "disk-image-observations.json",
+      "sha256": "A6C352B500333DBAE17B74EDB126618CCA969E63554B310CDA813683BFD19D8E"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Seven bounded original disk integrations; no whole real-media/controller or lifetime acceptance"
+}

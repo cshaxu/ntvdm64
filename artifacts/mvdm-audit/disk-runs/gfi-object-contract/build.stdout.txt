@@ -1,0 +1,1 @@
+gfi_object_contract_fixture.c

@@ -1,0 +1,7 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-role-final\\run.ps1\"",
+  "started": "2026-10-28T02:02:28.1320159Z",
+  "pid": 17276,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "diagnostic_budget_seconds": 400
+}

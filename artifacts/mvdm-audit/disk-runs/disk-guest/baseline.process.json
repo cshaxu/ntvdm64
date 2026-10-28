@@ -1,0 +1,7 @@
+{
+  "pid": 12992,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-sign-flags-guest.ps1\" -Workload DiskReset -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\" -Observer \"O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe\" -LogonHelper \"O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-guest\\baseline\"",
+  "diagnostic_budget_seconds": 180,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "started": "2026-10-28T02:00:21.2024077Z"
+}

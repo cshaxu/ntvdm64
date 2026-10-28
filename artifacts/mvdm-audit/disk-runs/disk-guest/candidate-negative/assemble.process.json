@@ -1,0 +1,7 @@
+{
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\disks_capability.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\disk-guest\\candidate-negative/EMSPROBE.COM\" -DCPU_PROBE_NEGATIVE_ORACLE=1",
+  "start": "2026-10-28T02:01:10.4622917Z",
+  "timeoutSeconds": 30,
+  "pid": 1588,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe"
+}

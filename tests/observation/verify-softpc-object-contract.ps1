@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$WorkerBuild = 'build/.ninja/msvc-x86-release/worker',
-    [ValidateSet('qevnt','ios')][string]$Contract = 'qevnt'
+    [ValidateSet('qevnt','ios','gfi')][string]$Contract = 'qevnt'
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -21,6 +21,14 @@ if ($Contract -eq 'qevnt') {
     $headers = @(Join-Path $repo 'src/mvdm/softpc.new/host/inc/host_qev.h')
     $object = Join-Path $WorkerBuild 'obj/system/qevnt.obj'
     $negativeDefine = 'MVDM_QEV_EXPECT_HANDLE_BYTES'
+} elseif ($Contract -eq 'gfi') {
+    $original = Join-Path $repo 'src/mvdm/softpc.new/base/disks/gfi.c'
+    $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/base/inc/xt.h','src/mvdm/softpc.new/base/inc/bios.h','src/mvdm/softpc.new/base/inc/config.h','src/mvdm/softpc.new/base/inc/gfi.h') | ForEach-Object { Join-Path $repo $_ }
+    $object = Join-Path $WorkerBuild 'obj/disks/gfi.obj'
+    $extraObjects = @(Join-Path $WorkerBuild 'obj/disks/gfi_mpty.obj')
+    $extraSources = @(Join-Path $repo 'src/mvdm/softpc.new/base/disks/gfi_mpty.c')
+    $negativeDefine = 'MVDM_GFI_EXPECT_TABLE_BYTES'
+    $extraFlags = '/DNTVDM /DSPC386 /DANSI /I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm/softpc.new/base/inc') + '" '
 } else {
     $original = Join-Path $repo 'src/mvdm/softpc.new/base/support/ios.c'
     $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/base/inc/base_def.h','src/mvdm/softpc.new/base/inc/ios.h','src/mvdm/softpc.new/base/ccpu386/in.h','src/mvdm/softpc.new/base/ccpu386/out.h') | ForEach-Object { Join-Path $repo $_ }

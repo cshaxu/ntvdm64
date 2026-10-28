@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 180,
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\disk-native-role-merge.py\"",
+  "pid": 26336,
+  "started": "2026-10-28T02:02:30.2253219Z",
+  "image": "C:\\Program Files\\Python313\\python.exe"
+}
