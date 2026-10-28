@@ -27,3 +27,7 @@ execute the selected VRAM routines or prove guest rendering. The fixture is
 linked with the existing `/force:multiple` test graph and its host seams.
 The passing result, executable, map, object and source hashes are retained in
 the [fixture evidence](cvidc-vector-fixture-evidence.json).
+The [subsequent fixture run](cvidc-vector-fixture-r74-evidence.json) also
+checks the actual byte, word and string mark pointers for all four mark
+selectors and confirms that selector 4 preserves the preceding read and mark
+selections. It does not exercise out-of-range chain indexes.

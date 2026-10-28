@@ -126,9 +126,23 @@ int main(void)
     }
     setReadPointers(DISABLED_RAM); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&ram_dsbld_read_evid);
     setReadPointers(SIMPLE_READ); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&simple_read_evid);
-    for(i=SIMPLE_MARK;i<=CHAIN_4_MARK;i++) {
-        setMarkPointers(i);
-        CHECK(getVideomark_byte()!=0 && getVideomark_word()!=0 && getVideomark_string()!=0);
+    {
+        EVID_MARK_POINTERS *marks[]={&simple_mark_evid,&cga_mark_evid,
+            &unchained_mark_evid,&chain4_mark_evid};
+        for(i=SIMPLE_MARK;i<=CHAIN_4_MARK;i++) {
+            setMarkPointers(i);
+            CHECK(getVideomark_byte()==(IHP)marks[i]->b_mark &&
+                  getVideomark_word()==(IHP)marks[i]->w_mark &&
+                  getVideomark_string()==(IHP)marks[i]->str_mark);
+        }
+        /* The original switch leaves the last selection intact for an
+         * unknown selector. This is not acceptance of invalid chain indexes. */
+        setMarkPointers(4);
+        CHECK(getVideomark_byte()==(IHP)marks[CHAIN_4_MARK]->b_mark &&
+              getVideomark_word()==(IHP)marks[CHAIN_4_MARK]->w_mark &&
+              getVideomark_string()==(IHP)marks[CHAIN_4_MARK]->str_mark);
+        setReadPointers(SIMPLE_READ); setReadPointers(4);
+        CHECK_READ_TABLE(&simple_read_evid);
     }
     setVideodither(1);
     for(i=MODE_0;i<=MODE_3;i++) {
@@ -185,7 +199,7 @@ int main(void)
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
     CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
-    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write table selection, 256 write-state cases, negative control, concurrent scratch preservation\r\n";
+    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }
     return 0;
 }

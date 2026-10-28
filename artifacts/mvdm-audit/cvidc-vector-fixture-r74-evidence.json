@@ -1,0 +1,38 @@
+{
+  "result": "pass",
+  "base": "c6cac6433",
+  "fixture_exit_code": 0,
+  "stdout": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, unknown read/mark selectors, negative control, concurrent scratch preservation",
+  "compile": "MSVC x86, cached Ninja target cvidc-vector-binding-fixture.exe; existing /force:multiple fixture graph",
+  "scope": "Exact read/write/mark publication, unknown read/mark selector behavior; not generated VRAM execution",
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "4695F40D6527A2E7A56D8A71BC87144F4ADDE39779AD6C8755FF90D61149C72E"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/cvidc/ev_glue.c",
+      "sha256": "7849FA7719B5A46FCAA4548F180589AF29CF84ECF24AF4E3D59FA7FCD58F7AFE"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/ev_glue.obj",
+      "sha256": "5EBEE9014915207ACDC2A9A95EEA413805ED4D1125A8A489BB7DAB97469F109D"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/tests/cvidc_vector_binding_fixture.obj",
+      "sha256": "1C1623834FD026C964DA8FC095AEDDFB60B9536E2DE4A9BDEA19E29416F4FD87"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe",
+      "sha256": "A64A9E36FD8017E27AA9F560F3111496EFBA3AD73CF6B5EF9E391690F3562A63"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe.map",
+      "sha256": "A601876AA3D0361CADF2A5AE881C484FDC0C58C6D0D74EAAB52412F4414E7284"
+    },
+    {
+      "path": "assets/release/ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    }
+  ]
+}
