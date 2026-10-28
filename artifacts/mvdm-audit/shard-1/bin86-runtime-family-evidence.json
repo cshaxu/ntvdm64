@@ -1,0 +1,131 @@
+{
+  "files": [
+    {
+      "name": "autoexec.nt",
+      "source_sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        }
+      ],
+      "zip_entry": "WINNT/SYSTEM32/autoexec.nt",
+      "zip_sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b",
+      "installed_path": "O:\\winnt\\system32\\autoexec.nt",
+      "installed_sha256": "02fe323bf5af799e3117ebdc6138b7eafe14d0453ecb06855d18b2c2e21b9d28"
+    },
+    {
+      "name": "ctl3dv2.dll",
+      "source_sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db"
+        }
+      ],
+      "zip_entry": "WINNT/SYSTEM32/CTL3DV2.DLL",
+      "zip_sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+      "installed_path": "O:\\winnt\\system32\\ctl3dv2.dll",
+      "installed_sha256": null
+    },
+    {
+      "name": "ctl3dv2.map",
+      "source_sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        }
+      ],
+      "zip_entry": null,
+      "zip_sha256": null,
+      "installed_path": "O:\\winnt\\system32\\ctl3dv2.map",
+      "installed_sha256": null
+    },
+    {
+      "name": "lzexpand.dll",
+      "source_sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd"
+        }
+      ],
+      "zip_entry": "WINNT/SYSTEM32/LZEXPAND.DLL",
+      "zip_sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+      "installed_path": "O:\\winnt\\system32\\lzexpand.dll",
+      "installed_sha256": null
+    },
+    {
+      "name": "netapi.dll",
+      "source_sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\netapi.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\netapi.dll",
+          "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a"
+        }
+      ],
+      "zip_entry": "WINNT/SYSTEM32/NETAPI.DLL",
+      "zip_sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+      "installed_path": "O:\\winnt\\system32\\netapi.dll",
+      "installed_sha256": null
+    },
+    {
+      "name": "regedit.hlp",
+      "source_sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        }
+      ],
+      "zip_entry": null,
+      "zip_sha256": null,
+      "installed_path": "O:\\winnt\\system32\\regedit.hlp",
+      "installed_sha256": null
+    },
+    {
+      "name": "winhelp.exe",
+      "source_sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170",
+      "references": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\winhelp.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\winhelp.exe",
+          "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170"
+        }
+      ],
+      "zip_entry": "WINNT/SYSTEM32/WINHELP.EXE",
+      "zip_sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170",
+      "installed_path": "O:\\winnt\\system32\\winhelp.exe",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "Matching basename in ZIP may be a different internal directory; exact installed system32 only; no source lineage or runtime test."
+}

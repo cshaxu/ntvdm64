@@ -1,0 +1,15 @@
+# S10 shard 1: bin86 guest runtime and support artifacts
+
+Seven pending bin86 paths were checked as a guest-runtime delivery family. Full source, original-reference, ZIP member and exact installed-path hashes are in `bin86-runtime-family-evidence.json`; replay `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/shard-1/bin86-runtime-family-observer.py`. Original `bin86/makefile:12-26` binplaces autoexec, CTL3DV2 and map, LZEXPAND, NETAPI and WINHELP; it does not list REGEDIT.HLP. No identity result establishes executable source provenance, active use, correctness or permission to overwrite guest or user configuration.
+
+| Pending file | Role, actual identity and disposition boundary |
+| --- | --- |
+| autoexec.nt | Default DOS startup script; both reference copies and ZIP equal source. Exact installed system32 file differs; this is a user configuration boundary, not proof of a fault or authorization to replace it. Startup effects depend on the actual selected configuration. |
+| ctl3dv2.dll | Original special WOW control DLL, binplaced as historical README explains. Source equals OpenNT-4.5 and ZIP; primary reference and exact installed system32 path absent. Existing `guest-ctl3d-review.md` contains original source/behavior boundaries. Do not infer no app can load another copy. |
+| ctl3dv2.map | Original symbol/map carrier; source matches both reference editions, absent from ZIP and exact installed system32 path. It lists CTL3DV2 exports, but without matching build evidence must not be asserted to describe the ZIP DLL. Not a runtime DLL. |
+| lzexpand.dll | Prebuilt Win16 LZ expansion library; source equals OpenNT-4.5 and ZIP, primary reference and exact installed system32 path absent. Guest `kernel31/lzexp.c` is a related API source, not proof of this binary's behavior or loading. |
+| netapi.dll | Prebuilt Win16 network API DLL; source equals OpenNT-4.5 and ZIP, primary reference and exact installed path absent. VDMREDIR `vrnetapi.c` references 16-bit NETAPI as a caller; forwarding, provider availability and lifecycle remain untested. Do not equate it with modern native NETAPI32. |
+| regedit.hlp | Help content, matches both references, absent from ZIP basename and installed exact path. Original `regedit/messages/usa/regedit.rc:40` names it and `regedit/cutils1.c:285` invokes WinHelp; help display or complete deployment is unverified. |
+| winhelp.exe | Prebuilt Win16 help application; source equals OpenNT-4.5 and ZIP, primary reference and exact installed path absent. `wow16/user/helpcall.c` contains WinHelp message behavior; actual launch, reuse and exit untested. |
+
+ZIP basename findings include exact recorded internal paths. The installed checks are restricted to O:/winnt/system32; no exhaustive machine search or functional test was done. Hash comparison is not a test of PE/NE exported contracts, and unused/alternate-profile claims require separate graph and runtime evidence. No product, user configuration, guest, build tree or shared ledger was modified.

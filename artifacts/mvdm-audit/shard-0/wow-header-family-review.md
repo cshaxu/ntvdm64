@@ -1,0 +1,7 @@
+# WOW core, message and dispatch header family
+
+The [observer](wow-header-family-observer.py) and [snapshot](wow-header-family-observations.json) compare 21 pending headers against both original editions, bounded direct includes and the current x86 WOW32 Ninja VALID dependency graph. Seventeen are dependencies of selected objects: shared declarations including `isz.h`, `mapembed.h`, `waccel.h`, `wcntl32.h`, `wdos.h`, `wkbman.h`, `wmsgsbm.h`, `wow32.h`, `wstruc.h`, `wthman.h`, `wucaret.h`, `wuclass.h`, `wutext.h` and `wutmr.h`, plus dispatch/table declarations `wcmdgtbl.h`, `wgtbl2.h` and `wstbl.h`. The snapshot records exact include lines and object names for each. The 88-object observations mostly reflect inclusion through the shared precompiled header and do not demonstrate use of every declaration.
+
+Four candidates remain pending: `wddeml32.h` and `wkglobal.h` have textual includes in source files but no VALID selected object dependency; `wddetbl2.h` and `wuansi.h` have neither within this bounded scan. These results do not exclude generated sources, different configurations or the underlying DDE, memory and ANSI capabilities. The two included-but-unselected sources and their real alternatives require separate owner analysis.
+
+Even for selected headers, source identity and build dependency do not prove guest dispatch, callbacks, errors or object lifetime. The selected declarations are partial file roles; behavior and recovery remain with the corresponding S14–S16 functional worklists. No guest, product binary or configuration is modified.
