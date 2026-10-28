@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1152,
-    "excluded": 2790,
+    "pending": 1141,
+    "excluded": 2801,
     "partial": 689,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Multimedia and resource thunk owners partial; guest dispatch and lifecycle remain open."
+  "note": "Eleven empty generated declaration file roles excluded; all CPU and video features remain in scope."
 }

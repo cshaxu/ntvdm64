@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "063cb8712",
+  "candidate_count": 11,
+  "source_tables": [
+    {
+      "path": "shard-1/cvidc-header-family-evidence.json",
+      "sha256": "D02F797372D1D502BF4B6E8CA00228D0FA0F90DD684EFF8F65D27E8A0AB912AF"
+    },
+    {
+      "path": "shard-1/cvidc-empty-guard-observations.json",
+      "sha256": "B04B83086295B53206555F29E720147A2E2602842E39B8B546C70F5666D49A49"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Empty file roles only; not CPU or video feature exclusion"
+}
