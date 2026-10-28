@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/mvdm/dos/v86/doskrnl/dos/lock.asm",
+    "sha256": "DA0824BC6C56E0ED73B9CCD49522C95268D5B6E86E627B50C7A7F3FA648DA3FE"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demlock.c",
+    "sha256": "7716AB3BE08F3532A60E3B05B2214BF1F8CB9F66F362B5F7F555DC3CD2755A71"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demdisp.c",
+    "sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demerror.c",
+    "sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F"
+  },
+  {
+    "path": "tests/legacy/opennt/trace/fixtures/original_demlock_register_fixture.c",
+    "sha256": "B130A93A1C79B5793690DDF31BA7A8C0300B80550F5E490D6AD15A64AEFA8510"
+  },
+  {
+    "path": "artifacts/mvdm-audit/shard-2/parallel-review-evidence.json",
+    "sha256": "48BF928F7CC54C7CAE194646816D829C3EB43C0EEC5C3B615C04D6CBC0345E4B"
+  },
+  {
+    "path": "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "sha256": "00F8E1D918128C26EC29A2B063E689BBC9581AB7DC31F281EBDAE0F584A6442D"
+  }
+]

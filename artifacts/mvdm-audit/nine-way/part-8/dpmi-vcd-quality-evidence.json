@@ -1,0 +1,42 @@
+[
+  {
+    "path": "src/mvdm/dpmi32/vxd.c",
+    "sha256": "240AF56E0A6644E1E4465BE781858FB7BBBE581AD062B7B62ED0BCA7F3436C22",
+    "bytes": 2995
+  },
+  {
+    "path": "O:/repos.external/OpenNT/base/mvdm/dpmi32/vxd.c",
+    "sha256": "C42DB46A3E7F985B83988668778613BA497B0A940F2AEF4E0A2E082E54D8DD3A",
+    "bytes": 3131
+  },
+  {
+    "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/dpmi32/vxd.c",
+    "sha256": "C42DB46A3E7F985B83988668778613BA497B0A940F2AEF4E0A2E082E54D8DD3A",
+    "bytes": 3131
+  },
+  {
+    "path": "src/mvdm/dpmi32/dpmi32.c",
+    "sha256": "E93E77A96E904D27E70C5817D915865D17D7F777C34F1FA3D7B6F223A8E6FD0D",
+    "bytes": 8976
+  },
+  {
+    "path": "src/mvdm/dpmi/486/dxfunc.asm",
+    "sha256": "76A4B056349827B526F4CB7EFBF308A0CAF1ECF3136B77065E700D9865928EEA",
+    "bytes": 52390
+  },
+  {
+    "path": "tests/observation/dpmi_vcd_service.asm",
+    "sha256": "9CE568AC1A29D6C25692E480C3A06B692C7EB16A16089865A65564182C287F47",
+    "bytes": 1362
+  },
+  {
+    "path": "docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md",
+    "sha256": "905F9D73BF29D19FC6312B4E850EE7056CDFC8B5F479A5B5FA5F38883FB00601",
+    "bytes": 235037
+  },
+  {
+    "path": "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "sha256": "00F8E1D918128C26EC29A2B063E689BBC9581AB7DC31F281EBDAE0F584A6442D",
+    "bytes": 516847
+  }
+]

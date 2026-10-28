@@ -1,0 +1,34 @@
+[
+  {
+    "path": "src/mvdm/dpmi32/i386/dpmimisc.c",
+    "sha256": "C4B46844E5D5CD8A0D26A20F8635E46F58A53CCE768AEAD3A472300D773FB8F5"
+  },
+  {
+    "path": "O:/repos.external/OpenNT/base/mvdm/dpmi32/i386/dpmimisc.c",
+    "sha256": "C4B46844E5D5CD8A0D26A20F8635E46F58A53CCE768AEAD3A472300D773FB8F5"
+  },
+  {
+    "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/dpmi32/i386/dpmimisc.c",
+    "sha256": "C4B46844E5D5CD8A0D26A20F8635E46F58A53CCE768AEAD3A472300D773FB8F5"
+  },
+  {
+    "path": "src/mvdm/dpmi32/dpmimscr.c",
+    "sha256": "19119D532486F2FA6D19129BFDE7EE703F63BDD101953F8DCB6112B8210FE035"
+  },
+  {
+    "path": "src/mvdm/dpmi32/dpmi32.c",
+    "sha256": "E93E77A96E904D27E70C5817D915865D17D7F777C34F1FA3D7B6F223A8E6FD0D"
+  },
+  {
+    "path": "src/mvdm/dpmi32/sources",
+    "sha256": "5E88950101F309FD999F42BD613E33CB4DAF9A83FFEE083F0BB4D84B161B3506"
+  },
+  {
+    "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+    "sha256": "7884E96510B3A1C05222140AADABC84DC24997A5B48E209FD344C62E1E5F148C"
+  },
+  {
+    "path": "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "sha256": "00F8E1D918128C26EC29A2B063E689BBC9581AB7DC31F281EBDAE0F584A6442D"
+  }
+]

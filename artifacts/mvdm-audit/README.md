@@ -40,6 +40,15 @@ The [shard-3 function](cross-369/shard3-partial-host-function-plan.md) and
 their ledger snapshot; the [controlled failure handoff](cross-369/selected-host-reproduced-failures-handoff.md)
 and [cross-shard handoff](cross-369/cross-shard-runtime-failures-handoff.md)
 separate reproduced fixture boundaries from guest compatibility claims.
+The [absolute disk I/O](nine-way/part-8/dem-absolute-io-review.md),
+[DOS lock](nine-way/part-8/dem-lock-guest-host-review.md),
+[DOS path](nine-way/part-8/dem-path-guest-host-review.md),
+[DPMI IRET](nine-way/part-8/dpmi-iret-provider-quality-review.md) and
+[VCD](nine-way/part-8/dpmi-vcd-quality-review.md) reviews retain concrete
+host/guest dispatch and failure-test boundaries. The original DOSX
+[SMARTDRV](nine-way/part-2/smartdrv-guest-abi-review.md) and
+[HP BIOS](nine-way/part-2/dosx-hp-bios-review.md) alternatives remain scoped
+by their original configuration.
 Additional evidence distinguishes [DPMI provider selection](nine-way/part-4/dpmi-legacy-selected-provider-review.md),
 [floppy](nine-way/part-4/gfi-real-floppy-provider-review.md),
 [Novell/IPX](nine-way/part-4/novell-ipx-selected-provider-review.md), and

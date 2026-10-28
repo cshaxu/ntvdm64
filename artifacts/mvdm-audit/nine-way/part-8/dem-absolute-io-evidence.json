@@ -1,0 +1,34 @@
+[
+  {
+    "path": "src/mvdm/dos/v86/doskrnl/dos/mscode.asm",
+    "sha256": "59F4903BE6456362EDE5C53FA49A31805946F5411E0A6960B0A89257A5C7D569"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demdisp.c",
+    "sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demdasd.c",
+    "sha256": "7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942"
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fdisk.c",
+    "sha256": "691EF629BB953A15F8C5A3BDFEE2D492BBCC534D14303FB03BF1CA988A79F4A7"
+  },
+  {
+    "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_fdisk.c",
+    "sha256": "F4CCA0215E2FF4F49113FE95A26529854B712E096AF1C3CC54536061808C4867"
+  },
+  {
+    "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new/host/src/nt_fdisk.c",
+    "sha256": "F4CCA0215E2FF4F49113FE95A26529854B712E096AF1C3CC54536061808C4867"
+  },
+  {
+    "path": "tests/component-integration/fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+    "sha256": "CE550558F04C33982A26753F0766C18E1F1460939F4E84E8DE8A88FADED23FBE"
+  },
+  {
+    "path": "tests/legacy/opennt/trace/fixtures/contained_media_fdisk_test.c",
+    "sha256": "59364F444F5050F7843A3FA8C30B4DED9FB47C3C9BBA1CE5FF22C5EEF5D5896F"
+  }
+]

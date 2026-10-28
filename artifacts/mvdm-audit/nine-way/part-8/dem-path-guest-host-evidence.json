@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/mvdm/dos/dem/demfile.c",
+    "sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demdisp.c",
+    "sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+  },
+  {
+    "path": "src/mvdm/dos/dem/demerror.c",
+    "sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F"
+  },
+  {
+    "path": "src/mvdm/dos/v86/doskrnl/dos/file.asm",
+    "sha256": "09F6F2E06F14754CFE069335906D26676AB5538C7C569A33B2D62E052FCD633E"
+  },
+  {
+    "path": "src/mvdm/oemuni/file.c",
+    "sha256": "83CDB96808AD79DF98C608BE95CDD16F7229B2E4946B86E6A473EDAE8F2407CE"
+  },
+  {
+    "path": "src/mvdm/inc/softpc.h",
+    "sha256": "04DAD85BEA7E01954C337FE3A3DC700E8BD7407B60F01EB2393F6055A2BDF8F3"
+  },
+  {
+    "path": "docs/etc/evidence/m0-t404-s5-dem-chmod-ingress-correction-001.md",
+    "sha256": "8EB365471EDE7216F6CABC20DAFD1A17DE955BDAAD314EA5B64DB78D23C05D84"
+  }
+]
