@@ -1,0 +1,45 @@
+{
+  "result": "pass",
+  "base": "b0650b792",
+  "candidate_count": 13,
+  "source_tables": [
+    {
+      "path": "cross-369/callback-interface-observations.json",
+      "sha256": "9487BE7EF105F56BA916A8C418AF7E86AE1545ED6A98DC882439CA1E110D6B36"
+    },
+    {
+      "path": "cross-369/file-cache-header-observations.json",
+      "sha256": "EB6293EFF4622E94D410043395E7F7073F1FBED00B96BCA5BB0836AD4C1C33F2"
+    },
+    {
+      "path": "cross-369/control-message-observations.json",
+      "sha256": "C9C9322E58AD36498371D1BAFDA5831888B2EE6D4452DE0903369A8426BBD57C"
+    },
+    {
+      "path": "cross-369/ole-alias-observations.json",
+      "sha256": "ED02ED914B3D0704783001812FE10169C1F366362A0B81E67271AF6E823A81FA"
+    },
+    {
+      "path": "cross-369/fax-provider-observations.json",
+      "sha256": "7B8836E6E71F3D2D27009ADE39F423E454893D4C071662950756731F101E9128"
+    },
+    {
+      "path": "cross-369/shell-header-observations.json",
+      "sha256": "AF92C7BE7262B240DA0AEF84334097B21EC3EF16DCA7A9140CA14C0152A86774"
+    },
+    {
+      "path": "cross-369/spool-header-observations.json",
+      "sha256": "C00A91B9D6DAA6A89B5AF91ED93E29C7D0D6A22F1F8BE9315401F6BA51B21E4C"
+    },
+    {
+      "path": "cross-369/toolhelp-table-observations.json",
+      "sha256": "002FEBE68289DF9ADD23BDC6D91C470F379FF42C31DD77046EECDFBC2FED29AA"
+    },
+    {
+      "path": "cross-369/menu-header-observations.json",
+      "sha256": "E73EB087ED64B397A61D4E6B04EC3683F828E6C6AEDEA70DBAB9E5F969928781"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}
