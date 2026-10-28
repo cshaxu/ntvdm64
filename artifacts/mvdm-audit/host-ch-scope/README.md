@@ -49,3 +49,5 @@ The [debug/fax declarations](wow-debug-fax-declarations-review.md), [fax/DDE rev
 The [CCPU vglob comparison](ccpu-vglob-review.md) records a byte-identical selected provider at a different path without claiming that the original CCPU profile ran. The [terminal/X review](terminal-x-host-provider-review.md) retains platform-specific provider boundaries.
 
 The [WOW dialog, DIB and printer review](wow-dialog-dib-print-review.md) records original selected providers and unverified callback, selector, resolver and device boundaries.
+
+The [WOW common declarations](wow-common-declarations-review.md) bind representative GDI, kernel and USER dispatch to selected original objects; the [CCPU production shim](ccpu-debug-pig-provider-review.md) records its original no-op behavior without claiming debugger support.
