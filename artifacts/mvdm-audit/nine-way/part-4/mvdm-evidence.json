@@ -1,0 +1,4002 @@
+{
+  "files": [
+    {
+      "key": "softpc.new/base/cvidc/chain4_c.h",
+      "path": "softpc.new/base/cvidc/chain4_c.h",
+      "sha256": "1a4c090b70fb28da21119a6ccf19371f9b5479256b18231b11437de15d5785fa",
+      "reference_hashes": [
+        "1a4c090b70fb28da21119a6ccf19371f9b5479256b18231b11437de15d5785fa",
+        "1a4c090b70fb28da21119a6ccf19371f9b5479256b18231b11437de15d5785fa",
+        "1a4c090b70fb28da21119a6ccf19371f9b5479256b18231b11437de15d5785fa"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 4,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/contxt_c.h",
+      "path": "softpc.new/base/cvidc/contxt_c.h",
+      "sha256": "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c",
+      "reference_hashes": [
+        "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c",
+        "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c",
+        "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 26,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/cpnote_c.h",
+      "path": "softpc.new/base/cvidc/cpnote_c.h",
+      "sha256": "311dacbcceec63f138d6aa05b004091772c31f73f9d9e54650b0287b2cfdfae1",
+      "reference_hashes": [
+        "311dacbcceec63f138d6aa05b004091772c31f73f9d9e54650b0287b2cfdfae1",
+        "311dacbcceec63f138d6aa05b004091772c31f73f9d9e54650b0287b2cfdfae1",
+        "311dacbcceec63f138d6aa05b004091772c31f73f9d9e54650b0287b2cfdfae1"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 8,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/cpureg_c.h",
+      "path": "softpc.new/base/cvidc/cpureg_c.h",
+      "sha256": "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73",
+      "reference_hashes": [
+        "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73",
+        "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73",
+        "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 15,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/ea_c.h",
+      "path": "softpc.new/base/cvidc/ea_c.h",
+      "sha256": "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d",
+      "reference_hashes": [
+        "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d",
+        "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d",
+        "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 7,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/flags_c.h",
+      "path": "softpc.new/base/cvidc/flags_c.h",
+      "sha256": "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026",
+      "reference_hashes": [
+        "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026",
+        "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026",
+        "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 19,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/flagtb_c.h",
+      "path": "softpc.new/base/cvidc/flagtb_c.h",
+      "sha256": "05e9ed0cc6e86605a12a83a55293ecd1b3dfaafaadbd12e3c26f848ad2c22a6e",
+      "reference_hashes": [
+        "05e9ed0cc6e86605a12a83a55293ecd1b3dfaafaadbd12e3c26f848ad2c22a6e",
+        "05e9ed0cc6e86605a12a83a55293ecd1b3dfaafaadbd12e3c26f848ad2c22a6e",
+        "05e9ed0cc6e86605a12a83a55293ecd1b3dfaafaadbd12e3c26f848ad2c22a6e"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 14,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/frag_c.h",
+      "path": "softpc.new/base/cvidc/frag_c.h",
+      "sha256": "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578",
+      "reference_hashes": [
+        "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578",
+        "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578",
+        "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 415,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/gdebug.h",
+      "path": "softpc.new/base/cvidc/gdebug.h",
+      "sha256": "b58a5ab1aea71e08802816aeeecdd3ffbf105dd02fe9f11d05f395be928e6ca8",
+      "reference_hashes": [
+        "b58a5ab1aea71e08802816aeeecdd3ffbf105dd02fe9f11d05f395be928e6ca8",
+        "b58a5ab1aea71e08802816aeeecdd3ffbf105dd02fe9f11d05f395be928e6ca8",
+        "b58a5ab1aea71e08802816aeeecdd3ffbf105dd02fe9f11d05f395be928e6ca8"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 695,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/gldc_c.h",
+      "path": "softpc.new/base/cvidc/gldc_c.h",
+      "sha256": "0c3b62314b6867b9929f1aec01961d66c86c2aa932af986cacfc662898c27f1f",
+      "reference_hashes": [
+        "0c3b62314b6867b9929f1aec01961d66c86c2aa932af986cacfc662898c27f1f",
+        "0c3b62314b6867b9929f1aec01961d66c86c2aa932af986cacfc662898c27f1f",
+        "0c3b62314b6867b9929f1aec01961d66c86c2aa932af986cacfc662898c27f1f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 179,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/hpphst_c.h",
+      "path": "softpc.new/base/cvidc/hpphst_c.h",
+      "sha256": "ff55f89a97e6f3b1ec155829f8b8608f56b90e3284fb1be3d30b8e8046125bc7",
+      "reference_hashes": [
+        "ff55f89a97e6f3b1ec155829f8b8608f56b90e3284fb1be3d30b8e8046125bc7",
+        "ff55f89a97e6f3b1ec155829f8b8608f56b90e3284fb1be3d30b8e8046125bc7",
+        "ff55f89a97e6f3b1ec155829f8b8608f56b90e3284fb1be3d30b8e8046125bc7"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 12,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/inst_c.h",
+      "path": "softpc.new/base/cvidc/inst_c.h",
+      "sha256": "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7",
+      "reference_hashes": [
+        "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7",
+        "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7",
+        "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 14,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/io_c.h",
+      "path": "softpc.new/base/cvidc/io_c.h",
+      "sha256": "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396",
+      "reference_hashes": [
+        "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396",
+        "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396",
+        "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 13,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/lc_c.h",
+      "path": "softpc.new/base/cvidc/lc_c.h",
+      "sha256": "d64684ce271144aa8e65463d3299ef1ff0f27837a21f720de6508d0f05a5e130",
+      "reference_hashes": [
+        "d64684ce271144aa8e65463d3299ef1ff0f27837a21f720de6508d0f05a5e130",
+        "d64684ce271144aa8e65463d3299ef1ff0f27837a21f720de6508d0f05a5e130",
+        "d64684ce271144aa8e65463d3299ef1ff0f27837a21f720de6508d0f05a5e130"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 156,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/muldiv_c.h",
+      "path": "softpc.new/base/cvidc/muldiv_c.h",
+      "sha256": "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5",
+      "reference_hashes": [
+        "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5",
+        "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5",
+        "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 8,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/nano_c.h",
+      "path": "softpc.new/base/cvidc/nano_c.h",
+      "sha256": "6f932e3d8e663ae3703bd8ff07407523d9d2041a0a1e9fc2dc7f1335adb3811f",
+      "reference_hashes": [
+        "6f932e3d8e663ae3703bd8ff07407523d9d2041a0a1e9fc2dc7f1335adb3811f",
+        "6f932e3d8e663ae3703bd8ff07407523d9d2041a0a1e9fc2dc7f1335adb3811f",
+        "6f932e3d8e663ae3703bd8ff07407523d9d2041a0a1e9fc2dc7f1335adb3811f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 187,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/page_c.h",
+      "path": "softpc.new/base/cvidc/page_c.h",
+      "sha256": "8a90aa33098f8f67fe278427d7869ef4a43fc8843e3f538abfac7c5e91cac7d0",
+      "reference_hashes": [
+        "8a90aa33098f8f67fe278427d7869ef4a43fc8843e3f538abfac7c5e91cac7d0",
+        "8a90aa33098f8f67fe278427d7869ef4a43fc8843e3f538abfac7c5e91cac7d0",
+        "8a90aa33098f8f67fe278427d7869ef4a43fc8843e3f538abfac7c5e91cac7d0"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 40,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/parser.h",
+      "path": "softpc.new/base/cvidc/parser.h",
+      "sha256": "7b91c7b142b73780530c65c92fc570b12122caaf1506a3c0ee2205c089b2a11c",
+      "reference_hashes": [
+        "7b91c7b142b73780530c65c92fc570b12122caaf1506a3c0ee2205c089b2a11c",
+        "7b91c7b142b73780530c65c92fc570b12122caaf1506a3c0ee2205c089b2a11c",
+        "7b91c7b142b73780530c65c92fc570b12122caaf1506a3c0ee2205c089b2a11c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 1005,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/ports_c.h",
+      "path": "softpc.new/base/cvidc/ports_c.h",
+      "sha256": "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332",
+      "reference_hashes": [
+        "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332",
+        "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332",
+        "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 4,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/ppchst_c.h",
+      "path": "softpc.new/base/cvidc/ppchst_c.h",
+      "sha256": "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3",
+      "reference_hashes": [
+        "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3",
+        "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3",
+        "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 9,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/prof_c.h",
+      "path": "softpc.new/base/cvidc/prof_c.h",
+      "sha256": "d890526d7af3f3bdee03547e9a77d60164cb6a421a96580c552ff299b8c5aed2",
+      "reference_hashes": [
+        "d890526d7af3f3bdee03547e9a77d60164cb6a421a96580c552ff299b8c5aed2",
+        "d890526d7af3f3bdee03547e9a77d60164cb6a421a96580c552ff299b8c5aed2",
+        "d890526d7af3f3bdee03547e9a77d60164cb6a421a96580c552ff299b8c5aed2"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 12,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/prot_c.h",
+      "path": "softpc.new/base/cvidc/prot_c.h",
+      "sha256": "732094541e77808ea4b94a7695d3e7b11f83d30fe174fe654ba439f76ded7c40",
+      "reference_hashes": [
+        "732094541e77808ea4b94a7695d3e7b11f83d30fe174fe654ba439f76ded7c40",
+        "732094541e77808ea4b94a7695d3e7b11f83d30fe174fe654ba439f76ded7c40",
+        "732094541e77808ea4b94a7695d3e7b11f83d30fe174fe654ba439f76ded7c40"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 148,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/pxcptn_c.h",
+      "path": "softpc.new/base/cvidc/pxcptn_c.h",
+      "sha256": "4ba08855422f5a69c5347d363363156da77ce8d77497bcd8f302d916a2745f6a",
+      "reference_hashes": [
+        "4ba08855422f5a69c5347d363363156da77ce8d77497bcd8f302d916a2745f6a",
+        "4ba08855422f5a69c5347d363363156da77ce8d77497bcd8f302d916a2745f6a",
+        "4ba08855422f5a69c5347d363363156da77ce8d77497bcd8f302d916a2745f6a"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 27,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/rdwr_c.h",
+      "path": "softpc.new/base/cvidc/rdwr_c.h",
+      "sha256": "78f25d584c2a5a2b7af065d122291159590b40c10b70d22f1bf48e3f22d35be6",
+      "reference_hashes": [
+        "78f25d584c2a5a2b7af065d122291159590b40c10b70d22f1bf48e3f22d35be6",
+        "78f25d584c2a5a2b7af065d122291159590b40c10b70d22f1bf48e3f22d35be6",
+        "78f25d584c2a5a2b7af065d122291159590b40c10b70d22f1bf48e3f22d35be6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 6,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/sas4gen.h",
+      "path": "softpc.new/base/cvidc/sas4gen.h",
+      "sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+      "reference_hashes": [
+        "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+        "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+        "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 666,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/sas_c.h",
+      "path": "softpc.new/base/cvidc/sas_c.h",
+      "sha256": "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10",
+      "reference_hashes": [
+        "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10",
+        "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10",
+        "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 14,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/sascdef.c",
+      "path": "softpc.new/base/cvidc/sascdef.c",
+      "sha256": "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474",
+      "reference_hashes": [
+        "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474",
+        "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474",
+        "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 126,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/segreg_c.h",
+      "path": "softpc.new/base/cvidc/segreg_c.h",
+      "sha256": "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368",
+      "reference_hashes": [
+        "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368",
+        "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368",
+        "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 27,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/sf_c.h",
+      "path": "softpc.new/base/cvidc/sf_c.h",
+      "sha256": "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f",
+      "reference_hashes": [
+        "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f",
+        "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f",
+        "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 42,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/stack_c.h",
+      "path": "softpc.new/base/cvidc/stack_c.h",
+      "sha256": "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4",
+      "reference_hashes": [
+        "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4",
+        "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4",
+        "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 45,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/strint_c.h",
+      "path": "softpc.new/base/cvidc/strint_c.h",
+      "sha256": "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88",
+      "reference_hashes": [
+        "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88",
+        "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88",
+        "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 6,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/sunhst_c.h",
+      "path": "softpc.new/base/cvidc/sunhst_c.h",
+      "sha256": "9d229f03011454c5b08835a3df36a88cb25c33b154b07191869c929e190161ac",
+      "reference_hashes": [
+        "9d229f03011454c5b08835a3df36a88cb25c33b154b07191869c929e190161ac",
+        "9d229f03011454c5b08835a3df36a88cb25c33b154b07191869c929e190161ac",
+        "9d229f03011454c5b08835a3df36a88cb25c33b154b07191869c929e190161ac"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 10,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/task_c.h",
+      "path": "softpc.new/base/cvidc/task_c.h",
+      "sha256": "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b",
+      "reference_hashes": [
+        "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b",
+        "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b",
+        "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 9,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/trace_c.h",
+      "path": "softpc.new/base/cvidc/trace_c.h",
+      "sha256": "6fa3aac92e55d2cc6463086460835f86fb1bd87ad006880f1fa2081d2f462e57",
+      "reference_hashes": [
+        "6fa3aac92e55d2cc6463086460835f86fb1bd87ad006880f1fa2081d2f462e57",
+        "6fa3aac92e55d2cc6463086460835f86fb1bd87ad006880f1fa2081d2f462e57",
+        "6fa3aac92e55d2cc6463086460835f86fb1bd87ad006880f1fa2081d2f462e57"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 18,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/vglob_c.h",
+      "path": "softpc.new/base/cvidc/vglob_c.h",
+      "sha256": "cc795d6480e57f9aaae793a88615d2242c91f1074481284106f1d919ff4df8a0",
+      "reference_hashes": [
+        "cc795d6480e57f9aaae793a88615d2242c91f1074481284106f1d919ff4df8a0",
+        "cc795d6480e57f9aaae793a88615d2242c91f1074481284106f1d919ff4df8a0",
+        "cc795d6480e57f9aaae793a88615d2242c91f1074481284106f1d919ff4df8a0"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 6,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/cvidc/xfer_c.h",
+      "path": "softpc.new/base/cvidc/xfer_c.h",
+      "sha256": "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3",
+      "reference_hashes": [
+        "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3",
+        "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3",
+        "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 15,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/btrace.c",
+      "path": "softpc.new/base/debug/btrace.c",
+      "sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "reference_hashes": [
+        "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+        "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+        "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/btrace.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/btrace.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 166,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/dasm.c",
+      "path": "softpc.new/base/debug/dasm.c",
+      "sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "reference_hashes": [
+        "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+        "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+        "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/dasm.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/dasm.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 2602,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/debuggng.c",
+      "path": "softpc.new/base/debug/debuggng.c",
+      "sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "reference_hashes": [
+        "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+        "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+        "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/debuggng.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/debuggng.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 49,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/ega_dump.c",
+      "path": "softpc.new/base/debug/ega_dump.c",
+      "sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+      "reference_hashes": [
+        "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+        "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa",
+        "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/ega_dump.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/ega_dump.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 188,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/markfrom",
+      "path": "softpc.new/base/debug/markfrom",
+      "sha256": "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83",
+      "reference_hashes": [
+        "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83",
+        "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83",
+        "d0734fc35cf6b2e8d8718217978651fdae23bf9e283f57874ffe864f8d998b83"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 0,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/pigyoda.c",
+      "path": "softpc.new/base/debug/pigyoda.c",
+      "sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+      "reference_hashes": [
+        "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+        "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
+        "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/pigyoda.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/pigyoda.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 308,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/profile.c",
+      "path": "softpc.new/base/debug/profile.c",
+      "sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+      "reference_hashes": [
+        "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+        "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+        "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/profile.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/profile.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 2790,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/trace.c",
+      "path": "softpc.new/base/debug/trace.c",
+      "sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "reference_hashes": [
+        "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+        "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+        "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/trace.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/trace.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 493,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/debug/yoda.c",
+      "path": "softpc.new/base/debug/yoda.c",
+      "sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "reference_hashes": [
+        "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+        "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+        "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/base-debug/yoda.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/yoda.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 8359,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/disks/gfi_ibm.c",
+      "path": "softpc.new/base/disks/gfi_ibm.c",
+      "sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "reference_hashes": [
+        "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+        "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+        "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/disks/gfi_ibm.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_ibm.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 444,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/disks/gfi_sflp.c",
+      "path": "softpc.new/base/disks/gfi_sflp.c",
+      "sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "reference_hashes": [
+        "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+        "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+        "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/disks/gfi_sflp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_sflp.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 656,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/disks/gfi_test.c",
+      "path": "softpc.new/base/disks/gfi_test.c",
+      "sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "reference_hashes": [
+        "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+        "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+        "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210"
+      ],
+      "graph_edges": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "edge": "build obj/disks/gfi_test.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_test.c"
+        }
+      ],
+      "valid_dependencies": [],
+      "nonblank_lines": 221,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/acc_efi.h",
+      "path": "softpc.new/base/inc/acc_efi.h",
+      "sha256": "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142",
+      "reference_hashes": [
+        "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142",
+        "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142",
+        "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 512,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/base_def.h",
+      "path": "softpc.new/base/inc/base_def.h",
+      "sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+      "reference_hashes": [
+        "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+        "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+        "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/adc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/aaa.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/aad.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/add.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/aas.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/and.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/arpl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/aam.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bsf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bsr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bound.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bswap.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/btc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/btr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/bts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cbw.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ccpupig.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/call.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cdq.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/clc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ccpusas4.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cli.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cld.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/clts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cmc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cmpxchg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cmp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cwd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/cwde.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_bsic.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_debug.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_addr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_div64.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_intr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_getset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_mul64.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_neg64.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_page.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_seg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_reg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_prot.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_tlb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_stack.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_tsksw.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_xfer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_xcptn.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_xtrn.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/daa.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/das.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/div.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/dec.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/enter.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/idiv.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/imul.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/fpu.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/inc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/in.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/into.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/invd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/intx.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/invlpg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/jcxz.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/iret.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/jmp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/jxx.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lahf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lar.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lea.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lgdt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/leave.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lidt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lldt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/loopxx.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lmsw.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lsl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ltr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/lxs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/movsx.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/mov.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/mul.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/neg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/nop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/not.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/or.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/pop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/out.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/popa.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/popf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/push.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/pushf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/pusha.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/rcl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/rcr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ret.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/rol.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ror.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/rsrvd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sahf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sbb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sar.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/setxx.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sgdt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/shl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/shld.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/shr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/shrd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sidt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sldt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/smsw.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/stc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/std.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sti.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/str.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/stubs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/test.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sub.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/verw.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/verr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/wbinvd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/wait.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/xadd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/xchg.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/xlat.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/xor.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/zfrsrvd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/sasCdef.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ntthread.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/cmos_bis.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/localfm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/bios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/cntlbop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/emm_fncs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/rom_basc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/slave_bs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/rtc_bios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/tape_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/ill_bop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/equipmnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/virtual.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/mem_size.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/build_id.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keybd_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keyba.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/at_dma.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/ppi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/idetect.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/cmosnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/ica.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/illegalp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/qevnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/rom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/timestrb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/dummy_nt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/timer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/unexp_nt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/diskbios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy_i.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fla.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_ibm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_mpty.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_sflp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_test.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/terminat.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/time_day.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/ios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/get_env.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/xt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gfx_updt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gvi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_ports.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_read.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_trcr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_dmmy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_writ.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/egawrtm0.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/egwrtm12.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SINIT011.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SINIT012.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SINIT013.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID000.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID001.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID002.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID005.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID003.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID004.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID009.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID006.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID007.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID008.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID011.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID010.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID012.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID013.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID017.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID015.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID018.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID016.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID020.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID014.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID019.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID021.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID023.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID022.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID024.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID026.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID027.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID025.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/evidfunc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/j_c_lang.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/ev_glue.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID029.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID030.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/SEVID028.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/vglfunc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/accessfn.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/mvdm_cvidc_vector_binding.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/cvidc/vglob.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer_.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/rs232_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dos/emm_mngr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/debuggng.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/ega_dump.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/profile.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/btrace.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/trace.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/pigyoda.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/yoda.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/dasm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/sim32.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_ntfun.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_timer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_msscs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_error.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_ega.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_vga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_input.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_hosts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sound.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_graph.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_bop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_wcom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sas.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rez.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cpu.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_unix.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_yoda.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_lpt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_munge.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_event.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/copy_fnc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_nls.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/config.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/stubs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_pif.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fulsc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/x86_emm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_emm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_eoi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_vdd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sec.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_det.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_umb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/fprt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_inthk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rflop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mem.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cprgs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/ntvdm_entry.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-debugger/dbg_registers.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_text_video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_keyboard_reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_effective_address.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/fmstubs_vector_defaults.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/fmstubs_activity_check.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-redir/mvdm_redirector_worker_copy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnmpipe.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrinit.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnetb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrdlcpst.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/keyboard_controller_pic_test.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/pic_reset_eoi_test.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/ccpu_stack_transition_test.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/ccpu_bounded_execution_fixture.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/v7_pointer_binding.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/cvidc_vector_binding_fixture.obj"
+        }
+      ],
+      "nonblank_lines": 253,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/build_id.h",
+      "path": "softpc.new/base/inc/build_id.h",
+      "sha256": "72c5484bf3eecc5a6c8a98c64e256c7a4d98e06c3a6172c8d9638be64b6dc3e6",
+      "reference_hashes": [
+        "72c5484bf3eecc5a6c8a98c64e256c7a4d98e06c3a6172c8d9638be64b6dc3e6",
+        "72c5484bf3eecc5a6c8a98c64e256c7a4d98e06c3a6172c8d9638be64b6dc3e6",
+        "72c5484bf3eecc5a6c8a98c64e256c7a4d98e06c3a6172c8d9638be64b6dc3e6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/build_id.obj"
+        }
+      ],
+      "nonblank_lines": 40,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/cdrom.h",
+      "path": "softpc.new/base/inc/cdrom.h",
+      "sha256": "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",
+      "reference_hashes": [
+        "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",
+        "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",
+        "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 232,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/cdrom_fn.h",
+      "path": "softpc.new/base/inc/cdrom_fn.h",
+      "sha256": "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99",
+      "reference_hashes": [
+        "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99",
+        "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99",
+        "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 95,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/chkmallc.h",
+      "path": "softpc.new/base/inc/chkmallc.h",
+      "sha256": "a73066eace8bb5104696355c34d741205779cb53472595b58812798210d513e7",
+      "reference_hashes": [
+        "a73066eace8bb5104696355c34d741205779cb53472595b58812798210d513e7",
+        "a73066eace8bb5104696355c34d741205779cb53472595b58812798210d513e7",
+        "a73066eace8bb5104696355c34d741205779cb53472595b58812798210d513e7"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/stubs.obj"
+        }
+      ],
+      "nonblank_lines": 26,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/cpu2.h",
+      "path": "softpc.new/base/inc/cpu2.h",
+      "sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "reference_hashes": [
+        "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+        "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+        "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 470,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/cpu3.h",
+      "path": "softpc.new/base/inc/cpu3.h",
+      "sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "reference_hashes": [
+        "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+        "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+        "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 1042,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/d_inst.h",
+      "path": "softpc.new/base/inc/d_inst.h",
+      "sha256": "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+      "reference_hashes": [
+        "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+        "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+        "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 417,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/d_oper.h",
+      "path": "softpc.new/base/inc/d_oper.h",
+      "sha256": "035d342c10eeed78180ed8881ef14b32477e93a12ce1c2cb35381554f598e90f",
+      "reference_hashes": [
+        "035d342c10eeed78180ed8881ef14b32477e93a12ce1c2cb35381554f598e90f",
+        "035d342c10eeed78180ed8881ef14b32477e93a12ce1c2cb35381554f598e90f",
+        "035d342c10eeed78180ed8881ef14b32477e93a12ce1c2cb35381554f598e90f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 333,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/dasm.h",
+      "path": "softpc.new/base/inc/dasm.h",
+      "sha256": "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+      "reference_hashes": [
+        "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+        "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+        "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 28,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/debug.h",
+      "path": "softpc.new/base/inc/debug.h",
+      "sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "reference_hashes": [
+        "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+        "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+        "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ccpusas4.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/popf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/zfrsrvd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/emm_fncs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/tape_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/ill_bop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/virtual.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keybd_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keyba.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/at_dma.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/ppi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/cmosnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/ica.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/illegalp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/qevnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/rom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/timer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/unexp_nt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/diskbios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy_i.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fla.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_mpty.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/terminat.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/ios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/get_env.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gfx_updt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gvi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_ports.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_read.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_dmmy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_writ.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/egawrtm0.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/egwrtm12.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dos/emm_mngr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/profile.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_ntfun.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_timer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_ega.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_vga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_input.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_hosts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sound.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_graph.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_wcom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sas.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cpu.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_unix.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_lpt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_event.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/stubs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fulsc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_emm.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_det.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_inthk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rflop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mem.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_reset.obj"
+        }
+      ],
+      "nonblank_lines": 362,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/decode.h",
+      "path": "softpc.new/base/inc/decode.h",
+      "sha256": "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+      "reference_hashes": [
+        "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+        "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+        "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 50,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/dfa.h",
+      "path": "softpc.new/base/inc/dfa.h",
+      "sha256": "c34cb343b608e1cb0cbb53f8ea0f5f4f50289d7565dd5bc36bb02fd963b0d309",
+      "reference_hashes": [
+        "c34cb343b608e1cb0cbb53f8ea0f5f4f50289d7565dd5bc36bb02fd963b0d309",
+        "c34cb343b608e1cb0cbb53f8ea0f5f4f50289d7565dd5bc36bb02fd963b0d309",
+        "c34cb343b608e1cb0cbb53f8ea0f5f4f50289d7565dd5bc36bb02fd963b0d309"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 120,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/disk_geo.h",
+      "path": "softpc.new/base/inc/disk_geo.h",
+      "sha256": "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30",
+      "reference_hashes": [
+        "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30",
+        "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30",
+        "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 44,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/dpmi.h",
+      "path": "softpc.new/base/inc/dpmi.h",
+      "sha256": "147472a572fe13d6a11307c28ef023b79b495087290b1c8124367b04f4891b46",
+      "reference_hashes": [
+        "147472a572fe13d6a11307c28ef023b79b495087290b1c8124367b04f4891b46",
+        "147472a572fe13d6a11307c28ef023b79b495087290b1c8124367b04f4891b46",
+        "147472a572fe13d6a11307c28ef023b79b495087290b1c8124367b04f4891b46"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 109,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/dterm.h",
+      "path": "softpc.new/base/inc/dterm.h",
+      "sha256": "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+      "reference_hashes": [
+        "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+        "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924",
+        "1a31bf16bf46b520110fd0d5e3562034f2c0d1f5e474ea030f98148c1c686924"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_error.obj"
+        }
+      ],
+      "nonblank_lines": 40,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/error.h",
+      "path": "softpc.new/base/inc/error.h",
+      "sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+      "reference_hashes": [
+        "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+        "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+        "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/ccpusas4.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/fpu.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/mov.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/popf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/emm_fncs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/rom_basc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/virtual.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keybd_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keyba.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/cmosnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/illegalp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/qevnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/rom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/diskbios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy_i.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fla.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_mpty.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/terminat.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/time_day.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/get_env.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gfx_updt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gvi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer_.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dos/emm_mngr.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/sim32.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_timer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_msscs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_error.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_input.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sound.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_graph.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_bop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_wcom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rez.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_unix.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_lpt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_event.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_nls.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/config.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/stubs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_pif.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fulsc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_eoi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_vdd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_det.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_umb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rflop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/ntvdm_entry.obj"
+        }
+      ],
+      "nonblank_lines": 346,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/flexlmif.h",
+      "path": "softpc.new/base/inc/flexlmif.h",
+      "sha256": "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6",
+      "reference_hashes": [
+        "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6",
+        "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6",
+        "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 51,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/getptis.h",
+      "path": "softpc.new/base/inc/getptis.h",
+      "sha256": "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c",
+      "reference_hashes": [
+        "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c",
+        "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c",
+        "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 84,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gfiempty.h",
+      "path": "softpc.new/base/inc/gfiempty.h",
+      "sha256": "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+      "reference_hashes": [
+        "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+        "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+        "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 38,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gfirflop.h",
+      "path": "softpc.new/base/inc/gfirflop.h",
+      "sha256": "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec",
+      "reference_hashes": [
+        "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec",
+        "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec",
+        "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 25,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gfisflop.h",
+      "path": "softpc.new/base/inc/gfisflop.h",
+      "sha256": "43fc7ed066c97d1c0264e08b6bcb1b3a8445f000d5a2132dcc415ebf1b0c88c4",
+      "reference_hashes": [
+        "43fc7ed066c97d1c0264e08b6bcb1b3a8445f000d5a2132dcc415ebf1b0c88c4",
+        "43fc7ed066c97d1c0264e08b6bcb1b3a8445f000d5a2132dcc415ebf1b0c88c4",
+        "43fc7ed066c97d1c0264e08b6bcb1b3a8445f000d5a2132dcc415ebf1b0c88c4"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 139,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gisp_sas.h",
+      "path": "softpc.new/base/inc/gisp_sas.h",
+      "sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+      "reference_hashes": [
+        "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+        "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
+        "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/emm_fncs.obj"
+        }
+      ],
+      "nonblank_lines": 46,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gispsvga.h",
+      "path": "softpc.new/base/inc/gispsvga.h",
+      "sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+      "reference_hashes": [
+        "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+        "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+        "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/bios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/rom.obj"
+        }
+      ],
+      "nonblank_lines": 25,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/gore.h",
+      "path": "softpc.new/base/inc/gore.h",
+      "sha256": "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2",
+      "reference_hashes": [
+        "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2",
+        "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2",
+        "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 129,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/harness.h",
+      "path": "softpc.new/base/inc/harness.h",
+      "sha256": "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77",
+      "reference_hashes": [
+        "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77",
+        "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77",
+        "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 82,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/haw.h",
+      "path": "softpc.new/base/inc/haw.h",
+      "sha256": "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c",
+      "reference_hashes": [
+        "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c",
+        "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c",
+        "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 275,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/herc.h",
+      "path": "softpc.new/base/inc/herc.h",
+      "sha256": "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f",
+      "reference_hashes": [
+        "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f",
+        "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f",
+        "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 28,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/hfx.h",
+      "path": "softpc.new/base/inc/hfx.h",
+      "sha256": "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+      "reference_hashes": [
+        "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+        "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+        "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/bios.obj"
+        }
+      ],
+      "nonblank_lines": 650,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/hg_cpu.h",
+      "path": "softpc.new/base/inc/hg_cpu.h",
+      "sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+      "reference_hashes": [
+        "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+        "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+        "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 252,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/hg_sas.h",
+      "path": "softpc.new/base/inc/hg_sas.h",
+      "sha256": "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd",
+      "reference_hashes": [
+        "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd",
+        "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd",
+        "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 26,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_cfg.h",
+      "path": "softpc.new/base/inc/host_cfg.h",
+      "sha256": "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+      "reference_hashes": [
+        "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+        "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+        "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/c_main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/mov.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/ccpu/popf.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/emm_fncs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/bios/reset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/keyba.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/keymouse/mouse_io.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/cmosnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/illegalp.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/qevnt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/system/rom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/diskbios.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy_i.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/floppy.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fla.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi_mpty.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/disks/gfi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/terminat.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/main.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/support/get_env.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/ega_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gfx_updt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/gvi.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/v7_video.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_mode.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_prts.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/vga_vide.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/video/cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/printer_.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/comms/com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_msscs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_error.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_cga.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_input.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_sound.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_graph.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_bop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_com.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_wcom.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fdisk.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_lpt.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_mouse.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_event.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/config.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/stubs.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_fulsc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_vdd.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_det.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_rflop.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/host/nt_reset.obj"
+        }
+      ],
+      "nonblank_lines": 7,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_hun.h",
+      "path": "softpc.new/base/inc/host_hun.h",
+      "sha256": "b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936",
+      "reference_hashes": [
+        "b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936",
+        "b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936",
+        "b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 2,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_msw.h",
+      "path": "softpc.new/base/inc/host_msw.h",
+      "sha256": "cf1ec4ebdc5ea03737bb97c8d0f5d82f52158e02927edb65e0e0eee5f9da4636",
+      "reference_hashes": [
+        "cf1ec4ebdc5ea03737bb97c8d0f5d82f52158e02927edb65e0e0eee5f9da4636",
+        "cf1ec4ebdc5ea03737bb97c8d0f5d82f52158e02927edb65e0e0eee5f9da4636",
+        "cf1ec4ebdc5ea03737bb97c8d0f5d82f52158e02927edb65e0e0eee5f9da4636"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 565,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_pth.h",
+      "path": "softpc.new/base/inc/host_pth.h",
+      "sha256": "82a1cb3e1d14f3561f048a82967c5129048146778db3bc79881c28a95df98d95",
+      "reference_hashes": [
+        "82a1cb3e1d14f3561f048a82967c5129048146778db3bc79881c28a95df98d95",
+        "82a1cb3e1d14f3561f048a82967c5129048146778db3bc79881c28a95df98d95",
+        "82a1cb3e1d14f3561f048a82967c5129048146778db3bc79881c28a95df98d95"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 39,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_sig.h",
+      "path": "softpc.new/base/inc/host_sig.h",
+      "sha256": "c3090a8b6b8f9f270d8d4276b88c4b5157c928a38b27ec79cccef4186d6a108b",
+      "reference_hashes": [
+        "c3090a8b6b8f9f270d8d4276b88c4b5157c928a38b27ec79cccef4186d6a108b",
+        "c3090a8b6b8f9f270d8d4276b88c4b5157c928a38b27ec79cccef4186d6a108b",
+        "c3090a8b6b8f9f270d8d4276b88c4b5157c928a38b27ec79cccef4186d6a108b"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 18,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_str.h",
+      "path": "softpc.new/base/inc/host_str.h",
+      "sha256": "6f4937cffde44e3db9ccf0950fcd13b8a5bcf871cbaca778650853d746294e95",
+      "reference_hashes": [
+        "6f4937cffde44e3db9ccf0950fcd13b8a5bcf871cbaca778650853d746294e95",
+        "6f4937cffde44e3db9ccf0950fcd13b8a5bcf871cbaca778650853d746294e95",
+        "6f4937cffde44e3db9ccf0950fcd13b8a5bcf871cbaca778650853d746294e95"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 21,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/host_uis.h",
+      "path": "softpc.new/base/inc/host_uis.h",
+      "sha256": "929e79db4ec85a73286a04100c74415091bf7ce3f9ee890e374edeae47c103df",
+      "reference_hashes": [
+        "929e79db4ec85a73286a04100c74415091bf7ce3f9ee890e374edeae47c103df",
+        "929e79db4ec85a73286a04100c74415091bf7ce3f9ee890e374edeae47c103df",
+        "929e79db4ec85a73286a04100c74415091bf7ce3f9ee890e374edeae47c103df"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 63,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/hosthunt.h",
+      "path": "softpc.new/base/inc/hosthunt.h",
+      "sha256": "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+      "reference_hashes": [
+        "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+        "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+        "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 33,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/hwvga.h",
+      "path": "softpc.new/base/inc/hwvga.h",
+      "sha256": "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72",
+      "reference_hashes": [
+        "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72",
+        "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72",
+        "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 82,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/ipx.h",
+      "path": "softpc.new/base/inc/ipx.h",
+      "sha256": "617b31c65dc4aa4ba02947eafac27459710c04f609401a6af19c46cea1bb178c",
+      "reference_hashes": [
+        "617b31c65dc4aa4ba02947eafac27459710c04f609401a6af19c46cea1bb178c",
+        "617b31c65dc4aa4ba02947eafac27459710c04f609401a6af19c46cea1bb178c",
+        "617b31c65dc4aa4ba02947eafac27459710c04f609401a6af19c46cea1bb178c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 166,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/j_c_lang.h",
+      "path": "softpc.new/base/inc/j_c_lang.h",
+      "sha256": "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+      "reference_hashes": [
+        "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+        "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+        "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/tests/cvidc_vector_binding_fixture.obj"
+        }
+      ],
+      "nonblank_lines": 47,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/jcgensyn.h",
+      "path": "softpc.new/base/inc/jcgensyn.h",
+      "sha256": "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15",
+      "reference_hashes": [
+        "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15",
+        "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15",
+        "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 24,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/jformate.h",
+      "path": "softpc.new/base/inc/jformate.h",
+      "sha256": "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c",
+      "reference_hashes": [
+        "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c",
+        "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c",
+        "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 628,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/keycaps.h",
+      "path": "softpc.new/base/inc/keycaps.h",
+      "sha256": "aeeafe559ee28ae484897740af13b51de2105e5b17a1d3bae78a01d7bb6514e2",
+      "reference_hashes": [
+        "aeeafe559ee28ae484897740af13b51de2105e5b17a1d3bae78a01d7bb6514e2",
+        "aeeafe559ee28ae484897740af13b51de2105e5b17a1d3bae78a01d7bb6514e2",
+        "aeeafe559ee28ae484897740af13b51de2105e5b17a1d3bae78a01d7bb6514e2"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 145,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/kybdmtx.h",
+      "path": "softpc.new/base/inc/kybdmtx.h",
+      "sha256": "04a7c5cfcbc08fcaef296feb55edcf779d616ba7fd0ab8fc8110ed2442a03c37",
+      "reference_hashes": [
+        "04a7c5cfcbc08fcaef296feb55edcf779d616ba7fd0ab8fc8110ed2442a03c37",
+        "04a7c5cfcbc08fcaef296feb55edcf779d616ba7fd0ab8fc8110ed2442a03c37",
+        "04a7c5cfcbc08fcaef296feb55edcf779d616ba7fd0ab8fc8110ed2442a03c37"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 39,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/lm_attr.h",
+      "path": "softpc.new/base/inc/lm_attr.h",
+      "sha256": "f0daa6a32aff8415e2921b57012752535e40751ac1a88b1f371a82e1ad4763f6",
+      "reference_hashes": [
+        "f0daa6a32aff8415e2921b57012752535e40751ac1a88b1f371a82e1ad4763f6",
+        "f0daa6a32aff8415e2921b57012752535e40751ac1a88b1f371a82e1ad4763f6",
+        "f0daa6a32aff8415e2921b57012752535e40751ac1a88b1f371a82e1ad4763f6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 68,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/lm_clien.h",
+      "path": "softpc.new/base/inc/lm_clien.h",
+      "sha256": "dcf42ddb359e55b9368c5d4e4b8f7a4ed075af40e26328b0434e3565406a8c6b",
+      "reference_hashes": [
+        "dcf42ddb359e55b9368c5d4e4b8f7a4ed075af40e26328b0434e3565406a8c6b",
+        "dcf42ddb359e55b9368c5d4e4b8f7a4ed075af40e26328b0434e3565406a8c6b",
+        "dcf42ddb359e55b9368c5d4e4b8f7a4ed075af40e26328b0434e3565406a8c6b"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 501,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/lm_code.h",
+      "path": "softpc.new/base/inc/lm_code.h",
+      "sha256": "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f",
+      "reference_hashes": [
+        "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f",
+        "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f",
+        "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 48,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/loader.h",
+      "path": "softpc.new/base/inc/loader.h",
+      "sha256": "c195ab5835bc1f5fda5d84e4539c9adece36417ffc5663fb5b789f971eb6bae3",
+      "reference_hashes": [
+        "c195ab5835bc1f5fda5d84e4539c9adece36417ffc5663fb5b789f971eb6bae3",
+        "c195ab5835bc1f5fda5d84e4539c9adece36417ffc5663fb5b789f971eb6bae3",
+        "c195ab5835bc1f5fda5d84e4539c9adece36417ffc5663fb5b789f971eb6bae3"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 77,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/low_intp.h",
+      "path": "softpc.new/base/inc/low_intp.h",
+      "sha256": "71f6bbc11d7020b985a36ae68419ec42f6779b897be564771de00ede350fb644",
+      "reference_hashes": [
+        "71f6bbc11d7020b985a36ae68419ec42f6779b897be564771de00ede350fb644",
+        "71f6bbc11d7020b985a36ae68419ec42f6779b897be564771de00ede350fb644",
+        "71f6bbc11d7020b985a36ae68419ec42f6779b897be564771de00ede350fb644"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 60,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/lq2500.h",
+      "path": "softpc.new/base/inc/lq2500.h",
+      "sha256": "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d",
+      "reference_hashes": [
+        "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d",
+        "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d",
+        "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 59,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/m_errorp.h",
+      "path": "softpc.new/base/inc/m_errorp.h",
+      "sha256": "ca61755977b972853bda02c4f659554e14efd7b7abab238f0b30e51dbd9b3d66",
+      "reference_hashes": [
+        "ca61755977b972853bda02c4f659554e14efd7b7abab238f0b30e51dbd9b3d66",
+        "ca61755977b972853bda02c4f659554e14efd7b7abab238f0b30e51dbd9b3d66",
+        "ca61755977b972853bda02c4f659554e14efd7b7abab238f0b30e51dbd9b3d66"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 11,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/m_fs.h",
+      "path": "softpc.new/base/inc/m_fs.h",
+      "sha256": "b6206bbaab8b425286721c07e1c7082dfdc0e3ff103d7d753420bcb7ef2f398e",
+      "reference_hashes": [
+        "b6206bbaab8b425286721c07e1c7082dfdc0e3ff103d7d753420bcb7ef2f398e",
+        "b6206bbaab8b425286721c07e1c7082dfdc0e3ff103d7d753420bcb7ef2f398e",
+        "b6206bbaab8b425286721c07e1c7082dfdc0e3ff103d7d753420bcb7ef2f398e"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 11,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/m_keybdp.h",
+      "path": "softpc.new/base/inc/m_keybdp.h",
+      "sha256": "b8d73e0606df03677d2b6ac550bb598e7022085df88ec43d81859b5a3f5f7672",
+      "reference_hashes": [
+        "b8d73e0606df03677d2b6ac550bb598e7022085df88ec43d81859b5a3f5f7672",
+        "b8d73e0606df03677d2b6ac550bb598e7022085df88ec43d81859b5a3f5f7672",
+        "b8d73e0606df03677d2b6ac550bb598e7022085df88ec43d81859b5a3f5f7672"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 144,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/m_lpcmp.h",
+      "path": "softpc.new/base/inc/m_lpcmp.h",
+      "sha256": "157ac9a370fc9c2e7586dbea939d39c6f0ca1ef32f91f1f2a26e441fa9fb4628",
+      "reference_hashes": [
+        "157ac9a370fc9c2e7586dbea939d39c6f0ca1ef32f91f1f2a26e441fa9fb4628",
+        "157ac9a370fc9c2e7586dbea939d39c6f0ca1ef32f91f1f2a26e441fa9fb4628",
+        "157ac9a370fc9c2e7586dbea939d39c6f0ca1ef32f91f1f2a26e441fa9fb4628"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 16,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/make_dis.h",
+      "path": "softpc.new/base/inc/make_dis.h",
+      "sha256": "aa42e79db75fcda7b0971580a86c095bf8aa49bf13e8ce6acad98f24ca9c4aa6",
+      "reference_hashes": [
+        "aa42e79db75fcda7b0971580a86c095bf8aa49bf13e8ce6acad98f24ca9c4aa6",
+        "aa42e79db75fcda7b0971580a86c095bf8aa49bf13e8ce6acad98f24ca9c4aa6",
+        "aa42e79db75fcda7b0971580a86c095bf8aa49bf13e8ce6acad98f24ca9c4aa6"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 55,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/mark_ima.h",
+      "path": "softpc.new/base/inc/mark_ima.h",
+      "sha256": "9af24af31e9c5da70bb8c25fe0aca758815fa186c185282e754535839b6e80f8",
+      "reference_hashes": [
+        "9af24af31e9c5da70bb8c25fe0aca758815fa186c185282e754535839b6e80f8",
+        "9af24af31e9c5da70bb8c25fe0aca758815fa186c185282e754535839b6e80f8",
+        "9af24af31e9c5da70bb8c25fe0aca758815fa186c185282e754535839b6e80f8"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 54,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/mda.h",
+      "path": "softpc.new/base/inc/mda.h",
+      "sha256": "751acb35ec7364ee370077bc909c6a4cf2d4472d18e3259e29f43c7665079a52",
+      "reference_hashes": [
+        "751acb35ec7364ee370077bc909c6a4cf2d4472d18e3259e29f43c7665079a52",
+        "751acb35ec7364ee370077bc909c6a4cf2d4472d18e3259e29f43c7665079a52",
+        "751acb35ec7364ee370077bc909c6a4cf2d4472d18e3259e29f43c7665079a52"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 27,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/mouse16b.h",
+      "path": "softpc.new/base/inc/mouse16b.h",
+      "sha256": "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+      "reference_hashes": [
+        "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+        "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+        "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 55,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/ms_windo.h",
+      "path": "softpc.new/base/inc/ms_windo.h",
+      "sha256": "f76510e61219069b0864434a6920a8639c4f7d2905d0ab9df22e0663ed27e52d",
+      "reference_hashes": [
+        "f76510e61219069b0864434a6920a8639c4f7d2905d0ab9df22e0663ed27e52d",
+        "f76510e61219069b0864434a6920a8639c4f7d2905d0ab9df22e0663ed27e52d",
+        "f76510e61219069b0864434a6920a8639c4f7d2905d0ab9df22e0663ed27e52d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 981,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/msw_dbg.h",
+      "path": "softpc.new/base/inc/msw_dbg.h",
+      "sha256": "3726b678c5bd4e98484c423b685b178d28c074625ce1de934d946f07021848e7",
+      "reference_hashes": [
+        "3726b678c5bd4e98484c423b685b178d28c074625ce1de934d946f07021848e7",
+        "3726b678c5bd4e98484c423b685b178d28c074625ce1de934d946f07021848e7",
+        "3726b678c5bd4e98484c423b685b178d28c074625ce1de934d946f07021848e7"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 325,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/msw_keyb.h",
+      "path": "softpc.new/base/inc/msw_keyb.h",
+      "sha256": "e39f2af151f2f67f17610d2834254a3cf7063f51ed6faf3e90c25ef799847785",
+      "reference_hashes": [
+        "e39f2af151f2f67f17610d2834254a3cf7063f51ed6faf3e90c25ef799847785",
+        "e39f2af151f2f67f17610d2834254a3cf7063f51ed6faf3e90c25ef799847785",
+        "e39f2af151f2f67f17610d2834254a3cf7063f51ed6faf3e90c25ef799847785"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 198,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/msw_snd.h",
+      "path": "softpc.new/base/inc/msw_snd.h",
+      "sha256": "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+      "reference_hashes": [
+        "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+        "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+        "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 159,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/novell.h",
+      "path": "softpc.new/base/inc/novell.h",
+      "sha256": "4fb1d6008cbaea0c3b36985743ec00bbf0441fa3aeea1fbefb17c6a598a0bcbf",
+      "reference_hashes": [
+        "4fb1d6008cbaea0c3b36985743ec00bbf0441fa3aeea1fbefb17c6a598a0bcbf",
+        "4fb1d6008cbaea0c3b36985743ec00bbf0441fa3aeea1fbefb17c6a598a0bcbf",
+        "4fb1d6008cbaea0c3b36985743ec00bbf0441fa3aeea1fbefb17c6a598a0bcbf"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 138,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/profile.h",
+      "path": "softpc.new/base/inc/profile.h",
+      "sha256": "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+      "reference_hashes": [
+        "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+        "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+        "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/base-debug/profile.obj"
+        }
+      ],
+      "nonblank_lines": 212,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/rommap.h",
+      "path": "softpc.new/base/inc/rommap.h",
+      "sha256": "b3e37f197c8bf67333bc72ea5035dcc529d714330ece237abdf0bc06a1152105",
+      "reference_hashes": [
+        "b3e37f197c8bf67333bc72ea5035dcc529d714330ece237abdf0bc06a1152105",
+        "b3e37f197c8bf67333bc72ea5035dcc529d714330ece237abdf0bc06a1152105",
+        "b3e37f197c8bf67333bc72ea5035dcc529d714330ece237abdf0bc06a1152105"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 45,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/smeg.h",
+      "path": "softpc.new/base/inc/smeg.h",
+      "sha256": "2e0bca83b80f59054c6bec10ebe391dc47cf19573426dc3253494ec427266b7e",
+      "reference_hashes": [
+        "2e0bca83b80f59054c6bec10ebe391dc47cf19573426dc3253494ec427266b7e",
+        "2e0bca83b80f59054c6bec10ebe391dc47cf19573426dc3253494ec427266b7e",
+        "2e0bca83b80f59054c6bec10ebe391dc47cf19573426dc3253494ec427266b7e"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 83,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/smeg_hea.h",
+      "path": "softpc.new/base/inc/smeg_hea.h",
+      "sha256": "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d",
+      "reference_hashes": [
+        "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d",
+        "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d",
+        "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 74,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/spc_icon.h",
+      "path": "softpc.new/base/inc/spc_icon.h",
+      "sha256": "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea",
+      "reference_hashes": [
+        "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea",
+        "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea",
+        "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 126,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    },
+    {
+      "key": "softpc.new/base/inc/standard.h",
+      "path": "softpc.new/base/inc/standard.h",
+      "sha256": "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+      "reference_hashes": [
+        "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+        "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+        "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335"
+      ],
+      "graph_edges": [],
+      "valid_dependencies": [],
+      "nonblank_lines": 69,
+      "guard_only": false,
+      "suggested_status": "pending-specific-owner-and-semantics"
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ],
+  "limitations": "Original identity, source edges and VALID deps are bounded; no runtime/function coverage."
+}

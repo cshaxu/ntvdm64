@@ -76,6 +76,9 @@ their asynchronous, lifecycle and test-evidence boundaries.
 The [part 1 handoff](nine-way/part-1/HANDOFF.md) indexes the DOS, debugger,
 font and external provider observations. Its per-key receipt coverage is not
 an acceptance or applicability decision for the remaining external sources.
+The [part 4 MVDM review](nine-way/part-4/mvdm-review.md) separates selected
+and diagnostic build inputs, while its [raster inventory](nine-way/part-4/external-mini-review.md)
+retains per-device relevance pending provider verification.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
