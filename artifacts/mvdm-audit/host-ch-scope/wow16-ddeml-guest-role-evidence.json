@@ -1,0 +1,77 @@
+{
+  "graph_count": 34,
+  "graph_sha256": {
+    "build\\.ninja\\console-observers-x64\\build.ninja": "2943da8cd06aa6c9e412f341f31a59f76970b71877c23a0d4ecee799206a2d3f",
+    "build\\.ninja\\msvc-x64-formal-release\\build.ninja": "25b1444bdb11fc879bc486a566f0f4916563dbeb94001fade443c0ad397425e9",
+    "build\\.ninja\\msvc-x64-release\\build.ninja": "73dd6831fe2befe3cfc01b228afb26fb2f4eb4d2652982c79a793c3a871cf357",
+    "build\\.ninja\\msvc-x86-formal-release\\build.ninja": "00f8e1d918128c26ec29a2b063e689bbc9581ab7dc31f281ebdae0f584a6442d",
+    "build\\.ninja\\msvc-x86-release\\build.ninja": "9dc237088472bfa070a80b2bc420ef0b3a202291dc2bdba233d101c821473b25",
+    "build\\.ninja\\msvc-x86-suballoc-audit\\build.ninja": "b45cea64707f692026f1f38fde79e964aa5bccef326f02ed37423143c245115e",
+    "build\\.ninja\\observations-x64\\build.ninja": "5e4e2312bdfba00d3aa4131beb9626bafee786a65f604e9b3bcba9891ce5806c",
+    "build\\.ninja\\pkg-uuid-x64\\build.ninja": "828ebac8ffd3e8a461fa05ac0a061e17137adf9ffd4474249a12ba2dc6068d0e",
+    "build\\.ninja\\pkg-uuid-x86\\build.ninja": "aa39cca521ffb8de6860e177626bc7d5c362b1b62946d907d6d6e63ea3a4ba98",
+    "build\\.ninja\\t463-s2-dialog-end-boundary\\build.ninja": "02cebb3f446a57897a9250f9996220e5c2a85bb63a8b36871069029a06e2e9f3",
+    "build\\.ninja\\t463-s2-dialog-procedure\\build.ninja": "12a4dbeab6e869d69c51d5d2f6f979340509e224705ca0e85c4b2ce5124e200f",
+    "build\\.ninja\\t473-s8-control-boundaries\\build.ninja": "55c81c57df0b2fde32f877403f6afe031bd067bb0c0246c16cb058597a0393bf",
+    "build\\.ninja\\pkg-uuid-x86\\worker\\build.ninja": "b1bc7b95c2a9dbc1a9dd8cc88931d86941ee146017c37a5eccb6843fa80ac470",
+    "build\\.ninja\\pkg-uuid-x86\\wow32\\build.ninja": "7cfa48c6823045472ce4357e518397324f6e93364ceca55ad11223e1cbf006aa",
+    "build\\.ninja\\pkg-uuid-x64\\frontend\\build.ninja": "aa3d766f7c561bb1e8df6cac1f86aa1a7b3db4c017400db6b3adb157a6a7072f",
+    "build\\.ninja\\pkg-uuid-x64\\hook\\build.ninja": "70d1791fc3210af2416697be0d645801f41281c33bef71c64f1362e75b221c74",
+    "build\\.ninja\\pkg-uuid-x64\\launcher\\build.ninja": "0a61b9dd5296e6fcc9b4f49f9276457f02db7bce1662754c8a50cee0f7689cfb",
+    "build\\.ninja\\pkg-uuid-x64\\monitor\\build.ninja": "949b5f662842dcf26605dfb1126f965ce7eab3264c365166224692208f3a966c",
+    "build\\.ninja\\pkg-uuid-x64\\service\\build.ninja": "8ba060405eddf404e6852cdae21fae7752bc3bd147963c0cb93e3206477e1b87",
+    "build\\.ninja\\pkg-uuid-x64\\worker\\build.ninja": "f91c4ad0fa322307d54800418ff576473a8fc1970c25bfa885bb613ca8b3f118",
+    "build\\.ninja\\pkg-uuid-x64\\worker-reference-x86\\build.ninja": "137eca21973f2228694943d284fe763fe66f8077f167579d17eb253aa6654009",
+    "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja": "eb6687e99014c0e17a63f98cdc772dd3280692ff584552d3481f50078a7467f8",
+    "build\\.ninja\\msvc-x86-release\\style-fixtures\\build.ninja": "2063ca7d6cfa03f4c62c6d45ab0aff58fe0f97ff8a75b50d17a9989aebdcba1d",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278",
+    "build\\.ninja\\msvc-x64-release\\frontend\\build.ninja": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1",
+    "build\\.ninja\\msvc-x64-release\\hook\\build.ninja": "918bcece19fa96b449314ada0a3b74a5fdf3751c15437dfe10d624a458fa0849",
+    "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja": "9a86a6253082ec795b4922dbed628f3cb22453bac04463824d5117920018412d",
+    "build\\.ninja\\msvc-x64-release\\monitor\\build.ninja": "556f580296a7f3752fa5dc71dba7de4087c35cea79ca21d757c7b688a1e0b4b7",
+    "build\\.ninja\\msvc-x64-release\\observation\\build.ninja": "2943da8cd06aa6c9e412f341f31a59f76970b71877c23a0d4ecee799206a2d3f",
+    "build\\.ninja\\msvc-x64-release\\service\\build.ninja": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9",
+    "build\\.ninja\\msvc-x64-release\\style-fixtures\\build.ninja": "b4a1ed748496a2e00dcb140045c317408b07d60ee7fbb03b9f0fff137d29b0fd",
+    "build\\.ninja\\msvc-x64-release\\worker\\build.ninja": "732526cca6bae92e860b6ed415ee96f0912c8cd3331ed87846eff5bdaefc44c5",
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja": "0eedaa88e612e34b4631f52064d680c7e5a80bd85c64835751c391061b8c521e"
+  },
+  "files": {
+    "wow16/ddeml/dmgdb.c": {
+      "sha256": "a1f7df43d0ce8cdef64271e778fd1e2d5d55ce7ce92df7e8508e1abb175e5b71",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmgdde.c": {
+      "sha256": "e9b8d0ee1e58cbb1944171704c735d35d8de41a9d366b25db06094be1ce40505",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmghsz.c": {
+      "sha256": "057b6e90ed65a296ef1151a02c5e5b8319d7ea5dd2a1904667acd6baf25562a3",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmgmem.c": {
+      "sha256": "94dbd9d00a8d907fe86eeccaf066e880ff5763381527979d0b5f35ac9b90edb8",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmgmon.c": {
+      "sha256": "cc5f2fc70db0a2fb0bfed3f5ef6b43edad78f9cb90e4ab7e8c9662f3fbff0925",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmgq.c": {
+      "sha256": "254d37ce3990229730dbbfc3cb97c2d32f2eef2d514385abc08b49f77f825e0b",
+      "selected_graph_edges": [],
+      "host_includes": []
+    },
+    "wow16/ddeml/dmgwndp.c": {
+      "sha256": "90ed7ba26029ba4b2dda2cd4bc6f857bf6a6150c6f8f97d9fe2ce02a89283875",
+      "selected_graph_edges": [],
+      "host_includes": []
+    }
+  },
+  "limits": "bounded generated Ninja graphs and named host directories; does not prove all host configurations or guest capability"
+}
