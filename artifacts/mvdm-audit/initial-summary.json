@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1453,
+    "pending": 1448,
     "excluded": 2652,
-    "partial": 526,
+    "partial": 531,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Original C-VID vector tables bind 692 initial image pointers; dynamic selection and behavior remain open."
+  "note": "Five selected original DOS and C-VID owners are partial; behavior and lifecycle remain open."
 }

@@ -44,7 +44,7 @@ dos/command/cmd.c,0,partial,shard-0/review.csv
 dos/command/cmd.h,1,partial,shard-1/file-audit.csv
 dos/command/cmdconf.c,0,partial,shard-0/review.csv
 dos/command/cmddata.c,2,partial,shard-2/file-audit.csv
-dos/command/cmddisp.c,2,pending,shard-2/file-audit.csv
+dos/command/cmddisp.c,2,partial,shard-2/file-audit.csv
 dos/command/cmdenv.c,1,partial,shard-1/file-audit.csv
 dos/command/cmdexec.c,0,partial,shard-0/review.csv
 dos/command/cmdexit.c,1,pending,shard-1/file-audit.csv
@@ -70,7 +70,7 @@ dos/command/obj/i386/cmdredir.obj,2,excluded,shard-2/file-audit.csv
 dos/command/sources,1,partial,shard-1/file-audit.csv
 dos/dem/dem.c,2,partial,shard-2/file-audit.csv
 dos/dem/dem.h,0,partial,shard-0/review.csv
-dos/dem/demdasd.c,2,pending,shard-2/file-audit.csv
+dos/dem/demdasd.c,2,partial,shard-2/file-audit.csv
 dos/dem/demdasd.h,0,partial,shard-0/review.csv
 dos/dem/demdata.c,3,partial,shard-3/file-review.csv
 dos/dem/demdir.c,1,pending,shard-1/file-audit.csv
@@ -80,9 +80,9 @@ dos/dem/demfcb.c,0,partial,shard-0/review.csv
 dos/dem/demfile.c,2,partial,shard-2/file-audit.csv
 dos/dem/demgset.c,1,partial,shard-1/file-audit.csv
 dos/dem/demhndl.c,3,partial,shard-3/file-review.csv
-dos/dem/demioctl.c,2,pending,shard-2/file-audit.csv
+dos/dem/demioctl.c,2,partial,shard-2/file-audit.csv
 dos/dem/demlabel.c,1,pending,shard-1/file-audit.csv
-dos/dem/demlock.c,2,pending,shard-2/file-audit.csv
+dos/dem/demlock.c,2,partial,shard-2/file-audit.csv
 dos/dem/demmisc.c,1,partial,shard-1/file-audit.csv
 dos/dem/demmsg.c,1,pending,shard-1/file-audit.csv
 dos/dem/demmsg.h,3,pending,shard-3/file-review.csv
@@ -1732,7 +1732,7 @@ softpc.new/base/cvidc/sf_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/shift_c.h,0,pending,shard-0/review.csv
 softpc.new/base/cvidc/simple_c.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/cvidc/sinit011.c,0,pending,shard-0/review.csv
-softpc.new/base/cvidc/sinit012.c,3,pending,shard-3/file-review.csv
+softpc.new/base/cvidc/sinit012.c,3,partial,shard-3/file-review.csv
 softpc.new/base/cvidc/sinit013.c,2,pending,shard-2/file-audit.csv
 softpc.new/base/cvidc/sources,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/stack_c.h,3,pending,shard-3/file-review.csv

@@ -1,0 +1,739 @@
+{
+  "result": "pass",
+  "base": "f472b0926 or subsequent audit-only commits",
+  "scope": "Only shard 1 pending C-VID source paths; no guest or whole behavior acceptance",
+  "deps_blocks": 639,
+  "deps_sha256": "DCB97A4318ABD2844BD9333CDF014E9B7AD3D11FB3D1F65EBCE6A9669B911430",
+  "preprocess_units": [
+    {
+      "target": "obj/host/nt_cpu.obj",
+      "output_sha256": "47C379B30F731E0174D717EADA1D3CD7D128D7B0796932B952EB6779BDDC22A9"
+    },
+    {
+      "target": "obj/cvidc/accessfn.obj",
+      "output_sha256": "4052563E4A186A387E8AEE8B3A7C2757967C68F0497D7E8FC844A8E6D5A61634"
+    },
+    {
+      "target": "obj/cvidc/ev_glue.obj",
+      "output_sha256": "0A45BEF726BFCC3DC94E2C7A10E8BF1F71959A31AAEFE9102EF6ABCDE09C3A66"
+    },
+    {
+      "target": "obj/video/ega_prts.obj",
+      "output_sha256": "EC668F5DA360C0CBB129A4BF66C46AF2EA0414A6D32108160966560A1F9E3C21"
+    },
+    {
+      "target": "obj/cvidc/vglob.obj",
+      "output_sha256": "B1A05ABF2CCD777207CEE8161A7BC93B47B86D70841A5174BAFC6FDC79D925DE"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\sources",
+      "sha256": "B8EEC6C3EF6A25D99D47C7987CB1FF5C07CAA255CC95A4FC111462E8598495CC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\cvidc\\vglfunc.obj",
+      "sha256": "373A17A350534171F23028CDFDC5AFFA3B9C6B0EFBD9C49DAE78E6BDE236BD84"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\t473-s10\\parallel8-cvidc-preprocess-r1\\result.json",
+      "sha256": "0837C86C97E06206C779CCA3E00B946BE889DF8466E1D94E21E3BA3336B3F46E"
+    }
+  ],
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/cvidc/access_c.h",
+      "sha256": "CC53344D9CE5DF3D47FC7DEE463862E8FA769DD59FE885CE7DC4FCD0040B53C2",
+      "wow_source_ids": "SRC:26a938402aca2c80b7df;SRC:9a2133ca07e15bf2d760",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/bodge_c.h",
+      "sha256": "42135D53DA8EB4733CBFBC6FE1EA2408F7B3595AD957E5B929A16D97941D6EEA",
+      "wow_source_ids": "SRC:511830fd0678b40af6f9;SRC:ee9871325de38c5183c9",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/btest_c.h",
+      "sha256": "7DE5938D9B167251BD61E326D7F2142381F7FAC36CF942195F8CC3B10AC3F595",
+      "wow_source_ids": "SRC:4d8b0f7e25d06f4f18a1;SRC:65c67f9936910f5049b2",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/buffer_c.h",
+      "sha256": "76E130306D75308A614F40D3A0507F1B546C12CE41C0C95EE87CD8834D5BA305",
+      "wow_source_ids": "SRC:3427ce5adfd7a4181904;SRC:796e176a3a9949e27f43",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/c2cput_c.h",
+      "sha256": "675216D270EA83BB20F5A3323DE6C04C280F363F921CB4B037FC5786A26AA49D",
+      "wow_source_ids": "SRC:3164aa3e06f21303d4d7;SRC:c5a68ac10cb6b992a7f6",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/contxt_c.h",
+      "sha256": "30EB579C995B281E873C6501FDA356027B8B782867C65ECD8B73FF420C906C6C",
+      "wow_source_ids": "SRC:2511857ceba204032546;SRC:eaba10e56e657c304e66",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/cpu_c.h",
+      "sha256": "8CD25A965F1866A6D8E64621712C00D2C5CB83F47C053C7AAC8CB72CE6620F15",
+      "wow_source_ids": "SRC:33eedcb476d997ac138b;SRC:a90b0808e346a606e01d",
+      "current_dependent_objects": [
+        "obj/host/nt_cpu.obj"
+      ],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/cpumod_c.h",
+      "sha256": "181A1204E685459661B200AA1BA804C3496105D5ED5CA28110AA0365F2D08785",
+      "wow_source_ids": "SRC:10839c1bb29c8d7cbfc5;SRC:a0f1bd62c268e69d78d3",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/cpureg_c.h",
+      "sha256": "40122F36CE134BB1B98556D595BF11F3CABC9B30551C370C50F2A95CD865AE73",
+      "wow_source_ids": "SRC:4de80d45cd94bd189efb;SRC:64022df552580ae84d84",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/flags_c.h",
+      "sha256": "3B1A17FF4F053C314E313F56DB3DC8C075D2E0631402B6A0260C485C50FBC026",
+      "wow_source_ids": "SRC:696dda30fb15c80c773e;SRC:98da57e2d25062b59bf4",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/frag_c.h",
+      "sha256": "599CFC4449C0F7737F0EBC9EB95CB8845244A72551E5E653BC7C74EE8B559578",
+      "wow_source_ids": "SRC:09496a0158e02b3edff7;SRC:cfea8b88ffb3da57dbe2",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/inst_c.h",
+      "sha256": "5769C2A8776DFA91149F5875B9D23163205A08B0ABBED5A003F74C17AACEF7F7",
+      "wow_source_ids": "SRC:1fac3ac0193e2c178d54;SRC:9a742b48a378d7fdfb16",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/io_c.h",
+      "sha256": "CF0EE3BEEA5BB6DD847AA6AA92F3127B0C6F095BFD66142252C401BEBE6B8396",
+      "wow_source_ids": "SRC:cf381a1a890540ed0c0f;SRC:dd79e01a5c6e24d51d06",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/lxs_c.h",
+      "sha256": "06312F9AE7A7080525EAEA432405B4EBF4D4D6A8A8E049F52C134AAEE6423666",
+      "wow_source_ids": "SRC:9c72ad7bdf14baa53db1;SRC:c6417756405b3445eee7",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/mark_c.h",
+      "sha256": "E06A0659134FD760752119DCF16A6A7AB0D68F9CB9230488ABEE10573B3C71DD",
+      "wow_source_ids": "SRC:6370417cbd7fb2ba760d;SRC:dcc7ce3262149b9a1256",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/misc_c.h",
+      "sha256": "EF97191D02794B940D4D888DEBE84815617D48FE994FA442891DF3E1FEE0617B",
+      "wow_source_ids": "SRC:18c4f8b3e4974c043639;SRC:97429f15a2c2664d53e3",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/nanoc_c.h",
+      "sha256": "7E92EC8459DA354D4144A4A2334DE6028F60817104FC6F7763B56B23597798B1",
+      "wow_source_ids": "SRC:0a4f76593c1c19809654;SRC:a5fb3ff45772844b298d",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/pigger_c.h",
+      "sha256": "61C86D668BDDAF998101A0DA469115325AD822F751D4B964DCAAD35EA4E7DE9F",
+      "wow_source_ids": "SRC:52b2a2d92b16d15cd561;SRC:d4e079465c8526aa1135",
+      "current_dependent_objects": [
+        "obj/cvidc/accessfn.obj"
+      ],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/ppchst_c.h",
+      "sha256": "6B438B02A5CE3EE09F3195F65F776921B5ECCC55E66D6ADE6CA9B1C2ED584CD3",
+      "wow_source_ids": "SRC:867af2fdb91d772c0d1c;SRC:cc3dbe473d34993b3780",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/sas_c.h",
+      "sha256": "0F9683A8B850161A763859D1AD3783D7E7B18D9F14A1C7B37402E85575976E10",
+      "wow_source_ids": "SRC:7ac53ce5d69bd64abfa8;SRC:b243ab2f32dfd018ec3b",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/segreg_c.h",
+      "sha256": "7535415EF1CB3BA8EC8FF2CC279982FEC90EBFD2E42B65FE1CE278A1290DA368",
+      "wow_source_ids": "SRC:163512f558d1a9deedaf;SRC:2fef71f26c2a9310eef1",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/sf_c.h",
+      "sha256": "ACACED67533F691CEAC18C04E6AF7F3E73DD4C43DBC939494FD5D16D0C31413F",
+      "wow_source_ids": "SRC:207d34033dd00e59e085;SRC:a4cf0416a074351b8332",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/strint_c.h",
+      "sha256": "554636DB8BEF72089516E17B9E4D4259C25095DD10F021ADAAB62690D6A6AA88",
+      "wow_source_ids": "SRC:7732beaabd3ae8f48049;SRC:b3f5073908b54f2df144",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/strsub_c.h",
+      "sha256": "E5DB3A9DC7997F4AC92A49845C34D3F5F1F9444D51E204DAF3AA59A98131E88B",
+      "wow_source_ids": "SRC:5f90dbac15bf7e0cc12e;SRC:8c907494b41519389433",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/sub_c.h",
+      "sha256": "0A7C443052FF007A112C6EEB894EF7BB8B36C8EECA268BDE207F9236FD2EA1A6",
+      "wow_source_ids": "SRC:10fc1d4e0c4585b67172;SRC:996398951c11f7ed7e67",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/task_c.h",
+      "sha256": "6B68909CE0CAE83346AD342D45D78181DA5BC89B8FB81E2760A7590665A2D11B",
+      "wow_source_ids": "SRC:1f54eae31ca397881fca;SRC:29b18059ea4bbb6744fe",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/test_c.h",
+      "sha256": "2EEE5D31833F95FBFAE772124D899DADDB3AF370D550ED2CF5333825740B6917",
+      "wow_source_ids": "SRC:5c8e830baa280c0b4054;SRC:9a0cf6c760ce2b1dd8b4",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/vglfunc.c",
+      "sha256": "22385F8A0F196C79B2F27B89EE33F7AE9D955304385D226522E2C06FA8726805",
+      "wow_source_ids": "SRC:d31ba9fb0df5c23112c2;SRC:eceaf29ed58a074e8fd5",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/xchg_c.h",
+      "sha256": "0154055071207581F4178B5D7C69D217E14EAC20ACF686BE6F49F75D7406C66D",
+      "wow_source_ids": "SRC:1f5dfdec50744df4b4b6;SRC:879afaf741e80a67b49b",
+      "current_dependent_objects": [],
+      "preprocessed_nonblank_lines": {}
+    }
+  ],
+  "table": {
+    "name": "_C_Video",
+    "va": 6006152,
+    "nonnull": [
+      {
+        "index": 0,
+        "name": "_S_0363_CiGetVideolatches_00000000",
+        "va": 4790656,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 1,
+        "name": "_S_0364_CiGetVideorplane_00000001",
+        "va": 4790688,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 2,
+        "name": "_S_0365_CiGetVideowplane_00000002",
+        "va": 4790720,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 3,
+        "name": "_S_0366_CiGetVideoscratch_00000003",
+        "va": 4790752,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 4,
+        "name": "_S_0367_CiGetVideosr_masked_val_00000004",
+        "va": 4790784,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 5,
+        "name": "_S_0368_CiGetVideosr_nmask_00000005",
+        "va": 4790816,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 6,
+        "name": "_S_0369_CiGetVideodata_and_mask_00000006",
+        "va": 4790848,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 7,
+        "name": "_S_0370_CiGetVideodata_xor_mask_00000007",
+        "va": 4790880,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 8,
+        "name": "_S_0371_CiGetVideolatch_xor_mask_00000008",
+        "va": 4790912,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 9,
+        "name": "_S_0372_CiGetVideobit_prot_mask_00000009",
+        "va": 4790944,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 10,
+        "name": "_S_0373_CiGetVideoplane_enable_0000000a",
+        "va": 4790976,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 11,
+        "name": "_S_0374_CiGetVideoplane_enable_mask_0000000b",
+        "va": 4791008,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 12,
+        "name": "_S_0375_CiGetVideosr_lookup_0000000c",
+        "va": 4791040,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 13,
+        "name": "_S_0376_CiGetVideofwd_str_read_addr_0000000d",
+        "va": 4791072,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 14,
+        "name": "_S_0377_CiGetVideobwd_str_read_addr_0000000e",
+        "va": 4791104,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 15,
+        "name": "_S_0378_CiGetVideodirty_total_0000000f",
+        "va": 4791136,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 16,
+        "name": "_S_0379_CiGetVideodirty_low_00000010",
+        "va": 4791168,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 17,
+        "name": "_S_0380_CiGetVideodirty_high_00000011",
+        "va": 4791200,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 18,
+        "name": "_S_0381_CiGetVideovideo_copy_00000012",
+        "va": 4791232,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 19,
+        "name": "_S_0382_CiGetVideomark_byte_00000013",
+        "va": 4791264,
+        "owner": "original-softpc-cvidc:SINIT011.obj"
+      },
+      {
+        "index": 20,
+        "name": "_S_0383_CiGetVideomark_word_00000014",
+        "va": 4795504,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 21,
+        "name": "_S_0384_CiGetVideomark_string_00000015",
+        "va": 4795536,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 22,
+        "name": "_S_0385_CiGetVideoread_shift_count_00000016",
+        "va": 4795568,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 23,
+        "name": "_S_0386_CiGetVideoread_mapped_plane_00000017",
+        "va": 4795600,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 24,
+        "name": "_S_0387_CiGetVideocolour_comp_00000018",
+        "va": 4795632,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 25,
+        "name": "_S_0388_CiGetVideodont_care_00000019",
+        "va": 4795664,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 26,
+        "name": "_S_0389_CiGetVideov7_bank_vid_copy_off_0000001a",
+        "va": 4795696,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 27,
+        "name": "_S_0390_CiGetVideoscreen_ptr_0000001b",
+        "va": 4795728,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 28,
+        "name": "_S_0391_CiGetVideorotate_0000001c",
+        "va": 4795760,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 29,
+        "name": "_S_0392_CiGetVideocalc_data_xor_0000001d",
+        "va": 4795792,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 30,
+        "name": "_S_0393_CiGetVideocalc_latch_xor_0000001e",
+        "va": 4795824,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 31,
+        "name": "_S_0394_CiGetVideoread_byte_addr_0000001f",
+        "va": 4795856,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 32,
+        "name": "_S_0395_CiGetVideov7_fg_latches_00000020",
+        "va": 4795888,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 33,
+        "name": "_S_0396_CiGetVideoGC_regs_00000021",
+        "va": 4795920,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 34,
+        "name": "_S_0397_CiGetVideolast_GC_index_00000022",
+        "va": 4795952,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 35,
+        "name": "_S_0398_CiGetVideodither_00000023",
+        "va": 4795984,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 36,
+        "name": "_S_0399_CiGetVideowrmode_00000024",
+        "va": 4796016,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 37,
+        "name": "_S_0400_CiGetVideochain_00000025",
+        "va": 4796048,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 38,
+        "name": "_S_0401_CiGetVideowrstate_00000026",
+        "va": 4796080,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 39,
+        "name": "_S_0402_CiSetVideolatches_00000027",
+        "va": 4796112,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 40,
+        "name": "_S_0403_CiSetVideorplane_00000028",
+        "va": 4796144,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 41,
+        "name": "_S_0404_CiSetVideowplane_00000029",
+        "va": 4796176,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 42,
+        "name": "_S_0405_CiSetVideoscratch_0000002a",
+        "va": 4796208,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 43,
+        "name": "_S_0406_CiSetVideosr_masked_val_0000002b",
+        "va": 4796240,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 44,
+        "name": "_S_0407_CiSetVideosr_nmask_0000002c",
+        "va": 4796272,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 45,
+        "name": "_S_0408_CiSetVideodata_and_mask_0000002d",
+        "va": 4796304,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 46,
+        "name": "_S_0409_CiSetVideodata_xor_mask_0000002e",
+        "va": 4796336,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 47,
+        "name": "_S_0410_CiSetVideolatch_xor_mask_0000002f",
+        "va": 4796368,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 48,
+        "name": "_S_0411_CiSetVideobit_prot_mask_00000030",
+        "va": 4796400,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 49,
+        "name": "_S_0412_CiSetVideoplane_enable_00000031",
+        "va": 4796432,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 50,
+        "name": "_S_0413_CiSetVideoplane_enable_mask_00000032",
+        "va": 4796464,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 51,
+        "name": "_S_0414_CiSetVideosr_lookup_00000033",
+        "va": 4796496,
+        "owner": "original-softpc-cvidc:SINIT012.obj"
+      },
+      {
+        "index": 52,
+        "name": "_S_0415_CiSetVideofwd_str_read_addr_00000034",
+        "va": 4803952,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 53,
+        "name": "_S_0416_CiSetVideobwd_str_read_addr_00000035",
+        "va": 4803984,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 54,
+        "name": "_S_0417_CiSetVideodirty_total_00000036",
+        "va": 4804016,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 55,
+        "name": "_S_0418_CiSetVideodirty_low_00000037",
+        "va": 4804048,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 56,
+        "name": "_S_0419_CiSetVideodirty_high_00000038",
+        "va": 4804080,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 57,
+        "name": "_S_0420_CiSetVideovideo_copy_00000039",
+        "va": 4804112,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 58,
+        "name": "_S_0421_CiSetVideomark_byte_0000003a",
+        "va": 4804144,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 59,
+        "name": "_S_0422_CiSetVideomark_word_0000003b",
+        "va": 4804176,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 60,
+        "name": "_S_0423_CiSetVideomark_string_0000003c",
+        "va": 4804208,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 61,
+        "name": "_S_0424_CiSetVideoread_shift_count_0000003d",
+        "va": 4804240,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 62,
+        "name": "_S_0425_CiSetVideoread_mapped_plane_0000003e",
+        "va": 4804272,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 63,
+        "name": "_S_0426_CiSetVideocolour_comp_0000003f",
+        "va": 4804304,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 64,
+        "name": "_S_0427_CiSetVideodont_care_00000040",
+        "va": 4804336,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 65,
+        "name": "_S_0428_CiSetVideov7_bank_vid_copy_off_00000041",
+        "va": 4804368,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 66,
+        "name": "_S_0429_CiSetVideoscreen_ptr_00000042",
+        "va": 4804400,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 67,
+        "name": "_S_0430_CiSetVideorotate_00000043",
+        "va": 4804432,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 68,
+        "name": "_S_0431_CiSetVideocalc_data_xor_00000044",
+        "va": 4804464,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 69,
+        "name": "_S_0432_CiSetVideocalc_latch_xor_00000045",
+        "va": 4804496,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 70,
+        "name": "_S_0433_CiSetVideoread_byte_addr_00000046",
+        "va": 4804528,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 71,
+        "name": "_S_0434_CiSetVideov7_fg_latches_00000047",
+        "va": 4804560,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 72,
+        "name": "_S_0435_CiSetVideoGC_regs_00000048",
+        "va": 4804592,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 73,
+        "name": "_S_0436_CiSetVideolast_GC_index_00000049",
+        "va": 4804624,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 74,
+        "name": "_S_0437_CiSetVideodither_0000004a",
+        "va": 4804656,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 75,
+        "name": "_S_0438_CiSetVideowrmode_0000004b",
+        "va": 4804688,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 76,
+        "name": "_S_0439_CiSetVideochain_0000004c",
+        "va": 4804720,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      },
+      {
+        "index": 77,
+        "name": "_S_0440_CiSetVideowrstate_0000004d",
+        "va": 4804752,
+        "owner": "original-softpc-cvidc:SINIT013.obj"
+      }
+    ],
+    "null_slots": [
+      78,
+      79,
+      80
+    ]
+  }
+}

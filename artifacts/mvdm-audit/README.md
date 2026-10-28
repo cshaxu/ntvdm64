@@ -5,6 +5,9 @@ The active review follows the original four disjoint partitions in
 shared ledger changes are merged only after independent verification. The
 external census remains a separate obligation.
 
+The [parallel native review](parallel-native-role-review.md) merges five
+independently replayed original-source/image bindings as partial.
+
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded
 actual-object evidence without changing the pending source-role ledger.

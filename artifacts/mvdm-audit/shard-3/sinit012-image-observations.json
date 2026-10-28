@@ -1,0 +1,307 @@
+{
+  "result": "pass",
+  "relative_path": "softpc.new/base/cvidc/sinit012.c",
+  "source_sha256": "E179ED0D6DE8662C5D48D9E5B235DBA11C4CDFAEBA816BDF31FEE3636FA0255C",
+  "wow_source_ids": "SRC:0b0e43fdf283f780183d;SRC:7fbf6e9a1d1af4cf5c49",
+  "dos_catalog_rows": 1,
+  "wow_catalog_rows": 2,
+  "edge": "build obj/cvidc/SINIT012.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SINIT012.c",
+  "dependency_header": "obj/cvidc/SINIT012.obj: #deps 11, deps mtime 8147602929236793 (VALID)",
+  "functions": [
+    {
+      "name": "_S_0383_CiGetVideomark_word_00000014",
+      "va": 4795504,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0384_CiGetVideomark_string_00000015",
+      "va": 4795536,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0385_CiGetVideoread_shift_count_00000016",
+      "va": 4795568,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0386_CiGetVideoread_mapped_plane_00000017",
+      "va": 4795600,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0387_CiGetVideocolour_comp_00000018",
+      "va": 4795632,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0388_CiGetVideodont_care_00000019",
+      "va": 4795664,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0389_CiGetVideov7_bank_vid_copy_off_0000001a",
+      "va": 4795696,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0390_CiGetVideoscreen_ptr_0000001b",
+      "va": 4795728,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0391_CiGetVideorotate_0000001c",
+      "va": 4795760,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0392_CiGetVideocalc_data_xor_0000001d",
+      "va": 4795792,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0393_CiGetVideocalc_latch_xor_0000001e",
+      "va": 4795824,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0394_CiGetVideoread_byte_addr_0000001f",
+      "va": 4795856,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0395_CiGetVideov7_fg_latches_00000020",
+      "va": 4795888,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0396_CiGetVideoGC_regs_00000021",
+      "va": 4795920,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0397_CiGetVideolast_GC_index_00000022",
+      "va": 4795952,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0398_CiGetVideodither_00000023",
+      "va": 4795984,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0399_CiGetVideowrmode_00000024",
+      "va": 4796016,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0400_CiGetVideochain_00000025",
+      "va": 4796048,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0401_CiGetVideowrstate_00000026",
+      "va": 4796080,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0402_CiSetVideolatches_00000027",
+      "va": 4796112,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0403_CiSetVideorplane_00000028",
+      "va": 4796144,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0404_CiSetVideowplane_00000029",
+      "va": 4796176,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0405_CiSetVideoscratch_0000002a",
+      "va": 4796208,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0406_CiSetVideosr_masked_val_0000002b",
+      "va": 4796240,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0407_CiSetVideosr_nmask_0000002c",
+      "va": 4796272,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0408_CiSetVideodata_and_mask_0000002d",
+      "va": 4796304,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0409_CiSetVideodata_xor_mask_0000002e",
+      "va": 4796336,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0410_CiSetVideolatch_xor_mask_0000002f",
+      "va": 4796368,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0411_CiSetVideobit_prot_mask_00000030",
+      "va": 4796400,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0412_CiSetVideoplane_enable_00000031",
+      "va": 4796432,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0413_CiSetVideoplane_enable_mask_00000032",
+      "va": 4796464,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_S_0414_CiSetVideosr_lookup_00000033",
+      "va": 4796496,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 27,
+      "relocation_words": 1
+    },
+    {
+      "name": "_crules",
+      "va": 4796528,
+      "function": true,
+      "owner": "original-softpc-cvidc:SINIT012.obj",
+      "bytes": 7420,
+      "relocation_words": 773
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\sinit012.c",
+      "sha256": "E179ED0D6DE8662C5D48D9E5B235DBA11C4CDFAEBA816BDF31FEE3636FA0255C"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sinit012.c",
+      "sha256": "E179ED0D6DE8662C5D48D9E5B235DBA11C4CDFAEBA816BDF31FEE3636FA0255C"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\cvidc\\sinit012.c",
+      "sha256": "E179ED0D6DE8662C5D48D9E5B235DBA11C4CDFAEBA816BDF31FEE3636FA0255C"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\cvidc\\SINIT012.obj",
+      "sha256": "4EED4FF25A6EF53DA24C981E0B781492758C3A0700E02B5A6174F86513CB59FB"
+    }
+  ],
+  "scope": "Code identity excluding relocation words; no generated getter execution or lifecycle claim"
+}

@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "69fa3fd4d",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-2/parallel-review-evidence.json",
+      "sha256": "48BF928F7CC54C7CAE194646816D829C3EB43C0EEC5C3B615C04D6CBC0345E4B"
+    },
+    {
+      "path": "shard-3/sinit012-image-observations.json",
+      "sha256": "F9E15C751CA5ECDB330767B3DF341CD79F86713C3DE20703164401AECEBF62C8"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source and image binding only, not behavioral acceptance"
+}
