@@ -168,3 +168,5 @@ S16 additionally has the [local WINMM versus selected wrapper witness](host-ch-s
 The [disk session routing review](host-ch-scope/dos-absolute-io-session-routing-review.md) distinguishes normal bound DEM execution from an independent FDC thread; the null-session LastError witness does not by itself establish normal guest reachability.
 
 S16 has a [minimal multimedia resolver design](host-ch-scope/wow-winmm-resolve-s16-design.md): retain original lookup and native handle authority while correcting BOOL failure and provider-output forwarding, subject to the recorded exception and full matrix. S13's [disk session routing](host-ch-scope/dos-absolute-io-session-routing-review.md) separates FDC status/handle lifecycle from synchronous DEM error mapping.
+
+The [FDC session fixture plan](shard-3/fdc-session-fixture-plan.md) specifies integration of existing selected-object and test-owned session seams, including first-open failure, rollback, reset and worker shutdown; its first-open reachability remains unproved until executed.

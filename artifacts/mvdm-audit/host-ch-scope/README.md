@@ -101,3 +101,5 @@ The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-p
 The [DOS absolute I/O lease-error witness](dos-absolute-io-lease-error-review.md) exercises four selected-object null-session paths with controlled seams; the DOS guest error and reachability remain unverified.
 
 The [third guest-target snapshot](guest-target-round3-review.md) raises observed-profile guest C source candidates to 182, with 291 still requiring role review; application host behavior is not excluded. The [local WINMM comparison](wow-winmm-real-null-review.md) exercises the selected cached wrapper and this host provider under controlled invalid inputs.
+
+The [guest header candidate review](guest-header-round4-review.md) adds 66 observed-profile header roles with original guest-source references and no captured host consumer; 225 ambiguous C/H roles remain. This is not proof of all build configurations or application behavior.
