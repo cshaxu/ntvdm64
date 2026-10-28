@@ -11,3 +11,9 @@ The 72 `tool-or-scaffold-candidate` rows (`vdmutils/`, `vdmexts/`, `bde/`, `ieuv
 Output counts and classifications are evidence-bound snapshots. They are neither final scope approval nor evidence that every listed capability executes or passes tests.
 
 The initial snapshot at 0ccfd0acf used historical reporting_class for shards 1–3, so its status counts were incorrect. The corrected observer reads audit_status, decision and review_class respectively; candidate scope counts did not change.
+
+The [GFI provider review](gfi-alternative-provider-review.md) distinguishes compiled empty objects from usable device behavior. The [DEM lock object fixture](../host-dem/demlock-selected-object-review.md) exercises real host locks with controlled guest-register and error seams; guest and lifecycle boundaries remain open.
+
+The [guest-tree consumer snapshot](guest-tree-host-consumer-review.md) compares ambiguous C/H paths to four recorded build/dependency sets; zero exact hits do not establish all configurations or justify bulk exclusion.
+
+The [GFI header review](gfi-header-provider-review.md) traces selected and alternative declarations. The [DEM directory fixture](../host-dem/demdir-selected-object-review.md) tests selected object success and controlled errors without claiming guest integration.
