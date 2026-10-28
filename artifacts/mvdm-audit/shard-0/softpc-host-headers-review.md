@@ -1,0 +1,5 @@
+# SoftPC host declaration and selected-owner family
+
+The [dependency observer](softpc-host-headers-observer.py) and [receipt](softpc-host-headers-observations.json) cover 16 original host declarations, each byte-identical to both retained source editions. The [image observer](softpc-host-headers-image-observer.py) and [receipt](softpc-host-headers-image-observations.json) bind one function from a VALID dependent object to the published worker for 13 of them. The result records the exact object, function and hash per header; a common header dependency may be conditional or broader than the particular bound function.
+
+`dfa.gi`, `nt_mon.h` and `nt_smenu.h` have no VALID dependency in the captured worker graph and remain pending; `nt_smenu.h` has a textual include in an unselected source. This is not a conclusion about alternate profiles or the underlying video, monitor or presentation capabilities. For the 13 selected file roles, actual semantics, errors, state ownership, callbacks and retirement remain with their device-specific stages. No product or guest image was modified.

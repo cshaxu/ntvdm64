@@ -571,3 +571,7 @@ The [SoftPC header family](shard-1/softpc-header-family-review.md), [standalone 
 The [disabled multimedia structure sources](shard-0/wow-multimedia-disabled-structures-review.md) retain their original inactive file-body roles; multimedia behavior remains in scope.
 
 Additional bounded reviews cover [SoftPC host declarations](shard-1/softpc-host-header-family-review.md), [WOWFAX inputs](shard-2/wowfax-family-review.md) and [Win16 multimedia inputs](shard-3/multimedia-guest-input-role-review.md). Their source or graph evidence does not establish runtime device and callback behavior.
+
+The [host declaration dependency cohort](shard-0/softpc-host-headers-review.md) binds a dependent worker body for each of 13 selected headers; three other candidates remain pending. This is not device behavior acceptance.
+
+Parallel source reviews add [DOS locale data](shard-1/dos-locale-family-review.md), [COMMDLG resource identity](shard-2/commdlg-ne-resource-review.md), and [SYSTEM driver variants](shard-3/wow-system-variants-role-review.md). Matching resources and guest binaries do not prove guest execution or source-to-image provenance.

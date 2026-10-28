@@ -1,0 +1,178 @@
+{
+  "result": "pass",
+  "family_sha256": "58C639686FD879B5E8B7837C9A67FDBA1F0534DE2B065D8F35E2AE62E463063B",
+  "selected": [
+    {
+      "name": "error.h",
+      "dependency": "obj/bios/emm_fncs.obj",
+      "object_sha256": "8898CC17F64D7B2997DDB6D947354300A8A6A8922E5FBC17A380C99FED39E47B",
+      "binding": {
+        "name": "_emm_init",
+        "va": 4615072,
+        "function": true,
+        "owner": "original-softpc-bios:emm_fncs.obj",
+        "bytes": 141,
+        "relocation_words": 13
+      }
+    },
+    {
+      "name": "host_gfx.h",
+      "dependency": "obj/keymouse/mouse_io.obj",
+      "object_sha256": "AA8BE40467E5F99D6D0785B8D33AB643631DD4C4F06FB893D232CFF7F451EDC0",
+      "binding": {
+        "name": "_mouse_EM_callback",
+        "va": 4642528,
+        "function": true,
+        "owner": "original-softpc-keymouse:mouse_io.obj",
+        "bytes": 464,
+        "relocation_words": 30
+      }
+    },
+    {
+      "name": "hostsync.h",
+      "dependency": "obj/host/nt_lpt.obj",
+      "object_sha256": "209CFD395378F01705EB6D58B5555E5E07AD32C7D8BF9FC92BEB2C1B17FBCECF",
+      "binding": {
+        "name": "_host_print_auto_feed",
+        "va": 4223152,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_lpt.obj",
+        "bytes": 3,
+        "relocation_words": 0
+      }
+    },
+    {
+      "name": "nt_cgalt.h",
+      "dependency": "obj/host/nt_cga.obj",
+      "object_sha256": "DBA456BBDC23200F173BB4364BE4E7A3CBFABD47A297CF54AD5E35AA147FD24C",
+      "binding": {
+        "name": "_nt_cga_mono_graph_big",
+        "va": 4223152,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_cga.obj",
+        "bytes": 3,
+        "relocation_words": 0
+      }
+    },
+    {
+      "name": "nt_com.h",
+      "dependency": "obj/host/nt_bop.obj",
+      "object_sha256": "289DEBEF2113920A09A111E0D374142789D232C8D84C1D22F5E35924779BC8C0",
+      "binding": {
+        "name": "_DefaultVrInitialized",
+        "va": 4222000,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_bop.obj",
+        "bytes": 3,
+        "relocation_words": 0
+      }
+    },
+    {
+      "name": "nt_det.h",
+      "dependency": "obj/host/nt_cga.obj",
+      "object_sha256": "DBA456BBDC23200F173BB4364BE4E7A3CBFABD47A297CF54AD5E35AA147FD24C",
+      "binding": {
+        "name": "_nt_cga_mono_graph_big",
+        "va": 4223152,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_cga.obj",
+        "bytes": 3,
+        "relocation_words": 0
+      }
+    },
+    {
+      "name": "nt_egalt.h",
+      "dependency": "obj/host/nt_ega.obj",
+      "object_sha256": "8070E48D642760C0A167B5953C4C1D0638948C31458B1A7840925D9DEB2962BF",
+      "binding": {
+        "name": "_nt_ega_mono_hi_graph_big",
+        "va": 4223152,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_ega.obj",
+        "bytes": 3,
+        "relocation_words": 0
+      }
+    },
+    {
+      "name": "nt_extra.h",
+      "dependency": "obj/cvidc/accessfn.obj",
+      "object_sha256": "742F61C0DCC913346F1CBFA630CBEBD41C87B6356FC786872F06160D67A32DEB",
+      "binding": {
+        "name": "_PurgeLostIretHookLine",
+        "va": 4783440,
+        "function": true,
+        "owner": "original-softpc-cvidc:accessfn.obj",
+        "bytes": 6,
+        "relocation_words": 1
+      }
+    },
+    {
+      "name": "nt_graph.h",
+      "dependency": "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+      "object_sha256": "CA6A011B50A7FD4C14CA4745C174A1F00223AE0F152AFDF2A3B9FEDA7FE96F3F",
+      "binding": {
+        "name": "_mvdm_softpc_text_video_copy",
+        "va": 5663008,
+        "function": true,
+        "owner": "softpc-bindings:mvdm_softpc_text_video.obj",
+        "bytes": 412,
+        "relocation_words": 19
+      }
+    },
+    {
+      "name": "nt_mem.h",
+      "dependency": "obj/host/nt_emm.obj",
+      "object_sha256": "F7945B49731474D6BED6BD7216B2DCCDD434D12FA43B3CA1068633BA848EF401",
+      "binding": {
+        "name": "_host_alloc_page",
+        "va": 5795888,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_emm.obj",
+        "bytes": 136,
+        "relocation_words": 3
+      }
+    },
+    {
+      "name": "nt_timer.h",
+      "dependency": "obj/host/nt_com.obj",
+      "object_sha256": "198D7C4FA54B32F5C29D9FF1A5FE3593D492D0DF302C019CACEE6353C0549D82",
+      "binding": {
+        "name": "_FlushTXBuffer",
+        "va": 4541360,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_com.obj",
+        "bytes": 591,
+        "relocation_words": 11
+      }
+    },
+    {
+      "name": "nt_uis.h",
+      "dependency": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+      "object_sha256": "BA2F25CAF92C7CA82CDE9618E423D042513D721CD4987F5B717F2564A6F9D40A",
+      "binding": {
+        "name": "_mvdm_softpc_mouse_apply",
+        "va": 5661328,
+        "function": true,
+        "owner": "softpc-bindings:mvdm_softpc_mouse_guest.obj",
+        "bytes": 540,
+        "relocation_words": 14
+      }
+    },
+    {
+      "name": "ntcheese.h",
+      "dependency": "obj/host/nt_event.obj",
+      "object_sha256": "152C8AA3B1CB532831A68A5AA6B74960E6D2EDB0013B2ED328EB5718616C30F4",
+      "binding": {
+        "name": "_AltUpDownUp",
+        "va": 4518304,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_event.obj",
+        "bytes": 479,
+        "relocation_words": 38
+      }
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "One dependent body per header, relocation-masked; conditional declarations and runtime behavior not proved"
+}

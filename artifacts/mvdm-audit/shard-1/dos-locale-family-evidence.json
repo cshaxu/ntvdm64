@@ -1,0 +1,150 @@
+{
+  "files": [
+    {
+      "path": "messages/japan.msg",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\messages\\japan.msg",
+          "sha256": "99277569a53e0078ca10da2d551eead407f76a5796addbfad9180de2265d111f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\japan.msg",
+          "sha256": "99277569a53e0078ca10da2d551eead407f76a5796addbfad9180de2265d111f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\messages\\japan.msg",
+          "sha256": "99277569a53e0078ca10da2d551eead407f76a5796addbfad9180de2265d111f"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\japan.msg",
+      "installed_sha256": null
+    },
+    {
+      "path": "messages/nether.msg",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\messages\\nether.msg",
+          "sha256": "85921e46aaa061e4dc24b0596d6ca3588647f2e15429cfe9cf9f063056f61219"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\nether.msg",
+          "sha256": "85921e46aaa061e4dc24b0596d6ca3588647f2e15429cfe9cf9f063056f61219"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\messages\\nether.msg",
+          "sha256": "85921e46aaa061e4dc24b0596d6ca3588647f2e15429cfe9cf9f063056f61219"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\nether.msg",
+      "installed_sha256": null
+    },
+    {
+      "path": "messages/norway.msg",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\messages\\norway.msg",
+          "sha256": "d47b0baf978f82a9aff346347d2e14692234af5cb4641e8344367d3e02482006"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\norway.msg",
+          "sha256": "d47b0baf978f82a9aff346347d2e14692234af5cb4641e8344367d3e02482006"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\messages\\norway.msg",
+          "sha256": "d47b0baf978f82a9aff346347d2e14692234af5cb4641e8344367d3e02482006"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\norway.msg",
+      "installed_sha256": null
+    },
+    {
+      "path": "messages/spain.msg",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\messages\\spain.msg",
+          "sha256": "5a24f2cf8dea54efd02cc8ad3619b6a9f951dec2e25a186958da4b518ab5585d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\spain.msg",
+          "sha256": "5a24f2cf8dea54efd02cc8ad3619b6a9f951dec2e25a186958da4b518ab5585d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\messages\\spain.msg",
+          "sha256": "5a24f2cf8dea54efd02cc8ad3619b6a9f951dec2e25a186958da4b518ab5585d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\spain.msg",
+      "installed_sha256": null
+    },
+    {
+      "path": "messages/usa-ibm.msg",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\messages\\usa-ibm.msg",
+          "sha256": "78d9a1de64be56f5bab7a4833354b58317917e8bf6e2a265718e9b47c0db03f2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\usa-ibm.msg",
+          "sha256": "78d9a1de64be56f5bab7a4833354b58317917e8bf6e2a265718e9b47c0db03f2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\messages\\usa-ibm.msg",
+          "sha256": "78d9a1de64be56f5bab7a4833354b58317917e8bf6e2a265718e9b47c0db03f2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\usa-ibm.msg",
+      "installed_sha256": null
+    },
+    {
+      "path": "dev/country/COUNTRY.SYS",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\country\\COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\country\\COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\COUNTRY.SYS",
+      "installed_sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+    },
+    {
+      "path": "dev/country/alclbjfk",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\country\\alclbjfk",
+          "sha256": "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\alclbjfk",
+          "sha256": "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\country\\alclbjfk",
+          "sha256": "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\alclbjfk",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "No source build or guest locale test; ZIP basenames and installed system32 only."
+}

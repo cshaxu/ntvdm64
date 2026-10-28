@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "a8bb977b9",
+  "candidate_count": 13,
+  "source_tables": [
+    {
+      "path": "shard-0/softpc-host-headers-observations.json",
+      "sha256": "58C639686FD879B5E8B7837C9A67FDBA1F0534DE2B065D8F35E2AE62E463063B"
+    },
+    {
+      "path": "shard-0/softpc-host-headers-image-observations.json",
+      "sha256": "E3E87A7CFB6C0DD6D76CD31CAB70908FD9A6F939D217BC5409957D9845AEBDA5"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected host header dependencies, not device acceptance"
+}
