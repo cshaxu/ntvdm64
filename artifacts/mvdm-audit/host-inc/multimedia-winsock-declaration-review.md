@@ -1,0 +1,15 @@
+# WOW multimedia, sound and Winsock shared headers
+
+These `inc/*.h` rows were pending at the review snapshot and were subsequently marked partial. They are original host/guest ABI declarations used by selected WOW32 sources; their current and OpenNT SHA-256 match. The following partial recommendations are limited to the described selected source roles and specific historical observations. Header identity, compilation or static table registration is not proof that all corresponding services or layouts work, and no runtime code, guest, or shared ledger was changed.
+
+## `wowmmed.h`: partial candidate
+
+SHA-256 `8416869D9F2A35A41E10187F0F27FA35198B750E5474CC5E281D30BA9F2918B9`. Selected `wow32/precomp.h` includes this packed multimedia declaration carrier; its `MMCALLPROC3216` structure is consumed by `wmmedia.c::WMM32CallProc32`. `docs/etc/evidence/m0-t466-s2-sync-multimedia-bridge.md` records a successful source-level x86 witness for the original body and synchronous `tid32Message` timer packet. That is a bounded particular call, not a fresh current-release or full 16-bit guest witness. Old alternate converters in `wmmedia2.c` are disabled; do not count them as live implementations. Wave/MIDI, asynchronous callbacks, bad pointers, device lifecycle, task death and all other packed layouts remain open.
+
+## `wowwsock.h`: partial candidate
+
+SHA-256 `05B478BB1E76E13571A179554217EE93663EA118E6A33F6F0F82766A0B490E2B`. WOW32's selected `precomp.h -> winsockp.h` includes the socket argument declarations; `wsext.c` consumes `WSASETBLOCKINGHOOK16` and `WSASTARTUP16`, while `wwstbl2.h` maps original API ordinals. Historical `docs/etc/evidence/m0-t447-s2-scope-freeze.md` records versioned `frozen-winsock-guest-r2` startup/callback/cancel/cleanup evidence with an original guest and controlled loopback/provider scenario, limited to that package. It does not prove every socket operation, cancellation race or present release. Local async context changes in `winsockp.h` are separately registered under DIV-463; completion/cancellation buffer ownership, task teardown and per-API ABI remain open. Do not call all Winsock unavailable merely because other original paths or providers are incomplete.
+
+## `wowsnd.h`: partial candidate, static-only selected branch
+
+SHA-256 `944ACEDF0708F0FC2176B28A18E07747DA57042FD93BFB63A51663E9E2A250E6`. Selected WOW32 `precomp.h` includes the original SOUND IDs and argument structures; original `wstbl2.h` routes ordinal DOBEEP to `WS32DoBeep` and most other SOUND entries to `UNIMPLEMENTEDAPI`; `WS32DoBeep` delegates to native `MessageBeep`. `shard-3/sound-abi-role-review.md` records source and selected-map references, not a live guest call or output. A partial declaration/source-role recommendation does **not** establish audible output or support for the other entries; verify actual compiled table/guest ordinal, provider result, task and callback semantics before making a runtime claim. Do not label all sound either restored or absent based on this static branch.
