@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1331,
-    "excluded": 2709,
+    "pending": 1326,
+    "excluded": 2714,
     "partial": 591,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Twelve historical guest input or editor-state file roles are excluded, not their guest features."
+  "note": "Five historical DEBUG/WRITE input roles are excluded, not guest functionality."
 }

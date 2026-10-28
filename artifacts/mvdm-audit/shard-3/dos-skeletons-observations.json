@@ -1,0 +1,109 @@
+{
+  "cmd/command/help.skl": {
+    "current": {
+      "size": 1176,
+      "sha256": "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450"
+    },
+    "opennt": {
+      "size": 1176,
+      "sha256": "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450"
+    },
+    "opennt45": {
+      "size": 1176,
+      "sha256": "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450"
+    }
+  },
+  "cmd/exe2bin/exe2bin.skl": {
+    "current": {
+      "size": 1310,
+      "sha256": "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173"
+    },
+    "opennt": {
+      "size": 1310,
+      "sha256": "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173"
+    },
+    "opennt45": {
+      "size": 1310,
+      "sha256": "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173"
+    }
+  },
+  "cmd/nlsfunc/nlsfunc.skl": {
+    "current": {
+      "size": 771,
+      "sha256": "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043"
+    },
+    "opennt": {
+      "size": 771,
+      "sha256": "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043"
+    },
+    "opennt45": {
+      "size": 771,
+      "sha256": "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043"
+    }
+  },
+  "cmd/command/makefile": {
+    "current": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt45": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    }
+  },
+  "cmd/exe2bin/makefile": {
+    "current": {
+      "size": 1877,
+      "sha256": "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5"
+    },
+    "opennt": {
+      "size": 1877,
+      "sha256": "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5"
+    },
+    "opennt45": {
+      "size": 1877,
+      "sha256": "70c345a1f7e3f763d5524f95dc35bc13a26d8a06a820df48910f49274174fbb5"
+    }
+  },
+  "cmd/nlsfunc/makefile": {
+    "current": {
+      "size": 1433,
+      "sha256": "a6d9adb0b5b2f0fdc0bf26200a92e2f0f9913dabea481b1b5d522498752693f5"
+    },
+    "opennt": {
+      "size": 1433,
+      "sha256": "a6d9adb0b5b2f0fdc0bf26200a92e2f0f9913dabea481b1b5d522498752693f5"
+    },
+    "opennt45": {
+      "size": 1433,
+      "sha256": "a6d9adb0b5b2f0fdc0bf26200a92e2f0f9913dabea481b1b5d522498752693f5"
+    }
+  },
+  "make.inc": {
+    "current": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    },
+    "opennt": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    },
+    "opennt45": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    }
+  },
+  "package_members": [
+    {
+      "name": "WINNT/SYSTEM32/COMMAND.COM",
+      "sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+    }
+  ],
+  "installed_COMMAND.COM": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43",
+  "installed_EXE2BIN.EXE": null,
+  "installed_NLSFUNC.EXE": null
+}

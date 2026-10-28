@@ -167,7 +167,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'wow16/ddeml/tests/ddestrs/ddestrs.rc', 'wow16/ddeml/tests/ddestrs/globals.h',
                         'wow16/ddeml/tests/ddestrs/mk4dos.cmd', 'wow16/ddeml/tests/src/client/ddemlcl.h',
                         'wow16/wfwnet/bseerr.h', 'wow16/wfwnet/libentry.asm', 'wow16/wfwnet/wfwnet.c',
-                        'wow16/wfwnet/wfwnet.rcv', 'wow16/wfwnet/WFWNET.RES', 'dos/v86/messages/state.rst'))
+                        'wow16/wfwnet/wfwnet.rcv', 'wow16/wfwnet/WFWNET.RES', 'dos/v86/messages/state.rst')) or (prefix == 'parallel-debug-write-role-' and path in (
+                        'dos/v86/cmd/debug/sysver.fal', 'dos/v86/cmd/debug/sysver.tru',
+                        'wow16/write/kmake.bat', 'wow16/write/state.rst', 'wow16/write/WRITE.RES'))
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':

@@ -1,0 +1,70 @@
+{
+  "result": "pass",
+  "ledger_sha256": "CEA9D61BE01C59133A24CB8B589508F97DF008225A39F0C0D58B1EBFF7BCDBD0",
+  "entries": [
+    {
+      "path": "dos/v86/cmd/debug/DEBUG.EXE",
+      "sha256": "9C230AA1CAFF2FF9D845514017B3E4BBE7B308AD26AD88740967651F7955CD60",
+      "catalog_ids": "SRC:655a4dd1ea56db75546f;SRC:bb4d2730a80d0a38c047",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.fal",
+      "sha256": "0AB49B5D636F7226377501C72B9B2FD70134219A17F8E6F61341175F4FFDCAD4",
+      "catalog_ids": "SRC:452db94c092418ca0648;SRC:f1c1b36913e88cd8b576",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.tru",
+      "sha256": "7C039228859D6820299183C45B8AF7B4F0CC78656F69FA3021BD866DFEF33ECE",
+      "catalog_ids": "SRC:05617fa196bcced1f4fd;SRC:f0bb8ea1d9c618a10117",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\debug\\makefile",
+      "sha256": "996256A7614656D9FABE197EC37DDA2A89C8BEDDC71A050614A442DF2BF91D74"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\debug\\debug.lnk",
+      "sha256": "7F1ABBCC55AA6E05F7F99021568ABF7F990EEC01C19FD0DE99ECA6A9399688FB"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\debug\\debug.inc",
+      "sha256": "400D93644FC605A0AFCAE71EE69698EE14A79BCDBEBBCB9D622EDE7E97ADA238"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\debug\\debmes.asm",
+      "sha256": "2C0272CDC4DACF7096926732F7A2B65B1EA26C0AB8D312BC39142ABD7F6D0308"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\debug\\sysver.inc",
+      "sha256": "7A6FF01783785EDD683608634566A1CEA88F4093A1C4930701D801C08530299B"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "zip_debug_matches": [],
+  "installed_exact_path_present": false,
+  "limitations": "Graph/path and original recipe evidence only; no guest execution, DEBUG image build provenance, variant selection mechanism, or other guest media search."
+}

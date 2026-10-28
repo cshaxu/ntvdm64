@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "168ea6b87",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-1/guest-debug-variant-observations.json",
+      "sha256": "80271BC06857ADB9487B235256C931223568D07A95CB54F650F31C3B450F3420"
+    },
+    {
+      "path": "shard-2/win16-write-guest-observations.json",
+      "sha256": "8779DC243BD5821FE8A4FF026A1CD2781C545391555B098F5FCBC98BAC886122"
+    },
+    {
+      "path": "shard-3/dos-skeletons-observations.json",
+      "sha256": "35894E8443CD5B90D08ACE2BA0E76A45EBB710D6BAD865A9913D1C3B2CD72237"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest build input and editor-state roles only; no runtime acceptance"
+}

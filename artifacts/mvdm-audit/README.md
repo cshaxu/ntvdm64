@@ -43,6 +43,9 @@ two CCPU instruction bodies and retains S11 guest execution obligations.
 The [DDEML and WFWNET checkpoint](parallel-ddeml-wfwnet-role-review.md)
 reconciles twelve guest-input and editor-state roles without excluding features.
 
+The [DEBUG and WRITE checkpoint](parallel-debug-write-role-review.md) retains
+the deployed-versus-source WRITE image distinction and guest feature obligations.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 
@@ -71,7 +74,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 63 independently replayed investigations; proposed dispositions remain pending.
+retain 66 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

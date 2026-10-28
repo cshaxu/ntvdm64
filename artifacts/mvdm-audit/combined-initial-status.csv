@@ -255,9 +255,9 @@ dos/v86/cmd/debug/debug.skl,1,excluded,shard-1/file-audit.csv
 dos/v86/cmd/debug/debug.tag,0,pending,shard-0/review.csv
 dos/v86/cmd/debug/dosdebug/debug.arf,0,pending,shard-0/review.csv
 dos/v86/cmd/debug/makefile,3,excluded,shard-3/file-review.csv
-dos/v86/cmd/debug/sysver.fal,1,pending,shard-1/file-audit.csv
+dos/v86/cmd/debug/sysver.fal,1,excluded,shard-1/file-audit.csv
 dos/v86/cmd/debug/sysver.inc,0,excluded,shard-0/review.csv
-dos/v86/cmd/debug/sysver.tru,1,pending,shard-1/file-audit.csv
+dos/v86/cmd/debug/sysver.tru,1,excluded,shard-1/file-audit.csv
 dos/v86/cmd/edlin/edlcmd1.asm,0,excluded,shard-0/review.csv
 dos/v86/cmd/edlin/edlcmd1.OBJ,0,excluded,shard-0/review.csv
 dos/v86/cmd/edlin/edlcmd2.asm,1,excluded,shard-1/file-audit.csv
@@ -4218,7 +4218,7 @@ wow16/write/jumppage.c,0,excluded,shard-0/review.csv
 wow16/write/jumppage.obj,1,excluded,shard-1/file-audit.csv
 wow16/write/just.bms,2,pending,shard-2/file-audit.csv
 wow16/write/kanji.h,2,excluded,shard-2/file-audit.csv
-wow16/write/kmake.bat,2,pending,shard-2/file-audit.csv
+wow16/write/kmake.bat,2,excluded,shard-2/file-audit.csv
 wow16/write/kmakend.bat,1,pending,shard-1/file-audit.csv
 wow16/write/left.bms,3,pending,shard-3/file-review.csv
 wow16/write/lib.asm,2,excluded,shard-2/file-audit.csv
@@ -4331,7 +4331,7 @@ wow16/write/selectsp.c,0,excluded,shard-0/review.csv
 wow16/write/selectsp.obj,3,excluded,shard-3/file-review.csv
 wow16/write/single.bms,0,pending,shard-0/review.csv
 wow16/write/sp15.bms,2,pending,shard-2/file-audit.csv
-wow16/write/state.rst,2,pending,shard-2/file-audit.csv
+wow16/write/state.rst,2,excluded,shard-2/file-audit.csv
 wow16/write/stcdefs.h,3,excluded,shard-3/file-review.csv
 wow16/write/str.h,0,excluded,shard-0/review.csv
 wow16/write/tags,0,pending,shard-0/review.csv
@@ -4366,7 +4366,7 @@ wow16/write/write.lnk,3,excluded,shard-3/file-review.csv
 wow16/write/write.map,3,excluded,shard-3/file-review.csv
 wow16/write/write.rc,2,excluded,shard-2/file-audit.csv
 wow16/write/write.rcv,0,excluded,shard-0/review.csv
-wow16/write/WRITE.RES,2,pending,shard-2/file-audit.csv
+wow16/write/WRITE.RES,2,excluded,shard-2/file-audit.csv
 wow16/write/write.sed,1,pending,shard-1/file-audit.csv
 wow16/write/write.sym,1,excluded,shard-1/file-audit.csv
 wow16/write/write16.exe,2,pending,shard-2/file-audit.csv
