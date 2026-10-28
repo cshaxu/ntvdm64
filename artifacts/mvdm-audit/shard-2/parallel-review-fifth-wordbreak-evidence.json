@@ -1,0 +1,59 @@
+{
+    "result":  "counterexample-observed",
+    "compile":  "call \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat\" -arch=x86 -host_arch=x64 \u003enul \u0026\u0026 cl /nologo /MT /O2 /Gy /Fo:build\\t473-s10\\shard-2-wordbreak\\probe.obj /Fe:build\\t473-s10\\shard-2-wordbreak\\probe.exe artifacts\\mvdm-audit\\shard-2\\parallel-review-fifth-wordbreak-probe.c build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcall32.obj build\\.ninja\\msvc-x86-release\\wow32\\obj\\walloc16.obj /link /OPT:REF /MAP:build\\t473-s10\\shard-2-wordbreak\\probe.map user32.lib kernel32.lib ntdll.lib",
+    "build_output":  [
+                         "parallel-review-fifth-wordbreak-probe.c"
+                     ],
+    "observe_exit":  0,
+    "observe_stdout":  "length255_adjacent=90 length256_adjacent=0 callbacks=2",
+    "strict_exit":  1,
+    "strict_stdout":  "length255_adjacent=90 length256_adjacent=0 callbacks=2",
+    "model":  "Actual selected wcall32/walloc16 objects; synthetic guest mapping and callback, two real 256-byte message-heap allocations",
+    "limits":  "No guest execution, live WOW session, or product modification; strict exit 1 is the expected contract failure",
+    "inputs":  [
+                   {
+                       "path":  "artifacts/mvdm-audit/shard-2/parallel-review-fifth-wordbreak-probe.c",
+                       "sha256":  "9CC11EF8D51D9996F294C6F8C3C4AA206EAC953FF7AFE294D6AA2AB78C341CCD"
+                   },
+                   {
+                       "path":  "artifacts/mvdm-audit/shard-2/parallel-review-fifth-wordbreak.ps1",
+                       "sha256":  "F2F5C00559317E55025A65DEE5ABB1D3A995B50FC950AE5DA02F5DABD961A8AD"
+                   },
+                   {
+                       "path":  "src/mvdm/wow32/wcall32.c",
+                       "sha256":  "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571"
+                   },
+                   {
+                       "path":  "src/mvdm/wow32/walloc16.c",
+                       "sha256":  "6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2"
+                   },
+                   {
+                       "path":  "src/opennt-host/windows/core/ntuser/client/editec.c",
+                       "sha256":  "54D7EBA85A09091767B18D06B88A48212D2429B0D75EF19C70C15BC674EF24CD"
+                   },
+                   {
+                       "path":  "src/opennt-host/windows/core/ntuser/client/edmlrare.c",
+                       "sha256":  "FB9DD31919B7B90DB2F713DAA83684F1231558E7653AE72CD72458F1212000F1"
+                   },
+                   {
+                       "path":  "build/.ninja/msvc-x86-release/wow32/obj/wcall32.obj",
+                       "sha256":  "496E5B97D6BF81C8956C7228E2AA93AF2457BE296758DB45257415CC66FA6814"
+                   },
+                   {
+                       "path":  "build/.ninja/msvc-x86-release/wow32/obj/walloc16.obj",
+                       "sha256":  "39B39347832B8B3B1B4A243205654304800A42E5D7D8100E110B77B85552144A"
+                   },
+                   {
+                       "path":  "build/t473-s10/shard-2-wordbreak/probe.exe",
+                       "sha256":  "32E265720B1AD9DD620A78F52779CADABA53E221FA69696B184C889FA4E1B9A7"
+                   },
+                   {
+                       "path":  "build/t473-s10/shard-2-wordbreak/probe.map",
+                       "sha256":  "5793C4730191F5F58D2CB89285C903FD389422E936573171B1F1B5D0E5F5E062"
+                   },
+                   {
+                       "path":  "assets/release/WOW32.DLL",
+                       "sha256":  "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+                   }
+               ]
+}

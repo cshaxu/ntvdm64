@@ -44,3 +44,5 @@ failure until its cause is proved, rather than being assigned to a later
 control stage merely from the application that triggers it.
 
 S13 additionally owns the [proved VDD uninstall and DMA boundary defects](../../../artifacts/mvdm-audit/vdd-native-role-review.md), including all-slot ownership retirement and channel-8 rejection before array access. S10 records their strict counterexamples without changing the runtime.
+
+S15 owns the isolated [EDIT word-break buffer counterexample](../../../artifacts/mvdm-audit/shard-2/wordbreak-boundary-review.md); real guest reachability and the length contract remain to be verified.

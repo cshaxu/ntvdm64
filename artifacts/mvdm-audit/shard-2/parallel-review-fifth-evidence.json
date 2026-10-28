@@ -1,0 +1,260 @@
+{
+  "result": "pass",
+  "original_wcall32_sha256": "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571",
+  "init": {
+    "name": "_W32Init@0",
+    "va": 268445136,
+    "function": true,
+    "owner": "wow32.obj",
+    "bytes": 1170,
+    "relocation_words": 104
+  },
+  "callbacks": [
+    {
+      "field": "pfnLocalAlloc",
+      "offset": 391,
+      "image_value": 268458944,
+      "callback": {
+        "name": "_W32LocalAlloc@12",
+        "va": 268458944,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 52,
+        "relocation_words": 2
+      }
+    },
+    {
+      "field": "pfnLocalReAlloc",
+      "offset": 399,
+      "image_value": 268459088,
+      "callback": {
+        "name": "_W32LocalReAlloc@20",
+        "va": 268459088,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 92,
+        "relocation_words": 3
+      }
+    },
+    {
+      "field": "pfnLocalLock",
+      "offset": 407,
+      "image_value": 268459040,
+      "callback": {
+        "name": "_W32LocalLock@8",
+        "va": 268459040,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 44,
+        "relocation_words": 3
+      }
+    },
+    {
+      "field": "pfnLocalUnlock",
+      "offset": 415,
+      "image_value": 268459232,
+      "callback": {
+        "name": "_W32LocalUnlock@8",
+        "va": 268459232,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 29,
+        "relocation_words": 2
+      }
+    },
+    {
+      "field": "pfnLocalSize",
+      "offset": 423,
+      "image_value": 268459184,
+      "callback": {
+        "name": "_W32LocalSize@8",
+        "va": 268459184,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 44,
+        "relocation_words": 2
+      }
+    },
+    {
+      "field": "pfnLocalFree",
+      "offset": 431,
+      "image_value": 268459008,
+      "callback": {
+        "name": "_W32LocalFree@8",
+        "va": 268459008,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 29,
+        "relocation_words": 2
+      }
+    },
+    {
+      "field": "pfnGetExpWinVer",
+      "offset": 439,
+      "image_value": 268458656,
+      "callback": {
+        "name": "_W32GetExpWinVer@4",
+        "va": 268458656,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 155,
+        "relocation_words": 7
+      }
+    },
+    {
+      "field": "pfnInitDlgCb",
+      "offset": 447,
+      "image_value": 268458880,
+      "callback": {
+        "name": "_W32InitDlg@8",
+        "va": 268458880,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 64,
+        "relocation_words": 3
+      }
+    },
+    {
+      "field": "pfn16GlobalAlloc",
+      "offset": 455,
+      "image_value": 268458816,
+      "callback": {
+        "name": "_W32GlobalAlloc16@8",
+        "va": 268458816,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 23,
+        "relocation_words": 1
+      }
+    },
+    {
+      "field": "pfn16GlobalFree",
+      "offset": 463,
+      "image_value": 268458848,
+      "callback": {
+        "name": "_W32GlobalFree16@4",
+        "va": 268458848,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 17,
+        "relocation_words": 1
+      }
+    },
+    {
+      "field": "pfnWowEditNextWord",
+      "offset": 535,
+      "image_value": 268458480,
+      "callback": {
+        "name": "_W32EditNextWord@20",
+        "va": 268458480,
+        "function": true,
+        "owner": "wcall32.obj",
+        "bytes": 169,
+        "relocation_words": 7
+      }
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_W32Init@0",
+      "target": "_UserRegisterWowHandlers@8",
+      "offsets": [
+        556
+      ],
+      "binding": {
+        "name": "_W32Init@0",
+        "va": 268445136,
+        "function": true,
+        "owner": "wow32.obj",
+        "bytes": 1170,
+        "relocation_words": 104
+      }
+    },
+    {
+      "caller": "_ECNcCreate@12",
+      "target": "_wow_user_registered_callbacks@0",
+      "offsets": [
+        146,
+        329
+      ],
+      "binding": {
+        "name": "_ECNcCreate@12",
+        "va": 268660912,
+        "function": true,
+        "owner": "control-body-edecrare.obj",
+        "bytes": 445,
+        "relocation_words": 9
+      }
+    },
+    {
+      "caller": "_ECNcDestroyHandler@8",
+      "target": "_wow_user_registered_callbacks@0",
+      "offsets": [
+        10
+      ],
+      "binding": {
+        "name": "_ECNcDestroyHandler@8",
+        "va": 268661360,
+        "function": true,
+        "owner": "control-body-edecrare.obj",
+        "bytes": 188,
+        "relocation_words": 8
+      }
+    }
+  ],
+  "bridge": {
+    "name": "_UserRegisterWowHandlers@8",
+    "va": 268917888,
+    "function": true,
+    "owner": "wow_user_registration_bridge.obj",
+    "bytes": 340,
+    "relocation_words": 36
+  },
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcall32.obj",
+      "sha256": "496E5B97D6BF81C8956C7228E2AA93AF2457BE296758DB45257415CC66FA6814"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32.obj",
+      "sha256": "B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\control-body-edecrare.obj",
+      "sha256": "E062D5FD295AAABD63F3658ABDB891CC6DDD783D40D28CAE4E2D86AABFD9969A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_registration_bridge.obj",
+      "sha256": "618EF0A73D39B9FBB5D31CC6B10CDF704DA5B6E97C928C942B44B289D63D32D2"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wow32.c",
+      "sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC"
+    },
+    {
+      "path": "src\\wow32-dll\\source\\wow_user_registration_bridge.c",
+      "sha256": "6D4AB36D006125B7FFB379B163D1E0E21558D420A6B4FCF4BA04B2BAE66B3F07"
+    },
+    {
+      "path": "src\\wow32-dll\\include\\wow_edit_memory_bindings.h",
+      "sha256": "71A4A36A08CF91FB712086BE44E99DAC562180FEC262F838144E156E887E930C"
+    }
+  ],
+  "scope": "Emitted address assignments and selected call edges; no callback execution or failure/lifetime proof"
+}
