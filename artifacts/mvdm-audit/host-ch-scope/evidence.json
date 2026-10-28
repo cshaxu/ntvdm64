@@ -6,7 +6,7 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-1/file-audit.csv",
-      "sha256": "AF5AA26F4FE79B17152122F31D961851572DB058C380D492AA582BD4DD2307EA"
+      "sha256": "5D4853FA17C083DDD5B90868EB2CAD29CB6BEA49D5617995CC217C880BB203CB"
     },
     {
       "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
@@ -27,9 +27,9 @@
     "partial": 434,
     "部分复通": 331,
     "excluded": 156,
-    "待核验": 66,
+    "待核验": 65,
     "pending": 152,
-    "整体排除": 78,
+    "整体排除": 79,
     "full": 36,
     "全复通": 17
   },
