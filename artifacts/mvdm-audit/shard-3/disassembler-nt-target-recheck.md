@@ -1,0 +1,15 @@
+# Original disassembler NT target and current owner
+
+Read-only source/build evidence; no test, guest, product, or shared ledger operation. This covers currently pending `base/debug/dasm.c` and `base/inc/{dasm,decode,d_inst,d_oper}.h`. All five match the compared OpenNT files byte-for-byte. The current `obj.vdm/sources` is not byte-identical to OpenNT due to documented unrelated project edits; the architecture split below was checked in both originals.
+
+The original `base/dasm386/sources` defines a `DASM386` library whose `PPC_SOURCES` are `dasm386.c`, `build.c`, and `decode.c`; `ALPHA_SOURCES` and `MIPS_SOURCES` use that list, while `i386_SOURCES` is empty. Original `base/dasm386/obj/_objects.mac` independently lists ALPHA/MIPS/PPC objects and no 386 objects. Original `obj.vdm/sources` puts `DASM386.LIB` in the non-386 link branch, not its 386 `LINKLIBS`. Therefore the three-file dasm386 component is an original **NT non-x86 target**, not a generic non-NT artifact; the current x86 worker graph does not select it. It is incorrect to claim its original non-x86 feature never belonged to NT.
+
+| Pending file | Original consumer and current evidence | Bounded disposition |
+|---|---|---|
+| `base/debug/dasm.c` | Separate original debugger disassembler, explicitly gated `#ifndef PROD`; captured worker compiles a debug archive object with `PROD`, and cached `dasm.obj` exposes no defined globals. | Exclude its inactive physical body in the captured production profile only; S17 retains diagnostic/non-PROD applicability. Not a replacement for the non-x86 component. |
+| `base/inc/d_inst.h` | Original `dasm386.c` and `decode.c` consume instruction identifiers; the former documents order coupling. | Exclude physical declaration input from selected x86 worker only; retain original non-x86 decoder's complete contract as S17 scope. |
+| `base/inc/d_oper.h` | Same two original component files consume operand descriptors. | Same x86 physical role exclusion; operand decoding and non-x86 target are not proved reproduced. |
+| `base/inc/dasm.h` | Original `dasm386.c`, non-PROD `trace.c`/`yoda.c`, and PIG-gated `ccpupig.c` use its declarations. | Captured worker has no exact dependency hit; **pending** PIG and non-PROD applicability, which are separate from selected CPU execution. Do not globally exclude solely from release flags. |
+| `base/inc/decode.h` | `dasm386.c`/`decode.c`, non-PROD trace and PIG-gated ccpupig reference it; header `dasm.h` also includes it. | **Pending** alongside those original diagnostic/PIG owners. A CCPU execution decoder with a similar name is not proof of this disassembler's output. |
+
+The retained current debugger source objects and original execution/decoder are separate components; no proof identifies a current replacement for the original non-x86 disassembler or for disabled PIG/YODA interfaces. The host T's supported architectures and diagnostic-profile obligations determine whether the scoped physical exclusions may be promoted to an overall ledger exclusion. Existing `../host-ch-scope/disassembler-legacy-ui-pending-review.md` retains related boundary. No run-time functionality is claimed tested.

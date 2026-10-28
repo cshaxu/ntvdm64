@@ -1675,7 +1675,7 @@ wow32/wgtext.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate
 wow32/wheap.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wheap.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/winsockp.h,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/winspldl.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/winspldl.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/witbl.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wkbdtbl2.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wkbman.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1807,7 +1807,7 @@ wow32/wuwind.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candi
 wow32/wwstbl2.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 xms.486/i386/xmsmem86.c,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 xms.486/xms.c,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-xms.486/xms.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+xms.486/xms.h,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 xms.486/xmsa20.c,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 xms.486/xmsblock.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 xms.486/xmsdisp.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

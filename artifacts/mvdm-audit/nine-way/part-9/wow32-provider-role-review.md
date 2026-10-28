@@ -1,5 +1,7 @@
 # Part 9: WOW32 source and selected build evidence
 
+**Later correction:** `xms.486/xms.h` is consumed by selected XMS host objects as well as serving a guest-facing subsystem; it is not a guest-only source. See the [host role correction](../../host-ch-scope/xms-header-host-role-correction.md). Its complete XMS behavior remains unproved.
+
 All owned WOW32 paths, identities across editions, include-name candidates and normalized source edges in `build/.ninja/msvc-x86-release/wow32/build.ninja` are recorded in `mvdm-identity-observations.json` and `wow32-selection-observations.json`. The latter is reproducible using `wow32-selection-observer.py`; it checks this one cached graph, not the installed DLL or preprocessor-expanded header resolution. The retained `wow32/obj/i386/wow32.def` is current-only in the two compared trees and has no observed graph source edge, so its provenance remains pending.
 
 The graph has source edges for owned `wdib.c`, `wgdi31.c`, `wgprnset.c`, `wkgthunk.c`, `wmmalias.c`, `wmmedia2.c`, `wmmstru2.c`, `wow32fax.c` and `wow32.rc`. Compilation edges do not prove all functions active: `artifacts/mvdm-audit/shard-3/wow-multimedia-alias-audit.md` traces `wmmedia2.c` under `#if 0` and the distinct live multimedia callback path. `wow-multimedia-alias-consumer-followup.md` bounds the inspected alias consumers. No source was modified to manufacture coverage.

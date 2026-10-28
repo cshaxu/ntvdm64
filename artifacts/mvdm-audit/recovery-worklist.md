@@ -24,6 +24,8 @@ The [DPMI owner cleanup witness](host-ch-scope/dpmi-xmem-owner-review.md) shows 
 
 The [historical disassembler and UI declaration review](host-ch-scope/disassembler-legacy-ui-pending-review.md) identifies distinct original owner/profile questions for S17. Determine whether those original facilities are within the supported product scope and whether selected providers implement them; absence from one captured graph is not a functional exclusion.
 
+The [original NT disassembler target review](shard-3/disassembler-nt-target-recheck.md) establishes that the original `DASM386` library belongs to NT non-x86 builds, while current x86 worker selection differs. S17 must not dismiss it as non-NT; scope and the separate PIG/YODA diagnostic paths remain to be resolved.
+
 The [DEM default-drive direct-service witness](host-ch-scope/dem-default-drive-selected-review.md) tests original case-sensitive drive validation and controlled host failure. The retained DOS default-drive source instead takes a separate active route; S12 must validate actual current-directory behavior without presenting this direct-service observation as a guest defect.
 
 The [DEM clock selected-object witness](host-ch-scope/dem-clock-review.md) exercises controlled date/time query, preservation and set-error paths. S12 retains guest interrupt/service dispatch, real privilege outcomes, date boundaries and timezone transitions; the mocked clock does not establish those behaviors.

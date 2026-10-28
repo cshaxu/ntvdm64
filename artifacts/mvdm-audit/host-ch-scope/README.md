@@ -2,7 +2,7 @@
 
 `inventory.csv` enumerates the 1,815 unique `.c`/`.h` paths in the four recorded shard CSVs. `observe.py` computes it from those CSVs, with each source file hashed in `evidence.json`; it reads and hashes the same input bytes, rejects duplicate paths, and does not change the shared ledgers. It reads each current shard decision field rather than stale imported reporting_class. Run from the repository root with `python artifacts/mvdm-audit/host-ch-scope/observe.py`. Two consecutive runs against the same input bytes produced byte-identical outputs. Running it against later shard states intentionally creates a **new** snapshot; compare the input hashes before interpreting counts or overwriting a frozen result. This is not a replacement for the authoritative per-file ledgers.
 
-The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 191 pending, 767 partial, 259 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
+The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 189 pending, 768 partial, 260 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
 
 The 473 `role-pending` rows (`wow16/`, `dos/v86/`) are **not excluded** from the task: some guest trees can contain host-consumed headers, shared ABI declarations, build inputs, or dual-use source. Each such case needs per-file consumer and build-dependency evidence before classification. In particular a path name or historical guest role alone cannot rule out a host dependency.
 
@@ -144,9 +144,13 @@ The same C-VID review also classifies `bodge_c.h`, a non-x86 host branch-size co
 
 The [CPU/SAS generated-header recheck](cpu-sas-generated-pending-role-review.md) identifies exact selected object dependencies and the selected x86 SAS layout, while retaining four unresolved header roles and vector/fallback semantics.
 
+The [register/schema header recheck](ccpu-register-generated-roles-recheck.md) records specific GDP offset differences and the observed quoted include; the actual expanded consumer and ABI remain unproved.
+
 The [disassembler and historical UI review](disassembler-legacy-ui-pending-review.md) separates three pending headers and retains their original profile and feature-ownership questions in S17.
 
 The [disassembler header follow-up](disassembler-header-profile-followup.md) bounds three original declarations to the observed production profile; their original disassembler/debugger capability remains pending and is not claimed restored.
+
+The [original NT disassembler target recheck](../shard-3/disassembler-nt-target-recheck.md) confirms the original target was selected for non-x86 NT, not a non-NT-only component. The [XMS header correction](xms-header-host-role-correction.md) records the guest-facing XMS header as an actual selected host dependency; its XMS behavior remains partial.
 
 The historical CPU30 `inc/v86def.h` carrier is excluded only from the selected CPU40/CCPU profile as explained in the [CPU declaration review](../host-inc/legacy-cpu-redir-declaration-review.md). The [remaining DOS host check](dos-host-remaining-partial-check.md) retains two selected header dependencies as pending where active behavior has not been established.
 
@@ -155,6 +159,8 @@ The [HFX protocol review](dos-hfx-protocol-owner-review.md) separates original H
 The [WOW internal table declaration review](witbl-original-consumer-recheck.md) and [GFI header review](gfi-header-selected-physical-review.md) distinguish unused physical declarations from selected original owners. WOW dispatch and real floppy behavior remain independent S14 and S13 obligations.
 
 The [global-memory](../cross-369/kernel-memory-header-disposition.md) and [local-memory](../cross-369/local-memory-header-disposition.md) reviews classify two old host-thunk declaration carriers; the local header is included by precomp, but its old thunk provider is unselected. Guest heap and callback behavior remain S14/S15 obligations.
+
+The [spool declaration review](../cross-369/spool-header-disposition.md) classifies the unconsumed historical `winspldl.h` carrier. Selected shared spooler and OLE resolver behavior, including the [failure boundaries](../shard-3/wow-spool-loader-callers-review.md), remains S16 work.
 
 The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-profile guest C source roles, while retaining 330 ambiguous paths and all host-side application behavior. The [original WINMM contract](wow-winmm-original-contract-review.md) supplies the historical provider contract for the controlled resolver witness, without proving modern provider behavior or guest reachability.
 
