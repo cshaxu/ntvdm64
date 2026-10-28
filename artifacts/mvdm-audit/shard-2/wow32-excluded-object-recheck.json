@@ -1,0 +1,86 @@
+{
+  "result": "pass",
+  "rows": [
+    {
+      "path": "wow32/wgman.c",
+      "status": "excluded",
+      "source_sha256": "C3BD58FC081256AF5F14653F1A15F56693BCF06EA5B20C2E15E4E0DDCC29B101",
+      "compile_edge": "build obj/wgman.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wgman.c",
+      "link_input": true,
+      "object_sha256": "414094A7A72AEA77869E2BCA16BA425AAAE4B3ABB25E38E3123E39DD2496D653",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 156
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_owner_lines": []
+    },
+    {
+      "path": "wow32/wmmedia1.c",
+      "status": "excluded",
+      "source_sha256": "74B1872BF1AFFF7A59721564F52B33C4FD74D9D7E329CCDBFF33F6BD612778D2",
+      "compile_edge": "build obj/wmmedia1.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmmedia1.c",
+      "link_input": true,
+      "object_sha256": "C6A790B426F815D9DA74445070EFACE4844C2563914E29A5EDAF9F5465B226BB",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 156
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_owner_lines": []
+    },
+    {
+      "path": "wow32/wthman.c",
+      "status": "excluded",
+      "source_sha256": "FB2A9E5FB2F06A20DAF67C90CB21621D649F128A3F739697DEB7A13506025286",
+      "compile_edge": "build obj/wthman.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wthman.c",
+      "link_input": true,
+      "object_sha256": "A1ED9F86BA131DCA2C9E7D640A33CBF9317D10EEED9D9835C0C4831F64784560",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 156
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_owner_lines": []
+    }
+  ],
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "scope": "Captured release objects are link inputs with no code sections; not absence from build or proof of related guest functionality"
+}

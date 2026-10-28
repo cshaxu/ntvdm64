@@ -14,9 +14,18 @@ contexts ([review](ccpu-header-macro-review.md)). A build rule does not prove
 archive extraction or active code; the [WGMAN review](shard-0/wow-gdi-empty-owner-review.md)
 already documents an empty selected object with linker directives.
 
-These observations do not establish all 13 exclusions are correct. S10 must
-check each graph hit against its actual archive/link selection, object contents,
-conditional compilation and existing per-file rationale; any unresolved or
-contradictory case remains open and the ledger must be corrected. CPU, video,
+The 13 hits were then examined in four bounded groups: [three empty host
+objects](shard-0/excluded-empty-host-objects-review.md), [four CCPU roles](shard-1/excluded-ccpu-objects-review.md),
+[three WOW32 link inputs](shard-2/wow32-excluded-object-recheck.md), and
+[three host alternatives](shard-3/host-excluded-graph-role-review.md). These
+reviews preserve exclusions only for the specifically inactive or alternative
+file roles. Several objects are compiled and archived or linked, and two host
+objects contain actual functions; map absence does not prove non-extraction
+under `/opt:ref`. The shard records have been corrected accordingly.
+
+These results do not prove feature completion or all profiles: the three host
+alternative checks do not bind the observed objects and map to the newest
+release image, and some depend on sampled callers. Revalidate those identities
+and late or indirect callers during their recovery stages. CPU, video,
 multimedia, ToolHelp and other guest behavior remain in scope. No guest or
 product image was modified or run.

@@ -1,0 +1,94 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/comms/prt_scrn.c",
+      "source_sha256": "8BE0F3950EB2DAA5B35D7E789FC7B7895DC68B2B841B97F056E2A304B157EA23",
+      "object": "obj/comms/prt_scrn.obj",
+      "object_sha256": "AB13E7C333D2B833B13012ED1782DC29A9EADD9928F85FE1953A82CDB80D799F",
+      "edge": "build obj/comms/prt_scrn.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/prt_scrn.c",
+      "libraries": [
+        "build original-softpc-comms.lib"
+      ],
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 164
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_symbol_owner_found": false
+    },
+    {
+      "path": "softpc.new/host/src/cpucstbs.c",
+      "source_sha256": "0E114C6368A616DC87CDF4311AFF19D50283E38A51B3F0E3301CBC45487DDAEB",
+      "object": "obj/host/cpucstbs.obj",
+      "object_sha256": "F3FFABCEC77E39ABEF435368150E0FB66D7AE5ED31237B2492E4E87513870FEE",
+      "edge": "build obj/host/cpucstbs.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/cpucstbs.c",
+      "libraries": [
+        "build original-softpc-host-roots.lib",
+        "build original-softpc-host-fixture-roots.lib"
+      ],
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 164
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_symbol_owner_found": false
+    },
+    {
+      "path": "softpc.new/host/src/x86_emm.c",
+      "source_sha256": "117D119314787E09B853E05DE0E35BB6935FB2D763F4FEC7EEF6B1D804E3D189",
+      "object": "obj/host/x86_emm.obj",
+      "object_sha256": "2B5D0BC4A7CC110D46459D2851C76F6567EC65F95701E6812C5A412AE741720F",
+      "edge": "build obj/host/x86_emm.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/x86_emm.c",
+      "libraries": [
+        "build original-softpc-host-roots.lib",
+        "build original-softpc-host-fixture-roots.lib"
+      ],
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136,
+          "size": 47
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896,
+          "size": 164
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560,
+          "size": 24
+        }
+      ],
+      "map_symbol_owner_found": false
+    }
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "limits": "Selected object sections and map owner only; no proof of alternate profiles or affected guest features."
+}

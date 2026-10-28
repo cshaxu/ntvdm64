@@ -1,0 +1,144 @@
+{
+  "result": "pass",
+  "entries": [
+    {
+      "path": "softpc.new/base/ccpu386/c_getset.c",
+      "sha256": "02783213DEBC6B9A712ADECF37941B4FEA01C60C0CC86C0D3CDF526B1FF43374",
+      "initial_class": "excluded",
+      "shard": "3"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpupig.c",
+      "sha256": "BFEAFF9C9A49039AA29740F6DAC2DD6A32BCE897D0D0FFE3D00A43D66CD09523",
+      "initial_class": "excluded",
+      "shard": "3"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpupig.h",
+      "sha256": "73B2E7CEDA4CB3BA83343B1FE07A428DCCAB76A196B2D7C3951C37962BE1E1DB",
+      "initial_class": "excluded",
+      "shard": "1"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/nop.c",
+      "sha256": "B80104E06BA7394C8B4E7A5CE82C19DC9681DBCD149BD2232F1770802D6D10B9",
+      "initial_class": "excluded",
+      "shard": "3"
+    }
+  ],
+  "ccpu_flag_prod": true,
+  "ccpu_flag_pig": false,
+  "objects": [
+    {
+      "stem": "c_getset",
+      "edge": "build obj/ccpu/c_getset.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_getset.c",
+      "object_sha256": "71250F6E4FECC984202210179C1AE53BC61B2CA8E7D938A00C475130D890BBCF",
+      "defined_nonsection_symbols": [],
+      "archive_member": true,
+      "map_owner_symbols": []
+    },
+    {
+      "stem": "ccpupig",
+      "edge": "build obj/ccpu/ccpupig.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ccpupig.c",
+      "object_sha256": "F48FCB79FACFB4F86C51F964331F6CAAC759613E691783AF56AF2BCE70D59CCC",
+      "defined_nonsection_symbols": [],
+      "archive_member": true,
+      "map_owner_symbols": []
+    },
+    {
+      "stem": "nop",
+      "edge": "build obj/ccpu/nop.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/nop.c",
+      "object_sha256": "1F155FC0FB4722C5010C44A2B9B456C27EAC5899728E2C6FC2A680C82E362D7A",
+      "defined_nonsection_symbols": [
+        {
+          "name": "_NOP",
+          "section": 3
+        }
+      ],
+      "archive_member": true,
+      "map_owner_symbols": []
+    }
+  ],
+  "header_valid_dependencies": [
+    {
+      "object": "obj/ccpu/c_addr.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    },
+    {
+      "object": "obj/ccpu/c_intr.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    },
+    {
+      "object": "obj/ccpu/c_tlb.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    },
+    {
+      "object": "obj/ccpu/c_stack.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    },
+    {
+      "object": "obj/ccpu/c_xcptn.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    },
+    {
+      "object": "obj/ccpu/c_main.obj",
+      "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/ccpupig.h"
+    }
+  ],
+  "header_prior_preprocessed": {
+    "relative_path": "softpc.new/base/ccpu386/ccpupig.h",
+    "source_sha256": "73B2E7CEDA4CB3BA83343B1FE07A428DCCAB76A196B2D7C3951C37962BE1E1DB",
+    "valid_consumers": [
+      "obj/ccpu/c_tlb.obj",
+      "obj/ccpu/c_main.obj"
+    ],
+    "seen_units": [
+      "softpc.new/base/ccpu386/c_tlb.c",
+      "softpc.new/base/ccpu386/c_main.c"
+    ],
+    "emitted_declaration_units": []
+  },
+  "decoder_binding": {
+    "name": "_ccpu",
+    "va": 4234240,
+    "function": true,
+    "owner": "original-ccpu386:c_main.obj",
+    "bytes": 55972,
+    "relocation_words": 6531
+  },
+  "inputs": [
+    {
+      "path": "artifacts\\mvdm-audit\\combined-initial-status.csv",
+      "sha256": "2208DE99247616FA42336A6E4E9B6BBB30889FCB35311F301765578BF6758FC0"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\frozen-file-reconciliation.csv",
+      "sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-header-selection-observations.json",
+      "sha256": "C63DB4DADD83592C44678C95440FB7497D0D37D28D402C6A168A6B48F0F54447"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+      "sha256": "A429F3708C78B2C7D553BEB66AC5391CBDC3ADC6FF576F130B80AE1989A958E8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+      "sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+    }
+  ],
+  "limitations": "Profile-scoped source, object/archive membership, released executable code equality and map labels; no assertion that absent map owner proves archive member was never extracted, nor alternate PIG/debug builds or guest behavior completeness."
+}

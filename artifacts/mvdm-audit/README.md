@@ -62,9 +62,9 @@ The [WOW USER declaration checkpoint](wow-user-header-role-review.md) records
 five selected headers as partial, not full guest behavior.
 The [guest-input dependency recheck](recent-guest-input-dependency-review.md)
 rechecks relative Ninja paths for 37 recent file-role exclusions.
-The [excluded-role sweep](excluded-dependency-sweep.md) inventories 13 graph
-or dependency hits among 2,727 excluded roles at its recorded baseline; each
-hit still needs its individual selection and content rationale verified.
+The [excluded-role sweep](excluded-dependency-sweep.md) inventories and
+reviews 13 graph or dependency hits among 2,727 excluded roles at its recorded
+baseline; release-image and indirect-caller limits remain explicit.
 The [additional empty guards](shard-3/cvidc-empty-guard-role-review.md) exclude
 twelve file roles without excluding CPU or video functionality.
 

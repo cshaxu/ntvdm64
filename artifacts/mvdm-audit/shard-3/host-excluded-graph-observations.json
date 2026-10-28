@@ -1,0 +1,123 @@
+{
+  "files": {
+    "nt_sas.c": {
+      "current": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344",
+      "opennt": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344",
+      "opennt45": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344"
+    },
+    "nt_sec.c": {
+      "current": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+      "opennt": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+      "opennt45": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd"
+    },
+    "nt_yoda.c": {
+      "current": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+      "opennt": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+      "opennt45": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a"
+    }
+  },
+  "objects": {
+    "host/nt_sas.obj": {
+      "sha256": "cde271fe9a55d1aa808b2419145133e45fd64977b657f3f478c6e94709734d1f",
+      "relevant_symbols": []
+    },
+    "host/nt_sec.obj": {
+      "sha256": "9cc513dc7137d16a880477e05a9abe523a54755250cd5fd9f295b3a5ec16a956",
+      "relevant_symbols": [
+        "[ 16](sec  3)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _LoseRegenMemory",
+        "[ 17](sec  5)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _RegainRegenMemory"
+      ]
+    },
+    "host/nt_yoda.obj": {
+      "sha256": "661a565c0563cb99ba9f6489edef5cd2c8647ba1cf6007c6151868e81ea3edaa",
+      "relevant_symbols": [
+        "[ 11](sec  3)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _host_set_yoda_ints"
+      ]
+    },
+    "host/nt_det.obj": {
+      "sha256": "ccca97828a111164653c0110c915b297b10470be0d76641721ac8bbaf6552946",
+      "relevant_symbols": []
+    },
+    "host/nt_event.obj": {
+      "sha256": "152c8aa3b1cb532831a68a5aa6b74960e6d2edb0013b2ed328eb5718616c30f4",
+      "relevant_symbols": []
+    },
+    "host/nt_fulsc.obj": {
+      "sha256": "d56fcb3831753065affe105b9f12897ab78659ceb6cd7320d8d685249bf7c42d",
+      "relevant_symbols": []
+    },
+    "support/main.obj": {
+      "sha256": "9cb7b64bbb79d72ec7d7ed81485a3a9a26cf16f6f2277c3c4c16abf4c83d4158",
+      "relevant_symbols": []
+    }
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": []
+  },
+  "compile_snapshot": {
+    "sha256": "99e5f505e266fc2b2afa01d77258121ddf2763ef5bc97c783110e9655db8cfc4",
+    "commands": [
+      {
+        "file": "nt_sas.c",
+        "defines": [
+          "_NO_CRT_STDIO_INLINE",
+          "WIN32",
+          "WINNT",
+          "OPENNT_ADAPTER_NT_ALERT_THREAD",
+          "MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+          "NTVDM",
+          "CPU_40_STYLE",
+          "NEW_CPU",
+          "CCPU",
+          "C_VID",
+          "SPC386",
+          "SIM32",
+          "V7VGA",
+          "ANSI",
+          "PROD"
+        ]
+      },
+      {
+        "file": "nt_yoda.c",
+        "defines": [
+          "_NO_CRT_STDIO_INLINE",
+          "WIN32",
+          "WINNT",
+          "OPENNT_ADAPTER_NT_ALERT_THREAD",
+          "MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+          "NTVDM",
+          "CPU_40_STYLE",
+          "NEW_CPU",
+          "CCPU",
+          "C_VID",
+          "SPC386",
+          "SIM32",
+          "V7VGA",
+          "ANSI",
+          "PROD"
+        ]
+      },
+      {
+        "file": "nt_sec.c",
+        "defines": [
+          "_NO_CRT_STDIO_INLINE",
+          "WIN32",
+          "WINNT",
+          "OPENNT_ADAPTER_NT_ALERT_THREAD",
+          "MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION",
+          "NTVDM",
+          "CPU_40_STYLE",
+          "NEW_CPU",
+          "CCPU",
+          "C_VID",
+          "SPC386",
+          "SIM32",
+          "V7VGA",
+          "ANSI",
+          "PROD"
+        ]
+      }
+    ]
+  }
+}
