@@ -16,3 +16,14 @@ selection or updates, validate mode changes, bounds and aliases, or cover
 teardown. The vector source is therefore **partial**. Its source text is
 100% retained; the complete behavioral restoration percentage cannot be
 measured from these bindings. Guest and product images are unchanged.
+
+The selected-object [fixture](../../tests/mvdm-host/cvidc_vector_binding_fixture.c)
+also verifies the exact five read pointers, all twelve write pointers, and the
+256 unchained/chain-4 write-mode and state combinations against the original
+table contract, plus dither, rotated, chain-2 and simple selections. It also
+checks that a deliberately different table does not share the selected byte
+writer. This exercises publication in the host fixture; it does not
+execute the selected VRAM routines or prove guest rendering. The fixture is
+linked with the existing `/force:multiple` test graph and its host seams.
+The passing result, executable, map, object and source hashes are retained in
+the [fixture evidence](cvidc-vector-fixture-evidence.json).

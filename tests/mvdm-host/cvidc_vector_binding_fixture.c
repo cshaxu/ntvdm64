@@ -13,6 +13,8 @@
 #include "gdpvar.h"
 #include "j_c_lang.h"
 #include "cpu_vid.h"
+#include "ga_mark.h"
+#include "evidfunc.h"
 
 extern struct VideoVector C_Video;
 extern struct SasVector Sas;
@@ -51,6 +53,21 @@ static IUH *scratch[] = { &r0,&r1,&r2,&r3,&r4,&r5,&r6,&r7,
           c_ev_write_ptr.b_fwd_move != 0 && c_ev_write_ptr.b_bwd_move != 0 && \
           c_ev_write_ptr.w_fwd_move != 0 && c_ev_write_ptr.w_bwd_move != 0 && \
           c_ev_write_ptr.d_fwd_move != 0 && c_ev_write_ptr.d_bwd_move != 0); \
+} while (0)
+#define CHECK_WRITE_TABLE(expected) do { \
+    EVID_WRT_POINTERS *e=(expected); \
+    CHECK(c_ev_write_ptr.b_write==e->b_write && c_ev_write_ptr.w_write==e->w_write && \
+          c_ev_write_ptr.d_write==e->d_write && c_ev_write_ptr.b_fill==e->b_fill && \
+          c_ev_write_ptr.w_fill==e->w_fill && c_ev_write_ptr.d_fill==e->d_fill && \
+          c_ev_write_ptr.b_fwd_move==e->b_fwd_move && c_ev_write_ptr.b_bwd_move==e->b_bwd_move && \
+          c_ev_write_ptr.w_fwd_move==e->w_fwd_move && c_ev_write_ptr.w_bwd_move==e->w_bwd_move && \
+          c_ev_write_ptr.d_fwd_move==e->d_fwd_move && c_ev_write_ptr.d_bwd_move==e->d_bwd_move); \
+} while (0)
+#define CHECK_READ_TABLE(expected) do { \
+    EVID_READ_POINTERS *e=(expected); \
+    CHECK(c_ev_read_ptr.b_read==e->b_read && c_ev_read_ptr.w_read==e->w_read && \
+          c_ev_read_ptr.d_read==e->d_read && c_ev_read_ptr.str_fwd_read==e->str_fwd_read && \
+          c_ev_read_ptr.str_bwd_read==e->str_bwd_read && getVideoread_byte_addr()==(IHP)e->b_read); \
 } while (0)
 
 static DWORD WINAPI refresh(void *unused)
@@ -104,32 +121,59 @@ int main(void)
     Video.SetVideolatches(0x12345678); CHECK(Video.GetVideolatches()==0x12345678);
     for(i=UNCHAINED;i<=CHAIN_4;i++) {
         setVideochain(i);
-        setReadPointers(READ_MODE_0); CHECK_READ_SELECTION();
-        setReadPointers(READ_MODE_1); CHECK_READ_SELECTION();
+        setReadPointers(READ_MODE_0); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&read_mode0_evid[i]);
+        setReadPointers(READ_MODE_1); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&read_mode1_evid[i]);
     }
-    setReadPointers(DISABLED_RAM); CHECK_READ_SELECTION();
-    setReadPointers(SIMPLE_READ); CHECK_READ_SELECTION();
+    setReadPointers(DISABLED_RAM); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&ram_dsbld_read_evid);
+    setReadPointers(SIMPLE_READ); CHECK_READ_SELECTION(); CHECK_READ_TABLE(&simple_read_evid);
     for(i=SIMPLE_MARK;i<=CHAIN_4_MARK;i++) {
         setMarkPointers(i);
         CHECK(getVideomark_byte()!=0 && getVideomark_word()!=0 && getVideomark_string()!=0);
     }
     setVideodither(1);
     for(i=MODE_0;i<=MODE_3;i++) {
-        setVideowrmode(i); setWritePointers(); CHECK_WRITE_SELECTION();
+        setVideowrmode(i); setWritePointers(); CHECK_WRITE_SELECTION(); CHECK_WRITE_TABLE(&dith_evid[i]);
     }
     setVideodither(0);
     for(i=UNCHAINED;i<=CHAIN_4;i+=CHAIN_4) {
-        setVideochain(i); setVideorotate(1); setWritePointers(); CHECK_WRITE_SELECTION();
+        setVideochain(i); setVideorotate(1); setWritePointers(); CHECK_WRITE_SELECTION(); CHECK_WRITE_TABLE(&gricvid_evid);
         setVideorotate(0); setVideowrstate(0);
         for(test=MODE_0;test<=MODE_3;test++) {
-            setVideowrmode(test); setWritePointers(); CHECK_WRITE_SELECTION();
+            EVID_WRT_POINTERS *table=(i==UNCHAINED?unchained_evid:chain4_evid);
+            static const unsigned offsets[]={0,12,13,17};
+            setVideowrmode(test); setWritePointers(); CHECK_WRITE_SELECTION(); CHECK_WRITE_TABLE(&table[offsets[test]]);
         }
     }
     setVideochain(CHAIN_2);
     for(i=MODE_0;i<=MODE_3;i++) {
-        setVideowrmode(i); setWritePointers(); CHECK_WRITE_SELECTION();
+        setVideowrmode(i); setWritePointers(); CHECK_WRITE_SELECTION(); CHECK_WRITE_TABLE(&chain2_evid[i]);
     }
-    setVideochain(SIMPLE_WRITES); setWritePointers(); CHECK_WRITE_SELECTION();
+    setVideochain(SIMPLE_WRITES); setWritePointers(); CHECK_WRITE_SELECTION(); CHECK_WRITE_TABLE(&simple_evid);
+    /* Original table contract for each write state; these offsets identify
+     * generated providers, not just non-null pointers. */
+    {
+        static const unsigned mode0_index[32]={
+            0,1,2,3,2,3,2,3,0,1,2,3,2,3,2,3,
+            8,9,10,11,10,11,6,7,8,9,10,11,10,11,10,11};
+        static const unsigned mode23_index[16]={0,1,2,3,2,3,2,3,0,1,2,3,2,3,2,3};
+        unsigned chain,mode,state,index;
+        setVideodither(0); setVideorotate(0);
+        for(chain=UNCHAINED;chain<=CHAIN_4;chain+=CHAIN_4) {
+            EVID_WRT_POINTERS *table=(chain==UNCHAINED?unchained_evid:chain4_evid);
+            setVideochain((IU8)chain);
+            for(mode=MODE_0;mode<=MODE_3;mode++) {
+                setVideowrmode((IU8)mode);
+                for(state=0;state<32;state++) {
+                    setVideowrstate((IU8)state); setWritePointers();
+                    index=mode==0?mode0_index[state]:mode==1?12:
+                        (mode==2?13:17)+mode23_index[state&15];
+                    CHECK_WRITE_TABLE(&table[index]);
+                }
+            }
+        }
+        setVideochain(SIMPLE_WRITES); setWritePointers();
+        CHECK(c_ev_write_ptr.b_write!=chain2_evid[0].b_write);
+    }
     /* Negative control: the original generated setter reproduces the
      * shared-scratch clobber; the newly selected direct setter must not. */
     r21=121;
@@ -141,7 +185,7 @@ int main(void)
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
     CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
-    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, read/mark/write table selections, republish, old-provider negative control, concurrent scratch preservation\r\n";
+    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write table selection, 256 write-state cases, negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }
     return 0;
 }
