@@ -1,0 +1,123 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/regedit/debug/REGEDIT.RES",
+      "sha256": "F5C342EA55C505CC3D24964AEA83B7A0BC72056B3301CDC03D675C82C5B3F9C5",
+      "origin": "current-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "0",
+      "wow_source_ids": "",
+      "originals": [],
+      "zip_members": []
+    },
+    {
+      "relative_path": "wow16/regedit/regedit.ico",
+      "sha256": "371A9D4D3886C60045869FCB0EDFFF3AB7FFA7760C60D192B57DA85A87F926E2",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:4de63eb89703bd6e4456;SRC:d97faa1f849d70281b8a",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\regedit.ico",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\regedit\\regedit.ico"
+      ],
+      "zip_members": []
+    },
+    {
+      "relative_path": "wow16/regedit/sdkreged.h",
+      "sha256": "017FBEAFE0B7220F60FD2BA34D64678E2BB115209C74477289A7194C68F966B0",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:23ad546298fdf96cc832;SRC:a0a8fd445c6f6eca5387",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\sdkreged.h",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\regedit\\sdkreged.h"
+      ],
+      "zip_members": []
+    },
+    {
+      "relative_path": "wow16/regedit/sdkreged.ico",
+      "sha256": "9CFBF8F6EA979AF88FB2911B72F840C8E9B80E65C4D7507A5CC546CFA33E477A",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:2a2e4501374e3a41f99d;SRC:5999c0db87191e7a8331",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\regedit\\sdkreged.ico",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\regedit\\sdkreged.ico"
+      ],
+      "zip_members": []
+    },
+    {
+      "relative_path": "wow16/sherlock/DRWATSON.EXE",
+      "sha256": "2F93A0A46F2E88B4BDAFE03111E901030F3EC0D862F3D2C675A66AAE36158AA3",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:029190d64dfb41dda436;SRC:0428734d2e069aee9a44",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\DRWATSON.EXE",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\sherlock\\DRWATSON.EXE"
+      ],
+      "zip_members": []
+    },
+    {
+      "relative_path": "wow16/sherlock/watson.ico",
+      "sha256": "50BAB5262A83EB363CF602F3E93B1BD58859B40FF1C34EF8B09BB3203CF13940",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:b25b4ff22c182c2d9c41;SRC:d97e55cd2613265e0073",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\sherlock\\watson.ico",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\sherlock\\watson.ico"
+      ],
+      "zip_members": []
+    }
+  ],
+  "recipes": [
+    {
+      "relative_path": "regedit/makefile",
+      "sha256": "6255669DED8680CF24DA6D74B49366D2F7F5AD08871CB95DE26A46D42DB339FD"
+    },
+    {
+      "relative_path": "regedit/messages/usa/regedit.rc",
+      "sha256": "06A46B77E6D2FAA6B19C40E4E2458785ABBC080789900D0D4E473E3CD4C53B61"
+    },
+    {
+      "relative_path": "sherlock/makefile",
+      "sha256": "D4E0A78455E5C688D42A7D96E8C012A39074F18A3411FA23A917809A8B7199D7"
+    },
+    {
+      "relative_path": "sherlock/messages/usa/drwatson.rc",
+      "sha256": "BD13EE18D6E879C4F7D06D275E9F33D3EDCA25627E501EDD269837C5FAD6EEC5"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_matching_names": [],
+  "direct_installation": [
+    {
+      "path": "O:/winnt/DRWATSON.EXE",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "O:/winnt/system32/DRWATSON.EXE",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "O:/winnt/REGEDT16.EXE",
+      "exists": false,
+      "sha256": null
+    },
+    {
+      "path": "O:/winnt/system32/REGEDT16.EXE",
+      "exists": false,
+      "sha256": null
+    }
+  ],
+  "scope": "Historical source/recipe and current package presence only, not loader behavior or guest semantics"
+}

@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/ctl3dv2/3dcheck.bmp",
+      "sha256": "E91236F7D764158A97A6899C70FDE0730C0D816C936CAEFBCB4186A78E5AD3E3",
+      "wow_source_ids": "SRC:0b214e3e74c33facad31;SRC:8a29b98b56de4e71a27a"
+    },
+    {
+      "relative_path": "wow16/ctl3dv2/new3d.doc",
+      "sha256": "B9FAA5A532A7604ED95715745E8F23CD3E23DCACAE079BCD74AB2FF0D4942B49",
+      "wow_source_ids": "SRC:1133d8cabfe9cd8a71e8;SRC:4fca643d8e7d966f8648"
+    },
+    {
+      "relative_path": "wow16/ctl3dv2/scomp.dif",
+      "sha256": "015CB337A720DD5C6208A007D807700BEFFE693C938D61E7BF6604DF0A07B50E",
+      "wow_source_ids": "SRC:6a6bddfa9a03e50cffd7;SRC:6c33036c276eb8789b7b"
+    },
+    {
+      "relative_path": "wow16/ctl3dv2/version.h",
+      "sha256": "F0564F64AAC6517FFA021EACA242739D3598FD07A641E680D84D099175A3BE02",
+      "wow_source_ids": "SRC:9bbeb6a62c7fa43717c7;SRC:b52e7c1a621498d7b4dd"
+    }
+  ],
+  "context": {
+    "readme.txt": "7FCE264469F2BACC16C0E1AA24429ADD3632DB7E24C46CFF01DF40B44C19D5EC",
+    "ctl3d.rc": "0D4AEF1276BFB648AD4A563097E86B96FC1C1FC5834E8BD6E8F1188302EB12C1",
+    "ctl3d.c": "F712DE39B011078A9491CF43247975B7B76A46A53FECAEB492CA09ED061598AD",
+    "common.ver": "FC90D58A2E9646C8493449C6B9DD0BFDE980A60746CE6F1817BDF7748DFA0E0D"
+  },
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "source_dll_sha256": "3387135A5075439B9238D6C486B047D4DBA8D9A6D1DAD6BB74050347C70616DB",
+  "direct_installed_exists": false,
+  "direct_installed_sha256": null,
+  "scope": "Original reference inputs and archived identity, not actual loader resolution or control behavior"
+}

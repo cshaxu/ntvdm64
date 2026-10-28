@@ -1,0 +1,86 @@
+{
+  "bde.h": {
+    "current": {
+      "size": 11074,
+      "sha256": "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e"
+    },
+    "opennt": {
+      "size": 11074,
+      "sha256": "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e"
+    },
+    "opennt45": {
+      "size": 11074,
+      "sha256": "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e"
+    }
+  },
+  "bdecmds.c": {
+    "current": {
+      "size": 13210,
+      "sha256": "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e"
+    },
+    "opennt": {
+      "size": 13210,
+      "sha256": "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e"
+    },
+    "opennt45": {
+      "size": 13210,
+      "sha256": "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e"
+    }
+  },
+  "bdemisc.c": {
+    "current": {
+      "size": 9573,
+      "sha256": "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b"
+    },
+    "opennt": {
+      "size": 9573,
+      "sha256": "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b"
+    },
+    "opennt45": {
+      "size": 9573,
+      "sha256": "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b"
+    }
+  },
+  "precomp.h": {
+    "current": {
+      "size": 303,
+      "sha256": "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c"
+    },
+    "opennt": {
+      "size": 303,
+      "sha256": "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c"
+    },
+    "opennt45": {
+      "size": 303,
+      "sha256": "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c"
+    }
+  },
+  "bde.def": {
+    "current": {
+      "size": 176,
+      "sha256": "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979"
+    },
+    "opennt": {
+      "size": 176,
+      "sha256": "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979"
+    },
+    "opennt45": {
+      "size": 176,
+      "sha256": "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979"
+    }
+  },
+  "sources": {
+    "current": {
+      "size": 2904,
+      "sha256": "a3166c1925cdc05ebe956067f47aade02b0706be9ed84fd301f2d78bfa9b2e9c"
+    },
+    "opennt": {
+      "size": 2904,
+      "sha256": "a3166c1925cdc05ebe956067f47aade02b0706be9ed84fd301f2d78bfa9b2e9c"
+    },
+    "opennt45": {
+      "size": 2904,
+      "sha256": "a3166c1925cdc05ebe956067f47aade02b0706be9ed84fd301f2d78bfa9b2e9c"
+    }
+  }
+}

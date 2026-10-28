@@ -1,0 +1,182 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/v86/cmd/append/append.exe",
+      "current_sha256": "73D6928246F369AAC5DE742E149196BF4DC3B5801A6EFFEED6D014E52841D0AC",
+      "opennt_sha256": "",
+      "opennt45_sha256": "73D6928246F369AAC5DE742E149196BF4DC3B5801A6EFFEED6D014E52841D0AC",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:2ed7f535ac8a738a51a3"
+    },
+    {
+      "relative_path": "dos/v86/cmd/command/readme.txt",
+      "current_sha256": "041A97E02C22441E6873F98A11DD64A44A1AA443C16D40B5B06E62A11953B631",
+      "opennt_sha256": "041A97E02C22441E6873F98A11DD64A44A1AA443C16D40B5B06E62A11953B631",
+      "opennt45_sha256": "041A97E02C22441E6873F98A11DD64A44A1AA443C16D40B5B06E62A11953B631",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:05186150b6b333990c87;SRC:e9a61571f0716a03528c"
+    },
+    {
+      "relative_path": "dos/v86/cmd/exe2bin/exe2bin.tag",
+      "current_sha256": "D47D911CFA306AAB0CA87C1D537669839B2FBE8A55E3B73ADD166BBA74582B0F",
+      "opennt_sha256": "D47D911CFA306AAB0CA87C1D537669839B2FBE8A55E3B73ADD166BBA74582B0F",
+      "opennt45_sha256": "D47D911CFA306AAB0CA87C1D537669839B2FBE8A55E3B73ADD166BBA74582B0F",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:2f9720accba0fcc4fe01;SRC:5728447cb2a34aec427c"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/kb16.exc",
+      "current_sha256": "8DAB9416340D09AA218FDBF904D52AE841A4FC47E90C9DF3D18BBF1D2B532420",
+      "opennt_sha256": "8DAB9416340D09AA218FDBF904D52AE841A4FC47E90C9DF3D18BBF1D2B532420",
+      "opennt45_sha256": "8DAB9416340D09AA218FDBF904D52AE841A4FC47E90C9DF3D18BBF1D2B532420",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:4e99a18ef1da768a29a6;SRC:e83d137acc8749016f67"
+    },
+    {
+      "relative_path": "dos/v86/cmd/keyb/keyb.tag",
+      "current_sha256": "7DE060FA90BFFB946B7B2F737105DE4EFC1D84F38967F05EB89372EBC732443C",
+      "opennt_sha256": "7DE060FA90BFFB946B7B2F737105DE4EFC1D84F38967F05EB89372EBC732443C",
+      "opennt45_sha256": "7DE060FA90BFFB946B7B2F737105DE4EFC1D84F38967F05EB89372EBC732443C",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:11184ae5037647883114;SRC:faaf0f5d81f87a31d5dd"
+    },
+    {
+      "relative_path": "dos/v86/cmd/loadfix/LOADFIX.COM",
+      "current_sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB",
+      "opennt_sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB",
+      "opennt45_sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:536e5a74e6ef9b4efa1b;SRC:adde2ebb6302e7570e2a"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/mem.exe",
+      "current_sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+      "opennt_sha256": "",
+      "opennt45_sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:3e8abf072cb9e680551e"
+    },
+    {
+      "relative_path": "dos/v86/cmd/mem/mem.skl",
+      "current_sha256": "71EBDE828ADE14A718E715C333D331B3A89132897EC0801A811FB9B56A01D9BB",
+      "opennt_sha256": "71EBDE828ADE14A718E715C333D331B3A89132897EC0801A811FB9B56A01D9BB",
+      "opennt45_sha256": "71EBDE828ADE14A718E715C333D331B3A89132897EC0801A811FB9B56A01D9BB",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:723d7f541d465d532a6a;SRC:bf5ed771436c78390026"
+    },
+    {
+      "relative_path": "dos/v86/cmd/nlsfunc/nlsfunc.exe",
+      "current_sha256": "A49E8C6C392F0FD323B52C1FA612420A9FC0258BA59413CCB3D2D19B1F229EE8",
+      "opennt_sha256": "",
+      "opennt45_sha256": "A49E8C6C392F0FD323B52C1FA612420A9FC0258BA59413CCB3D2D19B1F229EE8",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:2641259ea90d20bf3534"
+    },
+    {
+      "relative_path": "dos/v86/cmd/qbasic/edit.com",
+      "current_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "opennt_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "opennt45_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:2e7fb263d04b443b9a85;SRC:9ceb0a3fef4f450115a2"
+    },
+    {
+      "relative_path": "dos/v86/cmd/qbasic/edit.hlp",
+      "current_sha256": "DEB09A378B88F46A5BA3C755AFE03B9B2B0E18C929D9CDB24003B6BF0CAEE631",
+      "opennt_sha256": "DEB09A378B88F46A5BA3C755AFE03B9B2B0E18C929D9CDB24003B6BF0CAEE631",
+      "opennt45_sha256": "DEB09A378B88F46A5BA3C755AFE03B9B2B0E18C929D9CDB24003B6BF0CAEE631",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:b8ce8fad9cf0e5be0dcb;SRC:ff1cc8f2285f3a35d7e6"
+    },
+    {
+      "relative_path": "dos/v86/cmd/qbasic/gorilla.bas",
+      "current_sha256": "9926FC1F50C4B489EC4C1B0DA5BD2C497EBF4282B3259C28A835A743E24699F7",
+      "opennt_sha256": "9926FC1F50C4B489EC4C1B0DA5BD2C497EBF4282B3259C28A835A743E24699F7",
+      "opennt45_sha256": "9926FC1F50C4B489EC4C1B0DA5BD2C497EBF4282B3259C28A835A743E24699F7",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:17d7a7d48f96bb76fe30;SRC:593540916f650a6d2e28"
+    },
+    {
+      "relative_path": "dos/v86/cmd/setver/setver.tag",
+      "current_sha256": "195938D160D0E8AA092CBCD1A04DB8DF7B05E746592C128F1643A2A25B91F8CD",
+      "opennt_sha256": "195938D160D0E8AA092CBCD1A04DB8DF7B05E746592C128F1643A2A25B91F8CD",
+      "opennt45_sha256": "195938D160D0E8AA092CBCD1A04DB8DF7B05E746592C128F1643A2A25B91F8CD",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:77cbfa32061ed236cacc;SRC:8e1563b4c047c4fafa8e"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\keyb\\makefile",
+      "sha256": "05C82B9A6A0502ADC978663C6289F012EBCF804F3F6A5CD2B645E6E9855A8ECC"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\keyb\\keyb.lnk",
+      "sha256": "552438EB35685A24CEE630338FED6ECA1801C43B2C32B19E7346898C81CC805D"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\mem\\makefile",
+      "sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\readme.txt",
+      "sha256": "041A97E02C22441E6873F98A11DD64A44A1AA443C16D40B5B06E62A11953B631"
+    }
+  ],
+  "archive": {
+    "path": "assets\\winnt.zip",
+    "sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+    "exact_images": [
+      {
+        "source": "dos/v86/cmd/loadfix/LOADFIX.COM",
+        "member": "WINNT/SYSTEM32/LOADFIX.COM",
+        "installed": "O:/winnt/system32/LOADFIX.COM",
+        "sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB"
+      },
+      {
+        "source": "dos/v86/cmd/mem/mem.exe",
+        "member": "WINNT/SYSTEM32/MEM.EXE",
+        "installed": "O:/winnt/system32/MEM.EXE",
+        "sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+      },
+      {
+        "source": "dos/v86/cmd/qbasic/edit.com",
+        "member": "WINNT/EDIT.COM",
+        "installed": "O:/winnt/EDIT.COM",
+        "sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46"
+      },
+      {
+        "source": "dos/v86/cmd/qbasic/edit.hlp",
+        "member": "WINNT/EDIT.HLP",
+        "installed": "O:/winnt/EDIT.HLP",
+        "sha256": "DEB09A378B88F46A5BA3C755AFE03B9B2B0E18C929D9CDB24003B6BF0CAEE631"
+      }
+    ],
+    "other_basename_hits": {
+      "dos/v86/cmd/append/append.exe": [],
+      "dos/v86/cmd/command/readme.txt": [],
+      "dos/v86/cmd/exe2bin/exe2bin.tag": [],
+      "dos/v86/cmd/keyb/kb16.exc": [],
+      "dos/v86/cmd/keyb/keyb.tag": [],
+      "dos/v86/cmd/mem/mem.skl": [],
+      "dos/v86/cmd/nlsfunc/nlsfunc.exe": [],
+      "dos/v86/cmd/qbasic/gorilla.bas": [],
+      "dos/v86/cmd/setver/setver.tag": []
+    }
+  },
+  "scope": "Historical sources/recipes and captured guest identities, not build lineage or guest runtime behavior"
+}

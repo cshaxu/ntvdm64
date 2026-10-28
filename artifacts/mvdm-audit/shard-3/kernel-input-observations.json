@@ -1,0 +1,97 @@
+{
+  "debug3/kernstub.exe": {
+    "current": {
+      "size": 721,
+      "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+    },
+    "opennt": null,
+    "opennt45": {
+      "size": 721,
+      "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+    }
+  },
+  "kernel.api": {
+    "current": {
+      "size": 33423,
+      "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+    },
+    "opennt": {
+      "size": 33423,
+      "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+    },
+    "opennt45": {
+      "size": 33423,
+      "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+    }
+  },
+  "m.msg": {
+    "current": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "opennt": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "opennt45": {
+      "size": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "newexe.h": {
+    "current": {
+      "size": 16398,
+      "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+    },
+    "opennt": {
+      "size": 16398,
+      "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+    },
+    "opennt45": {
+      "size": 16398,
+      "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+    }
+  },
+  "patch.txt": {
+    "current": {
+      "size": 10590,
+      "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+    },
+    "opennt": {
+      "size": 10590,
+      "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+    },
+    "opennt45": {
+      "size": 10590,
+      "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+    }
+  },
+  "qgrep.grp": {
+    "current": {
+      "size": 4353,
+      "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+    },
+    "opennt": {
+      "size": 4353,
+      "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+    },
+    "opennt45": {
+      "size": 4353,
+      "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+    }
+  },
+  "state.rst": {
+    "current": {
+      "size": 72,
+      "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+    },
+    "opennt": {
+      "size": 72,
+      "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+    },
+    "opennt45": {
+      "size": 72,
+      "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+    }
+  }
+}

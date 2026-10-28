@@ -1,0 +1,32 @@
+{
+  "inc/oemuni.h": {
+    "current": "26c8509048272de86ed1b93f5af837434e90d8ecbc8a878d915c419be2d2bafb",
+    "opennt": "26c8509048272de86ed1b93f5af837434e90d8ecbc8a878d915c419be2d2bafb",
+    "opennt45": "26c8509048272de86ed1b93f5af837434e90d8ecbc8a878d915c419be2d2bafb"
+  },
+  "oemuni/file.c": {
+    "current": "83cdb96808ad79df98c608be95cdd16f7229b2e4946b86e6a473edae8f2407ce",
+    "opennt": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df",
+    "opennt45": "a3184eb571d6822577b52849e2da3955689899ecc6dfd9df100ff3f3636be5df"
+  },
+  "oemuni/process.c": {
+    "current": "fcf8695132e69e1612c08114a52938529131b951673291cc9c4cceff82c862b1",
+    "opennt": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468",
+    "opennt45": "38c9125f9f3c43f32f696616e565e63b8f056da7ec264d980a5e5278cc640468"
+  },
+  "dos/dem/demfile.c": {
+    "current": "fda27ba0bb550db4dfcb9aeee025821ab9a865f6676216c8cd15a8fbb74c9d20",
+    "opennt": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+    "opennt45": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00159fa0       _GetShortPathNameOem@12    0055afa0 f   original-mvdm-host-oemuni:process.obj",
+      " 0001:0015a770       _CreateFileOem@28          0055b770 f   original-mvdm-host-oemuni:file.obj",
+      " 0001:0015a8b0       _FindFirstFileOem@8        0055b8b0 f   original-mvdm-host-oemuni:file.obj",
+      " 0001:0015ae30       _GetFullPathNameOem@16     0055be30 f   original-mvdm-host-oemuni:file.obj",
+      " 0002:000249f0       __sehtable$_GetShortPathNameOem@12 005af9f0     original-mvdm-host-oemuni:process.obj"
+    ]
+  }
+}

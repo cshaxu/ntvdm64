@@ -1,0 +1,39 @@
+{
+  "inc/wowsnd.h": {
+    "current": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+    "opennt": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+    "opennt45": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6"
+  },
+  "wow32/wstbl2.h": {
+    "current": "d3aea894092dc6afc33701cfbcceff6297234e9e67185b09ea4fcfdb7c478b5e",
+    "opennt": "d3aea894092dc6afc33701cfbcceff6297234e9e67185b09ea4fcfdb7c478b5e",
+    "opennt45": "d3aea894092dc6afc33701cfbcceff6297234e9e67185b09ea4fcfdb7c478b5e"
+  },
+  "wow32/wsman.c": {
+    "current": "3481808a0c62754b72b5338680fb7e1a5dfc81722996cbf81400b2963771a913",
+    "opennt": "3481808a0c62754b72b5338680fb7e1a5dfc81722996cbf81400b2963771a913",
+    "opennt45": "3481808a0c62754b72b5338680fb7e1a5dfc81722996cbf81400b2963771a913"
+  },
+  "wow16/drivers/sound/sound.asm": {
+    "current": "eb4428f4d317591f5683af9c035c611bc88e14f90a5f71f7e166f754ffe02a23",
+    "opennt": "eb4428f4d317591f5683af9c035c611bc88e14f90a5f71f7e166f754ffe02a23",
+    "opennt45": "eb4428f4d317591f5683af9c035c611bc88e14f90a5f71f7e166f754ffe02a23"
+  },
+  "wow16/drivers/sound/sound.def": {
+    "current": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98",
+    "opennt": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98",
+    "opennt45": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+  },
+  "wow32/wowtbl.c": {
+    "current": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt45": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960"
+  },
+  "observed_map": {
+    "sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+    "lines": [
+      " 0001:00001c20       _InitThunkTableOffsets@0   10002c20 f   wowtbl.obj",
+      " 0001:0001b390       _WS32DoBeep@4              1001c390 f   wsman.obj"
+    ]
+  }
+}

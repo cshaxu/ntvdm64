@@ -1,0 +1,85 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/v86/h/bios.inc",
+      "sha256": "095016BB99A886B0873D2DDA452AF709B8D9410FC75E41C794EBA7CD1CACA638",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\h\\bios.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:620e5ce08272a146f89c;SRC:bd48b2ba73355b0bbf0e"
+    },
+    {
+      "relative_path": "dos/v86/h/process.h",
+      "sha256": "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\h\\process.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:8b0691f6d62f3e3c5811;SRC:cdfb6463b7dfcf45ccb3"
+    },
+    {
+      "relative_path": "dos/v86/h/stddef.h",
+      "sha256": "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\h\\stddef.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:1eccd55ac788f8a43d98;SRC:3bc182945c031bb38fa8"
+    },
+    {
+      "relative_path": "dos/v86/inc/msdata2.asm",
+      "sha256": "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\msdata2.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:396d4076356459f13ea0;SRC:5655d7d2d04157836a62"
+    },
+    {
+      "relative_path": "dos/v86/inc/oemnum.inc",
+      "sha256": "7FAC71D482C726F5BB68B9C4571176A7947451D616AE699D14575D8281CBFAA7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\oemnum.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:7018331c02e5235bca49;SRC:b524bf0d0dc02031b9e5"
+    },
+    {
+      "relative_path": "dos/v86/inc/pathmac.inc",
+      "sha256": "C4A595B9401ED8522BD526FF034AD8AB8AD16E237555F5792303F8AAD6AFC6E2",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\pathmac.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:1e79d2e64a4d7fb4749e;SRC:518d420052e159fd7d46"
+    },
+    {
+      "relative_path": "dos/v86/inc/pcgequ.inc",
+      "sha256": "1F7557E0B253DFDAB4816EF55ECD73BA2EAB6F4F4BA198D44D8E0C5ED6899B3E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\pcgequ.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:7c285b9c0bfbc64b6dbf;SRC:c4555709e5799392248b"
+    },
+    {
+      "relative_path": "dos/v86/inc/pcinput.inc",
+      "sha256": "C7AE852475F55EFB0FE0F824934AF3C4C1DD17D9EDC72649DDFB8875A31579F1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\inc\\pcinput.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:a3917d5de821a9cdfcc6;SRC:a66002d57bc26c853e05"
+    }
+  ],
+  "oemnum_all_nonblank_lines_are_comments": true,
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\buildmsg.c",
+      "sha256": "4B9FE27D3C5F4BC93CCB18DE85DA8C5FF5E601B5DB2D859F5E44A60572203C2A"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "sha256": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makefile",
+      "sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E"
+    }
+  ],
+  "scope": "Original identities, documentation-only lines and bounded historical source edges; no guest behavior or general include absence claim"
+}

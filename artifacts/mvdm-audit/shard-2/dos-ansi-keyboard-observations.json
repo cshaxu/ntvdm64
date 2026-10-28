@@ -1,0 +1,89 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/v86/dev/ansi/ansi.skl",
+      "sha256": "069A2E18E48DB331136612928B492E45373FAED134CCB35016B376D46ACE8D65",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansi.skl",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:3075875e11a5490c32ed;SRC:fa271bc286cae5416d2a"
+    },
+    {
+      "relative_path": "dos/v86/dev/ansi/ANSI.SYS",
+      "sha256": "C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.SYS",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:8158907f3618b9efe0b5;SRC:cb4a5ca24fb5c2d817e0"
+    },
+    {
+      "relative_path": "dos/v86/dev/ansi/ansivid.inc",
+      "sha256": "DE901DAA752DF43311B9E740AC05878F2A303077DD41F5EFB8DA3A90B19CF06F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ansivid.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:138d2e3c8bc38b182e10;SRC:6850f048fe57b8143ca8"
+    },
+    {
+      "relative_path": "dos/v86/dev/keyboard/kdfbr.asm",
+      "sha256": "29ECB6E0FF29160901F5009294061134BECCEF28DDF892B2DC7BB6C68D849B48",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:8e864c3b40c11eb6fc95;SRC:bf0b6e5b0bfd77c03951"
+    },
+    {
+      "relative_path": "dos/v86/dev/keyboard/kdfit.asm",
+      "sha256": "4AF550ECB3EA961B2451C542B055206F013964C5998555265F51E00DBBAF19CD",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:058534c3f606cfb08594;SRC:e9979e8f815ac65d18fc"
+    },
+    {
+      "relative_path": "dos/v86/dev/keyboard/kdfru092.asm",
+      "sha256": "2FBC917CAFCD9EEAB277B52E7256A822C1BB2ACA10AAC202755411CD40B31371",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru092.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:7ddaf5520ac7cb5dc6df;SRC:ff8501019fa786175025"
+    },
+    {
+      "relative_path": "dos/v86/dev/keyboard/kdfyc116.asm",
+      "sha256": "28803A449E073459F29AC3EC824F972EA07CD7C2B96101BA2541E9A8FA7CE01E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc116.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:2d6aed3cb7eb1243bb9d;SRC:f9d7d7b4eaab55200312"
+    },
+    {
+      "relative_path": "dos/v86/dev/keyboard/kdfyc117.asm",
+      "sha256": "7D0286579D4338D8F9CE484E68091ECFDB54C330A37ADECABB78BCE2E98C8AA3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc117.asm",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:6aa3f74f82915b3c7bc8;SRC:f5f580403499fa012f52"
+    }
+  ],
+  "recipes": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "sha256": "DF753A55DCF2551AECF16DC8C31DDEF7E41CC4C09B4C704887B6AD5ED7183CE2"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\makefile",
+      "sha256": "031DF79E3DD9FBE2D39B3F808F83DA74882778D21E53546E0F09A99DF854CCD3"
+    }
+  ],
+  "archive": {
+    "path": "assets\\winnt.zip",
+    "sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+    "keyboard_member": "WINNT/SYSTEM32/KEYBOARD.SYS",
+    "keyboard_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+    "ansi_named_members": []
+  },
+  "keyboard_source_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+  "installed_keyboard_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+  "scope": "Historical source and recipe evidence plus exact package identity; no behavior or source-to-binary provenance claim"
+}

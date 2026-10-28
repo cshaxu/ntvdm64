@@ -1,0 +1,13 @@
+# DEM OEM path conversion and host file provider — shard 3
+
+Shard 3 target `inc/oemuni.h` declares the historical OEM Win32 thunk API. `oem-path-observer.py` plus captured JSON compare it and related source against both original editions and record exact selected-map symbol lines. Header is byte-identical to both originals; `oemuni/file.c`, `oemuni/process.c` and `dos/dem/demfile.c` differ and cannot be treated as original wholesale. No build, guest execution, filesystem mutation or product test was performed.
+
+## One concrete call chain
+
+`demfile.c:311-344` calls `CreateFileOem` with a DOS filename, selected access/sharing and inheritable security attributes. On failure it can retry a CD-ROM write open without `GENERIC_WRITE`; otherwise it calls `demClientError` and releases an allocated path. The OEM header declares `CreateFileOem`; its provider in `oemuni/file.c:59-137` converts OEM input using the current thread's TEB static Unicode string, returns `INVALID_HANDLE_VALUE` with error on conversion failure, invokes `CreateFileW`, and for `GENERIC_READ` retries without its extra `FILE_WRITE_ATTRIBUTES` on failure. The successful OS file handle belongs to the caller; downstream handle lifetime is not fully traced here.
+
+The observed NTVDM map identifies `CreateFileOem`, `FindFirstFileOem`, and `GetFullPathNameOem` under original-mvdm-host-oemuni:file.obj, and `GetShortPathNameOem` under process.obj. `file-review.csv` separately records 101 header include edges. This is provider selection evidence, not proof that these particular operations execute at runtime or that the observed map matches the currently published image.
+
+`oemuni/file.c` and `process.c` contain documented local divergences MVDM-HOST-DIV-269, 274, 275, 276 and 277 covering optional-output handling and OEM/Unicode sizing and conversion. They can affect externally observed path, buffer-length and error behavior and must be assessed against their individual registrations; identity of `inc/oemuni.h` does not prove those paths are unchanged or wrong. Existing source `src/mvdm/README.md` contains exception records.
+
+Proposed status: **pending** for `inc/oemuni.h`. Beyond declaration identity and observed provider linkage, behavioral evidence is needed for OEM code pages and DBCS, exact and short output buffers, conversion failure, concurrent/reentrant use of TEB static storage, rename/search/find cleanup and caller-visible error propagation. This report does not claim all of these paths are defective or untested elsewhere; no particular runtime evidence was examined. Header role is not a reason to exclude file functionality, and no full restoration percentage is asserted.

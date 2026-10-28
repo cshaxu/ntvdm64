@@ -1,0 +1,69 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/v86/doskrnl/bios/msbio.skl",
+      "sha256": "2A2FB4D31B19BE6E57C45C1677E6C490D3138C7BB235757BD321102787F2B421",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\msbio.skl",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:34273611dc934240bd2b;SRC:a9d909fd90e8b0458280"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/msdos.skl",
+      "sha256": "A5605F538CCE0C44D6EEE650A50CC82B991E4F5743D804E9ABE17E12C6E27A9A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\msdos.skl",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:aa6499c98384455068df;SRC:d47ac28ebfff1c6eba18"
+    },
+    {
+      "relative_path": "dos/v86/doskrnl/dos/dos.tag",
+      "sha256": "914D6830589543211F0AA3959EAFA484795EA9D6B796ACD3819B16CEA67C6F2A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dos.tag",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5ddca0fb9bd2e2ba1b80;SRC:87844864d51b43f15f5a"
+    },
+    {
+      "relative_path": "dos/v86/dev/country/nls863.inc",
+      "sha256": "4DF45A50820484E96BE5FD7AE02D180D2A0AFC29CF4A4C495526FBA31137BD54",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\country\\nls863.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:3d132fb08255426fd4e3;SRC:d80e4a58f5748fd49700"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\makefile",
+      "sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makefile",
+      "sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\country\\makefile",
+      "sha256": "5671E0E417E8481555997D566AB0A4A99ADCE550C8918A68C824B59E45FCE327"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\country\\country.asm",
+      "sha256": "CB3B55A75C6D10092F592BBF27C176BB345DE199FB4194E7B53C4724DC7F1F9D"
+    }
+  ],
+  "country": {
+    "archive_path": "assets\\winnt.zip",
+    "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+    "member": "WINNT/SYSTEM32/COUNTRY.SYS",
+    "binary_sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54",
+    "source_image_path": "src\\mvdm\\dos\\v86\\dev\\country\\COUNTRY.SYS",
+    "installed_path": "O:\\winnt\\system32\\COUNTRY.SYS",
+    "collation_size": 256,
+    "collation_sha256": "27716325B5DF82BC11D045C511A25620D7862D15369C8840F465AA4D4F8ACFB0",
+    "match_offsets": [
+      23517
+    ]
+  },
+  "scope": "Historical message inputs and one exact country data sequence, not source-to-image provenance or guest locale behavior"
+}

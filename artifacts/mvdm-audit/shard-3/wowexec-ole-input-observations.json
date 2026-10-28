@@ -1,0 +1,20 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/test/shell/wowexec.ico",
+      "sha256": "6C19D4515EBF8E4FAC3A8B019E39D1DE9DA6B66145A200BD423661344EB906F9",
+      "wow_source_ids": "SRC:0ff0897873d90df921c9;SRC:868adb3a43142fcbf34a"
+    },
+    {
+      "relative_path": "wow16/ole/server/olever.h",
+      "sha256": "7FD441D04E7F4678706E2A1C9ADC13820BD5D558B3A8A6107F75AF6DB13F7F55",
+      "wow_source_ids": "SRC:6837994c568c3ef072d2;SRC:95b6e4af8ec500ecfbb2"
+    }
+  ],
+  "recipe_sha256": "9CFA907EB667AF36C3A7A01D7DABD88E37FFAF2A6854C89922B9B2812C64FB3A",
+  "resource_sha256": "CEB1A3A1F1EF0487367B8BB242DD4879BC986763FA891FA2E4BD30BD9DBE97BC",
+  "wowexec_sha256": "38EF366EB55AECC63183F32493B837CB4BDF059D969DD27185FCE6266CDC074D",
+  "zip_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "scope": "Original resource input and immutable image identities; no image build lineage, behavior or OLE consumer proof"
+}

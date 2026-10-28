@@ -1,0 +1,128 @@
+{
+  "486/dxboot.asm": {
+    "current": {
+      "size": 95802,
+      "sha256": "b22892c24496fdf6c88247c44fe90495475d1d9cbdafd6b0a3f5f3bd5dfd4077"
+    },
+    "opennt": {
+      "size": 95802,
+      "sha256": "b22892c24496fdf6c88247c44fe90495475d1d9cbdafd6b0a3f5f3bd5dfd4077"
+    },
+    "opennt45": {
+      "size": 95802,
+      "sha256": "b22892c24496fdf6c88247c44fe90495475d1d9cbdafd6b0a3f5f3bd5dfd4077"
+    }
+  },
+  "dxdisk.asm": {
+    "current": {
+      "size": 30571,
+      "sha256": "c1cb4a2568c56b1c12c028a0b296a3ae3e6d81407096909c37f720116e24e550"
+    },
+    "opennt": {
+      "size": 30571,
+      "sha256": "c1cb4a2568c56b1c12c028a0b296a3ae3e6d81407096909c37f720116e24e550"
+    },
+    "opennt45": {
+      "size": 30571,
+      "sha256": "c1cb4a2568c56b1c12c028a0b296a3ae3e6d81407096909c37f720116e24e550"
+    }
+  },
+  "dxrom.asm": {
+    "current": {
+      "size": 18517,
+      "sha256": "fa663dd3cc73aca572773fdefdb772fb45095dab511e95bedc066e461f548e50"
+    },
+    "opennt": {
+      "size": 18517,
+      "sha256": "fa663dd3cc73aca572773fdefdb772fb45095dab511e95bedc066e461f548e50"
+    },
+    "opennt45": {
+      "size": 18517,
+      "sha256": "fa663dd3cc73aca572773fdefdb772fb45095dab511e95bedc066e461f548e50"
+    }
+  },
+  "dxrom.inc": {
+    "current": {
+      "size": 2407,
+      "sha256": "3654e663f1ba86b6efb6c26d4aabf178fa2501c04ff9b5741507295932195a95"
+    },
+    "opennt": {
+      "size": 2407,
+      "sha256": "3654e663f1ba86b6efb6c26d4aabf178fa2501c04ff9b5741507295932195a95"
+    },
+    "opennt45": {
+      "size": 2407,
+      "sha256": "3654e663f1ba86b6efb6c26d4aabf178fa2501c04ff9b5741507295932195a95"
+    }
+  },
+  "gendefs.inc": {
+    "current": {
+      "size": 17115,
+      "sha256": "063ca242b52d632df9e06768fb759e0efb675eccc39886b18c3733ae0527cf72"
+    },
+    "opennt": {
+      "size": 17115,
+      "sha256": "063ca242b52d632df9e06768fb759e0efb675eccc39886b18c3733ae0527cf72"
+    },
+    "opennt45": {
+      "size": 17115,
+      "sha256": "063ca242b52d632df9e06768fb759e0efb675eccc39886b18c3733ae0527cf72"
+    }
+  },
+  "hostdata.inc": {
+    "current": {
+      "size": 1375,
+      "sha256": "bfff1443c09abf02e55bf18ea511c70065e7e332a891653956e8b20acd1af330"
+    },
+    "opennt": {
+      "size": 1375,
+      "sha256": "bfff1443c09abf02e55bf18ea511c70065e7e332a891653956e8b20acd1af330"
+    },
+    "opennt45": {
+      "size": 1375,
+      "sha256": "bfff1443c09abf02e55bf18ea511c70065e7e332a891653956e8b20acd1af330"
+    }
+  },
+  "woaswapi.inc": {
+    "current": {
+      "size": 4885,
+      "sha256": "4623b37d079aa81c6ee2992f325fdc4fd23e8ca4c54217657e29dc9d491e6b95"
+    },
+    "opennt": {
+      "size": 4885,
+      "sha256": "4623b37d079aa81c6ee2992f325fdc4fd23e8ca4c54217657e29dc9d491e6b95"
+    },
+    "opennt45": {
+      "size": 4885,
+      "sha256": "4623b37d079aa81c6ee2992f325fdc4fd23e8ca4c54217657e29dc9d491e6b95"
+    }
+  },
+  "dosx.lnk": {
+    "current": {
+      "size": 313,
+      "sha256": "294893f0d548dd310970671da9f2355e1a2571b6b4d9382c5629411a9e1de2e8"
+    },
+    "opennt": {
+      "size": 313,
+      "sha256": "294893f0d548dd310970671da9f2355e1a2571b6b4d9382c5629411a9e1de2e8"
+    },
+    "opennt45": {
+      "size": 313,
+      "sha256": "294893f0d548dd310970671da9f2355e1a2571b6b4d9382c5629411a9e1de2e8"
+    }
+  },
+  "makefile": {
+    "current": {
+      "size": 7651,
+      "sha256": "6f2e99255a4906daf8734f4529341c8123d2b39615fb282a3c81104e85e2aad9"
+    },
+    "opennt": {
+      "size": 7651,
+      "sha256": "6f2e99255a4906daf8734f4529341c8123d2b39615fb282a3c81104e85e2aad9"
+    },
+    "opennt45": {
+      "size": 7651,
+      "sha256": "6f2e99255a4906daf8734f4529341c8123d2b39615fb282a3c81104e85e2aad9"
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/write/chlook.c",
+      "sha256": "D7293AD79DAFD8CB5F6FEDB4E8176E07E18388D7AC69902FF7357293D569637E",
+      "wow_source_ids": "SRC:20bfb79d4f1e6fa91789;SRC:d20a31c99da6048fe24d"
+    },
+    {
+      "relative_path": "wow16/write/diachgpr.c",
+      "sha256": "B56F64052473FC014A231B175178F9EA6C0139E7378C848BABA668D4F3C37AA8",
+      "wow_source_ids": "SRC:157e5d5346063c040843;SRC:de66c806bca48f7b6763"
+    },
+    {
+      "relative_path": "wow16/write/diaprint.c",
+      "sha256": "C638E3704A1428823E1CBF1EEB4D294DC2F7D56A9E6FB88DBCE4E5E2BE165EA6",
+      "wow_source_ids": "SRC:458b9998b927db40b3f2;SRC:5846531b4fa3374b442c"
+    },
+    {
+      "relative_path": "wow16/write/double.bms",
+      "sha256": "D9A946764435B3D97E767D76B82AF46243404F22EA76DAA2D8B65FA46D18E0B7",
+      "wow_source_ids": "SRC:206d0b965716ad1d4cee;SRC:580ca8aab044fde8fea0"
+    },
+    {
+      "relative_path": "wow16/write/filespec.wri",
+      "sha256": "5AB8AD3918138D522FF78CBFA97484B7573F5E51419C5569E00A489D377F4584",
+      "wow_source_ids": "SRC:945d043cc43800aebbcc;SRC:d8332fe3331f7c25bef6"
+    },
+    {
+      "relative_path": "wow16/write/heapinit.c",
+      "sha256": "2E3EDB37CA6423F2C9D77E7EE2EFD84BA2D426D94F82F5BCD38FE8895437B550",
+      "wow_source_ids": "SRC:4dfaecc4280055b060f3;SRC:cf4ad7e117db1a81b65b"
+    },
+    {
+      "relative_path": "wow16/write/indent.bms",
+      "sha256": "802F93AD63A104DD7CBF2E461556BDD60EEDC71E0C9733D6AA7A49065CE5C04C",
+      "wow_source_ids": "SRC:1bc15f0d0cf671d6b382;SRC:dd4cad43d6eeb434d58a"
+    },
+    {
+      "relative_path": "wow16/write/left.bms",
+      "sha256": "675BB5FC012D50108E8C3DC7230C20F720E385D42E8E247FC77906E2FF3453B1",
+      "wow_source_ids": "SRC:776597c0d4534925fddd;SRC:7a2d42906fdac4dc5b6f"
+    },
+    {
+      "relative_path": "wow16/write/readme.txt",
+      "sha256": "8ADB97E346F028F09C171FE49551CAD1FCEE0BB81A1B17C5262A7E64C0ECCC33",
+      "wow_source_ids": "SRC:0802becef52f8d2acd45;SRC:a7cb67b4f68168f53f39"
+    },
+    {
+      "relative_path": "wow16/write/rmargin.bms",
+      "sha256": "A714AAC4D7D893123194872014E93AEEB76D12A11F85AE1AD281E57423FDBCB6",
+      "wow_source_ids": "SRC:24685a514b334b4f46e3;SRC:6317323fe472796d756f"
+    },
+    {
+      "relative_path": "wow16/write/write.def",
+      "sha256": "2C60AF15D667541503DEAD273C37E13207371ACB22D05203B98AC2246FD7345D",
+      "wow_source_ids": "SRC:08a0b02208ed9e546826;SRC:9bb27b5ddcb9b260e514"
+    },
+    {
+      "relative_path": "wow16/write/write.itl",
+      "sha256": "3031D140E78399F7BE0EFB0E6F87DBF5D4B7C1CC31FC21647BA3C8A8BD562091",
+      "wow_source_ids": "SRC:93de0882489949e1a9ca;SRC:d1e39f75f034f488bd43"
+    }
+  ],
+  "recipe_sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+  "link_response_sha256": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151",
+  "mirror_write_exe_sha256": "08EE1659788880FB593815FF9609BFE76743C1182D05E6702764BF3DFF68B30B",
+  "archive_write_exe_sha256": "EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A",
+  "installed_write_exe_sha256": "EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A",
+  "zip_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "manifest_sha256": "13C7CD6957E88BC4F035E7E727B6AF44313B14894AA4CA1B120DBED555C0EEA0",
+  "scope": "Historical WRITE recipe and binary identity; no source-to-installed image or behavior assertion"
+}

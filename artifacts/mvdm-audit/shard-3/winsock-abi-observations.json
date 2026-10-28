@@ -1,0 +1,37 @@
+{
+  "inc/wowwsock.h": {
+    "current": "05b478bb1e76e13571a179554217ee93663ea118e6a33f6f0f82766a0b490e2b",
+    "opennt": "05b478bb1e76e13571a179554217ee93663ea118e6a33f6f0f82766a0b490e2b",
+    "opennt45": "05b478bb1e76e13571a179554217ee93663ea118e6a33f6f0f82766a0b490e2b"
+  },
+  "wow32/wwstbl2.h": {
+    "current": "425f566fa0a559c2dcf79f39322a8ca3a0929371a447de3337b0c9f6ad1bef02",
+    "opennt": "425f566fa0a559c2dcf79f39322a8ca3a0929371a447de3337b0c9f6ad1bef02",
+    "opennt45": "425f566fa0a559c2dcf79f39322a8ca3a0929371a447de3337b0c9f6ad1bef02"
+  },
+  "wow32/wsraw.c": {
+    "current": "671210892e0ac174860ef9b2da141c471dc45b20e48dcc5b40a5185164262ce0",
+    "opennt": "671210892e0ac174860ef9b2da141c471dc45b20e48dcc5b40a5185164262ce0",
+    "opennt45": "671210892e0ac174860ef9b2da141c471dc45b20e48dcc5b40a5185164262ce0"
+  },
+  "wow32/wowtbl.c": {
+    "current": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt45": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960"
+  },
+  "wow32/winsockp.h": {
+    "current": "0f7f1a8237d5222bade5dd950078159c2af83b0921a2f9eb64c1248740b84652",
+    "opennt": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1",
+    "opennt45": "08e825ba1ce4b4226bf46045ffb2c0dad08e38a6a9bbb18653215c64a05086d1"
+  },
+  "observed_map": {
+    "sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+    "lines": [
+      " 0001:00001c20       _InitThunkTableOffsets@0   10002c20 f   wowtbl.obj",
+      " 0001:0002dc10       _WSThunkAddrBuf@16         1002ec10 f   wsraw.obj",
+      " 0001:0002df40       _WWS32bind@4               1002ef40 f   wsraw.obj",
+      " 0001:0002e0c0       _WWS32connect@4            1002f0c0 f   wsraw.obj",
+      " 0001:0002f010       _WWS32socket@4             10030010 f   wsraw.obj"
+    ]
+  }
+}

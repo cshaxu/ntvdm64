@@ -1,0 +1,60 @@
+{
+  "result": "pass",
+  "records": [
+    {
+      "relative_path": "wow16/commdlg/cddrv.bmp",
+      "sha256": "724F05D141B4F7F8541F5756B495A6152BC179B6E6E9CCC994EEE70DBF30D64E",
+      "wow_source_ids": "SRC:1d533ba73778094cd590;SRC:2f5d768b2b9b8c0bf653",
+      "matching_strip_tiles": [
+        5
+      ]
+    },
+    {
+      "relative_path": "wow16/commdlg/smfldr1.bmp",
+      "sha256": "64081942CF7356A105BDB73EB3C4DBD20E64663DEDF2C6DF9A760B9BDFF363E1",
+      "wow_source_ids": "SRC:3074da52b98568b095b6;SRC:7eca29ee50fa86b21203",
+      "matching_strip_tiles": []
+    },
+    {
+      "relative_path": "wow16/commdlg/smnet.bmp",
+      "sha256": "6CB1F6FEDDD7C8DE4EE25BDD5ED2ED687895D3AF80D87F8A2BDF9995DAA93C51",
+      "wow_source_ids": "SRC:a6c011093baa4baf8709;SRC:b5a8ac45bbcb74ef354c",
+      "matching_strip_tiles": [
+        6
+      ]
+    },
+    {
+      "relative_path": "wow16/commdlg/smram.bmp",
+      "sha256": "01BC50E05C9BB218885E8E2509AF3802B64119338EEC500DD0E3226BF77F2095",
+      "wow_source_ids": "SRC:63b046d40df8744ea952;SRC:77e995663e90cff226ce",
+      "matching_strip_tiles": [
+        7
+      ]
+    },
+    {
+      "relative_path": "wow16/commdlg/COMMDLG.RES",
+      "sha256": "9910C9A21575E68F1FC3957376D4DEB171D2686B8481052ACCBE1DE7FAF05C2B",
+      "wow_source_ids": "SRC:4b6de54e498ca414e5de;SRC:997a58a3311456dd2c2f"
+    }
+  ],
+  "strip": {
+    "sha256": "0CDC2AC2E97040A88CFD958D69ABA3AD6C6D198855AEC7FE3B3533B5843EEE18",
+    "width": 128,
+    "height": 16,
+    "palette_sha256": "0D8DA9A79A2603872685A9FD0E8DCCC792BDF3BE4014B547019D8F7145B6F152"
+  },
+  "recipe_sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+  "rc_sha256": "89F4EF82923C53E6AD5ADB6838DD46412A62ECF6B9B2476C1CB8F296ADBF12CB",
+  "image": {
+    "source": "src/mvdm/wow16/commdlg/COMMDLG.DLL",
+    "sha256": "54A7981C5667BDE19F0D703580D40A448A0BDEC010FEFFA153004EF4870DC0D4",
+    "archive": "WINNT/SYSTEM32/COMMDLG.DLL",
+    "installed": "O:/winnt/system32/COMMDLG.DLL",
+    "bitmap_id": 576,
+    "bitmap_offset": 18240,
+    "bitmap_size": 1136,
+    "bitmap_flags": 3088,
+    "strip_dib_sha256": "D51DF0F03CBD6C08C0A4124B5F6C430999BBF2B27B1739874C2633C9E2DF9915"
+  },
+  "scope": "Exact image resource and palette-index comparison; no guest execution, authoring provenance or visual behavior claim"
+}

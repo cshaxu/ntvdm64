@@ -1,0 +1,72 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/v86/messages/germany.msg",
+      "sha256": "EE003A8BE717FED880F7177FE99CA05BF7347788C5750207A2D0FD4213F54544",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\germany.msg",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:000f95bf0031f59be87b;SRC:e046dfac7b5909d6ed9e"
+    },
+    {
+      "relative_path": "dos/v86/messages/holland.msg",
+      "sha256": "D747A9FC011E50FFB3A1DA70DF6E27FDEBCDEF379EFC26B1873D8E3D00DFD227",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\holland.msg",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:177316b3e923c96a26a7;SRC:4ef5907c500812b29536"
+    },
+    {
+      "relative_path": "dos/v86/messages/loadmsg.msg",
+      "sha256": "D13386A68AD285FA2117112D1CC86FC7578A5640AA40CB1BAE28E775790358B7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\loadmsg.msg",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:7d6231036426d69bde46;SRC:f6c56338dcf784132e51"
+    },
+    {
+      "relative_path": "dos/v86/messages/usa-ms.idx",
+      "sha256": "FF460E0CFAE6001312ACD98556F449144E455DC57B5D54C807C2EA1306A8E1C8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\messages\\usa-ms.idx",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:05f9a7d74454efb35c4e;SRC:48562399942656a53bac"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\messages\\makefile",
+      "sha256": "867A421CC0F0859E769B4A521CA44B70F74781763E358016C025B43D89859FD4"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\make.inc",
+      "sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\loadfix\\makefile",
+      "sha256": "B5636050526F8A8F97147ED9BB43F7C18BFBF297E3D4E56A43EC1A25AA221959"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\loadfix\\loadfix.asm",
+      "sha256": "8B9A399C4412F1CE2235B32F27792F3310F4B7FB3E6EB0194754281F347C86E1"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\buildmsg.c",
+      "sha256": "4B9FE27D3C5F4BC93CCB18DE85DA8C5FF5E601B5DB2D859F5E44A60572203C2A"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\tools\\src\\buildidx\\buildidx.c",
+      "sha256": "791F0ACC67D4522FA2B562F1B4164A35343CA81B3D1767136BF679038350996C"
+    }
+  ],
+  "loadfix": {
+    "archive_path": "assets\\winnt.zip",
+    "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+    "member": "WINNT/SYSTEM32/LOADFIX.COM",
+    "image_sha256": "8E62654A49BD88C784C53F25E9FBA13C641624D6A02214385115F66CCF1ECFDB",
+    "source_image_path": "src\\mvdm\\dos\\v86\\cmd\\loadfix\\LOADFIX.COM",
+    "installed_path": "O:\\winnt\\system32\\LOADFIX.COM"
+  },
+  "scope": "Original message identities, historical source/recipe edges and captured image identity; no source-to-image derivation or guest behavior claim"
+}

@@ -1,0 +1,79 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/drivers/comm/bimodint.inc",
+      "sha256": "FD0F31C168C805DBEE1208C2C31EE186062303338C7A341197BBBFBC48F0B444",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\bimodint.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:0fa119d298be41c868dc;SRC:580a490066c459fb1870"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/comm.drv",
+      "sha256": "EE589C26791B66742F7B5E183A44C56A13053DC584B0DCA3FCC20CD87BDCA69E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\comm.drv",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:523f81b33ad75fdb2849;SRC:b4d0dd3fb6bcb5e9a1fe"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/comm.rc",
+      "sha256": "001855B73658DEDB474ACA4836153635ADEEB4F09B6E63835C0F1961871B6D21",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\comm.rc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:4639d5058e53f4a53b1e;SRC:b96f8d01cc3401f714eb"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/ddkmake",
+      "sha256": "A8F8035C4C1EC56B07F40ADFB3456EEC84601943DB4A295019DF61EFB525B276",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\ddkmake",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:4d5a971cc8a63c075692;SRC:a402eb17bd41f972c5ed"
+    },
+    {
+      "relative_path": "wow16/drivers/comm/ibmcom.inc",
+      "sha256": "A2E8E1FFD31124B7C92E6880AE0B4E76C46E4E29B018AF19A6D7D1A0EB62590D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\comm\\ibmcom.inc",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:b1085e032ce9cfcc3a18;SRC:f60b21252f6c180d0fb2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\makefile",
+      "sha256": "14A637EF74E864245AED77EBC271F71D56CD4183622DD17E3D56FAEC4DC8077E"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\ccom.asm",
+      "sha256": "3C735D9632801F538D3A5712735DBB5F40E027003B4FDC76D3A0BF15F3019F2F"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\ibmsetup.asm",
+      "sha256": "F094FC413A573B36290D81828798273D606ED8FCB6C47D61D594C18B116AAF90"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\ibmint.asm",
+      "sha256": "BF9FB1A6B8957B2160C794931100E6CC8A4D19E5D2837EA635DC3AD6278DBFB8"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\ibmcom.asm",
+      "sha256": "406FBD4DB3C747A465874DE03054259D8942DFD6E3C2F528CED4F6D48B5CB0A5"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\comm\\comm.def",
+      "sha256": "E267CDFA399CD0AE120D21A68D5976B6ED8DEB798BA1338149D46F76E68C03D5"
+    }
+  ],
+  "guest_image": {
+    "archive_path": "assets\\winnt.zip",
+    "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+    "member": "WINNT/SYSTEM32/COMM.DRV",
+    "sha256": "EE589C26791B66742F7B5E183A44C56A13053DC584B0DCA3FCC20CD87BDCA69E",
+    "installed_path": "O:\\winnt\\system32\\COMM.DRV"
+  },
+  "scope": "Original guest source/recipe edges and captured binary identity; no runtime serial or source-to-image derivation claim"
+}

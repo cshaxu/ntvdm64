@@ -1,0 +1,38 @@
+{
+  "i386/dpmimem.c": {
+    "current": "69695ab6dcb6c977318a4981b6b255ffcbb643b072549dc1c22b89c564ec2de4",
+    "opennt": "69695ab6dcb6c977318a4981b6b255ffcbb643b072549dc1c22b89c564ec2de4",
+    "opennt45": "69695ab6dcb6c977318a4981b6b255ffcbb643b072549dc1c22b89c564ec2de4"
+  },
+  "dpmimemr.c": {
+    "current": "a4c4801f915e8cd2fbfc7c7f54ebe412f4eea5367ecdacbc5c8130b6d9874b1a",
+    "opennt": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+    "opennt45": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae"
+  },
+  "xmem.c": {
+    "current": "fc05182aa46c78dee2a963d5d10a83deb8b34d84114725d6f0d5d334b0fa29b0",
+    "opennt": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+    "opennt45": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5"
+  },
+  "dpmi32.c": {
+    "current": "e93e77a96e904d27e70c5817d915865d17d7f777c34f1fa3d7b6f223a8e6fd0d",
+    "opennt": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+    "opennt45": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca"
+  },
+  "sources": {
+    "current": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506",
+    "opennt": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506",
+    "opennt45": "5e88950101f309fd999f42bd613e33cb4daf9a83ffee083f0bb4d84b161b3506"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00157330       _DpmiAllocateVirtualMemory 00558330 f   original-mvdm-dpmi32:dpmimemr.obj",
+      " 0001:00157350       _DpmiFreeVirtualMemory     00558350 f   original-mvdm-dpmi32:dpmimemr.obj",
+      " 0001:00157380       _DpmiGetMemoryInfo         00558380 f   original-mvdm-dpmi32:dpmimemr.obj",
+      " 0001:00157450       _DpmiReallocateVirtualMemory 00558450 f   original-mvdm-dpmi32:dpmimemr.obj",
+      " 0001:00157480       _DpmiAllocateXmem          00558480 f   original-mvdm-dpmi32:xmem.obj",
+      " 0001:001575e0       _DpmiFreeAppXmem           005585e0 f   original-mvdm-dpmi32:xmem.obj"
+    ]
+  }
+}
