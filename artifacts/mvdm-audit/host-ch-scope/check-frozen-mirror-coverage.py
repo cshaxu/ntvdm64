@@ -19,8 +19,11 @@ with open('artifacts/mvdm-audit/host-ch-scope/inventory.csv', encoding='utf-8') 
 with open('artifacts/mvdm-audit/frozen-file-reconciliation.csv', encoding='utf-8-sig') as f:
     frozen = {r['relative_path']: r for r in csv.DictReader(f)}
 with open('artifacts/mvdm-audit/mirror-diff-code-retention.csv', encoding='utf-8-sig') as f:
-    diffs = {r['relative_path'] for r in csv.DictReader(f)}
-unlisted, missing, no_original = [], [], []
+    diff_rows = list(csv.DictReader(f))
+    diffs = {r['relative_path']: r for r in diff_rows}
+    if len(diffs) != len(diff_rows):
+        raise SystemExit('duplicate path in mirror-difference table')
+unlisted, missing, no_original, stale = [], [], [], []
 compared = 0
 for path in inventory:
     record = frozen.get(path)
@@ -34,11 +37,20 @@ for path in inventory:
     compared += 1
     actual = hashlib.sha256(current.read_bytes()).hexdigest().upper()
     original = (record['opennt_sha256'] or record['opennt45_sha256']).upper()
-    if actual != original and path not in diffs:
-        unlisted.append(path)
+    if actual != original:
+        if path not in diffs:
+            unlisted.append(path)
+        elif (diffs[path]['current_sha256'].upper() != actual or
+              diffs[path]['original_sha256'].upper() != original or
+              not diffs[path]['text_retention_percent']):
+            stale.append(path)
+    elif path in diffs:
+        stale.append(path)
 print('compared', compared, 'unlisted differences', len(unlisted),
-      'missing current', len(missing), 'no frozen original', len(no_original))
+      'stale estimates', len(stale), 'missing current', len(missing),
+      'no frozen original', len(no_original))
 print('unlisted:', unlisted)
+print('stale estimates:', stale)
 print('missing current files:', missing)
-if unlisted:
-    raise SystemExit('current host C/H differences missing from retention table')
+if unlisted or stale or no_original:
+    raise SystemExit('host C/H differences, estimates or original identities require reconciliation')

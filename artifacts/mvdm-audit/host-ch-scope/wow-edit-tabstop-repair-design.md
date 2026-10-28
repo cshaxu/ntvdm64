@@ -8,6 +8,8 @@ An actual selected-object seam fixture found native result 1 enters the word-bre
 
 The [clean-link object baseline](tabstop-link-route-review.md) repeats the zero/one result against the cached selected object without `/FORCE`, using explicit fail-closed seams for unrelated paths. It also records all three synchronous source routes. It remains a controlled pre-fix witness, not a fresh product build or a complete callback/lifecycle test.
 
+The [controlled release matrix](tabstop-release-review.md) separately exercises twelve count, storage and return-value combinations in the cached selected object. It confirms the observed cleanup predicate and the existing result-one corruption, not constructor reachability, post-fix behavior or real guest lifecycle.
+
 ## Minimal correction
 
 Add a `break;` after the existing signed-condition `STACKORHEAPFREE` inside `UnThunkEMMsg16`'s `EM_SETTABSTOPS` case, with a new narrow registered mirror-diff exception explaining that a Boolean result is not a word-break procedure. Leave allocation predicate, release, result, `EM_GETWORDBREAKPROC` conversion and its callback/identity handling intact. Do not zero or replace word-break globals: an already registered legitimate procedure must survive the unrelated message. Do not modify guest or change the original control's actual tab-position behavior. This removes accidental callback and prevents corruption; it is a documented observable change to inherited behavior, not an assertion the two messages were previously independent in the source.

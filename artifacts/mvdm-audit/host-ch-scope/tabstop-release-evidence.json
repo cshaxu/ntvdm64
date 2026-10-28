@@ -1,0 +1,99 @@
+{
+  "sha256": {
+    "src\\mvdm\\wow32\\wmsgem.c": "251325307c9e698ee579e3493f15f93abb6dafe7d289f334ac3714c513566be9",
+    "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsgem.obj": "46c37b644ded00183c1ef5afb8a51bd1b9229040d2800a695cffb2159a0af6f9",
+    "artifacts\\mvdm-audit\\host-ch-scope\\tabstop-release-observe.py": "569e5a51af9b5d73f8134af32812d91662d13f01c1879e9473577e14340d14e1",
+    "artifacts\\mvdm-audit\\host-ch-scope\\tabstop-release-build.cmd": "86142c22506205959d6006ae3db9411857bf528e676d4d391d22a79f494a67fc",
+    "artifacts\\mvdm-audit\\host-ch-scope\\tabstop-release-fixture.c": "6b55bcd9dcee506f265b462b358a4651308a290e762cd220665778570e857712",
+    "artifacts\\mvdm-audit\\host-ch-scope\\tabstop-release-seams.c": "acf2eba42828887a131852eddcfe7e5aee130631217f85ee8e045feea7678c22",
+    "artifacts\\mvdm-audit\\shard-2\\tabstop-object-types.h": "ff83c8e60bbf088442bc5b9616f12fcc903e74bbc2334bb33a557348603034fc",
+    "build\\t473-s10\\tabstop-release-seams\\fixture.exe": "044848478c4c8162c7e94b5f4e9b858de7f868a8e0ece68cf6cd42c7cd639a35",
+    "build\\t473-s10\\tabstop-release-seams\\fixture.map": "538a9491942a70ba8cca6b8b05b6650db83fd77dc4de79d391e10b85af71168a"
+  },
+  "results": [
+    {
+      "count": 1,
+      "heap": 0,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": 1,
+      "heap": 0,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=1 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "count": 1,
+      "heap": 1,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=1 heap=1 result=0 free=1 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": 1,
+      "heap": 1,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=1 heap=1 result=1 free=1 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "count": 0,
+      "heap": 0,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=0 heap=0 result=0 free=0 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": 0,
+      "heap": 0,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=0 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "count": 0,
+      "heap": 1,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=0 heap=1 result=0 free=0 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": 0,
+      "heap": 1,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=0 heap=1 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "count": -1,
+      "heap": 0,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=-1 heap=0 result=0 free=0 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": -1,
+      "heap": 0,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=-1 heap=0 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    },
+    {
+      "count": -1,
+      "heap": 1,
+      "native_result": 0,
+      "exit": 0,
+      "output": "count=-1 heap=1 result=0 free=0 callbacks=0 ret=0 proc=00000000 word16=00000000"
+    },
+    {
+      "count": -1,
+      "heap": 1,
+      "native_result": 1,
+      "exit": 0,
+      "output": "count=-1 heap=1 result=1 free=0 callbacks=1 ret=1 proc=00000001 word16=00000001"
+    }
+  ]
+}
