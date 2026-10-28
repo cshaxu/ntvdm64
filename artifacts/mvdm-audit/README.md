@@ -189,6 +189,8 @@ The [101–300 sample correction](classification-scope-correction-101-300-verifi
 reopens 81 guest source/data decisions and two unbound guest images. Three
 COMMAND sources with mirror differences remain partial under the T objective;
 their source-to-image and behavioral evidence remains open.
+The [DEBUG variant correction](classification-scope-correction-debug-variants-verification.json)
+reopens the two original I/O-mode switches pending configuration and behavior review.
 The [DOSX scope correction](classification-scope-correction-dosx-verification.json)
 also reopens seven guest source entries previously excluded on historical
 build-input evidence; their protected-mode functionality remains unresolved.

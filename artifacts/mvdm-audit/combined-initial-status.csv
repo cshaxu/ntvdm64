@@ -255,9 +255,9 @@ dos/v86/cmd/debug/debug.skl,1,pending,shard-1/file-audit.csv
 dos/v86/cmd/debug/debug.tag,0,pending,shard-0/review.csv
 dos/v86/cmd/debug/dosdebug/debug.arf,0,pending,shard-0/review.csv
 dos/v86/cmd/debug/makefile,3,excluded,shard-3/file-review.csv
-dos/v86/cmd/debug/sysver.fal,1,excluded,shard-1/file-audit.csv
+dos/v86/cmd/debug/sysver.fal,1,pending,shard-1/file-audit.csv
 dos/v86/cmd/debug/sysver.inc,0,pending,shard-0/review.csv
-dos/v86/cmd/debug/sysver.tru,1,excluded,shard-1/file-audit.csv
+dos/v86/cmd/debug/sysver.tru,1,pending,shard-1/file-audit.csv
 dos/v86/cmd/edlin/edlcmd1.asm,0,pending,shard-0/review.csv
 dos/v86/cmd/edlin/edlcmd1.OBJ,0,excluded,shard-0/review.csv
 dos/v86/cmd/edlin/edlcmd2.asm,1,pending,shard-1/file-audit.csv
