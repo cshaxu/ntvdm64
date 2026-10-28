@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "bb3c8f460",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-2/curdir-abi-observations.json",
+      "sha256": "E472491EA0E6933AC75D7343867362BACB453192AA68AF4EC246541712FE6E31"
+    },
+    {
+      "path": "shard-2/dos-mouse-ppi-device-observations.json",
+      "sha256": "7132EA8FE8B1D852BD7133EA49C3E435C4CE232FC813BC254E87035E612FAADE"
+    },
+    {
+      "path": "shard-2/dpmi-interrupt-interface-observations.json",
+      "sha256": "4BCEF635B778983FADEB43861E01B2A356D3838286BD5BDB8D0B79BC23F11876"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected declarations and device sources; no runtime or guest ABI acceptance"
+}

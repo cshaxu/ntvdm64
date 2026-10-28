@@ -1,0 +1,337 @@
+{
+  "softpc.new/host/src/nt_rflop.c": {
+    "current": "d8e469a3ac2f35eb0205894f9c9f44404b6f3c797a295ab68281e54c009b53fa",
+    "opennt": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+    "opennt45": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29"
+  },
+  "softpc.new/base/disks/gfi.c": {
+    "current": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+    "opennt": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+    "opennt45": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6"
+  },
+  "softpc.new/base/disks/fla.c": {
+    "current": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+    "opennt": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+    "opennt45": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d"
+  },
+  "softpc.new/base/disks/floppy_i.c": {
+    "current": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+    "opennt": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+    "opennt45": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00051c80       _FloppyTerminatePDB        00452c80 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:00051d40       _fdc_read_write            00452d40 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:00052330       _fdc_thread                00453330 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:00052840       _host_gfi_rdiskette_active 00453840 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:000528a0       _nt_floppy_close           004538a0 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:00052fd0       _nt_rflop_command          00453fd0 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:000533a0       _nt_rflop_reset            004543a0 f   original-softpc-host-roots:nt_rflop.obj"
+    ]
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "blocks": [
+      {
+        "object": "obj/disks/gfi.obj",
+        "deps": [
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\cpuint_c.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/base_def.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\base_def.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/bios.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\bios.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/config.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\config.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/cpu4.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\cpu4.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/debug.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\debug.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/error.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\error.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/fla.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\fla.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/gfi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\gfi.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/gfitest.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\gfitest.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/host_cfg.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\host_cfg.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/host_sas.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\host_sas.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/ios.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\ios.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/sas.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\sas.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/trace.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\trace.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/xt.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\xt.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/error.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\error.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_cpu.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_cpu.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_def.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_def.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_gen.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/insignia.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\gdpvar.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_softpc_symbol_compat.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/nt.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\nt.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/ntioapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\ntioapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\wow_user_declarations.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\source\\public\\sdk\\inc\\devioctl.h"
+          },
+          {
+            "raw": "../../../../src/opennt-host/public/sdk/inc/ntpsapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-host\\public\\sdk\\inc\\ntpsapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-host/public/sdk/inc/ntrtl.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-host\\public\\sdk\\inc\\ntrtl.h"
+          }
+        ]
+      },
+      {
+        "object": "obj/host/nt_rflop.obj",
+        "deps": [
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\cpuint_c.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/base_def.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\base_def.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/cmos.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\cmos.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/config.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\config.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/cpu4.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\cpu4.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/debug.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\debug.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/dma.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\dma.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/error.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\error.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/fla.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\fla.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/floppy.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\floppy.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/gfi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\gfi.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/host_cfg.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\host_cfg.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/lock.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\lock.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/timer.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\timer.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/trace.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\trace.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/base/inc/xt.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\xt.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/error.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\error.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_cpu.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_cpu.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_def.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_def.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_gen.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/insignia.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/nt_fdisk.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_fdisk.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/nt_reset.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_reset.h"
+          },
+          {
+            "raw": "../../../../src/mvdm/softpc.new/host/inc/nt_uis.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_uis.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/command/include/mvdm_command_guest_state.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\command\\include\\mvdm_command_guest_state.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/session/guest_memory_lease.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\session\\guest_memory_lease.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\gdpvar.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/mvdm_guest_location.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_guest_location.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_softpc_symbol_compat.h"
+          },
+          {
+            "raw": "../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\win32\\mvdm_crt_redirect.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/nt.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\nt.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/ntioapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\ntioapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/vdmapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\vdmapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\host-compat\\include\\wow_user_declarations.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/source/public/ddk/inc/ntdddisk.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\source\\public\\ddk\\inc\\ntdddisk.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/source/public/internal/base/inc/vdmapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\source\\public\\internal\\base\\inc\\vdmapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-abi\\source\\public\\sdk\\inc\\devioctl.h"
+          },
+          {
+            "raw": "../../../../src/opennt-host/public/sdk/inc/ntpsapi.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-host\\public\\sdk\\inc\\ntpsapi.h"
+          },
+          {
+            "raw": "../../../../src/opennt-host/public/sdk/inc/ntrtl.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-host\\public\\sdk\\inc\\ntrtl.h"
+          },
+          {
+            "raw": "../../../../src/opennt-host/public/sdk/inc/nturtl.h",
+            "normalized": "o:\\repos.hobby\\ntvdm64\\src\\opennt-host\\public\\sdk\\inc\\nturtl.h"
+          }
+        ]
+      }
+    ]
+  }
+}

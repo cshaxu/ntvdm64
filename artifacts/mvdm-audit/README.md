@@ -15,8 +15,13 @@ The [DOS directory declarations](shard-2/curdir-abi-review.md),
 [DPMI interrupt declarations](shard-2/dpmi-interrupt-interface-review.md),
 [storage interfaces](shard-3/storage-interfaces-role-review.md) and
 [audio VDD samples](shard-1/vdd-audio-samples-review.md) record selected
-dependencies and bounded exclusions; their pending ledger dispositions and
-runtime behavior remain subject to coordinator reconciliation.
+dependencies and bounded exclusions. The [directory and interrupt checkpoint](directory-interrupt-headers-role-review.md)
+reconciles three selected declarations and two device sources; remaining dispositions and
+runtime behavior remain open.
+The [bus mouse and PPI review](shard-2/dos-mouse-ppi-device-review.md),
+[floppy lifecycle review](shard-3/floppy-lifecycle-role-review.md), and
+[MMSYSTEM legacy review](shard-1/guest-mmsystem-legacy-review.md) retain
+source-level findings and explicitly separate untested behavior from evidence.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

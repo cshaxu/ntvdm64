@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1268,
+    "pending": 1263,
     "excluded": 2739,
-    "partial": 624,
+    "partial": 629,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Four selected DOS and host input declaration roles remain partial; guest behavior remains in scope."
+  "note": "Three declarations and two selected port device roles are partial; runtime obligations remain open."
 }

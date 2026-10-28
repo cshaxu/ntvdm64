@@ -1,0 +1,51 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/keymouse/mouse.c",
+      "hashes": [
+        "2D196D9F0C1EF860436D8EB47C01820913A1164DD1B32E3BD518226653476785",
+        "2D196D9F0C1EF860436D8EB47C01820913A1164DD1B32E3BD518226653476785",
+        "2D196D9F0C1EF860436D8EB47C01820913A1164DD1B32E3BD518226653476785"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/keymouse/ppi.c",
+      "hashes": [
+        "367CCEAA88345E16B2E138FAEF9ADDD441DA2CD39F95EA3AB6C359651BD8EBF5",
+        "367CCEAA88345E16B2E138FAEF9ADDD441DA2CD39F95EA3AB6C359651BD8EBF5",
+        "367CCEAA88345E16B2E138FAEF9ADDD441DA2CD39F95EA3AB6C359651BD8EBF5"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "normalized_deps": [
+    {
+      "object": "obj/keymouse/mouse.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\mouse.h"
+    },
+    {
+      "object": "obj/keymouse/ppi.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\ppi.h"
+    }
+  ],
+  "compile_edges": [
+    "build obj/keymouse/mouse.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/mouse.c",
+    "build obj/keymouse/ppi.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/ppi.c"
+  ],
+  "map_symbols": [
+    "0001:00070bf0       _mouse_init                00471bf0 f   original-softpc-keymouse:mouse.obj",
+    "0001:00070b50       _mouse_inb                 00471b50 f   original-softpc-keymouse:mouse.obj",
+    "0001:00070c50       _mouse_outb                00471c50 f   original-softpc-keymouse:mouse.obj",
+    "0001:00070e00       _ppi_init                  00471e00 f   original-softpc-keymouse:ppi.obj",
+    "0001:00070de0       _ppi_inb                   00471de0 f   original-softpc-keymouse:ppi.obj",
+    "0001:00070e40       _ppi_outb                  00471e40 f   original-softpc-keymouse:ppi.obj"
+  ],
+  "reset_source_sha256": "EDE3217E7C3830601A7F95D557DA9011A15250902F8C468241C738B605055D3B",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Source port registration and worker link snapshot; not proof reset path executes or device I/O behavior"
+}

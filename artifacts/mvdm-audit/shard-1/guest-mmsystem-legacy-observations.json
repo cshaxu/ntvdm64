@@ -1,0 +1,75 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "wow16/mmsystem/drvrrare.c",
+      "sha256": "834C82CFCDF56DE9225724BA9E8E810E8F7C1EE2948FDB5A04195F3C08854B43",
+      "catalog_ids": "SRC:75d2b6c9d8d8ce06e686;SRC:e0ca7ff811f1e7c4f550",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/mmsystem/drvrstr.c",
+      "sha256": "5E63D7A4C94F4799910B4B79D00B667592DEAA2E33B143449682FDE4C7FD9990",
+      "catalog_ids": "SRC:a7da6533031ecc9da9e1;SRC:ec24ed1284180e083d25",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/mmsystem/mmsex.ico",
+      "sha256": "FB4BC2D72557833DCCD3BFCCEDD56FDAAE6F9C4E106492F7457681475E84D88D",
+      "catalog_ids": "SRC:9aeaca55284feef46831;SRC:efe8700942a9a9ab931d",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\drvr31.asm",
+      "sha256": "68549A548BE4376285FE98DF08FBD6269013F01340640835FBBE91F9E990CAF3"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\mmsystem.rc",
+      "sha256": "D6A328E813A38E64C5CE871F6A3F3D544136F084449DA7CD78B2F17E58C3D374"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\mmsex.dlg",
+      "sha256": "969585E46F97C680E8FAADD05790AA1933B7B3718CE3A7B239F38A7951E16211"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\init.c",
+      "sha256": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source": "src\\mvdm\\wow16\\mmsystem\\MMSYSTEM.DLL",
+    "source_sha256": "080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A",
+    "zip_member": "WINNT/SYSTEM32/MMSYSTEM.DLL",
+    "zip_sha256": "080432D0CAD660B163D0D231D37603010F7D9366F58570AC7C74D171C518211A",
+    "installed_exact_present": false
+  },
+  "limitations": "Original recipe, selected host dependencies and binary equality only; no guest build, callback/driver lifecycle, preprocessed resource or source-to-image proof."
+}
