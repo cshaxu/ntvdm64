@@ -65,6 +65,11 @@ The [multimedia callback review](nine-way/part-5/multimedia-semantic-reconciliat
 [combo/list message review](cross-369/control-message-disposition.md) trace
 selected original paths and distinguish bounded historical tests from missing
 current-artifact behavior and lifecycle evidence.
+The [DOS IOCTL review](nine-way/part-2/dos-ioctl-semantic-reconciliation.md),
+[REGEDIT review](nine-way/part-8/regedit-semantic-reconciliation.md) and
+[spool interface review](cross-369/spool-header-disposition.md) distinguish
+historical roles and bounded existing tests from unverified real-device and
+failure cleanup paths.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
