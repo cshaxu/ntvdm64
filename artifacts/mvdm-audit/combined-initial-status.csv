@@ -3770,7 +3770,7 @@ wow16/timer/startend.asm,0,pending,shard-0/review.csv
 wow16/timer/sysinfo.inc,2,pending,shard-2/file-audit.csv
 wow16/timer/timer.asm,0,pending,shard-0/review.csv
 wow16/timer/timer.def,0,excluded,shard-0/review.csv
-wow16/timer/TIMER.DRV,2,pending,shard-2/file-audit.csv
+wow16/timer/TIMER.DRV,2,partial,shard-2/file-audit.csv
 wow16/timer/timer.inc,2,pending,shard-2/file-audit.csv
 wow16/timer/timer.map,0,excluded,shard-0/review.csv
 wow16/timer/timer.rc,3,excluded,shard-3/file-review.csv
@@ -3878,7 +3878,7 @@ wow16/user/k/daytona/msglayer.OBJ,0,excluded,shard-0/review.csv
 wow16/user/k/daytona/net.obj,3,excluded,shard-3/file-review.csv
 wow16/user/k/daytona/rmcreate.obj,3,excluded,shard-3/file-review.csv
 wow16/user/k/daytona/rmload.obj,0,excluded,shard-0/review.csv
-wow16/user/k/daytona/USER.EXE,3,pending,shard-3/file-review.csv
+wow16/user/k/daytona/USER.EXE,3,partial,shard-3/file-review.csv
 wow16/user/k/daytona/user.map,0,excluded,shard-0/review.csv
 wow16/user/k/daytona/user.OBJ,0,excluded,shard-0/review.csv
 wow16/user/k/daytona/user.res,0,pending,shard-0/review.csv

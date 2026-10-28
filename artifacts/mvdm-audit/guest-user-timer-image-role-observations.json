@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "928abef79",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-2/timer-ne-family-observations.json",
+      "sha256": "D56BF71E834D1A2DBCB30BE60A038FEBECC63236CFC3E1918F14DD6A43C6B472"
+    },
+    {
+      "path": "shard-3/wow-user-guest-input-observations.json",
+      "sha256": "93600F269AE31253089FD6B17C64701A9710BB8AC45AC43DA156E475D8BDEC0E"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest USER and timer image identity, not runtime acceptance"
+}

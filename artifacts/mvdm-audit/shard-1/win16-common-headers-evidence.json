@@ -1,0 +1,120 @@
+{
+  "files": [
+    {
+      "name": "commdlg.h",
+      "sha256": "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec",
+      "reference_hashes": [
+        "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec",
+        "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec"
+      ],
+      "direct_basename_includes": [
+        "src\\mvdm\\wow16\\commdlg\\dlgs.c:9",
+        "src\\mvdm\\wow16\\commdlg\\privcomd.h:7",
+        "src\\mvdm\\wow16\\regedit\\filename.c:2",
+        "src\\mvdm\\wow16\\regedit\\utils1.c:2",
+        "src\\mvdm\\wow16\\write\\commdlg.c:8",
+        "src\\mvdm\\wow16\\write\\fontdlg.c:49",
+        "src\\mvdm\\wow16\\write\\initwin.c:42",
+        "src\\mvdm\\wow16\\write\\obj2.c:16",
+        "src\\mvdm\\wow16\\write\\obj3.c:18",
+        "src\\mvdm\\wow16\\write\\printdlg.c:37",
+        "src\\mvdm\\wow16\\write\\quit.c:57",
+        "src\\mvdm\\wow16\\write\\rare.c:41",
+        "src\\mvdm\\wow16\\write\\scrnchng.c:42"
+      ]
+    },
+    {
+      "name": "drivinit.h",
+      "sha256": "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0",
+      "reference_hashes": [
+        "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0",
+        "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0"
+      ],
+      "direct_basename_includes": [
+        "src\\mvdm\\wow16\\gdi\\metarec.c:31",
+        "src\\mvdm\\wow16\\write\\diachgpr.c:31"
+      ]
+    },
+    {
+      "name": "io.h",
+      "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+      "reference_hashes": [
+        "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32",
+        "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+      ],
+      "direct_basename_includes": [
+        "src\\mvdm\\wow16\\sherlock\\drwatson.c:39",
+        "src\\mvdm\\wow16\\write\\trans3.c:56"
+      ]
+    },
+    {
+      "name": "stdarg.h",
+      "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+      "reference_hashes": [
+        "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62",
+        "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62"
+      ],
+      "direct_basename_includes": [
+        "src\\mvdm\\wow16\\sherlock\\drwatson.c:38"
+      ]
+    },
+    {
+      "name": "stdio.h",
+      "sha256": "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536",
+      "reference_hashes": [
+        "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536",
+        "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536"
+      ],
+      "direct_basename_includes": [
+        "src\\mvdm\\wow16\\ctl3dv2\\ctl3d.c:124",
+        "src\\mvdm\\wow16\\inc\\cmstrip.c:6",
+        "src\\mvdm\\wow16\\kernel31\\fixexe.c:20",
+        "src\\mvdm\\wow16\\sherlock\\getsym.c:2",
+        "src\\mvdm\\wow16\\kernel31\\swappro\\swap.c:14",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\client\\dialog.c:12",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\client\\huge.c:12",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\dde.c:24",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\ddemlsv.c:23",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\dialog.c:2",
+        "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\huge.c:11"
+      ]
+    },
+    {
+      "name": "style.h",
+      "sha256": "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec",
+      "reference_hashes": [
+        "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec",
+        "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec"
+      ],
+      "direct_basename_includes": []
+    },
+    {
+      "name": "userproc.h",
+      "sha256": "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39",
+      "reference_hashes": [
+        "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39",
+        "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39"
+      ],
+      "direct_basename_includes": []
+    },
+    {
+      "name": "w32sys.h",
+      "sha256": "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02",
+      "reference_hashes": [
+        "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02",
+        "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02"
+      ],
+      "direct_basename_includes": []
+    },
+    {
+      "name": "wife.h",
+      "sha256": "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a",
+      "reference_hashes": [
+        "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a",
+        "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a"
+      ],
+      "direct_basename_includes": []
+    }
+  ],
+  "limitations": "Direct basename includes only, not search path resolution, preprocessor selection, Ninja deps, or runtime."
+}

@@ -1,0 +1,3 @@
+# Original USER and multimedia timer guest images
+
+The [timer review](shard-2/timer-ne-family-review.md) matches TIMER.DRV to the guest archive and parses its WEP and DriverProc ordinals. Its original timer source explicitly tolerates a failed driver open; neither archive presence nor exported names prove a timer loaded or fired. The [USER review](shard-3/wow-user-guest-input-role-review.md) matches USER.EXE to the installed image; supplemental original provenance is validated by the ledger checkpoint. Guest controls, callbacks, task lifecycle, timer cancellation and source-to-image lineage remain open. No guest bytes were modified.
