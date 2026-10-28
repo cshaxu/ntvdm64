@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "base": "02d23f2f7",
+  "candidate_count": 10,
+  "source_tables": [
+    {
+      "path": "shard-2/dos-kernel-country-observations.json",
+      "sha256": "CA5EBC3817CC597239F45298AD37A37082F22D93ED4AF8C2DCDA4195596B1025"
+    },
+    {
+      "path": "shard-2/dos-include-owner-observations.json",
+      "sha256": "B909CFE26F324D9F45AF02978297CFFC43625632DF6AE28D258DB42C23AEB9CD"
+    },
+    {
+      "path": "shard-2/dos-command-package-observations.json",
+      "sha256": "ED06A8615C7D4AA8794CF6E72A3FB5E0F2095617298E15470198BCAC41378FCC"
+    },
+    {
+      "path": "shard-2/win16-comm-guest-observations.json",
+      "sha256": "C164264B0BFFF6054BED517E281CB301344DA87A6C1E07B1D63D2B32054CD3C9"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest source roles and packaged identities only; no guest runtime acceptance"
+}

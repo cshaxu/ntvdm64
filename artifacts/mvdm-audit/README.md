@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
+six partial image/data roles and four file-only historical exclusions.
+
 The [parallel source and package observations](parallel-source-package-observations.md)
 retain 20 independently replayed investigations; proposed dispositions remain pending.
 
