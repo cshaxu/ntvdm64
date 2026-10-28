@@ -1,0 +1,11 @@
+# Part 6 external NT GDI source inventory
+
+`external-owned-files.csv` enumerates all 4,772 assigned external keys with frozen edition/path, actual file existence and SHA-256. All are present in the OpenNT comparison tree. Reproduce using `external-observer.py`; no imported product or source-tree write occurs. Identity alone is not an applicability decision.
+
+This range includes hardware display drivers, NT GDI math/debug and metafile conversion, and printer drivers/resources. Their real owners differ. For example `windows/core/ntgdi/displays/vga/sources` declares `TARGETTYPE=GDI_DRIVER`; its name does not make it the Win16 `VGA.DRV` compared in `guest-package-observations.json`. Display architecture variants such as PPC must be evaluated against the actual provider/profile, not ruled out or selected simply by directory name.
+
+`windows/core/ntgdi/mf3216/sources` builds an NT DLL from its parser, emit, handlers and drawing records; `mf3216.def` exports `ConvertEmfToWmf`. The current `docs/etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md` instead records selected original WOW `wgmeta.c` and modern GDI ownership. The distinct external conversion algorithm and current metafile callers are therefore a real relevance question, not proof it is selected or dispensable. Exact guest format conversions and any host substitution remain for the existing metafile owner to verify.
+
+Printer groups include `hprasdd`, `psprint`, `rasprint`, `compstui` and their per-device PFM/IFI/PPD resources; build descriptions and formats are different and do not justify one blanket disposition. No selected modern host printer/driver or cross-process driver dependency has been established for each key in this review. Other hardware display and GDI groups likewise need per-function/provider review. Keep each external key pending relevance until a direct caller, build/provider evidence or an explicit bounded exclusion is established. In particular, neither same-named driver paths nor lack of host-build references prove that Win16 guest capability is absent.
+
+No NT driver, metafile conversion, printer or guest behavior was run. No external source was imported and no runtime restoration percentage is claimed.

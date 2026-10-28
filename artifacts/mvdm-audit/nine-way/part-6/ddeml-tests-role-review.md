@@ -1,0 +1,9 @@
+# Part 6: DDEML retained tests and resources
+
+The owned keys include `DDEML.RES`, `debug/DDEML.DLL`, `verddeml.h`, seven `tests/ddestrs` files and the listed client/server/demo test inputs under `tests/src`; exact paths and SHA-256 are in `mvdm-identity-observations.json`. These are not one interchangeable test or evidence of a running DDE implementation.
+
+For the DDE stress test, `tests/ddestrs/sources` explicitly specifies `-DWIN32` and lists `client.c`, `wrapper.c` and other source/RC inputs for a Windows application. `makefile.dos` instead selects `-DWIN16` (optionally `-DWIN31`) and links the same application against `libw`, `ddeml`, and `mlibcew`; the corresponding owned `.def` and icon assets are part of that test context. Its `ddestrs.txt` describes asynchronous exchanges and format/connection stress; `runddes.bat` repeatedly invokes the executable and contains an intentional unbounded loop. No script was executed and no stress coverage is claimed. Do not infer Win16 coverage from a WIN32 test alone.
+
+`tests/src/mls.cmd` launches client and server executables; their separate directories contain individual BUILD `sources`/makefiles, client/server dialog resources and selected source files, while `ddemo/ddemo.c` is a separate sample. Check the corresponding recipe and feature configuration before classifying any item as applicable. `DDEML.RES` is a historical binary resource and `verddeml.h` version metadata. The debug DDEML DLL is a retained binary, not automatically the deployed retail guest: `guest-package-observations.json` shows no DDEML.DLL member in the inspected ZIP, and this cannot determine alternate runtime selection or application-bundled DLLs.
+
+Recommendation: retain historical test/resource roles with individual items pending applicability and provider linkage. No test executable was built or run, no DDE lifetime or cross-task semantics are proven, and no guest source or binary was modified.

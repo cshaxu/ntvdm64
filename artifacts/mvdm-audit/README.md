@@ -12,6 +12,10 @@ and separate external [printer implementations](nine-way/part-2/printer-implemen
 [PPDs](nine-way/part-2/psprint-ppd-review.md), and [model resources](nine-way/part-2/rasprint-mini-review.md).
 Its coverage observer checks key accounting only; external relevance and runtime
 equivalence remain open and must not be inferred from file identities.
+The [part 6 guest driver and common-dialog review](nine-way/part-6/wow16-drivers-dialog-role-review.md)
+and [external GDI inventory](nine-way/part-6/external-role-review.md) record
+separate image identities and unresolved provider boundaries; these are not
+runtime or binary-to-source provenance proof.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
