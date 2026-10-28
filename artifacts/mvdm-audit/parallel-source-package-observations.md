@@ -1,6 +1,11 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 95 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 99 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [guest-dosx-vcpi](shard-1/guest-dosx-vcpi-review.md): [observer](shard-1/guest-dosx-vcpi-observer.py), [receipt](shard-1/guest-dosx-vcpi-observations.json).
+- [historical-tools16-owner](shard-1/historical-tools16-owner-review.md): [observer](shard-1/historical-tools16-owner-observer.py), [receipt](shard-1/historical-tools16-owner-observations.json).
+- [xms-suballoc-roles](shard-2/xms-suballoc-roles-review.md): [observer](shard-2/xms-suballoc-roles-observer.py), [receipt](shard-2/xms-suballoc-roles-observations.json).
+- [cga-herc-interface](shard-3/cga-herc-interface-role-review.md): [observer](shard-3/cga-herc-interface-observer.py), [receipt](shard-3/cga-herc-interface-observations.json).
 
 - [guest-service-constants](shard-1/guest-service-constants-review.md): [observer](shard-1/guest-service-constants-observer.py), [receipt](shard-1/guest-service-constants-observations.json).
 - [wow-shared-abi-header](shard-2/wow-shared-abi-header-review.md): [observer](shard-2/wow-shared-abi-header-observer.py), [receipt](shard-2/wow-shared-abi-header-observations.json).

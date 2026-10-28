@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "9f50825e1",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-1/guest-service-constants-observations.json",
+      "sha256": "31DBC3EE0A8E6C2B14B9E567DFE5A3B54A427562E9BBE9247008B8ECE216D576"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original C header and simple cross-language constants; no guest runtime acceptance"
+}

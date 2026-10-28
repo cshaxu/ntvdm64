@@ -1177,11 +1177,11 @@ inc/dbginfo.h,2,pending,shard-2/file-audit.csv
 inc/dbgsvc.h,0,pending,shard-0/review.csv
 inc/DBGSVC.INC,0,pending,shard-0/review.csv
 inc/demexp.h,0,partial,shard-0/review.csv
-inc/dossvc.h,0,pending,shard-0/review.csv
+inc/dossvc.h,0,partial,shard-0/review.csv
 inc/DOSSVC.INC,1,pending,shard-1/file-audit.csv
 inc/doswow.h,0,pending,shard-0/review.csv
 inc/DOSWOW.INC,1,pending,shard-1/file-audit.csv
-inc/dpmi.h,0,pending,shard-0/review.csv
+inc/dpmi.h,0,partial,shard-0/review.csv
 inc/DPMI.INC,1,pending,shard-1/file-audit.csv
 inc/enumapis.h,1,pending,shard-1/file-audit.csv
 inc/ENUMAPIS.INC,0,pending,shard-0/review.csv
@@ -1258,7 +1258,7 @@ inc/wowwsock.h,3,pending,shard-3/file-review.csv
 inc/WOWWSOCK.INC,1,pending,shard-1/file-audit.csv
 inc/x86def.h,1,pending,shard-1/file-audit.csv
 inc/xmsexp.h,1,pending,shard-1/file-audit.csv
-inc/xmssvc.h,3,pending,shard-3/file-review.csv
+inc/xmssvc.h,3,partial,shard-3/file-review.csv
 inc/XMSSVC.INC,1,pending,shard-1/file-audit.csv
 makefil0,3,excluded,shard-3/file-review.csv
 oemuni/file.c,1,partial,shard-1/file-audit.csv

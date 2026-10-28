@@ -1,0 +1,59 @@
+{
+  "softpc.new/host/inc/nt_cga.h": {
+    "current": "8e92a1b59d9737f1753ccba9f22d17af6c6a3dd2f518a414957123afb69ce57e",
+    "opennt": "8e92a1b59d9737f1753ccba9f22d17af6c6a3dd2f518a414957123afb69ce57e",
+    "opennt45": "8e92a1b59d9737f1753ccba9f22d17af6c6a3dd2f518a414957123afb69ce57e"
+  },
+  "softpc.new/base/inc/herc.h": {
+    "current": "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f",
+    "opennt": "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f",
+    "opennt45": "cbe8cf0aa83fd197e97485c9d102b936a20c50dea2bba1f2292ddd035a26769f"
+  },
+  "softpc.new/base/video/gvi.c": {
+    "current": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+    "opennt": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+    "opennt45": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80"
+  },
+  "softpc.new/host/src/nt_graph.c": {
+    "current": "3bb4943473c69a70ac7ca8a56c76915314d97b608190bf9264de39c689b84277",
+    "opennt": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+    "opennt45": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
+  },
+  "softpc.new/host/src/nt_cga.c": {
+    "current": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+    "opennt": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+    "opennt45": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:0005e300       _nt_cga_colour_hi_graph_std 0045f300 f   original-softpc-host-roots:nt_cga.obj",
+      " 0001:0005e830       _nt_init_cga_colour_hi_graph 0045f830 f   original-softpc-host-roots:nt_cga.obj",
+      " 0001:00082850       _gvi_init                  00483850 f   original-softpc-video:gvi.obj",
+      " 0001:00082910       _gvi_term                  00483910 f   original-softpc-video:gvi.obj"
+    ]
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": [
+      {
+        "file": "softpc.new/host/inc/nt_cga.h",
+        "object": "obj/host/nt_cga.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_cga.h"
+      },
+      {
+        "file": "softpc.new/host/inc/nt_cga.h",
+        "object": "obj/host/nt_graph.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_cga.h"
+      }
+    ]
+  },
+  "gvi_object": {
+    "sha256": "a757dd2c72bf77f2274839e5abe3fceeb92a8caee5421cff6eeeb65ba80b39e6",
+    "lines": [
+      "[ 28](sec  4)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _gvi_init",
+      "[ 34](sec  0)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _vga_init",
+      "[ 35](sec  0)(fl 0x00)(ty   20)(scl   2) (nx 0) 0x00000000 _cga_init"
+    ]
+  }
+}

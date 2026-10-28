@@ -1,0 +1,64 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "xms.486/xmsdisp.c",
+      "hashes": [
+        "24B0FA2FE32BD7A94606D424A10B0961A9911190CB2684456AF04034E04BFF01",
+        "24B0FA2FE32BD7A94606D424A10B0961A9911190CB2684456AF04034E04BFF01",
+        "24B0FA2FE32BD7A94606D424A10B0961A9911190CB2684456AF04034E04BFF01"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "suballoc_normalized_dependency": false
+    },
+    {
+      "path": "suballoc/suballoc.c",
+      "hashes": [
+        "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+        "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+        "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "suballoc_normalized_dependency": false
+    },
+    {
+      "path": "suballoc/suballoc.txt",
+      "hashes": [
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7",
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7",
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "suballoc_normalized_dependency": false
+    },
+    {
+      "path": "suballoc/foo.bar",
+      "hashes": [
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905",
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905",
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "suballoc_normalized_dependency": false
+    }
+  ],
+  "normalized_deps_object": "obj/suballoc/suballoc.obj",
+  "compile_and_library_edges": [
+    "build obj/xms/xmsdisp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsdisp.c",
+    "build obj/suballoc/suballoc.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/suballoc/suballoc.c",
+    "build original-mvdm-xms.lib: lib obj/xms/xms.obj obj/xms/xmsa20.obj obj/xms/xmsblock.obj obj/xms/xmsdisp.obj obj/xms/xmsmisc.obj obj/xms/xmsumb.obj obj/xms/xmsmemr.obj",
+    "build original-mvdm-host-suballoc.lib: lib obj/suballoc/suballoc.obj"
+  ],
+  "map_symbols": [
+    "0001:001537c0       _XMSDispatch               005547c0 f   original-mvdm-xms:xmsdisp.obj",
+    "0001:00159780       _SAAllocate                0055a780 f   original-mvdm-host-suballoc:suballoc.obj",
+    "0001:001598a0       _SAInitialize              0055a8a0 f   original-mvdm-host-suballoc:suballoc.obj"
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Historical source identity and selected link snapshot; no runtime input bounds or allocator lifecycle proof"
+}

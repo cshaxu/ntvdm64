@@ -1,0 +1,104 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "dpmi/dxvcpi.asm",
+      "sha256": "9961A8644A2E58C1671A91FF425D8990420884294940E30AB884E95AEFAB77BE",
+      "catalog_ids": "SRC:5079ab1c698154602ac1;SRC:5e813f62e1a48bdf5938",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "dpmi/dxvcpi.inc",
+      "sha256": "CEAD5A03345A82029BBA9D42001A4DA6BF6CC1469F547E415B1545BAAF1F246A",
+      "catalog_ids": "SRC:91a7352eff8522683d11;SRC:d91e27e6abae4d653c64",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "dpmi/dxvcpibt.asm",
+      "sha256": "EFE782FD0E43FBD2DF9BEF47B92E1BE417EFDB9C1DEEC7DF0680416451E767C4",
+      "catalog_ids": "SRC:1377e70524af6c1458da;SRC:8e37abc047893e08f726",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "dpmi/netbios.inc",
+      "sha256": "2DC5593E505AC700B600FA85B729AF6D5CCA8A5FC9F1B09F51DF54936CA3913C",
+      "catalog_ids": "SRC:3d5aede6e424802e0fef;SRC:7f6ade09e47917a4ecc7",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "dpmi/segdefs.inc",
+      "sha256": "DFC56E901048C858C488127F20D6D57A0FFA2A03284906FB2F095C730EEF4BC2",
+      "catalog_ids": "SRC:2aaa0478ac2d00e6de56;SRC:9fa176f4b2cf6c74771a",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "dpmi/smartdrv.inc",
+      "sha256": "69F18CD56CF697593B1BEC1F7FBDE2023FAA065F0EE480BD22119C39A7165DA1",
+      "catalog_ids": "SRC:9ab09cf2c768a1352cf4;SRC:cdbe6514b85ec2aaf079",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\dpmi\\makefile",
+      "sha256": "6F2E99255A4906DAF8734F4529341C8123D2B39615FB282A3C81104E85E2AAD9"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\dosx.lnk",
+      "sha256": "294893F0D548DD310970671DA9F2355E1A2571B6B4D9382C5629411A9E1DE2E8"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\dosxi.lnk",
+      "sha256": "19725D558D71BF211EFF167D98D7D8FB74AAE259D46FD25F6AC9B992D7B852A6"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\gendefs.inc",
+      "sha256": "063CA242B52D632DF9E06768FB759E0EFB675ECCC39886B18C3733AE0527CF72"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\486\\dxboot.asm",
+      "sha256": "B22892C24496FDF6C88247C44FE90495475D1D9CBDAFD6B0A3F5F3BD5DFD4077"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\486\\dxstrt.asm",
+      "sha256": "8C6A6B667CDA46A1C1F75D2CD6F156704B82DB5F35DE3438EAC698CD9EBB9874"
+    },
+    {
+      "path": "src\\mvdm\\dpmi\\dxnetbio.asm",
+      "sha256": "C55A7F5625649CF79DB0D0EEA7E84F00B3449CB0068F38F0B019F6557F0B235A"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source": "src\\mvdm\\dpmi\\486\\DOSX.EXE",
+    "source_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+    "installed_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+    "zip_member": "WINNT/SYSTEM32/DOSX.EXE",
+    "zip_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF"
+  },
+  "limitations": "Original recipe, exact host dependencies and package identity only; no guest preprocessing, VCPI external build, DOSX execution or source-to-image provenance."
+}

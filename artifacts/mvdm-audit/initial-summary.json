@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1277,
+    "pending": 1274,
     "excluded": 2739,
-    "partial": 615,
+    "partial": 618,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Six original shared and thunk declarations remain partial; guest behavior remains in scope."
+  "note": "Three selected service declaration headers remain partial; guest service and lifecycle behavior remains in scope."
 }
