@@ -1,0 +1,67 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "path": "softpc.new/base/ccpu386/cmpxchg.c",
+      "hashes": [
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1",
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1",
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1"
+      ],
+      "edge": "build obj/ccpu/cmpxchg.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cmpxchg.c",
+      "object_sha256": "FD938EA04EE1E585735C907D39284766B747BB59A398B59E78EE3667DB984A2D",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xadd.c",
+      "hashes": [
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2",
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2",
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2"
+      ],
+      "edge": "build obj/ccpu/xadd.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xadd.c",
+      "object_sha256": "028D49A54668BA5787695C9E90340FA2714B2381809D65505DE4A7C2BD7CD335",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ]
+    }
+  ],
+  "dispatch_source_sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC",
+  "dispatch_entry_binding": {
+    "name": "_c_cpu_simulate",
+    "va": 4233936,
+    "function": true,
+    "owner": "original-ccpu386:c_main.obj",
+    "bytes": 200,
+    "relocation_words": 14
+  },
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "cached_sha256": "84F72C0B33D0D0BA8E6837A25B296C17D115157FC75A4E9DC394330CC6FAC5E6",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Objects have no code; dispatch entry binding does not prove instruction execution or all CPU backends"
+}

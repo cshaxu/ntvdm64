@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1203,
-    "excluded": 2787,
+    "pending": 1202,
+    "excluded": 2788,
     "partial": 641,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Three selected C-VID owner roles partial; complete video behavior remains open."
+  "note": "One current-release debug-only file role excluded; DPMI behavior remains in scope."
 }

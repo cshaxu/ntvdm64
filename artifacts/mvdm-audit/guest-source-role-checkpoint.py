@@ -155,7 +155,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-superseded-nt-host-source-only',
                                 'historical-debug-profile-host-source-only',
                                 'historical-alternative-virtual-floppy-source-only',
-                                  'historical-alternate-host-header-source-only', 'historical-profile-header-source-only', 'historical-relocated-build-artifact-only', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
+                                  'historical-alternate-host-header-source-only', 'historical-profile-header-source-only', 'historical-relocated-build-artifact-only', 'selected-debug-only-source-file', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -188,6 +188,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/cvidc/' + name + '.h' for name in ('add_c', 'bswap_c', 'cmp_c', 'copies_c', 'fmevid_c', 'gdmain_c', 'gicvid_c', 'idmain_c', 'logic_c', 'move_c', 'nanoe_c', 'unchn_c')})
                 if proof['role'] == 'selected-empty-source-file-only':
                     assert prefix == 'shard0-empty-gdi-role-' and path == 'wow32/wgman.c'
+                if proof['role'] == 'selected-debug-only-source-file':
+                    assert prefix == 'dpmi-debug-profile-role-' and path == 'dpmi32/debug.c'
                 if proof['role'] == 'historical-guest-library-build-artifact-only':
                     assert prefix == 'guest-library-role-' and path.lower().endswith('.lib')
                 if proof['role'] == 'historical-cpu-test-source-only':

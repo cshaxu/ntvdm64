@@ -90,6 +90,13 @@ retains its resource ID, language and failure-path gaps.
 The [DPMI debug profile](shard-2/dpmi-debug-selected-image-review.md) and
 [WOW DIB lifecycle](shard-3/wow-dib-provider-lifecycle-review.md) reviews
 retain their build selection and unproved failure-path boundaries.
+The [DPMI debug checkpoint](dpmi-debug-profile-role-verification.json)
+classifies only the inactive release debug body; DPMI remains in scope.
+The [multimedia alias follow-up](shard-3/wow-multimedia-alias-consumer-followup.md)
+and [multimedia header review](shard-1/wow-multimedia-headers-review.md)
+distinguish disabled original conversion code from the active bridge.
+The [CCPU 486 instruction review](shard-2/ccpu-486-instructions-review.md)
+records gated CMPXCHG/XADD bodies and an image-bound interpreter entry.
 The [KillWOW review](shard-1/guest-killwow-review.md) and [keyboard variant
 review](shard-3/dos-keyboard-variants-role-review.md) retain their worker-wide
 exit and layout selection boundaries.

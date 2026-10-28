@@ -1069,7 +1069,7 @@ dpmi/woaswapi.inc,3,pending,shard-3/file-review.csv
 dpmi/wowmac.inc,1,pending,shard-1/file-audit.csv
 dpmi32/buffer.c,0,partial,shard-0/review.csv
 dpmi32/data.c,3,partial,shard-3/file-review.csv
-dpmi32/debug.c,2,pending,shard-2/file-audit.csv
+dpmi32/debug.c,2,excluded,shard-2/file-audit.csv
 dpmi32/dpmi32.c,3,partial,shard-3/file-review.csv
 dpmi32/dpmi32p.h,0,partial,shard-0/review.csv
 dpmi32/dpmidata.h,1,partial,shard-1/file-audit.csv

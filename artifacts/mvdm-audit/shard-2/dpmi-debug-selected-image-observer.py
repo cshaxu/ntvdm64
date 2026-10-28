@@ -15,7 +15,7 @@ def inspect():
     ledger=next(r for r in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig')) if r['relative_path']==REL)
     hashes=[sha(root/REL) for root in (M,*O)]
     assert hashes == [frozen['current_sha256'],frozen['opennt_sha256'],frozen['opennt45_sha256']]
-    assert ledger['shard']=='2' and ledger['status']=='pending'
+    assert ledger['shard']=='2' and ledger['status'] in ('pending','excluded')
     source=(M/REL).read_text(encoding='latin1')
     assert re.search(r'#if\s+DBG\b',source) and 'DpmiDbgTrace' in source and re.search(r'#endif\s*\Z',source)
     graph=(B/'build.ninja').read_text(encoding='utf-8').replace('$:',':')

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "4780626d0",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-2/dpmi-debug-selected-image-observations.json",
+      "sha256": "D82897FD6415AB73A944D9A964A853B7A6469FA493F76E1BCEADBA1EB820CC41"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Debug-only file body, not DPMI capability exclusion"
+}
