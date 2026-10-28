@@ -2,7 +2,7 @@
 
 `inventory.csv` enumerates the 1,815 unique `.c`/`.h` paths in the four recorded shard CSVs. `observe.py` computes it from those CSVs, with each source file hashed in `evidence.json`; it reads and hashes the same input bytes, rejects duplicate paths, and does not change the shared ledgers. It reads each current shard decision field rather than stale imported reporting_class. Run from the repository root with `python artifacts/mvdm-audit/host-ch-scope/observe.py`. Two consecutive runs against the same input bytes produced byte-identical outputs. Running it against later shard states intentionally creates a **new** snapshot; compare the input hashes before interpreting counts or overwriting a frozen result. This is not a replacement for the authoritative per-file ledgers.
 
-The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 197 pending, 767 partial, 253 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
+The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 195 pending, 767 partial, 255 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
 
 The 473 `role-pending` rows (`wow16/`, `dos/v86/`) are **not excluded** from the task: some guest trees can contain host-consumed headers, shared ABI declarations, build inputs, or dual-use source. Each such case needs per-file consumer and build-dependency evidence before classification. In particular a path name or historical guest role alone cannot rule out a host dependency.
 
@@ -134,6 +134,8 @@ The [DEM default-drive selected-object fixture](dem-default-drive-selected-revie
 
 The [DEM clock selected-object fixture](dem-clock-review.md) checks date/time query, preservation and controlled set-error branches without modifying the host clock. Guest dispatch, real privilege behavior and date boundaries remain unverified.
 
+The [DEM computer-name selected-object fixture](dem-computername-review.md) checks mocked host-name results, guest register mapping, padding and the 15-byte boundary; actual guest mapping validity and lifecycle remain unverified.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.md) classify four physical non-x86 host-register headers; guest CPU/FPU and generated-vector behavior remain separate obligations.
@@ -149,6 +151,8 @@ The historical CPU30 `inc/v86def.h` carrier is excluded only from the selected C
 The [HFX protocol review](dos-hfx-protocol-owner-review.md) separates original HFX and SWIN_HFX BOPs from ordinary DOS file and redirector services. Original guest/provider applicability remains pending; captured illegal-BOP bindings are not a working HFX witness.
 
 The [WOW internal table declaration review](witbl-original-consumer-recheck.md) and [GFI header review](gfi-header-selected-physical-review.md) distinguish unused physical declarations from selected original owners. WOW dispatch and real floppy behavior remain independent S14 and S13 obligations.
+
+The [global-memory](../cross-369/kernel-memory-header-disposition.md) and [local-memory](../cross-369/local-memory-header-disposition.md) reviews classify two old host-thunk declaration carriers; the local header is included by precomp, but its old thunk provider is unselected. Guest heap and callback behavior remain S14/S15 obligations.
 
 The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-profile guest C source roles, while retaining 330 ambiguous paths and all host-side application behavior. The [original WINMM contract](wow-winmm-original-contract-review.md) supplies the historical provider contract for the controlled resolver witness, without proving modern provider behavior or guest reachability.
 

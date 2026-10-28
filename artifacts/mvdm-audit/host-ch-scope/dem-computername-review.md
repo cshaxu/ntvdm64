@@ -1,0 +1,9 @@
+# DEM computer-name service: actual-object observation
+
+Original DOS guest source `dos/v86/doskrnl/dos/macro.asm:210` invokes service 41h with DS:DX as the user buffer; `inc/DOSSVC.INC:81`, `inc/dossvc.h:157`, and `dos/dem/demdisp.c:165` connect the service number to `demGetComputerName` in `demgset.c:819`. This establishes the source call chain, not guest execution.
+
+Run `python artifacts/mvdm-audit/host-ch-scope/dem-computername-run.py` from the repository root. It links the current selected `worker/obj/dem/demgset.obj` with controlled test replacements for CPU registers, `Sim32pGetVDMPointer`, and `GetComputerNameOem`; it changes neither the system computer name nor guest memory. Source, object, fixture and executable hashes, tool diagnostics and output are recorded in the accompanying observation JSON. GNU ld reports an ignored MSVC `.drectve` warning; the fixture also stubs the MSVC security-cookie check, so this is not a stack-protection test.
+
+The selected object correctly delivered DS:DX to its mapping seam, padded a short OEM name to 15 bytes with spaces and added a terminating NUL, preserved exactly 15 characters at the boundary, and returned CX=01FF on success. On mocked host failure it cleared only the first output byte and CH, preserving CL. Guard bytes outside the specified 16-byte buffer remained unchanged in these cases.
+
+The controlled mapper always supplies a valid contiguous buffer. It does not test invalid/short guest mappings, lifetime or reentrant memory changes; this function uses `GetVDMAddr` directly and these tests must not be read as proof of bounded guest-memory access. Real OEM conversion, long-name behavior in a real host, actual guest BOP dispatch and release image linkage are also untested. This limited behavior evidence does not establish that the whole DEM file is fully restored or justify a classification beyond the existing partial functional boundary.

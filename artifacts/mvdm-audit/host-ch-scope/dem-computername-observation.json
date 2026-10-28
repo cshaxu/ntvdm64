@@ -1,0 +1,9 @@
+{
+  "object_sha256": "7B4172A148BCFA74D251617A3F3075628C41BEC005DE9776AA55C91CD5A20306",
+  "source_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+  "fixture_sha256": "30CA1E1E141A52AEE5D3DC0368E344B128FDE039F3965925D1E64DE4BD37D5FE",
+  "exe_sha256": "970A35312B8F1515A59BFAA7FD76392C7BAEE8C66F5FB55BF54FD216AC17CCD8",
+  "output": "PASS OEM computer name padding, 15-byte boundary, failure and mapped destination (mocked host/guest memory)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}
