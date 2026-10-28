@@ -1,0 +1,35 @@
+{
+  "result": "pass",
+  "relative_path": "dos/v86/dev/himem/himem.exe",
+  "hashes": [
+    "8121862C21B74F96C50B08232AC3D9CDAB2467A784F1D73C1AB94361D7BCB429",
+    "",
+    ""
+  ],
+  "dos_catalog_rows": "0",
+  "wow_catalog_rows": "0",
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\himem\\himem4.asm",
+      "sha256": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\himem\\himem2.asm",
+      "sha256": "5152B68073A26383266453EAF94970BF488E31E87F21E0E5DEEAA0F8BBFD411C"
+    },
+    {
+      "path": "src\\mvdm\\xms.486\\xmsdisp.c",
+      "sha256": "24B0FA2FE32BD7A94606D424A10B0961A9911190CB2684456AF04034E04BFF01"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "sys_member": "WINNT/SYSTEM32/HIMEM.SYS",
+  "sys_sha256": "08AA2C47D835460ED3067FA7D6F8A3B37EDECA524AD102B0588FDD1BF389CE08",
+  "archive_himem_exe_members": [],
+  "installed_sys_sha256": "08AA2C47D835460ED3067FA7D6F8A3B37EDECA524AD102B0588FDD1BF389CE08",
+  "scope": "Historical intermediate recipe and XMS source dispatch, not image provenance or runtime"
+}

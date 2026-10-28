@@ -1,0 +1,272 @@
+{
+  "result": "pass",
+  "source": "softpc.new/base/ccpu386/c_stack.c",
+  "source_sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292",
+  "catalog_ids": "SRC:8d1b08f6e3332284cd6c;SRC:dba7e6e6f63f313e9a2e",
+  "build_edge": "build obj/ccpu/c_stack.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_stack.c",
+  "functions": [
+    {
+      "name": "_GetStackPointer",
+      "va": 4389184,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 24,
+      "relocation_words": 3
+    },
+    {
+      "name": "_byte_change_SP",
+      "va": 4389216,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 35,
+      "relocation_words": 3
+    },
+    {
+      "name": "_change_SP",
+      "va": 4389264,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 48,
+      "relocation_words": 4
+    },
+    {
+      "name": "_get_current_BP",
+      "va": 4389312,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 24,
+      "relocation_words": 3
+    },
+    {
+      "name": "_set_current_BP",
+      "va": 4389344,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 33,
+      "relocation_words": 3
+    },
+    {
+      "name": "_set_current_SP",
+      "va": 4389392,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 33,
+      "relocation_words": 3
+    },
+    {
+      "name": "_spop",
+      "va": 4389440,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 125,
+      "relocation_words": 13
+    },
+    {
+      "name": "_spush",
+      "va": 4389568,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 179,
+      "relocation_words": 17
+    },
+    {
+      "name": "_spush16",
+      "va": 4389760,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 135,
+      "relocation_words": 13
+    },
+    {
+      "name": "_tpop",
+      "va": 4389904,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 110,
+      "relocation_words": 8
+    },
+    {
+      "name": "_validate_new_stack_space",
+      "va": 4390016,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 182,
+      "relocation_words": 5
+    },
+    {
+      "name": "_validate_stack_exists",
+      "va": 4390208,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 249,
+      "relocation_words": 19
+    },
+    {
+      "name": "_validate_stack_space",
+      "va": 4390464,
+      "function": true,
+      "owner": "original-ccpu386:c_stack.obj",
+      "bytes": 249,
+      "relocation_words": 18
+    }
+  ],
+  "interrupt_caller": {
+    "name": "_do_intrupt",
+    "va": 4300192,
+    "function": true,
+    "owner": "original-ccpu386:c_intr.obj",
+    "bytes": 1375,
+    "relocation_words": 109
+  },
+  "interrupt_edges": [
+    {
+      "caller": "_do_intrupt",
+      "target": "_validate_stack_space",
+      "offset": 34
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 91
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 104
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 115
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_validate_new_stack_space",
+      "offset": 668
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 793
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 806
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 819
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 832
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 877
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 886
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 892
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 905
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 916
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 937
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_validate_stack_space",
+      "offset": 997
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 1008
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_validate_stack_space",
+      "offset": 1096
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 1142
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush16",
+      "offset": 1155
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 1166
+    },
+    {
+      "caller": "_do_intrupt",
+      "target": "_spush",
+      "offset": 1184
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "sha256": "A038C8E79688B5E7430E3A9BAF0C5E11848C4D2DE89584AE71A4209C7ED54292"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_stack.obj",
+      "sha256": "0E9D339981882AEC7409A618D27975E20A954B09E8C05122E63A72590D2A55C2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_intr.obj",
+      "sha256": "B7BCC7FD0C305536A8B638A567B2A46ECFDB75BEDD0070EDE7E7540BBCC04210"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A"
+    }
+  ],
+  "limitations": "Static binding only; no actual stack write, exception, size/wrap, privilege switch or IRET behavior test."
+}

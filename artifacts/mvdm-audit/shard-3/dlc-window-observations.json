@@ -1,0 +1,50 @@
+{
+  "inc/VRDLCTAB.INC": {
+    "current": "9c0c853347ff8cffc7d729eee61ae856f26bc21de466ca7237dbf5d825e12c09",
+    "opennt": "9c0c853347ff8cffc7d729eee61ae856f26bc21de466ca7237dbf5d825e12c09",
+    "opennt45": "9c0c853347ff8cffc7d729eee61ae856f26bc21de466ca7237dbf5d825e12c09"
+  },
+  "inc/vrdlctab.h": {
+    "current": "bb57645d83b7285f14632914ee44d64f34b3c129b18fc59505b98c141a9cba2d",
+    "opennt": "bb57645d83b7285f14632914ee44d64f34b3c129b18fc59505b98c141a9cba2d",
+    "opennt45": "bb57645d83b7285f14632914ee44d64f34b3c129b18fc59505b98c141a9cba2d"
+  },
+  "inc/vdmredir.h": {
+    "current": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+    "opennt": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+    "opennt45": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d"
+  },
+  "dos/v86/redir/int5c.asm": {
+    "current": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt45": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5"
+  },
+  "dos/v86/redir/redir.asm": {
+    "current": "a30739691c5ef462f6eec73ca2e1f7d41495634930408af9171014a6cd20ed60",
+    "opennt": "a30739691c5ef462f6eec73ca2e1f7d41495634930408af9171014a6cd20ed60",
+    "opennt45": "a30739691c5ef462f6eec73ca2e1f7d41495634930408af9171014a6cd20ed60"
+  },
+  "vdmredir/vrdlc5c.c": {
+    "current": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+    "opennt": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+    "opennt45": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf"
+  },
+  "vdmredir/vrdlc.h": {
+    "current": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+    "opennt": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+    "opennt45": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8"
+  },
+  "vdmredir/vrdisp.c": {
+    "current": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt45": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
+  },
+  "map": {
+    "sha256": "4fcc34a02adad34e0ac55abe0af1c37d0a88db59b84e0fb22fc6616478544bc0",
+    "lines": [
+      " 0001:000078d0       _TerminateDlcEmulation     100088d0 f   vrdlc5c.obj",
+      " 0001:00007940       _VrDlc5cHandler            10008940 f   vrdlc5c.obj",
+      " 0001:00007db0       _VrVdmWindowInit           10008db0 f   vrdlc5c.obj"
+    ]
+  }
+}
