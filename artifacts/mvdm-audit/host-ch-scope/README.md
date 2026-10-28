@@ -61,3 +61,5 @@ The [WOW kernel table review](wow-kernel-table-review.md) identifies the selecte
 The [monitor register consumer check](../host-inc/monregs-selected-object-review.md) examines one actual object without ruling out other consumers; [C-VID/SAS alternate owners](cvid-sas-alternate-owner-review.md) are not assumed equivalent to selected same-name files.
 
 The [empty WOW GDI header](wow-gdi-empty-header-review.md) is excluded solely as an empty physical file; GDI behavior remains independently in scope.
+
+The [disk geometry and ROM map review](disk-geometry-rommap-provider-review.md) keeps distinct original and current host paths separate pending provider and device validation.
