@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "5547d5fad",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-message-heap-observations.json",
+      "sha256": "CBC26CBCA45131E35D6A4AD3ECD6FE115242C91081C56E3EAD307C146197CA62"
+    },
+    {
+      "path": "shard-1/wow-virtual-memory-observations.json",
+      "sha256": "D13257FFC0EBBD12462DA50F3B3BBB963ADDE43EE654D2F0025BD1204B705C80"
+    },
+    {
+      "path": "shard-1/wow-spool-carrier-observations.json",
+      "sha256": "36D74D0FE48DD4CCCB12AA64A9A993066AB18105D4A6769B0E83AE636E14198D"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected WOW source/image bindings only; no guest behavior acceptance"
+}

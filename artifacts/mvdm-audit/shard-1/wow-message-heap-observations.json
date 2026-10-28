@@ -1,0 +1,102 @@
+{
+  "result": "pass",
+  "source": "wow32/walloc16.c",
+  "source_sha256": "6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2",
+  "catalog_ids": "SRC:be73e5c9ebbdf0954f6d;SRC:da98edf5a97ba953e1f6",
+  "build_edge": "build obj/walloc16.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/walloc16.c",
+  "functions": [
+    {
+      "name": "_malloc16@4",
+      "va": 268616064,
+      "function": true,
+      "owner": "walloc16.obj",
+      "bytes": 329,
+      "relocation_words": 19
+    },
+    {
+      "name": "_free16@4",
+      "va": 268615920,
+      "function": true,
+      "owner": "walloc16.obj",
+      "bytes": 129,
+      "relocation_words": 9
+    },
+    {
+      "name": "_stackalloc16@4",
+      "va": 268616400,
+      "function": true,
+      "owner": "walloc16.obj",
+      "bytes": 47,
+      "relocation_words": 1
+    }
+  ],
+  "provider_edges": [
+    {
+      "caller": "_malloc16@4",
+      "target": "_WOWGlobalAllocLock16@12",
+      "owner": "wcall16.obj"
+    },
+    {
+      "caller": "_malloc16@4",
+      "target": "_WOWGlobalAllocLock16@12",
+      "owner": "wcall16.obj"
+    },
+    {
+      "caller": "_free16@4",
+      "target": "_WOWGlobalUnlockFree16@4",
+      "owner": "wcall16.obj"
+    },
+    {
+      "caller": "_stackalloc16@4",
+      "target": "_opennt_support_current_teb@0",
+      "owner": "ntvdm:ntvdm.exe"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\walloc16.c",
+      "sha256": "6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walloc16.c",
+      "sha256": "6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\walloc16.c",
+      "sha256": "6A1111899ADF5351E03F9989325D2412EF0716DA307A36793DC35ABF585C81F2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\walloc16.obj",
+      "sha256": "39B39347832B8B3B1B4A243205654304800A42E5D7D8100E110B77B85552144A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wcall16.c",
+      "sha256": "101B160B8A69B19150839128028F6E2E55A11DA7AB66ACE109E371131F1C4032"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wcntl32.c",
+      "sha256": "48408FEEF986365B459C7E973D7B92964F139B4879278325B0EB370634F38C81"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wcall32.c",
+      "sha256": "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wmdisp32.c",
+      "sha256": "6E4632F55695176E6C8D7C53E4DE5913358D4B8546E778D6D864E202EF8D623D"
+    }
+  ],
+  "limitations": "Static artifact binding only; no direct guest, concurrency, allocation failures or callback-stack lifetime execution."
+}

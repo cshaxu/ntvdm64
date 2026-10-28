@@ -4478,7 +4478,7 @@ wow32/waccel.c,1,partial,shard-1/file-audit.csv
 wow32/waccel.h,0,pending,shard-0/review.csv
 wow32/walias.c,0,partial,shard-0/review.csv
 wow32/walias.h,1,partial,shard-1/file-audit.csv
-wow32/walloc16.c,1,pending,shard-1/file-audit.csv
+wow32/walloc16.c,1,partial,shard-1/file-audit.csv
 wow32/wcall16.c,3,partial,shard-3/file-review.csv
 wow32/wcall16.h,1,pending,shard-1/file-audit.csv
 wow32/wcall32.c,2,pending,shard-2/file-audit.csv
@@ -4544,7 +4544,7 @@ wow32/wklocal.c,0,partial,shard-0/review.csv
 wow32/wklocal.h,1,pending,shard-1/file-audit.csv
 wow32/wkman.c,1,partial,shard-1/file-audit.csv
 wow32/wkman.h,1,partial,shard-1/file-audit.csv
-wow32/wkmem.c,1,pending,shard-1/file-audit.csv
+wow32/wkmem.c,1,partial,shard-1/file-audit.csv
 wow32/wkmem.h,1,pending,shard-1/file-audit.csv
 wow32/wktbl.h,3,pending,shard-3/file-review.csv
 wow32/wktbl2.h,3,pending,shard-3/file-review.csv
@@ -4609,7 +4609,7 @@ wow32/wshtbl2.h,2,pending,shard-2/file-audit.csv
 wow32/wsman.c,2,partial,shard-2/file-audit.csv
 wow32/wsman.h,3,pending,shard-3/file-review.csv
 wow32/wsocktbl.h,2,pending,shard-2/file-audit.csv
-wow32/wspool.c,1,pending,shard-1/file-audit.csv
+wow32/wspool.c,1,partial,shard-1/file-audit.csv
 wow32/wspool.h,2,pending,shard-2/file-audit.csv
 wow32/wsraw.c,0,pending,shard-0/review.csv
 wow32/wstbl.h,0,pending,shard-0/review.csv
