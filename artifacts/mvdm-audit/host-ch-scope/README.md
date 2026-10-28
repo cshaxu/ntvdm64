@@ -2,7 +2,7 @@
 
 `inventory.csv` enumerates the 1,815 unique `.c`/`.h` paths in the four recorded shard CSVs. `observe.py` computes it from those CSVs, with each source file hashed in `evidence.json`; it reads and hashes the same input bytes, rejects duplicate paths, and does not change the shared ledgers. It reads each current shard decision field rather than stale imported reporting_class. Run from the repository root with `python artifacts/mvdm-audit/host-ch-scope/observe.py`. Two consecutive runs against the same input bytes produced byte-identical outputs. Running it against later shard states intentionally creates a **new** snapshot; compare the input hashes before interpreting counts or overwriting a frozen result. This is not a replacement for the authoritative per-file ledgers.
 
-The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 201 pending, 767 partial, 249 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
+The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 200 pending, 767 partial, 250 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
 
 The 473 `role-pending` rows (`wow16/`, `dos/v86/`) are **not excluded** from the task: some guest trees can contain host-consumed headers, shared ABI declarations, build inputs, or dual-use source. Each such case needs per-file consumer and build-dependency evidence before classification. In particular a path name or historical guest role alone cannot rule out a host dependency.
 
@@ -88,6 +88,8 @@ The [local heap and multimedia follow-up](../host-wow/local-multimedia-declarati
 
 The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md) maps the 24 pending source roles to bounded S14–S17 recovery and verification groups. The [legacy dispatch handoff](../host-wow/legacy-dispatch-functional-handoff.md) separates original thunk families from obsolete declarations and unimplemented table entries.
 
+The private `wctlm32.h` declarations have since been classified with their unselected incomplete fragment; the selected original message owners and S14/S15 conversion, reentry and lifecycle obligations remain as documented in the [control-message review](excluded-control-message-owner-review.md).
+
 The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md), [legacy dispatch owners](../host-wow/legacy-dispatch-functional-handoff.md), and [excluded C source spot-check](excluded-host-c-source-spot-review.md) map pending and sampled physical roles to bounded recovery; their evidence does not establish full runtime coverage.
 
 The [memory/DPMI/CMOS exclusion review](excluded-memory-cmos-provider-review.md) checks five alternate physical source roles against their selected NT or CPU40 providers; remaining device and memory behavior stays in scope.
@@ -125,6 +127,8 @@ The [suballocator private-header review](dos-suballocator-private-header-review.
 The [selected suballocator object fixture](suballoc-selected-object-review.md) runs normal controls and injected callback failures against the current cached worker object; the injected failure observations are not real guest or installed-image acceptance.
 
 The [DPMI XMEM selected-object fixture](dpmi-xmem-selected-review.md) checks controlled allocation, reallocation and free-failure branches with fake register/provider boundaries; actual XMS pool, guest movement and task lifecycle remain S11/S12 work.
+
+The [DEM default-drive selected-object fixture](dem-default-drive-selected-review.md) verifies original direct-service argument and failure branches with controlled callbacks. The traced active DOS default-drive path does not establish guest reachability of that service.
 
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 

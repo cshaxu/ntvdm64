@@ -20,6 +20,8 @@ The [selected suballocator object witness](host-ch-scope/suballoc-selected-objec
 
 The [DPMI XMEM selected-object controls](host-ch-scope/dpmi-xmem-selected-review.md) exercise the DIV-272 BOOL reallocation branch and one failed-free retry with simulated providers. Actual XMS pool state, data movement, invalid handles and task retirement remain S11/S12 obligations.
 
+The [DEM default-drive direct-service witness](host-ch-scope/dem-default-drive-selected-review.md) tests original case-sensitive drive validation and controlled host failure. The retained DOS default-drive source instead takes a separate active route; S12 must validate actual current-directory behavior without presenting this direct-service observation as a guest defect.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.md) preserves separate original HFX and SWIN_HFX guest/provider applicability in S17; the selected DOS filesystem and redirector are different routes, and captured HFX BOPs resolving to `illegal_bop` are not evidence that the protocol works.
