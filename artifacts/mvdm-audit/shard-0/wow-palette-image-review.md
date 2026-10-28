@@ -23,8 +23,17 @@ original `malloc_w` uses `HeapAlloc` without `HEAP_ZERO_MEMORY`, and
 `putpaletteentry16` copies each requested element. Determine which short and
 failure results are actually possible with the supported host and valid guest
 inputs, then verify guest copyback and failure behavior. This is an original
-code path; no runtime defect or guest exposure has been demonstrated here.
+code path; no guest exposure has been demonstrated here. A current x86
+[native host probe](wow-palette-host-short-result.json) did produce both a
+short return (one of four entries) and a zero return for an invalid handle;
+the untouched buffer tail retained its sentinel. The probe does not call the
+WOW thunk, so it does not establish guest-side copying or a product defect.
 
 Source retention is 100%; no numerical estimate of behavioral restoration is
 supported by these bindings. Keep original palette conversion, host resource
 ownership, nested calls and teardown in S16. No guest or product changed.
+
+The standalone host-only probe source is [wow_palette_host_short_test.c](../../../tests/mvdm-host/wow_palette_host_short_test.c).
+It was compiled as x86 with the MSVC `/MT` runtime and `gdi32.lib`; the
+recorded executed source copy is byte-identical to the retained file. It is
+not currently wired into the full product gate.

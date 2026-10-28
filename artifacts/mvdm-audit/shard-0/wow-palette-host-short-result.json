@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "architecture": "x86",
+  "source": "tests/mvdm-host/wow_palette_host_short_test.c",
+  "source_sha256": "71FEC36882D28294CACF2D7F8E8425B2603719E2C31E1329912679FDE8D61B16",
+  "executed_copy_sha256": "71FEC36882D28294CACF2D7F8E8425B2603719E2C31E1329912679FDE8D61B16",
+  "fixture_sha256": "08C3DD406FE3956FFA9EDDF5F9537ACC6A26F70F68C65E55F77D4F39863B563F",
+  "host_gdi32_sha256": "7C3CB17BC41A00E5167A82AEF67D0DA4A09E73E6DEBA9ADDCDC8B20A90B5186C",
+  "exit_code": 0,
+  "output": [
+    "short count=1 tail=a5a5a5a5",
+    "invalid count=0 first=a5a5a5a5"
+  ],
+  "scope": "Native GetPaletteEntries short/invalid results only; no WOW thunk, guest copyback, or product fault injection"
+}
