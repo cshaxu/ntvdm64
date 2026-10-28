@@ -2,6 +2,8 @@
 
 Disposition for each physical header: **selected original declaration-only header; no demonstrated active use of its old named table**. This is a role classification, not a claim of tested API functionality or a recommendation to delete the file.
 
+The central ledger records these four included declaration roles as partial; their runtime restoration proportion is unmeasurable from inclusion and the current cached map. Functional and alternate-profile validation remains open.
+
 | Header | Declared table / conditional debug-profile maximum | Current dispatch owner |
 | --- | --- | --- |
 | `wgtbl.h` | `aw32GDI` / `iGDIMax` | `aw32WOW` includes `wgtbl2.h` |
