@@ -1,0 +1,27 @@
+# Seventeen graph-selected pending source keys: owner reconciliation
+
+Historical snapshot: current S10 scope and dispositions are in [the host C/H inventory](../host-ch-scope/README.md); non-C/H rows here are retained only as historical context.
+
+This is the exact set from the frozen `nine-way-ownership.csv` buckets 3/6/9 joined by key to `combined-initial-status.csv` (`pending`) and `frozen-file-reconciliation.csv` (product link selection other than `not-product-selected`). This is a historical inventory filter, not a current ledger assertion. The coordinator must check current ledger state and reread the linked evidence before integration. Every path is under `src/mvdm/`; all 17 were recorded byte-identical to **both** frozen OpenNT mirrors, so this set contains **zero frozen source mirror diffs**. That does not establish current installed-image identity or whether an object body is selected. See the detailed reports for live hashes, static versus tested boundaries, and image timing.
+
+| Exact MVDM path | Observed object / owner | Recommended current disposition | Detailed evidence under `artifacts/mvdm-audit/` |
+| --- | --- | --- | --- |
+| `softpc.new/base/ccpu386/bswap.c` | 386 build graph object; 486 body gated | pending: preserve 486 capability decision | `shard-3/cpu486-profile-boundary.md`; `shard-3/ccpu-486-debug-provider-role-review.md` |
+| `softpc.new/base/ccpu386/cmpxchg.c` | 386 graph object; body gated | pending: whole-product 486 decision; excluded only in observed 386 profile | `shard-3/cpu486-profile-boundary.md`; `shard-2/ccpu-486-instructions-review.md` |
+| `softpc.new/base/ccpu386/invd.c` | 386 graph object; body gated | pending: 486 and cache model | `shard-3/cpu486-profile-boundary.md`; `shard-1/ccpu-486-family-review.md` |
+| `softpc.new/base/ccpu386/invlpg.c` | 386 graph object; body gated | pending: 486 paging/TLB owner and faults | `shard-3/cpu486-profile-boundary.md`; `ccpu-remaining-header-source-review.md` |
+| `softpc.new/base/ccpu386/stubs.c` | original production debugger shim in archive | pending: actual extraction and debugger requirements | `shard-3/ccpu-486-debug-provider-role-review.md` |
+| `softpc.new/base/ccpu386/wbinvd.c` | 386 graph object; 486 body gated | pending: 486/cache model | `shard-3/cpu486-profile-boundary.md`; `shard-3/ccpu-486-debug-provider-role-review.md` |
+| `softpc.new/base/ccpu386/xadd.c` | 386 graph object; body gated | pending: whole-product 486 decision; excluded only in observed 386 profile | `shard-3/cpu486-profile-boundary.md`; `shard-2/ccpu-486-instructions-review.md` |
+| `vdmredir/vrdebug.c` | release object has compiler metadata, no ordinary code symbols | excluded diagnostic body for observed x86 release only; retain original source | `cross-369/redir-debug-provider-disposition.md` and observer/JSON |
+| `vdmredir/vrdlcdbg.c` | release object has compiler metadata, no ordinary code symbols | excluded diagnostic body for observed x86 release only; retain original source | `cross-369/redir-debug-provider-disposition.md` and observer/JSON |
+| `wow32/wdib.c` | WOW32 map and non-i386 mapping provider; selector/host mapping separate | pending: callback failure and descriptor retirement | `shard-3/wow-dib-provider-lifecycle-review.md`; `shard-3/wow-dib-selected-mapping-provider-review.md`; `shard-3/wow-dib-descriptor-retirement-review.md` |
+| `wow32/wgdi31.c` | mapped original print and other GDI thunks; native GDI owns HDC | pending: bounded print witness does not establish full file | `shard-3/wow-gdi-print-audit.md` |
+| `wow32/wgprnset.c` | original thunks mapped; native WINSPOOL/fax provider | pending: setup/provider failure and shared resolver lifecycle | `shard-3/wow-print-setup-failure-review.md` |
+| `wow32/wkgthunk.c` | mapped original generic thunk and adapter; code-section identity bounded in report | pending: actual S9 calling convention fault and broader call/reentry retirement | `shard-3/wow-generic-thunk-call-convention-review.md`; `shard-3/wow-generic-thunk-published-binding.md` |
+| `wow32/wmmalias.c` | object contains alias code; observed map has static datum, no listed multimedia alias entry | inactive multimedia conversion only in observed profile; keep pending as whole-file capability | `shard-3/wow-multimedia-alias-consumer-followup.md` |
+| `wow32/wmmedia2.c` | original outer `#if 0`; observed object has no body | excluded disabled conversion only in observed profile; other multimedia bridge remains | `shard-3/wow-multimedia-alias-consumer-followup.md` |
+| `wow32/wmmstru2.c` | original outer `#if 0`; observed object has no MCI conversion body | excluded disabled converter only in observed profile; not all MCI | `cross-369/mci-converter-disposition.md` and observer/JSON |
+| `wow32/wow32.rc` | selected resource linked in WOW32; representative strings observed | partial resource input; ID/language/error cleanup not established | `shard-1/wow32-resource-image-review.md` |
+
+The prior reports sometimes separately propose profile-specific `excluded` for 486 objects; the table deliberately retains whole-product rows pending where the later CPU486 profile boundary identifies an unresolved product capability. Image differences discussed in the linked records refer to **built versus installed binaries**, not source mirror diffs, and may be historical snapshots. The generic thunk report separately identifies equal code sections and different resource sections at its recorded checkpoint. No new build, execution, guest modification or ledger edit is claimed here.

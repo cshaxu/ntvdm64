@@ -1,0 +1,55 @@
+{
+  "ledger_sha256": "6eebb6c30c940bd453e67eb210a9c0765e16e2ab653a15a31a7935debd420bd9",
+  "excluded_count": 486,
+  "identity_counts": {
+    "current-only-needs-provenance": 243,
+    "exact-opennt-on-conflict": 1,
+    "exact-opennt-selected-or-identical": 201,
+    "exact-opennt45-selected-or-identical": 21,
+    "not-currently-mirrored": 20
+  },
+  "excluded_with_recorded_mirrors_count": 223,
+  "different_from_both_mirrors": [],
+  "sample_rows": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_getset.c",
+      "review_class": "excluded",
+      "review_basis": "Original PIG comparison state source is compiled and in original CCPU archive; current object has no non-section definitions under selected non-PIG profile. This excludes only inactive test-file role.",
+      "specific_limits": "Source hash identity and symbol extraction do not prove opcode dispatch, correct flags/exceptions or behavior through current guest; per-instruction execution evidence remains required.",
+      "current_identity": "exact-opennt-selected-or-identical",
+      "opennt_sha256": "02783213DEBC6B9A712ADECF37941B4FEA01C60C0CC86C0D3CDF526B1FF43374",
+      "opennt45_sha256": "02783213DEBC6B9A712ADECF37941B4FEA01C60C0CC86C0D3CDF526B1FF43374",
+      "current_sha256": "02783213DEBC6B9A712ADECF37941B4FEA01C60C0CC86C0D3CDF526B1FF43374"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/ccpupig.c",
+      "review_class": "excluded",
+      "review_basis": "Original PIG comparison source is compiled and in original CCPU archive; current object has no non-section definitions under selected non-PIG profile. This excludes only inactive test-file role.",
+      "specific_limits": "Source hash identity and symbol extraction do not prove opcode dispatch, correct flags/exceptions or behavior through current guest; per-instruction execution evidence remains required.",
+      "current_identity": "exact-opennt-selected-or-identical",
+      "opennt_sha256": "BFEAFF9C9A49039AA29740F6DAC2DD6A32BCE897D0D0FFE3D00A43D66CD09523",
+      "opennt45_sha256": "BFEAFF9C9A49039AA29740F6DAC2DD6A32BCE897D0D0FFE3D00A43D66CD09523",
+      "current_sha256": "BFEAFF9C9A49039AA29740F6DAC2DD6A32BCE897D0D0FFE3D00A43D66CD09523"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/nop.c",
+      "review_class": "excluded",
+      "review_basis": "Standalone NOP helper is compiled and archived; decoder implements 0x90 directly without its relocation. Link uses /opt:ref; map absence does not prove non-extraction. NOP instruction remains in scope.",
+      "specific_limits": "No map symbol for nop.obj; source traces an inline no-op but requires guest instruction and retirement proof before full classification.",
+      "current_identity": "exact-opennt-selected-or-identical",
+      "opennt_sha256": "B80104E06BA7394C8B4E7A5CE82C19DC9681DBCD149BD2232F1770802D6D10B9",
+      "opennt45_sha256": "B80104E06BA7394C8B4E7A5CE82C19DC9681DBCD149BD2232F1770802D6D10B9",
+      "current_sha256": "B80104E06BA7394C8B4E7A5CE82C19DC9681DBCD149BD2232F1770802D6D10B9"
+    },
+    {
+      "relative_path": "wow32/wthman.c",
+      "review_class": "excluded",
+      "review_basis": "Original has no callable thunk body; current object is compiled and linked with directives but no code section or mapped owner. Other ToolHelp entries and guest behavior remain in scope.",
+      "specific_limits": "This excludes an empty host source role only, and retains original ClassFirst/ClassNext unimplemented limitation; no implication that other ToolHelp APIs all work.",
+      "current_identity": "exact-opennt-selected-or-identical",
+      "opennt_sha256": "FB2A9E5FB2F06A20DAF67C90CB21621D649F128A3F739697DEB7A13506025286",
+      "opennt45_sha256": "FB2A9E5FB2F06A20DAF67C90CB21621D649F128A3F739697DEB7A13506025286",
+      "current_sha256": "FB2A9E5FB2F06A20DAF67C90CB21621D649F128A3F739697DEB7A13506025286"
+    }
+  ]
+}

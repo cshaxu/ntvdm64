@@ -1767,7 +1767,7 @@ wow32/wthman.c,shard-3/file-review.csv,excluded,host-candidate,host C/H candidat
 wow32/wthman.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wthtbl.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wthtbl2.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wuansi.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wuansi.h,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wucaret.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wucaret.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wuclass.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
