@@ -1,0 +1,21 @@
+{
+  "host": "C:\\Windows\\SysWOW64\\rasapi32.dll",
+  "host_sha256": "4a14966b10c3e4124ed0a1f37a439e0d1fbb5e8e3b4ef54be3d1401ca3d86231",
+  "expected": {
+    "RasDialWow": false,
+    "RasEnumConnectionsWow": false,
+    "RasEnumEntriesWow": false,
+    "RasGetConnectStatusWow": false,
+    "RasGetErrorStringWow": false,
+    "RasHangUpWow": false
+  },
+  "native_rasdial": [
+    "[  75] +base[  76]  004b RasDialA",
+    "[  76] +base[  77]  004c RasDialW"
+  ],
+  "guest": "src\\mvdm\\wow16\\rasapi16\\RASAPI16.DLL",
+  "guest_sha256": "af31d54e742b4c34f451d40c7405c3198d67a77808d41b559336ad0b9fd49cad",
+  "zip_guest": "WINNT/SYSTEM32/RASAPI16.DLL",
+  "zip_guest_sha256": "af31d54e742b4c34f451d40c7405c3198d67a77808d41b559336ad0b9fd49cad",
+  "limitations": "Host-specific PE export table and NE identity only; no Win16 invocation or source-to-binary proof."
+}

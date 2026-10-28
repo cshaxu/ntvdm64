@@ -1,0 +1,5 @@
+# Part 7: OpenNT raster printer mini-driver census
+
+`external-mini-evidence.json` records all 4,773 owned paths from the OpenNT `windows/core/ntgdi/printers/rasprint/mini` tree; all exist, with individual SHA-256, sizes and extensions. 1,289 IFI and 1,225 PFM files form the largest groups; these relate to model-specific font metrics and minidriver building, not automatically to host runtime behavior. No exact paths appeared in the VALID Ninja dependencies of the four captured graphs, and no basename matches in the inspected `assets/winnt.zip`. These are bounded checks: they do not rule out host driver packages, spooler use, alternate names or runtime printing. Each key remains pending provider-specific semantic review.
+
+Reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/nine-way/part-7/external-mini-observer.py`, capturing stdout separately. Generic extension role labels are census hints rather than evidence of selection. The observer does not execute or modify product, guest, or shared ledger.

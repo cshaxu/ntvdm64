@@ -1,0 +1,2915 @@
+{
+  "files": [
+    {
+      "key": "wow16/drivers/keyboard/keyboard.drv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\keyboard\\keyboard.drv",
+          "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\keyboard.drv",
+          "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\keyboard.drv",
+          "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\keyboard.drv",
+          "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/KEYBOARD.DRV",
+          "sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\keyboard.drv",
+      "installed_sha256": "c34d7d8d71453dd7567c6db28958a0d4d11e4b198cfc436f4d430d93a5a3584c"
+    },
+    {
+      "key": "wow16/drivers/keyboard/keyboard.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\keyboard\\keyboard.rc",
+          "sha256": "85ae02330e6fa0d472a448e3186d75b3aaa11cdfc68e71916fdad9cabcf65df0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\keyboard.rc",
+          "sha256": "85ae02330e6fa0d472a448e3186d75b3aaa11cdfc68e71916fdad9cabcf65df0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\keyboard.rc",
+          "sha256": "85ae02330e6fa0d472a448e3186d75b3aaa11cdfc68e71916fdad9cabcf65df0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\keyboard.rc",
+          "sha256": "85ae02330e6fa0d472a448e3186d75b3aaa11cdfc68e71916fdad9cabcf65df0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\keyboard.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/drivers/keyboard/KEYBOARD.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\keyboard\\KEYBOARD.RES",
+          "sha256": "ed251da372c5d5576b58d7a9cc9e65723ba8061aad7860b0f33add0852f48743"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\keyboard\\KEYBOARD.RES",
+          "sha256": "ed251da372c5d5576b58d7a9cc9e65723ba8061aad7860b0f33add0852f48743"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\KEYBOARD.RES",
+          "sha256": "ed251da372c5d5576b58d7a9cc9e65723ba8061aad7860b0f33add0852f48743"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\keyboard\\KEYBOARD.RES",
+          "sha256": "ed251da372c5d5576b58d7a9cc9e65723ba8061aad7860b0f33add0852f48743"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KEYBOARD.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/drivers/mouse/mouse.drv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\mouse\\mouse.drv",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\mouse\\mouse.drv",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\mouse.drv",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\mouse.drv",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/MOUSE.DRV",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\mouse.drv",
+      "installed_sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+    },
+    {
+      "key": "wow16/drivers/mouse/MOUSE.EXE",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\mouse\\MOUSE.EXE",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\mouse\\MOUSE.EXE",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\MOUSE.EXE",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\MOUSE.EXE",
+          "sha256": "2fa5611bb18edd9c0f35e0a6b479b9d9db17549aed811ab692bd79c3e899f890"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MOUSE.EXE",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/drivers/mouse/MOUSE.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\mouse\\MOUSE.RES",
+          "sha256": "51ef8422c756bebc954f94f88609d78b4105fb6c0333e8194178cf49aa20248d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\mouse\\MOUSE.RES",
+          "sha256": "51ef8422c756bebc954f94f88609d78b4105fb6c0333e8194178cf49aa20248d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\MOUSE.RES",
+          "sha256": "51ef8422c756bebc954f94f88609d78b4105fb6c0333e8194178cf49aa20248d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\mouse\\MOUSE.RES",
+          "sha256": "51ef8422c756bebc954f94f88609d78b4105fb6c0333e8194178cf49aa20248d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MOUSE.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/drivers/sound/sound.rcv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\sound\\sound.rcv",
+          "sha256": "f0eca8cb6ba34da40995d8529ebda0d133f278b78d8bfd9126c0f03f3782fac2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\sound\\sound.rcv",
+          "sha256": "f0eca8cb6ba34da40995d8529ebda0d133f278b78d8bfd9126c0f03f3782fac2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\sound\\sound.rcv",
+          "sha256": "f0eca8cb6ba34da40995d8529ebda0d133f278b78d8bfd9126c0f03f3782fac2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\sound\\sound.rcv",
+          "sha256": "f0eca8cb6ba34da40995d8529ebda0d133f278b78d8bfd9126c0f03f3782fac2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\sound.rcv",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/drivers/sound/SOUND.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\drivers\\sound\\SOUND.RES",
+          "sha256": "d73cfe9df6a7716d4a6469c18dfb65ea2d53178f68f85038f91a3cc4a3ad5ead"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\drivers\\sound\\SOUND.RES",
+          "sha256": "d73cfe9df6a7716d4a6469c18dfb65ea2d53178f68f85038f91a3cc4a3ad5ead"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\drivers\\sound\\SOUND.RES",
+          "sha256": "d73cfe9df6a7716d4a6469c18dfb65ea2d53178f68f85038f91a3cc4a3ad5ead"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\drivers\\sound\\SOUND.RES",
+          "sha256": "d73cfe9df6a7716d4a6469c18dfb65ea2d53178f68f85038f91a3cc4a3ad5ead"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\SOUND.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/gdi/GDI.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\gdi\\GDI.RES",
+          "sha256": "8f24ff1249999992b591e1feb1aa08ab985d4e9ff2d19ff2c8800adb7472d431"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\GDI.RES",
+          "sha256": "8f24ff1249999992b591e1feb1aa08ab985d4e9ff2d19ff2c8800adb7472d431"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\gdi\\GDI.RES",
+          "sha256": "8f24ff1249999992b591e1feb1aa08ab985d4e9ff2d19ff2c8800adb7472d431"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\GDI.RES",
+          "sha256": "8f24ff1249999992b591e1feb1aa08ab985d4e9ff2d19ff2c8800adb7472d431"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\GDI.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/gdi/gdi16.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\gdi\\gdi16.h",
+          "sha256": "e9799f73df1406e4966f54bb17d0bb8502580bebf8e69b935384969223bcf3cf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\gdi16.h",
+          "sha256": "e9799f73df1406e4966f54bb17d0bb8502580bebf8e69b935384969223bcf3cf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\gdi\\gdi16.h",
+          "sha256": "e9799f73df1406e4966f54bb17d0bb8502580bebf8e69b935384969223bcf3cf"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\gdi16.h",
+          "sha256": "e9799f73df1406e4966f54bb17d0bb8502580bebf8e69b935384969223bcf3cf"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\gdi16.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/gdi/meta.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\gdi\\meta.c",
+          "sha256": "1f4603b822661de7ac7a13597d1a1b72cd280f574718b0128f0123c0d008ea64"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\meta.c",
+          "sha256": "1f4603b822661de7ac7a13597d1a1b72cd280f574718b0128f0123c0d008ea64"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\gdi\\meta.c",
+          "sha256": "1f4603b822661de7ac7a13597d1a1b72cd280f574718b0128f0123c0d008ea64"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\meta.c",
+          "sha256": "1f4603b822661de7ac7a13597d1a1b72cd280f574718b0128f0123c0d008ea64"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\meta.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/gdi/metarec.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\gdi\\metarec.c",
+          "sha256": "b7e60597669551b22e69d072c95414df1398211be863292ce82a9293fd99f0de"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\metarec.c",
+          "sha256": "b7e60597669551b22e69d072c95414df1398211be863292ce82a9293fd99f0de"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\gdi\\metarec.c",
+          "sha256": "b7e60597669551b22e69d072c95414df1398211be863292ce82a9293fd99f0de"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\metarec.c",
+          "sha256": "b7e60597669551b22e69d072c95414df1398211be863292ce82a9293fd99f0de"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\metarec.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/gdi/metasup.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\gdi\\metasup.c",
+          "sha256": "3b90e8622c1263ccfd8a59f7f814b03d68c7074fa7c10bd9fe425d31cd0fede5"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\gdi\\metasup.c",
+          "sha256": "3b90e8622c1263ccfd8a59f7f814b03d68c7074fa7c10bd9fe425d31cd0fede5"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\gdi\\metasup.c",
+          "sha256": "3b90e8622c1263ccfd8a59f7f814b03d68c7074fa7c10bd9fe425d31cd0fede5"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\gdi\\metasup.c",
+          "sha256": "3b90e8622c1263ccfd8a59f7f814b03d68c7074fa7c10bd9fe425d31cd0fede5"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\metasup.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/cmacros.mas",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\cmacros.mas",
+          "sha256": "7456a2f8f0cb6bfa56f689ad3c86916503ea801fa0a02eb7fe0e543dece22bb2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\cmacros.mas",
+          "sha256": "7456a2f8f0cb6bfa56f689ad3c86916503ea801fa0a02eb7fe0e543dece22bb2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\cmacros.mas",
+          "sha256": "7456a2f8f0cb6bfa56f689ad3c86916503ea801fa0a02eb7fe0e543dece22bb2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\cmacros.mas",
+          "sha256": "7456a2f8f0cb6bfa56f689ad3c86916503ea801fa0a02eb7fe0e543dece22bb2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\cmacros.mas",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/cmstrip.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\cmstrip.c",
+          "sha256": "ebed214529a631b792e807f699823256bd7e139fee91dd6f1d6e33addc21e45a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\cmstrip.c",
+          "sha256": "ebed214529a631b792e807f699823256bd7e139fee91dd6f1d6e33addc21e45a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\cmstrip.c",
+          "sha256": "ebed214529a631b792e807f699823256bd7e139fee91dd6f1d6e33addc21e45a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\cmstrip.c",
+          "sha256": "ebed214529a631b792e807f699823256bd7e139fee91dd6f1d6e33addc21e45a"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\cmstrip.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/commdlg.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\commdlg.h",
+          "sha256": "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\commdlg.h",
+          "sha256": "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\commdlg.h",
+          "sha256": "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\commdlg.h",
+          "sha256": "6867caec8b30c98e1b8315a59f804f4d79f0ed3742b0c1049de06808e896d5ec"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\commdlg.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/custcntl.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\custcntl.h",
+          "sha256": "4117da182c7cbab239ec7c7c2ac96fef89ad11aaee5c6f10b35dc4ffcdbe1db2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\custcntl.h",
+          "sha256": "4117da182c7cbab239ec7c7c2ac96fef89ad11aaee5c6f10b35dc4ffcdbe1db2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\custcntl.h",
+          "sha256": "4117da182c7cbab239ec7c7c2ac96fef89ad11aaee5c6f10b35dc4ffcdbe1db2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\custcntl.h",
+          "sha256": "4117da182c7cbab239ec7c7c2ac96fef89ad11aaee5c6f10b35dc4ffcdbe1db2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\custcntl.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/dbcs.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\dbcs.c",
+          "sha256": "24798e19a3d56bebf0a1982ad78d845c363b72cb8eb7eff4d89ce697b81bb6bc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\dbcs.c",
+          "sha256": "24798e19a3d56bebf0a1982ad78d845c363b72cb8eb7eff4d89ce697b81bb6bc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\dbcs.c",
+          "sha256": "24798e19a3d56bebf0a1982ad78d845c363b72cb8eb7eff4d89ce697b81bb6bc"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\dbcs.c",
+          "sha256": "24798e19a3d56bebf0a1982ad78d845c363b72cb8eb7eff4d89ce697b81bb6bc"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\dbcs.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/dbcs.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\dbcs.h",
+          "sha256": "0fa790bba40381d98227a6ecd3afebdc63755e09cbba8dcaa17e66cec3521247"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\dbcs.h",
+          "sha256": "0fa790bba40381d98227a6ecd3afebdc63755e09cbba8dcaa17e66cec3521247"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\dbcs.h",
+          "sha256": "0fa790bba40381d98227a6ecd3afebdc63755e09cbba8dcaa17e66cec3521247"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\dbcs.h",
+          "sha256": "0fa790bba40381d98227a6ecd3afebdc63755e09cbba8dcaa17e66cec3521247"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\dbcs.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/debug.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\debug.h",
+          "sha256": "71121a6242280a915ec3ad56c00438f745c9795461126f9431aeb8e0c2f433ed"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\debug.h",
+          "sha256": "71121a6242280a915ec3ad56c00438f745c9795461126f9431aeb8e0c2f433ed"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\debug.h",
+          "sha256": "71121a6242280a915ec3ad56c00438f745c9795461126f9431aeb8e0c2f433ed"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\debug.h",
+          "sha256": "71121a6242280a915ec3ad56c00438f745c9795461126f9431aeb8e0c2f433ed"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\debug.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/debugsys.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\debugsys.inc",
+          "sha256": "9cf3e10e658d0a652e250d1fbdb7d21817c43786ff2a296834b58c7ec4f60464"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\debugsys.inc",
+          "sha256": "9cf3e10e658d0a652e250d1fbdb7d21817c43786ff2a296834b58c7ec4f60464"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\debugsys.inc",
+          "sha256": "9cf3e10e658d0a652e250d1fbdb7d21817c43786ff2a296834b58c7ec4f60464"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\debugsys.inc",
+          "sha256": "9cf3e10e658d0a652e250d1fbdb7d21817c43786ff2a296834b58c7ec4f60464"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\debugsys.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/dosx.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\dosx.inc",
+          "sha256": "d2f87a195d293a81876c98a28207c6dce5a2f2bfd62a253221c9aee53ce1f815"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\dosx.inc",
+          "sha256": "d2f87a195d293a81876c98a28207c6dce5a2f2bfd62a253221c9aee53ce1f815"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\dosx.inc",
+          "sha256": "d2f87a195d293a81876c98a28207c6dce5a2f2bfd62a253221c9aee53ce1f815"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\dosx.inc",
+          "sha256": "d2f87a195d293a81876c98a28207c6dce5a2f2bfd62a253221c9aee53ce1f815"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\dosx.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/drivinit.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\drivinit.h",
+          "sha256": "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\drivinit.h",
+          "sha256": "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\drivinit.h",
+          "sha256": "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\drivinit.h",
+          "sha256": "842b8448a3440408ca5c9006e0f9ece7e953346e8c3eac3161a71c9ccdfdb3b0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\drivinit.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/gdidefs.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\gdidefs.inc",
+          "sha256": "bebaf7a5e8fc3f44847806f8ebe8cad4c8d5d8346ec65217104ee065b590c42d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\gdidefs.inc",
+          "sha256": "bebaf7a5e8fc3f44847806f8ebe8cad4c8d5d8346ec65217104ee065b590c42d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\gdidefs.inc",
+          "sha256": "bebaf7a5e8fc3f44847806f8ebe8cad4c8d5d8346ec65217104ee065b590c42d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\gdidefs.inc",
+          "sha256": "bebaf7a5e8fc3f44847806f8ebe8cad4c8d5d8346ec65217104ee065b590c42d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\gdidefs.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/header.txt",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\header.txt",
+          "sha256": "ddd8c4461113d243924d86a9c2dd6a9e181ca06b644dc7fe999fff6f9bb9bd5a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\header.txt",
+          "sha256": "ddd8c4461113d243924d86a9c2dd6a9e181ca06b644dc7fe999fff6f9bb9bd5a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\header.txt",
+          "sha256": "ddd8c4461113d243924d86a9c2dd6a9e181ca06b644dc7fe999fff6f9bb9bd5a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\header.txt",
+          "sha256": "ddd8c4461113d243924d86a9c2dd6a9e181ca06b644dc7fe999fff6f9bb9bd5a"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\header.txt",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/io.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\io.h",
+          "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\io.h",
+          "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\io.h",
+          "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\io.h",
+          "sha256": "f81a13f740240a05b48f6dc614e44e2269c6ecca07bae0393ab71fab30691f32"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\io.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/logerror.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\logerror.h",
+          "sha256": "22121ce4b50a288da06ecb0bd4cef0c9c24ae6bf2ac03b947e5f2f8714978980"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\logerror.h",
+          "sha256": "22121ce4b50a288da06ecb0bd4cef0c9c24ae6bf2ac03b947e5f2f8714978980"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\logerror.h",
+          "sha256": "22121ce4b50a288da06ecb0bd4cef0c9c24ae6bf2ac03b947e5f2f8714978980"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\logerror.h",
+          "sha256": "22121ce4b50a288da06ecb0bd4cef0c9c24ae6bf2ac03b947e5f2f8714978980"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\logerror.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/lzdos.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\lzdos.h",
+          "sha256": "a7892617924ece22be9e87001418272eb7281beb47349a9007040f70ed46e536"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\lzdos.h",
+          "sha256": "a7892617924ece22be9e87001418272eb7281beb47349a9007040f70ed46e536"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\lzdos.h",
+          "sha256": "a7892617924ece22be9e87001418272eb7281beb47349a9007040f70ed46e536"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\lzdos.h",
+          "sha256": "a7892617924ece22be9e87001418272eb7281beb47349a9007040f70ed46e536"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\lzdos.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/lzexpand.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\lzexpand.h",
+          "sha256": "93ca9a8afc9cf378aa7bc487985a96c3160bbdbfff2338aebf331a0dc342f89e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\lzexpand.h",
+          "sha256": "93ca9a8afc9cf378aa7bc487985a96c3160bbdbfff2338aebf331a0dc342f89e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\lzexpand.h",
+          "sha256": "93ca9a8afc9cf378aa7bc487985a96c3160bbdbfff2338aebf331a0dc342f89e"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\lzexpand.h",
+          "sha256": "93ca9a8afc9cf378aa7bc487985a96c3160bbdbfff2338aebf331a0dc342f89e"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\lzexpand.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/paswindw.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\paswindw.inc",
+          "sha256": "e853182ddb41a397fb2965e4bfaf64dde02f03a7d0f64259af4e2039fd01bc49"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\paswindw.inc",
+          "sha256": "e853182ddb41a397fb2965e4bfaf64dde02f03a7d0f64259af4e2039fd01bc49"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\paswindw.inc",
+          "sha256": "e853182ddb41a397fb2965e4bfaf64dde02f03a7d0f64259af4e2039fd01bc49"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\paswindw.inc",
+          "sha256": "e853182ddb41a397fb2965e4bfaf64dde02f03a7d0f64259af4e2039fd01bc49"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\paswindw.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/prd.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\prd.inc",
+          "sha256": "c306e9a25b18063041965b974c7afca2d58d1c57915bcd905da388af7e2b5f49"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\prd.inc",
+          "sha256": "c306e9a25b18063041965b974c7afca2d58d1c57915bcd905da388af7e2b5f49"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\prd.inc",
+          "sha256": "c306e9a25b18063041965b974c7afca2d58d1c57915bcd905da388af7e2b5f49"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\prd.inc",
+          "sha256": "c306e9a25b18063041965b974c7afca2d58d1c57915bcd905da388af7e2b5f49"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\prd.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/printer.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\printer.h",
+          "sha256": "0ca8d8955f4b9eacb95bc8e113386989975e99a9478068981e2cce89314293a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\printer.h",
+          "sha256": "0ca8d8955f4b9eacb95bc8e113386989975e99a9478068981e2cce89314293a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\printer.h",
+          "sha256": "0ca8d8955f4b9eacb95bc8e113386989975e99a9478068981e2cce89314293a3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\printer.h",
+          "sha256": "0ca8d8955f4b9eacb95bc8e113386989975e99a9478068981e2cce89314293a3"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\printer.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/rom.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\rom.inc",
+          "sha256": "66fee9cd75cd31a0f2860236bd1c049609a4d429015fa21258828fe5c434da8d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\rom.inc",
+          "sha256": "66fee9cd75cd31a0f2860236bd1c049609a4d429015fa21258828fe5c434da8d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\rom.inc",
+          "sha256": "66fee9cd75cd31a0f2860236bd1c049609a4d429015fa21258828fe5c434da8d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\rom.inc",
+          "sha256": "66fee9cd75cd31a0f2860236bd1c049609a4d429015fa21258828fe5c434da8d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\rom.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/spl_wnt.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\spl_wnt.h",
+          "sha256": "7569ab550e21d86dda78654c8c15dc50b28ed21cac82eb09c5c375a85efd2946"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\spl_wnt.h",
+          "sha256": "7569ab550e21d86dda78654c8c15dc50b28ed21cac82eb09c5c375a85efd2946"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\spl_wnt.h",
+          "sha256": "7569ab550e21d86dda78654c8c15dc50b28ed21cac82eb09c5c375a85efd2946"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\spl_wnt.h",
+          "sha256": "7569ab550e21d86dda78654c8c15dc50b28ed21cac82eb09c5c375a85efd2946"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\spl_wnt.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/spool.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\spool.h",
+          "sha256": "3f5caa9323b51db55d13f9f042fba13298086b2ca2dc0ce208825bf074beee90"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\spool.h",
+          "sha256": "3f5caa9323b51db55d13f9f042fba13298086b2ca2dc0ce208825bf074beee90"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\spool.h",
+          "sha256": "3f5caa9323b51db55d13f9f042fba13298086b2ca2dc0ce208825bf074beee90"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\spool.h",
+          "sha256": "3f5caa9323b51db55d13f9f042fba13298086b2ca2dc0ce208825bf074beee90"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\spool.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/stdarg.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\stdarg.h",
+          "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\stdarg.h",
+          "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\stdarg.h",
+          "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\stdarg.h",
+          "sha256": "e294f329eb9ae698502ec1d90989afb09b7a077804213d6edfd5442335d43e62"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\stdarg.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/stdio.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\stdio.h",
+          "sha256": "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\stdio.h",
+          "sha256": "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\stdio.h",
+          "sha256": "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\stdio.h",
+          "sha256": "d9a57e817b7ea970bce445d910d1e47b1e762de3220bfade871d316710781536"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\stdio.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/style.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\style.h",
+          "sha256": "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\style.h",
+          "sha256": "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\style.h",
+          "sha256": "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\style.h",
+          "sha256": "0d2de3ef29241e439c42ea048fe346a175f109e5aa18e1e6493f5a6d675752ec"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\style.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/testing.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\testing.h",
+          "sha256": "e1c7442bdcd2b42ad01546dbdbd11e371e635020b56499e335a3dabc507737c1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\testing.h",
+          "sha256": "e1c7442bdcd2b42ad01546dbdbd11e371e635020b56499e335a3dabc507737c1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\testing.h",
+          "sha256": "e1c7442bdcd2b42ad01546dbdbd11e371e635020b56499e335a3dabc507737c1"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\testing.h",
+          "sha256": "e1c7442bdcd2b42ad01546dbdbd11e371e635020b56499e335a3dabc507737c1"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\testing.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/time.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\time.h",
+          "sha256": "b32351a07fc6ec06e6cc0122bf4c2ceaeab3240c9a9cabc5d478935bdd90928d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\time.h",
+          "sha256": "b32351a07fc6ec06e6cc0122bf4c2ceaeab3240c9a9cabc5d478935bdd90928d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\time.h",
+          "sha256": "b32351a07fc6ec06e6cc0122bf4c2ceaeab3240c9a9cabc5d478935bdd90928d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\time.h",
+          "sha256": "b32351a07fc6ec06e6cc0122bf4c2ceaeab3240c9a9cabc5d478935bdd90928d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\time.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/userproc.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\userproc.h",
+          "sha256": "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\userproc.h",
+          "sha256": "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\userproc.h",
+          "sha256": "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\userproc.h",
+          "sha256": "edacb1174a8375b5ef7cb65feb74c9787732dfabfcf89f3195d0e1eccdd74c39"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\userproc.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/w32sys.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\w32sys.h",
+          "sha256": "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\w32sys.h",
+          "sha256": "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\w32sys.h",
+          "sha256": "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\w32sys.h",
+          "sha256": "51b6f897d8a3e960aaff247cfe9a6aaaaaf56853b2e319ae9809bfc90e11ab02"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\w32sys.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/wife.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\wife.h",
+          "sha256": "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\wife.h",
+          "sha256": "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\wife.h",
+          "sha256": "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\wife.h",
+          "sha256": "a6e17b856c2e4d416474b2a6199e409deb21100a5db169f9f07b388fe32df66a"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\wife.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/win3deb.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\win3deb.inc",
+          "sha256": "71136d4520fd43d35b9e9938fdb34423ae51b114783a3a1b300550ca19b915e0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\win3deb.inc",
+          "sha256": "71136d4520fd43d35b9e9938fdb34423ae51b114783a3a1b300550ca19b915e0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\win3deb.inc",
+          "sha256": "71136d4520fd43d35b9e9938fdb34423ae51b114783a3a1b300550ca19b915e0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\win3deb.inc",
+          "sha256": "71136d4520fd43d35b9e9938fdb34423ae51b114783a3a1b300550ca19b915e0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\win3deb.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/windefs.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\windefs.inc",
+          "sha256": "6b39e28aaf3040511c4607da89a453d52f5bf096c19a3d4ee4a2f7c0999b42ee"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\windefs.inc",
+          "sha256": "6b39e28aaf3040511c4607da89a453d52f5bf096c19a3d4ee4a2f7c0999b42ee"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\windefs.inc",
+          "sha256": "6b39e28aaf3040511c4607da89a453d52f5bf096c19a3d4ee4a2f7c0999b42ee"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\windefs.inc",
+          "sha256": "6b39e28aaf3040511c4607da89a453d52f5bf096c19a3d4ee4a2f7c0999b42ee"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\windefs.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/inc/winnls.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\inc\\winnls.h",
+          "sha256": "5a9a33a529336938d7a31bca5201e0406ecefd333a897c269a6e1d32c3bb8d39"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\inc\\winnls.h",
+          "sha256": "5a9a33a529336938d7a31bca5201e0406ecefd333a897c269a6e1d32c3bb8d39"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\inc\\winnls.h",
+          "sha256": "5a9a33a529336938d7a31bca5201e0406ecefd333a897c269a6e1d32c3bb8d39"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\inc\\winnls.h",
+          "sha256": "5a9a33a529336938d7a31bca5201e0406ecefd333a897c269a6e1d32c3bb8d39"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\winnls.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/debug3/kernstub.exe",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\debug3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\debug3\\kernstub.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\debug3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\debug3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kernstub.exe",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/debug3/krnl386.exe",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\debug3\\krnl386.exe",
+          "sha256": "d3e1f922bc52178db2eec675ae9044c5efee1713c52e30cd08e43be6ba1a6173"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\debug3\\krnl386.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\debug3\\krnl386.exe",
+          "sha256": "d3e1f922bc52178db2eec675ae9044c5efee1713c52e30cd08e43be6ba1a6173"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\debug3\\krnl386.exe",
+          "sha256": "d3e1f922bc52178db2eec675ae9044c5efee1713c52e30cd08e43be6ba1a6173"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/KRNL386.EXE",
+          "sha256": "d404576899cc11d23f368f2b30554e6108657cd37809837b341fd37e6b1a7af4"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\krnl386.exe",
+      "installed_sha256": "d404576899cc11d23f368f2b30554e6108657cd37809837b341fd37e6b1a7af4"
+    },
+    {
+      "key": "wow16/kernel31/fixexe.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\fixexe.c",
+          "sha256": "2d466e7adbe75d501edadb1e44f2ab65333a042fed705411334e1c0c8ab3e9c0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\fixexe.c",
+          "sha256": "2d466e7adbe75d501edadb1e44f2ab65333a042fed705411334e1c0c8ab3e9c0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\fixexe.c",
+          "sha256": "2d466e7adbe75d501edadb1e44f2ab65333a042fed705411334e1c0c8ab3e9c0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\fixexe.c",
+          "sha256": "2d466e7adbe75d501edadb1e44f2ab65333a042fed705411334e1c0c8ab3e9c0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\fixexe.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/kernel.api",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\kernel.api",
+          "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\kernel.api",
+          "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\kernel.api",
+          "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\kernel.api",
+          "sha256": "562ce377b2013dd5d85d6afb830fafeb181db85c65691aad4d174aeacae9850a"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kernel.api",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/kernel.sed",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\kernel.sed",
+          "sha256": "147ac56a7a880d8e07ea276ad7e1190153dabad346716b109e867f58bce1cf56"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\kernel.sed",
+          "sha256": "147ac56a7a880d8e07ea276ad7e1190153dabad346716b109e867f58bce1cf56"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\kernel.sed",
+          "sha256": "147ac56a7a880d8e07ea276ad7e1190153dabad346716b109e867f58bce1cf56"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\kernel.sed",
+          "sha256": "147ac56a7a880d8e07ea276ad7e1190153dabad346716b109e867f58bce1cf56"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kernel.sed",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/krnl286.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\krnl286.rc",
+          "sha256": "6f2d96fe7c50b8dfa5d26ce920b939633e4ba7f96343a4b407c721fb8ffb6f3e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\krnl286.rc",
+          "sha256": "6f2d96fe7c50b8dfa5d26ce920b939633e4ba7f96343a4b407c721fb8ffb6f3e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\krnl286.rc",
+          "sha256": "6f2d96fe7c50b8dfa5d26ce920b939633e4ba7f96343a4b407c721fb8ffb6f3e"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\krnl286.rc",
+          "sha256": "6f2d96fe7c50b8dfa5d26ce920b939633e4ba7f96343a4b407c721fb8ffb6f3e"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\krnl286.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/KRNL386.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\KRNL386.RES",
+          "sha256": "18c74d3d6b8a2fd14c34dc1266c42f1e58c3ddd8fa28dccfdccd624a1a95df41"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\KRNL386.RES",
+          "sha256": "18c74d3d6b8a2fd14c34dc1266c42f1e58c3ddd8fa28dccfdccd624a1a95df41"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\KRNL386.RES",
+          "sha256": "18c74d3d6b8a2fd14c34dc1266c42f1e58c3ddd8fa28dccfdccd624a1a95df41"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\KRNL386.RES",
+          "sha256": "18c74d3d6b8a2fd14c34dc1266c42f1e58c3ddd8fa28dccfdccd624a1a95df41"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KRNL386.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/ksource.txt",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\ksource.txt",
+          "sha256": "2fd7701fc69ad907973a30a3657774ec6c9a3afaf6eb2ee7d4c1efe0c7dda294"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\ksource.txt",
+          "sha256": "2fd7701fc69ad907973a30a3657774ec6c9a3afaf6eb2ee7d4c1efe0c7dda294"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\ksource.txt",
+          "sha256": "2fd7701fc69ad907973a30a3657774ec6c9a3afaf6eb2ee7d4c1efe0c7dda294"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\ksource.txt",
+          "sha256": "2fd7701fc69ad907973a30a3657774ec6c9a3afaf6eb2ee7d4c1efe0c7dda294"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ksource.txt",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/log.slm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\log.slm",
+          "sha256": "f712f9779bbf73fa8342ca9b441928d5e26a7e869d32184706453245c7ffec87"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\log.slm",
+          "sha256": "f712f9779bbf73fa8342ca9b441928d5e26a7e869d32184706453245c7ffec87"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\log.slm",
+          "sha256": "f712f9779bbf73fa8342ca9b441928d5e26a7e869d32184706453245c7ffec87"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\log.slm",
+          "sha256": "f712f9779bbf73fa8342ca9b441928d5e26a7e869d32184706453245c7ffec87"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\log.slm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/m.msg",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\m.msg",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\m.msg",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\m.msg",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\m.msg",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\m.msg",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/newexe.doc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\newexe.doc",
+          "sha256": "cc66afb2d48369da54423642c9546f260fa64c2a33989a65fea479c2cbc354aa"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\newexe.doc",
+          "sha256": "cc66afb2d48369da54423642c9546f260fa64c2a33989a65fea479c2cbc354aa"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\newexe.doc",
+          "sha256": "cc66afb2d48369da54423642c9546f260fa64c2a33989a65fea479c2cbc354aa"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\newexe.doc",
+          "sha256": "cc66afb2d48369da54423642c9546f260fa64c2a33989a65fea479c2cbc354aa"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\newexe.doc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/newexe.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\newexe.h",
+          "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\newexe.h",
+          "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\newexe.h",
+          "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\newexe.h",
+          "sha256": "86f88e8f4eb7c9c417c692c731a3d2494e1a9afbc70c322ae1415f97e25db72f"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\newexe.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/patch.txt",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\patch.txt",
+          "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\patch.txt",
+          "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\patch.txt",
+          "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\patch.txt",
+          "sha256": "03069715072a2c6bb2acac01bc43ef8d5e123d6a093bfbf944b646c4a0afbb48"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\patch.txt",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/qgrep.grp",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\qgrep.grp",
+          "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\qgrep.grp",
+          "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\qgrep.grp",
+          "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\qgrep.grp",
+          "sha256": "c1fc9e40842851d69b2db7e04ac5198345aa440fea578556aaf5556b3ed949bf"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\qgrep.grp",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/retail3/kernstub.exe",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\retail3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\retail3\\kernstub.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\retail3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\retail3\\kernstub.exe",
+          "sha256": "4bef21a8e6aec527bdffea9daa75f600b83b8e0f19266dc1b28cf16ba8260d6d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kernstub.exe",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/retail3/krnl386.exe",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\retail3\\krnl386.exe",
+          "sha256": "bced7650a5b5d7ac25955ab2a21bc53ff06de1c35b25fad0690390135b093a03"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\retail3\\krnl386.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\retail3\\krnl386.exe",
+          "sha256": "bced7650a5b5d7ac25955ab2a21bc53ff06de1c35b25fad0690390135b093a03"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\retail3\\krnl386.exe",
+          "sha256": "bced7650a5b5d7ac25955ab2a21bc53ff06de1c35b25fad0690390135b093a03"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/KRNL386.EXE",
+          "sha256": "d404576899cc11d23f368f2b30554e6108657cd37809837b341fd37e6b1a7af4"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\krnl386.exe",
+      "installed_sha256": "d404576899cc11d23f368f2b30554e6108657cd37809837b341fd37e6b1a7af4"
+    },
+    {
+      "key": "wow16/kernel31/schedule.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\schedule.asm",
+          "sha256": "fa54ebf00189e134f072ca5c5da2c1c2142282787156c9ea753d343a41218962"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\schedule.asm",
+          "sha256": "fa54ebf00189e134f072ca5c5da2c1c2142282787156c9ea753d343a41218962"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\schedule.asm",
+          "sha256": "fa54ebf00189e134f072ca5c5da2c1c2142282787156c9ea753d343a41218962"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\schedule.asm",
+          "sha256": "fa54ebf00189e134f072ca5c5da2c1c2142282787156c9ea753d343a41218962"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\schedule.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/state.rst",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\state.rst",
+          "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\state.rst",
+          "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\state.rst",
+          "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\state.rst",
+          "sha256": "e1d7bfed282c6ec726e12e3fd60a94c796f213c033547e4d5f3ce3036ddacd81"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\state.rst",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/swappro/swap.doc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\swappro\\swap.doc",
+          "sha256": "74fb0fc60c116ca66b7205dd7313aa07532ae73ff0b770b3abd785b97579e328"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\swappro\\swap.doc",
+          "sha256": "74fb0fc60c116ca66b7205dd7313aa07532ae73ff0b770b3abd785b97579e328"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\swappro\\swap.doc",
+          "sha256": "74fb0fc60c116ca66b7205dd7313aa07532ae73ff0b770b3abd785b97579e328"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\swappro\\swap.doc",
+          "sha256": "74fb0fc60c116ca66b7205dd7313aa07532ae73ff0b770b3abd785b97579e328"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\swap.doc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/up.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\up.c",
+          "sha256": "c4aedb77629777560d17ab2eb3e8af6cbaed2b22ee70936582b453bce66ddac0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\up.c",
+          "sha256": "c4aedb77629777560d17ab2eb3e8af6cbaed2b22ee70936582b453bce66ddac0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\up.c",
+          "sha256": "c4aedb77629777560d17ab2eb3e8af6cbaed2b22ee70936582b453bce66ddac0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\up.c",
+          "sha256": "c4aedb77629777560d17ab2eb3e8af6cbaed2b22ee70936582b453bce66ddac0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\up.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/kernel31/w32sys.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\kernel31\\w32sys.asm",
+          "sha256": "fa09caf494858f8465be26d8475736f220e68a798ee4c81b3d24b15bfb7dc40d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\w32sys.asm",
+          "sha256": "fa09caf494858f8465be26d8475736f220e68a798ee4c81b3d24b15bfb7dc40d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\w32sys.asm",
+          "sha256": "fa09caf494858f8465be26d8475736f220e68a798ee4c81b3d24b15bfb7dc40d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\kernel31\\w32sys.asm",
+          "sha256": "fa09caf494858f8465be26d8475736f220e68a798ee4c81b3d24b15bfb7dc40d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\w32sys.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/killwow/killwow.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\killwow\\killwow.c",
+          "sha256": "ec2d3900269a912165b9072a8008046674d835d35118a58db635a92f8f71d685"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\killwow\\killwow.c",
+          "sha256": "ec2d3900269a912165b9072a8008046674d835d35118a58db635a92f8f71d685"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\killwow\\killwow.c",
+          "sha256": "ec2d3900269a912165b9072a8008046674d835d35118a58db635a92f8f71d685"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\killwow\\killwow.c",
+          "sha256": "ec2d3900269a912165b9072a8008046674d835d35118a58db635a92f8f71d685"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\killwow.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/killwow/KillWOW.def",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\killwow\\KillWOW.def",
+          "sha256": "e43e5d4616ee2603b27d4bab03329fccf4f24575d8462d0b971e098eb8127d5f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\killwow\\KillWOW.def",
+          "sha256": "e43e5d4616ee2603b27d4bab03329fccf4f24575d8462d0b971e098eb8127d5f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\killwow\\KillWOW.def",
+          "sha256": "e43e5d4616ee2603b27d4bab03329fccf4f24575d8462d0b971e098eb8127d5f"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\killwow\\KillWOW.def",
+          "sha256": "e43e5d4616ee2603b27d4bab03329fccf4f24575d8462d0b971e098eb8127d5f"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KillWOW.def",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/killwow/KILLWOW.EXE",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\killwow\\KILLWOW.EXE",
+          "sha256": "0ce3326b45eb302d26b0ea605109ed4ce5622539153d2209f43986cf2fdb50a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\killwow\\KILLWOW.EXE",
+          "sha256": "0ce3326b45eb302d26b0ea605109ed4ce5622539153d2209f43986cf2fdb50a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\killwow\\KILLWOW.EXE",
+          "sha256": "0ce3326b45eb302d26b0ea605109ed4ce5622539153d2209f43986cf2fdb50a3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\killwow\\KILLWOW.EXE",
+          "sha256": "0ce3326b45eb302d26b0ea605109ed4ce5622539153d2209f43986cf2fdb50a3"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KILLWOW.EXE",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/killwow/killwow.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\killwow\\killwow.rc",
+          "sha256": "5dd9acb70c935f673bd4b2f435270b3bc7848f0e9eb55b24cbbe46c76d7379fe"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\killwow\\killwow.rc",
+          "sha256": "5dd9acb70c935f673bd4b2f435270b3bc7848f0e9eb55b24cbbe46c76d7379fe"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\killwow\\killwow.rc",
+          "sha256": "5dd9acb70c935f673bd4b2f435270b3bc7848f0e9eb55b24cbbe46c76d7379fe"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\killwow\\killwow.rc",
+          "sha256": "5dd9acb70c935f673bd4b2f435270b3bc7848f0e9eb55b24cbbe46c76d7379fe"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\killwow.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/killwow/KILLWOW.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\killwow\\KILLWOW.RES",
+          "sha256": "ed21dcddb7e369fb6c959e1c756f92debc98fd7c909318fc31548287b70ad110"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\killwow\\KILLWOW.RES",
+          "sha256": "ed21dcddb7e369fb6c959e1c756f92debc98fd7c909318fc31548287b70ad110"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\killwow\\KILLWOW.RES",
+          "sha256": "ed21dcddb7e369fb6c959e1c756f92debc98fd7c909318fc31548287b70ad110"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\killwow\\KILLWOW.RES",
+          "sha256": "ed21dcddb7e369fb6c959e1c756f92debc98fd7c909318fc31548287b70ad110"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KILLWOW.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/lib/cdllcew.lib",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\lib\\cdllcew.lib",
+          "sha256": "b167df1530dd25eeb4da7012fbefc5b23ecf016e7a28ba7bafa0d797d3f03ae8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\cdllcew.lib",
+          "sha256": "b167df1530dd25eeb4da7012fbefc5b23ecf016e7a28ba7bafa0d797d3f03ae8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\lib\\cdllcew.lib",
+          "sha256": "b167df1530dd25eeb4da7012fbefc5b23ecf016e7a28ba7bafa0d797d3f03ae8"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\lib\\cdllcew.lib",
+          "sha256": "b167df1530dd25eeb4da7012fbefc5b23ecf016e7a28ba7bafa0d797d3f03ae8"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\cdllcew.lib",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/lib/keyboard.def",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\lib\\keyboard.def",
+          "sha256": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\keyboard.def",
+          "sha256": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\lib\\keyboard.def",
+          "sha256": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\lib\\keyboard.def",
+          "sha256": "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\keyboard.def",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/lib/snocrtdw.lib",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\lib\\snocrtdw.lib",
+          "sha256": "dbf6751b3e23ff5747fdbc6d584178416953e05dff3adcdd71b7d3db32988b4d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\snocrtdw.lib",
+          "sha256": "dbf6751b3e23ff5747fdbc6d584178416953e05dff3adcdd71b7d3db32988b4d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\lib\\snocrtdw.lib",
+          "sha256": "dbf6751b3e23ff5747fdbc6d584178416953e05dff3adcdd71b7d3db32988b4d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\lib\\snocrtdw.lib",
+          "sha256": "dbf6751b3e23ff5747fdbc6d584178416953e05dff3adcdd71b7d3db32988b4d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\snocrtdw.lib",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/lib/sound.def",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\lib\\sound.def",
+          "sha256": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\lib\\sound.def",
+          "sha256": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\lib\\sound.def",
+          "sha256": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\lib\\sound.def",
+          "sha256": "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\sound.def",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/libinit.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\libinit.asm",
+          "sha256": "436f6fed1d3ec8b5aa1c302299721d4ce11eeb77529a1fdcda522f0e1f65ac6c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\libinit.asm",
+          "sha256": "436f6fed1d3ec8b5aa1c302299721d4ce11eeb77529a1fdcda522f0e1f65ac6c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\libinit.asm",
+          "sha256": "436f6fed1d3ec8b5aa1c302299721d4ce11eeb77529a1fdcda522f0e1f65ac6c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\libinit.asm",
+          "sha256": "436f6fed1d3ec8b5aa1c302299721d4ce11eeb77529a1fdcda522f0e1f65ac6c"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\libinit.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/mciole.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\mciole.c",
+          "sha256": "0d19d3128fb5591e9fcf79165c42a1f9a6d762d5c91876765f8f5f321e5882c6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\mciole.c",
+          "sha256": "0d19d3128fb5591e9fcf79165c42a1f9a6d762d5c91876765f8f5f321e5882c6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\mciole.c",
+          "sha256": "0d19d3128fb5591e9fcf79165c42a1f9a6d762d5c91876765f8f5f321e5882c6"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\mciole.c",
+          "sha256": "0d19d3128fb5591e9fcf79165c42a1f9a6d762d5c91876765f8f5f321e5882c6"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mciole.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/MCIOLE16.DLL",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\MCIOLE16.DLL",
+          "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\MCIOLE16.DLL",
+          "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\MCIOLE16.DLL",
+          "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\MCIOLE16.DLL",
+          "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/MCIOLE16.DLL",
+          "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\MCIOLE16.DLL",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/mciole16.rcv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\mciole16.rcv",
+          "sha256": "878872ebaadb9328066ec7d9280e419db70e3e27a0d571a459abd57cf33bc63f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\mciole16.rcv",
+          "sha256": "878872ebaadb9328066ec7d9280e419db70e3e27a0d571a459abd57cf33bc63f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\mciole16.rcv",
+          "sha256": "878872ebaadb9328066ec7d9280e419db70e3e27a0d571a459abd57cf33bc63f"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\mciole16.rcv",
+          "sha256": "878872ebaadb9328066ec7d9280e419db70e3e27a0d571a459abd57cf33bc63f"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mciole16.rcv",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/MCIOLE16.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\MCIOLE16.RES",
+          "sha256": "41c9df3d5224413fab14cff6ac3f71a27bc7731791728527fecd5491d00755dc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\MCIOLE16.RES",
+          "sha256": "41c9df3d5224413fab14cff6ac3f71a27bc7731791728527fecd5491d00755dc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\MCIOLE16.RES",
+          "sha256": "41c9df3d5224413fab14cff6ac3f71a27bc7731791728527fecd5491d00755dc"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\MCIOLE16.RES",
+          "sha256": "41c9df3d5224413fab14cff6ac3f71a27bc7731791728527fecd5491d00755dc"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MCIOLE16.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/ole.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\ole.h",
+          "sha256": "05eb140fd65b33bcf551702da41ae6ad519201ebe5af771af9655e7d4b9835ee"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\ole.h",
+          "sha256": "05eb140fd65b33bcf551702da41ae6ad519201ebe5af771af9655e7d4b9835ee"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\ole.h",
+          "sha256": "05eb140fd65b33bcf551702da41ae6ad519201ebe5af771af9655e7d4b9835ee"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\ole.h",
+          "sha256": "05eb140fd65b33bcf551702da41ae6ad519201ebe5af771af9655e7d4b9835ee"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ole.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mciole/shellapi.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mciole\\shellapi.h",
+          "sha256": "5f6af83515d5306764c91aa46a368b6b2afce7413fd0321bede3d5a841aea9d8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mciole\\shellapi.h",
+          "sha256": "5f6af83515d5306764c91aa46a368b6b2afce7413fd0321bede3d5a841aea9d8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mciole\\shellapi.h",
+          "sha256": "5f6af83515d5306764c91aa46a368b6b2afce7413fd0321bede3d5a841aea9d8"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mciole\\shellapi.h",
+          "sha256": "5f6af83515d5306764c91aa46a368b6b2afce7413fd0321bede3d5a841aea9d8"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\shellapi.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/drvr.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\drvr.c",
+          "sha256": "8829dd259701877c45529226f1590ed15da33d7c274ffc4b4e58a56476220eb0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvr.c",
+          "sha256": "8829dd259701877c45529226f1590ed15da33d7c274ffc4b4e58a56476220eb0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\drvr.c",
+          "sha256": "8829dd259701877c45529226f1590ed15da33d7c274ffc4b4e58a56476220eb0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\drvr.c",
+          "sha256": "8829dd259701877c45529226f1590ed15da33d7c274ffc4b4e58a56476220eb0"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\drvr.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/drvrrare.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\drvrrare.c",
+          "sha256": "834c82cfcdf56de9225724ba9e8e810e8f7c1ee2948fdb5a04195f3c08854b43"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvrrare.c",
+          "sha256": "834c82cfcdf56de9225724ba9e8e810e8f7c1ee2948fdb5a04195f3c08854b43"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\drvrrare.c",
+          "sha256": "834c82cfcdf56de9225724ba9e8e810e8f7c1ee2948fdb5a04195f3c08854b43"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\drvrrare.c",
+          "sha256": "834c82cfcdf56de9225724ba9e8e810e8f7c1ee2948fdb5a04195f3c08854b43"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\drvrrare.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/drvrstr.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\drvrstr.c",
+          "sha256": "5e63d7a4c94f4799910b4b79d00b667592deaa2e33b143449682fde4c7fd9990"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\drvrstr.c",
+          "sha256": "5e63d7a4c94f4799910b4b79d00b667592deaa2e33b143449682fde4c7fd9990"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\drvrstr.c",
+          "sha256": "5e63d7a4c94f4799910b4b79d00b667592deaa2e33b143449682fde4c7fd9990"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\drvrstr.c",
+          "sha256": "5e63d7a4c94f4799910b4b79d00b667592deaa2e33b143449682fde4c7fd9990"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\drvrstr.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/gmem.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\gmem.h",
+          "sha256": "57b965f5f8f2bb1b06b7ef964cc161effb49d7677207bac635e144c9bd3c4c59"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\gmem.h",
+          "sha256": "57b965f5f8f2bb1b06b7ef964cc161effb49d7677207bac635e144c9bd3c4c59"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\gmem.h",
+          "sha256": "57b965f5f8f2bb1b06b7ef964cc161effb49d7677207bac635e144c9bd3c4c59"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\gmem.h",
+          "sha256": "57b965f5f8f2bb1b06b7ef964cc161effb49d7677207bac635e144c9bd3c4c59"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\gmem.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/int31.inc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\int31.inc",
+          "sha256": "0de2d446c1e62cb28cd0266341cb5b7a25b834b6f4336f5619d6c58fe436511b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\int31.inc",
+          "sha256": "0de2d446c1e62cb28cd0266341cb5b7a25b834b6f4336f5619d6c58fe436511b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\int31.inc",
+          "sha256": "0de2d446c1e62cb28cd0266341cb5b7a25b834b6f4336f5619d6c58fe436511b"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\int31.inc",
+          "sha256": "0de2d446c1e62cb28cd0266341cb5b7a25b834b6f4336f5619d6c58fe436511b"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\int31.inc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/messages/usa/mci.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\messages\\usa\\mci.rc",
+          "sha256": "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\messages\\usa\\mci.rc",
+          "sha256": "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\messages\\usa\\mci.rc",
+          "sha256": "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\messages\\usa\\mci.rc",
+          "sha256": "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mci.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/messages/usa/mmtask.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\messages\\usa\\mmtask.rc",
+          "sha256": "23ff18144c07fb6a1510dbc8ec97b1f8aa7d71e25a8cbe8276978afd29e7fdae"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\messages\\usa\\mmtask.rc",
+          "sha256": "23ff18144c07fb6a1510dbc8ec97b1f8aa7d71e25a8cbe8276978afd29e7fdae"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\messages\\usa\\mmtask.rc",
+          "sha256": "23ff18144c07fb6a1510dbc8ec97b1f8aa7d71e25a8cbe8276978afd29e7fdae"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\messages\\usa\\mmtask.rc",
+          "sha256": "23ff18144c07fb6a1510dbc8ec97b1f8aa7d71e25a8cbe8276978afd29e7fdae"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmtask.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mixmgri.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mixmgri.h",
+          "sha256": "bd7e612b493751d7e9fff085b145b59bbc4242e576af994f8c2d97c4d7c53b84"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mixmgri.h",
+          "sha256": "bd7e612b493751d7e9fff085b145b59bbc4242e576af994f8c2d97c4d7c53b84"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mixmgri.h",
+          "sha256": "bd7e612b493751d7e9fff085b145b59bbc4242e576af994f8c2d97c4d7c53b84"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mixmgri.h",
+          "sha256": "bd7e612b493751d7e9fff085b145b59bbc4242e576af994f8c2d97c4d7c53b84"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mixmgri.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmiocf.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmiocf.c",
+          "sha256": "6acc63699b48a4c781d36fadd2c68502761fe5085c19c5d2521da8c017d94840"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmiocf.c",
+          "sha256": "6acc63699b48a4c781d36fadd2c68502761fe5085c19c5d2521da8c017d94840"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmiocf.c",
+          "sha256": "6acc63699b48a4c781d36fadd2c68502761fe5085c19c5d2521da8c017d94840"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmiocf.c",
+          "sha256": "6acc63699b48a4c781d36fadd2c68502761fe5085c19c5d2521da8c017d94840"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmiocf.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmiocf.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmiocf.h",
+          "sha256": "13e501abfc4421dbde9bbb884b3885218cb08e93d97a69f509577c1803367e21"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmiocf.h",
+          "sha256": "13e501abfc4421dbde9bbb884b3885218cb08e93d97a69f509577c1803367e21"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmiocf.h",
+          "sha256": "13e501abfc4421dbde9bbb884b3885218cb08e93d97a69f509577c1803367e21"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmiocf.h",
+          "sha256": "13e501abfc4421dbde9bbb884b3885218cb08e93d97a69f509577c1803367e21"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmiocf.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmsex.dlg",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmsex.dlg",
+          "sha256": "969585e46f97c680e8faadd05790aa1933b7b3718ce3a7b239f38a7951e16211"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmsex.dlg",
+          "sha256": "969585e46f97c680e8faadd05790aa1933b7b3718ce3a7b239f38a7951e16211"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsex.dlg",
+          "sha256": "969585e46f97c680e8faadd05790aa1933b7b3718ce3a7b239f38a7951e16211"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsex.dlg",
+          "sha256": "969585e46f97c680e8faadd05790aa1933b7b3718ce3a7b239f38a7951e16211"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmsex.dlg",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmsex.ico",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmsex.ico",
+          "sha256": "fb4bc2d72557833dccd3bfccedd56fdaae6f9c4e106492f7457681475e84d88d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmsex.ico",
+          "sha256": "fb4bc2d72557833dccd3bfccedd56fdaae6f9c4e106492f7457681475e84d88d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsex.ico",
+          "sha256": "fb4bc2d72557833dccd3bfccedd56fdaae6f9c4e106492f7457681475e84d88d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsex.ico",
+          "sha256": "fb4bc2d72557833dccd3bfccedd56fdaae6f9c4e106492f7457681475e84d88d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmsex.ico",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmsystem.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmsystem.rc",
+          "sha256": "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmsystem.rc",
+          "sha256": "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsystem.rc",
+          "sha256": "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmsystem.rc",
+          "sha256": "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmsystem.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/MMSYSTEM.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\MMSYSTEM.RES",
+          "sha256": "fe8f9081edfa07a4cbc4133ebb2dfbf645df0c3215525df2ec89f76196a9088e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\MMSYSTEM.RES",
+          "sha256": "fe8f9081edfa07a4cbc4133ebb2dfbf645df0c3215525df2ec89f76196a9088e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\MMSYSTEM.RES",
+          "sha256": "fe8f9081edfa07a4cbc4133ebb2dfbf645df0c3215525df2ec89f76196a9088e"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\MMSYSTEM.RES",
+          "sha256": "fe8f9081edfa07a4cbc4133ebb2dfbf645df0c3215525df2ec89f76196a9088e"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MMSYSTEM.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmtask.tsk",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmtask.tsk",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmtask.tsk",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask.tsk",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask.tsk",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmtask.tsk",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmtask/mmtask.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmtask\\mmtask.asm",
+          "sha256": "ad9436f2b6f661c99f812524ae6c468a021d05df28db7532205f4d91c60bc2b3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmtask\\mmtask.asm",
+          "sha256": "ad9436f2b6f661c99f812524ae6c468a021d05df28db7532205f4d91c60bc2b3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\mmtask.asm",
+          "sha256": "ad9436f2b6f661c99f812524ae6c468a021d05df28db7532205f4d91c60bc2b3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\mmtask.asm",
+          "sha256": "ad9436f2b6f661c99f812524ae6c468a021d05df28db7532205f4d91c60bc2b3"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mmtask.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmtask/MMTASK.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.RES",
+          "sha256": "6f31bb413bcb748bdf4e0f9169f45b72a60cd5177e1d042ffe623ebbd123e6bb"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.RES",
+          "sha256": "6f31bb413bcb748bdf4e0f9169f45b72a60cd5177e1d042ffe623ebbd123e6bb"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.RES",
+          "sha256": "6f31bb413bcb748bdf4e0f9169f45b72a60cd5177e1d042ffe623ebbd123e6bb"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.RES",
+          "sha256": "6f31bb413bcb748bdf4e0f9169f45b72a60cd5177e1d042ffe623ebbd123e6bb"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MMTASK.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/mmtask/MMTASK.TSK",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.TSK",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.TSK",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.TSK",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\mmtask\\MMTASK.TSK",
+          "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\MMTASK.TSK",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/mmsystem/timea.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\mmsystem\\timea.asm",
+          "sha256": "6cc01772f84fd3b1875170472ea379387c5443c8d61d0194ca3c21dd5c7f9cc2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\mmsystem\\timea.asm",
+          "sha256": "6cc01772f84fd3b1875170472ea379387c5443c8d61d0194ca3c21dd5c7f9cc2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\mmsystem\\timea.asm",
+          "sha256": "6cc01772f84fd3b1875170472ea379387c5443c8d61d0194ca3c21dd5c7f9cc2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\mmsystem\\timea.asm",
+          "sha256": "6cc01772f84fd3b1875170472ea379387c5443c8d61d0194ca3c21dd5c7f9cc2"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\timea.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/amabaabo",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\amabaabo",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\amabaabo",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\amabaabo",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\amabaabo",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\amabaabo",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/amabaace",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\amabaace",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\amabaace",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\amabaace",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\amabaace",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\amabaace",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/defcreat.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\defcreat.c",
+          "sha256": "3ae79a6b97dcb7b9a174c10ea91c043f291c6a538ab864d2170b353cf2f6805e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\defcreat.c",
+          "sha256": "3ae79a6b97dcb7b9a174c10ea91c043f291c6a538ab864d2170b353cf2f6805e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\defcreat.c",
+          "sha256": "3ae79a6b97dcb7b9a174c10ea91c043f291c6a538ab864d2170b353cf2f6805e"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\defcreat.c",
+          "sha256": "3ae79a6b97dcb7b9a174c10ea91c043f291c6a538ab864d2170b353cf2f6805e"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\defcreat.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/generic.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\generic.c",
+          "sha256": "ecec4bf77ed9b4fadd6b65062bccd9e5723b7471763883ef20f34a4d23f66a15"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\generic.c",
+          "sha256": "ecec4bf77ed9b4fadd6b65062bccd9e5723b7471763883ef20f34a4d23f66a15"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\generic.c",
+          "sha256": "ecec4bf77ed9b4fadd6b65062bccd9e5723b7471763883ef20f34a4d23f66a15"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\generic.c",
+          "sha256": "ecec4bf77ed9b4fadd6b65062bccd9e5723b7471763883ef20f34a4d23f66a15"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\generic.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/main.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\main.c",
+          "sha256": "9f3e990a9e9685e4a62720ec676483be2e459a40b5553713e4881600d52a0205"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\main.c",
+          "sha256": "9f3e990a9e9685e4a62720ec676483be2e459a40b5553713e4881600d52a0205"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\main.c",
+          "sha256": "9f3e990a9e9685e4a62720ec676483be2e459a40b5553713e4881600d52a0205"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\main.c",
+          "sha256": "9f3e990a9e9685e4a62720ec676483be2e459a40b5553713e4881600d52a0205"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\main.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/net.asv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\net.asv",
+          "sha256": "d25c854c6be563132f37bf6dbf49c704bbd6890e742e75c48aa5056d69bc308d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\net.asv",
+          "sha256": "d25c854c6be563132f37bf6dbf49c704bbd6890e742e75c48aa5056d69bc308d"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\net.asv",
+          "sha256": "d25c854c6be563132f37bf6dbf49c704bbd6890e742e75c48aa5056d69bc308d"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\net.asv",
+          "sha256": "d25c854c6be563132f37bf6dbf49c704bbd6890e742e75c48aa5056d69bc308d"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\net.asv",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/client/ole.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\client\\ole.c",
+          "sha256": "5d0c0d7f0b644653a4442c638dc172f1e103ef2a0f04b015ba6c890fec6366dc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\client\\ole.c",
+          "sha256": "5d0c0d7f0b644653a4442c638dc172f1e103ef2a0f04b015ba6c890fec6366dc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\client\\ole.c",
+          "sha256": "5d0c0d7f0b644653a4442c638dc172f1e103ef2a0f04b015ba6c890fec6366dc"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\client\\ole.c",
+          "sha256": "5d0c0d7f0b644653a4442c638dc172f1e103ef2a0f04b015ba6c890fec6366dc"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ole.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/debug/OLESVR.DLL",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\debug\\OLESVR.DLL",
+          "sha256": "995faa034447d5c17fce1b0c5bf170817bc8671efefe934296921d6121e31910"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\debug\\OLESVR.DLL",
+          "sha256": "995faa034447d5c17fce1b0c5bf170817bc8671efefe934296921d6121e31910"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\debug\\OLESVR.DLL",
+          "sha256": "995faa034447d5c17fce1b0c5bf170817bc8671efefe934296921d6121e31910"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\debug\\OLESVR.DLL",
+          "sha256": "995faa034447d5c17fce1b0c5bf170817bc8671efefe934296921d6121e31910"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/OLESVR.DLL",
+          "sha256": "8bea5e9a9c49e84701f55e14312eb11bd04c1434c1ab59578c916a7db69aa3cc"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\OLESVR.DLL",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/item.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\item.c",
+          "sha256": "6f5024127209f89b8f2df45ff274d0477e5f8f4a998832955926dc5fa0fb7892"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\item.c",
+          "sha256": "6f5024127209f89b8f2df45ff274d0477e5f8f4a998832955926dc5fa0fb7892"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\item.c",
+          "sha256": "6f5024127209f89b8f2df45ff274d0477e5f8f4a998832955926dc5fa0fb7892"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\item.c",
+          "sha256": "6f5024127209f89b8f2df45ff274d0477e5f8f4a998832955926dc5fa0fb7892"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\item.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/olever.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\olever.h",
+          "sha256": "7fd441d04e7f4678706e2a1c9adc13820bd5d558b3a8a6107f75af6db13f7f55"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\olever.h",
+          "sha256": "7fd441d04e7f4678706e2a1c9adc13820bd5d558b3a8a6107f75af6db13f7f55"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\olever.h",
+          "sha256": "7fd441d04e7f4678706e2a1c9adc13820bd5d558b3a8a6107f75af6db13f7f55"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\olever.h",
+          "sha256": "7fd441d04e7f4678706e2a1c9adc13820bd5d558b3a8a6107f75af6db13f7f55"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\olever.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/srvr.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\srvr.c",
+          "sha256": "50b83fabeca031549e16345e49b0356b0d6f5b7ff9d5a245f436a324aa46470c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\srvr.c",
+          "sha256": "50b83fabeca031549e16345e49b0356b0d6f5b7ff9d5a245f436a324aa46470c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\srvr.c",
+          "sha256": "50b83fabeca031549e16345e49b0356b0d6f5b7ff9d5a245f436a324aa46470c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\srvr.c",
+          "sha256": "50b83fabeca031549e16345e49b0356b0d6f5b7ff9d5a245f436a324aa46470c"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\srvr.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/SRVR.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\SRVR.RES",
+          "sha256": "80af5ee1d6deaeef053aaf1d622d9b2c8f67bc32c93d95e6c0185fb6dd719da6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\SRVR.RES",
+          "sha256": "80af5ee1d6deaeef053aaf1d622d9b2c8f67bc32c93d95e6c0185fb6dd719da6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\SRVR.RES",
+          "sha256": "80af5ee1d6deaeef053aaf1d622d9b2c8f67bc32c93d95e6c0185fb6dd719da6"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\SRVR.RES",
+          "sha256": "80af5ee1d6deaeef053aaf1d622d9b2c8f67bc32c93d95e6c0185fb6dd719da6"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\SRVR.RES",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/ole/server/srvrmain.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\ole\\server\\srvrmain.c",
+          "sha256": "0bd33cb4c8eb66df54ccdb255742046135d110d9752802f7bcce4888508aff74"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\ole\\server\\srvrmain.c",
+          "sha256": "0bd33cb4c8eb66df54ccdb255742046135d110d9752802f7bcce4888508aff74"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\ole\\server\\srvrmain.c",
+          "sha256": "0bd33cb4c8eb66df54ccdb255742046135d110d9752802f7bcce4888508aff74"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\ole\\server\\srvrmain.c",
+          "sha256": "0bd33cb4c8eb66df54ccdb255742046135d110d9752802f7bcce4888508aff74"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\srvrmain.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/rasapi16/bseerr.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\rasapi16\\bseerr.h",
+          "sha256": "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\bseerr.h",
+          "sha256": "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\rasapi16\\bseerr.h",
+          "sha256": "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\bseerr.h",
+          "sha256": "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\bseerr.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/rasapi16/ras.h",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\rasapi16\\ras.h",
+          "sha256": "c56e335ab26c85cdba6327fd7f0e178093b7cb7e68f2d4d4ee792759bcc03dcf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\ras.h",
+          "sha256": "c56e335ab26c85cdba6327fd7f0e178093b7cb7e68f2d4d4ee792759bcc03dcf"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\rasapi16\\ras.h",
+          "sha256": "c56e335ab26c85cdba6327fd7f0e178093b7cb7e68f2d4d4ee792759bcc03dcf"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\ras.h",
+          "sha256": "c56e335ab26c85cdba6327fd7f0e178093b7cb7e68f2d4d4ee792759bcc03dcf"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ras.h",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/rasapi16/rasapi16.c",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\rasapi16\\rasapi16.c",
+          "sha256": "39b3824c07c736a2eae40bff6ec783fea3817c2a2eb6e2a4e71c3e11ec442425"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\rasapi16.c",
+          "sha256": "39b3824c07c736a2eae40bff6ec783fea3817c2a2eb6e2a4e71c3e11ec442425"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\rasapi16\\rasapi16.c",
+          "sha256": "39b3824c07c736a2eae40bff6ec783fea3817c2a2eb6e2a4e71c3e11ec442425"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\rasapi16.c",
+          "sha256": "39b3824c07c736a2eae40bff6ec783fea3817c2a2eb6e2a4e71c3e11ec442425"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\rasapi16.c",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/rasapi16/rasapi16.rc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\rasapi16\\rasapi16.rc",
+          "sha256": "4da981b74a78e74d481f83c98d2a62865b16fabbc173771af763fb9841a5643a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\rasapi16.rc",
+          "sha256": "4da981b74a78e74d481f83c98d2a62865b16fabbc173771af763fb9841a5643a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\rasapi16\\rasapi16.rc",
+          "sha256": "4da981b74a78e74d481f83c98d2a62865b16fabbc173771af763fb9841a5643a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\rasapi16.rc",
+          "sha256": "4da981b74a78e74d481f83c98d2a62865b16fabbc173771af763fb9841a5643a"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\rasapi16.rc",
+      "installed_sha256": null
+    },
+    {
+      "key": "wow16/rasapi16/RASAPI16.RES",
+      "identities": [
+        {
+          "path": "src\\mvdm\\wow16\\rasapi16\\RASAPI16.RES",
+          "sha256": "97b9221a27926a7c905a37ed47d7315516becce97ecb98a2619861ea7ab87f64"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\rasapi16\\RASAPI16.RES",
+          "sha256": "97b9221a27926a7c905a37ed47d7315516becce97ecb98a2619861ea7ab87f64"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\rasapi16\\RASAPI16.RES",
+          "sha256": "97b9221a27926a7c905a37ed47d7315516becce97ecb98a2619861ea7ab87f64"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\rasapi16\\RASAPI16.RES",
+          "sha256": "97b9221a27926a7c905a37ed47d7315516becce97ecb98a2619861ea7ab87f64"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\RASAPI16.RES",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "Read-only ZIP basename and exact system32 path only; no runtime or source build provenance."
+}

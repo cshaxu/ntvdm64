@@ -88,6 +88,11 @@ Further bounded reviews cover [DOS parsing](nine-way/part-2/dos-parser-semantic-
 [callback](cross-369/callback-interface-disposition.md), and
 [Shell](cross-369/shell-header-disposition.md) interfaces. Their separate
 failure and runtime boundaries remain recorded in each report.
+The [part 7 guest inventory](nine-way/part-7/wow16-review.md) and
+[RAS provider review](nine-way/part-7/ras-provider-review.md) record exact
+package identities and the observed missing host exports without claiming
+guest reachability or an exercised failure. Its [external raster inventory](nine-way/part-7/external-mini-review.md)
+likewise remains pending provider relevance.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
