@@ -1,0 +1,85 @@
+{
+  "inputs": [
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/obj/wmmedia.obj",
+      "sha256": "03D9412A0E2F17A87CC17AA18E98A9A4CBBBDC089FBE4B2BFBC04EA71BE52A7F"
+    },
+    {
+      "path": "build/t473-s10/winmm-resolve-object-replay/wmmedia-seam.obj",
+      "sha256": "3E47BDD5527BF581681EBA20FE62A70EFF8B4782F4156E1AF9489C56466AB957"
+    },
+    {
+      "path": "build/t473-s10/winmm-resolve-object-replay/fixture.exe",
+      "sha256": "8B01F625D621600B575FCC1FB78DC2A818CE38C93DA17475477AD16BB9C01530"
+    },
+    {
+      "path": "build/t473-s10/winmm-resolve-object-replay/fixture.obj",
+      "sha256": "1B9C319D992826E4A155E9E39DA51F7EA5DA71E5BE298024308FBE979288DEFA"
+    },
+    {
+      "path": "build/t473-s10/winmm-resolve-object-replay/fixture.map",
+      "sha256": "2FB6FF6823610AD057446130141813E5CF1EA860B44DC97CB9769A78E8163AFD"
+    },
+    {
+      "path": "src/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "src/mvdm/wow32/wmmedia.h",
+      "sha256": "7B2E07AC7DA3864922A65586539C19945344ED04DF1D53D26E38119102A69801"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/wow-winmm-resolve-object-fixture.c",
+      "sha256": "534815618CD8DABA93E85DFE4D5CBE8F1A0D94A0DAD3E36CB57C13521FEA53DB"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/wow-winmm-resolve-object-build.cmd",
+      "sha256": "5D26DD181746DE809576EB1C38E579A797F32749CEF9883073B518B14A7BC9BA"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    }
+  ],
+  "instructions_equal_ignoring_objcopy_padding": true,
+  "relocations_equal_after_two_loader_import_renames": true,
+  "scenarios": {
+    "missingdll": {
+      "exit_code": 0,
+      "stdout": "missingdll resolve=6 callback=6 out16=aaaa out32=cccccccc calls=0"
+    },
+    "missing": {
+      "exit_code": 0,
+      "stdout": "missing resolve=6 callback=6 out16=aaaa out32=cccccccc calls=0"
+    },
+    "success16to32": {
+      "exit_code": 0,
+      "stdout": "success16to32 resolve=1 out16=aaaa out32=11112222 calls=1"
+    },
+    "success32to16": {
+      "exit_code": 0,
+      "stdout": "success32to16 resolve=1 out16=2222 out32=cccccccc calls=1"
+    },
+    "fail16to32": {
+      "exit_code": 0,
+      "stdout": "fail16to32 resolve=1 out16=aaaa out32=11112222 calls=1"
+    },
+    "fail32to16": {
+      "exit_code": 0,
+      "stdout": "fail32to16 resolve=1 out16=2222 out32=cccccccc calls=1"
+    }
+  },
+  "limits": "Controlled loader and WINMM provider seams; unmodified selected object instruction body, no unresolved link; not real guest/provider ABI, reachability, or current release identity."
+}

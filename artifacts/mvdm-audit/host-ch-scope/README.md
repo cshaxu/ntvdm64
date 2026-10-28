@@ -91,3 +91,7 @@ The [remaining excluded header review](excluded-host-header-final-group-review.m
 The [SoftWindows input/audio profile review](softwindows-input-audio-profile-review.md) separates its conditional guest-driver BOPs from selected NT input and WOW multimedia paths; required selected-path behavior still needs validation.
 
 The [control message owner review](excluded-control-message-owner-review.md) traces selected original table and handlers without treating the static chain as a guest behavior pass.
+
+The [planar presentation handoff](../host-inc/planar-presentation-functional-handoff.md) and [virtual/real floppy owner review](virtual-real-floppy-owner-review.md) separate selected original owners from project adapters and retained device/lifecycle validation.
+
+The [guest-target candidate review](guest-target-candidate-review.md) identifies 98 C files with observed 16-bit target recipes and retains 375 roles for further host/shared review, without excluding corresponding applications. The [WINMM selected-object witness](wow-winmm-resolve-object-review.md) records controlled resolver failures and output overwrites; guest reachability and actual provider contract remain unproved.

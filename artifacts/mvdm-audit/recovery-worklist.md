@@ -154,3 +154,7 @@ S17 retains the [legacy network BOP boundary](host-inc/legacy-network-functional
 S16 retains the [WINMM host and callback boundary](host-ch-scope/wow-winmm-boundary-review.md): validate actual export loading/ABI, original guest ring ordering, in-flight callback and retirement; local export names and guest source alone are not a compatibility pass.
 
 S13 retains the [LPT selected-object failure boundary](host-comms/lpt-functional-failure-boundary.md): establish valid direct-mode error reachability and guest-visible semantics, then verify IOCTL/short-write/buffer/close paths with owned endpoints. An injected invalid handle is not a reproduced real-printer failure.
+
+S13 also retains the [planar presentation handoff](host-inc/planar-presentation-functional-handoff.md) and [virtual/real floppy owner review](host-ch-scope/virtual-real-floppy-owner-review.md): verify original paint and selected host bitmap lifetimes, and separately validate empty/real/virtual disk providers with owned media and failure cases.
+
+S16 retains the [selected-object multimedia resolver failure witness](host-ch-scope/wow-winmm-resolve-object-review.md): six isolated seam scenarios establish controlled missing-provider BOOL and handle-output behavior. Establish the actual WINMM/guest contract and current package reachability before a registered minimal original-source correction; this fixture is not a real guest or private-provider ABI pass.
