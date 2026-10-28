@@ -1045,7 +1045,7 @@ softpc.new/host/inc/ppc/prod/sas4gen.h,shard-1/file-audit.csv,整体排除,host-
 softpc.new/host/inc/sdos_ddi.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/sim32.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/winsigni.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/host/inc/xmsexp.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/host/inc/xmsexp.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/link/nt_uis.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/src/config.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/src/copy_fnc.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1733,7 +1733,7 @@ wow32/wow32fax.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H can
 wow32/wowdde.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wowhooks.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wowhooks.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wowtable.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wowtable.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wowtbl.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wowtbl.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wparam.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
