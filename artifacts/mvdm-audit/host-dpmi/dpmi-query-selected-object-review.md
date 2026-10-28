@@ -1,0 +1,13 @@
+# DPMI native-i386 versus selected CPU40 memory query
+
+The only currently pending `.c`/`.h` row under `dpmi32/` is `i386/dpmimem.c`. Current/OpenNT SHA-256 `69695AB6DCB6C977318A4981B6B255FFCBB643B072549DC1C22B89C564EC2DE4`. This original native-i386 provider allocates through NT virtual memory and estimates memory information from host `GlobalMemoryStatus` with a 15 MiB cap. The observed selected CCPU40 worker instead builds `dpmimemr.c` and `xmem.c`, uses the shared `ExtMemSA` XMS pool, and registers CPU40 selection as MVDM-HOST-DIV-224. `xmem.c` separately owns per-task tracking and its DIV-272 failure adapter. These are different allocation authorities and cannot simply be combined. Prior original route, differences and historical XMS/DPMI guest evidence are in `nine-way/part-2/dpmi-i386-allocator-semantic-reconciliation.md` and `shard-0/dpmi-memory-owner-audit.md`.
+
+A new x86 fixture links the selected `build/.ninja/msvc-x86-release/worker/obj/dpmi/dpmimemr.obj` SHA-256 `D3F07F4BD83EBEDD830593EF979E3CD5059B336B5A468AAD3F8B9923734E7FF4` directly to `dpmi-query-selected-object-fixture.c` SHA-256 `D26D5984D9065DD5DD1682CF1101FB6E5845FEC7430844AB969719BAEBDC3813`. MinGW i686 GCC `-Wl,--gc-sections` emitted `Warning: corrupt .drectve at end of def file` but succeeded. Controlled test seams provide the guest memory location, DI, a deliberately failing legacy `VdmQueryFreeVirtualMemory`, and a successful `SAQueryFree` of 8 MiB total/4 MiB largest; the selected function calls both and places pool-derived values in the mapped structure. Process exit 0:
+
+```text
+legacy=1 sa=1 largest=4194304 free_pages=2048 max_unlocked=1024 prefix=77 suffix=77
+```
+
+This proves the selected object call order and its supplied successful-pool result for this synthetic condition. It does not establish whether a real legacy query can fail in an initialized worker, the consequence of such failure, actual pool fragmentation, guest ABI identity, original i386 result equivalence, or current installed image identity. The security-cookie seam is a fixture stub, not a product lifecycle implementation.
+
+Recommendation: retain the native-i386 source as **pending alternative provider**, not partial selected CPU40 code nor automatically exclude all its intended behavior. The 15 MiB native-host heuristic and CPU40 pool-specific result have an unresolved observable semantic difference; test low-memory/fragmentation and task teardown through the original immutable guest before declaring compatibility. Separately, original i386 and currently selected implementation remain one owner each within their profiles; avoid adding a competing allocator. No runtime or guest changes.

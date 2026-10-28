@@ -138,3 +138,7 @@ reconciles every applicable path and runs the complete product and capability
 gates. Neither this list nor prior per-package acceptance converts pending
 rows to full/excluded, and the 42,963 external rows still require relevance
 review. Preserve original guest bytes and the owner-approved host boundaries.
+
+S11/S12 also retain the [DPMI memory-provider comparison](host-dpmi/dpmi-query-selected-object-review.md): compare native-i386 and CPU40 pool reporting under low memory and fragmentation, and verify actual guest/task lifetime before declaring their semantics equivalent. The selected-object failure seam is not a live-worker failure.
+
+The [DPMI field comparison](host-dpmi/dpmi-query-provider-difference-review.md) records nine source-derived fields and the limits of the historical CPU40 guest oracle; synthetic examples do not prove production divergence.
