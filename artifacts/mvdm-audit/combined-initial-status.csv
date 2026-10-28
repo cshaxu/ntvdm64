@@ -1845,7 +1845,7 @@ softpc.new/base/inc/egagraph.h,0,partial,shard-0/review.csv
 softpc.new/base/inc/egamode.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/egaports.h,0,partial,shard-0/review.csv
 softpc.new/base/inc/egaread.h,0,partial,shard-0/review.csv
-softpc.new/base/inc/egatrace.h,3,pending,shard-3/file-review.csv
+softpc.new/base/inc/egatrace.h,3,excluded,shard-3/file-review.csv
 softpc.new/base/inc/egavideo.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/emm.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/equip.h,1,partial,shard-1/file-audit.csv
@@ -1876,7 +1876,7 @@ softpc.new/base/inc/herc.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/hfx.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/hg_cpu.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/hg_sas.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/inc/hg_stat.h,3,pending,shard-3/file-review.csv
+softpc.new/base/inc/hg_stat.h,3,excluded,shard-3/file-review.csv
 softpc.new/base/inc/host.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/host_cfg.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/host_com.h,0,partial,shard-0/review.csv
@@ -2118,7 +2118,7 @@ softpc.new/host/inc/cfpu_def.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/dfa.gi,0,pending,shard-0/review.csv
 softpc.new/host/inc/error.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/host.h,2,pending,shard-2/file-audit.csv
-softpc.new/host/inc/host_bop.h,2,pending,shard-2/file-audit.csv
+softpc.new/host/inc/host_bop.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/host_cpu.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/host_def.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/host_emm.h,2,pending,shard-2/file-audit.csv
@@ -2247,7 +2247,7 @@ softpc.new/host/inc/mips/prod/xchg_c.h,0,excluded,shard-0/review.csv
 softpc.new/host/inc/mips/prod/xfer_c.h,2,excluded,shard-2/file-audit.csv
 softpc.new/host/inc/mips/prod/xlat_c.h,0,excluded,shard-0/review.csv
 softpc.new/host/inc/monregs.h,2,pending,shard-2/file-audit.csv
-softpc.new/host/inc/monsim32.h,3,pending,shard-3/file-review.csv
+softpc.new/host/inc/monsim32.h,3,excluded,shard-3/file-review.csv
 softpc.new/host/inc/nt_cga.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/nt_cgalt.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_com.h,0,pending,shard-0/review.csv
@@ -2262,16 +2262,16 @@ softpc.new/host/inc/nt_fdisk.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/nt_fulsc.h,3,pending,shard-3/file-review.csv
 softpc.new/host/inc/nt_getxx.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_graph.h,0,pending,shard-0/review.csv
-softpc.new/host/inc/nt_hunt.h,3,pending,shard-3/file-review.csv
+softpc.new/host/inc/nt_hunt.h,3,excluded,shard-3/file-review.csv
 softpc.new/host/inc/nt_inthk.h,0,partial,shard-0/review.csv
 softpc.new/host/inc/nt_mem.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_mon.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_mouse.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/nt_paint.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_pif.h,1,pending,shard-1/file-audit.csv
-softpc.new/host/inc/nt_reset.h,2,pending,shard-2/file-audit.csv
+softpc.new/host/inc/nt_reset.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/nt_smenu.h,0,pending,shard-0/review.csv
-softpc.new/host/inc/nt_thred.h,2,pending,shard-2/file-audit.csv
+softpc.new/host/inc/nt_thred.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/nt_timer.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_uis.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_vddp.h,3,partial,shard-3/file-review.csv

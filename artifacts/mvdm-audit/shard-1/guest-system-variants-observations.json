@@ -1,0 +1,71 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "wow16/system/equate.inc",
+      "sha256": "EF96A251B8FF37963120BBDC06460B6C702795B0279E045CEC9B50D2E21CF392",
+      "catalog_ids": "SRC:4c0e0e1cbcad2226ee0e;SRC:d44dab3c234bd4a684e9",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/system/romstuff.inc",
+      "sha256": "E69B89D53ABA721EFBE6FC419134F144C1566AE7389F36AECBB8396EB02BE765",
+      "catalog_ids": "SRC:ccccce0d7c7399ad63b2;SRC:f047f799594de0336b2b",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\system\\makefile",
+      "sha256": "5612B1329655BD6D171F4EBAF62BFAA0C3F4D9764CFEE6F1D9F54628BF6FD1BC"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\system.lrf",
+      "sha256": "CD6A2239FF01CAE1161B4BD685B1245CB915CB6E7551325911996800B0F989AF"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\envect.asm",
+      "sha256": "09C947FF2F204128A89DEEA9053E7E9C118C1F18FB083E071899BB33DBE4AF4C"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\system.asm",
+      "sha256": "423E3A8D220339E43FEB603B8458E7F939745DC258E0E31F7BD539F6C257F53D"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\system.inc",
+      "sha256": "1273C5EAAD79946269D91EB446BB6D5CD0F7CCD964E4C83BDAAA166A7B5C8F5C"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\timer.asm",
+      "sha256": "8BC8EBB79D50901330572AF95833BABA7CB631D90447AE215FF4806ADA6FB8B8"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+    "installed_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+    "zip_member": "WINNT/SYSTEM32/SYSTEM.DRV",
+    "zip_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3"
+  },
+  "limitations": "Source, recipe and host dependency evidence only; no guest build provenance, Vectra/ROM feature activation or SYSTEM runtime behavior."
+}

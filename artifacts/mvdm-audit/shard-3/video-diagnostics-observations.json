@@ -1,0 +1,29 @@
+{
+  "softpc.new/base/inc/egatrace.h": {
+    "current": "b7ea3a46cbf438275e2eddb68aaf7d9b744ea2a1b60e123fce833ab85b553e87",
+    "opennt": "b7ea3a46cbf438275e2eddb68aaf7d9b744ea2a1b60e123fce833ab85b553e87",
+    "opennt45": "b7ea3a46cbf438275e2eddb68aaf7d9b744ea2a1b60e123fce833ab85b553e87"
+  },
+  "softpc.new/base/inc/hg_stat.h": {
+    "current": "b628d6dd29dbf4b1f039f0362922ade1dc1e4588c5271b95f45a7addd080e9ea",
+    "opennt": "b628d6dd29dbf4b1f039f0362922ade1dc1e4588c5271b95f45a7addd080e9ea",
+    "opennt45": "b628d6dd29dbf4b1f039f0362922ade1dc1e4588c5271b95f45a7addd080e9ea"
+  },
+  "softpc.new/base/video/ega_trcr.c": {
+    "current": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c",
+    "opennt": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c",
+    "opennt45": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c"
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": []
+  },
+  "object": {
+    "sha256": "d9ac213c0c30105150ee585edad5ebe716b5a062da16c33ed6f58d68b6a3a3fb",
+    "symbols": "\nbuild\\.ninja\\msvc-x86-release\\worker\\obj\\video\\ega_trcr.obj:     file format pe-i386\n\nSYMBOL TABLE:\n[  0](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x010487f9 @comp.id\n[  1](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x80010191 @feat.00\n[  2](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000003 @vol.md\n[  3](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .drectve\nAUX scnlen 0x2f nreloc 0 nlnno 0\n[  5](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug$S\nAUX scnlen 0xa4 nreloc 0 nlnno 0\n[  7](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .chks64\nAUX scnlen 0x18 nreloc 0 nlnno 0\n\n\n"
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": []
+  }
+}

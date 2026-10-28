@@ -40,8 +40,13 @@ configuration, image identity and runtime boundaries for later reconciliation.
 The [legacy monitor interfaces](shard-3/monitor-legacy-interfaces-role-review.md)
 and [keyboard mapping headers](shard-2/dos-keyboard-legacy-headers-review.md)
 reviews distinguish profile-specific declarations from selected behavior.
+The [monitor profile checkpoint](monitor-profile-headers-role-review.md)
+records four inactive header roles and three selected declarations, without
+excluding selected memory, video, CPU or debugging capabilities.
 The [WINOLDAP owner review](shard-1/guest-winoldap-owner-review.md) records
 the original non-Win16 launch/return chain and scoped module availability gap.
+The [SYSTEM variant review](shard-1/guest-system-variants-review.md) records
+historical Vectra declarations and the observed SYSTEM.DRV image identities.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

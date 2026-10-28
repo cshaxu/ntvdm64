@@ -149,7 +149,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-superseded-nt-host-source-only',
                                 'historical-debug-profile-host-source-only',
                                 'historical-alternative-virtual-floppy-source-only',
-                                'historical-alternate-host-header-source-only', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
+                                  'historical-alternate-host-header-source-only', 'historical-profile-header-source-only', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -226,8 +226,14 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/host_fio.h', 'softpc.new/base/inc/unix_asy.h',
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
+                if proof['role'] == 'historical-profile-header-source-only':
+                    assert prefix == 'monitor-profile-headers-role-' and path in (
+                        'softpc.new/host/inc/monsim32.h', 'softpc.new/host/inc/nt_hunt.h',
+                        'softpc.new/base/inc/egatrace.h', 'softpc.new/base/inc/hg_stat.h')
             else:
-                if prefix == 'directory-interrupt-headers-role-':
+                if prefix == 'monitor-profile-headers-role-':
+                    assert path in ('softpc.new/host/inc/host_bop.h', 'softpc.new/host/inc/nt_reset.h', 'softpc.new/host/inc/nt_thred.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'directory-interrupt-headers-role-':
                     assert path in ('inc/curdir.h', 'dpmi32/precomp.h', 'inc/intapi.h', 'softpc.new/base/keymouse/mouse.c', 'softpc.new/base/keymouse/ppi.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'selected-command-input-headers-role-':
                     assert path in ('inc/cmdsvc.h', 'dos/dem/dosdef.h', 'softpc.new/host/inc/nt_cga.h', 'softpc.new/host/inc/nt_mouse.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

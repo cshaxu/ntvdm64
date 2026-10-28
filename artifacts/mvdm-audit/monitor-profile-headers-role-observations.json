@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "ecc093f7b",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "shard-3/monitor-legacy-interfaces-observations.json",
+      "sha256": "9907768F4CFA3943917E068162826B383983E8667814FFBA160292E91896D645"
+    },
+    {
+      "path": "shard-3/video-diagnostics-observations.json",
+      "sha256": "2EEC83F315ADB4F674244DF5B2E359EF2F9CCD713030CA68212C4C8DF226164C"
+    },
+    {
+      "path": "shard-2/dos-host-root-headers-observations.json",
+      "sha256": "1FAD9566CB9A940448C5BC015479DCCC8A5DB779D50AA5E24D4A371E9D6E606A"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Profile-specific file roles only; no capability exclusion"
+}

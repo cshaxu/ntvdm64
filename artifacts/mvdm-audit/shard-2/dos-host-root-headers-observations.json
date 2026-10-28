@@ -1,0 +1,52 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/host/inc/host_bop.h",
+      "hashes": [
+        "3AB20D68C49DCA4E7D8190C3FDC687B85012FE8C97678BED026A2FA21A07B0AA",
+        "3AB20D68C49DCA4E7D8190C3FDC687B85012FE8C97678BED026A2FA21A07B0AA",
+        "3AB20D68C49DCA4E7D8190C3FDC687B85012FE8C97678BED026A2FA21A07B0AA"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_bop.h"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_reset.h",
+      "hashes": [
+        "91E93365FC76A16FEA422918DC0BFB32499F27CD9C84998268A9368EB367C7F3",
+        "91E93365FC76A16FEA422918DC0BFB32499F27CD9C84998268A9368EB367C7F3",
+        "91E93365FC76A16FEA422918DC0BFB32499F27CD9C84998268A9368EB367C7F3"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_reset.h"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_thred.h",
+      "hashes": [
+        "9907EF3C8A402AFDA59DD15D25DDC0BA02EED85EBABC73F108DBF448382FC695",
+        "9907EF3C8A402AFDA59DD15D25DDC0BA02EED85EBABC73F108DBF448382FC695",
+        "9907EF3C8A402AFDA59DD15D25DDC0BA02EED85EBABC73F108DBF448382FC695"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_thred.h"
+    }
+  ],
+  "normalized_deps_object": "obj/host/nt_bop.obj",
+  "compile_edges": [
+    "build obj/host/nt_bop.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_bop.c",
+    "build obj/host/nt_reset.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_reset.c"
+  ],
+  "map_symbols": [
+    "0001:00050470       _MS_bop_2                  00451470 f   original-softpc-host-roots:nt_bop.obj",
+    "0001:00050510       _MS_bop_4                  00451510 f   original-softpc-host-roots:nt_bop.obj",
+    "0001:0004e100       _host_reset                0044f100 f   original-softpc-host-roots:nt_reset.obj"
+  ],
+  "nt_bop_current_sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Selected header dependency and representative host map symbols, not session/reset/BOP lifecycle correctness"
+}
