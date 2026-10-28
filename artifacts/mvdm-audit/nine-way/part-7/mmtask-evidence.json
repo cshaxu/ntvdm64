@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "path": "src/mvdm/wow16/mmsystem/mmtask.tsk",
+      "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+    },
+    {
+      "path": "src/mvdm/wow16/mmsystem/mmtask/MMTASK.TSK",
+      "sha256": "76d14010567c7b8fdfbbfed716819b32622977768ab4b14b354ce2471172a2db"
+    },
+    {
+      "path": "src/mvdm/wow16/mmsystem/MMSYSTEM.DLL",
+      "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a"
+    },
+    {
+      "path": "assets/release/mmtask.tsk",
+      "sha256": null
+    },
+    {
+      "path": "O:/winnt/system32/mmtask.tsk",
+      "sha256": null
+    },
+    {
+      "path": "O:/winnt/system32/MMSYSTEM.DLL",
+      "sha256": null
+    }
+  ],
+  "zip_entries": [
+    {
+      "name": "WINNT/SYSTEM32/MMSYSTEM.DLL",
+      "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a"
+    }
+  ],
+  "limits": "Named paths and ZIP only, no complete executable search path or guest call; source-to-image provenance not proved."
+}

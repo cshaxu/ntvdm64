@@ -1,0 +1,14 @@
+# S10 part 9: KERNEL virtual and global memory interfaces
+
+Only owned `wow32/wkmem.h` and `wow32/wkglobal.h` receive disposition recommendations. `kernel-memory-header-observer.py` records edition hashes, source edges and normalized `VALID` dependency for the selected `wkmem.obj`; reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/cross-369/kernel-memory-header-observer.py`. No product, guest, graph or ledger was changed.
+
+`wkmem.h` matches both original editions, is included via `precomp.h`, and is a VALID dependency of selected original `wkmem.c`. Its virtual alloc/free and memory-status declarations correspond to selected KERNEL dispatch entries (`wktbl2.h`); the declared virtual lock/unlock alternatives are themselves under `#if 0`. The guest KERNEL owns arena bookkeeping; selected NTVDM `nt_mem.c` owns guest-linear allocator state, and Windows owns backing memory. `shard-1/wow-virtual-memory-review.md` binds original selected WOW object instruction bodies to published WOW32 and traces current cached NTVDM mapping, with the explicit limit that current installed worker provider identity and guest invocation were not fully bound. The historical valid direct allocator pair fixture is a bounded success, not proof of all invalid requests or failed commits.
+
+`wkglobal.h` declares a different legacy host thunk family and is included by `wkglobal.c`; the inspected original `sources` and current graph select neither that body nor header as the `wkmem` provider. Original KERNEL dispatch marks `GLOBALALLOC` as `LOCALAPI`, and original guest `kernel31` owns the corresponding local global-memory operation. This supports an unselected alternative host-header role for the inspected profile, not absence of GlobalAlloc behavior nor proof about every historical configuration.
+
+| Owned key | Suggested role | Preserved capability/verification |
+| --- | --- | --- |
+| `wow32/wkmem.h` | Partial: active original typed interface with selected-object and bounded valid-operation evidence. | S11/S14 must verify actual worker binding, normal alloc/free, invalid/repeated free, commit/decommit failure and guest retirement. |
+| `wow32/wkglobal.h` | Excluded only as unselected historical host thunk declaration in this profile. | Keep original guest KERNEL GlobalAlloc/free/lock semantics, cross-boundary helpers and any other configuration explicitly in scope. |
+
+The source-level allocator follow-up identifies an original `flags & HDR_VALID_ALLOC != HDR_VALID_ALLOC` precedence condition which cannot enforce the intended flag check, plus a commit-failure rollback concern. The normal documented guest caller has narrower inputs, and existing evidence has not reproduced product corruption; verify reachability, installed provider, accounting and observable failure before selecting a minimal correction. Do not introduce an independent allocator or modify guest. No new tests or functional-completion percentage are claimed.

@@ -1,0 +1,9 @@
+# S10 part 9: duplicate historical DDE data declaration
+
+Only owned key `wow32/wowdde.h` receives a role recommendation. `dde-header-observer.py` records source-edition hashes, bounded include references and the selected `wdde.obj` Ninja dependency; reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/cross-369/dde-header-observer.py`. No product, guest, graph or shared ledger was changed.
+
+`wowdde.h` is byte-identical to both originals and declares only `DDEDATA16` and `DDEDATA32`. The corresponding structures are declared in `wdde.h`; `precomp.h` includes `wdde.h` and the selected `wdde.obj` has a VALID dependency on that exact path. The bounded current source search finds no include of `wowdde.h`. `wdde.c` consumes the structures and implements the selected classic DDE alias/message behavior. `wdde.c` and `wdde.h` have current registered differences, so this does not make those files byte-identical or assert every branch has original behavior.
+
+`docs/history/m0-t465-closure.md` records a bounded real guest/native classic DDE conversation, rejected conversion rollback, alias fixture and task-loss witness. It expressly excludes DDEML, cross-worker DDE, arbitrary peer loss and malformed peers; these remain feature obligations, not consequences of this header disposition.
+
+Recommendation: classify `wow32/wowdde.h` **excluded as a duplicate, unselected historical declaration in the inspected profile**; the selected `wdde.h` types and classic DDE capability remain in scope. Alternate source paths, preprocessing configurations, layout/packing across compiler profiles and binary consumers were not exhaustively audited. S14 must retain data format conversion, alias/guest buffer ownership, real peer/task loss, callback/reentry and `DDEAddhandle` failure recovery tests. No new runtime test or permission to remove the file is implied.

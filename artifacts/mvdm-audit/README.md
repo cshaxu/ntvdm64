@@ -93,6 +93,20 @@ The [part 7 guest inventory](nine-way/part-7/wow16-review.md) and
 package identities and the observed missing host exports without claiming
 guest reachability or an exercised failure. Its [external raster inventory](nine-way/part-7/external-mini-review.md)
 likewise remains pending provider relevance.
+Additional owner reviews cover [MSCDEX](nine-way/part-5/mscdex-semantic-reconciliation.md),
+[VDD examples](nine-way/part-5/vdd-examples-semantic-reconciliation.md),
+[debugger](nine-way/part-5/debugger-semantic-reconciliation.md),
+[environment helper](nine-way/part-5/get-env-semantic-reconciliation.md),
+[USER subclassing](nine-way/part-8/user-subclass-semantic-reconciliation.md),
+[generated thunks](nine-way/part-8/user-generated-thunks-reconciliation.md),
+[MMSYSTEM task packaging](nine-way/part-7/mmtask-review.md), and
+[multimedia driver](nine-way/part-7/multimedia-driver-review.md) and
+[metafile](nine-way/part-7/gdi-metafile-provider-review.md) boundaries.
+[Winsock](cross-369/winsock-table-disposition.md),
+[kernel memory](cross-369/kernel-memory-header-disposition.md),
+[DDE declarations](cross-369/dde-header-disposition.md) and
+[resource interface](cross-369/resource-interface-disposition.md) reports
+distinguish selected original paths from untested failures and retirement.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
