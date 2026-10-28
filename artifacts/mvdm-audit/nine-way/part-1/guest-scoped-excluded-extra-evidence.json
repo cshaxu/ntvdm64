@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "path": "dos/v86/cmd/setver/parse.c",
+      "basis": "",
+      "prior": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/setver/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/setver/makefile: inline parse.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for parse.c",
+      "evidence": "dos-command-input-review.md; dos-command-input-observations.json",
+      "remaining": "Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17."
+    },
+    {
+      "path": "dos/v86/cmd/setver/usa-ms/message.h",
+      "basis": "",
+      "prior": "historical-guest-build-source-file-only; setver/makefile: message.h <- $(COUNTRY)\\message.h; copy locale input into working directory -> COUNTRY=usa-ms branch: usa-ms/message.h equals retained local message.h byte-for-byte -> setver.c:69 includes message.h; setver.obj -> inline link16 SETVER.EXE",
+      "evidence": "dos-command-input-review.md; dos-command-input-observations.json",
+      "remaining": "Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17."
+    },
+    {
+      "path": "dos/v86/dev/country/nls862.inc",
+      "basis": "Original historical declaration/resource/tool input role: dos/v86/dev/country/country.asm:2009 include nls862.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/dev/country/country.asm:2009 include nls862.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/dev/country/nls865.inc",
+      "basis": "Original historical declaration/resource/tool input role: dos/v86/dev/country/country.asm:2012 include nls865.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/dev/country/country.asm:2012 include nls865.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/dev/country/nls869.inc",
+      "basis": "Original historical declaration/resource/tool input role: dos/v86/dev/country/country.asm:2014 include nls869.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/dev/country/country.asm:2014 include nls869.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/dev/country/nls93x.inc",
+      "basis": "Original historical declaration/resource/tool input role: dos/v86/dev/country/country.asm:2015 include nls93x.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/dev/country/country.asm:2015 include nls93x.inc; makefile:18-24 MASM country.obj -> link16 country.exe -> reloc country.sys",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/divmes.inc",
+      "basis": "Original historical declaration/resource/tool input role: dos/v86/doskrnl/dos/dosmes.inc:72 includes divmes.inc; msdosme.asm:16 includes dosmes.inc; makefile:78-86,308-322 msdosme.obj -> ntdos.sys; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/doskrnl/dos/dosmes.inc:72 includes divmes.inc; msdosme.asm:16 includes dosmes.inc; makefile:78-86,308-322 msdosme.obj -> ntdos.sys",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/h/io.h",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/setver/setver.c:65 #include <io.h>; setver/makefile:11,48-54 uses ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> setver.obj -> link16 SETVER.EXE; no local io.h; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/setver/setver.c:65 #include <io.h>; setver/makefile:11,48-54 uses ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> setver.obj -> link16 SETVER.EXE; no local io.h",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/h/stdlib.h",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/mem/mem.c:66 #include \"stdlib.h\"; mem/makefile:11-13,44-50,80-82 includes ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> mem.obj -> link16 MEM.EXE; no local stdlib.h; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/mem.c:66 #include \"stdlib.h\"; mem/makefile:11-13,44-50,80-82 includes ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> mem.obj -> link16 MEM.EXE; no local stdlib.h",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/h/string.h",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/mem/mem.c:65 #include \"string.h\"; mem/makefile:11-13,44-50,80-82 includes ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> mem.obj -> link16 MEM.EXE; no local string.h; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/mem.c:65 #include \"string.h\"; mem/makefile:11-13,44-50,80-82 includes ../../make.inc:47-57,90-91 CL16 -I. -I../../h -> mem.obj -> link16 MEM.EXE; no local string.h",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/h/version.h",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/mem/mem.c:69 #include \"version.h\"; mem/makefile:11-13,44-50,80-82 explicitly depends $(hinc)/version.h; ../../make.inc:47-57,90-91 CL16 -> MEM.EXE; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/mem.c:69 #include \"version.h\"; mem/makefile:11-13,44-50,80-82 explicitly depends $(hinc)/version.h; ../../make.inc:47-57,90-91 CL16 -> MEM.EXE",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/inc/dirent.inc",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/command/tdata.asm:73 INCLUDE dirent.inc; command/makefile:341,514-535 tdata.obj -> link16 COMMAND.COM; make.inc:44-47 -I. -I../../inc; no local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/command/tdata.asm:73 INCLUDE dirent.inc; command/makefile:341,514-535 tdata.obj -> link16 COMMAND.COM; make.inc:44-47 -I. -I../../inc; no local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/inc/dseg.inc",
+      "basis": "historical-guest-build-source-file-only; dos/v86/cmd/keyb/keybcmd.asm:139 INCLUDE DSEG.INC; keyb/makefile:28-44,76-87 $(com)/dseg.inc -> keybcmd.obj -> link16 KEYB; make.inc:44-47 -I. -I../../inc; no local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/cmd/keyb/keybcmd.asm:139 INCLUDE DSEG.INC; keyb/makefile:28-44,76-87 $(com)/dseg.inc -> keybcmd.obj -> link16 KEYB; make.inc:44-47 -I. -I../../inc; no local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "dos/v86/inc/umb.inc",
+      "basis": "historical-guest-build-source-file-only; dos/v86/doskrnl/bios/sysconf.asm:33 INCLUDE umb.inc; bios/makefile:48-52,74-80 sysconf.obj -> link16 msbio_4.lnk -> NTIO.SYS; make.inc:44-47 includes ../../inc; no local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; dos/v86/doskrnl/bios/sysconf.asm:33 INCLUDE umb.inc; bios/makefile:48-52,74-80 sysconf.obj -> link16 msbio_4.lnk -> NTIO.SYS; make.inc:44-47 includes ../../inc; no local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "wow16/inc/cpl.h",
+      "basis": "historical-guest-build-source-file-only; wow16/mmsystem/mmsex.c:18 includes <cpl.h>; mmsystem/makefile:44-57,79-85,92-105 debug OBJD mmsex.obj -> MMSYSTEM.DLL; -I../inc, no mmsystem-local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; wow16/mmsystem/mmsex.c:18 includes <cpl.h>; mmsystem/makefile:44-57,79-85,92-105 debug OBJD mmsex.obj -> MMSYSTEM.DLL; -I../inc, no mmsystem-local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "wow16/inc/gpfix.inc",
+      "basis": "historical-guest-build-source-file-only; wow16/kernel31/atom.asm:4 INCLUDE gpfix.inc; kernel31/makefile:125-127,179-183,537-541,346-350 atom.obj -> krnl386.lnk -> kernel.exe; -I../inc, no kernel31-local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; wow16/kernel31/atom.asm:4 INCLUDE gpfix.inc; kernel31/makefile:125-127,179-183,537-541,346-350 atom.obj -> krnl386.lnk -> kernel.exe; -I../inc, no kernel31-local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "wow16/inc/mmddk.h",
+      "basis": "historical-guest-build-source-file-only; wow16/mmsystem/joy.c:28 includes \"mmddk.h\"; mmsystem/makefile:12,32-39,79-85,92-105,223 joy.obj -> link16 MMSYSTEM.DLL; -I../inc, no mmsystem-local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; wow16/mmsystem/joy.c:28 includes \"mmddk.h\"; mmsystem/makefile:12,32-39,79-85,92-105,223 joy.obj -> link16 MMSYSTEM.DLL; -I../inc, no mmsystem-local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    },
+    {
+      "path": "wow16/inc/winexp.h",
+      "basis": "historical-guest-build-source-file-only; wow16/user/wsprintf.c:27 includes \"winexp.h\"; user/makefile:25-30,89,103-105,216,268-270 wsprintf.obj -> link16 USER.EXE; CINCS includes ../inc unless external INCLUDE; no user-local copy; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+      "prior": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; shared-guest-include-role-dispositions.csv; shard-1/shared-guest-include-owner-review.csv; wow16/user/wsprintf.c:27 includes \"winexp.h\"; user/makefile:25-30,89,103-105,216,268-270 wsprintf.obj -> link16 USER.EXE; CINCS includes ../inc unless external INCLUDE; no user-local copy",
+      "remaining": "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained."
+    }
+  ],
+  "limits": "Scoped guest source/declaration evidence only; not all remaining exclusions audited, no capability restored."
+}
