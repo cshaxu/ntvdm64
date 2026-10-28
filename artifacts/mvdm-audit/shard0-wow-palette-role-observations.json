@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "867f8291d",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-palette-image-observations.json",
+      "sha256": "DA120041D2E0418FA47C0909DCEBD35DA1ADE4D246EE832E26DA8E3E6A979F10"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Initial palette source and table bindings only; no guest behavior acceptance"
+}

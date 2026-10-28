@@ -1,0 +1,219 @@
+{
+  "result": "pass",
+  "gdi": {
+    "result": "pass",
+    "sources": [
+      {
+        "name": "wgpal.c",
+        "sha256": "942BD3C12615416A532638DF4B53A08E963BD1E60DD0D081FD34765ACE0872C8"
+      },
+      {
+        "name": "wowtbl.c",
+        "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+      },
+      {
+        "name": "wgtbl2.h",
+        "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+      },
+      {
+        "name": "wutbl2.h",
+        "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+      },
+      {
+        "name": "wktbl2.h",
+        "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+      }
+    ],
+    "gdi_table_base": 851,
+    "owners": [
+      {
+        "owner": "wgpal",
+        "object_sha256": "194EFBDB7C9C632C434644CB4A2FC2D6CC29062C4884442A69E2A8DB74439D59",
+        "dependency": "obj/wgpal.obj: #deps 126, deps mtime 8147760846484926 (VALID)",
+        "entries": [
+          {
+            "ordinal": 360,
+            "table_index": 1211,
+            "thunk": "WG32CreatePalette",
+            "binding": {
+              "name": "_WG32CreatePalette@4",
+              "va": 268515552,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 92,
+              "relocation_words": 6
+            }
+          },
+          {
+            "ordinal": 363,
+            "table_index": 1214,
+            "thunk": "WG32GetPaletteEntries",
+            "binding": {
+              "name": "_WG32GetPaletteEntries@4",
+              "va": 268515680,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 94,
+              "relocation_words": 5
+            }
+          },
+          {
+            "ordinal": 364,
+            "table_index": 1215,
+            "thunk": "WG32SetPaletteEntries",
+            "binding": {
+              "name": "_WG32SetPaletteEntries@4",
+              "va": 268516144,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 92,
+              "relocation_words": 5
+            }
+          },
+          {
+            "ordinal": 366,
+            "table_index": 1217,
+            "thunk": "WG32UpdateColors",
+            "binding": {
+              "name": "_WG32UpdateColors@4",
+              "va": 268516272,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 28,
+              "relocation_words": 2
+            }
+          },
+          {
+            "ordinal": 367,
+            "table_index": 1218,
+            "thunk": "WG32AnimatePalette",
+            "binding": {
+              "name": "_WG32AnimatePalette@4",
+              "va": 268515456,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 83,
+              "relocation_words": 5
+            }
+          },
+          {
+            "ordinal": 368,
+            "table_index": 1219,
+            "thunk": "WG32ResizePalette",
+            "binding": {
+              "name": "_WG32ResizePalette@4",
+              "va": 268516096,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 33,
+              "relocation_words": 2
+            }
+          },
+          {
+            "ordinal": 370,
+            "table_index": 1221,
+            "thunk": "WG32GetNearestPaletteIndex",
+            "binding": {
+              "name": "_WG32GetNearestPaletteIndex@4",
+              "va": 268515648,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 30,
+              "relocation_words": 2
+            }
+          },
+          {
+            "ordinal": 373,
+            "table_index": 1224,
+            "thunk": "WG32SetSystemPaletteUse",
+            "binding": {
+              "name": "_WG32SetSystemPaletteUse@4",
+              "va": 268516240,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 32,
+              "relocation_words": 2
+            }
+          },
+          {
+            "ordinal": 374,
+            "table_index": 1225,
+            "thunk": "WG32GetSystemPaletteUse",
+            "binding": {
+              "name": "_WG32GetSystemPaletteUse@4",
+              "va": 268516064,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 27,
+              "relocation_words": 2
+            }
+          },
+          {
+            "ordinal": 375,
+            "table_index": 1226,
+            "thunk": "WG32GetSystemPaletteEntries",
+            "binding": {
+              "name": "_WG32GetSystemPaletteEntries@4",
+              "va": 268515776,
+              "function": true,
+              "owner": "wgpal.obj",
+              "bytes": 275,
+              "relocation_words": 7
+            }
+          }
+        ]
+      }
+    ],
+    "inputs": [
+      {
+        "path": "assets\\release\\WOW32.DLL",
+        "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+      },
+      {
+        "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+        "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+      },
+      {
+        "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+        "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+      },
+      {
+        "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+        "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+      },
+      {
+        "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+        "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+      }
+    ],
+    "scope": "Original source, linked initial GDI pointers and masked code bytes; no guest dispatch or callback execution claim"
+  },
+  "user_table_base": 311,
+  "user_entries": [
+    {
+      "ordinal": 282,
+      "thunk": "WU32SelectPalette",
+      "binding": {
+        "name": "_WU32SelectPalette@4",
+        "va": 268516336,
+        "function": true,
+        "owner": "wgpal.obj",
+        "bytes": 60,
+        "relocation_words": 4
+      }
+    },
+    {
+      "ordinal": 283,
+      "thunk": "WU32RealizePalette",
+      "binding": {
+        "name": "_WU32RealizePalette@4",
+        "va": 268516304,
+        "function": true,
+        "owner": "wgpal.obj",
+        "bytes": 27,
+        "relocation_words": 2
+      }
+    }
+  ],
+  "scope": "Original source and initial GDI/USER table bindings; not guest behavior acceptance"
+}

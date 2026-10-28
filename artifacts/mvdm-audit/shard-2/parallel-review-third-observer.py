@@ -19,13 +19,13 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest().upper()
 
 
-def inspect():
+def inspect(owners=OWNERS):
     h = runpy.run_path('artifacts/mvdm-audit/host-tail-image-observer.py')
     image_path = Path('assets/release/WOW32.DLL')
     image, cached = h['Image'](image_path), h['Image'](BUILD / 'wow32.dll')
     assert image.base == cached.base and image.code == cached.code
     assert all(image.data[s:e] == cached.data[s:e] for s, e, _ in image.code)
-    names = ('wgfont.c', 'wgtext.c', 'wgmeta.c', 'wowtbl.c', 'wgtbl2.h', 'wutbl2.h', 'wktbl2.h')
+    names = tuple(owner + '.c' for owner in owners) + ('wowtbl.c', 'wgtbl2.h', 'wutbl2.h', 'wktbl2.h')
     sources = []
     for name in names:
         assert sha(SRC / name) == sha(ORIG[0] / name) == sha(ORIG[1] / name)
@@ -49,7 +49,7 @@ def inspect():
     base = len(table_names[0]) + len(table_names[1]) + 2
     assert base == 851
     output = []
-    for owner in OWNERS:
+    for owner in owners:
         target = f'obj/{owner}.obj'
         assert any(line.startswith('build ' + target + ':') for line in graph.splitlines())
         assert target in next(line for line in graph.splitlines() if line.startswith('build wow32.dll | wow32.lib:')).split()
@@ -73,7 +73,7 @@ def inspect():
             assert value == (symbol['va'] + addend) & 0xffffffff
             entries.append(dict(ordinal=ordinal, table_index=base + ordinal, thunk=name,
                                 binding=h['bind'](image, owner_obj, symbol)))
-        assert len(entries) == {'wgfont': 8, 'wgtext': 12, 'wgmeta': 8}[owner]
+        assert len(entries) == {'wgfont': 8, 'wgtext': 12, 'wgmeta': 8, 'wgpal': 10}[owner]
         output.append(dict(owner=owner, object_sha256=sha(BUILD / target), dependency=dep, entries=entries))
     return dict(result='pass', sources=sources, gdi_table_base=base, owners=output,
         inputs=[dict(path=str(p), sha256=sha(p)) for p in (image_path, BUILD / 'wow32.dll',

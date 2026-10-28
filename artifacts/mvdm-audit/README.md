@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [WOW palette checkpoint](shard-0/wow-palette-image-review.md) binds
+initial GDI and USER entries while retaining guest and copyback boundaries.
+
 The [C-VID declaration checkpoint](shard-0/cvidc-declaration-review.md)
 retains four selected compiler contexts with runtime boundaries open.
 

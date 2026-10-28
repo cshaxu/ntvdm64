@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1396,
+    "pending": 1395,
     "excluded": 2656,
-    "partial": 579,
+    "partial": 580,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Four C-VID declaration owners are partial; ABI, behavior and lifecycle remain open."
+  "note": "Palette owner is partial; guest behavior, host short-result copyback and lifecycle remain open."
 }
