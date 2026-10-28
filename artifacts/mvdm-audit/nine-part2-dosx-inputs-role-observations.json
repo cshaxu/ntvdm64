@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "74ce4d62a",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "nine-part2-dosx-inputs-observations.json",
+      "sha256": "21331B09EFF410CCD0DF5B42E319921C89913818BF8B781F00B597DD2A1F88CD"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "DOSX guest build input file roles only"
+}

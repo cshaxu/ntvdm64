@@ -1,0 +1,1694 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "dpmi/486/dxboot.asm",
+      "path": "dpmi/486/dxboot.asm",
+      "hashes": [
+        "B22892C24496FDF6C88247C44FE90495475D1D9CBDAFD6B0A3F5F3BD5DFD4077",
+        "B22892C24496FDF6C88247C44FE90495475D1D9CBDAFD6B0A3F5F3BD5DFD4077",
+        "B22892C24496FDF6C88247C44FE90495475D1D9CBDAFD6B0A3F5F3BD5DFD4077"
+      ],
+      "literal_reference_count": 5,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 2,
+          "text": "TITLE   DXBOOT.ASM -- Dos Extender Startup Code"
+        },
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 8,
+          "text": ";*      DXBOOT.ASM      -   Dos Extender Startup Code           *"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 15,
+          "text": ";*  the Dos Extender.  The module DXBOOT.ASM contains the code  *"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 109,
+          "text": "$(DEST486)\\dxboot.obj dxboot.lst: 486\\dxboot.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 15,
+          "text": ";*  the Dos Extender.  The module DXBOOT.ASM contains the code  *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/486/dxutil.asm",
+      "path": "dpmi/486/dxutil.asm",
+      "hashes": [
+        "24A0A2417FCF2AFA40DE1C293EA28EF94FF479FA9224126AFBDA77A542AD6CB8",
+        "24A0A2417FCF2AFA40DE1C293EA28EF94FF479FA9224126AFBDA77A542AD6CB8",
+        "24A0A2417FCF2AFA40DE1C293EA28EF94FF479FA9224126AFBDA77A542AD6CB8"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 2,
+          "text": "TITLE   DXUTIL.ASM -- Dos Extender Miscellaneous Routines"
+        },
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 8,
+          "text": ";*      DXUTIL.ASM      -   Dos Extender Miscellaneous          *"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 198,
+          "text": "$(DEST486)\\dxutil.obj dxutil.lst: 486\\dxutil.asm ../inc/bop.inc ../inc/dpmi.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/cmacros.mas",
+      "path": "dpmi/cmacros.mas",
+      "hashes": [
+        "656035CC4C110FCD13C99FC77FD9E61F2AFDDD09EAA0B794FBBAB4B9B58F7D34",
+        "656035CC4C110FCD13C99FC77FD9E61F2AFDDD09EAA0B794FBBAB4B9B58F7D34",
+        "656035CC4C110FCD13C99FC77FD9E61F2AFDDD09EAA0B794FBBAB4B9B58F7D34"
+      ],
+      "literal_reference_count": 0,
+      "literal_references": []
+    },
+    {
+      "key": "dpmi/dosx.def",
+      "path": "dpmi/dosx.def",
+      "hashes": [
+        "8ECE5C5CF5FA3710604C3A4B5AA0080E184D1BD9A744A53A9129797D2A9390B5",
+        "8ECE5C5CF5FA3710604C3A4B5AA0080E184D1BD9A744A53A9129797D2A9390B5",
+        "8ECE5C5CF5FA3710604C3A4B5AA0080E184D1BD9A744A53A9129797D2A9390B5"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 78,
+          "text": "$(DEST486)\\dosx.exe: $(OBJS486) dosx.lnk dosx.def"
+        },
+        {
+          "path": "dpmi/mk.cmd",
+          "line": 43,
+          "text": "nmake SRC=\"..\" DEST=\"rom\" OPTIONS=\"-DDEBUG=1 -DROM=1\" VCPI=\"\" LINKCMD=\"dosx.exe/far/ma,dosx.map,,$(SRC)\\dosx.def;\""
+        },
+        {
+          "path": "dpmi/mk.cmd",
+          "line": 53,
+          "text": "nmake SRC=\"..\" DEST=\"rrom\" OPTIONS=\"-DROM=1\" VCPI=\"\" LINKCMD=\"dosx.exe/far/ma,dosx.map,,$(SRC)\\dosx.def;\""
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxboot.asm",
+      "path": "dpmi/dxboot.asm",
+      "hashes": [
+        "4CE5AF62219684927A434CA9FD515A19E6BEEC5C8661662BFA3BAE0DB8782FB8",
+        "4CE5AF62219684927A434CA9FD515A19E6BEEC5C8661662BFA3BAE0DB8782FB8",
+        "4CE5AF62219684927A434CA9FD515A19E6BEEC5C8661662BFA3BAE0DB8782FB8"
+      ],
+      "literal_reference_count": 5,
+      "literal_references": [
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 15,
+          "text": ";*  the Dos Extender.  The module DXBOOT.ASM contains the code  *"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 109,
+          "text": "$(DEST486)\\dxboot.obj dxboot.lst: 486\\dxboot.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 2,
+          "text": "TITLE   DXBOOT.ASM -- Dos Extender Startup Code"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 8,
+          "text": ";*      DXBOOT.ASM      -   Dos Extender Startup Code           *"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 15,
+          "text": ";*  the Dos Extender.  The module DXBOOT.ASM contains the code  *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxbug.asm",
+      "path": "dpmi/dxbug.asm",
+      "hashes": [
+        "A05FE8E046622D798E924BDE43BB026CAB726F4E44512E19A821B661211C0E33",
+        "A05FE8E046622D798E924BDE43BB026CAB726F4E44512E19A821B661211C0E33",
+        "A05FE8E046622D798E924BDE43BB026CAB726F4E44512E19A821B661211C0E33"
+      ],
+      "literal_reference_count": 1,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 114,
+          "text": "$(DEST486)\\dxbug.obj dxbug.lst: dxbug.asm ./cmacros.inc gendefs.inc pmdefs.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxdisk.asm",
+      "path": "dpmi/dxdisk.asm",
+      "hashes": [
+        "C1CB4A2568C56B1C12C028A0B296A3AE3E6D81407096909C37F720116E24E550",
+        "C1CB4A2568C56B1C12C028A0B296A3AE3E6D81407096909C37F720116E24E550",
+        "C1CB4A2568C56B1C12C028A0B296A3AE3E6D81407096909C37F720116E24E550"
+      ],
+      "literal_reference_count": 1,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 118,
+          "text": "$(DEST486)\\dxdisk.obj dxdisk.lst: dxdisk.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxend.asm",
+      "path": "dpmi/dxend.asm",
+      "hashes": [
+        "0430786650C2F3FF59E809F7700A514905000C50924500B5765BCE699DE96550",
+        "0430786650C2F3FF59E809F7700A514905000C50924500B5765BCE699DE96550",
+        "0430786650C2F3FF59E809F7700A514905000C50924500B5765BCE699DE96550"
+      ],
+      "literal_reference_count": 2,
+      "literal_references": [
+        {
+          "path": "dpmi/dxendpm.asm",
+          "line": 20,
+          "text": ";*  08/02/89 jimmat   Split out from dxend.asm\t\t\t*"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 133,
+          "text": "$(DEST486)\\dxend.obj dxend.lst: dxend.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxendpm.asm",
+      "path": "dpmi/dxendpm.asm",
+      "hashes": [
+        "D50EF1DEDDA80FE22B75CBB8C7F5CAADFBE30125D0A687047E2A5D52E31251D0",
+        "D50EF1DEDDA80FE22B75CBB8C7F5CAADFBE30125D0A687047E2A5D52E31251D0",
+        "D50EF1DEDDA80FE22B75CBB8C7F5CAADFBE30125D0A687047E2A5D52E31251D0"
+      ],
+      "literal_reference_count": 2,
+      "literal_references": [
+        {
+          "path": "dpmi/dxend.asm",
+          "line": 26,
+          "text": ";*  08/02/89 jimmat   Moved CodeEndPM to DXENDPM.ASM\t\t*"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 137,
+          "text": "$(DEST486)\\dxendpm.obj dxendpm.lst: dxendpm.asm ./cmacros.inc segdefs.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxfunc.asm",
+      "path": "dpmi/dxfunc.asm",
+      "hashes": [
+        "EA8857F9497CEA63ECD9746AF3E16F222869F0C5C396CF78309CFC506546FBDC",
+        "EA8857F9497CEA63ECD9746AF3E16F222869F0C5C396CF78309CFC506546FBDC",
+        "EA8857F9497CEA63ECD9746AF3E16F222869F0C5C396CF78309CFC506546FBDC"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 143,
+          "text": "$(DEST486)\\dxfunc.obj dxfunc.lst: 486\\dxfunc.asm ../wow16/inc/dosx.inc ./cmacros.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 4,
+          "text": "TITLE   DXFUNC.ASM  --  Dos Extender Function Handlers"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 10,
+          "text": ";*      DXFUNC.ASM      - Dos Extender Function Handlers        *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxhpbios.asm",
+      "path": "dpmi/dxhpbios.asm",
+      "hashes": [
+        "7E421F0AEBADFE2A9410A9BD9782AB0D4A247190F3A23B3F585FA13DF0C664E9",
+        "7E421F0AEBADFE2A9410A9BD9782AB0D4A247190F3A23B3F585FA13DF0C664E9",
+        "7E421F0AEBADFE2A9410A9BD9782AB0D4A247190F3A23B3F585FA13DF0C664E9"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 1041,
+          "text": "; Hmmm, we have HP mouse code in dxhpbios.asm, but no clean up here..."
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 148,
+          "text": "$(DEST486)\\dxhpbios.obj dxhpbios.lst: dxhpbios.asm ./cmacros.inc dxrom.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 1042,
+          "text": "; Hmmm, we have HP mouse code in dxhpbios.asm, but no clean up here..."
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxint31.asm",
+      "path": "dpmi/dxint31.asm",
+      "hashes": [
+        "B9C065B8D193F6E8233757A6DE601EB1E299E6C1C1A1F5E839675E08635C2ADE",
+        "B9C065B8D193F6E8233757A6DE601EB1E299E6C1C1A1F5E839675E08635C2ADE",
+        "B9C065B8D193F6E8233757A6DE601EB1E299E6C1C1A1F5E839675E08635C2ADE"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 157,
+          "text": "$(DEST486)\\dxint31.obj dxint31.lst: 486\\dxint31.asm ../wow16/inc/int31.inc ./cmacros.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 2,
+          "text": "TITLE   DXINT31.ASM  -- Dos Extender Int 31h Handler"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 8,
+          "text": ";       DXINT31.ASM     --  DOS Extender Int 31h Handler"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxintr.asm",
+      "path": "dpmi/dxintr.asm",
+      "hashes": [
+        "EEE4DB25227BDD18C553E0AFE6078F0C5101F12FF50C948D266413A77FA1D333",
+        "EEE4DB25227BDD18C553E0AFE6078F0C5101F12FF50C948D266413A77FA1D333",
+        "EEE4DB25227BDD18C553E0AFE6078F0C5101F12FF50C948D266413A77FA1D333"
+      ],
+      "literal_reference_count": 8,
+      "literal_references": [
+        {
+          "path": "dpmi/dxint31.asm",
+          "line": 26,
+          "text": ";  05/12/89 jimmat  Original version (split out from DXINTR.ASM)"
+        },
+        {
+          "path": "dpmi/dxmain.asm",
+          "line": 726,
+          "text": ";       dxintr.asm).  DOS int 21h interrupts are vectored here."
+        },
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 328,
+          "text": ";   (Note: this comment copied almost unchanged from DXINTR.ASM)"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 162,
+          "text": "$(DEST486)\\dxintr.obj dxintr.lst: 486\\dxintr.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 26,
+          "text": ";  05/12/89 jimmat  Original version (split out from DXINTR.ASM)"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 2,
+          "text": "TITLE   DXINTR.ASM  -- Dos Extender Interrupt Reflector"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 8,
+          "text": ";*      DXINTR.ASM      -   Dos Extender Interrupt Reflector    *"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 723,
+          "text": ";       dxintr.asm).  DOS int 21h interrupts are vectored here."
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxmain.asm",
+      "path": "dpmi/dxmain.asm",
+      "hashes": [
+        "FCF32DB92738347F554B1636ADDAFC97FD9F1E406EAF72129BE6C8B6850F5DC2",
+        "FCF32DB92738347F554B1636ADDAFC97FD9F1E406EAF72129BE6C8B6850F5DC2",
+        "FCF32DB92738347F554B1636ADDAFC97FD9F1E406EAF72129BE6C8B6850F5DC2"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 167,
+          "text": "$(DEST486)\\dxmain.obj dxmain.lst: dxmain.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 2,
+          "text": "TITLE   DXMAIN.ASM -- Main Module for Dos Extender"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 8,
+          "text": ";*      DXMAIN.ASM      -   Dos Extender Main Module            *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxrom.asm",
+      "path": "dpmi/dxrom.asm",
+      "hashes": [
+        "FA663DD3CC73ACA572773FDEFDB772FB45095DAB511E95BEDC066E461F548E50",
+        "FA663DD3CC73ACA572773FDEFDB772FB45095DAB511E95BEDC066E461F548E50",
+        "FA663DD3CC73ACA572773FDEFDB772FB45095DAB511E95BEDC066E461F548E50"
+      ],
+      "literal_reference_count": 1,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 190,
+          "text": "$(DEST486)\\dxrom.obj dxrom.lst: dxrom.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxrom.inc",
+      "path": "dpmi/dxrom.inc",
+      "hashes": [
+        "3654E663F1BA86B6EFB6C26D4AABF178FA2501C04FF9B5741507295932195A95",
+        "3654E663F1BA86B6EFB6C26D4AABF178FA2501C04FF9B5741507295932195A95",
+        "3654E663F1BA86B6EFB6C26D4AABF178FA2501C04FF9B5741507295932195A95"
+      ],
+      "literal_reference_count": 31,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 90,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxdisk.asm",
+          "line": 36,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxemm.asm",
+          "line": 40,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 72,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxhpbios.asm",
+          "line": 35,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxint31.asm",
+          "line": 50,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxintr.asm",
+          "line": 97,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxmain.asm",
+          "line": 126,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 45,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxrom.asm",
+          "line": 34,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 73,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 70,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 109,
+          "text": "$(DEST486)\\dxboot.obj dxboot.lst: 486\\dxboot.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 118,
+          "text": "$(DEST486)\\dxdisk.obj dxdisk.lst: dxdisk.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 126,
+          "text": "$(DEST486)\\dxemm.obj dxemm.lst: dxemm.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 144,
+          "text": "dxrom.inc gendefs.inc pmdefs.inc segdefs.inc woaswapi.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 148,
+          "text": "$(DEST486)\\dxhpbios.obj dxhpbios.lst: dxhpbios.asm ./cmacros.inc dxrom.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 158,
+          "text": "dxrom.inc gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 162,
+          "text": "$(DEST486)\\dxintr.obj dxintr.lst: 486\\dxintr.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 167,
+          "text": "$(DEST486)\\dxmain.obj dxmain.lst: dxmain.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 181,
+          "text": "$(DEST486)\\dxnetbio.obj dxnetbio.lst: dxnetbio.asm ./cmacros.inc dxrom.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 190,
+          "text": "$(DEST486)\\dxrom.obj dxrom.lst: dxrom.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 194,
+          "text": "$(DEST486)\\dxstrt.obj dxstrt.lst: 486\\dxstrt.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 199,
+          "text": "./cmacros.inc dxrom.inc dxvcpi.inc gendefs.inc pmdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 90,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 74,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 50,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 97,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 126,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 73,
+          "text": "include dxrom.inc"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 65,
+          "text": "include dxrom.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxstrt.asm",
+      "path": "dpmi/dxstrt.asm",
+      "hashes": [
+        "E67463A6CA5BBE18447AC51123AB3DEC7F3DCCDB1606F10DBE611EE10580F295",
+        "E67463A6CA5BBE18447AC51123AB3DEC7F3DCCDB1606F10DBE611EE10580F295",
+        "E67463A6CA5BBE18447AC51123AB3DEC7F3DCCDB1606F10DBE611EE10580F295"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 194,
+          "text": "$(DEST486)\\dxstrt.obj dxstrt.lst: 486\\dxstrt.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 2,
+          "text": "TITLE   DXSTRT.ASM -- Dos Extender Startup Code"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 8,
+          "text": ";*      DXSTRT.ASM      -   Dos Extender Startup Code           *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxutil.asm",
+      "path": "dpmi/dxutil.asm",
+      "hashes": [
+        "C87933E2DA13CD0AA87E9ACF74DEA8254AF83672D4447624C3A775FB03730016",
+        "C87933E2DA13CD0AA87E9ACF74DEA8254AF83672D4447624C3A775FB03730016",
+        "C87933E2DA13CD0AA87E9ACF74DEA8254AF83672D4447624C3A775FB03730016"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 198,
+          "text": "$(DEST486)\\dxutil.obj dxutil.lst: 486\\dxutil.asm ../inc/bop.inc ../inc/dpmi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 2,
+          "text": "TITLE   DXUTIL.ASM -- Dos Extender Miscellaneous Routines"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 8,
+          "text": ";*      DXUTIL.ASM      -   Dos Extender Miscellaneous          *"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxvcpi.asm",
+      "path": "dpmi/dxvcpi.asm",
+      "hashes": [
+        "9961A8644A2E58C1671A91FF425D8990420884294940E30AB884E95AEFAB77BE",
+        "9961A8644A2E58C1671A91FF425D8990420884294940E30AB884E95AEFAB77BE",
+        "9961A8644A2E58C1671A91FF425D8990420884294940E30AB884E95AEFAB77BE"
+      ],
+      "literal_reference_count": 5,
+      "literal_references": [
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 229,
+          "text": "; ****** also in dxvcpi.asm ******"
+        },
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 233,
+          "text": "; ****** also in dxvcpi.asm ******"
+        },
+        {
+          "path": "dpmi/dxvcpi.inc",
+          "line": 47,
+          "text": "; See dxvcpi.asm for a rough sketch of the memory block that the"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 1145,
+          "text": "; Note: There is a copy of this routine in dxvcpi.asm and another"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 202,
+          "text": "$(DEST486)\\dxvcpi.obj dxvcpi.lst: dxvcpi.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxvcpi.inc",
+      "path": "dpmi/dxvcpi.inc",
+      "hashes": [
+        "CEAD5A03345A82029BBA9D42001A4DA6BF6CC1469F547E415B1545BAAF1F246A",
+        "CEAD5A03345A82029BBA9D42001A4DA6BF6CC1469F547E415B1545BAAF1F246A",
+        "CEAD5A03345A82029BBA9D42001A4DA6BF6CC1469F547E415B1545BAAF1F246A"
+      ],
+      "literal_reference_count": 23,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 87,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxdma.asm",
+          "line": 37,
+          "text": "include     dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxend.asm",
+          "line": 42,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxintr.asm",
+          "line": 94,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 99,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 69,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 67,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 41,
+          "text": "include         dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 56,
+          "text": "include \tdxvcpi.inc"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 997,
+          "text": "; IDT must be paragraph aligned!!!!! (guarenteed--see dxvcpi.inc)"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 109,
+          "text": "$(DEST486)\\dxboot.obj dxboot.lst: 486\\dxboot.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 122,
+          "text": "$(DEST486)\\dxdma.obj dxdma.lst: dxdma.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 133,
+          "text": "$(DEST486)\\dxend.obj dxend.lst: dxend.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 162,
+          "text": "$(DEST486)\\dxintr.obj dxintr.lst: 486\\dxintr.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 171,
+          "text": "$(DEST486)\\dxmmgr.obj dxmmgr.lst: dxmmgr.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 194,
+          "text": "$(DEST486)\\dxstrt.obj dxstrt.lst: 486\\dxstrt.asm ./cmacros.inc dxrom.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 199,
+          "text": "./cmacros.inc dxrom.inc dxvcpi.inc gendefs.inc pmdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 202,
+          "text": "$(DEST486)\\dxvcpi.obj dxvcpi.lst: dxvcpi.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 206,
+          "text": "$(DEST486)\\dxvcpibt.obj dxvcpibt.lst: dxvcpibt.asm ./cmacros.inc dxvcpi.inc \\"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 87,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 94,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 69,
+          "text": "include dxvcpi.inc"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 62,
+          "text": "include dxvcpi.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/dxvcpibt.asm",
+      "path": "dpmi/dxvcpibt.asm",
+      "hashes": [
+        "EFE782FD0E43FBD2DF9BEF47B92E1BE417EFDB9C1DEEC7DF0680416451E767C4",
+        "EFE782FD0E43FBD2DF9BEF47B92E1BE417EFDB9C1DEEC7DF0680416451E767C4",
+        "EFE782FD0E43FBD2DF9BEF47B92E1BE417EFDB9C1DEEC7DF0680416451E767C4"
+      ],
+      "literal_reference_count": 3,
+      "literal_references": [
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 100,
+          "text": ";       SetupPageTables in dxvcpibt.asm)"
+        },
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 288,
+          "text": ";\tin dxvcpibt.asm is discarded after initialization time."
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 206,
+          "text": "$(DEST486)\\dxvcpibt.obj dxvcpibt.lst: dxvcpibt.asm ./cmacros.inc dxvcpi.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/gendefs.inc",
+      "path": "dpmi/gendefs.inc",
+      "hashes": [
+        "063CA242B52D632DF9E06768FB759E0EFB675ECCC39886B18C3733AE0527CF72",
+        "063CA242B52D632DF9E06768FB759E0EFB675ECCC39886B18C3733AE0527CF72",
+        "063CA242B52D632DF9E06768FB759E0EFB675ECCC39886B18C3733AE0527CF72"
+      ],
+      "literal_reference_count": 56,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 81,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxbug.asm",
+          "line": 39,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxdisk.asm",
+          "line": 32,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxdma.asm",
+          "line": 33,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxemm.asm",
+          "line": 38,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxemm2.asm",
+          "line": 34,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxend.asm",
+          "line": 39,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxfind.asm",
+          "line": 30,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 67,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxhpbios.asm",
+          "line": 31,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxini.asm",
+          "line": 31,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxint31.asm",
+          "line": 40,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxintr.asm",
+          "line": 90,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxmain.asm",
+          "line": 123,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 94,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxmsg.asm",
+          "line": 32,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 40,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxoem.asm",
+          "line": 50,
+          "text": "include     gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxrom.asm",
+          "line": 32,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 66,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 58,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 31,
+          "text": "include         gendefs.inc"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 46,
+          "text": "include         gendefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 110,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 114,
+          "text": "$(DEST486)\\dxbug.obj dxbug.lst: dxbug.asm ./cmacros.inc gendefs.inc pmdefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 118,
+          "text": "$(DEST486)\\dxdisk.obj dxdisk.lst: dxdisk.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 122,
+          "text": "$(DEST486)\\dxdma.obj dxdma.lst: dxdma.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 126,
+          "text": "$(DEST486)\\dxemm.obj dxemm.lst: dxemm.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 130,
+          "text": "$(DEST486)\\dxemm2.obj dxemm2.lst: dxemm2.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 133,
+          "text": "$(DEST486)\\dxend.obj dxend.lst: dxend.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 140,
+          "text": "$(DEST486)\\dxfind.obj dxfind.lst: dxfind.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 144,
+          "text": "dxrom.inc gendefs.inc pmdefs.inc segdefs.inc woaswapi.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 149,
+          "text": "gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 153,
+          "text": "$(DEST486)\\dxini.obj dxini.lst: dxini.asm ./cmacros.inc gendefs.inc segdefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 158,
+          "text": "dxrom.inc gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 163,
+          "text": "gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 167,
+          "text": "$(DEST486)\\dxmain.obj dxmain.lst: dxmain.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 171,
+          "text": "$(DEST486)\\dxmmgr.obj dxmmgr.lst: dxmmgr.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 178,
+          "text": "$(DEST486)\\dxmsg.obj dxmsg.lst: dxmsg.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 182,
+          "text": "gendefs.inc interupt.inc netbios.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 186,
+          "text": "$(DEST486)\\dxoem.obj dxoem.lst: dxoem.asm ./cmacros.inc gendefs.inc pmdefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 190,
+          "text": "$(DEST486)\\dxrom.obj dxrom.lst: dxrom.asm ./cmacros.inc dxrom.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 195,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 199,
+          "text": "./cmacros.inc dxrom.inc dxvcpi.inc gendefs.inc pmdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 202,
+          "text": "$(DEST486)\\dxvcpi.obj dxvcpi.lst: dxvcpi.asm ./cmacros.inc dxvcpi.inc gendefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 207,
+          "text": "gendefs.inc pmdefs.inc prot386.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 211,
+          "text": "segdefs.inc gendefs.inc pmdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/ntnpxem.asm",
+          "line": 29,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 81,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 69,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 40,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 90,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 123,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 66,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 58,
+          "text": "include gendefs.inc"
+        },
+        {
+          "path": "dpmi/usa/dxmsg.asm",
+          "line": 32,
+          "text": "include     gendefs.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/hostdata.inc",
+      "path": "dpmi/hostdata.inc",
+      "hashes": [
+        "BFFF1443C09ABF02E55BF18EA511C70065E7E332A891653956E8B20ACD1AF330",
+        "BFFF1443C09ABF02E55BF18EA511C70065E7E332A891653956E8B20ACD1AF330",
+        "BFFF1443C09ABF02E55BF18EA511C70065E7E332A891653956E8B20ACD1AF330"
+      ],
+      "literal_reference_count": 6,
+      "literal_references": [
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 74,
+          "text": "include hostdata.inc"
+        },
+        {
+          "path": "dpmi/dxmain.asm",
+          "line": 133,
+          "text": "include hostdata.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 76,
+          "text": "include hostdata.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 76,
+          "text": "include hostdata.inc"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 131,
+          "text": "include hostdata.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 76,
+          "text": "include hostdata.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/netbios.inc",
+      "path": "dpmi/netbios.inc",
+      "hashes": [
+        "2DC5593E505AC700B600FA85B729AF6D5CCA8A5FC9F1B09F51DF54936CA3913C",
+        "2DC5593E505AC700B600FA85B729AF6D5CCA8A5FC9F1B09F51DF54936CA3913C",
+        "2DC5593E505AC700B600FA85B729AF6D5CCA8A5FC9F1B09F51DF54936CA3913C"
+      ],
+      "literal_reference_count": 2,
+      "literal_references": [
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 43,
+          "text": "include netbios.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 182,
+          "text": "gendefs.inc interupt.inc netbios.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/ntintr32.asm",
+      "path": "dpmi/ntintr32.asm",
+      "hashes": [
+        "0DF912D927861F9C883A9773513229AF1E3DC449ED3410805F7DFA0FA726825A",
+        "0DF912D927861F9C883A9773513229AF1E3DC449ED3410805F7DFA0FA726825A",
+        "0DF912D927861F9C883A9773513229AF1E3DC449ED3410805F7DFA0FA726825A"
+      ],
+      "literal_reference_count": 0,
+      "literal_references": []
+    },
+    {
+      "key": "dpmi/program.sed",
+      "path": "dpmi/program.sed",
+      "hashes": [
+        "8B4DB3C53679268BF6558A34DECE2CDD984DC86AE89D5836F56B6456203E30B7",
+        "8B4DB3C53679268BF6558A34DECE2CDD984DC86AE89D5836F56B6456203E30B7",
+        "8B4DB3C53679268BF6558A34DECE2CDD984DC86AE89D5836F56B6456203E30B7"
+      ],
+      "literal_reference_count": 1,
+      "literal_references": [
+        {
+          "path": "dpmi/makefile",
+          "line": 101,
+          "text": "includes $(INCLUDE) *.asm | sed -f program.sed>> makefile"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/prot386.inc",
+      "path": "dpmi/prot386.inc",
+      "hashes": [
+        "F7E6FD655EC14C1213E30B0960C6A4CA177EE9B36FB83028BEFE20C558ED1C9A",
+        "F7E6FD655EC14C1213E30B0960C6A4CA177EE9B36FB83028BEFE20C558ED1C9A",
+        "F7E6FD655EC14C1213E30B0960C6A4CA177EE9B36FB83028BEFE20C558ED1C9A"
+      ],
+      "literal_reference_count": 4,
+      "literal_references": [
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 264,
+          "text": "include prot386.inc"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 405,
+          "text": "include         prot386.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 203,
+          "text": "pmdefs.inc prot386.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 207,
+          "text": "gendefs.inc pmdefs.inc prot386.inc segdefs.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/segdefs.inc",
+      "path": "dpmi/segdefs.inc",
+      "hashes": [
+        "DFC56E901048C858C488127F20D6D57A0FFA2A03284906FB2F095C730EEF4BC2",
+        "DFC56E901048C858C488127F20D6D57A0FFA2A03284906FB2F095C730EEF4BC2",
+        "DFC56E901048C858C488127F20D6D57A0FFA2A03284906FB2F095C730EEF4BC2"
+      ],
+      "literal_reference_count": 57,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 80,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxbug.asm",
+          "line": 38,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxdisk.asm",
+          "line": 31,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxdma.asm",
+          "line": 32,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxemm.asm",
+          "line": 37,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxemm2.asm",
+          "line": 33,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxend.asm",
+          "line": 38,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxendpm.asm",
+          "line": 29,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxfind.asm",
+          "line": 29,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 66,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxhpbios.asm",
+          "line": 30,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxini.asm",
+          "line": 30,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxint31.asm",
+          "line": 39,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxintr.asm",
+          "line": 89,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxmain.asm",
+          "line": 122,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 95,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxmsg.asm",
+          "line": 31,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 39,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxoem.asm",
+          "line": 49,
+          "text": "include     segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxrom.asm",
+          "line": 31,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 65,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxutil.asm",
+          "line": 57,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxvcpi.asm",
+          "line": 30,
+          "text": "include         segdefs.inc"
+        },
+        {
+          "path": "dpmi/dxvcpibt.asm",
+          "line": 45,
+          "text": "include         segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 110,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 115,
+          "text": "segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 119,
+          "text": "interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 123,
+          "text": "interupt.inc pmdefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 127,
+          "text": "segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 130,
+          "text": "$(DEST486)\\dxemm2.obj dxemm2.lst: dxemm2.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 134,
+          "text": "pmdefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 137,
+          "text": "$(DEST486)\\dxendpm.obj dxendpm.lst: dxendpm.asm ./cmacros.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 140,
+          "text": "$(DEST486)\\dxfind.obj dxfind.lst: dxfind.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 144,
+          "text": "dxrom.inc gendefs.inc pmdefs.inc segdefs.inc woaswapi.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 149,
+          "text": "gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 153,
+          "text": "$(DEST486)\\dxini.obj dxini.lst: dxini.asm ./cmacros.inc gendefs.inc segdefs.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 158,
+          "text": "dxrom.inc gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 163,
+          "text": "gendefs.inc interupt.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 168,
+          "text": "pmdefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 172,
+          "text": "pmdefs.inc segdefs.inc woaswapi.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 178,
+          "text": "$(DEST486)\\dxmsg.obj dxmsg.lst: dxmsg.asm ./cmacros.inc gendefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 182,
+          "text": "gendefs.inc interupt.inc netbios.inc pmdefs.inc segdefs.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 187,
+          "text": "segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 191,
+          "text": "pmdefs.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 195,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 203,
+          "text": "pmdefs.inc prot386.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 207,
+          "text": "gendefs.inc pmdefs.inc prot386.inc segdefs.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 211,
+          "text": "segdefs.inc gendefs.inc pmdefs.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/ntnpxem.asm",
+          "line": 28,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 80,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 68,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 39,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 89,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxmain.asm",
+          "line": 122,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 65,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/486/dxutil.asm",
+          "line": 57,
+          "text": "include segdefs.inc"
+        },
+        {
+          "path": "dpmi/usa/dxmsg.asm",
+          "line": 31,
+          "text": "include     segdefs.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/smartdrv.inc",
+      "path": "dpmi/smartdrv.inc",
+      "hashes": [
+        "69F18CD56CF697593B1BEC1F7FBDE2023FAA065F0EE480BD22119C39A7165DA1",
+        "69F18CD56CF697593B1BEC1F7FBDE2023FAA065F0EE480BD22119C39A7165DA1",
+        "69F18CD56CF697593B1BEC1F7FBDE2023FAA065F0EE480BD22119C39A7165DA1"
+      ],
+      "literal_reference_count": 6,
+      "literal_references": [
+        {
+          "path": "dpmi/dxboot.asm",
+          "line": 84,
+          "text": "include smartdrv.inc"
+        },
+        {
+          "path": "dpmi/dxstrt.asm",
+          "line": 71,
+          "text": "include smartdrv.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 110,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 195,
+          "text": "gendefs.inc pmdefs.inc segdefs.inc smartdrv.inc ..\\inc\\intmac.inc"
+        },
+        {
+          "path": "dpmi/486/dxboot.asm",
+          "line": 84,
+          "text": "include smartdrv.inc"
+        },
+        {
+          "path": "dpmi/486/dxstrt.asm",
+          "line": 71,
+          "text": "include smartdrv.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/stackchk.inc",
+      "path": "dpmi/stackchk.inc",
+      "hashes": [
+        "DC0ECAB91E44B9CD2DFB7BCAC74473024FABBFD7404A472ABED685548CF26B29",
+        "DC0ECAB91E44B9CD2DFB7BCAC74473024FABBFD7404A472ABED685548CF26B29",
+        "DC0ECAB91E44B9CD2DFB7BCAC74473024FABBFD7404A472ABED685548CF26B29"
+      ],
+      "literal_reference_count": 13,
+      "literal_references": [
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 77,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/dxhpbios.asm",
+          "line": 38,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/dxint31.asm",
+          "line": 56,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/dxintr.asm",
+          "line": 104,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/dxnetbio.asm",
+          "line": 48,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 145,
+          "text": "stackchk.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 150,
+          "text": "stackchk.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 159,
+          "text": "stackchk.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 164,
+          "text": "stackchk.inc ..\\inc\\vdmtib.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 183,
+          "text": "stackchk.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 79,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/486/dxint31.asm",
+          "line": 56,
+          "text": "include stackchk.inc"
+        },
+        {
+          "path": "dpmi/486/dxintr.asm",
+          "line": 104,
+          "text": "include stackchk.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/woaswapi.inc",
+      "path": "dpmi/woaswapi.inc",
+      "hashes": [
+        "4623B37D079AA81C6EE2992F325FDC4FD23E8CA4C54217657E29DC9D491E6B95",
+        "4623B37D079AA81C6EE2992F325FDC4FD23E8CA4C54217657E29DC9D491E6B95",
+        "4623B37D079AA81C6EE2992F325FDC4FD23E8CA4C54217657E29DC9D491E6B95"
+      ],
+      "literal_reference_count": 5,
+      "literal_references": [
+        {
+          "path": "dpmi/dxfunc.asm",
+          "line": 70,
+          "text": "include woaswapi.inc"
+        },
+        {
+          "path": "dpmi/dxmmgr.asm",
+          "line": 97,
+          "text": "include woaswapi.inc"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 144,
+          "text": "dxrom.inc gendefs.inc pmdefs.inc segdefs.inc woaswapi.inc ..\\inc\\intmac.inc \\"
+        },
+        {
+          "path": "dpmi/makefile",
+          "line": 172,
+          "text": "pmdefs.inc segdefs.inc woaswapi.inc"
+        },
+        {
+          "path": "dpmi/486/dxfunc.asm",
+          "line": 72,
+          "text": "include woaswapi.inc"
+        }
+      ]
+    },
+    {
+      "key": "dpmi/wowmac.inc",
+      "path": "dpmi/wowmac.inc",
+      "hashes": [
+        "DB2088C6BA1501804931708C897E9F79C74AE639A64E21048079237FC2703008",
+        "DB2088C6BA1501804931708C897E9F79C74AE639A64E21048079237FC2703008",
+        "DB2088C6BA1501804931708C897E9F79C74AE639A64E21048079237FC2703008"
+      ],
+      "literal_reference_count": 0,
+      "literal_references": []
+    }
+  ],
+  "dosx_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "scope": "Literal references across retained DPMI source and recipes plus image identity; does not prove exact build provenance or runtime"
+}

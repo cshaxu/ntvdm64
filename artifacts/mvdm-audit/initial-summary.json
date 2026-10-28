@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1070,
-    "excluded": 2815,
+    "pending": 1063,
+    "excluded": 2822,
     "partial": 746,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Nine original guest images match ZIP; deployment and behavior remain distinct obligations."
+  "note": "Seven original part-2 DOSX build-file roles excluded; protected-mode behavior remains in scope."
 }

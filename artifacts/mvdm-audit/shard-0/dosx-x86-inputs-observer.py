@@ -32,7 +32,8 @@ def inspect():
         hashes = [sha((root / path).read_bytes()) for root in ROOTS]
         f = frozen[path]
         assert hashes == [f['current_sha256'], f['opennt_sha256'], f['opennt45_sha256']]
-        assert ledger[path]['shard'] == '0' and ledger[path]['status'] in ('pending', 'excluded')
+        assert int(ledger[path]['shard']) == int.from_bytes(hashlib.sha256(path.encode()).digest()[:8], 'big') % 4
+        assert ledger[path]['status'] in ('pending', 'excluded')
         if name in ASM:
             stem = Path(name).stem.lower()
             actual = name.replace('/', '\\')[:-4].lower()
