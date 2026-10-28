@@ -1,0 +1,30 @@
+{
+  "orig_sha256": "40550EA098C987667A0114709625B57D814AD25EB14E4286B5D644188ADC872D",
+  "modified_object_sha256": "CC02C2B585806AC4F7A33FCCBB048A18CD0130CD2492167F9D952B94776684FB",
+  "fixture_sha256": "334377841871DA56EFBF78E8819C0B7BAB930D5C8DE635205BB83664A22606AE",
+  "exe_sha256": "AEE450D3A400D55019579A33FC49EC58BC73BF8AE5021A4AD3439F1A18D7DCD0",
+  "rebindings": [
+    [
+      "__imp__GetFileTime@16",
+      "_hook_gft"
+    ],
+    [
+      "__imp__FileTimeToLocalFileTime@8",
+      "_hook_local"
+    ],
+    [
+      "__imp__FileTimeToDosDateTime@12",
+      "_hook_dos"
+    ],
+    [
+      "__imp__GetFileSize@8",
+      "_hook_size"
+    ],
+    [
+      "__imp__CloseHandle@4",
+      "_hook_close"
+    ]
+  ],
+  "exit_code": 0,
+  "output": "CALL case=0 open=1 close=0 err=0 cf=0 ax=0000 bp=1234\nCALL case=1 open=1 close=0 err=0 cf=0 ax=0000 bp=1234\nCALL case=2 open=1 close=0 err=0 cf=0 ax=0000 bp=1234\nCALL case=3 open=1 close=1 err=0 cf=0 ax=0000 bp=eeee\nCALL case=4 open=1 close=1 err=0 cf=0 ax=0000 bp=eeee\nCALL case=5 open=1 close=1 err=0 cf=0 ax=0000 bp=eeee\n"
+}

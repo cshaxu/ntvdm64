@@ -189,7 +189,7 @@ inc/wowexp.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate;
 inc/wowfax.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowgdi.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowinfo.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-inc/wowint.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+inc/wowint.h,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowkbd.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowkrn.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowmmcb.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
