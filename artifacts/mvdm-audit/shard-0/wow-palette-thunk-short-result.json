@@ -1,0 +1,40 @@
+{
+  "result": "controlled-counterexample",
+  "architecture": "x86",
+  "exit_code": 0,
+  "outputs": [
+    "short result=1 copied=16 first=4,5,6 tail=a5",
+    "invalid result=0 copied=16 first=a5"
+  ],
+  "extracted_sha256": {
+    "get_thunk_sha256": "7B3EDA00B11413671EF06FCB2040C180874B87F5BCAA164B87D888879F7B47C7",
+    "copy_sha256": "116A0BF860053D21F8186E9E21FC7AB5B77DBEC2657CACECB2CD85998F5B9B18"
+  },
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/wow_palette_thunk_short_fixture.c",
+      "sha256": "1C4213233291A2247DDAD53CE24A24EBCA0229C6DD18372037D5561BEA6F6125"
+    },
+    {
+      "path": "tests/observation/extract-wow-palette-thunk.py",
+      "sha256": "C711F6497D277111D91069D0FDB95C2B97E7A0AA0D727360B56F0B39A28ED9EC"
+    },
+    {
+      "path": "src/mvdm/wow32/wgpal.c",
+      "sha256": "942BD3C12615416A532638DF4B53A08E963BD1E60DD0D081FD34765ACE0872C8"
+    },
+    {
+      "path": "src/mvdm/wow32/wstruc.c",
+      "sha256": "91F0EB40AA660B339DB509C6650B08AD56A719343081C0B314B709D19C51A3B7"
+    },
+    {
+      "path": "build/t473-s10/palette-thunk-r1/probe.exe",
+      "sha256": "921B7421A9C1F82D358FAF03A4DE89B06361AF0BF13C5ABF7A217F35EFF8FE8A"
+    },
+    {
+      "path": "C:/Windows/SysWOW64/gdi32.dll",
+      "sha256": "7C3CB17BC41A00E5167A82AEF67D0DA4A09E73E6DEBA9ADDCDC8B20A90B5186C"
+    }
+  ],
+  "scope": "Original source bodies, real x86 GDI, controlled guest mapping and seeded heap; not actual linked WOW object or live guest"
+}

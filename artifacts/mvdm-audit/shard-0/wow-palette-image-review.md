@@ -37,3 +37,17 @@ The standalone host-only probe source is [wow_palette_host_short_test.c](../../.
 It was compiled as x86 with the MSVC `/MT` runtime and `gdi32.lib`; the
 recorded executed source copy is byte-identical to the retained file. It is
 not currently wired into the full product gate.
+
+## Controlled original-thunk counterexample
+
+The [controlled fixture receipt](wow-palette-thunk-short-result.json) executes
+exact extracted original thunk and copy bodies against real x86 GDI, with
+guest mapping and heap contents deliberately controlled. A request for four
+entries returned one but copied sixteen bytes, including seeded untouched
+tail bytes; an invalid palette returned zero and also copied sixteen bytes.
+This demonstrates the source-body behavior under those conditions, not an
+actual linked WOW32 invocation or a live guest manifestation. The
+[fixture](../../../tests/mvdm-host/wow_palette_thunk_short_fixture.c) and
+[extractor](../../../tests/observation/extract-wow-palette-thunk.py) retain the
+controlled boundary for later S16 regression and correction. The original
+source was not changed.
