@@ -1,6 +1,10 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 74 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 77 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [guest-keyboard-variants](shard-1/guest-keyboard-variants-review.md): [observer](shard-1/guest-keyboard-variants-observer.py), [receipt](shard-1/guest-keyboard-variants-observations.json).
+- [win16-win87em-guest](shard-2/win16-win87em-guest-review.md): [observer](shard-2/win16-win87em-guest-observer.py), [receipt](shard-2/win16-win87em-guest-observations.json).
+- [dos-c-headers](shard-3/dos-c-headers-role-review.md): [observer](shard-3/dos-c-headers-observer.py), [receipt](shard-3/dos-c-headers-observations.json).
 
 - [dpmi-buffer-state](shard-0/dpmi-buffer-state-review.md): [observer](shard-0/dpmi-buffer-state-observer.py), [receipt](shard-0/dpmi-buffer-state-observations.json).
 - [guest-write-supplement](shard-1/guest-write-supplement-review.md): [observer](shard-1/guest-write-supplement-observer.py), [receipt](shard-1/guest-write-supplement-observations.json).

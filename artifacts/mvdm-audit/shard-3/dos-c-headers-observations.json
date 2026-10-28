@@ -1,0 +1,114 @@
+{
+  "h/assert.h": {
+    "current": {
+      "size": 699,
+      "sha256": "6a32b3d4b878a7caffdb6ea632b951d5a6cafa4cb1e81e00c112d9dd8fe97cdc"
+    },
+    "opennt": {
+      "size": 699,
+      "sha256": "6a32b3d4b878a7caffdb6ea632b951d5a6cafa4cb1e81e00c112d9dd8fe97cdc"
+    },
+    "opennt45": {
+      "size": 699,
+      "sha256": "6a32b3d4b878a7caffdb6ea632b951d5a6cafa4cb1e81e00c112d9dd8fe97cdc"
+    }
+  },
+  "h/limits.h": {
+    "current": {
+      "size": 1553,
+      "sha256": "afe7f9b89ded5925deb4f4ff02c5bd6c7105f5770ee42fa6d6b2eceff20c193d"
+    },
+    "opennt": {
+      "size": 1553,
+      "sha256": "afe7f9b89ded5925deb4f4ff02c5bd6c7105f5770ee42fa6d6b2eceff20c193d"
+    },
+    "opennt45": {
+      "size": 1553,
+      "sha256": "afe7f9b89ded5925deb4f4ff02c5bd6c7105f5770ee42fa6d6b2eceff20c193d"
+    }
+  },
+  "h/malloc.h": {
+    "current": {
+      "size": 3097,
+      "sha256": "aa0cb86f9d6b0f475f339f0452fee810f321c61b3f0c9e23562077a5d32a76e4"
+    },
+    "opennt": {
+      "size": 3097,
+      "sha256": "aa0cb86f9d6b0f475f339f0452fee810f321c61b3f0c9e23562077a5d32a76e4"
+    },
+    "opennt45": {
+      "size": 3097,
+      "sha256": "aa0cb86f9d6b0f475f339f0452fee810f321c61b3f0c9e23562077a5d32a76e4"
+    }
+  },
+  "h/share.h": {
+    "current": {
+      "size": 554,
+      "sha256": "f72afe01ccafd4541e7289fc2d640056564d3e35a0948a03c8fbfd0368b1312d"
+    },
+    "opennt": {
+      "size": 554,
+      "sha256": "f72afe01ccafd4541e7289fc2d640056564d3e35a0948a03c8fbfd0368b1312d"
+    },
+    "opennt45": {
+      "size": 554,
+      "sha256": "f72afe01ccafd4541e7289fc2d640056564d3e35a0948a03c8fbfd0368b1312d"
+    }
+  },
+  "tools/src/h2inc/h2inc.c": {
+    "current": {
+      "size": 52184,
+      "sha256": "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163"
+    },
+    "opennt": {
+      "size": 52184,
+      "sha256": "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163"
+    },
+    "opennt45": {
+      "size": 52184,
+      "sha256": "d41ccc8bb473c1bb4c0fd6a7baf0d19b933602a2c9ef5a5b9660b2f4a79c8163"
+    }
+  },
+  "cmd/command/buildmsg.c": {
+    "current": {
+      "size": 40838,
+      "sha256": "4b9fe27d3c5f4bc93ccb18de85da8c5ff5e601b5db2d859f5e44a60572203c2a"
+    },
+    "opennt": {
+      "size": 40838,
+      "sha256": "4b9fe27d3c5f4bc93ccb18de85da8c5ff5e601b5db2d859f5e44a60572203c2a"
+    },
+    "opennt45": {
+      "size": 40838,
+      "sha256": "4b9fe27d3c5f4bc93ccb18de85da8c5ff5e601b5db2d859f5e44a60572203c2a"
+    }
+  },
+  "cmd/command/makefile": {
+    "current": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    },
+    "opennt45": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4"
+    }
+  },
+  "make.inc": {
+    "current": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    },
+    "opennt": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    },
+    "opennt45": {
+      "size": 3903,
+      "sha256": "e9d2e142803b748ce09ad7c6f91ac062c1a2f02493fdc7350e63b63db7836a4f"
+    }
+  }
+}

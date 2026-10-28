@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "b29a6fbab",
+  "candidate_count": 10,
+  "source_tables": [
+    {
+      "path": "shard-2/dosx-guest-build-observations.json",
+      "sha256": "E0CC26826772488B3627F9452B356A3C7CF422F101FFB2B6EA859B710DBFF418"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "DOSX image and historical input roles; no guest execution acceptance"
+}

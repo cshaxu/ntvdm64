@@ -1,0 +1,46 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/win87em/emds.asm",
+      "hashes": [
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B",
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B",
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/win87em/emoemwin.t1",
+      "hashes": [
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246",
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246",
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\makefile",
+      "sha256": "B76EC6E35F2C1285EF0C0930C4D534CA0E0A7533F8F4C3B4E53725ABE3C907A4"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\emulator.asm",
+      "sha256": "3835F5D7023D00BF0E6AA45E1AAA5A70411917A7DF99E3CC9EA1B7D932CA842E"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\emoemwin.asm",
+      "sha256": "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/WIN87EM.DLL",
+  "image_sha256": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+  "source_image_sha256": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+  "installed_path": "O:\\winnt\\system32\\WIN87EM.DLL",
+  "installed_sha256": "",
+  "scope": "Original emulator build profiles and guest image identity; not source-to-binary or floating-point behavior"
+}

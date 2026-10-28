@@ -1,0 +1,124 @@
+{
+  "result": "pass",
+  "ledger_sha256": "9AC25CC7F3534FC69276E85D998DFAC2D89A909CB1792FC7AD76E27F9288883A",
+  "entries": [
+    {
+      "path": "dos/v86/dev/keyboard/KEYBOARD.EXS",
+      "sha256": "C4BB078EC060EA3352DD307D690BE6227C6E5D699127518CAF9BD3085DF60BF1",
+      "reference": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.EXS",
+      "catalog_ids": "",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdffr120.asm",
+      "sha256": "F567591898FE1AFD787C912566CBF2B40DF7DE310C71C50A00CE55DE10C74FB9",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr120.asm",
+      "catalog_ids": "SRC:01d9183a675d9c98f68a;SRC:c820499b41f11fdf643d",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfjp.asm",
+      "sha256": "5FB7F0DFEF9D9160B2C7232159251A3F6891F3D14103ED808BFF45E698E3CD77",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfjp.asm",
+      "catalog_ids": "SRC:e1cf6782f423a810c5f1;SRC:f09eecdcde738ce571a3",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfru093.asm",
+      "sha256": "33C0B4705C26C82471BB45DF22CCBF1E25579BEB862AED039525C569601F5E83",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru093.asm",
+      "catalog_ids": "SRC:06084838447a9e2f2028;SRC:c1c7538fe1e2f0fbaa9d",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfuk.asm",
+      "sha256": "CFB979504ED0BFA5028013E1ADD0C1F487BBC1BD199452DD05B3CE6B4C53AD46",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk.asm",
+      "catalog_ids": "SRC:e00b8298681755d24efc;SRC:eeed2ed33e4ef055fc62",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfur095.asm",
+      "sha256": "D753BE7F458000C1C44C973F20E089BED3899AA25039EC2942C3581DC12A2871",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur095.asm",
+      "catalog_ids": "SRC:1a18038fb4c05f2f59e6;SRC:508b4e06ee1bc2624930",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/dev/keyboard/kdfyc118.asm",
+      "sha256": "B9C0BA7F990D151145C1E5368FDF5EBB2F76ED3F271433E08467FD3D3724F0E8",
+      "reference": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc118.asm",
+      "catalog_ids": "SRC:9bfc47518d8839d8811d;SRC:f953d62cd9373c72e351",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\makefile",
+      "sha256": "031DF79E3DD9FBE2D39B3F808F83DA74882778D21E53546E0F09A99DF854CCD3"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\keyboard.lnk",
+      "sha256": "E39A13AF777E2BFE4419DF80FE229F4972642361AFCD04510929CE74BC6E0E41"
+    }
+  ],
+  "variant_selection": [
+    {
+      "source": "dos/v86/dev/keyboard/kdffr120.asm",
+      "exact_object_in_link": false
+    },
+    {
+      "source": "dos/v86/dev/keyboard/kdfjp.asm",
+      "exact_object_in_link": false
+    },
+    {
+      "source": "dos/v86/dev/keyboard/kdfru093.asm",
+      "exact_object_in_link": false
+    },
+    {
+      "source": "dos/v86/dev/keyboard/kdfuk.asm",
+      "exact_object_in_link": false
+    },
+    {
+      "source": "dos/v86/dev/keyboard/kdfur095.asm",
+      "exact_object_in_link": false
+    },
+    {
+      "source": "dos/v86/dev/keyboard/kdfyc118.asm",
+      "exact_object_in_link": false
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source_sys_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+    "installed_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+    "zip_member": "WINNT/SYSTEM32/KEYBOARD.SYS",
+    "zip_sha256": "96FCAC606683CF262DBC030713A9263731EE83F19A10207E5DD632E5EE06C2AD",
+    "exs_sha256": "C4BB078EC060EA3352DD307D690BE6227C6E5D699127518CAF9BD3085DF60BF1"
+  },
+  "limitations": "Historical list and exact file identity only; no build provenance, keyboard layout equivalence, system configuration, real input or alternate image verification."
+}
