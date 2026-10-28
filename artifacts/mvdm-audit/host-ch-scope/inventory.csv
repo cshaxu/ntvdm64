@@ -22,7 +22,7 @@ dos/command/cmdkeyb.c,shard-3/file-review.csv,partial,host-candidate,host C/H ca
 dos/command/cmdkeyb.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmdmisc.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmdpif.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-dos/command/cmdpif.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+dos/command/cmdpif.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmdredir.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/dem.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/dem.h,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -153,7 +153,7 @@ inc/demexp.h,shard-0/review.csv,partial,host-candidate,host C/H candidate; selec
 inc/dossvc.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/doswow.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/dpmi.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-inc/enumapis.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+inc/enumapis.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/exterr.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/intapi.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/memapi.h,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -185,7 +185,7 @@ inc/wowcmdlg.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate
 inc/wowcmpat.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowcomm.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowddeml.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-inc/wowexp.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+inc/wowexp.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowfax.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowgdi.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowinfo.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
