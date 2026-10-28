@@ -1,0 +1,66 @@
+{
+  "inc/rdrsvc.h": {
+    "current": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e",
+    "opennt": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e",
+    "opennt45": "c8bc9db22634adb5e3dc85d30f721e602ff1c6a28221958587d0804f8e96e45e"
+  },
+  "inc/RDRSVC.INC": {
+    "current": "2c85bce46d4e9655fdf5c3bd18ace18b57d79160d9d85d1aefaa5cfb02c143ce",
+    "opennt": "2c85bce46d4e9655fdf5c3bd18ace18b57d79160d9d85d1aefaa5cfb02c143ce",
+    "opennt45": "2c85bce46d4e9655fdf5c3bd18ace18b57d79160d9d85d1aefaa5cfb02c143ce"
+  },
+  "dos/v86/redir/int5c.asm": {
+    "current": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt45": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5"
+  },
+  "dos/v86/redir/resident.asm": {
+    "current": "50844d93a6101b6dd64431d4842f5c4496923eb1039d071b116f148706216f98",
+    "opennt": "50844d93a6101b6dd64431d4842f5c4496923eb1039d071b116f148706216f98",
+    "opennt45": "50844d93a6101b6dd64431d4842f5c4496923eb1039d071b116f148706216f98"
+  },
+  "vdmredir/vrdisp.c": {
+    "current": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt45": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
+  },
+  "vdmredir/vrdll.c": {
+    "current": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+    "opennt": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+    "opennt45": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10"
+  },
+  "vdmredir/vrmisc.c": {
+    "current": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+    "opennt": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+    "opennt45": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d"
+  },
+  "softpc.new/host/src/nt_bop.c": {
+    "current": "ce9aafc3b82348e87ae2b2f13c30472d04c90198d27b0467d435cb5a6ced8ffd",
+    "opennt": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+    "opennt45": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+  },
+  "constants": {
+    "c_count": 50,
+    "asm_count": 50,
+    "shared": 50,
+    "mismatch": {},
+    "only_c": [],
+    "only_asm": []
+  },
+  "worker_map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:0004ff40       _LoadVdmRedir              00450f40 f   original-softpc-host-roots:nt_bop.obj",
+      " 0001:00050570       _MS_bop_7                  00451570 f   original-softpc-host-roots:nt_bop.obj"
+    ]
+  },
+  "redir_map": {
+    "sha256": "4fcc34a02adad34e0ac55abe0af1c37d0a88db59b84e0fb22fc6616478544bc0",
+    "lines": [
+      " 0001:00001e70       _VrDispatch                10002e70 f   vrdisp.obj",
+      " 0001:00002040       _VrInitialize              10003040 f   vrinit.obj",
+      " 0001:00002210       _VrUninitialize            10003210 f   vrinit.obj",
+      " 0001:00002250       _VrTerminateDosProcess     10003250 f   vrmisc.obj"
+    ]
+  }
+}

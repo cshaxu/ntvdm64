@@ -1,0 +1,65 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/kernel31/KRNL386.RES",
+      "hashes": [
+        "18C74D3D6B8A2FD14C34DC1266C42F1E58C3DDD8FA28DCCFDCCD624A1A95DF41",
+        "18C74D3D6B8A2FD14C34DC1266C42F1E58C3DDD8FA28DCCFDCCD624A1A95DF41",
+        "18C74D3D6B8A2FD14C34DC1266C42F1E58C3DDD8FA28DCCFDCCD624A1A95DF41"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/kernel31/ksource.txt",
+      "hashes": [
+        "2FD7701FC69AD907973A30A3657774EC6C9A3AFAF6EB2EE7D4C1EFE0C7DDA294",
+        "2FD7701FC69AD907973A30A3657774EC6C9A3AFAF6EB2EE7D4C1EFE0C7DDA294",
+        "2FD7701FC69AD907973A30A3657774EC6C9A3AFAF6EB2EE7D4C1EFE0C7DDA294"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/kernel31/newexe.doc",
+      "hashes": [
+        "CC66AFB2D48369DA54423642C9546F260FA64C2A33989A65FEA479C2CBC354AA",
+        "CC66AFB2D48369DA54423642C9546F260FA64C2A33989A65FEA479C2CBC354AA",
+        "CC66AFB2D48369DA54423642C9546F260FA64C2A33989A65FEA479C2CBC354AA"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/kernel31/retail3/krnl386.exe",
+      "hashes": [
+        "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03",
+        "",
+        "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03"
+      ],
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\makefile",
+      "sha256": "5DDCC52BB834D447E75D85D5720FFA52968D63912A718A8769AFB8555155E247"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\krnl386.rc",
+      "sha256": "7A716D2D53030AF3FA175FA624501FC4043E213DB48F5117911AD5A526485CA8"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\krnl386.lnk",
+      "sha256": "94BD46F231B97748AEA240B6B97E7828771B9CFC2FFBDB2B3E084A70BEEB9CBE"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/KRNL386.EXE",
+  "archive_image_sha256": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4",
+  "installed_path": "O:\\winnt\\system32\\KRNL386.EXE",
+  "installed_sha256": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4",
+  "scope": "Historical guest inputs and image identities; no deployed image provenance or runtime assertion"
+}

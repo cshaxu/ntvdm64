@@ -1,0 +1,41 @@
+{
+  "result": "pass",
+  "command": "build/.ninja/msvc-x86-release/worker/ccpu-halt-reset-test.exe",
+  "exit_code": 0,
+  "outputs": [
+    "ntvdm-exe/session/gdp",
+    "sas-init",
+    "vga/cpu-init",
+    "guest-program",
+    "simulate",
+    "original-CCPU HALT RESET: AX=beef producer=0 quick=0",
+    "S38_CCPU_DIV_FAULT_CANCELS_PENDING_DEBUG_OK",
+    "S38_CCPU_RF_SUPPRESS_ONCE_THEN_BREAK_OK",
+    "S38_CCPU_REAL_DESCRIPTOR_PAGING_REFUSAL_OK",
+    "S38_CCPU_TSS_TBIT_SINGLE_DELIVERY_OK",
+    "T430_CCPU_STALE_PIC_SENTINEL_OK"
+  ],
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/ccpu_halt_reset_test.c",
+      "sha256": "724A621F5D63BCA48F4E704467013F8C2AAD8A4FAD9A94B1C6E511D9D8F2E461"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/ccpu-halt-reset-test.exe",
+      "sha256": "4E379968630FBECFF9DC09949A28A7559319CB6F1CF7C03005BBE6F9DAFE22CF"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/ccpu/div.obj",
+      "sha256": "8E79EB61EF64456551EF98275D374C86BA3EE91687B62D0263763FF7BF8451AE"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/ccpu/c_xcptn.obj",
+      "sha256": "23B05770118A30E526A73E8CE264589DC7893EB5BB3B53981654CCC9A53222D8"
+    },
+    {
+      "path": "assets/release/ntvdm.exe",
+      "sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+    }
+  ],
+  "scope": "Fixture executes one real-mode unsigned 8-bit divide-by-zero with pending debug trap; not all division cases or live Win16 guest behavior"
+}

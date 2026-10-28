@@ -1,0 +1,174 @@
+{
+  "result": "pass",
+  "source": "softpc.new/base/ccpu386/div.c",
+  "source_sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007",
+  "catalog_ids": "SRC:b5b1918f94caba142d57;SRC:b8147df93c370cd005a1",
+  "build_edge": "build obj/ccpu/div.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/div.c",
+  "functions": [
+    {
+      "name": "_DIV8",
+      "va": 4345264,
+      "function": true,
+      "owner": "original-ccpu386:div.obj",
+      "bytes": 127,
+      "relocation_words": 11
+    },
+    {
+      "name": "_DIV16",
+      "va": 4344960,
+      "function": true,
+      "owner": "original-ccpu386:div.obj",
+      "bytes": 140,
+      "relocation_words": 12
+    },
+    {
+      "name": "_DIV32",
+      "va": 4345104,
+      "function": true,
+      "owner": "original-ccpu386:div.obj",
+      "bytes": 152,
+      "relocation_words": 13
+    }
+  ],
+  "decoder_binding": {
+    "name": "_ccpu",
+    "va": 4234240,
+    "function": true,
+    "owner": "original-ccpu386:c_main.obj",
+    "bytes": 55972,
+    "relocation_words": 6531
+  },
+  "decoder_edges": [
+    {
+      "caller": "_ccpu",
+      "target": "_DIV8",
+      "owner": "original-ccpu386:div.obj",
+      "kind": 6
+    },
+    {
+      "caller": "_ccpu",
+      "target": "_DIV16",
+      "owner": "original-ccpu386:div.obj",
+      "kind": 6
+    },
+    {
+      "caller": "_ccpu",
+      "target": "_DIV32",
+      "owner": "original-ccpu386:div.obj",
+      "kind": 6
+    }
+  ],
+  "fault_edges": [
+    {
+      "caller": "_DIV8",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV8",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV16",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV16",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV32",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV32",
+      "target": "_divu64",
+      "owner": "original-ccpu386:c_div64.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_DIV32",
+      "target": "_Int0",
+      "owner": "original-ccpu386:c_xcptn.obj",
+      "kind": 20
+    }
+  ],
+  "exception_binding": {
+    "name": "_Int0",
+    "va": 4295456,
+    "function": true,
+    "owner": "original-ccpu386:c_xcptn.obj",
+    "bytes": 190,
+    "relocation_words": 23
+  },
+  "continuation_edges": [
+    {
+      "caller": "_Int0",
+      "target": "_c_cpu_continue",
+      "owner": "original-ccpu386:c_main.obj",
+      "kind": 20
+    },
+    {
+      "caller": "_Int0",
+      "target": "_c_cpu_continue",
+      "owner": "original-ccpu386:c_main.obj",
+      "kind": 20
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\div.c",
+      "sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\div.c",
+      "sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\ccpu386\\div.c",
+      "sha256": "E1E9653D0883617E12ED70FF4AB08C96D75C7A8B09EA4EB855B3CD4AB3E73007"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\div.obj",
+      "sha256": "8E79EB61EF64456551EF98275D374C86BA3EE91687B62D0263763FF7BF8451AE"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+      "sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xcptn.obj",
+      "sha256": "23B05770118A30E526A73E8CE264589DC7893EB5BB3B53981654CCC9A53222D8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "sha256": "733B53659DFF179EF61FA1B5EF7D0D1269BC3CC217319EFBBA9A38EB98242F15"
+    }
+  ],
+  "limitations": "Static decode/exception binding only; no arithmetic oracle, fault guest execution, hook return or exception stack assertions."
+}
