@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "250c1ace8",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "cross-369/wow-selected-function-inventory.json",
+      "sha256": "2FEEA5EB87031D2F734AFE65CEC1F6602E4D273994A015E51D9DA1787E3474D5"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Bounded witnesses and function inventory; no whole-file runtime acceptance"
+}

@@ -149,6 +149,9 @@ selected resource or dependency evidence from unverified runtime behavior.
 The [DPMI provider comparison](nine-way/part-2/dpmi-provider-comparison-deep-review.md)
 details the observable memory-information differences and the bounded historical
 guest witness; current-release comparison has not yet been run.
+The [selected WOW function inventory](cross-369/wow-selected-function-coverage.md)
+separates bounded print and generic-thunk witnesses from three
+[still-pending execution routes](cross-369/wow-three-pending-execution-recheck.md).
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

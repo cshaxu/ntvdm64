@@ -4505,7 +4505,7 @@ wow32/wdos.c,2,partial,shard-2/file-audit.csv
 wow32/wdos.h,0,partial,shard-0/review.csv
 wow32/wgdi.c,0,partial,shard-0/review.csv
 wow32/wgdi.h,3,pending,shard-3/file-review.csv
-wow32/wgdi31.c,3,pending,shard-3/file-review.csv
+wow32/wgdi31.c,3,partial,shard-3/file-review.csv
 wow32/wgdi31.h,1,pending,shard-1/file-audit.csv
 wow32/wgfont.c,2,partial,shard-2/file-audit.csv
 wow32/wgfont.h,1,partial,shard-1/file-audit.csv
@@ -4538,7 +4538,7 @@ wow32/wkfileio.c,3,partial,shard-3/file-review.csv
 wow32/wkfileio.h,1,partial,shard-1/file-audit.csv
 wow32/wkglobal.c,0,partial,shard-0/review.csv
 wow32/wkglobal.h,0,pending,shard-0/review.csv
-wow32/wkgthunk.c,3,pending,shard-3/file-review.csv
+wow32/wkgthunk.c,3,partial,shard-3/file-review.csv
 wow32/wkgthunk.h,2,partial,shard-2/file-audit.csv
 wow32/wklocal.c,0,partial,shard-0/review.csv
 wow32/wklocal.h,1,pending,shard-1/file-audit.csv

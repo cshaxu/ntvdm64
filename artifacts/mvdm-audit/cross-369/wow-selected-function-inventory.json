@@ -1,0 +1,331 @@
+{
+  "map_sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+  "files": {
+    "wdib": {
+      "source_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "object_sha256": "dc2bae3ca643f70065f6cf05635a38b6fb22be7041accd8bb1e1c551f1ecc813",
+      "functions": [
+        {
+          "symbol": "_W32AddDibInfo@40",
+          "map_line": "0001:00031a80       _W32AddDibInfo@40          10032a80 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32CheckAndFreeDibInfo@4",
+          "map_line": "0001:00031b00       _W32CheckAndFreeDibInfo@4  10032b00 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32CheckAndFreeDibSectionInfo@4",
+          "map_line": "0001:00031b40       _W32CheckAndFreeDibSectionInfo@4 10032b40 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32CheckDibColorIndices@4",
+          "map_line": "0001:00031bf0       _W32CheckDibColorIndices@4 10032bf0 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32FindAndLockDibInfo@4",
+          "map_line": null
+        },
+        {
+          "symbol": "_W32FreeDibInfo@8",
+          "map_line": null
+        },
+        {
+          "symbol": "_W32FreeDibInfoHandle@8",
+          "map_line": "0001:00031c60       _W32FreeDibInfoHandle@8    10032c60 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32HandleDibDrv@4",
+          "map_line": "0001:00031d30       _W32HandleDibDrv@4         10032d30 f   wdib.obj"
+        },
+        {
+          "symbol": "_W32RestoreOldDib@4",
+          "map_line": null
+        },
+        {
+          "symbol": "_WG32CreateDIBSection@4",
+          "map_line": "0001:000323a0       _WG32CreateDIBSection@4    100333a0 f   wdib.obj"
+        },
+        {
+          "symbol": "_WG32GetDIBColorTable@4",
+          "map_line": "0001:000325b0       _WG32GetDIBColorTable@4    100335b0 f   wdib.obj"
+        },
+        {
+          "symbol": "_WG32SetDIBColorTable@4",
+          "map_line": "0001:00032610       _WG32SetDIBColorTable@4    10033610 f   wdib.obj"
+        },
+        {
+          "symbol": "_WK32FindAndReleaseDib@4",
+          "map_line": "0001:00032650       _WK32FindAndReleaseDib@4   10033650 f   wdib.obj"
+        },
+        {
+          "symbol": "_cjBitmapBitsSize@4",
+          "map_line": null
+        }
+      ]
+    },
+    "wgdi31": {
+      "source_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+      "object_sha256": "20dbcfc99a21613d47c18483d01637823716547da745ec46c4b1434e2d471207",
+      "functions": [
+        {
+          "symbol": "_InitVisRgn@0",
+          "map_line": "0001:0000c6a0       _InitVisRgn@0              1000d6a0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32AbortDoc@4",
+          "map_line": "0001:0000c6c0       _WG32AbortDoc@4            1000d6c0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32CreateScalableFontResource@4",
+          "map_line": "0001:0000c700       _WG32CreateScalableFontResource@4 1000d700 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32EndDoc@4",
+          "map_line": "0001:0000c760       _WG32EndDoc@4              1000d760 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32EndPage@4",
+          "map_line": "0001:0000c7a0       _WG32EndPage@4             1000d7a0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32EnumFontFamilies@4",
+          "map_line": "0001:0000c7c0       _WG32EnumFontFamilies@4    1000d7c0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetAspectRatioFilterEx@4",
+          "map_line": "0001:0000c7d0       _WG32GetAspectRatioFilterEx@4 1000d7d0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetBitmapDimensionEx@4",
+          "map_line": "0001:0000c820       _WG32GetBitmapDimensionEx@4 1000d820 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetBoundsRect@4",
+          "map_line": "0001:0000c870       _WG32GetBoundsRect@4       1000d870 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetBrushOrgEx@4",
+          "map_line": "0001:0000c8e0       _WG32GetBrushOrgEx@4       1000d8e0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetCharABCWidths@4",
+          "map_line": "0001:0000c920       _WG32GetCharABCWidths@4    1000d920 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetClipRgn@4",
+          "map_line": "0001:0000c9f0       _WG32GetClipRgn@4          1000d9f0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetCurrentPositionEx@4",
+          "map_line": "0001:0000ca60       _WG32GetCurrentPositionEx@4 1000da60 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetFontData@4",
+          "map_line": "0001:0000caa0       _WG32GetFontData@4         1000daa0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetGlyphOutline@4",
+          "map_line": "0001:0000cb10       _WG32GetGlyphOutline@4     1000db10 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetKerningPairs@4",
+          "map_line": "0001:0000cc60       _WG32GetKerningPairs@4     1000dc60 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetOutlineTextMetrics@4",
+          "map_line": "0001:0000ccd0       _WG32GetOutlineTextMetrics@4 1000dcd0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetRasterizerCaps@4",
+          "map_line": "0001:0000cd60       _WG32GetRasterizerCaps@4   1000dd60 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetTextExtentPoint@4",
+          "map_line": "0001:0000cdb0       _WG32GetTextExtentPoint@4  1000ddb0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetViewportExtEx@4",
+          "map_line": "0001:0000cf20       _WG32GetViewportExtEx@4    1000df20 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetViewportOrgEx@4",
+          "map_line": "0001:0000cf70       _WG32GetViewportOrgEx@4    1000df70 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetWindowExtEx@4",
+          "map_line": "0001:0000cfb0       _WG32GetWindowExtEx@4      1000dfb0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32GetWindowOrgEx@4",
+          "map_line": "0001:0000d000       _WG32GetWindowOrgEx@4      1000e000 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32InquireVisRgn@4",
+          "map_line": "0001:0000d040       _WG32InquireVisRgn@4       1000e040 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32IsGDIObject@4",
+          "map_line": "0001:0000d080       _WG32IsGDIObject@4         1000e080 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32MoveToEx@4",
+          "map_line": "0001:0000d0a0       _WG32MoveToEx@4            1000e0a0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32OffsetViewportOrgEx@4",
+          "map_line": "0001:0000d100       _WG32OffsetViewportOrgEx@4 1000e100 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32OffsetWindowOrgEx@4",
+          "map_line": "0001:0000d160       _WG32OffsetWindowOrgEx@4   1000e160 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32ResetDC@4",
+          "map_line": "0001:0000d1c0       _WG32ResetDC@4             1000e1c0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32ScaleViewportExtEx@4",
+          "map_line": "0001:0000d230       _WG32ScaleViewportExtEx@4  1000e230 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32ScaleWindowExtEx@4",
+          "map_line": "0001:0000d2a0       _WG32ScaleWindowExtEx@4    1000e2a0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetAbortProc@4",
+          "map_line": "0001:0000d310       _WG32SetAbortProc@4        1000e310 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetBitmapDimensionEx@4",
+          "map_line": "0001:0000d350       _WG32SetBitmapDimensionEx@4 1000e350 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetBoundsRect@4",
+          "map_line": "0001:0000d3b0       _WG32SetBoundsRect@4       1000e3b0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetViewportExtEx@4",
+          "map_line": "0001:0000d400       _WG32SetViewportExtEx@4    1000e400 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetViewportOrgEx@4",
+          "map_line": "0001:0000d460       _WG32SetViewportOrgEx@4    1000e460 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetWindowExtEx@4",
+          "map_line": "0001:0000d4c0       _WG32SetWindowExtEx@4      1000e4c0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32SetWindowOrgEx@4",
+          "map_line": "0001:0000d520       _WG32SetWindowOrgEx@4      1000e520 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32StartDoc@4",
+          "map_line": "0001:0000d580       _WG32StartDoc@4            1000e580 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_WG32StartPage@4",
+          "map_line": "0001:0000d6d0       _WG32StartPage@4           1000e6d0 f   wgdi31.obj"
+        },
+        {
+          "symbol": "_putabcpairs16@12",
+          "map_line": null
+        }
+      ]
+    },
+    "wgprnset": {
+      "source_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+      "object_sha256": "a96164dbabafba57a9dbf6ac651165ccbcf8ac1997153865962b2088ffd963c3",
+      "functions": [
+        {
+          "symbol": "_LoadLibraryAndGetProcAddresses@12",
+          "map_line": "0001:00012c30       _LoadLibraryAndGetProcAddresses@12 10013c30 f   wgprnset.obj"
+        },
+        {
+          "symbol": "_WG32DeviceCapabilities@4",
+          "map_line": "0001:00012c80       _WG32DeviceCapabilities@4  10013c80 f   wgprnset.obj"
+        },
+        {
+          "symbol": "_WG32DeviceMode@4",
+          "map_line": "0001:00012f80       _WG32DeviceMode@4          10013f80 f   wgprnset.obj"
+        },
+        {
+          "symbol": "_WG32ExtDeviceMode@4",
+          "map_line": "0001:00013060       _WG32ExtDeviceMode@4       10014060 f   wgprnset.obj"
+        }
+      ]
+    },
+    "wkgthunk": {
+      "source_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+      "object_sha256": "50e3000f28a6a6c943b7b521bdcd39e6df1b61d2ec8c07a42c1d8599811c83b5",
+      "functions": [
+        {
+          "symbol": "_WK32FreeLibrary32@4",
+          "map_line": "0001:00013980       _WK32FreeLibrary32@4       10014980 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_WK32GetProcAddress32@4",
+          "map_line": "0001:00013990       _WK32GetProcAddress32@4    10014990 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_WK32GetVDMPointer32@4",
+          "map_line": "0001:000139c0       _WK32GetVDMPointer32@4     100149c0 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_WK32LoadLibraryEx32@4",
+          "map_line": "0001:000139e0       _WK32LoadLibraryEx32@4     100149e0 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_WOWGetVDMPointerUnfix@4",
+          "map_line": "0001:0000bd40       _WOWGetVDMPointerUnfix@4   1000cd40 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_wow_original_WK32ICallProc32@4",
+          "map_line": "0001:00013a10       _wow_original_WK32ICallProc32@4 10014a10 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_wow_original_WOWDirectedYield16@4",
+          "map_line": "0001:00014380       _wow_original_WOWDirectedYield16@4 10015380 f   wkgthunk.obj"
+        },
+        {
+          "symbol": "_wow_original_WOWYield16@0",
+          "map_line": "0001:000143d0       _wow_original_WOWYield16@0 100153d0 f   wkgthunk.obj"
+        }
+      ]
+    },
+    "wmmalias": {
+      "source_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "object_sha256": "01683bb93e144685f971d3e34fd6720eb25307af95dbd94662bac9be9320a68e",
+      "functions": [
+        {
+          "symbol": "_FindHMap16@8",
+          "map_line": null
+        },
+        {
+          "symbol": "_FindHMap32@12",
+          "map_line": null
+        },
+        {
+          "symbol": "_FreeHMap16@8",
+          "map_line": null
+        },
+        {
+          "symbol": "_FreeMMedia16@4",
+          "map_line": null
+        },
+        {
+          "symbol": "_GetHMapNameM@8",
+          "map_line": null
+        },
+        {
+          "symbol": "_GetMMedia16@8",
+          "map_line": null
+        },
+        {
+          "symbol": "_GetMMedia32@4",
+          "map_line": null
+        }
+      ]
+    }
+  }
+}
