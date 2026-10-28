@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 2083,
-    "excluded": 1799,
+    "pending": 2175,
+    "excluded": 1707,
     "partial": 749,
     "full": 53
   },

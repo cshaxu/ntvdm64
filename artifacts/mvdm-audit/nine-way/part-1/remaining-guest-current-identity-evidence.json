@@ -1,0 +1,1052 @@
+{
+  "head": "b8aaf0870e9c18f51b2a7bcfc6e93b1c89b0fd36",
+  "aggregate_sha256": "5013836c1e9d0b60e6b4bd4c98bb3e219ea3d77628f4ee4aeffaf61ebdc6f533",
+  "source_evidence_sha256": "23381d3a1a14439f24bb00204a6cf578736f5a2cb8d4fe4c0422547187769c8c",
+  "rows": [
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/nlsfunc/nlsparm.asm",
+      "current_status": "excluded",
+      "hashes": [
+        "a7bc0f66a6ef36e54be3b0113fd1bc7dc18051d133e878aee0a520215f66a690",
+        "a7bc0f66a6ef36e54be3b0113fd1bc7dc18051d133e878aee0a520215f66a690",
+        "a7bc0f66a6ef36e54be3b0113fd1bc7dc18051d133e878aee0a520215f66a690"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/nlsfunc/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/nlsfunc/makefile: inline nlsparm.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for nlsparm.asm    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   "
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/setver/setver.c",
+      "current_status": "excluded",
+      "hashes": [
+        "840e8d3c2882039c594d63c01c4722ed768817f78524b4a176b1c228da309c15",
+        "840e8d3c2882039c594d63c01c4722ed768817f78524b4a176b1c228da309c15",
+        "840e8d3c2882039c594d63c01c4722ed768817f78524b4a176b1c228da309c15"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/setver/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/setver/makefile: inline setver.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for setver.c    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   "
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/share/share.asm",
+      "current_status": "excluded",
+      "hashes": [
+        "ab7fe7c1974897cd7f54ff91f2374006041d29280fccb88809d613659942ec45",
+        "ab7fe7c1974897cd7f54ff91f2374006041d29280fccb88809d613659942ec45",
+        "ab7fe7c1974897cd7f54ff91f2374006041d29280fccb88809d613659942ec45"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/share/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/share/share.lnk: share.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for share.asm    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   "
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/doskrnl/dos/NTDOS.BIN",
+      "current_status": "excluded",
+      "hashes": [
+        "25218fe6ba1a1c420448c2f2e0346481736a588553747276f950079e4a2df92c",
+        "25218fe6ba1a1c420448c2f2e0346481736a588553747276f950079e4a2df92c",
+        "25218fe6ba1a1c420448c2f2e0346481736a588553747276f950079e4a2df92c"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "historical-guest-build-input-only; Historical DOS kernel relocation intermediate    Guest execution, source-to-image provenance, DOS services, error and lifecycle behavior remain open.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/commdlg.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "89f4ef82923c53e6ad5adb6838dd46412a62ecf6b9b2476c1cb8f296adbf12cb",
+        "89f4ef82923c53e6ad5adb6838dd46412a62ecf6b9b2476c1cb8f296adbf12cb",
+        "89f4ef82923c53e6ad5adb6838dd46412a62ecf6b9b2476c1cb8f296adbf12cb"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/commdlg.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "309f8e236290b359bacca9511762e6f64173ac0f598d22a47717921ef2a8e924",
+        "309f8e236290b359bacca9511762e6f64173ac0f598d22a47717921ef2a8e924",
+        "309f8e236290b359bacca9511762e6f64173ac0f598d22a47717921ef2a8e924"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/crosshr.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "7b08010c3fd454a0d71dcf97f8dec525d85ec9293f5d2b9be24d61c59fba20e1",
+        "7b08010c3fd454a0d71dcf97f8dec525d85ec9293f5d2b9be24d61c59fba20e1",
+        "7b08010c3fd454a0d71dcf97f8dec525d85ec9293f5d2b9be24d61c59fba20e1"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/down.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "3aa2c3890b6646e8e24bc5f5ab89bc3d46ef0004861b60ff127d6e9f1058251a",
+        "3aa2c3890b6646e8e24bc5f5ab89bc3d46ef0004861b60ff127d6e9f1058251a",
+        "3aa2c3890b6646e8e24bc5f5ab89bc3d46ef0004861b60ff127d6e9f1058251a"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/left.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "ec9b136b75d4f21bfd1417d2fe6475839005600546ebfad8281c3b90bf836295",
+        "ec9b136b75d4f21bfd1417d2fe6475839005600546ebfad8281c3b90bf836295",
+        "ec9b136b75d4f21bfd1417d2fe6475839005600546ebfad8281c3b90bf836295"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/lefti.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "c60415f0407ee01e0c8ac7383ecc7de8a376a262df56bdcce4fb3e29fc326ab2",
+        "c60415f0407ee01e0c8ac7383ecc7de8a376a262df56bdcce4fb3e29fc326ab2",
+        "c60415f0407ee01e0c8ac7383ecc7de8a376a262df56bdcce4fb3e29fc326ab2"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/up.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "8939d8aab4e861cd2eaa42fbd7801d67d7a9b4475afbecc6bb71cda9c48b010b",
+        "8939d8aab4e861cd2eaa42fbd7801d67d7a9b4475afbecc6bb71cda9c48b010b",
+        "8939d8aab4e861cd2eaa42fbd7801d67d7a9b4475afbecc6bb71cda9c48b010b"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ddeml/ddeml.def",
+      "current_status": "excluded",
+      "hashes": [
+        "f16ef3ce2c49b0299fea7ab3435b6315a79a2a192d48e1bc1fcf38394b3b19b0",
+        "f16ef3ce2c49b0299fea7ab3435b6315a79a2a192d48e1bc1fcf38394b3b19b0",
+        "f16ef3ce2c49b0299fea7ab3435b6315a79a2a192d48e1bc1fcf38394b3b19b0"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ddeml/messages/usa/ddeml.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "b2b7985fb479fe6fb176352e6d42bbc3c8d6e82a0572cd162ecf70b7164ec640",
+        "b2b7985fb479fe6fb176352e6d42bbc3c8d6e82a0572cd162ecf70b7164ec640",
+        "b2b7985fb479fe6fb176352e6d42bbc3c8d6e82a0572cd162ecf70b7164ec640"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/comm/comm.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "ea0820f3092f81126af0da2e5fa8080798ee8ea5a6b8f6ef1110504af73804a9",
+        "ea0820f3092f81126af0da2e5fa8080798ee8ea5a6b8f6ef1110504af73804a9",
+        "ea0820f3092f81126af0da2e5fa8080798ee8ea5a6b8f6ef1110504af73804a9"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/mouse/mouse.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "f4b564b4640636fa6d837005406f6d42d29863cf6afeee6f63dd00d293a41da0",
+        "f4b564b4640636fa6d837005406f6d42d29863cf6afeee6f63dd00d293a41da0",
+        "f4b564b4640636fa6d837005406f6d42d29863cf6afeee6f63dd00d293a41da0"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/sound/sound.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "19b2e7371684be926c69f7649be1d4a185e7a07905099e80d130773c1b246c29",
+        "19b2e7371684be926c69f7649be1d4a185e7a07905099e80d130773c1b246c29",
+        "19b2e7371684be926c69f7649be1d4a185e7a07905099e80d130773c1b246c29"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/killwow/killwow.ico",
+      "current_status": "excluded",
+      "hashes": [
+        "c498e8de03c155a13f39b6e1f23c79e1839f18f47eba4bdde759bfef5583b5bd",
+        "c498e8de03c155a13f39b6e1f23c79e1839f18f47eba4bdde759bfef5583b5bd",
+        "c498e8de03c155a13f39b6e1f23c79e1839f18f47eba4bdde759bfef5583b5bd"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/killwow/killwow.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "2be13fb4616df582d239c19aa510a1b8dd2ff3e4e1704bef8f48eefded3b9b3c",
+        "2be13fb4616df582d239c19aa510a1b8dd2ff3e4e1704bef8f48eefded3b9b3c",
+        "2be13fb4616df582d239c19aa510a1b8dd2ff3e4e1704bef8f48eefded3b9b3c"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mci.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1",
+        "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1",
+        "0df6013a9080ef9f546b65a30e7976285b086456413ae3c301222bf026d19fd1"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/messages/usa/mmsystem.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374",
+        "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374",
+        "d6a328e813a38e64c5ce871f6a3f3d544136f084449da7cd78b2f17e58c3d374"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mmsystem.def",
+      "current_status": "excluded",
+      "hashes": [
+        "75db809f7f985990058eaa8c79bdd399f19a132ae581d8414d9a5ea721308431",
+        "75db809f7f985990058eaa8c79bdd399f19a132ae581d8414d9a5ea721308431",
+        "75db809f7f985990058eaa8c79bdd399f19a132ae581d8414d9a5ea721308431"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mmtask/mmtask.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f",
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f",
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ole/client/olecli.def",
+      "current_status": "excluded",
+      "hashes": [
+        "75f2d6462a5f2db4286419bf33c3f119edd58c6976ecbd611e49edcb1d8df001",
+        "75f2d6462a5f2db4286419bf33c3f119edd58c6976ecbd611e49edcb1d8df001",
+        "75f2d6462a5f2db4286419bf33c3f119edd58c6976ecbd611e49edcb1d8df001"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ole/server/srvr.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "9ce2b0fb3a6c6d292ef63fae05bac697ba832dfafb5f7eeef1f722f8fd54df79",
+        "9ce2b0fb3a6c6d292ef63fae05bac697ba832dfafb5f7eeef1f722f8fd54df79",
+        "9ce2b0fb3a6c6d292ef63fae05bac697ba832dfafb5f7eeef1f722f8fd54df79"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/rasapi16/rasapi16.def",
+      "current_status": "excluded",
+      "hashes": [
+        "19d7ad5ba75bf58a9efb6641e3c66416c941288704735273924838943d2913b1",
+        "19d7ad5ba75bf58a9efb6641e3c66416c941288704735273924838943d2913b1",
+        "19d7ad5ba75bf58a9efb6641e3c66416c941288704735273924838943d2913b1"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/sherlock/messages/usa/drwatson.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "648fe8d633afa0e075ed203a517f987594f07dd5773890d88f76c824f91ac3ac",
+        "648fe8d633afa0e075ed203a517f987594f07dd5773890d88f76c824f91ac3ac",
+        "648fe8d633afa0e075ed203a517f987594f07dd5773890d88f76c824f91ac3ac"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/shell/wowexec.def",
+      "current_status": "excluded",
+      "hashes": [
+        "69bafc5f99871a86e7c5990b50ca1bb3b4963a8e94fd2df935ed975a531c4629",
+        "69bafc5f99871a86e7c5990b50ca1bb3b4963a8e94fd2df935ed975a531c4629",
+        "69bafc5f99871a86e7c5990b50ca1bb3b4963a8e94fd2df935ed975a531c4629"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/shell/wowexec.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "ceb1a3a1f1ef0487367b8bb242dd4879bc986763fa891fa2e4bd30bd9dbe97bc",
+        "ceb1a3a1f1ef0487367b8bb242dd4879bc986763fa891fa2e4bd30bd9dbe97bc",
+        "ceb1a3a1f1ef0487367b8bb242dd4879bc986763fa891fa2e4bd30bd9dbe97bc"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/timer/timer.def",
+      "current_status": "excluded",
+      "hashes": [
+        "f8dbe3201b9632c96b7e1efee9533063149fbd4650ccd966cddc155621615991",
+        "f8dbe3201b9632c96b7e1efee9533063149fbd4650ccd966cddc155621615991",
+        "f8dbe3201b9632c96b7e1efee9533063149fbd4650ccd966cddc155621615991"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/toolhelp/STRIPPED.DEF",
+      "current_status": "excluded",
+      "hashes": [
+        "f555769548591f1489617985a4a29898ed691c023c4d0fab55a31fe43d3475c0",
+        "f555769548591f1489617985a4a29898ed691c023c4d0fab55a31fe43d3475c0",
+        "f555769548591f1489617985a4a29898ed691c023c4d0fab55a31fe43d3475c0"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/toolhelp/toolhelp.def",
+      "current_status": "excluded",
+      "hashes": [
+        "e58fc8d96077b66aed3007482d1229ebcd596cdbed3f1f1d948c61d0d6b79d53",
+        "e58fc8d96077b66aed3007482d1229ebcd596cdbed3f1f1d948c61d0d6b79d53",
+        "e58fc8d96077b66aed3007482d1229ebcd596cdbed3f1f1d948c61d0d6b79d53"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/winsock/winsock.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "7c47631896f4f1b190d67d40ffd759fa9ba21a11b8f95c63203e7ea58443adba",
+        "7c47631896f4f1b190d67d40ffd759fa9ba21a11b8f95c63203e7ea58443adba",
+        "7c47631896f4f1b190d67d40ffd759fa9ba21a11b8f95c63203e7ea58443adba"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/8514mrks.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "cb6819f2c22007298767aa9681616811204ece57fe1a61af8d60db302496f087",
+        "cb6819f2c22007298767aa9681616811204ece57fe1a61af8d60db302496f087",
+        "cb6819f2c22007298767aa9681616811204ece57fe1a61af8d60db302496f087"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/cgamarks.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "1843714ac00d2fa36bd52c4b55e519d0042606b6734a5ada5ca9808fd41e6c3c",
+        "1843714ac00d2fa36bd52c4b55e519d0042606b6734a5ada5ca9808fd41e6c3c",
+        "1843714ac00d2fa36bd52c4b55e519d0042606b6734a5ada5ca9808fd41e6c3c"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/egamarks.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "10fa316575c06bda0571196b2017c9dc789c3f14f96a0007ce61310295dd2e96",
+        "10fa316575c06bda0571196b2017c9dc789c3f14f96a0007ce61310295dd2e96",
+        "10fa316575c06bda0571196b2017c9dc789c3f14f96a0007ce61310295dd2e96"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/messages/usa/ole.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364",
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364",
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/mwhires.cur",
+      "current_status": "excluded",
+      "hashes": [
+        "0889fa3e0da50a6b34e7ad303071bd754575991193a808cfa0edd4fa078c687d",
+        "0889fa3e0da50a6b34e7ad303071bd754575991193a808cfa0edd4fa078c687d",
+        "0889fa3e0da50a6b34e7ad303071bd754575991193a808cfa0edd4fa078c687d"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/ole.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364",
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364",
+        "ca31a468419e39ee2b9d47d262cabf74f1a720fae0e7b18eeaee8ef2cf261364"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/write.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc",
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc",
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   "
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/messages/usa-ms.msg",
+      "current_status": "excluded",
+      "hashes": [
+        "c20f76c518d8248f5a9fe47259e80c9ce95f15fff6b86bad1a4d03f65161b037",
+        "c20f76c518d8248f5a9fe47259e80c9ce95f15fff6b86bad1a4d03f65161b037",
+        "c20f76c518d8248f5a9fe47259e80c9ce95f15fff6b86bad1a4d03f65161b037"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: dos/v86/make.inc:8-10 default COUNTRY=usa-ms and msg=../../messages; cmd/debug/makefile:29-31 debug.skl + $(msg)/$(COUNTRY).msg -> debug.ctl; :208-226 -> debug.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mciole/mciole.def",
+      "current_status": "excluded",
+      "hashes": [
+        "ec064fe6d7cf9acf662988fec586e4f4f81f61e63c88cc9d39a4ef373e73f1a5",
+        "ec064fe6d7cf9acf662988fec586e4f4f81f61e63c88cc9d39a4ef373e73f1a5",
+        "ec064fe6d7cf9acf662988fec586e4f4f81f61e63c88cc9d39a4ef373e73f1a5"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/mciole/makefile:62-74 mciole.def named in link16 response to mciole16.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mciole/mciole16.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "0d646f07888d32540272ba6f3fceba0470b4d843021c6cacf9792b89923d5236",
+        "0d646f07888d32540272ba6f3fceba0470b4d843021c6cacf9792b89923d5236",
+        "0d646f07888d32540272ba6f3fceba0470b4d843021c6cacf9792b89923d5236"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/mciole/makefile:51-52,62-74 mciole16.rc -> rc16 mciole16.res -> mciole16.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mmsystem/messages/usa/mmtask.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f",
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f",
+        "a428cbfc7a978d720a9c379dd101e9911538dff290fd8ffc2152e89d8afafd3f"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/mmsystem/mmtask/makefile:78-92 RES_DIR USA copy mmtask.rcv -> mmtask.res; RC16 applied to mmtask.tsk at :57-60; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/test/shell/wowexec.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "ef9e33b08397c1ffa13fa44e9e85ec5bf1841dcacf4d22637af6327fadcc24b2",
+        "ef9e33b08397c1ffa13fa44e9e85ec5bf1841dcacf4d22637af6327fadcc24b2",
+        "ef9e33b08397c1ffa13fa44e9e85ec5bf1841dcacf4d22637af6327fadcc24b2"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/test/shell/wowexec.rc:79 includes wowexec.rcv; makefile:120-123 rc16 wowexec.res -> link16 wowexec.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/winoldap/winoldap.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "74ed8c59044ff4880a98c95fbef601b2a987ac5903ae9cef3babbd870bfa2db5",
+        "74ed8c59044ff4880a98c95fbef601b2a987ac5903ae9cef3babbd870bfa2db5",
+        "74ed8c59044ff4880a98c95fbef601b2a987ac5903ae9cef3babbd870bfa2db5"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/winoldap/winoldap.rc:4 includes winoldap.rcv; makefile:107-111 link16 winoldap.mod and rc16 winoldap.res; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/winspool/winspool.def",
+      "current_status": "excluded",
+      "hashes": [
+        "592e4a7fd82be787b7512c7e906c8928a34e984e89f84c5ac6d3e0d487dbe4fa",
+        "592e4a7fd82be787b7512c7e906c8928a34e984e89f84c5ac6d3e0d487dbe4fa",
+        "592e4a7fd82be787b7512c7e906c8928a34e984e89f84c5ac6d3e0d487dbe4fa"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/winspool/makefile:102-104 winspool.def linked into WIN16 WINSPOOL.EXE via link16; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/write/messages/usa/write.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66",
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66",
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/write/makefile:16,357-358,369-370,145-152 USA RES_DIR write.rc -> rc16 -> write.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "1",
+      "path": "wow16/write/messages/usa/write.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc",
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc",
+        "8564a537c5dc341ba22685bc80cb7714c827c268ceceada2e5cd7083d0a46afc"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/write/messages/usa/write.rc:10 includes write.rcv; makefile:360-361,369-370,145-152 USA RES_DIR -> rc16 -> write.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  "
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/doskrnl/bios/msbio.skl",
+      "current_status": "excluded",
+      "hashes": [
+        "2a2fb4d31b19be6e57c45c1677e6c490d3138c7bb235757bd321102787f2b421",
+        "2a2fb4d31b19be6e57c45c1677e6c490d3138c7bb235757bd321102787f2b421",
+        "2a2fb4d31b19be6e57c45c1677e6c490d3138c7bb235757bd321102787f2b421"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-source-file-only; Original NTIO recipe uses this message skeleton as a guest build input    NTIO messages, localization, errors and image provenance remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/messages/loadmsg.msg",
+      "current_status": "excluded",
+      "hashes": [
+        "d13386a68ad285fa2117112d1cc86fc7578a5640aa40cb1bae28e775790358b7",
+        "d13386a68ad285fa2117112d1cc86fc7578a5640aa40cb1bae28e775790358b7",
+        "d13386a68ad285fa2117112d1cc86fc7578a5640aa40cb1bae28e775790358b7"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; LOADFIX assembler and recipe consume original message input    File-only historical build role; guest messages, locale support and image provenance remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/common.ver",
+      "current_status": "excluded",
+      "hashes": [
+        "fc90d58a2e9646c8493449c6b9dd0bfde980a60746ce6f1817bdf7748dfa0e0d",
+        "fc90d58a2e9646c8493449c6b9dd0bfde980a60746ce6f1817bdf7748dfa0e0d",
+        "fc90d58a2e9646c8493449c6b9dd0bfde980a60746ce6f1817bdf7748dfa0e0d"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical guest reference resource input    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/ctl3d.c",
+      "current_status": "excluded",
+      "hashes": [
+        "f712de39b011078a9491cf43247975b7b76a46a53fecaeb492ca09ed061598ad",
+        "f712de39b011078a9491cf43247975b7b76a46a53fecaeb492ca09ed061598ad",
+        "f712de39b011078a9491cf43247975b7b76a46a53fecaeb492ca09ed061598ad"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical guest debugging reference source    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/ctl3d.h",
+      "current_status": "excluded",
+      "hashes": [
+        "dfae25124e38b73657575c104325f15caa229562b8aae285222ea048fff8ede2",
+        "dfae25124e38b73657575c104325f15caa229562b8aae285222ea048fff8ede2",
+        "dfae25124e38b73657575c104325f15caa229562b8aae285222ea048fff8ede2"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical guest debugging reference header    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/display.def",
+      "current_status": "excluded",
+      "hashes": [
+        "a9539c1581e6fdcc62f63bc4403a7080ecc55857893277aa089ac0ddce05ca21",
+        "a9539c1581e6fdcc62f63bc4403a7080ecc55857893277aa089ac0ddce05ca21",
+        "a9539c1581e6fdcc62f63bc4403a7080ecc55857893277aa089ac0ddce05ca21"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/drivers/display/makefile:115-116 display.def in display.exe prerequisite/link16; original display driver [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/drivers/display/makefile:115-116 display.def in display.exe prerequisite/link16; original display driver [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/display.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "34e98adea5f0bc3c3723e6c07c5a632ad507787f28cacc403860c53c4a064ebb",
+        "34e98adea5f0bc3c3723e6c07c5a632ad507787f28cacc403860c53c4a064ebb",
+        "34e98adea5f0bc3c3723e6c07c5a632ad507787f28cacc403860c53c4a064ebb"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical display driver resource input    Guest driver image provenance and display behavior remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/DISPLAY.RES",
+      "current_status": "excluded",
+      "hashes": [
+        "c7b404b5f471b15eb384865ab67442f20786a90a02e16d833f1296b132ff6720",
+        "c7b404b5f471b15eb384865ab67442f20786a90a02e16d833f1296b132ff6720",
+        "c7b404b5f471b15eb384865ab67442f20786a90a02e16d833f1296b132ff6720"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical display driver resource build artifact    Resource generation, image provenance and display behavior remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/keyboard/keyboard.def",
+      "current_status": "excluded",
+      "hashes": [
+        "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b",
+        "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b",
+        "54493a986e588ece52684d9be94bda34a5e9cfa9b92c0adb7b2ddd5ccea5116b"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/lib/makefile:25-31 upd and implib sound/keyboard.def -> keyboard.lib -> lib16 libw; 16-bit import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:25-31 upd and implib sound/keyboard.def -> keyboard.lib -> lib16 libw; 16-bit import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/keyboard/keyboard.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "85b7a4631dcebad2e0f195e1ea98018c82cb807799f9652c3b7be79dea73c6fb",
+        "85b7a4631dcebad2e0f195e1ea98018c82cb807799f9652c3b7be79dea73c6fb",
+        "85b7a4631dcebad2e0f195e1ea98018c82cb807799f9652c3b7be79dea73c6fb"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical keyboard driver resource input    Guest keyboard behavior and image provenance remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/sound/sound.def",
+      "current_status": "excluded",
+      "hashes": [
+        "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98",
+        "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98",
+        "19dd3320243e759dd32b822756ac6840fe897194e9ae96abcb6eebfb4b891e98"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/lib/makefile:25-31 upd and implib sound.def -> sound.lib -> lib16 libw; 16-bit import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:25-31 upd and implib sound.def -> sound.lib -> lib16 libw; 16-bit import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/gdi/gdi.def",
+      "current_status": "excluded",
+      "hashes": [
+        "c1c2f324444057deba1ab34cc1f95aa01477adaf04a35b9303af1b481c1eb061",
+        "c1c2f324444057deba1ab34cc1f95aa01477adaf04a35b9303af1b481c1eb061",
+        "c1c2f324444057deba1ab34cc1f95aa01477adaf04a35b9303af1b481c1eb061"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/gdi/makefile:122-124 gdi.def is dependency of link16 @gdi.lrf; original guest gdi.exe [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/gdi/makefile:122-124 gdi.def is dependency of link16 @gdi.lrf; original guest gdi.exe [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/gdi/gdi.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "0984ac7064753bfb90fd50f57b1dad1dd5e256bbf9533b024d4758538950ea55",
+        "0984ac7064753bfb90fd50f57b1dad1dd5e256bbf9533b024d4758538950ea55",
+        "0984ac7064753bfb90fd50f57b1dad1dd5e256bbf9533b024d4758538950ea55"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical GDI version resource input    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ole/client/funchead.c",
+      "current_status": "excluded",
+      "hashes": [
+        "8c698b874aecddea2e14bd195b4ee4e991563fe91a1b0429ede03c220893058f",
+        "8c698b874aecddea2e14bd195b4ee4e991563fe91a1b0429ede03c220893058f",
+        "8c698b874aecddea2e14bd195b4ee4e991563fe91a1b0429ede03c220893058f"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Commented function template has no implementation    OLE entry points and object lifecycle remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ole/client/utils.c",
+      "current_status": "excluded",
+      "hashes": [
+        "6ed48e62191188ac2e4063986f2d6a2aef1f1b56709b25931e332e7ec2db378f",
+        "6ed48e62191188ac2e4063986f2d6a2aef1f1b56709b25931e332e7ec2db378f",
+        "6ed48e62191188ac2e4063986f2d6a2aef1f1b56709b25931e332e7ec2db378f"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical OLECLI guest build input referenced by its makefile    OLE utilities and guest object behavior remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/regedit/reg1632.h",
+      "current_status": "excluded",
+      "hashes": [
+        "1e56b04604d629a08ad33614d0175829e7d570dc405512c498d2592cda6cf6c4",
+        "1e56b04604d629a08ad33614d0175829e7d570dc405512c498d2592cda6cf6c4",
+        "1e56b04604d629a08ad33614d0175829e7d570dc405512c498d2592cda6cf6c4"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical REGEDIT guest header included by regporte.c    Registry semantics, actual guest image and lifecycle remain open. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/system/system.def",
+      "current_status": "excluded",
+      "hashes": [
+        "8010b90f82fb391f676b42e0e3a4d2169056449790fec8bf3723f22a7578c341",
+        "8010b90f82fb391f676b42e0e3a4d2169056449790fec8bf3723f22a7578c341",
+        "8010b90f82fb391f676b42e0e3a4d2169056449790fec8bf3723f22a7578c341"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/lib/makefile:45-46 system.def -> implib system.lib; guest import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:45-46 system.def -> implib system.lib; guest import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/bseerr.h",
+      "current_status": "excluded",
+      "hashes": [
+        "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61",
+        "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61",
+        "d2660a88eb8cb0f9746d9763ec33bdefcd70cdfcbc20409a4fe5407e7f535a61"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/libentry.asm",
+      "current_status": "excluded",
+      "hashes": [
+        "d227e572d9fc207d835a261f6a8b56b17a171e2ad8e5157ee5d81dbc2c9c7c49",
+        "d227e572d9fc207d835a261f6a8b56b17a171e2ad8e5157ee5d81dbc2c9c7c49",
+        "d227e572d9fc207d835a261f6a8b56b17a171e2ad8e5157ee5d81dbc2c9c7c49"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/wfwnet.c",
+      "current_status": "excluded",
+      "hashes": [
+        "2e46bb1d5b9c3791a70a21b0fc9b053b63748814988665fcabe13792543e6942",
+        "2e46bb1d5b9c3791a70a21b0fc9b053b63748814988665fcabe13792543e6942",
+        "2e46bb1d5b9c3791a70a21b0fc9b053b63748814988665fcabe13792543e6942"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/wfwnet.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "76941ea0258399ec8c227efe7ee11649d65404fb9cdf270af61eb3a8ce2e4986",
+        "76941ea0258399ec8c227efe7ee11649d65404fb9cdf270af61eb3a8ce2e4986",
+        "76941ea0258399ec8c227efe7ee11649d65404fb9cdf270af61eb3a8ce2e4986"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/WFWNET.RES",
+      "current_status": "excluded",
+      "hashes": [
+        "b464056f6a0eda99e5d97e8aba689c6a699edb96ca154e22687cab2683a4f85d",
+        "b464056f6a0eda99e5d97e8aba689c6a699edb96ca154e22687cab2683a4f85d",
+        "b464056f6a0eda99e5d97e8aba689c6a699edb96ca154e22687cab2683a4f85d"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/win87em/win87em3.def",
+      "current_status": "excluded",
+      "hashes": [
+        "3f6623f63573066e2a080ebd2c317c922bd045a29afabb5a9dcdf4bd10c4d454",
+        "3f6623f63573066e2a080ebd2c317c922bd045a29afabb5a9dcdf4bd10c4d454",
+        "3f6623f63573066e2a080ebd2c317c922bd045a29afabb5a9dcdf4bd10c4d454"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: wow16/win87em/makefile:646-656 explicit win87em3.def in win87em.dll link response; Windows conditional target [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/win87em/makefile:646-656 explicit win87em3.def in win87em.dll link response; Windows conditional target [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/winoldap/winoldap.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "b96d5787fb51497718fe7e394629f7b6453225ff36425dbe58390d0249cf711f",
+        "b96d5787fb51497718fe7e394629f7b6453225ff36425dbe58390d0249cf711f",
+        "b96d5787fb51497718fe7e394629f7b6453225ff36425dbe58390d0249cf711f"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: winoldap/makefile:107-111 winoldap.rc via suffix $*.rc -> winoldap.res -> link16 and rc16 winoldap.mod; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; winoldap/makefile:107-111 winoldap.rc via suffix $*.rc -> winoldap.res -> link16 and rc16 winoldap.mod    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/winsock/winsock.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "32e7d0766f804f0ee1ff16e6a4b451af70cf21c1b52cf146ff3fb0d8aab07631",
+        "32e7d0766f804f0ee1ff16e6a4b451af70cf21c1b52cf146ff3fb0d8aab07631",
+        "32e7d0766f804f0ee1ff16e6a4b451af70cf21c1b52cf146ff3fb0d8aab07631"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: winsock/makefile:101-105 winsock.rc via suffix $*.rc -> winsock.res -> link16 and rc16 winsock.dll; original conditional !ENDIF profile; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; winsock/makefile:101-105 winsock.rc via suffix $*.rc -> winsock.res -> link16 and rc16 winsock.dll; original conditional !ENDIF profile    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/write/write.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66",
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66",
+        "844a7f4ac20bf3be1e1985ba557ed986c427d8a4316b8a3509eecaa1c4957d66"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: write/makefile:357-358 copies RES_DIR/write.rc to write.rc; :369-370 rc16 -> write.res; :145-152 link16/rc16 write.exe; original/current local USA snapshot identity requires verification; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; write/makefile:357-358 copies RES_DIR/write.rc to write.rc; :369-370 rc16 -> write.res; :145-152 link16/rc16 write.exe; original/current local USA snapshot identity requires verification    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. "
+    },
+    {
+      "shard": "2",
+      "path": "wow16/write/WRITE.RES",
+      "current_status": "excluded",
+      "hashes": [
+        "39d3b445850e82ba949d0e6ba4a4fb76b9b414251156a638c9f725ac66e40e08",
+        "39d3b445850e82ba949d0e6ba4a4fb76b9b414251156a638c9f725ac66e40e08",
+        "39d3b445850e82ba949d0e6ba4a4fb76b9b414251156a638c9f725ac66e40e08"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": "  historical-guest-build-input-only; Historical guest resource build artifact    Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open. "
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/downi.bmp",
+      "current_status": "excluded",
+      "hashes": [
+        "7540ba4bff90889953ae3f6bf93ebe0b32d80fc2f7109af66ea837b09a640d6b",
+        "7540ba4bff90889953ae3f6bf93ebe0b32d80fc2f7109af66ea837b09a640d6b",
+        "7540ba4bff90889953ae3f6bf93ebe0b32d80fc2f7109af66ea837b09a640d6b"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: commdlg/commdlg.rc:26 BITMAP downi.bmp; makefile:112-113,143-155 commdlg.res -> rc16 commdlg.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/commdlg.rc:26 BITMAP downi.bmp; makefile:112-113,143-155 commdlg.res -> rc16 commdlg.dll    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/findtext.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "a16f6ee2240b359ec44a54321a749ffcbe922bc308287614a2a95b5382216592",
+        "a16f6ee2240b359ec44a54321a749ffcbe922bc308287614a2a95b5382216592",
+        "a16f6ee2240b359ec44a54321a749ffcbe922bc308287614a2a95b5382216592"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: commdlg/commdlg.rc:44 includes FindText.dlg; makefile:57,106-107,112-113,155 USA RES_DIR copied to local target then commdlg.res -> rc16 commdlg.dll; local file is build target; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/commdlg.rc:44 includes FindText.dlg; makefile:57,106-107,112-113,155 USA RES_DIR copied to local target then commdlg.res -> rc16 commdlg.dll; local file is build target    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/messages/usa/fileopen.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "ede19a180ae673bf6f543efea87aca8bd076576c881dbe929ca8d3cf3b80c2ae",
+        "ede19a180ae673bf6f543efea87aca8bd076576c881dbe929ca8d3cf3b80c2ae",
+        "ede19a180ae673bf6f543efea87aca8bd076576c881dbe929ca8d3cf3b80c2ae"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: commdlg/makefile:57,97-98,112-113,155 RES_DIR=.\\messages\\usa copied to local fileopen.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:42 includes it; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/makefile:57,97-98,112-113,155 RES_DIR=.\\messages\\usa copied to local fileopen.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:42 includes it    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/messages/usa/prnsetup.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "41f6d7b29e92bf811b9f82c16e4cf1da89ae0aa49a9029ef23bfc191f0e6c0fd",
+        "41f6d7b29e92bf811b9f82c16e4cf1da89ae0aa49a9029ef23bfc191f0e6c0fd",
+        "41f6d7b29e92bf811b9f82c16e4cf1da89ae0aa49a9029ef23bfc191f0e6c0fd"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: commdlg/makefile:57,109-110,112-113,155 RES_DIR=.\\messages\\usa copied to local prnsetup.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:43 includes it; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/makefile:57,109-110,112-113,155 RES_DIR=.\\messages\\usa copied to local prnsetup.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:43 includes it    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/regedit/messages/usa/regload.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "7eb523d516446301597b7b235906eaca5120517c12c78dc609229d97f5240149",
+        "7eb523d516446301597b7b235906eaca5120517c12c78dc609229d97f5240149",
+        "7eb523d516446301597b7b235906eaca5120517c12c78dc609229d97f5240149"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: regedit/makefile:4,68-69,109-110 USA RES_DIR -> rc16 -DREGLOAD regload.res -> regload.exe; messages/usa/regedit.rc:194-195 conditional include; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; regedit/makefile:4,68-69,109-110 USA RES_DIR -> rc16 -DREGLOAD regload.res -> regload.exe; messages/usa/regedit.rc:194-195 conditional include    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/regedit/messages/usa/sdkreged.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "dc736c2bf2c4ab9cad36ba98cad0d3fe3411a060612175684c4e593b55121738",
+        "dc736c2bf2c4ab9cad36ba98cad0d3fe3411a060612175684c4e593b55121738",
+        "dc736c2bf2c4ab9cad36ba98cad0d3fe3411a060612175684c4e593b55121738"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: regedit/makefile:4,65-69,105-110 USA RES_DIR -> rc16 regedit.res/regload.res -> regedt16.exe/regload.exe; messages/usa/regedit.rc:118 includes exact path; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; regedit/makefile:4,65-69,105-110 USA RES_DIR -> rc16 regedit.res/regload.res -> regedt16.exe/regload.exe; messages/usa/regedit.rc:118 includes exact path    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/messages/usa/timer.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b",
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b",
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-106 NAME=timer, EXT=drv, RES_DIR=.\\messages\\usa; copy timer.rc; rc16 -r timer.rc -> timer.res -> timer.drv; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-106 NAME=timer, EXT=drv, RES_DIR=.\\messages\\usa; copy timer.rc; rc16 -r timer.rc -> timer.res -> timer.drv    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/messages/usa/timer.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "88a0816f7e919ca867b69eff037bdca10751a0f71f039837f5540b3fbfdbb14c",
+        "88a0816f7e919ca867b69eff037bdca10751a0f71f039837f5540b3fbfdbb14c",
+        "88a0816f7e919ca867b69eff037bdca10751a0f71f039837f5540b3fbfdbb14c"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-109 NAME=timer, RES_DIR=.\\messages\\usa; copy timer.rcv; timer.rc:2 include -> rc16 timer.res -> timer.drv; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-109 NAME=timer, RES_DIR=.\\messages\\usa; copy timer.rcv; timer.rc:2 include -> rc16 timer.res -> timer.drv    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/timer.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b",
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b",
+        "d5b35717cd7cf35073d41f21ae7dbd2ca422d97231f98f16c6a6649de39e8c0b"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-109 NAME=timer; local timer.rc includes timer.rcv at line 2, rc16 -> timer.res -> timer.drv; generated copy target; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-109 NAME=timer; local timer.rc includes timer.rcv at line 2, rc16 -> timer.res -> timer.drv; generated copy target    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winspool/winspool.rc",
+      "current_status": "excluded",
+      "hashes": [
+        "d7fe7078c5a5b3d272485769d6ea67d7a133907cc9bc6433746977795d133fed",
+        "d7fe7078c5a5b3d272485769d6ea67d7a133907cc9bc6433746977795d133fed",
+        "d7fe7078c5a5b3d272485769d6ea67d7a133907cc9bc6433746977795d133fed"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: winspool/makefile:76,102-106 rc16 compiles winspool.rc and winspool.rcv to winspool.res; link16 winspool.obj -> winspool.exe then rc16 attaches res; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; winspool/makefile:76,102-106 rc16 compiles winspool.rc and winspool.rcv to winspool.res; link16 winspool.obj -> winspool.exe then rc16 attaches res    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winspool/winspool.rcv",
+      "current_status": "excluded",
+      "hashes": [
+        "284514919cc372b858c7139b5905d35a44f7cc7e8e1e047bbdc126ffdf44f4bb",
+        "284514919cc372b858c7139b5905d35a44f7cc7e8e1e047bbdc126ffdf44f4bb",
+        "284514919cc372b858c7139b5905d35a44f7cc7e8e1e047bbdc126ffdf44f4bb"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: winspool/winspool.rc:4 include winspool.rcv; winspool/makefile:76,102-106 rc16 -> winspool.res -> winspool.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; winspool/winspool.rc:4 include winspool.rcv; winspool/makefile:76,102-106 rc16 -> winspool.res -> winspool.exe    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/write/messages/usa/write.dlg",
+      "current_status": "excluded",
+      "hashes": [
+        "71e00d67bf5fe4b99d7ac0ff4b3725bfa2081b83edacb6ea3e26574073a3d414",
+        "71e00d67bf5fe4b99d7ac0ff4b3725bfa2081b83edacb6ea3e26574073a3d414",
+        "71e00d67bf5fe4b99d7ac0ff4b3725bfa2081b83edacb6ea3e26574073a3d414"
+      ],
+      "classification": "excluded-scope-candidate",
+      "explicit_scope": " Original historical declaration/resource/tool input role: write/makefile:14,23,145-152,363-370 APP=write RES_DIR=.\\messages\\usa; copy write.dlg -> rc16 write.res -> write.exe; write.rc:449 rcinclude write.dlg; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; write/makefile:14,23,145-152,363-370 APP=write RES_DIR=.\\messages\\usa; copy write.dlg -> rc16 write.res -> write.exe; write.rc:449 rcinclude write.dlg    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    }
+  ],
+  "limits": "Current excluded state and raw file hashes, original missing is not identity; no runtime or source-to-guest proof."
+}

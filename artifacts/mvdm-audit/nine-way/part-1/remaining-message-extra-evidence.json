@@ -1,0 +1,57 @@
+{
+  "head": "b8aaf0870e9c18f51b2a7bcfc6e93b1c89b0fd36",
+  "aggregate_sha256": "5013836c1e9d0b60e6b4bd4c98bb3e219ea3d77628f4ee4aeffaf61ebdc6f533",
+  "rows": [
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL3",
+      "status": "excluded",
+      "hashes": [
+        "279d5cf516a39248f910a17e02647f37737b2c4607a6cd119dc7236affed78e2",
+        "279d5cf516a39248f910a17e02647f37737b2c4607a6cd119dc7236affed78e2",
+        "279d5cf516a39248f910a17e02647f37737b2c4607a6cd119dc7236affed78e2"
+      ],
+      "disposition": "scoped-candidate"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL4",
+      "status": "excluded",
+      "hashes": [
+        "3c753ff790aad0f86a84130c8a40a23a420e8ebe842cb7dde442c55e9a525873",
+        "3c753ff790aad0f86a84130c8a40a23a420e8ebe842cb7dde442c55e9a525873",
+        "3c753ff790aad0f86a84130c8a40a23a420e8ebe842cb7dde442c55e9a525873"
+      ],
+      "disposition": "scoped-candidate"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL5",
+      "status": "excluded",
+      "hashes": [
+        "a929484571f630176541f39d8c411d6e924d8cd6358e6bc395f94b23295015d2",
+        "a929484571f630176541f39d8c411d6e924d8cd6358e6bc395f94b23295015d2",
+        "a929484571f630176541f39d8c411d6e924d8cd6358e6bc395f94b23295015d2"
+      ],
+      "disposition": "scoped-candidate"
+    },
+    {
+      "path": "dos/v86/messages/usa-ms.idx",
+      "status": "excluded",
+      "hashes": [
+        "ff460e0cfae6001312acd98556f449144e455dc57b5d54c807c2ea1306a8e1c8",
+        "ff460e0cfae6001312acd98556f449144e455dc57b5d54c807c2ea1306a8e1c8",
+        "ff460e0cfae6001312acd98556f449144e455dc57b5d54c807c2ea1306a8e1c8"
+      ],
+      "disposition": "scoped-candidate"
+    },
+    {
+      "path": "wow16/ddeml/STRIPPED.DEF",
+      "status": "excluded",
+      "hashes": [
+        "aa244ac0ad932b348a7a38d76d483e194548af27939ac362e6a9183653cc860a",
+        "aa244ac0ad932b348a7a38d76d483e194548af27939ac362e6a9183653cc860a",
+        "aa244ac0ad932b348a7a38d76d483e194548af27939ac362e6a9183653cc860a"
+      ],
+      "disposition": "scoped-candidate"
+    }
+  ],
+  "limits": "Static identity and current aggregate only, no guest runtime proof."
+}

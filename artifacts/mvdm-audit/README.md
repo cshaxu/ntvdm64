@@ -179,6 +179,9 @@ their nonselection in the currently observed configuration.
 The [r4 scope correction](classification-scope-correction-guest-r4-verification.json)
 reopens 52 further guest source/data decisions after deduplicating two
 independent scoped-evidence reviews and checking original bytes.
+The [remaining guest scope correction](classification-scope-correction-guest-remaining-verification.json)
+reopens 92 further source/resource decisions, with pinned original hashes and
+separate retained host-input evidence; build tools and recipes were not swept in.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 The [retention estimate replay](nine-way/part-8/retention-replay-review.md)
