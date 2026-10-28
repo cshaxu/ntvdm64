@@ -99,3 +99,5 @@ The [guest-target candidate review](guest-target-candidate-review.md) identifies
 The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-profile guest C source roles, while retaining 330 ambiguous paths and all host-side application behavior. The [original WINMM contract](wow-winmm-original-contract-review.md) supplies the historical provider contract for the controlled resolver witness, without proving modern provider behavior or guest reachability.
 
 The [DOS absolute I/O lease-error witness](dos-absolute-io-lease-error-review.md) exercises four selected-object null-session paths with controlled seams; the DOS guest error and reachability remain unverified.
+
+The [third guest-target snapshot](guest-target-round3-review.md) raises observed-profile guest C source candidates to 182, with 291 still requiring role review; application host behavior is not excluded. The [local WINMM comparison](wow-winmm-real-null-review.md) exercises the selected cached wrapper and this host provider under controlled invalid inputs.

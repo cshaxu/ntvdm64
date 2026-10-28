@@ -1,0 +1,80 @@
+{
+  "winmm_path": "C:\\Windows\\SysWOW64\\winmm.dll",
+  "winmm_sha256_before_after": [
+    "FF2ABD18BF1404A2D41831CEB6BFD25A812FABA7C29E66C0F2E0CFF5389FC344",
+    "FF2ABD18BF1404A2D41831CEB6BFD25A812FABA7C29E66C0F2E0CFF5389FC344"
+  ],
+  "fixture_sha256": "78844EF71A53B626DEB53F26BEC80ECF7BCC4924E5F02E07EC3C745E294605D0",
+  "fixture_obj_sha256": "8CC48BBAA8E1A7D64AF90D8C6007140445C5EC23C97EA5D67474DAE0E334FB26",
+  "wrapper_sha256": "A318F3F6F6E73CDC64EAECC9A834E55ADA2D8666F7164031935B0400618C1350",
+  "wrapper_obj_sha256": "94D1035F99193D8B459686A5AE7D720955188157009B0C41046B0E5E2292583E",
+  "wrapper_map_sha256": "E87AC1035093890CB71242A65F842D1EA1B0E371269514D576623AD531869369",
+  "wrapper_map_lines": [
+    "0001:000003f0       _WOW32ResolveHandle@24     004013f0 f   wmmedia.obj",
+    "0002:00005f30       __sehtable$_WOW32ResolveHandle@24 00419f30     wmmedia.obj"
+  ],
+  "selected_wmmedia_obj_sha256": "03D9412A0E2F17A87CC17AA18E98A9A4CBBBDC089FBE4B2BFBC04EA71BE52A7F",
+  "source_sha256": "EE8F851E6CD5CD5B9ECF9F1B372A47233B8C721C71307A9399DC1E77D9397ADC",
+  "build_recipe_sha256": "C8EF3BFC0DB761B3C91A8827BED0BD739AA05995AAEFD1A8156C3130A07F1DA4",
+  "fixture_architecture": "pei-i386",
+  "wrapper_architecture": "pei-i386",
+  "results": [
+    {
+      "mode": "provider",
+      "case": "zero16",
+      "exit_code": 0,
+      "stdout": "mode=provider case=zero16 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=cccccccc stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "provider",
+      "case": "invalid16",
+      "exit_code": 0,
+      "stdout": "mode=provider case=invalid16 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=cccccccc stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "provider",
+      "case": "zero32",
+      "exit_code": 0,
+      "stdout": "mode=provider case=zero32 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=cccccccc stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "provider",
+      "case": "invalid32",
+      "exit_code": 0,
+      "stdout": "mode=provider case=invalid32 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=cccccccc stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "wrapper",
+      "case": "zero16",
+      "exit_code": 0,
+      "stdout": "mode=wrapper case=zero16 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=00000000 stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "wrapper",
+      "case": "invalid16",
+      "exit_code": 0,
+      "stdout": "mode=wrapper case=invalid16 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=aaaa out32=00000000 stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "wrapper",
+      "case": "zero32",
+      "exit_code": 0,
+      "stdout": "mode=wrapper case=zero32 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=0 error=126 exception=00000000 out16=0000 out32=cccccccc stack_equal=1",
+      "stderr": ""
+    },
+    {
+      "mode": "wrapper",
+      "case": "invalid32",
+      "exit_code": 0,
+      "stdout": "mode=wrapper case=invalid32 path=C:\\WINDOWS\\system32\\winmm.dll resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll result=1 error=126 exception=00000000 out16=0001 out32=cccccccc stack_equal=1",
+      "stderr": ""
+    }
+  ],
+  "limits": "Independent processes and test-owned null/small-invalid handles; wrapper links cached unmodified wmmedia.obj with explicitly preloaded WINMM and fail-fast unrelated seams. Private ABI assumption; no real guest/device, valid handles, callback or other host versions."
+}

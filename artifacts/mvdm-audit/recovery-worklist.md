@@ -162,3 +162,7 @@ S16 retains the [selected-object multimedia resolver failure witness](host-ch-sc
 The [original WINMM resolver contract](host-ch-scope/wow-winmm-original-contract-review.md) supplies the historical BOOL/output semantics for S16's controlled handle witness; modern private provider behavior and any real guest or extension caller remain separate prerequisites.
 
 S12/S13 retain the [DOS absolute I/O lease-error witness](host-ch-scope/dos-absolute-io-lease-error-review.md): four actual selected-object paths preserve stale LastError under a controlled null-session seam. Establish guest/session reachability and original DOS error contract before a registered correction; no live guest failure or AX/CF result is claimed.
+
+S16 additionally has the [local WINMM versus selected wrapper witness](host-ch-scope/wow-winmm-real-null-review.md): for a test-owned invalid 32-bit handle, the local provider returns FALSE while the cached original wrapper returns TRUE. The wrapper is linked with explicit module-handle injection; establish real guest callers, valid handle contracts and current package identity before implementing and publishing a registered correction.
+
+The [disk session routing review](host-ch-scope/dos-absolute-io-session-routing-review.md) distinguishes normal bound DEM execution from an independent FDC thread; the null-session LastError witness does not by itself establish normal guest reachability.

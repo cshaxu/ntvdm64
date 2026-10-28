@@ -1,0 +1,151 @@
+{
+  "inventory_sha256": "B50EE0F0D0D283EE251D041BCAE6EB23DE4F7839D28132C7486CADD249E7CB86",
+  "graphs": [
+    {
+      "tree": "msvc-x86-release/worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+      "deps_sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "msvc-x86-release/wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "deps_sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "msvc-x64-release/worker",
+      "graph_sha256": "732526CCA6BAE92E860B6ED415EE96F0912C8CD3331ED87846EFF5BDAEFC44C5",
+      "deps_sha256": "75D7A478FD5F1B59D590E1E08C743B9551541FB29A3FC3989785952DCB1EB8A0",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "pkg-uuid-x86/worker",
+      "graph_sha256": "B1BC7B95C2A9DBC1A9DD8CC88931D86941EE146017C37A5ECCB6843FA80AC470",
+      "deps_sha256": "D7C2F7D3E0164F3E970C3FC2FB16822E8E941D526406B408A868ECC0EE025FEC",
+      "stale_blocks": 0
+    }
+  ],
+  "recipes": [
+    {
+      "prefix": "wow16/write/",
+      "target": "write.exe",
+      "recipe": "src/mvdm/wow16/write/makefile",
+      "sha256": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+      "object_names": 86
+    },
+    {
+      "prefix": "wow16/ddeml/",
+      "target": "ddeml.dll",
+      "recipe": "src/mvdm/wow16/ddeml/makefile",
+      "sha256": "8D8A1CBA40DB55B3C43FB97C5624877FC7084559AF568EFEABC6D58E3AFEE582",
+      "object_names": 13
+    },
+    {
+      "prefix": "wow16/commdlg/",
+      "target": "commdlg.dll",
+      "recipe": "src/mvdm/wow16/commdlg/makefile",
+      "sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+      "object_names": 5
+    },
+    {
+      "prefix": "wow16/mmsystem/",
+      "target": "mmsystem.dll",
+      "recipe": "src/mvdm/wow16/mmsystem/makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1",
+      "object_names": 29
+    },
+    {
+      "prefix": "wow16/regedit/",
+      "target": "regedt16.exe",
+      "recipe": "src/mvdm/wow16/regedit/makefile",
+      "sha256": "6255669DED8680CF24DA6D74B49366D2F7F5AD08871CB95DE26A46D42DB339FD",
+      "object_names": 12
+    },
+    {
+      "prefix": "wow16/toolhelp/",
+      "target": "toolhelp.dll",
+      "recipe": "src/mvdm/wow16/toolhelp/makefile",
+      "sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941",
+      "object_names": 25
+    },
+    {
+      "prefix": "wow16/wfwnet/",
+      "target": "wfwnet.drv",
+      "recipe": "src/mvdm/wow16/wfwnet/makefile",
+      "sha256": "F968A26DB06E9E2C3619A201E016A0AFB14C0A5AC19A2A8C8221831A888C4B4C",
+      "object_names": 7
+    },
+    {
+      "prefix": "wow16/killwow/",
+      "target": "KillWOW.exe",
+      "recipe": "src/mvdm/wow16/killwow/makefile",
+      "sha256": "6F81DAA8F5E5B79E69E473A7C023AE65EDBD3BF822E473FB4850935E1DE29D91",
+      "object_names": 1
+    },
+    {
+      "prefix": "wow16/user/",
+      "target": "user.exe",
+      "recipe": "src/mvdm/wow16/user/makefile",
+      "sha256": "7BCA4F72F3CDDC7344EE3B6A09DDA1F72BC96D84364E36C064535DFD213D0CC4",
+      "object_names": 33
+    },
+    {
+      "prefix": "wow16/ole/client/",
+      "target": "olecli.dll",
+      "recipe": "src/mvdm/wow16/ole/client/makefile",
+      "sha256": "42A19F54364CF6FEE49047DA225A702FADFF759541E37143B298F3A2EC7C0B58",
+      "object_names": 17
+    },
+    {
+      "prefix": "wow16/ole/server/",
+      "target": "olesvr.dll",
+      "recipe": "src/mvdm/wow16/ole/server/makefile",
+      "sha256": "040ECF946AE5F0FFBBC946C70637801210FDBFE01533E5CC66D0C85133665009",
+      "object_names": 8
+    },
+    {
+      "prefix": "wow16/mciole/",
+      "target": "mciole16.dll",
+      "recipe": "src/mvdm/wow16/mciole/makefile",
+      "sha256": "7B7D5350B85A364B0C21B9AB370A33DFA5C792FA88CD411CC686D03269F4EDBA",
+      "object_names": 2
+    },
+    {
+      "prefix": "wow16/sherlock/",
+      "target": "drwatson.exe",
+      "recipe": "src/mvdm/wow16/sherlock/makefile",
+      "sha256": "D4E0A78455E5C688D42A7D96E8C012A39074F18A3411FA23A917809A8B7199D7",
+      "object_names": 5
+    },
+    {
+      "prefix": "wow16/rasapi16/",
+      "target": "rasapi16.dll",
+      "recipe": "src/mvdm/wow16/rasapi16/makefile",
+      "sha256": "31404923FB8B2BEA3811701BC650D682D4390EE16738AA0EC58418C7D2E484EB",
+      "object_names": 1
+    }
+  ],
+  "total": 473,
+  "groups": {
+    "unresolved": 291,
+    "guest-source-observed-profile": 182
+  },
+  "guest_targets": {
+    "commdlg.dll": 3,
+    "ddeml.dll": 13,
+    "KillWOW.exe": 1,
+    "mciole16.dll": 1,
+    "mmsystem.dll": 17,
+    "olecli.dll": 15,
+    "olesvr.dll": 6,
+    "rasapi16.dll": 1,
+    "regedt16.exe": 12,
+    "drwatson.exe": 4,
+    "toolhelp.dll": 10,
+    "user.exe": 12,
+    "wfwnet.drv": 5,
+    "write.exe": 82
+  },
+  "limits": "Source/recipe and observed dependency graph only; no guest source build, guest image identity or runtime acceptance; no exclusion of the corresponding application functionality."
+}

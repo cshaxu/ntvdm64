@@ -1,0 +1,21 @@
+# Absolute disk I/O: session ownership and failure contract
+
+This is source tracing and the existing isolated provider-object witness, not a guest reproduction. No real disk or guest was used.
+
+## Synchronous DEM path
+
+The guest absolute-disk BOP dispatch goes through `nt_bop.c:MS_bop_0`, `demdisp.c` (`demAbsRead` / `demAbsWrite`), and `demdasd.c:demAbsReadWrite`. `demDasdRead` / `demDasdWrite` select fixed-disk providers for `NON_REMOVABLE`; floppy providers are selected only when the original INT 13 vector is still installed, otherwise the BIOS route is used. Media/BPB checks and range validation precede provider entry. This is a synchronous calling-thread path, not the separate FDC media-wait thread.
+
+The production standalone worker activates and binds its session (`mvdm_standalone_worker.c`); the CPU thread boundary is separately mediated by the selected original-worker thread binding in `thread_start_compat.c` and its explicitly configured callers in `New-T310OriginalSoftpcNinja.ps1`. The direct `mvdm_softpc_execution.c` host-start bridge also binds, but its own comment identifies it as a bounded fixture entry; it is not evidence by itself of the production route. Thus a provider call with a NULL current session is not established as reachable from a normally executing synchronous guest. The earlier object witness deliberately removes the binding and proves the error-return property only.
+
+## FDC path is different
+
+For certain commands when media is unavailable, `nt_rflop.c:nt_rflop_command` captures the PDB and starts `fdc_thread` with `CreateThread`; the build's per-file forced thread wrapper list does not include `nt_rflop.c`. That thread retries opening/media checks, then closes and calls `fdc_read_write`; some command branches call `nt_floppy_read` / `nt_floppy_write`. A fresh thread does not inherit the per-thread session binding. This is a conditional static route, not a demonstrated real-device or guest reproduction: the open/media and command conditions, `get_drive_handle`'s session-related failure, cancellation, and reset must be tested together before concluding the provider branch is reached. The fixed-disk providers are not reached by this FDC route. Do not infer that DEM reads run on this FDC thread.
+
+## Contract and test boundary
+
+Each of the four provider calls returns a byte count. A failed current-PDB location read returns zero before device I/O without explicitly setting `LastError`. `demAbsReadWrite` treats a sector count mismatch as failure and immediately maps the calling thread's `GetLastError` with `demWinErrorToDosError`, sets AX to that DOS error, and sets carry. Mapping includes seek, not-ready, sector-not-found, read/write faults, media-change and write-protect; unknown values map to generic failure. Therefore an unrelated stale value matching a mapped code may yield the wrong guest-visible DOS reason. The existing sentinel probe proves zero plus preserved stale values in all four selected provider objects with NULL session; it does not exercise DEM mapping, a real guest, or the conditions that cause a NULL session in production.
+
+`tests/adapter-mvdm-host-out/softpc/t280_s20_mvdm_guest_location_fixture.c` already demonstrates a test-owned active session, in-memory guest backing, and thread bind/unbind. This supports a safe future in-process test using actual selected providers and explicitly controlled lease failure, with test-owned BDS/drive seams that forbid device I/O, and a same-thread DEM mapping witness. It does not currently demonstrate the provider call chain or FDC worker; do not manufacture an invalid location and call it normal guest reachability. A separate bounded FDC fixture must reproduce actual worker creation, establish media/open conditions without a real device, and observe binding and termination/reset. Test-defined failure injection must be labelled as such. Neither fixture exists yet for these complete chains.
+
+S13 should establish the provider failure error contract and lifetime ownership as a group, including failed leases, while preserving the original DOS error conversion. The appropriate exact Windows error for an adapter failure is not established by these facts alone. Retain the existing object witness as limited failure evidence; do not mark a guest-visible fault or its severity as proven.
