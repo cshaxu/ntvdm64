@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "b38abd645",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "cross-369/cursor-alias-header-observations.json",
+      "sha256": "9B87B5D2944B31DD0089E2A9606EA6CE5A6ED584687EF80B47FC767C92D56921"
+    },
+    {
+      "path": "cross-369/sound-header-observations.json",
+      "sha256": "0281E6814534DD286DE2B56009B46C9ECC8874FFD6BA015F498C8785084BE837"
+    },
+    {
+      "path": "cross-369/gdi-text-header-observations.json",
+      "sha256": "A35F91CD7F63E8B3F3D5493608CE4189F5C52FC841CB28CB2CF95775508F7C04"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}

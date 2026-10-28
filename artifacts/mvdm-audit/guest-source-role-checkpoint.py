@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'cross-369-selected-owner-next-role-':
+                if prefix == 'cross-369-selected-owner-third-role-':
+                    assert path in {'wow32/' + n for n in ('wcuricon.h', 'wsman.h', 'wgtext.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'cross-369-selected-owner-next-role-':
                     assert path in {'wow32/' + n for n in ('wgpal.h', 'wkmem.h', 'wres32.h', 'wwstbl2.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'cross-369-selected-owner-role-':
                     assert path in {'wow32/' + n for n in ('wcall16.h', 'wcall32.h', 'wkfileio.h', 'wmsgcb.h', 'wmsglb.h', 'wole2.h', 'wow32fax.c', 'wshell.h', 'wshltbl.h', 'wspool.h', 'wthtbl.h', 'wthtbl2.h', 'wumenu.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
