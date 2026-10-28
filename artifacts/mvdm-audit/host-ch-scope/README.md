@@ -29,3 +29,5 @@ The [tool and scaffold role review](tool-scaffold-review.md) checks 72 candidate
 The [C-VID CPU metadata review](cvidc-metadata-review.md) moves one source role from pending to partial based on the generated binding and a bounded selected-object fixture; slot and deployed-runtime coverage remain open.
 
 The [COMMAND host review](../host-command/pending-command-owner-review.md) bounds selected exit and keyboard declarations; the [error/config review](error-config-interface-review.md) identifies an empty physical header without closing configuration behavior.
+
+The [DEM source review](../host-dem/pending-dem-owner-review.md) records current statuses and leaves [debug-only message support](../host-dem/demmsg-profile-role-review.md) pending. The [close object probe](../host-dem/demclose-selected-object-review.md) checks handle and callback sequencing with controlled seams.
