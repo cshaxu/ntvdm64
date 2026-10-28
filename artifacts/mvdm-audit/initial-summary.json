@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1361,
-    "excluded": 2682,
+    "pending": 1354,
+    "excluded": 2689,
     "partial": 588,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Eleven original empty declaration file roles are excluded; CPU, video and network capabilities remain in scope."
+  "note": "Seven original guest build-input file roles are excluded; all guest behavior and image provenance remain in scope."
 }

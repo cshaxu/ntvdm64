@@ -137,6 +137,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 assert proof['estimated_restored_code_percent'] == '100'
             elif proof['status'] == 'excluded':
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
+                                'historical-guest-build-input-only',
                                 'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only',
                                 'historical-build-recipe-file-only', 'historical-inline-helper-source-only',
                                 'historical-cpu-test-declaration-only', 'historical-guest-build-tool-source-only',
@@ -153,6 +154,12 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
                 assert proof['role'] in legacy_roles + artifact_roles and current_hash == original_hash
+                if proof['role'] == 'historical-guest-build-input-only':
+                    assert prefix == 'parallel-guest-resource-role-' and path in (
+                        'wow16/ole/client/funchead.c', 'wow16/ole/client/mk.cmd',
+                        'wow16/ole/client/utils.c', 'wow16/regedit/reg1632.h',
+                        'wow16/drivers/display/display.rc', 'wow16/drivers/display/DISPLAY.RES',
+                        'wow16/drivers/keyboard/keyboard.rcv')
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':

@@ -2960,9 +2960,9 @@ wow16/drivers/display/display.lrf,3,excluded,shard-3/file-review.csv
 wow16/drivers/display/display.LST,0,excluded,shard-0/review.csv
 wow16/drivers/display/display.map,2,excluded,shard-2/file-audit.csv
 wow16/drivers/display/display.OBJ,2,excluded,shard-2/file-audit.csv
-wow16/drivers/display/display.rc,2,pending,shard-2/file-audit.csv
+wow16/drivers/display/display.rc,2,excluded,shard-2/file-audit.csv
 wow16/drivers/display/display.rcv,1,excluded,shard-1/file-audit.csv
-wow16/drivers/display/DISPLAY.RES,2,pending,shard-2/file-audit.csv
+wow16/drivers/display/DISPLAY.RES,2,excluded,shard-2/file-audit.csv
 wow16/drivers/display/display.sym,0,excluded,shard-0/review.csv
 wow16/drivers/display/makefile,1,excluded,shard-1/file-audit.csv
 wow16/drivers/display/vga.drv,1,pending,shard-1/file-audit.csv
@@ -2978,7 +2978,7 @@ wow16/drivers/keyboard/keyboard.lrf,0,excluded,shard-0/review.csv
 wow16/drivers/keyboard/keyboard.map,3,excluded,shard-3/file-review.csv
 wow16/drivers/keyboard/keyboard.OBJ,3,excluded,shard-3/file-review.csv
 wow16/drivers/keyboard/keyboard.rc,3,pending,shard-3/file-review.csv
-wow16/drivers/keyboard/keyboard.rcv,2,pending,shard-2/file-audit.csv
+wow16/drivers/keyboard/keyboard.rcv,2,excluded,shard-2/file-audit.csv
 wow16/drivers/keyboard/KEYBOARD.RES,3,pending,shard-3/file-review.csv
 wow16/drivers/keyboard/keyboard.sym,3,excluded,shard-3/file-review.csv
 wow16/drivers/keyboard/makefile,2,excluded,shard-2/file-audit.csv
@@ -3554,14 +3554,14 @@ wow16/ole/client/dll.h,0,excluded,shard-0/review.csv
 wow16/ole/client/doc.c,3,excluded,shard-3/file-review.csv
 wow16/ole/client/draw.c,1,excluded,shard-1/file-audit.csv
 wow16/ole/client/error.c,3,excluded,shard-3/file-review.csv
-wow16/ole/client/funchead.c,2,pending,shard-2/file-audit.csv
+wow16/ole/client/funchead.c,2,excluded,shard-2/file-audit.csv
 wow16/ole/client/generic.c,0,pending,shard-0/review.csv
 wow16/ole/client/le.c,3,excluded,shard-3/file-review.csv
 wow16/ole/client/ledde.c,3,excluded,shard-3/file-review.csv
 wow16/ole/client/main.c,0,pending,shard-0/review.csv
 wow16/ole/client/makefile,3,excluded,shard-3/file-review.csv
 wow16/ole/client/mf.c,1,excluded,shard-1/file-audit.csv
-wow16/ole/client/mk.cmd,2,pending,shard-2/file-audit.csv
+wow16/ole/client/mk.cmd,2,excluded,shard-2/file-audit.csv
 wow16/ole/client/net.asv,0,pending,shard-0/review.csv
 wow16/ole/client/net.c,1,excluded,shard-1/file-audit.csv
 wow16/ole/client/ole.asm,3,excluded,shard-3/file-review.csv
@@ -3570,7 +3570,7 @@ wow16/ole/client/ole.h,2,excluded,shard-2/file-audit.csv
 wow16/ole/client/olecli.def,0,excluded,shard-0/review.csv
 wow16/ole/client/pbhandlr.c,2,excluded,shard-2/file-audit.csv
 wow16/ole/client/pict.h,1,excluded,shard-1/file-audit.csv
-wow16/ole/client/utils.c,2,pending,shard-2/file-audit.csv
+wow16/ole/client/utils.c,2,excluded,shard-2/file-audit.csv
 wow16/ole/server/block.c,2,excluded,shard-2/file-audit.csv
 wow16/ole/server/debug/block.obj,0,excluded,shard-0/review.csv
 wow16/ole/server/debug/doc.obj,0,excluded,shard-0/review.csv
@@ -3643,7 +3643,7 @@ wow16/regedit/messages/usa/regedit.rcv,1,excluded,shard-1/file-audit.csv
 wow16/regedit/messages/usa/regload.rcv,3,excluded,shard-3/file-review.csv
 wow16/regedit/messages/usa/sdkreged.dlg,3,excluded,shard-3/file-review.csv
 wow16/regedit/msvc.pdb,3,excluded,shard-3/file-review.csv
-wow16/regedit/reg1632.h,2,pending,shard-2/file-audit.csv
+wow16/regedit/reg1632.h,2,excluded,shard-2/file-audit.csv
 wow16/regedit/regdef.h,0,excluded,shard-0/review.csv
 wow16/regedit/regedit.c,3,excluded,shard-3/file-review.csv
 wow16/regedit/regedit.def,2,excluded,shard-2/file-audit.csv

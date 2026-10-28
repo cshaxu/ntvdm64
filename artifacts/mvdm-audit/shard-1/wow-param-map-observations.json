@@ -1,0 +1,159 @@
+{
+  "result": "pass",
+  "source": "wow32/wparam.c",
+  "source_sha256": "DA3930424A77FBAAB5184897475128F8070E9BEDD45A15A19F508DBFB22A36D4",
+  "original_sha256": "939785D0AEE348459E02136EFAFDCBDAC7AA1D7612F4BFCF8C4F21ACF677271A",
+  "catalog_ids": "SRC:6e2b4754506889a7a7f7;SRC:aee1137e11c34144a21d",
+  "build_edge": "build obj/wparam.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wparam.c",
+  "functions": [
+    {
+      "name": "_AddParamMap@8",
+      "va": 268647408,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 570,
+      "relocation_words": 23
+    },
+    {
+      "name": "_CacheBlockFree@8",
+      "va": 268647984,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 183,
+      "relocation_words": 1
+    },
+    {
+      "name": "_DeleteParamMap@12",
+      "va": 268648176,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 151,
+      "relocation_words": 4
+    },
+    {
+      "name": "_FindParamMap@12",
+      "va": 268648336,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 165,
+      "relocation_words": 2
+    },
+    {
+      "name": "_FreeParamMap@4",
+      "va": 268648512,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 314,
+      "relocation_words": 8
+    },
+    {
+      "name": "_GetParam16@4",
+      "va": 268648832,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 34,
+      "relocation_words": 1
+    },
+    {
+      "name": "_InitParamMap@0",
+      "va": 268648880,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 58,
+      "relocation_words": 5
+    },
+    {
+      "name": "_ParamMapUpdateNode@12",
+      "va": 268648944,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 112,
+      "relocation_words": 2
+    },
+    {
+      "name": "_W32CheckThunkParamFlag@0",
+      "va": 268649056,
+      "function": true,
+      "owner": "wparam.obj",
+      "bytes": 18,
+      "relocation_words": 1
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_WowOriginalFreeTask@4",
+      "target": "_FreeParamMap@4",
+      "offset": 201
+    },
+    {
+      "caller": "_W32Init@0",
+      "target": "_InitParamMap@0",
+      "offset": 1039
+    },
+    {
+      "caller": "_WU32SetWindowText@4",
+      "target": "_AddParamMap@8",
+      "offset": 97
+    },
+    {
+      "caller": "_WU32SetWindowText@4",
+      "target": "_DeleteParamMap@12",
+      "offset": 217
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wparam.c",
+      "sha256": "DA3930424A77FBAAB5184897475128F8070E9BEDD45A15A19F508DBFB22A36D4"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "sha256": "939785D0AEE348459E02136EFAFDCBDAC7AA1D7612F4BFCF8C4F21ACF677271A"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wparam.c",
+      "sha256": "939785D0AEE348459E02136EFAFDCBDAC7AA1D7612F4BFCF8C4F21ACF677271A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wparam.obj",
+      "sha256": "69A955DD9D0C40EF46933DC78EB24E9CBD07F0310A65E64F5E22E30B2360DDC2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkman.obj",
+      "sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32.obj",
+      "sha256": "B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuwind.obj",
+      "sha256": "186815949A7DD2B78B06C2FFB9B38CDDDD33F6DFE1DA06B324536BB865CC768A"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkman.c",
+      "sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wow32.c",
+      "sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wuwind.c",
+      "sha256": "7833FA05F1C91129F88C6D625BB4C104801901806BF9B0B4EE40DED820A45CEF"
+    }
+  ],
+  "limitations": "Static image binding and selected lifecycle calls, not live nested callback, cross-task alias, failure recovery, or task retirement proof."
+}

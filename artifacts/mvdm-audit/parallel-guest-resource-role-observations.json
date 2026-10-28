@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "265172c44",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "shard-2/win16-driver-resource-observations.json",
+      "sha256": "9966BB6751D5F52C089D7034FB726AD38AABDB23BA09DFF35F31E89C3A5E9D0B"
+    },
+    {
+      "path": "shard-2/win16-oleclient-guest-observations.json",
+      "sha256": "AF0963A9FD9FA150C05E2308F252F5EEF760B4E28BF550131039FBF340B39E82"
+    },
+    {
+      "path": "shard-2/win16-regedit-guest-observations.json",
+      "sha256": "EF66BCA5D847D9BA87232633AD32B5441FCBBF7AAE2624D8E3AF775014DE5154"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Historical guest input file roles only; no guest runtime acceptance"
+}

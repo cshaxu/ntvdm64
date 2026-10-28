@@ -1,6 +1,8 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 53 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 54 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [wow-param-map](shard-1/wow-param-map-review.md): [observer](shard-1/wow-param-map-observer.py), [receipt](shard-1/wow-param-map-observations.json).
 
 - [cvidc-sascdef](shard-0/cvidc-sascdef-review.md): [observer](shard-0/cvidc-sascdef-observer.py), [receipt](shard-0/cvidc-sascdef-observations.json).
 - [win16-driver-resource](shard-2/win16-driver-resource-review.md): [observer](shard-2/win16-driver-resource-observer.py), [receipt](shard-2/win16-driver-resource-observations.json).
