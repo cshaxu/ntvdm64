@@ -146,6 +146,9 @@ guest-visible equivalence. The [MCI resource](nine-way/part-7/mci-resource-revie
 [mixer](nine-way/part-7/mixer-provider-review.md), and
 [EMS profile](nine-way/part-4/gisp-ems-selection-review.md) reviews separate
 selected resource or dependency evidence from unverified runtime behavior.
+The [DPMI provider comparison](nine-way/part-2/dpmi-provider-comparison-deep-review.md)
+details the observable memory-information differences and the bounded historical
+guest witness; current-release comparison has not yet been run.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
