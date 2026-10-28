@@ -1,0 +1,46 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/host/inc/host_emm.h",
+      "hashes": [
+        "312EC4DC503633FE7D57ACF0327F2A51D10A62DC955FA9B0F933FFC83BDA785C",
+        "312EC4DC503633FE7D57ACF0327F2A51D10A62DC955FA9B0F933FFC83BDA785C",
+        "312EC4DC503633FE7D57ACF0327F2A51D10A62DC955FA9B0F933FFC83BDA785C"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/host/inc/sim32.h",
+      "hashes": [
+        "EEB9A654E53B5934850A6E7FA86FC67B1576AC9F1B9262D87ACB5EED42C2FD98",
+        "EEB9A654E53B5934850A6E7FA86FC67B1576AC9F1B9262D87ACB5EED42C2FD98",
+        "EEB9A654E53B5934850A6E7FA86FC67B1576AC9F1B9262D87ACB5EED42C2FD98"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "normalized_dependencies": [
+    {
+      "object": "obj/dos/emm_mngr.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_emm.h"
+    },
+    {
+      "object": "obj/host/sim32.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\sim32.h"
+    }
+  ],
+  "compile_edges": [
+    "build obj/dos/emm_mngr.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/dos/emm_mngr.c",
+    "build obj/host/sim32.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/sim32.c"
+  ],
+  "map_symbols": [
+    "0001:0004ca90       _Sim32FlushVDMPointer      0044da90 f   original-softpc-host-roots:sim32.obj",
+    "0001:001860c0       _host_allocate_storage     005870c0 f   original-softpc-host-roots:nt_emm.obj"
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Selected memory headers and representative map symbols; no guest memory lifetime or failure behavior proof"
+}

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "3aab0fde4",
+  "candidate_count": 33,
+  "source_tables": [
+    {
+      "path": "tools16-retained-observations.json",
+      "sha256": "F485C37C0966A077E4D826C1F355BC12D9E7ADAC4D4390C0596642CBEC8DFC1C"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Relocated historical file roles only; no guest capability exclusion"
+}

@@ -68,6 +68,12 @@ reconciles 11 empty file roles while leaving profile and capability questions op
 The [historical tools16 chain](shard-0/tools16-chain-review.md) and
 [retained-tool review](shard-3/tools16-build-input-role-review.md) distinguish
 absent mirror paths from hash-matched historical copies.
+The [33-file checkpoint](tools16-retained-role-review.md) reconciles those
+absent mirror roles while preserving the relocated tools and their uses.
+The [Win16 timer](shard-1/guest-timer-review.md),
+[EMS/Sim32 headers](shard-2/dos-emm-sim32-headers-review.md), and
+[Win16 sound resources](shard-3/wow-sound-resources-role-review.md) reviews
+retain their separate image, provider and runtime proof boundaries.
 Additional [tools16 checks](shard-1/historical-tools16-recheck-review.md),
 [DOS build inputs](shard-2/tools16-unmirrored-review.md) and
 [Win16 assembly declarations](shard-1/guest-inc-asm-review.md) retain their

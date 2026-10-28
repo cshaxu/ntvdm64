@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1245,
-    "excluded": 2754,
+    "pending": 1212,
+    "excluded": 2787,
     "partial": 632,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Eleven declaration-less header roles excluded; CPU and video capabilities remain open."
+  "note": "Thirty-three historical mirror tool roles excluded; exact relocated copies are retained."
 }

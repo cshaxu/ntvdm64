@@ -21,12 +21,12 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,245 pending, 632 partial, 53 full and 2,754 excluded physical
+The ledger has 1,212 pending, 632 partial, 53 full and 2,787 excluded physical
 file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.
-The [text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md) covers 208 current mirror differences; 66 original paths lack a file at that mirror location. All 33 pending paths have hash-matching historical tool copies elsewhere. Text retention is not behavioral coverage.
+The [text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md) covers 208 current mirror differences; 66 original paths lack a file at that mirror location. The 33 tools16 paths have hash-matching retained copies; their original mirror roles are excluded, not their uses. Text retention is not behavioral coverage.
 [Parallel source reviews](../../artifacts/mvdm-audit/README.md) include DOS,
 C-VID and WOW GDI bindings; execution and lifecycle obligations remain open.
 The [Video7 mouse-range candidate](../../artifacts/mvdm-audit/video7-pointer-review.md)

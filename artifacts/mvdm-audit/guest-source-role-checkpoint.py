@@ -115,10 +115,16 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             expected = dict(old[path], status=proof['status'])
             assert old[path]['status'] == changed[path]['prior_status'] == 'pending'
             assert row == expected
-            current_hash = sha(Path('src/mvdm') / path)
             original_hash = sha(Path(proof['original_path']))
-            assert current_hash == proof['sha256']
-            assert proof['sha256'] == frozen[path]['current_sha256']
+            if prefix == 'retained-tools16-role-':
+                assert path.startswith('tools16/') and not (Path('src/mvdm') / path).exists()
+                current_hash = sha(Path('tools/historical/opennt-4.5') / Path(path).name)
+                assert not frozen[path]['current_sha256']
+                assert current_hash == proof['sha256'] == frozen[path]['opennt45_sha256']
+            else:
+                current_hash = sha(Path('src/mvdm') / path)
+                assert current_hash == proof['sha256']
+                assert proof['sha256'] == frozen[path]['current_sha256']
             if proof['edition'] == 'OpenNT-src-2':
                 assert frozen[path]['upstream_origin'] == 'current-only' and not frozen[path]['opennt_sha256'] and not frozen[path]['opennt45_sha256']
                 provenance = supplemental[path]
@@ -149,7 +155,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-superseded-nt-host-source-only',
                                 'historical-debug-profile-host-source-only',
                                 'historical-alternative-virtual-floppy-source-only',
-                                  'historical-alternate-host-header-source-only', 'historical-profile-header-source-only', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
+                                  'historical-alternate-host-header-source-only', 'historical-profile-header-source-only', 'historical-relocated-build-artifact-only', 'selected-empty-source-file-only', 'historical-empty-declaration-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -231,6 +237,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'monitor-profile-headers-role-' and path in (
                         'softpc.new/host/inc/monsim32.h', 'softpc.new/host/inc/nt_hunt.h',
                         'softpc.new/base/inc/egatrace.h', 'softpc.new/base/inc/hg_stat.h')
+                if proof['role'] == 'historical-relocated-build-artifact-only':
+                    assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
                 if prefix == 'monitor-profile-headers-role-':
                     assert path in ('softpc.new/host/inc/host_bop.h', 'softpc.new/host/inc/nt_reset.h', 'softpc.new/host/inc/nt_thred.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

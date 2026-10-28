@@ -1,0 +1,9 @@
+# S10 shard 1: Win16 timer driver
+
+Read-only scope: `wow16/timer/api.asm` and `timer.rcv`, both pending when selected. No guest execution, rebuild, or Ninja graph check. Current files equal both OpenNT source editions by full SHA-256: api.asm `91f3e631058cbf37527a0d10e2022113ad805e244c59ea9a0231e4be22243d7e`; timer.rcv `88a0816f7e919ca867b69eff037bdca10751a0f71f039837f5540b3fbfdbb14c`.
+
+Original `timer/makefile:12-16,84-111` selects api.obj among TIMER.DRV objects, generates resource from RC/RCV and attaches it after linking. `timer.def` exports WEP and DriverProc; `api.asm:172-195` dispatches messages, rejecting reserved timer messages if wEnabled is zero. Its table (lines 79–80, 122–162) maps set/kill/time/capability/period calls to `tdd*` handlers. `timer.rcv` declares version metadata; it is not an independent executable.
+
+Separate source-level WOW path: `mmsystem/time.c:162-194` creates event data and calls timeMessage. Its makefile selects stack.obj (`mmsystem/makefile:15`); `stack.asm:1051-1094` initializes WOW thunks if necessary and calls the resolved `tid32Message` via MMCALLPROC32; `init.c:613-634` loads winmm.dll and resolves that name. Therefore one must not equate the presence of TIMER.DRV with proof that WOW timeSetEvent actually routes through this driver. The host export availability, timer delivery, callback lifetime, failures and cancellation remain unverified.
+
+`src/mvdm/wow16/timer/TIMER.DRV` and ZIP `WINNT/SYSTEM32/TIMER.DRV` both SHA-256 `4567fa8b0a10a7b3de47c9366e0a1acfeaf55d1e12387e76c89bbf474b914e5d`; `O:/winnt/system32/TIMER.DRV` was absent when checked. File equality does not establish source build provenance; installed-path absence is not proof no alternate path can load it. Reproduce using Get-FileHash, ZIP entry hashing, and rg for named symbols and original makefiles.
