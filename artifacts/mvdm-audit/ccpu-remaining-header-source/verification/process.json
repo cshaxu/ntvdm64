@@ -1,0 +1,7 @@
+{
+  "pid": 29768,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\ccpu-remaining-header-source-verification.ps1\"",
+  "started": "2026-10-28T00:42:32.1414113Z",
+  "diagnostic_budget_seconds": 180,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

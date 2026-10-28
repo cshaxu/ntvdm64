@@ -1,0 +1,8 @@
+{
+  "pid": 30940,
+  "diagnostic_budget_seconds": 60,
+  "arguments": "-t commands",
+  "started": "2026-10-28T00:40:24.9251489Z",
+  "working_directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\ninja.exe"
+}

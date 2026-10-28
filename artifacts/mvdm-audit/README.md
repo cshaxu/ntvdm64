@@ -29,6 +29,9 @@ file, with the original inline NOP instruction retained and tested.
 The [header/macro checkpoint](ccpu-header-macro-review.md) adds eight real
 preprocessing contexts and ten file dispositions, retains the reproduced
 negative bit-index failure and separates inconclusive x87 experiments.
+The [remaining twelve-header review](ccpu-remaining-header-source-review.md)
+uses complete worker dependencies to distinguish selected declarations from
+different generated schemas; all twelve remain pending.
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

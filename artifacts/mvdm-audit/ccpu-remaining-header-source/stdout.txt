@@ -1,0 +1,1 @@
+PASS actual whole-worker command and dependency records captured; no rebuild

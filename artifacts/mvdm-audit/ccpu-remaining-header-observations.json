@@ -1,0 +1,146 @@
+{
+  "base": "771ddfb0c",
+  "result": "observed",
+  "scope": "Whole-worker compile dependencies, source and alternate-schema identities; no runtime proof or classification change",
+  "headers": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/bswap.h",
+      "status": "pending",
+      "source_sha256": "E3A8AF0917FBE1324EBCFEC90F899DD5BF463884911662FDBA8FD9CC60D0208A",
+      "valid_dependency_consumers": [
+        "obj/ccpu/bswap.obj: #deps 21, deps mtime 8147602760213435 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/cmpxchg.h",
+      "status": "pending",
+      "source_sha256": "DA0CB148F406990BDD4AF19B231317608B29B9D370F5D5EBF70E2B14ECF683EF",
+      "valid_dependency_consumers": [
+        "obj/ccpu/cmpxchg.obj: #deps 22, deps mtime 8147602773616947 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evid_c.h",
+      "status": "pending",
+      "source_sha256": "C8E3925C56ED41CBCC982794EB87E2141DF7D5D01059D58E2A017F874074F693",
+      "valid_dependency_consumers": [],
+      "adjacent_cvid_variant_sha256": "EFD4BBF01556BB661A47131C75F05E321A41C00E407EC6177B66E80718DF8710"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evidfunc.h",
+      "status": "pending",
+      "source_sha256": "69FF2429A6FB7B0E6FFA690E101C2B0695A89CC3FA186A789DED9C27D81D7BC7",
+      "valid_dependency_consumers": [],
+      "adjacent_cvid_variant_sha256": "0EBA6E84CC56F22B5A2EAE75DF0B779E798E69E1BCA6DB5B6F21ABDBAB7AB083"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evidgen.h",
+      "status": "pending",
+      "source_sha256": "7E429987C49EC9E87CA45394EEDDC87C73877E5F95AED73E1BC1D7224D308772",
+      "valid_dependency_consumers": [
+        "obj/ccpu/sasCdef.obj: #deps 26, deps mtime 8147602871237202 (VALID)",
+        "obj/keymouse/mouse_io.obj: #deps 51, deps mtime 8147602890360635 (VALID)",
+        "obj/base-debug/trace.obj: #deps 24, deps mtime 8147602990756942 (VALID)",
+        "obj/host/nt_ega.obj: #deps 32, deps mtime 8147603004102882 (VALID)",
+        "obj/host/nt_vga.obj: #deps 27, deps mtime 8147603005135615 (VALID)",
+        "obj/host/nt_graph.obj: #deps 59, deps mtime 8148378653536001 (VALID)",
+        "obj/host/nt_mouse.obj: #deps 53, deps mtime 8147603017011234 (VALID)",
+        "obj/host/nt_fulsc.obj: #deps 56, deps mtime 8147603027990565 (VALID)",
+        "obj/host/nt_det.obj: #deps 51, deps mtime 8147603033897562 (VALID)",
+        "obj/adapter-softpc/mvdm_softpc_text_video.obj: #deps 33, deps mtime 8147603045900389 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": "18CB85AE563AAC444429E489F43EDCB58CDFAC3939D63C6F19A676BC5246E9A6"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/gdpvar.h",
+      "status": "pending",
+      "source_sha256": "A8FC9F81AF3C06EB4263CC5ACB3005A41F849677CBA4D09AE171AB450F7FB3EC",
+      "valid_dependency_consumers": [
+        "obj/ccpu/sasCdef.obj: #deps 26, deps mtime 8147602871237202 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": "557C5D1D0EFFD1F8B1A18E0DF5415924D63773EDBC7EE762A624720229C24042"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/invd.h",
+      "status": "pending",
+      "source_sha256": "402398E18F19D32B9E8298CC0AB17D8BCA2AF426280A8BDBFBEAD17DCF52A7DC",
+      "valid_dependency_consumers": [
+        "obj/ccpu/invd.obj: #deps 21, deps mtime 8147602803050624 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/invlpg.h",
+      "status": "pending",
+      "source_sha256": "C31E8EF3C4F2E524E248579B60C6BBBE2195E47BE07D8A3310EEAEA670CA2229",
+      "valid_dependency_consumers": [
+        "obj/ccpu/invlpg.obj: #deps 22, deps mtime 8147602803050624 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/pigger_c.h",
+      "status": "pending",
+      "source_sha256": "F8ABFAB1A7001E498A6DDB782C8B0831DB138E8DAAD8F52CCFCCDD4E2A7C297E",
+      "valid_dependency_consumers": [
+        "obj/ccpu/c_reg.obj: #deps 24, deps mtime 8147602784888628 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": "61C86D668BDDAF998101A0DA469115325AD822F751D4B964DCAAD35EA4E7DE9F"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/univer_c.h",
+      "status": "pending",
+      "source_sha256": "72655450D96DB6F58F2DBD8887334222647014E38F8386FAD58791502DCD52CD",
+      "valid_dependency_consumers": [
+        "obj/ccpu/sasCdef.obj: #deps 26, deps mtime 8147602871237202 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": "95963B89F5B99A06FE1C3EA85A0916500BC582881AD5BF2DB508F75BCB07638E"
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/wbinvd.h",
+      "status": "pending",
+      "source_sha256": "806A12EB2D541FC4B7E1C160B97C8CC81D8551A3FE685A0439A72DE2099AFFA2",
+      "valid_dependency_consumers": [
+        "obj/ccpu/wbinvd.obj: #deps 21, deps mtime 8147602856841365 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/xadd.h",
+      "status": "pending",
+      "source_sha256": "793871FEC24B535636658E9124381C3F5A4EBEA319D19C6D59330539BD7ED154",
+      "valid_dependency_consumers": [
+        "obj/ccpu/xadd.obj: #deps 22, deps mtime 8147602862980155 (VALID)"
+      ],
+      "adjacent_cvid_variant_sha256": null
+    }
+  ],
+  "inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-schema-review\\deps.stdout.txt",
+      "Hash": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-schema-review\\commands.stdout.txt",
+      "Hash": "99E5F505E266FC2B2AFA01D77258121DDF2763EF5BC97C783110E9655DB8CFC4"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+      "Hash": "3DD2BA6BF02F66E917F6751D6C6C6B63409D4BBC47D94A238EC73BF7FCE20099"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+      "Hash": "F0957A9BFB0C7E047A9C24FD688644E2203758102DDAF0BB4722158A99797E2D"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\sascdef.c",
+      "Hash": "0EC6AFC6E8FC2086639044D1ADB3460EDFE36B265C6B0CBFEB89391901870BE9"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+      "Hash": "D9BBC34913D015C386C354967D82F31ED53D87487EBFC183684EEE338FD4C150"
+    }
+  ]
+}
