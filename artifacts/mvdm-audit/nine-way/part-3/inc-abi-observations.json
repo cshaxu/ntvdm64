@@ -1,0 +1,1008 @@
+[
+  {
+    "key": "inc/BOP.INC",
+    "path": "inc/BOP.INC",
+    "sha256": {
+      "current": "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669",
+      "opennt": "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669",
+      "opennt45": "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\cmd\\keyb\\keybi9c.asm:98:include bop.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\getset.asm:39:\tinclude bop.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\mscode.asm:37:\tinclude bop.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdata.asm:38:include bop.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdisp.asm:34:include bop.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:40:include bop.inc",
+      "src/mvdm\\dpmi\\486\\dxfunc.asm:80:include bop.inc",
+      "src/mvdm\\dpmi\\486\\dxintr.asm:105:include bop.inc",
+      "src/mvdm\\dpmi\\486\\dxmain.asm:129:include bop.inc",
+      "src/mvdm\\dpmi\\dxfunc.asm:78:include bop.inc",
+      "src/mvdm\\dpmi\\dxhpbios.asm:39:include bop.inc",
+      "src/mvdm\\dpmi\\dxintr.asm:105:include bop.inc",
+      "src/mvdm\\dpmi\\dxmain.asm:130:include bop.inc",
+      "src/mvdm\\dpmi\\dxnetbio.asm:50:include bop.inc",
+      "src/mvdm\\dpmi\\dxutil.asm:63:include bop.inc",
+      "src/mvdm\\inc\\CMDSVC.INC:1:include bop.inc",
+      "src/mvdm\\inc\\DBGSVC.INC:1:include bop.inc",
+      "src/mvdm\\inc\\DOSSVC.INC:9:include bop.inc",
+      "src/mvdm\\inc\\DPMI.INC:4:include bop.inc",
+      "src/mvdm\\inc\\RDRSVC.INC:1:include bop.inc",
+      "src/mvdm\\inc\\WOW.INC:4:INCLUDE bop.INC",
+      "src/mvdm\\inc\\XMSSVC.INC:1:include bop.inc",
+      "src/mvdm\\inc\\cmdsvc.h:8:include bop.inc",
+      "src/mvdm\\inc\\dbgsvc.h:16:include bop.inc",
+      "src/mvdm\\inc\\dossvc.h:85:include bop.inc",
+      "src/mvdm\\inc\\dpmi.h:26:include bop.inc",
+      "src/mvdm\\inc\\rdrsvc.h:27:include bop.inc",
+      "src/mvdm\\inc\\xmssvc.h:18:include bop.inc",
+      "src/mvdm\\v86\\util\\quit.asm:30:include bop.inc",
+      "src/mvdm\\wow16\\kernel31\\lddebug.asm:9:include bop.inc",
+      "src/mvdm\\wow16\\kernel31\\ldint.asm:9:include bop.inc",
+      "src/mvdm\\wow16\\kernel31\\task.asm:10:include bop.inc",
+      "src/mvdm\\wow32\\i386\\fastwow.asm:47:include bop.inc"
+    ]
+  },
+  {
+    "key": "inc/CMDSVC.INC",
+    "path": "inc/CMDSVC.INC",
+    "sha256": {
+      "current": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6",
+      "opennt": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6",
+      "opennt45": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\cmd\\command\\init.asm:61:\tinclude cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\cmd\\command\\rdata.asm:37:\tinclude cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\cmd\\command\\tcmd2b.asm:20:\tinclude cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\cmd\\command\\tcode.asm:27:        include cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysconf.asm:36:        include cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:30:        include cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\macro.asm:26:        include cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm:45:        include cmdsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:38:INCLUDE cmdsvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysconf.asm:36:        include cmdsvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:30:        include cmdsvc.inc"
+    ]
+  },
+  {
+    "key": "inc/CURDIR.INC",
+    "path": "inc/CURDIR.INC",
+    "sha256": {
+      "current": "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762",
+      "opennt": "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762",
+      "opennt45": "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\cmd\\command\\comequ.asm:11:\t\tinclude\tcurdir.inc\t; to get DIRSTRLEN",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:16:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\dir2.asm:33:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\ioctl.asm:46:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\macro.asm:25:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\macro2.asm:65:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\misc.asm:38:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\misc2.asm:38:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\mscode.asm:31:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdata.asm:12:INCLUDE curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm:36:        include curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:33:INCLUDE curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\open.asm:41:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\path.asm:30:\tinclude curdir.inc",
+      "src/mvdm\\dos\\v86\\inc\\msdata2.asm:13:INCLUDE CURDIR.INC",
+      "src/mvdm\\dos\\v86\\inc\\smdossym.inc:129:include curdir.INC",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:16:\tinclude curdir.inc"
+    ]
+  },
+  {
+    "key": "inc/dbginfo.h",
+    "path": "inc/dbginfo.h",
+    "sha256": {
+      "current": "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B",
+      "opennt": "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B",
+      "opennt45": "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dbg\\dbg.c:25:#include <dbginfo.h>",
+      "src/mvdm\\vdmdbg\\vdmdbg.c:28:#include <dbginfo.h>",
+      "src/mvdm\\wow16\\wowdeb\\wowdeb.c:6:#include <dbginfo.h>"
+    ]
+  },
+  {
+    "key": "inc/DBGSVC.INC",
+    "path": "inc/DBGSVC.INC",
+    "sha256": {
+      "current": "296A6387CFE02445E6C8D43F9F68E1FD4DFBD9D654DE3BA6460DEE54F6DFC171",
+      "opennt": "296A6387CFE02445E6C8D43F9F68E1FD4DFBD9D654DE3BA6460DEE54F6DFC171",
+      "opennt45": "296A6387CFE02445E6C8D43F9F68E1FD4DFBD9D654DE3BA6460DEE54F6DFC171"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:29:        include dbgsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdisp.asm:36:include dbgsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm:46:        include dbgsvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:42:include dbgsvc.inc",
+      "src/mvdm\\dpmi\\486\\dxboot.asm:98:include dbgsvc.inc",
+      "src/mvdm\\dpmi\\dxboot.asm:98:include dbgsvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:29:        include dbgsvc.inc",
+      "src/mvdm\\wow16\\kernel31\\lddebug.asm:8:include dbgsvc.inc",
+      "src/mvdm\\wow16\\kernel31\\ldint.asm:8:include dbgsvc.inc",
+      "src/mvdm\\wow16\\kernel31\\task.asm:9:include dbgsvc.inc",
+      "src/mvdm\\wow16\\kernel31\\wow16cal.asm:20:    include dbgsvc.inc"
+    ]
+  },
+  {
+    "key": "inc/DOSSVC.INC",
+    "path": "inc/DOSSVC.INC",
+    "sha256": {
+      "current": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3",
+      "opennt": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3",
+      "opennt45": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\cmd\\command\\init.asm:62:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\msinit.asm:21:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysconf.asm:35:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:28:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\abort.asm:27:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\dev.asm:30:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\dir2.asm:34:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\fcbio.asm:37:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\fcbio2.asm:37:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\file.asm:28:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\getset.asm:38:\tINCLUDE dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\handle.asm:34:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\ioctl.asm:48:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\lock.asm:29:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\macro.asm:27:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\misc.asm:40:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\mscode.asm:36:\tinclude dossvc.inc\t;M018",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msctrlc.asm:52:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdisp.asm:33:include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm:44:        include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:39:include dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\path.asm:33:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\search.asm:31:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\time.asm:22:\tinclude dossvc.inc",
+      "src/mvdm\\dos\\v86\\inc\\const2.asm:16:include dossvc.inc",
+      "src/mvdm\\softpc.new\\bios\\msinit.asm:21:        include dossvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysconf.asm:35:        include dossvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:28:        include dossvc.inc"
+    ]
+  },
+  {
+    "key": "inc/DOSWOW.INC",
+    "path": "inc/DOSWOW.INC",
+    "sha256": {
+      "current": "D6BD8A52BFF2980DACAB518DA8F2330DA5BB978E6C07D1846662078DA49444FB",
+      "opennt": "D6BD8A52BFF2980DACAB518DA8F2330DA5BB978E6C07D1846662078DA49444FB",
+      "opennt45": "D6BD8A52BFF2980DACAB518DA8F2330DA5BB978E6C07D1846662078DA49444FB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msinit.asm:58:        include doswow.inc",
+      "src/mvdm\\dos\\v86\\inc\\lmstub.asm:925:        include doswow.inc",
+      "src/mvdm\\wow16\\kernel31\\ldboot.asm:14:include doswow.inc"
+    ]
+  },
+  {
+    "key": "inc/DPMI.INC",
+    "path": "inc/DPMI.INC",
+    "sha256": {
+      "current": "9E1EE5A80452668B6EC2E5FCDD0ED2686FDDFF26DA7FF03BAB63D0D3C08EE381",
+      "opennt": "9E1EE5A80452668B6EC2E5FCDD0ED2686FDDFF26DA7FF03BAB63D0D3C08EE381",
+      "opennt45": "9E1EE5A80452668B6EC2E5FCDD0ED2686FDDFF26DA7FF03BAB63D0D3C08EE381"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dpmi\\486\\dxboot.asm:93:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxfunc.asm:78:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxint31.asm:44:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxint31.asm:54:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxintr.asm:106:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxmain.asm:130:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxstrt.asm:77:include dpmi.inc",
+      "src/mvdm\\dpmi\\486\\dxutil.asm:60:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxboot.asm:93:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxfunc.asm:76:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxint31.asm:44:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxint31.asm:54:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxmain.asm:131:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxmmgr.asm:101:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxstrt.asm:77:include dpmi.inc",
+      "src/mvdm\\dpmi\\dxutil.asm:60:include dpmi.inc",
+      "src/mvdm\\wow16\\kernel31\\wow16cal.asm:22:    include dpmi.inc"
+    ]
+  },
+  {
+    "key": "inc/enumapis.h",
+    "path": "inc/enumapis.h",
+    "sha256": {
+      "current": "864C27F32FC218FDBC29CD137111253686AF65F6DBF77DE365FEF95EEE8F33DB",
+      "opennt": "864C27F32FC218FDBC29CD137111253686AF65F6DBF77DE365FEF95EEE8F33DB",
+      "opennt45": "864C27F32FC218FDBC29CD137111253686AF65F6DBF77DE365FEF95EEE8F33DB"
+    },
+    "textual_include_candidates": []
+  },
+  {
+    "key": "inc/ENUMAPIS.INC",
+    "path": "inc/ENUMAPIS.INC",
+    "sha256": {
+      "current": "2C0712FD64213997B99B8FADA9E8A253547EFC7937DD0E7CAE3469CD6FF580DB",
+      "opennt": "2C0712FD64213997B99B8FADA9E8A253547EFC7937DD0E7CAE3469CD6FF580DB",
+      "opennt45": "2C0712FD64213997B99B8FADA9E8A253547EFC7937DD0E7CAE3469CD6FF580DB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\redir\\mailslot.asm:53:include enumapis.inc    ; dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\namepipe.asm:62:include enumapis.inc    ; dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\netapis.asm:59:include enumapis.inc    ; dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\neterror.asm:49:include enumapis.inc    ; dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\redir.asm:43:include enumapis.inc    ; Local_API_GetRedirVersion, etc.",
+      "src/mvdm\\dos\\v86\\redir\\resident.asm:58:include enumapis.inc    ; dispatch codes"
+    ]
+  },
+  {
+    "key": "inc/intmac.inc",
+    "path": "inc/intmac.inc",
+    "sha256": {
+      "current": "2980D43394C76F17966AA9AA2775B2FC7B87E093AB94E1249B9FBC1295F83485",
+      "opennt": "2980D43394C76F17966AA9AA2775B2FC7B87E093AB94E1249B9FBC1295F83485",
+      "opennt45": "2980D43394C76F17966AA9AA2775B2FC7B87E093AB94E1249B9FBC1295F83485"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dpmi\\486\\dxboot.asm:97:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxfunc.asm:77:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxint31.asm:52:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxintr.asm:103:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxmain.asm:128:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxstrt.asm:78:include intmac.inc",
+      "src/mvdm\\dpmi\\486\\dxutil.asm:67:include intmac.inc",
+      "src/mvdm\\dpmi\\dxboot.asm:97:include intmac.inc",
+      "src/mvdm\\dpmi\\dxdisk.asm:38:include intmac.inc",
+      "src/mvdm\\dpmi\\dxfunc.asm:75:include intmac.inc",
+      "src/mvdm\\dpmi\\dxhpbios.asm:37:include intmac.inc",
+      "src/mvdm\\dpmi\\dxini.asm:32:include     intmac.inc",
+      "src/mvdm\\dpmi\\dxint31.asm:52:include intmac.inc",
+      "src/mvdm\\dpmi\\dxintr.asm:103:include intmac.inc",
+      "src/mvdm\\dpmi\\dxmain.asm:128:include intmac.inc",
+      "src/mvdm\\dpmi\\dxnetbio.asm:47:include intmac.inc",
+      "src/mvdm\\dpmi\\dxstrt.asm:78:include intmac.inc",
+      "src/mvdm\\dpmi\\dxutil.asm:72:include intmac.inc",
+      "src/mvdm\\dpmi\\ntintr32.asm:1:include intmac.inc",
+      "src/mvdm\\dpmi\\ntnpxem.asm:32:include intmac.inc"
+    ]
+  },
+  {
+    "key": "inc/monregs.h",
+    "path": "inc/monregs.h",
+    "sha256": {
+      "current": "8B8BAAA697B4DEA31FA51B4699A496D9D48673825BA3AB60869611DF8EC092FB",
+      "opennt": "8B8BAAA697B4DEA31FA51B4699A496D9D48673825BA3AB60869611DF8EC092FB",
+      "opennt45": "8B8BAAA697B4DEA31FA51B4699A496D9D48673825BA3AB60869611DF8EC092FB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\softpc.new\\host\\inc\\host_cpu.h:24:#include <monregs.h>",
+      "src/mvdm\\softpc.new\\host\\src\\nt_thred.c:27:#include \"monregs.h\""
+    ]
+  },
+  {
+    "key": "inc/MVDM.INC",
+    "path": "inc/MVDM.INC",
+    "sha256": {
+      "current": "514CE47685C836B3518242601F863BEFDA40A47D472EAC988780A678226794ED",
+      "opennt": "514CE47685C836B3518242601F863BEFDA40A47D472EAC988780A678226794ED",
+      "opennt45": "514CE47685C836B3518242601F863BEFDA40A47D472EAC988780A678226794ED"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\inc\\WOW.INC:3:INCLUDE mvdm.INC"
+    ]
+  },
+  {
+    "key": "inc/oemuni.h",
+    "path": "inc/oemuni.h",
+    "sha256": {
+      "current": "26C8509048272DE86ED1B93F5AF837434E90D8ECBC8A878D915C419BE2D2BAFB",
+      "opennt": "26C8509048272DE86ED1B93F5AF837434E90D8ECBC8A878D915C419BE2D2BAFB",
+      "opennt45": "26C8509048272DE86ED1B93F5AF837434E90D8ECBC8A878D915C419BE2D2BAFB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\command\\cmdconf.c:15:#include <oemuni.h>",
+      "src/mvdm\\dos\\command\\cmdenv.c:18:#include <oemuni.h>",
+      "src/mvdm\\dos\\command\\cmdexec.c:17:#include <oemuni.h>",
+      "src/mvdm\\dos\\command\\cmdmisc.c:24:#include \"oemuni.h\"",
+      "src/mvdm\\dos\\command\\cmdpif.c:18:#include <oemuni.h>",
+      "src/mvdm\\dos\\dem\\dem.h:85:#include <oemuni.h>",
+      "src/mvdm\\oemuni\\file.c:11:#include <oemuni.h>",
+      "src/mvdm\\oemuni\\process.c:11:#include <oemuni.h>",
+      "src/mvdm\\oemuni\\toemuni.c:12:#include <oemuni.h>",
+      "src/mvdm\\softpc.new\\host\\src\\config.c:52:#include \"oemuni.h\"",
+      "src/mvdm\\softpc.new\\host\\src\\nt_pif.c:24:#include <oemuni.h>",
+      "src/mvdm\\wow32\\precomp.h:94:#include \"oemuni.h\""
+    ]
+  },
+  {
+    "key": "inc/rdrexp.h",
+    "path": "inc/rdrexp.h",
+    "sha256": {
+      "current": "5A40A916B423D7758625F9E82EA938C0334E71710CB491C91D373AFF44F9A098",
+      "opennt": "5A40A916B423D7758625F9E82EA938C0334E71710CB491C91D373AFF44F9A098",
+      "opennt45": "5A40A916B423D7758625F9E82EA938C0334E71710CB491C91D373AFF44F9A098"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrdisp.c:45:#include <rdrexp.h>             // VrDispatch prototypes"
+    ]
+  },
+  {
+    "key": "inc/rdrsvc.h",
+    "path": "inc/rdrsvc.h",
+    "sha256": {
+      "current": "C8BC9DB22634ADB5E3DC85D30F721E602FF1C6A28221958587D0804F8E96E45E",
+      "opennt": "C8BC9DB22634ADB5E3DC85D30F721E602FF1C6A28221958587D0804F8E96E45E",
+      "opennt45": "C8BC9DB22634ADB5E3DC85D30F721E602FF1C6A28221958587D0804F8E96E45E"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrdisp.c:46:#include <rdrsvc.h>             // SVC_RDR... defines"
+    ]
+  },
+  {
+    "key": "inc/RDRSVC.INC",
+    "path": "inc/RDRSVC.INC",
+    "sha256": {
+      "current": "2C85BCE46D4E9655FDF5C3BD18ACE18B57D79160D9D85D1AEFAA5CFB02C143CE",
+      "opennt": "2C85BCE46D4E9655FDF5C3BD18ACE18B57D79160D9D85D1AEFAA5CFB02C143CE",
+      "opennt45": "2C85BCE46D4E9655FDF5C3BD18ACE18B57D79160D9D85D1AEFAA5CFB02C143CE"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\redir\\int2a.asm:36:include rdrsvc.inc      ; SVC",
+      "src/mvdm\\dos\\v86\\redir\\int5c.asm:38:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\mailslot.asm:56:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\msgapi.asm:44:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\namepipe.asm:65:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\netapis.asm:63:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\neterror.asm:53:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\redir.asm:45:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dos\\v86\\redir\\resident.asm:62:include rdrsvc.inc      ; BOP and SVC macros/dispatch codes",
+      "src/mvdm\\dpmi\\dxnetbio.asm:51:include rdrsvc.inc"
+    ]
+  },
+  {
+    "key": "inc/SOFTPC.INC",
+    "path": "inc/SOFTPC.INC",
+    "sha256": {
+      "current": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7",
+      "opennt": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7",
+      "opennt45": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysconf.asm:37:        include softpc.inc",
+      "src/mvdm\\inc\\WOW.INC:6:INCLUDE softpc.INC",
+      "src/mvdm\\softpc.new\\bios\\sysconf.asm:37:        include softpc.inc",
+      "src/mvdm\\wow16\\kernel31\\ldint.asm:14:include softpc.inc"
+    ]
+  },
+  {
+    "key": "inc/tdb16.h",
+    "path": "inc/tdb16.h",
+    "sha256": {
+      "current": "68F617F6EDC76573D618AE2966887F0DF4EA678B0B199F7347693D2EF11949EB",
+      "opennt": "68F617F6EDC76573D618AE2966887F0DF4EA678B0B199F7347693D2EF11949EB",
+      "opennt45": "68F617F6EDC76573D618AE2966887F0DF4EA678B0B199F7347693D2EF11949EB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\bde\\precomp.h:15:#include <tdb16.h>",
+      "src/mvdm\\vdmexts\\precomp.h:13:#include <tdb16.h>",
+      "src/mvdm\\wow32\\precomp.h:64:#include \"tdb16.h\""
+    ]
+  },
+  {
+    "key": "inc/TDB16.INC",
+    "path": "inc/TDB16.INC",
+    "sha256": {
+      "current": "F8B245F5906D05D02CB4492698FBCE84AADC381829ED438AA48461CB49EB0715",
+      "opennt": "F8B245F5906D05D02CB4492698FBCE84AADC381829ED438AA48461CB49EB0715",
+      "opennt45": "F8B245F5906D05D02CB4492698FBCE84AADC381829ED438AA48461CB49EB0715"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\kernel31\\tdb.inc:122:    include tdb16.inc"
+    ]
+  },
+  {
+    "key": "inc/v86def.h",
+    "path": "inc/v86def.h",
+    "sha256": {
+      "current": "5BC822B487F5F1A236E6BE8E107AF5832FD680E026CF7231E0AE61E13595937E",
+      "opennt": "5BC822B487F5F1A236E6BE8E107AF5832FD680E026CF7231E0AE61E13595937E",
+      "opennt45": "5BC822B487F5F1A236E6BE8E107AF5832FD680E026CF7231E0AE61E13595937E"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\inc\\softpc.h:34:#include \"v86def.h\""
+    ]
+  },
+  {
+    "key": "inc/vdmredir.h",
+    "path": "inc/vdmredir.h",
+    "sha256": {
+      "current": "2462271DD22683738E60B4154BD891A8DFC679D4C34B9F75B23ECF91523ADD2D",
+      "opennt": "2462271DD22683738E60B4154BD891A8DFC679D4C34B9F75B23ECF91523ADD2D",
+      "opennt45": "2462271DD22683738E60B4154BD891A8DFC679D4C34B9F75B23ECF91523ADD2D"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrdebug.c:195:#include <vdmredir.h>",
+      "src/mvdm\\vdmredir\\vrdisp.c:37:#include <vdmredir.h>           // common VdmRedir stuff",
+      "src/mvdm\\vdmredir\\vrdlc5c.c:64:#include <vdmredir.h>",
+      "src/mvdm\\vdmredir\\vrdlcbuf.c:60:#include <vdmredir.h>",
+      "src/mvdm\\vdmredir\\vrdlcdbg.c:98:#include <vdmredir.h>",
+      "src/mvdm\\vdmredir\\vrdlcpst.c:89:#include <vdmredir.h>",
+      "src/mvdm\\vdmredir\\vrinit.c:48:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrmisc.c:37:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrmslot.c:81:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrnetapi.c:64:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrnetb.c:47:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrnmpipe.c:112:#include <vdmredir.h>   // common Vdm Redir stuff",
+      "src/mvdm\\vdmredir\\vrputil.c:40:#include <vdmredir.h>   // common Vr stuff",
+      "src/mvdm\\vdmredir\\vrremote.c:59:#include <vdmredir.h>   // common Vr stuff"
+    ]
+  },
+  {
+    "key": "inc/vdmtb.inc",
+    "path": "inc/vdmtb.inc",
+    "sha256": {
+      "current": "EBBD61C06B36DA2C64B15AE7647AFF22F9F0090BE8C4676CBF4434548E154ACE",
+      "opennt": null,
+      "opennt45": "EBBD61C06B36DA2C64B15AE7647AFF22F9F0090BE8C4676CBF4434548E154ACE"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\i386\\fastwow.asm:51:include vdmtb.inc"
+    ]
+  },
+  {
+    "key": "inc/VDMTIB.INC",
+    "path": "inc/VDMTIB.INC",
+    "sha256": {
+      "current": "0AD51B2FAA863F5885F9B1326B24F8038D3BEE01C04AF11B059B4CA98C254661",
+      "opennt": null,
+      "opennt45": "0AD51B2FAA863F5885F9B1326B24F8038D3BEE01C04AF11B059B4CA98C254661"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dpmi\\486\\dxboot.asm:95:include vdmtib.inc",
+      "src/mvdm\\dpmi\\486\\dxintr.asm:100:include vdmtib.inc",
+      "src/mvdm\\dpmi\\dxboot.asm:95:include vdmtib.inc",
+      "src/mvdm\\dpmi\\dxintr.asm:100:include vdmtib.inc",
+      "src/mvdm\\inc\\SOFTPC.INC:61:INCLUDE vdmtib.INC",
+      "src/mvdm\\wow16\\drivers\\keyboard\\keyboard.asm:25:    include vdmtib.inc"
+    ]
+  },
+  {
+    "key": "inc/VDMTIB.INC.old",
+    "path": "inc/VDMTIB.INC.old",
+    "sha256": {
+      "current": "675CEEC6E626A6C05A1BAE513D3712A1C216BFFBE483FEC6B86E06B17E8F11D7",
+      "opennt": "675CEEC6E626A6C05A1BAE513D3712A1C216BFFBE483FEC6B86E06B17E8F11D7",
+      "opennt45": null
+    },
+    "textual_include_candidates": []
+  },
+  {
+    "key": "inc/vint.h",
+    "path": "inc/vint.h",
+    "sha256": {
+      "current": "E88CC5F8624A4A899095A4F1794C697754C71AEB7E480D20D51FD6A976D612D1",
+      "opennt": "E88CC5F8624A4A899095A4F1794C697754C71AEB7E480D20D51FD6A976D612D1",
+      "opennt45": "E88CC5F8624A4A899095A4F1794C697754C71AEB7E480D20D51FD6A976D612D1"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dpmi32\\precomp.h:22:#include <vint.h>",
+      "src/mvdm\\softpc.new\\host\\src\\nt_msscs.c:40:#include <vint.h>",
+      "src/mvdm\\wow16\\test\\shell\\wowexec.c:24:#include \"vint.h\""
+    ]
+  },
+  {
+    "key": "inc/VINT.INC",
+    "path": "inc/VINT.INC",
+    "sha256": {
+      "current": "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7",
+      "opennt": "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7",
+      "opennt45": "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\cmd\\command\\tcode.asm:29:        include vint.inc",
+      "src/mvdm\\dos\\v86\\cmd\\keyb\\keybi9c.asm:99:include vint.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem.asm:147:        include vint.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem4.asm:21:        include vint.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem5.asm:26:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\msbio1.asm:18:\tinclude vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\mschar.asm:20:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\msinit.asm:22:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\msint13.asm:22:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\spcemm.asm:34:include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\spckbd.asm:42:include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\spcmse_4.asm:36:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:32:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\handle.asm:35:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msctrlc.asm:53:        include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdata.asm:30:include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msdisp.asm:35:include vint.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\dos\\msproc.asm:41:include vint.inc",
+      "src/mvdm\\dos\\v86\\inc\\cputype.inc:14:include vint.inc",
+      "src/mvdm\\inc\\DPMI.INC:2:include vint.inc",
+      "src/mvdm\\inc\\dpmi.h:24:include vint.inc",
+      "src/mvdm\\inc\\intmac.inc:30:include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\msbio1.asm:18:\tinclude vint.inc",
+      "src/mvdm\\softpc.new\\bios\\mschar.asm:20:        include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\msinit.asm:22:        include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\msint13.asm:22:        include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\spcemm.asm:34:include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\spckbd.asm:42:include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\spcmse.asm:36:        include vint.inc",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:32:        include vint.inc",
+      "src/mvdm\\wow16\\drivers\\comm\\ibmcom.asm:149:include vint.inc",
+      "src/mvdm\\wow16\\drivers\\comm\\ibmcom1.asm:68:include vint.inc",
+      "src/mvdm\\wow16\\drivers\\comm\\ibmint.asm:45:include vint.inc",
+      "src/mvdm\\wow16\\drivers\\comm\\ibmsetup.asm:23:include vint.inc",
+      "src/mvdm\\wow16\\inc\\windefs.inc:12:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\2ginterf.asm:13:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\3ginterf.asm:11:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\context.asm:11:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\enable.asm:10:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\i21entry.asm:11:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\i21file.asm:10:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\i21task.asm:10:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\int24.asm:12:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\kernel.inc:25:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\kernstub.asm:16:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\ldboot.asm:13:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\lddebug.asm:11:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\ldint.asm:13:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\stack.asm:6:include vint.inc",
+      "src/mvdm\\wow16\\kernel31\\tasking.asm:21:include vint.inc",
+      "src/mvdm\\wow16\\mmsystem\\isr.asm:25:\tinclude vint.inc",
+      "src/mvdm\\wow16\\mmsystem\\stack.asm:47:\tinclude vint.inc",
+      "src/mvdm\\wow16\\system\\timer.asm:18:include vint.inc",
+      "src/mvdm\\wow16\\system\\windefs.inc:13:include vint.inc",
+      "src/mvdm\\wow16\\toolhelp\\int2.asm:12:        include vint.inc",
+      "src/mvdm\\wow16\\user\\user.inc:26:include vint.inc",
+      "src/mvdm\\wow16\\user\\winmisc2.asm:30:include vint.inc",
+      "src/mvdm\\wow32\\i386\\fastwow.asm:50:include vint.inc"
+    ]
+  },
+  {
+    "key": "inc/vrdefld.h",
+    "path": "inc/vrdefld.h",
+    "sha256": {
+      "current": "E15089BF59F6F69FB39C2BC35D79D40DA4B5AD2C9ED9401E955607FF5692B9BA",
+      "opennt": "E15089BF59F6F69FB39C2BC35D79D40DA4B5AD2C9ED9401E955607FF5692B9BA",
+      "opennt45": "E15089BF59F6F69FB39C2BC35D79D40DA4B5AD2C9ED9401E955607FF5692B9BA"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrdlc5c.c:69:#include <vrdefld.h>    // VDM_LOAD_INFO",
+      "src/mvdm\\vdmredir\\vrinit.c:53:#include <vrdefld.h>"
+    ]
+  },
+  {
+    "key": "inc/VRDEFLD.INC",
+    "path": "inc/VRDEFLD.INC",
+    "sha256": {
+      "current": "8A1A7D7BD9C7C14739A469DA3EA25ADE85DA77354EAD01886780963119EDB843",
+      "opennt": "8A1A7D7BD9C7C14739A469DA3EA25ADE85DA77354EAD01886780963119EDB843",
+      "opennt45": "8A1A7D7BD9C7C14739A469DA3EA25ADE85DA77354EAD01886780963119EDB843"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\redir\\resident.asm:65:include vrdefld.inc     ; VDM_LOAD_INFO"
+    ]
+  },
+  {
+    "key": "inc/VRDLCTAB.INC",
+    "path": "inc/VRDLCTAB.INC",
+    "sha256": {
+      "current": "9C0C853347FF8CFFC7D729EEE61AE856F26BC21DE466CA7237DBF5D825E12C09",
+      "opennt": "9C0C853347FF8CFFC7D729EEE61AE856F26BC21DE466CA7237DBF5D825E12C09",
+      "opennt45": "9C0C853347FF8CFFC7D729EEE61AE856F26BC21DE466CA7237DBF5D825E12C09"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\redir\\int5c.asm:41:include vrdlctab.inc    ; VDM_REDIR_DOS_WINDOW"
+    ]
+  },
+  {
+    "key": "inc/vrinit.h",
+    "path": "inc/vrinit.h",
+    "sha256": {
+      "current": "13FA0AA17EA85C2E9D0A48FFA72626C46CC1C53DECAD3DC4EDCBDD1FA7034939",
+      "opennt": "13FA0AA17EA85C2E9D0A48FFA72626C46CC1C53DECAD3DC4EDCBDD1FA7034939",
+      "opennt45": "13FA0AA17EA85C2E9D0A48FFA72626C46CC1C53DECAD3DC4EDCBDD1FA7034939"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrdisp.c:38:#include <vrinit.h>             // Vr init prototypes",
+      "src/mvdm\\vdmredir\\vrdll.c:38:#include <vrinit.h>",
+      "src/mvdm\\vdmredir\\vrinit.c:49:#include <vrinit.h>",
+      "src/mvdm\\vdmredir\\vrnetb.c:48:#include <vrinit.h>     // VrQueueCompletionHandler",
+      "src/mvdm\\vdmredir\\vrnmpipe.c:113:#include <vrinit.h>     // VrQueueCompletionHandler",
+      "src/mvdm\\vdmredir\\vrputil.c:41:#include <vrinit.h>"
+    ]
+  },
+  {
+    "key": "inc/vrremote.h",
+    "path": "inc/vrremote.h",
+    "sha256": {
+      "current": "E2214353D522AA44FB3BB2B2CD0918D51F5FC0A300E3643BB53090842D3D1819",
+      "opennt": "E2214353D522AA44FB3BB2B2CD0918D51F5FC0A300E3643BB53090842D3D1819",
+      "opennt45": "E2214353D522AA44FB3BB2B2CD0918D51F5FC0A300E3643BB53090842D3D1819"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\vdmredir\\vrnetapi.c:72:#include <vrremote.h>   // VrRemoteApi prototypes",
+      "src/mvdm\\vdmredir\\vrremote.c:66:#include <vrremote.h>   // prototypes"
+    ]
+  },
+  {
+    "key": "inc/wow.h",
+    "path": "inc/wow.h",
+    "sha256": {
+      "current": "64663C13ABAEFCCD99533352E08FB28EFC66032C94A1780BFF73BE4F4CDBF70B",
+      "opennt": "64663C13ABAEFCCD99533352E08FB28EFC66032C94A1780BFF73BE4F4CDBF70B",
+      "opennt45": "64663C13ABAEFCCD99533352E08FB28EFC66032C94A1780BFF73BE4F4CDBF70B"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.h:46:#include <wow.h>"
+    ]
+  },
+  {
+    "key": "inc/WOW.INC",
+    "path": "inc/WOW.INC",
+    "sha256": {
+      "current": "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC",
+      "opennt": "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC",
+      "opennt45": "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\commdlg\\commdlg.asm:18:        include wow.inc",
+      "src/mvdm\\wow16\\drivers\\keyboard\\kbdlocal.asm:25:    include wow.inc",
+      "src/mvdm\\wow16\\drivers\\keyboard\\keyboard.asm:21:    include wow.inc",
+      "src/mvdm\\wow16\\drivers\\sound\\sound.asm:21:    include wow.inc",
+      "src/mvdm\\wow16\\gdi\\gdi.asm:23:        include wow.inc",
+      "src/mvdm\\wow16\\kernel31\\3ginterf.asm:9:include wow.inc",
+      "src/mvdm\\wow16\\kernel31\\kthunks.asm:29:    include wow.inc",
+      "src/mvdm\\wow16\\kernel31\\lddebug.asm:7:include wow.inc",
+      "src/mvdm\\wow16\\kernel31\\tasking.asm:20:include wow.inc",
+      "src/mvdm\\wow16\\kernel31\\wow16cal.asm:21:    include wow.inc",
+      "src/mvdm\\wow16\\mmsystem\\stack.asm:37:        include wow.inc",
+      "src/mvdm\\wow16\\shell\\shell.asm:26:\tinclude wow.inc",
+      "src/mvdm\\wow16\\system\\timer.asm:16:include wow.inc",
+      "src/mvdm\\wow16\\toolhelp\\task2.asm:15:        INCLUDE WOW.INC",
+      "src/mvdm\\wow16\\toolhelp\\ththunks.asm:33:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user.asm:27:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user1a.asm:19:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user2.asm:19:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user2a.asm:19:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user3.asm:19:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user3a.asm:20:    include wow.inc",
+      "src/mvdm\\wow16\\user\\user4.asm:20:    include wow.inc",
+      "src/mvdm\\wow16\\user\\usercli.asm:16:    include wow.inc",
+      "src/mvdm\\wow16\\user\\winrect.asm:6:    include wow.inc",
+      "src/mvdm\\wow16\\winsock\\winsock.asm:19:        include wow.inc",
+      "src/mvdm\\wow16\\winspool\\winspool.asm:19:\tinclude wow.inc",
+      "src/mvdm\\wow32\\i386\\callpr32.asm:24:;include wow.inc",
+      "src/mvdm\\wow32\\i386\\fastwow.asm:48:include wow.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWCMDLG.INC",
+    "path": "inc/WOWCMDLG.INC",
+    "sha256": {
+      "current": "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175",
+      "opennt": "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175",
+      "opennt45": "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\commdlg\\commdlg.asm:19:        include wowcmdlg.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWCMPAT.INC",
+    "path": "inc/WOWCMPAT.INC",
+    "sha256": {
+      "current": "20CBCAADBD408C557C9116DB02C889579D105D8A0B84816E8257D980A1987650",
+      "opennt": "20CBCAADBD408C557C9116DB02C889579D105D8A0B84816E8257D980A1987650",
+      "opennt45": "20CBCAADBD408C557C9116DB02C889579D105D8A0B84816E8257D980A1987650"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\kernel31\\3galloc.asm:8:include wowcmpat.inc",
+      "src/mvdm\\wow16\\kernel31\\3ginterf.asm:12:include wowcmpat.inc",
+      "src/mvdm\\wow16\\kernel31\\context.asm:12:include wowcmpat.inc",
+      "src/mvdm\\wow16\\kernel31\\lstring.asm:5:include wowcmpat.inc",
+      "src/mvdm\\wow16\\kernel31\\winexec.asm:11:include wowcmpat.inc"
+    ]
+  },
+  {
+    "key": "inc/wowddeml.h",
+    "path": "inc/wowddeml.h",
+    "sha256": {
+      "current": "8CD9627DD0AF77790FD4C046C69F52C2A04FBF816166C8369033E65AE341E292",
+      "opennt": "8CD9627DD0AF77790FD4C046C69F52C2A04FBF816166C8369033E65AE341E292",
+      "opennt45": "8CD9627DD0AF77790FD4C046C69F52C2A04FBF816166C8369033E65AE341E292"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wddeml32.c:26:#include \"wowddeml.h\""
+    ]
+  },
+  {
+    "key": "inc/wowexp.h",
+    "path": "inc/wowexp.h",
+    "sha256": {
+      "current": "9808EA87FEBFAF78EBB5CDFB2DA68AC1C9795C6C19DD67C37A0E33EE95D6EB94",
+      "opennt": "9808EA87FEBFAF78EBB5CDFB2DA68AC1C9795C6C19DD67C37A0E33EE95D6EB94",
+      "opennt45": "9808EA87FEBFAF78EBB5CDFB2DA68AC1C9795C6C19DD67C37A0E33EE95D6EB94"
+    },
+    "textual_include_candidates": []
+  },
+  {
+    "key": "inc/wowfax.h",
+    "path": "inc/wowfax.h",
+    "sha256": {
+      "current": "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84",
+      "opennt": "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84",
+      "opennt45": "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\fax\\faxcomm.h:13:#include \"wowfax.h\"",
+      "src/mvdm\\wow16\\test\\shell\\wowexfax.c:13:#include \"wowfax.h\"",
+      "src/mvdm\\wow32\\wkman.c:40:#include \"wowfax.h\"",
+      "src/mvdm\\wow32\\wow32fax.c:15:#include \"wowfax.h\""
+    ]
+  },
+  {
+    "key": "inc/WOWGDI.INC",
+    "path": "inc/WOWGDI.INC",
+    "sha256": {
+      "current": "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52",
+      "opennt": "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52",
+      "opennt45": "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\gdi\\gdi.asm:24:        include wowgdi.inc",
+      "src/mvdm\\wow16\\winspool\\winspool.asm:20:\tinclude wowgdi.inc"
+    ]
+  },
+  {
+    "key": "inc/wowint.h",
+    "path": "inc/wowint.h",
+    "sha256": {
+      "current": "33449C2765F597B7CCDE3ED61C45F35E72730FBAEFC073A065C423A4FF716030",
+      "opennt": "33449C2765F597B7CCDE3ED61C45F35E72730FBAEFC073A065C423A4FF716030",
+      "opennt45": "33449C2765F597B7CCDE3ED61C45F35E72730FBAEFC073A065C423A4FF716030"
+    },
+    "textual_include_candidates": []
+  },
+  {
+    "key": "inc/WOWKBD.INC",
+    "path": "inc/WOWKBD.INC",
+    "sha256": {
+      "current": "638E7096A7B69117E8400F3F96232A18691292B41D2CA63873D61F248A7D6F79",
+      "opennt": "638E7096A7B69117E8400F3F96232A18691292B41D2CA63873D61F248A7D6F79",
+      "opennt45": "638E7096A7B69117E8400F3F96232A18691292B41D2CA63873D61F248A7D6F79"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\drivers\\keyboard\\kbdlocal.asm:26:    include wowkbd.inc",
+      "src/mvdm\\wow16\\drivers\\keyboard\\keyboard.asm:22:    include wowkbd.inc"
+    ]
+  },
+  {
+    "key": "inc/wowkrn.h",
+    "path": "inc/wowkrn.h",
+    "sha256": {
+      "current": "8D9FBB2C3B74C21588EAA7541513DB0E3181E41CAA0D6A38D2395AE27C01B8CF",
+      "opennt": "8D9FBB2C3B74C21588EAA7541513DB0E3181E41CAA0D6A38D2395AE27C01B8CF",
+      "opennt45": "8D9FBB2C3B74C21588EAA7541513DB0E3181E41CAA0D6A38D2395AE27C01B8CF"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:75:#include \"wowkrn.h\""
+    ]
+  },
+  {
+    "key": "inc/WOWKRN.INC",
+    "path": "inc/WOWKRN.INC",
+    "sha256": {
+      "current": "3E0347B0D75EF2FAC49CBF6C3B29E45EC71459807554143BC3251CAC53479433",
+      "opennt": "3E0347B0D75EF2FAC49CBF6C3B29E45EC71459807554143BC3251CAC53479433",
+      "opennt45": "3E0347B0D75EF2FAC49CBF6C3B29E45EC71459807554143BC3251CAC53479433"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\kernel31\\2ginterf.asm:12:include wowkrn.inc",
+      "src/mvdm\\wow16\\kernel31\\3ginterf.asm:10:include wowkrn.inc",
+      "src/mvdm\\wow16\\kernel31\\kthunks.asm:30:    include wowkrn.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWMMCB.INC",
+    "path": "inc/WOWMMCB.INC",
+    "sha256": {
+      "current": "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5",
+      "opennt": "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5",
+      "opennt45": "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\mmsystem\\isr.asm:24:        include wowmmcb.inc",
+      "src/mvdm\\wow16\\mmsystem\\stack.asm:38:        include wowmmcb.inc",
+      "src/mvdm\\wow16\\mmsystem\\stack.asm:45:;       include wowmmcb.inc"
+    ]
+  },
+  {
+    "key": "inc/wowmmed.h",
+    "path": "inc/wowmmed.h",
+    "sha256": {
+      "current": "8416869D9F2A35A41E10187F0F27FA35198B750E5474CC5E281D30BA9F2918B9",
+      "opennt": "8416869D9F2A35A41E10187F0F27FA35198B750E5474CC5E281D30BA9F2918B9",
+      "opennt45": "8416869D9F2A35A41E10187F0F27FA35198B750E5474CC5E281D30BA9F2918B9"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:109:#include \"wowmmed.h\""
+    ]
+  },
+  {
+    "key": "inc/WOWMMED.INC",
+    "path": "inc/WOWMMED.INC",
+    "sha256": {
+      "current": "E2F65FBB12742BA27620ECE28AEB6FA2136FC7ECF86CC16A1FBEA7B7AB1EBF32",
+      "opennt": "E2F65FBB12742BA27620ECE28AEB6FA2136FC7ECF86CC16A1FBEA7B7AB1EBF32",
+      "opennt45": "E2F65FBB12742BA27620ECE28AEB6FA2136FC7ECF86CC16A1FBEA7B7AB1EBF32"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\mmsystem\\stack.asm:39:        include wowmmed.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWNT32.INC",
+    "path": "inc/WOWNT32.INC",
+    "sha256": {
+      "current": "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C",
+      "opennt": "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C",
+      "opennt45": "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\inc\\WOW.INC:8:INCLUDE wownt32.INC"
+    ]
+  },
+  {
+    "key": "inc/wowshell.h",
+    "path": "inc/wowshell.h",
+    "sha256": {
+      "current": "0EA893E99640355CE77B4F71C836C54E43C0F2AB7331F53CB895705FAEF997BD",
+      "opennt": "0EA893E99640355CE77B4F71C836C54E43C0F2AB7331F53CB895705FAEF997BD",
+      "opennt45": "0EA893E99640355CE77B4F71C836C54E43C0F2AB7331F53CB895705FAEF997BD"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:134:#include \"wowshell.h\""
+    ]
+  },
+  {
+    "key": "inc/WOWSHELL.INC",
+    "path": "inc/WOWSHELL.INC",
+    "sha256": {
+      "current": "151845A03D19D5E41194E37B03E38038A150313C843D32B26EE8BD70105C3DEB",
+      "opennt": "151845A03D19D5E41194E37B03E38038A150313C843D32B26EE8BD70105C3DEB",
+      "opennt45": "151845A03D19D5E41194E37B03E38038A150313C843D32B26EE8BD70105C3DEB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\shell\\shell.asm:27:\tinclude wowshell.inc"
+    ]
+  },
+  {
+    "key": "inc/wowsnd.h",
+    "path": "inc/wowsnd.h",
+    "sha256": {
+      "current": "944ACEDF0708F0FC2176B28A18E07747DA57042FD93BFB63A51663E9E2A250E6",
+      "opennt": "944ACEDF0708F0FC2176B28A18E07747DA57042FD93BFB63A51663E9E2A250E6",
+      "opennt45": "944ACEDF0708F0FC2176B28A18E07747DA57042FD93BFB63A51663E9E2A250E6"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:132:#include \"wowsnd.h\""
+    ]
+  },
+  {
+    "key": "inc/WOWSND.INC",
+    "path": "inc/WOWSND.INC",
+    "sha256": {
+      "current": "B483AEF8A93769E6EFBC02D955EBB0F79017B2E879214D01AD3C6BD9296563AC",
+      "opennt": "B483AEF8A93769E6EFBC02D955EBB0F79017B2E879214D01AD3C6BD9296563AC",
+      "opennt45": "B483AEF8A93769E6EFBC02D955EBB0F79017B2E879214D01AD3C6BD9296563AC"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\drivers\\sound\\sound.asm:22:    include wowsnd.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWTH.INC",
+    "path": "inc/WOWTH.INC",
+    "sha256": {
+      "current": "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882",
+      "opennt": "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882",
+      "opennt45": "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\toolhelp\\ththunks.asm:34:    include wowth.inc"
+    ]
+  },
+  {
+    "key": "inc/WOWUSR.INC",
+    "path": "inc/WOWUSR.INC",
+    "sha256": {
+      "current": "88E6535DB84C9CCAC703E406A9A25C92158068ABC2EDD00CCE0164F0EF10F3E1",
+      "opennt": "88E6535DB84C9CCAC703E406A9A25C92158068ABC2EDD00CCE0164F0EF10F3E1",
+      "opennt45": "88E6535DB84C9CCAC703E406A9A25C92158068ABC2EDD00CCE0164F0EF10F3E1"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\system\\timer.asm:17:include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user.asm:28:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user1a.asm:20:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user2.asm:20:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user2a.asm:20:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user3.asm:20:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user3a.asm:21:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\user4.asm:21:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\usercli.asm:17:    include wowusr.inc",
+      "src/mvdm\\wow16\\user\\winrect.asm:7:    include wowusr.inc"
+    ]
+  },
+  {
+    "key": "inc/wowwsock.h",
+    "path": "inc/wowwsock.h",
+    "sha256": {
+      "current": "05B478BB1E76E13571A179554217EE93663EA118E6A33F6F0F82766A0B490E2B",
+      "opennt": "05B478BB1E76E13571A179554217EE93663EA118E6A33F6F0F82766A0B490E2B",
+      "opennt45": "05B478BB1E76E13571A179554217EE93663EA118E6A33F6F0F82766A0B490E2B"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\winsockp.h:23:#include <wowwsock.h>"
+    ]
+  },
+  {
+    "key": "inc/WOWWSOCK.INC",
+    "path": "inc/WOWWSOCK.INC",
+    "sha256": {
+      "current": "43C5359BC06ED04661FE2C61D1C3F719A12F1CEC07A39535F1CDB5A03F26F7FD",
+      "opennt": "43C5359BC06ED04661FE2C61D1C3F719A12F1CEC07A39535F1CDB5A03F26F7FD",
+      "opennt45": "43C5359BC06ED04661FE2C61D1C3F719A12F1CEC07A39535F1CDB5A03F26F7FD"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\winsock\\winsock.asm:20:        include wowwsock.inc"
+    ]
+  },
+  {
+    "key": "inc/x86def.h",
+    "path": "inc/x86def.h",
+    "sha256": {
+      "current": "F5D8AB04433599401682B0E4F7AE45104B8C5195168CB12201D8278F1549F38D",
+      "opennt": "F5D8AB04433599401682B0E4F7AE45104B8C5195168CB12201D8278F1549F38D",
+      "opennt45": "F5D8AB04433599401682B0E4F7AE45104B8C5195168CB12201D8278F1549F38D"
+    },
+    "textual_include_candidates": []
+  },
+  {
+    "key": "inc/xmsexp.h",
+    "path": "inc/xmsexp.h",
+    "sha256": {
+      "current": "35B7F0C5F15250D40076DF9F101CEA9CA565973B951CAE85E3366F8591AE0655",
+      "opennt": "35B7F0C5F15250D40076DF9F101CEA9CA565973B951CAE85E3366F8591AE0655",
+      "opennt45": "35B7F0C5F15250D40076DF9F101CEA9CA565973B951CAE85E3366F8591AE0655"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dpmi32\\dpmimemr.c:34:#include <xmsexp.h>",
+      "src/mvdm\\dpmi32\\i386\\dpmimem.c:34:#include <xmsexp.h>",
+      "src/mvdm\\softpc.new\\host\\src\\nt_bop.c:77:#include \"xmsexp.h\"",
+      "src/mvdm\\xms.486\\xms.h:81:#include <xmsexp.h>",
+      "src/mvdm\\xms.486\\xmsdisp.c:12:#include <xmsexp.h>"
+    ]
+  },
+  {
+    "key": "inc/XMSSVC.INC",
+    "path": "inc/XMSSVC.INC",
+    "sha256": {
+      "current": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB",
+      "opennt": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB",
+      "opennt45": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB"
+    },
+    "textual_include_candidates": [
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem.asm:146:\tinclude xmssvc.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem1.asm:17:\tinclude xmssvc.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem2.asm:31:\tinclude xmssvc.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem4.asm:20:\tinclude xmssvc.inc",
+      "src/mvdm\\dos\\v86\\dev\\himem\\himem5.asm:25:        include xmssvc.inc",
+      "src/mvdm\\dos\\v86\\doskrnl\\bios\\sysinit1.asm:31:        include xmssvc.inc",
+      "src/mvdm\\softpc.new\\bios\\sysinit1.asm:31:        include xmssvc.inc"
+    ]
+  }
+]

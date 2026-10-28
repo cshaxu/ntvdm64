@@ -28,6 +28,10 @@ The [part 9 WOW32 provider review](nine-way/part-9/wow32-provider-role-review.md
 and [guest utility review](nine-way/part-9/wow16-utilities-write-role-review.md)
 separate build-graph selection from execution evidence; the packaged WRITE.EXE
 identity differs from the retained mirror and its provenance remains open.
+The [part 3 CPU instruction](nine-way/part-3/ccpu-instructions-role-review.md),
+[simulator](nine-way/part-3/simulator-role-review.md), and
+[printer resource](nine-way/part-3/hppcl5ms-role-review.md) reviews retain
+their unresolved execution and provider selection obligations.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

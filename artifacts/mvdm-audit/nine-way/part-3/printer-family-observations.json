@@ -1,0 +1,293 @@
+[
+  {
+    "family": "hppcl",
+    "owned_count": 186,
+    "sources_sha256": "3825C54D3B838D7F8DBC0F16DDE8ABEA57CF6AC67CCAFBB572230F3752DD94C6",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_hppcl\r\n\r\nTARGETNAME=hppcl\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\thppcl.rc\r\n",
+    "rc_files": [
+      "hppcl.rc"
+    ]
+  },
+  {
+    "family": "hppcl5ms",
+    "owned_count": 832,
+    "sources_sha256": "84AF60E66F9BD997ED52F83C56416372823CFDBB8F91C505E6DCC799AB983865",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_hppcl5ms\r\n\r\nTARGETNAME=hppcl5ms\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\thppcl5ms.rc\r\n",
+    "rc_files": [
+      "hppcl5ms.rc"
+    ]
+  },
+  {
+    "family": "hppcle",
+    "owned_count": 394,
+    "sources_sha256": "1C1480E5B97ADB0B71905001E563DCB1AC935692289210971894D265F1C1851F",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_hppcle\r\n\r\nTARGETNAME=hppcle\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\thppcle.rc\r\n",
+    "rc_files": [
+      "hppcle.rc"
+    ]
+  },
+  {
+    "family": "ibm238x",
+    "owned_count": 61,
+    "sources_sha256": "2DA799E117D547531666E567C2AF806D5C75ACA33CE505944DB7CE1062F160F2",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_ibm238x\r\n\r\nTARGETNAME=ibm238x\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        ibm238x.rc\r\n",
+    "rc_files": [
+      "ibm238x.rc"
+    ]
+  },
+  {
+    "family": "ibm239x",
+    "owned_count": 181,
+    "sources_sha256": "995049199D173F1804D5DF7E5BC7A245FD9C1B7B0AE4F3CA01860FCDE53F1538",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_ibm239x\r\n\r\nTARGETNAME=ibm239x\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        ibm239x.rc\r\n",
+    "rc_files": [
+      "ibm239x.rc"
+    ]
+  },
+  {
+    "family": "ibm5204",
+    "owned_count": 76,
+    "sources_sha256": "117A8B4771A45F13A9074AA0B21AF8F4B2C20E71B0A6C176F6AA5A0179B2D925",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_ibm5204\r\n\r\nTARGETNAME=ibm5204\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tibm5204.rc\r\n",
+    "rc_files": [
+      "ibm5204.rc"
+    ]
+  },
+  {
+    "family": "ibmport",
+    "owned_count": 57,
+    "sources_sha256": "FDFBE25E4FBB2CB1F4654838FA33E699867ACE4FAC75504B10ADFDB664C27E44",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_IBMPORT\r\n\r\nTARGETNAME=IBMPORT\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        IBMPORT.rc\r\n",
+    "rc_files": [
+      "ibmport.rc"
+    ]
+  },
+  {
+    "family": "ibmppdsl",
+    "owned_count": 55,
+    "sources_sha256": "C4918A6D590392DD73AB58B6CFEA58E6E1B7E686C6FF29E74B9E481880159A11",
+    "sources_text": "TARGETNAME=ibmppdsl\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tibmppdsl.rc\r\n",
+    "rc_files": [
+      "ibmppdsl.rc"
+    ]
+  },
+  {
+    "root_file": "ifiin.bat",
+    "owned_count": 1,
+    "text": "echo \"Check in the IFIMETRICS files......\"\n\ncall _callit _ifiin_\n"
+  },
+  {
+    "root_file": "ifiout.bat",
+    "owned_count": 1,
+    "text": "echo \"Check out the IFIMETRICS files......\"\n\ncall _callit _ifiout_\n"
+  },
+  {
+    "root_file": "ifisync.cmd",
+    "owned_count": 1,
+    "text": "@echo off\nrem   Ssync the IFI files\n\ncall _callit _ifisyn_\n\n@echo on\n"
+  },
+  {
+    "family": "jp350",
+    "owned_count": 270,
+    "sources_sha256": "A60F723B35869A517CE80A311A5D3869FBB82A428CD8340CCF4DA23E3C0DF5DD",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_JP350\r\n\r\nTARGETNAME=JP350\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        JP350.rc\r\n",
+    "rc_files": [
+      "jp350.rc"
+    ]
+  },
+  {
+    "family": "kyocera",
+    "owned_count": 102,
+    "sources_sha256": "8EA08369962DAEFD24500E982CAE2488E1E1CDBF0F30D4627CCAD1C97742EDB0",
+    "sources_text": "UMAJORCOMP=windows\r\nMINORCOMP=md_KYOCERA\r\n\r\nTARGETNAME=KYOCERA\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        KYOCERA.rc\r\n",
+    "rc_files": [
+      "kyocera.rc"
+    ]
+  },
+  {
+    "family": "kyox",
+    "owned_count": 325,
+    "sources_sha256": "278B4C058F5EA0D8E26CE8DC74F1AFEA9D2EC1823E1D92FE784BCE053F37CE5F",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_kyocerax\r\n\r\nTARGETNAME=kyocerax\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\nSOURCES=code.c   \\\r\n    kyocerax.rc\r\n",
+    "rc_files": [
+      "kyocerax.rc"
+    ]
+  },
+  {
+    "family": "lminkjet",
+    "owned_count": 47,
+    "sources_sha256": "7D6761FFF88614FF134562202975DEF328CE68AC3F768255BF8D05BFF096D622",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_lminkjet\r\n\r\nTARGETNAME=lminkjet\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\n\r\nSOURCES=code.c \\\r\n       lminkjet.rc\r\n\r\n\r\n",
+    "rc_files": [
+      "lminkjet.rc"
+    ]
+  },
+  {
+    "family": "mantal24",
+    "owned_count": 158,
+    "sources_sha256": "740C61E96189B1E41170AB51C7F644DBCD743CD8714A542CE69E039AB04F9EBA",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_MANTAL24\r\n\r\nTARGETNAME=MANTAL24\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        MANTAL24.rc\r\n",
+    "rc_files": [
+      "mantal24.rc"
+    ]
+  },
+  {
+    "family": "mantal90",
+    "owned_count": 19,
+    "sources_sha256": "B16574ABD8850D6712E24CA403BE468137B51CD276E6723B317851844F6FDC7E",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_MANTAL90\r\n\r\nTARGETNAME=MANTAL90\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        MANTAL90.rc\r\n",
+    "rc_files": [
+      "mantal90.rc"
+    ]
+  },
+  {
+    "family": "mantalbj",
+    "owned_count": 99,
+    "sources_sha256": "6E31ABD7D45B5E0B57F1B44192F4C71A7BA3F7E50ECF5DCA3C75417ABB981479",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_MANTALBJ\r\n\r\nTARGETNAME=MANTALBJ\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\nSOURCES=code.c \\\r\n        MANTALBJ.rc\r\n",
+    "rc_files": [
+      "mantalbj.rc"
+    ]
+  },
+  {
+    "root_file": "mk_ctt.cmd",
+    "owned_count": 1,
+    "text": "call _callit _mk_ctt\n"
+  },
+  {
+    "root_file": "mk_ifi.bat",
+    "owned_count": 1,
+    "text": "rem  Rebuild the IFIMETRICS files from PFM files\ncall _callit _mkifi_\n"
+  },
+  {
+    "root_file": "modinit.c",
+    "owned_count": 1,
+    "text": "/********************** Module Header **************************************\n * modinit.c\n *\tThe generic minidriver module.  This is the DLL initialisation\n *\tfunction,  being called at load time.  We remember our handle,\n *\tin case it might be useful.\n *\n * HISTORY:\n *  17:37 on Fri 05 Apr 1991\t-by-\tLindsay Harris   [lindsayh]\n *\tCreated it.\n *\n *  Copyright (C) 1992  Microsoft Corporation.\n *\n **************************************************************************/\n\n#include\t<windows.h>\n\n\n\n/*************************** Function Header ******************************\n * bInitProc()\n *\tDLL initialization procedure.  Save the module handle and \n *\tinitialise some machine dependent \"constants\".\n *\n * Returns:\n *   This function returns TRUE.\n *\n * HISTORY:\n *  15:59 on Wed 08 Jan 1992\t-by-\tLindsay Harris   [lindsayh]\n *\tTaken from rasdd's enabldrv.c\n *\n ***************************************************************************/\n\nBOOL\nbInitProc( hmod, Reason, pctx )\nPVOID    hmod;\nULONG    Reason;\nPCONTEXT pctx;\n{\n\n\n    UNREFERENCED_PARAMETER( hmod );\n    UNREFERENCED_PARAMETER( Reason );\n    UNREFERENCED_PARAMETER( pctx );\n\n\n    return  TRUE;\n}\n\n\n#ifdef _GET_FUNC_ADDR\n\n/*\n *    If the minidriver contains code called by RasDD, then we will need\n * to be initialised: we need some function addresses in RasDD. But these\n * cannot be statically linked since we do not know the path to rasdd.\n * Hence,  we export the following function,  which RasDD will call first.\n * This gives us the address of the RasDD functions available to us.\n */\n\n\n/******************************* Function Header ***************************\n * bSetFuncAddr\n *      Called by RasDD to pass in addresses needed by us to call into\n *      the available functions in Rasdd.\n *\n * RETURNS:\n *      TRUE if data is understable,  else FALSE.\n *\n * HISTORY:\n *  13:50 on Wed 20 May 1992\t-by-\tLindsay Harris   [lindsayh]\n *      First version\n *\n ***************************************************************************/\n\nBOOL\nbSetFuncAddr( pntmd_init )\nNTMD_INIT   *pntmd_init;\n{\n    /*\n     *   Check that the data format is the type we understand.\n     */\n\n    if( pntmd_init->wSize < sizeof( NTMD_INIT ) ||\n        pntmd_init->wVersion < NTMD_INIT_VER )\n    {\n        return   FALSE;         /* Can't afford to monkey around */\n    }\n\n    /*  Data is GOOD,  so copy it to our global data  */\n\n    ntmdInit = *pntmd_init;\n\n    return  TRUE;\n}\n\n#endif\n"
+  },
+  {
+    "family": "mt735",
+    "owned_count": 73,
+    "sources_sha256": "A7F9AD3D9B59302600D92001B38326F5A6799BA8F7E62F0E74DA69445E93D8F7",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_MT735\r\n\r\nTARGETNAME=MT735\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        MT735.rc\r\n",
+    "rc_files": [
+      "mt735.rc"
+    ]
+  },
+  {
+    "family": "mt99",
+    "owned_count": 24,
+    "sources_sha256": "872A9A646F01FC494644648457A474BD85A7645DC835AFC2E86EB086E90184BE",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_MT99\r\n\r\nTARGETNAME=MT99\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\nSOURCES=code.c \\\r\n        MT99.rc\r\n",
+    "rc_files": [
+      "mt99.rc"
+    ]
+  },
+  {
+    "family": "nec24pin",
+    "owned_count": 97,
+    "sources_sha256": "251E3D09A9B4970DB275FAAC4AAF3B9C6D4493FF534E8AAFB11489C2163B89DF",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_nec24pin\r\n\r\nTARGETNAME=nec24pin\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tnec24pin.rc\r\n",
+    "rc_files": [
+      "nec24pin.rc"
+    ]
+  },
+  {
+    "family": "oescp2ms",
+    "owned_count": 8,
+    "sources_sha256": "91D07E9C64BDA851D1CE44DEEFFEB885FD254B6AF350951CC2EB5D37DCACC427",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_escp2ms\r\n\r\nTARGETNAME=escp2ms\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tescp2ms.rc\r\n",
+    "rc_files": [
+      "escp2ms.rc"
+    ]
+  },
+  {
+    "family": "oki24",
+    "owned_count": 195,
+    "sources_sha256": "249710E9840D87E0A5C9D40AB8681F769FBD2FD8FF00C8D59C2831680F275E7D",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_oki24\r\n\r\nTARGETNAME=oki24\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\toki24.rc\r\n",
+    "rc_files": [
+      "oki24.rc"
+    ]
+  },
+  {
+    "family": "oki9",
+    "owned_count": 57,
+    "sources_sha256": "C652A451C3DBA9FBA261B8BDCF5D5089E557E2A8FFCBA8915477D2A96C3D00AF",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_oki9\r\n\r\nTARGETNAME=oki9\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\toki9.rc\r\n",
+    "rc_files": [
+      "oki9.rc"
+    ]
+  },
+  {
+    "family": "oki9ibm",
+    "owned_count": 306,
+    "sources_sha256": "528DCA54CF283E6305C6532079AE6C430042C4C5C3A7971BB86FAB8EACDB56F7",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_oki9ibm\r\n\r\nTARGETNAME=oki9ibm\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\toki9ibm.rc\r\n",
+    "rc_files": [
+      "oki9ibm.rc"
+    ]
+  },
+  {
+    "family": "olidm24",
+    "owned_count": 101,
+    "sources_sha256": "79DCF5CCBE7F8F9AEF34040A728C8A44AFB8310F92D7ABE8AB99B54F406DE78A",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_OLIDM24\r\n\r\nTARGETNAME=OLIDM24\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        OLIDM24.rc\r\n",
+    "rc_files": [
+      "olidm24.rc"
+    ]
+  },
+  {
+    "family": "olidm9",
+    "owned_count": 111,
+    "sources_sha256": "580BF1070F40462DA85E34FD07E403743F2E47CC9DF5768088518C9F8DB4ACDF",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_OLIDM9\r\n\r\nTARGETNAME=OLIDM9\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        OLIDM9.rc\r\n",
+    "rc_files": [
+      "olidm9.rc"
+    ]
+  },
+  {
+    "family": "optra",
+    "owned_count": 523,
+    "sources_sha256": "AE85759DFDCF23C18F218A81A183705B3A64FC20ED0D94C0161C35FF35369938",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_optra\r\n\r\nTARGETNAME=optra\r\nTARGETPATH=obj\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\toptra.rc\r\n",
+    "rc_files": [
+      "optra.rc"
+    ]
+  },
+  {
+    "family": "paintjet",
+    "owned_count": 16,
+    "sources_sha256": "CD6DFD5883448E4A55A3561E1FE1F6885673B4547D44286A50D52882D4C4E73B",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_paintjet\r\n\r\nTARGETNAME=paintjet\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tpaintjet.rc\r\n",
+    "rc_files": [
+      "paintjet.rc"
+    ]
+  },
+  {
+    "family": "panson24",
+    "owned_count": 161,
+    "sources_sha256": "79F305E0E580A875A7158E0700FEAC402E873CB60B889CE2A5B7A55EA4D8B372",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_panson24\r\n\r\nTARGETNAME=panson24\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        panson24.rc\r\n",
+    "rc_files": [
+      "panson24.rc"
+    ]
+  },
+  {
+    "family": "panson9",
+    "owned_count": 211,
+    "sources_sha256": "2338703950E4E2D8A1BCB2B9813A1361CB6CDFB37CFBFFC43C8AD69DF25FA9A3",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_panson9\r\n\r\nTARGETNAME=panson9\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        panson9.rc\r\n",
+    "rc_files": [
+      "panson9.rc"
+    ]
+  },
+  {
+    "family": "pcl1200",
+    "owned_count": 21,
+    "sources_sha256": "B469256E992835F62F4ECC13AAADABFE83447C44BB38F4F8807FFF482BBD7882",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_pcl1200\r\nTARGETNAME=pcl1200\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tpcl1200.rc\r\n",
+    "rc_files": [
+      "pcl1200.rc"
+    ]
+  }
+]
