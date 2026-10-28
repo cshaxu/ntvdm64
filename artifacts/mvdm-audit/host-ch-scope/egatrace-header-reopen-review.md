@@ -1,0 +1,9 @@
+# EGA trace-format header: exclusion requires reopening
+
+`softpc.new/base/inc/egatrace.h` was marked excluded at the review snapshot and has since been reopened to pending in `shard-3/file-review.csv` as the historical EGA_DUMP trace-format profile. Original `base/video/ega_trcr.c:14,22` directly includes this header inside `#ifdef EGA_DUMP`; the header describes the binary video-access trace format and operation identifiers used by that tracer. The current worker's PROD/no-EGA_DUMP object does not establish the tracer is operational, but also does not establish that the original diagnostic capability is outside the user-approved scope.
+
+The associated original implementation `ega_trcr.c` is **pending**, and `video-native-role-review.md` explicitly retains EGA_DUMP's profile, trace-file setup/failure/close and hook ownership as unresolved. The current `recovery-worklist.md` also retains this diagnostic decision. Therefore an overall excluded disposition for its necessary trace-format physical header is inconsistent with the unresolved implementation, in the same way as the separately reopened `ccpupig.h`/PIG source relationship.
+
+**Recommendation: reopen `egatrace.h` to pending** and track it with the existing video/diagnostic owner, without claiming the header is selected or the behavior fails in a real guest. S13 should establish the original profile applicability and provider/caller closure; if required, verify actual trace operation encoding, address/value widths, file opening/writing/error/close, active mode hooks, teardown and selected-source identity. If it is demonstrated unnecessary under an approved scope, retain a scoped disposition with reasons. Standard VGA rendering and its guest behavior remain separate and cannot be certified by this trace header.
+
+This review is source-level; no runtime, guest, product or shared-ledger change was performed.

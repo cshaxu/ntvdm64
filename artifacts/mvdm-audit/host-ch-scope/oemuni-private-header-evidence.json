@@ -1,0 +1,25 @@
+{
+  "header_sha256": [
+    "A3ADD27675252CDD72E413DE9E897A123ADF2F426D292CD0B252CB389A23F91A",
+    "A3ADD27675252CDD72E413DE9E897A123ADF2F426D292CD0B252CB389A23F91A",
+    "A3ADD27675252CDD72E413DE9E897A123ADF2F426D292CD0B252CB389A23F91A"
+  ],
+  "source_sha256": {
+    "src/mvdm/oemuni/file.c": "83CDB96808AD79DF98C608BE95CDD16F7229B2E4946B86E6A473EDAE8F2407CE",
+    "src/mvdm/oemuni/process.c": "FCF8695132E69E1612C08114A52938529131B951673291CC9C4CCEFF82C862B1"
+  },
+  "deps_sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1",
+  "consumers": [
+    "obj/oemuni/file.obj: #deps 10, deps mtime 8147412849554724 (VALID)",
+    "obj/oemuni/process.obj: #deps 13, deps mtime 8147412849554724 (VALID)"
+  ],
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "map_lines": [
+    "0001:00159d30       _GetEnvironmentVariableOem@12 0055ad30 f   original-mvdm-host-oemuni:process.obj",
+    "0001:0015a2e0       _SearchPathOem@24          0055b2e0 f   original-mvdm-host-oemuni:process.obj",
+    "0001:0015a770       _CreateFileOem@28          0055b770 f   original-mvdm-host-oemuni:file.obj",
+    "0002:00024990       __sehtable$_GetEnvironmentVariableOem@12 005af990     original-mvdm-host-oemuni:process.obj"
+  ],
+  "historical_doc_sha256": "5C3D83BC40E09F01D733CBDD0C0FE62FB8CF04104BA241B9908BB2227F928B7E",
+  "limits": "Current dependency/map and historical evidence only; not a current guest or complete OEM error/lifecycle test."
+}

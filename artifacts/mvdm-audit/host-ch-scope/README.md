@@ -79,3 +79,9 @@ The [selected debugger provider](debugger-provider-review.md) has a bounded hist
 The [missing/empty excluded C review](excluded-missing-empty-c-source-review.md) verifies original identities and records the separate CPU40 obligations; it does not establish their runtime completion.
 
 The [DDEML route review](ddeml-route-review.md) binds bounded historical guest initialization evidence, without claiming transactions or callbacks. The [keyboard/mouse handoff](../host-inc/keyboard-mouse-functional-handoff.md) retains controller, guest and video-owner boundaries.
+
+The [OEM private header review](oemuni-private-header-review.md) binds selected providers and bounded historical conversion witnesses. The [PIG header correction](ccpupig-header-reopen-review.md) reopens an exclusion whose implementation owner remains unresolved.
+
+The [EGA trace header correction](egatrace-header-reopen-review.md) reopens a file whose associated original trace profile remains unresolved; no EGA trace behavior is claimed as executed.
+
+The [HUNTER provider correction](hunter-provider-reopen-review.md) reopens the original conditional provider while its diagnostic profile remains unresolved.
