@@ -1,0 +1,31 @@
+{
+  "headers": {
+    "flexlmif.h": "BA27DB4F84CC7707FE35CF96C3C8F0D99AD22ADB99DFC755F5DDFE750B34D0E6",
+    "lm_attr.h": "F0DAA6A32AFF8415E2921B57012752535E40751AC1A88B1F371A82E1AD4763F6",
+    "lm_clien.h": "DCF42DDB359E55B9368C5D4E4B8F7A4ED075AF40E26328B0434E3565406A8C6B"
+  },
+  "literal_direct_includes": {
+    "flexlmif.h": [],
+    "lm_attr.h": [],
+    "lm_clien.h": []
+  },
+  "graphs": {
+    "worker": {
+      "valid_object_blocks": 639,
+      "matching_valid_blocks": {
+        "flexlmif.h": 0,
+        "lm_attr.h": 0,
+        "lm_clien.h": 0
+      }
+    },
+    "wow32": {
+      "valid_object_blocks": 229,
+      "matching_valid_blocks": {
+        "flexlmif.h": 0,
+        "lm_attr.h": 0,
+        "lm_clien.h": 0
+      }
+    }
+  },
+  "scope": "Captured x86 release dependency snapshot; literal direct C/H includes; not a complete proof of other profiles, generated or external consumers."
+}

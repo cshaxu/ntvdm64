@@ -508,7 +508,7 @@ softpc.new/base/cvidc/add_c.h,shard-3/file-review.csv,excluded,host-candidate,ho
 softpc.new/base/cvidc/adjust_c.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/axphst_c.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/bldr_c.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/cvidc/bodge_c.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/cvidc/bodge_c.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/bound_c.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/bpi_c.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/bswap_c.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -706,7 +706,7 @@ softpc.new/base/inc/equip.h,shard-1/file-audit.csv,部分复通,host-candidate,h
 softpc.new/base/inc/error.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/fdisk.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/fla.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/flexlmif.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/flexlmif.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/floppy.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/ga_defs.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/ga_mark.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -759,8 +759,8 @@ softpc.new/base/inc/keyba.h,shard-3/file-review.csv,partial,host-candidate,host 
 softpc.new/base/inc/keyboard.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/keycaps.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/kybdmtx.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/lm_attr.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/lm_clien.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/lm_attr.h,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/lm_clien.h,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/lm_code.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/loader.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/lock.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

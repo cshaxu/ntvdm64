@@ -2,11 +2,11 @@
   "inputs": [
     {
       "path": "artifacts/mvdm-audit/shard-0/review.csv",
-      "sha256": "DEE3027222DDB5676C3220C30882A2138029F4EB21933CE8D88AE9CC403512B0"
+      "sha256": "E80D91719DDE890AC22AF9C782885D2E8891E7273DE535289CBE3D3D25F789A4"
     },
     {
       "path": "artifacts/mvdm-audit/shard-1/file-audit.csv",
-      "sha256": "6A6D3D21A79A6A1062589471502EB2959B27716CC3FD2963DAF5F204C3CF54BB"
+      "sha256": "292104A9D543ED35B02692DED9DB5D277869DFC9017C19B042900041DA2BBC1C"
     },
     {
       "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
@@ -14,7 +14,7 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
-      "sha256": "972CADEF793D46611C74ECCA90B2E9325839435A1BE3993C6A79134EE285C0BE"
+      "sha256": "520333E4B01F40A4DF99DB1BFBF8A83D46423B47DFD92D178A3F1A3F9AB47F1B"
     }
   ],
   "rows": 1815,
@@ -26,10 +26,10 @@
   "host_candidate_ledger_status_counts": {
     "partial": 435,
     "部分复通": 332,
-    "excluded": 168,
-    "待核验": 56,
-    "pending": 139,
-    "整体排除": 87,
+    "excluded": 171,
+    "待核验": 55,
+    "pending": 136,
+    "整体排除": 88,
     "full": 36,
     "全复通": 17
   },
