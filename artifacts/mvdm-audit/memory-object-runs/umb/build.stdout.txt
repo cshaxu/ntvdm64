@@ -1,0 +1,3 @@
+umb_object_contract_fixture.c
+O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\host\inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\host\inc\host_def.h(150): note: 'NTVDM' previously declared on the command line

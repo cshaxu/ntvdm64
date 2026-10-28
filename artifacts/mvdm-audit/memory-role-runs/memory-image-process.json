@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-28T02:58:33.3906134Z",
+  "pid": 25212,
+  "arguments": "-B artifacts/mvdm-audit/memory-image-observer.py"
+}

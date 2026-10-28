@@ -1,0 +1,1 @@
+UMB_OBJECT_CONTRACT checks=4240 failures=0 callbacks=6 notifies=2 boundary=0

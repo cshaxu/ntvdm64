@@ -2342,14 +2342,14 @@ softpc.new/host/src/nt_pif.c,3,partial,shard-3/file-review.csv
 softpc.new/host/src/nt_reset.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/nt_rez.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_rflop.c,3,partial,shard-3/file-review.csv
-softpc.new/host/src/nt_sas.c,1,pending,shard-1/file-audit.csv
-softpc.new/host/src/nt_sec.c,2,pending,shard-2/file-audit.csv
+softpc.new/host/src/nt_sas.c,1,excluded,shard-1/file-audit.csv
+softpc.new/host/src/nt_sec.c,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/nt_smenu.c,1,pending,shard-1/file-audit.csv
 softpc.new/host/src/nt_sound.c,3,partial,shard-3/file-review.csv
 softpc.new/host/src/nt_term.c,1,pending,shard-1/file-audit.csv
 softpc.new/host/src/nt_thred.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_timer.c,1,partial,shard-1/file-audit.csv
-softpc.new/host/src/nt_umb.c,2,pending,shard-2/file-audit.csv
+softpc.new/host/src/nt_umb.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_unix.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_vdd.c,0,pending,shard-0/review.csv
 softpc.new/host/src/nt_vflop.c,3,pending,shard-3/file-review.csv

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "4d0f2d2c6",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "memory-image-observations.json",
+      "sha256": "6DC03F6D47A58502E4E6C0628B064DF2872DF6970B8E8A906AE050DC4F3B05F4"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "UMB integration and original profile alternatives; no complete guest memory or release qualification"
+}

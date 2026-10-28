@@ -1,0 +1,6 @@
+{
+  "pid": 18616,
+  "started": "2026-10-28T02:59:30.4516480Z",
+  "arguments": "-NoProfile -File tests/observation/verify-softpc-object-contract.ps1 -Contract ios -BuildRoot build/t473-s10/memory-ios-control",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

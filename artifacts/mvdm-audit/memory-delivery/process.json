@@ -1,0 +1,6 @@
+{
+  "pid": 16376,
+  "arguments": "-NoProfile -File artifacts/mvdm-audit/memory-native-delivery-verification.ps1",
+  "started": "2026-10-28T03:02:12.1324354Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

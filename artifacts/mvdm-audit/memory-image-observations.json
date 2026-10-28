@@ -1,0 +1,277 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/host/src/nt_umb.c",
+      "sha256": "2A109F11985507463797E60B8B19FC12441BD18278B1444DDE581CC351DE72ED",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_umb.c",
+        "sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+        "bytes": "28045",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:7d354da32f29109a6808",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_umb.c",
+          "original_sha256": "2A109F11985507463797E60B8B19FC12441BD18278B1444DDE581CC351DE72ED",
+          "catalog_git_blob": "d6c9a4ffa5ddda6acff57dea664c292ff8e7f5d3"
+        },
+        {
+          "id": "SRC:84c6f008ed01bf3a466d",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_umb.c",
+          "original_sha256": "2A109F11985507463797E60B8B19FC12441BD18278B1444DDE581CC351DE72ED",
+          "catalog_git_blob": "d6c9a4ffa5ddda6acff57dea664c292ff8e7f5d3"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_umb.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_umb.c",
+      "dependency_block": "obj/host/nt_umb.obj: #deps 29, deps mtime 8147603037797552 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/emm.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/umb.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_vddp.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/nt_vdd.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "object_sha256": "54F1A069088F6FD5702BD2D1893AE85CAC0487AB608430AB7107D096F8388E9E",
+      "functions": [
+        {
+          "symbol": "_UMBNotify",
+          "va": 4223152,
+          "bytes": 3,
+          "relocation_words": 0
+        },
+        {
+          "symbol": "_InitUMBList",
+          "va": 4574432,
+          "bytes": 151,
+          "relocation_words": 7
+        },
+        {
+          "symbol": "_ReleaseUMB",
+          "va": 4574592,
+          "bytes": 133,
+          "relocation_words": 4
+        },
+        {
+          "symbol": "_ReserveUMB",
+          "va": 4574736,
+          "bytes": 536,
+          "relocation_words": 16
+        },
+        {
+          "symbol": "_SpliceUMB",
+          "va": 4575280,
+          "bytes": 178,
+          "relocation_words": 3
+        },
+        {
+          "symbol": "_VDDCommitUMB",
+          "va": 4575472,
+          "bytes": 106,
+          "relocation_words": 3
+        },
+        {
+          "symbol": "_VDDDeCommitUMB",
+          "va": 4575584,
+          "bytes": 106,
+          "relocation_words": 3
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_sas.c",
+      "sha256": "077663754025071C48EC5F0BFEBBCF07E1A6BCC240153B40545EF6F3C59C8344",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sas.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_sas.c",
+        "sha256": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344",
+        "bytes": "2806",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:6e55ba4ac253bd5abd8a",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_sas.c",
+          "original_sha256": "077663754025071C48EC5F0BFEBBCF07E1A6BCC240153B40545EF6F3C59C8344",
+          "catalog_git_blob": "ff2d706aecbf46efbc04b4ccfc64a225607431ee"
+        },
+        {
+          "id": "SRC:d15c893439b3401ec30a",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_sas.c",
+          "original_sha256": "077663754025071C48EC5F0BFEBBCF07E1A6BCC240153B40545EF6F3C59C8344",
+          "catalog_git_blob": "ff2d706aecbf46efbc04b4ccfc64a225607431ee"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_sas.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_sas.c",
+      "dependency_block": "obj/host/nt_sas.obj: #deps 17, deps mtime 8147603006375758 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "CDE271FE9A55D1AA808B2419145133E45FD64977B657F3F478C6E94709734D1F",
+      "functions": [],
+      "disposition": "alternative-profile-file"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_sec.c",
+      "sha256": "2BA1FACF8D0C0A00C71F78DFB1FC8E2D001B699E2659465044A94738B637C9BD",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sec.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_sec.c",
+        "sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+        "bytes": "7104",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:d692d079eb4cd97ec6cd",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_sec.c",
+          "original_sha256": "2BA1FACF8D0C0A00C71F78DFB1FC8E2D001B699E2659465044A94738B637C9BD",
+          "catalog_git_blob": "dd0a9f818d2842deecb61e3889bffdced0ba72df"
+        },
+        {
+          "id": "SRC:d9d72ee4d14dacd3137b",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_sec.c",
+          "original_sha256": "2BA1FACF8D0C0A00C71F78DFB1FC8E2D001B699E2659465044A94738B637C9BD",
+          "catalog_git_blob": "dd0a9f818d2842deecb61e3889bffdced0ba72df"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_sec.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_sec.c",
+      "dependency_block": "obj/host/nt_sec.obj: #deps 20, deps mtime 8147603033310343 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_rrr.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_det.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_eoi.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_thred.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_uis.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/ddk/inc/ntddvdeo.h\n    ../../../../src/opennt-abi/source/public/internal/base/inc/vdm.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "object_sha256": "9CC513DC7137D16A880477E05A9ABE523A54755250CD5FD9F295B3A5EC16A956",
+      "functions": [],
+      "disposition": "alternative-profile-file"
+    }
+  ],
+  "sas_providers": [
+    {
+      "symbol": "_c_sas_connect_memory",
+      "va": 4222016,
+      "bytes": 51,
+      "relocation_words": 2
+    },
+    {
+      "symbol": "_sas_init",
+      "va": 4226080,
+      "bytes": 286,
+      "relocation_words": 29
+    },
+    {
+      "symbol": "_sas_term",
+      "va": 4226368,
+      "bytes": 66,
+      "relocation_words": 7
+    }
+  ],
+  "public_callers": [
+    {
+      "symbol": "_VDDAllocMem",
+      "va": 4568144,
+      "bytes": 125,
+      "relocation_words": 3,
+      "target": "_VDDCommitUMB"
+    },
+    {
+      "symbol": "_VDDFreeMem",
+      "va": 4568736,
+      "bytes": 125,
+      "relocation_words": 3,
+      "target": "_VDDDeCommitUMB"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-softpc-host-roots.lib",
+      "sha256": "B0E9C871F6C5E42AFD860F03378DDF020B150E76070E618B4F675D23CD9A56FA"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_msscs.obj",
+      "sha256": "168370310D5185B01EC78C741064B3E414B581AFF75B3F8726A2F0F272F9844C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\ccpusas4.obj",
+      "sha256": "F4EFE1074775D9A208632B876370F7AA00903F5E62989557D607F6D376AE3D1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\source-file-catalog.csv",
+      "sha256": "7DAC7F535A737988BE4B3D859C82D58C89EE54E4C3207B529E0875FE29A76938"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\source-file-catalog.csv",
+      "sha256": "712AE62DC491DF3E2480FD82121D2A517093707C263E2803965EFC6AC9D98A9B"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-scope.json",
+      "sha256": "B5AC71F12855EA642F977D92139FB2EBB39210D03F8A0FDE18B7C453AE415E47"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\frozen-file-reconciliation.csv",
+      "sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "sha256": "FFD1901B69DE9BD8D433B7480D60B505B634CC17DBADFAF25AE1E6B06FF625A4"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "sha256": "F795E29A8C6E21E6221C5A2D3BDA1ED23914F28091F794EF2602C66B95292149"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\obj.vdm\\CDEFINE.INC",
+      "sha256": "A5CC355BFAB633968217C85A4BB210F684039E08E7784578800C672F65772F14"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "sha256": "4A209094D48DE6003255367352E17518D98233CF72829D18DEA268DC608B996B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\bios-image-observer.py",
+      "sha256": "7281778DC9EE59D4214CC137561E0045AA76BEA803FF0F9EF70D02BBD9B24CAE"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\disk-image-observer.py",
+      "sha256": "3C785EBF2F787213AB403D9AA1BEBC6BCF04CFF0091FD6FE055D813E90C4A9CF"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\memory-image-observer.py",
+      "sha256": "B671FDF568407687B035829E86E4B1DA16428B022264109F63715434B1C4947E"
+    }
+  ],
+  "scope": "Original UMB owner and physical alternative SAS/video files; actual public callers bound, no claim of complete guest memory-hook or physical hardware lifecycle"
+}

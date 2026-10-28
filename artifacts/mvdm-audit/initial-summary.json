@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1547,
-    "excluded": 2637,
-    "partial": 447,
+    "pending": 1544,
+    "excluded": 2639,
+    "partial": 448,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Three original planar owners are partial: 40 image-bound functions, 33 dispatch slots and actual-object pixels. No original source or image changed; mode/caller/transport lifetimes remain S13."
+  "note": "One original UMB owner partial with bounded native evidence; two physical alternate memory profiles excluded through selected original CPU40 ownership. Direct helper boundary failure is not a demonstrated production defect. No original source or image changed."
 }

@@ -1,0 +1,7 @@
+UMB_BOUNDARY kind=commit address=000c7000 size=00002000 accepted=1 calls=1 low=000c7000 high=000c8fff
+UMB_BOUNDARY kind=commit address=000c6000 size=00002000 accepted=1 calls=1 low=000c6000 high=000c7fff
+UMB_BOUNDARY kind=commit address=ffff0000 size=000e0000 accepted=1 calls=1 low=ffff0000 high=000cffff
+UMB_BOUNDARY kind=decommit address=000c7000 size=00002000 accepted=1 calls=1 low=000c7000 high=000c8fff
+UMB_BOUNDARY kind=decommit address=000c6000 size=00002000 accepted=1 calls=1 low=000c6000 high=000c7fff
+UMB_BOUNDARY kind=decommit address=ffff0000 size=000e0000 accepted=1 calls=1 low=ffff0000 high=000cffff
+UMB_OBJECT_CONTRACT checks=12 failures=12 callbacks=6 notifies=0 boundary=1

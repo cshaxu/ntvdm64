@@ -1,0 +1,92 @@
+[
+  {
+    "path": "ios/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "ios/build.stdout.txt",
+    "bytes": 31,
+    "sha256": "62AA50DB9890EB3D00488A23CB0851675086930FBDE51B2461F9CF406FCC3EEC"
+  },
+  {
+    "path": "ios/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "ios/negative-abi.stdout.txt",
+    "bytes": 138,
+    "sha256": "3A937F1AA41A1A98DC5D7FC8DE9C93617F808E123C08F92ACACE18A551BF7A52"
+  },
+  {
+    "path": "ios/result.json",
+    "bytes": 5166,
+    "sha256": "D6AD7B1CB850BA0484721E9F91A774B46C54995D7B2F7B8BF3BB38FF138DAE48"
+  },
+  {
+    "path": "ios/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "ios/run.stdout.txt",
+    "bytes": 55,
+    "sha256": "226EF948C2A19F5328A16A96D2D603A2A217457242E11B75416FE8FB642F6322"
+  },
+  {
+    "path": "umb/boundary.completion.json",
+    "bytes": 89,
+    "sha256": "A7B1573BD9C6BE5629AB00ACF4C577B53A9BB108EB5DF15DF2CA607E0B965BC9"
+  },
+  {
+    "path": "umb/boundary.process.json",
+    "bytes": 204,
+    "sha256": "DF3451CC6A645610F4CF8F2CEB4C11F300A074464C759028750491A63831CE83"
+  },
+  {
+    "path": "umb/boundary.stderr.txt",
+    "bytes": 200,
+    "sha256": "8B4E15DD0FAC14451B235458CF7D9987F198E25A989CEFEF2D9DE226E904DF2C"
+  },
+  {
+    "path": "umb/boundary.stdout.txt",
+    "bytes": 701,
+    "sha256": "EAF71FFAA1824B864F1153EF1324C935C4B6126EEFF4CA7FE21B7CECD8A31851"
+  },
+  {
+    "path": "umb/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "umb/build.stdout.txt",
+    "bytes": 268,
+    "sha256": "822AB09F7ACFF5CDE2F3976A3949F88ABE08F4B0A5C4B03800CE1A8D7DE21E06"
+  },
+  {
+    "path": "umb/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "umb/negative-abi.stdout.txt",
+    "bytes": 375,
+    "sha256": "092FC551A687C47FF04791C301D5665EA1CE2C884A36467811CEA13FE015D50A"
+  },
+  {
+    "path": "umb/result.json",
+    "bytes": 4478,
+    "sha256": "78FFB932DB5F2247D8B22E42DEE60231D5C9E12BB99309CC1C2B3E173F9B17A7"
+  },
+  {
+    "path": "umb/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "umb/run.stdout.txt",
+    "bytes": 78,
+    "sha256": "4853E8E0A53FDB9909F66703F7B973E07F00D4184A37F816E46320B7DEBA1624"
+  }
+]

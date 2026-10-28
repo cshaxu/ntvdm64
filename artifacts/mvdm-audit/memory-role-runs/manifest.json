@@ -1,0 +1,82 @@
+[
+  {
+    "path": "memory-image-completion.json",
+    "bytes": 66,
+    "sha256": "23ABBD07A6941A7E215AB36629F9D3E7760188C94D99C12057BF4A89654CDE36"
+  },
+  {
+    "path": "memory-image-process.json",
+    "bytes": 192,
+    "sha256": "54301677D1167E81973633AD4BEEB169C2A1640766D85101AEDCDBDC0060A382"
+  },
+  {
+    "path": "memory-image-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "memory-image-stdout.txt",
+    "bytes": 104,
+    "sha256": "4951530B33681B75476741825247211B57E524DCD24C945C9CD63ADA4C1C6846"
+  },
+  {
+    "path": "memory-ios-supervisor-completion.json",
+    "bytes": 66,
+    "sha256": "5679A06A8E702300B8259934F49965941562B7F9B46C725F08EA0BF77F2D23A4"
+  },
+  {
+    "path": "memory-ios-supervisor-process.json",
+    "bytes": 337,
+    "sha256": "195AA6E52F54258ABA784926890E649656B27D0F9B06FF5A48482CF2BD6D6026"
+  },
+  {
+    "path": "memory-ios-supervisor-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "memory-ios-supervisor-stdout.txt",
+    "bytes": 5166,
+    "sha256": "D6AD7B1CB850BA0484721E9F91A774B46C54995D7B2F7B8BF3BB38FF138DAE48"
+  },
+  {
+    "path": "memory-role-r2-completion.json",
+    "bytes": 66,
+    "sha256": "73563885D2E3544F76F42796745D65BCA116E93BD25F098D9C051D8E1E13FF9D"
+  },
+  {
+    "path": "memory-role-r2-process.json",
+    "bytes": 195,
+    "sha256": "9F3613B0CB64DC1DA7BDBB77FF85776CD7BC716CA9048833565DA2089F52E6FE"
+  },
+  {
+    "path": "memory-role-r2-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "memory-role-r2-stdout.txt",
+    "bytes": 383,
+    "sha256": "D991830B9B55074098FDD19E08ADEEF7CDD18D5E847823B3DD2FE367A33E8483"
+  },
+  {
+    "path": "umb-supervisor-r3-completion.json",
+    "bytes": 66,
+    "sha256": "692074A96BFB4ECB1B883799BE040324AC8AA23E4E54DFADA06635DBBAC423D9"
+  },
+  {
+    "path": "umb-supervisor-r3-process.json",
+    "bytes": 341,
+    "sha256": "A655861FA0AB9A8CF47FD9A3A1AAB0EAE542706E864AFA994051C12C971676C9"
+  },
+  {
+    "path": "umb-supervisor-r3-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "umb-supervisor-r3-stdout.txt",
+    "bytes": 4478,
+    "sha256": "78FFB932DB5F2247D8B22E42DEE60231D5C9E12BB99309CC1C2B3E173F9B17A7"
+  }
+]

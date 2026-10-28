@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "started": "2026-10-28T02:56:02.2112968Z",
+  "pid": 26168,
+  "arguments": "-NoProfile -File tests/observation/verify-softpc-object-contract.ps1 -Contract umb -BuildRoot build/t473-s10/umb-object-contract-r3"
+}

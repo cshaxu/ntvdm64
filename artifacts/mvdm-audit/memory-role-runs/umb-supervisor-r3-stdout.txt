@@ -1,0 +1,79 @@
+{
+  "started": "2026-10-28T02:56:02.9597552Z",
+  "owner_pid": 26168,
+  "result": "pass",
+  "contract": "umb",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\umb-object-contract-r3",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\umb-object-contract-r3\\umb-object-contract.exe",
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1",
+      "sha256": "8D1C4A06200B8F5D36787DD25652A56F87BFF6410C20BCF28A0CFCD2CB08A6D9"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\umb_object_contract_fixture.c",
+      "sha256": "A6FC0A42A907A748B72E9A921080987DAA19418DFA16173F27CE6DC001BFF667"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "sha256": "2A109F11985507463797E60B8B19FC12441BD18278B1444DDE581CC351DE72ED"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_umb.obj",
+      "sha256": "54F1A069088F6FD5702BD2D1893AE85CAC0487AB608430AB7107D096F8388E9E"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h",
+      "sha256": "16008682AF1A1770658FA6C70797E7B92BBD041E44D23B8759B05F71A91564EB"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+      "sha256": "881ABE6E5E1A5CE490542DE98B870E9DCDCF72AE7E3E836B6A6B2B73560EB063"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "sha256": "937F340563000566CA7504591CB0DD1F416CAA661A0BA206095588F783B40CBE"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\umb.h",
+      "sha256": "2461D7F74C3317A98D1456C238AD2F14BCDB2CBCD189D39836F24A353893E4B3"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h",
+      "sha256": "ABC942914E4EA58F17D4549C3FCD6753500B012B83056B33B285C4DCEE79008B"
+    }
+  ],
+  "runs": [
+    {
+      "kind": "build",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\umb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_umb.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\umb-object-contract-r3\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\umb-object-contract-r3\\umb-object-contract.exe\" /link kernel32.lib\"",
+      "exit": 0,
+      "pid": 20152
+    },
+    {
+      "kind": "negative-abi-compile",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_UMB_EXPECT_NODE_BYTES=4 /DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\umb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\umb-object-contract-r3\\negative-abi.obj\"\"",
+      "exit": 2,
+      "pid": 30084
+    },
+    {
+      "kind": "fixture",
+      "diagnostic_budget_ms": 30000,
+      "exit": 0,
+      "pid": 20468
+    }
+  ],
+  "checks": 4240,
+  "callbacks": 6,
+  "fixture_sha256": "E7712F7361915D753CCFF44BFA3A466EAC39A6DCEC2293EECE75C0A4BFA4D3A0",
+  "finished": "2026-10-28T02:56:13.1264693Z"
+}
