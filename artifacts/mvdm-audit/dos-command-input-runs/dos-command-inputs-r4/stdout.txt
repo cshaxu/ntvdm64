@@ -1,0 +1,2 @@
+{"base": "bba17e229", "result": "observed", "reviewed_count": 85, "source_chain_count": 78, "resolved_role_count": 85}
+{"result": "pass", "base": "bba17e229", "counts": {"pending": 1583, "excluded": 2632, "partial": 417, "full": 52}, "source_role_changes": 85, "unrelated_shard_rows_unchanged": true, "frozen_inventory_unchanged": true, "product_or_guest_changed_by_checkpoint": false, "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance"}

@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T00:55:08.3645784Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\dos-command-inputs-r4\\run.ps1\"",
+  "pid": 19116,
+  "diagnostic_budget_seconds": 420
+}

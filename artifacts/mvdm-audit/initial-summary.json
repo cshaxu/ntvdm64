@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1668,
-    "excluded": 2547,
+    "pending": 1583,
+    "excluded": 2632,
     "partial": 417,
     "full": 52
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Nine original CPU header/macro integrations partial; inactive PIG comparison-test declaration role excluded; twelve other header roles stay pending; no full/source/runtime change."
+  "note": "All 85 remaining DOS command source roles reconciled: 78 source/include inputs, two historical message-tool inputs, four source-proved obsolete modules/message bindings and one change-history note. Guest functionality and image provenance remain independent obligations."
 }

@@ -1,0 +1,7 @@
+{
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dos-command-input-role-merge.py\"",
+  "pid": 8604,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-28T00:55:10.0649464Z",
+  "diagnostic_budget_seconds": 180
+}

@@ -30,6 +30,58 @@ def sha(path):
     return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
 
+def apply_dispositions(dispositions, base, review, note):
+    """Update one exact reviewed cohort, retaining base CSV framing and other rows."""
+    def write_csv(path, content):
+        raw = subprocess.check_output(['git', 'show', f'{base}:{path.as_posix()}'])
+        ending = '\r\n' if b'\r\n' in raw.split(b'\n', 1)[0] + b'\n' else '\n'
+        encoding = 'utf-8-sig' if raw.startswith(b'\xef\xbb\xbf') else 'utf-8'
+        with path.open('w', encoding=encoding, newline='') as stream:
+            writer = csv.DictWriter(stream, list(content[0]), lineterminator=ending)
+            writer.writeheader()
+            writer.writerows(content)
+
+    changed = {r['relative_path']: r for r in dispositions}
+    assert len(changed) == len(dispositions)
+    ledger = rows(A / 'combined-initial-status.csv')
+    prior = {r['relative_path']: r for r in original_rows(A / 'combined-initial-status.csv', base)}
+    for row in ledger:
+        if row['relative_path'] in changed:
+            proof = changed[row['relative_path']]
+            original = prior[row['relative_path']]
+            assert original['status'] == 'pending'
+            assert row == original or row == dict(original, status=proof['status'])
+            row['status'] = proof['status']
+    specs = [('shard-0/review.csv', 'classification'), ('shard-1/file-audit.csv', 'audit_status'),
+             ('shard-2/file-audit.csv', 'decision'), ('shard-3/file-review.csv', 'review_class')]
+    for filename, column in specs:
+        content = rows(A / filename)
+        for row in content:
+            proof = changed.get(row['relative_path'])
+            if not proof:
+                continue
+            row[column] = ({'partial': '部分复通', 'excluded': '整体排除'}[proof['status']]
+                           if column in ('classification', 'audit_status') else proof['status'])
+            row['estimated_restored_code_pct'] = ''
+            if 'restored_estimate_status' in row:
+                row['restored_estimate_status'] = proof['restored_estimate_status']
+            for field in ('finding', 'role_or_prior_finding', 'decision_basis', 'review_basis'):
+                if field in row:
+                    row[field] = proof['role'] + '; ' + proof['original_edge']
+            for field in ('evidence', 'reviewed_test_evidence', 'specific_evidence'):
+                if field in row:
+                    row[field] = review + '; ' + proof['evidence_table']
+            for field in ('remaining_evidence', 'next_required_evidence', 'review_limits', 'remaining_proof'):
+                if field in row:
+                    row[field] = proof['limits']
+        write_csv(A / filename, content)
+    write_csv(A / 'combined-initial-status.csv', ledger)
+    summary = json.loads((A / 'initial-summary.json').read_text())
+    summary['counts'] = dict(collections.Counter(r['status'] for r in ledger))
+    summary['note'] = note
+    (A / 'initial-summary.json').write_text(json.dumps(summary, indent=2) + '\n')
+
+
 def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     frozen_path = A / 'frozen-file-reconciliation.csv'
     assert sha(frozen_path) == 'F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196'
@@ -79,7 +131,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
                                 'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only',
                                 'historical-build-recipe-file-only', 'historical-inline-helper-source-only',
-                                'historical-cpu-test-declaration-only')
+                                'historical-cpu-test-declaration-only', 'historical-guest-build-tool-source-only',
+                                'historical-obsolete-guest-source-only', 'historical-source-note-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -99,6 +152,14 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'ccpu-control-role-' and path == 'softpc.new/base/ccpu386/nop.c'
                 if proof['role'] == 'historical-cpu-test-declaration-only':
                     assert prefix == 'ccpu-header-macro-role-' and path == 'softpc.new/base/ccpu386/ccpupig.h'
+                if proof['role'] == 'historical-guest-build-tool-source-only':
+                    assert prefix == 'dos-command-input-role-' and path in ('dos/v86/cmd/command/buildmsg.c', 'dos/v86/cmd/command/usa-ms/bldmsg.h')
+                if proof['role'] == 'historical-obsolete-guest-source-only':
+                    assert prefix == 'dos-command-input-role-' and path in (
+                        'dos/v86/cmd/command/tcmd1a.asm', 'dos/v86/cmd/append/appendm.asm',
+                        'dos/v86/cmd/keyb/kbmsg.inc', 'dos/v86/cmd/keyb/keybmsg.inc')
+                if proof['role'] == 'historical-source-note-only':
+                    assert prefix == 'dos-command-input-role-' and path == 'dos/v86/cmd/exe2bin/e2bchng.inc'
             else:
                 if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
@@ -133,6 +194,17 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'dos-command-input-role-':
+        observed = json.loads((A / 'dos-command-input-observations.json').read_text())
+        actual = runpy.run_path(str(A / 'dos-command-input-observer.py'))['observe']()
+        assert observed == actual and observed['reviewed_count'] == 85
+        selected = {r['relative_path'] for r in observed['records'] if r['result'] != 'unresolved'}
+        assert selected == set(changed) and len(selected) == 85
+        assert observed['source_chain_count'] == 78 and observed['resolved_role_count'] == 85
+        assert all(proof['status'] == 'excluded' and proof['original_text_retained_percent'] == '100' for proof in dispositions)
+        for record in observed['records']:
+            if record['relative_path'] not in selected:
+                assert merged[record['relative_path']]['status'] == 'pending'
     if prefix == 'ccpu-header-macro-role-':
         observed = json.loads((A / 'ccpu-header-selection-observations.json').read_text())
         actual = runpy.run_path(str(A / 'ccpu-header-selection-extractor.py'))['inspect']()
@@ -464,7 +536,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

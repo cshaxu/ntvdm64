@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T00:55:46.2984915Z",
+  "diagnostic_budget_seconds": 180,
+  "pid": 22776,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dos-command-input-delivery-verification.ps1\"",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

@@ -1,0 +1,40 @@
+{
+  "result": "pass",
+  "base": "bba17e229",
+  "candidate_count": 85,
+  "source_tables": [
+    {
+      "path": "dos-command-input-observations.json",
+      "sha256": "C862E5D1EDC0DB71D550452EA2002387AA11FAFC7725BC37E879AA93B269BD68"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\commands.stdout.txt",
+      "sha256": "99E5F505E266FC2B2AFA01D77258121DDF2763EF5BC97C783110E9655DB8CFC4",
+      "graph": "worker",
+      "kind": "commands"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps"
+    }
+  ],
+  "scope": "Original source-input ownership, not guest image derivation or runtime acceptance"
+}

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\dos-command-input-observer.py", line 135, in <module>
+    result = observe()
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\dos-command-input-observer.py", line 86, in observe
+    assert len(sources) == 1, (family, stem, sources)
+           ^^^^^^^^^^^^^^^^^
+AssertionError: ('share', 'OBJ', [])

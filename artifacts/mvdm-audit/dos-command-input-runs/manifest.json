@@ -1,0 +1,192 @@
+[
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs/completion.json",
+    "bytes": 66,
+    "sha256": "65B5742DC564EEBAE72438A08A825CADDD7E8C7198E3706DAF6123E5E08CC1B1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs/process.json",
+    "bytes": 274,
+    "sha256": "C418F7936DBEFB0B830E4A74671BD14750316DBD2733672CB8DFC9FBAFEC0BBF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs/stderr.txt",
+    "bytes": 395,
+    "sha256": "33AF20B22230330391FDC55AF89E3C04876902A9D1FBB83E21928889F54CE23A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs/stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r2/completion.json",
+    "bytes": 66,
+    "sha256": "D87BC50E8FB380F993B0EAD961082DB44B70444A522C9EDA32235016E47909C9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r2/process.json",
+    "bytes": 274,
+    "sha256": "3FE0CF52328C9F01AE712E3CADAC35D42CF2C00E1E5C82F57658F92FB1726A96"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r2/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r2/stdout.txt",
+    "bytes": 442,
+    "sha256": "950A7833F386D59B66EC4964B23686CBA52A1ACCC14B1CA84FDDCD5A9F9E5A26"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/completion.json",
+    "bytes": 66,
+    "sha256": "69BF7A444C330CDDF072FE068BFDF218AAE6555D517172AA769AB2768A256F81"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/merge.completion.json",
+    "bytes": 66,
+    "sha256": "A1C1FC3CFA00C4ACB346B01358DEDD40973C54AE663EB08995EBA7E5DFD8DEB0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/merge.process.json",
+    "bytes": 275,
+    "sha256": "2D2AD3C7B8FF2A32B6267A874E7820DD5CAC0AC805C4F4408AE27D0B87BD1CAB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/merge.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/merge.stdout.txt",
+    "bytes": 384,
+    "sha256": "2EE6A6CF12BE75FCBA7B7C2A88D240B306698B1FACFB22AB93B7A527A4598E60"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/observer.completion.json",
+    "bytes": 66,
+    "sha256": "C300A70FF5B1E6E12350CED4525D433C8D91B0DC81F6E19C0A158065DE220359"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/observer.process.json",
+    "bytes": 274,
+    "sha256": "46B125AFFEE474F001600C44DB5A897B7922830FFE2C81D6C38E42ACD68C34FF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/observer.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/observer.stdout.txt",
+    "bytes": 243,
+    "sha256": "D42EA5C9FAFA1F300089EBE404EACF6675065DDCC067DD68E57A7079BF49DC9C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/process.json",
+    "bytes": 365,
+    "sha256": "A005FF2D0CBFD71AA996848FD3CD5C556E3BE811B1A45337488B6733AD25719E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/run.ps1",
+    "bytes": 1164,
+    "sha256": "9CB76C80F170D5DE9E198C3034D66C3F6228DB977E89AF09995A75781845F5AA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r3/stdout.txt",
+    "bytes": 627,
+    "sha256": "040E716D39BE94BEBF3B036B3D7B7EEA6BCD0DC9C533B87385D569AE2DC9DFC5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/completion.json",
+    "bytes": 66,
+    "sha256": "C11CD1BBBC15D9CBFAF77853F226A03DF0045CC289E8574DEDE95B777C355E10"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/merge.completion.json",
+    "bytes": 66,
+    "sha256": "A4D8208B4164B995BF5E9D1AB8CEE548E2E9658B6F570815F58C36619C4D40DE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/merge.process.json",
+    "bytes": 275,
+    "sha256": "47522435D6E345A95B025E415BD191FBBDEFD27FB6742BB37D508E64114A0E07"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/merge.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/merge.stdout.txt",
+    "bytes": 384,
+    "sha256": "FC34A73679A5447771AD22DA5F43134334251006C5A2C2C57B6A7F1FD49CABB2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/observer.completion.json",
+    "bytes": 66,
+    "sha256": "33C000A8AA48C98EFE40779AE9C18A3D2426A322F1341BA4DCDB3DE557B087DD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/observer.process.json",
+    "bytes": 274,
+    "sha256": "6B06504696DCC8E24D6DD76D3E332929F7A00C327180B499DFF49725EE6D3148"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/observer.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/observer.stdout.txt",
+    "bytes": 120,
+    "sha256": "4085ADE79595909FF6809AD86503F7FA033ABB430A7BA47F095125A5BA076199"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/process.json",
+    "bytes": 365,
+    "sha256": "E38A233BCB0F0903AC86C382FD89C0CB64EEA21AC945B41F3656398A9AA8BC89"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/run.ps1",
+    "bytes": 1164,
+    "sha256": "22FD7279AEAD52F73ECAEAE7AAD15FBEAE8F4212B69BF8AFB4E32C40D5AB10D4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-inputs-r4/stdout.txt",
+    "bytes": 504,
+    "sha256": "BF920999B4790F4C6CFE904DBC89D4A2A359840F9A0B88B760261E4D7D1451B6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-merge/completion.json",
+    "bytes": 66,
+    "sha256": "600EE01DF3E3153864A83A9D42B4CB2111AACD9F7961A2FB1CCB8943EFAB7911"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-merge/process.json",
+    "bytes": 275,
+    "sha256": "BE773B8163F163979F80FFE2AF4029568808CEF6546C671CBCABBAB296B9951A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-merge/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/dos-command-input-runs/dos-command-merge/stdout.txt",
+    "bytes": 384,
+    "sha256": "C33CFB036DDD542CA8E33F0F6F3D9CC34D75CD2D45F877C71A00271BC7C56C5B"
+  }
+]

@@ -20,11 +20,10 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[CCPU declaration review](../../artifacts/mvdm-audit/selected-ccpu-header-role-review.md)
-adds 71 partial declaration slices from actual compiler-selected tokens.
-The ledger retains 1,668 pending, 417 partial, 52 full and 2,547 excluded
-physical file roles. Source/ABI and real guest/device proof remain open;
-these checkpoints changed no runtime image.
+[DOS command input review](../../artifacts/mvdm-audit/dos-command-input-review.md)
+resolves all 85 historical file roles in this source cohort, retaining all guest
+capability obligations. The ledger has 1,583 pending, 417 partial, 52 full and
+2,632 excluded physical file roles. No runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

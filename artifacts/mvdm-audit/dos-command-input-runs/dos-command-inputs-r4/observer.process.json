@@ -1,0 +1,7 @@
+{
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\dos-command-input-observer.py\"",
+  "pid": 22228,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-28T00:55:09.0007675Z",
+  "diagnostic_budget_seconds": 180
+}
