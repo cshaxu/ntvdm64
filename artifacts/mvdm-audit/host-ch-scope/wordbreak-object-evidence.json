@@ -1,0 +1,45 @@
+{
+  "sha256": {
+    "src\\mvdm\\wow32\\wmsgem.c": "251325307c9e698ee579e3493f15f93abb6dafe7d289f334ac3714c513566be9",
+    "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsgem.obj": "46c37b644ded00183c1ef5afb8a51bd1b9229040d2800a695cffb2159a0af6f9",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wordbreak-object-observe.py": "2f0275d8ac94e605cdf53b31d2632f5fc95cbce3cdb7417ae146084ad593cc5b",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wordbreak-object-build.cmd": "d85cb5c89239caa96ceaf63959db33d61041efe54a42b2a7e87828f0bdc602c1",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wordbreak-object-fixture.c": "eb8344d2c8717c2982844c52a58865ea8e137b339b833ae2664db7f4aa005d82",
+    "artifacts\\mvdm-audit\\host-ch-scope\\tabstop-link-seams.c": "b657344d0514f4a15e6319470ca079f6de75311d7a80c59aa8985758866da2c7",
+    "artifacts\\mvdm-audit\\shard-2\\tabstop-object-types.h": "ff83c8e60bbf088442bc5b9616f12fcc903e74bbc2334bb33a557348603034fc",
+    "build\\t473-s10\\wordbreak-object\\fixture.exe": "03fc7318d8cbf02ce40b58923959ce9e4ae1d85a76ee65fec779f7412e763fee",
+    "build\\t473-s10\\wordbreak-object\\fixture.map": "b0d21df77c4fe57712dfc60f3bd0c0af71b4610985b9ee4b7d944a0d3ea9c0a2"
+  },
+  "results": [
+    {
+      "case": "zero",
+      "exit": 0,
+      "output": "zero ret=00000000 word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "case": "guest-ldt",
+      "exit": 0,
+      "output": "guest-ldt ret=00040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "case": "guest-high",
+      "exit": 0,
+      "output": "guest-high ret=80040077 word16=00000000 word32=11112222 callbacks=0 reason=0 ordinal=0"
+    },
+    {
+      "case": "native-fail",
+      "exit": 0,
+      "output": "native-fail ret=00123456 word16=00123456 word32=00123456 callbacks=1 reason=27 ordinal=535"
+    },
+    {
+      "case": "native-success",
+      "exit": 0,
+      "output": "native-success ret=00123456 word16=12345678 word32=00123456 callbacks=1 reason=27 ordinal=535"
+    },
+    {
+      "case": "native-cached",
+      "exit": 0,
+      "output": "native-cached ret=56789abc word16=56789abc word32=11112222 callbacks=0 reason=0 ordinal=0"
+    }
+  ]
+}

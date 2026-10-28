@@ -13,3 +13,5 @@ The [native page oracle](ccpu-bit-page-oracle-review.md) independently confirms 
 The [selected decoder fixture](ccpu-bit-decoder-probe-review.md) now reproduces BT and BTC failures for operand16/address16 and index -1 against real original CCPU decoder and instruction objects. Its derived host fixture omits an independently failing PIC self-check and links with `/force:multiple`; neither this observation nor the native oracle is a complete worker or guest regression.
 
 The [combined readiness and decoder control](ccpu-bit-ready-probe-review.md) retains the original PIC self-check and passes it after an explicit test-only readiness setup, then reproduces the same bit failures. It retains the forced-link and seam limits and is not a complete worker or guest regression.
+
+The [expanded decoder matrix](ccpu-bit-matrix-review.md) records seven independent cases, including a directly observed 16-bit positive-wrap BTC write beyond `0xffff`. A dword negative BTC case fails to modify the expected near word but its actual write target remains unknown; its expected result is an inference from separate native probes, not a direct matching instruction observation.

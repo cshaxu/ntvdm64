@@ -10,6 +10,8 @@ The [clean-link object baseline](tabstop-link-route-review.md) repeats the zero/
 
 The [controlled release matrix](tabstop-release-review.md) separately exercises twelve count, storage and return-value combinations in the cached selected object. It confirms the observed cleanup predicate and the existing result-one corruption, not constructor reachability, post-fix behavior or real guest lifecycle.
 
+The [word-break return controls](wordbreak-object-review.md) exercise six cases of the same cached object with synthetic pointer values and a controlled callback. They bound the existing zero, tagged, callback and cache behavior that the tab-stop correction must preserve; they do not establish valid native/guest pointer lifetimes or a real callback.
+
 The [three-route evidence review](tabstop-three-routes-evidence.md) distinguishes the existing real EDIT `SendMessage` witness from other-message `CallWindowProc` evidence and the missing `SendDlgItemMessage` EDIT witness; a test-owned NE probe may cover these without modifying an existing guest image.
 
 ## Minimal correction
