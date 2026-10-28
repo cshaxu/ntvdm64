@@ -48,6 +48,9 @@ The [cursor/icon alias review](cross-369/cursor-cache-disposition.md) and
 [DDEML thunk review](cross-369/ddeml-thunk-disposition.md) compare selected
 original providers with historical alternatives; role recommendations remain
 subject to coordinator disposition and do not close runtime obligations.
+The [OLE alias interface review](cross-369/ole-alias-header-disposition.md)
+records selected dependencies and a bounded alias witness, with observation
+failure and full guest interoperability still open.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
