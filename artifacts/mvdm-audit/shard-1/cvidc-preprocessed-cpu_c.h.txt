@@ -1,0 +1,119 @@
+#line 1 "O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\\cpu_c.h"
+
+
+
+
+enum cv
+{
+	SAFE_SEGMENT,
+	PUSH_SAFE,
+	POP_SAFE,
+	BP_RELATED_SAFE,
+	PROTECTED,
+	VIRTUAL_8086,
+	FLAT_SEGMENT,
+	DF_BACKWARDS,
+	NO_FLAGS,
+	ALIGN_2,
+	ALIGN_4,
+	ADDRESS_SIZE_32,
+	ACCESS_IS_READ,
+	EXPAND_UP,
+	COMPILE_TIME_FT,
+	COMPILE_TIME_FT_PAD1,
+	COMPILE_TIME_FT_PAD2,
+	COMPILE_TIME_FT_PAD3,
+	COMPILE_TIME_FT_PAD4,
+	COMPILE_TIME_FT_PAD5,
+	BEFORE_SINGLE,
+	AFTER_SINGLE,
+	COPIER_CHECK_OK,
+	SF_UNCHECKED,
+	SF_IOACCESS,
+	INVERT_JCOND,
+	LAST_CV
+};
+enum Constraints
+{
+	ConstraintPROTECTED = 0,
+	ConstraintVIRTUAL_8086 = 1,
+	ConstraintBIG_CODE = 2,
+	ConstraintDF = 3,
+	ConstraintRAX_LS16 = 4,
+	ConstraintRAL_LS8 = 5,
+	ConstraintRBX_LS16 = 6,
+	ConstraintRBL_LS8 = 7,
+	ConstraintRCX_LS16 = 8,
+	ConstraintRCL_LS8 = 9,
+	ConstraintRDX_LS16 = 10,
+	ConstraintRDL_LS8 = 11,
+	ConstraintRBP_LS16 = 12,
+	ConstraintRSI_LS16 = 13,
+	ConstraintRDI_LS16 = 14,
+	ConstraintSfUnchecked = 15,
+	ConstraintSfIOAccess = 16,
+	ConstraintDS_SAFE = 17,
+	ConstraintES_SAFE = 18,
+	ConstraintFS_SAFE = 19,
+	ConstraintGS_SAFE = 20,
+	ConstraintPUSH_SAFE = 21,
+	ConstraintPOP_SAFE = 22,
+	ConstraintBP_RELATED_SAFE = 23,
+	ConstraintBEFORE_SINGLE = 24,
+	ConstraintAFTER_SINGLE = 25,
+	ConstraintCS_FLAT = 26,
+	ConstraintDS_FLAT = 27,
+	ConstraintES_FLAT = 28,
+	ConstraintFS_FLAT = 29,
+	ConstraintGS_FLAT = 30,
+	ConstraintSS_FLAT = 31,
+	ConstraintODD_SEGMENT = 32,
+	ConstraintNPX_DOES_INT7 = 33,
+	ConstraintDEBUGGING = 34,
+	ConstraintContext0 = 35,
+	ConstraintContext1 = 36,
+	ConstraintContext2 = 37,
+	ConstraintContext3 = 38,
+	ConstraintContext4 = 39,
+	ConstraintContext5 = 40
+};
+enum Targets
+{
+	TargetUNKNOWN = 0,
+	TargetALPHA64 = 1,
+	TargetALPHA32 = 2,
+	TargetHPP = 3,
+	TargetPPC = 4,
+	TargetSPARC = 5
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#line 116 "O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\\cpu_c.h"
+
+
+#line 119 "O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\\cpu_c.h"

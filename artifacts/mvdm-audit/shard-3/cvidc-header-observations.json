@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/cvidc/cpuint_c.h",
+      "sha256": "814357A9371E97B0DB7F39943B0E55C9B76507371440614802ED7745E9D9F67B",
+      "wow_source_ids": "SRC:639bc1d7ec20127a008c;SRC:bca04b9c66533d817b2c",
+      "unit": "obj_ccpu_localfm.i",
+      "preprocessed_sha256": "23527B7ADE9EC7F217873F639923031E431D36C2A4F7A4406747552032AAFE74",
+      "selected_nonblank_lines": 35,
+      "first_line": "struct InterruptREC",
+      "last_line": "};"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/fm_c.h",
+      "sha256": "E8F877260EF1F968714A8ECAA3684B2FA4D041C0FF7DC1C9E7B564BA1036486D",
+      "wow_source_ids": "SRC:681367283c2d8413b941;SRC:6bf46e3a8a8dc09e7768",
+      "unit": "obj_host_nt_cpu.i",
+      "preprocessed_sha256": "47C379B30F731E0174D717EADA1D3CD7D128D7B0796932B952EB6779BDDC22A9",
+      "selected_nonblank_lines": 52,
+      "first_line": "struct ConstraintBitMapREC",
+      "last_line": "};"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/fpu_c.h",
+      "sha256": "4A3F2226E9D1CA9FA2E0A806D1D40719E94F97E98B6F22936147240F568AB244",
+      "wow_source_ids": "SRC:626cd9ffcef7b35680a7;SRC:8502440696022a9ce2c5",
+      "unit": "obj_cvidc_accessfn.i",
+      "preprocessed_sha256": "4052563E4A186A387E8AEE8B3A7C2757967C68F0497D7E8FC844A8E6D5A61634",
+      "selected_nonblank_lines": 21,
+      "first_line": "struct FPSTACKENTRY",
+      "last_line": "};"
+    }
+  ],
+  "scope": "Selected declarations only; no CPU, FPU or video behavior claim"
+}

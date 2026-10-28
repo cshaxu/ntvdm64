@@ -1,0 +1,119 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/cmdln.c",
+      "sha256": "6025A70936CA068DC29AF3FA582B3C43AC80EB1B054C73528E9E710F2D508C2B",
+      "wow_source_ids": "SRC:6333928355b7a087b876;SRC:ee25099c6c099479cf03"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/ddesorg.ico",
+      "sha256": "52399553691C38770FBD97C0FD37136E7D43F2AF91088C08B3C4350CF5F88F7A",
+      "wow_source_ids": "SRC:b6f3248247d9d74dc556;SRC:e2ba900cfafc31f087f9"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/ddestrs.h",
+      "sha256": "9E827322A7B8D14F9FCE9E098FADB2688EC8DD199A1626B2336B951FD1B0B982",
+      "wow_source_ids": "SRC:5555304a52d55ecfe80f;SRC:703686299e7ecaa242f0"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/globals.c",
+      "sha256": "998857E0CC117E58B192B821526CBFFD713C66EEEB36F147E4FAA8A88C9796A8",
+      "wow_source_ids": "SRC:cc5da7fe6170d3d9274f;SRC:dc25ec1181d5bab71a85"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/server.c",
+      "sha256": "AE9A7D42428F1E4F75F7A697BF4E8B626F0387DDF1C2C0909209D8C8786C5B77",
+      "wow_source_ids": "SRC:c14a12dc39f279e9ceb2;SRC:e2e3c5c61882a502b50e"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/ddestrs/wrapper.h",
+      "sha256": "0DAB959CD3BC0EDC45305A4C9DCFC8B2BEE7C12C40B921D3A66DBC044CF9D551",
+      "wow_source_ids": "SRC:0b5e50569a7ae402c7fe;SRC:39c059febc98bb143f70"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/client/dde.c",
+      "sha256": "5A43CF63D514AE151F2254E8B17C1DE13F98F979754497B8436DB2DAFED58BD2",
+      "wow_source_ids": "SRC:360791cba0b58458b047;SRC:f4fc3c8fc77aba4c67dd"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/client/dialog.h",
+      "sha256": "D0B07020054BE6C690AB96AA8000060ACD2E713345E12DFECDB74EEBCCF66151",
+      "wow_source_ids": "SRC:843fd65cb0b997f8e40e;SRC:fc4b793311ef2813be6b"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/client/infoctrl.c",
+      "sha256": "88F0A18F99AC221D8D6E59E8DC18CB3FB79852F98FABFD826DE72A82BD4B7BE5",
+      "wow_source_ids": "SRC:4db7cadf680d4a8d0c22;SRC:812f4cff2efd335c8cf2"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/client/infoctrl.h",
+      "sha256": "36324599A934FD0ADA67D72E0187F590C4F959CA8559F1587BA9E605B3E1FF47",
+      "wow_source_ids": "SRC:ed36286dcc13ddbd136a;SRC:ee67c974f1b4dfa9fbbf"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/client/mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13",
+      "wow_source_ids": "SRC:bfbb2397d625b83c8169;SRC:fb5fad1cd9c7b4ecc6bc"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/ddemo/ddemo.def",
+      "sha256": "B5AA923F34DD0712464644AE03A65E82A8FF4A6547B75E23E5E2C633232DE6B2",
+      "wow_source_ids": "SRC:718de336704a650b377b;SRC:ec1e9fd4218c8016ad58"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/ddemo/mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13",
+      "wow_source_ids": "SRC:7a46306e426b3dfd85e8;SRC:af24c3ef5d15d5a687c4"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/server/mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13",
+      "wow_source_ids": "SRC:db25be32759019d90e90;SRC:e66340047e385e067602"
+    },
+    {
+      "relative_path": "wow16/ddeml/tests/src/server/server.h",
+      "sha256": "5A4E4B5B52498974326E5F91FDDEC18CB210BAE7B62F4EF7E16978765B0253AA",
+      "wow_source_ids": "SRC:27da881ce29df469693d;SRC:83dc3693ef2ac6480e90"
+    }
+  ],
+  "recipes": [
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\ddestrs\\sources",
+      "sha256": "B57136A2889AD2F792E52DA93CD12665932CE00F63B55164A7D0D84401C910F7"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\ddestrs\\makefile.dos",
+      "sha256": "2D363DF8D68E84C6EDD10C8450AE3ED3A9C0E459D6A89807EA725DCB9823B67A"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\client\\sources",
+      "sha256": "8F0A9EAEFB415FE22BDDF392459C0ADA6E2CFEE7BC961AB8C19FFAC44E852CCD"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\client\\makefile.dos",
+      "sha256": "63B9B5B9C52E85D81904141DFD1354015E21262C5DA87A7D1603053FEFB50653"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\makefile.dos",
+      "sha256": "5B5E8FF82B3F34B0E1940C0850E064858580E28E212011F1129063AD09D39934"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\ddemo\\makefile.dos",
+      "sha256": "CA41CAACFB881D934F723EC75EF7AAEEE430FE47BE052322BDD799676F180479"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\client\\mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\server\\mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ddeml\\tests\\src\\ddemo\\mk4dos.cmd",
+      "sha256": "C85116E2ECE31AFCDE0D08E1B5D5432725FFC9112736DD44C18B228106A37B13"
+    }
+  ],
+  "scope": "Historical test input identities and recipes; not DDEML behavior acceptance"
+}

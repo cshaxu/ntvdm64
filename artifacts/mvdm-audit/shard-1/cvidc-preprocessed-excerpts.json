@@ -1,0 +1,24 @@
+{
+  "result": "pass",
+  "records": [
+    {
+      "source": "softpc.new/base/cvidc/cpu_c.h",
+      "unit": "host_nt_cpu.i",
+      "unit_sha256": "47C379B30F731E0174D717EADA1D3CD7D128D7B0796932B952EB6779BDDC22A9",
+      "excerpt": "cvidc-preprocessed-cpu_c.h.txt",
+      "excerpt_sha256": "1DE02907378D8AA21F99B074A346396D9D283FBFB4DC446F268FA24B43964690",
+      "nonblank_lines": 83,
+      "excerpt_bytes": 2034
+    },
+    {
+      "source": "softpc.new/base/cvidc/pigger_c.h",
+      "unit": "cvidc_accessfn.i",
+      "unit_sha256": "4052563E4A186A387E8AEE8B3A7C2757967C68F0497D7E8FC844A8E6D5A61634",
+      "excerpt": "cvidc-preprocessed-pigger_c.h.txt",
+      "excerpt_sha256": "EB6BAA43B468D9911622675D2C412020BB16DF71557B92E23D95E56C49C479F7",
+      "nonblank_lines": 113,
+      "excerpt_bytes": 2076
+    }
+  ],
+  "scope": "Exact preprocessor excerpts only; no runtime behavior claim"
+}

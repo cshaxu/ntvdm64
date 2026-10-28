@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "de8fc1a69",
+  "candidate_count": 6,
+  "source_tables": [
+    {
+      "path": "shard-1/cvidc-preprocessed-excerpts.json",
+      "sha256": "0A13A7038FA534B49122F35127D57D5108D6A9EECC91016AE5E00C142EDD4397"
+    },
+    {
+      "path": "shard-1/parallel-cvidc-evidence.json",
+      "sha256": "D9E52A59C36C5FA480BE83DFF3FB78BE8618F5F8E386175E34A8E5FA79CE2C2C"
+    },
+    {
+      "path": "shard-3/cvidc-header-durable-evidence.json",
+      "sha256": "F7F1FD17498B862A80627FBCA08A47298212B2D98649291A496028F13041C773"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Retained declaration excerpts and initial vector; no runtime behavior acceptance"
+}

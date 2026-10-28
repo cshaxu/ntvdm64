@@ -1,6 +1,6 @@
 # S10 shard 0 — DDEML test programs
 
-This read-only pass covers exactly 15 pending physical file roles in shard 0; shared ledger is unchanged. Both original editions, current source and frozen hashes agree; each path has one DOS and two WOW source-catalog rows. The historical ddestrs and client recipes select WIN32 via sources and WIN16 via makefile.dos; ddemo and server have Win16 recipes. These are historical test inputs, not proof of DDEML or user-program runtime behavior. The client WIN32 sources references missing client.rc; actual ddemlcl.rc is in the Win16 recipe. Do not claim that the WIN32 recipe is independently buildable.
+This read-only pass covers exactly 15 pending physical file roles in shard 0; shared ledger is unchanged. Both original editions, current source and frozen hashes agree; each path has one DOS and two WOW source-catalog rows. The [observer](ddeml-test-identity-observer.py) and [receipt](ddeml-test-identity-observations.json) preserve this identity and the original recipe evidence. The historical ddestrs and client recipes select WIN32 via sources and WIN16 via makefile.dos; ddemo and server have Win16 recipes. These are historical test inputs, not proof of DDEML or user-program runtime behavior. The client WIN32 sources references missing client.rc; actual ddemlcl.rc is in the Win16 recipe. Do not claim that the WIN32 recipe is independently buildable.
 
 | Path | SHA-256 | Proposed file role / boundary |
 | --- | --- | --- |
