@@ -1813,7 +1813,7 @@ softpc.new/base/dos/obj/i386/emm_mngr.obj,0,excluded,shard-0/review.csv
 softpc.new/base/dos/sources,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/acc_efi.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/base_def.h,3,pending,shard-3/file-review.csv
-softpc.new/base/inc/bios.h,1,pending,shard-1/file-audit.csv
+softpc.new/base/inc/bios.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/build_id.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/cdrom.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/cdrom_fn.h,3,pending,shard-3/file-review.csv
@@ -1823,11 +1823,11 @@ softpc.new/base/inc/ckmalloc.h,0,partial,shard-0/review.csv
 softpc.new/base/inc/cmos.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/cmosbios.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/cntlbop.h,0,pending,shard-0/review.csv
-softpc.new/base/inc/config.h,3,pending,shard-3/file-review.csv
+softpc.new/base/inc/config.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/cpu.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/cpu2.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/cpu3.h,3,pending,shard-3/file-review.csv
-softpc.new/base/inc/cpu4.h,1,pending,shard-1/file-audit.csv
+softpc.new/base/inc/cpu4.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/cpu_vid.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/d_inst.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/d_oper.h,3,pending,shard-3/file-review.csv
@@ -1947,7 +1947,7 @@ softpc.new/base/inc/swinhelp.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/swinmgre.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/tape_io.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/tcpip.h,3,pending,shard-3/file-review.csv
-softpc.new/base/inc/timer.h,3,pending,shard-3/file-review.csv
+softpc.new/base/inc/timer.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/timestmp.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/timeval.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/tmstrobe.h,1,pending,shard-1/file-audit.csv
@@ -1965,7 +1965,7 @@ softpc.new/base/inc/virtual.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/winfiles.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/winhelp.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/worm.h,2,pending,shard-2/file-audit.csv
-softpc.new/base/inc/xt.h,1,pending,shard-1/file-audit.csv
+softpc.new/base/inc/xt.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/yoda.h,0,pending,shard-0/review.csv
 softpc.new/base/keymouse/keyba.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/keymouse/keybd_io.c,3,partial,shard-3/file-review.csv

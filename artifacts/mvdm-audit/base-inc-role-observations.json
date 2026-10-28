@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "6c0df5292",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "base-inc-selection-observations.json",
+      "sha256": "FD9D5357620E3F8496E997DE406404DC77793B77F9E44AB81A2E011F3C81851D"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Five selected declaration roles, not full ABI or product behavior"
+}

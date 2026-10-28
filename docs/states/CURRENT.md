@@ -20,8 +20,8 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,531 pending, 454 partial, 53 full and 2,646 excluded physical
-file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
+The ledger has 1,526 pending, 459 partial, 53 full and 2,646 excluded physical
+file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps; [base-header selection](../../artifacts/mvdm-audit/base-inc-role-review.md) adds five partial declarations. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound
@@ -104,13 +104,9 @@ T461 S1's unchanged inventory is retained in its
 
 ## T461 S2 Closure Record
 
-S2 closes at the reviewed binding delivery. The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
-records the retained original five-caller Registry bodies, one parent-owned
-façade, worker-local non-reused tokens, façade mutation/retirement fixture,
-formal x86 builds and a coherent ten-image Product gate. `ntvdm.exe` and
-`WOW32.DLL` are published with matching release/installed hashes; guest media
-is unchanged. S3 alone owns durable commit, restart tombstones and
-cross-worker serialization.
+The [S2 acceptance](../etc/evidence/m0-t461-s2-binding-implementation.md)
+records the reviewed Registry bindings and product gate. S3 owns durable
+commit, restart tombstones and cross-worker serialization.
 
 ## S1 Closure Record
 

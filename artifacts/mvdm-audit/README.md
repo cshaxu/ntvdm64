@@ -303,3 +303,7 @@ The owner-directed [add-on layout delivery](addon-layout-review.md) records twel
 The [host-tail checkpoint](host-tail-role-review.md) classifies seven unchanged
 NT host sources: four selected roles remain partial and three narrowly scoped
 historical profiles are excluded; serial and frontend lifecycles remain open.
+
+The [base-header checkpoint](base-inc-role-review.md) records five selected
+original declaration roles as partial. The remaining 141 headers in its
+cohort stay pending until their other consumers and profiles are audited.
