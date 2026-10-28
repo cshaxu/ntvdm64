@@ -174,6 +174,9 @@ The [classification scope correction](classification-scope-correction-verificati
 reopens 241 overall decisions where the retained evidence established only a
 host-input role or guest-image identity. Scoped evidence remains available;
 the remaining historical decisions still require the same quality audit.
+The [historical residual guest census](nine-way/part-1/guest-excluded-residual-evidence.json)
+is pinned to revision `b8aaf0870`; it includes rows since reopened and is
+evidence for further per-file review, not the present excluded count.
 The [other-shard correction](classification-scope-correction-other-verification.json)
 reopens another 564 guest-input-only decisions on the same basis.
 An [additional frozen sample](nine-way/part-8/existing-classifications-uncovered-r2-review.md)

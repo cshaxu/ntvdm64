@@ -1,0 +1,1125 @@
+{
+  "rows": [
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/command/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86/cmd/command; no execution success inferred.   ",
+      "role": "",
+      "evidence": "Historical link response and source hashes: artifacts/mvdm-audit/shard-0/command-guest-build-evidence.csv; guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/mem/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86/cmd/mem; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/nlsfunc/nlsparm.asm",
+      "basis": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/nlsfunc/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/nlsfunc/makefile: inline nlsparm.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for nlsparm.asm    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   ",
+      "role": "",
+      "evidence": "dos-command-input-review.md; dos-command-input-observations.json"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/setver/setver.c",
+      "basis": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/setver/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/setver/makefile: inline setver.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for setver.c    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   ",
+      "role": "",
+      "evidence": "dos-command-input-review.md; dos-command-input-observations.json"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/cmd/share/share.asm",
+      "basis": "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/share/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/share/share.lnk: share.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for share.asm    Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.   ",
+      "role": "",
+      "evidence": "dos-command-input-review.md; dos-command-input-observations.json"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/dev/ansi/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/dev/keyboard/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with dos/v86; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/doskrnl/dos/NTDOS.BIN",
+      "basis": "historical-guest-build-input-only; Historical DOS kernel relocation intermediate    Guest execution, source-to-image provenance, DOS services, error and lifecycle behavior remain open.   ",
+      "role": "",
+      "evidence": "shard-0/dos-kernel-image-review.md; shard-0/dos-kernel-image-observations.json"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/commdlg.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/commdlg.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/crosshr.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/down.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/left.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/lefti.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/commdlg; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/commdlg/up.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg.rc:9,13,17,19-25 isz/RCV and explicit bitmap files; makefile:88-92 RES_DIR default messages/usa -> local copy, :112-114 commdlg.res, :138-155 link16/RC16 commdlg.dll; LANG branches retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ddeml/ddeml.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; ddeml/makefile:87-88 definition -> mkpublic stripped.def; :92-105 RES_DIR default messages/usa -> RC/RCV copy; :108-121 link16 DDEML.DLL and resource attachment"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ddeml/messages/usa/ddeml.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; ddeml/makefile:87-88 definition -> mkpublic stripped.def; :92-105 RES_DIR default messages/usa -> RC/RCV copy; :108-121 link16 DDEML.DLL and resource attachment"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/comm/comm.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; drivers/comm/makefile:97-99 comdev.inc dependencies of ccom/ibmsetup; comm.rc:4 includes comm.rcv; makefile historical driver object/link16 and RC16 COMM.DRV recipe"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/mouse/mouse.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mouse.rc:4 includes mouse.rcv; mouse/makefile:104 mouse.res prerequisite; historical MOUSE.DRV link16/RC16 recipe"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/drivers/sound/sound.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; drivers/sound/makefile:91 sound.res from $*.rc/$*.rcv; historical SOUND.DRV link16 and rc16 target, USEBUILD branch retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/killwow/killwow.ico",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; killwow.rc:3,5 includes RCV and ICON; makefile:83 RC16 rule, :86 KillWOW.exe, original cl16/link16 recipe"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/killwow/killwow.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; killwow.rc:3,5 includes RCV and ICON; makefile:83 RC16 rule, :86 KillWOW.exe, original cl16/link16 recipe"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/lib/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/lib; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/makefile; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mci.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mmsystem/makefile:77,79 cl16/link16; :92-106 MMSYSTEM.DLL consumes .def/.res; :110-122 default messages/usa RC copy and mci.rc resource dependency"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/messages/usa/mmsystem.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mmsystem/makefile:77,79 cl16/link16; :92-106 MMSYSTEM.DLL consumes .def/.res; :110-122 default messages/usa RC copy and mci.rc resource dependency"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mmsystem.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mmsystem/makefile:77,79 cl16/link16; :92-106 MMSYSTEM.DLL consumes .def/.res; :110-122 default messages/usa RC copy and mci.rc resource dependency"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mmtask/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/mmsystem; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/mmtask/mmtask.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mmtask.rc:2 includes mmtask.rcv; mmtask/makefile:76-93 RES_DIR=../messages/usa, RCV copy and RC16 .res; :57-59 LINK16/RC16 mmtask.tsk"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ole/client/olecli.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; client/dll.h:17 includes cmacs.h; makefile:141-142 dll.h dependencies, :46-53 LE_OBJ/PICT_OBJ -> OLECLI.DLL, :74-75 definition -> mkpublic/implib; original 16-bit build"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ole/server/srvr.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; server/makefile:55-56 RC16 srvr.res, :39-44 OLESVR guest object/DLL target and resource link attachment"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/rasapi16/rasapi16.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; rasapi16/makefile:75-81 writes rasapi16.def into response file; :86-88 LINK16/RC16 rasapi16.dll"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/sherlock/messages/usa/drwatson.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; messages/usa/drwatson.rc:32 includes local RCV; sherlock/makefile:58 RES_DIR/drwatson.res prerequisites and RC16, original Win16 DRWATSON target"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/test; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/shell/wowexec.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; test/shell/makefile:95 wowexfax.c/wowexec.h; :106-119 generates module declaration; :121-124 wowexec.exe RC16/LINK16 sequence, original Win16 test-shell role"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/shell/wowexec.rc",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; test/shell/makefile:95 wowexfax.c/wowexec.h; :106-119 generates module declaration; :121-124 wowexec.exe RC16/LINK16 sequence, original Win16 test-shell role"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/timer/timer.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; timer/makefile:9-15 NAME=timer EXT=drv and objects; :77-79 cl16/LINK16, :87-99 target consumes $(NAME).def; no SFELLOW/CPU profile activation"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/toolhelp/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/toolhelp; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/toolhelp/STRIPPED.DEF",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; toolhelp/makefile:121 global.c header prerequisite, :150-160 toolhelp.def LINK16 TOOLHELP.DLL, :167 original definition -> stripped.def public import generation"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/toolhelp/toolhelp.def",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; toolhelp/makefile:121 global.c header prerequisite, :150-160 toolhelp.def LINK16 TOOLHELP.DLL, :167 original definition -> stripped.def public import generation"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/winsock/makefile",
+      "basis": "historical guest build/link recipe; file-role exclusion only, not exclusion of guest source/functions.    Corresponding guest/source behavior and source-to-deployed-image lineage stay with wow16/winsock; no execution success inferred.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-build-carrier-disposition.csv; guest-build-owner-reconciliation.md"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/winsock/winsock.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; winsock.rc:4 includes local RCV; winsock/makefile winsock.res prerequisite -> link16 winsock.dll/rc16 attachment; USEBUILD branch retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/8514mrks.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/cgamarks.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/egamarks.bmp",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/messages/usa/ole.dlg",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/mwhires.cur",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/ole.dlg",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "0",
+      "path": "wow16/write/write.rcv",
+      "basis": "Historical file role only; no guest capability exclusion or host behavior completion.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.   ",
+      "role": "",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; write.rc:10,17,25-28 RCV/cursor/bitmap, messages/usa/write.rc:451 RC include ole.dlg; makefile:84-87 Res/ResB, :145-152 LINK16/RC16 WRITE.EXE, :360-369 language copy and resource prerequisites; DBCS/LANG conditions retained"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/cmd/debug/sysver.fal",
+      "basis": "     Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open.  ",
+      "role": "historical-guest-build-input-only; Original DOS-I/O guest build variant",
+      "evidence": "parallel-debug-write-role-review.md; shard-1/guest-debug-variant-observations.json"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/cmd/debug/sysver.tru",
+      "basis": "     Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open.  ",
+      "role": "historical-guest-build-input-only; Original BIOS-I/O guest build variant",
+      "evidence": "parallel-debug-write-role-review.md; shard-1/guest-debug-variant-observations.json"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/cmd/exe2bin/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/cmd/keyb/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/cmd/share/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/dev/country/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/dev/himem/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL3",
+      "basis": " historical-guest-build-source-file-only; dos/v86/doskrnl/bios/sysimes.asm:22 include msbio.cl3; dos/v86/doskrnl/bios/makefile:53-78 sysimes.obj -> link msbio_4.lnk -> NTIO.SYS; makefile:91-103 notes generated message classes; Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.    Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; generated-message-role-dispositions.csv; shard-1/generated-message-artifact-owner-review.csv; dos/v86/doskrnl/bios/sysimes.asm:22 include msbio.cl3; dos/v86/doskrnl/bios/makefile:53-78 sysimes.obj -> link msbio_4.lnk -> NTIO.SYS; makefile:91-103 notes generated message classes"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/doskrnl/dos/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/messages/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "dos/v86/messages/usa-ms.msg",
+      "basis": " Original historical declaration/resource/tool input role: dos/v86/make.inc:8-10 default COUNTRY=usa-ms and msg=../../messages; cmd/debug/makefile:29-31 debug.skl + $(msg)/$(COUNTRY).msg -> debug.ctl; :208-226 -> debug.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; dos/v86/make.inc:8-10 default COUNTRY=usa-ms and msg=../../messages; cmd/debug/makefile:29-31 debug.skl + $(msg)/$(COUNTRY).msg -> debug.ctl; :208-226 -> debug.exe"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/ddeml/STRIPPED.DEF",
+      "basis": "     Guest feature, image provenance, callbacks, failures and lifecycle remain unproved.  ",
+      "role": "historical-guest-build-input-only; Historical DDEML guest import or test build input",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-1/guest-ddeml-tests-observations.json"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/drivers/display/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/kernel31/swappro/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mciole/mciole.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/mciole/makefile:62-74 mciole.def named in link16 response to mciole16.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/mciole/makefile:62-74 mciole.def named in link16 response to mciole16.dll"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mciole/mciole16.rc",
+      "basis": " Original historical declaration/resource/tool input role: wow16/mciole/makefile:51-52,62-74 mciole16.rc -> rc16 mciole16.res -> mciole16.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/mciole/makefile:51-52,62-74 mciole16.rc -> rc16 mciole16.res -> mciole16.dll"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mmsystem/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/mmsystem/messages/usa/mmtask.rcv",
+      "basis": " Original historical declaration/resource/tool input role: wow16/mmsystem/mmtask/makefile:78-92 RES_DIR USA copy mmtask.rcv -> mmtask.res; RC16 applied to mmtask.tsk at :57-60; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/mmsystem/mmtask/makefile:78-92 RES_DIR USA copy mmtask.rcv -> mmtask.res; RC16 applied to mmtask.tsk at :57-60"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/ole/server/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/system/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/test/shell/wowexec.rcv",
+      "basis": " Original historical declaration/resource/tool input role: wow16/test/shell/wowexec.rc:79 includes wowexec.rcv; makefile:120-123 rc16 wowexec.res -> link16 wowexec.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/test/shell/wowexec.rc:79 includes wowexec.rcv; makefile:120-123 rc16 wowexec.res -> link16 wowexec.exe"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/user/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/wfwnet/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/winoldap/winoldap.rcv",
+      "basis": " Original historical declaration/resource/tool input role: wow16/winoldap/winoldap.rc:4 includes winoldap.rcv; makefile:107-111 link16 winoldap.mod and rc16 winoldap.res; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/winoldap/winoldap.rc:4 includes winoldap.rcv; makefile:107-111 link16 winoldap.mod and rc16 winoldap.res"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/winspool/winspool.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/winspool/makefile:102-104 winspool.def linked into WIN16 WINSPOOL.EXE via link16; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/winspool/makefile:102-104 winspool.def linked into WIN16 WINSPOOL.EXE via link16"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/write/makefile",
+      "basis": " Original guest build recipe/link response is not an input to checked current host product builds or packaged guest bytes; immutable guest feature remains separately in scope.    Guest source-to-image provenance and behavior remain independently unproved; no authorization to rebuild or modify guest.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/write/messages/usa/write.rc",
+      "basis": " Original historical declaration/resource/tool input role: wow16/write/makefile:16,357-358,369-370,145-152 USA RES_DIR write.rc -> rc16 -> write.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/write/makefile:16,357-358,369-370,145-152 USA RES_DIR write.rc -> rc16 -> write.exe"
+    },
+    {
+      "shard": "1",
+      "path": "wow16/write/messages/usa/write.rcv",
+      "basis": " Original historical declaration/resource/tool input role: wow16/write/messages/usa/write.rc:10 includes write.rcv; makefile:360-361,369-370,145-152 USA RES_DIR -> rc16 -> write.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  ",
+      "role": "immutable-guest-or-guest-build-input",
+      "evidence": "docs/etc/evidence/m0-t473-s1-whole-closure-baseline.md; frozen inventory; per-file guest role/hash and installed observations: artifacts/mvdm-audit/shard-1/guest-source-review.csv; guest-build-product-closure.csv: group/role, current hash, original nearby recipes and package-c exact/same-name identity; guest source-to-image not inferred; guest-declaration-resource-role-dispositions.csv; shard-1/guest-declaration-resource-owner-review.csv; wow16/write/messages/usa/write.rc:10 includes write.rcv; makefile:360-361,369-370,145-152 USA RES_DIR -> rc16 -> write.exe"
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/command/makefil0",
+      "basis": "  historical-build-recipe-file-only; Builds COUNTRY/buildmsg.exe from buildmsg.c with cl16/forcedos link    No guest/tool rebuild; COMMAND source, locale messages and immutable executable lineage remain independently reviewed; file-only build-role exclusion, not runtime capability completion or exclusion ",
+      "role": "",
+      "evidence": "historical-build-role-dispositions.csv; historical-build-role-review.md"
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/edlin/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/fastopen/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/setver/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/doskrnl/bios/msbio.skl",
+      "basis": "  historical-guest-build-source-file-only; Original NTIO recipe uses this message skeleton as a guest build input    NTIO messages, localization, errors and image provenance remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-delivery-role-review.md; shard-2/dos-kernel-country-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/lib/xmm/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/messages/loadmsg.msg",
+      "basis": "  historical-guest-build-input-only; LOADFIX assembler and recipe consume original message input    File-only historical build role; guest messages, locale support and image provenance remain open. ",
+      "role": "",
+      "evidence": "shard-2/dos-message-input-review.md; shard-2/dos-message-input-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/messages/usa-ms.idx",
+      "basis": "  historical-guest-build-input-only; Historical BUILDMSG opens a generated country message index    File-only historical build role; guest messages, locale support and image provenance remain open. ",
+      "role": "",
+      "evidence": "shard-2/dos-message-input-review.md; shard-2/dos-message-input-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/common.ver",
+      "basis": "  historical-guest-build-input-only; Historical guest reference resource input    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-ctl3d-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/ctl3d.c",
+      "basis": "  historical-guest-build-input-only; Historical guest debugging reference source    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-ctl3d-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/ctl3d.doc",
+      "basis": "  historical-guest-build-input-only; Historical CTL3D documentation    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-ctl3d-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/ctl3d.h",
+      "basis": "  historical-guest-build-input-only; Historical guest debugging reference header    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-ctl3d-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ctl3dv2/readme.txt",
+      "basis": "  historical-guest-build-input-only; Historical reference-source documentation    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-ctl3d-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/display.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/drivers/display/makefile:115-116 display.def in display.exe prerequisite/link16; original display driver [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/drivers/display/makefile:115-116 display.def in display.exe prerequisite/link16; original display driver [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/display.rc",
+      "basis": "  historical-guest-build-input-only; Historical display driver resource input    Guest driver image provenance and display behavior remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-driver-resource-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/display/DISPLAY.RES",
+      "basis": "  historical-guest-build-input-only; Historical display driver resource build artifact    Resource generation, image provenance and display behavior remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-driver-resource-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/keyboard/keyboard.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/lib/makefile:25-31 upd and implib sound/keyboard.def -> keyboard.lib -> lib16 libw; 16-bit import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:25-31 upd and implib sound/keyboard.def -> keyboard.lib -> lib16 libw; 16-bit import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/keyboard/keyboard.rcv",
+      "basis": "  historical-guest-build-input-only; Historical keyboard driver resource input    Guest keyboard behavior and image provenance remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-driver-resource-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/keyboard/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/mouse/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/sound/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/sound/sound.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/lib/makefile:25-31 upd and implib sound.def -> sound.lib -> lib16 libw; 16-bit import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:25-31 upd and implib sound.def -> sound.lib -> lib16 libw; 16-bit import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/gdi/gdi.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/gdi/makefile:122-124 gdi.def is dependency of link16 @gdi.lrf; original guest gdi.exe [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/gdi/makefile:122-124 gdi.def is dependency of link16 @gdi.lrf; original guest gdi.exe [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/gdi/gdi.rcv",
+      "basis": "  historical-guest-build-input-only; Historical GDI version resource input    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-2/win16-gdi-resource-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/kernel31/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ole/client/funchead.c",
+      "basis": "  historical-guest-build-input-only; Commented function template has no implementation    OLE entry points and object lifecycle remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-oleclient-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ole/client/mk.cmd",
+      "basis": "  historical-guest-build-input-only; Historical nmake build script    OLE runtime and actual image provenance remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-oleclient-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/ole/client/utils.c",
+      "basis": "  historical-guest-build-input-only; Historical OLECLI guest build input referenced by its makefile    OLE utilities and guest object behavior remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-oleclient-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/rasapi16/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/regedit/reg1632.h",
+      "basis": "  historical-guest-build-input-only; Historical REGEDIT guest header included by regporte.c    Registry semantics, actual guest image and lifecycle remain open. ",
+      "role": "",
+      "evidence": "parallel-guest-resource-role-review.md; shard-2/win16-regedit-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/system/system.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/lib/makefile:45-46 system.def -> implib system.lib; guest import library [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/lib/makefile:45-46 system.def -> implib system.lib; guest import library [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/bseerr.h",
+      "basis": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-2/win16-wfwnet-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/libentry.asm",
+      "basis": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-2/win16-wfwnet-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/wfwnet.c",
+      "basis": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-2/win16-wfwnet-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/wfwnet.rcv",
+      "basis": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-2/win16-wfwnet-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/wfwnet/WFWNET.RES",
+      "basis": "  historical-guest-build-input-only; Historical WFWNET guest build input    Guest feature, image provenance, callbacks, failures and lifecycle remain unproved. ",
+      "role": "",
+      "evidence": "parallel-ddeml-wfwnet-role-review.md; shard-2/win16-wfwnet-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/win87em/makefile",
+      "basis": "  original guest build recipe excluded only as historical guest build/debug artifact in immutable guest policy; no guest capability or corresponding source excluded.    Original recipe/build grouping is static; no source-to-binary production lineage or guest behavior inferred. See guest-remaining-target-groups.csv. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/win87em/win87em3.def",
+      "basis": " Original historical declaration/resource/tool input role: wow16/win87em/makefile:646-656 explicit win87em3.def in win87em.dll link response; Windows conditional target [source: original exact build rule]; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; wow16/win87em/makefile:646-656 explicit win87em3.def in win87em.dll link response; Windows conditional target [source: original exact build rule]    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/winoldap/winoldap.rc",
+      "basis": " Original historical declaration/resource/tool input role: winoldap/makefile:107-111 winoldap.rc via suffix $*.rc -> winoldap.res -> link16 and rc16 winoldap.mod; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; winoldap/makefile:107-111 winoldap.rc via suffix $*.rc -> winoldap.res -> link16 and rc16 winoldap.mod    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/winsock/winsock.rc",
+      "basis": " Original historical declaration/resource/tool input role: winsock/makefile:101-105 winsock.rc via suffix $*.rc -> winsock.res -> link16 and rc16 winsock.dll; original conditional !ENDIF profile; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; winsock/makefile:101-105 winsock.rc via suffix $*.rc -> winsock.res -> link16 and rc16 winsock.dll; original conditional !ENDIF profile    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/write/kmake.bat",
+      "basis": "  historical-guest-build-input-only; Historical guest build/setup script    Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open. ",
+      "role": "",
+      "evidence": "parallel-debug-write-role-review.md; shard-2/win16-write-guest-observations.json"
+    },
+    {
+      "shard": "2",
+      "path": "wow16/write/write.rc",
+      "basis": " Original historical declaration/resource/tool input role: write/makefile:357-358 copies RES_DIR/write.rc to write.rc; :369-370 rc16 -> write.res; :145-152 link16/rc16 write.exe; original/current local USA snapshot identity requires verification; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. Original guest guest export/resource input grouped by target family; identity or functionality is not established by directory/filename alone.; guest-declaration-resource-role-dispositions.csv; shard-2/guest-declaration-resource-owner-review.csv; write/makefile:357-358 copies RES_DIR/write.rc to write.rc; :369-370 rc16 -> write.res; :145-152 link16/rc16 write.exe; original/current local USA snapshot identity requires verification    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained. ",
+      "role": "",
+      "evidence": "Retained guest-identity-inventory.json: archive byte matches none; installed candidate identity not established. Hash identity alone is not source-to-binary proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/write/WRITE.RES",
+      "basis": "  historical-guest-build-input-only; Historical guest resource build artifact    Guest loading, image provenance, actual feature behavior, errors and lifecycle remain open. ",
+      "role": "",
+      "evidence": "parallel-debug-write-role-review.md; shard-2/win16-write-guest-observations.json"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/debug/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/graphics/GRAPHICS.EXC",
+      "basis": "   historical-guest-build-input-only; Original linker intermediate for GRAPHICS.COM    Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved.",
+      "role": "",
+      "evidence": "parallel-gdi-ctl3d-role-review.md; shard-3/graphics-input-observations.json"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/graphics/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/loadfix/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/makefile",
+      "basis": "   Original NMAKE aggregate text invokes $(MAKE) across DOS utility build directories; only the historical recipe file is excluded.    DOS utility sources, guest identity and behavior remain independently audited.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/nlsfunc/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/cmd/qbasic/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/dev/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL4",
+      "basis": " historical-guest-build-source-file-only; bios/sysinit1.asm:3009 INCLUDE msbio.cl4; bios/makefile:61,73-79 sysinit1.obj -> link16 @msbio_4.lnk -> reloc ntio.sys; :84-93 dosmsg.bat generates classes from msbio.skl and country messages; v86/make.inc:109-116 nosrvbld/buildmsg recipes; inc/sysmsg.inc:397-433,463-466 MSG_SERVICES routes non-service argument to $M_INC -> INCLUDE &ext (where invoked).; Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; generated-message-role-dispositions.csv; shard-3/generated-message-artifact-owner-review.csv; bios/sysinit1.asm:3009 INCLUDE msbio.cl4; bios/makefile:61,73-79 sysinit1.obj -> link16 @msbio_4.lnk -> reloc ntio.sys; :84-93 dosmsg.bat generates classes from msbio.skl and country messages; v86/make.inc:109-116 nosrvbld/buildmsg recipes; inc/sysmsg.inc:397-433,463-466 MSG_SERVICES routes non-service argument to $M_INC -> INCLUDE &ext (where invoked).    Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/doskrnl/bios/MSBIO.CL5",
+      "basis": " historical-guest-build-source-file-only; bios/sysinit1.asm:631 INCLUDE msbio.cl5; bios/makefile:61,73-79 sysinit1.obj -> link16 @msbio_4.lnk -> reloc ntio.sys; :84-93 dosmsg.bat generates classes from msbio.skl and country messages; v86/make.inc:109-116 nosrvbld/buildmsg recipes; inc/sysmsg.inc:397-433,463-466 MSG_SERVICES routes non-service argument to $M_INC -> INCLUDE &ext (where invoked).; Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; generated-message-role-dispositions.csv; shard-3/generated-message-artifact-owner-review.csv; bios/sysinit1.asm:631 INCLUDE msbio.cl5; bios/makefile:61,73-79 sysinit1.obj -> link16 @msbio_4.lnk -> reloc ntio.sys; :84-93 dosmsg.bat generates classes from msbio.skl and country messages; v86/make.inc:109-116 nosrvbld/buildmsg recipes; inc/sysmsg.inc:397-433,463-466 MSG_SERVICES routes non-service argument to $M_INC -> INCLUDE &ext (where invoked).    Historical source/artifact file role only; no guest/host capability exclusion, runtime restoration, exact generator/image lineage or symbol-resolution acceptance. All current bytes retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/doskrnl/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/redir/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/downi.bmp",
+      "basis": " Original historical declaration/resource/tool input role: commdlg/commdlg.rc:26 BITMAP downi.bmp; makefile:112-113,143-155 commdlg.res -> rc16 commdlg.dll; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/commdlg.rc:26 BITMAP downi.bmp; makefile:112-113,143-155 commdlg.res -> rc16 commdlg.dll    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/findtext.dlg",
+      "basis": " Original historical declaration/resource/tool input role: commdlg/commdlg.rc:44 includes FindText.dlg; makefile:57,106-107,112-113,155 USA RES_DIR copied to local target then commdlg.res -> rc16 commdlg.dll; local file is build target; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/commdlg.rc:44 includes FindText.dlg; makefile:57,106-107,112-113,155 USA RES_DIR copied to local target then commdlg.res -> rc16 commdlg.dll; local file is build target    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/messages/usa/fileopen.dlg",
+      "basis": " Original historical declaration/resource/tool input role: commdlg/makefile:57,97-98,112-113,155 RES_DIR=.\\messages\\usa copied to local fileopen.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:42 includes it; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/makefile:57,97-98,112-113,155 RES_DIR=.\\messages\\usa copied to local fileopen.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:42 includes it    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/commdlg/messages/usa/prnsetup.dlg",
+      "basis": " Original historical declaration/resource/tool input role: commdlg/makefile:57,109-110,112-113,155 RES_DIR=.\\messages\\usa copied to local prnsetup.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:43 includes it; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; commdlg/makefile:57,109-110,112-113,155 RES_DIR=.\\messages\\usa copied to local prnsetup.dlg -> commdlg.res -> rc16 commdlg.dll; commdlg.rc:43 includes it    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/ddeml/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/drivers/comm/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/gdi/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/killwow/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/mciole/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/ole/client/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/regedit/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/regedit/messages/usa/regload.rcv",
+      "basis": " Original historical declaration/resource/tool input role: regedit/makefile:4,68-69,109-110 USA RES_DIR -> rc16 -DREGLOAD regload.res -> regload.exe; messages/usa/regedit.rc:194-195 conditional include; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; regedit/makefile:4,68-69,109-110 USA RES_DIR -> rc16 -DREGLOAD regload.res -> regload.exe; messages/usa/regedit.rc:194-195 conditional include    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/regedit/messages/usa/sdkreged.dlg",
+      "basis": " Original historical declaration/resource/tool input role: regedit/makefile:4,65-69,105-110 USA RES_DIR -> rc16 regedit.res/regload.res -> regedt16.exe/regload.exe; messages/usa/regedit.rc:118 includes exact path; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; regedit/makefile:4,65-69,105-110 USA RES_DIR -> rc16 regedit.res/regload.res -> regedt16.exe/regload.exe; messages/usa/regedit.rc:118 includes exact path    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/shell/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/sherlock/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/test/shell/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/messages/usa/timer.rc",
+      "basis": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-106 NAME=timer, EXT=drv, RES_DIR=.\\messages\\usa; copy timer.rc; rc16 -r timer.rc -> timer.res -> timer.drv; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-106 NAME=timer, EXT=drv, RES_DIR=.\\messages\\usa; copy timer.rc; rc16 -r timer.rc -> timer.res -> timer.drv    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/messages/usa/timer.rcv",
+      "basis": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-109 NAME=timer, RES_DIR=.\\messages\\usa; copy timer.rcv; timer.rc:2 include -> rc16 timer.res -> timer.drv; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-109 NAME=timer, RES_DIR=.\\messages\\usa; copy timer.rcv; timer.rc:2 include -> rc16 timer.res -> timer.drv    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/timer/timer.rc",
+      "basis": " Original historical declaration/resource/tool input role: timer/makefile:9-10,85-109 NAME=timer; local timer.rc includes timer.rcv at line 2, rc16 -> timer.res -> timer.drv; generated copy target; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; timer/makefile:9-10,85-109 NAME=timer; local timer.rc includes timer.rcv at line 2, rc16 -> timer.res -> timer.drv; generated copy target    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winoldap/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winspool/makefile",
+      "basis": "   Historical guest build intermediate, symbol listing or recipe, not a guest runtime image; exact frozen hash checked, no exact product input path or standalone system32 same-hash match. Immutable guest binaries and original functionality remain independently scoped.    Does not prove this file built any distributed guest or that corresponding guest feature works; no guest build or modification authorized.",
+      "role": "",
+      "evidence": "artifacts/mvdm-audit/shard-3/guest-build-carriers.csv; guest-build-carriers.md; guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winspool/winspool.rc",
+      "basis": " Original historical declaration/resource/tool input role: winspool/makefile:76,102-106 rc16 compiles winspool.rc and winspool.rcv to winspool.res; link16 winspool.obj -> winspool.exe then rc16 attaches res; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; winspool/makefile:76,102-106 rc16 compiles winspool.rc and winspool.rcv to winspool.res; link16 winspool.obj -> winspool.exe then rc16 attaches res    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/winspool/winspool.rcv",
+      "basis": " Original historical declaration/resource/tool input role: winspool/winspool.rc:4 include winspool.rcv; winspool/makefile:76,102-106 rc16 -> winspool.res -> winspool.exe; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; winspool/winspool.rc:4 include winspool.rcv; winspool/makefile:76,102-106 rc16 -> winspool.res -> winspool.exe    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    },
+    {
+      "shard": "3",
+      "path": "wow16/write/messages/usa/write.dlg",
+      "basis": " Original historical declaration/resource/tool input role: write/makefile:14,23,145-152,363-370 APP=write RES_DIR=.\\messages\\usa; copy write.dlg -> rc16 write.res -> write.exe; write.rc:449 rcinclude write.dlg; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.  Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; write/makefile:14,23,145-152,363-370 APP=write RES_DIR=.\\messages\\usa; copy write.dlg -> rc16 write.res -> write.exe; write.rc:449 rcinclude write.dlg    Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+      "role": "",
+      "evidence": "assets/winnt-guest-manifest.json; artifacts/mvdm-audit/shard-3/guest-input-review.md"
+    }
+  ],
+  "limits": "Current guest excluded inventory except selected historical objects, listing, archives, linker inputs, sample/test and standalone tool paths; does not infer exclusion is wrong."
+}
