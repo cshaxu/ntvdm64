@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "8b68648e0",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-gdi-empty-owner-observations.json",
+      "sha256": "F5A9C698BA0019E306A5D1B405AC78D9D7B37E9206E0950E7E20FA9A6432A554"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected empty physical source role; no GDI capability exclusion"
+}

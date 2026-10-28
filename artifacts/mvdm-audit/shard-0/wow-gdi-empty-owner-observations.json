@@ -1,0 +1,34 @@
+{
+  "result": "pass",
+  "relative_path": "wow32/wgman.c",
+  "source_sha256": "C3BD58FC081256AF5F14653F1A15F56693BCF06EA5B20C2E15E4E0DDCC29B101",
+  "original_paths": [
+    "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgman.c",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wgman.c"
+  ],
+  "source_lines": [
+    "#include \"precomp.h\"",
+    "#pragma hdrstop",
+    "MODNAME(wgman.c);"
+  ],
+  "build_edge": "build obj/wgman.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wgman.c",
+  "object_sha256": "414094A7A72AEA77869E2BCA16BA425AAAE4B3ABB25E38E3123E39DD2496D653",
+  "sections": [
+    {
+      "name": ".drectve",
+      "flags": 1051136
+    },
+    {
+      "name": ".debug$S",
+      "flags": 1108344896
+    },
+    {
+      "name": ".chks64",
+      "flags": 2560
+    }
+  ],
+  "object_directive": "   /DEFAULTLIB:\"LIBCMT\" /DEFAULTLIB:\"OLDNAMES\" ",
+  "shared_directive_object": "obj/wgdi.obj",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "limitation": "No code section in this selected object; no claim that GDI behavior is absent or restored"
+}

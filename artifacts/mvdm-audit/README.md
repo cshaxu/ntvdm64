@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [selected empty WGMAN file role](shard-0/wow-gdi-empty-owner-review.md)
+excludes no GDI functionality and retains its real linker-directive boundary.
+
 The [GDI core and WOW table checkpoint](parallel-wow-gdi-table-role-review.md)
 retains guest, device and lifecycle boundaries despite 119 linked GDI slots.
 

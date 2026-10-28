@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1388,
-    "excluded": 2656,
+    "pending": 1387,
+    "excluded": 2657,
     "partial": 587,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original GDI and WOW table owners are partial; guest execution and lifecycle remain open."
+  "note": "Selected WGMAN file has no behavioral code; all GDI functionality remains in scope."
 }
