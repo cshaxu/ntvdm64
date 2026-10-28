@@ -17,3 +17,7 @@ The [GFI provider review](gfi-alternative-provider-review.md) distinguishes comp
 The [guest-tree consumer snapshot](guest-tree-host-consumer-review.md) compares ambiguous C/H paths to four recorded build/dependency sets; zero exact hits do not establish all configurations or justify bulk exclusion.
 
 The [GFI header review](gfi-header-provider-review.md) traces selected and alternative declarations. The [DEM directory fixture](../host-dem/demdir-selected-object-review.md) tests selected object success and controlled errors without claiming guest integration.
+
+Replaying check-mirror-diffs.py against the recorded inventory and retention ledger found 202 host-candidate C/H mirror-diff rows and zero with a non-partial status. This only checks recorded classifications, not behavioral recovery or completeness of diff detection.
+
+The [CD-ROM provider review](cdrom-provider-boundary-review.md) separates unselected original interfaces from independent MSCDEX/VDD behavior. The [DEM IOCTL object fixture](../host-dem/demioctl-selected-object-review.md) exercises seven controlled drive-type results without claiming real device or guest coverage.
