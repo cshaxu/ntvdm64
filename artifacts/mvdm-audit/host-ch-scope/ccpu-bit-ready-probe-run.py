@@ -1,0 +1,12 @@
+import subprocess,pathlib
+w=pathlib.Path('build/.ninja/msvc-x86-release/worker').resolve(); tmp=pathlib.Path('build/t473-s10/ccpu-bit-ready-probe').resolve();
+def get(t):return subprocess.check_output(['ninja','-C',str(w),'-t','commands',t],text=True).splitlines()[-1]
+c=get('obj/tests/ccpu_bounded_execution_fixture.obj')
+for token in ('/Foobj/tests/ccpu_bounded_execution_fixture.obj','O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c'):
+ assert token in c, 'unexpected compiler command: '+token
+c=c.replace('/Foobj/tests/ccpu_bounded_execution_fixture.obj','/Fo"'+str(tmp/'probe-ccpu.obj')+'"').replace('O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c','"'+str(tmp/'ccpu-fixture.c')+'"')
+l=get('ccpu-high-linear-page-test.exe')
+for token in ('obj/tests/ccpu_bounded_execution_fixture_seams.obj','/map:ccpu-high-linear-page-test.exe.map','/out:ccpu-high-linear-page-test.exe','obj/tests/ccpu_bounded_execution_fixture.obj'):
+ assert token in l, 'unexpected linker command: '+token
+l=l.replace('obj/tests/ccpu_bounded_execution_fixture_seams.obj','obj/tests/ccpu_bounded_execution_fixture_seams.obj obj/tests/ccpu_host_fixture_seams.obj');l=l.replace('/map:ccpu-high-linear-page-test.exe.map','/map:"'+str(tmp/'probe-ccpu.map')+'"').replace('/out:ccpu-high-linear-page-test.exe','/out:"'+str(tmp/'probe-ccpu.exe')+'"').replace('obj/tests/ccpu_bounded_execution_fixture.obj','"'+str(tmp/'probe-ccpu.obj')+'"')
+bat='@echo off\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\n'+c+'\nif errorlevel 1 exit /b %errorlevel%\n'+l+'\nif errorlevel 1 exit /b %errorlevel%\n"'+str(tmp/'probe-ccpu.exe')+'"\n';(tmp/'run-ccpu.cmd').write_text(bat);result=subprocess.run(['cmd','/c',str(tmp/'run-ccpu.cmd')],cwd=w,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,errors='replace'); (tmp/'ccpu-decoder-output.txt').write_text(result.stdout,encoding='utf8'); expected=['PIC16 vector=8 eoi=0 wow=1','BIT16 op=BT near=8000 far=0000 carry=0','BIT16 op=BTC near=8000 far=8000 carry=0']; print('\n'.join(x for x in result.stdout.splitlines() if 'BIT16 op=' in x or 'PIC16 vector=' in x)); print('exit',result.returncode); assert result.returncode==0 and all(x in result.stdout for x in expected), 'baseline or execution changed; review receipt'
