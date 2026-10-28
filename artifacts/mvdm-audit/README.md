@@ -124,6 +124,13 @@ records other installed copies and session-dependent paths; the
 [NTIO input](nine-way/part-5/ntio-input-semantic-reconciliation.md) and
 [EMS/INT 2F](nine-way/part-5/ntio-ems-int2f-semantic-reconciliation.md)
 reviews keep separate configuration and runtime boundaries.
+The [font](cross-369/font-header-disposition.md) and
+[metafile](cross-369/metafile-header-disposition.md) interfaces have selected
+dependency evidence; actual guest callbacks and failures remain open. The
+[KILLWOW route](nine-way/part-7/killwow-route-review.md) documents whole-worker
+exit separately from task termination, and the
+[NTIO bootstrap inputs](nine-way/part-5/ntio-bootstrap-character-reconciliation.md)
+retain guest binary provenance as an independent question.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

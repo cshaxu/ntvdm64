@@ -1,0 +1,11 @@
+# S10 part 9: classic metafile thunk interface
+
+Only owned `wow32/wgmeta.h` receives a recommendation. `metafile-header-observer.py` compares original/current hashes, selected `wgmeta.obj` normalized VALID dependency and bounded callback-name references; reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/cross-369/metafile-header-observer.py`. No guest, product, graph or shared ledger was changed.
+
+The header matches both original editions and is a selected original dependency. It declares classic metafile create/copy/play/enumeration operations and callback metadata. Original `wgmeta.c` translates guest global handles and temporary metafiles, while modern GDI owns the native metafile and recording DC. The original dispatch marks Get/SetMetaFileBits forms as `LOCALAPI` where the guest GDI owns those operations; treating every header prototype as an active host thunk would misclassify that split.
+
+The header declares `W32EnumMetaFileCallBack`, whereas the selected implementation defines and calls `WG32EnumMetaFileCallBack`; the bounded source search found no consumer of the former spelling. This appears to be an unused original declaration, not evidence that enumeration callback dispatch is broken. Preserve the actual selected call and verify any external/configuration consumers before changing the header.
+
+`m0-t456-s3-metafile-owner-host-audit.md` records original source ownership and a successful **public native-host API** fixture for create/copy/play/enum/error. It expressly is not the original `wgmeta.c` test or a Win16 guest metafile witness. `m0-t456-closure.md` preserves its historic package scope and early application non-passes. Do not report its public fixture as complete guest conversion or callback acceptance.
+
+Recommendation: `wow32/wgmeta.h` **partial, selected original interface**. S16 must bind actual guest and current provider identity and test normal and failed guest allocation/lock, copy/play/delete and nested synchronous enumeration, callback-return/failure and task loss, malformed/large records, and correct transfer of guest/native handles. Maintain the original guest LOCALAPI boundary and registered ownership; no generic metafile engine, guest rebuild, or new product change is proposed here.
