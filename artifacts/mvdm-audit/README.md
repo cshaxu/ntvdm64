@@ -305,6 +305,7 @@ NT host sources: four selected roles remain partial and three narrowly scoped
 historical profiles are excluded; serial and frontend lifecycles remain open.
 
 The [base-header checkpoint](base-inc-role-review.md) records five selected
-original declaration roles as partial. A [device/video extension](base-inc-multi-role-review.md)
-adds 30; the remaining 111 headers in that cohort stay pending for other
-consumers and profiles.
+original declaration roles as partial. The [device/video](base-inc-multi-role-review.md)
+and [dependency-selected](base-inc-wide-role-review.md) extensions add 30 and
+19 respectively; the remaining 92 headers in that cohort stay pending for
+other consumers and profiles.

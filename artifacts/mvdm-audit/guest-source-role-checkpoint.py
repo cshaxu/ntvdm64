@@ -195,7 +195,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-alternative-virtual-floppy-source-only':
                     assert prefix == 'host-tail-role-' and path == 'softpc.new/host/src/nt_vflop.c'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -228,9 +228,12 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
-    if prefix in ('base-inc-role-', 'base-inc-multi-role-'):
-        name, cohort, selected, remaining, units = (('base-inc-selection-observations.json', 146, 5, 141, 8)
-            if prefix == 'base-inc-role-' else ('base-inc-multi-observations.json', 141, 30, 111, 13))
+    if prefix in ('base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'):
+        name, cohort, selected, remaining, units = {
+            'base-inc-role-': ('base-inc-selection-observations.json', 146, 5, 141, 8),
+            'base-inc-multi-role-': ('base-inc-multi-observations.json', 141, 30, 111, 13),
+            'base-inc-wide-role-': ('base-inc-wide-observations.json', 111, 19, 92, 14),
+        }[prefix]
         observed = json.loads((A / name).read_text())
         assert observed['result'] == 'pass' and observed['pending_cohort'] == cohort
         assert observed['selected_headers'] == selected and observed['nonselected_headers_still_pending'] == remaining
@@ -800,7 +803,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

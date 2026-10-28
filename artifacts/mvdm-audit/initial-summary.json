@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1496,
+    "pending": 1477,
     "excluded": 2646,
-    "partial": 489,
+    "partial": 508,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "30 byte-identical original common headers selected by production preprocessing are partial; other contexts and behavioral contracts remain open."
+  "note": "19 byte-identical original common headers selected by production preprocessing are partial; other contexts and behavioral contracts remain open."
 }

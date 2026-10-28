@@ -20,8 +20,8 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,496 pending, 489 partial, 53 full and 2,646 excluded physical
-file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps; [base-header selection](../../artifacts/mvdm-audit/base-inc-multi-role-review.md) records 35 partial declarations. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
+The ledger has 1,477 pending, 508 partial, 53 full and 2,646 excluded physical
+file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps; [base-header selection](../../artifacts/mvdm-audit/base-inc-wide-role-review.md) records 54 partial declarations. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

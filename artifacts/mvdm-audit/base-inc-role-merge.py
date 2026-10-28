@@ -6,14 +6,19 @@ import sys
 from pathlib import Path
 
 A = Path('artifacts/mvdm-audit')
-multi = sys.argv[1:] == ['--multi']
-if sys.argv[1:] and not multi:
-    raise SystemExit('Use no arguments or --multi')
-BASE, PREFIX = ('11c1c5abf', 'base-inc-multi-role-') if multi else ('6c0df5292', 'base-inc-role-')
+mode = sys.argv[1:] or ['--first']
+if mode not in (['--first'], ['--multi'], ['--wide']):
+    raise SystemExit('Use no arguments, --multi or --wide')
+multi, wide = mode == ['--multi'], mode == ['--wide']
+BASE, PREFIX = (('306e9dbba', 'base-inc-wide-role-') if wide else
+                ('11c1c5abf', 'base-inc-multi-role-') if multi else ('6c0df5292', 'base-inc-role-'))
 H = runpy.run_path(str(A / 'guest-source-role-checkpoint.py'))
-table = 'base-inc-multi-observations.json' if multi else 'base-inc-selection-observations.json'
-observer = 'base-inc-multi-observer.py' if multi else 'base-inc-selection-observer.py'
-review = 'base-inc-multi-role-review.md' if multi else 'base-inc-role-review.md'
+table = ('base-inc-wide-observations.json' if wide else
+         'base-inc-multi-observations.json' if multi else 'base-inc-selection-observations.json')
+observer = ('base-inc-wide-observer.py' if wide else
+            'base-inc-multi-observer.py' if multi else 'base-inc-selection-observer.py')
+review = ('base-inc-wide-role-review.md' if wide else
+          'base-inc-multi-role-review.md' if multi else 'base-inc-role-review.md')
 observed = json.loads((A / table).read_text())
 assert runpy.run_path(str(A / observer))['inspect']() == observed
 ledger = {r['relative_path']: r for r in H['rows'](A / 'combined-initial-status.csv')}
@@ -41,6 +46,23 @@ if multi:
     }
     limits = {name: boundary for boundary, names in groups.items() for name in names.split()}
     assert len(limits) == 30
+if wide:
+    groups = {
+        'Prove BIOS/RTC state and ports, firmware paths, reset and errors.':
+            'cmosbios.h equip.h rom.h tape_io.h',
+        'Prove memory and DMA ABI, mappings, transfer boundaries, ownership and failure cleanup.':
+            'dma.h emm.h sasp.h umb.h',
+        'Prove video/palette state, mode transitions, DAC semantics and frontend behavior.':
+            'egavideo.h vga_dac.h',
+        'Prove media and handle identity, synchronization, commands, reset and errors.':
+            'fdisk.h floppy.h lock.h',
+        'Prove environment/configuration ownership, encoding, errors and lifetime.':
+            'get_env.h spcfile.h suplib.h',
+        'Prove real COM/LPT device behavior, queueing, failures and teardown.':
+            'host_com.h host_lpt.h printer.h',
+    }
+    limits = {name: boundary for boundary, names in groups.items() for name in names.split()}
+    assert len(limits) == 19
 proofs = []
 for row in observed['sources']:
     name = row['relative_path']
