@@ -6,6 +6,8 @@ Frozen universe SHA-256 F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F
 
 The previous DIV-007 entry in `src/mvdm/README.md` asserted active VDD wrappers use session-owned shadow/commit and WOW writes have explicit commit/discard, while the inspected current code uses the original linear pointer path. The provenance of any earlier shadow implementation is not established; `git show 622b71cda:src/mvdm/dos/dem/demfile.c` shows the same pointer provider already existed at T414 canonicalization. Do not claim a removal commit or infer production fault. CPU backing lifetime, reentry while guest pointers are held, rollback, session teardown, and handle width still require proof. If pointer lifetime cannot be established, admit a targeted binding/commit design rather than merely changing the documentation.
 
+The comment above `sft_head_location` in `dos/dem/demdata.c` still says the adapter reconstructs bounded SFT/JFT shadows. That claim also conflicts with the currently inspected `demfile.c` pointer path; the README correction did not correct this source comment. Reconcile the comment with the implemented ownership and the S12 lifetime decision. This observation alone does not establish an executable defect.
+
 The S10 package PE tables were subsequently checked directly: WOW32.DLL
 SHA-256 `C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83`
 imports `VDDAllocateDosHandle`, `VDDAssociateNtHandle` and

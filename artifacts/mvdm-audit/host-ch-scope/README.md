@@ -138,9 +138,15 @@ The [DEM computer-name selected-object fixture](dem-computername-review.md) chec
 
 The [DEM boot-drive selected-object fixture](dem-bootdrive-review.md) checks controlled registry and drive outcomes without modifying the registry or inspecting real disks. Malformed values, actual guest startup and current released-image binding remain unverified.
 
+The [DEM DOS/WOW FILES selected-object fixture](dem-wowfiles-review.md) checks the original service's DOS-preserve and WOW-255 branches with synthetic mode state; actual guest configuration and handle limits remain unverified.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [historical keyboard declarations review](../shard-3/legacy-keyboard-declaration-target-review.md) bounds two more physical declarations to alternate profiles. The selected NT input/IRQ behavior remains S13, and the SoftWindows provider is still unresolved.
+
+The [historical display declaration review](../shard-3/legacy-display-rom-icon-stats-review.md) distinguishes a selected header from its inactive GISP branch and retains old icon/provider applicability separately; current Video7 tests do not prove those paths.
+
+The [WOWFAX property-sheet owner review](wowfax-property-sheets-owner-review.md) separates a historical printer UI from ordinary dialogs and records unconfirmed allocation and cleanup risks for S16.
 
 The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.md) classify four physical non-x86 host-register headers; guest CPU/FPU and generated-vector behavior remain separate obligations.
 

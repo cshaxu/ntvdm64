@@ -1,0 +1,7 @@
+# DEM WOW FILES service: selected-object observation
+
+The original guest CONFIG handling in `dos/v86/doskrnl/bios/sysconf.asm:1561` invokes `SVC_DEMWOWFILES`; `inc/DOSSVC.INC:78` and `inc/dossvc.h:154` define service 3Eh; `dos/dem/demdisp.c:162` dispatches to `demmisc.c:641`. Original host behavior preserves the configured AL for a DOS VDM and changes AL to 255 for a WOW VDM. This is a source call chain, not proof of guest execution in this test.
+
+Run `python artifacts/mvdm-audit/host-ch-scope/dem-wowfiles-run.py`. It links the currently selected x86 release `worker/obj/dem/demmisc.obj` to a minimal fixture defining `VDMForWOW` and `setAL`. For initial AL values 17 and 255, the actual selected function leaves AL untouched and never calls `setAL` when `VDMForWOW=0`, and calls it once with 255 when `VDMForWOW=1`. The build uses GNU ld garbage collection to select the function; the ignored MSVC `.drectve` warning, source/object/fixture/executable hashes, and test output are in `dem-wowfiles-observation.json`. The current `worker/ntvdm.exe.map` maps `_demWOWFiles` to `original-mvdm-dem:demmisc.obj`.
+
+The fixture directly supplies the WOW state; it does not validate that a real worker sets it correctly, parse CONFIG.SYS, execute a guest, exercise file-handle limits or bind the installed release image. This is bounded evidence for this one selected behavior, not a complete DEM or WOW FILES integration claim. No product, guest or shared ledger was modified.
