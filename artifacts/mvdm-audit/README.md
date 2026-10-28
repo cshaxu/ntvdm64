@@ -173,6 +173,9 @@ reopens 14 image/data decisions lacking a bound execution witness while
 retaining four with bounded identity-matched historical execution evidence.
 An [additional source scope correction](classification-scope-correction-guest-extra-verification.json)
 reopens 18 guest source and declaration decisions with host-only evidence.
+The [alternate-profile correction](classification-scope-correction-alt-profile-verification.json)
+reopens five nonempty providers whose full applicability is not determined by
+their nonselection in the currently observed configuration.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 The [retention estimate replay](nine-way/part-8/retention-replay-review.md)

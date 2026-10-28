@@ -1358,7 +1358,7 @@ softpc.new/base/ccpu386/c_debug.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/ccpu386/c_debug.h,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/c_div64.c,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/c_div64.h,3,partial,shard-3/file-review.csv
-softpc.new/base/ccpu386/c_getset.c,3,excluded,shard-3/file-review.csv
+softpc.new/base/ccpu386/c_getset.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/c_intr.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/c_intr.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/ccpu386/c_main.c,1,partial,shard-1/file-audit.csv
@@ -1394,7 +1394,7 @@ softpc.new/base/ccpu386/call.h,3,partial,shard-3/file-review.csv
 softpc.new/base/ccpu386/cbw.c,3,full,shard-3/file-review.csv
 softpc.new/base/ccpu386/cbw.h,1,full,shard-1/file-audit.csv
 softpc.new/base/ccpu386/ccpudefs.inc,1,pending,shard-1/file-audit.csv
-softpc.new/base/ccpu386/ccpupig.c,3,excluded,shard-3/file-review.csv
+softpc.new/base/ccpu386/ccpupig.c,3,pending,shard-3/file-review.csv
 softpc.new/base/ccpu386/ccpupig.h,1,excluded,shard-1/file-audit.csv
 softpc.new/base/ccpu386/ccpusas4.c,0,partial,shard-0/review.csv
 softpc.new/base/ccpu386/ccpusas4.h,2,partial,shard-2/file-audit.csv
@@ -2352,10 +2352,10 @@ softpc.new/host/src/nt_timer.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/nt_umb.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_unix.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_vdd.c,0,partial,shard-0/review.csv
-softpc.new/host/src/nt_vflop.c,3,excluded,shard-3/file-review.csv
+softpc.new/host/src/nt_vflop.c,3,pending,shard-3/file-review.csv
 softpc.new/host/src/nt_vga.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_wcom.c,3,partial,shard-3/file-review.csv
-softpc.new/host/src/nt_yoda.c,3,excluded,shard-3/file-review.csv
+softpc.new/host/src/nt_yoda.c,3,pending,shard-3/file-review.csv
 softpc.new/host/src/obj/_objects.mac,3,excluded,shard-3/file-review.csv
 softpc.new/host/src/obj/i386/config.obj,1,excluded,shard-1/file-audit.csv
 softpc.new/host/src/obj/i386/copy_fnc.obj,2,excluded,shard-2/file-audit.csv
@@ -2409,7 +2409,7 @@ softpc.new/host/src/sources,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/stf_conf.c,0,excluded,shard-0/review.csv
 softpc.new/host/src/stubs.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/x86_emm.c,2,excluded,shard-2/file-audit.csv
-softpc.new/obj.vdm/c_regs.c,3,excluded,shard-3/file-review.csv
+softpc.new/obj.vdm/c_regs.c,3,pending,shard-3/file-review.csv
 softpc.new/obj.vdm/cdefine.inc,3,pending,shard-3/file-review.csv
 softpc.new/obj.vdm/makefile,1,excluded,shard-1/file-audit.csv
 softpc.new/obj.vdm/makefile.std,2,excluded,shard-2/file-audit.csv
