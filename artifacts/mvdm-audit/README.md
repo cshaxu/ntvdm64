@@ -32,6 +32,9 @@ The [part 3 CPU instruction](nine-way/part-3/ccpu-instructions-role-review.md),
 [simulator](nine-way/part-3/simulator-role-review.md), and
 [printer resource](nine-way/part-3/hppcl5ms-role-review.md) reviews retain
 their unresolved execution and provider selection obligations.
+The [cross-part 3/6/9 owner worklist](cross-369/function-owner-worklist.md)
+maps concrete findings to the planned recovery stages and traces WRITE image
+identity separately from the limited historical runtime witness.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
