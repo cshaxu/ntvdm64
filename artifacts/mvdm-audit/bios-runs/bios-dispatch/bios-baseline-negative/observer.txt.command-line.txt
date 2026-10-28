@@ -1,0 +1,1 @@
+O:\tmp\ndf7/system32/run16.exe --wait O:\tmp\ndf7\tests/E30.PIF

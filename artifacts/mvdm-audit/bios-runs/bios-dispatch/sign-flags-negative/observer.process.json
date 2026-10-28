@@ -1,0 +1,14 @@
+{
+  "start": "2026-10-28T01:05:41.0060594Z",
+  "timeoutSeconds": 55,
+  "arguments": [
+    "O:\\tmp\\n8c6/system32/run16.exe",
+    "O:\\tmp\\n8c6\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\sign-flags-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\n8c6\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "pid": 6492
+}

@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 180,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "pid": 15548,
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\bios-image-observer.py\"",
+  "started": "2026-10-28T01:06:54.6510167Z"
+}

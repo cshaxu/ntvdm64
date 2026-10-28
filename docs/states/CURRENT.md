@@ -5,9 +5,8 @@
 **Active: M0 T473 S10**
 
 S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
-The owner approved the T-wide DOS16/WOW32 source reconciliation and four
-parallel audit roles; one owner/reviewer coordinates three read-only shard
-agents. Automatic S progression remains in force. `books/` is supporting
+The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
+four-role census is retained; current work uses one implementer/reviewer. Automatic S progression remains in force. `books/` is supporting
 reading, not authority. Guest media remains unchanged.
 
 The current coherent ten-image baseline is `build/package-uuid/package-c`;
@@ -20,10 +19,10 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[DOS command input review](../../artifacts/mvdm-audit/dos-command-input-review.md)
-resolves all 85 historical file roles in this source cohort, retaining all guest
-capability obligations. The ledger has 1,583 pending, 417 partial, 52 full and
-2,632 excluded physical file roles. No runtime image changed.
+[BIOS review](../../artifacts/mvdm-audit/bios-native-role-review.md) adds seven
+partial owners, 52 image-bound functions and bounded real-guest dispatch proof.
+The ledger has 1,576 pending, 424 partial, 52 full and 2,632 excluded physical
+file roles. No runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound
@@ -45,7 +44,7 @@ unexplained and publication is still unqualified.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S10, Ordinary Mode with owner-approved four-role parallel audit. |
+| Identifier Mode | M0 T473 S10, Ordinary Mode; single implementer/reviewer after the initial four-role census. |
 | Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
 | Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
 | Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |

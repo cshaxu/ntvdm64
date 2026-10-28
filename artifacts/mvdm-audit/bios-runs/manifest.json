@@ -1,0 +1,1427 @@
+[
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative.completion.json",
+    "bytes": 66,
+    "sha256": "DA66F04636B23B449982811097CF529D16217609313E5EFBCB4E7D9AB16CF14E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative.process.json",
+    "bytes": 786,
+    "sha256": "F19851BA2171052867C2EBB4DED15641C6DF55802834A5929EF8778E5B8DF6C4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline.completion.json",
+    "bytes": 66,
+    "sha256": "E3BD74020F19EBEAFEA68FECF150D6D16120956658F9632C16A28BAF0D5944F1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline.process.json",
+    "bytes": 763,
+    "sha256": "42BE16064B0C0D9D11A90E5260A16F36A3E0D788475DE6DE91C9518C2A02CC77"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative.completion.json",
+    "bytes": 66,
+    "sha256": "C411323950A6BA1F01E6731F5F167F7DFC5B65A58DD7B565C9FB1798961E9BC4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative.process.json",
+    "bytes": 804,
+    "sha256": "B800711127E7EFD357EA3916CEACAE2E3298815D7ACD721CF48FD863D94A00D4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate.completion.json",
+    "bytes": 66,
+    "sha256": "36FF242F54A1CEFC8B359B53A9F7493F734ACDA912E994F2B70DF600877219D6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate.process.json",
+    "bytes": 778,
+    "sha256": "C4DE7422E4D6A52F5A0423350DA61D41E582A36A172A44B3F6C202BBDF65CF95"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/completion.json",
+    "bytes": 66,
+    "sha256": "E17F2BA44EEA269555C9EF28ACB50C643C0A823BEE79EB39E353F1FB31BB93A5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative.completion.json",
+    "bytes": 66,
+    "sha256": "EB0975E47F9AC7FAC04CE93EEE5EA7D7F592A3A4AC9A85A3B6C6A092F3CB7287"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative.process.json",
+    "bytes": 775,
+    "sha256": "FAF6D685D749658A41BFE91E3FD2B93423B76D286F7FE9702A768DE45D3D22CF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control.completion.json",
+    "bytes": 66,
+    "sha256": "AD85FFF1E8A47151B7D600741144A4B770D9C1B03DB85712C85B9102E94B1A3E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control.process.json",
+    "bytes": 752,
+    "sha256": "57DC3D3B1DF7F30D28ED202B85761B41D50C96D87711133E889F9CE3B62EA7A9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/process.json",
+    "bytes": 358,
+    "sha256": "0B83E5D0EE096D2F8ECC1466A2323B3B5480F67F7C743F699A4467678826E836"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/run.ps1",
+    "bytes": 2489,
+    "sha256": "3C95E6EA15BFE3269578BFC05322E5F3015B494471C1E076E241ED01373765ED"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative.completion.json",
+    "bytes": 66,
+    "sha256": "D6CC903A3B3FFF9B579137E9843595CA18A54E6E83747E34735BA646CC659BD2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative.process.json",
+    "bytes": 781,
+    "sha256": "AB86CDFE266D4017797BC0CB4E5D1D84B6D785339E4EB0D2615F78DF928E392A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags.completion.json",
+    "bytes": 66,
+    "sha256": "81ABD8B425E533404CE47217CCF63D78606B0E8D40C1CDD740436FB6EB15FC3B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags.process.json",
+    "bytes": 756,
+    "sha256": "59609A94D651227C78CF166FC44BC1C02A47C49954632BC6AEE7D7E1300C686B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/stdout.txt",
+    "bytes": 88,
+    "sha256": "CB1468363685A5F4E20C0A44C449B7C21CFDCB8EA1F2BC16509D9269BDCAF861"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/assemble.process.json",
+    "bytes": 455,
+    "sha256": "6B62DC3B52099ACF7FE5C35623687C92AC3568A2A1396633C7BC4B1D0D659574"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/inputs.csv",
+    "bytes": 1006,
+    "sha256": "B96921BD5AA0C88B7F019C2F9DDD1785A29A5DB7691CAC284B625E415C184751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.process.json",
+    "bytes": 376,
+    "sha256": "4425B70AE5C47871B3D82F6A74F6C1E7C1F0637A554BEE5B091F20B8D05D9E9B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.txt",
+    "bytes": 705,
+    "sha256": "164626A2A7458C9AA61E3BA142326557D3E4CA0397A40FB0DAD57A09498DBF2C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "2ECDDB717BBED9A6994D9AD36763DDF72C17068C56A434C304021351A03A44C7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.txt.console.txt",
+    "bytes": 105,
+    "sha256": "D88BF0ADDE795992C8A777344C8037959185FFD4E591C65679B6F01ACFF7C99B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "3917F077931781118FCF92178196FA2C0ED62E21471825C65F862DEF05E6D96C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-build.process.json",
+    "bytes": 604,
+    "sha256": "6329F1B4A2114D5EF689EFD3263E5FD19000CC3F818E686ADFD9A8B5582A7EE2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-profile.process.json",
+    "bytes": 252,
+    "sha256": "8A50B9C43FCCA6C95AED572F47A1AAB1D1EE662810A13A20267A7062E59C162F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "C3193149569FF93C702D95E2999E0694FAABAA29522E61497394DF798E1D18D0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/result.txt",
+    "bytes": 114,
+    "sha256": "83F382DBD5A51FFCFBDF0764E3234A5D1BD67326B0F5AEE41A3B3274DC16A32E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/runner-context.json",
+    "bytes": 334,
+    "sha256": "C610B5D610A0281C2D2FC817B028988B613DDD817067B891C9FEE5CE8B683CFB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "3D5E3CB32784F91728F680D4C0E8E5EB959A8D21FDC1F1C536E2B37DC217DFA8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/token-context.process.json",
+    "bytes": 171,
+    "sha256": "CAA7792851846CEE61BA3E14EDB529D5924BCA14E3D13683E332BA521C641959"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/assemble.process.json",
+    "bytes": 494,
+    "sha256": "8BE139A31B925BEE0A232271F0FE3C4403F2F1F152504C3F6A22A06512E0F3FA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/inputs.csv",
+    "bytes": 1015,
+    "sha256": "83C65F1DFE47C2EDA55B4283AFDCC552523EAD0EBCCD59A23537CD1F8989F5E3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.process.json",
+    "bytes": 385,
+    "sha256": "DC63FB58279034EF22D3F60827CCE309674C507A036FC18C1662AC7C83CFBD25"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.txt",
+    "bytes": 704,
+    "sha256": "AFC2FDECB03D92C4C9596DDE7D42D4727C5D2EC785345CF679CDB6C05B8F382C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "5654F1C47713BDC59E7291E77B9518439991A3A1BC5B9082A8FD83C4C239E9A8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.txt.console.txt",
+    "bytes": 69,
+    "sha256": "0BA4E9A97B269CBDEC1866C782BA056E054748AFDC5E8BA3BFD1DA0231AD42C8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "E155550775155575F376071D8EEE38768EFDD1E10F6A64F6780CF7270902539A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-build.process.json",
+    "bytes": 622,
+    "sha256": "A7C78686FF1905EEBD5764C26A64023A8525DDABCE4CC3F77244C187907DD727"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-profile.process.json",
+    "bytes": 261,
+    "sha256": "3BFEE33397E865674DB8835BF62C5B97018FD2832D0DAB8BA71AD538CC329A09"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "689A15F1F3E0E5270DB75F22E013C3EA5AEB1D96DC524641EA6D49A85AACBD53"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/result.txt",
+    "bytes": 92,
+    "sha256": "2C1407D979884AB9B35425CF5C9F93ED37F2D84F97243325A35C13CD160CCA82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/runner-context.json",
+    "bytes": 333,
+    "sha256": "7A03A8FB21D63DC72175440B99287E0D6F21097C96477A6658D3D8BEBFE8A0E3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "64D12D6ED1B907E58450C9534BDC98F231C659BDF6180FC4B0C90426D9857BD5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/token-context.process.json",
+    "bytes": 170,
+    "sha256": "1BA1DCBC69D0AFD31A03D8297DC0AF0A174B5D462FA694ADA1FD1655030D9AB2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-baseline-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/assemble.process.json",
+    "bytes": 455,
+    "sha256": "A40EE4B724A3D2073EA27052E15A5E2CB8B2D7B78B74D3DD148CE14D59083B59"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/inputs.csv",
+    "bytes": 1007,
+    "sha256": "95CC6DE4CD8A00BBD6C6E4C535E963CD0B61E2EDFD6BBE1B3FD1DDE9BFFD27FA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.process.json",
+    "bytes": 377,
+    "sha256": "0D150B16A99DDC1BE61C09BC952E72D61930A00F872C16D3B04B1F5F2BF819DA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.txt",
+    "bytes": 704,
+    "sha256": "696C43EC9DAB45EE2A42F31E917213140C735D430255A9259D2757587AF162AD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "AF7C54947A365E7AF45AF4B8C6A32AA6FB788B9E7FCB8D9A200B8A4993FC23D4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.txt.console.txt",
+    "bytes": 105,
+    "sha256": "D88BF0ADDE795992C8A777344C8037959185FFD4E591C65679B6F01ACFF7C99B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "EC1C4F71A253423309941F56FF59A5FAF4E4054A08BA72AFF713C16144FB622E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-build.process.json",
+    "bytes": 606,
+    "sha256": "DF3E89F32E4122E1CA62B2BBD90D46984374AC56F258C680380860AED0F32BE4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-profile.process.json",
+    "bytes": 253,
+    "sha256": "2A99EEDE1FF3281B59DE92A2B790AFDF2092FA4C60FA6E3121D153CBBB9E0FD5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "63C8E235FDF4B4CA961D690B8ED0AC6B845C3685E98A5C05E5B1A4FD60FE978B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/result.txt",
+    "bytes": 114,
+    "sha256": "83F382DBD5A51FFCFBDF0764E3234A5D1BD67326B0F5AEE41A3B3274DC16A32E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/runner-context.json",
+    "bytes": 332,
+    "sha256": "878C385424CA2A1ED812FB1BC6A040FCD7CE6183E32FDFC771B302ED5043D4A2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "C0EF4730D2AA59FCACBE0526102C72768DA83351D07621899328CC008A33E78B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/token-context.process.json",
+    "bytes": 171,
+    "sha256": "959E4C84A4C1389C3EFFD20CB38F00A52B19D949B6F383AC8CB0FA51907A4438"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/assemble.process.json",
+    "bytes": 495,
+    "sha256": "4EDED8BC69CA3251D3D79E0EBEC9D8263F365B242B9DA5A5F16926933D8D44B5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/inputs.csv",
+    "bytes": 1016,
+    "sha256": "7E46F4CBEEAD91CBDDE8052297B1F1C1CEBCF7F94869EFB9840593B695542E67"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.process.json",
+    "bytes": 386,
+    "sha256": "1CB710D2C37688AD6627FFEBA5C4C9F9E5B62604465C0171E49B3DDE63A3856E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.txt",
+    "bytes": 703,
+    "sha256": "81507656924014C7D7880A1FDF63551093C28CCFEE9E84FF3190BC09054FFB6D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "2FF2294643AE7C6B7F60E161B5787FB8A2516C5D77434FDE0FD4A74E5E49FB74"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.txt.console.txt",
+    "bytes": 69,
+    "sha256": "0BA4E9A97B269CBDEC1866C782BA056E054748AFDC5E8BA3BFD1DA0231AD42C8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/observer.txt.initial-console.txt",
+    "bytes": 218,
+    "sha256": "7BD47F47858C967B37F3C05C73A3F889CAB5FCEF3273483EA589A757AD0A1237"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-build.process.json",
+    "bytes": 623,
+    "sha256": "F99938F1B6FBC7051F7C6C15354FB81B8A1F67E8285052800504F91B13C66B8A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-profile.process.json",
+    "bytes": 262,
+    "sha256": "4FD6AB33EA43D6B118945CDB7F8A5457C06350B043EC245E4EF9198C48F92FAD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "EFBFF0135D7EAF5621BC8304584B29758C09E6BACE765843F13FFC3062319A7B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/result.txt",
+    "bytes": 92,
+    "sha256": "2C1407D979884AB9B35425CF5C9F93ED37F2D84F97243325A35C13CD160CCA82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "58536D03DB76D9CC669F773904284E1CA21CAC38F90222F83413A51D9B3C6947"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "99E2E55DC2CC3706094D48E6EF74DB564C4ACE484F8A58E7C727B7D93042F8A2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "1CB08DB88068CBACC6C757325CE04404BDCA14B8E669D9CA6F54DD7988278283"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/bios-candidate-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/assemble.process.json",
+    "bytes": 448,
+    "sha256": "4C9FDB1D008773A8B4D45D795518717FF570B28FF7C6E8176C4C56106C19A33D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/inputs.csv",
+    "bytes": 999,
+    "sha256": "A6CA1ED2D35A2D8040E00951EB1C8D11ECE719D6B7BD43AF241062E0EEB78952"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.process.json",
+    "bytes": 370,
+    "sha256": "3984EC4FA3B30E076392B88DBD1B62466E8EC6B964B008071BE86FF3F81AE177"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.txt",
+    "bytes": 704,
+    "sha256": "C4AA782A217C7BD71D7B1D5F98534C784FEB71B5CAE0AFAC5FDEEA6755D0D6CF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "63F6AEE01483A55995F66419C19745892A46766C8821EF41B4EB312BE58FDB63"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.txt.console.txt",
+    "bytes": 133,
+    "sha256": "210EA5C335D7D87F4F3A5991FC0D29581A454793E1DA5CC93F93EA369C9871CF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "CC6A7F88F2DAFCE8623D4BDAAB6BFC3C5E0A7B7905024500B804066643DD9F69"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-build.process.json",
+    "bytes": 592,
+    "sha256": "D1A95A20CA288A3DCD8959C70FFDDB88B134437B5D49D4E3DBD0658A30CD7661"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-profile.process.json",
+    "bytes": 246,
+    "sha256": "C9AC9E4215A213D5DB6A1695A82D4E57CFFFEB0144BD575F5E1676846EBC1C8C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "A2FB1EDAB2998AA6E0D600254CACB28C8695DD9321CC15B5F24E32CAA4568EBD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/result.txt",
+    "bytes": 109,
+    "sha256": "5308ED961954F3B9CF3ACD440E0F66C64132437E51DB7AFB21A7141E107660AC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/runner-context.json",
+    "bytes": 334,
+    "sha256": "B4CF3162B4DE455760BF2143243ABC4620786F80CC862148A0067FA47E890F5A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "F6D29E4D4689FF4EA8B882D61FDBBE94EBE5A523BAD4D4694EBCAF8798715788"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/token-context.process.json",
+    "bytes": 171,
+    "sha256": "6E07D3C6C4D176962FC0E567A52BBBFBF07790864FCAA2C14F0AB913D97BD33D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/assemble.process.json",
+    "bytes": 487,
+    "sha256": "4C247D758262D2A58881E5A199EA56F4D18E2D350D68FC9A8C3C06FF42B87417"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/inputs.csv",
+    "bytes": 1008,
+    "sha256": "AF015AD1E2B6A7F6B5BC1DE5B413D6523B25E68946B58793AA1B8624CF613CF9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.process.json",
+    "bytes": 378,
+    "sha256": "334653603D7761BC43146E730E681E1831D25CC0D56F875831A1F8E295688EA4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.txt",
+    "bytes": 705,
+    "sha256": "C04CBB37C5CA5E697E824A2E30F03C4B137AD0869617919F2287775CB53E394C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "DF94EDE9F4F4111F32B491883F2406ABA366ECF2989645E4BEC16049B741314B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.txt.console.txt",
+    "bytes": 68,
+    "sha256": "B00E5E5C4CF4F084E2793CD83DDA9D9BB1DE0704789C8C0795380743C90F7728"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "83B9A29BB4F18A37D0B0F8799F39E12D4470ECBEBCDE7042179B388CF9E8487D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-build.process.json",
+    "bytes": 610,
+    "sha256": "9402E9F7AB9EFF48C6EF1F58EA9E6B3E4C80D2CDF66699D9863737A89E431A16"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-profile.process.json",
+    "bytes": 255,
+    "sha256": "2CF1BAF978254314D7C44A43E3E8C848B17C8BAAC64D8B5F1A8D46B6EC2EC11A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "60476D41C7F083BF20E1A634022FA927A098307BF0D3D0F4A4A26038063220A6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/result.txt",
+    "bytes": 87,
+    "sha256": "F513073314DA6383FF73CCF40A7675BB3CCC78408E4059FBB4C98814F93FB6B9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/runner-context.json",
+    "bytes": 333,
+    "sha256": "FFB1C7377CE851346E17A57DBDCA3CD424E9D5D462382EE0E1A4AC1B8F676328"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "CD289F3BDE1E6816937E2C63BD0475439D7B8206A9C9ACE3A85B2FA104296FCA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "A55CB16B28F7CC9C83506CB1A8B63E2EC595EF707A83B7F4E236F488BBFBECF3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/control-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/assemble.process.json",
+    "bytes": 453,
+    "sha256": "E8A694ABA358F227BFD3EC21BC6976FFE360EDD542DADAC128A256DC5B7C7646"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/inputs.csv",
+    "bytes": 1004,
+    "sha256": "E28BDFB2077AF81E776622F9D049298747C625A9ED0788CF695D9FE4104FCE45"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.process.json",
+    "bytes": 373,
+    "sha256": "887A4F70D03E38C16B61052A27E79AFCD848ABDD52CA4865EC84DF558FB698B9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.txt",
+    "bytes": 703,
+    "sha256": "FCDCA0F3044C2B2EE28D47A1F73090B7E95E4F6D0642A0DFC8E7751809A4372E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "ED9D2EDFE22FC3650DB3E1BBB4B961F4C6E8670DC7CDFF561ADDA82FD722B3FF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.txt.console.txt",
+    "bytes": 181,
+    "sha256": "D81CAFDAA0AEFEA09269465A6D187A9B2B6A70EB5C7F704100A2B9FC8080A4FF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/observer.txt.initial-console.txt",
+    "bytes": 218,
+    "sha256": "EC98944C9F9DD114C87A531CAF80226E037C94623B01D3633B7AD2ED6B4236CB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-build.process.json",
+    "bytes": 597,
+    "sha256": "5E1EE374BFBD34B535E1C7A15ADD1F619CDADF6270808D26B3E0BA7FA489926E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-profile.process.json",
+    "bytes": 249,
+    "sha256": "CAE1B60F0B23239AD545E7D42F72F5C5431ADFE6C927C15B919286A5DB2D1966"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "22E2F67362E98EE90C1B1AAE6B6B6266AFF6688F1C341E371B502613B38ECE8B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/result.txt",
+    "bytes": 111,
+    "sha256": "B753042517A009FA9BFD7B0B39D675E5765BBB33A8B4A897360C12F9A2A0B0E0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/runner-context.json",
+    "bytes": 333,
+    "sha256": "72040524FA77CD0988E5F4A16CB7EE1905A11721FB5F4153A34F730E2ABEE7F3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "002BA111AE3669F37D69DD5EBC08E4B6C918167AC9F02FEB9F8EA739D153BCB0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/token-context.process.json",
+    "bytes": 171,
+    "sha256": "5F81AC87F00F290AD109D2FF8080838D5E2D05708F84E49815347ED32668992B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/assemble.process.json",
+    "bytes": 492,
+    "sha256": "BCCC795AE99A771571E21F45EC65132A41A6026378167314970C56CA8B58381A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/inputs.csv",
+    "bytes": 1013,
+    "sha256": "9F970442E56001CDC31AB48328AFFA941F534B2BAEE37341DA1146A03545A3CE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.process.json",
+    "bytes": 381,
+    "sha256": "4C83BCD863602E1BC53210DF143BE2A3F43782F5B6F39EDB00AB876AB8C36EF7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.txt",
+    "bytes": 704,
+    "sha256": "F15D329243455D0E01E09B11724A307B7FE22C9E3CEAB88DA3EDC9D43F2736B1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "5A2FCC80B80A6D41C4F6758F1588499329C3CDE9753FBAD96023B6EB6E896C1E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.txt.console.txt",
+    "bytes": 71,
+    "sha256": "12D8A0DC721D004C3935BCE11704EC17B9465912988FE700068F67E735F173E9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "3361A06B42F168077CC047957855D935DCB3CCB13B7C61C8071150C6D4529275"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-build.process.json",
+    "bytes": 616,
+    "sha256": "9834CF11319BF2A1652390F519330E1BD265A66B9785B18E5C61E318CA71A532"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-profile.process.json",
+    "bytes": 258,
+    "sha256": "0CC91D20B7D2A895F744384D87EE38441BCE39ADC491954CDBE7C4C18F0BD2DF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "FA818ECDE3456DD20C74692951B907AF92AD1FD8B8094C59E1B540156BF65B8C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/result.txt",
+    "bytes": 89,
+    "sha256": "DE5128BDD39442D5E33656FA82D6D62192BDFF5B92913D83CF74AB5DBDFAE106"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "F48D947589365B92CE5E87FA815D5A63D89320707DF747CFA3772A2888C06246"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "414F0099FB8E099A0A648FA34B05F338F76FD6DAF7490EECB3B44AF9F7DA794B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "14672EE0AE306B99DB959C26F402563B904D448E02E5AEC388A060ACA1AF283C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-dispatch/sign-flags-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image/completion.json",
+    "bytes": 66,
+    "sha256": "5BDC3CE7B58C9B869A9AA13960A237FDB19AF7C5763E19FE4FBCBE681B5DAF84"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image/process.json",
+    "bytes": 267,
+    "sha256": "0C0F27C48C94A4323E86B20837FA934CB56B25231053DB2D3061EE60A8578128"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image/stdout.txt",
+    "bytes": 70,
+    "sha256": "2CD142A3CDD1BBC78753949C989231FBC568F095F6497BDBCA2A42A187A78109"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-negative/completion.json",
+    "bytes": 66,
+    "sha256": "654C38CFB7F1C537B7E5EBC90E87C149C05981BA4879C693754BB76D8D3C7132"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-negative/process.json",
+    "bytes": 267,
+    "sha256": "72054E43A49AB81681CEA18B025F525CE745CF85EA6D9CFBF64EA34D5EE48389"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-negative/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-negative/stdout.txt",
+    "bytes": 393,
+    "sha256": "AFBEC0650DB1BC75F34335244740AC006399A4D48E07A48ACBA077A1121E578F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-r2/completion.json",
+    "bytes": 66,
+    "sha256": "8D233C7035C15E686D936F108897FC58304FD5CBDAB13979664B508B48A2B1E9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-r2/process.json",
+    "bytes": 267,
+    "sha256": "A2C968A21296A6CD560DC53E83CA515FFAB4A063AFE3B2B55A0DAAF4148A5129"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-r2/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-image-r2/stdout.txt",
+    "bytes": 87,
+    "sha256": "6F9B17D7980377839F3905279545D00E0CC83DED84758D87551AD9BB595699BE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-role-merge/completion.json",
+    "bytes": 66,
+    "sha256": "D39DFE8E0CA465CE2F877B73E21741495EC1EEA804861DECCF40DF3754CDE720"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-role-merge/process.json",
+    "bytes": 269,
+    "sha256": "4E181A151464095F215BCE5CAE80D6F0821C660BC91C3D33ABAF6147BBDD3A18"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-role-merge/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/bios-runs/bios-role-merge/stdout.txt",
+    "bytes": 383,
+    "sha256": "F7060FE87AF55E0F0F91A7B977CA202B728DD418B5194C86D080F9C76B30B110"
+  }
+]

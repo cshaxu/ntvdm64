@@ -161,7 +161,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-source-note-only':
                     assert prefix == 'dos-command-input-role-' and path == 'dos/v86/cmd/exe2bin/e2bchng.inc'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -194,6 +194,23 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'bios-native-role-':
+        observed = json.loads((A / 'bios-image-observations.json').read_text())
+        inspector = runpy.run_path(str(A / 'bios-image-observer.py'))['inspect']
+        assert inspector() == observed and observed['result'] == 'pass'
+        assert {r['relative_path'] for r in observed['sources']} == set(changed)
+        assert sum(len(r['functions']) for r in observed['sources']) == 52
+        assert len(observed['bios_slots']) == 256 and len(observed['ems_slots']) == 30
+        assert all(r['status'] == 'partial' and r['original_text_retained_percent'] == '100' for r in dispositions)
+        negative = json.loads((A / 'bios-image-negative-result.json').read_text())
+        bad_image = Path('build/t473-s10/bios-image-negative/changed-dispatch.exe')
+        assert sha(bad_image) == negative['changed_image_sha256'] and negative['executed'] is False
+        try:
+            inspector(bad_image)
+        except AssertionError as error:
+            assert error.args == ((255, '_control_bop'),)
+        else:
+            raise AssertionError('Corrupt BIOS dispatch pointer accepted')
     if prefix == 'dos-command-input-role-':
         observed = json.loads((A / 'dos-command-input-observations.json').read_text())
         actual = runpy.run_path(str(A / 'dos-command-input-observer.py'))['observe']()
@@ -536,7 +553,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

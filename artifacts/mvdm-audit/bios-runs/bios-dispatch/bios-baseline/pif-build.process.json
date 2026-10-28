@@ -1,0 +1,7 @@
+{
+  "pid": 11716,
+  "start": "2026-10-28T01:03:56.2874800Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /W4 /I\"O:\\repos.hobby\\ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /Fo\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\bios-baseline/pif.obj\" /Fe\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\bios-baseline/pif-builder.exe\" \"O:\\repos.hobby\\ntvdm64\\tests\\observation/ems_pif_builder.c\"\"",
+  "timeoutSeconds": 120,
+  "image": "C:\\WINDOWS\\system32\\cmd.exe"
+}

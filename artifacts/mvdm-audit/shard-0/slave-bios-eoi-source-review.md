@@ -1,5 +1,9 @@
 # Slave BIOS unexpected-interrupt source finding
 
+Later [BIOS integration evidence](../bios-native-role-review.md) supersedes
+the initial pending file disposition with partial integration. The D11
+finding below remains source-level and unproved at the real PIC/guest boundary.
+
 This is a source-level finding for S13, not a runtime reproduction, a selected
 patch or an explanation of the SOL Options failure. `slave_bs.c` remains
 pending in the master ledger until its complete file contract is reconciled.

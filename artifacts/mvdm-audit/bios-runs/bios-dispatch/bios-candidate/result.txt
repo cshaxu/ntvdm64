@@ -1,0 +1,1 @@
+PASS independent COM -> original CPU40 BiosDispatch owners; normal launcher exit; no original guest modification

@@ -1,0 +1,1916 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/bios/bios.c",
+      "source_sha256": "A8345E88DB25332BDF008BDC730FFA15BDC6110ECF1A6C54ED7E59C95CA7085B",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "compile_edge": "build obj/bios/bios.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/bios.c",
+      "dependency_block": "obj/bios/bios.obj: #deps 21, deps mtime 8147602874091399 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/cntlbop.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/gispsvga.h\n    ../../../../src/mvdm/softpc.new/base/inc/hfx.h\n    ../../../../src/mvdm/softpc.new/base/inc/host.h\n    ../../../../src/mvdm/softpc.new/base/inc/virtual.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_hfx.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\bios.obj",
+      "object_sha256": "8D6A49949BE5318A23A9E74E654FC2829D841A00FE345A346B074A96D3B81FD9",
+      "functions": [
+        {
+          "symbol": "_v_mouse_install1",
+          "va": 4603168,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_install2",
+          "va": 4603184,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_io_interrupt",
+          "va": 4603200,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_io_language",
+          "va": 4603216,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_video_io",
+          "va": 4603232,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_int1",
+          "va": 4603248,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_int2",
+          "va": 4603264,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_host_mouse_install1",
+          "va": 4603280,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_host_mouse_install2",
+          "va": 4603296,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        },
+        {
+          "symbol": "_v_mouse_EM_callback",
+          "va": 4603312,
+          "bytes": 10,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 2
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/cmos_bis.c",
+      "source_sha256": "E3B6710DB5887EF77C5A38C881EBB4EEFF2575DB65E86A3468258AAA9293E1BD",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "compile_edge": "build obj/bios/cmos_bis.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/cmos_bis.c",
+      "dependency_block": "obj/bios/cmos_bis.obj: #deps 20, deps mtime 8147602862076956 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/cmos.h\n    ../../../../src/mvdm/softpc.new/base/inc/cmosbios.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/rtc_bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\cmos_bis.obj",
+      "object_sha256": "7F8260B1CCF4C0ADE203DF5A3DFB54DCCAB7AADE6CADDB02521D9A8A7784D7C9",
+      "functions": [
+        {
+          "symbol": "_cmos_read",
+          "va": 5797920,
+          "bytes": 58,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 46
+        },
+        {
+          "symbol": "_cmos_write",
+          "va": 5797984,
+          "bytes": 61,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 49
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/cntlbop.c",
+      "source_sha256": "C65121F592F91EFBEA0DB0B3282F3252F4A58A4A87A281570EE3A0E50686CC87",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "compile_edge": "build obj/bios/cntlbop.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/cntlbop.c",
+      "dependency_block": "obj/bios/cntlbop.obj: #deps 20, deps mtime 8147602863558437 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/cntlbop.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/host.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_bop.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\cntlbop.obj",
+      "object_sha256": "B52EAE8D62337203D95D91D3C7EF1AFFCC1E9D94BE79E7E74655677FD8CD0096",
+      "functions": [
+        {
+          "symbol": "_control_bop",
+          "va": 4616736,
+          "bytes": 50,
+          "relocation_words": 6,
+          "nonrelocated_bytes_matched": 26
+        },
+        {
+          "symbol": "_do_bop",
+          "va": 4616800,
+          "bytes": 71,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 59
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/emm_fncs.c",
+      "source_sha256": "2FFB142BB4AD67958493668E06BEC3D81936790497965CDC5CA8A2AC0E142722",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
+      "compile_edge": "build obj/bios/emm_fncs.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/emm_fncs.c",
+      "dependency_block": "obj/bios/emm_fncs.obj: #deps 29, deps mtime 8147602868798542 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/emm.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gisp_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/timer.h\n    ../../../../src/mvdm/softpc.new/base/inc/timeval.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\emm_fncs.obj",
+      "object_sha256": "8898CC17F64D7B2997DDB6D947354300A8A6A8922E5FBC17A380C99FED39E47B",
+      "functions": [
+        {
+          "symbol": "_emm_init",
+          "va": 4615040,
+          "bytes": 141,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 89
+        },
+        {
+          "symbol": "_emm_io",
+          "va": 4615184,
+          "bytes": 52,
+          "relocation_words": 6,
+          "nonrelocated_bytes_matched": 28
+        },
+        {
+          "symbol": "_reset_emm_funcs",
+          "va": 4615248,
+          "bytes": 15,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 7
+        },
+        {
+          "symbol": "_return_from_call",
+          "va": 4615264,
+          "bytes": 121,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 101
+        },
+        {
+          "symbol": "_Get_Status",
+          "va": 4605872,
+          "bytes": 26,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 18
+        },
+        {
+          "symbol": "_Get_Page_Frame_Address",
+          "va": 4605904,
+          "bytes": 25,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 13
+        },
+        {
+          "symbol": "_Get_Unallocated_Page_Count",
+          "va": 4605936,
+          "bytes": 39,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 19
+        },
+        {
+          "symbol": "_Allocate_Pages",
+          "va": 4605984,
+          "bytes": 234,
+          "relocation_words": 15,
+          "nonrelocated_bytes_matched": 174
+        },
+        {
+          "symbol": "_Map_Unmap_Handle_Pages",
+          "va": 4606224,
+          "bytes": 261,
+          "relocation_words": 15,
+          "nonrelocated_bytes_matched": 201
+        },
+        {
+          "symbol": "_Deallocate_Pages",
+          "va": 4606496,
+          "bytes": 195,
+          "relocation_words": 11,
+          "nonrelocated_bytes_matched": 151
+        },
+        {
+          "symbol": "_Get_Version",
+          "va": 4606704,
+          "bytes": 18,
+          "relocation_words": 2,
+          "nonrelocated_bytes_matched": 10
+        },
+        {
+          "symbol": "_Save_Page_Map",
+          "va": 4606736,
+          "bytes": 113,
+          "relocation_words": 7,
+          "nonrelocated_bytes_matched": 85
+        },
+        {
+          "symbol": "_Restore_Page_Map",
+          "va": 4606864,
+          "bytes": 209,
+          "relocation_words": 9,
+          "nonrelocated_bytes_matched": 173
+        },
+        {
+          "symbol": "_Reserved",
+          "va": 4607088,
+          "bytes": 12,
+          "relocation_words": 1,
+          "nonrelocated_bytes_matched": 8
+        },
+        {
+          "symbol": "_Get_Handle_Count",
+          "va": 4607104,
+          "bytes": 25,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 13
+        },
+        {
+          "symbol": "_Get_Handle_Pages",
+          "va": 4607136,
+          "bytes": 81,
+          "relocation_words": 6,
+          "nonrelocated_bytes_matched": 57
+        },
+        {
+          "symbol": "_Get_All_Handle_Pages",
+          "va": 4607232,
+          "bytes": 182,
+          "relocation_words": 12,
+          "nonrelocated_bytes_matched": 134
+        },
+        {
+          "symbol": "_Get_Set_Page_Map",
+          "va": 4607424,
+          "bytes": 320,
+          "relocation_words": 20,
+          "nonrelocated_bytes_matched": 240
+        },
+        {
+          "symbol": "_Get_Set_Partial_Page_Map",
+          "va": 4607744,
+          "bytes": 330,
+          "relocation_words": 17,
+          "nonrelocated_bytes_matched": 262
+        },
+        {
+          "symbol": "_Map_Unmap_Multiple_Handle_Pages",
+          "va": 4608080,
+          "bytes": 474,
+          "relocation_words": 22,
+          "nonrelocated_bytes_matched": 386
+        },
+        {
+          "symbol": "_Reallocate_Pages",
+          "va": 4608560,
+          "bytes": 310,
+          "relocation_words": 19,
+          "nonrelocated_bytes_matched": 234
+        },
+        {
+          "symbol": "_Get_Set_Handle_Attribute",
+          "va": 4608880,
+          "bytes": 70,
+          "relocation_words": 5,
+          "nonrelocated_bytes_matched": 50
+        },
+        {
+          "symbol": "_Get_Set_Handle_Name",
+          "va": 4608960,
+          "bytes": 314,
+          "relocation_words": 21,
+          "nonrelocated_bytes_matched": 230
+        },
+        {
+          "symbol": "_Get_Handle_Directory",
+          "va": 4609280,
+          "bytes": 428,
+          "relocation_words": 27,
+          "nonrelocated_bytes_matched": 320
+        },
+        {
+          "symbol": "_Alter_Page_Map_And_Jump",
+          "va": 4609712,
+          "bytes": 741,
+          "relocation_words": 49,
+          "nonrelocated_bytes_matched": 545
+        },
+        {
+          "symbol": "_Alter_Page_Map_And_Call",
+          "va": 4610464,
+          "bytes": 1277,
+          "relocation_words": 79,
+          "nonrelocated_bytes_matched": 961
+        },
+        {
+          "symbol": "_Move_Exchange_Memory_Region",
+          "va": 4611744,
+          "bytes": 1246,
+          "relocation_words": 41,
+          "nonrelocated_bytes_matched": 1082
+        },
+        {
+          "symbol": "_Get_Mappable_Physical_Address_Array",
+          "va": 4612992,
+          "bytes": 421,
+          "relocation_words": 19,
+          "nonrelocated_bytes_matched": 345
+        },
+        {
+          "symbol": "_Get_Hardware_Configuration_Array",
+          "va": 4613424,
+          "bytes": 309,
+          "relocation_words": 24,
+          "nonrelocated_bytes_matched": 213
+        },
+        {
+          "symbol": "_Allocate_Raw_Pages",
+          "va": 4613744,
+          "bytes": 212,
+          "relocation_words": 13,
+          "nonrelocated_bytes_matched": 160
+        },
+        {
+          "symbol": "_Alternate_Map_Register_Support",
+          "va": 4613968,
+          "bytes": 756,
+          "relocation_words": 56,
+          "nonrelocated_bytes_matched": 532
+        },
+        {
+          "symbol": "_Prepare_Expanded_Memory_HW_For_Warm_Boot",
+          "va": 4614736,
+          "bytes": 9,
+          "relocation_words": 1,
+          "nonrelocated_bytes_matched": 5
+        },
+        {
+          "symbol": "_Enable_Disable_OSE_Function_Set_Functions",
+          "va": 4614752,
+          "bytes": 276,
+          "relocation_words": 29,
+          "nonrelocated_bytes_matched": 160
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/ill_bop.c",
+      "source_sha256": "89DF5A6FA3FC27DEF18B904FCD83F6C872778FEC33DFC58634C9F73449165799",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "compile_edge": "build obj/bios/ill_bop.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/ill_bop.c",
+      "dependency_block": "obj/bios/ill_bop.obj: #deps 21, deps mtime 8147602875554466 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\ill_bop.obj",
+      "object_sha256": "F9F21B19A5C86E5CCCF5D86AF8D15C23BE22405A8E69FB04569951F017478FDB",
+      "functions": [
+        {
+          "symbol": "_illegal_bop",
+          "va": 4223152,
+          "bytes": 3,
+          "relocation_words": 0,
+          "nonrelocated_bytes_matched": 3
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/rom_basc.c",
+      "source_sha256": "2E6F1783FCB3695443AB0A3A6FCB5DBF2BD3E2E7905217CD61021E031A8A709A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rom_basc.c",
+      "compile_edge": "build obj/bios/rom_basc.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/rom_basc.c",
+      "dependency_block": "obj/bios/rom_basc.obj: #deps 23, deps mtime 8147602874195505 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/host.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\rom_basc.obj",
+      "object_sha256": "F9ECBD4FA67F994A15C2B32022B83D564F1020D1DAC4F23F9E7A8E3D413A502B",
+      "functions": [
+        {
+          "symbol": "_rom_basic",
+          "va": 4615472,
+          "bytes": 15,
+          "relocation_words": 1,
+          "nonrelocated_bytes_matched": 11
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/bios/slave_bs.c",
+      "source_sha256": "22079CB4C1E033F1D33246DA6F60F8D5E1BBA5C925EE3E9E5EA3C3FD756C7368",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "compile_edge": "build obj/bios/slave_bs.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/slave_bs.c",
+      "dependency_block": "obj/bios/slave_bs.obj: #deps 16, deps mtime 8147602862751372 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\slave_bs.obj",
+      "object_sha256": "ACC6CDBBB0F6024591EC5E9B3B78285F1EF0A1E19254D27967B47373E8748BD0",
+      "functions": [
+        {
+          "symbol": "_D11_int",
+          "va": 4615568,
+          "bytes": 213,
+          "relocation_words": 12,
+          "nonrelocated_bytes_matched": 165
+        },
+        {
+          "symbol": "_int_287",
+          "va": 4615792,
+          "bytes": 37,
+          "relocation_words": 3,
+          "nonrelocated_bytes_matched": 25
+        },
+        {
+          "symbol": "_re_direct",
+          "va": 4615840,
+          "bytes": 16,
+          "relocation_words": 1,
+          "nonrelocated_bytes_matched": 12
+        }
+      ]
+    }
+  ],
+  "bios_slots": [
+    {
+      "index": 0,
+      "symbol": "_reset",
+      "va": 4603328
+    },
+    {
+      "index": 1,
+      "symbol": "_dummy_int",
+      "va": 4223152
+    },
+    {
+      "index": 2,
+      "symbol": "_unexpected_int",
+      "va": 4681216
+    },
+    {
+      "index": 3,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 4,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 5,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 6,
+      "symbol": "_illegal_op_int",
+      "va": 4680720
+    },
+    {
+      "index": 7,
+      "symbol": "_illegal_dvr_bop",
+      "va": 4223152
+    },
+    {
+      "index": 8,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 9,
+      "symbol": "_keyboard_int",
+      "va": 4655552
+    },
+    {
+      "index": 10,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 11,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 12,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 13,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 14,
+      "symbol": "_diskette_int",
+      "va": 4684384
+    },
+    {
+      "index": 15,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 16,
+      "symbol": "_video_io",
+      "va": 4763424
+    },
+    {
+      "index": 17,
+      "symbol": "_equipment",
+      "va": 4615392
+    },
+    {
+      "index": 18,
+      "symbol": "_memory_size",
+      "va": 4615440
+    },
+    {
+      "index": 19,
+      "symbol": "_disk_io",
+      "va": 4686592
+    },
+    {
+      "index": 20,
+      "symbol": "_rs232_io",
+      "va": 5532016
+    },
+    {
+      "index": 21,
+      "symbol": "_cassette_io",
+      "va": 4615856
+    },
+    {
+      "index": 22,
+      "symbol": "_keyboard_io",
+      "va": 4659520
+    },
+    {
+      "index": 23,
+      "symbol": "_printer_io",
+      "va": 5531408
+    },
+    {
+      "index": 24,
+      "symbol": "_rom_basic",
+      "va": 4615472
+    },
+    {
+      "index": 25,
+      "symbol": "_mvdm_softpc_terminate",
+      "va": 4603024
+    },
+    {
+      "index": 26,
+      "symbol": "_time_of_day",
+      "va": 5796880
+    },
+    {
+      "index": 27,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 28,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 29,
+      "symbol": "_kb_idle_poll",
+      "va": 4654864
+    },
+    {
+      "index": 30,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 31,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 32,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 33,
+      "symbol": "_Get_build_id",
+      "va": 4615488
+    },
+    {
+      "index": 34,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 35,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 36,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 37,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 38,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 39,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 40,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 41,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 42,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 43,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 44,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 45,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 46,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 47,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 48,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 49,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 50,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 51,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 52,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 53,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 54,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 55,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 56,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 57,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 58,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 59,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 60,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 61,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 62,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 63,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 64,
+      "symbol": "_diskette_io",
+      "va": 4684528
+    },
+    {
+      "index": 65,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 66,
+      "symbol": "_ega_video_io",
+      "va": 4759424
+    },
+    {
+      "index": 67,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 68,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 69,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 70,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 71,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 72,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 73,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 74,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 75,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 76,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 77,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 78,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 79,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 80,
+      "symbol": "_MS_bop_0",
+      "va": 4526176
+    },
+    {
+      "index": 81,
+      "symbol": "_MS_bop_1",
+      "va": 4526256
+    },
+    {
+      "index": 82,
+      "symbol": "_MS_bop_2",
+      "va": 4527216
+    },
+    {
+      "index": 83,
+      "symbol": "_MS_bop_3",
+      "va": 4527360
+    },
+    {
+      "index": 84,
+      "symbol": "_MS_bop_4",
+      "va": 4527376
+    },
+    {
+      "index": 85,
+      "symbol": "_MS_bop_5",
+      "va": 4527440
+    },
+    {
+      "index": 86,
+      "symbol": "_MS_bop_6",
+      "va": 4527456
+    },
+    {
+      "index": 87,
+      "symbol": "_MS_bop_7",
+      "va": 4527472
+    },
+    {
+      "index": 88,
+      "symbol": "_MS_bop_8",
+      "va": 4527920
+    },
+    {
+      "index": 89,
+      "symbol": "_MS_bop_9",
+      "va": 4528144
+    },
+    {
+      "index": 90,
+      "symbol": "_MS_bop_A",
+      "va": 4528512
+    },
+    {
+      "index": 91,
+      "symbol": "_MS_bop_B",
+      "va": 4528544
+    },
+    {
+      "index": 92,
+      "symbol": "_MS_bop_C",
+      "va": 4528560
+    },
+    {
+      "index": 93,
+      "symbol": "_MS_bop_D",
+      "va": 4528560
+    },
+    {
+      "index": 94,
+      "symbol": "_MS_bop_E",
+      "va": 4528576
+    },
+    {
+      "index": 95,
+      "symbol": "_MS_bop_F",
+      "va": 4528608
+    },
+    {
+      "index": 96,
+      "symbol": "_softpc_version",
+      "va": 4662368
+    },
+    {
+      "index": 97,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 98,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 99,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 100,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 101,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 102,
+      "symbol": "_emm_init",
+      "va": 4615040
+    },
+    {
+      "index": 103,
+      "symbol": "_emm_io",
+      "va": 4615184
+    },
+    {
+      "index": 104,
+      "symbol": "_return_from_call",
+      "va": 4615264
+    },
+    {
+      "index": 105,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 106,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 107,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 108,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 109,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 110,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 111,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 112,
+      "symbol": "_rtc_int",
+      "va": 4605472
+    },
+    {
+      "index": 113,
+      "symbol": "_re_direct",
+      "va": 4615840
+    },
+    {
+      "index": 114,
+      "symbol": "_D11_int",
+      "va": 4615568
+    },
+    {
+      "index": 115,
+      "symbol": "_D11_int",
+      "va": 4615568
+    },
+    {
+      "index": 116,
+      "symbol": "_D11_int",
+      "va": 4615568
+    },
+    {
+      "index": 117,
+      "symbol": "_int_287",
+      "va": 4615792
+    },
+    {
+      "index": 118,
+      "symbol": "_D11_int",
+      "va": 4615568
+    },
+    {
+      "index": 119,
+      "symbol": "_D11_int",
+      "va": 4615568
+    },
+    {
+      "index": 120,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 121,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 122,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 123,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 124,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 125,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 126,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 127,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 128,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 129,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 130,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 131,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 132,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 133,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 134,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 135,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 136,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 137,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 138,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 139,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 140,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 141,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 142,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 143,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 144,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 145,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 146,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 147,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 148,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 149,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 150,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 151,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 152,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 153,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 154,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 155,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 156,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 157,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 158,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 159,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 160,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 161,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 162,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 163,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 164,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 165,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 166,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 167,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 168,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 169,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 170,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 171,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 172,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 173,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 174,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 175,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 176,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 177,
+      "symbol": "_virtual_device_trap",
+      "va": 4617696
+    },
+    {
+      "index": 178,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 179,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 180,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 181,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 182,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 183,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 184,
+      "symbol": "_v_mouse_install1",
+      "va": 4603168
+    },
+    {
+      "index": 185,
+      "symbol": "_v_mouse_install2",
+      "va": 4603184
+    },
+    {
+      "index": 186,
+      "symbol": "_v_mouse_int1",
+      "va": 4603248
+    },
+    {
+      "index": 187,
+      "symbol": "_v_mouse_int2",
+      "va": 4603264
+    },
+    {
+      "index": 188,
+      "symbol": "_v_mouse_io_language",
+      "va": 4603216
+    },
+    {
+      "index": 189,
+      "symbol": "_v_mouse_io_interrupt",
+      "va": 4603200
+    },
+    {
+      "index": 190,
+      "symbol": "_v_mouse_video_io",
+      "va": 4603232
+    },
+    {
+      "index": 191,
+      "symbol": "_v_mouse_EM_callback",
+      "va": 4603312
+    },
+    {
+      "index": 192,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 193,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 194,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 195,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 196,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 197,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 198,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 199,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 200,
+      "symbol": "_v_host_mouse_install1",
+      "va": 4603280
+    },
+    {
+      "index": 201,
+      "symbol": "_v_host_mouse_install2",
+      "va": 4603296
+    },
+    {
+      "index": 202,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 203,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 204,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 205,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 206,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 207,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 208,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 209,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 210,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 211,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 212,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 213,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 214,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 215,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 216,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 217,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 218,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 219,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 220,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 221,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 222,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 223,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 224,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 225,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 226,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 227,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 228,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 229,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 230,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 231,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 232,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 233,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 234,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 235,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 236,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 237,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 238,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 239,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 240,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 241,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 242,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 243,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 244,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 245,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 246,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 247,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 248,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 249,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 250,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 251,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 252,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 253,
+      "symbol": "_switch_to_real_mode",
+      "va": 5592384
+    },
+    {
+      "index": 254,
+      "symbol": "_host_unsimulate",
+      "va": 4583456
+    },
+    {
+      "index": 255,
+      "symbol": "_control_bop",
+      "va": 4616736
+    }
+  ],
+  "ems_slots": [
+    {
+      "index": 0,
+      "symbol": "_Get_Status",
+      "va": 4605872
+    },
+    {
+      "index": 1,
+      "symbol": "_Get_Page_Frame_Address",
+      "va": 4605904
+    },
+    {
+      "index": 2,
+      "symbol": "_Get_Unallocated_Page_Count",
+      "va": 4605936
+    },
+    {
+      "index": 3,
+      "symbol": "_Allocate_Pages",
+      "va": 4605984
+    },
+    {
+      "index": 4,
+      "symbol": "_Map_Unmap_Handle_Pages",
+      "va": 4606224
+    },
+    {
+      "index": 5,
+      "symbol": "_Deallocate_Pages",
+      "va": 4606496
+    },
+    {
+      "index": 6,
+      "symbol": "_Get_Version",
+      "va": 4606704
+    },
+    {
+      "index": 7,
+      "symbol": "_Save_Page_Map",
+      "va": 4606736
+    },
+    {
+      "index": 8,
+      "symbol": "_Restore_Page_Map",
+      "va": 4606864
+    },
+    {
+      "index": 9,
+      "symbol": "_Reserved",
+      "va": 4607088
+    },
+    {
+      "index": 10,
+      "symbol": "_Reserved",
+      "va": 4607088
+    },
+    {
+      "index": 11,
+      "symbol": "_Get_Handle_Count",
+      "va": 4607104
+    },
+    {
+      "index": 12,
+      "symbol": "_Get_Handle_Pages",
+      "va": 4607136
+    },
+    {
+      "index": 13,
+      "symbol": "_Get_All_Handle_Pages",
+      "va": 4607232
+    },
+    {
+      "index": 14,
+      "symbol": "_Get_Set_Page_Map",
+      "va": 4607424
+    },
+    {
+      "index": 15,
+      "symbol": "_Get_Set_Partial_Page_Map",
+      "va": 4607744
+    },
+    {
+      "index": 16,
+      "symbol": "_Map_Unmap_Multiple_Handle_Pages",
+      "va": 4608080
+    },
+    {
+      "index": 17,
+      "symbol": "_Reallocate_Pages",
+      "va": 4608560
+    },
+    {
+      "index": 18,
+      "symbol": "_Get_Set_Handle_Attribute",
+      "va": 4608880
+    },
+    {
+      "index": 19,
+      "symbol": "_Get_Set_Handle_Name",
+      "va": 4608960
+    },
+    {
+      "index": 20,
+      "symbol": "_Get_Handle_Directory",
+      "va": 4609280
+    },
+    {
+      "index": 21,
+      "symbol": "_Alter_Page_Map_And_Jump",
+      "va": 4609712
+    },
+    {
+      "index": 22,
+      "symbol": "_Alter_Page_Map_And_Call",
+      "va": 4610464
+    },
+    {
+      "index": 23,
+      "symbol": "_Move_Exchange_Memory_Region",
+      "va": 4611744
+    },
+    {
+      "index": 24,
+      "symbol": "_Get_Mappable_Physical_Address_Array",
+      "va": 4612992
+    },
+    {
+      "index": 25,
+      "symbol": "_Get_Hardware_Configuration_Array",
+      "va": 4613424
+    },
+    {
+      "index": 26,
+      "symbol": "_Allocate_Raw_Pages",
+      "va": 4613744
+    },
+    {
+      "index": 27,
+      "symbol": "_Alternate_Map_Register_Support",
+      "va": 4613968
+    },
+    {
+      "index": 28,
+      "symbol": "_Prepare_Expanded_Memory_HW_For_Warm_Boot",
+      "va": 4614736
+    },
+    {
+      "index": 29,
+      "symbol": "_Enable_Disable_OSE_Function_Set_Functions",
+      "va": 4614752
+    }
+  ],
+  "empty_control_tables": true,
+  "inputs": [
+    {
+      "path": "build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib",
+      "sha256": "07AC1220344493DDC861393BD13FEF2DF90E5CEBE73A81383EB59A442A6A667D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\bios-image-observer.py",
+      "sha256": "7281778DC9EE59D4214CC137561E0045AA76BEA803FF0F9EF70D02BBD9B24CAE"
+    }
+  ],
+  "scope": "Original source, VALID compile/archive selection, function bytes excluding relocations, and all actual BIOS initializer relocation targets; not whole guest behavior"
+}

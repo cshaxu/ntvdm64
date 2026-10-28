@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "e0b7e8a42",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "bios-image-observations.json",
+      "sha256": "A1400DD2FCA608E8D2B4F38CF62B9A22E7E7DF372CB53D4AD57C905776B340FE"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original BIOS integration and bounded real guest contracts, not complete BIOS/EMS/device acceptance"
+}

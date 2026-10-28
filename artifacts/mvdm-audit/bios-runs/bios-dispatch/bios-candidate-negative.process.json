@@ -1,0 +1,8 @@
+{
+  "negative_oracle": true,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-sign-flags-guest.ps1\" -Workload BiosDispatch -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\candidate-validation\\package\" -Observer \"O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe\" -LogonHelper \"O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\bios-candidate-negative\" -NegativeOracle",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "diagnostic_budget_seconds": 180,
+  "started": "2026-10-28T01:04:36.3095766Z",
+  "pid": 22048
+}

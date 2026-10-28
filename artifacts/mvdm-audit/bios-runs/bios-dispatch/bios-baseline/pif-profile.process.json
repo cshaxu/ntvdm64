@@ -1,0 +1,7 @@
+{
+  "pid": 14924,
+  "start": "2026-10-28T01:04:03.0476072Z",
+  "command": "\"O:\\tmp\\n8a8\\tests\" --close-on-exit",
+  "timeoutSeconds": 30,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\bios-baseline/pif-builder.exe"
+}

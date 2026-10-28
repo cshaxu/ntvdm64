@@ -1,0 +1,7 @@
+{
+  "pid": 28824,
+  "start": "2026-10-28T01:03:52.8934055Z",
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\bios_dispatch_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\bios-baseline/EMSPROBE.COM\"",
+  "timeoutSeconds": 30,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe"
+}

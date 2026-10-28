@@ -1,0 +1,8 @@
+{
+  "private_desktop": true,
+  "parent_pid": 5356,
+  "script_sha256": "9AA69F175B350AF0D9B04836E0781FA6301A5E736E89853A47B82BC95415FCFA",
+  "host_path": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "token_class": "medium",
+  "integrity_sid": "S-1-16-8192"
+}

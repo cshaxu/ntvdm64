@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_sign_flag_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\bios-dispatch\\sign-flags/EMSPROBE.COM\"",
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "pid": 19804,
+  "start": "2026-10-28T01:05:19.6942800Z"
+}

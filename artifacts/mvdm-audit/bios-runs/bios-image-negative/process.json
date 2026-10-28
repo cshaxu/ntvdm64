@@ -1,0 +1,7 @@
+{
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\bios-image-negative.py\"",
+  "diagnostic_budget_seconds": 180,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "pid": 26056,
+  "started": "2026-10-28T01:07:19.0308155Z"
+}

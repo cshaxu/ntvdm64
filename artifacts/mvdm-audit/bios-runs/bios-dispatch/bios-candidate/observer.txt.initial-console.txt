@@ -1,0 +1,3 @@
+console-window=0908060C
+observer-pid=19476 console-window-owner-pid=19476 console-window-owner=O:\repos.hobby\ntvdm64\build\tools\console-startup-observer.exe
+buffer=53,9001 viewport=0,0,52,13 maximum=53,15 font=7,16

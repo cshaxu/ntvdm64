@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1583,
+    "pending": 1576,
     "excluded": 2632,
-    "partial": 417,
+    "partial": 424,
     "full": 52
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "All 85 remaining DOS command source roles reconciled: 78 source/include inputs, two historical message-tool inputs, four source-proved obsolete modules/message bindings and one change-history note. Guest functionality and image provenance remain independent obligations."
+  "note": "Seven original BIOS integrations partial: 52 mapped functions, 256 BIOS and 30 EMS pointers bound; two real-package 836-case guest witnesses plus oracle negatives; no full/source/runtime image change."
 }

@@ -1,0 +1,1 @@
+{"result": "pass", "sources": 7, "functions": 52, "bios_slots": 256}
