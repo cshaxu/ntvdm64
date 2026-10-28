@@ -12,6 +12,8 @@ Output counts and classifications are evidence-bound snapshots. They are neither
 
 The [FCB open ownership review](dem-fcb-open-ownership-review.md) distinguishes helper and caller handle ownership and records failure-path evidence for S12. The [WOW local parameter retirement review](wow-local-parameter-retirement-review.md) records original mapping ownership and a conditional same-key cross-task boundary; its reachability and contract remain unproved.
 
+The [floppy provider review](dos-floppy-pending-owner-review.md), [video diagnostic family review](../shard-3/pending-video-diagnostic-family-review.md), and [WOW multimedia pending review](wow-multimedia-three-pending-recheck.md) distinguish unselected original profiles from selected production owners. Their file roles and original capability obligations remain pending where the selected profile and consumer evidence is insufficient; controlled close-failure observations do not establish a live guest failure.
+
 The initial snapshot at 0ccfd0acf used historical reporting_class for shards 1–3, so its status counts were incorrect. The corrected observer reads audit_status, decision and review_class respectively; candidate scope counts did not change.
 
 The [GFI provider review](gfi-alternative-provider-review.md) distinguishes compiled empty objects from usable device behavior. The [DEM lock object fixture](../host-dem/demlock-selected-object-review.md) exercises real host locks with controlled guest-register and error seams; guest and lifecycle boundaries remain open.
