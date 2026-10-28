@@ -1,0 +1,130 @@
+{
+  "tools/src/buildidx/buildidx.def": {
+    "current": {
+      "size": 105,
+      "sha256": "ed7f31123f2b7e1bc2d4a3af9f41528bd4b4bd0969a7bdca1eaaa9f9dad239b1"
+    },
+    "opennt": {
+      "size": 105,
+      "sha256": "ed7f31123f2b7e1bc2d4a3af9f41528bd4b4bd0969a7bdca1eaaa9f9dad239b1"
+    },
+    "opennt45": {
+      "size": 105,
+      "sha256": "ed7f31123f2b7e1bc2d4a3af9f41528bd4b4bd0969a7bdca1eaaa9f9dad239b1"
+    }
+  },
+  "tools/src/stripz/stripz.def": {
+    "current": {
+      "size": 110,
+      "sha256": "129d55088cdb7f4df9c7869bdb644bcabc281f4258e4412ec57efbf7e2df00e7"
+    },
+    "opennt": {
+      "size": 110,
+      "sha256": "129d55088cdb7f4df9c7869bdb644bcabc281f4258e4412ec57efbf7e2df00e7"
+    },
+    "opennt45": {
+      "size": 110,
+      "sha256": "129d55088cdb7f4df9c7869bdb644bcabc281f4258e4412ec57efbf7e2df00e7"
+    }
+  },
+  "tools/src/h2inc/h2inc.mak": {
+    "current": {
+      "size": 814,
+      "sha256": "83606d34c4266852cd70ddda991c2c403bb4851dd2be5fb8593078c39e5f229d"
+    },
+    "opennt": {
+      "size": 814,
+      "sha256": "83606d34c4266852cd70ddda991c2c403bb4851dd2be5fb8593078c39e5f229d"
+    },
+    "opennt45": {
+      "size": 814,
+      "sha256": "83606d34c4266852cd70ddda991c2c403bb4851dd2be5fb8593078c39e5f229d"
+    }
+  },
+  "tools/src/h2inc/h2inc.doc": {
+    "current": {
+      "size": 6518,
+      "sha256": "89f3ff85ca1e1c4f4359065c6a996982ef79b6e39c8c3b0835a93b9439eb29d4"
+    },
+    "opennt": {
+      "size": 6518,
+      "sha256": "89f3ff85ca1e1c4f4359065c6a996982ef79b6e39c8c3b0835a93b9439eb29d4"
+    },
+    "opennt45": {
+      "size": 6518,
+      "sha256": "89f3ff85ca1e1c4f4359065c6a996982ef79b6e39c8c3b0835a93b9439eb29d4"
+    }
+  },
+  "tools/src/buildidx/makefile": {
+    "current": {
+      "size": 342,
+      "sha256": "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b"
+    },
+    "opennt": {
+      "size": 342,
+      "sha256": "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b"
+    },
+    "opennt45": {
+      "size": 342,
+      "sha256": "471dbe9c8c39a60de2a37b73200ea2d653c7a0a99bedcd3dc46af67ac5a8570b"
+    }
+  },
+  "tools/src/stripz/makefile": {
+    "current": {
+      "size": 330,
+      "sha256": "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b"
+    },
+    "opennt": {
+      "size": 330,
+      "sha256": "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b"
+    },
+    "opennt45": {
+      "size": 330,
+      "sha256": "dafe68aa373879021acf4601a688b2791d70cc9497fadfb1994eaf3d6877bb2b"
+    }
+  },
+  "messages/makefile": {
+    "current": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    },
+    "opennt": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    },
+    "opennt45": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    }
+  },
+  "doskrnl/dos/makefile": {
+    "current": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    },
+    "opennt": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    },
+    "opennt45": {
+      "size": 14484,
+      "sha256": "4bfc3320f1f519fd3ec2e851ffa28e7f633e3594d6e17f4fe3e5f7183da57d3e"
+    }
+  },
+  "redir/makefile": {
+    "current": {
+      "size": 4223,
+      "sha256": "318569c93bb478aea0a11e078c82e2fb2d4f649d2e2cc2fb78dbfed781fde53f"
+    },
+    "opennt": {
+      "size": 4223,
+      "sha256": "318569c93bb478aea0a11e078c82e2fb2d4f649d2e2cc2fb78dbfed781fde53f"
+    },
+    "opennt45": {
+      "size": 4223,
+      "sha256": "318569c93bb478aea0a11e078c82e2fb2d4f649d2e2cc2fb78dbfed781fde53f"
+    }
+  },
+  "tools/build/Build-T225S8PrimaryNtio.ps1": "37b3364ec1cc8191e3227f3f4b4a87bec68b9f6214ea988bdaff55f66ac0edb7",
+  "tools/build/Build-T225S8PrimaryNtdos.ps1": "3f4625f2183f0cc9efc99e0912da3615875d6ecdd8383f9a0433f50ecdd946cc"
+}

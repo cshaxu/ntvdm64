@@ -1,0 +1,38 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "dos/v86/doskrnl/bios/NTIO.SYS",
+      "sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+      "wow_source_ids": "SRC:08159fc5b0e99bf4700a;SRC:1ed6c0ec9992275bba68"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/NTDOS.BIN",
+      "sha256": "25218FE6BA1A1C420448C2F2E0346481736A588553747276F950079E4A2DF92C",
+      "wow_source_ids": "SRC:4fdfddadbfa8f9758ef2;SRC:cea61fc2e26803e2b812"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/NTDOS.SYS",
+      "sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+      "wow_source_ids": "SRC:ee3e71547d1f94bf787d;SRC:ef9922c424031cc03b3e"
+    }
+  ],
+  "images": [
+    {
+      "path": "dos/v86/doskrnl/bios/NTIO.SYS",
+      "member": "WINNT/SYSTEM32/NTIO.SYS",
+      "sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+      "installed": "O:\\winnt\\system32\\NTIO.SYS"
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/NTDOS.SYS",
+      "member": "WINNT/SYSTEM32/NTDOS.SYS",
+      "sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+      "installed": "O:\\winnt\\system32\\NTDOS.SYS"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "makefile_sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E",
+  "bios_makefile_sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8",
+  "limits": "Exact image identity and historical intermediate role only; no source-to-image or guest execution proof."
+}

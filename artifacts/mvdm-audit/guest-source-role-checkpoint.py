@@ -173,7 +173,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'dos/v86/tools/src/h2inc/h2inc.c', 'dos/v86/tools/src/stripdd/stripdd.c',
                         'dos/v86/tools/src/stripz/stripz.c')) or (prefix == 'dosx-guest-role-' and path in (
                         'dpmi/486/dxintr.asm', 'dpmi/dxini.asm', 'dpmi/dxmmgr.asm', 'dpmi/dxnetbio.asm',
-                        'dpmi/dxoem.asm', 'dpmi/ntnpxem.asm', 'dpmi/usa/dxmsg.asm', 'dpmi/mk.cmd', 'dpmi/migrate.bat'))
+                        'dpmi/dxoem.asm', 'dpmi/ntnpxem.asm', 'dpmi/usa/dxmsg.asm', 'dpmi/mk.cmd', 'dpmi/migrate.bat')) or (prefix == 'dos-kernel-image-role-' and path == 'dos/v86/doskrnl/dos/NTDOS.BIN')
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':
@@ -226,7 +226,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'dosx-guest-role-':
+                if prefix == 'dos-kernel-image-role-':
+                    assert path in ('dos/v86/doskrnl/bios/NTIO.SYS', 'dos/v86/doskrnl/dos/NTDOS.SYS') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
+                elif prefix == 'dosx-guest-role-':
                     assert path == 'dpmi/486/dosx.exe' and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
                 elif prefix == 'shard0-dpmi-buffer-state-role-':
                     assert path in ('dpmi32/buffer.c', 'dpmi32/savestat.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

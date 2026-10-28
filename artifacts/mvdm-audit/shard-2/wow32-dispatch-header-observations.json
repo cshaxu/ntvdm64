@@ -1,0 +1,77 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow32/witbl.h",
+      "hashes": [
+        "F6C77E7764D702501085CE7BE7F8D8BA79CB70673E6830CB9B7FD7D0550A2A03",
+        "F6C77E7764D702501085CE7BE7F8D8BA79CB70673E6830CB9B7FD7D0550A2A03",
+        "F6C77E7764D702501085CE7BE7F8D8BA79CB70673E6830CB9B7FD7D0550A2A03"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wkbtbl.h",
+      "hashes": [
+        "416AA19BD74BFDF5B5B4BB7AE849FEE56E9ECC378F47EEA9F70ED252D8DB8CC6",
+        "416AA19BD74BFDF5B5B4BB7AE849FEE56E9ECC378F47EEA9F70ED252D8DB8CC6",
+        "416AA19BD74BFDF5B5B4BB7AE849FEE56E9ECC378F47EEA9F70ED252D8DB8CC6"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wthtbl.h",
+      "hashes": [
+        "8423DFBAB62C8EE94F069502F829317C153AE371702F851B94DA12F6A18A4B89",
+        "8423DFBAB62C8EE94F069502F829317C153AE371702F851B94DA12F6A18A4B89",
+        "8423DFBAB62C8EE94F069502F829317C153AE371702F851B94DA12F6A18A4B89"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wowtbl.h",
+      "hashes": [
+        "343409D8ADC9C2F013FBC3C44C2C1F611556321832C95037EF7F90F7E439FE01",
+        "343409D8ADC9C2F013FBC3C44C2C1F611556321832C95037EF7F90F7E439FE01",
+        "343409D8ADC9C2F013FBC3C44C2C1F611556321832C95037EF7F90F7E439FE01"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow32\\precomp.h",
+      "sha256": "84E0AB967319CF5E75BCA9CF59E5EEFABC06732D18D8317F0298D30FBD00E16B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wow32.c",
+      "sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\kdata.asm",
+      "sha256": "D6D64A703F668DE46E58E68195FC8D233DC9C464B3534F8244F6AFF6AF9F7424"
+    }
+  ],
+  "graph_path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "compile_edges": [
+    "build obj/wow32.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wow32.c",
+    "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c"
+  ],
+  "map_path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "map_symbols": [
+    "0001:00001580       _W32GetTableOffsets@4      10002580 f   wow32.obj",
+    "0001:00001c20       _InitThunkTableOffsets@0   10002c20 f   wowtbl.obj",
+    "0003:00000108       _aw32WOW                   100a2108     wowtbl.obj"
+  ],
+  "scope": "Header roles, selected object/map evidence and source dispatch references, not guest ABI or per-API runtime proof"
+}

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "145327a87",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-0/dos-kernel-image-observations.json",
+      "sha256": "258381395471AE45638C0CCC86D8547509ECCEDD4B1289B39506E3437A33B031"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest image identities and intermediate role only; no guest runtime acceptance"
+}

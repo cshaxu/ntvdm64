@@ -1,0 +1,60 @@
+{
+  "result": "pass",
+  "ledger_sha256": "9AC25CC7F3534FC69276E85D998DFAC2D89A909CB1792FC7AD76E27F9288883A",
+  "entries": [
+    {
+      "path": "wow16/inc/gdidefs.inc",
+      "sha256": "BEBAF7A5E8FC3F44847806F8EBE8CAD4C8D5D8346EC65217104EE065B590C42D",
+      "catalog_ids": "SRC:c0a5fff1c38759ebd38d;SRC:caa3eff1378a3fd859ce",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/inc/paswindw.inc",
+      "sha256": "E853182DDB41A397FB2965E4BFAF64DDE02F03A7D0F64259AF4E2039FD01BC49",
+      "catalog_ids": "SRC:22c722f65a718d79c2e5;SRC:457a97e46d0541d27e1f",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/inc/win3deb.inc",
+      "sha256": "71136D4520FD43D35B9E9938FDB34423AE51B114783A3A1B300550CA19B915E0",
+      "catalog_ids": "SRC:26a7b45961a8a675a95d;SRC:9ed6d4465c362c14553a",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "conditional_consumers": [
+    {
+      "path": "src\\mvdm\\inc\\wowfax.h",
+      "sha256": "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\test\\shell\\wowexfax.c",
+      "sha256": "6959D7503E30E2251607627D1BD55969F4415A733CE7EBDBB5807FE92C4C3893"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\kernel.inc",
+      "sha256": "946A86F0660E69FDE38D813F26762FC57D5F2543B6D07F9F8849A1FBB15A1D76"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "Literal source anchors, pending status and selected graph/dependency observations only; no preprocessing of alternate profiles, guest build or functionality verification."
+}

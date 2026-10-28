@@ -680,7 +680,7 @@ dos/v86/doskrnl/bios/msint13.asm,1,excluded,shard-1/file-audit.csv
 dos/v86/doskrnl/bios/msint13.OBJ,0,excluded,shard-0/review.csv
 dos/v86/doskrnl/bios/ntio.map,3,excluded,shard-3/file-review.csv
 dos/v86/doskrnl/bios/ntio.sym,2,excluded,shard-2/file-audit.csv
-dos/v86/doskrnl/bios/NTIO.SYS,0,pending,shard-0/review.csv
+dos/v86/doskrnl/bios/NTIO.SYS,0,partial,shard-0/review.csv
 dos/v86/doskrnl/bios/spcemm.asm,3,excluded,shard-3/file-review.csv
 dos/v86/doskrnl/bios/spcemm.OBJ,1,excluded,shard-1/file-audit.csv
 dos/v86/doskrnl/bios/spckbd.asm,1,excluded,shard-1/file-audit.csv
@@ -771,10 +771,10 @@ dos/v86/doskrnl/dos/msproc.OBJ,2,excluded,shard-2/file-audit.csv
 dos/v86/doskrnl/dos/mssw.asm,3,excluded,shard-3/file-review.csv
 dos/v86/doskrnl/dos/mstable.asm,2,excluded,shard-2/file-audit.csv
 dos/v86/doskrnl/dos/mstable.OBJ,0,excluded,shard-0/review.csv
-dos/v86/doskrnl/dos/NTDOS.BIN,0,pending,shard-0/review.csv
+dos/v86/doskrnl/dos/NTDOS.BIN,0,excluded,shard-0/review.csv
 dos/v86/doskrnl/dos/NTDOS.MAP,0,excluded,shard-0/review.csv
 dos/v86/doskrnl/dos/ntdos.sym,0,excluded,shard-0/review.csv
-dos/v86/doskrnl/dos/NTDOS.SYS,0,pending,shard-0/review.csv
+dos/v86/doskrnl/dos/NTDOS.SYS,0,partial,shard-0/review.csv
 dos/v86/doskrnl/dos/open.asm,2,excluded,shard-2/file-audit.csv
 dos/v86/doskrnl/dos/open.OBJ,0,excluded,shard-0/review.csv
 dos/v86/doskrnl/dos/origin.asm,0,excluded,shard-0/review.csv
