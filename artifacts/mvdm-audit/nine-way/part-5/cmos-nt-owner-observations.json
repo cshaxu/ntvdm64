@@ -1,0 +1,40 @@
+{
+  "result": "pass",
+  "bindings": [
+    {
+      "name": "_cmos_pickup",
+      "va": 4223152,
+      "function": true,
+      "owner": "original-softpc-system:cmosnt.obj",
+      "bytes": 3,
+      "relocation_words": 0
+    },
+    {
+      "name": "_cmos_update",
+      "va": 4223152,
+      "function": true,
+      "owner": "original-softpc-system:cmosnt.obj",
+      "bytes": 3,
+      "relocation_words": 0
+    },
+    {
+      "name": "_cmos_init",
+      "va": 4674736,
+      "function": true,
+      "owner": "original-softpc-system:cmosnt.obj",
+      "bytes": 321,
+      "relocation_words": 35
+    },
+    {
+      "name": "_cmos_post",
+      "va": 4675920,
+      "function": true,
+      "owner": "original-softpc-system:cmosnt.obj",
+      "bytes": 1115,
+      "relocation_words": 65
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "source_sha256": "00156A734520B5D59442BF9D6127F4E722A7A697F9BE33F34FEECF4AEF06D850",
+  "scope": "Selected original cmosnt exported bodies and source; no real guest or asynchronous RTC behavior"
+}

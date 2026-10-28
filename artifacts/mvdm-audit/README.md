@@ -51,6 +51,10 @@ subject to coordinator disposition and do not close runtime obligations.
 The [OLE alias interface review](cross-369/ole-alias-header-disposition.md)
 records selected dependencies and a bounded alias witness, with observation
 failure and full guest interoperability still open.
+The [selected CMOS and ROM owner review](nine-way/part-5/cmos-rom-semantic-reconciliation.md)
+and [WOW fax review](cross-369/fax-provider-disposition.md) retain their
+specific published bindings and identify untested failure paths for S13 and
+S16/S17 respectively.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
