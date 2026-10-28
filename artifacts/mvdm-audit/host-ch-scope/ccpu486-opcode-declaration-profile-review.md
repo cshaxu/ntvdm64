@@ -1,0 +1,9 @@
+# Original CCPU 486 opcode declarations: production dependency boundary
+
+This review groups six pending `softpc.new/base/ccpu386` headers with their original opcode provider sources: `bswap.h`, `cmpxchg.h`, `invd.h`, `invlpg.h`, `wbinvd.h`, and `xadd.h`. It is a selected-profile check, not an instruction or guest execution test.
+
+`c_main.c:166-173` includes those six declarations under `CPU_486`; the corresponding instruction decode/call branches in `c_main.c` are guarded by `SPC486`. The original implementation bodies in the six corresponding `.c` files are also guarded by `SPC486`. These are distinct preprocessor names, so any future profile must establish how both are defined and reconcile the exact build/call chain rather than assume enabling one necessarily enables the other.
+
+The observed cached x86 worker flags select `SPC386` and do not explicitly select `SPC486`; the current selected `c_main.obj` VALID dependency record does not include these declarations. However, individual opcode `.c` files include their matching headers before their body guard: the cached `cmpxchg.obj` and `xadd.obj` VALID records do include `cmpxchg.h` and `xadd.h` despite the inactive opcode body. Compilation or a VALID include therefore cannot be used as evidence of an active 486 instruction implementation. The existing `shard-3/cpu486-profile-boundary.md` and `ccpu-486-debug-provider-role-review.md` identify the original 486/CPU profile and dynamic test boundaries.
+
+**Recommendation:** all six physical header rows remain pending until the required original CPU profile, its exact macro/decoder/provider dependency closure, invalid/privileged cases, and guest-visible behavior are decided and verified. Do not exclude the broader instruction capability because the current profile is inactive; do not claim it restored because an otherwise-empty `.obj` or declaration exists. No guest image, product source or shared ledger was changed and no runtime test was run.

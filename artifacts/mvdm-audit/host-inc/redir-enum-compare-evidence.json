@@ -1,0 +1,18 @@
+{
+  "inputs": [
+    {
+      "path": "src/mvdm/inc/enumapis.h",
+      "sha256": "864C27F32FC218FDBC29CD137111253686AF65F6DBF77DE365FEF95EEE8F33DB"
+    },
+    {
+      "path": "src/mvdm/dos/v86/redir/enumapis.inc",
+      "sha256": "7373034D858A9C34EE5BB55D78060A1E1262A8E7D4BA9E7491C26D7680A45BBE"
+    }
+  ],
+  "c_count": 51,
+  "asm_count": 51,
+  "common": 51,
+  "different": [],
+  "only_c": [],
+  "only_asm": []
+}

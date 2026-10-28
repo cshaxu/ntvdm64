@@ -1,0 +1,28 @@
+{
+  "header_sha256": [
+    "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9",
+    "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9",
+    "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+  ],
+  "wowtbl_source_sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960",
+  "wowtbl_includes_header": true,
+  "deps_sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+  "dependency_groups": [
+    "obj/wowtbl.obj: #deps 136, deps mtime 8147760841665270 (VALID)"
+  ],
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "map_lines": [
+    "0001:00019450       _WK32GetDriveType@4        1001a450 f   wkernel.obj",
+    "0003:00000108       _aw32WOW                   100a2108     wowtbl.obj"
+  ],
+  "historical_receipt_sha256": "AE578E971D11B7B27E5BC48EA0AB12C827733D07334214EBBE16DA1F7BCF7D0C",
+  "historical_result": "pass",
+  "historical_kernel_part": {
+    "header": "wktbl2.h",
+    "base": 0,
+    "entries": 310,
+    "separator": 310
+  },
+  "historical_header_matches_current": true,
+  "limits": "Source, deps and cached-image observations only; table entries include local/unimplemented sentinels and do not establish live API behavior."
+}

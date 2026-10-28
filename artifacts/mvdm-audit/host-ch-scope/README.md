@@ -51,3 +51,9 @@ The [CCPU vglob comparison](ccpu-vglob-review.md) records a byte-identical selec
 The [WOW dialog, DIB and printer review](wow-dialog-dib-print-review.md) records original selected providers and unverified callback, selector, resolver and device boundaries.
 
 The [WOW common declarations](wow-common-declarations-review.md) bind representative GDI, kernel and USER dispatch to selected original objects; the [CCPU production shim](ccpu-debug-pig-provider-review.md) records its original no-op behavior without claiming debugger support.
+
+The [legacy CPU/redirector declarations](../host-inc/legacy-cpu-redir-declaration-review.md) and [unselected WOW declarations](../host-inc/wow-unselected-profile-followup.md) record observed profile limits without declaring their features globally excluded.
+
+The [VGA accessor and alternate trace review](vga-accessor-env-trace-review.md) is a source-role assessment; the coordinator's partial decision for byte-identical vglob is recorded in the linked vglob review.
+
+The [WOW kernel table review](wow-kernel-table-review.md) identifies the selected original table, including entries that are still local or unimplemented; table selection does not establish every API.

@@ -1,0 +1,11 @@
+# SoftPC VGA accessor duplicate and host diagnostic providers
+
+Three currently pending original host `.c` roles were checked against both OpenNT editions. Current files and both source copies hash identically per path. No guest, product or shared-ledger change and no new runtime execution was performed.
+
+| Source | Actual current selection and original ownership | Recommendation |
+| --- | --- | --- |
+| `base/ccpu386/vglob.c` | Its bytes are **exactly identical** to `base/cpu/src/evid/vglob.c`: both SHA-256 `e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8` in the current tree and both originals. The cached x86 Ninja graph selects the `cpu/src/evid` path for `obj/cvidc/vglob.obj`, not this `ccpu386` path; the worker map attributes VGA getter/setters to that selected object. | **Excluded duplicate physical source role**, conditional on this exact byte identity and selected path; the original VGA accessor capability remains selected and must still be validated for state, mapping, lifetime and failure. A same-named zero-byte `base/cvidc/vglob.c` is a third, distinct physical path and is not the selected input. |
+| `base/support/get_env.c` | Original provides `IBOOLgetenv`, `ISM32getenv`, `STRINGgetenv`; the cached object defines them and Ninja puts it in the original support archive. The inspected worker map has no matching function names. Repository search finds `ISM32getenv` used by `ccpupig.c` for PIG history; this does not establish a selected PROD caller. | **Pending:** determine other original/selected callers and environment/error semantics; object or archive presence alone is not execution. |
+| `base/video/ega_trcr.c` | Original EGA access tracer/dump bodies require `EGA_DUMP` and an outer host condition. The cached x86 object contains metadata/directives with no ordinary executable symbol. | **Pending** original tracing-profile applicability and dependencies; the EGA video/port provider remains separately selected and no claim of tracing or full VGA equivalence follows from this object. |
+
+For a later ledger merge, re-hash the files and verify `build/.ninja/msvc-x86-release/worker/build.ninja` source selection. A duplicate-file role disposition must never remove the selected accessor’s execution, guest-mode and lifecycle obligations from the functional worklist.
