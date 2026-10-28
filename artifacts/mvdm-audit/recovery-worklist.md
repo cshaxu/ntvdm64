@@ -158,3 +158,5 @@ S13 retains the [LPT selected-object failure boundary](host-comms/lpt-functional
 S13 also retains the [planar presentation handoff](host-inc/planar-presentation-functional-handoff.md) and [virtual/real floppy owner review](host-ch-scope/virtual-real-floppy-owner-review.md): verify original paint and selected host bitmap lifetimes, and separately validate empty/real/virtual disk providers with owned media and failure cases.
 
 S16 retains the [selected-object multimedia resolver failure witness](host-ch-scope/wow-winmm-resolve-object-review.md): six isolated seam scenarios establish controlled missing-provider BOOL and handle-output behavior. Establish the actual WINMM/guest contract and current package reachability before a registered minimal original-source correction; this fixture is not a real guest or private-provider ABI pass.
+
+The [original WINMM resolver contract](host-ch-scope/wow-winmm-original-contract-review.md) supplies the historical BOOL/output semantics for S16's controlled handle witness; modern private provider behavior and any real guest or extension caller remain separate prerequisites.

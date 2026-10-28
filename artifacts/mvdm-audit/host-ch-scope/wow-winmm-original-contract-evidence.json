@@ -1,0 +1,69 @@
+{
+  "inputs": [
+    {
+      "path": "src/mvdm/wow32/isvwow.h",
+      "sha256": "476DCE640711C1D05DB167E9DC137670AAD1DD96B6F99AAC65F040BCA869891F"
+    },
+    {
+      "path": "src/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/wow32/isvwow.h",
+      "sha256": "3B8357D8FA20CFBEBCF5307D0ABF0471AD93D1C74CD2C9BBE2EA42E9D2F4E132"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/wow32/isvwow.h",
+      "sha256": "3B8357D8FA20CFBEBCF5307D0ABF0471AD93D1C74CD2C9BBE2EA42E9D2F4E132"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/wow32/wmmedia.c",
+      "sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/windows/media/winmm/mmwow32.c",
+      "sha256": "7EF074733FF94FAF8676B82C72970611E64ACE109496586D76C179455CE291FA"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/windows/media/winmm/winmm.def",
+      "sha256": "001067307E014E4B53E7524703A4EA863992F35AF5AE69B9689C77B3CE927D6B"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    }
+  ],
+  "search_roots": [
+    "O:/repos.external/OpenNT/base/mvdm",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm",
+    "O:/repos.external/OpenNT-4.5/nt/private/windows"
+  ],
+  "search_extensions": [
+    "c",
+    "h",
+    "cpp",
+    "asm",
+    "def"
+  ],
+  "resolve_handle_hits": [
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm\\wow32\\isvwow.h:40:WOW32ResolveHandle(",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm\\wow32\\isvwow.h:51:** Constants for use with WOW32ResolveHandle",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm\\wow32\\wmmedia.c:197:* WOW32ResolveHandle",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm\\wow32\\wmmedia.c:203:BOOL APIENTRY WOW32ResolveHandle( UINT uHandleType, UINT uMappingDirection,",
+    "O:/repos.external/OpenNT-4.5/nt/private/mvdm\\wow32\\wow32.def:15:    WOW32ResolveHandle",
+    "O:/repos.external/OpenNT/base/mvdm\\wow32\\isvwow.h:40:WOW32ResolveHandle(",
+    "O:/repos.external/OpenNT/base/mvdm\\wow32\\isvwow.h:51:** Constants for use with WOW32ResolveHandle",
+    "O:/repos.external/OpenNT/base/mvdm\\wow32\\wmmedia.c:197:* WOW32ResolveHandle",
+    "O:/repos.external/OpenNT/base/mvdm\\wow32\\wmmedia.c:203:BOOL APIENTRY WOW32ResolveHandle( UINT uHandleType, UINT uMappingDirection,",
+    "O:/repos.external/OpenNT/base/mvdm\\wow32\\wow32.def:15:    WOW32ResolveHandle"
+  ],
+  "cached_wow32_exports": [
+    "[   8] +base[   9]  0008 WOW32DriverCallback",
+    "[   9] +base[  10]  0009 WOW32ResolveHandle"
+  ],
+  "limits": "Bounded source search and cached PE exports; dynamically obtained names, binaries, other roots, real guest reachability and modern WINMM ABI/behavior unproved."
+}
