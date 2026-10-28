@@ -1,0 +1,68 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow32/wkgthunk.h",
+      "hashes": [
+        "87E01C6D4E7DD4CD96238649530A7A3FC180B06CC4C060B49AB45CB892E74993",
+        "87E01C6D4E7DD4CD96238649530A7A3FC180B06CC4C060B49AB45CB892E74993",
+        "87E01C6D4E7DD4CD96238649530A7A3FC180B06CC4C060B49AB45CB892E74993"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wkgthunk.h"
+    },
+    {
+      "path": "wow32/wshtbl2.h",
+      "hashes": [
+        "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F",
+        "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F",
+        "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wshtbl2.h"
+    },
+    {
+      "path": "wow32/wsocktbl.h",
+      "hashes": [
+        "A16351B3392F882B17A406688CD03B27E3C9E58A358C14A75AF925C2EE0923DC",
+        "A16351B3392F882B17A406688CD03B27E3C9E58A358C14A75AF925C2EE0923DC",
+        "A16351B3392F882B17A406688CD03B27E3C9E58A358C14A75AF925C2EE0923DC"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "normalized_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wsocktbl.h"
+    }
+  ],
+  "normalized_deps_object": "obj/wowtbl.obj",
+  "compile_edges": [
+    "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c",
+    "build obj/wkgthunk.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wkgthunk.c",
+    "build obj/wshell.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wshell.c",
+    "build obj/wsraw.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wsraw.c"
+  ],
+  "map_symbols": [
+    "0001:00013a10       _wow_original_WK32ICallProc32@4 10014a10 f   wkgthunk.obj",
+    "0001:00070f00       _WK32ICallProc32@4         10071f00 f   wow_user_native_extension.obj",
+    "0001:0001bf10       _WS32RegOpenKey@4          1001cf10 f   wshell.obj",
+    "0001:0002de30       _WWS32accept@4             1002ee30 f   wsraw.obj"
+  ],
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "tables": [
+    {
+      "path": "wow32/wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "wow32/wshtbl2.h",
+      "sha256": "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F"
+    },
+    {
+      "path": "wow32/wwstbl2.h",
+      "sha256": "425F566FA0A559C2DCF79F39322A8CA3A0929371A447DE3337B0C9F6AD1BEF02"
+    }
+  ],
+  "scope": "Normalized compile dependencies and representative table/map evidence; not live calls, complete ABI or lifecycle"
+}

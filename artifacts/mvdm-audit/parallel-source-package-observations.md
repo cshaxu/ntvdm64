@@ -1,6 +1,9 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 87 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 89 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [wow32-generic-shell-socket](shard-2/wow32-generic-shell-socket-review.md): [observer](shard-2/wow32-generic-shell-socket-observer.py), [receipt](shard-2/wow32-generic-shell-socket-observations.json).
+- [dos-utility-image](shard-3/dos-utility-image-role-review.md): [observer](shard-3/dos-utility-image-observer.py), [receipt](shard-3/dos-utility-image-observations.json).
 
 - [debug-trace-header](shard-1/debug-trace-header-review.md): [observer](shard-1/debug-trace-header-observer.py), [receipt](shard-1/debug-trace-header-observations.json).
 - [wow32-media-message](shard-2/wow32-media-message-review.md): [observer](shard-2/wow32-media-message-observer.py), [receipt](shard-2/wow32-media-message-observations.json).

@@ -1,0 +1,116 @@
+{
+  "backup/backup.exe": {
+    "current": {
+      "size": 22966,
+      "sha256": "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239",
+      "magic": "4b57414a"
+    },
+    "opennt": null,
+    "opennt45": {
+      "size": 22966,
+      "sha256": "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239",
+      "magic": "4b57414a"
+    }
+  },
+  "edlin/EDLIN.EXE": {
+    "current": {
+      "size": 12642,
+      "sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+      "magic": "4d5a6201"
+    },
+    "opennt": {
+      "size": 12642,
+      "sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+      "magic": "4d5a6201"
+    },
+    "opennt45": {
+      "size": 12642,
+      "sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+      "magic": "4d5a6201"
+    }
+  },
+  "command/command.exc": {
+    "current": {
+      "size": 51152,
+      "sha256": "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+      "magic": "4d5ad001"
+    },
+    "opennt": {
+      "size": 51152,
+      "sha256": "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+      "magic": "4d5ad001"
+    },
+    "opennt45": {
+      "size": 51152,
+      "sha256": "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+      "magic": "4d5ad001"
+    }
+  },
+  "backup/makefile": {
+    "current": {
+      "size": 186,
+      "sha256": "a913c18762bace9281d7104023f1e47cb0671978d1789fa9803d463789249c5d",
+      "magic": "23204d56"
+    },
+    "opennt": {
+      "size": 186,
+      "sha256": "a913c18762bace9281d7104023f1e47cb0671978d1789fa9803d463789249c5d",
+      "magic": "23204d56"
+    },
+    "opennt45": {
+      "size": 186,
+      "sha256": "a913c18762bace9281d7104023f1e47cb0671978d1789fa9803d463789249c5d",
+      "magic": "23204d56"
+    }
+  },
+  "edlin/makefile": {
+    "current": {
+      "size": 3318,
+      "sha256": "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8",
+      "magic": "23204d61"
+    },
+    "opennt": {
+      "size": 3318,
+      "sha256": "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8",
+      "magic": "23204d61"
+    },
+    "opennt45": {
+      "size": 3318,
+      "sha256": "d65923831d872f4f9eece055f72573e08cc4e853b74fec20f54936045d9746b8",
+      "magic": "23204d61"
+    }
+  },
+  "command/makefile": {
+    "current": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4",
+      "magic": "232a2a2a"
+    },
+    "opennt": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4",
+      "magic": "232a2a2a"
+    },
+    "opennt45": {
+      "size": 20162,
+      "sha256": "cf9dde2533c39677ce19078dc9a04489ee4e97aad21672a3d8343e40d66cd2c4",
+      "magic": "232a2a2a"
+    }
+  },
+  "package_members": [
+    {
+      "name": "WINNT/SYSTEM32/COMMAND.COM",
+      "size": 50384,
+      "sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+    }
+  ],
+  "installed_O:\\winnt\\BACKUP.EXE": null,
+  "installed_O:\\winnt\\system32\\BACKUP.EXE": null,
+  "installed_O:\\winnt\\EDLIN.EXE": null,
+  "installed_O:\\winnt\\system32\\EDLIN.EXE": null,
+  "installed_O:\\winnt\\COMMAND.COM": null,
+  "installed_O:\\winnt\\system32\\COMMAND.COM": {
+    "size": 50384,
+    "sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+  }
+}

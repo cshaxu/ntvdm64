@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "381203570",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-2/wow32-media-message-observations.json",
+      "sha256": "4EF20008C8359A80C7F5CF5C76CB88C000C09EC833E6E71C6749EA0E592E9EA4"
+    },
+    {
+      "path": "shard-2/wow32-dispatch-header-observations.json",
+      "sha256": "D10AC088339F786E357FFEB507238860F58120133AA4453CD5715C073BB02373"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original declaration dependencies only; no guest runtime acceptance"
+}

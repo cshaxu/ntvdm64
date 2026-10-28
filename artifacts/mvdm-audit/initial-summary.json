@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1289,
+    "pending": 1285,
     "excluded": 2739,
-    "partial": 603,
+    "partial": 607,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Twelve empty original guard file roles are excluded; CPU and video functionality remain in scope."
+  "note": "Four original multimedia and dispatch declaration roles remain partial; guest execution remains in scope."
 }
