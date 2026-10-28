@@ -1,0 +1,343 @@
+{
+  "result": "pass",
+  "tables": [
+    {
+      "name": "_apfnSVCCmd",
+      "owner": "original-mvdm-command:cmddisp.obj",
+      "object": "obj/command/cmddisp.obj",
+      "object_sha256": "8366453007524038E6E4DBD7ACFA0E49422A57821853322C63B59CD3A6F0D701",
+      "build_edge": "build obj/command/cmddisp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmddisp.c",
+      "dependency": "obj/command/cmddisp.obj: #deps 12, deps mtime 8147412826718550 (VALID)",
+      "entries": [
+        {
+          "index": 0,
+          "target": "_cmdExitVDM",
+          "value": 4569536,
+          "owners": [
+            "original-mvdm-command:cmdexit.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "target": "_cmdGetNextCmd",
+          "value": 5577472,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "target": "_cmdComSpec",
+          "value": 5576784,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "target": "_cmdSaveWorld",
+          "value": 4223152,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "target": "_cmdGetCurrentDir",
+          "value": 5577104,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "target": "_cmdSetInfo",
+          "value": 5580208,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "target": "_cmdGetStdHandle",
+          "value": 5574144,
+          "owners": [
+            "original-mvdm-command:cmdredir.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "target": "_cmdCheckBinary",
+          "value": 5580832,
+          "owners": [
+            "original-mvdm-command:cmdexec.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "target": "_cmdExec",
+          "value": 5582912,
+          "owners": [
+            "original-mvdm-command:cmdexec.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "target": "_cmdInitConsole",
+          "value": 5580176,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "target": "_cmdExecComspec32",
+          "value": 5583792,
+          "owners": [
+            "original-mvdm-command:cmdexec.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "target": "_cmdReturnExitCode",
+          "value": 5584032,
+          "owners": [
+            "original-mvdm-command:cmdexec.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "target": "_cmdGetConfigSys",
+          "value": 5573120,
+          "owners": [
+            "original-mvdm-command:cmdconf.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "target": "_cmdGetAutoexecBat",
+          "value": 5572944,
+          "owners": [
+            "original-mvdm-command:cmdconf.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "target": "_cmdGetKbdLayout",
+          "value": 5584336,
+          "owners": [
+            "original-mvdm-command:cmdkeyb.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "target": "_cmdGetInitEnvironment",
+          "value": 5586672,
+          "owners": [
+            "original-mvdm-command:cmdenv.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "target": "_cmdGetStartInfo",
+          "value": 5580144,
+          "owners": [
+            "original-mvdm-command:cmdmisc.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_apfnSVCIoctl",
+      "owner": "original-mvdm-dem:demioctl.obj",
+      "object": "obj/dem/demioctl.obj",
+      "object_sha256": "8F7C68C94E3556613EC42CF513E64E2EB20DDC4EF6E6F3AAD22109FEB33E9B54",
+      "build_edge": "build obj/dem/demioctl.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demioctl.c",
+      "dependency": "obj/dem/demioctl.obj: #deps 23, deps mtime 8147412820708760 (VALID)",
+      "entries": [
+        {
+          "index": 0,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "target": "_demIoctlChangeable",
+          "value": 5564416,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "target": "_demIoctlChangeable",
+          "value": 5564416,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "target": "_demIoctlDiskGeneric",
+          "value": 5564688,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 17,
+          "target": "_demIoctlDiskQuery",
+          "value": 5566768,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        },
+        {
+          "index": 18,
+          "target": "_demIoctlInvalid",
+          "value": 5564656,
+          "owners": [
+            "original-mvdm-dem:demioctl.obj"
+          ]
+        }
+      ]
+    }
+  ],
+  "pif": {
+    "duplicate_sha256": "1C629826EBA5A5437C481E8B4827298E5F178FA0EAA9CEACEB517CC80FE2E4C9",
+    "selected_header_sha256": "A8069D676141812CDDC35ADB0B29EA58E58BBA0A7F29DCF287468108188B8D09",
+    "direct_include_matches": 0,
+    "dependency_blocks": 639,
+    "providers": [
+      {
+        "name": "_GetPIFData",
+        "va": 4556080,
+        "function": true,
+        "owner": "original-softpc-host-roots:nt_pif.obj",
+        "bytes": 1838,
+        "relocation_words": 43,
+        "object_sha256": "4FF4E8C23A1FC58BFE86BB05CD083F4FFA7CCB13159E8F3988F14ECCA375365C"
+      },
+      {
+        "name": "_cmdCheckForPIF",
+        "va": 5799072,
+        "function": true,
+        "owner": "original-mvdm-command:cmdpif.obj",
+        "bytes": 1437,
+        "relocation_words": 78,
+        "object_sha256": "E09236BCD62857AB381E4692174CE5D0F2F594865E0FDE1B553EEB2329049AEF"
+      }
+    ]
+  },
+  "image_sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097",
+  "map_sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Initial image dispatch pointers only; no guest execution, failure or resource lifecycle claim"
+}

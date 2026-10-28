@@ -18,3 +18,8 @@ execution or complete behavior. Each source retains 100% original text; an
 overall restored-behavior percentage cannot be inferred. The potential
 debug-only dispatch checks are source findings, not reproduced crashes.
 Additional shard proposals remain separate pending coordinator review.
+
+The [follow-up shard review](shard-2/parallel-review-next.md) independently
+resolves all 17 command and 19 IOCTL table entries in the released image. The
+coordinator replayed its observer and matched the recorded receipt. This
+establishes initial table targets, not guest execution or error handling.
