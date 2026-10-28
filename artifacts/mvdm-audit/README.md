@@ -40,6 +40,9 @@ one partial image and eight historical input roles without excluding features.
 The [bit and rotate checkpoint](shard-0/ccpu-bit-rotate-image-review.md) binds
 two CCPU instruction bodies and retains S11 guest execution obligations.
 
+The [DDEML and WFWNET checkpoint](parallel-ddeml-wfwnet-role-review.md)
+reconciles twelve guest-input and editor-state roles without excluding features.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 

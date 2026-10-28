@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "426b1ffbd",
+  "candidate_count": 12,
+  "source_tables": [
+    {
+      "path": "shard-1/guest-ddeml-tests-observations.json",
+      "sha256": "7CCEF261F1759EA26BB8E41E63C6431EC2D8088551EBCDE46C07E85D029F4DBB"
+    },
+    {
+      "path": "shard-2/win16-wfwnet-guest-observations.json",
+      "sha256": "B215E91C5A3901F09E879B9B35F99FE53FB844E5794C44B7FE9C8EF3C43D4F6D"
+    },
+    {
+      "path": "shard-3/dos-messages-observations.json",
+      "sha256": "868E647D15947D4C84C0CE521601D20A96307411FDE478612DAD5A0A209E5D15"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest input and editor-state file roles; no guest runtime acceptance"
+}

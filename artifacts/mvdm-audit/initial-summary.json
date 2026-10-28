@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1343,
-    "excluded": 2697,
+    "pending": 1331,
+    "excluded": 2709,
     "partial": 591,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "BTC and RCL selected source bodies remain partial; full guest semantics remain in scope."
+  "note": "Twelve historical guest input or editor-state file roles are excluded, not their guest features."
 }

@@ -162,7 +162,12 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'wow16/drivers/keyboard/keyboard.rcv')) or (prefix == 'parallel-gdi-ctl3d-role-' and path in (
                         'wow16/gdi/gdi.rcv', 'wow16/ctl3dv2/readme.txt', 'wow16/ctl3dv2/ctl3d.doc',
                         'wow16/ctl3dv2/ctl3d.c', 'wow16/ctl3dv2/ctl3d.h', 'wow16/ctl3dv2/common.ver',
-                        'dos/v86/cmd/graphics/GRAPHICS.EXC', 'dos/v86/cmd/graphics/graphics.tag'))
+                        'dos/v86/cmd/graphics/GRAPHICS.EXC', 'dos/v86/cmd/graphics/graphics.tag')) or (prefix == 'parallel-ddeml-wfwnet-role-' and path in (
+                        'wow16/ddeml/STRIPPED.DEF', 'wow16/ddeml/tests/ddestrs/ddestrs.c',
+                        'wow16/ddeml/tests/ddestrs/ddestrs.rc', 'wow16/ddeml/tests/ddestrs/globals.h',
+                        'wow16/ddeml/tests/ddestrs/mk4dos.cmd', 'wow16/ddeml/tests/src/client/ddemlcl.h',
+                        'wow16/wfwnet/bseerr.h', 'wow16/wfwnet/libentry.asm', 'wow16/wfwnet/wfwnet.c',
+                        'wow16/wfwnet/wfwnet.rcv', 'wow16/wfwnet/WFWNET.RES', 'dos/v86/messages/state.rst'))
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':
