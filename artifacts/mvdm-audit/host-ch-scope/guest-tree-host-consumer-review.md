@@ -41,5 +41,19 @@ case. The four graphs and recorded dependencies do not name that guest path;
 the original conditional is nevertheless retained as evidence of dual-use
 source and requires separate review if that profile is in scope.
 
+The [per-file name-collision receipt](guest-tree-name-collision-evidence.json)
+enumerates all 473 candidates, their current hashes, every lexical include
+with the same basename in the scoped host C/H files, and recorded dependency
+paths with that basename. Reproduce it with
+`python artifacts/mvdm-audit/host-ch-scope/guest-tree-name-collision-observe.py`.
+It does not resolve include search order or preprocessor conditionals. The
+receipt has 53 candidate rows with host lexical collisions and 15 with
+recorded same-name dependencies, none of which establish guest-tree use.
+Original editions and current bytes agree for `inc/wowfax.h`,
+`wow16/inc/print.h`, `dos/v86/h/bios.h`, `softpc.new/base/inc/bios.h`,
+`wow16/inc/dde.h`, and both guest/host `isz.h` variants. In contrast,
+`nt_bop.c` and `wow32/precomp.h` differ from both originals, so the current
+lexical references alone cannot prove their original selected build paths.
+
 No guest or host source was changed or compiled. These observations do not
 prove runtime behavior or decide the per-file ledger classifications.

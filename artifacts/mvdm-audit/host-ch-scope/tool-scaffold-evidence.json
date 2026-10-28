@@ -1,0 +1,1036 @@
+{
+  "inventory_sha256": "BA07C656C6FE3691E0A4558BA6B74DC37EC822EED048EEC6CE19057CE74D831D",
+  "graphs": [
+    {
+      "tree": "msvc-x86-release/worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+      "deps_sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1"
+    },
+    {
+      "tree": "msvc-x86-release/wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "deps_sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9"
+    },
+    {
+      "tree": "msvc-x64-release/worker",
+      "graph_sha256": "732526CCA6BAE92E860B6ED415EE96F0912C8CD3331ED87846EFF5BDAEFC44C5",
+      "deps_sha256": "75D7A478FD5F1B59D590E1E08C743B9551541FB29A3FC3989785952DCB1EB8A0"
+    },
+    {
+      "tree": "pkg-uuid-x86/worker",
+      "graph_sha256": "B1BC7B95C2A9DBC1A9DD8CC88931D86941EE146017C37A5ECCB6843FA80AC470",
+      "deps_sha256": "D7C2F7D3E0164F3E970C3FC2FB16822E8E941D526406B408A868ECC0EE025FEC"
+    }
+  ],
+  "rows": [
+    {
+      "path": "bde/bde.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "E85678F92DA6F86F65E30B38530CCDA84A03D632EE39917D5B3EEC81D1A8FC8E",
+        "E85678F92DA6F86F65E30B38530CCDA84A03D632EE39917D5B3EEC81D1A8FC8E",
+        "E85678F92DA6F86F65E30B38530CCDA84A03D632EE39917D5B3EEC81D1A8FC8E"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdecmds.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "DDCC992C69FA9F390780A935C2B3721B1DF59EF148B15554B338CFBD248B110E",
+        "DDCC992C69FA9F390780A935C2B3721B1DF59EF148B15554B338CFBD248B110E",
+        "DDCC992C69FA9F390780A935C2B3721B1DF59EF148B15554B338CFBD248B110E"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdeheap.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "D681E9C5C124705AA2EABF999B0038D5409F6F9BBEA964D9ED100548C6AE6C7A",
+        "D681E9C5C124705AA2EABF999B0038D5409F6F9BBEA964D9ED100548C6AE6C7A",
+        "D681E9C5C124705AA2EABF999B0038D5409F6F9BBEA964D9ED100548C6AE6C7A"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdemisc.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "0BF544626A6E6B2BCD80F52EFB21942EAA58FCFD0E1B1A682652C975E290919B",
+        "0BF544626A6E6B2BCD80F52EFB21942EAA58FCFD0E1B1A682652C975E290919B",
+        "0BF544626A6E6B2BCD80F52EFB21942EAA58FCFD0E1B1A682652C975E290919B"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdestack.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "D832C428E64D72B312662A716A1A468986A6F142C1102BD2264849633526E86C",
+        "D832C428E64D72B312662A716A1A468986A6F142C1102BD2264849633526E86C",
+        "D832C428E64D72B312662A716A1A468986A6F142C1102BD2264849633526E86C"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdesym.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "C885AEA477F81E03FAF75C1F6FAD6AF2782660F005DDB597BA45059B3037C096",
+        "C885AEA477F81E03FAF75C1F6FAD6AF2782660F005DDB597BA45059B3037C096",
+        "C885AEA477F81E03FAF75C1F6FAD6AF2782660F005DDB597BA45059B3037C096"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/bdeutil.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "0B9F7BDCB968AD38D95C2170AFB0E84325C77E6D7A68161B6D63A89E4FCD225B",
+        "0B9F7BDCB968AD38D95C2170AFB0E84325C77E6D7A68161B6D63A89E4FCD225B",
+        "0B9F7BDCB968AD38D95C2170AFB0E84325C77E6D7A68161B6D63A89E4FCD225B"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/data.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "5DA2D4E3CD95333273F4C136686F91774685BB017AAD14E59E1316C45A601F16",
+        "5DA2D4E3CD95333273F4C136686F91774685BB017AAD14E59E1316C45A601F16",
+        "5DA2D4E3CD95333273F4C136686F91774685BB017AAD14E59E1316C45A601F16"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/disasm.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "8A59C16E5EDD056761B3FABCD2D67C07F2FB896B0128B8F82DAB2EF3B9336417",
+        "8A59C16E5EDD056761B3FABCD2D67C07F2FB896B0128B8F82DAB2EF3B9336417",
+        "8A59C16E5EDD056761B3FABCD2D67C07F2FB896B0128B8F82DAB2EF3B9336417"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "bde/precomp.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "7D2FD3883FC253312963C68F750005343C2499FA2EFFDBBCED6EA1807E5DBE5C",
+        "7D2FD3883FC253312963C68F750005343C2499FA2EFFDBBCED6EA1807E5DBE5C",
+        "7D2FD3883FC253312963C68F750005343C2499FA2EFFDBBCED6EA1807E5DBE5C"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/bde/sources",
+      "original_local_sources_sha256": "A3166C1925CDC05EBE956067F47AADE02B0706BE9ED84FD301F2D78BFA9B2E9C",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/alpha/helpp.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/alpha/sources",
+      "original_local_sources_sha256": "3EB1457C45EFD8C92FA64699696DE04B30A5134BF3F32DB228E38B23A2900C80",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/data.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "C8545C33806E1CFCFEE94971542232E266A8693F0B41C04A2FD77A3D5232680D",
+        "C8545C33806E1CFCFEE94971542232E266A8693F0B41C04A2FD77A3D5232680D",
+        "C8545C33806E1CFCFEE94971542232E266A8693F0B41C04A2FD77A3D5232680D"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/help.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "F27DDDEE55C29F080A4679BC1653384C28147961D497D04F2A7F85C89F3F13E4",
+        "F27DDDEE55C29F080A4679BC1653384C28147961D497D04F2A7F85C89F3F13E4",
+        "F27DDDEE55C29F080A4679BC1653384C28147961D497D04F2A7F85C89F3F13E4"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/i386/helpp.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "ABD758FE693D3BBB9DEBD649E890AA425B96A6A780B4E8D466E7A58D21B60D24",
+        "ABD758FE693D3BBB9DEBD649E890AA425B96A6A780B4E8D466E7A58D21B60D24",
+        "ABD758FE693D3BBB9DEBD649E890AA425B96A6A780B4E8D466E7A58D21B60D24"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/i386/sources",
+      "original_local_sources_sha256": "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/i386/profile.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "04AB8D21C213F98829229C0EAADF5BCE0A2A48F455075998A7B12CC4793ABA6F",
+        "04AB8D21C213F98829229C0EAADF5BCE0A2A48F455075998A7B12CC4793ABA6F",
+        "04AB8D21C213F98829229C0EAADF5BCE0A2A48F455075998A7B12CC4793ABA6F"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/i386/sources",
+      "original_local_sources_sha256": "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/i386/reflect.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "AB3D3DB2571D39DBA5E6DF8EA51743EF29DDBCB23265A11C4B3E44A8CD5F72A2",
+        "AB3D3DB2571D39DBA5E6DF8EA51743EF29DDBCB23265A11C4B3E44A8CD5F72A2",
+        "AB3D3DB2571D39DBA5E6DF8EA51743EF29DDBCB23265A11C4B3E44A8CD5F72A2"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/i386/sources",
+      "original_local_sources_sha256": "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/i386/regs.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "49618545C379EC52E42777962062534EABB6086943CCA7E208DC6E04D4AFCE99",
+        "49618545C379EC52E42777962062534EABB6086943CCA7E208DC6E04D4AFCE99",
+        "49618545C379EC52E42777962062534EABB6086943CCA7E208DC6E04D4AFCE99"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/i386/sources",
+      "original_local_sources_sha256": "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/i386/vdmtib.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "F4FB7E8955CACB599D9E360AB0370A4D987C00DA9839B270972DC8A6108E4F07",
+        "F4FB7E8955CACB599D9E360AB0370A4D987C00DA9839B270972DC8A6108E4F07",
+        "F4FB7E8955CACB599D9E360AB0370A4D987C00DA9839B270972DC8A6108E4F07"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/i386/sources",
+      "original_local_sources_sha256": "FF2B196A612D536EA3254730F0CE0C0CC36575151D282E8CC088006C779B18EF",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/ieuvddex.h",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "17257EB303D196B6CD7449A7F2F63FF0D3F865DF550C9D760F9D536B17BBCC37",
+        "17257EB303D196B6CD7449A7F2F63FF0D3F865DF550C9D760F9D536B17BBCC37",
+        "17257EB303D196B6CD7449A7F2F63FF0D3F865DF550C9D760F9D536B17BBCC37"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/mips/helpp.c",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/mips/sources",
+      "original_local_sources_sha256": "95FC212046390F868794E00AE013E9AB1E75E39A47B4BB8184BD0E5E7B512C7F",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/pmode.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "30187F0832C3EA0BC1933321FB247EEC4B6D3D2A4749AD05375DD44409BE0349",
+        "30187F0832C3EA0BC1933321FB247EEC4B6D3D2A4749AD05375DD44409BE0349",
+        "30187F0832C3EA0BC1933321FB247EEC4B6D3D2A4749AD05375DD44409BE0349"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/ppc/helpp.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87",
+        "987252587BAB9B164E668D55D781F79AF31118C6724FCE27F73BBCD3A69DAF87"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/ppc/sources",
+      "original_local_sources_sha256": "01FA076021A5E7603902A736CA60FEEF8CBB66626050B9012C945C35662765C2",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/procdep.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "33912500D91E1C6A59C7986F19C9E7B251371EE54F675407E1CBD90B8AD7910A",
+        "33912500D91E1C6A59C7986F19C9E7B251371EE54F675407E1CBD90B8AD7910A",
+        "33912500D91E1C6A59C7986F19C9E7B251371EE54F675407E1CBD90B8AD7910A"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/system.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "92A40AD25C423891B11F9D8EC993B75603CF01AE1C0A8966E1D5CBA1C63699DD",
+        "92A40AD25C423891B11F9D8EC993B75603CF01AE1C0A8966E1D5CBA1C63699DD",
+        "92A40AD25C423891B11F9D8EC993B75603CF01AE1C0A8966E1D5CBA1C63699DD"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "ieuvddex/trace.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "B1F435775188A93D9BDD20CFDF4DE08E0194D6AA86B695F092336E441A6B9143",
+        "B1F435775188A93D9BDD20CFDF4DE08E0194D6AA86B695F092336E441A6B9143",
+        "B1F435775188A93D9BDD20CFDF4DE08E0194D6AA86B695F092336E441A6B9143"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/ieuvddex/sources",
+      "original_local_sources_sha256": "442081D62891ABCE4B675FC23634EC7FC724659483DD56BD67CF65632A6CA41B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/fakebop.c",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "0E24CD7D4828F3DFBCDB77484816B5F991164E09FB3E6EDAD021A648455118E1",
+        "0E24CD7D4828F3DFBCDB77484816B5F991164E09FB3E6EDAD021A648455118E1"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/fakeinit.c",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "B749F4EA4B08E51A5C6C7FCDC01C6BE8A28C27A576D75BECEE9692C95A83493B",
+        "B749F4EA4B08E51A5C6C7FCDC01C6BE8A28C27A576D75BECEE9692C95A83493B"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/fakekbd.c",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "A6090B757ED4157BE5D0BB8D0D179F8BA275FB4B3A97F6ED43DAA5368DB06E13",
+        "A6090B757ED4157BE5D0BB8D0D179F8BA275FB4B3A97F6ED43DAA5368DB06E13"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/fakevid.c",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "303EB5D066D565F6A061A5A7FBA5F4E1D5BC876E0816A809FEDB24AECC2679DC",
+        "303EB5D066D565F6A061A5A7FBA5F4E1D5BC876E0816A809FEDB24AECC2679DC"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/fun.h",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "DFFD43367CB54A386DFB3E0D49FF6A553F9328283D2C53297B4EBCDC36459E5E",
+        "DFFD43367CB54A386DFB3E0D49FF6A553F9328283D2C53297B4EBCDC36459E5E"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/softpc.c",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "4272B1AAFA096106981FB1445846C5E3C317F8849B084734C1C2F472C5C3B3F6",
+        "4272B1AAFA096106981FB1445846C5E3C317F8849B084734C1C2F472C5C3B3F6"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/stubs.c",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "41825D03737AB8B001993798A2FCD20D752A81BDC8CF95D098B5929E70A97D4B",
+        "41825D03737AB8B001993798A2FCD20D752A81BDC8CF95D098B5929E70A97D4B"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/x86.h",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "EB08D62FBD5FD91535008F8631F33BDEDB685F88A40BA085852F497130B1E734",
+        "EB08D62FBD5FD91535008F8631F33BDEDB685F88A40BA085852F497130B1E734"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xbios.h",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "B402F5C2234279A8AF13EC749CB54EE6AC75A2B0858D55503A56AAB9611F379A",
+        "B402F5C2234279A8AF13EC749CB54EE6AC75A2B0858D55503A56AAB9611F379A"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xbiosdsk.h",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "124BEB9004CE7370536D2D49811AA0A1841BE01FDD0EF78A8E6A956FE897FAF2",
+        "124BEB9004CE7370536D2D49811AA0A1841BE01FDD0EF78A8E6A956FE897FAF2"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xbioskbd.h",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "4880BC4E4D5E2FD18F7E6E196B38C9467D03D9F114B940F194D0545D8418FC02",
+        "4880BC4E4D5E2FD18F7E6E196B38C9467D03D9F114B940F194D0545D8418FC02"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xbiosvid.h",
+      "ledger_status": "excluded",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "2B80EC8CEC0E389B4A0B269258742C16262A5C6728DF5DEBB7AEF472658BBD87",
+        "2B80EC8CEC0E389B4A0B269258742C16262A5C6728DF5DEBB7AEF472658BBD87"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xguest.h",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "1FC978BC102B6FE08D5343D680108AC4BF5405DC693D00004622B11D4C564926",
+        "1FC978BC102B6FE08D5343D680108AC4BF5405DC693D00004622B11D4C564926"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "v86/scaffold/i386/xwincon.h",
+      "ledger_status": "\u6574\u4f53\u6392\u9664",
+      "sha256_current_opennt_opennt45": [
+        null,
+        "B4249A9C3B62170E78CC2FF5A287170882115C8407BC899FF270B7D383BE5EE9",
+        "B4249A9C3B62170E78CC2FF5A287170882115C8407BC899FF270B7D383BE5EE9"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/v86/scaffold/i386/sources",
+      "original_local_sources_sha256": "6145F630AEA1E36EBB30600E8CFBEFC8FA62E0622881F30E172089AC272B571A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/data.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5",
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5",
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/debug.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC",
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC",
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/dib.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47",
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47",
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/disasm.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71",
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71",
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/heap.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F",
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F",
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/help.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942",
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942",
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/i386/profile.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA",
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA",
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA"
+      ],
+      "original_local_sources": null,
+      "original_local_sources_sha256": null,
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/i386/regs.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60",
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60",
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60"
+      ],
+      "original_local_sources": null,
+      "original_local_sources_sha256": null,
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/i386/vdmtib.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8",
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8",
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8"
+      ],
+      "original_local_sources": null,
+      "original_local_sources_sha256": null,
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/misc.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9",
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9",
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/platform.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53",
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53",
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/precomp.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1",
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1",
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/reflect.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "1776B1242808A0D3C456ED7725F16B55EACD2326BCE5370C06F3D1A66048B433",
+        "1776B1242808A0D3C456ED7725F16B55EACD2326BCE5370C06F3D1A66048B433",
+        "1776B1242808A0D3C456ED7725F16B55EACD2326BCE5370C06F3D1A66048B433"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/stack.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "EB5992DAD41AEB3D8CC325A49AAE8F586E3FDF6552250D71BD84708C86525F39",
+        "EB5992DAD41AEB3D8CC325A49AAE8F586E3FDF6552250D71BD84708C86525F39",
+        "EB5992DAD41AEB3D8CC325A49AAE8F586E3FDF6552250D71BD84708C86525F39"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/sym.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "469C9612DE293034FDBC7A74E1D2BD479222FE1CD3E1350F1F90C0737C2D701E",
+        "469C9612DE293034FDBC7A74E1D2BD479222FE1CD3E1350F1F90C0737C2D701E",
+        "469C9612DE293034FDBC7A74E1D2BD479222FE1CD3E1350F1F90C0737C2D701E"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/system.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "A9A4A81D076C075BB3BB1B6BF62BE8EF45A8B5EC44DE009F24BCDD1B9989FEED",
+        "A9A4A81D076C075BB3BB1B6BF62BE8EF45A8B5EC44DE009F24BCDD1B9989FEED",
+        "A9A4A81D076C075BB3BB1B6BF62BE8EF45A8B5EC44DE009F24BCDD1B9989FEED"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/trace.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "167378C220D44D08CC9ABBB7FB53948BC9D7AC6D6199473E05E9366A68D292C3",
+        "167378C220D44D08CC9ABBB7FB53948BC9D7AC6D6199473E05E9366A68D292C3",
+        "167378C220D44D08CC9ABBB7FB53948BC9D7AC6D6199473E05E9366A68D292C3"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/util.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "572625BF57190ADE673921F11A564C36E45F8458CBB5C63726B9D00D55E89702",
+        "572625BF57190ADE673921F11A564C36E45F8458CBB5C63726B9D00D55E89702",
+        "572625BF57190ADE673921F11A564C36E45F8458CBB5C63726B9D00D55E89702"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/vdmexts.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "1E79C2AE94E529E01122A087A728A16561C36D26C76052C06B18DB5DED498E76",
+        "1E79C2AE94E529E01122A087A728A16561C36D26C76052C06B18DB5DED498E76",
+        "1E79C2AE94E529E01122A087A728A16561C36D26C76052C06B18DB5DED498E76"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/wow.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "385755E94188901161A9E22D63790210F25AF014E0A06878655C86F0AF856EC4",
+        "385755E94188901161A9E22D63790210F25AF014E0A06878655C86F0AF856EC4",
+        "385755E94188901161A9E22D63790210F25AF014E0A06878655C86F0AF856EC4"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmexts/wowprof.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "BA37908B211095F7D8785690485390C924217EE1B82757F046CAE8F99BE6B73D",
+        "BA37908B211095F7D8785690485390C924217EE1B82757F046CAE8F99BE6B73D",
+        "BA37908B211095F7D8785690485390C924217EE1B82757F046CAE8F99BE6B73D"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmexts/sources",
+      "original_local_sources_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/forcedos/forcedos.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "27AAA61A441CD754FB8373C3DF0EBB3FF49A098926C1AEC0151AC9DEB5927F44",
+        "27AAA61A441CD754FB8373C3DF0EBB3FF49A098926C1AEC0151AC9DEB5927F44",
+        "27AAA61A441CD754FB8373C3DF0EBB3FF49A098926C1AEC0151AC9DEB5927F44"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/forcedos/sources",
+      "original_local_sources_sha256": "96AB7BB58EE49573441FE8D0713A769946130A1AF05CE7DAFA7D5F5E848CD99B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/forcedos/forcedos.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "9383FC6B92E6250A00793BD1EBC608026AE8061DB09D5F75E60D7964D5BC4544",
+        "9383FC6B92E6250A00793BD1EBC608026AE8061DB09D5F75E60D7964D5BC4544",
+        "9383FC6B92E6250A00793BD1EBC608026AE8061DB09D5F75E60D7964D5BC4544"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/forcedos/sources",
+      "original_local_sources_sha256": "96AB7BB58EE49573441FE8D0713A769946130A1AF05CE7DAFA7D5F5E848CD99B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/forcedos/pif.h",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "6473E80A539B746F5AF25C15AFB85F2F1498B0A0F429FEA861708E78D9E9D266",
+        "6473E80A539B746F5AF25C15AFB85F2F1498B0A0F429FEA861708E78D9E9D266",
+        "6473E80A539B746F5AF25C15AFB85F2F1498B0A0F429FEA861708E78D9E9D266"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/forcedos/sources",
+      "original_local_sources_sha256": "96AB7BB58EE49573441FE8D0713A769946130A1AF05CE7DAFA7D5F5E848CD99B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/graftabl/graftabl.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "25AF644F4F196B707FD0F2619FE7F1947CABDC73AB7E6436DB4FA1E044BFC88B",
+        "25AF644F4F196B707FD0F2619FE7F1947CABDC73AB7E6436DB4FA1E044BFC88B",
+        "25AF644F4F196B707FD0F2619FE7F1947CABDC73AB7E6436DB4FA1E044BFC88B"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/graftabl/sources",
+      "original_local_sources_sha256": "9B6FEDFD4357BF4A8C45426A6BFF4DFA134588B0631471FBA0D5EB8DB1D4506A",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/graftabl/graftabl.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008",
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008",
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/graftabl/sources",
+      "original_local_sources_sha256": "9B6FEDFD4357BF4A8C45426A6BFF4DFA134588B0631471FBA0D5EB8DB1D4506A",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/mods.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "3FB2BE0AAD425335F1CA612D9979B8F59F4A0B541B690F495C9BF1D7E0C881E5",
+        "3FB2BE0AAD425335F1CA612D9979B8F59F4A0B541B690F495C9BF1D7E0C881E5",
+        "3FB2BE0AAD425335F1CA612D9979B8F59F4A0B541B690F495C9BF1D7E0C881E5"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/mods.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "426786918B039CD80ABC234F002354A89907E040B52A61D184B963E7D3A2D174",
+        "426786918B039CD80ABC234F002354A89907E040B52A61D184B963E7D3A2D174",
+        "426786918B039CD80ABC234F002354A89907E040B52A61D184B963E7D3A2D174"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/pifedit.c",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278",
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278",
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/pifedit.h",
+      "ledger_status": "pending",
+      "sha256_current_opennt_opennt45": [
+        "56789C7EC827AE3A929E9F4CCA1C8BA12758437FEBF4C1EAEBA1F60B9B252673",
+        "56789C7EC827AE3A929E9F4CCA1C8BA12758437FEBF4C1EAEBA1F60B9B252673",
+        "56789C7EC827AE3A929E9F4CCA1C8BA12758437FEBF4C1EAEBA1F60B9B252673"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/pifhelp.h",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "057EEA902D8E249E50E525D04F06CE0232B6787F022498F6D7207D06FEE12E4C",
+        "057EEA902D8E249E50E525D04F06CE0232B6787F022498F6D7207D06FEE12E4C",
+        "057EEA902D8E249E50E525D04F06CE0232B6787F022498F6D7207D06FEE12E4C"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": false,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/pifedit/pifsubs.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "4077C27C5AE06830D19C94014DCD327CA51E93C5ACD3DC04BF1FA83FF6484EA2",
+        "4077C27C5AE06830D19C94014DCD327CA51E93C5ACD3DC04BF1FA83FF6484EA2",
+        "4077C27C5AE06830D19C94014DCD327CA51E93C5ACD3DC04BF1FA83FF6484EA2"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/pifedit/sources",
+      "original_local_sources_sha256": "6E42EC1E708A75F99FEFD3808223E87AFF90606956B6E34D699F03B228947D9B",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    },
+    {
+      "path": "vdmutils/win/win.c",
+      "ledger_status": "\u5f85\u6838\u9a8c",
+      "sha256_current_opennt_opennt45": [
+        "C654C38B0665308E44B80F60791A6A767A99D4618099758E5B00AA2607F788A0",
+        "C654C38B0665308E44B80F60791A6A767A99D4618099758E5B00AA2607F788A0",
+        "C654C38B0665308E44B80F60791A6A767A99D4618099758E5B00AA2607F788A0"
+      ],
+      "original_local_sources": "O:/repos.external/OpenNT/base/mvdm/vdmutils/win/sources",
+      "original_local_sources_sha256": "36554E6F651691FB3068891AEB2571C8221CEB96D6F70378DEECF75D155D2E43",
+      "basename_in_local_sources": true,
+      "graph_refs": [],
+      "recorded_deps": []
+    }
+  ],
+  "limits": "Manifest basename is lexical evidence only; headers, conditional profiles, alternate builds and runtime behavior require independent review."
+}
