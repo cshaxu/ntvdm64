@@ -145,7 +145,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-alternative-cpu-video-interface-source-only',
                                 'historical-superseded-nt-error-table-source-only',
                                 'historical-alternative-memory-provider-source-only',
-                                'historical-superseded-nt-host-source-only')
+                                'historical-superseded-nt-host-source-only',
+                                'historical-debug-profile-host-source-only',
+                                'historical-alternative-virtual-floppy-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -187,8 +189,13 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'retired-host-role-' and path in (
                         'softpc.new/host/src/nt_term.c', 'softpc.new/host/src/nt_smenu.c',
                         'softpc.new/host/src/nt_hfx.c', 'softpc.new/host/src/stf_conf.c')
+                if proof['role'] == 'historical-debug-profile-host-source-only':
+                    assert prefix == 'host-tail-role-' and path in (
+                        'softpc.new/host/src/nt_hunt.c', 'softpc.new/host/src/nt_yoda.c')
+                if proof['role'] == 'historical-alternative-virtual-floppy-source-only':
+                    assert prefix == 'host-tail-role-' and path == 'softpc.new/host/src/nt_vflop.c'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-', 'host-tail-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -221,6 +228,19 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'host-tail-role-':
+        observed = json.loads((A / 'host-tail-image-observations.json').read_text())
+        assert len(observed['sources']) == 7 and len(observed['functions']) == 18
+        assert len(observed['registration_calls']) == 2
+        assert len(observed['disk_providers']) == 3 and len(observed['wow_comm_functions']) == 2
+        assert {r['relative_path'] for r in observed['sources']} == set(changed)
+        assert sum(r['status'] == 'partial' for r in changed.values()) == 4
+        assert sum(r['status'] == 'excluded' for r in changed.values()) == 3
+        for proof in changed.values():
+            assert proof['original_text_retained_percent'] == '100'
+            assert not proof['estimated_restored_code_percent']
+            assert proof['restored_estimate_status'].startswith(
+                'unmeasurable:' if proof['status'] == 'partial' else 'not-applicable:')
     if prefix == 'retired-host-role-':
         observed = json.loads((A / 'retired-host-image-observations.json').read_text())
         assert runpy.run_path(str(A / 'retired-host-image-observer.py'))['inspect']() == observed
@@ -765,7 +785,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

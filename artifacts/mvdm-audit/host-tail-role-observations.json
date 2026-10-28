@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "147e75626",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "host-tail-image-observations.json",
+      "sha256": "CBF7DA9568273449493F054114E880D4DBC7B278EE6E8A5350A8A3A3A80C4479"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Source identity and linked entries only, not complete serial, display or frontend behavior"
+}

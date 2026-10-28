@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1538,
-    "excluded": 2643,
-    "partial": 450,
+    "pending": 1531,
+    "excluded": 2646,
+    "partial": 454,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -21,7 +21,7 @@
     {
       "relative_path": "softpc.new/base/video/v7_ports.c",
       "frozen": "D02575BD0594F9CCC3A23AD7ED0EB208EC7C1414EEFFD558DD1CE6B648F1991B",
-      "current": "A4165738799FF88DA1AEECDD3056745E19B1B583ED2A98C33EAC357487C7E6FA"
+      "current": "16D82A9736638F32A5A5BD00B5AB070BB6148834C6B8EAC56D6EB5DE7F7F1504"
     },
     {
       "relative_path": "softpc.new/base/video/vga_mode.c",
@@ -36,9 +36,9 @@
     {
       "relative_path": "softpc.new/host/src/nt_graph.c",
       "frozen": "3BD567C002DEE8B356788EA3AE63FBCB2DF9302E5D7CEB386149B013CEA95EDE",
-      "current": "8D10D85B80703C3515A92E1761FB32018620179B9ED93FF52137161BD53233C8"
+      "current": "3BB4943473C69A70AC7CA8A56C76915314D97B608190BF9264DE39C689B84277"
     }
   ],
   "complete": false,
-  "note": "Two original VDD implementation/private-declaration owners partial; nine image-bound bodies and 305 normal assertions. Two actual-object lifetime/boundary defects retained for S13. No runtime or guest change."
+  "note": "Seven original NT host roles: four selected partial and three bounded historical-profile exclusions; lifecycle and real serial proof remain open."
 }

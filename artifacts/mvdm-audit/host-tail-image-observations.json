@@ -1,0 +1,528 @@
+{
+  "sources": [
+    {
+      "relative_path": "softpc.new/host/src/fprt.c",
+      "sha256": "F7918F49BE621C55F53C51C9AE6DB756FF239768BB886B84FCFE39EEEDB65424",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/fprt.c",
+        "sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+        "bytes": "5747",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:61640f0770570db89999",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/fprt.c",
+          "sha256": "F7918F49BE621C55F53C51C9AE6DB756FF239768BB886B84FCFE39EEEDB65424"
+        },
+        {
+          "id": "SRC:d0b009c7c1b2e9ddcbd0",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/fprt.c",
+          "sha256": "F7918F49BE621C55F53C51C9AE6DB756FF239768BB886B84FCFE39EEEDB65424"
+        }
+      ],
+      "compile_edges": [
+        "build obj/host/fprt.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/fprt.c"
+      ],
+      "dependency_block": "obj/host/fprt.obj: #deps 10, deps mtime 8147603032760011 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "linked_function_labels": 2
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_det.c",
+      "sha256": "C58D15D58672440BF94E015F61A10B43311E601AE150DAE5B1559F2399F9DADC",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_det.c",
+        "sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+        "bytes": "48906",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:0e4d95c449d63159b073",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_det.c",
+          "sha256": "C58D15D58672440BF94E015F61A10B43311E601AE150DAE5B1559F2399F9DADC"
+        },
+        {
+          "id": "SRC:ad4412b96a85e6c6adde",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_det.c",
+          "sha256": "C58D15D58672440BF94E015F61A10B43311E601AE150DAE5B1559F2399F9DADC"
+        }
+      ],
+      "compile_edges": [
+        "build obj/host/nt_det.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_det.c"
+      ],
+      "dependency_block": "obj/host/nt_det.obj: #deps 51, deps mtime 8147603033897562 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/evidgen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/egacpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/egagraph.h\n    ../../../../src/mvdm/softpc.new/base/inc/egamode.h\n    ../../../../src/mvdm/softpc.new/base/inc/egaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gfx_upd.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/gvi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/idetect.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/video.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_rrr.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_eoi.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_event.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_graph.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_reset.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_thred.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_uis.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/conapi.h\n    ../../../../src/opennt-abi/host-compat/include/console_title.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/ddk/inc/ntddvdeo.h\n    ../../../../src/opennt-abi/source/public/internal/base/inc/vdm.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "linked_function_labels": 2
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_hunt.c",
+      "sha256": "6AEB2BA2EFAD017D65184D3FC32C09E0587BD02DEF267CC4FECFECA1C1715AD7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hunt.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_hunt.c",
+        "sha256": "6aeb2ba2efad017d65184d3fc32c09e0587bd02def267cc4fecfeca1c1715ad7",
+        "bytes": "5476",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:d82fccee64b72bec1d28",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_hunt.c",
+          "sha256": "6AEB2BA2EFAD017D65184D3FC32C09E0587BD02DEF267CC4FECFECA1C1715AD7"
+        },
+        {
+          "id": "SRC:1166eed4a82c1018d9ae",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_hunt.c",
+          "sha256": "6AEB2BA2EFAD017D65184D3FC32C09E0587BD02DEF267CC4FECFECA1C1715AD7"
+        }
+      ],
+      "compile_edges": [],
+      "dependency_block": "",
+      "linked_function_labels": 0
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_ntfun.c",
+      "sha256": "C2BECA20761B59DB5F8AEDE5F80E48D15FFD05CC0C81D1E0E5E017041AE01E63",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_ntfun.c",
+        "sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+        "bytes": "18079",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:586644a8b6b421a254db",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_ntfun.c",
+          "sha256": "C2BECA20761B59DB5F8AEDE5F80E48D15FFD05CC0C81D1E0E5E017041AE01E63"
+        },
+        {
+          "id": "SRC:47d77cdcf4bf4fe58407",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_ntfun.c",
+          "sha256": "C2BECA20761B59DB5F8AEDE5F80E48D15FFD05CC0C81D1E0E5E017041AE01E63"
+        }
+      ],
+      "compile_edges": [
+        "build obj/host/nt_ntfun.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_ntfun.c"
+      ],
+      "dependency_block": "obj/host/nt_ntfun.obj: #deps 17, deps mtime 8147602994475245 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/trace.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_trc.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_com.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_reset.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/ddk/inc/ntddser.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "linked_function_labels": 11
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_vflop.c",
+      "sha256": "B2766665ECD787CDC9DBABAB3C44F25FCD6185D90B221CDD201A159DD77A339D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vflop.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_vflop.c",
+        "sha256": "b2766665ecd787cdc9dbabab3c44f25fcd6185d90b221cdd201a159dd77a339d",
+        "bytes": "18554",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:43e83c97f0bb2df341b2",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_vflop.c",
+          "sha256": "B2766665ECD787CDC9DBABAB3C44F25FCD6185D90B221CDD201A159DD77A339D"
+        },
+        {
+          "id": "SRC:357fe846b87ee47b97c8",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_vflop.c",
+          "sha256": "B2766665ECD787CDC9DBABAB3C44F25FCD6185D90B221CDD201A159DD77A339D"
+        }
+      ],
+      "compile_edges": [],
+      "dependency_block": "",
+      "linked_function_labels": 0
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_wcom.c",
+      "sha256": "18C709BC88C37DE4D9323101D528AF0EC23A5E7E7B6942A1D2A1A9E7DED111A8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_wcom.c",
+        "sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+        "bytes": "10782",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:06c103f3b87de888c5eb",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_wcom.c",
+          "sha256": "18C709BC88C37DE4D9323101D528AF0EC23A5E7E7B6942A1D2A1A9E7DED111A8"
+        },
+        {
+          "id": "SRC:b181a2ec54f7ae4c88ef",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_wcom.c",
+          "sha256": "18C709BC88C37DE4D9323101D528AF0EC23A5E7E7B6942A1D2A1A9E7DED111A8"
+        }
+      ],
+      "compile_edges": [
+        "build obj/host/nt_wcom.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_wcom.c"
+      ],
+      "dependency_block": "obj/host/nt_wcom.obj: #deps 29, deps mtime 8147603008313848 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_com.h\n    ../../../../src/mvdm/softpc.new/base/inc/idetect.h\n    ../../../../src/mvdm/softpc.new/base/inc/rs232.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_rrr.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_trc.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_com.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_graph.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_uis.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/conapi.h\n    ../../../../src/opennt-abi/host-compat/include/console_title.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/ptypes32.h\n\n",
+      "linked_function_labels": 3
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_yoda.c",
+      "sha256": "2EC898DA6746F0992020845BDE73A30EDAF7CDD5C744559501EB9CBAA000DF0A",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_yoda.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_yoda.c",
+        "sha256": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+        "bytes": "29552",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:791ed5083e37f361bd3a",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_yoda.c",
+          "sha256": "2EC898DA6746F0992020845BDE73A30EDAF7CDD5C744559501EB9CBAA000DF0A"
+        },
+        {
+          "id": "SRC:cc8f0b8c4ffba5ff8fa3",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_yoda.c",
+          "sha256": "2EC898DA6746F0992020845BDE73A30EDAF7CDD5C744559501EB9CBAA000DF0A"
+        }
+      ],
+      "compile_edges": [
+        "build obj/host/nt_yoda.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_yoda.c"
+      ],
+      "dependency_block": "obj/host/nt_yoda.obj: #deps 11, deps mtime 8147603017023267 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "linked_function_labels": 0
+    }
+  ],
+  "flags": "host_cflags = /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\"",
+  "functions": [
+    {
+      "name": "_mvdm_host_fprintf",
+      "va": 4222000,
+      "function": true,
+      "owner": "original-softpc-host-roots:fprt.obj",
+      "bytes": 3,
+      "relocation_words": 0
+    },
+    {
+      "name": "_printf",
+      "va": 4222000,
+      "function": true,
+      "owner": "original-softpc-host-roots:fprt.obj",
+      "bytes": 3,
+      "relocation_words": 0
+    },
+    {
+      "name": "_doNullRegister",
+      "va": 4599280,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_det.obj",
+      "bytes": 74,
+      "relocation_words": 4
+    },
+    {
+      "name": "_initTextSection",
+      "va": 4599360,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_det.obj",
+      "bytes": 106,
+      "relocation_words": 11
+    },
+    {
+      "name": "_AddNewIOStatusBlockToList",
+      "va": 4581744,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 30,
+      "relocation_words": 0
+    },
+    {
+      "name": "_AllocStatusElement",
+      "va": 4581776,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 24,
+      "relocation_words": 1
+    },
+    {
+      "name": "_EnableMSRLSRRXmode",
+      "va": 4581808,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 83,
+      "relocation_words": 2
+    },
+    {
+      "name": "_FastCommGetLineControl",
+      "va": 4581904,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 140,
+      "relocation_words": 4
+    },
+    {
+      "name": "_FastCommSetBaudRate",
+      "va": 4582048,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 110,
+      "relocation_words": 4
+    },
+    {
+      "name": "_FastCommSetLineControl",
+      "va": 4582160,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 126,
+      "relocation_words": 4
+    },
+    {
+      "name": "_FastGetCommModemStatus",
+      "va": 4582288,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 81,
+      "relocation_words": 2
+    },
+    {
+      "name": "_FastSetCommMask",
+      "va": 4582384,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 83,
+      "relocation_words": 2
+    },
+    {
+      "name": "_FastWaitCommsOrCpuEvent",
+      "va": 4582480,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 177,
+      "relocation_words": 11
+    },
+    {
+      "name": "_RemoveCompletedIOCTLs",
+      "va": 4582672,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 73,
+      "relocation_words": 1
+    },
+    {
+      "name": "_SendXOFFIoctl",
+      "va": 4582752,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_ntfun.obj",
+      "bytes": 144,
+      "relocation_words": 7
+    },
+    {
+      "name": "_SyncLineSettings",
+      "va": 4577568,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_wcom.obj",
+      "bytes": 216,
+      "relocation_words": 10
+    },
+    {
+      "name": "_wow_com_inb",
+      "va": 4577792,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_wcom.obj",
+      "bytes": 304,
+      "relocation_words": 16
+    },
+    {
+      "name": "_wow_com_outb",
+      "va": 4578096,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_wcom.obj",
+      "bytes": 588,
+      "relocation_words": 33
+    }
+  ],
+  "registration": {
+    "name": "_RegisterConsoleVDM@44",
+    "va": 5717936,
+    "function": true,
+    "owner": "softpc-win32-bindings:console_compat.obj",
+    "bytes": 227,
+    "relocation_words": 6
+  },
+  "yoda_prod_stub_bytes": "c20000",
+  "yoda_prod_caller_absent": true,
+  "disk_providers": [
+    {
+      "name": "_gfi_fdc_command",
+      "va": 4684128,
+      "function": true,
+      "owner": "original-softpc-disks:gfi.obj",
+      "bytes": 109,
+      "relocation_words": 3
+    },
+    {
+      "name": "_gfi_init",
+      "va": 4684288,
+      "function": true,
+      "owner": "original-softpc-disks:gfi.obj",
+      "bytes": 43,
+      "relocation_words": 2
+    },
+    {
+      "name": "_nt_gfi_rdiskette_init",
+      "va": 4537328,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_rflop.obj",
+      "bytes": 792,
+      "relocation_words": 42
+    }
+  ],
+  "registration_calls": [
+    {
+      "caller": "_doNullRegister",
+      "target": "_RegisterConsoleVDM@44",
+      "va": 5717936
+    },
+    {
+      "caller": "_initTextSection",
+      "target": "_RegisterConsoleVDM@44",
+      "va": 5717936
+    }
+  ],
+  "wow_comm_functions": [
+    {
+      "name": "_GetCommHandle@4",
+      "va": 268567440,
+      "function": true,
+      "owner": "wucomm.obj",
+      "bytes": 62,
+      "relocation_words": 2
+    },
+    {
+      "name": "_GetCommShadowMSR@4",
+      "va": 268567504,
+      "function": true,
+      "owner": "wucomm.obj",
+      "bytes": 100,
+      "relocation_words": 3
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\fprt.obj",
+      "sha256": "B57194269B29EC5D5C4234C9612643424F22394CC2B0A37F6F996C6917FE7D18"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_det.obj",
+      "sha256": "CCCA97828A111164653C0110C915B297B10470BE0D76641721AC8BBAF6552946"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_ntfun.obj",
+      "sha256": "513D1C82EB05AFC08500E704DAC453290B966B8747B469079E989E80812CD504"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_wcom.obj",
+      "sha256": "7F3A0A5183D07B3574BB7E0B1A6B78A7FE56FABFE0EA08C1BD61DF6CAD59B42F"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_yoda.obj",
+      "sha256": "661A565C0563CB99BA9F6489EDEF5CD2C8647BA1CF6007C6151868E81EA3EDAA"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi.obj",
+      "sha256": "70AF076AC92CD039053FBE5806CC4BC62DFAFEF20D80B0981FB7B5538825295A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\disks\\gfi.obj",
+      "sha256": "70AF076AC92CD039053FBE5806CC4BC62DFAFEF20D80B0981FB7B5538825295A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_rflop.obj",
+      "sha256": "737C7D9FE945FC090AFCB64DE55B9729BFE481F5E619B89903B65BF61BBA2A30"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\main.obj",
+      "sha256": "9CB7B64BBB79D72EC7D7ED81485A3A9A26CF16F6F2277C3C4C16ABF4C83D4158"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_yoda.obj",
+      "sha256": "661A565C0563CB99BA9F6489EDEF5CD2C8647BA1CF6007C6151868E81EA3EDAA"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\adapter-win32\\console_compat.obj",
+      "sha256": "6932ADFC3BF1A123DEB9452AB71E579623482166B70154C96E8366ED4DE2EF78"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wucomm.obj",
+      "sha256": "032CA348E54EE7BA774CAE0DEC3E00FD840F991C69E6FFB60A978F4ABF1EB9A2"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\support\\main.c",
+      "sha256": "AB36BF5A4261967F3C4CF0AE8D4BC113F237B8FF25123C07701439C46688A462"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "path": "src\\ntvdm-exe\\win32\\console_compat.c",
+      "sha256": "9D225EBF49EF676383703CABF0494BF22FC98087BB5137355C8A013CFF4C38CE"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wucomm.c",
+      "sha256": "C9C8B11D65AC3F2B1EE9216A8102EF56908BFF5C5BF4ED2DD2BADC30CA8A4284"
+    }
+  ],
+  "scope": "Physical roles, original source/composition, 18 mapped labels and bounded host/WOW entry identity; not complete UART or display lifecycle proof"
+}

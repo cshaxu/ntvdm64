@@ -17,6 +17,10 @@ task baseline. The original VGA controller and its enabled/disabled register
 state remain authoritative; binding the existing callbacks avoids replacing
 the controller or patching the Windows mouse driver. Host surface teardown
 invalidates the saved background and a new full body gates pointer drawing.
+The [current source-retention overlay](video7-pointer/source-retention.csv)
+supersedes the older uncommitted-candidate measurements: it estimates 514/516
+(99.61%) and 1,414/1,424 (99.30%) original code lines respectively. Both roles
+remain partial; source-line retention is not functional coverage.
 The candidate computes pointer damage, while transport still copies complete
 graphics frames. The existing KVM Window renderer compares decoded pixels and
 derives dirty rectangles at the receiver; this is not SoftPC's sender-side

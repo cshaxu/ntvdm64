@@ -1,0 +1,3 @@
+relative_path,status,original_sha256,current_sha256,original_code_lines,matched_original_code_lines,text_retention_percent,limitation
+softpc.new/base/video/v7_ports.c,partial,D02575BD0594F9CCC3A23AD7ED0EB208EC7C1414EEFFD558DD1CE6B648F1991B,16D82A9736638F32A5A5BD00B5AB070BB6148834C6B8EAC56D6EB5DE7F7F1504,516,514,99.61,Text retention estimate only; not verified runtime behavior coverage
+softpc.new/host/src/nt_graph.c,partial,E08E6414C0261656B67A97F839256EE4BA6565F84CE6799197F92B98436131D9,3BB4943473C69A70AC7CA8A56C76915314D97B608190BF9264DE39C689B84277,1424,1414,99.30,Text retention estimate only; not verified runtime behavior coverage

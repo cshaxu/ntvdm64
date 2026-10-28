@@ -1,5 +1,13 @@
 # Live candidate source differences
 
+The [Video7 source-retention overlay](video7-pointer-review.md) supersedes
+the older `v7_ports.c` and `nt_graph.c` live-candidate measurements below:
+the owner-approved pointer candidate has since been built and published.
+Both physical source roles remain partial under the mirror-diff rule.
+The `vga_mode.c` observation below is likewise historical; its change was
+committed in `35424a126`. Statements about uncommitted files describe that
+earlier observation, not the current working tree.
+
 The frozen S10 inventory remains unchanged. A later read-only sweep observes
 two originally identical video files changed by the concurrent owner:
 `v7_ports.c` and `vga_mode.c`. Their current bytes therefore require partial

@@ -6,24 +6,22 @@
 
 S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
 The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
-four-role census is retained; current work uses one implementer/reviewer. Automatic S progression remains in force. `books/` is supporting
-reading, not authority. Guest media remains unchanged.
+four-role census is retained; current work uses one implementer/reviewer.
+Automatic S progression remains in force. Guest media remains unchanged.
 
 Current ten-image package: `build/t473-s10/v7-full-package-r56`;
 release/installed hashes match. Owner requires latest committed production
 code, never an automatic restore of historical package-c.
-The owner assigned package-scoped NTSRV isolation to S10. Its implementation and
-selected product, control, multi-package and application probes are recorded
-in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
-This delivery does not close the MVDM-wide source reconciliation or establish
-that every historical test has run.
+S10 package-scoped NTSRV isolation and selected probes are recorded in
+[package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
+MVDM-wide source reconciliation remains open.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,538 pending, 450 partial, 53 full and 2,643 excluded physical
-file roles. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
+The ledger has 1,531 pending, 454 partial, 53 full and 2,646 excluded physical
+file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound
@@ -99,7 +97,7 @@ Scope and pending gates are recorded in the
 [add-on review](../../artifacts/mvdm-audit/addon-layout-review.md#current-p-setup-correction-and-closure-gates).
 Complete add-on/tool cleanup, graphical Setup mouse investigation and
 profile-only finalization. Prove pure-DOS DOSONLY=0/1 with Standard/386 Enhanced
-startup. Future WOW31 conversion is excluded. [Video7 pointer evidence](../../artifacts/mvdm-audit/video7-pointer-review.md) retains the Raw Input limit; review and commit/push remain.
+startup. Future WOW31 conversion is excluded. [Video7 pointer evidence](../../artifacts/mvdm-audit/video7-pointer-review.md) records the published checkpoint and pending Raw Input/Setup completion.
 
 T461 S1's unchanged inventory is retained in its
 [owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md).
