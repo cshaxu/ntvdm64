@@ -97,6 +97,12 @@ and [multimedia header review](shard-1/wow-multimedia-headers-review.md)
 distinguish disabled original conversion code from the active bridge.
 The [CCPU 486 instruction review](shard-2/ccpu-486-instructions-review.md)
 records gated CMPXCHG/XADD bodies and an image-bound interpreter entry.
+The [WOW keyboard thunk review](shard-3/wow-keyboard-thunks-lifecycle-review.md)
+binds eleven selected bodies to released code while retaining guest and
+pointer-lifetime acceptance.
+The [SLAVEPC disk review](shard-2/disk-slavepc-review.md) and
+[WOW callback declarations](shard-1/wow-callback-control-headers-review.md)
+preserve alternate profile and reentrancy boundaries for later work.
 The [KillWOW review](shard-1/guest-killwow-review.md) and [keyboard variant
 review](shard-3/dos-keyboard-variants-role-review.md) retain their worker-wide
 exit and layout selection boundaries.

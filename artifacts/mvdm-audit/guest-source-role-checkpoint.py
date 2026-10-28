@@ -242,7 +242,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'cvidc-selected-core-role-':
+                if prefix == 'wow-keyboard-image-role-':
+                    assert path == 'wow32/wkbman.c' and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'cvidc-selected-core-role-':
                     assert path in ('softpc.new/base/cvidc/accessfn.c', 'softpc.new/base/cpu/src/evid/vglob.c', 'softpc.new/base/cvidc/sinit013.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'xms-runtime-owner-role-':
                     assert path in ('xms.486/xms.c', 'xms.486/xmsa20.c', 'xms.486/xmsmisc.c', 'xms.486/xmsumb.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

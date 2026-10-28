@@ -1,0 +1,40 @@
+{
+  "result": "pass",
+  "source": "softpc.new/base/disks/gfi_sflp.c",
+  "hashes": [
+    "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5",
+    "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5",
+    "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5"
+  ],
+  "edge": "build obj/disks/gfi_sflp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_sflp.c",
+  "object_sha256": "F86874B51F2BC711484AA6BCDED581E1F59156F4AF3B22403380DFB5ECF9547B",
+  "sections": [
+    {
+      "name": ".drectve",
+      "flags": 1051136
+    },
+    {
+      "name": ".debug$S",
+      "flags": 1108344896
+    },
+    {
+      "name": ".chks64",
+      "flags": 2560
+    }
+  ],
+  "active_fdc_binding": {
+    "name": "_fla_inb",
+    "va": 4682448,
+    "function": true,
+    "owner": "original-softpc-disks:fla.obj",
+    "bytes": 432,
+    "relocation_words": 40
+  },
+  "gfi_sha256": "0B332182C606CFEF8B0788B50866B9E13ACD389445A52F60F3CB65CAF8F916E6",
+  "fla_sha256": "B8C5F0420EAC7F14F662799B995B37E86D14DC252271B7BF4AE309BA6650FB5D",
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "cached_sha256": "84F72C0B33D0D0BA8E6837A25B296C17D115157FC75A4E9DC394330CC6FAC5E6",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Inactive SLAVEPC module in captured build; neighboring FDC binding does not prove floppy runtime behavior"
+}

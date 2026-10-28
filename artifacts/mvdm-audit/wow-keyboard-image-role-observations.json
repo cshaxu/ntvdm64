@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "139555283",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-keyboard-image-observations.json",
+      "sha256": "1BE10210CCD13AE713637C7743BA35C6764D0E8849F1639FD9E7C1F4EBAAB7DA"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Keyboard thunk body binding, not guest behavior acceptance"
+}

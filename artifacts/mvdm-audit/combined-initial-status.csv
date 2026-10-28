@@ -4529,7 +4529,7 @@ wow32/winspldl.h,2,pending,shard-2/file-audit.csv
 wow32/wintype.xls,3,pending,shard-3/file-review.csv
 wow32/witbl.h,2,pending,shard-2/file-audit.csv
 wow32/wkbdtbl2.h,1,pending,shard-1/file-audit.csv
-wow32/wkbman.c,3,pending,shard-3/file-review.csv
+wow32/wkbman.c,3,partial,shard-3/file-review.csv
 wow32/wkbman.h,0,pending,shard-0/review.csv
 wow32/wkbtbl.h,2,pending,shard-2/file-audit.csv
 wow32/wkernel.c,2,partial,shard-2/file-audit.csv
