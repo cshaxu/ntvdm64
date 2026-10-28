@@ -1,0 +1,17 @@
+# COMMAND PIF header and shared OEM declaration: configuration follow-up
+
+## `dos/command/cmdpif.h`
+
+The original `sources` manifest lists `cmdpif.c` in the COMMAND library and original/current `cmdpif.c` explicitly includes `nt_pif.h`, as do current `cmdmisc.c` and several SoftPC host sources. The old `cmdpif.h` is byte-identical to OpenNT, calls itself a copy of `NT_PIF.H`, but its `PIF_DATA` contains `fgprio`, absent from the current selected host `nt_pif.h`; therefore treating the two as interchangeable would be unsafe without layout proof.
+
+A case-insensitive search for the literal header filename across current `src`, `tools`, `tests`, CMake entry files and `docs` found only its name in the historical source-mirror import script `tools/historical/pre-t260/import/Sync-OpenNtCommandMirror.ps1`, not an include or runtime consumer. This search cannot rule out macro-computed includes, external repositories or generated sources outside those roots.
+
+`cmdpif-cached-graphs-observer.py` enumerates every currently present Ninja graph under `build/.ninja` whose build file references the COMMAND `cmdpif.c` path. It captures graph and `ninja -t deps` output hashes, per-block dependency states and matching header consumers in `cmdpif-cached-graphs-evidence.json`. Six such graphs were found. Three x86 graphs had 485, 639 and 497 valid dependency blocks, respectively, each with nine blocks selecting the host `nt_pif.h` and none referencing `dos/command/cmdpif.h`. The other three graphs returned **zero** recorded dependency blocks, so they provide no header-use conclusion. The currently offered CMake presets are release configurations; absence from these existing caches does not establish every possible debug, external, unbuilt, or future configuration. Previous selected-image observations are separately bounded in `shard-2/parallel-review-next.md`.
+
+Recommendation remains **excluded candidate for the duplicate header role in the observed compiled x86 graphs only**, not an unconditional all-config exclusion. The source-level PIF feature, PIF parsing, and lifecycle remain separately in scope; there is not enough evidence here to claim behavior has been validated or remove the header from the repository. The zero-dependency graph outcomes must not be described as proof.
+
+## `inc/oemuni.h`
+
+At the review snapshot this host header was pending. The coordinator subsequently marked its selected declaration role partial. It is directly included by current COMMAND `cmdconf.c`, `cmdenv.c`, `cmdexec.c`, `cmdpif.c`, and `cmdmisc.c`, as well as DEM through `dem.h`. Its declarations are therefore part of multiple live host source chains, not a guest-only declaration or an excluded PIF helper. `shard-3/oem-path-role-review.md` records original identity and selected host-provider map evidence, and documents local DIV-269/274/275/276/277 in the **implementations**. Historical `docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md` records bounded OEM 437 non-ASCII directory/file and environment tests, including nested COMMAND, for its specified historical package; that is stronger than mere include detection but not current-package identity, DBCS, all conversion failures or teardown.
+
+Recommend **partial candidate for the selected declaration role**, preserving separate implementation and lifecycle obligations. Do not infer a restored percentage or complete conversion behavior from header identity or a single historical code page. No shared ledger, runtime source, guest, or user media was changed.

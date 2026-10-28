@@ -1,0 +1,86 @@
+[
+  {
+    "graph": "build\\.ninja\\msvc-x64-formal-release\\build.ninja",
+    "sha256": "25B1444BDB11FC879BC486A566F0F4916563DBEB94001FADE443C0AD397425E9",
+    "deps_output_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "dependency_blocks": 0,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": []
+  },
+  {
+    "graph": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+    "sha256": "0EEDAA88E612E34B4631F52064D680C7E5A80BD85C64835751C391061B8C521E",
+    "deps_output_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "dependency_blocks": 0,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": []
+  },
+  {
+    "graph": "build\\.ninja\\msvc-x86-formal-release\\build.ninja",
+    "sha256": "00F8E1D918128C26EC29A2B063E689BBC9581AB7DC31F281EBDAE0F584A6442D",
+    "deps_output_sha256": "CE4C3F29DD4458436BCDA58757F274BD77AB6A354640464949DF6BB3A7973C21",
+    "dependency_blocks": 485,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": [
+      "obj/system/timer.obj: #deps 36, deps mtime 8147619280525212 (VALID)",
+      "obj/command/cmdmisc.obj: #deps 22, deps mtime 8145868062189952 (VALID)",
+      "obj/command/cmdpif.obj: #deps 20, deps mtime 8145868062555492 (VALID)",
+      "obj/host/nt_timer.obj: #deps 56, deps mtime 8147619362612976 (VALID)",
+      "obj/host/nt_msscs.obj: #deps 50, deps mtime 8147619363030619 (VALID)",
+      "obj/host/nt_unix.obj: #deps 30, deps mtime 8147619370451838 (VALID)",
+      "obj/host/nt_event.obj: #deps 83, deps mtime 8147619375181652 (VALID)",
+      "obj/host/config.obj: #deps 43, deps mtime 8147619374989236 (VALID)",
+      "obj/host/nt_pif.obj: #deps 18, deps mtime 8147619375271643 (VALID)"
+    ]
+  },
+  {
+    "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+    "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+    "deps_output_sha256": "8EBD0A732A6F9F9A478DBACDDD6CFDF82808788A10EC852DF30AE970A08175BB",
+    "dependency_blocks": 639,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": [
+      "obj/system/timer.obj: #deps 36, deps mtime 8147602892952406 (VALID)",
+      "obj/command/cmdmisc.obj: #deps 22, deps mtime 8147412827920180 (VALID)",
+      "obj/command/cmdpif.obj: #deps 20, deps mtime 8147412828594249 (VALID)",
+      "obj/host/nt_timer.obj: #deps 56, deps mtime 8147602998319987 (VALID)",
+      "obj/host/nt_msscs.obj: #deps 50, deps mtime 8147602995071488 (VALID)",
+      "obj/host/nt_unix.obj: #deps 30, deps mtime 8147603017254298 (VALID)",
+      "obj/host/nt_event.obj: #deps 83, deps mtime 8147603022877454 (VALID)",
+      "obj/host/config.obj: #deps 43, deps mtime 8147603022301356 (VALID)",
+      "obj/host/nt_pif.obj: #deps 18, deps mtime 8147603022281223 (VALID)"
+    ]
+  },
+  {
+    "graph": "build\\.ninja\\pkg-uuid-x64\\worker-reference-x86\\build.ninja",
+    "sha256": "137ECA21973F2228694943D284FE763FE66F8077F167579D17EB253AA6654009",
+    "deps_output_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "dependency_blocks": 0,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": []
+  },
+  {
+    "graph": "build\\.ninja\\pkg-uuid-x86\\worker\\build.ninja",
+    "sha256": "B1BC7B95C2A9DBC1A9DD8CC88931D86941EE146017C37A5ECCB6843FA80AC470",
+    "deps_output_sha256": "828ABC03DB78C39C5AC5A975DA1C1BDAB26320D6678CF87FDF827498D093DB65",
+    "dependency_blocks": 497,
+    "stale_blocks": 0,
+    "duplicate_matches": [],
+    "selected_matches": [
+      "obj/system/timer.obj: #deps 36, deps mtime 8147856499771606 (VALID)",
+      "obj/command/cmdmisc.obj: #deps 22, deps mtime 8147856594339094 (VALID)",
+      "obj/command/cmdpif.obj: #deps 20, deps mtime 8147856594545968 (VALID)",
+      "obj/host/nt_msscs.obj: #deps 50, deps mtime 8147856620985520 (VALID)",
+      "obj/host/nt_timer.obj: #deps 56, deps mtime 8147856620249078 (VALID)",
+      "obj/host/nt_unix.obj: #deps 30, deps mtime 8147856629464708 (VALID)",
+      "obj/host/nt_event.obj: #deps 83, deps mtime 8147856635047416 (VALID)",
+      "obj/host/config.obj: #deps 43, deps mtime 8147856635186179 (VALID)",
+      "obj/host/nt_pif.obj: #deps 18, deps mtime 8147856635319806 (VALID)"
+    ]
+  }
+]
