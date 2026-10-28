@@ -317,3 +317,6 @@ selected NT or guest capabilities.
 The [generated C-VID review](cvidc-generated-role-review.md) binds 17 more
 selected original objects to the released worker. Plane and mode behavior
 remain open; object identity is not behavioral acceptance.
+
+The [C-VID vector review](cvidc-vector-role-review.md) resolves 692 initial
+image pointers to original generated owners; runtime selection remains open.

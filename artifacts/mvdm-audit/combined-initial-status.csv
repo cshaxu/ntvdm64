@@ -1643,7 +1643,7 @@ softpc.new/base/cvidc/enter_c.h,0,pending,shard-0/review.csv
 softpc.new/base/cvidc/ev_glue.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/cvidc/ev_stubs.c,2,excluded,shard-2/file-audit.csv
 softpc.new/base/cvidc/evid_c.h,0,pending,shard-0/review.csv
-softpc.new/base/cvidc/evidfunc.c,0,pending,shard-0/review.csv
+softpc.new/base/cvidc/evidfunc.c,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/evidfunc.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/evidgen.h,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/flags_c.h,1,pending,shard-1/file-audit.csv

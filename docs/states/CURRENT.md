@@ -20,10 +20,13 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,454 pending, 525 partial, 53 full and 2,652 excluded physical
-file roles. The [host-tail audit](../../artifacts/mvdm-audit/host-tail-role-review.md) retains serial and frontend lifecycle gaps; [base-header selection](../../artifacts/mvdm-audit/base-inc-wide-role-review.md) records 54 partial declarations and [alternate interfaces](../../artifacts/mvdm-audit/base-inc-alternate-role-review.md) records six exclusions. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
+The ledger has 1,453 pending, 526 partial, 53 full and 2,652 excluded physical
+file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
+[header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
+[VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
+their unresolved behavior and lifecycle obligations for later stages.
 
-[C-VID generated objects](../../artifacts/mvdm-audit/cvidc-generated-role-review.md): 17 partial; mode and plane behavior remains open.
+[C-VID objects](../../artifacts/mvdm-audit/cvidc-generated-role-review.md) and [vectors](../../artifacts/mvdm-audit/cvidc-vector-role-review.md): partial; mode and plane behavior remains open.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "27a9d2e63",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "cvidc-vector-image-observations.json",
+      "sha256": "EBACBC8271EEC1FD7B143524A32FE64E314910325FDDF26FB848B1FB09885666"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Initial linked vector values only, not runtime mode or plane behavior"
+}

@@ -1,0 +1,5658 @@
+{
+  "result": "pass",
+  "base": "27a9d2e63",
+  "relative_path": "softpc.new/base/cvidc/evidfunc.c",
+  "sha256": "C932FE38359660386FC8A61C3DAD1691385F5080B32A7E30A16F53664384D4ED",
+  "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\evidfunc.c",
+  "original45_path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\cvidc\\evidfunc.c",
+  "dos_catalog_rows": 1,
+  "wow_catalog_rows": 2,
+  "wow_source_ids": "SRC:58d747cbe64f19ddb00a;SRC:745aa6e9f96276ca5ea1",
+  "compile_edge": "build obj/cvidc/evidfunc.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+  "dependency_header": "obj/cvidc/evidfunc.obj: #deps 13, deps mtime 8147602965398647 (VALID)",
+  "tables": [
+    {
+      "name": "_simple_evid",
+      "va": 6006480,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2139_SimpleByteWrite",
+          "va": 5116464,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2142_SimpleWordWrite",
+          "va": 5116560,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2145_SimpleDwordWrite",
+          "va": 5116656,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2140_SimpleByteFill",
+          "va": 5116496,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2143_SimpleWordFill",
+          "va": 5116592,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2146_SimpleDwordFill",
+          "va": 5116688,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2141_SimpleByteMove_Fwd",
+          "va": 5116528,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2148_SimpleByteMove_Bwd",
+          "va": 5116752,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2144_SimpleWordMove_Fwd",
+          "va": 5116624,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2149_SimpleWordMove_Bwd",
+          "va": 5116784,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2147_SimpleDwordMove_Fwd",
+          "va": 5116720,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2150_SimpleDwordMove_Bwd",
+          "va": 5152208,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_gricvid_evid",
+      "va": 6006528,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2238_GenericByteWrite",
+          "va": 5174864,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2241_GenericWordWrite",
+          "va": 5174960,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2244_GenericDwordWrite",
+          "va": 5174032,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2239_GenericByteFill",
+          "va": 5174896,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2242_GenericWordFill",
+          "va": 5173968,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2245_GenericDwordFill",
+          "va": 5174064,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2240_GenericByteMove_Fwd",
+          "va": 5174928,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2247_GenericByteMove_Bwd",
+          "va": 5202800,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2243_GenericWordMove_Fwd",
+          "va": 5174000,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2248_GenericWordMove_Bwd",
+          "va": 5202832,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2246_GenericDwordMove_Fwd",
+          "va": 5202768,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2249_GenericDwordMove_Bwd",
+          "va": 5202864,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_dith_evid",
+      "va": 6006576,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2151_UnchainedByteWrite_00000000_0000000e_00000001",
+          "va": 5152240,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2157_UnchainedWordWrite_00000000_0000000e_00000001",
+          "va": 5152432,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2163_UnchainedDwordWrite_00000000_0000000e_00000001",
+          "va": 5152624,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2152_UnchainedByteFill_00000000_0000000e_00000001",
+          "va": 5152272,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2158_UnchainedWordFill_00000000_0000000e_00000001",
+          "va": 5152464,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2164_UnchainedDwordFill_00000000_0000000e_00000001",
+          "va": 5152656,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2154_UnchainedByteMove_00000000_0000000e_00000001_00000000",
+          "va": 5152336,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2205_UnchainedByteMove_00000000_0000000e_00000001_00000001",
+          "va": 5222848,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2160_UnchainedWordMove_00000000_0000000e_00000001_00000000",
+          "va": 5152528,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2208_UnchainedWordMove_00000000_0000000e_00000001_00000001",
+          "va": 5222944,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2165_UnchainedDwordMove_00000000_0000000e_00000001_00000000",
+          "va": 5152688,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2211_UnchainedDwordMove_00000000_0000000e_00000001_00000001",
+          "va": 5223040,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2166_UnchainedByteWrite_00000001_0000000e_00000001",
+          "va": 5152720,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2171_UnchainedWordWrite_00000001_0000000e_00000001",
+          "va": 5152880,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2176_UnchainedDwordWrite_00000001_0000000e_00000001",
+          "va": 5153040,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "symbol": "_S_2167_UnchainedByteFill_00000001_0000000e_00000001",
+          "va": 5152752,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "symbol": "_S_2172_UnchainedWordFill_00000001_0000000e_00000001",
+          "va": 5152912,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 17,
+          "symbol": "_S_2177_UnchainedDwordFill_00000001_0000000e_00000001",
+          "va": 5153072,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 18,
+          "symbol": "_S_2168_UnchainedByteMove_00000001_0000000e_00000001_00000000",
+          "va": 5152784,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 19,
+          "symbol": "_S_2212_UnchainedByteMove_00000001_0000000e_00000001_00000001",
+          "va": 5223072,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 20,
+          "symbol": "_S_2173_UnchainedWordMove_00000001_0000000e_00000001_00000000",
+          "va": 5152944,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 21,
+          "symbol": "_S_2215_UnchainedWordMove_00000001_0000000e_00000001_00000001",
+          "va": 5174128,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 22,
+          "symbol": "_S_2178_UnchainedDwordMove_00000001_0000000e_00000001_00000000",
+          "va": 5153104,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 23,
+          "symbol": "_S_2218_UnchainedDwordMove_00000001_0000000e_00000001_00000001",
+          "va": 5174224,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 24,
+          "symbol": "_S_2179_UnchainedByteWrite_00000002_0000000e_00000001",
+          "va": 5153136,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 25,
+          "symbol": "_S_2184_UnchainedWordWrite_00000002_0000000e_00000001",
+          "va": 5222176,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 26,
+          "symbol": "_S_2189_UnchainedDwordWrite_00000002_0000000e_00000001",
+          "va": 5222336,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 27,
+          "symbol": "_S_2180_UnchainedByteFill_00000002_0000000e_00000001",
+          "va": 5153168,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 28,
+          "symbol": "_S_2185_UnchainedWordFill_00000002_0000000e_00000001",
+          "va": 5222208,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 29,
+          "symbol": "_S_2190_UnchainedDwordFill_00000002_0000000e_00000001",
+          "va": 5222368,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 30,
+          "symbol": "_S_2181_UnchainedByteMove_00000002_0000000e_00000001_00000000",
+          "va": 5153200,
+          "owners": [
+            "original-softpc-cvidc:SEVID002.obj"
+          ]
+        },
+        {
+          "index": 31,
+          "symbol": "_S_2219_UnchainedByteMove_00000002_0000000e_00000001_00000001",
+          "va": 5174256,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 32,
+          "symbol": "_S_2186_UnchainedWordMove_00000002_0000000e_00000001_00000000",
+          "va": 5222240,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 33,
+          "symbol": "_S_2222_UnchainedWordMove_00000002_0000000e_00000001_00000001",
+          "va": 5174352,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 34,
+          "symbol": "_S_2191_UnchainedDwordMove_00000002_0000000e_00000001_00000000",
+          "va": 5222400,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 35,
+          "symbol": "_S_2225_UnchainedDwordMove_00000002_0000000e_00000001_00000001",
+          "va": 5174448,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 36,
+          "symbol": "_S_2192_UnchainedByteWrite_00000003_0000000e_00000001",
+          "va": 5222432,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 37,
+          "symbol": "_S_2197_UnchainedWordWrite_00000003_0000000e_00000001",
+          "va": 5222592,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 38,
+          "symbol": "_S_2202_UnchainedDwordWrite_00000003_0000000e_00000001",
+          "va": 5222752,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 39,
+          "symbol": "_S_2193_UnchainedByteFill_00000003_0000000e_00000001",
+          "va": 5222464,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 40,
+          "symbol": "_S_2198_UnchainedWordFill_00000003_0000000e_00000001",
+          "va": 5222624,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 41,
+          "symbol": "_S_2203_UnchainedDwordFill_00000003_0000000e_00000001",
+          "va": 5222784,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 42,
+          "symbol": "_S_2194_UnchainedByteMove_00000003_0000000e_00000001_00000000",
+          "va": 5222496,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 43,
+          "symbol": "_S_2226_UnchainedByteMove_00000003_0000000e_00000001_00000001",
+          "va": 5174480,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 44,
+          "symbol": "_S_2199_UnchainedWordMove_00000003_0000000e_00000001_00000000",
+          "va": 5222656,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 45,
+          "symbol": "_S_2229_UnchainedWordMove_00000003_0000000e_00000001_00000001",
+          "va": 5174576,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        },
+        {
+          "index": 46,
+          "symbol": "_S_2204_UnchainedDwordMove_00000003_0000000e_00000001_00000000",
+          "va": 5222816,
+          "owners": [
+            "original-softpc-cvidc:SEVID003.obj"
+          ]
+        },
+        {
+          "index": 47,
+          "symbol": "_S_2232_UnchainedDwordMove_00000003_0000000e_00000001_00000001",
+          "va": 5174672,
+          "owners": [
+            "original-softpc-cvidc:SEVID004.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_chain2_evid",
+      "va": 6006768,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2624_Chain2ByteWrite_00000000",
+          "va": 4817792,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2630_Chain2WordWrite_00000000",
+          "va": 5248576,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2636_Chain2DwordWrite_00000000",
+          "va": 5248768,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2626_Chain2ByteFill_00000000",
+          "va": 4817856,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2632_Chain2WordFill_00000000",
+          "va": 5248640,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2638_Chain2DwordFill_00000000",
+          "va": 5248832,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2628_Chain2ByteMove_00000000_Fwd",
+          "va": 4817920,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2705_Chain2ByteMove_00000000_Bwd",
+          "va": 5265840,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2634_Chain2WordMove_00000000_Fwd",
+          "va": 5248704,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2707_Chain2WordMove_00000000_Bwd",
+          "va": 5265904,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2640_Chain2DwordMove_00000000_Fwd",
+          "va": 5248896,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2709_Chain2DwordMove_00000000_Bwd",
+          "va": 5265968,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2642_Chain2ByteWrite_00000001",
+          "va": 5248960,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2648_Chain2WordWrite_00000001",
+          "va": 5249152,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2654_Chain2DwordWrite_00000001",
+          "va": 5249344,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "symbol": "_S_2644_Chain2ByteFill_00000001",
+          "va": 5249024,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "symbol": "_S_2650_Chain2WordFill_00000001",
+          "va": 5249216,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 17,
+          "symbol": "_S_2656_Chain2DwordFill_00000001",
+          "va": 5249408,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 18,
+          "symbol": "_S_2646_Chain2ByteMove_00000001_Fwd",
+          "va": 5249088,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 19,
+          "symbol": "_S_2711_Chain2ByteMove_00000001_Bwd",
+          "va": 5266032,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 20,
+          "symbol": "_S_2652_Chain2WordMove_00000001_Fwd",
+          "va": 5249280,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 21,
+          "symbol": "_S_2713_Chain2WordMove_00000001_Bwd",
+          "va": 5266096,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 22,
+          "symbol": "_S_2658_Chain2DwordMove_00000001_Fwd",
+          "va": 5249472,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 23,
+          "symbol": "_S_2715_Chain2DwordMove_00000001_Bwd",
+          "va": 5266160,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 24,
+          "symbol": "_S_2660_Chain2ByteWrite_00000002",
+          "va": 5249536,
+          "owners": [
+            "original-softpc-cvidc:SEVID017.obj"
+          ]
+        },
+        {
+          "index": 25,
+          "symbol": "_S_2666_Chain2WordWrite_00000002",
+          "va": 5289072,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 26,
+          "symbol": "_S_2672_Chain2DwordWrite_00000002",
+          "va": 5289264,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 27,
+          "symbol": "_S_2662_Chain2ByteFill_00000002",
+          "va": 5288944,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 28,
+          "symbol": "_S_2668_Chain2WordFill_00000002",
+          "va": 5289136,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 29,
+          "symbol": "_S_2674_Chain2DwordFill_00000002",
+          "va": 5289328,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 30,
+          "symbol": "_S_2664_Chain2ByteMove_00000002_Fwd",
+          "va": 5289008,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 31,
+          "symbol": "_S_2717_Chain2ByteMove_00000002_Bwd",
+          "va": 5266224,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 32,
+          "symbol": "_S_2670_Chain2WordMove_00000002_Fwd",
+          "va": 5289200,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 33,
+          "symbol": "_S_2719_Chain2WordMove_00000002_Bwd",
+          "va": 5266288,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 34,
+          "symbol": "_S_2676_Chain2DwordMove_00000002_Fwd",
+          "va": 5289392,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 35,
+          "symbol": "_S_2721_Chain2DwordMove_00000002_Bwd",
+          "va": 5266352,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 36,
+          "symbol": "_S_2678_Chain2ByteWrite_00000003",
+          "va": 5289456,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 37,
+          "symbol": "_S_2684_Chain2WordWrite_00000003",
+          "va": 5289648,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 38,
+          "symbol": "_S_2690_Chain2DwordWrite_00000003",
+          "va": 5289840,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 39,
+          "symbol": "_S_2680_Chain2ByteFill_00000003",
+          "va": 5289520,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 40,
+          "symbol": "_S_2686_Chain2WordFill_00000003",
+          "va": 5289712,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 41,
+          "symbol": "_S_2692_Chain2DwordFill_00000003",
+          "va": 5289904,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 42,
+          "symbol": "_S_2682_Chain2ByteMove_00000003_Fwd",
+          "va": 5289584,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 43,
+          "symbol": "_S_2723_Chain2ByteMove_00000003_Bwd",
+          "va": 5266416,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 44,
+          "symbol": "_S_2688_Chain2WordMove_00000003_Fwd",
+          "va": 5289776,
+          "owners": [
+            "original-softpc-cvidc:SEVID018.obj"
+          ]
+        },
+        {
+          "index": 45,
+          "symbol": "_S_2725_Chain2WordMove_00000003_Bwd",
+          "va": 5266480,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 46,
+          "symbol": "_S_2694_Chain2DwordMove_00000003_Fwd",
+          "va": 5265488,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 47,
+          "symbol": "_S_2727_Chain2DwordMove_00000003_Bwd",
+          "va": 4888512,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 48,
+          "symbol": "_S_2696_Chain2ByteWrite_Copy",
+          "va": 5265552,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 49,
+          "symbol": "_S_2699_Chain2WordWrite_Copy",
+          "va": 5265648,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 50,
+          "symbol": "_S_2702_Chain2DwordWrite_Copy",
+          "va": 5265744,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 51,
+          "symbol": "_S_2697_Chain2ByteFill_Copy",
+          "va": 5265584,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 52,
+          "symbol": "_S_2700_Chain2WordFill_Copy",
+          "va": 5265680,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 53,
+          "symbol": "_S_2703_Chain2DwordFill_Copy",
+          "va": 5265776,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 54,
+          "symbol": "_S_2698_Chain2ByteMove_Copy_Fwd",
+          "va": 5265616,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 55,
+          "symbol": "_S_2729_Chain2ByteMove_Copy_Bwd",
+          "va": 4888576,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 56,
+          "symbol": "_S_2701_Chain2WordMove_Copy_Fwd",
+          "va": 5265712,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 57,
+          "symbol": "_S_2730_Chain2WordMove_Copy_Bwd",
+          "va": 4888608,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 58,
+          "symbol": "_S_2704_Chain2DwordMove_Copy_Fwd",
+          "va": 5265808,
+          "owners": [
+            "original-softpc-cvidc:SEVID019.obj"
+          ]
+        },
+        {
+          "index": 59,
+          "symbol": "_S_2731_Chain2DwordMove_Copy_Bwd",
+          "va": 4888640,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_unchained_evid",
+      "va": 6007008,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2250_UnchainedByteWrite_00000000_00000008_00000000",
+          "va": 5202896,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2305_UnchainedWordWrite_00000000_00000008_00000000",
+          "va": 5308512,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2360_UnchainedDwordWrite_00000000_00000008_00000000",
+          "va": 5336160,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2262_UnchainedByteFill_00000000_00000008_00000000",
+          "va": 5203280,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2317_UnchainedWordFill_00000000_00000008_00000000",
+          "va": 5362064,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2372_UnchainedDwordFill_00000000_00000008_00000000",
+          "va": 5336544,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2275_UnchainedByteMove_00000000_00000008_00000000_00000000",
+          "va": 5203696,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2501_UnchainedByteMove_00000000_00000008_00000000_00000001",
+          "va": 4865376,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2330_UnchainedWordMove_00000000_00000008_00000000_00000000",
+          "va": 5362480,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2531_UnchainedWordMove_00000000_00000008_00000000_00000001",
+          "va": 5407920,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2384_UnchainedDwordMove_00000000_00000008_00000000_00000000",
+          "va": 5393040,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2561_UnchainedDwordMove_00000000_00000008_00000000_00000001",
+          "va": 5437152,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2251_UnchainedByteWrite_00000000_00000009_00000000",
+          "va": 5202928,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2306_UnchainedWordWrite_00000000_00000009_00000000",
+          "va": 5308544,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2361_UnchainedDwordWrite_00000000_00000009_00000000",
+          "va": 5336192,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "symbol": "_S_2263_UnchainedByteFill_00000000_00000009_00000000",
+          "va": 5203312,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "symbol": "_S_2318_UnchainedWordFill_00000000_00000009_00000000",
+          "va": 5362096,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 17,
+          "symbol": "_S_2373_UnchainedDwordFill_00000000_00000009_00000000",
+          "va": 5336576,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 18,
+          "symbol": "_S_2278_UnchainedByteMove_00000000_00000009_00000000_00000000",
+          "va": 5307648,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 19,
+          "symbol": "_S_2504_UnchainedByteMove_00000000_00000009_00000000_00000001",
+          "va": 5407056,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 20,
+          "symbol": "_S_2333_UnchainedWordMove_00000000_00000009_00000000_00000000",
+          "va": 5362576,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 21,
+          "symbol": "_S_2534_UnchainedWordMove_00000000_00000009_00000000_00000001",
+          "va": 5436288,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 22,
+          "symbol": "_S_2385_UnchainedDwordMove_00000000_00000009_00000000_00000000",
+          "va": 5393072,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 23,
+          "symbol": "_S_2562_UnchainedDwordMove_00000000_00000009_00000000_00000001",
+          "va": 5437184,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 24,
+          "symbol": "_S_2252_UnchainedByteWrite_00000000_0000000e_00000000",
+          "va": 5202960,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 25,
+          "symbol": "_S_2307_UnchainedWordWrite_00000000_0000000e_00000000",
+          "va": 5308576,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 26,
+          "symbol": "_S_2362_UnchainedDwordWrite_00000000_0000000e_00000000",
+          "va": 5336224,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 27,
+          "symbol": "_S_2265_UnchainedByteFill_00000000_0000000e_00000000",
+          "va": 5203376,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 28,
+          "symbol": "_S_2320_UnchainedWordFill_00000000_0000000e_00000000",
+          "va": 5362160,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 29,
+          "symbol": "_S_2374_UnchainedDwordFill_00000000_0000000e_00000000",
+          "va": 5392720,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 30,
+          "symbol": "_S_2280_UnchainedByteMove_00000000_0000000e_00000000_00000000",
+          "va": 5307712,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 31,
+          "symbol": "_S_2506_UnchainedByteMove_00000000_0000000e_00000000_00000001",
+          "va": 5407120,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 32,
+          "symbol": "_S_2335_UnchainedWordMove_00000000_0000000e_00000000_00000000",
+          "va": 5362640,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 33,
+          "symbol": "_S_2536_UnchainedWordMove_00000000_0000000e_00000000_00000001",
+          "va": 5436352,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 34,
+          "symbol": "_S_2386_UnchainedDwordMove_00000000_0000000e_00000000_00000000",
+          "va": 5393104,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 35,
+          "symbol": "_S_2563_UnchainedDwordMove_00000000_0000000e_00000000_00000001",
+          "va": 5437216,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 36,
+          "symbol": "_S_2253_UnchainedByteWrite_00000000_0000000f_00000000",
+          "va": 5202992,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 37,
+          "symbol": "_S_2308_UnchainedWordWrite_00000000_0000000f_00000000",
+          "va": 5308608,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 38,
+          "symbol": "_S_2363_UnchainedDwordWrite_00000000_0000000f_00000000",
+          "va": 5336256,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 39,
+          "symbol": "_S_2266_UnchainedByteFill_00000000_0000000f_00000000",
+          "va": 5203408,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 40,
+          "symbol": "_S_2321_UnchainedWordFill_00000000_0000000f_00000000",
+          "va": 5362192,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 41,
+          "symbol": "_S_2375_UnchainedDwordFill_00000000_0000000f_00000000",
+          "va": 5392752,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 42,
+          "symbol": "_S_2283_UnchainedByteMove_00000000_0000000f_00000000_00000000",
+          "va": 5307808,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 43,
+          "symbol": "_S_2509_UnchainedByteMove_00000000_0000000f_00000000_00000001",
+          "va": 5407216,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 44,
+          "symbol": "_S_2338_UnchainedWordMove_00000000_0000000f_00000000_00000000",
+          "va": 5362736,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 45,
+          "symbol": "_S_2539_UnchainedWordMove_00000000_0000000f_00000000_00000001",
+          "va": 5436448,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 46,
+          "symbol": "_S_2387_UnchainedDwordMove_00000000_0000000f_00000000_00000000",
+          "va": 5393136,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 47,
+          "symbol": "_S_2564_UnchainedDwordMove_00000000_0000000f_00000000_00000001",
+          "va": 5437248,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 48,
+          "symbol": "_S_2254_UnchainedByteWrite_00000000_00000010_00000000",
+          "va": 5203024,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 49,
+          "symbol": "_S_2309_UnchainedWordWrite_00000000_00000010_00000000",
+          "va": 5308640,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 50,
+          "symbol": "_S_2364_UnchainedDwordWrite_00000000_00000010_00000000",
+          "va": 5336288,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 51,
+          "symbol": "_S_2267_UnchainedByteFill_00000000_00000010_00000000",
+          "va": 5203440,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 52,
+          "symbol": "_S_2322_UnchainedWordFill_00000000_00000010_00000000",
+          "va": 5362224,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 53,
+          "symbol": "_S_2376_UnchainedDwordFill_00000000_00000010_00000000",
+          "va": 5392784,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 54,
+          "symbol": "_S_2285_UnchainedByteMove_00000000_00000010_00000000_00000000",
+          "va": 5307872,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 55,
+          "symbol": "_S_2511_UnchainedByteMove_00000000_00000010_00000000_00000001",
+          "va": 5407280,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 56,
+          "symbol": "_S_2340_UnchainedWordMove_00000000_00000010_00000000_00000000",
+          "va": 5362800,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 57,
+          "symbol": "_S_2541_UnchainedWordMove_00000000_00000010_00000000_00000001",
+          "va": 5436512,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 58,
+          "symbol": "_S_2388_UnchainedDwordMove_00000000_00000010_00000000_00000000",
+          "va": 5393168,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 59,
+          "symbol": "_S_2565_UnchainedDwordMove_00000000_00000010_00000000_00000001",
+          "va": 5437280,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 60,
+          "symbol": "_S_2255_UnchainedByteWrite_00000000_00000011_00000000",
+          "va": 5203056,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 61,
+          "symbol": "_S_2310_UnchainedWordWrite_00000000_00000011_00000000",
+          "va": 5361840,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 62,
+          "symbol": "_S_2365_UnchainedDwordWrite_00000000_00000011_00000000",
+          "va": 5336320,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 63,
+          "symbol": "_S_2268_UnchainedByteFill_00000000_00000011_00000000",
+          "va": 5203472,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 64,
+          "symbol": "_S_2323_UnchainedWordFill_00000000_00000011_00000000",
+          "va": 5362256,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 65,
+          "symbol": "_S_2377_UnchainedDwordFill_00000000_00000011_00000000",
+          "va": 5392816,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 66,
+          "symbol": "_S_2288_UnchainedByteMove_00000000_00000011_00000000_00000000",
+          "va": 5307968,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 67,
+          "symbol": "_S_2514_UnchainedByteMove_00000000_00000011_00000000_00000001",
+          "va": 5407376,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 68,
+          "symbol": "_S_2343_UnchainedWordMove_00000000_00000011_00000000_00000000",
+          "va": 5335616,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 69,
+          "symbol": "_S_2544_UnchainedWordMove_00000000_00000011_00000000_00000001",
+          "va": 5436608,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 70,
+          "symbol": "_S_2389_UnchainedDwordMove_00000000_00000011_00000000_00000000",
+          "va": 5393200,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 71,
+          "symbol": "_S_2566_UnchainedDwordMove_00000000_00000011_00000000_00000001",
+          "va": 5468528,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 72,
+          "symbol": "_S_2256_UnchainedByteWrite_00000000_00000016_00000000",
+          "va": 5203088,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 73,
+          "symbol": "_S_2311_UnchainedWordWrite_00000000_00000016_00000000",
+          "va": 5361872,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 74,
+          "symbol": "_S_2366_UnchainedDwordWrite_00000000_00000016_00000000",
+          "va": 5336352,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 75,
+          "symbol": "_S_2269_UnchainedByteFill_00000000_00000016_00000000",
+          "va": 5203504,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 76,
+          "symbol": "_S_2324_UnchainedWordFill_00000000_00000016_00000000",
+          "va": 5362288,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 77,
+          "symbol": "_S_2378_UnchainedDwordFill_00000000_00000016_00000000",
+          "va": 5392848,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 78,
+          "symbol": "_S_2290_UnchainedByteMove_00000000_00000016_00000000_00000000",
+          "va": 5308032,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 79,
+          "symbol": "_S_2516_UnchainedByteMove_00000000_00000016_00000000_00000001",
+          "va": 5407440,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 80,
+          "symbol": "_S_2345_UnchainedWordMove_00000000_00000016_00000000_00000000",
+          "va": 5335680,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 81,
+          "symbol": "_S_2546_UnchainedWordMove_00000000_00000016_00000000_00000001",
+          "va": 5436672,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 82,
+          "symbol": "_S_2390_UnchainedDwordMove_00000000_00000016_00000000_00000000",
+          "va": 5393232,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 83,
+          "symbol": "_S_2567_UnchainedDwordMove_00000000_00000016_00000000_00000001",
+          "va": 5468560,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 84,
+          "symbol": "_S_2257_UnchainedByteWrite_00000000_00000017_00000000",
+          "va": 5203120,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 85,
+          "symbol": "_S_2312_UnchainedWordWrite_00000000_00000017_00000000",
+          "va": 5361904,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 86,
+          "symbol": "_S_2367_UnchainedDwordWrite_00000000_00000017_00000000",
+          "va": 5336384,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 87,
+          "symbol": "_S_2270_UnchainedByteFill_00000000_00000017_00000000",
+          "va": 5203536,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 88,
+          "symbol": "_S_2325_UnchainedWordFill_00000000_00000017_00000000",
+          "va": 5362320,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 89,
+          "symbol": "_S_2379_UnchainedDwordFill_00000000_00000017_00000000",
+          "va": 5392880,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 90,
+          "symbol": "_S_2293_UnchainedByteMove_00000000_00000017_00000000_00000000",
+          "va": 5308128,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 91,
+          "symbol": "_S_2519_UnchainedByteMove_00000000_00000017_00000000_00000001",
+          "va": 5407536,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 92,
+          "symbol": "_S_2348_UnchainedWordMove_00000000_00000017_00000000_00000000",
+          "va": 5335776,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 93,
+          "symbol": "_S_2549_UnchainedWordMove_00000000_00000017_00000000_00000001",
+          "va": 5436768,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 94,
+          "symbol": "_S_2391_UnchainedDwordMove_00000000_00000017_00000000_00000000",
+          "va": 5393264,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 95,
+          "symbol": "_S_2568_UnchainedDwordMove_00000000_00000017_00000000_00000001",
+          "va": 5468592,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 96,
+          "symbol": "_S_2258_UnchainedByteWrite_00000000_00000018_00000000",
+          "va": 5203152,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 97,
+          "symbol": "_S_2313_UnchainedWordWrite_00000000_00000018_00000000",
+          "va": 5361936,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 98,
+          "symbol": "_S_2368_UnchainedDwordWrite_00000000_00000018_00000000",
+          "va": 5336416,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 99,
+          "symbol": "_S_2271_UnchainedByteFill_00000000_00000018_00000000",
+          "va": 5203568,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 100,
+          "symbol": "_S_2326_UnchainedWordFill_00000000_00000018_00000000",
+          "va": 5362352,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 101,
+          "symbol": "_S_2380_UnchainedDwordFill_00000000_00000018_00000000",
+          "va": 5392912,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 102,
+          "symbol": "_S_2295_UnchainedByteMove_00000000_00000018_00000000_00000000",
+          "va": 5308192,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 103,
+          "symbol": "_S_2521_UnchainedByteMove_00000000_00000018_00000000_00000001",
+          "va": 5407600,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 104,
+          "symbol": "_S_2350_UnchainedWordMove_00000000_00000018_00000000_00000000",
+          "va": 5335840,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 105,
+          "symbol": "_S_2551_UnchainedWordMove_00000000_00000018_00000000_00000001",
+          "va": 5436832,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 106,
+          "symbol": "_S_2392_UnchainedDwordMove_00000000_00000018_00000000_00000000",
+          "va": 5393296,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 107,
+          "symbol": "_S_2569_UnchainedDwordMove_00000000_00000018_00000000_00000001",
+          "va": 5468624,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 108,
+          "symbol": "_S_2259_UnchainedByteWrite_00000000_00000019_00000000",
+          "va": 5203184,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 109,
+          "symbol": "_S_2314_UnchainedWordWrite_00000000_00000019_00000000",
+          "va": 5361968,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 110,
+          "symbol": "_S_2369_UnchainedDwordWrite_00000000_00000019_00000000",
+          "va": 5336448,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 111,
+          "symbol": "_S_2272_UnchainedByteFill_00000000_00000019_00000000",
+          "va": 5203600,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 112,
+          "symbol": "_S_2327_UnchainedWordFill_00000000_00000019_00000000",
+          "va": 5362384,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 113,
+          "symbol": "_S_2381_UnchainedDwordFill_00000000_00000019_00000000",
+          "va": 5392944,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 114,
+          "symbol": "_S_2298_UnchainedByteMove_00000000_00000019_00000000_00000000",
+          "va": 5308288,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 115,
+          "symbol": "_S_2524_UnchainedByteMove_00000000_00000019_00000000_00000001",
+          "va": 5407696,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 116,
+          "symbol": "_S_2353_UnchainedWordMove_00000000_00000019_00000000_00000000",
+          "va": 5335936,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 117,
+          "symbol": "_S_2554_UnchainedWordMove_00000000_00000019_00000000_00000001",
+          "va": 5436928,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 118,
+          "symbol": "_S_2393_UnchainedDwordMove_00000000_00000019_00000000_00000000",
+          "va": 5393328,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 119,
+          "symbol": "_S_2570_UnchainedDwordMove_00000000_00000019_00000000_00000001",
+          "va": 5468656,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 120,
+          "symbol": "_S_2260_UnchainedByteWrite_00000000_0000001e_00000000",
+          "va": 5203216,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 121,
+          "symbol": "_S_2315_UnchainedWordWrite_00000000_0000001e_00000000",
+          "va": 5362000,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 122,
+          "symbol": "_S_2370_UnchainedDwordWrite_00000000_0000001e_00000000",
+          "va": 5336480,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 123,
+          "symbol": "_S_2273_UnchainedByteFill_00000000_0000001e_00000000",
+          "va": 5203632,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 124,
+          "symbol": "_S_2328_UnchainedWordFill_00000000_0000001e_00000000",
+          "va": 5362416,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 125,
+          "symbol": "_S_2382_UnchainedDwordFill_00000000_0000001e_00000000",
+          "va": 5392976,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 126,
+          "symbol": "_S_2300_UnchainedByteMove_00000000_0000001e_00000000_00000000",
+          "va": 5308352,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 127,
+          "symbol": "_S_2526_UnchainedByteMove_00000000_0000001e_00000000_00000001",
+          "va": 5407760,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 128,
+          "symbol": "_S_2355_UnchainedWordMove_00000000_0000001e_00000000_00000000",
+          "va": 5336000,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 129,
+          "symbol": "_S_2556_UnchainedWordMove_00000000_0000001e_00000000_00000001",
+          "va": 5436992,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 130,
+          "symbol": "_S_2394_UnchainedDwordMove_00000000_0000001e_00000000_00000000",
+          "va": 5393360,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 131,
+          "symbol": "_S_2571_UnchainedDwordMove_00000000_0000001e_00000000_00000001",
+          "va": 5468688,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 132,
+          "symbol": "_S_2261_UnchainedByteWrite_00000000_0000001f_00000000",
+          "va": 5203248,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 133,
+          "symbol": "_S_2316_UnchainedWordWrite_00000000_0000001f_00000000",
+          "va": 5362032,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 134,
+          "symbol": "_S_2371_UnchainedDwordWrite_00000000_0000001f_00000000",
+          "va": 5336512,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 135,
+          "symbol": "_S_2274_UnchainedByteFill_00000000_0000001f_00000000",
+          "va": 5203664,
+          "owners": [
+            "original-softpc-cvidc:SEVID005.obj"
+          ]
+        },
+        {
+          "index": 136,
+          "symbol": "_S_2329_UnchainedWordFill_00000000_0000001f_00000000",
+          "va": 5362448,
+          "owners": [
+            "original-softpc-cvidc:SEVID007.obj"
+          ]
+        },
+        {
+          "index": 137,
+          "symbol": "_S_2383_UnchainedDwordFill_00000000_0000001f_00000000",
+          "va": 5393008,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 138,
+          "symbol": "_S_2303_UnchainedByteMove_00000000_0000001f_00000000_00000000",
+          "va": 5308448,
+          "owners": [
+            "original-softpc-cvidc:SEVID006.obj"
+          ]
+        },
+        {
+          "index": 139,
+          "symbol": "_S_2529_UnchainedByteMove_00000000_0000001f_00000000_00000001",
+          "va": 5407856,
+          "owners": [
+            "original-softpc-cvidc:SEVID013.obj"
+          ]
+        },
+        {
+          "index": 140,
+          "symbol": "_S_2358_UnchainedWordMove_00000000_0000001f_00000000_00000000",
+          "va": 5336096,
+          "owners": [
+            "original-softpc-cvidc:SEVID008.obj"
+          ]
+        },
+        {
+          "index": 141,
+          "symbol": "_S_2559_UnchainedWordMove_00000000_0000001f_00000000_00000001",
+          "va": 5437088,
+          "owners": [
+            "original-softpc-cvidc:SEVID014.obj"
+          ]
+        },
+        {
+          "index": 142,
+          "symbol": "_S_2395_UnchainedDwordMove_00000000_0000001f_00000000_00000000",
+          "va": 5393392,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 143,
+          "symbol": "_S_2572_UnchainedDwordMove_00000000_0000001f_00000000_00000001",
+          "va": 5468720,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 144,
+          "symbol": "_S_2396_UnchainedByteWrite_00000001_00000000_00000000",
+          "va": 5393424,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 145,
+          "symbol": "_S_2399_UnchainedWordWrite_00000001_00000000_00000000",
+          "va": 5393520,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 146,
+          "symbol": "_S_2402_UnchainedDwordWrite_00000001_00000000_00000000",
+          "va": 5393616,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 147,
+          "symbol": "_S_2397_UnchainedByteFill_00000001_00000000_00000000",
+          "va": 5393456,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 148,
+          "symbol": "_S_2400_UnchainedWordFill_00000001_00000000_00000000",
+          "va": 5393552,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 149,
+          "symbol": "_S_2403_UnchainedDwordFill_00000001_00000000_00000000",
+          "va": 5393648,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 150,
+          "symbol": "_S_2398_UnchainedByteMove_00000001_00000000_00000000_00000000",
+          "va": 5393488,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 151,
+          "symbol": "_S_2573_UnchainedByteMove_00000001_00000000_00000000_00000001",
+          "va": 5468752,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 152,
+          "symbol": "_S_2401_UnchainedWordMove_00000001_00000000_00000000_00000000",
+          "va": 5393584,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 153,
+          "symbol": "_S_2574_UnchainedWordMove_00000001_00000000_00000000_00000001",
+          "va": 5468784,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 154,
+          "symbol": "_S_2404_UnchainedDwordMove_00000001_00000000_00000000_00000000",
+          "va": 5393680,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 155,
+          "symbol": "_S_2575_UnchainedDwordMove_00000001_00000000_00000000_00000001",
+          "va": 5468816,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 156,
+          "symbol": "_S_2405_UnchainedByteWrite_00000002_00000008_00000000",
+          "va": 5393712,
+          "owners": [
+            "original-softpc-cvidc:SEVID009.obj"
+          ]
+        },
+        {
+          "index": 157,
+          "symbol": "_S_2423_UnchainedWordWrite_00000002_00000008_00000000",
+          "va": 5495248,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 158,
+          "symbol": "_S_2441_UnchainedDwordWrite_00000002_00000008_00000000",
+          "va": 4842672,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 159,
+          "symbol": "_S_2409_UnchainedByteFill_00000002_00000008_00000000",
+          "va": 5494800,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 160,
+          "symbol": "_S_2427_UnchainedWordFill_00000002_00000008_00000000",
+          "va": 5495376,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 161,
+          "symbol": "_S_2445_UnchainedDwordFill_00000002_00000008_00000000",
+          "va": 4842800,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 162,
+          "symbol": "_S_2413_UnchainedByteMove_00000002_00000008_00000000_00000000",
+          "va": 5494928,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 163,
+          "symbol": "_S_2576_UnchainedByteMove_00000002_00000008_00000000_00000001",
+          "va": 5468848,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 164,
+          "symbol": "_S_2431_UnchainedWordMove_00000002_00000008_00000000_00000000",
+          "va": 5495504,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 165,
+          "symbol": "_S_2586_UnchainedWordMove_00000002_00000008_00000000_00000001",
+          "va": 5469168,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 166,
+          "symbol": "_S_2449_UnchainedDwordMove_00000002_00000008_00000000_00000000",
+          "va": 4842928,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 167,
+          "symbol": "_S_2596_UnchainedDwordMove_00000002_00000008_00000000_00000001",
+          "va": 5469488,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 168,
+          "symbol": "_S_2406_UnchainedByteWrite_00000002_00000009_00000000",
+          "va": 5494704,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 169,
+          "symbol": "_S_2424_UnchainedWordWrite_00000002_00000009_00000000",
+          "va": 5495280,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 170,
+          "symbol": "_S_2442_UnchainedDwordWrite_00000002_00000009_00000000",
+          "va": 4842704,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 171,
+          "symbol": "_S_2410_UnchainedByteFill_00000002_00000009_00000000",
+          "va": 5494832,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 172,
+          "symbol": "_S_2428_UnchainedWordFill_00000002_00000009_00000000",
+          "va": 5495408,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 173,
+          "symbol": "_S_2446_UnchainedDwordFill_00000002_00000009_00000000",
+          "va": 4842832,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 174,
+          "symbol": "_S_2416_UnchainedByteMove_00000002_00000009_00000000_00000000",
+          "va": 5495024,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 175,
+          "symbol": "_S_2579_UnchainedByteMove_00000002_00000009_00000000_00000001",
+          "va": 5468944,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 176,
+          "symbol": "_S_2434_UnchainedWordMove_00000002_00000009_00000000_00000000",
+          "va": 5495600,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 177,
+          "symbol": "_S_2589_UnchainedWordMove_00000002_00000009_00000000_00000001",
+          "va": 5469264,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 178,
+          "symbol": "_S_2450_UnchainedDwordMove_00000002_00000009_00000000_00000000",
+          "va": 4842960,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 179,
+          "symbol": "_S_2597_UnchainedDwordMove_00000002_00000009_00000000_00000001",
+          "va": 5469520,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 180,
+          "symbol": "_S_2407_UnchainedByteWrite_00000002_0000000e_00000000",
+          "va": 5494736,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 181,
+          "symbol": "_S_2425_UnchainedWordWrite_00000002_0000000e_00000000",
+          "va": 5495312,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 182,
+          "symbol": "_S_2443_UnchainedDwordWrite_00000002_0000000e_00000000",
+          "va": 4842736,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 183,
+          "symbol": "_S_2411_UnchainedByteFill_00000002_0000000e_00000000",
+          "va": 5494864,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 184,
+          "symbol": "_S_2429_UnchainedWordFill_00000002_0000000e_00000000",
+          "va": 5495440,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 185,
+          "symbol": "_S_2447_UnchainedDwordFill_00000002_0000000e_00000000",
+          "va": 4842864,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 186,
+          "symbol": "_S_2418_UnchainedByteMove_00000002_0000000e_00000000_00000000",
+          "va": 5495088,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 187,
+          "symbol": "_S_2581_UnchainedByteMove_00000002_0000000e_00000000_00000001",
+          "va": 5469008,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 188,
+          "symbol": "_S_2436_UnchainedWordMove_00000002_0000000e_00000000_00000000",
+          "va": 5495664,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 189,
+          "symbol": "_S_2591_UnchainedWordMove_00000002_0000000e_00000000_00000001",
+          "va": 5469328,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 190,
+          "symbol": "_S_2451_UnchainedDwordMove_00000002_0000000e_00000000_00000000",
+          "va": 4842992,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 191,
+          "symbol": "_S_2598_UnchainedDwordMove_00000002_0000000e_00000000_00000001",
+          "va": 4816960,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 192,
+          "symbol": "_S_2408_UnchainedByteWrite_00000002_0000000f_00000000",
+          "va": 5494768,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 193,
+          "symbol": "_S_2426_UnchainedWordWrite_00000002_0000000f_00000000",
+          "va": 5495344,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 194,
+          "symbol": "_S_2444_UnchainedDwordWrite_00000002_0000000f_00000000",
+          "va": 4842768,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 195,
+          "symbol": "_S_2412_UnchainedByteFill_00000002_0000000f_00000000",
+          "va": 5494896,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 196,
+          "symbol": "_S_2430_UnchainedWordFill_00000002_0000000f_00000000",
+          "va": 5495472,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 197,
+          "symbol": "_S_2448_UnchainedDwordFill_00000002_0000000f_00000000",
+          "va": 4842896,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 198,
+          "symbol": "_S_2421_UnchainedByteMove_00000002_0000000f_00000000_00000000",
+          "va": 5495184,
+          "owners": [
+            "original-softpc-cvidc:SEVID010.obj"
+          ]
+        },
+        {
+          "index": 199,
+          "symbol": "_S_2584_UnchainedByteMove_00000002_0000000f_00000000_00000001",
+          "va": 5469104,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 200,
+          "symbol": "_S_2439_UnchainedWordMove_00000002_0000000f_00000000_00000000",
+          "va": 4842608,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 201,
+          "symbol": "_S_2594_UnchainedWordMove_00000002_0000000f_00000000_00000001",
+          "va": 5469424,
+          "owners": [
+            "original-softpc-cvidc:SEVID015.obj"
+          ]
+        },
+        {
+          "index": 202,
+          "symbol": "_S_2452_UnchainedDwordMove_00000002_0000000f_00000000_00000000",
+          "va": 4843024,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 203,
+          "symbol": "_S_2599_UnchainedDwordMove_00000002_0000000f_00000000_00000001",
+          "va": 4816992,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 204,
+          "symbol": "_S_2453_UnchainedByteWrite_00000003_00000008_00000000",
+          "va": 4843056,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 205,
+          "symbol": "_S_2471_UnchainedWordWrite_00000003_00000008_00000000",
+          "va": 4864416,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 206,
+          "symbol": "_S_2489_UnchainedDwordWrite_00000003_00000008_00000000",
+          "va": 4864992,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 207,
+          "symbol": "_S_2457_UnchainedByteFill_00000003_00000008_00000000",
+          "va": 4843184,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 208,
+          "symbol": "_S_2475_UnchainedWordFill_00000003_00000008_00000000",
+          "va": 4864544,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 209,
+          "symbol": "_S_2493_UnchainedDwordFill_00000003_00000008_00000000",
+          "va": 4865120,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 210,
+          "symbol": "_S_2461_UnchainedByteMove_00000003_00000008_00000000_00000000",
+          "va": 4843312,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 211,
+          "symbol": "_S_2600_UnchainedByteMove_00000003_00000008_00000000_00000001",
+          "va": 4817024,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 212,
+          "symbol": "_S_2479_UnchainedWordMove_00000003_00000008_00000000_00000000",
+          "va": 4864672,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 213,
+          "symbol": "_S_2610_UnchainedWordMove_00000003_00000008_00000000_00000001",
+          "va": 4817344,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 214,
+          "symbol": "_S_2497_UnchainedDwordMove_00000003_00000008_00000000_00000000",
+          "va": 4865248,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 215,
+          "symbol": "_S_2620_UnchainedDwordMove_00000003_00000008_00000000_00000001",
+          "va": 4817664,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 216,
+          "symbol": "_S_2454_UnchainedByteWrite_00000003_00000009_00000000",
+          "va": 4843088,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 217,
+          "symbol": "_S_2472_UnchainedWordWrite_00000003_00000009_00000000",
+          "va": 4864448,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 218,
+          "symbol": "_S_2490_UnchainedDwordWrite_00000003_00000009_00000000",
+          "va": 4865024,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 219,
+          "symbol": "_S_2458_UnchainedByteFill_00000003_00000009_00000000",
+          "va": 4843216,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 220,
+          "symbol": "_S_2476_UnchainedWordFill_00000003_00000009_00000000",
+          "va": 4864576,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 221,
+          "symbol": "_S_2494_UnchainedDwordFill_00000003_00000009_00000000",
+          "va": 4865152,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 222,
+          "symbol": "_S_2464_UnchainedByteMove_00000003_00000009_00000000_00000000",
+          "va": 4843408,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 223,
+          "symbol": "_S_2603_UnchainedByteMove_00000003_00000009_00000000_00000001",
+          "va": 4817120,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 224,
+          "symbol": "_S_2482_UnchainedWordMove_00000003_00000009_00000000_00000000",
+          "va": 4864768,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 225,
+          "symbol": "_S_2613_UnchainedWordMove_00000003_00000009_00000000_00000001",
+          "va": 4817440,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 226,
+          "symbol": "_S_2498_UnchainedDwordMove_00000003_00000009_00000000_00000000",
+          "va": 4865280,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 227,
+          "symbol": "_S_2621_UnchainedDwordMove_00000003_00000009_00000000_00000001",
+          "va": 4817696,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 228,
+          "symbol": "_S_2455_UnchainedByteWrite_00000003_0000000e_00000000",
+          "va": 4843120,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 229,
+          "symbol": "_S_2473_UnchainedWordWrite_00000003_0000000e_00000000",
+          "va": 4864480,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 230,
+          "symbol": "_S_2491_UnchainedDwordWrite_00000003_0000000e_00000000",
+          "va": 4865056,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 231,
+          "symbol": "_S_2459_UnchainedByteFill_00000003_0000000e_00000000",
+          "va": 4843248,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 232,
+          "symbol": "_S_2477_UnchainedWordFill_00000003_0000000e_00000000",
+          "va": 4864608,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 233,
+          "symbol": "_S_2495_UnchainedDwordFill_00000003_0000000e_00000000",
+          "va": 4865184,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 234,
+          "symbol": "_S_2466_UnchainedByteMove_00000003_0000000e_00000000_00000000",
+          "va": 4843472,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 235,
+          "symbol": "_S_2605_UnchainedByteMove_00000003_0000000e_00000000_00000001",
+          "va": 4817184,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 236,
+          "symbol": "_S_2484_UnchainedWordMove_00000003_0000000e_00000000_00000000",
+          "va": 4864832,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 237,
+          "symbol": "_S_2615_UnchainedWordMove_00000003_0000000e_00000000_00000001",
+          "va": 4817504,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 238,
+          "symbol": "_S_2499_UnchainedDwordMove_00000003_0000000e_00000000_00000000",
+          "va": 4865312,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 239,
+          "symbol": "_S_2622_UnchainedDwordMove_00000003_0000000e_00000000_00000001",
+          "va": 4817728,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 240,
+          "symbol": "_S_2456_UnchainedByteWrite_00000003_0000000f_00000000",
+          "va": 4843152,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 241,
+          "symbol": "_S_2474_UnchainedWordWrite_00000003_0000000f_00000000",
+          "va": 4864512,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 242,
+          "symbol": "_S_2492_UnchainedDwordWrite_00000003_0000000f_00000000",
+          "va": 4865088,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 243,
+          "symbol": "_S_2460_UnchainedByteFill_00000003_0000000f_00000000",
+          "va": 4843280,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 244,
+          "symbol": "_S_2478_UnchainedWordFill_00000003_0000000f_00000000",
+          "va": 4864640,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 245,
+          "symbol": "_S_2496_UnchainedDwordFill_00000003_0000000f_00000000",
+          "va": 4865216,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 246,
+          "symbol": "_S_2469_UnchainedByteMove_00000003_0000000f_00000000_00000000",
+          "va": 4843568,
+          "owners": [
+            "original-softpc-cvidc:SEVID011.obj"
+          ]
+        },
+        {
+          "index": 247,
+          "symbol": "_S_2608_UnchainedByteMove_00000003_0000000f_00000000_00000001",
+          "va": 4817280,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 248,
+          "symbol": "_S_2487_UnchainedWordMove_00000003_0000000f_00000000_00000000",
+          "va": 4864928,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 249,
+          "symbol": "_S_2618_UnchainedWordMove_00000003_0000000f_00000000_00000001",
+          "va": 4817600,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        },
+        {
+          "index": 250,
+          "symbol": "_S_2500_UnchainedDwordMove_00000003_0000000f_00000000_00000000",
+          "va": 4865344,
+          "owners": [
+            "original-softpc-cvidc:SEVID012.obj"
+          ]
+        },
+        {
+          "index": 251,
+          "symbol": "_S_2623_UnchainedDwordMove_00000003_0000000f_00000000_00000001",
+          "va": 4817760,
+          "owners": [
+            "original-softpc-cvidc:SEVID016.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_chain4_evid",
+      "va": 6008016,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2732_Chain4ByteWrite_00000000_00000008",
+          "va": 4888672,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2782_Chain4WordWrite_00000000_00000008",
+          "va": 4907104,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2831_Chain4DwordWrite_00000000_00000008",
+          "va": 4931040,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2744_Chain4ByteFill_00000000_00000008",
+          "va": 4889056,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2794_Chain4WordFill_00000000_00000008",
+          "va": 4946912,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2843_Chain4DwordFill_00000000_00000008",
+          "va": 4931424,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2758_Chain4ByteMove_00000000_00000008_00000000",
+          "va": 4906336,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2965_Chain4ByteMove_00000000_00000008_00000001",
+          "va": 4986768,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2807_Chain4WordMove_00000000_00000008_00000000",
+          "va": 4947328,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2989_Chain4WordMove_00000000_00000008_00000001",
+          "va": 5007728,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2855_Chain4DwordMove_00000000_00000008_00000000",
+          "va": 4969840,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_3013_Chain4DwordMove_00000000_00000008_00000001",
+          "va": 5008496,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2733_Chain4ByteWrite_00000000_00000009",
+          "va": 4888704,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2783_Chain4WordWrite_00000000_00000009",
+          "va": 4907136,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2832_Chain4DwordWrite_00000000_00000009",
+          "va": 4931072,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 15,
+          "symbol": "_S_2746_Chain4ByteFill_00000000_00000009",
+          "va": 4889120,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 16,
+          "symbol": "_S_2795_Chain4WordFill_00000000_00000009",
+          "va": 4946944,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 17,
+          "symbol": "_S_2844_Chain4DwordFill_00000000_00000009",
+          "va": 4931456,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 18,
+          "symbol": "_S_2760_Chain4ByteMove_00000000_00000009_00000000",
+          "va": 4906400,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 19,
+          "symbol": "_S_2967_Chain4ByteMove_00000000_00000009_00000001",
+          "va": 4986832,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 20,
+          "symbol": "_S_2809_Chain4WordMove_00000000_00000009_00000000",
+          "va": 4947392,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 21,
+          "symbol": "_S_2991_Chain4WordMove_00000000_00000009_00000001",
+          "va": 5007792,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 22,
+          "symbol": "_S_2856_Chain4DwordMove_00000000_00000009_00000000",
+          "va": 4969872,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 23,
+          "symbol": "_S_3014_Chain4DwordMove_00000000_00000009_00000001",
+          "va": 5032560,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 24,
+          "symbol": "_S_2734_Chain4ByteWrite_00000000_0000000e",
+          "va": 4888736,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 25,
+          "symbol": "_S_2784_Chain4WordWrite_00000000_0000000e",
+          "va": 4907168,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 26,
+          "symbol": "_S_2833_Chain4DwordWrite_00000000_0000000e",
+          "va": 4931104,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 27,
+          "symbol": "_S_2748_Chain4ByteFill_00000000_0000000e",
+          "va": 4889184,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 28,
+          "symbol": "_S_2797_Chain4WordFill_00000000_0000000e",
+          "va": 4947008,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 29,
+          "symbol": "_S_2845_Chain4DwordFill_00000000_0000000e",
+          "va": 4931488,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 30,
+          "symbol": "_S_2762_Chain4ByteMove_00000000_0000000e_00000000",
+          "va": 4906464,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 31,
+          "symbol": "_S_2969_Chain4ByteMove_00000000_0000000e_00000001",
+          "va": 4986896,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 32,
+          "symbol": "_S_2811_Chain4WordMove_00000000_0000000e_00000000",
+          "va": 4947456,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 33,
+          "symbol": "_S_2993_Chain4WordMove_00000000_0000000e_00000001",
+          "va": 5007856,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 34,
+          "symbol": "_S_2857_Chain4DwordMove_00000000_0000000e_00000000",
+          "va": 4969904,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 35,
+          "symbol": "_S_3015_Chain4DwordMove_00000000_0000000e_00000001",
+          "va": 5032592,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 36,
+          "symbol": "_S_2735_Chain4ByteWrite_00000000_0000000f",
+          "va": 4888768,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 37,
+          "symbol": "_S_2785_Chain4WordWrite_00000000_0000000f",
+          "va": 4907200,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 38,
+          "symbol": "_S_2834_Chain4DwordWrite_00000000_0000000f",
+          "va": 4931136,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 39,
+          "symbol": "_S_2749_Chain4ByteFill_00000000_0000000f",
+          "va": 4889216,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 40,
+          "symbol": "_S_2798_Chain4WordFill_00000000_0000000f",
+          "va": 4947040,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 41,
+          "symbol": "_S_2846_Chain4DwordFill_00000000_0000000f",
+          "va": 4931520,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 42,
+          "symbol": "_S_2764_Chain4ByteMove_00000000_0000000f_00000000",
+          "va": 4906528,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 43,
+          "symbol": "_S_2971_Chain4ByteMove_00000000_0000000f_00000001",
+          "va": 4986960,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 44,
+          "symbol": "_S_2813_Chain4WordMove_00000000_0000000f_00000000",
+          "va": 4947520,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 45,
+          "symbol": "_S_2995_Chain4WordMove_00000000_0000000f_00000001",
+          "va": 5007920,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 46,
+          "symbol": "_S_2858_Chain4DwordMove_00000000_0000000f_00000000",
+          "va": 4969936,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 47,
+          "symbol": "_S_3016_Chain4DwordMove_00000000_0000000f_00000001",
+          "va": 5032624,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 48,
+          "symbol": "_S_2736_Chain4ByteWrite_00000000_00000010",
+          "va": 4888800,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 49,
+          "symbol": "_S_2786_Chain4WordWrite_00000000_00000010",
+          "va": 4907232,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 50,
+          "symbol": "_S_2835_Chain4DwordWrite_00000000_00000010",
+          "va": 4931168,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 51,
+          "symbol": "_S_2750_Chain4ByteFill_00000000_00000010",
+          "va": 4889248,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 52,
+          "symbol": "_S_2799_Chain4WordFill_00000000_00000010",
+          "va": 4947072,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 53,
+          "symbol": "_S_2847_Chain4DwordFill_00000000_00000010",
+          "va": 4931552,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 54,
+          "symbol": "_S_2766_Chain4ByteMove_00000000_00000010_00000000",
+          "va": 4906592,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 55,
+          "symbol": "_S_2973_Chain4ByteMove_00000000_00000010_00000001",
+          "va": 4987024,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 56,
+          "symbol": "_S_2815_Chain4WordMove_00000000_00000010_00000000",
+          "va": 4947584,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 57,
+          "symbol": "_S_2997_Chain4WordMove_00000000_00000010_00000001",
+          "va": 5007984,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 58,
+          "symbol": "_S_2859_Chain4DwordMove_00000000_00000010_00000000",
+          "va": 4969968,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 59,
+          "symbol": "_S_3017_Chain4DwordMove_00000000_00000010_00000001",
+          "va": 5032656,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 60,
+          "symbol": "_S_2737_Chain4ByteWrite_00000000_00000011",
+          "va": 4888832,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 61,
+          "symbol": "_S_2787_Chain4WordWrite_00000000_00000011",
+          "va": 4907264,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 62,
+          "symbol": "_S_2836_Chain4DwordWrite_00000000_00000011",
+          "va": 4931200,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 63,
+          "symbol": "_S_2751_Chain4ByteFill_00000000_00000011",
+          "va": 4889280,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 64,
+          "symbol": "_S_2800_Chain4WordFill_00000000_00000011",
+          "va": 4947104,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 65,
+          "symbol": "_S_2848_Chain4DwordFill_00000000_00000011",
+          "va": 4931584,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 66,
+          "symbol": "_S_2768_Chain4ByteMove_00000000_00000011_00000000",
+          "va": 4906656,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 67,
+          "symbol": "_S_2975_Chain4ByteMove_00000000_00000011_00000001",
+          "va": 4987088,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 68,
+          "symbol": "_S_2817_Chain4WordMove_00000000_00000011_00000000",
+          "va": 4947648,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 69,
+          "symbol": "_S_2999_Chain4WordMove_00000000_00000011_00000001",
+          "va": 5008048,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 70,
+          "symbol": "_S_2860_Chain4DwordMove_00000000_00000011_00000000",
+          "va": 4970000,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 71,
+          "symbol": "_S_3018_Chain4DwordMove_00000000_00000011_00000001",
+          "va": 5032688,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 72,
+          "symbol": "_S_2738_Chain4ByteWrite_00000000_00000016",
+          "va": 4888864,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 73,
+          "symbol": "_S_2788_Chain4WordWrite_00000000_00000016",
+          "va": 4907296,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 74,
+          "symbol": "_S_2837_Chain4DwordWrite_00000000_00000016",
+          "va": 4931232,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 75,
+          "symbol": "_S_2752_Chain4ByteFill_00000000_00000016",
+          "va": 4889312,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 76,
+          "symbol": "_S_2801_Chain4WordFill_00000000_00000016",
+          "va": 4947136,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 77,
+          "symbol": "_S_2849_Chain4DwordFill_00000000_00000016",
+          "va": 4931616,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 78,
+          "symbol": "_S_2770_Chain4ByteMove_00000000_00000016_00000000",
+          "va": 4906720,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 79,
+          "symbol": "_S_2977_Chain4ByteMove_00000000_00000016_00000001",
+          "va": 4987152,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 80,
+          "symbol": "_S_2819_Chain4WordMove_00000000_00000016_00000000",
+          "va": 4947712,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 81,
+          "symbol": "_S_3001_Chain4WordMove_00000000_00000016_00000001",
+          "va": 5008112,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 82,
+          "symbol": "_S_2861_Chain4DwordMove_00000000_00000016_00000000",
+          "va": 4970032,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 83,
+          "symbol": "_S_3019_Chain4DwordMove_00000000_00000016_00000001",
+          "va": 5032720,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 84,
+          "symbol": "_S_2739_Chain4ByteWrite_00000000_00000017",
+          "va": 4888896,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 85,
+          "symbol": "_S_2789_Chain4WordWrite_00000000_00000017",
+          "va": 4907328,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 86,
+          "symbol": "_S_2838_Chain4DwordWrite_00000000_00000017",
+          "va": 4931264,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 87,
+          "symbol": "_S_2753_Chain4ByteFill_00000000_00000017",
+          "va": 4889344,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 88,
+          "symbol": "_S_2802_Chain4WordFill_00000000_00000017",
+          "va": 4947168,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 89,
+          "symbol": "_S_2850_Chain4DwordFill_00000000_00000017",
+          "va": 4931648,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 90,
+          "symbol": "_S_2772_Chain4ByteMove_00000000_00000017_00000000",
+          "va": 4906784,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 91,
+          "symbol": "_S_2979_Chain4ByteMove_00000000_00000017_00000001",
+          "va": 4987216,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 92,
+          "symbol": "_S_2821_Chain4WordMove_00000000_00000017_00000000",
+          "va": 4947776,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 93,
+          "symbol": "_S_3003_Chain4WordMove_00000000_00000017_00000001",
+          "va": 5008176,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 94,
+          "symbol": "_S_2862_Chain4DwordMove_00000000_00000017_00000000",
+          "va": 4970064,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 95,
+          "symbol": "_S_3020_Chain4DwordMove_00000000_00000017_00000001",
+          "va": 5032752,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 96,
+          "symbol": "_S_2740_Chain4ByteWrite_00000000_00000018",
+          "va": 4888928,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 97,
+          "symbol": "_S_2790_Chain4WordWrite_00000000_00000018",
+          "va": 4946784,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 98,
+          "symbol": "_S_2839_Chain4DwordWrite_00000000_00000018",
+          "va": 4931296,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 99,
+          "symbol": "_S_2754_Chain4ByteFill_00000000_00000018",
+          "va": 4889376,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 100,
+          "symbol": "_S_2803_Chain4WordFill_00000000_00000018",
+          "va": 4947200,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 101,
+          "symbol": "_S_2851_Chain4DwordFill_00000000_00000018",
+          "va": 4931680,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 102,
+          "symbol": "_S_2774_Chain4ByteMove_00000000_00000018_00000000",
+          "va": 4906848,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 103,
+          "symbol": "_S_2981_Chain4ByteMove_00000000_00000018_00000001",
+          "va": 4987280,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 104,
+          "symbol": "_S_2823_Chain4WordMove_00000000_00000018_00000000",
+          "va": 4930784,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 105,
+          "symbol": "_S_3005_Chain4WordMove_00000000_00000018_00000001",
+          "va": 5008240,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 106,
+          "symbol": "_S_2863_Chain4DwordMove_00000000_00000018_00000000",
+          "va": 4970096,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 107,
+          "symbol": "_S_3021_Chain4DwordMove_00000000_00000018_00000001",
+          "va": 5032784,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 108,
+          "symbol": "_S_2741_Chain4ByteWrite_00000000_00000019",
+          "va": 4888960,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 109,
+          "symbol": "_S_2791_Chain4WordWrite_00000000_00000019",
+          "va": 4946816,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 110,
+          "symbol": "_S_2840_Chain4DwordWrite_00000000_00000019",
+          "va": 4931328,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 111,
+          "symbol": "_S_2755_Chain4ByteFill_00000000_00000019",
+          "va": 4889408,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 112,
+          "symbol": "_S_2804_Chain4WordFill_00000000_00000019",
+          "va": 4947232,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 113,
+          "symbol": "_S_2852_Chain4DwordFill_00000000_00000019",
+          "va": 4931712,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 114,
+          "symbol": "_S_2776_Chain4ByteMove_00000000_00000019_00000000",
+          "va": 4906912,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 115,
+          "symbol": "_S_2983_Chain4ByteMove_00000000_00000019_00000001",
+          "va": 5007536,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 116,
+          "symbol": "_S_2825_Chain4WordMove_00000000_00000019_00000000",
+          "va": 4930848,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 117,
+          "symbol": "_S_3007_Chain4WordMove_00000000_00000019_00000001",
+          "va": 5008304,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 118,
+          "symbol": "_S_2864_Chain4DwordMove_00000000_00000019_00000000",
+          "va": 4970128,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 119,
+          "symbol": "_S_3022_Chain4DwordMove_00000000_00000019_00000001",
+          "va": 5032816,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 120,
+          "symbol": "_S_2742_Chain4ByteWrite_00000000_0000001e",
+          "va": 4888992,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 121,
+          "symbol": "_S_2792_Chain4WordWrite_00000000_0000001e",
+          "va": 4946848,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 122,
+          "symbol": "_S_2841_Chain4DwordWrite_00000000_0000001e",
+          "va": 4931360,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 123,
+          "symbol": "_S_2756_Chain4ByteFill_00000000_0000001e",
+          "va": 4889440,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 124,
+          "symbol": "_S_2805_Chain4WordFill_00000000_0000001e",
+          "va": 4947264,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 125,
+          "symbol": "_S_2853_Chain4DwordFill_00000000_0000001e",
+          "va": 4931744,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 126,
+          "symbol": "_S_2778_Chain4ByteMove_00000000_0000001e_00000000",
+          "va": 4906976,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 127,
+          "symbol": "_S_2985_Chain4ByteMove_00000000_0000001e_00000001",
+          "va": 5007600,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 128,
+          "symbol": "_S_2827_Chain4WordMove_00000000_0000001e_00000000",
+          "va": 4930912,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 129,
+          "symbol": "_S_3009_Chain4WordMove_00000000_0000001e_00000001",
+          "va": 5008368,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 130,
+          "symbol": "_S_2865_Chain4DwordMove_00000000_0000001e_00000000",
+          "va": 4970160,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 131,
+          "symbol": "_S_3023_Chain4DwordMove_00000000_0000001e_00000001",
+          "va": 5032848,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 132,
+          "symbol": "_S_2743_Chain4ByteWrite_00000000_0000001f",
+          "va": 4889024,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 133,
+          "symbol": "_S_2793_Chain4WordWrite_00000000_0000001f",
+          "va": 4946880,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 134,
+          "symbol": "_S_2842_Chain4DwordWrite_00000000_0000001f",
+          "va": 4931392,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 135,
+          "symbol": "_S_2757_Chain4ByteFill_00000000_0000001f",
+          "va": 4889472,
+          "owners": [
+            "original-softpc-cvidc:SEVID020.obj"
+          ]
+        },
+        {
+          "index": 136,
+          "symbol": "_S_2806_Chain4WordFill_00000000_0000001f",
+          "va": 4947296,
+          "owners": [
+            "original-softpc-cvidc:SEVID022.obj"
+          ]
+        },
+        {
+          "index": 137,
+          "symbol": "_S_2854_Chain4DwordFill_00000000_0000001f",
+          "va": 4969808,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 138,
+          "symbol": "_S_2780_Chain4ByteMove_00000000_0000001f_00000000",
+          "va": 4907040,
+          "owners": [
+            "original-softpc-cvidc:SEVID021.obj"
+          ]
+        },
+        {
+          "index": 139,
+          "symbol": "_S_2987_Chain4ByteMove_00000000_0000001f_00000001",
+          "va": 5007664,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 140,
+          "symbol": "_S_2829_Chain4WordMove_00000000_0000001f_00000000",
+          "va": 4930976,
+          "owners": [
+            "original-softpc-cvidc:SEVID023.obj"
+          ]
+        },
+        {
+          "index": 141,
+          "symbol": "_S_3011_Chain4WordMove_00000000_0000001f_00000001",
+          "va": 5008432,
+          "owners": [
+            "original-softpc-cvidc:SEVID028.obj"
+          ]
+        },
+        {
+          "index": 142,
+          "symbol": "_S_2866_Chain4DwordMove_00000000_0000001f_00000000",
+          "va": 4970192,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 143,
+          "symbol": "_S_3024_Chain4DwordMove_00000000_0000001f_00000001",
+          "va": 5032880,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 144,
+          "symbol": "_S_2867_Chain4ByteWrite_00000001_00000000",
+          "va": 4970224,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 145,
+          "symbol": "_S_2871_Chain4WordWrite_00000001_00000000",
+          "va": 4970352,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 146,
+          "symbol": "_S_2874_Chain4DwordWrite_00000001_00000000",
+          "va": 4970448,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 147,
+          "symbol": "_S_2868_Chain4ByteFill_00000001_00000000",
+          "va": 4970256,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 148,
+          "symbol": "_S_2872_Chain4WordFill_00000001_00000000",
+          "va": 4970384,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 149,
+          "symbol": "_S_2875_Chain4DwordFill_00000001_00000000",
+          "va": 4970480,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 150,
+          "symbol": "_S_2869_Chain4ByteMove_00000001_00000000_00000000",
+          "va": 4970288,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 151,
+          "symbol": "_S_3025_Chain4ByteMove_00000001_00000000_00000001",
+          "va": 5032912,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 152,
+          "symbol": "_S_2873_Chain4WordMove_00000001_00000000_00000000",
+          "va": 4970416,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 153,
+          "symbol": "_S_3027_Chain4WordMove_00000001_00000000_00000001",
+          "va": 5032976,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 154,
+          "symbol": "_S_2876_Chain4DwordMove_00000001_00000000_00000000",
+          "va": 4970512,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 155,
+          "symbol": "_S_3028_Chain4DwordMove_00000001_00000000_00000001",
+          "va": 5033008,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 156,
+          "symbol": "_S_2877_Chain4ByteWrite_00000002_00000008",
+          "va": 4970544,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 157,
+          "symbol": "_S_2893_Chain4WordWrite_00000002_00000008",
+          "va": 5053856,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 158,
+          "symbol": "_S_2909_Chain4DwordWrite_00000002_00000008",
+          "va": 5054368,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 159,
+          "symbol": "_S_2881_Chain4ByteFill_00000002_00000008",
+          "va": 4970672,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 160,
+          "symbol": "_S_2897_Chain4WordFill_00000002_00000008",
+          "va": 5053984,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 161,
+          "symbol": "_S_2913_Chain4DwordFill_00000002_00000008",
+          "va": 5054496,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 162,
+          "symbol": "_S_2885_Chain4ByteMove_00000002_00000008_00000000",
+          "va": 4970800,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 163,
+          "symbol": "_S_3029_Chain4ByteMove_00000002_00000008_00000001",
+          "va": 5033040,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 164,
+          "symbol": "_S_2901_Chain4WordMove_00000002_00000008_00000000",
+          "va": 5054112,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 165,
+          "symbol": "_S_3037_Chain4WordMove_00000002_00000008_00000001",
+          "va": 5033296,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 166,
+          "symbol": "_S_2917_Chain4DwordMove_00000002_00000008_00000000",
+          "va": 5054624,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 167,
+          "symbol": "_S_3045_Chain4DwordMove_00000002_00000008_00000001",
+          "va": 5033552,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 168,
+          "symbol": "_S_2878_Chain4ByteWrite_00000002_00000009",
+          "va": 4970576,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 169,
+          "symbol": "_S_2894_Chain4WordWrite_00000002_00000009",
+          "va": 5053888,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 170,
+          "symbol": "_S_2910_Chain4DwordWrite_00000002_00000009",
+          "va": 5054400,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 171,
+          "symbol": "_S_2882_Chain4ByteFill_00000002_00000009",
+          "va": 4970704,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 172,
+          "symbol": "_S_2898_Chain4WordFill_00000002_00000009",
+          "va": 5054016,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 173,
+          "symbol": "_S_2914_Chain4DwordFill_00000002_00000009",
+          "va": 5054528,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 174,
+          "symbol": "_S_2887_Chain4ByteMove_00000002_00000009_00000000",
+          "va": 5053664,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 175,
+          "symbol": "_S_3031_Chain4ByteMove_00000002_00000009_00000001",
+          "va": 5033104,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 176,
+          "symbol": "_S_2903_Chain4WordMove_00000002_00000009_00000000",
+          "va": 5054176,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 177,
+          "symbol": "_S_3039_Chain4WordMove_00000002_00000009_00000001",
+          "va": 5033360,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 178,
+          "symbol": "_S_2918_Chain4DwordMove_00000002_00000009_00000000",
+          "va": 5078400,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 179,
+          "symbol": "_S_3046_Chain4DwordMove_00000002_00000009_00000001",
+          "va": 5101072,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 180,
+          "symbol": "_S_2879_Chain4ByteWrite_00000002_0000000e",
+          "va": 4970608,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 181,
+          "symbol": "_S_2895_Chain4WordWrite_00000002_0000000e",
+          "va": 5053920,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 182,
+          "symbol": "_S_2911_Chain4DwordWrite_00000002_0000000e",
+          "va": 5054432,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 183,
+          "symbol": "_S_2883_Chain4ByteFill_00000002_0000000e",
+          "va": 4970736,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 184,
+          "symbol": "_S_2899_Chain4WordFill_00000002_0000000e",
+          "va": 5054048,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 185,
+          "symbol": "_S_2915_Chain4DwordFill_00000002_0000000e",
+          "va": 5054560,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 186,
+          "symbol": "_S_2889_Chain4ByteMove_00000002_0000000e_00000000",
+          "va": 5053728,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 187,
+          "symbol": "_S_3033_Chain4ByteMove_00000002_0000000e_00000001",
+          "va": 5033168,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 188,
+          "symbol": "_S_2905_Chain4WordMove_00000002_0000000e_00000000",
+          "va": 5054240,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 189,
+          "symbol": "_S_3041_Chain4WordMove_00000002_0000000e_00000001",
+          "va": 5033424,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 190,
+          "symbol": "_S_2919_Chain4DwordMove_00000002_0000000e_00000000",
+          "va": 5078432,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 191,
+          "symbol": "_S_3047_Chain4DwordMove_00000002_0000000e_00000001",
+          "va": 5101104,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 192,
+          "symbol": "_S_2880_Chain4ByteWrite_00000002_0000000f",
+          "va": 4970640,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 193,
+          "symbol": "_S_2896_Chain4WordWrite_00000002_0000000f",
+          "va": 5053952,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 194,
+          "symbol": "_S_2912_Chain4DwordWrite_00000002_0000000f",
+          "va": 5054464,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 195,
+          "symbol": "_S_2884_Chain4ByteFill_00000002_0000000f",
+          "va": 4970768,
+          "owners": [
+            "original-softpc-cvidc:SEVID024.obj"
+          ]
+        },
+        {
+          "index": 196,
+          "symbol": "_S_2900_Chain4WordFill_00000002_0000000f",
+          "va": 5054080,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 197,
+          "symbol": "_S_2916_Chain4DwordFill_00000002_0000000f",
+          "va": 5054592,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 198,
+          "symbol": "_S_2891_Chain4ByteMove_00000002_0000000f_00000000",
+          "va": 5053792,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 199,
+          "symbol": "_S_3035_Chain4ByteMove_00000002_0000000f_00000001",
+          "va": 5033232,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 200,
+          "symbol": "_S_2907_Chain4WordMove_00000002_0000000f_00000000",
+          "va": 5054304,
+          "owners": [
+            "original-softpc-cvidc:SEVID025.obj"
+          ]
+        },
+        {
+          "index": 201,
+          "symbol": "_S_3043_Chain4WordMove_00000002_0000000f_00000001",
+          "va": 5033488,
+          "owners": [
+            "original-softpc-cvidc:SEVID029.obj"
+          ]
+        },
+        {
+          "index": 202,
+          "symbol": "_S_2920_Chain4DwordMove_00000002_0000000f_00000000",
+          "va": 5078464,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 203,
+          "symbol": "_S_3048_Chain4DwordMove_00000002_0000000f_00000001",
+          "va": 5101136,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 204,
+          "symbol": "_S_2921_Chain4ByteWrite_00000003_00000008",
+          "va": 5078496,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 205,
+          "symbol": "_S_2937_Chain4WordWrite_00000003_00000008",
+          "va": 5079008,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 206,
+          "symbol": "_S_2953_Chain4DwordWrite_00000003_00000008",
+          "va": 4986384,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 207,
+          "symbol": "_S_2925_Chain4ByteFill_00000003_00000008",
+          "va": 5078624,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 208,
+          "symbol": "_S_2941_Chain4WordFill_00000003_00000008",
+          "va": 5079136,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 209,
+          "symbol": "_S_2957_Chain4DwordFill_00000003_00000008",
+          "va": 4986512,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 210,
+          "symbol": "_S_2929_Chain4ByteMove_00000003_00000008_00000000",
+          "va": 5078752,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 211,
+          "symbol": "_S_3049_Chain4ByteMove_00000003_00000008_00000001",
+          "va": 5101168,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 212,
+          "symbol": "_S_2945_Chain4WordMove_00000003_00000008_00000000",
+          "va": 5079264,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 213,
+          "symbol": "_S_3057_Chain4WordMove_00000003_00000008_00000001",
+          "va": 5101424,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 214,
+          "symbol": "_S_2961_Chain4DwordMove_00000003_00000008_00000000",
+          "va": 4986640,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 215,
+          "symbol": "_S_3065_Chain4DwordMove_00000003_00000008_00000001",
+          "va": 5101680,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 216,
+          "symbol": "_S_2922_Chain4ByteWrite_00000003_00000009",
+          "va": 5078528,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 217,
+          "symbol": "_S_2938_Chain4WordWrite_00000003_00000009",
+          "va": 5079040,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 218,
+          "symbol": "_S_2954_Chain4DwordWrite_00000003_00000009",
+          "va": 4986416,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 219,
+          "symbol": "_S_2926_Chain4ByteFill_00000003_00000009",
+          "va": 5078656,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 220,
+          "symbol": "_S_2942_Chain4WordFill_00000003_00000009",
+          "va": 5079168,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 221,
+          "symbol": "_S_2958_Chain4DwordFill_00000003_00000009",
+          "va": 4986544,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 222,
+          "symbol": "_S_2931_Chain4ByteMove_00000003_00000009_00000000",
+          "va": 5078816,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 223,
+          "symbol": "_S_3051_Chain4ByteMove_00000003_00000009_00000001",
+          "va": 5101232,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 224,
+          "symbol": "_S_2947_Chain4WordMove_00000003_00000009_00000000",
+          "va": 5079328,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 225,
+          "symbol": "_S_3059_Chain4WordMove_00000003_00000009_00000001",
+          "va": 5101488,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 226,
+          "symbol": "_S_2962_Chain4DwordMove_00000003_00000009_00000000",
+          "va": 4986672,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 227,
+          "symbol": "_S_3066_Chain4DwordMove_00000003_00000009_00000001",
+          "va": 5101712,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 228,
+          "symbol": "_S_2923_Chain4ByteWrite_00000003_0000000e",
+          "va": 5078560,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 229,
+          "symbol": "_S_2939_Chain4WordWrite_00000003_0000000e",
+          "va": 5079072,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 230,
+          "symbol": "_S_2955_Chain4DwordWrite_00000003_0000000e",
+          "va": 4986448,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 231,
+          "symbol": "_S_2927_Chain4ByteFill_00000003_0000000e",
+          "va": 5078688,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 232,
+          "symbol": "_S_2943_Chain4WordFill_00000003_0000000e",
+          "va": 5079200,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 233,
+          "symbol": "_S_2959_Chain4DwordFill_00000003_0000000e",
+          "va": 4986576,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 234,
+          "symbol": "_S_2933_Chain4ByteMove_00000003_0000000e_00000000",
+          "va": 5078880,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 235,
+          "symbol": "_S_3053_Chain4ByteMove_00000003_0000000e_00000001",
+          "va": 5101296,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 236,
+          "symbol": "_S_2949_Chain4WordMove_00000003_0000000e_00000000",
+          "va": 5079392,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 237,
+          "symbol": "_S_3061_Chain4WordMove_00000003_0000000e_00000001",
+          "va": 5101552,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 238,
+          "symbol": "_S_2963_Chain4DwordMove_00000003_0000000e_00000000",
+          "va": 4986704,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 239,
+          "symbol": "_S_3067_Chain4DwordMove_00000003_0000000e_00000001",
+          "va": 5101744,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 240,
+          "symbol": "_S_2924_Chain4ByteWrite_00000003_0000000f",
+          "va": 5078592,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 241,
+          "symbol": "_S_2940_Chain4WordWrite_00000003_0000000f",
+          "va": 5079104,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 242,
+          "symbol": "_S_2956_Chain4DwordWrite_00000003_0000000f",
+          "va": 4986480,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 243,
+          "symbol": "_S_2928_Chain4ByteFill_00000003_0000000f",
+          "va": 5078720,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 244,
+          "symbol": "_S_2944_Chain4WordFill_00000003_0000000f",
+          "va": 5079232,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 245,
+          "symbol": "_S_2960_Chain4DwordFill_00000003_0000000f",
+          "va": 4986608,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 246,
+          "symbol": "_S_2935_Chain4ByteMove_00000003_0000000f_00000000",
+          "va": 5078944,
+          "owners": [
+            "original-softpc-cvidc:SEVID026.obj"
+          ]
+        },
+        {
+          "index": 247,
+          "symbol": "_S_3055_Chain4ByteMove_00000003_0000000f_00000001",
+          "va": 5101360,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 248,
+          "symbol": "_S_2951_Chain4WordMove_00000003_0000000f_00000000",
+          "va": 4986320,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 249,
+          "symbol": "_S_3063_Chain4WordMove_00000003_0000000f_00000001",
+          "va": 5101616,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        },
+        {
+          "index": 250,
+          "symbol": "_S_2964_Chain4DwordMove_00000003_0000000f_00000000",
+          "va": 4986736,
+          "owners": [
+            "original-softpc-cvidc:SEVID027.obj"
+          ]
+        },
+        {
+          "index": 251,
+          "symbol": "_S_3068_Chain4DwordMove_00000003_0000000f_00000001",
+          "va": 5101776,
+          "owners": [
+            "original-softpc-cvidc:SEVID030.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_simple_read_evid",
+      "va": 6009024,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2115_SimpleByteRead",
+          "va": 5134992,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2116_SimpleWordRead",
+          "va": 5135024,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2117_SimpleDwordRead",
+          "va": 5135056,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2118_SimpleStringRead",
+          "va": 5115792,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2118_SimpleStringRead",
+          "va": 5115792,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_ram_dsbld_read_evid",
+      "va": 6009044,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2111_DisabledRAMByteRead",
+          "va": 5134864,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2112_DisabledRAMWordRead",
+          "va": 5134896,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2113_DisabledRAMDwordRead",
+          "va": 5134928,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2114_DisabledRAMStringReadFwd",
+          "va": 5134960,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2125_DisabledRAMStringReadBwd",
+          "va": 5116016,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_read_mode0_evid",
+      "va": 6009064,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2095_RdMode0UnchainedByteRead",
+          "va": 5134352,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2096_RdMode0UnchainedWordRead",
+          "va": 5134384,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2097_RdMode0UnchainedDwordRead",
+          "va": 5134416,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2098_RdMode0UnchainedStringReadFwd",
+          "va": 5134448,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2121_RdMode0UnchainedStringReadBwd",
+          "va": 5115888,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2087_RdMode0Chain2ByteRead",
+          "va": 5134096,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2088_RdMode0Chain2WordRead",
+          "va": 5134128,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2089_RdMode0Chain2DwordRead",
+          "va": 5134160,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2090_RdMode0Chain2StringReadFwd",
+          "va": 5134192,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2119_RdMode0Chain2StringReadBwd",
+          "va": 5115824,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2091_RdMode0Chain4ByteRead",
+          "va": 5134224,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2092_RdMode0Chain4WordRead",
+          "va": 5134256,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2093_RdMode0Chain4DwordRead",
+          "va": 5134288,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2094_RdMode0Chain4StringReadFwd",
+          "va": 5134320,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2120_RdMode0Chain4StringReadBwd",
+          "va": 5115856,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_read_mode1_evid",
+      "va": 6009124,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2107_RdMode1UnchainedByteRead",
+          "va": 5134736,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2108_RdMode1UnchainedWordRead",
+          "va": 5134768,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2109_RdMode1UnchainedDwordRead",
+          "va": 5134800,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2110_RdMode1UnchainedStringReadFwd",
+          "va": 5134832,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 4,
+          "symbol": "_S_2124_RdMode1UnchainedStringReadBwd",
+          "va": 5115984,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 5,
+          "symbol": "_S_2099_RdMode1Chain2ByteRead",
+          "va": 5134480,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 6,
+          "symbol": "_S_2100_RdMode1Chain2WordRead",
+          "va": 5134512,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 7,
+          "symbol": "_S_2101_RdMode1Chain2DwordRead",
+          "va": 5134544,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 8,
+          "symbol": "_S_2102_RdMode1Chain2StringReadFwd",
+          "va": 5134576,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 9,
+          "symbol": "_S_2122_RdMode1Chain2StringReadBwd",
+          "va": 5115920,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 10,
+          "symbol": "_S_2103_RdMode1Chain4ByteRead",
+          "va": 5134608,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 11,
+          "symbol": "_S_2104_RdMode1Chain4WordRead",
+          "va": 5134640,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 12,
+          "symbol": "_S_2105_RdMode1Chain4DwordRead",
+          "va": 5134672,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 13,
+          "symbol": "_S_2106_RdMode1Chain4StringReadFwd",
+          "va": 5134704,
+          "owners": [
+            "original-softpc-cvidc:SEVID000.obj"
+          ]
+        },
+        {
+          "index": 14,
+          "symbol": "_S_2123_RdMode1Chain4StringReadBwd",
+          "va": 5115952,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_simple_mark_evid",
+      "va": 6009184,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2126_SimpleMark",
+          "va": 5116048,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2126_SimpleMark",
+          "va": 5116048,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2126_SimpleMark",
+          "va": 5116048,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2126_SimpleMark",
+          "va": 5116048,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_cga_mark_evid",
+      "va": 6009200,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2127_CGAMarkByte",
+          "va": 5116080,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2128_CGAMarkWord",
+          "va": 5116112,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2129_CGAMarkDword",
+          "va": 5116144,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2130_CGAMarkString",
+          "va": 5116176,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_unchained_mark_evid",
+      "va": 6009216,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2131_UnchainedMarkByte",
+          "va": 5116208,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2132_UnchainedMarkWord",
+          "va": 5116240,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2133_UnchainedMarkDword",
+          "va": 5116272,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2134_UnchainedMarkString",
+          "va": 5116304,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "_chain4_mark_evid",
+      "va": 6009232,
+      "entries": [
+        {
+          "index": 0,
+          "symbol": "_S_2135_Chain4MarkByte",
+          "va": 5116336,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 1,
+          "symbol": "_S_2136_Chain4MarkWord",
+          "va": 5116368,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 2,
+          "symbol": "_S_2137_Chain4MarkDword",
+          "va": 5116400,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        },
+        {
+          "index": 3,
+          "symbol": "_S_2138_Chain4MarkString",
+          "va": 5116432,
+          "owners": [
+            "original-softpc-cvidc:SEVID001.obj"
+          ]
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "33172BD6AB0729062761F3E51987F029998DE7AD92705A701882EF9B3DF79F72"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\cvidc\\evidfunc.obj",
+      "sha256": "E88FB4E1B9D5290DBBBA5E9C64DA09B653154FD256EAB28E73DC51A2F59881FB"
+    }
+  ],
+  "scope": "Initial linked vector values only; actual mode choice and VRAM behavior remain open"
+}
