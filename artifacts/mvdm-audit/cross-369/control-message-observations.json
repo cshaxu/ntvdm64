@@ -1,0 +1,51 @@
+{
+  "sha256": {
+    "wow32/wmsgcb.h": {
+      "current": "6E9F759F83DFA3A0C03A8988D292E16D0CBF14D3E1D040245C5B5FE2FB02538B",
+      "opennt": "6E9F759F83DFA3A0C03A8988D292E16D0CBF14D3E1D040245C5B5FE2FB02538B",
+      "opennt45": "6E9F759F83DFA3A0C03A8988D292E16D0CBF14D3E1D040245C5B5FE2FB02538B"
+    },
+    "wow32/wmsglb.h": {
+      "current": "6DD54D68BA19801325FC732B1B025AD489861E52E8DF58F88EAC41815ADE28F0",
+      "opennt": "6DD54D68BA19801325FC732B1B025AD489861E52E8DF58F88EAC41815ADE28F0",
+      "opennt45": "6DD54D68BA19801325FC732B1B025AD489861E52E8DF58F88EAC41815ADE28F0"
+    },
+    "wow32/wmsgcb.c": {
+      "current": "AF2F31CE67FFA1A15A59F4AB0993ED6E4781CBDCEABC5A96E6BE8682F51114E3",
+      "opennt": "CA644A033B4ED5974F70FAD75615EF18C80466F3ED6D987554CE031CACAB1E13",
+      "opennt45": "CA644A033B4ED5974F70FAD75615EF18C80466F3ED6D987554CE031CACAB1E13"
+    },
+    "wow32/wmsglb.c": {
+      "current": "9F5D3549B2E3C1FCAA4342DA0A04D37F74477DDA07903071291E74539AF426A2",
+      "opennt": "5E1A7DD4140AE6538D4E728CA869013E8CD00D06D5339EE5682319D5FF4BF26E",
+      "opennt45": "5E1A7DD4140AE6538D4E728CA869013E8CD00D06D5339EE5682319D5FF4BF26E"
+    },
+    "wow32/wmsg16.c": {
+      "current": "952FC7C7466336C45271722122E99E045EA7B56ED649E0C18EC40FF65C1075D0",
+      "opennt": "EB7B726626232AD95F1FF766004F8BEA6FCA3D25111124DD5C18E8512C1DBE44",
+      "opennt45": "EB7B726626232AD95F1FF766004F8BEA6FCA3D25111124DD5C18E8512C1DBE44"
+    }
+  },
+  "edges": [
+    "35:build obj/wmsg16.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wmsg16.c",
+    "38:build obj/wmsgcb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wmsgcb.c",
+    "40:build obj/wmsglb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/wow32/wmsglb.c"
+  ],
+  "deps": {
+    "wmsgcb": [
+      "obj/wmsgcb.obj: #deps 127, deps mtime 8147760840957863 (VALID)",
+      "../../../../src/mvdm/wow32/wmsgcb.h",
+      "../../../../src/mvdm/wow32/wmsglb.h"
+    ],
+    "wmsglb": [
+      "obj/wmsglb.obj: #deps 126, deps mtime 8147760839498214 (VALID)",
+      "../../../../src/mvdm/wow32/wmsgcb.h",
+      "../../../../src/mvdm/wow32/wmsglb.h"
+    ],
+    "wmsg16": [
+      "obj/wmsg16.obj: #deps 127, deps mtime 8147760848754540 (VALID)",
+      "../../../../src/mvdm/wow32/wmsgcb.h",
+      "../../../../src/mvdm/wow32/wmsglb.h"
+    ]
+  }
+}

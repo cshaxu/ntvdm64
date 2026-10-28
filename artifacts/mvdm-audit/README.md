@@ -60,6 +60,11 @@ traces the guest continuation frame into the selected host adapter. The
 [MCI converter review](cross-369/mci-converter-disposition.md) distinguishes
 the inactive historical converter from the separate guest multimedia route;
 neither report claims current end-to-end device behavior is verified.
+The [multimedia callback review](nine-way/part-5/multimedia-semantic-reconciliation.md),
+[SHELL owner review](nine-way/part-8/shell-semantic-reconciliation.md), and
+[combo/list message review](cross-369/control-message-disposition.md) trace
+selected original paths and distinguish bounded historical tests from missing
+current-artifact behavior and lifecycle evidence.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
