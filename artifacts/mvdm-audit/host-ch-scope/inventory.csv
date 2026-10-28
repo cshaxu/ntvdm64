@@ -478,7 +478,7 @@ softpc.new/base/ccpu386/verr.c,shard-2/file-audit.csv,partial,host-candidate,hos
 softpc.new/base/ccpu386/verr.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/verw.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/verw.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/ccpu386/vglob.c,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/ccpu386/vglob.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/wait.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/wait.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/wbinvd.c,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1638,7 +1638,7 @@ wow32/wcmdgtbl.h,shard-0/review.csv,部分复通,host-candidate,host C/H candida
 wow32/wcntl32.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wcntl32.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wcommdlg.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wcommdlg.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wcommdlg.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wctlm32.c,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wctlm32.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wcurcash.c,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1650,8 +1650,8 @@ wow32/wdde.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candida
 wow32/wddeml32.c,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wddeml32.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wddetbl2.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wdib.c,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wdib.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wdib.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wdib.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wdos.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wdos.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgdi.c,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1666,8 +1666,8 @@ wow32/wgmeta.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate;
 wow32/wgmeta.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgpal.c,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgpal.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wgprnset.c,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wgprnset.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wgprnset.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wgprnset.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgtbl.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgtbl2.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgtext.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

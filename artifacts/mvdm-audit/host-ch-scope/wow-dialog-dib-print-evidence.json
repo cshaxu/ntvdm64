@@ -1,0 +1,764 @@
+{
+  "identities": {
+    "wow32/wcommdlg.h": [
+      "F2229629FE88AC3A5243200AF9F9F92A6A853D39322FD470DE1CBA588A5E9E69",
+      "F2229629FE88AC3A5243200AF9F9F92A6A853D39322FD470DE1CBA588A5E9E69",
+      "F2229629FE88AC3A5243200AF9F9F92A6A853D39322FD470DE1CBA588A5E9E69"
+    ],
+    "wow32/wdib.c": [
+      "D0BD4F9CB7BBA0DC5E977A8C096337DF0830E3804EF6AEB8759CF979176DD910",
+      "D0BD4F9CB7BBA0DC5E977A8C096337DF0830E3804EF6AEB8759CF979176DD910",
+      "D0BD4F9CB7BBA0DC5E977A8C096337DF0830E3804EF6AEB8759CF979176DD910"
+    ],
+    "wow32/wdib.h": [
+      "AC3C662CAD367DC6C63C0812A376FBCC7BAE5DF7407BAE6EADBCFAEEE3D78CF4",
+      "AC3C662CAD367DC6C63C0812A376FBCC7BAE5DF7407BAE6EADBCFAEEE3D78CF4",
+      "AC3C662CAD367DC6C63C0812A376FBCC7BAE5DF7407BAE6EADBCFAEEE3D78CF4"
+    ],
+    "wow32/wgprnset.c": [
+      "7E53074328ACE93AE8CE39FB218FA780FF868999B40F7904FDBBFF45FBD7B990",
+      "7E53074328ACE93AE8CE39FB218FA780FF868999B40F7904FDBBFF45FBD7B990",
+      "7E53074328ACE93AE8CE39FB218FA780FF868999B40F7904FDBBFF45FBD7B990"
+    ],
+    "wow32/wgprnset.h": [
+      "6A5B7B76249B5209AA7D4B9FD2F6C29786676F3293AF68A4FDC0FEE1E52BD9E7",
+      "6A5B7B76249B5209AA7D4B9FD2F6C29786676F3293AF68A4FDC0FEE1E52BD9E7",
+      "6A5B7B76249B5209AA7D4B9FD2F6C29786676F3293AF68A4FDC0FEE1E52BD9E7"
+    ]
+  },
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "deps_sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+  "exact_dependencies": [
+    {
+      "object": "obj/wres32.obj: #deps 126, deps mtime 8147760843476020 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wres32.obj: #deps 126, deps mtime 8147760843476020 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsglb.obj: #deps 126, deps mtime 8147760839498214 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsglb.obj: #deps 126, deps mtime 8147760839498214 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgman.obj: #deps 126, deps mtime 8147760839386800 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgman.obj: #deps 126, deps mtime 8147760839386800 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmtbl32.obj: #deps 126, deps mtime 8147760843907617 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmtbl32.obj: #deps 126, deps mtime 8147760843907617 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wcntl32.obj: #deps 127, deps mtime 8147760847201179 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wcntl32.obj: #deps 127, deps mtime 8147760847201179 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgprnset.obj: #deps 126, deps mtime 8147760839573350 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgprnset.obj: #deps 126, deps mtime 8147760839573350 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsgem.obj: #deps 126, deps mtime 8147760835748962 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsgem.obj: #deps 126, deps mtime 8147760835748962 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgdi31.obj: #deps 127, deps mtime 8147760843937588 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgdi31.obj: #deps 127, deps mtime 8147760843937588 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsgbm.obj: #deps 126, deps mtime 8147760837104102 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsgbm.obj: #deps 126, deps mtime 8147760837104102 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgfont.obj: #deps 126, deps mtime 8147760845200216 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgfont.obj: #deps 126, deps mtime 8147760845200216 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/mapembed.obj: #deps 127, deps mtime 8147760845421186 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/mapembed.obj: #deps 127, deps mtime 8147760845421186 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgpal.obj: #deps 126, deps mtime 8147760846484926 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgpal.obj: #deps 126, deps mtime 8147760846484926 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wcall32.obj: #deps 126, deps mtime 8147760844896481 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wcall32.obj: #deps 126, deps mtime 8147760844896481 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgmeta.obj: #deps 126, deps mtime 8147760840697005 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgmeta.obj: #deps 126, deps mtime 8147760840697005 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wres16.obj: #deps 126, deps mtime 8147760838998422 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wres16.obj: #deps 126, deps mtime 8147760838998422 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/walias.obj: #deps 126, deps mtime 8147760836219529 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/walias.obj: #deps 126, deps mtime 8147760836219529 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsgcb.obj: #deps 127, deps mtime 8147760840957863 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsgcb.obj: #deps 127, deps mtime 8147760840957863 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wdde.obj: #deps 127, deps mtime 8147760846896720 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wdde.obj: #deps 127, deps mtime 8147760846896720 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32.obj: #deps 142, deps mtime 8147760837231305 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32.obj: #deps 142, deps mtime 8147760837231305 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsgsbm.obj: #deps 126, deps mtime 8147760847866536 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsgsbm.obj: #deps 126, deps mtime 8147760847866536 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wstruc.obj: #deps 127, deps mtime 8147760844662946 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wstruc.obj: #deps 127, deps mtime 8147760844662946 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wcall16.obj: #deps 128, deps mtime 8147760841399046 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wcall16.obj: #deps 128, deps mtime 8147760841399046 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wowtbl.obj: #deps 136, deps mtime 8147760841665270 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wowtbl.obj: #deps 136, deps mtime 8147760841665270 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmdisp32.obj: #deps 128, deps mtime 8147760843330739 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmdisp32.obj: #deps 128, deps mtime 8147760843330739 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgdi.obj: #deps 128, deps mtime 8147760840731982 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgdi.obj: #deps 128, deps mtime 8147760840731982 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wdib.h"
+    },
+    {
+      "object": "obj/wgdi.obj: #deps 128, deps mtime 8147760840731982 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmsg16.obj: #deps 127, deps mtime 8147760848754540 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmsg16.obj: #deps 127, deps mtime 8147760848754540 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wgtext.obj: #deps 126, deps mtime 8147760877332285 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wgtext.obj: #deps 126, deps mtime 8147760877332285 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkbman.obj: #deps 126, deps mtime 8147760879286607 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkbman.obj: #deps 126, deps mtime 8147760879286607 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkmem.obj: #deps 127, deps mtime 8147760882605532 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkmem.obj: #deps 127, deps mtime 8147760882605532 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkgthunk.obj: #deps 127, deps mtime 8147760891414900 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkgthunk.obj: #deps 127, deps mtime 8147760891414900 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkman.obj: #deps 134, deps mtime 8147760894818988 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkman.obj: #deps 134, deps mtime 8147760894818988 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkfileio.obj: #deps 133, deps mtime 8147760890275175 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkfileio.obj: #deps 133, deps mtime 8147760890275175 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wkernel.obj: #deps 127, deps mtime 8147760897524551 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wkernel.obj: #deps 127, deps mtime 8147760897524551 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wsman.obj: #deps 126, deps mtime 8147760881185406 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wsman.obj: #deps 126, deps mtime 8147760881185406 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32fax.obj: #deps 130, deps mtime 8147760899847622 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32fax.obj: #deps 130, deps mtime 8147760899847622 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuser31.obj: #deps 128, deps mtime 8147760888936802 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuser31.obj: #deps 128, deps mtime 8147760888936802 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wshell.obj: #deps 128, deps mtime 8147760888112919 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wshell.obj: #deps 128, deps mtime 8147760888112919 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuman.obj: #deps 127, deps mtime 8147760896748498 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuman.obj: #deps 127, deps mtime 8147760896748498 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wucaret.obj: #deps 126, deps mtime 8147760886424534 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wucaret.obj: #deps 126, deps mtime 8147760886424534 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuclass.obj: #deps 126, deps mtime 8147760897113827 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuclass.obj: #deps 126, deps mtime 8147760897113827 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wucomm.obj: #deps 126, deps mtime 8147760898324305 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wucomm.obj: #deps 126, deps mtime 8147760898324305 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuclip.obj: #deps 128, deps mtime 8147760899653721 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuclip.obj: #deps 128, deps mtime 8147760899653721 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wucursor.obj: #deps 126, deps mtime 8147760895310353 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wucursor.obj: #deps 126, deps mtime 8147760895310353 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wudlg.obj: #deps 127, deps mtime 8147760895466832 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wudlg.obj: #deps 127, deps mtime 8147760895466832 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuhook.obj: #deps 126, deps mtime 8147760893421644 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuhook.obj: #deps 126, deps mtime 8147760893421644 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wulang.obj: #deps 126, deps mtime 8147760899252601 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wulang.obj: #deps 126, deps mtime 8147760899252601 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wumenu.obj: #deps 126, deps mtime 8147760890997595 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wumenu.obj: #deps 126, deps mtime 8147760890997595 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wumsg.obj: #deps 127, deps mtime 8147760896066493 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wumsg.obj: #deps 127, deps mtime 8147760896066493 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuser.obj: #deps 128, deps mtime 8147760899778816 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuser.obj: #deps 128, deps mtime 8147760899778816 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wutext.obj: #deps 126, deps mtime 8147760899758691 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wutext.obj: #deps 126, deps mtime 8147760899758691 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wutmr.obj: #deps 126, deps mtime 8147760895759169 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wutmr.obj: #deps 126, deps mtime 8147760895759169 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wuwind.obj: #deps 126, deps mtime 8147760898425283 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wuwind.obj: #deps 126, deps mtime 8147760898425283 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wowhooks.obj: #deps 127, deps mtime 8147760925067255 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wowhooks.obj: #deps 127, deps mtime 8147760925067255 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wdos.obj: #deps 128, deps mtime 8147760933988022 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wdos.obj: #deps 128, deps mtime 8147760933988022 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wreldc.obj: #deps 126, deps mtime 8147760925791766 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wreldc.obj: #deps 126, deps mtime 8147760925791766 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wcuricon.obj: #deps 126, deps mtime 8147760930928214 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wcuricon.obj: #deps 126, deps mtime 8147760930928214 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wsubcls.obj: #deps 126, deps mtime 8147760932474891 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wsubcls.obj: #deps 126, deps mtime 8147760932474891 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmedia.obj: #deps 126, deps mtime 8147760933555866 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmedia.obj: #deps 126, deps mtime 8147760933555866 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmedia1.obj: #deps 126, deps mtime 8147760930654140 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmedia1.obj: #deps 126, deps mtime 8147760930654140 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmedia2.obj: #deps 126, deps mtime 8147760932644320 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmedia2.obj: #deps 126, deps mtime 8147760932644320 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmstruc.obj: #deps 126, deps mtime 8147760933928040 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmstruc.obj: #deps 126, deps mtime 8147760933928040 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmstru2.obj: #deps 126, deps mtime 8147760940071598 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmstru2.obj: #deps 126, deps mtime 8147760940071598 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/walloc16.obj: #deps 126, deps mtime 8147760936857970 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/walloc16.obj: #deps 126, deps mtime 8147760936857970 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmstru1.obj: #deps 126, deps mtime 8147760937574169 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmstru1.obj: #deps 126, deps mtime 8147760937574169 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/waccel.obj: #deps 126, deps mtime 8147760935718447 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/waccel.obj: #deps 126, deps mtime 8147760935718447 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wmmalias.obj: #deps 127, deps mtime 8147760942810876 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wmmalias.obj: #deps 127, deps mtime 8147760942810876 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wsext.obj: #deps 127, deps mtime 8147760946572320 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wsext.obj: #deps 127, deps mtime 8147760946572320 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wsdata.obj: #deps 127, deps mtime 8147760946758857 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wsdata.obj: #deps 127, deps mtime 8147760946758857 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wsraw.obj: #deps 127, deps mtime 8147760949365544 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wsraw.obj: #deps 127, deps mtime 8147760949365544 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wheap.obj: #deps 126, deps mtime 8147760940686363 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wheap.obj: #deps 126, deps mtime 8147760940686363 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wthman.obj: #deps 126, deps mtime 8147760940686363 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wthman.obj: #deps 126, deps mtime 8147760940686363 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wcommdlg.obj: #deps 129, deps mtime 8147760945906425 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wcommdlg.obj: #deps 129, deps mtime 8147760945906425 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wdib.obj: #deps 129, deps mtime 8147760950833391 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wdib.obj: #deps 129, deps mtime 8147760950833391 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wdib.h"
+    },
+    {
+      "object": "obj/wdib.obj: #deps 129, deps mtime 8147760950833391 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wusercli.obj: #deps 126, deps mtime 8147760947272417 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wusercli.obj: #deps 126, deps mtime 8147760947272417 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wspool.obj: #deps 126, deps mtime 8147760949633123 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wspool.obj: #deps 126, deps mtime 8147760949633123 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wole2.obj: #deps 126, deps mtime 8147760938806894 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wole2.obj: #deps 126, deps mtime 8147760938806894 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wparam.obj: #deps 126, deps mtime 8147760946810822 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wparam.obj: #deps 126, deps mtime 8147760946810822 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_hook_callback.obj: #deps 138, deps mtime 8147761042302599 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_hook_callback.obj: #deps 138, deps mtime 8147761042302599 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_shell_callback.obj: #deps 127, deps mtime 8147761041849804 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_shell_callback.obj: #deps 127, deps mtime 8147761041849804 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_task_cleanup_entry.obj: #deps 129, deps mtime 8147761042039606 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_task_cleanup_entry.obj: #deps 129, deps mtime 8147761042039606 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_idle_hook_binding.obj: #deps 135, deps mtime 8147761037303138 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_idle_hook_binding.obj: #deps 135, deps mtime 8147761037303138 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_common_dialog_calls.obj: #deps 130, deps mtime 8147761037368406 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_common_dialog_calls.obj: #deps 130, deps mtime 8147761037368406 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_message_lifetime.obj: #deps 127, deps mtime 8147761042126950 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_message_lifetime.obj: #deps 127, deps mtime 8147761042126950 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_user_thunk_scope.obj: #deps 136, deps mtime 8147761042204341 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_user_thunk_scope.obj: #deps 136, deps mtime 8147761042204341 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_user_native_extension.obj: #deps 130, deps mtime 8147761038388104 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_user_native_extension.obj: #deps 130, deps mtime 8147761038388104 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_launch_identity.obj: #deps 126, deps mtime 8147761020346627 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_launch_identity.obj: #deps 126, deps mtime 8147761020346627 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_task_termination.obj: #deps 130, deps mtime 8147761031797931 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_task_termination.obj: #deps 130, deps mtime 8147761031797931 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_registry_binding.obj: #deps 127, deps mtime 8147761037611220 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wcommdlg.h"
+    },
+    {
+      "object": "obj/wow32-dll/wow_registry_binding.obj: #deps 127, deps mtime 8147761037611220 (VALID)",
+      "dependency": "../../../../src/mvdm/wow32/wgprnset.h"
+    }
+  ],
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "map_lines": [
+    "0001:00012c80       _WG32DeviceCapabilities@4  10013c80 f   wgprnset.obj",
+    "0001:00012f80       _WG32DeviceMode@4          10013f80 f   wgprnset.obj",
+    "0001:00013060       _WG32ExtDeviceMode@4       10014060 f   wgprnset.obj",
+    "0001:0002f3a0       _WCD32ChooseColor@4        100303a0 f   wcommdlg.obj",
+    "0001:00030200       _WCD32GetOpenFileName@4    10031200 f   wcommdlg.obj",
+    "0001:00030240       _WCD32PrintDlg@4           10031240 f   wcommdlg.obj",
+    "0001:00031b00       _W32CheckAndFreeDibInfo@4  10032b00 f   wdib.obj",
+    "0001:00031d30       _W32HandleDibDrv@4         10032d30 f   wdib.obj",
+    "0002:0000b000       __sehtable$_W32HandleDibDrv@4 1009a000     wdib.obj"
+  ],
+  "calling_source_sha256": {
+    "src/mvdm/wow32/wcmdgtbl.h": "4C320281E81D1CECFAD832587C4887E9D96E09488348234BC276FF4B5CC00B32",
+    "src/mvdm/wow32/wcommdlg.c": "2B3C50B279E92DEEC0CB7259A863EA5C4E590C44CA61BFB54760C1F061CB1387",
+    "src/mvdm/wow32/wgdi.c": "4C28E5166B294AC2A17982B3FF6E6559F369B8A8A2DD766AA18E16C8F74379D6",
+    "src/mvdm/wow32/wgtbl2.h": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+  },
+  "limits": "Selected static calls and object ownership only, not live guest/device execution, complete ABI or lifecycle."
+}

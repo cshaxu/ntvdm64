@@ -1,0 +1,99 @@
+{
+  "inputs": [
+    {
+      "path": "src/mvdm/softpc.new/base/ccpu386/vglob.c",
+      "sha256": "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/cpu/src/evid/vglob.c",
+      "sha256": "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/vglob.c",
+      "sha256": "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new/base/ccpu386/vglob.c",
+      "sha256": "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/vglob.obj",
+      "sha256": "0222C2606BF85AF74F8D51D023ABAEED1A06FAB40C1196E7FADB3530AEAF7C84"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "6049E67EB804DBA2BD59E3EF7563B1FA0B3979B52EADFC9745745F5E1E000185"
+    },
+    {
+      "path": "artifacts/mvdm-audit/cvidc-vector-fixture-r74-evidence.json",
+      "sha256": "00133C70486C8349AF16B181943B289D557CD3C77648B8ECCBBD342ABBADA52D"
+    }
+  ],
+  "source_bytes_equal": true,
+  "selected_build_edge": "build obj/cvidc/vglob.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cpu/src/evid/vglob.c",
+  "selected_accessor_map_symbols": [
+    "0001:000905f0       _getVideobit_prot_mask     004915f0 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090600       _getVideochain             00491600 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090610       _getVideodata_and_mask     00491610 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090620       _getVideodata_xor_mask     00491620 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090630       _getVideodirty_high        00491630 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090640       _getVideodirty_low         00491640 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090650       _getVideodirty_total       00491650 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090660       _getVideodither            00491660 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090670       _getVideolatch_xor_mask    00491670 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090680       _getVideoplane_enable      00491680 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090690       _getVideoread_mapped_plane 00491690 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906a0       _getVideorotate            004916a0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906b0       _getVideoscreen_ptr        004916b0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906c0       _getVideov7_fg_latches     004916c0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906d0       _getVideowplane            004916d0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906e0       _getVideowrmode            004916e0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000906f0       _getVideowrstate           004916f0 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090700       _setVideobit_prot_mask     00491700 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090710       _setVideocalc_data_xor     00491710 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090720       _setVideocalc_latch_xor    00491720 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090730       _setVideochain             00491730 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090740       _setVideocolour_comp       00491740 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090750       _setVideodata_and_mask     00491750 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090760       _setVideodata_xor_mask     00491760 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090770       _setVideodirty_high        00491770 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090780       _setVideodirty_low         00491780 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090790       _setVideodirty_total       00491790 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907a0       _setVideodither            004917a0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907b0       _setVideodont_care         004917b0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907c0       _setVideolatch_xor_mask    004917c0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907d0       _setVideomark_byte         004917d0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907e0       _setVideomark_string       004917e0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000907f0       _setVideomark_word         004917f0 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090800       _setVideoplane_enable      00491800 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090810       _setVideoplane_enable_mask 00491810 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090820       _setVideoread_byte_addr    00491820 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090830       _setVideoread_mapped_plane 00491830 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090840       _setVideoread_shift_count  00491840 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090850       _setVideorotate            00491850 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090860       _setVideorplane            00491860 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090870       _setVideoscratch           00491870 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090880       _setVideoscreen_ptr        00491880 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090890       _setVideosr_lookup         00491890 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908a0       _setVideosr_masked_val     004918a0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908b0       _setVideosr_nmask          004918b0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908c0       _setVideov7_bank_vid_copy_off 004918c0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908d0       _setVideov7_fg_latches     004918d0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908e0       _setVideovideo_copy        004918e0 f   original-softpc-cvidc:vglob.obj",
+    "0001:000908f0       _setVideowplane            004918f0 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090900       _setVideowrmode            00491900 f   original-softpc-cvidc:vglob.obj",
+    "0001:00090910       _setVideowrstate           00491910 f   original-softpc-cvidc:vglob.obj"
+  ],
+  "prior_fixture_result": "pass",
+  "current_fixture_matches_prior": false,
+  "prior_fixture_scope": "Exact read/write/mark publication, unknown read/mark selector behavior; not generated VRAM execution",
+  "limits": "Selected source is a different physical path/profile; source identity and fixture do not establish original CCPU variant runtime or all device/lifecycle behavior."
+}
