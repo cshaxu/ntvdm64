@@ -1,0 +1,2940 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "wow16/rasapi16/raserror.h",
+      "path": "wow16/rasapi16/raserror.h",
+      "hashes": [
+        "A5739BEDD75C02EEE62CDEFC9D85959BB647F8A8CAEBA1D52B6EFC68339B7D70",
+        "A5739BEDD75C02EEE62CDEFC9D85959BB647F8A8CAEBA1D52B6EFC68339B7D70",
+        "A5739BEDD75C02EEE62CDEFC9D85959BB647F8A8CAEBA1D52B6EFC68339B7D70"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/rasapi16/makefile",
+          "line": 71,
+          "text": "rasapi16.obj: .\\ras.h .\\raserror.h ..\\inc\\windows.h"
+        },
+        {
+          "path": "wow16/rasapi16/rasapi16.c",
+          "line": 20,
+          "text": "#include <raserror.h>"
+        },
+        {
+          "path": "wow16/rasapi16/rasapi16.c",
+          "line": 644,
+          "text": "/* Map Win32 error codes to Win16.  (Win32: raserror.h)"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/debug/REGEDIT.RES",
+      "path": "wow16/regedit/debug/REGEDIT.RES",
+      "hashes": [
+        "F5C342EA55C505CC3D24964AEA83B7A0BC72056B3301CDC03D675C82C5B3F9C5",
+        "",
+        ""
+      ],
+      "basename_match_count": 8,
+      "literal_refs": [
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 65,
+          "text": "$(DSTDIR)\\regedit.res: $(RES_DIR)\\regedit.rc $(RES_DIR)\\sdkreged.dlg $(RES_DIR)\\regedit.rcv"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 66,
+          "text": "rc16 -I..\\inc -r $(DEF) -fo$(DSTDIR)\\regedit.res $(RES_DIR)\\regedit.rc"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 71,
+          "text": "regedit.res: $(RES_DIR)\\regedit.res"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 72,
+          "text": "copy $(RES_DIR)\\regedit.res"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 101,
+          "text": "$(NAME1).$(LANG):  iclean  $(DSTDIR)\\regedit.res"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 103,
+          "text": "rc16 -I..\\inc -t -30 $(DSTDIR)\\regedit.res $(NAME1).$(LANG)"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 105,
+          "text": "$(NAME1).exe:   $(NAME1).tmp $(DSTDIR)\\regedit.res"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 106,
+          "text": "rc16 -I..\\inc -t -30 $(DSTDIR)\\regedit.res $(NAME1).exe"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/debug/REGEDT16.EXE",
+      "path": "wow16/regedit/debug/REGEDT16.EXE",
+      "hashes": [
+        "9AC95769EF42E27E637457D6CBEECCF8FD9FFD248D4911E870DCB319E9122793",
+        "",
+        ""
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/regedit.ico",
+      "path": "wow16/regedit/regedit.ico",
+      "hashes": [
+        "371A9D4D3886C60045869FCB0EDFFF3AB7FFA7760C60D192B57DA85A87F926E2",
+        "371A9D4D3886C60045869FCB0EDFFF3AB7FFA7760C60D192B57DA85A87F926E2",
+        "371A9D4D3886C60045869FCB0EDFFF3AB7FFA7760C60D192B57DA85A87F926E2"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/regedit/messages/usa/regedit.rc",
+          "line": 7,
+          "text": "MAINICON ICON RegEdit.ico"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/sdkreged.def",
+      "path": "wow16/regedit/sdkreged.def",
+      "hashes": [
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3",
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3",
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/sdkreged.h",
+      "path": "wow16/regedit/sdkreged.h",
+      "hashes": [
+        "017FBEAFE0B7220F60FD2BA34D64678E2BB115209C74477289A7194C68F966B0",
+        "017FBEAFE0B7220F60FD2BA34D64678E2BB115209C74477289A7194C68F966B0",
+        "017FBEAFE0B7220F60FD2BA34D64678E2BB115209C74477289A7194C68F966B0"
+      ],
+      "basename_match_count": 9,
+      "literal_refs": [
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 196,
+          "text": "$(DSTDIR)\\regmain.obj: regmain.c RegEdit.h SDKRegEd.h common.h"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 198,
+          "text": "$(DSTDIR)\\sdbase.obj: sdbase.c SDKRegEd.h common.h"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 200,
+          "text": "$(DSTDIR)\\sdkreged.obj: sdkreged.c SDKRegEd.h common.h"
+        },
+        {
+          "path": "wow16/regedit/makefile",
+          "line": 204,
+          "text": "$(DSTDIR)\\virt.obj: virt.c SDKRegEd.h common.h"
+        },
+        {
+          "path": "wow16/regedit/regmain.c",
+          "line": 4,
+          "text": "#include \"SDKRegEd.h\""
+        },
+        {
+          "path": "wow16/regedit/sdbase.c",
+          "line": 2,
+          "text": "#include \"SDKRegEd.h\""
+        },
+        {
+          "path": "wow16/regedit/sdkreged.c",
+          "line": 3,
+          "text": "#include \"SDKRegEd.h\""
+        },
+        {
+          "path": "wow16/regedit/virt.c",
+          "line": 2,
+          "text": "#include \"SDKRegEd.h\""
+        },
+        {
+          "path": "wow16/regedit/messages/usa/regedit.rc",
+          "line": 5,
+          "text": "#include \"SDKRegEd.h\""
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/regedit/sdkreged.ico",
+      "path": "wow16/regedit/sdkreged.ico",
+      "hashes": [
+        "9CFBF8F6EA979AF88FB2911B72F840C8E9B80E65C4D7507A5CC546CFA33E477A",
+        "9CFBF8F6EA979AF88FB2911B72F840C8E9B80E65C4D7507A5CC546CFA33E477A",
+        "9CFBF8F6EA979AF88FB2911B72F840C8E9B80E65C4D7507A5CC546CFA33E477A"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/shell/library/shell.def",
+      "path": "wow16/shell/library/shell.def",
+      "hashes": [
+        "3328A736A61B18ADF007D8453D6993BA087571F9DE7F5F1464E1CA5160D14908",
+        "3328A736A61B18ADF007D8453D6993BA087571F9DE7F5F1464E1CA5160D14908",
+        "3328A736A61B18ADF007D8453D6993BA087571F9DE7F5F1464E1CA5160D14908"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/shell/makefile",
+          "line": 98,
+          "text": "shell.dll shell.map: shell.obj shell.lrf shell.def shell.res dragdrop.obj"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/shell/shell.asm",
+      "path": "wow16/shell/shell.asm",
+      "hashes": [
+        "C5260DF05BD3A224EB9711348837C6B7A15540F9974529D2D1F11BEF5DFAF8D3",
+        "C5260DF05BD3A224EB9711348837C6B7A15540F9974529D2D1F11BEF5DFAF8D3",
+        "C5260DF05BD3A224EB9711348837C6B7A15540F9974529D2D1F11BEF5DFAF8D3"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/shell/makefile",
+          "line": 85,
+          "text": "shell.obj: shell.asm ..\\..\\inc\\wow.inc ..\\..\\inc\\wowshell.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/shell/SHELL.DLL",
+      "path": "wow16/shell/SHELL.DLL",
+      "hashes": [
+        "B5C132C76B5106BE713B2E1B1E519EC9F540A39FCB8EFCA5CCAA42F16ECCA04F",
+        "B5C132C76B5106BE713B2E1B1E519EC9F540A39FCB8EFCA5CCAA42F16ECCA04F",
+        "B5C132C76B5106BE713B2E1B1E519EC9F540A39FCB8EFCA5CCAA42F16ECCA04F"
+      ],
+      "basename_match_count": 6,
+      "literal_refs": [
+        {
+          "path": "wow16/shell/makefile",
+          "line": 70,
+          "text": "all: shell.dll shell.sym"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 71,
+          "text": "-binplace shell.dll"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 93,
+          "text": "echo shell.dll>>shell.lrf"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 98,
+          "text": "shell.dll shell.map: shell.obj shell.lrf shell.def shell.res dragdrop.obj"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 100,
+          "text": "rc16 -t shell.res shell.dll"
+        },
+        {
+          "path": "wow16/shell/shell.rcv",
+          "line": 11,
+          "text": "#define VER_ORIGINALFILENAME_STR        \"SHELL.DLL\""
+        }
+      ],
+      "archive_identical": [
+        "WINNT/SYSTEM32/SHELL.DLL"
+      ],
+      "archive_named": [
+        "WINNT/SYSTEM32/SHELL.DLL"
+      ]
+    },
+    {
+      "key": "wow16/shell/shell.rc",
+      "path": "wow16/shell/shell.rc",
+      "hashes": [
+        "A85D2C3A86A2C60BE03E1C862133BFE9DC1A20EFA9AEBA8B176B68F39573233D",
+        "A85D2C3A86A2C60BE03E1C862133BFE9DC1A20EFA9AEBA8B176B68F39573233D",
+        "A85D2C3A86A2C60BE03E1C862133BFE9DC1A20EFA9AEBA8B176B68F39573233D"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/shell/makefile",
+          "line": 102,
+          "text": "shell.res: shell.rc shell.rcv ..\\inc\\common.ver"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/shell/SHELL.RES",
+      "path": "wow16/shell/SHELL.RES",
+      "hashes": [
+        "60D7E9EC7AB17E61C1E5E9426EE4652E2EF7E85EF282F5CE0469DC4DD87B0577",
+        "60D7E9EC7AB17E61C1E5E9426EE4652E2EF7E85EF282F5CE0469DC4DD87B0577",
+        "60D7E9EC7AB17E61C1E5E9426EE4652E2EF7E85EF282F5CE0469DC4DD87B0577"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/shell/makefile",
+          "line": 98,
+          "text": "shell.dll shell.map: shell.obj shell.lrf shell.def shell.res dragdrop.obj"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 100,
+          "text": "rc16 -t shell.res shell.dll"
+        },
+        {
+          "path": "wow16/shell/makefile",
+          "line": 102,
+          "text": "shell.res: shell.rc shell.rcv ..\\inc\\common.ver"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/DRWATSON.EXE",
+      "path": "wow16/sherlock/DRWATSON.EXE",
+      "hashes": [
+        "2F93A0A46F2E88B4BDAFE03111E901030F3EC0D862F3D2C675A66AAE36158AA3",
+        "2F93A0A46F2E88B4BDAFE03111E901030F3EC0D862F3D2C675A66AAE36158AA3",
+        "2F93A0A46F2E88B4BDAFE03111E901030F3EC0D862F3D2C675A66AAE36158AA3"
+      ],
+      "basename_match_count": 7,
+      "literal_refs": [
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 42,
+          "text": "all:  drwatson.exe"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 61,
+          "text": "drwatson.exe: $(OBJ) $(RES_DIR)\\drwatson.res sherlock.lnk drwatson.def"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 64,
+          "text": "rc16 -t -30 $(RES_DIR)\\drwatson.res drwatson.exe"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 65,
+          "text": "binplace drwatson.exe drwatson.map drwatson.sym"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 74,
+          "text": "if exist drwatson.exe del drwatson.exe"
+        },
+        {
+          "path": "wow16/sherlock/sherlock.lnk",
+          "line": 2,
+          "text": "drwatson.exe"
+        },
+        {
+          "path": "wow16/sherlock/messages/usa/drwatson.rcv",
+          "line": 12,
+          "text": "#define VER_ORIGINALFILENAME_STR        \"DRWATSON.EXE\""
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/messages/usa/DRWATSON.RES",
+      "path": "wow16/sherlock/messages/usa/DRWATSON.RES",
+      "hashes": [
+        "CEC5BA8D9252410BA12F572422C10167D5733A605020309716692C2B7A4B040E",
+        "CEC5BA8D9252410BA12F572422C10167D5733A605020309716692C2B7A4B040E",
+        "CEC5BA8D9252410BA12F572422C10167D5733A605020309716692C2B7A4B040E"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 58,
+          "text": "$(RES_DIR)\\drwatson.res: $(RES_DIR)\\drwatson.rc $(RES_DIR)\\drwatson.rcv ..\\inc\\common.ver str.h"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 61,
+          "text": "drwatson.exe: $(OBJ) $(RES_DIR)\\drwatson.res sherlock.lnk drwatson.def"
+        },
+        {
+          "path": "wow16/sherlock/makefile",
+          "line": 64,
+          "text": "rc16 -t -30 $(RES_DIR)\\drwatson.res drwatson.exe"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/sherlock.doc",
+      "path": "wow16/sherlock/sherlock.doc",
+      "hashes": [
+        "B5CD28778C6DCF4E65DFD307E46449DABF88E753533198E5F0E1F077B2C0B9E5",
+        "B5CD28778C6DCF4E65DFD307E46449DABF88E753533198E5F0E1F077B2C0B9E5",
+        "B5CD28778C6DCF4E65DFD307E46449DABF88E753533198E5F0E1F077B2C0B9E5"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/sherlock.ico",
+      "path": "wow16/sherlock/sherlock.ico",
+      "hashes": [
+        "087CD0589EDBFAF9E4D193EB54180629E14C37EF2162036313B7BBFFB87336C3",
+        "087CD0589EDBFAF9E4D193EB54180629E14C37EF2162036313B7BBFFB87336C3",
+        "087CD0589EDBFAF9E4D193EB54180629E14C37EF2162036313B7BBFFB87336C3"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/sherlock.txt",
+      "path": "wow16/sherlock/sherlock.txt",
+      "hashes": [
+        "87B1CAD85A11399619E19FF9061CDE2740A95BE9DEFA81AABF063FFCD3AB5F18",
+        "87B1CAD85A11399619E19FF9061CDE2740A95BE9DEFA81AABF063FFCD3AB5F18",
+        "87B1CAD85A11399619E19FF9061CDE2740A95BE9DEFA81AABF063FFCD3AB5F18"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/sherlock/watson.ico",
+      "path": "wow16/sherlock/watson.ico",
+      "hashes": [
+        "50BAB5262A83EB363CF602F3E93B1BD58859B40FF1C34EF8B09BB3203CF13940",
+        "50BAB5262A83EB363CF602F3E93B1BD58859B40FF1C34EF8B09BB3203CF13940",
+        "50BAB5262A83EB363CF602F3E93B1BD58859B40FF1C34EF8B09BB3203CF13940"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/envect.asm",
+      "path": "wow16/system/envect.asm",
+      "hashes": [
+        "09C947FF2F204128A89DEEA9053E7E9C118C1F18FB083E071899BB33DBE4AF4C",
+        "09C947FF2F204128A89DEEA9053E7E9C118C1F18FB083E071899BB33DBE4AF4C",
+        "09C947FF2F204128A89DEEA9053E7E9C118C1F18FB083E071899BB33DBE4AF4C"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/hpsystem",
+          "line": 19,
+          "text": "envect.obj: envect.asm vecsys.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/equate.inc",
+      "path": "wow16/system/equate.inc",
+      "hashes": [
+        "EF96A251B8FF37963120BBDC06460B6C702795B0279E045CEC9B50D2E21CF392",
+        "EF96A251B8FF37963120BBDC06460B6C702795B0279E045CEC9B50D2E21CF392",
+        "EF96A251B8FF37963120BBDC06460B6C702795B0279E045CEC9B50D2E21CF392"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/envect.asm",
+          "line": 7,
+          "text": "include\tequate.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/hpsystem",
+      "path": "wow16/system/hpsystem",
+      "hashes": [
+        "4CDD82D29FC078410F1C9ABECDCD887EC11709014AA3A69CC5557F23526AA41B",
+        "4CDD82D29FC078410F1C9ABECDCD887EC11709014AA3A69CC5557F23526AA41B",
+        "4CDD82D29FC078410F1C9ABECDCD887EC11709014AA3A69CC5557F23526AA41B"
+      ],
+      "basename_match_count": 6,
+      "literal_refs": [
+        {
+          "path": "wow16/system/envect.asm",
+          "line": 68,
+          "text": ";  Check if the PC is a Vectra. If Yes, then call HPSystem to get the"
+        },
+        {
+          "path": "wow16/system/hpsystem.lnk",
+          "line": 1,
+          "text": "hpsystem timer envect"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 30,
+          "text": "ifdef\tHPSYSTEM"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 507,
+          "text": "ifdef HPSYSTEM"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 525,
+          "text": "endif ;HPSYSTEM"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 627,
+          "text": "ifdef\tHPSYSTEM"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/hpsystem.def",
+      "path": "wow16/system/hpsystem.def",
+      "hashes": [
+        "4A78CB2C77992633C69CC81077B50C71B1C1538D9CD8DFE47F99F2B699A7AB3C",
+        "4A78CB2C77992633C69CC81077B50C71B1C1538D9CD8DFE47F99F2B699A7AB3C",
+        "4A78CB2C77992633C69CC81077B50C71B1C1538D9CD8DFE47F99F2B699A7AB3C"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/system/hpsystem",
+          "line": 21,
+          "text": "hpsystem.drv: hpsystem.def hpsystem.lnk hpsystem.obj timer.obj envect.obj"
+        },
+        {
+          "path": "wow16/system/hpsystem.lnk",
+          "line": 5,
+          "text": "hpsystem.def"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/romstuff.inc",
+      "path": "wow16/system/romstuff.inc",
+      "hashes": [
+        "E69B89D53ABA721EFBE6FC419134F144C1566AE7389F36AECBB8396EB02BE765",
+        "E69B89D53ABA721EFBE6FC419134F144C1566AE7389F36AECBB8396EB02BE765",
+        "E69B89D53ABA721EFBE6FC419134F144C1566AE7389F36AECBB8396EB02BE765"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/system.inc",
+          "line": 19,
+          "text": "; picked off romstuff.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/romsys",
+      "path": "wow16/system/romsys",
+      "hashes": [
+        "BAA24D29817FC20C8B435650F119EA5E4B38D46A61DD6D6FC9C63D99000CCA27",
+        "BAA24D29817FC20C8B435650F119EA5E4B38D46A61DD6D6FC9C63D99000CCA27",
+        "BAA24D29817FC20C8B435650F119EA5E4B38D46A61DD6D6FC9C63D99000CCA27"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/romsys.def",
+      "path": "wow16/system/romsys.def",
+      "hashes": [
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B",
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B",
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/romsys",
+          "line": 18,
+          "text": "system.drv: romsys.def system.lnk system.obj timer.obj"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/system",
+      "path": "wow16/system/system",
+      "hashes": [
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63",
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63",
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63"
+      ],
+      "basename_match_count": 31,
+      "literal_refs": [
+        {
+          "path": "wow16/system/equate.inc",
+          "line": 155,
+          "text": "V_SYSTEM                equ     0012H           ; System Intrinsics"
+        },
+        {
+          "path": "wow16/system/equate.inc",
+          "line": 179,
+          "text": "V_LHPMOUSE              equ     00CCH           ; Microsoft/Mouse System's"
+        },
+        {
+          "path": "wow16/system/equate.inc",
+          "line": 206,
+          "text": "F_SYSTEM                equ     01H*2           ; System func. call,"
+        },
+        {
+          "path": "wow16/system/hpsystem",
+          "line": 15,
+          "text": "masm -R -DHPSYSTEM system,hpsystem;"
+        },
+        {
+          "path": "wow16/system/hpsystem.def",
+          "line": 1,
+          "text": "LIBRARY SYSTEM"
+        },
+        {
+          "path": "wow16/system/hpsystem.def",
+          "line": 3,
+          "text": "DESCRIPTION 'Microsoft Windows System configuration module for HP Vectra'"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 1,
+          "text": "# SYSTEM makefile"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 96,
+          "text": "echo system $(LINK)>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 98,
+          "text": "echo system;>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 101,
+          "text": "masm $(AOBJ) system;"
+        },
+        {
+          "path": "wow16/system/romstuff.inc",
+          "line": 12,
+          "text": "%out Creating Data Segment For ROM System"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 19,
+          "text": "link system timer, system.drv/al:16, system.map/map, /nod, system.def;"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 21,
+          "text": "mapsym system"
+        },
+        {
+          "path": "wow16/system/romsys.def",
+          "line": 1,
+          "text": "LIBRARY SYSTEM"
+        },
+        {
+          "path": "wow16/system/romsys.def",
+          "line": 3,
+          "text": "DESCRIPTION 'Microsoft Windows System Configuration Module for ROM Systems'"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 11,
+          "text": "TITLE SYSTEM - InquireSystem procedure to return info about devices"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 79,
+          "text": "; necessitating the use of a system flag to store the machine"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 80,
+          "text": "; configuration. The system flag is initialised during init time"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 88,
+          "text": "; The system flag bit assignments are:"
+        },
+        {
+          "path": "wow16/system/system.asm",
+          "line": 106,
+          "text": ";\tequates used for the system flag"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/system.drv",
+      "path": "wow16/system/system.drv",
+      "hashes": [
+        "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+        "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+        "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3"
+      ],
+      "basename_match_count": 13,
+      "literal_refs": [
+        {
+          "path": "wow16/system/makefile",
+          "line": 79,
+          "text": "all: system.drv system.sym"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 80,
+          "text": "-binplace system.drv system.map system.sym"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 108,
+          "text": "system.drv: system.obj timer.obj system.lrf system.res"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 112,
+          "text": "ren system.exe system.drv"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 12,
+          "text": "target: system.drv"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 18,
+          "text": "system.drv: romsys.def system.lnk system.obj timer.obj"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 19,
+          "text": "link system timer, system.drv/al:16, system.map/map, /nod, system.def;"
+        },
+        {
+          "path": "wow16/system/romsys",
+          "line": 20,
+          "text": "rc system.drv"
+        },
+        {
+          "path": "wow16/system/system",
+          "line": 12,
+          "text": "target: system.drv"
+        },
+        {
+          "path": "wow16/system/system",
+          "line": 18,
+          "text": "system.drv: system.def system.lnk system.obj timer.obj"
+        },
+        {
+          "path": "wow16/system/system",
+          "line": 19,
+          "text": "link system timer, system.drv/al:16, system.map/map, /nod, system.def;"
+        },
+        {
+          "path": "wow16/system/system",
+          "line": 20,
+          "text": "rc system.drv"
+        },
+        {
+          "path": "wow16/system/system.lnk",
+          "line": 2,
+          "text": "system.drv"
+        }
+      ],
+      "archive_identical": [
+        "WINNT/SYSTEM32/SYSTEM.DRV"
+      ],
+      "archive_named": [
+        "WINNT/SYSTEM32/SYSTEM.DRV"
+      ]
+    },
+    {
+      "key": "wow16/system/system.lrf",
+      "path": "wow16/system/system.lrf",
+      "hashes": [
+        "CD6A2239FF01CAE1161B4BD685B1245CB915CB6E7551325911996800B0F989AF",
+        "",
+        ""
+      ],
+      "basename_match_count": 8,
+      "literal_refs": [
+        {
+          "path": "wow16/system/makefile",
+          "line": 93,
+          "text": "system.lrf: makefile"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 94,
+          "text": "echo system.obj timer.obj >system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 95,
+          "text": "echo system.exe/align:16>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 96,
+          "text": "echo system $(LINK)>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 97,
+          "text": "echo ..\\lib\\libw.lib /nod>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 98,
+          "text": "echo system;>>system.lrf"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 108,
+          "text": "system.drv: system.obj timer.obj system.lrf system.res"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 109,
+          "text": "link16 @system.lrf;"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/system.rcv",
+      "path": "wow16/system/system.rcv",
+      "hashes": [
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1",
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1",
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/system.rc",
+          "line": 5,
+          "text": "#include \"system.rcv\""
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/SYSTEM.RES",
+      "path": "wow16/system/SYSTEM.RES",
+      "hashes": [
+        "C84493C8CC7A8D564B2DE0890CFE4E46C4AD048B245C27F21AF2D65553C30BD8",
+        "C84493C8CC7A8D564B2DE0890CFE4E46C4AD048B245C27F21AF2D65553C30BD8",
+        "C84493C8CC7A8D564B2DE0890CFE4E46C4AD048B245C27F21AF2D65553C30BD8"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/system/makefile",
+          "line": 106,
+          "text": "system.res: system.rc ..\\inc\\common.ver"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 108,
+          "text": "system.drv: system.obj timer.obj system.lrf system.res"
+        },
+        {
+          "path": "wow16/system/makefile",
+          "line": 110,
+          "text": "rc16 -t system.res system.exe"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/vecsys.inc",
+      "path": "wow16/system/vecsys.inc",
+      "hashes": [
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66",
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66",
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/system/envect.asm",
+          "line": 9,
+          "text": "include vecsys.inc"
+        },
+        {
+          "path": "wow16/system/hpsystem",
+          "line": 19,
+          "text": "envect.obj: envect.asm vecsys.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/system/windefs.inc",
+      "path": "wow16/system/windefs.inc",
+      "hashes": [
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1",
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1",
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/system/system.inc",
+          "line": 16,
+          "text": ";\t include windefs.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/hello/hello.c",
+      "path": "wow16/test/hello/hello.c",
+      "hashes": [
+        "B943B91C0C83926680607EF63AF1E7445A534BFEA6A23E931113A48A0DCD69AC",
+        "B943B91C0C83926680607EF63AF1E7445A534BFEA6A23E931113A48A0DCD69AC",
+        "B943B91C0C83926680607EF63AF1E7445A534BFEA6A23E931113A48A0DCD69AC"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/hello/hello.h",
+      "path": "wow16/test/hello/hello.h",
+      "hashes": [
+        "E52F8AFC9854ED4B450052333F7EB459BEDCA50EAA63811133975562C58401CF",
+        "E52F8AFC9854ED4B450052333F7EB459BEDCA50EAA63811133975562C58401CF",
+        "E52F8AFC9854ED4B450052333F7EB459BEDCA50EAA63811133975562C58401CF"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/test/hello/hello.c",
+          "line": 17,
+          "text": "#include \"hello.h\""
+        },
+        {
+          "path": "wow16/test/hello/hello.rc",
+          "line": 1,
+          "text": "#include \"hello.h\""
+        },
+        {
+          "path": "wow16/test/hello/makefile",
+          "line": 93,
+          "text": "hello.res: hello.rc hello.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/shell/pmdos.asm",
+      "path": "wow16/test/shell/pmdos.asm",
+      "hashes": [
+        "F94CB4ED65AABE52BA1AE6F2E8465F201B591F65D338817BE287DA2EDD658251",
+        "F94CB4ED65AABE52BA1AE6F2E8465F201B591F65D338817BE287DA2EDD658251",
+        "F94CB4ED65AABE52BA1AE6F2E8465F201B591F65D338817BE287DA2EDD658251"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/test/shell/wowexec.h",
+          "line": 84,
+          "text": "/* PMDOS.ASM */"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/shell/wowexec.c",
+      "path": "wow16/test/shell/wowexec.c",
+      "hashes": [
+        "755D49485353849FEB3A41C8BD65984C4C82B4C28C2A90C29D2E8682C0751C83",
+        "755D49485353849FEB3A41C8BD65984C4C82B4C28C2A90C29D2E8682C0751C83",
+        "755D49485353849FEB3A41C8BD65984C4C82B4C28C2A90C29D2E8682C0751C83"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/test/shell/makefile",
+          "line": 92,
+          "text": "wowexec.obj: wowexec.c ..\\..\\..\\inc\\wowinfo.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/shell/wowexec.ico",
+      "path": "wow16/test/shell/wowexec.ico",
+      "hashes": [
+        "6C19D4515EBF8E4FAC3A8B019E39D1DE9DA6B66145A200BD423661344EB906F9",
+        "6C19D4515EBF8E4FAC3A8B019E39D1DE9DA6B66145A200BD423661344EB906F9",
+        "6C19D4515EBF8E4FAC3A8B019E39D1DE9DA6B66145A200BD423661344EB906F9"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/test/shell/wowexec.rc",
+          "line": 18,
+          "text": "ID_WOWEXEC_ICON ICON wowexec.ico"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/shell/WOWEXEC.RES",
+      "path": "wow16/test/shell/WOWEXEC.RES",
+      "hashes": [
+        "41A9A822E57B5D39EFE046D67D34A7118C0329981DA9EE202D2213E47B265BDA",
+        "41A9A822E57B5D39EFE046D67D34A7118C0329981DA9EE202D2213E47B265BDA",
+        "41A9A822E57B5D39EFE046D67D34A7118C0329981DA9EE202D2213E47B265BDA"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/test/shell/makefile",
+          "line": 122,
+          "text": "rc16 -r $(RCFLAGS) -fo wowexec.res $(INCS) wowexec.rc"
+        },
+        {
+          "path": "wow16/test/shell/makefile",
+          "line": 124,
+          "text": "rc16 -t wowexec.res wowexec.exe"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/test/shell/wowexfax.c",
+      "path": "wow16/test/shell/wowexfax.c",
+      "hashes": [
+        "6959D7503E30E2251607627D1BD55969F4415A733CE7EBDBB5807FE92C4C3893",
+        "6959D7503E30E2251607627D1BD55969F4415A733CE7EBDBB5807FE92C4C3893",
+        "6959D7503E30E2251607627D1BD55969F4415A733CE7EBDBB5807FE92C4C3893"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/test/shell/makefile",
+          "line": 95,
+          "text": "wowexfax.obj: wowexfax.c wowexec.h ..\\..\\..\\inc\\wowfax.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/api.asm",
+      "path": "wow16/timer/api.asm",
+      "hashes": [
+        "91F3E631058CBF37527A0D10E2022113AD805E244C59EA9A0231E4BE22243D7E",
+        "91F3E631058CBF37527A0D10E2022113AD805E244C59EA9A0231E4BE22243D7E",
+        "91F3E631058CBF37527A0D10E2022113AD805E244C59EA9A0231E4BE22243D7E"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/makefile",
+          "line": 128,
+          "text": "api.obj: api.asm timer.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/libinit.asm",
+      "path": "wow16/timer/libinit.asm",
+      "hashes": [
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262",
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262",
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/makefile",
+          "line": 130,
+          "text": "libinit.obj: libinit.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/timer.def",
+          "line": 21,
+          "text": ";  place if we need it, see libinit.asm!Lib286Init"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/local.asm",
+      "path": "wow16/timer/local.asm",
+      "hashes": [
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933",
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933",
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933"
+      ],
+      "basename_match_count": 5,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/libinit.asm",
+          "line": 300,
+          "text": "externFP    tddISR                  ; in local.asm"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 132,
+          "text": "local.obj: local.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/startend.asm",
+          "line": 62,
+          "text": "externFP    tddISR                      ; in local.asm"
+        },
+        {
+          "path": "wow16/timer/startend.asm",
+          "line": 66,
+          "text": "externW     RmodeDataSegment            ; in local.asm"
+        },
+        {
+          "path": "wow16/timer/startend.asm",
+          "line": 67,
+          "text": "externFP    tddRModeISR                 ; in local.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/math.asm",
+      "path": "wow16/timer/math.asm",
+      "hashes": [
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317",
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317",
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/timer.asm",
+          "line": 776,
+          "text": "externNP\tqdiv\t\t; In math.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/njumps.mac",
+      "path": "wow16/timer/njumps.mac",
+      "hashes": [
+        "1E4FE8F985C57315F6738A5E1396C0EADF64D74293A10186BF9F5D2263F178D5",
+        "1E4FE8F985C57315F6738A5E1396C0EADF64D74293A10186BF9F5D2263F178D5",
+        "1E4FE8F985C57315F6738A5E1396C0EADF64D74293A10186BF9F5D2263F178D5"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/startend.asm",
+      "path": "wow16/timer/startend.asm",
+      "hashes": [
+        "2731A315828300B5C99A8CB80E4A8D82F452D9D6C79F2FAC0A5ED8E94362757E",
+        "2731A315828300B5C99A8CB80E4A8D82F452D9D6C79F2FAC0A5ED8E94362757E",
+        "2731A315828300B5C99A8CB80E4A8D82F452D9D6C79F2FAC0A5ED8E94362757E"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/makefile",
+          "line": 134,
+          "text": "startend.obj: startend.asm timer.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/sysinfo.inc",
+      "path": "wow16/timer/sysinfo.inc",
+      "hashes": [
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F",
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F",
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/libinit.asm",
+          "line": 15,
+          "text": "include sysinfo.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/timer.asm",
+      "path": "wow16/timer/timer.asm",
+      "hashes": [
+        "BEFDA785B8DC0FA76AB875FC5D09FD8102DC95BB70DB457D57134B327DAC2196",
+        "BEFDA785B8DC0FA76AB875FC5D09FD8102DC95BB70DB457D57134B327DAC2196",
+        "BEFDA785B8DC0FA76AB875FC5D09FD8102DC95BB70DB457D57134B327DAC2196"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/local.asm",
+          "line": 28,
+          "text": "externFP    tddEndMinPeriod     ; timer.asm"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 136,
+          "text": "timer.obj: timer.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/startend.asm",
+          "line": 63,
+          "text": "externFP    tddSetInterruptPeriodFar    ; in timer.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/timer.inc",
+      "path": "wow16/timer/timer.inc",
+      "hashes": [
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D",
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D",
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D"
+      ],
+      "basename_match_count": 11,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/api.asm",
+          "line": 28,
+          "text": "include timer.inc"
+        },
+        {
+          "path": "wow16/timer/libinit.asm",
+          "line": 18,
+          "text": "include timer.inc"
+        },
+        {
+          "path": "wow16/timer/local.asm",
+          "line": 22,
+          "text": "include timer.inc"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 128,
+          "text": "api.obj: api.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 130,
+          "text": "libinit.obj: libinit.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 132,
+          "text": "local.obj: local.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 134,
+          "text": "startend.obj: startend.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/makefile",
+          "line": 136,
+          "text": "timer.obj: timer.asm timer.inc"
+        },
+        {
+          "path": "wow16/timer/math.asm",
+          "line": 22,
+          "text": "include timer.inc"
+        },
+        {
+          "path": "wow16/timer/startend.asm",
+          "line": 23,
+          "text": "include  timer.inc"
+        },
+        {
+          "path": "wow16/timer/timer.asm",
+          "line": 20,
+          "text": "include timer.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/timer.rcv",
+      "path": "wow16/timer/timer.rcv",
+      "hashes": [
+        "88A0816F7E919CA867B69EFF037BDCA10751A0F71F039837F5540B3FBFDBB14C",
+        "88A0816F7E919CA867B69EFF037BDCA10751A0F71F039837F5540B3FBFDBB14C",
+        "88A0816F7E919CA867B69EFF037BDCA10751A0F71F039837F5540B3FBFDBB14C"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/timer/timer.rc",
+          "line": 2,
+          "text": "#include \"timer.rcv\""
+        },
+        {
+          "path": "wow16/timer/messages/usa/timer.rc",
+          "line": 2,
+          "text": "#include \"timer.rcv\""
+        },
+        {
+          "path": "wow16/timer/messages/usa/timer.rcv",
+          "line": 2,
+          "text": "/*        TIMER.RCV                                                 */"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/timer/TIMER.RES",
+      "path": "wow16/timer/TIMER.RES",
+      "hashes": [
+        "9E449D7C1C82E2C7FA48A1091B0C0C4413E28C2C44EDF7D1EF422FC903E359D1",
+        "9E449D7C1C82E2C7FA48A1091B0C0C4413E28C2C44EDF7D1EF422FC903E359D1",
+        "9E449D7C1C82E2C7FA48A1091B0C0C4413E28C2C44EDF7D1EF422FC903E359D1"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/class1.c",
+      "path": "wow16/toolhelp/class1.c",
+      "hashes": [
+        "E169C1080CCBD6A99C2E66E81EDEE1D14BE4D746E78FA96C16FAF9327CC67A8E",
+        "E169C1080CCBD6A99C2E66E81EDEE1D14BE4D746E78FA96C16FAF9327CC67A8E",
+        "E169C1080CCBD6A99C2E66E81EDEE1D14BE4D746E78FA96C16FAF9327CC67A8E"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 115,
+          "text": "# NOTE:  Class1.c and Class2.asm are checked in for reference but are not"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 118,
+          "text": "# class1.obj: class1.c toolpriv.h toolhelp.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/class2.asm",
+      "path": "wow16/toolhelp/class2.asm",
+      "hashes": [
+        "CDB243EDC9DE41338034740501DE349ADC4AD2FC29A324644DCE24E01AC8A994",
+        "CDB243EDC9DE41338034740501DE349ADC4AD2FC29A324644DCE24E01AC8A994",
+        "CDB243EDC9DE41338034740501DE349ADC4AD2FC29A324644DCE24E01AC8A994"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 115,
+          "text": "# NOTE:  Class1.c and Class2.asm are checked in for reference but are not"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 119,
+          "text": "# class2.obj: class2.asm toolpriv.inc toolhelp.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/dllentry.asm",
+      "path": "wow16/toolhelp/dllentry.asm",
+      "hashes": [
+        "98FD43BD1CE372ADAD06590F1889046066C8AC1D9B63255C9096B391CDC2BAB1",
+        "98FD43BD1CE372ADAD06590F1889046066C8AC1D9B63255C9096B391CDC2BAB1",
+        "98FD43BD1CE372ADAD06590F1889046066C8AC1D9B63255C9096B391CDC2BAB1"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 120,
+          "text": "dllentry.obj: dllentry.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/module.c",
+      "path": "wow16/toolhelp/module.c",
+      "hashes": [
+        "AF50878652F55B4304BE3164B9577F765E2E96255A78C4056C841B4143976C0C",
+        "AF50878652F55B4304BE3164B9577F765E2E96255A78C4056C841B4143976C0C",
+        "AF50878652F55B4304BE3164B9577F765E2E96255A78C4056C841B4143976C0C"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 129,
+          "text": "module.obj: module.c toolpriv.h toolhelp.h string.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/notify2.asm",
+      "path": "wow16/toolhelp/notify2.asm",
+      "hashes": [
+        "1F20FB5F592447EDFE362F99DF75F6D8283C41483222DF1203BD5BE5106DF262",
+        "1F20FB5F592447EDFE362F99DF75F6D8283C41483222DF1203BD5BE5106DF262",
+        "1F20FB5F592447EDFE362F99DF75F6D8283C41483222DF1203BD5BE5106DF262"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 131,
+          "text": "notify2.obj: notify2.asm toolpriv.inc toolhelp.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/string.h",
+      "path": "wow16/toolhelp/string.h",
+      "hashes": [
+        "FF36B60ADCF99A547032981A149CC6D37F48CFA2F556CEBE327C59D79C93823E",
+        "FF36B60ADCF99A547032981A149CC6D37F48CFA2F556CEBE327C59D79C93823E",
+        "FF36B60ADCF99A547032981A149CC6D37F48CFA2F556CEBE327C59D79C93823E"
+      ],
+      "basename_match_count": 14,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/global.c",
+          "line": 10,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/int1.c",
+          "line": 9,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 121,
+          "text": "global.obj: global.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 123,
+          "text": "int1.obj: int1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 129,
+          "text": "module.obj: module.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 130,
+          "text": "notify1.obj: notify1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 132,
+          "text": "signal.obj: signal.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 133,
+          "text": "stack1.obj: stack1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 135,
+          "text": "task1.obj: task1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/module.c",
+          "line": 11,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/notify1.c",
+          "line": 9,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/signal.c",
+          "line": 9,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/stack1.c",
+          "line": 10,
+          "text": "#include <string.h>"
+        },
+        {
+          "path": "wow16/toolhelp/task1.c",
+          "line": 8,
+          "text": "#include <string.h>"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/task1.c",
+      "path": "wow16/toolhelp/task1.c",
+      "hashes": [
+        "D4BC1F926B13D3534FA58F00098D4C1E4B6C80E169CAB7BFE20416FF799975A8",
+        "D4BC1F926B13D3534FA58F00098D4C1E4B6C80E169CAB7BFE20416FF799975A8",
+        "D4BC1F926B13D3534FA58F00098D4C1E4B6C80E169CAB7BFE20416FF799975A8"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 135,
+          "text": "task1.obj: task1.c toolpriv.h toolhelp.h string.h"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/ththunks.asm",
+      "path": "wow16/toolhelp/ththunks.asm",
+      "hashes": [
+        "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321",
+        "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321",
+        "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 116,
+          "text": "# ----   built for WOW.  Instead THTHUNKS.ASM contains thunks to WOW32."
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 138,
+          "text": "ththunks.obj: ththunks.asm ..\\..\\inc\\wow.inc ..\\..\\inc\\wowth.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/timer.asm",
+      "path": "wow16/toolhelp/timer.asm",
+      "hashes": [
+        "45A87CC439049ACEF18A3A65FEA03493AF35901391218D604EAC54E21D436CEB",
+        "45A87CC439049ACEF18A3A65FEA03493AF35901391218D604EAC54E21D436CEB",
+        "45A87CC439049ACEF18A3A65FEA03493AF35901391218D604EAC54E21D436CEB"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 139,
+          "text": "timer.obj: timer.asm toolpriv.inc toolhelp.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/TOOLHELP.DLL",
+      "path": "wow16/toolhelp/TOOLHELP.DLL",
+      "hashes": [
+        "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+        "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+        "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE"
+      ],
+      "basename_match_count": 20,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/dllentry.asm",
+          "line": 6,
+          "text": ";*      TOOLHELP.DLL Entry code"
+        },
+        {
+          "path": "wow16/toolhelp/helper.asm",
+          "line": 364,
+          "text": "mov     ax,_DATA                ;Get the TOOLHELP.DLL DS"
+        },
+        {
+          "path": "wow16/toolhelp/int1.c",
+          "line": 5,
+          "text": "*      TOOLHELP.DLL"
+        },
+        {
+          "path": "wow16/toolhelp/int1.c",
+          "line": 27,
+          "text": "/* Make sure TOOLHELP.DLL is installed */"
+        },
+        {
+          "path": "wow16/toolhelp/int2.asm",
+          "line": 5,
+          "text": ";*      Assembly code support routines used for the TOOLHELP.DLL interrupt"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 1,
+          "text": "# TOOLHELP.DLL for WOW makefile"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 76,
+          "text": "all: toolhelp.dll toolhelp.sym toolhelp.map toolhelp.lib"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 77,
+          "text": "-binplace toolhelp.dll"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 150,
+          "text": "toolhelp.dll: $(OBJS) toolhelp.def"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 157,
+          "text": "toolhelp.dll"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 164,
+          "text": "$(RC16) $(RFLAGS) -t -30 toolhelp.rcv toolhelp.dll"
+        },
+        {
+          "path": "wow16/toolhelp/notify1.c",
+          "line": 5,
+          "text": "*      TOOLHELP.DLL"
+        },
+        {
+          "path": "wow16/toolhelp/notify1.c",
+          "line": 32,
+          "text": "/* Make sure TOOLHELP.DLL is installed */"
+        },
+        {
+          "path": "wow16/toolhelp/notify2.asm",
+          "line": 5,
+          "text": ";*      Assembly code support routines used for the TOOLHELP.DLL"
+        },
+        {
+          "path": "wow16/toolhelp/terminat.asm",
+          "line": 5,
+          "text": ";*      Assembly code routine used for the TOOLHELP.DLL app terminate"
+        },
+        {
+          "path": "wow16/toolhelp/toolhelp.h",
+          "line": 3,
+          "text": "* toolhelp.h -  toolhelp.dll functions, types, and definitions                *"
+        },
+        {
+          "path": "wow16/toolhelp/toolhelp.inc",
+          "line": 4,
+          "text": ";*      Assembly-language public include file for TOOLHELP.DLL"
+        },
+        {
+          "path": "wow16/toolhelp/toolhelp.rcv",
+          "line": 12,
+          "text": "#define VER_ORIGINALFILENAME_STR        \"TOOLHELP.DLL\""
+        },
+        {
+          "path": "wow16/toolhelp/walk286.asm",
+          "line": 5,
+          "text": ";*      for TOOLHELP.DLL"
+        },
+        {
+          "path": "wow16/toolhelp/walk386.asm",
+          "line": 5,
+          "text": ";*      for TOOLHELP.DLL"
+        }
+      ],
+      "archive_identical": [
+        "WINNT/SYSTEM32/TOOLHELP.DLL"
+      ],
+      "archive_named": [
+        "WINNT/SYSTEM32/TOOLHELP.DLL"
+      ]
+    },
+    {
+      "key": "wow16/toolhelp/toolhelp.h",
+      "path": "wow16/toolhelp/toolhelp.h",
+      "hashes": [
+        "03B01C09B2777EF684FBFDA95076BF1D1BC569D0D3C3084DEDC26F1F5C53E374",
+        "03B01C09B2777EF684FBFDA95076BF1D1BC569D0D3C3084DEDC26F1F5C53E374",
+        "03B01C09B2777EF684FBFDA95076BF1D1BC569D0D3C3084DEDC26F1F5C53E374"
+      ],
+      "basename_match_count": 12,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 118,
+          "text": "# class1.obj: class1.c toolpriv.h toolhelp.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 121,
+          "text": "global.obj: global.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 123,
+          "text": "int1.obj: int1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 126,
+          "text": "local.obj: local.c toolpriv.h toolhelp.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 129,
+          "text": "module.obj: module.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 130,
+          "text": "notify1.obj: notify1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 132,
+          "text": "signal.obj: signal.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 133,
+          "text": "stack1.obj: stack1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 135,
+          "text": "task1.obj: task1.c toolpriv.h toolhelp.h string.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 140,
+          "text": "toolhelp.obj: toolhelp.c toolpriv.h toolhelp.h"
+        },
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 141,
+          "text": "usergdi1.obj: usergdi1.c toolpriv.h toolhelp.h"
+        },
+        {
+          "path": "wow16/toolhelp/toolpriv.h",
+          "line": 14,
+          "text": "#include \"toolhelp.h\""
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/TOOLHELP.RES",
+      "path": "wow16/toolhelp/TOOLHELP.RES",
+      "hashes": [
+        "3BF44A3DAAE514FAFEB56F4053F8AE934752AD0C9A0B70EDD0BF05A2F27396B0",
+        "3BF44A3DAAE514FAFEB56F4053F8AE934752AD0C9A0B70EDD0BF05A2F27396B0",
+        "3BF44A3DAAE514FAFEB56F4053F8AE934752AD0C9A0B70EDD0BF05A2F27396B0"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/toolhelp/usergdi2.asm",
+      "path": "wow16/toolhelp/usergdi2.asm",
+      "hashes": [
+        "595BB64AEF4CCCA681C7BBB38272175F41F0BE2EA195EAD5DC305CDF3A5FE173",
+        "595BB64AEF4CCCA681C7BBB38272175F41F0BE2EA195EAD5DC305CDF3A5FE173",
+        "595BB64AEF4CCCA681C7BBB38272175F41F0BE2EA195EAD5DC305CDF3A5FE173"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/toolhelp/makefile",
+          "line": 142,
+          "text": "usergdi2.obj: usergdi2.asm toolpriv.inc toolhelp.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/comdev.c",
+      "path": "wow16/user/comdev.c",
+      "hashes": [
+        "5F579792509EDB3137958938F8CD8D47C2E70B7A57332F2F412D69A36F95DD37",
+        "5F579792509EDB3137958938F8CD8D47C2E70B7A57332F2F412D69A36F95DD37",
+        "5F579792509EDB3137958938F8CD8D47C2E70B7A57332F2F412D69A36F95DD37"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/comdevi.h",
+      "path": "wow16/user/comdevi.h",
+      "hashes": [
+        "F3F61015E3B4B4410573727C672D10953B737BB7BC8CD3650FD13465BB060AD9",
+        "F3F61015E3B4B4410573727C672D10953B737BB7BC8CD3650FD13465BB060AD9",
+        "F3F61015E3B4B4410573727C672D10953B737BB7BC8CD3650FD13465BB060AD9"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/user/comdev.c",
+          "line": 33,
+          "text": "#include \"comdevi.h\"            /* Device driver internal defs  */"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/iuser.inc",
+      "path": "wow16/user/iuser.inc",
+      "hashes": [
+        "8669936AD3943915F22D391D91376DF9F747D31BC8DECB1A5843A20031B2E9D5",
+        "8669936AD3943915F22D391D91376DF9F747D31BC8DECB1A5843A20031B2E9D5",
+        "8669936AD3943915F22D391D91376DF9F747D31BC8DECB1A5843A20031B2E9D5"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/user/user.inc",
+          "line": 220,
+          "text": "include iuser.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/user.res",
+      "path": "wow16/user/k/daytona/user.res",
+      "hashes": [
+        "6BB0EF260B9DFE23C864BAA23F4B42516BDB19C191956376F30929A590EB2281",
+        "",
+        ""
+      ],
+      "basename_match_count": 5,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 126,
+          "text": "copy user.res $*.res"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 127,
+          "text": "erase user.res"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 254,
+          "text": "$(O)\\user.res: user.rc user.rcv ..\\inc\\common.ver"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 268,
+          "text": "$(O)\\user.exe $(O)\\user.map: $(OBJ1) $(OBJ2) $(OBJ3) $(OBJ4) $(O)\\userk.lrf user.def $(O)\\user.res $(OBJ386)"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 270,
+          "text": "rc16 -t $(O)\\user.res $(O)\\user.exe"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/wowasmk.asm",
+      "path": "wow16/user/k/daytona/wowasmk.asm",
+      "hashes": [
+        "3CEADD4255934162CA99623297B6FEC493BCAAEBD3425657D1107C6FE150045D",
+        "",
+        ""
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 231,
+          "text": "copy $(USER32CLPROJ)\\wowasm.asm $(O)\\wowasmk.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/wowk.asm",
+      "path": "wow16/user/k/daytona/wowk.asm",
+      "hashes": [
+        "CB6C500C767D9B7C609AF9D4CE7D7CF36C89707658C8E03278A46441B770D4D7",
+        "",
+        ""
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 230,
+          "text": "$(O)\\wowk.asm: $(USER32CLPROJ)\\wowasm.asm"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 234,
+          "text": "$(O)\\wowk.obj: $(O)\\wowk.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/wowkr.asm",
+      "path": "wow16/user/k/daytona/wowkr.asm",
+      "hashes": [
+        "EBF0F3014A585E75512150B94656299C8779E6AF3B632A662C55623D6C2690C3",
+        "",
+        ""
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 246,
+          "text": "$(O)\\wowkr.asm: $(USER32RTLCLPROJ)\\wowrtl.asm"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 251,
+          "text": "$(O)\\wowkr.obj: $(O)\\wowkr.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/wowkr1.asm",
+      "path": "wow16/user/k/daytona/wowkr1.asm",
+      "hashes": [
+        "57CA95C78EEDADF1C370A29BDFDBC94926F5F90C5DBC4994BF73CA778FFEC027",
+        "",
+        ""
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/k/daytona/wowrtl.asm",
+      "path": "wow16/user/k/daytona/wowrtl.asm",
+      "hashes": [
+        "7EF0A72EDF8A29303F3B72D75E64DA1510CBDD3715E7F794AE295DCFDDCD9D81",
+        "",
+        ""
+      ],
+      "basename_match_count": 4,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 241,
+          "text": "$(USER32RTLCLPROJ)\\wowrtl.asm : $(USER32RTL)\\wow.c $(USER32RTLCL)\\wow.c $(USER32RTL)\\precomp.h"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 243,
+          "text": "nmake wowrtl.asm"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 246,
+          "text": "$(O)\\wowkr.asm: $(USER32RTLCLPROJ)\\wowrtl.asm"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 247,
+          "text": "copy $(USER32RTLCLPROJ)\\wowrtl.asm $(O)\\wowrtl.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/listing.inc",
+      "path": "wow16/user/listing.inc",
+      "hashes": [
+        "C13C6D5FBEA668B79F8BEB460BEF26B6A6C01AAB1C4A52280124D2149598BFD7",
+        "C13C6D5FBEA668B79F8BEB460BEF26B6A6C01AAB1C4A52280124D2149598BFD7",
+        "A9B196AF7FB2522E122B4718D0B33E3A4D52045028C573A0B02B9CCF048C4EF3"
+      ],
+      "basename_match_count": 5,
+      "literal_refs": [
+        {
+          "path": "wow16/user/k/daytona/wowasmk.asm",
+          "line": 3,
+          "text": "include listing.inc"
+        },
+        {
+          "path": "wow16/user/k/daytona/wowk.asm",
+          "line": 3,
+          "text": "include listing.inc"
+        },
+        {
+          "path": "wow16/user/k/daytona/wowkr.asm",
+          "line": 3,
+          "text": "include listing.inc"
+        },
+        {
+          "path": "wow16/user/k/daytona/wowkr1.asm",
+          "line": 3,
+          "text": "include listing.inc"
+        },
+        {
+          "path": "wow16/user/k/daytona/wowrtl.asm",
+          "line": 3,
+          "text": "include listing.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/msglayer.inc",
+      "path": "wow16/user/msglayer.inc",
+      "hashes": [
+        "77422E462ED6FAB2603B9FA5353671302CCC2DEEC969E8A76CFBDD9E9D1ED423",
+        "77422E462ED6FAB2603B9FA5353671302CCC2DEEC969E8A76CFBDD9E9D1ED423",
+        "77422E462ED6FAB2603B9FA5353671302CCC2DEEC969E8A76CFBDD9E9D1ED423"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 169,
+          "text": "$(O)\\msglayer.obj: msglayer.asm user.inc ..\\inc\\layer.inc messages.api msglayer.inc"
+        },
+        {
+          "path": "wow16/user/msglayer.asm",
+          "line": 13,
+          "text": "include msglayer.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/msutil.c",
+      "path": "wow16/user/msutil.c",
+      "hashes": [
+        "57D07748F08FABC9D0538E274627C26F8CF6FB97A3D4AFA9EF180A33163509E1",
+        "57D07748F08FABC9D0538E274627C26F8CF6FB97A3D4AFA9EF180A33163509E1",
+        "57D07748F08FABC9D0538E274627C26F8CF6FB97A3D4AFA9EF180A33163509E1"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/readme.txt",
+      "path": "wow16/user/readme.txt",
+      "hashes": [
+        "7124AF87B8C99F4FF353A1903B5957E6B108287AE23DE5B3E822A04B68FA546C",
+        "7124AF87B8C99F4FF353A1903B5957E6B108287AE23DE5B3E822A04B68FA546C",
+        "7124AF87B8C99F4FF353A1903B5957E6B108287AE23DE5B3E822A04B68FA546C"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/usermenu.inc",
+      "path": "wow16/user/usermenu.inc",
+      "hashes": [
+        "2B798EAC7F7AAC8208A80C9B051FE5038B1FC98000EB1500AA4751BFCF02E13C",
+        "2B798EAC7F7AAC8208A80C9B051FE5038B1FC98000EB1500AA4751BFCF02E13C",
+        "2B798EAC7F7AAC8208A80C9B051FE5038B1FC98000EB1500AA4751BFCF02E13C"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/user/layer.asm",
+          "line": 9,
+          "text": ";include usermenu.inc"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/winutil.asm",
+      "path": "wow16/user/winutil.asm",
+      "hashes": [
+        "7939DB7F692ED0C6CE122642EFF3BC4DA053CD3CEB176B7837851C1165D86FE5",
+        "7939DB7F692ED0C6CE122642EFF3BC4DA053CD3CEB176B7837851C1165D86FE5",
+        "7939DB7F692ED0C6CE122642EFF3BC4DA053CD3CEB176B7837851C1165D86FE5"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/user/user.inc",
+          "line": 541,
+          "text": ";  Note: This is used in WinUtil.ASM"
+        },
+        {
+          "path": "wow16/user/user3.asm",
+          "line": 59,
+          "text": ";;; DUserThunk  OLDEXITWINDOWS      ; LOCALAPI in winutil.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wmsyserr.c",
+      "path": "wow16/user/wmsyserr.c",
+      "hashes": [
+        "7356B11EBB35366D49276DB2374230D587AE59EBED87D690121DE9F9951615A2",
+        "7356B11EBB35366D49276DB2374230D587AE59EBED87D690121DE9F9951615A2",
+        "7356B11EBB35366D49276DB2374230D587AE59EBED87D690121DE9F9951615A2"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wowasm.cmd",
+      "path": "wow16/user/wowasm.cmd",
+      "hashes": [
+        "ECE2FF97CBA846942D1B60A6094F255AFA258A88C5EDE06FB9382B0CABED3CBC",
+        "ECE2FF97CBA846942D1B60A6094F255AFA258A88C5EDE06FB9382B0CABED3CBC",
+        "C9CEE948820E14D8553FCD7C64D52F60B3C29B1754827185BD6509EF0CA2F254"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wowasm.sed",
+      "path": "wow16/user/wowasm.sed",
+      "hashes": [
+        "E2CCB526CECA4ADE46CC3C1D88D8B04C2DC93A4F6C0E2EDD42FA82D2256D81A5",
+        "E2CCB526CECA4ADE46CC3C1D88D8B04C2DC93A4F6C0E2EDD42FA82D2256D81A5",
+        "E2CCB526CECA4ADE46CC3C1D88D8B04C2DC93A4F6C0E2EDD42FA82D2256D81A5"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/user/wowasm.cmd",
+          "line": 3,
+          "text": "sed -f wowasm.sed wowasm.asm > wow.asm"
+        },
+        {
+          "path": "wow16/user/wowasmc.cmd",
+          "line": 4,
+          "text": "sed -f ..\\wowasm.sed %1.asm > %2.asm"
+        },
+        {
+          "path": "wow16/user/wowasmk.cmd",
+          "line": 4,
+          "text": "sed -f ..\\..\\wowasm.sed %1.asm > %2.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wowasmc.cmd",
+      "path": "wow16/user/wowasmc.cmd",
+      "hashes": [
+        "4BA193D15E8A98372E2AF11A740914F0CD8FF7EA25DE1283D55F59EE6F8C64A7",
+        "4BA193D15E8A98372E2AF11A740914F0CD8FF7EA25DE1283D55F59EE6F8C64A7",
+        "AEC006207842398B400EBD7A5D613D88DEF44F46A38024975CD848956B0B6498"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wowasmk.cmd",
+      "path": "wow16/user/wowasmk.cmd",
+      "hashes": [
+        "30D5FF78380AAD55088076D8804F450081D363C8A240162DBC63BF3D221AA757",
+        "30D5FF78380AAD55088076D8804F450081D363C8A240162DBC63BF3D221AA757",
+        "6240D729F461A35EC283EB9A88D1A83BC522A03B13153A3E340BA93B7873F226"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/user/makefile",
+          "line": 232,
+          "text": "wowasmk.cmd wowasmk wowk $(ALT_PROJECT)"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 248,
+          "text": "wowasmk.cmd wowrtl wowkr1 $(ALT_PROJECT)"
+        },
+        {
+          "path": "wow16/user/makefile",
+          "line": 249,
+          "text": "wowasmk.cmd wowkr1 wowkr $(ALT_PROJECT)"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/user/wsubcls.c",
+      "path": "wow16/user/wsubcls.c",
+      "hashes": [
+        "BC4E9F995498A6F18296D307A2AD6FC520DC3F9F9FAFBF8C10D318DFBE6FD4F7",
+        "BC4E9F995498A6F18296D307A2AD6FC520DC3F9F9FAFBF8C10D318DFBE6FD4F7",
+        "BC4E9F995498A6F18296D307A2AD6FC520DC3F9F9FAFBF8C10D318DFBE6FD4F7"
+      ],
+      "basename_match_count": 7,
+      "literal_refs": [
+        {
+          "path": "wow16/user/user.asm",
+          "line": 349,
+          "text": ";;; UserThunk   BUTTONWNDPROC           ;LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user.asm",
+          "line": 369,
+          "text": ";;; UserThunk   COMBOBOXCTLWNDPROC      ;LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user1a.asm",
+          "line": 66,
+          "text": ";   UserThunk   EDITWNDPROC         ; LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user2a.asm",
+          "line": 88,
+          "text": ";;; UserThunk   LBOXCTLWNDPROC          ;LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user3.asm",
+          "line": 52,
+          "text": ";;; UserThunk   MDICLIENTWNDPROC        ;LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user3.asm",
+          "line": 85,
+          "text": ";;; UserThunk   SBWNDPROC           ;LOCALAPI in wsubcls.c"
+        },
+        {
+          "path": "wow16/user/user3a.asm",
+          "line": 203,
+          "text": ";;; UserThunk   STATICWNDPROC           ;LOCALAPI in wsubcls.c"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/ints.asm",
+      "path": "wow16/wfwnet/ints.asm",
+      "hashes": [
+        "539A6B8C41C797A5BB550964FCB59EF060C2AC8520AF4A2416F050470AD7CD60",
+        "539A6B8C41C797A5BB550964FCB59EF060C2AC8520AF4A2416F050470AD7CD60",
+        "539A6B8C41C797A5BB550964FCB59EF060C2AC8520AF4A2416F050470AD7CD60"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/lfn.c",
+      "path": "wow16/wfwnet/lfn.c",
+      "hashes": [
+        "AD3C9F738F9EF58C40A0EB0AA6A4981951E1819984045FEF4907F952FBB0B0C2",
+        "AD3C9F738F9EF58C40A0EB0AA6A4981951E1819984045FEF4907F952FBB0B0C2",
+        "AD3C9F738F9EF58C40A0EB0AA6A4981951E1819984045FEF4907F952FBB0B0C2"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/wfwnet/makefile",
+          "line": 117,
+          "text": "lfn.obj: lfn.c ..\\..\\inc\\wow.inc ..\\inc\\winnet.h ..\\inc\\wfwnet.h \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/misc.c",
+      "path": "wow16/wfwnet/misc.c",
+      "hashes": [
+        "140D4A6D35E10CBBB6341DF388D2167B9A1D2CC71C7F9E7BE5184BBD1E4A1311",
+        "140D4A6D35E10CBBB6341DF388D2167B9A1D2CC71C7F9E7BE5184BBD1E4A1311",
+        "140D4A6D35E10CBBB6341DF388D2167B9A1D2CC71C7F9E7BE5184BBD1E4A1311"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/wfwnet/makefile",
+          "line": 109,
+          "text": "misc.obj: misc.c ..\\..\\inc\\wow.inc ..\\inc\\winnet.h ..\\inc\\wfwnet.h \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/print.c",
+      "path": "wow16/wfwnet/print.c",
+      "hashes": [
+        "52B122DC693E86CA34A4676CF8331F0C1392B68BE6BF4A2179D41F66390CD446",
+        "52B122DC693E86CA34A4676CF8331F0C1392B68BE6BF4A2179D41F66390CD446",
+        "52B122DC693E86CA34A4676CF8331F0C1392B68BE6BF4A2179D41F66390CD446"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/wfwnet/makefile",
+          "line": 105,
+          "text": "print.obj: print.c ..\\..\\inc\\wow.inc ..\\inc\\winnet.h ..\\inc\\wfwnet.h \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/to32.c",
+      "path": "wow16/wfwnet/to32.c",
+      "hashes": [
+        "27877B1F92AA064A17260C519ED2A92B4E4A016BEB7C29690E11906A485E04A0",
+        "27877B1F92AA064A17260C519ED2A92B4E4A016BEB7C29690E11906A485E04A0",
+        "27877B1F92AA064A17260C519ED2A92B4E4A016BEB7C29690E11906A485E04A0"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/wfwnet/makefile",
+          "line": 113,
+          "text": "to32.obj: to32.c ..\\..\\inc\\wow.inc ..\\inc\\winnet.h ..\\inc\\wfwnet.h \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/wfwnet.def",
+      "path": "wow16/wfwnet/wfwnet.def",
+      "hashes": [
+        "4B04DCFA7F31E47BCAF791B22DA558EF1E60CAD4EE7045CBFAA474F7E2F12B67",
+        "4B04DCFA7F31E47BCAF791B22DA558EF1E60CAD4EE7045CBFAA474F7E2F12B67",
+        "4B04DCFA7F31E47BCAF791B22DA558EF1E60CAD4EE7045CBFAA474F7E2F12B67"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/wfwnet/makefile",
+          "line": 136,
+          "text": "wfwnet.drv: ints.obj libentry.obj wfwnet.obj to32.obj lfn.obj print.obj misc.obj wfwnet.lrf wfwnet.def wfwnet.res"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/wfwnet/wfwnet.rc",
+      "path": "wow16/wfwnet/wfwnet.rc",
+      "hashes": [
+        "476604BCB0650BA9B3668922B5A28F95A6F366FBE115636260C6B27F8BE398C6",
+        "476604BCB0650BA9B3668922B5A28F95A6F366FBE115636260C6B27F8BE398C6",
+        "476604BCB0650BA9B3668922B5A28F95A6F366FBE115636260C6B27F8BE398C6"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/apisim.asm",
+      "path": "wow16/win87em/apisim.asm",
+      "hashes": [
+        "AF777174B3F1625C87E4C2C1A2645EDEDB71F2C67307C2D5E718B34BCDE251F9",
+        "AF777174B3F1625C87E4C2C1A2645EDEDB71F2C67307C2D5E718B34BCDE251F9",
+        "AF777174B3F1625C87E4C2C1A2645EDEDB71F2C67307C2D5E718B34BCDE251F9"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 75,
+          "text": "$(SRCDIR)\\apisim.asm\t \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emds.asm",
+      "path": "wow16/win87em/emds.asm",
+      "hashes": [
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B",
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B",
+        "9A315A40BB12FA2CFD768647F8AF1242859238DBE724E8D6F79A541CCEBC3F2B"
+      ],
+      "basename_match_count": 4,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/emdos.asm",
+          "line": 685,
+          "text": "lab  LoadDS_EDI \t\t\t; this is used from emds.asm"
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 83,
+          "text": "$(SRCDIR)\\emds.asm\t \\"
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 276,
+          "text": "$(OBJDIR)\\emds.obj: $(SRCDIR)\\emds.asm"
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 277,
+          "text": "$(ASM) $(SRCDIR)\\emds.asm, $@;"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emoem.src",
+      "path": "wow16/win87em/emoem.src",
+      "hashes": [
+        "CE4256816D27F8A16B2A99DF8D3265993D142E009C115FFA9DE488AC7CABB90C",
+        "CE4256816D27F8A16B2A99DF8D3265993D142E009C115FFA9DE488AC7CABB90C",
+        "CE4256816D27F8A16B2A99DF8D3265993D142E009C115FFA9DE488AC7CABB90C"
+      ],
+      "basename_match_count": 4,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 25,
+          "text": "#   09/09/91  JCR   Now builds emoem.src, OEM version of emoem.asm."
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 712,
+          "text": "#   This is how to build emoem.src, the OEM version of emoem.asm."
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 717,
+          "text": "emoem: $(SRCDIR)\\emoem.src"
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 719,
+          "text": "$(SRCDIR)\\emoem.src: $(SRCDIR)\\emoem.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emoemqb.asm",
+      "path": "wow16/win87em/emoemqb.asm",
+      "hashes": [
+        "D41FFF09661AA8934FB3D86F9313CD923E2F6EE76757D056F2F526BC6FF1B447",
+        "D41FFF09661AA8934FB3D86F9313CD923E2F6EE76757D056F2F526BC6FF1B447",
+        "D41FFF09661AA8934FB3D86F9313CD923E2F6EE76757D056F2F526BC6FF1B447"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 107,
+          "text": "$(SRCDIR)\\emoemqb.asm\t \\"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emoemwin.std",
+      "path": "wow16/win87em/emoemwin.std",
+      "hashes": [
+        "2BB83A1603CF1372BAFD3DC4A385F372C1B06AB826C6D5C260529AE45AFD3576",
+        "2BB83A1603CF1372BAFD3DC4A385F372C1B06AB826C6D5C260529AE45AFD3576",
+        "2BB83A1603CF1372BAFD3DC4A385F372C1B06AB826C6D5C260529AE45AFD3576"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emoemwin.t1",
+      "path": "wow16/win87em/emoemwin.t1",
+      "hashes": [
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246",
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246",
+        "1BFB4F8B04BC5489CE66093D8385A0B35C7138A20D90B62D00F793647296B246"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/emoemwin.t2",
+      "path": "wow16/win87em/emoemwin.t2",
+      "hashes": [
+        "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A",
+        "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A",
+        "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/key",
+      "path": "wow16/win87em/key",
+      "hashes": [
+        "A7BA0FC279CD026280A7DF77893E03B3B09E7CE59FEDA78273800D5FC1237437",
+        "A7BA0FC279CD026280A7DF77893E03B3B09E7CE59FEDA78273800D5FC1237437",
+        "A7BA0FC279CD026280A7DF77893E03B3B09E7CE59FEDA78273800D5FC1237437"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/emdos.asm",
+          "line": 353,
+          "text": "mov\tcx,CHIPKEYLEN\t\t; Length of key 'NO87='"
+        },
+        {
+          "path": "wow16/win87em/emdos.asm",
+          "line": 354,
+          "text": "mov\tsi,offset CHIPKEY\t; key string address"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/switch.an",
+      "path": "wow16/win87em/switch.an",
+      "hashes": [
+        "240C5A85EED279C2A981DC68D47E0F6C42C48AC549F2520E77650D2D795E337F",
+        "240C5A85EED279C2A981DC68D47E0F6C42C48AC549F2520E77650D2D795E337F",
+        "240C5A85EED279C2A981DC68D47E0F6C42C48AC549F2520E77650D2D795E337F"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/switch.n",
+      "path": "wow16/win87em/switch.n",
+      "hashes": [
+        "793D286FBEB69CB54E816770E41CCD65D09CF490604FD41D7140A82CD51ED996",
+        "793D286FBEB69CB54E816770E41CCD65D09CF490604FD41D7140A82CD51ED996",
+        "793D286FBEB69CB54E816770E41CCD65D09CF490604FD41D7140A82CD51ED996"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/switch.src",
+      "path": "wow16/win87em/switch.src",
+      "hashes": [
+        "F019093C79C32A5515070A05B7C59841983C8BF89C04B18491D857D6A2A01BEB",
+        "F019093C79C32A5515070A05B7C59841983C8BF89C04B18491D857D6A2A01BEB",
+        "F019093C79C32A5515070A05B7C59841983C8BF89C04B18491D857D6A2A01BEB"
+      ],
+      "basename_match_count": 1,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 720,
+          "text": "$(IFSTRIP) -w -xsrc -f $(SRCDIR)\\switch.src $(SRCDIR)\\emoem.asm"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/wfpsig.asm",
+      "path": "wow16/win87em/wfpsig.asm",
+      "hashes": [
+        "5995B5FB3486BD64DA642F3ADB4F415C46C2CEC73F2868CE411F565C2C5CF699",
+        "5995B5FB3486BD64DA642F3ADB4F415C46C2CEC73F2868CE411F565C2C5CF699",
+        "5995B5FB3486BD64DA642F3ADB4F415C46C2CEC73F2868CE411F565C2C5CF699"
+      ],
+      "basename_match_count": 2,
+      "literal_refs": [
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 676,
+          "text": "$(OBJDIR)\\wfpsig.obj: $(SRCDIR)\\wfpsig.asm"
+        },
+        {
+          "path": "wow16/win87em/makefile",
+          "line": 677,
+          "text": "$(ASM) $(WINFLAGS) $(SRCDIR)\\wfpsig.asm, $@;"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/win87em.h",
+      "path": "wow16/win87em/win87em.h",
+      "hashes": [
+        "E85719D13447C27515F94395C3EA1A6D280D700E978733F8AD68E0AAB7E2C10E",
+        "E85719D13447C27515F94395C3EA1A6D280D700E978733F8AD68E0AAB7E2C10E",
+        "E85719D13447C27515F94395C3EA1A6D280D700E978733F8AD68E0AAB7E2C10E"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/win87hdr.txt",
+      "path": "wow16/win87em/win87hdr.txt",
+      "hashes": [
+        "7E401A1C3A23F664C62941172036B55AA2B7BB0333E9D58E297E6531BDEE0B22",
+        "7E401A1C3A23F664C62941172036B55AA2B7BB0333E9D58E297E6531BDEE0B22",
+        "7E401A1C3A23F664C62941172036B55AA2B7BB0333E9D58E297E6531BDEE0B22"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/win87em/win87std.def",
+      "path": "wow16/win87em/win87std.def",
+      "hashes": [
+        "8CEC4D7B26A1787201E4ACBB38AEEB65230429EBA9AAD15487F4A378C6E00D4B",
+        "8CEC4D7B26A1787201E4ACBB38AEEB65230429EBA9AAD15487F4A378C6E00D4B",
+        "8CEC4D7B26A1787201E4ACBB38AEEB65230429EBA9AAD15487F4A378C6E00D4B"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winoldap/winoldap.c",
+      "path": "wow16/winoldap/winoldap.c",
+      "hashes": [
+        "DAB0023993AD00CE173C6E31FC6061E398781970D52A46D7A9145C023C858621",
+        "DAB0023993AD00CE173C6E31FC6061E398781970D52A46D7A9145C023C858621",
+        "DAB0023993AD00CE173C6E31FC6061E398781970D52A46D7A9145C023C858621"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winoldap/winoldap.def",
+      "path": "wow16/winoldap/winoldap.def",
+      "hashes": [
+        "1CB664C195169C5AE48F15290834323FA8A8BB71EAC9E5FA87B036A298E076BB",
+        "1CB664C195169C5AE48F15290834323FA8A8BB71EAC9E5FA87B036A298E076BB",
+        "1CB664C195169C5AE48F15290834323FA8A8BB71EAC9E5FA87B036A298E076BB"
+      ],
+      "basename_match_count": 10,
+      "literal_refs": [
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 95,
+          "text": "echo winoldap.def;        >>winoldap.lrf"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 97,
+          "text": "winoldap.def: makefile"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 98,
+          "text": "echo name winoldap                      >winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 99,
+          "text": "echo exetype windows                   >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 100,
+          "text": "echo stub '..\\bin\\winstub.exe'         >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 101,
+          "text": "echo code preload moveable discardable >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 102,
+          "text": "echo data preload moveable multiple    >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 103,
+          "text": "echo heapsize 512                      >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 104,
+          "text": "echo exports                           >>winoldap.def"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 107,
+          "text": "winoldap.mod: winoldap.obj winoldap.lrf winoldap.def winoldap.res"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winoldap/WINOLDAP.MOD",
+      "path": "wow16/winoldap/WINOLDAP.MOD",
+      "hashes": [
+        "CC9C8BC27E11843C6739D0798EFA2AC41C4EF71A6A34B68F1AF38640A2BBCC7F",
+        "CC9C8BC27E11843C6739D0798EFA2AC41C4EF71A6A34B68F1AF38640A2BBCC7F",
+        "CC9C8BC27E11843C6739D0798EFA2AC41C4EF71A6A34B68F1AF38640A2BBCC7F"
+      ],
+      "basename_match_count": 7,
+      "literal_refs": [
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 75,
+          "text": "all: winoldap.mod winoldap.sym"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 76,
+          "text": "binplace winoldap.mod winoldap.map winoldap.sym"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 92,
+          "text": "echo winoldap.mod $(LINK) >>winoldap.lrf"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 107,
+          "text": "winoldap.mod: winoldap.obj winoldap.lrf winoldap.def winoldap.res"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 109,
+          "text": "rc16 -t winoldap.res winoldap.mod"
+        },
+        {
+          "path": "wow16/winoldap/winoldap.c",
+          "line": 18,
+          "text": "The binary is named WINOLDAP.MOD for historic reasons."
+        },
+        {
+          "path": "wow16/winoldap/winoldap.rcv",
+          "line": 7,
+          "text": "#define VER_ORIGINALFILENAME_STR        \"WINOLDAP.MOD\""
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winoldap/WINOLDAP.RES",
+      "path": "wow16/winoldap/WINOLDAP.RES",
+      "hashes": [
+        "467DA0F2D558F2DF5A4DB40C04EE8F85DDBB0D4D1FA615DAD03A0E77A76582D2",
+        "467DA0F2D558F2DF5A4DB40C04EE8F85DDBB0D4D1FA615DAD03A0E77A76582D2",
+        "467DA0F2D558F2DF5A4DB40C04EE8F85DDBB0D4D1FA615DAD03A0E77A76582D2"
+      ],
+      "basename_match_count": 3,
+      "literal_refs": [
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 107,
+          "text": "winoldap.mod: winoldap.obj winoldap.lrf winoldap.def winoldap.res"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 109,
+          "text": "rc16 -t winoldap.res winoldap.mod"
+        },
+        {
+          "path": "wow16/winoldap/makefile",
+          "line": 111,
+          "text": "winoldap.res: $*.rc $*.rcv ..\\inc\\common.ver"
+        }
+      ],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winsock/winsock.asm",
+      "path": "wow16/winsock/winsock.asm",
+      "hashes": [
+        "2FDB30852982DBCF6A6C73AC4CD6440D48238407BE5E96B4A7BD49AFCD357BA1",
+        "2FDB30852982DBCF6A6C73AC4CD6440D48238407BE5E96B4A7BD49AFCD357BA1",
+        "2FDB30852982DBCF6A6C73AC4CD6440D48238407BE5E96B4A7BD49AFCD357BA1"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    },
+    {
+      "key": "wow16/winsock/winsock.def",
+      "path": "wow16/winsock/winsock.def",
+      "hashes": [
+        "A31B511502A509DC88CFC3BD5470B9BEA7BCCFA2410B540B63BF3E678E8DBC7E",
+        "A31B511502A509DC88CFC3BD5470B9BEA7BCCFA2410B540B63BF3E678E8DBC7E",
+        "A31B511502A509DC88CFC3BD5470B9BEA7BCCFA2410B540B63BF3E678E8DBC7E"
+      ],
+      "basename_match_count": 0,
+      "literal_refs": [],
+      "archive_identical": [],
+      "archive_named": []
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "scope": "Frozen source identities, family-local literal references and selected binary ZIP exact matches; no runtime, provenance or alternate build inference"
+}

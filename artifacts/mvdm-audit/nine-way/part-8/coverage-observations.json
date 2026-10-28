@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "owned_mvdm": 120,
+  "owned_external": 4773,
+  "recorded_keys": 4893,
+  "missing": [],
+  "extra": [],
+  "duplicates": {},
+  "scope": "Ownership evidence coverage only; not completion of semantic audit or provider relevance"
+}

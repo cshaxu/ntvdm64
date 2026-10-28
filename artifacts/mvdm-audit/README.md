@@ -35,6 +35,12 @@ their unresolved execution and provider selection obligations.
 The [cross-part 3/6/9 owner worklist](cross-369/function-owner-worklist.md)
 maps concrete findings to the planned recovery stages and traces WRITE image
 identity separately from the limited historical runtime witness.
+The [part 8 EDIT boundary](nine-way/part-8/edit-guest-host-review.md) separates
+guest source from the selected host control, and the [ToolHelp review](nine-way/part-8/toolhelp-family-review.md)
+distinguishes export and dispatch observations from guest reachability.
+Its [remaining guest inventory](nine-way/part-8/guest-family-inventory-review.md)
+and [external raster resources](nine-way/part-8/rasprint-mini-review.md)
+retain unresolved provider and relevance decisions.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

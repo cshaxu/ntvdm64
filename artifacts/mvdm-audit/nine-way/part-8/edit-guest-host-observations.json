@@ -1,0 +1,153 @@
+{
+  "result": "pass",
+  "guest_files": [
+    {
+      "key": "wow16/user/editec.c",
+      "path": "wow16/user/editec.c",
+      "hashes": [
+        "10975935F40EE5D38AB50CBE6950FC4244D2EEA5C148D079007C444ECC681AF4",
+        "10975935F40EE5D38AB50CBE6950FC4244D2EEA5C148D079007C444ECC681AF4",
+        "10975935F40EE5D38AB50CBE6950FC4244D2EEA5C148D079007C444ECC681AF4"
+      ]
+    },
+    {
+      "key": "wow16/user/edecrare.c",
+      "path": "wow16/user/edecrare.c",
+      "hashes": [
+        "856D7EE09A165D2472352CD5C848BB9AC14415E4271C4FFC675E69A5C9963E0D",
+        "856D7EE09A165D2472352CD5C848BB9AC14415E4271C4FFC675E69A5C9963E0D",
+        "856D7EE09A165D2472352CD5C848BB9AC14415E4271C4FFC675E69A5C9963E0D"
+      ]
+    },
+    {
+      "key": "wow16/user/editsl.c",
+      "path": "wow16/user/editsl.c",
+      "hashes": [
+        "1533858AE3E5016F85D2C4723C28D2ECAA1FFA803D70533100332D20DAB653B3",
+        "1533858AE3E5016F85D2C4723C28D2ECAA1FFA803D70533100332D20DAB653B3",
+        "1533858AE3E5016F85D2C4723C28D2ECAA1FFA803D70533100332D20DAB653B3"
+      ]
+    },
+    {
+      "key": "wow16/user/editml.c",
+      "path": "wow16/user/editml.c",
+      "hashes": [
+        "34A06789A953BAF70CAC571F2D3BF17258B63EDD8C56BB4ECA10F137FDF3EC1D",
+        "34A06789A953BAF70CAC571F2D3BF17258B63EDD8C56BB4ECA10F137FDF3EC1D",
+        "34A06789A953BAF70CAC571F2D3BF17258B63EDD8C56BB4ECA10F137FDF3EC1D"
+      ]
+    },
+    {
+      "key": "wow16/user/edmlonce.c",
+      "path": "wow16/user/edmlonce.c",
+      "hashes": [
+        "27E85B97361A86DACA8514B2EF7FDD991F82D21B44AA2202EC6441ACBDC4FD43",
+        "27E85B97361A86DACA8514B2EF7FDD991F82D21B44AA2202EC6441ACBDC4FD43",
+        "27E85B97361A86DACA8514B2EF7FDD991F82D21B44AA2202EC6441ACBDC4FD43"
+      ]
+    },
+    {
+      "key": "wow16/user/edmlrare.c",
+      "path": "wow16/user/edmlrare.c",
+      "hashes": [
+        "F8F7F793F8DCE82DF28DA07C13969A2126F732765C20A5DC62B53B04BA7C4181",
+        "F8F7F793F8DCE82DF28DA07C13969A2126F732765C20A5DC62B53B04BA7C4181",
+        "F8F7F793F8DCE82DF28DA07C13969A2126F732765C20A5DC62B53B04BA7C4181"
+      ]
+    },
+    {
+      "key": "wow16/user/edslrare.c",
+      "path": "wow16/user/edslrare.c",
+      "hashes": [
+        "9D3FBEB78ACF733FC051D8FF22C58983FFAA3005C24AD681E1D7C83A658C90F7",
+        "9D3FBEB78ACF733FC051D8FF22C58983FFAA3005C24AD681E1D7C83A658C90F7",
+        "9D3FBEB78ACF733FC051D8FF22C58983FFAA3005C24AD681E1D7C83A658C90F7"
+      ]
+    },
+    {
+      "key": "wow16/user/edit.h",
+      "path": "wow16/user/edit.h",
+      "hashes": [
+        "B5E17F84747DE916CEB4A0EA4339476BE8F98FE6EE4E6437C89680161AC4DA82",
+        "B5E17F84747DE916CEB4A0EA4339476BE8F98FE6EE4E6437C89680161AC4DA82",
+        "B5E17F84747DE916CEB4A0EA4339476BE8F98FE6EE4E6437C89680161AC4DA82"
+      ]
+    }
+  ],
+  "host_body_bindings": [
+    {
+      "name": "_ECCalcChangeSelection@20",
+      "va": 268649088,
+      "function": true,
+      "owner": "control-body-editec.obj",
+      "bytes": 302,
+      "relocation_words": 0,
+      "graph_edge": "build obj/opennt-user/control-body-editec.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/editec.c",
+      "host_source_sha256": "54D7EBA85A09091767B18D06B88A48212D2429B0D75EF19C70C15BC674EF24CD"
+    },
+    {
+      "name": "_ECCreate@12",
+      "va": 268660528,
+      "function": true,
+      "owner": "control-body-edecrare.obj",
+      "bytes": 129,
+      "relocation_words": 4,
+      "graph_edge": "build obj/opennt-user/control-body-edecrare.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/edecrare.c",
+      "host_source_sha256": "B50E0F8F305F6456B3A952DDD63C815357136F222328C6D83DD0E76E697B5634"
+    },
+    {
+      "name": "_SLChangeSelection@16",
+      "va": 268663696,
+      "function": true,
+      "owner": "control-body-editsl.obj",
+      "bytes": 547,
+      "relocation_words": 16,
+      "graph_edge": "build obj/opennt-user/control-body-editsl.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/editsl.c",
+      "host_source_sha256": "5D730399CE35740C88E7D5F98F1A4C4882802A6E66A830D11B3D8E4BFAD9EB1C"
+    },
+    {
+      "name": "_MLBuildchLines@24",
+      "va": 268672064,
+      "function": true,
+      "owner": "control-body-editml.obj",
+      "bytes": 1331,
+      "relocation_words": 18,
+      "graph_edge": "build obj/opennt-user/control-body-editml.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/editml.c",
+      "host_source_sha256": "5F65E9AFF922918240243C3D91AEEC4C0317010C80A01AF43626F828B0F95DEC"
+    },
+    {
+      "name": "_MLCreate@12",
+      "va": 268685872,
+      "function": true,
+      "owner": "control-body-edmlonce.obj",
+      "bytes": 251,
+      "relocation_words": 6,
+      "graph_edge": "build obj/opennt-user/control-body-edmlonce.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/edmlonce.c",
+      "host_source_sha256": "AC63E8B953B97C91FE4F0C7813919CF1FA482EA253E2EDFD3EF7CF606E5940A2"
+    },
+    {
+      "name": "_MLGetLine@16",
+      "va": 268686128,
+      "function": true,
+      "owner": "control-body-edmlrare.obj",
+      "bytes": 108,
+      "relocation_words": 5,
+      "graph_edge": "build obj/opennt-user/control-body-edmlrare.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/edmlrare.c",
+      "host_source_sha256": "FB9DD31919B7B90DB2F713DAA83684F1231558E7653AE72CD72458F1212000F1"
+    },
+    {
+      "name": "_SLCreate@12",
+      "va": 268687872,
+      "function": true,
+      "owner": "control-body-edslrare.obj",
+      "bytes": 160,
+      "relocation_words": 6,
+      "graph_edge": "build obj/opennt-user/control-body-edslrare.obj: cc O:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/client/edslrare.c",
+      "host_source_sha256": "B33DEA4AA66B7713B651B259A37D7F993802F40C042514122B73580BAEC4F0DF"
+    }
+  ],
+  "release_wow32_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "guest_user_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "scope": "Guest original source identity versus distinct selected NT USER source; representative relocation-masked body bindings, no guest EDIT semantics or callbacks proven"
+}

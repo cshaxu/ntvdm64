@@ -1,0 +1,7 @@
+# Part 8: 4,773 external OpenNT miniature printer-driver resources
+
+The companion `rasprint-mini-owned.csv` records every one of the 4,773 part-8 external owned keys individually: OpenNT source path/edition, verified Git blob (raw or CRLF-normalized), raw SHA-256, size, model directory, exact references from that model's RC/sources/INF where present, and captured ZIP basename observation. They span 33 distinct original printer-model directories. A reference is reported with exact original path, line and text; 2,320 rows have such a direct model-relative textual reference, while the remainder have none in that limited search. No basename match appears in the captured ZIP.
+
+Each key remains **relevance pending**, not excluded: RC references document original model build intent, not actual current device selection or printer behavior; lack of those particular references does not rule out generated resources, indirect code, shared assets, alternate profiles, or OS-supplied drivers. Archive basename absence does not rule out embedded or renamed resources. Model paths and evidence are retained individually to support the future printer/host-seam decision; none of these files is imported or modified here.
+
+Replay `PYTHONDONTWRITEBYTECODE=1 python artifacts/mvdm-audit/nine-way/part-8/rasprint-mini-observer.py` to regenerate CSV and JSON. The observer compares each working source to its frozen original Git blob. No printer, external source, product, guest, build tree or shared ledger was changed.
