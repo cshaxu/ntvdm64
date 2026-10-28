@@ -1,0 +1,48 @@
+{
+  "files": [
+    "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.dll",
+    "assets\\release\\VDMREDIR.DLL"
+  ],
+  "changed_section_bytes": {
+    ".text": 0,
+    ".rdata": 3,
+    ".data": 0,
+    ".rsrc": 953,
+    ".reloc": 0
+  },
+  "cached_resources": [
+    {
+      "path": [
+        16,
+        1,
+        1033
+      ],
+      "size": 936,
+      "codepage": 0,
+      "sha256": "D96EB703EE5A10112228F895F30F9B44899FA39D62566AF8F50A19F6108443C2"
+    }
+  ],
+  "release_resources": [
+    {
+      "path": [
+        10,
+        "NTVDM_PACKAGE_ID",
+        0
+      ],
+      "size": 16,
+      "codepage": 1252,
+      "sha256": "218996CB00EFB5F2E1A6ABB513DA90FB763EF65CBBB1F81719C8D492A260E95B"
+    },
+    {
+      "path": [
+        16,
+        1,
+        1033
+      ],
+      "size": 936,
+      "codepage": 1252,
+      "sha256": "D96EB703EE5A10112228F895F30F9B44899FA39D62566AF8F50A19F6108443C2"
+    }
+  ],
+  "limits": "Resource hashes and raw section differences only; no runtime equivalence claim"
+}

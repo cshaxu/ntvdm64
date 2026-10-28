@@ -1,0 +1,57 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "inc/curdir.h",
+      "hashes": [
+        "8FB302F406591989ABE2CF93880A84A100E694BE745E42D79CE674503C5E6F9F",
+        "8FB302F406591989ABE2CF93880A84A100E694BE745E42D79CE674503C5E6F9F",
+        "8FB302F406591989ABE2CF93880A84A100E694BE745E42D79CE674503C5E6F9F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "inc/CURDIR.INC",
+      "hashes": [
+        "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762",
+        "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762",
+        "8490C9AA0702BC17B6F73483837159934AA8C8F353DF5402B71812EA87D63762"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\inc\\makefile",
+      "sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\mscode.asm",
+      "sha256": "59F4903BE6456362EDE5C53FA49A31805946F5411E0A6960B0A89257A5C7D569"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\path.asm",
+      "sha256": "BD111F35AD06774100F4FD0B1D299390B4A221A8FD716CA136FFAAB9D8082BE9"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\msdos.lnk",
+      "sha256": "828FF652663F3999F8FA75311ED31398C8E0138F93CEE86F38A6F36CA9A9D840"
+    }
+  ],
+  "normalized_dependencies": [
+    {
+      "build": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+      "object": "obj/dem/demfile.obj"
+    },
+    {
+      "build": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+      "object": "obj/wdos.obj"
+    }
+  ],
+  "wow_map_entry": "0001:00029710       _GetCurrentDir@8           1002a710 f   wdos.obj",
+  "worker_graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "wow_map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "scope": "Source field names, normalized host dependencies and historical guest build references, not layout or behavior proof"
+}

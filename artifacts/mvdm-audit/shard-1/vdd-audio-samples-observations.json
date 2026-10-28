@@ -1,0 +1,66 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "vdd/samples/adlibvdd/vdd.c",
+      "sha256": "13520D81890F84D34C49AEA49466E17BB652EF3A841A2A7254E4C1B332F1E70C",
+      "catalog_ids": "SRC:8a2ae58a076033ead227;SRC:de00bcbc23dbf9a4bcac",
+      "status": "\u5f85\u6838\u9a8c",
+      "sources_path": "vdd/samples/adlibvdd/sources",
+      "sources_sha256": "A2FF03420BCAD5F5FCC30020D18C9C650AFF1CEA14E81EFA007F405D73F049B4",
+      "target_name": "adlibvdd",
+      "exact_graph_hits": [],
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "vdd/samples/vsbd/vdd.c",
+      "sha256": "FCF0E4817F2F69D7264754EF8A2BA498380E0B6B1199C93CF0F16BA036580A20",
+      "catalog_ids": "SRC:545ba8ee3827fe4d8746;SRC:c72ebd54538d843e4da2",
+      "status": "\u5f85\u6838\u9a8c",
+      "sources_path": "vdd/samples/vsbd/sources",
+      "sources_sha256": "AFD1D2CBDAFD96195179418908C15CB806486ED859FA43B88C40AA558D79DCFF",
+      "target_name": "vsbd",
+      "exact_graph_hits": [],
+      "valid_dependency_matches": []
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "zip_members": [],
+  "exact_paths": [
+    {
+      "path": "assets\\release\\adlibvdd.dll",
+      "present": false
+    },
+    {
+      "path": "assets\\release\\vsbd.dll",
+      "present": false
+    },
+    {
+      "path": "O:\\winnt\\system32\\adlibvdd.dll",
+      "present": false
+    },
+    {
+      "path": "O:\\winnt\\system32\\vsbd.dll",
+      "present": false
+    }
+  ],
+  "limitations": "Historical sample source/recipes and checked graph/path census only; no DLL provenance, audio hardware, VDD loading, lifecycle or functional execution proof."
+}

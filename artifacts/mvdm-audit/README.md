@@ -11,6 +11,12 @@ The [parallel C-VID review](parallel-cvidc-role-review.md) adds five retained
 compiler declaration excerpts and one linked initial vector, all partial.
 The [parallel WOW GDI review](shard-2/parallel-review-third.md) binds 28
 font, text and metafile targets; guest execution and callback lifetimes remain open.
+The [DOS directory declarations](shard-2/curdir-abi-review.md),
+[DPMI interrupt declarations](shard-2/dpmi-interrupt-interface-review.md),
+[storage interfaces](shard-3/storage-interfaces-role-review.md) and
+[audio VDD samples](shard-1/vdd-audio-samples-review.md) record selected
+dependencies and bounded exclusions; their pending ledger dispositions and
+runtime behavior remain subject to coordinator reconciliation.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

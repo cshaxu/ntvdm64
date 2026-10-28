@@ -5,8 +5,12 @@ release asset and the installed VDMREDIR. At this snapshot release and installed
 whole-file hashes match; the cached whole-file hash differs. The two image
 `.text`, `.data` and `.reloc` raw section bytes match, while `.rdata` and
 `.rsrc` differ; PE timestamps also differ. The differing resources and
-read-only data have not been interpreted, so timestamp alone is not asserted
-as the reason and semantic equivalence is not claimed.
+read-only data differ in three bytes. The [resource observer](vdmredir-resource-observer.py)
+and its [snapshot](vdmredir-resource-observations.json) show that the release
+contains an additional 16-byte `NTVDM_PACKAGE_ID` resource; its version-resource
+payload is byte-identical to the cache version. The resource-directory codepage
+also differs. This explains the resource content difference but does not explain
+the three read-only-data bytes, establish provenance or prove semantic equivalence.
 
 The [VDMREDIR source review](../shard-2/vdmredir-host-roles-review.md) records
 current graph and source evidence. Bind any claim about the delivered DLL to

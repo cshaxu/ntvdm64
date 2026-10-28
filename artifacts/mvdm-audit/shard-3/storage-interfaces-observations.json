@@ -1,0 +1,46 @@
+{
+  "softpc.new/base/inc/cdrom_fn.h": {
+    "current": "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99",
+    "opennt": "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99",
+    "opennt45": "50376ae1cb7e4ff4ddb8ac8bd4af2e74c9ae3c86246c93e3380befb1fb65ea99"
+  },
+  "softpc.new/base/inc/disk_geo.h": {
+    "current": "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30",
+    "opennt": "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30",
+    "opennt45": "8d750f2d279e825004ac24bab65ed8ea6fe94fe385963835fe479ba8a7956c30"
+  },
+  "softpc.new/base/inc/gfirflop.h": {
+    "current": "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec",
+    "opennt": "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec",
+    "opennt45": "9e033d9d00afa92aa71b157b043df550f5bb1d62aed97aa8d77e29c46e3372ec"
+  },
+  "softpc.new/base/disks/gfi.c": {
+    "current": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+    "opennt": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+    "opennt45": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6"
+  },
+  "softpc.new/host/src/nt_rflop.c": {
+    "current": "d8e469a3ac2f35eb0205894f9c9f44404b6f3c797a295ab68281e54c009b53fa",
+    "opennt": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+    "opennt45": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29"
+  },
+  "softpc.new/host/src/nt_fdisk.c": {
+    "current": "691ef629bb953a15f8c5a3bdfee2d492bbcc534d14303fb03bf1ca988a79f4a7",
+    "opennt": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+    "opennt45": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867"
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": []
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00005c30       _host_fdisk_rd             00406c30 f   original-softpc-host-roots:nt_fdisk.obj",
+      " 0001:00052840       _host_gfi_rdiskette_active 00453840 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:000528a0       _nt_floppy_close           004538a0 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:00052ad0       _nt_floppy_read            00453ad0 f   original-softpc-host-roots:nt_rflop.obj",
+      " 0001:0005d300       _host_fdisk_get_params     0045e300 f   original-softpc-host-roots:nt_fdisk.obj"
+    ]
+  }
+}

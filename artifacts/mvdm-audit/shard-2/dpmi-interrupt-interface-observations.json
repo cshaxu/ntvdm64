@@ -1,0 +1,62 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "dpmi32/precomp.h",
+      "hashes": [
+        "F3111325CDFF8671464B6C457D7B04E3F666282DF638D200908A57AF2CC6491E",
+        "F3111325CDFF8671464B6C457D7B04E3F666282DF638D200908A57AF2CC6491E",
+        "F3111325CDFF8671464B6C457D7B04E3F666282DF638D200908A57AF2CC6491E"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "dpmiint_normalized_dependency": true
+    },
+    {
+      "path": "inc/intapi.h",
+      "hashes": [
+        "4A4EA44F62A4F9E86793E82808CE19AFC7AFC493678568FDCF38FB1597A2910F",
+        "4A4EA44F62A4F9E86793E82808CE19AFC7AFC493678568FDCF38FB1597A2910F",
+        "4A4EA44F62A4F9E86793E82808CE19AFC7AFC493678568FDCF38FB1597A2910F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "dpmiint_normalized_dependency": true
+    },
+    {
+      "path": "inc/VINT.INC",
+      "hashes": [
+        "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7",
+        "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7",
+        "2BA06B3EEA9A8EC96236D96FF7D996274B3FEB5AC456524D6A9E8BD6A44541C7"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "dpmiint_normalized_dependency": false
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dpmi32\\dpmiint.c",
+      "sha256": "F7FF2FC0686C67D3AD767A2D6CA91CCD45A1DD1381C902F4B7D27726AA74B94C"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\himem\\himem4.asm",
+      "sha256": "0EAE030990A2EE242E94F0AB0D49248D4C0DE4CFF8CDAF5FF7E355C5939809F2"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\i386\\fastwow.asm",
+      "sha256": "9B0C44D32EDB5FDEE9C20028CBECAF569F2C53CBAC28048C1BD97E93248A07A9"
+    },
+    {
+      "path": "src\\mvdm\\inc\\makefile",
+      "sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9"
+    }
+  ],
+  "normalized_deps_object": "obj/dpmi/dpmiint.obj",
+  "compile_edge": "build obj/dpmi/dpmiint.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c",
+  "map_entry": "0001:00158490       _DpmiSetProtectedmodeInterrupt 00559490 f   original-mvdm-dpmi32:dpmiint.obj",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Interrupt declaration selection and source references; no vector ownership, reentry or guest ABI proof"
+}
