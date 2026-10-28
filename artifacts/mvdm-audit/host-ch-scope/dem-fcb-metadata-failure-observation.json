@@ -1,0 +1,30 @@
+{
+  "orig_sha256": "40550EA098C987667A0114709625B57D814AD25EB14E4286B5D644188ADC872D",
+  "modified_object_sha256": "CC02C2B585806AC4F7A33FCCBB048A18CD0130CD2492167F9D952B94776684FB",
+  "fixture_sha256": "9AB458834A654FE289796089134D09EF26D209AF76A157F5D62252CCFB4D8896",
+  "exe_sha256": "D9DF615F9BA4402732D3CFD967C87918E577ECA492158A9374C85B1266C459AF",
+  "rebindings": [
+    [
+      "__imp__GetFileTime@16",
+      "_hook_gft"
+    ],
+    [
+      "__imp__FileTimeToLocalFileTime@8",
+      "_hook_local"
+    ],
+    [
+      "__imp__FileTimeToDosDateTime@12",
+      "_hook_dos"
+    ],
+    [
+      "__imp__GetFileSize@8",
+      "_hook_size"
+    ],
+    [
+      "__imp__CloseHandle@4",
+      "_hook_close"
+    ]
+  ],
+  "exit_code": 0,
+  "output": "FCB case=0 result=1 gft=1 local=1 dos=1 size=1 errors=0 closes=0 error=0 out=0000007b\nFCB case=1 result=1 gft=1 local=1 dos=1 size=1 errors=0 closes=0 error=0 out=0000007b\nFCB case=2 result=1 gft=1 local=1 dos=1 size=1 errors=0 closes=0 error=0 out=0000007b\nFCB case=3 result=0 gft=1 local=1 dos=1 size=0 errors=1 closes=0 error=0 out=00000000\nFCB case=4 result=0 gft=1 local=1 dos=1 size=1 errors=1 closes=0 error=5 out=ffffffff\nFCB case=5 result=0 gft=1 local=1 dos=1 size=1 errors=1 closes=0 error=0 out=0000007b\nFCB case=6 result=0 gft=1 local=1 dos=1 size=1 errors=1 closes=0 error=0 out=ffffffff\n"
+}

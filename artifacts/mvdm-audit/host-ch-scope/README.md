@@ -12,6 +12,8 @@ Output counts and classifications are evidence-bound snapshots. They are neither
 
 The [FCB open ownership review](dem-fcb-open-ownership-review.md) distinguishes helper and caller handle ownership and records failure-path evidence for S12. The [WOW local parameter retirement review](wow-local-parameter-retirement-review.md) records original mapping ownership and a conditional same-key cross-task boundary; its reachability and contract remain unproved.
 
+The [FCB metadata actual-object fixture](dem-fcb-metadata-failure-review.md) executes seven controlled API outcomes, including two ignored failures and a successful size sentinel rejected by the original helper. It does not exercise the complete caller or guest path.
+
 The [floppy provider review](dos-floppy-pending-owner-review.md), [video diagnostic family review](../shard-3/pending-video-diagnostic-family-review.md), and [WOW multimedia pending review](wow-multimedia-three-pending-recheck.md) distinguish unselected original profiles from selected production owners. Their file roles and original capability obligations remain pending where the selected profile and consumer evidence is insufficient; controlled close-failure observations do not establish a live guest failure.
 
 The [legacy CPU header selection](legacy-cpu-header-selection.md) excludes two older physical interface paths for the captured NT profile while retaining CPU behavior in S11. The [GFI](gfi-scoped-physical-disposition-review.md) and [WOW](wow-profile-excluded-three-candidates.md) scoped candidates remain pending until their original feature applicability is decided; an inactive body alone is insufficient to exclude an unverified capability.

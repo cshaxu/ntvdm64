@@ -8,6 +8,8 @@ original behavior, lifecycle and regression before implementing a change.
 
 Further bounded ownership reviews: [FCB open and metadata](host-ch-scope/dem-fcb-open-ownership-review.md) belongs to S12; preserve the live handle through error translation and establish exactly-once cleanup for both callers. The selected-object size witness alone does not prove a guest leak. [WOW local heap parameter retirement](host-ch-scope/wow-local-parameter-retirement-review.md) belongs to S14/S15; same-key borrowing across tasks has a source-level lifetime concern whose legality and reachability are not yet established.
 
+The [FCB actual-object API-failure witness](host-ch-scope/dem-fcb-metadata-failure-review.md) independently reproduces ignored `GetFileTime` and local-time conversion failures and rejects a successful `FFFFFFFFh` low file size under controlled seams. S12 must test correct Win32 sentinel/error handling, both caller cleanup and guest-visible translation; the fixture does not itself establish guest reachability or an actual leaked handle.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 | Stage | Cohort and evidence | Established result / remaining work |
