@@ -3592,7 +3592,7 @@ wow16/ole/server/olesvr.asm,3,excluded,shard-3/file-review.csv
 wow16/ole/server/olesvr.def,3,excluded,shard-3/file-review.csv
 wow16/ole/server/olesvr.rcv,1,excluded,shard-1/file-audit.csv
 wow16/ole/server/olever.h,3,pending,shard-3/file-review.csv
-wow16/ole/server/retail/OLESVR.DLL,0,pending,shard-0/review.csv
+wow16/ole/server/retail/OLESVR.DLL,0,partial,shard-0/review.csv
 wow16/ole/server/retail/olesvr.lib,2,excluded,shard-2/file-audit.csv
 wow16/ole/server/retail/olesvr.map,3,excluded,shard-3/file-review.csv
 wow16/ole/server/retail/olesvr.sym,0,excluded,shard-0/review.csv

@@ -1,0 +1,106 @@
+{
+  "files": [
+    {
+      "path": "forcedos/obj/i386/forcedos.exe",
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+      "original_hashes": [
+        null,
+        null,
+        "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "forcedos/pif.h",
+      "sha256": "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266",
+      "original_hashes": [
+        "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266",
+        "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266",
+        "6473e80a539b746f5af25c15afb85f2f1498b0a0f429fea861708e78d9e9d266"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "pifedit/pifedit.ico",
+      "sha256": "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e",
+      "original_hashes": [
+        "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e",
+        "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e",
+        "5a6a3034f6132a48b7e4929d528ef6cc1a589cae62573af5c788d42bbde70e5e"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "pifedit/pifedit.rc",
+      "sha256": "f198facc157235f09227ef4bfd534c8f5ca13425244b84da08051865b66ed1ec",
+      "original_hashes": [
+        "f198facc157235f09227ef4bfd534c8f5ca13425244b84da08051865b66ed1ec",
+        "f198facc157235f09227ef4bfd534c8f5ca13425244b84da08051865b66ed1ec",
+        "f198facc157235f09227ef4bfd534c8f5ca13425244b84da08051865b66ed1ec"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "pifedit/pifedit.rcv",
+      "sha256": "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5",
+      "original_hashes": [
+        "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5",
+        "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5",
+        "740822d23ee2f692f3de8517393c1060d8288b36262ba2769fce33017bfeeaa5"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "pifedit/pifhelp.h",
+      "sha256": "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c",
+      "original_hashes": [
+        "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c",
+        "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c",
+        "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "pifedit/pifsubs.c",
+      "sha256": "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2",
+      "original_hashes": [
+        "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2",
+        "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2",
+        "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}

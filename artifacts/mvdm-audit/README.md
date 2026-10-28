@@ -585,3 +585,7 @@ The [COUNTRY data comparison](shard-0/country-bin86-identity-review.md) identifi
 Further bounded reviews trace [DOS utilities](shard-1/dos-utility-family-review.md), [WRITE DBCS build selection](shard-2/write-dbcs-family-review.md), and [RASAPI16 inputs](shard-3/rasapi-guest-input-role-review.md). Original recipes and retained images do not establish live guest behavior or provider availability.
 
 The [guest stub and WFWNET review](win16-guest-image-payload-role-review.md) records bounded deployed-byte identities; the [VDD sample family](shard-1/vdd-sample-family-review.md) preserves separate package and external-provider boundaries.
+
+The [OLE server image review](shard-0/ole-server-image-review.md) matches the original retail image to the guest archive while recording the absent exact installed path; actual loading and OLE behavior remain unverified.
+
+The [PIFEDIT/FORCEDOS](shard-1/pifedit-forcedos-family-review.md), [SYSTEM NE](shard-2/system-ne-family-review.md), and [WRITE alternate source](shard-3/write-alternate-owners-role-review.md) reviews retain separate editor, driver and guest build-profile boundaries.

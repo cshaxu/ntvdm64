@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "54624d313",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/ole-server-image-observations.json",
+      "sha256": "C2E7863C1A64C4DE7404F4C8A0E4BDC1EE45A7BA04913855524242B37F594F3B"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Archived guest image identity only"
+}

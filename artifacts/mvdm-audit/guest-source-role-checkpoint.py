@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'win16-guest-image-payload-role-':
+                if prefix == 'ole-server-guest-image-role-':
+                    assert path == 'wow16/ole/server/retail/OLESVR.DLL' and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
+                elif prefix == 'win16-guest-image-payload-role-':
                     assert path in ('wow16/bin/winstub.exe', 'wow16/wfwnet/WFWNET.DRV') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
                 elif prefix == 'mvdm-inc-header-owner-role-':
                     assert path in {'inc/' + n for n in ('apistruc.h', 'bop.h', 'dbgsvc.h', 'doswow.h', 'exterr.h', 'netb.h', 'sharewow.h', 'vrdlctab.h', 'vrmisc.h', 'vrmslot.h', 'vrnetapi.h', 'wowclip.h', 'wowcmdlg.h', 'wowinfo.h', 'wowth.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
