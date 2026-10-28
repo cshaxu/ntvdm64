@@ -1,0 +1,56 @@
+{
+  "inputs": [
+    {
+      "path": "src/mvdm/softpc.new/base/cvidc/c2cpusad.h",
+      "sha256": "6F73C73102647669A8DB411C8A6A2AC6412FE2CCBB3DAA6331B7B8FD2717260B"
+    },
+    {
+      "path": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/cvidc/c2cpusad.h",
+      "sha256": "6F73C73102647669A8DB411C8A6A2AC6412FE2CCBB3DAA6331B7B8FD2717260B"
+    },
+    {
+      "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/softpc.new/base/cvidc/c2cpusad.h",
+      "sha256": "6F73C73102647669A8DB411C8A6A2AC6412FE2CCBB3DAA6331B7B8FD2717260B"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/generated/cvidc_cpu_binding.inc",
+      "sha256": "F6F480D0BFF8A1CAB2C495506C831E69BF17276D82775F4037F435578C7D5E7E"
+    },
+    {
+      "path": "tools/build/GenerateCvidcCpuBinding.mjs",
+      "sha256": "CEAD121D5B143DA18049E4C7015782B47EF3B670E7AE4B0624C049B577E789C6"
+    },
+    {
+      "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+      "sha256": "7884E96510B3A1C05222140AADABC84DC24997A5B48E209FD344C62E1E5F148C"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "sha256": "7D3FFB9518BAE76A89FBFCFAB0EF2754BB864B61A9A0CC48993A17E685AFC022"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    }
+  ],
+  "groups": [
+    {
+      "name": "CpuVectorNames",
+      "count": 154
+    },
+    {
+      "name": "CpuPrivateVectorNames",
+      "count": 55
+    }
+  ],
+  "generated_slots": 209,
+  "checks": {
+    "generator_reads_metadata": true,
+    "builder_invokes_generator": true,
+    "binding_includes_generated": true,
+    "graph_builds_binding": true,
+    "graph_selects_object": true,
+    "all_ordered_names_match": true
+  },
+  "limits": "Names and build selection only; provider semantics, null slots and runtime vector behavior are not proved."
+}

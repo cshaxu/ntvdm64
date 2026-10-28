@@ -515,7 +515,7 @@ softpc.new/base/cvidc/bswap_c.h,shard-3/file-review.csv,excluded,host-candidate,
 softpc.new/base/cvidc/btest_c.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/buffer_c.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/c2cpug_c.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/cvidc/c2cpusad.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/cvidc/c2cpusad.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/c2cput_c.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/chain2_c.h,shard-0/review.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/cvidc/chain4_c.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
