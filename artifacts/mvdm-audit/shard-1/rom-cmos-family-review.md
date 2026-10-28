@@ -1,0 +1,13 @@
+# S10 shard 1: ROM and CMOS resource ownership
+
+Three pending `softpc.new/roms` paths were checked together. `rom-cmos-family-evidence.json` records full source/reference and image hashes; replay `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/shard-1/rom-cmos-family-observer.py`. It uses LoadLibraryEx as a data file and resource lookup, not execution. All three source files match both original editions.
+
+| File | Evidence and remaining boundary |
+| --- | --- |
+| v7vga.rom | The full 18,832 bytes equal named `SOFTPC_V7VGA` RCDATA in current built NTVDM, assets/release NTVDM and installed O:/winnt/system32 NTVDM. Those image hashes differ between build and published/installed; published and installed match. Current rom.c → host_read_resource(ROMS_REZ_ID) → mvdm_softpc_firmware_read_embedded_rom selects the resource. This proves content and source path, not execution, VGA/Win31 mouse behavior or assembly-to-ROM provenance. |
+| cmos.ram | Original 64-byte resource image, identical to both references; `cmos.c:830,844` reads CMOS_REZ_ID and writes after read/change through host resource functions. This check did not identify a particular live session CMOS file, persistence or mutation; never replace user runtime state based on original hash. |
+| profile.spc | Original profile data, identical to both references; nt_rez.c:77,118 conditionally maps `.spcprofile` under DELTA. Whether selected profile uses it and lifecycle/persistence remain unverified. Project profile shadow for SYSTEM.INI is a different owner; do not conflate it with this resource. |
+
+Failure candidate in `host/src/nt_rez.c:80-87`: for non-ROM resources, if `_open` succeeds and `_lseek` returns a size greater than maxsize, the function returns zero before `_close(file_fd)`. Same control flow exists in the original reference. CMOS calls this non-ROM path; whether an oversized file can actually be selected in the current session, if so how often, and effects of leaked descriptors remain untested. ROM calls now take the early embedded-resource branch and are not covered by this candidate. A bounded fixture should extract the actual routine, simulate a valid open with oversized length and verify close counts, plus valid and failed-open controls; actual session selection must be checked separately. This is source-level evidence, not observed guest failure.
+
+Prior `rom-residency-xt-audit.md` covers missing embedded resource and load/protection boundaries. No guest, product or provider was executed or changed, no shared ledger/build tree was modified, and no default-release conclusion follows.

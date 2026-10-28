@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "source_sha256": "F7E4DB5E30D10E982F063D177D50A6F9C88D7FD8D96203C43FB73FFAE4492012",
+  "body_sha256": "BAB0FEC152C77A06BD0E8EB5B8B47CB6EDE218371B68B1CF1172E145BB8CCF2C",
+  "checks": [
+    "PASS failed open has no close",
+    "PASS valid resource closes once",
+    "PASS oversize returns without close",
+    "PASS embedded ROM bypasses file path"
+  ],
+  "scope": "Actual extracted source body with fake file boundaries; no actual session path, native handle leak or guest behavior proof",
+  "fixture_sha256": "548DBF88633A9CB874FA3F96770A0E3CA6788D3C0FD0775352441545F1A94D5E"
+}

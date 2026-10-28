@@ -1,0 +1,78 @@
+{
+  "files": [
+    {
+      "name": "cmos.ram",
+      "identities": [
+        {
+          "path": "src\\mvdm\\softpc.new\\roms\\cmos.ram",
+          "sha256": "97fca7adb543bdac4e571185a3f37c17a30a6ad937e0817048d965a850edddd9"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\roms\\cmos.ram",
+          "sha256": "97fca7adb543bdac4e571185a3f37c17a30a6ad937e0817048d965a850edddd9"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\roms\\cmos.ram",
+          "sha256": "97fca7adb543bdac4e571185a3f37c17a30a6ad937e0817048d965a850edddd9"
+        }
+      ]
+    },
+    {
+      "name": "profile.spc",
+      "identities": [
+        {
+          "path": "src\\mvdm\\softpc.new\\roms\\profile.spc",
+          "sha256": "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\roms\\profile.spc",
+          "sha256": "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\roms\\profile.spc",
+          "sha256": "c35020473aed1b4642cd726cad727b63fff2824ad68cedd7ffb73c7cbd890479"
+        }
+      ]
+    },
+    {
+      "name": "v7vga.rom",
+      "identities": [
+        {
+          "path": "src\\mvdm\\softpc.new\\roms\\v7vga.rom",
+          "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\roms\\v7vga.rom",
+          "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\roms\\v7vga.rom",
+          "sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "image_sha256": "84f72c0b33d0d0ba8e6837a25b296c17d115157fc75a4e9dc394330cc6fac5e6",
+      "resource_size": 18832,
+      "resource_sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0",
+      "matches_source": true
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "image_sha256": "ef546743393dad7e45bb7bda605775524adb26b94dae4bdefe32951eb0510294",
+      "resource_size": 18832,
+      "resource_sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0",
+      "matches_source": true
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "image_sha256": "ef546743393dad7e45bb7bda605775524adb26b94dae4bdefe32951eb0510294",
+      "resource_size": 18832,
+      "resource_sha256": "970f105cd9e42ee56f07aae695bac89786d3455ab9d4c1ea9a1d1643b1e8f6f0",
+      "matches_source": true
+    }
+  ]
+}

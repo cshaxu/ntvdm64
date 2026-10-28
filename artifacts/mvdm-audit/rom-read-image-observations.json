@@ -1,0 +1,16 @@
+{
+  "result": "pass",
+  "source_sha256": "F7E4DB5E30D10E982F063D177D50A6F9C88D7FD8D96203C43FB73FFAE4492012",
+  "object_sha256": "367590786C7B3651EBF82C235D8540EF38C266969F8ED3FE3EFD015C7201E69B",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "binding": {
+    "name": "_host_read_resource",
+    "va": 5797232,
+    "function": true,
+    "owner": "original-softpc-host-roots:nt_rez.obj",
+    "bytes": 261,
+    "relocation_words": 11
+  },
+  "scope": "Relocation-masked selected function body; no actual file or guest execution"
+}

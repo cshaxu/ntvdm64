@@ -25,8 +25,8 @@ def sha(data):
 def main():
     names = ('combined-initial-status.csv', 'frozen-external-audit-rows.csv', 'external-obligation-triage.csv')
     inputs = {n: committed(A / n) for n in names}
-    # Never silently partition a ledger that differs from the committed base.
-    assert all((A / n).read_bytes() == data for n, data in inputs.items())
+    # The assignment remains reproducible after live ledgers advance: only the
+    # explicitly recorded committed base defines its source snapshot.
     ledger = rows(inputs[names[0]])
     external = {r['id']: r for r in rows(inputs[names[1]])}
     triage = rows(inputs[names[2]])

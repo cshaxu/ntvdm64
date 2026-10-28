@@ -598,6 +598,10 @@ The [DOSX x86 input cohort](shard-0/dosx-x86-inputs-review.md) reconciles twelve
 
 The current [nine-way assignment](nine-way-plan.md) freezes all remaining MVDM file roles and external relevance rows, without changing the original physical ledger ownership or claiming those rows are resolved.
 
+The [non-ROM read failure fixture](rom-read-failure-review.md) demonstrates an original-source oversized-input close omission with simulated file I/O and binds its reader to the released worker; actual session reachability remains open.
+
+Pre-partition reviews also record [ROM/CMOS resource identity](shard-1/rom-cmos-family-review.md), [SOUND import metadata](shard-2/sound-import-family-review.md), and [kernel bootstrap inputs](shard-3/kernel-boot-build-input-role-review.md), without guest runtime acceptance.
+
 Additional reviews cover [486 profile source gates](shard-1/ccpu-486-family-review.md), [original debugger tools](shard-2/debugger-tools-family-review.md) and [Win16 debug declarations](shard-3/wow-debug-input-role-review.md). Current nonselection or original unimplemented entries do not establish full feature recovery.
 
 The [DOS kernel build records](shard-1/dos-kernel-build-family-review.md), [DDEML test/version inputs](shard-2/ddeml-test-version-review.md) and [WOW USER guest inputs](shard-3/wow-user-guest-input-role-review.md) distinguish historical recipes from actual guest runtime evidence.
