@@ -1,0 +1,328 @@
+{
+  "inputs": [
+    {
+      "file": "shard-0/review.csv",
+      "sha256": "CE5FB73093A8CC5FB6A78E3B36E28BE2C8441DB0D10CB1E2A94FA79E1241F583"
+    },
+    {
+      "file": "shard-1/file-audit.csv",
+      "sha256": "6A7CA3421BF19BC017A55E9C94568A56C5E7D55356DBBA7151569FCF96330E91"
+    },
+    {
+      "file": "shard-2/file-audit.csv",
+      "sha256": "4E2F9B63C897C261AC6E967206FDBEB504E4C7F07D1A8C7C390938FA867082F3"
+    },
+    {
+      "file": "shard-3/file-review.csv",
+      "sha256": "423BFCCB6859A0E5622FD578CEF9B36662DBDC44D809C57D17C670D89ED3F868"
+    }
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "deps_sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1",
+  "stale_dependency_blocks": 0,
+  "pending_count": 55,
+  "matched_count": 10,
+  "rows": [
+    {
+      "path": "softpc.new/base/ccpu386/bswap.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": [
+        "obj/ccpu/bswap.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpupig.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": [
+        "obj/ccpu/c_addr.obj",
+        "obj/ccpu/c_intr.obj",
+        "obj/ccpu/c_main.obj",
+        "obj/ccpu/c_stack.obj",
+        "obj/ccpu/c_tlb.obj",
+        "obj/ccpu/c_xcptn.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmpxchg.h",
+      "shard": "shard-0/review.csv",
+      "objects": [
+        "obj/ccpu/cmpxchg.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/evid_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/ccpu386/evidfunc.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/ccpu386/gdpvar.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": [
+        "obj/ccpu/sasCdef.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/invd.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": [
+        "obj/ccpu/invd.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/invlpg.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": [
+        "obj/ccpu/invlpg.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/pigger_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": [
+        "obj/ccpu/c_reg.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/univer_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": [
+        "obj/ccpu/sasCdef.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/wbinvd.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": [
+        "obj/ccpu/wbinvd.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xadd.h",
+      "shard": "shard-0/review.csv",
+      "objects": [
+        "obj/ccpu/xadd.obj"
+      ]
+    },
+    {
+      "path": "softpc.new/base/cvidc/acc_efi.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/access_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/adjust_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/axphst_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/bldr_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/bodge_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/bpi_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/buffer_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/chain4_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/contxt_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/cpnote_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/cpureg_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/ea_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/flags_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/flagtb_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/frag_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/gdebug.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/gldc_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/hpphst_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/inst_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/io_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/lc_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/muldiv_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/nano_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/page_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/parser.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/ports_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/ppchst_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/prof_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/prot_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/pxcptn_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/rdwr_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/sas4gen.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/sas_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/segreg_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/sf_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/stack_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/strint_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/sunhst_c.h",
+      "shard": "shard-0/review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/task_c.h",
+      "shard": "shard-1/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/trace_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/vglob_c.h",
+      "shard": "shard-2/file-audit.csv",
+      "objects": []
+    },
+    {
+      "path": "softpc.new/base/cvidc/xfer_c.h",
+      "shard": "shard-3/file-review.csv",
+      "objects": []
+    }
+  ],
+  "limit": "One worker dependency cache; a VALID include proves neither emitted declarations nor active execution. Missing entries do not exclude unbuilt profiles or consumers."
+}

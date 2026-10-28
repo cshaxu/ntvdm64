@@ -1,0 +1,15 @@
+# Pending device headers: partial-classification check
+
+Read-only reconciliation of `host-ch-scope/inventory.csv`, captured x86 `ccpu-remaining-header-source/deps.stdout.txt`, and referenced prior reviews. No guest/device tests were run. A selected include is not sufficient where all meaningful declarations are behind an unselected macro. No currently pending header in this bounded group has enough exact-path **and** active-behavior evidence here to recommend new partial classification.
+
+| Pending header | Concrete finding and evidence limit |
+|---|---|
+| `base/inc/gispsvga.h` | Included by selected `bios`/`rom` objects, but its original declarations and corresponding GISP path are `GISP_SVGA` gated, not established enabled. Do not make inclusion a partial GISP feature claim. See `gisp-vgastate-interface-role-review.md` and `../nine-way/part-4/gisp-video-mouse-provider-review.md`. |
+| `host/inc/host_hfx.h` | Four exact selected dependency hits, including BIOS, but HFX declarations are gated; the selected `nt_hfx.c` describes a stub. No demonstrated active HFX behavior. See `../host-ch-scope/host-memory-fullscreen-interface-review.md`. |
+| `base/inc/gfiempty.h` | No captured selected include; selected `gfi_mpty.c` uses local definitions rather than this header's external declarations. The GFI empty object has limited behavioral test evidence, but that supports its provider, not this header. See `disk-input-pending-header-reconciliation.md`. |
+| `base/inc/gfirflop.h`, `disk_geo.h` | No captured exact include. Actual GFI real-floppy path uses declarations from `gfi.h`; `nt_fdisk.c` separately defines geometry constants. Selected provider code remains partial but is not an exact-header dependency. See `disk-rom-declaration-review.md`. |
+| `base/inc/hwvga.h`, `vgastate.h` | No captured exact active provider; alternate hardware/state contracts remain pending, and VGA/V7VGA output is not proof of those contracts. See `../host-ch-scope/display-profile-interface-review.md`. |
+| `base/inc/keycaps.h`, `kybdmtx.h`, `m_keybdp.h`, `mouse16b.h`, `msw_keyb.h` | Alternate test, X, matrix, 16-bit mouse or SoftWindows interfaces; no observed active exact path. Existing NT `keyba`/`mouse_io` object ownership and PIC/input witnesses are separate and do not establish these alternate header contracts. See `disk-input-pending-header-reconciliation.md`. |
+| `host/inc/hostgrph.h`, `nt_paint.h`, `hosttyps.h`, `nt_conf.h` | No exact captured dependency was established. In particular, selected `nt_graph.c`'s `SCREEN_DESCRIPTION` aggregate differs from `nt_paint.h`'s old standalone declarations. See `../host-inc/planar-presentation-functional-handoff.md`. |
+
+To promote any such file, recover its exact selected production dependency and an active declaration or data edge, then link to a finite test of that function. Retain unresolved feature/host-profile questions; do not mark live, unrelated providers excluded merely because an old header is inactive. No shared inventory or product was changed.

@@ -123,3 +123,7 @@ The [comment-only host system header](host-system-empty-header-review.md) is exc
 The [four C-VID header review](../shard-3/cvidc-four-header-provider-review.md) separates historical generated-header paths from selected CPU/video implementations. No exact selected dependency was established for those four paths; their instruction and video behaviors remain separately scoped.
 
 The [three WOW declaration review](wow-three-table-structure-recheck.md) identifies one included multimedia table declaration, an included legacy conversion header with bounded disabled consumers, and an unselected duplicate table declaration; actual multimedia and dispatch behavior remain separate obligations.
+
+The [device header review](../shard-3/pending-device-headers-partial-check.md) distinguishes exact selected header paths and gated declarations from independently selected device implementations. A separate [MEM/SETVER source-role observation](dos-target-round5-evidence.json) identifies 12 historical guest-target C/H candidates with no observed host dependency in the recorded graphs; this is supporting scope evidence, not a guest source audit or proof about other build configurations.
+
+The [CCPU/C-VID pending-header dependency snapshot](ccpu-cvidc-pending-header-review.md) records ten exact CCPU dependency hits among 55 pending headers. It also corrects the interpretation of an older bounded inclusion snapshot; inclusion does not prove guarded 486 or PIG code executes.

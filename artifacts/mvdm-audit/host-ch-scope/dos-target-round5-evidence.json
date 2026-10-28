@@ -1,0 +1,253 @@
+{
+  "input_inventory_sha256": "A942BF091FDDB881CCC0B3D351F19558546237C019DCC7D477810852A4628154",
+  "input_header_sha256": "B63574F4017D97D21E0BEBC4A8B864E2A40977DE0DFE5DF17D5F0C256F533259",
+  "pending_count": 225,
+  "recipes": {
+    "dos/v86/cmd/mem": {
+      "target": "mem.exe",
+      "sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "objects": [
+        "_msgret",
+        "_parse",
+        "chkvdisk",
+        "mem",
+        "membase",
+        "memctrlc",
+        "memex",
+        "submsg"
+      ]
+    },
+    "dos/v86/cmd/setver": {
+      "target": "setver.exe",
+      "sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF",
+      "objects": [
+        "device",
+        "dos",
+        "parse",
+        "setver"
+      ]
+    }
+  },
+  "graphs": [
+    {
+      "tree": "msvc-x86-release/worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+      "deps_sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "msvc-x86-release/wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "deps_sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "msvc-x64-release/worker",
+      "graph_sha256": "732526CCA6BAE92E860B6ED415EE96F0912C8CD3331ED87846EFF5BDAEFC44C5",
+      "deps_sha256": "75D7A478FD5F1B59D590E1E08C743B9551541FB29A3FC3989785952DCB1EB8A0",
+      "stale_blocks": 0
+    },
+    {
+      "tree": "pkg-uuid-x86/worker",
+      "graph_sha256": "B1BC7B95C2A9DBC1A9DD8CC88931D86941EE146017C37A5ECCB6843FA80AC470",
+      "deps_sha256": "D7C2F7D3E0164F3E970C3FC2FB16822E8E941D526406B408A868ECC0EE025FEC",
+      "stale_blocks": 0
+    }
+  ],
+  "results": [
+    {
+      "path": "dos/v86/cmd/mem/mem.c",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "0164C0003739607FB0D0C2614B6C8F59C1A496A4305B289B702A88B7A768E1B9",
+      "same_as_original": true,
+      "recipe_objects": [
+        "mem.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/mem.h",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "807A025ECB0A0D693764ACF58260A27FC59080EF8AC3008A80FB59F440F33522",
+      "same_as_original": true,
+      "recipe_objects": [
+        "mem.obj",
+        "membase.obj",
+        "memex.obj",
+        "submsg.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/membase.c",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "3BE20ADB76EA1579CEED7FF2FB63C99FD0C8B6C7AA5B08BB9EB2F7AE69F32C6C",
+      "same_as_original": true,
+      "recipe_objects": [
+        "membase.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/memctrlc.c",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "2BA74F03AD1AE4BA924DC91D45FC2B5EA7EFB3290F88FA85B236075A22DD0A28",
+      "same_as_original": true,
+      "recipe_objects": [
+        "memctrlc.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/memex.c",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "3804B48C4FEE8BF17F06DB353D45E8E3DABDC13C32EA7ADCB5A6AD302E0735EE",
+      "same_as_original": true,
+      "recipe_objects": [
+        "memex.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/msgdef.h",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "2733D8F7FF20641488C5AE17D596355C01022C98B00AB040E385C9F7533921E2",
+      "same_as_original": true,
+      "recipe_objects": [
+        "mem.obj",
+        "membase.obj",
+        "memex.obj",
+        "submsg.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/submsg.c",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "BC896BEB310E50D4A7A2580853DAA461248F23123ADB70EAF1827FCD73A15277",
+      "same_as_original": true,
+      "recipe_objects": [
+        "submsg.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/mem/xmm.h",
+      "target": "mem.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/mem/makefile",
+      "recipe_sha256": "5723C2CA43AE5ADFFF9CD5FD6C2C1EF4BEDC8CCEE7CBFC878F4A43A31B86B8DE",
+      "file_sha256": "27AC47BFFF2CD2B801B75A49ECD6968B83D2602E6FF1AC53EACBDB93F5DFCA33",
+      "same_as_original": true,
+      "recipe_objects": [
+        "mem.obj",
+        "membase.obj",
+        "memex.obj",
+        "submsg.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/setver/message.h",
+      "target": "setver.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/setver/makefile",
+      "recipe_sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF",
+      "file_sha256": "EA1011041E54DBF2F951B3694765E16C997E22248B77FE9041A4A0826B32AF00",
+      "same_as_original": true,
+      "recipe_objects": [
+        "setver.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/setver/parse.c",
+      "target": "setver.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/setver/makefile",
+      "recipe_sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF",
+      "file_sha256": "ABE5D998EB034616744042637029978C5CDB3304285126A303F0554F79EA836E",
+      "same_as_original": true,
+      "recipe_objects": [
+        "parse.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.c",
+      "target": "setver.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/setver/makefile",
+      "recipe_sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF",
+      "file_sha256": "840E8D3C2882039C594D63C01C4722ED768817F78524B4A176B1C228DA309C15",
+      "same_as_original": true,
+      "recipe_objects": [
+        "setver.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.h",
+      "target": "setver.exe",
+      "recipe": "src/mvdm/dos/v86/cmd/setver/makefile",
+      "recipe_sha256": "B2B3833B81AEBD0E68612149699DC35306F65E9C3D3CE11E361B898AC24CAEAF",
+      "file_sha256": "868EDAC18A8605D8CB08F004F28597636CFF91670BB788B208E17D2EA0CA1C00",
+      "same_as_original": true,
+      "recipe_objects": [
+        "setver.obj",
+        "parse.obj"
+      ],
+      "host_same_basename_includes": [],
+      "host_exact_recorded_dep": false,
+      "host_graph_mentions": [],
+      "candidate": true
+    }
+  ],
+  "witness_count": 12,
+  "candidates": 12,
+  "remaining": 213,
+  "limitations": "Historical DOS link16 target and listed object prerequisites, not evidence of guest runtime, image provenance, all build profiles or unscanned consumers. Same-basename lexical scan is conservative; conditional compilation is not evaluated."
+}
