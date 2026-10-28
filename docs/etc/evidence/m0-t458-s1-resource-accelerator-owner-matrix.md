@@ -1,5 +1,7 @@
 # M0 T458 S1 — resource and accelerator owner matrix
 
+**Later correction:** The `wcurcash.c` selected-owner claim below is not supported by the original manifest or current graph. The selected cursor/icon alias owner is `wcuricon.c`; see the [T473 source and graph reconciliation](../../../artifacts/mvdm-audit/cross-369/cursor-cache-disposition.md). The original acceptance limits remain unchanged.
+
 **Status:** closed source/boundary audit. This records the selected original
 owners and the finite S2 conversion acceptance boundary. It does not claim
 that the residual W09 family has passed real Win16 application acceptance.

@@ -1,5 +1,7 @@
 # M0 T458 S2 — original resource conversion acceptance
 
+**Later correction:** The `wcurcash.c` selected-owner claim below is not supported by the original manifest or current graph. The selected cursor/icon alias owner is `wcuricon.c`; see the [T473 source and graph reconciliation](../../../artifacts/mvdm-audit/cross-369/cursor-cache-disposition.md). This does not change the scope of the recorded extracted-body tests.
+
 **Status:** closed test/provider boundary; no production-source or guest-media
 change.
 
