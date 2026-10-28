@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\tests\component-integration\grp_tool_test.ps1:34
+Line |
+  34 |      throw 'GRP replacement did not retain the Win3.1 tag header'
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | GRP replacement did not retain the Win3.1 tag header

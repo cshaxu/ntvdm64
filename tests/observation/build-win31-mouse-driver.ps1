@@ -6,7 +6,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)) {
     throw 'Fresh build-owned output required'
 }
-$source=Join-Path $repo 'src/addon/win31-mouse-drv/mouse.asm'
+$source=Join-Path $repo 'src/addon/mouse31/mouse31.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
 $pythonPath=(Resolve-Path -LiteralPath $Python).Path
 New-Item -ItemType Directory -Path $root|Out-Null

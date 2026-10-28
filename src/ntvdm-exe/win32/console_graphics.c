@@ -2,6 +2,7 @@
 /* DIVERGENCE(ADAPTER-WIN32-058): original ntcon bitmap/mutex service bound
  * locally, with copied presentation to run16; no Console server or KVM UI. */
 #include "console_bitmap.h"
+#include "ntvdm-exe/softpc/v7_pointer.h"
 #include "console_client.h"
 #include "worker-base/publication.h"
 #include "conapi.h"
@@ -15,7 +16,9 @@ struct ntvdm_console_graphics {
     HANDLE identity;
     HPALETTE palette;
     DWORD bytes,width,height;
-    BOOL active,dirty;
+    BOOL active,dirty,body_ready;
+    unsigned update_depth;
+    mvdm_v7_pointer v7_pointer;
     int cursor_count;
     worker_base_publication *publisher;
 };
@@ -36,6 +39,7 @@ static void close_bitmap(ntvdm_console_graphics *state)
     ntvdm_console_bitmap_destroy(state->bitmap);state->bitmap=NULL;
     if (state->identity) CloseHandle(state->identity);
     state->identity=NULL;state->bytes=0;state->active=FALSE;state->dirty=FALSE;
+    state->body_ready=FALSE;ZeroMemory(&state->v7_pointer,sizeof(state->v7_pointer));
     state->cursor_count=0;
 }
 
@@ -75,7 +79,7 @@ static DWORD capture(ntvdm_console_graphics *state,void **payload,SIZE_T *payloa
     /* See flush(): physical Console selection is irrelevant to a copied
      * software-VGA frame.  A live graphics identity is the source lifetime
      * guard; route admission remains exclusively in worker-base. */
-    if (!state->identity || !state->dirty) {ReleaseSRWLockExclusive(&state->lock);return ERROR_SUCCESS;}
+    if (!state->identity || !state->dirty || state->update_depth) {ReleaseSRWLockExclusive(&state->lock);return ERROR_SUCCESS;}
     if((SIZE_T)state->bytes>SIZE_MAX-sizeof(*copied)) {
         ReleaseSRWLockExclusive(&state->lock);return ERROR_ARITHMETIC_OVERFLOW;
     }
@@ -126,9 +130,32 @@ DWORD ntvdm_console_graphics_attach_publisher(ntvdm_console_graphics *state,
 
 static BOOL signal_dirty(ntvdm_console_graphics *state)
 {
-    DWORD error=state->publisher ? worker_base_publication_signal(state->publisher) : ERROR_NOT_READY;
+    DWORD error;
+    if (state->update_depth) return TRUE;
+    error=state->publisher ? worker_base_publication_signal(state->publisher) : ERROR_NOT_READY;
     if(error) SetLastError(error);
     return !error;
+}
+
+void ntvdm_console_graphics_begin_update(void)
+{
+    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
+    if (!state) return;
+    AcquireSRWLockExclusive(&state->lock);
+    ++state->update_depth;
+    ReleaseSRWLockExclusive(&state->lock);
+    /* Remove the old overlay before the original body painter writes. */
+    ntvdm_console_graphics_v7_pointer(NULL,0,0,FALSE);
+}
+
+void ntvdm_console_graphics_end_update(void)
+{
+    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
+    if (!state) return;
+    AcquireSRWLockExclusive(&state->lock);
+    if (state->update_depth && --state->update_depth==0 && state->dirty)
+        (void)signal_dirty(state);
+    ReleaseSRWLockExclusive(&state->lock);
 }
 
 HANDLE WINAPI MvdmCreateConsoleScreenBuffer(DWORD access,DWORD share,
@@ -226,9 +253,51 @@ int ntvdm_console_graphics_invalidate(HANDLE output,const SMALL_RECT *rect)
         if (!rect || rect->Left<0 || rect->Top<0 || rect->Right<rect->Left || rect->Bottom<rect->Top ||
             (DWORD)rect->Right>=state->width || (DWORD)rect->Bottom>=state->height) {
             SetLastError(ERROR_INVALID_PARAMETER);result=-1;
-        } else {state->dirty=TRUE;result=signal_dirty(state) ? 1 : -1;}
+        } else {
+            if (!rect->Left && !rect->Top && (DWORD)rect->Right==state->width-1 &&
+                (DWORD)rect->Bottom==state->height-1) state->body_ready=TRUE;
+            state->dirty=TRUE;result=signal_dirty(state) ? 1 : -1;
+        }
     }
     ReleaseSRWLockExclusive(&state->lock);return result;
+}
+
+typedef struct v7_mutation {
+    mvdm_v7_pointer *pointer;
+    const BYTE *pattern;
+    unsigned x,y;
+    BOOL paint,changed;
+    SMALL_RECT dirty;
+} v7_mutation;
+
+static BOOL apply_v7_pointer(void *opaque,BYTE *pixels,const ntvdm_bitmap_description *info)
+{
+    v7_mutation *op=opaque;
+    if (info->depth!=8) return TRUE;
+    if (op->paint)
+        op->changed=mvdm_v7_pointer_paint(op->pointer,pixels,info->width,info->height,
+            info->stride,op->pattern,256,op->x,op->y,&op->dirty);
+    else
+        op->changed=mvdm_v7_pointer_clear(op->pointer,pixels,info->width,info->height,
+            info->stride,&op->dirty);
+    return TRUE;
+}
+
+void ntvdm_console_graphics_v7_pointer(const BYTE *pattern,unsigned x,unsigned y,BOOL paint)
+{
+    ntvdm_console_graphics *state=ntvdm_console_graphics_context();
+    v7_mutation op={0};
+    if (!state || (paint && !pattern)) return;
+    AcquireSRWLockExclusive(&state->lock);
+    if (state->bitmap && state->identity && state->body_ready) {
+        op.pointer=&state->v7_pointer;op.pattern=pattern;op.x=x;op.y=y;op.paint=paint;
+        if (ntvdm_console_bitmap_mutate(state->bitmap,apply_v7_pointer,&op) && op.changed) {
+            /* The current publisher captures an owned complete bitmap; the
+             * clipped damage rectangle remains local to this source owner. */
+            state->dirty=TRUE;(void)signal_dirty(state);
+        }
+    }
+    ReleaseSRWLockExclusive(&state->lock);
 }
 
 int ntvdm_console_graphics_flush(void)

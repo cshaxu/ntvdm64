@@ -1,0 +1,4 @@
+PASS two compiled guest add-ons published; host release manifest unchanged
+PASS published compat95.sys add-on; mouse/utility entries and ten-host-image manifest retained
+PASS selected AMD64 add-on utilities published; other utility/driver entries retained
+PASS all 12 add-on component builds, 12 outputs, unchanged three driver bytes and eleven functional tool groups

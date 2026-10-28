@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\tests\observation\build-win101-mouse-driver.ps1:6
+Line |
+   6 |  . h -LiteralPath $build)) { throw 'Fresh build-owned output required' }
+     |                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Fresh build-owned output required

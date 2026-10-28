@@ -1,0 +1,6 @@
+Exception: O:\repos.hobby\ntvdm64\tools\win95-launch\Prepare-StartMenu.ps1:22
+Line |
+  22 |  . +1) -ge 64){throw "Win95 MS-DOS Prompt PIF directory exceeds its 62-b .
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Win95 MS-DOS Prompt PIF directory exceeds its 62-byte OEM limit:
+     | O:\repos.hobby\ntvdm64\build\t473-s10\addon-renames-r2\win95-menu\WINDOWS

@@ -8,7 +8,7 @@ if not defined TARGET (set "RESULT=64"& goto done)
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
 for %%F in (SETUP.EXE DOSX.EX_ KRNL386.EX_ WIN386.EX_ MOUSE.DR_) do if not exist "%TARGET%\%%F" (echo Missing media file: %%F& set "RESULT=2"& goto done)
 for %%F in (SETUP.CMD) do if not exist "%~dp0%%F" (echo Missing tool file: %%F& set "RESULT=3"& goto done)
-for %%F in (HASH.EXE MOUSE31.DRV PIF.EXE SZDD.EXE W31PATCH.EXE) do if not exist "%RELEASE%\%%F" (echo Missing release file: %%F& set "RESULT=3"& goto done)
+for %%F in (HASH.EXE MOUSE31.DRV PIF.EXE SZDD.EXE patch31.exe) do if not exist "%RELEASE%\%%F" (echo Missing release file: %%F& set "RESULT=3"& goto done)
 set "PATCH=%TARGET%\PATCH"
 set "WORK=%PATCH%\W31STAGE"
 if exist "%WORK%\" (echo Preserve existing staging directory: %WORK%& set "RESULT=5"& goto done)
@@ -49,7 +49,7 @@ for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%WORK%\KRNL386-RETAIL.EXE"'
 for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%WORK%\WIN386-RETAIL.EXE"') do set "WH=%%H"
 if /i not "!KH!"=="FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980" (echo Missing or unrecognised original KRNL386 backup.& set "RESULT=6"& goto cleanup)
 if /i not "!WH!"=="6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5" (echo Missing or unrecognised original WIN386 backup.& set "RESULT=6"& goto cleanup)
-"%RELEASE%\W31PATCH.EXE" "%WORK%\KRNL386.EXE" "%WORK%\WIN386.EXE" || (set "RESULT=6"& goto cleanup)
+"%RELEASE%\patch31.exe" "%WORK%\KRNL386.EXE" "%WORK%\WIN386.EXE" || (set "RESULT=6"& goto cleanup)
 for %%F in (KRNL386 WIN386) do (
   "%RELEASE%\SZDD.EXE" "%WORK%\%%F.EXE" "%WORK%\%%F.EX_" || (set "RESULT=6"& goto cleanup)
   expand.exe "%WORK%\%%F.EX_" "%WORK%\%%F-CHECK.EXE" >nul || (set "RESULT=6"& goto cleanup)

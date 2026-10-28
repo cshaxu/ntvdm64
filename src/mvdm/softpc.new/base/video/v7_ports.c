@@ -232,7 +232,9 @@ half_word       value;
 
 			/* Not doing cursor mode stuff (whatever that means) */
 
-			if (value&0x80!=old_value&0x80) {
+			/* DIVERGENCE(VIDEO7-POINTER-ENABLE): match the SoftPC
+			 * precedence correction for the pointer enable transition. */
+			if ((value & 0x80) != (old_value & 0x80)) {
 				host_start_update ();
 				if (value & 0x80) {
 					/* Enable hardware graphics pointer */ 

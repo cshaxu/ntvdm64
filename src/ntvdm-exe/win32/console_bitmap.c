@@ -136,6 +136,20 @@ BOOL ntvdm_console_bitmap_palette(ntvdm_console_bitmap *buffer, HPALETTE palette
     return ReleaseMutex(buffer->mutex);
 }
 
+BOOL ntvdm_console_bitmap_mutate(ntvdm_console_bitmap *buffer,
+    ntvdm_console_bitmap_mutator mutate, void *context)
+{
+    BOOL result;
+    DWORD error;
+    if (!buffer || !mutate) return reject(ERROR_INVALID_PARAMETER);
+    if (!acquire(buffer, INFINITE)) return FALSE;
+    result = mutate(context, buffer->pixels, &buffer->description);
+    error = result ? ERROR_SUCCESS : GetLastError();
+    if (!ReleaseMutex(buffer->mutex)) return FALSE;
+    if (!result) SetLastError(error);
+    return result;
+}
+
 BOOL ntvdm_console_bitmap_copy(ntvdm_console_bitmap *buffer, void *pixels,
     size_t capacity, ntvdm_bitmap_description *description, DWORD timeout)
 {

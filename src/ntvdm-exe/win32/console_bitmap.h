@@ -18,6 +18,10 @@ BOOL ntvdm_console_bitmap_create(const BITMAPINFO *, DWORD, DWORD,
 void ntvdm_console_bitmap_destroy(ntvdm_console_bitmap *);
 DWORD ntvdm_console_bitmap_bytes(const ntvdm_console_bitmap *);
 BOOL ntvdm_console_bitmap_palette(ntvdm_console_bitmap *, HPALETTE);
+/* The callback is synchronous and must not call out or retain the pixels.
+ * It runs under the same mutex as the original painter and frame capture. */
+typedef BOOL (*ntvdm_console_bitmap_mutator)(void *, BYTE *, const ntvdm_bitmap_description *);
+BOOL ntvdm_console_bitmap_mutate(ntvdm_console_bitmap *, ntvdm_console_bitmap_mutator, void *);
 /* Copies packed top-down rows, including original DWORD padding. No external
  * call/IPC occurs while holding the painter mutex. Failure publishes nothing. */
 BOOL ntvdm_console_bitmap_copy(ntvdm_console_bitmap *, void *, size_t,

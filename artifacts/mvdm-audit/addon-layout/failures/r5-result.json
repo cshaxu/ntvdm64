@@ -1,0 +1,31 @@
+{
+  "result": "pass",
+  "started": "2026-10-28T04:37:24.5017690Z",
+  "runs": [
+    {
+      "started": "2026-10-28T04:37:24.5511493Z",
+      "pid": 5664,
+      "name": "grp-tagless",
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+      "exit": 0,
+      "arguments": "-NoProfile -File tests/component-integration/grp_tool_test.ps1 -Grp \"O:/repos.hobby/ntvdm64/assets/release/GRP.EXE\" -FixtureRoot O:/w31 -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r5/tagless\""
+    },
+    {
+      "started": "2026-10-28T04:37:26.8086406Z",
+      "pid": 12448,
+      "name": "grp-tagged",
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+      "exit": 0,
+      "arguments": "-NoProfile -File tests/component-integration/grp_tool_test.ps1 -Grp \"O:/repos.hobby/ntvdm64/assets/release/GRP.EXE\" -FixtureRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r5/tagged-fixture\" -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r5/tagged\""
+    },
+    {
+      "started": "2026-10-28T04:37:28.1827752Z",
+      "pid": 9592,
+      "name": "szdd",
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+      "exit": 0,
+      "arguments": "-NoProfile -File tests/component-integration/szdd_roundtrip_test.ps1 -BuildRoot build/t473-s10/renamed-szdd"
+    }
+  ],
+  "finished": "2026-10-28T04:37:30.0440595Z"
+}

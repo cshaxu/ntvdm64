@@ -1019,6 +1019,10 @@ void nt_graphics_tick(void)
 
 void nt_start_update(void)
 {
+   /* DIVERGENCE(VIDEO7-POINTER-UPDATE): keep pointer and original body
+    * painting in one source-owned update until the matching end. */
+   extern void ntvdm_console_graphics_begin_update(void);
+   ntvdm_console_graphics_begin_update();
    /* DIVERGENCE(MVDM-HOST-DIV-314): original painter began an update. */
    presentation_updated = TRUE;
    IDLE_video();
@@ -1028,7 +1032,18 @@ void nt_start_update(void)
 /*::::::::::::::::::::::::: End screen update ::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
-void nt_end_update(void) {   }
+void nt_end_update(void) {
+   extern void ntvdm_console_graphics_end_update(void);
+#ifdef V7VGA
+   /* The host removes the overlay before every body update.  The original
+    * partial painter redraws only when the dirty lines intersect the cursor,
+    * so restore it here as well when those lines are elsewhere.  draw_v7ptr
+    * consults the controller's enable bit and original position registers. */
+   extern void draw_v7ptr(void);
+   draw_v7ptr();
+#endif
+   ntvdm_console_graphics_end_update();
+}
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::: Scroll screen up :::::::::::::::::::::::::::::*/

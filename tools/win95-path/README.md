@@ -13,7 +13,7 @@ backup and installed identity before making any change; it refuses rather than
 overwriting a file edited after migration. The original is retained beside the
 file as `.W95PATH.BAK`.
 
-`WIN95PATH.EXE` must be beside the command wrappers. Released `PIF.EXE`,
+`path95.exe` is published from src/addon/path95/path95.c. It and `PIF.EXE`,
 `GRP.EXE` and `LNK.EXE` are read from `assets/release`; none are copied into a
 guest tree. This is an offline recovery tool, not a Run16/NTVDM runtime
 dependency and not a general Win95 compatibility claim.

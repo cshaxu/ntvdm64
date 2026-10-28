@@ -1,0 +1,1 @@
+{"passed": true, "checks": ["CP936 create, metadata and no-overwrite", "variable-length relocation preserves metadata", "local-base and path-suffix combination", "malformed header and offset rejection without writes", "unknown extra block is read-only", "lossy encoding rejected"], "originalLinks": 0}

@@ -6,6 +6,19 @@
 #define REQUIRE(x) do { if (!(x)) { printf("FAIL line=%d error=%lu\n",__LINE__,GetLastError()); return 1; } } while (0)
 
 typedef struct lock_case { HANDLE mutex, ready, release; BOOL abandon; } lock_case;
+static BOOL mutate_first(void *context, BYTE *pixels, const ntvdm_bitmap_description *description)
+{
+    if (!context || !pixels || description->width != 9 || description->height != 2) {
+        SetLastError(ERROR_INVALID_DATA); return FALSE;
+    }
+    pixels[0] = *(const BYTE *)context;
+    return TRUE;
+}
+static BOOL reject_mutation(void *context, BYTE *pixels, const ntvdm_bitmap_description *description)
+{
+    (void)context; (void)pixels; (void)description;
+    SetLastError(ERROR_ACCESS_DENIED); return FALSE;
+}
 static DWORD WINAPI hold_mutex(void *argument)
 {
     lock_case *test = argument;
@@ -46,6 +59,16 @@ int main(void)
         for (i = 0; i < 256; ++i) {logical.entries[i].peRed=(BYTE)i; logical.entries[i].peBlue=(BYTE)(255-i);}
         palette = CreatePalette((LOGPALETTE *)&logical); REQUIRE(palette);
         REQUIRE(ntvdm_console_bitmap_palette(buffer,palette));
+        {
+            BYTE value=0x3c;
+            REQUIRE(ntvdm_console_bitmap_mutate(buffer,mutate_first,&value));
+            REQUIRE(ntvdm_console_bitmap_copy(buffer,copied,sizeof(copied),&description,0));
+            REQUIRE(copied[0]==value);
+            REQUIRE(!ntvdm_console_bitmap_mutate(buffer,reject_mutation,NULL));
+            REQUIRE(GetLastError()==ERROR_ACCESS_DENIED);
+            REQUIRE(!ntvdm_console_bitmap_mutate(buffer,NULL,NULL));
+            REQUIRE(GetLastError()==ERROR_INVALID_PARAMETER);
+        }
         REQUIRE(WaitForSingleObject(mutex,0) == WAIT_OBJECT_0);
         memset(pixels,0xa5,depth == 1 ? 8 : 24);
         REQUIRE(ReleaseMutex(mutex));

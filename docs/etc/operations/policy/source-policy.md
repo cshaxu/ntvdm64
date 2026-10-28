@@ -5,7 +5,7 @@ OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 ### Owner-supplied independent add-on audit — T460 S3
 
 The owner requests joint audit/submission of the supplied `src/addon` and
-launch tools. `win95-compat-sys` has independently authored driver sources;
+launch tools. `compat95` has independently authored driver sources;
 its offline `extract-logo.py` adapts the already supplied MIT-licensed
 `JHRobotics/patcher9x pe/ds_decompress.c`, revision
 `b6e30d4b5a396dcd453b6c8e6733fd5b5cbce59e`. The adjacent provenance manifest

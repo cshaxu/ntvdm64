@@ -307,6 +307,7 @@ $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvd
                         'mvdm_keyboard_reset.c',
                         'mvdm_softpc_mouse_input.c', 'mvdm_softpc_mouse_bridge.c',
                         'mvdm_softpc_mouse_guest.c',
+                        'v7_pointer.c', 'v7_pointer_binding.c',
                         'mvdm_softpc_descriptor_fields.c')
 $workerPackageNames = @('package_layout.c')
 $effectiveAddressSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_effective_address.c'
@@ -1410,6 +1411,13 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build console-bitmap-test.exe: bitmap_test_link obj/tests/console_bitmap.obj obj/tests/console_bitmap_provider.obj')
     $graph.Add('build obj/tests/console_graphics_provider.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/console_graphics.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '"')
+    $graph.Add('build obj/tests/v7_pointer.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/v7_pointer.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build obj/tests/v7_pointer_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/v7_pointer_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build v7-pointer-test.exe: bitmap_test_link obj/tests/v7_pointer_test.obj obj/tests/v7_pointer.obj')
+    $graph.Add('build obj/tests/v7_graphics_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/v7_graphics_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '"')
     $graph.Add('build obj/tests/frontend_scope_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_scope_lifetime_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj obj/frontend/session_service.obj nthook-context.lib')
@@ -1537,6 +1545,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('rule console_test_link')
     $graph.Add('  command = link.exe /nologo /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib user32.lib gdi32.lib')
+    $graph.Add('build v7-graphics-test.exe: console_test_link obj/tests/v7_graphics_test.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj')
     $graph.Add('build obj/tests/ntvwm_next_command.obj: cc ' + (NinjaPath (Join-Path $root 'tests/observation/ntvwm_next_command_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build ntvwm-next-command-test.exe: console_test_link obj/tests/ntvwm_next_command.obj obj/ntvwm/next_command.obj')
@@ -1729,7 +1738,7 @@ $graph.Add('build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthoo
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/worker_lifecycle.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/win32/worker_lifecycle.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
-    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib ' + $consoleGridObject)
+    $graph.Add('build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib ' + $consoleGridObject)
     $graph.Add('build obj/tests/softpc_text_video.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/softpc_text_video_test.c')))
     $graph.Add('build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj')
     $graph.Add('build obj/tests/console_text_producer.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/console_text_producer_test.c')))

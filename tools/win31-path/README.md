@@ -1,7 +1,7 @@
 # Win31 path repair
 
 `win31-path` makes an already installed Windows 3.1 tree relocatable.  It is
-independent from `win31-launch`: it never installs guest binaries, mouse
+independent from `win31-setup`: it never installs guest binaries, mouse
 drivers, PIF profiles, or NTVDM configuration.
 
 The tool first displays the proven old root and the requested new root. CMD
@@ -25,6 +25,9 @@ window open to read the final exit code.  It records the names it changed in
 backups, leaving unknown owner content in `PATCH` untouched. Neither command
 needs a fixed drive or `HASH.EXE`.
 
-The tool directory contains `APPLY.CMD`, `UNAPPLY.CMD`, and `WIN31PATH.EXE`.
-The latter must remain beside the command files. `PIF.EXE` and `GRP.EXE` are
-consumed from `assets\release`, not copied into this tool directory.
+The tool directory contains `APPLY.CMD` and `UNAPPLY.CMD`. `path31.exe`,
+`PIF.EXE` and `GRP.EXE` are consumed from `assets\release`, without duplicate
+copies here. path31 only discovers the unique old root; it does not perform
+the repair. Its source is `src/addon/path31/path31.c`; build it with
+`src\addon\path31\BUILD.CMD output-exe` in a build-owned directory and publish
+through `tools/build/Stage-AddonUtilityRelease.ps1 -Path31Build`.

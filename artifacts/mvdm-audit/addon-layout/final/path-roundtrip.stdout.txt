@@ -1,0 +1,10 @@
+Windows 3.1 path repair
+
+Target installed Windows 3.1 directory: Current installed path: O:\repos.hobby\ntvdm64\build\t473-s10\addon-renames-r7\installed
+Requested installed path: O:\repos.hobby\ntvdm64\build\t473-s10\addon-renames-r7\installed
+Paths already match.
+
+Path repair exit code: 0
+Press any key to continue . . .
+
+PASS Win31 path apply/repeat/unapply with adjacent backups

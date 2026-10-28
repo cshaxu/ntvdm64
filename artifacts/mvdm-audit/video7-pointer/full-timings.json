@@ -1,0 +1,92 @@
+{
+  "Suite": "Full",
+  "ElapsedMs": 323084,
+  "InputPolicy": "Observed",
+  "PreparationMs": 3229,
+  "Gates": [
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66018,
+      "CleanupMs": 436,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 42148,
+      "CleanupMs": 377,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 37624,
+      "CleanupMs": 345,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 13589,
+      "CleanupMs": 428,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 8994,
+      "CleanupMs": 344,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 45404,
+      "CleanupMs": 340,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12316,
+      "CleanupMs": 390,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 27570,
+      "CleanupMs": 389,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30085,
+      "CleanupMs": 392,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3259,
+      "CleanupMs": 429,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7374,
+      "CleanupMs": 437,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9443,
+      "CleanupMs": 372,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 3244,
+      "CleanupMs": 378,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 5957,
+      "CleanupMs": 328,
+      "Passed": true
+    }
+  ]
+}

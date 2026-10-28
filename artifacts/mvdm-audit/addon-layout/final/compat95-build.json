@@ -1,0 +1,22 @@
+{
+  "driverSha256": "50117300CE5CCE2C3C1F8671A109A8A9B9C58FC8B27C1DA48746C05C56AB9E6E",
+  "bytes": 5223,
+  "sourceSha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+  "nasm": "NASM version 3.01 compiled on Jun 10 2026",
+  "file": "compat95.sys",
+  "sources": [
+    {
+      "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+      "name": "compat95.asm"
+    },
+    {
+      "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7",
+      "name": "bootlogo.inc"
+    },
+    {
+      "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D",
+      "name": "root.inc"
+    }
+  ],
+  "compatibilityOnly": false
+}

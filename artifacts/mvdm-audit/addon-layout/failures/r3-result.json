@@ -1,0 +1,49 @@
+{
+  "result": "fail",
+  "started": "2026-10-28T04:32:06.2121961Z",
+  "prior_receipt": "build/t473-s10/addon-renames-r2/result.json",
+  "runs": [
+    {
+      "exit": 0,
+      "started": "2026-10-28T04:32:06.2749202Z",
+      "name": "win95-menu",
+      "arguments": "-NoProfile -File tests/component-integration/win95_start_menu_template_test.ps1 -OutputRoot \"O:/repos.hobby/ntvdm64/build/w95ar1\"",
+      "pid": 11712,
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
+    },
+    {
+      "exit": 0,
+      "started": "2026-10-28T04:32:10.1688195Z",
+      "name": "pif-hash",
+      "arguments": "-NoProfile -File tests/component-integration/pif_hash_tool_test.ps1 -Pif \"O:/repos.hobby/ntvdm64/assets/release/PIF.EXE\" -Hash \"O:/repos.hobby/ntvdm64/assets/release/HASH.EXE\" -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r3/pif-hash\" -ReleaseRoot \"O:/repos.hobby/ntvdm64/assets/release\"",
+      "pid": 29396,
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
+    },
+    {
+      "exit": 0,
+      "started": "2026-10-28T04:32:11.6694449Z",
+      "name": "pif-root",
+      "arguments": "-NoProfile -File tests/component-integration/pif_root_update_test.ps1 -Pif \"O:/repos.hobby/ntvdm64/assets/release/PIF.EXE\" -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r3/pif-root\"",
+      "pid": 15988,
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
+    },
+    {
+      "exit": 0,
+      "started": "2026-10-28T04:32:12.7809333Z",
+      "name": "lnk",
+      "arguments": "-B tests/component-integration/lnk_tool_test.py --lnk \"O:/repos.hobby/ntvdm64/assets/release/LNK.EXE\" --output \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r3/lnk\"",
+      "pid": 27740,
+      "image": "C:\\Program Files\\Python313\\python.exe"
+    },
+    {
+      "exit": 1,
+      "started": "2026-10-28T04:32:13.5417928Z",
+      "name": "grp",
+      "arguments": "-NoProfile -File tests/component-integration/grp_tool_test.ps1 -Grp \"O:/repos.hobby/ntvdm64/assets/release/GRP.EXE\" -FixtureRoot O:/w31 -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r3/grp\"",
+      "pid": 21452,
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe"
+    }
+  ],
+  "error": "grp returned 1",
+  "finished": "2026-10-28T04:32:15.2561943Z"
+}

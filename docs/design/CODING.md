@@ -18,12 +18,12 @@ kernel patches or host runtime linkage. Output is staged under build and copied
 to the owner-authorized installation PATCH directory; default profiles stay intact.
 
 Owner accepts S1's unstable enhanced-mode research and admits T436 S2's
-src/addon/win31-mouse-drv independent guest driver. It consumes NTVDM's
+src/addon/mouse31 independent guest driver. It consumes NTVDM's
 existing INT33 provider through a verified real/protected-mode boundary;
 it is not a mirror, host component or host link input. Driver artifacts and
 tests remain build-owned. S3 will consolidate launch/setup implementations.
 
-Owner renames driver source to `src/addon/win101-mouse-drv/` and assigns all
+Owner renames driver source to `src/addon/mouse101/` and assigns all
 installation/patch implementation to `tools/win101-setup/` (owner's subsequent
 source-home correction). Future Win3.1 setup belongs to `tools/win31-setup/`.
 Driver sources remain under src/addon. These are the destinations for

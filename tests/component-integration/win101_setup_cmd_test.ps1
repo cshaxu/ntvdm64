@@ -40,7 +40,7 @@ function Invoke-Apply([string]$Media, [int]$ExpectedExit = 0) {
     $command = '(type "{0}" & echo.) | call "{1}"' -f $input,(Join-Path $ToolRoot 'APPLY.CMD')
     $stdout = Join-Path $BuildRoot ('apply-' + [IO.Path]::GetFileName($Media) + '.out')
     $stderr = Join-Path $BuildRoot ('apply-' + [IO.Path]::GetFileName($Media) + '.err')
-    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    $process = Start-Process -FilePath cmd.exe -WindowStyle Hidden -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "APPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }
@@ -74,7 +74,7 @@ exit /b 0
         # and right sides in separate command contexts, which makes CALL :label
         # unreliable; standard-input redirection preserves the batch context.
         $command = 'call "{0}" < "{1}"' -f (Join-Path $Media 'PATCH\SETUP.CMD'),$input
-        $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+        $process = Start-Process -FilePath cmd.exe -WindowStyle Hidden -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
         if ($process.ExitCode -ne $ExitCode) {
             throw "SETUP.CMD returned $($process.ExitCode), expected $ExitCode`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
         }
@@ -89,7 +89,7 @@ function Invoke-Unapply([string]$Media, [int]$ExpectedExit = 0) {
     $stdout = Join-Path $BuildRoot ('unapply-' + [IO.Path]::GetFileName($Media) + '.out')
     $stderr = Join-Path $BuildRoot ('unapply-' + [IO.Path]::GetFileName($Media) + '.err')
     $command = '(type "{0}" & echo.) | call "{1}"' -f $input,(Join-Path $ToolRoot 'UNAPPLY.CMD')
-    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    $process = Start-Process -FilePath cmd.exe -WindowStyle Hidden -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
     if ($process.ExitCode -ne $ExpectedExit) {
         throw "UNAPPLY.CMD returned $($process.ExitCode), expected $ExpectedExit`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))"
     }

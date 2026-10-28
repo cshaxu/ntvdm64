@@ -9,7 +9,7 @@ The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
 four-role census is retained; current work uses one implementer/reviewer. Automatic S progression remains in force. `books/` is supporting
 reading, not authority. Guest media remains unchanged.
 
-Current ten-image package: `build/t473-s10/latest-source-release-r3/package`;
+Current ten-image package: `build/t473-s10/v7-full-package-r56`;
 release/installed hashes match. Owner requires latest committed production
 code, never an automatic restore of historical package-c.
 The owner assigned package-scoped NTSRV isolation to S10. Its implementation and
@@ -47,7 +47,7 @@ selected Full gates do not prove those historical failures repaired.
 | Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
 | Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
 | Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
-| Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package identity, existing RPC endpoint and staging changes. |
+| Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package/RPC staging and add-on/tool producer/consumer renames. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
 | Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
 | Expected Markers | Each row has justified full/partial/excluded disposition and selected original owner; every mirror diff is partial, with reproducible justified restored-code estimate or explicit unmeasurable basis. |
@@ -92,16 +92,17 @@ records the parent-owned commit/rollback contract, concurrent writer fixture,
 formal graphs and complete Product gate.  It changes only `ntvdm.exe`; guest
 media and the S2 raw-key/token boundary remain unchanged.
 
-## T461 S1 Closure Record
+## S10 Current P — add-on ownership and Win3.1 Setup
 
-S1 closed the selected Shell-service and layered Registry caller/owner inventory.
-[The owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md)
-identifies the two original Shell-service and seven Registry entries, the one
-worker-local `NTVDM.REG` façade, its opaque-key lifetime, the missing
-write/persistence/concurrency contract, its necessary replacement of a
-private-pointer key representation with bounded guest-safe tokens, and the
-explicit W18/W11 consumer handoffs. It changed no runtime, guest or installed
-package.
+Owner requires this sequential P before resuming the original S10 census.
+Scope and pending gates are recorded in the
+[add-on review](../../artifacts/mvdm-audit/addon-layout-review.md#current-p-setup-correction-and-closure-gates).
+Complete add-on/tool cleanup, graphical Setup mouse investigation and
+profile-only finalization. Prove pure-DOS DOSONLY=0/1 with Standard/386 Enhanced
+startup. Future WOW31 conversion is excluded. [Video7 pointer evidence](../../artifacts/mvdm-audit/video7-pointer-review.md) retains the Raw Input limit; review and commit/push remain.
+
+T461 S1's unchanged inventory is retained in its
+[owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md).
 
 ## T461 S2 Closure Record
 

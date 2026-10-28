@@ -297,3 +297,5 @@ the held candidate or selects a repair.
 The [latest-source delivery](latest-source-release-review.md) records the owner-directed ten-image publication correction and independent SZDD/W31PATCH tools; the whole-source reconciliation remains open.
 
 The [VDD owner checkpoint](vdd-native-role-review.md) binds nine original bodies and two partial file roles; 305 normal checks pass while strict uninstall and DMA boundary failures are preserved for S13.
+
+The owner-directed [add-on layout delivery](addon-layout-review.md) records twelve source/build components, single-copy releases and exact naming; the [tools directory review](tool-directory-review.md) separates current owners from archive candidates. This does not close MVDM source recovery.

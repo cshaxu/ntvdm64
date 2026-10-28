@@ -61,6 +61,9 @@ foreach ($case in @(@('WINSTD.PIF','/S'),@('WIN386.PIF','/3'))) {
 }
 $nasm = (Get-Command nasm.exe -ErrorAction Stop).Source
 New-Item -ItemType Directory -Path $output | Out-Null
+# The private-desktop inspector only dismisses the identified, test-owned
+# missing serial-port dialogs. Other errors remain visible to the observer.
+. "$repo/tests/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $output
 & $nasm -f bin -o "$output/W31CHECK.EXE" "$repo/tests/observation/win31_startup_contract.asm"
 if ($LASTEXITCODE) { throw 'Failed to assemble Win16 startup witness' }
 $probeBytes = [IO.File]::ReadAllBytes("$output/W31CHECK.EXE")
@@ -137,7 +140,29 @@ try {
             $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'; $env:MVDM_OBSERVER_SHORT_HISTORY='1'
             $process=Start-Process $observer -ArgumentList @('C:\Windows\System32\cmd.exe',$install,$report,
                 '/d','/c',(Join-Path $patch $case.Command),'--observation-timeout-ms',"$TimeoutMs") -WindowStyle Hidden -PassThru
-            if (!$process.WaitForExit($TimeoutMs+15000)) { throw 'Observer did not complete its bounded observation' }
+            $deadline = [DateTime]::UtcNow.AddMilliseconds($TimeoutMs+15000)
+            $known = @($process.Id)
+            $desktop = 'NTVDMConsoleTest-' + $process.Id
+            while (!$process.WaitForExit(500)) {
+                if ([DateTime]::UtcNow -ge $deadline) { throw 'Observer did not complete its bounded observation' }
+                if (!$case.Enhanced) { continue }
+                # Include the system CMD intermediary, then follow only the
+                # observer's descendants; never act on unrelated processes.
+                $rows = @(Get-CimInstance Win32_Process)
+                for ($round=0; $round -lt 5; $round++) {
+                    foreach ($row in $rows) {
+                        if ($row.ParentProcessId -in $known -and $row.ProcessId -notin $known) { $known += $row.ProcessId }
+                    }
+                }
+                try { $observation = [WindowInspector]::Read([int[]]$known,$desktop,$true,$false,$false) }
+                catch [System.ComponentModel.Win32Exception] {
+                    if ($_.Exception.NativeErrorCode -ne 2) { throw }
+                    continue # The observer has not created its desktop yet.
+                }
+                if ($observation -match 'serial-ignore=True') {
+                    [IO.File]::AppendAllText((Join-Path $output "$($case.Name).serial-dialogs.txt"),$observation)
+                }
+            }
         } catch { $errorText=$_.ToString() }
         finally {
             if($process){if(!$process.HasExited){$process.Kill();[void]$process.WaitForExit(5000)};$process.Dispose()}

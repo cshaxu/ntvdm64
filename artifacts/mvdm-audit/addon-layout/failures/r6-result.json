@@ -1,0 +1,271 @@
+{
+  "result": "fail",
+  "started": "2026-10-28T04:42:18.4450607Z",
+  "source_commit": "e3fccb127d66f069e7712dddfad5a0fbeea3e08c",
+  "runs": [
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 4584,
+      "name": "build-pif",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/pif/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/PIF.EXE\"\"",
+      "started": "2026-10-28T04:42:18.7740833Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 18580,
+      "name": "build-hash",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/hash/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/HASH.EXE\"\"",
+      "started": "2026-10-28T04:42:23.8414788Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 24832,
+      "name": "build-grp",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/grp/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/GRP.EXE\"\"",
+      "started": "2026-10-28T04:42:29.1468081Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 15456,
+      "name": "build-lnk",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/lnk/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/LNK.EXE\"\"",
+      "started": "2026-10-28T04:42:35.3599251Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 11828,
+      "name": "build-szdd",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/szdd/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/SZDD.EXE\"\"",
+      "started": "2026-10-28T04:42:42.0157146Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 5332,
+      "name": "build-patch31",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/patch31/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/patch31.exe\"\"",
+      "started": "2026-10-28T04:42:48.0494666Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 21472,
+      "name": "build-path31",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/path31/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/path31.exe\"\"",
+      "started": "2026-10-28T04:42:54.3530372Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 20596,
+      "name": "build-patch95",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/patch95/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/patch95.exe\"\"",
+      "started": "2026-10-28T04:43:00.7023241Z",
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "pid": 3692,
+      "name": "build-path95",
+      "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/path95/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r6/path95.exe\"\"",
+      "started": "2026-10-28T04:43:06.8865026Z",
+      "exit": 2
+    }
+  ],
+  "core_before": [
+    {
+      "name": "run16.exe",
+      "sha256": "E0292EB0A89CB41303D3EE818CAF343CD93FA6992A624DF3B30012338E2F3B91"
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "A84984D97FB9006ED912AC621B4A7360300D8CA4918AC7E9C1AFF01D84DE3D2A"
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "78363F0B8CD3548B3D844A1D46639669DC8D620E5AEAF510FB72CCC63604EC39"
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "DFF69ABC5D48BF65FE9D1AB2F113B89A1AF4498903E66EA25A266F4D181F9BC8"
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "D206159482D02D33C947C5D85C004B0B0A75F385992A7A85110096A004C87747"
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "F2FEC474C42AB2A6930518C4635FFC128D38EB6A79B3A16D8D899C15F8A872AB"
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "D4170C70FD83A4D4159B9173AE402C0A8A2BBC982E185F6167F18F331B32EC48"
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "BFEC81A2D857CE1522EBD513F6282164E8F9D5D1B98E06F9E6706F651D6B9E39"
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "40FC71C023F95DA6267788CB099E96659A174FEA5406812DE417A9D1BD8A9D64"
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "CEB26072A90C8D5164FBF88C869DD4F1CDB6FEAC8CAE981F2449543DEBB1855B"
+    }
+  ],
+  "drivers_before": [
+    {
+      "id": "win101",
+      "file": "MOUSE101.DRV",
+      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+      "source": "src/addon/mouse101/mouse101.asm",
+      "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win31",
+      "file": "MOUSE31.DRV",
+      "sha256": "186AD08C4E75BA528001D29C102797B05901BCD74C720334D5859EB53CF390C7",
+      "source": "src/addon/mouse31/mouse31.asm",
+      "sourceSha256": "33B7CD881BA6412701D719765C909DCE1B8C58C9E4D3FBD3A862C5C843D8A4D1",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win95-compat",
+      "file": "compat95.sys",
+      "kind": "dos-character-driver",
+      "architecture": "i386-real-mode",
+      "sha256": "50117300CE5CCE2C3C1F8671A109A8A9B9C58FC8B27C1DA48746C05C56AB9E6E",
+      "source": "src/addon/compat95/compat95.asm",
+      "sourceSha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+      "sources": [
+        {
+          "name": "compat95.asm",
+          "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7"
+        },
+        {
+          "name": "bootlogo.inc",
+          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+        },
+        {
+          "name": "root.inc",
+          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
+        }
+      ],
+      "acceptance": "candidate"
+    }
+  ],
+  "sources": [
+    {
+      "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\compat95\\bootlogo.inc"
+    },
+    {
+      "sha256": "225742258BC8EB8C38387639761E59A6D35D581434E4A2C6F688C39ACD90BB60",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\compat95\\build.ps1"
+    },
+    {
+      "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\compat95\\compat95.asm"
+    },
+    {
+      "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\compat95\\root.inc"
+    },
+    {
+      "sha256": "0E41AC9E9F628E409C3232EB09B26D5A2880582B47B1167141A4EA1F3E463791",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\grp\\BUILD.CMD"
+    },
+    {
+      "sha256": "AD3A04E79358F3A338EE85619A94387CD89B71ED124F1494F4ABB8425C334E90",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\grp\\grp.c"
+    },
+    {
+      "sha256": "B55EAF1A31C014F683D741D2365409D2F0F8AF843EEA93A6BF40A6AA8152DFE0",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\hash\\BUILD.CMD"
+    },
+    {
+      "sha256": "2C143430F34EA275E0894F66F0F79BE5B894C5078938498F0732E3A594DB5B4B",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\hash\\hash.c"
+    },
+    {
+      "sha256": "D42925F906FA6EB60EA45EB2D7A7139EA65028E94AFCAA0E76896D7D2401FD12",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\lnk\\BUILD.CMD"
+    },
+    {
+      "sha256": "5E7F5B6554D4A20D5E65C49AD266A17B08DEDAA3CD93690C4D83D822DCCF92B9",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\lnk\\lnk.c"
+    },
+    {
+      "sha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\mouse101\\mouse101.asm"
+    },
+    {
+      "sha256": "33B7CD881BA6412701D719765C909DCE1B8C58C9E4D3FBD3A862C5C843D8A4D1",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\mouse31\\mouse31.asm"
+    },
+    {
+      "sha256": "7EE0B68D5EDFE82831957577B8E523F1AF9F7225B63141E87AE86F8A258F9A7F",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch31\\BUILD.CMD"
+    },
+    {
+      "sha256": "62A4B479A32F95C2C704B2AC116E0B0604948949230C8DAF7F78982627CC1776",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch31\\patch31.c"
+    },
+    {
+      "sha256": "DE19F1C20B6EB32D518308CCC64E2A1AF283AB189B9ACE4BD5C5E2076F0B2D5B",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch95\\BUILD.CMD"
+    },
+    {
+      "sha256": "EB76211C6DCA2257C62910205894503F0FB13CB3B70CEA7E5E82B439F6439F4E",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch95\\deltas.h"
+    },
+    {
+      "sha256": "5FF78824AC5AE0FD6825B62EE4F0A2DE434CE6DC8A5062712C518E3A24CFB981",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch95\\file-helpers.h"
+    },
+    {
+      "sha256": "9B22F3F9CA02908A16E4FE42DC70406C51EE91E421CAFA135E51DC13E02A969B",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\patch95\\patch95.c"
+    },
+    {
+      "sha256": "0EFF60F8B7FA0764D975E13055B5B146234C690B32713512CAB2F81A9F9FB8FA",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\path31\\BUILD.CMD"
+    },
+    {
+      "sha256": "9592C65A1764D9F1A7F3E963927E21AE7B69E7C0637781C7BDB5F5480E519E98",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\path31\\path31.c"
+    },
+    {
+      "sha256": "F8C960BF742326859E09910504163F9DBA2D6F66A85F2CEC0A3F48AB3EF0BBE5",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\path95\\BUILD.CMD"
+    },
+    {
+      "sha256": "FA46BAD8D182F6673EDCD32067A65DF78420D6C43DB6FD3FDAE58EC96DEAE7C8",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\path95\\path95.c"
+    },
+    {
+      "sha256": "1BDFD290177C352949A877EB749C661BF2A61E96F8F98A2D61BBF40D619C1090",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\pif\\BUILD.CMD"
+    },
+    {
+      "sha256": "FCF25EF5B1F543137F8BE9599C12D9B802D1D593B921EEDE267C452D9605ED87",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\pif\\pif.c"
+    },
+    {
+      "sha256": "F7A03CF7AE1D1D95188A46C9AC24B72592B13AC7FB27FAA361F18AA2349803F3",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\szdd\\BUILD.CMD"
+    },
+    {
+      "sha256": "2CBA06E0F0132C7A24D3EE643E8D29923A873EE294128F145627D1D5FD97E2A0",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\addon\\szdd\\szdd.c"
+    }
+  ],
+  "error": "build-path95 returned 2",
+  "finished": "2026-10-28T04:43:13.0771968Z"
+}

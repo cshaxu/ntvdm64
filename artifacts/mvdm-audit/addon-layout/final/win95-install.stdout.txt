@@ -1,0 +1,4 @@
+PASS installed compat95.sys and updated existing profile; old names backed up outside PATCH
+PASS installed repaired menu and exact program copies; original trees, launch profile and hives/INIs unchanged
+PASS restored prior menu and removed only unchanged owned files; other user files preserved
+WIN95_LAUNCH_INSTALL_OK compat_install=1 backup_refusals=2 menu_install=1 changed_file_refusal=1 restore=1 journal_failure_rollbacks=2 fixture_only=1

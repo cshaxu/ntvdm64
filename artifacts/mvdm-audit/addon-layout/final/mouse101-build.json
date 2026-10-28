@@ -1,0 +1,52 @@
+{
+  "kind": "guest-build-structure-only-not-runtime-pass",
+  "source": "O:\\repos.hobby\\ntvdm64\\src\\addon\\mouse101\\mouse101.asm",
+  "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+  "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "assemblerVersion": "NASM version 3.01 compiled on Jun 10 2026",
+  "driver": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\addon-renames-r7\\mouse101/MOUSE101.DRV",
+  "driverSha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+  "contract": {
+    "kind": "readonly-contract-audit-not-runtime-validation",
+    "driver": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\addon-renames-r7\\mouse101\\MOUSE101.DRV",
+    "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+    "neFlags": 32773,
+    "automaticDataSegment": 2,
+    "segments": [
+      {
+        "number": 1,
+        "offset": 176,
+        "length": 418,
+        "flags": 64
+      },
+      {
+        "number": 2,
+        "offset": 608,
+        "length": 16,
+        "flags": 65
+      }
+    ],
+    "entries": [
+      {
+        "ordinal": 1,
+        "segment": 1,
+        "flags": 3,
+        "offset": 44
+      },
+      {
+        "ordinal": 2,
+        "segment": 1,
+        "flags": 3,
+        "offset": 84
+      },
+      {
+        "ordinal": 3,
+        "segment": 1,
+        "flags": 3,
+        "offset": 198
+      }
+    ],
+    "snapshot": "",
+    "vectors": []
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "drivers": [
+    {
+      "id": "win101",
+      "file": "MOUSE101.DRV",
+      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+      "source": "src/addon/mouse101/mouse101.asm",
+      "sourceSha256": "0999EA9631BBAE52DAFADFE0A6E4DD8B946DF8136A5D42869573A08C259CAA8E",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win31",
+      "file": "MOUSE31.DRV",
+      "sha256": "186AD08C4E75BA528001D29C102797B05901BCD74C720334D5859EB53CF390C7",
+      "source": "src/addon/mouse31/mouse31.asm",
+      "sourceSha256": "33B7CD881BA6412701D719765C909DCE1B8C58C9E4D3FBD3A862C5C843D8A4D1",
+      "acceptance": "verified"
+    },
+    {
+      "id": "win95-compat",
+      "file": "compat95.sys",
+      "kind": "dos-character-driver",
+      "architecture": "i386-real-mode",
+      "sha256": "50117300CE5CCE2C3C1F8671A109A8A9B9C58FC8B27C1DA48746C05C56AB9E6E",
+      "source": "src/addon/compat95/compat95.asm",
+      "sourceSha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+      "sources": [
+        {
+          "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+          "name": "compat95.asm"
+        },
+        {
+          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7",
+          "name": "bootlogo.inc"
+        },
+        {
+          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D",
+          "name": "root.inc"
+        }
+      ],
+      "acceptance": "candidate"
+    }
+  ],
+  "utilities": [
+    {
+      "id": "pif",
+      "file": "PIF.EXE",
+      "architecture": "amd64",
+      "sha256": "20548C490BB02406A6CA0EC16C000CD9DF8B2DACBF6004B7C1F31BA7E060824C",
+      "source": "src/addon/pif/pif.c",
+      "sourceSha256": "FCF25EF5B1F543137F8BE9599C12D9B802D1D593B921EEDE267C452D9605ED87"
+    },
+    {
+      "id": "hash",
+      "file": "HASH.EXE",
+      "architecture": "amd64",
+      "sha256": "B1298FD6A5E6CE98F66C2C84D920D127FFAC8D33CE463458FEBFD87ECD02C486",
+      "source": "src/addon/hash/hash.c",
+      "sourceSha256": "2C143430F34EA275E0894F66F0F79BE5B894C5078938498F0732E3A594DB5B4B"
+    },
+    {
+      "id": "grp",
+      "file": "GRP.EXE",
+      "architecture": "amd64",
+      "sha256": "470D7D6F68D6E8BF55195A1A744D4FA4723983354AF5CDDF0E646C7C804DA92F",
+      "source": "src/addon/grp/grp.c",
+      "sourceSha256": "AD3A04E79358F3A338EE85619A94387CD89B71ED124F1494F4ABB8425C334E90"
+    },
+    {
+      "id": "lnk",
+      "file": "LNK.EXE",
+      "architecture": "amd64",
+      "sha256": "D79E03C00DCDB6050AA68109FE09D7AF89998A9B57B6FF6E6D991DCDA281F5FA",
+      "source": "src/addon/lnk/lnk.c",
+      "sourceSha256": "5E7F5B6554D4A20D5E65C49AD266A17B08DEDAA3CD93690C4D83D822DCCF92B9"
+    },
+    {
+      "id": "szdd",
+      "file": "SZDD.EXE",
+      "architecture": "amd64",
+      "sha256": "885761530EC6BA8CDBC6CBB0AF87F03F09029DFC04A65C4B2F51603DE05A614E",
+      "source": "src/addon/szdd/szdd.c",
+      "sourceSha256": "2CBA06E0F0132C7A24D3EE643E8D29923A873EE294128F145627D1D5FD97E2A0"
+    },
+    {
+      "id": "patch31",
+      "file": "patch31.exe",
+      "architecture": "amd64",
+      "sha256": "53A04ABDC5758B8DD471F36C1DA15418C698355CCC433A9782DCBCA6D8103D09",
+      "source": "src/addon/patch31/patch31.c",
+      "sourceSha256": "62A4B479A32F95C2C704B2AC116E0B0604948949230C8DAF7F78982627CC1776"
+    },
+    {
+      "id": "path31",
+      "file": "path31.exe",
+      "architecture": "amd64",
+      "sha256": "B06655CEAD36B855B8A9902248A4C00A257E1C7A485FA165C013A505F03D7557",
+      "source": "src/addon/path31/path31.c",
+      "sourceSha256": "9592C65A1764D9F1A7F3E963927E21AE7B69E7C0637781C7BDB5F5480E519E98"
+    },
+    {
+      "id": "patch95",
+      "file": "patch95.exe",
+      "architecture": "amd64",
+      "sha256": "93C6571892E210C40835022584BFD8FA30EBA8B552FF0E091087009874AAF219",
+      "source": "src/addon/patch95/patch95.c",
+      "sourceSha256": "497B8A6B9208BCD3FAF45D241F26FFA97878D9D1CA479D911DF6463222985571"
+    },
+    {
+      "id": "path95",
+      "file": "path95.exe",
+      "architecture": "amd64",
+      "sha256": "28C4E068B36C12415A2FDBBC53D9D99EBCF8BC3927AB921D16957F2B207C92DA",
+      "source": "src/addon/path95/path95.c",
+      "sourceSha256": "F814EB02A895F9F2CCC35F81B54215F328F9B1F87841F2287BBE7CF56BCA281E"
+    }
+  ]
+}

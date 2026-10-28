@@ -1,0 +1,3 @@
+Win95 paths restored.
+Win95 launcher restored.
+WIN95_LAUNCH_COMMAND_SAFETY_OK preexisting_patch=refused journal_less_undo=refused changed_path_preserved=1 exact_path_restore=1 changed_launch_preserved=1 exact_launch_restore=1

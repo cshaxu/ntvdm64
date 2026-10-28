@@ -20,4 +20,8 @@ void ntvdm_console_graphics_flush_probe(DWORD screen_state,DWORD mode_type);
 int ntvdm_console_graphics_palette(HANDLE,HPALETTE,DWORD);
 /* TRUE only for this session's live graphics output; count may be negative. */
 BOOL ntvdm_console_graphics_cursor(HANDLE,BOOL,int *);
+/* Original Video 7 hardware-pointer callback; pattern remains caller-owned. */
+void ntvdm_console_graphics_v7_pointer(const BYTE *,unsigned,unsigned,BOOL);
+void ntvdm_console_graphics_begin_update(void);
+void ntvdm_console_graphics_end_update(void);
 #endif

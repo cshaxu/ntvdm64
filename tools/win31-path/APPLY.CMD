@@ -8,11 +8,11 @@ set /p "TARGET=Target installed Windows 3.1 directory: "
 if not defined TARGET (set "RESULT=64"& goto done)
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
 if not exist "%TARGET%\WIN.COM" (echo WIN.COM was not found in "%TARGET%".& set "RESULT=2"& goto done)
-for %%F in (WIN31PATH.EXE) do if not exist "%~dp0%%F" (echo Missing %%F beside APPLY.CMD.& set "RESULT=3"& goto done)
+for %%F in (path31.exe) do if not exist "%RELEASE%\%%F" (echo Missing released add-on: %%F& set "RESULT=3"& goto done)
 for %%F in (GRP.EXE PIF.EXE) do if not exist "%RELEASE%\%%F" (echo Missing released add-on: %RELEASE%\%%F& set "RESULT=3"& goto done)
 set "PATCH=%TARGET%\PATCH"
 set "MANIFEST=%PATCH%\PATH-REPAIR.MANIFEST"
-for /f "tokens=1,* delims==" %%A in ('call "%~dp0WIN31PATH.EXE" --discover-root "%TARGET%"') do (
+for /f "tokens=1,* delims==" %%A in ('call "%RELEASE%\path31.exe" --discover-root "%TARGET%"') do (
   if /I "%%A"=="OLD_ROOT" set "OLD_ROOT=%%B"
   if /I "%%A"=="NEW_ROOT" set "NEW_ROOT=%%B"
 )

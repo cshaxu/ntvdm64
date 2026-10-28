@@ -4,7 +4,10 @@ param(
     [string]$GrpBuild='',
     [string]$LnkBuild='',
     [string]$SzddBuild='',
-    [string]$W31PatchBuild=''
+    [string]$Patch31Build='',
+    [string]$Path31Build='',
+    [string]$Patch95Build='',
+    [string]$Path95Build=''
 )
 
 $ErrorActionPreference='Stop'
@@ -15,7 +18,10 @@ $items=@(
     @{id='grp'; file='GRP.EXE'; build=$GrpBuild; source='src/addon/grp/grp.c'},
     @{id='lnk'; file='LNK.EXE'; build=$LnkBuild; source='src/addon/lnk/lnk.c'},
     @{id='szdd'; file='SZDD.EXE'; build=$SzddBuild; source='src/addon/szdd/szdd.c'},
-    @{id='w31patch'; file='W31PATCH.EXE'; build=$W31PatchBuild; source='src/addon/w31patch/w31patch.c'}
+    @{id='patch31'; file='patch31.exe'; build=$Patch31Build; source='src/addon/patch31/patch31.c'},
+    @{id='path31'; file='path31.exe'; build=$Path31Build; source='src/addon/path31/path31.c'},
+    @{id='patch95'; file='patch95.exe'; build=$Patch95Build; source='src/addon/patch95/patch95.c'},
+    @{id='path95'; file='path95.exe'; build=$Path95Build; source='src/addon/path95/path95.c'}
 ) | Where-Object build
 if(!@($items).Count){throw 'At least one utility build is required'}
 $manifest=@()
@@ -30,7 +36,8 @@ foreach($item in $items) {
     if($bytes.Length -lt 64 -or [BitConverter]::ToUInt16($bytes,0) -ne 0x5A4D) { throw "Invalid PE: $($item.file)" }
     $pe=[BitConverter]::ToInt32($bytes,0x3C)
     if($pe -lt 0 -or $pe+6 -ge $bytes.Length -or [BitConverter]::ToUInt16($bytes,$pe+4) -ne 0x8664) { throw "Not AMD64: $($item.file)" }
-    $manifest += [ordered]@{id=$item.id;file=$item.file;architecture='amd64';sha256=(Get-FileHash -LiteralPath $image).Hash;source=$item.source}
+    $sourceHash=(Get-FileHash -LiteralPath (Join-Path $repo $item.source)).Hash
+    $manifest += [ordered]@{id=$item.id;file=$item.file;architecture='amd64';sha256=(Get-FileHash -LiteralPath $image).Hash;source=$item.source;sourceSha256=$sourceHash}
 }
 foreach($item in $items) {
     $build=(Resolve-Path -LiteralPath $item.build).Path
@@ -42,6 +49,7 @@ $prior=Get-Content -LiteralPath $addonPath -Raw|ConvertFrom-Json
 if($prior.schema -ne 1 -or $null -eq $prior.drivers){throw 'Invalid existing add-on manifest'}
 $updatedIds=@($manifest|ForEach-Object id)
 $updatedFiles=@($manifest|ForEach-Object file)
-$utilities=@($prior.utilities|Where-Object {$_.id -notin $updatedIds -and $_.file -notin $updatedFiles})+@($manifest)
+$updatedSources=@($manifest|ForEach-Object source)
+$utilities=@($prior.utilities|Where-Object {$_.id -notin $updatedIds -and $_.file -notin $updatedFiles -and $_.source -notin $updatedSources})+@($manifest)
 [ordered]@{schema=1;drivers=@($prior.drivers);utilities=$utilities}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $addonPath -Encoding UTF8
 'PASS selected AMD64 add-on utilities published; other utility/driver entries retained'

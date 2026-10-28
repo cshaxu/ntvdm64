@@ -48,6 +48,18 @@ static void create_transport(void);
 static HANDLE broker_shutdown,broker_console_close,broker_wow_task_close;
 static HANDLE broker_lifetime;
 static BOOL lifecycle_wow;
+DWORD worker_base_take_wow_task_close(uint64_t *identity)
+{ (void)identity;return ERROR_NOT_FOUND; }
+DWORD worker_base_fail_wow_task_close(uint64_t identity)
+{ (void)identity;return ERROR_NOT_FOUND; }
+DWORD ntvdm_wow_terminate_ticket(uint64_t identity)
+{ (void)identity;return ERROR_NOT_FOUND; }
+DWORD worker_base_request_console_exit(void) { return ERROR_SUCCESS; }
+DWORD worker_base_io_release_event(HANDLE *event)
+{
+    *event=CreateEventW(NULL,TRUE,FALSE,NULL);
+    return *event ? ERROR_SUCCESS : GetLastError();
+}
 DWORD OpenNtBaseClientFailure(DWORD error)
 { return broker_lifetime && WaitForSingleObject(broker_lifetime,0)==WAIT_OBJECT_0 ? ERROR_INVALID_HANDLE : error; }
 DWORD worker_base_controls(HANDLE *process,HANDLE *shutdown,HANDLE *console_close,HANDLE *wow_task_close)

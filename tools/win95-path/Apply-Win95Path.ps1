@@ -22,7 +22,8 @@ $WindowsRoot=[IO.Path]::GetFullPath($WindowsRoot).TrimEnd('\')
 if(-not(Test-Path -LiteralPath "$WindowsRoot\WIN.COM")){Fail "WIN.COM was not found below $WindowsRoot"}
 if(((Get-Item -LiteralPath $WindowsRoot -Force).Attributes -band [IO.FileAttributes]::ReparsePoint)){Fail "Refusing Windows root reparse point: $WindowsRoot"}
 if(@(Get-ChildItem -LiteralPath $WindowsRoot -Recurse -Force | Where-Object { $_.Attributes -band [IO.FileAttributes]::ReparsePoint }).Count){Fail "Refusing tree containing reparse point: $WindowsRoot"}
-$tool=Join-Path $PSScriptRoot 'WIN95PATH.EXE';$release=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\assets\release'))
+$release=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\assets\release'))
+$tool=Join-Path $release 'path95.exe'
 foreach($f in @($tool,"$release\PIF.EXE","$release\GRP.EXE","$release\LNK.EXE")){if(-not(Test-Path -LiteralPath $f)){Fail "Missing required tool: $f"}}
 $line=(& $tool root "$WindowsRoot\SYSTEM.DAT" | Where-Object {$_ -like 'OLD_ROOT=*'} | Select-Object -First 1)
 if(-not $line){Fail 'SYSTEM.DAT did not provide a unique SystemRoot'}

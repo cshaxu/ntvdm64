@@ -1,0 +1,1 @@
+PASS independent guest driver assembly and NE structure; runtime not yet verified

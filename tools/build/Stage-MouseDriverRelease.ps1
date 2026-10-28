@@ -5,8 +5,8 @@ $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $drivers=@()
 foreach($item in @(
-    @{id='win101';build=$Win101Build;file='MOUSE101.DRV';source='src/addon/win101-mouse-drv/mouse.asm';acceptance='verified'},
-    @{id='win31';build=$Win31Build;file='MOUSE31.DRV';source='src/addon/win31-mouse-drv/mouse.asm';acceptance=$Win31Acceptance}
+    @{id='win101';build=$Win101Build;file='MOUSE101.DRV';source='src/addon/mouse101/mouse101.asm';acceptance='verified'},
+    @{id='win31';build=$Win31Build;file='MOUSE31.DRV';source='src/addon/mouse31/mouse31.asm';acceptance=$Win31Acceptance}
 )) {
     $root=(Resolve-Path -LiteralPath $item.build).Path
     if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Driver build must be repository-owned'}

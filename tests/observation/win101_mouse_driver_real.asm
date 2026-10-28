@@ -3,7 +3,7 @@ bits 16
 org 0x100
 jmp main
 %define MOUSE101_GUEST_TEST
-%include "mouse.asm"
+%include "mouse101.asm"
 %macro check 1
     je %%ok
     mov byte [failed_case],%1

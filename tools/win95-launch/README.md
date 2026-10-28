@@ -13,7 +13,7 @@ Apply. It restores only journaled adjacent backups and removes only known
 tool-owned files. A missing journal is a refusal, never an instruction to
 delete `PATCH` content.
 
-`PATCH95.EXE` and the freshly built `compat95.sys` must be beside the wrapper;
+`patch95.exe` and `compat95.sys` are consumed from `assets/release`;
 released `PIF.EXE` and `MOUSE31.DRV` are read from `assets/release`. The tool
 does not install a background service or modify the global NTVDM installation.
 

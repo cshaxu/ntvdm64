@@ -19,7 +19,7 @@ function Invoke-InteractiveCmd([string]$script, [string]$target, [string]$name) 
     $stdout = Join-Path $build "$name.out"
     $stderr = Join-Path $build "$name.err"
     $command = 'call "{0}" < "{1}"' -f $script,$input
-    $process = Start-Process -FilePath cmd.exe -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
+    $process = Start-Process -FilePath cmd.exe -WindowStyle Hidden -ArgumentList @('/d','/c',$command) -RedirectStandardOutput $stdout -RedirectStandardError $stderr -Wait -PassThru
     if ($process.ExitCode -ne 0) { throw "$name failed: $($process.ExitCode)`n$((Get-Content -LiteralPath $stdout -Raw))$((Get-Content -LiteralPath $stderr -Raw))" }
     return (Get-Content -LiteralPath $stdout -Raw)
 }

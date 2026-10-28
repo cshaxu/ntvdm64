@@ -1,0 +1,2 @@
+PASS prepared original DOS/OEM menu names and relocated shortcut copies; installation untouched
+WIN95_START_MENU_TEMPLATE_OK menu_source=1 template_provenance=1 profile_preserved=1 pif_directory_limit=1 installation=0 fixture_only=1

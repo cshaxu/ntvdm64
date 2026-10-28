@@ -1,0 +1,1 @@
+frontend=17816 thread=21108 sink-accepted=1 dx=55 dy=20 buttons=0

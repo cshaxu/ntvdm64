@@ -14,7 +14,7 @@ if(@(Get-ChildItem -LiteralPath $WindowsRoot -Recurse -Force | Where-Object { $_
 foreach($name in @('W95LAUNCH.MANIFEST','CONFIG.NT','AUTOEXEC.NT','WIN.PIF','WIN.CMD','compat95.sys','MOUSE.DRV','SETVER.EXE')){
   if(Test-Path -LiteralPath (Join-Path $patch $name)){Fail "Refusing to overwrite pre-existing PATCH content: $name"}
 }
-$release=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\assets\release'));$patcher=Join-Path $PSScriptRoot 'PATCH95.EXE';$driver=Join-Path $PSScriptRoot 'compat95.sys';$setver=Join-Path $env:SystemRoot 'System32\SETVER.EXE'
+$release=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\assets\release'));$patcher=Join-Path $release 'patch95.exe';$driver=Join-Path $release 'compat95.sys';$setver=Join-Path $env:SystemRoot 'System32\SETVER.EXE'
 foreach($p in @($patcher,$driver,$setver,"$release\PIF.EXE","$release\MOUSE31.DRV")){if(-not(Test-Path -LiteralPath $p)){Fail "Missing required component: $p"}}
 New-Item -ItemType Directory -Force -Path $patch,"$patch\TEMP" | Out-Null;$script:journal=Join-Path $patch 'W95LAUNCH.MANIFEST';if(Test-Path $script:journal){Fail "Existing launch journal: $script:journal (run UNAPPLY.CMD first)"};New-Item -ItemType File -Path $script:journal|Out-Null
 try {

@@ -1,0 +1,1 @@
+PASS guest assembly and fixed/resident Win3.1 NE ABI; callback/provider/Windows tests remain required

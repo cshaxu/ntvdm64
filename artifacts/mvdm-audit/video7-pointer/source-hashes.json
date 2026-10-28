@@ -1,0 +1,46 @@
+[
+  {
+    "sha256": "16D82A9736638F32A5A5BD00B5AB070BB6148834C6B8EAC56D6EB5DE7F7F1504",
+    "path": "src/mvdm/softpc.new/base/video/v7_ports.c"
+  },
+  {
+    "sha256": "3BB4943473C69A70AC7CA8A56C76915314D97B608190BF9264DE39C689B84277",
+    "path": "src/mvdm/softpc.new/host/src/nt_graph.c"
+  },
+  {
+    "sha256": "86C1F96BA77D006AE9E2E831B7D4C5081818DAE651E866E9A0D14CEB6475301E",
+    "path": "src/ntvdm-exe/softpc/v7_pointer.c"
+  },
+  {
+    "sha256": "9A306E5DA74107A6CA8FCD9E348BCFA44183224F0603E35BCF3A3004CDEAE00F",
+    "path": "src/ntvdm-exe/softpc/v7_pointer.h"
+  },
+  {
+    "sha256": "86EDEBF29D540297656438BFE51F9DFD696243A567904374E7065EA416A68F98",
+    "path": "src/ntvdm-exe/softpc/v7_pointer_binding.c"
+  },
+  {
+    "sha256": "E2F445F78C1D3B9FAA217E0D65F4AF964BC853423375F12ED64D6311471A736A",
+    "path": "src/ntvdm-exe/softpc/mvdm_standalone_worker.c"
+  },
+  {
+    "sha256": "77CE54AC4759A73D44A3E52D05C4C48A44B56A758BFF5DE22B91D28E226DC900",
+    "path": "src/ntvdm-exe/win32/console_bitmap.c"
+  },
+  {
+    "sha256": "3BC241D599DFCD27FCFBB22DF6836E7199C5A415C40D470F6DE34D74758B26A8",
+    "path": "src/ntvdm-exe/win32/console_graphics.c"
+  },
+  {
+    "sha256": "5E91229A8773D2CB60329D078784E989D6499057E783A41F747512C64E593935",
+    "path": "tests/app/v7_pointer_test.c"
+  },
+  {
+    "sha256": "B6BBDA44DD01B4F6A36B51C78AFE74C32E883F60260A20DC571C15D222DE74FB",
+    "path": "tests/app/v7_graphics_test.c"
+  },
+  {
+    "sha256": "7884E96510B3A1C05222140AADABC84DC24997A5B48E209FD344C62E1E5F148C",
+    "path": "tools/build/New-T310OriginalSoftpcNinja.ps1"
+  }
+]

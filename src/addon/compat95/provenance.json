@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "role": "project-owned independently authored Win95 compatibility add-on",
+  "sourceSnapshot": "T473 S10 owner-renamed source layout; executable source bytes unchanged",
+  "externalSourceImported": true,
+  "runtimeExternalSourceImported": false,
+  "runtimeDependency": false,
+  "buildDependency": false,
+  "redistributableSources": [
+    {
+      "path": "compat95.asm",
+      "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7"
+    },
+    {
+      "path": "bootlogo.inc",
+      "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+    }
+  ],
+  "thirdPartyNotices": [
+    {
+      "path": "DS-LICENSE.txt",
+      "role": "offline logo extraction helper only",
+      "source": "JHRobotics/patcher9x pe/ds_decompress.c",
+      "revision": "b6e30d4b5a396dcd453b6c8e6733fd5b5cbce59e",
+      "license": "MIT",
+      "derivedFile": "extract-logo.py",
+      "derivedSha256": "1F2C2FEC1F2FAE9D760F7E478F46731F8B469D212D394F01596247A722307B37"
+    }
+  ],
+  "previousSourceSnapshot": {
+    "name": "owner-session stock-all-consumers",
+    "sources": [
+      {
+        "path": "compat.asm",
+        "sha256": "FDBEDC5FF2B6960ACBF0129CD0F955F8C1735FF21571C35E6856E192DC0337E9"
+      },
+      {
+        "path": "bootlogo.inc",
+        "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
+      }
+    ]
+  }
+}

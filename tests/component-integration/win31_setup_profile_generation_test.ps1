@@ -9,7 +9,7 @@ Copy-Item -LiteralPath "$repo/tools/win31-setup/SETUP.CMD" -Destination "$patch/
 Copy-Item -LiteralPath "$repo/assets/release/PIF.EXE" -Destination "$patch/PIF.EXE"
 @('@echo off','exit /b 0')|Set-Content "$bin/run16.cmd" -Encoding ascii
 $before=@{}
-foreach($name in @('WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','SYSTEM.INI')){
+foreach($name in @('WIN.COM','SYSTEM/DOSX.EXE','SYSTEM/KRNL386.EXE','SYSTEM/WIN386.EXE','SYSTEM/MOUSE.DRV','SYSTEM.INI')){
     $file=Join-Path $install $name;[IO.File]::WriteAllText($file,"fixture only: $name");$before[$file]=(Get-FileHash -LiteralPath $file).Hash
 }
 $oldPath=$env:PATH;$oldNoPause=$env:NTVDM_SETUP_TEST_NO_PAUSE
@@ -37,6 +37,11 @@ try{
     if($LASTEXITCODE -ne 5 -or !$text.Contains('Preserve changed profile')){throw 'Changed profile was not preserved'}
     foreach($name in $files){$expected=if($name -eq 'CONFIG.NT'){$custom}else{$saved[$name]};if((Get-FileHash "$profiles/$name").Hash -ne $expected){throw "Failed preparation changed $name"}}
     if(Test-Path "$profiles/W31PROFILES"){throw 'Profile staging directory remains'}
-    foreach($file in $before.Keys){if((Get-FileHash -LiteralPath $file).Hash -ne $before[$file]){throw 'Profile-only finalization modified an installed input'}}
+    foreach($file in $before.Keys){if((Get-FileHash -LiteralPath $file).Hash -ne $before[$file]){throw "Profile-only finalization modified an installed input: $file"}}
+    $unexpected = @(Get-ChildItem -LiteralPath $install -File -Recurse | Where-Object {
+        !$_.FullName.StartsWith($profiles+'\',[StringComparison]::OrdinalIgnoreCase) -and
+        !$before.ContainsKey($_.FullName)
+    })
+    if($unexpected.Count){throw "Profile-only finalization added an unexpected installed file: $($unexpected[0].FullName)"}
     'PASS Setup profile generation/repeat, legacy PIF fields, conflict preservation and unchanged installed inputs; Setup execution is a test shim'
 }finally{$env:PATH=$oldPath;$env:NTVDM_SETUP_TEST_NO_PAUSE=$oldNoPause}

@@ -1,11 +1,11 @@
 param([Parameter(Mandatory)][string]$BuildRoot)
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
-$build=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
+$build=[IO.Path]::GetFullPath($(if([IO.Path]::IsPathRooted($BuildRoot)){$BuildRoot}else{Join-Path $repo $BuildRoot}))
 if (!$build.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or
     (Test-Path -LiteralPath $build)) { throw 'Fresh build-owned output required' }
 New-Item -ItemType Directory -Path $build | Out-Null
-$source=Join-Path $repo 'src/addon/win101-mouse-drv/mouse.asm'
+$source=Join-Path $repo 'src/addon/mouse101/mouse101.asm'
 $assembler=(Get-Command nasm.exe -ErrorAction Stop).Source
 & $assembler -f bin $source -o "$build/MOUSE101.DRV" -l "$build/mouse101.lst"
 if ($LASTEXITCODE) { throw 'Mouse driver assembly failed' }

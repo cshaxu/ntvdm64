@@ -39,6 +39,7 @@ static DWORD begin_character_io(void *owner,HANDLE stop)
 }
 static BOOL worker_shadow_registry;
 static BOOL worker_ccpu_wait;
+extern void mvdm_softpc_v7_pointer_attach(void);
 
 static int mvdm_standalone_worker_cleanup(int result)
 {
@@ -100,6 +101,7 @@ DWORD mvdm_standalone_worker_begin(void)
     session_initialize(&worker_session,1u);
     worker_session_initialized=TRUE;
     mvdm_softpc_initialize_default_off_traces();
+    mvdm_softpc_v7_pointer_attach();
     if (!mvdm_softpc_ccpu_wait_begin()) {
         error=GetLastError(); goto fail;
     }

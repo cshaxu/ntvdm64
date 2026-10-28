@@ -1,0 +1,79 @@
+{
+  "role": "independent-guest-driver-build-not-runtime-pass",
+  "source": "O:\\repos.hobby\\ntvdm64\\src\\addon\\mouse31\\mouse31.asm",
+  "sourceSha256": "33B7CD881BA6412701D719765C909DCE1B8C58C9E4D3FBD3A862C5C843D8A4D1",
+  "assembler": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "assemblerVersion": "NASM version 3.01 compiled on Jun 10 2026",
+  "driverSha256": "186AD08C4E75BA528001D29C102797B05901BCD74C720334D5859EB53CF390C7",
+  "contract": {
+    "role": "read-only-NE-ABI-evidence-not-runtime-validation",
+    "driver": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\addon-renames-r7\\mouse31\\MOUSE31.DRV",
+    "sha256": "186ad08c4e75ba528001d29c102797b05901bcd74c720334d5859eb53cf390c7",
+    "neVersion": "0x30a",
+    "flags": "0x8309",
+    "automaticDataSegment": 2,
+    "segments": [
+      {
+        "number": 1,
+        "offset": 192,
+        "length": 689,
+        "flags": "0x40"
+      },
+      {
+        "number": 2,
+        "offset": 896,
+        "length": 148,
+        "flags": "0x41"
+      }
+    ],
+    "entries": [
+      {
+        "ordinal": 1,
+        "segment": 1,
+        "offset": "0x95",
+        "flags": "0x3",
+        "firstBytes": "8c d8 90 45 55 89 e5 1e 8e d8 56 57 c4 7e 06 be 10 00 b9 0e 00 fc f3 a4"
+      },
+      {
+        "ordinal": 2,
+        "segment": 1,
+        "offset": "0xe6",
+        "flags": "0x3",
+        "firstBytes": "8c d8 90 45 55 89 e5 1e 8e d8 56 57 c4 7e 06 89 3e 1e 00 8c 06 20 00 80"
+      },
+      {
+        "ordinal": 3,
+        "segment": 1,
+        "offset": "0x1cd",
+        "flags": "0x3",
+        "firstBytes": "8c d8 90 45 55 89 e5 1e 8e d8 56 57 e8 99 ff 5f 5e 8d 66 fe 1f 5d 4d ca"
+      },
+      {
+        "ordinal": 4,
+        "segment": 1,
+        "offset": "0x1e7",
+        "flags": "0x3",
+        "firstBytes": "8c d8 90 45 55 89 e5 1e 8e d8 56 57 b8 ff ff 5f 5e 8d 66 fe 1f 5d 4d ca"
+      },
+      {
+        "ordinal": 8,
+        "segment": 1,
+        "offset": "0x201",
+        "flags": "0x3",
+        "firstBytes": "8c d8 90 45 55 89 e5 1e 8e d8 56 57 e8 65 ff b8 01 00 5f 5e 8d 66 fe 1f"
+      }
+    ],
+    "imports": [],
+    "residentNames": [
+      {
+        "name": "MOUSE",
+        "ordinal": 0
+      },
+      {
+        "name": "WEP",
+        "ordinal": 8
+      }
+    ],
+    "nonresidentNames": []
+  }
+}

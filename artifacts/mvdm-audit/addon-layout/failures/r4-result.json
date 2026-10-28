@@ -1,0 +1,16 @@
+{
+  "result": "fail",
+  "started": "2026-10-28T04:36:40.5398716Z",
+  "runs": [
+    {
+      "image": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+      "pid": 24172,
+      "name": "grp-tagless",
+      "exit": 1,
+      "started": "2026-10-28T04:36:40.5818533Z",
+      "arguments": "-NoProfile -File tests/component-integration/grp_tool_test.ps1 -Grp \"O:/repos.hobby/ntvdm64/assets/release/GRP.EXE\" -FixtureRoot O:/w31 -BuildRoot \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-renames-r4/tagless\""
+    }
+  ],
+  "error": "grp-tagless returned 1",
+  "finished": "2026-10-28T04:36:45.9852816Z"
+}

@@ -1,0 +1,36 @@
+Windows 1.01 patch preparation
+
+Target Windows 1.01 installation-media directory: Replace: SETUP.CMD => O:\repos.hobby\ntvdm64\build\w101ar7\m\PATCH
+Replace: SETVER.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\m\PATCH
+Replace: PIF.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\m\PATCH
+Replace: HASH.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\m\PATCH
+
+Patch preparation exit code: 0
+Press any key to continue . . .
+
+Windows 1.01 patch recovery
+
+Target prepared Windows 1.01 installation-media directory: Missing prepared media file: MOUSE.DRV.BAK
+
+Patch recovery exit code: 2
+Press any key to continue . . .
+
+Windows 1.01 patch preparation
+
+Target Windows 1.01 installation-media directory: Replace: MOUSE.DRV => O:\repos.hobby\ntvdm64\build\w101ar7\f
+New: SETUP.CMD => O:\repos.hobby\ntvdm64\build\w101ar7\f\PATCH
+New: SETVER.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\f\PATCH
+New: PIF.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\f\PATCH
+New: HASH.EXE => O:\repos.hobby\ntvdm64\build\w101ar7\f\PATCH
+
+Patch preparation exit code: 0
+Press any key to continue . . .
+
+Windows 1.01 patch preparation
+
+Target Windows 1.01 installation-media directory: Existing MOUSE.DRV.BAK does not match an already-applied replacement.
+
+Patch preparation exit code: 5
+Press any key to continue . . .
+
+PASS Win1.01 APPLY/UNAPPLY/SETUP CMD orchestration, generated profile, recovery, and cleanup
