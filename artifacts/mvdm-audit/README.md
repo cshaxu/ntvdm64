@@ -152,6 +152,12 @@ guest witness; current-release comparison has not yet been run.
 The [selected WOW function inventory](cross-369/wow-selected-function-coverage.md)
 separates bounded print and generic-thunk witnesses from three
 [still-pending execution routes](cross-369/wow-three-pending-execution-recheck.md).
+The [classification scope correction](classification-scope-correction-verification.json)
+reopens 241 overall decisions where the retained evidence established only a
+host-input role or guest-image identity. Scoped evidence remains available;
+the remaining historical decisions still require the same quality audit.
+The [live mirror check](live-mirror-disposition-observations.json) compares
+current source bytes to frozen original hashes; it is not functional proof.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

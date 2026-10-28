@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1034,
-    "excluded": 2822,
-    "partial": 775,
+    "pending": 1275,
+    "excluded": 2590,
+    "partial": 766,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Two original WOW bodies have bounded execution evidence; remaining functionality is open."
+  "note": "Overall file decisions reopened where evidence only established a scoped host role or image identity; original evidence is retained."
 }

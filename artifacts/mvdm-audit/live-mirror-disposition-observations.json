@@ -1,0 +1,1051 @@
+{
+  "counts": {
+    "partial": 207
+  },
+  "differences": [
+    {
+      "path": "dos/command/cmd.c",
+      "status": "partial",
+      "current_sha256": "7BA0E9FE6D25F04419F931DE2AA6D51C3A4FEFB4699CDC35BC6412CCF2602807"
+    },
+    {
+      "path": "dos/command/cmd.h",
+      "status": "partial",
+      "current_sha256": "02BBCFD31B8CD35F78CA39E5F00F8B6A345C03113162B48F779618FA97F383F2"
+    },
+    {
+      "path": "dos/command/cmdconf.c",
+      "status": "partial",
+      "current_sha256": "0AA24B4C49C7A87F556C1DD738638555E8D2253D565B05EFFA0A87BE8AFA29E7"
+    },
+    {
+      "path": "dos/command/cmddata.c",
+      "status": "partial",
+      "current_sha256": "5CBC229764ACEB417000A7FBCE75A016CFCCCC2546EEA726670CD008A50A2E37"
+    },
+    {
+      "path": "dos/command/cmdenv.c",
+      "status": "partial",
+      "current_sha256": "4508C02A54C0CD3F6E3BC5FCCC9A462C1C4B59F737805C582A722BC49CCB8198"
+    },
+    {
+      "path": "dos/command/cmdexec.c",
+      "status": "partial",
+      "current_sha256": "5ECE239B87A9046AFF6B62AC44EC1FA2A35753E8DCB87C179571AF52B8B85ABE"
+    },
+    {
+      "path": "dos/command/cmdkeyb.c",
+      "status": "partial",
+      "current_sha256": "C3F318FD75DF9302A782594A5777CF60F401FF1E6997A118AE3D9299705CDD6C"
+    },
+    {
+      "path": "dos/command/cmdmisc.c",
+      "status": "partial",
+      "current_sha256": "9659C54A7151EA69428DBE56AB8902723F6BD1FCE46EFD377850711B0F7D6D4B"
+    },
+    {
+      "path": "dos/command/cmdpif.c",
+      "status": "partial",
+      "current_sha256": "2228973DBE7DB1900B234C2FE84BE90ACF446F4A4911AB98099CA4A92DC4D6F6"
+    },
+    {
+      "path": "dos/command/cmdredir.c",
+      "status": "partial",
+      "current_sha256": "C583C3872A532DF9F679EE35012624A636CC3D345CD0C07C7700C3966D065FE3"
+    },
+    {
+      "path": "dos/dem/dem.c",
+      "status": "partial",
+      "current_sha256": "C808AC6C148C8000F2115F6298270316AE86E29E384678031657025B7AC2AA42"
+    },
+    {
+      "path": "dos/dem/dem.h",
+      "status": "partial",
+      "current_sha256": "35CC550D9AB9A17211D7776874F951CF19AC339F8B91F0E68460BF32810566B5"
+    },
+    {
+      "path": "dos/dem/demdasd.h",
+      "status": "partial",
+      "current_sha256": "721DED4EE0B5F110CC2C46902C67D2879048EA2C73C8DABFF0788964D4831C99"
+    },
+    {
+      "path": "dos/dem/demdata.c",
+      "status": "partial",
+      "current_sha256": "D683F95923E4D5C9F31F5B1297910408B0EBA68A1AC592D0CD9F54D364563C3C"
+    },
+    {
+      "path": "dos/dem/demdisp.c",
+      "status": "partial",
+      "current_sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+    },
+    {
+      "path": "dos/dem/demfcb.c",
+      "status": "partial",
+      "current_sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155"
+    },
+    {
+      "path": "dos/dem/demfile.c",
+      "status": "partial",
+      "current_sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20"
+    },
+    {
+      "path": "dos/dem/demgset.c",
+      "status": "partial",
+      "current_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D"
+    },
+    {
+      "path": "dos/dem/demhndl.c",
+      "status": "partial",
+      "current_sha256": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE"
+    },
+    {
+      "path": "dos/dem/demmisc.c",
+      "status": "partial",
+      "current_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994"
+    },
+    {
+      "path": "dos/dem/demsrch.c",
+      "status": "partial",
+      "current_sha256": "8AB053F632861DC37A748EDAB449D4E8D411145D27BD10D326EE7815E61F289D"
+    },
+    {
+      "path": "dos/v86/cmd/command/init.asm",
+      "status": "partial",
+      "current_sha256": "D5A4C9A46C8E6D3A4C28CF525DB6524279602957C95690AE2FC511F367DF92F6"
+    },
+    {
+      "path": "dos/v86/cmd/command/rdata.asm",
+      "status": "partial",
+      "current_sha256": "FE8798D9765C1DF48121DE66840452F699B2EE55FA1923068BCCFA15520057AF"
+    },
+    {
+      "path": "dos/v86/cmd/command/stub.asm",
+      "status": "partial",
+      "current_sha256": "8A6146E1FC68D7899776F03093860CFB0F323DCCE3A26AAF6E25FF7D396513DF"
+    },
+    {
+      "path": "dpmi32/data.c",
+      "status": "partial",
+      "current_sha256": "EA43687AB305E3F5449E180E97AE7568FB3793E4DB1DE759374DA013E6B44D43"
+    },
+    {
+      "path": "dpmi32/dpmi32.c",
+      "status": "partial",
+      "current_sha256": "E93E77A96E904D27E70C5817D915865D17D7F777C34F1FA3D7B6F223A8E6FD0D"
+    },
+    {
+      "path": "dpmi32/dpmi32p.h",
+      "status": "partial",
+      "current_sha256": "152529FAD6533BED8E1588D6AAB43651A9E391A8E53695EAE60C33B91CF1E7B1"
+    },
+    {
+      "path": "dpmi32/dpmidata.h",
+      "status": "partial",
+      "current_sha256": "36620DC5659FD996C27E7A4064597F4F200DB1ABDDD1649462041174C9CDF0CE"
+    },
+    {
+      "path": "dpmi32/dpmiint.c",
+      "status": "partial",
+      "current_sha256": "F7FF2FC0686C67D3AD767A2D6CA91CCD45A1DD1381C902F4B7D27726AA74B94C"
+    },
+    {
+      "path": "dpmi32/dpmiint.h",
+      "status": "partial",
+      "current_sha256": "0180F1245BAB378559E7810BC2A1BBC742BAFC8A721BA4DB49DDCD66935844C3"
+    },
+    {
+      "path": "dpmi32/dpmimemr.c",
+      "status": "partial",
+      "current_sha256": "A4C4801F915E8CD2FBFC7C7F54EBE412F4EEA5367ECDACBC5C8130B6D9874B1A"
+    },
+    {
+      "path": "dpmi32/dpmimscr.c",
+      "status": "partial",
+      "current_sha256": "19119D532486F2FA6D19129BFDE7EE703F63BDD101953F8DCB6112B8210FE035"
+    },
+    {
+      "path": "dpmi32/dpmiselr.c",
+      "status": "partial",
+      "current_sha256": "DB5522D1B5387FC84C8AAE3F6490620C3F7AFA5016DE748D15C7BF17DD7155CA"
+    },
+    {
+      "path": "dpmi32/i386/dpmi386.c",
+      "status": "partial",
+      "current_sha256": "B66A8E333D2944E6B140947AE97FC5EAF7432F1C46AE0830759BADF36FF86103"
+    },
+    {
+      "path": "dpmi32/int21map.c",
+      "status": "partial",
+      "current_sha256": "8331CFA53F23246F9738B9C75624B070E0C3F3A7D89564807B0C6D1519C64792"
+    },
+    {
+      "path": "dpmi32/modesw.c",
+      "status": "partial",
+      "current_sha256": "9D19900E7F87ED5C96A6682F825AA1839D3C3313364F6089D3B057D87E0019DE"
+    },
+    {
+      "path": "dpmi32/vxd.c",
+      "status": "partial",
+      "current_sha256": "240AF56E0A6644E1E4465BE781858FB7BBBE581AD062B7B62ED0BCA7F3436C22"
+    },
+    {
+      "path": "dpmi32/xlathlp.h",
+      "status": "partial",
+      "current_sha256": "9BA5FCE186BBBA1D55E3C68710C22E24F2726734F4129388E941311D27CF9D3F"
+    },
+    {
+      "path": "dpmi32/xmem.c",
+      "status": "partial",
+      "current_sha256": "FC05182AA46C78DEE2A963D5D10A83DEB8B34D84114725D6F0D5D334B0FA29B0"
+    },
+    {
+      "path": "inc/dbgexp.h",
+      "status": "partial",
+      "current_sha256": "0C9633AF33B60909993B967971466C9207DBC7DA3637DEE28639D066F43792EC"
+    },
+    {
+      "path": "inc/demexp.h",
+      "status": "partial",
+      "current_sha256": "91DA9C6F6DE3B84C672F8CACE6C83B2F74E70F0132D46E040C566127DEC2141D"
+    },
+    {
+      "path": "inc/memapi.h",
+      "status": "partial",
+      "current_sha256": "CD8404712FB3293F612BE38DE095E66D7A5B99CB265EE86AD0FC2015FE38439B"
+    },
+    {
+      "path": "inc/mvdm.h",
+      "status": "partial",
+      "current_sha256": "FC3399509AAC4097E6753BC19C527149E594DB4420A832596BE1905C7655C02E"
+    },
+    {
+      "path": "inc/softpc.h",
+      "status": "partial",
+      "current_sha256": "04DAD85BEA7E01954C337FE3A3DC700E8BD7407B60F01EB2393F6055A2BDF8F3"
+    },
+    {
+      "path": "inc/suballoc.h",
+      "status": "partial",
+      "current_sha256": "0F9D3A85F6E6E5A20ADCD71B7F98F2A7DBFD64EE4FCF086B3781037E20A63421"
+    },
+    {
+      "path": "inc/vdmtib.h",
+      "status": "partial",
+      "current_sha256": "A44101B1C5DC7E46EFF3FE77A30F880DD6AE164F419FF5661F8627F35AFECF90"
+    },
+    {
+      "path": "inc/vrnmpipe.h",
+      "status": "partial",
+      "current_sha256": "93C2BBD9504FFCC91E56A59262D2F5D32AA2AD7969715D307DEFBCC9BCE2AB0E"
+    },
+    {
+      "path": "inc/wowmmcb.h",
+      "status": "partial",
+      "current_sha256": "792D12C29A5913EE4DD9D46F3173F4E7AC8F1CD88CFA91272268BD8BCAFB8E8C"
+    },
+    {
+      "path": "oemuni/file.c",
+      "status": "partial",
+      "current_sha256": "83CDB96808AD79DF98C608BE95CDD16F7229B2E4946B86E6A473EDAE8F2407CE"
+    },
+    {
+      "path": "oemuni/process.c",
+      "status": "partial",
+      "current_sha256": "FCF8695132E69E1612C08114A52938529131B951673291CC9C4CCEFF82C862B1"
+    },
+    {
+      "path": "softpc.new/base/bios/equipmnt.c",
+      "status": "partial",
+      "current_sha256": "EAEF4EE7DF21B03A9FD9C2D0A179C18E6AC7D0EDA17911866DD7D044261E54E6"
+    },
+    {
+      "path": "softpc.new/base/bios/reset.c",
+      "status": "partial",
+      "current_sha256": "EDE3217E7C3830601A7F95D557DA9011A15250902F8C468241C738B605055D3B"
+    },
+    {
+      "path": "softpc.new/base/bios/tape_io.c",
+      "status": "partial",
+      "current_sha256": "9073B54069F74950CB4B14D2B01E7AEAC0EDD2A482930AEF5DE6ABFF5CFCD5F3"
+    },
+    {
+      "path": "softpc.new/base/bios/virtual.c",
+      "status": "partial",
+      "current_sha256": "2B5BEBDDE07783D3A4B0AC01AE35159F0AD3EA589FD35260AD86E0837C627174"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_bsic.h",
+      "status": "partial",
+      "current_sha256": "9F95D903CB5E3CE7F7361E9223D8A204A37332821AB54A6FB313F715E61A545A"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_debug.c",
+      "status": "partial",
+      "current_sha256": "4E39100587D5D94ED39321BBA8335F4DB6B82CA8DCAD477A4B6F011CEC778A3C"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_debug.h",
+      "status": "partial",
+      "current_sha256": "A3C422F0CEE7A0B50E54A7EE3A02B5624E506CD7D29EB6E9E367033E6E5D4E7D"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_main.c",
+      "status": "partial",
+      "current_sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_page.c",
+      "status": "partial",
+      "current_sha256": "466CA443C7CF3B32808F28D2EBD0090EE616D768FE272699D05D02A6BF5BC09D"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_reg.c",
+      "status": "partial",
+      "current_sha256": "D9BBC34913D015C386C354967D82F31ED53D87487EBFC183684EEE338FD4C150"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_seg.c",
+      "status": "partial",
+      "current_sha256": "8C3DDB4448BEC21E62AC16EF933971375DC9FF388494083CF41E37D44712FB21"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_tsksw.c",
+      "status": "partial",
+      "current_sha256": "CFC9AC858DB9BFED7C9E2DE1B26FFB04728FA545A373C980FB1A79FA62541F2F"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_xcptn.c",
+      "status": "partial",
+      "current_sha256": "733B53659DFF179EF61FA1B5EF7D0D1269BC3CC217319EFBBA9A38EB98242F15"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_xfer.c",
+      "status": "partial",
+      "current_sha256": "20701465C5DB30FB728EB9FFE6258D3A96B88A9067CD974C128B3585964D8FD2"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/c_xtrn.c",
+      "status": "partial",
+      "current_sha256": "5A4B0F0F7C7B7699BA1DD31BB461854DB7169ECEF13B765F99EC18DA15ACA4BE"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/call.c",
+      "status": "partial",
+      "current_sha256": "EA0E61F2EB649A8C4109611091DB3CF5D98E0600A425B31784591E9316AE2B0C"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ccpusas4.c",
+      "status": "partial",
+      "current_sha256": "4A209094D48DE6003255367352E17518D98233CF72829D18DEA268DC608B996B"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cpu4gen.h",
+      "status": "partial",
+      "current_sha256": "FDD8A8FAAF2AD5B95EB7B93DA3701E2D3CA5767742EB6FA201639FB2E229F6C9"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/fpu.c",
+      "status": "partial",
+      "current_sha256": "70FF522A4F2E079C9BDC1804FAAFDF804B109DC3C55D77F9C9BEEDD19CECEDEB"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/iret.c",
+      "status": "partial",
+      "current_sha256": "C9E2E694604D71064AE87351B9E23C76B0E0835A274E600B3D98B2818D5160B3"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lmsw.c",
+      "status": "partial",
+      "current_sha256": "1B802987E70E5074EA5D777F76BCF5C12A41290D58D172173D44005EB5D2B8BC"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/localfm.c",
+      "status": "partial",
+      "current_sha256": "746FBFFDD7C678F46A4F87FEA72F80A7F3B80CF442F7FB6009280090CA10E0CE"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ntthread.c",
+      "status": "partial",
+      "current_sha256": "DCAE84898221AE9AAAEA99688874752B1FB56ED6E13BEB420A8177211E648747"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ntthread.h",
+      "status": "partial",
+      "current_sha256": "CE275BBA258868706593990D9000BFD9E9219FAF846C9E92D647501CC1C3890E"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/popf.c",
+      "status": "partial",
+      "current_sha256": "C1CA0F0273BB6B41051CD25C4AC39A85E1967D6B0DB9EF8ECE246C71F0294F72"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/ret.c",
+      "status": "partial",
+      "current_sha256": "62AA2EFE949FFC7AFCFC1DFF6B5EF96D749B06B4DB362122CEA861822D179DF1"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sascdef.c",
+      "status": "partial",
+      "current_sha256": "0EC6AFC6E8FC2086639044D1ADB3460EDFE36B265C6B0CBFEB89391901870BE9"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/zfrsrvd.c",
+      "status": "partial",
+      "current_sha256": "1CDAA787DB8DC62D01DD37347B528C7E5EC515BACBEBEAA9F89DA5E5302D5E88"
+    },
+    {
+      "path": "softpc.new/base/comms/printer_.c",
+      "status": "partial",
+      "current_sha256": "83023196CCECB265DC85284AF2B019532FCC95B4D203DDF31E62754A48FF8C33"
+    },
+    {
+      "path": "softpc.new/base/comms/rs232_io.c",
+      "status": "partial",
+      "current_sha256": "A3FA318CE5167BDBE15BF12A97BF6FB4362D63D812F4E1907A24F34738063EF3"
+    },
+    {
+      "path": "softpc.new/base/cvidc/ev_glue.c",
+      "status": "partial",
+      "current_sha256": "7849FA7719B5A46FCAA4548F180589AF29CF84ECF24AF4E3D59FA7FCD58F7AFE"
+    },
+    {
+      "path": "softpc.new/base/cvidc/evidfunc.h",
+      "status": "partial",
+      "current_sha256": "0EBA6E84CC56F22B5A2EAE75DF0B779E798E69E1BCA6DB5B6F21ABDBAB7AB083"
+    },
+    {
+      "path": "softpc.new/base/cvidc/evidgen.h",
+      "status": "partial",
+      "current_sha256": "18CB85AE563AAC444429E489F43EDCB58CDFAC3939D63C6F19A676BC5246E9A6"
+    },
+    {
+      "path": "softpc.new/base/cvidc/j_c_lang.c",
+      "status": "partial",
+      "current_sha256": "5B04A76BEE2942A71950AA4CA845EA9311116FC088E3169E9A2B0AD406EE237E"
+    },
+    {
+      "path": "softpc.new/base/cvidc/j_c_lang.h",
+      "status": "partial",
+      "current_sha256": "55DF471AFE9F7C0A8CF83AAE0476A1277AA44AC3AB5EFACB658D4F597569A18A"
+    },
+    {
+      "path": "softpc.new/base/dos/emm_mngr.c",
+      "status": "partial",
+      "current_sha256": "A7703FE73F811EAD70EDE8EDFEACCD45DB79CE747CF3D67CD9BEE4638FB81901"
+    },
+    {
+      "path": "softpc.new/base/inc/ckmalloc.h",
+      "status": "partial",
+      "current_sha256": "170E715F61A5333FF0D3D55B52518303C56CA7F5C1A773898970EB561E94F461"
+    },
+    {
+      "path": "softpc.new/base/inc/cpu_vid.h",
+      "status": "partial",
+      "current_sha256": "A95964596457376831D7AFA09BC4E95B8545EB17E676175197E58AE48D500D0C"
+    },
+    {
+      "path": "softpc.new/base/inc/egacpu.h",
+      "status": "partial",
+      "current_sha256": "F0957A9BFB0C7E047A9C24FD688644E2203758102DDAF0BB4722158A99797E2D"
+    },
+    {
+      "path": "softpc.new/base/inc/gfx_upd.h",
+      "status": "partial",
+      "current_sha256": "F8BA4D0CA029482583AEAF06BF51FE2481DF2C0AB9AC6D5F2F8CA5EC165F72D2"
+    },
+    {
+      "path": "softpc.new/base/inc/gmi.h",
+      "status": "partial",
+      "current_sha256": "9EDED1CD3AAD99A03283EF78C1C1CABF4D4C817BD15F256FF2FCE8AB852A667E"
+    },
+    {
+      "path": "softpc.new/base/inc/host.h",
+      "status": "partial",
+      "current_sha256": "22C1B555E429F3DF096B2D18AA6AB66FE9B42495B9F16D307639095ED239CB14"
+    },
+    {
+      "path": "softpc.new/base/inc/ica.h",
+      "status": "partial",
+      "current_sha256": "3F1B786A921D818A95525FD1B2CF4473B86A7944F4BF0ECBE5325EC928898FB2"
+    },
+    {
+      "path": "softpc.new/base/inc/sas.h",
+      "status": "partial",
+      "current_sha256": "937F340563000566CA7504591CB0DD1F416CAA661A0BA206095588F783B40CBE"
+    },
+    {
+      "path": "softpc.new/base/inc/timeval.h",
+      "status": "partial",
+      "current_sha256": "D3E9D4D135121B7F39A100CE06A18DBEB763A9B22E91F668DB855BC17BDD196F"
+    },
+    {
+      "path": "softpc.new/base/keymouse/keyba.c",
+      "status": "partial",
+      "current_sha256": "28A77176BAAB32235879E52EE54D01223905B7C899A3365F6E0720D899683463"
+    },
+    {
+      "path": "softpc.new/base/keymouse/keybd_io.c",
+      "status": "partial",
+      "current_sha256": "F5992EF1FF275D53C689D97D8263AFADB5993954901810D8DF48E0E6590262C1"
+    },
+    {
+      "path": "softpc.new/base/keymouse/mouse_io.c",
+      "status": "partial",
+      "current_sha256": "520A8B6939DFE2CF3FDA8AD30AF623E42D795BB470654A7E14B672BD8030533C"
+    },
+    {
+      "path": "softpc.new/base/support/main.c",
+      "status": "partial",
+      "current_sha256": "AB36BF5A4261967F3C4CF0AE8D4BC113F237B8FF25123C07701439C46688A462"
+    },
+    {
+      "path": "softpc.new/base/support/terminat.c",
+      "status": "partial",
+      "current_sha256": "B310AAEB2EEC726C80B83211587DB82B04D32E92FAD885DD5DBEA10B4C1F801D"
+    },
+    {
+      "path": "softpc.new/base/support/xt.c",
+      "status": "partial",
+      "current_sha256": "9DDFA47E01FE9C0F3BE1F2D9A8FF387F97FD34DC72B4B90941B4AD180AA0279B"
+    },
+    {
+      "path": "softpc.new/base/system/ica.c",
+      "status": "partial",
+      "current_sha256": "A2C983FEEDAF8E121D0F47A1EC12C019EB826F3B8AC75655C882D6B4B1C429EA"
+    },
+    {
+      "path": "softpc.new/base/system/idetect.c",
+      "status": "partial",
+      "current_sha256": "E0D575A2FF8F64E9D07E1C8AC06D9B4CBEEE4A35986271B4D94854136A6FD137"
+    },
+    {
+      "path": "softpc.new/base/system/illegalp.c",
+      "status": "partial",
+      "current_sha256": "C3214520B0944064CF396D3E22814836A8DC193B0F6594EFAFA627D7C038FF94"
+    },
+    {
+      "path": "softpc.new/base/system/rom.c",
+      "status": "partial",
+      "current_sha256": "82A19620DE7F793D52C6842FF1B58CD1E4827207D11561895C3E03ED44A24D5C"
+    },
+    {
+      "path": "softpc.new/base/video/cga.c",
+      "status": "partial",
+      "current_sha256": "A982709CD035C7238D493498B60D902DA8016B249F4D8F26F53D355ECE1D6D0B"
+    },
+    {
+      "path": "softpc.new/base/video/ega_prts.c",
+      "status": "partial",
+      "current_sha256": "E1629BA6DD5D465B8877175C9B3BB611A10627D8ACEF44E86AA5EA0BC399FF65"
+    },
+    {
+      "path": "softpc.new/base/video/ega_read.c",
+      "status": "partial",
+      "current_sha256": "5AEE033F046EC9E992C42AAF86B1C85F70FB4F71571566F80965711022524A96"
+    },
+    {
+      "path": "softpc.new/base/video/ega_vide.c",
+      "status": "partial",
+      "current_sha256": "EC8A47408D0A29455381E809D56586C3789969040A0D47FEE304CFE3E05F51E5"
+    },
+    {
+      "path": "softpc.new/base/video/ega_writ.c",
+      "status": "partial",
+      "current_sha256": "566BB0172289210EE399BF5108D84B7BB062BD90C5CB7CBAFA8925BD1B939FCF"
+    },
+    {
+      "path": "softpc.new/base/video/egawrtm0.c",
+      "status": "partial",
+      "current_sha256": "EFF81ECE0B8B6C599D2D69DD36241DECB9591A2E38F7CB5CECA99FD73650C3DB"
+    },
+    {
+      "path": "softpc.new/base/video/egwrtm12.c",
+      "status": "partial",
+      "current_sha256": "65C7618E23B74DAAE9094E2131A3811945971F8C59EB765A7BA41D24A3C5B98A"
+    },
+    {
+      "path": "softpc.new/base/video/gfx_updt.c",
+      "status": "partial",
+      "current_sha256": "DEBADB93A46284818E8197DA00F9B5ED19B8FAD16E9FBA2EC507BF79FBB5C959"
+    },
+    {
+      "path": "softpc.new/base/video/v7_ports.c",
+      "status": "partial",
+      "current_sha256": "16D82A9736638F32A5A5BD00B5AB070BB6148834C6B8EAC56D6EB5DE7F7F1504"
+    },
+    {
+      "path": "softpc.new/base/video/v7_video.c",
+      "status": "partial",
+      "current_sha256": "E79048230DE980EE7F5DFCE418EC396A14517C06D705959825B63D55D5ACD058"
+    },
+    {
+      "path": "softpc.new/base/video/vga_mode.c",
+      "status": "partial",
+      "current_sha256": "E4237ED746FBFFBF1F1CBA86212D52BB352AE84BEB411FA600A492501A7BF01A"
+    },
+    {
+      "path": "softpc.new/base/video/vga_prts.c",
+      "status": "partial",
+      "current_sha256": "2B0A7D689D9B69B0A688032D44788DDAC5C4A027B754E2C2DA6B70C418A51ECF"
+    },
+    {
+      "path": "softpc.new/base/video/video.c",
+      "status": "partial",
+      "current_sha256": "D10D5F937BF49A3D383D5B618B3285E848F96760D88A116F77A1DA75E4952FF0"
+    },
+    {
+      "path": "softpc.new/host/inc/cfpu_def.h",
+      "status": "partial",
+      "current_sha256": "7D4E3BE111C8D66AF271EDFCA1866B44F16D0836C4E26B108074E1E58457FF12"
+    },
+    {
+      "path": "softpc.new/host/inc/host_cpu.h",
+      "status": "partial",
+      "current_sha256": "BE78638EAF1EC8084B4F6E5776DEA294EB4D579F6A3592986FCB6A088346EBB7"
+    },
+    {
+      "path": "softpc.new/host/inc/host_def.h",
+      "status": "partial",
+      "current_sha256": "881ABE6E5E1A5CE490542DE98B870E9DCDCF72AE7E3E836B6A6B2B73560EB063"
+    },
+    {
+      "path": "softpc.new/host/inc/insignia.h",
+      "status": "partial",
+      "current_sha256": "16008682AF1A1770658FA6C70797E7B92BBD041E44D23B8759B05F71A91564EB"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_event.h",
+      "status": "partial",
+      "current_sha256": "E09A090CB6127DECAC1603BBF16DB5C274097F9556E3CED076AAB34122B319B6"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_fdisk.h",
+      "status": "partial",
+      "current_sha256": "B846AFEDCB0B139A0DD55BBDA98B9D8DAF66FA85E54AFDC36A58A8BEEFBD8A6F"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_inthk.h",
+      "status": "partial",
+      "current_sha256": "73C737CC70121D7B76F09CE8F5C85C14144F864A8D78393F6E0D7B15B80FE4E5"
+    },
+    {
+      "path": "softpc.new/host/src/config.c",
+      "status": "partial",
+      "current_sha256": "B876FE8DA0BA1A2FBB995D069D7989A07D5825938574079A957C04D8C0B70D27"
+    },
+    {
+      "path": "softpc.new/host/src/copy_fnc.c",
+      "status": "partial",
+      "current_sha256": "DF1648827C9BCF847494C00DAB526821BDD52EA451AB7440CFBD4E9543C60555"
+    },
+    {
+      "path": "softpc.new/host/src/nt_aorc.c",
+      "status": "partial",
+      "current_sha256": "D85686B8288A8D6646ED1205483EEFF2AC77E345BB4207DF91221D67F68F300A"
+    },
+    {
+      "path": "softpc.new/host/src/nt_bop.c",
+      "status": "partial",
+      "current_sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    {
+      "path": "softpc.new/host/src/nt_com.c",
+      "status": "partial",
+      "current_sha256": "3DD6E95BE2B9A14B1D7659F192673673B719B53D21C2D6FD42F26BD8485D5245"
+    },
+    {
+      "path": "softpc.new/host/src/nt_cprgs.c",
+      "status": "partial",
+      "current_sha256": "A82488C882B041083FEDECB16BED7589AA0CCD03B5FFAF00CAAC5C041F0B3B83"
+    },
+    {
+      "path": "softpc.new/host/src/nt_cpu.c",
+      "status": "partial",
+      "current_sha256": "531E6C5225C45A17E04890C7B04715CA7F05F8B518B511348CE48E6C6C796496"
+    },
+    {
+      "path": "softpc.new/host/src/nt_emm.c",
+      "status": "partial",
+      "current_sha256": "ED9E716D8D981D8A1174696B014C1DB36504ECC30A617A02C97E5214C1E25839"
+    },
+    {
+      "path": "softpc.new/host/src/nt_eoi.c",
+      "status": "partial",
+      "current_sha256": "41C30FEF0E3514E5AFA25778773048F1CD10855BE9BC52028CF16B35045E1DFE"
+    },
+    {
+      "path": "softpc.new/host/src/nt_error.c",
+      "status": "partial",
+      "current_sha256": "09E1F4D221DB21E04A32096380C4E48EDEC23863943A068DA7118B1E542D6957"
+    },
+    {
+      "path": "softpc.new/host/src/nt_event.c",
+      "status": "partial",
+      "current_sha256": "FC319D06BC44C6DC0AD645F661C3763E67835114040898AE9ED0EADEE746D75D"
+    },
+    {
+      "path": "softpc.new/host/src/nt_fdisk.c",
+      "status": "partial",
+      "current_sha256": "691EF629BB953A15F8C5A3BDFEE2D492BBCC534D14303FB03BF1CA988A79F4A7"
+    },
+    {
+      "path": "softpc.new/host/src/nt_fulsc.c",
+      "status": "partial",
+      "current_sha256": "F795E29A8C6E21E6221C5A2D3BDA1ED23914F28091F794EF2602C66B95292149"
+    },
+    {
+      "path": "softpc.new/host/src/nt_graph.c",
+      "status": "partial",
+      "current_sha256": "3BB4943473C69A70AC7CA8A56C76915314D97B608190BF9264DE39C689B84277"
+    },
+    {
+      "path": "softpc.new/host/src/nt_hosts.c",
+      "status": "partial",
+      "current_sha256": "86D35DEA880856074CE1C205B9EB1F0AB1DA0664CEC3A5422221A99CC3DF5034"
+    },
+    {
+      "path": "softpc.new/host/src/nt_inthk.c",
+      "status": "partial",
+      "current_sha256": "7703E3D7994220DA8AA5FF4555807F5B38BBB1A0CAB34795F0D7191E371F179B"
+    },
+    {
+      "path": "softpc.new/host/src/nt_lpt.c",
+      "status": "partial",
+      "current_sha256": "C2C77BCD2A9151BFAB0DADD3CCD3A30259DD79C904AA2E3D02BC66AE7E500449"
+    },
+    {
+      "path": "softpc.new/host/src/nt_mem.c",
+      "status": "partial",
+      "current_sha256": "6ABEA408AEF77B1B45C87065F14D56FF046D87C0B52CBFA2534011DB0270D1B1"
+    },
+    {
+      "path": "softpc.new/host/src/nt_mouse.c",
+      "status": "partial",
+      "current_sha256": "62492FCA31945777C67385BED503829A5A740BEA99877E1938B74848EA549CB8"
+    },
+    {
+      "path": "softpc.new/host/src/nt_msscs.c",
+      "status": "partial",
+      "current_sha256": "FFD1901B69DE9BD8D433B7480D60B505B634CC17DBADFAF25AE1E6B06FF625A4"
+    },
+    {
+      "path": "softpc.new/host/src/nt_pif.c",
+      "status": "partial",
+      "current_sha256": "0A7933AAF0FA43D1865419781C6AD6DDD908B3D0A09B5DFCEAD66217A7FB78D8"
+    },
+    {
+      "path": "softpc.new/host/src/nt_reset.c",
+      "status": "partial",
+      "current_sha256": "857F1EC8DC743CFC77BBE6BCF3ACC1FC271950B6F86CA8D81E65B3B68DCE5739"
+    },
+    {
+      "path": "softpc.new/host/src/nt_rez.c",
+      "status": "partial",
+      "current_sha256": "F7E4DB5E30D10E982F063D177D50A6F9C88D7FD8D96203C43FB73FFAE4492012"
+    },
+    {
+      "path": "softpc.new/host/src/nt_rflop.c",
+      "status": "partial",
+      "current_sha256": "D8E469A3AC2F35EB0205894F9C9F44404B6F3C797A295AB68281E54C009B53FA"
+    },
+    {
+      "path": "softpc.new/host/src/nt_sound.c",
+      "status": "partial",
+      "current_sha256": "4A4630377BC18A1AE11DA6B87D46609C6D632A4CA0A55AC673B9DC546084867A"
+    },
+    {
+      "path": "softpc.new/host/src/nt_thred.c",
+      "status": "partial",
+      "current_sha256": "5ADC1D3B6C19B9C03437C31ADE04D42F7D9FE5292089888C7FF7F8A34D6A01BA"
+    },
+    {
+      "path": "softpc.new/host/src/nt_timer.c",
+      "status": "partial",
+      "current_sha256": "5E0F4F2763C745FF2947E34D6CE713CBFB17579314DD61F4CA247C99FED1D03B"
+    },
+    {
+      "path": "softpc.new/host/src/nt_unix.c",
+      "status": "partial",
+      "current_sha256": "E1B4609F5D860AF505FA763F29CD1F300D6BED4E54B8D9103EC4C56B3EA3E3A3"
+    },
+    {
+      "path": "softpc.new/host/src/nt_vga.c",
+      "status": "partial",
+      "current_sha256": "CCB324645A0C90922C837FC9C33207A765F38A2EF97ADD00D343F10593231E2F"
+    },
+    {
+      "path": "softpc.new/host/src/sim32.c",
+      "status": "partial",
+      "current_sha256": "A412788912D241593D74753C6DB23ECBB528E0DDC2F5DFD9D5C44B376B7AB0A4"
+    },
+    {
+      "path": "softpc.new/host/src/stubs.c",
+      "status": "partial",
+      "current_sha256": "2DAA1907B69BE6D7ED5A97A17F1D5A85DC285FFA17846BE91EC67D4742BD1938"
+    },
+    {
+      "path": "softpc.new/obj.vdm/ntvdm.c",
+      "status": "partial",
+      "current_sha256": "5F915B30D181A318B3D98C01CCEBEECE4F700300D1879EF6554EB274FB2068C0"
+    },
+    {
+      "path": "softpc.new/obj.vdm/sources",
+      "status": "partial",
+      "current_sha256": "65432974D9240A6A6258BF7391A77E7EE6924C9543EDC551D20C1914C013B2DF"
+    },
+    {
+      "path": "vdmredir/vrnetapi.c",
+      "status": "partial",
+      "current_sha256": "8DB46C3C95773834F8472F97C7CEB09D5ED47444F3CA4B74410FA993CB1EB9D9"
+    },
+    {
+      "path": "vdmredir/vrnmpipe.c",
+      "status": "partial",
+      "current_sha256": "6AD86BD579F615AD519CE1DC2DA4D8D771DD8C26BEBD475638631FD39BD48997"
+    },
+    {
+      "path": "vdmredir/vrremote.c",
+      "status": "partial",
+      "current_sha256": "8911A0E0965F199F995760F2EDEAD1F48726542B2E813C8404BE678CB40F20F9"
+    },
+    {
+      "path": "wow32/isvwow.h",
+      "status": "partial",
+      "current_sha256": "476DCE640711C1D05DB167E9DC137670AAD1DD96B6F99AAC65F040BCA869891F"
+    },
+    {
+      "path": "wow32/precomp.h",
+      "status": "partial",
+      "current_sha256": "84E0AB967319CF5E75BCA9CF59E5EEFABC06732D18D8317F0298D30FBD00E16B"
+    },
+    {
+      "path": "wow32/walias.c",
+      "status": "partial",
+      "current_sha256": "D56ABF4F150CFFCAA209C4FC5C25013A346105BC9FD479B27A03E1260CAF3A89"
+    },
+    {
+      "path": "wow32/walias.h",
+      "status": "partial",
+      "current_sha256": "82EAA15BE034F7C56C8030C8033D523A0A5BDDD26C54A9E08C3A0FA170311612"
+    },
+    {
+      "path": "wow32/wcall16.c",
+      "status": "partial",
+      "current_sha256": "101B160B8A69B19150839128028F6E2E55A11DA7AB66ACE109E371131F1C4032"
+    },
+    {
+      "path": "wow32/wcntl32.c",
+      "status": "partial",
+      "current_sha256": "48408FEEF986365B459C7E973D7B92964F139B4879278325B0EB370634F38C81"
+    },
+    {
+      "path": "wow32/wcommdlg.c",
+      "status": "partial",
+      "current_sha256": "2B3C50B279E92DEEC0CB7259A863EA5C4E590C44CA61BFB54760C1F061CB1387"
+    },
+    {
+      "path": "wow32/wdde.c",
+      "status": "partial",
+      "current_sha256": "2662E6A99EE1F03A9C42D2E9F3AB1E3F3DC71B58965DE7A721140B16E53B26C0"
+    },
+    {
+      "path": "wow32/wdde.h",
+      "status": "partial",
+      "current_sha256": "5556C69F4A64B2817FE8BE21A9421E7D614403ED5A34B4136E19FAA7CA629109"
+    },
+    {
+      "path": "wow32/wdos.c",
+      "status": "partial",
+      "current_sha256": "36F0F6E2BD5F4DBB11297FEDE065D5F67A106642DB81D9EA8F0413983442D29B"
+    },
+    {
+      "path": "wow32/winsockp.h",
+      "status": "partial",
+      "current_sha256": "0F7F1A8237D5222BADE5DD950078159C2AF83B0921A2F9EB64C1248740B84652"
+    },
+    {
+      "path": "wow32/wkernel.c",
+      "status": "partial",
+      "current_sha256": "DAFC1E3A472DD55458CB41D216DF25ACBE11BAD68EE4BD8D8E90E8FF554DA998"
+    },
+    {
+      "path": "wow32/wkfileio.c",
+      "status": "partial",
+      "current_sha256": "0593995BF9159B23BB21AFFF66A961EF83C6E052BC09ADB5C6A6CB09D559879A"
+    },
+    {
+      "path": "wow32/wkglobal.c",
+      "status": "partial",
+      "current_sha256": "2AC3DB8D9BD34BE96CE0F2B3DEFC2EE780C92618D229D9682A8AF1E5A75645E3"
+    },
+    {
+      "path": "wow32/wklocal.c",
+      "status": "partial",
+      "current_sha256": "ABE4EF2DFA25E8C88DD01427470D4461B13B2FA765769962918C0F45C229E7CA"
+    },
+    {
+      "path": "wow32/wkman.c",
+      "status": "partial",
+      "current_sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2"
+    },
+    {
+      "path": "wow32/wkman.h",
+      "status": "partial",
+      "current_sha256": "885BC32D229EC69E8E64485FF84073A2FA11C008FD1F47ECFFEC31067F027931"
+    },
+    {
+      "path": "wow32/wmdisp32.c",
+      "status": "partial",
+      "current_sha256": "6E4632F55695176E6C8D7C53E4DE5913358D4B8546E778D6D864E202EF8D623D"
+    },
+    {
+      "path": "wow32/wmdisp32.h",
+      "status": "partial",
+      "current_sha256": "1060DA45256E127D23FAA6A44275FA5A88F865A7B74990E092B96D828C6A9243"
+    },
+    {
+      "path": "wow32/wmsg16.c",
+      "status": "partial",
+      "current_sha256": "952FC7C7466336C45271722122E99E045EA7B56ED649E0C18EC40FF65C1075D0"
+    },
+    {
+      "path": "wow32/wmsgcb.c",
+      "status": "partial",
+      "current_sha256": "AF2F31CE67FFA1A15A59F4AB0993ED6E4781CBDCEABC5A96E6BE8682F51114E3"
+    },
+    {
+      "path": "wow32/wmsgem.c",
+      "status": "partial",
+      "current_sha256": "251325307C9E698EE579E3493F15F93ABB6DAFE7D289F334AC3714C513566BE9"
+    },
+    {
+      "path": "wow32/wmsglb.c",
+      "status": "partial",
+      "current_sha256": "9F5D3549B2E3C1FCAA4342DA0A04D37F74477DDA07903071291E74539AF426A2"
+    },
+    {
+      "path": "wow32/wole2.c",
+      "status": "partial",
+      "current_sha256": "C2B35E404B289691BC0A6CF3C2DE14E21F4C46969323D115A99C749808F8C45A"
+    },
+    {
+      "path": "wow32/wow32.c",
+      "status": "partial",
+      "current_sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC"
+    },
+    {
+      "path": "wow32/wow32.def",
+      "status": "partial",
+      "current_sha256": "2B0DCA9F3F81A10C66429E4A13ECB55EE7B91A5E4ED9B76C384AEDBDBABE7A56"
+    },
+    {
+      "path": "wow32/wowhooks.c",
+      "status": "partial",
+      "current_sha256": "63F92BB51C6CBAB216E23E97538BF52BE489742675F8FF7FD278109248409ECD"
+    },
+    {
+      "path": "wow32/wowhooks.h",
+      "status": "partial",
+      "current_sha256": "458AD85D06EB1DC084F996C2AEE04E4FBB81563730A825480836AA24E8395A2E"
+    },
+    {
+      "path": "wow32/wparam.c",
+      "status": "partial",
+      "current_sha256": "DA3930424A77FBAAB5184897475128F8070E9BEDD45A15A19F508DBFB22A36D4"
+    },
+    {
+      "path": "wow32/wreldc.c",
+      "status": "partial",
+      "current_sha256": "712130D7F2EF32BA1A48A187C700895F31C7698274A8669ABA7A154F73C1285C"
+    },
+    {
+      "path": "wow32/wreldc.h",
+      "status": "partial",
+      "current_sha256": "7B61BAF8414269E3095713A3B2CFD910E6ACEF8268EFD4E7EB8E9CA2996574C9"
+    },
+    {
+      "path": "wow32/wsdata.c",
+      "status": "partial",
+      "current_sha256": "5F37ABC01127D62858970B7021FC9ED2B9213E9B81CB4C12122ABDADF64BDA8E"
+    },
+    {
+      "path": "wow32/wsext.c",
+      "status": "partial",
+      "current_sha256": "62E2390F9EC198C09384DC1B18110B25FCBA0CFEDC189DA3E3EFFBA9653CAC14"
+    },
+    {
+      "path": "wow32/wstruc.c",
+      "status": "partial",
+      "current_sha256": "91F0EB40AA660B339DB509C6650B08AD56A719343081C0B314B709D19C51A3B7"
+    },
+    {
+      "path": "wow32/wuclass.c",
+      "status": "partial",
+      "current_sha256": "8C26553CB7CFD8FE128EE75B534ED93005588808D7F51D5AC84EC06B250D2D76"
+    },
+    {
+      "path": "wow32/wuclip.c",
+      "status": "partial",
+      "current_sha256": "3B30B2AF4F1BBB588C051C15D03FBF9C7E1E299FFEA02BB4BCC74A74DF6C10FA"
+    },
+    {
+      "path": "wow32/wudlg.c",
+      "status": "partial",
+      "current_sha256": "1032565DBC656936FE8E0CE6144532E9CEA2699D402E848D59E850C1DB08420B"
+    },
+    {
+      "path": "wow32/wuman.c",
+      "status": "partial",
+      "current_sha256": "FD996581326F266C6EC80905FA087BE22435E9254DD7382B67F626CE902A6500"
+    },
+    {
+      "path": "wow32/wumsg.c",
+      "status": "partial",
+      "current_sha256": "6FDA9165958DA8B4D98C9EA6214787D5D4E9DD2E1BDADFBD7F31E60D5FF22D8E"
+    },
+    {
+      "path": "wow32/wumsg.h",
+      "status": "partial",
+      "current_sha256": "75FBFB01F3D649187D7EDE9545118553E718B5B8AA422EB9D0863D3E85066BC9"
+    },
+    {
+      "path": "wow32/wuser.c",
+      "status": "partial",
+      "current_sha256": "52FB57288855AE2B7809ED18553A65B3368063253DBAE19C8D7E894E1829B191"
+    },
+    {
+      "path": "wow32/wuser31.c",
+      "status": "partial",
+      "current_sha256": "116331D5D9542B3D4FFC48BDB9D19A86400F9B88FE9B15CC978BB30D7CB56719"
+    },
+    {
+      "path": "wow32/wutmr.c",
+      "status": "partial",
+      "current_sha256": "1A02209DE52CC0BBABF47FF2133289AC6DBE6AB197DDBFBFFB72A4E4E29464A5"
+    },
+    {
+      "path": "wow32/wuwind.c",
+      "status": "partial",
+      "current_sha256": "7833FA05F1C91129F88C6D625BB4C104801901806BF9B0B4EE40DED820A45CEF"
+    },
+    {
+      "path": "xms.486/xmsblock.c",
+      "status": "partial",
+      "current_sha256": "05B6B3B21E5249C02883ABCFE61AB6CA0FE6AAB6DAA6F784DD838932D3E37DFA"
+    },
+    {
+      "path": "xms.486/xmsmemr.c",
+      "status": "partial",
+      "current_sha256": "B9DCD6084B94C9C50757C08437AE584B61C967E440891D35B62BD4989D537472"
+    }
+  ],
+  "current_source_drift": [
+    "dpmi32/modesw.c",
+    "softpc.new/base/video/v7_ports.c",
+    "softpc.new/base/video/v7_video.c",
+    "softpc.new/base/video/vga_mode.c",
+    "softpc.new/host/src/nt_bop.c",
+    "softpc.new/host/src/nt_graph.c"
+  ],
+  "scope": "Current mirror bytes versus frozen original hashes; excludes absent/current-only files and does not prove functional coverage"
+}
