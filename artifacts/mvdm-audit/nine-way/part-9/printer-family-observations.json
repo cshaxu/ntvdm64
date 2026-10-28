@@ -1,0 +1,210 @@
+[
+  {
+    "family": "pcl5ee",
+    "owned_count": 126,
+    "sources_sha256": "1006959BB37191365F679B85BCA62A1578F0DB376BD254FE61C568DF65D15FB9",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_pcl5emse\r\n\r\nTARGETNAME=pcl5emse\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tpcl5emse.rc\r\n",
+    "rc_files": [
+      "pcl5emse.rc"
+    ]
+  },
+  {
+    "family": "pcl5ms",
+    "owned_count": 849,
+    "sources_sha256": "9C90677E571CE73CBF94CF611AE795964F01BF148A462B0539FE9E855CFD7E29",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_pcl5ms\r\n\r\nTARGETNAME=pcl5ms\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tpcl5ms.rc\r\n",
+    "rc_files": [
+      "pcl5ms.rc"
+    ]
+  },
+  {
+    "family": "pcl5mse",
+    "owned_count": 800,
+    "sources_sha256": "CCA2A0D7E1CD5E1B5B2E795A73EB48C6FCBE840D453F3E331CFCA679C2C11E97",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_pcl5mse\r\n\r\nTARGETNAME=pcl5mse\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tpcl5mse.rc\r\n",
+    "rc_files": [
+      "pcl5mse.rc"
+    ]
+  },
+  {
+    "family": "proprint",
+    "owned_count": 37,
+    "sources_sha256": "08C053CAF81BE93561439159809319E42D1F07B8E525112FF220EEB95C219106",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_proprint\r\n\r\nTARGETNAME=proprint\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tproprint.rc\r\n",
+    "rc_files": [
+      "proprint.rc"
+    ]
+  },
+  {
+    "family": "proprn24",
+    "owned_count": 31,
+    "sources_sha256": "899F20C86CFD744C8C284877AFA17DAEE0B20B18888FB95C5AA1E1ECEA136834",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_proprn24\r\n\r\nTARGETNAME=proprn24\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tproprn24.rc\r\n",
+    "rc_files": [
+      "proprn24.rc"
+    ]
+  },
+  {
+    "family": "ps1",
+    "owned_count": 79,
+    "sources_sha256": "1C310E9F01AE292D12198C1987323447917237ABACA01E54271B6A998DCB4B9B",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_ps1\r\n\r\nTARGETNAME=ps1\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        ps1.rc\r\n",
+    "rc_files": [
+      "ps1.rc"
+    ]
+  },
+  {
+    "family": "quietjet",
+    "owned_count": 19,
+    "sources_sha256": "2439762340D714B3BB45ED7D621894A82BEB595BDC68CE8B05430637436B51DC",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_QUIETJET\r\n\r\nTARGETNAME=QUIETJET\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        QUIETJET.rc\r\n",
+    "rc_files": [
+      "quietjet.rc"
+    ]
+  },
+  {
+    "family": "qwiii",
+    "owned_count": 70,
+    "sources_sha256": "D1306B78D502050086CB14BCE331BD64ADB2AC60CD9AB98F50C8A601A894A38F",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_qwiii\r\n\r\nTARGETNAME=qwiii\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tqwiii.rc\r\n",
+    "rc_files": [
+      "qwiii.rc"
+    ]
+  },
+  {
+    "family": "readme.txt",
+    "owned_count": 1,
+    "sources_sha256": null,
+    "sources_text": null,
+    "rc_files": []
+  },
+  {
+    "family": "rlein.cmd",
+    "owned_count": 1,
+    "sources_sha256": null,
+    "sources_text": null,
+    "rc_files": []
+  },
+  {
+    "family": "rleout.cmd",
+    "owned_count": 1,
+    "sources_sha256": null,
+    "sources_text": null,
+    "rc_files": []
+  },
+  {
+    "family": "rlesync.cmd",
+    "owned_count": 1,
+    "sources_sha256": null,
+    "sources_text": null,
+    "rc_files": []
+  },
+  {
+    "family": "seiko",
+    "owned_count": 8,
+    "sources_sha256": "6F7F883F24217511FBBF396344ED50A49028335EC650B6232BC4B47D0D73C955",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_seiko\r\n\r\nTARGETNAME=seiko\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        seiko.rc\r\n",
+    "rc_files": [
+      "seiko.rc"
+    ]
+  },
+  {
+    "family": "seiko24e",
+    "owned_count": 195,
+    "sources_sha256": "CA7529747ECB6C0893D0FE07EAF7E7B6EA49A0B4A46FE52CC5DCAE3564A707EB",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_SEIKO24E\r\n\r\nTARGETNAME=SEIKO24E\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        SEIKO24E.rc\r\n",
+    "rc_files": [
+      "seiko24e.rc"
+    ]
+  },
+  {
+    "family": "seikosh9",
+    "owned_count": 81,
+    "sources_sha256": "36867546BB994591CDA800180090A0E2611B423860238007D16F7F308155517E",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_SEIKOSH9\r\n\r\nTARGETNAME=SEIKOSH9\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        SEIKOSH9.rc\r\n",
+    "rc_files": [
+      "seikosh9.rc"
+    ]
+  },
+  {
+    "family": "star24e",
+    "owned_count": 409,
+    "sources_sha256": "55A724632E95EB17E668892F906265793E62C1A8D19F96767DE6399D36346AF7",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_STAR24E\r\n\r\nTARGETNAME=STAR24E\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        STAR24E.rc\r\n",
+    "rc_files": [
+      "star24e.rc"
+    ]
+  },
+  {
+    "family": "star9e",
+    "owned_count": 235,
+    "sources_sha256": "1C882ED1CA8554BCF95268A739C024943EB82D86509D98773BC1FC3B72320BAD",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_STAR9E\r\n\r\nTARGETNAME=STAR9E\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        STAR9E.rc\r\n",
+    "rc_files": [
+      "star9e.rc"
+    ]
+  },
+  {
+    "family": "starjet",
+    "owned_count": 41,
+    "sources_sha256": "FDB3E5E4335B687D8B1975EDC1F3A8F5D6B7B7E508B7B70667072665D93C5693",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_STARJET\r\n\r\nTARGETNAME=STARJET\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c \\\r\n        STARJET.rc\r\n",
+    "rc_files": [
+      "starjet.rc"
+    ]
+  },
+  {
+    "family": "thinkjet",
+    "owned_count": 16,
+    "sources_sha256": "A930B0A62B753CFAA6AD350DEF7A2F06A101C44C25BC330DD5B8D73515F9793E",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_thinkjet\r\n\r\nTARGETNAME=thinkjet\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tthinkjet.rc\r\n",
+    "rc_files": [
+      "thinkjet.rc"
+    ]
+  },
+  {
+    "family": "ti850",
+    "owned_count": 12,
+    "sources_sha256": "C9ABAFD6B56C5CBAC19BB8B0A5CAB533458A16E5FD36B639CE8F72EFEF89A968",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_ti850\r\n\r\nTARGETNAME=ti850\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n\tti850.rc\r\n",
+    "rc_files": [
+      "ti850.rc"
+    ]
+  },
+  {
+    "family": "toshiba",
+    "owned_count": 43,
+    "sources_sha256": "14F2A430CBEE66EFFC0B6FD34F6027440B1C9842F99631BDCD83B8BC1319509F",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_toshiba\r\n\r\nTARGETNAME=toshiba\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\nSOURCES=code.c \\\r\n        toshiba.rc\r\n",
+    "rc_files": [
+      "toshiba.rc"
+    ]
+  },
+  {
+    "family": "txtonly",
+    "owned_count": 15,
+    "sources_sha256": "0E71F70F6B1326350CC282034CBC0A66AAAD945057800AE1F5B2BD450BE10854",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_textonly\r\n\r\nTARGETNAME=txtonly\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\nSUBSYSTEM_VERSION=3.50\r\n\r\nSOURCES=code.c   \\\r\n        txtonly.rc \r\n\t\r\n",
+    "rc_files": [
+      "txtonly.rc"
+    ]
+  },
+  {
+    "family": "x42pcl",
+    "owned_count": 84,
+    "sources_sha256": "19A9A903D1FE51C7B02F0236660CA157DC2B6E196326A236619797FD4189E5C6",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_x42xxpcl\r\n\r\nTARGETNAME=x42xxpcl\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nSOURCES=code.c   \\\r\n    x42xxpcl.rc\r\n",
+    "rc_files": [
+      "x42xxpcl.rc"
+    ]
+  },
+  {
+    "family": "xerox",
+    "owned_count": 481,
+    "sources_sha256": "07334D61BDEE60E6C83BE47CAB325BAEDE919D6C76586A56961D237A273362F8",
+    "sources_text": "MAJORCOMP=windows\r\nMINORCOMP=md_xeroxpcl\r\n\r\nTARGETNAME=xeroxpcl\r\nTARGETPATH=$(BASEDIR)\\public\\sdk\\lib\r\nTARGETTYPE=DYNLINK\r\nTARGETLIBS=\r\n\r\nINCLUDES=..;..\\..\\inc\r\n\r\nPRIVINCS=\r\n\r\nSOURCES=code.c   \\\r\n\txeroxpcl.rc\r\n",
+    "rc_files": [
+      "xeroxpcl.rc"
+    ]
+  }
+]

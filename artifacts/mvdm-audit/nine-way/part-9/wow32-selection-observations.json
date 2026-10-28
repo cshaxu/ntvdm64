@@ -1,0 +1,526 @@
+[
+  {
+    "key": "wow32/debug.c",
+    "path": "wow32/debug.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/fastwow.h",
+    "path": "wow32/fastwow.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:61:#include \"fastwow.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/i386/callpr32.asm",
+    "path": "wow32/i386/callpr32.asm",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/i386/fastwow.asm",
+    "path": "wow32/i386/fastwow.asm",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/obj/i386/wow32.def",
+    "path": "wow32/obj/i386/wow32.def",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/sz.src",
+    "path": "wow32/sz.src",
+    "textual_include_candidates": [
+      "src/mvdm\\wow16\\commdlg\\commdlg.rc:52:#include \"sz.src\"",
+      "src/mvdm\\wow16\\commdlg\\messages\\usa\\commdlg.rc:52:#include \"sz.src\"",
+      "src/mvdm\\wow32\\wow32.rc:25:#include \"sz.src\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/thunkdll.txt",
+    "path": "wow32/thunkdll.txt",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcall16.h",
+    "path": "wow32/wcall16.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:56:#include \"wcall16.h\"",
+      "src/mvdm\\wow32\\winsockp.h:24:#include \"wcall16.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcall32.h",
+    "path": "wow32/wcall32.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:62:#include \"wcall32.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcommdlg.h",
+    "path": "wow32/wcommdlg.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:70:#include \"wcommdlg.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wctlm32.h",
+    "path": "wow32/wctlm32.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcurcash.c",
+    "path": "wow32/wcurcash.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcurcash.h",
+    "path": "wow32/wcurcash.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wcuricon.h",
+    "path": "wow32/wcuricon.h",
+    "textual_include_candidates": [
+      "src/mvdm\\vdmexts\\dib.c:22:#include <wcuricon.h>",
+      "src/mvdm\\vdmexts\\wow.c:25:#include <wcuricon.h>",
+      "src/mvdm\\vdmexts\\wowprof.c:25:#include <wcuricon.h>",
+      "src/mvdm\\wow32\\precomp.h:66:#include \"wcuricon.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wddeml32.c",
+    "path": "wow32/wddeml32.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wddeml32.h",
+    "path": "wow32/wddeml32.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wddeml32.c:25:#include \"wddeml32.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wddetbl2.h",
+    "path": "wow32/wddetbl2.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wdib.c",
+    "path": "wow32/wdib.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      109
+    ]
+  },
+  {
+    "key": "wow32/wdib.h",
+    "path": "wow32/wdib.h",
+    "textual_include_candidates": [
+      "src/mvdm\\vdmexts\\dib.c:25:#include <wdib.h>",
+      "src/mvdm\\wow32\\wdib.c:20:#include \"wdib.h\"",
+      "src/mvdm\\wow32\\wgdi.c:33:#include \"wdib.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgdi.h",
+    "path": "wow32/wgdi.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:81:#include \"wgdi.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgdi31.c",
+    "path": "wow32/wgdi31.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      43
+    ]
+  },
+  {
+    "key": "wow32/wgdi31.h",
+    "path": "wow32/wgdi31.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:84:#include \"wgdi31.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgfont.h",
+    "path": "wow32/wgfont.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:83:#include \"wgfont.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgman.h",
+    "path": "wow32/wgman.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:85:#include \"wgman.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgmeta.h",
+    "path": "wow32/wgmeta.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:79:#include \"wgmeta.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgpal.h",
+    "path": "wow32/wgpal.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:86:#include \"wgpal.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgprnset.c",
+    "path": "wow32/wgprnset.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      49
+    ]
+  },
+  {
+    "key": "wow32/wgprnset.h",
+    "path": "wow32/wgprnset.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:82:#include \"wgprnset.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgtbl.h",
+    "path": "wow32/wgtbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:28:#include \"wgtbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wgtext.h",
+    "path": "wow32/wgtext.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:87:#include \"wgtext.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/win30api.xls",
+    "path": "wow32/win30api.xls",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/winspldl.h",
+    "path": "wow32/winspldl.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wintype.xls",
+    "path": "wow32/wintype.xls",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/witbl.h",
+    "path": "wow32/witbl.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkbtbl.h",
+    "path": "wow32/wkbtbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:30:#include \"wkbtbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkernel.h",
+    "path": "wow32/wkernel.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:91:#include \"wkernel.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkfileio.h",
+    "path": "wow32/wkfileio.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:92:#include \"wkfileio.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkglobal.h",
+    "path": "wow32/wkglobal.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wkglobal.c:17:#include \"wkglobal.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkgthunk.c",
+    "path": "wow32/wkgthunk.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      53
+    ]
+  },
+  {
+    "key": "wow32/wklocal.h",
+    "path": "wow32/wklocal.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:97:#include \"wklocal.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wkmem.h",
+    "path": "wow32/wkmem.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:107:#include \"wkmem.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wktbl.h",
+    "path": "wow32/wktbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:26:#include \"wktbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wktbl2.h",
+    "path": "wow32/wktbl2.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wowtbl.c:42:#include \"wktbl2.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wmmalias.c",
+    "path": "wow32/wmmalias.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      97
+    ]
+  },
+  {
+    "key": "wow32/wmmalias.h",
+    "path": "wow32/wmmalias.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wmmalias.c:18:#include \"wmmalias.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wmmedia2.c",
+    "path": "wow32/wmmedia2.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      93
+    ]
+  },
+  {
+    "key": "wow32/wmmstru2.c",
+    "path": "wow32/wmmstru2.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      96
+    ]
+  },
+  {
+    "key": "wow32/wmmstruc.h",
+    "path": "wow32/wmmstruc.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:110:#include \"wmmstruc.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wmmtbl.h",
+    "path": "wow32/wmmtbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:32:#include \"wmmtbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wmsgcb.h",
+    "path": "wow32/wmsgcb.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:115:#include \"wmsgcb.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wmsglb.h",
+    "path": "wow32/wmsglb.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:117:#include \"wmsglb.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wole2.h",
+    "path": "wow32/wole2.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:139:#include \"wole2.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wow32.rc",
+    "path": "wow32/wow32.rc",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      323
+    ]
+  },
+  {
+    "key": "wow32/wow32.tt",
+    "path": "wow32/wow32.tt",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wow32fax.c",
+    "path": "wow32/wow32fax.c",
+    "textual_include_candidates": [],
+    "ninja_source_lines": [
+      60
+    ]
+  },
+  {
+    "key": "wow32/wowdde.h",
+    "path": "wow32/wowdde.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wowtable.h",
+    "path": "wow32/wowtable.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wres32.h",
+    "path": "wow32/wres32.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:74:#include \"wres32.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wshell.h",
+    "path": "wow32/wshell.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:135:#include \"wshell.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wshltbl.h",
+    "path": "wow32/wshltbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:31:#include \"wshltbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wsman.h",
+    "path": "wow32/wsman.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:133:#include \"wsman.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wspool.h",
+    "path": "wow32/wspool.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\walias.h:18:#include \"wspool.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wthtbl.h",
+    "path": "wow32/wthtbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:34:#include \"wthtbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wthtbl2.h",
+    "path": "wow32/wthtbl2.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wowtbl.c:63:#include \"wthtbl2.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wuansi.h",
+    "path": "wow32/wuansi.h",
+    "textual_include_candidates": [],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wumenu.h",
+    "path": "wow32/wumenu.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:125:#include \"wumenu.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wuser.h",
+    "path": "wow32/wuser.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\precomp.h:126:#include \"wuser.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wutbl.h",
+    "path": "wow32/wutbl.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wow32.c:27:#include \"wutbl.h\""
+    ],
+    "ninja_source_lines": []
+  },
+  {
+    "key": "wow32/wwstbl2.h",
+    "path": "wow32/wwstbl2.h",
+    "textual_include_candidates": [
+      "src/mvdm\\wow32\\wowtbl.c:60:#include \"wwstbl2.h\""
+    ],
+    "ninja_source_lines": []
+  }
+]

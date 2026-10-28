@@ -24,6 +24,10 @@ The [part 5 BIOS resources](nine-way/part-5/bios-resource-family-review.md),
 separate linked-image evidence from unresolved behavior. The remaining
 [external inventory](nine-way/part-5/external-envelope-review.md) is a source
 identity and recipe census, not an applicability decision.
+The [part 9 WOW32 provider review](nine-way/part-9/wow32-provider-role-review.md)
+and [guest utility review](nine-way/part-9/wow16-utilities-write-role-review.md)
+separate build-graph selection from execution evidence; the packaged WRITE.EXE
+identity differs from the retained mirror and its provenance remains open.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

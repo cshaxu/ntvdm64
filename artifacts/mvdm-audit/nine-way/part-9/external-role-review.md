@@ -1,0 +1,9 @@
+# Part 9 external NT GDI source inventory
+
+All 4,772 frozen external keys have exact edition paths, presence and SHA-256 in `external-owned-files.csv`; all were present in the OpenNT comparison tree. Reproduce with `external-observer.py`. This verifies identity, not feature ownership or dependency selection.
+
+`printer-family-observer.py` examines the 3,635 owned `rasprint/mini` entries by actual family and captures each family's `sources` contents/hash and RC names in `printer-family-observations.json`. The 22 examined family directories declare dynamic-link targets, but target/resource names are not always the folder name (`pcl5ee` uses `pcl5emse.rc`, `x42pcl` uses `x42xxpcl.rc`). The same range includes the raster driver, UI, generation tools, specs and font/device resource inputs. File presence or a family recipe does not prove all individual resources are compiled, shipped, selected by the host, or unnecessary for a given Win16 print flow. Four owned root files are readme/RLE helpers, not device-family directories. More precise per-item dependency and printing-provider evidence remains pending.
+
+The remaining keys include NT GDI test and localization sources; for instance `test/fonttest.nt` has a separate build recipe, dialog and glyph resources. Those tests can be useful evidence candidates, but source presence is not a passed test and it does not establish a WOW execution path. Related previously recorded metafile/printing owner evidence in `docs/etc/evidence/m0-t456-s1-font-text-metafile-owner-matrix.md` distinguishes original WOW conversions from modern host GDI owners.
+
+All individual external keys remain pending relevance unless independently tied to a concrete provider/caller and configuration. No broad directory exclusion, runtime coverage percentage, printing functionality, or guest execution claim follows from this inventory; no external source was imported.
