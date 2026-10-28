@@ -1,0 +1,62 @@
+{
+  "winmm_path": "C:\\Windows\\SysWOW64\\winmm.dll",
+  "winmm_sha256_before_after": [
+    "FF2ABD18BF1404A2D41831CEB6BFD25A812FABA7C29E66C0F2E0CFF5389FC344",
+    "FF2ABD18BF1404A2D41831CEB6BFD25A812FABA7C29E66C0F2E0CFF5389FC344"
+  ],
+  "source_sha256": "94577AB8A83776F6D132CDC4A8BAAD9AF9D2395D58ACF838B0FBEE1A4F2750B4",
+  "recipe_sha256": "8D3E69023EA6C4FB4EC6F68809DF7C95766501A67D0153CE0F6DA6CA477ABFF3",
+  "selected_wmmedia_object_sha256": "03D9412A0E2F17A87CC17AA18E98A9A4CBBBDC089FBE4B2BFBC04EA71BE52A7F",
+  "wrapper_map_sha256": "3562F90C7551DDDDEFDB1216010D9B2923A70216849F6F257F3F30E39236ADC2",
+  "wrapper_map_lines": [
+    "0001:000003d0       _WOW32ResolveHandle@24     004013d0 f   wmmedia.obj",
+    "0002:00005f70       __sehtable$_WOW32ResolveHandle@24 0041af70     wmmedia.obj"
+  ],
+  "runs": [
+    {
+      "mode": "provider",
+      "executable_sha256": "1791A82BA43316E7BC6CF86EAE2E83B35A729A0C915B9D3B0C6EF5A0159EBBFF",
+      "exit_code": 0,
+      "stdout": "mode=provider resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll query=0 open=0 handle_nonzero=1 handle_low16=f278 result=0 error=126 exception=00000000 out16=aaaa out32=cccccccc stack_equal=1 close=0",
+      "stderr": "",
+      "fields": {
+        "mode": "provider",
+        "resolved": "\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll",
+        "query": "0",
+        "open": "0",
+        "handle_nonzero": "1",
+        "handle_low16": "f278",
+        "result": "0",
+        "error": "126",
+        "exception": "00000000",
+        "out16": "aaaa",
+        "out32": "cccccccc",
+        "stack_equal": "1",
+        "close": "0"
+      }
+    },
+    {
+      "mode": "wrapper",
+      "executable_sha256": "059BC04BDF64379101B3C57D52CB1C7284C6B0FDCCF2AE3C36E40C6BBFB7DB7C",
+      "exit_code": 0,
+      "stdout": "mode=wrapper resolved=\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll query=0 open=0 handle_nonzero=1 handle_low16=0600 result=1 error=126 exception=00000000 out16=0600 out32=cccccccc stack_equal=1 close=0",
+      "stderr": "",
+      "fields": {
+        "mode": "wrapper",
+        "resolved": "\\\\?\\C:\\Windows\\SysWOW64\\winmm.dll",
+        "query": "0",
+        "open": "0",
+        "handle_nonzero": "1",
+        "handle_low16": "0600",
+        "result": "1",
+        "error": "126",
+        "exception": "00000000",
+        "out16": "0600",
+        "out32": "cccccccc",
+        "stack_equal": "1",
+        "close": "0"
+      }
+    }
+  ],
+  "limits": "Each process independently opens and closes one host wave output handle, no sound buffers; ordinary Win32 handle is not proof of a valid Win16 alias. A device-open failure is recorded, not fabricated success."
+}

@@ -16,3 +16,20 @@ Suggested finite matrix:
 6. **FDC result contract:** controlled short reads and writes must produce FDC status bits, with explicit write-protect versus other write error; do not apply DEM's AX/CF assertions to FDC. A separate synchronous DEM test covers zero-byte return, mapping and CF on its bound calling thread.
 
 The finite product-repair boundary is correct owner binding with the appropriate calling convention, safe lifetime/parameter retirement for that existing FDC worker, and consistent handle/counter rollback when guest state operations fail. Select the smallest implementation only after this test reveals which underlying existing lifecycle facilities are usable. Do not assume wrapper injection alone solves the lifetime race. Existing fixture failures are fault injections, not proof that a real guest reaches those conditions.
+
+## Real session/scalar object witness: wrapper binding is insufficient
+
+`fdc-bound-session-scalar-probe.c` SHA-256 `3FD99C20981ABACC5F85EFBBA5AA54D12DD4C2106F2DE7BF0A706F079FEC7DE6` uses a fixture-owned active session, in-memory guest callbacks, and actual cached x86 MSVC `session.obj`, `guest_memory_lease.obj`, `mvdm_guest_location.obj` and `mvdm_command_guest_state.obj`. Main registers the scalar location and successfully increments its test-memory value to 1. A separate thread explicitly binds the same real session and calls the actual scalar update, which fails and leaves value 1; the fixture prints `bound child update=0 parent_count=1` and exits 0. The test supplies unreachable PIF globals/function solely for the full object link; calling that function terminates the fixture. No FDC object, device or actual guest is involved.
+
+The result is consistent with `mvdm_command_guest_state.c` retaining `current_state` as separate thread-local data: session binding alone does not register the scalar location/epochs on the new thread. It does not prove how an FDC worker can safely access that state, nor does it validate epoch and teardown races. Any correction needs one authoritative session-owned registration and controlled access under that owner's lifetime; independently copied thread-local facts would need explicit synchronization and must not become a second authority. The precise design and original FDC full-chain test remain S13 work.
+
+Replay from an x86 MSVC developer environment using the existing cached object paths:
+
+```powershell
+cl /nologo /MT /Isrc /Isrc\ntvdm-exe\session artifacts\mvdm-audit\shard-3\fdc-bound-session-scalar-probe.c build\.ninja\msvc-x86-release\worker\obj\ntvdm\session\session.obj build\.ninja\msvc-x86-release\worker\obj\ntvdm\session\guest_memory_lease.obj build\.ninja\msvc-x86-release\worker\obj\adapter-basesrv\mvdm_command_guest_state.obj build\.ninja\msvc-x86-release\worker\obj\adapter-softpc\mvdm_guest_location.obj /Fe:build\t473-s10\fdc-session-attempt\probe.exe /Fo:build\t473-s10\fdc-session-attempt\ /link /OPT:REF
+& build\t473-s10\fdc-session-attempt\probe.exe
+```
+
+The tested `session.obj` hash is `0034A91F70AAC65859E4CBC2127BEA8828A9529C572EE35023D96FF25BB2B595`; `mvdm_command_guest_state.obj` is `48533DAB038EAA3E40B51910668D872D3F85171AA0B4359C60C5B6F1D527CBA7`. The earlier MinGW attempt could not link MSVC TLS (`_tls_array`); the successful witness uses MSVC rather than substituting a TLS implementation.
+
+For a self-contained build invocation with a caller-selected output directory, run `artifacts\mvdm-audit\shard-3\build-fdc-bound-session-scalar-probe.cmd build\t473-s10\fdc-session-replay-2`. The script has SHA-256 `8E9B3EC641D1243D530DFD5FADAA159C6A5FF6F5292414DDE824F9841074843E`; it requires the existing cached MSVC worker objects and VS 2022 Build Tools, but no guest. A fresh-directory execution returned exit 0 and printed `bound child update=0 parent_count=1`. The remaining input hashes are `guest_memory_lease.obj` `ECDA9A94EC6977E3EB0D6A4A4E56689E14F549BBF271BF3D0A0B1ABF14590F4A` and `mvdm_guest_location.obj` `44B012725B5BA009DFC779C8569C1300ADBB652AEBDB8F04A88554B158719C8F`.

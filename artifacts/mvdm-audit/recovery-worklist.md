@@ -170,3 +170,9 @@ The [disk session routing review](host-ch-scope/dos-absolute-io-session-routing-
 S16 has a [minimal multimedia resolver design](host-ch-scope/wow-winmm-resolve-s16-design.md): retain original lookup and native handle authority while correcting BOOL failure and provider-output forwarding, subject to the recorded exception and full matrix. S13's [disk session routing](host-ch-scope/dos-absolute-io-session-routing-review.md) separates FDC status/handle lifecycle from synchronous DEM error mapping.
 
 The [FDC session fixture plan](shard-3/fdc-session-fixture-plan.md) specifies integration of existing selected-object and test-owned session seams, including first-open failure, rollback, reset and worker shutdown; its first-open reachability remains unproved until executed.
+
+The [test-owned wave handle comparison](host-ch-scope/wow-winmm-wave-handle-review.md) independently observed the local provider fail while the selected wrapper returned a truncated native handle in separate processes. It does not prove a Win16 alias or deployed guest reachability; retain it in S16's actual-provider failure matrix.
+
+The [FDC session/scalar object witness](shard-3/fdc-session-fixture-plan.md) demonstrates that binding the same session in a child does not transfer the separately thread-local guest-state registration. S13 must design a single authoritative session-owned location/epoch and validate shutdown/reset lifetime; this is not yet a full FDC or guest reproduction.
+
+The [test-owned wave handle comparison](host-ch-scope/wow-winmm-wave-handle-review.md) confirms the local provider/wrapper discrepancy with separately opened real native handles and no playback; no Win16 alias or deployed guest path was established.
