@@ -1995,7 +1995,7 @@ softpc.new/base/support/obj/i386/time_day.obj,1,excluded,shard-1/file-audit.csv
 softpc.new/base/support/obj/i386/xt.obj,3,excluded,shard-3/file-review.csv
 softpc.new/base/support/sources,2,partial,shard-2/file-audit.csv
 softpc.new/base/support/terminat.c,0,partial,shard-0/review.csv
-softpc.new/base/support/time_day.c,3,pending,shard-3/file-review.csv
+softpc.new/base/support/time_day.c,3,partial,shard-3/file-review.csv
 softpc.new/base/support/xt.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/system/at_dma.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/system/cmos.c,1,excluded,shard-1/file-audit.csv
@@ -4629,7 +4629,7 @@ wow32/wuclass.c,3,partial,shard-3/file-review.csv
 wow32/wuclass.h,0,pending,shard-0/review.csv
 wow32/wuclip.c,2,partial,shard-2/file-audit.csv
 wow32/wuclip.h,2,pending,shard-2/file-audit.csv
-wow32/wucomm.c,2,pending,shard-2/file-audit.csv
+wow32/wucomm.c,2,partial,shard-2/file-audit.csv
 wow32/wucomm.h,2,pending,shard-2/file-audit.csv
 wow32/wucursor.c,1,pending,shard-1/file-audit.csv
 wow32/wucursor.h,1,pending,shard-1/file-audit.csv
@@ -4641,7 +4641,7 @@ wow32/wulang.c,1,pending,shard-1/file-audit.csv
 wow32/wulang.h,1,pending,shard-1/file-audit.csv
 wow32/wuman.c,2,partial,shard-2/file-audit.csv
 wow32/wuman.h,2,pending,shard-2/file-audit.csv
-wow32/wumenu.c,2,pending,shard-2/file-audit.csv
+wow32/wumenu.c,2,partial,shard-2/file-audit.csv
 wow32/wumenu.h,3,pending,shard-3/file-review.csv
 wow32/wumsg.c,3,partial,shard-3/file-review.csv
 wow32/wumsg.h,0,partial,shard-0/review.csv

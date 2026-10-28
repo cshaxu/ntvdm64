@@ -1,0 +1,611 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "name": "wucomm.c",
+      "sha256": "C9C8B11D65AC3F2B1EE9216A8102EF56908BFF5C5BF4ED2DD2BADC30CA8A4284"
+    },
+    {
+      "name": "wumenu.c",
+      "sha256": "0FC60E98713F9C37F6FEE8C5DF25DCBA55277DBAEF5B82C49A90E62AE6DB72C6"
+    },
+    {
+      "name": "wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "name": "wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "name": "wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    }
+  ],
+  "user_table_base": 311,
+  "owners": [
+    {
+      "owner": "wumenu",
+      "object_sha256": "4594E3BEDFB9086522D50CB3E646EEAF6DE01428E21BB9FBC7B55CC54D4BE998",
+      "dependency": "obj/wumenu.obj: #deps 126, deps mtime 8147760890997595 (VALID)",
+      "entries": [
+        {
+          "ordinal": 150,
+          "table_index": 461,
+          "thunk": "WU32LoadMenu",
+          "binding": {
+            "name": "_WU32LoadMenu@4",
+            "va": 268579728,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 193,
+            "relocation_words": 8
+          }
+        },
+        {
+          "ordinal": 151,
+          "table_index": 462,
+          "thunk": "WU32CreateMenu",
+          "binding": {
+            "name": "_WU32CreateMenu@4",
+            "va": 268579264,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 11,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 152,
+          "table_index": 463,
+          "thunk": "WU32DestroyMenu",
+          "binding": {
+            "name": "_WU32DestroyMenu@4",
+            "va": 268579328,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 18,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 153,
+          "table_index": 464,
+          "thunk": "WU32ChangeMenu",
+          "binding": {
+            "name": "_WU32ChangeMenu@4",
+            "va": 268579136,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 92,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 154,
+          "table_index": 465,
+          "thunk": "WU32CheckMenuItem",
+          "binding": {
+            "name": "_WU32CheckMenuItem@4",
+            "va": 268579232,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 28,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 156,
+          "table_index": 467,
+          "thunk": "WU32GetSystemMenu",
+          "binding": {
+            "name": "_WU32GetSystemMenu@4",
+            "va": 268579520,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 25,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 158,
+          "table_index": 469,
+          "thunk": "WU32SetMenu",
+          "binding": {
+            "name": "_WU32SetMenu@4",
+            "va": 268580272,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 23,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 160,
+          "table_index": 471,
+          "thunk": "WU32DrawMenuBar",
+          "binding": {
+            "name": "_WU32DrawMenuBar@4",
+            "va": 268579360,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 22,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 161,
+          "table_index": 472,
+          "thunk": "WU32GetMenuString",
+          "binding": {
+            "name": "_WU32GetMenuString@4",
+            "va": 268579408,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 98,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 162,
+          "table_index": 473,
+          "thunk": "WU32HiliteMenuItem",
+          "binding": {
+            "name": "_WU32HiliteMenuItem@4",
+            "va": 268579552,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 33,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 220,
+          "table_index": 531,
+          "thunk": "WU32LoadMenuIndirect",
+          "binding": {
+            "name": "_WU32LoadMenuIndirect@4",
+            "va": 268579936,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 99,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 410,
+          "table_index": 721,
+          "thunk": "WU32InsertMenu",
+          "binding": {
+            "name": "_WU32InsertMenu@4",
+            "va": 268579600,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 113,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 411,
+          "table_index": 722,
+          "thunk": "WU32AppendMenu",
+          "binding": {
+            "name": "_WU32AppendMenu@4",
+            "va": 268579024,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 97,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 412,
+          "table_index": 723,
+          "thunk": "WU32RemoveMenu",
+          "binding": {
+            "name": "_WU32RemoveMenu@4",
+            "va": 268580240,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 28,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 413,
+          "table_index": 724,
+          "thunk": "WU32DeleteMenu",
+          "binding": {
+            "name": "_WU32DeleteMenu@4",
+            "va": 268579296,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 28,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 414,
+          "table_index": 725,
+          "thunk": "WU32ModifyMenu",
+          "binding": {
+            "name": "_WU32ModifyMenu@4",
+            "va": 268580048,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 181,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 415,
+          "table_index": 726,
+          "thunk": "WU32CreatePopupMenu",
+          "binding": {
+            "name": "_WU32CreatePopupMenu@4",
+            "va": 268579280,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 11,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 416,
+          "table_index": 727,
+          "thunk": "WU32TrackPopupMenu",
+          "binding": {
+            "name": "_WU32TrackPopupMenu@4",
+            "va": 268580368,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 87,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 417,
+          "table_index": 728,
+          "thunk": "WU32GetMenuCheckMarkDimensions",
+          "binding": {
+            "name": "_WU32GetMenuCheckMarkDimensions@4",
+            "va": 268579392,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 9,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 418,
+          "table_index": 729,
+          "thunk": "WU32SetMenuItemBitmaps",
+          "binding": {
+            "name": "_WU32SetMenuItemBitmaps@4",
+            "va": 268580304,
+            "function": true,
+            "owner": "wumenu.obj",
+            "bytes": 64,
+            "relocation_words": 3
+          }
+        }
+      ]
+    },
+    {
+      "owner": "wucomm",
+      "object_sha256": "032CA348E54EE7BA774CAE0DEC3E00FD840F991C69E6FFB60A978F4ABF1EB9A2",
+      "dependency": "obj/wucomm.obj: #deps 126, deps mtime 8147760898324305 (VALID)",
+      "entries": [
+        {
+          "ordinal": 200,
+          "table_index": 511,
+          "thunk": "WU32OpenComm",
+          "binding": {
+            "name": "_WU32OpenComm@4",
+            "va": 268571664,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 1191,
+            "relocation_words": 32
+          }
+        },
+        {
+          "ordinal": 201,
+          "table_index": 512,
+          "thunk": "WU32SetCommState",
+          "binding": {
+            "name": "_WU32SetCommState@4",
+            "va": 268573360,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 362,
+            "relocation_words": 14
+          }
+        },
+        {
+          "ordinal": 202,
+          "table_index": 513,
+          "thunk": "WU32GetCommState",
+          "binding": {
+            "name": "_WU32GetCommState@4",
+            "va": 268571392,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 272,
+            "relocation_words": 11
+          }
+        },
+        {
+          "ordinal": 203,
+          "table_index": 514,
+          "thunk": "WU32GetCommError",
+          "binding": {
+            "name": "_WU32GetCommError@4",
+            "va": 268571008,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 304,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 204,
+          "table_index": 515,
+          "thunk": "WU32ReadComm",
+          "binding": {
+            "name": "_WU32ReadComm@4",
+            "va": 268572864,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 291,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 205,
+          "table_index": 516,
+          "thunk": "WU32WriteComm",
+          "binding": {
+            "name": "_WU32WriteComm@4",
+            "va": 268574048,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 581,
+            "relocation_words": 13
+          }
+        },
+        {
+          "ordinal": 206,
+          "table_index": 517,
+          "thunk": "WU32TransmitCommChar",
+          "binding": {
+            "name": "_WU32TransmitCommChar@4",
+            "va": 268573728,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 242,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 207,
+          "table_index": 518,
+          "thunk": "WU32CloseComm",
+          "binding": {
+            "name": "_WU32CloseComm@4",
+            "va": 268570160,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 122,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 208,
+          "table_index": 519,
+          "thunk": "WU32SetCommEventMask",
+          "binding": {
+            "name": "_WU32SetCommEventMask@4",
+            "va": 268573264,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 93,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 209,
+          "table_index": 520,
+          "thunk": "WU32GetCommEventMask",
+          "binding": {
+            "name": "_WU32GetCommEventMask@4",
+            "va": 268571312,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 79,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 210,
+          "table_index": 521,
+          "thunk": "WU32SetCommBreak",
+          "binding": {
+            "name": "_WU32SetCommBreak@4",
+            "va": 268573168,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 93,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 211,
+          "table_index": 522,
+          "thunk": "WU32ClearCommBreak",
+          "binding": {
+            "name": "_WU32ClearCommBreak@4",
+            "va": 268570064,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 93,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 212,
+          "table_index": 523,
+          "thunk": "WU32UngetCommChar",
+          "binding": {
+            "name": "_WU32UngetCommChar@4",
+            "va": 268573984,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 57,
+            "relocation_words": 1
+          }
+        },
+        {
+          "ordinal": 213,
+          "table_index": 524,
+          "thunk": "WU32BuildCommDCB",
+          "binding": {
+            "name": "_WU32BuildCommDCB@4",
+            "va": 268569776,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 284,
+            "relocation_words": 12
+          }
+        },
+        {
+          "ordinal": 214,
+          "table_index": 525,
+          "thunk": "WU32EscapeCommFunction",
+          "binding": {
+            "name": "_WU32EscapeCommFunction@4",
+            "va": 268570512,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 295,
+            "relocation_words": 9
+          }
+        },
+        {
+          "ordinal": 215,
+          "table_index": 526,
+          "thunk": "WU32FlushComm",
+          "binding": {
+            "name": "_WU32FlushComm@4",
+            "va": 268570816,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 187,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 245,
+          "table_index": 556,
+          "thunk": "WU32EnableCommNotification",
+          "binding": {
+            "name": "_WU32EnableCommNotification@4",
+            "va": 268570288,
+            "function": true,
+            "owner": "wucomm.obj",
+            "bytes": 210,
+            "relocation_words": 3
+          }
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_WowOriginalFreeTask@4",
+      "target": "_FreeCommSupportResources@4",
+      "offsets": [
+        105
+      ],
+      "binding": {
+        "name": "_WowOriginalFreeTask@4",
+        "va": 268536240,
+        "function": true,
+        "owner": "wkman.obj",
+        "bytes": 263,
+        "relocation_words": 24
+      }
+    },
+    {
+      "caller": "_WU32LoadMenu@4",
+      "target": "_ConvertMenu16@20",
+      "offsets": [
+        111
+      ],
+      "binding": {
+        "name": "_WU32LoadMenu@4",
+        "va": 268579728,
+        "function": true,
+        "owner": "wumenu.obj",
+        "bytes": 193,
+        "relocation_words": 8
+      }
+    },
+    {
+      "caller": "_WU32LoadMenuIndirect@4",
+      "target": "_ConvertMenu16@20",
+      "offsets": [
+        21,
+        57
+      ],
+      "binding": {
+        "name": "_WU32LoadMenuIndirect@4",
+        "va": 268579936,
+        "function": true,
+        "owner": "wumenu.obj",
+        "bytes": 99,
+        "relocation_words": 5
+      }
+    }
+  ],
+  "cleanup": {
+    "name": "_FreeCommSupportResources@4",
+    "va": 268567152,
+    "function": true,
+    "owner": "wucomm.obj",
+    "bytes": 273,
+    "relocation_words": 14
+  },
+  "wkman_source_sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2",
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkman.obj",
+      "sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wres16.obj",
+      "sha256": "38A00BEA2262CEA4BA2E89C9A1FFB43B81408DC62B6051A99CEB80808BC40AC6"
+    }
+  ],
+  "scope": "Initial USER pointers, selected call relocations and masked source-object code; no guest execution or complete lifecycle"
+}

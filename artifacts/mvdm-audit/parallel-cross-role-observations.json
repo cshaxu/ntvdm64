@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "f7a974aba",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-2/parallel-review-fourth-evidence.json",
+      "sha256": "B40CBF0EFB02EEC242AF06174196F6C36E46AE28EDA63C43A3AF1E93CAFA8F2F"
+    },
+    {
+      "path": "shard-3/support-clock-env-observations.json",
+      "sha256": "A356BE442EEC490D0009F9CB5B0BAA9C269140773043D7C61B947695755BAD08"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Initial image dispatch and selected call edges, not behavioral acceptance"
+}

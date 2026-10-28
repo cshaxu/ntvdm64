@@ -1,0 +1,139 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/support/time_day.c",
+      "sha256": "AF7A3D2B6DD80DEC1F72910AE627F2ED87906FE8986E8C7C930AE6FBF35BD1B2",
+      "wow_source_ids": "SRC:49c3b1c0436e4564bd7c;SRC:b97302ccaf33a06954e1",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "compile_edge": "build obj/support/time_day.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/time_day.c",
+      "dependency_header": "obj/support/time_day.obj: #deps 32, deps mtime 8147602913275323 (VALID)",
+      "functions": [
+        {
+          "name": "_time_of_day_init",
+          "va": 4223152,
+          "function": true,
+          "owner": "original-softpc-support:time_day.obj",
+          "bytes": 3,
+          "relocation_words": 0
+        },
+        {
+          "name": "_UpDateInProgress",
+          "va": 5797856,
+          "function": true,
+          "owner": "original-softpc-support:time_day.obj",
+          "bytes": 43,
+          "relocation_words": 3
+        },
+        {
+          "name": "_time_of_day",
+          "va": 5797904,
+          "function": true,
+          "owner": "original-softpc-support:time_day.obj",
+          "bytes": 1032,
+          "relocation_words": 105
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/support/get_env.c",
+      "sha256": "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F",
+      "wow_source_ids": "SRC:586bd2b13eeae482deaa;SRC:76b8b1972367a00ac926",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "compile_edge": "build obj/support/get_env.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/get_env.c",
+      "dependency_header": "obj/support/get_env.obj: #deps 19, deps mtime 8147602915614860 (VALID)",
+      "functions": []
+    }
+  ],
+  "bios_1a_target": {
+    "name": "_time_of_day",
+    "va": 5797904,
+    "function": true,
+    "owner": "original-softpc-support:time_day.obj"
+  },
+  "flags": "cflags = /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\"",
+  "helper_search": [
+    "src\\mvdm\\softpc.new\\base\\support\\get_env.c:83:GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)",
+    "src\\mvdm\\softpc.new\\base\\support\\get_env.c:125:GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)",
+    "src\\mvdm\\softpc.new\\base\\support\\get_env.c:157:GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)",
+    "src\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.c:193:\t\tISM32 size = ISM32getenv(\"CCPU_HISTORY_SIZE\", 256);",
+    "src\\mvdm\\softpc.new\\base\\inc\\get_env.h:20:extern IBOOL IBOOLgetenv IPT2(char *, name, IBOOL, default_value);",
+    "src\\mvdm\\softpc.new\\base\\inc\\get_env.h:21:extern ISM32 ISM32getenv IPT2(char *, name, ISM32, default_value);",
+    "src\\mvdm\\softpc.new\\base\\inc\\get_env.h:22:extern char *STRINGgetenv IPT2(char *, name, char *, default_value);"
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "sha256": "AF7A3D2B6DD80DEC1F72910AE627F2ED87906FE8986E8C7C930AE6FBF35BD1B2"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "sha256": "AF7A3D2B6DD80DEC1F72910AE627F2ED87906FE8986E8C7C930AE6FBF35BD1B2"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "sha256": "AF7A3D2B6DD80DEC1F72910AE627F2ED87906FE8986E8C7C930AE6FBF35BD1B2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\time_day.obj",
+      "sha256": "06EF8059F0531216D16A0062C8B187B8E77793428BB4A7B7393B97DF3408A249"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "sha256": "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "sha256": "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "sha256": "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\get_env.obj",
+      "sha256": "1235BC181E2D83508B80689685FAB05F6379D44A9B2CEACD96FB618F9B7A450B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\bios.obj",
+      "sha256": "8D6A49949BE5318A23A9E74E654FC2829D841A00FE345A346B074A96D3B81FD9"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.c",
+      "sha256": "BFEAFF9C9A49039AA29740F6DAC2DD6A32BCE897D0D0FFE3D00A43D66CD09523"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "sha256": "A8345E88DB25332BDF008BDC730FFA15BDC6110ECF1A6C54ED7E59C95CA7085B"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "sha256": "EDE3217E7C3830601A7F95D557DA9011A15250902F8C468241C738B605055D3B"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\config.c",
+      "sha256": "B876FE8DA0BA1A2FBB995D069D7989A07D5825938574079A957C04D8C0B70D27"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\host_def.h",
+      "sha256": "881ABE6E5E1A5CE490542DE98B870E9DCDCF72AE7E3E836B6A6B2B73560EB063"
+    },
+    {
+      "path": "src\\ntvdm-exe\\win32\\mvdm_crt_redirect.h",
+      "sha256": "65C69CCA19B03E14CD6D28F9DE567F55F134246CCA133F910FBC877E97C23BD7"
+    }
+  ],
+  "scope": "Clock BOP initial image binding; source profile and helper linkage, not timing behavior"
+}
