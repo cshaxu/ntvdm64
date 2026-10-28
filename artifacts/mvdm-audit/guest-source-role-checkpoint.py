@@ -165,7 +165,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-empty-printscreen-source-only':
                     assert prefix == 'native-source-next-role-' and path == 'softpc.new/base/comms/prt_scrn.c'
                 if proof['role'] == 'historical-build-recipe-file-only':
-                    assert prefix == 'historical-build-role-'
+                    assert prefix == 'historical-build-role-' or (prefix == 'shard0-ddeml-test-role-' and path in ('wow16/ddeml/tests/src/client/mk4dos.cmd', 'wow16/ddeml/tests/src/ddemo/mk4dos.cmd', 'wow16/ddeml/tests/src/server/mk4dos.cmd'))
                 if proof['role'] == 'historical-inline-helper-source-only':
                     assert prefix == 'ccpu-control-role-' and path == 'softpc.new/base/ccpu386/nop.c'
                 if proof['role'] == 'historical-cpu-test-declaration-only':
@@ -240,6 +240,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'shard0-ddeml-test-role-':
+        assert len(changed) == 14 and all(p.startswith('wow16/ddeml/tests/') and changed[p]['status'] == 'excluded' for p in changed)
     if prefix == 'shard0-winsock-raw-role-':
         assert set(changed) == {'wow32/wsraw.c'} and changed['wow32/wsraw.c']['status'] == 'partial'
         assert changed['wow32/wsraw.c']['original_text_retained_percent'] == '100' and not changed['wow32/wsraw.c']['estimated_restored_code_percent']
@@ -924,7 +926,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-', 'base-inc-alternate-role-', 'cvidc-generated-role-', 'cvidc-vector-role-', 'parallel-native-role-', 'parallel-cvidc-role-', 'parallel-wow-gdi-role-', 'parallel-cross-role-', 'parallel-dpmi-role-', 'parallel-text-dem-role-', 'parallel-resource-redir-role-', 'parallel-heap-video-role-', 'parallel-controls-directory-role-', 'parallel-user-sound-role-', 'parallel-user-interaction-role-', 'parallel-guest-delivery-role-', 'shard0-cvidc-declaration-role-', 'shard0-wow-palette-role-', 'parallel-wow-memory-spool-role-', 'parallel-embedding-sound-role-', 'parallel-wow-gdi-table-role-', 'shard0-empty-gdi-role-', 'shard0-winsock-raw-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-', 'base-inc-alternate-role-', 'cvidc-generated-role-', 'cvidc-vector-role-', 'parallel-native-role-', 'parallel-cvidc-role-', 'parallel-wow-gdi-role-', 'parallel-cross-role-', 'parallel-dpmi-role-', 'parallel-text-dem-role-', 'parallel-resource-redir-role-', 'parallel-heap-video-role-', 'parallel-controls-directory-role-', 'parallel-user-sound-role-', 'parallel-user-interaction-role-', 'parallel-guest-delivery-role-', 'shard0-cvidc-declaration-role-', 'shard0-wow-palette-role-', 'parallel-wow-memory-spool-role-', 'parallel-embedding-sound-role-', 'parallel-wow-gdi-table-role-', 'shard0-empty-gdi-role-', 'shard0-winsock-raw-role-', 'shard0-ddeml-test-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

@@ -1,0 +1,905 @@
+build obj/ccpu/aaa.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/aaa.c
+build obj/ccpu/aad.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/aad.c
+build obj/ccpu/aam.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/aam.c
+build obj/ccpu/aas.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/aas.c
+build obj/ccpu/adc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/adc.c
+build obj/ccpu/add.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/add.c
+build obj/ccpu/and.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/and.c
+build obj/ccpu/arpl.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/arpl.c
+build obj/ccpu/bound.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bound.c
+build obj/ccpu/bsf.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bsf.c
+build obj/ccpu/bsr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bsr.c
+build obj/ccpu/bswap.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bswap.c
+build obj/ccpu/bt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bt.c
+build obj/ccpu/btc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/btc.c
+build obj/ccpu/btr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/btr.c
+build obj/ccpu/bts.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/bts.c
+build obj/ccpu/call.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/call.c
+build obj/ccpu/cbw.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cbw.c
+build obj/ccpu/ccpupig.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ccpupig.c
+build obj/ccpu/ccpusas4.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ccpusas4.c
+build obj/ccpu/cdq.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cdq.c
+build obj/ccpu/clc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/clc.c
+build obj/ccpu/cld.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cld.c
+build obj/ccpu/cli.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cli.c
+build obj/ccpu/clts.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/clts.c
+build obj/ccpu/cmc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cmc.c
+build obj/ccpu/cmp.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cmp.c
+build obj/ccpu/cmpxchg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cmpxchg.c
+build obj/ccpu/cwd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cwd.c
+build obj/ccpu/cwde.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cwde.c
+build obj/ccpu/c_addr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_addr.c
+build obj/ccpu/c_bsic.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_bsic.c
+build obj/ccpu/c_debug.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_debug.c
+build obj/ccpu/c_div64.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_div64.c
+build obj/ccpu/c_getset.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_getset.c
+build obj/ccpu/c_intr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_intr.c
+build obj/ccpu/c_main.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c
+build obj/ccpu/c_mul64.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_mul64.c
+build obj/ccpu/c_neg64.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_neg64.c
+build obj/ccpu/c_page.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_page.c
+build obj/ccpu/c_prot.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_prot.c
+build obj/ccpu/c_reg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_reg.c
+build obj/ccpu/c_seg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_seg.c
+build obj/ccpu/c_stack.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_stack.c
+build obj/ccpu/c_tlb.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_tlb.c
+build obj/ccpu/c_tsksw.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_tsksw.c
+build obj/ccpu/c_xcptn.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_xcptn.c
+build obj/ccpu/c_xfer.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_xfer.c
+build obj/ccpu/c_xtrn.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_xtrn.c
+build obj/ccpu/daa.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/daa.c
+build obj/ccpu/das.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/das.c
+build obj/ccpu/dec.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/dec.c
+build obj/ccpu/div.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/div.c
+build obj/ccpu/enter.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/enter.c
+build obj/ccpu/fpu.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/fpu.c
+build obj/ccpu/idiv.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/idiv.c
+build obj/ccpu/imul.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/imul.c
+build obj/ccpu/in.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/in.c
+build obj/ccpu/inc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/inc.c
+build obj/ccpu/into.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/into.c
+build obj/ccpu/intx.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/intx.c
+build obj/ccpu/invd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/invd.c
+build obj/ccpu/invlpg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/invlpg.c
+build obj/ccpu/iret.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/iret.c
+build obj/ccpu/jcxz.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/jcxz.c
+build obj/ccpu/jmp.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/jmp.c
+build obj/ccpu/jxx.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/jxx.c
+build obj/ccpu/lahf.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lahf.c
+build obj/ccpu/lar.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lar.c
+build obj/ccpu/lea.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lea.c
+build obj/ccpu/leave.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/leave.c
+build obj/ccpu/lgdt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lgdt.c
+build obj/ccpu/lidt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lidt.c
+build obj/ccpu/lldt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lldt.c
+build obj/ccpu/lmsw.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lmsw.c
+build obj/ccpu/loopxx.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/loopxx.c
+build obj/ccpu/lsl.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lsl.c
+build obj/ccpu/ltr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ltr.c
+build obj/ccpu/lxs.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/lxs.c
+build obj/ccpu/mov.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/mov.c
+build obj/ccpu/movsx.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/movsx.c
+build obj/ccpu/mul.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/mul.c
+build obj/ccpu/neg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/neg.c
+build obj/ccpu/nop.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/nop.c
+build obj/ccpu/not.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/not.c
+build obj/ccpu/or.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/or.c
+build obj/ccpu/out.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/out.c
+build obj/ccpu/pop.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/pop.c
+build obj/ccpu/popa.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/popa.c
+build obj/ccpu/popf.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/popf.c
+build obj/ccpu/push.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/push.c
+build obj/ccpu/pusha.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/pusha.c
+build obj/ccpu/pushf.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/pushf.c
+build obj/ccpu/rcl.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/rcl.c
+build obj/ccpu/rcr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/rcr.c
+build obj/ccpu/ret.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ret.c
+build obj/ccpu/rol.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/rol.c
+build obj/ccpu/ror.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ror.c
+build obj/ccpu/rsrvd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/rsrvd.c
+build obj/ccpu/sahf.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sahf.c
+build obj/ccpu/sar.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sar.c
+build obj/ccpu/sbb.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sbb.c
+build obj/ccpu/setxx.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/setxx.c
+build obj/ccpu/sgdt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sgdt.c
+build obj/ccpu/shl.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/shl.c
+build obj/ccpu/shld.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/shld.c
+build obj/ccpu/shr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/shr.c
+build obj/ccpu/shrd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/shrd.c
+build obj/ccpu/sidt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sidt.c
+build obj/ccpu/sldt.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sldt.c
+build obj/ccpu/smsw.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/smsw.c
+build obj/ccpu/stc.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/stc.c
+build obj/ccpu/std.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/std.c
+build obj/ccpu/sti.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sti.c
+build obj/ccpu/str.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/str.c
+build obj/ccpu/stubs.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/stubs.c
+build obj/ccpu/sub.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sub.c
+build obj/ccpu/test.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/test.c
+build obj/ccpu/verr.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/verr.c
+build obj/ccpu/verw.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/verw.c
+build obj/ccpu/wait.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/wait.c
+build obj/ccpu/wbinvd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/wbinvd.c
+build obj/ccpu/xadd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xadd.c
+build obj/ccpu/xchg.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xchg.c
+build obj/ccpu/xlat.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xlat.c
+build obj/ccpu/xor.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xor.c
+build obj/ccpu/zfrsrvd.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/zfrsrvd.c
+build obj/ccpu/sasCdef.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/sasCdef.c
+build obj/ccpu/ntthread.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/ntthread.c
+build obj/ccpu/localfm.obj: cc_ccpu O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/localfm.c
+build obj/bios/bios.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/bios.c
+build obj/bios/cmos_bis.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/cmos_bis.c
+build obj/bios/cntlbop.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/cntlbop.c
+build obj/bios/emm_fncs.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/emm_fncs.c
+build obj/bios/reset.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/reset.c
+build obj/bios/rom_basc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/rom_basc.c
+build obj/bios/rtc_bios.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/rtc_bios.c
+build obj/bios/slave_bs.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/slave_bs.c
+build obj/bios/tape_io.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/tape_io.c
+build obj/bios/equipmnt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/equipmnt.c
+build obj/bios/ill_bop.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/ill_bop.c
+build obj/bios/build_id.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/build_id.c
+build obj/bios/virtual.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/virtual.c
+build obj/bios/mem_size.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/bios/mem_size.c
+build obj/keymouse/keyba.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/keyba.c
+build obj/keymouse/keybd_io.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/keybd_io.c
+build obj/keymouse/mouse.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/mouse.c
+build obj/keymouse/ppi.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/ppi.c
+build obj/keymouse/mouse_io.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/mouse_io.c
+build obj/system/at_dma.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/at_dma.c
+build obj/system/cmosnt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/cmosnt.c
+build obj/system/ica.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/ica.c
+build obj/system/idetect.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/idetect.c
+build obj/system/illegalp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/illegalp.c
+build obj/system/qevnt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/qevnt.c
+build obj/system/rom.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/rom.c
+build obj/system/timer.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/timer.c
+build obj/system/timestrb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/timestrb.c
+build obj/system/dummy_nt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/dummy_nt.c
+build obj/system/unexp_nt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/system/unexp_nt.c
+build obj/disks/floppy.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/floppy.c
+build obj/disks/floppy_i.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/floppy_i.c
+build obj/disks/diskbios.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/diskbios.c
+build obj/disks/fdisk.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/fdisk.c
+build obj/disks/fla.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/fla.c
+build obj/disks/gfi.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi.c
+build obj/disks/gfi_ibm.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_ibm.c
+build obj/disks/gfi_mpty.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_mpty.c
+build obj/disks/gfi_sflp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_sflp.c
+build obj/disks/gfi_test.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_test.c
+build obj/support/terminat.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/terminat.c
+build obj/support/time_day.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/time_day.c
+build obj/support/ios.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/ios.c
+build obj/support/main.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/main.c
+build obj/support/get_env.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/get_env.c
+build obj/support/xt.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/support/xt.c
+build obj/video/ega_mode.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_mode.c
+build obj/video/ega_prts.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_prts.c
+build obj/video/ega_vide.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_vide.c
+build obj/video/gfx_updt.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/gfx_updt.c
+build obj/video/video.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/video.c
+build obj/video/gvi.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/gvi.c
+build obj/video/video_io.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/video_io.c
+build obj/video/v7_ports.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/v7_ports.c
+build obj/video/v7_video.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/v7_video.c
+build obj/video/vga_mode.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/vga_mode.c
+build obj/video/vga_prts.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/vga_prts.c
+build obj/video/vga_vide.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/vga_vide.c
+build obj/video/ega_read.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_read.c
+build obj/video/ega_writ.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_writ.c
+build obj/video/ega_dmmy.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_dmmy.c
+build obj/video/ega_trcr.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_trcr.c
+build obj/video/egawrtm0.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/egawrtm0.c
+build obj/video/egwrtm12.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/egwrtm12.c
+build obj/video/cga.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/cga.c
+build obj/cvidc/SINIT011.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SINIT011.c
+build obj/cvidc/SINIT012.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SINIT012.c
+build obj/cvidc/SINIT013.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SINIT013.c
+build obj/cvidc/SEVID000.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID000.c
+build obj/cvidc/SEVID001.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID001.c
+build obj/cvidc/SEVID002.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID002.c
+build obj/cvidc/SEVID003.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID003.c
+build obj/cvidc/SEVID004.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID004.c
+build obj/cvidc/SEVID005.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID005.c
+build obj/cvidc/SEVID006.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID006.c
+build obj/cvidc/SEVID007.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID007.c
+build obj/cvidc/SEVID008.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID008.c
+build obj/cvidc/SEVID009.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID009.c
+build obj/cvidc/SEVID010.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID010.c
+build obj/cvidc/SEVID011.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID011.c
+build obj/cvidc/SEVID012.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID012.c
+build obj/cvidc/SEVID013.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID013.c
+build obj/cvidc/SEVID014.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID014.c
+build obj/cvidc/SEVID015.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID015.c
+build obj/cvidc/SEVID016.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID016.c
+build obj/cvidc/SEVID017.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID017.c
+build obj/cvidc/SEVID018.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID018.c
+build obj/cvidc/SEVID019.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID019.c
+build obj/cvidc/SEVID020.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID020.c
+build obj/cvidc/SEVID021.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID021.c
+build obj/cvidc/SEVID022.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID022.c
+build obj/cvidc/SEVID023.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID023.c
+build obj/cvidc/SEVID024.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID024.c
+build obj/cvidc/SEVID025.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID025.c
+build obj/cvidc/SEVID026.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID026.c
+build obj/cvidc/SEVID027.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID027.c
+build obj/cvidc/SEVID028.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID028.c
+build obj/cvidc/SEVID029.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID029.c
+build obj/cvidc/SEVID030.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SEVID030.c
+build obj/cvidc/ev_glue.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/ev_glue.c
+build obj/cvidc/evidfunc.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/evidfunc.c
+build obj/cvidc/j_c_lang.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/j_c_lang.c
+build obj/cvidc/accessfn.obj: cc_cvidc_access O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/accessfn.c
+build obj/cvidc/vglfunc.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/vglfunc.c
+build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c | O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/cvidc_cpu_binding.inc
+build obj/cvidc/vglob.obj: cc_cvidc_rule O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cpu/src/evid/vglob.c
+build obj/comms/com.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/com.c
+build obj/comms/printer.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/printer.c
+build obj/comms/printer_.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/printer_.c
+build obj/comms/prt_scrn.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/prt_scrn.c
+build obj/comms/rs232_io.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/comms/rs232_io.c
+build obj/dos/emm_mngr.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/dos/emm_mngr.c
+build obj/dem/dem.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/dem.c
+build obj/dem/demfcb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demfcb.c
+build obj/dem/demdata.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demdata.c
+build obj/dem/demdir.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demdir.c
+build obj/dem/demdisp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demdisp.c
+build obj/dem/demerror.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demerror.c
+build obj/dem/demfile.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demfile.c
+build obj/dem/demgset.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demgset.c
+build obj/dem/demhndl.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demhndl.c
+build obj/dem/demioctl.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demioctl.c
+build obj/dem/demlock.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demlock.c
+build obj/dem/demmisc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demmisc.c
+build obj/dem/demmsg.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demmsg.c
+build obj/dem/demsrch.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demsrch.c
+build obj/dem/demdasd.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demdasd.c
+build obj/dem/demlabel.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demlabel.c
+build obj/command/cmd.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmd.c
+build obj/command/cmddata.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmddata.c
+build obj/command/cmddisp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmddisp.c
+build obj/command/cmdexec.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdexec.c
+build obj/command/cmdexit.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdexit.c
+build obj/command/cmdmisc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdmisc.c
+build obj/command/cmdpif.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdpif.c
+build obj/command/cmdredir.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdredir.c
+build obj/command/cmdconf.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdconf.c
+build obj/command/cmdkeyb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdkeyb.c
+build obj/command/cmdenv.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmdenv.c
+build obj/redir/vrmslot.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrmslot.c
+build obj/redir/vrnmpipe.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrnmpipe.c
+build obj/redir/vrdisp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdisp.c
+build obj/redir/vrinit.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrinit.c
+build obj/redir/vrmisc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrmisc.c
+build obj/redir/vrnetapi.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrnetapi.c
+build obj/redir/vrnetb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrnetb.c
+build obj/redir/vrputil.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrputil.c
+build obj/redir/vrremote.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrremote.c
+build obj/redir/vrdlc5c.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlc5c.c
+build obj/redir/vrdlcpst.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlcpst.c
+build obj/redir/vrdlcbuf.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlcbuf.c
+build obj/redir/vrdlcdbg.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlcdbg.c
+build obj/redir/vrdebug.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdebug.c
+build obj/redir/vrdll.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdll.c
+build obj/xms/xms.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xms.c
+build obj/xms/xmsa20.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsa20.c
+build obj/xms/xmsblock.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsblock.c
+build obj/xms/xmsdisp.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsdisp.c
+build obj/xms/xmsmisc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsmisc.c
+build obj/xms/xmsumb.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsumb.c
+build obj/xms/xmsmemr.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/xms.486/xmsmemr.c
+build obj/dpmi/debug.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/debug.c
+build obj/dpmi/dpmi32.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmi32.c
+build obj/dpmi/dpmiint.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c
+build obj/dpmi/dpmiselr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiselr.c
+build obj/dpmi/buffer.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/buffer.c
+build obj/dpmi/data.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/data.c
+build obj/dpmi/int21map.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/int21map.c
+build obj/dpmi/modesw.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/modesw.c
+build obj/dpmi/register.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/register.c
+build obj/dpmi/savestat.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/savestat.c
+build obj/dpmi/stack.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/stack.c
+build obj/dpmi/vxd.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/vxd.c
+build obj/dpmi/xmem.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/xmem.c
+build obj/dpmi/dpmimemr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmimemr.c
+build obj/dpmi/dpmimscr.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmimscr.c
+build obj/dpmi/i386_dpmi386.obj: cc_dpmi O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32/i386/dpmi386.c
+build obj/suballoc/suballoc.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/suballoc/suballoc.c
+build obj/oemuni/file.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/oemuni/file.c
+build obj/oemuni/process.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/oemuni/process.c
+build obj/ntvdm/session/guest_memory_lease.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/session/guest_memory_lease.c
+build obj/ntvdm/session/session.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/session/session.c
+build obj/adapter-wow-worker/wow_gdi_alias.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/wow_gdi_alias.c
+build obj/adapter-wow-worker/wow_user_runtime.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/wow_user_runtime.c
+build obj/adapter-wow-worker/wow_user_session_binding.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/wow_user_session_binding.c
+build obj/tests/cpu40_descriptor_domain_fixture.obj: cc_dpmi O$:/repos.hobby/ntvdm64/tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c
+build obj/tests/rtl_x86_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/opennt-host/rtl_x86_fixture.c
+build obj/tests/environment_projection_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/opennt-host/environment_projection_fixture.c
+build obj/tests/cvidc_vector_binding_fixture.obj: cc_cvidc_access O$:/repos.hobby/ntvdm64/tests/mvdm-host/cvidc_vector_binding_fixture.c
+build obj/tests/x87_layout_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/x87_layout_fixture.c
+build generated/cvidc_vector_provider_stubs.c: generate_cvidc_vector_provider_stubs generated/cvidc_cpu_binding.inc
+build obj/tests/cvidc_vector_provider_stubs.obj: cc generated/cvidc_vector_provider_stubs.c
+build obj/base-debug/debuggng.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/debuggng.c
+build obj/base-debug/ega_dump.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/ega_dump.c
+build obj/base-debug/btrace.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/btrace.c
+build obj/base-debug/trace.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/trace.c
+build obj/base-debug/profile.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/profile.c
+build obj/base-debug/pigyoda.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/pigyoda.c
+build obj/base-debug/yoda.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/yoda.c
+build obj/base-debug/dasm.obj: cc O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/dasm.c
+build obj/host/sim32.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/sim32.c
+build obj/host/cpucstbs.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/cpucstbs.c
+build obj/host/nt_timer.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_timer.c
+build obj/host/nt_ntfun.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_ntfun.c
+build obj/host/nt_msscs.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_msscs.c
+build obj/host/nt_error.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_error.c
+build obj/host/nt_cga.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_cga.c
+build obj/host/nt_ega.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_ega.c
+build obj/host/nt_vga.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_vga.c
+build obj/host/nt_input.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_input.c
+build obj/host/nt_graph.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_graph.c
+build obj/host/nt_hosts.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_hosts.c
+build obj/host/nt_sound.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_sound.c
+build obj/host/nt_bop.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_bop.c
+build obj/host/nt_com.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_com.c
+build obj/host/nt_wcom.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_wcom.c
+build obj/host/nt_rez.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_rez.c
+build obj/host/nt_sas.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_sas.c
+build obj/host/nt_fdisk.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_fdisk.c
+build obj/host/nt_unix.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_unix.c
+build obj/host/nt_keycd.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_keycd.c
+build obj/host/nt_cpu.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_cpu.c
+build obj/host/nt_lpt.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_lpt.c
+build obj/host/nt_yoda.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_yoda.c
+build obj/host/nt_mouse.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_mouse.c
+build obj/host/nt_event.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_event.c
+build obj/host/nt_munge.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_munge.c
+build obj/host/config.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/config.c
+build obj/host/nt_nls.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_nls.c
+build obj/host/copy_fnc.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/copy_fnc.c
+build obj/host/stubs.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/stubs.c
+build obj/host/nt_pif.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_pif.c
+build obj/host/nt_fulsc.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_fulsc.c
+build obj/host/nt_emm.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_emm.c
+build obj/host/x86_emm.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/x86_emm.c
+build obj/host/nt_eoi.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_eoi.c
+build obj/host/nt_vdd.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_vdd.c
+build obj/host/nt_sec.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_sec.c
+build obj/host/nt_thred.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_thred.c
+build obj/host/nt_det.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_det.c
+build obj/host/nt_umb.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_umb.c
+build obj/host/fprt.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/fprt.c
+build obj/host/nt_rflop.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_rflop.c
+build obj/host/nt_inthk.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_inthk.c
+build obj/host/nt_reset.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_reset.c
+build obj/host/nt_mem.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_mem.c
+build obj/host/nt_cprgs.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_cprgs.c
+build obj/host/ntvdm_entry.obj: cc_host O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/obj.vdm/ntvdm.c
+build obj/host/softpc-resource.res: rc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/softpc-embedded-roms.rc
+build obj/adapter-win32/ntioapi_facade.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/ntioapi_facade.c
+build obj/adapter-win32/thread_start_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/thread_start_compat.c
+build obj/adapter-win32/ccpu_thread_exit_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/ccpu_thread_exit_compat.c
+build obj/adapter-win32/nt_thread_alert_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/nt_thread_alert_compat.c
+build obj/adapter-win32/console_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_compat.c
+build obj/adapter-win32/console_client.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_client.c
+build obj/adapter-win32/worker_lifecycle.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/worker_lifecycle.c
+build obj/adapter-win32/console_bitmap.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_bitmap.c
+build obj/adapter-win32/console_graphics.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_graphics.c
+build obj/adapter-win32/console_text.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_text.c
+build obj/adapter-win32/crt_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/crt_compat.c
+build obj/adapter-win32/command_process_compat.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/command_process_compat.c
+build obj/adapter-win32/wow_private_unavailable.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/wow_private_unavailable.c
+build obj/adapter-win32/wow_hard_error_dialog.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/wow_hard_error_dialog.c
+build obj/adapter-win32/wow_hard_error_decoder.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/wow_hard_error_decoder.c
+build obj/adapter-win32/mvdm_base_vdm_environment.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_base_vdm_environment.c
+build obj/opennt-abi-host-compat/opennt_support_rtl.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/opennt_support_rtl.c
+build obj/opennt-abi-host-compat/console_grid.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/console_grid.c
+build obj/adapter-basesrv/mvdm_command_guest_state.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/command/source/mvdm_command_guest_state.c
+build obj/adapter-basesrv/mvdm_command_native_child.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/command/source/mvdm_command_native_child.c
+build obj/adapter-monitor/vdm_control.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/source/vdm_control.c
+build obj/adapter-monitor/mvdm_vdm_tib.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/source/../mvdm_vdm_tib.c
+build obj/adapter-debugger/dbg_registers.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/debugger/source/dbg_registers.c
+build obj/adapter-debugger/dbg_prompt.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/debugger/source/dbg_prompt.c
+build obj/mvdm-debugger/dbg.obj: cc_mvdm_debugger O$:/repos.hobby/ntvdm64/src/mvdm/dbg/dbg.c
+build obj/adapter-softpc/mvdm_softpc_firmware.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_firmware.c
+build obj/adapter-softpc/mvdm_shadow_registry.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_shadow_registry.c
+build obj/adapter-softpc/mvdm_xms_memory.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_xms_memory.c
+build obj/adapter-softpc/mvdm_a20.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_a20.c
+build obj/adapter-softpc/mvdm_softpc_guest_memory.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c
+build obj/adapter-softpc/mvdm_softpc_physical_mapping.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_physical_mapping.c
+build obj/adapter-softpc/mvdm_guest_location.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_guest_location.c
+build obj/adapter-softpc/mvdm_softpc_execution.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_execution.c
+build obj/adapter-softpc/mvdm_softpc_termination.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_termination.c
+build obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_ccpu_wait.c
+build obj/adapter-softpc/mvdm_softpc_fast_bop.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c
+build obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c
+build obj/adapter-softpc/mvdm_standalone_worker.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_standalone_worker.c
+build obj/adapter-softpc/ntvdm_dos_observer.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/ntvdm_dos_observer.c
+build obj/adapter-softpc/mvdm_softpc_event_thread.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_event_thread.c
+build obj/adapter-softpc/mvdm_softpc_presentation_font.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_presentation_font.c
+build obj/adapter-softpc/mvdm_softpc_text_video.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_text_video.c
+build obj/adapter-softpc/mvdm_keyboard_history.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_keyboard_history.c
+build obj/adapter-softpc/mvdm_keyboard_reset.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_keyboard_reset.c
+build obj/adapter-softpc/mvdm_softpc_mouse_input.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_input.c
+build obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c
+build obj/adapter-softpc/mvdm_softpc_mouse_guest.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c
+build obj/adapter-softpc/v7_pointer.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/v7_pointer.c
+build obj/adapter-softpc/v7_pointer_binding.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/v7_pointer_binding.c
+build obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_descriptor_fields.c
+build obj/vdmredir-dll/mvdm_redirector_guest_copy.obj: cc O$:/repos.hobby/ntvdm64/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c
+build obj/vdmredir-dll/mvdm_redirector_remote_unavailable.obj: cc O$:/repos.hobby/ntvdm64/src/vdmredir-dll/source/mvdm_redirector_remote_unavailable.c
+build obj/vdmredir-dll/mvdm_redirector_dll_entry.obj: cc O$:/repos.hobby/ntvdm64/src/vdmredir-dll/source/mvdm_redirector_dll_entry.c
+build obj/adapter-redir/mvdm_redirector_worker_copy.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/mvdm_redirector_worker_copy.c
+build obj/adapter-redir/mvdm_redirector_async.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/mvdm_redirector_async.c
+build obj/opennt-rtl-x86/largeint-selected.obj: asm_x86 O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/rtl/x86/largeint-selected.asm
+build obj/opennt-rtl-x86/movemem-selected.obj: asm_x86 O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/rtl/x86/movemem-selected.asm
+build obj/opennt-rtl/environ.obj: cc_rtl O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/rtl/environ.c
+build obj/opennt-rtl/error.obj: cc_rtl O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/rtl/error.c
+build obj/opennt-rtl/time.obj: cc_rtl O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/rtl/time.c
+build obj/kernel-vdm/monitor_printer.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/source/monitor_printer.c
+build obj/adapter-vdd/mvdm_softpc_vdd_unavailable.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/mvdm_softpc_vdd_unavailable.c
+build obj/opennt-netlib/ntstatus.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/ntstatus.c
+build obj/opennt-netlib/copystr.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/copystr.c
+build obj/opennt-netlib/allocstr.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/allocstr.c
+build obj/opennt-netlib/initoem.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/initoem.c
+build obj/opennt-netlib/memalloc.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/memalloc.c
+build obj/opennt-netlib/time.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/time.c
+build obj/opennt-netlib/timezone.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/timezone.c
+build obj/opennt-netlib/xlatesvc.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/xlatesvc.c
+build obj/opennt-netlib/svcinfo.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/svcinfo.c
+build obj/opennt-netlib/packstr.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/netlib/packstr.c
+build obj/opennt-netapi-api/apibuff.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/api/apibuff.c
+build obj/opennt-xactsrv/apiwksta.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/apiwksta.c
+build obj/opennt-xactsrv/apiuse.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/apiuse.c
+build obj/opennt-xactsrv/apimsg.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/apimsg.c
+build obj/opennt-xactsrv/apisvc.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/apisvc.c
+build obj/opennt-xactsrv/xssubs.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/xssubs.c
+build obj/opennt-xactsrv/strucsiz.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/strucsiz.c
+build obj/opennt-xactsrv/examine.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/examine.c
+build obj/opennt-xactsrv/ascii.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/ascii.c
+build obj/opennt-xactsrv/pointer.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/pointer.c
+build obj/opennt-xactsrv/convert.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/convert.c
+build obj/opennt-xactsrv/xsunicod.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/xsunicod.c
+build obj/opennt-xactsrv/auxdata.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/auxdata.c
+build obj/opennt-xactsrv/parmnum.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv/parmnum.c
+build obj/opennt-base-vdm/vdm.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/win32/client/vdm.c
+build obj/opennt-base-client/client.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/win32/client/vdm.c
+build obj/opennt-base-client/classifier.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/win32/client/vdm.c
+build obj/opennt-base-client/capture.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntdll/csrutil.c
+build opennt-base-client.lib: lib obj/opennt-base-client/client.obj obj/opennt-base-client/classifier.obj obj/opennt-base-client/capture.obj
+build obj/opennt-base-server/srvvdm.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/win32/server/srvvdm.c
+build obj/opennt-base-server/exports.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/server/exports.c
+build opennt-base-server.lib: lib obj/opennt-base-server/srvvdm.obj obj/opennt-base-server/exports.obj
+build obj/opennt-base-bindings/service.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_service.c
+build obj/opennt-base-bindings/service-core.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/service_core.c
+build obj/opennt-base-bindings/worker-registry.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/worker_registry.c
+build obj/opennt-base-bindings/frontend-registry.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/frontend_registry.c
+build obj/opennt-base-bindings/native-commands.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/native_commands.c
+build obj/opennt-base-bindings/service-lifecycle.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/lifecycle.c
+build obj/opennt-base-bindings/service-management.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/management.c
+build obj/opennt-base-bindings/task-observation.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/task_observation.c
+build obj/opennt-base-bindings/worker-spawn.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/worker_spawn.c
+build obj/opennt-base-bindings/command.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_command.c
+build obj/opennt-base-bindings/values.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_values.c
+build obj/opennt-base-bindings/payload.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_payload.c
+build obj/opennt-base-bindings/startup.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_startup.c
+build obj/opennt-base-bindings/dispatch.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_dispatch.c
+build obj/opennt-base-bindings/resources.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_resource.c
+build obj/opennt-base-bindings/streams.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_stream.c
+build obj/opennt-base-bindings/waits.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_wait.c
+build obj/opennt-base-bindings/registry.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_process.c
+build obj/opennt-base-bindings/reservation.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_reservation.c
+build obj/opennt-base-bindings/request.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_request.c
+build obj/opennt-base-bindings/config.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_config.c
+build obj/opennt-base-bindings/process.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_client_process.c
+build obj/opennt-base-bindings/interactive.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_interactive.c
+build obj/opennt-base-bindings/classifier-path.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_classifier_path.c
+build obj/opennt-base-bindings/config-command.obj: cc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/base_vdm_config.c | O$:/repos.hobby/ntvdm64/src/opennt-host/base/win32/client/vdm.c
+build opennt-base-bindings.lib: lib obj/opennt-base-bindings/service.obj obj/opennt-base-bindings/service-core.obj obj/opennt-base-bindings/worker-registry.obj obj/opennt-base-bindings/frontend-registry.obj obj/opennt-base-bindings/native-commands.obj obj/opennt-base-bindings/service-lifecycle.obj obj/opennt-base-bindings/service-management.obj obj/opennt-base-bindings/task-observation.obj obj/opennt-base-bindings/worker-spawn.obj obj/opennt-base-bindings/command.obj obj/opennt-base-bindings/values.obj obj/opennt-base-bindings/payload.obj obj/opennt-base-bindings/startup.obj obj/opennt-base-bindings/dispatch.obj obj/opennt-base-bindings/resources.obj obj/opennt-base-bindings/streams.obj obj/opennt-base-bindings/waits.obj obj/opennt-base-bindings/registry.obj obj/opennt-base-bindings/reservation.obj obj/opennt-base-bindings/request.obj obj/opennt-base-bindings/config.obj obj/opennt-base-bindings/process.obj obj/opennt-base-bindings/interactive.obj obj/opennt-base-bindings/classifier-path.obj obj/opennt-base-bindings/config-command.obj obj/common/native_image.obj
+build obj/broker-transport/rpc_security.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/rpc_security.c
+build obj/broker-transport/vdm_receipt.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/vdm_receipt.c
+build obj/broker-transport/vdm_delivery.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/vdm_delivery.c
+build obj/broker-transport/vdm_payload.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/vdm_payload.c
+build obj/broker-transport/vdm_message.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/transport/vdm_message.c
+build broker-transport.lib: lib obj/broker-transport/rpc_security.obj obj/broker-transport/vdm_receipt.obj obj/broker-transport/vdm_delivery.obj obj/broker-transport/vdm_payload.obj obj/broker-transport/vdm_message.obj
+build obj/tests/vdm_protocol_test.obj: cc O$:/repos.hobby/ntvdm64/tests/broker/vdm_payload.c
+build vdm-protocol-test.exe: broker_test_link obj/tests/vdm_protocol_test.obj broker-transport.lib
+build opennt-broker-owners: phony opennt-base-client.lib opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib
+build obj/tests/base_reservation_test.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/base_reservation_test.c
+build basesrv-reservation-test.exe: broker_test_link obj/tests/base_reservation_test.obj opennt-base-bindings.lib broker-transport.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/base_service_reservation_test.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/base_service_reservation_test.c
+build obj/tests/base_service_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/base_service_fixture.c
+build basesrv-service-reservation-test.exe: basesrv_service_test_link obj/tests/base_service_reservation_test.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/native_observation_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/native_observation_fixture.c
+build native-observation-fixture.exe: basesrv_service_test_link obj/tests/native_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/dos_observation_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/dos_observation_fixture.c
+build dos-observation-fixture.exe: basesrv_service_test_link obj/tests/dos_observation_fixture.obj obj/tests/base_service_fixture.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/basesrv_idle_policy.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/idle_policy_test.c
+build basesrv-idle-policy-test.exe: basesrv_service_test_link obj/tests/basesrv_idle_policy.obj
+build obj/tests/native_service_layout.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/native_service_layout_test.c
+build native-service-layout-test.exe: basesrv_service_test_link obj/tests/native_service_layout.obj
+build obj/tests/base_client_rpc_first.obj: cc O$:/repos.hobby/ntvdm64/tests/app/base_client_rpc_first_test.c
+build base-client-rpc-first-test.exe: base_rpc_test_link obj/tests/base_client_rpc_first.obj obj/ntvwm/next_command.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | ntsrv.exe ntvwm.exe
+build obj/frontend/window/lib/base/input.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/base/input.c
+build obj/frontend/window/lib/base/sync.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/base/sync.c
+build obj/frontend/window/lib/base/text.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/base/text.c
+build obj/frontend/window/lib/base/win32/input.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/base/win32/input.c
+build obj/frontend/window/lib/base/win32/sync.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/base/win32/sync.c
+build obj/frontend/window/lib/kvm-base/component.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-base/component.c
+build obj/frontend/window/lib/kvm-base/frame_exchange.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-base/frame_exchange.c
+build obj/frontend/window/lib/kvm-base/hotkey.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-base/hotkey.c
+build obj/frontend/window/lib/kvm-base/input.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-base/input.c
+build obj/frontend/window/lib/kvm-base/mailbox.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-base/mailbox.c
+build obj/frontend/window/lib/kvm-window/geometry.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/geometry.c
+build obj/frontend/window/lib/kvm-window/motion.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/motion.c
+build obj/frontend/window/lib/kvm-window/render.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/render.c
+build obj/frontend/window/lib/kvm-window/win32/component.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/win32/component.c
+build obj/frontend/window/lib/kvm-window/win32/geometry.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/win32/geometry.c
+build obj/frontend/window/lib/kvm-window/win32/input.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/win32/input.c
+build obj/frontend/window/lib/kvm-window/win32/mouse.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/win32/mouse.c
+build obj/frontend/window/lib/kvm-window/window.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/lib/kvm-window/window.c
+build obj/frontend/window/window_frame.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/window_frame.c
+build obj/frontend/window/window_controller.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/window_controller.c
+build obj/frontend/window/window_input_queue.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/window_input_queue.c
+build obj/frontend/window/window_keyboard.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/window_keyboard.c
+build obj/frontend/window/window_mouse.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/window_mouse.c
+build frontend-window.lib: lib obj/frontend/window/lib/base/input.obj obj/frontend/window/lib/base/sync.obj obj/frontend/window/lib/base/text.obj obj/frontend/window/lib/base/win32/input.obj obj/frontend/window/lib/base/win32/sync.obj obj/frontend/window/lib/kvm-base/component.obj obj/frontend/window/lib/kvm-base/frame_exchange.obj obj/frontend/window/lib/kvm-base/hotkey.obj obj/frontend/window/lib/kvm-base/input.obj obj/frontend/window/lib/kvm-base/mailbox.obj obj/frontend/window/lib/kvm-window/geometry.obj obj/frontend/window/lib/kvm-window/motion.obj obj/frontend/window/lib/kvm-window/render.obj obj/frontend/window/lib/kvm-window/win32/component.obj obj/frontend/window/lib/kvm-window/win32/geometry.obj obj/frontend/window/lib/kvm-window/win32/input.obj obj/frontend/window/lib/kvm-window/win32/mouse.obj obj/frontend/window/lib/kvm-window/window.obj obj/frontend/window/window_frame.obj obj/frontend/window/window_controller.obj obj/frontend/window/window_input_queue.obj obj/frontend/window/window_keyboard.obj obj/frontend/window/window_mouse.obj
+build obj/tests/console_title_native.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_title_native_test.c
+build console-title-native-test.exe: broker_test_link obj/tests/console_title_native.obj
+build obj/tests/console_keyboard_layout_native.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_keyboard_layout_native_test.c
+build console-keyboard-layout-native-test.exe: rtl_fixture_link obj/tests/console_keyboard_layout_native.obj
+build obj/tests/console_graphics_native.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_graphics_native_test.c
+build console-graphics-native-test.exe: broker_test_link obj/tests/console_graphics_native.obj
+build obj/tests/console_bitmap.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_bitmap_test.c
+build obj/tests/console_bitmap_provider.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_bitmap.c
+build console-bitmap-test.exe: bitmap_test_link obj/tests/console_bitmap.obj obj/tests/console_bitmap_provider.obj
+build obj/tests/console_graphics_provider.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_graphics.c
+build obj/tests/v7_pointer.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/v7_pointer.c
+build obj/tests/v7_pointer_test.obj: cc O$:/repos.hobby/ntvdm64/tests/app/v7_pointer_test.c
+build v7-pointer-test.exe: bitmap_test_link obj/tests/v7_pointer_test.obj obj/tests/v7_pointer.obj
+build obj/tests/v7_graphics_test.obj: cc O$:/repos.hobby/ntvdm64/tests/app/v7_graphics_test.c
+build obj/tests/frontend_scope_lifetime.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_scope_lifetime_test.c
+build frontend-scope-lifetime-test.exe: broker_test_link obj/tests/frontend_scope_lifetime.obj obj/run16/frontend_scope.obj obj/frontend/session_service.obj nthook-context.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/native_lifetime_pair.obj: cc O$:/repos.hobby/ntvdm64/tests/app/native_lifetime_pair_test.c
+build native-lifetime-pair-test.exe: broker_test_link obj/tests/native_lifetime_pair.obj
+build native-lifetime-pair-target.exe: native_pair_gui_link obj/tests/native_lifetime_pair.obj
+build obj/run16/entry.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/main.c
+build obj/common/application_search.obj: cc O$:/repos.hobby/ntvdm64/src/common/application_search.c
+build obj/tests/application_search.obj: cc O$:/repos.hobby/ntvdm64/tests/app/application_search_test.c
+build application-search-test.exe: broker_test_link obj/tests/application_search.obj obj/common/application_search.obj
+build obj/common/guest_environment.obj: cc O$:/repos.hobby/ntvdm64/src/common/guest_environment.c
+build obj/tests/guest_environment.obj: cc O$:/repos.hobby/ntvdm64/tests/app/guest_environment_test.c
+build guest-environment-test.exe: broker_test_link obj/tests/guest_environment.obj obj/common/guest_environment.obj
+build obj/worker-base/connection.obj: cc O$:/repos.hobby/ntvdm64/src/worker-base/connection.c
+build obj/worker-base/shutdown_close.obj: cc O$:/repos.hobby/ntvdm64/src/worker-base/shutdown_close.c
+build obj/ntvwm/next_command.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/next_command.c
+build obj/worker-base/publication.obj: cc O$:/repos.hobby/ntvdm64/src/worker-base/publication.c
+build obj/worker-base/input_watch.obj: cc O$:/repos.hobby/ntvdm64/src/worker-base/input_watch.c
+build obj/worker-base/task_observation.obj: cc O$:/repos.hobby/ntvdm64/src/worker-base/task_observation.c
+build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj obj/worker-base/task_observation.obj
+build obj/tests/worker_task_observation.obj: cc O$:/repos.hobby/ntvdm64/tests/app/worker_task_observation_test.c
+build worker-task-observation-test.exe: broker_test_link obj/tests/worker_task_observation.obj worker-base.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/worker_input_watch.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/worker_input_watch_test.c
+build worker-input-watch-test.exe: broker_test_link obj/tests/worker_input_watch.obj worker-base.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/worker_shutdown.obj: cc O$:/repos.hobby/ntvdm64/tests/app/worker_shutdown_test.c
+build worker-shutdown-test.exe: base_rpc_test_link obj/tests/worker_shutdown.obj worker-base.lib frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/common/pipe_transfer.obj: cc O$:/repos.hobby/ntvdm64/src/common/transport/pipe_transfer.c
+build common-transport.lib: lib obj/common/pipe_transfer.obj
+build obj/common/system_root.obj: cc O$:/repos.hobby/ntvdm64/src/common/system_root.c
+build common-root.lib: lib obj/common/system_root.obj obj/common/guest_environment.obj
+build obj/tests/common_system_root.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_system_root_test.c
+build common-system-root-test.exe: broker_test_link obj/tests/common_system_root.obj common-root.lib
+build obj/common/console_members.obj: cc O$:/repos.hobby/ntvdm64/src/common/console/members.c
+build common-console.lib: lib obj/common/console_members.obj obj/common/console_client.obj
+build obj/common/local_binding.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/local_binding.c
+build obj/common/native_command.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/native_command.c | obj/basesrv/service.h
+build obj/common/frontend_control.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/frontend_control.c | obj/basesrv/service.h
+build obj/common/worker_control.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/worker_control.c | obj/basesrv/service.h
+build obj/common/management.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/management.c | obj/basesrv/service.h
+build obj/common/dos_observation.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/dos_observation.c | obj/basesrv/service.h
+build obj/common/interface_query.obj: cc O$:/repos.hobby/ntvdm64/src/common/rpc/interface_query.c | obj/basesrv/rpc_management.h
+build obj/common/rpc_management_stub.obj: cc obj/basesrv/rpc_management_c.c | obj/basesrv/rpc_management.h
+build common-rpc.lib: lib obj/common/local_binding.obj obj/common/native_command.obj obj/common/frontend_control.obj obj/common/worker_control.obj obj/common/management.obj obj/common/dos_observation.obj obj/common/interface_query.obj obj/common/rpc_management_stub.obj
+build obj/tests/common_management.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_management_test.c | obj/basesrv/service.h
+build common-management-test.exe: base_rpc_test_link obj/tests/common_management.obj common-rpc.lib
+build obj/tests/rpc_interface_query.obj: cc O$:/repos.hobby/ntvdm64/tests/app/rpc_interface_query_test.c
+build rpc-interface-query-test.exe: base_rpc_test_link obj/tests/rpc_interface_query.obj common-rpc.lib
+build obj/tests/common_worker_control.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_worker_control_test.c | obj/basesrv/service.h
+build common-worker-control-test.exe: base_rpc_test_link obj/tests/common_worker_control.obj common-rpc.lib
+build obj/tests/common_frontend_control.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_frontend_control_test.c | obj/basesrv/service.h
+build common-frontend-control-test.exe: base_rpc_test_link obj/tests/common_frontend_control.obj common-rpc.lib
+build obj/tests/common_native_command.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_native_command_test.c | obj/basesrv/service.h
+build common-native-command-test.exe: base_rpc_test_link obj/tests/common_native_command.obj common-rpc.lib
+build obj/tests/common_console_members.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_console_members_test.c
+build common-console-members-test.exe: broker_test_link obj/tests/common_console_members.obj
+build obj/tests/common_rpc_binding.obj: cc O$:/repos.hobby/ntvdm64/tests/app/common_rpc_binding_test.c
+build common-rpc-binding-test.exe: broker_test_link obj/tests/common_rpc_binding.obj
+build obj/run16/launch_options.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/launch_options.c
+build obj/tests/run16_launch_options.obj: cc O$:/repos.hobby/ntvdm64/tests/app/run16_launch_options_test.c
+build run16-launch-options-test.exe: broker_test_link obj/tests/run16_launch_options.obj obj/run16/launch_options.obj
+build obj/tests/run16_gui_wait.obj: cc O$:/repos.hobby/ntvdm64/tests/app/run16_gui_wait_test.c
+build run16-gui-wait-test.exe: broker_test_link obj/tests/run16_gui_wait.obj
+build run16-gui-wait-target.exe: gui_wait_target_link obj/tests/run16_gui_wait.obj
+build obj/run16/support.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/opennt_support_rtl.c
+build obj/run16/rpc_client_core.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_rpc_client_core.c | obj/basesrv/service.h
+build obj/run16/rpc_client_launch.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/opennt/source/base_rpc_client_launch.c | obj/basesrv/service.h
+build base-rpc-client-core.lib: lib obj/run16/rpc_client_core.obj
+build base-rpc-client-launch.lib: lib obj/run16/rpc_client_launch.obj
+build obj/run16/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h
+build obj/frontend/console_frontend.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/console_frontend.c
+build obj/frontend/console_video.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/console_video.c
+build obj/frontend/console_channel.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/console_channel.c
+build obj/run16/frontend_scope.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/frontend_scope.c
+build obj/frontend/session_service.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/session_service.c
+build obj/tests/console_frontend_test.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_frontend_test.c
+build v7-graphics-test.exe: console_test_link obj/tests/v7_graphics_test.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj
+build obj/tests/ntvwm_next_command.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_next_command_test.c
+build ntvwm-next-command-test.exe: console_test_link obj/tests/ntvwm_next_command.obj obj/ntvwm/next_command.obj
+build obj/tests/frontend_window_library.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_library_test.c
+build frontend-window-library-test.exe: console_test_link obj/tests/frontend_window_library.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build obj/tests/frontend_window_controller.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_controller_test.c
+build frontend-window-controller-test.exe: console_test_link obj/tests/frontend_window_controller.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build obj/tests/frontend_window_keyboard.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_keyboard_test.c
+build frontend-window-keyboard-test.exe: console_test_link obj/tests/frontend_window_keyboard.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build obj/tests/frontend_window_mouse.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_mouse_test.c
+build frontend-window-mouse-test.exe: console_test_link obj/tests/frontend_window_mouse.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build obj/tests/frontend_window_lifetime.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_lifetime_test.c
+build frontend-window-lifetime-test.exe: console_test_link obj/tests/frontend_window_lifetime.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build obj/tests/frontend_window_payload.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/frontend_window_payload_test.c
+build frontend-window-payload-test.exe: console_test_link obj/tests/frontend_window_payload.obj frontend-window.lib obj/frontend/console_video.obj obj/ntvwm/text_frame.obj
+build console-frontend-test.exe: console_test_link obj/tests/console_frontend_test.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/console_video.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_video_test.c
+build console-video-test.exe: console_test_link obj/tests/console_video.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/keyboard_history_carrier.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_keyboard_history.c
+build obj/tests/keyboard_origin.obj: cc O$:/repos.hobby/ntvdm64/tests/app/keyboard_origin_test.c
+build keyboard-origin-test.exe: rtl_fixture_link obj/tests/keyboard_origin.obj obj/tests/keyboard_history_carrier.obj
+build obj/common/native_launch.obj: cc O$:/repos.hobby/ntvdm64/src/common/codec/native_launch.c
+build common-codec.lib: lib obj/common/native_launch.obj
+build obj/common/native_process.obj: cc O$:/repos.hobby/ntvdm64/src/common/native_process.c
+build obj/frontend/frontend_session.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/frontend_session.c
+build obj/frontend/native_request_client.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/native_request_client.c
+build obj/frontend/bootstrap_client.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/bootstrap_client.c
+build obj/frontend/main.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/main.c
+build obj/tests/control_transfer.obj: cc O$:/repos.hobby/ntvdm64/tests/app/control_transfer_test.c
+build control-transfer-test.exe: console_test_link obj/tests/control_transfer.obj
+build obj/common/console_client.obj: cc O$:/repos.hobby/ntvdm64/src/common/console/client.c
+build obj/common/native_path.obj: cc O$:/repos.hobby/ntvdm64/src/common/native_path.c
+build frontend-client.lib: lib obj/frontend/native_request_client.obj obj/frontend/bootstrap_client.obj obj/common/native_path.obj
+build obj/frontend/session_arguments.obj: cc O$:/repos.hobby/ntvdm64/src/ntcon-exe/session_arguments.c
+build obj/tests/frontend_session_arguments.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_session_arguments_test.c
+build frontend-session-arguments-test.exe: console_test_link obj/tests/frontend_session_arguments.obj obj/frontend/session_arguments.obj
+build ntcon.exe: native_ntcon_import O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/native-inputs/ntcon.exe
+build obj/ntvwm/main.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/main.c
+build obj/ntvwm/console_state.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/console_state.c
+build obj/ntvwm/execution.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/execution.c
+build ntvwm-source-closure: phony worker-base.lib obj/ntvwm/next_command.obj obj/ntvwm/main.obj obj/ntvwm/presentation.obj obj/ntvwm/text_frame.obj obj/ntvwm/console_state.obj obj/ntvwm/execution.obj obj/common/native_process.obj nthook-installer.lib nthook-context.lib obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build ntvwm.exe: native_worker_import O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/native-inputs/ntvwm.exe
+build obj/run16/image_classification.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/image_classification.c
+build obj/common/native_image.obj: cc O$:/repos.hobby/ntvdm64/src/common/native_image.c
+build obj/nthook32/detours-detours.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/detours/detours.cpp
+build obj/nthook32/detours-modules.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/detours/modules.cpp
+build obj/nthook32/detours-disasm.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/detours/disasm.cpp
+build obj/nthook32/detours-image.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/detours/image.cpp
+build obj/nthook32/detours-creatwth.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/detours/creatwth.cpp
+build obj/nthook32/context.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/context.cpp | obj/basesrv/service.h
+build obj/nthook32/installer.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/installer.cpp | obj/basesrv/service.h
+build obj/nthook32/entry.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/entry.cpp | obj/basesrv/service.h
+build obj/nthook32/create_process.obj: cc O$:/repos.hobby/ntvdm64/src/nthook32-dll/create_process.cpp | obj/basesrv/service.h
+build obj/nthook32/classification.obj: cc O$:/repos.hobby/ntvdm64/src/run16-exe/hook_classification.c
+build nthook-context.lib: lib obj/nthook32/context.obj obj/nthook32/detours-detours.obj obj/nthook32/detours-modules.obj obj/nthook32/detours-disasm.obj obj/nthook32/detours-image.obj obj/nthook32/detours-creatwth.obj
+build nthook-installer.lib: lib obj/nthook32/installer.obj obj/common/native_image.obj
+build nthook32.dll: nthook_dll_link obj/nthook32/entry.obj obj/nthook32/create_process.obj obj/nthook32/classification.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/stub.obj nthook-installer.lib nthook-context.lib opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib obj/run16/support.obj original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | O$:/repos.hobby/ntvdm64/src/nthook32-dll/nthook32.def
+build obj/tests/nthook_install.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/nthook_install_test.cpp
+build nthook-install-test.exe: nthook_test_link obj/tests/nthook_install.obj nthook-installer.lib nthook-context.lib obj/run16/support.obj original-opennt-rtl-x86.lib || nthook32.dll nthook-gui-test.exe run16.exe
+build nthook-gui-test.exe: nthook_test_link obj/tests/nthook_install.obj nthook-installer.lib nthook-context.lib obj/run16/support.obj original-opennt-rtl-x86.lib
+build obj/tests/run16_image_classification.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/run16_image_classification_test.c
+build run16-image-classification-test.exe: frontend_link obj/tests/run16_image_classification.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/common/native_path.obj obj/run16/support.obj original-opennt-rtl-x86.lib
+build obj/tests/native_gui_startup_probe.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/native_gui_startup_probe.c
+build native-gui-startup-probe.exe: native_gui_probe_link obj/tests/native_gui_startup_probe.obj
+build obj/ntvwm/text_frame.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/text_frame.c
+build obj/tests/ntvwm_text_frame.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_text_frame_test.c
+build ntvwm-text-frame-test.exe: console_test_link obj/tests/ntvwm_text_frame.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj
+build obj/tests/ntvwm_native_colour_probe.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_native_colour_probe.c
+build ntvwm-native-colour-probe.exe: console_test_link obj/tests/ntvwm_native_colour_probe.obj obj/ntvwm/text_frame.obj
+build obj/ntvwm/presentation.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/presentation.c
+build obj/tests/ntvwm_presentation.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_presentation_test.c
+build obj/tests/ntvwm_presentation_provider.obj: cc O$:/repos.hobby/ntvdm64/src/ntvwm-exe/presentation.c
+build ntvwm-presentation-test.exe: console_test_link obj/tests/ntvwm_presentation.obj obj/tests/ntvwm_presentation_provider.obj obj/ntvwm/console_state.obj obj/ntvwm/text_frame.obj obj/frontend/console_video.obj worker-base.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/frontend_text_handoff.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_text_handoff_test.c
+build frontend-text-handoff-test.exe: console_test_link obj/tests/frontend_text_handoff.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/ntvwm_execution_lifetime.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_execution_lifetime_test.c
+build ntvwm-execution-lifetime-test.exe: frontend_link obj/tests/ntvwm_execution_lifetime.obj obj/ntvwm/execution.obj obj/common/native_process.obj common-codec.lib nthook-installer.lib nthook-context.lib obj/run16/support.obj original-opennt-rtl-x86.lib || nthook32.dll run16.exe
+build obj/tests/ntsrv_native_job_tracker.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntsrv_native_job_tracker_test.c
+build obj/tests/native_job_tracker_research.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/native_job_tracker_research.c
+build ntsrv-native-job-tracker-test.exe: console_test_link obj/tests/ntsrv_native_job_tracker.obj obj/tests/native_job_tracker_research.obj
+build obj/tests/ntvwm_surviving_client.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_surviving_client_test.c
+build ntvwm-surviving-client-test.exe: frontend_link obj/tests/ntvwm_surviving_client.obj
+build obj/tests/ntvwm_close.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_close_test.c
+build ntvwm-close-test.exe: frontend_link obj/tests/ntvwm_close.obj obj/ntvwm/console_state.obj common-transport.lib common-codec.lib common-console.lib
+build obj/tests/ntvwm_close_events.obj: cc O$:/repos.hobby/ntvdm64/tests/app/ntvwm_close_events_test.c
+build ntvwm-close-events-test.exe: console_test_link obj/tests/ntvwm_close_events.obj common-console.lib
+build obj/tests/relative_mouse_bridge.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/softpc_relative_mouse_bridge_test.c
+build relative-mouse-bridge-test.exe: console_test_link obj/tests/relative_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj
+build obj/tests/frontend_request_client.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_request_client_test.c
+build frontend-request-client-test.exe: console_test_link obj/tests/frontend_request_client.obj frontend-client.lib obj/common/native_process.obj common-transport.lib common-codec.lib common-console.lib
+build obj/tests/frontend_gui_boundary.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_gui_boundary_test.c
+build frontend-gui-boundary-test.exe: gui_boundary_link obj/tests/frontend_gui_boundary.obj
+build obj/tests/frontend_chain_target.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_chain_target.c
+build frontend-chain-cui.exe: frontend_link obj/tests/frontend_chain_target.obj obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/frontend_chain_input.obj: cc O$:/repos.hobby/ntvdm64/tests/app/frontend_chain_input.c
+build frontend-chain-input.exe: frontend_link obj/tests/frontend_chain_input.obj
+build frontend-chain-gui.exe: frontend_chain_gui_link obj/tests/frontend_chain_target.obj obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/broker_frontend_bootstrap.obj: cc O$:/repos.hobby/ntvdm64/tests/app/broker_frontend_bootstrap_test.c
+build broker-frontend-bootstrap-test.exe: frontend_link obj/tests/broker_frontend_bootstrap.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | ntcon.exe ntsrv.exe
+build obj/tests/native_console_capture.obj: cc O$:/repos.hobby/ntvdm64/tests/app/native_console_capture_test.c
+build native-console-capture-test.exe: console_test_link obj/tests/native_console_capture.obj obj/ntvwm/console_state.obj common-transport.lib common-codec.lib common-console.lib
+build obj/tests/ntvwm_capture_race.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_capture_race_test.c
+build ntvwm-capture-race-test.exe: console_test_link obj/tests/ntvwm_capture_race.obj
+build obj/tests/ntvwm_geometry_handoff.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/ntvwm_geometry_handoff_probe.c
+build ntvwm-geometry-handoff-probe.exe: console_test_link obj/tests/ntvwm_geometry_handoff.obj
+build obj/tests/console_channel_lifetime.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_channel_lifetime_test.c
+build console-channel-lifetime-test.exe: console_test_link obj/tests/console_channel_lifetime.obj obj/frontend/frontend_session.obj frontend-window.lib common-transport.lib obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/console_frame_failure.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_frame_failure_test.c
+build console-frame-failure-test.exe: console_test_link obj/tests/console_frame_failure.obj frontend-window.lib common-transport.lib obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/console_pointer_dispatch_test.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_pointer_dispatch_test.c
+build console-pointer-contract-test.exe: pointer_test_link obj/tests/console_pointer_dispatch_test.obj obj/frontend/console_video.obj obj/opennt-abi-host-compat/console_grid.obj
+build obj/tests/console_client_test.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_client_test.c
+build obj/tests/console_client.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_client.c
+build obj/tests/worker_lifecycle.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/worker_lifecycle.c
+build console-client-test.exe: console_test_link obj/tests/console_client_test.obj obj/tests/console_client.obj obj/tests/worker_lifecycle.obj obj/tests/console_graphics_provider.obj obj/tests/console_bitmap_provider.obj obj/tests/v7_pointer.obj obj/frontend/console_frontend.obj obj/frontend/console_video.obj worker-base.lib obj/opennt-abi-host-compat/console_grid.obj common-transport.lib common-codec.lib common-console.lib
+build obj/tests/softpc_text_video.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/softpc_text_video_test.c
+build softpc-text-video-test.exe: console_test_link obj/tests/softpc_text_video.obj obj/adapter-softpc/mvdm_softpc_text_video.obj
+build obj/tests/console_text_producer.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/console_text_producer_test.c
+build obj/tests/console_text_provider.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/console_text.c
+build console-text-producer-test.exe: console_test_link obj/tests/console_text_producer.obj obj/tests/console_text_provider.obj
+build run16.exe: native_run16_import O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/native-inputs/run16.exe
+build obj/tests/console_video_observed.obj: cc O$:/repos.hobby/ntvdm64/tests/app/console_video_observed.c
+build obj/tests/run16_package_observed.obj: cc O$:/repos.hobby/ntvdm64/tests/app/run16_package_observed.c | obj/basesrv/service.h
+build frontend-video-observer.exe: frontend_link obj/frontend/main.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib frontend-client.lib obj/tests/console_video_observed.obj obj/frontend/console_channel.obj obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj obj/opennt-abi-host-compat/console_grid.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/basesrv/service_s.c | obj/basesrv/service_c.c obj/basesrv/service.h: basesrv_idl O$:/repos.hobby/ntvdm64/src/common/protocol/service.idl | O$:/repos.hobby/ntvdm64/src/common/protocol/service.acf
+build obj/basesrv/rpc_management_c.c obj/basesrv/rpc_management.h: rpc_management_idl O$:/repos.hobby/ntvdm64/src/common/protocol/rpc_management.idl | O$:/repos.hobby/ntvdm64/src/common/protocol/rpc_management.acf
+build obj/basesrv/entry.obj: cc O$:/repos.hobby/ntvdm64/src/ntsrv-exe/main.c | obj/basesrv/service.h
+build obj/basesrv/stub.obj: cc obj/basesrv/service_s.c | obj/basesrv/service.h
+build obj/worker/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h
+build ntsrv.exe: native_ntsrv_import O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/native-inputs/ntsrv.exe
+build obj/monitor/main.obj: cc O$:/repos.hobby/ntvdm64/src/ntmon-exe/main.c | obj/basesrv/service.h
+build obj/monitor/stub.obj: cc obj/basesrv/service_c.c | obj/basesrv/service.h
+build obj/monitor/trace_view.obj: cc O$:/repos.hobby/ntvdm64/src/ntmon-exe/trace_view.c
+build ntmon.exe: native_ntmon_import O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/native-inputs/ntmon.exe
+build obj/tests/native_capture.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/native_capture_test.c
+build native-capture-test.exe: base_rpc_test_link obj/tests/native_capture.obj obj/opennt-base-client/capture.obj obj/run16/support.obj
+build obj/tests/monitor_session.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/monitor_session_test.c
+build monitor-session-test.exe: console_test_link obj/tests/monitor_session.obj
+build obj/tests/session_lifecycle.obj: cc O$:/repos.hobby/ntvdm64/tests/session/session_lifecycle_test.c
+build session-lifecycle-test.exe: console_test_link obj/tests/session_lifecycle.obj obj/ntvdm/session/session.obj obj/ntvdm/session/guest_memory_lease.obj
+build obj/tests/monitor_rpc_test.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-basesrv/monitor_rpc_test.c | obj/basesrv/service.h
+build monitor-rpc-test.exe: monitor_link obj/tests/monitor_rpc_test.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib
+build obj/tests/worker_identity_version.obj: cc O$:/repos.hobby/ntvdm64/tests/component-integration/worker_identity_version_test.c | obj/basesrv/service.h
+build worker-identity-version-test.exe: monitor_link obj/tests/worker_identity_version.obj obj/monitor/stub.obj broker-transport.lib | ntsrv.exe
+build obj/tests/monitor_layout.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/monitor_layout_test.c | obj/basesrv/service.h
+build monitor-layout-test.exe: monitor_link obj/tests/monitor_layout.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib
+build obj/tests/monitor_trace_view.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/monitor_trace_view_test.c
+build monitor-trace-view-test.exe: monitor_link obj/tests/monitor_trace_view.obj obj/monitor/trace_view.obj
+build obj/tests/monitor_live_view.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/monitor_live_view_test.c | obj/basesrv/service.h
+build monitor-live-view-test.exe: monitor_link obj/tests/monitor_live_view.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib
+build ntvdm.exe | ntvdm.lib: worker_link worker-base.lib nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | generated/ntvdm-wow32-provider.def
+build obj/tests/keyba_observed.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c
+build obj/tests/nt_event_observed.obj: cc_host O$:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c
+build ntvdm-keyboard-observer.exe: worker_link obj/tests/keyba_observed.obj obj/tests/nt_event_observed.obj worker-base.lib nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | generated/ntvdm-wow32-provider.def
+build obj/tests/console_client_observed.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/console_client_observed.c
+build obj/tests/console_channel_observed.obj: cc O$:/repos.hobby/ntvdm64/tests/observation/console_channel_observed.c
+build ntvdm-console-wire-observer.exe: worker_link obj/tests/console_client_observed.obj worker-base.lib nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj obj/adapter-redir/mvdm_redirector_worker_copy.obj obj/adapter-redir/mvdm_redirector_async.obj obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj worker-shell.lib worker-command-bindings.lib original-softpc-host-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib opennt-base-client.lib opennt-base-bindings.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib broker-transport.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib original-softpc-host-roots.lib obj/host/softpc-resource.res common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib | generated/ntvdm-wow32-provider.def
+build frontend-console-wire-observer.exe: frontend_link obj/frontend/main.obj obj/frontend/session_arguments.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/tests/console_channel_observed.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj obj/opennt-abi-host-compat/console_grid.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/worker/package_layout.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/package_layout.c
+build obj/adapter-softpc/mvdm_softpc_effective_address.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c
+build obj/ccpu/fmstubs_vector_defaults.obj: cc_patch_vector_defaults O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c
+build obj/ccpu/fmstubs_activity_check.obj: cc_patch_activity_check O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c
+build obj/redir/vdmredir.res: rc O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vdmredir.rc
+build original-ccpu386.lib: lib obj/ccpu/aaa.obj obj/ccpu/aad.obj obj/ccpu/aam.obj obj/ccpu/aas.obj obj/ccpu/adc.obj obj/ccpu/add.obj obj/ccpu/and.obj obj/ccpu/arpl.obj obj/ccpu/bound.obj obj/ccpu/bsf.obj obj/ccpu/bsr.obj obj/ccpu/bswap.obj obj/ccpu/bt.obj obj/ccpu/btc.obj obj/ccpu/btr.obj obj/ccpu/bts.obj obj/ccpu/call.obj obj/ccpu/cbw.obj obj/ccpu/ccpupig.obj obj/ccpu/ccpusas4.obj obj/ccpu/cdq.obj obj/ccpu/clc.obj obj/ccpu/cld.obj obj/ccpu/cli.obj obj/ccpu/clts.obj obj/ccpu/cmc.obj obj/ccpu/cmp.obj obj/ccpu/cmpxchg.obj obj/ccpu/cwd.obj obj/ccpu/cwde.obj obj/ccpu/c_addr.obj obj/ccpu/c_bsic.obj obj/ccpu/c_debug.obj obj/ccpu/c_div64.obj obj/ccpu/c_getset.obj obj/ccpu/c_intr.obj obj/ccpu/c_main.obj obj/ccpu/c_mul64.obj obj/ccpu/c_neg64.obj obj/ccpu/c_page.obj obj/ccpu/c_prot.obj obj/ccpu/c_reg.obj obj/ccpu/c_seg.obj obj/ccpu/c_stack.obj obj/ccpu/c_tlb.obj obj/ccpu/c_tsksw.obj obj/ccpu/c_xcptn.obj obj/ccpu/c_xfer.obj obj/ccpu/c_xtrn.obj obj/ccpu/daa.obj obj/ccpu/das.obj obj/ccpu/dec.obj obj/ccpu/div.obj obj/ccpu/enter.obj obj/ccpu/fpu.obj obj/ccpu/idiv.obj obj/ccpu/imul.obj obj/ccpu/in.obj obj/ccpu/inc.obj obj/ccpu/into.obj obj/ccpu/intx.obj obj/ccpu/invd.obj obj/ccpu/invlpg.obj obj/ccpu/iret.obj obj/ccpu/jcxz.obj obj/ccpu/jmp.obj obj/ccpu/jxx.obj obj/ccpu/lahf.obj obj/ccpu/lar.obj obj/ccpu/lea.obj obj/ccpu/leave.obj obj/ccpu/lgdt.obj obj/ccpu/lidt.obj obj/ccpu/lldt.obj obj/ccpu/lmsw.obj obj/ccpu/loopxx.obj obj/ccpu/lsl.obj obj/ccpu/ltr.obj obj/ccpu/lxs.obj obj/ccpu/mov.obj obj/ccpu/movsx.obj obj/ccpu/mul.obj obj/ccpu/neg.obj obj/ccpu/nop.obj obj/ccpu/not.obj obj/ccpu/or.obj obj/ccpu/out.obj obj/ccpu/pop.obj obj/ccpu/popa.obj obj/ccpu/popf.obj obj/ccpu/push.obj obj/ccpu/pusha.obj obj/ccpu/pushf.obj obj/ccpu/rcl.obj obj/ccpu/rcr.obj obj/ccpu/ret.obj obj/ccpu/rol.obj obj/ccpu/ror.obj obj/ccpu/rsrvd.obj obj/ccpu/sahf.obj obj/ccpu/sar.obj obj/ccpu/sbb.obj obj/ccpu/setxx.obj obj/ccpu/sgdt.obj obj/ccpu/shl.obj obj/ccpu/shld.obj obj/ccpu/shr.obj obj/ccpu/shrd.obj obj/ccpu/sidt.obj obj/ccpu/sldt.obj obj/ccpu/smsw.obj obj/ccpu/stc.obj obj/ccpu/std.obj obj/ccpu/sti.obj obj/ccpu/str.obj obj/ccpu/stubs.obj obj/ccpu/sub.obj obj/ccpu/test.obj obj/ccpu/verr.obj obj/ccpu/verw.obj obj/ccpu/wait.obj obj/ccpu/wbinvd.obj obj/ccpu/xadd.obj obj/ccpu/xchg.obj obj/ccpu/xlat.obj obj/ccpu/xor.obj obj/ccpu/zfrsrvd.obj obj/ccpu/sasCdef.obj obj/ccpu/ntthread.obj obj/ccpu/localfm.obj
+build original-softpc-bios.lib: lib obj/bios/bios.obj obj/bios/cmos_bis.obj obj/bios/cntlbop.obj obj/bios/emm_fncs.obj obj/bios/reset.obj obj/bios/rom_basc.obj obj/bios/rtc_bios.obj obj/bios/slave_bs.obj obj/bios/tape_io.obj obj/bios/equipmnt.obj obj/bios/ill_bop.obj obj/bios/build_id.obj obj/bios/virtual.obj obj/bios/mem_size.obj
+build original-softpc-keymouse.lib: lib obj/keymouse/keyba.obj obj/keymouse/keybd_io.obj obj/keymouse/mouse.obj obj/keymouse/ppi.obj obj/keymouse/mouse_io.obj
+build original-softpc-system.lib: lib obj/system/at_dma.obj obj/system/cmosnt.obj obj/system/ica.obj obj/system/idetect.obj obj/system/illegalp.obj obj/system/qevnt.obj obj/system/rom.obj obj/system/timer.obj obj/system/timestrb.obj obj/system/dummy_nt.obj obj/system/unexp_nt.obj
+build original-softpc-disks.lib: lib obj/disks/floppy.obj obj/disks/floppy_i.obj obj/disks/diskbios.obj obj/disks/fdisk.obj obj/disks/fla.obj obj/disks/gfi.obj obj/disks/gfi_ibm.obj obj/disks/gfi_mpty.obj obj/disks/gfi_sflp.obj obj/disks/gfi_test.obj
+build original-softpc-support.lib: lib obj/support/terminat.obj obj/support/time_day.obj obj/support/ios.obj obj/support/main.obj obj/support/get_env.obj obj/support/xt.obj
+build original-softpc-video.lib: lib obj/video/ega_mode.obj obj/video/ega_prts.obj obj/video/ega_vide.obj obj/video/gfx_updt.obj obj/video/video.obj obj/video/gvi.obj obj/video/video_io.obj obj/video/v7_ports.obj obj/video/v7_video.obj obj/video/vga_mode.obj obj/video/vga_prts.obj obj/video/vga_vide.obj obj/video/ega_read.obj obj/video/ega_writ.obj obj/video/ega_dmmy.obj obj/video/ega_trcr.obj obj/video/egawrtm0.obj obj/video/egwrtm12.obj obj/video/cga.obj
+build original-softpc-cvidc.lib: lib obj/cvidc/SINIT011.obj obj/cvidc/SINIT012.obj obj/cvidc/SINIT013.obj obj/cvidc/SEVID000.obj obj/cvidc/SEVID001.obj obj/cvidc/SEVID002.obj obj/cvidc/SEVID003.obj obj/cvidc/SEVID004.obj obj/cvidc/SEVID005.obj obj/cvidc/SEVID006.obj obj/cvidc/SEVID007.obj obj/cvidc/SEVID008.obj obj/cvidc/SEVID009.obj obj/cvidc/SEVID010.obj obj/cvidc/SEVID011.obj obj/cvidc/SEVID012.obj obj/cvidc/SEVID013.obj obj/cvidc/SEVID014.obj obj/cvidc/SEVID015.obj obj/cvidc/SEVID016.obj obj/cvidc/SEVID017.obj obj/cvidc/SEVID018.obj obj/cvidc/SEVID019.obj obj/cvidc/SEVID020.obj obj/cvidc/SEVID021.obj obj/cvidc/SEVID022.obj obj/cvidc/SEVID023.obj obj/cvidc/SEVID024.obj obj/cvidc/SEVID025.obj obj/cvidc/SEVID026.obj obj/cvidc/SEVID027.obj obj/cvidc/SEVID028.obj obj/cvidc/SEVID029.obj obj/cvidc/SEVID030.obj obj/cvidc/ev_glue.obj obj/cvidc/evidfunc.obj obj/cvidc/j_c_lang.obj obj/cvidc/accessfn.obj obj/cvidc/vglfunc.obj obj/cvidc/mvdm_cvidc_vector_binding.obj obj/cvidc/vglob.obj
+build original-softpc-comms.lib: lib obj/comms/com.obj obj/comms/printer.obj obj/comms/printer_.obj obj/comms/prt_scrn.obj obj/comms/rs232_io.obj
+build original-softpc-dos.lib: lib obj/dos/emm_mngr.obj
+build original-mvdm-dem.lib: lib obj/dem/dem.obj obj/dem/demfcb.obj obj/dem/demdata.obj obj/dem/demdir.obj obj/dem/demdisp.obj obj/dem/demerror.obj obj/dem/demfile.obj obj/dem/demgset.obj obj/dem/demhndl.obj obj/dem/demioctl.obj obj/dem/demlock.obj obj/dem/demmisc.obj obj/dem/demmsg.obj obj/dem/demsrch.obj obj/dem/demdasd.obj obj/dem/demlabel.obj
+build original-mvdm-command.lib: lib obj/command/cmd.obj obj/command/cmddata.obj obj/command/cmddisp.obj obj/command/cmdexec.obj obj/command/cmdexit.obj obj/command/cmdmisc.obj obj/command/cmdpif.obj obj/command/cmdredir.obj obj/command/cmdconf.obj obj/command/cmdkeyb.obj obj/command/cmdenv.obj
+build original-mvdm-redir.lib: lib obj/redir/vrmslot.obj obj/redir/vrnmpipe.obj obj/redir/vrdisp.obj obj/redir/vrinit.obj obj/redir/vrmisc.obj obj/redir/vrnetapi.obj obj/redir/vrnetb.obj obj/redir/vrputil.obj obj/redir/vrremote.obj obj/redir/vrdlc5c.obj obj/redir/vrdlcpst.obj obj/redir/vrdlcbuf.obj obj/redir/vrdlcdbg.obj obj/redir/vrdebug.obj obj/redir/vrdll.obj
+build original-mvdm-xms.lib: lib obj/xms/xms.obj obj/xms/xmsa20.obj obj/xms/xmsblock.obj obj/xms/xmsdisp.obj obj/xms/xmsmisc.obj obj/xms/xmsumb.obj obj/xms/xmsmemr.obj
+build original-mvdm-dpmi32.lib: lib obj/dpmi/debug.obj obj/dpmi/dpmi32.obj obj/dpmi/dpmiint.obj obj/dpmi/dpmiselr.obj obj/dpmi/buffer.obj obj/dpmi/data.obj obj/dpmi/int21map.obj obj/dpmi/modesw.obj obj/dpmi/register.obj obj/dpmi/savestat.obj obj/dpmi/stack.obj obj/dpmi/vxd.obj obj/dpmi/xmem.obj obj/dpmi/dpmimemr.obj obj/dpmi/dpmimscr.obj obj/dpmi/i386_dpmi386.obj
+build original-mvdm-host-suballoc.lib: lib obj/suballoc/suballoc.obj
+build original-mvdm-host-oemuni.lib: lib obj/oemuni/file.obj obj/oemuni/process.obj
+build original-softpc-base-trace.lib: lib obj/base-debug/debuggng.obj obj/base-debug/ega_dump.obj obj/base-debug/btrace.obj obj/base-debug/trace.obj obj/base-debug/profile.obj obj/base-debug/pigyoda.obj obj/base-debug/yoda.obj obj/base-debug/dasm.obj
+build original-softpc-host-roots.lib: lib obj/host/sim32.obj obj/host/cpucstbs.obj obj/host/nt_timer.obj obj/host/nt_ntfun.obj obj/host/nt_msscs.obj obj/host/nt_error.obj obj/host/nt_cga.obj obj/host/nt_ega.obj obj/host/nt_vga.obj obj/host/nt_input.obj obj/host/nt_graph.obj obj/host/nt_hosts.obj obj/host/nt_sound.obj obj/host/nt_bop.obj obj/host/nt_com.obj obj/host/nt_wcom.obj obj/host/nt_rez.obj obj/host/nt_sas.obj obj/host/nt_fdisk.obj obj/host/nt_unix.obj obj/host/nt_keycd.obj obj/host/nt_cpu.obj obj/host/nt_lpt.obj obj/host/nt_yoda.obj obj/host/nt_mouse.obj obj/host/nt_event.obj obj/host/nt_munge.obj obj/host/config.obj obj/host/nt_nls.obj obj/host/copy_fnc.obj obj/host/stubs.obj obj/host/nt_pif.obj obj/host/nt_fulsc.obj obj/host/nt_emm.obj obj/host/x86_emm.obj obj/host/nt_eoi.obj obj/host/nt_vdd.obj obj/host/nt_sec.obj obj/host/nt_thred.obj obj/host/nt_det.obj obj/host/nt_umb.obj obj/host/fprt.obj obj/host/nt_rflop.obj obj/host/nt_inthk.obj obj/host/nt_reset.obj obj/host/nt_mem.obj obj/host/nt_cprgs.obj obj/host/ntvdm_entry.obj
+build original-softpc-host-fixture-roots.lib: lib obj/host/sim32.obj obj/host/cpucstbs.obj obj/host/nt_timer.obj obj/host/nt_ntfun.obj obj/host/nt_msscs.obj obj/host/nt_error.obj obj/host/nt_cga.obj obj/host/nt_ega.obj obj/host/nt_vga.obj obj/host/nt_input.obj obj/host/nt_graph.obj obj/host/nt_hosts.obj obj/host/nt_sound.obj obj/host/nt_bop.obj obj/host/nt_com.obj obj/host/nt_wcom.obj obj/host/nt_rez.obj obj/host/nt_sas.obj obj/host/nt_fdisk.obj obj/host/nt_unix.obj obj/host/nt_keycd.obj obj/host/nt_cpu.obj obj/host/nt_lpt.obj obj/host/nt_yoda.obj obj/host/nt_mouse.obj obj/host/nt_event.obj obj/host/nt_munge.obj obj/host/config.obj obj/host/nt_nls.obj obj/host/copy_fnc.obj obj/host/stubs.obj obj/host/nt_pif.obj obj/host/nt_fulsc.obj obj/host/nt_emm.obj obj/host/x86_emm.obj obj/host/nt_eoi.obj obj/host/nt_vdd.obj obj/host/nt_sec.obj obj/host/nt_thred.obj obj/host/nt_det.obj obj/host/nt_umb.obj obj/host/fprt.obj obj/host/nt_rflop.obj obj/host/nt_inthk.obj obj/host/nt_reset.obj obj/host/nt_mem.obj obj/host/nt_cprgs.obj
+build softpc-bindings.lib: lib obj/adapter-softpc/mvdm_softpc_firmware.obj obj/adapter-softpc/mvdm_shadow_registry.obj obj/adapter-softpc/mvdm_xms_memory.obj obj/adapter-softpc/mvdm_a20.obj obj/adapter-softpc/mvdm_softpc_guest_memory.obj obj/adapter-softpc/mvdm_softpc_physical_mapping.obj obj/adapter-softpc/mvdm_guest_location.obj obj/adapter-softpc/mvdm_softpc_execution.obj obj/adapter-softpc/mvdm_softpc_termination.obj obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj obj/adapter-softpc/mvdm_softpc_fast_bop.obj obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj obj/adapter-softpc/mvdm_standalone_worker.obj obj/adapter-softpc/ntvdm_dos_observer.obj obj/adapter-softpc/mvdm_softpc_event_thread.obj obj/adapter-softpc/mvdm_softpc_presentation_font.obj obj/adapter-softpc/mvdm_softpc_text_video.obj obj/adapter-softpc/mvdm_keyboard_history.obj obj/adapter-softpc/mvdm_keyboard_reset.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_guest.obj obj/adapter-softpc/v7_pointer.obj obj/adapter-softpc/v7_pointer_binding.obj obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj
+build softpc-fixture-bindings.lib: lib obj/adapter-softpc/mvdm_softpc_firmware.obj obj/adapter-softpc/mvdm_shadow_registry.obj obj/adapter-softpc/mvdm_xms_memory.obj obj/adapter-softpc/mvdm_a20.obj obj/adapter-softpc/mvdm_softpc_guest_memory.obj obj/adapter-softpc/mvdm_softpc_physical_mapping.obj obj/adapter-softpc/mvdm_guest_location.obj obj/adapter-softpc/mvdm_softpc_execution.obj obj/adapter-softpc/mvdm_softpc_termination.obj obj/adapter-softpc/mvdm_softpc_ccpu_wait.obj obj/adapter-softpc/mvdm_softpc_fast_bop.obj obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj obj/adapter-softpc/ntvdm_dos_observer.obj obj/adapter-softpc/mvdm_softpc_event_thread.obj obj/adapter-softpc/mvdm_softpc_presentation_font.obj obj/adapter-softpc/mvdm_softpc_text_video.obj obj/adapter-softpc/mvdm_keyboard_history.obj obj/adapter-softpc/mvdm_keyboard_reset.obj obj/adapter-softpc/mvdm_softpc_mouse_input.obj obj/adapter-softpc/mvdm_softpc_mouse_bridge.obj obj/adapter-softpc/mvdm_softpc_mouse_guest.obj obj/adapter-softpc/v7_pointer.obj obj/adapter-softpc/v7_pointer_binding.obj obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj
+build vdmredir-dll-bindings.lib: lib obj/vdmredir-dll/mvdm_redirector_guest_copy.obj obj/vdmredir-dll/mvdm_redirector_remote_unavailable.obj obj/vdmredir-dll/mvdm_redirector_dll_entry.obj
+build vdd-bindings.lib: lib obj/adapter-vdd/mvdm_softpc_vdd_unavailable.obj
+build original-opennt-netlib.lib: lib obj/opennt-netlib/ntstatus.obj obj/opennt-netlib/copystr.obj obj/opennt-netlib/allocstr.obj obj/opennt-netlib/initoem.obj obj/opennt-netlib/memalloc.obj obj/opennt-netlib/time.obj obj/opennt-netlib/timezone.obj obj/opennt-netlib/xlatesvc.obj obj/opennt-netlib/svcinfo.obj obj/opennt-netlib/packstr.obj
+build original-opennt-netapi-api.lib: lib obj/opennt-netapi-api/apibuff.obj
+build original-opennt-xactsrv.lib: lib obj/opennt-xactsrv/apiwksta.obj obj/opennt-xactsrv/apiuse.obj obj/opennt-xactsrv/apimsg.obj obj/opennt-xactsrv/apisvc.obj obj/opennt-xactsrv/xssubs.obj obj/opennt-xactsrv/strucsiz.obj obj/opennt-xactsrv/examine.obj obj/opennt-xactsrv/ascii.obj obj/opennt-xactsrv/pointer.obj obj/opennt-xactsrv/convert.obj obj/opennt-xactsrv/xsunicod.obj obj/opennt-xactsrv/auxdata.obj obj/opennt-xactsrv/parmnum.obj
+build original-opennt-base-vdm.lib: lib obj/opennt-base-vdm/vdm.obj
+build original-opennt-rtl-x86.lib: lib obj/opennt-rtl/environ.obj obj/opennt-rtl/error.obj obj/opennt-rtl/time.obj obj/opennt-rtl-x86/largeint-selected.obj obj/opennt-rtl-x86/movemem-selected.obj
+build worker-shell.lib: lib obj/worker/package_layout.obj
+build session.lib: lib obj/ntvdm/session/guest_memory_lease.obj obj/ntvdm/session/session.obj
+build wow-worker-bindings.lib: lib obj/adapter-wow-worker/wow_gdi_alias.obj obj/adapter-wow-worker/wow_user_runtime.obj obj/adapter-wow-worker/wow_user_session_binding.obj
+build rtl-x86-fixture.exe: rtl_fixture_link obj/tests/rtl_x86_fixture.obj original-opennt-rtl-x86.lib
+build environment-projection-fixture.exe: rtl_fixture_link obj/tests/environment_projection_fixture.obj original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-win32-bindings.lib
+build mvdm-softpc-effective-address.lib: lib obj/adapter-softpc/mvdm_softpc_effective_address.obj
+build softpc-win32-bindings.lib: lib obj/adapter-win32/ntioapi_facade.obj obj/adapter-win32/thread_start_compat.obj obj/adapter-win32/ccpu_thread_exit_compat.obj obj/adapter-win32/nt_thread_alert_compat.obj obj/adapter-win32/console_compat.obj obj/adapter-win32/console_client.obj obj/adapter-win32/worker_lifecycle.obj obj/adapter-win32/console_bitmap.obj obj/adapter-win32/console_graphics.obj obj/adapter-win32/console_text.obj obj/adapter-win32/crt_compat.obj obj/adapter-win32/command_process_compat.obj obj/adapter-win32/wow_private_unavailable.obj obj/adapter-win32/wow_hard_error_dialog.obj obj/adapter-win32/wow_hard_error_decoder.obj obj/adapter-win32/mvdm_base_vdm_environment.obj obj/opennt-abi-host-compat/opennt_support_rtl.obj obj/opennt-abi-host-compat/console_grid.obj
+build worker-command-bindings.lib: lib obj/adapter-basesrv/mvdm_command_guest_state.obj obj/adapter-basesrv/mvdm_command_native_child.obj
+build monitor-bindings.lib: lib obj/adapter-monitor/vdm_control.obj obj/adapter-monitor/mvdm_vdm_tib.obj
+build kernel-vdm-printer.lib: lib obj/kernel-vdm/monitor_printer.obj
+build debugger-bindings.lib: lib obj/adapter-debugger/dbg_registers.obj obj/adapter-debugger/dbg_prompt.obj obj/mvdm-debugger/dbg.obj
+build softpc-ccpu-vector-defaults.lib: lib obj/ccpu/fmstubs_vector_defaults.obj
+build softpc-activity-check.lib: lib obj/ccpu/fmstubs_activity_check.obj
+build original-softpc-candidate: phony original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-redir.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib vdmredir-dll-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib
+build product-programs: phony run16.exe ntsrv.exe ntvdm.exe ntvwm.exe ntcon.exe ntmon.exe VDMREDIR.dll
+build obj/tests/ccpu_halt_reset_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_halt_reset_test.c
+build obj/tests/ccpu_host_fixture_seams.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_host_fixture_seams.c
+build obj/tests/ccpu_bounded_execution_fixture_seams.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c
+build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/ccpu_throughput_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_throughput_fixture.c
+build ccpu-throughput-fixture.exe: event_test_link obj/tests/ccpu_throughput_fixture.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/physical_mapping_observation_test.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-mvdm-host-out/physical_mapping_observation_test.c
+build physical-mapping-observation-test.exe: event_test_link obj/tests/physical_mapping_observation_test.obj obj/adapter-softpc/mvdm_softpc_physical_mapping.obj session.lib
+build obj/tests/ccpu_debug_match_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_debug_match_test.c
+build ccpu-debug-match-test.exe: debug_unit_link obj/tests/ccpu_debug_match_test.obj obj/ccpu/c_debug.obj
+build obj/tests/debug_register_binding_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/debug_register_binding_test.c
+build debug-register-binding-test.exe: debug_unit_link obj/tests/debug_register_binding_test.obj
+build obj/tests/debugger_event_transport_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/debugger_event_transport_test.c
+build debugger-event-transport-test.exe: event_test_link obj/tests/debugger_event_transport_test.obj
+build obj/tests/debugger_module_event_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/debugger_module_event_test.c
+build debugger-module-event-test.exe: event_test_link obj/tests/debugger_module_event_test.obj
+build obj/tests/oem_command_uppercase_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/oem_command_uppercase_test.c
+build oem-command-uppercase-test.exe: debug_unit_link obj/tests/oem_command_uppercase_test.obj
+build obj/tests/debugger_worker_module_observer.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/debugger_worker_module_observer.c
+build debugger-worker-module-observer.exe: event_test_link obj/tests/debugger_worker_module_observer.obj
+build obj/tests/s44_bop_vdd.obj: s44_bop_vdd_cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/s44_test_vdd.c
+build obj/tests/s44_entry_hook_vdd.obj: s44_entry_hook_vdd_cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/s44_test_vdd.c
+build obj/tests/s44_memory_vdd.obj: s44_memory_vdd_cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/s44_test_vdd.c
+build obj/tests/s44_terminate_vdd.obj: s44_terminate_vdd_cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/s44_test_vdd.c
+build s44-bop-vdd.dll: s44_test_vdd_link obj/tests/s44_bop_vdd.obj ntvdm.lib common-root.lib
+build s44-entry-hook-vdd.dll: s44_test_vdd_link obj/tests/s44_entry_hook_vdd.obj ntvdm.lib common-root.lib
+build s44-memory-vdd.dll: s44_test_vdd_link obj/tests/s44_memory_vdd.obj ntvdm.lib common-root.lib
+build s44-terminate-vdd.dll: s44_test_vdd_link obj/tests/s44_terminate_vdd.obj ntvdm.lib common-root.lib
+build debugger-event-tests: phony debugger-event-transport-test.exe debugger-module-event-test.exe debugger-worker-module-observer.exe
+build dpmi-debug-tests: phony ccpu-debug-match-test.exe debug-register-binding-test.exe debugger-event-transport-test.exe debugger-module-event-test.exe ccpu-halt-reset-test.exe
+build obj/tests/ccpu_thread_lifecycle_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_thread_lifecycle_test.c
+build ccpu-thread-lifecycle-test.exe: event_test_link obj/tests/ccpu_thread_lifecycle_test.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/original_external_memory_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/original_external_memory_test.c
+build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/ccpu_bounded_execution_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c
+build ccpu-high-linear-page-test.exe: memory_test_link obj/tests/ccpu_bounded_execution_fixture.obj obj/tests/ccpu_bounded_execution_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/ccpu_stack_transition_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_stack_transition_test.c
+build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj obj/tests/ccpu_bounded_execution_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/keyboard_controller_pic_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/keyboard_controller_pic_test.c
+build keyboard-controller-pic-test.exe: memory_test_link obj/tests/keyboard_controller_pic_test.obj obj/tests/ccpu_bounded_execution_fixture_seams.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/pic_reset_eoi_test.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/pic_reset_eoi_test.c
+build pic-reset-eoi-test.exe: memory_test_link obj/tests/pic_reset_eoi_test.obj obj/tests/ccpu_bounded_execution_fixture_seams.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/adapter-wow/wow_menu_native_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_menu_native_bindings.c
+build obj/tests/wow_menu_runtime.obj: cc O$:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/wow_user_runtime.c
+build obj/tests/wow_original_cleanup.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/kernel/cleanup.c
+build obj/tests/wow_original_handtabl.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/windows/core/ntuser/kernel/handtabl.c
+build obj/tests/wow_original_probe.obj: cc O$:/repos.hobby/ntvdm64/src/opennt-host/base/ntos/ex/probe.c
+build obj/adapter-wow/wow_cleanup_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_cleanup_bindings.c
+build obj/tests/wow_page_domain_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/mvdm-host/wow_page_domain_fixture.c
+build obj/adapter-wow/wow_user_object_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_object_bindings.c
+build obj/adapter-wow/wow_menu_client_bindings.obj: cc O$:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_menu_client_bindings.c
+build wow-page-domain-test.exe: memory_test_link obj/tests/wow_page_domain_fixture.obj obj/adapter-wow/wow_user_object_bindings.obj obj/adapter-wow/wow_menu_client_bindings.obj obj/adapter-wow/wow_menu_native_bindings.obj obj/tests/wow_menu_runtime.obj obj/tests/wow_original_cleanup.obj obj/tests/wow_original_handtabl.obj obj/tests/wow_original_probe.obj obj/adapter-wow/wow_cleanup_bindings.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build cpu40-descriptor-domain-fixture.exe: memory_test_link obj/tests/cpu40_descriptor_domain_fixture.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build obj/tests/wow_user_client_view_layout_fixture.obj: cc O$:/repos.hobby/ntvdm64/tests/adapter-mvdm-host-out/wow/wow_user_client_view_layout_fixture.c
+build wow-user-client-view-layout-test.exe: memory_test_link obj/tests/wow_user_client_view_layout_fixture.obj
+build cvidc-vector-binding-fixture.exe: memory_test_link obj/tests/cvidc_vector_binding_fixture.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build x87-layout-fixture.exe: rtl_fixture_link obj/tests/x87_layout_fixture.obj
+build VDMREDIR.dll | VDMREDIR.dll.lib: redir_dll_link obj/redir/vrmslot.obj obj/redir/vrnmpipe.obj obj/redir/vrdisp.obj obj/redir/vrinit.obj obj/redir/vrmisc.obj obj/redir/vrnetapi.obj obj/redir/vrnetb.obj obj/redir/vrputil.obj obj/redir/vrremote.obj obj/redir/vrdlc5c.obj obj/redir/vrdlcpst.obj obj/redir/vrdlcbuf.obj obj/redir/vrdlcdbg.obj obj/redir/vrdebug.obj obj/redir/vrdll.obj obj/redir/vdmredir.res ntvdm.lib worker-base.lib vdmredir-dll-bindings.lib original-opennt-netlib.lib original-opennt-netapi-api.lib original-opennt-xactsrv.lib original-opennt-rtl-x86.lib softpc-bindings.lib softpc-win32-bindings.lib common-root.lib common-transport.lib common-codec.lib common-console.lib
+build original-softpc-forced-closure.dll: forced_link_audit original-ccpu386.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-support.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-softpc-host-roots.lib softpc-bindings.lib worker-shell.lib worker-command-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib
+build ntcon-source-closure: phony obj/frontend/main.obj obj/frontend/session_arguments.obj obj/frontend/session_service.obj obj/frontend/frontend_session.obj frontend-window.lib obj/frontend/console_frontend.obj obj/frontend/console_video.obj obj/frontend/console_channel.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib obj/run16/stub.obj obj/opennt-abi-host-compat/console_grid.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib
+build ntmon-source-closure: phony obj/monitor/main.obj obj/monitor/trace_view.obj obj/monitor/stub.obj broker-transport.lib common-rpc.lib
+build run16-source-closure: phony obj/run16/entry.obj obj/common/application_search.obj obj/run16/image_classification.obj obj/common/native_image.obj obj/run16/launch_options.obj obj/run16/frontend_scope.obj frontend-client.lib obj/run16/support.obj base-rpc-client-core.lib base-rpc-client-launch.lib obj/run16/stub.obj opennt-base-client.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib nthook-context.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib || ntcon.exe
+build ntsrv-source-closure: phony obj/basesrv/entry.obj obj/basesrv/stub.obj obj/run16/support.obj opennt-base-server.lib opennt-base-bindings.lib broker-transport.lib original-opennt-rtl-x86.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib

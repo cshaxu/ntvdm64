@@ -1,0 +1,26 @@
+{
+  "result": "pass",
+  "base": "feae187ad",
+  "candidate_count": 14,
+  "source_tables": [
+    {
+      "path": "shard-0/ddeml-test-input-observations.json",
+      "sha256": "CB61A032B32FEAA10877327FF1D899A1691B83CFD6B6427B9A428FB00B6E54A6"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "artifacts\\mvdm-audit\\shard-0\\ddeml-inputs-worker.txt",
+      "sha256": "76825856415C42B430FD42625C71F6D8C62A10FFF1223765EBA37F67B149D36D",
+      "graph": "worker",
+      "kind": "build edges"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\shard-0\\ddeml-inputs-wow32.txt",
+      "sha256": "29C763211833CA2D67A24DD6E676FBEC27A130C62A2CD348B150DB8787F4F4A5",
+      "graph": "wow32",
+      "kind": "build edges"
+    }
+  ],
+  "scope": "Historical test/sample file roles only; no DDE capability or behavior exclusion"
+}

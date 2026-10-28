@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
+excludes individual historical sample/build roles, never DDE functionality.
+
 The [synchronous Winsock checkpoint](shard-0/wow-winsock-raw-review.md)
 retains guest, network failure and socket-lifetime obligations.
 
