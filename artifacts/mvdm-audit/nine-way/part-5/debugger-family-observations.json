@@ -1,0 +1,276 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "softpc.new/debugger/vdmdebug.c",
+      "path": "softpc.new/debugger/vdmdebug.c",
+      "hashes": [
+        "38A25FA9784C466C56EE7024B33DFB7E3A419E6E415AEDBB92AF32F61FA24C77",
+        "38A25FA9784C466C56EE7024B33DFB7E3A419E6E415AEDBB92AF32F61FA24C77",
+        "38A25FA9784C466C56EE7024B33DFB7E3A419E6E415AEDBB92AF32F61FA24C77"
+      ],
+      "original_tool": "softpc.new/debugger",
+      "recipe": "src\\mvdm\\softpc.new\\debugger\\sources",
+      "recipe_sha256": "3C1CA045BAB3890047459B9F943E059EBCC5284DD3366DC3DEEB24A10FAD37A2",
+      "recipe_literal_hits": [
+        "46:SOURCES=vdmdebug.c"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmdbg/vdmdbg.c",
+      "path": "vdmdbg/vdmdbg.c",
+      "hashes": [
+        "11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2",
+        "11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2",
+        "11CAD596254D09929987CF110F5B492862972D06077C5FECC100DC79B087E1D2"
+      ],
+      "original_tool": "vdmdbg",
+      "recipe": "src\\mvdm\\vdmdbg\\sources",
+      "recipe_sha256": "3535DBFC2D7F23704F9A6C662AD6D3077C1C7E9584EF12D1352DFE0CDECA0F3E",
+      "recipe_literal_hits": [
+        "59:SOURCES=vdmdbg.c vdmdbg.rc"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmdbg/vdmdbg.def",
+      "path": "vdmdbg/vdmdbg.def",
+      "hashes": [
+        "2C104E9E79BBB49447A004E8FB54651CEBFC4158A7472BD3A151DEE920047758",
+        "2C104E9E79BBB49447A004E8FB54651CEBFC4158A7472BD3A151DEE920047758",
+        "2C104E9E79BBB49447A004E8FB54651CEBFC4158A7472BD3A151DEE920047758"
+      ],
+      "original_tool": "vdmdbg",
+      "recipe": "src\\mvdm\\vdmdbg\\sources",
+      "recipe_sha256": "3535DBFC2D7F23704F9A6C662AD6D3077C1C7E9584EF12D1352DFE0CDECA0F3E",
+      "recipe_literal_hits": [],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmdbg/vdmdbg.rc",
+      "path": "vdmdbg/vdmdbg.rc",
+      "hashes": [
+        "AEAC86FDDB551EC11F7B6CEF4BE7B53F173D5DFB42B3C876F3A785F0B47643A4",
+        "AEAC86FDDB551EC11F7B6CEF4BE7B53F173D5DFB42B3C876F3A785F0B47643A4",
+        "AEAC86FDDB551EC11F7B6CEF4BE7B53F173D5DFB42B3C876F3A785F0B47643A4"
+      ],
+      "original_tool": "vdmdbg",
+      "recipe": "src\\mvdm\\vdmdbg\\sources",
+      "recipe_sha256": "3535DBFC2D7F23704F9A6C662AD6D3077C1C7E9584EF12D1352DFE0CDECA0F3E",
+      "recipe_literal_hits": [
+        "59:SOURCES=vdmdbg.c vdmdbg.rc"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmdbg/vdmdbg.txt",
+      "path": "vdmdbg/vdmdbg.txt",
+      "hashes": [
+        "A4070771C906841890D675D6A450FE44F4F291F4BE6F85EBE0481D86BE768208",
+        "A4070771C906841890D675D6A450FE44F4F291F4BE6F85EBE0481D86BE768208",
+        "A4070771C906841890D675D6A450FE44F4F291F4BE6F85EBE0481D86BE768208"
+      ],
+      "original_tool": "vdmdbg",
+      "recipe": "src\\mvdm\\vdmdbg\\sources",
+      "recipe_sha256": "3535DBFC2D7F23704F9A6C662AD6D3077C1C7E9584EF12D1352DFE0CDECA0F3E",
+      "recipe_literal_hits": [],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/data.c",
+      "path": "vdmexts/data.c",
+      "hashes": [
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5",
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5",
+        "75731661D637B1455EBB0166CD1FF8E7DE35AE904D4118EC630B1D767E0199B5"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/debug.c",
+      "path": "vdmexts/debug.c",
+      "hashes": [
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC",
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC",
+        "35DF768F94E937A09353C0DAF51F0752187AC0C55D5BEFD65BD8817A1868EBEC"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/dib.c",
+      "path": "vdmexts/dib.c",
+      "hashes": [
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47",
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47",
+        "35266593DDF2FF1CF7965BDF99F5345C2791F62FED379D9B4F96FA51D9386D47"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "41:wowprof.c dib.c \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/disasm.c",
+      "path": "vdmexts/disasm.c",
+      "hashes": [
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71",
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71",
+        "6DA5A9F7CF7510A0E93586AEF7D25F3F14B149250BB7419422EDEB32F0C8DA71"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/heap.c",
+      "path": "vdmexts/heap.c",
+      "hashes": [
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F",
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F",
+        "3E4544BBD3030EA995B0D79C91AD34A45C6A022F8E67C69060454049B3489D8F"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/help.c",
+      "path": "vdmexts/help.c",
+      "hashes": [
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942",
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942",
+        "D1D776C6733C3F692A4E72DDF8F7B983187A7C2A960EF3A1F505A8741F4D9942"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/i386/profile.c",
+      "path": "vdmexts/i386/profile.c",
+      "hashes": [
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA",
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA",
+        "376C2FEC8CB42783CA220165681D88FCD95C0EBA155EA2B397A4AB1BD5431EFA"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "44:i386_SOURCES=i386\\profile.c i386\\vdmtib.c i386\\regs.c"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/i386/regs.c",
+      "path": "vdmexts/i386/regs.c",
+      "hashes": [
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60",
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60",
+        "D31BA6E3342C76DF3DBA260B21B0DF25700F30D2C153A3C05B79353146B79C60"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "44:i386_SOURCES=i386\\profile.c i386\\vdmtib.c i386\\regs.c"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/i386/vdmtib.c",
+      "path": "vdmexts/i386/vdmtib.c",
+      "hashes": [
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8",
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8",
+        "F56CE99FA7D3166CFA82F825E3AC8BEED562064A3CC9CCE0285378E6E0C100E8"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "44:i386_SOURCES=i386\\profile.c i386\\vdmtib.c i386\\regs.c"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/misc.c",
+      "path": "vdmexts/misc.c",
+      "hashes": [
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9",
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9",
+        "BFBF56CEDA6CDB56E09BA098377B1EDAA2AA9CFA168C3D79B083E74D754BFCA9"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/platform.c",
+      "path": "vdmexts/platform.c",
+      "hashes": [
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53",
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53",
+        "3483655E311E105900194DB2A9BD6083BC03BB2DA943BDD16E8DA29AB74F9E53"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "39:SOURCES=data.c debug.c disasm.c heap.c help.c misc.c platform.c     \\"
+      ],
+      "current_exact_graph_hits": []
+    },
+    {
+      "key": "vdmexts/precomp.h",
+      "path": "vdmexts/precomp.h",
+      "hashes": [
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1",
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1",
+        "4A72DC0AB4119BAAD9B1EED2ED7C6CDC20D141E7FED9F52133ECCBC2D0C5C9C1"
+      ],
+      "original_tool": "vdmexts",
+      "recipe": "src\\mvdm\\vdmexts\\sources",
+      "recipe_sha256": "D2366C1773A0799EB01FA57CEC518D8BD5F7E3047351FBCDAFBE8F47C9205F2D",
+      "recipe_literal_hits": [
+        "54:PRECOMPILED_INCLUDE=precomp.h"
+      ],
+      "current_exact_graph_hits": []
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_named_outputs": [],
+  "scope": "Original separate debugger tool recipe and exact current build graph path; no runtime API or replacement equivalence"
+}

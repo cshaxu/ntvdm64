@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "owned_mvdm": 120,
+  "owned_external": 4773,
+  "recorded_keys": 4893,
+  "missing": [],
+  "extra": [],
+  "duplicates": {},
+  "scope": "One per-key evidence record, not functional or relevance completion"
+}

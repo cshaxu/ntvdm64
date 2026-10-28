@@ -1,0 +1,710 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "vdd/samples/adlibvdd/adlibvdd.def",
+      "path": "vdd/samples/adlibvdd/adlibvdd.def",
+      "hashes": [
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED",
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED",
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/adlibvdd/vdd.c",
+      "path": "vdd/samples/adlibvdd/vdd.c",
+      "hashes": [
+        "13520D81890F84D34C49AEA49466E17BB652EF3A841A2A7254E4C1B332F1E70C",
+        "13520D81890F84D34C49AEA49466E17BB652EF3A841A2A7254E4C1B332F1E70C",
+        "13520D81890F84D34C49AEA49466E17BB652EF3A841A2A7254E4C1B332F1E70C"
+      ],
+      "reference_count": 6,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/adlibvdd/sources",
+          "line": 20,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/vsbd/sources",
+          "line": 21,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/vsbd/vdd.c",
+          "line": 3,
+          "text": "*   vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/sources",
+          "line": 17,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/vdd.c",
+          "line": 7,
+          "text": "*  VDD.C - Sample VDD for NT-MVDM"
+        },
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.c",
+          "line": 7,
+          "text": "*  VDD.C - Sample VDD for NT-MVDM"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/adlibvdd/vdd.h",
+      "path": "vdd/samples/adlibvdd/vdd.h",
+      "hashes": [
+        "E55D125672EC0BDC8787F6D781C47AA16F91E12D9792833401AEB29A78118FCE",
+        "E55D125672EC0BDC8787F6D781C47AA16F91E12D9792833401AEB29A78118FCE",
+        "E55D125672EC0BDC8787F6D781C47AA16F91E12D9792833401AEB29A78118FCE"
+      ],
+      "reference_count": 4,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/adlibvdd/vdd.c",
+          "line": 27,
+          "text": "#include \"vdd.h\"                // Common data with kernel driver"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/vdd.c",
+          "line": 11,
+          "text": "#include \"vdd.h\""
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/vdd.h",
+          "line": 1,
+          "text": "/* vdd.h - main include file for the VDD"
+        },
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.h",
+          "line": 1,
+          "text": "/* vdd.h - main include file for the VDD"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/hpscan/hpscan16.asm",
+      "path": "vdd/samples/hpscan/hpscan16.asm",
+      "hashes": [
+        "2B115015D9C66AF34607B5E510D954FF930C713583FF63C4017C0C83368FA168",
+        "2B115015D9C66AF34607B5E510D954FF930C713583FF63C4017C0C83368FA168",
+        "2B115015D9C66AF34607B5E510D954FF930C713583FF63C4017C0C83368FA168"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/hpscan/hpscan16.inc",
+          "line": 3,
+          "text": "; Description: Defines for HPSCAN16.ASM"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/hpscan/hpscan16.exe",
+      "path": "vdd/samples/hpscan/hpscan16.exe",
+      "hashes": [
+        "6A8F336F374F3FD2562663A85C30D6925E56A4E6362A2CE1A2B224DC4F069990",
+        "",
+        ""
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/hpscan/makefile",
+          "line": 44,
+          "text": "exe2bin hpscan16.exe hpscan16.sys"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/hpscan/hpscan16.inc",
+      "path": "vdd/samples/hpscan/hpscan16.inc",
+      "hashes": [
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC",
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC",
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/hpscan/hpscan16.asm",
+          "line": 9,
+          "text": "INCLUDE hpscan16.inc     ;private"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/hpscan/HPSCAN16.SYS",
+      "path": "vdd/samples/hpscan/HPSCAN16.SYS",
+      "hashes": [
+        "05A0BC699092741948852355DBA57B70E14C520EDA177F6CBC058D8D539A2866",
+        "",
+        ""
+      ],
+      "reference_count": 4,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/hpscan/makefile",
+          "line": 30,
+          "text": "all: hpscan16.sys"
+        },
+        {
+          "path": "vdd/samples/hpscan/makefile",
+          "line": 31,
+          "text": "-binplace hpscan16.sys"
+        },
+        {
+          "path": "vdd/samples/hpscan/makefile",
+          "line": 42,
+          "text": "hpscan16.sys: hpscan16.obj"
+        },
+        {
+          "path": "vdd/samples/hpscan/makefile",
+          "line": 44,
+          "text": "exe2bin hpscan16.exe hpscan16.sys"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/readme.txt",
+      "path": "vdd/samples/mscdex/readme.txt",
+      "hashes": [
+        "0A640502CA6E2BD5AC12984C67FB5B4D5B51531BEC6908604A574A14DEBD8994",
+        "0A640502CA6E2BD5AC12984C67FB5B4D5B51531BEC6908604A574A14DEBD8994",
+        "0A640502CA6E2BD5AC12984C67FB5B4D5B51531BEC6908604A574A14DEBD8994"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/tsr/messages.inc",
+      "path": "vdd/samples/mscdex/tsr/messages.inc",
+      "hashes": [
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6"
+      ],
+      "reference_count": 5,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 41,
+          "text": "if exist messages.inc del messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 43,
+          "text": "messages.inc : messages\\$(COUNTRY)\\messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 44,
+          "text": "copy messages\\$(COUNTRY)\\messages.inc ."
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 46,
+          "text": "mscdexnt.obj: mscdexnt.asm mscdexnt.inc messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/mscdexnt.asm",
+          "line": 233,
+          "text": "include messages.inc"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/tsr/messages/usa/messages.inc",
+      "path": "vdd/samples/mscdex/tsr/messages/usa/messages.inc",
+      "hashes": [
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6"
+      ],
+      "reference_count": 5,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 41,
+          "text": "if exist messages.inc del messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 43,
+          "text": "messages.inc : messages\\$(COUNTRY)\\messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 44,
+          "text": "copy messages\\$(COUNTRY)\\messages.inc ."
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 46,
+          "text": "mscdexnt.obj: mscdexnt.asm mscdexnt.inc messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/mscdexnt.asm",
+          "line": 233,
+          "text": "include messages.inc"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/tsr/mscdexnt.asm",
+      "path": "vdd/samples/mscdex/tsr/mscdexnt.asm",
+      "hashes": [
+        "BDA33DC8F48ADEAB11CA452312B8A74FB7194300C1BD5DB450DF466F537CA0B1",
+        "BDA33DC8F48ADEAB11CA452312B8A74FB7194300C1BD5DB450DF466F537CA0B1",
+        "BDA33DC8F48ADEAB11CA452312B8A74FB7194300C1BD5DB450DF466F537CA0B1"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 46,
+          "text": "mscdexnt.obj: mscdexnt.asm mscdexnt.inc messages.inc"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/tsr/mscdexnt.exe",
+      "path": "vdd/samples/mscdex/tsr/mscdexnt.exe",
+      "hashes": [
+        "B3151A2DFE4A67A6C2E6113071D1F1C713BB78A04ADEA986FE01540EB96762D0",
+        "",
+        ""
+      ],
+      "reference_count": 3,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 31,
+          "text": "all: mscdexnt.exe"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 32,
+          "text": "-binplace mscdexnt.exe"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 48,
+          "text": "mscdexnt.exe: mscdexnt.obj"
+        }
+      ],
+      "archive_identical_members": [
+        "WINNT/SYSTEM32/mscdexnt.exe"
+      ],
+      "archive_named_members": [
+        "WINNT/SYSTEM32/mscdexnt.exe"
+      ]
+    },
+    {
+      "key": "vdd/samples/mscdex/tsr/mscdexnt.inc",
+      "path": "vdd/samples/mscdex/tsr/mscdexnt.inc",
+      "hashes": [
+        "329B698242F683B53C1B283295F3D3B5A2B43B12550B45451FD6537246DE259E",
+        "329B698242F683B53C1B283295F3D3B5A2B43B12550B45451FD6537246DE259E",
+        "329B698242F683B53C1B283295F3D3B5A2B43B12550B45451FD6537246DE259E"
+      ],
+      "reference_count": 2,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/tsr/makefile",
+          "line": 46,
+          "text": "mscdexnt.obj: mscdexnt.asm mscdexnt.inc messages.inc"
+        },
+        {
+          "path": "vdd/samples/mscdex/tsr/mscdexnt.asm",
+          "line": 16,
+          "text": "include mscdexnt.inc"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/vdd/mscdex.h",
+      "path": "vdd/samples/mscdex/vdd/mscdex.h",
+      "hashes": [
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430",
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430",
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/vdd/vcdex.c",
+          "line": 48,
+          "text": "#include <mscdex.h>"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/vdd/vcdex.c",
+      "path": "vdd/samples/mscdex/vdd/vcdex.c",
+      "hashes": [
+        "1E04779EE75DE6B1CB294E4B036E68745F84815D73C6037EE577258E97C629CA",
+        "1E04779EE75DE6B1CB294E4B036E68745F84815D73C6037EE577258E97C629CA",
+        "1E04779EE75DE6B1CB294E4B036E68745F84815D73C6037EE577258E97C629CA"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/vdd/sources",
+          "line": 19,
+          "text": "SOURCES=vcdex.c VCDEX.RC"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/vdd/vcdex.def",
+      "path": "vdd/samples/mscdex/vdd/vcdex.def",
+      "hashes": [
+        "EAC12FD23DA49E0BA41BAE2BB628AF4722F0942B84D5671971E1E7B8873E84F6",
+        "EAC12FD23DA49E0BA41BAE2BB628AF4722F0942B84D5671971E1E7B8873E84F6",
+        "EAC12FD23DA49E0BA41BAE2BB628AF4722F0942B84D5671971E1E7B8873E84F6"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/vdd/vcdex.h",
+      "path": "vdd/samples/mscdex/vdd/vcdex.h",
+      "hashes": [
+        "EF58FF9747B8B14A904A3B2894FB496FEA500771AAEC462DD8CEFED63BC00B5A",
+        "EF58FF9747B8B14A904A3B2894FB496FEA500771AAEC462DD8CEFED63BC00B5A",
+        "EF58FF9747B8B14A904A3B2894FB496FEA500771AAEC462DD8CEFED63BC00B5A"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/vdd/vcdex.c",
+          "line": 52,
+          "text": "#include \"vcdex.h\""
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/mscdex/vdd/vcdex.rc",
+      "path": "vdd/samples/mscdex/vdd/vcdex.rc",
+      "hashes": [
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F",
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F",
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/mscdex/vdd/sources",
+          "line": 19,
+          "text": "SOURCES=vcdex.c VCDEX.RC"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/readme",
+      "path": "vdd/samples/readme",
+      "hashes": [
+        "8AA70F6151632D7C74D7F1786A9D3F9A172176BA36934B294C7016C0E388C9BC",
+        "8AA70F6151632D7C74D7F1786A9D3F9A172176BA36934B294C7016C0E388C9BC",
+        "8AA70F6151632D7C74D7F1786A9D3F9A172176BA36934B294C7016C0E388C9BC"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample1/fax16/fax16.asm",
+      "path": "vdd/samples/sample1/fax16/fax16.asm",
+      "hashes": [
+        "E1CABBFE6C1984F5F4B76A7DCEFAC2225D87EA0A2B174413F898F4A386A338AE",
+        "E1CABBFE6C1984F5F4B76A7DCEFAC2225D87EA0A2B174413F898F4A386A338AE",
+        "E1CABBFE6C1984F5F4B76A7DCEFAC2225D87EA0A2B174413F898F4A386A338AE"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample1/fax32/fax32.c",
+      "path": "vdd/samples/sample1/fax32/fax32.c",
+      "hashes": [
+        "9F9AAC26CD8254DEBBFCC6A157AA0BA97B04668041BF0503720EF26FDC6241DB",
+        "9F9AAC26CD8254DEBBFCC6A157AA0BA97B04668041BF0503720EF26FDC6241DB",
+        "9F9AAC26CD8254DEBBFCC6A157AA0BA97B04668041BF0503720EF26FDC6241DB"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/sample1/fax32/sources",
+          "line": 15,
+          "text": "SOURCES=fax32.c"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample1/fax32/fax32.def",
+      "path": "vdd/samples/sample1/fax32/fax32.def",
+      "hashes": [
+        "43B4B7D255C89CC8BD8106B8E5BCF671B3483909379BE6567A73404FDE2252F5",
+        "43B4B7D255C89CC8BD8106B8E5BCF671B3483909379BE6567A73404FDE2252F5",
+        "43B4B7D255C89CC8BD8106B8E5BCF671B3483909379BE6567A73404FDE2252F5"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample1/fax32/fax32.h",
+      "path": "vdd/samples/sample1/fax32/fax32.h",
+      "hashes": [
+        "EFDAB3D2E2BD986C90192C1E539A739BCFF54C39EC8BE700101B251F911F177B",
+        "EFDAB3D2E2BD986C90192C1E539A739BCFF54C39EC8BE700101B251F911F177B",
+        "EFDAB3D2E2BD986C90192C1E539A739BCFF54C39EC8BE700101B251F911F177B"
+      ],
+      "reference_count": 1,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.c",
+          "line": 10,
+          "text": "#include \"fax32.h\""
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample2/16bits/16bits.asm",
+      "path": "vdd/samples/sample2/16bits/16bits.asm",
+      "hashes": [
+        "DB03AA7060A40815C120937D2AE59323AF7467BA2A9A9E8292AF74AEF0ADBDD4",
+        "DB03AA7060A40815C120937D2AE59323AF7467BA2A9A9E8292AF74AEF0ADBDD4",
+        "DB03AA7060A40815C120937D2AE59323AF7467BA2A9A9E8292AF74AEF0ADBDD4"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample2/16bits/16bits.inc",
+      "path": "vdd/samples/sample2/16bits/16bits.inc",
+      "hashes": [
+        "EC5D07EA987EFA07C43869046EE57AFCE94B639BB78D1ECE049F1D9E136872BA",
+        "EC5D07EA987EFA07C43869046EE57AFCE94B639BB78D1ECE049F1D9E136872BA",
+        "EC5D07EA987EFA07C43869046EE57AFCE94B639BB78D1ECE049F1D9E136872BA"
+      ],
+      "reference_count": 2,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/sample2/16bits/16bits.asm",
+          "line": 4,
+          "text": "include 16bits.inc"
+        },
+        {
+          "path": "vdd/samples/sample2/16bits/makefile",
+          "line": 42,
+          "text": "16bits.obj: 16bits.inc"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample2/vdd/vdd.c",
+      "path": "vdd/samples/sample2/vdd/vdd.c",
+      "hashes": [
+        "F8EE71884385FC8A7703DA165461735F96BA01D4D0A5C7C33670929C5A821E4C",
+        "F8EE71884385FC8A7703DA165461735F96BA01D4D0A5C7C33670929C5A821E4C",
+        "F8EE71884385FC8A7703DA165461735F96BA01D4D0A5C7C33670929C5A821E4C"
+      ],
+      "reference_count": 5,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/adlibvdd/sources",
+          "line": 20,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/vsbd/sources",
+          "line": 21,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/vsbd/vdd.c",
+          "line": 3,
+          "text": "*   vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/sources",
+          "line": 17,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.c",
+          "line": 7,
+          "text": "*  VDD.C - Sample VDD for NT-MVDM"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample2/vdd/vdd.def",
+      "path": "vdd/samples/sample2/vdd/vdd.def",
+      "hashes": [
+        "072101CA34B3BDFEF82AC910F2E625A1F76CFA11DB242806A75F562DF1D22B6C",
+        "072101CA34B3BDFEF82AC910F2E625A1F76CFA11DB242806A75F562DF1D22B6C",
+        "072101CA34B3BDFEF82AC910F2E625A1F76CFA11DB242806A75F562DF1D22B6C"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/sample2/vdd/vdd.h",
+      "path": "vdd/samples/sample2/vdd/vdd.h",
+      "hashes": [
+        "F8D6EF9AB8372F6CDEE0B9401F22CCF1A0807C5C1D69F78948DD6415420121AC",
+        "F8D6EF9AB8372F6CDEE0B9401F22CCF1A0807C5C1D69F78948DD6415420121AC",
+        "F8D6EF9AB8372F6CDEE0B9401F22CCF1A0807C5C1D69F78948DD6415420121AC"
+      ],
+      "reference_count": 4,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/adlibvdd/vdd.c",
+          "line": 27,
+          "text": "#include \"vdd.h\"                // Common data with kernel driver"
+        },
+        {
+          "path": "vdd/samples/adlibvdd/vdd.h",
+          "line": 8,
+          "text": "vdd.h"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/vdd.c",
+          "line": 11,
+          "text": "#include \"vdd.h\""
+        },
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.h",
+          "line": 1,
+          "text": "/* vdd.h - main include file for the VDD"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/vsbd/vdd.c",
+      "path": "vdd/samples/vsbd/vdd.c",
+      "hashes": [
+        "FCF0E4817F2F69D7264754EF8A2BA498380E0B6B1199C93CF0F16BA036580A20",
+        "FCF0E4817F2F69D7264754EF8A2BA498380E0B6B1199C93CF0F16BA036580A20",
+        "FCF0E4817F2F69D7264754EF8A2BA498380E0B6B1199C93CF0F16BA036580A20"
+      ],
+      "reference_count": 5,
+      "literal_refs": [
+        {
+          "path": "vdd/samples/adlibvdd/sources",
+          "line": 20,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/vsbd/sources",
+          "line": 21,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/sources",
+          "line": 17,
+          "text": "SOURCES=vdd.c"
+        },
+        {
+          "path": "vdd/samples/sample2/vdd/vdd.c",
+          "line": 7,
+          "text": "*  VDD.C - Sample VDD for NT-MVDM"
+        },
+        {
+          "path": "vdd/samples/sample1/fax32/fax32.c",
+          "line": 7,
+          "text": "*  VDD.C - Sample VDD for NT-MVDM"
+        }
+      ],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/samples/vsbd/vsbd.def",
+      "path": "vdd/samples/vsbd/vsbd.def",
+      "hashes": [
+        "D80BC719EA090575366FA5ABED495C219BD6B125F6B3235BB59E5A848C66F3A4",
+        "D80BC719EA090575366FA5ABED495C219BD6B125F6B3235BB59E5A848C66F3A4",
+        "D80BC719EA090575366FA5ABED495C219BD6B125F6B3235BB59E5A848C66F3A4"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    },
+    {
+      "key": "vdd/vddserv.doc",
+      "path": "vdd/vddserv.doc",
+      "hashes": [
+        "4202F2F705A5B9CC552AD437BC76FDD4D7D389D2F9E40FD25665EB6518A699BA",
+        "4202F2F705A5B9CC552AD437BC76FDD4D7D389D2F9E40FD25665EB6518A699BA",
+        "4202F2F705A5B9CC552AD437BC76FDD4D7D389D2F9E40FD25665EB6518A699BA"
+      ],
+      "reference_count": 0,
+      "literal_refs": [],
+      "archive_identical_members": [],
+      "archive_named_members": []
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "scope": "Literal sample source references and exact sample-binary package identity; does not establish runtime or generic VDD capability"
+}

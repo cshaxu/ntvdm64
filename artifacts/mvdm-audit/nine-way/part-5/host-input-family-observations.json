@@ -1,0 +1,723 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "softpc.new/base/inc/tcpip.h",
+      "path": "softpc.new/base/inc/tcpip.h",
+      "hashes": [
+        "240F9FBCC78213F7E3DC458013A096A4C2F0768E05D8F34808E5610A7E38BFB1",
+        "240F9FBCC78213F7E3DC458013A096A4C2F0768E05D8F34808E5610A7E38BFB1",
+        "240F9FBCC78213F7E3DC458013A096A4C2F0768E05D8F34808E5610A7E38BFB1"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/tredltr.h",
+      "path": "softpc.new/base/inc/tredltr.h",
+      "hashes": [
+        "0FAC7A13402DA75950B2F701E3700442CF21A2FC73686301566ED3F9035FC952",
+        "0FAC7A13402DA75950B2F701E3700442CF21A2FC73686301566ED3F9035FC952",
+        "0FAC7A13402DA75950B2F701E3700442CF21A2FC73686301566ED3F9035FC952"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/vgastate.h",
+      "path": "softpc.new/base/inc/vgastate.h",
+      "hashes": [
+        "BFFF3B82A50C1AC89D1BEB0195CFFD7E4FB82A90715C25D279FD8AA8BD77580C",
+        "BFFF3B82A50C1AC89D1BEB0195CFFD7E4FB82A90715C25D279FD8AA8BD77580C",
+        "BFFF3B82A50C1AC89D1BEB0195CFFD7E4FB82A90715C25D279FD8AA8BD77580C"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/winfiles.h",
+      "path": "softpc.new/base/inc/winfiles.h",
+      "hashes": [
+        "F307FC3F4039B70639A9403FF07BFC8C44A1D14BAAC5DF8F51CE7AB69D27A4B7",
+        "F307FC3F4039B70639A9403FF07BFC8C44A1D14BAAC5DF8F51CE7AB69D27A4B7",
+        "F307FC3F4039B70639A9403FF07BFC8C44A1D14BAAC5DF8F51CE7AB69D27A4B7"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/winhelp.h",
+      "path": "softpc.new/base/inc/winhelp.h",
+      "hashes": [
+        "8EF3D5E1F7848239EA7C45EEA43098088A78A632D7803CA86C299CD553AE81D6",
+        "8EF3D5E1F7848239EA7C45EEA43098088A78A632D7803CA86C299CD553AE81D6",
+        "8EF3D5E1F7848239EA7C45EEA43098088A78A632D7803CA86C299CD553AE81D6"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/worm.h",
+      "path": "softpc.new/base/inc/worm.h",
+      "hashes": [
+        "D49A3112A511C092090753BF4B65C714785A049F09F312F0A78006A91531DC61",
+        "D49A3112A511C092090753BF4B65C714785A049F09F312F0A78006A91531DC61",
+        "D49A3112A511C092090753BF4B65C714785A049F09F312F0A78006A91531DC61"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/inc/yoda.h",
+      "path": "softpc.new/base/inc/yoda.h",
+      "hashes": [
+        "9488860E836E9B4FB17EC69558BC65CE1A8AFB99286F62E6092759C959569FC1",
+        "9488860E836E9B4FB17EC69558BC65CE1A8AFB99286F62E6092759C959569FC1",
+        "9488860E836E9B4FB17EC69558BC65CE1A8AFB99286F62E6092759C959569FC1"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": [
+        "worker/obj/ccpu/ccpusas4.obj",
+        "worker/obj/ccpu/c_page.obj",
+        "worker/obj/ccpu/c_xcptn.obj",
+        "worker/obj/system/ica.obj",
+        "worker/obj/system/illegalp.obj",
+        "worker/obj/system/rom.obj",
+        "worker/obj/support/main.obj",
+        "worker/obj/base-debug/yoda.obj",
+        "worker/obj/host/nt_bop.obj",
+        "worker/obj/host/nt_cpu.obj",
+        "worker/obj/host/nt_event.obj"
+      ]
+    },
+    {
+      "key": "softpc.new/base/support/get_env.c",
+      "path": "softpc.new/base/support/get_env.c",
+      "hashes": [
+        "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F",
+        "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F",
+        "7E0FC5E63E423A6BFC0F29E871D55C60D95CC1319F621571317B8F5A73433A2F"
+      ],
+      "exact_graphs": [
+        "worker"
+      ],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/base/video/ega_trcr.c",
+      "path": "softpc.new/base/video/ega_trcr.c",
+      "hashes": [
+        "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C",
+        "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C",
+        "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C"
+      ],
+      "exact_graphs": [
+        "worker"
+      ],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/dfa.gi",
+      "path": "softpc.new/host/inc/dfa.gi",
+      "hashes": [
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/host.h",
+      "path": "softpc.new/host/inc/host.h",
+      "hashes": [
+        "0192CAFB4E0E9A42A83A409503F12E3F0E9F7ABFE8619EB4CE7DFEC36E938B94",
+        "0192CAFB4E0E9A42A83A409503F12E3F0E9F7ABFE8619EB4CE7DFEC36E938B94",
+        "0192CAFB4E0E9A42A83A409503F12E3F0E9F7ABFE8619EB4CE7DFEC36E938B94"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/host_gen.h",
+      "path": "softpc.new/host/inc/host_gen.h",
+      "hashes": [
+        "D86CD3C505D643531DAFAA548E66FBB42BA13C37E3C632A214A69B4F2F86F557",
+        "D86CD3C505D643531DAFAA548E66FBB42BA13C37E3C632A214A69B4F2F86F557",
+        "D86CD3C505D643531DAFAA548E66FBB42BA13C37E3C632A214A69B4F2F86F557"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": [
+        "worker/obj/ccpu/adc.obj",
+        "worker/obj/ccpu/aaa.obj",
+        "worker/obj/ccpu/aad.obj",
+        "worker/obj/ccpu/add.obj",
+        "worker/obj/ccpu/aas.obj",
+        "worker/obj/ccpu/and.obj",
+        "worker/obj/ccpu/arpl.obj",
+        "worker/obj/ccpu/aam.obj",
+        "worker/obj/ccpu/bsf.obj",
+        "worker/obj/ccpu/bsr.obj",
+        "worker/obj/ccpu/bound.obj",
+        "worker/obj/ccpu/bswap.obj",
+        "worker/obj/ccpu/bt.obj",
+        "worker/obj/ccpu/btc.obj",
+        "worker/obj/ccpu/btr.obj",
+        "worker/obj/ccpu/bts.obj",
+        "worker/obj/ccpu/cbw.obj",
+        "worker/obj/ccpu/call.obj",
+        "worker/obj/ccpu/cdq.obj",
+        "worker/obj/ccpu/clc.obj",
+        "worker/obj/ccpu/ccpusas4.obj",
+        "worker/obj/ccpu/cli.obj",
+        "worker/obj/ccpu/cld.obj",
+        "worker/obj/ccpu/clts.obj",
+        "worker/obj/ccpu/cmc.obj",
+        "worker/obj/ccpu/cmpxchg.obj",
+        "worker/obj/ccpu/cmp.obj",
+        "worker/obj/ccpu/cwd.obj",
+        "worker/obj/ccpu/cwde.obj",
+        "worker/obj/ccpu/c_bsic.obj",
+        "worker/obj/ccpu/c_debug.obj",
+        "worker/obj/ccpu/c_addr.obj",
+        "worker/obj/ccpu/c_div64.obj",
+        "worker/obj/ccpu/c_intr.obj",
+        "worker/obj/ccpu/c_mul64.obj",
+        "worker/obj/ccpu/c_neg64.obj",
+        "worker/obj/ccpu/c_page.obj",
+        "worker/obj/ccpu/c_seg.obj",
+        "worker/obj/ccpu/c_reg.obj",
+        "worker/obj/ccpu/c_prot.obj",
+        "worker/obj/ccpu/c_tlb.obj",
+        "worker/obj/ccpu/c_stack.obj",
+        "worker/obj/ccpu/c_tsksw.obj",
+        "worker/obj/ccpu/c_xfer.obj",
+        "worker/obj/ccpu/c_xcptn.obj",
+        "worker/obj/ccpu/c_xtrn.obj",
+        "worker/obj/ccpu/daa.obj",
+        "worker/obj/ccpu/das.obj",
+        "worker/obj/ccpu/div.obj",
+        "worker/obj/ccpu/dec.obj",
+        "worker/obj/ccpu/enter.obj",
+        "worker/obj/ccpu/idiv.obj",
+        "worker/obj/ccpu/imul.obj",
+        "worker/obj/ccpu/inc.obj",
+        "worker/obj/ccpu/in.obj",
+        "worker/obj/ccpu/into.obj",
+        "worker/obj/ccpu/invd.obj",
+        "worker/obj/ccpu/intx.obj",
+        "worker/obj/ccpu/invlpg.obj",
+        "worker/obj/ccpu/jcxz.obj",
+        "worker/obj/ccpu/iret.obj",
+        "worker/obj/ccpu/jmp.obj",
+        "worker/obj/ccpu/jxx.obj",
+        "worker/obj/ccpu/lahf.obj",
+        "worker/obj/ccpu/c_main.obj",
+        "worker/obj/ccpu/lar.obj",
+        "worker/obj/ccpu/lea.obj",
+        "worker/obj/ccpu/lgdt.obj",
+        "worker/obj/ccpu/leave.obj",
+        "worker/obj/ccpu/lidt.obj",
+        "worker/obj/ccpu/lldt.obj",
+        "worker/obj/ccpu/loopxx.obj",
+        "worker/obj/ccpu/lmsw.obj",
+        "worker/obj/ccpu/lsl.obj",
+        "worker/obj/ccpu/ltr.obj",
+        "worker/obj/ccpu/lxs.obj",
+        "worker/obj/ccpu/movsx.obj",
+        "worker/obj/ccpu/mov.obj",
+        "worker/obj/ccpu/mul.obj",
+        "worker/obj/ccpu/neg.obj",
+        "worker/obj/ccpu/nop.obj",
+        "worker/obj/ccpu/not.obj",
+        "worker/obj/ccpu/or.obj",
+        "worker/obj/ccpu/pop.obj",
+        "worker/obj/ccpu/out.obj",
+        "worker/obj/ccpu/popa.obj",
+        "worker/obj/ccpu/popf.obj",
+        "worker/obj/ccpu/push.obj",
+        "worker/obj/ccpu/pushf.obj",
+        "worker/obj/ccpu/pusha.obj",
+        "worker/obj/ccpu/rcl.obj",
+        "worker/obj/ccpu/rcr.obj",
+        "worker/obj/ccpu/ret.obj",
+        "worker/obj/ccpu/rol.obj",
+        "worker/obj/ccpu/ror.obj",
+        "worker/obj/ccpu/rsrvd.obj",
+        "worker/obj/ccpu/sahf.obj",
+        "worker/obj/ccpu/sbb.obj",
+        "worker/obj/ccpu/sar.obj",
+        "worker/obj/ccpu/setxx.obj",
+        "worker/obj/ccpu/sgdt.obj",
+        "worker/obj/ccpu/shl.obj",
+        "worker/obj/ccpu/shld.obj",
+        "worker/obj/ccpu/shr.obj",
+        "worker/obj/ccpu/shrd.obj",
+        "worker/obj/ccpu/sidt.obj",
+        "worker/obj/ccpu/sldt.obj",
+        "worker/obj/ccpu/smsw.obj",
+        "worker/obj/ccpu/stc.obj",
+        "worker/obj/ccpu/std.obj",
+        "worker/obj/ccpu/sti.obj",
+        "worker/obj/ccpu/str.obj",
+        "worker/obj/ccpu/test.obj",
+        "worker/obj/ccpu/sub.obj",
+        "worker/obj/ccpu/verw.obj",
+        "worker/obj/ccpu/verr.obj",
+        "worker/obj/ccpu/wbinvd.obj",
+        "worker/obj/ccpu/wait.obj",
+        "worker/obj/ccpu/xadd.obj",
+        "worker/obj/ccpu/xchg.obj",
+        "worker/obj/ccpu/xlat.obj",
+        "worker/obj/ccpu/xor.obj",
+        "worker/obj/ccpu/zfrsrvd.obj",
+        "worker/obj/bios/cmos_bis.obj",
+        "worker/obj/bios/bios.obj",
+        "worker/obj/bios/cntlbop.obj",
+        "worker/obj/bios/emm_fncs.obj",
+        "worker/obj/bios/rom_basc.obj",
+        "worker/obj/bios/slave_bs.obj",
+        "worker/obj/bios/rtc_bios.obj",
+        "worker/obj/bios/reset.obj",
+        "worker/obj/bios/tape_io.obj",
+        "worker/obj/bios/ill_bop.obj",
+        "worker/obj/bios/equipmnt.obj",
+        "worker/obj/bios/virtual.obj",
+        "worker/obj/bios/mem_size.obj",
+        "worker/obj/bios/build_id.obj",
+        "worker/obj/keymouse/keybd_io.obj",
+        "worker/obj/keymouse/keyba.obj",
+        "worker/obj/keymouse/mouse.obj",
+        "worker/obj/system/at_dma.obj",
+        "worker/obj/keymouse/ppi.obj",
+        "worker/obj/keymouse/mouse_io.obj",
+        "worker/obj/system/idetect.obj",
+        "worker/obj/system/cmosnt.obj",
+        "worker/obj/system/ica.obj",
+        "worker/obj/system/illegalp.obj",
+        "worker/obj/system/qevnt.obj",
+        "worker/obj/system/rom.obj",
+        "worker/obj/system/timestrb.obj",
+        "worker/obj/system/timer.obj",
+        "worker/obj/system/unexp_nt.obj",
+        "worker/obj/disks/diskbios.obj",
+        "worker/obj/disks/floppy_i.obj",
+        "worker/obj/disks/floppy.obj",
+        "worker/obj/disks/fla.obj",
+        "worker/obj/disks/fdisk.obj",
+        "worker/obj/disks/gfi_mpty.obj",
+        "worker/obj/disks/gfi.obj",
+        "worker/obj/support/terminat.obj",
+        "worker/obj/support/time_day.obj",
+        "worker/obj/support/ios.obj",
+        "worker/obj/support/main.obj",
+        "worker/obj/support/xt.obj",
+        "worker/obj/video/ega_mode.obj",
+        "worker/obj/video/ega_prts.obj",
+        "worker/obj/video/ega_vide.obj",
+        "worker/obj/video/gfx_updt.obj",
+        "worker/obj/video/video.obj",
+        "worker/obj/video/gvi.obj",
+        "worker/obj/video/v7_ports.obj",
+        "worker/obj/video/video_io.obj",
+        "worker/obj/video/v7_video.obj",
+        "worker/obj/video/vga_mode.obj",
+        "worker/obj/video/ega_read.obj",
+        "worker/obj/video/vga_prts.obj",
+        "worker/obj/video/vga_vide.obj",
+        "worker/obj/video/ega_dmmy.obj",
+        "worker/obj/video/ega_writ.obj",
+        "worker/obj/video/egawrtm0.obj",
+        "worker/obj/video/egwrtm12.obj",
+        "worker/obj/video/cga.obj",
+        "worker/obj/comms/printer.obj",
+        "worker/obj/comms/printer_.obj",
+        "worker/obj/comms/com.obj",
+        "worker/obj/comms/rs232_io.obj",
+        "worker/obj/dos/emm_mngr.obj",
+        "worker/obj/base-debug/btrace.obj",
+        "worker/obj/base-debug/trace.obj",
+        "worker/obj/base-debug/pigyoda.obj",
+        "worker/obj/base-debug/yoda.obj",
+        "worker/obj/host/sim32.obj",
+        "worker/obj/host/nt_timer.obj",
+        "worker/obj/host/nt_msscs.obj",
+        "worker/obj/host/nt_error.obj",
+        "worker/obj/host/nt_cga.obj",
+        "worker/obj/host/nt_ega.obj",
+        "worker/obj/host/nt_vga.obj",
+        "worker/obj/host/nt_input.obj",
+        "worker/obj/host/nt_hosts.obj",
+        "worker/obj/host/nt_sound.obj",
+        "worker/obj/host/nt_graph.obj",
+        "worker/obj/host/nt_bop.obj",
+        "worker/obj/host/nt_com.obj",
+        "worker/obj/host/nt_wcom.obj",
+        "worker/obj/host/nt_sas.obj",
+        "worker/obj/host/nt_rez.obj",
+        "worker/obj/host/nt_fdisk.obj",
+        "worker/obj/host/nt_cpu.obj",
+        "worker/obj/host/nt_unix.obj",
+        "worker/obj/host/nt_lpt.obj",
+        "worker/obj/host/nt_mouse.obj",
+        "worker/obj/host/nt_munge.obj",
+        "worker/obj/host/nt_event.obj",
+        "worker/obj/host/copy_fnc.obj",
+        "worker/obj/host/nt_nls.obj",
+        "worker/obj/host/config.obj",
+        "worker/obj/host/stubs.obj",
+        "worker/obj/host/nt_fulsc.obj",
+        "worker/obj/host/nt_emm.obj",
+        "worker/obj/host/nt_eoi.obj",
+        "worker/obj/host/nt_vdd.obj",
+        "worker/obj/host/nt_det.obj",
+        "worker/obj/host/nt_umb.obj",
+        "worker/obj/host/nt_rflop.obj",
+        "worker/obj/host/nt_cprgs.obj",
+        "worker/obj/host/nt_reset.obj",
+        "worker/obj/host/ntvdm_entry.obj",
+        "worker/obj/adapter-debugger/dbg_registers.obj",
+        "worker/obj/adapter-softpc/mvdm_softpc_text_video.obj",
+        "worker/obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "worker/obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj",
+        "worker/obj/adapter-softpc/mvdm_softpc_effective_address.obj",
+        "worker/obj/redir/vrnmpipe.obj",
+        "worker/obj/redir/vrinit.obj",
+        "worker/obj/redir/vrnetb.obj",
+        "worker/obj/redir/vrdlcpst.obj",
+        "worker/obj/tests/keyboard_controller_pic_test.obj",
+        "worker/obj/tests/pic_reset_eoi_test.obj",
+        "worker/obj/tests/ccpu_stack_transition_test.obj",
+        "worker/obj/tests/ccpu_bounded_execution_fixture.obj",
+        "worker/obj/adapter-softpc/v7_pointer_binding.obj"
+      ]
+    },
+    {
+      "key": "softpc.new/host/inc/host_hfx.h",
+      "path": "softpc.new/host/inc/host_hfx.h",
+      "hashes": [
+        "48A9B2BF6C4439301182AA118FE42AFB8AAFAA20146B2597021AF162F2465F85",
+        "48A9B2BF6C4439301182AA118FE42AFB8AAFAA20146B2597021AF162F2465F85",
+        "48A9B2BF6C4439301182AA118FE42AFB8AAFAA20146B2597021AF162F2465F85"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": [
+        "worker/obj/bios/bios.obj",
+        "worker/obj/system/qevnt.obj",
+        "worker/obj/host/nt_input.obj",
+        "worker/obj/host/nt_event.obj"
+      ]
+    },
+    {
+      "key": "softpc.new/host/inc/hostgrph.h",
+      "path": "softpc.new/host/inc/hostgrph.h",
+      "hashes": [
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4",
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4",
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/hosttyps.h",
+      "path": "softpc.new/host/inc/hosttyps.h",
+      "hashes": [
+        "D41A82B33DC8C8DC3056DE79F553B334A3D1B905C8DA218E1D5EE1465DF4E36A",
+        "D41A82B33DC8C8DC3056DE79F553B334A3D1B905C8DA218E1D5EE1465DF4E36A",
+        "D41A82B33DC8C8DC3056DE79F553B334A3D1B905C8DA218E1D5EE1465DF4E36A"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/hstsystm.h",
+      "path": "softpc.new/host/inc/hstsystm.h",
+      "hashes": [
+        "B6D4B43341231D108828F30E22A22C9E3672459693B88E4E2B8B7F2A7A719AD7",
+        "B6D4B43341231D108828F30E22A22C9E3672459693B88E4E2B8B7F2A7A719AD7",
+        "B6D4B43341231D108828F30E22A22C9E3672459693B88E4E2B8B7F2A7A719AD7"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/kybdcpu.gi",
+      "path": "softpc.new/host/inc/kybdcpu.gi",
+      "hashes": [
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+        "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/monregs.h",
+      "path": "softpc.new/host/inc/monregs.h",
+      "hashes": [
+        "AF51BE97B6926835F02D78143BD54463500E94710E088E4BE15E9AB5D81690BA",
+        "AF51BE97B6926835F02D78143BD54463500E94710E088E4BE15E9AB5D81690BA",
+        "AF51BE97B6926835F02D78143BD54463500E94710E088E4BE15E9AB5D81690BA"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/nt_conf.h",
+      "path": "softpc.new/host/inc/nt_conf.h",
+      "hashes": [
+        "42F541DFE879BACAE812471B725EC9E1FF12DC5D172F8277E77E5642F15DD848",
+        "42F541DFE879BACAE812471B725EC9E1FF12DC5D172F8277E77E5642F15DD848",
+        "42F541DFE879BACAE812471B725EC9E1FF12DC5D172F8277E77E5642F15DD848"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/nt_fulsc.h",
+      "path": "softpc.new/host/inc/nt_fulsc.h",
+      "hashes": [
+        "733FE8AAEF56E9FEBC5E2F35AC03057918DF2BF75173779870E2B07DC673E1D0",
+        "733FE8AAEF56E9FEBC5E2F35AC03057918DF2BF75173779870E2B07DC673E1D0",
+        "733FE8AAEF56E9FEBC5E2F35AC03057918DF2BF75173779870E2B07DC673E1D0"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": [
+        "worker/obj/host/nt_timer.obj",
+        "worker/obj/host/nt_graph.obj",
+        "worker/obj/host/nt_mouse.obj",
+        "worker/obj/host/nt_event.obj",
+        "worker/obj/host/config.obj",
+        "worker/obj/host/nt_fulsc.obj",
+        "worker/obj/host/nt_sec.obj",
+        "worker/obj/host/nt_det.obj",
+        "worker/obj/host/nt_reset.obj"
+      ]
+    },
+    {
+      "key": "softpc.new/host/inc/nt_getxx.h",
+      "path": "softpc.new/host/inc/nt_getxx.h",
+      "hashes": [
+        "B7ADBF0D1F261F852F78179E757FB1ED8004DB8EA6711DDF1FC4D5BB19819C46",
+        "B7ADBF0D1F261F852F78179E757FB1ED8004DB8EA6711DDF1FC4D5BB19819C46",
+        "B7ADBF0D1F261F852F78179E757FB1ED8004DB8EA6711DDF1FC4D5BB19819C46"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/nt_mon.h",
+      "path": "softpc.new/host/inc/nt_mon.h",
+      "hashes": [
+        "C55C392D342B5DBEF7C5C692D5F7C4D06486E9CF1597FE8A1B4A166E61BDC804",
+        "C55C392D342B5DBEF7C5C692D5F7C4D06486E9CF1597FE8A1B4A166E61BDC804",
+        "C55C392D342B5DBEF7C5C692D5F7C4D06486E9CF1597FE8A1B4A166E61BDC804"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/nt_paint.h",
+      "path": "softpc.new/host/inc/nt_paint.h",
+      "hashes": [
+        "1A04BB94C25EF5DFE4C890442262D0B3162F0A9E0B7BD89C53DF12A63AFF506F",
+        "1A04BB94C25EF5DFE4C890442262D0B3162F0A9E0B7BD89C53DF12A63AFF506F",
+        "1A04BB94C25EF5DFE4C890442262D0B3162F0A9E0B7BD89C53DF12A63AFF506F"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/nt_smenu.h",
+      "path": "softpc.new/host/inc/nt_smenu.h",
+      "hashes": [
+        "811068F48A8B312A7096C4261A20D09D2629C3B15A00857342C48C2FDC09B9B4",
+        "811068F48A8B312A7096C4261A20D09D2629C3B15A00857342C48C2FDC09B9B4",
+        "811068F48A8B312A7096C4261A20D09D2629C3B15A00857342C48C2FDC09B9B4"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/sdos_ddi.h",
+      "path": "softpc.new/host/inc/sdos_ddi.h",
+      "hashes": [
+        "C6B1F280CA1A33EADAB8509FEE4E064B388F4E508355AE9540B3FE1EF0FD10D1",
+        "C6B1F280CA1A33EADAB8509FEE4E064B388F4E508355AE9540B3FE1EF0FD10D1",
+        "C6B1F280CA1A33EADAB8509FEE4E064B388F4E508355AE9540B3FE1EF0FD10D1"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/winsigni.h",
+      "path": "softpc.new/host/inc/winsigni.h",
+      "hashes": [
+        "54088B4DCD3E1255852D94EB4BEEC3DAFDFB9F915D20A810624B62179DB2C44A",
+        "54088B4DCD3E1255852D94EB4BEEC3DAFDFB9F915D20A810624B62179DB2C44A",
+        "54088B4DCD3E1255852D94EB4BEEC3DAFDFB9F915D20A810624B62179DB2C44A"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/inc/xmsexp.h",
+      "path": "softpc.new/host/inc/xmsexp.h",
+      "hashes": [
+        "4AEE7F4219C89043DFD1E5D3C139999524806CEFA6E507EBFFECD63D9A543072",
+        "4AEE7F4219C89043DFD1E5D3C139999524806CEFA6E507EBFFECD63D9A543072",
+        "4AEE7F4219C89043DFD1E5D3C139999524806CEFA6E507EBFFECD63D9A543072"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/link/nt_uis.h",
+      "path": "softpc.new/host/link/nt_uis.h",
+      "hashes": [
+        "F35DE41A225039FA430EF18FC8E311093AEA4236B72F65E448D02A35643E426B",
+        "F35DE41A225039FA430EF18FC8E311093AEA4236B72F65E448D02A35643E426B",
+        "F35DE41A225039FA430EF18FC8E311093AEA4236B72F65E448D02A35643E426B"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/link/resource.rc",
+      "path": "softpc.new/host/link/resource.rc",
+      "hashes": [
+        "FBF7F94838571EC486880DE4574724FA883580C5AB2AC5EB4463D248C3205369",
+        "FBF7F94838571EC486880DE4574724FA883580C5AB2AC5EB4463D248C3205369",
+        "FBF7F94838571EC486880DE4574724FA883580C5AB2AC5EB4463D248C3205369"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/link/softerr.ico",
+      "path": "softpc.new/host/link/softerr.ico",
+      "hashes": [
+        "D27D263FB667946E4A5320CBEBD1B6378659AE31D9F4744311FC581140756F67",
+        "D27D263FB667946E4A5320CBEBD1B6378659AE31D9F4744311FC581140756F67",
+        "D27D263FB667946E4A5320CBEBD1B6378659AE31D9F4744311FC581140756F67"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/link/softpc.def",
+      "path": "softpc.new/host/link/softpc.def",
+      "hashes": [
+        "2DBBE115D93D9D2A25004868450B43568BE3E14565FD08314D78E18F658F8AB7",
+        "2DBBE115D93D9D2A25004868450B43568BE3E14565FD08314D78E18F658F8AB7",
+        "2DBBE115D93D9D2A25004868450B43568BE3E14565FD08314D78E18F658F8AB7"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/host/link/softpc.ico",
+      "path": "softpc.new/host/link/softpc.ico",
+      "hashes": [
+        "779A5E682DBECB23E9EA86F94BE5591C53B1FE93497F7F0507ECBAC4042EBE79",
+        "779A5E682DBECB23E9EA86F94BE5591C53B1FE93497F7F0507ECBAC4042EBE79",
+        "779A5E682DBECB23E9EA86F94BE5591C53B1FE93497F7F0507ECBAC4042EBE79"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/obj.vdm/cdefine.inc",
+      "path": "softpc.new/obj.vdm/cdefine.inc",
+      "hashes": [
+        "A5CC355BFAB633968217C85A4BB210F684039E08E7784578800C672F65772F14",
+        "A5CC355BFAB633968217C85A4BB210F684039E08E7784578800C672F65772F14",
+        "A5CC355BFAB633968217C85A4BB210F684039E08E7784578800C672F65772F14"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/obj.vdm/ntvdm.prf",
+      "path": "softpc.new/obj.vdm/ntvdm.prf",
+      "hashes": [
+        "00D94378F996EDD8703F884524398D73F7BFDDB0E5ABBC0CA23633471559937B",
+        "00D94378F996EDD8703F884524398D73F7BFDDB0E5ABBC0CA23633471559937B",
+        "00D94378F996EDD8703F884524398D73F7BFDDB0E5ABBC0CA23633471559937B"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/obj.vdm/resource.rc",
+      "path": "softpc.new/obj.vdm/resource.rc",
+      "hashes": [
+        "3E3AC9B1001127E3900C1BA5A2309C28AAA97ECF2882FA6F4E9F20E600A26D8D",
+        "3E3AC9B1001127E3900C1BA5A2309C28AAA97ECF2882FA6F4E9F20E600A26D8D",
+        "3E3AC9B1001127E3900C1BA5A2309C28AAA97ECF2882FA6F4E9F20E600A26D8D"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "softpc.new/rename/rename.c",
+      "path": "softpc.new/rename/rename.c",
+      "hashes": [
+        "7064E2516D6A43BA9A35BADC45D09E16524B22F70362110F9A3526BE028501E7",
+        "7064E2516D6A43BA9A35BADC45D09E16524B22F70362110F9A3526BE028501E7",
+        "7064E2516D6A43BA9A35BADC45D09E16524B22F70362110F9A3526BE028501E7"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "suballoc/foo.bar",
+      "path": "suballoc/foo.bar",
+      "hashes": [
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905",
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905",
+        "0350C8AD182E081C6106CD75A56B7F8E18B07445D0668835485A55761463A905"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    },
+    {
+      "key": "suballoc/suballcp.h",
+      "path": "suballoc/suballcp.h",
+      "hashes": [
+        "25451AA0C293F3950107E81D81507E692E3DB7B089655CEAC320E4F3779FADB2",
+        "25451AA0C293F3950107E81D81507E692E3DB7B089655CEAC320E4F3779FADB2",
+        "25451AA0C293F3950107E81D81507E692E3DB7B089655CEAC320E4F3779FADB2"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": [
+        "worker/obj/suballoc/suballoc.obj"
+      ]
+    },
+    {
+      "key": "suballoc/suballoc.txt",
+      "path": "suballoc/suballoc.txt",
+      "hashes": [
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7",
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7",
+        "5F8EF01DA1307CB393DB9C2E6DBAA505D2DC14ABC2625D0CAFA39695C12C6CF7"
+      ],
+      "exact_graphs": [],
+      "valid_dependency_objects": []
+    }
+  ],
+  "objects": [
+    {
+      "path": "obj/support/get_env.obj",
+      "sha256": "1235BC181E2D83508B80689685FAB05F6379D44A9B2CEACD96FB618F9B7A450B",
+      "has_code": true
+    },
+    {
+      "path": "obj/video/ega_trcr.obj",
+      "sha256": "D9AC213C0C30105150EE585EDAD5EBE716B5A062DA16C33ED6F58D68B6A3A3FB",
+      "has_code": false
+    }
+  ],
+  "scope": "Exact normalized current VALID dependency paths and graph mentions; stale records, semantic activity and other configurations remain unproven"
+}

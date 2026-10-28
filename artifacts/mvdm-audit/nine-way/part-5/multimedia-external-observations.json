@@ -1,0 +1,197 @@
+{
+  "result": "pass",
+  "external": [
+    {
+      "key": "SRC:c9d73a41f6e99f24c488",
+      "path": "nt/private/windows/media/winmm/regapi.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "9bcfdd6ba9babb875d11198d90f597f87550fafc",
+      "raw_sha256": "3B3A5EE48488EEC9ECE3669C5B947998954B45D1C01F2C0B5D0738984C7C654C",
+      "bytes": 18869,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/winmm/sources:42:SOURCES=regapi.c    \\"
+      ]
+    },
+    {
+      "key": "SRC:697a5cb8532bfcb4ef38",
+      "path": "nt/private/windows/media/winmm/drvrrare.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "026e542fe98ef9d5cbca5a997eff9fc4a9b3f07b",
+      "raw_sha256": "56812DFDCFA46B73FAAD898D0E3AAB84E81FB43A91E54D980E06A1679E4A925E",
+      "bytes": 35937,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/winmm/sources:46:drvrrare.c  \\"
+      ]
+    },
+    {
+      "key": "SRC:a7b6058535cc789e2e20",
+      "path": "nt/private/windows/media/winmm/drvr.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "967519de9ad70b1b23a96eae9dd2ec062668fbc6",
+      "raw_sha256": "20BCD30C3C707C9FB2470F4E0B1FC0973A87A3E04588D34EB17C4D07B09A7A84",
+      "bytes": 16125,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/winmm/sources:45:drvr.c      \\"
+      ]
+    },
+    {
+      "key": "SRC:f71bfc8dcdadad10564a",
+      "path": "nt/private/windows/media/winmm/drvr.h",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "0c65fcca6bcd75428b11a0d4e8ab09a3c16ce767",
+      "raw_sha256": "E1D3E39AD307458C3A903D0153AEAEE91B977F449E718BC3BAA5FED0B303C5E4",
+      "bytes": 2592,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:f8019bbdf671713b816e",
+      "path": "nt/private/windows/media/winmm/playsnd.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "26e13982eaba6d178ada27da491fae609271e660",
+      "raw_sha256": "1188674BE484B1071F019939C479F2D7888C2493FFAF43C64DCD325D397BFA13",
+      "bytes": 45743,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/winmm/sources:61:playsnd.c   \\"
+      ]
+    },
+    {
+      "key": "SRC:770b16367ab76fcb38a8",
+      "path": "nt/private/windows/media/winmm/sources",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "f589de8c5f89db1a10674fcb51c415412b6f1394",
+      "raw_sha256": "D59A2ED81B2C67A55729668FD43F0B17BF048115E6DA2F50D1E6C59B2518B3BA",
+      "bytes": 1473,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Exact driver/config/queryhelper reachedfrom selectedmixer dependency;not directoryinventory",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:9aded9b31c5044abb5f8",
+      "path": "nt/private/windows/media/drivers/sndsys32/dll/oemsetup.inf",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "e19748c59690f767fbd927cd09cff91386759dff",
+      "raw_sha256": "61BE659236D6546B8804105A72984F1D8BAA18CC5E5226A5CDA3A635A8F6A685",
+      "bytes": 274,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:d6547834ff1da2c6758f",
+      "path": "nt/private/windows/media/drivers/sndsys32/dll/sources",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "0b47d501c756be007afe2656c1c6b3d72754d777",
+      "raw_sha256": "710057E2CAE46BDDBF696659FCB984B61E4D047700946EFFE3A0C6BD852843BE",
+      "bytes": 874,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:bd128b962679f9a476a7",
+      "path": "nt/private/windows/media/drivers/sndsys32/dll/sndsys32.def",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "1c43227011a83d252f9407dd44df62bed76fabdf",
+      "raw_sha256": "306149CDD019D7E599B0D6456EF76D17C9B72130262FAA5D3910A921CDF654DE",
+      "bytes": 209,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:c64fb8a345268250f42c",
+      "path": "nt/private/windows/media/drivers/sndsys32/dll/drvproc.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "1518520f2f786d099b26f4239e50cb18bffc89f9",
+      "raw_sha256": "9263FCACF6A3AEA8F07828053A7B693814DD503AB0B3BAB9E319DAFE9D3D6748",
+      "bytes": 10674,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/drivers/sndsys32/dll/sources:35:drvproc.c          \\"
+      ]
+    },
+    {
+      "key": "SRC:12ce285caa286e9d404a",
+      "path": "nt/private/windows/media/drivers/drvlib/sources",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "2938e10cb92bbea92478c69a52ab666e84e762d3",
+      "raw_sha256": "643092A0F38F05E44B3DBDFBA9F5332018B126BB308AB93D95018B92EA37A6BB",
+      "bytes": 782,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:778b04f76a6738c6a7cf",
+      "path": "nt/private/windows/media/drivers/drvlib/inc/drvlib.h",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "77c1f322f82063a2b4172470a6a9fadf724c4577",
+      "raw_sha256": "50330B8AF2F3411325F4D9D5DAA9E4FF556FE48CD6D1AED7EB007B7E58ADFA17",
+      "bytes": 5267,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": []
+    },
+    {
+      "key": "SRC:fb27eadcf5a05c5294b0",
+      "path": "nt/private/windows/media/drivers/drvlib/mixerdd.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "355427df8e90f742aed0751730c468cb04234cc2",
+      "raw_sha256": "72E37E5D01E122AF5B2E71BFB8293BDE20DC3EA198E87A9D7A4718967DB2832A",
+      "bytes": 54930,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/drivers/drvlib/sources:27:mixerdd.c   \\"
+      ]
+    },
+    {
+      "key": "SRC:306d8a29b4e55d89a953",
+      "path": "nt/private/windows/media/drivers/drvlib/drvlib.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "4fb52ab9c5a747ba3e466aef7dc709e7e66e6136",
+      "raw_sha256": "6A1A6F49B82FBD18A968E77DC48113C0E69536F5442010C24CB6F2B7FE49B016",
+      "bytes": 5919,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/drivers/drvlib/sources:25:drvlib.c    \\"
+      ]
+    },
+    {
+      "key": "SRC:adc53c2a0d7273a93f85",
+      "path": "nt/private/windows/media/drivers/drvlib/drvutil.c",
+      "edition": "OpenNT-4.5",
+      "catalog_blob": "79e648202dddae335a2937765927845b01a84697",
+      "raw_sha256": "FC572E4A294CC3165D430F63980913B5F038873DCA201E2D9140A063366DEA65",
+      "bytes": 25397,
+      "catalog_role": "host_provider_exact_dependency",
+      "catalog_reason": "Bounded installation/recipe/provider/notify dependency;notdirectoryinventory or actualruntimeadmission",
+      "same_directory_sources_references": [
+        "nt/private/windows/media/drivers/drvlib/sources:31:drvutil.c"
+      ]
+    }
+  ],
+  "selected_wow32_wmmedia_binding": {
+    "name": "_WOW32DriverCallback@28",
+    "va": 268615248,
+    "function": true,
+    "owner": "wmmedia.obj",
+    "bytes": 104,
+    "relocation_words": 9
+  },
+  "release_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "source_sha256": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08",
+  "scope": "Original dependency candidates and current WOW32 source/binding; not proof modern WinMM uses NT4 internals or device"
+}

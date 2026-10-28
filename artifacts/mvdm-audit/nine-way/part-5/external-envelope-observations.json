@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "files": 4758,
+  "identity_counts": {
+    "raw": 1180,
+    "crlf-to-lf": 3578
+  },
+  "catalog_roles": {
+    "device_provider_relevance_pending": 1055,
+    "host_provider_envelope": 3693,
+    "audit_format_context": 2,
+    "audit_original_client_context": 4,
+    "audit_provider_recipe_context": 2,
+    "original_repository_image_evidence": 2
+  },
+  "same_directory_refs": 736,
+  "exact_graph_hits": 0,
+  "archive_basename_hits": 0,
+  "ownership_sha256": "46DADB6DE7EDD6277438429DDFFC501084892B595D386F54ED660CDFF21C5E86",
+  "scope": "Per-key frozen edition identity and local build leads; no relevance/behavior completion claim"
+}

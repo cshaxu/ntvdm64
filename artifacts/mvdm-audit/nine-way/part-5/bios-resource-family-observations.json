@@ -1,0 +1,413 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "softpc.new/bios/biosbop.inc",
+      "path": "softpc.new/bios/biosbop.inc",
+      "hashes": [
+        "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A",
+        "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A",
+        "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A"
+      ],
+      "recipe_references": [
+        "makefile:35:mschar.obj mschar.lst: mschar.asm biosbop.inc $(inc)\\devsym.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/biosseg.inc",
+      "path": "softpc.new/bios/biosseg.inc",
+      "hashes": [
+        "C124DCC40FD138CAE400F993F5730337EE7E23FB50A20E097B09382694F6FC91",
+        "C124DCC40FD138CAE400F993F5730337EE7E23FB50A20E097B09382694F6FC91",
+        "C124DCC40FD138CAE400F993F5730337EE7E23FB50A20E097B09382694F6FC91"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/bios/biostruc.inc",
+      "path": "softpc.new/bios/biostruc.inc",
+      "hashes": [
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E",
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E",
+        "63FB257501A0FD9217F68E49D189BAA2A42330F3476DF352B5737E9BF0C7AC0E"
+      ],
+      "recipe_references": [
+        "makefile:43:$(inc)\\dossym.inc $(inc)\\error.inc $(inc)\\version.inc biostruc.inc \\",
+        "makefile:46:msint13.obj msint13.lst: msint13.asm biostruc.inc $(cinc)\\vint.inc \\",
+        "makefile:68:$(inc)\\sysvar.inc $(inc)\\version.inc biostruc.inc  $(cinc)\\vint.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/devmark.inc",
+      "path": "softpc.new/bios/devmark.inc",
+      "hashes": [
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20",
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20",
+        "3250E13971FC05C4B0389159171921FE56037059D1539CC9BCC9AF8C3CE54B20"
+      ],
+      "recipe_references": [
+        "makefile:52:$(inc)\\syscall.inc $(inc)\\sysvar.inc $(inc)\\version.inc devmark.inc \\",
+        "makefile:69:devmark.inc $(inc)\\devsym.inc $(inc)\\ioctl.inc $(cinc)\\dossvc.inc \\",
+        "makefile:74:devmark.inc $(inc)\\devsym.inc $(inc)\\ioctl.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msbio.lnk",
+      "path": "softpc.new/bios/msbio.lnk",
+      "hashes": [
+        "9A163DEAD32E6F7BED5BD283B0B8D68FA28A4DC21C54C5A98E69DDA4C0BD9B58",
+        "9A163DEAD32E6F7BED5BD283B0B8D68FA28A4DC21C54C5A98E69DDA4C0BD9B58",
+        "9A163DEAD32E6F7BED5BD283B0B8D68FA28A4DC21C54C5A98E69DDA4C0BD9B58"
+      ],
+      "recipe_references": [
+        "makefile:78:sysinit2.obj sysimes.obj msend.obj msbio.lnk",
+        "makefile:80:link16 $(link_opts) @msbio.lnk",
+        "makefile:82:$(lpath)\\link $(link_opts) @msbio.lnk"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msbio.skl",
+      "path": "softpc.new/bios/msbio.skl",
+      "hashes": [
+        "2A2FB4D31B19BE6E57C45C1677E6C490D3138C7BB235757BD321102787F2B421",
+        "2A2FB4D31B19BE6E57C45C1677E6C490D3138C7BB235757BD321102787F2B421",
+        "2A2FB4D31B19BE6E57C45C1677E6C490D3138C7BB235757BD321102787F2B421"
+      ],
+      "recipe_references": [
+        "makefile:29:msbio.cl1: msbio.skl \\",
+        "makefile:96:# from msbio.skl and internationalized using ..\\messages\\<COUNTRY>.msg file.",
+        "makefile:102:# \"dosmsg msbio.skl usa-ms.msg\""
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msbio1.asm",
+      "path": "softpc.new/bios/msbio1.asm",
+      "hashes": [
+        "D72A4C94D40210EC1E814A972F23965E50139F65E6F4DF43A6E20649DD973A3F",
+        "D72A4C94D40210EC1E814A972F23965E50139F65E6F4DF43A6E20649DD973A3F",
+        "D72A4C94D40210EC1E814A972F23965E50139F65E6F4DF43A6E20649DD973A3F"
+      ],
+      "recipe_references": [
+        "makefile:32:msbio1.obj msbio1.lst: msbio1.asm $(inc)\\msbdata.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/mschar.asm",
+      "path": "softpc.new/bios/mschar.asm",
+      "hashes": [
+        "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A",
+        "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A",
+        "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A"
+      ],
+      "recipe_references": [
+        "makefile:35:mschar.obj mschar.lst: mschar.asm biosbop.inc $(inc)\\devsym.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msend.asm",
+      "path": "softpc.new/bios/msend.asm",
+      "hashes": [
+        "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A",
+        "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A",
+        "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A"
+      ],
+      "recipe_references": [
+        "makefile:39:msend.obj msend.lst: msend.asm"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msequ.inc",
+      "path": "softpc.new/bios/msequ.inc",
+      "hashes": [
+        "0AC3D8ACC22EDCFB6889F466DD582479CCAB9C7A29928CF55D240EBC9A863A64",
+        "0AC3D8ACC22EDCFB6889F466DD582479CCAB9C7A29928CF55D240EBC9A863A64",
+        "0AC3D8ACC22EDCFB6889F466DD582479CCAB9C7A29928CF55D240EBC9A863A64"
+      ],
+      "recipe_references": [
+        "makefile:33:$(inc)\\devsym.inc msequ.inc $(cinc)\\vint.inc",
+        "makefile:36:$(inc)\\ioctl.inc msequ.inc msgroup.inc $(cinc)\\vint.inc",
+        "makefile:44:msequ.inc msgroup.inc $(cinc)\\dossvc.inc $(cinc)\\vint.inc",
+        "makefile:47:msequ.inc msgroup.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msgroup.inc",
+      "path": "softpc.new/bios/msgroup.inc",
+      "hashes": [
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967",
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967",
+        "E07D8DE5142451891ED3E2148951B05A7741D7C81E5AB1EF6FE1CD6D9D108967"
+      ],
+      "recipe_references": [
+        "makefile:36:$(inc)\\ioctl.inc msequ.inc msgroup.inc $(cinc)\\vint.inc",
+        "makefile:44:msequ.inc msgroup.inc $(cinc)\\dossvc.inc $(cinc)\\vint.inc",
+        "makefile:47:msequ.inc msgroup.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msinit.asm",
+      "path": "softpc.new/bios/msinit.asm",
+      "hashes": [
+        "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E",
+        "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E",
+        "7ACB1D97311D41310530188C80C6850250B997980E214AF2DCB8B8200300DC9E"
+      ],
+      "recipe_references": [
+        "makefile:41:msinit.obj msinit.lst: msinit.asm $(inc)\\VERSIONA.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/msint13.asm",
+      "path": "softpc.new/bios/msint13.asm",
+      "hashes": [
+        "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF",
+        "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF",
+        "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF"
+      ],
+      "recipe_references": [
+        "makefile:46:msint13.obj msint13.lst: msint13.asm biostruc.inc $(cinc)\\vint.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/spcemm.asm",
+      "path": "softpc.new/bios/spcemm.asm",
+      "hashes": [
+        "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D",
+        "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D",
+        "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D"
+      ],
+      "recipe_references": [
+        "makefile:61:spcemm.obj spcemm.lst: spcemm.asm $(cinc)\\vint.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/spckbd.asm",
+      "path": "softpc.new/bios/spckbd.asm",
+      "hashes": [
+        "7DC376B9B27D7DC204DA63003D7F320433B20E488BFD1BB1476D789DC156A068",
+        "7DC376B9B27D7DC204DA63003D7F320433B20E488BFD1BB1476D789DC156A068",
+        "7DC376B9B27D7DC204DA63003D7F320433B20E488BFD1BB1476D789DC156A068"
+      ],
+      "recipe_references": [
+        "makefile:57:spckbd.obj spckbd.lst: spckbd.asm $(cinc)\\vint.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/spcmse.asm",
+      "path": "softpc.new/bios/spcmse.asm",
+      "hashes": [
+        "1B0B7A9C956DB2AFBEA40D787460F1002FD9E4D81724B725E76BCD6465830132",
+        "1B0B7A9C956DB2AFBEA40D787460F1002FD9E4D81724B725E76BCD6465830132",
+        "1B0B7A9C956DB2AFBEA40D787460F1002FD9E4D81724B725E76BCD6465830132"
+      ],
+      "recipe_references": [
+        "makefile:59:spcmse.obj spcmse.lst: spcmse.asm $(cinc)\\vint.inc"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/sysconf.asm",
+      "path": "softpc.new/bios/sysconf.asm",
+      "hashes": [
+        "60BBA5FFC49C7C995A33819CE6BC1D3111A4A693B7972D81BB3B146F600BCD7E",
+        "60BBA5FFC49C7C995A33819CE6BC1D3111A4A693B7972D81BB3B146F600BCD7E",
+        "60BBA5FFC49C7C995A33819CE6BC1D3111A4A693B7972D81BB3B146F600BCD7E"
+      ],
+      "recipe_references": [
+        "makefile:50:sysconf.obj sysconf.lst: sysconf.asm $(inc)\\doscntry.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/sysimes.asm",
+      "path": "softpc.new/bios/sysimes.asm",
+      "hashes": [
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A",
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A",
+        "C78FD2DDB0E2FC5683D3054CA426976A1DFFD72E2ADFBBF19A7EEA345DC3CF8A"
+      ],
+      "recipe_references": [
+        "makefile:55:sysimes.obj sysimes.lst: sysimes.asm"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/sysinit1.asm",
+      "path": "softpc.new/bios/sysinit1.asm",
+      "hashes": [
+        "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A",
+        "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A",
+        "0A0126881DFB6A487D8702BC90C248B57A4079AC1C13452861C5B4F4D5E4B37A"
+      ],
+      "recipe_references": [
+        "makefile:63:sysinit1.obj sysinit1.lst: sysinit1.asm $(inc)\\VERSIONA.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/bios/sysinit2.asm",
+      "path": "softpc.new/bios/sysinit2.asm",
+      "hashes": [
+        "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8",
+        "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8",
+        "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8"
+      ],
+      "recipe_references": [
+        "makefile:72:sysinit2.obj sysinit2.lst: sysinit2.asm $(inc)\\copyrigh.inc \\"
+      ]
+    },
+    {
+      "key": "softpc.new/data/bios1.rom",
+      "path": "softpc.new/data/bios1.rom",
+      "hashes": [
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/data/bios4.rom",
+      "path": "softpc.new/data/bios4.rom",
+      "hashes": [
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/data/cmos.ram",
+      "path": "softpc.new/data/cmos.ram",
+      "hashes": [
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9",
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9",
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/data/profile.spc",
+      "path": "softpc.new/data/profile.spc",
+      "hashes": [
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479",
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479",
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/data/v7vga.rom",
+      "path": "softpc.new/data/v7vga.rom",
+      "hashes": [
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/bios1.asm",
+      "path": "softpc.new/roms/bios1.asm",
+      "hashes": [
+        "622C4FC85B997C64256CFCE22951FE7D705AF0FA33ADFBD349E0CD8A41FE82D9",
+        "622C4FC85B997C64256CFCE22951FE7D705AF0FA33ADFBD349E0CD8A41FE82D9",
+        "622C4FC85B997C64256CFCE22951FE7D705AF0FA33ADFBD349E0CD8A41FE82D9"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/bios1.rom",
+      "path": "softpc.new/roms/bios1.rom",
+      "hashes": [
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+        "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/bios2.rom",
+      "path": "softpc.new/roms/bios2.rom",
+      "hashes": [
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838",
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838",
+        "6BF8BDC71A77AE6A089F4D2BFAC15F31C0FF7FEB9D476136F5CA2F8D64972838"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/bios4.asm",
+      "path": "softpc.new/roms/bios4.asm",
+      "hashes": [
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB",
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB",
+        "E8E03F141C87563B2526555C8070E2D256BD1A3D570F64E287FFD1835AE1DFFB"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/bios4.rom",
+      "path": "softpc.new/roms/bios4.rom",
+      "hashes": [
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+        "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/cmos.ram",
+      "path": "softpc.new/roms/cmos.ram",
+      "hashes": [
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9",
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9",
+        "97FCA7ADB543BDAC4E571185A3F37C17A30A6AD937E0817048D965A850EDDDD9"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/profile.spc",
+      "path": "softpc.new/roms/profile.spc",
+      "hashes": [
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479",
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479",
+        "C35020473AED1B4642CD726CAD727B63FFF2824AD68CEDD7FFB73C7CBD890479"
+      ],
+      "recipe_references": []
+    },
+    {
+      "key": "softpc.new/roms/v7vga.rom",
+      "path": "softpc.new/roms/v7vga.rom",
+      "hashes": [
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+        "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0"
+      ],
+      "recipe_references": []
+    }
+  ],
+  "resources": [
+    {
+      "name": "SOFTPC_BIOS1",
+      "bytes": 28420,
+      "sha256": "1CE33544249FEF59865B91308FAF60F354563CF854F80EB196D47C968899A574",
+      "rom_source": "src\\mvdm\\softpc.new\\roms\\bios1.rom",
+      "data_source": "src\\mvdm\\softpc.new\\data\\bios1.rom"
+    },
+    {
+      "name": "SOFTPC_BIOS4",
+      "bytes": 8191,
+      "sha256": "B09FDFF1A500971D54233378CE9C36F1B6A58BF577E4A544DA03A0D78D7E0D6F",
+      "rom_source": "src\\mvdm\\softpc.new\\roms\\bios4.rom",
+      "data_source": "src\\mvdm\\softpc.new\\data\\bios4.rom"
+    },
+    {
+      "name": "SOFTPC_V7VGA",
+      "bytes": 18832,
+      "sha256": "970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0",
+      "rom_source": "src\\mvdm\\softpc.new\\roms\\v7vga.rom",
+      "data_source": "src\\mvdm\\softpc.new\\data\\v7vga.rom"
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "ntio_sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+  "scope": "Owned BIOS source identity, original recipe and released resource bytes; no runtime/guest build or NTIO source lineage"
+}

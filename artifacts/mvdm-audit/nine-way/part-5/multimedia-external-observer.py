@@ -1,0 +1,12 @@
+import csv,hashlib,json,re,runpy
+from pathlib import Path
+A=Path('artifacts/mvdm-audit');root=Path('O:/repos.external/OpenNT-4.5');own=[x for x in csv.DictReader((A/'nine-way-ownership.csv').open(encoding='utf-8-sig')) if x['bucket']=='5' and x['kind']=='external'];ids={x['key'] for x in own};cat={x['id']:x for x in csv.DictReader(Path('O:/repos.hobby/ntvdm64-wow32-audit/management/source-file-catalog.csv').open(encoding='utf-8-sig')) if x['id'] in ids and x['role']=='host_provider_exact_dependency'};assert len(cat)==15
+rows=[]
+for id,c in cat.items():
+ row=next(x for x in own if x['key']==id);p=root/row['path'];d=p.read_bytes();normal=d.replace(b'\r\n',b'\n');bl=lambda q:hashlib.sha1(b'blob '+str(len(q)).encode()+b'\0'+q).hexdigest();assert c['edition']=='OpenNT-4.5' and c['path']==row['path'] and c['git_blob'] in (bl(d),bl(normal));r=p.parent/'sources';recipe_refs=[]
+ if r.is_file() and r != p:
+  for i,line in enumerate(r.read_text(encoding='latin1').splitlines()):
+   if re.search(r'(?i)(?<![\w.])'+re.escape(p.name)+r'(?![\w.])',line):recipe_refs.append(str(r.relative_to(root)).replace('\\','/')+':'+str(i+1)+':'+line.strip())
+ rows.append(dict(key=id,path=row['path'],edition=c['edition'],catalog_blob=c['git_blob'],raw_sha256=hashlib.sha256(d).hexdigest().upper(),bytes=len(d),catalog_role=c['role'],catalog_reason=c['relevance_reason'],same_directory_sources_references=recipe_refs))
+h=runpy.run_path(str(A/'host-tail-image-observer.py'));B=Path('build/.ninja/msvc-x86-release/wow32');mp=(B/'wow32.dll.map').read_text();image=h['Image'](Path('assets/release/WOW32.DLL'));cached=h['Image'](B/'wow32.dll');assert image.base==cached.base and image.code==cached.code and all(image.data[s:e]==cached.data[s:e] for s,e,_ in image.code);sym=next(s for s in h['symbols'](mp) if s['name']=='_WOW32DriverCallback@28' and s['owner'].lower()=='wmmedia.obj' and s['function']);binding=h['bind'](image,h['Coff'](B/'obj/wmmedia.obj'),sym);src=Path('src/mvdm/wow32/wmmedia.c').read_text(encoding='latin1');assert 'SafeLoadLibrary( "WINMM.DLL" )' in src and 'GetProcAddress( hWinmm, lpstrProcName )' in src
+print(json.dumps(dict(result='pass',external=rows,selected_wow32_wmmedia_binding=binding,release_sha256=hashlib.sha256(Path('assets/release/WOW32.DLL').read_bytes()).hexdigest().upper(),source_sha256=hashlib.sha256(Path('src/mvdm/wow32/wmmedia.c').read_bytes()).hexdigest().upper(),scope='Original dependency candidates and current WOW32 source/binding; not proof modern WinMM uses NT4 internals or device'),indent=2))

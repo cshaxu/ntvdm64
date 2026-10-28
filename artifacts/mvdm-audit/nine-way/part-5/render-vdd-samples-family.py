@@ -1,0 +1,11 @@
+import json
+from pathlib import Path
+p=Path('artifacts/mvdm-audit/nine-way/part-5');d=json.loads((p/'vdd-samples-family-observations.json').read_text(encoding='utf-8-sig'));head='''# Part 5: VDD interface documentation and historical sample family\n\nAll 31 owned keys are enumerated below. Twenty-eight match both original editions; the three current-only sample binaries have no corresponding original byte identity. The observer records hashes and up to 20 literal reference leads per source (comments/conditionals and same-name ambiguity are not resolved) and checks exact ZIP byte matches for sample binaries. Historical separate samples are distinct from the project's actual VDD API, guest dispatch and hardware behavior.\n\n| Owned key | Captured evidence | Bounded status |\n| --- | --- | --- |\n''';lines=[]
+for x in d['files']:
+ r=x['literal_refs'];ref=(r[0]['path']+':'+str(r[0]['line'])) if r else 'no literal sample-source reference found';status='Historical sample role; actual sample build, selection and behavior remain pending.'
+ if x['path']=='vdd/vddserv.doc':status='Historical VDD service documentation; actual product VDD callback/ownership semantics remain separate.'
+ elif x['path'].endswith('/readme') or x['path'].endswith('/readme.txt'):status='Historical sample documentation; do not exclude the functionality described.'
+ elif not x['hashes'][1] and not x['hashes'][2]:status='Current-only sample binary; provenance and selected consumer pending; exact archive matches: '+str(x['archive_identical_members'])+'.'
+ elif x['path'].endswith(('.inc','.h','.rc','.def')):status='Historical sample declaration/resource/definition; selected profile and runtime behavior remain open.'
+ lines.append(f"| `{x['path']}` | {x['reference_count']} literal references; example `{ref}` | {status} |")
+tail='''\n\nThe ZIP byte scan applies to these named sample binaries only; no equivalent producer, device behavior, external application, or different configuration is ruled out. Literal references must be checked in context before marking any source selected. No guest/build/product/shared-ledger changes or test execution. Replay `PYTHONDONTWRITEBYTECODE=1 python artifacts/mvdm-audit/nine-way/part-5/vdd-samples-family-observer.py` and compare JSON.\n''';(p/'vdd-samples-family-review.md').write_text(head+'\n'.join(lines)+tail,encoding='utf-8')

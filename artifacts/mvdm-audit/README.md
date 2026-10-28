@@ -16,6 +16,14 @@ The [part 6 guest driver and common-dialog review](nine-way/part-6/wow16-drivers
 and [external GDI inventory](nine-way/part-6/external-role-review.md) record
 separate image identities and unresolved provider boundaries; these are not
 runtime or binary-to-source provenance proof.
+The [part 5 BIOS resources](nine-way/part-5/bios-resource-family-review.md),
+[host inputs](nine-way/part-5/host-input-family-review.md),
+[VDD samples](nine-way/part-5/vdd-samples-family-review.md),
+[debugger](nine-way/part-5/debugger-family-review.md) and
+[multimedia provider](nine-way/part-5/multimedia-external-review.md) records
+separate linked-image evidence from unresolved behavior. The remaining
+[external inventory](nine-way/part-5/external-envelope-review.md) is a source
+identity and recipe census, not an applicability decision.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
