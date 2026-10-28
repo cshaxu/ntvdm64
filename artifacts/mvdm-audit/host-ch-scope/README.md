@@ -20,6 +20,8 @@ The [GFI header review](gfi-header-provider-review.md) traces selected and alter
 
 Replaying check-mirror-diffs.py against the recorded inventory and retention ledger found 202 host-candidate C/H mirror-diff rows and zero with a non-partial status. This only checks recorded classifications, not behavioral recovery or completeness of diff detection.
 
+The independent `check-frozen-mirror-coverage.py` compares current bytes of all host candidates against the frozen original hashes (primary edition when present). At this checkpoint, 1,263 present files were compared, with no differences absent from the retention table; seven historical CPU30 monitor paths are absent from the current tree and require their own role dispositions. All 202 recorded differences have a textual estimate and their stored current hash matches the current file. This is not an independent validation of frozen original hashes, supplemental editions, restored behavior or code semantics.
+
 The [CD-ROM provider review](cdrom-provider-boundary-review.md) separates unselected original interfaces from independent MSCDEX/VDD behavior. The [DEM IOCTL object fixture](../host-dem/demioctl-selected-object-review.md) exercises seven controlled drive-type results without claiming real device or guest coverage.
 
 The [input alternate headers](keyboard-mouse-alternate-header-review.md) and [display profiles](display-profile-interface-review.md) retain per-profile boundaries. DEM selected-object fixtures also cover [current-directory failure](../host-dem/demcwd-selected-object-review.md) and [cross-process lock retirement](../host-dem/demlock-process-selected-object-review.md); guest integration remains open.
