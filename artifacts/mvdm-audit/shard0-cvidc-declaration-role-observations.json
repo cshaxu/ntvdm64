@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "09265ef54",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-0/cvidc-declaration-observations.json",
+      "sha256": "B3DB6109DA3E4381F3DDB85AEE5239D475C5A42259FEB60760B5AA751404D201"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Compiler-selected declaration evidence only; no runtime acceptance"
+}

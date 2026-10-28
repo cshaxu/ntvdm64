@@ -1632,7 +1632,7 @@ softpc.new/base/cvidc/contxt_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/conv_c.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/cvidc/copies_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/cpnote_c.h,2,pending,shard-2/file-audit.csv
-softpc.new/base/cvidc/cpu4gen.h,0,pending,shard-0/review.csv
+softpc.new/base/cvidc/cpu4gen.h,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/cpu_c.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/cpuint_c.h,3,partial,shard-3/file-review.csv
 softpc.new/base/cvidc/cpumod_c.h,1,pending,shard-1/file-audit.csv
@@ -1642,7 +1642,7 @@ softpc.new/base/cvidc/ea_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/enter_c.h,0,pending,shard-0/review.csv
 softpc.new/base/cvidc/ev_glue.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/cvidc/ev_stubs.c,2,excluded,shard-2/file-audit.csv
-softpc.new/base/cvidc/evid_c.h,0,pending,shard-0/review.csv
+softpc.new/base/cvidc/evid_c.h,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/evidfunc.c,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/evidfunc.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/evidgen.h,0,partial,shard-0/review.csv
@@ -1655,7 +1655,7 @@ softpc.new/base/cvidc/frag_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/gdebug.h,0,pending,shard-0/review.csv
 softpc.new/base/cvidc/gdinit_c.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/cvidc/gdmain_c.h,3,pending,shard-3/file-review.csv
-softpc.new/base/cvidc/gdpvar.h,0,pending,shard-0/review.csv
+softpc.new/base/cvidc/gdpvar.h,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/gicvid_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/gldc_c.h,0,pending,shard-0/review.csv
 softpc.new/base/cvidc/hpphst_c.h,2,pending,shard-2/file-audit.csv
@@ -1746,7 +1746,7 @@ softpc.new/base/cvidc/task_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/test_c.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/cvidc/trace_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/unchn_c.h,3,pending,shard-3/file-review.csv
-softpc.new/base/cvidc/univer_c.h,0,pending,shard-0/review.csv
+softpc.new/base/cvidc/univer_c.h,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/vglfunc.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/vglob.c,2,excluded,shard-2/file-audit.csv
 softpc.new/base/cvidc/vglob_c.h,2,pending,shard-2/file-audit.csv

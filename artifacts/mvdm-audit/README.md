@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [C-VID declaration checkpoint](shard-0/cvidc-declaration-review.md)
+retains four selected compiler contexts with runtime boundaries open.
+
 The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
