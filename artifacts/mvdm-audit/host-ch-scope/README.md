@@ -63,3 +63,9 @@ The [monitor register consumer check](../host-inc/monregs-selected-object-review
 The [empty WOW GDI header](wow-gdi-empty-header-review.md) is excluded solely as an empty physical file; GDI behavior remains independently in scope.
 
 The [disk geometry and ROM map review](disk-geometry-rommap-provider-review.md) keeps distinct original and current host paths separate pending provider and device validation.
+
+The [local heap and multimedia follow-up](../host-wow/local-multimedia-declaration-followup.md) distinguishes inactive historical declarations from active guest and host owners, with alternate-profile and lifecycle questions retained.
+
+The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md) maps the 24 pending source roles to bounded S14–S17 recovery and verification groups. The [legacy dispatch handoff](../host-wow/legacy-dispatch-functional-handoff.md) separates original thunk families from obsolete declarations and unimplemented table entries.
+
+The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md), [legacy dispatch owners](../host-wow/legacy-dispatch-functional-handoff.md), and [excluded C source spot-check](excluded-host-c-source-spot-review.md) map pending and sampled physical roles to bounded recovery; their evidence does not establish full runtime coverage.

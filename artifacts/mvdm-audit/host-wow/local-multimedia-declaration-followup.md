@@ -1,0 +1,15 @@
+# WOW32 local-heap and multimedia declarations: actual selected paths
+
+This is a bounded follow-up on current pending header decisions, not a shared-ledger edit. Compilation through a common precompiled header is not by itself proof a declaration is consumed or a feature executes. Existing observations below are tied to their recorded build/guest snapshots and do not establish current release identity.
+
+## `wklocal.h`: observed-profile exclusion candidate
+
+`precomp.h` includes the original header, but it only declares historical `WK32Local*` thunks. Original `wow32/sources` does not list `wklocal.c`; the original/current selected `wktbl2.h` labels LOCALALLOC/LOCALFREE `LOCALAPI` instead of calling those thunks. The actual selected cross-boundary paths in `wcall16.c`, `wcall32.c` and `walloc16.c` retain different guest callbacks and message-heap roles; see `cross-369/local-memory-header-disposition.md` and its object/dependency observer. Recommend exclusion of the historical host-thunk declaration role in the inspected original/current profile only. Never infer exclusion of the guest local heap or other configurations, and do not remove the source without broader profile authority.
+
+## `wmmtbl.h`: observed-profile exclusion candidate
+
+The original header declares only `aw32MMED` and debug/profile `iMMEDMax`. Current source search finds those identifiers only in this header. The selected x86 `obj/wow32.obj` has a VALID Ninja dependency on the header, but i686 `objdump -t` finds `_aw32WOW`, not either legacy symbol. Header SHA-256 `C35252B376C0F6132DF8439F19EF66C780A2CF3BB39720B62C0D1D8B6F2069E4`; selected object SHA-256 `B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2`. Selected `wowtbl.c` instead embeds `wmmtbl2.h` into the common `aw32WOW` table, including the active `WMM32CallProc32` route; T466 S2 records a limited original-body synchronous timer witness. Recommend exclusion only for this apparently unused old table declaration in the inspected release graph; keep multimedia bridge behavior and debug/alternate profiles separate. Object-symbol absence cannot exclude macros, generated consumers or different build profiles.
+
+## `wmmstruc.h` and `wmmalias.h`: remain pending
+
+Both are included by selected graph inputs and contain original 16/32 conversion and alias interfaces. The bounded consumer audit `shard-3/wow-multimedia-alias-consumer-followup.md` finds legacy alias macro uses in the disabled outer `#if 0` of `wmmedia2.c`; the observed map has no `GetMMedia16`, `GetMMedia32` or `FreeMMedia16` function entry. The current search for `GETMMTIME16`/`PUTMMTIME16` likewise finds uses in that disabled source and definitions in `wmmstruc.h`. These facts do not prove that every declaration, actual inline expansion, or other configuration is unused. The T466 timer witness executes the separate live `WMM32CallProc32` route and cannot establish these old structure/alias macros. Leave both pending until each remaining selected object consumer, alternate profile and associated guest handle lifetime are examined; do not introduce a second alias owner or assert unsupported multimedia wholesale.
