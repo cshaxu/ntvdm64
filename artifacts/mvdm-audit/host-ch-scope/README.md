@@ -140,6 +140,8 @@ The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.m
 
 The [CPU/SAS generated-header recheck](cpu-sas-generated-pending-role-review.md) identifies exact selected object dependencies and the selected x86 SAS layout, while retaining four unresolved header roles and vector/fallback semantics.
 
+The [disassembler and historical UI review](disassembler-legacy-ui-pending-review.md) separates three pending headers and retains their original profile and feature-ownership questions in S17.
+
 The historical CPU30 `inc/v86def.h` carrier is excluded only from the selected CPU40/CCPU profile as explained in the [CPU declaration review](../host-inc/legacy-cpu-redir-declaration-review.md). The [remaining DOS host check](dos-host-remaining-partial-check.md) retains two selected header dependencies as pending where active behavior has not been established.
 
 The [HFX protocol review](dos-hfx-protocol-owner-review.md) separates original HFX and SWIN_HFX BOPs from ordinary DOS file and redirector services. Original guest/provider applicability remains pending; captured illegal-BOP bindings are not a working HFX witness.

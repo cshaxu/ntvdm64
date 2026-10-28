@@ -22,6 +22,8 @@ The [DPMI XMEM selected-object controls](host-ch-scope/dpmi-xmem-selected-review
 
 The [DPMI owner cleanup witness](host-ch-scope/dpmi-xmem-owner-review.md) shows the actual object's void cleanup stops after a simulated first free failure, after earlier blocks were freed. A separate explicit test retry clears the rest while preserving another owner's block; no production retry or guest failure is established. S11/S12 retain actual task-exit ownership and failure cleanup.
 
+The [historical disassembler and UI declaration review](host-ch-scope/disassembler-legacy-ui-pending-review.md) identifies distinct original owner/profile questions for S17. Determine whether those original facilities are within the supported product scope and whether selected providers implement them; absence from one captured graph is not a functional exclusion.
+
 The [DEM default-drive direct-service witness](host-ch-scope/dem-default-drive-selected-review.md) tests original case-sensitive drive validation and controlled host failure. The retained DOS default-drive source instead takes a separate active route; S12 must validate actual current-directory behavior without presenting this direct-service observation as a guest defect.
 
 The [DEM clock selected-object witness](host-ch-scope/dem-clock-review.md) exercises controlled date/time query, preservation and set-error paths. S12 retains guest interrupt/service dispatch, real privilege outcomes, date boundaries and timezone transitions; the mocked clock does not establish those behaviors.
