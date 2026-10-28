@@ -1,0 +1,5 @@
+PASS masked port read preserves original EOI-owned slot and IRQ request
+PASS actual INTACK/EOI advances queued bytes and retires final slot
+PASS early EOI retains unread port-60 byte and advances once
+PASS PIC reset cancels rather than early-acknowledges unread keyboard output
+KEYBOARD_PIC_PROFILE assertions=46 failures=0

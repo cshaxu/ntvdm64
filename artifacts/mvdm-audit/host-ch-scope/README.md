@@ -75,3 +75,7 @@ The [memory/DPMI/CMOS exclusion review](excluded-memory-cmos-provider-review.md)
 The [GFI functional handoff](../host-inc/gfi-functional-handoff.md) separates real, empty and SLAVEPC providers and records bounded close-failure observations. The [excluded UI/video source review](excluded-ui-video-scaffold-review.md) examines physical roles without closing their selected functionality.
 
 The [selected debugger provider](debugger-provider-review.md) has a bounded historical real worker event witness. The [SAS/error/alternate CPU review](excluded-sas-error-altcpu-review.md) preserves functional obligations independently of source-role selection.
+
+The [missing/empty excluded C review](excluded-missing-empty-c-source-review.md) verifies original identities and records the separate CPU40 obligations; it does not establish their runtime completion.
+
+The [DDEML route review](ddeml-route-review.md) binds bounded historical guest initialization evidence, without claiming transactions or callbacks. The [keyboard/mouse handoff](../host-inc/keyboard-mouse-functional-handoff.md) retains controller, guest and video-owner boundaries.

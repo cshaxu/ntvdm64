@@ -1,0 +1,60 @@
+{
+  "historical_receipt_sha256": "848F042A90AB107795B280D639D488371D4809FEB7BF1DFE2214A794A9CF9027",
+  "historical_checks": {
+    "source_matches_receipt": true,
+    "runner_matches_receipt": true,
+    "w31_observer_matches": true,
+    "w31_result_matches": true,
+    "opennt-debug_observer_matches": true,
+    "opennt-debug_result_matches": true
+  },
+  "historical_scope": "one Win16 task, static guest DDEML import, invalid reserved field, one instance init, same-instance reinit, uninit and repeated uninit; no DDE transaction requested and callback invocation not instrumented",
+  "historical_runs": [
+    {
+      "case": "w31",
+      "probe_sha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+      "input_sha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+      "resolved_sha256": "6D86DE3A979AB3F4EEAC37EBFD8F43B33F7DC80E50EDE7112903E41DA77FC95B",
+      "guest_exit_code": "0x00000000",
+      "reserved_error": 16390,
+      "init_error": 0,
+      "instance": 131776,
+      "reinit_error": 0,
+      "reinit_instance": 131776,
+      "uninit": 1,
+      "second_uninit": 0,
+      "module_path": "O:\\TMP\\N2B3\\TESTS\\DDEML.DLL",
+      "observer_sha256": "CEFF539958811BDD629A5E95ADFD27A48D9AC8A9D45141E32375C123FD77932F",
+      "receipt_sha256": "89EF46D9C2B176A6825D0855D91BFF4BD0F4A2EF9AB868D5E608D7851EA9988F"
+    },
+    {
+      "case": "opennt-debug",
+      "probe_sha256": "D59F34317AE216B1A2ECAA9385FE68702703A7277A07E1D679FFB6F8EE5DC56A",
+      "input_sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+      "resolved_sha256": "4A8FAB7786A388882687E1A79D810534C94D0F9E05A313D22173C0C68C83A443",
+      "guest_exit_code": "0x00000000",
+      "reserved_error": 16390,
+      "init_error": 0,
+      "instance": 147072,
+      "reinit_error": 0,
+      "reinit_instance": 147072,
+      "uninit": 1,
+      "second_uninit": 0,
+      "module_path": "O:\\TMP\\NFC0\\TESTS\\DDEML.DLL",
+      "observer_sha256": "9BDF7C0324C2328A3324F1BC3D736A629E52736A58CFB4E80A6A056688635150",
+      "receipt_sha256": "C98F5CF3E70253031DE895F056EBA3F68358EDA0CAB6815D9CC24F110461DC92"
+    }
+  ],
+  "source_hashes": {
+    "src/mvdm/wow32/wowtbl.c": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960",
+    "src/mvdm/wow32/sources": "D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36",
+    "src/mvdm/wow32/wddetbl2.h": "AE89A2A82C10AD6FF2B8A41F7E876AF2286B9AD48C8441B7726D901483E30148",
+    "src/mvdm/wow32/wddeml32.c": "13DB1E133CBB9BE8037FE9A57B1CF637F744EF23C9277697C096486BDE3A8C2C",
+    "src/mvdm/wow32/wddeml32.h": "B74CDA34EC90308AA0212142E7282A878DD7C2267A0305C07147543C0B0A0A52"
+  },
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "original_master_names_old_table": false,
+  "original_sources_names_old_provider": false,
+  "current_graph_names_old_provider": false,
+  "limits": "Historical receipt integrity and current static selection only; no callback, transaction, original guest source lineage or current install identity proved."
+}

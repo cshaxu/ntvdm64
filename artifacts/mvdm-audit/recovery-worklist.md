@@ -144,3 +144,5 @@ S11/S12 also retain the [DPMI memory-provider comparison](host-dpmi/dpmi-query-s
 The [DPMI field comparison](host-dpmi/dpmi-query-provider-difference-review.md) records nine source-derived fields and the limits of the historical CPU40 guest oracle; synthetic examples do not prove production divergence.
 
 S12/S13 retain the [GFI functional handoff](host-inc/gfi-functional-handoff.md), including controlled close-failure state, real/test-owned media, provider ownership and separate SLAVEPC applicability; no observed seam failure is asserted as a customer reproduction.
+
+S13 retains the [keyboard/mouse functional handoff](host-inc/keyboard-mouse-functional-handoff.md), including actual controller/PIC recheck, Win3.x and host input, reset/EOI and device lifecycle boundaries. S14 retains the [DDEML route review](host-ch-scope/ddeml-route-review.md); historical initialization alone does not verify transactions, callbacks or retirement.
