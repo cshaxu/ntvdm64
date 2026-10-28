@@ -75,7 +75,7 @@ dos/dem/demdasd.h,0,partial,shard-0/review.csv
 dos/dem/demdata.c,3,partial,shard-3/file-review.csv
 dos/dem/demdir.c,1,pending,shard-1/file-audit.csv
 dos/dem/demdisp.c,2,partial,shard-2/file-audit.csv
-dos/dem/demerror.c,3,pending,shard-3/file-review.csv
+dos/dem/demerror.c,3,partial,shard-3/file-review.csv
 dos/dem/demfcb.c,0,partial,shard-0/review.csv
 dos/dem/demfile.c,2,partial,shard-2/file-audit.csv
 dos/dem/demgset.c,1,partial,shard-1/file-audit.csv
@@ -4653,7 +4653,7 @@ wow32/wusercli.c,3,pending,shard-3/file-review.csv
 wow32/wusercli.h,3,pending,shard-3/file-review.csv
 wow32/wutbl.h,3,pending,shard-3/file-review.csv
 wow32/wutbl2.h,3,pending,shard-3/file-review.csv
-wow32/wutext.c,1,pending,shard-1/file-audit.csv
+wow32/wutext.c,1,partial,shard-1/file-audit.csv
 wow32/wutext.h,0,pending,shard-0/review.csv
 wow32/wutmr.c,3,partial,shard-3/file-review.csv
 wow32/wutmr.h,0,pending,shard-0/review.csv

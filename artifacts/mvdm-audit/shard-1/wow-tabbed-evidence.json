@@ -1,0 +1,202 @@
+{
+  "result": "pass",
+  "source": "wow32/wutext.c",
+  "source_sha256": "83F6C0568C00C273A93A2D333ED434EA78BEED4E2682E78E260A31BE031441CD",
+  "wow_source_ids": "SRC:9e683a190f2507a8d3f7;SRC:a7aad1d5bfbb06c62203",
+  "object_dependency": "obj/wutext.obj: #deps 126, deps mtime 8147760899758691 (VALID)",
+  "user_table_base": 311,
+  "entries": [
+    {
+      "ordinal": 196,
+      "table_index": 507,
+      "binding": {
+        "name": "_WU32TabbedTextOut@4",
+        "va": 268592272,
+        "function": true,
+        "owner": "wutext.obj",
+        "bytes": 198,
+        "relocation_words": 8
+      },
+      "edges": [
+        {
+          "offset": 7,
+          "target": "___security_cookie",
+          "owner": "LIBCMT:gs_cookie.obj",
+          "va": 269113344,
+          "kind": 6
+        },
+        {
+          "offset": 47,
+          "target": "_GetPModeVDMPointerAssert@4",
+          "owner": "wow32.obj",
+          "va": 268441744,
+          "kind": 20
+        },
+        {
+          "offset": 72,
+          "target": "_malloc_w@4",
+          "owner": "wow32.obj",
+          "va": 268446656,
+          "kind": 20
+        },
+        {
+          "offset": 95,
+          "target": "_getintarray16@12",
+          "owner": "wstruc.obj",
+          "va": 268450480,
+          "kind": 20
+        },
+        {
+          "offset": 135,
+          "target": "_mvdm_wow_gdi_handle_to_native",
+          "owner": "ntvdm:ntvdm.exe",
+          "va": 268924304,
+          "kind": 20
+        },
+        {
+          "offset": 145,
+          "target": "__imp__TabbedTextOutA@32",
+          "owner": "user32:USER32.dll",
+          "va": 269023824,
+          "kind": 6
+        },
+        {
+          "offset": 166,
+          "target": "_free_w@4",
+          "owner": "wow32.obj",
+          "va": 268446624,
+          "kind": 20
+        },
+        {
+          "offset": 185,
+          "target": "@__security_check_cookie@4",
+          "owner": "LIBCMT:secchk.obj",
+          "va": 268924946,
+          "kind": 20
+        }
+      ]
+    },
+    {
+      "ordinal": 197,
+      "table_index": 508,
+      "binding": {
+        "name": "_WU32GetTabbedTextExtent@4",
+        "va": 268592096,
+        "function": true,
+        "owner": "wutext.obj",
+        "bytes": 170,
+        "relocation_words": 8
+      },
+      "edges": [
+        {
+          "offset": 7,
+          "target": "___security_cookie",
+          "owner": "LIBCMT:gs_cookie.obj",
+          "va": 269113344,
+          "kind": 6
+        },
+        {
+          "offset": 41,
+          "target": "_GetPModeVDMPointerAssert@4",
+          "owner": "wow32.obj",
+          "va": 268441744,
+          "kind": 20
+        },
+        {
+          "offset": 64,
+          "target": "_malloc_w@4",
+          "owner": "wow32.obj",
+          "va": 268446656,
+          "kind": 20
+        },
+        {
+          "offset": 86,
+          "target": "_getintarray16@12",
+          "owner": "wstruc.obj",
+          "va": 268450480,
+          "kind": 20
+        },
+        {
+          "offset": 108,
+          "target": "_mvdm_wow_gdi_handle_to_native",
+          "owner": "ntvdm:ntvdm.exe",
+          "va": 268924304,
+          "kind": 20
+        },
+        {
+          "offset": 118,
+          "target": "__imp__GetTabbedTextExtentA@20",
+          "owner": "user32:USER32.dll",
+          "va": 269023820,
+          "kind": 6
+        },
+        {
+          "offset": 138,
+          "target": "_free_w@4",
+          "owner": "wow32.obj",
+          "va": 268446624,
+          "kind": 20
+        },
+        {
+          "offset": 157,
+          "target": "@__security_check_cookie@4",
+          "owner": "LIBCMT:secchk.obj",
+          "va": 268924946,
+          "kind": 20
+        }
+      ]
+    }
+  ],
+  "getintarray16_source_sha256": "EEB570FD94BB826BFA7CF46679FDD4EE8DE44E0E7566F3E0F988A899B0D952A3",
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wutext.obj",
+      "sha256": "ABF126EB16392A14937BF5D456F85993BDCA4A6218828B1B238399DDBB8339E4"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutext.c",
+      "sha256": "83F6C0568C00C273A93A2D333ED434EA78BEED4E2682E78E260A31BE031441CD"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wstruc.c",
+      "sha256": "91F0EB40AA660B339DB509C6650B08AD56A719343081C0B314B709D19C51A3B7"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    }
+  ],
+  "scope": "Initial USER dispatch and masked object code/call bindings; not guest execution or failure-path acceptance"
+}

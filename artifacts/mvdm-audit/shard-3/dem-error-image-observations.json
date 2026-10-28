@@ -1,0 +1,128 @@
+{
+  "result": "pass",
+  "relative_path": "dos/dem/demerror.c",
+  "source_sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F",
+  "wow_source_ids": "SRC:53df51878fca1891c6c2;SRC:e4f1df895feb5b7883e7",
+  "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+  "edge": "build obj/dem/demerror.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demerror.c",
+  "dependency_header": "obj/dem/demerror.obj: #deps 22, deps mtime 8147412820708760 (VALID)",
+  "functions": [
+    {
+      "name": "_GetDriveLetterByHandle",
+      "va": 5550416,
+      "function": true,
+      "owner": "original-mvdm-dem:demerror.obj",
+      "bytes": 479,
+      "relocation_words": 19
+    },
+    {
+      "name": "_demClientError",
+      "va": 5550896,
+      "function": true,
+      "owner": "original-mvdm-dem:demerror.obj",
+      "bytes": 279,
+      "relocation_words": 31
+    },
+    {
+      "name": "_demClientErrorEx",
+      "va": 5551184,
+      "function": true,
+      "owner": "original-mvdm-dem:demerror.obj",
+      "bytes": 283,
+      "relocation_words": 29
+    },
+    {
+      "name": "_demRetry",
+      "va": 5551472,
+      "function": true,
+      "owner": "original-mvdm-dem:demerror.obj",
+      "bytes": 139,
+      "relocation_words": 21
+    },
+    {
+      "name": "_demSetHardErrorInfo",
+      "va": 5551616,
+      "function": true,
+      "owner": "original-mvdm-dem:demerror.obj",
+      "bytes": 77,
+      "relocation_words": 8
+    }
+  ],
+  "slots": [
+    {
+      "index": 50,
+      "symbol": "_demSetHardErrorInfo",
+      "va": 5551616
+    },
+    {
+      "index": 51,
+      "symbol": "_demRetry",
+      "va": 5551472
+    }
+  ],
+  "calls": [
+    {
+      "caller": "_demOpen",
+      "target": "_demClientError",
+      "va": 5556440
+    },
+    {
+      "caller": "_demOpen",
+      "target": "_demClientError",
+      "va": 5556866
+    },
+    {
+      "caller": "_demOpen",
+      "target": "_demClientError",
+      "va": 5557065
+    },
+    {
+      "caller": "_demOpen",
+      "target": "_demClientError",
+      "va": 5557093
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\dos\\dem\\demerror.c",
+      "sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\dem\\demerror.c",
+      "sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F"
+    },
+    {
+      "path": "src\\mvdm\\dos\\dem\\demdisp.c",
+      "sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demerror.obj",
+      "sha256": "3F5E2723236063EADF3FEB41D80E02A501D51667D923E48F645567ADD2A60281"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demdisp.obj",
+      "sha256": "E5A2CE79348585E04688EB5659F850F9E0ACC383F1DCF0D5D793000E9E7966A8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demfile.obj",
+      "sha256": "1B3E81593F2C061F6587C2B2835D6245460D41DB96CF4E7B0373677D5D61CA6D"
+    }
+  ],
+  "scope": "Initial dispatch and four original caller edges; no hard-error or retry behavior acceptance"
+}

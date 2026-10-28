@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "d56754f49",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-tabbed-evidence.json",
+      "sha256": "654271FC48D13E70280CCBC6B0C6038705CDCC362C5094F6A0409329A8C530F2"
+    },
+    {
+      "path": "shard-3/dem-error-image-observations.json",
+      "sha256": "2389DDAF2485F4C17BF8901AB59F755104142ECA674C2803740FFE6F5D35CFF8"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original code and linked edges; no guest or failure behavior acceptance"
+}
