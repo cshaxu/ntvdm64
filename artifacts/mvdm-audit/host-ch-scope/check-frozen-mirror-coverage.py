@@ -23,13 +23,15 @@ with open('artifacts/mvdm-audit/mirror-diff-code-retention.csv', encoding='utf-8
     diffs = {r['relative_path']: r for r in diff_rows}
     if len(diffs) != len(diff_rows):
         raise SystemExit('duplicate path in mirror-difference table')
-unlisted, missing, no_original, stale = [], [], [], []
+unlisted, missing, unexplained_missing, no_original, stale = [], [], [], [], []
 compared = 0
 for path in inventory:
     record = frozen.get(path)
     current = root / path
     if not current.is_file():
         missing.append(path)
+        if inventory[path]['ledger_status'] not in ('excluded', '整体排除'):
+            unexplained_missing.append(path)
         continue
     if not record or not (record['opennt_sha256'] or record['opennt45_sha256']):
         no_original.append(path)
@@ -52,5 +54,6 @@ print('compared', compared, 'unlisted differences', len(unlisted),
 print('unlisted:', unlisted)
 print('stale estimates:', stale)
 print('missing current files:', missing)
-if unlisted or stale or no_original:
+print('missing without exclusion:', unexplained_missing)
+if unlisted or stale or no_original or unexplained_missing:
     raise SystemExit('host C/H differences, estimates or original identities require reconciliation')
