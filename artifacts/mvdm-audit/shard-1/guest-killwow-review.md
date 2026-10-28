@@ -1,0 +1,9 @@
+# S10 shard 1: KillWOW historical guest utility
+
+Scope: pending `wow16/killwow/killwow.c` and `KillWOW.def`. Read-only inspection; this destructive historical utility was not run, and no guest was rebuilt. Both files match corresponding OpenNT and OpenNT-4.5 copies: C SHA-256 `ec2d3900269a912165b9072a8008046674d835d35118a58db635a92f8f71d685`; DEF `e43e5d4616ee2603b27d4bab03329fccf4f24575d8462d0b971e098eb8127d5f`.
+
+The original makefile builds a standalone Win16 `KillWOW.exe` from killwow.obj and a generated DEF and attaches a resource (makefile:84–121). WinMain calls `ExitKernelThunk(0)` (killwow.c:30); `kernel31/kthunks.asm:341-349` maps that thunk to FUN_ExitKernel, and `wow32/wktbl2.h:15` binds it to WK32ExitKernel. Current `wow32/wkman.c:4386-4420` authorizes worker exit through NtvdmAuthorizeExit, calls ExitVDM(WOWVDM, ALL_TASKS), then ExitProcess. This is a worker-wide exit path, not proof of per-task termination; authorization, worker supervision and side effects are untested here. The current host implementation carries `MVDM-HOST-DIV-356`; see the project's exception register rather than interpreting this as byte-identical OpenNT.
+
+Historical source binary `KILLWOW.EXE` equals both comparison editions at SHA-256 `0ce3326b45eb302d26b0ea605109ed4ce5622539153d2209f43986cf2fdb50a3`. A case-insensitive scan of ZIP member paths found no killwow.exe; exact `O:/winnt/system32/killwow.exe` was absent. Absence at those locations is not proof that no other media can supply it or that the kernel exit API is unreachable; WOWEXEC also names ExitKernelThunk in its source. Binary identity does not prove source build provenance. No Ninja graph or runtime exit/restart behavior was verified.
+
+Reproduce with Get-FileHash on the two files and executable under the current source and both original trees, enumerate ZIP entries, and `rg -n 'ExitKernelThunk|WK32ExitKernel|FUN_EXITKERNEL' src/mvdm/wow16 src/mvdm/wow32 src/mvdm/inc`.

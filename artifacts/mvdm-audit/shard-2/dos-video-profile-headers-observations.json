@@ -1,0 +1,45 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/inc/gisp_sas.h",
+      "hashes": [
+        "2413FD0F1B4A4D9CB0238A4C811D088D2D0D1B0C0EAA423956400BD8256558E3",
+        "2413FD0F1B4A4D9CB0238A4C811D088D2D0D1B0C0EAA423956400BD8256558E3",
+        "2413FD0F1B4A4D9CB0238A4C811D088D2D0D1B0C0EAA423956400BD8256558E3"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/host/inc/hostgrph.h",
+      "hashes": [
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4",
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4",
+        "DE614AFAF98ABA14BA184F6CE8381B17C20A244F9F96F823EA60B713861B26E4"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/host/inc/nt_ega.h",
+      "hashes": [
+        "D60C53FEF1C7403CFB534C45BAE48A9524EA4DD218ADC48B68F7183B35461E7E",
+        "D60C53FEF1C7403CFB534C45BAE48A9524EA4DD218ADC48B68F7183B35461E7E",
+        "D60C53FEF1C7403CFB534C45BAE48A9524EA4DD218ADC48B68F7183B35461E7E"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "normalized_nt_ega_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\nt_ega.h",
+  "gisp_in_reset_normalized_dependency": false,
+  "compile_edge": "build obj/host/nt_ega.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_ega.c",
+  "map_symbols": [
+    "0001:000060b0       _nt_ega_mono_hi_graph_big  004070b0 f   original-softpc-host-roots:nt_ega.obj",
+    "0001:000060b0       _nt_change_mode            004070b0 f   original-softpc-host-roots:nt_graph.obj"
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Video interface and selected map snapshot; not proof any mode handler renders or alternate profiles are unused"
+}

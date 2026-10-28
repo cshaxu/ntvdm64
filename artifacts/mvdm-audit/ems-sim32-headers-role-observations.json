@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "7a6f51058",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-2/dos-emm-sim32-headers-observations.json",
+      "sha256": "186736466F3490894800FFF84C6FB95197F907456DF92688E5E663CE3BF18DCD"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected interfaces, not complete guest behavior"
+}

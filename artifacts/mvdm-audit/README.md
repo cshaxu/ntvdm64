@@ -74,6 +74,11 @@ The [Win16 timer](shard-1/guest-timer-review.md),
 [EMS/Sim32 headers](shard-2/dos-emm-sim32-headers-review.md), and
 [Win16 sound resources](shard-3/wow-sound-resources-role-review.md) reviews
 retain their separate image, provider and runtime proof boundaries.
+The [DOS video profile review](shard-2/dos-video-profile-headers-review.md)
+distinguishes selected EGA declarations from unproved rendering behavior.
+The [KillWOW review](shard-1/guest-killwow-review.md) and [keyboard variant
+review](shard-3/dos-keyboard-variants-role-review.md) retain their worker-wide
+exit and layout selection boundaries.
 Additional [tools16 checks](shard-1/historical-tools16-recheck-review.md),
 [DOS build inputs](shard-2/tools16-unmirrored-review.md) and
 [Win16 assembly declarations](shard-1/guest-inc-asm-review.md) retain their

@@ -240,7 +240,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'monitor-profile-headers-role-':
+                if prefix == 'ems-sim32-headers-role-':
+                    assert path in ('softpc.new/host/inc/host_emm.h', 'softpc.new/host/inc/sim32.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'monitor-profile-headers-role-':
                     assert path in ('softpc.new/host/inc/host_bop.h', 'softpc.new/host/inc/nt_reset.h', 'softpc.new/host/inc/nt_thred.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'directory-interrupt-headers-role-':
                     assert path in ('inc/curdir.h', 'dpmi32/precomp.h', 'inc/intapi.h', 'softpc.new/base/keymouse/mouse.c', 'softpc.new/base/keymouse/ppi.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
