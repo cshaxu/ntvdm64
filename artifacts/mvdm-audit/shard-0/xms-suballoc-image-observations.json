@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "bindings": [
+    {
+      "name": "_XMSDispatch",
+      "va": 5588928,
+      "function": true,
+      "owner": "original-mvdm-xms:xmsdisp.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_SAAllocate",
+      "va": 5613440,
+      "function": true,
+      "owner": "original-mvdm-host-suballoc:suballoc.obj",
+      "bytes": 184,
+      "relocation_words": 1
+    },
+    {
+      "name": "_SAInitialize",
+      "va": 5613728,
+      "function": true,
+      "owner": "original-mvdm-host-suballoc:suballoc.obj",
+      "bytes": 80,
+      "relocation_words": 2
+    }
+  ],
+  "image_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "object_sha256": {
+    "obj/xms/xmsdisp.obj": "FE79578FCA3501A079BC08180FF49DBA4E62755C1237FF54295A07F4EE338D04",
+    "obj/suballoc/suballoc.obj": "F5CF62A66083A173274455CB4714BA7E8C3C9FA27D56A2F548F7AF908169C373"
+  },
+  "limits": "Object/image binding only; no guest index bounds, allocation failure, rollback or lifecycle execution."
+}

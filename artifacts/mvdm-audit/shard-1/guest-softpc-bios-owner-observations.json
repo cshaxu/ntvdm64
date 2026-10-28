@@ -1,0 +1,123 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "softpc.new/bios/biosbop.inc",
+      "sha256": "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A",
+      "catalog_ids": "SRC:19a2588f2702dbee2660;SRC:77ef16c51a668f731d36",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\biosbop.inc",
+      "other_present": true,
+      "other_sha256": "97855EC4EEB18B454862023B449BACCB4B3B649EA9C727FDAFAB45F865F9158A",
+      "other_equal": true
+    },
+    {
+      "path": "softpc.new/bios/msend.asm",
+      "sha256": "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A",
+      "catalog_ids": "SRC:472794c392195696078b;SRC:735fe4f81c5cd7d3b9b4",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\msend.asm",
+      "other_present": true,
+      "other_sha256": "40D639BB0F09814E537A742081B85557D49C2FC1219F0FF6618D823623F88F0A",
+      "other_equal": true
+    },
+    {
+      "path": "softpc.new/bios/msint13.asm",
+      "sha256": "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF",
+      "catalog_ids": "SRC:38f3e7933107f1c04384;SRC:ceec536f26cf333c0159",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\msint13.asm",
+      "other_present": true,
+      "other_sha256": "0EDED1F8DFADB5B6229BDF69D9A5B155567A335BDA95C8B4F7397E92961663DF",
+      "other_equal": true
+    },
+    {
+      "path": "softpc.new/bios/spcemm.asm",
+      "sha256": "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D",
+      "catalog_ids": "SRC:b5aa63f6540d7c1d54d1;SRC:bd204897d3188b9f80dc",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\spcemm.asm",
+      "other_present": true,
+      "other_sha256": "554D8FF28331A4BCE69D99551C9640E62E32718C437926BEFB17CBE72D831F9D",
+      "other_equal": true
+    },
+    {
+      "path": "softpc.new/bios/spckbd.asm",
+      "sha256": "7DC376B9B27D7DC204DA63003D7F320433B20E488BFD1BB1476D789DC156A068",
+      "catalog_ids": "SRC:98a24a0722b0b8370fad;SRC:e72d85a7fe1b0c2ea7af",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\spckbd.asm",
+      "other_present": true,
+      "other_sha256": "88B642477594DA7D51D1F20BEC5DC0AC93D9EA7C0A6B862FA69EC4C15C59C6F0",
+      "other_equal": false
+    },
+    {
+      "path": "softpc.new/bios/spcmse.asm",
+      "sha256": "1B0B7A9C956DB2AFBEA40D787460F1002FD9E4D81724B725E76BCD6465830132",
+      "catalog_ids": "SRC:98a0a57dc5c1351d0a76;SRC:ed9680da136cd52a5d85",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\spcmse.asm",
+      "other_present": false,
+      "other_sha256": null,
+      "other_equal": false
+    },
+    {
+      "path": "softpc.new/bios/sysinit2.asm",
+      "sha256": "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8",
+      "catalog_ids": "SRC:d25c263cfc6a11bae8cd;SRC:f8465f8e3d0e94bde3a1",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [],
+      "other_bios_path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\sysinit2.asm",
+      "other_present": true,
+      "other_sha256": "3B05B35C6C555ADB68301DAB7DF1E3CC886CA160068366326E3D1C88643A37E8",
+      "other_equal": true
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\makefile",
+      "sha256": "F04EAE991E915389168DCD4C1BA40C5EE11BD83CFFE190F3A55BA2EC13B437FB"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\msbio.lnk",
+      "sha256": "9A163DEAD32E6F7BED5BD283B0B8D68FA28A4DC21C54C5A98E69DDA4C0BD9B58"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\bios\\mschar.asm",
+      "sha256": "8A8C5BC7C96613392C4176817B7533E1F6533E5B514D25016F1B33394E3FB50A"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\NTIO.SYS",
+    "source_sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+    "installed_sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937",
+    "zip_member": "WINNT/SYSTEM32/NTIO.SYS",
+    "zip_sha256": "CFC8BE16576BB6ACD16BB8FC9B2D9A080F544BBFDD2D2D2DF07ED908B3AB4937"
+  },
+  "limitations": "Original recipe, selected host dependencies and binary equality only; no source-to-image provenance, guest execution, keyboard/mouse or device behavior claim."
+}

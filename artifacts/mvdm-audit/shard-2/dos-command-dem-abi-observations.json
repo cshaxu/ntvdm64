@@ -1,0 +1,75 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "inc/cmdsvc.h",
+      "hashes": [
+        "C22D682422E2AC3200BDAE808A5309B57A7A0402DF2A3AA6199502D911FF6624",
+        "C22D682422E2AC3200BDAE808A5309B57A7A0402DF2A3AA6199502D911FF6624",
+        "C22D682422E2AC3200BDAE808A5309B57A7A0402DF2A3AA6199502D911FF6624"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "dos/dem/dosdef.h",
+      "hashes": [
+        "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+        "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "inc/BOP.INC",
+      "hashes": [
+        "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669",
+        "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669",
+        "A3705F225C47E53DC4E106C7362366477F2F06C33CB9BF52515CA1299556F669"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\command\\cmddisp.c",
+      "sha256": "2A906E7100DA9DB6F16BAB91C767B149F28E63A0DB2803297812A8E86D2B19D6"
+    },
+    {
+      "path": "src\\mvdm\\dos\\dem\\dem.h",
+      "sha256": "35CC550D9AB9A17211D7776874F951CF19AC339F8B91F0E68460BF32810566B5"
+    },
+    {
+      "path": "src\\mvdm\\inc\\CMDSVC.INC",
+      "sha256": "7643746CEEC383536CA3EA2CFC4400AC94C8C7A34BD266B09258CFCB337441C6"
+    },
+    {
+      "path": "src\\mvdm\\inc\\bop.h",
+      "sha256": "7B16C577F3C478AC0DF9E982D727A1469352727D970B5889688880026CCE97A0"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    }
+  ],
+  "normalized_dependencies": [
+    {
+      "object": "obj/command/cmddisp.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\inc\\cmdsvc.h"
+    },
+    {
+      "object": "obj/dem/demfile.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dos\\dem\\dosdef.h"
+    }
+  ],
+  "compile_edges": [
+    "build obj/command/cmddisp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/dos/command/cmddisp.c",
+    "build obj/dem/demfile.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/dos/dem/demfile.c"
+  ],
+  "map_entry": "0001:0014fab0       _CmdDispatch               00550ab0 f   original-mvdm-command:cmddisp.obj",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "BOP/command source references and normalized dependency snapshot, not guest ABI/runtime proof"
+}

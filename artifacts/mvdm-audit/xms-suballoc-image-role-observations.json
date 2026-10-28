@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "fef0cf799",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-2/xms-suballoc-roles-observations.json",
+      "sha256": "EBF869A69D0D526CB9CAF009FC6E1CF5F2B5A8F90A3357F2A1839B249ADD5C11"
+    },
+    {
+      "path": "shard-0/xms-suballoc-image-observations.json",
+      "sha256": "725438AE4D3AAD1960529010FF9450E708619C93C22192FF09FBD5BFD178DA58"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Source and image binding only; no guest runtime acceptance"
+}

@@ -2439,7 +2439,7 @@ suballoc/obj/_objects.mac,3,excluded,shard-3/file-review.csv
 suballoc/obj/i386/suballoc.obj,2,excluded,shard-2/file-audit.csv
 suballoc/sources,2,partial,shard-2/file-audit.csv
 suballoc/suballcp.h,1,pending,shard-1/file-audit.csv
-suballoc/suballoc.c,2,pending,shard-2/file-audit.csv
+suballoc/suballoc.c,2,partial,shard-2/file-audit.csv
 suballoc/suballoc.txt,2,pending,shard-2/file-audit.csv
 suballoc/tsa.c,0,excluded,shard-0/review.csv
 tools16/buildidx.exe,0,pending,shard-0/review.csv
@@ -4679,7 +4679,7 @@ xms.486/xms.c,0,pending,shard-0/review.csv
 xms.486/xms.h,0,pending,shard-0/review.csv
 xms.486/xmsa20.c,0,pending,shard-0/review.csv
 xms.486/xmsblock.c,0,partial,shard-0/review.csv
-xms.486/xmsdisp.c,2,pending,shard-2/file-audit.csv
+xms.486/xmsdisp.c,2,partial,shard-2/file-audit.csv
 xms.486/xmsmemr.c,0,partial,shard-0/review.csv
 xms.486/xmsmisc.c,0,pending,shard-0/review.csv
 xms.486/xmsumb.c,0,pending,shard-0/review.csv
