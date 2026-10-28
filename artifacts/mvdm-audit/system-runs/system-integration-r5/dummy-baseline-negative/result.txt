@@ -1,0 +1,1 @@
+PASS deliberately wrong DummyInt expectation rejected; guest exit=1; no success marker

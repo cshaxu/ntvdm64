@@ -1,0 +1,14 @@
+{
+  "pid": 26004,
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T01:30:50.1231391Z",
+  "arguments": [
+    "O:\\tmp\\n6fa/system32/run16.exe",
+    "O:\\tmp\\n6fa\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\dummy-candidate/observer.txt",
+    "--wait",
+    "O:\\tmp\\n6fa\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ]
+}

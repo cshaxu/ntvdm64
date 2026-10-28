@@ -1,0 +1,39 @@
+[1/3] LIB original-softpc-host-fixture-roots.lib
+[2/3] CC O:/repos.hobby/ntvdm64/tests/mvdm-host/pic_reset_eoi_test.c
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): note: 'NTVDM' previously declared on the command line
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union
+[3/3] link.exe /nologo /force:multiple /map:pic-reset-eoi-test.exe.map /out:pic-reset-eoi-test.exe obj/tests/pic_reset_eoi_test.obj obj/tests/ccpu_bounded_execution_fixture_seams.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib libcmt.lib libvcruntime.lib libucrt.lib
+ccpu_bounded_execution_fixture_seams.obj : warning LNK4006: _host_EOI_hook already defined in pic_reset_eoi_test.obj; second definition ignored
+ccpu_host_fixture_seams.obj : warning LNK4006: _mvdm_host_getenv already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _WOWIdle already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_DelayHwInterrupt already defined in pic_reset_eoi_test.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_EOI_hook already defined in pic_reset_eoi_test.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_ica_lock already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_eoi.obj) : warning LNK4006: _host_ica_unlock already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_error.obj) : warning LNK4006: _host_error already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_timer.obj) : warning LNK4006: _host_timer_event already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_reset.obj) : warning LNK4006: _host_applClose already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_reset.obj) : warning LNK4006: _host_terminate already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_unix.obj) : warning LNK4006: _HostIdleNoActivity already defined in pic_reset_eoi_test.obj; second definition ignored
+original-softpc-system.lib(qevnt.obj) : warning LNK4006: _dispatch_q_event already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-system.lib(rom.obj) : warning LNK4006: _copyROM already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-system.lib(rom.obj) : warning LNK4006: _rom_init already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-cvidc.lib(accessfn.obj) : warning LNK4006: _sas_overwrite_memory already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-dos.lib(emm_mngr.obj) : warning LNK4006: _LIM_b_write already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-dos.lib(emm_mngr.obj) : warning LNK4006: _LIM_w_write already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_exint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_hwint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+original-softpc-host-fixture-roots.lib(nt_inthk.obj) : warning LNK4006: _host_swint_hook already defined in ccpu_bounded_execution_fixture_seams.obj; second definition ignored
+pic-reset-eoi-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run

@@ -1,0 +1,2 @@
+# buffer=120,9001 viewport=0,0,119,29
+[0] S24_CMOS_FAIL

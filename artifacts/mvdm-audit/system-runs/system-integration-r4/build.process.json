@@ -1,0 +1,8 @@
+{
+  "diagnostic_budget_seconds": 180,
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r4/build.cmd\"\"",
+  "working_directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+  "started": "2026-10-28T01:25:54.1274755Z",
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 26364
+}

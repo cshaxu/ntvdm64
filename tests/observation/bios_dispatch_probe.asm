@@ -63,6 +63,23 @@ start:
     push cs
     pop es
     mov [guest_segment],ds
+%ifdef CPU_PROBE_DUMMY_INT_ONLY
+    mov byte [phase],'D'
+    mov word [input_ax],0x7ecd
+    mov word [expected_ax],0x7ecd
+%ifdef CPU_PROBE_NEGATIVE_ORACLE
+    mov word [expected_ax],0
+%endif
+.dummy:
+    PREPARE
+    db 0xc4,0xc4,0x01
+    ASSERT_STATE
+    inc word [index]
+    cmp word [index],16
+    jb .dummy
+    cmp word [asserted],16
+    jne failed
+%else
     mov byte [phase],'C'
 .kind:
     mov word [index],0
@@ -124,6 +141,7 @@ start:
     mov byte [phase],'N'
     cmp word [asserted],836
     jne failed
+%endif
     cld
     mov dx,pass_message
     mov ah,9
@@ -156,6 +174,11 @@ expected_flags dw 0
 actual_flags dw 0
 patterns dw 0x0202,0x02d7,0x0a02,0x0603
 invalid_ems db 0,0x3f,0x60,0xff
+%ifdef CPU_PROBE_DUMMY_INT_ONLY
+pass_message db 'DUMMY INT PASS cases=16',13,10,'$'
+fail_message db 'DUMMY INT FAIL phase=','$'
+%else
 pass_message db 'BIOS DISPATCH PASS cases=836',13,10,'CONTROL768 ILLEGAL64 EMSBAD4',13,10,'$'
 fail_message db 'BIOS DISPATCH FAIL phase=','$'
+%endif
 newline db 13,10,'$'

@@ -1,0 +1,7 @@
+{
+  "command": "\"O:\\tmp\\nad3\\tests\" --close-on-exit",
+  "start": "2026-10-28T01:30:37.7508592Z",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\dummy-baseline-negative/pif-builder.exe",
+  "timeoutSeconds": 30,
+  "pid": 32048
+}

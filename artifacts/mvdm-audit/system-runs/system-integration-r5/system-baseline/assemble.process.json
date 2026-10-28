@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "start": "2026-10-28T01:29:27.9838231Z",
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\system_capability.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\system-baseline/EMSPROBE.COM\"",
+  "pid": 13132
+}

@@ -1,0 +1,14 @@
+{
+  "pid": 26784,
+  "arguments": [
+    "O:\\tmp\\nca2/system32/run16.exe",
+    "O:\\tmp\\nca2\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\system-candidate-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\nca2\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T01:30:12.7886972Z"
+}

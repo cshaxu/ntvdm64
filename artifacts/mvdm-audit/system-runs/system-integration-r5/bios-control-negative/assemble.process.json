@@ -1,0 +1,7 @@
+{
+  "pid": 15024,
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\bios_dispatch_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\bios-control-negative/EMSPROBE.COM\" -DCPU_PROBE_NEGATIVE_ORACLE=1",
+  "timeoutSeconds": 30,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "start": "2026-10-28T01:31:17.7303027Z"
+}

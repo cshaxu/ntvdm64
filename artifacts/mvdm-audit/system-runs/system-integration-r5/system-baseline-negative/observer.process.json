@@ -1,0 +1,14 @@
+{
+  "pid": 29184,
+  "arguments": [
+    "O:\\tmp\\ne80/system32/run16.exe",
+    "O:\\tmp\\ne80\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\system-baseline-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\ne80\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T01:29:48.7790900Z"
+}

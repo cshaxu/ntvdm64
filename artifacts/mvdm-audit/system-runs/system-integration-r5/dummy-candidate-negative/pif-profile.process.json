@@ -1,0 +1,7 @@
+{
+  "pid": 21076,
+  "command": "\"O:\\tmp\\n31d\\tests\" --close-on-exit",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\dummy-candidate-negative/pif-builder.exe",
+  "start": "2026-10-28T01:31:00.9254137Z",
+  "timeoutSeconds": 30
+}

@@ -1,0 +1,4 @@
+warning: in the working copy of 'docs/states/CURRENT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/states/QUEUE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/observation/bios_dispatch_probe.asm', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/observation/system_capability.asm', LF will be replaced by CRLF the next time Git touches it

@@ -41,6 +41,15 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
+The [system-provider checkpoint](system-native-role-review.md) leaves S13 a
+finite device group: DMA byte/word transfers, masks, auto-init, decrement/page
+wrap, LIM and reset/failure; RTC alarm/calendar/format, register-C concurrency
+and real IRQ8/BOP70; all PIT modes/gates/latches and time discontinuities;
+exact nineteen-strobe blank/refresh/reset and retirement; and unexpected
+master/slave/cascade interrupts including D11. Generic CMOS and ica.old are
+physical alternative/revision exclusions only; their selected NT capabilities
+remain in this group. The full dummy leaf does not close these lifecycles.
+
 S18 removes only providers actually displaced by verified recoveries. S19
 reconciles every applicable path and runs the complete product and capability
 gates. Neither this list nor prior per-package acceptance converts pending

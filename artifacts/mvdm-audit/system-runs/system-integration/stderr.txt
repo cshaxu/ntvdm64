@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\build\t473-s10\system-integration\run.ps1:12
+Line |
+  12 |  . ode){Get-Content "$run/$name.stderr.txt";throw "$name failed: $code"}
+     |                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | image failed: 1

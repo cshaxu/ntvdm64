@@ -1,0 +1,1 @@
+O:\tmp\neb6/system32/run16.exe --wait O:\tmp\neb6\tests/E30.PIF

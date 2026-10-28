@@ -1,0 +1,7 @@
+{
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\system-baseline-negative/pif-builder.exe",
+  "pid": 33668,
+  "command": "\"O:\\tmp\\ne80\\tests\" --close-on-exit",
+  "timeoutSeconds": 30,
+  "start": "2026-10-28T01:29:48.0714340Z"
+}

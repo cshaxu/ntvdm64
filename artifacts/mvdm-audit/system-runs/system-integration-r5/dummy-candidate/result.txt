@@ -1,0 +1,1 @@
+PASS independent COM -> original CPU40 DummyInt owners; normal launcher exit; no original guest modification

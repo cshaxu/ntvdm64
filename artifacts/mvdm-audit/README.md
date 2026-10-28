@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-424 partial, 2,632 excluded physical file roles,
-52 full files (26 executable leaves and 26 declarations) and 1,576 pending.
+429 partial, 2,634 excluded physical file roles,
+53 full files (27 executable leaves and 26 declarations) and 1,568 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the BIOS checkpoint, not a prior snapshot's fixed counts.
+the system-provider checkpoint, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -40,6 +40,12 @@ The [BIOS checkpoint](bios-native-role-review.md) adds seven partial owners,
 52 image-bound functions, all 256 BIOS/30 EMS vector targets and two actual
 836-case guest dispatch runs with wrong-oracle controls. Wider BIOS, EMS and
 device lifecycle acceptance remains open.
+The [system-provider review](system-native-role-review.md) reconciles eight
+more roles through the original NT recipe, 77 mapped functions, ten real
+guest/oracle contracts and 24 native PIC assertions. Only the complete
+no-state dummy leaf becomes full; five devices remain partial and two
+alternative/revision files are excluded without excluding their capabilities.
+Its current gate is [delivery verification](system-native-delivery-verification.ps1).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 120,
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\system-image-observer.py\"",
+  "pid": 29768,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-28T01:23:47.5091402Z"
+}

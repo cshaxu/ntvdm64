@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\system-image-observer.py", line 81, in <module>
+    result = inspect()
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\system-image-observer.py", line 53, in inspect
+    assert len(functions) == 1 and obj.function('_dummy_int') == (b'\xc3', []), (functions, obj.function('_dummy_int')[0].hex(), obj.function('_dummy_int')[1])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ([{'symbol': '_dummy_int', 'va': 4223152, 'bytes': 3, 'relocation_words': 0, 'nonrelocated_bytes_matched': 3}], 'c20000', [])

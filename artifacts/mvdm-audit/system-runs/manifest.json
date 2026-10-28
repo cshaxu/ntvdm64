@@ -1,0 +1,2392 @@
+[
+  {
+    "bytes": 66,
+    "sha256": "230831A55135C94B75F9E36C7F99EE58690E5E13836C1774A8461E2EFF0A1CF2",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "FDBD62680B0315DD8806E56F87173E9D7820E296B45752028E5FF609576A402B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/image.completion.json"
+  },
+  {
+    "bytes": 320,
+    "sha256": "025C0C86AF603BB87A5F1B57146F034D914AAE4D358FFD350EF6440B8109D451",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/image.process.json"
+  },
+  {
+    "bytes": 437,
+    "sha256": "B3CFD0A07277EB478D889B878B1EB98ECE9436673F286088238F4AA818346BD8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/image.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/image.stdout.txt"
+  },
+  {
+    "bytes": 363,
+    "sha256": "08E5BD34E16A67DEC1182334387F023561502E66CC5F873144025374A3257FBC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/process.json"
+  },
+  {
+    "bytes": 3726,
+    "sha256": "61B548D8059679FDAF4CBC642F39C5CC873B12A992112B302C5F666F58AD5697",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/run.ps1"
+  },
+  {
+    "bytes": 273,
+    "sha256": "C6CCEBFB5CB6FFC1830E0908595D169FF40E8B3AFDB2B2EA07F14E63DAD72789",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/stderr.txt"
+  },
+  {
+    "bytes": 437,
+    "sha256": "B3CFD0A07277EB478D889B878B1EB98ECE9436673F286088238F4AA818346BD8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "35EA8ADD6C3D981D314CF330C7B0FD0F15275100F842E9724AE6A7B10AB3102A",
+    "path": "artifacts/mvdm-audit/system-runs/system-image-inspect/completion.json"
+  },
+  {
+    "bytes": 269,
+    "sha256": "A0831268CE59FFE36824343D0FC601D7A8626298F9DC865869CE545E446CE8D7",
+    "path": "artifacts/mvdm-audit/system-runs/system-image-inspect/process.json"
+  },
+  {
+    "bytes": 645,
+    "sha256": "46D8AFB717C1B6E6E1F5504A4933C923CB66115A654BCB94F615CB0CEFE372F8",
+    "path": "artifacts/mvdm-audit/system-runs/system-image-inspect/stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-image-inspect/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "CA280B5E8EDE69CDE56FD469F689801896A763D0CF4C0F91EC6A2170FEF7BE8B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "4267EDEAB80E9CDDF6635A5CBD5664E623EF6D88D893097FD51441228E63DA2B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/image.completion.json"
+  },
+  {
+    "bytes": 320,
+    "sha256": "52B0FB06E416D238A197BC7E5AE96F3C9BECD3A7D9A9B01A04922CF9288E2CE8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/image.stderr.txt"
+  },
+  {
+    "bytes": 75,
+    "sha256": "47229DFD7B04FBE1CADCE87C63C7E372353D543DA46E8B49B5BB172BF72538C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "95ECBC0408B3D664BE12FC2F620CB456C96604808C84E1A94C1EFDEAD640A8F4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/incremental.completion.json"
+  },
+  {
+    "bytes": 415,
+    "sha256": "2C8285A1AB53BE5CBB8378250CAF6F2D1D23E797A799F984471246B8A3849538",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/incremental.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/incremental.stderr.txt"
+  },
+  {
+    "bytes": 1610,
+    "sha256": "643D7BA3030A9BD06E59940389B598BEE2ECAC9D9A16AF392193DB770B19E9AB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/incremental.stdout.txt"
+  },
+  {
+    "bytes": 366,
+    "sha256": "96C7EC603EA020472D9F745E9F8623FAD2CF1D39451C2FF5B25B7A91119A41B5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/process.json"
+  },
+  {
+    "bytes": 3729,
+    "sha256": "A4F874B776CFEB5377386C7ED4AED5A24D1F7A6C4E78286ABE5D3BBC866C0BA4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/run.ps1"
+  },
+  {
+    "bytes": 327,
+    "sha256": "77B21DDE3122B4E7C28DD6D5000869D10DCBBAFBA8223015DBD4C236AD290DAE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r2/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "B6CF1ED0D8F7F6DD5A623A23927628F7ED14D4A793592F5CE3FCBB3570B94340",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "7C3E8DA2589C4B9F7E00A64C84A31E46AC39A9CE3B9E102929E67BF8110EC0EE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/image.completion.json"
+  },
+  {
+    "bytes": 321,
+    "sha256": "670D4D27A1419F0D144437AE146309C54687201503854DE5E5331255D5092805",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/image.stderr.txt"
+  },
+  {
+    "bytes": 75,
+    "sha256": "47229DFD7B04FBE1CADCE87C63C7E372353D543DA46E8B49B5BB172BF72538C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "120A386A30E4EC72A87905CACCFDBF639A82214C0D697E2DE6BB7973CB413A57",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/incremental.completion.json"
+  },
+  {
+    "bytes": 417,
+    "sha256": "DEBA7549B5446EF542C439231814F8897CF279908A9E530F0DFC74D0579E533B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/incremental.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/incremental.stderr.txt"
+  },
+  {
+    "bytes": 1610,
+    "sha256": "643D7BA3030A9BD06E59940389B598BEE2ECAC9D9A16AF392193DB770B19E9AB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/incremental.stdout.txt"
+  },
+  {
+    "bytes": 366,
+    "sha256": "6366B7F66D450DE154A7A9771CBB1FE69FA073189769B1F2857C80B0DA26A050",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/process.json"
+  },
+  {
+    "bytes": 4686,
+    "sha256": "C185800EB8F11AD21FE5B108653B99B1BA2DA94E8C438C8E1A43E16F56149E4A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/run.ps1"
+  },
+  {
+    "bytes": 410,
+    "sha256": "51CFF80232DC11CAD214FCBF944D35EDAADBD3A75BB29D38760FB41C90C0C4B9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r3/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "C784CEECCEDBA8B6FEB4DC79A800A2B2AC180FECDD0FB20BF33E661E77F922C7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control-negative.completion.json"
+  },
+  {
+    "bytes": 818,
+    "sha256": "E998B78B8999DAA5C9059FACC677D60BAF4AE377B43A2C671B660711D0428873",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "615E548262192173A83210A94E93606A279BC7D4708354406A20DED18726BC52",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control.completion.json"
+  },
+  {
+    "bytes": 793,
+    "sha256": "9A164713CA6F1643E564D3AF85C7C87E16F489D55189FD18B97BEBE8ABFFE2D9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/bios-control.stdout.txt"
+  },
+  {
+    "bytes": 291,
+    "sha256": "2EE433D5D8C7C95736E2B5379032F1D38F5EB1703662B27D929CC365B2F4C06F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/build.cmd"
+  },
+  {
+    "bytes": 66,
+    "sha256": "0F909BD11266C4F6F6F19D6CAF58208D5F154D2FDE7A57A0C185F8BF4D0BA718",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/build.completion.json"
+  },
+  {
+    "bytes": 355,
+    "sha256": "AA1389FC3D1C8BCF7C73767C0ADDDACAAD44D2A4ADEDB01E9BC27F8C75564722",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/build.stderr.txt"
+  },
+  {
+    "bytes": 7502,
+    "sha256": "7FEA328D7E0FEF83F53A3E56CC449EFF6BE71DA67F0F4687B6D053BBEE11F41A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/build.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "DB200279383DC9DF2FC58FEB0ABFF1BB2B8F7EF1C06972126F4D1C0087547556",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "408EC95657C9B0317D274E664F073696EA8CB82D3373693A62C30680AE9718FA",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline-negative.completion.json"
+  },
+  {
+    "bytes": 816,
+    "sha256": "9F6FACC8F08108F15F9A61B83337A292C10CEF84571325D97282215CD34DFE3F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "A4690A9500ED1C6F520937A10C9B29D7BAD160FAFE135A956E3A9D8ABCEDFF5C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline.completion.json"
+  },
+  {
+    "bytes": 791,
+    "sha256": "F5D7DC222A16AAE3E9B212B50B1B47C284A9CE3EBE63A003D7CAB1CC50B2C3D0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-baseline.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "4150B3818D0ED802CB082C1BFFA69F4265D34E714D8DA6390174B7196F944C77",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate-negative.completion.json"
+  },
+  {
+    "bytes": 833,
+    "sha256": "D38A4AC15CD2DAFDF51CAC42777D53EE825BBFF9C8224EEFDE6F413E8720B9BC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "A6F557222532B708B3DE2C99C486442B00F87542291275666BD49F69B7E0BE1C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate.completion.json"
+  },
+  {
+    "bytes": 808,
+    "sha256": "E9C32D46CEED62F3D1C2C48453EEDBAD956B802F52AE465C8E0D6C833E8B09D1",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/dummy-candidate.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "B51D8400F704B1526915207E86A86C9C24BE3D7562A7982898074500ECCDF01F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/image.completion.json"
+  },
+  {
+    "bytes": 321,
+    "sha256": "28701F19ECE8B068DCB9735C043BCB6A684C5A38247D0EDD2862D44B5DA4694A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/image.stderr.txt"
+  },
+  {
+    "bytes": 75,
+    "sha256": "47229DFD7B04FBE1CADCE87C63C7E372353D543DA46E8B49B5BB172BF72538C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "791CBC23EAA4F97D2FC4F7F21F108CC512FB66E4DC73FAE3E8BAAE618B6EDAA8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental-after.completion.json"
+  },
+  {
+    "bytes": 417,
+    "sha256": "132D54F4E9ECC0D0A722821C4F6D475E8FA22ECC2C5AD6F148FD17CA783DACFF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental-after.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental-after.stderr.txt"
+  },
+  {
+    "bytes": 23,
+    "sha256": "71AA391EC7D7E291B419A7F40FBA91919E14AC2394AB4E8B66ED126E267D70F6",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental-after.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "F34072061BC3BFF9F2B03DA605956134E68917F7B232185D9521BE45C88E9B88",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental.completion.json"
+  },
+  {
+    "bytes": 417,
+    "sha256": "5865C74E2A2827ABFE40BD5D4C0E9D4130D97123625C0F8DC0EC2D6A62A2FE1A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental.stderr.txt"
+  },
+  {
+    "bytes": 1610,
+    "sha256": "643D7BA3030A9BD06E59940389B598BEE2ECAC9D9A16AF392193DB770B19E9AB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/incremental.stdout.txt"
+  },
+  {
+    "bytes": 811,
+    "sha256": "EF0BAC32FEADB65AA95BAF414B15BE1439A74A4E2ACC612B0ACD06EAB40FB37D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/native-inputs.csv"
+  },
+  {
+    "bytes": 66,
+    "sha256": "2D4DAD765D5588E17B9555F17DA7BD89B7CEEA0C1C30A3F22FB4C26B25196722",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/pic.completion.json"
+  },
+  {
+    "bytes": 321,
+    "sha256": "379166D01059E4702E34AEBAE357BA9AA99E0D81A4212B4F1001E5D34ABC8BB1",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/pic.process.json"
+  },
+  {
+    "bytes": 396,
+    "sha256": "2569BADC64C5F957160639D32EA0F986974C5D149899BB9879FBF5E2D098F670",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/pic.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/pic.stdout.txt"
+  },
+  {
+    "bytes": 1630,
+    "sha256": "D8FF7DDDE298DA0984143594EA2D1EF6AECE6AA5ABA22F98D2B16CC605FF891B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/preserved-production-inputs.csv"
+  },
+  {
+    "bytes": 366,
+    "sha256": "A3B993C6D78BDA04A0AA62FEF084C4E550EB0040B790E1A459C7AA46CB3108C0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/process.json"
+  },
+  {
+    "bytes": 4717,
+    "sha256": "A7145F7B2DFFE4635CB7EC817B7BAB59F701991B7490996FDB348D60FB09E191",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/stderr.txt"
+  },
+  {
+    "bytes": 101,
+    "sha256": "297CC1F09FF097AB501B80D58BF8ACA7F86DFEFAE750105F8D986F6756D68B49",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "5E5475B30B72B5F554FA01DFB936ADA00CCF395913134C4EF5FE4986DD617A4A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline-negative.completion.json"
+  },
+  {
+    "bytes": 822,
+    "sha256": "FE7CE635E3F986DB0F9D1D9E628181ACDE1CBC54416C3A30480B0F8B9729B99F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "8E5653EBA7C42E3126550549F605E1D0366DBD17ABD24E26810684E67A2CEAD8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline.completion.json"
+  },
+  {
+    "bytes": 797,
+    "sha256": "CC4D0854BC5FF08D6A24DDEE49036862F091284CB576EF36B581B146CF6CFB79",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-baseline.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "30CC9A93C6AE6935B68958CEDEB3800E30C45D0D5C638AC3BFA6F9DE12FD3648",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate-negative.completion.json"
+  },
+  {
+    "bytes": 839,
+    "sha256": "1106A0EAB7BCA69CC55984BAF4F0ED4D1477F188C8A487F04600A2DD9470DDB4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "535FBE6071BCEE5452CC563335C68435BC72A6A03ACCA894662F58C639865222",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate.completion.json"
+  },
+  {
+    "bytes": 813,
+    "sha256": "19CB119D5393B63DC1F989AC393D1602B2ED529F9F8CB29657C9A7CD22D1526D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r4/system-candidate.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "246FAAEA57A3130175E64325ED58E51244075D62A9C7D92A6FAC8AA78780758B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative.completion.json"
+  },
+  {
+    "bytes": 818,
+    "sha256": "ACFFE187833C70F4C1656134C760C9E15E3E6B0279E7AB34AA0FBC070F9C140B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "1941D3524640E6FC207FD4448F93F011CE5232BFCF2B1213EDCDB229BC1C6A41",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control.completion.json"
+  },
+  {
+    "bytes": 793,
+    "sha256": "C62EC49DC706E3F79075841A62BB633BA3EDE99DC3E90F49737F124BBA6BA9BC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control.stdout.txt"
+  },
+  {
+    "bytes": 291,
+    "sha256": "2EE433D5D8C7C95736E2B5379032F1D38F5EB1703662B27D929CC365B2F4C06F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/build.cmd"
+  },
+  {
+    "bytes": 66,
+    "sha256": "93E46DC7475245672C6E297E4A1EB68701149AB08FFF4E45B2F630D7B58AE8D7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/build.completion.json"
+  },
+  {
+    "bytes": 355,
+    "sha256": "0F7AD98CBC204CA09A982879298A0EE9B3869F70862A8218C1D9FD83E347CAAF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/build.stderr.txt"
+  },
+  {
+    "bytes": 23,
+    "sha256": "71AA391EC7D7E291B419A7F40FBA91919E14AC2394AB4E8B66ED126E267D70F6",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/build.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "CDCC87A8519ED7FB45658C35F7394D921882704F954AAF25248151A875D2CF6A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "CE9EF3263FABC0845FC6D2F9E7226DDAD8A10A5F1DB0508FE6540F0CC39E5787",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative.completion.json"
+  },
+  {
+    "bytes": 815,
+    "sha256": "CDBB863062766F9E033E5BE262F5656A1DAC4197F53454F42461507CB1249C40",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "F77AA8FE5280F2505AFDEBF605FCC2E38E80CE50B6AC309457DBB6D35C817186",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline.completion.json"
+  },
+  {
+    "bytes": 791,
+    "sha256": "094A339142099BC8F651C3FF053022D587AD82075378AB7236971F4CDB7A6DC4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "8D5E4B7AE2A19D35EDD87D7E61225F53313538BB4050D4CC5FD18389A0DA3125",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative.completion.json"
+  },
+  {
+    "bytes": 833,
+    "sha256": "A7E37C50078AA702C42868DC230A4F810A9713D6EDFE8FE7E04199378FCED2C3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "9BEE79217459DEA66218E88EF37FDC49D152F2CABFC7FCBF2C989F073936467E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate.completion.json"
+  },
+  {
+    "bytes": 808,
+    "sha256": "5ED71ECD5FB34F10F73A432483C68D1F83FD6DCFB4E9D3D0DDBB303FD1467B7A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "60EC2D116BEA9A19E68DB6389027592869324EDD89CCA4D303EC677234A9F334",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/image.completion.json"
+  },
+  {
+    "bytes": 321,
+    "sha256": "FCE1C93E34C1CB9A5838A960389FDCB04688821A8B86A3BD619C9D8641F08F2A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/image.stderr.txt"
+  },
+  {
+    "bytes": 75,
+    "sha256": "47229DFD7B04FBE1CADCE87C63C7E372353D543DA46E8B49B5BB172BF72538C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "6CE32501F2376B62770A00134D586BF62469E11470A586F0B3FEEFC86A43F4DB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental-after.completion.json"
+  },
+  {
+    "bytes": 417,
+    "sha256": "C5904AF964D1F4F6979999D8A2B1FF24DF77E80294ABDFFF8C6ED39B5FCEE0B3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental-after.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental-after.stderr.txt"
+  },
+  {
+    "bytes": 23,
+    "sha256": "71AA391EC7D7E291B419A7F40FBA91919E14AC2394AB4E8B66ED126E267D70F6",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental-after.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "9DEFC8E9E4612B4E9A9D595101A32FBAEE2E67A17773FAC22F5B41D2C9CF9BE0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental.completion.json"
+  },
+  {
+    "bytes": 417,
+    "sha256": "EB3AC78DD3178E32AC9D1BDD57424A3496D0080BCC2652FA22AF39CFB5F1C7D8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental.stderr.txt"
+  },
+  {
+    "bytes": 23,
+    "sha256": "71AA391EC7D7E291B419A7F40FBA91919E14AC2394AB4E8B66ED126E267D70F6",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/incremental.stdout.txt"
+  },
+  {
+    "bytes": 811,
+    "sha256": "EF0BAC32FEADB65AA95BAF414B15BE1439A74A4E2ACC612B0ACD06EAB40FB37D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/native-inputs.csv"
+  },
+  {
+    "bytes": 66,
+    "sha256": "24C3A165CE5809712F80E7A11596CEF8078F3CF57B603AE7A6A6CA85FFF565C0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/pic.completion.json"
+  },
+  {
+    "bytes": 321,
+    "sha256": "DEEE0E0EF9B8176CE3C403DDDE302CC3DB7DEEA09634B1039017F2BEC3118FDC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/pic.process.json"
+  },
+  {
+    "bytes": 396,
+    "sha256": "2569BADC64C5F957160639D32EA0F986974C5D149899BB9879FBF5E2D098F670",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/pic.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/pic.stdout.txt"
+  },
+  {
+    "bytes": 1630,
+    "sha256": "D8FF7DDDE298DA0984143594EA2D1EF6AECE6AA5ABA22F98D2B16CC605FF891B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/preserved-production-inputs.csv"
+  },
+  {
+    "bytes": 365,
+    "sha256": "EBFC518429AEF1EDB2297B49354D7D460F98FBD1BC12DE740FB09D7AE5FFFDD9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/process.json"
+  },
+  {
+    "bytes": 4791,
+    "sha256": "A55907B720554D8CE7AD97A438C842946C08B6A8E17DD73F0BCBD0700D7A43AB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/stderr.txt"
+  },
+  {
+    "bytes": 101,
+    "sha256": "297CC1F09FF097AB501B80D58BF8ACA7F86DFEFAE750105F8D986F6756D68B49",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "3582DD18FBCFBA5ACF7D1E3CDB21AF8A08413A7A2A300A0FAD66FB4147E68E03",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative.completion.json"
+  },
+  {
+    "bytes": 822,
+    "sha256": "971F60B59D95F8AF4E04C2C6AD8FCEB1202D59A5E76624253E95A250BB0CD52C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "275ACFD40B6D8EAC248411A169239F50CF28A3F9B278BFD8DF48E0D869DEEA32",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline.completion.json"
+  },
+  {
+    "bytes": 797,
+    "sha256": "D5A22E9D1B2387C76661297A1D478D456B171D97771421017852446635A9486C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "80E96166B927B56BD58B1314997F18EE207CC1EBA1EE7136A37304E013C44D1D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative.completion.json"
+  },
+  {
+    "bytes": 839,
+    "sha256": "6A2F44ADFA0D2D2E52DD06E67F84962A0F5B1F96FCEC480D02CCADD4DC46A58B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "FEA644D4C6B69683ED1C93A107CED26AF1AD0162736B1457CEA6F9B2E9E4B576",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate.completion.json"
+  },
+  {
+    "bytes": 814,
+    "sha256": "551ACCCFD20504D3EA6E661B1D3118E54F37D7591AE0E6FDB01EC99F438C0C89",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/assemble.exit.txt"
+  },
+  {
+    "bytes": 462,
+    "sha256": "C9697A247A926EA6B5C26EBA155CD88A80F95FF566A78E1F4D90C495E273B454",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/exit.txt"
+  },
+  {
+    "bytes": 1013,
+    "sha256": "5F46661525ABD432781CCAD8F868FB90B6F859E9A787D0559986D1D6A8BFAFDB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.exit.txt"
+  },
+  {
+    "bytes": 383,
+    "sha256": "B4CBF3D2E52FE7F2306AEF052FE662D0891ABACC632B8DAFA33EBC2BDEAC3B4B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.process.json"
+  },
+  {
+    "bytes": 702,
+    "sha256": "45D616E13AE22A4F73CCFEC0F610EA7FA10E429B4D210A547037D86CA325E93F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "B4B33A0CF7B899A13F9B8339D40FD84110C7D9EA8AB2D216F24728FE3B677300",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 107,
+    "sha256": "99C61BD7D56413E8877DC5095C955372E6F4AF5F17973886AE135C083456B4F5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.txt.console.txt"
+  },
+  {
+    "bytes": 221,
+    "sha256": "0A9F00DF3E296CCC392D5D6EB3778CA22F5DF2ABA6D953397664DF7FCB184373",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-build.exit.txt"
+  },
+  {
+    "bytes": 618,
+    "sha256": "BD8C2FA05BC5E80BECF9E6FEE603544B5DBE6B63E1681663CE71CF01FF98C699",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 259,
+    "sha256": "72395AE4EDF7185B1CD2530E9ED995A36304F697B711EF1B222609915ED78DBA",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "51A90C135F8F25476C3F7D581BD22D3BAB46F5986BE50B7D10F2E8DA84B87BD3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/profile-inputs.csv"
+  },
+  {
+    "bytes": 114,
+    "sha256": "83F382DBD5A51FFCFBDF0764E3234A5D1BD67326B0F5AEE41A3B3274DC16A32E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "0ED40E45CE898BFE50EF9BE831FF23A68FEDAEB3511CD08F0A8C002BDB034BAB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "6DA06F56DD62DCFF612D16BC8848ED4E41569E775DB1260223E787ECF493E912",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "592279E2EDC34C8BF1EB49A7E29B0D74B18DCEB111869B20A6931854E550D264",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 501,
+    "sha256": "C67498F51121ED4FCB2ED9B02B0A170921293C4257E1F53D639C7EC1346FE731",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/exit.txt"
+  },
+  {
+    "bytes": 1022,
+    "sha256": "33E4A4B9A3549C6F9D2F9ACDDF00AFD157667B9ADB3B56A908AADAF892F1E9F9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 392,
+    "sha256": "8706F063B70981A905DFE92F187DDCF28F84F3E4F2D4AE1378CC0A2A4B7525C9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.process.json"
+  },
+  {
+    "bytes": 704,
+    "sha256": "857D5EBC8FA4C10CBF6FD2A5453931D9679BCC9E0A152457895FA4F4D693BE6E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "A48CE0851FD08BF206A4802569150B984E47385FBAD398DD49CC76C97B0276AD",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 71,
+    "sha256": "435DB35E2EAB5650E55865BEAFD69D123D41088BCDF371ECC29E0629B0B9ECED",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "EA913F4FEBA3FDF5ECF29643F2A08F43EECA1859C747C9E68552BCBC69793743",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 636,
+    "sha256": "9BA87FE4EE9AFFC543EDF0781A86BFF354FDEDE6F585D8601E4A2E0EE51F8B57",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 268,
+    "sha256": "5517FC107EF821F8B8AD05DE0C66B5D00A45D6B37BEC047F0B2708A0076CDA38",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "1C3D371958FF7AFF94F78FA9311C7C33BF03E27776DC50715B5039E10EECB882",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 92,
+    "sha256": "2C1407D979884AB9B35425CF5C9F93ED37F2D84F97243325A35C13CD160CCA82",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "8D9C0CBF38B7954CCD0397CEC91F9E5E688AC3596C2464462D87CAD2C936139D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "20625F34BEE764563409BC0BF028C17A99FE93D5CD36F82171200A919E3AF74E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 170,
+    "sha256": "5B6A68ADCB7F3B425FD11075C1CABEB85AD5C8CB6CE111957A8E6325D19C697D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/bios-control-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/assemble.exit.txt"
+  },
+  {
+    "bytes": 493,
+    "sha256": "AA2B7E6BC764B52220111362B5871E6BCB4D4F87D4275DFB73592F9044F863AB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/exit.txt"
+  },
+  {
+    "bytes": 1015,
+    "sha256": "E7B10F01558F5BF83299C44C8AB52B95BC6DE43361CD5CEEA0CB94F6D046B320",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.exit.txt"
+  },
+  {
+    "bytes": 385,
+    "sha256": "7DF37273FB5DA8FB03F039CE7F6E3ED4A5FC159822F3D5BF5F6FD8EBA5C01365",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "D553248FEC3AFAE6637374964D64C667D7B63A988543CD66F5BBEF8C5CB89861",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "88815941CE42F5DCF79E2777A8CB3CAB25486E9F69C996035E02CE663148A2B9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 68,
+    "sha256": "53B7569D2A9B831712352F5DF4315B10EF88FD9D61D19C640C860F58243C334D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "F7FBC59BAE91DA914DC8835B68D56D3CF98556ECDB53D1CF717B8880F8E113FE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-build.exit.txt"
+  },
+  {
+    "bytes": 622,
+    "sha256": "30DDBC3AF61E1710DF265291B62A29634CF2BFF3A02153581A89694067FBCAB8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 260,
+    "sha256": "41FA22DE60B393B051C66871D55D224E178916AD2BAAA7D7F67691055BBFF3E8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "DE0CF63D941D798D374CAE7279124644BDAE2435139E02B98ED589B03448EA7C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/profile-inputs.csv"
+  },
+  {
+    "bytes": 110,
+    "sha256": "711239FEFFA2D6BBCDC330384EDBC7E4BC67A7AA2C762BD5100CC261D19CDBD5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "3006D203AC50EDACF95398F252A9B6E8C997672EFB1E0EB164FCE085890CB8FD",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "CD9A83BF6BB47BBB47C09092E72A207571C14308C034BBFD7B1151BEF7231FD0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "7B76B0FD5F42B7C202888AB02CADE09B86A912A7718CFD54A06F09CB46981C7F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 532,
+    "sha256": "40510B484CBD0CDB5E4352E345B79EC349725E6376C88810E66E76879A639034",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/exit.txt"
+  },
+  {
+    "bytes": 1024,
+    "sha256": "E04D6E0F60FB2EA0DC66210AD4A22FED7392D195811575E091DED701A718C7BD",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 394,
+    "sha256": "4DF54910014FAEDAF6D5027813EE0719BC4A544BF134E66F293F37A7AE42D4B7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.process.json"
+  },
+  {
+    "bytes": 704,
+    "sha256": "7C0A78E5BA1FE76719E283CE1CD333B2063D0818081910714C4D4AF002073C1F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "0329F390EB3A99B0A8947165E1DABCB59BC34E8724723E0FB87AA29436C01A66",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 67,
+    "sha256": "950151F84B612BA617728CDA7357B08C86F53DB0E2E83EFE046520D5039E7EF5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "8338F2F676C38B0C49D64D568F7CD657A929729D6A7FA2A2717AA4D98D1E6852",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 639,
+    "sha256": "F52C749E6B26FEA1FFA26343F6B43311F17E7FD4F47FDB329E71634CE28D2602",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 270,
+    "sha256": "0FA6313FCF83899AB02A7A067D4F6BAF9FB3E1E52826EB6FBE92AB5BBFFBF1F8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "32B63C6A87F0F866854E98081C3D2FC530FB0C20170344C604D1DB791D76557F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 88,
+    "sha256": "3EDCD62A11A92117C5D12840048C2A6A25F913F9AD21C58127F1ADAD5BD297A3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/result.txt"
+  },
+  {
+    "bytes": 333,
+    "sha256": "7660AC47AAB6F50E2C8B15F1667E0094539B88DBBF739F18A59D3DF9DCBDE8CE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "B680B4932CD2887239C199B3CA36E33F4F81CF4ECFC5159E0DB9EB31C10927D5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "358E446072717B23E606A3F28473229F1E2C5C6B9D05A140AB69C5D6CF3DCDFF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-baseline-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/assemble.exit.txt"
+  },
+  {
+    "bytes": 494,
+    "sha256": "661B35BE2EF6E8C33D058CC08C292E5A5807505FA7E195461C12012DCF166114",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/exit.txt"
+  },
+  {
+    "bytes": 1016,
+    "sha256": "AE57A2E12829D5E44F9DC7F51DD044A0202615E5E2088F8905EF5233497A0595",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.exit.txt"
+  },
+  {
+    "bytes": 386,
+    "sha256": "1697E98B0E3B040DBD73756104002B33F03284F08DC0D4A222E8454CDB9E0528",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.process.json"
+  },
+  {
+    "bytes": 704,
+    "sha256": "44581A0DFDF6ABC2E7045CC02419EAD0B048BB7917885C51FFEEC675333CC48E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "3302593257E4455D2FECDA279EA208BD901127C380F9EB000B1AD9309F7981BE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 68,
+    "sha256": "53B7569D2A9B831712352F5DF4315B10EF88FD9D61D19C640C860F58243C334D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "69017790E1A9102F86011C640C74E57424FF39CFF1A8ADFA23718B410951B737",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-build.exit.txt"
+  },
+  {
+    "bytes": 623,
+    "sha256": "C746272AA2E2C3BDD691C715D8C49CBDB3151BFC6E03846F09EB46430E0ADFBF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 262,
+    "sha256": "B20E0841E3705AD91B8596F73EE37CDD652119D01F2E7C0BEF6FE36645274237",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "B5B3BFA202E3AA6E16D97DD1D7825930397F6DB7752A9B809CEABC68F5B01439",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/profile-inputs.csv"
+  },
+  {
+    "bytes": 110,
+    "sha256": "711239FEFFA2D6BBCDC330384EDBC7E4BC67A7AA2C762BD5100CC261D19CDBD5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "0FD659DE9282464B48F0B82CBA8DB54F01CA989137E4E1A556E47F27C60F5021",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "B5597FE67837B5DED7A77CB79FA0C5E0457EA824F5465E23B90D9440FCEFCB8C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "F5E5386D1CCBB820A3D5A5AFDE67E816726042CE1F204B95ADD7FC7D50975505",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 533,
+    "sha256": "9E6F9402FF63E1747AFF97442FF0BB29886E30C04312442ED1EC9AD3CAED1624",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/exit.txt"
+  },
+  {
+    "bytes": 1025,
+    "sha256": "0362C50710B82DD4A3DAA6C3BF56650E4C9ABA27917995840856348BE99988D5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 395,
+    "sha256": "67CF36D00FE209A878A415BBFF17E68F37FDF5F909BC704C0CE53A4480936879",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.process.json"
+  },
+  {
+    "bytes": 700,
+    "sha256": "875D04B632FD49899E6864AB00A05616F995DFDDF32D396656E0AE5B71A392C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "F696625293E9C1962FF3381895D5E6D541562048925371D2EC34C3EAB7E1BCFF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 67,
+    "sha256": "950151F84B612BA617728CDA7357B08C86F53DB0E2E83EFE046520D5039E7EF5",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 219,
+    "sha256": "CD056712CE78F9C16F4F8F899C1CF287E30B6C92DF21F8A5407C851C037CD157",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 642,
+    "sha256": "5FB673878A57F896E89A40631CA870EFC76C786763ED4E5F832C63DF8CB59AD8",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 271,
+    "sha256": "100F51A4EA0D9273C803F2BD90B8AA2000521FFB2A24AAB02F57C98AAD00EA8F",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "87B1F79B2794DB2BA0217F13644D196A56BCF9A9AEE234919DA426D4CE99F089",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 88,
+    "sha256": "3EDCD62A11A92117C5D12840048C2A6A25F913F9AD21C58127F1ADAD5BD297A3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "1BFB0405F64E6C973E48C5F0E9867A2A4A1609E850880EACE4B875B20DA1BDC6",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "B2FF8D21F1B59BD2C34E3C38AE57873EF2630CFBCE14CBBCC780C0C3B5BDF5AC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "C03619C955FA57C2282C554405E04929615948EF569DE84734AB6C890FD387D0",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/dummy-candidate-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/assemble.exit.txt"
+  },
+  {
+    "bytes": 463,
+    "sha256": "38E3087A394F340E7744D352D0E4EF247191E74396B6807E6D30316C8F061583",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/exit.txt"
+  },
+  {
+    "bytes": 1014,
+    "sha256": "40EBF343D35605B26F2A8A99E26D7C58495884ACE710016F3B6D6AB952DD7E7E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.exit.txt"
+  },
+  {
+    "bytes": 386,
+    "sha256": "4A31EC9E496DA78D0610FC32717525989138F4A91D235552A9EBE48460B15903",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "B668A1ABFEE676D000B5096F7F27A8A35E5E924DA7E223BA929FFA7B86B4A9CA",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "54B7A70B197A3C8F7ACF71BB54E66A5904C45D45427F052F10FC487D4EF53693",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 161,
+    "sha256": "C0019C52CF4B2C43B3E6A21060CA9073073C56ECD6777219954AD9C6DF199979",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "E83324BEEC8BA9FD75568F06C74BE83F2D2871CF82C6E9B093A8853B234E7CED",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-build.exit.txt"
+  },
+  {
+    "bytes": 624,
+    "sha256": "178C0E8D6DE84C0BFB3BE4DF85D2F3577381319B8E4BF6C9CC0D3893005C148D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 262,
+    "sha256": "B4207ACE7167949EE88A6031EF3685EE1969E06F63612F4396A1EF357FFE7CCF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "529DA226CD12F916D7FE1EA35F601CE22973E6E326F71AD2F5D550D99D5BAACB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/profile-inputs.csv"
+  },
+  {
+    "bytes": 115,
+    "sha256": "287F0C6CB34A076443C75ACF2DD831B5C01315CA59AACD75D9774E2B107B98EE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "9C1D760C893D0E8670CCEB16DEEE29367B2D4EBBDC1B62DD83462252FD3C62C9",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "1343351008C5AB6F25B7AD26F8BE1BD8DCE0907916725DC474140926C945B934",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/token-context.exit.txt"
+  },
+  {
+    "bytes": 170,
+    "sha256": "50BE8BD5C8D917940B4AE06D7C98EBC5F5747EE0B4F493B004E7B89072D948E7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 502,
+    "sha256": "12A9DDF321352B823D2E56E2605A358BD933C6945F892C9B54CFE1EE28BBE59B",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/exit.txt"
+  },
+  {
+    "bytes": 1023,
+    "sha256": "47D20220FDA9E56882BCB355C99AED7B88DB1E38989D8A596374A286D0BEBAD3",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 395,
+    "sha256": "716DC2A7B29812AE4853419D2992635019CAB13315010A4CAB8CF24B9E29A583",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "2B86D7D3CAFBC1A58B3C6F016252B2B99DD36D1B9ADE06D6E0F8B0FB99740E2A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "72EDB0437D85C68E7147A792D08949BB60F2446D8E439993244A6937A0F21839",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 58,
+    "sha256": "23BDF4DF7F5FD5EACC48592C7B0B6B6668177CC93E59F38005EC38EB6BD7818E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "12BD0BF6EE905F9F1D49989383E4A05118B8C66E2622A1F8B958957187AC16F1",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 641,
+    "sha256": "3AEDB17577B6F69C409A0EAB8352444A2EAD8469E44971CF1E43F38C314AC038",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 271,
+    "sha256": "8E035BB1F3943AC39EAE76E4C25D3320624246C7B2E982ED8FA8ADA8695F6E1D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "712263CB838234AF5D07A7400A9E6F44343D63DF36EB75D6715940FDB09087A7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 93,
+    "sha256": "1D28CF2041E8F303D184CE01DFF600D2C116EA060F9904696F6E874566C94ECC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "C331C23FF3483203B681C4CC0E1728DC4491DB7645A4A7824AE5E183DC57EA5D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "76C7547C454590AFF467995E855F973069A1A6107A8806775FE6810E1A17D962",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 170,
+    "sha256": "2D897E50EF1AA365C3AF0EBD4AD2EE02CE4756E49237CCA6D53A220089A9EE52",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-baseline-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/assemble.exit.txt"
+  },
+  {
+    "bytes": 464,
+    "sha256": "0FF4E6C6FCEBF82A41C5EC06235D27237BF2F95551A2D7703A89989516FF0A90",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/exit.txt"
+  },
+  {
+    "bytes": 1015,
+    "sha256": "342F4044AA168C7BA62F119D0CC6C71F6E5DEFC12F28B6EED340C00040B4065A",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.exit.txt"
+  },
+  {
+    "bytes": 387,
+    "sha256": "0C857F7ACEC98F37D4B9C4BAC5B6D84756D44208776FDBB448B373C2BE96996E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "0A836208ACAB7CEAF2EC5EB704560AE721B2DB8BF04A528D2EC120F66B2DB63C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "E446D48FB1DF46324CB854364230CEEF49EB99AA6FB9A9CC0AF0C53D1440894D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 161,
+    "sha256": "C0019C52CF4B2C43B3E6A21060CA9073073C56ECD6777219954AD9C6DF199979",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "6F785F95CDC92E6570C636C6E6D4EADB80502ABB379BBAD4B836CD123ECB4E7D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-build.exit.txt"
+  },
+  {
+    "bytes": 626,
+    "sha256": "102360F491FCC9BE81CD773C1F5BEA2D1B39CE4F8210BBD999BE0B6CF73320DF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 262,
+    "sha256": "4CE2BA465D2727FA679462F6ACD651C91421616E48D7397EE8C335475B7226B2",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "4045A01C440CE2B4DA330EFA3A0B551D9AB4BD8EFF28B89017590EB3892FBBFF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/profile-inputs.csv"
+  },
+  {
+    "bytes": 115,
+    "sha256": "287F0C6CB34A076443C75ACF2DD831B5C01315CA59AACD75D9774E2B107B98EE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "6C5A7B7CD6E61C29FA7B0A68B4A92BC5AD4D3DD33D523ECC4C459E55E6A0D23E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "636D5E21B895E328CD4C57BDEB9E451E8C1911649C3D74C7A5D0E73207EFF7AE",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "AB22F92E650F5601C44DEE881A511ACA06610EE347F1E8404B3C3CED5B2E2D4C",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate/token-context.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/assemble.exit.txt"
+  },
+  {
+    "bytes": 502,
+    "sha256": "262BCBAF4A68735F48C17027E495E3457EDDFFBFCB2D73553FE6CE21EB4FD137",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/assemble.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/assemble.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/assemble.stdout.txt"
+  },
+  {
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/environment-shape.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/exit.txt"
+  },
+  {
+    "bytes": 1024,
+    "sha256": "6774171C51C50F6FD0B41DF450B969E351CF0F8BD0169D6C1F3BF61682A760D4",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.exit.txt"
+  },
+  {
+    "bytes": 396,
+    "sha256": "B909BC45D4D984D193649F7349ED2A6AC4686962B91ADA3E8AD46AB1741E8DAF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.process.json"
+  },
+  {
+    "bytes": 705,
+    "sha256": "8B025CBA63D84B7F4241A9F6A997C8FF45E527B073FCC23BAF09D827E4998061",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.txt"
+  },
+  {
+    "bytes": 64,
+    "sha256": "0639205CCB9630A4F98EEF86F7B3C4D86A18070C95931E47247155A56598CA81",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.txt.command-line.txt"
+  },
+  {
+    "bytes": 58,
+    "sha256": "23BDF4DF7F5FD5EACC48592C7B0B6B6668177CC93E59F38005EC38EB6BD7818E",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.txt.console.txt"
+  },
+  {
+    "bytes": 223,
+    "sha256": "5DD7C9A6BF8739E62C00E79855DF35F40F41A7C855C99672D1577E5A3528B82D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/observer.txt.initial-console.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-build.exit.txt"
+  },
+  {
+    "bytes": 643,
+    "sha256": "05D6E36778D806AA76D1E12A8F337560BFEBABAD844E1036CDD9B2646C650355",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-build.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-build.stderr.txt"
+  },
+  {
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-build.stdout.txt"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-profile.exit.txt"
+  },
+  {
+    "bytes": 272,
+    "sha256": "5AD437029B3BD585013636258FF6E9B608DD2A8934DF5EB3D9281ACDB7E036CA",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-profile.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-profile.stderr.txt"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/pif-profile.stdout.txt"
+  },
+  {
+    "bytes": 738,
+    "sha256": "934FA592132D7EDB82CA478424763CD2DA58FC48D0B5C83871EA61BAFA81B8B7",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/profile-inputs.csv"
+  },
+  {
+    "bytes": 93,
+    "sha256": "1D28CF2041E8F303D184CE01DFF600D2C116EA060F9904696F6E874566C94ECC",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/result.txt"
+  },
+  {
+    "bytes": 334,
+    "sha256": "C1AF2122C370333B95016F6786DFE8194268C373D6AA02E8C8611ED97392C87D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/runner-context.json"
+  },
+  {
+    "bytes": 1357,
+    "sha256": "CBB6D833E795F6EB15C2369A21F128EDF33A08EB42C55090D1617B8B4420C36D",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/runtime-inputs.csv"
+  },
+  {
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/token-context.exit.txt"
+  },
+  {
+    "bytes": 171,
+    "sha256": "7A1289745B63B13C30CC92EB66C6B18993EB0C43218D0DD96C0038083762E0CB",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/token-context.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/token-context.stderr.txt"
+  },
+  {
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF",
+    "path": "artifacts/mvdm-audit/system-runs/system-integration-r5/system-candidate-negative/token-context.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "BC384356E653D6E05ED77509DBF6F9F7B6B908A985679240BA9D63D1CA68708E",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/completion.json"
+  },
+  {
+    "bytes": 66,
+    "sha256": "DB323D2448E3CD958577194D8454C0C915118B2EE45BE8C87CB2EB893DE6533B",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/image.completion.json"
+  },
+  {
+    "bytes": 269,
+    "sha256": "DA49FA36E86C67BB1413998213BE6D42A685B3798C08D32223D2B72F6E15C790",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/image.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/image.stderr.txt"
+  },
+  {
+    "bytes": 75,
+    "sha256": "47229DFD7B04FBE1CADCE87C63C7E372353D543DA46E8B49B5BB172BF72538C4",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/image.stdout.txt"
+  },
+  {
+    "bytes": 66,
+    "sha256": "9ACADBE3F31AD36B35CAC756010A54A773188EEB86C9A57E83D4AFB62D736DF5",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/merge.completion.json"
+  },
+  {
+    "bytes": 272,
+    "sha256": "9530E83686699EA3F814809B4568A94E80DB7D76ED78E6618A381F43AE92445F",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/merge.process.json"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/merge.stderr.txt"
+  },
+  {
+    "bytes": 383,
+    "sha256": "89EBE5A0D35B64903249942D775016D262E3EE129D4ACCF62768B7BB9B833EEA",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/merge.stdout.txt"
+  },
+  {
+    "bytes": 361,
+    "sha256": "8E64D266F9F7EE57214955AF08B377CB3B954C4E98F1CB453312FFEBF5CABB17",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/process.json"
+  },
+  {
+    "bytes": 1136,
+    "sha256": "E5D32F506A2DAFC426D941902D7D95603FB6C2351384DF5531BA64549B965FC5",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/run.ps1"
+  },
+  {
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/stderr.txt"
+  },
+  {
+    "bytes": 458,
+    "sha256": "5EB19FBB918CB3702ADC3E2E7571E051F9056C7563E3CFD077BE7DD5D2C65C6B",
+    "path": "artifacts/mvdm-audit/system-runs/system-role-final/stdout.txt"
+  }
+]

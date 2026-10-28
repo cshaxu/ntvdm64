@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "eb218c706",
+  "candidate_count": 8,
+  "source_tables": [
+    {
+      "path": "system-image-observations.json",
+      "sha256": "A3E3B10ADAB66D8232D7C8A5FA8128B798986CD072F38415755372DEA765D342"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "One complete no-state leaf, five bounded selected integrations and two original provider-file alternatives; not complete device acceptance"
+}

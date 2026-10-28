@@ -1,0 +1,6 @@
+Get-FileHash: O:\repos.hobby\ntvdm64\build\t473-s10\system-integration-r3\run.ps1:18
+Line |
+  18 |  . et-FileHash "$worker/original-softpc-system.lib","$worker/original-so .
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Cannot convert 'System.Object[]' to the type 'System.IO.Stream' required by parameter 'InputStream'. Specified
+     | method is not supported.

@@ -1,0 +1,7 @@
+PASS PIC reset retires pending and in-service master ownership
+PASS PIC reset retains controller-local cascade ownership
+PASS PIC reset distinguishes callback-requeued ownership
+PASS PIC automatic EOI leaves no stale reset ownership
+PASS actual RTC reset cancellation and periodic requeue
+PASS actual mouse reset cancellation flushes without requeue
+PIC_RESET_EOI assertions=24 failures=0

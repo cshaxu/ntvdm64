@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\build\t473-s10\system-integration-r2\run.ps1:18
+Line |
+  18 |  . ork to do'){throw 'Fixture cache requires build; do not run a stale n .
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Fixture cache requires build; do not run a stale native fixture

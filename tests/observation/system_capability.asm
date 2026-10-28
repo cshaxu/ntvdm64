@@ -29,7 +29,11 @@ start:
     out 70h, al
     in al, 71h
     test al, 80h
+%ifdef CPU_PROBE_NEGATIVE_ORACLE
+    jnz fail_cmos                 ; deliberately wrong valid-RAM expectation
+%else
     jz fail_cmos
+%endif
 
     ; Exercise the selected original RTC periodic queue: preserve register B,
     ; enable only PIE, wait under ordinary guest execution, then acknowledge
@@ -37,6 +41,15 @@ start:
     ; real periodic event instead of merely exposing CMOS storage.
     ; Re-publish the current rate through the original REG_A write path.
     ; `rtc_period_mSeconds` is derived there rather than from CMOS storage.
+    ; Hold IRQ8 while observing register C so the BIOS cannot consume the
+    ; periodic flag first. This tests event publication, not BOP70 delivery.
+    in al, 0a1h
+    mov [slave_mask], al
+    or al, 1
+    out 0a1h, al
+    mov al, 0ch
+    out 70h, al
+    in al, 71h                    ; discard any older cause before this test
     mov al, 0ah
     out 70h, al
     in al, 71h
@@ -62,6 +75,8 @@ start:
     out 70h, al
     mov al, [cmos_b]
     out 71h, al
+    mov al, [slave_mask]
+    out 0a1h, al
     mov al, [cmos_c]
     test al, 40h
     jz fail_rtc_periodic
@@ -119,7 +134,8 @@ pic_mask db 0
 dma_status db 0
 cmos_b db 0
 cmos_c db 0
-success db 'S24_TIMER_OK S24_CMOS_OK S24_RTC_PERIODIC_OK S24_PIC_OK S24_DMA_PORT_OK S24_ROM_READ_OK S24_SYSTEM_OK$'
+slave_mask db 0
+success db 'S24_TIMER_OK S24_CMOS_OK',13,10,'S24_RTC_PERIODIC_OK S24_PIC_OK',13,10,'S24_DMA_PORT_OK S24_ROM_READ_OK',13,10,'S24_SYSTEM_OK',13,10,'$'
 timer_failure db 'S24_TIMER_FAIL$'
 cmos_failure db 'S24_CMOS_FAIL$'
 rtc_failure db 'S24_RTC_PERIODIC_FAIL$'

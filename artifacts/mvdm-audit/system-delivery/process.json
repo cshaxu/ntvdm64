@@ -1,0 +1,7 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\system-native-delivery-verification.ps1\"",
+  "started": "2026-10-28T01:41:49.2412750Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 8412,
+  "diagnostic_budget_seconds": 240
+}

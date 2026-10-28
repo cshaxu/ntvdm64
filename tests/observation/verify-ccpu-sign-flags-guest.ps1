@@ -6,7 +6,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe',
  [switch]$NegativeOracle,
- [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch')][string]$Workload='SignFlags')
+ [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch','DummyInt','SystemDevices')][string]$Workload='SignFlags')
 # Independent COM exercises selected CPU40 sign-extension and flag instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
@@ -31,9 +31,10 @@ try{
  if($label -ne 'S-1-16-8192'){throw "Expected desktop-capable medium token, got $label"}
  @{parent_pid=$PID;host_path=(Get-Process -Id $PID).Path;integrity_sid=$label;token_class='medium';script_sha256=(Get-FileHash $PSCommandPath).Hash;private_desktop=$true}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm'}[$Workload])
+ $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm';DummyInt='bios_dispatch_probe.asm';SystemDevices='system_capability.asm'}[$Workload])
  $line='-f bin "'+$probe+'" -o "'+$root+'/EMSPROBE.COM"'
  if($NegativeOracle){$line+=' -DCPU_PROBE_NEGATIVE_ORACLE=1'}
+ if($Workload -eq 'DummyInt'){$line+=' -DCPU_PROBE_DUMMY_INT_ONLY=1'}
  $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$assembler;command=$line;timeoutSeconds=30}|ConvertTo-Json|Set-Content "$root/assemble.process.json"
  if(!$p.WaitForExit(30000)){taskkill.exe /PID $p.Id /T /F;throw 'Owned assembler deadline'}
@@ -66,10 +67,23 @@ try{
  @{pid=$observerProcess.Id;start=$observerProcess.StartTime.ToUniversalTime().ToString('o');arguments=@($info.ArgumentList);timeoutSeconds=55}|ConvertTo-Json|Set-Content "$root/observer.process.json"
  if(!$observerProcess.WaitForExit(55000)){throw 'Owned CPU40 observer deadline'}
  $observerProcess.WaitForExit();$observerProcess.ExitCode|Set-Content "$root/observer.exit.txt"
- $report=Get-Content "$root/observer.txt" -Raw
- $console=Get-Content "$root/observer.txt.console.txt" -Raw
+ $report=[IO.File]::ReadAllText("$root/observer.txt")
+ $console=[IO.File]::ReadAllText("$root/observer.txt.console.txt")
+ if([string]::IsNullOrWhiteSpace($report) -or [string]::IsNullOrWhiteSpace($console)){throw 'CPU40 guest observation output is empty'}
  if($observerProcess.ExitCode -or $report -notmatch 'result=exited'){throw 'CPU40 guest observation did not complete'}
- if($Workload -eq 'BiosDispatch'){
+ if($Workload -eq 'SystemDevices'){
+  if($NegativeOracle){
+   if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'S24_CMOS_FAIL' -or $console -match 'S24_SYSTEM_OK'){throw 'Wrong CMOS oracle was not rejected after the timer check'}
+  }elseif($report -notmatch 'exit=0x00000000' -or @('S24_TIMER_OK','S24_CMOS_OK','S24_RTC_PERIODIC_OK','S24_PIC_OK','S24_DMA_PORT_OK','S24_ROM_READ_OK','S24_SYSTEM_OK').Where({$console -notmatch $_}).Count){
+   throw 'Original system-device guest witness did not complete'
+  }
+ }elseif($Workload -eq 'DummyInt'){
+  if($NegativeOracle){
+   if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'DUMMY INT FAIL phase=D' -or $console -match 'DUMMY INT PASS'){throw 'Wrong dummy-interrupt oracle was not rejected'}
+  }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'DUMMY INT PASS cases=16'){
+   throw 'Original dummy-interrupt guest witness did not complete'
+  }
+ }elseif($Workload -eq 'BiosDispatch'){
   if($NegativeOracle){
    if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'BIOS DISPATCH FAIL phase=C' -or $console -match 'BIOS DISPATCH PASS'){throw 'Deliberately wrong BIOS oracle was not rejected'}
   }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'BIOS DISPATCH PASS cases=836' -or $console -notmatch 'CONTROL768 ILLEGAL64 EMSBAD4'){

@@ -1,0 +1,1 @@
+O:\tmp\nad3/system32/run16.exe --wait O:\tmp\nad3\tests/E30.PIF

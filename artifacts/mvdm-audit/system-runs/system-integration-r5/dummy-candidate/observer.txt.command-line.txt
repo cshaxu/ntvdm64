@@ -1,0 +1,1 @@
+O:\tmp\n6fa/system32/run16.exe --wait O:\tmp\n6fa\tests/E30.PIF

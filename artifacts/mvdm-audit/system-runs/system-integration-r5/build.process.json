@@ -1,0 +1,8 @@
+{
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 26684,
+  "started": "2026-10-28T01:29:21.9861793Z",
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5/build.cmd\"\"",
+  "diagnostic_budget_seconds": 180,
+  "working_directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+}

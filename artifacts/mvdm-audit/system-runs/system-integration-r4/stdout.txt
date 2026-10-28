@@ -1,0 +1,1 @@
+PASS original system image/recipe, cached native PIC assertions and ten real guest/oracle contracts

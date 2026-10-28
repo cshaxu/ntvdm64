@@ -1,0 +1,14 @@
+{
+  "pid": 12940,
+  "arguments": [
+    "O:\\tmp\\neb6/system32/run16.exe",
+    "O:\\tmp\\neb6\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\system-integration-r5\\bios-control-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\neb6\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T01:31:25.3178283Z"
+}
