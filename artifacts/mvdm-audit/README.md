@@ -176,6 +176,9 @@ reopens 18 guest source and declaration decisions with host-only evidence.
 The [alternate-profile correction](classification-scope-correction-alt-profile-verification.json)
 reopens five nonempty providers whose full applicability is not determined by
 their nonselection in the currently observed configuration.
+The [r4 scope correction](classification-scope-correction-guest-r4-verification.json)
+reopens 52 further guest source/data decisions after deduplicating two
+independent scoped-evidence reviews and checking original bytes.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 The [retention estimate replay](nine-way/part-8/retention-replay-review.md)

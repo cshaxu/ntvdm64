@@ -1,0 +1,38 @@
+{
+  "files": [
+    {
+      "path": "artifacts\\mvdm-audit\\combined-initial-status.csv",
+      "sha256": "3b8e686c73d0a956cf67b61b9eb1c4aa3fd5ac73c42c49233c5494371bdc4dd5"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\frozen-file-reconciliation.csv",
+      "sha256": "f73ffd45dff44fca4ecefc49ef769beab5c085542cd04ffe4d6a7b5f942e3196"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-1\\other-guest-excluded-scope-evidence.json",
+      "sha256": "711925934efecc8082beb6ee9020ddf9351c9a0cc6fd8925ce9ef9530e780e7d"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-sample100.csv",
+      "sha256": "ead0b9cda164e16b9c3ffdd2184f6b3380c8d4ae59ae4cb95d2b31630ced0cba"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-sample101-300.csv",
+      "sha256": "0bddd3dae8562f409794031d66b881a9b8d8f3c268fe269a02f3f5f10861ddc6"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-uncovered-r2.csv",
+      "sha256": "abaf498ff467371418e9f61dcad74d70653abcf62769df2ee0b7c7831d726b40"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-uncovered-r3.csv",
+      "sha256": "b4304bf520a8e158afc81b3495dada2951db8ac914abb207648514314deee804"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\nine-way\\part-8\\guest-quality-r4-freeze.py",
+      "sha256": "96149f4ef239c6edf72a625889bf398086efb7224d30fbd1645796de7c192dee"
+    }
+  ],
+  "sample_sha256": "3d38fd11634269985221e0304751182f5c393e725c1a4407060654310d1100ad",
+  "count": 33
+}

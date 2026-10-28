@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "952d68c5a",
+  "reopened": 52,
+  "counts": {
+    "pending": 2083,
+    "excluded": 1799,
+    "partial": 749,
+    "full": 53
+  },
+  "scope": "Conservative correction of insufficient overall dispositions; no source, runtime or guest change",
+  "evidence_sha256": {
+    "artifacts\\mvdm-audit\\nine-way\\part-1\\other-guest-scoped-extra-evidence.json": "43C9A89AF1E73C50ED69B778356E8F0AD0EFE2E061C85F67DD67B593BCF512E5",
+    "artifacts\\mvdm-audit\\nine-way\\part-1\\zero-guest-scoped-extra-evidence.json": "0805E0AB5622DD3FE90F083862F4A72D886F3CA67AF72CAEFC3385F0B8871AD2",
+    "artifacts\\mvdm-audit\\nine-way\\part-8\\guest-quality-r4-observations.json": "A5B4ECCA494E8332B745606A39E2EF20D26840948749E310E4E07F0CE8E06314"
+  }
+}

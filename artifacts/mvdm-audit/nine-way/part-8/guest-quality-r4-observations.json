@@ -1,0 +1,596 @@
+[
+  {
+    "path": "dos/v86/doskrnl/dos/divmes.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "4635FF455355C3C152D361972B7A599C14D25E33EAE754F7EB983C75A8319F11",
+    "original_sha256": "4635FF455355C3C152D361972B7A599C14D25E33EAE754F7EB983C75A8319F11",
+    "original45_sha256": "4635FF455355C3C152D361972B7A599C14D25E33EAE754F7EB983C75A8319F11",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/dosmes.inc:72:include divmes.inc",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:86:              divmes.inc                /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/doskrnl/dos/MSDOS.CL1",
+    "frozen_status": "excluded",
+    "live_sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153",
+    "original_sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153",
+    "original45_sha256": "12B8032CD71B9026B0AA7F3CDDD98B896D5A84C091F9BB1597D4033262238153",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/divmes.inc:6:include msdos.cl1",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:25:msdos.cl1: msdos.skl /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:308:ntdos.bin: msdos.cl1 msdos.cl2 exepatch.obj /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:80:              msdos.cl1                 /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/doskrnl/dos/MSDOS.CL2",
+    "frozen_status": "excluded",
+    "live_sha256": "EB2759BC8C8DB4A665B6383EC98B53AFC98C67A41E9B8AAB309109504909711B",
+    "original_sha256": "EB2759BC8C8DB4A665B6383EC98B53AFC98C67A41E9B8AAB309109504909711B",
+    "original45_sha256": "EB2759BC8C8DB4A665B6383EC98B53AFC98C67A41E9B8AAB309109504909711B",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:28:msdos.cl2: msdos.skl /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:308:ntdos.bin: msdos.cl1 msdos.cl2 exepatch.obj /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:76:              msdos.cl2",
+      "src/mvdm/dos/v86/inc/lmstub.asm:831:include\tmsdos.cl2\t\t\t; XMMERRMSG"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/doskrnl/dos/MSDOS.CL3",
+    "frozen_status": "excluded",
+    "live_sha256": "E6312A30FA572B0ADA935D76C8C306856E6D4EEB561C2F67F9DEEAD57D97F475",
+    "original_sha256": "E6312A30FA572B0ADA935D76C8C306856E6D4EEB561C2F67F9DEEAD57D97F475",
+    "original45_sha256": "E6312A30FA572B0ADA935D76C8C306856E6D4EEB561C2F67F9DEEAD57D97F475",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/getset.asm:432:;hkn; NLS_YES, NLS_NO, NLS_yes2, NLS_no2 is defined in msdos.cl3 which is",
+      "src/mvdm/dos/v86/inc/yesno.asm:3:include msdos.cl3"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/doskrnl/dos/MSDOS.CL4",
+    "frozen_status": "excluded",
+    "live_sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9",
+    "original_sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9",
+    "original45_sha256": "6BB4F994E388DB32D50000EEC3064E09D6940F20FD408EB26605A03F05E625A9",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/divmes.inc:16:include msdos.cl4\t\t\t;M018"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/doskrnl/dos/msdos.skl",
+    "frozen_status": "excluded",
+    "live_sha256": "A5605F538CCE0C44D6EEE650A50CC82B991E4F5743D804E9ABE17E12C6E27A9A",
+    "original_sha256": "A5605F538CCE0C44D6EEE650A50CC82B991E4F5743D804E9ABE17E12C6E27A9A",
+    "original45_sha256": "A5605F538CCE0C44D6EEE650A50CC82B991E4F5743D804E9ABE17E12C6E27A9A",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/dos.tag:87:\t\t MSDOS.SKL \tdrive.",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:25:msdos.cl1: msdos.skl /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:28:msdos.cl2: msdos.skl /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/conio.h",
+    "frozen_status": "excluded",
+    "live_sha256": "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE",
+    "original_sha256": "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE",
+    "original45_sha256": "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/mem/mem.c:62:#include \"conio.h\"\t\t\t/* need for kbhit prototype */",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:10:#include \"conio.h\"\t\t\t/* need for kbhit prototype */",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:10:#include \"conio.h\"\t\t\t/* need for kbhit prototype */"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/copyrigh.h",
+    "frozen_status": "excluded",
+    "live_sha256": "0F4BDA1C3E6822EDCD68FE07CE47A8098EC68093E15B0F5029E03E8F4588FA57",
+    "original_sha256": "0F4BDA1C3E6822EDCD68FE07CE47A8098EC68093E15B0F5029E03E8F4588FA57",
+    "original45_sha256": "0F4BDA1C3E6822EDCD68FE07CE47A8098EC68093E15B0F5029E03E8F4588FA57",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/mem/makefile:51:                $(hinc)/copyrigh.h",
+      "src/mvdm/dos/v86/cmd/mem/makefile:58:                $(hinc)/copyrigh.h",
+      "src/mvdm/dos/v86/cmd/mem/makefile:65:                $(hinc)/copyrigh.h"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/ctype.h",
+    "frozen_status": "excluded",
+    "live_sha256": "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4",
+    "original_sha256": "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4",
+    "original45_sha256": "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:13:#include \"ctype.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:61:#include \"ctype.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:9:#include \"ctype.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:9:#include \"ctype.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:35:#include\t<ctype.h>",
+      "src/mvdm/dos/v86/cmd/setver/setver.c:62:#include <ctype.h>",
+      "src/mvdm/dos/v86/h/stdlib.h:10:*   place (ctype.h in the case of toupper/tolower) for other reasons.",
+      "src/mvdm/dos/v86/tools/src/buildidx/buildidx.c:22:#include <ctype.h>                     /* Req for isdigit, isalpha */",
+      "src/mvdm/dos/v86/tools/src/h2inc/h2inc.c:122:#include <ctype.h>",
+      "src/mvdm/dos/v86/tools/src/h2inc/h2inc.mak:14:h2inc.obj:\th2inc.c $(H286)/ctype.h $(H286)/io.h /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/direct.h",
+    "frozen_status": "excluded",
+    "live_sha256": "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D",
+    "original_sha256": "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D",
+    "original45_sha256": "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/setver/parse.c:38:#include\t<direct.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/dos.h",
+    "frozen_status": "excluded",
+    "live_sha256": "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E",
+    "original_sha256": "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E",
+    "original45_sha256": "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:9:#include \"dos.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:64:#include \"dos.h\"",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:11:#include \"dos.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memctrlc.c:20:#include <dos.h>",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:12:#include \"dos.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:12:#include \"dos.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:37:#include\t<dos.h>",
+      "src/mvdm/dos/v86/cmd/setver/setver.c:64:#include <dos.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/fcntl.h",
+    "frozen_status": "excluded",
+    "live_sha256": "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857",
+    "original_sha256": "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857",
+    "original45_sha256": "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/setver/setver.c:66:#include <fcntl.h>",
+      "src/mvdm/dos/v86/tools/src/stripdd/stripdd.c:66:#include\t<fcntl.h>",
+      "src/mvdm/dos/v86/tools/src/stripz/stripz.c:19:#include <fcntl.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/io.h",
+    "frozen_status": "excluded",
+    "live_sha256": "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9",
+    "original_sha256": "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9",
+    "original45_sha256": "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:62:#include \"conio.h\"\t\t\t/* need for kbhit prototype */",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:63:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:10:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memctrlc.c:18:#include <stdio.h>",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:10:#include \"conio.h\"\t\t\t/* need for kbhit prototype */",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:10:#include \"conio.h\"\t\t\t/* need for kbhit prototype */",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:33:#include\t<stdio.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/stdio.h",
+    "frozen_status": "excluded",
+    "live_sha256": "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434",
+    "original_sha256": "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434",
+    "original45_sha256": "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:63:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:10:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memctrlc.c:18:#include <stdio.h>",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:11:#include \"stdio.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:33:#include\t<stdio.h>",
+      "src/mvdm/dos/v86/cmd/setver/setver.c:60:#include <stdio.h>",
+      "src/mvdm/dos/v86/tools/src/buildidx/buildidx.c:17:#include <stdio.h>                     /* Req. for feof, fgets, printf, fputs */",
+      "src/mvdm/dos/v86/tools/src/getsize/getsize.c:16:#include<stdio.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/stdlib.h",
+    "frozen_status": "excluded",
+    "live_sha256": "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A",
+    "original_sha256": "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A",
+    "original45_sha256": "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:12:#include \"stdlib.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:66:#include \"stdlib.h\"",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:13:#include \"stdlib.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memctrlc.c:19:#include <stdlib.h>",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:14:#include \"stdlib.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:14:#include \"stdlib.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:34:#include\t<stdlib.h>",
+      "src/mvdm/dos/v86/cmd/setver/setver.c:61:#include <stdlib.h>",
+      "src/mvdm/dos/v86/tools/src/buildidx/buildidx.c:19:#include <stdlib.h>",
+      "src/mvdm/dos/v86/tools/src/h2inc/h2inc.c:124:#include <stdlib.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/string.h",
+    "frozen_status": "excluded",
+    "live_sha256": "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0",
+    "original_sha256": "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0",
+    "original45_sha256": "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/buildmsg.c:10:#include \"string.h\"",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:65:#include \"string.h\"",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:12:#include \"string.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:13:#include \"string.h\"",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:13:#include \"string.h\"",
+      "src/mvdm/dos/v86/cmd/setver/parse.c:36:#include\t<string.h>",
+      "src/mvdm/dos/v86/cmd/setver/setver.c:63:#include <string.h>",
+      "src/mvdm/dos/v86/tools/src/buildidx/buildidx.c:23:#include <string.h>                    /* Required for strcpy, strcat, */",
+      "src/mvdm/dos/v86/tools/src/getsize/getsize.c:18:#include<string.h>",
+      "src/mvdm/dos/v86/tools/src/h2inc/h2inc.c:121:#include <string.h>"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/version.h",
+    "frozen_status": "excluded",
+    "live_sha256": "0ACB18FC1A4DE9D457B89D1EEF3ED24366763CA7B2C88C6BC58E1B7A91D1A02C",
+    "original_sha256": "0ACB18FC1A4DE9D457B89D1EEF3ED24366763CA7B2C88C6BC58E1B7A91D1A02C",
+    "original45_sha256": "0ACB18FC1A4DE9D457B89D1EEF3ED24366763CA7B2C88C6BC58E1B7A91D1A02C",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/mem/makefile:50:                $(hinc)/version.h               /",
+      "src/mvdm/dos/v86/cmd/mem/makefile:57:                $(hinc)/version.h               /",
+      "src/mvdm/dos/v86/cmd/mem/makefile:64:                $(hinc)/version.h               /",
+      "src/mvdm/dos/v86/cmd/mem/mem.c:69:#include \"version.h\"\t\t\t/* MSKK02 07/18/89 */",
+      "src/mvdm/dos/v86/cmd/mem/membase.c:15:#include \"version.h\"",
+      "src/mvdm/dos/v86/cmd/mem/memex.c:16:#include \"version.h\"\t\t\t/* MSKK02 07/18/89 */",
+      "src/mvdm/dos/v86/cmd/mem/msgdef.h:13:#include \"version.h\"                                                    /*EGH*/",
+      "src/mvdm/dos/v86/cmd/mem/submsg.c:16:#include \"version.h\"\t\t\t/* MSKK02 07/18/89 */"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/h/versionc.h",
+    "frozen_status": "excluded",
+    "live_sha256": "6782153411F326006A8A8910CAFC406A48ED39EF9E69D766E076E324CD2DDA36",
+    "original_sha256": "6782153411F326006A8A8910CAFC406A48ED39EF9E69D766E076E324CD2DDA36",
+    "original45_sha256": "6782153411F326006A8A8910CAFC406A48ED39EF9E69D766E076E324CD2DDA36",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/mem/memex.c:19:#include \"versionc.h\""
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/bdsize.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "EAF5420A062D06B200EC7E80192C5C1C7CC8957363F863891B1AFAF988D6041D",
+    "original_sha256": "EAF5420A062D06B200EC7E80192C5C1C7CC8957363F863891B1AFAF988D6041D",
+    "original45_sha256": "EAF5420A062D06B200EC7E80192C5C1C7CC8957363F863891B1AFAF988D6041D",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/dos/makedos.cmd:3:out -f ../inc/bdsize.inc",
+      "src/mvdm/dos/v86/doskrnl/dos/makedos.cmd:6:in -f -c \"update size\" ../inc/bdsize.inc",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:250:\t$(inc)/dossym.inc $(inc)/bdsize.inc",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:70:\t      $(inc)/bdsize.inc\t\t/",
+      "src/mvdm/dos/v86/inc/origin.inc:50:; BDSIZE.INC contains the equates for BIODATASIZE, BIOCODESIZ and DOSDATASIZ.",
+      "src/mvdm/dos/v86/inc/origin.inc:54:; utility. The FORMAT of BDSIZE.INC should not be changed as getsize is ",
+      "src/mvdm/dos/v86/inc/origin.inc:69:include\tbdsize.inc\t\t; this sets the values:",
+      "src/mvdm/dos/v86/tools/src/getsize/getsize.c:152:\tif ( (fp1 = fopen(\"..//..//inc//bdsize.inc\", \"r\")) == NULL )",
+      "src/mvdm/dos/v86/tools/src/getsize/getsize.c:159:\t/* size from bdsize.inc. \t\t\t\t\t\t\t\t\t\t\t\t\t\t*/",
+      "src/mvdm/dos/v86/tools/src/getsize/getsize.c:185:\t/* One of the values has changed update bdsize.inc */"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/cmacros.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "E50DA5D68B05B2B83FE5A4D824BFCB178C0B74B92CC80CCD380D14BD8C69F739",
+    "original_sha256": "E50DA5D68B05B2B83FE5A4D824BFCB178C0B74B92CC80CCD380D14BD8C69F739",
+    "original45_sha256": "E50DA5D68B05B2B83FE5A4D824BFCB178C0B74B92CC80CCD380D14BD8C69F739",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/inc/version.inc:30:; Use the following switches to control cmacros.inc",
+      "src/mvdm/dos/v86/lib/xmm/makefile:31:              $(inc)/cmacros.inc",
+      "src/mvdm/dos/v86/lib/xmm/xmm.asm:17:include\tcmacros.inc"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/dirent.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+    "original_sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+    "original45_sha256": "D3199A48B1815444E04CF3E0E05B2A21168038F5C9440B267CCA67820E474DFE",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/makefile:39:               $(inc)/dirent.inc        /",
+      "src/mvdm/dos/v86/cmd/command/makefile:54:               $(inc)/dirent.inc        /",
+      "src/mvdm/dos/v86/cmd/command/makefile:70:               $(inc)/dirent.inc        /",
+      "src/mvdm/dos/v86/cmd/command/tdata.asm:73:\tINCLUDE dirent.inc\t\t\t\t;AN042;",
+      "src/mvdm/dos/v86/cmd/debug/makefile:39:              $(inc)/dirent.inc         /",
+      "src/mvdm/dos/v86/cmd/debug/makefile:58:              $(inc)/dirent.inc         /",
+      "src/mvdm/dos/v86/cmd/debug/makefile:77:              $(inc)/dirent.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:42:              $(inc)/dirent.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:61:              $(inc)/dirent.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:80:              $(inc)/dirent.inc         /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/dseg.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "5055923F232D4A5E9CD5B42D315DB6D1752B286C3F96E13C8E9BB9C89E21033C",
+    "original_sha256": "5055923F232D4A5E9CD5B42D315DB6D1752B286C3F96E13C8E9BB9C89E21033C",
+    "original45_sha256": "5055923F232D4A5E9CD5B42D315DB6D1752B286C3F96E13C8E9BB9C89E21033C",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/keyb/commsubs.asm:73:\tINCLUDE DSEG.INC",
+      "src/mvdm/dos/v86/cmd/keyb/keybcmd.asm:139:        INCLUDE DSEG.INC",
+      "src/mvdm/dos/v86/cmd/keyb/keybi9.asm:35:        INCLUDE DSEG.INC               ; System data segments",
+      "src/mvdm/dos/v86/cmd/keyb/keybi9c.asm:90:        INCLUDE DSEG.INC                ; System data segments",
+      "src/mvdm/dos/v86/cmd/keyb/makefile:44:              $(com)/dseg.inc     /",
+      "src/mvdm/dos/v86/dev/keyboard/makefile:38:\t      $(com)/dseg.inc /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/ea.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "A34D912019E1C78C040972C9EFB165898DBF9CD4296B0857B1493F9B9BEA274B",
+    "original_sha256": "A34D912019E1C78C040972C9EFB165898DBF9CD4296B0857B1493F9B9BEA274B",
+    "original45_sha256": "A34D912019E1C78C040972C9EFB165898DBF9CD4296B0857B1493F9B9BEA274B",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/makefile:285:               $(inc)/ea.inc",
+      "src/mvdm/dos/v86/cmd/command/makefile:355:               $(inc)/ea.inc",
+      "src/mvdm/dos/v86/cmd/command/makefile:484:               $(inc)/ea.inc",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:158:file.obj file.lst: file.asm $(inc)/EA.inc $(inc)/VERSIONA.INC /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:171:\t$(inc)/EA.inc $(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/bugtyp.inc /",
+      "src/mvdm/dos/v86/doskrnl/dos/makefile:264:\t$(inc)/EA.INC $(inc)/VERSIONA.INC $(inc)/arena.inc $(inc)/buffer.INC /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/intnat.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "E38D3C8A8B82F4D2B622A9BF276B087D2BB6E4E7FE33658354B06B33466EC970",
+    "original_sha256": "E38D3C8A8B82F4D2B622A9BF276B087D2BB6E4E7FE33658354B06B33466EC970",
+    "original45_sha256": "E38D3C8A8B82F4D2B622A9BF276B087D2BB6E4E7FE33658354B06B33466EC970",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/makefile:481:               $(inc)/intnat.inc        /",
+      "src/mvdm/dos/v86/cmd/command/tspc.asm:31:\tinclude intnat.inc",
+      "src/mvdm/dos/v86/cmd/debug/makefile:45:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/debug/makefile:64:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/debug/makefile:83:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/edlin.asm:105:include intnat.inc",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:48:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:67:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:86:              $(inc)/intnat.inc         /",
+      "src/mvdm/dos/v86/cmd/exe2bin/makefile:53:              $(inc)/intnat.inc         /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/oemnum.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "7FAC71D482C726F5BB68B9C4571176A7947451D616AE699D14575D8281CBFAA7",
+    "original_sha256": "7FAC71D482C726F5BB68B9C4571176A7947451D616AE699D14575D8281CBFAA7",
+    "original45_sha256": "7FAC71D482C726F5BB68B9C4571176A7947451D616AE699D14575D8281CBFAA7",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/struc.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "9D1EBE08ECC092AD11C67F1A816F6ECD6B2C6D120CFAFF5497801A53DC8308D3",
+    "original_sha256": "9D1EBE08ECC092AD11C67F1A816F6ECD6B2C6D120CFAFF5497801A53DC8308D3",
+    "original45_sha256": "9D1EBE08ECC092AD11C67F1A816F6ECD6B2C6D120CFAFF5497801A53DC8308D3",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/graphics/grbwprt.asm:117:INCLUDE STRUC.INC\t\t\t;\t\t\t\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grbwprt.asm:86:;;\t STRUC.INC    - Macros for using structured assembly language\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grcolprt.asm:47:;;\t STRUC.INC    - Macros for using structured assembly language\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grcolprt.asm:79:INCLUDE STRUC.INC\t\t\t;\t\t\t\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grctrl.asm:110:INCLUDE STRUC.INC\t\t\t\t\t\t\t\t",
+      "src/mvdm/dos/v86/cmd/graphics/grinst.asm:101:\tINCLUDE STRUC.INC\t       ;; Include macros - Structured Assembler ",
+      "src/mvdm/dos/v86/cmd/graphics/grinst.asm:74:;;\t STRUC.INC    - Macros for using structured assembly language\t\t",
+      "src/mvdm/dos/v86/cmd/graphics/grint2fh.asm:65:INCLUDE STRUC.INC\t\t\t\t\t\t\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grload.asm:75:\tINCLUDE STRUC.INC\t       ;;\t\t\t\t\t;AN000;",
+      "src/mvdm/dos/v86/cmd/graphics/grload2.asm:154:\tINCLUDE STRUC.INC\t       ;;\t\t\t\t\t;AN000;"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/inc/umb.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "DC03BE21A15F2F3E319C5E10FB7C4EC9BB8FF426B7E8C60BAA9F4EC77187D18D",
+    "original_sha256": "DC03BE21A15F2F3E319C5E10FB7C4EC9BB8FF426B7E8C60BAA9F4EC77187D18D",
+    "original45_sha256": "DC03BE21A15F2F3E319C5E10FB7C4EC9BB8FF426B7E8C60BAA9F4EC77187D18D",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/doskrnl/bios/sysconf.asm:33:\tinclude\tumb.inc"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/make.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+    "original_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+    "original45_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/append/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/command/makefile:7:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/debug/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/edlin/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/exe2bin/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/fastopen/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/graphics/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/keyb/makefile:11:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/loadfix/makefile:10:include ../../make.inc",
+      "src/mvdm/dos/v86/cmd/mem/makefile:11:include ../../make.inc"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/messages/comimsg.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "C006BBCFC0DCFBABDED1648F8F0EFA1F769CABF9CEBCF1CEB8940AE54027C644",
+    "original_sha256": "C006BBCFC0DCFBABDED1648F8F0EFA1F769CABF9CEBCF1CEB8940AE54027C644",
+    "original45_sha256": "C006BBCFC0DCFBABDED1648F8F0EFA1F769CABF9CEBCF1CEB8940AE54027C644",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/makefile:504:\t       $(msg)/comimsg.inc",
+      "src/mvdm/dos/v86/cmd/command/uinit.asm:320:\tinclude\tcomimsg.inc\t\t;M00"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/messages/comrmsg.inc",
+    "frozen_status": "excluded",
+    "live_sha256": "711E8B6E73FCC7C2CB62C47ECA75730BC8779A824CC5B9039BFC4692322435E2",
+    "original_sha256": "711E8B6E73FCC7C2CB62C47ECA75730BC8779A824CC5B9039BFC4692322435E2",
+    "original45_sha256": "711E8B6E73FCC7C2CB62C47ECA75730BC8779A824CC5B9039BFC4692322435E2",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "guest declaration/message/build input; source role alone does not exclude the guest capability or all profiles",
+    "references": [
+      "src/mvdm/dos/v86/cmd/command/makefile:193:\t       $(msg)/comrmsg.inc",
+      "src/mvdm/dos/v86/cmd/command/rdata.asm:793:\tinclude\tcomrmsg.inc\t;M00"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/tools/src/h2inc/h2inc.c",
+    "frozen_status": "excluded",
+    "live_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+    "original_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+    "original45_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "build-tool source; selected historical recipe does not prove deployed tool provenance or all configuration scope",
+    "references": [
+      "src/mvdm/dos/v86/tools/src/h2inc/h2inc.mak:14:h2inc.obj:\th2inc.c $(H286)/ctype.h $(H286)/io.h /"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/tools/src/stripdd/stripdd.c",
+    "frozen_status": "excluded",
+    "live_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+    "original_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+    "original45_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "build-tool source; selected historical recipe does not prove deployed tool provenance or all configuration scope",
+    "references": [
+      "src/mvdm/dos/v86/tools/src/stripdd/sources:9:SOURCES=stripdd.c"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  },
+  {
+    "path": "dos/v86/tools/src/stripz/stripz.c",
+    "frozen_status": "excluded",
+    "live_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+    "original_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+    "original45_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+    "live_frozen_match": true,
+    "actual_diff": false,
+    "role": "build-tool source; selected historical recipe does not prove deployed tool provenance or all configuration scope",
+    "references": [
+      "src/mvdm/dos/v86/tools/src/stripz/sources:9:SOURCES=stripz.c"
+    ],
+    "suggestion": "pending candidate; verify capability applicability and alternative provider before overall exclusion"
+  }
+]

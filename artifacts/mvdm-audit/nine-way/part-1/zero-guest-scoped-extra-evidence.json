@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "path": "dos/v86/h/direct.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; setver/parse.c:38 and setver/setver.c:66 include direct.h/fcntl.h; setver/makefile:12 ../../make.inc, :51-55 guest setver.exe link16; make.inc:51-54 cl16 and incc=-I. -I../../h resolve these exact headers after local search",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/h/fcntl.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; setver/parse.c:38 and setver/setver.c:66 include direct.h/fcntl.h; setver/makefile:12 ../../make.inc, :51-55 guest setver.exe link16; make.inc:51-54 cl16 and incc=-I. -I../../h resolve these exact headers after local search",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/h/stdio.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mem/mem.c:63 includes stdio.h; mem/makefile:10-12 includes ../../make.inc; make.inc:51-54 cl16, -I. -I../../h resolves this path, MEM.EXE link16 consumer",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/inc/cmacros.inc",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; dos/v86/lib/xmm/makefile:31 $(inc)/cmacros.inc object dependency; ../../make.inc inc=../../inc and MASM include path; historical XMM library guest input",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/inc/ea.inc",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; command/makefile:285,355 $(inc)/ea.inc dependencies; command/makefile:7 includes ../../make.inc defining inc=../../inc; guest COMMAND link16 target",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/messages/comimsg.inc",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; command/uinit.asm:320 and rdata.asm:793 INCLUDE; command/makefile:193,504 $(msg) paths; make.inc:8-13 default msg=../../messages (COUNTRY branch retained); COMMAND guest link16",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "dos/v86/messages/comrmsg.inc",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; command/uinit.asm:320 and rdata.asm:793 INCLUDE; command/makefile:193,504 $(msg) paths; make.inc:8-13 default msg=../../messages (COUNTRY branch retained); COMMAND guest link16",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/commdlg/_xlib.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg/font.c:25 -> privcomd.h:9-11 includes _xlib.h, isz.h, cderr.h; makefile:127-128 font.c -> cl16 font.obj, :138-155 commdlg.dll link16 + RC16; shared external API capability remains open",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/commdlg/cderr.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg/font.c:25 -> privcomd.h:9-11 includes _xlib.h, isz.h, cderr.h; makefile:127-128 font.c -> cl16 font.obj, :138-155 commdlg.dll link16 + RC16; shared external API capability remains open",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/commdlg/commdlg.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; dlgs.c:9 local commdlg.h; makefile:121-122 dlgs.c -> cl16 dlgs.obj, :138-155 commdlg.dll link16/RC16",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/commdlg/isz.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; commdlg/font.c:25 -> privcomd.h:9-11 includes _xlib.h, isz.h, cderr.h; makefile:127-128 font.c -> cl16 font.obj, :138-155 commdlg.dll link16 + RC16; shared external API capability remains open",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/drivers/comm/comdev.inc",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; drivers/comm/makefile:97-99 comdev.inc dependencies of ccom/ibmsetup; comm.rc:4 includes comm.rcv; makefile historical driver object/link16 and RC16 COMM.DRV recipe",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/mciole/mciole.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; mciole.c:72 local mciole.h; makefile:42-43 cl16, :55 mciole.obj in OBJ1 and historical MCIOLE16 DLL link16 target",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/mmsystem/rinc/mmsysver.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; drvproc.c:11 and init.c:16 include mmsysver.h; mmsystem/makefile retail/debug CLOPT includes -I./rinc; OBJ2 drvproc and OBJ1 init feed MMSYSTEM.DLL cl16/link16",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/ole/client/cmacs.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; client/dll.h:17 includes cmacs.h; makefile:141-142 dll.h dependencies, :46-53 LE_OBJ/PICT_OBJ -> OLECLI.DLL, :74-75 definition -> mkpublic/implib; original 16-bit build",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/ole/client/dll.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; client/dll.h:17 includes cmacs.h; makefile:141-142 dll.h dependencies, :46-53 LE_OBJ/PICT_OBJ -> OLECLI.DLL, :74-75 definition -> mkpublic/implib; original 16-bit build",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/test/shell/wowexec.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; test/shell/makefile:95 wowexfax.c/wowexec.h; :106-119 generates module declaration; :121-124 wowexec.exe RC16/LINK16 sequence, original Win16 test-shell role",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/toolhelp/toolpriv.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; toolhelp/makefile:121 global.c header prerequisite, :150-160 toolhelp.def LINK16 TOOLHELP.DLL, :167 original definition -> stripped.def public import generation",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/user/combcom.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; user/edit.h:21 -> combcom.h and comdev.c:32 -> comdev.h; user/makefile:104-113 CL16 rules, :268-270 USER.EXE LINK16/RC16; source-role exclusion only, modern USER owner remains separate",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/user/comdev.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; user/edit.h:21 -> combcom.h and comdev.c:32 -> comdev.h; user/makefile:104-113 CL16 rules, :268-270 USER.EXE LINK16/RC16; source-role exclusion only, modern USER owner remains separate",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    },
+    {
+      "path": "wow16/wfwnet/locals.h",
+      "finding": "Historical file role only; no guest capability exclusion or host behavior completion.",
+      "evidence": "guest-build-owner-reconciliation.csv; guest-build-owner-reconciliation.md; guest-declaration-resource-role-dispositions.csv; shard-0/guest-declaration-resource-owner-review.csv; wfwnet/makefile:101-114 explicit local locals.h dependencies for wfwnet/print/misc/to32; original cl16/link16 WFWNET.DRV target",
+      "remaining": "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained."
+    }
+  ],
+  "limits": "Explicit scoped guest declaration/source only; excludes make.inc build recipe and does not adjudicate all other items."
+}

@@ -1,0 +1,293 @@
+{
+  "rows": [
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/setver/setver.h",
+      "basis": [
+        "",
+        "historical-guest-build-source-file-only; src/mvdm/dos/v86/cmd/setver/makefile: original link16 guest target -> src/mvdm/dos/v86/cmd/setver/makefile: inline setver.obj -> src/mvdm/dos/v86/make.inc: source-to-object inference for setver.c -> src/mvdm/dos/v86/cmd/setver/setver.c:68: #include <setver.h> (original branch conditions retained)",
+        "",
+        "",
+        "Only this historical guest-build source role is excluded from host implementation inputs. Retain branch conditions, immutable guest/image provenance and DOS/COMMAND/utility host-boundary acceptance in S12-S17.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/h/copyrigh.h",
+      "basis": [
+        "historical-guest-build-source-file-only; dos/v86/cmd/mem/makefile:12 hinc=../../h, :47-51 mem.obj explicitly depends $(hinc)/copyrigh.h; :79-81 link16 @mem.lnk, mem.lnk:1 mem.obj -> MEM.EXE. This is a make prerequisite; no claim of an active #include.; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/makefile:12 hinc=../../h, :47-51 mem.obj explicitly depends $(hinc)/copyrigh.h; :79-81 link16 @mem.lnk, mem.lnk:1 mem.obj -> MEM.EXE. This is a make prerequisite; no claim of an active #include.",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/h/dos.h",
+      "basis": [
+        "historical-guest-build-source-file-only; dos/v86/cmd/mem/mem.c:64 #include \"dos.h\"; no local mem/dos.h; make.inc:57 incc=-I. -I../../h and :90-91 CL16; mem/makefile:79-81 + mem.lnk:1 link MEM.EXE; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/mem.c:64 #include \"dos.h\"; no local mem/dos.h; make.inc:57 incc=-I. -I../../h and :90-91 CL16; mem/makefile:79-81 + mem.lnk:1 link MEM.EXE",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/h/versionc.h",
+      "basis": [
+        "historical-guest-build-source-file-only; dos/v86/cmd/mem/memex.c:19 #include \"versionc.h\"; no local mem/versionc.h; make.inc:57,90-91 CL16 ../../h; mem/makefile:79-81 and mem.lnk:4 link MEM.EXE; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; dos/v86/cmd/mem/memex.c:19 #include \"versionc.h\"; no local mem/versionc.h; make.inc:57,90-91 CL16 ../../h; mem/makefile:79-81 and mem.lnk:4 link MEM.EXE",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/inc/bdsize.inc",
+      "basis": [
+        "historical-guest-build-source-file-only; dos/v86/doskrnl/dos/origin.asm:15 includes origin.inc; dos/v86/inc/origin.inc:69 includes bdsize.inc; make.inc:47,83-84 MASM ../../inc; DOS makefile:249-250,308-317, msdos.lnk:1 origin.obj -> NTDOS; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; dos/v86/doskrnl/dos/origin.asm:15 includes origin.inc; dos/v86/inc/origin.inc:69 includes bdsize.inc; make.inc:47,83-84 MASM ../../inc; DOS makefile:249-250,308-317, msdos.lnk:1 origin.obj -> NTDOS",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/inc/intnat.inc",
+      "basis": [
+        "historical-guest-build-source-file-only; dos/v86/cmd/edlin/edlin.asm:105 include intnat.inc; make.inc:47,83-84 MASM ../../inc; edlin/makefile:48,100-104 and edlin.lnk:1 EDLIN -> EDLIN.EXE; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; dos/v86/cmd/edlin/edlin.asm:105 include intnat.inc; make.inc:47,83-84 MASM ../../inc; edlin/makefile:48,100-104 and edlin.lnk:1 EDLIN -> EDLIN.EXE",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "wow16/inc/ime.h",
+      "basis": [
+        "historical-guest-build-source-file-only; wow16/write/cmd.c:49-51 KOREA conditional #include <ime.h>; write/makefile:9,52 include -I../inc and CL16, :89-90 OBJ1 cmd.obj and :145-152 link16; write.lnk:2 cmd.obj; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; wow16/write/cmd.c:49-51 KOREA conditional #include <ime.h>; write/makefile:9,52 include -I../inc and CL16, :89-90 OBJ1 cmd.obj and :145-152 link16; write.lnk:2 cmd.obj",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "2",
+      "path": "wow16/inc/winnet.h",
+      "basis": [
+        "historical-guest-build-source-file-only; wow16/user/net.c:2 #include \"winnet.h\"; user/makefile:26-30 sets ../inc (unless INCLUDE externally defined), :90,171 net.obj and :258-270 link16; no local user/winnet.h; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "Original guest guest source or declaration grouped by target family; identity or functionality is not established by directory/filename alone.; shared-guest-include-role-dispositions.csv; shard-2/shared-guest-include-owner-review.csv; wow16/user/net.c:2 #include \"winnet.h\"; user/makefile:26-30 sets ../inc (unless INCLUDE externally defined), :90,171 net.obj and :258-270 link16; no local user/winnet.h",
+        "",
+        "",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        ""
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/dev/country/nls737.inc",
+      "basis": [
+        "Original historical declaration/resource/tool input role: country/country.asm:2002 INCLUDE nls737.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; country/country.asm:2002 INCLUDE nls737.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root",
+        "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/dev/country/nls860.inc",
+      "basis": [
+        "Original historical declaration/resource/tool input role: country/country.asm:2007 INCLUDE nls860.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; country/country.asm:2007 INCLUDE nls860.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root",
+        "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/dev/country/nls866.inc",
+      "basis": [
+        "Original historical declaration/resource/tool input role: country/country.asm:2013 INCLUDE nls866.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; country/country.asm:2013 INCLUDE nls866.inc; country/makefile:18-24 country.obj -> link16 country.exe -> reloc country.sys; v86/make.inc local assembler include root",
+        "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/dev/himem/himem.inc",
+      "basis": [
+        "Original historical declaration/resource/tool input role: himem/himem1.asm:16 INCLUDE himem.inc; himem/makefile:42-55 himem1.obj and other objects -> link16 himem.exe -> HIMEM.SYS; Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; guest-declaration-resource-role-dispositions.csv; shard-3/guest-declaration-resource-owner-review.csv; himem/himem1.asm:16 INCLUDE himem.inc; himem/makefile:42-55 himem1.obj and other objects -> link16 himem.exe -> HIMEM.SYS",
+        "Only historical guest/tool build-input file role excluded. Guest capabilities, modern host counterparts, current-image derivation and lifecycle/behavior remain separate obligations; exact original build conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/h/conio.h",
+      "basis": [
+        "historical-guest-build-source-file-only; mem/memex.c:10 quotes conio.h; no local mem/conio.h; v86/make.inc:57,90 -I. -I..\\..\\h via cl16; mem/makefile:60,79 memex.obj -> mem.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; mem/memex.c:10 quotes conio.h; no local mem/conio.h; v86/make.inc:57,90 -I. -I..\\..\\h via cl16; mem/makefile:60,79 memex.obj -> mem.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/h/ctype.h",
+      "basis": [
+        "historical-guest-build-source-file-only; mem/memex.c:9 quotes ctype.h; no local mem/ctype.h; v86/make.inc:57,90 -I. -I..\\..\\h via cl16; mem/makefile:60,79 memex.obj -> mem.exe; distinct host SDK ctype headers not conflated; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; mem/memex.c:9 quotes ctype.h; no local mem/ctype.h; v86/make.inc:57,90 -I. -I..\\..\\h via cl16; mem/makefile:60,79 memex.obj -> mem.exe; distinct host SDK ctype headers not conflated",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "dos/v86/inc/struc.inc",
+      "basis": [
+        "historical-guest-build-source-file-only; nlsfunc/nlsfunc.asm:317 INCLUDE struc.inc; v86/make.inc:14,47,84 MASM -I..\\..\\inc; nlsfunc/makefile:33,43,55-57 explicit $(inc)\\struc.inc -> nlsfunc.obj -> link16 nlsfunc.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; nlsfunc/nlsfunc.asm:317 INCLUDE struc.inc; v86/make.inc:14,47,84 MASM -I..\\..\\inc; nlsfunc/makefile:33,43,55-57 explicit $(inc)\\struc.inc -> nlsfunc.obj -> link16 nlsfunc.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/cderr.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/printdlg.c:38 <cderr.h>; no local copy; write/makefile:9,91,124,145-152,203 CL16 -I..\\inc -> printdlg.obj -> LINK16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/printdlg.c:38 <cderr.h>; no local copy; write/makefile:9,91,124,145-152,203 CL16 -I..\\inc -> printdlg.obj -> LINK16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/dlgs.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/commdlg.c:10 <dlgs.h>; no local copy; write/makefile:9,113,124,145-152 CL16 -I..\\inc -> commdlg.obj -> LINK16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/commdlg.c:10 <dlgs.h>; no local copy; write/makefile:9,113,124,145-152 CL16 -I..\\inc -> commdlg.obj -> LINK16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/mmsystem.inc",
+      "basis": [
+        "historical-guest-build-source-file-only; mmsystem/taska.asm:16 INCLUDE mmsystem.inc; makefile:14,20,37,54,78-79,93-108,247 MASM -I..\\inc; explicit ..\\inc\\mmsystem.inc -> taska.obj -> link16 mmsystem.dll; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; mmsystem/taska.asm:16 INCLUDE mmsystem.inc; makefile:14,20,37,54,78-79,93-108,247 MASM -I..\\inc; explicit ..\\inc\\mmsystem.inc -> taska.obj -> link16 mmsystem.dll",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/newexe.inc",
+      "basis": [
+        "historical-guest-build-source-file-only; user/winhook.asm:16 INCLUDE newexe.inc; user/makefile:28,195,268-270 explicit ..\\inc\\newexe.inc -> winhook.obj -> user.exe; distinguish other kernel31 include roots/profile; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; user/winhook.asm:16 INCLUDE newexe.inc; user/makefile:28,195,268-270 explicit ..\\inc\\newexe.inc -> winhook.obj -> user.exe; distinguish other kernel31 include roots/profile",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/penwin.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/initwin.c:81-82 <penwin.h> under PENWIN; no local copy; write/makefile:9,99,124,145-152,260 CL16 -I..\\inc -> initwin.obj -> LINK16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/initwin.c:81-82 <penwin.h> under PENWIN; no local copy; write/makefile:9,99,124,145-152,260 CL16 -I..\\inc -> initwin.obj -> LINK16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/print.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/printdlg.c:39 includes <print.h>; write/makefile:9,91,124,145-152,203 -I..\\inc then -I..\\..\\inc; no local write/print.h; cl16 printdlg.obj -> link16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/printdlg.c:39 includes <print.h>; write/makefile:9,91,124,145-152,203 -I..\\inc then -I..\\..\\inc; no local write/print.h; cl16 printdlg.obj -> link16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/strtable.h",
+      "basis": [
+        "historical-guest-build-source-file-only; user/user.rc:9 includes strtable.h; no local copy; user/makefile:24-29,125-126,254,268-270 default non-USEBUILD without preexisting INCLUDE uses rc16 -I..\\inc -> user.res -> user.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; user/user.rc:9 includes strtable.h; no local copy; user/makefile:24-29,125-126,254,268-270 default non-USEBUILD without preexisting INCLUDE uses rc16 -I..\\inc -> user.res -> user.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/ver.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/write.rc:10 includes write.rcv; write/write.rcv:9 includes version.h; wow16/inc/version.h:12 includes <ver.h>; write/makefile:9,145-152,369-370 -I..\\inc -> rc16 write.res -> LINK16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/write.rc:10 includes write.rcv; write/write.rcv:9 includes version.h; wow16/inc/version.h:12 includes <ver.h>; write/makefile:9,145-152,369-370 -I..\\inc -> rc16 write.res -> LINK16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    },
+    {
+      "shard": "3",
+      "path": "wow16/inc/windows.h",
+      "basis": [
+        "historical-guest-build-source-file-only; write/printdlg.c:27 <windows.h>; no local copy; write/makefile:9,91,124,145-152,203 CL16 -I..\\inc -> printdlg.obj -> LINK16 write.exe; Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Inventory alone does not prove actual extraction, dispatch, behavior, or authority for exclusion.; shared-guest-include-role-dispositions.csv; shard-3/shared-guest-include-owner-review.csv; write/printdlg.c:27 <windows.h>; no local copy; write/makefile:9,91,124,145-152,203 CL16 -I..\\inc -> printdlg.obj -> LINK16 write.exe",
+        "Only this physical historical guest include/build-input role excluded. Exact guest image, guarded-body execution, shared API/data semantics and host counterparts remain separate; default/external include conditions retained.",
+        "",
+        "Guest source/media/build role; not host-link input; guest modification/rebuild prohibited. Role does not prove guest capability."
+      ]
+    }
+  ],
+  "limits": "Explicit scoped guest-only reasons; current aggregate snapshot, no capability or guest runtime claim."
+}
