@@ -40,6 +40,10 @@ The [shard-3 function](cross-369/shard3-partial-host-function-plan.md) and
 their ledger snapshot; the [controlled failure handoff](cross-369/selected-host-reproduced-failures-handoff.md)
 and [cross-shard handoff](cross-369/cross-shard-runtime-failures-handoff.md)
 separate reproduced fixture boundaries from guest compatibility claims.
+Additional evidence distinguishes [DPMI provider selection](nine-way/part-4/dpmi-legacy-selected-provider-review.md),
+[floppy](nine-way/part-4/gfi-real-floppy-provider-review.md),
+[Novell/IPX](nine-way/part-4/novell-ipx-selected-provider-review.md), and
+[common-dialog guest evidence](nine-way/part-7/commdlg-header-consumer-review.md).
 The [part 8 EDIT boundary](nine-way/part-8/edit-guest-host-review.md) separates
 guest source from the selected host control, and the [ToolHelp review](nine-way/part-8/toolhelp-family-review.md)
 distinguishes export and dispatch observations from guest reachability.

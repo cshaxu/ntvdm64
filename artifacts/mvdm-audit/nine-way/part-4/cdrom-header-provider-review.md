@@ -1,0 +1,7 @@
+# Original SoftPC CD-ROM declarations versus current VDD route
+
+Owned `softpc.new/base/inc/cdrom.h` declares legacy SoftPC CD-ROM interfaces, while `cdrom_fn.h` declares addressing, device status and table-of-contents data for the original `cdrom_fn.c` family. A bounded direct search across SoftPC current `.c`/`.h` sources found no include of either exact basename; the part-4 captured four-graph exact VALID dependency inventory likewise records no consumer. This does not establish that every original profile or generated include is absent, nor that CD-ROM support is absent.
+
+A distinct NT MSCDEX path is documented with actual guest/VDD ownership and package evidence in `part-5/mscdex-semantic-reconciliation.md`: guest TSR hooks INT 2F and requests VCDEX.DLL via VDD registration; the candidate original VDD owns drive records and native optical handles. The checked standard package lacks named VCDEX at the observed paths, so the provider remains a candidate gap with alternate search paths and live requests unproved. That route does not establish use of either owned SoftPC header, and nothing in this review imports a provider or tests optical devices.
+
+Suggested classification: retained original SoftPC CD-ROM declarations with current exact dependency not observed; applicability of their legacy profile remains pending. Keep the separately traced guest/VDD provider, rollback and real media behavior open. No guest/product/shared-ledger change.
