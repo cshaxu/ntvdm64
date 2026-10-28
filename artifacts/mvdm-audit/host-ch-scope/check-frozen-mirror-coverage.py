@@ -4,7 +4,18 @@ from pathlib import Path
 
 root = Path('src/mvdm')
 with open('artifacts/mvdm-audit/host-ch-scope/inventory.csv', encoding='utf-8') as f:
-    inventory = {r['path']: r for r in csv.DictReader(f) if r['scope'] == 'host-candidate'}
+    rows = list(csv.DictReader(f))
+    inventory = {r['path']: r for r in rows if r['scope'] == 'host-candidate'}
+    all_paths = [r['path'].casefold() for r in rows]
+    if len(all_paths) != len(set(all_paths)):
+        raise SystemExit('duplicate case-insensitive inventory path')
+    recorded = set(all_paths)
+    actual = {p.relative_to(root).as_posix().casefold() for p in root.rglob('*')
+              if p.is_file() and p.suffix.casefold() in ('.c', '.h')}
+    unlisted_sources = sorted(actual - recorded)
+    print('current C/H paths', len(actual), 'missing from inventory', len(unlisted_sources))
+    if unlisted_sources:
+        raise SystemExit('C/H paths missing from inventory: ' + str(unlisted_sources))
 with open('artifacts/mvdm-audit/frozen-file-reconciliation.csv', encoding='utf-8-sig') as f:
     frozen = {r['relative_path']: r for r in csv.DictReader(f)}
 with open('artifacts/mvdm-audit/mirror-diff-code-retention.csv', encoding='utf-8-sig') as f:
