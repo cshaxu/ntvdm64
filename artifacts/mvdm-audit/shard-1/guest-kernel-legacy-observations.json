@@ -1,0 +1,111 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "wow16/kernel31/krnl286.rc",
+      "sha256": "6F2D96FE7C50B8DFA5D26CE920B939633E4BA7F96343A4B407C721FB8FFB6F3E",
+      "reference_paths": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\krnl286.rc",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\krnl286.rc"
+      ],
+      "catalog_ids": "SRC:859faccf507f10d204cd;SRC:d76b53a343303e3e42a3",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/kernel31/log.slm",
+      "sha256": "F712F9779BBF73FA8342CA9B441928D5E26A7E869D32184706453245C7FFEC87",
+      "reference_paths": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\log.slm",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\log.slm"
+      ],
+      "catalog_ids": "SRC:4b98d9b81b09ea80f18b;SRC:9b74d1db005e138ae212",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/kernel31/retail3/kernstub.exe",
+      "sha256": "4BEF21A8E6AEC527BDFFEA9DAA75F600B83B8E0F19266DC1B28CF16BA8260D6D",
+      "reference_paths": [
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\retail3\\kernstub.exe"
+      ],
+      "catalog_ids": "SRC:715baf8bb1a25d5db5e6",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/kernel31/swappro/swap.doc",
+      "sha256": "74FB0FC60C116CA66B7205DD7313AA07532AE73FF0B770B3ABD785B97579E328",
+      "reference_paths": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\swappro\\swap.doc",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\swappro\\swap.doc"
+      ],
+      "catalog_ids": "SRC:e8f56890ff517ff603d8;SRC:e951345ac72833dffe27",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/kernel31/w32sys.asm",
+      "sha256": "FA09CAF494858F8465BE26D8475736F220E68A798EE4C81B3D24B15BFB7DC40D",
+      "reference_paths": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\kernel31\\w32sys.asm",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow16\\kernel31\\w32sys.asm"
+      ],
+      "catalog_ids": "SRC:1646fe9d66c54079088a;SRC:b7e633b9096e6733962b",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\makefile",
+      "sha256": "5DDCC52BB834D447E75D85D5720FFA52968D63912A718A8769AFB8555155E247"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\kernel.def",
+      "sha256": "F6893F01252337595077E0C2FB68BE6875642E96D2D8F2A97B304A042BC14F92"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\krnl386.lnk",
+      "sha256": "94BD46F231B97748AEA240B6B97E7828771B9CFC2FFBDB2B3E084A70BEEB9CBE"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\krnl286.lnk",
+      "sha256": "C520AB3D01CE7F5BE161126F53C8FA38F77B3B5C96CCB5847A48D7DB5E956890"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\kernstub.asm",
+      "sha256": "510229830A00C015B89E719DD53C7C37244FE639A8B06FCAA0A4C962336FBFC0"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\swappro\\makefile",
+      "sha256": "6D368071E3CFB975F5607E74341CA57A12659ABC2B2DA79A04E0412BCD6C9E5F"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "retained_source_sha256": "BCED7650A5B5D7AC25955AB2A21BC53FF06DE1C35B25FAD0690390135B093A03",
+    "installed_sha256": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4",
+    "zip_member": "WINNT/SYSTEM32/KRNL386.EXE",
+    "zip_sha256": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4"
+  },
+  "limitations": "Current ledger/original recipes, normalized host deps and binary identity only; no guest compilation, runtime loader/behavior, binary source lineage or all variant claims."
+}

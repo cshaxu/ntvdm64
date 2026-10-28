@@ -1,0 +1,99 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/ccpu386/cmpxchg.c",
+      "hashes": [
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1",
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1",
+        "02318C7BD61EAD65D6D2C97B3980A7ACC573D7B6FD951371FBFAC157FEC397F1"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xadd.c",
+      "hashes": [
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2",
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2",
+        "80D97CE7D9B57B24C6B498B72DEF5E847CA39642545BD841F0FBAE5725C702E2"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/wbinvd.h",
+      "hashes": [
+        "806A12EB2D541FC4B7E1C160B97C8CC81D8551A3FE685A0439A72DE2099AFFA2",
+        "806A12EB2D541FC4B7E1C160B97C8CC81D8551A3FE685A0439A72DE2099AFFA2",
+        "806A12EB2D541FC4B7E1C160B97C8CC81D8551A3FE685A0439A72DE2099AFFA2"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "objects": [
+    {
+      "name": "cmpxchg",
+      "edge": "build obj/ccpu/cmpxchg.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/cmpxchg.c",
+      "sha256": "FD938EA04EE1E585735C907D39284766B747BB59A398B59E78EE3667DB984A2D",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ]
+    },
+    {
+      "name": "xadd",
+      "edge": "build obj/ccpu/xadd.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/xadd.c",
+      "sha256": "028D49A54668BA5787695C9E90340FA2714B2381809D65505DE4A7C2BD7CD335",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ]
+    },
+    {
+      "name": "wbinvd",
+      "edge": "build obj/ccpu/wbinvd.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/wbinvd.c",
+      "sha256": "3851B2849E1F79A96FF0AB09538D1A511C0141B792879328C968C1D4D61EB233",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ]
+    }
+  ],
+  "normalized_wbinvd_dependency": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\wbinvd.h",
+  "flags_sha256": "949743F9A64590FCC833DE251127F25304C90F8457F88EE50F8240B7DED5695F",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "decoder_sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC",
+  "scope": "CPU profile guards and captured object sections; not guest instruction/fault behavior"
+}

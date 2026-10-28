@@ -1,7 +1,13 @@
 {
   "files": [
-    "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.dll",
-    "assets\\release\\VDMREDIR.DLL"
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.dll",
+      "sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7"
+    }
   ],
   "changed_section_bytes": {
     ".text": 0,
@@ -10,6 +16,11 @@
     ".rsrc": 953,
     ".reloc": 0
   },
+  "rdata_changed_rvas": [
+    126644,
+    126645,
+    126646
+  ],
   "cached_resources": [
     {
       "path": [
@@ -42,6 +53,22 @@
       "size": 936,
       "codepage": 1252,
       "sha256": "D96EB703EE5A10112228F895F30F9B44899FA39D62566AF8F50A19F6108443C2"
+    }
+  ],
+  "cached_debug": [
+    {
+      "rva": 126640,
+      "timestamp": 1793199592,
+      "type": 13,
+      "size": 716
+    }
+  ],
+  "release_debug": [
+    {
+      "rva": 126640,
+      "timestamp": 1793193083,
+      "type": 13,
+      "size": 716
     }
   ],
   "limits": "Resource hashes and raw section differences only; no runtime equivalence claim"

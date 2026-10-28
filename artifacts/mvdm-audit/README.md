@@ -22,6 +22,14 @@ The [bus mouse and PPI review](shard-2/dos-mouse-ppi-device-review.md),
 [floppy lifecycle review](shard-3/floppy-lifecycle-role-review.md), and
 [MMSYSTEM legacy review](shard-1/guest-mmsystem-legacy-review.md) retain
 source-level findings and explicitly separate untested behavior from evidence.
+The [CPU486 guarded-input review](shard-2/cpu486-guarded-inputs-review.md)
+records three compiled inputs with no code in the captured SPC386 profile;
+it does not treat their library membership as restored instruction behavior.
+The [floppy lease follow-up](shard-3/floppy-lease-failure-role-review.md)
+traces the actual FDC thread creation and identifies a host-side session
+binding gap, with device triggering and a repair still awaiting verification.
+The [Win16 KERNEL legacy review](shard-1/guest-kernel-legacy-review.md)
+retains the separate installed-kernel provenance boundary.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

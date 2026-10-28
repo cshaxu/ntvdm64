@@ -1,0 +1,61 @@
+{
+  "src/mvdm/softpc.new/host/src/nt_rflop.c": "d8e469a3ac2f35eb0205894f9c9f44404b6f3c797a295ab68281e54c009b53fa",
+  "src/mvdm/softpc.new/host/src/nt_fdisk.c": "691ef629bb953a15f8c5a3bdfee2d492bbcc534d14303fb03bf1ca988a79f4a7",
+  "src/ntvdm-exe/session/session.c": "b3df1d940be4ffa8e9946593f08812b9d8cb795f24031e7e7eb607663ed385c7",
+  "src/ntvdm-exe/command/source/mvdm_command_guest_state.c": "a73af312b22be04b7e4570cdedc3df6aa7fe2ab036de1cf83cf3e87e2025a615",
+  "src/ntvdm-exe/softpc/mvdm_guest_location.c": "9ab0794acde1874e0bf084e61e92bc68d16a32855521b96805811424f03cbcb3",
+  "artifacts/mvdm-audit/shard-3/disk-close-failure-probe.c": "daa3148aab59d6af055668e2bc77231b05e41217def39e7a4bd2e44cd5fb8273",
+  "artifacts/mvdm-audit/shard-3/disk-close-failure-audit.md": "0095187a6ca382ae6d65e3a13a71e98faf431e19cf8b689b71531dbcfacd6dfa",
+  "src/ntvdm-exe/win32/thread_start_compat.c": "9011422aeeb812804fe4609d94c55826da62cb99a317e39f7a91bad2332bddcb",
+  "src/opennt-abi/host-compat/include/thread_start_compat.h": "294cbb0b54264b99768618188e155129366b1195cac51f96ba94d34478b92637",
+  "tools/build/New-T310OriginalSoftpcNinja.ps1": "7884e96510b3a1c05222140aadabc84dc24997a5b48e209fd344c62e1e5f148c",
+  "opennt/nt_rflop.c": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+  "opennt45/nt_rflop.c": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+  "opennt/nt_fdisk.c": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+  "opennt45/nt_fdisk.c": "f4cca0215e2ff4f49113fe95a26529854b712e096af1c3cc54536061808c4867",
+  "object": {
+    "sha256": "737c7d9fe945fc090afcb64de55b9729bfe481f5e619b89903b65bf61bba2a30",
+    "relocations": [
+      "00000044 DISP32            _nt_floppy_close",
+      "00000037 DISP32            _nt_floppy_close",
+      "0000035d DISP32            _get_drive_handle",
+      "00000497 DISP32            _get_drive_handle",
+      "00000034 DISP32            _get_drive_handle",
+      "00000075 dir32             _fdc_thread_handle",
+      "00000086 DISP32            _nt_floppy_close",
+      "00000000 rva32             _fdc_thread",
+      "00000080 DISP32            _nt_floppy_close",
+      "0000017e DISP32            _mvdm_command_guest_state_add_fd_access",
+      "00000000 rva32             _get_drive_handle",
+      "00000041 DISP32            _get_drive_handle",
+      "000000f1 DISP32            _get_drive_handle",
+      "0000005e DISP32            _nt_floppy_close",
+      "0000002c DISP32            _mvdm_command_guest_state_add_fd_access",
+      "00000000 rva32             _nt_floppy_close",
+      "00000059 DISP32            _get_drive_handle",
+      "00000023 DISP32            _get_drive_handle",
+      "00000023 DISP32            _get_drive_handle",
+      "00000023 DISP32            _get_drive_handle",
+      "0000002f DISP32            _nt_floppy_close",
+      "0000005e DISP32            _get_drive_handle",
+      "00000035 dir32             _fdc_thread_handle",
+      "00000049 dir32             _fdc_thread_handle",
+      "0000019e DISP32            _nt_floppy_close",
+      "000001c6 DISP32            _get_drive_handle",
+      "00000223 dir32             _fdc_thread",
+      "0000023f dir32             __imp__CreateThread@24",
+      "00000244 dir32             _fdc_thread_handle",
+      "0000001d dir32             _fdc_thread_handle",
+      "0000002e dir32             _fdc_thread_handle"
+    ]
+  },
+  "compile_snapshot": {
+    "sha256": "99e5f505e266fc2b2afa01d77258121ddf2763ef5bc97c783110e9655db8cfc4",
+    "lines": [
+      "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\" /O2 /Foobj/host/nt_rflop.obj O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_rflop.c"
+    ],
+    "compat_forced": [
+      false
+    ]
+  }
+}

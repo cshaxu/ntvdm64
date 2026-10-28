@@ -9,8 +9,10 @@ read-only data differ in three bytes. The [resource observer](vdmredir-resource-
 and its [snapshot](vdmredir-resource-observations.json) show that the release
 contains an additional 16-byte `NTVDM_PACKAGE_ID` resource; its version-resource
 payload is byte-identical to the cache version. The resource-directory codepage
-also differs. This explains the resource content difference but does not explain
-the three read-only-data bytes, establish provenance or prove semantic equivalence.
+also differs. The three differing `.rdata` bytes all fall in the timestamp
+field of the single PE debug-directory entry; the observer checks their exact
+RVAs. This accounts for the observed section differences but does not establish
+source-to-image provenance or prove runtime semantic equivalence.
 
 The [VDMREDIR source review](../shard-2/vdmredir-host-roles-review.md) records
 current graph and source evidence. Bind any claim about the delivered DLL to

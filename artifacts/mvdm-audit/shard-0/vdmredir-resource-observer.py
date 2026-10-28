@@ -59,19 +59,36 @@ def inspect(path):
                                       sha256=hashlib.sha256(payload).hexdigest().upper()))
 
     visit(0, [])
-    return data, sections, resources
+    debug_rva, debug_size = struct.unpack_from('<II', data, optional + 144)
+    assert debug_size % 28 == 0
+    debug = []
+    if debug_size:
+        offset = file_offset(debug_rva)
+        for index in range(debug_size // 28):
+            at = offset + 28 * index
+            debug.append(dict(rva=debug_rva + 28 * index, timestamp=u32(at + 4),
+                              type=u32(at + 12), size=u32(at + 16)))
+    return data, sections, resources, debug
 
 
 def main():
-    left, sections, left_resources = inspect(PATHS[0])
-    right, right_sections, right_resources = inspect(PATHS[1])
+    left, sections, left_resources, left_debug = inspect(PATHS[0])
+    right, right_sections, right_resources, right_debug = inspect(PATHS[1])
     assert len(left) == len(right)
     changes = {}
     for (name, _, _, offset, size), (other_name, _, _, other_offset, other_size) in zip(sections, right_sections):
         assert name == other_name and size == other_size
         changes[name] = sum(a != b for a, b in zip(left[offset:offset + size], right[other_offset:other_offset + size]))
-    print(json.dumps(dict(files=[str(p) for p in PATHS], changed_section_bytes=changes,
+    rdata = next(s for s in sections if s[0] == '.rdata')
+    other_rdata = next(s for s in right_sections if s[0] == '.rdata')
+    changed_rvas = [rdata[1] + i for i in range(rdata[4])
+                    if left[rdata[3] + i] != right[other_rdata[3] + i]]
+    assert left_debug and left_debug[0]['rva'] == right_debug[0]['rva']
+    assert all(left_debug[0]['rva'] + 4 <= rva < left_debug[0]['rva'] + 8 for rva in changed_rvas)
+    print(json.dumps(dict(files=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest().upper()) for p in PATHS], changed_section_bytes=changes,
+                          rdata_changed_rvas=changed_rvas,
                           cached_resources=left_resources, release_resources=right_resources,
+                          cached_debug=left_debug, release_debug=right_debug,
                           limits='Resource hashes and raw section differences only; no runtime equivalence claim'), indent=2))
 
 
