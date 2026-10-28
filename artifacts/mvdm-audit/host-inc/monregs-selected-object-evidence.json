@@ -1,0 +1,36 @@
+{
+  "inputs": [
+    {
+      "path": "src/mvdm/inc/monregs.h",
+      "sha256": "8B8BAAA697B4DEA31FA51B4699A496D9D48673825BA3AB60869611DF8EC092FB"
+    },
+    {
+      "path": "src/mvdm/softpc.new/host/src/nt_thred.c",
+      "sha256": "5ADC1D3B6C19B9C03437C31ADE04D42F7D9FE5292089888C7FF7F8A34D6A01BA"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_thred.obj",
+      "sha256": "713243EDFC4A6CBF945CBAD1FF0B188811603151564A1872F3DB3E0546B57EF3"
+    }
+  ],
+  "header_function_declarations": 82,
+  "matching_source_tokens": [],
+  "matching_undefined_object_symbols": [],
+  "all_undefined_object_symbols": [
+    "__imp__ResumeThread@4",
+    "_opennt_create_winapi_thread_named",
+    "_opennt_exit_thread@4",
+    "_free",
+    "_malloc",
+    "_VdmUnhandledExceptionFilter",
+    "_ccpu386newthread",
+    "_opennt_ccpu_exit_thread",
+    "__except_handler4",
+    "___security_cookie"
+  ],
+  "dependency_lines": [
+    "obj/host/nt_thred.obj: #deps 12, deps mtime 8147412880752186 (VALID)",
+    "    ../../../../src/mvdm/inc/monregs.h"
+  ],
+  "scope": "nt_thred object only; inline, types, preprocessor effects, alternate consumers/profiles require separate review"
+}

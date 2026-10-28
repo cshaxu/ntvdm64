@@ -1661,7 +1661,7 @@ wow32/wgdi31.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candi
 wow32/wgfont.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgfont.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgman.c,shard-0/review.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wgman.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wgman.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgmeta.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgmeta.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wgpal.c,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

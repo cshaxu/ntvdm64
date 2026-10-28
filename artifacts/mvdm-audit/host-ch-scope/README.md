@@ -57,3 +57,7 @@ The [legacy CPU/redirector declarations](../host-inc/legacy-cpu-redir-declaratio
 The [VGA accessor and alternate trace review](vga-accessor-env-trace-review.md) is a source-role assessment; the coordinator's partial decision for byte-identical vglob is recorded in the linked vglob review.
 
 The [WOW kernel table review](wow-kernel-table-review.md) identifies the selected original table, including entries that are still local or unimplemented; table selection does not establish every API.
+
+The [monitor register consumer check](../host-inc/monregs-selected-object-review.md) examines one actual object without ruling out other consumers; [C-VID/SAS alternate owners](cvid-sas-alternate-owner-review.md) are not assumed equivalent to selected same-name files.
+
+The [empty WOW GDI header](wow-gdi-empty-header-review.md) is excluded solely as an empty physical file; GDI behavior remains independently in scope.
