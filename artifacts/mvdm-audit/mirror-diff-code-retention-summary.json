@@ -1,14 +1,16 @@
 {
   "result": "pass",
-  "count": 197,
-  "measured": 196,
+  "count": 207,
+  "measured": 206,
   "current_drift": [
     "dpmi32/modesw.c",
+    "softpc.new/base/video/v7_ports.c",
     "softpc.new/base/video/v7_video.c",
+    "softpc.new/base/video/vga_mode.c",
     "softpc.new/host/src/nt_bop.c",
     "softpc.new/host/src/nt_graph.c"
   ],
-  "csv_sha256": "6E78649AB7E95DC7B088029A28B8BFEB5787BDA993FC56BAD2592EA2FFC90111",
+  "csv_sha256": "762E24DC823E28B32BD70095CA2E157D448FB4CC563A8571CB35C939974CCBB0",
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "scope": "Original code text estimate, not executed code or behavioral restoration"
 }

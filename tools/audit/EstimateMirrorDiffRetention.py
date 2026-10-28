@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Measure current original-code text retention for frozen mirror differences.
+"""Measure current original-code text retention for original mirror differences.
 
 This is a source-line estimate, never a claim of behavioral completeness.
 """
@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 AUDIT = ROOT / 'artifacts/mvdm-audit'
 ORIGINAL = Path('O:/repos.external/OpenNT/base/mvdm')
+SECONDARY = Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm')
 HELPER = runpy.run_path(str(ROOT / 'tools/audit/EstimateOriginalCodeRetention.py'))
 
 
@@ -28,30 +29,37 @@ def rows(path):
 def main():
     ledger = {r['relative_path']: r for r in rows(AUDIT / 'combined-initial-status.csv')}
     sources = [r for r in rows(AUDIT / 'frozen-file-reconciliation.csv')
-               if 'mirror-different' in r['current_identity']]
+               if r['opennt_sha256'] or r['opennt45_sha256']]
     records = []
     for entry in sources:
         path = entry['relative_path']
+        primary = bool(entry['opennt_sha256'])
+        old = (ORIGINAL if primary else SECONDARY) / path
+        current = ROOT / 'src/mvdm' / path
+        if not current.is_file():
+            continue
+        expected_hash = entry['opennt_sha256' if primary else 'opennt45_sha256'].upper()
+        current_hash = sha(current)
+        if current_hash == expected_hash:
+            continue
+        original_hash = sha(old)
+        assert original_hash == expected_hash, path
         assert ledger[path]['status'] == 'partial', path
-        assert entry['selected_comparison_edition'] == 'OpenNT', path
-        old, current = ORIGINAL / path, ROOT / 'src/mvdm' / path
-        assert sha(old) == entry['opennt_sha256'].upper(), path
-        original_hash, current_hash = sha(old), sha(current)
         kind = current.suffix.lower()
-        if kind not in ('.c', '.h', '.def'):
-            records.append(dict(relative_path=path, original_sha256=original_hash,
+        if kind not in ('.c', '.h', '.def', '.asm'):
+            records.append(dict(relative_path=path, original_edition='OpenNT' if primary else 'OpenNT-4.5', original_sha256=original_hash,
                 current_sha256=current_hash, frozen_current_sha256=entry['current_sha256'],
                 original_code_lines='', matched_code_lines='', text_retention_percent='',
                 limitation='Non-source build input; original-code percentage not applicable.'))
             continue
         before, after = HELPER['source_lines'](old), HELPER['source_lines'](current)
         matched = sum(n for _, _, n in difflib.SequenceMatcher(None, before, after, autojunk=True).get_matching_blocks())
-        records.append(dict(relative_path=path, original_sha256=original_hash,
+        records.append(dict(relative_path=path, original_edition='OpenNT' if primary else 'OpenNT-4.5', original_sha256=original_hash,
             current_sha256=current_hash, frozen_current_sha256=entry['current_sha256'],
             original_code_lines=len(before), matched_code_lines=matched,
             text_retention_percent=f'{100 * matched / len(before):.2f}' if before else '',
             limitation='Matched original source lines after comment removal; not runtime or branch coverage.'))
-    assert len(records) == 197 and len({r['relative_path'] for r in records}) == len(records)
+    assert records and len({r['relative_path'] for r in records}) == len(records)
     output = AUDIT / 'mirror-diff-code-retention.csv'
     with output.open('w', encoding='utf-8', newline='') as stream:
         writer = csv.DictWriter(stream, fieldnames=list(records[0]), lineterminator='\n')

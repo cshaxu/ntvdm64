@@ -1,0 +1,195 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/debug/dasm.c",
+      "hashes": [
+        "6F90249D51EEE69AF65F59DE138F915DC05AF3A67B7BB529EA33596C04888B9B",
+        "6F90249D51EEE69AF65F59DE138F915DC05AF3A67B7BB529EA33596C04888B9B",
+        "6F90249D51EEE69AF65F59DE138F915DC05AF3A67B7BB529EA33596C04888B9B"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/debug/ega_dump.c",
+      "hashes": [
+        "18C7205169A62E40E80122DEBA5645F1CD7CE0D760EA71D95E9688A5A1DA98AA",
+        "18C7205169A62E40E80122DEBA5645F1CD7CE0D760EA71D95E9688A5A1DA98AA",
+        "18C7205169A62E40E80122DEBA5645F1CD7CE0D760EA71D95E9688A5A1DA98AA"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/debug/markfrom",
+      "hashes": [
+        "D0734FC35CF6B2E8D8718217978651FDAE23BF9E283F57874FFE864F8D998B83",
+        "D0734FC35CF6B2E8D8718217978651FDAE23BF9E283F57874FFE864F8D998B83",
+        "D0734FC35CF6B2E8D8718217978651FDAE23BF9E283F57874FFE864F8D998B83"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/debug/profile.c",
+      "hashes": [
+        "93A1891B0A27B336CCECD99A4B198E1D26F769FE31ED83023DF52178E3364A51",
+        "93A1891B0A27B336CCECD99A4B198E1D26F769FE31ED83023DF52178E3364A51",
+        "93A1891B0A27B336CCECD99A4B198E1D26F769FE31ED83023DF52178E3364A51"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "softpc.new/base/debug/trace.c",
+      "hashes": [
+        "B776BEC19F7C7C615684711B915C7C7D1C56A124D37E14FC30A575681C83B2E3",
+        "B776BEC19F7C7C615684711B915C7C7D1C56A124D37E14FC30A575681C83B2E3",
+        "B776BEC19F7C7C615684711B915C7C7D1C56A124D37E14FC30A575681C83B2E3"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "objects": [
+    {
+      "name": "dasm",
+      "compile_edge": "build obj/base-debug/dasm.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/dasm.c",
+      "sha256": "CF285AC722409780A9FCD04FB61949017C77DC700BBE5A39B8F5D43CA63446D3",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ],
+      "map_owner_lines": []
+    },
+    {
+      "name": "ega_dump",
+      "compile_edge": "build obj/base-debug/ega_dump.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/ega_dump.c",
+      "sha256": "4D7375DF1E376727B5D77A3C88187F5C08B7597522AAF88F2E44B133BD7186B2",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ],
+      "map_owner_lines": []
+    },
+    {
+      "name": "profile",
+      "compile_edge": "build obj/base-debug/profile.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/profile.c",
+      "sha256": "8B065137CBC01B01B63ACC50821EDD1F3DECD1E38F29810BBE2137BDF7F2DE98",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ],
+      "map_owner_lines": []
+    },
+    {
+      "name": "trace",
+      "compile_edge": "build obj/base-debug/trace.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/debug/trace.c",
+      "sha256": "5F99814A57ADD3AFBE05D17244F8BBAC0D14D3BC27C18D74F9E7209161B97D43",
+      "sections": [
+        {
+          "name": ".drectve",
+          "flags": 1051136
+        },
+        {
+          "name": ".debug$S",
+          "flags": 1108344896
+        },
+        {
+          "name": ".bss",
+          "flags": 3224371328
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".text$mn",
+          "flags": 1615859744
+        },
+        {
+          "name": ".debug$F",
+          "flags": 1108348992
+        },
+        {
+          "name": ".chks64",
+          "flags": 2560
+        }
+      ],
+      "map_owner_lines": [
+        "0003:00145c00       _sub_io_verbose            006f9c00     original-softpc-base-trace:trace.obj",
+        "0003:00145c04       _io_verbose                006f9c04     original-softpc-base-trace:trace.obj"
+      ]
+    }
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Captured PROD diagnostic object and map roles; no debugger behavior or all-configuration reachability proof"
+}

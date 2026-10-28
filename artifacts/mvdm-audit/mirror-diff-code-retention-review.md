@@ -1,14 +1,16 @@
 # Mirror-difference source retention estimate
 
-The [per-file table](mirror-diff-code-retention.csv) covers every one of the
-197 frozen mirror-different roles and verifies that each remains partial in
-the current ledger. For 196 C, header and definition files it estimates the
+The [per-file table](mirror-diff-code-retention.csv) checks every available
+primary OpenNT mirror against current bytes, falling back to OpenNT-4.5 when
+the primary source is absent, and verifies that each different file remains
+partial in the current ledger. For C, header, assembly and
+definition files it estimates the
 percentage of original non-comment, nonblank source lines matched in the
 current file, using the existing `EstimateOriginalCodeRetention.py` line
-extractor and Python's sequence matcher. The remaining `obj.vdm/sources` is
+extractor and Python's sequence matcher. `obj.vdm/sources` is
 a build input, for which a source-code retention percentage is not applicable.
 
-Every row records both input hashes and the frozen current hash. The four
+Every row records the selected edition, both input hashes and the frozen current hash. The
 current files whose hash has since changed are listed in the [summary](mirror-diff-code-retention-summary.json);
 the estimate measures their actual current bytes, not the earlier snapshot.
 The [generator](../../tools/audit/EstimateMirrorDiffRetention.py) checks the

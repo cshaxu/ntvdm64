@@ -6,8 +6,8 @@ shared ledger changes are merged only after independent verification. The
 external census remains a separate obligation.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
-provides reproducible current-source percentages for the 196 code files and
-identifies the remaining non-code build input; this is not behavioral coverage.
+provides reproducible current-source percentages and identifies the non-code
+build input; this is not behavioral coverage.
 
 The [parallel native review](parallel-native-role-review.md) merges five
 independently replayed original-source/image bindings as partial.
@@ -55,6 +55,10 @@ The [DOS BIOS and firmware review](shard-2/dos-bios-firmware-review.md),
 [RAS/WINSPOOL review](shard-1/guest-ras-winspool-review.md) and
 [Novell/TCP interface review](shard-3/novell-tcp-interface-role-review.md)
 preserve profile, guest-image and runtime limitations for later reconciliation.
+The [COMMDLG resource](shard-1/guest-commdlg-resources-review.md),
+[debug profile](shard-2/dos-debug-profile-review.md), and
+[GISP/VGA interface](shard-3/gisp-vgastate-interface-role-review.md) reviews
+retain their source and build boundaries without asserting runtime behavior.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds
