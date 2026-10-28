@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1442,
+    "pending": 1439,
     "excluded": 2652,
-    "partial": 537,
+    "partial": 540,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Five selected C-VID declarations and one original vector owner remain partial."
+  "note": "Three original WOW GDI owners bind 28 initial dispatch targets; guest behavior and callbacks remain open."
 }

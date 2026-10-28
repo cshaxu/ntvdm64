@@ -9,6 +9,8 @@ The [parallel native review](parallel-native-role-review.md) merges five
 independently replayed original-source/image bindings as partial.
 The [parallel C-VID review](parallel-cvidc-role-review.md) adds five retained
 compiler declaration excerpts and one linked initial vector, all partial.
+The [parallel WOW GDI review](shard-2/parallel-review-third.md) binds 28
+font, text and metafile targets; guest execution and callback lifetimes remain open.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

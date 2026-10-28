@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "ef8c75472",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-2/parallel-review-third-evidence.json",
+      "sha256": "AC85BF81FFDC606E15E698AFC461B5D71342A3072031EB15ABA4A51268E83052"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Initial GDI dispatch and code binding only, not guest behavior acceptance"
+}

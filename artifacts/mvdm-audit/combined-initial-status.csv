@@ -4507,11 +4507,11 @@ wow32/wgdi.c,0,pending,shard-0/review.csv
 wow32/wgdi.h,3,pending,shard-3/file-review.csv
 wow32/wgdi31.c,3,pending,shard-3/file-review.csv
 wow32/wgdi31.h,1,pending,shard-1/file-audit.csv
-wow32/wgfont.c,2,pending,shard-2/file-audit.csv
+wow32/wgfont.c,2,partial,shard-2/file-audit.csv
 wow32/wgfont.h,1,pending,shard-1/file-audit.csv
 wow32/wgman.c,0,pending,shard-0/review.csv
 wow32/wgman.h,2,pending,shard-2/file-audit.csv
-wow32/wgmeta.c,2,pending,shard-2/file-audit.csv
+wow32/wgmeta.c,2,partial,shard-2/file-audit.csv
 wow32/wgmeta.h,1,pending,shard-1/file-audit.csv
 wow32/wgpal.c,0,pending,shard-0/review.csv
 wow32/wgpal.h,3,pending,shard-3/file-review.csv
@@ -4519,7 +4519,7 @@ wow32/wgprnset.c,3,pending,shard-3/file-review.csv
 wow32/wgprnset.h,1,pending,shard-1/file-audit.csv
 wow32/wgtbl.h,3,pending,shard-3/file-review.csv
 wow32/wgtbl2.h,0,pending,shard-0/review.csv
-wow32/wgtext.c,2,pending,shard-2/file-audit.csv
+wow32/wgtext.c,2,partial,shard-2/file-audit.csv
 wow32/wgtext.h,3,pending,shard-3/file-review.csv
 wow32/wheap.c,3,pending,shard-3/file-review.csv
 wow32/wheap.h,3,pending,shard-3/file-review.csv

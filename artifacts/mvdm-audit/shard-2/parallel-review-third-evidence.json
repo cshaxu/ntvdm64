@@ -1,0 +1,444 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "name": "wgfont.c",
+      "sha256": "383A2AECB42C3B96AEE822559F9C9D331C1ED7BCDC7E089D018DEFC33C3FC969"
+    },
+    {
+      "name": "wgtext.c",
+      "sha256": "863EFA2383AFDDC1419D291C94112CBC87E918DA59A33ECD483884C323D3AFDD"
+    },
+    {
+      "name": "wgmeta.c",
+      "sha256": "213B4AA2F1F7A11AC310D7152027DA2DA0EA804B9EFEB6FEFC0CF609CE3D5260"
+    },
+    {
+      "name": "wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "name": "wgtbl2.h",
+      "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+    },
+    {
+      "name": "wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "name": "wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    }
+  ],
+  "gdi_table_base": 851,
+  "owners": [
+    {
+      "owner": "wgfont",
+      "object_sha256": "2401EA56BF27E4856E5255A780B16905B7C6646DCE2CF80287A7F1A0018B4DD6",
+      "dependency": "obj/wgfont.obj: #deps 126, deps mtime 8147760845200216 (VALID)",
+      "entries": [
+        {
+          "ordinal": 56,
+          "table_index": 907,
+          "thunk": "WG32CreateFont",
+          "binding": {
+            "name": "_WG32CreateFont@4",
+            "va": 268512336,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 599,
+            "relocation_words": 14
+          }
+        },
+        {
+          "ordinal": 57,
+          "table_index": 908,
+          "thunk": "WG32CreateFontIndirect",
+          "binding": {
+            "name": "_WG32CreateFontIndirect@4",
+            "va": 268512944,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 377,
+            "relocation_words": 12
+          }
+        },
+        {
+          "ordinal": 70,
+          "table_index": 921,
+          "thunk": "WG32EnumFonts",
+          "binding": {
+            "name": "_WG32EnumFonts@4",
+            "va": 268513328,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 107,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 119,
+          "table_index": 970,
+          "thunk": "WG32AddFontResource",
+          "binding": {
+            "name": "_WG32AddFontResource@4",
+            "va": 268512256,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 68,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 136,
+          "table_index": 987,
+          "thunk": "WG32RemoveFontResource",
+          "binding": {
+            "name": "_WG32RemoveFontResource@4",
+            "va": 268513728,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 68,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 350,
+          "table_index": 1201,
+          "thunk": "WG32GetCharWidth",
+          "binding": {
+            "name": "_WG32GetCharWidth@4",
+            "va": 268513504,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 172,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 353,
+          "table_index": 1204,
+          "thunk": "WG32GetAspectRatioFilter",
+          "binding": {
+            "name": "_WG32GetAspectRatioFilter@4",
+            "va": 268513440,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 411,
+          "table_index": 1262,
+          "thunk": "WG32GetCurLogFont",
+          "binding": {
+            "name": "_WG32GetCurLogFont@4",
+            "va": 268513680,
+            "function": true,
+            "owner": "wgfont.obj",
+            "bytes": 38,
+            "relocation_words": 3
+          }
+        }
+      ]
+    },
+    {
+      "owner": "wgtext",
+      "object_sha256": "E12D60925A03A7EEE330257C179FDB8AD3CDB8CCF1F6BB0B0C1011EBB9CB337A",
+      "dependency": "obj/wgtext.obj: #deps 126, deps mtime 8147760877332285 (VALID)",
+      "entries": [
+        {
+          "ordinal": 8,
+          "table_index": 859,
+          "thunk": "WG32SetTextCharacterExtra",
+          "binding": {
+            "name": "_WG32SetTextCharacterExtra@4",
+            "va": 268518688,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 9,
+          "table_index": 860,
+          "thunk": "WG32SetTextColor",
+          "binding": {
+            "name": "_WG32SetTextColor@4",
+            "va": 268518736,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 57,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 10,
+          "table_index": 861,
+          "thunk": "WG32SetTextJustification",
+          "binding": {
+            "name": "_WG32SetTextJustification@4",
+            "va": 268518800,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 33,
+          "table_index": 884,
+          "thunk": "WG32TextOut",
+          "binding": {
+            "name": "_WG32TextOut@4",
+            "va": 268518848,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 56,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 89,
+          "table_index": 940,
+          "thunk": "WG32GetTextCharacterExtra",
+          "binding": {
+            "name": "_WG32GetTextCharacterExtra@4",
+            "va": 268518272,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 90,
+          "table_index": 941,
+          "thunk": "WG32GetTextColor",
+          "binding": {
+            "name": "_WG32GetTextColor@4",
+            "va": 268518304,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 27,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 91,
+          "table_index": 942,
+          "thunk": "WG32GetTextExtent",
+          "binding": {
+            "name": "_WG32GetTextExtent@4",
+            "va": 268518336,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 135,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 92,
+          "table_index": 943,
+          "thunk": "WG32GetTextFace",
+          "binding": {
+            "name": "_WG32GetTextFace@4",
+            "va": 268518480,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 71,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 93,
+          "table_index": 944,
+          "thunk": "WG32GetTextMetrics",
+          "binding": {
+            "name": "_WG32GetTextMetrics@4",
+            "va": 268518560,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 82,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 345,
+          "table_index": 1196,
+          "thunk": "WG32GetTextAlign",
+          "binding": {
+            "name": "_WG32GetTextAlign@4",
+            "va": 268518240,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 27,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 346,
+          "table_index": 1197,
+          "thunk": "WG32SetTextAlign",
+          "binding": {
+            "name": "_WG32SetTextAlign@4",
+            "va": 268518656,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 32,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 351,
+          "table_index": 1202,
+          "thunk": "WG32ExtTextOut",
+          "binding": {
+            "name": "_WG32ExtTextOut@4",
+            "va": 268518016,
+            "function": true,
+            "owner": "wgtext.obj",
+            "bytes": 221,
+            "relocation_words": 10
+          }
+        }
+      ]
+    },
+    {
+      "owner": "wgmeta",
+      "object_sha256": "D62491D342FB98CF20B732F3860DAAA9EFEA3E849C9CFD5173A6FAD34B376428",
+      "dependency": "obj/wgmeta.obj: #deps 126, deps mtime 8147760840697005 (VALID)",
+      "entries": [
+        {
+          "ordinal": 123,
+          "table_index": 974,
+          "thunk": "WG32PlayMetaFile",
+          "binding": {
+            "name": "_WG32PlayMetaFile@4",
+            "va": 268515088,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 96,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 124,
+          "table_index": 975,
+          "thunk": "WG32GetMetaFile",
+          "binding": {
+            "name": "_WG32GetMetaFile@4",
+            "va": 268515024,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 51,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 125,
+          "table_index": 976,
+          "thunk": "WG32CreateMetaFile",
+          "binding": {
+            "name": "_WG32CreateMetaFile@4",
+            "va": 268514192,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 43,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 126,
+          "table_index": 977,
+          "thunk": "WG32CloseMetaFile",
+          "binding": {
+            "name": "_WG32CloseMetaFile@4",
+            "va": 268513904,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 47,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 127,
+          "table_index": 978,
+          "thunk": "WG32DeleteMetaFile",
+          "binding": {
+            "name": "_WG32DeleteMetaFile@4",
+            "va": 268514240,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 105,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 151,
+          "table_index": 1002,
+          "thunk": "WG32CopyMetaFile",
+          "binding": {
+            "name": "_WG32CopyMetaFile@4",
+            "va": 268513952,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 236,
+            "relocation_words": 17
+          }
+        },
+        {
+          "ordinal": 175,
+          "table_index": 1026,
+          "thunk": "WG32EnumMetaFile",
+          "binding": {
+            "name": "_WG32EnumMetaFile@4",
+            "va": 268514352,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 532,
+            "relocation_words": 33
+          }
+        },
+        {
+          "ordinal": 176,
+          "table_index": 1027,
+          "thunk": "WG32PlayMetaFileRecord",
+          "binding": {
+            "name": "_WG32PlayMetaFileRecord@4",
+            "va": 268515184,
+            "function": true,
+            "owner": "wgmeta.obj",
+            "bytes": 140,
+            "relocation_words": 7
+          }
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    }
+  ],
+  "scope": "Original source, linked initial GDI pointers and masked code bytes; no guest dispatch or callback execution claim"
+}
