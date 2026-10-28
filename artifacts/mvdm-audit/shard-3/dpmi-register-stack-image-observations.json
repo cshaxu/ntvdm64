@@ -1,0 +1,218 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dpmi32/register.c",
+      "sha256": "98E8C569AC743FA59FA6EDE4118259BB18FC3CFD5D387F9C2B9CCE8ECE7C0B45",
+      "wow_source_ids": "SRC:0c5e8f70544169d89a1d;SRC:232e7918d5a79270a76b",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\register.c",
+      "compile_edge": "build obj/dpmi/register.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/register.c",
+      "dependency_header": "obj/dpmi/register.obj: #deps 16, deps mtime 8147412843633054 (VALID)",
+      "functions": [
+        {
+          "name": "_IgetCX",
+          "va": 5610624,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetDX",
+          "va": 5610640,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetDI",
+          "va": 5610656,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetSI",
+          "va": 5610672,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetBX",
+          "va": 5610688,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetAX",
+          "va": 5610704,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_IgetSP",
+          "va": 5610720,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 45,
+          "relocation_words": 4
+        },
+        {
+          "name": "_DpmiInitRegisterSize",
+          "va": 5610768,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:register.obj",
+          "bytes": 259,
+          "relocation_words": 42
+        }
+      ]
+    },
+    {
+      "relative_path": "dpmi32/stack.c",
+      "sha256": "E7423B2C5B7C6108B55C262D1329E1B1D279850B65AF1ABFBC6EC3FCF2AF0FE5",
+      "wow_source_ids": "SRC:1401146a6eb256ff5cf2;SRC:85da895d2b60b25e5de6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\stack.c",
+      "compile_edge": "build obj/dpmi/stack.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/stack.c",
+      "dependency_header": "obj/dpmi/stack.obj: #deps 16, deps mtime 8147412844594283 (VALID)",
+      "functions": [
+        {
+          "name": "_DpmiPushRmInt",
+          "va": 5611232,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:stack.obj",
+          "bytes": 124,
+          "relocation_words": 11
+        },
+        {
+          "name": "_DpmiSimulateIretCF",
+          "va": 5611360,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:stack.obj",
+          "bytes": 98,
+          "relocation_words": 9
+        },
+        {
+          "name": "_DpmiSwitchFromDosxStack",
+          "va": 5611472,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:stack.obj",
+          "bytes": 16,
+          "relocation_words": 2
+        },
+        {
+          "name": "_DpmiSwitchToDosxStack",
+          "va": 5611488,
+          "function": true,
+          "owner": "original-mvdm-dpmi32:stack.obj",
+          "bytes": 63,
+          "relocation_words": 7
+        }
+      ]
+    }
+  ],
+  "calls": [
+    {
+      "caller": "_DpmiInitApp",
+      "target": "_DpmiInitRegisterSize",
+      "caller_owner": "original-mvdm-dpmi32:dpmi32.obj",
+      "va": 5591519
+    },
+    {
+      "caller": "_DpmiSegmentToSelector",
+      "target": "_DpmiSwitchToDosxStack",
+      "caller_owner": "original-mvdm-dpmi32:buffer.obj",
+      "va": 5612540
+    },
+    {
+      "caller": "_DpmiSegmentToSelector",
+      "target": "_DpmiSwitchFromDosxStack",
+      "caller_owner": "original-mvdm-dpmi32:buffer.obj",
+      "va": 5612750
+    },
+    {
+      "caller": "_NoTranslation",
+      "target": "_DpmiSwitchToDosxStack",
+      "caller_owner": "original-mvdm-dpmi32:int21map.obj",
+      "va": 5592683
+    },
+    {
+      "caller": "_NoTranslation",
+      "target": "_DpmiSwitchFromDosxStack",
+      "caller_owner": "original-mvdm-dpmi32:int21map.obj",
+      "va": 5592703
+    },
+    {
+      "caller": "_NoTranslation",
+      "target": "_DpmiSimulateIretCF",
+      "caller_owner": "original-mvdm-dpmi32:int21map.obj",
+      "va": 5592725
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "src\\mvdm\\dpmi32\\register.c",
+      "sha256": "98E8C569AC743FA59FA6EDE4118259BB18FC3CFD5D387F9C2B9CCE8ECE7C0B45"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\register.c",
+      "sha256": "98E8C569AC743FA59FA6EDE4118259BB18FC3CFD5D387F9C2B9CCE8ECE7C0B45"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dpmi32\\register.c",
+      "sha256": "98E8C569AC743FA59FA6EDE4118259BB18FC3CFD5D387F9C2B9CCE8ECE7C0B45"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\register.obj",
+      "sha256": "00FD604040E02AB355AF86537584389B9298296CB3EF7699FF5D495B4C28BD09"
+    },
+    {
+      "path": "src\\mvdm\\dpmi32\\stack.c",
+      "sha256": "E7423B2C5B7C6108B55C262D1329E1B1D279850B65AF1ABFBC6EC3FCF2AF0FE5"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\stack.c",
+      "sha256": "E7423B2C5B7C6108B55C262D1329E1B1D279850B65AF1ABFBC6EC3FCF2AF0FE5"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dpmi32\\stack.c",
+      "sha256": "E7423B2C5B7C6108B55C262D1329E1B1D279850B65AF1ABFBC6EC3FCF2AF0FE5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\stack.obj",
+      "sha256": "965A8E04867951E11F412AD78D6D6942F01D3784A247D3FD00D9302F4118DAA0"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\dpmi32.obj",
+      "sha256": "94FFE3A0B5099BA56F2C181EC1266C21E581BF5743A4B3E5F358A0A450A1C4BF"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\buffer.obj",
+      "sha256": "3844B6F5F3B917F37574963873527E01FAC5FC8B960A98C8B364DEF16785C320"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dpmi\\int21map.obj",
+      "sha256": "41E1CD3A0B445B3E17A2AF2DA59C7F097BE0C2CB3BC600315BDCD092A9B07387"
+    }
+  ],
+  "scope": "Selected code identity and six resolved callers; no complete stack, exception or lifecycle behavior"
+}

@@ -13,6 +13,8 @@ The [parallel WOW GDI review](shard-2/parallel-review-third.md) binds 28
 font, text and metafile targets; guest execution and callback lifetimes remain open.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
+The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds
+register/stack owners and selected call edges; guest transitions remain open.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

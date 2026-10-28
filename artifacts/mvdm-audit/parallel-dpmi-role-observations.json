@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "1b3513c2e",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-3/dpmi-register-stack-image-observations.json",
+      "sha256": "0D6DF515F8723794BF54AE1641F5FA86312AEA7CDF28A54DF0D01024AA13E10A"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original code and call edges; no guest transition behavior acceptance"
+}

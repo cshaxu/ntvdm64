@@ -1104,10 +1104,10 @@ dpmi32/obj/i386/stack.obj,1,excluded,shard-1/file-audit.csv
 dpmi32/obj/i386/vxd.obj,3,excluded,shard-3/file-review.csv
 dpmi32/obj/i386/xmem.obj,3,excluded,shard-3/file-review.csv
 dpmi32/precomp.h,2,pending,shard-2/file-audit.csv
-dpmi32/register.c,3,pending,shard-3/file-review.csv
+dpmi32/register.c,3,partial,shard-3/file-review.csv
 dpmi32/savestat.c,0,pending,shard-0/review.csv
 dpmi32/sources,3,partial,shard-3/file-review.csv
-dpmi32/stack.c,3,pending,shard-3/file-review.csv
+dpmi32/stack.c,3,partial,shard-3/file-review.csv
 dpmi32/vxd.c,2,partial,shard-2/file-audit.csv
 dpmi32/xlathlp.h,3,partial,shard-3/file-review.csv
 dpmi32/xmem.c,2,partial,shard-2/file-audit.csv
