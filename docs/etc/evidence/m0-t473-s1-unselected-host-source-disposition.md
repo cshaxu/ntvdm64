@@ -32,6 +32,12 @@ definition rather than a recovery candidate.
 | 1 | `oemuni/toemuni.c` | Original `UMTEST=toemuni` test application, not a member of the selected `oemuni.lib` (`file.c`, `process.c`). |
 | 2 | `suballoc/{debug,tsa}.c` | Diagnostic body and `UMTEST=tsa`; the selected original library member is `suballoc.c`. |
 
+The sample-host exclusion above is limited to the current host build edge; it
+does not exclude MSCDEX functionality or its guest/VDD pair from T473. The
+original `makefil0` builds the MSCDEX TSR, and the installed guest package
+names it. Its original VCDEX loading and provider boundary remains a live S17
+obligation in the [MSCDEX review](../../../artifacts/mvdm-audit/shard-0/mscdex-package-review.md).
+
 ## CPU40/profile alternatives retained as explicit boundaries
 
 | Count | Paths | Why whole-file import is rejected |
