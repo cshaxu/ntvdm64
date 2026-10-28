@@ -97,3 +97,5 @@ The [planar presentation handoff](../host-inc/planar-presentation-functional-han
 The [guest-target candidate review](guest-target-candidate-review.md) identifies 98 C files with observed 16-bit target recipes and retains 375 roles for further host/shared review, without excluding corresponding applications. The [WINMM selected-object witness](wow-winmm-resolve-object-review.md) records controlled resolver failures and output overwrites; guest reachability and actual provider contract remain unproved.
 
 The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-profile guest C source roles, while retaining 330 ambiguous paths and all host-side application behavior. The [original WINMM contract](wow-winmm-original-contract-review.md) supplies the historical provider contract for the controlled resolver witness, without proving modern provider behavior or guest reachability.
+
+The [DOS absolute I/O lease-error witness](dos-absolute-io-lease-error-review.md) exercises four selected-object null-session paths with controlled seams; the DOS guest error and reachability remain unverified.
