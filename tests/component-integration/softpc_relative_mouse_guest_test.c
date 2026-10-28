@@ -18,6 +18,7 @@
 #endif
 
 word VirtualX=640,VirtualY=200;
+IU8 Currently_emulated_video_mode=3;
 MOUSE_STATUS os_pointer_data;
 static BOOL bFunctionZeroReset,bFunctionFour;
 static IS16 newF4x,newF4y;
@@ -34,6 +35,7 @@ half_word c_sas_hw_at(sys_addr address)
 void host_ica_lock(void) { assert(!locked);locked=1; }
 void host_ica_unlock(void) { assert(locked);locked=0; }
 void DoMouseInterrupt(void) { assert(locked);++interrupts; }
+void mouse_pointer_route_changed(int active) { (void)active; }
 mvdm_mouse_bridge *mvdm_softpc_mouse_current(void) { return &bridge; }
 int DisplayErrorTerm(int error,DWORD os_error,char *file,int line)
 { (void)error;(void)os_error;(void)file;(void)line;abort(); }
@@ -82,6 +84,8 @@ int main(void)
     assert(!mvdm_softpc_mouse_route_active() && !locked);
     assert(APPLY() && mvdm_softpc_mouse_active(&bridge));
     assert(interrupts==9 && !locked);
+    receive(CONSOLE_MOUSE_LEAVE,0,0,0);
+    assert(APPLY());
     mvdm_softpc_mouse_cancel(&bridge);assert(!APPLY());
     /* Guest INT33/4 before Window selection updates base state without an IRQ. */
     cursor.position.x=240;cursor.position.y=88;x=12;y=16;
@@ -89,6 +93,18 @@ int main(void)
     assert(APPLY() && x==240 && y==88);
     receive(CONSOLE_MOUSE_MOVE,4,2,0);
     assert(APPLY() && x==244 && y==90);
+    mvdm_softpc_mouse_cancel(&bridge);
+    /* Video 7 mode 67h is represented as 1bh in the BIOS data area. */
+    bios_mode=0x1b;Currently_emulated_video_mode=0x67;VirtualY=480;
+    bFunctionFour=TRUE;newF4x=0;newF4y=0;
+    receive(CONSOLE_MOUSE_MOVE,0,1000,0);
+    assert(APPLY() && y==479);
+    mvdm_softpc_mouse_cancel(&bridge);
+    /* A nonmatching actual mode must retain the normal unknown-mode limit. */
+    Currently_emulated_video_mode=0x12;
+    bFunctionFour=TRUE;newF4x=0;newF4y=0;
+    receive(CONSOLE_MOUSE_MOVE,0,1000,0);
+    assert(APPLY() && y==199);
     mvdm_softpc_mouse_cancel(&bridge);
     puts("PASS production mouse adapter: copied ingress, original coordinates, reset/position, idle buttons, overflow, release/re-entry; memory/IRQ mocked, cursor drawing untested");
     return 0;

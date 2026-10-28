@@ -1,5 +1,30 @@
 # T473 S10 P: Video7 pointer candidate
 
+## Pending mouse-range correction
+
+An independent Windows 3.1 investigation observed 640×480 mode `0x67`,
+BIOS mode byte `0x1b`, stale mouse height 350 and an effective bottom near
+row 272. Its candidate calls the existing mouse mode owner after an extended
+mode change and decodes the biased BIOS value in the project-owned relative
+mouse bridge only when the video owner agrees. The isolated candidate reported
+height 480 and mouse Y 479; this is frontend-injected input, not physical Raw
+Input or complete Setup acceptance.
+
+The new mirror exception is `VIDEO7-MOUSE-MODE`, registered in
+`src/mvdm/README.md`. Relative to primary OpenNT, `v7_video.c` now has
+12 added and 3 removed lines across both registered Video7 differences;
+the additional current candidate contributes 8 added lines. A raw line-match
+heuristic retains 521/524 original lines (99.43%); this is not behavioral
+coverage. The project-owned bridge and test each have separate additions.
+The separate investigation subsequently replaced the installed and release
+`ntvdm.exe` with this candidate and updated the ten-image manifest. On review,
+both directories match that manifest, but only NTVDM was replaced and the
+full product suite was not rerun before that replacement. The complete
+ten-component build and regression are still required; the earlier full-suite
+result must not be attributed to this later executable. The owner manually
+accepted the fix on 2026-10-28 and authorized committing before the full
+regression. No guest was modified.
+
 The original Video7 register code selects the cursor mask and position, but
 the linked host callbacks were the stub `dummy`. The user's VGA/Video7
 comparison and the original NTVDM link map identify the missing host

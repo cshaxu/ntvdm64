@@ -43,6 +43,9 @@
 #include "vgaports.h"
 #include CpuH
 #include "sas.h"
+#if defined(NTVDM) && !defined(X86GFX)
+#include "mouse_io.h"
+#endif
 
 
 #ifdef SEGMENTATION
@@ -454,6 +457,11 @@ v7vga_extended_set_mode()
     }
     inb(EGA_IPSTAT1_REG,&temp_word);
     outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
+#if defined(NTVDM) && !defined(X86GFX)
+    /* DIVERGENCE(VIDEO7-MOUSE-MODE): match the standard EGA mode path: INT33 and the host mouse bridge
+     * must observe the actual Video 7 extent after an extended mode set. */
+    mouse_video_mode_changed(video_mode);
+#endif
 #ifndef PROD
     trace("end of video set mode", DUMP_NONE);
 #endif

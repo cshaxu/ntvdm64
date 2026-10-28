@@ -1,5 +1,15 @@
 # mvdm
 
+DIVERGENCE(VIDEO7-MOUSE-MODE), T473 S10 candidate: after an extended Video7
+mode is set, `v7vga_extended_set_mode` notifies the existing mouse mode owner,
+as the normal EGA mode path does. Video7 stores extended graphics modes in
+the BIOS data area with a bias; the project-owned relative mouse bridge uses
+the real Video7 mode only when it agrees with that encoded value. This keeps
+the mouse range synchronized with the actual video mode without modifying
+the guest. Focused tests and an isolated Windows 3.1 pointer-range probe pass;
+complete product regression and publication remain required. See
+`artifacts/mvdm-audit/video7-pointer-review.md` for the delivery boundary.
+
 MVDM-HOST-DIV-466: BOP 57 and BOP 58 pass the actual segment-address
 mode to SIM32: PE with VM clear selects descriptors; real and V86 execution
 select segment arithmetic. The original PE-only decision mistakes V86 for
