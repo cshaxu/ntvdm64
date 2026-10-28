@@ -242,7 +242,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'wow-core-header-family-role-':
+                if prefix == 'wow-media-resource-image-role-':
+                    assert path in ('wow32/wmmedia.c', 'wow32/wres32.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'wow-core-header-family-role-':
                     assert path in {'wow32/' + n for n in ('isz.h', 'mapembed.h', 'waccel.h', 'wcmdgtbl.h', 'wcntl32.h', 'wdos.h', 'wgtbl2.h', 'wkbman.h', 'wmsgsbm.h', 'wow32.h', 'wstbl.h', 'wstruc.h', 'wthman.h', 'wucaret.h', 'wuclass.h', 'wutext.h', 'wutmr.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'wow-user-header-family-role-':
                     assert path in {'wow32/' + n for n in ('wkbdtbl2.h', 'wmsg16.h', 'wmsgbm.h', 'wmsgem.h', 'wparam.h', 'wsdynmc.h', 'wsubcls.h', 'wucursor.h', 'wuhook.h', 'wulang.h', 'wuwind.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

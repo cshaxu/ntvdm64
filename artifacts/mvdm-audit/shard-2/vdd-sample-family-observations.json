@@ -1,0 +1,67 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "vdd/samples/adlibvdd/adlibvdd.def",
+      "hashes": [
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED",
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED",
+        "B9F65254A9CED1F5516C3036F2FBEBD6FE0FDC696D28F594FC54D03059A9FCED"
+      ]
+    },
+    {
+      "path": "vdd/samples/hpscan/hpscan16.exe",
+      "hashes": [
+        "6A8F336F374F3FD2562663A85C30D6925E56A4E6362A2CE1A2B224DC4F069990",
+        "",
+        ""
+      ]
+    },
+    {
+      "path": "vdd/samples/hpscan/hpscan16.inc",
+      "hashes": [
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC",
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC",
+        "08E6F2F7D449458EF3F66BB6FBFCA1492549FE9CDDE2AACACA2AAC5143925FEC"
+      ]
+    },
+    {
+      "path": "vdd/samples/mscdex/tsr/messages/usa/messages.inc",
+      "hashes": [
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6",
+        "0323803B2F554E5CA4D8ADBAAE717996537B972A03FA8800D8026C185AAFDAF6"
+      ]
+    },
+    {
+      "path": "vdd/samples/mscdex/vdd/mscdex.h",
+      "hashes": [
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430",
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430",
+        "ECCAF60CC04AA7524C060B88F8863BF77093445E0760212F7DB6786E401DD430"
+      ]
+    },
+    {
+      "path": "vdd/samples/mscdex/vdd/vcdex.rc",
+      "hashes": [
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F",
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F",
+        "1DE1253BAB13A6E4E09F0F5404F848BE62F116E87ADBFA0A8C036E32A9DB438F"
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_hpscan16_identical": [],
+  "archive_hpscan16_named": [],
+  "scope": "Historical sample recipe references and snapshot graph/package identities; no sample runtime, external deployment, or source-to-binary provenance"
+}

@@ -1,0 +1,14 @@
+import csv,hashlib,json,re,zipfile
+from pathlib import Path
+A=Path('artifacts/mvdm-audit');M=Path('src/mvdm');O=(Path('O:/repos.external/OpenNT/base/mvdm'),Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm'));N=('vdd/samples/adlibvdd/adlibvdd.def','vdd/samples/hpscan/hpscan16.exe','vdd/samples/hpscan/hpscan16.inc','vdd/samples/mscdex/tsr/messages/usa/messages.inc','vdd/samples/mscdex/vdd/mscdex.h','vdd/samples/mscdex/vdd/vcdex.rc')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest().upper() if p.is_file() else ''
+def inspect():
+ f={x['relative_path']:x for x in csv.DictReader((A/'frozen-file-reconciliation.csv').open(encoding='utf-8-sig'))};l={x['relative_path']:x for x in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig'))};rows=[]; graphs=[]
+ for b in ('worker','wow32'):
+  p=Path('build/.ninja/msvc-x86-release')/b/'build.ninja';g=p.read_text().replace('$:',':').replace('\\','/').lower();graphs.append(dict(path=str(p),sha256=sha(p)));assert all(str((M/n).resolve()).replace('\\','/').lower() not in g for n in N)
+ for n in N:
+  hashes=[sha(root/n) for root in (M,*O)];assert hashes==[f[n]['current_sha256'],f[n]['opennt_sha256'],f[n]['opennt45_sha256']] and l[n]['shard']=='2' and l[n]['status']=='pending'; rows.append(dict(path=n,hashes=hashes))
+ assert rows[1]['hashes'][1:]==['','']; root=M/'vdd/samples'; hps=(root/'hpscan/hpscan16.asm').read_text(encoding='latin1').lower();make=(root/'hpscan/makefile').read_text(encoding='latin1').lower(); tsrm=(root/'mscdex/tsr/makefile').read_text(encoding='latin1').lower();tsr=(root/'mscdex/tsr/mscdexnt.asm').read_text(encoding='latin1').lower(); vdd=(root/'mscdex/vdd/vcdex.c').read_text(encoding='latin1').lower();vdds=(root/'mscdex/vdd/sources').read_text(encoding='latin1').lower();adlibs=(root/'adlibvdd/sources').read_text(encoding='latin1').lower(); assert 'include hpscan16.inc' in hps and 'exe2bin hpscan16.exe hpscan16.sys' in make and 'messages\\$(country)\\messages.inc' in tsrm and 'include messages.inc' in tsr and '#include <mscdex.h>' in vdd and 'vcdex.rc' in vdds and 'targetname=adlibvdd' in adlibs
+ zpath=Path('assets/winnt.zip');z=zipfile.ZipFile(zpath);fs=[x for x in z.infolist() if not x.is_dir()];data=(M/N[1]).read_bytes();eq=[x.filename for x in fs if x.file_size==len(data) and hashlib.sha256(z.read(x)).hexdigest().upper()==rows[1]['hashes'][0]];named=[x.filename for x in fs if x.filename.lower().endswith('/hpscan16.exe')]; assert not eq and not named
+ return dict(result='pass',sources=rows,graphs=graphs,archive_sha256=sha(zpath),archive_hpscan16_identical=eq,archive_hpscan16_named=named,scope='Historical sample recipe references and snapshot graph/package identities; no sample runtime, external deployment, or source-to-binary provenance')
+if __name__=='__main__':print(json.dumps(inspect(),indent=2))

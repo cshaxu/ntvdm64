@@ -1,0 +1,106 @@
+{
+  "result": "pass",
+  "family_sha256": "D02F797372D1D502BF4B6E8CA00228D0FA0F90DD684EFF8F65D27E8A0AB912AF",
+  "files": [
+    {
+      "name": "btest_c.h",
+      "guard": "_BTest_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\btest_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\btest_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\btest_c.h:3"
+      ]
+    },
+    {
+      "name": "c2cput_c.h",
+      "guard": "_C2CpuT_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\c2cput_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\c2cput_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\c2cput_c.h:3"
+      ]
+    },
+    {
+      "name": "cpumod_c.h",
+      "guard": "_CpuMod_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpumod_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpumod_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\cpumod_c.h:3"
+      ]
+    },
+    {
+      "name": "lxs_c.h",
+      "guard": "_LxS_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\lxs_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\lxs_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\lxs_c.h:3"
+      ]
+    },
+    {
+      "name": "mark_c.h",
+      "guard": "_Mark_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\mark_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\mark_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\mark_c.h:3"
+      ]
+    },
+    {
+      "name": "misc_c.h",
+      "guard": "_Misc_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\misc_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\misc_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\misc_c.h:3"
+      ]
+    },
+    {
+      "name": "nanoc_c.h",
+      "guard": "_NanoC_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoc_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoc_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoc_c.h:3"
+      ]
+    },
+    {
+      "name": "strsub_c.h",
+      "guard": "_StrSub_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\strsub_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\strsub_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\strsub_c.h:3"
+      ]
+    },
+    {
+      "name": "sub_c.h",
+      "guard": "_Sub_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\sub_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\sub_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\sub_c.h:3"
+      ]
+    },
+    {
+      "name": "test_c.h",
+      "guard": "_Test_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\test_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\test_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\test_c.h:3"
+      ]
+    },
+    {
+      "name": "xchg_c.h",
+      "guard": "_Xchg_c_h",
+      "other_references": [
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\xchg_c.h:1",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\xchg_c.h:2",
+        "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\xchg_c.h:3"
+      ]
+    }
+  ],
+  "scope": "Literal macro references in retained MVDM text extensions; no dynamically constructed names or external profiles"
+}

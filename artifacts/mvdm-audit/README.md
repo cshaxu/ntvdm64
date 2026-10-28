@@ -559,3 +559,7 @@ Further bounded reviews cover [DOS locale inputs](shard-2/dos-locale-source-chai
 The [WOW USER header family](shard-1/wow-user-header-family-review.md) and [core header family](shard-0/wow-header-family-review.md) record declaration paths and current build dependencies, without proving callback behavior. [GRAPHICS image lineage](shard-3/graphics-exc-lineage-review.md) relates a retained intermediate to the installed COM bytes; [DOS build-tool inputs](shard-2/dos-build-tool-auxiliary-review.md) remain pending where their historical dependency resolution is unknown.
 
 New source-family reviews cover [BIOS and CMOS resources](shard-2/bios-family-resource-review.md), [bin86 guest artifacts](shard-1/bin86-runtime-family-review.md), and [DDEML test resources](shard-3/ddeml-client-test-resources-review.md). Published ROM content and historical test inputs do not prove runtime or source-to-image behavior.
+
+The [WOW multimedia bridge and resource thunk review](shard-0/wow-media-resource-image-review.md) binds ten original function bodies to released executable code; their guest dispatch and lifecycle remain separate obligations.
+
+The [C-VID declaration family](shard-1/cvidc-header-family-review.md), [generated carriers](shard-3/cvidc-generated-carriers-role-review.md), and [VDD sample family](shard-2/vdd-sample-family-review.md) retain separate profile, provenance and runtime boundaries; missing current graph dependencies do not exclude device capabilities.

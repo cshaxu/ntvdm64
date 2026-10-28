@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "bf92afb7d",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-media-resource-image-observations.json",
+      "sha256": "82B1BF8A4332773B87F9DC43664CFBA46084F3CC95F2079B422F205A2DE03DBC"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "WOW function body binding only"
+}

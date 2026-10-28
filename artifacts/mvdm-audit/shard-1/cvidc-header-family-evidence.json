@@ -1,0 +1,318 @@
+{
+  "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "graph_sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+  "files": [
+    {
+      "name": "access_c.h",
+      "sha256": "cc53344d9ce5df3d47fc7dee463862e8fa769dd59fe885ce7dc4fcd0040b53c2",
+      "reference_hashes": [
+        "cc53344d9ce5df3d47fc7dee463862e8fa769dd59fe885ce7dc4fcd0040b53c2",
+        "cc53344d9ce5df3d47fc7dee463862e8fa769dd59fe885ce7dc4fcd0040b53c2"
+      ],
+      "guard_only": false,
+      "line_count": 37,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "bodge_c.h",
+      "sha256": "42135d53da8eb4733cbfbc6fe1ea2408f7b3595ad957e5b929a16d97941d6eea",
+      "reference_hashes": [
+        "42135d53da8eb4733cbfbc6fe1ea2408f7b3595ad957e5b929a16d97941d6eea",
+        "42135d53da8eb4733cbfbc6fe1ea2408f7b3595ad957e5b929a16d97941d6eea"
+      ],
+      "guard_only": false,
+      "line_count": 5,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "btest_c.h",
+      "sha256": "7de5938d9b167251bd61e326d7f2142381f7fac36cf942195f8cc3b10ac3f595",
+      "reference_hashes": [
+        "7de5938d9b167251bd61e326d7f2142381f7fac36cf942195f8cc3b10ac3f595",
+        "7de5938d9b167251bd61e326d7f2142381f7fac36cf942195f8cc3b10ac3f595"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "buffer_c.h",
+      "sha256": "76e130306d75308a614f40d3a0507f1b546c12ce41c0c95ee87cd8834d5ba305",
+      "reference_hashes": [
+        "76e130306d75308a614f40d3a0507f1b546c12ce41c0c95ee87cd8834d5ba305",
+        "76e130306d75308a614f40d3a0507f1b546c12ce41c0c95ee87cd8834d5ba305"
+      ],
+      "guard_only": false,
+      "line_count": 103,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "c2cput_c.h",
+      "sha256": "675216d270ea83bb20f5a3323de6c04c280f363f921cb4b037fc5786a26aa49d",
+      "reference_hashes": [
+        "675216d270ea83bb20f5a3323de6c04c280f363f921cb4b037fc5786a26aa49d",
+        "675216d270ea83bb20f5a3323de6c04c280f363f921cb4b037fc5786a26aa49d"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "contxt_c.h",
+      "sha256": "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c",
+      "reference_hashes": [
+        "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c",
+        "30eb579c995b281e873c6501fda356027b8b782867c65ecd8b73ff420c906c6c"
+      ],
+      "guard_only": false,
+      "line_count": 26,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "cpumod_c.h",
+      "sha256": "181a1204e685459661b200aa1ba804c3496105d5ed5ca28110aa0365f2d08785",
+      "reference_hashes": [
+        "181a1204e685459661b200aa1ba804c3496105d5ed5ca28110aa0365f2d08785",
+        "181a1204e685459661b200aa1ba804c3496105d5ed5ca28110aa0365f2d08785"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "cpureg_c.h",
+      "sha256": "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73",
+      "reference_hashes": [
+        "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73",
+        "40122f36ce134bb1b98556d595bf11f3cabc9b30551c370c50f2a95cd865ae73"
+      ],
+      "guard_only": false,
+      "line_count": 15,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "flags_c.h",
+      "sha256": "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026",
+      "reference_hashes": [
+        "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026",
+        "3b1a17ff4f053c314e313f56db3dc8c075d2e0631402b6a0260c485c50fbc026"
+      ],
+      "guard_only": false,
+      "line_count": 19,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "frag_c.h",
+      "sha256": "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578",
+      "reference_hashes": [
+        "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578",
+        "599cfc4449c0f7737f0ebc9eb95cb8845244a72551e5e653bc7c74ee8b559578"
+      ],
+      "guard_only": false,
+      "line_count": 415,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "inst_c.h",
+      "sha256": "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7",
+      "reference_hashes": [
+        "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7",
+        "5769c2a8776dfa91149f5875b9d23163205a08b0abbed5a003f74c17aacef7f7"
+      ],
+      "guard_only": false,
+      "line_count": 14,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "io_c.h",
+      "sha256": "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396",
+      "reference_hashes": [
+        "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396",
+        "cf0ee3beea5bb6dd847aa6aa92f3127b0c6f095bfd66142252c401bebe6b8396"
+      ],
+      "guard_only": false,
+      "line_count": 13,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "lxs_c.h",
+      "sha256": "06312f9ae7a7080525eaea432405b4ebf4d4d6a8a8e049f52c134aaee6423666",
+      "reference_hashes": [
+        "06312f9ae7a7080525eaea432405b4ebf4d4d6a8a8e049f52c134aaee6423666",
+        "06312f9ae7a7080525eaea432405b4ebf4d4d6a8a8e049f52c134aaee6423666"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "mark_c.h",
+      "sha256": "e06a0659134fd760752119dcf16a6a7ab0d68f9cb9230488abee10573b3c71dd",
+      "reference_hashes": [
+        "e06a0659134fd760752119dcf16a6a7ab0d68f9cb9230488abee10573b3c71dd",
+        "e06a0659134fd760752119dcf16a6a7ab0d68f9cb9230488abee10573b3c71dd"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "misc_c.h",
+      "sha256": "ef97191d02794b940d4d888debe84815617d48fe994fa442891df3e1fee0617b",
+      "reference_hashes": [
+        "ef97191d02794b940d4d888debe84815617d48fe994fa442891df3e1fee0617b",
+        "ef97191d02794b940d4d888debe84815617d48fe994fa442891df3e1fee0617b"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "nanoc_c.h",
+      "sha256": "7e92ec8459da354d4144a4a2334de6028f60817104fc6f7763b56b23597798b1",
+      "reference_hashes": [
+        "7e92ec8459da354d4144a4a2334de6028f60817104fc6f7763b56b23597798b1",
+        "7e92ec8459da354d4144a4a2334de6028f60817104fc6f7763b56b23597798b1"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "ppchst_c.h",
+      "sha256": "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3",
+      "reference_hashes": [
+        "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3",
+        "6b438b02a5ce3ee09f3195f65f776921b5eccc55e66d6ade6ca9b1c2ed584cd3"
+      ],
+      "guard_only": false,
+      "line_count": 9,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "sas_c.h",
+      "sha256": "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10",
+      "reference_hashes": [
+        "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10",
+        "0f9683a8b850161a763859d1ad3783d7e7b18d9f14a1c7b37402e85575976e10"
+      ],
+      "guard_only": false,
+      "line_count": 14,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "segreg_c.h",
+      "sha256": "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368",
+      "reference_hashes": [
+        "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368",
+        "7535415ef1cb3ba8ec8ff2cc279982fec90ebfd2e42b65fe1ce278a1290da368"
+      ],
+      "guard_only": false,
+      "line_count": 27,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "sf_c.h",
+      "sha256": "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f",
+      "reference_hashes": [
+        "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f",
+        "acaced67533f691ceac18c04e6af7f3e73dd4c43dbc939494fd5d16d0c31413f"
+      ],
+      "guard_only": false,
+      "line_count": 42,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "strint_c.h",
+      "sha256": "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88",
+      "reference_hashes": [
+        "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88",
+        "554636db8bef72089516e17b9e4d4259c25095dd10f021adaab62690d6a6aa88"
+      ],
+      "guard_only": false,
+      "line_count": 6,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "strsub_c.h",
+      "sha256": "e5db3a9dc7997f4ac92a49845c34d3f5f1f9444d51e204daf3aa59a98131e88b",
+      "reference_hashes": [
+        "e5db3a9dc7997f4ac92a49845c34d3f5f1f9444d51e204daf3aa59a98131e88b",
+        "e5db3a9dc7997f4ac92a49845c34d3f5f1f9444d51e204daf3aa59a98131e88b"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "sub_c.h",
+      "sha256": "0a7c443052ff007a112c6eeb894ef7bb8b36c8eeca268bde207f9236fd2ea1a6",
+      "reference_hashes": [
+        "0a7c443052ff007a112c6eeb894ef7bb8b36c8eeca268bde207f9236fd2ea1a6",
+        "0a7c443052ff007a112c6eeb894ef7bb8b36c8eeca268bde207f9236fd2ea1a6"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "task_c.h",
+      "sha256": "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b",
+      "reference_hashes": [
+        "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b",
+        "6b68909ce0cae83346ad342d45d78181da5bc89b8fb81e2760a7590665a2d11b"
+      ],
+      "guard_only": false,
+      "line_count": 9,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "test_c.h",
+      "sha256": "2eee5d31833f95fbfae772124d899daddb3af370d550ed2cf5333825740b6917",
+      "reference_hashes": [
+        "2eee5d31833f95fbfae772124d899daddb3af370d550ed2cf5333825740b6917",
+        "2eee5d31833f95fbfae772124d899daddb3af370d550ed2cf5333825740b6917"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "xchg_c.h",
+      "sha256": "0154055071207581f4178b5d7c69d217e14eac20acf686be6f49f75d7406c66d",
+      "reference_hashes": [
+        "0154055071207581f4178b5d7c69d217e14eac20acf686be6f49f75d7406c66d",
+        "0154055071207581f4178b5d7c69d217e14eac20acf686be6f49f75d7406c66d"
+      ],
+      "guard_only": true,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    }
+  ]
+}
