@@ -1,0 +1,366 @@
+{
+  "files": [
+    {
+      "path": "graphics.pro",
+      "sha256": "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b",
+      "original_hashes": [
+        "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b",
+        "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b",
+        "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [
+        "WINNT/SYSTEM32/GRAPHICS.PRO"
+      ],
+      "installed_basename_present": true,
+      "asm_direct_includes": [],
+      "make_mentions": [
+        {
+          "line": 12,
+          "text": "dest2   =graphics.pro"
+        }
+      ]
+    },
+    {
+      "path": "grcommon.ext",
+      "sha256": "71f7f5ea82b47e5f8e16f99223f642745fa1ec8ce33234311965cc0569cf54bb",
+      "original_hashes": [
+        "71f7f5ea82b47e5f8e16f99223f642745fa1ec8ce33234311965cc0569cf54bb",
+        "71f7f5ea82b47e5f8e16f99223f642745fa1ec8ce33234311965cc0569cf54bb",
+        "71f7f5ea82b47e5f8e16f99223f642745fa1ec8ce33234311965cc0569cf54bb"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [],
+      "make_mentions": [
+        {
+          "line": 46,
+          "text": "grbwprt.obj: grbwprt.asm grcommon.ext grctrl.str grshar.str makefile \\"
+        }
+      ]
+    },
+    {
+      "path": "grctrl.ext",
+      "sha256": "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9",
+      "original_hashes": [
+        "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9",
+        "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9",
+        "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grbwprt.asm:116",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcolprt.asm:78",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcpsd.asm:53",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:105",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:110",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grint2fh.asm:67"
+      ],
+      "make_mentions": [
+        {
+          "line": 35,
+          "text": "grinst.obj: grinst.asm\tgrload.ext grload2.ext grctrl.ext grprint.ext \\"
+        },
+        {
+          "line": 49,
+          "text": "grint2fh.obj: grint2fh.asm  grload.ext\tgrctrl.ext grprint.ext \\"
+        },
+        {
+          "line": 56,
+          "text": "grcolprt.obj: grctrl.str grshar.str grpattrn.str grctrl.ext  \\"
+        }
+      ]
+    },
+    {
+      "path": "grctrl.str",
+      "sha256": "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c",
+      "original_hashes": [
+        "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c",
+        "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c",
+        "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grbwprt.asm:113",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcolprt.asm:74",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcpsd.asm:54",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grctrl.asm:135"
+      ],
+      "make_mentions": [
+        {
+          "line": 46,
+          "text": "grbwprt.obj: grbwprt.asm grcommon.ext grctrl.str grshar.str makefile \\"
+        },
+        {
+          "line": 53,
+          "text": "grpattrn.str grpattrn.ext grctrl.str $(inc)\\struc.inc \\"
+        },
+        {
+          "line": 56,
+          "text": "grcolprt.obj: grctrl.str grshar.str grpattrn.str grctrl.ext  \\"
+        }
+      ]
+    },
+    {
+      "path": "grinst.ext",
+      "sha256": "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586",
+      "original_hashes": [
+        "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586",
+        "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586",
+        "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\graphics.asm:66",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grint2fh.asm:66",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload.asm:76",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm:155",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm:159",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm:98",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm:102",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grparms.asm:75"
+      ],
+      "make_mentions": [
+        {
+          "line": 33,
+          "text": "graphics.obj: graphics.asm  grinst.ext makefile"
+        },
+        {
+          "line": 59,
+          "text": "grload.obj: grload.asm $(inc)\\struc.inc grinst.ext grshar.str grparse.ext \\"
+        },
+        {
+          "line": 62,
+          "text": "grload2.obj: grload2.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 63,
+          "text": "grinst.ext grload.ext grparse.ext grpattrn.str grpattrn.ext \\"
+        },
+        {
+          "line": 66,
+          "text": "grload3.obj: grload3.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 67,
+          "text": "grinst.ext grload.ext grload2.ext grparse.ext grpattrn.str \\"
+        },
+        {
+          "line": 70,
+          "text": "grparms.obj: grparms.asm grmsg.equ grshar.str grinst.ext grparse.ext \\"
+        }
+      ]
+    },
+    {
+      "path": "grload3.ext",
+      "sha256": "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec",
+      "original_hashes": [
+        "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec",
+        "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec",
+        "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:104",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload.asm:81"
+      ],
+      "make_mentions": [
+        {
+          "line": 60,
+          "text": "grload2.ext grload3.ext grmsg.equ  makefile"
+        }
+      ]
+    },
+    {
+      "path": "grmsg.equ",
+      "sha256": "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860",
+      "original_hashes": [
+        "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860",
+        "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860",
+        "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:113",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload.asm:82",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm:158",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm:101",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grparms.asm:73"
+      ],
+      "make_mentions": [
+        {
+          "line": 37,
+          "text": "grint2fh.ext grmsg.equ  graphics.ctl  \\"
+        },
+        {
+          "line": 60,
+          "text": "grload2.ext grload3.ext grmsg.equ  makefile"
+        },
+        {
+          "line": 62,
+          "text": "grload2.obj: grload2.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 66,
+          "text": "grload3.obj: grload3.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 70,
+          "text": "grparms.obj: grparms.asm grmsg.equ grshar.str grinst.ext grparse.ext \\"
+        }
+      ]
+    },
+    {
+      "path": "grparms.ext",
+      "sha256": "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d",
+      "original_hashes": [
+        "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d",
+        "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d",
+        "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:112"
+      ],
+      "make_mentions": [
+        {
+          "line": 36,
+          "text": "grcpsd.ext\tgrparms.ext  grparse.ext grbwprt.ext grcolprt.ext \\"
+        }
+      ]
+    },
+    {
+      "path": "grpattrn.str",
+      "sha256": "9bc3b23e07e20518b8ccfd9d3b5f1f213f36835314578344ff1d891548e69ae1",
+      "original_hashes": [
+        "9bc3b23e07e20518b8ccfd9d3b5f1f213f36835314578344ff1d891548e69ae1",
+        "9bc3b23e07e20518b8ccfd9d3b5f1f213f36835314578344ff1d891548e69ae1",
+        "9bc3b23e07e20518b8ccfd9d3b5f1f213f36835314578344ff1d891548e69ae1"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grbwprt.asm:115",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcolprt.asm:76",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grctrl.asm:108",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm:162",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm:106",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grpattrn.asm:51"
+      ],
+      "make_mentions": [
+        {
+          "line": 44,
+          "text": "grpattrn.obj: grpattrn.asm grpattrn.str makefile"
+        },
+        {
+          "line": 47,
+          "text": "grpattrn.str $(inc)\\struc.inc makefile"
+        },
+        {
+          "line": 53,
+          "text": "grpattrn.str grpattrn.ext grctrl.str $(inc)\\struc.inc \\"
+        },
+        {
+          "line": 56,
+          "text": "grcolprt.obj: grctrl.str grshar.str grpattrn.str grctrl.ext  \\"
+        },
+        {
+          "line": 63,
+          "text": "grinst.ext grload.ext grparse.ext grpattrn.str grpattrn.ext \\"
+        },
+        {
+          "line": 67,
+          "text": "grinst.ext grload.ext grload2.ext grparse.ext grpattrn.str \\"
+        }
+      ]
+    },
+    {
+      "path": "grshar.str",
+      "sha256": "37394c24132158f7c970483a5277032de195e9247913ae0ba0930f7b1548d5f1",
+      "original_hashes": [
+        "37394c24132158f7c970483a5277032de195e9247913ae0ba0930f7b1548d5f1",
+        "37394c24132158f7c970483a5277032de195e9247913ae0ba0930f7b1548d5f1",
+        "37394c24132158f7c970483a5277032de195e9247913ae0ba0930f7b1548d5f1"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false,
+      "asm_direct_includes": [
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grbwprt.asm:114",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcolprt.asm:75",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grctrl.asm:107",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grinst.asm:99",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload.asm:78",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm:157",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm:100",
+        "src\\mvdm\\dos\\v86\\cmd\\graphics\\grparms.asm:74"
+      ],
+      "make_mentions": [
+        {
+          "line": 38,
+          "text": "$(inc)\\sysmsg.inc $(inc)\\struc.inc grshar.str  makefile"
+        },
+        {
+          "line": 46,
+          "text": "grbwprt.obj: grbwprt.asm grcommon.ext grctrl.str grshar.str makefile \\"
+        },
+        {
+          "line": 52,
+          "text": "grctrl.obj: grctrl.asm grint2fh.ext grbwprt.ext grcolprt.ext grshar.str \\"
+        },
+        {
+          "line": 56,
+          "text": "grcolprt.obj: grctrl.str grshar.str grpattrn.str grctrl.ext  \\"
+        },
+        {
+          "line": 59,
+          "text": "grload.obj: grload.asm $(inc)\\struc.inc grinst.ext grshar.str grparse.ext \\"
+        },
+        {
+          "line": 62,
+          "text": "grload2.obj: grload2.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 66,
+          "text": "grload3.obj: grload3.asm $(inc)\\struc.inc grinst.ext grshar.str grmsg.equ \\"
+        },
+        {
+          "line": 70,
+          "text": "grparms.obj: grparms.asm grmsg.equ grshar.str grinst.ext grparse.ext \\"
+        }
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}

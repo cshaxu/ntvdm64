@@ -1,0 +1,990 @@
+{
+  "files": [
+    {
+      "key": "dos/v86/cmd/append/append.exe",
+      "sha256": "73d6928246f369aac5de742e149196bf4dc3b5801a6effeed6d014e52841d0ac",
+      "refs": [
+        null,
+        "73d6928246f369aac5de742e149196bf4dc3b5801a6effeed6d014e52841d0ac",
+        "73d6928246f369aac5de742e149196bf4dc3b5801a6effeed6d014e52841d0ac"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\append\\makefile",
+      "make_mentions": [
+        {
+          "line": 11,
+          "text": "dest\t=append.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/backup/backup.exe",
+      "sha256": "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239",
+      "refs": [
+        null,
+        "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239",
+        "b692773717380e80558c5cf20bb5c6f9830dfd2ee908058daa51095955a6f239"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\backup\\makefile",
+      "make_mentions": [
+        {
+          "line": 11,
+          "text": "binplace backup.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/command/COMMAND.COM",
+      "sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43",
+      "refs": [
+        "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43",
+        "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43",
+        "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "make_mentions": [
+        {
+          "line": 9,
+          "text": "dest    =command.com"
+        },
+        {
+          "line": 26,
+          "text": "if exist command.com del command.com"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/COMMAND.COM",
+          "sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+        }
+      ],
+      "installed_sha256": "908a77ac617c2d741f0aa1b73f73973dcf29adc91f092e5bcb02173c8c732c43"
+    },
+    {
+      "key": "dos/v86/cmd/command/command.exc",
+      "sha256": "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+      "refs": [
+        "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+        "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c",
+        "1c02b6cf836387d9621aca333094a6e9a57aab591f37c78688faa3d4fce2886c"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "make_mentions": [
+        {
+          "line": 514,
+          "text": "command.exc:   command1.obj   tenv2.obj      \\"
+        },
+        {
+          "line": 533,
+          "text": "$(dest):       command.exc"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/command/help.skl",
+      "sha256": "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450",
+      "refs": [
+        "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450",
+        "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450",
+        "6b288ce9dd07b0069aad897e9b11a58ee54a738a8ebee088fc552d3bba05f450"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/command/readme.txt",
+      "sha256": "041a97e02c22441e6873f98a11dd64a44a1aa443c16d40b5b06e62a11953b631",
+      "refs": [
+        "041a97e02c22441e6873f98a11dd64a44a1aa443c16d40b5b06e62a11953b631",
+        "041a97e02c22441e6873f98a11dd64a44a1aa443c16d40b5b06e62a11953b631",
+        "041a97e02c22441e6873f98a11dd64a44a1aa443c16d40b5b06e62a11953b631"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\command\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/debug/DEBUG.EXE",
+      "sha256": "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
+      "refs": [
+        "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
+        "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60",
+        "9c230aa1caff2ff9d845514017b3e4bbe7b308ad26ad88740967651f7955cd60"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\debug\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for debug.exe"
+        },
+        {
+          "line": 11,
+          "text": "dest\t=debug.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/debug/debug.tag",
+      "sha256": "8596d58e46c5087bd2b62f89b536c0fcd3eea7e9ab6107cc197c93b8e6d32f0f",
+      "refs": [
+        "8596d58e46c5087bd2b62f89b536c0fcd3eea7e9ab6107cc197c93b8e6d32f0f",
+        "8596d58e46c5087bd2b62f89b536c0fcd3eea7e9ab6107cc197c93b8e6d32f0f",
+        "8596d58e46c5087bd2b62f89b536c0fcd3eea7e9ab6107cc197c93b8e6d32f0f"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\debug\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/debug/dosdebug/debug.arf",
+      "sha256": "4f8eeb696b288935d3cd2e94a5b6f7fd10dc4ab231a916d0424b76ec477ab3b1",
+      "refs": [
+        "4f8eeb696b288935d3cd2e94a5b6f7fd10dc4ab231a916d0424b76ec477ab3b1",
+        "4f8eeb696b288935d3cd2e94a5b6f7fd10dc4ab231a916d0424b76ec477ab3b1",
+        "4f8eeb696b288935d3cd2e94a5b6f7fd10dc4ab231a916d0424b76ec477ab3b1"
+      ],
+      "makefile": null,
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/edlin/EDLIN.EXE",
+      "sha256": "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+      "refs": [
+        "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+        "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477",
+        "9d835a8a46406fcb01f4509550cc86ea2755c3084c95c744cbec79d8d94c0477"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\edlin\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for edlin.exe"
+        },
+        {
+          "line": 11,
+          "text": "dest    =edlin.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/exe2bin/EXE2BIN.EXE",
+      "sha256": "edf4009a2ab45a30ae3291b0f8c9585de9a15b6a1262288ae6694d4693cb737e",
+      "refs": [
+        "edf4009a2ab45a30ae3291b0f8c9585de9a15b6a1262288ae6694d4693cb737e",
+        "edf4009a2ab45a30ae3291b0f8c9585de9a15b6a1262288ae6694d4693cb737e",
+        "edf4009a2ab45a30ae3291b0f8c9585de9a15b6a1262288ae6694d4693cb737e"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\exe2bin\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for exe2bin.exe"
+        },
+        {
+          "line": 11,
+          "text": "dest    =exe2bin.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/exe2bin/exe2bin.skl",
+      "sha256": "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173",
+      "refs": [
+        "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173",
+        "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173",
+        "e9475efabec5bcf730a276ac910dbc33dc4a2a18337abaf7fcb283a43bf7f173"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\exe2bin\\makefile",
+      "make_mentions": [
+        {
+          "line": 30,
+          "text": "exe2bin.ctl:  exe2bin.skl makefile      \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/exe2bin/exe2bin.tag",
+      "sha256": "d47d911cfa306aab0ca87c1d537669839b2fbe8a55e3b73add166bba74582b0f",
+      "refs": [
+        "d47d911cfa306aab0ca87c1d537669839b2fbe8a55e3b73add166bba74582b0f",
+        "d47d911cfa306aab0ca87c1d537669839b2fbe8a55e3b73add166bba74582b0f",
+        "d47d911cfa306aab0ca87c1d537669839b2fbe8a55e3b73add166bba74582b0f"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\exe2bin\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/keyb/KB16.COM",
+      "sha256": "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9",
+      "refs": [
+        "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9",
+        "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9",
+        "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\keyb\\makefile",
+      "make_mentions": [
+        {
+          "line": 12,
+          "text": "dest\t=kb16.com"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/KB16.COM",
+          "sha256": "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9"
+        }
+      ],
+      "installed_sha256": "9c432ea71e0e11bfb2edf9166c862826115ec4cdf8439f986a5ed71d9a3af3b9"
+    },
+    {
+      "key": "dos/v86/cmd/keyb/kb16.exc",
+      "sha256": "8dab9416340d09aa218fdbf904d52ae841a4fc47e90c9df3d18bbf1d2b532420",
+      "refs": [
+        "8dab9416340d09aa218fdbf904d52ae841a4fc47e90c9df3d18bbf1d2b532420",
+        "8dab9416340d09aa218fdbf904d52ae841a4fc47e90c9df3d18bbf1d2b532420",
+        "8dab9416340d09aa218fdbf904d52ae841a4fc47e90c9df3d18bbf1d2b532420"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\keyb\\makefile",
+      "make_mentions": [
+        {
+          "line": 77,
+          "text": "KB16.exc: keyb.obj     \\"
+        },
+        {
+          "line": 89,
+          "text": "$(dest):      kb16.exc"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/keyb/keyb.tag",
+      "sha256": "7de060fa90bffb946b7b2f737105de4efc1d84f38967f05eb89372ebc732443c",
+      "refs": [
+        "7de060fa90bffb946b7b2f737105de4efc1d84f38967f05eb89372ebc732443c",
+        "7de060fa90bffb946b7b2f737105de4efc1d84f38967f05eb89372ebc732443c",
+        "7de060fa90bffb946b7b2f737105de4efc1d84f38967f05eb89372ebc732443c"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\keyb\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/loadfix/loadfix.exc",
+      "sha256": "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b",
+      "refs": [
+        "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b",
+        "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b",
+        "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\loadfix\\makefile",
+      "make_mentions": [
+        {
+          "line": 30,
+          "text": "$(dest): loadfix.exc"
+        },
+        {
+          "line": 32,
+          "text": "loadfix.exc: loadfix.obj"
+        },
+        {
+          "line": 33,
+          "text": "link16 $(exelink) $(exelink) loadfix,loadfix.exc;"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/mem/mem.skl",
+      "sha256": "71ebde828ade14a718e715c333d331b3a89132897ec0801a811fb9b56a01d9bb",
+      "refs": [
+        "71ebde828ade14a718e715c333d331b3a89132897ec0801a811fb9b56a01d9bb",
+        "71ebde828ade14a718e715c333d331b3a89132897ec0801a811fb9b56a01d9bb",
+        "71ebde828ade14a718e715c333d331b3a89132897ec0801a811fb9b56a01d9bb"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\mem\\makefile",
+      "make_mentions": [
+        {
+          "line": 31,
+          "text": "mem.ctl:        mem.skl                         \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/mem/mem.tag",
+      "sha256": "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45",
+      "refs": [
+        "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45",
+        "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45",
+        "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\mem\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/mem/value",
+      "sha256": "dd36b752acf9c8786c69992d5daaf2bb3132a0c9513cd4e9220bde13678ec1a2",
+      "refs": [
+        "dd36b752acf9c8786c69992d5daaf2bb3132a0c9513cd4e9220bde13678ec1a2",
+        "dd36b752acf9c8786c69992d5daaf2bb3132a0c9513cd4e9220bde13678ec1a2",
+        "dd36b752acf9c8786c69992d5daaf2bb3132a0c9513cd4e9220bde13678ec1a2"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\mem\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/nlsfunc/nlsfunc.exe",
+      "sha256": "a49e8c6c392f0fd323b52c1fa612420a9fc0258ba59413ccb3d2d19b1f229ee8",
+      "refs": [
+        null,
+        "a49e8c6c392f0fd323b52c1fa612420a9fc0258ba59413ccb3d2d19b1f229ee8",
+        "a49e8c6c392f0fd323b52c1fa612420a9fc0258ba59413ccb3d2d19b1f229ee8"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\nlsfunc\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for nlsfunc.exe"
+        },
+        {
+          "line": 11,
+          "text": "dest    =nlsfunc.exe"
+        },
+        {
+          "line": 55,
+          "text": "nlsfunc.exe:  nlsfunc.obj               \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/nlsfunc/nlsfunc.skl",
+      "sha256": "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043",
+      "refs": [
+        "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043",
+        "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043",
+        "01554da2fb9eceaa7f3205e3697ed8e15289ba9d77c5015bb04297524de11043"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\nlsfunc\\makefile",
+      "make_mentions": [
+        {
+          "line": 28,
+          "text": "nlsfunc.ctl:  nlsfunc.skl               \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/gorilla.bas",
+      "sha256": "9926fc1f50c4b489ec4c1b0da5bd2c497ebf4282b3259c28a835a743e24699f7",
+      "refs": [
+        "9926fc1f50c4b489ec4c1b0da5bd2c497ebf4282b3259c28a835a743e24699f7",
+        "9926fc1f50c4b489ec4c1b0da5bd2c497ebf4282b3259c28a835a743e24699f7",
+        "9926fc1f50c4b489ec4c1b0da5bd2c497ebf4282b3259c28a835a743e24699f7"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 21,
+          "text": "binplace gorilla.bas"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/money.bas",
+      "sha256": "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065",
+      "refs": [
+        "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065",
+        "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065",
+        "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 23,
+          "text": "binplace money.bas"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/msherc.com",
+      "sha256": "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e",
+      "refs": [
+        "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e",
+        "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e",
+        "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 18,
+          "text": "binplace msherc.com"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/nibbles.bas",
+      "sha256": "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528",
+      "refs": [
+        "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528",
+        "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528",
+        "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 22,
+          "text": "binplace nibbles.bas"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/qbasic.exe",
+      "sha256": "e8341b546cc12cfd4d59a7eb24e116f2cfbcae71779d9a7f712902f65e5deb6e",
+      "refs": [
+        null,
+        "e8341b546cc12cfd4d59a7eb24e116f2cfbcae71779d9a7f712902f65e5deb6e",
+        "e8341b546cc12cfd4d59a7eb24e116f2cfbcae71779d9a7f712902f65e5deb6e"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for qbasic.exe"
+        },
+        {
+          "line": 16,
+          "text": "binplace qbasic.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/QBASIC.EXE",
+          "sha256": "ecca463f1820749a1408fc8ef3799d23fb232c188669ca9d5db3769ce628746b"
+        }
+      ],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/qbasic.hlp",
+      "sha256": "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db",
+      "refs": [
+        "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db",
+        "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db",
+        "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 17,
+          "text": "binplace qbasic.hlp"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/QBASIC.HLP",
+          "sha256": "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db"
+        }
+      ],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/qbasic/remline.bas",
+      "sha256": "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5",
+      "refs": [
+        "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5",
+        "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5",
+        "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\makefile",
+      "make_mentions": [
+        {
+          "line": 24,
+          "text": "binplace remline.bas"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/setver/setver.doc",
+      "sha256": "356591e4c183e584439a27a0f341a9a6c24dcb1446e9a9a9e27cbf07b4c3abd7",
+      "refs": [
+        "356591e4c183e584439a27a0f341a9a6c24dcb1446e9a9a9e27cbf07b4c3abd7",
+        "356591e4c183e584439a27a0f341a9a6c24dcb1446e9a9a9e27cbf07b4c3abd7",
+        "356591e4c183e584439a27a0f341a9a6c24dcb1446e9a9a9e27cbf07b4c3abd7"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\setver\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/setver/setver.exe",
+      "sha256": "8ab7e855fb4bd066ac0230dfb7d194180bb73fdd99c040c340a903353dcd822b",
+      "refs": [
+        null,
+        "8ab7e855fb4bd066ac0230dfb7d194180bb73fdd99c040c340a903353dcd822b",
+        "8ab7e855fb4bd066ac0230dfb7d194180bb73fdd99c040c340a903353dcd822b"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\setver\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for setver.exe"
+        },
+        {
+          "line": 31,
+          "text": "dest    =setver.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": "7d8b0765c302358117186d93283ab70d2d0dc72852757afb4cfeeca69fd74653"
+    },
+    {
+      "key": "dos/v86/cmd/setver/setver.tag",
+      "sha256": "195938d160d0e8aa092cbcd1a04db8df7b05e746592c128f1643a2a25b91f8cd",
+      "refs": [
+        "195938d160d0e8aa092cbcd1a04db8df7b05e746592c128f1643a2a25b91f8cd",
+        "195938d160d0e8aa092cbcd1a04db8df7b05e746592c128f1643a2a25b91f8cd",
+        "195938d160d0e8aa092cbcd1a04db8df7b05e746592c128f1643a2a25b91f8cd"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\setver\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/cmd/share/share.EXE",
+      "sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc",
+      "refs": [
+        "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc",
+        "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc",
+        "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\cmd\\share\\makefile",
+      "make_mentions": [
+        {
+          "line": 1,
+          "text": "# Makefile for share.exe"
+        },
+        {
+          "line": 11,
+          "text": "dest\t=share.exe"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/ansi/ANSI.EXS",
+      "sha256": "09d886e1d050bc7bf4afd49e21ca22300c8e739ae8eb8d51a3b83926541c24a8",
+      "refs": [
+        null,
+        null,
+        "09d886e1d050bc7bf4afd49e21ca22300c8e739ae8eb8d51a3b83926541c24a8"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "make_mentions": [
+        {
+          "line": 71,
+          "text": "ansi.exs:     ansi.obj                  \\"
+        },
+        {
+          "line": 79,
+          "text": "$(dest):      ansi.exs"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/ansi/ansi.skl",
+      "sha256": "069a2e18e48db331136612928b492e45373faed134ccb35016b376d46ace8d65",
+      "refs": [
+        "069a2e18e48db331136612928b492e45373faed134ccb35016b376d46ace8d65",
+        "069a2e18e48db331136612928b492e45373faed134ccb35016b376d46ace8d65",
+        "069a2e18e48db331136612928b492e45373faed134ccb35016b376d46ace8d65"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "make_mentions": [
+        {
+          "line": 39,
+          "text": "ansi.ctl:     ansi.skl                  \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/ansi/ANSI.SYS",
+      "sha256": "c929c0893bba4c6454632d3408ee4f7661b51cf5c2ce20035dcd4283cd623c85",
+      "refs": [
+        "c929c0893bba4c6454632d3408ee4f7661b51cf5c2ce20035dcd4283cd623c85",
+        "c929c0893bba4c6454632d3408ee4f7661b51cf5c2ce20035dcd4283cd623c85",
+        "c929c0893bba4c6454632d3408ee4f7661b51cf5c2ce20035dcd4283cd623c85"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "make_mentions": [
+        {
+          "line": 7,
+          "text": "#  Make file for ANSI.SYS"
+        },
+        {
+          "line": 13,
+          "text": "#*********************** Makefile for ansi.sys ****************************"
+        },
+        {
+          "line": 19,
+          "text": "dest\t=ansi.sys"
+        },
+        {
+          "line": 36,
+          "text": "if exist ansi.sys   del ansi.sys"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/ansi/ansi.tag",
+      "sha256": "c138d931caf30e13a1b1761c6a57585454ae9748bcc1b433262dad0d20ca2b7a",
+      "refs": [
+        "c138d931caf30e13a1b1761c6a57585454ae9748bcc1b433262dad0d20ca2b7a",
+        "c138d931caf30e13a1b1761c6a57585454ae9748bcc1b433262dad0d20ca2b7a",
+        "c138d931caf30e13a1b1761c6a57585454ae9748bcc1b433262dad0d20ca2b7a"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/ansi/ansivid.inc",
+      "sha256": "de901daa752df43311b9e740ac05878f2a303077dd41f5efb8da3a90b19cf06f",
+      "refs": [
+        "de901daa752df43311b9e740ac05878f2a303077dd41f5efb8da3a90b19cf06f",
+        "de901daa752df43311b9e740ac05878f2a303077dd41f5efb8da3a90b19cf06f",
+        "de901daa752df43311b9e740ac05878f2a303077dd41f5efb8da3a90b19cf06f"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\ansi\\makefile",
+      "make_mentions": [
+        {
+          "line": 58,
+          "text": "ansivid.inc               \\"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/country/alclbjfk",
+      "sha256": "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2",
+      "refs": [
+        "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2",
+        "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2",
+        "411dfbcefa2a14da7715a3b21760a6ee696aae7b006faf3ec0fe35f0763944a2"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\country\\makefile",
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/country/country.exe",
+      "sha256": "1b5b114fc5442a596d654ee2e463cf9b250561ab9de49c7bf15f79856fb96442",
+      "refs": [
+        null,
+        "1b5b114fc5442a596d654ee2e463cf9b250561ab9de49c7bf15f79856fb96442",
+        "1b5b114fc5442a596d654ee2e463cf9b250561ab9de49c7bf15f79856fb96442"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\country\\makefile",
+      "make_mentions": [
+        {
+          "line": 16,
+          "text": "-del country.obj country.exe country.map country.sym country.sys > nul 2>&1"
+        },
+        {
+          "line": 20,
+          "text": "country.exe: country.obj"
+        },
+        {
+          "line": 23,
+          "text": "country.sys: country.exe"
+        },
+        {
+          "line": 24,
+          "text": "reloc country.exe country.sys"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/country/COUNTRY.SYS",
+      "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54",
+      "refs": [
+        "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54",
+        "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54",
+        "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\country\\makefile",
+      "make_mentions": [
+        {
+          "line": 6,
+          "text": "#************************ Makefile for Country.sys ************************"
+        },
+        {
+          "line": 10,
+          "text": "all: country.sys"
+        },
+        {
+          "line": 11,
+          "text": "binplace country.sys"
+        },
+        {
+          "line": 16,
+          "text": "-del country.obj country.exe country.map country.sym country.sys > nul 2>&1"
+        },
+        {
+          "line": 23,
+          "text": "country.sys: country.exe"
+        },
+        {
+          "line": 24,
+          "text": "reloc country.exe country.sys"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        }
+      ],
+      "installed_sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+    },
+    {
+      "key": "dos/v86/dev/himem/HIMEM.BIN",
+      "sha256": "d873abddad195149c0354a67c3c050685c92fab5ef330f8365cb8f5b242018c8",
+      "refs": [
+        null,
+        null,
+        "d873abddad195149c0354a67c3c050685c92fab5ef330f8365cb8f5b242018c8"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "make_mentions": [
+        {
+          "line": 57,
+          "text": "himem.bin: himem.exe"
+        },
+        {
+          "line": 58,
+          "text": "reloc himem.exe himem.bin 0"
+        },
+        {
+          "line": 60,
+          "text": "$(dest): himem.bin"
+        },
+        {
+          "line": 61,
+          "text": "stripdd himem.bin $(dest)"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/himem/himem.exe",
+      "sha256": "8121862c21b74f96c50b08232ac3d9cdab2467a784f1d73c1ab94361d7bcb429",
+      "refs": [
+        null,
+        null,
+        "8121862c21b74f96c50b08232ac3d9cdab2467a784f1d73c1ab94361d7bcb429"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "make_mentions": [
+        {
+          "line": 54,
+          "text": "himem.exe: himem.obj himem1.obj himem2.obj messages.obj himem4.obj himem5.obj"
+        },
+        {
+          "line": 57,
+          "text": "himem.bin: himem.exe"
+        },
+        {
+          "line": 58,
+          "text": "reloc himem.exe himem.bin 0"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/himem/HIMEM.SYS",
+      "sha256": "08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08",
+      "refs": [
+        null,
+        null,
+        "08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "make_mentions": [
+        {
+          "line": 7,
+          "text": "#  Make file for HIMEM.SYS"
+        },
+        {
+          "line": 14,
+          "text": "dest    =himem.sys"
+        },
+        {
+          "line": 39,
+          "text": "if exist himem.sys  del himem.sys"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/HIMEM.SYS",
+          "sha256": "08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08"
+        }
+      ],
+      "installed_sha256": "08aa2c47d835460ed3067fa7d6f8a3b37edeca524ad102b0588fdd1bf389ce08"
+    },
+    {
+      "key": "dos/v86/dev/himem/himem1.asm",
+      "sha256": "375bce3bb1d474f0f50c8564e8e9effb96717371f4d2a7cf3cf6fdd0fa72d108",
+      "refs": [
+        "375bce3bb1d474f0f50c8564e8e9effb96717371f4d2a7cf3cf6fdd0fa72d108",
+        "375bce3bb1d474f0f50c8564e8e9effb96717371f4d2a7cf3cf6fdd0fa72d108",
+        "375bce3bb1d474f0f50c8564e8e9effb96717371f4d2a7cf3cf6fdd0fa72d108"
+      ],
+      "makefile": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "make_mentions": [
+        {
+          "line": 44,
+          "text": "himem1.obj: himem1.asm himem.inc $(cinc)/xmssvc.inc"
+        }
+      ],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/himem/usa-ms/messages.asm",
+      "sha256": "d7da918413e5594c4747dad8d0c2d6b97d123c01a16b0c0dfefe3bed41cf4216",
+      "refs": [
+        "d7da918413e5594c4747dad8d0c2d6b97d123c01a16b0c0dfefe3bed41cf4216",
+        "d7da918413e5594c4747dad8d0c2d6b97d123c01a16b0c0dfefe3bed41cf4216",
+        "d7da918413e5594c4747dad8d0c2d6b97d123c01a16b0c0dfefe3bed41cf4216"
+      ],
+      "makefile": null,
+      "make_mentions": [],
+      "valid_deps": [],
+      "zip_entries": [],
+      "installed_sha256": null
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ],
+  "limitations": "Literal recipe mentions only; filename may be generated implicitly; no execution or image lineage."
+}

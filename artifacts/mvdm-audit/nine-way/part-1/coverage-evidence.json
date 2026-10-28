@@ -1,0 +1,16 @@
+{
+  "mvdm": {
+    "expected": 120,
+    "observed": 120,
+    "missing": [],
+    "duplicates": {},
+    "out_of_scope": []
+  },
+  "external": {
+    "expected": 4773,
+    "observed": 4773,
+    "missing": [],
+    "duplicates": {},
+    "out_of_scope": []
+  }
+}

@@ -1,0 +1,1362 @@
+{
+  "files": [
+    {
+      "key": "dos/v86/dev/keyboard/kdf.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdf.asm",
+          "sha256": "d632227cf79ea7b4823c1022176b1707c09bc4df950f79747cbdd70d74cc5b86"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdf.asm",
+          "sha256": "d632227cf79ea7b4823c1022176b1707c09bc4df950f79747cbdd70d74cc5b86"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdf.asm",
+          "sha256": "d632227cf79ea7b4823c1022176b1707c09bc4df950f79747cbdd70d74cc5b86"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdf.asm",
+          "sha256": "d632227cf79ea7b4823c1022176b1707c09bc4df950f79747cbdd70d74cc5b86"
+        }
+      ],
+      "public_lines": [],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdf.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfbl.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl.asm",
+          "sha256": "8c45d19006f05f030418322ed49abae8ba08acab22b63058458070ffa6584d4c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl.asm",
+          "sha256": "8c45d19006f05f030418322ed49abae8ba08acab22b63058458070ffa6584d4c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl.asm",
+          "sha256": "8c45d19006f05f030418322ed49abae8ba08acab22b63058458070ffa6584d4c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl.asm",
+          "sha256": "8c45d19006f05f030418322ed49abae8ba08acab22b63058458070ffa6584d4c"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC BL_LOGIC                ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC BL2_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC BL3_LOGIC               ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC BL_866_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC BL_437_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC BL_850_XLAT             ;;"
+        },
+        {
+          "line": 25,
+          "text": "PUBLIC BL_855_XLAT             ;;"
+        },
+        {
+          "line": 154,
+          "text": "PUBLIC BL1_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 304,
+          "text": "PUBLIC BL2_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 451,
+          "text": "PUBLIC BL3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfbl.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfbl097.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl097.asm",
+          "sha256": "39faa524067fccb6966415968c2d0f7601a26786ae9a70998bb2ba2d643842e2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl097.asm",
+          "sha256": "39faa524067fccb6966415968c2d0f7601a26786ae9a70998bb2ba2d643842e2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl097.asm",
+          "sha256": "39faa524067fccb6966415968c2d0f7601a26786ae9a70998bb2ba2d643842e2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl097.asm",
+          "sha256": "39faa524067fccb6966415968c2d0f7601a26786ae9a70998bb2ba2d643842e2"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC BL1_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC BL1_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC BL1_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC BL1_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC BL1_855_XLAT             ;;"
+        },
+        {
+          "line": 152,
+          "text": "PUBLIC BL1_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfbl097.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfbl098.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl098.asm",
+          "sha256": "d35b8fa5d3bade13784d8c4bdddc40e11dbc634f3241dea35290b79f686c9c4f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl098.asm",
+          "sha256": "d35b8fa5d3bade13784d8c4bdddc40e11dbc634f3241dea35290b79f686c9c4f"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl098.asm",
+          "sha256": "d35b8fa5d3bade13784d8c4bdddc40e11dbc634f3241dea35290b79f686c9c4f"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl098.asm",
+          "sha256": "d35b8fa5d3bade13784d8c4bdddc40e11dbc634f3241dea35290b79f686c9c4f"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC BL2_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC BL2_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC BL2_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC BL2_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC BL2_855_XLAT             ;;"
+        },
+        {
+          "line": 150,
+          "text": "PUBLIC BL2_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfbl098.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfbl099.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl099.asm",
+          "sha256": "e14824500aac8360691fb02247d1fe0ec2e8ed590fce672a93fa65acb9e4ecc3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl099.asm",
+          "sha256": "e14824500aac8360691fb02247d1fe0ec2e8ed590fce672a93fa65acb9e4ecc3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl099.asm",
+          "sha256": "e14824500aac8360691fb02247d1fe0ec2e8ed590fce672a93fa65acb9e4ecc3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbl099.asm",
+          "sha256": "e14824500aac8360691fb02247d1fe0ec2e8ed590fce672a93fa65acb9e4ecc3"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC BL3_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC BL3_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC BL3_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC BL3_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC BL3_855_XLAT             ;;"
+        },
+        {
+          "line": 149,
+          "text": "PUBLIC BL3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfbl099.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfbr.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr.asm",
+          "sha256": "29ecb6e0ff29160901f5009294061134beccef28ddf892b2dc7bb6c68d849b48"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr.asm",
+          "sha256": "29ecb6e0ff29160901f5009294061134beccef28ddf892b2dc7bb6c68d849b48"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr.asm",
+          "sha256": "29ecb6e0ff29160901f5009294061134beccef28ddf892b2dc7bb6c68d849b48"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfbr.asm",
+          "sha256": "29ecb6e0ff29160901f5009294061134beccef28ddf892b2dc7bb6c68d849b48"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 27,
+          "text": "PUBLIC BR_LOGIC \t       ;;"
+        },
+        {
+          "line": 28,
+          "text": "PUBLIC BR_437_XLAT\t       ;;"
+        },
+        {
+          "line": 29,
+          "text": "PUBLIC BR_850_XLAT\t       ;;"
+        },
+        {
+          "line": 396,
+          "text": "PUBLIC BR_COMMON_XLAT\t\t       ;;"
+        },
+        {
+          "line": 892,
+          "text": "PUBLIC BR_437_XLAT\t\t       ;;"
+        },
+        {
+          "line": 907,
+          "text": "PUBLIC BR_850_XLAT\t\t       ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [
+        {
+          "line": 77,
+          "text": "# KDFBR.OBJ:    KDFBR.ASM    $(com)\\keybshar.inc keybmac.inc makefile   # [Mihindu 10/30/90 : added Brazil]"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfbr.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdffr.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr.asm",
+          "sha256": "ffe30b27951927728891ca09fb4e6cb49f476626a7f196406903f063af136c1c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr.asm",
+          "sha256": "ffe30b27951927728891ca09fb4e6cb49f476626a7f196406903f063af136c1c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr.asm",
+          "sha256": "ffe30b27951927728891ca09fb4e6cb49f476626a7f196406903f063af136c1c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr.asm",
+          "sha256": "ffe30b27951927728891ca09fb4e6cb49f476626a7f196406903f063af136c1c"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 30,
+          "text": "PUBLIC FR_LOGIC \t       ;;"
+        },
+        {
+          "line": 31,
+          "text": "PUBLIC FR_437_XLAT\t       ;;"
+        },
+        {
+          "line": 32,
+          "text": "PUBLIC FR_850_XLAT\t       ;;"
+        },
+        {
+          "line": 364,
+          "text": "PUBLIC FR_COMMON_XLAT\t\t       ;;"
+        },
+        {
+          "line": 1246,
+          "text": "PUBLIC FR_437_XLAT\t\t       ;;"
+        },
+        {
+          "line": 1331,
+          "text": "PUBLIC FR_850_XLAT\t\t       ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdffr.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdffr120.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr120.asm",
+          "sha256": "f567591898fe1afd787c912566cbf2b40df7de310c71c50a00ce55de10c74fb9"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr120.asm",
+          "sha256": "f567591898fe1afd787c912566cbf2b40df7de310c71c50a00ce55de10c74fb9"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr120.asm",
+          "sha256": "f567591898fe1afd787c912566cbf2b40df7de310c71c50a00ce55de10c74fb9"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdffr120.asm",
+          "sha256": "f567591898fe1afd787c912566cbf2b40df7de310c71c50a00ce55de10c74fb9"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 29,
+          "text": "PUBLIC FR1_LOGIC\t       ;;"
+        },
+        {
+          "line": 30,
+          "text": "PUBLIC FR1_437_XLAT\t       ;;"
+        },
+        {
+          "line": 31,
+          "text": "PUBLIC FR1_850_XLAT\t       ;;"
+        },
+        {
+          "line": 413,
+          "text": "PUBLIC FR1_COMMON_XLAT \t\t;;"
+        },
+        {
+          "line": 1547,
+          "text": "PUBLIC FR1_437_XLAT\t\t\t;;"
+        },
+        {
+          "line": 1894,
+          "text": "PUBLIC FR1_850_XLAT\t\t\t;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdffr120.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfit.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit.asm",
+          "sha256": "4af550ecb3ea961b2451c542b055206f013964c5998555265f51e00dbbaf19cd"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit.asm",
+          "sha256": "4af550ecb3ea961b2451c542b055206f013964c5998555265f51e00dbbaf19cd"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit.asm",
+          "sha256": "4af550ecb3ea961b2451c542b055206f013964c5998555265f51e00dbbaf19cd"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfit.asm",
+          "sha256": "4af550ecb3ea961b2451c542b055206f013964c5998555265f51e00dbbaf19cd"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 28,
+          "text": "PUBLIC IT_LOGIC \t       ;;"
+        },
+        {
+          "line": 29,
+          "text": "PUBLIC IT_437_XLAT\t       ;;"
+        },
+        {
+          "line": 30,
+          "text": "PUBLIC IT_850_XLAT\t       ;;"
+        },
+        {
+          "line": 311,
+          "text": "PUBLIC IT_COMMON_XLAT\t\t       ;;"
+        },
+        {
+          "line": 681,
+          "text": "PUBLIC IT_437_XLAT\t\t       ;;"
+        },
+        {
+          "line": 742,
+          "text": "PUBLIC IT_850_XLAT\t\t       ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfit.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfjp.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfjp.asm",
+          "sha256": "5fb7f0dfef9d9160b2c7232159251a3f6891f3d14103ed808bff45e698e3cd77"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfjp.asm",
+          "sha256": "5fb7f0dfef9d9160b2c7232159251a3f6891f3d14103ed808bff45e698e3cd77"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfjp.asm",
+          "sha256": "5fb7f0dfef9d9160b2c7232159251a3f6891f3d14103ed808bff45e698e3cd77"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfjp.asm",
+          "sha256": "5fb7f0dfef9d9160b2c7232159251a3f6891f3d14103ed808bff45e698e3cd77"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 29,
+          "text": "PUBLIC JP_LOGIC                ;;"
+        },
+        {
+          "line": 30,
+          "text": "PUBLIC JP_COMMON_XLAT          ;;"
+        },
+        {
+          "line": 31,
+          "text": "PUBLIC  JP_932_XLAT            ;;"
+        },
+        {
+          "line": 32,
+          "text": "PUBLIC  JP_437_XLAT            ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [
+        {
+          "line": 113,
+          "text": "# KDFJP.OBJ:\tKDFJP.ASM    $(com)\\keybshar.inc keybmac.inc makefile\t    # CAS M000 Merged JP from IBM"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfjp.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfpl.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpl.asm",
+          "sha256": "c41813d732ba6d82b5747761184c48e7d3182d076a7c7e35c79e83d36c1e4262"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpl.asm",
+          "sha256": "c41813d732ba6d82b5747761184c48e7d3182d076a7c7e35c79e83d36c1e4262"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpl.asm",
+          "sha256": "c41813d732ba6d82b5747761184c48e7d3182d076a7c7e35c79e83d36c1e4262"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfpl.asm",
+          "sha256": "c41813d732ba6d82b5747761184c48e7d3182d076a7c7e35c79e83d36c1e4262"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 23,
+          "text": "PUBLIC PL_LOGIC                ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC PL_850_XLAT             ;;"
+        },
+        {
+          "line": 25,
+          "text": "PUBLIC PL_852_XLAT             ;;"
+        },
+        {
+          "line": 661,
+          "text": "PUBLIC PL_COMMON_XLAT                 ;;"
+        },
+        {
+          "line": 1381,
+          "text": "PUBLIC PL_850_XLAT                    ;;"
+        },
+        {
+          "line": 1643,
+          "text": "PUBLIC PL_852_XLAT                    ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [
+        {
+          "line": 95,
+          "text": "#KDFPL.OBJ:\tKDFPL.ASM    $(com)\\keybshar.inc keybmac.inc makefile"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfpl.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfru.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru.asm",
+          "sha256": "f8ab3487fe86845a2ff90e96b53bb4caeac26c2eb9434490e5ffb04652879120"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru.asm",
+          "sha256": "f8ab3487fe86845a2ff90e96b53bb4caeac26c2eb9434490e5ffb04652879120"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru.asm",
+          "sha256": "f8ab3487fe86845a2ff90e96b53bb4caeac26c2eb9434490e5ffb04652879120"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru.asm",
+          "sha256": "f8ab3487fe86845a2ff90e96b53bb4caeac26c2eb9434490e5ffb04652879120"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC RU1_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC RU2_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC RU3_LOGIC               ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC RU_866_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC RU_437_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC RU_850_XLAT             ;;"
+        },
+        {
+          "line": 25,
+          "text": "PUBLIC RU_855_XLAT             ;;"
+        },
+        {
+          "line": 26,
+          "text": "PUBLIC RU_1251_XLAT            ;;"
+        },
+        {
+          "line": 155,
+          "text": "PUBLIC RU1_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 305,
+          "text": "PUBLIC RU2_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 452,
+          "text": "PUBLIC RU3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfru.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfru092.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru092.asm",
+          "sha256": "2fbc917cafcd9eeab277b52e7256a822c1bb2aca10aac202755411cd40b31371"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru092.asm",
+          "sha256": "2fbc917cafcd9eeab277b52e7256a822c1bb2aca10aac202755411cd40b31371"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru092.asm",
+          "sha256": "2fbc917cafcd9eeab277b52e7256a822c1bb2aca10aac202755411cd40b31371"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru092.asm",
+          "sha256": "2fbc917cafcd9eeab277b52e7256a822c1bb2aca10aac202755411cd40b31371"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC RU2_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC RU2_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC RU2_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC RU2_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC RU2_855_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC RU2_1251_XLAT            ;;"
+        },
+        {
+          "line": 151,
+          "text": "PUBLIC RU2_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfru092.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfru093.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru093.asm",
+          "sha256": "33c0b4705c26c82471bb45df22ccbf1e25579beb862aed039525c569601f5e83"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru093.asm",
+          "sha256": "33c0b4705c26c82471bb45df22ccbf1e25579beb862aed039525c569601f5e83"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru093.asm",
+          "sha256": "33c0b4705c26c82471bb45df22ccbf1e25579beb862aed039525c569601f5e83"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfru093.asm",
+          "sha256": "33c0b4705c26c82471bb45df22ccbf1e25579beb862aed039525c569601f5e83"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC RU3_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC RU3_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC RU3_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC RU3_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC RU3_855_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC RU3_1251_XLAT            ;;"
+        },
+        {
+          "line": 150,
+          "text": "PUBLIC RU3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfru093.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfsu.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsu.asm",
+          "sha256": "0c8cf0bf41d8ec47f847d49680d26c809c954dfcc1caf5e59f04582493510e67"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsu.asm",
+          "sha256": "0c8cf0bf41d8ec47f847d49680d26c809c954dfcc1caf5e59f04582493510e67"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsu.asm",
+          "sha256": "0c8cf0bf41d8ec47f847d49680d26c809c954dfcc1caf5e59f04582493510e67"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfsu.asm",
+          "sha256": "0c8cf0bf41d8ec47f847d49680d26c809c954dfcc1caf5e59f04582493510e67"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 25,
+          "text": "PUBLIC SU_LOGIC \t       ;;"
+        },
+        {
+          "line": 26,
+          "text": "PUBLIC SU_437_XLAT\t       ;;"
+        },
+        {
+          "line": 27,
+          "text": "PUBLIC SU_850_XLAT\t       ;;"
+        },
+        {
+          "line": 382,
+          "text": "PUBLIC SU_COMMON_XLAT\t\t       ;;"
+        },
+        {
+          "line": 1127,
+          "text": "PUBLIC SU_437_XLAT\t\t       ;;"
+        },
+        {
+          "line": 1332,
+          "text": "PUBLIC SU_850_XLAT\t\t       ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfsu.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfuk.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk.asm",
+          "sha256": "cfb979504ed0bfa5028013e1add0c1f487bbc1bd199452dd05b3ce6b4c53ad46"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk.asm",
+          "sha256": "cfb979504ed0bfa5028013e1add0c1f487bbc1bd199452dd05b3ce6b4c53ad46"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk.asm",
+          "sha256": "cfb979504ed0bfa5028013e1add0c1f487bbc1bd199452dd05b3ce6b4c53ad46"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk.asm",
+          "sha256": "cfb979504ed0bfa5028013e1add0c1f487bbc1bd199452dd05b3ce6b4c53ad46"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 29,
+          "text": "PUBLIC UK_LOGIC \t       ;;"
+        },
+        {
+          "line": 30,
+          "text": "PUBLIC UK_437_XLAT\t       ;;"
+        },
+        {
+          "line": 31,
+          "text": "PUBLIC UK_850_XLAT\t       ;;"
+        },
+        {
+          "line": 310,
+          "text": "PUBLIC UK_COMMON_XLAT\t\t       ;;"
+        },
+        {
+          "line": 540,
+          "text": "PUBLIC UK_437_XLAT\t\t       ;;"
+        },
+        {
+          "line": 601,
+          "text": "PUBLIC UK_850_XLAT\t\t       ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfuk.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfuk168.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk168.asm",
+          "sha256": "eb4714bc00581c35736ddf8a583c404e9fc046cfc607d7956d9989cf0e8c2b71"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk168.asm",
+          "sha256": "eb4714bc00581c35736ddf8a583c404e9fc046cfc607d7956d9989cf0e8c2b71"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk168.asm",
+          "sha256": "eb4714bc00581c35736ddf8a583c404e9fc046cfc607d7956d9989cf0e8c2b71"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfuk168.asm",
+          "sha256": "eb4714bc00581c35736ddf8a583c404e9fc046cfc607d7956d9989cf0e8c2b71"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 30,
+          "text": "PUBLIC UK1_LOGIC\t       ;;\t\t\t\t\t;AN000;"
+        },
+        {
+          "line": 31,
+          "text": "PUBLIC UK1_437_XLAT\t\t;;\t\t\t\t\t;AN000;"
+        },
+        {
+          "line": 32,
+          "text": "PUBLIC UK1_850_XLAT\t\t;;\t\t\t\t\t;AN000;"
+        },
+        {
+          "line": 311,
+          "text": "PUBLIC UK1_COMMON_XLAT \t\t;;\t\t\t\t\t;AN000;"
+        },
+        {
+          "line": 636,
+          "text": "PUBLIC UK1_437_XLAT\t\t\t;;\t\t\t\t\t;AN000;"
+        },
+        {
+          "line": 746,
+          "text": "PUBLIC UK1_850_XLAT\t\t\t;;\t\t\t\t\t;AN000;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfuk168.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfur.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur.asm",
+          "sha256": "18a9a43c1f0e94a3f1d0983a92e8391d8dde3f64789a8c18259b7065d6dc3230"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur.asm",
+          "sha256": "18a9a43c1f0e94a3f1d0983a92e8391d8dde3f64789a8c18259b7065d6dc3230"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur.asm",
+          "sha256": "18a9a43c1f0e94a3f1d0983a92e8391d8dde3f64789a8c18259b7065d6dc3230"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur.asm",
+          "sha256": "18a9a43c1f0e94a3f1d0983a92e8391d8dde3f64789a8c18259b7065d6dc3230"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC UR_LOGIC                ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC UR2_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC UR3_LOGIC               ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC UR_866_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC UR_437_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC UR_850_XLAT             ;;"
+        },
+        {
+          "line": 25,
+          "text": "PUBLIC UR_855_XLAT             ;;"
+        },
+        {
+          "line": 154,
+          "text": "PUBLIC UR1_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 304,
+          "text": "PUBLIC UR2_COMMON_XLAT                ;;"
+        },
+        {
+          "line": 451,
+          "text": "PUBLIC UR3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfur.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfur094.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur094.asm",
+          "sha256": "14c6f0f14a18b6601254fd02b016f293d4b519ceaeafbbbae9174c4764b24242"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur094.asm",
+          "sha256": "14c6f0f14a18b6601254fd02b016f293d4b519ceaeafbbbae9174c4764b24242"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur094.asm",
+          "sha256": "14c6f0f14a18b6601254fd02b016f293d4b519ceaeafbbbae9174c4764b24242"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur094.asm",
+          "sha256": "14c6f0f14a18b6601254fd02b016f293d4b519ceaeafbbbae9174c4764b24242"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC UR1_LOGIC                ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC UR1_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC UR1_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC UR1_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC UR1_855_XLAT             ;;"
+        },
+        {
+          "line": 152,
+          "text": "PUBLIC UR1_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfur094.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfur095.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur095.asm",
+          "sha256": "d753be7f458000c1c44c973f20e089bed3899aa25039ec2942c3581dc12a2871"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur095.asm",
+          "sha256": "d753be7f458000c1c44c973f20e089bed3899aa25039ec2942c3581dc12a2871"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur095.asm",
+          "sha256": "d753be7f458000c1c44c973f20e089bed3899aa25039ec2942c3581dc12a2871"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur095.asm",
+          "sha256": "d753be7f458000c1c44c973f20e089bed3899aa25039ec2942c3581dc12a2871"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC UR2_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC UR2_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC UR2_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC UR2_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC UR2_855_XLAT             ;;"
+        },
+        {
+          "line": 150,
+          "text": "PUBLIC UR2_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfur095.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfur096.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur096.asm",
+          "sha256": "5a6a36e41317636f1116fb10c66d5eca85134d9bf418bea0ab56a88daf80e394"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur096.asm",
+          "sha256": "5a6a36e41317636f1116fb10c66d5eca85134d9bf418bea0ab56a88daf80e394"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur096.asm",
+          "sha256": "5a6a36e41317636f1116fb10c66d5eca85134d9bf418bea0ab56a88daf80e394"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfur096.asm",
+          "sha256": "5a6a36e41317636f1116fb10c66d5eca85134d9bf418bea0ab56a88daf80e394"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC UR3_LOGIC               ;;"
+        },
+        {
+          "line": 20,
+          "text": "PUBLIC UR3_866_XLAT             ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC UR3_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC UR3_850_XLAT             ;;"
+        },
+        {
+          "line": 23,
+          "text": "PUBLIC UR3_855_XLAT             ;;"
+        },
+        {
+          "line": 149,
+          "text": "PUBLIC UR3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfur096.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfyc116.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc116.asm",
+          "sha256": "28803a449e073459f29ac3ec824f972ea07cd7c2b96101ba2541e9a8fa7ce01e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc116.asm",
+          "sha256": "28803a449e073459f29ac3ec824f972ea07cd7c2b96101ba2541e9a8fa7ce01e"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc116.asm",
+          "sha256": "28803a449e073459f29ac3ec824f972ea07cd7c2b96101ba2541e9a8fa7ce01e"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc116.asm",
+          "sha256": "28803a449e073459f29ac3ec824f972ea07cd7c2b96101ba2541e9a8fa7ce01e"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC YC1_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC YC1_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC YC1_850_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC YC1_855_XLAT             ;;"
+        },
+        {
+          "line": 247,
+          "text": "PUBLIC YC1_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfyc116.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfyc117.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc117.asm",
+          "sha256": "7d0286579d4338d8f9ce484e68091ecfdb54c330a37adecabb78bce2e98c8aa3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc117.asm",
+          "sha256": "7d0286579d4338d8f9ce484e68091ecfdb54c330a37adecabb78bce2e98c8aa3"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc117.asm",
+          "sha256": "7d0286579d4338d8f9ce484e68091ecfdb54c330a37adecabb78bce2e98c8aa3"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc117.asm",
+          "sha256": "7d0286579d4338d8f9ce484e68091ecfdb54c330a37adecabb78bce2e98c8aa3"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC YC2_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC YC2_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC YC2_850_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC YC2_855_XLAT             ;;"
+        },
+        {
+          "line": 247,
+          "text": "PUBLIC YC2_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfyc117.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/kdfyc118.asm",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc118.asm",
+          "sha256": "b9c0ba7f990d151145c1e5368fdf5ebb2f76ed3f271433e08467fd3d3724f0e8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc118.asm",
+          "sha256": "b9c0ba7f990d151145c1e5368fdf5ebb2f76ed3f271433e08467fd3d3724f0e8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc118.asm",
+          "sha256": "b9c0ba7f990d151145c1e5368fdf5ebb2f76ed3f271433e08467fd3d3724f0e8"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\kdfyc118.asm",
+          "sha256": "b9c0ba7f990d151145c1e5368fdf5ebb2f76ed3f271433e08467fd3d3724f0e8"
+        }
+      ],
+      "public_lines": [
+        {
+          "line": 19,
+          "text": "PUBLIC YC3_LOGIC               ;;"
+        },
+        {
+          "line": 21,
+          "text": "PUBLIC YC3_437_XLAT             ;;"
+        },
+        {
+          "line": 22,
+          "text": "PUBLIC YC3_850_XLAT             ;;"
+        },
+        {
+          "line": 24,
+          "text": "PUBLIC YC3_855_XLAT             ;;"
+        },
+        {
+          "line": 246,
+          "text": "PUBLIC YC3_COMMON_XLAT                ;;"
+        }
+      ],
+      "exact_obj_in_lnk": false,
+      "make_mentions": [],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\kdfyc118.asm",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/KEYBOARD.EXS",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.EXS",
+          "sha256": "c4bb078ec060ea3352dd307d690be6227c6e5d699127518caf9bd3085df60bf1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.EXS",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.EXS",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.EXS",
+          "sha256": "c4bb078ec060ea3352dd307d690be6227c6e5d699127518caf9bd3085df60bf1"
+        }
+      ],
+      "public_lines": [],
+      "exact_obj_in_lnk": null,
+      "make_mentions": [
+        {
+          "line": 115,
+          "text": "KEYBOARD.exs: KDFDV.OBJ KDFSP.OBJ KDFPO.OBJ \\"
+        },
+        {
+          "line": 128,
+          "text": "$(dest):      Keyboard.exs"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\KEYBOARD.EXS",
+      "installed_sha256": null
+    },
+    {
+      "key": "dos/v86/dev/keyboard/KEYBOARD.SYS",
+      "identities": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.SYS",
+          "sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.SYS",
+          "sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.SYS",
+          "sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\keyboard\\KEYBOARD.SYS",
+          "sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+        }
+      ],
+      "public_lines": [],
+      "exact_obj_in_lnk": null,
+      "make_mentions": [
+        {
+          "line": 11,
+          "text": "dest    =keyboard.sys"
+        },
+        {
+          "line": 29,
+          "text": "if exist keyboard.sys\tdel keyboard.sys"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/KEYBOARD.SYS",
+          "sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\KEYBOARD.SYS",
+      "installed_sha256": "96fcac606683cf262dbc030713a9263731ee83f19a10207e5dd632e5ee06c2ad"
+    }
+  ],
+  "link_sha256": "e39a13af777e2bfe4419df80fe229f4972642361afcd04510929ce74bc6e0e41",
+  "makefile_sha256": "031df79e3dd9fbe2d39b3f808f83da74882778d21e53546e0f09a99df854ccd3",
+  "limitations": "Textual recipe evidence is bounded; no guest build or behavior."
+}

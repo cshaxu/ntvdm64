@@ -1,0 +1,192 @@
+{
+  "files": [
+    {
+      "path": "build.log",
+      "sha256": "38c01c654934611817b834a4580f35f205c085413f0ce5096679e7373142f942",
+      "original_hashes": [
+        null,
+        null,
+        "38c01c654934611817b834a4580f35f205c085413f0ce5096679e7373142f942"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dbg/dbg.c",
+      "sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+      "original_hashes": [
+        "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+        "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+        "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/command/cmdexit.c",
+      "sha256": "3fb4616667b2b73f00ed56d5944a786be741f5db511e6f0d5f6a751593a418c9",
+      "original_hashes": [
+        "3fb4616667b2b73f00ed56d5944a786be741f5db511e6f0d5f6a751593a418c9",
+        "3fb4616667b2b73f00ed56d5944a786be741f5db511e6f0d5f6a751593a418c9",
+        "3fb4616667b2b73f00ed56d5944a786be741f5db511e6f0d5f6a751593a418c9"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/command/cmdkeyb.h",
+      "sha256": "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+      "original_hashes": [
+        "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+        "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+        "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361"
+      ],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdkeyb.obj"
+        }
+      ],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/command/cmdpif.h",
+      "sha256": "1c629826eba5a5437c481e8b4827298e5f178fa0eaa9ceaceb517cc80fe2e4c9",
+      "original_hashes": [
+        "1c629826eba5a5437c481e8b4827298e5f178fa0eaa9ceaceb517cc80fe2e4c9",
+        "1c629826eba5a5437c481e8b4827298e5f178fa0eaa9ceaceb517cc80fe2e4c9",
+        "1c629826eba5a5437c481e8b4827298e5f178fa0eaa9ceaceb517cc80fe2e4c9"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/dem/demmsg.c",
+      "sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+      "original_hashes": [
+        "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+        "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+        "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/dem/demmsg.h",
+      "sha256": "de14973d8c9a5ee9e76111c52b687f30321955eef623b79a01345cdd78942e43",
+      "original_hashes": [
+        "de14973d8c9a5ee9e76111c52b687f30321955eef623b79a01345cdd78942e43",
+        "de14973d8c9a5ee9e76111c52b687f30321955eef623b79a01345cdd78942e43",
+        "de14973d8c9a5ee9e76111c52b687f30321955eef623b79a01345cdd78942e43"
+      ],
+      "valid_dependencies": [
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfcb.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdir.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demerror.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfile.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demgset.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demioctl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demhndl.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlock.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demmisc.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlabel.obj"
+        },
+        {
+          "graph": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demsrch.obj"
+        }
+      ],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/test/test.bat",
+      "sha256": "90ee88ee2f64859d8ec7a32e50e90c29b1dc610aae48e5e00c50ff19c4df64c3",
+      "original_hashes": [
+        "90ee88ee2f64859d8ec7a32e50e90c29b1dc610aae48e5e00c50ff19c4df64c3",
+        "90ee88ee2f64859d8ec7a32e50e90c29b1dc610aae48e5e00c50ff19c4df64c3",
+        "90ee88ee2f64859d8ec7a32e50e90c29b1dc610aae48e5e00c50ff19c4df64c3"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/dosmsg.cmd",
+      "sha256": "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04",
+      "original_hashes": [
+        "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04",
+        "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04",
+        "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "dos/v86/doskrnl/dos/crit.asm",
+      "sha256": "425d8fec7aeb45964595b33f3cdebb7dfd615e1ee76cc5fe631566a5d2acb8cc",
+      "original_hashes": [
+        "425d8fec7aeb45964595b33f3cdebb7dfd615e1ee76cc5fe631566a5d2acb8cc",
+        "425d8fec7aeb45964595b33f3cdebb7dfd615e1ee76cc5fe631566a5d2acb8cc",
+        "425d8fec7aeb45964595b33f3cdebb7dfd615e1ee76cc5fe631566a5d2acb8cc"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}

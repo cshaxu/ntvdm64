@@ -1,0 +1,30 @@
+# Part 1 external: loader, kernel I/O, sound and CRT priority boundaries
+
+These 20 assigned external SRC keys were selected from `external-remaining-evidence.json` because the frozen priority inventory marks a concrete loader, asynchronous audio, I/O rundown or CRT association. Each row has its edition, full original SHA-256, priority reason, exact current four-graph VALID dependency results and bounded ZIP basename observation in that JSON. All exist and have no exact dependency hit in those graphs; absence of exact old source does not mean the operating system service is absent. Per-key roles below remain pending unless actual execution and lifecycle evidence proves them.
+
+Original `base/ntdll/ldrsnap.c` calls an initialization routine with DLL_PROCESS_ATTACH; both source-edition loader groups are distinct records and not interchangeable by name. The current project calls Windows LoadLibrary/LoadLibraryEx through its adapter; the modern host loader owns actual module loading. It is not justified to copy the NT4 loader, nor is callback/partial-load/detach ordering automatically proven. The original soundlib sources use IRP create/read/write/device-control/cleanup and notification; `ntos/io/internal.c` contains IopCancelAlertedRequest/IoCancelIrp and IopCompleteRequest. Current guest MMSYSTEM resolves host WINMM callbacks; existing `external-winmm-callback-boundary.md` records that export resolution is not a complete asynchronous queue, cancellation or task-death witness. The native provider/kernel owns actual IRPs, and original guest conversions remain separately accountable.
+
+| Assigned key | Original path | Per-key role and remaining proof |
+| --- | --- | --- |
+| `SRC:adf68fcfaf72064602cb` | `base/crts/libw32/lib/sources.nt` | historic CRT static library build configuration; Resolve case-helper/ABI dependency against current CRT and concrete locale behavior. |
+| `SRC:b96e21503f23c2b066ad` | `base/ntdll/ldrapi.c` | loader public operation; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:0acb6cf5bf09e8b2751b` | `base/ntdll/ldrinit.c` | loader initialization; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:1505c960fc87439b0234` | `base/ntdll/ldrsnap.c` | loader import/initialization processing; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:ebe4f9afc1212962457c` | `nt/private/ntos/dd/sound/soundlib/dispatch.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:5afb030290d77173dce4` | `nt/private/ntos/dd/sound/soundlib/inc/mixer.h` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:924797e0e01bf1c067a7` | `nt/private/ntos/dd/sound/soundlib/mixer.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:ee5bdf58d7f7ea0d0d4f` | `nt/private/ntos/dd/sound/soundlib/soundlib.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:ae51ccaf48d1dfb9f6b2` | `nt/private/ntos/dd/sound/soundlib/sources` | sound provider build manifest; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:519bc99780e746e080e8` | `nt/private/ntos/dd/sound/soundlib/synth.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:40d465f760d41713133c` | `nt/private/ntos/dd/sound/soundlib/wave.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:13efd78c0ab9a4bb3957` | `nt/private/ntos/dd/sound/soundsys/init.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:83005ca45a795f8b62ca` | `nt/private/ntos/dd/sound/soundsys/mixer.c` | kernel sound/notification source or interface; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:65adb1f516dafc8b4115` | `nt/private/ntos/dd/sound/soundsys/sources` | sound provider build manifest; Bind a concrete async multimedia provider/notification route; test cancel, task loss and teardown. |
+| `SRC:64fa4d96e1bc42a2b1bf` | `nt/private/ntos/dll/ldrapi.c` | loader public operation; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:a6e13763e905ffd070a2` | `nt/private/ntos/dll/ldrinit.c` | loader initialization; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:6e673405a7ca6162279a` | `nt/private/ntos/dll/ldrsnap.c` | loader import/initialization processing; Preserve real host loader and prove WOW32 attach/error/teardown boundaries. |
+| `SRC:04a074d392407360791b` | `nt/private/ntos/io/devctrl.c` | device-control dispatch; Host kernel owns IRP lifetime; verify device/notification failure and rundown without importing kernel. |
+| `SRC:8d0c0d6f2866de56c7f9` | `nt/private/ntos/io/internal.c` | I/O completion/cancellation internals; Host kernel owns IRP lifetime; verify device/notification failure and rundown without importing kernel. |
+| `SRC:16e600460335f8c61184` | `nt/private/ntos/io/iosubs.c` | kernel I/O helpers; Host kernel owns IRP lifetime; verify device/notification failure and rundown without importing kernel. |
+
+This is a bounded source/provider trace, not kernel or device execution, 20 completed semantic audits, or permission to import legacy subsystems. Current priority labels are prior audit leads; the actual loader/provider/version and effect on each guest path must be verified before changing status. No guest, product, provider, system settings or shared ledger modified.

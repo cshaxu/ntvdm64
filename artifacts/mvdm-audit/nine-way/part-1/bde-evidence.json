@@ -1,0 +1,154 @@
+{
+  "files": [
+    {
+      "path": "bde.def",
+      "sha256": "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979",
+      "original_hashes": [
+        "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979",
+        "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979",
+        "cfb2deeb3c42a282c4cf19aa8cf13d3408b007ceb42dc21c1b098e0b7da16979"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bde.h",
+      "sha256": "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e",
+      "original_hashes": [
+        "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e",
+        "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e",
+        "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdecmds.c",
+      "sha256": "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e",
+      "original_hashes": [
+        "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e",
+        "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e",
+        "ddcc992c69fa9f390780a935c2b3721b1df59ef148b15554b338cfbd248b110e"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdeheap.c",
+      "sha256": "d681e9c5c124705aa2eabf999b0038d5409f6f9bbea964d9ed100548c6ae6c7a",
+      "original_hashes": [
+        "d681e9c5c124705aa2eabf999b0038d5409f6f9bbea964d9ed100548c6ae6c7a",
+        "d681e9c5c124705aa2eabf999b0038d5409f6f9bbea964d9ed100548c6ae6c7a",
+        "d681e9c5c124705aa2eabf999b0038d5409f6f9bbea964d9ed100548c6ae6c7a"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdemisc.c",
+      "sha256": "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b",
+      "original_hashes": [
+        "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b",
+        "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b",
+        "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdestack.c",
+      "sha256": "d832c428e64d72b312662a716a1a468986a6f142c1102bd2264849633526e86c",
+      "original_hashes": [
+        "d832c428e64d72b312662a716a1a468986a6f142c1102bd2264849633526e86c",
+        "d832c428e64d72b312662a716a1a468986a6f142c1102bd2264849633526e86c",
+        "d832c428e64d72b312662a716a1a468986a6f142c1102bd2264849633526e86c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdesym.c",
+      "sha256": "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
+      "original_hashes": [
+        "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
+        "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
+        "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "bdeutil.c",
+      "sha256": "0b9f7bdcb968ad38d95c2170afb0e84325c77e6d7a68161b6d63a89e4fcd225b",
+      "original_hashes": [
+        "0b9f7bdcb968ad38d95c2170afb0e84325c77e6d7a68161b6d63a89e4fcd225b",
+        "0b9f7bdcb968ad38d95c2170afb0e84325c77e6d7a68161b6d63a89e4fcd225b",
+        "0b9f7bdcb968ad38d95c2170afb0e84325c77e6d7a68161b6d63a89e4fcd225b"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "data.c",
+      "sha256": "5da2d4e3cd95333273f4c136686f91774685bb017aad14e59e1316c45a601f16",
+      "original_hashes": [
+        "5da2d4e3cd95333273f4c136686f91774685bb017aad14e59e1316c45a601f16",
+        "5da2d4e3cd95333273f4c136686f91774685bb017aad14e59e1316c45a601f16",
+        "5da2d4e3cd95333273f4c136686f91774685bb017aad14e59e1316c45a601f16"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "disasm.c",
+      "sha256": "8a59c16e5edd056761b3fabcd2d67c07f2fb896b0128b8f82dab2ef3b9336417",
+      "original_hashes": [
+        "8a59c16e5edd056761b3fabcd2d67c07f2fb896b0128b8f82dab2ef3b9336417",
+        "8a59c16e5edd056761b3fabcd2d67c07f2fb896b0128b8f82dab2ef3b9336417",
+        "8a59c16e5edd056761b3fabcd2d67c07f2fb896b0128b8f82dab2ef3b9336417"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "precomp.h",
+      "sha256": "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c",
+      "original_hashes": [
+        "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c",
+        "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c",
+        "7d2fd3883fc253312963c68f750005343c2499fa2effdbbced6ea1807e5dbe5c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}

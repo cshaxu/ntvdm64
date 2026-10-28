@@ -1,0 +1,158 @@
+{
+  "files": [
+    {
+      "key": "SRC:85c76aa4fb2dbac0b334",
+      "path": "base/crts/crtw32/convert/isctype.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "2e10afb7fd814d2ad8c6d6ad82f1e30a72f5e3bbdc55e88bec56b1aa76102d99",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:9ed337c4d14e38f138c7",
+      "path": "base/crts/crtw32/convert/nt/sources",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "6d5dafbaa46c3a08c788288d4570879520c702444b32f76f0e9c5ded6c5e3611",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:1b54d71736d114679ba7",
+      "path": "base/crts/crtw32/convert/sources.nt",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "bc25082a6c46f68e34d06aba434b08974b7888d70feeebe0fc348d6bfa1ad3b5",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:ac541f46bee931e82556",
+      "path": "base/crts/crtw32/convert/tolower.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "9c708025ed933ba61409a80e62ea8ff1e8e893e2a031437dba483f61ab50e3a3",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:65a279830a861efc5345",
+      "path": "base/crts/crtw32/crt32.nt",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "bc75d5a6d098eb6ff3b411088c35c9c10adf2212b0a571c162628de944d75c44",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:815cd09a4f6d242624af",
+      "path": "base/crts/crtw32/h/ctype.h",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "14ab639e7ca8b29d7390fea8b681b88a637cdbe4b6cf0541bb9f1583c397ff6d",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:dba8d3f890800fec2d7b",
+      "path": "base/crts/crtw32/misc/ctype.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "5a4439a201ddc86b76e4c51d3816ff3c83548edce69c7b115b747abfb1e83117",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:c563787fe717156b8a23",
+      "path": "base/crts/crtw32/misc/initctyp.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "6eeb59df7fa4a4d048b08e12393d73925e090057c176f26e11cf8c2f26d9281f",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:039d3e15660408e569ea",
+      "path": "base/crts/crtw32/misc/nlsdata1.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "012d17802b0a191c7b195034800e063b92aa67c82f1a8db4486d59203eb3b96d",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:5a6fa631570c6e2eeeaa",
+      "path": "base/crts/crtw32/misc/nlsdata2.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "4ccd1c39ce4bb03a429627640f747b5428cab3126db099e64a9faee1a7cfb9be",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:41ec298ffe0efc3d8652",
+      "path": "base/crts/crtw32/misc/nt/sources",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "7604913b35a434cf1a916681eaf210a883da7a92ce456282b445022243d9c5bc",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:6d7f30604745ce231f8f",
+      "path": "base/crts/crtw32/misc/setlocal.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "679ccf47fb57daddbe656187fdeed9fd0f5441cca44f1b7734162383840652b0",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:73c6249a84d1c7e9780e",
+      "path": "base/crts/crtw32/string/nt/sources",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "6d5dafbaa46c3a08c788288d4570879520c702444b32f76f0e9c5ded6c5e3611",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:e3e3274406a6bb054e63",
+      "path": "base/crts/crtw32/string/sources.nt",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "d558a1efd8eb12082da4a29995af0fca36a72822284eb784580f37b083f2cea4",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:7c530d14f7ee1f39690c",
+      "path": "base/crts/crtw32/string/stricmp.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "4d0bec9d5961484366a9af2534e90159241e0733d1194631f06d0f24e84f14c1",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:e12bc0bc25f81c4489f1",
+      "path": "base/crts/crtw32/string/strlwr.c",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "bd7d238eb07f216eb0017231dd846387672ecd1919e823c133ef892bdb0b884d",
+      "exact_valid_deps": []
+    },
+    {
+      "key": "SRC:35a7dcc91a6c6fb483bd",
+      "path": "base/crts/crtw32/string/x86/stricmp.asm",
+      "edition": "OpenNT",
+      "exists": true,
+      "sha256": "b914b4598d5ddb47bbdbde9abcb042645091c9deac562fb9c2dfd20f1128fbf6",
+      "exact_valid_deps": []
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}
