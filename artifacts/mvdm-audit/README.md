@@ -313,3 +313,7 @@ other consumers and profiles.
 The [alternate host interfaces](base-inc-alternate-role-review.md) checkpoint
 excludes six Unix or SoftWindows headers without excluding the corresponding
 selected NT or guest capabilities.
+
+The [generated C-VID review](cvidc-generated-role-review.md) binds 17 more
+selected original objects to the released worker. Plane and mode behavior
+remain open; object identity is not behavioral acceptance.

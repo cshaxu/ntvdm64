@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1471,
+    "pending": 1454,
     "excluded": 2652,
-    "partial": 508,
+    "partial": 525,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Six unselected alternate host interfaces; selected NT capabilities remain open."
+  "note": "Seventeen selected generated C-VID units are partial; video data semantics remain open."
 }

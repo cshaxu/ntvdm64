@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "626f77507",
+  "candidate_count": 17,
+  "source_tables": [
+    {
+      "path": "cvidc-generated-image-observations.json",
+      "sha256": "4F011FDF1A8F35AAFBB4F16962A99C7B134DC6A33A9C1FEE06222FF52F863B98"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Image code and table source references, not mode execution"
+}
