@@ -155,11 +155,14 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                   'historical-generated-message-artifact-only')
                 assert proof['role'] in legacy_roles + artifact_roles and current_hash == original_hash
                 if proof['role'] == 'historical-guest-build-input-only':
-                    assert prefix == 'parallel-guest-resource-role-' and path in (
+                    assert (prefix == 'parallel-guest-resource-role-' and path in (
                         'wow16/ole/client/funchead.c', 'wow16/ole/client/mk.cmd',
                         'wow16/ole/client/utils.c', 'wow16/regedit/reg1632.h',
                         'wow16/drivers/display/display.rc', 'wow16/drivers/display/DISPLAY.RES',
-                        'wow16/drivers/keyboard/keyboard.rcv')
+                        'wow16/drivers/keyboard/keyboard.rcv')) or (prefix == 'parallel-gdi-ctl3d-role-' and path in (
+                        'wow16/gdi/gdi.rcv', 'wow16/ctl3dv2/readme.txt', 'wow16/ctl3dv2/ctl3d.doc',
+                        'wow16/ctl3dv2/ctl3d.c', 'wow16/ctl3dv2/ctl3d.h', 'wow16/ctl3dv2/common.ver',
+                        'dos/v86/cmd/graphics/GRAPHICS.EXC', 'dos/v86/cmd/graphics/graphics.tag'))
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':
@@ -212,7 +215,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'parallel-guest-delivery-role-':
+                if prefix in ('parallel-guest-delivery-role-', 'parallel-gdi-ctl3d-role-'):
                     assert proof['role'] in ('selected-guest-image-partial', 'selected-guest-data-partial') and current_hash == original_hash
                 elif prefix == 'parallel-embedding-sound-role-':
                     assert proof['role'] in ('selected-native-source-partial', 'selected-guest-image-partial') and current_hash == original_hash

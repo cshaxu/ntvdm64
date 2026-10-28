@@ -1,0 +1,162 @@
+{
+  "GRAPHICS.EXC": {
+    "current": {
+      "size": 20462,
+      "sha256": "40b380874875ac10e16bedb04c5c05e7894a3f27a6ee1cb892948810bbc4d7b4"
+    },
+    "opennt": {
+      "size": 20462,
+      "sha256": "40b380874875ac10e16bedb04c5c05e7894a3f27a6ee1cb892948810bbc4d7b4"
+    },
+    "opennt45": {
+      "size": 20462,
+      "sha256": "40b380874875ac10e16bedb04c5c05e7894a3f27a6ee1cb892948810bbc4d7b4"
+    }
+  },
+  "graphics.tag": {
+    "current": {
+      "size": 676,
+      "sha256": "1aa392f9d234e56075aac7d4d51b9ea8b73c69605d4ea3265857d972c8335b88"
+    },
+    "opennt": {
+      "size": 676,
+      "sha256": "1aa392f9d234e56075aac7d4d51b9ea8b73c69605d4ea3265857d972c8335b88"
+    },
+    "opennt45": {
+      "size": 676,
+      "sha256": "1aa392f9d234e56075aac7d4d51b9ea8b73c69605d4ea3265857d972c8335b88"
+    }
+  },
+  "grctrl.ext": {
+    "current": {
+      "size": 2114,
+      "sha256": "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9"
+    },
+    "opennt": {
+      "size": 2114,
+      "sha256": "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9"
+    },
+    "opennt45": {
+      "size": 2114,
+      "sha256": "a2f8885757efdb5b7e44e00d4b803c805589f8841e00a384df597942f59ee9b9"
+    }
+  },
+  "grctrl.str": {
+    "current": {
+      "size": 5346,
+      "sha256": "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c"
+    },
+    "opennt": {
+      "size": 5346,
+      "sha256": "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c"
+    },
+    "opennt45": {
+      "size": 5346,
+      "sha256": "d68a3ffd01e9283f1cdf4e1364663f3804e4377da1220060982bae2d19b5f50c"
+    }
+  },
+  "grinst.ext": {
+    "current": {
+      "size": 1907,
+      "sha256": "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586"
+    },
+    "opennt": {
+      "size": 1907,
+      "sha256": "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586"
+    },
+    "opennt45": {
+      "size": 1907,
+      "sha256": "52dc74341f6ba702c97ef6433df8a30a5300ebf09d10ed05871e37c1a8b68586"
+    }
+  },
+  "grload3.ext": {
+    "current": {
+      "size": 1208,
+      "sha256": "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec"
+    },
+    "opennt": {
+      "size": 1208,
+      "sha256": "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec"
+    },
+    "opennt45": {
+      "size": 1208,
+      "sha256": "04d4b6a82a18cc9220937f641c92e7a591068222d297b68bdf23984017c610ec"
+    }
+  },
+  "grmsg.equ": {
+    "current": {
+      "size": 4482,
+      "sha256": "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860"
+    },
+    "opennt": {
+      "size": 4482,
+      "sha256": "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860"
+    },
+    "opennt45": {
+      "size": 4482,
+      "sha256": "94875ae62444611c34edce91c45d14d416072fe428fe2f9ca2828943d8be6860"
+    }
+  },
+  "grparms.ext": {
+    "current": {
+      "size": 1003,
+      "sha256": "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d"
+    },
+    "opennt": {
+      "size": 1003,
+      "sha256": "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d"
+    },
+    "opennt45": {
+      "size": 1003,
+      "sha256": "05ac9c7d41c87b33cb5b0c369c76962db4a540a96348affe22e3146ec75f098d"
+    }
+  },
+  "makefile": {
+    "current": {
+      "size": 2364,
+      "sha256": "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a"
+    },
+    "opennt": {
+      "size": 2364,
+      "sha256": "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a"
+    },
+    "opennt45": {
+      "size": 2364,
+      "sha256": "100b5334a762451551344507c57bdd8a57cabfc9b1d417593e469827fb79ec4a"
+    }
+  },
+  "graphics.lnk": {
+    "current": {
+      "size": 147,
+      "sha256": "1560ab572a2806cb73ac856d65ab898e7e0125ac7f7ba91c77c6826589fb5e50"
+    },
+    "opennt": {
+      "size": 147,
+      "sha256": "1560ab572a2806cb73ac856d65ab898e7e0125ac7f7ba91c77c6826589fb5e50"
+    },
+    "opennt45": {
+      "size": 147,
+      "sha256": "1560ab572a2806cb73ac856d65ab898e7e0125ac7f7ba91c77c6826589fb5e50"
+    }
+  },
+  "package_members": [
+    {
+      "name": "WINNT/SYSTEM32/GRAPHICS.COM",
+      "size": 19694,
+      "sha256": "989b38806ec1e1bdd30da3dc6b41cc85bdc81dda74f870fcc7df399876eb2756"
+    },
+    {
+      "name": "WINNT/SYSTEM32/GRAPHICS.PRO",
+      "size": 21232,
+      "sha256": "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b"
+    }
+  ],
+  "installed_GRAPHICS.COM": {
+    "size": 19694,
+    "sha256": "989b38806ec1e1bdd30da3dc6b41cc85bdc81dda74f870fcc7df399876eb2756"
+  },
+  "installed_GRAPHICS.PRO": {
+    "size": 21232,
+    "sha256": "b734f750a473f83d33aa773fe3d6c7bcdd209d97339f37b03b8c5f3f8eed890b"
+  }
+}

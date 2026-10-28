@@ -1,6 +1,10 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 56 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 59 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [guest-toolhelp-owner](shard-1/guest-toolhelp-owner-review.md): [observer](shard-1/guest-toolhelp-owner-observer.py), [receipt](shard-1/guest-toolhelp-owner-observations.json).
+- [win16-ctl3d-guest](shard-2/win16-ctl3d-guest-review.md): [observer](shard-2/win16-ctl3d-guest-observer.py), [receipt](shard-2/win16-ctl3d-guest-observations.json).
+- [graphics-input](shard-3/graphics-input-role-review.md): [observer](shard-3/graphics-input-observer.py), [receipt](shard-3/graphics-input-observations.json).
 
 - [wow-winsock-database](shard-1/wow-winsock-database-review.md): [observer](shard-1/wow-winsock-database-observer.py), [receipt](shard-1/wow-winsock-database-observations.json).
 - [win16-gdi-resource](shard-2/win16-gdi-resource-review.md): [observer](shard-2/win16-gdi-resource-observer.py), [receipt](shard-2/win16-gdi-resource-observations.json).

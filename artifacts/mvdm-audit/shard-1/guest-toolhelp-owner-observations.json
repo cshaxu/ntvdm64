@@ -1,0 +1,218 @@
+{
+  "result": "pass",
+  "entries": [
+    {
+      "path": "wow16/toolhelp/global.c",
+      "sha256": "644E7775F4A4617AC6DF8CBFCD263E2F8A0E9AB3870645FF2EEF561D76D5FB86",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\global.c",
+      "comparison_sha256": "644E7775F4A4617AC6DF8CBFCD263E2F8A0E9AB3870645FF2EEF561D76D5FB86",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        121
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/int2.OBJ",
+      "sha256": "86C1E861ACCB279BC42E2C2AD3555B7664C724DFEF43DD4C1A82FF6A5668340C",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\int2.OBJ",
+      "comparison_sha256": "86C1E861ACCB279BC42E2C2AD3555B7664C724DFEF43DD4C1A82FF6A5668340C",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        65,
+        124
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/local.c",
+      "sha256": "C9F6C400B47937D0180E541E1C19B113A9F58EAC03AAAB58B6357B6641D0A0F5",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\local.c",
+      "comparison_sha256": "C9F6C400B47937D0180E541E1C19B113A9F58EAC03AAAB58B6357B6641D0A0F5",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        126
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/local.obj",
+      "sha256": "C815ACB192044D120840BC28D9FAE49BA17D87A30D040E775A71EE62B7573C1F",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\local.obj",
+      "comparison_sha256": "C815ACB192044D120840BC28D9FAE49BA17D87A30D040E775A71EE62B7573C1F",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        63,
+        126
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/memman.asm",
+      "sha256": "4237107CDD31C6441B720CEDD9B5825A5EB65D2C4ADB02815145B0711259074E",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\memman.asm",
+      "comparison_sha256": "4237107CDD31C6441B720CEDD9B5825A5EB65D2C4ADB02815145B0711259074E",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        127
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/memory.asm",
+      "sha256": "9CA062782752D4EFE24B2B512077ECEB7F2B87B50B07356934A1B2B2ACB6BD61",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\memory.asm",
+      "comparison_sha256": "9CA062782752D4EFE24B2B512077ECEB7F2B87B50B07356934A1B2B2ACB6BD61",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        128
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/notify1.c",
+      "sha256": "76C6EE0529C7D543D4251B44BF8CDE51E1E08DFCB00A05BAB68E75B4FDAFA5A7",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\notify1.c",
+      "comparison_sha256": "76C6EE0529C7D543D4251B44BF8CDE51E1E08DFCB00A05BAB68E75B4FDAFA5A7",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        130
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/notify1.obj",
+      "sha256": "143C38AF4B42FD0BFE3D076860C19E892C9C9107A4D684045F1095BCE92FA780",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\notify1.obj",
+      "comparison_sha256": "143C38AF4B42FD0BFE3D076860C19E892C9C9107A4D684045F1095BCE92FA780",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        65,
+        130
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/stack2.asm",
+      "sha256": "5F4895ADCD5AF74C972A8811A97F8864ADAACD85448493BB2B2DE091831A1FD8",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\stack2.asm",
+      "comparison_sha256": "5F4895ADCD5AF74C972A8811A97F8864ADAACD85448493BB2B2DE091831A1FD8",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        134
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/terminat.asm",
+      "sha256": "EFF63844C7F678BA84066F23793406F1BD758ABEC373373A8A84C2471C76BE3C",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\terminat.asm",
+      "comparison_sha256": "EFF63844C7F678BA84066F23793406F1BD758ABEC373373A8A84C2471C76BE3C",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        137
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/timer.OBJ",
+      "sha256": "06C7360DC50F6ECC9B530E348C7C597CC3D3C007EBBFE88DB1E7BC66B6FB7DF0",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\timer.OBJ",
+      "comparison_sha256": "06C7360DC50F6ECC9B530E348C7C597CC3D3C007EBBFE88DB1E7BC66B6FB7DF0",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        66,
+        139
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.obj",
+      "sha256": "DC6610E223A519B73C04AC9D2A7F29AD3796FABDD9A1D3282572BE0DA918735B",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\toolhelp.obj",
+      "comparison_sha256": "DC6610E223A519B73C04AC9D2A7F29AD3796FABDD9A1D3282572BE0DA918735B",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        62,
+        140
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.rcv",
+      "sha256": "1416001B043898F094771A71F374463B805B3ECBECCBA5A5C868224CE564943B",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\toolhelp.rcv",
+      "comparison_sha256": "1416001B043898F094771A71F374463B805B3ECBECCBA5A5C868224CE564943B",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        164
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/toolpriv.inc",
+      "sha256": "9306675C541DFDC2AC1454603901C3DCCA6952C75BD1872BE38BE939FBBE8F41",
+      "comparison": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow16\\toolhelp\\toolpriv.inc",
+      "comparison_sha256": "9306675C541DFDC2AC1454603901C3DCCA6952C75BD1872BE38BE939FBBE8F41",
+      "source_identity": "exact-opennt-selected-or-identical",
+      "recipe_reference_lines": [
+        119,
+        122,
+        124,
+        125,
+        127,
+        128,
+        131,
+        134,
+        136,
+        137,
+        139,
+        142,
+        143,
+        144
+      ],
+      "host_graphs_or_deps_matching": []
+    },
+    {
+      "path": "wow16/toolhelp/usergdi2.OBJ",
+      "sha256": "1692D489D4212E3C357E36B745D2F0181A29EBE0E9E9DC1556E523CC6A9EF78B",
+      "comparison": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\wow16\\toolhelp\\usergdi2.OBJ",
+      "comparison_sha256": "1692D489D4212E3C357E36B745D2F0181A29EBE0E9E9DC1556E523CC6A9EF78B",
+      "source_identity": "current-only-needs-provenance",
+      "recipe_reference_lines": [
+        64,
+        142
+      ],
+      "host_graphs_or_deps_matching": []
+    }
+  ],
+  "makefile_sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941",
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "graph_sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "graph_sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_dll": {
+    "source_path": "src\\mvdm\\wow16\\toolhelp\\TOOLHELP.DLL",
+    "source_sha256": "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+    "zip_member": "WINNT/SYSTEM32/TOOLHELP.DLL",
+    "zip_member_sha256": "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+    "zip_matches_source": true,
+    "installed_present": false,
+    "installed_sha256": null
+  },
+  "limitations": "Recipe and exact artifact identity only; no object-to-DLL provenance, guest rebuild, API execution, entire build closure, or archive deployment assertion."
+}

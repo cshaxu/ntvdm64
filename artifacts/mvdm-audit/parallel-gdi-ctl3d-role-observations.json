@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "base": "6a7bf31bf",
+  "candidate_count": 9,
+  "source_tables": [
+    {
+      "path": "shard-1/guest-toolhelp-owner-observations.json",
+      "sha256": "AD5F64E7D18607EA0E221919578D50185DFF2C5B3DD9A28AE1825785BABE0A9C"
+    },
+    {
+      "path": "shard-2/win16-gdi-resource-observations.json",
+      "sha256": "DB5E3BC43EAFBBC0AD744A512ABC088D618FCAB672024CFD449ECDEAAB8D512C"
+    },
+    {
+      "path": "shard-2/win16-ctl3d-guest-observations.json",
+      "sha256": "8736C52F2310C92FC0AA52079F4F09DA095EF0658C45094B7987A446F231191C"
+    },
+    {
+      "path": "shard-3/graphics-input-observations.json",
+      "sha256": "8C8ABABBBF93B0F36F4823C6EE66F8F8F8A6BADB08538FCE96F122619D9CB581"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest image identity and input roles only; no guest runtime acceptance"
+}

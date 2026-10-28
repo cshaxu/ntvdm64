@@ -1,0 +1,85 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/ctl3dv2/common.ver",
+      "hashes": [
+        "FC90D58A2E9646C8493449C6B9DD0BFDE980A60746CE6F1817BDF7748DFA0E0D",
+        "FC90D58A2E9646C8493449C6B9DD0BFDE980A60746CE6F1817BDF7748DFA0E0D",
+        "FC90D58A2E9646C8493449C6B9DD0BFDE980A60746CE6F1817BDF7748DFA0E0D"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.c",
+      "hashes": [
+        "F712DE39B011078A9491CF43247975B7B76A46A53FECAEB492CA09ED061598AD",
+        "F712DE39B011078A9491CF43247975B7B76A46A53FECAEB492CA09ED061598AD",
+        "F712DE39B011078A9491CF43247975B7B76A46A53FECAEB492CA09ED061598AD"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.doc",
+      "hashes": [
+        "B9FAA5A532A7604ED95715745E8F23CD3E23DCACAE079BCD74AB2FF0D4942B49",
+        "B9FAA5A532A7604ED95715745E8F23CD3E23DCACAE079BCD74AB2FF0D4942B49",
+        "B9FAA5A532A7604ED95715745E8F23CD3E23DCACAE079BCD74AB2FF0D4942B49"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.h",
+      "hashes": [
+        "DFAE25124E38B73657575C104325F15CAA229562B8AAE285222EA048FFF8EDE2",
+        "DFAE25124E38B73657575C104325F15CAA229562B8AAE285222EA048FFF8EDE2",
+        "DFAE25124E38B73657575C104325F15CAA229562B8AAE285222EA048FFF8EDE2"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ctl3dv2/msdn.ico",
+      "hashes": [
+        "03E8F1A57F28916AF7441E9A268DF7E56ECD811F99FC8B5678E64867D159AB63",
+        "03E8F1A57F28916AF7441E9A268DF7E56ECD811F99FC8B5678E64867D159AB63",
+        "03E8F1A57F28916AF7441E9A268DF7E56ECD811F99FC8B5678E64867D159AB63"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ctl3dv2/readme.txt",
+      "hashes": [
+        "7FCE264469F2BACC16C0E1AA24429ADD3632DB7E24C46CFF01DF40B44C19D5EC",
+        "7FCE264469F2BACC16C0E1AA24429ADD3632DB7E24C46CFF01DF40B44C19D5EC",
+        "7FCE264469F2BACC16C0E1AA24429ADD3632DB7E24C46CFF01DF40B44C19D5EC"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\ctl3dv2\\ctl3d.rc",
+      "sha256": "0D4AEF1276BFB648AD4A563097E86B96FC1C1FC5834E8BD6E8F1188302EB12C1"
+    },
+    {
+      "path": "src\\mvdm\\bin86\\makefile",
+      "sha256": "2A5AACAFE216A9BD3B46FA0929C522EAD66E7BA7E81E24258BD53F59B89FDA6B"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ctl3dv2\\new3d.doc",
+      "sha256": "B9FAA5A532A7604ED95715745E8F23CD3E23DCACAE079BCD74AB2FF0D4942B49"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/CTL3DV2.DLL",
+  "image_sha256": "3387135A5075439B9238D6C486B047D4DBA8D9A6D1DAD6BB74050347C70616DB",
+  "installed_path": "O:\\winnt\\system32\\CTL3DV2.DLL",
+  "installed_sha256": "",
+  "scope": "Original debugging-material description and package identity, not source-to-binary or control behavior"
+}
