@@ -1,0 +1,125 @@
+[
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_address": 4096,
+        "virtual_size": 580129,
+        "raw_size": 580608,
+        "raw_sha256": "E2917CC9D47853D3157D6FBCF911F5C9E75E2073FE35CA505207F6F9FD30DF51"
+      },
+      {
+        "name": ".rdata",
+        "virtual_address": 585728,
+        "virtual_size": 76596,
+        "raw_size": 76800,
+        "raw_sha256": "BF2EE194EAF64909F652AE31EA3B22138F35B1558082D95A4713430D9E4CF188"
+      },
+      {
+        "name": ".data",
+        "virtual_address": 663552,
+        "virtual_size": 26932,
+        "raw_size": 16896,
+        "raw_sha256": "5255284F964B1914BC8BF7DD4ABC82A6A586788DA48E17C9E39A0EE7CEAF2EFB"
+      },
+      {
+        "name": ".rsrc",
+        "virtual_address": 692224,
+        "virtual_size": 5104,
+        "raw_size": 5120,
+        "raw_sha256": "0445D8CE9A77A0E386D8A739375E11C0F872DE4967AE40DC41820D82B5F9DB80"
+      },
+      {
+        "name": ".reloc",
+        "virtual_address": 700416,
+        "virtual_size": 33024,
+        "raw_size": 33280,
+        "raw_sha256": "2C5C925F2C633247E55A9AEC44C9F9B373B527B850AB270BB99989367AFAA76C"
+      }
+    ]
+  },
+  {
+    "path": "O:\\winnt\\system32\\wow32.dll",
+    "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_address": 4096,
+        "virtual_size": 580129,
+        "raw_size": 580608,
+        "raw_sha256": "E2917CC9D47853D3157D6FBCF911F5C9E75E2073FE35CA505207F6F9FD30DF51"
+      },
+      {
+        "name": ".rdata",
+        "virtual_address": 585728,
+        "virtual_size": 76596,
+        "raw_size": 76800,
+        "raw_sha256": "BF2EE194EAF64909F652AE31EA3B22138F35B1558082D95A4713430D9E4CF188"
+      },
+      {
+        "name": ".data",
+        "virtual_address": 663552,
+        "virtual_size": 26932,
+        "raw_size": 16896,
+        "raw_sha256": "5255284F964B1914BC8BF7DD4ABC82A6A586788DA48E17C9E39A0EE7CEAF2EFB"
+      },
+      {
+        "name": ".rsrc",
+        "virtual_address": 692224,
+        "virtual_size": 5212,
+        "raw_size": 5632,
+        "raw_sha256": "D5459806937B25261930033192B85B6DB005D35A26104C17BD97DA1C567841E1"
+      },
+      {
+        "name": ".reloc",
+        "virtual_address": 700416,
+        "virtual_size": 33024,
+        "raw_size": 33280,
+        "raw_sha256": "2C5C925F2C633247E55A9AEC44C9F9B373B527B850AB270BB99989367AFAA76C"
+      }
+    ]
+  },
+  {
+    "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+    "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_address": 4096,
+        "virtual_size": 580129,
+        "raw_size": 580608,
+        "raw_sha256": "E2917CC9D47853D3157D6FBCF911F5C9E75E2073FE35CA505207F6F9FD30DF51"
+      },
+      {
+        "name": ".rdata",
+        "virtual_address": 585728,
+        "virtual_size": 76596,
+        "raw_size": 76800,
+        "raw_sha256": "BF2EE194EAF64909F652AE31EA3B22138F35B1558082D95A4713430D9E4CF188"
+      },
+      {
+        "name": ".data",
+        "virtual_address": 663552,
+        "virtual_size": 26932,
+        "raw_size": 16896,
+        "raw_sha256": "5255284F964B1914BC8BF7DD4ABC82A6A586788DA48E17C9E39A0EE7CEAF2EFB"
+      },
+      {
+        "name": ".rsrc",
+        "virtual_address": 692224,
+        "virtual_size": 5212,
+        "raw_size": 5632,
+        "raw_sha256": "D5459806937B25261930033192B85B6DB005D35A26104C17BD97DA1C567841E1"
+      },
+      {
+        "name": ".reloc",
+        "virtual_address": 700416,
+        "virtual_size": 33024,
+        "raw_size": 33280,
+        "raw_sha256": "2C5C925F2C633247E55A9AEC44C9F9B373B527B850AB270BB99989367AFAA76C"
+      }
+    ]
+  }
+]

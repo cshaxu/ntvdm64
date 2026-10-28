@@ -242,7 +242,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'redir-dispatch-release-role-':
+                if prefix == 'redir-service-owners-role-':
+                    assert path in ('vdmredir/vrinit.c', 'vdmredir/vrmisc.c', 'vdmredir/vrmslot.c', 'vdmredir/vrputil.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'redir-dispatch-release-role-':
                     assert path == 'vdmredir/vrdisp.c' and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'wow-keyboard-image-role-':
                     assert path == 'wow32/wkbman.c' and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

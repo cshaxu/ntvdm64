@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1200,
+    "pending": 1196,
     "excluded": 2788,
-    "partial": 643,
+    "partial": 647,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original redirector dispatch role partial; guest and network behavior remain open."
+  "note": "Four original redirector owners partial; guest, network and lifecycle behavior remain open."
 }

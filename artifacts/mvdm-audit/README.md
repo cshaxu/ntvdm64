@@ -103,6 +103,10 @@ pointer-lifetime acceptance.
 The [redirector dispatch review](shard-0/redir-dispatch-release-review.md)
 binds all 50 original service-table targets to the released DLL without
 claiming guest or network execution.
+The [redirector service owners](shard-0/redir-service-owners-review.md)
+bind 22 original initialization, cleanup, mailslot and utility functions.
+The [generic thunk published binding](shard-3/wow-generic-thunk-published-binding.md)
+relates earlier mismatch evidence to the currently released code section.
 The [generic thunk convention review](shard-3/wow-generic-thunk-call-convention-review.md)
 records the current-object versus historical-assembly selection boundary.
 The [debug object](shard-2/base-debug-objects-review.md) and

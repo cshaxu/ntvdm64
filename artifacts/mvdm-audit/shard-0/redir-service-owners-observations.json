@@ -1,0 +1,233 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "vdmredir/vrinit.c",
+      "hashes": [
+        "088ECFF80459ED358EBF4F7DD291821748475A8FBDCCAF27A1EE1DF2B6648273",
+        "088ECFF80459ED358EBF4F7DD291821748475A8FBDCCAF27A1EE1DF2B6648273",
+        "088ECFF80459ED358EBF4F7DD291821748475A8FBDCCAF27A1EE1DF2B6648273"
+      ],
+      "edge": "build obj/redir/vrinit.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrinit.c",
+      "object_sha256": "2867F65DA1BD150AFB3C636CDE7463473618C276ACCF9109A4B8FC919E1CEFA7",
+      "bindings": [
+        {
+          "name": "_VrCheckPmNetbiosAnr",
+          "va": 268447472,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 64,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrDismissInterrupt",
+          "va": 268447536,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 63,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrEoiAndDismissInterrupt",
+          "va": 268447600,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 108,
+          "relocation_words": 10
+        },
+        {
+          "name": "_VrHandleAsyncCompletion",
+          "va": 268447744,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 50,
+          "relocation_words": 7
+        },
+        {
+          "name": "_VrInitialize",
+          "va": 268447808,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 153,
+          "relocation_words": 19
+        },
+        {
+          "name": "_VrInitialized",
+          "va": 268447968,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 6,
+          "relocation_words": 1
+        },
+        {
+          "name": "_VrQueueCompletionHandler",
+          "va": 268447984,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 101,
+          "relocation_words": 12
+        },
+        {
+          "name": "_VrRaiseInterrupt",
+          "va": 268448096,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 63,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrResumeHook",
+          "va": 268448160,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 57,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrSuspendHook",
+          "va": 268448224,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 40,
+          "relocation_words": 7
+        },
+        {
+          "name": "_VrUninitialize",
+          "va": 268448272,
+          "function": true,
+          "owner": "vrinit.obj",
+          "bytes": 61,
+          "relocation_words": 8
+        }
+      ]
+    },
+    {
+      "path": "vdmredir/vrmisc.c",
+      "hashes": [
+        "1AF57ABA3BE6A1425EB18187A73C579F56619A2593BCE3B2C20BE8CF67216B6D",
+        "1AF57ABA3BE6A1425EB18187A73C579F56619A2593BCE3B2C20BE8CF67216B6D",
+        "1AF57ABA3BE6A1425EB18187A73C579F56619A2593BCE3B2C20BE8CF67216B6D"
+      ],
+      "edge": "build obj/redir/vrmisc.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrmisc.c",
+      "object_sha256": "55F515B7900178569212668EE7596A7713CD6DEBEA9E3AE6C82DA7F7CFD8A9A2",
+      "bindings": [
+        {
+          "name": "_VrTerminateDosProcess",
+          "va": 268448336,
+          "function": true,
+          "owner": "vrmisc.obj",
+          "bytes": 26,
+          "relocation_words": 3
+        }
+      ]
+    },
+    {
+      "path": "vdmredir/vrmslot.c",
+      "hashes": [
+        "70294B72780D3287137310DD4B018B7E572328E1B8BCF9BF4178C32734B95C7C",
+        "70294B72780D3287137310DD4B018B7E572328E1B8BCF9BF4178C32734B95C7C",
+        "70294B72780D3287137310DD4B018B7E572328E1B8BCF9BF4178C32734B95C7C"
+      ],
+      "edge": "build obj/redir/vrmslot.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrmslot.c",
+      "object_sha256": "1B6C15A3F5BF6104094BB1CC18697FEEAF780F5F2426F6E6E3AD635074D1C21C",
+      "bindings": [
+        {
+          "name": "_VrDeleteMailslot",
+          "va": 268439552,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 276,
+          "relocation_words": 20
+        },
+        {
+          "name": "_VrGetMailslotInfo",
+          "va": 268439840,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 196,
+          "relocation_words": 14
+        },
+        {
+          "name": "_VrMakeMailslot",
+          "va": 268440048,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 662,
+          "relocation_words": 39
+        },
+        {
+          "name": "_VrPeekMailslot",
+          "va": 268440720,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 18,
+          "relocation_words": 2
+        },
+        {
+          "name": "_VrReadMailslot",
+          "va": 268440752,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 279,
+          "relocation_words": 19
+        },
+        {
+          "name": "_VrTerminateMailslots",
+          "va": 268441040,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 126,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrWriteMailslot",
+          "va": 268441168,
+          "function": true,
+          "owner": "vrmslot.obj",
+          "bytes": 520,
+          "relocation_words": 25
+        }
+      ]
+    },
+    {
+      "path": "vdmredir/vrputil.c",
+      "hashes": [
+        "1440CD1379DEE1BBE65B0A1E6F6A637A3DE48765DA85CFD94153E8876A66FE16",
+        "1440CD1379DEE1BBE65B0A1E6F6A637A3DE48765DA85CFD94153E8876A66FE16",
+        "1440CD1379DEE1BBE65B0A1E6F6A637A3DE48765DA85CFD94153E8876A66FE16"
+      ],
+      "edge": "build obj/redir/vrputil.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrputil.c",
+      "object_sha256": "78C02B48DCE89554FD35332A4EDF13AEE847121C40C30537DD23613E0DCB4383",
+      "bindings": [
+        {
+          "name": "_VrpMapDosError",
+          "va": 268459152,
+          "function": true,
+          "owner": "vrputil.obj",
+          "bytes": 22,
+          "relocation_words": 0
+        },
+        {
+          "name": "_VrpMapLastError",
+          "va": 268459184,
+          "function": true,
+          "owner": "vrputil.obj",
+          "bytes": 20,
+          "relocation_words": 1
+        },
+        {
+          "name": "_VrpTranslateDosNetPath",
+          "va": 268459216,
+          "function": true,
+          "owner": "vrputil.obj",
+          "bytes": 202,
+          "relocation_words": 1
+        }
+      ]
+    }
+  ],
+  "release_sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+  "cached_sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A",
+  "map_sha256": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0",
+  "limits": "Masked object body bindings only; no provider availability, guest request or lifecycle proof."
+}

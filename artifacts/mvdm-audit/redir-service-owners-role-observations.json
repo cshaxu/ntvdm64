@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "318846a2b",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-0/redir-service-owners-observations.json",
+      "sha256": "ABB91B1D762B1E099A7B198D3B3EBB2CCEF47AC829C3F1532B03723F7BBF0B99"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original object bindings, not network behavior acceptance"
+}
