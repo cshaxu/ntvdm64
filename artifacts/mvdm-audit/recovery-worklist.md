@@ -12,6 +12,8 @@ The [FCB actual-object API-failure witness](host-ch-scope/dem-fcb-metadata-failu
 
 The [FCB actual-caller witness](host-ch-scope/dem-fcb-callers-reachability-review.md) additionally executes both selected DEM callers: on the same injected metadata error, open fails without publishing or closing its acquired fake handle, while file-info closes once. Original guest source identifies the INT 21 routes, but the fixture's handles and error translator are controlled seams; installed guest reachability and real handle/error behavior remain S12 acceptance work.
 
+The [real-file sentinel witness](host-ch-scope/dem-fcb-error-sentinel-review.md) uses an actual sparse file of length `FFFFFFFFh`: Windows returns low `FFFFFFFFh`, high zero and LastError zero, while the selected DEM helper rejects it. Original error-converter source predicts zero becomes access denied, but actual guest, converter, hard-error and retry behavior remain untested.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 | Stage | Cohort and evidence | Established result / remaining work |
