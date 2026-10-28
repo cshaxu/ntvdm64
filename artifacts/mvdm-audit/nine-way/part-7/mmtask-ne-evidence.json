@@ -1,0 +1,59 @@
+{
+  "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
+  "ne_offset": 128,
+  "resource_alignment": 4,
+  "strings": [
+    {
+      "type": "0x8006",
+      "name": "0x807e",
+      "offset": 68736,
+      "size": 160,
+      "id2000": "mmtask.tsk",
+      "all_strings": [
+        "mmtask.tsk",
+        "Unknown error returned from MCI command",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "Error in mciSendString but could not get text",
+        "Error in mciSendCommand but could not get text",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "task_exports": [
+    [
+      "MCIGETCREATORTASK",
+      717
+    ],
+    [
+      "MMTASKCREATE",
+      900
+    ],
+    [
+      "MMTASKYIELD",
+      905
+    ],
+    [
+      "MMTASKBLOCK",
+      902
+    ],
+    [
+      "MMGETCURRENTTASK",
+      904
+    ],
+    [
+      "MMTASKSIGNAL",
+      903
+    ]
+  ],
+  "limitations": "NE parsed static strings and name/ordinal only; no execution, source binding or search-path observation."
+}

@@ -1,0 +1,8 @@
+{
+  "path": "src\\mvdm\\wow16\\mmsystem\\MMSYSTEM.DLL",
+  "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
+  "needle": "mmtask.tsk",
+  "offset": 68737,
+  "bytes_hex": "6d6d7461736b2e74736b",
+  "limits": "Raw ASCII presence only; not a validated NE resource parse, invocation, or search-path test."
+}

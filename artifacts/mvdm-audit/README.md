@@ -107,6 +107,17 @@ Additional owner reviews cover [MSCDEX](nine-way/part-5/mscdex-semantic-reconcil
 [DDE declarations](cross-369/dde-header-disposition.md) and
 [resource interface](cross-369/resource-interface-disposition.md) reports
 distinguish selected original paths from untested failures and retirement.
+The [MMTASK NE investigation](nine-way/part-7/mmtask-ne-search-review.md)
+adds binary resource and entry evidence, but not an exercised search path.
+Reviews of [country messages](nine-way/part-2/dos-country-semantic-reconciliation.md),
+[VCPI](nine-way/part-2/dosx-vcpi-semantic-reconciliation.md),
+[WOWEXEC](nine-way/part-8/wowexec-semantic-reconciliation.md),
+[Winsock guest](nine-way/part-8/winsock-semantic-reconciliation.md),
+[COMM and EDIT helpers](nine-way/part-8/user-comm-edit-helper-reconciliation.md),
+[timer provider](nine-way/part-7/multimedia-timer-review.md),
+[local memory](cross-369/local-memory-header-disposition.md),
+[cursor aliases](cross-369/cursor-alias-header-disposition.md) and
+[sound](cross-369/sound-header-disposition.md) retain their distinct owners.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

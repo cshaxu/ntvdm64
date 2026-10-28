@@ -1,0 +1,12 @@
+{
+  "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
+  "ordinal": 900,
+  "entry": {
+    "flags": 3,
+    "segment": 4,
+    "offset": 3278,
+    "file_offset": 19630,
+    "bytes_hex": "c8220000561eb8fc0b8ed8ff36b00568d0078d46de16506a149affff00000bc07505b80100eb6ec646f20d8b460e8b56"
+  },
+  "limitation": "NE entry-table and segment translation only; code disassembly and invocation not verified."
+}
