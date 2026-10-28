@@ -38,6 +38,9 @@ identity separately from the limited historical runtime witness.
 The [part 8 EDIT boundary](nine-way/part-8/edit-guest-host-review.md) separates
 guest source from the selected host control, and the [ToolHelp review](nine-way/part-8/toolhelp-family-review.md)
 distinguishes export and dispatch observations from guest reachability.
+The [ToolHelp semantic reconciliation](nine-way/part-8/toolhelp-semantic-reconciliation.md)
+binds its original unimplemented class entries to the published dispatch table;
+task and module queries remain separate guest-owned validation work.
 Its [remaining guest inventory](nine-way/part-8/guest-family-inventory-review.md)
 and [external raster resources](nine-way/part-8/rasprint-mini-review.md)
 retain unresolved provider and relevance decisions.

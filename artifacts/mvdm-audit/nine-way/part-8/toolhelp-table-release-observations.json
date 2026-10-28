@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "release_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "table": {
+    "name": "_aw32WOW",
+    "va": 269099272,
+    "function": false,
+    "owner": "wowtbl.obj"
+  },
+  "prior_module_separators": [
+    310,
+    850,
+    1342,
+    1481,
+    1501,
+    1606,
+    1759
+  ],
+  "toolhelp_start_index": 1760,
+  "slots": [
+    268446416,
+    268446416,
+    268446416,
+    4294967295
+  ],
+  "unimplemented_binding": {
+    "name": "_WOW32UnimplementedAPI@4",
+    "va": 268446416,
+    "function": true,
+    "owner": "wow32.obj",
+    "bytes": 5,
+    "relocation_words": 0
+  },
+  "scope": "Published retail table pointer and target body binding, no runtime guest callback or class-list validation"
+}
