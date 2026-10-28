@@ -7,11 +7,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-441 partial, 2,635 excluded physical file roles,
-53 full files (27 executable leaves and 26 declarations) and 1,555 pending.
+444 partial, 2,637 excluded physical file roles,
+53 full files (27 executable leaves and 26 declarations) and 1,550 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the video-entry checkpoint, not a prior snapshot's fixed counts.
+the input/NLS checkpoint, not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)
@@ -53,7 +53,11 @@ The [video-entry review](video-native-role-review.md) adds five partial
 owners, one alternative CPU-interface file exclusion, 21 image-bound functions
 and 67 actual initial pointers. Six guest/oracle runs prove bounded invalid
 entry semantics and preserve the default BIOS workload; tracing remains pending.
-Its current gate is [delivery verification](video-native-delivery-verification.ps1).
+The [input/NLS review](input-native-role-review.md) adds three partial owners
+and two original-NT generic-table file exclusions. Actual objects pass bounded
+268,322 keycode/LED, 3,645 NLS and 70 IOS assertions. A strict original keycode
+bound witness fails and remains a concrete S13 repair, not a passing runtime case.
+Its current gate is [delivery verification](input-native-delivery-verification.ps1).
 The [pending-role census](pending-role-census.md) separates initial inventory
 hints from final dispositions; it does not remove any pending path from scope.
 

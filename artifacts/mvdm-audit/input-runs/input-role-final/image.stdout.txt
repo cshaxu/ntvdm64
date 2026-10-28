@@ -1,0 +1,1 @@
+{"result": "pass", "sources": 5, "functions": 6, "keyboard_slots": 6, "scan_table_bytes": 217}

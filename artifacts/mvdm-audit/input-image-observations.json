@@ -1,0 +1,353 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/host/src/nt_input.c",
+      "sha256": "9F54D1ED5C7074BA753B31DAF28A42231598107E9A779381E94B91A25218E8F7",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_input.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_input.c",
+        "sha256": "9f54d1ed5c7074ba753b31daf28a42231598107e9a779381e94b91a25218e8f7",
+        "bytes": "3166",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:853375f8fb877295916d",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_input.c",
+          "original_sha256": "9F54D1ED5C7074BA753B31DAF28A42231598107E9A779381E94B91A25218E8F7",
+          "catalog_git_blob": "3b89d83d340abf0a0604343de75732a35bf091db"
+        },
+        {
+          "id": "SRC:5977762cf7ef23deeb4f",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_input.c",
+          "original_sha256": "9F54D1ED5C7074BA753B31DAF28A42231598107E9A779381E94B91A25218E8F7",
+          "catalog_git_blob": "3b89d83d340abf0a0604343de75732a35bf091db"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_input.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_input.c",
+      "dependency_block": "obj/host/nt_input.obj: #deps 44, deps mtime 8147602998319987 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_nls.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ica.h\n    ../../../../src/mvdm/softpc.new/base/inc/keyba.h\n    ../../../../src/mvdm/softpc.new/base/inc/keyboard.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/spcfile.h\n    ../../../../src/mvdm/softpc.new/base/inc/trace.h\n    ../../../../src/mvdm/softpc.new/base/inc/video.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_hfx.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_event.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_reset.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_uis.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/ddk/inc/ntddkbd.h\n    ../../../../src/opennt-abi/source/public/internal/base/inc/vdm.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "object_sha256": "243A7A25F960D06992D8B5165712B4828AEFE6DB125A958035937E9037567CAC",
+      "functions": [
+        {
+          "symbol": "_nt_kb_prepare",
+          "va": 4223152,
+          "bytes": 3,
+          "relocation_words": 0
+        },
+        {
+          "symbol": "_nt_kb_light_on",
+          "va": 4566112,
+          "bytes": 129,
+          "relocation_words": 2
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_keycd.c",
+      "sha256": "4DE067C013B25120A09EC7D7A0BB5F0FE16EABA59B665AADBCF891CDFBA0CAEF",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_keycd.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_keycd.c",
+        "sha256": "4de067c013b25120a09ec7d7a0bb5f0fe16eaba59b665aadbcf891cdfba0caef",
+        "bytes": "21854",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:18708e0bf158afd48c18",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_keycd.c",
+          "original_sha256": "4DE067C013B25120A09EC7D7A0BB5F0FE16EABA59B665AADBCF891CDFBA0CAEF",
+          "catalog_git_blob": "2d1f80423410cdb7f30964346b2e31a6cd2264e3"
+        },
+        {
+          "id": "SRC:f4e8fd637ad05695efc9",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_keycd.c",
+          "original_sha256": "4DE067C013B25120A09EC7D7A0BB5F0FE16EABA59B665AADBCF891CDFBA0CAEF",
+          "catalog_git_blob": "2d1f80423410cdb7f30964346b2e31a6cd2264e3"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_keycd.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_keycd.c",
+      "dependency_block": "obj/host/nt_keycd.obj: #deps 9, deps mtime 8147412869003886 (VALID)\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "object_sha256": "51A6B7D77F327390FAAC3D73708B068001222B6FBC4A4B6FC169EBE82D2C4D19",
+      "functions": [
+        {
+          "symbol": "_BiosKeyToInputRecord",
+          "va": 4566256,
+          "bytes": 785,
+          "relocation_words": 19
+        },
+        {
+          "symbol": "_KeyMsgToKeyCode",
+          "va": 4567056,
+          "bytes": 49,
+          "relocation_words": 2
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_nls.c",
+      "sha256": "6CEF4FC4ADF6CE81F42CFA4EBFA9C1EDB153A3CE651A69321F5B5022A9B6FA06",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_nls.c",
+        "sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+        "bytes": "3425",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:840cc6c466e23e308157",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_nls.c",
+          "original_sha256": "6CEF4FC4ADF6CE81F42CFA4EBFA9C1EDB153A3CE651A69321F5B5022A9B6FA06",
+          "catalog_git_blob": "eda6a1021161b0c6931688f7229cc55d00a39d91"
+        },
+        {
+          "id": "SRC:8f2ccac289a74e866d4e",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_nls.c",
+          "original_sha256": "6CEF4FC4ADF6CE81F42CFA4EBFA9C1EDB153A3CE651A69321F5B5022A9B6FA06",
+          "catalog_git_blob": "eda6a1021161b0c6931688f7229cc55d00a39d91"
+        }
+      ],
+      "compile_edge": "build obj/host/nt_nls.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_nls.c",
+      "dependency_block": "obj/host/nt_nls.obj: #deps 19, deps mtime 8147603022877454 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_nls.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_rrr.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_uis.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n    ../../../../src/opennt-host/public/sdk/inc/nturtl.h\n\n",
+      "object_sha256": "3292DEB87F8189F9A99012FCC983BFF9FB357AB53005C85783F1702FFF53D29A",
+      "functions": [
+        {
+          "symbol": "_host_nls_get_msg",
+          "va": 4517328,
+          "bytes": 58,
+          "relocation_words": 4
+        },
+        {
+          "symbol": "_nls_init",
+          "va": 4517392,
+          "bytes": 139,
+          "relocation_words": 8
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_ertbl.c",
+      "sha256": "3A41BBCE47258534E4375615A960048A97143A2353AA5946DE13C8F870DC572F",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ertbl.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_ertbl.c",
+        "sha256": "3a41bbce47258534e4375615a960048a97143a2353aa5946de13c8f870dc572f",
+        "bytes": "716",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:e08abea4c069af0720fd",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_ertbl.c",
+          "original_sha256": "3A41BBCE47258534E4375615A960048A97143A2353AA5946DE13C8F870DC572F",
+          "catalog_git_blob": "9c0785ab1963008018be6499bc128645583e208b"
+        },
+        {
+          "id": "SRC:3752d842c7ecac52904b",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_ertbl.c",
+          "original_sha256": "3A41BBCE47258534E4375615A960048A97143A2353AA5946DE13C8F870DC572F",
+          "catalog_git_blob": "9c0785ab1963008018be6499bc128645583e208b"
+        }
+      ],
+      "functions": [],
+      "disposition": "legacy-generic-error-table"
+    },
+    {
+      "relative_path": "softpc.new/host/src/nt_mess.c",
+      "sha256": "00855DDB83164E8E20D8EDC482F48FF403C42D2808D4D951081FACB335550A83",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mess.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_mess.c",
+        "sha256": "00855ddb83164e8e20d8edc482f48ff403c42d2808d4d951081facb335550a83",
+        "bytes": "940",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:fd834bd6fe0766251d8c",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_mess.c",
+          "original_sha256": "00855DDB83164E8E20D8EDC482F48FF403C42D2808D4D951081FACB335550A83",
+          "catalog_git_blob": "40fa77b3030377a70bb5028e729ce43761e49687"
+        },
+        {
+          "id": "SRC:bc522e7fe0110c7c5d5c",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_mess.c",
+          "original_sha256": "00855DDB83164E8E20D8EDC482F48FF403C42D2808D4D951081FACB335550A83",
+          "catalog_git_blob": "40fa77b3030377a70bb5028e729ce43761e49687"
+        }
+      ],
+      "functions": [],
+      "disposition": "legacy-generic-error-table"
+    }
+  ],
+  "key_arrays": [
+    {
+      "symbol": "_Scan1ToKeynum",
+      "va": 5994560,
+      "bytes": 133,
+      "initializer_sha256": "001722BE2F1FFFF911A765805773453D761038F13FEDED1D4F2C7F9A1ED0CFD9",
+      "bound_predicate": "scan > sizeof(table)"
+    },
+    {
+      "symbol": "_Scan1ToKeynumExtended",
+      "va": 5994696,
+      "bytes": 84,
+      "initializer_sha256": "0E9A98C091D9E76B9626B9BED0C771D2634CB13312D63048DFA7D61101478118",
+      "bound_predicate": "scan > sizeof(table)"
+    }
+  ],
+  "keyboard_slots": [
+    {
+      "index": 0,
+      "symbol": "_nt_kb_prepare",
+      "va": 4223152
+    },
+    {
+      "index": 1,
+      "symbol": "_nt_kb_prepare",
+      "va": 4223152
+    },
+    {
+      "index": 2,
+      "symbol": "_nt_kb_prepare",
+      "va": 4223152
+    },
+    {
+      "index": 3,
+      "symbol": "_nt_kb_prepare",
+      "va": 4223152
+    },
+    {
+      "index": 4,
+      "symbol": "_nt_kb_light_on",
+      "va": 4566112
+    },
+    {
+      "index": 5,
+      "symbol": "_nt_kb_light_on",
+      "va": 4566112
+    }
+  ],
+  "toggle_callback": {
+    "name": "_SyncToggleKeys",
+    "va": 4520768,
+    "function": true,
+    "owner": "original-softpc-host-roots:nt_event.obj"
+  },
+  "inputs": [
+    {
+      "path": "build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-softpc-host-roots.lib",
+      "sha256": "B0E9C871F6C5E42AFD860F03378DDF020B150E76070E618B4F675D23CD9A56FA"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\source-file-catalog.csv",
+      "sha256": "7DAC7F535A737988BE4B3D859C82D58C89EE54E4C3207B529E0875FE29A76938"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\source-file-catalog.csv",
+      "sha256": "712AE62DC491DF3E2480FD82121D2A517093707C263E2803965EFC6AC9D98A9B"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-scope.json",
+      "sha256": "B5AC71F12855EA642F977D92139FB2EBB39210D03F8A0FDE18B7C453AE415E47"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\frozen-file-reconciliation.csv",
+      "sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\obj.vdm\\resource.rc",
+      "sha256": "3E3AC9B1001127E3900C1BA5A2309C28AAA97ECF2882FA6F4E9F20E600A26D8D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\generated\\softpc-embedded-roms.rc",
+      "sha256": "EE33688A792A32C63ABE61CEAC07BF74F51BBC13639DEEE8FE11C5C6C7F322FD"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\softpc-resource.res",
+      "sha256": "882C48D551A23F4C58DE8E89B98C15C6AC85453A250CFA69C7D39A0BB826CDC4"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "sha256": "09E1F4D221DB21E04A32096380C4E48EDEC23863943A068DA7118B1E542D6957"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "sha256": "FC319D06BC44C6DC0AD645F661C3763E67835114040898AE9ED0EADEE746D75D"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "sha256": "857F1EC8DC743CFC77BBE6BCF3ACC1FC271950B6F86CA8D81E65B3B68DCE5739"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\bios-image-observer.py",
+      "sha256": "7281778DC9EE59D4214CC137561E0045AA76BEA803FF0F9EF70D02BBD9B24CAE"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\disk-image-observer.py",
+      "sha256": "3C785EBF2F787213AB403D9AA1BEBC6BCF04CFF0091FD6FE055D813E90C4A9CF"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\input-image-observer.py",
+      "sha256": "E2E25225EEF5DDF565524101E163D3A2CA5CF65CEA159B77B69CB2523A8F6D8B"
+    }
+  ],
+  "scope": "Original selected input/NLS and legacy-error file roles; code/table identity and callback target, not whole guest keyboard/locale/error lifecycle acceptance"
+}

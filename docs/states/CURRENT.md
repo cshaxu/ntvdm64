@@ -19,10 +19,10 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[video review](../../artifacts/mvdm-audit/video-native-role-review.md) adds six
-roles, 21 image-bound functions and six real-guest/oracle contracts.
-The ledger has 1,555 pending, 441 partial, 53 full and 2,635 excluded physical
-file roles. EGA diagnostic tracing remains pending; no runtime image changed.
+[input review](../../artifacts/mvdm-audit/input-native-role-review.md) adds five
+roles, six image-bound functions and actual-object contract evidence.
+The ledger has 1,550 pending, 444 partial, 53 full and 2,637 excluded physical
+file roles. Keycode one-past reads remain a proved S13 defect; no runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

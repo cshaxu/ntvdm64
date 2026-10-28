@@ -1,0 +1,2 @@
+nls_object_contract_fixture.c
+O:\repos.hobby\ntvdm64\tests\mvdm-host\nls_object_contract_fixture.c(12): error C2118: negative subscript

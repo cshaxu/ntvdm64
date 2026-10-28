@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "010952cdd",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "input-image-observations.json",
+      "sha256": "AD24D24FF6539C9E8AA397ACBAA388C6F3A9F7F0D9946758D6D8F3137C883382"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Three bounded integrations and two original generic-table roles; known scan-bound defect is not repaired or waived"
+}

@@ -1,0 +1,3 @@
+KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=123 restored=0
+KEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=123 restored=0
+KEYCODE_BOUNDARY expected_rejected=2 actual_rejected=0

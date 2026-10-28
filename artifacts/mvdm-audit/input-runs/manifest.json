@@ -1,0 +1,352 @@
+[
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/build.stdout.txt",
+    "bytes": 160,
+    "sha256": "3E2C0F373BDD0223CD89152FED2A9A57A781A088B03B42DC6F43A49278BB8D4E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/negative-abi.stdout.txt",
+    "bytes": 146,
+    "sha256": "065EEB3A09A0BCB299AB4C5D2599DF13E8EC448E3956CA1B5119CF5A2356A02A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/result.json",
+    "bytes": 4230,
+    "sha256": "E4F3CE07AD6F8DE8B517C5EA5ECFE74A511481D228E87D99834726EF7F598F55"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/run.stdout.txt",
+    "bytes": 65,
+    "sha256": "BF6FEB0248BEF41457BD05E51B8908A4AD3DD14D775CF9B717CFB4CFC7B419C6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/supervisor.completion.json",
+    "bytes": 66,
+    "sha256": "83978C1BDBFF46AE2E4909CBDD4C9D506D657B5C401406D3C21BC5E03C92A235"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/supervisor.process.json",
+    "bytes": 470,
+    "sha256": "BD9024F958F1571DD9CC4C77E50A49DF417FB372DCDA3DDBC7B0EE0BDF138B84"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/supervisor.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/keycode-object-contract/supervisor.stdout.txt",
+    "bytes": 4230,
+    "sha256": "E4F3CE07AD6F8DE8B517C5EA5ECFE74A511481D228E87D99834726EF7F598F55"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/boundary.completion.json",
+    "bytes": 89,
+    "sha256": "61EEFF3D72B73CB13334BF263D04D6CE4FDD30805B7C85B0442243A6AFA774E6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/boundary.process.json",
+    "bytes": 252,
+    "sha256": "C90D696FCA638E38B6C9C5B1D55D95A0576AD60A99FCE0B92250A94E3C44F3E0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/boundary.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/boundary.stdout.txt",
+    "bytes": 223,
+    "sha256": "8EED885D21C302CC857AD7DFA18C97A4320DDBFB597EDE027299417DD2B26FB5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/completion.json",
+    "bytes": 66,
+    "sha256": "64360BE6D2CEFCFC316E07F5A8C92E3FA3EC9F91564E7EC099D168431A79B6A5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios.completion.json",
+    "bytes": 89,
+    "sha256": "35F17D6A8566787A307FF94F72A8F2674E6616586CB6A9C5A318BBEC82C02676"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios.process.json",
+    "bytes": 471,
+    "sha256": "3D0DED89A8FE0575A41C2279ED776D90F6026C8F913440B4CAF411E744172F24"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios.stdout.txt",
+    "bytes": 5209,
+    "sha256": "EFE0CFEEEACA1FCECFC1BC9619B80BE39C3E4B244343E7424226839314612DD8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode.completion.json",
+    "bytes": 89,
+    "sha256": "8DBE6B66F20C2EB7253A9B14F4109FF33DCF70FE54BC2A6226A8CCCEC04C9F89"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode.process.json",
+    "bytes": 479,
+    "sha256": "2D372B85ABB89470FB26B674C8131137A0EA1BD04B43EF5A074DDB3AB464ABB1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode.stdout.txt",
+    "bytes": 4270,
+    "sha256": "6BC77A5779792AADD327C8754965B0A09C3BD636E001F9E029A76EE557D44282"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls.completion.json",
+    "bytes": 89,
+    "sha256": "CFD668DAE1445B1F5E281402D77A005A93F723525B11241D5A5A06F2EBA959E7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls.process.json",
+    "bytes": 471,
+    "sha256": "7EDA7CC410BED799A0F28154152219937334D3C3975C4B86079D3E5C4B101D96"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls.stdout.txt",
+    "bytes": 4251,
+    "sha256": "284016B3937A74208F1640439591E6161D273E362617E6F7D0CD78EF35B50778"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/process.json",
+    "bytes": 366,
+    "sha256": "85227B5A5874D99DA04F0E758AE44B8D957161B014E806149E2C00CFBA9C0D6D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/run.ps1",
+    "bytes": 1838,
+    "sha256": "7F1165A063C21960B47D6A881BD1D8EB70A0CF387461BE90DA5F594222C2454C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/stdout.txt",
+    "bytes": 899,
+    "sha256": "10482FCD906BC87491242CDB8B829F17F41B0AA3EB129037FA21C641440D53B3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/build.stdout.txt",
+    "bytes": 31,
+    "sha256": "62AA50DB9890EB3D00488A23CB0851675086930FBDE51B2461F9CF406FCC3EEC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/negative-abi.stdout.txt",
+    "bytes": 138,
+    "sha256": "3A937F1AA41A1A98DC5D7FC8DE9C93617F808E123C08F92ACACE18A551BF7A52"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/result.json",
+    "bytes": 5209,
+    "sha256": "EFE0CFEEEACA1FCECFC1BC9619B80BE39C3E4B244343E7424226839314612DD8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/ios/run.stdout.txt",
+    "bytes": 55,
+    "sha256": "226EF948C2A19F5328A16A96D2D603A2A217457242E11B75416FE8FB642F6322"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/build.stdout.txt",
+    "bytes": 35,
+    "sha256": "2801DC9C249B58EA01E5AE0365C87A1846CAB2BDE6185611B53D4F2CAD69C14B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/negative-abi.stdout.txt",
+    "bytes": 146,
+    "sha256": "065EEB3A09A0BCB299AB4C5D2599DF13E8EC448E3956CA1B5119CF5A2356A02A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/result.json",
+    "bytes": 4270,
+    "sha256": "6BC77A5779792AADD327C8754965B0A09C3BD636E001F9E029A76EE557D44282"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/keycode/run.stdout.txt",
+    "bytes": 65,
+    "sha256": "BF6FEB0248BEF41457BD05E51B8908A4AD3DD14D775CF9B717CFB4CFC7B419C6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/build.stdout.txt",
+    "bytes": 31,
+    "sha256": "CF0E4CBB801290272AB1B498D7D5C292A1A490A5CCAC8C18BE74D7BB17AE19C4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/negative-abi.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/negative-abi.stdout.txt",
+    "bytes": 138,
+    "sha256": "D9C51628C549C3F89F08824265319306898DED5850114566B266C00628906EAC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/result.json",
+    "bytes": 4251,
+    "sha256": "284016B3937A74208F1640439591E6161D273E362617E6F7D0CD78EF35B50778"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/run.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-object-contracts/nls/run.stdout.txt",
+    "bytes": 56,
+    "sha256": "C293957EBACD24BBE77177C885EAE8EEB6AA5A1FC8F19EAA9C57E627B0414880"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-image/completion.json",
+    "bytes": 66,
+    "sha256": "9A9AB0F26B62D90707D8BE9FBE9F835726C012182634BA458F4C575681005CDB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-image/process.json",
+    "bytes": 268,
+    "sha256": "356E185B4F27F24171E0720F405AE379064A6D71025F109B8349511205E67789"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-image/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-image/stdout.txt",
+    "bytes": 96,
+    "sha256": "10A6E1AE4BCBBEF104C984DEF96465233BCF99CF4D01DFE8EBD8BBD6E86369E8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/completion.json",
+    "bytes": 66,
+    "sha256": "18D8E7284BD4DF72E6BFC05B768733BCDA22D10C9D703E3BE2941CC4F6BDCCBD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/image.completion.json",
+    "bytes": 66,
+    "sha256": "91DD4B6CAD1427724E84CF19F26F4145B9A5CEB58D2D51D9E92F6F537D6C9077"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/image.process.json",
+    "bytes": 268,
+    "sha256": "F7E5C39790916090F2F8315039A307A6AC6956F5D5263FDC4F2998306C9F0C97"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/image.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/image.stdout.txt",
+    "bytes": 96,
+    "sha256": "10A6E1AE4BCBBEF104C984DEF96465233BCF99CF4D01DFE8EBD8BBD6E86369E8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/merge.completion.json",
+    "bytes": 66,
+    "sha256": "C3F308BF7E4A2FB1044DCF7F91492FB708EFE48AFA2FD0BD79A67A3B6906B97B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/merge.process.json",
+    "bytes": 271,
+    "sha256": "BF89C98022212447C908A28FA688D4D19F05AEEE11B51F4DEEAD43B67734EED3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/merge.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/merge.stdout.txt",
+    "bytes": 383,
+    "sha256": "53876657232E19354BA2FD3AF41802923D7EA871A2264E0FFF2EAE98AC861E1A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/process.json",
+    "bytes": 359,
+    "sha256": "4A93F3E1261333762484B9D6E0BE624F42047F1F633F6E07F558B5AED2DFB6EC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/run.ps1",
+    "bytes": 1133,
+    "sha256": "06B4D4EF380E0CDEAB201325E3C62B5D0D504C50E7C8F59CEDCB7B8251B4ACF2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/input-runs/input-role-final/stdout.txt",
+    "bytes": 479,
+    "sha256": "A91D3CCC96FCD23B848AFA935F19BFB113A37F9753E76774FE845C9554F9C926"
+  }
+]

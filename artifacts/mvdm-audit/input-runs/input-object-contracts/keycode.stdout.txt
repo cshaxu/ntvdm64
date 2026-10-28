@@ -1,0 +1,75 @@
+{
+  "started": "2026-10-28T02:19:47.8549465Z",
+  "owner_pid": 32240,
+  "result": "pass",
+  "contract": "keycode",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode\\keycode-object-contract.exe",
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1",
+      "sha256": "84BB83AAA84AB994AC242A0AE85993618E4ED0B86D1C25BA85FBF63CC0739B89"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\keycode_object_contract_fixture.c",
+      "sha256": "DA3FD677417EB38CD2087A0B516605E20F4F2DB5724694431063E7EEE3AF793B"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_keycd.c",
+      "sha256": "4DE067C013B25120A09EC7D7A0BB5F0FE16EABA59B665AADBCF891CDFBA0CAEF"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj",
+      "sha256": "51A6B7D77F327390FAAC3D73708B068001222B6FBC4A4B6FC169EBE82D2C4D19"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h",
+      "sha256": "16008682AF1A1770658FA6C70797E7B92BBD041E44D23B8759B05F71A91564EB"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\keyboard.h",
+      "sha256": "1FE1D02140170EEF068A61E8FEEC7F2E6BAFC2D235CA6D2B345F898827F8AD9E"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj",
+      "sha256": "243A7A25F960D06992D8B5165712B4828AEFE6DB125A958035937E9037567CAC"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_input.c",
+      "sha256": "9F54D1ED5C7074BA753B31DAF28A42231598107E9A779381E94B91A25218E8F7"
+    }
+  ],
+  "runs": [
+    {
+      "kind": "build",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_keycd.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_input.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode\\keycode-object-contract.exe\" /link kernel32.lib user32.lib ntdll.lib\"",
+      "exit": 0,
+      "pid": 24776
+    },
+    {
+      "kind": "negative-abi-compile",
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_KEYCODE_EXPECT_EVENT_BYTES=4 /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\keycode_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode\\negative-abi.obj\"\"",
+      "exit": 2,
+      "pid": 7968
+    },
+    {
+      "kind": "fixture",
+      "exit": 0,
+      "diagnostic_budget_ms": 30000,
+      "pid": 14760
+    }
+  ],
+  "checks": 268322,
+  "callbacks": 1184,
+  "fixture_sha256": "F1534ABDC80A8A4ABC1233946705B0CCC74F8DAF9D4BF438C30FFB56BCCD1EFC",
+  "finished": "2026-10-28T02:19:58.8895207Z"
+}

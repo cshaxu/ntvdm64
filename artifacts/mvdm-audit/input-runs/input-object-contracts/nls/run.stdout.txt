@@ -1,0 +1,1 @@
+NLS_OBJECT_CONTRACT checks=3645 failures=0 callbacks=0

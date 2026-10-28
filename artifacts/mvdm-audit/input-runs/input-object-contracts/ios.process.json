@@ -1,0 +1,7 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1\" -Contract ios -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios\"",
+  "diagnostic_budget_seconds": 180,
+  "started": "2026-10-28T02:20:11.2041989Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 25560
+}

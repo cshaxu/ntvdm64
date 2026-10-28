@@ -24,6 +24,7 @@ original behavior, lifecycle and regression before implementing a change.
 | S12 | [ForceDOS](shard-3/forcedos-original-owner-audit.md); [PIF](shard-3/pif-config-lifecycle-audit.md) | ForceDOS consumer rejects an encoded original flag; nested guest execution still needs proof. PIF state retention is a source-level question, not an established defect. Trace task and worker owners before choosing changes. |
 | S11/S12/S13/S17 | [BIOS integrations](bios-native-role-review.md) | Preserve the original 256-entry dispatch and virtualized callbacks; new real guest proof covers 768 control errors, 64 PROD illegal no-ops and four invalid EMS returns per package only. S12 owns valid 30-slot EMS/handle/page/map/access-key/reset and failure contracts; S13 owns actual CMOS, ROM-error and slave-IRQ lifecycles. The D11 slave-port finding still requires real PIC/guest proof. |
 | S13 | [BIOS memory and RTC](shard-3/bios-memory-rtc-audit.md) | Historical INT 12h baseline and CMOS flag tests do not cover changed BDA, BOP 70 alarm, countdown and EOI; verify those reached original paths. |
+| S13 | [Original scan-table exact bound](input-native-role-review.md#proven-one-past-key-table-read) | Actual nt_keycd.obj reads one-past normal[133]/enhanced[84] under an isolated data sentinel and returns it. Change both `>` guards to `>=` with a registered minimal mirror exception; preserve all mapping/ABI and translation flow. Verify strict rejection, all normal/enhanced scans, BIOS conversion and actual DOS/WOW input/reset/retirement. Real queued occurrence or guest crash is not established. |
 | S13 | [ROM and CPU register owners](shard-1/rom-residency-xt-audit.md) | Required embedded ROM failures return zero and rom_init ignores the result; deployed failure reachability and outer handling are unproved. Verify required resources, protection, startup failure and register/parity ownership. |
 | S13 | [Codepage transition](shard-1/standalone-tool-chain-audit.md) | Independent console carrier codepages were observed; establish original console authority and test both native and guest output before modifying propagation. |
 | S13 | [Original NT quick events](quick-event-owner-review.md) | Selected `qevnt.obj` passes 37 controlled queue/identity/failure/reentrant callback assertions and the original 64-bit declaration rejects a wrong-width build. Preserve NT owner selection and intentional unused-tick boundary; verify real calibration, late-event behavior, ICA concurrency, device/guest reset and retirement and published-image equivalence before declaring `qevnt.c`/`host_qev.h` full. Do not repair or revive generic `quick_ev.c` as if it were the selected provider. |
@@ -40,6 +41,13 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | [BDE extension](shard-0/bde-debugger-extension-audit.md) | Original standalone debugger-extension command chain is identified; product scope and whether its context/symbol dependencies are recoverable remain to be decided. Do not equate it with all debugger functionality. |
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
+
+The [input/NLS checkpoint](input-native-role-review.md) leaves S13 real LED/
+BIOS/Console synchronization, input nesting/reset/retirement, OEM/DBCS and
+Alt-numpad conversion and failure, and missing initialization resources/
+noncontinuable NLS failure, locales and actual error/dialog lifetimes.
+The two generic error-table physical files are superseded by original NT
+resource/error owners, not exclusions of localization or error capability.
 
 The [video-entry checkpoint](video-native-role-review.md) leaves S11/S13
 valid BIOS/table dispatch and stream ownership; adapter reset/retirement;

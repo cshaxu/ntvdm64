@@ -1,0 +1,7 @@
+{
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\input-image-observer.py\"",
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "started": "2026-10-28T02:23:19.4452341Z",
+  "pid": 26052,
+  "diagnostic_budget_seconds": 180
+}

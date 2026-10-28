@@ -1,0 +1,95 @@
+{
+  "started": "2026-10-28T02:20:11.9927071Z",
+  "owner_pid": 25560,
+  "result": "pass",
+  "contract": "ios",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios\\ios-object-contract.exe",
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1",
+      "sha256": "84BB83AAA84AB994AC242A0AE85993618E4ED0B86D1C25BA85FBF63CC0739B89"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ios_object_contract_fixture.c",
+      "sha256": "7C9DFB06557A25E6FD560AACCB40C98BEBD572276756902870FAA98F3F00609C"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "sha256": "E4F39908FF9534ADDE52E46DEF732A93790AC48F2BB481590622C537C2F3B205"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\ios.obj",
+      "sha256": "00F21423007F39DDB26312B4EB41A41911456B062EA5B035D394577C498D4DF9"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\\insignia.h",
+      "sha256": "16008682AF1A1770658FA6C70797E7B92BBD041E44D23B8759B05F71A91564EB"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\base_def.h",
+      "sha256": "084991CFC23DC79529CC67A43488EC114BE882FB62A9F95B879E1B6995F7AFAE"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\ios.h",
+      "sha256": "AE58169DE7AA969000F7CF4374D3D850B55D352C3D4C6EDCF52DEC0E985620A4"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\in.h",
+      "sha256": "F70A52EA71CA37B268D8735F7EB358BE3E828237999E0B973B9C9E18FAC9D570"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\out.h",
+      "sha256": "8E53E3FA7ACA9E0FBEBCEA0FB5092213DCAB4C7AFE3055228CBAF33CC5179F11"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\in.obj",
+      "sha256": "51F3E9CE7BAC1288A54B5B2D978673E1A4043DDB7EA09D3ACE9EF3386DAD7E12"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\out.obj",
+      "sha256": "72037106ABA6375D86AAF11D3DB3E65886583759C3CFDE25D299B627504283C8"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\in.c",
+      "sha256": "5A6CB5699C84E6A25FC984AA9C5A4EE50CB22D4408BA3DF57CD0CD95E41F23B0"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\out.c",
+      "sha256": "520BDEBE72DCB263BF2A8312EC543B0414A0456E07959891BDDB7D083B52B91B"
+    }
+  ],
+  "runs": [
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ios_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\support\\ios.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\in.obj\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\out.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios\\ios-object-contract.exe\" /link kernel32.lib\"",
+      "kind": "build",
+      "exit": 0,
+      "pid": 20772
+    },
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_IO_EXPECT_WORD_BYTES=4 /DNTVDM /DSPC386 /DANSI /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\inc\" /I\"O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\" \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ios_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\ios\\negative-abi.obj\"\"",
+      "kind": "negative-abi-compile",
+      "exit": 2,
+      "pid": 3844
+    },
+    {
+      "diagnostic_budget_ms": 30000,
+      "kind": "fixture",
+      "exit": 0,
+      "pid": 1576
+    }
+  ],
+  "checks": 70,
+  "callbacks": 78,
+  "fixture_sha256": "5C0F7845BBF11FC9F5EC01CFB8FBE4AD84E0FF887BA022705A16A1EF7777CD5D",
+  "finished": "2026-10-28T02:20:23.7305264Z"
+}

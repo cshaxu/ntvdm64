@@ -2,7 +2,7 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$WorkerBuild = 'build/.ninja/msvc-x86-release/worker',
-    [ValidateSet('qevnt','ios','gfi')][string]$Contract = 'qevnt'
+    [ValidateSet('qevnt','ios','gfi','keycode','nls')][string]$Contract = 'qevnt'
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -16,11 +16,30 @@ $headers = @()
 $extraObjects = @()
 $extraSources = @()
 $extraFlags = ''
+$extraLibraries = ''
 if ($Contract -eq 'qevnt') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/base/system/qevnt.c'
     $headers = @(Join-Path $repo 'src/mvdm/softpc.new/host/inc/host_qev.h')
     $object = Join-Path $WorkerBuild 'obj/system/qevnt.obj'
     $negativeDefine = 'MVDM_QEV_EXPECT_HANDLE_BYTES'
+} elseif ($Contract -eq 'nls') {
+    $original = Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_nls.c'
+    $headers = @('src/mvdm/softpc.new/host/inc/host_rrr.h','src/mvdm/softpc.new/host/inc/nt_uis.h','src/mvdm/softpc.new/obj.vdm/resource.rc') | ForEach-Object { Join-Path $repo $_ }
+    $object = Join-Path $WorkerBuild 'obj/host/nt_nls.obj'
+    $extraObjects = @(Join-Path $WorkerBuild 'obj/host/softpc-resource.res')
+    $extraSources = @(Join-Path $WorkerBuild 'generated/softpc-embedded-roms.rc')
+    $negativeDefine = 'MVDM_NLS_EXPECT_CAPACITY'
+    $extraFlags = '/I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" '
+    $extraLibraries = ' user32.lib'
+} elseif ($Contract -eq 'keycode') {
+    $original = Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_keycd.c'
+    $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/base/inc/keyboard.h') | ForEach-Object { Join-Path $repo $_ }
+    $object = Join-Path $WorkerBuild 'obj/host/nt_keycd.obj'
+    $extraObjects = @(Join-Path $WorkerBuild 'obj/host/nt_input.obj')
+    $extraSources = @(Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_input.c')
+    $negativeDefine = 'MVDM_KEYCODE_EXPECT_EVENT_BYTES'
+    $extraFlags = '/DNTVDM /DSPC386 /DANSI /I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm/softpc.new/base/inc') + '" '
+    $extraLibraries = ' user32.lib ntdll.lib'
 } elseif ($Contract -eq 'gfi') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/base/disks/gfi.c'
     $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/base/inc/xt.h','src/mvdm/softpc.new/base/inc/bios.h','src/mvdm/softpc.new/base/inc/config.h','src/mvdm/softpc.new/base/inc/gfi.h') | ForEach-Object { Join-Path $repo $_ }
@@ -51,7 +70,7 @@ try {
         $receipt.inputs += @{ path = $path; sha256 = (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }
     }
     $linkedObjects = (@($object) + $extraObjects | ForEach-Object { '"' + $_ + '"' }) -join ' '
-    $command = '/d /s /c ""' + $driver + '" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS ' + $extraFlags + '"' + $source + '" ' + $linkedObjects + ' /Fo:"' + $fixtureObject + '" /Fe:"' + $exe + '" /link kernel32.lib"'
+    $command = '/d /s /c ""' + $driver + '" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS ' + $extraFlags + '"' + $source + '" ' + $linkedObjects + ' /Fo:"' + $fixtureObject + '" /Fe:"' + $exe + '" /link kernel32.lib' + $extraLibraries + '"'
     $build = Start-Process cmd.exe -ArgumentList $command -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $BuildRoot 'build.stdout.txt') -RedirectStandardError (Join-Path $BuildRoot 'build.stderr.txt')
     $receipt.runs += @{ kind = 'build'; pid = $build.Id; command = $command }
     $receipt | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $BuildRoot 'result.json')

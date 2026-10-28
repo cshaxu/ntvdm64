@@ -1,0 +1,22 @@
+  ],
+  "checks": 268322,
+  "callbacks": 1184,
+  "fixture_sha256": "F1534ABDC80A8A4ABC1233946705B0CCC74F8DAF9D4BF438C30FFB56BCCD1EFC",
+  "finished": "2026-10-28T02:19:58.8895207Z"
+}
+  ],
+  "checks": 3645,
+  "callbacks": 0,
+  "fixture_sha256": "9E899052CBE4E46AD590551DD0152C13611084F85B739E48678755BD0F497C9D",
+  "finished": "2026-10-28T02:20:11.0009302Z"
+}
+  ],
+  "checks": 70,
+  "callbacks": 78,
+  "fixture_sha256": "5C0F7845BBF11FC9F5EC01CFB8FBE4AD84E0FF887BA022705A16A1EF7777CD5D",
+  "finished": "2026-10-28T02:20:23.7305264Z"
+}
+KEYCODE_BOUNDARY enhanced=0 scan=133 before=0 sentinel=123 observed=123 restored=0
+KEYCODE_BOUNDARY enhanced=1 scan=84 before=0 sentinel=123 observed=123 restored=0
+KEYCODE_BOUNDARY expected_rejected=2 actual_rejected=0
+PASS bounded input/NLS/IOS cases; strict keycode bound contract fails on actual original object under isolated data sentinel

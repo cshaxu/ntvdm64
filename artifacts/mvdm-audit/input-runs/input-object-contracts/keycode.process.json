@@ -1,0 +1,7 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1\" -Contract keycode -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\input-object-contracts\\keycode\"",
+  "diagnostic_budget_seconds": 180,
+  "started": "2026-10-28T02:19:47.0238387Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 32240
+}

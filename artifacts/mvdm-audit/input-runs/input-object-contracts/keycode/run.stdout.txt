@@ -1,0 +1,1 @@
+KEYCODE_OBJECT_CONTRACT checks=268322 failures=0 callbacks=1184
