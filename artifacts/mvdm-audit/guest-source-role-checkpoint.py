@@ -226,7 +226,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'dos-kernel-image-role-':
+                if prefix == 'wow-user-header-role-':
+                    assert path in ('wow32/wuclip.h', 'wow32/wucomm.h', 'wow32/wudlg.h', 'wow32/wuman.h', 'wow32/wuser31.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'dos-kernel-image-role-':
                     assert path in ('dos/v86/doskrnl/bios/NTIO.SYS', 'dos/v86/doskrnl/dos/NTDOS.SYS') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
                 elif prefix == 'dosx-guest-role-':
                     assert path == 'dpmi/486/dosx.exe' and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash

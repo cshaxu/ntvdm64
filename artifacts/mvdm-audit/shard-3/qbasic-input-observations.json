@@ -1,0 +1,97 @@
+{
+  "money.bas": {
+    "current": {
+      "size": 46225,
+      "sha256": "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065"
+    },
+    "opennt": {
+      "size": 46225,
+      "sha256": "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065"
+    },
+    "opennt45": {
+      "size": 46225,
+      "sha256": "9f5153fddae4351fe845f2eeedd74e293d30f8898505a0d9b4d4488888f9d065"
+    }
+  },
+  "msherc.com": {
+    "current": {
+      "size": 6934,
+      "sha256": "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e"
+    },
+    "opennt": {
+      "size": 6934,
+      "sha256": "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e"
+    },
+    "opennt45": {
+      "size": 6934,
+      "sha256": "eb96ee0e8be6d4a4332c3e1947d95f9c448a0a8a96b5cd74a38d33a1e0b9405e"
+    }
+  },
+  "qbasic.exe": {
+    "current": {
+      "size": 257824,
+      "sha256": "e8341b546cc12cfd4d59a7eb24e116f2cfbcae71779d9a7f712902f65e5deb6e"
+    },
+    "opennt": null,
+    "opennt45": {
+      "size": 257824,
+      "sha256": "e8341b546cc12cfd4d59a7eb24e116f2cfbcae71779d9a7f712902f65e5deb6e"
+    }
+  },
+  "makefile": {
+    "current": {
+      "size": 449,
+      "sha256": "3df0ec2d79ac0458617c7c67b217517223de1d9b71cebdcae2e6609c974c9048"
+    },
+    "opennt": {
+      "size": 449,
+      "sha256": "3df0ec2d79ac0458617c7c67b217517223de1d9b71cebdcae2e6609c974c9048"
+    },
+    "opennt45": {
+      "size": 449,
+      "sha256": "3df0ec2d79ac0458617c7c67b217517223de1d9b71cebdcae2e6609c974c9048"
+    }
+  },
+  "qbasic.hlp": {
+    "current": {
+      "size": 130810,
+      "sha256": "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db"
+    },
+    "opennt": {
+      "size": 130810,
+      "sha256": "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db"
+    },
+    "opennt45": {
+      "size": 130810,
+      "sha256": "6740dba6966378c317a6273299157db1388d6b5820ecb7a05ab68cf2af96a8db"
+    }
+  },
+  "edit.com": {
+    "current": {
+      "size": 413,
+      "sha256": "e0a0b24fee4037cb050670661c30ad7ecc0ea9483938152fca3d807c443e8a46"
+    },
+    "opennt": {
+      "size": 413,
+      "sha256": "e0a0b24fee4037cb050670661c30ad7ecc0ea9483938152fca3d807c443e8a46"
+    },
+    "opennt45": {
+      "size": 413,
+      "sha256": "e0a0b24fee4037cb050670661c30ad7ecc0ea9483938152fca3d807c443e8a46"
+    }
+  },
+  "package_members": [
+    {
+      "name": "WINNT/QBASIC.EXE",
+      "size": 254799,
+      "sha256": "ecca463f1820749a1408fc8ef3799d23fb232c188669ca9d5db3769ce628746b"
+    }
+  ],
+  "installed_money.bas": null,
+  "installed_msherc.com": null,
+  "installed_qbasic.exe": null,
+  "installed_root_qbasic": {
+    "size": 254799,
+    "sha256": "ecca463f1820749a1408fc8ef3799d23fb232c188669ca9d5db3769ce628746b"
+  }
+}

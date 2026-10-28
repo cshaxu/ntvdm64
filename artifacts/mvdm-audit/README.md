@@ -58,6 +58,11 @@ guest image as partial and historical build inputs as file roles only.
 The [DOS kernel image checkpoint](shard-0/dos-kernel-image-review.md) records
 two partial images and one historical intermediate without excluding DOS.
 
+The [WOW USER declaration checkpoint](wow-user-header-role-review.md) records
+five selected headers as partial, not full guest behavior.
+The [guest-input dependency recheck](recent-guest-input-dependency-review.md)
+rechecks relative Ninja paths for 37 recent file-role exclusions.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 
@@ -86,7 +91,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 81 independently replayed investigations; proposed dispositions remain pending.
+retain 84 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

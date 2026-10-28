@@ -1,0 +1,102 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow32/wuclip.h",
+      "hashes": [
+        "90600AF10DB9F7FC80FE999921DC97CBBC691BDD8BDB6F142E389D7FA34EE314",
+        "90600AF10DB9F7FC80FE999921DC97CBBC691BDD8BDB6F142E389D7FA34EE314",
+        "90600AF10DB9F7FC80FE999921DC97CBBC691BDD8BDB6F142E389D7FA34EE314"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wucomm.h",
+      "hashes": [
+        "43D3F49FE9ABB8FBBBE1A93E7725F7A368676DFADD764C8F0497A4218B23F77B",
+        "43D3F49FE9ABB8FBBBE1A93E7725F7A368676DFADD764C8F0497A4218B23F77B",
+        "43D3F49FE9ABB8FBBBE1A93E7725F7A368676DFADD764C8F0497A4218B23F77B"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wudlg.h",
+      "hashes": [
+        "E92C13CC2AF28C806BFD8474A0875DB556AB8D15490F3D7B04ADC662280ADDFC",
+        "E92C13CC2AF28C806BFD8474A0875DB556AB8D15490F3D7B04ADC662280ADDFC",
+        "E92C13CC2AF28C806BFD8474A0875DB556AB8D15490F3D7B04ADC662280ADDFC"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wuman.h",
+      "hashes": [
+        "DC0B3173C5995BF3183071F9D8560A2371BD940AC59F2DBE77822742B06DE113",
+        "DC0B3173C5995BF3183071F9D8560A2371BD940AC59F2DBE77822742B06DE113",
+        "DC0B3173C5995BF3183071F9D8560A2371BD940AC59F2DBE77822742B06DE113"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow32/wuser31.h",
+      "hashes": [
+        "9CC837D93C61656DDE97FA09FEE3E63402039E3F66BE517E0823F9FA1B15F118",
+        "9CC837D93C61656DDE97FA09FEE3E63402039E3F66BE517E0823F9FA1B15F118",
+        "9CC837D93C61656DDE97FA09FEE3E63402039E3F66BE517E0823F9FA1B15F118"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "sample_entries": [
+    {
+      "header": "wuclip.h",
+      "source": "src\\mvdm\\wow32\\wuclip.c",
+      "source_sha256": "3B30B2AF4F1BBB588C051C15D03FBF9C7E1E299FFEA02BB4BCC74A74DF6C10FA",
+      "function": "WU32OpenClipboard",
+      "compile_edge": "build obj/wuclip.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wuclip.c",
+      "map_entry": "0001:0001e560       _WU32OpenClipboard@4       1001f560 f   wuclip.obj"
+    },
+    {
+      "header": "wucomm.h",
+      "source": "src\\mvdm\\wow32\\wucomm.c",
+      "source_sha256": "C9C8B11D65AC3F2B1EE9216A8102EF56908BFF5C5BF4ED2DD2BADC30CA8A4284",
+      "function": "WU32OpenComm",
+      "compile_edge": "build obj/wucomm.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wucomm.c",
+      "map_entry": "0001:00020410       _WU32OpenComm@4            10021410 f   wucomm.obj"
+    },
+    {
+      "header": "wudlg.h",
+      "source": "src\\mvdm\\wow32\\wudlg.c",
+      "source_sha256": "1032565DBC656936FE8E0CE6144532E9CEA2699D402E848D59E850C1DB08420B",
+      "function": "WU32DialogBoxParam",
+      "compile_edge": "build obj/wudlg.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wudlg.c",
+      "map_entry": "0001:00021510       _WU32DialogBoxParam@4      10022510 f   wudlg.obj"
+    },
+    {
+      "header": "wuman.h",
+      "source": "src\\mvdm\\wow32\\wuman.c",
+      "source_sha256": "FD996581326F266C6EC80905FA087BE22435E9254DD7382B67F626CE902A6500",
+      "function": "WU32MouseEvent",
+      "compile_edge": "build obj/wuman.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wuman.c",
+      "map_entry": "0001:0001cdf0       _WU32MouseEvent@4          1001ddf0 f   wuman.obj"
+    },
+    {
+      "header": "wuser31.h",
+      "source": "src\\mvdm\\wow32\\wuser31.c",
+      "source_sha256": "116331D5D9542B3D4FFC48BDB9D19A86400F9B88FE9B15CC978BB30D7CB56719",
+      "function": "WU32SetWindowPlacement",
+      "compile_edge": "build obj/wuser31.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wuser31.c",
+      "map_entry": "0001:0001c9d0       _WU32SetWindowPlacement@4  1001d9d0 f   wuser31.obj"
+    }
+  ],
+  "precomp_sha256": "84E0AB967319CF5E75BCA9CF59E5EEFABC06732D18D8317F0298D30FBD00E16B",
+  "table_sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65",
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "scope": "Header inclusion and sample source/table/map selection; no per-entry execution or lifecycle proof"
+}

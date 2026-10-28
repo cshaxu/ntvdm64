@@ -1,0 +1,92 @@
+{
+  "result": "pass",
+  "ledger_sha256": "9AC25CC7F3534FC69276E85D998DFAC2D89A909CB1792FC7AD76E27F9288883A",
+  "entries": [
+    {
+      "path": "wow16/user/comdev.c",
+      "sha256": "5F579792509EDB3137958938F8CD8D47C2E70B7A57332F2F412D69A36F95DD37",
+      "catalog_ids": "SRC:0c2fbdc761db7716bfaa;SRC:ddccb55cebcfc6222d3b",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/user/comdevi.h",
+      "sha256": "F3F61015E3B4B4410573727C672D10953B737BB7BC8CD3650FD13465BB060AD9",
+      "catalog_ids": "SRC:913eade809d68cb982c4;SRC:ee57bb7098d26ddd321a",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/user/edmlonce.c",
+      "sha256": "27E85B97361A86DACA8514B2EF7FDD991F82D21B44AA2202EC6441ACBDC4FD43",
+      "catalog_ids": "SRC:266a6e12073a449a8f8b;SRC:841bba20940e9b8b2755",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/user/readme.txt",
+      "sha256": "7124AF87B8C99F4FF353A1903B5957E6B108287AE23DE5B3E822A04B68FA546C",
+      "catalog_ids": "SRC:0f6b0fc5be8ae510e5a6;SRC:2d64044ad35eb7f2e06b",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/user/usermenu.inc",
+      "sha256": "2B798EAC7F7AAC8208A80C9B051FE5038B1FC98000EB1500AA4751BFCF02E13C",
+      "catalog_ids": "SRC:5e623a9355826b238ff2;SRC:9e2e0960e8613a872805",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "wow16/user/wmsyserr.c",
+      "sha256": "7356B11EBB35366D49276DB2374230D587AE59EBED87D690121DE9F9951615A2",
+      "catalog_ids": "SRC:299e56543d60d0f9d9f5;SRC:a83116199640a444f71a",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\user\\makefile",
+      "sha256": "7BCA4F72F3CDDC7344EE3B6A09DDA1F72BC96D84364E36C064535DFD213D0CC4"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\userk.lrf",
+      "sha256": "345B98775C61B83DEEADAF869459549E17371A1E0546E81F0996FDC65B59FFA0"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\layer.asm",
+      "sha256": "699051E8AB661606BD62C1A772288976DAE2632B4EDE01E9C0763B68DB915942"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\wowcomm.c",
+      "sha256": "08A2371890362F7DCFF4CD9D5E80A886EE9BF2C41A628CD57C4CD44F09FEE4F7"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source": "src\\mvdm\\wow16\\user\\k\\daytona\\USER.EXE",
+    "source_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C",
+    "installed_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C",
+    "zip_member": "WINNT/SYSTEM32/USER.EXE",
+    "zip_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+  },
+  "limitations": "Original source/list, selected graphs and package identity only; no guest source-image lineage, alternate profile resolution, USER execution or feature equivalence proof."
+}

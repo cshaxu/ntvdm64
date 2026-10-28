@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "e5264914b",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-2/wow32-user-header-observations.json",
+      "sha256": "6DED495BB483CB43405788B2989F86CBC30F60C4B2D569A4FADF089ED41BC084"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original declarations and selected dependency evidence only; no guest runtime acceptance"
+}

@@ -1,0 +1,209 @@
+{
+  "result": "pass",
+  "entries": [
+    {
+      "path": "wow16/gdi/gdi.rcv",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ctl3dv2/readme.txt",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.doc",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.c",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.h",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ctl3dv2/common.ver",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/GRAPHICS.EXC",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/graphics.tag",
+      "checkpoint": "parallel-gdi-ctl3d",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/STRIPPED.DEF",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.c",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.rc",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.h",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/mk4dos.cmd",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.h",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/wfwnet/bseerr.h",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/wfwnet/libentry.asm",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.c",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.rcv",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/wfwnet/WFWNET.RES",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/messages/state.rst",
+      "checkpoint": "parallel-ddeml-wfwnet",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.fal",
+      "checkpoint": "parallel-debug-write",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/debug/sysver.tru",
+      "checkpoint": "parallel-debug-write",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/write/kmake.bat",
+      "checkpoint": "parallel-debug-write",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/write/state.rst",
+      "checkpoint": "parallel-debug-write",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "wow16/write/WRITE.RES",
+      "checkpoint": "parallel-debug-write",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "checkpoint": "parallel-shld-tools",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "checkpoint": "parallel-shld-tools",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "checkpoint": "parallel-shld-tools",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/486/dxintr.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/dxini.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/dxmmgr.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/dxnetbio.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/dxoem.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/ntnpxem.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/usa/dxmsg.asm",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/mk.cmd",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    },
+    {
+      "path": "dpmi/migrate.bat",
+      "checkpoint": "dosx-guest",
+      "checked_graph_hits": []
+    }
+  ],
+  "graphs": [
+    {
+      "root": "build/.ninja/msvc-x86-release/worker",
+      "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "root": "build/.ninja/msvc-x86-release/wow32",
+      "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "root": "build/.ninja/msvc-x64-release/frontend",
+      "graph_sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "root": "build/.ninja/msvc-x64-release/service",
+      "graph_sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "Exact normalized paths in four current graphs/dependency logs only; no guest functionality, source lineage or other build-profile proof."
+}
