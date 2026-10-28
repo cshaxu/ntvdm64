@@ -1,0 +1,51 @@
+{
+  "result": "pass",
+  "base": "2bbd67135",
+  "rows": 44033,
+  "counts": {
+    "1": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "2": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "3": {
+      "mvdm": 120,
+      "external": 4772
+    },
+    "4": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "5": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "6": {
+      "mvdm": 120,
+      "external": 4772
+    },
+    "7": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "8": {
+      "mvdm": 120,
+      "external": 4773
+    },
+    "9": {
+      "mvdm": 119,
+      "external": 4772
+    }
+  },
+  "inputs": {
+    "combined-initial-status.csv": "60CA3A056AC6FB2F6B486411A2321D29AE6B6F76251D6CE69EEBDEE961C2FB70",
+    "frozen-external-audit-rows.csv": "949D696E96F088A69EA437A41F15A09D50C8218BA29983A15A7B31E25AF95623",
+    "external-obligation-triage.csv": "BEE8961258DC21245211499E9ACFAA1A62F30361505366A747D1B2EBE08CC807"
+  },
+  "ownership_sha256": "46DADB6DE7EDD6277438429DDFFC501084892B595D386F54ED660CDFF21C5E86",
+  "allocation": "Sort pending paths independently by kind, casefolded path and unique key; divide each sorted list into nine contiguous ranks.",
+  "scope": "Frozen remaining file roles and external source-edition relevance obligations, not functionality acceptance or permission to import NT4 subsystems."
+}

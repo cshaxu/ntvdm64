@@ -6,9 +6,10 @@
 
 S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
 The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
-four-role census is retained; three reviewers and the coordinator audit the
-original disjoint shards in parallel.
+four-role census is retained; nine logical partitions are assigned to three
+reviewers in parallel batches, with the coordinator integrating evidence.
 Automatic S progression remains in force. Guest media remains unchanged.
+See the [nine-part assignment](../../artifacts/mvdm-audit/nine-way-plan.md).
 
 Current installed ten-image manifest is `assets/release/release-manifest.json`;
 release/installed hashes match. The Video7 mouse-range repair passed all 14
