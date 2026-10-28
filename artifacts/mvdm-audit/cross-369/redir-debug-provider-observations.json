@@ -1,0 +1,38 @@
+{
+  "vdmredir/vrdebug.c": {
+    "sha256": {
+      "current": "A857E79085FABC406667F849229100EE7B92CD13107CEEB37FA798AEDEBA42EA",
+      "opennt": "A857E79085FABC406667F849229100EE7B92CD13107CEEB37FA798AEDEBA42EA",
+      "opennt45": "A857E79085FABC406667F849229100EE7B92CD13107CEEB37FA798AEDEBA42EA"
+    },
+    "object_sha256": "3C538A7D1ED2064BD058106EE6CD10BE86B79A9F92875A978C2434462D11134E",
+    "command_defines_DBG": false,
+    "command_defines_PROD": true,
+    "symbol_lines": [
+      "[  0](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x010487f9 @comp.id",
+      "[  1](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x80010191 @feat.00",
+      "[  2](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000003 @vol.md",
+      "[  3](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .drectve",
+      "[  5](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug$S",
+      "[  7](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .chks64"
+    ]
+  },
+  "vdmredir/vrdlcdbg.c": {
+    "sha256": {
+      "current": "98E30A6019415EED62EFA2AED0D921D4F8B7F4FE5DA150E664C925D9E61504C2",
+      "opennt": "98E30A6019415EED62EFA2AED0D921D4F8B7F4FE5DA150E664C925D9E61504C2",
+      "opennt45": "98E30A6019415EED62EFA2AED0D921D4F8B7F4FE5DA150E664C925D9E61504C2"
+    },
+    "object_sha256": "71B7B435CBED510014BF9B212A4BE60D8C700AED4D8D9A35FBE8FA3C7A206208",
+    "command_defines_DBG": false,
+    "command_defines_PROD": true,
+    "symbol_lines": [
+      "[  0](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x010487f9 @comp.id",
+      "[  1](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x80010191 @feat.00",
+      "[  2](sec -1)(fl 0x00)(ty    0)(scl   3) (nx 0) 0x00000003 @vol.md",
+      "[  3](sec  1)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .drectve",
+      "[  5](sec  2)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .debug$S",
+      "[  7](sec  3)(fl 0x00)(ty    0)(scl   3) (nx 1) 0x00000000 .chks64"
+    ]
+  }
+}

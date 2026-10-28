@@ -1,0 +1,188 @@
+{
+  "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
+  "resources": [
+    {
+      "type": "14",
+      "name": "400",
+      "offset": 67664,
+      "size": 32,
+      "sha256": "8632931b4da7244f77e15616cb790dd0cbc45f64068fdb620df47db43b86e2a2"
+    },
+    {
+      "type": "5",
+      "name": "400",
+      "offset": 67696,
+      "size": 288,
+      "sha256": "6ff690704a4668e05f6680c4774b11597c9ef92aab64a1c4f4171c60aec6fdbb"
+    },
+    {
+      "type": "6",
+      "name": "1",
+      "offset": 67984,
+      "size": 752,
+      "sha256": "b700612e7d180c93c5d91a0fd99ee67e743eef76f29d8be5f1faede57cbbba1b"
+    },
+    {
+      "type": "6",
+      "name": "126",
+      "offset": 68736,
+      "size": 160,
+      "sha256": "d13510162d63b337b14ff5747d34688333dca3738ef15b6c86577af853c24287"
+    },
+    {
+      "type": "6",
+      "name": "3",
+      "offset": 68896,
+      "size": 480,
+      "sha256": "44b7d8a4c7f3603dd6b7fbad3cd620618cf33902106476a70c0d8b86562bd0b5"
+    },
+    {
+      "type": "6",
+      "name": "5",
+      "offset": 69376,
+      "size": 720,
+      "sha256": "493e0b1649c70e75cef325b0e48285d9eee9e20dd4a0ed4bd99da5827339af19"
+    },
+    {
+      "type": "6",
+      "name": "17",
+      "offset": 70096,
+      "size": 1024,
+      "sha256": "589b68a3b027811bb8930983d77890f9345cc872e22c9ed3b2718aba26c1d77e"
+    },
+    {
+      "type": "6",
+      "name": "18",
+      "offset": 71120,
+      "size": 1104,
+      "sha256": "ee137edb52f6a8b3f1e3158bd2d09d4ca10c5e590ada6bd1090fc2cd291d5ee2"
+    },
+    {
+      "type": "6",
+      "name": "19",
+      "offset": 72224,
+      "size": 1264,
+      "sha256": "c76244107092b652c004eb5878257e94588aa782e68d5f262df654ef1ca9ad08"
+    },
+    {
+      "type": "6",
+      "name": "22",
+      "offset": 73488,
+      "size": 1008,
+      "sha256": "1dfa5e861e7cd1c2874a2bc87c67d697d9ba2c6146f6765980854da8f8257d19"
+    },
+    {
+      "type": "6",
+      "name": "20",
+      "offset": 74496,
+      "size": 816,
+      "sha256": "bf482b5745b30f00dd7120516ec90774c0cd011589e72261dcce516e9025f57e"
+    },
+    {
+      "type": "6",
+      "name": "21",
+      "offset": 75312,
+      "size": 1024,
+      "sha256": "22c1de0ee0f76e2730ecab95bae81c48ae61a7066ad34eaea482b54a5e7244bb"
+    },
+    {
+      "type": "6",
+      "name": "34",
+      "offset": 76336,
+      "size": 128,
+      "sha256": "2d61e34a1e72dca5ce995b80370ebc69ab91f08e1f09082a3ea82b8fcf170903"
+    },
+    {
+      "type": "6",
+      "name": "33",
+      "offset": 76464,
+      "size": 128,
+      "sha256": "410e78acda06b8cbf98fbc235dc64294b63a983675a3586ef94622381544e3b2"
+    },
+    {
+      "type": "6",
+      "name": "65",
+      "offset": 76592,
+      "size": 48,
+      "sha256": "c99aedb47396cac1989e2887cb84868e23cd8e540822b6980cd7b4ff3d4bab49"
+    },
+    {
+      "type": "6",
+      "name": "77",
+      "offset": 76640,
+      "size": 128,
+      "sha256": "2073401091e8f433b8fab0f1957e5a9ff0278aa30d297bb3fc53310a392aa2bd"
+    },
+    {
+      "type": "6",
+      "name": "73",
+      "offset": 76768,
+      "size": 32,
+      "sha256": "20e6070f09a7ca4ea6e9a2a8f1cf67b4098b3018aaac0c30599661fd775dab05"
+    },
+    {
+      "type": "10",
+      "name": "CORE",
+      "offset": 76800,
+      "size": 1536,
+      "sha256": "682af012ef9d362ea0edea1fac9b6ef1e424b4c1d5822c2519bc02c57dc7365c"
+    },
+    {
+      "type": "10",
+      "name": "VIDEODISC",
+      "offset": 78336,
+      "size": 1264,
+      "sha256": "25978f1cd5ca48ef09d2e7468c2d2759b4eea9dc8201d83f56ac5f389c21edf7"
+    },
+    {
+      "type": "10",
+      "name": "WAVEAUDIO",
+      "offset": 79600,
+      "size": 1392,
+      "sha256": "8687aea4440ca1a409dfed2b367ae8f453d4bae9b9505ba6c276cd82b51dd3b3"
+    },
+    {
+      "type": "10",
+      "name": "CDAUDIO",
+      "offset": 80992,
+      "size": 464,
+      "sha256": "8d37ef0b5f372f503a2d7057ad6604627e5601661a128fe9032adcbad4abc12b"
+    },
+    {
+      "type": "10",
+      "name": "SEQUENCER",
+      "offset": 81456,
+      "size": 864,
+      "sha256": "238b7997f8849506b95d66e8c76dcd0beaad10937146fb9da62c9f155b0b4d4b"
+    },
+    {
+      "type": "10",
+      "name": "ANIMATION",
+      "offset": 82320,
+      "size": 1920,
+      "sha256": "608ce587917b1e61c8224e7c10166d710eb975caad99908dbcfc8219b54f8214"
+    },
+    {
+      "type": "10",
+      "name": "OVERLAY",
+      "offset": 84240,
+      "size": 1472,
+      "sha256": "b7c18691263260ea6109bf5fe3656672bac54ea847cfec7915b5994ef33977f8"
+    },
+    {
+      "type": "16",
+      "name": "1",
+      "offset": 85712,
+      "size": 512,
+      "sha256": "75a298b5f91be6e38bfd4f67a57028a780e4c4c78c83ab35abb3affe7ab78024"
+    },
+    {
+      "type": "3",
+      "name": "1",
+      "offset": 86224,
+      "size": 752,
+      "sha256": "55e2fb304ab5daf7f71a993f0805c28e3f6893661008fbd9374a8a89a879f5e6"
+    }
+  ],
+  "limitations": "NE resource membership only, not source identity or runtime use."
+}

@@ -1,0 +1,15 @@
+# Part 2: i386 DPMI allocator versus selected CPU40 host provider
+
+Owned `dpmi32/i386/dpmimem.c` matches both originals as recorded in shard-3 `dpmi-allocator-role-observations.json` and part-2 tools observer. It is an original i386 native-VDM memory provider, not a guest file. Its allocation uses NtAllocateVirtualMemory, release uses NtFreeVirtualMemory, and memory information uses host GlobalMemoryStatus with a 15 MiB largest-free cap. The original i386 recipe selects it in its native monitor environment; it cannot safely be merged one function at a time with another state owner.
+
+The captured actual x86 standalone graph instead compiles `dpmi32/dpmimemr.c` and `xmem.c` (`worker/build.ninja:450,452`). The prior shard-3 map observer binds the four allocator symbols to dpmimemr.obj in its recorded candidate, not to i386/dpmimem.obj; it does not independently bind today's installed release. Current `dpmimemr.c:65-70,124-125,182-184,263-264` uses the shared `ExtMemSA` CPU40 pool for allocation/free/reallocation/query (registered DIV-224). `xmem.c` owns per-application tracking, rollback after tracking allocation fails and task-level release; DIV-272 handles its BOOL return. XMS initializes the shared pool; CPU40 SAS supplies backing. Guest DPMI block handles and range ownership must not be replaced with a second native process-memory allocator.
+
+| Owned path | Evidence-backed recommendation |
+| --- | --- |
+| `dpmi32/i386/dpmimem.c` | Pending alternative native-monitor provider: selected standalone counterpart has a different pool and memory-info contract. Original recipe/profile and specific current graph are established, but guest-observable equivalence, other profiles and exact present release still require proof. No overall exclusion. |
+
+The final T420 S36 ledger (`m0-t420-s36-suballoc-capability-review.md:510-526`) records real XMS relocation/data, DPMI failure/relocation and task memory reuse for its identified package; generic allocator callback rollback deficiencies applied to a different fallible callback provider, while that candidate used original preallocated SAS callbacks. This older evidence is neither a new current runtime pass nor proof that the i386 15 MiB report is semantically identical. A real low-memory, fragmentation and 0500 information comparison is still needed.
+
+S11/S12 should bind current selected object and release, exercise guest allocation, resize/move with contents, exhausted/fragmented query, failed tracking allocation and task teardown. Investigate only concrete observed differences using original semantics and registered exceptions; keep any alternate native-monitor provider/profile separate. S19 binds exact immutable guest and package. No build, runtime test, source, guest or ledger change.
+
+Replay `rg -n "DpmiAllocateVirtualMemory|DpmiFreeVirtualMemory|DpmiReallocateVirtualMemory|DpmiGetMemoryInfo" src/mvdm/dpmi32`, inspect original i386 and CPU40 branches, captured build.ninja and shard-3 observer, and T420 S36 final ledger.

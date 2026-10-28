@@ -140,6 +140,12 @@ The [redirector interface](cross-369/redirector-interface-disposition.md),
 [video trace](nine-way/part-5/video-trace-fullscreen-semantic-reconciliation.md),
 and [suballocator](nine-way/part-5/suballoc-semantic-reconciliation.md) reviews
 retain distinct runtime and alternate-profile obligations.
+The [DPMI allocator comparison](nine-way/part-2/dpmi-i386-allocator-semantic-reconciliation.md)
+records the distinct native-monitor and CPU40 pool providers without assuming
+guest-visible equivalence. The [MCI resource](nine-way/part-7/mci-resource-review.md),
+[mixer](nine-way/part-7/mixer-provider-review.md), and
+[EMS profile](nine-way/part-4/gisp-ems-selection-review.md) reviews separate
+selected resource or dependency evidence from unverified runtime behavior.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

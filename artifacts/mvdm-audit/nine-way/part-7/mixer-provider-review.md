@@ -1,0 +1,9 @@
+# Win16 mixer manager input and host provider
+
+Owned `wow16/mmsystem/mixmgri.h` declares internal mixer structures, thunk slots and APIs, with byte packing; WIN32 conditional slots differ, so it is not a generic interchangeable modern WinMM header. Original `mixer.c:16-46` includes it, and the original MMSYSTEM recipe `makefile:16,193` lists mixer.obj. This is source-level linkage, not proof that the delivered NE was built from these exact files.
+
+The source's `InitMixerThunks` (`mixer.c:1859-1920`) installs a guest message-forwarding driver, tries winmm.dll then msmix32.dll, obtains `mxd32Message`, and uses it to initialize and query device count. The source `mixerOpen` sends MXDM_OPEN then publishes its allocated guest `MIXERDEV` into a list only on success, otherwise frees it (`mixer.c:802-837`). `mixerClose` asks the driver to close first; a failed close returns before list removal, whereas success unlinks, decrements usage and frees the handle (`mixer.c:850-910`). This is an original behavior sequence; actual callbacks/reentrancy, last-handle owner, guest teardown and missing provider behavior remain to be tested.
+
+Read-only `objdump -p C:/Windows/SysWOW64/winmm.dll` lists `mxd32Message` and the public mixerOpen/mixerClose in this host's PE export table. It does not prove the real session selects that module, its private entry accepts legacy arguments, or an audio device exists. `tests/adapter-mvdm-host-out/wow/wow_multimedia_inventory_fixture.c` observes native device counts and capabilities only; it explicitly does not open a guest mixer or verify callback/lifetime semantics.
+
+Suggested classification: retained original mixer-manager interface tied to the original guest mixer object; actual binary and provider selection and runtime lifecycle remain pending. No guest/product changes or new runtime test.
