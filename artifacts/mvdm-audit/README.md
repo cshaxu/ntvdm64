@@ -1,6 +1,8 @@
 # MVDM cross-audit: first parallel review
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
+The [planar pixel contract](planar-pixel-contract-review.md) adds bounded
+actual-object evidence without changing the pending source-role ledger.
 The owner authorized four parallel roles; three agents and the primary session
 used the disjoint frozen path shards described by `manifest.json`.
 

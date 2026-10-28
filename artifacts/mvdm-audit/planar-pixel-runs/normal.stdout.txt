@@ -1,0 +1,1 @@
+PLANAR_OBJECT_CONTRACT checks=182801 failures=0 callbacks=26114 cases=26114 wrong_oracle=0

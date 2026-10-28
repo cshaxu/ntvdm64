@@ -1,0 +1,6 @@
+{
+  "pid": 32192,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "started": "2026-10-28T02:47:25.6036720Z",
+  "arguments": "-NoProfile -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\planar-governance\\run.ps1\""
+}

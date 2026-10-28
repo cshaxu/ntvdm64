@@ -1,0 +1,7 @@
+{
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 2116,
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\planar-object-contract-r7/build.cmd\"\"",
+  "diagnostic_budget_seconds": 120,
+  "started": "2026-10-28T02:47:03.4372100Z"
+}

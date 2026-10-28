@@ -1,0 +1,8 @@
+{
+  "callbacks": 26114,
+  "cases": 26114,
+  "result": "pass",
+  "checks": 182801,
+  "fixture_sha256": "BF9BE88AA7205F0E0005957904173624A07C8289EBE3E71DB0CDBCD4A0E4C849",
+  "scope": "Actual cached original painter/LUT/munge objects; controlled DIB and invalidation sink, fail-fast traps for untested text/mono services, not guest or full rendering lifecycle"
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "path": "build.completion.json",
+    "bytes": 84,
+    "sha256": "927CF542E57FFB024C1FC4CB746FA137DD70EED6AA443D419D71F8895DBE5E09"
+  },
+  {
+    "path": "build.process.json",
+    "bytes": 265,
+    "sha256": "220167FF8F8CF6CC44A1F2A1A9DC7A21C56A9BB219C281D3F13C76E7B0EA1C4E"
+  },
+  {
+    "path": "governance-completion.json",
+    "bytes": 19,
+    "sha256": "3BED2591497B89B762FBDECA5FC4DA005CC8CB3BDEDE1FCB6DE0D5E2C45F98D3"
+  },
+  {
+    "path": "governance-process.json",
+    "bytes": 300,
+    "sha256": "AE9DD8ED4F1D55ABF0507F0A3A1CCD037D5B6C958A22B0FD5E998EEBD9A04CB2"
+  },
+  {
+    "path": "governance-stderr.txt",
+    "bytes": 113,
+    "sha256": "605040C8789A37FBBAD952BA86DAAB05E454E4030ECE1906CABF7AF59C9F7445"
+  },
+  {
+    "path": "governance-stdout.txt",
+    "bytes": 97,
+    "sha256": "A72FAB3DF38095E91F4FCA33E0E97C4BFBEED336DBF7F007D0FD8DA4672077F7"
+  },
+  {
+    "path": "inputs.csv",
+    "bytes": 1542,
+    "sha256": "65D91038902E24DD48CFF7055020A8ED56FCBFEDD7A5516D9D947223454FBFA7"
+  },
+  {
+    "path": "negative.completion.json",
+    "bytes": 84,
+    "sha256": "A4F547A9CD43AC7961EA2D5D8F0B55E42B4614E4B9D8262553F5DD05882F9FAF"
+  },
+  {
+    "path": "negative.process.json",
+    "bytes": 240,
+    "sha256": "47A9495972B60240A4F3020FE2C7BDCAC0C0EAA81123F8E96F703082313A998E"
+  },
+  {
+    "path": "negative.stderr.txt",
+    "bytes": 100,
+    "sha256": "9507F12C1B69386C27EF0DA766A566F1D06EE7C81783EC0162062974B240FC13"
+  },
+  {
+    "path": "negative.stdout.txt",
+    "bytes": 79,
+    "sha256": "B62A2CBA5C410E14CDB4F63A12EB1BCC70A93697C571EF00B99AF6A6ECAA6D33"
+  },
+  {
+    "path": "normal.completion.json",
+    "bytes": 84,
+    "sha256": "25A48F1D2542679D7DBEC8DD215D17760BC7A66F42857DF46B911B55956DE180"
+  },
+  {
+    "path": "normal.process.json",
+    "bytes": 227,
+    "sha256": "61BAEA99F451031982D836863A4AC51AEFC91006BE2D9083777C49B11A8DD8BE"
+  },
+  {
+    "path": "normal.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "normal.stdout.txt",
+    "bytes": 92,
+    "sha256": "A1A23E965507591F099FA6504D1D5E54D3256A901DF2CD36C38B6E91D15F7A85"
+  },
+  {
+    "path": "result.json",
+    "bytes": 368,
+    "sha256": "0FC04D0EA3E848D3A69F8A37A7FB128CAD82B50EC92B452E14D6B3BD89B07054"
+  }
+]
