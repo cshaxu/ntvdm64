@@ -89,3 +89,14 @@ system-input attempt was refused: the input desktop was `Screen-saver`, while
 the test window belonged to `Default`. Thus physical Raw Input remains
 unverified; sink injection is not represented as proof of it. The Setup probe
 still awaits completion, and its screenshot reads are explicitly non-atomic.
+
+## Mouse-range repair full regression
+
+After commit `16c9ca687`, the current published ten-image package was copied
+to an isolated test package and all ten images were stamped with a fresh test
+identity. The [Full suite receipt](video7-pointer/mouse-range-full-timings.json)
+records all 14 gates passed, including WOW frontiers, Console-17, Window-17,
+RPC, GUI, version rejection, return and nested-window handoff. This is a
+post-repair test, distinct from the earlier candidate receipt above; it is not
+a physical Raw Input or complete Video7 mode coverage claim. The user accepted
+the mouse-range repair separately. No guest image was modified or rebuilt.
