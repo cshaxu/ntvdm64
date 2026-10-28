@@ -2656,7 +2656,7 @@ vdmredir/vrdebug.c,0,pending,shard-0/review.csv
 vdmredir/vrdebug.h,3,pending,shard-3/file-review.csv
 vdmredir/vrdisp.c,2,partial,shard-2/file-audit.csv
 vdmredir/vrdlc.h,3,pending,shard-3/file-review.csv
-vdmredir/vrdlc5c.c,1,pending,shard-1/file-audit.csv
+vdmredir/vrdlc5c.c,1,partial,shard-1/file-audit.csv
 vdmredir/vrdlcbuf.c,3,partial,shard-3/file-review.csv
 vdmredir/vrdlcdbg.c,0,pending,shard-0/review.csv
 vdmredir/vrdlcdbg.h,3,pending,shard-3/file-review.csv

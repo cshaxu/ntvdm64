@@ -1,0 +1,169 @@
+{
+  "result": "pass",
+  "source": "vdmredir/vrdlc5c.c",
+  "hashes": [
+    "850F2F1A746EEE3610F06EBF489CB662BCD628F556299E445DAAC7FDD24E9BBF",
+    "850F2F1A746EEE3610F06EBF489CB662BCD628F556299E445DAAC7FDD24E9BBF",
+    "850F2F1A746EEE3610F06EBF489CB662BCD628F556299E445DAAC7FDD24E9BBF"
+  ],
+  "bindings": [
+    {
+      "name": "_BufferFree",
+      "va": 268463728,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 116,
+      "relocation_words": 3
+    },
+    {
+      "name": "_CloseAdapter",
+      "va": 268463856,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 71,
+      "relocation_words": 5
+    },
+    {
+      "name": "_CompleteCcbProcessing",
+      "va": 268463936,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 1399,
+      "relocation_words": 78
+    },
+    {
+      "name": "_CopyDosBuffersToDescriptorArray",
+      "va": 268465344,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 205,
+      "relocation_words": 1
+    },
+    {
+      "name": "_GetAdapterType",
+      "va": 268465552,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 300,
+      "relocation_words": 12
+    },
+    {
+      "name": "_InitializeAdapterSupport",
+      "va": 268465856,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 686,
+      "relocation_words": 40
+    },
+    {
+      "name": "_LlcCommand",
+      "va": 268466544,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 89,
+      "relocation_words": 3
+    },
+    {
+      "name": "_MapDosCommandsToNt",
+      "va": 268466640,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 2342,
+      "relocation_words": 86
+    },
+    {
+      "name": "_OpenDirectStation",
+      "va": 268468992,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 117,
+      "relocation_words": 4
+    },
+    {
+      "name": "_ProcessImmediateCommand",
+      "va": 268469120,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 1098,
+      "relocation_words": 30
+    },
+    {
+      "name": "_RestoreExceptions",
+      "va": 268470224,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 39,
+      "relocation_words": 3
+    },
+    {
+      "name": "_SaveExceptions",
+      "va": 268470272,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 65,
+      "relocation_words": 6
+    },
+    {
+      "name": "_SetExceptionFlags",
+      "va": 268470352,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 118,
+      "relocation_words": 3
+    },
+    {
+      "name": "_TerminateDlcEmulation",
+      "va": 268470480,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 99,
+      "relocation_words": 6
+    },
+    {
+      "name": "_VrDlc5cHandler",
+      "va": 268470592,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 1050,
+      "relocation_words": 45
+    },
+    {
+      "name": "_VrDlcWorkerThread",
+      "va": 268471648,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 73,
+      "relocation_words": 9
+    },
+    {
+      "name": "_VrVdmWindowInit",
+      "va": 268471728,
+      "function": true,
+      "owner": "vrdlc5c.obj",
+      "bytes": 57,
+      "relocation_words": 6
+    }
+  ],
+  "event_fields": [
+    {
+      "offset": 98,
+      "name": "_DlcWorkerEvent",
+      "target": 268651544
+    },
+    {
+      "offset": 118,
+      "name": "_DlcWorkerEvent",
+      "target": 268651544
+    },
+    {
+      "offset": 124,
+      "name": "_DlcWorkerCompletionEvent",
+      "target": 268651540
+    }
+  ],
+  "object_sha256": "9B3BA6F308D3F8052A06B8A444EDD9762D0913905133867BB41EE4FBAA4203A0",
+  "map_sha256": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0",
+  "release_sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+  "cached_sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A",
+  "limits": "Static image and relocation binding; provider reachability and event failures not exercised."
+}

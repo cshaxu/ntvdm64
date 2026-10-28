@@ -107,6 +107,8 @@ The [redirector service owners](shard-0/redir-service-owners-review.md)
 bind 22 original initialization, cleanup, mailslot and utility functions.
 The [DLC post owner](shard-0/redir-dlc-post-image-review.md) binds eleven
 additional event and interrupt bodies while retaining provider obligations.
+The [DLC command owner](shard-0/redir-dlc-command-image-review.md) binds 17
+additional bodies and event references, without proving provider reachability.
 The [interface and callback checkpoint](selected-interface-callback-role-review.md)
 reconciles seven selected source and resource roles, not complete behavior.
 The [generic thunk published binding](shard-3/wow-generic-thunk-published-binding.md)

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "fixture_sha256": "A1C35836319B29CE51811222F0D87F76C1C75581E3B778370F23DFA0B3F9B1A6",
+  "source_sha256": "0593995BF9159B23BB21AFFF66A961EF83C6E052BC09ADB5C6A6CB09D559879A",
+  "output": [
+    "PASS failed map, simulated reuse closes unrelated handle",
+    "PASS failed map, no reuse double close invalid handle",
+    "PASS successful map exactly once cleanup",
+    "PASS real cache eviction closes reused fake handle",
+    "PASS mapping creation failure has no mapping close"
+  ],
+  "scope": "Extracted source cache functions and simulated Windows handle reuse; no real host reuse or guest caller"
+}

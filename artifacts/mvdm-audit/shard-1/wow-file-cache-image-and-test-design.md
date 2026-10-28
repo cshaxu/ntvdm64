@@ -11,3 +11,10 @@ No failure injection or live product run has yet been performed, so this is an i
 ## Isolated failure witness
 
 `wow-file-cache-failure-fixture.py` now extracts the exact current W32MapViewOfFile and FreeMapFileCache bodies, checks both expected SHA-256 function-body hashes, compiles them against simulated Win32 functions in a temporary directory, and executes four assertions groups. Result: failed view plus simulated handle reuse closes the unrelated simulated handle; failed view without reuse repeats an invalid close; successful view cleans up once; mapping-creation failure makes no mapping close. Repeated free in the fixture does not repeat cleanup. The independently replayed [receipt](wow-file-cache-failure-result.json) records source and fixture hashes. This is an observed source-level failure under deterministic fake boundaries, not a real-Windows handle-reuse or full WK32FileRead/WK32FileClose witness. The fixture uses a fake FindMapFileCache to isolate ownership; it does not yet test actual cache eviction, real file I/O, guest execution, error handling or concurrent teardown. Run with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/shard-1/wow-file-cache-failure-fixture.py`; its transient C/executable directory is removed after completion. No fix was applied.
+
+The separate [real-list fixture](wow-file-cache-real-list-fixture.py) also
+extracts the actual cache initialization, lookup, allocation and eviction
+functions. Its independently replayed [receipt](wow-file-cache-real-list-result.json)
+shows that filling the cache and triggering eviction closes a reused fake
+handle after simulated view failure. The Windows handle table remains a
+controlled substitute; no real host reuse or guest caller is claimed.

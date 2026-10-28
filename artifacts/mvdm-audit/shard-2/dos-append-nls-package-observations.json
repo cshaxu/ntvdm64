@@ -1,0 +1,28 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "source": "dos/v86/cmd/append/append.exe",
+      "sha256": "73D6928246F369AAC5DE742E149196BF4DC3B5801A6EFFEED6D014E52841D0AC",
+      "size": 10790,
+      "archive_equal_members": [],
+      "archive_named_members": [],
+      "installed_exists": false
+    },
+    {
+      "source": "dos/v86/cmd/nlsfunc/nlsfunc.exe",
+      "sha256": "A49E8C6C392F0FD323B52C1FA612420A9FC0258BA59413CCB3D2D19B1F229EE8",
+      "size": 7052,
+      "archive_equal_members": [],
+      "archive_named_members": [],
+      "installed_exists": false
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_file_count": 62,
+  "country_member": "WINNT/SYSTEM32/COUNTRY.SYS",
+  "country_sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54",
+  "installed_country_sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54",
+  "nlsfunc_source_sha256": "589A83F0B29510C171488B72DCF975832AB94C634768125BDDEBD17C6E8FC997",
+  "scope": "Exact archive binary identities and source-level NLS path only; no guest execution or alternate media conclusion"
+}

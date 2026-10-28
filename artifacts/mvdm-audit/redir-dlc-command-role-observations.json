@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "a4719801d",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/redir-dlc-command-image-observations.json",
+      "sha256": "B2C4302AC94D7D5FBBBC830293A0D6C6A6D3DBF8D011AD85E8400E643F238A71"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Object and event relocation binding, not DLC runtime acceptance"
+}
