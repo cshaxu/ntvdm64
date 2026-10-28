@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "1ff330f9f",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-1/softpc-host-header-family-evidence.json",
+      "sha256": "4D27CBB92519AF658A8E84944C1A4F362B774D5C1F293061C380F1F8219E9CA2"
+    },
+    {
+      "path": "shard-1/softpc-host-header-owner-observations.json",
+      "sha256": "9DF0FF2CE7DA0ACC27A8FBE990F438ECFEEF6D22BCFE42234C109B5F9C880756"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected host declarations, not device acceptance"
+}

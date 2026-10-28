@@ -17,3 +17,5 @@ Eleven pending `softpc.new/host/inc` files were checked together. All match both
 | kybdcpu.gi | Zero-byte file, exact identity in both references; no textual include and no VALID dep found. Candidate exclusion only for this empty artifact in the observed graph; cannot infer keyboard behavior, generator inputs or alternate-profile status. |
 
 Counts are bounded to C/H/INC/CPP direct scan in current softpc.new and VALID deps in one x86 worker tree; no exhaustive other-platform, path resolution, stale dependency, binary/image binding or runtime/device test was done. Product, guest, build tree and shared ledger remain untouched.
+
+The subsequent [owner observer](softpc-host-header-owner-observer.py) and [receipt](softpc-host-header-owner-observations.json) bind selected timer and COM function bodies from dependent objects to the published worker. Four declaration files can therefore be classified partial at file level; actual EOI, PIF, trace, error and device behavior is not established by these bindings.

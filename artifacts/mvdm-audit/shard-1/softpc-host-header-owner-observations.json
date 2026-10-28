@@ -1,0 +1,31 @@
+{
+  "result": "pass",
+  "family_sha256": "4D27CBB92519AF658A8E84944C1A4F362B774D5C1F293061C380F1F8219E9CA2",
+  "dependencies": {
+    "host_rrr.h": "obj/host/nt_timer.obj",
+    "nt_eoi.h": "obj/host/nt_timer.obj",
+    "nt_pif.h": "obj/host/nt_timer.obj",
+    "host_trc.h": "obj/host/nt_com.obj"
+  },
+  "bindings": [
+    {
+      "name": "_TimerInit",
+      "va": 4513808,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_timer.obj",
+      "bytes": 185,
+      "relocation_words": 17
+    },
+    {
+      "name": "_FlushTXBuffer",
+      "va": 4541360,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_com.obj",
+      "bytes": 591,
+      "relocation_words": 11
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Dependent function bodies only; no proof individual header declarations or runtime device behavior"
+}
