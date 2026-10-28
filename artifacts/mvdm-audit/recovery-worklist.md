@@ -16,6 +16,8 @@ The [real-file sentinel witness](host-ch-scope/dem-fcb-error-sentinel-review.md)
 
 The [FCB ignored-time-failure caller fixture](host-ch-scope/dem-fcb-ignored-errors-review.md) extends the helper witness through both actual callers with controlled API outputs: both continue as success and open publishes a fake handle. Actual Windows failure outputs and installed guest reachability remain unproved.
 
+The [selected suballocator object witness](host-ch-scope/suballoc-selected-object-review.md) binds normal and callback-failure probes to the actual worker object: injected second-commit failure does not roll back the first callback, and injected decommit failure can leave the bitmap reporting 4096 bytes free. S12 must resolve real-provider rollback, guest-visible errors and lifetime; synthetic callbacks do not establish a live guest failure.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.md) preserves separate original HFX and SWIN_HFX guest/provider applicability in S17; the selected DOS filesystem and redirector are different routes, and captured HFX BOPs resolving to `illegal_bop` are not evidence that the protocol works.

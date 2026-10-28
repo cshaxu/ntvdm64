@@ -1,5 +1,7 @@
 # M0 T468 S3 — printing and spool retirement disposition
 
+**Later source correction:** The success-only `FreePrn` description below is incorrect. `WG32CloseJob` calls `FreePrn` whenever `ul` is nonzero; a failed `ClosePrinter` with a nonzero `GetLastError()` also takes that branch. The provider's actual failure and handle-ownership behavior have not been reproduced. See the [T473 spool loader and caller review](../../../artifacts/mvdm-audit/shard-3/wow-spool-loader-callers-review.md).
+
 ## Scope and sources
 
 This record traces the existing original retirement owners before any change.

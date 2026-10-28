@@ -122,6 +122,8 @@ The [DDEML guest source recheck](wow16-ddeml-guest-role-review.md) inspects seve
 
 The [suballocator private-header review](dos-suballocator-private-header-review.md) establishes actual selected bitmap, granularity and address-macro uses, recorded partial. The [input profile handoff](../shard-3/pending-input-profile-ledger-handoff.md) retains separate NT and historical keyboard/mouse capability obligations.
 
+The [selected suballocator object fixture](suballoc-selected-object-review.md) runs normal controls and injected callback failures against the current cached worker object; the injected failure observations are not real guest or installed-image acceptance.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.md) classify four physical non-x86 host-register headers; guest CPU/FPU and generated-vector behavior remain separate obligations.

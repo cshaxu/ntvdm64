@@ -1,0 +1,22 @@
+{
+  "source_sha256": "B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0",
+  "fixture_source_sha256": "5A61AC4F547D1247672C1DAFFC0495412D476FDA7C2C50A6E91B4E109FFC1F92",
+  "selected_object_sha256": "F5CF62A66083A173274455CB4714BA7E8C3C9FA27D56A2F548F7AF908169C373",
+  "fixture_object_sha256": "170AFA39338F031FA4D35E4C7791A41EF7E057C157A721F1632E2E8B311683B4",
+  "exe_sha256": "4963FA80EECF624D3E37946AEC8A17F814F117468059C1E751D5B8F0F2E7AEDA",
+  "results": [
+    {
+      "args": [],
+      "exit": 0,
+      "output": "SUBALLOC_ROUND_TAIL_GROW_SHRINK_OK\nSUBALLOC_PRECEDING_OVERLAP_DATA_OK\nSUBALLOC_ELSEWHERE_DATA_OK\nSUBALLOC_FRAGMENT_EXHAUST_FAILGROW_COALESCE_OK\nSUBALLOC_FIRST_COMMIT_FAILURE_REUSE_OK\n"
+    },
+    {
+      "args": [
+        "--failure-audit"
+      ],
+      "exit": 0,
+      "output": "LIMITATION_PARTIAL_COMMIT_NO_ROLLBACK: first page committed; bitmap free\nLIMITATION_DECOMMIT_FAILURE_BITMAP_NOT_RESTORED: failed free exposes 4096 bytes\n"
+    }
+  ],
+  "limit": "Selected original allocator object with test-owned callback seams; not the actual VDM/XMS provider, native failure, installed image, or guest."
+}

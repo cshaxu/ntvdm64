@@ -1,0 +1,15 @@
+# Selected suballocator object: normal and injected callback behavior
+
+This non-guest fixture links the **actual current selected** x86 `build/.ninja/msvc-x86-release/worker/obj/suballoc/suballoc.obj` into the existing standalone `suballoc_lifecycle_fixture.c` harness. It does not recompile the product object or modify product/guest. The [runner](suballoc-selected-object-run.py) derives the existing test graph's link command, substitutes the exact selected object and redirects the executable to an isolated build directory; [receipt](suballoc-selected-object-observation.json) records source, fixture, object, executable hashes and full output. This is new binding evidence over the [earlier source-built fixture](../shard-0/dpmi-memory-owner-audit.md): original implementation source SHA is `B06496E16D551F2BBAC37D896B61857C6569EDA8C98FB3D26DBF574E594148E0`, selected object SHA `F5CF62A66083A173274455CB4714BA7E8C3C9FA27D56A2F548F7AF908169C373`, fixture object SHA `170AFA39338F031FA4D35E4C7791A41EF7E057C157A721F1632E2E8B311683B4`, and observed EXE SHA `D5090F08B50C92A07B92326F126F3E2F1704A00B92416E3F2505C1427CBA9E02`. The existing fixture graph's no-op increment check said no work; its dependency entry has zero recorded headers, so this alone does not prove a complete compiler dependency audit.
+
+Normal mode exited 0 and reported rounding/grow/shrink, overlapping and elsewhere data movement, fragment/exhaust/coalesce and first-commit-failure reuse checks. In `--failure-audit`, deliberately failing the second commit yielded two commit callbacks, zero rollback/decommit callbacks and a fully free reported allocation bitmap. Deliberately failing first decommit yielded a false free return but 4096 bytes reported available. The `LIMITATION_*` markers are explicit **observations of problematic failure behavior**, not proof these paths are correct. The callback seams record calls and return synthetic failure; they do not actually commit or decommit native memory and do not prove a real XMS guest encounters the failures.
+
+Source tracing in [XMS callback review](../shard-2/suballoc-xms-callback-failure-review.md) identifies `XMSInit`'s selected normal native reserve/commit/decommit callback route and its separate all-success fallback. A real host failure at a corresponding point, side effects of `sas_overwrite_memory`, bitmaps versus native pages, guest error results, concurrent use and teardown still need controlled real-provider or guest evidence. S12 owns that follow-up; do not choose rollback policy solely from the test callbacks. Source/object binding does not establish the current installed EXE's identity or all other profiles.
+
+Replay from the repository root with the populated x86 worker and existing fixture trees and VS x86 tools:
+
+```powershell
+python artifacts/mvdm-audit/host-ch-scope/suballoc-selected-object-run.py
+```
+
+The runner invokes only an isolated link and two process runs, writing logs and EXE under `build/t473-s10/suballoc-selected-object`. Both runs' exit 0 means the harness reached and recognized its stated observations; it is not a full product/guest acceptance.
