@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "50bdf9b9d",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "cross-369/redirector-interface-observations.json",
+      "sha256": "6010DC4EFFE0A01CE2C0AF05D7ABB194BBEF6C6D58435198F90457873D0DFCC9"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}

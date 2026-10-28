@@ -1196,7 +1196,7 @@ inc/MVDM.INC,3,pending,shard-3/file-review.csv
 inc/netb.h,0,partial,shard-0/review.csv
 inc/oemuni.h,3,pending,shard-3/file-review.csv
 inc/rdrexp.h,1,pending,shard-1/file-audit.csv
-inc/rdrsvc.h,3,pending,shard-3/file-review.csv
+inc/rdrsvc.h,3,partial,shard-3/file-review.csv
 inc/RDRSVC.INC,0,pending,shard-0/review.csv
 inc/sharewow.h,0,partial,shard-0/review.csv
 inc/softpc.h,2,partial,shard-2/file-audit.csv
@@ -1205,7 +1205,7 @@ inc/suballoc.h,1,partial,shard-1/file-audit.csv
 inc/tdb16.h,3,pending,shard-3/file-review.csv
 inc/TDB16.INC,0,pending,shard-0/review.csv
 inc/v86def.h,3,pending,shard-3/file-review.csv
-inc/vdmredir.h,3,pending,shard-3/file-review.csv
+inc/vdmredir.h,3,partial,shard-3/file-review.csv
 inc/vdmtb.inc,0,pending,shard-0/review.csv
 inc/vdmtib.h,1,partial,shard-1/file-audit.csv
 inc/VDMTIB.INC,1,pending,shard-1/file-audit.csv
