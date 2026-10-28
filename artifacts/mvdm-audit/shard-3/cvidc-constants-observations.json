@@ -1,0 +1,132 @@
+{
+  "adjust_c.h": {
+    "current": {
+      "size": 167,
+      "sha256": "18bb94f5513c4a2f4dcaec3f288db019233ed37efa0791b1fad8f0144a3c8b79"
+    },
+    "opennt": {
+      "size": 167,
+      "sha256": "18bb94f5513c4a2f4dcaec3f288db019233ed37efa0791b1fad8f0144a3c8b79"
+    },
+    "opennt45": {
+      "size": 167,
+      "sha256": "18bb94f5513c4a2f4dcaec3f288db019233ed37efa0791b1fad8f0144a3c8b79"
+    },
+    "mips_prod": {
+      "size": 167,
+      "sha256": "18bb94f5513c4a2f4dcaec3f288db019233ed37efa0791b1fad8f0144a3c8b79"
+    },
+    "x86_prod": null
+  },
+  "ea_c.h": {
+    "current": {
+      "size": 142,
+      "sha256": "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d"
+    },
+    "opennt": {
+      "size": 142,
+      "sha256": "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d"
+    },
+    "opennt45": {
+      "size": 142,
+      "sha256": "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d"
+    },
+    "mips_prod": {
+      "size": 142,
+      "sha256": "fe7a96f39e7b35f7926e441d6d602df86af4cbaded124ee9f9612dfae651994d"
+    },
+    "x86_prod": null
+  },
+  "muldiv_c.h": {
+    "current": {
+      "size": 199,
+      "sha256": "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5"
+    },
+    "opennt": {
+      "size": 199,
+      "sha256": "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5"
+    },
+    "opennt45": {
+      "size": 199,
+      "sha256": "df2e2f0d1efd938b635b3fa8aba582df81510ac0d9e6720b90d65e3c0bafb2f5"
+    },
+    "mips_prod": {
+      "size": 222,
+      "sha256": "625ddef44c9a6bc60da793c1648907b5fb474746cd95c2c4e299efb71d15ebc7"
+    },
+    "x86_prod": null
+  },
+  "ports_c.h": {
+    "current": {
+      "size": 98,
+      "sha256": "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332"
+    },
+    "opennt": {
+      "size": 98,
+      "sha256": "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332"
+    },
+    "opennt45": {
+      "size": 98,
+      "sha256": "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332"
+    },
+    "mips_prod": {
+      "size": 98,
+      "sha256": "3b1a90cf411e5dfcbcda8e18a6d4ad448b6707f02bedc390d2fe057716df8332"
+    },
+    "x86_prod": null
+  },
+  "stack_c.h": {
+    "current": {
+      "size": 1101,
+      "sha256": "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4"
+    },
+    "opennt": {
+      "size": 1101,
+      "sha256": "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4"
+    },
+    "opennt45": {
+      "size": 1101,
+      "sha256": "9420545b764138c9582639753064d2b65723539e8258b62023e56395166736f4"
+    },
+    "mips_prod": {
+      "size": 2045,
+      "sha256": "d1310b5bba16538fca429f719e4f802125a5ec6f44bb1ba247f452680a969694"
+    },
+    "x86_prod": null
+  },
+  "xfer_c.h": {
+    "current": {
+      "size": 286,
+      "sha256": "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3"
+    },
+    "opennt": {
+      "size": 286,
+      "sha256": "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3"
+    },
+    "opennt45": {
+      "size": 286,
+      "sha256": "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3"
+    },
+    "mips_prod": {
+      "size": 286,
+      "sha256": "7c2318c2353401b6f5086e40a4d88f570a58116427555329eaee18637049d8c3"
+    },
+    "x86_prod": null
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": []
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00022fe0       _AAD                       00423fe0 f   original-ccpu386:aad.obj",
+      " 0001:00023050       _AAM                       00424050 f   original-ccpu386:aam.obj",
+      " 0001:00023520       _CALLF                     00424520 f   original-ccpu386:call.obj",
+      " 0001:00023c80       _DIV16                     00424c80 f   original-ccpu386:div.obj",
+      " 0001:000253f0       _MUL16                     004263f0 f   original-ccpu386:mul.obj",
+      " 0001:00025690       _POP                       00426690 f   original-ccpu386:pop.obj",
+      " 0001:00025860       _PUSH                      00426860 f   original-ccpu386:push.obj"
+    ]
+  }
+}

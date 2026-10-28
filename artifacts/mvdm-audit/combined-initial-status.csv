@@ -87,7 +87,7 @@ dos/dem/demmisc.c,1,partial,shard-1/file-audit.csv
 dos/dem/demmsg.c,1,pending,shard-1/file-audit.csv
 dos/dem/demmsg.h,3,pending,shard-3/file-review.csv
 dos/dem/demsrch.c,0,partial,shard-0/review.csv
-dos/dem/dosdef.h,2,pending,shard-2/file-audit.csv
+dos/dem/dosdef.h,2,partial,shard-2/file-audit.csv
 dos/dem/makefile,3,excluded,shard-3/file-review.csv
 dos/dem/obj/_objects.mac,1,excluded,shard-1/file-audit.csv
 dos/dem/obj/i386/dem.obj,2,excluded,shard-2/file-audit.csv
@@ -1168,7 +1168,7 @@ inc/apistruc.h,0,pending,shard-0/review.csv
 inc/APISTRUC.INC,3,excluded,shard-3/file-review.csv
 inc/bop.h,0,pending,shard-0/review.csv
 inc/BOP.INC,2,pending,shard-2/file-audit.csv
-inc/cmdsvc.h,2,pending,shard-2/file-audit.csv
+inc/cmdsvc.h,2,partial,shard-2/file-audit.csv
 inc/CMDSVC.INC,3,pending,shard-3/file-review.csv
 inc/curdir.h,2,pending,shard-2/file-audit.csv
 inc/CURDIR.INC,2,pending,shard-2/file-audit.csv
@@ -2248,7 +2248,7 @@ softpc.new/host/inc/mips/prod/xfer_c.h,2,excluded,shard-2/file-audit.csv
 softpc.new/host/inc/mips/prod/xlat_c.h,0,excluded,shard-0/review.csv
 softpc.new/host/inc/monregs.h,2,pending,shard-2/file-audit.csv
 softpc.new/host/inc/monsim32.h,3,pending,shard-3/file-review.csv
-softpc.new/host/inc/nt_cga.h,3,pending,shard-3/file-review.csv
+softpc.new/host/inc/nt_cga.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/nt_cgalt.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_com.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_conf.h,1,pending,shard-1/file-audit.csv
@@ -2266,7 +2266,7 @@ softpc.new/host/inc/nt_hunt.h,3,pending,shard-3/file-review.csv
 softpc.new/host/inc/nt_inthk.h,0,partial,shard-0/review.csv
 softpc.new/host/inc/nt_mem.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_mon.h,0,pending,shard-0/review.csv
-softpc.new/host/inc/nt_mouse.h,3,pending,shard-3/file-review.csv
+softpc.new/host/inc/nt_mouse.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/nt_paint.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_pif.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_reset.h,2,pending,shard-2/file-audit.csv

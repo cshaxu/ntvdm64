@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1272,
+    "pending": 1268,
     "excluded": 2739,
-    "partial": 620,
+    "partial": 624,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original XMS dispatch and suballocator owners remain partial; guest and failure behavior remain in scope."
+  "note": "Four selected DOS and host input declaration roles remain partial; guest behavior remains in scope."
 }

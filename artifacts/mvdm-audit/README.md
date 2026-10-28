@@ -70,6 +70,10 @@ The [guest service header checkpoint](guest-service-header-role-review.md)
 records three selected host declarations while retaining guest service obligations.
 The [XMS and suballocator checkpoint](shard-0/xms-suballoc-image-review.md)
 binds selected original bodies while retaining guest failure and lifecycle work.
+The [command and input header checkpoint](selected-command-input-headers-role-review.md)
+records four selected declarations without claiming guest or device completion.
+The [VDMREDIR image comparison](shard-0/vdmredir-package-identity-review.md)
+retains the cached-versus-release resource and read-only data identity boundary.
 The [guest-input dependency recheck](recent-guest-input-dependency-review.md)
 rechecks relative Ninja paths for 37 recent file-role exclusions.
 The [excluded-role sweep](excluded-dependency-sweep.md) inventories and
@@ -106,7 +110,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 102 independently replayed investigations; proposed dispositions remain pending.
+retain 105 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

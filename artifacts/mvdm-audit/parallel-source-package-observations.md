@@ -1,6 +1,10 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 102 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 105 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [vdd-sample2-owner](shard-1/vdd-sample2-owner-review.md): [observer](shard-1/vdd-sample2-owner-observer.py), [receipt](shard-1/vdd-sample2-owner-observations.json).
+- [vdmredir-host-roles](shard-2/vdmredir-host-roles-review.md): [observer](shard-2/vdmredir-host-roles-observer.py), [receipt](shard-2/vdmredir-host-roles-observations.json).
+- [cvidc-constants](shard-3/cvidc-constants-role-review.md): [observer](shard-3/cvidc-constants-observer.py), [receipt](shard-3/cvidc-constants-observations.json).
 
 - [guest-softpc-bios-owner](shard-1/guest-softpc-bios-owner-review.md): [observer](shard-1/guest-softpc-bios-owner-observer.py), [receipt](shard-1/guest-softpc-bios-owner-observations.json).
 - [dos-command-dem-abi](shard-2/dos-command-dem-abi-review.md): [observer](shard-2/dos-command-dem-abi-observer.py), [receipt](shard-2/dos-command-dem-abi-observations.json).

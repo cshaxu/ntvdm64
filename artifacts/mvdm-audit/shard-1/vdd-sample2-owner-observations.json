@@ -1,0 +1,73 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "vdd/samples/sample2/16bits/16bits.asm",
+      "sha256": "DB03AA7060A40815C120937D2AE59323AF7467BA2A9A9E8292AF74AEF0ADBDD4",
+      "catalog_ids": "SRC:3e044edc8e1017da9bba;SRC:7c7b602d223b448ab9e4",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "vdd/samples/sample2/16bits/16bits.inc",
+      "sha256": "EC5D07EA987EFA07C43869046EE57AFCE94B639BB78D1ECE049F1D9E136872BA",
+      "catalog_ids": "SRC:2167c65a0b7c2d852d65;SRC:a78d1a630d17ee9dc744",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "vdd/samples/sample2/vdd/vdd.def",
+      "sha256": "072101CA34B3BDFEF82AC910F2E625A1F76CFA11DB242806A75F562DF1D22B6C",
+      "catalog_ids": "SRC:7d447b14cb7e3001c871;SRC:d722b2ff1edebdbf9029",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\vdd\\samples\\sample2\\16bits\\makefile",
+      "sha256": "F9F43343AF1F73E7017EEEEBBA15D564DF80F86ECAE00832FB07F84643065A80"
+    },
+    {
+      "path": "src\\mvdm\\vdd\\samples\\sample2\\vdd\\sources",
+      "sha256": "84EEE43D50D3A5164168C154DCDCD84DDC7201878C62AE9FC7DB5A2939BA0F17"
+    },
+    {
+      "path": "src\\mvdm\\vdd\\samples\\sample2\\vdd\\vdd.c",
+      "sha256": "F8EE71884385FC8A7703DA165461735F96BA01D4D0A5C7C33670929C5A821E4C"
+    },
+    {
+      "path": "src\\mvdm\\vdd\\samples\\sample2\\vdd\\vdd.h",
+      "sha256": "F8D6EF9AB8372F6CDEE0B9401F22CCF1A0807C5C1D69F78948DD6415420121AC"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "numeric_constants": {
+    "IO_PORT_FIRST": 1936,
+    "IO_PORT_LAST": 1939,
+    "MIO_SEGMENT": 49152,
+    "MIO_PORT_FIRST": 0,
+    "MIO_PORT_LAST": 7,
+    "DMA_CHANNEL": 1
+  },
+  "zip_16bits_exe_matches": [],
+  "limitations": "Source/recipe and normalized dependencies only; no historical producer provenance, VDD DLL deployment, provider behavior, IRQ/DMA or guest test."
+}

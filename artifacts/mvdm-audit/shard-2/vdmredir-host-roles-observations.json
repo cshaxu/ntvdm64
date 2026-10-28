@@ -1,0 +1,90 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "vdmredir/dlstruct.h",
+      "hashes": [
+        "C98F6C2E38CA0392EA2A1AFD24A5044262203F0F756CA9E94E0A0A4D1B23DCF8",
+        "C98F6C2E38CA0392EA2A1AFD24A5044262203F0F756CA9E94E0A0A4D1B23DCF8",
+        "C98F6C2E38CA0392EA2A1AFD24A5044262203F0F756CA9E94E0A0A4D1B23DCF8"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "vdmredir/vdmredir.rc",
+      "hashes": [
+        "92794973E7F1561C10C6C2C0BD60A04BDCAAB742ABB2438940DF5A35EE5C34D4",
+        "92794973E7F1561C10C6C2C0BD60A04BDCAAB742ABB2438940DF5A35EE5C34D4",
+        "92794973E7F1561C10C6C2C0BD60A04BDCAAB742ABB2438940DF5A35EE5C34D4"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "vdmredir/vrdisp.c",
+      "hashes": [
+        "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389",
+        "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389",
+        "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "vdmredir/vrica.h",
+      "hashes": [
+        "B93042CE17AE454D6BFF085B15D93221BC86ADB1FDE50620675BF41EE34D8D75",
+        "B93042CE17AE454D6BFF085B15D93221BC86ADB1FDE50620675BF41EE34D8D75",
+        "B93042CE17AE454D6BFF085B15D93221BC86ADB1FDE50620675BF41EE34D8D75"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "vdmredir/vrputil.h",
+      "hashes": [
+        "39F3E56F1F344D6F5EF17DB3AD9F9451BE7E860259A1779E4EB3F997C53B3C84",
+        "39F3E56F1F344D6F5EF17DB3AD9F9451BE7E860259A1779E4EB3F997C53B3C84",
+        "39F3E56F1F344D6F5EF17DB3AD9F9451BE7E860259A1779E4EB3F997C53B3C84"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "normalized_dependencies": [
+    {
+      "object": "obj/redir/vrnetapi.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\vdmredir\\dlstruct.h"
+    },
+    {
+      "object": "obj/redir/vrnetapi.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\vdmredir\\vrputil.h"
+    },
+    {
+      "object": "obj/redir/vrnetb.obj",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\vdmredir\\vrica.h"
+    }
+  ],
+  "compile_resource_edges": [
+    "build obj/redir/vrdisp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdisp.c",
+    "build obj/redir/vdmredir.res: rc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vdmredir.rc"
+  ],
+  "link_has_dispatch_and_resource": true,
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "images": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.dll",
+      "sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A"
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7"
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7"
+    }
+  ],
+  "scope": "Current redirector build input and identity snapshot; no live service, remote partner, interrupt or lifecycle proof"
+}

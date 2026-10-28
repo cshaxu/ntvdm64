@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "130184f12",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-2/dos-command-dem-abi-observations.json",
+      "sha256": "2882191AE3F6EC03C2E3906D07EF076CCC72C250DA7DB3CA4F7985D407ADC296"
+    },
+    {
+      "path": "shard-3/cga-herc-interface-observations.json",
+      "sha256": "A8C2CBC21108E1EFFDB2B9EDBA8A619CF56690532D245514D3F5EB7738EA5045"
+    },
+    {
+      "path": "shard-3/mouse-host-interface-observations.json",
+      "sha256": "2595A533F581416AC35ABA66493E5EA35CE15DA667A63049ABAF305E82F44743"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected declarations and dependency snapshots only; no guest runtime acceptance"
+}

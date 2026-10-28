@@ -227,7 +227,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'xms-suballoc-image-role-':
+                if prefix == 'selected-command-input-headers-role-':
+                    assert path in ('inc/cmdsvc.h', 'dos/dem/dosdef.h', 'softpc.new/host/inc/nt_cga.h', 'softpc.new/host/inc/nt_mouse.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'xms-suballoc-image-role-':
                     assert path in ('xms.486/xmsdisp.c', 'suballoc/suballoc.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'guest-service-header-role-':
                     assert path in ('inc/dossvc.h', 'inc/dpmi.h', 'inc/xmssvc.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

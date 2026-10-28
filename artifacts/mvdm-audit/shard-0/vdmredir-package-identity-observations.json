@@ -1,0 +1,105 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\VDMREDIR.dll",
+      "size": 207872,
+      "sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A",
+      "timestamp": 1793199592,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 98304,
+          "sha256": "D36BC4FAAD8775A09168A7478F802136B1F0A30D5348DA7A46E8DD9CEB299179"
+        },
+        {
+          "name": ".rdata",
+          "size": 96768,
+          "sha256": "6C7E5463FC17875F058E9BE14581CD384B0C650E6FF793EDA6F9A95A70A6B951"
+        },
+        {
+          "name": ".data",
+          "size": 4096,
+          "sha256": "D80BBC5C4A162E05234761C29A7940BFD5322380B57C0575BDA964D2039F33C4"
+        },
+        {
+          "name": ".rsrc",
+          "size": 1536,
+          "sha256": "076D8AD8AD8D6CC84357FCE35A4E90A266E0F259A0859DD5A3692E7076D91F4A"
+        },
+        {
+          "name": ".reloc",
+          "size": 6144,
+          "sha256": "8AF29B454557C64964E3407A1FA2B54ABF9B6FE648517BD4802149E301C1B641"
+        }
+      ]
+    },
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "size": 207872,
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+      "timestamp": 1793193083,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 98304,
+          "sha256": "D36BC4FAAD8775A09168A7478F802136B1F0A30D5348DA7A46E8DD9CEB299179"
+        },
+        {
+          "name": ".rdata",
+          "size": 96768,
+          "sha256": "A13943BAFB13FFFCE802BB7123F8A104DB342C35D4EFA038BDF24D46E898C053"
+        },
+        {
+          "name": ".data",
+          "size": 4096,
+          "sha256": "D80BBC5C4A162E05234761C29A7940BFD5322380B57C0575BDA964D2039F33C4"
+        },
+        {
+          "name": ".rsrc",
+          "size": 1536,
+          "sha256": "E4C2629A79823E2205D6A4C5CB9B338ED390EE2994E92CC3D06ACC5A6DB47DF8"
+        },
+        {
+          "name": ".reloc",
+          "size": 6144,
+          "sha256": "8AF29B454557C64964E3407A1FA2B54ABF9B6FE648517BD4802149E301C1B641"
+        }
+      ]
+    },
+    {
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "size": 207872,
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+      "timestamp": 1793193083,
+      "sections": [
+        {
+          "name": ".text",
+          "size": 98304,
+          "sha256": "D36BC4FAAD8775A09168A7478F802136B1F0A30D5348DA7A46E8DD9CEB299179"
+        },
+        {
+          "name": ".rdata",
+          "size": 96768,
+          "sha256": "A13943BAFB13FFFCE802BB7123F8A104DB342C35D4EFA038BDF24D46E898C053"
+        },
+        {
+          "name": ".data",
+          "size": 4096,
+          "sha256": "D80BBC5C4A162E05234761C29A7940BFD5322380B57C0575BDA964D2039F33C4"
+        },
+        {
+          "name": ".rsrc",
+          "size": 1536,
+          "sha256": "E4C2629A79823E2205D6A4C5CB9B338ED390EE2994E92CC3D06ACC5A6DB47DF8"
+        },
+        {
+          "name": ".reloc",
+          "size": 6144,
+          "sha256": "8AF29B454557C64964E3407A1FA2B54ABF9B6FE648517BD4802149E301C1B641"
+        }
+      ]
+    }
+  ],
+  "limits": "PE section byte comparison only; no source provenance, data interpretation, runtime or semantic-equivalence claim"
+}
