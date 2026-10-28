@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "adb38a3f5",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "cross-369/font-header-observations.json",
+      "sha256": "97835B51C77919CEB67D51DA39156143A7D01D139AD0402D14C2897A59C378FD"
+    },
+    {
+      "path": "cross-369/metafile-header-observations.json",
+      "sha256": "B1F0DB70A96090649A58D3C5FE0BA4018469C2164AD1E4B15C6C2CCE3ED046E5"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}
