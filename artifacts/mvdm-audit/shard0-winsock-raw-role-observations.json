@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "12bd70ab1",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-winsock-raw-observations.json",
+      "sha256": "B7B4DFB55258231ED86CDE83AB7A3F1805501B3FB73BA23378EAB6C0A17E4884"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source and initial 23 Winsock bindings only; no broad network acceptance"
+}

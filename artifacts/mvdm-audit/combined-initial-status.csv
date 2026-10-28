@@ -4611,7 +4611,7 @@ wow32/wsman.h,3,pending,shard-3/file-review.csv
 wow32/wsocktbl.h,2,pending,shard-2/file-audit.csv
 wow32/wspool.c,1,partial,shard-1/file-audit.csv
 wow32/wspool.h,2,pending,shard-2/file-audit.csv
-wow32/wsraw.c,0,pending,shard-0/review.csv
+wow32/wsraw.c,0,partial,shard-0/review.csv
 wow32/wstbl.h,0,pending,shard-0/review.csv
 wow32/wstbl2.h,2,partial,shard-2/file-audit.csv
 wow32/wstruc.c,1,partial,shard-1/file-audit.csv

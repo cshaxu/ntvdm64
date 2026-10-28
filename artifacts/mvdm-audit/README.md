@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [synchronous Winsock checkpoint](shard-0/wow-winsock-raw-review.md)
+retains guest, network failure and socket-lifetime obligations.
+
 The [selected empty WGMAN file role](shard-0/wow-gdi-empty-owner-review.md)
 excludes no GDI functionality and retains its real linker-directive boundary.
 

@@ -1,0 +1,347 @@
+{
+  "result": "pass",
+  "source": "wow32/wsraw.c",
+  "source_sha256": "671210892E0AC174860EF9B2DA141C471DC45B20E48DCC5B40A5185164262CE0",
+  "table_base": 1607,
+  "entries": [
+    {
+      "ordinal": 1,
+      "thunk": "WWS32accept",
+      "binding": {
+        "name": "_WWS32accept@4",
+        "va": 268627504,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 269,
+        "relocation_words": 15
+      }
+    },
+    {
+      "ordinal": 2,
+      "thunk": "WWS32bind",
+      "binding": {
+        "name": "_WWS32bind@4",
+        "va": 268627776,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 188,
+        "relocation_words": 11
+      }
+    },
+    {
+      "ordinal": 3,
+      "thunk": "WWS32closesocket",
+      "binding": {
+        "name": "_WWS32closesocket@4",
+        "va": 268627968,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 179,
+        "relocation_words": 16
+      }
+    },
+    {
+      "ordinal": 4,
+      "thunk": "WWS32connect",
+      "binding": {
+        "name": "_WWS32connect@4",
+        "va": 268628160,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 196,
+        "relocation_words": 11
+      }
+    },
+    {
+      "ordinal": 5,
+      "thunk": "WWS32getpeername",
+      "binding": {
+        "name": "_WWS32getpeername@4",
+        "va": 268628368,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 208,
+        "relocation_words": 11
+      }
+    },
+    {
+      "ordinal": 6,
+      "thunk": "WWS32getsockname",
+      "binding": {
+        "name": "_WWS32getsockname@4",
+        "va": 268628576,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 208,
+        "relocation_words": 11
+      }
+    },
+    {
+      "ordinal": 7,
+      "thunk": "WWS32getsockopt",
+      "binding": {
+        "name": "_WWS32getsockopt@4",
+        "va": 268628784,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 378,
+        "relocation_words": 19
+      }
+    },
+    {
+      "ordinal": 8,
+      "thunk": "WWS32htonl",
+      "binding": {
+        "name": "_WWS32htonl@4",
+        "va": 268629168,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 16,
+        "relocation_words": 1
+      }
+    },
+    {
+      "ordinal": 9,
+      "thunk": "WWS32htons",
+      "binding": {
+        "name": "_WWS32htons@4",
+        "va": 268629184,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 18,
+        "relocation_words": 1
+      }
+    },
+    {
+      "ordinal": 10,
+      "thunk": "WWS32inet_addr",
+      "binding": {
+        "name": "_WWS32inet_addr@4",
+        "va": 268629216,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 200,
+        "relocation_words": 13
+      }
+    },
+    {
+      "ordinal": 11,
+      "thunk": "WWS32inet_ntoa",
+      "binding": {
+        "name": "_WWS32inet_ntoa@4",
+        "va": 268629424,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 157,
+        "relocation_words": 10
+      }
+    },
+    {
+      "ordinal": 12,
+      "thunk": "WWS32ioctlsocket",
+      "binding": {
+        "name": "_WWS32ioctlsocket@4",
+        "va": 268629584,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 388,
+        "relocation_words": 21
+      }
+    },
+    {
+      "ordinal": 13,
+      "thunk": "WWS32listen",
+      "binding": {
+        "name": "_WWS32listen@4",
+        "va": 268629984,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 89,
+        "relocation_words": 6
+      }
+    },
+    {
+      "ordinal": 14,
+      "thunk": "WWS32ntohl",
+      "binding": {
+        "name": "_WWS32ntohl@4",
+        "va": 268630080,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 16,
+        "relocation_words": 1
+      }
+    },
+    {
+      "ordinal": 15,
+      "thunk": "WWS32ntohs",
+      "binding": {
+        "name": "_WWS32ntohs@4",
+        "va": 268630096,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 18,
+        "relocation_words": 1
+      }
+    },
+    {
+      "ordinal": 16,
+      "thunk": "WWS32recv",
+      "binding": {
+        "name": "_WWS32recv@4",
+        "va": 268630128,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 213,
+        "relocation_words": 14
+      }
+    },
+    {
+      "ordinal": 17,
+      "thunk": "WWS32recvfrom",
+      "binding": {
+        "name": "_WWS32recvfrom@4",
+        "va": 268630352,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 339,
+        "relocation_words": 18
+      }
+    },
+    {
+      "ordinal": 18,
+      "thunk": "WWS32select",
+      "binding": {
+        "name": "_WWS32select@4",
+        "va": 268630704,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 633,
+        "relocation_words": 35
+      }
+    },
+    {
+      "ordinal": 19,
+      "thunk": "WWS32send",
+      "binding": {
+        "name": "_WWS32send@4",
+        "va": 268631344,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 143,
+        "relocation_words": 8
+      }
+    },
+    {
+      "ordinal": 20,
+      "thunk": "WWS32sendto",
+      "binding": {
+        "name": "_WWS32sendto@4",
+        "va": 268631488,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 259,
+        "relocation_words": 13
+      }
+    },
+    {
+      "ordinal": 21,
+      "thunk": "WWS32setsockopt",
+      "binding": {
+        "name": "_WWS32setsockopt@4",
+        "va": 268631760,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 219,
+        "relocation_words": 12
+      }
+    },
+    {
+      "ordinal": 22,
+      "thunk": "WWS32shutdown",
+      "binding": {
+        "name": "_WWS32shutdown@4",
+        "va": 268631984,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 89,
+        "relocation_words": 6
+      }
+    },
+    {
+      "ordinal": 23,
+      "thunk": "WWS32socket",
+      "binding": {
+        "name": "_WWS32socket@4",
+        "va": 268632080,
+        "function": true,
+        "owner": "wsraw.obj",
+        "bytes": 109,
+        "relocation_words": 7
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wsraw.c",
+      "sha256": "671210892E0AC174860EF9B2DA141C471DC45B20E48DCC5B40A5185164262CE0"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsraw.c",
+      "sha256": "671210892E0AC174860EF9B2DA141C471DC45B20E48DCC5B40A5185164262CE0"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wsraw.c",
+      "sha256": "671210892E0AC174860EF9B2DA141C471DC45B20E48DCC5B40A5185164262CE0"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsraw.obj",
+      "sha256": "7B06DE1A9FCA4521B09A3A8D1E1869D3A31E2F007C4CC4293DE10B3E89734666"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wgtbl2.h",
+      "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkbdtbl2.h",
+      "sha256": "B00166F7ABF269442FA1AA4B5C07AB1C08AB126C15E886DD654F519FBEABB0EB"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wstbl2.h",
+      "sha256": "D3AEA894092DC6AFC33701CFBCCEFF6297234E9E67185B09EA4FCFDB7C478B5E"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wshtbl2.h",
+      "sha256": "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wwstbl2.h",
+      "sha256": "425F566FA0A559C2DCF79F39322A8CA3A0929371A447DE3337B0C9F6AD1BEF02"
+    }
+  ],
+  "scope": "Initial synchronous Winsock bindings only; no network, concurrent task or guest behavior acceptance"
+}
