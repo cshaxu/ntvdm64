@@ -87,3 +87,5 @@ The [EGA trace header correction](egatrace-header-reopen-review.md) reopens a fi
 The [HUNTER provider correction](hunter-provider-reopen-review.md) reopens the original conditional provider while its diagnostic profile remains unresolved.
 
 The [remaining excluded header review](excluded-host-header-final-group-review.md) reopens GISP diagnostic applicability while retaining the separate SoftWindows-only interface outside the NTVDM product profile. The [WINMM boundary](wow-winmm-boundary-review.md) and [legacy networking boundary](../host-inc/legacy-network-functional-boundary.md) distinguish source/image observations from runtime acceptance.
+
+The [SoftWindows input/audio profile review](softwindows-input-audio-profile-review.md) separates its conditional guest-driver BOPs from selected NT input and WOW multimedia paths; required selected-path behavior still needs validation.
