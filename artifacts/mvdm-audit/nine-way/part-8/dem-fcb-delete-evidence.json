@@ -1,0 +1,34 @@
+[
+  {
+    "path": "src/mvdm/dos/dem/demfcb.c",
+    "sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155"
+  },
+  {
+    "path": "O:/repos.external/OpenNT/base/mvdm/dos/dem/demfcb.c",
+    "sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670"
+  },
+  {
+    "path": "O:/repos.external/OpenNT-4.5/nt/private/mvdm/dos/dem/demfcb.c",
+    "sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670"
+  },
+  {
+    "path": "src/mvdm/oemuni/file.c",
+    "sha256": "83CDB96808AD79DF98C608BE95CDD16F7229B2E4946B86E6A473EDAE8F2407CE"
+  },
+  {
+    "path": "src/mvdm/dos/v86/doskrnl/dos/fcbio.asm",
+    "sha256": "363DE101BFFCBAD8CB4FF2B0396EA29AC3E6D307019AE21D66F899DF075D435E"
+  },
+  {
+    "path": "tests/observation/oem_file_contract.asm",
+    "sha256": "F9E968BA0383D58A4F65E379F464E96E4400BA85B224FBD2DB7A364EA30D72DD"
+  },
+  {
+    "path": "tools/audit/Verify-T420S37OemGuest.ps1",
+    "sha256": "E6026299926C15980D33766F1085BED2E7EF9C2875855252A356CEB116FC33D0"
+  },
+  {
+    "path": "docs/etc/evidence/m0-t420-s37-oemuni-capability-review.md",
+    "sha256": "5C3D83BC40E09F01D733CBDD0C0FE62FB8CF04104BA241B9908BB2227F928B7E"
+  }
+]
