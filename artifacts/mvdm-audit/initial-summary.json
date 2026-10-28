@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1182,
+    "pending": 1171,
     "excluded": 2790,
-    "partial": 659,
+    "partial": 670,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Two historical DOS message build inputs excluded by file role; locale and runtime behavior remain open."
+  "note": "Eleven selected WOW USER declarations partial; two unselected candidates remain pending."
 }

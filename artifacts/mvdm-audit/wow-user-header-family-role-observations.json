@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "6d0844bac",
+  "candidate_count": 11,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-user-header-family-evidence.json",
+      "sha256": "CD1A2B914A4A102B1F64BD0BAF4601FB4BC892BD531C259561AAD3BEEAAF5413"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected WOW declarations, not guest runtime acceptance"
+}
