@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'redirector-selected-interfaces-role-':
+                if prefix == 'execution-selected-interfaces-role-':
+                    assert path in ('inc/vint.h', 'wow32/fastwow.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'redirector-selected-interfaces-role-':
                     assert path in ('inc/rdrsvc.h', 'inc/vdmredir.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'cross-369-selected-owner-fourth-role-':
                     assert path in {'wow32/' + n for n in ('wgfont.h', 'wgmeta.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

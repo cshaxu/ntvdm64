@@ -1,0 +1,12 @@
+# Virtual interrupt interface: disposition
+
+Scope is the two part-3 ownership keys below, not all interrupt handling. Both files match the corresponding OpenNT and OpenNT 4.5 originals byte for byte in the accompanying observations. Suggested disposition is **partial**, not a claim of complete runtime equivalence.
+
+| MVDM path | Role and selected evidence | Boundary |
+| --- | --- | --- |
+| `inc/vint.h` | Original C definitions of virtual interrupt flags and fixed VDM state; current `nt_msscs.c:40,129-146`, `dpmi32/precomp.h:22`, and `src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c:10` include/use the contract. The x86 Ninja dependency records for `nt_msscs.obj` and `dpmi32.obj` are VALID and include this file. | Compilation dependencies do not demonstrate all run-time state transitions; `nt_msscs.c` itself differs from both original mirrors and is not certified by the header hash. |
+| `inc/VINT.INC` | Original guest assembly constants and FCLI/FSTI/FIRET macros. `inc/DPMI.INC:2`, DOS COMMAND `tcode.asm:29`, and multiple BIOS files include it. Historical T407 S14 captured actual original DOSX FSTI/STI and real-mode transition after fixed-selector repair. | Includes establish original source relationships, not proof every retained guest binary came from this source. The T407 trace used the recorded historical binary, not the current release, and WRITE later exited 255; this is not complete application or FCLI/FIRET acceptance. |
+
+The observer compares 13 numeric constants across the current C/assembly interfaces and reports all equal. The linear address is defined from segment and offset rather than independently parsed. The recorded Ninja paths are relative to `build/.ninja/msvc-x86-release/worker`; resolve against that directory before associating them with source. Run `python artifacts/mvdm-audit/cross-369/virtual-interrupt-interface-observer.py` and compare its parsed JSON with `virtual-interrupt-interface-observations.json`.
+
+Existing bounded execution evidence: `docs/etc/evidence/m0-t407-s14-fsti-fixed-selector-recovery.md`, including the historical image hash, original execution order and explicit failure boundary. S11/S13 or the relevant functional owner should validate pending interrupts and mode transitions, nested FCLI/FSTI/FIRET, fixed-selector lifetime and guest-visible interrupt delivery; coordinate PIC reset/cancel and worker termination tests separately. No such test was run in this source audit, and no guest was modified.

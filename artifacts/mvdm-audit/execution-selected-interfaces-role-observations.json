@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "cc061741d",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "cross-369/virtual-interrupt-interface-observations.json",
+      "sha256": "37DD99F180913C689D3C61D88CA0A551E2E5BA3D0460167C752E2621B716592F"
+    },
+    {
+      "path": "cross-369/fastwow-header-observations.json",
+      "sha256": "435F69792723ECF7D6851CA2C0920567A90A294E7574D10567250F007A3025F4"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source roles only; no complete runtime capability assertion"
+}

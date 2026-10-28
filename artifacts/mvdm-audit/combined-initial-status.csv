@@ -1210,7 +1210,7 @@ inc/vdmtb.inc,0,pending,shard-0/review.csv
 inc/vdmtib.h,1,partial,shard-1/file-audit.csv
 inc/VDMTIB.INC,1,pending,shard-1/file-audit.csv
 inc/VDMTIB.INC.old,2,pending,shard-2/file-audit.csv
-inc/vint.h,1,pending,shard-1/file-audit.csv
+inc/vint.h,1,partial,shard-1/file-audit.csv
 inc/VINT.INC,2,pending,shard-2/file-audit.csv
 inc/vrdefld.h,2,pending,shard-2/file-audit.csv
 inc/VRDEFLD.INC,2,pending,shard-2/file-audit.csv
@@ -4376,7 +4376,7 @@ wow16/write/wwactde.c,1,excluded,shard-1/file-audit.csv
 wow16/write/wwactde.obj,1,excluded,shard-1/file-audit.csv
 wow16/write/wwdefs.h,3,excluded,shard-3/file-review.csv
 wow32/debug.c,1,pending,shard-1/file-audit.csv
-wow32/fastwow.h,2,pending,shard-2/file-audit.csv
+wow32/fastwow.h,2,partial,shard-2/file-audit.csv
 wow32/i386/callpr32.asm,0,pending,shard-0/review.csv
 wow32/i386/fastwow.asm,3,pending,shard-3/file-review.csv
 wow32/i386/sources,1,excluded,shard-1/file-audit.csv

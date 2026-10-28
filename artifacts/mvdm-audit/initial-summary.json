@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1039,
+    "pending": 1037,
     "excluded": 2822,
-    "partial": 770,
+    "partial": 772,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Two selected original redirector interface roles are partial; runtime acceptance remains open."
+  "note": "Two selected original execution interface roles are partial; runtime acceptance remains open."
 }
