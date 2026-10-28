@@ -1,0 +1,129 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow16/user/k/daytona/wowk.asm",
+      "sha256": "CB6C500C767D9B7C609AF9D4CE7D7CF36C89707658C8E03278A46441B770D4D7",
+      "origin": "current-only",
+      "dos_catalog_rows": 0,
+      "wow_catalog_rows": 0
+    },
+    {
+      "relative_path": "wow16/user/k/daytona/wowrtl.asm",
+      "sha256": "7EF0A72EDF8A29303F3B72D75E64DA1510CBDD3715E7F794AE295DCFDDCD9D81",
+      "origin": "current-only",
+      "dos_catalog_rows": 0,
+      "wow_catalog_rows": 0
+    }
+  ],
+  "transformations": [
+    {
+      "input": "wowasmk.asm",
+      "output": "wowk.asm",
+      "lines": 1423,
+      "changed_lines": 134,
+      "short_removals": []
+    },
+    {
+      "input": "wowrtl.asm",
+      "output": "wowkr1.asm",
+      "lines": 909,
+      "changed_lines": 85,
+      "short_removals": [
+        {
+          "line": 239,
+          "generated": "\tje\tSHORT $L14586",
+          "actual": "\tje\t $L14586"
+        },
+        {
+          "line": 242,
+          "generated": "\tjmp\tSHORT $L14586",
+          "actual": "\tjmp\t $L14586"
+        },
+        {
+          "line": 506,
+          "generated": "\tje\tSHORT $L14494",
+          "actual": "\tje\t $L14494"
+        }
+      ]
+    },
+    {
+      "input": "wowkr1.asm",
+      "output": "wowkr.asm",
+      "lines": 909,
+      "changed_lines": 4,
+      "short_removals": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\user\\makefile",
+      "sha256": "7BCA4F72F3CDDC7344EE3B6A09DDA1F72BC96D84364E36C064535DFD213D0CC4"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\wowasm.sed",
+      "sha256": "E2CCB526CECA4ADE46CC3C1D88D8B04C2DC93A4F6C0E2EDD42FA82D2256D81A5"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\wowasmk.cmd",
+      "sha256": "30D5FF78380AAD55088076D8804F450081D363C8A240162DBC63BF3D221AA757"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowasmk.asm",
+      "sha256": "3CEADD4255934162CA99623297B6FEC493BCAAEBD3425657D1107C6FE150045D"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowk.asm",
+      "sha256": "CB6C500C767D9B7C609AF9D4CE7D7CF36C89707658C8E03278A46441B770D4D7"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowrtl.asm",
+      "sha256": "7EF0A72EDF8A29303F3B72D75E64DA1510CBDD3715E7F794AE295DCFDDCD9D81"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowkr1.asm",
+      "sha256": "57CA95C78EEDADF1C370A29BDFDBC94926F5F90C5DBC4994BF73CA778FFEC027"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowkr.asm",
+      "sha256": "EBF0F3014A585E75512150B94656299C8779E6AF3B632A662C55623D6C2690C3"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowk.OBJ",
+      "sha256": "17C2D0F574D5C1626A2B0059F509BFAF466074624CA05E4F933CC7ECA44F852D"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\wowkr.OBJ",
+      "sha256": "620CDA45CE03189B16053990D07AC1D0BD62FA34EF5FBE1167D5C9E76545A20F"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\userk.lrf",
+      "sha256": "345B98775C61B83DEEADAF869459549E17371A1E0546E81F0996FDC65B59FFA0"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\user.map",
+      "sha256": "078BE44676C7B878B9FA97930B52063E73B001FCE9D2B6096866A1C13956B871"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\k\\daytona\\USER.EXE",
+      "sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+    },
+    {
+      "path": "O:\\winnt\\system32\\USER.EXE",
+      "sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "sha256": "1ECE9DB0E35238434843BB73ECE92DD66000A44BC6B1148A08BCABF1329F8D9A"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "sha256": "71E5B523BD44077AB4E86FFC6093544922C815C759BB753C32B4155E3206691D"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\client\\wow.c",
+      "sha256": "10AE048C10022A1C1B164861AE5E82DDFC60A5769D7FAF47EBC67B693C979340"
+    }
+  ],
+  "scope": "Stored source role and textual transformations; no assembly rebuild, byte provenance or runtime equivalence claim"
+}

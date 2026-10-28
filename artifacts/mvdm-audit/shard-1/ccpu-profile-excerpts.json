@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "archive": "ccpu-profile-excerpts.zip",
+  "archive_sha256": "42F2A8021F1D143A8DFFB39E1B24AF4C6C65D642B1A77C25E3634273DC9BA847",
+  "records": [
+    {
+      "member": "ccpu-profile-invd-header.txt",
+      "sha256": "8F2192286D35432934C35F017C70E9CA017C4D09529209E587C83C4C638DDA0B",
+      "input_sha256": "F994D378C83511BDA5BD0CBDF0D65553248376FFD93A52EEF935C4B2FD748A53"
+    },
+    {
+      "member": "ccpu-profile-bswap-header.txt",
+      "sha256": "0A29EC108DA0D184B4DE4C1A9A7190E6AE8D248E5D103EC4F811F2083B328F10",
+      "input_sha256": "A8A81A89F9BA7931AB2CD05BB2E647DAF2A536FDD40F6420EBF058AE4220F048"
+    },
+    {
+      "member": "ccpu-profile-selected-decoder.txt",
+      "sha256": "440BC18FDD1A2EDE9CEF181E0818CFEE04C41EDCBCF1A39DD3080F8A8F4E6B09",
+      "input_sha256": "E549C5583D797EEA65BFFC76C9B69523DAE91767A90D9578AAFD6E7F80D8142E"
+    }
+  ],
+  "scope": "Preprocessed declaration and decoder excerpts only"
+}

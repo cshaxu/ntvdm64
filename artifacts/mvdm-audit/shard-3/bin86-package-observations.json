@@ -1,0 +1,111 @@
+{
+  "result": "pass",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "manifest_sha256": "13C7CD6957E88BC4F035E7E727B6AF44313B14894AA4CA1B120DBED555C0EEA0",
+  "sources": [
+    {
+      "relative_path": "bin86/config.nt",
+      "source_sha256": "6AE1E74E78DE00C0FA03124E6F947D977C71F253855AD2AF979554074AEA189A",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:3be3ebce370eae407891;SRC:b76824653893540c03ed",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\config.nt",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\config.nt"
+      ],
+      "zip_members": [
+        "WINNT/SYSTEM32/config.nt"
+      ],
+      "direct_installed_path": "O:\\winnt\\system32\\config.nt",
+      "direct_installed_sha256": "B321E1D6FDC48D7C3F9F04109F8CFB9B83E0389D222CBBBD69168B6C3A35D8BB",
+      "direct_installed_matches": false
+    },
+    {
+      "relative_path": "bin86/i386/win87em.dll",
+      "source_sha256": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:e2677917c7da2ce2fa49",
+      "originals": [
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\i386\\win87em.dll"
+      ],
+      "zip_members": [
+        "WINNT/SYSTEM32/WIN87EM.DLL"
+      ],
+      "direct_installed_path": "O:\\winnt\\system32\\win87em.dll",
+      "direct_installed_sha256": null,
+      "direct_installed_matches": false
+    },
+    {
+      "relative_path": "bin86/lanman.drv",
+      "source_sha256": "60204F58744D38E9201BA958D45C483CE7989B216B98A67CE5AA355AF37DEC02",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:25541b87f94e409786f8;SRC:aea01945e460b36a1910",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\lanman.drv",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\lanman.drv"
+      ],
+      "zip_members": [
+        "WINNT/SYSTEM32/LANMAN.DRV"
+      ],
+      "direct_installed_path": "O:\\winnt\\system32\\lanman.drv",
+      "direct_installed_sha256": null,
+      "direct_installed_matches": false
+    },
+    {
+      "relative_path": "bin86/olecli.dll",
+      "source_sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4",
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:0c3b641ec3f2165653f5",
+      "originals": [
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\olecli.dll"
+      ],
+      "zip_members": [
+        "WINNT/SYSTEM32/OLECLI.DLL"
+      ],
+      "direct_installed_path": "O:\\winnt\\system32\\olecli.dll",
+      "direct_installed_sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4",
+      "direct_installed_matches": true
+    },
+    {
+      "relative_path": "bin86/ver.dll",
+      "source_sha256": "6D03CF1E31748149B6D34725E293C5EE4F3BD7DDEBE526285FE7BA41A1D1F5B4",
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "wow_source_ids": "SRC:2cddff34f68577b06cc5",
+      "originals": [
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ver.dll"
+      ],
+      "zip_members": [
+        "WINNT/SYSTEM32/VER.DLL"
+      ],
+      "direct_installed_path": "O:\\winnt\\system32\\ver.dll",
+      "direct_installed_sha256": null,
+      "direct_installed_matches": false
+    },
+    {
+      "relative_path": "bin86/write.hlp",
+      "source_sha256": "B6B131A2FC1FCB7AD69EA7404FA35B46CF21549913293F3D412708FA8C138F67",
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wow_source_ids": "SRC:04a8b0bacbf9273b6436;SRC:253421ccd75ae7014052",
+      "originals": [
+        "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\write.hlp",
+        "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\write.hlp"
+      ],
+      "zip_members": [],
+      "direct_installed_path": "O:\\winnt\\system32\\write.hlp",
+      "direct_installed_sha256": null,
+      "direct_installed_matches": false
+    }
+  ],
+  "scope": "Archive and direct installed identity only; loader search and module behavior unproven"
+}
