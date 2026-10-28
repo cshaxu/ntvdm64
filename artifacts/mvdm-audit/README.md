@@ -59,6 +59,11 @@ The [COMMDLG resource](shard-1/guest-commdlg-resources-review.md),
 [debug profile](shard-2/dos-debug-profile-review.md), and
 [GISP/VGA interface](shard-3/gisp-vgastate-interface-role-review.md) reviews
 retain their source and build boundaries without asserting runtime behavior.
+The [USER historical review](shard-1/guest-user-historical-review.md) and
+[host keyboard/ROM review](shard-3/legacy-host-matrix-rommap-role-review.md)
+retain further selected-versus-historical source boundaries.
+The [C-VID header batch](shard-2/cvidc-header-batch-review.md) records 17
+reviewed candidates and leaves profile/consumer questions explicit.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

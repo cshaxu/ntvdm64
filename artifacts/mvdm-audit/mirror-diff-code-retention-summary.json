@@ -1,7 +1,273 @@
 {
   "result": "pass",
-  "count": 207,
-  "measured": 206,
+  "count": 208,
+  "measured": 207,
+  "absent_current_files": [
+    {
+      "relative_path": "tools16/buildidx.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/buildmsg.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c1.err",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c13216.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c1xx3216.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c23.err",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c23216.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c23pcd.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/c33216.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cl.def",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cl.err",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cl.msg",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cl16.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cvpack.err",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/cvpack16.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/fixexe.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/getsize.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/h2inc.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/implib.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/lib16.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/link16.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/link_60.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/masm.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/mkpublic.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/nosrvbld.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/q23.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/rc16.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/rcpp.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/rcqq.err",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/rcqq.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/reloc.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/stripdd.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "tools16/stripz.exe",
+      "status": "pending"
+    },
+    {
+      "relative_path": "v86/dirs",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/fastpm.asm",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/int.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/monitor.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/monitorp.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/proflib.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/sas.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/sources",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/spcstubs.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/i386/thread.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/makefile",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/monitor/sources",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/fakebop.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/fakeinit.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/fakekbd.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/fakevid.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/fun.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/softpc.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/sources",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/stubs.c",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/x86.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xbios.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xbiosdsk.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xbioskbd.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xbiosvid.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xguest.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/i386/xwincon.h",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/makefile",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/ntvdm.def",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/sources",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/vdm.ico",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/vdm.rc",
+      "status": "excluded"
+    },
+    {
+      "relative_path": "v86/scaffold/wow.ico",
+      "status": "excluded"
+    }
+  ],
   "current_drift": [
     "dpmi32/modesw.c",
     "softpc.new/base/video/v7_ports.c",
@@ -10,7 +276,8 @@
     "softpc.new/host/src/nt_bop.c",
     "softpc.new/host/src/nt_graph.c"
   ],
-  "csv_sha256": "762E24DC823E28B32BD70095CA2E157D448FB4CC563A8571CB35C939974CCBB0",
+  "csv_sha256": "84FEC94BD6474E16CB646D69FBC6778E320A7E62D10038EDC106DB9F92605C40",
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
+  "supplemental_provenance_sha256": "A9BD43A4E844A34796968D6F7C1BDC5A8FD971E9557791944F9C9E0337A65849",
   "scope": "Original code text estimate, not executed code or behavioral restoration"
 }

@@ -26,7 +26,7 @@ file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.
-Current differences against original mirrors have a [text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md); this does not establish behavioral coverage.
+The [text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md) covers 208 current mirror differences; 66 original paths have no current file, of which 33 remain pending. Text retention is not behavioral coverage.
 [Parallel source reviews](../../artifacts/mvdm-audit/README.md) include DOS,
 C-VID and WOW GDI bindings; execution and lifecycle obligations remain open.
 The [Video7 mouse-range candidate](../../artifacts/mvdm-audit/video7-pointer-review.md)
