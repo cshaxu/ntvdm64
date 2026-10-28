@@ -31,3 +31,11 @@ The [subsequent fixture run](cvidc-vector-fixture-r74-evidence.json) also
 checks the actual byte, word and string mark pointers for all four mark
 selectors and confirms that selector 4 preserves the preceding read and mark
 selections. It does not exercise out-of-range chain indexes.
+
+The [simple-byte run](cvidc-simple-byte-fixture-evidence.json) executes the
+original byte read/write glue and selected `SEVID000`/`SEVID001` generated
+bodies, rather than merely comparing their addresses. In a guarded test-owned
+linear buffer, all 256 byte values are written and read back through a
+nonzero guest-address base, the dirty counter advances, and trace identifiers
+confirm the intended routines. This is not a planar, latch, mode-13, real
+guest or frontend test. The fixture uses the existing `/force:multiple` graph.

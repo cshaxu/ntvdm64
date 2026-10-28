@@ -27,6 +27,9 @@ extern void setMarkPointers(IUH);
 extern void c_sas_overwrite_memory(PHY_ADDR, PHY_ADDR);
 extern EVID_READ_POINTERS c_ev_read_ptr;
 extern EVID_WRT_POINTERS c_ev_write_ptr;
+extern IU32 gvi_pc_low_regen;
+extern void write_byte_ev_glue(IU32, IU8);
+extern IU32 read_byte_ev_glue(IU32);
 static unsigned char expected[65536];
 static IUH *scratch[] = { &r0,&r1,&r2,&r3,&r4,&r5,&r6,&r7,
     &r8,&r9,&r10,&r11,&r12,&r13,&r14,&r15,&r16,&r17,&r18,&r19,
@@ -188,6 +191,29 @@ int main(void)
         setVideochain(SIMPLE_WRITES); setWritePointers();
         CHECK(c_ev_write_ptr.b_write!=chain2_evid[0].b_write);
     }
+    /* Execute original generated simple byte routines through the real glue.
+     * The guarded local buffer is the fixture's screen memory; the trace ring
+     * mirrors the generated runtime precondition without touching guest media. */
+    {
+        IU8 memory[258]; IUH trace[8]; IU32 saved_base=gvi_pc_low_regen;
+        memset(memory,0xa5,sizeof(memory)); memset(trace,0,sizeof(trace));
+        ((IUH *)Gdp)[2]=(IUH)&trace[0];
+        ((IUH *)Gdp)[3]=(IUH)&trace[0];
+        ((IUH *)Gdp)[4]=(IUH)&trace[7];
+        setVideoscreen_ptr(memory+1); setVideodirty_total(0);
+        gvi_pc_low_regen=0x1000;
+        setVideodither(0); setVideochain(SIMPLE_WRITES); setWritePointers();
+        setReadPointers(SIMPLE_READ);
+        for(i=0;i<256;i++) {
+            write_byte_ev_glue(0x1000+i,(IU8)i);
+            CHECK(memory[i+1]==(IU8)i);
+            CHECK((read_byte_ev_glue(0x1000+i)&0xff)==i);
+            CHECK(memory[0]==0xa5 && memory[257]==0xa5);
+        }
+        CHECK(getVideodirty_total()==256);
+        CHECK(trace[0]==2139 && trace[1]==2115);
+        gvi_pc_low_regen=saved_base;
+    }
     /* Negative control: the original generated setter reproduces the
      * shared-scratch clobber; the newly selected direct setter must not. */
     r21=121;
@@ -199,7 +225,7 @@ int main(void)
     CHECK(WaitForSingleObject(thread,10000)==WAIT_OBJECT_0); CloseHandle(thread);
     CHECK(getVideodirty_total()==1000000);
     for(i=0;i<32;i++) CHECK(*scratch[i]==100+i);
-    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
+    { const char message[]="PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte writes and reads with guards, unknown read/mark selectors, negative control, concurrent scratch preservation\r\n";
       WriteFile(GetStdHandle(STD_OUTPUT_HANDLE),message,sizeof(message)-1,&written,NULL); }
     return 0;
 }
