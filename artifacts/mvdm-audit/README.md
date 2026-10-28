@@ -79,6 +79,15 @@ an acceptance or applicability decision for the remaining external sources.
 The [part 4 MVDM review](nine-way/part-4/mvdm-review.md) separates selected
 and diagnostic build inputs, while its [raster inventory](nine-way/part-4/external-mini-review.md)
 retains per-device relevance pending provider verification.
+Further bounded reviews cover [DOS parsing](nine-way/part-2/dos-parser-semantic-reconciliation.md),
+[WFWNET](nine-way/part-8/wfwnet-semantic-reconciliation.md),
+[WINOLDAP](nine-way/part-8/winoldap-semantic-reconciliation.md),
+[SYSTEM](nine-way/part-8/system-semantic-reconciliation.md),
+[WIN87EM](nine-way/part-8/win87em-semantic-reconciliation.md), and selected
+[ToolHelp](cross-369/toolhelp-table-disposition.md), [file cache](cross-369/file-cache-header-disposition.md),
+[callback](cross-369/callback-interface-disposition.md), and
+[Shell](cross-369/shell-header-disposition.md) interfaces. Their separate
+failure and runtime boundaries remain recorded in each report.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

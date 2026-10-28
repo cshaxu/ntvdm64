@@ -1,0 +1,14 @@
+# S10 part 9: Shell dispatch and Registry interfaces
+
+Only owned `wow32/wshell.h` and `wow32/wshltbl.h` are classified here. `shell-header-observer.py` records exact edition hashes and normalized cached Ninja dependency blocks for `wshell.obj`, `wow32.obj`, and `wowtbl.obj`; reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/cross-369/shell-header-observer.py`. No source, guest, graph or shared ledger was changed.
+
+Both headers match both originals. `precomp.h` includes `wshell.h`, a VALID dependency of selected `wshell.obj`; it declares original Shell execution, Registry, drag/drop, return conversion and associated data interfaces. `wow32.c` includes `wshltbl.h`, the historical Shell dispatch-table declaration. The current `wowtbl.c` uses the separate `wshtbl2.h` for the master ordinal entries; do not conflate the declaration with an independently instantiated provider. Source/dependency is not a runtime witness.
+
+`m0-t461-s1-shell-registry-owner-matrix.md` traces original `WS32ShellExecute` through guest argument mapping, native Shell execution and the original synchronous guest callback, and separately describes `FindExecutable` and Shell Registry operations. `m0-t461-s2-binding-implementation.md` records a bounded overlay fixture, source-shaped binding and coherent package frontiers; the `m0-t461-shell-registry-closure.md` records later persistence/restart/concurrent-writer evidence. Those receipts establish the selected layered Registry contract in their stated artifacts, not general Shell associations or unrestricted Registry provider equivalence. The S2 record also preserves an unrelated Shell callback host control as a non-pass; do not convert it into acceptance.
+
+| Owned key | Suggested disposition | Remaining S14/S17 boundary |
+| --- | --- | --- |
+| `wow32/wshell.h` | Partial: selected original interface spanning multiple independent features with bounded Registry/callback evidence. | Guest ShellExecute and FindExecutable associations, mapped input/output and failure cleanup, drag/drop aliases, reentry and task retirement must each be witnessed rather than inferred from Registry results. |
+| `wow32/wshltbl.h` | Partial: selected original dispatch declaration, not a standalone service implementation. | Validate actual `wshtbl2.h` ordinal routing and owner evidence for each relevant operation/configuration; preserve debug/profile variations. |
+
+The modern native Shell owns its actual association results and HWND; original WOW owns guest conversion and callback semantics; the documented parent-owned layered Registry owns its accepted key representation/persistence, without storing real host handles in the guest. Preserve these boundaries and registered differences. No runtime was executed in this review and no whole-feature percentage is claimed.

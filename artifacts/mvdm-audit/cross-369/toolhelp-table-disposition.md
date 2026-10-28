@@ -1,0 +1,14 @@
+# S10 part 9: original ToolHelp dispatch table
+
+Only owned keys `wow32/wthtbl.h` and `wow32/wthtbl2.h` receive classification recommendations here. `toolhelp-table-observer.py` records exact original/current hashes and normalized `VALID` dependencies for cached `wow32.obj` and `wowtbl.obj`; reproduce with `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/cross-369/toolhelp-table-observer.py`. No guest, product or shared ledger was modified.
+
+Both files match both original source editions. `wow32.c` includes `wthtbl.h`, which declares the historical ToolHelp table/debug count; cached `wow32.obj` has that exact VALID dependency. `wowtbl.c` includes `wthtbl2.h` into the master dispatch table and cached `wowtbl.obj` has the corresponding VALID dependency. The latter maps its `ClassFirst` and `ClassNext` entries to original `UNIMPLEMENTEDAPI`. These are separate files and roles: a header declaration is not evidence that `aw32ToolHelp` is itself independently instantiated or every API is serviced.
+
+The original Win16 `toolhelp/makefile` says its `class1.c`/`class2.asm` are reference inputs not built for WOW; `ththunks.asm` supplies the WOW route. Other ToolHelp functionality is guest implementation, not reducible to the two class slots. Earlier `m0-t470-s2-toolhelp-query-disposition.md` used two independently identified immutable ToolHelp variants: the guest probe completed and `TaskFirst`/valid `ModuleFirst` returned zero, while `ClassFirst` returned the original unimplemented zero. Its private-KERNEL-layout analysis does not locate a specific mismatched field; it is bounded negative evidence, not proof that every ToolHelp function fails. The planned host/guest architecture and prohibition on guest modification still apply.
+
+| Owned key | Suggested disposition | Preserved boundary |
+| --- | --- | --- |
+| `wow32/wthtbl.h` | Partial: selected original declaration input; exact table/debug symbol participation varies by configuration. | Preserve ToolHelp guest API and independently establish actual consumer, provider and debug/profile configuration. |
+| `wow32/wthtbl2.h` | Partial: selected original master-table entries; both class queries deliberately unimplemented by this original table. | Keep the observed class negative and investigate other query operations/pairing separately; table/source identity is not broad capability acceptance. |
+
+S14/S17 should bind exact guest KERNEL, ToolHelp DLL and host image identities for any further experiment; compare expected original pair layouts with supported immutable candidates, prove query/init/retirement behavior and preserve the existing explicit negative unless a policy-compatible same-semantics solution is established. Neither an invented host task registry nor a guest rebuild is approved by this audit. No new execution or repair is claimed.
