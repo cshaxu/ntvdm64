@@ -169,6 +169,8 @@ The [disk session routing review](host-ch-scope/dos-absolute-io-session-routing-
 
 S16 has a [minimal multimedia resolver design](host-ch-scope/wow-winmm-resolve-s16-design.md): retain original lookup and native handle authority while correcting BOOL failure and provider-output forwarding, subject to the recorded exception and full matrix. S13's [disk session routing](host-ch-scope/dos-absolute-io-session-routing-review.md) separates FDC status/handle lifecycle from synchronous DEM error mapping.
 
+The [USER/GDI resolver controls](host-ch-scope/wow-winmm-user-gdi-object-review.md) exercise eight isolated cases against the cached wrapper with controlled imports. They establish current conversion and missing-provider ordering for this fixture, not real guest or GDI object lifetime. S16 must preserve these behaviors apart from the proposed BOOL failure correction and bind a rebuilt object to current source before treating it as product evidence.
+
 The [FDC session fixture plan](shard-3/fdc-session-fixture-plan.md) specifies integration of existing selected-object and test-owned session seams, including first-open failure, rollback, reset and worker shutdown; its first-open reachability remains unproved until executed.
 
 The [test-owned wave handle comparison](host-ch-scope/wow-winmm-wave-handle-review.md) independently observed the local provider fail while the selected wrapper returned a truncated native handle in separate processes. It does not prove a Win16 alias or deployed guest reachability; retain it in S16's actual-provider failure matrix.

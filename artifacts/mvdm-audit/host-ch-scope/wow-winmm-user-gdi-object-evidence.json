@@ -1,0 +1,63 @@
+{
+  "sha256": {
+    "src\\mvdm\\wow32\\wmmedia.c": "fbc4695791937fea487c91a0ba964e19625ebf4793c0123238100628fa95fd08",
+    "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmmedia.obj": "03d9412a0e2f17a87cc17aa18e98a9a4cbbbdc089fbe4b2bfbc04ea71be52a7f",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wow-winmm-user-gdi-object-observe.py": "d49985ae0a10717197e3f56428992baf804edf6d576010371d8bd721c994006a",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wow-winmm-user-gdi-object-fixture.c": "7b01624641d3349273a9c7361aadc52bf79f675680c2c90ed2e504a780548f56",
+    "artifacts\\mvdm-audit\\host-ch-scope\\wow-winmm-user-gdi-object-build.cmd": "773b5909028f1951bb847a69a13c403c4354ecc0a2cdddd49c10c8e842b0fc35",
+    "build\\t473-s10\\winmm-user-gdi-replay\\wmmedia-seam.obj": "3e47bdd5527bf581681eba20fe62a70eff8b4782f4156e1af9489c56466ab957",
+    "build\\t473-s10\\winmm-user-gdi-replay\\fixture.obj": "5cd6da7291d427e348a0049aa24bc141f77aa62a4c5e23e752c7af5e1c2b56fb",
+    "build\\t473-s10\\winmm-user-gdi-replay\\fixture.exe": "15e5e6b8bce161df238fac8791dec1f02d53e2b588382376f78b9a1fdbd448aa",
+    "build\\t473-s10\\winmm-user-gdi-replay\\fixture.map": "ee493b238836067de4d1ec8375eb1bd684307b2a00d35203b6e0df23c795ddcf"
+  },
+  "results": [
+    {
+      "case": "missing-user16to32",
+      "exit": 0,
+      "stdout": "missing-user16to32 result=6 out16=aaaa out32=cccccccc gdi_to=0 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "missing-gdi16to32",
+      "exit": 0,
+      "stdout": "missing-gdi16to32 result=6 out16=aaaa out32=cccccccc gdi_to=0 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "user16to32",
+      "exit": 0,
+      "stdout": "user16to32 result=1 out16=aaaa out32=00001234 gdi_to=0 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "user32to16",
+      "exit": 0,
+      "stdout": "user32to16 result=1 out16=2222 out32=cccccccc gdi_to=0 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "gdi16to32",
+      "exit": 0,
+      "stdout": "gdi16to32 result=1 out16=aaaa out32=55667788 gdi_to=1 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "gdi32to16",
+      "exit": 0,
+      "stdout": "gdi32to16 result=1 out16=6789 out32=cccccccc gdi_to=0 gdi_from=1",
+      "stderr": ""
+    },
+    {
+      "case": "gdi-zero16to32",
+      "exit": 0,
+      "stdout": "gdi-zero16to32 result=0 out16=aaaa out32=00000000 gdi_to=1 gdi_from=0",
+      "stderr": ""
+    },
+    {
+      "case": "gdi-zero32to16",
+      "exit": 0,
+      "stdout": "gdi-zero32to16 result=0 out16=0000 out32=cccccccc gdi_to=0 gdi_from=1",
+      "stderr": ""
+    }
+  ]
+}
