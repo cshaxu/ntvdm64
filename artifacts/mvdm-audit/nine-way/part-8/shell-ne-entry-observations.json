@@ -1,0 +1,51 @@
+{
+  "result": "pass",
+  "image_sha256": "B5C132C76B5106BE713B2E1B1E519EC9F540A39FCB8EFCA5CCAA42F16ECCA04F",
+  "source": "src\\mvdm\\wow16\\shell\\SHELL.DLL",
+  "installed": "O:\\winnt\\system32\\SHELL.DLL",
+  "archive": "assets\\winnt.zip",
+  "archive_entry": "WINNT/SYSTEM32/SHELL.DLL",
+  "entries": {
+    "1": {
+      "segment": 1,
+      "segment_offset": 30,
+      "file_offset": 2590,
+      "entry_bytes": "6a0c6800006801009affff0000",
+      "args_bytes": 12,
+      "call_id_fixup": "0505240001001002"
+    },
+    "2": {
+      "segment": 1,
+      "segment_offset": 43,
+      "file_offset": 2603,
+      "entry_bytes": "6a0c6800006802009a27000000",
+      "args_bytes": 12,
+      "call_id_fixup": "0505310001001002"
+    },
+    "20": {
+      "segment": 1,
+      "segment_offset": 160,
+      "file_offset": 2720,
+      "entry_bytes": "6a146800006814009a9c000000",
+      "args_bytes": 20,
+      "call_id_fixup": "0505a60001001002"
+    },
+    "21": {
+      "segment": 1,
+      "segment_offset": 173,
+      "file_offset": 2733,
+      "entry_bytes": "6a0c6800006815009aa9000000",
+      "args_bytes": 12,
+      "call_id_fixup": "0505b30001001002"
+    },
+    "22": {
+      "segment": 1,
+      "segment_offset": 186,
+      "file_offset": 2746,
+      "entry_bytes": "6a0c6800006816009ab6000000",
+      "args_bytes": 12,
+      "call_id_fixup": "0505c00001001002"
+    }
+  },
+  "scope": "NE entry bytes and fixup-site identity only; imports, loader relocation, source build provenance and live dispatch unproved"
+}

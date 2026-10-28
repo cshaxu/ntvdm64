@@ -820,4 +820,12 @@ Additional reviews cover [486 profile source gates](shard-1/ccpu-486-family-revi
 
 The [DOS kernel build records](shard-1/dos-kernel-build-family-review.md), [DDEML test/version inputs](shard-2/ddeml-test-version-review.md) and [WOW USER guest inputs](shard-3/wow-user-guest-input-role-review.md) distinguish historical recipes from actual guest runtime evidence.
 
-The [pending role recommendations](nine-way/part-2/sufficient-file-role-recommendations.md) distinguish recipe evidence from whole-capability exclusions. The [FCB open review](nine-way/part-8/dem-fcb-open-review.md) records original-source failure candidates without claiming guest reproduction; S13 owns their controlled validation.
+The [pending role recommendations](nine-way/part-2/sufficient-file-role-recommendations.md) distinguish recipe evidence from whole-capability exclusions. The [FCB open review](nine-way/part-8/dem-fcb-open-review.md) records original-source failure candidates without claiming guest reproduction; S12 owns their controlled validation.
+
+The [selected-object FCB metadata fixture](nine-way/part-8/dem-fcb-metadata-selected-object-review.md) confirms a bounded high-size failure with an open handle, not a guest leak. The [selected-object file-cache fixture](cross-369/file-cache-selected-object-review.md) independently strengthens the existing S14 mapping and flush handoff.
+
+The [frozen guest partial review](nine-way/part-8/guest-quality-all-partial-review.md) records later reopened rows and bounded image evidence. The [SHELL NE observation](nine-way/part-8/shell-guest-image-partial-review.md) establishes image and entry structure, not runtime loading.
+
+The [DOSX guest-source correction](classification-scope-correction-dosx-r5.md) reopens nine source roles whose historical build-input classification did not establish their functional exclusion.
+
+The [host C/H scope snapshot](host-ch-scope/README.md) is the current owner-directed audit starting point. Earlier all-file reviews remain historical evidence; they do not expand the active audit scope.

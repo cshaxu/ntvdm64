@@ -16,14 +16,13 @@ release/installed hashes match. The Video7 mouse-range repair passed all 14
 Full gates in a fresh-identity isolated copy. Never restore historical package-c.
 S10 package-scoped NTSRV isolation and selected probes are recorded in
 [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
-MVDM-wide source reconciliation remains open.
+Host MVDM C/H reconciliation remains open.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 2,177 pending, 749 partial, 53 full and 1,705 excluded physical
-file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
+The earlier all-file ledger is historical; host C/H-only scope and counts are being reconciled. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.
@@ -52,17 +51,17 @@ selected Full gates do not prove those historical failures repaired.
 | --- | --- |
 | Identifier Mode | M0 T473 S10, Ordinary Mode; coordinator and three reviewers on disjoint shards. |
 | Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
-| Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
+| Objective | Reconcile applicable host MVDM C/H files against both audit inventories, product composition and evidence; form an owner-group recovery worklist. Other file types are supporting dependencies, not individually classified scope. |
 | Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
 | Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
 | Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package/RPC staging and add-on/tool producer/consumer renames. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
 | Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
-| Expected Markers | Each row has justified full/partial/excluded disposition and selected original owner; every mirror diff is partial, with reproducible justified restored-code estimate or explicit unmeasurable basis. |
+| Expected Markers | Each in-scope host C/H row has justified full/partial/excluded disposition and selected original owner; mirror diffs are partial with a justified estimate or explicit unmeasurable basis. |
 | Asset Needs | Read-only DOS16/WOW32 inventories and original sources; existing build graphs, maps and noninteractive/authorized desktop probes. |
 | Reporting Requirements | Per-file evidence and unresolved capabilities; source/adapter diff and ownership accounting; 42,963 external audit rows assessed for relevance. |
 | Stop Conditions | Guest change, inaccessible original source, private host-layout assumption or new observable semantic concession. |
-| Exit Criteria | Complete reconciled ledger with no unclassified applicable path, evidence-backed exclusions and finite dependency-ordered recovery groups; no compilation or trace alone counts as functional proof. |
+| Exit Criteria | Complete reconciled host C/H ledger with no unclassified applicable file, evidence-backed exclusions and finite dependency-ordered recovery groups; compilation or trace alone is not functional proof. |
 | Original Owner Request | Reconnect every feasible original MVDM capability, per-file full/partial/excluded with mirror diffs partial and estimated restored proportion, then complete all required tests before T closure. |
 | Similar-Issue Sweep | Original source presence, selected profile, build/link extraction, callbacks, failure/teardown, duplicate adapters and both guest and host owner boundaries. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |

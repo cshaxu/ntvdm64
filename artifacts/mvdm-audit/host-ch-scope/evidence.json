@@ -1,0 +1,41 @@
+{
+  "inputs": [
+    {
+      "path": "artifacts/mvdm-audit/shard-0/review.csv",
+      "sha256": "583197102458D77B83B4DC0127A91A2B1377E8F57459913609076B73D77BF08A"
+    },
+    {
+      "path": "artifacts/mvdm-audit/shard-1/file-audit.csv",
+      "sha256": "110D778CA57DA86D582BB7387FC6BD0B6DC8400CA0FF45CB3C468E1B22C20E2B"
+    },
+    {
+      "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
+      "sha256": "53B7CCC927754C93838127B80FCF21349224AE271D61674738156BCE37758DB9"
+    },
+    {
+      "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
+      "sha256": "1C7D677D1329532B95B9AC6A1EB1BF9839E216DE6119F49C2A738BF598FB90C1"
+    }
+  ],
+  "rows": 1815,
+  "scope_counts": {
+    "tool-or-scaffold-candidate": 72,
+    "host-candidate": 1270,
+    "role-pending": 473
+  },
+  "host_candidate_ledger_status_counts": {
+    "pending": 57,
+    "partial": 64,
+    "partial-mirror-diff": 140,
+    "pending-evidence": 727,
+    "部分复通": 146,
+    "full-selected-leaf": 10,
+    "full": 15,
+    "full-selected-declaration": 14,
+    "整体排除": 17,
+    "excluded": 37,
+    "excluded-architecture-header": 36,
+    "excluded-cpu30": 7
+  },
+  "warning": "Path-based candidate scope is not a final host/guest exclusion or proof of behavior."
+}

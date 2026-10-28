@@ -1,0 +1,799 @@
+{
+  "ledger_sha256": "5013836C1E9D0B60E6B4BD4C98BB3E219EA3D77628F4EE4AEFFAF61EBDC6F533",
+  "reconciliation_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
+  "retention_sha256": "84FEC94BD6474E16CB646D69FBC6778E320A7E62D10038EDC106DB9F92605C40",
+  "images": [
+    {
+      "path": "dos/v86/cmd/mem/mem.exe",
+      "status": "partial",
+      "current_sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+      "frozen_sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+      "current_matches_frozen": true,
+      "opennt_sha256": "",
+      "opennt45_sha256": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB",
+      "mirror_diff": false,
+      "witness_class": "bound",
+      "witness_source": "docs/etc/evidence/m0-t406-s1-physical-mapping-design.md",
+      "witness_scope": "MEM totals and exit 0"
+    },
+    {
+      "path": "dos/v86/cmd/qbasic/edit.com",
+      "status": "partial",
+      "current_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "frozen_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "current_matches_frozen": true,
+      "opennt_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "opennt45_sha256": "E0A0B24FEE4037CB050670661C30AD7ECC0EA9483938152FCA3D807C443E8A46",
+      "mirror_diff": false,
+      "witness_class": "bound",
+      "witness_source": "docs/etc/evidence/m0-t406-s1-physical-mapping-design.md",
+      "witness_scope": "welcome and Esc; job cleanup, no normal exit"
+    },
+    {
+      "path": "dpmi/486/dosx.exe",
+      "status": "partial",
+      "current_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+      "frozen_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+      "current_matches_frozen": true,
+      "opennt_sha256": "",
+      "opennt45_sha256": "C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF8E1E2576EAD5F6CEEFF",
+      "mirror_diff": false,
+      "witness_class": "historical identity and entry; timing binding bounded",
+      "witness_source": "docs/etc/evidence/m0-t404-s2-dosx-bop-fd-contract-audit-001.md",
+      "witness_scope": "same record identifies SHA and r048 DEM open/read/entry transfer; confirm per-run immutable identity before stronger claim"
+    },
+    {
+      "path": "wow16/user/k/daytona/USER.EXE",
+      "status": "partial",
+      "current_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C",
+      "frozen_sha256": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C",
+      "current_matches_frozen": true,
+      "opennt_sha256": "",
+      "opennt45_sha256": "",
+      "mirror_diff": false,
+      "witness_class": "bound historical",
+      "witness_source": "artifacts/mvdm-audit/nine-way/part-1/guest-identity-runtime-witness-review.md",
+      "witness_scope": "T447 S2 CBT nested/veto/destroy callback; not all USER"
+    },
+    {
+      "path": "wow16/winsock/WINSOCK.DLL",
+      "status": "partial",
+      "current_sha256": "629E86C59C83F66D3623388B9ED6AE9D5A664979E588A9EB45B8A54441126FD9",
+      "frozen_sha256": "629E86C59C83F66D3623388B9ED6AE9D5A664979E588A9EB45B8A54441126FD9",
+      "current_matches_frozen": true,
+      "opennt_sha256": "629E86C59C83F66D3623388B9ED6AE9D5A664979E588A9EB45B8A54441126FD9",
+      "opennt45_sha256": "629E86C59C83F66D3623388B9ED6AE9D5A664979E588A9EB45B8A54441126FD9",
+      "mirror_diff": false,
+      "witness_class": "bound historical optional image",
+      "witness_source": "artifacts/mvdm-audit/nine-way/part-1/guest-identity-runtime-witness-review.md",
+      "witness_scope": "T467 S2 synchronous loopback and blocking hook, optional staged image"
+    }
+  ],
+  "dos_source_rows": [
+    {
+      "path": "dos/command/cmd.c",
+      "status": "partial",
+      "current_sha256": "7BA0E9FE6D25F04419F931DE2AA6D51C3A4FEFB4699CDC35BC6412CCF2602807",
+      "frozen_sha256": "7BA0E9FE6D25F04419F931DE2AA6D51C3A4FEFB4699CDC35BC6412CCF2602807",
+      "current_matches_frozen": true,
+      "opennt_sha256": "9D0A773FCC8D7765B0FE3FE3750B5C9A29A596362F78A221161318FD83CC0262",
+      "opennt45_sha256": "9D0A773FCC8D7765B0FE3FE3750B5C9A29A596362F78A221161318FD83CC0262",
+      "mirror_diff": true,
+      "code_text_pct": "92.31",
+      "metric_current_hash": "7BA0E9FE6D25F04419F931DE2AA6D51C3A4FEFB4699CDC35BC6412CCF2602807",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-0/command-home-drive-audit.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmd.h",
+      "status": "partial",
+      "current_sha256": "02BBCFD31B8CD35F78CA39E5F00F8B6A345C03113162B48F779618FA97F383F2",
+      "frozen_sha256": "02BBCFD31B8CD35F78CA39E5F00F8B6A345C03113162B48F779618FA97F383F2",
+      "current_matches_frozen": true,
+      "opennt_sha256": "EA707E7955198462F93A0E795AE1751D83749578E93653E9B0BAF4594D069711",
+      "opennt45_sha256": "EA707E7955198462F93A0E795AE1751D83749578E93653E9B0BAF4594D069711",
+      "mirror_diff": true,
+      "code_text_pct": "97.81",
+      "metric_current_hash": "02BBCFD31B8CD35F78CA39E5F00F8B6A345C03113162B48F779618FA97F383F2",
+      "metric_is_current": true,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": []
+    },
+    {
+      "path": "dos/command/cmdconf.c",
+      "status": "partial",
+      "current_sha256": "0AA24B4C49C7A87F556C1DD738638555E8D2253D565B05EFFA0A87BE8AFA29E7",
+      "frozen_sha256": "0AA24B4C49C7A87F556C1DD738638555E8D2253D565B05EFFA0A87BE8AFA29E7",
+      "current_matches_frozen": true,
+      "opennt_sha256": "32892C8C489BED9E4BE8FAED12E1BAFBC6C580BA81A509425E8493DE1E6FFC0A",
+      "opennt45_sha256": "32892C8C489BED9E4BE8FAED12E1BAFBC6C580BA81A509425E8493DE1E6FFC0A",
+      "mirror_diff": true,
+      "code_text_pct": "99.75",
+      "metric_current_hash": "0AA24B4C49C7A87F556C1DD738638555E8D2253D565B05EFFA0A87BE8AFA29E7",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-0/bin86-country-config-review.md",
+        "artifacts/mvdm-audit/shard-0/command-config-root-audit.md",
+        "artifacts/mvdm-audit/shard-1/package-uuid-dos-bootstrap-audit.md",
+        "artifacts/mvdm-audit/shard-3/pif-config-lifecycle-audit.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmddata.c",
+      "status": "partial",
+      "current_sha256": "5CBC229764ACEB417000A7FBCE75A016CFCCCC2546EEA726670CD008A50A2E37",
+      "frozen_sha256": "5CBC229764ACEB417000A7FBCE75A016CFCCCC2546EEA726670CD008A50A2E37",
+      "current_matches_frozen": true,
+      "opennt_sha256": "937C134E46B5C714B9106D85FD0250B88FCA5958E69A1E60FDEAB558D4F4F8D2",
+      "opennt45_sha256": "937C134E46B5C714B9106D85FD0250B88FCA5958E69A1E60FDEAB558D4F4F8D2",
+      "mirror_diff": true,
+      "code_text_pct": "91.43",
+      "metric_current_hash": "5CBC229764ACEB417000A7FBCE75A016CFCCCC2546EEA726670CD008A50A2E37",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-0/command-home-drive-audit.md",
+        "artifacts/mvdm-audit/shard-2/command-state-pif-redirection-review.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmddisp.c",
+      "status": "partial",
+      "current_sha256": "2A906E7100DA9DB6F16BAB91C767B149F28E63A0DB2803297812A8E86D2B19D6",
+      "frozen_sha256": "2A906E7100DA9DB6F16BAB91C767B149F28E63A0DB2803297812A8E86D2B19D6",
+      "current_matches_frozen": true,
+      "opennt_sha256": "2A906E7100DA9DB6F16BAB91C767B149F28E63A0DB2803297812A8E86D2B19D6",
+      "opennt45_sha256": "2A906E7100DA9DB6F16BAB91C767B149F28E63A0DB2803297812A8E86D2B19D6",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/nine-way/part-1/mvdm-core-review.md",
+        "artifacts/mvdm-audit/parallel-native-role-review.md",
+        "artifacts/mvdm-audit/shard-1/command-exit-owner-audit.md",
+        "artifacts/mvdm-audit/shard-2/dem-divergence-registration-reconciliation.md",
+        "artifacts/mvdm-audit/shard-2/dos-command-dem-abi-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-next.md",
+        "artifacts/mvdm-audit/shard-3/cmdsvc-abi-role-review.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdenv.c",
+      "status": "partial",
+      "current_sha256": "4508C02A54C0CD3F6E3BC5FCCC9A462C1C4B59F737805C582A722BC49CCB8198",
+      "frozen_sha256": "4508C02A54C0CD3F6E3BC5FCCC9A462C1C4B59F737805C582A722BC49CCB8198",
+      "current_matches_frozen": true,
+      "opennt_sha256": "AFC71D306491FE6A7F8CD7356B8682176A33A05F3652BAE735BE079B3CD0A32B",
+      "opennt45_sha256": "AFC71D306491FE6A7F8CD7356B8682176A33A05F3652BAE735BE079B3CD0A32B",
+      "mirror_diff": true,
+      "code_text_pct": "99.81",
+      "metric_current_hash": "4508C02A54C0CD3F6E3BC5FCCC9A462C1C4B59F737805C582A722BC49CCB8198",
+      "metric_is_current": true,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/nine-way/part-1/external-rtl-review.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdexec.c",
+      "status": "partial",
+      "current_sha256": "5ECE239B87A9046AFF6B62AC44EC1FA2A35753E8DCB87C179571AF52B8B85ABE",
+      "frozen_sha256": "5ECE239B87A9046AFF6B62AC44EC1FA2A35753E8DCB87C179571AF52B8B85ABE",
+      "current_matches_frozen": true,
+      "opennt_sha256": "98A941095D47AE73EF9731D389A433203C7184B0A016B62E24B202BB89F829D0",
+      "opennt45_sha256": "98A941095D47AE73EF9731D389A433203C7184B0A016B62E24B202BB89F829D0",
+      "mirror_diff": true,
+      "code_text_pct": "91.04",
+      "metric_current_hash": "5ECE239B87A9046AFF6B62AC44EC1FA2A35753E8DCB87C179571AF52B8B85ABE",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/findings.md",
+        "artifacts/mvdm-audit/shard-1/codepage-concurrency-audit.md",
+        "artifacts/mvdm-audit/shard-1/codepage-handoff-design.md",
+        "artifacts/mvdm-audit/shard-1/standalone-tool-chain-audit.md",
+        "artifacts/mvdm-audit/shard-2/ccpu-call-lmsw-registration-review.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdkeyb.c",
+      "status": "partial",
+      "current_sha256": "C3F318FD75DF9302A782594A5777CF60F401FF1E6997A118AE3D9299705CDD6C",
+      "frozen_sha256": "C3F318FD75DF9302A782594A5777CF60F401FF1E6997A118AE3D9299705CDD6C",
+      "current_matches_frozen": true,
+      "opennt_sha256": "B945CD4A072B592211F6427EE526B2CA47BE05AC6BEF9A33956105749D899EBA",
+      "opennt45_sha256": "B945CD4A072B592211F6427EE526B2CA47BE05AC6BEF9A33956105749D899EBA",
+      "mirror_diff": true,
+      "code_text_pct": "99.30",
+      "metric_current_hash": "C3F318FD75DF9302A782594A5777CF60F401FF1E6997A118AE3D9299705CDD6C",
+      "metric_is_current": true,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-3/cmd-keyboard-layout-role-review.md",
+        "artifacts/mvdm-audit/shard-3/external-device-provider-review.md",
+        "artifacts/mvdm-audit/shard-3/README.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdmisc.c",
+      "status": "partial",
+      "current_sha256": "9659C54A7151EA69428DBE56AB8902723F6BD1FCE46EFD377850711B0F7D6D4B",
+      "frozen_sha256": "9659C54A7151EA69428DBE56AB8902723F6BD1FCE46EFD377850711B0F7D6D4B",
+      "current_matches_frozen": true,
+      "opennt_sha256": "1CA036932368A0D0BF1848B078CC80CD66E67A4CC46AD26A0C1B236FE40F4281",
+      "opennt45_sha256": "1CA036932368A0D0BF1848B078CC80CD66E67A4CC46AD26A0C1B236FE40F4281",
+      "mirror_diff": true,
+      "code_text_pct": "94.99",
+      "metric_current_hash": "9659C54A7151EA69428DBE56AB8902723F6BD1FCE46EFD377850711B0F7D6D4B",
+      "metric_is_current": true,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-0/command-home-drive-audit.md",
+        "artifacts/mvdm-audit/shard-2/dem-divergence-registration-reconciliation.md",
+        "artifacts/mvdm-audit/shard-3/cmdsvc-abi-role-review.md",
+        "artifacts/mvdm-audit/shard-3/forcedos-original-owner-audit.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdpif.c",
+      "status": "partial",
+      "current_sha256": "2228973DBE7DB1900B234C2FE84BE90ACF446F4A4911AB98099CA4A92DC4D6F6",
+      "frozen_sha256": "2228973DBE7DB1900B234C2FE84BE90ACF446F4A4911AB98099CA4A92DC4D6F6",
+      "current_matches_frozen": true,
+      "opennt_sha256": "6D3AAC795C1C6275695E0B4B72DCBDBF7206456F27E07A11BC28BF5CE3438A9B",
+      "opennt45_sha256": "6D3AAC795C1C6275695E0B4B72DCBDBF7206456F27E07A11BC28BF5CE3438A9B",
+      "mirror_diff": true,
+      "code_text_pct": "99.52",
+      "metric_current_hash": "2228973DBE7DB1900B234C2FE84BE90ACF446F4A4911AB98099CA4A92DC4D6F6",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/addon-layout-review.md",
+        "artifacts/mvdm-audit/shard-2/command-state-pif-redirection-review.md",
+        "artifacts/mvdm-audit/shard-2/oemuni-process-path-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-next.md",
+        "artifacts/mvdm-audit/shard-3/pif-config-lifecycle-audit.md"
+      ]
+    },
+    {
+      "path": "dos/command/cmdredir.c",
+      "status": "partial",
+      "current_sha256": "C583C3872A532DF9F679EE35012624A636CC3D345CD0C07C7700C3966D065FE3",
+      "frozen_sha256": "C583C3872A532DF9F679EE35012624A636CC3D345CD0C07C7700C3966D065FE3",
+      "current_matches_frozen": true,
+      "opennt_sha256": "A403F15BA9EC33AF85AB38AAA7C4FEA301016C4BB09A1CCBD3ADEE71A07DCC49",
+      "opennt45_sha256": "A403F15BA9EC33AF85AB38AAA7C4FEA301016C4BB09A1CCBD3ADEE71A07DCC49",
+      "mirror_diff": true,
+      "code_text_pct": "99.58",
+      "metric_current_hash": "C583C3872A532DF9F679EE35012624A636CC3D345CD0C07C7700C3966D065FE3",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/package-uuid-dos-bootstrap-audit.md",
+        "artifacts/mvdm-audit/shard-2/command-state-pif-redirection-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/dem.c",
+      "status": "partial",
+      "current_sha256": "C808AC6C148C8000F2115F6298270316AE86E29E384678031657025B7AC2AA42",
+      "frozen_sha256": "C808AC6C148C8000F2115F6298270316AE86E29E384678031657025B7AC2AA42",
+      "current_matches_frozen": true,
+      "opennt_sha256": "2573DA2DBF964C5E75102145B031766113CFC4E914DC00F0D80FDC6D98F5A2DE",
+      "opennt45_sha256": "2573DA2DBF964C5E75102145B031766113CFC4E914DC00F0D80FDC6D98F5A2DE",
+      "mirror_diff": true,
+      "code_text_pct": "97.62",
+      "metric_current_hash": "C808AC6C148C8000F2115F6298270316AE86E29E384678031657025B7AC2AA42",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-2/dem-initialization-dispatch-file-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/dem.h",
+      "status": "partial",
+      "current_sha256": "35CC550D9AB9A17211D7776874F951CF19AC339F8B91F0E68460BF32810566B5",
+      "frozen_sha256": "35CC550D9AB9A17211D7776874F951CF19AC339F8B91F0E68460BF32810566B5",
+      "current_matches_frozen": true,
+      "opennt_sha256": "C9C4B4814E1B30FFAD29A7716948EC7B6C0ADE8F6AB2FBB9FD6998D358706E5A",
+      "opennt45_sha256": "C9C4B4814E1B30FFAD29A7716948EC7B6C0ADE8F6AB2FBB9FD6998D358706E5A",
+      "mirror_diff": true,
+      "code_text_pct": "98.41",
+      "metric_current_hash": "35CC550D9AB9A17211D7776874F951CF19AC339F8B91F0E68460BF32810566B5",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-2/dos-command-dem-abi-review.md",
+        "artifacts/mvdm-audit/shard-2/guest-declaration-resource-owner-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demdasd.c",
+      "status": "partial",
+      "current_sha256": "7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942",
+      "frozen_sha256": "7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942",
+      "current_matches_frozen": true,
+      "opennt_sha256": "7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942",
+      "opennt45_sha256": "7438F5D4DF1803664E66F16B7464D719C8E4341D1D9C2E7721CE7184BDF08942",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/parallel-native-role-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-next.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demdasd.h",
+      "status": "partial",
+      "current_sha256": "721DED4EE0B5F110CC2C46902C67D2879048EA2C73C8DABFF0788964D4831C99",
+      "frozen_sha256": "721DED4EE0B5F110CC2C46902C67D2879048EA2C73C8DABFF0788964D4831C99",
+      "current_matches_frozen": true,
+      "opennt_sha256": "DE5BD5E437C17A34AF71999E6E6E7C0E749D9D9DA61BC5CC8420C0406E1A2C35",
+      "opennt45_sha256": "DE5BD5E437C17A34AF71999E6E6E7C0E749D9D9DA61BC5CC8420C0406E1A2C35",
+      "mirror_diff": true,
+      "code_text_pct": "99.58",
+      "metric_current_hash": "721DED4EE0B5F110CC2C46902C67D2879048EA2C73C8DABFF0788964D4831C99",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": []
+    },
+    {
+      "path": "dos/dem/demdata.c",
+      "status": "partial",
+      "current_sha256": "D683F95923E4D5C9F31F5B1297910408B0EBA68A1AC592D0CD9F54D364563C3C",
+      "frozen_sha256": "D683F95923E4D5C9F31F5B1297910408B0EBA68A1AC592D0CD9F54D364563C3C",
+      "current_matches_frozen": true,
+      "opennt_sha256": "366A350BC31579DC48764B81D28B26F4D2A5C69C66EC42D742DDAAF739E6A566",
+      "opennt45_sha256": "366A350BC31579DC48764B81D28B26F4D2A5C69C66EC42D742DDAAF739E6A566",
+      "mirror_diff": true,
+      "code_text_pct": "20.00",
+      "metric_current_hash": "D683F95923E4D5C9F31F5B1297910408B0EBA68A1AC592D0CD9F54D364563C3C",
+      "metric_is_current": true,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-3/README.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demdir.c",
+      "status": "partial",
+      "current_sha256": "7013B557F8D89527E719484C032BCB3BEFE8BF6F79CBD7C97EAE49C737E1B9AC",
+      "frozen_sha256": "7013B557F8D89527E719484C032BCB3BEFE8BF6F79CBD7C97EAE49C737E1B9AC",
+      "current_matches_frozen": true,
+      "opennt_sha256": "7013B557F8D89527E719484C032BCB3BEFE8BF6F79CBD7C97EAE49C737E1B9AC",
+      "opennt45_sha256": "7013B557F8D89527E719484C032BCB3BEFE8BF6F79CBD7C97EAE49C737E1B9AC",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demdisp.c",
+      "status": "partial",
+      "current_sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256",
+      "frozen_sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256",
+      "current_matches_frozen": true,
+      "opennt_sha256": "7EA3A829E3F8AAD2DFE644D101CABAFF514DE25909DB937675FC323DFCE8FE3C",
+      "opennt45_sha256": "7EA3A829E3F8AAD2DFE644D101CABAFF514DE25909DB937675FC323DFCE8FE3C",
+      "mirror_diff": true,
+      "code_text_pct": "99.04",
+      "metric_current_hash": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-review.md",
+        "artifacts/mvdm-audit/shard-2/dem-initialization-dispatch-file-review.md",
+        "artifacts/mvdm-audit/shard-3/dem-hard-error-audit.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demerror.c",
+      "status": "partial",
+      "current_sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F",
+      "frozen_sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F",
+      "current_matches_frozen": true,
+      "opennt_sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F",
+      "opennt45_sha256": "8C266CC5086F5BFB834F7D2054459F0A91B1789E90095E56FF363F77D409B64F",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/parallel-text-dem-role-review.md",
+        "artifacts/mvdm-audit/shard-3/dem-error-role-review.md",
+        "artifacts/mvdm-audit/shard-3/dem-hard-error-audit.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demfcb.c",
+      "status": "partial",
+      "current_sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155",
+      "frozen_sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155",
+      "current_matches_frozen": true,
+      "opennt_sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670",
+      "opennt45_sha256": "2705FE134A825C3FBCB11594CF1AA23E858438A43D1DE0C03E010930F921C670",
+      "mirror_diff": true,
+      "code_text_pct": "98.38",
+      "metric_current_hash": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-0/dem-search-fcb-lifetime-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demfile.c",
+      "status": "partial",
+      "current_sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20",
+      "frozen_sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20",
+      "current_matches_frozen": true,
+      "opennt_sha256": "701C7CE94B6317F23D73D847C681338DDB522D0216CF6373713E542C34236620",
+      "opennt45_sha256": "701C7CE94B6317F23D73D847C681338DDB522D0216CF6373713E542C34236620",
+      "mirror_diff": true,
+      "code_text_pct": "97.53",
+      "metric_current_hash": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20",
+      "metric_is_current": true,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-review.md",
+        "artifacts/mvdm-audit/shard-1/dem-media-sft-lifecycle-audit.md",
+        "artifacts/mvdm-audit/shard-2/dem-divergence-registration-reconciliation.md",
+        "artifacts/mvdm-audit/shard-2/dem-initialization-dispatch-file-review.md",
+        "artifacts/mvdm-audit/shard-3/oem-path-role-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demgset.c",
+      "status": "partial",
+      "current_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+      "frozen_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+      "current_matches_frozen": true,
+      "opennt_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+      "opennt45_sha256": "19C5999308A479CC9C0FCB30D23E8301D9A835408417AA965B85523DFB8A1653",
+      "mirror_diff": true,
+      "code_text_pct": "97.96",
+      "metric_current_hash": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+      "metric_is_current": true,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-media-sft-lifecycle-audit.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demhndl.c",
+      "status": "partial",
+      "current_sha256": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE",
+      "frozen_sha256": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE",
+      "current_matches_frozen": true,
+      "opennt_sha256": "5E951E14D7C88357DC25933B602CB756FBAF4CF47125A46D740135491B4EB958",
+      "opennt45_sha256": "5E951E14D7C88357DC25933B602CB756FBAF4CF47125A46D740135491B4EB958",
+      "mirror_diff": true,
+      "code_text_pct": "93.29",
+      "metric_current_hash": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE",
+      "metric_is_current": true,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-2/dem-divergence-registration-reconciliation.md",
+        "artifacts/mvdm-audit/shard-3/redir-service-role-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demioctl.c",
+      "status": "partial",
+      "current_sha256": "6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA",
+      "frozen_sha256": "6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA",
+      "current_matches_frozen": true,
+      "opennt_sha256": "6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA",
+      "opennt45_sha256": "6F480BF758D071B1FD2F76A137F892B77D1EA8D2D8FFB4690D395AEDF5F733FA",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/parallel-native-role-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-next.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demlabel.c",
+      "status": "partial",
+      "current_sha256": "F77E781014AD34F6686FC3A94019BD82C995D7830EBD29F91DC358272ED30F22",
+      "frozen_sha256": "F77E781014AD34F6686FC3A94019BD82C995D7830EBD29F91DC358272ED30F22",
+      "current_matches_frozen": true,
+      "opennt_sha256": "F77E781014AD34F6686FC3A94019BD82C995D7830EBD29F91DC358272ED30F22",
+      "opennt45_sha256": "F77E781014AD34F6686FC3A94019BD82C995D7830EBD29F91DC358272ED30F22",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/parallel-controls-directory-role-review.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-review.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demlock.c",
+      "status": "partial",
+      "current_sha256": "7716AB3BE08F3532A60E3B05B2214BF1F8CB9F66F362B5F7F555DC3CD2755A71",
+      "frozen_sha256": "7716AB3BE08F3532A60E3B05B2214BF1F8CB9F66F362B5F7F555DC3CD2755A71",
+      "current_matches_frozen": true,
+      "opennt_sha256": "7716AB3BE08F3532A60E3B05B2214BF1F8CB9F66F362B5F7F555DC3CD2755A71",
+      "opennt45_sha256": "7716AB3BE08F3532A60E3B05B2214BF1F8CB9F66F362B5F7F555DC3CD2755A71",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/parallel-native-role-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-next.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demmisc.c",
+      "status": "partial",
+      "current_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+      "frozen_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+      "current_matches_frozen": true,
+      "opennt_sha256": "19676FA5995555EC0B16C2923953B4E6236467DC42BF36CC7E746F45D0FCF912",
+      "opennt45_sha256": "19676FA5995555EC0B16C2923953B4E6236467DC42BF36CC7E746F45D0FCF912",
+      "mirror_diff": true,
+      "code_text_pct": "99.50",
+      "metric_current_hash": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+      "metric_is_current": true,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dem-media-sft-lifecycle-audit.md",
+        "artifacts/mvdm-audit/shard-1/package-uuid-dos-bootstrap-audit.md"
+      ]
+    },
+    {
+      "path": "dos/dem/demsrch.c",
+      "status": "partial",
+      "current_sha256": "8AB053F632861DC37A748EDAB449D4E8D411145D27BD10D326EE7815E61F289D",
+      "frozen_sha256": "8AB053F632861DC37A748EDAB449D4E8D411145D27BD10D326EE7815E61F289D",
+      "current_matches_frozen": true,
+      "opennt_sha256": "2FB56AAD4D35A02DEC38E9202D41B94A25076428C3D9EB08211D89F890C896EE",
+      "opennt45_sha256": "2FB56AAD4D35A02DEC38E9202D41B94A25076428C3D9EB08211D89F890C896EE",
+      "mirror_diff": true,
+      "code_text_pct": "99.41",
+      "metric_current_hash": "8AB053F632861DC37A748EDAB449D4E8D411145D27BD10D326EE7815E61F289D",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/external-kernel-vdm-boundary.md",
+        "artifacts/mvdm-audit/shard-0/dem-search-fcb-lifetime-audit.md",
+        "artifacts/mvdm-audit/shard-1/dem-directory-label-audit.md"
+      ]
+    },
+    {
+      "path": "dos/dem/dosdef.h",
+      "status": "partial",
+      "current_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+      "frozen_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+      "current_matches_frozen": true,
+      "opennt_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+      "opennt45_sha256": "82522742F0111CAC59FEADABA4C1216C39D72C9AC77473FB0061AD29E5B8A8A0",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/guest-declaration-resource-role-review.md",
+        "artifacts/mvdm-audit/shard-2/dos-command-dem-abi-review.md",
+        "artifacts/mvdm-audit/shard-2/guest-declaration-resource-owner-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/command/init.asm",
+      "status": "partial",
+      "current_sha256": "D5A4C9A46C8E6D3A4C28CF525DB6524279602957C95690AE2FC511F367DF92F6",
+      "frozen_sha256": "D5A4C9A46C8E6D3A4C28CF525DB6524279602957C95690AE2FC511F367DF92F6",
+      "current_matches_frozen": true,
+      "opennt_sha256": "3D69D0C82789BA5EB359794096AB215AFE4F705CBA35CA211948E93923E8FD16",
+      "opennt45_sha256": "3D69D0C82789BA5EB359794096AB215AFE4F705CBA35CA211948E93923E8FD16",
+      "mirror_diff": true,
+      "code_text_pct": "100.00",
+      "metric_current_hash": "D5A4C9A46C8E6D3A4C28CF525DB6524279602957C95690AE2FC511F367DF92F6",
+      "metric_is_current": true,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/nine-way/part-1/command-mirror-runtime-review.md",
+        "artifacts/mvdm-audit/nine-way/part-3/simulator-role-review.md",
+        "artifacts/mvdm-audit/nine-way/part-5/bios-resource-family-review.md",
+        "artifacts/mvdm-audit/nine-way/part-5/ntio-bootstrap-character-reconciliation.md",
+        "artifacts/mvdm-audit/nine-way/part-8/existing-classifications-sample101-300-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/guest-family-inventory-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-command-diff-correction.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-partial-five-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/timer-semantic-reconciliation.md",
+        "artifacts/mvdm-audit/shard-0/guest-source-active-edges.md",
+        "artifacts/mvdm-audit/shard-2/ansi-package-identity-review.md",
+        "artifacts/mvdm-audit/shard-2/dos-include-owner-review.md",
+        "artifacts/mvdm-audit/shard-2/msdata-wrapper-owner-review.md",
+        "artifacts/mvdm-audit/shard-2/multimedia-family-owner-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-2/timer-ne-family-review.md",
+        "artifacts/mvdm-audit/shard-2/win16-mciole-guest-review.md",
+        "artifacts/mvdm-audit/shard-2/win16-timer-guest-review.md"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/command/rdata.asm",
+      "status": "partial",
+      "current_sha256": "FE8798D9765C1DF48121DE66840452F699B2EE55FA1923068BCCFA15520057AF",
+      "frozen_sha256": "FE8798D9765C1DF48121DE66840452F699B2EE55FA1923068BCCFA15520057AF",
+      "current_matches_frozen": true,
+      "opennt_sha256": "350CB74DA4D43313CF7CE0F9BDB957CEFA5759EF32F439F8A83102F0162ED441",
+      "opennt45_sha256": "350CB74DA4D43313CF7CE0F9BDB957CEFA5759EF32F439F8A83102F0162ED441",
+      "mirror_diff": true,
+      "code_text_pct": "100.00",
+      "metric_current_hash": "FE8798D9765C1DF48121DE66840452F699B2EE55FA1923068BCCFA15520057AF",
+      "metric_is_current": true,
+      "authority": "shard-1/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/nine-way/part-1/command-mirror-runtime-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/existing-classifications-sample101-300-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-command-diff-correction.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-partial-five-review.md"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/command/stub.asm",
+      "status": "partial",
+      "current_sha256": "8A6146E1FC68D7899776F03093860CFB0F323DCCE3A26AAF6E25FF7D396513DF",
+      "frozen_sha256": "8A6146E1FC68D7899776F03093860CFB0F323DCCE3A26AAF6E25FF7D396513DF",
+      "current_matches_frozen": true,
+      "opennt_sha256": "650B4C89FE06E647F461BD2F5B634C2CF5E850B772BDE6AB902C96FBF862C7F4",
+      "opennt45_sha256": "650B4C89FE06E647F461BD2F5B634C2CF5E850B772BDE6AB902C96FBF862C7F4",
+      "mirror_diff": true,
+      "code_text_pct": "100.00",
+      "metric_current_hash": "8A6146E1FC68D7899776F03093860CFB0F323DCCE3A26AAF6E25FF7D396513DF",
+      "metric_is_current": true,
+      "authority": "shard-3/file-review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/kernel31-source-role-review.md",
+        "artifacts/mvdm-audit/nine-way/part-1/command-mirror-runtime-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/existing-classifications-sample101-300-review.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-command-diff-correction.md",
+        "artifacts/mvdm-audit/nine-way/part-8/sample101-300-partial-five-review.md",
+        "artifacts/mvdm-audit/shard-0/kernel31-guest-owner-review.md",
+        "artifacts/mvdm-audit/shard-1/guest-kernel-legacy-review.md",
+        "artifacts/mvdm-audit/shard-3/kernel-input-role-review.md"
+      ]
+    },
+    {
+      "path": "dos/v86/cmd/nlsfunc/nlsparm.asm",
+      "status": "excluded",
+      "current_sha256": "A7BC0F66A6EF36E54BE3B0113FD1BC7DC18051D133E878AEE0A520215F66A690",
+      "frozen_sha256": "A7BC0F66A6EF36E54BE3B0113FD1BC7DC18051D133E878AEE0A520215F66A690",
+      "current_matches_frozen": true,
+      "opennt_sha256": "A7BC0F66A6EF36E54BE3B0113FD1BC7DC18051D133E878AEE0A520215F66A690",
+      "opennt45_sha256": "A7BC0F66A6EF36E54BE3B0113FD1BC7DC18051D133E878AEE0A520215F66A690",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": []
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.c",
+      "status": "excluded",
+      "current_sha256": "840E8D3C2882039C594D63C01C4722ED768817F78524B4A176B1C228DA309C15",
+      "frozen_sha256": "840E8D3C2882039C594D63C01C4722ED768817F78524B4A176B1C228DA309C15",
+      "current_matches_frozen": true,
+      "opennt_sha256": "840E8D3C2882039C594D63C01C4722ED768817F78524B4A176B1C228DA309C15",
+      "opennt45_sha256": "840E8D3C2882039C594D63C01C4722ED768817F78524B4A176B1C228DA309C15",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": []
+    },
+    {
+      "path": "dos/v86/cmd/share/share.asm",
+      "status": "excluded",
+      "current_sha256": "AB7FE7C1974897CD7F54FF91F2374006041D29280FCCB88809D613659942EC45",
+      "frozen_sha256": "AB7FE7C1974897CD7F54FF91F2374006041D29280FCCB88809D613659942EC45",
+      "current_matches_frozen": true,
+      "opennt_sha256": "AB7FE7C1974897CD7F54FF91F2374006041D29280FCCB88809D613659942EC45",
+      "opennt45_sha256": "AB7FE7C1974897CD7F54FF91F2374006041D29280FCCB88809D613659942EC45",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-0/review.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-1/dos-utility-family-review.md"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "status": "excluded",
+      "current_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+      "frozen_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+      "current_matches_frozen": true,
+      "opennt_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+      "opennt45_sha256": "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/nine-way/part-2/dos-shared-inputs-review.md",
+        "artifacts/mvdm-audit/shard-2/dos-v86-build-tools-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md",
+        "artifacts/mvdm-audit/shard-3/dos-c-headers-role-review.md"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "status": "excluded",
+      "current_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+      "frozen_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+      "current_matches_frozen": true,
+      "opennt_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+      "opennt45_sha256": "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-2/dos-v86-build-tools-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md"
+      ]
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "status": "excluded",
+      "current_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+      "frozen_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+      "current_matches_frozen": true,
+      "opennt_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+      "opennt45_sha256": "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+      "mirror_diff": false,
+      "code_text_pct": "",
+      "metric_current_hash": "",
+      "metric_is_current": false,
+      "authority": "shard-2/file-audit.csv",
+      "candidate_review_reports": [
+        "artifacts/mvdm-audit/shard-2/dos-v86-build-tools-review.md",
+        "artifacts/mvdm-audit/shard-2/parallel-review-current.md"
+      ]
+    }
+  ]
+}

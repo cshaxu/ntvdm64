@@ -8,7 +8,7 @@ from the T objective through renumbering.
 | Stage | Scope and exit |
 | --- | --- |
 | S9 | Complete generic USER identity, callbacks and lifetime audit; deliver and verify any repair. |
-| S10 | Reconcile both DOS16 and WOW32 audit inventories with every original source, selected edition, actual build/dispatch and evidence; establish full/partial/excluded dispositions, defensible partial-source estimates and finite owner-group worklist. Mirror diffs are partial. |
+| S10 | Reconcile both DOS16 and WOW32 audits with host C/H sources, selected edition, actual build/dispatch and evidence; classify applicable files as full/partial/excluded and estimate mirror-diff retention. Other file types serve as dependencies or evidence, not individually classified scope. |
 | S11 | Recover proven execution, scheduling, callback, identity and lifetime foundations. |
 | S12 | Recover identified DOS core, startup and services. |
 | S13 | Recover identified device, timing, input and presentation owners. |
@@ -17,7 +17,7 @@ from the T objective through renumbering.
 | S16 | Recover identified GDI, resource and other system-service owners. |
 | S17 | Complete remaining independently bounded owner packages from S10. |
 | S18 | Remove local providers and selections displaced by this T's original recoveries; report mirror and non-original footprint separately. |
-| S19 | Re-audit full source and composition, complete all required product and capability regressions, publish, commit and push for T acceptance. |
+| S19 | Re-audit host C/H source and composition, complete all required product and capability regressions, publish, commit and push for T acceptance. |
 
 The owner also assigned package-scoped NTSRV isolation to S10. Its reviewed
 candidate passed selected independent-package, DOS, native CUI, WOW and
@@ -51,3 +51,5 @@ The [selected host failure handoff](../../../artifacts/mvdm-audit/cross-369/sele
 S14/S15 retain the [cursor/icon alias allocation and cleanup boundaries](../../../artifacts/mvdm-audit/cross-369/cursor-cache-disposition.md): both unchecked allocation sites and lock/mapping failure ownership require controlled failure and lifecycle witnesses. The separate [historical DDEML thunk review](../../../artifacts/mvdm-audit/cross-369/ddeml-thunk-disposition.md) leaves actual guest DDEML registration, peer interaction, callbacks and retirement in S14.
 S12 owns the isolated [DOS label boundary](../../../artifacts/mvdm-audit/shard-1/dem-directory-review.md); guest reachability and safe volume semantics remain to be verified.
 S12 additionally retains the [FCB deletion failure branches](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-delete-review.md) as unconfirmed source risks. Exercise the actual DEM object with controlled attribute and enumeration failures before deciding whether a mirror exception is justified.
+
+S12 also owns the [FCB open metadata failure review](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-open-review.md): validate acquired-handle publication and retirement through the actual selected DEM object before deciding a mirror exception.
