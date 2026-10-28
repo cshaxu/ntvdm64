@@ -86,7 +86,7 @@ The [disk geometry and ROM map review](disk-geometry-rommap-provider-review.md) 
 
 The [local heap and multimedia follow-up](../host-wow/local-multimedia-declaration-followup.md) distinguishes inactive historical declarations from active guest and host owners, with alternate-profile and lifecycle questions retained.
 
-The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md) maps the 24 pending source roles to bounded S14–S17 recovery and verification groups. The [legacy dispatch handoff](../host-wow/legacy-dispatch-functional-handoff.md) separates original thunk families from obsolete declarations and unimplemented table entries.
+The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md) maps a historical snapshot of 24 source roles to bounded S14–S17 recovery and verification groups; current statuses are in the live inventory. The [legacy dispatch handoff](../host-wow/legacy-dispatch-functional-handoff.md) separates original thunk families from obsolete declarations and unimplemented table entries.
 
 The private `wctlm32.h` declarations have since been classified with their unselected incomplete fragment; the selected original message owners and S14/S15 conversion, reentry and lifecycle obligations remain as documented in the [control-message review](excluded-control-message-owner-review.md).
 
@@ -127,6 +127,8 @@ The [suballocator private-header review](dos-suballocator-private-header-review.
 The [selected suballocator object fixture](suballoc-selected-object-review.md) runs normal controls and injected callback failures against the current cached worker object; the injected failure observations are not real guest or installed-image acceptance.
 
 The [DPMI XMEM selected-object fixture](dpmi-xmem-selected-review.md) checks controlled allocation, reallocation and free-failure branches with fake register/provider boundaries; actual XMS pool, guest movement and task lifecycle remain S11/S12 work.
+
+The [DPMI XMEM owner cleanup fixture](dpmi-xmem-owner-review.md) observes that one controlled provider failure stops cleanup after earlier blocks were freed; an explicit fixture retry clears the remaining owner block while a second owner stays separate. Real task teardown, retry and native memory are not covered.
 
 The [DEM default-drive selected-object fixture](dem-default-drive-selected-review.md) verifies original direct-service argument and failure branches with controlled callbacks. The traced active DOS default-drive path does not establish guest reachability of that service.
 

@@ -1,5 +1,7 @@
 # Remaining WOW32 host C/H: source roles and bounded recovery groups
 
+**Snapshot note:** The 24 pending paths below were the inventory at the time of this handoff. Later file-role decisions are in the live `inventory.csv` and shard ledgers; for example, the historical cursor cache, `wctlm32.h`, `witbl.h`, `wmmedia2.c`, and `wmmstru2.c` have since received physical-file dispositions. Their associated functional obligations below remain open. Do not interpret the historical count or row labels as the current pending count.
+
 This is a handoff for the 24 WOW32 pending paths in the observed host C/H
 inventory, not a change to their classification. It cross-references existing
 source/graph reviews. Any change to an original or selected provider must

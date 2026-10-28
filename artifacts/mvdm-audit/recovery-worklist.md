@@ -20,6 +20,8 @@ The [selected suballocator object witness](host-ch-scope/suballoc-selected-objec
 
 The [DPMI XMEM selected-object controls](host-ch-scope/dpmi-xmem-selected-review.md) exercise the DIV-272 BOOL reallocation branch and one failed-free retry with simulated providers. Actual XMS pool state, data movement, invalid handles and task retirement remain S11/S12 obligations.
 
+The [DPMI owner cleanup witness](host-ch-scope/dpmi-xmem-owner-review.md) shows the actual object's void cleanup stops after a simulated first free failure, after earlier blocks were freed. A separate explicit test retry clears the rest while preserving another owner's block; no production retry or guest failure is established. S11/S12 retain actual task-exit ownership and failure cleanup.
+
 The [DEM default-drive direct-service witness](host-ch-scope/dem-default-drive-selected-review.md) tests original case-sensitive drive validation and controlled host failure. The retained DOS default-drive source instead takes a separate active route; S12 must validate actual current-directory behavior without presenting this direct-service observation as a guest defect.
 
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
