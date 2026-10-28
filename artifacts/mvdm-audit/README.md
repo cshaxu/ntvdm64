@@ -25,10 +25,8 @@ The [control and directory review](parallel-controls-directory-role-review.md)
 records selected bindings and a bounded original label-read counterexample.
 The [USER client and SOUND review](parallel-user-sound-role-review.md) retains
 guest local-path, audio and lifecycle boundaries.
-The independent [accelerator](shard-1/wow-accelerator-review.md),
-[button](shard-1/wow-button-image-review.md) and
-[country/profile](shard-0/bin86-country-config-review.md) observations retain
-open execution and lifetime questions; they do not yet change the ledger.
+The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
+records three partial source roles and retains guest behavior and teardown boundaries.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

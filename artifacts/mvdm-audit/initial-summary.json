@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1413,
+    "pending": 1410,
     "excluded": 2652,
-    "partial": 566,
+    "partial": 569,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original USER client and SOUND roles are partial; actual guest behavior remains open."
+  "note": "Accelerator, button and language owners are partial; guest behavior and lifecycle remain open."
 }

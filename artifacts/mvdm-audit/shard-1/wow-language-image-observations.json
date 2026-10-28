@@ -1,0 +1,290 @@
+{
+  "result": "pass",
+  "relative_path": "wow32/wulang.c",
+  "sha256": "F6EEB696A1F2878E52586D9496924C5C8064C63F800F5A25E55F7848AA68D13C",
+  "wow_source_ids": "SRC:122a3251ab9d8000afe7;SRC:ad3433fb5622b389c9d7",
+  "edge": "build obj/wulang.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wulang.c",
+  "dependency": "obj/wulang.obj: #deps 126, deps mtime 8147760899252601 (VALID)",
+  "functions": [
+    {
+      "name": "_WU32AnsiLower@4",
+      "va": 268578336,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 56,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32AnsiLowerBuff@4",
+      "va": 268578400,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 69,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32AnsiNext@4",
+      "va": 268578480,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 49,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32AnsiPrev@4",
+      "va": 268578544,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 71,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WU32AnsiUpper@4",
+      "va": 268578624,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 56,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32AnsiUpperBuff@4",
+      "va": 268578688,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 69,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32IsCharAlpha@4",
+      "va": 268578768,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsCharAlphaNumeric@4",
+      "va": 268578800,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsCharLower@4",
+      "va": 268578832,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsCharUpper@4",
+      "va": 268578864,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32lstrcmp@4",
+      "va": 268578896,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 52,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WU32lstrcmpi@4",
+      "va": 268578960,
+      "function": true,
+      "owner": "wulang.obj",
+      "bytes": 52,
+      "relocation_words": 3
+    }
+  ],
+  "user_table_base": 311,
+  "entries": [
+    {
+      "ordinal": 430,
+      "target": "_WU32lstrcmp@4",
+      "va": 268578896
+    },
+    {
+      "ordinal": 431,
+      "target": "_WU32AnsiUpper@4",
+      "va": 268578624
+    },
+    {
+      "ordinal": 432,
+      "target": "_WU32AnsiLower@4",
+      "va": 268578336
+    },
+    {
+      "ordinal": 433,
+      "target": "_WU32IsCharAlpha@4",
+      "va": 268578768
+    },
+    {
+      "ordinal": 434,
+      "target": "_WU32IsCharAlphaNumeric@4",
+      "va": 268578800
+    },
+    {
+      "ordinal": 435,
+      "target": "_WU32IsCharUpper@4",
+      "va": 268578864
+    },
+    {
+      "ordinal": 436,
+      "target": "_WU32IsCharLower@4",
+      "va": 268578832
+    },
+    {
+      "ordinal": 437,
+      "target": "_WU32AnsiUpperBuff@4",
+      "va": 268578688
+    },
+    {
+      "ordinal": 438,
+      "target": "_WU32AnsiLowerBuff@4",
+      "va": 268578400
+    },
+    {
+      "ordinal": 471,
+      "target": "_WU32lstrcmpi@4",
+      "va": 268578960
+    },
+    {
+      "ordinal": 472,
+      "target": "_WU32AnsiNext@4",
+      "va": 268578480
+    },
+    {
+      "ordinal": 473,
+      "target": "_WU32AnsiPrev@4",
+      "va": 268578544
+    }
+  ],
+  "imports": [
+    {
+      "caller": "_WU32AnsiLower@4",
+      "target": "__imp__CharLowerA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269023956
+    },
+    {
+      "caller": "_WU32AnsiLowerBuff@4",
+      "target": "__imp__CharLowerBuffA@8",
+      "owner": "user32:USER32.dll",
+      "va": 269023952
+    },
+    {
+      "caller": "_WU32AnsiNext@4",
+      "target": "__imp__CharNextA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269024292
+    },
+    {
+      "caller": "_WU32AnsiPrev@4",
+      "target": "__imp__CharPrevA@8",
+      "owner": "user32:USER32.dll",
+      "va": 269023948
+    },
+    {
+      "caller": "_WU32AnsiUpper@4",
+      "target": "__imp__CharUpperA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269024028
+    },
+    {
+      "caller": "_WU32AnsiUpperBuff@4",
+      "target": "__imp__CharUpperBuffA@8",
+      "owner": "user32:USER32.dll",
+      "va": 269024228
+    },
+    {
+      "caller": "_WU32IsCharAlpha@4",
+      "target": "__imp__IsCharAlphaA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269023944
+    },
+    {
+      "caller": "_WU32IsCharAlphaNumeric@4",
+      "target": "__imp__IsCharAlphaNumericA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269023940
+    },
+    {
+      "caller": "_WU32IsCharLower@4",
+      "target": "__imp__IsCharLowerA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269023932
+    },
+    {
+      "caller": "_WU32IsCharUpper@4",
+      "target": "__imp__IsCharUpperA@4",
+      "owner": "user32:USER32.dll",
+      "va": 269023936
+    },
+    {
+      "caller": "_WU32lstrcmp@4",
+      "target": "__imp__lstrcmpA@8",
+      "owner": "kernel32:KERNEL32.dll",
+      "va": 269022860
+    },
+    {
+      "caller": "_WU32lstrcmpi@4",
+      "target": "__imp__lstrcmpiA@8",
+      "owner": "kernel32:KERNEL32.dll",
+      "va": 269022116
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wulang.c",
+      "sha256": "F6EEB696A1F2878E52586D9496924C5C8064C63F800F5A25E55F7848AA68D13C"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wulang.c",
+      "sha256": "F6EEB696A1F2878E52586D9496924C5C8064C63F800F5A25E55F7848AA68D13C"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wulang.c",
+      "sha256": "F6EEB696A1F2878E52586D9496924C5C8064C63F800F5A25E55F7848AA68D13C"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wulang.obj",
+      "sha256": "1463A3AB079B0717718245C4D2435EE177E787EF9B87E156E0D9DD96D1AC9372"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    }
+  ],
+  "scope": "Initial original USER table, selected code and native imports; no runtime locale or guest behavior claim"
+}

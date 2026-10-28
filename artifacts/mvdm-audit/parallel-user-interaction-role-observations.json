@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "c63492da9",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-accelerator-observations.json",
+      "sha256": "E059205DCF20CDB026836D873485FC23145A9C6DCA635CE1D1CD4867254C083F"
+    },
+    {
+      "path": "shard-1/wow-button-image-observations.json",
+      "sha256": "F76509212456F875A2F19AAFD77FF8BB635432F3834413AA12C11ED48658BA24"
+    },
+    {
+      "path": "shard-1/wow-language-image-observations.json",
+      "sha256": "F91526C591A5CB4236B640509D2D830AFBF09A010680DCEE63CE16FAA4D9652F"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source and selected image edges only; no guest behavior acceptance"
+}
