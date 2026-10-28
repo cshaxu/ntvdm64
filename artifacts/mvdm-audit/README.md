@@ -118,6 +118,12 @@ Reviews of [country messages](nine-way/part-2/dos-country-semantic-reconciliatio
 [local memory](cross-369/local-memory-header-disposition.md),
 [cursor aliases](cross-369/cursor-alias-header-disposition.md) and
 [sound](cross-369/sound-header-disposition.md) retain their distinct owners.
+The [MMTASK search context](nine-way/part-7/mmtask-search-context-review.md)
+records other installed copies and session-dependent paths; the
+[compound MMIO](nine-way/part-7/mmio-compound-review.md),
+[NTIO input](nine-way/part-5/ntio-input-semantic-reconciliation.md) and
+[EMS/INT 2F](nine-way/part-5/ntio-ems-int2f-semantic-reconciliation.md)
+reviews keep separate configuration and runtime boundaries.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
