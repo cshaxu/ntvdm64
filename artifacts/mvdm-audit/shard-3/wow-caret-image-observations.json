@@ -1,0 +1,215 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wucaret.c",
+      "sha256": "E31545F6DDAAD250517B0566287FB6B99C6F5CE3DA2517D55A25536A046AC4D8",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucaret.c",
+      "wow_source_ids": "SRC:0b7906a2b39d07fb3745;SRC:7db7c9ac4fc5230aef5d"
+    },
+    {
+      "relative_path": "wow32/wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutbl2.h",
+      "wow_source_ids": "SRC:046d06bd57449f6cdf0b;SRC:b3ff00ba2ad41252509d"
+    }
+  ],
+  "functions": [
+    {
+      "name": "_WU32CreateCaret@4",
+      "va": 268558560,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 52,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32DestroyCaret@4",
+      "va": 268558624,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 10,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetCaretBlinkTime@4",
+      "va": 268558640,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 9,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetCaretPos@4",
+      "va": 268558656,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 39,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32HideCaret@4",
+      "va": 268558704,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32SetCaretBlinkTime@4",
+      "va": 268558736,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 20,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32SetCaretPos@4",
+      "va": 268558768,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 24,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32ShowCaret@4",
+      "va": 268558800,
+      "function": true,
+      "owner": "wucaret.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    }
+  ],
+  "user_slots": [
+    {
+      "user_ordinal": 163,
+      "table_index": 474,
+      "symbol": "_WU32CreateCaret@4",
+      "va": 268558560
+    },
+    {
+      "user_ordinal": 164,
+      "table_index": 475,
+      "symbol": "_WU32DestroyCaret@4",
+      "va": 268558624
+    },
+    {
+      "user_ordinal": 165,
+      "table_index": 476,
+      "symbol": "_WU32SetCaretPos@4",
+      "va": 268558768
+    },
+    {
+      "user_ordinal": 166,
+      "table_index": 477,
+      "symbol": "_WU32HideCaret@4",
+      "va": 268558704
+    },
+    {
+      "user_ordinal": 167,
+      "table_index": 478,
+      "symbol": "_WU32ShowCaret@4",
+      "va": 268558800
+    },
+    {
+      "user_ordinal": 168,
+      "table_index": 479,
+      "symbol": "_WU32SetCaretBlinkTime@4",
+      "va": 268558736
+    },
+    {
+      "user_ordinal": 169,
+      "table_index": 480,
+      "symbol": "_WU32GetCaretBlinkTime@4",
+      "va": 268558640
+    },
+    {
+      "user_ordinal": 183,
+      "table_index": 494,
+      "symbol": "_WU32GetCaretPos@4",
+      "va": 268558656
+    }
+  ],
+  "native_calls": [
+    {
+      "caller": "_WU32CreateCaret@4",
+      "target": "_wow_native_CreateCaret@16",
+      "target_owner": "wow_user_task_lifecycle.obj"
+    },
+    {
+      "caller": "_WU32DestroyCaret@4",
+      "target": "_wow_native_DestroyCaret@0",
+      "target_owner": "wow_user_task_lifecycle.obj"
+    },
+    {
+      "caller": "_WU32SetCaretPos@4",
+      "target": "_wow_native_SetCaretPos@8",
+      "target_owner": "wow_user_task_lifecycle.obj"
+    },
+    {
+      "caller": "_WU32HideCaret@4",
+      "target": "_wow_native_HideCaret@4",
+      "target_owner": "wow_user_task_lifecycle.obj"
+    },
+    {
+      "caller": "_WU32ShowCaret@4",
+      "target": "_wow_native_ShowCaret@4",
+      "target_owner": "wow_user_task_lifecycle.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\package-uuid\\package-c\\system32\\WOW32.DLL",
+      "sha256": "C3188EA4A9A1B59EAA77BD9CFB61DA6F00C25466BCB7E5795E604DBB89D2DF83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wucaret.obj",
+      "sha256": "7E7898DBF450E06BBAFDB32E288965E65E90CEE57A6B8B8D9A0026977B42AC35"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wucaret.c",
+      "sha256": "E31545F6DDAAD250517B0566287FB6B99C6F5CE3DA2517D55A25536A046AC4D8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucaret.c",
+      "sha256": "E31545F6DDAAD250517B0566287FB6B99C6F5CE3DA2517D55A25536A046AC4D8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wucaret.c",
+      "sha256": "E31545F6DDAAD250517B0566287FB6B99C6F5CE3DA2517D55A25536A046AC4D8"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    }
+  ],
+  "scope": "Initial caret dispatch and selected adapter calls; historic identical code section is not current-run guest execution"
+}

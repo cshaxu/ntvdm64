@@ -1,0 +1,138 @@
+{
+  "result": "pass",
+  "relative_path": "wow32/wmsgsbm.c",
+  "sha256": "CF1EA646693339E8C2B03875DAD6C7B4A92576FC80F330407E60231E2689B18E",
+  "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgsbm.c",
+  "dos_catalog_rows": 1,
+  "wow_catalog_rows": 2,
+  "wow_source_ids": "SRC:3c575c6d456538838f5e;SRC:40152e07f34997e50fe4",
+  "compile_edge": "build obj/wmsgsbm.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmsgsbm.c",
+  "dependency_header": "obj/wmsgsbm.obj: #deps 126, deps mtime 8147760847866536 (VALID)",
+  "functions": [
+    {
+      "name": "_ThunkSBMMsg16@4",
+      "va": 268490224,
+      "function": true,
+      "owner": "wmsgsbm.obj",
+      "bytes": 119,
+      "relocation_words": 0
+    },
+    {
+      "name": "_UnThunkSBMMsg16@4",
+      "va": 268490352,
+      "function": true,
+      "owner": "wmsgsbm.obj",
+      "bytes": 44,
+      "relocation_words": 0
+    },
+    {
+      "name": "_WM32SBMControl@4",
+      "va": 268462352,
+      "function": true,
+      "owner": "wcntl32.obj",
+      "bytes": 31,
+      "relocation_words": 0
+    },
+    {
+      "name": "_WM32SBMGetRange@4",
+      "va": 268462384,
+      "function": true,
+      "owner": "wcntl32.obj",
+      "bytes": 60,
+      "relocation_words": 0
+    },
+    {
+      "name": "_WM32SBMSetRange@4",
+      "va": 268462448,
+      "function": true,
+      "owner": "wcntl32.obj",
+      "bytes": 59,
+      "relocation_words": 0
+    }
+  ],
+  "table_entries": [
+    {
+      "table": "_apfnThunkMsg16",
+      "index": 7,
+      "target": "_ThunkSBMMsg16@4",
+      "image_pointer": 268490224
+    },
+    {
+      "table": "_apfnUnThunkMsg16",
+      "index": 7,
+      "target": "_UnThunkSBMMsg16@4",
+      "image_pointer": 268490352
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 224,
+      "target": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 225,
+      "target": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 226,
+      "target": "_WM32SBMSetRange@4",
+      "image_pointer": 268462448
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 227,
+      "target": "_WM32SBMGetRange@4",
+      "image_pointer": 268462384
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 228,
+      "target": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "table": "_aw32Msg",
+      "index": 230,
+      "target": "_WM32SBMSetRange@4",
+      "image_pointer": 268462448
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsgsbm.obj",
+      "sha256": "A2822AA7E4B905D48AD4611DEAE93CD455E6A3CBEB93E0F30589E5B3AFE5D6C6"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmsg16.obj",
+      "sha256": "BDAEB0962672D55A7B26E17730BF53380B43613C0442F1AEAAAC1CE372584FB2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmtbl32.obj",
+      "sha256": "EA94E922413CA073FE609F693698C28655905B6D8FFE0A34D7DDE834471D87DB"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcntl32.obj",
+      "sha256": "EA023F1A9D66D8FC51721B015836BD756EDC4C85ED5DEA05DE151F22D2668DE8"
+    }
+  ],
+  "scope": "Initial bidirectional scrollbar message bindings; not guest message execution or lifecycle proof"
+}

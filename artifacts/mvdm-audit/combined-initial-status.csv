@@ -73,7 +73,7 @@ dos/dem/dem.h,0,partial,shard-0/review.csv
 dos/dem/demdasd.c,2,partial,shard-2/file-audit.csv
 dos/dem/demdasd.h,0,partial,shard-0/review.csv
 dos/dem/demdata.c,3,partial,shard-3/file-review.csv
-dos/dem/demdir.c,1,pending,shard-1/file-audit.csv
+dos/dem/demdir.c,1,partial,shard-1/file-audit.csv
 dos/dem/demdisp.c,2,partial,shard-2/file-audit.csv
 dos/dem/demerror.c,3,partial,shard-3/file-review.csv
 dos/dem/demfcb.c,0,partial,shard-0/review.csv
@@ -81,7 +81,7 @@ dos/dem/demfile.c,2,partial,shard-2/file-audit.csv
 dos/dem/demgset.c,1,partial,shard-1/file-audit.csv
 dos/dem/demhndl.c,3,partial,shard-3/file-review.csv
 dos/dem/demioctl.c,2,partial,shard-2/file-audit.csv
-dos/dem/demlabel.c,1,pending,shard-1/file-audit.csv
+dos/dem/demlabel.c,1,partial,shard-1/file-audit.csv
 dos/dem/demlock.c,2,partial,shard-2/file-audit.csv
 dos/dem/demmisc.c,1,partial,shard-1/file-audit.csv
 dos/dem/demmsg.c,1,pending,shard-1/file-audit.csv
@@ -4572,7 +4572,7 @@ wow32/wmsgem.c,2,partial,shard-2/file-audit.csv
 wow32/wmsgem.h,1,pending,shard-1/file-audit.csv
 wow32/wmsglb.c,3,partial,shard-3/file-review.csv
 wow32/wmsglb.h,3,pending,shard-3/file-review.csv
-wow32/wmsgsbm.c,2,pending,shard-2/file-audit.csv
+wow32/wmsgsbm.c,2,partial,shard-2/file-audit.csv
 wow32/wmsgsbm.h,0,pending,shard-0/review.csv
 wow32/wmtbl32.c,0,pending,shard-0/review.csv
 wow32/wmtbl32.h,2,pending,shard-2/file-audit.csv
@@ -4623,7 +4623,7 @@ wow32/wthman.h,0,pending,shard-0/review.csv
 wow32/wthtbl.h,2,pending,shard-2/file-audit.csv
 wow32/wthtbl2.h,3,pending,shard-3/file-review.csv
 wow32/wuansi.h,0,pending,shard-0/review.csv
-wow32/wucaret.c,3,pending,shard-3/file-review.csv
+wow32/wucaret.c,3,partial,shard-3/file-review.csv
 wow32/wucaret.h,0,pending,shard-0/review.csv
 wow32/wuclass.c,3,partial,shard-3/file-review.csv
 wow32/wuclass.h,0,pending,shard-0/review.csv
@@ -4652,7 +4652,7 @@ wow32/wuser31.h,2,pending,shard-2/file-audit.csv
 wow32/wusercli.c,3,pending,shard-3/file-review.csv
 wow32/wusercli.h,3,pending,shard-3/file-review.csv
 wow32/wutbl.h,3,pending,shard-3/file-review.csv
-wow32/wutbl2.h,3,pending,shard-3/file-review.csv
+wow32/wutbl2.h,3,partial,shard-3/file-review.csv
 wow32/wutext.c,1,partial,shard-1/file-audit.csv
 wow32/wutext.h,0,pending,shard-0/review.csv
 wow32/wutmr.c,3,partial,shard-3/file-review.csv

@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1422,
+    "pending": 1417,
     "excluded": 2652,
-    "partial": 557,
+    "partial": 562,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Original WOW heap and C-VID accessor roles are partial; behavior and lifecycle remain open."
+  "note": "Original scrollbar, caret and DOS directory owners are partial; behavior and lifecycle remain open."
 }

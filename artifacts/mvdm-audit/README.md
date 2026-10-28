@@ -21,6 +21,8 @@ The [resource and redirector review](parallel-resource-redir-role-review.md)
 binds seven further owners; guest and external-provider lifetimes remain open.
 The [heap and video-accessor review](parallel-heap-video-role-review.md)
 retains bounded heap evidence and unresolved concurrency/lifetime obligations.
+The [control and directory review](parallel-controls-directory-role-review.md)
+records selected bindings and a bounded original label-read counterexample.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

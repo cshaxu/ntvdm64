@@ -1,0 +1,33 @@
+{
+  "result": "pass",
+  "exit_code": 0,
+  "output": "PASS bounded label: selected object read exactly one byte beyond NUL into guarded page, before volume call",
+  "commands": [
+    "mingw32 objcopy --remove-section=.drectve selected/demlabel.obj isolated/demlabel.obj",
+    "mingw32 gcc -O2 -o dem-label-guard.exe dem-label-guard-probe.c isolated/demlabel.obj",
+    "isolated/dem-label-guard.exe"
+  ],
+  "inputs": [
+    {
+      "path": "artifacts/mvdm-audit/shard-1/dem-label-guard-probe.c",
+      "sha256": "964537EE0181D4DA5CAEE683E9CD94F9FCC9A14FE6EA47680742BF77F074C8A2"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/dem/demlabel.obj",
+      "sha256": "C6405450FFB6674BF4E91C1BE6B3AC02809B22E84E91A034873E61557E09D1C6"
+    },
+    {
+      "path": "build/t473-s10/shard1-dem-guard-r1/demlabel.obj",
+      "sha256": "83B64EEEB852D0398AA0BD0A7F2E71D429E1E7D5FA73F99FF706EE05E043C774"
+    },
+    {
+      "path": "build/t473-s10/shard1-dem-guard-r1/dem-label-guard.exe",
+      "sha256": "66652C61F89F14C4D648ECC5F96772A6E55E2BC51E93483A609194F36CDD5EB1"
+    },
+    {
+      "path": "assets/release/ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    }
+  ],
+  "scope": "Exact read access violation on guard page before host volume API; not guest reachability or real media behavior"
+}

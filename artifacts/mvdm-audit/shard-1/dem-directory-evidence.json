@@ -1,0 +1,270 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "dos/dem/demdir.c",
+      "sha256": "7013B557F8D89527E719484C032BCB3BEFE8BF6F79CBD7C97EAE49C737E1B9AC",
+      "wow_source_ids": "SRC:fbdf8396ca3508cd9025;SRC:fe52986cc2f95cec0540"
+    },
+    {
+      "relative_path": "dos/dem/demlabel.c",
+      "sha256": "F77E781014AD34F6686FC3A94019BD82C995D7830EBD29F91DC358272ED30F22",
+      "wow_source_ids": "SRC:093bb2338436451c5f45;SRC:b3fba2344b393a83a259"
+    },
+    {
+      "relative_path": "dos/dem/demmsg.c",
+      "sha256": "1414099A0A5AD421440F101BBC6C669285141AB53BD9403B9EAD4A6E4D9DB2C8",
+      "wow_source_ids": "SRC:52400638750a35efe1d1;SRC:a453552bae93effef281"
+    }
+  ],
+  "bound_functions": [
+    {
+      "name": "_demCreateDir",
+      "va": 5560256,
+      "function": true,
+      "owner": "original-mvdm-dem:demdir.obj",
+      "bytes": 95,
+      "relocation_words": 8
+    },
+    {
+      "name": "_demDeleteDir",
+      "va": 5560352,
+      "function": true,
+      "owner": "original-mvdm-dem:demdir.obj",
+      "bytes": 73,
+      "relocation_words": 6
+    },
+    {
+      "name": "_demQueryCurrentDir",
+      "va": 5560432,
+      "function": true,
+      "owner": "original-mvdm-dem:demdir.obj",
+      "bytes": 192,
+      "relocation_words": 9
+    },
+    {
+      "name": "_demSetCurrentDir",
+      "va": 5560624,
+      "function": true,
+      "owner": "original-mvdm-dem:demdir.obj",
+      "bytes": 130,
+      "relocation_words": 9
+    },
+    {
+      "name": "_demCreateLabel",
+      "va": 5569344,
+      "function": true,
+      "owner": "original-mvdm-dem:demlabel.obj",
+      "bytes": 193,
+      "relocation_words": 8
+    },
+    {
+      "name": "_demDeleteLabel",
+      "va": 5569552,
+      "function": true,
+      "owner": "original-mvdm-dem:demlabel.obj",
+      "bytes": 70,
+      "relocation_words": 5
+    },
+    {
+      "name": "_demCreateCommon",
+      "va": 5555328,
+      "function": true,
+      "owner": "original-mvdm-dem:demfile.obj",
+      "bytes": 821,
+      "relocation_words": 45
+    },
+    {
+      "name": "_demFCBCommon",
+      "va": 5558400,
+      "function": true,
+      "owner": "original-mvdm-dem:demfcb.obj",
+      "bytes": 389,
+      "relocation_words": 20
+    },
+    {
+      "name": "_demDeleteFCB",
+      "va": 5557600,
+      "function": true,
+      "owner": "original-mvdm-dem:demfcb.obj",
+      "bytes": 796,
+      "relocation_words": 27
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_demCreateDir",
+      "target": "_CreateDirectoryOem@8",
+      "target_owner": "original-mvdm-host-oemuni:file.obj",
+      "va": 5617408,
+      "kind": 20
+    },
+    {
+      "caller": "_demDeleteDir",
+      "target": "_RemoveDirectoryOem@4",
+      "target_owner": "original-mvdm-host-oemuni:file.obj",
+      "va": 5620784,
+      "kind": 20
+    },
+    {
+      "caller": "_demSetCurrentDir",
+      "target": "_SetCurrentDirectoryOem@4",
+      "target_owner": "original-mvdm-host-oemuni:file.obj",
+      "va": 5621008,
+      "kind": 20
+    },
+    {
+      "caller": "_demSetCurrentDir",
+      "target": "_SetEnvironmentVariableOem@8",
+      "target_owner": "original-mvdm-host-oemuni:process.obj",
+      "va": 5617008,
+      "kind": 20
+    },
+    {
+      "caller": "_demCreateLabel",
+      "target": "__imp__OemToCharA@8",
+      "target_owner": "user32:USER32.dll",
+      "va": 5813392,
+      "kind": 6
+    },
+    {
+      "caller": "_demCreateLabel",
+      "target": "__imp__SetVolumeLabelA@8",
+      "target_owner": "kernel32:KERNEL32.dll",
+      "va": 5812924,
+      "kind": 6
+    },
+    {
+      "caller": "_demDeleteLabel",
+      "target": "__imp__SetVolumeLabelA@8",
+      "target_owner": "kernel32:KERNEL32.dll",
+      "va": 5812924,
+      "kind": 6
+    },
+    {
+      "caller": "_demCreateCommon",
+      "target": "_demCreateLabel",
+      "target_owner": "original-mvdm-dem:demlabel.obj",
+      "va": 5569344,
+      "kind": 20
+    },
+    {
+      "caller": "_demFCBCommon",
+      "target": "_demCreateLabel",
+      "target_owner": "original-mvdm-dem:demlabel.obj",
+      "va": 5569344,
+      "kind": 20
+    },
+    {
+      "caller": "_demDeleteFCB",
+      "target": "_demDeleteLabel",
+      "target_owner": "original-mvdm-dem:demlabel.obj",
+      "va": 5569552,
+      "kind": 20
+    }
+  ],
+  "dispatch": [
+    {
+      "index": 3,
+      "target": "_demCreate",
+      "owner": "original-mvdm-dem:demfile.obj",
+      "va": 5555312
+    },
+    {
+      "index": 4,
+      "target": "_demCreateDir",
+      "owner": "original-mvdm-dem:demdir.obj",
+      "va": 5560256
+    },
+    {
+      "index": 6,
+      "target": "_demDeleteDir",
+      "owner": "original-mvdm-dem:demdir.obj",
+      "va": 5560352
+    },
+    {
+      "index": 7,
+      "target": "_demDeleteFCB",
+      "owner": "original-mvdm-dem:demfcb.obj",
+      "va": 5557600
+    },
+    {
+      "index": 19,
+      "target": "_demQueryCurrentDir",
+      "owner": "original-mvdm-dem:demdir.obj",
+      "va": 5560432
+    },
+    {
+      "index": 24,
+      "target": "_demSetCurrentDir",
+      "owner": "original-mvdm-dem:demdir.obj",
+      "va": 5560624
+    },
+    {
+      "index": 44,
+      "target": "_demCreateFCB",
+      "owner": "original-mvdm-dem:demfcb.obj",
+      "va": 5557472
+    }
+  ],
+  "dem_print_msg_defined": false,
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "33172BD6AB0729062761F3E51987F029998DE7AD92705A701882EF9B3DF79F72"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "src\\mvdm\\dos\\dem\\demdisp.c",
+      "sha256": "05C662B557A3B63D5CB8EA56402165368929B97227AD01F0090C54600F50D256"
+    },
+    {
+      "path": "src\\mvdm\\dos\\dem\\demfile.c",
+      "sha256": "FDA27BA0BB550DB4DFCB9AEEE025821AB9A865F6676216C8CD15A8FBB74C9D20"
+    },
+    {
+      "path": "src\\mvdm\\dos\\dem\\demfcb.c",
+      "sha256": "DC69282B091A5B2216F85B3F70F7D9D493FF6AA40A3ECFAA1E86EC1D4D354155"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demdir.obj",
+      "sha256": "C896938C307E25F03D083142D04407D0316515E5B90ECAA89EA7BAE6D88A9F11"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demlabel.obj",
+      "sha256": "C6405450FFB6674BF4E91C1BE6B3AC02809B22E84E91A034873E61557E09D1C6"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demmsg.obj",
+      "sha256": "870CCB698029573AB6737A31EE56D813A7B2FF80960F3D1A6D208F6E41CC1B2B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demdisp.obj",
+      "sha256": "E5A2CE79348585E04688EB5659F850F9E0ACC383F1DCF0D5D793000E9E7966A8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demfile.obj",
+      "sha256": "1B3E81593F2C061F6587C2B2835D6245460D41DB96CF4E7B0373677D5D61CA6D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demfcb.obj",
+      "sha256": "40550EA098C987667A0114709625B57D814AD25EB14E4286B5D644188ADC872D"
+    }
+  ],
+  "scope": "Selected image dispatch and source boundaries; no volume mutation or guest execution"
+}

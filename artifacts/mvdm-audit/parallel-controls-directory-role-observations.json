@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "9e1885d75",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-2/wow-scrollbar-image-observations.json",
+      "sha256": "0C80DE52E17A3FE2CA8D811CCAB2BC43AC184C27F1244FC9D0DD1D4F55411755"
+    },
+    {
+      "path": "shard-3/wow-caret-image-observations.json",
+      "sha256": "6C1C440896B9F7DFBAB0E4B676794D3B85A32C752292610C975FD1244628E6B5"
+    },
+    {
+      "path": "shard-1/dem-directory-evidence.json",
+      "sha256": "37D2063414EC243952FD03E4DF4000D67193C9489603773762900D801D65C341"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original image and dispatch edges; no full guest behavior acceptance"
+}
