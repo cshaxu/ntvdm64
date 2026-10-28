@@ -25,6 +25,12 @@ jmp start
 %macro ASSERT_STATE 0
     pushf
     pop word [actual_flags]
+%ifdef CPU_PROBE_VIDEO_INVALID_ONLY
+    cmp byte [phase],'E'
+    jne %%ordinary_flags
+    or word [expected_flags],1      ; EGA rejection explicitly sets carry
+%%ordinary_flags:
+%endif
     cmp ax,[expected_ax]
     jne failed
     shr eax,16
@@ -63,7 +69,52 @@ start:
     push cs
     pop es
     mov [guest_segment],ds
-%ifdef CPU_PROBE_DUMMY_INT_ONLY
+%ifdef CPU_PROBE_VIDEO_INVALID_ONLY
+    mov byte [phase],'V'
+    mov byte [round],0
+.video_round:
+    mov byte [video_ah],0x1d
+.video:
+    mov ah,[video_ah]
+    mov al,0x5a
+    mov [input_ax],ax
+    mov [expected_ax],ax
+%ifdef CPU_PROBE_NEGATIVE_ORACLE
+    mov word [expected_ax],0
+%endif
+    PREPARE
+    db 0xc4,0xc4,0x10
+    ASSERT_STATE
+    inc word [index]
+    inc byte [video_ah]
+    jnz .video
+    inc byte [round]
+    cmp byte [round],4
+    jb .video_round
+    mov byte [phase],'E'
+    mov byte [round],0
+.ega_round:
+    mov byte [video_ah],0x1d
+.ega:
+    cmp byte [video_ah],0x6f         ; valid Video7 extension, outside this test
+    je .next_ega
+    mov ah,[video_ah]
+    mov al,0x5a
+    mov [input_ax],ax
+    mov [expected_ax],ax
+    PREPARE
+    db 0xc4,0xc4,0x42
+    ASSERT_STATE
+.next_ega:
+    inc word [index]               ; keep all four flag patterns per AH
+    inc byte [video_ah]
+    jnz .ega
+    inc byte [round]
+    cmp byte [round],4
+    jb .ega_round
+    cmp word [asserted],1812
+    jne failed
+%elifdef CPU_PROBE_DUMMY_INT_ONLY
     mov byte [phase],'D'
     mov word [input_ax],0x7ecd
     mov word [expected_ax],0x7ecd
@@ -174,7 +225,12 @@ expected_flags dw 0
 actual_flags dw 0
 patterns dw 0x0202,0x02d7,0x0a02,0x0603
 invalid_ems db 0,0x3f,0x60,0xff
-%ifdef CPU_PROBE_DUMMY_INT_ONLY
+%ifdef CPU_PROBE_VIDEO_INVALID_ONLY
+round db 0
+video_ah db 0
+pass_message db 'VIDEO INVALID PASS cases=1812',13,10,'GENERIC908 EGA904',13,10,'$'
+fail_message db 'VIDEO INVALID FAIL phase=','$'
+%elifdef CPU_PROBE_DUMMY_INT_ONLY
 pass_message db 'DUMMY INT PASS cases=16',13,10,'$'
 fail_message db 'DUMMY INT FAIL phase=','$'
 %else

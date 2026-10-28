@@ -1,0 +1,4 @@
+{"result": "pass", "base": "1b506b719", "counts": {"pending": 1555, "excluded": 2635, "partial": 441, "full": 53}, "source_role_changes": 6, "unrelated_shard_rows_unchanged": true, "frozen_inventory_unchanged": true, "product_or_guest_changed_by_checkpoint": false, "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance"}
+Documentation governance verification passed.
+Documentation relative-link verification passed.
+PASS six video file-role changes, two-audit/edition identities, 21 code bodies, 67 initial pointers, both 1812-case guest witnesses/oracle negatives and unchanged 836-case control; no full video or release qualification

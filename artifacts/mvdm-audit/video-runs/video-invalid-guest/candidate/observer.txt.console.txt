@@ -1,0 +1,3 @@
+# buffer=120,9001 viewport=0,0,119,29
+[0] VIDEO INVALID PASS cases=1812
+[1] GENERIC908 EGA904

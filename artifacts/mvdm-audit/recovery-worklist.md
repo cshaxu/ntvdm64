@@ -41,6 +41,15 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
+The [video-entry checkpoint](video-native-role-review.md) leaves S11/S13
+valid BIOS/table dispatch and stream ownership; adapter reset/retirement;
+all original geometry, wrap/split/font/update/paint modes; VGA palette/pixel/
+scroll/display-information and state buffer/failure contracts. CPU40 uses
+original EVID instead of legacy a2cpu ga_glue; address units, direction,
+RAM/video source identity, faults and all generated operations remain at
+those partial owners. EGA_DUMP tracing still needs a diagnostic-profile and
+file/callback lifetime disposition. Invalid-entry passes prove none of these.
+
 The [disk-provider checkpoint](disk-native-role-review.md) leaves S12/S13
 the original BIOS/controller group: configured geometry and real read/write/
 verify/format, DMA/byte-word boundaries, command/result phases, interrupt and

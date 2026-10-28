@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "1b506b719",
+  "candidate_count": 6,
+  "source_tables": [
+    {
+      "path": "video-image-observations.json",
+      "sha256": "DA8B83E1858A9C59309D986A5E773C8A44C68A8B3582FFF0415274848B83CD65"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Five bounded integrations and one original CPU-interface file role; no full rendering or lifecycle acceptance"
+}

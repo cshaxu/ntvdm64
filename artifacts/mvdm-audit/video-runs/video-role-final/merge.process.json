@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T02:12:06.2740935Z",
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\video-native-role-merge.py\"",
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "diagnostic_budget_seconds": 180,
+  "pid": 22792
+}

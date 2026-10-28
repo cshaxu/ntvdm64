@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T02:11:04.0216142Z",
+  "pid": 24360,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-sign-flags-guest.ps1\" -Workload BiosDispatch -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\" -Observer \"O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe\" -LogonHelper \"O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-dispatch-control\\baseline-negative\" -NegativeOracle",
+  "diagnostic_budget_seconds": 180,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

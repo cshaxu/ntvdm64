@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1561,
-    "excluded": 2634,
-    "partial": 436,
+    "pending": 1555,
+    "excluded": 2635,
+    "partial": 441,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Seven original disk source integrations partial with bounded object/guest evidence; three guarded remote/diagnostic profiles remain pending. No production source, guest or runtime image changed."
+  "note": "Five original video integrations partial; legacy CPU/video glue excluded only as an alternative physical interface, with selected EVID behavior retained; diagnostic tracing remains pending. No production/guest image change."
 }

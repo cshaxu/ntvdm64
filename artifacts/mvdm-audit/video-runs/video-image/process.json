@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T02:09:57.4614294Z",
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "diagnostic_budget_seconds": 180,
+  "arguments": "-B -X utf8 \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\video-image-observer.py\"",
+  "pid": 27576
+}

@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-invalid-guest\\candidate-negative/pif-builder.exe",
+  "start": "2026-10-28T02:08:50.5120097Z",
+  "command": "\"O:\\tmp\\nc1e\\tests\" --close-on-exit",
+  "pid": 16864
+}

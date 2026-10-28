@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "start": "2026-10-28T02:11:00.6869792Z",
+  "pid": 24000,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-dispatch-control\\baseline/pif-builder.exe",
+  "command": "\"O:\\tmp\\na91\\tests\" --close-on-exit"
+}

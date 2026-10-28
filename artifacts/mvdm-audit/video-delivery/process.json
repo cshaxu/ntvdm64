@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 240,
+  "started": "2026-10-28T02:13:35.7582521Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\video-native-delivery-verification.ps1\"",
+  "pid": 6224
+}

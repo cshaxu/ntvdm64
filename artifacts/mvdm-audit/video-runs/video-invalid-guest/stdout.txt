@@ -1,0 +1,1 @@
+PASS four real guest disk reset/carry-oracle contracts

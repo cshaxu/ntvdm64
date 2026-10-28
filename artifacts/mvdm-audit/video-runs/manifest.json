@@ -1,0 +1,1127 @@
+[
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-image/completion.json",
+    "bytes": 66,
+    "sha256": "DB85555568A6BE7C2462890270EC2F02BC52A4EB4304BC8DB0F0B279B155E050"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-image/process.json",
+    "bytes": 268,
+    "sha256": "FD05924C02147800B3443F1E3578E31638F278C38482C40704DA84A2EBC10CB2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-image/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-image/stdout.txt",
+    "bytes": 71,
+    "sha256": "4F93CC04FEFAFE05A1EBBF7334A81A29D5CE6A015092D23621DF707FE37D2410"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/completion.json",
+    "bytes": 66,
+    "sha256": "234C68B60A14721732ECDA43180EE416F1C4EFF42F194AAFB0E056FB3D481A7A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/image.completion.json",
+    "bytes": 66,
+    "sha256": "FE8FD6EB6667D6C4EBF14477C9A3CD9DF9109AA6413B4BC5D2BAD609A82F28A6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/image.process.json",
+    "bytes": 268,
+    "sha256": "FED9B029C69059FA16076D5A12303E3D39D87CA300B74A9904A1B45278EC2F9D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/image.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/image.stdout.txt",
+    "bytes": 71,
+    "sha256": "4F93CC04FEFAFE05A1EBBF7334A81A29D5CE6A015092D23621DF707FE37D2410"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/merge.completion.json",
+    "bytes": 66,
+    "sha256": "FB65161F8DEAA6A8B5D814895ADC127BCCC1907234574B1A0314132FF8089FF4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/merge.process.json",
+    "bytes": 271,
+    "sha256": "F231DB91B37D3ACCAD294FD3B40AC7BEAC93F766BD61F0B45A24555F64822AF6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/merge.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/merge.stdout.txt",
+    "bytes": 383,
+    "sha256": "72622A9FD245AA42317DA40E89B48FCAB5D837BA9114EEC5C71D9F61757156A8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/process.json",
+    "bytes": 360,
+    "sha256": "05F0AEE9C885C265FFDFFD2955931F103003647756153C940F297DF2E10819DA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/run.ps1",
+    "bytes": 1133,
+    "sha256": "6B5630A488F8E70B14D9C867FF11D990641A10D5892AE20C26306693BC568F54"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-role-final/stdout.txt",
+    "bytes": 454,
+    "sha256": "A3731108EC73BEA73C8852E9A3FD564E63B6FADDF808DC584485A9DC57CFB663"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative.completion.json",
+    "bytes": 66,
+    "sha256": "59C6D3119E0886A25E2FDF83D6C6570789445C0394C3CC6B410C6ADEAA41B988"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative.process.json",
+    "bytes": 759,
+    "sha256": "DB64811AE78C5058D6592A8F54AAAE62CD3C979ED28A2C2AC363DFE9D5E3F8C4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline.completion.json",
+    "bytes": 66,
+    "sha256": "5C4BA54D69A56D8342DBD4B02CEB6D93533E2B66A964AAB98D6FDDDC5C79D7A9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline.process.json",
+    "bytes": 735,
+    "sha256": "49AA7E85E1C6BD2EC420076F71E335C919F71B757B13E4350D86E26231088A24"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative.completion.json",
+    "bytes": 66,
+    "sha256": "ECE989E426CFF2F9E132AE2D1AE0403A6A14B72B170C4F895EA9825B51B55773"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative.process.json",
+    "bytes": 777,
+    "sha256": "5F45BD6AFC9AAD84C8F0CDBB5B79B428D1F1377B0E6F5CF5C7EB14A4C43F88B4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate.completion.json",
+    "bytes": 66,
+    "sha256": "4BD6ACE5C380FF0A1D46BB3E989177EA9A822675C8B03B42C1E26E0955B346ED"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate.process.json",
+    "bytes": 752,
+    "sha256": "F07BAD0799E4F7EA22AE16A7B7240DD09FBEAF7C9398472A70586C528D9FA6F4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/completion.json",
+    "bytes": 66,
+    "sha256": "63491C9B9B1CC2448EAA77CD81949A2238629B7F182BBD6FB75EF35459A65CE1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/process.json",
+    "bytes": 363,
+    "sha256": "426D90D31714EF50228834FF1C647B628F69E447457A2544407E1116475AEC40"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/run.ps1",
+    "bytes": 1687,
+    "sha256": "FA922A7BF6F4C3AC0A00FAAE527ECB5C63F7D74A123185B952BCD0E042BFC5B0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/stdout.txt",
+    "bytes": 56,
+    "sha256": "AF32361FD7316E1287DE995899072DE6B1DA4FC521ADEE17847FD33F91E9F2D4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/assemble.process.json",
+    "bytes": 489,
+    "sha256": "768DB88A976210E57BD81067A3F29F26676F3C91D7524890C38260D1102D21DE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/inputs.csv",
+    "bytes": 1007,
+    "sha256": "F82C7471B45CB2E53B9E51791E747D0E3025D3E709E08D044D1DCAA3AA6C3FF8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.process.json",
+    "bytes": 377,
+    "sha256": "69276A33BDCC9B149977B5552ECFA430F687A91837E58D7EA802E3CD0D17B1C6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.txt",
+    "bytes": 703,
+    "sha256": "5ECCFB5429BE78C77DDCD78E858770EAF5694E64036CEFCD0A988E4E9E21AB89"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "5113A8E3084AB50D1EF38F139DEEDE15FC01704517A9FEC06E39D28C4CE84E62"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.txt.console.txt",
+    "bytes": 97,
+    "sha256": "F8E5625FB96038A983C0B5FAEFEE92A93F2F4EF42CEB2B92D9C06DD2A5A4F005"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/observer.txt.initial-console.txt",
+    "bytes": 221,
+    "sha256": "1F91282EB1AF34AB92B1600387E71A1250E84DF362D2A6CA7B569DE14AB717EC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-build.process.json",
+    "bytes": 605,
+    "sha256": "68195E2734C6C052C4218467E623728311BCA7D8576F59E49C0256C3C925BE85"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-profile.process.json",
+    "bytes": 253,
+    "sha256": "110A40487CDDC0AB708C6A4BE5FD54C198CBAFAF9F9E93D02EDC32CA8AB6BFA8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "1624807553A6C3F2ACB355946566461AD75D2FBB62A6E2994B62EF22C8E8159B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/result.txt",
+    "bytes": 114,
+    "sha256": "201303E091BFF429A4B7FCA9038F64BAC248AFEEA89EF23A931B733A5E1FDB82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/runner-context.json",
+    "bytes": 334,
+    "sha256": "C49AFE168E4C76C0CF49697379AB3E6A2212C1F4735802E4CEB8D8895C2211B0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "8BB1EB9E503878419FBE33F838225AAE3BF2AA63E4FD63FCC022318508985F01"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/token-context.process.json",
+    "bytes": 170,
+    "sha256": "DF5B20B289B60366D780A19AAA1F78DCE7A7B4730A176ADD0012F79F50040369"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/assemble.process.json",
+    "bytes": 528,
+    "sha256": "E77B49899F56E94628BDC60E17FB96EA441287EE95096A59F66BF69D57238083"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/inputs.csv",
+    "bytes": 1016,
+    "sha256": "024861644CBB8270D187AE422A845F8050DC66BF4E8424C8DA210D334B6CDFAB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.process.json",
+    "bytes": 385,
+    "sha256": "A6BB19F058B67D067CC1BB9382FE8C12926D2BB9CB8E37C671308FA808A17E2B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.txt",
+    "bytes": 705,
+    "sha256": "3DA474A0BF94ED51E2B10E970CF9C0E564E5833CB46CBFD1BD18B492EA1B7E16"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "5D35A0F9C325329B85E2B5582E53BC32B7B3A8F65BFFB813AE625D5A9CB9CDF1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.txt.console.txt",
+    "bytes": 71,
+    "sha256": "B9503FA17101C2F37C389FA8CD91A25DC4310E085A25B17EBD079090C6C634E9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/observer.txt.initial-console.txt",
+    "bytes": 223,
+    "sha256": "1AB610A88761EAF40720251D53F9E14FED358E0287202D584ABE319EBF2B740C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-build.process.json",
+    "bytes": 624,
+    "sha256": "5EEA98461B0542CB15C39C1923F5C4D95A2264114138B0FAC504BAF5C03D6F56"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-profile.process.json",
+    "bytes": 262,
+    "sha256": "73E6868B50B36A0594B52F5CBE9A3481317022F708A01DE33324B7E993DC2242"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "DFB4AC6294E80020805CD8740491820E50021153F0BC40E1E74451980D12625C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/result.txt",
+    "bytes": 92,
+    "sha256": "A7A4E8F913B65E0BFDF651F3AA88DF00B81036EBCB9A5EC95EF840F26C6BBA9E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/runner-context.json",
+    "bytes": 333,
+    "sha256": "F9CAA74722DA8CBAAFC12B0147DAC9CA1CEF07F0FD9B609B31679862809A4A85"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "EE25BAF6571743D0A899B69FA63D13BC660FC6F16FC3DB31322B3D407102A32D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "69DF8EBE5759570A91635869A06D440769940DCDE2A492943B8F726E96FF44A7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/baseline-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/assemble.process.json",
+    "bytes": 490,
+    "sha256": "FB0D1DEC0549A4F31FEB9C31F122D22FCF387AC0CF75A3F0DD27F5864F70B802"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/inputs.csv",
+    "bytes": 1008,
+    "sha256": "52EAABDD9549EE652C5C34D7EABDC15A94A619F2143097F6090073F94088A6B9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.process.json",
+    "bytes": 378,
+    "sha256": "4B297D8FA57D03158445EC252B53202E549F5CF5CC15D098A91192F0C0E8FCAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.txt",
+    "bytes": 705,
+    "sha256": "5E1925524A8B9B867D15BD0EE0DAC85F07D17348FFA3F1023A96FADA9EDBC740"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "9FA666010D57C70196B77BD8371A9A8E4ED8334B5905003FC4BD62153A0CE814"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.txt.console.txt",
+    "bytes": 97,
+    "sha256": "F8E5625FB96038A983C0B5FAEFEE92A93F2F4EF42CEB2B92D9C06DD2A5A4F005"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/observer.txt.initial-console.txt",
+    "bytes": 223,
+    "sha256": "542273A7969A13CCD86769E5CD6C30F5AE9E83A38F7243C8507E6F7B2276F104"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-build.process.json",
+    "bytes": 608,
+    "sha256": "EE8E85356719D8B3475F547DAC7651ACF893EA4801EFFA048C7D131C3A5F807A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-profile.process.json",
+    "bytes": 253,
+    "sha256": "5E3B25359790CB688B3F631517AF332533C2C568282299BE9B4145469342452E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "15E1C93483C830018CCAAA83ED73D1700E28346F359C561C117A92704D0297DA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/result.txt",
+    "bytes": 114,
+    "sha256": "201303E091BFF429A4B7FCA9038F64BAC248AFEEA89EF23A931B733A5E1FDB82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/runner-context.json",
+    "bytes": 334,
+    "sha256": "A0880BD80E12A14C4B99151160533D616E1A29C9083F8971A964FDEFA46E7F57"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "6A8335E446848AFDFE3A37F45DD624DD9F50F27EF1BBFBDB79FD1B6AE964F5BD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/token-context.process.json",
+    "bytes": 171,
+    "sha256": "1464C5D1141979E69D8BF53C09100FFF4F449E45949B47605DD114E033EEA0E1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/assemble.process.json",
+    "bytes": 529,
+    "sha256": "1FB6472396242A3DD4C13AF0C3E112CA21A1B04C7A52231C27CE36F13E3E69F5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/inputs.csv",
+    "bytes": 1017,
+    "sha256": "BB02B2D5B6E88FA81040C9BEDCF5A6AB847C920C4980D505BE0F7A0EAD1CF32B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.process.json",
+    "bytes": 387,
+    "sha256": "0E801B56C86227F0D770A550CF69361D307DBF21D0AA1064F10C2B5806CFB086"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.txt",
+    "bytes": 704,
+    "sha256": "3DED0CBF540C6B2CEC99DD472D544C526EDA531D425E5F5AA0C89CBACC7B13D7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "043A330BE67FB27BA4AD4DA44E60F31C8E3BEDC17ACE2D077271FC83C217A87E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.txt.console.txt",
+    "bytes": 71,
+    "sha256": "B9503FA17101C2F37C389FA8CD91A25DC4310E085A25B17EBD079090C6C634E9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/observer.txt.initial-console.txt",
+    "bytes": 223,
+    "sha256": "777D631A133511DCFE7A603BF6C1461A7CE9AC7027E7015EF2AAB710317D9970"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-build.process.json",
+    "bytes": 625,
+    "sha256": "9860187C6C9E0EACE1FCE50F66CB827942B47472198220A4D1BA94A4ACB2E2DF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-profile.process.json",
+    "bytes": 263,
+    "sha256": "128777EA8B2769764CC872416ADD8646CAD03E3200382181E7286ACAAE408AD6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "FAE4C27F830E324475E853F6BD40DE6AC4B0112E349EF09018D7FCC2D6E43BEC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/result.txt",
+    "bytes": 92,
+    "sha256": "A7A4E8F913B65E0BFDF651F3AA88DF00B81036EBCB9A5EC95EF840F26C6BBA9E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "3DAF1598934F3C6A8F5742D00CC916F20A6F6CF713302E817D1BD1012C5648CB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "7113C865333D666C8BF36EC06380C471BBC8176CDB964EE318A7A7AAFE23287D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "F78D9254533CB2C9C8F3A61E2399512C037F858717D1C7A00F19E4EAE9F8E70D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-invalid-guest/candidate-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative.completion.json",
+    "bytes": 66,
+    "sha256": "0FAA46488C9D763BE626709FD3D97F967908370D449CF84D726FD4E34A4E42FD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative.process.json",
+    "bytes": 763,
+    "sha256": "BE3B7D61A7A48450ECA22D8054F78B4EA98EBD8EE8720599A81C89C230C78233"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline.completion.json",
+    "bytes": 66,
+    "sha256": "0582C0DE3EF2FA8160B1D890442ADE928E7F174F537E4C70EFC86A187ED4D1B3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline.process.json",
+    "bytes": 738,
+    "sha256": "3D419068262DE5A01A85EF7A0F3FD7EA5FFA3D57A8A208576F50D163623205E3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/completion.json",
+    "bytes": 66,
+    "sha256": "9FA9E83E681303AA11BEF4E3305A988B18480CC319EAC13CEF319C2BB2FC5B99"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/process.json",
+    "bytes": 365,
+    "sha256": "F44648F47AAFEB8DE24CFD8B6CB7EEBB274ECA5929D722ADAD0FEF307EC7EE61"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/run.ps1",
+    "bytes": 1664,
+    "sha256": "68275614A02C25E2A9050D62D8EEE6FC79280D493217F6DC7FB69E79D022C89F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/stdout.txt",
+    "bytes": 63,
+    "sha256": "67A45C6D2F5191FB2A4D92084E59F34248C8DA1B5CC201A2AE5D44964B4B9AA6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/assemble.process.json",
+    "bytes": 459,
+    "sha256": "51EC8FC0003D078CF6EBCB2FC55D7CEEA66A21C395C09BA3321767F1DDA25C26"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/inputs.csv",
+    "bytes": 1010,
+    "sha256": "8F8D21D9C6C9BFF2A8056216BA105D913C78AD45F084D661963D54F3C6FF7034"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.process.json",
+    "bytes": 380,
+    "sha256": "A7F078C7691229D2A9326ECD3B738247CAC790EC17FA18DA7E5243FFEADDECC1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.txt",
+    "bytes": 705,
+    "sha256": "601C3100A91592C655380A2F85A02C1A42C5F2E8052AE1599409B8332B8FADF7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "D72D9FA567F02504D25379838AD5AF13F945B4908005B971D12E1013673CE12F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.txt.console.txt",
+    "bytes": 107,
+    "sha256": "99C61BD7D56413E8877DC5095C955372E6F4AF5F17973886AE135C083456B4F5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/observer.txt.initial-console.txt",
+    "bytes": 223,
+    "sha256": "7C2DC640E9358B31758F46A7E109AF14B0BB50301E6AF282CBC538019377A6C4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-build.process.json",
+    "bytes": 612,
+    "sha256": "D2D324BC635B26E6C6DF96BBA1582386E6DD80EAA23E9BBDE4B55CECAD323159"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-profile.process.json",
+    "bytes": 256,
+    "sha256": "C60E727A2D074BFE0C30D2B689699B19C902D695AFB8C14EA662A9AF00382263"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "A6CC250C0AC9BC1FADDB925EEADBCDB5FD47B84CF96C3FC210A58CD85C477043"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/result.txt",
+    "bytes": 114,
+    "sha256": "83F382DBD5A51FFCFBDF0764E3234A5D1BD67326B0F5AEE41A3B3274DC16A32E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/runner-context.json",
+    "bytes": 334,
+    "sha256": "0C588FE787F74A927C8E42AB5443F268A989EACB5D67C8A539C676012540B8DD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "D090CCA7470CD7E97110D6B045547A66D8E2C43D9866A961F5878C974F12D566"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/token-context.process.json",
+    "bytes": 171,
+    "sha256": "C33BE520F45B2EED7C64CA017DE8A4F34B2C4B0E46368B330CAE3D90C3428E88"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/assemble.process.json",
+    "bytes": 498,
+    "sha256": "5D6142F12A51CD0234EE4B150A6BDA7E12354C314880B91CE0CF892B27475C20"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/environment-shape.csv",
+    "bytes": 971,
+    "sha256": "BC0F6EA173CD4D7B34C1F120D8F052B42F8EDBFBF5FFAF3362ABCD04CDA84B80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/inputs.csv",
+    "bytes": 1019,
+    "sha256": "C98BF45556BDFC0EEE351513B2274CCCBC64EBF99F1D400BFAFCDD8540B0177B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.process.json",
+    "bytes": 388,
+    "sha256": "576B84AC09FBD7A5FD1F01C6904BD6A4A4CB2EB41AC29CA339A9BCA11F7863D4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.txt",
+    "bytes": 705,
+    "sha256": "9D660CDD0F9D9A3B35659343415BBA58437012FC07A1AED54EC6C920F59F4ACA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "E603EC16448B3F01F5AE5ACD613B53C6136F521CFD1E91F83343BCC4E3A41F02"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.txt.console.txt",
+    "bytes": 71,
+    "sha256": "435DB35E2EAB5650E55865BEAFD69D123D41088BCDF371ECC29E0629B0B9ECED"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/observer.txt.initial-console.txt",
+    "bytes": 223,
+    "sha256": "241FE7D2FCBB192F2A03B3E1100E0DAC82CF6BA195512D27DC846FCAD64FEEEF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-build.process.json",
+    "bytes": 630,
+    "sha256": "1600E2D433B6D650D80431E5C765400ABABACE075F68055903D46747BFB6449C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-profile.process.json",
+    "bytes": 265,
+    "sha256": "476BC270539BC62B56167AA8EC8CAFBA571CB17A57303653423B759FB6FE4C05"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "A403796F88D139285F948CA8B1574D8917C9AA697868F6C1882F97BC046746F0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/result.txt",
+    "bytes": 92,
+    "sha256": "2C1407D979884AB9B35425CF5C9F93ED37F2D84F97243325A35C13CD160CCA82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "95C2D70FE30BCC1B371C37D21FF5BF9E87BB6AEC6676CB80D0D94964B9E09559"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "A40095E4CF68FE1535F71CA027483F669BA8EECCE947BCB3C5D801BD05B49505"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "7D8BF4A6D07BF3288A51EE0EDBB325E0255DBE19D75334C79DC399F30544A018"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/video-runs/video-dispatch-control/baseline-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  }
+]

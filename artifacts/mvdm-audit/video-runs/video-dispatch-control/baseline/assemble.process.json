@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "start": "2026-10-28T02:10:52.5399824Z",
+  "pid": 24760,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\bios_dispatch_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-dispatch-control\\baseline/EMSPROBE.COM\""
+}

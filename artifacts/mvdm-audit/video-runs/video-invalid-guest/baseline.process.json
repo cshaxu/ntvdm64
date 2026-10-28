@@ -1,0 +1,7 @@
+{
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-sign-flags-guest.ps1\" -Workload VideoInvalid -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\package-uuid\\package-c\" -Observer \"O:\\repos.hobby\\ntvdm64\\build\\tools\\console-startup-observer.exe\" -LogonHelper \"O:\\repos.hobby\\ntvdm64\\build\\t449-s2-message-construction-r3\\logon-env.dll\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-invalid-guest\\baseline\"",
+  "started": "2026-10-28T02:08:11.2663431Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "diagnostic_budget_seconds": 180,
+  "pid": 19892
+}

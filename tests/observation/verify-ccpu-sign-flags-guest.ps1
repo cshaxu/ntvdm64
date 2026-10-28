@@ -6,7 +6,7 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe',
  [switch]$NegativeOracle,
- [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch','DummyInt','SystemDevices','DiskReset')][string]$Workload='SignFlags')
+ [ValidateSet('SignFlags','Control','BitMemory','BiosDispatch','DummyInt','SystemDevices','DiskReset','VideoInvalid')][string]$Workload='SignFlags')
 # Independent COM exercises selected CPU40 sign-extension and flag instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
@@ -31,10 +31,11 @@ try{
  if($label -ne 'S-1-16-8192'){throw "Expected desktop-capable medium token, got $label"}
  @{parent_pid=$PID;host_path=(Get-Process -Id $PID).Path;integrity_sid=$label;token_class='medium';script_sha256=(Get-FileHash $PSCommandPath).Hash;private_desktop=$true}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm';DummyInt='bios_dispatch_probe.asm';SystemDevices='system_capability.asm';DiskReset='disks_capability.asm'}[$Workload])
+ $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm';BiosDispatch='bios_dispatch_probe.asm';DummyInt='bios_dispatch_probe.asm';SystemDevices='system_capability.asm';DiskReset='disks_capability.asm';VideoInvalid='bios_dispatch_probe.asm'}[$Workload])
  $line='-f bin "'+$probe+'" -o "'+$root+'/EMSPROBE.COM"'
  if($NegativeOracle){$line+=' -DCPU_PROBE_NEGATIVE_ORACLE=1'}
  if($Workload -eq 'DummyInt'){$line+=' -DCPU_PROBE_DUMMY_INT_ONLY=1'}
+ if($Workload -eq 'VideoInvalid'){$line+=' -DCPU_PROBE_VIDEO_INVALID_ONLY=1'}
  $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');image=$assembler;command=$line;timeoutSeconds=30}|ConvertTo-Json|Set-Content "$root/assemble.process.json"
  if(!$p.WaitForExit(30000)){taskkill.exe /PID $p.Id /T /F;throw 'Owned assembler deadline'}
@@ -71,7 +72,13 @@ try{
  $console=[IO.File]::ReadAllText("$root/observer.txt.console.txt")
  if([string]::IsNullOrWhiteSpace($report) -or [string]::IsNullOrWhiteSpace($console)){throw 'CPU40 guest observation output is empty'}
  if($observerProcess.ExitCode -or $report -notmatch 'result=exited'){throw 'CPU40 guest observation did not complete'}
- if($Workload -eq 'DiskReset'){
+ if($Workload -eq 'VideoInvalid'){
+  if($NegativeOracle){
+   if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'VIDEO INVALID FAIL phase=V' -or $console -match 'VIDEO INVALID PASS'){throw 'Wrong video-return oracle was not rejected'}
+  }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'VIDEO INVALID PASS cases=1812' -or $console -notmatch 'GENERIC908 EGA904'){
+   throw 'Original invalid-video dispatch witness did not complete'
+  }
+ }elseif($Workload -eq 'DiskReset'){
   if($NegativeOracle){
    if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'S28_INT13_RESET_FAIL' -or $console -match 'S28_DISKS_OK'){throw 'Wrong disk reset carry oracle was not rejected'}
   }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'S28_INT13_RESET_OK S28_DISKS_OK'){

@@ -2029,8 +2029,8 @@ softpc.new/base/system/unexp_nt.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/unix/makefile,0,excluded,shard-0/review.csv
 softpc.new/base/unix/sources,0,excluded,shard-0/review.csv
 softpc.new/base/video/cga.c,3,partial,shard-3/file-review.csv
-softpc.new/base/video/ega_dmmy.c,1,pending,shard-1/file-audit.csv
-softpc.new/base/video/ega_mode.c,3,pending,shard-3/file-review.csv
+softpc.new/base/video/ega_dmmy.c,1,partial,shard-1/file-audit.csv
+softpc.new/base/video/ega_mode.c,3,partial,shard-3/file-review.csv
 softpc.new/base/video/ega_prts.c,3,partial,shard-3/file-review.csv
 softpc.new/base/video/ega_read.c,3,partial,shard-3/file-review.csv
 softpc.new/base/video/ega_trcr.c,3,pending,shard-3/file-review.csv
@@ -2038,9 +2038,9 @@ softpc.new/base/video/ega_vide.c,0,partial,shard-0/review.csv
 softpc.new/base/video/ega_writ.c,0,partial,shard-0/review.csv
 softpc.new/base/video/egawrtm0.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/video/egwrtm12.c,2,partial,shard-2/file-audit.csv
-softpc.new/base/video/ga_glue.c,0,pending,shard-0/review.csv
+softpc.new/base/video/ga_glue.c,0,excluded,shard-0/review.csv
 softpc.new/base/video/gfx_updt.c,0,partial,shard-0/review.csv
-softpc.new/base/video/gvi.c,1,pending,shard-1/file-audit.csv
+softpc.new/base/video/gvi.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/video/makefile,2,excluded,shard-2/file-audit.csv
 softpc.new/base/video/obj/_objects.mac,2,excluded,shard-2/file-audit.csv
 softpc.new/base/video/obj/i386/cga.obj,2,excluded,shard-2/file-audit.csv
@@ -2068,9 +2068,9 @@ softpc.new/base/video/v7_ports.c,0,partial,shard-0/review.csv
 softpc.new/base/video/v7_video.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/video/vga_mode.c,0,partial,shard-0/review.csv
 softpc.new/base/video/vga_prts.c,1,partial,shard-1/file-audit.csv
-softpc.new/base/video/vga_vide.c,2,pending,shard-2/file-audit.csv
+softpc.new/base/video/vga_vide.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/video/video.c,2,partial,shard-2/file-audit.csv
-softpc.new/base/video/video_io.c,1,pending,shard-1/file-audit.csv
+softpc.new/base/video/video_io.c,1,partial,shard-1/file-audit.csv
 softpc.new/bios/biosbop.inc,1,pending,shard-1/file-audit.csv
 softpc.new/bios/biosseg.inc,0,pending,shard-0/review.csv
 softpc.new/bios/biostruc.inc,2,pending,shard-2/file-audit.csv

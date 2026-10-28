@@ -1,0 +1,14 @@
+{
+  "arguments": [
+    "O:\\tmp\\n303/system32/run16.exe",
+    "O:\\tmp\\n303\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-invalid-guest\\baseline-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\n303\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T02:08:30.4506413Z",
+  "pid": 4296
+}

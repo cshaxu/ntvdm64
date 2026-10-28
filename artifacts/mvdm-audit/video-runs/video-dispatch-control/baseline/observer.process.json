@@ -1,0 +1,14 @@
+{
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T02:11:01.4680766Z",
+  "pid": 24168,
+  "arguments": [
+    "O:\\tmp\\na91/system32/run16.exe",
+    "O:\\tmp\\na91\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-dispatch-control\\baseline/observer.txt",
+    "--wait",
+    "O:\\tmp\\na91\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ]
+}

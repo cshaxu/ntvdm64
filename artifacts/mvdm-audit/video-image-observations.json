@@ -1,0 +1,998 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/video/ega_dmmy.c",
+      "sha256": "4F7AAA63FB26F4FB556EA90183149CEE7DFD048B954922AE335E17AE3CAFC40D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_dmmy.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/ega_dmmy.c",
+        "sha256": "4f7aaa63fb26f4fb556ea90183149cee7dfd048b954922ae335e17ae3cafc40d",
+        "bytes": "1037",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:6b1b77c906a0c9d2dfbd",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/ega_dmmy.c",
+          "original_sha256": "4F7AAA63FB26F4FB556EA90183149CEE7DFD048B954922AE335E17AE3CAFC40D",
+          "catalog_git_blob": "30c761618f942eef9752fa1a658c205604a4cddd"
+        },
+        {
+          "id": "SRC:0ad04d507d446d5a781e",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/ega_dmmy.c",
+          "original_sha256": "4F7AAA63FB26F4FB556EA90183149CEE7DFD048B954922AE335E17AE3CAFC40D",
+          "catalog_git_blob": "30c761618f942eef9752fa1a658c205604a4cddd"
+        }
+      ],
+      "compile_edge": "build obj/video/ega_dmmy.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_dmmy.c",
+      "dependency_block": "obj/video/ega_dmmy.obj: #deps 25, deps mtime 8147602926182818 (VALID)\n    ../../../../src/mvdm/softpc.new/base/cvidc/evidgen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/egacpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/egagraph.h\n    ../../../../src/mvdm/softpc.new/base/inc/egaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/gfx_upd.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/gvi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "ABB6FA3C36ED03B2AEF70038FACDA45E3BE4DF9373181008253B3F4A9270D232",
+      "functions": [
+        {
+          "symbol": "_get_ega_switch_setting",
+          "va": 4222000,
+          "bytes": 3,
+          "relocation_words": 0
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/base/video/ega_mode.c",
+      "sha256": "1B73D0BDEA339DC2A42F9674E04FD14575400070E8436149A84A2AC5510A057D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_mode.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/ega_mode.c",
+        "sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+        "bytes": "21898",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:0f87d7249aa5aaf0b857",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/ega_mode.c",
+          "original_sha256": "1B73D0BDEA339DC2A42F9674E04FD14575400070E8436149A84A2AC5510A057D",
+          "catalog_git_blob": "e2be88bdc181faf234bcf84098c155f977f6afc9"
+        },
+        {
+          "id": "SRC:f3e9d18713f9a74b1590",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/ega_mode.c",
+          "original_sha256": "1B73D0BDEA339DC2A42F9674E04FD14575400070E8436149A84A2AC5510A057D",
+          "catalog_git_blob": "e2be88bdc181faf234bcf84098c155f977f6afc9"
+        }
+      ],
+      "compile_edge": "build obj/video/ega_mode.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_mode.c",
+      "dependency_block": "obj/video/ega_mode.obj: #deps 28, deps mtime 8147602914066976 (VALID)\n    ../../../../src/mvdm/softpc.new/base/cvidc/evidgen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/egacpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/egagraph.h\n    ../../../../src/mvdm/softpc.new/base/inc/egamode.h\n    ../../../../src/mvdm/softpc.new/base/inc/egaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gfx_upd.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/gvi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/vgaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gfx.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "264999B8A157AD3C7661B5B15A816C65A34A26968A7E8133997F8E54838B9F3A",
+      "functions": [
+        {
+          "symbol": "_ega_mode_init",
+          "va": 4223152,
+          "bytes": 3,
+          "relocation_words": 0
+        },
+        {
+          "symbol": "_choose_ega_display_mode",
+          "va": 4748960,
+          "bytes": 374,
+          "relocation_words": 27
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/base/video/gvi.c",
+      "sha256": "2AEB2F79FD87002EA70BAFE745612E9C8131F56863C90ED7AD11127439682B80",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/gvi.c",
+        "sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+        "bytes": "7379",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:db41f3d341979669d25d",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/gvi.c",
+          "original_sha256": "2AEB2F79FD87002EA70BAFE745612E9C8131F56863C90ED7AD11127439682B80",
+          "catalog_git_blob": "91c0383c5f939f466debb94dc06c6284167677ef"
+        },
+        {
+          "id": "SRC:c518600fae5c392a5aa1",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/gvi.c",
+          "original_sha256": "2AEB2F79FD87002EA70BAFE745612E9C8131F56863C90ED7AD11127439682B80",
+          "catalog_git_blob": "91c0383c5f939f466debb94dc06c6284167677ef"
+        }
+      ],
+      "compile_edge": "build obj/video/gvi.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/gvi.c",
+      "dependency_block": "obj/video/gvi.obj: #deps 30, deps mtime 8147602919714457 (VALID)\n    ../../../../src/mvdm/softpc.new/base/cvidc/evidgen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/cga.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/egacpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/egagraph.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gfx_upd.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/gvi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gfx.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "A757DD2C72BF77F2274839E5ABE3FCEEB92A8CAEE5421CFF6EEEB65BA80B39E6",
+      "functions": [
+        {
+          "symbol": "_gvi_init",
+          "va": 4733008,
+          "bytes": 192,
+          "relocation_words": 19
+        },
+        {
+          "symbol": "_gvi_term",
+          "va": 4733200,
+          "bytes": 38,
+          "relocation_words": 4
+        },
+        {
+          "symbol": "_recalc_screen_params",
+          "va": 4733248,
+          "bytes": 204,
+          "relocation_words": 22
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/base/video/vga_vide.c",
+      "sha256": "3D0159B8BD4D1BCC3448BC61FB90F5B1C34C09099BBA49187FE4573354CCC89D",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_vide.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/vga_vide.c",
+        "sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
+        "bytes": "27942",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:2993163c6429ee0af55b",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/vga_vide.c",
+          "original_sha256": "3D0159B8BD4D1BCC3448BC61FB90F5B1C34C09099BBA49187FE4573354CCC89D",
+          "catalog_git_blob": "766a1b5f20d15d387b650c02f0c8bc019ecdbd6a"
+        },
+        {
+          "id": "SRC:fe48b67ebd28987f8e11",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/vga_vide.c",
+          "original_sha256": "3D0159B8BD4D1BCC3448BC61FB90F5B1C34C09099BBA49187FE4573354CCC89D",
+          "catalog_git_blob": "766a1b5f20d15d387b650c02f0c8bc019ecdbd6a"
+        }
+      ],
+      "compile_edge": "build obj/video/vga_vide.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/vga_vide.c",
+      "dependency_block": "obj/video/vga_vide.obj: #deps 43, deps mtime 8147602923775161 (VALID)\n    ../../../../src/mvdm/softpc.new/base/cvidc/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/cvidc/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/cvidc/evidgen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/egacpu.h\n    ../../../../src/mvdm/softpc.new/base/inc/egagraph.h\n    ../../../../src/mvdm/softpc.new/base/inc/egaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/egaread.h\n    ../../../../src/mvdm/softpc.new/base/inc/egavideo.h\n    ../../../../src/mvdm/softpc.new/base/inc/equip.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/gfx_upd.h\n    ../../../../src/mvdm/softpc.new/base/inc/gmi.h\n    ../../../../src/mvdm/softpc.new/base/inc/gvi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_gwi.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/timer.h\n    ../../../../src/mvdm/softpc.new/base/inc/vga_dac.h\n    ../../../../src/mvdm/softpc.new/base/inc/vgaports.h\n    ../../../../src/mvdm/softpc.new/base/inc/video.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gfx.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "A63265E1C039517693017CF455A5C14AF8F5E143BA7F63A889459266EA647536",
+      "functions": [
+        {
+          "symbol": "_init_vga_dac",
+          "va": 4767424,
+          "bytes": 226,
+          "relocation_words": 8
+        },
+        {
+          "symbol": "_vga_disp_comb",
+          "va": 4767808,
+          "bytes": 48,
+          "relocation_words": 6
+        },
+        {
+          "symbol": "_vga_disp_func",
+          "va": 4767856,
+          "bytes": 856,
+          "relocation_words": 61
+        },
+        {
+          "symbol": "_vga_func_12",
+          "va": 4768720,
+          "bytes": 396,
+          "relocation_words": 31
+        },
+        {
+          "symbol": "_vga_graphics_write_char",
+          "va": 4769120,
+          "bytes": 268,
+          "relocation_words": 8
+        },
+        {
+          "symbol": "_vga_int_1C",
+          "va": 4769392,
+          "bytes": 1930,
+          "relocation_words": 140
+        },
+        {
+          "symbol": "_vga_read_attrib_char",
+          "va": 4771328,
+          "bytes": 260,
+          "relocation_words": 7
+        },
+        {
+          "symbol": "_vga_read_dot",
+          "va": 4771600,
+          "bytes": 43,
+          "relocation_words": 3
+        },
+        {
+          "symbol": "_vga_sensible_graph_scroll_down",
+          "va": 4771648,
+          "bytes": 434,
+          "relocation_words": 14
+        },
+        {
+          "symbol": "_vga_sensible_graph_scroll_up",
+          "va": 4772096,
+          "bytes": 405,
+          "relocation_words": 14
+        },
+        {
+          "symbol": "_vga_set_palette",
+          "va": 4772512,
+          "bytes": 1361,
+          "relocation_words": 99
+        },
+        {
+          "symbol": "_vga_write_dot",
+          "va": 4773888,
+          "bytes": 70,
+          "relocation_words": 4
+        },
+        {
+          "symbol": "_get_dac",
+          "va": 4767344,
+          "bytes": 68,
+          "relocation_words": 4
+        },
+        {
+          "symbol": "_set_dac",
+          "va": 4767664,
+          "bytes": 141,
+          "relocation_words": 5
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/base/video/video_io.c",
+      "sha256": "92680AC402633DD5DD52BBCCFFF55F41A65A1485DC2736666A9DA45B7EA6BF86",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video_io.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/video_io.c",
+        "sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+        "bytes": "1387",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:129857fdb9fbe680c085",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/video_io.c",
+          "original_sha256": "92680AC402633DD5DD52BBCCFFF55F41A65A1485DC2736666A9DA45B7EA6BF86",
+          "catalog_git_blob": "a0bb75c6528adfa6aaa01013051444a58b1d5e08"
+        },
+        {
+          "id": "SRC:192ded34ad911c43803d",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/video_io.c",
+          "original_sha256": "92680AC402633DD5DD52BBCCFFF55F41A65A1485DC2736666A9DA45B7EA6BF86",
+          "catalog_git_blob": "a0bb75c6528adfa6aaa01013051444a58b1d5e08"
+        }
+      ],
+      "compile_edge": "build obj/video/video_io.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/video_io.c",
+      "dependency_block": "obj/video/video_io.obj: #deps 20, deps mtime 8147602920594077 (VALID)\n    ../../../../src/mvdm/softpc.new/base/cvidc/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/cvidc/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/bios.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/debug.h\n    ../../../../src/mvdm/softpc.new/base/inc/idetect.h\n    ../../../../src/mvdm/softpc.new/base/inc/video.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "09BB4307195D3DB493D8EE7E68BD949B79C862D380D431BC2C74AB6114917013",
+      "functions": [
+        {
+          "symbol": "_video_io",
+          "va": 4763424,
+          "bytes": 70,
+          "relocation_words": 8
+        }
+      ],
+      "disposition": "partial-candidate"
+    },
+    {
+      "relative_path": "softpc.new/base/video/ega_trcr.c",
+      "sha256": "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_trcr.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/ega_trcr.c",
+        "sha256": "f69389e877975d277405c21af95b5fea6fe2794b5ac7928d8634efbbbd432e9c",
+        "bytes": "5330",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:ef2672357dfcdf1cd90a",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/ega_trcr.c",
+          "original_sha256": "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C",
+          "catalog_git_blob": "da7d21a414a0e4dd7f8ca0c2a296e4345a7224d2"
+        },
+        {
+          "id": "SRC:7671a6d29fc018bfcdb3",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/ega_trcr.c",
+          "original_sha256": "F69389E877975D277405C21AF95B5FEA6FE2794B5AC7928D8634EFBBBD432E9C",
+          "catalog_git_blob": "da7d21a414a0e4dd7f8ca0c2a296e4345a7224d2"
+        }
+      ],
+      "compile_edge": "build obj/video/ega_trcr.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/video/ega_trcr.c",
+      "dependency_block": "obj/video/ega_trcr.obj: #deps 10, deps mtime 8147602925471959 (VALID)\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+      "object_sha256": "D9AC213C0C30105150EE585EDAD5EBE716B5A062DA16C33ED6F58D68B6A3A3FB",
+      "functions": [],
+      "disposition": "pending-diagnostic-profile"
+    },
+    {
+      "relative_path": "softpc.new/base/video/ga_glue.c",
+      "sha256": "8BBD170935279A625B5ADD89E491DD788F914D963788FE007B0AC08C942F5536",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ga_glue.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/base/video/ga_glue.c",
+        "sha256": "8bbd170935279a625b5add89e491dd788f914d963788fe007b0ac08c942f5536",
+        "bytes": "7090",
+        "role": "executor_or_device_context_exact_edges_only",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:e7770ae2acea09701457",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/base/video/ga_glue.c",
+          "original_sha256": "8BBD170935279A625B5ADD89E491DD788F914D963788FE007B0AC08C942F5536",
+          "catalog_git_blob": "99d91ae4be2e85b89ee485da744b4d4640a78209"
+        },
+        {
+          "id": "SRC:346d1bd34f8c31a5ad4e",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/base/video/ga_glue.c",
+          "original_sha256": "8BBD170935279A625B5ADD89E491DD788F914D963788FE007B0AC08C942F5536",
+          "catalog_git_blob": "99d91ae4be2e85b89ee485da744b4d4640a78209"
+        }
+      ],
+      "functions": [],
+      "disposition": "alternative-legacy-cpu-interface"
+    }
+  ],
+  "generic_slots": [
+    {
+      "index": 0,
+      "symbol": "_vd_set_mode",
+      "va": 4703200,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 1,
+      "symbol": "_vd_set_cursor_mode",
+      "va": 4704192,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 2,
+      "symbol": "_vd_set_cursor_position",
+      "va": 4704304,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 3,
+      "symbol": "_vd_get_cursor_position",
+      "va": 4704512,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 4,
+      "symbol": "_vd_get_light_pen",
+      "va": 4704624,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 5,
+      "symbol": "_vd_set_active_page",
+      "va": 4704704,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 6,
+      "symbol": "_vd_scroll_up",
+      "va": 4705136,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 7,
+      "symbol": "_vd_scroll_down",
+      "va": 4705872,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 8,
+      "symbol": "_vd_read_attrib_char",
+      "va": 4707168,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 9,
+      "symbol": "_vd_write_char_attrib",
+      "va": 4708208,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 10,
+      "symbol": "_vd_write_char",
+      "va": 4708896,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 11,
+      "symbol": "_vd_set_colour_palette",
+      "va": 4709536,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 12,
+      "symbol": "_vd_write_dot",
+      "va": 4710064,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 13,
+      "symbol": "_vd_read_dot",
+      "va": 4709696,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 14,
+      "symbol": "_vd_write_teletype",
+      "va": 4710736,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 15,
+      "symbol": "_vd_get_mode",
+      "va": 4712624,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 16,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 17,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 18,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 19,
+      "symbol": "_vd_write_string",
+      "va": 4712704,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 20,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 21,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 22,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 23,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 24,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 25,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 26,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 27,
+      "symbol": "_vga_disp_func",
+      "va": 4767856,
+      "owners": [
+        "original-softpc-video:vga_vide.obj"
+      ]
+    },
+    {
+      "index": 28,
+      "symbol": "_vd_dummy",
+      "va": 4223152,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    }
+  ],
+  "ega_slots": [
+    {
+      "index": 0,
+      "symbol": "_ega_set_mode",
+      "va": 4752336,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 1,
+      "symbol": "_ega_set_cursor_mode",
+      "va": 4755776,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 2,
+      "symbol": "_vd_set_cursor_position",
+      "va": 4704304,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 3,
+      "symbol": "_vd_get_cursor_position",
+      "va": 4704512,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 4,
+      "symbol": "_vd_get_light_pen",
+      "va": 4704624,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 5,
+      "symbol": "_vd_set_active_page",
+      "va": 4704704,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 6,
+      "symbol": "_vd_scroll_up",
+      "va": 4705136,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 7,
+      "symbol": "_vd_scroll_down",
+      "va": 4705872,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 8,
+      "symbol": "_vd_read_attrib_char",
+      "va": 4707168,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 9,
+      "symbol": "_vd_write_char_attrib",
+      "va": 4708208,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 10,
+      "symbol": "_vd_write_char",
+      "va": 4708896,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 11,
+      "symbol": "_ega_emul_set_palette",
+      "va": 4756112,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 12,
+      "symbol": "_vd_write_dot",
+      "va": 4710064,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 13,
+      "symbol": "_vd_read_dot",
+      "va": 4709696,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 14,
+      "symbol": "_vd_write_teletype",
+      "va": 4710736,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 15,
+      "symbol": "_vd_get_mode",
+      "va": 4712624,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 16,
+      "symbol": "_ega_set_palette",
+      "va": 4754880,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 17,
+      "symbol": "_ega_char_gen",
+      "va": 4753920,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 18,
+      "symbol": "_ega_alt_sel",
+      "va": 4755632,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 19,
+      "symbol": "_vd_write_string",
+      "va": 4712704,
+      "owners": [
+        "original-softpc-video:video.obj"
+      ]
+    },
+    {
+      "index": 20,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 21,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 22,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 23,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 24,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 25,
+      "symbol": "_not_imp",
+      "va": 4752320,
+      "owners": [
+        "original-softpc-video:ega_vide.obj"
+      ]
+    },
+    {
+      "index": 26,
+      "symbol": "_vga_disp_comb",
+      "va": 4767808,
+      "owners": [
+        "original-softpc-video:vga_vide.obj"
+      ]
+    },
+    {
+      "index": 27,
+      "symbol": "_vga_disp_func",
+      "va": 4767856,
+      "owners": [
+        "original-softpc-video:vga_vide.obj"
+      ]
+    },
+    {
+      "index": 28,
+      "symbol": "_vga_int_1C",
+      "va": 4769392,
+      "owners": [
+        "original-softpc-video:vga_vide.obj"
+      ]
+    }
+  ],
+  "cpu40_reads": [
+    {
+      "index": 0,
+      "symbol": "_read_byte_ev_glue",
+      "va": 4785328,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 1,
+      "symbol": "_read_word_ev_glue",
+      "va": 4785456,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 2,
+      "symbol": "_read_str_fwd_ev_glue",
+      "va": 4785376,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    }
+  ],
+  "cpu40_writes": [
+    {
+      "index": 0,
+      "symbol": "_write_byte_ev_glue",
+      "va": 4787088,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 1,
+      "symbol": "_write_word_ev_glue",
+      "va": 4787152,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 2,
+      "symbol": "_fill_byte_ev_glue",
+      "va": 4785008,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 3,
+      "symbol": "_fill_word_ev_glue",
+      "va": 4785072,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 4,
+      "symbol": "_move_byte_fwd_ev_glue",
+      "va": 4785136,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    },
+    {
+      "index": 5,
+      "symbol": "_move_word_fwd_ev_glue",
+      "va": 4785232,
+      "owners": [
+        "original-softpc-cvidc:ev_glue.obj"
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-softpc-video.lib",
+      "sha256": "7F29EACC0ACFFD9F4283493E9F65705DCD5A10A8F34ADF6835691A35712ED027"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\video\\sources",
+      "sha256": "6383E77B670EDF3C1F6D4CEF75B99D85A094BD19BC83703BEF474DAD86543463"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\sources",
+      "sha256": "6383E77B670EDF3C1F6D4CEF75B99D85A094BD19BC83703BEF474DAD86543463"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-dos16-audit\\management\\source-file-catalog.csv",
+      "sha256": "7DAC7F535A737988BE4B3D859C82D58C89EE54E4C3207B529E0875FE29A76938"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\source-file-catalog.csv",
+      "sha256": "712AE62DC491DF3E2480FD82121D2A517093707C263E2803965EFC6AC9D98A9B"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64-wow32-audit\\management\\seam-scope.json",
+      "sha256": "B5AC71F12855EA642F977D92139FB2EBB39210D03F8A0FDE18B7C453AE415E47"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\frozen-file-reconciliation.csv",
+      "sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\bios-image-observations.json",
+      "sha256": "A1400DD2FCA608E8D2B4F38CF62B9A22E7E7DF372CB53D4AD57C905776B340FE"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\bios-image-observer.py",
+      "sha256": "7281778DC9EE59D4214CC137561E0045AA76BEA803FF0F9EF70D02BBD9B24CAE"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\disk-image-observer.py",
+      "sha256": "3C785EBF2F787213AB403D9AA1BEBC6BCF04CFF0091FD6FE055D813E90C4A9CF"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+      "sha256": "5AEE033F046EC9E992C42AAF86B1C85F70FB4F71571566F80965711022524A96"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+      "sha256": "566BB0172289210EE399BF5108D84B7BB062BD90C5CB7CBAFA8925BD1B939FCF"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
+      "sha256": "7849FA7719B5A46FCAA4548F180589AF29CF84ECF24AF4E3D59FA7FCD58F7AFE"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\video-image-observer.py",
+      "sha256": "4C4C6A3EA64A52FD63F9D85C342570DD0DE68E62493BAFD53A2A488B15A7B8E2"
+    }
+  ],
+  "scope": "Selected initial image code/tables, original CPU-interface selection and catalog identities; no whole mode/VRAM/rendering or runtime-table lifetime proof"
+}

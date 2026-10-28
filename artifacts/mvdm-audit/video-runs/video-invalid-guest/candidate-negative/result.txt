@@ -1,0 +1,1 @@
+PASS deliberately wrong VideoInvalid expectation rejected; guest exit=1; no success marker

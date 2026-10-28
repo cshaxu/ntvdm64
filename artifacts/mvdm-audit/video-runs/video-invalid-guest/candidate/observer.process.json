@@ -1,0 +1,14 @@
+{
+  "start": "2026-10-28T02:08:40.8399943Z",
+  "arguments": [
+    "O:\\tmp\\neb9/system32/run16.exe",
+    "O:\\tmp\\neb9\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-invalid-guest\\candidate/observer.txt",
+    "--wait",
+    "O:\\tmp\\neb9\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "pid": 22088,
+  "timeoutSeconds": 55
+}

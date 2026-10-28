@@ -1,0 +1,14 @@
+{
+  "pid": 9484,
+  "arguments": [
+    "O:\\tmp\\n904/system32/run16.exe",
+    "O:\\tmp\\n904\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\video-dispatch-control\\baseline-negative/observer.txt",
+    "--wait",
+    "O:\\tmp\\n904\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T02:11:12.9982308Z"
+}
