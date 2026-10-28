@@ -1,0 +1,1605 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "name": "wgdi.c",
+      "sha256": "4C28E5166B294AC2A17982B3FF6E6559F369B8A8A2DD766AA18E16C8F74379D6"
+    },
+    {
+      "name": "wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "name": "wgtbl2.h",
+      "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+    },
+    {
+      "name": "wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "name": "wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    }
+  ],
+  "gdi_table_base": 851,
+  "owners": [
+    {
+      "owner": "wgdi",
+      "object_sha256": "CF4BCD06422FE2FD95135A7C617269A1DA7300BC38AAF72CF3F6604D63A79F59",
+      "dependency": "obj/wgdi.obj: #deps 128, deps mtime 8147760840731982 (VALID)",
+      "entries": [
+        {
+          "ordinal": 1,
+          "table_index": 852,
+          "thunk": "WG32SetBkColor",
+          "binding": {
+            "name": "_WG32SetBkColor@4",
+            "va": 268509248,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 57,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 2,
+          "table_index": 853,
+          "thunk": "WG32SetBkMode",
+          "binding": {
+            "name": "_WG32SetBkMode@4",
+            "va": 268509312,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 3,
+          "table_index": 854,
+          "thunk": "WG32SetMapMode",
+          "binding": {
+            "name": "_WG32SetMapMode@4",
+            "va": 268509872,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 4,
+          "table_index": 855,
+          "thunk": "WG32SetROP2",
+          "binding": {
+            "name": "_WG32SetROP2@4",
+            "va": 268510048,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 5,
+          "table_index": 856,
+          "thunk": "WG32SetRelAbs",
+          "binding": {
+            "name": "_WG32SetRelAbs@4",
+            "va": 268510160,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 32,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 6,
+          "table_index": 857,
+          "thunk": "WG32SetPolyFillMode",
+          "binding": {
+            "name": "_WG32SetPolyFillMode@4",
+            "va": 268510000,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 7,
+          "table_index": 858,
+          "thunk": "WG32SetStretchBltMode",
+          "binding": {
+            "name": "_WG32SetStretchBltMode@4",
+            "va": 268510192,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 11,
+          "table_index": 862,
+          "thunk": "WG32SetWindowOrg",
+          "binding": {
+            "name": "_WG32SetWindowOrg@4",
+            "va": 268510528,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 91,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 12,
+          "table_index": 863,
+          "thunk": "WG32SetWindowExt",
+          "binding": {
+            "name": "_WG32SetWindowExt@4",
+            "va": 268510432,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 85,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 13,
+          "table_index": 864,
+          "thunk": "WG32SetViewportOrg",
+          "binding": {
+            "name": "_WG32SetViewportOrg@4",
+            "va": 268510336,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 91,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 14,
+          "table_index": 865,
+          "thunk": "WG32SetViewportExt",
+          "binding": {
+            "name": "_WG32SetViewportExt@4",
+            "va": 268510240,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 85,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 15,
+          "table_index": 866,
+          "thunk": "WG32OffsetWindowOrg",
+          "binding": {
+            "name": "_WG32OffsetWindowOrg@4",
+            "va": 268507040,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 91,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 16,
+          "table_index": 867,
+          "thunk": "WG32ScaleWindowExt",
+          "binding": {
+            "name": "_WG32ScaleWindowExt@4",
+            "va": 268508704,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 99,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 17,
+          "table_index": 868,
+          "thunk": "WG32OffsetViewportOrg",
+          "binding": {
+            "name": "_WG32OffsetViewportOrg@4",
+            "va": 268506944,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 91,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 18,
+          "table_index": 869,
+          "thunk": "WG32ScaleViewportExt",
+          "binding": {
+            "name": "_WG32ScaleViewportExt@4",
+            "va": 268508592,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 99,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 19,
+          "table_index": 870,
+          "thunk": "WG32LineTo",
+          "binding": {
+            "name": "_WG32LineTo@4",
+            "va": 268506704,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 20,
+          "table_index": 871,
+          "thunk": "WG32MoveTo",
+          "binding": {
+            "name": "_WG32MoveTo@4",
+            "va": 268506752,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 91,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 21,
+          "table_index": 872,
+          "thunk": "WG32ExcludeClipRect",
+          "binding": {
+            "name": "_WG32ExcludeClipRect@4",
+            "va": 268503104,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 52,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 22,
+          "table_index": 873,
+          "thunk": "WG32IntersectClipRect",
+          "binding": {
+            "name": "_WG32IntersectClipRect@4",
+            "va": 268506336,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 52,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 23,
+          "table_index": 874,
+          "thunk": "WG32Arc",
+          "binding": {
+            "name": "_WG32Arc@4",
+            "va": 268495824,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 93,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 24,
+          "table_index": 875,
+          "thunk": "WG32Ellipse",
+          "binding": {
+            "name": "_WG32Ellipse@4",
+            "va": 268499632,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 52,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 25,
+          "table_index": 876,
+          "thunk": "WG32FloodFill",
+          "binding": {
+            "name": "_WG32FloodFill@4",
+            "va": 268503280,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 41,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 26,
+          "table_index": 877,
+          "thunk": "WG32Pie",
+          "binding": {
+            "name": "_WG32Pie@4",
+            "va": 268507248,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 93,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 27,
+          "table_index": 878,
+          "thunk": "WG32Rectangle",
+          "binding": {
+            "name": "_WG32Rectangle@4",
+            "va": 268508368,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 52,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 28,
+          "table_index": 879,
+          "thunk": "WG32RoundRect",
+          "binding": {
+            "name": "_WG32RoundRect@4",
+            "va": 268508480,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 66,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 29,
+          "table_index": 880,
+          "thunk": "WG32PatBlt",
+          "binding": {
+            "name": "_WG32PatBlt@4",
+            "va": 268507184,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 55,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 30,
+          "table_index": 881,
+          "thunk": "WG32SaveDC",
+          "binding": {
+            "name": "_WG32SaveDC@4",
+            "va": 268508560,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 31,
+          "table_index": 882,
+          "thunk": "WG32SetPixel",
+          "binding": {
+            "name": "_WG32SetPixel@4",
+            "va": 268509952,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 40,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 32,
+          "table_index": 883,
+          "thunk": "WG32OffsetClipRgn",
+          "binding": {
+            "name": "_WG32OffsetClipRgn@4",
+            "va": 268506848,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 34,
+          "table_index": 885,
+          "thunk": "WG32BitBlt",
+          "binding": {
+            "name": "_WG32BitBlt@4",
+            "va": 268495920,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 108,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 35,
+          "table_index": 886,
+          "thunk": "WG32StretchBlt",
+          "binding": {
+            "name": "_WG32StretchBlt@4",
+            "va": 268510624,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 132,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 36,
+          "table_index": 887,
+          "thunk": "WG32Polygon",
+          "binding": {
+            "name": "_WG32Polygon@4",
+            "va": 268507792,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 145,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 37,
+          "table_index": 888,
+          "thunk": "WG32Polyline",
+          "binding": {
+            "name": "_WG32Polyline@4",
+            "va": 268507952,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 145,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 38,
+          "table_index": 889,
+          "thunk": "WG32Escape",
+          "binding": {
+            "name": "_WG32Escape@4",
+            "va": 268499936,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 3160,
+            "relocation_words": 160
+          }
+        },
+        {
+          "ordinal": 39,
+          "table_index": 890,
+          "thunk": "WG32RestoreDC",
+          "binding": {
+            "name": "_WG32RestoreDC@4",
+            "va": 268508432,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 40,
+          "table_index": 891,
+          "thunk": "WG32FillRgn",
+          "binding": {
+            "name": "_WG32FillRgn@4",
+            "va": 268503216,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 60,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 41,
+          "table_index": 892,
+          "thunk": "WG32FrameRgn",
+          "binding": {
+            "name": "_WG32FrameRgn@4",
+            "va": 268503328,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 70,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 42,
+          "table_index": 893,
+          "thunk": "WG32InvertRgn",
+          "binding": {
+            "name": "_WG32InvertRgn@4",
+            "va": 268506400,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 44,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 43,
+          "table_index": 894,
+          "thunk": "WG32PaintRgn",
+          "binding": {
+            "name": "_WG32PaintRgn@4",
+            "va": 268507136,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 44,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 44,
+          "table_index": 895,
+          "thunk": "WG32SelectClipRgn",
+          "binding": {
+            "name": "_WG32SelectClipRgn@4",
+            "va": 268508816,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 44,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 45,
+          "table_index": 896,
+          "thunk": "WG32SelectObject",
+          "binding": {
+            "name": "_WG32SelectObject@4",
+            "va": 268508864,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 55,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 47,
+          "table_index": 898,
+          "thunk": "WG32CombineRgn",
+          "binding": {
+            "name": "_WG32CombineRgn@4",
+            "va": 268496128,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 65,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 48,
+          "table_index": 899,
+          "thunk": "WG32CreateBitmap",
+          "binding": {
+            "name": "_WG32CreateBitmap@4",
+            "va": 268496208,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 65,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 49,
+          "table_index": 900,
+          "thunk": "WG32CreateBitmapIndirect",
+          "binding": {
+            "name": "_WG32CreateBitmapIndirect@4",
+            "va": 268496288,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 118,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 50,
+          "table_index": 901,
+          "thunk": "WG32CreateBrushIndirect",
+          "binding": {
+            "name": "_WG32CreateBrushIndirect@4",
+            "va": 268496416,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 339,
+            "relocation_words": 17
+          }
+        },
+        {
+          "ordinal": 51,
+          "table_index": 902,
+          "thunk": "WG32CreateCompatibleBitmap",
+          "binding": {
+            "name": "_WG32CreateCompatibleBitmap@4",
+            "va": 268496768,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 49,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 52,
+          "table_index": 903,
+          "thunk": "WG32CreateCompatibleDC",
+          "binding": {
+            "name": "_WG32CreateCompatibleDC@4",
+            "va": 268496832,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 78,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 53,
+          "table_index": 904,
+          "thunk": "WG32CreateDC",
+          "binding": {
+            "name": "_WG32CreateDC@4",
+            "va": 268496912,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 344,
+            "relocation_words": 27
+          }
+        },
+        {
+          "ordinal": 54,
+          "table_index": 905,
+          "thunk": "WG32CreateEllipticRgn",
+          "binding": {
+            "name": "_WG32CreateEllipticRgn@4",
+            "va": 268497680,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 45,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 55,
+          "table_index": 906,
+          "thunk": "WG32CreateEllipticRgnIndirect",
+          "binding": {
+            "name": "_WG32CreateEllipticRgnIndirect@4",
+            "va": 268497728,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 69,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 58,
+          "table_index": 909,
+          "thunk": "WG32CreateHatchBrush",
+          "binding": {
+            "name": "_WG32CreateHatchBrush@4",
+            "va": 268497808,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 33,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 60,
+          "table_index": 911,
+          "thunk": "WG32CreatePatternBrush",
+          "binding": {
+            "name": "_WG32CreatePatternBrush@4",
+            "va": 268498240,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 89,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 61,
+          "table_index": 912,
+          "thunk": "WG32CreatePen",
+          "binding": {
+            "name": "_WG32CreatePen@4",
+            "va": 268498336,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 62,
+          "table_index": 913,
+          "thunk": "WG32CreatePenIndirect",
+          "binding": {
+            "name": "_WG32CreatePenIndirect@4",
+            "va": 268498384,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 86,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 63,
+          "table_index": 914,
+          "thunk": "WG32CreatePolygonRgn",
+          "binding": {
+            "name": "_WG32CreatePolygonRgn@4",
+            "va": 268498864,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 145,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 64,
+          "table_index": 915,
+          "thunk": "WG32CreateRectRgn",
+          "binding": {
+            "name": "_WG32CreateRectRgn@4",
+            "va": 268499024,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 45,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 65,
+          "table_index": 916,
+          "thunk": "WG32CreateRectRgnIndirect",
+          "binding": {
+            "name": "_WG32CreateRectRgnIndirect@4",
+            "va": 268499072,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 69,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 66,
+          "table_index": 917,
+          "thunk": "WG32CreateSolidBrush",
+          "binding": {
+            "name": "_WG32CreateSolidBrush@4",
+            "va": 268499216,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 52,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 67,
+          "table_index": 918,
+          "thunk": "WG32DPtoLP",
+          "binding": {
+            "name": "_WG32DPtoLP@4",
+            "va": 268499280,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 161,
+            "relocation_words": 8
+          }
+        },
+        {
+          "ordinal": 68,
+          "table_index": 919,
+          "thunk": "WG32DeleteDC",
+          "binding": {
+            "name": "_WG32DeleteDC@4",
+            "va": 268499456,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 76,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 69,
+          "table_index": 920,
+          "thunk": "WG32DeleteObject",
+          "binding": {
+            "name": "_WG32DeleteObject@4",
+            "va": 268499536,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 85,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 71,
+          "table_index": 922,
+          "thunk": "WG32EnumObjects",
+          "binding": {
+            "name": "_WG32EnumObjects@4",
+            "va": 268499696,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 184,
+            "relocation_words": 10
+          }
+        },
+        {
+          "ordinal": 72,
+          "table_index": 923,
+          "thunk": "WG32EqualRgn",
+          "binding": {
+            "name": "_WG32EqualRgn@4",
+            "va": 268499888,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 44,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 74,
+          "table_index": 925,
+          "thunk": "WG32GetBitmapBits",
+          "binding": {
+            "name": "_WG32GetBitmapBits@4",
+            "va": 268503408,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 71,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 75,
+          "table_index": 926,
+          "thunk": "WG32GetBkColor",
+          "binding": {
+            "name": "_WG32GetBkColor@4",
+            "va": 268503552,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 27,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 76,
+          "table_index": 927,
+          "thunk": "WG32GetBkMode",
+          "binding": {
+            "name": "_WG32GetBkMode@4",
+            "va": 268503584,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 77,
+          "table_index": 928,
+          "thunk": "WG32GetClipBox",
+          "binding": {
+            "name": "_WG32GetClipBox@4",
+            "va": 268503728,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 105,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 78,
+          "table_index": 929,
+          "thunk": "WG32GetCurrentPosition",
+          "binding": {
+            "name": "_WG32GetCurrentPosition@4",
+            "va": 268503888,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 79,
+          "table_index": 930,
+          "thunk": "WG32GetDCOrg",
+          "binding": {
+            "name": "_WG32GetDCOrg@4",
+            "va": 268503952,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 80,
+          "table_index": 931,
+          "thunk": "WG32GetDeviceCaps",
+          "binding": {
+            "name": "_WG32GetDeviceCaps@4",
+            "va": 268504304,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 223,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 81,
+          "table_index": 932,
+          "thunk": "WG32GetMapMode",
+          "binding": {
+            "name": "_WG32GetMapMode@4",
+            "va": 268504848,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 82,
+          "table_index": 933,
+          "thunk": "WG32GetObject",
+          "binding": {
+            "name": "_WG32GetObject@4",
+            "va": 268504912,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 740,
+            "relocation_words": 33
+          }
+        },
+        {
+          "ordinal": 83,
+          "table_index": 934,
+          "thunk": "WG32GetPixel",
+          "binding": {
+            "name": "_WG32GetPixel@4",
+            "va": 268505664,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 37,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 84,
+          "table_index": 935,
+          "thunk": "WG32GetPolyFillMode",
+          "binding": {
+            "name": "_WG32GetPolyFillMode@4",
+            "va": 268505712,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 85,
+          "table_index": 936,
+          "thunk": "WG32GetROP2",
+          "binding": {
+            "name": "_WG32GetROP2@4",
+            "va": 268505744,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 86,
+          "table_index": 937,
+          "thunk": "WG32GetRelAbs",
+          "binding": {
+            "name": "_WG32GetRelAbs@4",
+            "va": 268505856,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 29,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 87,
+          "table_index": 938,
+          "thunk": "WG32GetStockObject",
+          "binding": {
+            "name": "_WG32GetStockObject@4",
+            "va": 268505984,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 30,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 88,
+          "table_index": 939,
+          "thunk": "WG32GetStretchBltMode",
+          "binding": {
+            "name": "_WG32GetStretchBltMode@4",
+            "va": 268506016,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 94,
+          "table_index": 945,
+          "thunk": "WG32GetViewportExt",
+          "binding": {
+            "name": "_WG32GetViewportExt@4",
+            "va": 268506048,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 72,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 95,
+          "table_index": 946,
+          "thunk": "WG32GetViewportOrg",
+          "binding": {
+            "name": "_WG32GetViewportOrg@4",
+            "va": 268506128,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 96,
+          "table_index": 947,
+          "thunk": "WG32GetWindowExt",
+          "binding": {
+            "name": "_WG32GetWindowExt@4",
+            "va": 268506192,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 72,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 97,
+          "table_index": 948,
+          "thunk": "WG32GetWindowOrg",
+          "binding": {
+            "name": "_WG32GetWindowOrg@4",
+            "va": 268506272,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 99,
+          "table_index": 950,
+          "thunk": "WG32LPtoDP",
+          "binding": {
+            "name": "_WG32LPtoDP@4",
+            "va": 268506448,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 161,
+            "relocation_words": 8
+          }
+        },
+        {
+          "ordinal": 100,
+          "table_index": 951,
+          "thunk": "WG32LineDDA",
+          "binding": {
+            "name": "_WG32LineDDA@4",
+            "va": 268506624,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 66,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 101,
+          "table_index": 952,
+          "thunk": "WG32OffsetRgn",
+          "binding": {
+            "name": "_WG32OffsetRgn@4",
+            "va": 268506896,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 103,
+          "table_index": 954,
+          "thunk": "WG32PtVisible",
+          "binding": {
+            "name": "_WG32PtVisible@4",
+            "va": 268508160,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 104,
+          "table_index": 955,
+          "thunk": "WG32RectVisible",
+          "binding": {
+            "name": "_WG32RectVisible@4",
+            "va": 268508288,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 76,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 106,
+          "table_index": 957,
+          "thunk": "WG32SetBitmapBits",
+          "binding": {
+            "name": "_WG32SetBitmapBits@4",
+            "va": 268508928,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 231,
+            "relocation_words": 9
+          }
+        },
+        {
+          "ordinal": 133,
+          "table_index": 984,
+          "thunk": "WG32GetEnvironment",
+          "binding": {
+            "name": "_WG32GetEnvironment@4",
+            "va": 268504528,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 315,
+            "relocation_words": 18
+          }
+        },
+        {
+          "ordinal": 134,
+          "table_index": 985,
+          "thunk": "WG32GetRgnBox",
+          "binding": {
+            "name": "_WG32GetRgnBox@4",
+            "va": 268505888,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 82,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 148,
+          "table_index": 999,
+          "thunk": "WG32SetBrushOrg",
+          "binding": {
+            "name": "_WG32SetBrushOrg@4",
+            "va": 268509360,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 140,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 149,
+          "table_index": 1000,
+          "thunk": "WG32GetBrushOrg",
+          "binding": {
+            "name": "_WG32GetBrushOrg@4",
+            "va": 268503616,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 106,
+            "relocation_words": 4
+          }
+        },
+        {
+          "ordinal": 150,
+          "table_index": 1001,
+          "thunk": "WG32UnrealizeObject",
+          "binding": {
+            "name": "_WG32UnrealizeObject@4",
+            "va": 268511072,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 28,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 153,
+          "table_index": 1004,
+          "thunk": "WG32CreateIC",
+          "binding": {
+            "name": "_WG32CreateIC@4",
+            "va": 268497856,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 374,
+            "relocation_words": 26
+          }
+        },
+        {
+          "ordinal": 154,
+          "table_index": 1005,
+          "thunk": "WG32GetNearestColor",
+          "binding": {
+            "name": "_WG32GetNearestColor@4",
+            "va": 268504880,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 30,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 156,
+          "table_index": 1007,
+          "thunk": "WG32CreateDiscardableBitmap",
+          "binding": {
+            "name": "_WG32CreateDiscardableBitmap@4",
+            "va": 268497616,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 49,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 161,
+          "table_index": 1012,
+          "thunk": "WG32PtInRegion",
+          "binding": {
+            "name": "_WG32PtInRegion@4",
+            "va": 268508112,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 38,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 162,
+          "table_index": 1013,
+          "thunk": "WG32GetBitmapDimension",
+          "binding": {
+            "name": "_WG32GetBitmapDimension@4",
+            "va": 268503488,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 62,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 163,
+          "table_index": 1014,
+          "thunk": "WG32SetBitmapDimension",
+          "binding": {
+            "name": "_WG32SetBitmapDimension@4",
+            "va": 268509168,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 75,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 172,
+          "table_index": 1023,
+          "thunk": "WG32SetRectRgn",
+          "binding": {
+            "name": "_WG32SetRectRgn@4",
+            "va": 268510096,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 53,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 181,
+          "table_index": 1032,
+          "thunk": "WG32RectInRegion",
+          "binding": {
+            "name": "_WG32RectInRegion@4",
+            "va": 268508208,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 76,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 261,
+          "table_index": 1112,
+          "thunk": "WG32GetCurrentObject",
+          "binding": {
+            "name": "_WG32GetCurrentObject@4",
+            "va": 268503840,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 44,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 262,
+          "table_index": 1113,
+          "thunk": "WG32GetRegionData",
+          "binding": {
+            "name": "_WG32GetRegionData@4",
+            "va": 268505776,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 71,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 348,
+          "table_index": 1199,
+          "thunk": "WG32Chord",
+          "binding": {
+            "name": "_WG32Chord@4",
+            "va": 268496032,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 93,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 349,
+          "table_index": 1200,
+          "thunk": "WG32SetMapperFlags",
+          "binding": {
+            "name": "_WG32SetMapperFlags@4",
+            "va": 268509920,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 30,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 372,
+          "table_index": 1223,
+          "thunk": "WG32ExtFloodFill",
+          "binding": {
+            "name": "_WG32ExtFloodFill@4",
+            "va": 268503168,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 48,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 407,
+          "table_index": 1258,
+          "thunk": "WG32CreateBitmap",
+          "binding": {
+            "name": "_WG32CreateBitmap@4",
+            "va": 268496208,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 65,
+            "relocation_words": 3
+          }
+        },
+        {
+          "ordinal": 439,
+          "table_index": 1290,
+          "thunk": "WG32StretchDIBits",
+          "binding": {
+            "name": "_WG32StretchDIBits@4",
+            "va": 268510768,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 299,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 440,
+          "table_index": 1291,
+          "thunk": "WG32SetDIBits",
+          "binding": {
+            "name": "_WG32SetDIBits@4",
+            "va": 268509504,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 145,
+            "relocation_words": 7
+          }
+        },
+        {
+          "ordinal": 441,
+          "table_index": 1292,
+          "thunk": "WG32GetDIBits",
+          "binding": {
+            "name": "_WG32GetDIBits@4",
+            "va": 268504016,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 282,
+            "relocation_words": 14
+          }
+        },
+        {
+          "ordinal": 442,
+          "table_index": 1293,
+          "thunk": "WG32CreateDIBitmap",
+          "binding": {
+            "name": "_WG32CreateDIBitmap@4",
+            "va": 268497376,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 240,
+            "relocation_words": 9
+          }
+        },
+        {
+          "ordinal": 443,
+          "table_index": 1294,
+          "thunk": "WG32SetDIBitsToDevice",
+          "binding": {
+            "name": "_WG32SetDIBitsToDevice@4",
+            "va": 268509664,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 203,
+            "relocation_words": 6
+          }
+        },
+        {
+          "ordinal": 444,
+          "table_index": 1295,
+          "thunk": "WG32CreateRoundRectRgn",
+          "binding": {
+            "name": "_WG32CreateRoundRectRgn@4",
+            "va": 268499152,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 55,
+            "relocation_words": 2
+          }
+        },
+        {
+          "ordinal": 445,
+          "table_index": 1296,
+          "thunk": "WG32CreateDIBPatternBrush",
+          "binding": {
+            "name": "_WG32CreateDIBPatternBrush@4",
+            "va": 268497264,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 97,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 450,
+          "table_index": 1301,
+          "thunk": "WG32PolyPolygon",
+          "binding": {
+            "name": "_WG32PolyPolygon@4",
+            "va": 268507344,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 383,
+            "relocation_words": 10
+          }
+        },
+        {
+          "ordinal": 451,
+          "table_index": 1302,
+          "thunk": "WG32CreatePolyPolygonRgn",
+          "binding": {
+            "name": "_WG32CreatePolyPolygonRgn@4",
+            "va": 268498480,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 383,
+            "relocation_words": 10
+          }
+        },
+        {
+          "ordinal": 461,
+          "table_index": 1312,
+          "thunk": "WG32SetObjectOwner",
+          "binding": {
+            "name": "_WG32SetObjectOwner@4",
+            "va": 268487552,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 8,
+            "relocation_words": 0
+          }
+        },
+        {
+          "ordinal": 465,
+          "table_index": 1316,
+          "thunk": "WG32RectVisible",
+          "binding": {
+            "name": "_WG32RectVisible@4",
+            "va": 268508288,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 76,
+            "relocation_words": 5
+          }
+        },
+        {
+          "ordinal": 490,
+          "table_index": 1341,
+          "thunk": "WG32PolyPolylineWOW",
+          "binding": {
+            "name": "_WG32PolyPolylineWOW@4",
+            "va": 268507728,
+            "function": true,
+            "owner": "wgdi.obj",
+            "bytes": 58,
+            "relocation_words": 4
+          }
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    }
+  ],
+  "scope": "Original source, linked initial GDI pointers and masked code bytes; no guest dispatch or callback execution claim"
+}

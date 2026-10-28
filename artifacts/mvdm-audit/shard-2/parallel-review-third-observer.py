@@ -73,7 +73,7 @@ def inspect(owners=OWNERS):
             assert value == (symbol['va'] + addend) & 0xffffffff
             entries.append(dict(ordinal=ordinal, table_index=base + ordinal, thunk=name,
                                 binding=h['bind'](image, owner_obj, symbol)))
-        assert len(entries) == {'wgfont': 8, 'wgtext': 12, 'wgmeta': 8, 'wgpal': 10}[owner]
+        assert len(entries) == {'wgfont': 8, 'wgtext': 12, 'wgmeta': 8, 'wgpal': 10, 'wgdi': 119}[owner]
         output.append(dict(owner=owner, object_sha256=sha(BUILD / target), dependency=dep, entries=entries))
     return dict(result='pass', sources=sources, gdi_table_base=base, owners=output,
         inputs=[dict(path=str(p), sha256=sha(p)) for p in (image_path, BUILD / 'wow32.dll',

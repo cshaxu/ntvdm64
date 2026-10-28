@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "da9f045d5",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-gdi-core-observations.json",
+      "sha256": "BFC613160DD6EDC9F1ED73EF9C5B3E403C588A9E5B59EB35801986C631338797"
+    },
+    {
+      "path": "shard-1/wow-table-boundary-observations.json",
+      "sha256": "AE578E971D11B7B27E5BC48EA0AB12C827733D07334214EBBE16DA1F7BCF7D0C"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original source and initial table/image bindings only; no guest behavior acceptance"
+}

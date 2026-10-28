@@ -1,0 +1,177 @@
+{
+  "result": "pass",
+  "source": "wow32/wowtbl.c",
+  "source_sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960",
+  "catalog_ids": "SRC:252ed4673776c0731369;SRC:57312490ca08f26993ed",
+  "build_edge": "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c",
+  "table_base": 269099272,
+  "parts": [
+    {
+      "header": "wktbl2.h",
+      "base": 0,
+      "entries": 310,
+      "separator": 310
+    },
+    {
+      "header": "wutbl2.h",
+      "base": 311,
+      "entries": 539,
+      "separator": 850
+    },
+    {
+      "header": "wgtbl2.h",
+      "base": 851,
+      "entries": 491,
+      "separator": 1342
+    },
+    {
+      "header": "wkbdtbl2.h",
+      "base": 1343,
+      "entries": 138,
+      "separator": 1481
+    },
+    {
+      "header": "wstbl2.h",
+      "base": 1482,
+      "entries": 19,
+      "separator": 1501
+    },
+    {
+      "header": "wshtbl2.h",
+      "base": 1502,
+      "entries": 104,
+      "separator": 1606
+    },
+    {
+      "header": "wwstbl2.h",
+      "base": 1607,
+      "entries": 152,
+      "separator": 1759
+    },
+    {
+      "header": "wthtbl2.h",
+      "base": 1760,
+      "entries": 3,
+      "separator": 1763
+    },
+    {
+      "header": "wmmtbl2.h",
+      "base": 1764,
+      "entries": 3,
+      "separator": 1767
+    },
+    {
+      "header": "wcmdgtbl.h",
+      "base": 1768,
+      "entries": 27,
+      "separator": 1795
+    }
+  ],
+  "init_binding": {
+    "name": "_InitThunkTableOffsets@0",
+    "va": 268446752,
+    "function": true,
+    "owner": "wowtbl.obj",
+    "bytes": 206,
+    "relocation_words": 16
+  },
+  "attach_binding": {
+    "name": "_W32DllInitialize@12",
+    "va": 268442608,
+    "function": true,
+    "owner": "wow32.obj",
+    "bytes": 762,
+    "relocation_words": 51
+  },
+  "guest_copy_binding": {
+    "name": "_W32GetTableOffsets@4",
+    "va": 268445056,
+    "function": true,
+    "owner": "wow32.obj",
+    "bytes": 73,
+    "relocation_words": 6
+  },
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32.obj",
+      "sha256": "B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\inc\\wow.h",
+      "sha256": "64663C13ABAEFCCD99533352E08FB28EFC66032C94A1780BFF73BE4F4CDBF70B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wow32.c",
+      "sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wgtbl2.h",
+      "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkbdtbl2.h",
+      "sha256": "B00166F7ABF269442FA1AA4B5C07AB1C08AB126C15E886DD654F519FBEABB0EB"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wstbl2.h",
+      "sha256": "D3AEA894092DC6AFC33701CFBCCEFF6297234E9E67185B09EA4FCFDB7C478B5E"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wshtbl2.h",
+      "sha256": "84F782A33328812BF9E639EAE9F99236941E8BF19EA4C3328D8E8F9F3074E29F"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wwstbl2.h",
+      "sha256": "425F566FA0A559C2DCF79F39322A8CA3A0929371A447DE3337B0C9F6AD1BEF02"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wthtbl2.h",
+      "sha256": "830B724673E5B94B3D48D33E21FCAAA374DF3161D191ECC4B76E46387EF9817F"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wmmtbl2.h",
+      "sha256": "C48E5FC47DF9AC3A0FF72754E1253AF3C65DA102E4CA6B5EF5451A754E954EE5"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wcmdgtbl.h",
+      "sha256": "4C320281E81D1CECFAD832587C4887E9D96E09488348234BC276FF4B5CC00B32"
+    }
+  ],
+  "limitations": "Image boundaries and selected bodies only; no runtime initialization, guest publication or each entry behavioral validation."
+}

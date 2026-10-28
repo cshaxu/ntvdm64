@@ -4503,7 +4503,7 @@ wow32/wdib.c,3,pending,shard-3/file-review.csv
 wow32/wdib.h,1,pending,shard-1/file-audit.csv
 wow32/wdos.c,2,partial,shard-2/file-audit.csv
 wow32/wdos.h,0,pending,shard-0/review.csv
-wow32/wgdi.c,0,pending,shard-0/review.csv
+wow32/wgdi.c,0,partial,shard-0/review.csv
 wow32/wgdi.h,3,pending,shard-3/file-review.csv
 wow32/wgdi31.c,3,pending,shard-3/file-review.csv
 wow32/wgdi31.h,1,pending,shard-1/file-audit.csv
@@ -4589,7 +4589,7 @@ wow32/wowdde.h,1,pending,shard-1/file-audit.csv
 wow32/wowhooks.c,2,partial,shard-2/file-audit.csv
 wow32/wowhooks.h,3,partial,shard-3/file-review.csv
 wow32/wowtable.h,1,pending,shard-1/file-audit.csv
-wow32/wowtbl.c,1,pending,shard-1/file-audit.csv
+wow32/wowtbl.c,1,partial,shard-1/file-audit.csv
 wow32/wowtbl.h,2,pending,shard-2/file-audit.csv
 wow32/wparam.c,1,partial,shard-1/file-audit.csv
 wow32/wparam.h,1,pending,shard-1/file-audit.csv
