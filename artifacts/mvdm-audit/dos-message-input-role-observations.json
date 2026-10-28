@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "9825a2b4c",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-2/dos-message-input-observations.json",
+      "sha256": "50A8D5524FD7D1A8F7D8704E42AA1D85FA903C87BAFE928ABC63F1292ACC6465"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest build input roles, not DOS locale behavior"
+}

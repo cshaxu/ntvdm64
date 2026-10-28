@@ -1,0 +1,10 @@
+{
+  "exe_sha256": "40B380874875AC10E16BEDB04C5C05E7894A3F27A6EE1CB892948810BBC4D7B4",
+  "exe_bytes": 20462,
+  "mz_header_bytes": 512,
+  "payload_bytes": 19950,
+  "offset_of_com": 256,
+  "leading_256_all_zero": true,
+  "suffix_matches_installed_com": true,
+  "installed_com_sha256": "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756"
+}

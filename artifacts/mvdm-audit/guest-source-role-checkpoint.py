@@ -179,7 +179,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'dos/v86/tools/src/h2inc/h2inc.c', 'dos/v86/tools/src/stripdd/stripdd.c',
                         'dos/v86/tools/src/stripz/stripz.c')) or (prefix == 'dosx-guest-role-' and path in (
                         'dpmi/486/dxintr.asm', 'dpmi/dxini.asm', 'dpmi/dxmmgr.asm', 'dpmi/dxnetbio.asm',
-                        'dpmi/dxoem.asm', 'dpmi/ntnpxem.asm', 'dpmi/usa/dxmsg.asm', 'dpmi/mk.cmd', 'dpmi/migrate.bat')) or (prefix == 'dos-kernel-image-role-' and path == 'dos/v86/doskrnl/dos/NTDOS.BIN')
+                        'dpmi/dxoem.asm', 'dpmi/ntnpxem.asm', 'dpmi/usa/dxmsg.asm', 'dpmi/mk.cmd', 'dpmi/migrate.bat')) or (prefix == 'dos-kernel-image-role-' and path == 'dos/v86/doskrnl/dos/NTDOS.BIN') or (prefix == 'dos-message-input-role-' and path in ('dos/v86/messages/loadmsg.msg', 'dos/v86/messages/usa-ms.idx'))
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':

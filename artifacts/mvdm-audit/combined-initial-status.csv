@@ -923,7 +923,7 @@ dos/v86/messages/germany.msg,2,pending,shard-2/file-audit.csv
 dos/v86/messages/holland.msg,2,pending,shard-2/file-audit.csv
 dos/v86/messages/italy.msg,3,pending,shard-3/file-review.csv
 dos/v86/messages/japan.msg,1,pending,shard-1/file-audit.csv
-dos/v86/messages/loadmsg.msg,2,pending,shard-2/file-audit.csv
+dos/v86/messages/loadmsg.msg,2,excluded,shard-2/file-audit.csv
 dos/v86/messages/makefile,1,excluded,shard-1/file-audit.csv
 dos/v86/messages/nether.msg,1,pending,shard-1/file-audit.csv
 dos/v86/messages/norway.msg,1,pending,shard-1/file-audit.csv
@@ -932,7 +932,7 @@ dos/v86/messages/spain.msg,1,pending,shard-1/file-audit.csv
 dos/v86/messages/state.rst,3,excluded,shard-3/file-review.csv
 dos/v86/messages/sweden.msg,3,pending,shard-3/file-review.csv
 dos/v86/messages/usa-ibm.msg,1,pending,shard-1/file-audit.csv
-dos/v86/messages/usa-ms.idx,2,pending,shard-2/file-audit.csv
+dos/v86/messages/usa-ms.idx,2,excluded,shard-2/file-audit.csv
 dos/v86/messages/usa-ms.msg,1,excluded,shard-1/file-audit.csv
 dos/v86/redir/asmmacro.inc,0,excluded,shard-0/review.csv
 dos/v86/redir/debugmac.inc,1,excluded,shard-1/file-audit.csv
