@@ -302,7 +302,7 @@ dos/v86/cmd/exe2bin/exe2bin.skl,3,pending,shard-3/file-review.csv
 dos/v86/cmd/exe2bin/exe2bin.tag,2,pending,shard-2/file-audit.csv
 dos/v86/cmd/exe2bin/makefile,1,excluded,shard-1/file-audit.csv
 dos/v86/cmd/fastopen/fastopen.asm,3,excluded,shard-3/file-review.csv
-dos/v86/cmd/fastopen/FASTOPEN.EXE,0,pending,shard-0/review.csv
+dos/v86/cmd/fastopen/FASTOPEN.EXE,0,partial,shard-0/review.csv
 dos/v86/cmd/fastopen/fastopen.lnk,3,excluded,shard-3/file-review.csv
 dos/v86/cmd/fastopen/FASTOPEN.map,0,excluded,shard-0/review.csv
 dos/v86/cmd/fastopen/fastopen.OBJ,3,excluded,shard-3/file-review.csv
@@ -3509,7 +3509,7 @@ wow16/mmsystem/mmsex.dlg,3,pending,shard-3/file-review.csv
 wow16/mmsystem/mmsex.ico,1,pending,shard-1/file-audit.csv
 wow16/mmsystem/mmsysi.h,1,excluded,shard-1/file-audit.csv
 wow16/mmsystem/mmsystem.def,0,excluded,shard-0/review.csv
-wow16/mmsystem/MMSYSTEM.DLL,0,pending,shard-0/review.csv
+wow16/mmsystem/MMSYSTEM.DLL,0,partial,shard-0/review.csv
 wow16/mmsystem/mmsystem.map,3,excluded,shard-3/file-review.csv
 wow16/mmsystem/mmsystem.rc,2,pending,shard-2/file-audit.csv
 wow16/mmsystem/mmsystem.rcv,1,excluded,shard-1/file-audit.csv
@@ -3607,7 +3607,7 @@ wow16/rasapi16/makefile,2,excluded,shard-2/file-audit.csv
 wow16/rasapi16/ras.h,3,pending,shard-3/file-review.csv
 wow16/rasapi16/rasapi16.c,1,pending,shard-1/file-audit.csv
 wow16/rasapi16/rasapi16.def,0,excluded,shard-0/review.csv
-wow16/rasapi16/RASAPI16.DLL,0,pending,shard-0/review.csv
+wow16/rasapi16/RASAPI16.DLL,0,partial,shard-0/review.csv
 wow16/rasapi16/rasapi16.lrf,1,excluded,shard-1/file-audit.csv
 wow16/rasapi16/rasapi16.map,1,excluded,shard-1/file-audit.csv
 wow16/rasapi16/rasapi16.obj,0,excluded,shard-0/review.csv
@@ -3740,7 +3740,7 @@ wow16/test/shell/pmdos.asm,0,pending,shard-0/review.csv
 wow16/test/shell/pmdos.OBJ,2,excluded,shard-2/file-audit.csv
 wow16/test/shell/wowexec.c,0,pending,shard-0/review.csv
 wow16/test/shell/wowexec.def,0,excluded,shard-0/review.csv
-wow16/test/shell/WOWEXEC.EXE,0,pending,shard-0/review.csv
+wow16/test/shell/WOWEXEC.EXE,0,partial,shard-0/review.csv
 wow16/test/shell/wowexec.h,0,excluded,shard-0/review.csv
 wow16/test/shell/wowexec.ico,3,pending,shard-3/file-review.csv
 wow16/test/shell/wowexec.lrf,0,excluded,shard-0/review.csv
@@ -4058,7 +4058,7 @@ wow16/winoldap/winoldap.sym,0,excluded,shard-0/review.csv
 wow16/winsock/makefile,0,excluded,shard-0/review.csv
 wow16/winsock/winsock.asm,3,pending,shard-3/file-review.csv
 wow16/winsock/winsock.def,3,pending,shard-3/file-review.csv
-wow16/winsock/WINSOCK.DLL,0,pending,shard-0/review.csv
+wow16/winsock/WINSOCK.DLL,0,partial,shard-0/review.csv
 wow16/winsock/winsock.lrf,3,excluded,shard-3/file-review.csv
 wow16/winsock/winsock.map,0,excluded,shard-0/review.csv
 wow16/winsock/winsock.OBJ,3,excluded,shard-3/file-review.csv

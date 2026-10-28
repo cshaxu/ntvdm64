@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'ole-server-guest-image-role-':
+                if prefix == 'guest-package-image-family-role-':
+                    assert path in ('dos/v86/cmd/fastopen/FASTOPEN.EXE', 'wow16/mmsystem/MMSYSTEM.DLL', 'wow16/rasapi16/RASAPI16.DLL', 'wow16/test/shell/WOWEXEC.EXE', 'wow16/winsock/WINSOCK.DLL') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
+                elif prefix == 'ole-server-guest-image-role-':
                     assert path == 'wow16/ole/server/retail/OLESVR.DLL' and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
                 elif prefix == 'win16-guest-image-payload-role-':
                     assert path in ('wow16/bin/winstub.exe', 'wow16/wfwnet/WFWNET.DRV') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash

@@ -1,0 +1,85 @@
+{
+  "files": [
+    {
+      "path": "doskrnl/bios/dosmsg.cmd",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\doskrnl\\bios\\dosmsg.cmd",
+          "sha256": "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\bios\\dosmsg.cmd",
+          "sha256": "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\doskrnl\\bios\\dosmsg.cmd",
+          "sha256": "a7b1387fc13fd1f954cb569755d6211914b6221bb690b6c6e91dceaed2b23a04"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\dosmsg.cmd",
+      "installed_sha256": null
+    },
+    {
+      "path": "doskrnl/dos/makedos.cmd",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makedos.cmd",
+          "sha256": "c9cf63e808001245efbce6f4791ce9326d320e06930d398a885a00c05c4289e1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\makedos.cmd",
+          "sha256": "c9cf63e808001245efbce6f4791ce9326d320e06930d398a885a00c05c4289e1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\doskrnl\\dos\\makedos.cmd",
+          "sha256": "c9cf63e808001245efbce6f4791ce9326d320e06930d398a885a00c05c4289e1"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\makedos.cmd",
+      "installed_sha256": null
+    },
+    {
+      "path": "doskrnl/dos/dispatch.txt",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\dispatch.txt",
+          "sha256": "75775d3a6eecd745546672516db56db42c54891a5a0c8e02bcd81048b0043f40"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\dispatch.txt",
+          "sha256": "75775d3a6eecd745546672516db56db42c54891a5a0c8e02bcd81048b0043f40"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\doskrnl\\dos\\dispatch.txt",
+          "sha256": "75775d3a6eecd745546672516db56db42c54891a5a0c8e02bcd81048b0043f40"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\dispatch.txt",
+      "installed_sha256": null
+    },
+    {
+      "path": "doskrnl/dos/state.rst",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\state.rst",
+          "sha256": "7ef73805a29bca9d437b2b1c79007fcad00712e1ad247446e8875a9691eb1885"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\doskrnl\\dos\\state.rst",
+          "sha256": "7ef73805a29bca9d437b2b1c79007fcad00712e1ad247446e8875a9691eb1885"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\doskrnl\\dos\\state.rst",
+          "sha256": "7ef73805a29bca9d437b2b1c79007fcad00712e1ad247446e8875a9691eb1885"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\state.rst",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "No source build or guest locale test; ZIP basenames and installed system32 only."
+}

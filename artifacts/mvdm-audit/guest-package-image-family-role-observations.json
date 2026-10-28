@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "ddc8fc533",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-0/guest-package-image-family-observations.json",
+      "sha256": "4A32296140ADACB640C8007E54BF6383E00CA9CFBC3A102CB8EAB75436281894"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest image identity, not execution acceptance"
+}

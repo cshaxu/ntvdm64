@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1098,
+    "pending": 1093,
     "excluded": 2803,
-    "partial": 730,
+    "partial": 735,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original OLE server retail guest image matches archive; actual loading and runtime remain open."
+  "note": "Five original guest images match the archive; actual loading and runtime behavior remain open."
 }

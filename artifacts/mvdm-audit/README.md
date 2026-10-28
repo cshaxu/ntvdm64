@@ -589,3 +589,7 @@ The [guest stub and WFWNET review](win16-guest-image-payload-role-review.md) rec
 The [OLE server image review](shard-0/ole-server-image-review.md) matches the original retail image to the guest archive while recording the absent exact installed path; actual loading and OLE behavior remain unverified.
 
 The [PIFEDIT/FORCEDOS](shard-1/pifedit-forcedos-family-review.md), [SYSTEM NE](shard-2/system-ne-family-review.md), and [WRITE alternate source](shard-3/write-alternate-owners-role-review.md) reviews retain separate editor, driver and guest build-profile boundaries.
+
+The [guest package image family](shard-0/guest-package-image-family-review.md) compares five original DOS and Win16 images with the archive and exact installed paths; load and execution remain unverified.
+
+The [DOS kernel build records](shard-1/dos-kernel-build-family-review.md), [DDEML test/version inputs](shard-2/ddeml-test-version-review.md) and [WOW USER guest inputs](shard-3/wow-user-guest-input-role-review.md) distinguish historical recipes from actual guest runtime evidence.
