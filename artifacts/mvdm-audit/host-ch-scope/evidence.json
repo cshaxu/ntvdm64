@@ -14,7 +14,7 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
-      "sha256": "583356DFCD92C7B53494BEB258627842568A2C057A296581363B907DCEC0182F"
+      "sha256": "D063828A7B5FAAA2A3E20609EAC6414DA1E2075F26F4EAB8A5655D6CA89B9F1D"
     }
   ],
   "rows": 1815,
@@ -24,9 +24,9 @@
     "role-pending": 473
   },
   "host_candidate_ledger_status_counts": {
-    "partial": 428,
+    "partial": 429,
     "部分复通": 330,
-    "pending": 165,
+    "pending": 164,
     "待核验": 72,
     "excluded": 149,
     "full": 36,

@@ -41,7 +41,7 @@ dos/dem/demlabel.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H c
 dos/dem/demlock.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/demmisc.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/demmsg.c,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-dos/dem/demmsg.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+dos/dem/demmsg.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/demsrch.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/dem/dosdef.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/v86/cmd/command/buildmsg.c,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
