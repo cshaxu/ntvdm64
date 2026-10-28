@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "391cca934",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "wow32-resource-current-observations.json",
+      "sha256": "6977786D559D2752A8998B680EE7C49EC3B5EC2B58F6D389190990D2379AA012"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Resource source and bounded image strings only"
+}

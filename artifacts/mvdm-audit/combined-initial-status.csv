@@ -4582,7 +4582,7 @@ wow32/wow32.c,0,partial,shard-0/review.csv
 wow32/wow32.def,0,partial,shard-0/review.csv
 wow32/wow32.h,0,partial,shard-0/review.csv
 wow32/wow32.prf,1,excluded,shard-1/file-audit.csv
-wow32/wow32.rc,1,pending,shard-1/file-audit.csv
+wow32/wow32.rc,1,partial,shard-1/file-audit.csv
 wow32/wow32.tt,3,pending,shard-3/file-review.csv
 wow32/wow32fax.c,1,partial,shard-1/file-audit.csv
 wow32/wowdde.h,1,pending,shard-1/file-audit.csv
