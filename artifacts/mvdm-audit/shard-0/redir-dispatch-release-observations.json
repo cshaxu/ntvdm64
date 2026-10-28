@@ -1,0 +1,324 @@
+{
+  "result": "pass",
+  "source": "vdmredir/vrdisp.c",
+  "hashes": [
+    "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389",
+    "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389",
+    "030A3A2F2BAAEB36BB58EB459CC91A0F6BF15BFDEC777FC2998E3C3D69B2A389"
+  ],
+  "dispatch_binding": {
+    "name": "_VrDispatch",
+    "va": 268447344,
+    "function": true,
+    "owner": "vrdisp.obj",
+    "bytes": 27,
+    "relocation_words": 1
+  },
+  "entries": [
+    {
+      "index": 0,
+      "name": "_VrInitialize",
+      "owner": "vrinit.obj",
+      "va": 268447808
+    },
+    {
+      "index": 1,
+      "name": "_VrUninitialize",
+      "owner": "vrinit.obj",
+      "va": 268448272
+    },
+    {
+      "index": 2,
+      "name": "_VrGetNamedPipeInfo",
+      "owner": "vrnmpipe.obj",
+      "va": 268443040
+    },
+    {
+      "index": 3,
+      "name": "_VrGetNamedPipeHandleState",
+      "owner": "vrnmpipe.obj",
+      "va": 268442832
+    },
+    {
+      "index": 4,
+      "name": "_VrSetNamedPipeHandleState",
+      "owner": "vrnmpipe.obj",
+      "va": 268445632
+    },
+    {
+      "index": 5,
+      "name": "_VrPeekNamedPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268444240
+    },
+    {
+      "index": 6,
+      "name": "_VrTransactNamedPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268445808
+    },
+    {
+      "index": 7,
+      "name": "_VrCallNamedPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268442016
+    },
+    {
+      "index": 8,
+      "name": "_VrWaitNamedPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268446288
+    },
+    {
+      "index": 9,
+      "name": "_VrDeleteMailslot",
+      "owner": "vrmslot.obj",
+      "va": 268439552
+    },
+    {
+      "index": 10,
+      "name": "_VrGetMailslotInfo",
+      "owner": "vrmslot.obj",
+      "va": 268439840
+    },
+    {
+      "index": 11,
+      "name": "_VrMakeMailslot",
+      "owner": "vrmslot.obj",
+      "va": 268440048
+    },
+    {
+      "index": 12,
+      "name": "_VrPeekMailslot",
+      "owner": "vrmslot.obj",
+      "va": 268440720
+    },
+    {
+      "index": 13,
+      "name": "_VrReadMailslot",
+      "owner": "vrmslot.obj",
+      "va": 268440752
+    },
+    {
+      "index": 14,
+      "name": "_VrWriteMailslot",
+      "owner": "vrmslot.obj",
+      "va": 268441168
+    },
+    {
+      "index": 15,
+      "name": "_VrTerminateDosProcess",
+      "owner": "vrmisc.obj",
+      "va": 268448336
+    },
+    {
+      "index": 16,
+      "name": "_VrNetTransactApi",
+      "owner": "vrnetapi.obj",
+      "va": 268453408
+    },
+    {
+      "index": 17,
+      "name": "_VrNetRemoteApi",
+      "owner": "vrnetapi.obj",
+      "va": 268451120
+    },
+    {
+      "index": 18,
+      "name": "_VrNetNullTransactApi",
+      "owner": "vrnetapi.obj",
+      "va": 268451072
+    },
+    {
+      "index": 19,
+      "name": "_VrNetServerEnum",
+      "owner": "vrnetapi.obj",
+      "va": 268452448
+    },
+    {
+      "index": 20,
+      "name": "_VrNetUseAdd",
+      "owner": "vrnetapi.obj",
+      "va": 268453456
+    },
+    {
+      "index": 21,
+      "name": "_VrNetUseDel",
+      "owner": "vrnetapi.obj",
+      "va": 268453904
+    },
+    {
+      "index": 22,
+      "name": "_VrNetUseEnum",
+      "owner": "vrnetapi.obj",
+      "va": 268454128
+    },
+    {
+      "index": 23,
+      "name": "_VrNetUseGetInfo",
+      "owner": "vrnetapi.obj",
+      "va": 268454448
+    },
+    {
+      "index": 24,
+      "name": "_VrNetWkstaGetInfo",
+      "owner": "vrnetapi.obj",
+      "va": 268454880
+    },
+    {
+      "index": 25,
+      "name": "_VrNetWkstaSetInfo",
+      "owner": "vrnetapi.obj",
+      "va": 268440720
+    },
+    {
+      "index": 26,
+      "name": "_VrNetMessageBufferSend",
+      "owner": "vrnetapi.obj",
+      "va": 268450816
+    },
+    {
+      "index": 27,
+      "name": "_VrGetCDNames",
+      "owner": "vrnetapi.obj",
+      "va": 268449936
+    },
+    {
+      "index": 28,
+      "name": "_VrGetComputerName",
+      "owner": "vrnetapi.obj",
+      "va": 268450400
+    },
+    {
+      "index": 29,
+      "name": "_VrGetUserName",
+      "owner": "vrnetapi.obj",
+      "va": 268450560
+    },
+    {
+      "index": 30,
+      "name": "_VrGetDomainName",
+      "owner": "vrnetapi.obj",
+      "va": 268440720
+    },
+    {
+      "index": 31,
+      "name": "_VrGetLogonServer",
+      "owner": "vrnetapi.obj",
+      "va": 268440720
+    },
+    {
+      "index": 32,
+      "name": "_VrNetHandleGetInfo",
+      "owner": "vrnmpipe.obj",
+      "va": 268443632
+    },
+    {
+      "index": 33,
+      "name": "_VrNetHandleSetInfo",
+      "owner": "vrnmpipe.obj",
+      "va": 268443824
+    },
+    {
+      "index": 34,
+      "name": "_VrNetGetDCName",
+      "owner": "vrnetapi.obj",
+      "va": 268440720
+    },
+    {
+      "index": 35,
+      "name": "_VrReadWriteAsyncNmPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268444928
+    },
+    {
+      "index": 36,
+      "name": "_VrReadWriteAsyncNmPipe",
+      "owner": "vrnmpipe.obj",
+      "va": 268444928
+    },
+    {
+      "index": 37,
+      "name": "_VrNetbios5c",
+      "owner": "vrnetb.obj",
+      "va": 268458192
+    },
+    {
+      "index": 38,
+      "name": "_VrHandleAsyncCompletion",
+      "owner": "vrinit.obj",
+      "va": 268447744
+    },
+    {
+      "index": 39,
+      "name": "_VrDlc5cHandler",
+      "owner": "vrdlc5c.obj",
+      "va": 268470592
+    },
+    {
+      "index": 40,
+      "name": "_VrVdmWindowInit",
+      "owner": "vrdlc5c.obj",
+      "va": 268471728
+    },
+    {
+      "index": 41,
+      "name": "_VrReturnAssignMode",
+      "owner": "vrnetapi.obj",
+      "va": 268445792
+    },
+    {
+      "index": 42,
+      "name": "_VrSetAssignMode",
+      "owner": "vrnetapi.obj",
+      "va": 268445792
+    },
+    {
+      "index": 43,
+      "name": "_VrGetAssignListEntry",
+      "owner": "vrnetapi.obj",
+      "va": 268449248
+    },
+    {
+      "index": 44,
+      "name": "_VrDefineMacro",
+      "owner": "vrnetapi.obj",
+      "va": 268448720
+    },
+    {
+      "index": 45,
+      "name": "_VrBreakMacro",
+      "owner": "vrnetapi.obj",
+      "va": 268448576
+    },
+    {
+      "index": 46,
+      "name": "_VrNetServiceControl",
+      "owner": "vrnetapi.obj",
+      "va": 268453024
+    },
+    {
+      "index": 47,
+      "name": "_VrDismissInterrupt",
+      "owner": "vrinit.obj",
+      "va": 268447536
+    },
+    {
+      "index": 48,
+      "name": "_VrEoiAndDismissInterrupt",
+      "owner": "vrinit.obj",
+      "va": 268447600
+    },
+    {
+      "index": 49,
+      "name": "_VrCheckPmNetbiosAnr",
+      "owner": "vrinit.obj",
+      "va": 268447472
+    }
+  ],
+  "object_sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E",
+  "map_sha256": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0",
+  "release_sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+  "cached_sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A",
+  "limits": "Original source and static dispatch binding only; no guest or network execution proof."
+}

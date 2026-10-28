@@ -100,6 +100,14 @@ records gated CMPXCHG/XADD bodies and an image-bound interpreter entry.
 The [WOW keyboard thunk review](shard-3/wow-keyboard-thunks-lifecycle-review.md)
 binds eleven selected bodies to released code while retaining guest and
 pointer-lifetime acceptance.
+The [redirector dispatch review](shard-0/redir-dispatch-release-review.md)
+binds all 50 original service-table targets to the released DLL without
+claiming guest or network execution.
+The [generic thunk convention review](shard-3/wow-generic-thunk-call-convention-review.md)
+records the current-object versus historical-assembly selection boundary.
+The [debug object](shard-2/base-debug-objects-review.md) and
+[GDI header](shard-1/wow-gdi-headers-review.md) reviews retain bounded
+profile and declaration evidence.
 The [SLAVEPC disk review](shard-2/disk-slavepc-review.md) and
 [WOW callback declarations](shard-1/wow-callback-control-headers-review.md)
 preserve alternate profile and reentrancy boundaries for later work.

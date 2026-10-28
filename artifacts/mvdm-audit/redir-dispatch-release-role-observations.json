@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "6085452e7",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/redir-dispatch-release-observations.json",
+      "sha256": "8EBDEEB722E9C12E08D4A0160F180E77A1213BBF367C14FBFECEABD3264D2A7F"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected dispatch and table targets, not network behavior acceptance"
+}
