@@ -2310,12 +2310,12 @@ softpc.new/host/src/makefile,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/makefile.inc,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/nt_aorc.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_bop.c,1,partial,shard-1/file-audit.csv
-softpc.new/host/src/nt_cga.c,0,pending,shard-0/review.csv
+softpc.new/host/src/nt_cga.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_com.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_cprgs.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_cpu.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_det.c,1,pending,shard-1/file-audit.csv
-softpc.new/host/src/nt_ega.c,0,pending,shard-0/review.csv
+softpc.new/host/src/nt_ega.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_emm.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_eoi.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_error.c,1,partial,shard-1/file-audit.csv
@@ -2335,7 +2335,7 @@ softpc.new/host/src/nt_mem.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_mess.c,3,excluded,shard-3/file-review.csv
 softpc.new/host/src/nt_mouse.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_msscs.c,1,partial,shard-1/file-audit.csv
-softpc.new/host/src/nt_munge.c,0,pending,shard-0/review.csv
+softpc.new/host/src/nt_munge.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_nls.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_ntfun.c,3,pending,shard-3/file-review.csv
 softpc.new/host/src/nt_pif.c,3,partial,shard-3/file-review.csv

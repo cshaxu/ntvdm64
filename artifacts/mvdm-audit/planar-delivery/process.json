@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 22052,
+  "arguments": "-NoProfile -File artifacts/mvdm-audit/planar-native-delivery-verification.ps1",
+  "started": "2026-10-28T02:51:07.9368626Z"
+}

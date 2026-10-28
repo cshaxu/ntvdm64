@@ -42,6 +42,13 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
+The [planar checkpoint](planar-native-role-review.md) leaves S13 actual
+CGA text/high-colour and EGA low-resolution/alternative modes; real caller
+dimension/address preconditions and source/LUT/DIB lifetimes; mask concurrency,
+mode changes, transport failures and retirement. Original unsupported mono/
+user-font bodies require an original-profile capability disposition, not a
+success stub. The 26,114 controlled pixel cases do not close those contracts.
+
 The [input/NLS checkpoint](input-native-role-review.md) leaves S13 real LED/
 BIOS/Console synchronization, input nesting/reset/retirement, OEM/DBCS and
 Alt-numpad conversion and failure, and missing initialization resources/

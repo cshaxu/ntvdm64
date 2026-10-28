@@ -19,9 +19,9 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[input review](../../artifacts/mvdm-audit/input-native-role-review.md) adds five
-roles, six image-bound functions and actual-object contract evidence.
-The ledger has 1,550 pending, 444 partial, 53 full and 2,637 excluded physical
+[planar review](../../artifacts/mvdm-audit/planar-native-role-review.md) adds three
+roles, 40 image-bound functions and actual-object pixel evidence.
+The ledger has 1,547 pending, 447 partial, 53 full and 2,637 excluded physical
 file roles. Keycode one-past reads remain a proved S13 defect; no runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)

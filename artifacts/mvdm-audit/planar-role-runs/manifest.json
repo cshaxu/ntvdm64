@@ -1,0 +1,42 @@
+[
+  {
+    "path": "planar-image-completion.json",
+    "bytes": 66,
+    "sha256": "ACCD6E2A066239C97FE4A55A0728DFC198C39BB3177AF3F7546523601AB8180E"
+  },
+  {
+    "path": "planar-image-process.json",
+    "bytes": 189,
+    "sha256": "47334C3261976D211DE9C3E67AA96BA673656701F98FA3BF4E36A5107D086D8F"
+  },
+  {
+    "path": "planar-image-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "planar-image-stdout.txt",
+    "bytes": 85,
+    "sha256": "50397EFAB783004770AA6FAD2FC1E1F8EB17C3347632C19B71EB632D50BBC0B6"
+  },
+  {
+    "path": "planar-role-completion.json",
+    "bytes": 66,
+    "sha256": "F495F91F44C12A67F7F7E0F1870F95D8ADBD9AF8BAEE67CCB282B9DDC62AEE07"
+  },
+  {
+    "path": "planar-role-process.json",
+    "bytes": 192,
+    "sha256": "C2989EE7A77C0039563FC7EE92515F8C018724A829F14EDB6274204BEFEE9DBD"
+  },
+  {
+    "path": "planar-role-stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "planar-role-stdout.txt",
+    "bytes": 383,
+    "sha256": "8EB10CA0CB057C7D72C4FD6FEBDDE233A7F896D239AB90D45B5BC0C8626BCF70"
+  }
+]

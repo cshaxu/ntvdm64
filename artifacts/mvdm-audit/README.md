@@ -9,11 +9,11 @@ used the disjoint frozen path shards described by `manifest.json`.
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
 reasoning and limitations are in each shard directory. Current counts are
-444 partial, 2,637 excluded physical file roles,
-53 full files (27 executable leaves and 26 declarations) and 1,550 pending.
+447 partial, 2,637 excluded physical file roles,
+53 full files (27 executable leaves and 26 declarations) and 1,547 pending.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the input/NLS checkpoint, not a prior snapshot's fixed counts.
+the [planar checkpoint](planar-native-role-review.md), not a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)

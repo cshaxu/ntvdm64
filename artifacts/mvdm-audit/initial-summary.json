@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1550,
+    "pending": 1547,
     "excluded": 2637,
-    "partial": 444,
+    "partial": 447,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Three original input/NLS integrations partial with an actual-object scan-bound defect retained for S13; two generic error-table files excluded through original NT resource ownership. No guest or runtime image changed."
+  "note": "Three original planar owners are partial: 40 image-bound functions, 33 dispatch slots and actual-object pixels. No original source or image changed; mode/caller/transport lifetimes remain S13."
 }

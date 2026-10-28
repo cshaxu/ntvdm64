@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "bea69f8b4",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "planar-image-observations.json",
+      "sha256": "F2F9CCA4F6A2FA5A066E3623D6EBFF99F524810C3DB2817DE7B39F6264C51332"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original CGA/EGA/munge integration with bounded pixel contracts; no complete guest rendering or release qualification"
+}

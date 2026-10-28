@@ -178,7 +178,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-superseded-nt-error-table-source-only':
                     assert prefix == 'input-native-role-' and path in ('softpc.new/host/src/nt_ertbl.c', 'softpc.new/host/src/nt_mess.c')
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -211,6 +211,29 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'planar-native-role-':
+        observed = json.loads((A / 'planar-image-observations.json').read_text())
+        assert runpy.run_path(str(A / 'planar-image-observer.py'))['inspect']() == observed
+        assert len(observed['sources']) == 3 and sum(len(r['functions']) for r in observed['sources']) == 40
+        assert len(observed['dispatch_vectors']) == 3 and sum(len(r['slots']) for r in observed['dispatch_vectors']) == 33
+        assert len(observed['munge_calls']) == 6
+        assert {r['relative_path'] for r in observed['sources']} == set(changed)
+        assert all(r['status'] == 'partial' for r in changed.values())
+        root = A / 'planar-pixel-runs'
+        receipt = json.loads((root / 'result.json').read_text(encoding='utf-8-sig'))
+        assert receipt['result'] == 'pass' and receipt['checks'] == 182801
+        assert receipt['callbacks'] == receipt['cases'] == 26114
+        normal = json.loads((root / 'normal.completion.json').read_text(encoding='utf-8-sig'))
+        negative = json.loads((root / 'negative.completion.json').read_text(encoding='utf-8-sig'))
+        assert normal['exit'] == 0 and negative['exit'] == 1
+        assert 'checks=9 failures=2 callbacks=1 cases=1 wrong_oracle=1' in (root / 'negative.stdout.txt').read_text()
+        for row in rows(root / 'inputs.csv'):
+            assert sha(Path(row['Path'])) == row['Hash']
+        for row in json.loads((root / 'manifest.json').read_text(encoding='utf-8-sig')):
+            assert sha(root / row['path']) == row['sha256']
+        for proof in changed.values():
+            assert proof['original_text_retained_percent'] == '100'
+            assert proof['restored_estimate_status'].startswith('unmeasurable:')
     if prefix == 'input-native-role-':
         observed = json.loads((A / 'input-image-observations.json').read_text())
         assert runpy.run_path(str(A / 'input-image-observer.py'))['inspect']() == observed
@@ -673,7 +696,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)
