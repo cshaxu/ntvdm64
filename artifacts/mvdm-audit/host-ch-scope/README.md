@@ -140,4 +140,6 @@ The [WOW owner recheck](wow-four-excluded-owner-recheck.md) establishes matching
 
 The [four legacy host header recheck](../shard-3/four-legacy-host-headers-recheck.md) documents selected and unselected owner boundaries; its recommendations have not been applied to the ledger.
 
+The [GLOBALFREEALL owner trace](globalfreeall-guest-owner-review.md) corrects a host-table inference: original guest kernel paths directly implement and call it. The [memory-bit-index path review](ccpu-bit-index-shared-path-review.md) bounds the previously reproduced BTC defect and keeps the rest of the instruction matrix unproven.
+
 The [15-header review](../shard-3/pending-header-15-disposition-review.md) and [VDMREDIR review](vdmredir-five-role-recheck.md) distinguish exact historical declarations from selected device and DLC owners. Subsequent ledger updates classify only the explicitly identified physical paths; real device and DLC behavior remains independently scoped.
