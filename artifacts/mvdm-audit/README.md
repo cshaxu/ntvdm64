@@ -1,5 +1,9 @@
 # MVDM cross-audit: first parallel review
 
+The active [eight-way work partition](parallel8-work-plan.md) assigns pending
+paths and the external census to disjoint reviewers in batches; shared ledger
+changes are merged only after independent verification.
+
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded
 actual-object evidence without changing the pending source-role ledger.

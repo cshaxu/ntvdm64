@@ -1,0 +1,50 @@
+{
+  "result": "pass",
+  "base": "f472b0926",
+  "fixture_exit_code": 0,
+  "stdout": "PASS original C-VID setup: 38 pairs x 4 values, 81 slots, exact read/write/mark selection, 256 write-state cases, 256 simple byte and 253 unaligned word/dword read/write cases with guards, unknown read/mark selectors, negative control, concurrent scratch preservation",
+  "compile": "MSVC x86, cached Ninja cvidc-vector-binding-fixture.exe; existing /force:multiple fixture graph",
+  "scope": "Linear simple byte, word and dword access with bounded aligned/unaligned offsets, guest-base subtraction and guard bytes; no planar, mode-13, frontend or guest claim",
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "6049E67EB804DBA2BD59E3EF7563B1FA0B3979B52EADFC9745745F5E1E000185"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/cvidc/ev_glue.c",
+      "sha256": "7849FA7719B5A46FCAA4548F180589AF29CF84ECF24AF4E3D59FA7FCD58F7AFE"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/cvidc/sevid000.c",
+      "sha256": "251BDD0925969A79D3FF98F5E19A249E99849D0DB0C3C908AE5005040E8E7758"
+    },
+    {
+      "path": "src/mvdm/softpc.new/base/cvidc/sevid001.c",
+      "sha256": "963AFFCEFA6E16B2754365787ADA8C2A7944B8890D96807D1A98DF44CCAE2C84"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/ev_glue.obj",
+      "sha256": "5EBEE9014915207ACDC2A9A95EEA413805ED4D1125A8A489BB7DAB97469F109D"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/SEVID000.obj",
+      "sha256": "0E788994505FBAC8EF26B241F732CAB75D206A34640474AA6C916B9C23297EDE"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/SEVID001.obj",
+      "sha256": "1F64A4979E5084534C8CBC7E9E45AE7CA0D66F578A51FBBAFD5DC8C774DBEC0C"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe",
+      "sha256": "B45F9585455C168FF2371CF3FBF28BAB9A5CA87A6F93925E777B047A11D22A01"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe.map",
+      "sha256": "92F2775F804C58C811D0663973BE5EA3F9CAD6D87D1C457A2B2E1BB5CAC318E3"
+    },
+    {
+      "path": "assets/release/ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    }
+  ]
+}

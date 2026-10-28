@@ -39,3 +39,7 @@ linear buffer, all 256 byte values are written and read back through a
 nonzero guest-address base, the dirty counter advances, and trace identifiers
 confirm the intended routines. This is not a planar, latch, mode-13, real
 guest or frontend test. The fixture uses the existing `/force:multiple` graph.
+The [width extension](cvidc-linear-width-fixture-evidence.json) additionally
+checks 253 aligned and unaligned offsets for little-endian word/dword writes
+and reads, with both boundary guards intact. Plane and latch modes remain
+uncovered.
