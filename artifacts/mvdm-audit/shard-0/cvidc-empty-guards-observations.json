@@ -1,0 +1,74 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/cvidc/chain2_c.h",
+      "sha256": "7EFF1BB184ECC203B3413FE8BF55CDFB861E4A06DFB8CDE973BC94C5F5E964B2",
+      "guard": "_Chain2_c_h",
+      "wow_source_ids": "SRC:0f653b7e2ec38b1e485b;SRC:5ff5cfa7406f0356cf2f"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/enter_c.h",
+      "sha256": "4EC3493A0CA6966E91092A317F94190B1DF6326AED29902C33C8DC870F1032F5",
+      "guard": "_Enter_c_h",
+      "wow_source_ids": "SRC:7bf228ec29b52ebdb301;SRC:848ca65804f1254243e3"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/nanob_c.h",
+      "sha256": "DAD9CF8F222669C79B0DAE480EF5D740DC9428AC48FD58FCC3DEE0FBF9978D52",
+      "guard": "_NanoB_c_h",
+      "wow_source_ids": "SRC:9027f56ea49e75ceae2a;SRC:929a498747ee404d04cc"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/nanod_c.h",
+      "sha256": "1EB0D068D2D4AEE74081415AFC5393D77228ECBDAACCCCE2D5B8F819BD8BC24B",
+      "guard": "_NanoD_c_h",
+      "wow_source_ids": "SRC:0f2fc806a9a9241f77b4;SRC:df01500d125e7aca5cf2"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/pti_c.h",
+      "sha256": "F9A501635CAF055B045C15BF9A7F8F6764A50299DB59495AB5C4E692D31835B3",
+      "guard": "_Pti_c_h",
+      "wow_source_ids": "SRC:17a99731ea604fc7c1b4;SRC:c9046b35dd0006d5ef96"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/read_c.h",
+      "sha256": "4AAA6945AD478284F3EFDF71B5F4F38CBD1E0B4B79B3A5B588E01E3B353ABE57",
+      "guard": "_Read_c_h",
+      "wow_source_ids": "SRC:2ec23d7299f2cf9edd9f;SRC:75e4287fdca51f55d273"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/rotate_c.h",
+      "sha256": "A31C2FFC77400DCB50D4211AB80EBB7C99F972ED41BDB48FE2E8E293C079A0D4",
+      "guard": "_Rotate_c_h",
+      "wow_source_ids": "SRC:2b9e11d197f1505771f7;SRC:5b769dd8764976150d7b"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/shift_c.h",
+      "sha256": "D7E3AFF851E4AC66138F40F41504C1E15B043FBF8A1164A6B7461DB9F40CA086",
+      "guard": "_Shift_c_h",
+      "wow_source_ids": "SRC:460a23f077bb1ced31e2;SRC:51292e57f13ab7afc79f"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/string_c.h",
+      "sha256": "5708BD3D42E2AA3F21085E4E8E477184F7B069757DD690598A2B259CF117CF4E",
+      "guard": "_String_c_h",
+      "wow_source_ids": "SRC:cfe4e1ef23f649da043f;SRC:f1c722e897bf47e1e5a6"
+    },
+    {
+      "relative_path": "softpc.new/base/cvidc/xlat_c.h",
+      "sha256": "BBD1284454566DE2244D42A3A0F19785784C33F4D1396A169F2AF202ADAA33F0",
+      "guard": "_Xlat_c_h",
+      "wow_source_ids": "SRC:399642e4bc9aaf20d3e0;SRC:d2f8366f40c69690c93c"
+    },
+    {
+      "relative_path": "inc/APISTRUC.INC",
+      "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "guard": null,
+      "wow_source_ids": "SRC:b99e06b1b1705743452e;SRC:e632edb006b791512b56"
+    }
+  ],
+  "guard_reference_lines": 60,
+  "recipe_sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9",
+  "scope": "Only empty physical header roles; CPU, video and network functionality remain in scope"
+}

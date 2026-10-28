@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1372,
-    "excluded": 2671,
+    "pending": 1361,
+    "excluded": 2682,
     "partial": 588,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Fourteen historical DDEML test/sample input roles are excluded only as product owners; DDE behavior and future tests remain in scope."
+  "note": "Eleven original empty declaration file roles are excluded; CPU, video and network capabilities remain in scope."
 }

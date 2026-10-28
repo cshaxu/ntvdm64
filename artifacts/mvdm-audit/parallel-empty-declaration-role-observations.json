@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "9885952a4",
+  "candidate_count": 11,
+  "source_tables": [
+    {
+      "path": "shard-0/cvidc-empty-guards-observations.json",
+      "sha256": "96FB7EBEDE30885F3481F5F24D38B455F38AE8E048E79FE737D627FA85432E74"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Empty physical declaration roles only; no capability exclusion"
+}

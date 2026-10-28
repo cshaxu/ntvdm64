@@ -28,6 +28,9 @@ guest local-path, audio and lifecycle boundaries.
 The [USER interaction checkpoint](parallel-user-interaction-role-review.md)
 records three partial source roles and retains guest behavior and teardown boundaries.
 
+The [empty declaration checkpoint](shard-0/cvidc-empty-guards-review.md)
+excludes eleven empty file roles while preserving CPU, video and network scope.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 
