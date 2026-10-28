@@ -1,6 +1,6 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 44 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 47 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).
@@ -46,3 +46,6 @@ The coordinator independently replayed all 44 observers against their retained J
 - [ccpu-stack-owner](shard-1/ccpu-stack-owner-review.md): [observer](shard-1/ccpu-stack-owner-observer.py), [receipt](shard-1/ccpu-stack-owner-observations.json).
 - [dos-himem-exe](shard-2/dos-himem-exe-review.md): [observer](shard-2/dos-himem-exe-observer.py), [receipt](shard-2/dos-himem-exe-observations.json).
 - [dlc-window](shard-3/dlc-window-role-review.md): [observer](shard-3/dlc-window-observer.py), [receipt](shard-3/dlc-window-observations.json).
+- [wow-fax-owner](shard-1/wow-fax-owner-review.md): [observer](shard-1/wow-fax-owner-observer.py), [receipt](shard-1/wow-fax-owner-observations.json).
+- [dos-redir-guest](shard-2/dos-redir-guest-review.md): [observer](shard-2/dos-redir-guest-observer.py), [receipt](shard-2/dos-redir-guest-observations.json).
+- [remote-rap](shard-3/remote-rap-role-review.md): [observer](shard-3/remote-rap-observer.py), [receipt](shard-3/remote-rap-observations.json).

@@ -1,0 +1,225 @@
+{
+  "result": "pass",
+  "source": "wow32/wow32fax.c",
+  "source_sha256": "855AC6C5D6D6CA97CC78802994784E8612E5EB6197533790466664BF0E892700",
+  "catalog_ids": "SRC:22773ed9b1db300efea6;SRC:ed8ef73945205576b152",
+  "build_edge": "build obj/wow32fax.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wow32fax.c",
+  "functions": [
+    {
+      "name": "_BuildPath@8",
+      "va": 268546112,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 197,
+      "relocation_words": 4
+    },
+    {
+      "name": "_BuildStrList@8",
+      "va": 268546320,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 132,
+      "relocation_words": 1
+    },
+    {
+      "name": "_ConvertDevMode@12",
+      "va": 268546464,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 470,
+      "relocation_words": 5
+    },
+    {
+      "name": "_DeviceCapsHandler@4",
+      "va": 268546944,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 373,
+      "relocation_words": 14
+    },
+    {
+      "name": "_ExtDevModeHandler@4",
+      "va": 268547328,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 414,
+      "relocation_words": 12
+    },
+    {
+      "name": "_GetFaxPrinterProfileString@20",
+      "va": 268547744,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 307,
+      "relocation_words": 11
+    },
+    {
+      "name": "_InstallWowFaxPrinter@12",
+      "va": 268548064,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 696,
+      "relocation_words": 46
+    },
+    {
+      "name": "_IsFaxPrinterSupportedDevice@4",
+      "va": 268548768,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 63,
+      "relocation_words": 4
+    },
+    {
+      "name": "_IsFaxPrinterWriteProfileString@12",
+      "va": 268548832,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 92,
+      "relocation_words": 5
+    },
+    {
+      "name": "_WG32DMBitBlt@4",
+      "va": 268548928,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 305,
+      "relocation_words": 6
+    },
+    {
+      "name": "_WOW32FaxHandler@8",
+      "va": 268549248,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 1408,
+      "relocation_words": 75
+    },
+    {
+      "name": "_WowFaxWndProc@16",
+      "va": 268550656,
+      "function": true,
+      "owner": "wow32fax.obj",
+      "bytes": 394,
+      "relocation_words": 22
+    }
+  ],
+  "registry_edges": [
+    {
+      "caller": "_GetFaxPrinterProfileString@20",
+      "target": "_wow_registry_open_key_ex@20",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_GetFaxPrinterProfileString@20",
+      "target": "_wow_registry_query_value_ex@24",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_GetFaxPrinterProfileString@20",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_GetFaxPrinterProfileString@20",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_open_key_ex@20",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_create_key@12",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_set_value_ex@24",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_InstallWowFaxPrinter@12",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_WOW32FaxHandler@8",
+      "target": "_wow_registry_open_key_ex@20",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_WOW32FaxHandler@8",
+      "target": "_wow_registry_query_value_ex@24",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_WOW32FaxHandler@8",
+      "target": "_wow_registry_query_value_ex@24",
+      "owner": "wow_registry_binding.obj"
+    },
+    {
+      "caller": "_WOW32FaxHandler@8",
+      "target": "_wow_registry_close_key@4",
+      "owner": "wow_registry_binding.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wow32fax.c",
+      "sha256": "855AC6C5D6D6CA97CC78802994784E8612E5EB6197533790466664BF0E892700"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32fax.c",
+      "sha256": "855AC6C5D6D6CA97CC78802994784E8612E5EB6197533790466664BF0E892700"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wow32fax.c",
+      "sha256": "855AC6C5D6D6CA97CC78802994784E8612E5EB6197533790466664BF0E892700"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32fax.obj",
+      "sha256": "6EBFCE4F7F631A7A9B81E1E2E0CBBBDEE52CC1ED8AFBA4987F5F32298570324B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkman.c",
+      "sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkernel.c",
+      "sha256": "DAFC1E3A472DD55458CB41D216DF25ACBE11BAD68EE4BD8D8E90E8FF554DA998"
+    },
+    {
+      "path": "src\\wow32-dll\\source\\wow_registry_binding.c",
+      "sha256": "D2CD247800DBAAACEC597130E5F6637C914F57A55376934BFC144A9E31DFD8DE"
+    }
+  ],
+  "limitations": "Static evidence only; no fax device, spooler, registry modification, allocation failure or installer behavior was exercised."
+}

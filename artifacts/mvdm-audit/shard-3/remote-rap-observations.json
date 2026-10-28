@@ -1,0 +1,37 @@
+{
+  "inc/vrremote.h": {
+    "current": "e2214353d522aa44fb3bb2b2cd0918d51f5fc0a300e3643bb53090842d3d1819",
+    "opennt": "e2214353d522aa44fb3bb2b2cd0918d51f5fc0a300e3643bb53090842d3d1819",
+    "opennt45": "e2214353d522aa44fb3bb2b2cd0918d51f5fc0a300e3643bb53090842d3d1819"
+  },
+  "vdmredir/vrremote.c": {
+    "current": "8911a0e0965f199f995760f2edead1f48726542b2e813c8404be678cb40f20f9",
+    "opennt": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+    "opennt45": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8"
+  },
+  "vdmredir/vrnetapi.c": {
+    "current": "8db46c3c95773834f8472f97c7ceb09d5ed47444f3ca4b74410fa993cb1eb9d9",
+    "opennt": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+    "opennt45": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70"
+  },
+  "vdmredir/vrdisp.c": {
+    "current": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt45": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
+  },
+  "dos/v86/redir/netapis.asm": {
+    "current": "b3d490abc40544a1563104be20c84f5dda7b5672cb53ca282f3520ec1a23cf7d",
+    "opennt": "b3d490abc40544a1563104be20c84f5dda7b5672cb53ca282f3520ec1a23cf7d",
+    "opennt45": "b3d490abc40544a1563104be20c84f5dda7b5672cb53ca282f3520ec1a23cf7d"
+  },
+  "unavailable_provider_sha256": "d493722d383f3801108b3a4b46c109eea86d98b994408ec685ada4ccb213ac34",
+  "map": {
+    "sha256": "4fcc34a02adad34e0ac55abe0af1c37d0a88db59b84e0fb22fc6616478544bc0",
+    "lines": [
+      " 0001:00002d30       _VrNetRemoteApi            10003d30 f   vrnetapi.obj",
+      " 0001:00003620       _VrNetTransactApi          10004620 f   vrnetapi.obj",
+      " 0001:00004da0       _VrRemoteApi               10005da0 f   vrremote.obj",
+      " 0001:00009d60       _RxpTransactSmb            1000ad60 f   vdmredir-dll-bindings:mvdm_redirector_remote_unavailable.obj"
+    ]
+  }
+}

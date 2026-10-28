@@ -1,0 +1,17 @@
+# Shard 1: original WOW fax client, image binding and failure paths
+
+`wow32/wow32fax.c` is byte-identical to both frozen original source editions. The observer binds all 12 map-visible functions from the selected object to released WOW32 executable bytes, and resolves actual Registry relocations to `wow_registry_*` project bindings, including the handler's query and installer's set. This does not prove an external fax driver, printer, Win16 task or spooler ran. The prior `wowfax-trace.md` documents the separate unselected WOWFAX driver/UI and missing product-deployment evidence; T468 printing acceptance explicitly does not establish fax operation.
+
+## Ownership and source paths
+
+`wkman.c` can dispatch fax requests to `WOW32FaxHandler`; the handler sets up the WOWEXEC window and obtains its supported-driver list. The original native window procedure opens named shared mappings for fax messages, dispatches their payload, unmaps the view and closes the mapping handle on the visible success path; non-fax messages go to the prior window procedure. `wkernel.c` profile writes may call `IsFaxPrinterWriteProfileString` and then `InstallWowFaxPrinter`, which uses Registry, WINSPOOL and files. These are source-level paths: prerequisites, actual installed files, access permissions and end-to-end teardown are not established by link evidence.
+
+## Original failure candidates requiring controlled tests
+
+- In `GetSupportedFaxDrivers`, after obtaining a nonempty list, `malloc_w` for its pointer array is followed by `RtlZeroMemory` before testing the pointer (`wow32fax.c:131–137`). If this allocation returns NULL with a nonzero count, the source attempts a write through NULL. The helper is inlined into the bound `_WOW32FaxHandler@8` in this build, where malloc and memset relocations are present; this observation alone does not prove a live allocation failure or executable instruction ordering under all branches.
+- The same helper returns an uninitialized local `alpSupFaxDrvList` if registry setup fails or the list is empty (`:105–149`), while setting the global count to zero. The current `IsFaxPrinterSupportedDevice` iteration is bounded by that count, so return of an indeterminate value does not by itself establish dereference or a user-visible defect. The allocated MULTI_SZ buffer also has a failure path after its second query where no local free is visible; trace persistent ownership and actual caller lifecycle before assigning a leak.
+- `InstallWowFaxPrinter` reads `bRetVal` after the successful `AddPrinterDriver` path without a visible prior assignment, as the earlier fax trace notes. It also has later success/failure branches worth validating with a mocked spooler. Neither the original intended outcome nor runtime effect is demonstrated by this static review.
+
+These are source-level original candidates, not project-authored regressions or accepted fixes. A finite, isolated provider fixture can exercise absent/empty MULTI_SZ, allocation and second-query failure, successful and already-installed driver paths while checking count, pointer use, native handle and heap ownership. It must not install a real printer or change a live registry. Reconcile missing driver/UI deployment before claiming the feature works.
+
+Replay `python artifacts/mvdm-audit/shard-1/wow-fax-owner-observer.py`. No product process was run and no product, guest, registry, shared ledger or build tree was changed.
