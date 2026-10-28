@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1432,
+    "pending": 1425,
     "excluded": 2652,
-    "partial": 547,
+    "partial": 554,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "Two original text and DEM error owners are partial; guest behavior and failures remain open."
+  "note": "Seven original WOW resource and redirector roles are partial; runtime lifetimes remain open."
 }

@@ -1,0 +1,281 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "vdmredir/vrdll.c",
+      "sha256": "234946E3DC0BDA5851DE48F05DDB2DC921F76F7C717772CB2F69D4EAB5D8EC10",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "wow_source_ids": "SRC:698098f2782e5ac49bee;SRC:7dcb0df332beccdccd08",
+      "compile_edge": "build obj/redir/vrdll.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdll.c",
+      "dependency_header": "obj/redir/vrdll.obj: #deps 12, deps mtime 8147413481272052 (VALID)",
+      "functions": [
+        {
+          "name": "_VrDllInitialize",
+          "va": 268479568,
+          "function": true,
+          "owner": "vrdll.obj",
+          "bytes": 35,
+          "relocation_words": 3
+        }
+      ]
+    },
+    {
+      "relative_path": "vdmredir/vrnetb.c",
+      "sha256": "1DE0507A7A4649253B63FC4A42DA9C54A9670C8A2883BBE3B19B27F132E94157",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "wow_source_ids": "SRC:3d179f731b6f1e0e325b;SRC:5abab9743b194c0d18c3",
+      "compile_edge": "build obj/redir/vrnetb.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrnetb.c",
+      "dependency_header": "obj/redir/vrnetb.obj: #deps 31, deps mtime 8147641041429935 (VALID)",
+      "functions": [
+        {
+          "name": "_IsPmNcbAtQueueHead",
+          "va": 268457984,
+          "function": true,
+          "owner": "vrnetb.obj",
+          "bytes": 9,
+          "relocation_words": 1
+        },
+        {
+          "name": "_Netbios32Post",
+          "va": 268458000,
+          "function": true,
+          "owner": "vrnetb.obj",
+          "bytes": 190,
+          "relocation_words": 12
+        },
+        {
+          "name": "_VrNetbios5c",
+          "va": 268458192,
+          "function": true,
+          "owner": "vrnetb.obj",
+          "bytes": 672,
+          "relocation_words": 22
+        },
+        {
+          "name": "_VrNetbios5cInitialize",
+          "va": 268458864,
+          "function": true,
+          "owner": "vrnetb.obj",
+          "bytes": 61,
+          "relocation_words": 8
+        },
+        {
+          "name": "_VrNetbios5cInterrupt",
+          "va": 268458928,
+          "function": true,
+          "owner": "vrnetb.obj",
+          "bytes": 212,
+          "relocation_words": 16
+        }
+      ]
+    },
+    {
+      "relative_path": "vdmredir/vrdlcbuf.c",
+      "sha256": "90E6DC8F5625C371C8C14A2A111C3403D0F4B24597EACCE8549049138F5721A6",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "wow_source_ids": "SRC:5034c12fbb377dacdcc6;SRC:b4825cb13f4aae5ac4b5",
+      "compile_edge": "build obj/redir/vrdlcbuf.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlcbuf.c",
+      "dependency_header": "obj/redir/vrdlcbuf.obj: #deps 20, deps mtime 8147413480123387 (VALID)",
+      "functions": [
+        {
+          "name": "_AllBuffersInPool",
+          "va": 268477040,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 55,
+          "relocation_words": 6
+        },
+        {
+          "name": "_CalculateBufferRequirement",
+          "va": 268477104,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 351,
+          "relocation_words": 1
+        },
+        {
+          "name": "_CopyFrame",
+          "va": 268477456,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 858,
+          "relocation_words": 4
+        },
+        {
+          "name": "_CreateBufferPool",
+          "va": 268478320,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 440,
+          "relocation_words": 16
+        },
+        {
+          "name": "_DeleteBufferPool",
+          "va": 268478768,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 64,
+          "relocation_words": 7
+        },
+        {
+          "name": "_FreeBuffers",
+          "va": 268478832,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 280,
+          "relocation_words": 17
+        },
+        {
+          "name": "_GetBuffers",
+          "va": 268479120,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 401,
+          "relocation_words": 15
+        },
+        {
+          "name": "_InitializeBufferPools",
+          "va": 268479536,
+          "function": true,
+          "owner": "vrdlcbuf.obj",
+          "bytes": 32,
+          "relocation_words": 4
+        }
+      ]
+    }
+  ],
+  "netbios_dispatch": {
+    "index": 37,
+    "va": 268458192,
+    "target": "_VrNetbios5c"
+  },
+  "calls": [
+    {
+      "caller": "_mvdm_vdmredir_dll_entry@12",
+      "target": "_VrDllInitialize",
+      "caller_owner": "vdmredir-dll-bindings:mvdm_redirector_dll_entry.obj",
+      "target_owner": "vrdll.obj"
+    },
+    {
+      "caller": "_VrDllInitialize",
+      "target": "_VrInitialize",
+      "caller_owner": "vrdll.obj",
+      "target_owner": "vrinit.obj"
+    },
+    {
+      "caller": "_VrDllInitialize",
+      "target": "_VrUninitialize",
+      "caller_owner": "vrdll.obj",
+      "target_owner": "vrinit.obj"
+    },
+    {
+      "caller": "_VrDllInitialize",
+      "target": "_TerminateDlcEmulation",
+      "caller_owner": "vrdll.obj",
+      "target_owner": "vrdlc5c.obj"
+    },
+    {
+      "caller": "_ProcessImmediateCommand",
+      "target": "_FreeBuffers",
+      "caller_owner": "vrdlc5c.obj",
+      "target_owner": "vrdlcbuf.obj"
+    },
+    {
+      "caller": "_ProcessImmediateCommand",
+      "target": "_GetBuffers",
+      "caller_owner": "vrdlc5c.obj",
+      "target_owner": "vrdlcbuf.obj"
+    },
+    {
+      "caller": "_ProcessImmediateCommand",
+      "target": "_CreateBufferPool",
+      "caller_owner": "vrdlc5c.obj",
+      "target_owner": "vrdlcbuf.obj"
+    },
+    {
+      "caller": "_ProcessImmediateCommand",
+      "target": "_DeleteBufferPool",
+      "caller_owner": "vrdlc5c.obj",
+      "target_owner": "vrdlcbuf.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\VDMREDIR.DLL",
+      "sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7"
+    },
+    {
+      "path": "build\\t473-s10\\shard-3-redir-map-r81\\VDMREDIR.dll",
+      "sha256": "342A6EEE544C52A1C55D9088CD807D4497B092CEB506E7C425451C1E934DFE45"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\shard-3\\redir-private-map.txt",
+      "sha256": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "src\\mvdm\\vdmredir\\vrdll.c",
+      "sha256": "234946E3DC0BDA5851DE48F05DDB2DC921F76F7C717772CB2F69D4EAB5D8EC10"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "sha256": "234946E3DC0BDA5851DE48F05DDB2DC921F76F7C717772CB2F69D4EAB5D8EC10"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrdll.c",
+      "sha256": "234946E3DC0BDA5851DE48F05DDB2DC921F76F7C717772CB2F69D4EAB5D8EC10"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdll.obj",
+      "sha256": "D26A910AEFAFF4CB002E434FAD39D1595EA6107437A3E608512110E39405DBB3"
+    },
+    {
+      "path": "src\\mvdm\\vdmredir\\vrnetb.c",
+      "sha256": "1DE0507A7A4649253B63FC4A42DA9C54A9670C8A2883BBE3B19B27F132E94157"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "sha256": "1DE0507A7A4649253B63FC4A42DA9C54A9670C8A2883BBE3B19B27F132E94157"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrnetb.c",
+      "sha256": "1DE0507A7A4649253B63FC4A42DA9C54A9670C8A2883BBE3B19B27F132E94157"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrnetb.obj",
+      "sha256": "EE1FD5352B54CE7FD333F74DF3C70741A01A77DEAEAF6A3BF81CB75443CFA270"
+    },
+    {
+      "path": "src\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "sha256": "90E6DC8F5625C371C8C14A2A111C3403D0F4B24597EACCE8549049138F5721A6"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "sha256": "90E6DC8F5625C371C8C14A2A111C3403D0F4B24597EACCE8549049138F5721A6"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "sha256": "90E6DC8F5625C371C8C14A2A111C3403D0F4B24597EACCE8549049138F5721A6"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdlcbuf.obj",
+      "sha256": "BBC499A8E966622E69E561AB035484FC7401967E940C1D95EF6FEF733F181925"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\vdmredir-dll\\mvdm_redirector_dll_entry.obj",
+      "sha256": "04ACC91D6A0E95025C492B85FACA2CFC3EF410F4CF31D0FE5F3CB4ADBC68598C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdlc5c.obj",
+      "sha256": "9B3BA6F308D3F8052A06B8A444EDD9762D0913905133867BB41EE4FBAA4203A0"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\redir\\vrdisp.obj",
+      "sha256": "3B130BE3A06B5560F1ECDED43F20701F047A7E92058F9A83D8D68DDB475D9A1E"
+    }
+  ],
+  "scope": "Initial image dispatch and selected call targets, not DLL lifecycle, NetBIOS callbacks or DLC behavior"
+}

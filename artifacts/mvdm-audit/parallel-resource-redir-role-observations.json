@@ -1,0 +1,21 @@
+{
+  "result": "pass",
+  "base": "fee15c70f",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-cursor-evidence.json",
+      "sha256": "0AACE5A87045ECC7A0BA19C3F3B264B2AF753D7DDDAF64B9B2DBDB30165E2FB1"
+    },
+    {
+      "path": "shard-2/wow-resource-owner-observations.json",
+      "sha256": "FF779E180DAF2E982C98798465864753C47BB6C6F9537C5644B2F766AE1755EF"
+    },
+    {
+      "path": "shard-3/redir-image-observations.json",
+      "sha256": "CC9CB270196C809EEAB238D7600672DE60A976EA813A1247725FE3B2A790CA76"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original image and call edges; no guest or external provider acceptance"
+}

@@ -1,0 +1,283 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wres16.c",
+      "sha256": "24324D4B95B7C5AC102E9751872AF1DB779EFC0CFF223B32AA066034CB874AE9",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wres16.c",
+      "wow_source_ids": "SRC:198dd2b2ce2d068c29a8;SRC:f96d3f340440e690d168",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2
+    },
+    {
+      "relative_path": "wow32/wres16.h",
+      "sha256": "AF060CC040A5EC79D0077C5429DF8CD96FF632B27D0EAFA04B5719A39ACF5167",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wres16.h",
+      "wow_source_ids": "SRC:33aaeffbcda0d4e26051;SRC:dd8a7287390fafe25656",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2
+    }
+  ],
+  "compile_edge": "build obj/wres16.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wres16.c",
+  "dependency_header": "obj/wres16.obj: #deps 126, deps mtime 8147760838998422 (VALID)",
+  "functions": [
+    {
+      "name": "_ConvertDialog16@16",
+      "va": 268468960,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 846,
+      "relocation_words": 5
+    },
+    {
+      "name": "_ConvertMenu16@20",
+      "va": 268469808,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 150,
+      "relocation_words": 2
+    },
+    {
+      "name": "_ConvertMenuItems16@16",
+      "va": 268469968,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 349,
+      "relocation_words": 2
+    },
+    {
+      "name": "_DestroyRes16@4",
+      "va": 268470320,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 155,
+      "relocation_words": 7
+    },
+    {
+      "name": "_FindResource16@12",
+      "va": 268470480,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 415,
+      "relocation_words": 16
+    },
+    {
+      "name": "_FreeResource16@4",
+      "va": 268470896,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 130,
+      "relocation_words": 7
+    },
+    {
+      "name": "_LoadResource16@8",
+      "va": 268471040,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 97,
+      "relocation_words": 3
+    },
+    {
+      "name": "_LockResource16@4",
+      "va": 268471152,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 433,
+      "relocation_words": 14
+    },
+    {
+      "name": "_SizeofResource16@8",
+      "va": 268471600,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 129,
+      "relocation_words": 4
+    },
+    {
+      "name": "_UnlockResource16@4",
+      "va": 268471744,
+      "function": true,
+      "owner": "wres16.obj",
+      "bytes": 107,
+      "relocation_words": 4
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_W32FindResource@16",
+      "target": "_FindResource16@12",
+      "offsets": [
+        32
+      ],
+      "binding": {
+        "name": "_W32FindResource@16",
+        "va": 268471856,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 50,
+        "relocation_words": 2
+      }
+    },
+    {
+      "caller": "_W32FreeResource@8",
+      "target": "_FreeResource16@4",
+      "offsets": [
+        21
+      ],
+      "binding": {
+        "name": "_W32FreeResource@8",
+        "va": 268471920,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 38,
+        "relocation_words": 2
+      }
+    },
+    {
+      "caller": "_W32LoadResource@8",
+      "target": "_LoadResource16@8",
+      "offsets": [
+        26
+      ],
+      "binding": {
+        "name": "_W32LoadResource@8",
+        "va": 268471968,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 58,
+        "relocation_words": 2
+      }
+    },
+    {
+      "caller": "_W32LockResource@8",
+      "target": "_LockResource16@4",
+      "offsets": [
+        21
+      ],
+      "binding": {
+        "name": "_W32LockResource@8",
+        "va": 268472032,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 38,
+        "relocation_words": 2
+      }
+    },
+    {
+      "caller": "_W32SizeofResource@8",
+      "target": "_SizeofResource16@8",
+      "offsets": [
+        40
+      ],
+      "binding": {
+        "name": "_W32SizeofResource@8",
+        "va": 268472080,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 58,
+        "relocation_words": 2
+      }
+    },
+    {
+      "caller": "_W32UnlockResource@8",
+      "target": "_UnlockResource16@4",
+      "offsets": [
+        21
+      ],
+      "binding": {
+        "name": "_W32UnlockResource@8",
+        "va": 268472144,
+        "function": true,
+        "owner": "wres32.obj",
+        "bytes": 33,
+        "relocation_words": 1
+      }
+    },
+    {
+      "caller": "_WowOriginalFreeTask@4",
+      "target": "_DestroyRes16@4",
+      "offsets": [
+        146
+      ],
+      "binding": {
+        "name": "_WowOriginalFreeTask@4",
+        "va": 268536240,
+        "function": true,
+        "owner": "wkman.obj",
+        "bytes": 263,
+        "relocation_words": 24
+      }
+    },
+    {
+      "caller": "_WU32DialogBoxParam@4",
+      "target": "_ConvertDialog16@16",
+      "offsets": [
+        63,
+        122
+      ],
+      "binding": {
+        "name": "_WU32DialogBoxParam@4",
+        "va": 268576016,
+        "function": true,
+        "owner": "wudlg.obj",
+        "bytes": 304,
+        "relocation_words": 12
+      }
+    },
+    {
+      "caller": "_GetTemplate16@12",
+      "target": "_ConvertDialog16@16",
+      "offsets": [
+        131,
+        161
+      ],
+      "binding": {
+        "name": "_GetTemplate16@12",
+        "va": 268632288,
+        "function": true,
+        "owner": "wcommdlg.obj",
+        "bytes": 183,
+        "relocation_words": 10
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wres16.obj",
+      "sha256": "38A00BEA2262CEA4BA2E89C9A1FFB43B81408DC62B6051A99CEB80808BC40AC6"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wres32.obj",
+      "sha256": "8FE9E16F712B1866E49E5F8308F01300E2E491C8B44C4874DB7D4FBE6A89BEB3"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkman.obj",
+      "sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wudlg.obj",
+      "sha256": "73667347FC58C2C674F50797B425A358F56F6A3DFFC16C849506B035E53A3D61"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcommdlg.obj",
+      "sha256": "D1506A86D00FDD6C0CB09CC962D8008BC2459077B469B0FC23AA87E3573B6BE3"
+    }
+  ],
+  "scope": "Original source, release code and selected resource call edges; not guest behavior or lifetime acceptance"
+}

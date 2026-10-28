@@ -17,6 +17,8 @@ The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds
 register/stack owners and selected call edges; guest transitions remain open.
 The [tabbed-text and DEM error review](parallel-text-dem-role-review.md)
 binds their selected original entries; guest and failure behavior remains open.
+The [resource and redirector review](parallel-resource-redir-role-review.md)
+binds seven further owners; guest and external-provider lifetimes remain open.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

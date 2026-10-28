@@ -1,0 +1,276 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wcurcash.c",
+      "sha256": "ED9FA5EE3EB6CE9059D58F21DEA3A7416B0229678F7F62918DE02A2CF78D0E61",
+      "wow_source_ids": "SRC:0c59a1dbd7ed77b53d20;SRC:504562b1d16179f8f5bc"
+    },
+    {
+      "relative_path": "wow32/wcuricon.c",
+      "sha256": "5F654AB2A98B2925474DFFD49C5A3ABAAEFACF6193375AF3794E70731C4E8673",
+      "wow_source_ids": "SRC:27f8fe95014277f9748e;SRC:f65beff15eaa75471bc1"
+    },
+    {
+      "relative_path": "wow32/wucursor.c",
+      "sha256": "78943C10AFECBBDEDD57408A5417A2D342D5A0A5DD354B321C773BD18916AF31",
+      "wow_source_ids": "SRC:1891e8aec1c0da848106;SRC:79c7c0d404c472d1dfd5"
+    }
+  ],
+  "initial_dispatch": [
+    {
+      "ordinal": 173,
+      "label": "LOADCURSOR",
+      "target": "_WU32LoadCursor@4",
+      "va": 268574960
+    },
+    {
+      "ordinal": 174,
+      "label": "LOADICON",
+      "target": "_WU32LoadCursor@4",
+      "va": 268574960
+    },
+    {
+      "ordinal": 533,
+      "label": "NOTIFYWOW",
+      "target": "_WU32NotifyWow@4",
+      "va": 268557856
+    }
+  ],
+  "bound_functions": [
+    {
+      "name": "_WU32LoadCursor@4",
+      "va": 268574960,
+      "function": true,
+      "owner": "wucursor.obj",
+      "bytes": 340,
+      "relocation_words": 12
+    },
+    {
+      "name": "_WU32NotifyWow@4",
+      "va": 268557856,
+      "function": true,
+      "owner": "wuman.obj",
+      "bytes": 650,
+      "relocation_words": 37
+    },
+    {
+      "name": "_SetupResCursorIconAlias@20",
+      "va": 268612832,
+      "function": true,
+      "owner": "wcuricon.obj",
+      "bytes": 289,
+      "relocation_words": 13
+    },
+    {
+      "name": "_W32CheckIfAlreadyLoaded@8",
+      "va": 268613136,
+      "function": true,
+      "owner": "wcuricon.obj",
+      "bytes": 237,
+      "relocation_words": 8
+    },
+    {
+      "name": "_FreeCursorIconAlias@8",
+      "va": 268611168,
+      "function": true,
+      "owner": "wcuricon.obj",
+      "bytes": 314,
+      "relocation_words": 12
+    },
+    {
+      "name": "_WowOriginalFreeTask@4",
+      "va": 268536240,
+      "function": true,
+      "owner": "wkman.obj",
+      "bytes": 263,
+      "relocation_words": 24
+    },
+    {
+      "name": "_W32FreeTask@4",
+      "va": 268896288,
+      "function": true,
+      "owner": "wow_task_cleanup_entry.obj",
+      "bytes": 32,
+      "relocation_words": 5
+    },
+    {
+      "name": "_UserRegisterWowHandlers@8",
+      "va": 268917888,
+      "function": true,
+      "owner": "wow_user_registration_bridge.obj",
+      "bytes": 340,
+      "relocation_words": 36
+    },
+    {
+      "name": "_wow_private_user_load_create_cursor_icon@32",
+      "va": 268783264,
+      "function": true,
+      "owner": "wow_private_user_compat.obj",
+      "bytes": 109,
+      "relocation_words": 2
+    }
+  ],
+  "relocations": [
+    {
+      "caller": "_WU32LoadCursor@4",
+      "target": "_SetupResCursorIconAlias@20",
+      "kind": 20,
+      "target_owner": "wcuricon.obj",
+      "va": 268612832
+    },
+    {
+      "caller": "_WU32NotifyWow@4",
+      "target": "_W32CheckIfAlreadyLoaded@8",
+      "kind": 20,
+      "target_owner": "wcuricon.obj",
+      "va": 268613136
+    },
+    {
+      "caller": "_W32FreeTask@4",
+      "target": "_wow_user_task_prepare_exit@0",
+      "kind": 20,
+      "target_owner": "wow_user_task_lifecycle.obj",
+      "va": 268865168
+    },
+    {
+      "caller": "_W32FreeTask@4",
+      "target": "_WowOriginalFreeTask@4",
+      "kind": 20,
+      "target_owner": "wkman.obj",
+      "va": 268536240
+    },
+    {
+      "caller": "_WowOriginalFreeTask@4",
+      "target": "_FreeCursorIconAlias@8",
+      "kind": 20,
+      "target_owner": "wcuricon.obj",
+      "va": 268611168
+    },
+    {
+      "caller": "_UserRegisterWowHandlers@8",
+      "target": "_wow_private_user_load_create_cursor_icon@32",
+      "kind": 6,
+      "target_owner": "wow_private_user_compat.obj",
+      "va": 268783264
+    },
+    {
+      "caller": "_wow_private_user_load_create_cursor_icon@32",
+      "target": "__imp__CreateIconFromResourceEx@28",
+      "kind": 6,
+      "target_owner": "user32:USER32.dll",
+      "va": 269024304
+    },
+    {
+      "caller": "_wow_private_user_load_create_cursor_icon@32",
+      "target": "__imp__LoadImageW@24",
+      "kind": 6,
+      "target_owner": "user32:USER32.dll",
+      "va": 269024300
+    }
+  ],
+  "previous_cache_references": [
+    "src\\mvdm\\wow32\\wcurcash.c:162:VOID W32DeleteCursorIconCashForTask ()",
+    "src\\mvdm\\wow32\\wcurcash.c:23:HICON16 W32CheckWOWCashforIconCursors(VPVOID pData, WORD ResType)",
+    "src\\mvdm\\wow32\\wcurcash.c:34:    hIcon16 = W32FindCursorIcon (parg16->hInst, psz, ResType, &hRes16);",
+    "src\\mvdm\\wow32\\wcurcash.c:56:HICON16 W32FindCursorIcon (WORD hInst, LPSTR psz, WORD ResType, HICON16 *phRes16)",
+    "src\\mvdm\\wow32\\wcurcash.h:27:HICON16 W32CheckWOWCashforIconCursors(VPVOID pData, WORD ResType);",
+    "src\\mvdm\\wow32\\wcurcash.h:29:HICON16 W32FindCursorIcon (WORD hInst, LPSTR psz, WORD ResType, HICON16 *phRes16);",
+    "src\\mvdm\\wow32\\wcurcash.h:31:VOID    W32DeleteCursorIconCashForTask ();"
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\sources",
+      "sha256": "D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wuman.c",
+      "sha256": "FD996581326F266C6EC80905FA087BE22435E9254DD7382B67F626CE902A6500"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wkman.c",
+      "sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2"
+    },
+    {
+      "path": "src\\wow32-dll\\source\\wow_user_registration_bridge.c",
+      "sha256": "6D4AB36D006125B7FFB379B163D1E0E21558D420A6B4FCF4BA04B2BAE66B3F07"
+    },
+    {
+      "path": "src\\wow32-dll\\source\\wow_private_user_compat.c",
+      "sha256": "C9C974F6990781A7C2120EEE0E5283CB55309F5BBA34504EC40DF313C135B413"
+    },
+    {
+      "path": "src\\wow32-dll\\source\\wow_task_cleanup_entry.c",
+      "sha256": "E7765BA127291A7AAC0BC6F781AC3F4955471A1FF0762DA6B019079E385B8A74"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wucursor.obj",
+      "sha256": "B6A3318FBCD15A6E5D78CB9B50E2BA8B0338C506B10058D1AF7964CD00AF2D47"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuman.obj",
+      "sha256": "19008163BDEA5EDD686BD2574EEC6F16FFEE31ED4AFF2D3F245D0F4A825AC98F"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcuricon.obj",
+      "sha256": "7FECBD6D77511494570657143F41D830F2F52AB9AA75A5009588908803283099"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcuricon.obj",
+      "sha256": "7FECBD6D77511494570657143F41D830F2F52AB9AA75A5009588908803283099"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcuricon.obj",
+      "sha256": "7FECBD6D77511494570657143F41D830F2F52AB9AA75A5009588908803283099"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkman.obj",
+      "sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_task_cleanup_entry.obj",
+      "sha256": "DDF272B231D97EE76D4AC7294805D7344ED5E265B0C1B5F7415B9D165F6F99C0"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_registration_bridge.obj",
+      "sha256": "618EF0A73D39B9FBB5D31CC6B10CDF704DA5B6E97C928C942B44B289D63D32D2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_private_user_compat.obj",
+      "sha256": "F3A82D9EEFD57E9E4FE35958E2C35216BAB9B2DDA296CD4C7189BE2C6EE42E0F"
+    }
+  ],
+  "scope": "Image bindings and source ownership; no guest, dynamic registration, cache equivalence or lifecycle proof"
+}
