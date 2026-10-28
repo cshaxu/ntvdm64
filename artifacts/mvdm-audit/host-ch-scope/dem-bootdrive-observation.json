@@ -1,0 +1,10 @@
+{
+  "object_sha256": "7B4172A148BCFA74D251617A3F3075628C41BEC005DE9776AA55C91CD5A20306",
+  "source_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+  "fixture_sha256": "53AA9DBB5967656917245C0E8458422998636FF7116003022BEE9EB8092B0D11",
+  "exe_sha256": "7CEBF7640FD6F7DC09FA2B9532C7295D59AC599288277BFA1F74BF3BE6FF80A9",
+  "rebound_import": "GetDriveTypeA",
+  "output": "PASS boot-drive fallback on open/query/nonfixed and fixed uppercase/lowercase cases (mocked registry/drive)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}

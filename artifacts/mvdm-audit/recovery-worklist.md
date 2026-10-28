@@ -32,6 +32,8 @@ The [DEM clock selected-object witness](host-ch-scope/dem-clock-review.md) exerc
 
 The [DEM computer-name selected-object witness](host-ch-scope/dem-computername-review.md) verifies synthetic mapped-buffer and host-name success/failure boundaries. S12 retains actual guest mapping, invalid or short buffer handling, OEM host behavior and lifecycle.
 
+The [DEM boot-drive selected-object witness](host-ch-scope/dem-bootdrive-review.md) verifies controlled registry/drive fallback and fixed-drive letter conversion. S12 retains malformed registry values, real configuration, guest startup and released-image binding.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.md) preserves separate original HFX and SWIN_HFX guest/provider applicability in S17; the selected DOS filesystem and redirector are different routes, and captured HFX BOPs resolving to `illegal_bop` are not evidence that the protocol works.

@@ -1,0 +1,9 @@
+# DEM boot-drive selection: selected-object observation
+
+Original guest `dos/v86/doskrnl/bios/sysinit1.asm:1026` invokes `SVC_DEMGETBOOTDRIVE` (service 0Dh in `inc/DOSSVC.INC` and `inc/dossvc.h`); `dos/dem/demdisp.c:113` binds it to `demGetBootDrive` in `demgset.c:103`. This is the original source call chain, not a claim that the test executes the guest.
+
+Reproduce with `python artifacts/mvdm-audit/host-ch-scope/dem-bootdrive-run.py`. The test links the current x86 release `worker/obj/dem/demgset.obj`; only its `GetDriveTypeA` import is rebound in a copied object, and shadow-registry entry points and CPU register setters are controlled test seams. No registry or disk is modified or queried. Hashes, output and build diagnostics are saved in `dem-bootdrive-observation.json`; GNU ld reports an ignored MSVC `.drectve` warning, and the test's security-cookie check is a stub.
+
+The selected function returned C (AL=3) on simulated registry-open failure, query failure or non-fixed host drive. It returned D and E for mocked fixed uppercase `D:\\` and lowercase `e:\\` paths, respectively. The test also checked that an opened registry key was closed once, query was skipped on open failure, and drive lookup was skipped on open/query failure. This reproduces the original source's fallback/one-based result, not every conceivable input or error path.
+
+No real shadow registry, registry type/length validation, corrupt or unterminated values, actual host drive types, guest boot, or product installation was exercised. Mock results alone cannot establish those paths safe. A selected object hash is not an installed-image binding. These observations support this narrow branch of the existing partial DEM audit, not complete restoration of `demgset.c`. No product, guest or shared ledger file was changed.
