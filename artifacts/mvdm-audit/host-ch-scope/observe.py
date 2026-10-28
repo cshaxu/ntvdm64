@@ -14,6 +14,10 @@ root = Path('artifacts/mvdm-audit')
 out = root / 'host-ch-scope'
 inputs = ('shard-0/review.csv', 'shard-1/file-audit.csv',
           'shard-2/file-audit.csv', 'shard-3/file-review.csv')
+status_fields = {'shard-0/review.csv': 'classification',
+                 'shard-1/file-audit.csv': 'audit_status',
+                 'shard-2/file-audit.csv': 'decision',
+                 'shard-3/file-review.csv': 'review_class'}
 tool_paths = ('vdmutils/', 'vdmexts/', 'bde/', 'ieuvddex/', 'v86/scaffold/')
 roles = {
     'wow16/': 'guest, shared ABI or host use requires per-file role review',
@@ -47,7 +51,7 @@ for name in inputs:
             scope = 'host-candidate'
             reason = 'host C/H candidate; selected runtime and ownership remain to verify'
         rows.append({'path': relative, 'shard': name,
-                     'ledger_status': source.get('classification', source.get('reporting_class', '')),
+                     'ledger_status': source[status_fields[name]],
                      'scope': scope, 'scope_limit': reason})
 rows.sort(key=lambda x: x['path'].casefold())
 out.mkdir(parents=True, exist_ok=True)

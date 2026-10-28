@@ -24,18 +24,14 @@
     "role-pending": 473
   },
   "host_candidate_ledger_status_counts": {
-    "pending": 57,
-    "partial": 64,
-    "partial-mirror-diff": 140,
-    "pending-evidence": 727,
-    "部分复通": 146,
-    "full-selected-leaf": 10,
-    "full": 15,
-    "full-selected-declaration": 14,
-    "整体排除": 17,
-    "excluded": 37,
-    "excluded-architecture-header": 36,
-    "excluded-cpu30": 7
+    "pending": 198,
+    "partial": 395,
+    "部分复通": 321,
+    "待核验": 79,
+    "excluded": 149,
+    "full": 36,
+    "全复通": 17,
+    "整体排除": 75
   },
   "warning": "Path-based candidate scope is not a final host/guest exclusion or proof of behavior."
 }
