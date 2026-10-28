@@ -1,0 +1,15 @@
+# WOW fax and debug/DDE declarations: selected versus unproved
+
+These five current `inc/` headers match OpenNT by SHA-256. This review distinguishes selected host source and old runtime evidence from absent provider functionality. It makes no guest, runtime or ledger changes.
+
+## `wowfax.h`: partial candidate for selected host branch
+
+SHA-256 `97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84`. The original header declares WOWFAX message constants and shared structures. The selected WOW32 `wkman.c` and `wow32fax.c` include it; `WK32RegisterShellWindowHandle` calls original `WOW32FaxHandler`, which conditionally subclasses a fax window and obtains the supported driver list. The historical map and current source path are recorded in `cross-369/fax-provider-disposition.md`. `m0-t422-s2-user-client-lifecycle-ledger.md` records WOWExec/WOWFax window creation during historical real WINMINE runs. Neither observation proves a fax device, fax printing, every message, or that the currently installed image has those exact bytes.
+
+The optional external `fax/wowfax` and `wowfaxui` product profile has no selected DLL in the examined graph (`m0-t473-s1-unselected-host-source-disposition.md`); this does not make the selected WOW32 callback disappear or license a fabricated provider. The header also has a `_WOWFAX16_` branch including original guest print headers; the current host graph evidence does not select that guest branch. Recommend partial for the selected host declaration/registration role, while keeping callback reentry, shared-map ownership, driver installation, unsupported device results and guest-branch dependencies unresolved.
+
+## Remaining headers: keep pending
+
+- `wowddeml.h` (`8CD9627DD0AF77790FD4C046C69F52C2A04FBF816166C8369033E65AE341E292`) is explicitly included by `wow32/wddeml32.c`, but the captured WOW32 graph has no matching valid edge for that source/header (`nine-way/part-9/wow32-provider-role-review.md`). That does not prove DDE is absent, unused in other configurations, or available through this specific implementation. Establish the selected provider and runtime owner before classifying this header.
+- `wowint.h` (`33449C2765F597B7CCDE3ED61C45F35E72730FBAEFC073A065C423A4FF716030`) and `wowexp.h` (`9808EA87FEBFAF78EBB5CDFB2DA68AC1C9795C6C19DD67C37A0E33EE95D6EB94`) have no exact valid dependency in the recorded graphs (`shard-0/mvdm-inc-header-family-review.md`, `shard-3/header-inclusions.csv`). This is neither proof of no generated/conditional consumer nor proof of active code. Keep pending.
+- `dbginfo.h` (`EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B`) defines shared debugger process/context records and is textually included by original `vdmdbg.c`, `dbg.c`, and guest `wowdeb.c`. These are distinct host/guest consumers and profiles; their lexical includes alone do not establish selected production behavior, actual structure layout, cross-process lifetime or runtime identity. Keep pending until the exact provider and consumer profile are bound.

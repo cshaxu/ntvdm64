@@ -10,11 +10,11 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
-      "sha256": "9D9FCDC403DAE9CE9618693CDFDB106E5927BE0F52B55DEF86920ADE85173FEE"
+      "sha256": "D0C150D5BCED82C39046ACB1C2F2FE8618E8A119DAB540BEEB4CFAAA06386C7D"
     },
     {
       "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
-      "sha256": "49D005005978939156704E0E2702AF448F848F7A778E9A04865FBA329391A7D8"
+      "sha256": "43E546E3E4657D22914B95BD742784CF5C9F9FCCB1F5B724BF07517BDD5DD10D"
     }
   ],
   "rows": 1815,
@@ -24,8 +24,8 @@
     "role-pending": 473
   },
   "host_candidate_ledger_status_counts": {
-    "pending": 177,
-    "partial": 414,
+    "pending": 174,
+    "partial": 417,
     "部分复通": 327,
     "待核验": 73,
     "excluded": 151,

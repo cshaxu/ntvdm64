@@ -1,0 +1,69 @@
+{
+  "identities": {
+    "inc/dbginfo.h": [
+      "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B",
+      "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B",
+      "EB63D7148716751592D41942924876B0A8D797A934785AB21B3202BFC436CF1B"
+    ],
+    "inc/wowfax.h": [
+      "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84",
+      "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84",
+      "97C6C40DC2D0565A21DC1BE4112FE24F138B10DDBB55FBD29E55DA972A2A2C84"
+    ]
+  },
+  "deps": {
+    "worker": {
+      "sha256": "1CFBFF3FF9BB63B5F2E62D2A2224842DAB28A21061854B625766125E6DEE66C1",
+      "matches": [
+        {
+          "object": "obj/mvdm-debugger/dbg.obj: #deps 16, deps mtime 8147412909310146 (VALID)",
+          "header": "../../../../src/mvdm/inc/dbginfo.h"
+        }
+      ]
+    },
+    "wow32": {
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "matches": [
+        {
+          "object": "obj/wkman.obj: #deps 134, deps mtime 8147760894818988 (VALID)",
+          "header": "../../../../src/mvdm/inc/wowfax.h"
+        },
+        {
+          "object": "obj/wow32fax.obj: #deps 130, deps mtime 8147760899847622 (VALID)",
+          "header": "../../../../src/mvdm/inc/wowfax.h"
+        }
+      ]
+    }
+  },
+  "sources": {
+    "src/mvdm/dbg/dbg.c": {
+      "sha256": "5A3A207EFF1570908E270C737D12FB40FE66097895063136D17FE6B971494B90"
+    },
+    "src/mvdm/softpc.new/host/src/nt_bop.c": {
+      "sha256": "CE9AAFC3B82348E87AE2B2F13C30472D04C90198D27B0467D435CB5A6CED8FFD"
+    },
+    "src/mvdm/wow32/wkman.c": {
+      "sha256": "F66805A02FD6D29A7AA1001BA2E549507B66F1A96E2BE3460090C007B0D472A2"
+    },
+    "src/mvdm/wow32/wow32fax.c": {
+      "sha256": "855AC6C5D6D6CA97CC78802994784E8612E5EB6197533790466664BF0E892700"
+    }
+  },
+  "maps": {
+    "worker": {
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+      "lines": [
+        "0001:001760e0       _DBGDispatch               005770e0 f   debugger-bindings:dbg.obj",
+        "0001:00177270       _GetNormalContext          00578270 f   debugger-bindings:dbg.obj"
+      ]
+    },
+    "wow32": {
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+      "lines": [
+        "0001:00016510       _WK32RegisterShellWindowHandle@4 10017510 f   wkman.obj",
+        "0001:0001ac80       _WOW32FaxHandler@8         1001bc80 f   wow32fax.obj"
+      ]
+    }
+  },
+  "limits": "Source and selected-build ownership only; no event, fax or end-to-end runtime is established."
+}
