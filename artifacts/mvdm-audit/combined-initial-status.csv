@@ -989,7 +989,7 @@ dos/v86/tools/src/stripz/stripz.def,3,pending,shard-3/file-review.csv
 dpmi/486/dosx.exe,1,partial,shard-1/file-audit.csv
 dpmi/486/dosx.map,2,excluded,shard-2/file-audit.csv
 dpmi/486/dosx.sym,1,excluded,shard-1/file-audit.csv
-dpmi/486/dxboot.asm,3,excluded,shard-3/file-review.csv
+dpmi/486/dxboot.asm,3,pending,shard-3/file-review.csv
 dpmi/486/dxboot.OBJ,3,excluded,shard-3/file-review.csv
 dpmi/486/dxbug.OBJ,2,excluded,shard-2/file-audit.csv
 dpmi/486/dxdisk.OBJ,1,excluded,shard-1/file-audit.csv
@@ -1015,7 +1015,7 @@ dpmi/486/dxoem.OBJ,2,excluded,shard-2/file-audit.csv
 dpmi/486/dxrom.OBJ,0,excluded,shard-0/review.csv
 dpmi/486/dxstrt.asm,0,excluded,shard-0/review.csv
 dpmi/486/dxstrt.OBJ,2,excluded,shard-2/file-audit.csv
-dpmi/486/dxutil.asm,1,excluded,shard-1/file-audit.csv
+dpmi/486/dxutil.asm,1,pending,shard-1/file-audit.csv
 dpmi/486/dxutil.OBJ,1,excluded,shard-1/file-audit.csv
 dpmi/486/ntnpxem.OBJ,2,excluded,shard-2/file-audit.csv
 dpmi/cmacros.inc,0,excluded,shard-0/review.csv
@@ -1024,13 +1024,13 @@ dpmi/dosx.def,2,pending,shard-2/file-audit.csv
 dpmi/dosx.lnk,2,excluded,shard-2/file-audit.csv
 dpmi/dosxi.lnk,2,excluded,shard-2/file-audit.csv
 dpmi/dxboot.asm,0,pending,shard-0/review.csv
-dpmi/dxbug.asm,1,excluded,shard-1/file-audit.csv
-dpmi/dxdisk.asm,3,excluded,shard-3/file-review.csv
+dpmi/dxbug.asm,1,pending,shard-1/file-audit.csv
+dpmi/dxdisk.asm,3,pending,shard-3/file-review.csv
 dpmi/dxdma.asm,0,excluded,shard-0/review.csv
 dpmi/dxemm.asm,0,excluded,shard-0/review.csv
 dpmi/dxemm2.asm,0,excluded,shard-0/review.csv
-dpmi/dxend.asm,1,excluded,shard-1/file-audit.csv
-dpmi/dxendpm.asm,1,excluded,shard-1/file-audit.csv
+dpmi/dxend.asm,1,pending,shard-1/file-audit.csv
+dpmi/dxendpm.asm,1,pending,shard-1/file-audit.csv
 dpmi/dxfind.asm,0,excluded,shard-0/review.csv
 dpmi/dxfunc.asm,1,pending,shard-1/file-audit.csv
 dpmi/dxhpbios.asm,2,pending,shard-2/file-audit.csv
@@ -1042,7 +1042,7 @@ dpmi/dxmmgr.asm,2,excluded,shard-2/file-audit.csv
 dpmi/dxmsg.asm,0,excluded,shard-0/review.csv
 dpmi/dxnetbio.asm,2,excluded,shard-2/file-audit.csv
 dpmi/dxoem.asm,2,excluded,shard-2/file-audit.csv
-dpmi/dxrom.asm,3,excluded,shard-3/file-review.csv
+dpmi/dxrom.asm,3,pending,shard-3/file-review.csv
 dpmi/dxrom.inc,3,pending,shard-3/file-review.csv
 dpmi/dxstrt.asm,2,pending,shard-2/file-audit.csv
 dpmi/dxutil.asm,0,pending,shard-0/review.csv
