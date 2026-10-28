@@ -21,3 +21,5 @@ The [GFI header review](gfi-header-provider-review.md) traces selected and alter
 Replaying check-mirror-diffs.py against the recorded inventory and retention ledger found 202 host-candidate C/H mirror-diff rows and zero with a non-partial status. This only checks recorded classifications, not behavioral recovery or completeness of diff detection.
 
 The [CD-ROM provider review](cdrom-provider-boundary-review.md) separates unselected original interfaces from independent MSCDEX/VDD behavior. The [DEM IOCTL object fixture](../host-dem/demioctl-selected-object-review.md) exercises seven controlled drive-type results without claiming real device or guest coverage.
+
+The [input alternate headers](keyboard-mouse-alternate-header-review.md) and [display profiles](display-profile-interface-review.md) retain per-profile boundaries. DEM selected-object fixtures also cover [current-directory failure](../host-dem/demcwd-selected-object-review.md) and [cross-process lock retirement](../host-dem/demlock-process-selected-object-review.md); guest integration remains open.

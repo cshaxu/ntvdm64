@@ -1,0 +1,14 @@
+# SoftPC host keyboard/mouse alternate headers
+
+Four pending host C/H source roles were compared read-only against original OpenNT; all four current files match that edition byte-for-byte. This review is limited to the observed x86 release profile and source/build ownership; it does not execute input devices or validate other host profiles.
+
+| Header | Original contract and current evidence | Bounded decision |
+| --- | --- | --- |
+| `keycaps.h` | Human-readable keycap names and diagnostics are inside `UIF_TEST`; searches of current `src/mvdm` and `src/ntvdm-exe` find no including consumer. | This is a possible original test-profile input, not the production input driver or proof keyboard names/actions are absent. Keep pending until test-profile applicability is decided. |
+| `kybdmtx.h` | Declares keyboard matrix models/actions (`KY83`, `KY101`, `KY102`, `kybdmtx`, `kybdcpu101`); searches find no current including consumer. | The alternate matrix interface is pending original provider/caller assessment; no equivalence to today’s Windows input translation is inferred. |
+| `m_keybdp.h` | Original local `KeySymTable` maps X key symbols to AT matrix positions; searches find no current including consumer. | X host mapping is an alternate host profile. Keep its source role pending until its caller and profile scope are established; do not mistake it for selected Windows scan-code mapping. |
+| `mouse16b.h` | Original 16-bit mouse BOP/data interface. `mouse_io.c:179-183` includes it only under `MOUSE_16_BIT`. Existing x86 `obj/keymouse/mouse_io.obj` VALID dependency record does not list it; current generic profile flags contain no `MOUSE_16_BIT`. | This particular alternate interface is not selected by the observed profile. Preserve pending until guest/mouse-driver relationship and profile relevance are decided. Do not conclude mouse emulation or INT33 is absent. |
+
+Original selected source `keyba.c` owns host key transitions, controller input and the EOI hook; the recorded cached worker map attributes `_host_key_down`, `_host_key_up`, `_kbd_inb` and `_KbdEOIHook` to `original-softpc-keymouse:keyba.obj`. The map likewise attributes `_mouse_io_interrupt` and `_mouse_video_io` to `mouse_io.obj`. These are link attribution, not execution, lifetime or source-to-installed-binary proof. Separate input behavior, PIC early-EOI tests and mouse-range/Win3.x witnesses have their own evidence; they do not prove every keyboard layout, key combination, mouse callback, reset and mode transition. No new runtime test was performed here.
+
+Replay: inspect the four files and `mouse_io.c:179-183`; search `rg -n -i 'keycaps\.h|kybdmtx\.h|m_keybdp\.h|mouse16b\.h' src/mvdm src/ntvdm-exe`; run `ninja -C build/.ninja/msvc-x86-release/worker -t deps obj/keymouse/mouse_io.obj`; examine the recorded worker map and profile flags. Ninja dependency records characterize only that specific cached compilation.
