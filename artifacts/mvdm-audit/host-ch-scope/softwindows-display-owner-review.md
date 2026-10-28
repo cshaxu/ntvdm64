@@ -1,0 +1,12 @@
+# Original SoftWindows display-driver profile versus active DOS/WOW graphics
+
+This bounded source audit covers pending `softpc.new/base/inc/ms_windo.h` and `host_msw.h`, and their relationship to current DOS/WOW graphics. No guest, product, shared ledger or device was modified, and no runtime test was run.
+
+The original `ms_windo.h` declares a SoftWindows-specific interface between GDI and a dedicated display driver under `MSWDVR`, including Windows-version and raster-operation identifiers. `host_msw.h` holds related historical host-side definitions. In original `base/bios/bios.c:453-463`, `MSWDVR` controls BOP 98–9B (`ms_windows`, mouse, copy and keyboard); without the profile those slots use `illegal_bop`. The observed CPU40 NT worker profile does not enable `MSWDVR`. Source searches did not establish the corresponding driver implementation under the inspected current host tree. A branch exists in source; that is not a real guest caller, loaded driver or proof of behavior.
+
+The current product has two distinct graphics boundaries which must not be merged:
+
+- A DOS-hosted Windows installation uses the selected SoftPC device/BIOS/C-VID/Video7 route and its actual guest display driver. The observed object graph and worker map bind original video owners, but full modes, palette, repaint, failure and reset remain stage-owned tests.
+- A Win16 WOW application can enter original WOW32 GDI thunks and modern host GDI; for example original `wow32/wgtbl2.h:54` registers `WG32BitBlt`, and the cached WOW32 map attributes that symbol to `wgdi.obj`. This table/map binding does not demonstrate the SoftWindows-only dedicated display BOPs or every raster operation, callback and object lifecycle.
+
+Keep both historical header roles **pending** until the original MSWDVR driver/provider and its actual supported guest/profile are traced and its relevance to the requested NTVDM capabilities is decided. S13/S15 should independently test the actual selected DOS/Video7 and WOW/GDI producers, including source/destination bounds, guest/device pointer lifetime, unsupported mode/error and reset/teardown. If original SoftWindows-only behavior cannot be recovered through an existing selected owner, name the specific missing dependency and semantic difference before considering an exception. Do not alter/rebuild guest media or activate a second display engine merely because this original interface is present.

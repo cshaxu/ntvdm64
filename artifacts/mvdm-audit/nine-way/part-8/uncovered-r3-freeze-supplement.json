@@ -1,0 +1,29 @@
+{
+  "note": "Additional frozen input identities; original baseline omits the r2 exclusion label, although the frozen generator uses it. Original snapshot unchanged.",
+  "inputs": [
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\uncovered-sample-r3-observer.py",
+      "sha256": "7D19A02CAE012C3C93C957B8D9B5F9099AC12FDAC6D1D54789F63EC311823F5C"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-sample100.csv",
+      "sha256": "EAD0B9CDA164E16B9C3FFDD2184F6B3380C8D4AE59AE4CB95D2B31630CED0CBA"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-sample101-300.csv",
+      "sha256": "0BDDD3DAE8562F409794031D66B881A9B8D8F3C268FE269A02F3F5F10861DDC6"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-uncovered-r2.csv",
+      "sha256": "ABAF498FF467371418E9F61DCAD74D70653ABCF62769DF2EE0B7C7831D726B40"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-1\\other-guest-excluded-scope-evidence.json",
+      "sha256": "711925934EFECC8082BEB6EE9020DDF9351C9A0CC6FD8925CE9EF9530E780E7D"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\nine-way\\part-8\\existing-classifications-uncovered-r3.csv",
+      "sha256": "B4304BF520A8E158AFC81B3495DADA2951DB8AC914ABB207648514314DEEE804"
+    }
+  ]
+}

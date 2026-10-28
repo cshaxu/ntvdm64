@@ -1,0 +1,27 @@
+{
+  "source_hashes": [
+    {
+      "path": "shard-0/review.csv",
+      "sha256": "F77BDF7AA4CFF7D7D1B285D9ED13008035BBAC1AEB0978BD014A17860C725C57"
+    },
+    {
+      "path": "shard-1/file-audit.csv",
+      "sha256": "2D4BC11EF164463BAE9BD030AF4AE91C99189FEC9F02441B13B565E3C02A291B"
+    },
+    {
+      "path": "shard-2/file-audit.csv",
+      "sha256": "8B8B96A005E6E8528E125A381E82D5970C702A1978D1D4F8064493FEE83F6425"
+    },
+    {
+      "path": "shard-3/file-review.csv",
+      "sha256": "6EEBB6C30C940BD453E67EB210A9C0765E16E2AB653A15A31A7935DEBD420BD9"
+    }
+  ],
+  "sample_sha256": "B4304BF520A8E158AFC81B3495DADA2951DB8AC914ABB207648514314DEEE804",
+  "exclude_lists": [
+    "sample100-all",
+    "sample101-300-all",
+    "part1-other-guest-564"
+  ],
+  "rows": 100
+}
