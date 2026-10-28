@@ -1,0 +1,115 @@
+{
+  "result": "pass",
+  "entries": [
+    {
+      "path": "tools16/buildidx.exe",
+      "status": "pending",
+      "original_sha256": "6A301EAEE8EA8516E541DA2A61A22F1DB7D09B15C278A88A8D73083AAC0F4D91",
+      "retained_path": "tools\\historical\\opennt-4.5\\buildidx.exe",
+      "retained_sha256": "6A301EAEE8EA8516E541DA2A61A22F1DB7D09B15C278A88A8D73083AAC0F4D91",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/c1xx3216.exe",
+      "status": "pending",
+      "original_sha256": "86F1B2F4411FC9AD48030C0503D92F53D93BE9F020404CE8BD32CF3D67FD41D1",
+      "retained_path": "tools\\historical\\opennt-4.5\\c1xx3216.exe",
+      "retained_sha256": "86F1B2F4411FC9AD48030C0503D92F53D93BE9F020404CE8BD32CF3D67FD41D1",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/c23216.exe",
+      "status": "pending",
+      "original_sha256": "153F14C922089C962FE42668BFC38D3A68ADEEAD50D65E0E6A196DFC56B211CC",
+      "retained_path": "tools\\historical\\opennt-4.5\\c23216.exe",
+      "retained_sha256": "153F14C922089C962FE42668BFC38D3A68ADEEAD50D65E0E6A196DFC56B211CC",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/c23pcd.exe",
+      "status": "pending",
+      "original_sha256": "5A4820B00A5E6310AE5D2976423B8359E97F475E7F1C597F39CEDD450C975FD8",
+      "retained_path": "tools\\historical\\opennt-4.5\\c23pcd.exe",
+      "retained_sha256": "5A4820B00A5E6310AE5D2976423B8359E97F475E7F1C597F39CEDD450C975FD8",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/implib.exe",
+      "status": "pending",
+      "original_sha256": "45DC9B73FB9A46E213825970CC4E998950BCF3564BFEEFA81E51E2D64610D23C",
+      "retained_path": "tools\\historical\\opennt-4.5\\implib.exe",
+      "retained_sha256": "45DC9B73FB9A46E213825970CC4E998950BCF3564BFEEFA81E51E2D64610D23C",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/link_60.exe",
+      "status": "pending",
+      "original_sha256": "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00",
+      "retained_path": "tools\\historical\\opennt-4.5\\link_60.exe",
+      "retained_sha256": "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/mkpublic.exe",
+      "status": "pending",
+      "original_sha256": "5C4C7F6CA057A8DED485F6771AC27DFEA689EE9A78632237A34B84E6F55AA1A0",
+      "retained_path": "tools\\historical\\opennt-4.5\\mkpublic.exe",
+      "retained_sha256": "5C4C7F6CA057A8DED485F6771AC27DFEA689EE9A78632237A34B84E6F55AA1A0",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/rcpp.exe",
+      "status": "pending",
+      "original_sha256": "42268CAE70387E133BA0596B5B50F8878EBA2B6CB85FD1C6F689B2430F7BF720",
+      "retained_path": "tools\\historical\\opennt-4.5\\rcpp.exe",
+      "retained_sha256": "42268CAE70387E133BA0596B5B50F8878EBA2B6CB85FD1C6F689B2430F7BF720",
+      "installed": false,
+      "in_archive": false
+    },
+    {
+      "path": "tools16/reloc.exe",
+      "status": "pending",
+      "original_sha256": "300B58668D46C3281EF2C017409AA9300499155D6593A8A9552781D2D96CC2B3",
+      "retained_path": "tools\\historical\\opennt-4.5\\reloc.exe",
+      "retained_sha256": "300B58668D46C3281EF2C017409AA9300499155D6593A8A9552781D2D96CC2B3",
+      "installed": false,
+      "in_archive": false
+    }
+  ],
+  "parent_images": [
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl16.exe",
+      "sha256": "FD857E7B5DF2431B1312B987F3729EE7101AAC59D21CC2E14E82D3F1DD6D97D3"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rc16.exe",
+      "sha256": "838455C5EE149D3BC2ADF2A80840E5AC0AAE138D93AC3D8876DEEE16E6833AD3"
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "dos/v86/messages/makefile",
+      "sha256": "867A421CC0F0859E769B4A521CA44B70F74781763E358016C025B43D89859FD4"
+    },
+    {
+      "path": "dos/v86/doskrnl/bios/makefile",
+      "sha256": "03C54D48FDF24EECE3B664A0A6C625DD649A5EF423173A80F9DFC36BE025DDF8"
+    },
+    {
+      "path": "wow16/ole/client/makefile",
+      "sha256": "42A19F54364CF6FEE49047DA225A702FADFF759541E37143B298F3A2EC7C0B58"
+    },
+    {
+      "path": "wow16/lib/makefile",
+      "sha256": "8804E8BF3409DF79EEEF188B0487451EA01550E25D709875241AC313F820099A"
+    }
+  ],
+  "limits": "Strings and recipes are static evidence only; exact historical tool selection and runtime behavior are not proved."
+}

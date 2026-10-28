@@ -1,0 +1,243 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "tools16/buildmsg.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:fffce6b694ad936a6d30",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\buildmsg.exe",
+          "sha256": "0D8EA59396A769E440549322A2EC9D1AB70423147E702EF1B1F42606CADD50CD"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/c1.err",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:2da83ce8bec107989583;SRC:47ac1f5695f06e981cb7",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\tools16\\c1.err",
+          "sha256": "2F6AF4A7CA7DD061E340F517609482FD263845F2F2B9ED837490A3A980D5018D"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\c1.err",
+          "sha256": "2F6AF4A7CA7DD061E340F517609482FD263845F2F2B9ED837490A3A980D5018D"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/cl.err",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:2da05a6879210566f493;SRC:c4844924299f6db01ab8",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\tools16\\cl.err",
+          "sha256": "ABAF652BD8FD8A0CF4241FB58E7DCB420267C0921126F2146D5CEE591C9FC097"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl.err",
+          "sha256": "ABAF652BD8FD8A0CF4241FB58E7DCB420267C0921126F2146D5CEE591C9FC097"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/cl.msg",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:1a83ec5d3232f6434d6d;SRC:bb4b7d43fb90e3f547a7",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\tools16\\cl.msg",
+          "sha256": "3EF4C6D6DBC46B40B159330300AF63A6EC0093207970FD95266A5267D8F865E8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl.msg",
+          "sha256": "3EF4C6D6DBC46B40B159330300AF63A6EC0093207970FD95266A5267D8F865E8"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/cl16.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:3ff4e21cd33cbc1be827",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl16.exe",
+          "sha256": "FD857E7B5DF2431B1312B987F3729EE7101AAC59D21CC2E14E82D3F1DD6D97D3"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/h2inc.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:52563456ce8fb4c61870",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\h2inc.exe",
+          "sha256": "FBB1E12752C4C0A7518725EE16F98E10151634BB3840EDA9F1C136551649D189"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/masm.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:0f738f60d3231680966b",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\masm.exe",
+          "sha256": "E54AFAA9565E046CD862C29A015D685DE43311ACCCF796469030E162CED6D00D"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/q23.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:f4174724683be1116d98",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\q23.exe",
+          "sha256": "08CCE8CF3AB01061E22F7612561CD42A0E456D8B61F5BB832BA622786A9F9E8B"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/rc16.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:2f5915043f18f0c67db9",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rc16.exe",
+          "sha256": "838455C5EE149D3BC2ADF2A80840E5AC0AAE138D93AC3D8876DEEE16E6833AD3"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/rcqq.err",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:ca29b29c121eff598f44;SRC:e5712f3da5db03890703",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\tools16\\rcqq.err",
+          "sha256": "53C4D172D684080C45C1B94F5EEAA7C514CE0147AA2FD2D52CADC29A04671217"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rcqq.err",
+          "sha256": "53C4D172D684080C45C1B94F5EEAA7C514CE0147AA2FD2D52CADC29A04671217"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/rcqq.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:6a07451b17eed2a22609",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rcqq.exe",
+          "sha256": "AD1C3EA071E9D85EBEDCB4370D6E5B1134F92DFB2065558D06A898926B807EBE"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    },
+    {
+      "path": "tools16/stripdd.exe",
+      "status": "\u5f85\u6838\u9a8c",
+      "catalog_ids": "SRC:67b4358399c6874c833b",
+      "originals": [
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\stripdd.exe",
+          "sha256": "748A4D0F8BF3AFD7CCE867D452EA3C475C267C9A308856C15B872D5A813039D9"
+        }
+      ],
+      "valid_host_dependencies": [],
+      "exact_graph_path_hits": [],
+      "installed_system32_basename_present": false,
+      "archive_basename_present": false
+    }
+  ],
+  "recipe_anchors": [
+    {
+      "path": "dos/v86/cmd/command/makefile",
+      "sha256": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4"
+    },
+    {
+      "path": "inc/makefile",
+      "sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9"
+    },
+    {
+      "path": "dpmi/makefile",
+      "sha256": "6F2E99255A4906DAF8734F4529341C8123D2B39615FB282A3C81104E85E2AAD9"
+    },
+    {
+      "path": "wow16/commdlg/makefile",
+      "sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36"
+    },
+    {
+      "path": "dos/v86/dev/himem/makefile",
+      "sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "Original bytes and bounded name/recipe/graph evidence only; no execution, proven tool-file-to-recipe identity, full PATH search, guest rebuild or all-profile tool requirement claim."
+}

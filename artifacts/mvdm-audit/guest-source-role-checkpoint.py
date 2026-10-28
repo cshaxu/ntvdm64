@@ -177,7 +177,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] in artifact_roles:
                     assert prefix == 'generated-message-role-'
                 if proof['role'] == 'historical-empty-declaration-only':
-                    assert (prefix == 'parallel-empty-declaration-role-' and (path == 'inc/APISTRUC.INC' or path.startswith('softpc.new/base/cvidc/'))) or (prefix == 'shard3-empty-declaration-role-' and path in {
+                    assert (prefix == 'parallel-empty-declaration-role-' and (path == 'inc/APISTRUC.INC' or path.startswith('softpc.new/base/cvidc/'))) or (prefix == 'shard2-empty-declaration-role-' and path in {
+                        'softpc.new/base/cvidc/' + name + '_c.h' for name in ('bound', 'c2cpug', 'conv', 'dec', 'gdinit', 'inc', 'light', 'nanoa', 'pm', 'simple', 'stub')}) or (prefix == 'shard3-empty-declaration-role-' and path in {
                         'softpc.new/base/cvidc/' + name + '.h' for name in ('add_c', 'bswap_c', 'cmp_c', 'copies_c', 'fmevid_c', 'gdmain_c', 'gicvid_c', 'idmain_c', 'logic_c', 'move_c', 'nanoe_c', 'unchn_c')})
                 if proof['role'] == 'selected-empty-source-file-only':
                     assert prefix == 'shard0-empty-gdi-role-' and path == 'wow32/wgman.c'

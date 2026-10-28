@@ -47,7 +47,11 @@ def main():
                else Path(supplemental['source_path']))
         current = ROOT / 'src/mvdm' / path
         if not current.is_file():
-            missing.append(dict(relative_path=path, status=ledger[path]['status']))
+            relocated = ROOT / 'tools/historical/opennt-4.5' / Path(path).name
+            historical = (path.startswith('tools16/') and entry['opennt45_sha256'] and
+                          relocated.is_file() and sha(relocated) == entry['opennt45_sha256'].upper())
+            missing.append(dict(relative_path=path, status=ledger[path]['status'],
+                                retained_historical_path=str(relocated.relative_to(ROOT)) if historical else ''))
             continue
         expected_hash = (entry['opennt_sha256'] if primary else entry['opennt45_sha256'] if secondary
                          else supplemental['source_sha256']).upper()

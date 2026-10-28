@@ -1,0 +1,14 @@
+# Shard 2: four unmirrored tools16 inputs
+
+All four pending paths are absent from `src/mvdm/tools16`, **but all four are preserved in `tools/historical/opennt-4.5`**. The observer/JSON independently hash both original-tree copies and the retained historical copies, verify the latter against the historical manifest's SHA-256 and size, then inspect original consumer recipes and the literal contents of the current worker and WOW32 Ninja graphs. Each retained historical copy is byte-identical to the corresponding OpenNT 4.5 original. Neither graph names these four exact filenames. This is a current graph observation, not proof that every historical script or other configuration has no dependency.
+
+| Entry | Original role and bounded disposition |
+| --- | --- |
+| `tools16/c23.err` | Present and identical in both original editions; text contains compiler fatal/error messages. Exact invoking compiler and search-path relationship were not established. Candidate **unmirrored historical tool-support data**, not runtime executable functionality; retain pending if a definite consumer is required before exclusion. |
+| `tools16/fixexe.exe` | Present only in OpenNT 4.5. The original Win16 kernel makefile invokes `fixexe kernel.exe` and has a rule for `fixexe.c`, but this does not prove that the executable was built from that source. Candidate **unmirrored historical guest-build tool**; not part of the observed modern graphs. |
+| `tools16/lib16.exe` | Present only in OpenNT 4.5. The original Win16 library makefile invokes `lib16` to assemble `libw.lib`; COMMDLG also declares a librarian variable. Candidate **unmirrored historical guest-build tool**; the exact binary used by those historical invocations is not established. |
+| `tools16/nosrvbld.exe` | Present only in OpenNT 4.5. Original DOS `make.inc` invokes `nosrvbld` on message skeleton and locale inputs; a separate retained historical NTIO build script also requests such a tool. Candidate **unmirrored historical guest-build tool**, not a claim that historical reproduction can run without it. |
+
+Because current policy prohibits modifying or rebuilding guest images, their absence from the mirror path does not by itself require importing these tools into the product build. Historical copies are already retained in the repository; they must not be reported as missing altogether. This does not eliminate guest kernel, library or message behavior, and it does not claim that independently invoked historical reproduction scripts have no tools16 prerequisites. No original executable was run or copied. Modern source/build graph and external tool paths can change; the findings apply to the captured inputs.
+
+Replay `python artifacts/mvdm-audit/shard-2/tools16-unmirrored-observer.py` with `PYTHONDONTWRITEBYTECODE=1` and compare the JSON. No guest, product, installation, shared ledger or build tree was modified.

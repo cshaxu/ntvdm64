@@ -1,0 +1,90 @@
+[
+  {
+    "name": "c13216.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "3170A7C6E90FAA3FC593D7B8514C8E23D67E8BD5DE0EB3D8173C8B89BBE1FA1C",
+    "manifest_sha256": "3170A7C6E90FAA3FC593D7B8514C8E23D67E8BD5DE0EB3D8173C8B89BBE1FA1C",
+    "opennt_sha256": "",
+    "opennt45_sha256": "3170A7C6E90FAA3FC593D7B8514C8E23D67E8BD5DE0EB3D8173C8B89BBE1FA1C",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "c33216.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "E38B304E6F3F3ABF9B7AFCC2D4867BD19BB89C2789436AA96F91C8333C7AB044",
+    "manifest_sha256": "E38B304E6F3F3ABF9B7AFCC2D4867BD19BB89C2789436AA96F91C8333C7AB044",
+    "opennt_sha256": "",
+    "opennt45_sha256": "E38B304E6F3F3ABF9B7AFCC2D4867BD19BB89C2789436AA96F91C8333C7AB044",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "cl.def",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "9AEF258DA8E4A37245306B7E238AE89C6099C323149881E1C42E5E0CDDE4E9BA",
+    "manifest_sha256": "9AEF258DA8E4A37245306B7E238AE89C6099C323149881E1C42E5E0CDDE4E9BA",
+    "opennt_sha256": "9AEF258DA8E4A37245306B7E238AE89C6099C323149881E1C42E5E0CDDE4E9BA",
+    "opennt45_sha256": "9AEF258DA8E4A37245306B7E238AE89C6099C323149881E1C42E5E0CDDE4E9BA",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "cvpack.err",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "B13DB1DB1C6E66F497B569CFE4C039BF64EB3437ACFB158AB531D9DBACE6021F",
+    "manifest_sha256": "B13DB1DB1C6E66F497B569CFE4C039BF64EB3437ACFB158AB531D9DBACE6021F",
+    "opennt_sha256": "B13DB1DB1C6E66F497B569CFE4C039BF64EB3437ACFB158AB531D9DBACE6021F",
+    "opennt45_sha256": "B13DB1DB1C6E66F497B569CFE4C039BF64EB3437ACFB158AB531D9DBACE6021F",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "cvpack16.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "73335AB475F1C9D9027A75C137024E0897F8187A1D83F308EC9E79E794921420",
+    "manifest_sha256": "73335AB475F1C9D9027A75C137024E0897F8187A1D83F308EC9E79E794921420",
+    "opennt_sha256": "",
+    "opennt45_sha256": "73335AB475F1C9D9027A75C137024E0897F8187A1D83F308EC9E79E794921420",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "getsize.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "496882B8405FE1514ED4DE4F77C6C7AC923420A4D086E94A83562F175028D1C3",
+    "manifest_sha256": "496882B8405FE1514ED4DE4F77C6C7AC923420A4D086E94A83562F175028D1C3",
+    "opennt_sha256": "",
+    "opennt45_sha256": "496882B8405FE1514ED4DE4F77C6C7AC923420A4D086E94A83562F175028D1C3",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "link16.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00",
+    "manifest_sha256": "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00",
+    "opennt_sha256": "",
+    "opennt45_sha256": "910ED26E6C8D72D64FAA82A7EEABB6D5C002B347024C8F1D778FDDBBB8AC1B00",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  },
+  {
+    "name": "stripz.exe",
+    "present_at_original_mirror_path": false,
+    "historical_copy_present": true,
+    "historical_sha256": "6D424555368E2F61D201DD249532672A12164C35AFB507A3E3556595511EA689",
+    "manifest_sha256": "6D424555368E2F61D201DD249532672A12164C35AFB507A3E3556595511EA689",
+    "opennt_sha256": "",
+    "opennt45_sha256": "6D424555368E2F61D201DD249532672A12164C35AFB507A3E3556595511EA689",
+    "matches_45_inventory": true,
+    "matches_manifest": true
+  }
+]

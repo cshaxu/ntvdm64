@@ -1,0 +1,399 @@
+{
+  "result": "pass",
+  "headers": [
+    {
+      "name": "bound_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\bound_c.h",
+      "guard": "_Bound_c_h",
+      "sha256": "8B0D1F2E0C5D4E9F5224ED6CB4EAD97998253645E10FE5566AF9A7B5E449A83D"
+    },
+    {
+      "name": "c2cpug_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\c2cpug_c.h",
+      "guard": "_C2CpuG_c_h",
+      "sha256": "6CD353C8CB0576C532E0CDDC5F7B27BA6A7C58C4E5197851DB857C18D1CE1D9F"
+    },
+    {
+      "name": "conv_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\conv_c.h",
+      "guard": "_Conv_c_h",
+      "sha256": "3DB1FDFE05AD4F7B2B8F743E23DCCE7E0A74AB89FBA3EC2CB7EE21AD6A66B0BB"
+    },
+    {
+      "name": "dec_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\dec_c.h",
+      "guard": "_Dec_c_h",
+      "sha256": "7A4B90358D04A45C0C13CCC6668B6293FDB82A7AADB2AABB9B5B8ECC822F3F86"
+    },
+    {
+      "name": "gdinit_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\gdinit_c.h",
+      "guard": "_GdInit_c_h",
+      "sha256": "2D3923E7AFA152715EBB0503E93F1C5AFA89AAF4594213A1AF0ED134469465E6"
+    },
+    {
+      "name": "inc_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\inc_c.h",
+      "guard": "_Inc_c_h",
+      "sha256": "2C9C5AE87D0738BBCD682C0A5E5B86494E9B3555AAC71594E57032EEB8173C84"
+    },
+    {
+      "name": "light_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\light_c.h",
+      "guard": "_Light_c_h",
+      "sha256": "491FBBAA1ACAC663F79F7A5A848AA40E86778CCC9006DF80F5619F9AB8A9C47D"
+    },
+    {
+      "name": "nanoa_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\nanoa_c.h",
+      "guard": "_NanoA_c_h",
+      "sha256": "BB31A4C32DB6D2974841A6F9D59F05B3524F00E384A6565903AA7098DA3B0ACC"
+    },
+    {
+      "name": "pm_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\pm_c.h",
+      "guard": "_PM_c_h",
+      "sha256": "B6BA5208F758247BD755E351E8FA140AD731ABF7B7E5BCD41566A7A8C5BB72E8"
+    },
+    {
+      "name": "simple_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\simple_c.h",
+      "guard": "_Simple_c_h",
+      "sha256": "569A34BE63D1922A0FEC5965CECA4D86940AEA547B77391C795B087FE22802FC"
+    },
+    {
+      "name": "stub_c.h",
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\stub_c.h",
+      "guard": "_Stub_c_h",
+      "sha256": "F2FB630C8FB554E0AA7E42C231F971BAD8D5D813B02FB346B722341763CE5421"
+    }
+  ],
+  "search_roots": [
+    "src",
+    "tools",
+    "tests",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/generated"
+  ],
+  "guard_hits": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\bound_c.h",
+      "line": 1,
+      "text": "#ifndef _Bound_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\bound_c.h",
+      "line": 2,
+      "text": "#define _Bound_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\bound_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Bound_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\c2cpug_c.h",
+      "line": 1,
+      "text": "#ifndef _C2CpuG_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\c2cpug_c.h",
+      "line": 2,
+      "text": "#define _C2CpuG_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\c2cpug_c.h",
+      "line": 3,
+      "text": "#endif /* ! _C2CpuG_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\conv_c.h",
+      "line": 1,
+      "text": "#ifndef _Conv_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\conv_c.h",
+      "line": 2,
+      "text": "#define _Conv_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\conv_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Conv_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\dec_c.h",
+      "line": 1,
+      "text": "#ifndef _Dec_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\dec_c.h",
+      "line": 2,
+      "text": "#define _Dec_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\dec_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Dec_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\gdinit_c.h",
+      "line": 1,
+      "text": "#ifndef _GdInit_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\gdinit_c.h",
+      "line": 2,
+      "text": "#define _GdInit_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\gdinit_c.h",
+      "line": 3,
+      "text": "#endif /* ! _GdInit_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\inc_c.h",
+      "line": 1,
+      "text": "#ifndef _Inc_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\inc_c.h",
+      "line": 2,
+      "text": "#define _Inc_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\inc_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Inc_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\light_c.h",
+      "line": 1,
+      "text": "#ifndef _Light_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\light_c.h",
+      "line": 2,
+      "text": "#define _Light_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\light_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Light_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\nanoa_c.h",
+      "line": 1,
+      "text": "#ifndef _NanoA_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\nanoa_c.h",
+      "line": 2,
+      "text": "#define _NanoA_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\nanoa_c.h",
+      "line": 3,
+      "text": "#endif /* ! _NanoA_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\pm_c.h",
+      "line": 1,
+      "text": "#ifndef _PM_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\pm_c.h",
+      "line": 2,
+      "text": "#define _PM_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\pm_c.h",
+      "line": 3,
+      "text": "#endif /* ! _PM_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\simple_c.h",
+      "line": 1,
+      "text": "#ifndef _Simple_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\simple_c.h",
+      "line": 2,
+      "text": "#define _Simple_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\simple_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Simple_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\stub_c.h",
+      "line": 1,
+      "text": "#ifndef _Stub_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\stub_c.h",
+      "line": 2,
+      "text": "#define _Stub_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\cvidc\\stub_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Stub_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\bound_c.h",
+      "line": 1,
+      "text": "#ifndef _Bound_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\bound_c.h",
+      "line": 2,
+      "text": "#define _Bound_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\bound_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Bound_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\conv_c.h",
+      "line": 1,
+      "text": "#ifndef _Conv_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\conv_c.h",
+      "line": 2,
+      "text": "#define _Conv_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\conv_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Conv_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\dec_c.h",
+      "line": 1,
+      "text": "#ifndef _Dec_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\dec_c.h",
+      "line": 2,
+      "text": "#define _Dec_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\dec_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Dec_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\gdinit_c.h",
+      "line": 1,
+      "text": "#ifndef _GdInit_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\gdinit_c.h",
+      "line": 2,
+      "text": "#define _GdInit_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\gdinit_c.h",
+      "line": 3,
+      "text": "#endif /* ! _GdInit_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\inc_c.h",
+      "line": 1,
+      "text": "#ifndef _Inc_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\inc_c.h",
+      "line": 2,
+      "text": "#define _Inc_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\inc_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Inc_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\light_c.h",
+      "line": 1,
+      "text": "#ifndef _Light_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\light_c.h",
+      "line": 2,
+      "text": "#define _Light_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\light_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Light_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoa_c.h",
+      "line": 1,
+      "text": "#ifndef _NanoA_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoa_c.h",
+      "line": 2,
+      "text": "#define _NanoA_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\nanoa_c.h",
+      "line": 3,
+      "text": "#endif /* ! _NanoA_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\pm_c.h",
+      "line": 1,
+      "text": "#ifndef _PM_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\pm_c.h",
+      "line": 2,
+      "text": "#define _PM_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\pm_c.h",
+      "line": 3,
+      "text": "#endif /* ! _PM_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\simple_c.h",
+      "line": 1,
+      "text": "#ifndef _Simple_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\simple_c.h",
+      "line": 2,
+      "text": "#define _Simple_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\simple_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Simple_c_h */"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\stub_c.h",
+      "line": 1,
+      "text": "#ifndef _Stub_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\stub_c.h",
+      "line": 2,
+      "text": "#define _Stub_c_h"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\inc\\mips\\prod\\stub_c.h",
+      "line": 3,
+      "text": "#endif /* ! _Stub_c_h */"
+    }
+  ],
+  "non_guard_hits": [],
+  "filename_hits": [],
+  "build_graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Literal guard and filename references in checked roots, with generated worker files; not proof of all build configurations or dynamic include generation"
+}

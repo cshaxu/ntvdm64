@@ -1,0 +1,133 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "tools16/c23.err",
+      "hashes": [
+        "",
+        "816CF9EE6DEDDD4CBB1655F5ABA516B9471B6CF6494DE9D44E52D9D59D73E6FF",
+        "816CF9EE6DEDDD4CBB1655F5ABA516B9471B6CF6494DE9D44E52D9D59D73E6FF"
+      ],
+      "origin": "both-identical",
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "historical_path": "tools\\historical\\opennt-4.5\\c23.err",
+      "historical_sha256": "816CF9EE6DEDDD4CBB1655F5ABA516B9471B6CF6494DE9D44E52D9D59D73E6FF",
+      "historical_size": 4631
+    },
+    {
+      "path": "tools16/fixexe.exe",
+      "hashes": [
+        "",
+        "",
+        "0048DC25A8B527A5489779FE95B4B1B9367B8B56B49189FB0ED3B0D76A6B701C"
+      ],
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "historical_path": "tools\\historical\\opennt-4.5\\fixexe.exe",
+      "historical_sha256": "0048DC25A8B527A5489779FE95B4B1B9367B8B56B49189FB0ED3B0D76A6B701C",
+      "historical_size": 22016
+    },
+    {
+      "path": "tools16/lib16.exe",
+      "hashes": [
+        "",
+        "",
+        "DCADF5E7A21A72B9C98366CEAE307DAE529002F21279B0C697BDB7BDD2B0BC05"
+      ],
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "historical_path": "tools\\historical\\opennt-4.5\\lib16.exe",
+      "historical_sha256": "DCADF5E7A21A72B9C98366CEAE307DAE529002F21279B0C697BDB7BDD2B0BC05",
+      "historical_size": 134144
+    },
+    {
+      "path": "tools16/nosrvbld.exe",
+      "hashes": [
+        "",
+        "",
+        "E49E569B7E0775BDD731BCF18CEA1D85C29DABC1AA9A7285DE51249387711665"
+      ],
+      "origin": "opennt45-only",
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "1",
+      "historical_path": "tools\\historical\\opennt-4.5\\nosrvbld.exe",
+      "historical_sha256": "E49E569B7E0775BDD731BCF18CEA1D85C29DABC1AA9A7285DE51249387711665",
+      "historical_size": 16299
+    }
+  ],
+  "historical_manifest_sha256": "09A198AD5768A6F17E4ADD6BFBBD73C9F0940CC13DA669C903C0D18434E5DDC9",
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\makefile",
+      "sha256": "5DDCC52BB834D447E75D85D5720FFA52968D63912A718A8769AFB8555155E247"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\fixexe.c",
+      "sha256": "2D466E7ADBE75D501EDADB1E44F2AB65333A042FED705411334E1C0C8AB3E9C0"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\lib\\makefile",
+      "sha256": "8804E8BF3409DF79EEEF188B0487451EA01550E25D709875241AC313F820099A"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\make.inc",
+      "sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F"
+    }
+  ],
+  "graph_hits": [
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "name": "c23.err",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "name": "fixexe.exe",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "name": "lib16.exe",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "name": "nosrvbld.exe",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "name": "c23.err",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "name": "fixexe.exe",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "name": "lib16.exe",
+      "lines": []
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "name": "nosrvbld.exe",
+      "lines": []
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    }
+  ],
+  "scope": "Unmirrored source identity, original build recipes and two current Ninja graph literal scans; no provenance of alternate tools or guest rebuild"
+}

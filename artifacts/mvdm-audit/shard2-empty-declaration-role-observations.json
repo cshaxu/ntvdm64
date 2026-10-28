@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "0c9b9bdba",
+  "candidate_count": 11,
+  "source_tables": [
+    {
+      "path": "shard-2/cvidc-header-batch-observations.json",
+      "sha256": "B32C28EED3C066498FC1913E96BE8D6D4E7DE4010B12B84DD84A60972C601762"
+    },
+    {
+      "path": "shard-2/cvidc-guard-closure-observations.json",
+      "sha256": "11A758245A9C986B0B3A1502DAAB23177A3C9C91F238C08D8C3343FED8FEA979"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Empty header roles only; no runtime feature exclusion"
+}

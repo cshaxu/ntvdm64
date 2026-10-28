@@ -14,7 +14,9 @@ Every row records the selected edition, both input hashes and the frozen current
 current files whose hash has since changed are listed in the [summary](mirror-diff-code-retention-summary.json);
 the estimate measures their actual current bytes, not the earlier snapshot.
 Original paths with no current file are listed separately in that summary and
-remain subject to their ledger dispositions; they have no current text to compare.
+remain subject to their ledger dispositions; they have no current text to compare
+at the original mirror path. Exact retained copies of historical build tools are
+identified separately, not described as lost.
 The [generator](../../tools/audit/EstimateMirrorDiffRetention.py) checks the
 original hashes and current ledger before producing the table.
 The supplemental generated NTVDM definition differs by an added export; its

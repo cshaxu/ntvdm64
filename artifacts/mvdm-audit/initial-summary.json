@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1256,
-    "excluded": 2743,
+    "pending": 1245,
+    "excluded": 2754,
     "partial": 632,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Four inactive diagnostic/profile headers excluded and three selected host declarations partial; capabilities remain open."
+  "note": "Eleven declaration-less header roles excluded; CPU and video capabilities remain open."
 }

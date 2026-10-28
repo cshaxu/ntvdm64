@@ -63,7 +63,15 @@ The [USER historical review](shard-1/guest-user-historical-review.md) and
 [host keyboard/ROM review](shard-3/legacy-host-matrix-rommap-role-review.md)
 retain further selected-versus-historical source boundaries.
 The [C-VID header batch](shard-2/cvidc-header-batch-review.md) records 17
-reviewed candidates and leaves profile/consumer questions explicit.
+reviewed candidates; its [guard closure](shard-2/cvidc-guard-closure-review.md)
+reconciles 11 empty file roles while leaving profile and capability questions open.
+The [historical tools16 chain](shard-0/tools16-chain-review.md) and
+[retained-tool review](shard-3/tools16-build-input-role-review.md) distinguish
+absent mirror paths from hash-matched historical copies.
+Additional [tools16 checks](shard-1/historical-tools16-recheck-review.md),
+[DOS build inputs](shard-2/tools16-unmirrored-review.md) and
+[Win16 assembly declarations](shard-1/guest-inc-asm-review.md) retain their
+specific build and provenance boundaries.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds

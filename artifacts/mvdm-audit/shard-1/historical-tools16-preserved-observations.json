@@ -1,0 +1,98 @@
+[
+  {
+    "name": "buildmsg.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\buildmsg.exe",
+    "original_sha256": "0d8ea59396a769e440549322a2ec9d1ab70423147e702ef1b1f42606cadd50cd",
+    "preserved": "tools\\historical\\opennt-4.5\\buildmsg.exe",
+    "preserved_sha256": "0d8ea59396a769e440549322a2ec9d1ab70423147e702ef1b1f42606cadd50cd",
+    "match": true
+  },
+  {
+    "name": "c1.err",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\c1.err",
+    "original_sha256": "2f6af4a7ca7dd061e340f517609482fd263845f2f2b9ed837490a3a980d5018d",
+    "preserved": "tools\\historical\\opennt-4.5\\c1.err",
+    "preserved_sha256": "2f6af4a7ca7dd061e340f517609482fd263845f2f2b9ed837490a3a980d5018d",
+    "match": true
+  },
+  {
+    "name": "cl.err",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl.err",
+    "original_sha256": "abaf652bd8fd8a0cf4241fb58e7dcb420267c0921126f2146d5cee591c9fc097",
+    "preserved": "tools\\historical\\opennt-4.5\\cl.err",
+    "preserved_sha256": "abaf652bd8fd8a0cf4241fb58e7dcb420267c0921126f2146d5cee591c9fc097",
+    "match": true
+  },
+  {
+    "name": "cl.msg",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl.msg",
+    "original_sha256": "3ef4c6d6dbc46b40b159330300af63a6ec0093207970fd95266a5267d8f865e8",
+    "preserved": "tools\\historical\\opennt-4.5\\cl.msg",
+    "preserved_sha256": "3ef4c6d6dbc46b40b159330300af63a6ec0093207970fd95266a5267d8f865e8",
+    "match": true
+  },
+  {
+    "name": "cl16.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\cl16.exe",
+    "original_sha256": "fd857e7b5df2431b1312b987f3729ee7101aac59d21cc2e14e82d3f1dd6d97d3",
+    "preserved": "tools\\historical\\opennt-4.5\\cl16.exe",
+    "preserved_sha256": "fd857e7b5df2431b1312b987f3729ee7101aac59d21cc2e14e82d3f1dd6d97d3",
+    "match": true
+  },
+  {
+    "name": "h2inc.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\h2inc.exe",
+    "original_sha256": "fbb1e12752c4c0a7518725ee16f98e10151634bb3840eda9f1c136551649d189",
+    "preserved": "tools\\historical\\opennt-4.5\\h2inc.exe",
+    "preserved_sha256": "fbb1e12752c4c0a7518725ee16f98e10151634bb3840eda9f1c136551649d189",
+    "match": true
+  },
+  {
+    "name": "masm.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\masm.exe",
+    "original_sha256": "e54afaa9565e046cd862c29a015d685de43311acccf796469030e162ced6d00d",
+    "preserved": "tools\\historical\\opennt-4.5\\masm.exe",
+    "preserved_sha256": "e54afaa9565e046cd862c29a015d685de43311acccf796469030e162ced6d00d",
+    "match": true
+  },
+  {
+    "name": "q23.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\q23.exe",
+    "original_sha256": "08cce8cf3ab01061e22f7612561cd42a0e456d8b61f5bb832ba622786a9f9e8b",
+    "preserved": "tools\\historical\\opennt-4.5\\q23.exe",
+    "preserved_sha256": "08cce8cf3ab01061e22f7612561cd42a0e456d8b61f5bb832ba622786a9f9e8b",
+    "match": true
+  },
+  {
+    "name": "rc16.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rc16.exe",
+    "original_sha256": "838455c5ee149d3bc2adf2a80840e5ac0aae138d93ac3d8876deee16e6833ad3",
+    "preserved": "tools\\historical\\opennt-4.5\\rc16.exe",
+    "preserved_sha256": "838455c5ee149d3bc2adf2a80840e5ac0aae138d93ac3d8876deee16e6833ad3",
+    "match": true
+  },
+  {
+    "name": "rcqq.err",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rcqq.err",
+    "original_sha256": "53c4d172d684080c45c1b94f5eeaa7c514ce0147aa2fd2d52cadc29a04671217",
+    "preserved": "tools\\historical\\opennt-4.5\\rcqq.err",
+    "preserved_sha256": "53c4d172d684080c45c1b94f5eeaa7c514ce0147aa2fd2d52cadc29a04671217",
+    "match": true
+  },
+  {
+    "name": "rcqq.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\rcqq.exe",
+    "original_sha256": "ad1c3ea071e9d85ebedcb4370d6e5b1134f92dfb2065558d06a898926b807ebe",
+    "preserved": "tools\\historical\\opennt-4.5\\rcqq.exe",
+    "preserved_sha256": "ad1c3ea071e9d85ebedcb4370d6e5b1134f92dfb2065558d06a898926b807ebe",
+    "match": true
+  },
+  {
+    "name": "stripdd.exe",
+    "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\tools16\\stripdd.exe",
+    "original_sha256": "748a4d0f8bf3afd7cce867d452ea3c475c267c9a308856c15b872d5a813039d9",
+    "preserved": "tools\\historical\\opennt-4.5\\stripdd.exe",
+    "preserved_sha256": "748a4d0f8bf3afd7cce867d452ea3c475c267c9a308856c15b872d5a813039d9",
+    "match": true
+  }
+]
