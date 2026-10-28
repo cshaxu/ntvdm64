@@ -1,6 +1,11 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 47 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 51 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [ccpu-stack-instruction-image](shard-1/ccpu-stack-instruction-image-review.md): [observer](shard-1/ccpu-stack-instruction-image-observer.py), [receipt](shard-1/ccpu-stack-instruction-image-observations.json).
+- [win16-oleclient-guest](shard-2/win16-oleclient-guest-review.md): [observer](shard-2/win16-oleclient-guest-observer.py), [receipt](shard-2/win16-oleclient-guest-observations.json).
+- [win16-regedit-guest](shard-2/win16-regedit-guest-review.md): [observer](shard-2/win16-regedit-guest-observer.py), [receipt](shard-2/win16-regedit-guest-observations.json).
+- [cmd-keyboard-layout](shard-3/cmd-keyboard-layout-role-review.md): [observer](shard-3/cmd-keyboard-layout-observer.py), [receipt](shard-3/cmd-keyboard-layout-observations.json).
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).

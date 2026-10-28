@@ -1,0 +1,54 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/regedit/debug/REGEDT16.EXE",
+      "hashes": [
+        "9AC95769EF42E27E637457D6CBEECCF8FD9FFD248D4911E870DCB319E9122793",
+        "",
+        ""
+      ],
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "0"
+    },
+    {
+      "path": "wow16/regedit/reg1632.h",
+      "hashes": [
+        "1E56B04604D629A08AD33614D0175829E7D570DC405512C498D2592CDA6CF6C4",
+        "1E56B04604D629A08AD33614D0175829E7D570DC405512C498D2592CDA6CF6C4",
+        "1E56B04604D629A08AD33614D0175829E7D570DC405512C498D2592CDA6CF6C4"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/regedit/sdkreged.def",
+      "hashes": [
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3",
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3",
+        "129735B29CA5FD8EDDDC7A57C8F0DE687D8007E07E599CE32A426495BBE96FF3"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\regedit\\makefile",
+      "sha256": "6255669DED8680CF24DA6D74B49366D2F7F5AD08871CB95DE26A46D42DB339FD"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\regedit\\regporte.c",
+      "sha256": "D069E2DF7307AC741AC03DED5234CF776483506FEC3AEECD66310E00251EA506"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\regedit\\regedit.def",
+      "sha256": "07023C6810F15CFDAFBF9F07129E0F13B8EC64D4F873EB06C64D74D88B50EC01"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_basename_matches": [],
+  "installed_path": "O:\\winnt\\system32\\REGEDT16.EXE",
+  "installed_sha256": "",
+  "scope": "Original guest build references and package identities; no runtime registry behavior or source-to-image claim"
+}

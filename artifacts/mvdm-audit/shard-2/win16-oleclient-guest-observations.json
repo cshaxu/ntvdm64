@@ -1,0 +1,56 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/ole/client/funchead.c",
+      "hashes": [
+        "8C698B874AECDDEA2E14BD195B4EE4E991563FE91A1B0429EDE03C220893058F",
+        "8C698B874AECDDEA2E14BD195B4EE4E991563FE91A1B0429EDE03C220893058F",
+        "8C698B874AECDDEA2E14BD195B4EE4E991563FE91A1B0429EDE03C220893058F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ole/client/mk.cmd",
+      "hashes": [
+        "B64EA57A825BD1C3D23D6F6D4674D202DA7B094A8852243333F009A080C1AB00",
+        "B64EA57A825BD1C3D23D6F6D4674D202DA7B094A8852243333F009A080C1AB00",
+        "B64EA57A825BD1C3D23D6F6D4674D202DA7B094A8852243333F009A080C1AB00"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/ole/client/utils.c",
+      "hashes": [
+        "6ED48E62191188AC2E4063986F2D6A2AEF1F1B56709B25931E332E7EC2DB378F",
+        "6ED48E62191188AC2E4063986F2D6A2AEF1F1B56709B25931E332E7EC2DB378F",
+        "6ED48E62191188AC2E4063986F2D6A2AEF1F1B56709B25931E332E7EC2DB378F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\ole\\client\\makefile",
+      "sha256": "42A19F54364CF6FEE49047DA225A702FADFF759541E37143B298F3A2EC7C0B58"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ole\\client\\bm.c",
+      "sha256": "254A5030EFA1A98B67742F6AC3E33F871892FB6BF8CF692ADF6C0C2E05C90EA9"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\ole\\client\\dll.h",
+      "sha256": "AFDF363F82588474E86205DF85880922D2E85359D60407B49C6AA1B8A3C686F4"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/OLECLI.DLL",
+  "image_sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4",
+  "source_image_sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4",
+  "installed_path": "O:\\winnt\\system32\\OLECLI.DLL",
+  "installed_sha256": "F3A76752B6A257056EC43CD6D43DA5A65244FC5C41F89E2162EF27634ECE54B4",
+  "scope": "Historical OLE guest build and package identity; no source-to-binary or runtime behavior claim"
+}

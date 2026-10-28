@@ -1,0 +1,38 @@
+{
+  "dos/command/cmdkeyb.h": {
+    "current": "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+    "opennt": "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361",
+    "opennt45": "b83738295ed02d762748eef550058332078ce24b94ed76fd1a77c2eb8f77a361"
+  },
+  "dos/command/cmdkeyb.c": {
+    "current": "c3f318fd75df9302a782594a5777cf60f401ff1e6997a118ae3d9299705cdd6c",
+    "opennt": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba",
+    "opennt45": "b945cd4a072b592211f6427ee526b2ca47be05ac6bef9a33956105749d899eba"
+  },
+  "dos/command/cmddisp.c": {
+    "current": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+    "opennt": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+    "opennt45": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6"
+  },
+  "dos/v86/cmd/command/tcode.asm": {
+    "current": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377",
+    "opennt": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377",
+    "opennt45": "223938eef6bc48314805cb3c35ebbd11cd6da10316ed09952c8f06cf9ca11377"
+  },
+  "inc/CMDSVC.INC": {
+    "current": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6",
+    "opennt": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6",
+    "opennt45": "7643746ceec383536ca3ea2cfc4400ac94c8c7a34bd266b09258cfcb337441c6"
+  },
+  "src/ntvdm-exe/softpc/mvdm_shadow_registry.c": "829ff1b62de2f95a3518d86190edc93319ab03220d44f2904b5a2da3e927a067",
+  "src/ntvdm-exe/softpc/mvdm_softpc_firmware.c": "93e5f7bc821ec28f1e929e3da1aa27a94c6f6131c8f2d3c01888a271b129674e",
+  "src/ntvdm-exe/softpc/include/mvdm_shadow_registry.h": "0c638bcb55ac20bce38a9219726ae9df360c68bbf57b76d6c22588e704501396",
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:001525d0       _cmdGetKbdLayout           005535d0 f   original-mvdm-command:cmdkeyb.obj",
+      " 0001:00162500       _ntvdm_shadow_reg_open_key_ex@20 00563500 f   softpc-bindings:mvdm_shadow_registry.obj",
+      " 0001:0016be90       _NtvdmGetSystemDirectoryA  0056ce90 f   softpc-bindings:mvdm_softpc_firmware.obj"
+    ]
+  }
+}
