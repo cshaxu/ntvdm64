@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1417,
+    "pending": 1413,
     "excluded": 2652,
-    "partial": 562,
+    "partial": 566,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -11,7 +11,7 @@
     {
       "relative_path": "README.md",
       "frozen": "E6048BF474AB6748C963DD99D1D3F5B779615E9F748DA289100C34BE247B7335",
-      "current": "FE3795503ABE771A753709740AAD7A4815F0404D790B03083F37192EF2A01335"
+      "current": "97178B0337DC81AEF5F698D1B0E7BA1B94DE2C5C42EA9D4B91EFBABF76EC49E3"
     },
     {
       "relative_path": "dpmi32/modesw.c",
@@ -22,6 +22,11 @@
       "relative_path": "softpc.new/base/video/v7_ports.c",
       "frozen": "D02575BD0594F9CCC3A23AD7ED0EB208EC7C1414EEFFD558DD1CE6B648F1991B",
       "current": "16D82A9736638F32A5A5BD00B5AB070BB6148834C6B8EAC56D6EB5DE7F7F1504"
+    },
+    {
+      "relative_path": "softpc.new/base/video/v7_video.c",
+      "frozen": "B9B6BEFBC8B1C44DD930C2BC173885A5972B02E6FBEFA21FD33815FC028E5D54",
+      "current": "E79048230DE980EE7F5DFCE418EC396A14517C06D705959825B63D55D5ACD058"
     },
     {
       "relative_path": "softpc.new/base/video/vga_mode.c",
@@ -40,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Original scrollbar, caret and DOS directory owners are partial; behavior and lifecycle remain open."
+  "note": "Original USER client and SOUND roles are partial; actual guest behavior remains open."
 }

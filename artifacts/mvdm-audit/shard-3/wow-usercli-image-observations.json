@@ -1,0 +1,504 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wusercli.c",
+      "sha256": "96B363EE882839A61D232DFBE145346D6E4D7EC7BFBAA4C97C4E0500A39B51ED",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.c",
+      "wow_source_ids": "SRC:3650a2aebce0d3c84e70;SRC:44355891f1859a42092c"
+    },
+    {
+      "relative_path": "wow32/wusercli.h",
+      "sha256": "2731955B6F6D24419575806304481B7D866C99B552EC8DA756FC956B5DFA4B2E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.h",
+      "wow_source_ids": "SRC:42ccf361bfc5ddf1677a;SRC:e69f2c53ac9211967e5c"
+    }
+  ],
+  "functions": [
+    {
+      "name": "_WU32ClientToScreen@4",
+      "va": 268641568,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 62,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WU32DefHookProc@4",
+      "va": 268641632,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 116,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WU32EnableMenuItem@4",
+      "va": 268641760,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 28,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetClassName@4",
+      "va": 268641792,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 82,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32GetClientRect@4",
+      "va": 268641888,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 71,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32GetCursorPos@4",
+      "va": 268641968,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 39,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32GetDesktopWindow@4",
+      "va": 268642016,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 12,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetDlgItem@4",
+      "va": 268642032,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 66,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WU32GetKeyState@4",
+      "va": 268642112,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 38,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetKeyboardState@4",
+      "va": 268642160,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 54,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32GetMenu@4",
+      "va": 268642224,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 20,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetMenuItemCount@4",
+      "va": 268642256,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 18,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetMenuItemID@4",
+      "va": 268642288,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 23,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetMenuState@4",
+      "va": 268642320,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 28,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetNextWindow@4",
+      "va": 268642352,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 26,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetWindow@4",
+      "va": 268642352,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 26,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetParent@4",
+      "va": 268642384,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 20,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetSubMenu@4",
+      "va": 268642416,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 26,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetSysColor@4",
+      "va": 268642448,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 18,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetSystemMetrics@4",
+      "va": 268642480,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetTickCount@4",
+      "va": 268642512,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 52,
+      "relocation_words": 2
+    },
+    {
+      "name": "_WU32GetTopWindow@4",
+      "va": 268642576,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 21,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32GetWindowRect@4",
+      "va": 268642608,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 71,
+      "relocation_words": 4
+    },
+    {
+      "name": "_WU32IsChild@4",
+      "va": 268642688,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 24,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsIconic@4",
+      "va": 268642720,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsWindow@4",
+      "va": 268642752,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsWindowEnabled@4",
+      "va": 268642784,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsWindowVisible@4",
+      "va": 268642816,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32IsZoomed@4",
+      "va": 268642848,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 19,
+      "relocation_words": 1
+    },
+    {
+      "name": "_WU32ScreenToClient@4",
+      "va": 268642880,
+      "function": true,
+      "owner": "wusercli.obj",
+      "bytes": 62,
+      "relocation_words": 3
+    }
+  ],
+  "user_slots": [
+    {
+      "user_ordinal": 13,
+      "table_index": 324,
+      "symbol": "_WU32GetTickCount@4",
+      "va": 268642512
+    },
+    {
+      "user_ordinal": 15,
+      "table_index": 326,
+      "symbol": "_WU32GetTickCount@4",
+      "va": 268642512
+    },
+    {
+      "user_ordinal": 17,
+      "table_index": 328,
+      "symbol": "_WU32GetCursorPos@4",
+      "va": 268641968
+    },
+    {
+      "user_ordinal": 28,
+      "table_index": 339,
+      "symbol": "_WU32ClientToScreen@4",
+      "va": 268641568
+    },
+    {
+      "user_ordinal": 29,
+      "table_index": 340,
+      "symbol": "_WU32ScreenToClient@4",
+      "va": 268642880
+    },
+    {
+      "user_ordinal": 31,
+      "table_index": 342,
+      "symbol": "_WU32IsIconic@4",
+      "va": 268642720
+    },
+    {
+      "user_ordinal": 32,
+      "table_index": 343,
+      "symbol": "_WU32GetWindowRect@4",
+      "va": 268642608
+    },
+    {
+      "user_ordinal": 33,
+      "table_index": 344,
+      "symbol": "_WU32GetClientRect@4",
+      "va": 268641888
+    },
+    {
+      "user_ordinal": 35,
+      "table_index": 346,
+      "symbol": "_WU32IsWindowEnabled@4",
+      "va": 268642784
+    },
+    {
+      "user_ordinal": 46,
+      "table_index": 357,
+      "symbol": "_WU32GetParent@4",
+      "va": 268642384
+    },
+    {
+      "user_ordinal": 47,
+      "table_index": 358,
+      "symbol": "_WU32IsWindow@4",
+      "va": 268642752
+    },
+    {
+      "user_ordinal": 48,
+      "table_index": 359,
+      "symbol": "_WU32IsChild@4",
+      "va": 268642688
+    },
+    {
+      "user_ordinal": 49,
+      "table_index": 360,
+      "symbol": "_WU32IsWindowVisible@4",
+      "va": 268642816
+    },
+    {
+      "user_ordinal": 58,
+      "table_index": 369,
+      "symbol": "_WU32GetClassName@4",
+      "va": 268641792
+    },
+    {
+      "user_ordinal": 91,
+      "table_index": 402,
+      "symbol": "_WU32GetDlgItem@4",
+      "va": 268642032
+    },
+    {
+      "user_ordinal": 106,
+      "table_index": 417,
+      "symbol": "_WU32GetKeyState@4",
+      "va": 268642112
+    },
+    {
+      "user_ordinal": 155,
+      "table_index": 466,
+      "symbol": "_WU32EnableMenuItem@4",
+      "va": 268641760
+    },
+    {
+      "user_ordinal": 157,
+      "table_index": 468,
+      "symbol": "_WU32GetMenu@4",
+      "va": 268642224
+    },
+    {
+      "user_ordinal": 159,
+      "table_index": 470,
+      "symbol": "_WU32GetSubMenu@4",
+      "va": 268642416
+    },
+    {
+      "user_ordinal": 179,
+      "table_index": 490,
+      "symbol": "_WU32GetSystemMetrics@4",
+      "va": 268642480
+    },
+    {
+      "user_ordinal": 180,
+      "table_index": 491,
+      "symbol": "_WU32GetSysColor@4",
+      "va": 268642448
+    },
+    {
+      "user_ordinal": 222,
+      "table_index": 533,
+      "symbol": "_WU32GetKeyboardState@4",
+      "va": 268642160
+    },
+    {
+      "user_ordinal": 229,
+      "table_index": 540,
+      "symbol": "_WU32GetTopWindow@4",
+      "va": 268642576
+    },
+    {
+      "user_ordinal": 230,
+      "table_index": 541,
+      "symbol": "_WU32GetNextWindow@4",
+      "va": 268642352
+    },
+    {
+      "user_ordinal": 235,
+      "table_index": 546,
+      "symbol": "_WU32DefHookProc@4",
+      "va": 268641632
+    },
+    {
+      "user_ordinal": 250,
+      "table_index": 561,
+      "symbol": "_WU32GetMenuState@4",
+      "va": 268642320
+    },
+    {
+      "user_ordinal": 262,
+      "table_index": 573,
+      "symbol": "_WU32GetWindow@4",
+      "va": 268642352
+    },
+    {
+      "user_ordinal": 263,
+      "table_index": 574,
+      "symbol": "_WU32GetMenuItemCount@4",
+      "va": 268642256
+    },
+    {
+      "user_ordinal": 264,
+      "table_index": 575,
+      "symbol": "_WU32GetMenuItemID@4",
+      "va": 268642288
+    },
+    {
+      "user_ordinal": 272,
+      "table_index": 583,
+      "symbol": "_WU32IsZoomed@4",
+      "va": 268642848
+    },
+    {
+      "user_ordinal": 278,
+      "table_index": 589,
+      "symbol": "_WU32GetDesktopWindow@4",
+      "va": 268642016
+    },
+    {
+      "user_ordinal": 286,
+      "table_index": 597,
+      "symbol": "_WU32GetDesktopWindow@4",
+      "va": 268642016
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wusercli.obj",
+      "sha256": "F5D87FF563DA47B55C3B0FBF92272FE5CA3A7EB76FD3E92A1D781F655070F1F3"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wusercli.c",
+      "sha256": "96B363EE882839A61D232DFBE145346D6E4D7EC7BFBAA4C97C4E0500A39B51ED"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.c",
+      "sha256": "96B363EE882839A61D232DFBE145346D6E4D7EC7BFBAA4C97C4E0500A39B51ED"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wusercli.c",
+      "sha256": "96B363EE882839A61D232DFBE145346D6E4D7EC7BFBAA4C97C4E0500A39B51ED"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wusercli.h",
+      "sha256": "2731955B6F6D24419575806304481B7D866C99B552EC8DA756FC956B5DFA4B2E"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.h",
+      "sha256": "2731955B6F6D24419575806304481B7D866C99B552EC8DA756FC956B5DFA4B2E"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wusercli.h",
+      "sha256": "2731955B6F6D24419575806304481B7D866C99B552EC8DA756FC956B5DFA4B2E"
+    }
+  ],
+  "scope": "Selected host thunk code and initial pointers; immutable guest optimized local paths and runtime behavior unproven"
+}

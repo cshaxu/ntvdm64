@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "cae58ad80",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-2/wow-sound-image-observations.json",
+      "sha256": "5967C244D201C3B760DDA76C4F1026079037FCA669FBC8D1E73C2D101A8A3B57"
+    },
+    {
+      "path": "shard-3/wow-usercli-image-observations.json",
+      "sha256": "E61C72BE4232797D4A4E829B22E6A6A36124D6FE348B3F79C43F40C78328418A"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original initial table and selected source; no guest execution or audio acceptance"
+}

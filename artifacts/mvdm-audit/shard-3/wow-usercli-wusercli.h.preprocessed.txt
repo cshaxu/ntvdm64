@@ -1,0 +1,97 @@
+#line 1 "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wusercli.h"
+
+
+
+
+
+ULONG  WU32DefHookProc(PVDMFRAME pFrame);
+ULONG  WU32EnableMenuItem(PVDMFRAME pFrame);
+ULONG  WU32GetKeyState(PVDMFRAME pFrame);
+ULONG  WU32GetKeyboardState(PVDMFRAME pFrame);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ULONG  WU32ClientToScreen(PVDMFRAME pFrame);
+ULONG  WU32GetClassName(PVDMFRAME pFrame);
+ULONG  WU32GetClientRect(PVDMFRAME pFrame);
+ULONG  WU32GetCursorPos(PVDMFRAME pFrame);
+ULONG  WU32GetDesktopWindow(PVDMFRAME pFrame);
+ULONG  WU32GetDlgItem(PVDMFRAME pFrame);
+ULONG  WU32GetMenu(PVDMFRAME pFrame);
+ULONG  WU32GetMenuItemCount(PVDMFRAME pFrame);
+ULONG  WU32GetMenuItemID(PVDMFRAME pFrame);
+ULONG  WU32GetMenuState(PVDMFRAME pFrame);
+ULONG  WU32GetNextWindow(PVDMFRAME pFrame);
+ULONG  WU32GetParent(PVDMFRAME pFrame);
+ULONG  WU32GetSubMenu(PVDMFRAME pFrame);
+ULONG  WU32GetSysColor(PVDMFRAME pFrame);
+ULONG  WU32GetSystemMetrics(PVDMFRAME pFrame);
+ULONG  WU32GetTopWindow(PVDMFRAME pFrame);
+ULONG  WU32GetWindow(PVDMFRAME pFrame);
+ULONG  WU32GetWindowRect(PVDMFRAME pFrame);
+ULONG  WU32IsWindow(PVDMFRAME pFrame);
+ULONG  WU32ScreenToClient(PVDMFRAME pFrame);
+ULONG  WU32IsChild(PVDMFRAME pFrame);
+ULONG  WU32IsIconic(PVDMFRAME pFrame);
+ULONG  WU32IsWindowEnabled(PVDMFRAME pFrame);
+ULONG  WU32IsWindowVisible(PVDMFRAME pFrame);
+ULONG  WU32IsZoomed(PVDMFRAME pFrame);
+ULONG  WU32GetTickCount(PVDMFRAME pFrame);
+

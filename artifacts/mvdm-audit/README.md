@@ -23,6 +23,8 @@ The [heap and video-accessor review](parallel-heap-video-role-review.md)
 retains bounded heap evidence and unresolved concurrency/lifetime obligations.
 The [control and directory review](parallel-controls-directory-role-review.md)
 records selected bindings and a bounded original label-read counterexample.
+The [USER client and SOUND review](parallel-user-sound-role-review.md) retains
+guest local-path, audio and lifecycle boundaries.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded
@@ -32,12 +34,12 @@ used the disjoint frozen path shards described by `manifest.json`.
 
 `frozen-file-reconciliation.csv` freezes the 4,684 unique MVDM union paths.
 `combined-initial-status.csv` is the current merged index; detailed per-file
-reasoning and limitations are in each shard directory. Current counts are
-448 partial, 2,643 excluded physical file roles,
-53 full files (27 executable leaves and 26 declarations) and 1,540 pending.
+reasoning and limitations are in each shard directory. The historical retired-host
+checkpoint recorded 448 partial, 2,643 excluded, 53 full and 1,540 pending;
+the live counts are in the current index and project status.
 Each checkpoint's exact-delta verifier is tied to its named base/delivery;
 run historical ones in their matching checkout. The current ledger gate is
-the [retired-host checkpoint](retired-host-role-review.md), not a prior snapshot's fixed counts.
+recorded by each checkpoint rather than a prior snapshot's fixed counts.
 Exclusion of an object or provider does not prove its guest
 functionality works; see the WOW32 object audits for [shard 0](shard-0/historical-wow-objects.md),
 [shard 1](shard-1/historical-wow-objects.md), [shard 2](shard-2/historical-wow-objects.md)

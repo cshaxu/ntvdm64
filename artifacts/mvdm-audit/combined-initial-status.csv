@@ -4606,14 +4606,14 @@ wow32/wshell.c,0,pending,shard-0/review.csv
 wow32/wshell.h,3,pending,shard-3/file-review.csv
 wow32/wshltbl.h,3,pending,shard-3/file-review.csv
 wow32/wshtbl2.h,2,pending,shard-2/file-audit.csv
-wow32/wsman.c,2,pending,shard-2/file-audit.csv
+wow32/wsman.c,2,partial,shard-2/file-audit.csv
 wow32/wsman.h,3,pending,shard-3/file-review.csv
 wow32/wsocktbl.h,2,pending,shard-2/file-audit.csv
 wow32/wspool.c,1,pending,shard-1/file-audit.csv
 wow32/wspool.h,2,pending,shard-2/file-audit.csv
 wow32/wsraw.c,0,pending,shard-0/review.csv
 wow32/wstbl.h,0,pending,shard-0/review.csv
-wow32/wstbl2.h,2,pending,shard-2/file-audit.csv
+wow32/wstbl2.h,2,partial,shard-2/file-audit.csv
 wow32/wstruc.c,1,partial,shard-1/file-audit.csv
 wow32/wstruc.h,0,pending,shard-0/review.csv
 wow32/wsubcls.c,0,pending,shard-0/review.csv
@@ -4649,8 +4649,8 @@ wow32/wuser.c,0,partial,shard-0/review.csv
 wow32/wuser.h,3,pending,shard-3/file-review.csv
 wow32/wuser31.c,0,partial,shard-0/review.csv
 wow32/wuser31.h,2,pending,shard-2/file-audit.csv
-wow32/wusercli.c,3,pending,shard-3/file-review.csv
-wow32/wusercli.h,3,pending,shard-3/file-review.csv
+wow32/wusercli.c,3,partial,shard-3/file-review.csv
+wow32/wusercli.h,3,partial,shard-3/file-review.csv
 wow32/wutbl.h,3,pending,shard-3/file-review.csv
 wow32/wutbl2.h,3,partial,shard-3/file-review.csv
 wow32/wutext.c,1,partial,shard-1/file-audit.csv

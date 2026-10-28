@@ -1,0 +1,190 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wsman.c",
+      "sha256": "3481808A0C62754B72B5338680FB7E1A5DFC81722996CBF81400B2963771A913",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsman.c",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:77687544543f88ee7cc0;SRC:ff17300be2cceea13f6a"
+    },
+    {
+      "relative_path": "wow32/wstbl2.h",
+      "sha256": "D3AEA894092DC6AFC33701CFBCCEFF6297234E9E67185B09EA4FCFDB7C478B5E",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstbl2.h",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:4a75bb39cb672d72f0f8;SRC:5cb471a7352f61d4c69d"
+    }
+  ],
+  "sound_base": 1482,
+  "entries": [
+    {
+      "ordinal": 0,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 1,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 2,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 3,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 4,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 5,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 6,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 7,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 8,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 9,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 10,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 11,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 12,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 13,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 14,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 15,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 16,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    },
+    {
+      "ordinal": 17,
+      "target": "_WS32DoBeep@4",
+      "owner": "wsman.obj",
+      "image_pointer": 268551056
+    },
+    {
+      "ordinal": 18,
+      "target": "_WOW32UnimplementedAPI@4",
+      "owner": "wow32.obj",
+      "image_pointer": 268446416
+    }
+  ],
+  "beep_binding": {
+    "name": "_WS32DoBeep@4",
+    "va": 268551056,
+    "function": true,
+    "owner": "wsman.obj",
+    "bytes": 14,
+    "relocation_words": 1
+  },
+  "beep_import": {
+    "name": "__imp__MessageBeep@4",
+    "owner": "user32:USER32.dll",
+    "va": 269024168
+  },
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wowtbl.obj",
+      "sha256": "FEE788AB813424049B044FB723278B65DD4E26EE5255F9C9286C15B3B9D8251B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsman.obj",
+      "sha256": "9373F89C8AA0B03D2B80A4395601D5EB6BB3D63A51C5713BBD1A159534AD2EA6"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32.obj",
+      "sha256": "B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\sound\\sound.asm",
+      "sha256": "EB4428F4D317591F5683AF9C035C611BC88E14F90A5F71F7E166F754FFE02A23"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\sound\\sound.def",
+      "sha256": "19DD3320243E759DD32B822756AC6840FE897194E9AE96ABCB6EEBFB4B891E98"
+    }
+  ],
+  "scope": "Initial original SOUND dispatch and native MessageBeep import; not guest or audio playback behavior"
+}

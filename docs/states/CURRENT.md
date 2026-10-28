@@ -6,12 +6,13 @@
 
 S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
 The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
-four-role census is retained; current work uses one implementer/reviewer.
+four-role census is retained; three reviewers and the coordinator audit the
+original disjoint shards in parallel.
 Automatic S progression remains in force. Guest media remains unchanged.
 
-Current ten-image package: `build/t473-s10/v7-full-package-r56`;
-release/installed hashes match. Owner requires latest committed production
-code, never an automatic restore of historical package-c.
+Current installed ten-image manifest is `assets/release/release-manifest.json`;
+release/installed hashes match. The Video7 mouse-range repair passed all 14
+Full gates in a fresh-identity isolated copy. Never restore historical package-c.
 S10 package-scoped NTSRV isolation and selected probes are recorded in
 [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
 MVDM-wide source reconciliation remains open.
@@ -20,13 +21,15 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,417 pending, 562 partial, 53 full and 2,652 excluded physical
+The ledger has 1,413 pending, 566 partial, 53 full and 2,652 excluded physical
 file roles. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.
 [Parallel source reviews](../../artifacts/mvdm-audit/README.md) include DOS,
 C-VID and WOW GDI bindings; execution and lifecycle obligations remain open.
+The [Video7 mouse-range candidate](../../artifacts/mvdm-audit/video7-pointer-review.md)
+was accepted by the owner and passed the full ten-component regression.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound
@@ -45,7 +48,7 @@ selected Full gates do not prove those historical failures repaired.
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S10, Ordinary Mode; single implementer/reviewer after the initial four-role census. |
+| Identifier Mode | M0 T473 S10, Ordinary Mode; coordinator and three reviewers on disjoint shards. |
 | Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
 | Objective | Reconcile every applicable original MVDM source against both audit inventories, product composition and evidence; form an exhaustive owner-group recovery worklist. |
 | Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
