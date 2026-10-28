@@ -242,7 +242,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'wow-message-table-image-role-':
+                if prefix == 'softpc-header-owner-role-':
+                    assert path in {'softpc.new/base/inc/' + n for n in ('dsktrace.h', 'gendrvr.h', 'host_gwi.h', 'host_sas.h', 'hunter.h')} and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'wow-message-table-image-role-':
                     assert path == 'wow32/wmtbl32.c' and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'wow-media-resource-image-role-':
                     assert path in ('wow32/wmmedia.c', 'wow32/wres32.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

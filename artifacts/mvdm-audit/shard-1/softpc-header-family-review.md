@@ -31,3 +31,5 @@
 | spc_icon.h | Historical icon mask/data definitions; 0/0. Pending resource/provider attribution. |
 
 Zero/zero means zero direct include references in scanned current softpc.new C/H/INC/CPP sources and zero normalized VALID dependencies in this single worker tree, not a global negative or safe-deletion proof. The large header family crosses multiple independent subsystems; per-row evidence is classification input only, and no CPU, graphics, disk, mouse, audio or user-visible behavior is thereby accepted. No product, guest, build tree or shared ledger modified.
+
+The [dependent-owner observer](softpc-header-owner-image-observer.py) and [receipt](softpc-header-owner-image-observations.json) additionally bind the `_reset` and `_disk_io` bodies from their selected objects to the released worker. Five headers with VALID dependencies on those objects are partial file roles. This does not show that conditional declarations are active or that every owner operation is correct; the testing-only and other uncertain dependencies remain pending.

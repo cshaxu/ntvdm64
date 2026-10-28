@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1140,
+    "pending": 1135,
     "excluded": 2801,
-    "partial": 690,
+    "partial": 695,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "The original message table is partially reconciled; guest execution and lifecycles remain open."
+  "note": "Five selected SoftPC declaration roles partial; other conditional or test-only dependencies remain pending."
 }

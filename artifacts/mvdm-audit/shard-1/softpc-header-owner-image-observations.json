@@ -1,0 +1,39 @@
+{
+  "result": "pass",
+  "family_sha256": "6BD51BB5A0DDFF21D26554EB43DD782112CBB41B7391CBF918569B183C9FB52F",
+  "names": [
+    "dsktrace.h",
+    "gendrvr.h",
+    "host_gwi.h",
+    "host_sas.h",
+    "hunter.h"
+  ],
+  "dependencies": {
+    "dsktrace.h": "obj/disks/diskbios.obj",
+    "gendrvr.h": "obj/bios/reset.obj",
+    "host_gwi.h": "obj/bios/reset.obj",
+    "host_sas.h": "obj/bios/reset.obj",
+    "hunter.h": "obj/bios/reset.obj"
+  },
+  "bindings": [
+    {
+      "name": "_reset",
+      "va": 4603360,
+      "function": true,
+      "owner": "original-softpc-bios:reset.obj",
+      "bytes": 1192,
+      "relocation_words": 127
+    },
+    {
+      "name": "_disk_io",
+      "va": 4686592,
+      "function": true,
+      "owner": "original-softpc-disks:diskbios.obj",
+      "bytes": 327,
+      "relocation_words": 31
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Selected dependent function bodies only; no proof every header declaration is active or runtime behavior"
+}

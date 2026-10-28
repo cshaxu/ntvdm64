@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "b87501599",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-1/softpc-header-family-evidence.json",
+      "sha256": "6BD51BB5A0DDFF21D26554EB43DD782112CBB41B7391CBF918569B183C9FB52F"
+    },
+    {
+      "path": "shard-1/softpc-header-owner-image-observations.json",
+      "sha256": "6BA7572FFFD8191AB67EC6D31EF828F64108AC42C539CBF486ADC96EB783B81C"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected header dependencies, not runtime behavioral acceptance"
+}
