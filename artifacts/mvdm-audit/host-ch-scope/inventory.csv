@@ -714,7 +714,7 @@ softpc.new/base/inc/gendrvr.h,shard-1/file-audit.csv,部分复通,host-candidate
 softpc.new/base/inc/get_env.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/getptis.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/gfi.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/gfiempty.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/gfiempty.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/gfirflop.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/gfisflop.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/gfitest.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -757,7 +757,7 @@ softpc.new/base/inc/jcgensyn.h,shard-1/file-audit.csv,待核验,host-candidate,h
 softpc.new/base/inc/jformate.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/keyba.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/keyboard.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/keycaps.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/keycaps.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/kybdmtx.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/lm_attr.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/lm_clien.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1019,7 +1019,7 @@ softpc.new/host/inc/nt_inthk.h,shard-0/review.csv,partial,host-candidate,host C/
 softpc.new/host/inc/nt_mem.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/nt_mon.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/nt_mouse.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/host/inc/nt_paint.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/host/inc/nt_paint.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/nt_pif.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/nt_reset.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/nt_smenu.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -1167,7 +1167,7 @@ vdmredir/dlstruct.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candi
 vdmredir/vrdebug.c,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 vdmredir/vrdebug.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 vdmredir/vrdisp.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-vdmredir/vrdlc.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+vdmredir/vrdlc.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 vdmredir/vrdlc5c.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 vdmredir/vrdlcbuf.c,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 vdmredir/vrdlcdbg.c,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
