@@ -1,0 +1,133 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "xms.486/xms.c",
+      "hashes": [
+        "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+        "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75",
+        "592F4A063AD84C21890CDC15E56D4900E6669224C7C34C829C09D25DFF9BED75"
+      ],
+      "object_sha256": "7BFD6C305F19C6B23F85AECE113D431FD2EE47440A0C5CD06DACCF7F43F12771",
+      "bindings": [
+        {
+          "name": "_XMSInit",
+          "va": 5588960,
+          "function": true,
+          "owner": "original-mvdm-xms:xms.obj",
+          "bytes": 174,
+          "relocation_words": 11
+        }
+      ]
+    },
+    {
+      "path": "xms.486/xmsa20.c",
+      "hashes": [
+        "7261B7064A089B655B8D41D3E4EF6887BE869AF2B7B62970389AEEE9A8ACC94B",
+        "7261B7064A089B655B8D41D3E4EF6887BE869AF2B7B62970389AEEE9A8ACC94B",
+        "7261B7064A089B655B8D41D3E4EF6887BE869AF2B7B62970389AEEE9A8ACC94B"
+      ],
+      "object_sha256": "5AE9E0F92409D6E36D248585B4BBABCDC23A6D3A232CDA760E03366031A2EEA4",
+      "bindings": [
+        {
+          "name": "_xmsA20",
+          "va": 5590000,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsa20.obj",
+          "bytes": 124,
+          "relocation_words": 10
+        },
+        {
+          "name": "_xmsEnableA20Wrapping",
+          "va": 5590160,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsa20.obj",
+          "bytes": 18,
+          "relocation_words": 2
+        },
+        {
+          "name": "_xmsDisableA20Wrapping",
+          "va": 5590128,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsa20.obj",
+          "bytes": 18,
+          "relocation_words": 2
+        }
+      ]
+    },
+    {
+      "path": "xms.486/xmsmisc.c",
+      "hashes": [
+        "10AD205D9DEDE714749A9746DD99B3389546B8AAF3A63DD0236386A9D4CE5245",
+        "10AD205D9DEDE714749A9746DD99B3389546B8AAF3A63DD0236386A9D4CE5245",
+        "10AD205D9DEDE714749A9746DD99B3389546B8AAF3A63DD0236386A9D4CE5245"
+      ],
+      "object_sha256": "42A6FC4DD67BC9A151F825B3247777985E0F461E29F49AF54A5CD3E80DE13CD5",
+      "bindings": [
+        {
+          "name": "_xmsNotifyHookI15",
+          "va": 5590752,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsmisc.obj",
+          "bytes": 40,
+          "relocation_words": 5
+        },
+        {
+          "name": "_xmsQueryExtMem",
+          "va": 5590800,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsmisc.obj",
+          "bytes": 15,
+          "relocation_words": 2
+        },
+        {
+          "name": "_xmsSysPageSize",
+          "va": 5590816,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsmisc.obj",
+          "bytes": 26,
+          "relocation_words": 2
+        }
+      ]
+    },
+    {
+      "path": "xms.486/xmsumb.c",
+      "hashes": [
+        "1608B70F239570F2CB5BEEAEEACA63065CC9550BD6BAD15B47F4160307B33DDC",
+        "1608B70F239570F2CB5BEEAEEACA63065CC9550BD6BAD15B47F4160307B33DDC",
+        "1608B70F239570F2CB5BEEAEEACA63065CC9550BD6BAD15B47F4160307B33DDC"
+      ],
+      "object_sha256": "A7576D748DF846E8E77F38D0D5B2B8A831A1161F9230A1D2B9C081E1BA2050D1",
+      "bindings": [
+        {
+          "name": "_xmsInitUMB",
+          "va": 5589136,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsumb.obj",
+          "bytes": 202,
+          "relocation_words": 12
+        },
+        {
+          "name": "_xmsRequestUMB",
+          "va": 5589776,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsumb.obj",
+          "bytes": 218,
+          "relocation_words": 10
+        },
+        {
+          "name": "_xmsReleaseUMB",
+          "va": 5589344,
+          "function": true,
+          "owner": "original-mvdm-xms:xmsumb.obj",
+          "bytes": 172,
+          "relocation_words": 7
+        }
+      ]
+    }
+  ],
+  "image_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "cached_sha256": "84F72C0B33D0D0BA8E6837A25B296C17D115157FC75A4E9DC394330CC6FAC5E6",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "limits": "Representative function binding only; no XMS guest behavior, errors or lifecycle proof."
+}

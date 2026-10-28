@@ -4675,11 +4675,11 @@ xms.486/obj/i386/xmsmisc.obj,0,excluded,shard-0/review.csv
 xms.486/obj/i386/xmsumb.obj,3,excluded,shard-3/file-review.csv
 xms.486/ppc/sources,2,excluded,shard-2/file-audit.csv
 xms.486/sources,0,partial,shard-0/review.csv
-xms.486/xms.c,0,pending,shard-0/review.csv
+xms.486/xms.c,0,partial,shard-0/review.csv
 xms.486/xms.h,0,pending,shard-0/review.csv
-xms.486/xmsa20.c,0,pending,shard-0/review.csv
+xms.486/xmsa20.c,0,partial,shard-0/review.csv
 xms.486/xmsblock.c,0,partial,shard-0/review.csv
 xms.486/xmsdisp.c,2,partial,shard-2/file-audit.csv
 xms.486/xmsmemr.c,0,partial,shard-0/review.csv
-xms.486/xmsmisc.c,0,pending,shard-0/review.csv
-xms.486/xmsumb.c,0,pending,shard-0/review.csv
+xms.486/xmsmisc.c,0,partial,shard-0/review.csv
+xms.486/xmsumb.c,0,partial,shard-0/review.csv

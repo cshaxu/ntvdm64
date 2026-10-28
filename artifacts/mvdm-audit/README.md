@@ -76,6 +76,14 @@ The [Win16 timer](shard-1/guest-timer-review.md),
 retain their separate image, provider and runtime proof boundaries.
 The [DOS video profile review](shard-2/dos-video-profile-headers-review.md)
 distinguishes selected EGA declarations from unproved rendering behavior.
+The [XMS runtime owners](shard-0/xms-runtime-owner-review.md) bind selected
+initialization, A20, UMB and query functions to released worker code while
+retaining guest and lifecycle obligations.
+The [C-VID selected core](shard-2/cvidc-selected-core-image-review.md),
+[VDMREDIR DLC recheck](shard-1/vdmredir-dlc-image-recheck.md),
+[CPU profile review](shard-3/ccpu-486-debug-provider-role-review.md) and
+[host platform headers](shard-2/dos-host-platform-headers-review.md) separate
+image samples from unverified runtime and alternative-profile behavior.
 The [KillWOW review](shard-1/guest-killwow-review.md) and [keyboard variant
 review](shard-3/dos-keyboard-variants-role-review.md) retain their worker-wide
 exit and layout selection boundaries.

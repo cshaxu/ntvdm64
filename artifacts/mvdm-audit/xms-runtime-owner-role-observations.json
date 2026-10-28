@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "c5949d0f6",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "shard-0/xms-runtime-owner-observations.json",
+      "sha256": "92409DBEEEC7A86E23A2770596DE12A040E65CF3C8B9B782C08996C2433B9544"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Representative selected bindings; not complete XMS behavior"
+}

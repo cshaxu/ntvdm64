@@ -1,0 +1,64 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/cvidc/accessfn.c",
+      "hashes": [
+        "326046C10F56B4DA4EB4D7FE8B7E2052A46955A229CD94F717AB3FF6B52A1A37",
+        "326046C10F56B4DA4EB4D7FE8B7E2052A46955A229CD94F717AB3FF6B52A1A37",
+        "326046C10F56B4DA4EB4D7FE8B7E2052A46955A229CD94F717AB3FF6B52A1A37"
+      ],
+      "compile_edge": "build obj/cvidc/accessfn.obj: cc_cvidc_access O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/accessfn.c",
+      "object_sha256": "742F61C0DCC913346F1CBFA630CBEBD41C87B6356FC786872F06160D67A32DEB",
+      "sample_binding": {
+        "name": "_PurgeLostIretHookLine",
+        "va": 4783440,
+        "function": true,
+        "owner": "original-softpc-cvidc:accessfn.obj",
+        "bytes": 6,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "softpc.new/base/cpu/src/evid/vglob.c",
+      "hashes": [
+        "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8",
+        "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8",
+        "E695A9807285703119CFFB0C3BC8A3AA6433EDE43EFA499F21A6E736F94395D8"
+      ],
+      "compile_edge": "build obj/cvidc/vglob.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cpu/src/evid/vglob.c",
+      "object_sha256": "0222C2606BF85AF74F8D51D023ABAEED1A06FAB40C1196E7FADB3530AEAF7C84",
+      "sample_binding": {
+        "name": "_getVideobit_prot_mask",
+        "va": 4789744,
+        "function": true,
+        "owner": "original-softpc-cvidc:vglob.obj",
+        "bytes": 12,
+        "relocation_words": 1
+      }
+    },
+    {
+      "path": "softpc.new/base/cvidc/sinit013.c",
+      "hashes": [
+        "9BA333037CAF483AC33AED794C6EF5EF0DF9C77EFDD7328677F3A921AAF49926",
+        "9BA333037CAF483AC33AED794C6EF5EF0DF9C77EFDD7328677F3A921AAF49926",
+        "9BA333037CAF483AC33AED794C6EF5EF0DF9C77EFDD7328677F3A921AAF49926"
+      ],
+      "compile_edge": "build obj/cvidc/SINIT013.obj: cc_cvidc_rule O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc/SINIT013.c",
+      "object_sha256": "78C6ABD9916A1C20162DCBA97CB8E21B49342825B6FE53FD85B7F8997ECE587E",
+      "sample_binding": {
+        "name": "_S_0415_CiSetVideofwd_str_read_addr_00000034",
+        "va": 4803952,
+        "function": true,
+        "owner": "original-softpc-cvidc:SINIT013.obj",
+        "bytes": 27,
+        "relocation_words": 1
+      }
+    }
+  ],
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "cached_sha256": "84F72C0B33D0D0BA8E6837A25B296C17D115157FC75A4E9DC394330CC6FAC5E6",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Three relocation-masked sample function bindings to released worker; no complete runtime, vector or device lifecycle proof"
+}
