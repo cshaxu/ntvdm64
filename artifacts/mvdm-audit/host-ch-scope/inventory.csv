@@ -884,7 +884,7 @@ softpc.new/host/inc/host_rrr.h,shard-1/file-audit.csv,部分复通,host-candidat
 softpc.new/host/inc/host_trc.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/hostgrph.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/hostsync.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/host/inc/hosttyps.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/host/inc/hosttyps.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/hstsystm.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/insignia.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/host/inc/mips/pig/c2cpusad.h,shard-0/review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

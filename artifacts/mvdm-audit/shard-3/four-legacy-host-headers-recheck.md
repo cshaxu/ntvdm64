@@ -1,5 +1,7 @@
 # Four legacy host header roles
 
+Coordinator disposition: `softpc.new/host/inc/hosttyps.h` is excluded as a physical wrapper in the recorded NT worker profile: it only includes `sys/types.h`, matches the original bytes and has no exact source include in the inspected tree. This does not exclude selected host type/ABI behavior or other profiles; those remain separate S11 obligations.
+
 Static, exact-path recheck of the captured x86 CPU40 NTVDM profile; no new runtime test. All recommendations below are **physical file roles in this profile**, not claims of complete behavior equivalence or authority to remove the source files.
 
 | File | Exact consumer and present owner | Decision / preserved obligation |
