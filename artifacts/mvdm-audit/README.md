@@ -158,6 +158,9 @@ host-input role or guest-image identity. Scoped evidence remains available;
 the remaining historical decisions still require the same quality audit.
 The [other-shard correction](classification-scope-correction-other-verification.json)
 reopens another 564 guest-input-only decisions on the same basis.
+An [additional frozen sample](nine-way/part-8/existing-classifications-uncovered-r2-review.md)
+reopens 64 guest source/data decisions and one unbound guest image; an
+independently witnessed MEM image remains partial.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 

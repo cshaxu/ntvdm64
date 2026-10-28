@@ -1,0 +1,33 @@
+{
+  "scope": "frozen selected rows 101-300; later live recomputation can differ",
+  "files": [
+    {
+      "path": "shard-0/review.csv",
+      "sha256": "376571D0CFABEB1896E7242D9D158823785C59975912BA201205A6AC81564705"
+    },
+    {
+      "path": "shard-1/file-audit.csv",
+      "sha256": "7A54837130A0BABB32FEDF2B4B6C088982EB2F44CE767C33A0E577F056F3BEA2"
+    },
+    {
+      "path": "shard-2/file-audit.csv",
+      "sha256": "D565302C25A87202BB37010FD3CF170A0B95C540037FE3FBC7A955162408AB0F"
+    },
+    {
+      "path": "shard-3/file-review.csv",
+      "sha256": "BBCCE8517C26B326128342ADB86AE057FFF0BD23A8190FAEF9799624A1E04E9C"
+    },
+    {
+      "path": "nine-way/part-8/existing-classifications-sample101-300.csv",
+      "sha256": "0BDDD3DAE8562F409794031D66B881A9B8D8F3C268FE269A02F3F5F10861DDC6"
+    },
+    {
+      "path": "nine-way/part-8/sample101-300-observer.py",
+      "sha256": "601C67A0EB4FF9C2CD06CE1A4C5D9BEC646979BA0F38B4152FEFA7F86456B359"
+    },
+    {
+      "path": "nine-way/part-8/sample101-300-corrections-observer.py",
+      "sha256": "6C224C65FEAA5BF5AEF76FC4585C2ADD6D24D9D77797F09DFBCB3D20714C0DD2"
+    }
+  ]
+}

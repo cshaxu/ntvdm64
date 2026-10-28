@@ -1,0 +1,53 @@
+{
+  "source_hashes": [
+    {
+      "path": "shard-0/review.csv",
+      "sha256": "376571D0CFABEB1896E7242D9D158823785C59975912BA201205A6AC81564705"
+    },
+    {
+      "path": "shard-1/file-audit.csv",
+      "sha256": "7A54837130A0BABB32FEDF2B4B6C088982EB2F44CE767C33A0E577F056F3BEA2"
+    },
+    {
+      "path": "shard-2/file-audit.csv",
+      "sha256": "D565302C25A87202BB37010FD3CF170A0B95C540037FE3FBC7A955162408AB0F"
+    },
+    {
+      "path": "shard-3/file-review.csv",
+      "sha256": "BBCCE8517C26B326128342ADB86AE057FFF0BD23A8190FAEF9799624A1E04E9C"
+    }
+  ],
+  "sample_sha256": "ABAF498FF467371418E9F61DCAD74D70653ABCF62769DF2EE0B7C7831D726B40",
+  "exclude_lists": [
+    "sample100-all",
+    "sample101-300-all",
+    "part1-other-guest-564"
+  ],
+  "rows": 100,
+  "frozen_inputs": [
+    {
+      "path": "nine-way/part-8/existing-classifications-uncovered-r2.csv",
+      "sha256": "ABAF498FF467371418E9F61DCAD74D70653ABCF62769DF2EE0B7C7831D726B40"
+    },
+    {
+      "path": "nine-way/part-8/uncovered-sample-r2-observer.py",
+      "sha256": "C7ECD74982DDB804C4BF424094EF17DA69D3E01917450A0E41B51A9B71985CE0"
+    },
+    {
+      "path": "nine-way/part-8/uncovered-r2-corrections-observer.py",
+      "sha256": "0DA93190AD888FD7919670EA4F4B0CB6562C54692D8D3418F24B91C8994452F2"
+    },
+    {
+      "path": "nine-way/part-8/existing-classifications-sample100.csv",
+      "sha256": "EAD0B9CDA164E16B9C3FFDD2184F6B3380C8D4AE59AE4CB95D2B31630CED0CBA"
+    },
+    {
+      "path": "nine-way/part-8/existing-classifications-sample101-300.csv",
+      "sha256": "0BDDD3DAE8562F409794031D66B881A9B8D8F3C268FE269A02F3F5F10861DDC6"
+    },
+    {
+      "path": "nine-way/part-1/other-guest-excluded-scope-evidence.json",
+      "sha256": "711925934EFECC8082BEB6EE9020DDF9351C9A0CC6FD8925CE9EF9530E780E7D"
+    }
+  ]
+}
