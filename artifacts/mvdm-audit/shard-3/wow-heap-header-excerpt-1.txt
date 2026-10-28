@@ -1,0 +1,37 @@
+#line 1 "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow32\\wheap.h"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+PVOID  malloc_w(ULONG size);
+PVOID  malloc_w_zero (ULONG size);
+PVOID  realloc_w (PVOID p, ULONG size, DWORD dwFlags);
+void   free_w(PVOID p);
+
+PVOID  malloc_w_or_die(ULONG size);
+
+
+
+
+
+
+
+
+BOOL  CreateSmallHeap(void);
+PVOID  malloc_w_small (ULONG size);
+BOOL  free_w_small(PVOID p);

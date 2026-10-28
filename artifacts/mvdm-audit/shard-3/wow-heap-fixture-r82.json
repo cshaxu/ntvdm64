@@ -1,0 +1,9 @@
+{
+  "result": "pass",
+  "exit_code": 0,
+  "stderr": "WHEAP production object allocation/free/growth pass=1",
+  "source_sha256": "802217ED969A0086A4F5FF2736C3B09B63B4FFCBA48E507809EC8636F1083020",
+  "object_sha256": "9DB934418EEB86C0D2D41CED1A9FDE27A6B921C35B495D0010F47D98BD1A4A94",
+  "test_exe_sha256": "2CCAD1F458309F37D16967FEDE20FE4DA9431BA6D18EFDE0519314A9E9C8E675",
+  "scope": "Single-threaded isolated allocation, free, growth and test-owned heap destruction only"
+}

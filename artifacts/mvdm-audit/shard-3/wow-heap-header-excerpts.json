@@ -1,0 +1,18 @@
+{
+  "result": "pass",
+  "source_sha256": "2F2D102A6651259FE3FA290D63BEB8544F1D54D08C930AE4A12EFAF0BD55D7D4",
+  "full_preprocessed_sha256": "9C13E5154F13B81962C0D1F8A36D93A1D3078FE58A4F29D676137AB5822BC6C3",
+  "command": "@echo off\ncall \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /c /MT /W3 /Gz /DSTD_CALL /showIncludes /DMVDM_WOW32_PROVIDER /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /O2 /P /Fi\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\shard-3-wowheap-r82/wheap.i\" O:/repos.hobby/ntvdm64/src/mvdm/wow32/wheap.c\nexit /b %errorlevel%\n",
+  "snippets": [
+    {
+      "path": "wow-heap-header-excerpt-1.txt",
+      "sha256": "A51F9EB3C637780A6E0946248B16D8CB35F7C8F67B26FE13835DBA9A1D470A31",
+      "size": 400
+    },
+    {
+      "path": "wow-heap-header-excerpt-2.txt",
+      "sha256": "A51F9EB3C637780A6E0946248B16D8CB35F7C8F67B26FE13835DBA9A1D470A31",
+      "size": 400
+    }
+  ]
+}

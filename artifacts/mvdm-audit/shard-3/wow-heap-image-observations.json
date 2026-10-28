@@ -1,0 +1,133 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "relative_path": "wow32/wheap.c",
+      "sha256": "BE3AF89DA01D5A6F296A47B7E505E2D6598B4C4E1A5CB35E76DAB3AC839848DE",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.c",
+      "wow_source_ids": "SRC:6018cc45ee7d3d373bbc;SRC:b7f850e2ab9a2f5b9f8f"
+    },
+    {
+      "relative_path": "wow32/wheap.h",
+      "sha256": "2F2D102A6651259FE3FA290D63BEB8544F1D54D08C930AE4A12EFAF0BD55D7D4",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.h",
+      "wow_source_ids": "SRC:189e18acb1825a50859a;SRC:7820eb0d1f09774771a2"
+    }
+  ],
+  "functions": [
+    {
+      "name": "_CreateSmallHeap@0",
+      "va": 268639648,
+      "function": true,
+      "owner": "wheap.obj",
+      "bytes": 21,
+      "relocation_words": 2
+    },
+    {
+      "name": "_free_w_small@4",
+      "va": 268639680,
+      "function": true,
+      "owner": "wheap.obj",
+      "bytes": 21,
+      "relocation_words": 2
+    },
+    {
+      "name": "_malloc_w_small@4",
+      "va": 268639712,
+      "function": true,
+      "owner": "wheap.obj",
+      "bytes": 21,
+      "relocation_words": 2
+    }
+  ],
+  "calls": [
+    {
+      "caller": "_W32DllInitialize@12",
+      "target": "_CreateSmallHeap@0",
+      "caller_owner": "wow32.obj"
+    },
+    {
+      "caller": "_SetupAccelAlias@16",
+      "target": "_malloc_w_small@4",
+      "caller_owner": "waccel.obj"
+    },
+    {
+      "caller": "_DestroyAccelAlias@4",
+      "target": "_free_w_small@4",
+      "caller_owner": "waccel.obj"
+    },
+    {
+      "caller": "_AllocCursorIconAlias@0",
+      "target": "_malloc_w_small@4",
+      "caller_owner": "wcuricon.obj"
+    },
+    {
+      "caller": "_StoreDC@16",
+      "target": "_malloc_w_small@4",
+      "caller_owner": "wreldc.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wheap.obj",
+      "sha256": "9DB934418EEB86C0D2D41CED1A9FDE27A6B921C35B495D0010F47D98BD1A4A94"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wheap.c",
+      "sha256": "BE3AF89DA01D5A6F296A47B7E505E2D6598B4C4E1A5CB35E76DAB3AC839848DE"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.c",
+      "sha256": "BE3AF89DA01D5A6F296A47B7E505E2D6598B4C4E1A5CB35E76DAB3AC839848DE"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wheap.c",
+      "sha256": "BE3AF89DA01D5A6F296A47B7E505E2D6598B4C4E1A5CB35E76DAB3AC839848DE"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wheap.h",
+      "sha256": "2F2D102A6651259FE3FA290D63BEB8544F1D54D08C930AE4A12EFAF0BD55D7D4"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.h",
+      "sha256": "2F2D102A6651259FE3FA290D63BEB8544F1D54D08C930AE4A12EFAF0BD55D7D4"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wheap.h",
+      "sha256": "2F2D102A6651259FE3FA290D63BEB8544F1D54D08C930AE4A12EFAF0BD55D7D4"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32.obj",
+      "sha256": "B7B57867FF563557C7E2C3D7435CF451356B3164EA5A16F62612B05E9F63CCC2"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\waccel.obj",
+      "sha256": "B8CBADD8E9EE6646BCBDA721037C5DCCCD696930BE17420CEC95FED3A67745CC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wcuricon.obj",
+      "sha256": "7FECBD6D77511494570657143F41D830F2F52AB9AA75A5009588908803283099"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wreldc.obj",
+      "sha256": "A73EA4884083E485A4AD3C84F7E862341DBADDED375D93FFCA13FB6A7CC13BCC"
+    }
+  ],
+  "scope": "Selected heap implementations and five call edges, not concurrency, allocation failure or task cleanup proof"
+}

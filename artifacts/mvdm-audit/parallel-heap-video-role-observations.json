@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "fbe870930",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-3/wow-heap-image-observations.json",
+      "sha256": "0EA93A3F41276279FF7FB5919D6CC404B2CA281B715356A00EE4E69C32D32E34"
+    },
+    {
+      "path": "shard-0/sinit011-image-observations.json",
+      "sha256": "4993B30C94011B14CE4F2D9D6FC4B38AC6A21D38FA7F48E2BF1DFD84FF43485D"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original code/declarations and bounded heap test; no complete lifetime acceptance"
+}
