@@ -44,6 +44,7 @@ failure until its cause is proved, rather than being assigned to a later
 control stage merely from the application that triggers it.
 
 S13 additionally owns the [proved VDD uninstall and DMA boundary defects](../../../artifacts/mvdm-audit/vdd-native-role-review.md), including all-slot ownership retirement and channel-8 rejection before array access. S10 records their strict counterexamples without changing the runtime.
+S13 also owns the scoped [fixed-disk failure review](../../../artifacts/mvdm-audit/nine-way/part-8/fdisk-open-close-failure-review.md): establish actual-object failure propagation and one-time handle/count retirement with a disposable fixture before choosing an original-source change. The recorded source risks are not yet reproduced guest failures.
 
 S15 owns the isolated [EDIT word-break buffer counterexample](../../../artifacts/mvdm-audit/shard-2/wordbreak-boundary-review.md); real guest reachability and the length contract remain to be verified.
 The [selected host failure handoff](../../../artifacts/mvdm-audit/cross-369/selected-host-reproduced-failures-handoff.md) and [cross-shard handoff](../../../artifacts/mvdm-audit/cross-369/cross-shard-runtime-failures-handoff.md) assign bounded controlled failures to S11, S13, S14, S15 and S16. Each later stage must rebind its tested artifact and preserve the recorded distinction between controlled fixtures and live guest outcomes.
