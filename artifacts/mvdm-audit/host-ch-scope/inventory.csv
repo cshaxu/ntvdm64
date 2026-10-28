@@ -1709,7 +1709,7 @@ wow32/wmmstru1.c,shard-0/review.csv,整体排除,host-candidate,host C/H candida
 wow32/wmmstru2.c,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wmmstruc.c,shard-0/review.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wmmstruc.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-wow32/wmmtbl.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+wow32/wmmtbl.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wmmtbl2.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wmsg16.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/wmsg16.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
