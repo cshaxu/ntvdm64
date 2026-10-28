@@ -1,0 +1,7 @@
+# C-VID alternate-host register constant files
+
+The four exact `softpc.new/base/cvidc/{axphst_c,hpphst_c,ppchst_c,sunhst_c}.h` paths contain Alpha, HP, PowerPC and Sun host register IDs and host-specific FPU/branch adjustments respectively. Their current hashes match both recorded OpenNT editions. They are host-code-generator configuration constants, not Intel guest instruction implementations. No product or guest file was changed.
+
+The selected worker is the recorded x86 CPU40/CCPU profile; `New-T310OriginalSoftpcNinja.ps1` selects x86 production generated headers. A case-insensitive full `src/mvdm` and `tools` search found no direct inclusion of these four names; searching their distinctive destination-register symbols found only each header's own definition. The retained C-VID header-family and generated-carrier reviews also recorded no exact selected dependency for these paths. These observations identify four alternative-host physical files, not all possible external or generator consumers.
+
+The four physical files are excluded from the NTVDM product host scope. CPU/FPU execution, exception ordering, C-VID bindings and generated-vector ABI remain separate S11/S13 requirements. This disposition does not remove the files, establish non-x86 platform support, or claim that related guest instructions have been verified. Re-evaluate if a supported host profile actually selects any of them.
