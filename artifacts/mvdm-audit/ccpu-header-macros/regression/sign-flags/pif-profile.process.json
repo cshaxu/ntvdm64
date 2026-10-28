@@ -1,0 +1,7 @@
+{
+  "command": "\"O:\\tmp\\n65b\\tests\" --close-on-exit",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\sign-flags/pif-builder.exe",
+  "pid": 27792,
+  "timeoutSeconds": 30,
+  "start": "2026-10-28T00:34:10.5778060Z"
+}

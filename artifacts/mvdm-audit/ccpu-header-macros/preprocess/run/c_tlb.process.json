@@ -1,0 +1,7 @@
+{
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-selection\\run/c_tlb.cmd\"\"",
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 25080,
+  "started": "2026-10-28T00:04:42.6260647Z",
+  "diagnostic_budget_seconds": 60
+}

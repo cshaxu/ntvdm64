@@ -6,10 +6,11 @@ param([Parameter(Mandatory)][string]$PackageRoot,
  [string]$CompilerDriver=(Join-Path $PSScriptRoot '../../build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd'),
  [string]$Nasm='nasm.exe',
  [switch]$NegativeOracle,
- [ValidateSet('SignFlags','Control')][string]$Workload='SignFlags')
+ [ValidateSet('SignFlags','Control','BitMemory')][string]$Workload='SignFlags')
 # Independent COM exercises selected CPU40 sign-extension and flag instructions; no original guest is
 # modified/rebuilt, no substituted memory provider and no mapped drive.
 $ErrorActionPreference='Stop'
+if($Workload -eq 'BitMemory' -and $NegativeOracle){throw 'BitMemory uses its direct hardware expectation; NegativeOracle is not supported'}
 $repo=[IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
@@ -30,7 +31,7 @@ try{
  if($label -ne 'S-1-16-8192'){throw "Expected desktop-capable medium token, got $label"}
  @{parent_pid=$PID;host_path=(Get-Process -Id $PID).Path;integrity_sid=$label;token_class='medium';script_sha256=(Get-FileHash $PSCommandPath).Hash;private_desktop=$true}|ConvertTo-Json|Set-Content "$root/runner-context.json"
  $assembler=(Get-Command $Nasm -ErrorAction Stop).Source
- $probe=Join-Path $PSScriptRoot $(if($Workload -eq 'Control'){'ccpu_control_probe.asm'}else{'ccpu_sign_flag_probe.asm'})
+ $probe=Join-Path $PSScriptRoot (@{Control='ccpu_control_probe.asm';SignFlags='ccpu_sign_flag_probe.asm';BitMemory='ccpu_bit_memory_probe.asm'}[$Workload])
  $line='-f bin "'+$probe+'" -o "'+$root+'/EMSPROBE.COM"'
  if($NegativeOracle){$line+=' -DCPU_PROBE_NEGATIVE_ORACLE=1'}
  $p=Start-Process $assembler -ArgumentList $line -WindowStyle Hidden -WorkingDirectory $root -PassThru -RedirectStandardOutput "$root/assemble.stdout.txt" -RedirectStandardError "$root/assemble.stderr.txt";$null=$p.Handle
@@ -49,7 +50,7 @@ try{
  OwnedTool pif-build $env:ComSpec $line 120
  OwnedTool pif-profile "$root/pif-builder.exe" ('"'+$tests+'" --close-on-exit') 30
  Get-FileHash "$PSScriptRoot/ems_pif_builder.c",$CompilerDriver,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"
- Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
+ Get-ChildItem "$stage/system32" -File|Where-Object Name -in @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe','ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll','COMMAND.COM','DOSX.EXE')|Get-FileHash|Export-Csv -NoTypeInformation "$root/runtime-inputs.csv"
  Add-Type -Path (Resolve-Path $LogonHelper).Path
  $logonIdentity=[Security.Principal.WindowsIdentity]::GetCurrent()
  try{$entries=[WowMessageLogonEnvironment]::Read($logonIdentity.Token)}
@@ -68,7 +69,9 @@ try{
  $report=Get-Content "$root/observer.txt" -Raw
  $console=Get-Content "$root/observer.txt.console.txt" -Raw
  if($observerProcess.ExitCode -or $report -notmatch 'result=exited'){throw 'CPU40 guest observation did not complete'}
- if($Workload -eq 'Control'){
+ if($Workload -eq 'BitMemory'){
+  if($report -notmatch 'exit=0x00000000' -or $console -notmatch 'BITMEM POSITIVE PASS' -or $console -notmatch 'BITMEM NEGATIVE PASS'){throw 'CPU40 word-memory bit-index expectation differs; inspect captured positions/carry'}
+ }elseif($Workload -eq 'Control'){
   if($NegativeOracle){
    if($report -notmatch 'exit=0x00000001' -or $console -notmatch 'CCPU CONTROL FAIL phase=A' -or $console -match 'CCPU CONTROL PASS'){throw 'Deliberately wrong control oracle was not rejected'}
   }elseif($report -notmatch 'exit=0x00000000' -or $console -notmatch 'CCPU CONTROL PASS' -or $console -notmatch 'NOP32 CLI32 CLTS4 WAIT4 IDT16' -or $console -notmatch 'DIVFAULT6 JCXZ4 STRFAULT1 RSRVD5'){

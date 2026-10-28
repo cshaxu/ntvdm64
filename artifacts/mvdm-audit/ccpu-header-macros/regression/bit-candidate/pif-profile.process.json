@@ -1,0 +1,7 @@
+{
+  "start": "2026-10-28T00:34:43.7257082Z",
+  "pid": 21352,
+  "timeoutSeconds": 30,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\bit-candidate/pif-builder.exe",
+  "command": "\"O:\\tmp\\n369\\tests\" --close-on-exit"
+}

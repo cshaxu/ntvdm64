@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T00:04:32.0030592Z",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "diagnostic_budget_seconds": 600,
+  "pid": 25640,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\observe-ccpu-header-selection.ps1\" -BuildRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-selection\\run\""
+}

@@ -1,0 +1,4 @@
+# buffer=53,9001 viewport=0,0,52,14
+[0] BITMEM POSITIVE PASS
+[1] BITMEM near=8000 far=8000 carry=0
+[2] BITMEM NEGATIVE FAIL

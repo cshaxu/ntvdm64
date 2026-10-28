@@ -1,0 +1,351 @@
+{
+  "result": "pass",
+  "base": "70985c440",
+  "headers": [
+    {
+      "relative_path": "softpc.new/base/ccpu386/bswap.h",
+      "source_sha256": "E3A8AF0917FBE1324EBCFEC90F899DD5BF463884911662FDBA8FD9CC60D0208A",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_div64.h",
+      "source_sha256": "D0F6B3B3273A4330701C09BE93441C3AF0A26DAEEC45E1DFAF2077B2175716E8",
+      "valid_consumers": [
+        "obj/ccpu/c_div64.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_div64.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_div64.h",
+          "source_sha256": "D0F6B3B3273A4330701C09BE93441C3AF0A26DAEEC45E1DFAF2077B2175716E8",
+          "translation_unit": "softpc.new/base/ccpu386/c_div64.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 4,
+          "selected_text_sha256": "123273F89C59CCA8F16295801B755563D261612489DF87A32A50CCBE64CD0BFC",
+          "selected_excerpt": "extern void divu64 | (IU32 * hr, IU32 * lr, IU32 divisor, IU32 * rem);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_oprnd.h",
+      "source_sha256": "D7B6CF24845A42B42246CB8AE2C41B7BBEDA398C0DA4CB51CAB2620E3938619E",
+      "valid_consumers": [
+        "obj/ccpu/c_main.obj",
+        "obj/ccpu/zfrsrvd.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_main.c",
+        "softpc.new/base/ccpu386/zfrsrvd.c"
+      ],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_tlb.h",
+      "source_sha256": "FBE5B60EE74699DF9C44A3CAA728035F92C9300CF53C4BE51FB67B00565C1F36",
+      "valid_consumers": [
+        "obj/ccpu/c_tlb.obj",
+        "obj/ccpu/c_xfer.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_tlb.c",
+        "softpc.new/base/ccpu386/c_xfer.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_tlb.h",
+          "source_sha256": "FBE5B60EE74699DF9C44A3CAA728035F92C9300CF53C4BE51FB67B00565C1F36",
+          "translation_unit": "softpc.new/base/ccpu386/c_tlb.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 5,
+          "selected_text_sha256": "618B3F037EEEC6EA13E7B7586EF88B9DACBEBA7D47135A5204D71853377111B4",
+          "selected_excerpt": "extern void flush_tlb (void); | extern void invalidate_tlb_entry (IU32 lin);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_tlb.h",
+          "source_sha256": "FBE5B60EE74699DF9C44A3CAA728035F92C9300CF53C4BE51FB67B00565C1F36",
+          "translation_unit": "softpc.new/base/ccpu386/c_xfer.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 5,
+          "selected_text_sha256": "618B3F037EEEC6EA13E7B7586EF88B9DACBEBA7D47135A5204D71853377111B4",
+          "selected_excerpt": "extern void flush_tlb (void); | extern void invalidate_tlb_entry (IU32 lin);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_tsksw.h",
+      "source_sha256": "D95D976A8ADE5FDDC6992649CB4897E41B6B1937BE08FC61EAC709AA95B38635",
+      "valid_consumers": [
+        "obj/ccpu/c_tsksw.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_tsksw.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_tsksw.h",
+          "source_sha256": "D95D976A8ADE5FDDC6992649CB4897E41B6B1937BE08FC61EAC709AA95B38635",
+          "translation_unit": "softpc.new/base/ccpu386/c_tsksw.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 2,
+          "selected_text_sha256": "7C84D00D0BFE05A8C5F63581195C80C483335D3033C8C46C0C5AF380C5D78518",
+          "selected_excerpt": "extern void switch_tasks | (UINT returning, UINT nesting, IU16 TSS_selector, IU32 descr, IU32 return_ip);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_xfer.h",
+      "source_sha256": "F6C8C6EA9E20AE50F80A2B78C1CD8A2DD7235D2B90CA6B92639B69D1FF5633C1",
+      "valid_consumers": [
+        "obj/ccpu/c_xfer.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_xfer.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_xfer.h",
+          "source_sha256": "F6C8C6EA9E20AE50F80A2B78C1CD8A2DD7235D2B90CA6B92639B69D1FF5633C1",
+          "translation_unit": "softpc.new/base/ccpu386/c_xfer.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 8,
+          "selected_text_sha256": "8E684B6516C9CB0E3980189F5CD006BF0684437E831A29A79E8232FA772A0652",
+          "selected_excerpt": "extern void update_relative_ip | (IU32 rel_offset);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/c_xtrn.h",
+      "source_sha256": "8A2481C44FB3C03C6F87B60E5C6D9C5EE2974068B0CBFB47434DBD8F1D6DE71D",
+      "valid_consumers": [
+        "obj/ccpu/c_xtrn.obj",
+        "obj/ccpu/c_reg.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_xtrn.c",
+        "softpc.new/base/ccpu386/c_reg.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_xtrn.h",
+          "source_sha256": "8A2481C44FB3C03C6F87B60E5C6D9C5EE2974068B0CBFB47434DBD8F1D6DE71D",
+          "translation_unit": "softpc.new/base/ccpu386/c_xtrn.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 7,
+          "selected_text_sha256": "817922272F50B7993FE0946895897F095242B57ADF0C99E5F1B5E5ED96D18BF8",
+          "selected_excerpt": "extern void check_interface_active | (ISM32 except_nmbr);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        },
+        {
+          "relative_path": "softpc.new/base/ccpu386/c_xtrn.h",
+          "source_sha256": "8A2481C44FB3C03C6F87B60E5C6D9C5EE2974068B0CBFB47434DBD8F1D6DE71D",
+          "translation_unit": "softpc.new/base/ccpu386/c_reg.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 7,
+          "selected_text_sha256": "817922272F50B7993FE0946895897F095242B57ADF0C99E5F1B5E5ED96D18BF8",
+          "selected_excerpt": "extern void check_interface_active | (ISM32 except_nmbr);",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/ccpupig.h",
+      "source_sha256": "73B2E7CEDA4CB3BA83343B1FE07A428DCCAB76A196B2D7C3951C37962BE1E1DB",
+      "valid_consumers": [
+        "obj/ccpu/c_tlb.obj",
+        "obj/ccpu/c_main.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_tlb.c",
+        "softpc.new/base/ccpu386/c_main.c"
+      ],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/cmpxchg.h",
+      "source_sha256": "DA0CB148F406990BDD4AF19B231317608B29B9D370F5D5EBF70E2B14ECF683EF",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evid_c.h",
+      "source_sha256": "C8E3925C56ED41CBCC982794EB87E2141DF7D5D01059D58E2A017F874074F693",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evidfunc.h",
+      "source_sha256": "69FF2429A6FB7B0E6FFA690E101C2B0695A89CC3FA186A789DED9C27D81D7BC7",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/evidgen.h",
+      "source_sha256": "7E429987C49EC9E87CA45394EEDDC87C73877E5F95AED73E1BC1D7224D308772",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/fault.h",
+      "source_sha256": "120771ED9EABA525F18AC81D62B0E868D4655A4071DB1D8E48C8A7561924169F",
+      "valid_consumers": [
+        "obj/ccpu/c_tlb.obj",
+        "obj/ccpu/c_tsksw.obj",
+        "obj/ccpu/c_xfer.obj",
+        "obj/ccpu/c_main.obj",
+        "obj/ccpu/zfrsrvd.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_tlb.c",
+        "softpc.new/base/ccpu386/c_tsksw.c",
+        "softpc.new/base/ccpu386/c_xfer.c",
+        "softpc.new/base/ccpu386/c_main.c",
+        "softpc.new/base/ccpu386/zfrsrvd.c"
+      ],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/fpu_c.h",
+      "source_sha256": "0F1D67436ED417B6726F958CFD97ECE40DDEDD05997369449BE5861A47B7B912",
+      "valid_consumers": [
+        "obj/ccpu/c_reg.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_reg.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/fpu_c.h",
+          "source_sha256": "0F1D67436ED417B6726F958CFD97ECE40DDEDD05997369449BE5861A47B7B912",
+          "translation_unit": "softpc.new/base/ccpu386/c_reg.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 21,
+          "selected_text_sha256": "2A23D5AF155BF0752EBDC2F5091F2B7180885AF11E7A1F6647FA162980AB92B7",
+          "selected_excerpt": "struct FPSTACKENTRY | {",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/gdpvar.h",
+      "source_sha256": "A8FC9F81AF3C06EB4263CC5ACB3005A41F849677CBA4D09AE171AB450F7FB3EC",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/invd.h",
+      "source_sha256": "402398E18F19D32B9E8298CC0AB17D8BCA2AF426280A8BDBFBEAD17DCF52A7DC",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/invlpg.h",
+      "source_sha256": "C31E8EF3C4F2E524E248579B60C6BBBE2195E47BE07D8A3310EEAEA670CA2229",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/newnpx.h",
+      "source_sha256": "BA439D5AEDFB13930BC2571D6DF13CA3372C04E54B3617CB478B52DAC0E35677",
+      "valid_consumers": [
+        "obj/ccpu/zfrsrvd.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/zfrsrvd.c"
+      ],
+      "emitted_declaration_units": [
+        {
+          "relative_path": "softpc.new/base/ccpu386/newnpx.h",
+          "source_sha256": "BA439D5AEDFB13930BC2571D6DF13CA3372C04E54B3617CB478B52DAC0E35677",
+          "translation_unit": "softpc.new/base/ccpu386/zfrsrvd.c",
+          "selected_profile": "CPU_40_STYLE CCPU SPC386 PROD",
+          "seen_in_line_markers": true,
+          "selected_nonblank_lines": 55,
+          "selected_text_sha256": "D3D748251C371FBE260E291D721B203AFF75C6EAE840DA9996082373012C9569",
+          "selected_excerpt": "extern void F2XM1(); | extern void FABS();",
+          "remaining_contract": "Selected tokens are preprocessing evidence, not proven layout, call ABI, guest decoding, fault ordering or behavior"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/pigger_c.h",
+      "source_sha256": "F8ABFAB1A7001E498A6DDB782C8B0831DB138E8DAAD8F52CCFCCDD4E2A7C297E",
+      "valid_consumers": [
+        "obj/ccpu/c_reg.obj"
+      ],
+      "seen_units": [
+        "softpc.new/base/ccpu386/c_reg.c"
+      ],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/univer_c.h",
+      "source_sha256": "72655450D96DB6F58F2DBD8887334222647014E38F8386FAD58791502DCD52CD",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/wbinvd.h",
+      "source_sha256": "806A12EB2D541FC4B7E1C160B97C8CC81D8551A3FE685A0439A72DE2099AFFA2",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    },
+    {
+      "relative_path": "softpc.new/base/ccpu386/xadd.h",
+      "source_sha256": "793871FEC24B535636658E9124381C3F5A4EBEA319D19C6D59330539BD7ED154",
+      "valid_consumers": [],
+      "seen_units": [],
+      "emitted_declaration_units": []
+    }
+  ],
+  "source_header_count": 22,
+  "selected_declaration_headers": 7,
+  "x87_selected_macro_expansions": {
+    "npx_frstor": "static void npx_frstor() {\n\n\n\tNPX_ADDRESS_SIZE_32 = (CCPU_MODE[0]==0)?0:1;\n\tNPX_PROT_MODE = ( ( CCPU_CR[0] & 0x1) && (CCPU_FLAGS[17] == 0) );\n\tm_isreg[0] = 0; d_mem(modRM, &p, segment_override, &m_seg[0], &m_off[0]); if ( !CCPU_SR[(m_seg[0])].ar_r ) GP((IU16)0, 35); if (NPX_ADDRESS_SIZE_32) { limit_check(m_seg[0], m_off[0], (int)1, (int)94); } else { limit_check(m_seg[0], m_off[0], (int)1, (int)106); } m_la[0] = CCPU_SR[(m_seg[0])].base + m_off[0]; m_pa[0] = usr_chk_word(m_la[0], 0x0);;\n\tif (NPX_ADDRESS_SIZE_32) { vir_read_bytes(&ops[0].npxbuff[0], m_la[0], m_pa[0], 0x6c); } else { vir_read_bytes(&ops[0].npxbuff[0], m_la[0], m_pa[0], 0x5e); };\n\tFRSTOR(&ops[0].npxbuff[0]);\n}",
+    "npx_fsave": "static void npx_fsave() {\n\n\n\tNPX_ADDRESS_SIZE_32 = (CCPU_MODE[0]==0)?0:1;\n\tNPX_PROT_MODE = ( ( CCPU_CR[0] & 0x1) && (CCPU_FLAGS[17] == 0) );\n\tm_isreg[0] = 0; d_mem(modRM, &p, segment_override, &m_seg[0], &m_off[0]); if ( !CCPU_SR[(m_seg[0])].ar_w ) GP((IU16)0, 36); if (NPX_ADDRESS_SIZE_32) { limit_check(m_seg[0], m_off[0], (int)1, (int)94); } else { limit_check(m_seg[0], m_off[0], (int)1, (int)106); } m_la[0] = CCPU_SR[(m_seg[0])].base + m_off[0]; m_pa[0] = usr_chk_word(m_la[0], 0x1);;\n\tFSAVE(&ops[0].npxbuff[0]);\n\tif (NPX_ADDRESS_SIZE_32) { vir_write_bytes(m_la[0], m_pa[0], &ops[0].npxbuff[0], 0x6c); } else { vir_write_bytes(m_la[0], m_pa[0], &ops[0].npxbuff[0], 0x5e); };\n}"
+  },
+  "records": [
+    {
+      "path": "build\\t473-s10\\ccpu-header-selection\\run\\result.json",
+      "sha256": "D353DC2C56D254687E432AE1C3B5AA42BAB0B21AE181C9AAC71B2CDBA302DC84"
+    },
+    {
+      "path": "build\\t473-s10\\ccpu-header-selection\\run\\deps.stdout.txt",
+      "sha256": "C84D985C343AA514CEF7298E8B9F51EA91D2150334807BCD9389F89486DC6BAF"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-selected-header-extractor.py",
+      "sha256": "37982B804B91F5A9FD112AF30F99F95F0EB5A55E771FD0EAF7B9DEA84D21C9FE"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\ccpu-header-selection-extractor.py",
+      "sha256": "F0C4FD40BD6D67C5794ED5EE7101498CFFB9348487AC994F26F4531DECA16C7E"
+    }
+  ],
+  "scope": "Eight actual production preprocessing/dependency contexts; not whole-product absence or runtime/ABI acceptance"
+}

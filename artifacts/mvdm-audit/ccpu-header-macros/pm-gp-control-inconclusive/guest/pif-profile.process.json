@@ -1,0 +1,7 @@
+{
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-x87-transition-gp\\guest/pif-builder.exe",
+  "start": "2026-10-28T00:19:57.6118016Z",
+  "timeoutSeconds": 30,
+  "pid": 29104,
+  "command": "\"O:\\tmp\\n588\\tests\" --close-on-exit"
+}

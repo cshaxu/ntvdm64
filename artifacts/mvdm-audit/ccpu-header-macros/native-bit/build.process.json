@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-27T23:54:27.4214239Z",
+  "diagnostic_budget_seconds": 60,
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-bit-memory/build.cmd\"\"",
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 11864
+}

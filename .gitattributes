@@ -34,5 +34,7 @@ docs/etc/legacy_code/opennt-bop/original/** -text -whitespace
 artifacts/mvdm-audit/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # A blank context line's leading space is part of this captured patch format.
 artifacts/mvdm-audit/shard-3/sas-vector-runtime-fixture.patch -whitespace
+# Retain the original Ninja dependency dump's terminal blank line.
+artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/deps.stdout.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof
 # Retain the captured PowerShell failure record's terminal blank line verbatim.
 artifacts/mvdm-audit/ccpu-control/initial-narrow-nonpass/failure.txt whitespace=blank-at-eol,space-before-tab,cr-at-eol,-blank-at-eof

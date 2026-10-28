@@ -22,14 +22,15 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [CCPU declaration review](../../artifacts/mvdm-audit/selected-ccpu-header-role-review.md)
 adds 71 partial declaration slices from actual compiler-selected tokens.
-The ledger retains 1,678 pending, 408 partial, 52 full and 2,546 excluded
+The ledger retains 1,668 pending, 417 partial, 52 full and 2,547 excluded
 physical file roles. Source/ABI and real guest/device proof remain open;
 these checkpoints changed no runtime image.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound
 helpers. Nine owners are partial; only the unused NOP helper file is excluded,
-with the original inline instruction retained. Wider CPU obligations remain open.
+with the original inline instruction retained. Wider CPU obligations remain open. The [header/macro review](../../artifacts/mvdm-audit/ccpu-header-macro-review.md) adds nine partial
+owners, one inactive PIG declaration exclusion and a reproduced bit-index defect.
 
 The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
 passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;

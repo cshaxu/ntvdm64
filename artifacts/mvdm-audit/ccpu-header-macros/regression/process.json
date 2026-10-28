@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 1080,
+  "arguments": "-NoProfile -ExecutionPolicy Bypass -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\run.ps1\"",
+  "pid": 20892,
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "started": "2026-10-28T00:33:40.5216069Z"
+}

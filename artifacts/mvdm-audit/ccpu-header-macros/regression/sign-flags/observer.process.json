@@ -1,0 +1,14 @@
+{
+  "arguments": [
+    "O:\\tmp\\n65b/system32/run16.exe",
+    "O:\\tmp\\n65b\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\sign-flags/observer.txt",
+    "--wait",
+    "O:\\tmp\\n65b\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "pid": 22580,
+  "timeoutSeconds": 55,
+  "start": "2026-10-28T00:34:11.4499650Z"
+}

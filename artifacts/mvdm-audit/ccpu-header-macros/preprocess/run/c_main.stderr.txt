@@ -1,0 +1,456 @@
+c_main.c
+Note: including file: O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h
+Note: including file:  C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\windows.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\winapifamily.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\winpackagefamily.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\sdkddkver.h
+Note: including file:   C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\excpt.h
+Note: including file:    C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\vcruntime.h
+Note: including file:     C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\sal.h
+Note: including file:      C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\concurrencysal.h
+Note: including file:     C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\vadefs.h
+Note: including file:   C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\stdarg.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\windef.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\minwindef.h
+Note: including file:     C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\specstrings.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\specstrings_strict.h
+Note: including file:       C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\specstrings_undef.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\driverspecs.h
+Note: including file:       C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\sdv_driverspecs.h
+Note: including file:     C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnt.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\ctype.h
+Note: including file:       C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt.h
+Note: including file:       C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_wctype.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\kernelspecs.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\basetsd.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\guiddef.h
+Note: including file:       C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\string.h
+Note: including file:        C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_memory.h
+Note: including file:         C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_memcpy_s.h
+Note: including file:          C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\errno.h
+Note: including file:          C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\vcruntime_string.h
+Note: including file:        C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_wstring.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack4.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack4.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack4.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack4.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack2.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack2.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack2.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack8.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack1.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\pshpack1.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\shared\poppack.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\apiset.h
+Note: including file:      C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\ktmtypes.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winbase.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\apisetcconv.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\minwinbase.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\apiquery2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\processenv.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\fileapifromapp.h
+Note: including file:     C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\fileapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\debugapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\utilapiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\handleapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\errhandlingapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\fibersapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\namedpipeapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\profileapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\heapapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\ioapiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\synchapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\interlockedapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\processthreadsapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\sysinfoapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\memoryapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\enclaveapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\threadpoollegacyapiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\threadpoolapiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\jobapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\jobapi2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\wow64apiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\libloaderapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\securitybaseapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\namespaceapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\systemtopologyapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\processtopologyapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\securityappcontainer.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\realtimeapiset.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\winerror.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\timezoneapi.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\wingdi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack4.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack4.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winuser.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\tvout.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnls.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\datetimeapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\stringapiset.h
+Note: including file:     C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnls.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\wincon.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\wincontypes.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\consoleapi.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\consoleapi2.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\consoleapi3.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winver.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\verrsrc.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winreg.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\reason.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winnetwk.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\wnnc.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\stralign.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winsvc.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\mcx.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\imm.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\ime_cmodes.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\devioctl.h
+Note: including file:  C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winternl.h
+Note: including file:  O:\repos.hobby\ntvdm64\src\opennt-abi\host-compat\include\wow_user_declarations.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\ntpsapi.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\ntrtl.h
+Note: including file:   O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\nt.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\ntioapi.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\um\winioctl.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\pshpack1.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\\include\10.0.22621.0\\shared\poppack.h
+Note: including file: O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\insignia.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\base_def.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h
+Note: including file:  C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\stdlib.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_malloc.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_search.h
+Note: including file:    C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\stddef.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_wstdlib.h
+Note: including file:   C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\limits.h
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): note: 'NTVDM' previously declared on the command line
+Note: including file: C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\stdio.h
+Note: including file:  C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_wstdio.h
+Note: including file:   C:\Program Files (x86)\Windows Kits\10\include\10.0.22621.0\ucrt\corecrt_stdio_config.h
+Note: including file: C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\setjmp.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\xt.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_gen.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\sas.h
+Note: including file:  O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\inc\host_sas.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\sas4gen.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ccpusas4.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\cpu4.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\CpuInt_c.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h
+Note: including file:   O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\gdpvar.h
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(397): warning C4005: 'setAL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(266): note: see previous definition of 'setAL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(412): warning C4005: 'setAH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(265): note: see previous definition of 'setAH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(427): warning C4005: 'setAX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(264): note: see previous definition of 'setAX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(457): warning C4005: 'setBL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(269): note: see previous definition of 'setBL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(472): warning C4005: 'setBH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(268): note: see previous definition of 'setBH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(487): warning C4005: 'setBX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(267): note: see previous definition of 'setBX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(517): warning C4005: 'setCL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(272): note: see previous definition of 'setCL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(532): warning C4005: 'setCH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(271): note: see previous definition of 'setCH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(547): warning C4005: 'setCX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(270): note: see previous definition of 'setCX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(577): warning C4005: 'setDL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(275): note: see previous definition of 'setDL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(592): warning C4005: 'setDH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(274): note: see previous definition of 'setDH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(607): warning C4005: 'setDX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(273): note: see previous definition of 'setDX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(637): warning C4005: 'setSI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(278): note: see previous definition of 'setSI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(667): warning C4005: 'setDI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(279): note: see previous definition of 'setDI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(697): warning C4005: 'setSP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(276): note: see previous definition of 'setSP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(723): warning C4005: 'setBP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(277): note: see previous definition of 'setBP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(753): warning C4005: 'setIP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(280): note: see previous definition of 'setIP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(782): warning C4005: 'setCS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(281): note: see previous definition of 'setCS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(795): warning C4005: 'setSS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(284): note: see previous definition of 'setSS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(808): warning C4005: 'setDS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(282): note: see previous definition of 'setDS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(821): warning C4005: 'setES': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(283): note: see previous definition of 'setES'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(886): warning C4005: 'setIOPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(311): note: see previous definition of 'setIOPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(899): warning C4005: 'setMSW': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(285): note: see previous definition of 'setMSW'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(951): warning C4005: 'setCF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(294): note: see previous definition of 'setCF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(964): warning C4005: 'setPF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(289): note: see previous definition of 'setPF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(977): warning C4005: 'setAF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(290): note: see previous definition of 'setAF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(990): warning C4005: 'setZF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(292): note: see previous definition of 'setZF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1003): warning C4005: 'setSF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(291): note: see previous definition of 'setSF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1016): warning C4005: 'setTF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(288): note: see previous definition of 'setTF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1029): warning C4005: 'setIF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(287): note: see previous definition of 'setIF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1042): warning C4005: 'setDF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(286): note: see previous definition of 'setDF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1055): warning C4005: 'setOF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(293): note: see previous definition of 'setOF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1068): warning C4005: 'setNT': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(310): note: see previous definition of 'setNT'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1120): warning C4005: 'setPE': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(309): note: see previous definition of 'setPE'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1133): warning C4005: 'setMP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(308): note: see previous definition of 'setMP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1146): warning C4005: 'setEM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(307): note: see previous definition of 'setEM'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1159): warning C4005: 'setTS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(306): note: see previous definition of 'setTS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1211): warning C4005: 'getAL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(205): note: see previous definition of 'getAL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1224): warning C4005: 'getAH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(204): note: see previous definition of 'getAH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1237): warning C4005: 'getAX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(203): note: see previous definition of 'getAX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1263): warning C4005: 'getBL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(208): note: see previous definition of 'getBL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1276): warning C4005: 'getBH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(207): note: see previous definition of 'getBH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1289): warning C4005: 'getBX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(206): note: see previous definition of 'getBX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1315): warning C4005: 'getCL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(211): note: see previous definition of 'getCL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1328): warning C4005: 'getCH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(210): note: see previous definition of 'getCH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1341): warning C4005: 'getCX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(209): note: see previous definition of 'getCX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1367): warning C4005: 'getDL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(214): note: see previous definition of 'getDL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1380): warning C4005: 'getDH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(213): note: see previous definition of 'getDH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1393): warning C4005: 'getDX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(212): note: see previous definition of 'getDX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1419): warning C4005: 'getSI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(217): note: see previous definition of 'getSI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1445): warning C4005: 'getDI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(218): note: see previous definition of 'getDI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1471): warning C4005: 'getSP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(215): note: see previous definition of 'getSP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1497): warning C4005: 'getBP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(216): note: see previous definition of 'getBP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1523): warning C4005: 'getIP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(219): note: see previous definition of 'getIP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1549): warning C4005: 'getCS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(220): note: see previous definition of 'getCS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1562): warning C4005: 'getSS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(223): note: see previous definition of 'getSS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1575): warning C4005: 'getDS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(221): note: see previous definition of 'getDS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1588): warning C4005: 'getES': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(222): note: see previous definition of 'getES'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1640): warning C4005: 'getSTATUS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(251): note: see previous definition of 'getSTATUS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1653): warning C4005: 'getIOPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(250): note: see previous definition of 'getIOPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1666): warning C4005: 'getMSW': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(224): note: see previous definition of 'getMSW'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1721): warning C4005: 'getCF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(233): note: see previous definition of 'getCF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1734): warning C4005: 'getPF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(228): note: see previous definition of 'getPF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1747): warning C4005: 'getAF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(229): note: see previous definition of 'getAF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1760): warning C4005: 'getZF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(231): note: see previous definition of 'getZF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1773): warning C4005: 'getSF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(230): note: see previous definition of 'getSF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1786): warning C4005: 'getTF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(227): note: see previous definition of 'getTF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1799): warning C4005: 'getIF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(226): note: see previous definition of 'getIF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1812): warning C4005: 'getDF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(225): note: see previous definition of 'getDF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1825): warning C4005: 'getOF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(232): note: see previous definition of 'getOF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1838): warning C4005: 'getNT': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(249): note: see previous definition of 'getNT'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1890): warning C4005: 'getPE': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(248): note: see previous definition of 'getPE'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1903): warning C4005: 'getMP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(247): note: see previous definition of 'getMP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1916): warning C4005: 'getEM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(246): note: see previous definition of 'getEM'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1929): warning C4005: 'getTS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(245): note: see previous definition of 'getTS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(2879): warning C4005: 'getCPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(237): note: see previous definition of 'getCPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(2892): warning C4005: 'setCPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(298): note: see previous definition of 'setCPL'
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\bios.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\debug.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\config.h
+Note: including file:  O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\inc\error.h
+Note: including file:   O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\inc\..\..\host\inc\error.h
+Note: including file:  O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\inc\host_cfg.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ntthread.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_main.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_addr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_page.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_mem.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_intr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_seg.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_debug.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_oprnd.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_xcptn.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_reg.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_page.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_intr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_debug.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_oprnd.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_bsic.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ccpupig.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\fault.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\ica.h
+Note: including file:  O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\timer.h
+Note: including file: O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\mvdm_softpc_ccpu_wait.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\aaa.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\aad.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\aam.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\aas.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\adc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\add.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\and.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\arpl.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\bound.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\bsf.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\bsr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\bt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\btc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\btr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\bts.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\call.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cbw.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cdq.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\clc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cld.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cli.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\clts.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cmc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cmp.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cwd.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cwde.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\daa.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\das.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\dec.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\div.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\enter.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\idiv.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\imul.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\in.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\inc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\into.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\intx.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\iret.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\jcxz.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\jmp.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\jxx.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lahf.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lar.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lea.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\leave.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lgdt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lidt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lldt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lmsw.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\loopxx.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lsl.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ltr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\lxs.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\mov.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\movsx.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\mul.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\neg.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\nop.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\not.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\out.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\or.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\pop.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\popa.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\popf.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\push.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\pusha.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\pushf.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\rcl.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\rcr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ret.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\rol.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\ror.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\rsrvd.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sahf.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sar.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sbb.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\setxx.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sgdt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\shl.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\shld.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\shr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\shrd.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sidt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sldt.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\smsw.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\stc.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\std.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sti.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\str.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\sub.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\test.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\verr.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\verw.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\wait.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\xchg.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\xlat.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\xor.h
+Note: including file: O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\zfrsrvd.h
+Note: including file: O:/repos.hobby/ntvdm64/src\ntvdm-exe/softpc/include/mvdm_softpc_termination.h
+Note: including file:  C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\14.43.34808\include\stdint.h

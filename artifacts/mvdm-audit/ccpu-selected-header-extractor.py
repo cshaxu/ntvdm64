@@ -13,7 +13,7 @@ A=Path('artifacts/mvdm-audit')
 OUTPUT=Path('build/t473-s10/ccpu-selected-preprocessing/c_main.i')
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest().upper()
 
-def inspect_output(path,cohort):
+def inspect_output(path,cohort,minimum_markers=21,translation_unit='softpc.new/base/ccpu386/c_main.c'):
     repo=Path.cwd()
     canonical={str(repo/'src/mvdm'/p).replace('\\','/').casefold():p for p in cohort}
     selected=defaultdict(list);seen=set();current=None
@@ -24,12 +24,12 @@ def inspect_output(path,cohort):
             if current:seen.add(current)
         elif current and line.strip() and not line.lstrip().startswith('#'):
             selected[current].append(line.strip())
-    assert len(seen)>20, 'Expected actual selected CCPU header markers'
+    assert len(seen)>=minimum_markers, 'Expected actual selected CCPU header markers'
     records=[]
     for name in cohort:
         lines=selected[name];tokens='\n'.join(lines)
         records.append(dict(relative_path=name,source_sha256=sha(Path('src/mvdm')/name),
-            translation_unit='softpc.new/base/ccpu386/c_main.c',selected_profile='CPU_40_STYLE CCPU SPC386 PROD',
+            translation_unit=translation_unit,selected_profile='CPU_40_STYLE CCPU SPC386 PROD',
             seen_in_line_markers=name in seen,selected_nonblank_lines=len(lines),
             selected_text_sha256=hashlib.sha256(tokens.encode()).hexdigest().upper() if lines else '',
             selected_excerpt=' | '.join(lines[:2])[:240],

@@ -1,0 +1,7 @@
+{
+  "timeoutSeconds": 30,
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\control-negative/pif-builder.exe",
+  "command": "\"O:\\tmp\\n80b\\tests\" --close-on-exit",
+  "pid": 25652,
+  "start": "2026-10-28T00:33:59.7595657Z"
+}

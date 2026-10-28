@@ -1,0 +1,2257 @@
+[
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/dpmi-x87-probe-inconclusive.asm",
+    "bytes": 5149,
+    "sha256": "D5795496D4FD518050257D82BFC54528D73D2064D78FC491FF3C5E1692CA291F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-probe-inconclusive.asm",
+    "bytes": 5609,
+    "sha256": "E3176FDA66075626F664E455B71DDC46AF663CFF9A3BC2BE59022B79AB4E000C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/build.cmd",
+    "bytes": 350,
+    "sha256": "F38762E63F79042FB12F7ED3F530F25B6A73D5B0B312778D98C5CA7A5F41B787"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/build.completion.json",
+    "bytes": 66,
+    "sha256": "700F839C8E43F137BED953107725C6568D7043DDBF15F6CE4CFB75E70542F580"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/build.process.json",
+    "bytes": 255,
+    "sha256": "F59205BE89940F7EC17CF3D32BD034AD7B71F04129BF710A6F1CF5153EF12F88"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/build.stdout.txt",
+    "bytes": 26,
+    "sha256": "A0100E4C8000F1612E6E28DD7EB920BCC712E9F01A7AF1F41ABDD085B4AE34EC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/guest.completion.json",
+    "bytes": 66,
+    "sha256": "EECEB44B0DBC93CD2D68AA5C18C8786C2962113A59F58C5DEA263FFBAAA7D20B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/guest.process.json",
+    "bytes": 725,
+    "sha256": "7FC1F8EF63A274C6674038FEEB49E9D455F6215192ED2514CF6DA8D766D6429B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/inputs.csv",
+    "bytes": 608,
+    "sha256": "016C3C406FB87407D84FCB1F3123F7CAFE7B1B411F14AAAC29C88D6E344F26AD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/native.completion.json",
+    "bytes": 66,
+    "sha256": "88E2E417BEFBE9963C7238E8F073EF0E65328ADB19A500B7C60267EE2715C6C4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/native.process.json",
+    "bytes": 362,
+    "sha256": "AE344077F2009BCEEC97B56C455C065EC93959FEE6A7B21867B66BF50D9312C8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/native.ps1",
+    "bytes": 1487,
+    "sha256": "7684F8727210E9B4DDA277C2741CCAD74D15D06BA4A3A6000BA9A5794433FD46"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/native.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/native.stdout.txt",
+    "bytes": 66,
+    "sha256": "AF51AC683E096700A8C57D386F873BFD674D0267A5E32D3E3AE5EFE87DA55B93"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/oracle.completion.json",
+    "bytes": 66,
+    "sha256": "E1D27A77048544BE899DB825490EBF558158D2025DDD975C0DB7E676F15E73BC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/oracle.process.json",
+    "bytes": 211,
+    "sha256": "A25A9E30F4F46A1F3F56E384BD10FCD75FF33F037E35F35C4ACE53B9CFE3834D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/oracle.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/native-bit/oracle.stdout.txt",
+    "bytes": 66,
+    "sha256": "AF51AC683E096700A8C57D386F873BFD674D0267A5E32D3E3AE5EFE87DA55B93"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest.completion.json",
+    "bytes": 66,
+    "sha256": "4CCC5C4B7D5E6E5A0A71177D5C692F5087F064B49607B735CF02D77A0D9D60BB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest.process.json",
+    "bytes": 753,
+    "sha256": "E730AFF51310ED5C44C83813963DFDA1C50337E7F23D0A941E2260A515811FEB"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/assemble.process.json",
+    "bytes": 490,
+    "sha256": "462DCB449532C1C0750EA9D1BB74714583B802E786ADF6773905213A1ED2721E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/inputs.csv",
+    "bytes": 1011,
+    "sha256": "BF9EE41C92417A87931AB4AC4AA6F4DA1F4C2C569CE21F37DA52CEE5BB0C96EC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.process.json",
+    "bytes": 377,
+    "sha256": "20D1482462B6DA65AB27D46B8F3BC12252CC4526E32A26111B35EB31B0AFFD78"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.txt",
+    "bytes": 684,
+    "sha256": "A4043C1BD4FB0906F1D60A641B7E4AAE158FCE5AE89D3C546BB6F6495B70A63F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "74F7B3CC7716ACE0F06EB252BCFFED2A84DAEFC77CEF97D433F850FFEB3AA140"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.txt.console.txt",
+    "bytes": 37,
+    "sha256": "50A07F9FB2A108E2CBBB3451A961736C9118CF4E1B98337368D301ECAD95A550"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "ACF37A984CD6F47FD962F3D4D832B45EE3E65FAD48211AD3847DD99D7EF0756F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-build.process.json",
+    "bytes": 606,
+    "sha256": "62F6D9D7C24507A4E93C2996528F9B6EC388B9A7B16D9D2FF5795388133B568E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-profile.process.json",
+    "bytes": 253,
+    "sha256": "7428D8A388486EEAC7D58F61ACF4B2920781E2E2B842D2B3B7E3FDC2394E0672"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "754307C20169453BB6B20DF4C0281A25656C7DDE7F26C3601BD899514F5C235B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/runner-context.json",
+    "bytes": 334,
+    "sha256": "73C40469CC08FF3E8209AABBE0F8A68A02C94AC1BBF8FCFA940B0B55AB388BA7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "E93BC8912435A0715F57B85B101D2F5EFAF81FC87DB64A7AF14CCAFBD220D832"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/token-context.process.json",
+    "bytes": 171,
+    "sha256": "7A0278F1B49F61F1BDA5EBE363B0A9C08EED3E237488C5DF99421E7922922E24"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-gp-control-inconclusive/guest/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest.completion.json",
+    "bytes": 66,
+    "sha256": "08F5FC3AC323C8E3E3B2D667B211994F38143AA5D302AD08786BED744B9BB55C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest.process.json",
+    "bytes": 750,
+    "sha256": "A2F0D06FAF8E7A30789DF0DC6A9FC29E68994DFF7FBC905790C73350B3B17FAC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/assemble.process.json",
+    "bytes": 488,
+    "sha256": "8263C3D9D63AADE804AF64EFBDC00B0192446062CF03C48664FAA2958D851FB8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/inputs.csv",
+    "bytes": 1008,
+    "sha256": "886326BE9FC29CB5E49CF1AE01375EA6027BFE1A0CE26737EF7568D151875BEE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.process.json",
+    "bytes": 373,
+    "sha256": "1916356C82DA78AAF4352195A28F8191BD95AD3B6CAA49F1E5EA2296C1393406"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.txt",
+    "bytes": 705,
+    "sha256": "90CEBF4B5A083C2AAEDB950810AF793BCCE830C4A7FCD025CD1D6CE2A11A57F3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "A76E7D51147029F0D069201AFC7BD986B7790A63AC32F03B001192FDD085338C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.txt.console.txt",
+    "bytes": 77,
+    "sha256": "4F4ED7879701126021E420824B6678DDC3C8BB13B66C9148B83C28B0B4DEA44C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "83FACCB1F703D7C5EBB808BB0228D67BCE7B4234C229158759627625820C365E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-build.process.json",
+    "bytes": 600,
+    "sha256": "49D87453DF2ACC16A8C89E319500261278F081D522A9C3D0A556F5BAFF5F5C97"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-profile.process.json",
+    "bytes": 249,
+    "sha256": "6D23E277A9682B8737451CE8A72048BC28DDA6A259B207597EB973396DAF4056"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "640AE6E3DE688C24C17B25B4155DC7E1D2B4B344A1A9D85EA50C6605E85D37F8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/result.txt",
+    "bytes": 113,
+    "sha256": "E44A71E8CBF40938F93AFC4CB42DAA65FAEF23C8362E84C480683B49CAC90170"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/runner-context.json",
+    "bytes": 334,
+    "sha256": "9752D2F84D230B69B0B02C8F665AA51109A6CB21C5C68B03870C296E6ED12A29"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "660BD6E1562DBA891649EBAFF650AE77CE0CFC47D63224B2D384D1CF087B1546"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/token-context.process.json",
+    "bytes": 171,
+    "sha256": "83CAE93A242E93C2FC3F7FC69088F2CB7671A1514886FEC6A3C6FA36C4BC4663"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/pm-transition-control/guest/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/completion.json",
+    "bytes": 66,
+    "sha256": "F6A447C65C71AE204B1F670DA9C9089C8810DA613189E495A37F117570B072C2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract-r2.completion.json",
+    "bytes": 66,
+    "sha256": "56ABA73A9ECD9845BB9AAC78B8235988F4BDEF1F524EFB37D1BC107635643FEC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract-r2.process.json",
+    "bytes": 247,
+    "sha256": "736321BDADD68B99DB408A301D9E98F6AA8D0C4ACC9ADB20D06202AC57C511C0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract-r2.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract-r2.stdout.txt",
+    "bytes": 54,
+    "sha256": "DD8B9EF8843AC4152CB4B058D89A3DD47FF93EE1AD6FFC54705A99DABA976CCA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract.completion.json",
+    "bytes": 66,
+    "sha256": "C06B225C726AFC93D06B944303B3B45C018524D841A03B539618FB499D860202"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract.process.json",
+    "bytes": 247,
+    "sha256": "ED1B13C6E3CECAFDADA709F57233A8E62B37583B66473C5B199AF49DB4B74E1F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/extract.stdout.txt",
+    "bytes": 54,
+    "sha256": "DD8B9EF8843AC4152CB4B058D89A3DD47FF93EE1AD6FFC54705A99DABA976CCA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/merge.completion.json",
+    "bytes": 66,
+    "sha256": "F4546D572563B0E0849FF1D48C7866783E811A09479E01D65F18FFFD01C37A1A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/merge.process.json",
+    "bytes": 244,
+    "sha256": "2E3B332BFD22BEDEE8B25965F448522E6B5A7FCA8E28BDCE2C38B31BDDEC8237"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/merge.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/merge.stdout.txt",
+    "bytes": 384,
+    "sha256": "0DA26C8B037A67E29E1C84B30E2346C2554B6B513F753D7924FB5287F402240B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/process.json",
+    "bytes": 456,
+    "sha256": "D65127BE742A3D341455C8A7A91C7902BC239CC31A9E727A38751C33F19BFA2F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/stdout.txt",
+    "bytes": 88,
+    "sha256": "43DD0B7F51FEC5E46FC8BC69665158B69819F5DFE1E3772FB47E7F11B223EC82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_div64.cmd",
+    "bytes": 2977,
+    "sha256": "AE9C7FEE8773C45B64188EE162C41BAC8BEAACAF661B1571AB9A7E868686842C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_div64.completion.json",
+    "bytes": 66,
+    "sha256": "29796762F0B230D125AB8C7C03567AA6BCFBC3333C30E960710145985E838F52"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_div64.process.json",
+    "bytes": 268,
+    "sha256": "68106EF3A4C8EB7FB537CCACF99C757212BBD57095EB6F99B3E8E680C5AE01EA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_div64.stderr.txt",
+    "bytes": 17811,
+    "sha256": "24FD49ED37C4FA5B4593530D83F5C898648A24B37B441EC8A95249BC0F8EDD61"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_div64.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_main.cmd",
+    "bytes": 2975,
+    "sha256": "058C1779573EE832F8A39615827DBD6460AF2D706F3A92DE8AA4622320FF2A8E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_main.completion.json",
+    "bytes": 66,
+    "sha256": "9E35D7422DA9CFACBC122E8E289E5F412EFBBEC9571373D37ACF2EE683BC20A4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_main.process.json",
+    "bytes": 266,
+    "sha256": "393B62AE0EA3E1153AD9D6451DB2B2B52D27673313AC6633E40DF5CD1FB12B63"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_main.stderr.txt",
+    "bytes": 46826,
+    "sha256": "8E6206B4239678335FE0D4A2E6DB82E18AEC4992D8A7D400604883743AA93B26"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_main.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_reg.cmd",
+    "bytes": 2973,
+    "sha256": "A031E90D6A9A8BBD14DC04103D5AE10C602F2AB4285D5407657F450A8F1BF13A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_reg.completion.json",
+    "bytes": 66,
+    "sha256": "04927FD33D38CEE459F0FE0AD08DA386EEB2350EEA82A2ECE0488F2661FED829"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_reg.process.json",
+    "bytes": 265,
+    "sha256": "70F3EE9125A4C2A82268D3667CFAC7D3A25001C3C925A79CB94F97E8BC64A4D6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_reg.stderr.txt",
+    "bytes": 18296,
+    "sha256": "4526400D68DA6DF1175889075DFCE733ABF93623430526A634ED2D9C849B2451"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_reg.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tlb.cmd",
+    "bytes": 2973,
+    "sha256": "4A8FFDB0B458EDBD69E3BE305882559293078488E98973D8B0FF53A248B85ADA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tlb.completion.json",
+    "bytes": 66,
+    "sha256": "9B627B961C319C8EA0BCD4E11817FAE86E536AD1B068D6B26BBB97920E333D4D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tlb.process.json",
+    "bytes": 266,
+    "sha256": "5664D7D8E371E417DBDC25E4B65D4E1B5E8F73C737C9E3E8CA913789AB0AE116"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tlb.stderr.txt",
+    "bytes": 18474,
+    "sha256": "B5A509842BC13B2D173A416C4203207B0DD8C150902D3D328C4C15DE52768A00"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tlb.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tsksw.cmd",
+    "bytes": 2977,
+    "sha256": "971DF009DA08B422B4FB5F8CC01AD4F3C16E002ED89ED64B400BBFC35B6EFDC3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tsksw.completion.json",
+    "bytes": 66,
+    "sha256": "B63A7126DFB827B4A87A54928DEA2729047D569ABCE78AB98E3804107CED3BB5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tsksw.process.json",
+    "bytes": 267,
+    "sha256": "B73876286118BDE676EBF758F2D2B794E28DC037786F82D19CD40852A3067A1B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tsksw.stderr.txt",
+    "bytes": 36394,
+    "sha256": "8229E140122061D5A78997F003924BBAE4458F7447079D71BECAEEF1F9848E7E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_tsksw.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xfer.cmd",
+    "bytes": 2975,
+    "sha256": "4C4D2F312E38CE871EC219FC02FAD635D7FB2FC884F312E5C37CF338E36493AC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xfer.completion.json",
+    "bytes": 66,
+    "sha256": "C01E503E1B21128E60BA819DE9CC6C94E42554C974CF7F396695489F15D5B0D2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xfer.process.json",
+    "bytes": 267,
+    "sha256": "DD2703F8F442D7BBA70CF91B1A785450DE5CB375625B3E2053ED4A878D55691F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xfer.stderr.txt",
+    "bytes": 18213,
+    "sha256": "4D9A3A4EDA8B8AE411DAB2B099C87544A2A3EEBAB27685E053D31C4F03D49023"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xfer.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xtrn.cmd",
+    "bytes": 2975,
+    "sha256": "084A5F070DED515CB771765954AAA6CAC48AB88174E230511425A248F72EAAB9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xtrn.completion.json",
+    "bytes": 66,
+    "sha256": "9F09E7AAF1C00AC10689D351D0030A5CDF4A25B0A3BECFCEEDE0D104D432AC72"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xtrn.process.json",
+    "bytes": 267,
+    "sha256": "E9B520BDBE6255750EEF25FAAD0AC2634C30D76C5FDDD95CF82782BA5D860B08"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xtrn.stderr.txt",
+    "bytes": 18251,
+    "sha256": "FAE32F4050152060298BC5A3DFFD9751517DB17755564DEB9E0A5B7B2E3F34A7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/c_xtrn.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/cache-inputs.json",
+    "bytes": 1953,
+    "sha256": "79933A588895D81C9C5AB2007EAE61CB83F799547B5F02F25B809BDF2BB07229"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/commands.completion.json",
+    "bytes": 66,
+    "sha256": "5A48B2D8C6E6014901AD6F87A56AFAD047382262738C7954307BAB556C86D955"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/commands.process.json",
+    "bytes": 471,
+    "sha256": "F3D2526C642D59B63900FEBD5D0F0660401D4970A1F23E653C43040D083780FF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/commands.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/commands.stdout.txt",
+    "bytes": 22442,
+    "sha256": "2C0F808C8D3C766E46F59FA77F205B39542E8674134AB44022F916780578057E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/deps.completion.json",
+    "bytes": 66,
+    "sha256": "1D50521322BFF29FFC91BE1C227BFA112F5478C1A5E65CB240B4F1951672B17A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/deps.process.json",
+    "bytes": 467,
+    "sha256": "BED88B3910D9C53A13B7E8EB3EC9DE46FC0C84DFC6A0B3C4C5AF0BC2E4796705"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/deps.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/deps.stdout.txt",
+    "bytes": 19625,
+    "sha256": "C84D985C343AA514CEF7298E8B9F51EA91D2150334807BCD9389F89486DC6BAF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/result.json",
+    "bytes": 49442,
+    "sha256": "D353DC2C56D254687E432AE1C3B5AA42BAB0B21AE181C9AAC71B2CDBA302DC84"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/tool-inputs.json",
+    "bytes": 831,
+    "sha256": "20CF70A9B574B8137BEABCA3AB4419C9D8CF6640F7722257EC2B4A26B0782F7B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/zfrsrvd.cmd",
+    "bytes": 2977,
+    "sha256": "55C2CDF520FA912CBE281FC8950367A0298492672AC6A44343921418D86AD98D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/zfrsrvd.completion.json",
+    "bytes": 66,
+    "sha256": "E444A683056FF484CE340E4ED3972206DC917C9FFBE25E1779A6E62A8F1221F4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/zfrsrvd.process.json",
+    "bytes": 267,
+    "sha256": "94B17E4FF431C40B252DBF4DC0717927D8B2E7123C606B05D559601609B53B16"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/zfrsrvd.stderr.txt",
+    "bytes": 18704,
+    "sha256": "FF216C0E4CC2A644CEC61E510D6E0EB2D87F636D880FAA7A86CCC67BE208EE0B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/preprocess/run/zfrsrvd.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline.completion.json",
+    "bytes": 66,
+    "sha256": "41938653A7606013F23A385F0B21B383005650BB98DFBB3F83AEF1C362C192DF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline.process.json",
+    "bytes": 772,
+    "sha256": "3DD8495C4BB647A9A3F8C6052056FAB2CF2D376FCD5EB5C2D8DE4EABD542C77A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate.completion.json",
+    "bytes": 66,
+    "sha256": "688A51AA686642C64FCACF32B0724801D2B36DD7F0286A77499452519693245A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate.process.json",
+    "bytes": 790,
+    "sha256": "B168072C197B5DE2EBE600A259554FFDCD62B92AA388225E9F004669D5830C51"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/completion.json",
+    "bytes": 66,
+    "sha256": "13C5213E8BE428F53D71B4FFAA5F3979C08CC7B97EF7BF664601F18E4D65F49D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative.completion.json",
+    "bytes": 66,
+    "sha256": "9A08866F3C1954A8F8EED73BFDAF45E7D0701F95195833DC6DEA8905565C6EC3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative.process.json",
+    "bytes": 791,
+    "sha256": "D1F799192F336B18A87E412DC8824BF4F3EBCA65A1F4442048663A83A3F7FA82"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control.completion.json",
+    "bytes": 66,
+    "sha256": "EF6C0FC1FB2A3CF82202CEB191AF2889750C6D6D31AD1FC37F3A0C895B59DD46"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control.process.json",
+    "bytes": 765,
+    "sha256": "63FAE8D95B57802516BC809188AC603BA992C2B2DC2821B024A4D7306F1AF66D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/process.json",
+    "bytes": 367,
+    "sha256": "92612EBF340FD34E9D05B9F3C2C50CB267A4BFD19F3E55992F0F78590DAABC8F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/run.ps1",
+    "bytes": 2667,
+    "sha256": "62F43DE0149F778B6754C472AA588B5FC49200586535BAAF48393B100D08A8D7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative.completion.json",
+    "bytes": 66,
+    "sha256": "5A9A20F6ADBBFD8CC13083A49AB48AE2205E3475311185F7FDF5299BF130B929"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative.process.json",
+    "bytes": 796,
+    "sha256": "06B38B2AC0992B21C3C14B5185B78680C40116646A60146D7E29DC726E9D6715"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags.completion.json",
+    "bytes": 66,
+    "sha256": "6FB7179830EAD9C12BDBE1F69AEBC05EEB5CE26720EA001BB5C82C3265E2C158"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags.process.json",
+    "bytes": 770,
+    "sha256": "5455D5C119301F3DF746B07ADBE11A92445DD77905922E9F0A9CEC488AD3A7A8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/stdout.txt",
+    "bytes": 122,
+    "sha256": "3977E994747BD5FE9283C80F64E11C7AC81DC6BB44D541DA6EB8D386E0503909"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/assemble.process.json",
+    "bytes": 465,
+    "sha256": "14EE2995DF3E8072EE9ECBF06F5C51920D6335197FA0B1998DA91B2DDEF46DDE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/inputs.csv",
+    "bytes": 1016,
+    "sha256": "2774759CF1E8291E4737B46541AA948B6B2D0780D484B5130BF45271B18FEF12"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.process.json",
+    "bytes": 384,
+    "sha256": "15EC991455C5BC5462B087BD8C6DFC64F6DE6F866ADE2B99041829A6442428A3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.txt",
+    "bytes": 703,
+    "sha256": "18BB7E7E392D412170C086BDF4E8839E642C98C2AD342729C215D63D04D6622B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "46CCDC7A7AFCB39A82F1EA8A5EE5CC07B3B68B972F4669B998F48A31A3D8836E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.txt.console.txt",
+    "bytes": 128,
+    "sha256": "D90D42AE5D126764854AC794B46D9FD5400E8AEED486542088B7683EDAB35435"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/observer.txt.initial-console.txt",
+    "bytes": 218,
+    "sha256": "51097DD8904CC8FCA4BD2CE0B67A76A7C2A230469004364C9D8162CB7E34EF10"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-build.process.json",
+    "bytes": 619,
+    "sha256": "38E60C9B4EC3514C415F5ED0977FA14E81CAF66384308F814A54EE68AEA3CC56"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-profile.process.json",
+    "bytes": 260,
+    "sha256": "064EEBAE9F32853B9A96F11784463BBEF007CAFF1EC5DFDB5F2850262A408A5D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "A64F16B46A1646C698FA7B43B58E8AB654C34AAEBB9B5E71CF7DFF5335F60B49"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/runner-context.json",
+    "bytes": 333,
+    "sha256": "726B96FD0BEB7779CA9106C27810084531124D753FA62C48350411BC2CCA391E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "967B1A0751C5E97340A44C35AAF671DF1DF938E67106270025B32DBF8FD71239"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/token-context.process.json",
+    "bytes": 171,
+    "sha256": "979B8C7195A5002EB752DB46B70E429867F3BB717C2328BFFBE5A94ABDE7FF04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-baseline/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/assemble.process.json",
+    "bytes": 466,
+    "sha256": "0F82630709C1F9BFB9C4CE26E233E9931F26A95F23B1D50F540258C1A3DE1B71"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/inputs.csv",
+    "bytes": 1017,
+    "sha256": "2E0512EF7ADCF095BA21C72B64813B3FD856F2FDDF5D0685F6BAAFE21093E33B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.process.json",
+    "bytes": 385,
+    "sha256": "D72AC4205792E21E91F5913A10E956C0296BAC33F3251DCA7F738DB76B62301E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.txt",
+    "bytes": 705,
+    "sha256": "2D724F45DE99E77F935EC46A11BAF290519CF7249A90F572C6A213DBA043CDA1"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "92CB9E437CC5DBB82F3D7A7BA58CA392318A483C4ACED5B1AE07CC9BCAA60021"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.txt.console.txt",
+    "bytes": 128,
+    "sha256": "D90D42AE5D126764854AC794B46D9FD5400E8AEED486542088B7683EDAB35435"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "F0D702C101C854883F0C33D0D112EC1B4338693AF5D77AD638FA79F9D41C6D96"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-build.process.json",
+    "bytes": 622,
+    "sha256": "F55D147909C1CE31AFD0AE5013ECE80E0C22CCCC26C90BC0D2A217A07CD6B9CE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-profile.process.json",
+    "bytes": 261,
+    "sha256": "90EE5D40B35DC627296483AD3C8155862E8E8312B5021C80379425FA921CD45E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "E151A318DF3477DCDA920B8F86AF4693DB9CB8DE02A2E0CB6F1F4930A8005F46"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/runner-context.json",
+    "bytes": 334,
+    "sha256": "64BEFBB6ABD7559C95AC8CB633768E89AFB6E6F19B065702361AD0B7E2D7E669"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "72BFD0FB3077115B649541B664F12F82AE02DF9926AB856B0E212E4C998A54AD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/token-context.process.json",
+    "bytes": 171,
+    "sha256": "230B27E500520FEDD36EB03378C848221FC5A11D5099E3EECFB099BC817B3D32"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/bit-candidate/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/assemble.process.json",
+    "bytes": 456,
+    "sha256": "ECF593EC80111CB57F7D452CBB2D0D65796CB7D7F6F85FF429935EAB9BE37788"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/inputs.csv",
+    "bytes": 1008,
+    "sha256": "A2BA03C3EF2EB77A614222D0A347F1B7E870340101B3FF85DB3D4C43DA12D664"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.process.json",
+    "bytes": 379,
+    "sha256": "39808EF7CF881298BCA98C43CC47307A87758581140B63E07ABA1BDFF428C34E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.txt",
+    "bytes": 705,
+    "sha256": "0981F69EA5E816DC064D27A17EFB6E68B098C8CDAB4B430B3A9A907142A1BFFA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "C531197F42495A252C098F5F945425A8A3E0A18ECA63364BC11EEB1E40CAC004"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.txt.console.txt",
+    "bytes": 133,
+    "sha256": "210EA5C335D7D87F4F3A5991FC0D29581A454793E1DA5CC93F93EA369C9871CF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "E32C2ECCFC9428DB6851D850BD8AF830E80C0FCCED792BD4AB6B515D54BEA2C9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-build.process.json",
+    "bytes": 609,
+    "sha256": "316C1275A03E70417C3E6849C1C1B0817F74D993DE63C4F1303FF20E3EDF175D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-profile.process.json",
+    "bytes": 255,
+    "sha256": "C09D7E242BDE00095E14D884044B52C3E13230C59F911351C68844C4350E6EFA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "1345666B01B10BEAA1ADCCEEF6B59131B316949CF74A0117419E5A7868075ECD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/result.txt",
+    "bytes": 109,
+    "sha256": "5308ED961954F3B9CF3ACD440E0F66C64132437E51DB7AFB21A7141E107660AC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/runner-context.json",
+    "bytes": 333,
+    "sha256": "3140E478E94EFA5C6A081FAB522906F2CD7AFCB6807A7532645B7F4855FC8499"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "5729FCB9AF0B20A01DA02B7683ED24EFF4CACA03C6614251DA499349243C3C6B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/token-context.process.json",
+    "bytes": 171,
+    "sha256": "21E4E5DE169767522E55D0162A20BBCA0B432460C53CF0C462038C7B9F848CD6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/assemble.process.json",
+    "bytes": 496,
+    "sha256": "1119564FBA85063FE1C9F7D66E76A37C0682A1C9D0E6E169021BCBCD6B1E71DD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/inputs.csv",
+    "bytes": 1017,
+    "sha256": "A77E8A1F9C8F2DE42A3C4094BAF09037157B1E2BEEABDC4DFF0C7886A621C3A3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.process.json",
+    "bytes": 388,
+    "sha256": "5F79DD32E5E0E1AD15C47BA586206F35CD92AD05823E862D62D8CD54BB3EE2E8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.txt",
+    "bytes": 704,
+    "sha256": "08C1D714929D18561BAD612241D991DE8618B8E23F2EA2B148CF3662EE236BA9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "A74390A1CD761D512B44D98B145E32EE8C52613B7BC3E32C88F86A5CBDA49503"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.txt.console.txt",
+    "bytes": 68,
+    "sha256": "B00E5E5C4CF4F084E2793CD83DDA9D9BB1DE0704789C8C0795380743C90F7728"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "707EE6B069DEBDAD02071C119E29F59FF6D19C16CF689677F61CD550006DB6D2"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-build.process.json",
+    "bytes": 628,
+    "sha256": "43A3CD2847D03E212E633239804A3F4EF4EF7385D7D681E67FBBAAA18E7AE82A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-profile.process.json",
+    "bytes": 264,
+    "sha256": "6A263C0A1A55EC31E3568EC9E48C4D2818607E42AC87E1A03FF5F4E882815648"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "91496C292A7F39B7FCB409F8DAF699D046680EE9ACDF3B793B60ADC0F3751C69"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/result.txt",
+    "bytes": 87,
+    "sha256": "F513073314DA6383FF73CCF40A7675BB3CCC78408E4059FBB4C98814F93FB6B9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "DD0DE65844136607D86BE1D8AB665D423BB67FA46816FE4C186D7877B5ACEA50"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "FCD8C439557B08CF9DB3B0A93FBADC20EB67F356C12EB56F2F75B5D7F95B482D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "EEC96287B5AEE27076DB225644F9B5B0A54A67C7BEDCD103401CFF1E2C7AF771"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/control-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/assemble.process.json",
+    "bytes": 461,
+    "sha256": "663B898BDE835BA09163AF83F9491C2824723073478B624909599FB86E7E6A16"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/inputs.csv",
+    "bytes": 1013,
+    "sha256": "D48D02BF3E0C7A13D06274CB5C95CB9CFE7D76CE12C2E4F85169E96F939C6E27"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.process.json",
+    "bytes": 382,
+    "sha256": "3A2852E1543A2E9C4B5389A481C582E9293B5A5718FE591E833980A1CBC7D7B0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.txt",
+    "bytes": 705,
+    "sha256": "2CCA5F109AD345A40F8DDA34FBC14DFB6B74D11FD1413C57AA56F99C4180B06B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "9987D5ED8C95C0720FE68185143B35560CA2E3EB2608427958A4EB392B4A97B6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.txt.console.txt",
+    "bytes": 181,
+    "sha256": "D81CAFDAA0AEFEA09269465A6D187A9B2B6A70EB5C7F704100A2B9FC8080A4FF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "A144292B0F55B3717B3122D174A656380715F45F213756B990D832A7B449572A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-build.process.json",
+    "bytes": 615,
+    "sha256": "C0655E5D46ACDDCEC77C28E913570B4C0524A4F4076E9A34DC9F9259CA160DE3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-profile.process.json",
+    "bytes": 258,
+    "sha256": "C9D467C56386DD038F3C3B193BE89EB2C2CDA3DC8AA59284F1E077D2FD6657AA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "8AEF9681D2274347C145B26C4F9C218C7CA3D69D7404512ED05DF3FC96B70102"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/result.txt",
+    "bytes": 111,
+    "sha256": "B753042517A009FA9BFD7B0B39D675E5765BBB33A8B4A897360C12F9A2A0B0E0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/runner-context.json",
+    "bytes": 333,
+    "sha256": "28CFB77D889BDC179F424C14954685363BB164B8945C179970EB81A9A9A0B14C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "7D039C5DBCD27B0C1C3FFB607154CFB21F099B167948FFF1F2D5889FBF25F9B9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/token-context.process.json",
+    "bytes": 171,
+    "sha256": "1F2BB05D772EB5B1A61197DF81D5F35A0B81FF95FAD280FF2E92D7CC8CC5A74A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/assemble.process.json",
+    "bytes": 501,
+    "sha256": "20C68218C54C6DC63DF8BE8A8CD3BDAA368B2F54F9A9E653123F74E865252AB5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/inputs.csv",
+    "bytes": 1022,
+    "sha256": "98AA5E97438DB835707B161AC38B78206DA517D010807C7E2B973544EFB49453"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.process.json",
+    "bytes": 391,
+    "sha256": "9556330E5C6D0BDCC174E6E334C72F664CF4A525FE2F8447EC2070B5219F0C1C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.txt",
+    "bytes": 705,
+    "sha256": "5963A73D3D1BB3534F9E3207FF9E209CA171AE5E711D5AD2A6BF6E3F9C606DFF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "6F18AF60EB890F995B7DF809E5CE93286F447EEF593FB2907A9D8C7A5D00D83B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.txt.console.txt",
+    "bytes": 71,
+    "sha256": "12D8A0DC721D004C3935BCE11704EC17B9465912988FE700068F67E735F173E9"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "1B7DA66DCD77CBBCF00BAE69AF60EC323384B0322D99DC3DEF631D7D1FD2F0FA"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-build.process.json",
+    "bytes": 634,
+    "sha256": "9D5AA74AEFE85F736FBE8BEA316C49270CB0F60A9B81C9DAD8ADB0B477279AF5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-profile.process.json",
+    "bytes": 266,
+    "sha256": "0EDFBB6D9270ABA423FF0FBF08303885653C7D2B7E5EE9214EBD944F2DC1189B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "B6AE50B2389A80E4CF3D02C9257F2C708314F2F6BEA92B2294EE832C2278EA2A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/result.txt",
+    "bytes": 89,
+    "sha256": "DE5128BDD39442D5E33656FA82D6D62192BDFF5B92913D83CF74AB5DBDFAE106"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/runner-context.json",
+    "bytes": 334,
+    "sha256": "D27CB14BF51C2C0EA926CCBBD578745CFC95C0FE8D5F88782C689E904ED7F94B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "AF4A35EDCA2CCE9B0370E2757102CEB7362ED9124674C9C5B60952AC82056A02"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/token-context.process.json",
+    "bytes": 171,
+    "sha256": "0F2B727F8BCBA8137F436306CF5EE2ABDFDF43612A66DAAFF4EAE4F39A4437F7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/regression/sign-flags-negative/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest.completion.json",
+    "bytes": 66,
+    "sha256": "C2FFFF9545DF10111A8934D79E1FEC02219AB61AD01FDE221BEA026B2F74B144"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest.process.json",
+    "bytes": 727,
+    "sha256": "74DD885D2A1A98959D1663163CFB313C946331BAA7928C33CA41E003070A2989"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/assemble.process.json",
+    "bytes": 453,
+    "sha256": "51D72DD66C580841817C9A3EA6BB56EB34B0222BFB2048947896FCC692ACF68B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/inputs.csv",
+    "bytes": 1004,
+    "sha256": "46A8B5A75C491615391E64B75F466BC54958C13C59193C522D03885C110DC773"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.process.json",
+    "bytes": 370,
+    "sha256": "8E52C959A21691113410144090430BE57227D166BD9E7615A3F1131B97BCB40B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.txt",
+    "bytes": 684,
+    "sha256": "01417E79DEBEBCA1AC0E4829507A2E681C612124DBFB5F5FDDC59FD11888FD47"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "9CD85F2373B66C185EBB8796A89578E2B777598F160ECCFD6CDE8642BE035591"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.txt.console.txt",
+    "bytes": 37,
+    "sha256": "50A07F9FB2A108E2CBBB3451A961736C9118CF4E1B98337368D301ECAD95A550"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "F359FC525F94FA60C8A0DCEC7BCCEDDE19B34032697632097AB584F244F1CF6B"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-build.process.json",
+    "bytes": 591,
+    "sha256": "F380C7948D252ECCDA2C57636FF879DD35ED543AC5E040139D3DD3043A870C8D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-profile.process.json",
+    "bytes": 246,
+    "sha256": "B6B05BDFF5C848463D09DDF0D3B1F994AD86E355C9230A9258641DEFC59194D8"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "8E0131B5C7A548F54C1E8A59CCBDEFFBEA2250DA176F35DCD30CA45FB03058A4"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/runner-context.json",
+    "bytes": 334,
+    "sha256": "DC3139EFF46811ED11AD03670EB66EE6D015DB7CD396A1BEFB1DBC9222829BD3"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "9F80FA990B35B1D538B5431B93C3FAA175B6103C6BFDBBEC5721765166A16E80"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/token-context.process.json",
+    "bytes": 171,
+    "sha256": "0F8F9359057993DA458C9D983BB3FB2F17D79E0548C8BEE0B4B23AAC3E32ABBD"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-direct-inconclusive/guest/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest.completion.json",
+    "bytes": 66,
+    "sha256": "2C388465EDD59D987400A4624E60D41B1611562C71CBE6DAF64C6CCC892EFF6A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest.process.json",
+    "bytes": 731,
+    "sha256": "26EFFB4AC14D12F72112F57364CD71866540FC80B26E75B4DA1C9ED17BCDE7C0"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/assemble.process.json",
+    "bytes": 458,
+    "sha256": "FD9AF85468D30B6DDB26DE5E96B0DB23E1C19F9263866DD27F41B7E3D9B0068E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/inputs.csv",
+    "bytes": 1009,
+    "sha256": "8398B994828940FDE48A482D85887867EB7FF1B8C37F60B4D74F77986E2ADFEC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.process.json",
+    "bytes": 374,
+    "sha256": "A6E11BBC8928FE3A8DBD8F4183EE1CFB390A8E4A373A8168966105BEED85E592"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.txt",
+    "bytes": 6753,
+    "sha256": "4CCB017337055B2E934912A477BDAC07523CE506F0587E74E830098F1A670D0C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "889380DC5017495B6CE1E935767825D8AC9ED3FE5BBDDFA02A8256950A3874B6"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.txt.console.txt",
+    "bytes": 37,
+    "sha256": "50A07F9FB2A108E2CBBB3451A961736C9118CF4E1B98337368D301ECAD95A550"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.txt.initial-console.txt",
+    "bytes": 220,
+    "sha256": "FF4E44FB106D818158BF33FEEF85350F837CAEB85C7861713E503033BCEB2CE5"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/observer.txt.timeout-live.txt",
+    "bytes": 6103,
+    "sha256": "D2D9CF6B30017AAB63FBA79E3ED57B1D790AA579C51942E8E9330B627CE7D652"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-build.process.json",
+    "bytes": 602,
+    "sha256": "FD1D1456C51897F1F04BAC2BA7E6BA9E71383140C91A63FA13469EEC2EFBD90E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-profile.process.json",
+    "bytes": 251,
+    "sha256": "B38A530B1A09708AA7ED39F2DC9D0FD2801C5F1591760396A20D7B1E9C3487ED"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "5495B22F5F6A13CC920B7C59C4A16CDEEE0F9760728D40AEDAC51C04EF1EC507"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/runner-context.json",
+    "bytes": 333,
+    "sha256": "4A320EA460C9A2F92FDBF3312704C87048E44B78018D7812E4471F072A5B90CE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/runtime-inputs.csv",
+    "bytes": 1357,
+    "sha256": "FA852D949C814842777CC4A4ED48ED7D2C9D04628EFF4C2AD488A602B9C5D2AC"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/token-context.process.json",
+    "bytes": 170,
+    "sha256": "AA074AB817BBCA00D1CB08796F78B362E35E544B679895221A9CA3C5EF254E52"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-inconclusive/guest/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest.completion.json",
+    "bytes": 66,
+    "sha256": "B46C701F14883B1A113637B762726C7405143B64C45E2E5204D584DB1FF3E08A"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest.process.json",
+    "bytes": 729,
+    "sha256": "F16427297C1FA376203CF31A97566E53B33D3B7AA38F89D4F8DB98C09F21F59F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/assemble.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/assemble.process.json",
+    "bytes": 455,
+    "sha256": "A4099AE3BFFA530DC70E7CFAAF60163E52B3A17B8C8DA4EC8BD3CA8086E6967E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/assemble.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/assemble.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/environment-shape.csv",
+    "bytes": 990,
+    "sha256": "15FD1B1E995D259ED8A8A4C15C8AF7B15BDA98B7F8599F6A49435FECB4CC6CAE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/exit.txt",
+    "bytes": 3,
+    "sha256": "F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/inputs.csv",
+    "bytes": 1006,
+    "sha256": "1C477FBF6DB44B668BCC6F07D29061157B10683126109B4BE907A3288772225C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.process.json",
+    "bytes": 372,
+    "sha256": "FDCA1A136DB17089F7DCC6D11CC345E87679E5F64CBD4A8C95DF2765EAA4282E"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.txt",
+    "bytes": 703,
+    "sha256": "9EE0EFF82C5B63600C05EB034C909135982AC0EFD9B29A977853B24FED02C299"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.txt.command-line.txt",
+    "bytes": 64,
+    "sha256": "9CC103F3C30BCFF5075BF328932BFE3A49613C88C17FA4D16220269B7228D676"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.txt.console.txt",
+    "bytes": 57,
+    "sha256": "C278BE17FB7FB6FCB87C2F5C151418B2F8ED189620576D2CA7F0F5A0486DBE7D"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/observer.txt.initial-console.txt",
+    "bytes": 218,
+    "sha256": "FF5CBC276A751FD386C733AD9D6F3DD9628605B02C5F409D215AE37E3109CAA7"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-build.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-build.process.json",
+    "bytes": 596,
+    "sha256": "CEB26B873514FB491A6D9FB2F154C8A0472ECF4B548A37EAEC8F1063E8B48555"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-build.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-build.stdout.txt",
+    "bytes": 19,
+    "sha256": "890D10F7752DC76A12184B4DD84A7DBE868A173593E27AC941D21447EDB5E751"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-profile.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-profile.process.json",
+    "bytes": 248,
+    "sha256": "0058BB2DDB6A69681FFE99664B6356F8DA28F96957EF6840564BAA48E7A3657F"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-profile.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/pif-profile.stdout.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/profile-inputs.csv",
+    "bytes": 738,
+    "sha256": "CD8992A15ACA14A0EA1F240B9E0B5B2C82AD1A18638F950CB68F9184785F5F27"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/runner-context.json",
+    "bytes": 334,
+    "sha256": "E7DFAB7A199679428183C9DF522DE6E29D8CF85E297F8E5832C184AF6939DD01"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/runtime-inputs.csv",
+    "bytes": 1248,
+    "sha256": "48F2104F14BE6B9EDCDB29C58BB515C574ACB646483867C3E894C2E26BC9A1CE"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/token-context.exit.txt",
+    "bytes": 3,
+    "sha256": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/token-context.process.json",
+    "bytes": 171,
+    "sha256": "EEC87E8161AC046DF3DE8CE4492229A28BDEC1489D87E6197831AC65CA07767C"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/token-context.stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "artifacts/mvdm-audit/ccpu-header-macros/x87-dpmi-setup/guest/token-context.stdout.txt",
+    "bytes": 1481,
+    "sha256": "9FAD13D44D6D2886982CD368DB74EF818327CC7418C50788BD6FB991DF5FC7BF"
+  }
+]

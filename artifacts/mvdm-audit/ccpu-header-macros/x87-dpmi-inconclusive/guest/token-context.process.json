@@ -1,0 +1,7 @@
+{
+  "start": "2026-10-28T00:05:32.4878144Z",
+  "pid": 3880,
+  "image": "C:\\WINDOWS/System32/whoami.exe",
+  "command": "/groups /fo csv",
+  "timeoutSeconds": 15
+}

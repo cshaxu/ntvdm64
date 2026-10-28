@@ -1,0 +1,14 @@
+{
+  "arguments": [
+    "O:\\tmp\\n88f/system32/run16.exe",
+    "O:\\tmp\\n88f\\tests",
+    "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-x87-direct\\guest/observer.txt",
+    "--wait",
+    "O:\\tmp\\n88f\\tests/E30.PIF",
+    "--observation-timeout-ms",
+    "45000"
+  ],
+  "timeoutSeconds": 55,
+  "pid": 26296,
+  "start": "2026-10-28T00:12:35.3230221Z"
+}

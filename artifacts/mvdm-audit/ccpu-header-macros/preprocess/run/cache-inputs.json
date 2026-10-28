@@ -1,0 +1,42 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_div64.obj",
+    "Hash": "6B9A91FAE213817D2D6DE6E30859C698B00E2F75C0F71D48E448A3D8B4A190B8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_tlb.obj",
+    "Hash": "B5119584B139E8362E964F2B9CB8A96C2C238C7EAD0752DDCFAED84E171416D8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_tsksw.obj",
+    "Hash": "CBCB50151950BCA4754BD9E17718835311B8252F752CC71D41BAB629707A2900"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xfer.obj",
+    "Hash": "36001C57AE786DBD574AF7518822714BEA4C18A259F8C054BE23D919265C2EAA"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xtrn.obj",
+    "Hash": "2CA110FE3FF2AC2DD5E0A87C18320001CA778D77F56598048105D7F9E6840714"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+    "Hash": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_reg.obj",
+    "Hash": "5309A08CDB4A68EF53A2CEBBE0DD7F4B9BF5061DD61B9F40DA7FEB9EC738733B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\zfrsrvd.obj",
+    "Hash": "F1CAF64DBE270B9E9C195BA8FABEFFC395F125481D01155C9701D84B17C52336"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+    "Hash": "A429F3708C78B2C7D553BEB66AC5391CBDC3ADC6FF576F130B80AE1989A958E8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+  }
+]

@@ -1,0 +1,7 @@
+{
+  "started": "2026-10-28T00:21:05.7632637Z",
+  "diagnostic_budget_seconds": 120,
+  "pid": 25044,
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "arguments": "-B -X utf8 artifacts/mvdm-audit/ccpu-header-macro-role-merge.py"
+}

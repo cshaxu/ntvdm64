@@ -1,0 +1,7 @@
+{
+  "arguments": "-t deps obj/ccpu/c_div64.obj obj/ccpu/c_tlb.obj obj/ccpu/c_tsksw.obj obj/ccpu/c_xfer.obj obj/ccpu/c_xtrn.obj obj/ccpu/c_main.obj obj/ccpu/c_reg.obj obj/ccpu/zfrsrvd.obj",
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\ninja.exe",
+  "pid": 21056,
+  "started": "2026-10-28T00:04:34.1660221Z",
+  "diagnostic_budget_seconds": 60
+}

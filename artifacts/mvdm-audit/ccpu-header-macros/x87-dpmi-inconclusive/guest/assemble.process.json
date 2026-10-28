@@ -1,0 +1,7 @@
+{
+  "start": "2026-10-28T00:05:32.8103558Z",
+  "pid": 25968,
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_x87_boundary_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-x87-boundary-r3\\guest/EMSPROBE.COM\"",
+  "timeoutSeconds": 30
+}

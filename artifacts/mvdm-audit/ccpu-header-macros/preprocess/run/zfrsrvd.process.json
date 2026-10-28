@@ -1,0 +1,7 @@
+{
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-selection\\run/zfrsrvd.cmd\"\"",
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 3240,
+  "started": "2026-10-28T00:05:17.8524039Z",
+  "diagnostic_budget_seconds": 60
+}

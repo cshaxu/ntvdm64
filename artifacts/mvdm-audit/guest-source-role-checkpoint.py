@@ -78,7 +78,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
             if proof['status'] == 'excluded':
                 legacy_roles = ('historical-guest-build-source-file-only', 'historical-guest-library-build-artifact-only',
                                 'historical-cpu-test-source-only', 'historical-empty-printscreen-source-only',
-                                'historical-build-recipe-file-only', 'historical-inline-helper-source-only')
+                                'historical-build-recipe-file-only', 'historical-inline-helper-source-only',
+                                'historical-cpu-test-declaration-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -96,8 +97,10 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'historical-build-role-'
                 if proof['role'] == 'historical-inline-helper-source-only':
                     assert prefix == 'ccpu-control-role-' and path == 'softpc.new/base/ccpu386/nop.c'
+                if proof['role'] == 'historical-cpu-test-declaration-only':
+                    assert prefix == 'ccpu-header-macro-role-' and path == 'softpc.new/base/ccpu386/ccpupig.h'
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -130,6 +133,25 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'ccpu-header-macro-role-':
+        observed = json.loads((A / 'ccpu-header-selection-observations.json').read_text())
+        actual = runpy.run_path(str(A / 'ccpu-header-selection-extractor.py'))['inspect']()
+        assert observed == actual and observed['source_header_count'] == 22
+        assert observed['selected_declaration_headers'] == 7
+        selected = {r['relative_path'] for r in observed['headers'] if r['emitted_declaration_units']}
+        selected.update('softpc.new/base/ccpu386/' + n for n in ('c_oprnd.h', 'fault.h', 'ccpupig.h'))
+        assert selected == set(changed) and len(selected) == 10
+        for record in observed['headers']:
+            name = record['relative_path']
+            if name in changed:
+                assert record['valid_consumers'] and record['seen_units']
+                assert changed[name]['status'] == ('excluded' if name.endswith('/ccpupig.h') else 'partial')
+            else:
+                assert merged[name]['status'] == 'pending'
+        for proof in dispositions:
+            assert proof['original_text_retained_percent'] == '100' and not proof['estimated_restored_code_percent']
+        for record in observation['normal_cache_inputs']:
+            assert sha(Path(record['Path'])) == record['Hash']
     if prefix == 'ccpu-control-role-':
         expected = {'cli', 'clts', 'wait', 'rsrvd', 'div', 'lidt', 'sidt', 'jcxz', 'str', 'nop'}
         assert set(changed) == {'softpc.new/base/ccpu386/' + n + '.c' for n in expected}
@@ -415,7 +437,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
         assert sha(path) == record['sha256'] and '(STALE)' not in path.read_text()
         text = path.read_text().replace('\\', '/').lower()
         for relative in changed:
-            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] not in ('historical-cpu-test-source-only', 'historical-empty-printscreen-source-only', 'historical-inline-helper-source-only'):
+            if changed[relative]['status'] == 'excluded' and changed[relative]['role'] not in ('historical-cpu-test-source-only', 'historical-empty-printscreen-source-only', 'historical-inline-helper-source-only', 'historical-cpu-test-declaration-only'):
                 assert 'src/mvdm/' + relative.lower() not in text, relative
     for row in rows(A / 'full-selected-leaf.csv') + rows(A / 'full-selected-declarations.csv'):
         assert merged[row['relative_path']]['status'] == 'full'
@@ -442,7 +464,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

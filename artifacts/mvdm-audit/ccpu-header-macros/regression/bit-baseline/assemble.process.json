@@ -1,0 +1,7 @@
+{
+  "command": "-f bin \"O:\\repos.hobby\\ntvdm64\\tests\\observation\\ccpu_bit_memory_probe.asm\" -o \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-regression\\bit-baseline/EMSPROBE.COM\"",
+  "image": "C:\\Users\\neko\\AppData\\Local\\Microsoft\\WinGet\\Packages\\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\\mingw64\\bin\\nasm.exe",
+  "start": "2026-10-28T00:34:26.0979718Z",
+  "pid": 24880,
+  "timeoutSeconds": 30
+}

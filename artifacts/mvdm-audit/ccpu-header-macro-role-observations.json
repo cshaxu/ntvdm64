@@ -1,0 +1,84 @@
+{
+  "result": "pass",
+  "base": "70985c440",
+  "candidate_count": 10,
+  "source_tables": [
+    {
+      "path": "ccpu-header-selection-observations.json",
+      "sha256": "C63DB4DADD83592C44678C95440FB7497D0D37D28D402C6A168A6B48F0F54447"
+    }
+  ],
+  "normal_cache_inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_div64.obj",
+      "Hash": "6B9A91FAE213817D2D6DE6E30859C698B00E2F75C0F71D48E448A3D8B4A190B8"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_tlb.obj",
+      "Hash": "B5119584B139E8362E964F2B9CB8A96C2C238C7EAD0752DDCFAED84E171416D8"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_tsksw.obj",
+      "Hash": "CBCB50151950BCA4754BD9E17718835311B8252F752CC71D41BAB629707A2900"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xfer.obj",
+      "Hash": "36001C57AE786DBD574AF7518822714BEA4C18A259F8C054BE23D919265C2EAA"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xtrn.obj",
+      "Hash": "2CA110FE3FF2AC2DD5E0A87C18320001CA778D77F56598048105D7F9E6840714"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+      "Hash": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_reg.obj",
+      "Hash": "5309A08CDB4A68EF53A2CEBBE0DD7F4B9BF5061DD61B9F40DA7FEB9EC738733B"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\zfrsrvd.obj",
+      "Hash": "F1CAF64DBE270B9E9C195BA8FABEFFC395F125481D01155C9701D84B17C52336"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+      "Hash": "A429F3708C78B2C7D553BEB66AC5391CBDC3ADC6FF576F130B80AE1989A958E8"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "Hash": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    }
+  ],
+  "host_input_observations": [
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-inputs.txt",
+      "sha256": "D95E467D9E75C95737DEFE3ADEC70014681D371D76AEF134A828AFC3947DEC4C",
+      "graph": "worker",
+      "kind": "inputs",
+      "lines": 1014
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\worker-deps.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313",
+      "graph": "worker",
+      "kind": "deps",
+      "lines": 12795
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-inputs.txt",
+      "sha256": "A1C4813C11EBD0640571CA4C388A91675C1E2E800440E8943FE6A2E4CAFBA276",
+      "graph": "wow32",
+      "kind": "inputs",
+      "lines": 454
+    },
+    {
+      "path": "build\\t473-s10\\shared-guest-include-owner\\wow32-deps.txt",
+      "sha256": "629DDBBB90E7CCAD366EA11D68D7E7F422A70990DCA8602DD76436EC576854E9",
+      "graph": "wow32",
+      "kind": "deps",
+      "lines": 15249
+    }
+  ],
+  "scope": "Selected original header/macro integration, not whole-file guest acceptance"
+}

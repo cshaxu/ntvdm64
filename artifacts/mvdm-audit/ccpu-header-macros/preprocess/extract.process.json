@@ -1,0 +1,7 @@
+{
+  "diagnostic_budget_seconds": 120,
+  "started": "2026-10-28T00:09:12.0602914Z",
+  "arguments": "-B -X utf8 artifacts/mvdm-audit/ccpu-header-selection-extractor.py",
+  "pid": 14268,
+  "image": "C:\\Program Files\\Python313\\python.exe"
+}

@@ -1,0 +1,7 @@
+{
+  "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\ccpu-header-selection\\run/c_xfer.cmd\"\"",
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "pid": 28844,
+  "started": "2026-10-28T00:04:55.5600991Z",
+  "diagnostic_budget_seconds": 60
+}

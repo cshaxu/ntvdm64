@@ -1,0 +1,103 @@
+phase=before-launcher-termination
+launcher=28728
+wait=258
+windows-desktop=NTVDMConsoleTest-1092
+window pid=29384 visible=0 class=ConsoleWindowClass title=O:\tmp\n4f0\system32\run16.exe
+window pid=22632 visible=0 class=IME title=Default IME
+direct-child pid=4336 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\tmp\n4f0\system32\ntsrv.exe
+child-modules pid=4336 error=299
+child-image pid=4336 base=00000000 size=00000000
+child-thread pid=4336 tid=20236 available=0 eip=00000000
+child-thread pid=4336 tid=26236 available=0 eip=00000000
+child-thread pid=4336 tid=33156 available=0 eip=00000000
+child-thread pid=4336 tid=30048 available=0 eip=00000000
+child-thread pid=4336 tid=11908 available=0 eip=00000000
+descendant-child pid=26812 name=ntcon.exe wait=258 exit-known=1 exit=00000103 path=O:\tmp\n4f0\system32\ntcon.exe
+child-modules pid=26812 error=299
+child-image pid=26812 base=00000000 size=00000000
+child-thread pid=26812 tid=23144 available=0 eip=00000000
+child-thread pid=26812 tid=31272 available=0 eip=00000000
+child-thread pid=26812 tid=28008 available=0 eip=00000000
+child-thread pid=26812 tid=17540 available=0 eip=00000000
+child-thread pid=26812 tid=3612 available=0 eip=00000000
+child-thread pid=26812 tid=32488 available=0 eip=00000000
+descendant-child pid=17396 name=ntvdm.exe wait=258 exit-known=1 exit=00000103 path=O:\tmp\n4f0\system32\ntvdm.exe
+child-module pid=17396 base=00670000 size=00455000 path=O:\tmp\n4f0\system32\ntvdm.exe
+child-module pid=17396 base=76f10000 size=001c0000 path=C:\WINDOWS\SYSTEM32\ntdll.dll
+child-module pid=17396 base=75260000 size=000f0000 path=C:\WINDOWS\System32\KERNEL32.DLL
+child-module pid=17396 base=76300000 size=002d9000 path=C:\WINDOWS\System32\KERNELBASE.dll
+child-module pid=17396 base=69d60000 size=000af000 path=C:\WINDOWS\SYSTEM32\apphelp.dll
+child-module pid=17396 base=74ea0000 size=000bc000 path=C:\WINDOWS\System32\RPCRT4.dll
+child-module pid=17396 base=76100000 size=001ed000 path=C:\WINDOWS\System32\USER32.dll
+child-module pid=17396 base=754c0000 size=0001c000 path=C:\WINDOWS\System32\win32u.dll
+child-module pid=17396 base=75490000 size=00022000 path=C:\WINDOWS\System32\GDI32.dll
+child-module pid=17396 base=74d20000 size=000eb000 path=C:\WINDOWS\System32\gdi32full.dll
+child-module pid=17396 base=76d50000 size=00085000 path=C:\WINDOWS\System32\msvcp_win.dll
+child-module pid=17396 base=74f70000 size=00110000 path=C:\WINDOWS\System32\ucrtbase.dll
+child-module pid=17396 base=74e10000 size=00085000 path=C:\WINDOWS\System32\ADVAPI32.dll
+child-module pid=17396 base=75190000 size=000c7000 path=C:\WINDOWS\System32\msvcrt.dll
+child-module pid=17396 base=76070000 size=00085000 path=C:\WINDOWS\System32\sechost.dll
+child-module pid=17396 base=75090000 size=00025000 path=C:\WINDOWS\System32\IMM32.DLL
+child-image pid=17396 base=00670000 size=00455000
+child-thread pid=17396 tid=11924 available=1 eip=76fc235f
+child-frame pid=17396 tid=11924 index=0 pc=76fc235f
+child-frame pid=17396 tid=11924 index=1 pc=76fc2687
+child-frame pid=17396 tid=11924 index=2 pc=76f6228e
+child-frame pid=17396 tid=11924 index=3 pc=76f7d1cd
+child-frame pid=17396 tid=11924 index=4 pc=76454215
+child-frame pid=17396 tid=11924 index=5 pc=007d0085
+child-frame pid=17396 tid=11924 index=6 pc=7644e8f7
+child-frame pid=17396 tid=11924 index=7 pc=7644e821
+child-frame pid=17396 tid=11924 index=8 pc=00679b97
+child-frame pid=17396 tid=11924 index=9 pc=007e0029
+child-frame pid=17396 tid=11924 index=10 pc=006d3c80
+child-frame pid=17396 tid=11924 index=11 pc=006a1f96
+child-frame pid=17396 tid=11924 index=12 pc=75275d49
+child-frame pid=17396 tid=11924 index=13 pc=76f7c75b
+child-frame pid=17396 tid=11924 index=14 pc=76f7c6e1
+child-thread pid=17396 tid=18160 available=1 eip=76f8a0bc
+child-frame pid=17396 tid=18160 index=0 pc=76f8a0bc
+child-frame pid=17396 tid=18160 index=1 pc=75275d49
+child-frame pid=17396 tid=18160 index=2 pc=76f7c75b
+child-frame pid=17396 tid=18160 index=3 pc=76f7c6e1
+child-thread pid=17396 tid=26864 available=1 eip=76f8a0bc
+child-frame pid=17396 tid=26864 index=0 pc=76f8a0bc
+child-frame pid=17396 tid=26864 index=1 pc=75275d49
+child-frame pid=17396 tid=26864 index=2 pc=76f7c75b
+child-frame pid=17396 tid=26864 index=3 pc=76f7c6e1
+child-thread pid=17396 tid=30952 available=1 eip=76f887fc
+child-frame pid=17396 tid=30952 index=0 pc=76f887fc
+child-frame pid=17396 tid=30952 index=1 pc=7645f4d8
+child-frame pid=17396 tid=30952 index=2 pc=007f00dc
+child-frame pid=17396 tid=30952 index=3 pc=76f7c75b
+child-frame pid=17396 tid=30952 index=4 pc=76f7c6e1
+child-thread pid=17396 tid=8820 available=1 eip=76f887fc
+child-frame pid=17396 tid=8820 index=0 pc=76f887fc
+child-frame pid=17396 tid=8820 index=1 pc=7645f4d8
+child-frame pid=17396 tid=8820 index=2 pc=007f0bf3
+child-thread pid=17396 tid=8792 available=1 eip=76f887fc
+child-frame pid=17396 tid=8792 index=0 pc=76f887fc
+child-frame pid=17396 tid=8792 index=1 pc=7645f4d8
+child-frame pid=17396 tid=8792 index=2 pc=007efbff
+child-frame pid=17396 tid=8792 index=3 pc=75275d49
+child-frame pid=17396 tid=8792 index=4 pc=76f7c75b
+child-frame pid=17396 tid=8792 index=5 pc=76f7c6e1
+child-thread pid=17396 tid=32856 available=1 eip=76f8a6b0
+child-frame pid=17396 tid=32856 index=0 pc=76f8a6b0
+child-thread pid=17396 tid=9864 available=1 eip=76f8826c
+child-frame pid=17396 tid=9864 index=0 pc=76f8826c
+child-frame pid=17396 tid=9864 index=1 pc=006bdf35
+child-frame pid=17396 tid=9864 index=2 pc=007def7a
+child-frame pid=17396 tid=9864 index=3 pc=75275d49
+child-frame pid=17396 tid=9864 index=4 pc=76f7c75b
+child-frame pid=17396 tid=9864 index=5 pc=76f7c6e1
+child-thread pid=17396 tid=24404 available=1 eip=76f887fc
+child-frame pid=17396 tid=24404 index=0 pc=76f887fc
+child-frame pid=17396 tid=24404 index=1 pc=7645f4d8
+child-frame pid=17396 tid=24404 index=2 pc=007f0bf3
+child-thread pid=17396 tid=30164 available=1 eip=76f887fc
+child-frame pid=17396 tid=30164 index=0 pc=76f887fc
+child-frame pid=17396 tid=30164 index=1 pc=7645f4d8
+child-frame pid=17396 tid=30164 index=2 pc=00673567
+child-frame pid=17396 tid=30164 index=3 pc=76f7c75b
+child-frame pid=17396 tid=30164 index=4 pc=76f7c6e1

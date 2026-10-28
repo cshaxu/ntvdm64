@@ -1,0 +1,7 @@
+"Algorithm","Hash","Path"
+"SHA256","1F472CFF64E93040FA80F6ED3CF840AF4370D452D220534488D1125E1BBEE74F","O:\repos.hobby\ntvdm64\tests\observation\verify-ccpu-sign-flags-guest.ps1"
+"SHA256","DC22CFFF1C897D574B374D964274E146F0B5A8C1F0B69480C0185498EC759EAD","O:\repos.hobby\ntvdm64\tests\observation\ccpu_x87_boundary_probe.asm"
+"SHA256","99D0FC746B241CCA5BA4A47E24BBCFB3074FBC68398928E1CAE08AAE2628CE9E","O:\repos.hobby\ntvdm64\build\t473-s10\ccpu-x87-boundary\guest\EMSPROBE.COM"
+"SHA256","A8FD30EC72F5CA28F46FC03E649D7B9608D083B629B798AFC85C786A36790022","O:\repos.hobby\ntvdm64\build\tools\console-startup-observer.exe"
+"SHA256","89BF354A203F4074B63F05FBD8DF7F65CF05EECFE7B98E18EBC81083819A6B66","O:\repos.hobby\ntvdm64\build\t449-s2-message-construction-r3\logon-env.dll"
+"SHA256","08AD4879E8E327F7B5F830A76DF6A6418FFA9AEA50FEBFD399EFFF747AD32EF8","C:\Users\neko\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\nasm.exe"

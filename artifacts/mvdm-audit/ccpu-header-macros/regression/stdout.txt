@@ -1,0 +1,1 @@
+REGRESSION PASS four existing positive/negative runs; KNOWN FAILURE reproduced in both bit-memory packages, not repaired
