@@ -244,7 +244,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'guest-user-timer-image-role-':
+                if prefix == 'nine-part1-bin86-image-role-':
+                    assert path in ('bin86/ctl3dv2.dll', 'bin86/i386/win87em.dll', 'bin86/lanman.drv', 'bin86/lzexpand.dll', 'bin86/netapi.dll', 'bin86/olecli.dll', 'bin86/pmspl.dll', 'bin86/ver.dll', 'bin86/winhelp.exe') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
+                elif prefix == 'guest-user-timer-image-role-':
                     assert path in ('wow16/timer/TIMER.DRV', 'wow16/user/k/daytona/USER.EXE') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash
                 elif prefix == 'guest-package-image-family-role-':
                     assert path in ('dos/v86/cmd/fastopen/FASTOPEN.EXE', 'wow16/mmsystem/MMSYSTEM.DLL', 'wow16/rasapi16/RASAPI16.DLL', 'wow16/test/shell/WOWEXEC.EXE', 'wow16/winsock/WINSOCK.DLL') and proof['role'] == 'selected-guest-image-partial' and current_hash == original_hash

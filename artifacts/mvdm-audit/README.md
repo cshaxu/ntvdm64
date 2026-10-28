@@ -598,6 +598,8 @@ The [DOSX x86 input cohort](shard-0/dosx-x86-inputs-review.md) reconciles twelve
 
 The current [nine-way assignment](nine-way-plan.md) freezes all remaining MVDM file roles and external relevance rows, without changing the original physical ledger ownership or claiming those rows are resolved.
 
+The first [nine-way bin86 image cohort](nine-way/part-1/bin86-review.md) records nine original guest binaries matching the archive; their installed search paths and runtime behavior remain separate obligations.
+
 The [non-ROM read failure fixture](rom-read-failure-review.md) demonstrates an original-source oversized-input close omission with simulated file I/O and binds its reader to the released worker; actual session reachability remains open.
 
 Pre-partition reviews also record [ROM/CMOS resource identity](shard-1/rom-cmos-family-review.md), [SOUND import metadata](shard-2/sound-import-family-review.md), and [kernel bootstrap inputs](shard-3/kernel-boot-build-input-role-review.md), without guest runtime acceptance.

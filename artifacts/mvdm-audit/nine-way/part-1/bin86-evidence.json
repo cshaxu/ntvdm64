@@ -1,0 +1,483 @@
+{
+  "files": [
+    {
+      "key": "bin86/autoexec.nt",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/autoexec.nt",
+          "sha256": "c2a23a5fb96682c33d99c13a57e6f3c1e10dfd3d263d972775a8c42bfb6a9a9b"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\autoexec.nt",
+      "installed_sha256": "02fe323bf5af799e3117ebdc6138b7eafe14d0453ecb06855d18b2c2e21b9d28"
+    },
+    {
+      "key": "bin86/config.nt",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\config.nt",
+          "sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\config.nt",
+          "sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\config.nt",
+          "sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\config.nt",
+          "sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/config.nt",
+          "sha256": "6ae1e74e78de00c0fa03124e6f947d977c71f253855ad2af979554074aea189a"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\config.nt",
+      "installed_sha256": "b321e1d6fdc48d7c3f9f04109f8cfb9b83e0389d222cbbbd69168b6c3a35d8bb"
+    },
+    {
+      "key": "bin86/country.sys",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\country.sys",
+          "sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\country.sys",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\country.sys",
+          "sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\country.sys",
+          "sha256": "ba263d4276024a904ece68fe193f8ca6da928dc9b35f8948f69d458dbb6ac3d0"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/COUNTRY.SYS",
+          "sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\country.sys",
+      "installed_sha256": "9ddf2b738307b5950699513e6b8221e2044bb686487a8c216af7c6fd3f853b54"
+    },
+    {
+      "key": "bin86/ctl3dv2.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\ctl3dv2.dll",
+          "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/CTL3DV2.DLL",
+          "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\ctl3dv2.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/ctl3dv2.map",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\ctl3dv2.map",
+          "sha256": "862d762ce3ce3619ed3321d9eec69b8d5a1fbca42b52a9d914128a1e11d485c1"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ctl3dv2.map",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/i386/win87em.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\i386\\win87em.dll",
+          "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\i386\\win87em.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\i386\\win87em.dll",
+          "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\i386\\win87em.dll",
+          "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/WIN87EM.DLL",
+          "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\win87em.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/lanman.drv",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\lanman.drv",
+          "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\lanman.drv",
+          "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\lanman.drv",
+          "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\lanman.drv",
+          "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/LANMAN.DRV",
+          "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\lanman.drv",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/lzexpand.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\lzexpand.dll",
+          "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/LZEXPAND.DLL",
+          "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\lzexpand.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/netapi.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\netapi.dll",
+          "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\netapi.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\netapi.dll",
+          "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\netapi.dll",
+          "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/NETAPI.DLL",
+          "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\netapi.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/olecli.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\olecli.dll",
+          "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\olecli.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\olecli.dll",
+          "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\olecli.dll",
+          "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/OLECLI.DLL",
+          "sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\olecli.dll",
+      "installed_sha256": "f3a76752b6a257056ec43cd6d43da5a65244fc5c41f89e2162ef27634ece54b4"
+    },
+    {
+      "key": "bin86/pifedit.hlp",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\pifedit.hlp",
+          "sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\pifedit.hlp",
+          "sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\pifedit.hlp",
+          "sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\pifedit.hlp",
+          "sha256": "20bb0049acbeda2a403dd07204ec82102671fc97359691b0ed0009b33c3e788c"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\pifedit.hlp",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/pmspl.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\pmspl.dll",
+          "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\pmspl.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\pmspl.dll",
+          "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\pmspl.dll",
+          "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/PMSPL.DLL",
+          "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\pmspl.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/regedit.hlp",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\regedit.hlp",
+          "sha256": "1e857dcc7e9ea31b6b8232c8b5f973cbe2dffbdbca649756d2a77c520b1020e6"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\regedit.hlp",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/system.ini",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\system.ini",
+          "sha256": "6f533ccc79227e38f18bfc63bfc961ef4d3ee0e2bf33dd097ccf3548a12b743b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\system.ini",
+          "sha256": "6f533ccc79227e38f18bfc63bfc961ef4d3ee0e2bf33dd097ccf3548a12b743b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\system.ini",
+          "sha256": "6f533ccc79227e38f18bfc63bfc961ef4d3ee0e2bf33dd097ccf3548a12b743b"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\system.ini",
+          "sha256": "6f533ccc79227e38f18bfc63bfc961ef4d3ee0e2bf33dd097ccf3548a12b743b"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM.INI",
+          "sha256": "f20a94235712c26b0499d61e7cc080b612bbfe230de0c65a6832494fdbb1acaa"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\system.ini",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/ver.dll",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\ver.dll",
+          "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\ver.dll",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\ver.dll",
+          "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\ver.dll",
+          "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/VER.DLL",
+          "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\ver.dll",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/winhelp.exe",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\winhelp.exe",
+          "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\winhelp.exe",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\winhelp.exe",
+          "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\winhelp.exe",
+          "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/SYSTEM32/WINHELP.EXE",
+          "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\winhelp.exe",
+      "installed_sha256": null
+    },
+    {
+      "key": "bin86/write.hlp",
+      "identities": [
+        {
+          "path": "src\\mvdm\\bin86\\write.hlp",
+          "sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\bin86\\write.hlp",
+          "sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\bin86\\write.hlp",
+          "sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\bin86\\write.hlp",
+          "sha256": "b6b131a2fc1fcb7ad69ea7404fa35b46cf21549913293f3d412708fa8c138f67"
+        }
+      ],
+      "zip_entries": [
+        {
+          "path": "WINNT/WRITE.HLP",
+          "sha256": "c9606bf99b6e5ce0a72f7336adb593e3a7080a191d9428d01955cdb0b5824f11"
+        }
+      ],
+      "installed_path": "O:\\winnt\\system32\\write.hlp",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "Read-only ZIP basename and exact system32 path only; no runtime or source build provenance."
+}

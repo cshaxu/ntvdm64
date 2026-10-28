@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "2e3b00992",
+  "candidate_count": 9,
+  "source_tables": [
+    {
+      "path": "nine-way/part-1/bin86-evidence.json",
+      "sha256": "8C6349D1906B848D84527FA11BD18A2E96AC91D4C9FB159E04D91EDC665D5A40"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Guest archive identities only, not runtime acceptance"
+}
