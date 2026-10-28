@@ -53,3 +53,5 @@ S12 owns the isolated [DOS label boundary](../../../artifacts/mvdm-audit/shard-1
 S12 additionally retains the [FCB deletion failure branches](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-delete-review.md) as unconfirmed source risks. Exercise the actual DEM object with controlled attribute and enumeration failures before deciding whether a mirror exception is justified.
 
 S12 also owns the [FCB open metadata failure review](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-open-review.md): validate acquired-handle publication and retirement through the actual selected DEM object before deciding a mirror exception.
+
+S11/S13 own the [CCPU and C-VID VideoVector layout boundary](../../../artifacts/mvdm-audit/host-ch-scope/ccpu-evidgen-review.md): establish actual cross-object accesses, ownership and ABI before any repair; different declarations alone do not prove an executed defect.
