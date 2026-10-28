@@ -9,7 +9,7 @@ bde/bdeutil.c,shard-0/review.csv,pending,tool-or-scaffold-candidate,"standalone 
 bde/data.c,shard-2/file-audit.csv,pending,tool-or-scaffold-candidate,"standalone tool, debugger extension or scaffold; verify per-file ownership"
 bde/disasm.c,shard-2/file-audit.csv,pending,tool-or-scaffold-candidate,"standalone tool, debugger extension or scaffold; verify per-file ownership"
 bde/precomp.h,shard-3/file-review.csv,pending,tool-or-scaffold-candidate,"standalone tool, debugger extension or scaffold; verify per-file ownership"
-dbg/dbg.c,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+dbg/dbg.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmd.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmd.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/command/cmdconf.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

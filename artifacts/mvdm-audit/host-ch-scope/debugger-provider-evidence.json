@@ -1,0 +1,25 @@
+{
+  "source_identity": [
+    "5A3A207EFF1570908E270C737D12FB40FE66097895063136D17FE6B971494B90",
+    "5A3A207EFF1570908E270C737D12FB40FE66097895063136D17FE6B971494B90",
+    "5A3A207EFF1570908E270C737D12FB40FE66097895063136D17FE6B971494B90"
+  ],
+  "selected_object_sha256": "C4BA30469375AABA23DF15375B5F1794350B1F19A0DA312F5AF69185AF2B76E4",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "graph_edges": [
+    "build obj/mvdm-debugger/dbg.obj: cc_mvdm_debugger O$:/repos.hobby/ntvdm64/src/mvdm/dbg/dbg.c",
+    "build debugger-bindings.lib: lib obj/adapter-debugger/dbg_registers.obj obj/adapter-debugger/dbg_prompt.obj obj/mvdm-debugger/dbg.obj"
+  ],
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "map_lines": [
+    "0001:001760e0       _DBGDispatch               005770e0 f   debugger-bindings:dbg.obj",
+    "0001:00177270       _GetNormalContext          00578270 f   debugger-bindings:dbg.obj",
+    "0001:001774c0       _ModuleLoad                005784c0 f   debugger-bindings:dbg.obj",
+    "0001:001776e0       _SendVDMEvent              005786e0 f   debugger-bindings:dbg.obj",
+    "0002:00024b78       __sehtable$_SendVDMEvent   005afb78     debugger-bindings:dbg.obj"
+  ],
+  "demmisc_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+  "historical_ledger_sha256": "2C7C233E557867E62F73AF050509A5D4E18E66695C1B771AEFDFD64D0C12E744",
+  "historical_marker_present": true,
+  "limits": "Source/graph/map and historical ledger only; no current debugger execution or current install identity proof."
+}

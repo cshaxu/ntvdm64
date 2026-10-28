@@ -142,3 +142,5 @@ review. Preserve original guest bytes and the owner-approved host boundaries.
 S11/S12 also retain the [DPMI memory-provider comparison](host-dpmi/dpmi-query-selected-object-review.md): compare native-i386 and CPU40 pool reporting under low memory and fragmentation, and verify actual guest/task lifetime before declaring their semantics equivalent. The selected-object failure seam is not a live-worker failure.
 
 The [DPMI field comparison](host-dpmi/dpmi-query-provider-difference-review.md) records nine source-derived fields and the limits of the historical CPU40 guest oracle; synthetic examples do not prove production divergence.
+
+S12/S13 retain the [GFI functional handoff](host-inc/gfi-functional-handoff.md), including controlled close-failure state, real/test-owned media, provider ownership and separate SLAVEPC applicability; no observed seam failure is asserted as a customer reproduction.

@@ -69,3 +69,9 @@ The [local heap and multimedia follow-up](../host-wow/local-multimedia-declarati
 The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md) maps the 24 pending source roles to bounded S14–S17 recovery and verification groups. The [legacy dispatch handoff](../host-wow/legacy-dispatch-functional-handoff.md) separates original thunk families from obsolete declarations and unimplemented table entries.
 
 The [remaining WOW32 owner handoff](wow-remaining-owner-handoff.md), [legacy dispatch owners](../host-wow/legacy-dispatch-functional-handoff.md), and [excluded C source spot-check](excluded-host-c-source-spot-review.md) map pending and sampled physical roles to bounded recovery; their evidence does not establish full runtime coverage.
+
+The [memory/DPMI/CMOS exclusion review](excluded-memory-cmos-provider-review.md) checks five alternate physical source roles against their selected NT or CPU40 providers; remaining device and memory behavior stays in scope.
+
+The [GFI functional handoff](../host-inc/gfi-functional-handoff.md) separates real, empty and SLAVEPC providers and records bounded close-failure observations. The [excluded UI/video source review](excluded-ui-video-scaffold-review.md) examines physical roles without closing their selected functionality.
+
+The [selected debugger provider](debugger-provider-review.md) has a bounded historical real worker event witness. The [SAS/error/alternate CPU review](excluded-sas-error-altcpu-review.md) preserves functional obligations independently of source-role selection.

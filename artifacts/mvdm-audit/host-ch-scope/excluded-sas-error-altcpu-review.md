@@ -1,0 +1,12 @@
+# Excluded host C roles: SAS, error tables and alternate CPU diagnostics
+
+This audit continues the prior host C exclusion census. It checks the following nonempty physical source roles against current selection and original owners. No product, guest or shared ledger was modified; no dynamic memory, debug or error test was run in this pass.
+
+| Physical source | Original role and actual selected boundary | Remaining proof |
+| --- | --- | --- |
+| `softpc.new/host/src/nt_sas.c` | Generic host SAS initialization and functions are guarded by `HOST_SAS` (and some by `SUN_VA`). Existing `../memory-native-role-review.md` identifies selected CPU40 SAS initialization and connection in original `ccpusas4` instead; current worker profile does not select HOST_SAS/SUN_VA. | Keep guest read/write, mapping leases, A20, failure and termination under the actual CPU40 SAS owner. Profile-specific physical exclusion is not complete SAS acceptance. |
+| `softpc.new/host/src/nt_ertbl.c` | Generic `host_errors` severity/variant table. Original NT recipe omits the source; selected `nt_error`/`nt_nls` and NT resources are independently traced in `../input-native-role-review.md`. Source searches do not show an active NT `host_errors` provider use. | Error messages, locale, host choices, failure and lifecycle remain open; do not assume generic table semantics were tested or imported. |
+| `softpc.new/host/src/cpucstbs.c` | Original code is under `!MONITOR && A3CPU`; it supplies an alternate floating-point interrupt/cacheflush host path. Captured CPU40 x86 profile uses CCPU, not the A3CPU condition. | Current CPU/exception, x87 interrupts, code invalidation and guest behavior remain independently auditable; this alternate source's inactive role is not proof they work. |
+| `softpc.new/host/src/nt_hunt.c` | Original HUNTER-specific debug extension, omitted by the original NT recipe; `../host-tail-role-review.md` ties this exclusion to the profile. | Do not use that physical-file result to exclude all debugger, fault or error paths; requested diagnostic profile scope remains separate. |
+
+For these four cases, the existing physical exclusions are explainable on source/profile evidence and no unconditional bad exclusion was established. This statement is bounded: no claim that selected alternative failure and lifecycle behavior is complete, and no attempt to restore an alternate host/CPU runtime or private NT monitor was made.
