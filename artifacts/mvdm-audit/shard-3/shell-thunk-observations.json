@@ -1,0 +1,41 @@
+{
+  "inc/WOWSHELL.INC": {
+    "current": "151845a03d19d5e41194e37b03e38038a150313c843d32b26ee8bd70105c3deb",
+    "opennt": "151845a03d19d5e41194e37b03e38038a150313c843d32b26ee8bd70105c3deb",
+    "opennt45": "151845a03d19d5e41194e37b03e38038a150313c843d32b26ee8bd70105c3deb"
+  },
+  "wow32/wshltbl.h": {
+    "current": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+    "opennt": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+    "opennt45": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d"
+  },
+  "wow32/wshtbl2.h": {
+    "current": "84f782a33328812bf9e639eae9f99236941e8bf19ea4c3328d8e8f9f3074e29f",
+    "opennt": "84f782a33328812bf9e639eae9f99236941e8bf19ea4c3328d8e8f9f3074e29f",
+    "opennt45": "84f782a33328812bf9e639eae9f99236941e8bf19ea4c3328d8e8f9f3074e29f"
+  },
+  "wow32/wshell.c": {
+    "current": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+    "opennt": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+    "opennt45": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40"
+  },
+  "wow16/shell/shell.asm": {
+    "current": "c5260df05bd3a224eb9711348837c6b7a15540f9974529d2d1f11bef5dfaf8d3",
+    "opennt": "c5260df05bd3a224eb9711348837c6b7a15540f9974529d2d1f11bef5dfaf8d3",
+    "opennt45": "c5260df05bd3a224eb9711348837c6b7a15540f9974529d2d1f11bef5dfaf8d3"
+  },
+  "wow32/wowtbl.c": {
+    "current": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt45": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960"
+  },
+  "map": {
+    "sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+    "lines": [
+      " 0001:0001b950       _W32ShellExecuteCallBack@8 1001c950 f   wshell.obj",
+      " 0001:0001bf10       _WS32RegOpenKey@4          1001cf10 f   wshell.obj",
+      " 0001:0001c2c0       _WS32ShellExecute@4        1001d2c0 f   wshell.obj"
+    ]
+  },
+  "project_callback_sha256": "255792a7d691bafb4eae847035edf0d2f372984d1cb9f5a8d0545d3d2e68e8f4"
+}

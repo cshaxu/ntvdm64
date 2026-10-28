@@ -1,0 +1,14 @@
+# Win16 Shell thunk declarations and ShellExecute callback — shard 3
+
+Two pending shard 3 inputs are `inc/WOWSHELL.INC` and `wow32/wshltbl.h`. `shell-thunk-observer.py` and captured JSON provide reproducible SHA-256 comparisons of them and four related sources with both original editions, plus existing map lines and project adapter hash. All six selected original source files match both references; the project adapter is a separate local implementation. No build, guest change, program launch or test was performed.
+
+Original source chain: `wow16/shell/shell.asm:27,105` includes WOWSHELL.INC and supplies SHELLEXECUTE thunk; `shell.def:22` names ordinal 20, matching `inc/WOWSHELL.INC:12,98-105`. `wow32/wowtbl.c:57` includes `wshtbl2.h`, whose ShellExecute entry calls `WS32ShellExecute` (`wshtbl2.h:38`). `wshell.c:791-827` maps four guest strings, calls WOWShellExecute and releases them. Its callback at `:832-854` updates DOS current directory, allocates a 16-bit command buffer, calls back through `RET_WINEXEC` and frees that buffer. The map snapshot includes both shell entry and callback under wshell.obj, but is not bound to the current released DLL by this analysis.
+
+The selected build applies `/DWOWShellExecute=wow_shell_execute` (`tools/build/New-T404S5Wow32ProviderNinja.ps1:446`); project `src/wow32-dll/source/wow_shell_callback.c` resolves host `shell32.dll` export and adapts its three-argument callback to the two-argument original via thread-local saved callback and a `__finally` restoration. Missing export reports SE_ERR_DLLNOTFOUND. This is a material boundary despite unchanged original shell files. `docs/etc/evidence/m0-t447-s2-scope-freeze.md:79` explicitly records an older exception/guest retirement limitation; do not interpret it as a current regression without current proof, nor as complete coverage. Broader callback execution and exception results require current evidence.
+
+| file | disposition | remaining boundary |
+|---|---|---|
+| `inc/WOWSHELL.INC` | pending | original guest declarations and ordinal use established; no source-to-deployed guest assembly, full ordinal/structure equivalence, nested callback or lifecycle execution proof here. |
+| `wow32/wshltbl.h` | pending | original declarations included by `wow32.c:31`; its `aw32Shell` declaration does not by itself prove that symbol is referenced, nor that an independently defined table is used. Actual active table originates in `wowtbl.c`/`wshtbl2.h`; do not infer restoration or exclusion from the header alone. |
+
+Cross-shard implementation `wshell.c` is owned by shard 0 and `wshtbl2.h` by shard 2. Source identity, historical map and earlier callback evidence do not establish all guest paths, host export availability, callback reentrancy, exception cleanup, returned handle mapping or failed string allocation behavior. No restoration percentage is asserted.

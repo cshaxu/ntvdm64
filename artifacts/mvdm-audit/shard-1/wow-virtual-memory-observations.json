@@ -1,0 +1,132 @@
+{
+  "result": "pass",
+  "source": "wow32/wkmem.c",
+  "sha256": "9D0FAE5E7719398D5D9776602664D5F9A0DD4BDD81E79616AD848035007D4722",
+  "catalog_ids": "SRC:8270d4e59c7b0d7bcd93;SRC:f16adada09d1c159e65c",
+  "build_edge": "build obj/wkmem.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wkmem.c",
+  "thunks": [
+    {
+      "binding": {
+        "name": "_WK32VirtualAlloc@4",
+        "va": 268519664,
+        "function": true,
+        "owner": "wkmem.obj",
+        "bytes": 70,
+        "relocation_words": 2
+      },
+      "edges": [
+        {
+          "symbol": "_VdmAllocateVirtualMemory",
+          "owner": "ntvdm:ntvdm.exe",
+          "relocation_type": 20
+        },
+        {
+          "symbol": "__imp__VirtualAlloc@16",
+          "owner": "kernel32:KERNEL32.dll",
+          "relocation_type": 6
+        }
+      ]
+    },
+    {
+      "binding": {
+        "name": "_WK32VirtualFree@4",
+        "va": 268519744,
+        "function": true,
+        "owner": "wkmem.obj",
+        "bytes": 55,
+        "relocation_words": 2
+      },
+      "edges": [
+        {
+          "symbol": "_VdmFreeVirtualMemory",
+          "owner": "ntvdm:ntvdm.exe",
+          "relocation_type": 20
+        },
+        {
+          "symbol": "__imp__VirtualFree@12",
+          "owner": "kernel32:KERNEL32.dll",
+          "relocation_type": 6
+        }
+      ]
+    },
+    {
+      "binding": {
+        "name": "_WK32GlobalMemoryStatus@4",
+        "va": 268519632,
+        "function": true,
+        "owner": "wkmem.obj",
+        "bytes": 22,
+        "relocation_words": 2
+      },
+      "edges": [
+        {
+          "symbol": "_GetPModeVDMPointerAssert@4",
+          "owner": "wow32.obj",
+          "relocation_type": 20
+        },
+        {
+          "symbol": "__imp__GlobalMemoryStatus@4",
+          "owner": "kernel32:KERNEL32.dll",
+          "relocation_type": 6
+        }
+      ]
+    }
+  ],
+  "worker_map_providers": [
+    {
+      "name": "_VdmAllocateVirtualMemory",
+      "va": 4529616,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_mem.obj"
+    },
+    {
+      "name": "_VdmFreeVirtualMemory",
+      "va": 4530240,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_mem.obj"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wkmem.c",
+      "sha256": "9D0FAE5E7719398D5D9776602664D5F9A0DD4BDD81E79616AD848035007D4722"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkmem.c",
+      "sha256": "9D0FAE5E7719398D5D9776602664D5F9A0DD4BDD81E79616AD848035007D4722"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wkmem.c",
+      "sha256": "9D0FAE5E7719398D5D9776602664D5F9A0DD4BDD81E79616AD848035007D4722"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkmem.obj",
+      "sha256": "4CEBA4C2C67A940EF51E4ED06D0C65DEEFDAEBD20A17F09BECED01E00F9A6955"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+      "sha256": "6ABEA408AEF77B1B45C87065F14D56FF046D87C0B52CBFA2534011DB0270D1B1"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wktbl2.h",
+      "sha256": "906A9371263F08CA073AA74D0F87B57076C21FDEA5587B930398582B7C16B6F9"
+    }
+  ],
+  "limitations": "Static linked-code proof, not allocation execution, cross-image identity, stress, host failure injection, or guest lifetime proof."
+}

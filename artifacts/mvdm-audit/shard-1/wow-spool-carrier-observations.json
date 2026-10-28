@@ -1,0 +1,141 @@
+{
+  "result": "pass",
+  "source": "wow32/wspool.c",
+  "source_sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8",
+  "catalog_ids": "SRC:9c4d7103c4ced5c3f379;SRC:aeda5e9720ffcb6e2b6b",
+  "build_edge": "build obj/wspool.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wspool.c",
+  "functions": [
+    {
+      "name": "_FreePrn@4",
+      "va": 268639744,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 26,
+      "relocation_words": 2
+    },
+    {
+      "name": "_GetDefaultDevMode32@4",
+      "va": 268639776,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 129,
+      "relocation_words": 8
+    },
+    {
+      "name": "_GetDriverName@8",
+      "va": 268639920,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 225,
+      "relocation_words": 11
+    },
+    {
+      "name": "_GetPrn16@4",
+      "va": 268640160,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 59,
+      "relocation_words": 5
+    },
+    {
+      "name": "_Prn32@4",
+      "va": 268640224,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 80,
+      "relocation_words": 5
+    },
+    {
+      "name": "_WG32CloseJob@4",
+      "va": 268640304,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 215,
+      "relocation_words": 15
+    },
+    {
+      "name": "_WG32DeleteJob@4",
+      "va": 268640528,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 96,
+      "relocation_words": 7
+    },
+    {
+      "name": "_WG32EndSpoolPage@4",
+      "va": 268640624,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 96,
+      "relocation_words": 7
+    },
+    {
+      "name": "_WG32OpenJob@4",
+      "va": 268640720,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 598,
+      "relocation_words": 34
+    },
+    {
+      "name": "_WG32StartSpoolPage@4",
+      "va": 268641328,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 96,
+      "relocation_words": 7
+    },
+    {
+      "name": "_WG32WriteSpool@4",
+      "va": 268641424,
+      "function": true,
+      "owner": "wspool.obj",
+      "bytes": 139,
+      "relocation_words": 8
+    }
+  ],
+  "internal_edges": [],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wspool.c",
+      "sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.c",
+      "sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wspool.c",
+      "sha256": "C76BEC31AE9020EA0173C20D42986F36E6888A315A5D27E91E5CBF2579CB2AD8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wspool.obj",
+      "sha256": "1602044DC933EE008403820007A5C7B6C570163E3136F95B685054780EC582A1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wgtbl2.h",
+      "sha256": "DACD3DAD507BF731B23F4CD80BA402027DD9727B3E2B15D9EC33F0764BBDBD07"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\walias.h",
+      "sha256": "82EAA15BE034F7C56C8030C8033D523A0A5BDDD26C54A9E08C3A0FA170311612"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wuwind.c",
+      "sha256": "7833FA05F1C91129F88C6D625BB4C104801901806BF9B0B4EE40DED820A45CEF"
+    }
+  ],
+  "limitations": "Static image/source binding only; no actual spool provider, long profile name, allocation failure, task loss, or deferred positioning execution."
+}

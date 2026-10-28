@@ -1,0 +1,81 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/timer/libinit.asm",
+      "hashes": [
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262",
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262",
+        "EFAEA505F8E21C68E0790C8430AF5498775104B825532CD05BB4A6B479A0F262"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/timer/local.asm",
+      "hashes": [
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933",
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933",
+        "30A1698384F8FF3E2AE5D0C97B4C4CAF525CA1854C5D885D7F883C0C2618F933"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/timer/math.asm",
+      "hashes": [
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317",
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317",
+        "7E6CA6CC7AD7B30758FBD82FC96382D3C7B398DED973786C27C40EFB8FC81317"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/timer/sysinfo.inc",
+      "hashes": [
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F",
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F",
+        "24A8BD23FDC0BEB4BB237966AF2296AA04B5F3D842F7A74C49F61841EF5EF92F"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/timer/TIMER.DRV",
+      "hashes": [
+        "4567FA8B0A10A7B3DE47C9366E0A1ACFEAF55D1E12387E76C89BBF474B914E5D",
+        "4567FA8B0A10A7B3DE47C9366E0A1ACFEAF55D1E12387E76C89BBF474B914E5D",
+        "4567FA8B0A10A7B3DE47C9366E0A1ACFEAF55D1E12387E76C89BBF474B914E5D"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/timer/timer.inc",
+      "hashes": [
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D",
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D",
+        "A5929F2DB4B3EEB61193D4078BB6ED5AE1DE604E8F10CDEB1F3FCA3EBA3C085D"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\timer\\makefile",
+      "sha256": "3A98A2B07A68CE4BAD5FAC4D592480D6FA77C0CEB14F5F2E2AF692419C5B7112"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\timer\\timer.def",
+      "sha256": "F8DBE3201B9632C96B7E1EFEE9533063149FBD4650CCD966CDDC155621615991"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/TIMER.DRV",
+  "image_sha256": "4567FA8B0A10A7B3DE47C9366E0A1ACFEAF55D1E12387E76C89BBF474B914E5D",
+  "installed_path": "O:\\winnt\\system32\\TIMER.DRV",
+  "installed_sha256": "",
+  "scope": "Historical guest source and package identity; no runtime or build lineage claim"
+}

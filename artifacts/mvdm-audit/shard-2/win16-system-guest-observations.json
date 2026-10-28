@@ -1,0 +1,98 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "wow16/system/romsys.def",
+      "hashes": [
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B",
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B",
+        "49B045478AD84D37B3176E6889F92E116F56B880A26FFA81851C43E9ED940E8B"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/system/system",
+      "hashes": [
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63",
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63",
+        "440EA1B0A988F57A50D61317D23F9FB5D58042E370D32E029890D1EB3D16CC63"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/system/system.lrf",
+      "hashes": [
+        "CD6A2239FF01CAE1161B4BD685B1245CB915CB6E7551325911996800B0F989AF",
+        "",
+        ""
+      ],
+      "dos_catalog_rows": "0",
+      "wow_catalog_rows": "0"
+    },
+    {
+      "path": "wow16/system/system.rcv",
+      "hashes": [
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1",
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1",
+        "BD0A53FAF270B5CC6CB15CD523976CD5766E60C046FE907E2EA5CDFDBE8791C1"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/system/vecsys.inc",
+      "hashes": [
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66",
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66",
+        "11EFA3C6083911995922A5AF03C50415B04F7EBED3F821ED378B68F6D5DE7A66"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "wow16/system/windefs.inc",
+      "hashes": [
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1",
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1",
+        "693D86727B3E16986C3D73309AA05E5720BC1E4F9594E5FE282768EEECC449A1"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\system\\makefile",
+      "sha256": "5612B1329655BD6D171F4EBAF62BFAA0C3F4D9764CFEE6F1D9F54628BF6FD1BC"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\romsys",
+      "sha256": "BAA24D29817FC20C8B435650F119EA5E4B38D46A61DD6D6FC9C63D99000CCA27"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\hpsystem",
+      "sha256": "4CDD82D29FC078410F1C9ABECDCD887EC11709014AA3A69CC5557F23526AA41B"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\envect.asm",
+      "sha256": "09C947FF2F204128A89DEEA9053E7E9C118C1F18FB083E071899BB33DBE4AF4C"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\system.inc",
+      "sha256": "1273C5EAAD79946269D91EB446BB6D5CD0F7CCD964E4C83BDAAA166A7B5C8F5C"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\system\\system.rc",
+      "sha256": "8FB9D34E0FAD4F69BB365F7CC72181903808481461C96369921DD19B67349889"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/SYSTEM.DRV",
+  "archive_image_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+  "source_image_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+  "installed_path": "O:\\winnt\\system32\\SYSTEM.DRV",
+  "installed_sha256": "32D88D68FD5DAE0F37766DB04742CAA912C9A4C7193D15A1E99E617FF6F794A3",
+  "scope": "Historical guest build variants and binary identity; no guest runtime or image provenance claim"
+}

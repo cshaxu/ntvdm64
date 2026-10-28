@@ -1,6 +1,6 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 20 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 28 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).
@@ -22,3 +22,11 @@ The coordinator independently replayed all 20 observers against their retained J
 - [winsock-abi](shard-3/winsock-abi-role-review.md): [observer](shard-3/winsock-abi-observer.py), [receipt](shard-3/winsock-abi-observations.json).
 - [wowexec-ole-input](shard-3/wowexec-ole-input-role-review.md): [observer](shard-3/wowexec-ole-input-observer.py), [receipt](shard-3/wowexec-ole-input-observations.json).
 - [write-source](shard-3/write-source-role-review.md): [observer](shard-3/write-source-observer.py), [receipt](shard-3/write-source-observations.json).
+- [wow-mci-image](shard-1/wow-mci-image-review.md): [observer](shard-1/wow-mci-image-observer.py), [receipt](shard-1/wow-mci-image-observations.json).
+- [wow-spool-carrier](shard-1/wow-spool-carrier-review.md): [observer](shard-1/wow-spool-carrier-observer.py), [receipt](shard-1/wow-spool-carrier-observations.json).
+- [wow-virtual-memory](shard-1/wow-virtual-memory-review.md): [observer](shard-1/wow-virtual-memory-observer.py), [receipt](shard-1/wow-virtual-memory-observations.json).
+- [win16-commdlg-guest](shard-2/win16-commdlg-guest-review.md): [observer](shard-2/win16-commdlg-guest-observer.py), [receipt](shard-2/win16-commdlg-guest-observations.json).
+- [win16-system-guest](shard-2/win16-system-guest-review.md): [observer](shard-2/win16-system-guest-observer.py), [receipt](shard-2/win16-system-guest-observations.json).
+- [win16-timer-guest](shard-2/win16-timer-guest-review.md): [observer](shard-2/win16-timer-guest-observer.py), [receipt](shard-2/win16-timer-guest-observations.json).
+- [multimedia-guest-abi](shard-3/multimedia-guest-abi-role-review.md): [observer](shard-3/multimedia-guest-abi-observer.py), [receipt](shard-3/multimedia-guest-abi-observations.json).
+- [shell-thunk](shard-3/shell-thunk-role-review.md): [observer](shard-3/shell-thunk-observer.py), [receipt](shard-3/shell-thunk-observations.json).
