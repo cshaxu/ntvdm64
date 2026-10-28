@@ -26,4 +26,3 @@ def inspect():
  installed=Path('O:/winnt/system32/USER.EXE');image=d/'k/daytona/USER.EXE';assert installed.exists() and sha(installed)==sha(image)==zsha
  return dict(result='pass',ledger_sha256=sha(A/'shard-1/file-audit.csv'),entries=entries,recipe_inputs=[dict(path=str(d/n),sha256=sha(d/n)) for n in refs],host_graphs=[dict(path=str(b),sha256=sha(b/'build.ninja')) for b in graphs],guest_image=dict(source=str(image),source_sha256=sha(image),installed_sha256=sha(installed),zip_member=names[0],zip_sha256=zsha),limitations='Original source/list, selected graphs and package identity only; no guest source-image lineage, alternate profile resolution, USER execution or feature equivalence proof.')
 if __name__=='__main__':print(json.dumps(inspect(),indent=2))
-
