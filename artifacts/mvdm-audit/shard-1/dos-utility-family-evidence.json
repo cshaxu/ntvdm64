@@ -1,0 +1,173 @@
+{
+  "files": [
+    {
+      "path": "cmd/loadfix/loadfix.exc",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\cmd\\loadfix\\loadfix.exc",
+          "sha256": "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\loadfix\\loadfix.exc",
+          "sha256": "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\cmd\\loadfix\\loadfix.exc",
+          "sha256": "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\cmd\\loadfix\\loadfix.exc",
+          "sha256": "4916d7c867f27d6459ff602caeb1a751d2b6d9b5584ecccc808160d8eb49489b"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\loadfix.exc",
+      "installed_sha256": null
+    },
+    {
+      "path": "cmd/mem/mem.tag",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\cmd\\mem\\mem.tag",
+          "sha256": "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\mem\\mem.tag",
+          "sha256": "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\cmd\\mem\\mem.tag",
+          "sha256": "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\cmd\\mem\\mem.tag",
+          "sha256": "fd6aa9acb019d2032263843c79b332d06883e5383e99b598e8f831b31422ef45"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\mem.tag",
+      "installed_sha256": null
+    },
+    {
+      "path": "cmd/qbasic/nibbles.bas",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\nibbles.bas",
+          "sha256": "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\qbasic\\nibbles.bas",
+          "sha256": "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\cmd\\qbasic\\nibbles.bas",
+          "sha256": "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\cmd\\qbasic\\nibbles.bas",
+          "sha256": "24017f3b84e5e072090ab55b76700feaec197c5b12ebb26432bce3b2e88e8528"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\nibbles.bas",
+      "installed_sha256": null
+    },
+    {
+      "path": "cmd/qbasic/remline.bas",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\cmd\\qbasic\\remline.bas",
+          "sha256": "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\qbasic\\remline.bas",
+          "sha256": "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\cmd\\qbasic\\remline.bas",
+          "sha256": "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\cmd\\qbasic\\remline.bas",
+          "sha256": "b1b9b3b3c70026ed01a47c88319c9bd1bb392e55575a9dec7e87230a36799ac5"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\remline.bas",
+      "installed_sha256": null
+    },
+    {
+      "path": "cmd/share/share.EXE",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\cmd\\share\\share.EXE",
+          "sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\share\\share.EXE",
+          "sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\cmd\\share\\share.EXE",
+          "sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc"
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\cmd\\share\\share.EXE",
+          "sha256": "69dabbdb754b358ac4fe4b22de04c0e4c93076816f14bb0730caa9fd223996fc"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\share.EXE",
+      "installed_sha256": null
+    },
+    {
+      "path": "dev/ansi/ANSI.EXS",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.EXS",
+          "sha256": "09d886e1d050bc7bf4afd49e21ca22300c8e739ae8eb8d51a3b83926541c24a8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.EXS",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.EXS",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\ansi\\ANSI.EXS",
+          "sha256": "09d886e1d050bc7bf4afd49e21ca22300c8e739ae8eb8d51a3b83926541c24a8"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\ANSI.EXS",
+      "installed_sha256": null
+    },
+    {
+      "path": "dev/himem/HIMEM.BIN",
+      "source_and_refs": [
+        {
+          "path": "src\\mvdm\\dos\\v86\\dev\\himem\\HIMEM.BIN",
+          "sha256": "d873abddad195149c0354a67c3c050685c92fab5ef330f8365cb8f5b242018c8"
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\dev\\himem\\HIMEM.BIN",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\dos\\v86\\dev\\himem\\HIMEM.BIN",
+          "sha256": null
+        },
+        {
+          "path": "O:\\repos.external\\opennt-src-2\\nt\\private\\mvdm\\dos\\v86\\dev\\himem\\HIMEM.BIN",
+          "sha256": "d873abddad195149c0354a67c3c050685c92fab5ef330f8365cb8f5b242018c8"
+        }
+      ],
+      "zip_entries": [],
+      "installed_path": "O:\\winnt\\system32\\HIMEM.BIN",
+      "installed_sha256": null
+    }
+  ],
+  "limitations": "No guest execution; ZIP basename and installed system32 only."
+}

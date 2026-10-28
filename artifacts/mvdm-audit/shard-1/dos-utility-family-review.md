@@ -1,0 +1,15 @@
+# S10 shard 1: DOS utility, sample and device-build artifacts
+
+Seven pending paths were compared with original source trees, ZIP entries and exact system32 installed names. Full per-item SHA-256 and paths, including a third OpenNT source mirror for two intermediates, are in `dos-utility-family-evidence.json`; replay `PYTHONDONTWRITEBYTECODE=1 python -B artifacts/mvdm-audit/shard-1/dos-utility-family-observer.py`. No guest build or execution occurred.
+
+| Path | Role and precise disposition boundary |
+| --- | --- |
+| cmd/loadfix/loadfix.exc | Linked DOS intermediate, identical in both primary original editions. LOADFIX makefile selects it and make.inc `.exc.com` invokes reloc to produce LOADFIX.COM. That target exists in ZIP and system32 with matching full hashes to each other, but this does not prove either was generated from this EXC. EXC basename not packaged/installed. |
+| cmd/mem/mem.tag | Human-readable historical MEM change log, identical in both primary originals; no same-basename ZIP/system32 match. Not executable evidence of MEM behavior. |
+| cmd/qbasic/nibbles.bas | BASIC sample program, identical in both originals; no same-basename ZIP/system32 match. QBASIC.EXE exists as ZIP `WINNT/QBASIC.EXE`, not at exact system32 path. No BASIC execution or path search performed. |
+| cmd/qbasic/remline.bas | BASIC line-number removal utility source, identical in both originals; no same-basename ZIP/system32 match. Its own header describes possible .BAK creation, but it was not executed and no user files touched. |
+| cmd/share/share.EXE | Original DOS SHARE executable matching both reference editions; original makefile selects share.asm and share.lnk. No same-basename ZIP/system32 match; this does not prove absence of all file sharing or alternative paths. |
+| dev/ansi/ANSI.EXS | Historical linked intermediate, absent from both primary comparison paths but byte-identical to `O:/repos.external/opennt-src-2/nt/private/mvdm/dos/v86/dev/ansi/ANSI.EXS`. Original ANSI makefile links ansi.exs then `.exs.sys` rule relocates it to ANSI.SYS. Neither same EXS basename nor ANSI.SYS was found in ZIP/system32 scans; no generated-image lineage or console behavior proven. |
+| dev/himem/HIMEM.BIN | Historical relocated intermediate, absent from the primary reference paths but byte-identical to third OpenNT source mirror. HIMEM makefile produces himem.bin by reloc then applies stripdd for HIMEM.SYS. HIMEM.SYS exists in ZIP and system32 with matching hashes to each other, not proof of lineage from this BIN. See shard-2 `dos-himem-exe-review.md` for separate provider/image limits. |
+
+All negative installed observations are restricted to exact `O:/winnt/system32/<basename>` and ZIP basename search; QBASIC's ZIP location differs. A recipe describes intended build, not empirical provenance of a binary. No device functionality, sample execution, errors, memory/handle lifetime or alternate media was tested. No product, guest, build tree, configuration or shared ledger modified.

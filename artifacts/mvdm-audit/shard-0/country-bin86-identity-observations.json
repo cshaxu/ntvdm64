@@ -1,0 +1,1989 @@
+{
+  "result": "pass",
+  "retained": {
+    "path": "src\\mvdm\\bin86\\country.sys",
+    "sha256": "BA263D4276024A904ECE68FE193F8CA6DA928DC9B35F8948F69D458DBB6AC3D0",
+    "size": 17069,
+    "entries": [
+      {
+        "country": 1,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2065
+      },
+      {
+        "country": 1,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2115
+      },
+      {
+        "country": 44,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 865
+      },
+      {
+        "country": 44,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 915
+      },
+      {
+        "country": 33,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 965
+      },
+      {
+        "country": 33,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1015
+      },
+      {
+        "country": 49,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1065
+      },
+      {
+        "country": 49,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1115
+      },
+      {
+        "country": 34,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1215
+      },
+      {
+        "country": 34,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1165
+      },
+      {
+        "country": 39,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1265
+      },
+      {
+        "country": 39,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1315
+      },
+      {
+        "country": 46,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1365
+      },
+      {
+        "country": 46,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1415
+      },
+      {
+        "country": 45,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1465
+      },
+      {
+        "country": 45,
+        "codepage": 865,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1515
+      },
+      {
+        "country": 41,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1615
+      },
+      {
+        "country": 41,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1565
+      },
+      {
+        "country": 47,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1715
+      },
+      {
+        "country": 47,
+        "codepage": 865,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1665
+      },
+      {
+        "country": 31,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1765
+      },
+      {
+        "country": 31,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1815
+      },
+      {
+        "country": 32,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1915
+      },
+      {
+        "country": 32,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1865
+      },
+      {
+        "country": 358,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2015
+      },
+      {
+        "country": 358,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1965
+      },
+      {
+        "country": 972,
+        "codepage": 862,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2165
+      },
+      {
+        "country": 972,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2215
+      },
+      {
+        "country": 2,
+        "codepage": 863,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2265
+      },
+      {
+        "country": 2,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2315
+      },
+      {
+        "country": 785,
+        "codepage": 864,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2365
+      },
+      {
+        "country": 785,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2415
+      },
+      {
+        "country": 351,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2515
+      },
+      {
+        "country": 351,
+        "codepage": 860,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2465
+      },
+      {
+        "country": 3,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2615
+      },
+      {
+        "country": 3,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2565
+      },
+      {
+        "country": 61,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3065
+      },
+      {
+        "country": 61,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3115
+      },
+      {
+        "country": 81,
+        "codepage": 932,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2665
+      },
+      {
+        "country": 81,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2715
+      },
+      {
+        "country": 82,
+        "codepage": 934,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2765
+      },
+      {
+        "country": 82,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2815
+      },
+      {
+        "country": 86,
+        "codepage": 936,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2865
+      },
+      {
+        "country": 86,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2915
+      },
+      {
+        "country": 88,
+        "codepage": 938,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2965
+      },
+      {
+        "country": 88,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3015
+      },
+      {
+        "country": 55,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3165
+      },
+      {
+        "country": 55,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3215
+      },
+      {
+        "country": 354,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3315
+      },
+      {
+        "country": 354,
+        "codepage": 861,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3265
+      },
+      {
+        "country": 90,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3365
+      },
+      {
+        "country": 90,
+        "codepage": 857,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3415
+      },
+      {
+        "country": 38,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3515
+      },
+      {
+        "country": 38,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3465
+      },
+      {
+        "country": 42,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3615
+      },
+      {
+        "country": 42,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3565
+      },
+      {
+        "country": 48,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3815
+      },
+      {
+        "country": 48,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3765
+      },
+      {
+        "country": 36,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3915
+      },
+      {
+        "country": 36,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3865
+      }
+    ]
+  },
+  "installed": {
+    "path": "O:/winnt/system32/COUNTRY.SYS",
+    "sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54",
+    "size": 27097,
+    "entries": [
+      {
+        "country": 355,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1817
+      },
+      {
+        "country": 355,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1867
+      },
+      {
+        "country": 54,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2017
+      },
+      {
+        "country": 54,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2067
+      },
+      {
+        "country": 61,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2117
+      },
+      {
+        "country": 61,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2167
+      },
+      {
+        "country": 43,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2217
+      },
+      {
+        "country": 43,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2267
+      },
+      {
+        "country": 32,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2317
+      },
+      {
+        "country": 32,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2367
+      },
+      {
+        "country": 387,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2417
+      },
+      {
+        "country": 387,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2467
+      },
+      {
+        "country": 55,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2517
+      },
+      {
+        "country": 55,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2567
+      },
+      {
+        "country": 35,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2617
+      },
+      {
+        "country": 35,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2667
+      },
+      {
+        "country": 359,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2717
+      },
+      {
+        "country": 359,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2767
+      },
+      {
+        "country": 2,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2817
+      },
+      {
+        "country": 2,
+        "codepage": 863,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2867
+      },
+      {
+        "country": 4,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2917
+      },
+      {
+        "country": 4,
+        "codepage": 863,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 2967
+      },
+      {
+        "country": 56,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3017
+      },
+      {
+        "country": 56,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3067
+      },
+      {
+        "country": 57,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3117
+      },
+      {
+        "country": 57,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3167
+      },
+      {
+        "country": 384,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3217
+      },
+      {
+        "country": 384,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3267
+      },
+      {
+        "country": 42,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3317
+      },
+      {
+        "country": 42,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3367
+      },
+      {
+        "country": 593,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3517
+      },
+      {
+        "country": 593,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3567
+      },
+      {
+        "country": 45,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3417
+      },
+      {
+        "country": 45,
+        "codepage": 865,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3467
+      },
+      {
+        "country": 358,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3617
+      },
+      {
+        "country": 358,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3667
+      },
+      {
+        "country": 33,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3717
+      },
+      {
+        "country": 33,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3767
+      },
+      {
+        "country": 49,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3817
+      },
+      {
+        "country": 49,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3867
+      },
+      {
+        "country": 30,
+        "codepage": 869,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3917
+      },
+      {
+        "country": 30,
+        "codepage": 737,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 3967
+      },
+      {
+        "country": 30,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4017
+      },
+      {
+        "country": 852,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4067
+      },
+      {
+        "country": 36,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4117
+      },
+      {
+        "country": 36,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4167
+      },
+      {
+        "country": 354,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4217
+      },
+      {
+        "country": 354,
+        "codepage": 861,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4267
+      },
+      {
+        "country": 91,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4517
+      },
+      {
+        "country": 61,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4317
+      },
+      {
+        "country": 61,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4367
+      },
+      {
+        "country": 39,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4667
+      },
+      {
+        "country": 39,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4717
+      },
+      {
+        "country": 353,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4417
+      },
+      {
+        "country": 353,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4467
+      },
+      {
+        "country": 3,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5017
+      },
+      {
+        "country": 3,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5067
+      },
+      {
+        "country": 389,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5117
+      },
+      {
+        "country": 389,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5167
+      },
+      {
+        "country": 60,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5217
+      },
+      {
+        "country": 52,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5267
+      },
+      {
+        "country": 52,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5317
+      },
+      {
+        "country": 31,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5367
+      },
+      {
+        "country": 31,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5417
+      },
+      {
+        "country": 64,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5467
+      },
+      {
+        "country": 64,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5517
+      },
+      {
+        "country": 47,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5567
+      },
+      {
+        "country": 47,
+        "codepage": 865,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5617
+      },
+      {
+        "country": 48,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5767
+      },
+      {
+        "country": 48,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5817
+      },
+      {
+        "country": 351,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5867
+      },
+      {
+        "country": 351,
+        "codepage": 860,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5917
+      },
+      {
+        "country": 40,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5967
+      },
+      {
+        "country": 40,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6017
+      },
+      {
+        "country": 7,
+        "codepage": 866,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6067
+      },
+      {
+        "country": 7,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6117
+      },
+      {
+        "country": 7,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6167
+      },
+      {
+        "country": 7,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6217
+      },
+      {
+        "country": 7,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6267
+      },
+      {
+        "country": 381,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6317
+      },
+      {
+        "country": 381,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6367
+      },
+      {
+        "country": 65,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6417
+      },
+      {
+        "country": 421,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6467
+      },
+      {
+        "country": 421,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6517
+      },
+      {
+        "country": 386,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6567
+      },
+      {
+        "country": 386,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6617
+      },
+      {
+        "country": 27,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6667
+      },
+      {
+        "country": 27,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6717
+      },
+      {
+        "country": 34,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6767
+      },
+      {
+        "country": 34,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6817
+      },
+      {
+        "country": 46,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6867
+      },
+      {
+        "country": 46,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6917
+      },
+      {
+        "country": 41,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 6967
+      },
+      {
+        "country": 41,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7017
+      },
+      {
+        "country": 90,
+        "codepage": 857,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7267
+      },
+      {
+        "country": 90,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7317
+      },
+      {
+        "country": 44,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7367
+      },
+      {
+        "country": 44,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7417
+      },
+      {
+        "country": 1,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7467
+      },
+      {
+        "country": 1,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7517
+      },
+      {
+        "country": 58,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7567
+      },
+      {
+        "country": 58,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7617
+      },
+      {
+        "country": 38,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7667
+      },
+      {
+        "country": 38,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7717
+      },
+      {
+        "country": 38,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7767
+      },
+      {
+        "country": 972,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4617
+      },
+      {
+        "country": 972,
+        "codepage": 862,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4567
+      },
+      {
+        "country": 785,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1967
+      },
+      {
+        "country": 785,
+        "codepage": 864,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 1917
+      },
+      {
+        "country": 81,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4817
+      },
+      {
+        "country": 81,
+        "codepage": 932,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4767
+      },
+      {
+        "country": 82,
+        "codepage": 949,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4867
+      },
+      {
+        "country": 82,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4967
+      },
+      {
+        "country": 82,
+        "codepage": 1361,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 4917
+      },
+      {
+        "country": 86,
+        "codepage": 936,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5667
+      },
+      {
+        "country": 86,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 5717
+      },
+      {
+        "country": 88,
+        "codepage": 950,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7067
+      },
+      {
+        "country": 88,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7117
+      },
+      {
+        "country": 88,
+        "codepage": 938,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7067
+      },
+      {
+        "country": 886,
+        "codepage": 950,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7167
+      },
+      {
+        "country": 886,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7217
+      },
+      {
+        "country": 886,
+        "codepage": 938,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7167
+      },
+      {
+        "country": 711,
+        "codepage": 437,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7817
+      },
+      {
+        "country": 711,
+        "codepage": 737,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7817
+      },
+      {
+        "country": 711,
+        "codepage": 850,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7867
+      },
+      {
+        "country": 711,
+        "codepage": 852,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7867
+      },
+      {
+        "country": 711,
+        "codepage": 855,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7867
+      },
+      {
+        "country": 711,
+        "codepage": 857,
+        "reserved": [
+          0,
+          0
+        ],
+        "data_offset": 7867
+      }
+    ]
+  },
+  "unique_retained_pairs": 60,
+  "unique_installed_pairs": 126,
+  "common_pairs": 59,
+  "retained_only": [
+    [
+      82,
+      934
+    ]
+  ],
+  "installed_only": [
+    [
+      4,
+      850
+    ],
+    [
+      4,
+      863
+    ],
+    [
+      7,
+      437
+    ],
+    [
+      7,
+      850
+    ],
+    [
+      7,
+      852
+    ],
+    [
+      7,
+      855
+    ],
+    [
+      7,
+      866
+    ],
+    [
+      27,
+      437
+    ],
+    [
+      27,
+      850
+    ],
+    [
+      30,
+      737
+    ],
+    [
+      30,
+      850
+    ],
+    [
+      30,
+      869
+    ],
+    [
+      35,
+      850
+    ],
+    [
+      35,
+      855
+    ],
+    [
+      38,
+      855
+    ],
+    [
+      40,
+      850
+    ],
+    [
+      40,
+      852
+    ],
+    [
+      43,
+      437
+    ],
+    [
+      43,
+      850
+    ],
+    [
+      52,
+      437
+    ],
+    [
+      52,
+      850
+    ],
+    [
+      54,
+      437
+    ],
+    [
+      54,
+      850
+    ],
+    [
+      56,
+      437
+    ],
+    [
+      56,
+      850
+    ],
+    [
+      57,
+      437
+    ],
+    [
+      57,
+      850
+    ],
+    [
+      58,
+      437
+    ],
+    [
+      58,
+      850
+    ],
+    [
+      60,
+      437
+    ],
+    [
+      64,
+      437
+    ],
+    [
+      64,
+      850
+    ],
+    [
+      65,
+      437
+    ],
+    [
+      82,
+      949
+    ],
+    [
+      82,
+      1361
+    ],
+    [
+      88,
+      950
+    ],
+    [
+      91,
+      437
+    ],
+    [
+      353,
+      437
+    ],
+    [
+      353,
+      850
+    ],
+    [
+      355,
+      850
+    ],
+    [
+      355,
+      852
+    ],
+    [
+      359,
+      850
+    ],
+    [
+      359,
+      855
+    ],
+    [
+      381,
+      850
+    ],
+    [
+      381,
+      855
+    ],
+    [
+      384,
+      850
+    ],
+    [
+      384,
+      852
+    ],
+    [
+      386,
+      850
+    ],
+    [
+      386,
+      852
+    ],
+    [
+      387,
+      850
+    ],
+    [
+      387,
+      852
+    ],
+    [
+      389,
+      850
+    ],
+    [
+      389,
+      855
+    ],
+    [
+      421,
+      850
+    ],
+    [
+      421,
+      852
+    ],
+    [
+      593,
+      437
+    ],
+    [
+      593,
+      850
+    ],
+    [
+      711,
+      437
+    ],
+    [
+      711,
+      737
+    ],
+    [
+      711,
+      850
+    ],
+    [
+      711,
+      852
+    ],
+    [
+      711,
+      855
+    ],
+    [
+      711,
+      857
+    ],
+    [
+      852,
+      437
+    ],
+    [
+      886,
+      437
+    ],
+    [
+      886,
+      938
+    ],
+    [
+      886,
+      950
+    ]
+  ],
+  "scope": "COUNTRY.SYS header and country/codepage index only; no data payload semantics, runtime or alternate paths"
+}

@@ -579,3 +579,7 @@ Parallel source reviews add [DOS locale data](shard-1/dos-locale-family-review.m
 The [shared MVDM declaration family](shard-0/mvdm-inc-header-family-review.md) links selected dependent objects to the three published NTVDM, VDMREDIR and WOW32 images; behavioral obligations remain open.
 
 The [DOS guest header family](shard-1/dos-header-family-review.md), [multimedia source family](shard-2/multimedia-family-owner-review.md) and [TOOLHELP inputs](shard-3/toolhelp-guest-input-role-review.md) record selected guest build chains and unresolved image, provider and runtime boundaries.
+
+The [COUNTRY data comparison](shard-0/country-bin86-identity-review.md) identifies nonidentical original and installed country/code-page indices; actual guest selection and semantics remain open in S12.
+
+Further bounded reviews trace [DOS utilities](shard-1/dos-utility-family-review.md), [WRITE DBCS build selection](shard-2/write-dbcs-family-review.md), and [RASAPI16 inputs](shard-3/rasapi-guest-input-role-review.md). Original recipes and retained images do not establish live guest behavior or provider availability.
