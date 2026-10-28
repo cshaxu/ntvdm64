@@ -40,6 +40,9 @@ The [shard-3 function](cross-369/shard3-partial-host-function-plan.md) and
 their ledger snapshot; the [controlled failure handoff](cross-369/selected-host-reproduced-failures-handoff.md)
 and [cross-shard handoff](cross-369/cross-shard-runtime-failures-handoff.md)
 separate reproduced fixture boundaries from guest compatibility claims.
+The [palette object reproduction](cross-369/palette-selected-object-result.md)
+adds a current cached-object short/failed-return witness with controlled guest
+copy boundaries; it is not a live guest or release acceptance test.
 The [absolute disk I/O](nine-way/part-8/dem-absolute-io-review.md),
 [DOS lock](nine-way/part-8/dem-lock-guest-host-review.md),
 [DOS path](nine-way/part-8/dem-path-guest-host-review.md),
