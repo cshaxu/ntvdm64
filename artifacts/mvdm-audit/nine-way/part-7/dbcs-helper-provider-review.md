@@ -1,0 +1,7 @@
+# DBCS helper ownership: DOS support versus guest kernel
+
+Owned `wow16/inc/dbcs.c` explicitly implements DOS-app DBCS helpers. `IsDBCSLeadByte` issues DOS INT 21h AX=6300 once and caches the returned segment:offset table, then walks lead-byte ranges; `AnsiNext` advances over a lead/trail pair. Owned `wow16/inc/dbcs.h` declares that interface. A bounded search of MVDM makefile/sources/link-response files found no `inc/dbcs.c` or `dbcs.obj` reference; this negative is limited to those filenames and does not rule out aliases, other build systems or a retained prebuilt guest.
+
+It is not a valid inference that current WOW kernel DBCS handling is absent: `wow16/kernel31/makefile:253,744` selects `lstring.obj`, and `lstring.asm:595-638` has its own MyIsDBCSLeadByte/FarMyIsDBCSLeadByte table-based routines. `ld.asm`, `userpro.asm` and `winexec.asm` contain distinct source calls. Exact table initialization, relevant conditional branches, shipped NE provenance, host codepage mapping and concurrent locale transitions are unproved by these static links. `tests/observation/dpmi_int21_state.asm` contains a DBCS pointer/selector test and explicitly labels one non-DBCS subfunction case; it is not an end-to-end Win16 DBCS keyboard, EDIT, file-name or locale-switch test.
+
+Suggested classification: historical DOS-side support source/header, bounded build selection not established; kernel lstring is a distinct source-level provider, with release binding and locale behavior still pending. No guest/product changes or execution.

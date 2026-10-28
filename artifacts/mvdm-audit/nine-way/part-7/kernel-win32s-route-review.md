@@ -1,0 +1,7 @@
+# Win32s guest helper and conditional PE execution
+
+Owned `wow16/kernel31/w32sys.asm` provides `GetW32SysInfo`; under PMODE32 it returns a pointer to current TDB. `kernel31/makefile:808-810` contains an explicit object rule, but the inspected OBJ/OBJ2/OBJ3 lists (`makefile:235-300`) do not list w32sys.obj. Thus an available rule is not by itself an actual selected link dependency. The NE image supplied in the manifest is a preserved baseline ZIP, distinct from these retained debug/retail source-tree images; source/build-map equivalence and live helper call remain unproved.
+
+Related `i21task.asm:1275-1345` defines `ExecPE` only under WIN32S: it dynamically loads W32SYS.DLL, resolves ordinal 3, caches its address, and returns invalid-format 11 when resolution is unavailable. That is the original WIN32S conditional route, not evidence that every WOW Win32 launch or every Win16 process needs W32SYS. Selection and executable semantics depend on actual compile defines and loaded kernel; no isolated Win32s guest runtime test was run. The source has a retry suppression cache, but persistence and module lifetime are not established in the delivered image from the source alone.
+
+Classification recommendation: retained original Win32s helper source with explicit rule but not shown in the examined final object list; leave Win32s capability, conditional ExecPE binding, ABI and lifetime pending instead of claiming product support or deleting based on file role. No guest or product modifications.

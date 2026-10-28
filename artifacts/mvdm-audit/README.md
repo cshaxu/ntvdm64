@@ -131,6 +131,15 @@ dependency evidence; actual guest callbacks and failures remain open. The
 exit separately from task termination, and the
 [NTIO bootstrap inputs](nine-way/part-5/ntio-bootstrap-character-reconciliation.md)
 retain guest binary provenance as an independent question.
+The [redirector interface](cross-369/redirector-interface-disposition.md),
+[fast WOW boundary](cross-369/fastwow-header-disposition.md),
+[multimedia alias](cross-369/mmalias-header-disposition.md),
+[DOSX segment layout](nine-way/part-2/dosx-layout-semantic-reconciliation.md),
+[NetBIOS](nine-way/part-2/dosx-netbios-semantic-reconciliation.md),
+[DOS redirector](nine-way/part-2/dos-redir-semantic-reconciliation.md),
+[video trace](nine-way/part-5/video-trace-fullscreen-semantic-reconciliation.md),
+and [suballocator](nine-way/part-5/suballoc-semantic-reconciliation.md) reviews
+retain distinct runtime and alternate-profile obligations.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
