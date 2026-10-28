@@ -1,0 +1,11 @@
+import csv,hashlib,json,re,subprocess,zipfile
+from pathlib import Path
+A=Path('artifacts/mvdm-audit');M=Path('src/mvdm');O=(Path('O:/repos.external/OpenNT/base/mvdm'),Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm'));rel='dos/v86/redir/fudgedef.inc'
+def sha(d):return hashlib.sha256(d).hexdigest().upper()
+def inspect():
+ f=next(x for x in csv.DictReader((A/'frozen-file-reconciliation.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel);l=next(x for x in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel);hs=[sha((x/rel).read_bytes()) for x in (M,*O)];assert hs==[f['current_sha256'],f['opennt_sha256'],f['opennt45_sha256']] and l['shard']=='2' and l['status']=='pending'
+ cmd=['rg','-n','-i','-F','fudgedef.inc',str(M),*(str(x) for x in O),'--glob','!fudgedef.inc','--glob','!*.map','--glob','!*.lst','--glob','!build.log'];r=subprocess.run(cmd,capture_output=True,text=True);assert r.returncode==1 and not r.stdout
+ redir=M/'dos/v86/redir';src=(redir/'redir.asm').read_text(encoding='latin1');defn=(redir/'rdrmisc.inc').read_text(encoding='latin1');recipe=(redir/'makefile').read_text(encoding='latin1');assert re.search(r'(?im)^\s*include\s+rdrmisc\.inc',src) and re.search(r'(?im)^\s*LM20_CNLEN\s+equ\s+15',defn) and re.search(r'(?im)^\s*ComputerName\s+db\s+LM20_CNLEN\s*\+',src) and 'redir.obj' in recipe.lower() and 'redir.asm' in recipe.lower()
+ zpath=Path('assets/winnt.zip');z=zipfile.ZipFile(zpath);entry=next(x for x in z.infolist() if x.filename.lower()=='winnt/system32/redir.exe');published=sha(z.read(entry));installed=sha(Path('O:/winnt/system32/redir.exe').read_bytes()); supplemental=sha((redir/'obj/redir.exe').read_bytes());assert published==installed and published!=supplemental
+ return dict(result='pass',source=rel,hashes=hs,search_command=cmd,search_returncode=r.returncode,redir_asm_sha256=sha((redir/'redir.asm').read_bytes()),rdrmisc_sha256=sha((redir/'rdrmisc.inc').read_bytes()),recipe_sha256=sha((redir/'makefile').read_bytes()),archive_sha256=sha(zpath.read_bytes()),published_redir_sha256=published,installed_redir_sha256=installed,supplemental_redir_sha256=supplemental,scope='Literal-name search and source selection; does not establish guest runtime dispatch or image provenance')
+if __name__=='__main__':print(json.dumps(inspect(),indent=2))

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "e4f7690ba",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-shell-hook-image-observations.json",
+      "sha256": "01EF955CCFF4AAF5D1C4109902671F105D3BB17D63F89FF5C956C2DFA8BA8528"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "WOW function body binding, not guest behavior acceptance"
+}

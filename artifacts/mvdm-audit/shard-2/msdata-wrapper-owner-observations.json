@@ -1,0 +1,39 @@
+{
+  "result": "pass",
+  "source": "dos/v86/inc/msdata2.asm",
+  "source_hashes": [
+    "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE",
+    "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE",
+    "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE"
+  ],
+  "search_command": [
+    "rg",
+    "-n",
+    "-i",
+    "-F",
+    "msdata2.asm",
+    "src\\mvdm",
+    "O:\\repos.external\\OpenNT\\base\\mvdm",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm",
+    "--glob",
+    "!msdata2.asm",
+    "--glob",
+    "!*.map",
+    "--glob",
+    "!*.lst",
+    "--glob",
+    "!build.log"
+  ],
+  "search_returncode": 1,
+  "recipe_sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E",
+  "link_sha256": "828FF652663F3999F8FA75311ED31398C8E0138F93CEE86F38A6F36CA9A9D840",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "ntdos_sha256": "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+  "ntdos_identity_hashes": [
+    "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+    "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+    "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84",
+    "957662320654AD5251C3A8B228A5DADEC28AA65DDDBCBA38C3658A6E7F93BC84"
+  ],
+  "scope": "Literal name search and original source recipe only; no assertion of image provenance or runtime behavior"
+}

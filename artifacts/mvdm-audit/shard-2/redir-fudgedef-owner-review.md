@@ -1,0 +1,9 @@
+# DOS redirector fudgedef declaration owner
+
+`dos/v86/redir/fudgedef.inc` matches both original editions by SHA-256. It defines a small set of assembler equates, including LM20_CNLEN=15. In the captured original recipe, `redir.obj` uses `redir.asm`; the latter explicitly includes `rdrmisc.inc`, whose own LM20_CNLEN=15 defines the value used for `ComputerName`. This follows the original selected source chain and identifies a different provider for that specific equate; it does not prove every definition or alternate configuration is equivalent.
+
+A case-insensitive literal filename search of the current and both original MVDM trees (excluding this file itself and diagnostic map, list and build logs; ordinary rg ignore rules apply) finds no other `fudgedef.inc` reference. The search cannot rule out generated/ignored files, dynamic include paths, external tools or differently named copies. Suggest an exclusion only for the file's observed role in this captured REDIR recipe, retaining alternate configurations and all redirector capabilities; if the shared ledger cannot encode that scope, keep pending.
+
+The release ZIP and installed `REDIR.EXE` have the same SHA-256, while `src/mvdm/dos/v86/redir/obj/redir.exe` differs. The latter remains a current-only supplemental binary of unproved provenance. No identity match proves either executable came from this recipe or is selected in a running DOS session. The BOP interface and redirector initialization, networking and teardown remain separate runtime obligations documented in `dos-redir-guest-review.md`.
+
+Replay `PYTHONDONTWRITEBYTECODE=1 python artifacts/mvdm-audit/shard-2/redir-fudgedef-owner-observer.py` and compare JSON. No guest or product was executed or modified, no historical makefile run, and the shared ledger and build tree remain unchanged.

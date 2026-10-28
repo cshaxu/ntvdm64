@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "source": "dos/v86/redir/fudgedef.inc",
+  "hashes": [
+    "02E1C6C267C250AA5E709B05ADAA80EBFCBD44F3F1841F8DB237E14A24BDE0E1",
+    "02E1C6C267C250AA5E709B05ADAA80EBFCBD44F3F1841F8DB237E14A24BDE0E1",
+    "02E1C6C267C250AA5E709B05ADAA80EBFCBD44F3F1841F8DB237E14A24BDE0E1"
+  ],
+  "search_command": [
+    "rg",
+    "-n",
+    "-i",
+    "-F",
+    "fudgedef.inc",
+    "src\\mvdm",
+    "O:\\repos.external\\OpenNT\\base\\mvdm",
+    "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm",
+    "--glob",
+    "!fudgedef.inc",
+    "--glob",
+    "!*.map",
+    "--glob",
+    "!*.lst",
+    "--glob",
+    "!build.log"
+  ],
+  "search_returncode": 1,
+  "redir_asm_sha256": "A30739691C5EF462F6EEC73CA2E1F7D41495634930408AF9171014A6CD20ED60",
+  "rdrmisc_sha256": "966420D2FD0B9D65375ACC72F4D08112993A27CB646E37388BAD0288C724F1A7",
+  "recipe_sha256": "318569C93BB478AEA0A11E078C82E2FB2D4F649D2E2CC2FB78DBFED781FDE53F",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "published_redir_sha256": "B6E9FAD30A5423EAD9ECB45C8E28197EA62A39187D36241F9018DB82FACAC3A7",
+  "installed_redir_sha256": "B6E9FAD30A5423EAD9ECB45C8E28197EA62A39187D36241F9018DB82FACAC3A7",
+  "supplemental_redir_sha256": "F4BE4EA0476971E3C702C5D4B4857664C0092205C2C64295313812297A33240A",
+  "scope": "Literal-name search and source selection; does not establish guest runtime dispatch or image provenance"
+}

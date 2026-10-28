@@ -13,5 +13,5 @@ described in the [shell review](../shard-3/shell-thunk-role-review.md).
 Original hook and subclass logic handles guest procedure identities at the
 host USER boundary. Hooks, nested callbacks, task/window destruction, drop
 data, registry failures, buffer bounds and teardown remain unverified. These
-three roles merit partial classification after ledger reconciliation; this is
-not a claim of complete Win16 shell or hook behavior.
+three roles are classified partial in the ledger; this is not a claim of
+complete Win16 shell or hook behavior.

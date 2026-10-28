@@ -1,0 +1,11 @@
+import csv,hashlib,json,re,subprocess,zipfile
+from pathlib import Path
+A=Path('artifacts/mvdm-audit'); M=Path('src/mvdm'); O=(Path('O:/repos.external/OpenNT/base/mvdm'),Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm')); rel='dos/v86/inc/msdata2.asm'
+def sha(d):return hashlib.sha256(d).hexdigest().upper()
+def inspect():
+ f=next(x for x in csv.DictReader((A/'frozen-file-reconciliation.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel);l=next(x for x in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel);hashes=[sha((x/rel).read_bytes()) for x in (M,*O)];assert hashes==[f['current_sha256'],f['opennt_sha256'],f['opennt45_sha256']] and l['shard']=='2' and l['status']=='pending'
+ roots=[str(M),*(str(x) for x in O)]; cmd=['rg','-n','-i','-F','msdata2.asm',*roots,'--glob','!msdata2.asm','--glob','!*.map','--glob','!*.lst','--glob','!build.log'];r=subprocess.run(cmd,capture_output=True,text=True);assert r.returncode==1 and not r.stdout
+ recipe=(M/'dos/v86/doskrnl/dos/makefile').read_text(encoding='latin1').lower();link=(M/'dos/v86/doskrnl/dos/msdos.lnk').read_text(encoding='latin1').lower();s=(M/rel).read_text(encoding='latin1').lower();assert 'include msdata.asm' in s and 'include msinit.asm' in s and re.search(r'(?m)^msdata\.obj\s*:\s*msdata\.asm',recipe) and 'msdata.obj' in link and 'msinit.obj' in link and 'ntdos.bin:' in recipe and 'stripz ntdos.bin' in recipe
+ zpath=Path('assets/winnt.zip');z=zipfile.ZipFile(zpath);entry=next(x for x in z.infolist() if x.filename.lower()=='winnt/system32/ntdos.sys');digest=sha(z.read(entry));sysrel='dos/v86/doskrnl/dos/ntdos.sys'; sysident=[sha((x/sysrel).read_bytes()) for x in (M,*O)]+[sha(Path('O:/winnt/system32/NTDOS.SYS').read_bytes())];assert sysident==[digest]*4
+ return dict(result='pass',source=rel,source_hashes=hashes,search_command=cmd,search_returncode=r.returncode,recipe_sha256=sha((M/'dos/v86/doskrnl/dos/makefile').read_bytes()),link_sha256=sha((M/'dos/v86/doskrnl/dos/msdos.lnk').read_bytes()),archive_sha256=sha(zpath.read_bytes()),ntdos_sha256=digest,ntdos_identity_hashes=sysident,scope='Literal name search and original source recipe only; no assertion of image provenance or runtime behavior')
+if __name__=='__main__':print(json.dumps(inspect(),indent=2))
