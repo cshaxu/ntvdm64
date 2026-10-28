@@ -1,0 +1,2264 @@
+{
+  "softpc.new/base/inc/base_def.h": {
+    "current": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+    "opennt": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+    "opennt45": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae"
+  },
+  "softpc.new/host/inc/host_gen.h": {
+    "current": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557",
+    "opennt": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557",
+    "opennt45": "d86cd3c505d643531dafaa548e66fbb42ba13c37e3c632a214a69b4f2f86f557"
+  },
+  "softpc.new/host/inc/insignia.h": {
+    "current": "16008682af1a1770658fa6c70797e7b92bbd041e44d23b8759b05f71a91564eb",
+    "opennt": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02",
+    "opennt45": "26ed468f31ea44c8069300f150e5eefef3ba21c12eb2f2f68cca95bcc6f3ba02"
+  },
+  "softpc.new/base/inc/xt.h": {
+    "current": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+    "opennt": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111",
+    "opennt45": "c5b376f59d45ddb6ca36aa66e96e095203a261b125bd6a34247d6c88e98cb111"
+  },
+  "softpc.new/base/ccpu386/ccpusas4.c": {
+    "current": "4a209094d48de6003255367352e17518d98233cf72829d18dea268dc608b996b",
+    "opennt": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+    "opennt45": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e"
+  },
+  "softpc.new/host/src/nt_timer.c": {
+    "current": "5e0f4f2763c745ff2947e34d6ce713cbfb17579314dd61f4ca247c99fed1d03b",
+    "opennt": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+    "opennt45": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": {
+      "softpc.new/base/inc/base_def.h": [
+        {
+          "object": "obj/ccpu/adc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/aaa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/aad.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/add.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/aas.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/and.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/arpl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/aam.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bsf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bsr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bound.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bswap.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/btc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/btr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/bts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cbw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ccpupig.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/call.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cdq.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/clc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ccpusas4.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cli.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cld.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/clts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cmc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cmpxchg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cmp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cwd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/cwde.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_bsic.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_debug.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_addr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_div64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_intr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_getset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_mul64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_neg64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_page.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_seg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_reg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_prot.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_tlb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_stack.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_tsksw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_xfer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_xcptn.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_xtrn.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/daa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/das.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/div.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/dec.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/enter.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/idiv.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/imul.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/fpu.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/inc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/in.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/into.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/invd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/intx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/invlpg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/jcxz.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/iret.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/jmp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/jxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lahf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/c_main.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lar.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lea.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lgdt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/leave.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lidt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lldt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/loopxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lmsw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lsl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ltr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/lxs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/movsx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/mov.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/mul.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/neg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/nop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/not.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/or.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/pop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/out.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/popa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/popf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/push.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/pushf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/pusha.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/rcl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/rcr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ret.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/rol.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ror.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/rsrvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sahf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sbb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sar.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/setxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sgdt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/shl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/shld.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/shr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/shrd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sidt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sldt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/smsw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/stc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/std.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sti.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/str.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/stubs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sub.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/verw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/verr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/wbinvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/wait.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/xadd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/xchg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/xlat.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/xor.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/zfrsrvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/sasCdef.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/ntthread.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/cmos_bis.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/localfm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/bios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/cntlbop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/emm_fncs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/rom_basc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/slave_bs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/rtc_bios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/tape_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/ill_bop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/equipmnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/virtual.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/mem_size.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/bios/build_id.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/keymouse/keybd_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/keymouse/keyba.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/keymouse/mouse.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/at_dma.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/keymouse/ppi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/keymouse/mouse_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/idetect.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/cmosnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/ica.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/illegalp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/qevnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/rom.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/timestrb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/dummy_nt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/timer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/system/unexp_nt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/diskbios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/floppy_i.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/floppy.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/fla.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/fdisk.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/gfi_ibm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/gfi_mpty.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/gfi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/gfi_sflp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/disks/gfi_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/terminat.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/time_day.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/ios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/main.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/get_env.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/support/xt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_mode.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_prts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_vide.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/gfx_updt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/gvi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/v7_ports.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/video_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/v7_video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/vga_mode.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_read.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/vga_prts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/vga_vide.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_trcr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_dmmy.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/ega_writ.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/egawrtm0.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/egwrtm12.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SINIT011.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/video/cga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SINIT012.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SINIT013.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID000.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID001.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID002.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID005.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID003.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID004.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID009.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID006.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID007.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID008.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID011.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID010.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID012.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID013.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID017.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID015.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID018.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID016.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID020.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID014.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID019.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID021.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID023.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID022.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID024.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID026.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID027.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID025.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/evidfunc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/j_c_lang.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/ev_glue.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID029.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID030.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/SEVID028.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/vglfunc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/accessfn.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/cvidc/vglob.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/comms/printer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/comms/printer_.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/comms/com.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/comms/rs232_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/dos/emm_mngr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/debuggng.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/ega_dump.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/profile.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/btrace.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/trace.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/pigyoda.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/yoda.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/base-debug/dasm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/sim32.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_ntfun.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_timer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_msscs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_error.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_cga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_ega.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_vga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_input.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_hosts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_sound.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_graph.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_com.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_wcom.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_sas.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_rez.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_fdisk.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_cpu.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_unix.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_yoda.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_lpt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_mouse.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_munge.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_event.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/copy_fnc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_nls.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/config.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/stubs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_pif.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_fulsc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/x86_emm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_emm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_eoi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_vdd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_sec.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_det.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_umb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/fprt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_inthk.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_rflop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_mem.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_cprgs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/nt_reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/host/ntvdm_entry.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-debugger/dbg_registers.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_wow_page_domain.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_keyboard_reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_effective_address.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/fmstubs_vector_defaults.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/ccpu/fmstubs_activity_check.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/adapter-redir/mvdm_redirector_worker_copy.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/redir/vrnmpipe.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/redir/vrinit.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/redir/vrnetb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/redir/vrdlcpst.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/tests/keyboard_controller_pic_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/tests/pic_reset_eoi_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/tests/ccpu_stack_transition_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        },
+        {
+          "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/base/inc/base_def.h"
+        }
+      ],
+      "softpc.new/host/inc/host_gen.h": [
+        {
+          "object": "obj/ccpu/adc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/aaa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/aad.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/add.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/aas.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/and.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/arpl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/aam.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bsf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bsr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bound.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bswap.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/btc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/btr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/bts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cbw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/call.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cdq.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/clc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/ccpusas4.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cli.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cld.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/clts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cmc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cmpxchg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cmp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cwd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/cwde.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_bsic.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_debug.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_addr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_div64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_intr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_mul64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_neg64.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_page.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_seg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_reg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_prot.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_tlb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_stack.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_tsksw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_xfer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_xcptn.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_xtrn.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/daa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/das.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/div.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/dec.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/enter.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/idiv.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/imul.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/inc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/in.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/into.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/invd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/intx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/invlpg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/jcxz.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/iret.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/jmp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/jxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lahf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/c_main.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lar.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lea.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lgdt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/leave.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lidt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lldt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/loopxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lmsw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lsl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/ltr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/lxs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/movsx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/mov.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/mul.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/neg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/nop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/not.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/or.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/pop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/out.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/popa.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/popf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/push.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/pushf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/pusha.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/rcl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/rcr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/ret.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/rol.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/ror.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/rsrvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sahf.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sbb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sar.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/setxx.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sgdt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/shl.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/shld.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/shr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/shrd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sidt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sldt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/smsw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/stc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/std.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sti.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/str.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/sub.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/verw.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/verr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/wbinvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/wait.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/xadd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/xchg.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/xlat.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/xor.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/ccpu/zfrsrvd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/cmos_bis.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/bios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/cntlbop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/emm_fncs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/rom_basc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/slave_bs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/rtc_bios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/tape_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/ill_bop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/equipmnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/virtual.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/mem_size.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/bios/build_id.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/keymouse/keybd_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/keymouse/keyba.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/keymouse/mouse.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/at_dma.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/keymouse/ppi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/keymouse/mouse_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/idetect.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/cmosnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/ica.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/illegalp.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/qevnt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/rom.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/timestrb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/timer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/system/unexp_nt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/diskbios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/floppy_i.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/floppy.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/fla.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/fdisk.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/gfi_mpty.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/disks/gfi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/support/terminat.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/support/time_day.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/support/ios.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/support/main.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/support/xt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_mode.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_prts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_vide.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/gfx_updt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/gvi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/v7_ports.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/video_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/v7_video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/vga_mode.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_read.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/vga_prts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/vga_vide.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_dmmy.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/ega_writ.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/egawrtm0.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/egwrtm12.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/video/cga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/comms/printer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/comms/printer_.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/comms/com.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/comms/rs232_io.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/dos/emm_mngr.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/base-debug/btrace.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/base-debug/trace.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/base-debug/pigyoda.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/base-debug/yoda.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/sim32.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_timer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_msscs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_error.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_cga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_ega.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_vga.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_input.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_hosts.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_sound.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_graph.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_com.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_wcom.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_sas.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_rez.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_fdisk.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_cpu.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_unix.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_lpt.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_mouse.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_munge.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_event.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/copy_fnc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_nls.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/config.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/stubs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_fulsc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_emm.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_eoi.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_vdd.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_det.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_umb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_rflop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_cprgs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/nt_reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/host/ntvdm_entry.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/adapter-debugger/dbg_registers.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/adapter-softpc/mvdm_softpc_effective_address.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/redir/vrnmpipe.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/redir/vrinit.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/redir/vrnetb.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/redir/vrdlcpst.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/tests/keyboard_controller_pic_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/tests/pic_reset_eoi_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/tests/ccpu_stack_transition_test.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        },
+        {
+          "object": "obj/tests/ccpu_bounded_execution_fixture.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/host_gen.h"
+        }
+      ]
+    }
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00005c40       _c_sas_connect_memory      00406c40 f   original-ccpu386:ccpusas4.obj",
+      " 0001:00006c20       _sas_init                  00407c20 f   original-ccpu386:ccpusas4.obj",
+      " 0001:00006d40       _sas_term                  00407d40 f   original-ccpu386:ccpusas4.obj",
+      " 0001:0004cbb0       _host_sas_init             0044dbb0 f   original-softpc-host-roots:sim32.obj",
+      " 0001:0004cbe0       _host_sas_term             0044dbe0 f   original-softpc-host-roots:sim32.obj",
+      " 0001:0004ced0       _HeartBeatThread           0044ded0 f   original-softpc-host-roots:nt_timer.obj"
+    ]
+  }
+}

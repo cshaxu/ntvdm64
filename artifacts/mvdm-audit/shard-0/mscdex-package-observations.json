@@ -1,0 +1,29 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "path": "src\\mvdm\\vdd\\samples\\mscdex\\tsr\\mscdexnt.exe",
+      "sha256": "B3151A2DFE4A67A6C2E6113071D1F1C713BB78A04ADEA986FE01540EB96762D0"
+    },
+    {
+      "path": "O:\\winnt\\system32\\mscdexnt.exe",
+      "sha256": "B3151A2DFE4A67A6C2E6113071D1F1C713BB78A04ADEA986FE01540EB96762D0"
+    }
+  ],
+  "zip_entries": {
+    "WINNT/SYSTEM32/mscdexnt.exe": "B3151A2DFE4A67A6C2E6113071D1F1C713BB78A04ADEA986FE01540EB96762D0"
+  },
+  "provider_paths": [
+    {
+      "path": "assets\\release\\VCDEX.DLL",
+      "exists": false
+    },
+    {
+      "path": "O:\\winnt\\system32\\VCDEX.DLL",
+      "exists": false
+    }
+  ],
+  "tsr_source_sha256": "BDA33DC8F48ADEAB11CA452312B8A74FB7194300C1BD5DB450DF466F537CA0B1",
+  "autoexec_sha256": "02FE323BF5AF799E3117EBDC6138B7EAFE14D0453ECB06855D18B2C2E21B9D28",
+  "scope": "Selected filesystem and guest-source observations; no actual DLL search, guest load or optical-device test"
+}

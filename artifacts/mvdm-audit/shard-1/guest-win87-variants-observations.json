@@ -1,0 +1,71 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "wow16/win87em/emoem.src",
+      "sha256": "CE4256816D27F8A16B2A99DF8D3265993D142E009C115FFA9DE488AC7CABB90C",
+      "catalog_ids": "SRC:a21d57f93262123cb1ff;SRC:d259285859fe2bf9c719",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/win87em/emoemwin.std",
+      "sha256": "2BB83A1603CF1372BAFD3DC4A385F372C1B06AB826C6D5C260529AE45AFD3576",
+      "catalog_ids": "SRC:36da5ad6261b64a89a20;SRC:9b282dc903f8feb96fef",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/win87em/win87std.def",
+      "sha256": "8CEC4D7B26A1787201E4ACBB38AEEB65230429EBA9AAD15487F4A378C6E00D4B",
+      "catalog_ids": "SRC:497064d7edb5ae623758;SRC:63c624ea8ccbab967251",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\makefile",
+      "sha256": "B76EC6E35F2C1285EF0C0930C4D534CA0E0A7533F8F4C3B4E53725ABE3C907A4"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\emoem.asm",
+      "sha256": "5CD866DC6433B124A1523E909B0C7C5432404140B1513E08DF35A38E7876FFAD"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\emoemwin.asm",
+      "sha256": "E66B5B533AF8191A57203B2D88C407359300059E1A0CD0EBE670420AC76BDD3A"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\win87em\\win87em3.def",
+      "sha256": "3F6623F63573066E2A080EBD2C317C922BD045A29AFABB5A9DCDF4BD10C4D454"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "guest_image": {
+    "source": "src\\mvdm\\bin86\\i386\\win87em.dll",
+    "source_sha256": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+    "zip_member": "WINNT/SYSTEM32/WIN87EM.DLL",
+    "zip_sha256": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+    "installed_exact_present": false
+  },
+  "limitations": "Original recipe, selected graph and file identity only; no guest build, emulator loading, x87 arithmetic or exception/state lifetime validation."
+}

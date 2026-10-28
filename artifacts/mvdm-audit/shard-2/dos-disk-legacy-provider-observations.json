@@ -1,0 +1,46 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/disks/gfi_sflp.c",
+      "hashes": [
+        "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5",
+        "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5",
+        "396C621A6C6ABF135FDEC730A0BE91C8BC5582DE51687ED006CA5DF97D354DC5"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "gfi_sflp_normalized_dependency": false
+    },
+    {
+      "path": "softpc.new/base/inc/cdrom.h",
+      "hashes": [
+        "9DA2A1531AC1EB2E0D2D9B57EC7E85328FD6402A83A3E562494B175F27101569",
+        "9DA2A1531AC1EB2E0D2D9B57EC7E85328FD6402A83A3E562494B175F27101569",
+        "9DA2A1531AC1EB2E0D2D9B57EC7E85328FD6402A83A3E562494B175F27101569"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "gfi_sflp_normalized_dependency": false
+    }
+  ],
+  "compile_edge": "build obj/disks/gfi_sflp.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/disks/gfi_sflp.c",
+  "object_sha256": "F86874B51F2BC711484AA6BCDED581E1F59156F4AF3B22403380DFB5ECF9547B",
+  "sections": [
+    {
+      "name": ".drectve",
+      "flags": 1051136
+    },
+    {
+      "name": ".debug$S",
+      "flags": 1108344896
+    },
+    {
+      "name": ".chks64",
+      "flags": 2560
+    }
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Guarded remote floppy provider and single-object dependency snapshot, not feature execution or total header-use proof"
+}

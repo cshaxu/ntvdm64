@@ -30,6 +30,13 @@ traces the actual FDC thread creation and identifies a host-side session
 binding gap, with device triggering and a repair still awaiting verification.
 The [Win16 KERNEL legacy review](shard-1/guest-kernel-legacy-review.md)
 retains the separate installed-kernel provenance boundary.
+The [MSCDEX package review](shard-0/mscdex-package-review.md) records a
+guest TSR and missing scoped VDD-provider candidate without claiming a
+runtime or optical-device failure.
+The [legacy disk provider](shard-2/dos-disk-legacy-provider-review.md),
+[base host profile](shard-3/base-host-profile-role-review.md), and
+[WIN87EM variants](shard-1/guest-win87-variants-review.md) reviews retain
+configuration, image identity and runtime boundaries for later reconciliation.
 The [parallel USER and BIOS review](parallel-cross-role-review.md) binds menu,
 COMM and BIOS time owners while retaining their runtime obligations.
 The [parallel DPMI review](shard-3/dpmi-register-stack-role-review.md) binds
