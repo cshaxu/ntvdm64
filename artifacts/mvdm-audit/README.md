@@ -583,3 +583,5 @@ The [DOS guest header family](shard-1/dos-header-family-review.md), [multimedia 
 The [COUNTRY data comparison](shard-0/country-bin86-identity-review.md) identifies nonidentical original and installed country/code-page indices; actual guest selection and semantics remain open in S12.
 
 Further bounded reviews trace [DOS utilities](shard-1/dos-utility-family-review.md), [WRITE DBCS build selection](shard-2/write-dbcs-family-review.md), and [RASAPI16 inputs](shard-3/rasapi-guest-input-role-review.md). Original recipes and retained images do not establish live guest behavior or provider availability.
+
+The [guest stub and WFWNET review](win16-guest-image-payload-role-review.md) records bounded deployed-byte identities; the [VDD sample family](shard-1/vdd-sample-family-review.md) preserves separate package and external-provider boundaries.

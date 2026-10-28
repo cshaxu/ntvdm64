@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "d84daa8be",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-2/win16-kernel-stub-owner-observations.json",
+      "sha256": "FE1FA3AD6BEB3584A1326731FA948BC99CDE439749B5112FA96187FD5F29CE5A"
+    },
+    {
+      "path": "shard-3/wfwnet-guest-input-observations.json",
+      "sha256": "65F9318006BDD7E5D9CAAE724F66E97922A79D209607AA88D86E5424510E8F9A"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Two immutable guest image/payload identities, not guest acceptance"
+}

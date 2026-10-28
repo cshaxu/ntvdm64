@@ -2718,7 +2718,7 @@ vdmutils/win/sources,0,excluded,shard-0/review.csv
 vdmutils/win/win.c,1,pending,shard-1/file-audit.csv
 vdmutils/win/win.rc,0,pending,shard-0/review.csv
 wow16/bin/rcpp.err,1,pending,shard-1/file-audit.csv
-wow16/bin/winstub.exe,2,pending,shard-2/file-audit.csv
+wow16/bin/winstub.exe,2,partial,shard-2/file-audit.csv
 wow16/commdlg/_xlib.h,0,excluded,shard-0/review.csv
 wow16/commdlg/cddrv.bmp,1,pending,shard-1/file-audit.csv
 wow16/commdlg/cderr.h,0,excluded,shard-0/review.csv
@@ -3974,7 +3974,7 @@ wow16/wfwnet/to32.c,0,pending,shard-0/review.csv
 wow16/wfwnet/to32.obj,2,excluded,shard-2/file-audit.csv
 wow16/wfwnet/wfwnet.c,2,excluded,shard-2/file-audit.csv
 wow16/wfwnet/wfwnet.def,3,pending,shard-3/file-review.csv
-wow16/wfwnet/WFWNET.DRV,3,pending,shard-3/file-review.csv
+wow16/wfwnet/WFWNET.DRV,3,partial,shard-3/file-review.csv
 wow16/wfwnet/wfwnet.lrf,3,excluded,shard-3/file-review.csv
 wow16/wfwnet/wfwnet.map,3,excluded,shard-3/file-review.csv
 wow16/wfwnet/wfwnet.obj,0,excluded,shard-0/review.csv

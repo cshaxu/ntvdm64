@@ -1,0 +1,118 @@
+{
+  "files": [
+    {
+      "path": "adlibvdd/vdd.c",
+      "sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "original_hashes": [
+        "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+        "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+        "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "hpscan/HPSCAN16.SYS",
+      "sha256": "05a0bc699092741948852355dba57b70e14c520eda177f6cbc058d8d539a2866",
+      "original_hashes": [
+        null,
+        null,
+        "05a0bc699092741948852355dba57b70e14c520eda177f6cbc058d8d539a2866"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "mscdex/tsr/messages.inc",
+      "sha256": "0323803b2f554e5ca4d8adbaae717996537b972a03fa8800d8026c185aafdaf6",
+      "original_hashes": [
+        "0323803b2f554e5ca4d8adbaae717996537b972a03fa8800d8026c185aafdaf6",
+        "0323803b2f554e5ca4d8adbaae717996537b972a03fa8800d8026c185aafdaf6",
+        "0323803b2f554e5ca4d8adbaae717996537b972a03fa8800d8026c185aafdaf6"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "sample1/fax32/fax32.h",
+      "sha256": "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+      "original_hashes": [
+        "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+        "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+        "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "sample2/16bits/16bits.asm",
+      "sha256": "db03aa7060a40815c120937d2ae59323af7467ba2a9a9e8292af74aef0adbdd4",
+      "original_hashes": [
+        "db03aa7060a40815c120937d2ae59323af7467ba2a9a9e8292af74aef0adbdd4",
+        "db03aa7060a40815c120937d2ae59323af7467ba2a9a9e8292af74aef0adbdd4",
+        "db03aa7060a40815c120937d2ae59323af7467ba2a9a9e8292af74aef0adbdd4"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "sample2/16bits/16bits.inc",
+      "sha256": "ec5d07ea987efa07c43869046ee57afce94b639bb78d1ece049f1d9e136872ba",
+      "original_hashes": [
+        "ec5d07ea987efa07c43869046ee57afce94b639bb78d1ece049f1d9e136872ba",
+        "ec5d07ea987efa07c43869046ee57afce94b639bb78d1ece049f1d9e136872ba",
+        "ec5d07ea987efa07c43869046ee57afce94b639bb78d1ece049f1d9e136872ba"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "sample2/vdd/vdd.def",
+      "sha256": "072101ca34b3bdfef82ac910f2e625a1f76cfa11db242806a75f562df1d22b6c",
+      "original_hashes": [
+        "072101ca34b3bdfef82ac910f2e625a1f76cfa11db242806a75f562df1d22b6c",
+        "072101ca34b3bdfef82ac910f2e625a1f76cfa11db242806a75f562df1d22b6c",
+        "072101ca34b3bdfef82ac910f2e625a1f76cfa11db242806a75f562df1d22b6c"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    },
+    {
+      "path": "vsbd/vdd.c",
+      "sha256": "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+      "original_hashes": [
+        "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+        "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+        "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20"
+      ],
+      "valid_dependencies": [],
+      "zip_basename_matches": [],
+      "installed_basename_present": false
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03fe1c4aeb2cfb7434fa1471c55a3ef62652254615e630ba5861ae7f8729e278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431e10a293f02d8919d7a9d794e8f351939f583eafdc30431640ae75a1c0ad1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35d5da514e10ff6bcb9ccce3ef70b8f53be23405eb5c1650081ae58fab865fd9"
+    }
+  ]
+}
