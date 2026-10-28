@@ -64,6 +64,8 @@ The [multimedia and dispatch checkpoint](wow-media-dispatch-header-role-review.m
 adds four selected original declaration roles with guest behavior still open.
 The [cross-language header checkpoint](wow-cross-language-header-role-review.md)
 records selected C declarations and retains guest ABI and table obligations.
+The [shared thunk header checkpoint](wow-shared-thunk-header-role-review.md)
+records six further selected declarations with runtime obligations open.
 The [guest-input dependency recheck](recent-guest-input-dependency-review.md)
 rechecks relative Ninja paths for 37 recent file-role exclusions.
 The [excluded-role sweep](excluded-dependency-sweep.md) inventories and
@@ -100,7 +102,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 90 independently replayed investigations; proposed dispositions remain pending.
+retain 95 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

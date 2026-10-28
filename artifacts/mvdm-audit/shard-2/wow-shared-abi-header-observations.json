@@ -1,0 +1,98 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "inc/WOWCMDLG.INC",
+      "hashes": [
+        "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175",
+        "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175",
+        "19CE7BB243B18B97631949E8780E288BC702D320BCB01460C93754EFA6813175"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "selected_normalized_dependency": false
+    },
+    {
+      "path": "inc/wowcomm.h",
+      "hashes": [
+        "4817961493D33932A98F5EE2222C0F2E20A43FD4900430910B81E5C70C5F1C85",
+        "4817961493D33932A98F5EE2222C0F2E20A43FD4900430910B81E5C70C5F1C85",
+        "4817961493D33932A98F5EE2222C0F2E20A43FD4900430910B81E5C70C5F1C85"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "selected_normalized_dependency": true
+    },
+    {
+      "path": "inc/wowgdi.h",
+      "hashes": [
+        "474B263B337B1B3724B0A154C5FF3AD7689EAB54906BC4E327272DDA04F0C8F8",
+        "474B263B337B1B3724B0A154C5FF3AD7689EAB54906BC4E327272DDA04F0C8F8",
+        "474B263B337B1B3724B0A154C5FF3AD7689EAB54906BC4E327272DDA04F0C8F8"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "selected_normalized_dependency": true
+    },
+    {
+      "path": "inc/WOWGDI.INC",
+      "hashes": [
+        "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52",
+        "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52",
+        "5B6C2F8A7400862FDF65F35FC9C60E0E4185ED7A306579C1AF41FEBF258AAC52"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "selected_normalized_dependency": false
+    },
+    {
+      "path": "inc/wowkbd.h",
+      "hashes": [
+        "ECFF4D47C62F462AA0CEA48D5CB0C8C0B658E33D89DBB6F47899DF2228A414CF",
+        "ECFF4D47C62F462AA0CEA48D5CB0C8C0B658E33D89DBB6F47899DF2228A414CF",
+        "ECFF4D47C62F462AA0CEA48D5CB0C8C0B658E33D89DBB6F47899DF2228A414CF"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "selected_normalized_dependency": true
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\inc\\makefile",
+      "sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\gdi\\gdi.asm",
+      "sha256": "D64FA58C7AE7B6FBC84B25F4BC60C08D5D8453ACB1C9FE769F201FC5B6D213B2"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\gdi\\makefile",
+      "sha256": "1868F7AD348A492ACDEF374C7B535B9AB0AB2BCFE894CB1C02232AA089B796F0"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\commdlg\\commdlg.asm",
+      "sha256": "422AEE71F549C60C6638EC8100C57135813F140DCAA1AF976881FD448ADEA6D1"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\commdlg\\makefile",
+      "sha256": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\drivers\\keyboard\\keyboard.asm",
+      "sha256": "279D4BF8DE3DBC9849651D93DC1EC5E824A1830506242C5AC1642DF701916C75"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\precomp.h",
+      "sha256": "84E0AB967319CF5E75BCA9CF59E5EEFABC06732D18D8317F0298D30FBD00E16B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wucomm.h",
+      "sha256": "43D3F49FE9ABB8FBBBE1A93E7725F7A368676DFADD764C8F0497A4218B23F77B"
+    }
+  ],
+  "normalized_deps_object": "obj/wowtbl.obj",
+  "compile_edge": "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c",
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "scope": "Header dependency and historical guest include roles; no exact ABI, generated .inc provenance or runtime proof"
+}

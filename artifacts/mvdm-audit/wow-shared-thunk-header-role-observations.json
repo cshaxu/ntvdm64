@@ -1,0 +1,17 @@
+{
+  "result": "pass",
+  "base": "18bac6fdc",
+  "candidate_count": 6,
+  "source_tables": [
+    {
+      "path": "shard-2/wow-shared-abi-header-observations.json",
+      "sha256": "BC5603F134EAE246FF44CFDC6BFBEEDC6807378217FD2CEB39B9D006902B9A71"
+    },
+    {
+      "path": "shard-2/wow32-generic-shell-socket-observations.json",
+      "sha256": "B23ABC80B8F0F0786BD133D14FA1B34CB353EB6D74B3639222794F361B418B55"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected original declaration dependencies only; no guest runtime acceptance"
+}

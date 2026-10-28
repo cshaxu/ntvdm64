@@ -1,0 +1,64 @@
+{
+  "softpc.new/host/inc/nt_mouse.h": {
+    "current": "bb80ed237120b9def63e41f25bbbe19d6e89512944270eb492b2d4c11546e2aa",
+    "opennt": "bb80ed237120b9def63e41f25bbbe19d6e89512944270eb492b2d4c11546e2aa",
+    "opennt45": "bb80ed237120b9def63e41f25bbbe19d6e89512944270eb492b2d4c11546e2aa"
+  },
+  "softpc.new/host/src/nt_mouse.c": {
+    "current": "62492fca31945777c67385bed503829a5a740bea99877e1938b74848ea549cb8",
+    "opennt": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+    "opennt45": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b"
+  },
+  "softpc.new/base/keymouse/mouse_io.c": {
+    "current": "520a8b6939dfe2cf3fda8ad30af623e42d795bb470654a7e14b672bd8030533c",
+    "opennt": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+    "opennt45": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439"
+  },
+  "src/ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.c": "84d2fa8e1a7ef88408396f7a3bcd0394fa3f0b5d235303c914d4c45e03204c7d",
+  "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c": "bddfaf03034ebe5e7cff1c0310d396db02bfe348f244f77e35c3858c0292c708",
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:00057ce0       _deinstall_host_mouse      00458ce0 f   original-softpc-host-roots:nt_mouse.obj",
+      " 0001:00057dd0       _DoMouseInterrupt          00458dd0 f   original-softpc-host-roots:nt_mouse.obj",
+      " 0001:00058560       _MouseEoiHook              00459560 f   original-softpc-host-roots:nt_mouse.obj",
+      " 0001:00058c60       _host_mouse_install1       00459c60 f   original-softpc-host-roots:nt_mouse.obj",
+      " 0001:00164ee0       _mvdm_softpc_mouse_submit  00565ee0 f   softpc-bindings:mvdm_softpc_mouse_bridge.obj",
+      " 0001:00165290       _mvdm_softpc_mouse_apply   00566290 f   softpc-bindings:mvdm_softpc_mouse_guest.obj",
+      " 0001:00062db0       _v_host_mouse_install1     00463db0 f   original-softpc-bios:bios.obj"
+    ]
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": [
+      {
+        "object": "obj/keymouse/mouse_io.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/host/nt_graph.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/host/nt_mouse.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/host/nt_event.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/host/nt_fulsc.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/host/nt_det.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      },
+      {
+        "object": "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_mouse.h"
+      }
+    ]
+  }
+}

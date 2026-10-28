@@ -227,7 +227,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
                         'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
-                if prefix == 'wow-cross-language-header-role-':
+                if prefix == 'wow-shared-thunk-header-role-':
+                    assert path in ('inc/wowcomm.h', 'inc/wowgdi.h', 'inc/wowkbd.h', 'wow32/wkgthunk.h', 'wow32/wshtbl2.h', 'wow32/wsocktbl.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'wow-cross-language-header-role-':
                     assert path in ('inc/wowcmpat.h', 'inc/wowusr.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'wow-media-dispatch-header-role-':
                     assert path in ('wow32/wmmedia.h', 'wow32/wmmtbl2.h', 'wow32/wmtbl32.h', 'wow32/wowtbl.h') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash

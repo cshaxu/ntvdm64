@@ -1,6 +1,12 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 90 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 95 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [guest-service-constants](shard-1/guest-service-constants-review.md): [observer](shard-1/guest-service-constants-observer.py), [receipt](shard-1/guest-service-constants-observations.json).
+- [wow-shared-abi-header](shard-2/wow-shared-abi-header-review.md): [observer](shard-2/wow-shared-abi-header-observer.py), [receipt](shard-2/wow-shared-abi-header-observations.json).
+- [wow-guest-asm-interfaces](shard-2/wow-guest-asm-interfaces-review.md): [observer](shard-2/wow-guest-asm-interfaces-observer.py), [receipt](shard-2/wow-guest-asm-interfaces-observations.json).
+- [softpc-resources](shard-3/softpc-resources-role-review.md): [observer](shard-3/softpc-resources-observer.py), [receipt](shard-3/softpc-resources-observations.json).
+- [mouse-host-interface](shard-3/mouse-host-interface-role-review.md): [observer](shard-3/mouse-host-interface-observer.py), [receipt](shard-3/mouse-host-interface-observations.json).
 
 - [wow-cross-language-constants](shard-1/wow-cross-language-constants-review.md): [observer](shard-1/wow-cross-language-constants-observer.py), [receipt](shard-1/wow-cross-language-constants-observations.json).
 

@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1283,
+    "pending": 1277,
     "excluded": 2739,
-    "partial": 609,
+    "partial": 615,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Two selected WOW C headers remain partial; guest ASM, ABI and behavior remain in scope."
+  "note": "Six original shared and thunk declarations remain partial; guest behavior remains in scope."
 }

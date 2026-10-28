@@ -1,0 +1,1015 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "inc/DOSSVC.INC",
+      "sha256": "07C4676C9A44418C5A0175ACC7A09C251BDE892B0A838381EDEEE26E49C9FAF3",
+      "catalog_ids": "SRC:f485a437c14ae42b2ff2;SRC:f7b919a49741a93a47f7",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "inc/DPMI.INC",
+      "sha256": "9E1EE5A80452668B6EC2E5FCDD0ED2686FDDFF26DA7FF03BAB63D0D3C08EE381",
+      "catalog_ids": "SRC:15363090bd86d3d8a5d8;SRC:7e36f2f15af1fab0a5f3",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "inc/XMSSVC.INC",
+      "sha256": "430DE6A636D6F8B3D94ED7AE36C6BB663E14A6F3DD59DF236D395564840A63DB",
+      "catalog_ids": "SRC:3d8f0ba5d00bf5ccc687;SRC:703446d15804775d325d",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "inc/SOFTPC.INC",
+      "sha256": "525702D6BC5A320A1B112DEE068DDFFF32F23A62D64F1B177BF2F0295975DED7",
+      "catalog_ids": "SRC:6ff4378775776212202d;SRC:ff7850194070e9048e80",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "pairs": [
+    {
+      "name": "DOSSVC",
+      "asm_literals": 81,
+      "c_literals": 81,
+      "shared_literals": 81,
+      "only_asm": [],
+      "only_c": [],
+      "differences": [],
+      "c_sha256": "82B5135E78BD3010128BD5DD54978B0E00AEC0073F0A7E6B547CBE8DFF08A91C",
+      "c_valid_dependencies": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/dem.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfcb.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdata.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdir.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdisp.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demerror.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfile.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demgset.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demioctl.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demhndl.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlock.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demmisc.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlabel.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdasd.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demsrch.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnmpipe.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkfileio.obj",
+          "raw": "../../../../src/mvdm/inc/dossvc.h"
+        }
+      ]
+    },
+    {
+      "name": "DPMI",
+      "asm_literals": 38,
+      "c_literals": 38,
+      "shared_literals": 38,
+      "only_asm": [],
+      "only_c": [],
+      "differences": [],
+      "c_sha256": "3425F64B805B8BAB8086523288C8AFE86EEE8F183208AA863B49BB8FB962A154",
+      "c_valid_dependencies": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmi32.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/debug.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmiint.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/buffer.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/data.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmiselr.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/int21map.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/modesw.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/register.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/savestat.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/stack.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/vxd.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/xmem.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmimemr.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmimscr.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/i386_dpmi386.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/adapter-softpc/mvdm_softpc_fast_bop.obj",
+          "raw": "../../../../src/mvdm/inc/dpmi.h"
+        }
+      ]
+    },
+    {
+      "name": "XMSSVC",
+      "asm_literals": 13,
+      "c_literals": 13,
+      "shared_literals": 13,
+      "only_asm": [],
+      "only_c": [],
+      "differences": [],
+      "c_sha256": "E2661ECF606B903E4C3053C4E6FE8197F4F4B15DDE81393FB6FD508F09BCCEBE",
+      "c_valid_dependencies": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsdisp.obj",
+          "raw": "../../../../src/mvdm/inc/xmssvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsblock.obj",
+          "raw": "../../../../src/mvdm/inc/xmssvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsa20.obj",
+          "raw": "../../../../src/mvdm/inc/xmssvc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsmisc.obj",
+          "raw": "../../../../src/mvdm/inc/xmssvc.h"
+        }
+      ]
+    },
+    {
+      "name": "SOFTPC",
+      "asm_literals": 67,
+      "c_literals": 66,
+      "shared_literals": 66,
+      "only_asm": [
+        "EXPORT"
+      ],
+      "only_c": [],
+      "differences": [],
+      "c_sha256": "04DAD85BEA7E01954C337FE3A3DC700E8BD7407B60F01EB2393F6055A2BDF8F3",
+      "c_valid_dependencies": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfcb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdir.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdisp.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demerror.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demfile.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demgset.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demioctl.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demhndl.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlock.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demmisc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demlabel.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demdasd.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dem/demsrch.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmddisp.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdexit.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdexec.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdmisc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdpif.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdredir.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdconf.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdkeyb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdenv.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsdisp.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsblock.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsa20.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsmisc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsumb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmi32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/debug.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/xms/xmsmemr.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmiint.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/buffer.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmiselr.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/int21map.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/modesw.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/register.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/savestat.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/stack.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/vxd.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/xmem.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmimemr.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/dpmimscr.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/dpmi/i386_dpmi386.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/mvdm-debugger/dbg.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrmslot.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnmpipe.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrdisp.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrinit.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrmisc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrputil.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnetb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrremote.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrnetapi.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrdlc5c.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrdlcpst.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/redir/vrdlcbuf.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsglb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmtbl32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcntl32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgprnset.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgem.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi31.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgbm.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgfont.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/mapembed.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgpal.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgmeta.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres16.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walias.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgcb.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdde.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgsbm.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wstruc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall16.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowtbl.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmdisp32.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsg16.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgtext.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkbman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkmem.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkgthunk.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkfileio.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkernel.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32fax.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser31.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wshell.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucaret.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclass.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucomm.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclip.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucursor.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wudlg.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuhook.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wulang.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumenu.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumsg.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutext.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutmr.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuwind.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowhooks.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdos.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wreldc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcuricon.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsubcls.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia1.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia2.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstruc.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru2.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walloc16.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru1.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/waccel.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmalias.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsext.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsdata.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsraw.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wheap.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wthman.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcommdlg.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdib.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wusercli.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wspool.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wole2.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wparam.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_hook_callback.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_shell_callback.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_cleanup_entry.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_idle_hook_binding.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_common_dialog_calls.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_message_lifetime.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_thunk_scope.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_native_extension.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_launch_identity.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_termination.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_registry_binding.obj",
+          "raw": "../../../../src/mvdm/inc/softpc.h"
+        }
+      ]
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "Literal constants and normalized exact host dependencies only; no guest built, selector dispatch table validation, service behavior or structure layout compatibility."
+}

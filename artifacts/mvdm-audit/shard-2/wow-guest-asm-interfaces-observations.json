@@ -1,0 +1,83 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "inc/WOW.INC",
+      "hashes": [
+        "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC",
+        "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC",
+        "87C5A5A1A3F34873B9BB27BA21EEF73A576589229A205EC6DEC32CA8E8B5AEBC"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wowtbl_normalized_dependency": false
+    },
+    {
+      "path": "inc/WOWMMCB.INC",
+      "hashes": [
+        "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5",
+        "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5",
+        "0BA724BB298B3ABFC0AC49248B02CA78887F0025C4BC6B8EFF2079555C583BE5"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wowtbl_normalized_dependency": false
+    },
+    {
+      "path": "inc/WOWNT32.INC",
+      "hashes": [
+        "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C",
+        "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C",
+        "3F0DF9FE5BAE1F2022E6E0A346E35FA67EEB16482D6A37D66336AA150E9C9D2C"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wowtbl_normalized_dependency": false
+    },
+    {
+      "path": "inc/WOWTH.INC",
+      "hashes": [
+        "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882",
+        "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882",
+        "CE4A1BE01D6467C251510FF60B65E5000912E8198CA87FCB7AE70F834721F882"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "wowtbl_normalized_dependency": false
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\inc\\makefile",
+      "sha256": "22619F4BDD9BE2F377AB919997527AA9797DFDB0E10D5082EBF424CDDF7280D9"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\gdi\\gdi.asm",
+      "sha256": "D64FA58C7AE7B6FBC84B25F4BC60C08D5D8453ACB1C9FE769F201FC5B6D213B2"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\toolhelp\\ththunks.asm",
+      "sha256": "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\toolhelp\\makefile",
+      "sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\stack.asm",
+      "sha256": "2254EDD89933F7A869DB2E98DCE5CF58BA44CE20A490B014202224CED478BB6F"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\isr.asm",
+      "sha256": "DDCEEDDAAE67DBE2CD56ECFA60683DE48549FEB7A54283EE740BA7BA205D83AE"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\mmsystem\\makefile",
+      "sha256": "C2D398CC825DD29EB8E93CD93BAA0AE234669D8EA5AF81B0C88F5F868D06EAE1"
+    }
+  ],
+  "normalized_deps_object": "obj/wowtbl.obj",
+  "compile_edge": "build obj/wowtbl.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wowtbl.c",
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "scope": "Historical guest assembly references and one host dependency snapshot, not complete build closure or guest ABI proof"
+}

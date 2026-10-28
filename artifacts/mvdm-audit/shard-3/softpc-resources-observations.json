@@ -1,0 +1,99 @@
+{
+  "softerr.ico": {
+    "current": {
+      "size": 766,
+      "sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67"
+    },
+    "opennt": {
+      "size": 766,
+      "sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67"
+    },
+    "opennt45": {
+      "size": 766,
+      "sha256": "d27d263fb667946e4a5320cbebd1b6378659ae31d9f4744311fc581140756f67"
+    }
+  },
+  "softpc.ico": {
+    "current": {
+      "size": 766,
+      "sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79"
+    },
+    "opennt": {
+      "size": 766,
+      "sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79"
+    },
+    "opennt45": {
+      "size": 766,
+      "sha256": "779a5e682dbecb23e9ea86f94be5591c53b1fe93497f7f0507ecbac4042ebe79"
+    }
+  },
+  "softpc.def": {
+    "current": {
+      "size": 205,
+      "sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7"
+    },
+    "opennt": {
+      "size": 205,
+      "sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7"
+    },
+    "opennt45": {
+      "size": 205,
+      "sha256": "2dbbe115d93d9d2a25004868450b43568be3e14565fd08314d78e18f658f8ab7"
+    }
+  },
+  "resource.rc": {
+    "current": {
+      "size": 1249,
+      "sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369"
+    },
+    "opennt": {
+      "size": 1249,
+      "sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369"
+    },
+    "opennt45": {
+      "size": 1249,
+      "sha256": "fbf7f94838571ec486880de4574724fa883580c5ab2ac5eb4463d248c3205369"
+    }
+  },
+  "sources": {
+    "current": {
+      "size": 732,
+      "sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5"
+    },
+    "opennt": {
+      "size": 732,
+      "sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5"
+    },
+    "opennt45": {
+      "size": 732,
+      "sha256": "559d13e3e33a0dc0da9c60e209017b1f3dc5b1806d0bee4ce928aa488a05b2f5"
+    }
+  },
+  "current_rc": {
+    "sha256": "3e3ac9b1001127e3900c1ba5a2309c28aaa97ecf2882fa6f4e9f20e600a26d8d",
+    "lines": [
+      "ERRORPANEL DIALOG 0, 0, 240, 87"
+    ]
+  },
+  "generated_rc": {
+    "sha256": "ee33688a792a32c63abe61ceac07bf74f51bbc13639deee8fe11c5c6c7f322fd",
+    "lines": [
+      "ERRORPANEL DIALOG 0, 0, 240, 87"
+    ]
+  },
+  "current_def": {
+    "sha256": "09b1b928016158b2b5492c6726b0e1ce2efbf07c4d14d0ed1c5dfdd4d0efe362",
+    "lines": []
+  },
+  "build_ninja": {
+    "sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+    "lines": [
+      "build obj/host/softpc-resource.res: rc O$:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/softpc-embedded-roms.rc"
+    ]
+  },
+  "dependency_snapshot": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": [],
+    "limitation": "C compile deps only; resource compiler dependencies require separately examined resource source"
+  }
+}
