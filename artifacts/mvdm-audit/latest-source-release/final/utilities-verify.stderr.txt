@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\build\t473-s10\verify-utilities.ps1:4
+Line |
+   4 |  if($LASTEXITCODE){throw 'SZDD test failed'}
+     |                    ~~~~~~~~~~~~~~~~~~~~~~~~
+     | SZDD test failed

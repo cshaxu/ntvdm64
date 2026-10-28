@@ -1,0 +1,151 @@
+{
+  "result": "pass",
+  "source_commit": "55c7373344cfc7e9b150b4fc39fff23bf8e2f25f",
+  "published_utc": "2026-10-28T03:31:29.9540363Z",
+  "verified": [
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/launcher/run16.exe",
+      "producer_sha256": "F4BBCDFFEF8DDCEC91DE8DBC21324D63D99AF5D26D03A46B8D808C03F4B369AC",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\run16.exe",
+      "sha256": "EF57CFB54A22E416FBCF393AAA631169AC3B82AF87EC70F6208F17FD1B28400E",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/service/ntsrv.exe",
+      "producer_sha256": "9DD53AA2E012FECEB822624894F55B2859E2B782980B60B0DE7EA0B060842FA2",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntsrv.exe",
+      "sha256": "349FC7882957CCE3DB8A0466DD5D7904E12BCAEA1D84BB373DE94E5EAFE0873B",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/frontend/ntcon.exe",
+      "producer_sha256": "238BC8ED7705B832F9CBB9C0981B1E267DE052EFB90FCF02214FF8DAE8280C15",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntcon.exe",
+      "sha256": "A446070E5CEBB1837B7EDD48F6AD01D630FFCB95B097BB92C6DB060FD442B81E",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/ntvdm.exe",
+      "producer_sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+      "sha256": "9132A574A2A58D44CF2EAC36F352956156304C8B2317F88A28BBE24683947E3B",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/worker/ntvwm.exe",
+      "producer_sha256": "E5DF2A5C465281C8F0C6D3EFFE73D9AD7CC9431275334FFFCFB876BFDD1EAD7C",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvwm.exe",
+      "sha256": "A6000D8CE1BBDB8AC5D253040D2224D2B9DC0F97819F17A15F171DDDEF0408C6",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/monitor/ntmon.exe",
+      "producer_sha256": "68343A16B1F80AD44464C0435E1EDE8BA522F0001DEC0009D29FAD4259847044",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntmon.exe",
+      "sha256": "3927647686344F8D15748203790E4F0E0CF06A588B2DDF141304F52DB8DC0D29",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "producer_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\WOW32.DLL",
+      "sha256": "117FF1A06273BC509F5F52F17C16702A37D751F1C3088897A479ED7A46CD7947",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/VDMREDIR.dll",
+      "producer_sha256": "A5FADF8EC7734DC7231544346F873D32E781C500068859677AE9166040613113",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\VDMREDIR.DLL",
+      "sha256": "66E7809E9693902DA1CFA981E412998F8CFBA433F33D810E0281D341DF88CD12",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/nthook32.dll",
+      "producer_sha256": "6300B5307CAB210B0D1D2DFEFF874EFAE2961DEE89F81B89490FE8D45D07BFCA",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook32.dll",
+      "sha256": "8053C8C59EB637FC49F653E2225069EE9D2E6C5327579E997B5061DB742FE821",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/hook/nthook64.dll",
+      "producer_sha256": "F5C73BCA78BCC14FA8C4F53ED2C481A52E079B9ACED713BF04A36A05E124810C",
+      "path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\nthook64.dll",
+      "sha256": "2A21919D83B9FE9CBE15664CFE3D96F8419F1AC373946AB57560E6EA46427F51",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/launcher/run16.exe",
+      "producer_sha256": "F4BBCDFFEF8DDCEC91DE8DBC21324D63D99AF5D26D03A46B8D808C03F4B369AC",
+      "path": "O:\\winnt\\system32\\run16.exe",
+      "sha256": "EF57CFB54A22E416FBCF393AAA631169AC3B82AF87EC70F6208F17FD1B28400E",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/service/ntsrv.exe",
+      "producer_sha256": "9DD53AA2E012FECEB822624894F55B2859E2B782980B60B0DE7EA0B060842FA2",
+      "path": "O:\\winnt\\system32\\ntsrv.exe",
+      "sha256": "349FC7882957CCE3DB8A0466DD5D7904E12BCAEA1D84BB373DE94E5EAFE0873B",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/frontend/ntcon.exe",
+      "producer_sha256": "238BC8ED7705B832F9CBB9C0981B1E267DE052EFB90FCF02214FF8DAE8280C15",
+      "path": "O:\\winnt\\system32\\ntcon.exe",
+      "sha256": "A446070E5CEBB1837B7EDD48F6AD01D630FFCB95B097BB92C6DB060FD442B81E",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/ntvdm.exe",
+      "producer_sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C",
+      "path": "O:\\winnt\\system32\\ntvdm.exe",
+      "sha256": "9132A574A2A58D44CF2EAC36F352956156304C8B2317F88A28BBE24683947E3B",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/worker/ntvwm.exe",
+      "producer_sha256": "E5DF2A5C465281C8F0C6D3EFFE73D9AD7CC9431275334FFFCFB876BFDD1EAD7C",
+      "path": "O:\\winnt\\system32\\ntvwm.exe",
+      "sha256": "A6000D8CE1BBDB8AC5D253040D2224D2B9DC0F97819F17A15F171DDDEF0408C6",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/monitor/ntmon.exe",
+      "producer_sha256": "68343A16B1F80AD44464C0435E1EDE8BA522F0001DEC0009D29FAD4259847044",
+      "path": "O:\\winnt\\system32\\ntmon.exe",
+      "sha256": "3927647686344F8D15748203790E4F0E0CF06A588B2DDF141304F52DB8DC0D29",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "producer_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+      "path": "O:\\winnt\\system32\\WOW32.DLL",
+      "sha256": "117FF1A06273BC509F5F52F17C16702A37D751F1C3088897A479ED7A46CD7947",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/VDMREDIR.dll",
+      "producer_sha256": "A5FADF8EC7734DC7231544346F873D32E781C500068859677AE9166040613113",
+      "path": "O:\\winnt\\system32\\VDMREDIR.DLL",
+      "sha256": "66E7809E9693902DA1CFA981E412998F8CFBA433F33D810E0281D341DF88CD12",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker/nthook32.dll",
+      "producer_sha256": "6300B5307CAB210B0D1D2DFEFF874EFAE2961DEE89F81B89490FE8D45D07BFCA",
+      "path": "O:\\winnt\\system32\\nthook32.dll",
+      "sha256": "8053C8C59EB637FC49F653E2225069EE9D2E6C5327579E997B5061DB742FE821",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    },
+    {
+      "producer": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release/hook/nthook64.dll",
+      "producer_sha256": "F5C73BCA78BCC14FA8C4F53ED2C481A52E079B9ACED713BF04A36A05E124810C",
+      "path": "O:\\winnt\\system32\\nthook64.dll",
+      "sha256": "2A21919D83B9FE9CBE15664CFE3D96F8419F1AC373946AB57560E6EA46427F51",
+      "package_id": "7328a488-df89-476b-a392-8308b6798b3f"
+    }
+  ],
+  "guest_changed": false,
+  "scope": "All ten components built from latest committed production code; owner rejects old-package restoration",
+  "package_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\package",
+  "head_at_publication": "55c7373344cfc7e9b150b4fc39fff23bf8e2f25f"
+}

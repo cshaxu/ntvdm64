@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\build\t473-s10\latest-source-release\incremental.ps1:19
+Line |
+  19 |  . row.producer_sha256){throw 'Producer changed after published build'}}
+     |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Producer changed after published build

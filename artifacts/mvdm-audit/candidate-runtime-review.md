@@ -1,5 +1,11 @@
 # S10 current-source candidate verification
 
+Owner correction dated 2026-10-27 supersedes the older publication hold below:
+deploy all ten components built from latest committed production code and do
+not restore package-c merely to satisfy historical hashes. The [fresh delivery](latest-source-release-review.md)
+records that build, current Full verification and complete publication. The
+older SOL Options non-passes remain evidence; this does not declare them fixed.
+
 This is a candidate review, **not a release or S10 closure**. The candidate
 contains the five runtime mirror updates committed by the concurrent setup
 work in `35424a126`; `6ecbf166e` subsequently restored the independent path

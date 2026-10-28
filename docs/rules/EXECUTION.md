@@ -249,6 +249,14 @@ or weaken output assertions as a throughput optimization.
 
 ### Every-P regression and side-test publication gate
 
+Owner correction dated 2026-10-27: the requested ten-component publication
+must be built from the latest committed production source. A historical
+checkpoint or its expected hashes is comparison evidence, not authority to
+restore an older package. Diagnose a mismatch against the active build and
+publication manifest; never automatically downgrade installed or release
+images to make a historical verifier pass. A rollback needs explicit owner
+direction. Preserve the failed check and record the actual selected version.
+
 #### Current ten-component release and committed assets
 
 Owner clarification dated 2026-10-06: every delivery that updates product code

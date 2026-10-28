@@ -70,6 +70,20 @@
       "architecture": "amd64",
       "sha256": "B27F657281EB00BCA30314014AF20FE5D7E3ADB2E190934CB292A20F523E0B60",
       "source": "src/addon/lnk/lnk.c"
+    },
+    {
+      "id": "szdd",
+      "file": "SZDD.EXE",
+      "architecture": "amd64",
+      "sha256": "E89F4AB5C0170BE7AA1E9E5C9504F358F983E4D7DD6054AD1FC8AFF7C36644D0",
+      "source": "src/addon/szdd/szdd.c"
+    },
+    {
+      "id": "w31patch",
+      "file": "W31PATCH.EXE",
+      "architecture": "amd64",
+      "sha256": "E6C93ED2AE9527376E1721D9BF1916EFA7BFBFB3984710B455DA2A756858B05A",
+      "source": "src/addon/w31patch/w31patch.c"
     }
   ]
 }

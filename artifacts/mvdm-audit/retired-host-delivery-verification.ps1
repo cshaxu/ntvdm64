@@ -21,10 +21,10 @@ if(@($candidate).Count -ne 10){throw 'Candidate package incomplete'}
 foreach($row in $candidate){
     if((Get-FileHash (Join-Path 'build/t473-s10/candidate-validation/package' $row.RelativePath)).Hash -ne $row.Sha256){throw 'Candidate changed'}
 }
-$baseline=Get-Content build/package-uuid/package-c/product-system32-manifest.json -Raw|ConvertFrom-Json
-if(@($baseline).Count -ne 10){throw 'Accepted package incomplete'}
+$baseline=Get-Content "$PSScriptRoot/latest-source-release/ten-component-manifest.json" -Raw|ConvertFrom-Json
+if(@($baseline).Count -ne 10){throw 'Current source-built package incomplete'}
 foreach($row in $baseline){foreach($directory in @('assets/release','O:/winnt/system32')){
-    if((Get-FileHash (Join-Path $directory $row.Name)).Hash -ne $row.Sha256){throw 'Published package changed'}
+    if((Get-FileHash (Join-Path $directory $row.Name)).Hash -ne $row.Sha256){throw 'Current source-built publication differs'}
 }}
 & tools/governance/Verify-DocumentationGovernance.ps1
 if($LASTEXITCODE){exit $LASTEXITCODE}
@@ -35,4 +35,4 @@ if($LASTEXITCODE){exit $LASTEXITCODE}
 & git diff --cached --check
 if($LASTEXITCODE){exit $LASTEXITCODE}
 if((Get-Item docs/states/CURRENT.md).Length -gt 16384){throw 'CURRENT exceeds 16KiB'}
-'PASS four physical NT predecessors, 15 actual selected functions, 73 DEM slots, original cleanup order and wrong-slot negative; selected capabilities remain partial; accepted/candidate unchanged, installed baseline restored'
+'PASS four physical NT predecessors and retained controls; selected capabilities remain partial; installed/release images match the owner-selected latest source-built package'

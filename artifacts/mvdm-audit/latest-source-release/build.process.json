@@ -1,0 +1,6 @@
+{
+  "pid": 27768,
+  "started": "2026-10-28T03:27:18.6926906Z",
+  "arguments": "-NoProfile -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\build.ps1\"",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+}

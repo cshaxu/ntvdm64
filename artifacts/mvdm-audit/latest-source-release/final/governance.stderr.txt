@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\latest-source-delivery-verification.ps1:23
+Line |
+  23 |      if($entries.Count -ne 1){throw "Missing utility record: $name"}
+     |                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Missing utility record: W31PATCH.EXE

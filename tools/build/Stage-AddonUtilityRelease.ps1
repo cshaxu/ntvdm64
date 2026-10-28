@@ -2,7 +2,9 @@ param(
     [string]$PifBuild='',
     [string]$HashBuild='',
     [string]$GrpBuild='',
-    [string]$LnkBuild=''
+    [string]$LnkBuild='',
+    [string]$SzddBuild='',
+    [string]$W31PatchBuild=''
 )
 
 $ErrorActionPreference='Stop'
@@ -11,7 +13,9 @@ $items=@(
     @{id='pif'; file='PIF.EXE'; build=$PifBuild; source='src/addon/pif/pif.c'},
     @{id='hash';file='HASH.EXE';build=$HashBuild;source='src/addon/hash/hash.c'},
     @{id='grp'; file='GRP.EXE'; build=$GrpBuild; source='src/addon/grp/grp.c'},
-    @{id='lnk'; file='LNK.EXE'; build=$LnkBuild; source='src/addon/lnk/lnk.c'}
+    @{id='lnk'; file='LNK.EXE'; build=$LnkBuild; source='src/addon/lnk/lnk.c'},
+    @{id='szdd'; file='SZDD.EXE'; build=$SzddBuild; source='src/addon/szdd/szdd.c'},
+    @{id='w31patch'; file='W31PATCH.EXE'; build=$W31PatchBuild; source='src/addon/w31patch/w31patch.c'}
 ) | Where-Object build
 if(!@($items).Count){throw 'At least one utility build is required'}
 $manifest=@()
@@ -37,6 +41,7 @@ $addonPath=Join-Path $repo 'assets/release/addon-manifest.json'
 $prior=Get-Content -LiteralPath $addonPath -Raw|ConvertFrom-Json
 if($prior.schema -ne 1 -or $null -eq $prior.drivers){throw 'Invalid existing add-on manifest'}
 $updatedIds=@($manifest|ForEach-Object id)
-$utilities=@($prior.utilities|Where-Object {$_.id -notin $updatedIds})+@($manifest)
+$updatedFiles=@($manifest|ForEach-Object file)
+$utilities=@($prior.utilities|Where-Object {$_.id -notin $updatedIds -and $_.file -notin $updatedFiles})+@($manifest)
 [ordered]@{schema=1;drivers=@($prior.drivers);utilities=$utilities}|ConvertTo-Json -Depth 6|Set-Content -LiteralPath $addonPath -Encoding UTF8
 'PASS selected AMD64 add-on utilities published; other utility/driver entries retained'

@@ -1,0 +1,7 @@
+ParentContainsErrorRecordException: O:\repos.hobby\ntvdm64\build\t473-s10\latest-source-release\incremental.ps1:10
+Line |
+  10 |      $text=[IO.File]::ReadAllText("$out/incremental-$arch.stdout.txt")
+     |      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllText" with "1" argument(s): "The process cannot access the file
+     | 'O:\repos.hobby\ntvdm64\build\t473-s10\latest-source-release\incremental-x86.stdout.txt' because it is being
+     | used by another process."

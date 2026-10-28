@@ -16,6 +16,16 @@ owner-supplied IO.SYS copy and creates separate local artwork only.
 
 ### Permanent guest-media immutability
 
+T473 S10 companion-tool scope, owner request dated 2026-10-27: audit and
+commit the supplied `tools/win31-setup` changes. The reviewed APPLY/UNAPPLY
+workflow additionally substitutes the already released, independently authored
+MOUSE31.DRV as compressed MOUSE.DR_ in a user-selected **media copy**, retaining
+and verifying the exact original compressed adjacent backup. Validation uses
+build-owned copies only. Original media, NTIO/NTDOS and existing installations
+remain unchanged. SETUP.CMD generates installed launch profiles without
+patching installed guest binaries again. This scoped tool delivery does not
+admit other media replacements, guest recompilation or runtime guest patches.
+
 Owner-scoped standalone Win95 toolkit exception dated 2026-10-25: package the
 already proven VMM32.VXD IOS/VMM/VWIN32/DOSMGR consumer adaptations in an
 identity-bound offline patcher for recoverable installed copies. Retain exact

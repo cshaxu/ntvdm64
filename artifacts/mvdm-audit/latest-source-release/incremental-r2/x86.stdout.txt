@@ -1,0 +1,8 @@
+[0/3] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/run-ninja-parallel.cmd ntvdm.exe"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker'
+ninja: no work to do.
+[1/2] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe -C O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32 wow32.dll"
+ninja: Entering directory `O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32'
+ninja: no work to do.
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker'
+ninja: no work to do.

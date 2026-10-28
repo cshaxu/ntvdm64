@@ -1,0 +1,18 @@
+[0/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\worker'
+ninja: no work to do.
+[1/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/frontend/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\frontend'
+ninja: no work to do.
+[2/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/monitor/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\monitor'
+ninja: no work to do.
+[3/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/launcher/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\launcher'
+ninja: no work to do.
+[4/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/service/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\service'
+ninja: no work to do.
+[5/6] C:\WINDOWS\system32\cmd.exe /C "cd /D O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release && cmd /d /c O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/hook/run-ninja.cmd"
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x64-release\hook'
+ninja: no work to do.

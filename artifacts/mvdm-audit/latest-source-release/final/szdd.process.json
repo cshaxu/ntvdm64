@@ -1,0 +1,6 @@
+{
+  "pid": 5100,
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/szdd/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-utilities-r4/SZDD.EXE\"\"",
+  "started": "2026-10-28T03:54:38.2132564Z"
+}

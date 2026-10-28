@@ -1,5 +1,11 @@
 # S10 superseded NT host source roles
 
+The owner rejected this checkpoint's package-c restoration and required a
+fresh build/publication of all ten latest-source components. The [correction](latest-source-release-review.md)
+supersedes that operational choice; the source dispositions below remain
+unchanged. The current delivery verifier checks the newly selected package,
+not historical installed hashes as a reason for another rollback.
+
 Base `de734bc9c`; exactly four unchanged physical predecessor files become
 excluded. Their current NT capabilities retain independent partial owners.
 This is not exclusion of DOS files, configuration, frontend or termination.

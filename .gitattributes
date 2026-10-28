@@ -32,6 +32,9 @@ docs/etc/legacy_code/opennt-bop/original/** -text -whitespace
 # Audit ledgers, probes and reports carry exact-byte SHA-256 identities.
 # Preserve their captured bytes instead of applying core.autocrlf on checkout.
 artifacts/mvdm-audit/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve raw Full-run output, including native messages' terminal spaces.
+artifacts/mvdm-audit/latest-source-release/full.stdout.txt -whitespace
+artifacts/mvdm-audit/latest-source-release/final/run-full.log -whitespace
 # A blank context line's leading space is part of this captured patch format.
 artifacts/mvdm-audit/shard-3/sas-vector-runtime-fixture.patch -whitespace
 # Retain the original Ninja dependency dump's terminal blank line.

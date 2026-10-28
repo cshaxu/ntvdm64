@@ -1,11 +1,6 @@
 param(
     [string]$MediaRoot,
-    [string]$ReleaseRoot = '',
-    [Parameter(Mandatory)][string]$Patchset,
-    [Parameter(Mandatory)][string]$AdaptedWin386,
-    [Parameter(Mandatory)][string]$AdaptedKrnl386,
-    [Parameter(Mandatory)][string]$RetailWin386,
-    [Parameter(Mandatory)][string]$RetailKrnl386
+    [string]$ReleaseRoot = ''
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot/../../..").Path
@@ -31,13 +26,9 @@ function HashBytes([byte[]]$bytes) {
 }
 $files = @{}
 $files['MOUSE31.DRV'] = [IO.File]::ReadAllBytes($driver)
-$files['PATCHSET.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $Patchset).Path)
 $files['README.TXT'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/README.txt'))
-$files['KRNL386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedKrnl386).Path)
-$files['KRNL386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailKrnl386).Path)
 $files['SETUP.CMD'] = [IO.File]::ReadAllBytes((Join-Path $repo 'tools/win31-setup/SETUP.CMD'))
-$files['WIN386-ADAPTED.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $AdaptedWin386).Path)
-$files['WIN386-RETAIL.EXE'] = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $RetailWin386).Path)
+$files['PIF.EXE'] = [IO.File]::ReadAllBytes((Join-Path $release 'PIF.EXE'))
 
 $patch = Join-Path $media 'PATCH'; $owned = @{}
 if(Test-Path -LiteralPath $patch) {

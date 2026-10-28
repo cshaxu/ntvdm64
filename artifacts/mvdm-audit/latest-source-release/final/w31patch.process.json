@@ -1,0 +1,6 @@
+{
+  "pid": 15864,
+  "image": "C:\\WINDOWS\\system32\\cmd.exe",
+  "arguments": "/d /s /c \"\"O:/repos.hobby/ntvdm64/src/addon/w31patch/BUILD.CMD\" \"O:/repos.hobby/ntvdm64/build/t473-s10/addon-utilities-r4/W31PATCH.EXE\"\"",
+  "started": "2026-10-28T03:54:42.3768272Z"
+}

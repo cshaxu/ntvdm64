@@ -54,11 +54,9 @@ foreach($pair in @(@('WINSTD.CMD','WINSTD.PIF'), @('WIN386.CMD','WIN386.PIF'))) 
 }
 foreach($forbidden in @('win.cmd','start.cmd','WIN31.PIF')) {if(Test-Path -LiteralPath (Join-Path $patch $forbidden)) {throw "Ambiguous installed launcher remains: $forbidden"}}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE')).Hash -ne 'C67E667E25E91C65EFB5ACDDEC437DA8B586037DA7DE502228CA8FBD806CF3F8') {throw 'Installed WIN386 is not the checked enhanced candidate'}
-$winBackup=if($SetupMode){Join-Path $patch 'WIN386.ORIG'}else{Join-Path $root 'SYSTEM\WIN386.EXE.BAK'}
-if((Get-FileHash -LiteralPath $winBackup).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 backup is missing'}
+if(!$SetupMode -and (Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\WIN386.EXE.BAK')).Hash -ne '6006860AE1003114583D70A1C6447247E1280A99633202912092A5F06A0C22A5') {throw 'Original WIN386 backup is missing'}
 if((Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE')).Hash -ne $ExpectedKernelHash) {throw 'Installed KRNL386 is not the checked standard candidate'}
-$krnlBackup=if($SetupMode){Join-Path $patch 'KRNL386.ORIG'}else{Join-Path $root 'SYSTEM\KRNL386.EXE.BAK'}
-if((Get-FileHash -LiteralPath $krnlBackup).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 backup is missing'}
+if(!$SetupMode -and (Get-FileHash -LiteralPath (Join-Path $root 'SYSTEM\KRNL386.EXE.BAK')).Hash -ne 'FBEAF672EE9E917318CE8FCD1D560DB805DBFADF4777039ABBAAFF1A9C75B980') {throw 'Original KRNL386 backup is missing'}
 if(!$SetupMode) {
  if(!(Test-Path -LiteralPath (Join-Path $root 'SYSTEM\MOUSE.DRV.BAK') -PathType Leaf)) {throw 'Original mouse-driver adjacent backup is missing'}
  foreach($legacy in @('WIN386.ORIG','KRNL386.ORIG','MOUSE.DRV.ORIG')) {if(Test-Path -LiteralPath (Join-Path $patch $legacy)) {throw "Legacy PATCH recovery copy remains: $legacy"}}

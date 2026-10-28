@@ -1,0 +1,24 @@
+{
+  "source_commit": "55c7373344cfc7e9b150b4fc39fff23bf8e2f25f",
+  "started": "2026-10-28T03:49:38.3093190Z",
+  "result": "pass",
+  "runs": [
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "architecture": "x86",
+      "started": "2026-10-28T03:49:38.3658361Z",
+      "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\x86.cmd\"\"",
+      "pid": 17876,
+      "exit": 0
+    },
+    {
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "architecture": "x64",
+      "started": "2026-10-28T03:49:52.2831205Z",
+      "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\x64.cmd\"\"",
+      "pid": 18792,
+      "exit": 0
+    }
+  ],
+  "finished": "2026-10-28T03:50:22.5010823Z"
+}

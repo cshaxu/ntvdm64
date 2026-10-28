@@ -293,3 +293,5 @@ ledger is 1,697 pending, 390 partial, 52 full and 2,545 excluded file roles.
 The separate [SOL debugger observations](sol-creation-debugger-review.md)
 distinguish sentinel error writes from actual failure branches; none qualifies
 the held candidate or selects a repair.
+
+The [latest-source delivery](latest-source-release-review.md) records the owner-directed ten-image publication correction and independent SZDD/W31PATCH tools; the whole-source reconciliation remains open.

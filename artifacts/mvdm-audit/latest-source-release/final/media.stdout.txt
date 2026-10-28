@@ -1,0 +1,12 @@
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\w31-media-r3\PATCH\SETUP.CMD
+Patch preparation exit code: 0
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\w31-media-r3\PATCH\SETUP.CMD
+Patch preparation exit code: 0
+Patch recovery exit code: 0
+Preserve unrecognised PATCH\PIF.EXE
+Patch preparation exit code: 5
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\w31-media-r3\PATCH\SETUP.CMD
+Patch preparation exit code: 0
+Preserve unrecognised PATCH\SETUP.CMD
+Patch recovery exit code: 5
+PASS CMD apply, repeat, exact unapply, unknown payload and conflict preservation

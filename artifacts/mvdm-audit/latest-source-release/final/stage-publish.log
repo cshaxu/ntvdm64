@@ -1,0 +1,2 @@
+PASS staged coherent system32 host package; explicitly selected native images verified; baseline media/configuration retained
+PASS latest-source ten-component package published to assets/release and O:/winnt/system32; 20 destination hashes verified

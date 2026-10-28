@@ -1,0 +1,60 @@
+{
+  "result": "pass",
+  "started": "2026-10-28T03:51:54.9673656Z",
+  "runs": [
+    {
+      "diagnostic_budget_ms": 120000,
+      "name": "media",
+      "started": "2026-10-28T03:51:54.9832291Z",
+      "arguments": "-NoProfile -File tests/component-integration/win31_setup_cmd_roundtrip_test.ps1 -OriginalMedia O:/assets/mswindos/ewin31 -BuildRoot build/t473-s10/w31-media-r3",
+      "pid": 33224,
+      "exit": 0,
+      "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    {
+      "diagnostic_budget_ms": 120000,
+      "name": "profiles",
+      "started": "2026-10-28T03:52:01.6624322Z",
+      "arguments": "-NoProfile -File tests/component-integration/win31_setup_profile_generation_test.ps1 -BuildRoot build/w31r3",
+      "pid": 15924,
+      "exit": 0,
+      "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    {
+      "diagnostic_budget_ms": 120000,
+      "name": "safety",
+      "started": "2026-10-28T03:52:04.1690116Z",
+      "arguments": "-NoProfile -File tests/component-integration/win31_setup_runner_safety_test.ps1 -BuildRoot build/t473-s10/w31-safety-r3",
+      "pid": 30924,
+      "exit": 0,
+      "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    {
+      "diagnostic_budget_ms": 120000,
+      "name": "runner",
+      "started": "2026-10-28T03:52:05.2802289Z",
+      "arguments": "-NoProfile -File tests/component-integration/win31_setup_runner_test.ps1 -PackageRoot build/t473-s10/w31-media-r3 -BuildRoot build/t473-s10/w31-runner-r3",
+      "pid": 25296,
+      "exit": 0,
+      "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+    },
+    {
+      "diagnostic_budget_ms": 120000,
+      "name": "payload",
+      "started": "2026-10-28T03:52:07.6385793Z",
+      "arguments": "-NoProfile -File tests/component-integration/win31_setup_apply_idempotence_test.ps1 -PackageRoot \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\payload-media\" -BuildRoot build/t473-s10/w31-payload-r3",
+      "pid": 8724,
+      "exit": 0,
+      "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe"
+    }
+  ],
+  "original_media": "O:\\assets\\mswindos\\ewin31",
+  "original_hashes": {
+    "DOSX.EX_": "A0CBBABE19211342966D88E3C3C34DF36DD443485F574EC0D3FACC1322C3D9FB",
+    "WIN386.EX_": "CFBEE553B065CDC2C5FCDD3EAF3A397646E5FA61FB656E14BBE9EEE354169E39",
+    "MOUSE.DR_": "9B83A0049F193231C09B1A2EB02D5C928F8C0C10367943581055D97A960C8400",
+    "SETUP.EXE": "DD5A9288A0267D0476DA5B7697963708B27611B10134410496025D6E4F1FD7CB",
+    "KRNL386.EX_": "035E81BCB16B02BFFB044F43E61CB2F7E3C1E2392EADC42FB32CEEB5BF7D510B"
+  },
+  "finished": "2026-10-28T03:52:08.9864108Z"
+}

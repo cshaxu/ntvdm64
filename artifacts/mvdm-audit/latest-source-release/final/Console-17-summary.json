@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-empty.txt",
+    "BodyMs": 1726,
+    "CleanupMs": 231
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-native-zero.txt",
+    "BodyMs": 2302,
+    "CleanupMs": 196
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-missing.txt",
+    "BodyMs": 3038,
+    "CleanupMs": 228
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-native-seven.txt",
+    "BodyMs": 1237,
+    "CleanupMs": 215
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-native-streams.txt",
+    "BodyMs": 1257,
+    "CleanupMs": 204
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-native-eof.txt",
+    "BodyMs": 1259,
+    "CleanupMs": 207
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-mem.txt",
+    "BodyMs": 2223,
+    "CleanupMs": 180
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-nested-empty.txt",
+    "BodyMs": 3001,
+    "CleanupMs": 202
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-nested-mem.txt",
+    "BodyMs": 6423,
+    "CleanupMs": 164
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-mem-repeat.txt",
+    "BodyMs": 2837,
+    "CleanupMs": 163
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-direct-mem.txt",
+    "BodyMs": 1011,
+    "CleanupMs": 174
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-command-c.txt",
+    "BodyMs": 993,
+    "CleanupMs": 177
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-command-c-seven.txt",
+    "BodyMs": 1245,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-guest-seven.txt",
+    "BodyMs": 1063,
+    "CleanupMs": 176
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-command-c-mem.txt",
+    "BodyMs": 1011,
+    "CleanupMs": 198
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-direct-seven.txt",
+    "BodyMs": 1198,
+    "CleanupMs": 192
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release-r3\\full\\Console-17-edit.txt",
+    "BodyMs": 4348,
+    "CleanupMs": 178
+  }
+]

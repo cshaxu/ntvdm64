@@ -1,0 +1,6 @@
+{
+  "arguments": "-NoProfile -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\tools-tests.ps1\"",
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "pid": 29640,
+  "started": "2026-10-28T03:39:06.2834599Z"
+}

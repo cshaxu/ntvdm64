@@ -9,9 +9,10 @@ The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
 four-role census is retained; current work uses one implementer/reviewer. Automatic S progression remains in force. `books/` is supporting
 reading, not authority. Guest media remains unchanged.
 
-The current coherent ten-image baseline is `build/package-uuid/package-c`;
-its manifest matches `assets/release` and `O:/winnt/system32`. The owner
-assigned package-scoped NTSRV isolation to S10. Its implementation and
+Current ten-image package: `build/t473-s10/latest-source-release-r3/package`;
+release/installed hashes match. Owner requires latest committed production
+code, never an automatic restore of historical package-c.
+The owner assigned package-scoped NTSRV isolation to S10. Its implementation and
 selected product, control, multi-package and application probes are recorded
 in [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
 This delivery does not close the MVDM-wide source reconciliation or establish
@@ -30,13 +31,10 @@ helpers. Nine owners are partial; only the unused NOP helper file is excluded,
 with the original inline instruction retained. Wider CPU obligations remain open. The [header/macro review](../../artifacts/mvdm-audit/ccpu-header-macro-review.md) adds nine partial
 owners, one inactive PIG declaration exclusion and a reproduced bit-index defect.
 
-The separate [current-source candidate](../../artifacts/mvdm-audit/candidate-runtime-review.md)
-passes selected Full/game/WRITE/Video7 checks but fails SOL Options twice;
-accepted-baseline controls pass. It is not published or qualified for release.
-The [failure-only observer](../../artifacts/mvdm-audit/creation-negative-only-review.md)
-passes without reproducing the rejection; this is inconclusive, not a fix.
-An ordinary candidate control passes too; the two earlier failures remain
-unexplained and publication is still unqualified.
+Historical SOL Options candidate failures remain unexplained in the
+[candidate review](../../artifacts/mvdm-audit/candidate-runtime-review.md).
+The owner-directed latest-source publication supersedes its old hold;
+selected Full gates do not prove those historical failures repaired.
 
 ## Active Packet
 
@@ -175,10 +173,9 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-Accepted baseline: `build/package-uuid/package-c` and `assets/release`.
-The [latest checkpoint](../../artifacts/mvdm-audit/retired-host-role-review.md)
-restored all ten installed images after candidate hash drift; installation
-again matches the accepted baseline. Guest media remains unchanged.
+The [latest source delivery](../../artifacts/mvdm-audit/latest-source-release-review.md)
+builds all ten components from committed production code. Full selected
+product gates pass; both deployment targets match. Guest media is unchanged.
 
 ## Temporary Evidence
 

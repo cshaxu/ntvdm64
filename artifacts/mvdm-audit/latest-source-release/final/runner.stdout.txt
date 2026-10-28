@@ -1,0 +1,1 @@
+PASS SETUP.CMD invokes PATH run16 on DOS COMMAND /c SETUP.EXE, preserves its result and uses package-local TEMP

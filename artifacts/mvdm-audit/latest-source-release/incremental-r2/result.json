@@ -1,0 +1,22 @@
+{
+  "started": "2026-10-28T03:46:39.4096321Z",
+  "result": "running",
+  "runs": [
+    {
+      "exit": 0,
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "started": "2026-10-28T03:46:39.4536382Z",
+      "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\x86.cmd\"\"",
+      "no_work_markers": 3,
+      "pid": 18784,
+      "architecture": "x86"
+    },
+    {
+      "started": "2026-10-28T03:46:52.2416121Z",
+      "arguments": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\x64.cmd\"\"",
+      "image": "C:\\WINDOWS\\system32\\cmd.exe",
+      "architecture": "x64",
+      "pid": 23272
+    }
+  ]
+}

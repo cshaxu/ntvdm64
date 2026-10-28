@@ -1,0 +1,3 @@
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\latest-source-release\payload-media\PATCH; original media remain unchanged.
+Run PATCH\SETUP.CMD. After original Setup, enter the actual installation directory when prompted.
+PASS five setup tool contract groups; original media hashes unchanged; no actual Setup/installed guest executed

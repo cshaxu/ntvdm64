@@ -3,7 +3,6 @@ param(
     [Parameter(Mandatory)][string]$OriginalMedia,
     [Parameter(Mandatory)][string]$Destination,
     [Parameter(Mandatory)][string]$NtDos,
-    [Parameter(Mandatory)][string]$PifTemplate,
     [Parameter(Mandatory)][string]$OriginalWin386,
     [string]$ReleaseRoot = '',
     [string]$PreviousManifest = ''
@@ -11,44 +10,6 @@ param(
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path "$PSScriptRoot/../../..").Path
 
-# The only available source PIF is a functional historical profile and may
-# therefore contain the path of its former installation.  PATCHSET overwrites
-# every path-bearing field before it writes either installed PIF, but keep the
-# embedded resource itself path-neutral as well: a shipped executable must not
-# retain that former path as dead template data.
-function New-PathNeutralPifTemplate([string]$Source, [string]$Destination) {
-    $bytes = [IO.File]::ReadAllBytes((Resolve-Path -LiteralPath $Source).Path)
-    if($bytes.Length -lt 0x171) {throw 'Truncated PIF template'}
-    function Clear-Field([int]$Offset, [int]$Length) {
-        if($Offset -lt 0 -or $Length -lt 1 -or $Offset + $Length -gt $bytes.Length) {
-            throw 'PIF field outside template'
-        }
-        [Array]::Clear($bytes, $Offset, $Length)
-    }
-    Clear-Field 2 30; Clear-Field 0x24 63; Clear-Field 0x65 64; Clear-Field 0xa5 64
-    $position = 0x171; $seen = @{}; $nt = $false; $w386 = $false
-    while($position -ne 0xffff) {
-        if($seen.ContainsKey($position) -or $position + 22 -gt $bytes.Length) {throw 'Invalid PIF extension chain'}
-        $seen[$position] = $true
-        $signature = [Text.Encoding]::ASCII.GetString($bytes, $position, 16).Trim([char]0)
-        $next = [BitConverter]::ToUInt16($bytes, $position + 16)
-        $data = [BitConverter]::ToUInt16($bytes, $position + 18)
-        $length = [BitConverter]::ToUInt16($bytes, $position + 20)
-        if($data + $length -gt $bytes.Length) {throw 'Truncated PIF extension'}
-        if($signature -eq 'WINDOWS 386 3.0') {
-            if($length -lt 104) {throw 'Short Windows 386 PIF extension'}
-            Clear-Field ($data + 40) 64; $w386 = $true
-        }
-        if($signature -eq 'WINDOWS NT  3.1') {
-            if($length -lt 140) {throw 'Short Windows NT PIF extension'}
-            Clear-Field ($data + 12) 64; Clear-Field ($data + 76) 64; $nt = $true
-        }
-        $position = $next
-    }
-    if(!$nt -or !$w386) {throw 'Missing required PIF extension'}
-    $sum = 0; for($i = 2; $i -lt 0x171; $i++) {$sum = ($sum + $bytes[$i]) -band 255}; $bytes[1] = [byte]$sum
-    [IO.File]::WriteAllBytes($Destination, $bytes)
-}
 $build = [IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if(!$build.StartsWith((Join-Path $repo 'build') + '\', [StringComparison]::OrdinalIgnoreCase) -or (Test-Path -LiteralPath $build)) {throw 'Use a fresh build-owned packaging output'}
 $source = (Resolve-Path -LiteralPath $OriginalMedia).Path.TrimEnd('\')
@@ -78,12 +39,8 @@ New-Item -ItemType Directory -Path $krnlRetailRoot | Out-Null
 & expand.exe (Join-Path $stage 'KRNL386.EX_') $retailKrnl | Out-Null
 if($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath $retailKrnl)) {throw 'Could not expand original KRNL386.EX_'}
 & (Join-Path $PSScriptRoot 'adapt-retail-krnl386.ps1') -OriginalKrnl386 $retailKrnl -OutputRoot $krnlAdaptation
-$szddBuild = Join-Path $build 'szddpack'
-New-Item -ItemType Directory -Path $szddBuild | Out-Null
-$szddPack = Join-Path $szddBuild 'SZDDPACK.EXE'
-$szddBuildSource = Join-Path $repo 'src/addon/win31-setup/BUILD-SZDDPACK.CMD'
-& cmd.exe /d /c ('"{0}" "{1}" "{2}"' -f $szddBuildSource,$szddPack,$szddBuild)
-if($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath $szddPack)) {throw 'SZDDPACK build failed'}
+$szddPack = Join-Path $release 'SZDD.EXE'
+if(!(Test-Path -LiteralPath $szddPack)) {throw 'Missing released SZDD.EXE'}
 
 # Setup selects the retail compressed filenames.  Replace those exact source
 # representations in the build-owned copy before Setup gets a chance to copy
@@ -111,14 +68,7 @@ foreach($replacement in @(
         throw "Derived $($replacement.compressed) does not expand exactly"
     }
 }
-$patchsetRoot = Join-Path $build 'patchset'
-New-Item -ItemType Directory -Path $patchsetRoot | Out-Null
-$neutralPif = Join-Path $patchsetRoot 'PIF-TEMPLATE.BIN'
-New-PathNeutralPifTemplate $PifTemplate $neutralPif
-$patchsetSource = Join-Path $repo 'src/addon/win31-setup/BUILD.CMD'
-& cmd.exe /d /c ('"{0}" "{1}" "{2}" "{3}"' -f $patchsetSource,$neutralPif,(Join-Path $patchsetRoot 'PATCHSET.EXE'),$patchsetRoot)
-if($LASTEXITCODE -ne 0 -or !(Test-Path -LiteralPath (Join-Path $patchsetRoot 'PATCHSET.EXE'))) {throw 'PATCHSET build failed'}
-& (Join-Path $PSScriptRoot 'apply-setup.ps1') -MediaRoot $stage -ReleaseRoot $release -Patchset (Join-Path $patchsetRoot 'PATCHSET.EXE') -AdaptedWin386 (Join-Path $adaptation 'WIN386.EXE') -AdaptedKrnl386 (Join-Path $krnlAdaptation 'KRNL386.EXE') -RetailWin386 $expandedWin386 -RetailKrnl386 $retailKrnl
+& (Join-Path $PSScriptRoot 'apply-setup.ps1') -MediaRoot $stage -ReleaseRoot $release
 $manifest = @(Get-ChildItem -LiteralPath $stage -Recurse -File | ForEach-Object {
     [ordered]@{path=$_.FullName.Substring($stage.Length + 1);sha256=(Get-FileHash -LiteralPath $_.FullName).Hash;length=$_.Length}
 })

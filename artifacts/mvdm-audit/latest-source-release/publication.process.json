@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "started": "2026-10-28T03:31:14.1091845Z",
+  "pid": 7744,
+  "arguments": "-NoProfile -File \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\latest-source-release\\stage-publish.ps1\""
+}

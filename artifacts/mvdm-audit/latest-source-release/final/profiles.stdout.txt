@@ -1,0 +1,1 @@
+PASS Setup profile generation/repeat, legacy PIF fields, conflict preservation and unchanged installed inputs; Setup execution is a test shim

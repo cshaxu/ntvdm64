@@ -1,0 +1,5 @@
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\w31-payload-r1\PATCH; original media remain unchanged.
+Run PATCH\SETUP.CMD. After original Setup, enter the actual installation directory when prompted.
+Prepared O:\repos.hobby\ntvdm64\build\t473-s10\w31-payload-r1\PATCH; original media remain unchanged.
+Run PATCH\SETUP.CMD. After original Setup, enter the actual installation directory when prompted.
+PASS repeated preparation and unknown PATCH payload preservation

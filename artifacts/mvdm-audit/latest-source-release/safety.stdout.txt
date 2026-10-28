@@ -1,0 +1,1 @@
+PASS Setup runner uses package-local TEMP and rejects an incomplete installation
