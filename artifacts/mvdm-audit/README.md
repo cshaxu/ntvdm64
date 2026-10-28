@@ -70,6 +70,9 @@ The [DOS IOCTL review](nine-way/part-2/dos-ioctl-semantic-reconciliation.md),
 [spool interface review](cross-369/spool-header-disposition.md) distinguish
 historical roles and bounded existing tests from unverified real-device and
 failure cleanup paths.
+The [Win16 TIMER review](nine-way/part-8/timer-semantic-reconciliation.md)
+and [menu interface review](cross-369/menu-header-disposition.md) preserve
+their asynchronous, lifecycle and test-evidence boundaries.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code

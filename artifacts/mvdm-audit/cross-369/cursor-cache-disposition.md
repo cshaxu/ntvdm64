@@ -8,6 +8,8 @@ Both owned cache files are byte-identical in the current tree and both compariso
 
 The selected current original path is separate: `wutbl2.h` routes Win16 LoadIcon/LoadCursor to `WU32LoadCursor` in `wucursor.c`. That function maps the guest name/resource, calls `pfnOut.pfnServerLoadCreateCursorIcon`, and calls `SetupResCursorIconAlias` on success. `wcuricon.c` owns `lpCIAlias`, looks up existing resource handles in `SetupResCursorIconAlias`, creates Win16 aliases when absent, and `wuser.c` calls `FreeCursorIconAlias` for task/module retirement. These three C bodies have independent selected x86 graph edges. Historical `wcurcash.c:46` calls `SetupResCursorIconAlias` with four arguments whereas the current selected `wcuricon.c:552` definition has five, including resource name; blindly adding the old list would neither be a drop-in link nor a demonstrated recovery.
 
+Correction to historical attribution: `docs/etc/evidence/m0-t458-s2-resource-conversion-acceptance.md` calls `wcurcash.c` the task-cache owner, but its described selected caller actually reaches the `wcuricon.c` alias owner traced above. The original/current source manifest and bounded reference search do not support that `wcurcash.c` ownership in this profile. This corrects that owner description only: the historical extracted-body output-then-alias test results and their stated limitations are not changed or invalidated by this audit.
+
 ## Per-file recommendation
 
 | Owned key | Recommended role disposition | Scope retained |
