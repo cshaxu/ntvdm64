@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1326,
-    "excluded": 2714,
-    "partial": 591,
+    "pending": 1321,
+    "excluded": 2717,
+    "partial": 593,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Five historical DEBUG/WRITE input roles are excluded, not guest functionality."
+  "note": "SHLD and GRAPHICS.COM remain partial; three historical tool source roles are excluded, not guest functionality."
 }

@@ -1,0 +1,30 @@
+{
+  "result": "pass",
+  "source": "softpc.new/base/ccpu386/shld.c",
+  "source_sha256": "0454F3A15E286A17A61CD6D4AD8CC0EC42267E2CB50624B366B136962E3F855E",
+  "wow_source_ids": "SRC:10d85b228efbbdab24f8;SRC:73f8039356bc20d665b1",
+  "edge": "build obj/ccpu/shld.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/shld.c",
+  "body": {
+    "name": "_SHLD",
+    "va": 4354720,
+    "function": true,
+    "owner": "original-ccpu386:shld.obj",
+    "bytes": 210,
+    "relocation_words": 7
+  },
+  "decoder": {
+    "name": "_ccpu",
+    "va": 4234240,
+    "function": true,
+    "owner": "original-ccpu386:c_main.obj",
+    "bytes": 55972,
+    "relocation_words": 6531
+  },
+  "decoder_reference_offsets": [
+    5393,
+    5400
+  ],
+  "image_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "limits": "Static selected body and references; operand, count, flags, memory and fault behavior are not proven."
+}

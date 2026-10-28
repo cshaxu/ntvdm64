@@ -1,0 +1,42 @@
+{
+  "inc/vrinit.h": {
+    "current": "13fa0aa17ea85c2e9d0a48ffa72626c46cc1c53decad3dc4edcbdd1fa7034939",
+    "opennt": "13fa0aa17ea85c2e9d0a48ffa72626c46cc1c53decad3dc4edcbdd1fa7034939",
+    "opennt45": "13fa0aa17ea85c2e9d0a48ffa72626c46cc1c53decad3dc4edcbdd1fa7034939"
+  },
+  "vdmredir/vrinit.c": {
+    "current": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+    "opennt": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+    "opennt45": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273"
+  },
+  "vdmredir/vrnetb.c": {
+    "current": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+    "opennt": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+    "opennt45": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157"
+  },
+  "vdmredir/vrdll.c": {
+    "current": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+    "opennt": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+    "opennt45": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10"
+  },
+  "vdmredir/vrdisp.c": {
+    "current": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+    "opennt45": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
+  },
+  "dos/v86/redir/int5c.asm": {
+    "current": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5",
+    "opennt45": "38660d903b630263e68543f52a196ec3d259b820d30a3588be401c7341c322a5"
+  },
+  "map": {
+    "sha256": "4fcc34a02adad34e0ac55abe0af1c37d0a88db59b84e0fb22fc6616478544bc0",
+    "lines": [
+      " 0001:00002000       _VrHandleAsyncCompletion   10003000 f   vrinit.obj",
+      " 0001:000020f0       _VrQueueCompletionHandler  100030f0 f   vrinit.obj",
+      " 0001:00002160       _VrRaiseInterrupt          10003160 f   vrinit.obj",
+      " 0001:00002210       _VrUninitialize            10003210 f   vrinit.obj",
+      " 0001:00004810       _Netbios32Post             10005810 f   vrnetb.obj"
+    ]
+  }
+}

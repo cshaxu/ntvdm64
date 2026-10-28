@@ -1,0 +1,87 @@
+{
+  "result": "pass",
+  "ledger_sha256": "24313C19BC66A1816002B2133E4FC6BC6B39A92E1384ED86B74382F4A361B03E",
+  "entries": [
+    {
+      "path": "dos/v86/cmd/graphics/GRAPHICS.COM",
+      "sha256": "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756",
+      "catalog_ids": "SRC:0f543ca8b03d1a4bfc0b;SRC:41393a1aa9c201536251",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grcommon.ext",
+      "sha256": "71F7F5EA82B47E5F8E16F99223F642745FA1EC8CE33234311965CC0569CF54BB",
+      "catalog_ids": "SRC:0d2c31ead4b0e2bd4301;SRC:53b51c74dc812cd5f557",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    },
+    {
+      "path": "dos/v86/cmd/graphics/grpattrn.str",
+      "sha256": "9BC3B23E07E20518B8CCFD9D3B5F1F213F36835314578344FF1D891548E69AE1",
+      "catalog_ids": "SRC:04fd8eb6971513eba124;SRC:05bf076312601093c770",
+      "status": "\u5f85\u6838\u9a8c",
+      "host_graph_or_dep_hits": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\makefile",
+      "sha256": "100B5334A762451551344507C57BDD8A57CABFC9B1D417593E469827FB79EC4A"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\graphics.lnk",
+      "sha256": "1560AB572A2806CB73AC856D65AB898E7E0125AC7F7BA91C77C6826589FB5E50"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grbwprt.asm",
+      "sha256": "EA30DCE059897094984428F87B6F6385BB12F93344E8053D734587FD8A228D18"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grcolprt.asm",
+      "sha256": "A600CAEDA341F3CB5A86EEAA040191C46037E088A0C68F2E1CF4CDA8C980A8C7"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grctrl.asm",
+      "sha256": "AC4D86C7F97F14FC5CEA6D5313FA488D82726EDA2E2010CBB6D338013E33A5BC"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload2.asm",
+      "sha256": "278CC654C9FA0E8E14BAB599532D7AF7A8C379357A59004329832B8ECF6B7EE1"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grload3.asm",
+      "sha256": "B9A03E9EAF277A76BF37226B8BA10FE8C94C583AE94C31C77959651568937539"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\graphics\\grpattrn.asm",
+      "sha256": "C056177B34F8C9F184EF212DA2AF0BB3C396C5760AF72EEF1FF5AA0771AC4102"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "grcommon_ext_direct_asm_include": [],
+  "guest_image": {
+    "installed_path": "O:\\winnt\\system32\\GRAPHICS.COM",
+    "sha256": "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756",
+    "zip_member": "WINNT/SYSTEM32/GRAPHICS.COM",
+    "zip_sha256": "989B38806EC1E1BDD30DA3DC6B41CC85BDC81DDA74F870FCC7DF399876EB2756"
+  },
+  "limitations": "Recipe and exact image identity only; no source-to-binary lineage, guest execution, printer or media behavior."
+}

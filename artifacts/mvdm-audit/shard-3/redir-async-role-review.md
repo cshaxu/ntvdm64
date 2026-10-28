@@ -1,0 +1,15 @@
+# VDMREDIR async completion and lifecycle — shard 3
+
+Scope: pending `inc/vrinit.h`. `redir-async-observer.py` and captured JSON compare target and related implementation/guest code to both reference editions and retain private-map symbol evidence. All six inspected original files are byte-identical to both editions. No product, guest, network or fault-injection test was performed.
+
+`vrinit.h` declares initialization, interrupt and completion services. The original `vrnetb.c:295-340` Netbios32Post places completed NCB work on PostWorkQueue, calls `VrQueueCompletionHandler(VrNetbios5cInterrupt)` and `VrRaiseInterrupt`. `vrinit.c:411-475` allocates and enqueues a disposition under AsyncEventQueueCritSec; `:481-528` dequeues under that lock, frees the disposition, unlocks, then calls it. Guest `int5c.asm:286-298` uses SVC_NETBIOS5CINTERRUPT, and `vrdisp.c:97` routes service 0x26 to VrHandleAsyncCompletion. The original interrupt counter/ICA logic is in `vrinit.c:288-405`. The prior private map contains Netbios32Post and the queue/handler/interrupt implementations, but its linkage does not by itself prove current deployment or full runtime semantics.
+
+Lifecycle: `VrInitialize` installs original VDD hooks, creates queue/interrupt critical sections and initializes NetBIOS/DLC; `VrUninitialize` deletes those critical sections (`vrinit.c:158-279`). The prior review `redir-role-review.md` records original DLL attach/detach and unverified asynchronous teardown; T420 S20 operation matrix records a historical real async guest NetBIOS completion and follow-on COMMAND/MEM result, but that successful case does not establish allocation failure, late completion or exact current release identity.
+
+Static failure/lifecycle boundaries to verify, not claims of reproduced faults:
+
+* A LocalAlloc failure in `VrQueueCompletionHandler` returns without queuing and has no status return; Netbios32Post still calls VrRaiseInterrupt. `VrHandleAsyncCompletion` dereferences the queue head without a null check. With no other queued disposition, this source path would have a null-head risk if the failure and corresponding guest interrupt are actually reached; the provider and failure were not injected.
+* `VrUninitialize` deletes queue/interrupt critical sections without an evident local drain/wait. Determine whether external NetBIOS teardown, process detach ordering or other ownership guarantees callbacks are already quiescent; this audit did not prove a late callback or double cleanup.
+* Initialization failure and partial hook/queue lifecycle require separate bounded tests and investigation. `VrQueueCompletionHandler` and related original source are not automatically wrong merely because these edges are currently untested.
+
+Proposed `inc/vrinit.h` status: **pending**. It is an original interface carrier with selected provider/map evidence, not independent proof of all queue, failure and teardown behavior. Report hypotheses separately from the historical success witness; no runtime percentage inferred.

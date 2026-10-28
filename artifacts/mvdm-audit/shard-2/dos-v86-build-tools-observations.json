@@ -1,0 +1,80 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "dos/v86/tools/src/getsize/getsize.def",
+      "hashes": [
+        "CCA1D14426EB8609B3FBD29465510CBA4B6DB403CF31EE8B5C7E01082A487743",
+        "CCA1D14426EB8609B3FBD29465510CBA4B6DB403CF31EE8B5C7E01082A487743",
+        "CCA1D14426EB8609B3FBD29465510CBA4B6DB403CF31EE8B5C7E01082A487743"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "hashes": [
+        "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+        "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163",
+        "D41CCC8BB473C1BB4C0FD6A7BAF0D19B933602A2C9EF5A5B9660B2F4A79C8163"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "hashes": [
+        "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+        "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF",
+        "7A5E4536964D312C24AF6F11BA387B6845C92E089A08D843F72A52C36F0956FF"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "hashes": [
+        "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+        "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22",
+        "3B3DD85FBEF2A022380291BA57959DB1DB913FDBAF6A6E61271B82D6C4533B22"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2"
+    }
+  ],
+  "context": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\tools\\src\\stripdd\\sources",
+      "sha256": "3F6DC74093E2AE5274CB5E03BF30FEF813BAEE5C9967BF80E1B2198953C4F17C"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\tools\\src\\stripz\\sources",
+      "sha256": "D9DB191E7CE80787C281995F285F1BEBC8607F85C47C3A623284C75C950FC23B"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\tools\\src\\getsize\\sources",
+      "sha256": "223487A6E344CFBA49138096F74CA7BD5A52DA18564120CE575F957475021AA1"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\tools\\src\\h2inc\\h2inc.mak",
+      "sha256": "83606D34C4266852CD70DDDA991C2C403BB4851DD2BE5FB8593078C39E5F229D"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\dev\\himem\\makefile",
+      "sha256": "4BCAD509BAD1CBA600C444B0682FC3A8AE3C112FCCD97CCBA4B57CD17B6583C2"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makefile",
+      "sha256": "4BFC3320F1F519FD3EC2E851FFA28E7F633E3594D6E17F4FE3E5F7183DA57D3E"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\redir\\makefile",
+      "sha256": "318569C93BB478AEA0A11E078C82E2FB2D4F649D2E2CC2FB78DBFED781FDE53F"
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\doskrnl\\dos\\makedos.cmd",
+      "sha256": "C9CF63E808001245EFBCE6F4791CE9326D320E06930D398A885A00C05C4289E1"
+    }
+  ],
+  "scope": "Historical build tool source and consumer recipes; no executable tool generation or guest runtime claim"
+}

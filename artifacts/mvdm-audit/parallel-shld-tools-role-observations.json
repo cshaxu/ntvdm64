@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "base": "d7e55c0e1",
+  "candidate_count": 5,
+  "source_tables": [
+    {
+      "path": "shard-0/ccpu-shld-image-observations.json",
+      "sha256": "7008317C98E00F38E7B9C3CC0411708FDBD48348149F5958DD21F6788CA0F53C"
+    },
+    {
+      "path": "shard-1/guest-graphics-owner-observations.json",
+      "sha256": "0D8D1A013B54E366CFCE5477C2A30E09F6D645D9499B4359A006488767F315BC"
+    },
+    {
+      "path": "shard-2/dos-v86-build-tools-observations.json",
+      "sha256": "77068481E67BACEC8D05651364A2BD56B309DED1B4503F65694CE33BA33D7642"
+    },
+    {
+      "path": "shard-3/redir-async-observations.json",
+      "sha256": "05081B2B5A860710AE0751DBBCD902E48285C5022E19744F3B16500F5B395EC7"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected source, image identity and build-input roles; no guest runtime acceptance"
+}
