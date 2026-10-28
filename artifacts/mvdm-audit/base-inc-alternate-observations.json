@@ -1,0 +1,143 @@
+{
+  "result": "pass",
+  "base": "cb592628d",
+  "sources": [
+    {
+      "relative_path": "softpc.new/base/inc/host_fio.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_fio.h",
+      "sha256": "28C33AD38E38F45A0B66268B8F4F90C6269F0A0FBF428C78063B6BEE2E4AF388",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:b3f05282e5e9a5ace8bf;SRC:f7c3b362e71cbaff0f2b"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/unix_asy.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_asy.h",
+      "sha256": "EF87C2C6EB2300A4339846A80334687828FD184B20A274F568F87446157DBFC0",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:45dc12e715b6b893af46;SRC:81650c10344855a36343"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/unix_cnf.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_cnf.h",
+      "sha256": "1DB2D689864893264A6C40445525840A6047213CAEA4945A646FC59CC41D9019",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:597f9108b29ef2bd6b20;SRC:f3aa57b9bfb2eb74bec6"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/unix_loc.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\unix_loc.h",
+      "sha256": "3BD6197388C1EF0BA79B9C44B5BC8B064D3F105234F8179682D4F41EDA9187CD",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:730a1c3d7e6665ead19c;SRC:bf58bdb00080e8cad031"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/swinhelp.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\swinhelp.h",
+      "sha256": "DF7D0D15F908E554D41A119EF947A744861AE5B29FEC9B4204EEA687F9743717",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5abcd0bf01be7af11acb;SRC:62eb2a7ae0f3b325016c"
+    },
+    {
+      "relative_path": "softpc.new/base/inc/swinmgre.h",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\swinmgre.h",
+      "sha256": "303CA6566369A686647B246C859B4AA39260ACEFD9DA38AE00CF28396E3E93FE",
+      "dos_catalog_rows": 1,
+      "wow_catalog_rows": 2,
+      "wow_source_ids": "SRC:5bafb6e89ec4a6a25101;SRC:9783ce5a341c1bbf213b"
+    }
+  ],
+  "flags": "host_cflags = /nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O$:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include/nt.h\" /FI \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\" /I \"O$:/repos.hobby/ntvdm64/src\" /I \"O$:/repos.hobby/ntvdm64/src/vdmredir-dll/include\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/redir/include\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-host/netapi/xactsrv\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/host-compat/include\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-host/public/sdk/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/sdk/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/windows/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/ds/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/net/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/private/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/private/ds/netapi/rpcxlate\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/private/windows/inc\" /I \"O$:/repos.hobby/ntvdm64/src/opennt-abi/source/public/ddk/inc\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/inc\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/xms.486\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/dpmi32\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/vdmredir\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/cvidc\" /I \"O$:/repos.hobby/ntvdm64/src/mvdm/dos/dem\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O$:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /FI \"O$:/repos.hobby/ntvdm64/src/ntvdm-exe/win32/mvdm_crt_redirect.h\"",
+  "dependency_blocks": 638,
+  "dependency_sha256": "AF923303037219931C3A4CE4BF0202B11114D2D2D6F696804081B8E74FFE8D5D",
+  "source_include_matches": 0,
+  "providers": [
+    {
+      "name": "_nt_event_loop",
+      "va": 4522672,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_event.obj",
+      "bytes": 1350,
+      "relocation_words": 98
+    },
+    {
+      "name": "_config_inquire",
+      "va": 4572944,
+      "function": true,
+      "owner": "original-softpc-host-roots:config.obj",
+      "bytes": 1181,
+      "relocation_words": 85
+    },
+    {
+      "name": "_host_start_cpu",
+      "va": 4583472,
+      "function": true,
+      "owner": "original-softpc-host-roots:nt_cpu.obj",
+      "bytes": 10,
+      "relocation_words": 2
+    },
+    {
+      "name": "_demOpen",
+      "va": 5556256,
+      "function": true,
+      "owner": "original-mvdm-dem:demfile.obj",
+      "bytes": 937,
+      "relocation_words": 43
+    },
+    {
+      "name": "_demRead",
+      "va": 5552640,
+      "function": true,
+      "owner": "original-mvdm-dem:demhndl.obj",
+      "bytes": 514,
+      "relocation_words": 30
+    },
+    {
+      "name": "_demWrite",
+      "va": 5553168,
+      "function": true,
+      "owner": "original-mvdm-dem:demhndl.obj",
+      "bytes": 500,
+      "relocation_words": 34
+    }
+  ],
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "B504F1F2B9B247DDB6EA3726AE09DA523C0B99F679D20DEB1366EC7987368097"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "8416F200FCDB760513D9370377A97A0009C18AE626066F8D5B16F39C8CE0E8BC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_event.obj",
+      "sha256": "152C8AA3B1CB532831A68A5AA6B74960E6D2EDB0013B2ED328EB5718616C30F4"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\config.obj",
+      "sha256": "6DBCEE6653360554E31A8FB112AE1562476E0D95ED809913B8701DC6992939C9"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_cpu.obj",
+      "sha256": "B8290A491BBA13D2789B73C5147B3BB1634EA3041D2B5D6C32F0CCADEEBBB9A5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demfile.obj",
+      "sha256": "1B3E81593F2C061F6587C2B2835D6245460D41DB96CF4E7B0373677D5D61CA6D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\dem\\demhndl.obj",
+      "sha256": "706D3670AF83AA52497EEF567E78927AFA3658546BBA039CFAF7BFE724A31EC6"
+    }
+  ],
+  "scope": "Six alternate host/product headers only; not exclusion or behavioral proof of selected NT capabilities"
+}

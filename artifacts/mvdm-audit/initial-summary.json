@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1477,
-    "excluded": 2646,
+    "pending": 1471,
+    "excluded": 2652,
     "partial": 508,
     "full": 53
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "19 byte-identical original common headers selected by production preprocessing are partial; other contexts and behavioral contracts remain open."
+  "note": "Six unselected alternate host interfaces; selected NT capabilities remain open."
 }

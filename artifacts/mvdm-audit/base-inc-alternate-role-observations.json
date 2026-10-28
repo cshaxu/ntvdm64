@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "cb592628d",
+  "candidate_count": 6,
+  "source_tables": [
+    {
+      "path": "base-inc-alternate-observations.json",
+      "sha256": "8DB001558A8CB0C76F5C84A108FE5B1D9C75F8D6F6462FF9E28041B7EAFDDDA4"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Alternate interfaces only; no runtime behavior claim"
+}

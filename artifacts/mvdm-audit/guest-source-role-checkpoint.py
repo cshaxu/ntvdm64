@@ -147,7 +147,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-alternative-memory-provider-source-only',
                                 'historical-superseded-nt-host-source-only',
                                 'historical-debug-profile-host-source-only',
-                                'historical-alternative-virtual-floppy-source-only')
+                                'historical-alternative-virtual-floppy-source-only',
+                                'historical-alternate-host-header-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -194,6 +195,11 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/host/src/nt_hunt.c', 'softpc.new/host/src/nt_yoda.c')
                 if proof['role'] == 'historical-alternative-virtual-floppy-source-only':
                     assert prefix == 'host-tail-role-' and path == 'softpc.new/host/src/nt_vflop.c'
+                if proof['role'] == 'historical-alternate-host-header-source-only':
+                    assert prefix == 'base-inc-alternate-role-' and path in (
+                        'softpc.new/base/inc/host_fio.h', 'softpc.new/base/inc/unix_asy.h',
+                        'softpc.new/base/inc/unix_cnf.h', 'softpc.new/base/inc/unix_loc.h',
+                        'softpc.new/base/inc/swinhelp.h', 'softpc.new/base/inc/swinmgre.h')
             else:
                 if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
@@ -228,6 +234,17 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'base-inc-alternate-role-':
+        observed = json.loads((A / 'base-inc-alternate-observations.json').read_text())
+        assert observed['result'] == 'pass' and len(observed['sources']) == 6
+        assert observed['dependency_blocks'] > 0 and observed['source_include_matches'] == 0
+        assert len(observed['providers']) == 6 and {r['relative_path'] for r in observed['sources']} == set(changed)
+        for source in observed['sources']:
+            assert source['sha256'] == changed[source['relative_path']]['sha256']
+        for proof in changed.values():
+            assert proof['status'] == 'excluded' and proof['original_text_retained_percent'] == '100'
+            assert not proof['estimated_restored_code_percent']
+            assert proof['restored_estimate_status'].startswith('not-applicable:')
     if prefix in ('base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'):
         name, cohort, selected, remaining, units = {
             'base-inc-role-': ('base-inc-selection-observations.json', 146, 5, 141, 8),
@@ -803,7 +820,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-', 'host-tail-role-', 'base-inc-role-', 'base-inc-multi-role-', 'base-inc-wide-role-', 'base-inc-alternate-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

@@ -309,3 +309,7 @@ original declaration roles as partial. The [device/video](base-inc-multi-role-re
 and [dependency-selected](base-inc-wide-role-review.md) extensions add 30 and
 19 respectively; the remaining 92 headers in that cohort stay pending for
 other consumers and profiles.
+
+The [alternate host interfaces](base-inc-alternate-role-review.md) checkpoint
+excludes six Unix or SoftWindows headers without excluding the corresponding
+selected NT or guest capabilities.

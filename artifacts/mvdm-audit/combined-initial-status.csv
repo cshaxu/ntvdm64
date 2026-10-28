@@ -1880,7 +1880,7 @@ softpc.new/base/inc/hg_stat.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/host.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/host_cfg.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/host_com.h,0,partial,shard-0/review.csv
-softpc.new/base/inc/host_fio.h,1,pending,shard-1/file-audit.csv
+softpc.new/base/inc/host_fio.h,1,excluded,shard-1/file-audit.csv
 softpc.new/base/inc/host_gwi.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/host_hun.h,2,pending,shard-2/file-audit.csv
 softpc.new/base/inc/host_lpt.h,2,partial,shard-2/file-audit.csv
@@ -1943,8 +1943,8 @@ softpc.new/base/inc/spc_icon.h,1,pending,shard-1/file-audit.csv
 softpc.new/base/inc/spcfile.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/standard.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/suplib.h,0,partial,shard-0/review.csv
-softpc.new/base/inc/swinhelp.h,0,pending,shard-0/review.csv
-softpc.new/base/inc/swinmgre.h,2,pending,shard-2/file-audit.csv
+softpc.new/base/inc/swinhelp.h,0,excluded,shard-0/review.csv
+softpc.new/base/inc/swinmgre.h,2,excluded,shard-2/file-audit.csv
 softpc.new/base/inc/tape_io.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/tcpip.h,3,pending,shard-3/file-review.csv
 softpc.new/base/inc/timer.h,3,partial,shard-3/file-review.csv
@@ -1954,9 +1954,9 @@ softpc.new/base/inc/tmstrobe.h,1,partial,shard-1/file-audit.csv
 softpc.new/base/inc/trace.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/tredltr.h,0,pending,shard-0/review.csv
 softpc.new/base/inc/umb.h,3,partial,shard-3/file-review.csv
-softpc.new/base/inc/unix_asy.h,0,pending,shard-0/review.csv
-softpc.new/base/inc/unix_cnf.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/inc/unix_loc.h,3,pending,shard-3/file-review.csv
+softpc.new/base/inc/unix_asy.h,0,excluded,shard-0/review.csv
+softpc.new/base/inc/unix_cnf.h,1,excluded,shard-1/file-audit.csv
+softpc.new/base/inc/unix_loc.h,3,excluded,shard-3/file-review.csv
 softpc.new/base/inc/vga_dac.h,3,partial,shard-3/file-review.csv
 softpc.new/base/inc/vgaports.h,2,partial,shard-2/file-audit.csv
 softpc.new/base/inc/vgastate.h,3,pending,shard-3/file-review.csv
