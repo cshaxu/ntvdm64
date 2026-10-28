@@ -1,0 +1,105 @@
+{
+  "result": "pass",
+  "source": "vdmredir/vrdlcpst.c",
+  "hashes": [
+    "EA7CE5C516434BD5B08FDDD53881705385F3D925388FF4E439B337FAA388CF01",
+    "EA7CE5C516434BD5B08FDDD53881705385F3D925388FF4E439B337FAA388CF01",
+    "EA7CE5C516434BD5B08FDDD53881705385F3D925388FF4E439B337FAA388CF01"
+  ],
+  "compile_edge": "build obj/redir/vrdlcpst.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/vdmredir/vrdlcpst.c",
+  "bindings": [
+    {
+      "name": "_InitializeEventHandler",
+      "va": 268471792,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 172,
+      "relocation_words": 12
+    },
+    {
+      "name": "_InitiateRead",
+      "va": 268471968,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 127,
+      "relocation_words": 6
+    },
+    {
+      "name": "_IssueHardwareInterrupt",
+      "va": 268472096,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 58,
+      "relocation_words": 9
+    },
+    {
+      "name": "_ProcessReceiveFrame",
+      "va": 268472160,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 431,
+      "relocation_words": 7
+    },
+    {
+      "name": "_RemoveDeadReceives",
+      "va": 268472592,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 552,
+      "relocation_words": 37
+    },
+    {
+      "name": "_ResetEmulatedLocalBusyState",
+      "va": 268473152,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 235,
+      "relocation_words": 10
+    },
+    {
+      "name": "_ResetEmulatedLocalBusyStateLink",
+      "va": 268473392,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 107,
+      "relocation_words": 2
+    },
+    {
+      "name": "_SetEmulatedLocalBusyState",
+      "va": 268473504,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 416,
+      "relocation_words": 30
+    },
+    {
+      "name": "_VrDlcEventHandlerThread",
+      "va": 268473920,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 621,
+      "relocation_words": 43
+    },
+    {
+      "name": "_VrDlcHwInterrupt",
+      "va": 268474544,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 2476,
+      "relocation_words": 158
+    },
+    {
+      "name": "_VrDlcInitialize",
+      "va": 268477024,
+      "function": true,
+      "owner": "vrdlcpst.obj",
+      "bytes": 12,
+      "relocation_words": 2
+    }
+  ],
+  "object_sha256": "3D1A0B8213ECAFAA331346FEBCE057BEEB56840B4B6605C2D6AF9EE1F433F7E3",
+  "map_sha256": "4FCC34A02ADAD34E0AC55ABE0AF1C37D0A88DB59B84E0FB22FC6616478544BC0",
+  "release_sha256": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7",
+  "cached_sha256": "FE70BD966A225A08EA64C385B82FC8883EB5B5A59C954CAC3633A0A880BBA61A",
+  "limits": "Object bindings only; actual DLC provider, interrupts, errors and teardown remain unverified."
+}

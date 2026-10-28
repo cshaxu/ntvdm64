@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "source": "dos/v86/dev/ansi/ANSI.SYS",
+  "source_hashes": [
+    "C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85",
+    "C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85",
+    "C929C0893BBA4C6454632D3408EE4F7661B51CF5C2CE20035DCD4283CD623C85"
+  ],
+  "source_size": 9029,
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_file_count": 62,
+  "identical_archive_members": [],
+  "named_archive_members": [],
+  "archive_config_sha256": "6AE1E74E78DE00C0FA03124E6F947D977C71F253855AD2AF979554074AEA189A",
+  "archive_config_active_lines": [
+    "dos=high, umb",
+    "device=%SystemRoot%\\system32\\himem.sys",
+    "files=20"
+  ],
+  "installed_ansi_exists": false,
+  "command_source_sha256": "E93964B8A359112199AACA42BADE5548812BD683AFEB03C5391D79D8F80F4C83",
+  "scope": "Current archive exact binary identity and default configuration only; no runtime or alternate media determination"
+}

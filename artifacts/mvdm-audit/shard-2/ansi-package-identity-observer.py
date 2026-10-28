@@ -1,0 +1,10 @@
+import csv,hashlib,json,zipfile
+from pathlib import Path
+A=Path('artifacts/mvdm-audit');M=Path('src/mvdm'); O=(Path('O:/repos.external/OpenNT/base/mvdm'),Path('O:/repos.external/OpenNT-4.5/nt/private/mvdm'));rel='dos/v86/dev/ansi/ANSI.SYS'
+def sha(b): return hashlib.sha256(b).hexdigest().upper()
+def inspect():
+ f=next(x for x in csv.DictReader((A/'frozen-file-reconciliation.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel);l=next(x for x in csv.DictReader((A/'combined-initial-status.csv').open(encoding='utf-8-sig')) if x['relative_path']==rel); d=(M/rel).read_bytes(); hashes=[sha((x/rel).read_bytes()) for x in (M,*O)]; assert hashes==[f['current_sha256'],f['opennt_sha256'],f['opennt45_sha256']] and l['shard']=='2' and l['status']=='pending'
+ zpath=Path('assets/winnt.zip');z=zipfile.ZipFile(zpath); files=[x for x in z.infolist() if not x.is_dir()]; equal=[x.filename for x in files if x.file_size==len(d) and sha(z.read(x))==hashes[0]];named=[x.filename for x in files if x.filename.lower().endswith('/ansi.sys')]; config=next(x for x in files if x.filename.lower()=='winnt/system32/config.nt'); lines=z.read(config).decode('latin1').splitlines(); active=[x.strip() for x in lines if x.strip() and not x.lstrip().lower().startswith('rem')];installed=Path('O:/winnt/system32/ANSI.SYS'); assert not equal and not named and not installed.exists() and all('ansi.sys' not in x.lower() for x in active)
+ command=(M/'dos/v86/cmd/command/tcmd2a.asm').read_text(encoding='latin1');assert 'Mult_ANSI' in command
+ return dict(result='pass',source=rel,source_hashes=hashes,source_size=len(d),archive_sha256=sha(zpath.read_bytes()),archive_file_count=len(files),identical_archive_members=equal,named_archive_members=named,archive_config_sha256=sha(z.read(config)),archive_config_active_lines=active,installed_ansi_exists=installed.exists(),command_source_sha256=sha((M/'dos/v86/cmd/command/tcmd2a.asm').read_bytes()),scope='Current archive exact binary identity and default configuration only; no runtime or alternate media determination')
+if __name__=='__main__':print(json.dumps(inspect(),indent=2))

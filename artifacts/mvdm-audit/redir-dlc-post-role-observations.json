@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "168ad29de",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/redir-dlc-post-image-observations.json",
+      "sha256": "E8DECDE3E5EFD66407AA12266502AFC7B85B153F1C860A96C0A49951361534CA"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Object body binding, not DLC runtime acceptance"
+}

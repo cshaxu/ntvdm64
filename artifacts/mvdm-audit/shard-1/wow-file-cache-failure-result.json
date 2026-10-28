@@ -1,0 +1,12 @@
+{
+  "result": "pass",
+  "fixture_sha256": "73E7D4B249FF4FE5ADE0C43E934707A2F3B7CE500F1258ECA9B05C5D450FAB8C",
+  "source_sha256": "0593995BF9159B23BB21AFFF66A961EF83C6E052BC09ADB5C6A6CB09D559879A",
+  "output": [
+    "PASS failed map, simulated reuse closes unrelated handle",
+    "PASS failed map, no reuse double close invalid handle",
+    "PASS successful map exactly once cleanup",
+    "PASS mapping creation failure has no mapping close"
+  ],
+  "scope": "Extracted original source bodies and simulated handle boundary; no real Windows handle reuse or full guest caller"
+}
