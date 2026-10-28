@@ -1,0 +1,41 @@
+{
+  "rows": [
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\init.asm",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\init.asm",
+      "current_sha256": "d5a4c9a46c8e6d3a4c28cf525db6524279602957c95690ae2fc511f367df92f6",
+      "original_sha256": "3d69d0c82789ba5eb359794096ab215afe4f705cba35ca211948e93923e8fd16",
+      "byte_equal": false,
+      "splitlines_equal": true,
+      "current_crlf": 2530,
+      "original_crlf": 2533,
+      "current_len": 62761,
+      "original_len": 62764
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\rdata.asm",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\rdata.asm",
+      "current_sha256": "fe8798d9765c1df48121de66840452f699b2ee55fa1923068bccfa15520057af",
+      "original_sha256": "350cb74da4d43313cf7ce0f9bdb957cefa5759ef32f439f8a83102f0162ed441",
+      "byte_equal": false,
+      "splitlines_equal": true,
+      "current_crlf": 781,
+      "original_crlf": 797,
+      "current_len": 20018,
+      "original_len": 20034
+    },
+    {
+      "path": "src\\mvdm\\dos\\v86\\cmd\\command\\stub.asm",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\v86\\cmd\\command\\stub.asm",
+      "current_sha256": "8a6146e1fc68d7899776f03093860cfb0f323dcce3a26aaf6e25ff7d396513df",
+      "original_sha256": "650b4c89fe06e647f461bd2f5b634c2cf5e850b772bde6ab902c96fbf862c7f4",
+      "byte_equal": false,
+      "splitlines_equal": true,
+      "current_crlf": 328,
+      "original_crlf": 336,
+      "current_len": 8895,
+      "original_len": 8903
+    }
+  ],
+  "limits": "Line comparison does not prove source-to-binary identity or functionality; raw mirror differences require partial."
+}

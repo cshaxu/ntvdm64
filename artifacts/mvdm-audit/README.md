@@ -173,6 +173,9 @@ reopens 14 image/data decisions lacking a bound execution witness while
 retaining four with bounded identity-matched historical execution evidence.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
+The [retention estimate replay](nine-way/part-8/retention-replay-review.md)
+independently reproduces the canonical code-text table and explains its
+scope and differences from older all-line estimates.
 
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
