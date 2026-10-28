@@ -4574,7 +4574,7 @@ wow32/wmsglb.c,3,partial,shard-3/file-review.csv
 wow32/wmsglb.h,3,pending,shard-3/file-review.csv
 wow32/wmsgsbm.c,2,partial,shard-2/file-audit.csv
 wow32/wmsgsbm.h,0,partial,shard-0/review.csv
-wow32/wmtbl32.c,0,pending,shard-0/review.csv
+wow32/wmtbl32.c,0,partial,shard-0/review.csv
 wow32/wmtbl32.h,2,partial,shard-2/file-audit.csv
 wow32/wole2.c,0,partial,shard-0/review.csv
 wow32/wole2.h,3,pending,shard-3/file-review.csv

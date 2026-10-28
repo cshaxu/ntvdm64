@@ -563,3 +563,7 @@ New source-family reviews cover [BIOS and CMOS resources](shard-2/bios-family-re
 The [WOW multimedia bridge and resource thunk review](shard-0/wow-media-resource-image-review.md) binds ten original function bodies to released executable code; their guest dispatch and lifecycle remain separate obligations.
 
 The [C-VID declaration family](shard-1/cvidc-header-family-review.md), [generated carriers](shard-3/cvidc-generated-carriers-role-review.md), and [VDD sample family](shard-2/vdd-sample-family-review.md) retain separate profile, provenance and runtime boundaries; missing current graph dependencies do not exclude device capabilities.
+
+The [WOW message table review](shard-0/wow-message-table-image-review.md) binds all 1,024 initial native-to-guest message table pointers to the released DLL; runtime dispatch and message behavior remain open.
+
+The [SoftPC header family](shard-1/softpc-header-family-review.md), [standalone VDM utilities](shard-2/vdmutils-family-review.md) and [WIN87EM build inputs](shard-3/win87em-build-input-role-review.md) distinguish selected objects, standalone tools and guest-image identity from runtime proof.

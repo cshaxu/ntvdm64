@@ -1,0 +1,5 @@
+# WOW native-to-guest message table image binding
+
+The [observer](wow-message-table-image-observer.py) and [snapshot](wow-message-table-image-observations.json) compare the original `wmtbl32.c` source with both retained original editions, verify the selected x86 object and check **all 1,024** `_aw32Msg` object relocations against their actual initial pointers in the released WOW32 image. The installed and release WOW32 files have the same hash. Each recorded pointer resolves to the target indicated by the object's original relocation; this is a stronger initial-table binding than checking a few named slots.
+
+This table selects native-to-guest message handling; its reverse direction has separate source and tables. The evidence does not establish that guest dispatch reaches every slot, that runtime mutation is impossible, or that parameter conversion, return values, error paths, reentry, object identity and destruction are correct. Existing button, scrollbar, dialog and message-family worklists continue to own these functional boundaries. No product or guest bytes were changed.

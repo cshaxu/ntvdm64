@@ -1,0 +1,5142 @@
+{
+  "result": "pass",
+  "source": "wow32/wmtbl32.c",
+  "hashes": [
+    "8FB4F02963CEB0772E69749D703868273F942978FA6BAF162E039065DD957BD6",
+    "8FB4F02963CEB0772E69749D703868273F942978FA6BAF162E039065DD957BD6",
+    "8FB4F02963CEB0772E69749D703868273F942978FA6BAF162E039065DD957BD6"
+  ],
+  "compile_edge": "build obj/wmtbl32.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmtbl32.c",
+  "object_sha256": "EA94E922413CA073FE609F693698C28655905B6D8FFE0A34D7DDE834471D87DB",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "release_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "table": {
+    "name": "_aw32Msg",
+    "va": 269106888,
+    "function": false,
+    "owner": "wmtbl32.obj"
+  },
+  "slots": [
+    {
+      "index": 0,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1,
+      "symbol": "_WM32Create@4",
+      "image_pointer": 268481232
+    },
+    {
+      "index": 2,
+      "symbol": "_WM32Destroy@4",
+      "image_pointer": 268484224
+    },
+    {
+      "index": 3,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 4,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 5,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 6,
+      "symbol": "_WM32Activate@4",
+      "image_pointer": 268480176
+    },
+    {
+      "index": 7,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 8,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 9,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 10,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 11,
+      "symbol": "_WM32Thunk16To32@4",
+      "image_pointer": 268487552
+    },
+    {
+      "index": 12,
+      "symbol": "_WM32SetText@4",
+      "image_pointer": 268487008
+    },
+    {
+      "index": 13,
+      "symbol": "_WM32GetText@4",
+      "image_pointer": 268484912
+    },
+    {
+      "index": 14,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 15,
+      "symbol": "_WM32NCPaint@4",
+      "image_pointer": 268486656
+    },
+    {
+      "index": 16,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 17,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 18,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 19,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 20,
+      "symbol": "_WM32EraseBkGnd@4",
+      "image_pointer": 268484640
+    },
+    {
+      "index": 21,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 22,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 23,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 24,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 25,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 26,
+      "symbol": "_WM32SetText@4",
+      "image_pointer": 268487008
+    },
+    {
+      "index": 27,
+      "symbol": "_WM32SetText@4",
+      "image_pointer": 268487008
+    },
+    {
+      "index": 28,
+      "symbol": "_WM32ActivateApp@4",
+      "image_pointer": 268480224
+    },
+    {
+      "index": 29,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 30,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 31,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 32,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 33,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 34,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 35,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 36,
+      "symbol": "_WM32GetMinMaxInfo@4",
+      "image_pointer": 268484832
+    },
+    {
+      "index": 37,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 38,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 39,
+      "symbol": "_WM32EraseBkGnd@4",
+      "image_pointer": 268484640
+    },
+    {
+      "index": 40,
+      "symbol": "_WM32NextDlgCtl@4",
+      "image_pointer": 268486720
+    },
+    {
+      "index": 41,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 42,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 43,
+      "symbol": "_WM32DrawItem@4",
+      "image_pointer": 268484288
+    },
+    {
+      "index": 44,
+      "symbol": "_WM32MeasureItem@4",
+      "image_pointer": 268486032
+    },
+    {
+      "index": 45,
+      "symbol": "_WM32DeleteItem@4",
+      "image_pointer": 268484112
+    },
+    {
+      "index": 46,
+      "symbol": "_WM32VKeyToItem@4",
+      "image_pointer": 268487616
+    },
+    {
+      "index": 47,
+      "symbol": "_WM32VKeyToItem@4",
+      "image_pointer": 268487616
+    },
+    {
+      "index": 48,
+      "symbol": "_WM32SetFont@4",
+      "image_pointer": 268484640
+    },
+    {
+      "index": 49,
+      "symbol": "_WM32GetFont@4",
+      "image_pointer": 268484784
+    },
+    {
+      "index": 50,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 51,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 52,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 53,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 54,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 55,
+      "symbol": "_WM32QueryDragIcon@4",
+      "image_pointer": 268486960
+    },
+    {
+      "index": 56,
+      "symbol": "_WM32WinHelp@4",
+      "image_pointer": 268487680
+    },
+    {
+      "index": 57,
+      "symbol": "_WM32CompareItem@4",
+      "image_pointer": 268480496
+    },
+    {
+      "index": 58,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 59,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 60,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 61,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 62,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 63,
+      "symbol": "_WM32MMCalcScroll@4",
+      "image_pointer": 268486000
+    },
+    {
+      "index": 64,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 65,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 66,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 67,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 68,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 69,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 70,
+      "symbol": "_WM32WindowPosChanging@4",
+      "image_pointer": 268487872
+    },
+    {
+      "index": 71,
+      "symbol": "_WM32WindowPosChanging@4",
+      "image_pointer": 268487872
+    },
+    {
+      "index": 72,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 73,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 74,
+      "symbol": "_WM32CopyData@4",
+      "image_pointer": 268480560
+    },
+    {
+      "index": 75,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 76,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 77,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 78,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 79,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 80,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 81,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 82,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 83,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 84,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 85,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 86,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 87,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 88,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 89,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 90,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 91,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 92,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 93,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 94,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 95,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 96,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 97,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 98,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 99,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 100,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 101,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 102,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 103,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 104,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 105,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 106,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 107,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 108,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 109,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 110,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 111,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 112,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 113,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 114,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 115,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 116,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 117,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 118,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 119,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 120,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 121,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 122,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 123,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 124,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 125,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 126,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 127,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 128,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 129,
+      "symbol": "_WM32Create@4",
+      "image_pointer": 268481232
+    },
+    {
+      "index": 130,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 131,
+      "symbol": "_WM32NCCalcSize@4",
+      "image_pointer": 268486448
+    },
+    {
+      "index": 132,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 133,
+      "symbol": "_WM32NCPaint@4",
+      "image_pointer": 268486656
+    },
+    {
+      "index": 134,
+      "symbol": "_WM32Activate@4",
+      "image_pointer": 268480176
+    },
+    {
+      "index": 135,
+      "symbol": "_WM32GetDlgCode@4",
+      "image_pointer": 268484688
+    },
+    {
+      "index": 136,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 137,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 138,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 139,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 140,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 141,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 142,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 143,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 144,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 145,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 146,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 147,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 148,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 149,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 150,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 151,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 152,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 153,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 154,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 155,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 156,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 157,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 158,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 159,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 160,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 161,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 162,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 163,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 164,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 165,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 166,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 167,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 168,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 169,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 170,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 171,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 172,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 173,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 174,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 175,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 176,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 177,
+      "symbol": "_WM32EMSetSel@4",
+      "image_pointer": 268461008
+    },
+    {
+      "index": 178,
+      "symbol": "_WM32EMGetRect@4",
+      "image_pointer": 268460544
+    },
+    {
+      "index": 179,
+      "symbol": "_WM32EMSetRect@4",
+      "image_pointer": 268460912
+    },
+    {
+      "index": 180,
+      "symbol": "_WM32EMSetRect@4",
+      "image_pointer": 268460912
+    },
+    {
+      "index": 181,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 182,
+      "symbol": "_WM32EMLineScroll@4",
+      "image_pointer": 268460704
+    },
+    {
+      "index": 183,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 184,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 185,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 186,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 187,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 188,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 189,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 190,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 191,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 192,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 193,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 194,
+      "symbol": "_WM32EMReplaceSel@4",
+      "image_pointer": 268460752
+    },
+    {
+      "index": 195,
+      "symbol": "_WM32SetFont@4",
+      "image_pointer": 268484640
+    },
+    {
+      "index": 196,
+      "symbol": "_WM32EMGetLine@4",
+      "image_pointer": 268460400
+    },
+    {
+      "index": 197,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 198,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 199,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 200,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 201,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 202,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 203,
+      "symbol": "_WM32EMSetTabStops@4",
+      "image_pointer": 268461072
+    },
+    {
+      "index": 204,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 205,
+      "symbol": "_WM32EMControl@4",
+      "image_pointer": 268460368
+    },
+    {
+      "index": 206,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 207,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 208,
+      "symbol": "_WM32EMSetWordBreakProc@4",
+      "image_pointer": 268461184
+    },
+    {
+      "index": 209,
+      "symbol": "_WM32EMGetWordBreakProc@4",
+      "image_pointer": 268460640
+    },
+    {
+      "index": 210,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 211,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 212,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 213,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 214,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 215,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 216,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 217,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 218,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 219,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 220,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 221,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 222,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 223,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 224,
+      "symbol": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "index": 225,
+      "symbol": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "index": 226,
+      "symbol": "_WM32SBMSetRange@4",
+      "image_pointer": 268462448
+    },
+    {
+      "index": 227,
+      "symbol": "_WM32SBMGetRange@4",
+      "image_pointer": 268462384
+    },
+    {
+      "index": 228,
+      "symbol": "_WM32SBMControl@4",
+      "image_pointer": 268462352
+    },
+    {
+      "index": 229,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 230,
+      "symbol": "_WM32SBMSetRange@4",
+      "image_pointer": 268462448
+    },
+    {
+      "index": 231,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 232,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 233,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 234,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 235,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 236,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 237,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 238,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 239,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 240,
+      "symbol": "_WM32BMControl@4",
+      "image_pointer": 268459488
+    },
+    {
+      "index": 241,
+      "symbol": "_WM32BMControl@4",
+      "image_pointer": 268459488
+    },
+    {
+      "index": 242,
+      "symbol": "_WM32BMControl@4",
+      "image_pointer": 268459488
+    },
+    {
+      "index": 243,
+      "symbol": "_WM32BMControl@4",
+      "image_pointer": 268459488
+    },
+    {
+      "index": 244,
+      "symbol": "_WM32BMControl@4",
+      "image_pointer": 268459488
+    },
+    {
+      "index": 245,
+      "symbol": "_WM32BMClick@4",
+      "image_pointer": 268459456
+    },
+    {
+      "index": 246,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 247,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 248,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 249,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 250,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 251,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 252,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 253,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 254,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 255,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 256,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 257,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 258,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 259,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 260,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 261,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 262,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 263,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 264,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 265,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 266,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 267,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 268,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 269,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 270,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 271,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 272,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 273,
+      "symbol": "_WM32Command@4",
+      "image_pointer": 268480448
+    },
+    {
+      "index": 274,
+      "symbol": "_WM32Thunk16To32@4",
+      "image_pointer": 268487552
+    },
+    {
+      "index": 275,
+      "symbol": "_WM32Timer@4",
+      "image_pointer": 268487568
+    },
+    {
+      "index": 276,
+      "symbol": "_WM32HScroll@4",
+      "image_pointer": 268485184
+    },
+    {
+      "index": 277,
+      "symbol": "_WM32HScroll@4",
+      "image_pointer": 268485184
+    },
+    {
+      "index": 278,
+      "symbol": "_WM32InitMenu@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 279,
+      "symbol": "_WM32InitMenu@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 280,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 281,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 282,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 283,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 284,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 285,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 286,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 287,
+      "symbol": "_WM32MenuSelect@4",
+      "image_pointer": 268486352
+    },
+    {
+      "index": 288,
+      "symbol": "_WM32MenuChar@4",
+      "image_pointer": 268485184
+    },
+    {
+      "index": 289,
+      "symbol": "_WM32EnterIdle@4",
+      "image_pointer": 268484592
+    },
+    {
+      "index": 290,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 291,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 292,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 293,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 294,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 295,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 296,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 297,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 298,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 299,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 300,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 301,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 302,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 303,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 304,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 305,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 306,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 307,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 308,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 309,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 310,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 311,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 312,
+      "symbol": "_WM32CtlColor@4",
+      "image_pointer": 268481824
+    },
+    {
+      "index": 313,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 314,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 315,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 316,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 317,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 318,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 319,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 320,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 321,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 322,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 323,
+      "symbol": "_WM32CBAddString@4",
+      "image_pointer": 268459520
+    },
+    {
+      "index": 324,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 325,
+      "symbol": "_WM32CBDir@4",
+      "image_pointer": 268459792
+    },
+    {
+      "index": 326,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 327,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 328,
+      "symbol": "_WM32CBGetLBText@4",
+      "image_pointer": 268460112
+    },
+    {
+      "index": 329,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 330,
+      "symbol": "_WM32CBAddString@4",
+      "image_pointer": 268459520
+    },
+    {
+      "index": 331,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 332,
+      "symbol": "_WM32CBAddString@4",
+      "image_pointer": 268459520
+    },
+    {
+      "index": 333,
+      "symbol": "_WM32CBAddString@4",
+      "image_pointer": 268459520
+    },
+    {
+      "index": 334,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 335,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 336,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 337,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 338,
+      "symbol": "_WM32CBGetDropDownControlRect@4",
+      "image_pointer": 268460016
+    },
+    {
+      "index": 339,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 340,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 341,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 342,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 343,
+      "symbol": "_WM32CBControl@4",
+      "image_pointer": 268459760
+    },
+    {
+      "index": 344,
+      "symbol": "_WM32CBAddString@4",
+      "image_pointer": 268459520
+    },
+    {
+      "index": 345,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 346,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 347,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 348,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 349,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 350,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 351,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 352,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 353,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 354,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 355,
+      "symbol": "_WM32CBComboFocus@4",
+      "image_pointer": 268459728
+    },
+    {
+      "index": 356,
+      "symbol": "_WM32CBComboFocus@4",
+      "image_pointer": 268459728
+    },
+    {
+      "index": 357,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 358,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 359,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 360,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 361,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 362,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 363,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 364,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 365,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 366,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 367,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 368,
+      "symbol": "_WM32STMControl@4",
+      "image_pointer": 268462512
+    },
+    {
+      "index": 369,
+      "symbol": "_WM32STMControl@4",
+      "image_pointer": 268462512
+    },
+    {
+      "index": 370,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 371,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 372,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 373,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 374,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 375,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 376,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 377,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 378,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 379,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 380,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 381,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 382,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 383,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 384,
+      "symbol": "_WM32LBAddString@4",
+      "image_pointer": 268461248
+    },
+    {
+      "index": 385,
+      "symbol": "_WM32LBAddString@4",
+      "image_pointer": 268461248
+    },
+    {
+      "index": 386,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 387,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 388,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 389,
+      "symbol": "_WM32LBSetSel@4",
+      "image_pointer": 268462128
+    },
+    {
+      "index": 390,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 391,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 392,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 393,
+      "symbol": "_WM32LBGetText@4",
+      "image_pointer": 268461808
+    },
+    {
+      "index": 394,
+      "symbol": "_WM32LBGetTextLen@4",
+      "image_pointer": 268462048
+    },
+    {
+      "index": 395,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 396,
+      "symbol": "_WM32LBAddString@4",
+      "image_pointer": 268461248
+    },
+    {
+      "index": 397,
+      "symbol": "_WM32LBDir@4",
+      "image_pointer": 268461488
+    },
+    {
+      "index": 398,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 399,
+      "symbol": "_WM32LBAddString@4",
+      "image_pointer": 268461248
+    },
+    {
+      "index": 400,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 401,
+      "symbol": "_WM32LBGetSelItems@4",
+      "image_pointer": 268461712
+    },
+    {
+      "index": 402,
+      "symbol": "_WM32LBSetTabStops@4",
+      "image_pointer": 268462176
+    },
+    {
+      "index": 403,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 404,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 405,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 406,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 407,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 408,
+      "symbol": "_WM32LBGetItemRect@4",
+      "image_pointer": 268461616
+    },
+    {
+      "index": 409,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 410,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 411,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 412,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 413,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 414,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 415,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 416,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 417,
+      "symbol": "_WM32LBControl@4",
+      "image_pointer": 268461456
+    },
+    {
+      "index": 418,
+      "symbol": "_WM32LBAddString@4",
+      "image_pointer": 268461248
+    },
+    {
+      "index": 419,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 420,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 421,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 422,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 423,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 424,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 425,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 426,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 427,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 428,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 429,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 430,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 431,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 432,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 433,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 434,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 435,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 436,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 437,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 438,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 439,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 440,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 441,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 442,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 443,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 444,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 445,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 446,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 447,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 448,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 449,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 450,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 451,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 452,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 453,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 454,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 455,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 456,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 457,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 458,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 459,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 460,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 461,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 462,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 463,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 464,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 465,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 466,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 467,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 468,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 469,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 470,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 471,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 472,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 473,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 474,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 475,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 476,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 477,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 478,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 479,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 480,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 481,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 482,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 483,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 484,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 485,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 486,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 487,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 488,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 489,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 490,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 491,
+      "symbol": "_WM32MNFindMenuWindow@4",
+      "image_pointer": 268462288
+    },
+    {
+      "index": 492,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 493,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 494,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 495,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 496,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 497,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 498,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 499,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 500,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 501,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 502,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 503,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 504,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 505,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 506,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 507,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 508,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 509,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 510,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 511,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 512,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 513,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 514,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 515,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 516,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 517,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 518,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 519,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 520,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 521,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 522,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 523,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 524,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 525,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 526,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 527,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 528,
+      "symbol": "_WM32ParentNotify@4",
+      "image_pointer": 268486912
+    },
+    {
+      "index": 529,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 530,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 531,
+      "symbol": "_WM32NextMenu@4",
+      "image_pointer": 268486752
+    },
+    {
+      "index": 532,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 533,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 534,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 535,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 536,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 537,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 538,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 539,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 540,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 541,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 542,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 543,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 544,
+      "symbol": "_WM32MDICreate@4",
+      "image_pointer": 268485328
+    },
+    {
+      "index": 545,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 546,
+      "symbol": "_WM32MDIActivate@4",
+      "image_pointer": 268485232
+    },
+    {
+      "index": 547,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 548,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 549,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 550,
+      "symbol": "_WM32Thunk16To32@4",
+      "image_pointer": 268487552
+    },
+    {
+      "index": 551,
+      "symbol": "_WM32Thunk16To32@4",
+      "image_pointer": 268487552
+    },
+    {
+      "index": 552,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 553,
+      "symbol": "_WM32MDIGetActive@4",
+      "image_pointer": 268485856
+    },
+    {
+      "index": 554,
+      "symbol": "_WM32DropObject@4",
+      "image_pointer": 268484400
+    },
+    {
+      "index": 555,
+      "symbol": "_WM32DropObject@4",
+      "image_pointer": 268484400
+    },
+    {
+      "index": 556,
+      "symbol": "_WM32Thunk16To32@4",
+      "image_pointer": 268487552
+    },
+    {
+      "index": 557,
+      "symbol": "_WM32DropObject@4",
+      "image_pointer": 268484400
+    },
+    {
+      "index": 558,
+      "symbol": "_WM32DropObject@4",
+      "image_pointer": 268484400
+    },
+    {
+      "index": 559,
+      "symbol": "_WM32DropObject@4",
+      "image_pointer": 268484400
+    },
+    {
+      "index": 560,
+      "symbol": "_WM32MDISetMenu@4",
+      "image_pointer": 268485920
+    },
+    {
+      "index": 561,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 562,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 563,
+      "symbol": "_WM32DropFiles@4",
+      "image_pointer": 268484352
+    },
+    {
+      "index": 564,
+      "symbol": "_WM32MDISetMenu@4",
+      "image_pointer": 268485920
+    },
+    {
+      "index": 565,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 566,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 567,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 568,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 569,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 570,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 571,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 572,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 573,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 574,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 575,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 576,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 577,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 578,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 579,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 580,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 581,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 582,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 583,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 584,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 585,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 586,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 587,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 588,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 589,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 590,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 591,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 592,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 593,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 594,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 595,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 596,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 597,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 598,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 599,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 600,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 601,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 602,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 603,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 604,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 605,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 606,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 607,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 608,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 609,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 610,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 611,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 612,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 613,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 614,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 615,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 616,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 617,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 618,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 619,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 620,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 621,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 622,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 623,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 624,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 625,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 626,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 627,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 628,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 629,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 630,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 631,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 632,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 633,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 634,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 635,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 636,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 637,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 638,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 639,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 640,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 641,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 642,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 643,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 644,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 645,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 646,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 647,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 648,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 649,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 650,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 651,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 652,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 653,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 654,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 655,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 656,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 657,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 658,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 659,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 660,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 661,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 662,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 663,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 664,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 665,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 666,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 667,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 668,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 669,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 670,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 671,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 672,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 673,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 674,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 675,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 676,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 677,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 678,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 679,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 680,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 681,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 682,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 683,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 684,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 685,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 686,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 687,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 688,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 689,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 690,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 691,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 692,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 693,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 694,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 695,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 696,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 697,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 698,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 699,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 700,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 701,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 702,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 703,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 704,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 705,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 706,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 707,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 708,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 709,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 710,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 711,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 712,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 713,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 714,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 715,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 716,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 717,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 718,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 719,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 720,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 721,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 722,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 723,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 724,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 725,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 726,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 727,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 728,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 729,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 730,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 731,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 732,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 733,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 734,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 735,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 736,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 737,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 738,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 739,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 740,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 741,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 742,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 743,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 744,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 745,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 746,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 747,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 748,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 749,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 750,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 751,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 752,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 753,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 754,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 755,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 756,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 757,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 758,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 759,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 760,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 761,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 762,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 763,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 764,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 765,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 766,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 767,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 768,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 769,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 770,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 771,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 772,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 773,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 774,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 775,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 776,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 777,
+      "symbol": "_WM32SizeClipBoard@4",
+      "image_pointer": 268487280
+    },
+    {
+      "index": 778,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 779,
+      "symbol": "_WM32SizeClipBoard@4",
+      "image_pointer": 268487280
+    },
+    {
+      "index": 780,
+      "symbol": "_WM32AskCBFormatName@4",
+      "image_pointer": 268480304
+    },
+    {
+      "index": 781,
+      "symbol": "_WM32ChangeCBChain@4",
+      "image_pointer": 268480400
+    },
+    {
+      "index": 782,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 783,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 784,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 785,
+      "symbol": "_WM32SetFocus@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 786,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 787,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 788,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 789,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 790,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 791,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 792,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 793,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 794,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 795,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 796,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 797,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 798,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 799,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 800,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 801,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 802,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 803,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 804,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 805,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 806,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 807,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 808,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 809,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 810,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 811,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 812,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 813,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 814,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 815,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 816,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 817,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 818,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 819,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 820,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 821,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 822,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 823,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 824,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 825,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 826,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 827,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 828,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 829,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 830,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 831,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 832,
+      "symbol": "_WM32NotifyWow@4",
+      "image_pointer": 268486848
+    },
+    {
+      "index": 833,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 834,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 835,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 836,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 837,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 838,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 839,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 840,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 841,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 842,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 843,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 844,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 845,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 846,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 847,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 848,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 849,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 850,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 851,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 852,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 853,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 854,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 855,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 856,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 857,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 858,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 859,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 860,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 861,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 862,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 863,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 864,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 865,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 866,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 867,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 868,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 869,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 870,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 871,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 872,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 873,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 874,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 875,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 876,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 877,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 878,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 879,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 880,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 881,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 882,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 883,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 884,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 885,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 886,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 887,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 888,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 889,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 890,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 891,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 892,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 893,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 894,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 895,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 896,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 897,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 898,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 899,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 900,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 901,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 902,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 903,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 904,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 905,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 906,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 907,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 908,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 909,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 910,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 911,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 912,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 913,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 914,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 915,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 916,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 917,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 918,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 919,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 920,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 921,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 922,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 923,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 924,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 925,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 926,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 927,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 928,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 929,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 930,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 931,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 932,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 933,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 934,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 935,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 936,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 937,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 938,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 939,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 940,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 941,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 942,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 943,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 944,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 945,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 946,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 947,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 948,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 949,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 950,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 951,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 952,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 953,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 954,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 955,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 956,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 957,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 958,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 959,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 960,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 961,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 962,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 963,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 964,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 965,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 966,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 967,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 968,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 969,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 970,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 971,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 972,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 973,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 974,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 975,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 976,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 977,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 978,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 979,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 980,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 981,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 982,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 983,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 984,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 985,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 986,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 987,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 988,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 989,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 990,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 991,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 992,
+      "symbol": "_WM32DDEInitiate@4",
+      "image_pointer": 268483552
+    },
+    {
+      "index": 993,
+      "symbol": "_WM32DDERequest@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 994,
+      "symbol": "_WM32DDEAdvise@4",
+      "image_pointer": 268482336
+    },
+    {
+      "index": 995,
+      "symbol": "_WM32DDERequest@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 996,
+      "symbol": "_WM32DDEAck@4",
+      "image_pointer": 268481936
+    },
+    {
+      "index": 997,
+      "symbol": "_WM32DDEData@4",
+      "image_pointer": 268482784
+    },
+    {
+      "index": 998,
+      "symbol": "_WM32DDERequest@4",
+      "image_pointer": 268484080
+    },
+    {
+      "index": 999,
+      "symbol": "_WM32DDEPoke@4",
+      "image_pointer": 268483648
+    },
+    {
+      "index": 1000,
+      "symbol": "_WM32DDEExecute@4",
+      "image_pointer": 268483216
+    },
+    {
+      "index": 1001,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1002,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1003,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1004,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1005,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1006,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1007,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1008,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1009,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1010,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1011,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1012,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1013,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1014,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1015,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1016,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1017,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1018,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1019,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1020,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1021,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1022,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    },
+    {
+      "index": 1023,
+      "symbol": "_WM32NoThunking@4",
+      "image_pointer": 268446416
+    }
+  ],
+  "scope": "Initial 32-to-16 message table pointers in released image, not message execution or lifetime acceptance"
+}

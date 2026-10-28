@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "a0d9d5502",
+  "candidate_count": 1,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-message-table-image-observations.json",
+      "sha256": "E76ADE4861419BB84C3A6947152A07AA130820DA394921FF99A1BF1B6CC13F50"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Initial native-to-guest message table pointers only"
+}

@@ -1,0 +1,513 @@
+{
+  "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "graph_sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+  "files": [
+    {
+      "name": "acc_efi.h",
+      "sha256": "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142",
+      "reference_hashes": [
+        "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142",
+        "1223e330518775a04b49d913c8fbdff86d2eec0c8308218640d7fa9215c72142"
+      ],
+      "guard_only": false,
+      "line_count": 512,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "cpu2.h",
+      "sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "reference_hashes": [
+        "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+        "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216"
+      ],
+      "guard_only": false,
+      "line_count": 470,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "d_inst.h",
+      "sha256": "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+      "reference_hashes": [
+        "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+        "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3"
+      ],
+      "guard_only": false,
+      "line_count": 417,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\dasm386\\dasm386.c:52",
+        "src\\mvdm\\softpc.new\\base\\dasm386\\decode.c:99"
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "dsktrace.h",
+      "sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082",
+      "reference_hashes": [
+        "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082",
+        "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082"
+      ],
+      "guard_only": false,
+      "line_count": 97,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\debug\\yoda.c:104",
+        "src\\mvdm\\softpc.new\\base\\disks\\diskbios.c:45",
+        "src\\mvdm\\softpc.new\\base\\disks\\fdisk.c:236"
+      ],
+      "valid_worker_objects": [
+        "obj/disks/diskbios.obj",
+        "obj/disks/fdisk.obj"
+      ]
+    },
+    {
+      "name": "gendrvr.h",
+      "sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "reference_hashes": [
+        "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+        "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185"
+      ],
+      "guard_only": false,
+      "line_count": 23,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\bios\\reset.c:66"
+      ],
+      "valid_worker_objects": [
+        "obj/bios/reset.obj"
+      ]
+    },
+    {
+      "name": "getptis.h",
+      "sha256": "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c",
+      "reference_hashes": [
+        "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c",
+        "e3d1d37fcc3b148e5e27c041ea9c14609a5a5b98d76a23b90d76a0a7a057102c"
+      ],
+      "guard_only": false,
+      "line_count": 84,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "gfiempty.h",
+      "sha256": "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+      "reference_hashes": [
+        "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+        "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d"
+      ],
+      "guard_only": false,
+      "line_count": 38,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "gore.h",
+      "sha256": "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2",
+      "reference_hashes": [
+        "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2",
+        "ef1880d39bc72f79dae1b4a14103e99765cfb78968304142388a83e0ab3049f2"
+      ],
+      "guard_only": false,
+      "line_count": 129,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\video\\ega_mode.c:108",
+        "src\\mvdm\\softpc.new\\base\\video\\ega_prts.c:355",
+        "src\\mvdm\\softpc.new\\base\\video\\gfx_updt.c:94",
+        "src\\mvdm\\softpc.new\\base\\video\\vga_mode.c:114"
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "harness.h",
+      "sha256": "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77",
+      "reference_hashes": [
+        "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77",
+        "8f989d1fb417baf5a51a7eae1c1b0f810876bcded3af3ec801ec051f27ad7a77"
+      ],
+      "guard_only": false,
+      "line_count": 82,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "hg_cpu.h",
+      "sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+      "reference_hashes": [
+        "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+        "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0"
+      ],
+      "guard_only": false,
+      "line_count": 252,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\comms\\com.c:59"
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "hg_sas.h",
+      "sha256": "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd",
+      "reference_hashes": [
+        "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd",
+        "4198ab0c46fca85740de31d45161981a828ea41842f3928d5cf6cc85ac086bbd"
+      ],
+      "guard_only": false,
+      "line_count": 26,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "host_gwi.h",
+      "sha256": "aea6e4658c2880f6494b3ea7a2ec81f42f740aadc83e8563d8aa8a7a5433bb67",
+      "reference_hashes": [
+        "aea6e4658c2880f6494b3ea7a2ec81f42f740aadc83e8563d8aa8a7a5433bb67",
+        "aea6e4658c2880f6494b3ea7a2ec81f42f740aadc83e8563d8aa8a7a5433bb67"
+      ],
+      "guard_only": false,
+      "line_count": 12,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\inc\\error.h:417",
+        "src\\mvdm\\softpc.new\\base\\inc\\gfx_upd.h:223",
+        "src\\mvdm\\softpc.new\\base\\inc\\keyboard.h:215"
+      ],
+      "valid_worker_objects": [
+        "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+        "obj/adapter-softpc/v7_pointer_binding.obj",
+        "obj/bios/reset.obj",
+        "obj/host/nt_cga.obj",
+        "obj/host/nt_det.obj",
+        "obj/host/nt_ega.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_fulsc.obj",
+        "obj/host/nt_graph.obj",
+        "obj/host/nt_input.obj",
+        "obj/host/nt_munge.obj",
+        "obj/host/nt_reset.obj",
+        "obj/host/nt_timer.obj",
+        "obj/host/nt_vga.obj",
+        "obj/keymouse/keyba.obj",
+        "obj/keymouse/keybd_io.obj",
+        "obj/keymouse/mouse_io.obj",
+        "obj/support/main.obj",
+        "obj/system/timestrb.obj",
+        "obj/video/cga.obj",
+        "obj/video/ega_dmmy.obj",
+        "obj/video/ega_mode.obj",
+        "obj/video/ega_prts.obj",
+        "obj/video/ega_vide.obj",
+        "obj/video/egawrtm0.obj",
+        "obj/video/egwrtm12.obj",
+        "obj/video/gfx_updt.obj",
+        "obj/video/gvi.obj",
+        "obj/video/v7_ports.obj",
+        "obj/video/v7_video.obj",
+        "obj/video/vga_mode.obj",
+        "obj/video/vga_prts.obj",
+        "obj/video/vga_vide.obj",
+        "obj/video/video.obj"
+      ]
+    },
+    {
+      "name": "host_sas.h",
+      "sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+      "reference_hashes": [
+        "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+        "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717"
+      ],
+      "guard_only": false,
+      "line_count": 191,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\inc\\sas.h:26"
+      ],
+      "valid_worker_objects": [
+        "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "obj/base-debug/btrace.obj",
+        "obj/base-debug/pigyoda.obj",
+        "obj/base-debug/trace.obj",
+        "obj/bios/build_id.obj",
+        "obj/bios/cmos_bis.obj",
+        "obj/bios/emm_fncs.obj",
+        "obj/bios/equipmnt.obj",
+        "obj/bios/ill_bop.obj",
+        "obj/bios/mem_size.obj",
+        "obj/bios/reset.obj",
+        "obj/bios/rom_basc.obj",
+        "obj/bios/rtc_bios.obj",
+        "obj/bios/slave_bs.obj",
+        "obj/bios/tape_io.obj",
+        "obj/bios/virtual.obj",
+        "obj/ccpu/c_main.obj",
+        "obj/ccpu/call.obj",
+        "obj/ccpu/ccpusas4.obj",
+        "obj/ccpu/sasCdef.obj",
+        "obj/ccpu/zfrsrvd.obj",
+        "obj/comms/com.obj",
+        "obj/comms/printer.obj",
+        "obj/comms/printer_.obj",
+        "obj/comms/rs232_io.obj",
+        "obj/cvidc/accessfn.obj",
+        "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+        "obj/disks/diskbios.obj",
+        "obj/disks/fdisk.obj",
+        "obj/disks/floppy.obj",
+        "obj/disks/floppy_i.obj",
+        "obj/disks/gfi.obj",
+        "obj/disks/gfi_mpty.obj",
+        "obj/dos/emm_mngr.obj",
+        "obj/host/config.obj",
+        "obj/host/nt_bop.obj",
+        "obj/host/nt_cga.obj",
+        "obj/host/nt_cpu.obj",
+        "obj/host/nt_det.obj",
+        "obj/host/nt_ega.obj",
+        "obj/host/nt_emm.obj",
+        "obj/host/nt_eoi.obj",
+        "obj/host/nt_error.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_fulsc.obj",
+        "obj/host/nt_graph.obj",
+        "obj/host/nt_input.obj",
+        "obj/host/nt_lpt.obj",
+        "obj/host/nt_mem.obj",
+        "obj/host/nt_mouse.obj",
+        "obj/host/nt_msscs.obj",
+        "obj/host/nt_reset.obj",
+        "obj/host/nt_sas.obj",
+        "obj/host/nt_timer.obj",
+        "obj/host/nt_umb.obj",
+        "obj/host/nt_unix.obj",
+        "obj/host/nt_vdd.obj",
+        "obj/host/sim32.obj",
+        "obj/host/stubs.obj",
+        "obj/keymouse/keyba.obj",
+        "obj/keymouse/keybd_io.obj",
+        "obj/keymouse/mouse.obj",
+        "obj/keymouse/mouse_io.obj",
+        "obj/support/ios.obj",
+        "obj/support/main.obj",
+        "obj/support/time_day.obj",
+        "obj/support/xt.obj",
+        "obj/system/at_dma.obj",
+        "obj/system/cmosnt.obj",
+        "obj/system/illegalp.obj",
+        "obj/system/rom.obj",
+        "obj/system/timer.obj",
+        "obj/system/unexp_nt.obj",
+        "obj/tests/ccpu_bounded_execution_fixture.obj",
+        "obj/tests/ccpu_stack_transition_test.obj",
+        "obj/tests/cvidc_vector_binding_fixture.obj",
+        "obj/tests/keyboard_controller_pic_test.obj",
+        "obj/tests/pic_reset_eoi_test.obj",
+        "obj/video/cga.obj",
+        "obj/video/ega_dmmy.obj",
+        "obj/video/ega_prts.obj",
+        "obj/video/ega_read.obj",
+        "obj/video/ega_vide.obj",
+        "obj/video/egawrtm0.obj",
+        "obj/video/egwrtm12.obj",
+        "obj/video/gfx_updt.obj",
+        "obj/video/gvi.obj",
+        "obj/video/v7_video.obj",
+        "obj/video/vga_prts.obj",
+        "obj/video/vga_vide.obj",
+        "obj/video/video.obj"
+      ]
+    },
+    {
+      "name": "hosthunt.h",
+      "sha256": "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+      "reference_hashes": [
+        "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+        "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2"
+      ],
+      "guard_only": false,
+      "line_count": 33,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "hunter.h",
+      "sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+      "reference_hashes": [
+        "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
+        "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf"
+      ],
+      "guard_only": false,
+      "line_count": 531,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\src\\nt_hunt.c:37",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_yoda.c:45",
+        "src\\mvdm\\softpc.new\\base\\bios\\reset.c:85",
+        "src\\mvdm\\softpc.new\\base\\system\\timer.c:78",
+        "src\\mvdm\\softpc.new\\base\\system\\timestrb.c:58"
+      ],
+      "valid_worker_objects": [
+        "obj/bios/reset.obj"
+      ]
+    },
+    {
+      "name": "j_c_lang.h",
+      "sha256": "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+      "reference_hashes": [
+        "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+        "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4"
+      ],
+      "guard_only": false,
+      "line_count": 47,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c:41",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid000.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid001.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid002.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid003.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid004.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid005.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid006.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid007.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid008.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid009.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid010.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid011.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid012.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid013.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid014.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid015.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid016.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid017.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid018.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid019.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid020.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid021.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid022.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid023.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid024.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid025.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid026.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid027.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid028.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid029.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sevid030.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sinit011.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sinit012.c:5",
+        "src\\mvdm\\softpc.new\\base\\cvidc\\sinit013.c:5",
+        "src\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\ev_glue.c:35"
+      ],
+      "valid_worker_objects": [
+        "obj/tests/cvidc_vector_binding_fixture.obj"
+      ]
+    },
+    {
+      "name": "jcgensyn.h",
+      "sha256": "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15",
+      "reference_hashes": [
+        "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15",
+        "6f207de257898856faa00baf78e381b15303e3ff57900af0ca4f651015cdbe15"
+      ],
+      "guard_only": false,
+      "line_count": 24,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "jformate.h",
+      "sha256": "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c",
+      "reference_hashes": [
+        "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c",
+        "a3fa4f16ff4f2e96f9f0d03cf69cf24e404ed3b428dda3a3f8466945a651ca5c"
+      ],
+      "guard_only": false,
+      "line_count": 628,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "lm_code.h",
+      "sha256": "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f",
+      "reference_hashes": [
+        "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f",
+        "981cee8585698990b8d7c69f3fd256a01219c2033fa81830c4b6887e33545f2f"
+      ],
+      "guard_only": false,
+      "line_count": 48,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "lq2500.h",
+      "sha256": "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d",
+      "reference_hashes": [
+        "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d",
+        "42758f3a5e16744fac7a14a04fa60d4b77467d8d92d8c1ecaadfc3283b02eb5d"
+      ],
+      "guard_only": false,
+      "line_count": 59,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "mouse16b.h",
+      "sha256": "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+      "reference_hashes": [
+        "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+        "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250"
+      ],
+      "guard_only": false,
+      "line_count": 55,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c:182"
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "msw_snd.h",
+      "sha256": "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+      "reference_hashes": [
+        "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+        "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc"
+      ],
+      "guard_only": false,
+      "line_count": 159,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "profile.h",
+      "sha256": "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+      "reference_hashes": [
+        "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+        "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d"
+      ],
+      "guard_only": false,
+      "line_count": 212,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\base\\debug\\profile.c:39"
+      ],
+      "valid_worker_objects": [
+        "obj/base-debug/profile.obj"
+      ]
+    },
+    {
+      "name": "smeg_hea.h",
+      "sha256": "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d",
+      "reference_hashes": [
+        "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d",
+        "ca784c2c076245462181acb61ad44dd89e92d26beef4227864152a50f9d5a47d"
+      ],
+      "guard_only": false,
+      "line_count": 74,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "spc_icon.h",
+      "sha256": "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea",
+      "reference_hashes": [
+        "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea",
+        "0f49f06c62860a0d5d9b0c645d148cf00416c341c3c82a7ec307349657781eea"
+      ],
+      "guard_only": false,
+      "line_count": 126,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    }
+  ]
+}

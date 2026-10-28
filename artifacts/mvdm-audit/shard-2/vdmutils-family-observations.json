@@ -1,0 +1,71 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "path": "vdmutils/graftabl/graftabl.h",
+      "hashes": [
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008",
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008",
+        "55ED64F98B6587A5B2DD6A7BEB2E5FCE11C2851AE4830D535B345C99163B2008"
+      ]
+    },
+    {
+      "path": "vdmutils/graftabl/obj/i386/graftabl.com",
+      "hashes": [
+        "BC241D49E73A10471500BCFCDA8302EF72FD7411F7B8DEA92289B4244EA2C87E",
+        "",
+        ""
+      ]
+    },
+    {
+      "path": "vdmutils/pifedit/pif.def",
+      "hashes": [
+        "79A710528DAFFA77FAEF458E590F2583A3F5954AE206B6B6F3EABED809441629",
+        "79A710528DAFFA77FAEF458E590F2583A3F5954AE206B6B6F3EABED809441629",
+        "79A710528DAFFA77FAEF458E590F2583A3F5954AE206B6B6F3EABED809441629"
+      ]
+    },
+    {
+      "path": "vdmutils/pifedit/pifedit.c",
+      "hashes": [
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278",
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278",
+        "FE2330596F35C493BC5FFB6BB8DAEEA9EB97A557F788ED9B3650F6F8FFA7E278"
+      ]
+    },
+    {
+      "path": "vdmutils/win/obj/i386/win.com",
+      "hashes": [
+        "5EB085D36B58B1B2CA57E07BEFFC341860D451265D2F913F4DE799C0235F05CF",
+        "",
+        ""
+      ]
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "package_comparison": [
+    {
+      "path": "vdmutils/graftabl/obj/i386/graftabl.com",
+      "zip_identical": [],
+      "zip_named": [],
+      "installed_exists": false
+    },
+    {
+      "path": "vdmutils/win/obj/i386/win.com",
+      "zip_identical": [],
+      "zip_named": [],
+      "installed_exists": false
+    }
+  ],
+  "scope": "Historical standalone utility source and current-only binary identity; no execution, provenance, or universal capability conclusion"
+}
