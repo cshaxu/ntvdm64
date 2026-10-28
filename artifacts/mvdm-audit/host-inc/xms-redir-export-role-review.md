@@ -1,0 +1,15 @@
+# Host shared export declarations: XMS and redirector
+
+This source-level review addresses decisions pending at its snapshot; xmsexp.h and rdrexp.h were subsequently marked partial. It addresses for `inc/xmsexp.h`, `inc/rdrexp.h`, and `inc/monregs.h`. These are declarations, not independent feature implementations. Scope and recommendation are limited to each exact header role; no shared ledger, runtime source or guest was changed.
+
+## `inc/xmsexp.h`: partial candidate
+
+Current and OpenNT SHA-256 are both `35B7F0C5F15250D40076DF9F101CEA9CA565973B951CAE85E3366F8591AE0655`. The header declares XMS dispatch and initialization and the shared `ExtMemSA` pool. Current `nt_bop.c` and `xmsdisp.c` directly include it; XMS source initializes the pool and the selected `dpmi32/dpmimemr.c` uses it for the CPU40 memory allocator. The recorded selected x86 dependency census has 11 edges, and `shard-3/xms-service-role-review.md` traces the BOP and handler map. `shard-0/xms-block-zero-boundary.md` records a versioned real guest XMS service probe against the explicitly hashed package-c worker and HIMEM image. These show selected declaration and bounded behavior, not all XMS functions or current installed identity. The zero allocation result is observed but its semantic correctness remains under review; allocation failure, cross-task lifetime, provider revisions and teardown remain open. Recommend partial for the declaration role, not full XMS restoration.
+
+## `inc/rdrexp.h`: partial candidate
+
+Current and OpenNT SHA-256 are both `5A40A916B423D7758625F9E82EA938C0334E71710CB491C91D373AFF44F9A098`. This header declares the VDM redirector dispatcher `VrDispatch`; selected `vdmredir/vrdisp.c` includes it and implements the 50-service table. `nt_bop.c` loads that exported name from the redirector and forwards the guest service byte through its own function pointer; it does not itself include this header. The selected dependency census identifies the provider object, and `docs/etc/evidence/m0-t420-s20-vdmredir-operation-matrix.md` describes versioned real guest witnesses for specific local operations, with RAP and DLC exclusions scoped separately. Recommend partial for the provider declaration; do not equate this with full redirector coverage, current package identity, or success of all operation and process-death paths.
+
+## `inc/monregs.h`: keep pending
+
+Current and OpenNT SHA-256 are both `8B8BAAA697B4DEA31FA51B4699A496D9D48673825BA3AB60869611DF8EC092FB`. It declares monitor register/flags globals and accessors. A valid dependency indicates `softpc.new/host/src/nt_thred.c` includes it, but the inspected source does not directly use the declarations. Another same-basename header exists in the host include tree, so source include text alone cannot establish which file every other consumer resolves. Selected dependency is not runtime use or proof of provider ABI. Keep pending until exact consumers, selected profile and provider semantics are bound; do not classify as guest-only or unused solely from this inspection.

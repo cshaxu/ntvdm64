@@ -6,11 +6,11 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-1/file-audit.csv",
-      "sha256": "938DAFE88F30B2CA4ECD46B1C6C000BEA447D71847C4816AEAB12BAE177D98AD"
+      "sha256": "DD313CE42A8C09CDCCE8C56F5F8328CB86B2AD97340738B632F1113917DC04FA"
     },
     {
       "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
-      "sha256": "53B7CCC927754C93838127B80FCF21349224AE271D61674738156BCE37758DB9"
+      "sha256": "0F07009CFC2C641EA204B29C27E4CEA97881B8FA0DE08FDD118838B817F9E3E1"
     },
     {
       "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
@@ -24,11 +24,11 @@
     "role-pending": 473
   },
   "host_candidate_ledger_status_counts": {
-    "pending": 194,
-    "partial": 398,
-    "部分复通": 322,
-    "待核验": 78,
-    "excluded": 150,
+    "pending": 192,
+    "partial": 399,
+    "部分复通": 324,
+    "待核验": 76,
+    "excluded": 151,
     "full": 36,
     "全复通": 17,
     "整体排除": 75

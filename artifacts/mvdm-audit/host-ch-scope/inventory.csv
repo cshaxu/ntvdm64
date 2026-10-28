@@ -161,7 +161,7 @@ inc/monregs.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate
 inc/mvdm.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/netb.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/oemuni.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-inc/rdrexp.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+inc/rdrexp.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/rdrsvc.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/sharewow.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/softpc.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -200,7 +200,7 @@ inc/wowth.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; s
 inc/wowusr.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/wowwsock.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/x86def.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-inc/xmsexp.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+inc/xmsexp.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 inc/xmssvc.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 oemuni/file.c,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 oemuni/oem.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -668,7 +668,7 @@ softpc.new/base/dos/emm_mngr.c,shard-0/review.csv,partial,host-candidate,host C/
 softpc.new/base/inc/acc_efi.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/base_def.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/bios.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/build_id.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/build_id.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/cdrom.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/cdrom_fn.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/cga.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
@@ -736,7 +736,7 @@ softpc.new/base/inc/host_cfg.h,shard-3/file-review.csv,excluded,host-candidate,h
 softpc.new/base/inc/host_com.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_fio.h,shard-1/file-audit.csv,整体排除,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_gwi.h,shard-1/file-audit.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/host_hun.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/host_hun.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_lpt.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_msw.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_nls.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

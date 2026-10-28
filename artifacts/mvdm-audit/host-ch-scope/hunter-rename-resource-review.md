@@ -1,0 +1,11 @@
+# Original Hunter rename marker and alternate host resources
+
+Three pending original `softpc.new/base/inc` C/H files were compared with OpenNT and OpenNT-4.5; each current copy is byte-identical to both. This review does not change a ledger or run product/guest code.
+
+| File | Original contents and observed dependency | Proposed disposition |
+| --- | --- | --- |
+| `host_hun.h` | The entire file consists of two **plain text**, non-C lines announcing that this filename was renamed to `HOSTHUNT.h`. There is no declaration, macro, include guard, function, or executable body. Current source searches find no `#include` of this exact name. Its SHA-256 and both original copies are `b2ef5f35b0828ada5881db818e59d7578dfa080e2321aa98f0bb6f315aef3936`. | **Excluded physical implementation role:** original rename notice only. Do not discard the separate Hunter diagnostic capability or its actual later header. |
+| `hosthunt.h` | Original HUNTER-specific binary file modes and host/PC coordinate-conversion macro interface, conditional on `HUNTER`. The observed current source search finds no direct include; current x86 PROD worker flags do not enable the profile. Separate `hunter.h` and `HUNTER`-gated configuration/video routines demonstrate that the historical capability was not equivalent to the obsolete filename marker. | **Pending:** verify original profile consumers/dependency closure and desired diagnostics scope; inactive in one configuration does not establish global irrelevance. |
+| `spc_icon.h` | Original SoftPC/SoftWindows icon bitmap data, including a `SOFTWINDOWS` guarded variant; the current source search found no exact include in `src/mvdm` or `src/ntvdm-exe`. | **Pending** product/resource ownership decision: source nonselection alone does not establish selected NTVDM/NTCON icons or image/resource behavior. Avoid treating bitmap data as executable device logic. |
+
+The old `host_hun.h` is not an empty header that compiles to nothing: including its bare text would fail C parsing. Its correct scoped disposition is a non-code rename marker, not a claim that a fake runtime implementation is harmless. `host-tail-role-review.md` separately scopes `nt_hunt.c` as an unselected debug profile; neither record proves other debugger or VGA behavior. The proposed classification is not a feature acceptance or behavioral test.
