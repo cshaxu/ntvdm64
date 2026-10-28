@@ -1,0 +1,25 @@
+{
+  "result": "pass",
+  "base": "f1b3042c6",
+  "candidate_count": 7,
+  "source_tables": [
+    {
+      "path": "shard-2/vdmredir-host-roles-observations.json",
+      "sha256": "A3B481BCBBF6987A4507F86CE98B5C0069FB5CC5EF7820D55EC91158B617A40E"
+    },
+    {
+      "path": "shard-2/dos-host-platform-headers-observations.json",
+      "sha256": "07343751D48431FE2D51BDA44856B531AC54E1C1F4FD710E0967FAC1BC9ED449"
+    },
+    {
+      "path": "shard-2/dos-video-profile-headers-observations.json",
+      "sha256": "9484092D166111C75956A3BA8C7C53458D89A91BB1EE66FE6FF42E19059F345E"
+    },
+    {
+      "path": "shard-2/wcall32-release-observations.json",
+      "sha256": "F7E1E7592D702D43B80E9E302B256281E7CD9FEC0947175FBD95917DC3674A45"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected inputs and samples; not complete runtime behavior"
+}

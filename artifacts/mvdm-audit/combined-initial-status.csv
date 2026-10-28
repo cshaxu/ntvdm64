@@ -2125,7 +2125,7 @@ softpc.new/host/inc/host_emm.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/host_gen.h,3,pending,shard-3/file-review.csv
 softpc.new/host/inc/host_gfx.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/host_hfx.h,3,pending,shard-3/file-review.csv
-softpc.new/host/inc/host_inc.h,2,pending,shard-2/file-audit.csv
+softpc.new/host/inc/host_inc.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/host_qev.h,0,partial,shard-0/review.csv
 softpc.new/host/inc/host_rrr.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/host_trc.h,1,pending,shard-1/file-audit.csv
@@ -2253,7 +2253,7 @@ softpc.new/host/inc/nt_cgalt.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_com.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_conf.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_det.h,0,pending,shard-0/review.csv
-softpc.new/host/inc/nt_ega.h,2,pending,shard-2/file-audit.csv
+softpc.new/host/inc/nt_ega.h,2,partial,shard-2/file-audit.csv
 softpc.new/host/inc/nt_egalt.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_eoi.h,1,pending,shard-1/file-audit.csv
 softpc.new/host/inc/nt_event.h,3,partial,shard-3/file-review.csv
@@ -2630,7 +2630,7 @@ vdmexts/vdmexts.h,3,pending,shard-3/file-review.csv
 vdmexts/vdmexts.rc,0,pending,shard-0/review.csv
 vdmexts/wow.c,0,pending,shard-0/review.csv
 vdmexts/wowprof.c,1,pending,shard-1/file-audit.csv
-vdmredir/dlstruct.h,2,pending,shard-2/file-audit.csv
+vdmredir/dlstruct.h,2,partial,shard-2/file-audit.csv
 vdmredir/makefile,2,excluded,shard-2/file-audit.csv
 vdmredir/obj/_objects.mac,2,excluded,shard-2/file-audit.csv
 vdmredir/obj/i386/vdmredir.res,1,excluded,shard-1/file-audit.csv
@@ -2651,7 +2651,7 @@ vdmredir/obj/i386/vrputil.obj,1,excluded,shard-1/file-audit.csv
 vdmredir/obj/i386/vrremote.obj,0,excluded,shard-0/review.csv
 vdmredir/sources,2,partial,shard-2/file-audit.csv
 vdmredir/vdmredir.def,0,pending,shard-0/review.csv
-vdmredir/vdmredir.rc,2,pending,shard-2/file-audit.csv
+vdmredir/vdmredir.rc,2,partial,shard-2/file-audit.csv
 vdmredir/vrdebug.c,0,pending,shard-0/review.csv
 vdmredir/vrdebug.h,3,pending,shard-3/file-review.csv
 vdmredir/vrdisp.c,2,partial,shard-2/file-audit.csv
@@ -2662,7 +2662,7 @@ vdmredir/vrdlcdbg.c,0,pending,shard-0/review.csv
 vdmredir/vrdlcdbg.h,3,pending,shard-3/file-review.csv
 vdmredir/vrdlcpst.c,0,pending,shard-0/review.csv
 vdmredir/vrdll.c,3,partial,shard-3/file-review.csv
-vdmredir/vrica.h,2,pending,shard-2/file-audit.csv
+vdmredir/vrica.h,2,partial,shard-2/file-audit.csv
 vdmredir/vrinit.c,0,partial,shard-0/review.csv
 vdmredir/vrmisc.c,0,partial,shard-0/review.csv
 vdmredir/vrmslot.c,0,partial,shard-0/review.csv
@@ -2670,7 +2670,7 @@ vdmredir/vrnetapi.c,1,partial,shard-1/file-audit.csv
 vdmredir/vrnetb.c,3,partial,shard-3/file-review.csv
 vdmredir/vrnmpipe.c,0,partial,shard-0/review.csv
 vdmredir/vrputil.c,0,partial,shard-0/review.csv
-vdmredir/vrputil.h,2,pending,shard-2/file-audit.csv
+vdmredir/vrputil.h,2,partial,shard-2/file-audit.csv
 vdmredir/vrremote.c,3,partial,shard-3/file-review.csv
 vdmutils/dirs,1,excluded,shard-1/file-audit.csv
 vdmutils/forcedos/forcedos.c,3,pending,shard-3/file-review.csv
@@ -4481,7 +4481,7 @@ wow32/walias.h,1,partial,shard-1/file-audit.csv
 wow32/walloc16.c,1,partial,shard-1/file-audit.csv
 wow32/wcall16.c,3,partial,shard-3/file-review.csv
 wow32/wcall16.h,1,pending,shard-1/file-audit.csv
-wow32/wcall32.c,2,pending,shard-2/file-audit.csv
+wow32/wcall32.c,2,partial,shard-2/file-audit.csv
 wow32/wcall32.h,3,pending,shard-3/file-review.csv
 wow32/wcmdgtbl.h,0,pending,shard-0/review.csv
 wow32/wcntl32.c,3,partial,shard-3/file-review.csv

@@ -1,0 +1,51 @@
+{
+  "result": "pass",
+  "source": "wow32/wcall32.c",
+  "hashes": [
+    "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571",
+    "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571",
+    "0F72AE39E691F3EF672DF4F1AEB3EBB6443E87F091FB6322EF1C13604AB3D571"
+  ],
+  "edge": "build obj/wcall32.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wcall32.c",
+  "object_sha256": "496E5B97D6BF81C8956C7228E2AA93AF2457BE296758DB45257415CC66FA6814",
+  "registration_source_sha256": "42AC4813868D734B26FEDEBCA4841B6E1318ECAC4BE0D700D3D0712D47231EAC",
+  "bindings": [
+    {
+      "name": "_W32LocalAlloc@12",
+      "va": 268458944,
+      "function": true,
+      "owner": "wcall32.obj",
+      "bytes": 52,
+      "relocation_words": 2
+    },
+    {
+      "name": "_W32LocalReAlloc@20",
+      "va": 268459088,
+      "function": true,
+      "owner": "wcall32.obj",
+      "bytes": 92,
+      "relocation_words": 3
+    },
+    {
+      "name": "_W32EditNextWord@20",
+      "va": 268458480,
+      "function": true,
+      "owner": "wcall32.obj",
+      "bytes": 169,
+      "relocation_words": 7
+    },
+    {
+      "name": "_W32InitDlg@8",
+      "va": 268458880,
+      "function": true,
+      "owner": "wcall32.obj",
+      "bytes": 64,
+      "relocation_words": 3
+    }
+  ],
+  "release_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "cached_sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "scope": "Object body binding only; no runtime or callback registration-table image binding"
+}

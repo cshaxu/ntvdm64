@@ -105,6 +105,8 @@ binds all 50 original service-table targets to the released DLL without
 claiming guest or network execution.
 The [redirector service owners](shard-0/redir-service-owners-review.md)
 bind 22 original initialization, cleanup, mailslot and utility functions.
+The [interface and callback checkpoint](selected-interface-callback-role-review.md)
+reconciles seven selected source and resource roles, not complete behavior.
 The [generic thunk published binding](shard-3/wow-generic-thunk-published-binding.md)
 relates earlier mismatch evidence to the currently released code section.
 The [generic thunk convention review](shard-3/wow-generic-thunk-call-convention-review.md)

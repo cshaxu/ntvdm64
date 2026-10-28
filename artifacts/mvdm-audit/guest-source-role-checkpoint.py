@@ -242,7 +242,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                 if proof['role'] == 'historical-relocated-build-artifact-only':
                     assert prefix == 'retained-tools16-role-' and path.startswith('tools16/')
             else:
-                if prefix == 'redir-service-owners-role-':
+                if prefix == 'selected-interface-callback-role-':
+                    assert path in ('vdmredir/dlstruct.h', 'vdmredir/vrica.h', 'vdmredir/vrputil.h', 'vdmredir/vdmredir.rc', 'softpc.new/host/inc/host_inc.h', 'softpc.new/host/inc/nt_ega.h', 'wow32/wcall32.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
+                elif prefix == 'redir-service-owners-role-':
                     assert path in ('vdmredir/vrinit.c', 'vdmredir/vrmisc.c', 'vdmredir/vrmslot.c', 'vdmredir/vrputil.c') and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 elif prefix == 'redir-dispatch-release-role-':
                     assert path == 'vdmredir/vrdisp.c' and proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
