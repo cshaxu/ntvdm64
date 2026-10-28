@@ -128,6 +128,8 @@ The [CPU/SAS generated-header recheck](cpu-sas-generated-pending-role-review.md)
 
 The historical CPU30 `inc/v86def.h` carrier is excluded only from the selected CPU40/CCPU profile as explained in the [CPU declaration review](../host-inc/legacy-cpu-redir-declaration-review.md). The [remaining DOS host check](dos-host-remaining-partial-check.md) retains two selected header dependencies as pending where active behavior has not been established.
 
+The [HFX protocol review](dos-hfx-protocol-owner-review.md) separates original HFX and SWIN_HFX BOPs from ordinary DOS file and redirector services. Original guest/provider applicability remains pending; captured illegal-BOP bindings are not a working HFX witness.
+
 The [guest-target follow-up](guest-target-followup-review.md) adds 45 observed-profile guest C source roles, while retaining 330 ambiguous paths and all host-side application behavior. The [original WINMM contract](wow-winmm-original-contract-review.md) supplies the historical provider contract for the controlled resolver witness, without proving modern provider behavior or guest reachability.
 
 The [DOS absolute I/O lease-error witness](dos-absolute-io-lease-error-review.md) exercises four selected-object null-session paths with controlled seams; the DOS guest error and reachability remain unverified.
