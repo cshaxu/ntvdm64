@@ -161,6 +161,10 @@ reopens another 564 guest-input-only decisions on the same basis.
 An [additional frozen sample](nine-way/part-8/existing-classifications-uncovered-r2-review.md)
 reopens 64 guest source/data decisions and one unbound guest image; an
 independently witnessed MEM image remains partial.
+The [101–300 sample correction](classification-scope-correction-101-300-verification.json)
+reopens 81 guest source/data decisions and two unbound guest images. Three
+COMMAND sources with mirror differences remain partial under the T objective;
+their source-to-image and behavioral evidence remains open.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 
