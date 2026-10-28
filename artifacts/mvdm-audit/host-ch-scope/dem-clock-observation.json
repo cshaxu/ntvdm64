@@ -1,0 +1,19 @@
+{
+  "object_sha256": "7B4172A148BCFA74D251617A3F3075628C41BEC005DE9776AA55C91CD5A20306",
+  "source_sha256": "1EF781412422CE7048FE2E40B0D8B067D4ACCCD83C35B8B29A7FB8A5D1551D7D",
+  "fixture_sha256": "612E875715668660ED8D6A23D41D00D5ACFE748AAE08DA30BEDB40061CC73971",
+  "exe_sha256": "8D7D8721F6F09B469626D09FC7402C3441023F2A4955B42E7C105A8996C804E6",
+  "rebindings": [
+    [
+      "__imp__GetLocalTime@4",
+      "_hook_getlocal"
+    ],
+    [
+      "__imp__SetLocalTime@4",
+      "_hook_setlocal"
+    ]
+  ],
+  "output": "PASS query date/time; set date/time preservation; success, privilege and error paths (mocked clock)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}

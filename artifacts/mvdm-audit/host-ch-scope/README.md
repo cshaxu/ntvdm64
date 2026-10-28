@@ -132,6 +132,8 @@ The [DPMI XMEM owner cleanup fixture](dpmi-xmem-owner-review.md) observes that o
 
 The [DEM default-drive selected-object fixture](dem-default-drive-selected-review.md) verifies original direct-service argument and failure branches with controlled callbacks. The traced active DOS default-drive path does not establish guest reachability of that service.
 
+The [DEM clock selected-object fixture](dem-clock-review.md) checks date/time query, preservation and controlled set-error branches without modifying the host clock. Guest dispatch, real privilege behavior and date boundaries remain unverified.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [C-VID alternative-host constants](cvidc-alternate-host-register-constants.md) classify four physical non-x86 host-register headers; guest CPU/FPU and generated-vector behavior remain separate obligations.
