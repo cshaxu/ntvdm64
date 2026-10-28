@@ -1,6 +1,6 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 38 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 41 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
 
 - [commdlg-resource](shard-1/commdlg-resource-review.md): [observer](shard-1/commdlg-resource-observer.py), [receipt](shard-1/commdlg-resource-observations.json).
 - [guest-resource-components](shard-1/guest-resource-components-review.md): [observer](shard-1/guest-resource-components-observer.py), [receipt](shard-1/guest-resource-components-observations.json).
@@ -40,3 +40,6 @@ The coordinator independently replayed all 38 observers against their retained J
 - [ccpu-div](shard-1/ccpu-div-review.md): [observer](shard-1/ccpu-div-observer.py), [receipt](shard-1/ccpu-div-observations.json).
 - [win16-kernel-guest](shard-2/win16-kernel-guest-review.md): [observer](shard-2/win16-kernel-guest-observer.py), [receipt](shard-2/win16-kernel-guest-observations.json).
 - [redir-service](shard-3/redir-service-role-review.md): [observer](shard-3/redir-service-observer.py), [receipt](shard-3/redir-service-observations.json).
+- [ccpu-interrupt](shard-1/ccpu-interrupt-review.md): [observer](shard-1/ccpu-interrupt-observer.py), [receipt](shard-1/ccpu-interrupt-observations.json).
+- [win16-toolhelp-guest](shard-2/win16-toolhelp-guest-review.md): [observer](shard-2/win16-toolhelp-guest-observer.py), [receipt](shard-2/win16-toolhelp-guest-observations.json).
+- [kernel32-extension](shard-3/kernel32-extension-role-review.md): [observer](shard-3/kernel32-extension-observer.py), [receipt](shard-3/kernel32-extension-observations.json).

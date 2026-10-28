@@ -1,0 +1,35 @@
+{
+  "result": "pass",
+  "relative_path": "wow16/toolhelp/TOOLHELP.DLL",
+  "hashes": [
+    "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+    "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+    "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE"
+  ],
+  "dos_catalog_rows": "1",
+  "wow_catalog_rows": "2",
+  "context": [
+    {
+      "path": "src\\mvdm\\wow16\\toolhelp\\makefile",
+      "sha256": "015B38918E45C957B4E29720E9C183090BED2BA30671105E50877DC679466941"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\toolhelp\\toolhelp.def",
+      "sha256": "E58FC8D96077B66AED3007482D1229EBCD596CDBED3F1F1D948C61D0D6B79D53"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\toolhelp\\ththunks.asm",
+      "sha256": "81200528F9D14768801AB7AE7DE117DB3B7D8E5BA6C597DC05B8EC296C332321"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wthtbl2.h",
+      "sha256": "830B724673E5B94B3D48D33E21FCAAA374DF3161D191ECC4B76E46387EF9817F"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_member": "WINNT/SYSTEM32/TOOLHELP.DLL",
+  "image_sha256": "DDEECCC103F7E3C105602A6F791792BAA7778A796709BE63983A8A921DF80CFE",
+  "installed_path": "O:\\winnt\\system32\\TOOLHELP.DLL",
+  "installed_sha256": "",
+  "scope": "Source-level class dispatch and image identity, not guest execution or complete ToolHelp behavior"
+}

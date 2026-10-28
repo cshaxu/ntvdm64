@@ -1,0 +1,43 @@
+{
+  "inc/WOWKRN.INC": {
+    "current": "3e0347b0d75ef2fac49cbf6c3b29e45ec71459807554143bc3251cac53479433",
+    "opennt": "3e0347b0d75ef2fac49cbf6c3b29e45ec71459807554143bc3251cac53479433",
+    "opennt45": "3e0347b0d75ef2fac49cbf6c3b29e45ec71459807554143bc3251cac53479433"
+  },
+  "wow16/kernel31/kthunks.asm": {
+    "current": "86f13d90280c7655acc4f36cb72760c944441be486886ccd96b0d737346460fc",
+    "opennt": "86f13d90280c7655acc4f36cb72760c944441be486886ccd96b0d737346460fc",
+    "opennt45": "86f13d90280c7655acc4f36cb72760c944441be486886ccd96b0d737346460fc"
+  },
+  "wow32/wktbl2.h": {
+    "current": "906a9371263f08ca073aa74d0f87b57076c21fdea5587b930398582b7c16b6f9",
+    "opennt": "906a9371263f08ca073aa74d0f87b57076c21fdea5587b930398582b7c16b6f9",
+    "opennt45": "906a9371263f08ca073aa74d0f87b57076c21fdea5587b930398582b7c16b6f9"
+  },
+  "wow32/wkgthunk.c": {
+    "current": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+    "opennt": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+    "opennt45": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec"
+  },
+  "wow32/wowtbl.c": {
+    "current": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+    "opennt45": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960"
+  },
+  "wow16/mmsystem/init.c": {
+    "current": "dce6cbec338bd4f549d0fb2c221a258f41a492f49bc9d23787d895dc6fef516d",
+    "opennt": "dce6cbec338bd4f549d0fb2c221a258f41a492f49bc9d23787d895dc6fef516d",
+    "opennt45": "dce6cbec338bd4f549d0fb2c221a258f41a492f49bc9d23787d895dc6fef516d"
+  },
+  "src/wow32-dll/include/wow_user_native_extension.h": "5ae3d36993ceeeb64436f9c99cff1b103d306c4aebd5fde8fed28949f41e11b2",
+  "src/wow32-dll/source/wow_user_native_extension.c": "93d840a9ece0be6fe0afc6fa0597e23cfc2182359ce2ba4be6e4848d97b6fa54",
+  "tools/build/New-T404S5Wow32ProviderNinja.ps1": "d8168ffd8919514c446f28511039f2b1122e2abf4f41b73f06009f15779c6962",
+  "map": {
+    "sha256": "37ce4b735da1536d2dee3492169d5a46785c04111e305a378e239b33d552b1f5",
+    "lines": [
+      " 0001:00013980       _WK32FreeLibrary32@4       10014980 f   wkgthunk.obj",
+      " 0001:00013990       _WK32GetProcAddress32@4    10014990 f   wkgthunk.obj",
+      " 0001:000139e0       _WK32LoadLibraryEx32@4     100149e0 f   wkgthunk.obj"
+    ]
+  }
+}

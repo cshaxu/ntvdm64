@@ -1,0 +1,128 @@
+{
+  "result": "pass",
+  "source": "softpc.new/base/ccpu386/c_intr.c",
+  "source_sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A",
+  "catalog_ids": "SRC:0aa0f05b6857670a018c;SRC:4a728a64616545a6cc75",
+  "build_edge": "build obj/ccpu/c_intr.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_intr.c",
+  "interrupt_binding": {
+    "name": "_do_intrupt",
+    "va": 4300192,
+    "function": true,
+    "owner": "original-ccpu386:c_intr.obj",
+    "bytes": 1375,
+    "relocation_words": 109
+  },
+  "selected_callers": [
+    {
+      "caller": "_INTx",
+      "offset": 46,
+      "binding": {
+        "name": "_INTx",
+        "va": 4347376,
+        "function": true,
+        "owner": "original-ccpu386:intx.obj",
+        "bytes": 54,
+        "relocation_words": 4
+      }
+    },
+    {
+      "caller": "_INTO",
+      "offset": 51,
+      "binding": {
+        "name": "_INTO",
+        "va": 4347312,
+        "function": true,
+        "owner": "original-ccpu386:into.obj",
+        "bytes": 59,
+        "relocation_words": 5
+      }
+    },
+    {
+      "caller": "_Int0",
+      "offset": 178,
+      "binding": {
+        "name": "_Int0",
+        "va": 4295456,
+        "function": true,
+        "owner": "original-ccpu386:c_xcptn.obj",
+        "bytes": 190,
+        "relocation_words": 23
+      }
+    },
+    {
+      "caller": "_ccpu",
+      "offset": 53673,
+      "binding": {
+        "name": "_ccpu",
+        "va": 4234240,
+        "function": true,
+        "owner": "original-ccpu386:c_main.obj",
+        "bytes": 55972,
+        "relocation_words": 6531
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "sha256": "9E6D69B1E05309CA87DB41C66B89EB9D0862F2078C08A16FE20B82669BC46A7A"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03"
+    },
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_intr.obj",
+      "sha256": "B7BCC7FD0C305536A8B638A567B2A46ECFDB75BEDD0070EDE7E7540BBCC04210"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\intx.obj",
+      "sha256": "A693AE10E40BF57EC8D812262D48D44AE354D1D828A8DC427E925050EA36D350"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\into.obj",
+      "sha256": "4E599BCA785042A159F5073BDC90C5DB29125030C96A5497A50AB7F21B61D9A9"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_xcptn.obj",
+      "sha256": "23B05770118A30E526A73E8CE264589DC7893EB5BB3B53981654CCC9A53222D8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj",
+      "sha256": "6FF59175D530E65B489B2C1BACB93B7C5AC459E049FE75B28EC0372AFA1C5986"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\intx.c",
+      "sha256": "544A08AEC10DFF46968F48B3AA83243FAC5BF78EF04D189C7B46518C242907E1"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\into.c",
+      "sha256": "FBE4DFE731C9D367C0270675C679BBF6ACF1A45CF0B4D4548B54E5D2080C74C3"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_xcptn.c",
+      "sha256": "733B53659DFF179EF61FA1B5EF7D0D1269BC3CC217319EFBBA9A38EB98242F15"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "sha256": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC"
+    }
+  ],
+  "limitations": "Static binary/source bindings only; no hardware IRQ, fault delivery, nested gates, privilege-stack or IRET execution proof."
+}

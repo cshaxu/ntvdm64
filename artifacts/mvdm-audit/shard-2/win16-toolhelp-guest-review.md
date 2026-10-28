@@ -1,0 +1,7 @@
+# Shard 2: Win16 TOOLHELP image and class thunks
+
+The pending `wow16/toolhelp/TOOLHELP.DLL` matches both original trees and `WINNT/SYSTEM32/TOOLHELP.DLL` in the captured release ZIP. The direct `O:/winnt/system32/TOOLHELP.DLL` path was absent; other search locations and application-local files are possible. The observer and JSON record the exact identities. Candidate partial: archive image identity is not a runtime selection or functioning ToolHelp witness.
+
+Original `toolhelp.def` exports ClassFirst and ClassNext at 69 and 70. The original guest `ththunks.asm`, whose object appears in the historical link list, emits ToolHelp thunks for those calls; the original WOW32 `wthtbl2.h` routes those named entries to `UNIMPLEMENTEDAPI`. This is a concrete source-table limitation, not proof that every ToolHelp API is unimplemented. In particular, the definition separately exports TaskFirst at 63; its complete guest implementation, task enumeration, exception paths and lifecycle were not verified by this observation. The retained guest image cannot be claimed to derive from the inspected recipe solely from byte identity.
+
+Prior `guest-loader-location-audit.md` records path ambiguity and independent earlier probe results, including application-local differing bytes. No new runtime or guest build was performed. Replay `python artifacts/mvdm-audit/shard-2/win16-toolhelp-guest-observer.py` and compare the companion JSON. No guest, product, installation, shared ledger or build tree was modified.
