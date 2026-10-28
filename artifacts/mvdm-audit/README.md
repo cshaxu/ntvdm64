@@ -35,6 +35,11 @@ their unresolved execution and provider selection obligations.
 The [cross-part 3/6/9 owner worklist](cross-369/function-owner-worklist.md)
 maps concrete findings to the planned recovery stages and traces WRITE image
 identity separately from the limited historical runtime witness.
+The [shard-3 function](cross-369/shard3-partial-host-function-plan.md) and
+[header](cross-369/shard3-partial-header-function-plan.md) inventories pin
+their ledger snapshot; the [controlled failure handoff](cross-369/selected-host-reproduced-failures-handoff.md)
+and [cross-shard handoff](cross-369/cross-shard-runtime-failures-handoff.md)
+separate reproduced fixture boundaries from guest compatibility claims.
 The [part 8 EDIT boundary](nine-way/part-8/edit-guest-host-review.md) separates
 guest source from the selected host control, and the [ToolHelp review](nine-way/part-8/toolhelp-family-review.md)
 distinguishes export and dispatch observations from guest reachability.
