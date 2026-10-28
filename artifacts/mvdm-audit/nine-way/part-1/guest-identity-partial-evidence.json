@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "shard": "0",
+      "path": "dos/v86/doskrnl/bios/NTIO.SYS",
+      "reason": "selected-guest-image-partial; Original guest image matches archive and installation",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest execution, source-to-image provenance, DOS services, error and lifecycle behavior remain open."
+    },
+    {
+      "shard": "0",
+      "path": "dos/v86/doskrnl/dos/NTDOS.SYS",
+      "reason": "selected-guest-image-partial; Original guest image matches archive and installation",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest execution, source-to-image provenance, DOS services, error and lifecycle behavior remain open."
+    },
+    {
+      "shard": "0",
+      "path": "wow16/mmsystem/MMSYSTEM.DLL",
+      "reason": "selected-guest-image-partial; Original guest binary matches archive but installed exact path was absent",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest load path, source-to-image provenance, actual service behavior and lifecycle remain unproved."
+    },
+    {
+      "shard": "0",
+      "path": "wow16/ole/server/retail/OLESVR.DLL",
+      "reason": "selected-guest-image-partial; Original retail OLE server guest image matches the archived guest package",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Exact installation path was absent; guest loading, source-to-image provenance, OLE behavior and lifetime remain unproved."
+    },
+    {
+      "shard": "0",
+      "path": "wow16/rasapi16/RASAPI16.DLL",
+      "reason": "selected-guest-image-partial; Original guest binary matches archive but installed exact path was absent",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest load path, source-to-image provenance, actual service behavior and lifecycle remain unproved."
+    },
+    {
+      "shard": "0",
+      "path": "wow16/test/shell/WOWEXEC.EXE",
+      "reason": "selected-guest-image-partial; Original guest binary matches archive and installed exact path",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest load path, source-to-image provenance, actual service behavior and lifecycle remain unproved."
+    },
+    {
+      "shard": "0",
+      "path": "wow16/winsock/WINSOCK.DLL",
+      "reason": "selected-guest-image-partial; Original guest binary matches archive but installed exact path was absent",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest load path, source-to-image provenance, actual service behavior and lifecycle remain unproved."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/mem/mem.exe",
+      "reason": "selected-guest-image-partial; OpenNT-4.5 guest image matches archive and installed image",
+      "recorded_runtime": "Unverified per file; source identity and build selection do not prove exercised behavior.",
+      "remaining": "Runtime selection, DOS memory accounting and error paths remain open."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/qbasic/edit.com",
+      "reason": "selected-guest-image-partial; Original guest image matches archive and installed image",
+      "recorded_runtime": "Unverified per file; source identity and build selection do not prove exercised behavior.",
+      "remaining": "Editor input, files, shell transitions and exit remain open."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/cmd/qbasic/edit.hlp",
+      "reason": "selected-guest-image-partial; Original help image matches archive and installed image",
+      "recorded_runtime": "Unverified per file; source identity and build selection do not prove exercised behavior.",
+      "remaining": "Runtime help selection, encoding and navigation remain open."
+    },
+    {
+      "shard": "2",
+      "path": "dos/v86/dev/country/nls863.inc",
+      "reason": "selected-guest-data-partial; Exact source collation bytes occur in packaged and installed COUNTRY.SYS",
+      "recorded_runtime": "Unverified per file; source identity and build selection do not prove exercised behavior.",
+      "remaining": "Runtime code-page selection, other tables, errors and image provenance remain open."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/bin/winstub.exe",
+      "reason": "selected-guest-image-partial; 546-byte stub payload matches installed WRITE and COMM images; standalone guest execution remains unproved",
+      "recorded_runtime": "Per-file runtime behavior unverified.",
+      "remaining": "Payload/image identity is not guest execution, source-to-image lineage, errors or lifecycle proof."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/comm/comm.drv",
+      "reason": "selected-guest-image-partial; Original COMM driver image matches archive and installed image",
+      "recorded_runtime": "Per-file runtime behavior unverified.",
+      "remaining": "Guest loading, serial behavior, CTS, failure and lifecycle remain open."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/drivers/sound/sound.drv",
+      "reason": "selected-guest-image-partial; Original sound driver matches packaged and installed image; DOBEEP source chain is traced",
+      "recorded_runtime": "Per-file runtime behavior unverified.",
+      "remaining": "Guest selection/loading, actual sound, timing, other ordinals and source-to-image provenance remain open."
+    },
+    {
+      "shard": "2",
+      "path": "wow16/timer/TIMER.DRV",
+      "reason": "selected-guest-image-partial; Original timer guest image and NE export ordinals match the archived guest package",
+      "recorded_runtime": "Per-file runtime behavior unverified.",
+      "remaining": "Package/installed identity and export metadata do not prove guest loading, callbacks, errors or task lifecycle."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/gdi/GDI.EXE",
+      "reason": "selected-guest-image-partial; Original image matches archive and installed image",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Guest execution, image lineage, feature behavior, failures and lifecycle remain unproved."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/user/k/daytona/USER.EXE",
+      "reason": "selected-guest-image-partial; Supplemental original USER guest image matches installed USER.EXE",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Package/installed identity and export metadata do not prove guest loading, callbacks, errors or task lifecycle."
+    },
+    {
+      "shard": "3",
+      "path": "wow16/wfwnet/WFWNET.DRV",
+      "reason": "selected-guest-image-partial; Original network driver matches installed guest image; selected runtime and providers remain unproved",
+      "recorded_runtime": "not stated in this row",
+      "remaining": "Payload/image identity is not guest execution, source-to-image lineage, errors or lifecycle proof."
+    }
+  ],
+  "limits": "Only row-reported image/data identity basis; absence of behavioral evidence in a row is not proof no independent witness exists; mirror diffs are not selected."
+}

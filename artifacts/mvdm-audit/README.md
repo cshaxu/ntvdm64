@@ -168,6 +168,9 @@ their source-to-image and behavioral evidence remains open.
 The [DOSX scope correction](classification-scope-correction-dosx-verification.json)
 also reopens seven guest source entries previously excluded on historical
 build-input evidence; their protected-mode functionality remains unresolved.
+The [guest-image witness review](nine-way/part-1/guest-identity-runtime-witness-review.md)
+reopens 14 image/data decisions lacking a bound execution witness while
+retaining four with bounded identity-matched historical execution evidence.
 The [live mirror check](live-mirror-disposition-observations.json) compares
 current source bytes to frozen original hashes; it is not functional proof.
 
