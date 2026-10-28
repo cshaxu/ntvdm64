@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "f56fd3f3e",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-0/ccpu-bit-rotate-image-observations.json",
+      "sha256": "858F71ABCA59EECF83DEAA8765777E1D1C1B0BD7A1AFA71014F81C55D4474FA0"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected instruction source and image binding; no complete guest acceptance"
+}

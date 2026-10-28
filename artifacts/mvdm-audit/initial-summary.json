@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1345,
+    "pending": 1343,
     "excluded": 2697,
-    "partial": 589,
+    "partial": 591,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "One guest image is partial and eight historical guest input roles are excluded, not their features."
+  "note": "BTC and RCL selected source bodies remain partial; full guest semantics remain in scope."
 }

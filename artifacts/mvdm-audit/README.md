@@ -37,6 +37,9 @@ seven historical guest build-input roles, not their guest capabilities.
 The [GDI and guest-input checkpoint](parallel-gdi-ctl3d-role-review.md) records
 one partial image and eight historical input roles without excluding features.
 
+The [bit and rotate checkpoint](shard-0/ccpu-bit-rotate-image-review.md) binds
+two CCPU instruction bodies and retains S11 guest execution obligations.
+
 The [DDEML test-input checkpoint](shard-0/ddeml-test-input-review.md)
 excludes individual historical sample/build roles, never DDE functionality.
 
@@ -65,7 +68,7 @@ The [guest delivery checkpoint](parallel-guest-delivery-role-review.md) records
 six partial image/data roles and four file-only historical exclusions.
 
 The [parallel source and package observations](parallel-source-package-observations.md)
-retain 59 independently replayed investigations; proposed dispositions remain pending.
+retain 63 independently replayed investigations; proposed dispositions remain pending.
 
 This is an in-progress S10 preparation record, not S9 closure or T acceptance.
 The [planar pixel contract](planar-pixel-contract-review.md) adds bounded

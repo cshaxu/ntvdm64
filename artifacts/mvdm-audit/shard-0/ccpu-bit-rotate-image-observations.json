@@ -1,0 +1,37 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/ccpu386/btc.c",
+      "sha256": "B6A883564D9F0F426274376C88410698A129542ED0E2EA22A4942C11085DEF89",
+      "edge": "build obj/ccpu/btc.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/btc.c",
+      "binding": {
+        "name": "_BTC",
+        "va": 4342928,
+        "function": true,
+        "owner": "original-ccpu386:btc.obj",
+        "bytes": 46,
+        "relocation_words": 1
+      },
+      "wow_source_ids": "SRC:7ee86a64d49efffeb52b;SRC:accaf858801dda3aab2b"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/rcl.c",
+      "sha256": "6C6B3036663637C364E94CD1BE954420DE6AFDE0ACCC603E1BFCD29D7F9F5BEC",
+      "edge": "build obj/ccpu/rcl.obj: cc_ccpu O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/rcl.c",
+      "binding": {
+        "name": "_RCL",
+        "va": 4352304,
+        "function": true,
+        "owner": "original-ccpu386:rcl.obj",
+        "bytes": 130,
+        "relocation_words": 4
+      },
+      "wow_source_ids": "SRC:3f3b8ec977fb77260e00;SRC:5cfe1992c898ed7428b9"
+    }
+  ],
+  "image_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "limits": "Source and selected instruction body binding only; actual operand, flags, faults and guest execution remain separate."
+}

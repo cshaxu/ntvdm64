@@ -1,0 +1,101 @@
+{
+  "denmark.msg": {
+    "current": {
+      "size": 63513,
+      "sha256": "0518b0d363eadc6f6ccd0a6b3400fc569b013079ead41df9602677bf18179b31"
+    },
+    "opennt": {
+      "size": 63513,
+      "sha256": "0518b0d363eadc6f6ccd0a6b3400fc569b013079ead41df9602677bf18179b31"
+    },
+    "opennt45": {
+      "size": 63513,
+      "sha256": "0518b0d363eadc6f6ccd0a6b3400fc569b013079ead41df9602677bf18179b31"
+    }
+  },
+  "finland.msg": {
+    "current": {
+      "size": 58744,
+      "sha256": "26cefa237a9f8367709075423adbcb4a46dd171f96946eef56fb4c0b439c3218"
+    },
+    "opennt": {
+      "size": 58744,
+      "sha256": "26cefa237a9f8367709075423adbcb4a46dd171f96946eef56fb4c0b439c3218"
+    },
+    "opennt45": {
+      "size": 58744,
+      "sha256": "26cefa237a9f8367709075423adbcb4a46dd171f96946eef56fb4c0b439c3218"
+    }
+  },
+  "italy.msg": {
+    "current": {
+      "size": 63868,
+      "sha256": "4fea9db9283ec25b91f349f1a5b05425ad1f2a19685240104d5182f56cbf0c16"
+    },
+    "opennt": {
+      "size": 63868,
+      "sha256": "4fea9db9283ec25b91f349f1a5b05425ad1f2a19685240104d5182f56cbf0c16"
+    },
+    "opennt45": {
+      "size": 63868,
+      "sha256": "4fea9db9283ec25b91f349f1a5b05425ad1f2a19685240104d5182f56cbf0c16"
+    }
+  },
+  "portugal.msg": {
+    "current": {
+      "size": 65735,
+      "sha256": "f3bd2706a971cd87263408c41c2157105a4f4e7e1f5759d2698ac4704648734e"
+    },
+    "opennt": {
+      "size": 65735,
+      "sha256": "f3bd2706a971cd87263408c41c2157105a4f4e7e1f5759d2698ac4704648734e"
+    },
+    "opennt45": {
+      "size": 65735,
+      "sha256": "f3bd2706a971cd87263408c41c2157105a4f4e7e1f5759d2698ac4704648734e"
+    }
+  },
+  "sweden.msg": {
+    "current": {
+      "size": 63175,
+      "sha256": "8c3855660ec2838b45cbecb83fb1d9dcf37dfebd9f08857525bd223a05b95f23"
+    },
+    "opennt": {
+      "size": 63175,
+      "sha256": "8c3855660ec2838b45cbecb83fb1d9dcf37dfebd9f08857525bd223a05b95f23"
+    },
+    "opennt45": {
+      "size": 63175,
+      "sha256": "8c3855660ec2838b45cbecb83fb1d9dcf37dfebd9f08857525bd223a05b95f23"
+    }
+  },
+  "state.rst": {
+    "current": {
+      "size": 267,
+      "sha256": "528fc79d1c1a64e92056f956b0a4ded79d3cc4515a1b0637c5d82d1857b5526a"
+    },
+    "opennt": {
+      "size": 267,
+      "sha256": "528fc79d1c1a64e92056f956b0a4ded79d3cc4515a1b0637c5d82d1857b5526a"
+    },
+    "opennt45": {
+      "size": 267,
+      "sha256": "528fc79d1c1a64e92056f956b0a4ded79d3cc4515a1b0637c5d82d1857b5526a"
+    }
+  },
+  "makefile": {
+    "current": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    },
+    "opennt": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    },
+    "opennt45": {
+      "size": 326,
+      "sha256": "867a421cc0f0859e769b4a521ca44b70f74781763e358016c025b43d89859fd4"
+    }
+  },
+  "package_names": []
+}

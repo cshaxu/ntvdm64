@@ -1,6 +1,11 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 59 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 63 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Only dispositions explicitly included in a later checkpoint are merged into the ledger. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [ccpu-bit-rotate-image](shard-0/ccpu-bit-rotate-image-review.md): [observer](shard-0/ccpu-bit-rotate-image-observer.py), [receipt](shard-0/ccpu-bit-rotate-image-observations.json).
+- [guest-ddeml-tests](shard-1/guest-ddeml-tests-review.md): [observer](shard-1/guest-ddeml-tests-observer.py), [receipt](shard-1/guest-ddeml-tests-observations.json).
+- [win16-wfwnet-guest](shard-2/win16-wfwnet-guest-review.md): [observer](shard-2/win16-wfwnet-guest-observer.py), [receipt](shard-2/win16-wfwnet-guest-observations.json).
+- [dos-messages](shard-3/dos-messages-role-review.md): [observer](shard-3/dos-messages-observer.py), [receipt](shard-3/dos-messages-observations.json).
 
 - [guest-toolhelp-owner](shard-1/guest-toolhelp-owner-review.md): [observer](shard-1/guest-toolhelp-owner-observer.py), [receipt](shard-1/guest-toolhelp-owner-observations.json).
 - [win16-ctl3d-guest](shard-2/win16-ctl3d-guest-review.md): [observer](shard-2/win16-ctl3d-guest-observer.py), [receipt](shard-2/win16-ctl3d-guest-observations.json).
