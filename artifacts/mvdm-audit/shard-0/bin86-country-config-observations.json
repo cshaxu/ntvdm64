@@ -1,0 +1,45 @@
+{
+  "result": "pass",
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "sources": [
+    {
+      "relative_path": "bin86/country.sys",
+      "sha256": "BA263D4276024A904ECE68FE193F8CA6DA928DC9B35F8948F69D458DBB6AC3D0",
+      "original_hashes": [
+        "",
+        "BA263D4276024A904ECE68FE193F8CA6DA928DC9B35F8948F69D458DBB6AC3D0"
+      ],
+      "zip_matching_members": [],
+      "installed": [
+        {
+          "path": "O:\\winnt\\country.sys",
+          "sha256": null
+        },
+        {
+          "path": "O:\\winnt\\system32\\country.sys",
+          "sha256": "9DDF2B738307B5950699513E6B8221E2044BB686487A8C216AF7C6FD3F853B54"
+        }
+      ]
+    },
+    {
+      "relative_path": "bin86/system.ini",
+      "sha256": "6F533CCC79227E38F18BFC63BFC961EF4D3EE0E2BF33DD097CCF3548A12B743B",
+      "original_hashes": [
+        "6F533CCC79227E38F18BFC63BFC961EF4D3EE0E2BF33DD097CCF3548A12B743B",
+        "6F533CCC79227E38F18BFC63BFC961EF4D3EE0E2BF33DD097CCF3548A12B743B"
+      ],
+      "zip_matching_members": [],
+      "installed": [
+        {
+          "path": "O:\\winnt\\system.ini",
+          "sha256": "F20A94235712C26B0499D61E7CC080B612BBFE230DE0C65A6832494FDBB1ACAA"
+        },
+        {
+          "path": "O:\\winnt\\system32\\system.ini",
+          "sha256": null
+        }
+      ]
+    }
+  ],
+  "scope": "Point-in-time identities only; no guest search path or behavior claim"
+}

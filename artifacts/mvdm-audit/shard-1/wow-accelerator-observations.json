@@ -1,0 +1,153 @@
+{
+  "result": "pass",
+  "relative_path": "wow32/waccel.c",
+  "sha256": "C78DD24195E1A7D28DC3A9EE535B4104E9859F98EA8869F8F5591BC9C159A8E8",
+  "wow_source_ids": "SRC:3fc539d4bfdddbd71cc4;SRC:81902d204f7d4b49211d",
+  "edge": "build obj/waccel.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/waccel.c",
+  "dependency": "obj/waccel.obj: #deps 126, deps mtime 8147760935718447 (VALID)",
+  "functions": [
+    {
+      "name": "_CreateAccel32@8",
+      "va": 268616448,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 134,
+      "relocation_words": 4
+    },
+    {
+      "name": "_DestroyAccelAlias@4",
+      "va": 268616592,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 116,
+      "relocation_words": 6
+    },
+    {
+      "name": "_FindAccelAlias@8",
+      "va": 268616720,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 66,
+      "relocation_words": 2
+    },
+    {
+      "name": "_FreeAccelAliasEntry@4",
+      "va": 268616800,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 69,
+      "relocation_words": 4
+    },
+    {
+      "name": "_GetAccelHandle16@4",
+      "va": 268616880,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 321,
+      "relocation_words": 12
+    },
+    {
+      "name": "_GetAccelHandle32@4",
+      "va": 268617216,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 138,
+      "relocation_words": 7
+    },
+    {
+      "name": "_SetupAccelAlias@16",
+      "va": 268617360,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 162,
+      "relocation_words": 9
+    },
+    {
+      "name": "_WU32LoadAccelerators@4",
+      "va": 268617536,
+      "function": true,
+      "owner": "waccel.obj",
+      "bytes": 119,
+      "relocation_words": 5
+    }
+  ],
+  "calls": [
+    {
+      "caller": "_WU32NotifyWow@4",
+      "target": "_WU32LoadAccelerators@4",
+      "target_owner": "waccel.obj",
+      "va": 268617536
+    },
+    {
+      "caller": "_WowOriginalFreeTask@4",
+      "target": "_DestroyAccelAlias@4",
+      "target_owner": "waccel.obj",
+      "va": 268616592
+    },
+    {
+      "caller": "_WU32LoadAccelerators@4",
+      "target": "_CreateAccel32@8",
+      "target_owner": "waccel.obj",
+      "va": 268616448
+    },
+    {
+      "caller": "_WU32LoadAccelerators@4",
+      "target": "_SetupAccelAlias@16",
+      "target_owner": "waccel.obj",
+      "va": 268617360
+    },
+    {
+      "caller": "_SetupAccelAlias@16",
+      "target": "_malloc_w_small@4",
+      "target_owner": "wheap.obj",
+      "va": 268639712
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\waccel.c",
+      "sha256": "C78DD24195E1A7D28DC3A9EE535B4104E9859F98EA8869F8F5591BC9C159A8E8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "sha256": "C78DD24195E1A7D28DC3A9EE535B4104E9859F98EA8869F8F5591BC9C159A8E8"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\waccel.c",
+      "sha256": "C78DD24195E1A7D28DC3A9EE535B4104E9859F98EA8869F8F5591BC9C159A8E8"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "sha256": "C97C512C6F6BD6F16A6FB68F340760F551CD2186B5262B1A6AE892FC8A06BC58"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\waccel.obj",
+      "sha256": "B8CBADD8E9EE6646BCBDA721037C5DCCCD696930BE17420CEC95FED3A67745CC"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wuman.obj",
+      "sha256": "19008163BDEA5EDD686BD2574EEC6F16FFEE31ED4AFF2D3F245D0F4A825AC98F"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wkman.obj",
+      "sha256": "6AE8D87734AFCE23E72D3CD7359A53B46044273CEB2740F347968EB759107699"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\shard-1\\wow-cursor-evidence.json",
+      "sha256": "0AACE5A87045ECC7A0BA19C3F3B264B2AF753D7DDDAF64B9B2DBDB30165E2FB1"
+    }
+  ],
+  "scope": "Selected original code and initial call edges; no guest execution, invalid-input or alias lifetime proof"
+}
