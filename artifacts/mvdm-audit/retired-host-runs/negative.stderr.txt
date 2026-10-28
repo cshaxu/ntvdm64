@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\retired-host-image-observer.py", line 149, in <module>
+    result = inspect('--wrong-slot' in sys.argv)
+  File "O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\retired-host-image-observer.py", line 131, in inspect
+    assert kind == 6 and target == expected, 'DEM_SLOT_EXPECTATION_MISMATCH'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: DEM_SLOT_EXPECTATION_MISMATCH

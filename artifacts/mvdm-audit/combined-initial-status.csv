@@ -2324,7 +2324,7 @@ softpc.new/host/src/nt_event.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/nt_fdisk.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_fulsc.c,3,partial,shard-3/file-review.csv
 softpc.new/host/src/nt_graph.c,0,partial,shard-0/review.csv
-softpc.new/host/src/nt_hfx.c,2,pending,shard-2/file-audit.csv
+softpc.new/host/src/nt_hfx.c,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/nt_hosts.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_hunt.c,1,pending,shard-1/file-audit.csv
 softpc.new/host/src/nt_input.c,0,partial,shard-0/review.csv
@@ -2344,9 +2344,9 @@ softpc.new/host/src/nt_rez.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_rflop.c,3,partial,shard-3/file-review.csv
 softpc.new/host/src/nt_sas.c,1,excluded,shard-1/file-audit.csv
 softpc.new/host/src/nt_sec.c,2,excluded,shard-2/file-audit.csv
-softpc.new/host/src/nt_smenu.c,1,pending,shard-1/file-audit.csv
+softpc.new/host/src/nt_smenu.c,1,excluded,shard-1/file-audit.csv
 softpc.new/host/src/nt_sound.c,3,partial,shard-3/file-review.csv
-softpc.new/host/src/nt_term.c,1,pending,shard-1/file-audit.csv
+softpc.new/host/src/nt_term.c,1,excluded,shard-1/file-audit.csv
 softpc.new/host/src/nt_thred.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_timer.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/nt_umb.c,2,partial,shard-2/file-audit.csv
@@ -2406,7 +2406,7 @@ softpc.new/host/src/obj/i386/stubs.obj,0,excluded,shard-0/review.csv
 softpc.new/host/src/obj/i386/x86_emm.obj,2,excluded,shard-2/file-audit.csv
 softpc.new/host/src/sim32.c,0,partial,shard-0/review.csv
 softpc.new/host/src/sources,2,partial,shard-2/file-audit.csv
-softpc.new/host/src/stf_conf.c,0,pending,shard-0/review.csv
+softpc.new/host/src/stf_conf.c,0,excluded,shard-0/review.csv
 softpc.new/host/src/stubs.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/x86_emm.c,2,excluded,shard-2/file-audit.csv
 softpc.new/obj.vdm/c_regs.c,3,excluded,shard-3/file-review.csv

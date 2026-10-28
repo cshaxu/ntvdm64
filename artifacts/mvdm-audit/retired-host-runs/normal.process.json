@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Program Files\\Python313\\python.exe",
+  "pid": 15064,
+  "started": "2026-10-28T03:10:27.2136061Z",
+  "arguments": "-B artifacts/mvdm-audit/retired-host-image-observer.py"
+}

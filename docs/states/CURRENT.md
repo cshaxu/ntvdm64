@@ -19,9 +19,9 @@ that every historical test has run.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
-[memory review](../../artifacts/mvdm-audit/memory-native-role-review.md) adds three
-roles, seven UMB functions and actual-object contracts.
-The ledger has 1,544 pending, 448 partial, 53 full and 2,639 excluded physical
+[retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
+predecessors through 15 selected functions and 73 DEM slots.
+The ledger has 1,540 pending, 448 partial, 53 full and 2,643 excluded physical
 file roles. Keycode one-past reads remain a proved S13 defect; no runtime image changed.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
@@ -175,10 +175,10 @@ packet above remains the only current S authority.
 
 ## Current Technical Baseline
 
-The current coherent ten-image delivery is the S10 package-isolation baseline
-`build/package-uuid/package-c`. Its release identity is
-`assets/release/release-manifest.json`; all ten files are hash-equal to
-`O:\winnt\system32` and the tested package. Guest media remains unchanged.
+Accepted baseline: `build/package-uuid/package-c` and `assets/release`.
+The [latest checkpoint](../../artifacts/mvdm-audit/retired-host-role-review.md)
+restored all ten installed images after candidate hash drift; installation
+again matches the accepted baseline. Guest media remains unchanged.
 
 ## Temporary Evidence
 

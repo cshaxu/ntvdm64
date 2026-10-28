@@ -1,0 +1,22 @@
+[
+  {
+    "path": "completion.json",
+    "bytes": 66,
+    "sha256": "A7C1AC0AB93EFECD1950BB31ACB1BDA59721CFC665813F900743F84A2CE3C4AB"
+  },
+  {
+    "path": "process.json",
+    "bytes": 286,
+    "sha256": "182300FC8486B252BDC98D749AD5203764192ED732112CC510E1158A1D7DC1D1"
+  },
+  {
+    "path": "stderr.txt",
+    "bytes": 301,
+    "sha256": "E11C51C3A00F5EE0353949F9B21C491A37AF7E30553230CD0B8658462864BF3B"
+  },
+  {
+    "path": "stdout.txt",
+    "bytes": 383,
+    "sha256": "595E9D256C7FEE7FE241ECEA32105A90C6E3FC20033DFF520ECB8D86BCD63E44"
+  }
+]

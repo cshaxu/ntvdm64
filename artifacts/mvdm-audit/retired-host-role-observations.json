@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "de734bc9c",
+  "candidate_count": 4,
+  "source_tables": [
+    {
+      "path": "retired-host-image-observations.json",
+      "sha256": "B7165DDDCA9E85F54540CCF4EE604E7334799F2F8182C3C5C58BE3832AAB7455"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Four physical predecessor exclusions, not complete selected files/configuration/menu/termination acceptance"
+}

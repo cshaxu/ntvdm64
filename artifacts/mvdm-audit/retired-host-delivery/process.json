@@ -1,0 +1,6 @@
+{
+  "image": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+  "arguments": "-NoProfile -File artifacts/mvdm-audit/retired-host-delivery-verification.ps1",
+  "pid": 31548,
+  "started": "2026-10-28T03:18:10.4854943Z"
+}

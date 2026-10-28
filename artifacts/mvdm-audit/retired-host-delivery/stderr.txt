@@ -1,0 +1,5 @@
+warning: in the working copy of 'docs/states/CURRENT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/states/QUEUE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/component-integration/win31_setup_cmd_roundtrip_test.ps1', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tools/win31-setup/APPLY.CMD', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tools/win31-setup/UNAPPLY.CMD', LF will be replaced by CRLF the next time Git touches it

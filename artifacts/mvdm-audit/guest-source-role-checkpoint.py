@@ -144,7 +144,8 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                                 'historical-alternative-nt-provider-source-only', 'historical-superseded-source-revision-only',
                                 'historical-alternative-cpu-video-interface-source-only',
                                 'historical-superseded-nt-error-table-source-only',
-                                'historical-alternative-memory-provider-source-only')
+                                'historical-alternative-memory-provider-source-only',
+                                'historical-superseded-nt-host-source-only')
                 artifact_roles = ('historical-symbol-artifact-only', 'historical-host-build-artifact-only',
                                   'historical-guest-build-object-artifact-only', 'historical-source-index-artifact-only',
                                   'historical-generated-message-artifact-only')
@@ -182,6 +183,10 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                     assert prefix == 'input-native-role-' and path in ('softpc.new/host/src/nt_ertbl.c', 'softpc.new/host/src/nt_mess.c')
                 if proof['role'] == 'historical-alternative-memory-provider-source-only':
                     assert prefix == 'memory-native-role-' and path in ('softpc.new/host/src/nt_sas.c', 'softpc.new/host/src/nt_sec.c')
+                if proof['role'] == 'historical-superseded-nt-host-source-only':
+                    assert prefix == 'retired-host-role-' and path in (
+                        'softpc.new/host/src/nt_term.c', 'softpc.new/host/src/nt_smenu.c',
+                        'softpc.new/host/src/nt_hfx.c', 'softpc.new/host/src/stf_conf.c')
             else:
                 if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
@@ -216,6 +221,17 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
     assert observation['result'] == 'pass' and observation['candidate_count'] == expected_count
     for record in observation['source_tables']:
         assert sha(A / record['path']) == record['sha256']
+    if prefix == 'retired-host-role-':
+        observed = json.loads((A / 'retired-host-image-observations.json').read_text())
+        assert runpy.run_path(str(A / 'retired-host-image-observer.py'))['inspect']() == observed
+        assert len(observed['sources']) == 4 and len(observed['providers']) == 15
+        assert len(observed['dem_slots']) == 73 and len(observed['cleanup_sequences']) == 3
+        assert {r['relative_path'] for r in observed['sources']} == set(changed)
+        assert all(r['status'] == 'excluded' for r in changed.values())
+        negative = Path('build/t473-s10/retired-host-image-final')
+        completion = json.loads((negative / 'negative.completion.json').read_text(encoding='utf-8-sig'))
+        assert completion['exit'] == completion['expected_exit'] == 1
+        assert 'DEM_SLOT_EXPECTATION_MISMATCH' in (negative / 'negative.stderr.txt').read_text()
     if prefix == 'memory-native-role-':
         observed = json.loads((A / 'memory-image-observations.json').read_text())
         assert runpy.run_path(str(A / 'memory-image-observer.py'))['inspect']() == observed
@@ -715,6 +731,9 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                   unrelated_shard_rows_unchanged=True, frozen_inventory_unchanged=True,
                   product_or_guest_changed_by_checkpoint=False,
                   scope='Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance')
+    if prefix == 'retired-host-role-':
+        result.pop('product_or_guest_changed_by_checkpoint')
+        result.update(package_and_installed_state_verification='separate delivery gate')
     output.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result))
 
@@ -723,7 +742,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

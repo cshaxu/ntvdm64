@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1544,
-    "excluded": 2639,
+    "pending": 1540,
+    "excluded": 2643,
     "partial": 448,
     "full": 53
   },
@@ -40,5 +40,5 @@
     }
   ],
   "complete": false,
-  "note": "One original UMB owner partial with bounded native evidence; two physical alternate memory profiles excluded through selected original CPU40 ownership. Direct helper boundary failure is not a demonstrated production defect. No original source or image changed."
+  "note": "Four unchanged physical host predecessors excluded through original NT recipe/callers, 15 actual selected functions, 73 DEM slots and cleanup order. Their selected capabilities remain partial; no original source or image changed."
 }

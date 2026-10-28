@@ -1,0 +1,37 @@
+[
+  {
+    "path": "before.json",
+    "bytes": 2500,
+    "sha256": "5C10C85EF73D6B4550AB9C463B358D07923DDBBE850FD7BEC441B2E73AB37ADE"
+  },
+  {
+    "path": "completion.json",
+    "bytes": 66,
+    "sha256": "007821ED09C712101A8CD0EDD31DA096C94AF083B2A157E00F3C75BE3448F2E0"
+  },
+  {
+    "path": "process.json",
+    "bytes": 319,
+    "sha256": "EFDF2363F59971DCBF8A26FE6B023B06D88563B0C9016F8B728DFB9726AD9A3D"
+  },
+  {
+    "path": "restore.ps1",
+    "bytes": 3431,
+    "sha256": "42DF040992899C3CD08B07FC3A03C6CB8D6667C833EB2FB50A60258A9FD176D9"
+  },
+  {
+    "path": "result.json",
+    "bytes": 2529,
+    "sha256": "BB4A459535F86478E031E47D008C76788F12EE202052F049147EB7275EBA8D4B"
+  },
+  {
+    "path": "stderr.txt",
+    "bytes": 0,
+    "sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855"
+  },
+  {
+    "path": "stdout.txt",
+    "bytes": 117,
+    "sha256": "7EC3DFD0CF1667D0E7AC75B9CA21369B86729B267B73700A492C9303E1B2B3DD"
+  }
+]

@@ -42,6 +42,14 @@ original behavior, lifecycle and regression before implementing a change.
 | S17 | Registry identifiers and selected-versus-linked reconciliation in [cross-shard findings](findings.md) | Resolve misleading provenance and owner records without treating documentation collisions as runtime defects; unresolved unselected and external paths remain in the exhaustive audit. |
 | S18 | [Unused C-VID test-provider scaffold](cvidc-inert-scaffold-review.md) | Current production and actual binding-fixture inputs exclude the inert object, whose query has no consumers. Reconfirm against the implementation-time graph, then remove only the unused project generator/rule declarations and exercise the real fixture; this is not a production success-stub recovery or an original-provider removal. |
 
+The [retired-host checkpoint](retired-host-role-review.md) excludes four
+superseded physical files, not their selected NT capabilities. S11/S13 retain
+nt_reset once-only cleanup, error/return codes and NTSRV-coordinated retirement;
+S12 retains actual DEM file/handle/path and configuration behavior; S13 retains
+device/profile/frontend propagation. Source cleanup order and 73 linked DEM
+slots do not close these obligations or accept unimplemented/fast-I/O slots.
+Do not restore old no-op HFX file stubs or a dead application-local kill flag.
+
 The [memory checkpoint](memory-native-role-review.md) leaves S13 original
 UMB initialization/failure, public hook and UMB-list identity/retirement,
 nesting, actual guest faults and SAS/XMS/reset lifecycle. Direct helpers accept

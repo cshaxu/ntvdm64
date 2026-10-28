@@ -1,0 +1,4 @@
+{"result": "pass", "base": "de734bc9c", "counts": {"pending": 1540, "excluded": 2643, "partial": 448, "full": 53}, "source_role_changes": 4, "unrelated_shard_rows_unchanged": true, "frozen_inventory_unchanged": true, "scope": "Source roles, identities, recorded input absence and ledger consistency; no guest capability acceptance", "package_and_installed_state_verification": "separate delivery gate"}
+Documentation governance verification passed.
+Documentation relative-link verification passed.
+PASS four physical NT predecessors, 15 actual selected functions, 73 DEM slots, original cleanup order and wrong-slot negative; selected capabilities remain partial; accepted/candidate unchanged, installed baseline restored

@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\artifacts\mvdm-audit\retired-host-delivery-verification.ps1:21
+Line |
+  21 |  .  $row.Name)).Hash -ne $row.Sha256){throw 'Published package changed'}
+     |                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Published package changed

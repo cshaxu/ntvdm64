@@ -1,0 +1,1 @@
+PASS ten installed images restored to existing accepted baseline; exact candidate backup retained; no guest changed
