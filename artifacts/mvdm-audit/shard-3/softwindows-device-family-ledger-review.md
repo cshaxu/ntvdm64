@@ -1,0 +1,15 @@
+# Pending SoftWindows device interface family
+
+The `host-ch-scope/inventory.csv` snapshot checked before this review lists all five exact `softpc.new/base/inc` paths below as pending host candidates. They match the corresponding OpenNT bytes, and the captured x86 worker dependency list contains none of the five exact paths. No guest or device was run; the selected source and map observations are not a new product acceptance test.
+
+Original `base/bios/bios.c:453–463` routes BOP 98–9B to SoftWindows display, mouse, copy and keyboard only under `MSWDVR`; otherwise those slots route to `illegal_bop`. BOP 9F similarly uses `msw_sound` only under `SWIN_HAW`. Neither macro is passed in the captured worker build commands. This establishes the source-level profile split, not by itself final preprocessor state or a separately verified latest executable. Existing `../host-ch-scope/softwindows-display-owner-review.md` and `../host-ch-scope/softwindows-input-audio-profile-review.md` describe the distinct selected DOS/Video7 and WOW32/host providers and their evidence limits.
+
+| Pending exact file | Original obligation and current owner comparison | Ledger-ready recommendation |
+|---|---|---|
+| `ms_windo.h` | SoftWindows display driver/GDI protocol and raster identifiers; current DOS Windows uses SoftPC Video7, WOW uses original WOW32 GDI → host GDI. Neither demonstrates this dedicated BOP protocol. | **Pending** original driver/profile applicability and provider; no partial or global exclusion solely from current inactivity. S13/S15 retain selected graphics tests. |
+| `host_msw.h` | Host-side SoftWindows definitions under `MSWDVR` and `XWINDOW`; no exact selected dependency. | Exact X/SoftWindows physical header can be excluded **for the captured NT profile**; do not close its underlying cross-profile capability without the S17 scope decision. |
+| `msw_keyb.h` | SoftWindows keyboard virtual-key interface; selected `nt_keycd`, `nt_event`, `keyba` own the separate NT input path. | **Pending** original profile applicability and independent keyboard behavior; link attribution does not establish driver equivalence. S13/S15. |
+| `msw_snd.h` | SoftWindows sound-driver buffers/errors and `SWIN_HAW` BOP; selected WOW32 WINMM is a separate route. | **Pending** historical waveform contract and S13/S16 actual wave/MIDI completion, failure and teardown; do not equate a timer witness with wave output. |
+| `msw_dbg.h` | Driver diagnostics gated by production/debug configuration; no selected exact consumer proved. | **Pending** debug profile applicability; selected NT errors/diagnostics remain independent. Do not silently treat inactive diagnostic code as impossible to need. |
+
+No live SoftWindows driver, guest BOP operation, or equivalent semantics has been demonstrated. If project policy explicitly excludes a historical profile, the coordinator may record file-level exclusions with that authority; otherwise the four unresolved contracts remain pending. No shared ledger was modified.

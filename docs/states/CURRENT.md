@@ -59,7 +59,7 @@ selected Full gates do not prove those historical failures repaired.
 | Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
 | Expected Markers | Each in-scope host C/H row has justified full/partial/excluded disposition and selected original owner; mirror diffs are partial with a justified estimate or explicit unmeasurable basis. |
 | Asset Needs | Read-only DOS16/WOW32 inventories and original sources; existing build graphs, maps and noninteractive/authorized desktop probes. |
-| Reporting Requirements | Per-file evidence and unresolved capabilities; source/adapter diff and ownership accounting; 42,963 external audit rows assessed for relevance. |
+| Reporting Requirements | Per-file evidence for applicable MVDM host C/H and unresolved capabilities; source/adapter diff and ownership accounting. Use the external audit inventories to trace relevant capability and provider dependencies, without individually classifying unrelated external files. |
 | Stop Conditions | Guest change, inaccessible original source, private host-layout assumption or new observable semantic concession. |
 | Exit Criteria | Complete reconciled host C/H ledger with no unclassified applicable file, evidence-backed exclusions and finite dependency-ordered recovery groups; compilation or trace alone is not functional proof. |
 | Original Owner Request | Reconnect every feasible original MVDM capability, per-file full/partial/excluded with mirror diffs partial and estimated restored proportion, then complete all required tests before T closure. |
