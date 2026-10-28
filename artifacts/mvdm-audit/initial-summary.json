@@ -1,8 +1,8 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1135,
-    "excluded": 2801,
+    "pending": 1133,
+    "excluded": 2803,
     "partial": 695,
     "full": 53
   },
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Five selected SoftPC declaration roles partial; other conditional or test-only dependencies remain pending."
+  "note": "Two original disabled converter file roles excluded; multimedia capability remains open."
 }

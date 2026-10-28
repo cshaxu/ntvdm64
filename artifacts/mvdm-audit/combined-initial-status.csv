@@ -4556,9 +4556,9 @@ wow32/wmmedia.c,0,partial,shard-0/review.csv
 wow32/wmmedia.h,2,partial,shard-2/file-audit.csv
 wow32/wmmedia1.c,2,excluded,shard-2/file-audit.csv
 wow32/wmmedia2.c,3,pending,shard-3/file-review.csv
-wow32/wmmstru1.c,0,pending,shard-0/review.csv
+wow32/wmmstru1.c,0,excluded,shard-0/review.csv
 wow32/wmmstru2.c,1,pending,shard-1/file-audit.csv
-wow32/wmmstruc.c,0,pending,shard-0/review.csv
+wow32/wmmstruc.c,0,excluded,shard-0/review.csv
 wow32/wmmstruc.h,1,pending,shard-1/file-audit.csv
 wow32/wmmtbl.h,1,pending,shard-1/file-audit.csv
 wow32/wmmtbl2.h,2,partial,shard-2/file-audit.csv

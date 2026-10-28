@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "bee94b5e2",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-0/wow-multimedia-disabled-structures-observations.json",
+      "sha256": "9830C0FAEEA1E4C58356DE9C89FD7315321980F2A554CF63094AF5CD132342AA"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original disabled source bodies only, not multimedia capability"
+}

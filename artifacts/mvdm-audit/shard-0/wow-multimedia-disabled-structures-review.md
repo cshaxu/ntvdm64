@@ -1,0 +1,5 @@
+# Original disabled WOW multimedia structure converters
+
+The [observer](wow-multimedia-disabled-structures-observer.py) and [receipt](wow-multimedia-disabled-structures-observations.json) compare both original editions and the current sources. Original `wmmstru1.c` encloses the MCI structure helpers in an unconditional `#if 0` from lines 27–1579; `wmmstruc.c` similarly encloses its structure converters from lines 33–762. Both disabled blocks extend to file end and have no top-level alternate branch. The current graph compiles and links their objects, but those objects contain only linker directives and debug metadata, with no loadable code or data section and no map-owned runtime symbol.
+
+This is an exclusion of two original disabled **file roles**, not of MCI, wave, multimedia conversion or callback capabilities. The live generic guest-to-WINMM bridge is separately traced in the [multimedia review](../shard-2/wow-multimedia-inactive-body-review.md), and S14/S16 retain guest execution, asynchronous completion, conversion, resource ownership and teardown. A no-code object does not prove those paths work. No guest or product binary was modified.

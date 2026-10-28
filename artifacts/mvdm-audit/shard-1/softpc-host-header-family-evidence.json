@@ -1,0 +1,246 @@
+{
+  "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+  "graph_sha256": "835d8d25248ffbe2c4b4b147c056a43ef7c2f3624a85e09f141258f45fa0410c",
+  "files": [
+    {
+      "name": "host_rrr.h",
+      "sha256": "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+      "reference_hashes": [
+        "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac",
+        "a849bf3b9c08d83ca3e21a386c6a45042494df82eeb28e4c8d0de3d7f14972ac"
+      ],
+      "guard_only": false,
+      "line_count": 34,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c:10",
+        "src\\mvdm\\softpc.new\\host\\src\\config.c:41",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_cga.c:34",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_com.c:273",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_det.c:45",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_ega.c:36",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_eoi.c:33",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_error.c:44",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_event.c:76",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c:57",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_graph.c:48",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_hosts.c:21",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_lpt.c:69",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_mouse.c:24",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_nls.c:34",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_sec.c:18",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_timer.c:154",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_vga.c:31",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_wcom.c:26",
+        "src\\mvdm\\softpc.new\\host\\src\\x86_emm.c:54"
+      ],
+      "valid_worker_objects": [
+        "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+        "obj/host/config.obj",
+        "obj/host/nt_cga.obj",
+        "obj/host/nt_com.obj",
+        "obj/host/nt_det.obj",
+        "obj/host/nt_ega.obj",
+        "obj/host/nt_eoi.obj",
+        "obj/host/nt_error.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_fulsc.obj",
+        "obj/host/nt_graph.obj",
+        "obj/host/nt_hosts.obj",
+        "obj/host/nt_lpt.obj",
+        "obj/host/nt_mouse.obj",
+        "obj/host/nt_nls.obj",
+        "obj/host/nt_sec.obj",
+        "obj/host/nt_timer.obj",
+        "obj/host/nt_vga.obj",
+        "obj/host/nt_wcom.obj",
+        "obj/host/ntvdm_entry.obj"
+      ]
+    },
+    {
+      "name": "host_trc.h",
+      "sha256": "81c80fa61476745303c3cc7753c85ca876f2b33e269aca8d96db779135f7791f",
+      "reference_hashes": [
+        "81c80fa61476745303c3cc7753c85ca876f2b33e269aca8d96db779135f7791f",
+        "81c80fa61476745303c3cc7753c85ca876f2b33e269aca8d96db779135f7791f"
+      ],
+      "guard_only": false,
+      "line_count": 27,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\src\\nt_com.c:29",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c:11",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_timer.c:164",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_wcom.c:25"
+      ],
+      "valid_worker_objects": [
+        "obj/host/nt_com.obj",
+        "obj/host/nt_ntfun.obj",
+        "obj/host/nt_wcom.obj"
+      ]
+    },
+    {
+      "name": "hosttyps.h",
+      "sha256": "d41a82b33dc8c8dc3056de79f553b334a3d1b905c8da218e1d5ee1465df4e36a",
+      "reference_hashes": [
+        "d41a82b33dc8c8dc3056de79f553b334a3d1b905c8da218e1d5ee1465df4e36a",
+        "d41a82b33dc8c8dc3056de79f553b334a3d1b905c8da218e1d5ee1465df4e36a"
+      ],
+      "guard_only": false,
+      "line_count": 7,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "nt_conf.h",
+      "sha256": "42f541dfe879bacae812471b725ec9e1ff12dc5d172f8277e77e5642f15dd848",
+      "reference_hashes": [
+        "42f541dfe879bacae812471b725ec9e1ff12dc5d172f8277e77e5642f15dd848",
+        "42f541dfe879bacae812471b725ec9e1ff12dc5d172f8277e77e5642f15dd848"
+      ],
+      "guard_only": false,
+      "line_count": 24,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "nt_eoi.h",
+      "sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "reference_hashes": [
+        "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+        "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3"
+      ],
+      "guard_only": false,
+      "line_count": 41,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\inc\\nt_mon.h:19",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_bop.c:83",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_com.c:41",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_det.c:56",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_eoi.c:37",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_event.c:85",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c:62",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_mouse.c:29",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_msscs.c:27",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_reset.c:57",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_sec.c:17",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_timer.c:178",
+        "src\\mvdm\\softpc.new\\base\\keymouse\\keyba.c:114",
+        "src\\mvdm\\softpc.new\\base\\system\\cmosnt.c:47",
+        "src\\mvdm\\softpc.new\\base\\system\\ica.c:203",
+        "src\\mvdm\\softpc.new\\base\\system\\qevnt.c:40",
+        "src\\mvdm\\softpc.new\\base\\system\\timer.c:83"
+      ],
+      "valid_worker_objects": [
+        "obj/adapter-softpc/mvdm_keyboard_reset.obj",
+        "obj/host/nt_bop.obj",
+        "obj/host/nt_com.obj",
+        "obj/host/nt_det.obj",
+        "obj/host/nt_eoi.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_fulsc.obj",
+        "obj/host/nt_mouse.obj",
+        "obj/host/nt_msscs.obj",
+        "obj/host/nt_reset.obj",
+        "obj/host/nt_sec.obj",
+        "obj/host/nt_timer.obj",
+        "obj/keymouse/keyba.obj",
+        "obj/system/cmosnt.obj",
+        "obj/system/ica.obj",
+        "obj/system/qevnt.obj",
+        "obj/system/timer.obj"
+      ]
+    },
+    {
+      "name": "nt_getxx.h",
+      "sha256": "b7adbf0d1f261f852f78179e757fb1ed8004db8ea6711ddf1fc4d5bb19819c46",
+      "reference_hashes": [
+        "b7adbf0d1f261f852f78179e757fb1ed8004db8ea6711ddf1fc4d5bb19819c46",
+        "b7adbf0d1f261f852f78179e757fb1ed8004db8ea6711ddf1fc4d5bb19819c46"
+      ],
+      "guard_only": false,
+      "line_count": 26,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\src\\nt_yoda.c:46"
+      ],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "nt_paint.h",
+      "sha256": "1a04bb94c25ef5dfe4c890442262d0b3162f0a9e0b7bd89c53df12a63aff506f",
+      "reference_hashes": [
+        "1a04bb94c25ef5dfe4c890442262d0b3162f0a9e0b7bd89c53df12a63aff506f",
+        "1a04bb94c25ef5dfe4c890442262d0b3162f0a9e0b7bd89c53df12a63aff506f"
+      ],
+      "guard_only": false,
+      "line_count": 3,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "nt_pif.h",
+      "sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+      "reference_hashes": [
+        "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+        "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09"
+      ],
+      "guard_only": false,
+      "line_count": 124,
+      "direct_includes": [
+        "src\\mvdm\\softpc.new\\host\\src\\config.c:32",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_event.c:87",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_msscs.c:33",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_pif.c:22",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_timer.c:177",
+        "src\\mvdm\\softpc.new\\host\\src\\nt_unix.c:33",
+        "src\\mvdm\\softpc.new\\base\\system\\timer.c:85"
+      ],
+      "valid_worker_objects": [
+        "obj/command/cmdmisc.obj",
+        "obj/command/cmdpif.obj",
+        "obj/host/config.obj",
+        "obj/host/nt_event.obj",
+        "obj/host/nt_msscs.obj",
+        "obj/host/nt_pif.obj",
+        "obj/host/nt_timer.obj",
+        "obj/host/nt_unix.obj",
+        "obj/system/timer.obj"
+      ]
+    },
+    {
+      "name": "sdos_ddi.h",
+      "sha256": "c6b1f280ca1a33eadab8509fee4e064b388f4e508355ae9540b3fe1ef0fd10d1",
+      "reference_hashes": [
+        "c6b1f280ca1a33eadab8509fee4e064b388f4e508355ae9540b3fe1ef0fd10d1",
+        "c6b1f280ca1a33eadab8509fee4e064b388f4e508355ae9540b3fe1ef0fd10d1"
+      ],
+      "guard_only": false,
+      "line_count": 33,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "winsigni.h",
+      "sha256": "54088b4dcd3e1255852d94eb4beec3dafdfb9f915d20a810624b62179db2c44a",
+      "reference_hashes": [
+        "54088b4dcd3e1255852d94eb4beec3dafdfb9f915d20a810624b62179db2c44a",
+        "54088b4dcd3e1255852d94eb4beec3dafdfb9f915d20a810624b62179db2c44a"
+      ],
+      "guard_only": false,
+      "line_count": 52,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    },
+    {
+      "name": "kybdcpu.gi",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reference_hashes": [
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ],
+      "guard_only": [],
+      "line_count": 0,
+      "direct_includes": [],
+      "valid_worker_objects": []
+    }
+  ]
+}

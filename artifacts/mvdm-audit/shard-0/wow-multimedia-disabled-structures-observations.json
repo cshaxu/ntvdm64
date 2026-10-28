@@ -1,0 +1,38 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "relative_path": "wow32/wmmstru1.c",
+      "hashes": [
+        "8480EEC46CE4371647743D176D19709A9902A749A84452A5743F1A72AB675BE9",
+        "8480EEC46CE4371647743D176D19709A9902A749A84452A5743F1A72AB675BE9",
+        "8480EEC46CE4371647743D176D19709A9902A749A84452A5743F1A72AB675BE9"
+      ],
+      "disabled_lines": [
+        27,
+        1579
+      ],
+      "compile_edge": "build obj/wmmstru1.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmmstru1.c",
+      "object_sha256": "D81F2848A5C3431FCD24FFAC1F2247DEF155E8EF6B01046C4AA5FBF236637835",
+      "object_sections": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmmstru1.obj:     file format pe-i386\n\nSections:\nIdx Name          Size      VMA       LMA       File off  Algn\n  0 .drectve      0000002f  00000000  00000000  0000008c  2**0\n                  CONTENTS, READONLY, DEBUGGING, EXCLUDE, NOREAD\n  1 .debug$S      0000009c  00000000  00000000  000000bb  2**0\n                  CONTENTS, READONLY, DEBUGGING\n  2 .chks64       00000018  00000000  00000000  00000157  2**2\n                  CONTENTS, READONLY, DEBUGGING, EXCLUDE, NOREAD"
+    },
+    {
+      "relative_path": "wow32/wmmstruc.c",
+      "hashes": [
+        "AF5F3E85909F195C283D4C2D275B07B995E44E448E0DECB2EE6FB06764FA1CC4",
+        "AF5F3E85909F195C283D4C2D275B07B995E44E448E0DECB2EE6FB06764FA1CC4",
+        "AF5F3E85909F195C283D4C2D275B07B995E44E448E0DECB2EE6FB06764FA1CC4"
+      ],
+      "disabled_lines": [
+        33,
+        762
+      ],
+      "compile_edge": "build obj/wmmstruc.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wmmstruc.c",
+      "object_sha256": "A5E0CA138124B72143D5D24A86D426E0E6359EB3D78CC2DAAE3B2C3746F9788C",
+      "object_sections": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wmmstruc.obj:     file format pe-i386\n\nSections:\nIdx Name          Size      VMA       LMA       File off  Algn\n  0 .drectve      0000002f  00000000  00000000  0000008c  2**0\n                  CONTENTS, READONLY, DEBUGGING, EXCLUDE, NOREAD\n  1 .debug$S      0000009c  00000000  00000000  000000bb  2**0\n                  CONTENTS, READONLY, DEBUGGING\n  2 .chks64       00000018  00000000  00000000  00000157  2**2\n                  CONTENTS, READONLY, DEBUGGING, EXCLUDE, NOREAD"
+    }
+  ],
+  "graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "scope": "Original disabled body and current no-code object only; multimedia guest and host behavior not excluded"
+}

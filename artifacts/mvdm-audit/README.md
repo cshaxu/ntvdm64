@@ -567,3 +567,7 @@ The [C-VID declaration family](shard-1/cvidc-header-family-review.md), [generate
 The [WOW message table review](shard-0/wow-message-table-image-review.md) binds all 1,024 initial native-to-guest message table pointers to the released DLL; runtime dispatch and message behavior remain open.
 
 The [SoftPC header family](shard-1/softpc-header-family-review.md), [standalone VDM utilities](shard-2/vdmutils-family-review.md) and [WIN87EM build inputs](shard-3/win87em-build-input-role-review.md) distinguish selected objects, standalone tools and guest-image identity from runtime proof.
+
+The [disabled multimedia structure sources](shard-0/wow-multimedia-disabled-structures-review.md) retain their original inactive file-body roles; multimedia behavior remains in scope.
+
+Additional bounded reviews cover [SoftPC host declarations](shard-1/softpc-host-header-family-review.md), [WOWFAX inputs](shard-2/wowfax-family-review.md) and [Win16 multimedia inputs](shard-3/multimedia-guest-input-role-review.md). Their source or graph evidence does not establish runtime device and callback behavior.
