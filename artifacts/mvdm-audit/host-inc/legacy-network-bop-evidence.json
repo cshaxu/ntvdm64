@@ -1,0 +1,142 @@
+{
+  "source_path": "artifacts/mvdm-audit/bios-image-observations.json",
+  "source_sha256": "A1400DD2FCA608E8D2B4F38CF62B9A22E7E7DF372CB53D4AD57C905776B340FE",
+  "original_inputs": [
+    {
+      "path": "build\\t473-s10\\candidate-validation\\package\\system32\\ntvdm.exe",
+      "sha256": "F09BA0871392093D4BDF8564345026F5DE11CC458BD9F6E141E6E220C3B49A1D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "sha256": "4C77B02214DFC04A1E5FD46656B4351B4CF9A9C2056872F858E858E3E78C7B3C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\original-softpc-bios.lib",
+      "sha256": "07AC1220344493DDC861393BD13FEF2DF90E5CEBE73A81383EB59A442A6A667D"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "0FC378A4AC3EB8CB0112139C61C7926B3FF6EB19CD2C526F3A60B00AF490097B"
+    },
+    {
+      "path": "artifacts\\mvdm-audit\\ccpu-remaining-header-source\\deps.stdout.txt",
+      "sha256": "BE1459524A80B31D13668F42BFC4D18D416F77F57C6534C2F0A6360035F18313"
+    },
+    {
+      "path": "tests\\observation\\verify_ccpu_sign_flag_image.py",
+      "sha256": "8D07EFCB23DEABF0E5FD69C86BFFC5F2C4CD48F96DFC7E75D8CA4A388985DF64"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\bios-image-observer.py",
+      "sha256": "7281778DC9EE59D4214CC137561E0045AA76BEA803FF0F9EF70D02BBD9B24CAE"
+    }
+  ],
+  "scope": "Original source, VALID compile/archive selection, function bytes excluding relocations, and all actual BIOS initializer relocation targets; not whole guest behavior",
+  "slots": [
+    {
+      "index": 52,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 53,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 54,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 55,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 56,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 57,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 58,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 59,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 60,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 61,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 62,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 63,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 160,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 161,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 162,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 163,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 164,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 165,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 166,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    },
+    {
+      "index": 167,
+      "symbol": "_illegal_bop",
+      "va": 4223152
+    }
+  ],
+  "all_illegal_bop": true
+}

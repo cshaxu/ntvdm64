@@ -1,0 +1,58 @@
+{
+  "winmm_path": "C:\\Windows\\SysWOW64\\winmm.dll",
+  "winmm_sha256": "FF2ABD18BF1404A2D41831CEB6BFD25A812FABA7C29E66C0F2E0CFF5389FC344",
+  "named_exports": {
+    "NotifyCallbackData": [
+      "[   7] +base[   9]  0005 NotifyCallbackData"
+    ],
+    "wod32Message": [
+      "[ 192] +base[ 194]  00bf wod32Message"
+    ],
+    "wid32Message": [
+      "[ 191] +base[ 193]  00be wid32Message"
+    ],
+    "mod32Message": [
+      "[ 140] +base[ 142]  008b mod32Message"
+    ],
+    "mid32Message": [
+      "[  54] +base[  56]  0035 mid32Message"
+    ],
+    "aux32Message": [
+      "[  16] +base[  18]  000e aux32Message"
+    ],
+    "mci32Message": [
+      "[  34] +base[  36]  0020 mci32Message"
+    ],
+    "tid32Message": [
+      "[ 144] +base[ 146]  008f tid32Message"
+    ],
+    "joy32Message": [
+      "[  23] +base[  25]  0015 joy32Message"
+    ],
+    "WOW32DriverCallback": [
+      "[  13] +base[  15]  000b WOW32DriverCallback"
+    ],
+    "WOW32ResolveMultiMediaHandle": [
+      "[  14] +base[  16]  000c WOW32ResolveMultiMediaHandle"
+    ]
+  },
+  "input_sha256": {
+    "src/mvdm/wow32/wmmalias.c": "D4949206F261D22F80F96E769388AEE94037B27092C69C68EC058619F843F4FB",
+    "src/mvdm/wow32/wmmedia2.c": "4A2A6E5E6C6E7172CB3FEA4BB9035A18C7C5A292618B9EB507B71AE9F7D76856",
+    "src/mvdm/wow32/wmmstru2.c": "F96AE87C3F0290B72C838B174B8EFBE82BD727290451BA99650ECC85BF738632",
+    "src/mvdm/wow32/wmmstruc.h": "8C8C764F500C47689F5D97C485E8D81C6361130C6CE744A3DBE8D2D26C1EAF5B",
+    "src/mvdm/wow32/wmmedia.c": "FBC4695791937FEA487C91A0BA964E19625EBF4793C0123238100628FA95FD08",
+    "src/mvdm/wow32/wmmtbl2.h": "C48E5FC47DF9AC3A0FF72754E1253AF3C65DA102E4CA6B5EF5451A754E954EE5",
+    "src/mvdm/wow16/mmsystem/init.c": "DCE6CBEC338BD4F549D0FB2C221A258F41A492F49BC9D23787D895DC6FEF516D",
+    "src/mvdm/wow16/mmsystem/stack.asm": "2254EDD89933F7A869DB2E98DCE5CF58BA44CE20A490B014202224CED478BB6F",
+    "src/mvdm/inc/wowmmcb.h": "792D12C29A5913EE4DD9D46F3173F4E7AC8F1CD88CFA91272268BD8BCAFB8E8C",
+    "docs/etc/evidence/m0-t466-s3-async-multimedia-owner-audit.md": "52B4F16B71157A58FF01CE099621ED7A3205FAFD947D8724D601EA8621BE7BDE"
+  },
+  "map_sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5",
+  "map_lines": [
+    "0001:0002b0b0       _wow_original_WMM32CallProc32@4 1002c0b0 f   wmmedia.obj",
+    "0001:00070fd0       _WMM32CallProc32@4         10071fd0 f   wow_user_native_extension.obj",
+    "0002:0000c918       __sehtable$_WMM32CallProc32@4 1009b918     wow_user_native_extension.obj"
+  ],
+  "limits": "Named exports and source/map identity only; no calling private ABI, device operation, callbacks or current guest loaded-image proof."
+}

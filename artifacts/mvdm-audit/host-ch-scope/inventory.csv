@@ -730,7 +730,7 @@ softpc.new/base/inc/herc.h,shard-3/file-review.csv,pending,host-candidate,host C
 softpc.new/base/inc/hfx.h,shard-0/review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/hg_cpu.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/hg_sas.h,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/inc/hg_stat.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/inc/hg_stat.h,shard-3/file-review.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_cfg.h,shard-3/file-review.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/inc/host_com.h,shard-0/review.csv,部分复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

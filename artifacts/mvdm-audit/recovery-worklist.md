@@ -148,3 +148,7 @@ S12/S13 retain the [GFI functional handoff](host-inc/gfi-functional-handoff.md),
 S13 retains the [keyboard/mouse functional handoff](host-inc/keyboard-mouse-functional-handoff.md), including actual controller/PIC recheck, Win3.x and host input, reset/EOI and device lifecycle boundaries. S14 retains the [DDEML route review](host-ch-scope/ddeml-route-review.md); historical initialization alone does not verify transactions, callbacks or retirement.
 
 S13 retains the [original virtual-floppy recovery boundary](host-inc/vfloppy-functional-recovery-boundary.md): compare the B: file/SID provider with the selected real/empty paths and validate isolated media, errors, IRQ and teardown before claiming support; source risks in the inactive branch are not customer reproductions.
+
+S17 retains the [legacy network BOP boundary](host-inc/legacy-network-functional-boundary.md): determine whether applicable immutable guests reach the 20 observed illegal BOP slots, and independently assess original ODI/IPX providers, selected NetBIOS/Winsock and optional VDD paths. The candidate-image relocation census is not a guest failure or a current installed-image proof.
+
+S16 retains the [WINMM host and callback boundary](host-ch-scope/wow-winmm-boundary-review.md): validate actual export loading/ABI, original guest ring ordering, in-flight callback and retirement; local export names and guest source alone are not a compatibility pass.
