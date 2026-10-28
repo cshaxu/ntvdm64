@@ -1,0 +1,1 @@
+VDD_OBJECT_CONTRACT checks=305 failures=0 callbacks=82 locks=27 dma_accesses=16 mode=controls

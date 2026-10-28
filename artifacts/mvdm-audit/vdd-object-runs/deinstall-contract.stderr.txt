@@ -1,0 +1,12 @@
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write
+FAIL 100: value==0xff && read_calls==before_read
+FAIL 100: write_calls==before_write

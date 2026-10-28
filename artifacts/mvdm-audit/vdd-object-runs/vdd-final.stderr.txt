@@ -1,0 +1,4 @@
+warning: in the working copy of 'docs/etc/operations/m0-t473-whole-recovery-stage-plan.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/states/CURRENT.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/states/QUEUE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/observation/verify-softpc-object-contract.ps1', LF will be replaced by CRLF the next time Git touches it

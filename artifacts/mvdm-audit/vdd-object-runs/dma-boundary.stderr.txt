@@ -1,0 +1,7 @@
+FAIL 111: result==0 && GetLastError()==ERROR_INVALID_ADDRESS
+FAIL 111: dma_access==before
+FAIL 114: result==FALSE && GetLastError()==ERROR_INVALID_ADDRESS
+FAIL 114: dma_access==before
+FAIL 120: result==FALSE && GetLastError()==ERROR_INVALID_ADDRESS
+FAIL 120: dma_access==before
+FAIL 120: memcmp(saved,dma_owned.guard,sizeof(saved))==0

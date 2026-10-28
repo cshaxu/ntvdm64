@@ -42,3 +42,5 @@ it is not the already delivered PIC reinitialization correction. The held
 SOL Options candidate failure remains an unclassified runtime invariant
 failure until its cause is proved, rather than being assigned to a later
 control stage merely from the application that triggers it.
+
+S13 additionally owns the [proved VDD uninstall and DMA boundary defects](../../../artifacts/mvdm-audit/vdd-native-role-review.md), including all-slot ownership retirement and channel-8 rejection before array access. S10 records their strict counterexamples without changing the runtime.

@@ -295,3 +295,5 @@ distinguish sentinel error writes from actual failure branches; none qualifies
 the held candidate or selects a repair.
 
 The [latest-source delivery](latest-source-release-review.md) records the owner-directed ten-image publication correction and independent SZDD/W31PATCH tools; the whole-source reconciliation remains open.
+
+The [VDD owner checkpoint](vdd-native-role-review.md) binds nine original bodies and two partial file roles; 305 normal checks pass while strict uninstall and DMA boundary failures are preserved for S13.

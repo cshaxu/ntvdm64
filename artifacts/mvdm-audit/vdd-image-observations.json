@@ -1,0 +1,233 @@
+{
+  "sources": [
+    {
+      "relative_path": "softpc.new/host/src/nt_vdd.c",
+      "sha256": "CB97F2C233B1062DAE7942DFA3B2BC84D9F21B9D6527F6C993A99137C2C845E3",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/src/nt_vdd.c",
+        "sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+        "bytes": "23990",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:084da34b0ba4a6bc74d6",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/src/nt_vdd.c",
+          "sha256": "CB97F2C233B1062DAE7942DFA3B2BC84D9F21B9D6527F6C993A99137C2C845E3"
+        },
+        {
+          "id": "SRC:8f096a8316c1b82dd211",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/src/nt_vdd.c",
+          "sha256": "CB97F2C233B1062DAE7942DFA3B2BC84D9F21B9D6527F6C993A99137C2C845E3"
+        }
+      ]
+    },
+    {
+      "relative_path": "softpc.new/host/inc/nt_vddp.h",
+      "sha256": "92C8EA5D3764C20679F9C58D77E316C65F092CCA2913114E47D590ECFB459912",
+      "original_path": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_vddp.h",
+      "dos_catalog": {
+        "path": "base/mvdm/softpc.new/host/inc/nt_vddp.h",
+        "sha256": "92c8ea5d3764c20679f9c58d77e316c65f092cca2913114e47d590ecfb459912",
+        "bytes": "821",
+        "role": "primary_perimeter_pending_adjudication",
+        "semantic_review": "not_reviewed",
+        "module": "unassigned_pending_perimeter_review"
+      },
+      "wow_catalog": [
+        {
+          "id": "SRC:0c0da9489f0a3b91f2d0",
+          "edition": "OpenNT",
+          "path": "base/mvdm/softpc.new/host/inc/nt_vddp.h",
+          "sha256": "92C8EA5D3764C20679F9C58D77E316C65F092CCA2913114E47D590ECFB459912"
+        },
+        {
+          "id": "SRC:8210939419cd172d03ec",
+          "edition": "OpenNT-4.5",
+          "path": "nt/private/mvdm/softpc.new/host/inc/nt_vddp.h",
+          "sha256": "92C8EA5D3764C20679F9C58D77E316C65F092CCA2913114E47D590ECFB459912"
+        }
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "_FreeVddAdapter",
+      "va": 4575696,
+      "bytes": 53,
+      "relocation_words": 2
+    },
+    {
+      "name": "_VDDDeInstallIOHook",
+      "va": 4575760,
+      "bytes": 99,
+      "relocation_words": 2
+    },
+    {
+      "name": "_VDDInstallIOHook",
+      "va": 4575872,
+      "bytes": 619,
+      "relocation_words": 16
+    },
+    {
+      "name": "_VDDQueryDMA",
+      "va": 4576496,
+      "bytes": 157,
+      "relocation_words": 2
+    },
+    {
+      "name": "_VDDReleaseIrqLine",
+      "va": 4576656,
+      "bytes": 97,
+      "relocation_words": 7
+    },
+    {
+      "name": "_VDDRequestDMA",
+      "va": 4576768,
+      "bytes": 361,
+      "relocation_words": 8
+    },
+    {
+      "name": "_VDDReserveIrqLine",
+      "va": 4577136,
+      "bytes": 196,
+      "relocation_words": 11
+    },
+    {
+      "name": "_VDDSetDMA",
+      "va": 4577344,
+      "bytes": 154,
+      "relocation_words": 2
+    },
+    {
+      "name": "_ms_bop",
+      "va": 4577504,
+      "bytes": 26,
+      "relocation_words": 2
+    }
+  ],
+  "calls": [
+    {
+      "caller": "_VDDDeInstallIOHook",
+      "target": "_io_disconnect_port",
+      "owner": "original-softpc-support:ios.obj",
+      "target_va": 4602496
+    },
+    {
+      "caller": "_VDDInstallIOHook",
+      "target": "_io_connect_port",
+      "owner": "original-softpc-support:ios.obj",
+      "target_va": 4602032
+    },
+    {
+      "caller": "_VDDInstallIOHook",
+      "target": "_io_disconnect_port",
+      "owner": "original-softpc-support:ios.obj",
+      "target_va": 4602496
+    },
+    {
+      "caller": "_VDDInstallIOHook",
+      "target": "_io_disconnect_port",
+      "owner": "original-softpc-support:ios.obj",
+      "target_va": 4602496
+    },
+    {
+      "caller": "_VDDQueryDMA",
+      "target": "_dmaGetAdaptor",
+      "owner": "original-softpc-system:at_dma.obj",
+      "target_va": 4677760
+    },
+    {
+      "caller": "_VDDReleaseIrqLine",
+      "target": "_host_ica_lock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550752
+    },
+    {
+      "caller": "_VDDReleaseIrqLine",
+      "target": "_host_ica_unlock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550768
+    },
+    {
+      "caller": "_VDDReleaseIrqLine",
+      "target": "_host_ica_unlock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550768
+    },
+    {
+      "caller": "_VDDRequestDMA",
+      "target": "_dmaGetAdaptor",
+      "owner": "original-softpc-system:at_dma.obj",
+      "target_va": 4677760
+    },
+    {
+      "caller": "_VDDReserveIrqLine",
+      "target": "_host_ica_lock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550752
+    },
+    {
+      "caller": "_VDDReserveIrqLine",
+      "target": "_host_ica_unlock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550768
+    },
+    {
+      "caller": "_VDDReserveIrqLine",
+      "target": "_host_ica_unlock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550768
+    },
+    {
+      "caller": "_VDDReserveIrqLine",
+      "target": "_host_ica_unlock",
+      "owner": "original-softpc-host-roots:nt_eoi.obj",
+      "target_va": 4550768
+    },
+    {
+      "caller": "_VDDSetDMA",
+      "target": "_dmaGetAdaptor",
+      "owner": "original-softpc-system:at_dma.obj",
+      "target_va": 4677760
+    }
+  ],
+  "compile_edge": "build obj/host/nt_vdd.obj: cc_host O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/src/nt_vdd.c",
+  "dependencies": "obj/host/nt_vdd.obj: #deps 29, deps mtime 8147603030245722 (VALID)\n    ../../../../src/mvdm/softpc.new/base/ccpu386/CpuInt_c.h\n    ../../../../src/mvdm/softpc.new/base/ccpu386/cpu4gen.h\n    ../../../../src/mvdm/softpc.new/base/inc/base_def.h\n    ../../../../src/mvdm/softpc.new/base/inc/config.h\n    ../../../../src/mvdm/softpc.new/base/inc/cpu4.h\n    ../../../../src/mvdm/softpc.new/base/inc/dma.h\n    ../../../../src/mvdm/softpc.new/base/inc/error.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_cfg.h\n    ../../../../src/mvdm/softpc.new/base/inc/host_sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/ios.h\n    ../../../../src/mvdm/softpc.new/base/inc/sas.h\n    ../../../../src/mvdm/softpc.new/base/inc/xt.h\n    ../../../../src/mvdm/softpc.new/host/inc/error.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_cpu.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_def.h\n    ../../../../src/mvdm/softpc.new/host/inc/host_gen.h\n    ../../../../src/mvdm/softpc.new/host/inc/insignia.h\n    ../../../../src/mvdm/softpc.new/host/inc/nt_vddp.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/gdpvar.h\n    ../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h\n    ../../../../src/ntvdm-exe/softpc/include/mvdm_softpc_symbol_compat.h\n    ../../../../src/ntvdm-exe/win32/mvdm_crt_redirect.h\n    ../../../../src/opennt-abi/host-compat/include/nt.h\n    ../../../../src/opennt-abi/host-compat/include/ntioapi.h\n    ../../../../src/opennt-abi/host-compat/include/wow_user_declarations.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/devioctl.h\n    ../../../../src/opennt-abi/source/public/sdk/inc/nt_vdd.h\n    ../../../../src/opennt-host/public/sdk/inc/ntpsapi.h\n    ../../../../src/opennt-host/public/sdk/inc/ntrtl.h\n\n",
+  "public_declaration": {
+    "path": "src\\opennt-abi\\source\\public\\sdk\\inc\\nt_vdd.h",
+    "sha256": "7E89FD4420381A54BC89E9807E54CCFE138A0767996AB7C74712E5E96AEB6609"
+  },
+  "inputs": [
+    {
+      "path": "assets\\release\\ntvdm.exe",
+      "sha256": "DFF69ABC5D48BF65FE9D1AB2F113B89A1AF4498903E66EA25A266F4D181F9BC8"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+      "sha256": "D6804267B20822643BE76793246248CAAC47419686BC40C7662D753F958B1594"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_vdd.obj",
+      "sha256": "75C48554F12D179F4DC3FD95051BB788E9D879C13F7792901F4EB4FDA2E08F5B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83"
+    },
+    {
+      "path": "src\\opennt-abi\\source\\public\\sdk\\inc\\nt_vdd.h",
+      "sha256": "7E89FD4420381A54BC89E9807E54CCFE138A0767996AB7C74712E5E96AEB6609"
+    },
+    {
+      "path": "src\\mvdm\\softpc.new\\host\\src\\sources",
+      "sha256": "A6C0B2B3DC29151D6A760335D607114835490B1D2FE67E04E5F5C68865DAB7E7"
+    }
+  ],
+  "scope": "Original bytes/catalogs and nine image-bound functions; not complete VDD lifecycle acceptance"
+}

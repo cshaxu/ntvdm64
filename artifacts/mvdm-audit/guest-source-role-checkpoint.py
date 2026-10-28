@@ -188,7 +188,7 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
                         'softpc.new/host/src/nt_term.c', 'softpc.new/host/src/nt_smenu.c',
                         'softpc.new/host/src/nt_hfx.c', 'softpc.new/host/src/stf_conf.c')
             else:
-                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-'):
+                if prefix in ('native-source-role-', 'native-source-next-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'vdd-native-role-'):
                     assert proof['role'] == 'selected-native-source-partial' and current_hash == original_hash
                 else:
                     assert proof['role'] in ('active-export-declaration-mirror-diff', 'partially-integrated-export-template')
@@ -232,6 +232,29 @@ def main(output, base=BASE, prefix='guest-source-role-', expected_count=187):
         completion = json.loads((negative / 'negative.completion.json').read_text(encoding='utf-8-sig'))
         assert completion['exit'] == completion['expected_exit'] == 1
         assert 'DEM_SLOT_EXPECTATION_MISMATCH' in (negative / 'negative.stderr.txt').read_text()
+    if prefix == 'vdd-native-role-':
+        observed = json.loads((A / 'vdd-image-observations.json').read_text())
+        assert runpy.run_path(str(A / 'vdd-image-observer.py'))['inspect']() == observed
+        assert len(observed['sources']) == 2 and len(observed['functions']) == 9
+        root = A / 'vdd-object-runs'
+        receipt = json.loads((root / 'result.json').read_text(encoding='utf-8-sig'))
+        assert receipt['result'] == 'pass' and receipt['contract'] == 'vdd'
+        assert receipt['checks'] == 305 and receipt['callbacks'] == 82
+        assert [r['exit'] for r in receipt['runs']] == [0, 2, 0]
+        for row in receipt['inputs']:
+            assert sha(Path(row['path'])) == row['sha256']
+        assert sha(Path(receipt['fixture_path'])) == receipt['fixture_sha256']
+        for mode, marker in (
+                ('deinstall-contract', 'checks=57 failures=14 callbacks=21'),
+                ('dma-boundary', 'checks=8 failures=7 callbacks=0')):
+            completion = json.loads((root / (mode + '.completion.json')).read_text(encoding='utf-8-sig'))
+            assert completion['exit'] == 1
+            assert marker in (root / (mode + '.stdout.txt')).read_text()
+        assert (root / 'deinstall-contract.stdout.txt').read_text().count('read_calls=1 write_calls=1 owner_released=1') == 7
+        assert 'operation=set result=1 accesses=1 guard_changed=1' in (root / 'dma-boundary.stdout.txt').read_text()
+        for row in json.loads((root / 'manifest.json').read_text(encoding='utf-8-sig')):
+            path = root / row['path']
+            assert path.stat().st_size == row['bytes'] and sha(path) == row['sha256']
     if prefix == 'memory-native-role-':
         observed = json.loads((A / 'memory-image-observations.json').read_text())
         assert runpy.run_path(str(A / 'memory-image-observer.py'))['inspect']() == observed
@@ -742,7 +765,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
     parser.add_argument('--base', default=BASE)
-    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-'), default='guest-source-role-')
+    parser.add_argument('--prefix', choices=('guest-source-role-', 'kernel31-source-role-', 'dos-core-source-role-', 'wow16-core-source-role-', 'wow16-extension-source-role-', 'guest-library-role-', 'wow16-support-source-role-', 'guest-declaration-resource-role-', 'generated-message-role-', 'shared-guest-include-role-', 'native-source-role-', 'native-source-next-role-', 'historical-build-role-', 'selected-ccpu-header-role-', 'ccpu-foundation-role-', 'ccpu-control-role-', 'ccpu-header-macro-role-', 'dos-command-input-role-', 'bios-native-role-', 'system-native-role-', 'disk-native-role-', 'video-native-role-', 'input-native-role-', 'planar-native-role-', 'memory-native-role-', 'retired-host-role-', 'vdd-native-role-'), default='guest-source-role-')
     parser.add_argument('--expected-count', type=int, default=187)
     args = parser.parse_args()
     main(args.output, args.base, args.prefix, args.expected_count)

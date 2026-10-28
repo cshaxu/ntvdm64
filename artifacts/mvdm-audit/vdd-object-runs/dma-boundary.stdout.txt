@@ -1,0 +1,4 @@
+VDD_DMA_BOUNDARY operation=request result=0 accesses=1
+VDD_DMA_BOUNDARY operation=query result=1 accesses=1
+VDD_DMA_BOUNDARY operation=set result=1 accesses=1 guard_changed=1
+VDD_OBJECT_CONTRACT checks=8 failures=7 callbacks=0 locks=0 dma_accesses=3 mode=--dma-boundary

@@ -1,0 +1,8 @@
+VDD_DEINSTALL index=0 adapter=36 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=1 adapter=37 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=2 adapter=38 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=3 adapter=39 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=4 adapter=40 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=5 adapter=41 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_DEINSTALL index=6 adapter=42 value=56 read_calls=1 write_calls=1 owner_released=1
+VDD_OBJECT_CONTRACT checks=57 failures=14 callbacks=21 locks=0 dma_accesses=0 mode=--deinstall-contract

@@ -2274,7 +2274,7 @@ softpc.new/host/inc/nt_smenu.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_thred.h,2,pending,shard-2/file-audit.csv
 softpc.new/host/inc/nt_timer.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/nt_uis.h,0,pending,shard-0/review.csv
-softpc.new/host/inc/nt_vddp.h,3,pending,shard-3/file-review.csv
+softpc.new/host/inc/nt_vddp.h,3,partial,shard-3/file-review.csv
 softpc.new/host/inc/ntcheese.h,0,pending,shard-0/review.csv
 softpc.new/host/inc/ppc/pig/c2cpusad.h,1,excluded,shard-1/file-audit.csv
 softpc.new/host/inc/ppc/pig/cpu4gen.h,0,excluded,shard-0/review.csv
@@ -2351,7 +2351,7 @@ softpc.new/host/src/nt_thred.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_timer.c,1,partial,shard-1/file-audit.csv
 softpc.new/host/src/nt_umb.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_unix.c,0,partial,shard-0/review.csv
-softpc.new/host/src/nt_vdd.c,0,pending,shard-0/review.csv
+softpc.new/host/src/nt_vdd.c,0,partial,shard-0/review.csv
 softpc.new/host/src/nt_vflop.c,3,pending,shard-3/file-review.csv
 softpc.new/host/src/nt_vga.c,2,partial,shard-2/file-audit.csv
 softpc.new/host/src/nt_wcom.c,3,pending,shard-3/file-review.csv

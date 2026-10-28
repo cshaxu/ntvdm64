@@ -22,8 +22,8 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The ledger has 1,540 pending, 448 partial, 53 full and 2,643 excluded physical
-file roles. Keycode one-past reads remain a proved S13 defect; no runtime image changed.
+The ledger has 1,538 pending, 450 partial, 53 full and 2,643 excluded physical
+file roles. The [VDD audit](../../artifacts/mvdm-audit/vdd-native-role-review.md) proves stale uninstall callbacks and DMA channel-8 overflow for S13; no runtime image changes.
 
 The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
 adds accepted/candidate guest exception paths, oracle negatives and 14 bound

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "6f7ca8722",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "vdd-image-observations.json",
+      "sha256": "FCA98426AC0C2959F999A075F7C0F43D7464738699756F2E2FC676792B1EC773"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Original VDD source/private declaration and controlled object contracts; no complete guest lifecycle or new release acceptance"
+}

@@ -1,0 +1,1 @@
+PASS two VDD source roles and strict original-source counterexamples
