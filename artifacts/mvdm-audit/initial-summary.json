@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1285,
+    "pending": 1283,
     "excluded": 2739,
-    "partial": 607,
+    "partial": 609,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Four original multimedia and dispatch declaration roles remain partial; guest execution remains in scope."
+  "note": "Two selected WOW C headers remain partial; guest ASM, ABI and behavior remain in scope."
 }

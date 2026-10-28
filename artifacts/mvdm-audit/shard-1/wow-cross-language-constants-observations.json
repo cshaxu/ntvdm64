@@ -1,0 +1,1055 @@
+{
+  "result": "pass",
+  "ledger_sha256": "0C471D318A2EB0ECAD7947228A2EF186CD550C1E9EBABE64282B30A7AD5700A6",
+  "entries": [
+    {
+      "path": "inc/WOWCMPAT.INC",
+      "sha256": "20CBCAADBD408C557C9116DB02C889579D105D8A0B84816E8257D980A1987650",
+      "catalog_ids": "SRC:b22765a945e810332a48;SRC:d98f9090917cd0803692",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "inc/WOWUSR.INC",
+      "sha256": "88E6535DB84C9CCAC703E406A9A25C92158068ABC2EDD00CCE0164F0EF10F3E1",
+      "catalog_ids": "SRC:0d59238db7ecf04d5fb0;SRC:51bf70235a49fe5ae91b",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "inc/wowcmpat.h",
+      "sha256": "0D0BAB4DF27031FDC35A39E7D3EB704B7F77EC25D981A215E30FB218AAC9EE92",
+      "catalog_ids": "SRC:7aef3b3bc52f0309b70e;SRC:fa1029c6bc0f79ad44f7",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\worker",
+          "object": "obj/command/cmdexec.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsglb.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmtbl32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcntl32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgprnset.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgem.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi31.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgbm.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgfont.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/mapembed.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgpal.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgmeta.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres16.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walias.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgcb.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdde.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgsbm.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wstruc.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall16.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowtbl.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmdisp32.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsg16.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgtext.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkbman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkmem.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkgthunk.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkfileio.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkernel.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32fax.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser31.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wshell.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucaret.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclass.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucomm.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclip.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucursor.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wudlg.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuhook.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wulang.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumenu.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumsg.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutext.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutmr.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuwind.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowhooks.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdos.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wreldc.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcuricon.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsubcls.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia1.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia2.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstruc.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru2.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walloc16.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru1.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/waccel.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmalias.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsext.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsdata.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsraw.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wheap.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wthman.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcommdlg.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdib.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wusercli.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wspool.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wole2.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wparam.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_hook_callback.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_shell_callback.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_cleanup_entry.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_idle_hook_binding.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_common_dialog_calls.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_message_lifetime.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_thunk_scope.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_native_extension.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_launch_identity.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_termination.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_registry_binding.obj",
+          "raw": "../../../../src/mvdm/inc/wowcmpat.h"
+        }
+      ]
+    },
+    {
+      "path": "inc/wowusr.h",
+      "sha256": "02938AC7DD2356CF551044B892658B90D52EA2476A0EED4C974E955E54482469",
+      "catalog_ids": "SRC:393227442b46d728ea2a;SRC:837a7a1b9e7fdbb05954",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": [
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsglb.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmtbl32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcntl32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgprnset.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgem.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi31.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgbm.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgfont.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/mapembed.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgpal.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgmeta.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wres16.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walias.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgcb.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdde.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsgsbm.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wstruc.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcall16.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowtbl.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmdisp32.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgdi.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmsg16.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wgtext.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkbman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkmem.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkgthunk.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkfileio.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wkernel.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32fax.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser31.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wshell.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucaret.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclass.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucomm.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuclip.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wucursor.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wudlg.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuhook.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wulang.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumenu.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wumsg.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuser.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutext.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wutmr.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wuwind.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wowhooks.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdos.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wreldc.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcuricon.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsubcls.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia1.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmedia2.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstruc.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru2.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/walloc16.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmstru1.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/waccel.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wmmalias.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsext.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsdata.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wsraw.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wheap.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wthman.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wcommdlg.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wdib.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wusercli.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wspool.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wole2.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wparam.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_hook_callback.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_shell_callback.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_cleanup_entry.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_idle_hook_binding.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_common_dialog_calls.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_message_lifetime.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_thunk_scope.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_user_native_extension.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_launch_identity.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_task_termination.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        },
+        {
+          "build": "build\\.ninja\\msvc-x86-release\\wow32",
+          "object": "obj/wow32-dll/wow_registry_binding.obj",
+          "raw": "../../../../src/mvdm/inc/wowusr.h"
+        }
+      ]
+    }
+  ],
+  "flags_shared": 52,
+  "user_ids_shared": 455,
+  "user_table_entries": 539,
+  "user_label_mismatches": [
+    {
+      "name": "FUN_DEFDLGPROCTHUNK",
+      "ordinal": 534,
+      "table_label": "WOWGETIDFROMDIRECTORY"
+    },
+    {
+      "name": "FUN_GETSYSTEMMSECCOUNT",
+      "ordinal": 15,
+      "table_label": "GETCURRENTTIME"
+    },
+    {
+      "name": "FUN_MENUWNDPROC",
+      "ordinal": 306,
+      "table_label": "MENUWINDOWPROC"
+    },
+    {
+      "name": "FUN_SETGRIDGRANULARITY",
+      "ordinal": 284,
+      "table_label": "GETFREESYSTEMRESOURCES"
+    },
+    {
+      "name": "FUN_SETWC2",
+      "ordinal": 319,
+      "table_label": "SCROLLWINDOWEX"
+    },
+    {
+      "name": "FUN_TILECHILDWzINDOWS",
+      "ordinal": 199,
+      "table_label": "TILECHILDWINDOWS"
+    },
+    {
+      "name": "FUN_OLDSETDESKPATTERN",
+      "ordinal": 279,
+      "table_label": "SETDESKPATTERN"
+    },
+    {
+      "name": "FUN_OLDSETDESKWALLPAPER",
+      "ordinal": 285,
+      "table_label": "SETDESKWALLPAPER"
+    },
+    {
+      "name": "FUN_BOZOSLIVEHERE",
+      "ordinal": 301,
+      "table_label": "EDITWNDPROC"
+    },
+    {
+      "name": "FUN_GETINTERNALICONHEADER",
+      "ordinal": 372,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_GETUSERLOCALOBJTYPE",
+      "ordinal": 480,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_HARDWARE_EVENT",
+      "ordinal": 481,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_DCHOOK",
+      "ordinal": 362,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_WNETERRORTEXT",
+      "ordinal": 499,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_WNETABORTJOB",
+      "ordinal": 503,
+      "table_label": ""
+    },
+    {
+      "name": "FUN_WOWWORDBREAKPROC",
+      "ordinal": 535,
+      "table_label": "WORDBREAKPROC"
+    }
+  ],
+  "context_inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wutbl2.h",
+      "sha256": "3B8802574625E12FA280872DBC9F2EF49A8D9FABB6840F76CE7FCAE63367EC65"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\precomp.h",
+      "sha256": "84E0AB967319CF5E75BCA9CF59E5EEFABC06732D18D8317F0298D30FBD00E16B"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wow32.h",
+      "sha256": "06148A93A63FAF7FC5480E4C9F80C98DDFE6E2A0A782EAFE6A6FD1CCDD46DE27"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\kernel31\\3ginterf.asm",
+      "sha256": "8E86AE890F44D9CDEE33F69475CF86AEBA87C72EFE03968E7E8E0E0276DE6B7A"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\user\\user.asm",
+      "sha256": "97FB8148DAD9B570E2204F951686CE4DF8B517D85B377F48D043EAF4BFA29718"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "limitations": "Numeric literal comparison, normalized compiler dependencies, source anchors and image section identity only; no packing, guest image lineage, all table slots semantic equivalence, or live API behavior proof."
+}

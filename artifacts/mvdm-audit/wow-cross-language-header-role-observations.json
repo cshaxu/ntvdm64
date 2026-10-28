@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "5617acf75",
+  "candidate_count": 2,
+  "source_tables": [
+    {
+      "path": "shard-1/wow-cross-language-constants-observations.json",
+      "sha256": "43FFE69A29F8DE13D5C60113668E3B84DF708A03C6B2FB97DEF27E42350B6E0E"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Selected C declarations and cross-language constants; no guest runtime acceptance"
+}
