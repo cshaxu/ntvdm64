@@ -14,6 +14,8 @@ The [word-break return controls](wordbreak-object-review.md) exercise six cases 
 
 The [three-route evidence review](tabstop-three-routes-evidence.md) distinguishes the existing real EDIT `SendMessage` witness from other-message `CallWindowProc` evidence and the missing `SendDlgItemMessage` EDIT witness; a test-owned NE probe may cover these without modifying an existing guest image.
 
+The [original USER route analysis](tabstop-other-guest-route-review.md) further distinguishes the item lookup/cache branch and the native versus Win16 window-procedure branch; historical guest EDIT tab-stop source is a behavioral reference, not a claim it runs as the selected host control.
+
 ## Minimal correction
 
 Add a `break;` after the existing signed-condition `STACKORHEAPFREE` inside `UnThunkEMMsg16`'s `EM_SETTABSTOPS` case, with a new narrow registered mirror-diff exception explaining that a Boolean result is not a word-break procedure. Leave allocation predicate, release, result, `EM_GETWORDBREAKPROC` conversion and its callback/identity handling intact. Do not zero or replace word-break globals: an already registered legitimate procedure must survive the unrelated message. Do not modify guest or change the original control's actual tab-position behavior. This removes accidental callback and prevents corruption; it is a documented observable change to inherited behavior, not an assertion the two messages were previously independent in the source.
