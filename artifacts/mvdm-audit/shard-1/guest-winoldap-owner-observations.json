@@ -1,0 +1,72 @@
+{
+  "result": "pass",
+  "ledger_sha256": "21F90A7D3E8BFF5AE44FAE1F021EC27819BEBE546AAA7BA41AF5B9154026F11A",
+  "entries": [
+    {
+      "path": "wow16/winoldap/WINOLDAP.MOD",
+      "sha256": "CC9C8BC27E11843C6739D0798EFA2AC41C4EF71A6A34B68F1AF38640A2BBCC7F",
+      "catalog_ids": "SRC:b3f6146812f4548a1b0c;SRC:c335df8cd3fbbf726ccf",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/winoldap/WINOLDAP.RES",
+      "sha256": "467DA0F2D558F2DF5A4DB40C04EE8F85DDBB0D4D1FA615DAD03A0E77A76582D2",
+      "catalog_ids": "SRC:32887db6cb4135139628;SRC:fcad96de1495dc21c0a8",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    },
+    {
+      "path": "wow16/winoldap/winoldap.c",
+      "sha256": "DAB0023993AD00CE173C6E31FC6061E398781970D52A46D7A9145C023C858621",
+      "catalog_ids": "SRC:60f00bcb4f2054c09369;SRC:93d9b1a28fea0f369840",
+      "status": "\u5f85\u6838\u9a8c",
+      "valid_dependency_matches": []
+    }
+  ],
+  "recipe_inputs": [
+    {
+      "path": "src\\mvdm\\wow16\\winoldap\\makefile",
+      "sha256": "79F795410CF3130439EED2572E2581B8D4224CE2881EC266248289AE2DF11378"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\winoldap\\winoldap.rc",
+      "sha256": "B96D5787FB51497718FE7E394629F7B6453225FF36425DBE58390D0249CF711F"
+    },
+    {
+      "path": "src\\mvdm\\wow16\\winoldap\\winoldap.rcv",
+      "sha256": "74ED8C59044FF4880A98C95FBEF601B2A987AC5903AE9CEF3BABBD870BFA2DB5"
+    }
+  ],
+  "host_graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\frontend",
+      "sha256": "4431E10A293F02D8919D7A9D794E8F351939F583EAFDC30431640AE75A1C0AD1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x64-release\\service",
+      "sha256": "35D5DA514E10FF6BCB9CCCE3EF70B8F53BE23405EB5C1650081AE58FAB865FD9"
+    }
+  ],
+  "wow32_image_sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431",
+  "wow_module_binding": {
+    "name": "_WK32LoadModule32@4",
+    "va": 268529312,
+    "function": true,
+    "owner": "wkman.obj",
+    "bytes": 1587,
+    "relocation_words": 64
+  },
+  "kernel_ordinal": 225,
+  "zip_members": [],
+  "installed_exact_present": false,
+  "limitations": "Original source/recipe and one WOW image table binding only; no installed guest execution, package search outside exact inspected locations or guest concurrency/teardown proof."
+}

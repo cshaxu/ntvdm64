@@ -15,6 +15,10 @@ that name at observation. A retained historical VDD binary is present under
 the source sample, but its existence neither places it on the runtime search
 path nor establishes that it is suitable for modern delivery. External search
 paths, alternate providers and guest configuration have not been excluded.
+The retained historical `vcdex.dll` imports twelve symbols by name from
+`ntvdm.exe`; all twelve names appear in the installed worker's export table.
+This narrows the proposed ABI review but does not establish calling convention,
+loader success, compatibility, safety, or suitability for delivery.
 
 This is a concrete package/dispatch mismatch candidate, not proof that a
 particular machine's CD-ROM or every MSCDEX call fails. Validate actual guest

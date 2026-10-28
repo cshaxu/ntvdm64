@@ -23,6 +23,23 @@
       "exists": false
     }
   ],
+  "retained_vdd_sha256": "3679DB6245B7717D3E58C19B19097C8031D6C5A94DF773B5C01E5CA7ED98EBDE",
+  "installed_worker_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "vdd_ntvdm_imports": [
+    "setCF",
+    "VDDInstallUserHook",
+    "MGetVdmPointer",
+    "getDX",
+    "getCX",
+    "setAX",
+    "getSP",
+    "getSS",
+    "setCX",
+    "setBX",
+    "getBX",
+    "getES"
+  ],
+  "absent_worker_export_names": [],
   "tsr_source_sha256": "BDA33DC8F48ADEAB11CA452312B8A74FB7194300C1BD5DB450DF466F537CA0B1",
   "autoexec_sha256": "02FE323BF5AF799E3117EBDC6138B7EAFE14D0453ECB06855D18B2C2E21B9D28",
   "scope": "Selected filesystem and guest-source observations; no actual DLL search, guest load or optical-device test"

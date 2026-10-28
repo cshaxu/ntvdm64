@@ -1,0 +1,92 @@
+{
+  "monsim32.h": {
+    "current": "f088d30fc6d00830849912f7c9c1135afa0d21f729d95fe72c9d9a11aca010c6",
+    "opennt": "f088d30fc6d00830849912f7c9c1135afa0d21f729d95fe72c9d9a11aca010c6",
+    "opennt45": "f088d30fc6d00830849912f7c9c1135afa0d21f729d95fe72c9d9a11aca010c6"
+  },
+  "nt_hunt.h": {
+    "current": "bfe7f5fdad083744001220f808025b2da24d6768d2b242768de9cac9447d9462",
+    "opennt": "bfe7f5fdad083744001220f808025b2da24d6768d2b242768de9cac9447d9462",
+    "opennt45": "bfe7f5fdad083744001220f808025b2da24d6768d2b242768de9cac9447d9462"
+  },
+  "nt_fulsc.h": {
+    "current": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+    "opennt": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+    "opennt45": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0"
+  },
+  "sim32.h": {
+    "current": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+    "opennt": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98",
+    "opennt45": "eeb9a654e53b5934850a6e7fa86fc67b1576ac9f1b9262d87acb5eed42c2fd98"
+  },
+  "deps": {
+    "sha256": "be1459524a80b31d13668f42bfc4d18d416f77f57c6534c2f0a6360035f18313",
+    "matches": {
+      "monsim32.h": [],
+      "nt_hunt.h": [],
+      "nt_fulsc.h": [
+        {
+          "object": "obj/host/nt_timer.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_graph.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_mouse.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_event.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/config.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_fulsc.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_sec.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_det.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        },
+        {
+          "object": "obj/host/nt_reset.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/nt_fulsc.h"
+        }
+      ],
+      "sim32.h": [
+        {
+          "object": "obj/host/sim32.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/sim32.h"
+        },
+        {
+          "object": "obj/host/nt_msscs.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/sim32.h"
+        },
+        {
+          "object": "obj/host/nt_bop.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/sim32.h"
+        },
+        {
+          "object": "obj/host/nt_cpu.obj",
+          "relative_path": "../../../../src/mvdm/softpc.new/host/inc/sim32.h"
+        }
+      ]
+    }
+  },
+  "map": {
+    "sha256": "e8024ef9250c9834601a1a32674ea6e46d3e9e6526bbc6a0be864a40e50c3c03",
+    "lines": [
+      " 0001:0004b670       _DisplayErrorTerm          0044c670 f   original-softpc-host-roots:nt_error.obj",
+      " 0001:0004ca90       _Sim32FlushVDMPointer      0044da90 f   original-softpc-host-roots:sim32.obj"
+    ]
+  }
+}

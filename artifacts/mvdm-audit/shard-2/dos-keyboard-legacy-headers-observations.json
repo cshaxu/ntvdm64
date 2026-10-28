@@ -1,0 +1,36 @@
+{
+  "result": "pass",
+  "sources": [
+    {
+      "path": "softpc.new/base/inc/keycaps.h",
+      "hashes": [
+        "AEEAFE559EE28AE484897740AF13B51DE2105E5B17A1D3BAE78A01D7BB6514E2",
+        "AEEAFE559EE28AE484897740AF13B51DE2105E5B17A1D3BAE78A01D7BB6514E2",
+        "AEEAFE559EE28AE484897740AF13B51DE2105E5B17A1D3BAE78A01D7BB6514E2"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "keyba_normalized_dependency": false
+    },
+    {
+      "path": "softpc.new/base/inc/m_keybdp.h",
+      "hashes": [
+        "B8D73E0606DF03677D2B6AC550BB598E7022085DF88EC43D81859B5A3F5F7672",
+        "B8D73E0606DF03677D2B6AC550BB598E7022085DF88EC43D81859B5A3F5F7672",
+        "B8D73E0606DF03677D2B6AC550BB598E7022085DF88EC43D81859B5A3F5F7672"
+      ],
+      "dos_catalog_rows": "1",
+      "wow_catalog_rows": "2",
+      "keyba_normalized_dependency": false
+    }
+  ],
+  "normalized_deps_object": "obj/keymouse/keyba.obj",
+  "compile_edge": "build obj/keymouse/keyba.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/keymouse/keyba.c",
+  "map_symbols": [
+    "0001:00066970       _KbdEOIHook                00467970 f   original-softpc-keymouse:keyba.obj",
+    "0001:00068440       _kbd_inb                   00469440 f   original-softpc-keymouse:keyba.obj"
+  ],
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "scope": "Original alternate-keyboard header contents and one controller build snapshot; not keyboard behavior or total consumer proof"
+}
