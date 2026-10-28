@@ -1,0 +1,14 @@
+ccpu386ThrdExptnPtr id:0x1eb0 called with Bad Id
+sas-init
+cpu-init
+access-init
+SOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2
+PIC ready-control enabled
+PIC before request irr=00 imr=00 DelayIrqLine=00000000
+PIC after request irr=01 imr=00 DelayIrqLine=00000000
+PIC intack vector=8 eoi=0 wow=1
+seed
+start
+returned-start
+reenter
+returned-recursive

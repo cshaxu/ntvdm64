@@ -17,6 +17,8 @@ Linking follows the existing worker fixture command, including `/force:multiple`
 
 Before omitting the check, one run with both fixture seam objects printed `original timer IRQ did not traverse original PIC INTACK: vector=-1 eoi=0 wow=0` and exited 1 after CPU/SAS initialization. Its output existed only in the interactive tool record and the derived executable was subsequently replaced, so this is not a retained reproducible PIC result or evidence of a product regression. S13 must separately exercise the original PIC/IRQ fixture and establish the cause if it recurs; this bit probe cannot be counted as its pass.
 
+The subsequent [same-binary readiness control](ccpu-pic-readiness-review.md) reproduced a blocked IRQ while the request remained in IRR, and delivered it when the test explicitly simulated the existing keyboard-ready boundary. This identifies the observed fixture initialization condition; it does not prove a product PIC regression or pass the separate reset/EOI acceptance.
+
 Reproduce from repository root with the populated selected worker build and VS x86 environment:
 
 ```powershell

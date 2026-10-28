@@ -148,7 +148,7 @@ S12/S13 retain the [GFI functional handoff](host-inc/gfi-functional-handoff.md),
 
 S13 retains the [keyboard/mouse functional handoff](host-inc/keyboard-mouse-functional-handoff.md), including actual controller/PIC recheck, Win3.x and host input, reset/EOI and device lifecycle boundaries. S14 retains the [DDEML route review](host-ch-scope/ddeml-route-review.md); historical initialization alone does not verify transactions, callbacks or retirement.
 
-S13 must also independently check the [PIC self-check observation](host-ch-scope/ccpu-bit-decoder-probe-review.md): one modified fixture exited with `vector=-1 eoi=0 wow=0`, but no run log or binary identity was retained, so neither a product regression nor a PIC pass is established.
+The [PIC self-check observation](host-ch-scope/ccpu-bit-decoder-probe-review.md) is explained by a [same-binary readiness control](host-ch-scope/ccpu-pic-readiness-review.md): the isolated fixture requested IRQ0 while the original readiness mask was still blocking it, with the request retained in IRR. This is not a product regression or a PIC reset/EOI acceptance; S13 retains those independent checks.
 
 S13 retains the [original virtual-floppy recovery boundary](host-inc/vfloppy-functional-recovery-boundary.md) and [provider dependency and failure analysis](shard-3/vfloppy-recovery-closure-review.md): recover the original B: file/SID route with selected GFI/FLA/DMA ownership and verify isolated media, errors, IRQ and teardown. The inactive source has unverified bounds, misleading failure results and incomplete commands; do not expose it by simply enabling a macro or call those source risks customer reproductions.
 

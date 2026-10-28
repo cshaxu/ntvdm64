@@ -1,0 +1,13 @@
+# Five pending host headers: original identity and classification
+
+Five current `host-candidate` pending entries were independently rehashed against both retained original MVDM editions; each group matches exactly. Current SHA-256: `witbl.h` F6C77E7764D702501085CE7BE7F8D8BA79CB70673E6830CB9B7FD7D0550A2A03; `winspldl.h` 1536AFD93C023039E526EF708F405D80A8B1AF5683EE9FEB6BA16959860A847E; `wkglobal.h` 3F17FAE6A9962AF439050E188E139D264BBB33B059DE1D450048D904D3B5F3D2; `wklocal.h` C80F41BF0882C55F2935FF2CFA82A2FC590B63A92DCB0837898489275875749A; `wmmstruc.h` 8C8C764F500C47689F5D97C485E8D81C6361130C6CE744A3DBE8D2D26C1EAF5B.
+
+| File | What can be established | Strict recommendation |
+| --- | --- | --- |
+| `witbl.h` | Old `aw32Internal`/conditional `iInternalMax` declarations have no identified current consumer; current table combines other tables into `aw32WOW`. | Keep pending: no original internal-table equivalence or exact replacement established. An apparently unused table declaration is not automatically a duplicate. |
+| `winspldl.h` | Old individual printer pointer declarations lack observed consumer; selected implementation uses indexed `spoolerapis`. | Keep pending for a **duplicate-table-only** closure: different mechanism, not a verified duplicate; S16 printing behavior remains. |
+| `wkglobal.h` | Original host Global thunk prototypes, implementation not in examined manifest; current table has many guest `LOCALAPI` entries. | Keep pending under duplicate-table-only criterion; guest path is a different owner and `GLOBALFREEALL` guest path has separately documented evidence. No object execution attributable to this physical header. |
+| `wklocal.h` | Included by precomp but old host thunk implementation is unselected; guest LOCALAPI and selected cross-boundary callbacks have distinct roles. | Keep pending under duplicate-table-only criterion; neither include nor guest heap test proves the old declarations execute. |
+| `wmmstruc.h` | Selected precomp conversion macros/prototypes; bounded macro references in the old disabled bodies. | Keep pending: not a duplicate table and not all consumers/profiles proven. S16 actual multimedia remains. |
+
+None of these five meets a strict identical duplicate-table condition or has a file-specific real behavioral witness sufficient for partial; earlier broader profile-limited exclusion suggestions were physical-role proposals and do not prove semantic equivalence. [Original owners](wow-four-excluded-owner-recheck.md), [table/multimedia recheck](wow-three-table-structure-recheck.md), and [GLOBALFREEALL guest trace](globalfreeall-guest-owner-review.md) provide the bounded source/graph evidence. No product, guest, or shared ledger changed.

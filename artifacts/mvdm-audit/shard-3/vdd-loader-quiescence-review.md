@@ -9,6 +9,8 @@
 
 No pre-`FreeLibrary` VDD hook quiescence was found in the **examined** BOP or installable-VDD paths. This is bounded source evidence, not proof that every possible third-party native thread or external loader entry is controlled by the project.
 
+The isolated [test-owned DLL control](vdd-loader-lock-probe-review.md) demonstrates a loader-dependent wait cycle during detach on the observed host, and a separate deliberately deferred self-request control. Neither exercises the real VDD/IOS/BOP implementation or proves a compatible self-uninstall contract; the diagnostic test timeout is not a proposed runtime timeout.
+
 ## Proposed consistent owner sequence
 
 For each **project-owned ISV load reference**, use the existing loader/table lifecycle as authority, not a second independent module owner. Before every project-owned `FreeLibrary` path, including registration failure after successful load, retire that module's registered callbacks: stop new dispatch and hook admission under the same owner, disconnect that module's mappings, then wait **outside any VDD callback and before entering `FreeLibrary`** for already-acquired callbacks to finish. Only after quiescence call `FreeLibrary`; the later original DLL detach `VDDDeInstallIOHook` must be an idempotent no-op for already-retired hooks. Clear/publish the BOP table and handle exactly once according to register success or failure. Do not hold the metadata lock while running init, dispatch, DLL entry or callbacks.

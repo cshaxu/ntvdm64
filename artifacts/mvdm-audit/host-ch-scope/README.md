@@ -138,6 +138,8 @@ The [CCPU physical-role review](ccpu-pending-physical-role-review.md), [WOW dupl
 
 The [WOW owner recheck](wow-four-excluded-owner-recheck.md) establishes matching classic DDE structures for the subsequently excluded `wowdde.h` physical role and keeps classic DDE, DDEML, printing and guest heap behavior separate. The [CCPU/C-VID exact-duplicate observation](ccpu-cvidc-selected-duplicate-evidence.json) found no different selected header with matching bytes for its 55-file historical snapshot; it does not rule out alternate profiles or equivalent behavior.
 
+The [five WOW header recheck](wow-five-pending-conservative-recheck.md) retains pending dispositions where a distinct guest owner, different dispatch mechanism or inactive legacy macros do not establish an exact duplicate or behavior of that physical header.
+
 The [four legacy host header recheck](../shard-3/four-legacy-host-headers-recheck.md) documents selected and unselected owner boundaries; its recommendations have not been applied to the ledger.
 
 The [GLOBALFREEALL owner trace](globalfreeall-guest-owner-review.md) corrects a host-table inference: original guest kernel paths directly implement and call it. The [memory-bit-index path review](ccpu-bit-index-shared-path-review.md) bounds the previously reproduced BTC defect and keeps the rest of the instruction matrix unproven.

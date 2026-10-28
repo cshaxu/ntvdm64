@@ -1,0 +1,9 @@
+ccpu386ThrdExptnPtr id:0x79dc called with Bad Id
+sas-init
+cpu-init
+access-init
+SOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2
+PIC before request irr=00 imr=00 DelayIrqLine=ffffffff
+PIC after request irr=01 imr=00 DelayIrqLine=ffffffff
+PIC intack vector=-1 eoi=0 wow=0
+original timer IRQ did not traverse original PIC INTACK: vector=-1 eoi=0 wow=0
