@@ -1,0 +1,184 @@
+{
+  "result": "pass",
+  "mvdm": [
+    {
+      "key": "fax/dummy.hlp",
+      "path": "fax/dummy.hlp",
+      "hashes": [
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028",
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028",
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028"
+      ]
+    },
+    {
+      "key": "fax/dummy.ppd",
+      "path": "fax/dummy.ppd",
+      "hashes": [
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028",
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028",
+        "12F99F53144294750FE8713D580EDA286F4BD95CD9C840DB8AB957DEF8040028"
+      ]
+    },
+    {
+      "key": "fax/faxcomm.h",
+      "path": "fax/faxcomm.h",
+      "hashes": [
+        "3F0EBB1007332C1C02B6B32AF42577992886F5E2447433C0193CC89B988B25F4",
+        "3F0EBB1007332C1C02B6B32AF42577992886F5E2447433C0193CC89B988B25F4",
+        "3F0EBB1007332C1C02B6B32AF42577992886F5E2447433C0193CC89B988B25F4"
+      ]
+    },
+    {
+      "key": "fax/printer.inf",
+      "path": "fax/printer.inf",
+      "hashes": [
+        "C3F15C09D4556009E6484E1C08D01D8405C9B1080F3B963C31F5955443DE6949",
+        "C3F15C09D4556009E6484E1C08D01D8405C9B1080F3B963C31F5955443DE6949",
+        "C3F15C09D4556009E6484E1C08D01D8405C9B1080F3B963C31F5955443DE6949"
+      ]
+    },
+    {
+      "key": "fax/wowfax/wowfax.c",
+      "path": "fax/wowfax/wowfax.c",
+      "hashes": [
+        "CF77AD0A7FAD02C80A872C388EBF5B38D59E69CCA2B84C36D316734C095381D4",
+        "CF77AD0A7FAD02C80A872C388EBF5B38D59E69CCA2B84C36D316734C095381D4",
+        "CF77AD0A7FAD02C80A872C388EBF5B38D59E69CCA2B84C36D316734C095381D4"
+      ]
+    },
+    {
+      "key": "fax/wowfax/wowfax.def",
+      "path": "fax/wowfax/wowfax.def",
+      "hashes": [
+        "4C62075FC119FF7C44CBDC554470F044C102BCBC420F8CD3CD4B9F0C12A4F983",
+        "4C62075FC119FF7C44CBDC554470F044C102BCBC420F8CD3CD4B9F0C12A4F983",
+        "4C62075FC119FF7C44CBDC554470F044C102BCBC420F8CD3CD4B9F0C12A4F983"
+      ]
+    },
+    {
+      "key": "fax/wowfax/wowfax.rc",
+      "path": "fax/wowfax/wowfax.rc",
+      "hashes": [
+        "ED78F5F9A5046511D4624EAE5CA0D6B13913A6A5CDE23B7AEEE3E9E2478A1120",
+        "ED78F5F9A5046511D4624EAE5CA0D6B13913A6A5CDE23B7AEEE3E9E2478A1120",
+        "ED78F5F9A5046511D4624EAE5CA0D6B13913A6A5CDE23B7AEEE3E9E2478A1120"
+      ]
+    },
+    {
+      "key": "fax/wowfax/wowfaxdd.h",
+      "path": "fax/wowfax/wowfaxdd.h",
+      "hashes": [
+        "B198E348FAD62C416D8451DDD24E25F76132786A1CC8AED6A9C4B481F7518129",
+        "B198E348FAD62C416D8451DDD24E25F76132786A1CC8AED6A9C4B481F7518129",
+        "B198E348FAD62C416D8451DDD24E25F76132786A1CC8AED6A9C4B481F7518129"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wfhelper.c",
+      "path": "fax/wowfaxui/wfhelper.c",
+      "hashes": [
+        "BF8CD7FE0A51E9339B98C1CED13A7D295A25A0F49DC08BE83D7C07E1B6785BEC",
+        "BF8CD7FE0A51E9339B98C1CED13A7D295A25A0F49DC08BE83D7C07E1B6785BEC",
+        "BF8CD7FE0A51E9339B98C1CED13A7D295A25A0F49DC08BE83D7C07E1B6785BEC"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wfsheets.c",
+      "path": "fax/wowfaxui/wfsheets.c",
+      "hashes": [
+        "C43B25CB761CD8A3CA6DD95C3E4707B9A118544A1BCBC014CA5C780A40F0AAC6",
+        "C43B25CB761CD8A3CA6DD95C3E4707B9A118544A1BCBC014CA5C780A40F0AAC6",
+        "C43B25CB761CD8A3CA6DD95C3E4707B9A118544A1BCBC014CA5C780A40F0AAC6"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wfsheets.h",
+      "path": "fax/wowfaxui/wfsheets.h",
+      "hashes": [
+        "262CCB34768EABC0E64C6EA30096356C3823E5872A790991785CEA0B72CFCF0C",
+        "262CCB34768EABC0E64C6EA30096356C3823E5872A790991785CEA0B72CFCF0C",
+        "262CCB34768EABC0E64C6EA30096356C3823E5872A790991785CEA0B72CFCF0C"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wfupgrad.c",
+      "path": "fax/wowfaxui/wfupgrad.c",
+      "hashes": [
+        "67D44211D4014E713116B72347159DA85DF18EC5D9042094C009357F9062617E",
+        "67D44211D4014E713116B72347159DA85DF18EC5D9042094C009357F9062617E",
+        "67D44211D4014E713116B72347159DA85DF18EC5D9042094C009357F9062617E"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wowfaxui.c",
+      "path": "fax/wowfaxui/wowfaxui.c",
+      "hashes": [
+        "D96BF03EBD449B537C25E0126529AF008E5ECC8D7421658497FE35FDE4261CA4",
+        "D96BF03EBD449B537C25E0126529AF008E5ECC8D7421658497FE35FDE4261CA4",
+        "D96BF03EBD449B537C25E0126529AF008E5ECC8D7421658497FE35FDE4261CA4"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wowfaxui.def",
+      "path": "fax/wowfaxui/wowfaxui.def",
+      "hashes": [
+        "A73B79DF1AF0324E7B29ABF9E9664994CA69FCA6BCDE21A36A6AC8F741FBB6F0",
+        "A73B79DF1AF0324E7B29ABF9E9664994CA69FCA6BCDE21A36A6AC8F741FBB6F0",
+        "A73B79DF1AF0324E7B29ABF9E9664994CA69FCA6BCDE21A36A6AC8F741FBB6F0"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wowfaxui.h",
+      "path": "fax/wowfaxui/wowfaxui.h",
+      "hashes": [
+        "88D90B14CEC1EBF6CB08D142F8CCC19B9DCB246CF9FAB6C63124B468284CDF51",
+        "88D90B14CEC1EBF6CB08D142F8CCC19B9DCB246CF9FAB6C63124B468284CDF51",
+        "88D90B14CEC1EBF6CB08D142F8CCC19B9DCB246CF9FAB6C63124B468284CDF51"
+      ]
+    },
+    {
+      "key": "fax/wowfaxui/wowfaxui.rc",
+      "path": "fax/wowfaxui/wowfaxui.rc",
+      "hashes": [
+        "0EB16F981EDCE319863EF147175A0F66F7C403D3CA3BB826FBE29E179E059097",
+        "0EB16F981EDCE319863EF147175A0F66F7C403D3CA3BB826FBE29E179E059097",
+        "0EB16F981EDCE319863EF147175A0F66F7C403D3CA3BB826FBE29E179E059097"
+      ]
+    }
+  ],
+  "external": [
+    {
+      "key": "SRC:a867497988c30606f28d",
+      "path": "nt/private/ntos/w32/ntgdi/printers/rasprint.sp1/rasdd/enabldrv.c",
+      "edition": "OpenNT-4.5",
+      "catalog_git_blob": "02d5fbbbcf2b1ad575f8b791b56166597a7d8c80",
+      "normalized_git_blob": "02d5fbbbcf2b1ad575f8b791b56166597a7d8c80",
+      "sha256": "9DA5A043A2D15561F57AAF66EAC459D340CF7B5A978D07864E0B8BDAF257C6E9",
+      "bytes": 5520,
+      "normalization": "CRLF to LF"
+    },
+    {
+      "key": "SRC:1d405e9fd6f5f186c8c4",
+      "path": "nt/private/ntos/w32/ntgdi/printers/rasprint.sp1/rasdd/compress.c",
+      "edition": "OpenNT-4.5",
+      "catalog_git_blob": "21fa224af103b08834cf83a5f015447045122264",
+      "normalized_git_blob": "21fa224af103b08834cf83a5f015447045122264",
+      "sha256": "07BBFBF15E4FB0B50D87C8E11EAE50D876A886BDD4AC9B610F0F65126966FD10",
+      "bytes": 8448,
+      "normalization": "CRLF to LF"
+    }
+  ],
+  "graphs": [
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "archive_named_drivers": [],
+  "scope": "Owned keys only; separate original drivers, static graph/package-name snapshot, no actual spooler or test execution"
+}

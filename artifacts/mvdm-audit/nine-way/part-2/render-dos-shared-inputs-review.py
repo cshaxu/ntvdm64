@@ -1,0 +1,9 @@
+import json
+from pathlib import Path
+p=Path('artifacts/mvdm-audit/nine-way/part-2');d=json.loads((p/'dos-shared-inputs-observations.json').read_text(encoding='utf-8-sig'));head='''# Part 2: DOS shared headers, assembler includes and source inputs\n\nAll 39 owned paths match both frozen original editions. The companion observer scans retained DOS v86 source/recipe text for literal basenames; its JSON records per-file counts and up to 20 source/line/snippet leads. These are **not resolved include paths**, proof of active conditional compilation, or exhaustive original dependencies: generic C header names collide with SDKs, comments may match, and builders may synthesize names.\n\n| Owned key | Basename observations | Restricted disposition |\n| --- | --- | --- |\n''';lines=[]
+for x in d['files']:
+ r=x['matching_basename_references'];example=(r[0]['path']+':'+str(r[0]['line'])) if r else 'none in captured text';count=x['match_count'];status='Pending exact consumer, selected profile and behavior.'
+ if x['path']=='dos/v86/inc/msdata2.asm':status='Historical alternate wrapper; observed DOS kernel recipe separately assembles msdata and msinit (see shard-2/msdata-wrapper-owner-review.md). Other profiles and DOS semantics remain pending.'
+ if x['path']=='dos/v86/inc/inc.tag':status='Historical change-log candidate only; verify content before integrating; related functionality stays open.'
+ lines.append(f"| `{x['path']}` | {count} textual matches; example `{example}` | {status} |")
+tail='''\n\nSee the JSON for reproducible original/current hashes and literal line evidence, including multiple hits and conditional/commented contexts. No guest build or runtime semantics were inferred, and the shared ledger was not changed. Replay `PYTHONDONTWRITEBYTECODE=1 python artifacts/mvdm-audit/nine-way/part-2/dos-shared-inputs-observer.py` and compare JSON.\n''';(p/'dos-shared-inputs-review.md').write_text(head+'\n'.join(lines)+tail,encoding='utf-8')

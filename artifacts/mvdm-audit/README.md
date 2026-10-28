@@ -5,6 +5,14 @@ The active review follows the original four disjoint partitions in
 shared ledger changes are merged only after independent verification. The
 external census remains a separate obligation.
 
+The [nine-way part 2 census](nine-way/part-2/dos-tools-dispatch-review.md)
+also records [DOS shared inputs](nine-way/part-2/dos-shared-inputs-review.md),
+[locales](nine-way/part-2/dos-locales-review.md), [fax boundaries](nine-way/part-2/fax-boundary-review.md),
+and separate external [printer implementations](nine-way/part-2/printer-implementation-review.md),
+[PPDs](nine-way/part-2/psprint-ppd-review.md), and [model resources](nine-way/part-2/rasprint-mini-review.md).
+Its coverage observer checks key accounting only; external relevance and runtime
+equivalence remain open and must not be inferred from file identities.
+
 The [mirror-difference retention estimate](mirror-diff-code-retention-review.md)
 provides reproducible current-source percentages and identifies the non-code
 build input; this is not behavioral coverage.

@@ -1,0 +1,9 @@
+# Part 2: 4,208 external RASPRINT miniature-driver assets
+
+The companion `rasprint-mini-owned.csv` covers exactly the 4,208 owned external keys in `rasprint/mini/`, across 39 model directories. Every row independently records its frozen source-edition ID and path, catalog-verified Git blob (raw or CRLF-normalized as applicable), raw SHA-256, byte count, model, exact references in that model's RC/sources/INF files with line and text, and current archive basename observation. This is a per-file evidence inventory, not an exclusion of the RASPRINT directory or an assumption that all files serve the same model.
+
+In the captured original model resource scripts, 1,944 records have a direct model-relative textual reference; the rest have none in the limited RC/sources/INF search. For example, HPPCL.RC names specific IFI font data and GPC tables; the HPPCL `sources` selects a separate model driver and its resource. A direct resource declaration is a real original build-use edge, not proof of current deployment, exact historical output, or selected user printer. No basename match occurs in `assets/winnt.zip`, which is only a filename-level package observation; resources can be embedded or supplied by the OS/another package.
+
+Each row remains **relevance pending** until its actual model/host seam and applicable printer context are established. Files with no matching RC line are not declared unused: references may be generated, indirect, via other file types, another model or another configuration. No device, printer subsystem, build or guest ran. No unowned key is classified by this report.
+
+Replay `PYTHONDONTWRITEBYTECODE=1 python artifacts/mvdm-audit/nine-way/part-2/rasprint-mini-observer.py` to regenerate the per-key CSV and JSON. No external source, product, build tree, guest or shared ledger was modified.

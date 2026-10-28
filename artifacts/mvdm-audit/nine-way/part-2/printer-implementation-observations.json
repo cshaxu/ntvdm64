@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "count": 488,
+  "recipe_name_refs": 106,
+  "archive_basename_hits": 0,
+  "ownership_sha256": "46DADB6DE7EDD6277438429DDFFC501084892B595D386F54ED660CDFF21C5E86",
+  "scope": "Individual owned external identities and same-directory build metadata, not blanket relevance"
+}

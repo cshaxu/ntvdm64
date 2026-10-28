@@ -1,0 +1,726 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "dos/v86/h/assert.h",
+      "path": "dos/v86/h/assert.h",
+      "hashes": [
+        "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC",
+        "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC",
+        "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/tools/src/h2inc/h2inc.c",
+          "line": 120,
+          "text": "#include <assert.h>"
+        }
+      ],
+      "match_count": 1
+    },
+    {
+      "key": "dos/v86/h/bios.h",
+      "path": "dos/v86/h/bios.h",
+      "hashes": [
+        "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB",
+        "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB",
+        "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/bios.inc",
+      "path": "dos/v86/h/bios.inc",
+      "hashes": [
+        "095016BB99A886B0873D2DDA452AF709B8D9410FC75E41C794EBA7CD1CACA638",
+        "095016BB99A886B0873D2DDA452AF709B8D9410FC75E41C794EBA7CD1CACA638",
+        "095016BB99A886B0873D2DDA452AF709B8D9410FC75E41C794EBA7CD1CACA638"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/dos.inc",
+      "path": "dos/v86/h/dos.inc",
+      "hashes": [
+        "F5A62B37B71D5C69421317F1FCA41570C1261BB9231BCA7E051DD1280B2C5547",
+        "F5A62B37B71D5C69421317F1FCA41570C1261BB9231BCA7E051DD1280B2C5547",
+        "F5A62B37B71D5C69421317F1FCA41570C1261BB9231BCA7E051DD1280B2C5547"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/errno.h",
+      "path": "dos/v86/h/errno.h",
+      "hashes": [
+        "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A",
+        "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A",
+        "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/float.h",
+      "path": "dos/v86/h/float.h",
+      "hashes": [
+        "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA",
+        "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA",
+        "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/graph.h",
+      "path": "dos/v86/h/graph.h",
+      "hashes": [
+        "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3",
+        "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3",
+        "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/limits.h",
+      "path": "dos/v86/h/limits.h",
+      "hashes": [
+        "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D",
+        "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D",
+        "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/malloc.h",
+      "path": "dos/v86/h/malloc.h",
+      "hashes": [
+        "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4",
+        "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4",
+        "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/tools/src/h2inc/h2inc.c",
+          "line": 123,
+          "text": "#include <malloc.h>"
+        },
+        {
+          "path": "dos/v86/cmd/command/buildmsg.c",
+          "line": 15,
+          "text": "#include \"malloc.h\""
+        }
+      ],
+      "match_count": 2
+    },
+    {
+      "key": "dos/v86/h/math.h",
+      "path": "dos/v86/h/math.h",
+      "hashes": [
+        "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825",
+        "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825",
+        "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/memory.h",
+      "path": "dos/v86/h/memory.h",
+      "hashes": [
+        "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA",
+        "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA",
+        "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/mixed.inc",
+      "path": "dos/v86/h/mixed.inc",
+      "hashes": [
+        "CA097B1F2D85C7A0B4CDE3A44B7844A25A3EE300C3580860FAEBC4EA18CFEA9F",
+        "CA097B1F2D85C7A0B4CDE3A44B7844A25A3EE300C3580860FAEBC4EA18CFEA9F",
+        "CA097B1F2D85C7A0B4CDE3A44B7844A25A3EE300C3580860FAEBC4EA18CFEA9F"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/process.h",
+      "path": "dos/v86/h/process.h",
+      "hashes": [
+        "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA",
+        "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA",
+        "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/tools/src/buildidx/buildidx.c",
+          "line": 21,
+          "text": "#include <process.h>                   /* Req. for exit */"
+        },
+        {
+          "path": "dos/v86/tools/src/getsize/getsize.c",
+          "line": 17,
+          "text": "#include<process.h>"
+        },
+        {
+          "path": "dos/v86/tools/src/stripdd/stripdd.c",
+          "line": 71,
+          "text": "#include\t<process.h>"
+        },
+        {
+          "path": "dos/v86/cmd/command/buildmsg.c",
+          "line": 14,
+          "text": "#include \"process.h\""
+        }
+      ],
+      "match_count": 4
+    },
+    {
+      "key": "dos/v86/h/search.h",
+      "path": "dos/v86/h/search.h",
+      "hashes": [
+        "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A",
+        "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A",
+        "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/setjmp.h",
+      "path": "dos/v86/h/setjmp.h",
+      "hashes": [
+        "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48",
+        "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48",
+        "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/share.h",
+      "path": "dos/v86/h/share.h",
+      "hashes": [
+        "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D",
+        "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D",
+        "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/signal.h",
+      "path": "dos/v86/h/signal.h",
+      "hashes": [
+        "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E",
+        "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E",
+        "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/stdarg.h",
+      "path": "dos/v86/h/stdarg.h",
+      "hashes": [
+        "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3",
+        "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3",
+        "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/stddef.h",
+      "path": "dos/v86/h/stddef.h",
+      "hashes": [
+        "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F",
+        "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F",
+        "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/time.h",
+      "path": "dos/v86/h/time.h",
+      "hashes": [
+        "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561",
+        "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561",
+        "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/h/varargs.h",
+      "path": "dos/v86/h/varargs.h",
+      "hashes": [
+        "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005",
+        "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005",
+        "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/_parse.asm",
+      "path": "dos/v86/inc/_parse.asm",
+      "hashes": [
+        "3C57BD2D1CFC097420948F7D268CF335C853ACCB101E6ECF8F1AE3644D0F5C20",
+        "3C57BD2D1CFC097420948F7D268CF335C853ACCB101E6ECF8F1AE3644D0F5C20",
+        "3C57BD2D1CFC097420948F7D268CF335C853ACCB101E6ECF8F1AE3644D0F5C20"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/cmd/mem/makefile",
+          "line": 34,
+          "text": "_parse.obj:     _parse.asm                      \\"
+        }
+      ],
+      "match_count": 1
+    },
+    {
+      "key": "dos/v86/inc/chkcpu.inc",
+      "path": "dos/v86/inc/chkcpu.inc",
+      "hashes": [
+        "4DFC656E6F53F0D5C93EA41EAD580C46FC0C725F5C0567EDCB7465A2DD2A248E",
+        "4DFC656E6F53F0D5C93EA41EAD580C46FC0C725F5C0567EDCB7465A2DD2A248E",
+        "4DFC656E6F53F0D5C93EA41EAD580C46FC0C725F5C0567EDCB7465A2DD2A248E"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/dbcs.sw",
+      "path": "dos/v86/inc/dbcs.sw",
+      "hashes": [
+        "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43",
+        "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43",
+        "7B86C933D33473FE03AA995258A113D53419545970D472AFEA1A1B6F2C9CBC43"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/inc/dossym.inc",
+          "line": 31,
+          "text": "include dbcs.sw"
+        },
+        {
+          "path": "dos/v86/doskrnl/bios/makefile",
+          "line": 40,
+          "text": "$(inc)\\dbcs.sw $(inc)\\dirent.inc $(inc)\\dosmac.inc $(inc)\\dosmac.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/bios/makefile",
+          "line": 63,
+          "text": "$(cinc)\\curdir.inc $(inc)\\dbcs.sw $(inc)\\dirent.inc $(inc)\\dosmac.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 52,
+          "text": "$(inc)\\dbcs.sw            \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 84,
+          "text": "$(inc)\\dbcs.sw            \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 97,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 103,
+          "text": "$(inc)/VERSIONA.INC $(inc)/arena.inc $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 108,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 114,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 119,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 125,
+          "text": "$(cinc)/curdir.inc $(inc)/dbcs.sw $(inc)/devsym.inc $(inc)/dirent.INC \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 130,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 136,
+          "text": "$(inc)/VERSIONA.INC $(inc)/buffer.INC $(inc)/dbcs.sw \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 141,
+          "text": "$(inc)/dbcs.sw $(inc)/devsym.inc $(inc)/dirent.INC \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 147,
+          "text": "$(inc)/cpmfcb.inc $(inc)/dbcs.sw $(inc)/dirent.INC $(inc)/dosmac.INC \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 154,
+          "text": "$(inc)/cpmfcb.inc $(inc)/dbcs.sw $(inc)/dirent.INC $(inc)/dosmac.INC \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 159,
+          "text": "$(inc)/buffer.INC $(inc)/bugtyp.inc $(inc)/dbcs.sw $(inc)/devsym.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 165,
+          "text": "$(inc)/dbcs.sw $(inc)/devsym.inc $(inc)/dirent.INC \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 172,
+          "text": "$(inc)/dbcs.sw $(inc)/dirent.INC $(inc)/dosmac.INC $(inc)/dosseg.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 179,
+          "text": "$(cinc)/curdir.inc $(inc)/dbcs.sw $(inc)/dirent.INC $(inc)/dosmac.INC \\"
+        }
+      ],
+      "match_count": 64
+    },
+    {
+      "key": "dos/v86/inc/inc.tag",
+      "path": "dos/v86/inc/inc.tag",
+      "hashes": [
+        "DFBBA52AD3177AEE246C0A268F29966D04D48D78E2AE58667C656F21B45CD828",
+        "DFBBA52AD3177AEE246C0A268F29966D04D48D78E2AE58667C656F21B45CD828",
+        "DFBBA52AD3177AEE246C0A268F29966D04D48D78E2AE58667C656F21B45CD828"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/macro.def",
+      "path": "dos/v86/inc/macro.def",
+      "hashes": [
+        "8EF6549F60A45F73DE1EB7F0873AB876672CC8464EA1518288854FB6E1DE5DB3",
+        "8EF6549F60A45F73DE1EB7F0873AB876672CC8464EA1518288854FB6E1DE5DB3",
+        "8EF6549F60A45F73DE1EB7F0873AB876672CC8464EA1518288854FB6E1DE5DB3"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/mft.inc",
+      "path": "dos/v86/inc/mft.inc",
+      "hashes": [
+        "DB88D3407FEB7D284812F9A4A0258C18CFA31C6625276116EFB5F0625F561D8F",
+        "DB88D3407FEB7D284812F9A4A0258C18CFA31C6625276116EFB5F0625F561D8F",
+        "DB88D3407FEB7D284812F9A4A0258C18CFA31C6625276116EFB5F0625F561D8F"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/msdata2.asm",
+      "path": "dos/v86/inc/msdata2.asm",
+      "hashes": [
+        "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE",
+        "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE",
+        "40CC58C966738905F1FB1F2FC840B42D71D3060BAB77B2F52663EFF2D577A5DE"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/msghan.inc",
+      "path": "dos/v86/inc/msghan.inc",
+      "hashes": [
+        "35112EAE8BA696585315AA4F0DE05910817EB9C3A4300B1435E785FC42B47475",
+        "35112EAE8BA696585315AA4F0DE05910817EB9C3A4300B1435E785FC42B47475",
+        "35112EAE8BA696585315AA4F0DE05910817EB9C3A4300B1435E785FC42B47475"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/cmd/nlsfunc/msg2nls.inc",
+          "line": 99,
+          "text": ";end of MSGHAN.INC"
+        }
+      ],
+      "match_count": 1
+    },
+    {
+      "key": "dos/v86/inc/msgserv.sa",
+      "path": "dos/v86/inc/msgserv.sa",
+      "hashes": [
+        "7278011C48813742E0F6F6D6882E3C88CC3C7F27283E8D5A9084D72956D07257",
+        "7278011C48813742E0F6F6D6882E3C88CC3C7F27283E8D5A9084D72956D07257",
+        "7278011C48813742E0F6F6D6882E3C88CC3C7F27283E8D5A9084D72956D07257"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/mshead.asm",
+      "path": "dos/v86/inc/mshead.asm",
+      "hashes": [
+        "080CCF82E02DA9EB2F1502053CF15C74E19DC1335DDD055CD49BBFA792C5E537",
+        "080CCF82E02DA9EB2F1502053CF15C74E19DC1335DDD055CD49BBFA792C5E537",
+        "080CCF82E02DA9EB2F1502053CF15C74E19DC1335DDD055CD49BBFA792C5E537"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 67,
+          "text": "$(inc)\\mshead.asm         \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/msconst.asm",
+          "line": 24,
+          "text": "include mshead.asm"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/msdata.asm",
+          "line": 32,
+          "text": "include msconst.asm\t; This includes mshead.asm whihc has DOS entry point"
+        }
+      ],
+      "match_count": 3
+    },
+    {
+      "key": "dos/v86/inc/mstable.asm",
+      "path": "dos/v86/inc/mstable.asm",
+      "hashes": [
+        "DCB97A65EEC51268628473257EB830C5D65C7381110E346158B544211669289D",
+        "DCB97A65EEC51268628473257EB830C5D65C7381110E346158B544211669289D",
+        "DCB97A65EEC51268628473257EB830C5D65C7381110E346158B544211669289D"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/inc/ms_data.asm",
+          "line": 211,
+          "text": "; Following 4 variables moved to MSDATA.asm from MSTABLE.asm (P4986)"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 301,
+          "text": "mstable.obj mstable.lst: mstable.asm mssw.asm \\"
+        }
+      ],
+      "match_count": 2
+    },
+    {
+      "key": "dos/v86/inc/parse.asm",
+      "path": "dos/v86/inc/parse.asm",
+      "hashes": [
+        "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656",
+        "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656",
+        "6924DC79C6EAB811D5C0C08992ADF2F2726B36078A466B8DD2B6E3E7FD07D656"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/inc/psdata.inc",
+          "line": 482,
+          "text": "; In routine SYSPARSE (parse.asm), $P_FileSp_Char is reinitialized using"
+        },
+        {
+          "path": "dos/v86/inc/_parse.asm",
+          "line": 51,
+          "text": "include parse.asm               ; include the parser"
+        },
+        {
+          "path": "dos/v86/doskrnl/bios/makefile",
+          "line": 49,
+          "text": "$(inc)\\parse.asm $(inc)\\psdata.inc $(inc)\\smifssym.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/bios/sysconf.asm",
+          "line": 236,
+          "text": "include parse.asm\t\t;together with psdata.inc"
+        },
+        {
+          "path": "dos/v86/doskrnl/dos/makefile",
+          "line": 252,
+          "text": "parse.obj parse.lst: parse.asm $(inc)/DEVSYM.INC $(inc)/DOSSYM.INC \\"
+        },
+        {
+          "path": "dos/v86/dev/ansi/makefile",
+          "line": 66,
+          "text": "$(inc)\\parse.asm          \\"
+        },
+        {
+          "path": "dos/v86/dev/ansi/parser.asm",
+          "line": 93,
+          "text": "INCLUDE     PARSE.ASM       ; Parsing code"
+        },
+        {
+          "path": "dos/v86/cmd/append/append.asm",
+          "line": 3552,
+          "text": "include parse.asm\t\t\t; include the parser code"
+        },
+        {
+          "path": "dos/v86/cmd/append/makefile",
+          "line": 35,
+          "text": "$(inc)\\parse.asm \\"
+        },
+        {
+          "path": "dos/v86/cmd/command/iparse.asm",
+          "line": 36,
+          "text": ";AD054; INCLUDE parse.asm\t\t;AN000;"
+        },
+        {
+          "path": "dos/v86/cmd/command/makefile",
+          "line": 143,
+          "text": "$(inc)\\parse.asm         \\"
+        },
+        {
+          "path": "dos/v86/cmd/command/makefile",
+          "line": 439,
+          "text": "$(inc)\\parse.asm         \\"
+        },
+        {
+          "path": "dos/v86/cmd/command/parse2.asm",
+          "line": 7,
+          "text": ";\tSCCSID = @(#)parse.asm\t1.1 85/05/14"
+        },
+        {
+          "path": "dos/v86/cmd/command/parse2.asm",
+          "line": 8,
+          "text": ";\tSCCSID = @(#)parse.asm\t1.1 85/05/14"
+        },
+        {
+          "path": "dos/v86/cmd/command/parse2.asm",
+          "line": 21,
+          "text": "break <Parse.Asm>"
+        },
+        {
+          "path": "dos/v86/cmd/command/parse2.asm",
+          "line": 23,
+          "text": ";    PARSE.ASM contains the routines to perform command line parsing."
+        },
+        {
+          "path": "dos/v86/cmd/command/tparse.asm",
+          "line": 58,
+          "text": "INCLUDE parse.asm\t\t;AN000;"
+        },
+        {
+          "path": "dos/v86/cmd/command/tspc.asm",
+          "line": 461,
+          "text": "; Data declarations taken out of parse.asm"
+        },
+        {
+          "path": "dos/v86/cmd/edlin/edlparse.asm",
+          "line": 37,
+          "text": ";     ROUTINE: PARSE.ASM - THIS IS THE PARSER CODE."
+        },
+        {
+          "path": "dos/v86/cmd/edlin/edlparse.asm",
+          "line": 169,
+          "text": "include version.inc  ; parse.asm include psdata.inc which needs defs from here"
+        }
+      ],
+      "match_count": 32
+    },
+    {
+      "key": "dos/v86/inc/pathmac.inc",
+      "path": "dos/v86/inc/pathmac.inc",
+      "hashes": [
+        "C4A595B9401ED8522BD526FF034AD8AB8AD16E237555F5792303F8AAD6AFC6E2",
+        "C4A595B9401ED8522BD526FF034AD8AB8AD16E237555F5792303F8AAD6AFC6E2",
+        "C4A595B9401ED8522BD526FF034AD8AB8AD16E237555F5792303F8AAD6AFC6E2"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/pcgequ.inc",
+      "path": "dos/v86/inc/pcgequ.inc",
+      "hashes": [
+        "1F7557E0B253DFDAB4816EF55ECD73BA2EAB6F4F4BA198D44D8E0C5ED6899B3E",
+        "1F7557E0B253DFDAB4816EF55ECD73BA2EAB6F4F4BA198D44D8E0C5ED6899B3E",
+        "1F7557E0B253DFDAB4816EF55ECD73BA2EAB6F4F4BA198D44D8E0C5ED6899B3E"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/pcinput.inc",
+      "path": "dos/v86/inc/pcinput.inc",
+      "hashes": [
+        "C7AE852475F55EFB0FE0F824934AF3C4C1DD17D9EDC72649DDFB8875A31579F1",
+        "C7AE852475F55EFB0FE0F824934AF3C4C1DD17D9EDC72649DDFB8875A31579F1",
+        "C7AE852475F55EFB0FE0F824934AF3C4C1DD17D9EDC72649DDFB8875A31579F1"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/redirsym.inc",
+      "path": "dos/v86/inc/redirsym.inc",
+      "hashes": [
+        "53FAEBA5556D628E8FF19B1F236101241661C9C7A7C4E88B53030B1F542B6E49",
+        "53FAEBA5556D628E8FF19B1F236101241661C9C7A7C4E88B53030B1F542B6E49",
+        "53FAEBA5556D628E8FF19B1F236101241661C9C7A7C4E88B53030B1F542B6E49"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/smdossym.inc",
+      "path": "dos/v86/inc/smdossym.inc",
+      "hashes": [
+        "E62331E76BCF0513BBD6CBC35A4914CBB83C71ED2E6CC028F1A4407561C0FE1F",
+        "E62331E76BCF0513BBD6CBC35A4914CBB83C71ED2E6CC028F1A4407561C0FE1F",
+        "E62331E76BCF0513BBD6CBC35A4914CBB83C71ED2E6CC028F1A4407561C0FE1F"
+      ],
+      "matching_basename_references": [],
+      "match_count": 0
+    },
+    {
+      "key": "dos/v86/inc/smifssym.inc",
+      "path": "dos/v86/inc/smifssym.inc",
+      "hashes": [
+        "E61DCBF29CE0AA75661EDA829CDDFC699DDEEF5BB1550294198B8DA3D4B869BA",
+        "E61DCBF29CE0AA75661EDA829CDDFC699DDEEF5BB1550294198B8DA3D4B869BA",
+        "E61DCBF29CE0AA75661EDA829CDDFC699DDEEF5BB1550294198B8DA3D4B869BA"
+      ],
+      "matching_basename_references": [
+        {
+          "path": "dos/v86/doskrnl/bios/makefile",
+          "line": 49,
+          "text": "$(inc)\\parse.asm $(inc)\\psdata.inc $(inc)\\smifssym.inc \\"
+        },
+        {
+          "path": "dos/v86/doskrnl/bios/makefile",
+          "line": 65,
+          "text": "$(inc)\\pdb.inc $(inc)\\sf.inc $(inc)\\smifssym.inc $(inc)\\syscall.inc \\"
+        }
+      ],
+      "match_count": 2
+    }
+  ],
+  "scanned_files": 487,
+  "scope": "Basename matches are leads, not resolved includes, active preprocessing or exhaustive alternate build evidence"
+}

@@ -1,0 +1,12 @@
+{
+  "result": "pass",
+  "count": 77,
+  "catalog_blob_verified": 77,
+  "nicknames": 77,
+  "historical_placefil": 69,
+  "archive_name_hits": 0,
+  "graph_name_hits": 0,
+  "placefil_sha256": "6EB19830262CFEE6764173F202A84C78884046F4DB807A2CBCA07172645ED177",
+  "ownership_sha256": "46DADB6DE7EDD6277438429DDFFC501084892B595D386F54ED660CDFF21C5E86",
+  "scope": "Per-key source identity and model / original packaging evidence; printer driver relevance remains pending"
+}

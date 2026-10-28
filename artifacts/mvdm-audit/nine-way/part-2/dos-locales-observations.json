@@ -1,0 +1,243 @@
+{
+  "result": "pass",
+  "files": [
+    {
+      "key": "dos/v86/messages/denmark.msg",
+      "path": "dos/v86/messages/denmark.msg",
+      "hashes": [
+        "0518B0D363EADC6F6CCD0A6B3400FC569B013079EAD41DF9602677BF18179B31",
+        "0518B0D363EADC6F6CCD0A6B3400FC569B013079EAD41DF9602677BF18179B31",
+        "0518B0D363EADC6F6CCD0A6B3400FC569B013079EAD41DF9602677BF18179B31"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/finland.msg",
+      "path": "dos/v86/messages/finland.msg",
+      "hashes": [
+        "26CEFA237A9F8367709075423ADBCB4A46DD171F96946EEF56FB4C0B439C3218",
+        "26CEFA237A9F8367709075423ADBCB4A46DD171F96946EEF56FB4C0B439C3218",
+        "26CEFA237A9F8367709075423ADBCB4A46DD171F96946EEF56FB4C0B439C3218"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/france.msg",
+      "path": "dos/v86/messages/france.msg",
+      "hashes": [
+        "440B0E19594465FEC26B7196568C66BC7DD442A9340A251ABD28EAA2F75DFFF4",
+        "440B0E19594465FEC26B7196568C66BC7DD442A9340A251ABD28EAA2F75DFFF4",
+        "440B0E19594465FEC26B7196568C66BC7DD442A9340A251ABD28EAA2F75DFFF4"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/germany.msg",
+      "path": "dos/v86/messages/germany.msg",
+      "hashes": [
+        "EE003A8BE717FED880F7177FE99CA05BF7347788C5750207A2D0FD4213F54544",
+        "EE003A8BE717FED880F7177FE99CA05BF7347788C5750207A2D0FD4213F54544",
+        "EE003A8BE717FED880F7177FE99CA05BF7347788C5750207A2D0FD4213F54544"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/holland.msg",
+      "path": "dos/v86/messages/holland.msg",
+      "hashes": [
+        "D747A9FC011E50FFB3A1DA70DF6E27FDEBCDEF379EFC26B1873D8E3D00DFD227",
+        "D747A9FC011E50FFB3A1DA70DF6E27FDEBCDEF379EFC26B1873D8E3D00DFD227",
+        "D747A9FC011E50FFB3A1DA70DF6E27FDEBCDEF379EFC26B1873D8E3D00DFD227"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/italy.msg",
+      "path": "dos/v86/messages/italy.msg",
+      "hashes": [
+        "4FEA9DB9283EC25B91F349F1A5B05425AD1F2A19685240104D5182F56CBF0C16",
+        "4FEA9DB9283EC25B91F349F1A5B05425AD1F2A19685240104D5182F56CBF0C16",
+        "4FEA9DB9283EC25B91F349F1A5B05425AD1F2A19685240104D5182F56CBF0C16"
+      ],
+      "message_rows": 1020,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/japan.msg",
+      "path": "dos/v86/messages/japan.msg",
+      "hashes": [
+        "99277569A53E0078CA10DA2D551EEAD407F76A5796ADDBFAD9180DE2265D111F",
+        "99277569A53E0078CA10DA2D551EEAD407F76A5796ADDBFAD9180DE2265D111F",
+        "99277569A53E0078CA10DA2D551EEAD407F76A5796ADDBFAD9180DE2265D111F"
+      ],
+      "message_rows": 1350,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/nether.msg",
+      "path": "dos/v86/messages/nether.msg",
+      "hashes": [
+        "85921E46AAA061E4DC24B0596D6CA3588647F2E15429CFE9CF9F063056F61219",
+        "85921E46AAA061E4DC24B0596D6CA3588647F2E15429CFE9CF9F063056F61219",
+        "85921E46AAA061E4DC24B0596D6CA3588647F2E15429CFE9CF9F063056F61219"
+      ],
+      "message_rows": 1000,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/norway.msg",
+      "path": "dos/v86/messages/norway.msg",
+      "hashes": [
+        "D47B0BAF978F82A9AFF346347D2E14692234AF5CB4641E8344367D3E02482006",
+        "D47B0BAF978F82A9AFF346347D2E14692234AF5CB4641E8344367D3E02482006",
+        "D47B0BAF978F82A9AFF346347D2E14692234AF5CB4641E8344367D3E02482006"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/portugal.msg",
+      "path": "dos/v86/messages/portugal.msg",
+      "hashes": [
+        "F3BD2706A971CD87263408C41C2157105A4F4E7E1F5759D2698AC4704648734E",
+        "F3BD2706A971CD87263408C41C2157105A4F4E7E1F5759D2698AC4704648734E",
+        "F3BD2706A971CD87263408C41C2157105A4F4E7E1F5759D2698AC4704648734E"
+      ],
+      "message_rows": 1021,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/spain.msg",
+      "path": "dos/v86/messages/spain.msg",
+      "hashes": [
+        "5A24F2CF8DEA54EFD02CC8AD3619B6A9F951DEC2E25A186958DA4B518AB5585D",
+        "5A24F2CF8DEA54EFD02CC8AD3619B6A9F951DEC2E25A186958DA4B518AB5585D",
+        "5A24F2CF8DEA54EFD02CC8AD3619B6A9F951DEC2E25A186958DA4B518AB5585D"
+      ],
+      "message_rows": 1020,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/sweden.msg",
+      "path": "dos/v86/messages/sweden.msg",
+      "hashes": [
+        "8C3855660EC2838B45CBECB83FB1D9DCF37DFEBD9F08857525BD223A05B95F23",
+        "8C3855660EC2838B45CBECB83FB1D9DCF37DFEBD9F08857525BD223A05B95F23",
+        "8C3855660EC2838B45CBECB83FB1D9DCF37DFEBD9F08857525BD223A05B95F23"
+      ],
+      "message_rows": 1012,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    },
+    {
+      "key": "dos/v86/messages/usa-ibm.msg",
+      "path": "dos/v86/messages/usa-ibm.msg",
+      "hashes": [
+        "78D9A1DE64BE56F5BAB7A4833354B58317917E8BF6E2A265718E9B47C0DB03F2",
+        "78D9A1DE64BE56F5BAB7A4833354B58317917E8BF6E2A265718E9B47C0DB03F2",
+        "78D9A1DE64BE56F5BAB7A4833354B58317917E8BF6E2A265718E9B47C0DB03F2"
+      ],
+      "message_rows": 1078,
+      "first_ids": [
+        "0001",
+        "0002",
+        "0003",
+        "0004",
+        "0005"
+      ],
+      "archive_names": []
+    }
+  ],
+  "archive_sha256": "7A0534DEC9940B2D8366C8EF71DD536ED94BE7817D7C4E1E19BED05F6E60B8F7",
+  "message_make_sha256": "867A421CC0F0859E769B4A521CA44B70F74781763E358016C025B43D89859FD4",
+  "common_make_sha256": "E9D2E142803B748CE09AD7C6F91AC062C1A2F02493FDC7350E63B63DB7836A4F",
+  "scope": "Per-locale original build message inputs, parameterized country directory; no shipped locale or runtime proof"
+}

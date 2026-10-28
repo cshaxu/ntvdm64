@@ -1,0 +1,9 @@
+{
+  "result": "pass",
+  "keys": 4208,
+  "models": 39,
+  "direct_resource_refs": 1944,
+  "archive_basename_hits": 0,
+  "ownership_sha256": "46DADB6DE7EDD6277438429DDFFC501084892B595D386F54ED660CDFF21C5E86",
+  "scope": "Only owned device assets; per-key identity, model and exact model-relative RC references, no blanket disposition"
+}
