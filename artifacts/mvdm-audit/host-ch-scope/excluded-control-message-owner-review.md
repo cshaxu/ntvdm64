@@ -1,0 +1,9 @@
+# Excluded historical control-message fragment and selected NT WOW owner
+
+This checks excluded `wow32/wctlm32.c` against the actual original NT WOW32 message dispatch, rather than inferring feature recovery from the obsolete fragment. No product, guest or shared ledger was modified and no runtime test was run.
+
+The excluded physical `wctlm32.c` begins with bare `case` labels outside any enclosing function and is absent from the selected WOW32 graph. It is not a complete standalone translation unit. It names `ThunkEMMsg32`, `ThunkSBMMsg32`, `ThunkBMMsg32`, `ThunkCBMsg32` and `ThunkLBMsg32`, with commented/placeholder cases. Searches find those exact thunk names only in that fragment and its historical `wctlm32.h`; they do not identify the actual selected dispatcher.
+
+The selected original NT owner is instead `wow32/wmtbl32.c` plus `wcntl32.c`. The original table maps `EM_GETSEL` to `WM32EMControl`, `EM_SETSEL` to `WM32EMSetSel`, `EM_GETLINE` to `WM32EMGetLine`, `SBM_GETRANGE` to `WM32SBMGetRange`, and `CB_DIR`/`LB_DIR` to their distinct handlers. In `wcntl32.c`, `WM32EMControl` translates the message ordinal and `WM32EMSetSel` also packs parameters. The cached WOW32 map attributes these functions to `wcntl32.obj`. This is a concrete source/table/object ownership chain, not a guest behavior pass or proof every fragment behavior is equivalent.
+
+Existing `../cross-369/control-message-disposition.md` identifies selected combo/list text versus owner-draw and callback/map lifetime, including project divergences 346/347. Keep real guest/native message direction, truncation/width, pointer handling, `CB_DIR` versus `LB_DIR`, `EM_GETLINE` buffer rules, failed allocation, reentry and task/window retirement as distinct S14/S15 acceptance obligations. The empty/malformed physical fragment may remain excluded while those selected providers remain partial; do not introduce it as a second thunk engine or assume all original edit/control semantics are done.

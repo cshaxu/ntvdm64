@@ -89,3 +89,5 @@ The [HUNTER provider correction](hunter-provider-reopen-review.md) reopens the o
 The [remaining excluded header review](excluded-host-header-final-group-review.md) reopens GISP diagnostic applicability while retaining the separate SoftWindows-only interface outside the NTVDM product profile. The [WINMM boundary](wow-winmm-boundary-review.md) and [legacy networking boundary](../host-inc/legacy-network-functional-boundary.md) distinguish source/image observations from runtime acceptance.
 
 The [SoftWindows input/audio profile review](softwindows-input-audio-profile-review.md) separates its conditional guest-driver BOPs from selected NT input and WOW multimedia paths; required selected-path behavior still needs validation.
+
+The [control message owner review](excluded-control-message-owner-review.md) traces selected original table and handlers without treating the static chain as a guest behavior pass.
