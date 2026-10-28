@@ -1,0 +1,11 @@
+# DDEML old host files: individual roles
+
+| File | Original role | Selected-host classification |
+| --- | --- | --- |
+| `wddetbl2.h` | DDEML ordinal entries pointing to `WD32Dde*` | Original historical table; absent from the original/current master table examined, not selected in the observed profile. |
+| `wddeml32.h` | Host thunk declarations and 16/32 binding types | Original declaration header for the old host thunk, directly included by the old provider; no active selected host provider has been established. |
+| `wddeml32.c` | Host thunk implementations, including guest callback bridge | Original historical implementation; absent from the examined original `sources` and current x86 Ninja graph, so do not classify as selected or executed. |
+
+All three current files are byte-identical to `O:/repos.external/OpenNT/base/mvdm/wow32`, respectively SHA-256 `AE89A2A82C10AD6FF2B8A41F7E876AF2286B9AD48C8441B7726D901483E30148`, `B74CDA34EC90308AA0212142E7282A878DD7C2267A0305C07147543C0B0A0A52`, and `13DB1E133CBB9BE8037FE9A57B1CF637F744EF23C9277697C096486BDE3A8C2C`. `wddeml32.c:25` includes its own header; `wddetbl2.h:17-35` identifies the thunk family. Searching the checked master `wowtbl.c`, source manifest and cached graph for the table/provider shows no selection; no `WD32Dde` symbol was found in the cached map. This is limited to those manifests and selected profile, not every original build or indirect consumer. The [observer](ddeml-route-observe.py) was rerun successfully against existing evidence and current static inputs.
+
+Do not confuse the physical-file result with removal of DDEML capability. The original Win16 `wow16/ddeml/ddeml.c:90,351,1213` contains guest-side initialize, uninitialize and transaction logic; it is a distinct possible route. Historical tests in [route review](ddeml-route-review.md) witnessed initialize/reinitialize/uninitialize using two immutable app-local guest DLLs, but did not verify transactions or callback execution. They do not identify the guest DLL loaded by an arbitrary current app. Retain S14 work to identify the actual guest module and prove registration, same/cross-task conversations, callbacks, failures and teardown. No product, guest or shared ledger changed.
