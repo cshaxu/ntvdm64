@@ -1,6 +1,9 @@
 # Parallel source and package observations
 
-The coordinator independently replayed all 54 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+The coordinator independently replayed all 56 observers against their retained JSON receipts. These are read-only source, image and selected-map observations, not guest behavior acceptance. Proposed dispositions remain unmerged until their individual ownership and applicability are reviewed. The reports retain the remaining runtime, failure and lifecycle evidence requirements.
+
+- [wow-winsock-database](shard-1/wow-winsock-database-review.md): [observer](shard-1/wow-winsock-database-observer.py), [receipt](shard-1/wow-winsock-database-observations.json).
+- [win16-gdi-resource](shard-2/win16-gdi-resource-review.md): [observer](shard-2/win16-gdi-resource-observer.py), [receipt](shard-2/win16-gdi-resource-observations.json).
 
 - [wow-param-map](shard-1/wow-param-map-review.md): [observer](shard-1/wow-param-map-observer.py), [receipt](shard-1/wow-param-map-observations.json).
 

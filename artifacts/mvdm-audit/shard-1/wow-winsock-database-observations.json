@@ -1,0 +1,251 @@
+{
+  "result": "pass",
+  "source": "wow32/wsdata.c",
+  "source_sha256": "5F37ABC01127D62858970B7021FC9ED2B9213E9B81CB4C12122ABDADF64BDA8E",
+  "original_sha256": "F8F95C4CB6EC3ACA607E66D615900129497738617B9A6A192880DC66BEB5E63B",
+  "catalog_ids": "SRC:794259fb931d5ae14b79;SRC:d4425276678f086c29d2",
+  "build_edge": "build obj/wsdata.obj: cc O:/repos.hobby/ntvdm64/src/mvdm/wow32/wsdata.c",
+  "functions": [
+    {
+      "name": "_CopyHostent32To16@16",
+      "va": 268617664,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 639,
+      "relocation_words": 3
+    },
+    {
+      "name": "_CopyProtoent32To16@16",
+      "va": 268618304,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 411,
+      "relocation_words": 2
+    },
+    {
+      "name": "_CopyServent32To16@16",
+      "va": 268618720,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 534,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WWS32CancelAsyncRequestsForTask@4",
+      "va": 268619264,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 168,
+      "relocation_words": 10
+    },
+    {
+      "name": "_WWS32FindAndRemoveAsyncContext@4",
+      "va": 268619440,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 89,
+      "relocation_words": 9
+    },
+    {
+      "name": "_WWS32GetAsyncTaskHandle16@0",
+      "va": 268619536,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 33,
+      "relocation_words": 3
+    },
+    {
+      "name": "_WWS32PostAsyncGetHost@16",
+      "va": 268619584,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 121,
+      "relocation_words": 6
+    },
+    {
+      "name": "_WWS32PostAsyncGetProto@16",
+      "va": 268619712,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 121,
+      "relocation_words": 6
+    },
+    {
+      "name": "_WWS32PostAsyncGetServ@16",
+      "va": 268619840,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 121,
+      "relocation_words": 6
+    },
+    {
+      "name": "_WWS32WSAAsyncGetHostByAddr@4",
+      "va": 268619968,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 290,
+      "relocation_words": 22
+    },
+    {
+      "name": "_WWS32WSAAsyncGetHostByName@4",
+      "va": 268620272,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 289,
+      "relocation_words": 22
+    },
+    {
+      "name": "_WWS32WSAAsyncGetProtoByName@4",
+      "va": 268620576,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 289,
+      "relocation_words": 22
+    },
+    {
+      "name": "_WWS32WSAAsyncGetProtoByNumber@4",
+      "va": 268620880,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 269,
+      "relocation_words": 21
+    },
+    {
+      "name": "_WWS32WSAAsyncGetServByName@4",
+      "va": 268621152,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 315,
+      "relocation_words": 23
+    },
+    {
+      "name": "_WWS32WSAAsyncGetServByPort@4",
+      "va": 268621472,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 285,
+      "relocation_words": 22
+    },
+    {
+      "name": "_WWS32WSACancelAsyncRequest@4",
+      "va": 268621760,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 289,
+      "relocation_words": 27
+    },
+    {
+      "name": "_WWS32gethostbyaddr@4",
+      "va": 268622064,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 181,
+      "relocation_words": 13
+    },
+    {
+      "name": "_WWS32gethostbyname@4",
+      "va": 268622256,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 227,
+      "relocation_words": 15
+    },
+    {
+      "name": "_WWS32gethostname@4",
+      "va": 268622496,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 133,
+      "relocation_words": 8
+    },
+    {
+      "name": "_WWS32getprotobyname@4",
+      "va": 268622640,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 227,
+      "relocation_words": 15
+    },
+    {
+      "name": "_WWS32getprotobynumber@4",
+      "va": 268622880,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 153,
+      "relocation_words": 12
+    },
+    {
+      "name": "_WWS32getservbyname@4",
+      "va": 268623040,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 169,
+      "relocation_words": 14
+    },
+    {
+      "name": "_WWS32getservbyport@4",
+      "va": 268623216,
+      "function": true,
+      "owner": "wsdata.obj",
+      "bytes": 162,
+      "relocation_words": 13
+    }
+  ],
+  "edges": [
+    {
+      "caller": "_WWS32TaskCleanup@0",
+      "target": "_WWS32CancelAsyncRequestsForTask@4",
+      "owner": "wsdata.obj",
+      "offset": 47
+    },
+    {
+      "caller": "_WWS32PostAsyncGetHost@16",
+      "target": "_WWS32FindAndRemoveAsyncContext@4",
+      "owner": "wsdata.obj",
+      "offset": 6
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src\\mvdm\\wow32\\wsdata.c",
+      "sha256": "5F37ABC01127D62858970B7021FC9ED2B9213E9B81CB4C12122ABDADF64BDA8E"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsdata.c",
+      "sha256": "F8F95C4CB6EC3ACA607E66D615900129497738617B9A6A192880DC66BEB5E63B"
+    },
+    {
+      "path": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\mvdm\\wow32\\wsdata.c",
+      "sha256": "F8F95C4CB6EC3ACA607E66D615900129497738617B9A6A192880DC66BEB5E63B"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja",
+      "sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+      "sha256": "37CE4B735DA1536D2DEE3492169D5A46785C04111E305A378E239B33D552B1F5"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsdata.obj",
+      "sha256": "919B7BC18B3277189114CF7D538876C6D436EB53A8BEDB23BB03F54A01F480D1"
+    },
+    {
+      "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wsext.obj",
+      "sha256": "66B99615B6BD8C6D4BA546F970E1FC6A7131249B309D14E2B9314F4FFCBE6B71"
+    },
+    {
+      "path": "assets\\release\\WOW32.DLL",
+      "sha256": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\wsext.c",
+      "sha256": "62E2390F9EC198C09384DC1B18110B25FCBA0CFEDC189DA3E3EFFBA9653CAC14"
+    },
+    {
+      "path": "src\\mvdm\\wow32\\winsockp.h",
+      "sha256": "0F7F1A8237D5222BADE5DD950078159C2AF83B0921A2F9EB64C1248740B84652"
+    }
+  ],
+  "limitations": "Static image/source evidence, not live provider cancellation, completion race, handle reuse or guest execution proof."
+}
