@@ -1607,10 +1607,10 @@ softpc.new/base/comms/rs232_io.c,1,partial,shard-1/file-audit.csv
 softpc.new/base/comms/sources,0,partial,shard-0/review.csv
 softpc.new/base/cpu/src/evid/ev_glue.c,0,pending,shard-0/review.csv
 softpc.new/base/cpu/src/evid/ev_stubs.c,2,excluded,shard-2/file-audit.csv
-softpc.new/base/cpu/src/evid/vglob.c,2,pending,shard-2/file-audit.csv
+softpc.new/base/cpu/src/evid/vglob.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/cvidc/acc_efi.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/access_c.h,1,pending,shard-1/file-audit.csv
-softpc.new/base/cvidc/accessfn.c,2,pending,shard-2/file-audit.csv
+softpc.new/base/cvidc/accessfn.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/cvidc/add_c.h,3,excluded,shard-3/file-review.csv
 softpc.new/base/cvidc/adjust_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/axphst_c.h,3,pending,shard-3/file-review.csv
@@ -1733,7 +1733,7 @@ softpc.new/base/cvidc/shift_c.h,0,excluded,shard-0/review.csv
 softpc.new/base/cvidc/simple_c.h,2,excluded,shard-2/file-audit.csv
 softpc.new/base/cvidc/sinit011.c,0,partial,shard-0/review.csv
 softpc.new/base/cvidc/sinit012.c,3,partial,shard-3/file-review.csv
-softpc.new/base/cvidc/sinit013.c,2,pending,shard-2/file-audit.csv
+softpc.new/base/cvidc/sinit013.c,2,partial,shard-2/file-audit.csv
 softpc.new/base/cvidc/sources,1,partial,shard-1/file-audit.csv
 softpc.new/base/cvidc/stack_c.h,3,pending,shard-3/file-review.csv
 softpc.new/base/cvidc/string_c.h,0,excluded,shard-0/review.csv

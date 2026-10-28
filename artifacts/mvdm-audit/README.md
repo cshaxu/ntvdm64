@@ -84,6 +84,12 @@ The [C-VID selected core](shard-2/cvidc-selected-core-image-review.md),
 [CPU profile review](shard-3/ccpu-486-debug-provider-role-review.md) and
 [host platform headers](shard-2/dos-host-platform-headers-review.md) separate
 image samples from unverified runtime and alternative-profile behavior.
+The [C-VID core checkpoint](cvidc-selected-core-role-verification.json)
+reconciles three source roles; the [WOW32 resource review](shard-1/wow32-resource-image-review.md)
+retains its resource ID, language and failure-path gaps.
+The [DPMI debug profile](shard-2/dpmi-debug-selected-image-review.md) and
+[WOW DIB lifecycle](shard-3/wow-dib-provider-lifecycle-review.md) reviews
+retain their build selection and unproved failure-path boundaries.
 The [KillWOW review](shard-1/guest-killwow-review.md) and [keyboard variant
 review](shard-3/dos-keyboard-variants-role-review.md) retain their worker-wide
 exit and layout selection boundaries.

@@ -25,7 +25,7 @@ def inspect():
     for rel,objname,func in ITEMS:
         f=frozen[rel]; hashes=[sha(root/rel) if (root/rel).is_file() else '' for root in (M,*O)]
         assert hashes == [f['current_sha256'],f['opennt_sha256'],f['opennt45_sha256']]
-        assert ledger[rel]['shard']=='2' and ledger[rel]['status']=='pending'
+        assert ledger[rel]['shard']=='2' and ledger[rel]['status'] in ('pending','partial')
         target='obj/cvidc/'+objname+'.obj'
         edge=next(line for line in graph.splitlines() if line.lower().startswith(('build '+target+':').lower()))
         assert target.lower() in archive.lower().split()

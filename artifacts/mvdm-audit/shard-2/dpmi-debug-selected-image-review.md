@@ -1,0 +1,7 @@
+# Shard 2: selected DPMI debug object and active neighbor
+
+Pending `dpmi32/debug.c` matches both original trees. Its `DpmiDbgTrace` body is under `#if DBG`. The captured current worker graph compiles `debug.obj` and includes it in `original-mvdm-dpmi32.lib`, but the object has no executable code section and no captured map owner. Recommend exclusion **only for the debug functional body in this captured configuration**, explicitly recording that the source/object is built and archived. A non-release/debug profile remains a separate decision; this must not exclude DPMI behavior or imply all debug configurations are empty.
+
+To distinguish an empty selected diagnostic body from the active DPMI path, the companion observer binds `_DpmiSetProtectedmodeInterrupt` in the separately selected `dpmiint.obj` to the released `assets/release/ntvdm.exe`: 89 bytes compared with eight relocation words masked. The cached worker and published worker executable sections match, although their whole-file hashes differ. This is a representative image binding, not proof of actual interrupt registration, vector ownership, nested execution or exception/lifecycle correctness. The neighboring `dpmiint.c` has project adaptations and is not claimed identical to original.
+
+Replay `python artifacts/mvdm-audit/shard-2/dpmi-debug-selected-image-observer.py` with `PYTHONDONTWRITEBYTECODE=1` and compare its JSON. No guest, product, installation, shared ledger or build tree was modified.

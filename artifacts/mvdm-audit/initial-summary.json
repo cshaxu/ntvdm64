@@ -1,9 +1,9 @@
 {
   "total": 4684,
   "counts": {
-    "pending": 1206,
+    "pending": 1203,
     "excluded": 2787,
-    "partial": 638,
+    "partial": 641,
     "full": 53
   },
   "unique_and_partition_verified": true,
@@ -45,5 +45,5 @@
     }
   ],
   "complete": false,
-  "note": "Four original XMS owner files partial; guest, error and teardown behavior remain open."
+  "note": "Three selected C-VID owner roles partial; complete video behavior remains open."
 }

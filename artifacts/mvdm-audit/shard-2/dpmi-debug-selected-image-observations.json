@@ -1,0 +1,39 @@
+{
+  "result": "pass",
+  "source": "dpmi32/debug.c",
+  "hashes": [
+    "88A0FB538D88F8BEE711BD2AA5390602394ABE1FC1A577090F15183A3BFD1FB1",
+    "88A0FB538D88F8BEE711BD2AA5390602394ABE1FC1A577090F15183A3BFD1FB1",
+    "88A0FB538D88F8BEE711BD2AA5390602394ABE1FC1A577090F15183A3BFD1FB1"
+  ],
+  "compile_edge": "build obj/dpmi/debug.obj: cc_dpmi O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/debug.c",
+  "object_sha256": "C606ECB78FD0BC7EB0E032B6ED5015D5C5068CFF4CBF21DDEF965338DED0F738",
+  "sections": [
+    {
+      "name": ".drectve",
+      "flags": 1051136
+    },
+    {
+      "name": ".debug$S",
+      "flags": 1108344896
+    },
+    {
+      "name": ".chks64",
+      "flags": 2560
+    }
+  ],
+  "active_neighbor_binding": {
+    "name": "_DpmiSetProtectedmodeInterrupt",
+    "va": 5608592,
+    "function": true,
+    "owner": "original-mvdm-dpmi32:dpmiint.obj",
+    "bytes": 89,
+    "relocation_words": 8
+  },
+  "neighbor_source_sha256": "F7FF2FC0686C67D3AD767A2D6CA91CCD45A1DD1381C902F4B7D27726AA74B94C",
+  "release_sha256": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294",
+  "cached_sha256": "84F72C0B33D0D0BA8E6837A25B296C17D115157FC75A4E9DC394330CC6FAC5E6",
+  "map_sha256": "E8024EF9250C9834601A1A32674EA6E46D3E9E6526BBC6A0BE864A40E50C3C03",
+  "graph_sha256": "835D8D25248FFBE2C4B4B147C056A43EF7C2F3624A85E09F141258F45FA0410C",
+  "scope": "Captured no-code debug object and relocation-masked neighboring function, not complete DPMI or debug-profile behavior"
+}

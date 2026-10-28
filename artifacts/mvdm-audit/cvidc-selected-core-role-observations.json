@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "base": "bc6bdee9f",
+  "candidate_count": 3,
+  "source_tables": [
+    {
+      "path": "shard-2/cvidc-selected-core-image-observations.json",
+      "sha256": "3AEA95D04109263AF6E01DAE9AA8E61DF3AA66B2467E8507E770C25425539B77"
+    }
+  ],
+  "host_input_observations": [],
+  "scope": "Representative relocation-masked bindings, not complete rendering proof"
+}
