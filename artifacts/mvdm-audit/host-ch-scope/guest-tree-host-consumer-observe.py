@@ -13,7 +13,7 @@ inventory = pathlib.Path('artifacts/mvdm-audit/host-ch-scope/inventory.csv')
 raw = inventory.read_bytes()
 import io
 rows = [r for r in csv.DictReader(io.StringIO(raw.decode('utf-8-sig'), newline=''))
-        if r['scope'] == 'role-pending']
+        if r['scope'] in ('role-pending', 'guest-target-observed')]
 paths = {r['path'].replace('\\', '/').lower() for r in rows}
 trees = ('msvc-x86-release/worker', 'msvc-x86-release/wow32',
          'msvc-x64-release/worker', 'pkg-uuid-x86/worker')

@@ -13,7 +13,16 @@ user-visible capability from the T-wide recovery worklist.
 
 The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 185 pending, 768 partial, 264 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
 
-The 473 `role-pending` rows (`wow16/`, `dos/v86/`) are **not excluded** from the task: some guest trees can contain host-consumed headers, shared ABI declarations, build inputs, or dual-use source. Each such case needs per-file consumer and build-dependency evidence before classification. In particular a path name or historical guest role alone cannot rule out a host dependency.
+Of the 473 `wow16/` and `dos/v86/` paths, 111 are now labelled
+`guest-target-observed` on the previously recorded source/recipe and host-graph
+evidence: 98 WRITE/DDEML/COMMDLG C files and 13 MEM/SETVER C/H files. Their
+source and recipe hashes and captured graph identities were rechecked by the
+observer; dependency logs were rerun for the 98, but not for the 13 DOS rows.
+This is a
+bounded physical-source role, not proof of installed binary provenance or a
+functional exclusion. The remaining 362 `role-pending` rows require individual
+ownership review: guest trees can contain host-consumed headers, shared ABI,
+build tools, or dual-use source. Corresponding host capabilities stay in scope.
 
 The 72 `tool-or-scaffold-candidate` rows (`vdmutils/`, `vdmexts/`, `bde/`, `ieuvddex/`, `v86/scaffold/`) are provisionally separated as utility, debugger-extension or scaffold paths, not asserted unnecessary: verify per-file linkage and any shared runtime dependencies. `v86/monitor/` remains a host candidate because the original monitor describes itself as user-mode host code; `dbg/` and `vdmdbg/` also remain candidates as possible host DLL capability.
 

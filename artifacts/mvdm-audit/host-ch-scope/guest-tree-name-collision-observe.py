@@ -17,7 +17,7 @@ root = pathlib.Path('src/mvdm')
 inventory = pathlib.Path('artifacts/mvdm-audit/host-ch-scope/inventory.csv')
 raw = inventory.read_bytes()
 rows = list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'), newline='')))
-guest = [x for x in rows if x['scope'] == 'role-pending']
+guest = [x for x in rows if x['scope'] in ('role-pending', 'guest-target-observed')]
 host = [x for x in rows if x['scope'] == 'host-candidate']
 by_name = collections.defaultdict(list)
 for r in guest:

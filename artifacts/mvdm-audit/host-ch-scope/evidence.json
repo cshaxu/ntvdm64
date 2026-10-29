@@ -1,6 +1,22 @@
 {
   "inputs": [
     {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-candidate-inventory.csv",
+      "sha256": "AABBCF2D680BA3156A1375E422546282164F12E6470B74708C5A1BB3DF6B1C9F"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-candidate-evidence.json",
+      "sha256": "291AB107F3B0C2F18D8298A8846CC8CCAA4A4C848B2D8F927BEAE3BE6789B72E"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/dos-v86-target-current-inventory.csv",
+      "sha256": "8584A9E66E5927C6945AC4AB95A6A9E3AF5B62D49A9E1E857DFFE11CB7DA4145"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/dos-v86-target-current-evidence.json",
+      "sha256": "795D673BDD01E639E385E8C9630A05A80C73A240452121672037EE3D27EE5370"
+    },
+    {
       "path": "artifacts/mvdm-audit/shard-0/review.csv",
       "sha256": "07FACAD9BCC7C711A08F0AA8D172B0BF2925506A88D867D795368A5662CCA5EC"
     },
@@ -21,7 +37,8 @@
   "scope_counts": {
     "tool-or-scaffold-candidate": 72,
     "host-candidate": 1270,
-    "role-pending": 473
+    "role-pending": 362,
+    "guest-target-observed": 111
   },
   "host_candidate_ledger_status_counts": {
     "partial": 436,

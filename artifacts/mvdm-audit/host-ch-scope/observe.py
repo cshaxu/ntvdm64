@@ -23,8 +23,48 @@ roles = {
     'wow16/': 'guest, shared ABI or host use requires per-file role review',
     'dos/v86/': 'guest, build tool or shared ABI requires per-file role review',
 }
-rows = []
+# Classify a guest-target *physical source role* only while its previous
+# source/recipe observation and captured build graphs still match. This does
+# not classify the guest binary or exclude the related host capability.
+guest_roles = {}
 evidence = []
+guest_inputs = (
+    ('guest-target-candidate-inventory.csv', 'guest-target-candidate-evidence.json'),
+    ('dos-v86-target-current-inventory.csv', 'dos-v86-target-current-evidence.json'),
+)
+for table_name, receipt_name in guest_inputs:
+    table, receipt = out / table_name, out / receipt_name
+    receipt_data = json.loads(receipt.read_text(encoding='utf-8'))
+    for p in (table, receipt):
+        evidence.append({'path': str(p).replace('\\', '/'),
+                         'sha256': hashlib.sha256(p.read_bytes()).hexdigest().upper()})
+    graphs_valid = all(
+        (graph_path := Path('build/.ninja') / g['tree'] / 'build.ninja').is_file()
+        and hashlib.sha256(graph_path.read_bytes()).hexdigest().upper() == g['graph_sha256']
+        and g['stale_blocks'] == 0 for g in receipt_data['graphs'])
+    if not graphs_valid:
+        continue
+    with table.open(encoding='utf-8-sig', newline='') as stream:
+        for candidate in csv.DictReader(stream):
+            is_guest = (candidate.get('group') == 'guest-source-observed-profile'
+                        or candidate.get('candidate') == 'True')
+            if not is_guest:
+                continue
+            key = candidate['path'].replace('\\', '/').casefold()
+            source = Path('src/mvdm') / candidate['path']
+            digest = candidate.get('source_sha256') or candidate.get('file_sha256')
+            recipe = candidate.get('makefile') or candidate.get('recipe')
+            recipe_hash = candidate.get('recipe_sha256')
+            if not recipe_hash:
+                recipe_hash = next((r['sha256'] for r in receipt_data['recipes']
+                                    if r['recipe'] == recipe), None)
+            recipe_path = Path(recipe) if recipe else None
+            if (digest and source.is_file() and
+                    hashlib.sha256(source.read_bytes()).hexdigest().upper() == digest.upper() and
+                    recipe_hash and recipe_path.is_file() and
+                    hashlib.sha256(recipe_path.read_bytes()).hexdigest().upper() == recipe_hash.upper()):
+                guest_roles[key] = candidate.get('guest_target') or candidate.get('target')
+rows = []
 seen = set()
 for name in inputs:
     path = root / name
@@ -44,6 +84,10 @@ for name in inputs:
         prefix = next((p for p in roles if key.startswith(p)), None)
         if prefix:
             scope, reason = 'role-pending', roles[prefix]
+            if key in guest_roles:
+                scope = 'guest-target-observed'
+                reason = ('guest target ' + guest_roles[key] + '; captured-profile source role only; '
+                          'host capabilities and other profiles remain separately open')
         elif key.startswith(tool_paths):
             scope = 'tool-or-scaffold-candidate'
             reason = 'standalone tool, debugger extension or scaffold; verify per-file ownership'

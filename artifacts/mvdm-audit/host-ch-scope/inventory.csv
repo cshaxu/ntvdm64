@@ -46,20 +46,20 @@ dos/dem/demsrch.c,shard-0/review.csv,partial,host-candidate,host C/H candidate; 
 dos/dem/dosdef.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 dos/v86/cmd/command/buildmsg.c,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
 dos/v86/cmd/command/usa-ms/bldmsg.h,shard-0/review.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/mem.c,shard-0/review.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/mem.h,shard-0/review.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/membase.c,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/memctrlc.c,shard-1/file-audit.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/memex.c,shard-3/file-review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/msgdef.h,shard-1/file-audit.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
+dos/v86/cmd/mem/mem.c,shard-0/review.csv,待核验,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/mem.h,shard-0/review.csv,待核验,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/membase.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/memctrlc.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/memex.c,shard-3/file-review.csv,pending,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/msgdef.h,shard-1/file-audit.csv,待核验,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 dos/v86/cmd/mem/parse.h,shard-3/file-review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/submsg.c,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/mem/xmm.h,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/setver/message.h,shard-3/file-review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/setver/parse.c,shard-1/file-audit.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/setver/setver.c,shard-0/review.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/setver/setver.h,shard-2/file-audit.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
-dos/v86/cmd/setver/usa-ms/message.h,shard-1/file-audit.csv,待核验,role-pending,"guest, build tool or shared ABI requires per-file role review"
+dos/v86/cmd/mem/submsg.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/mem/xmm.h,shard-2/file-audit.csv,pending,guest-target-observed,guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/setver/message.h,shard-3/file-review.csv,pending,guest-target-observed,guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/setver/parse.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/setver/setver.c,shard-0/review.csv,待核验,guest-target-observed,guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/setver/setver.h,shard-2/file-audit.csv,pending,guest-target-observed,guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+dos/v86/cmd/setver/usa-ms/message.h,shard-1/file-audit.csv,待核验,guest-target-observed,guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 dos/v86/h/assert.h,shard-3/file-review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
 dos/v86/h/bios.h,shard-0/review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
 dos/v86/h/conio.h,shard-3/file-review.csv,pending,role-pending,"guest, build tool or shared ABI requires per-file role review"
@@ -1200,12 +1200,12 @@ wow16/commdlg/_xlib.h,shard-0/review.csv,待核验,role-pending,"guest, shared A
 wow16/commdlg/cderr.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/commdlg/colordlg.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/commdlg/commdlg.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/commdlg/dlgs.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/commdlg/dlgs.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/commdlg/dlgs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/commdlg/font.c,shard-0/review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/commdlg/font.c,shard-0/review.csv,pending,guest-target-observed,guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/commdlg/font.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/commdlg/isz.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/commdlg/parse.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/commdlg/parse.c,shard-3/file-review.csv,pending,guest-target-observed,guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/commdlg/parse.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/commdlg/privcomd.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/commdlg/xlib.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
@@ -1213,21 +1213,21 @@ wow16/ctl3dv2/ctl3d.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared
 wow16/ctl3dv2/ctl3d.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/ctl3dv2/loaddib.h,shard-0/review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/ctl3dv2/version.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/ddeml.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/ddeml/ddeml.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/ddeml/ddemlp.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgdb.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgdde.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmghsz.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgmem.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgmon.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgq.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/dmgwndp.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/hdata.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/heapwach.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/ddeml/dmgdb.c,shard-3/file-review.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmgdde.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmghsz.c,shard-3/file-review.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmgmem.c,shard-3/file-review.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmgmon.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmgq.c,shard-3/file-review.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/dmgwndp.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/hdata.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/heapwach.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/ddeml/heapwach.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/register.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/stdinit.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/ddeml/stdptcl.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/ddeml/register.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/stdinit.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/ddeml/stdptcl.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/ddeml/tests/ddestrs/client.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/ddeml/tests/ddestrs/cmdln.c,shard-0/review.csv,整体排除,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/ddeml/tests/ddestrs/ddestrs.c,shard-1/file-audit.csv,整体排除,role-pending,"guest, shared ABI or host use requires per-file role review"
@@ -1484,139 +1484,139 @@ wow16/win87em/win87em.h,shard-0/review.csv,pending,role-pending,"guest, shared A
 wow16/winoldap/winoldap.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/wowdeb/wowdeb.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/aaa.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/addprm.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/addprm.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/bitmaps.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/cache.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/cache.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/ch.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/chlook.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/chngwin.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/clipbord.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/clipbrd2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/clipdisp.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/cmd.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/chngwin.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/clipbord.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/clipbrd2.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/clipdisp.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/cmd.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/cmddefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/code.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/commdlg.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/createww.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/curskeys.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/commdlg.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/createww.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/curskeys.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/d_disp.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/d_form1.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/d_selec2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/dbcs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/debug.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/debug.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/debug.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/diaalert.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/diaalert.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/diachgpr.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/diadiv.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/diapara.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/diadiv.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/diapara.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/diaprint.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/diarepag.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/diasubs.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/disp.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/diarepag.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/diasubs.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/disp.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/dispdefs.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/dlgdefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/doc.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/doc.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/docdefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/doprm.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/doprm.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/doslib.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/edit.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/edit.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/editdefs.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/editftn.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/editpgtb.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/editpgtb.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/editsect.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fetch.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/fetch.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/ffdefs.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/file.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/file.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/filedefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fileres.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fileutil.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/fileres.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/fileutil.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/fkpdefs.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/fmtdefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/fontdefs.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fontdlg.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fontenum.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/fontutil.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/fontdlg.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/fontenum.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/fontutil.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/form1.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/format2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/format2.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/globdefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/heapdata.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/heapdefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/heapinit.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/heapmain.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/heaprare.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/heapmain.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/heaprare.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/help.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/initmmw.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/initwin.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/insert.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/insert2.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/insertco.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/jumppage.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/initmmw.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/initwin.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/insert.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/insert2.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/insertco.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/jumppage.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/kanji.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/loadfnt2.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/loadfont.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/loadfnt2.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/loadfont.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/looks.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/machdefs.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/macro.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/mainloop.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/mdoc.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/menu.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/mainloop.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/mdoc.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/menu.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/menudefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/mergedef.h,shard-0/review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/mglobals.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/mmw.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/mouse.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/mglobals.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/mmw.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/mouse.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/mouse.h,shard-0/review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/mw.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/obj.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/obj.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/obj.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/obj2.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/obj3.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/objpsp.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/objreg.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/obj2.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/obj3.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/objpsp.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/objreg.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/objreg.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/open.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/pageinfo.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/pictdrag.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/picture.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/picture2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/open.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/pageinfo.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/pictdrag.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/picture.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/picture2.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/preload.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/print.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/print2.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/print3.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/print.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/print2.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/print3.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/printdef.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/printdlg.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/printdlg.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/prmdefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/propdefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/quit.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/rare.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/ruler.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/ruler2.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/ruler3.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/quit.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/rare.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/ruler.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/ruler2.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/ruler3.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/rulerdef.h,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/running.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/screen.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/scrnchng.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/running.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/screen.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/scrnchng.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/scrndefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/scrollhz.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/scrollvt.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/search.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/select.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/select2.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/selectsp.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/scrollhz.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/scrollvt.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/search.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/select.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/select2.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/selectsp.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/stcdefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/str.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow16/write/toolbox.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/trans2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/trans3.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/trans4.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/transbuf.c,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/transfer.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/trans2.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/trans3.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/trans4.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/transbuf.c,shard-3/file-review.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/transfer.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/txb.h,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/undo.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/util.c,shard-2/file-audit.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/util2.c,shard-0/review.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/undo.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/util.c,shard-2/file-audit.csv,pending,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
+wow16/write/util2.c,shard-0/review.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/winddefs.h,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
-wow16/write/wwactde.c,shard-1/file-audit.csv,待核验,role-pending,"guest, shared ABI or host use requires per-file role review"
+wow16/write/wwactde.c,shard-1/file-audit.csv,待核验,guest-target-observed,guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open
 wow16/write/wwdefs.h,shard-3/file-review.csv,pending,role-pending,"guest, shared ABI or host use requires per-file role review"
 wow32/debug.c,shard-1/file-audit.csv,待核验,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 wow32/fastwow.h,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
