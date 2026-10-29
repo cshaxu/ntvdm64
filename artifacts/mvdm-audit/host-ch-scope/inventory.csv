@@ -473,7 +473,7 @@ softpc.new/base/ccpu386/sub.c,shard-1/file-audit.csv,全复通,host-candidate,ho
 softpc.new/base/ccpu386/sub.h,shard-1/file-audit.csv,全复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/test.c,shard-0/review.csv,full,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/test.h,shard-1/file-audit.csv,全复通,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
-softpc.new/base/ccpu386/univer_c.h,shard-2/file-audit.csv,pending,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
+softpc.new/base/ccpu386/univer_c.h,shard-2/file-audit.csv,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/verr.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/verr.h,shard-3/file-review.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify
 softpc.new/base/ccpu386/verw.c,shard-2/file-audit.csv,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify

@@ -1,0 +1,9 @@
+# DEM block IOCTL query: selected-object observation
+
+The original guest calls `SVC_DEMIOCTL` from `dos/v86/doskrnl/dos/ioctl.asm:453,592`; service 21h is defined in `inc/DOSSVC.INC`/`dossvc.h`, and `dos/dem/demdisp.c:133` points to `demIOCTL`. Its subfunction table in `demioctl.c:36` includes `demIoctlDiskQuery` for block-device query. This is a source-level chain; the fixture calls the selected handler directly, not the guest or dispatcher.
+
+Run `python artifacts/mvdm-audit/host-ch-scope/dem-ioctl-query-run.py` from the repository root. The test links current x86 release `worker/obj/dem/demioctl.obj`; `getCL`, `getBL`, AX/carry setters and the `demGetBDS` drive lookup are controlled seams. It checks all 256 code values both with an existing simulated drive and a missing one: existing returns success for `40,41,42,46,60,61,62,66` hexadecimal and DOS access denied for the others; missing returns file not found for all. The passed drive number and one lookup per call are also checked. No physical disk or guest is touched.
+
+The first fixture attempt failed because its `demGetBDS` seam incorrectly declared the byte parameter as unsigned int, observing uninitialized upper stack bytes. Inspecting the actual call and correcting the seam to `unsigned char` yielded the recorded pass; that earlier fixture mistake is not a product failure. Hashes and final output are in `dem-ioctl-query-observation.json`. GNU ld discards unrelated sections and reports an ignored MSVC `.drectve` warning.
+
+This checks advertised query results only; it does not prove the queried operations work, BDS ownership/lifetime, actual device accesses, invalid drive semantics in the real provider, guest dispatch, or the installed image identity. It is bounded behavior evidence for an already-partial DEM file, not complete IOCTL restoration. No product, guest or shared ledger was changed.

@@ -2,6 +2,8 @@
 
 Coordinator update: `ccpu386/pigger_c.h` has since been classified only as an unused physical declaration in the captured NT worker. A case-sensitive search of current MVDM, NTVDM host and tools C/H/INC/MJS finds `Pig` only in its definition, two alternate definitions, and comments/strings; it does not equate that macro to `PIG`. Original PIG diagnostic behavior remains separately pending in S17. The pending row below reflects the earlier snapshot.
 
+`ccpu386/univer_c.h` is likewise classified only as an unused physical declaration in the captured worker: its sole `ImpossibleConstraint` definition has no literal consumer in current MVDM, NTVDM host or tools; the other hit is the alternate MIPS definition. The exact SAS schema, generated consumers outside the captured trees and runtime ABI remain separate S11/S13 obligations.
+
 This read-only review covers four still-pending original header paths as a single CPU/SAS schema group; the selected x86 generated adapter is identified as an implementation dependency, not reclassified here. No existing probe was executed, no shared ledger, product or guest was changed. A fresh `ninja -t deps` read of `build/.ninja/msvc-x86-release/worker` resolves exact physical paths; its counts are a snapshot, not behavioral proof.
 
 | Original pending path | Actual selected profile / original role | Supported current disposition and unresolved behavior |

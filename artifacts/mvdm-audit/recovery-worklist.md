@@ -44,6 +44,8 @@ The [video J-code declaration review](shard-3/video-jcode-declaration-target-rev
 
 The [DEM debug-state witness](host-ch-scope/dem-isdebug-review.md) checks selected-object branches with a mocked native query. S17 retains real debugger connection, error behavior and guest debug execution.
 
+The [DEM IOCTL query witness](host-ch-scope/dem-ioctl-query-review.md) checks all 256 block-device query codes with synthetic BDS data. S12/S13 retain actual device operations, guest dispatch and BDS lifetime.
+
 The [C-VID context and flags review](shard-3/cvidc-context-register-flags-review.md) leaves actual generated macro expansion and provider layout in S11; text mentions alone do not establish a runtime access. The [WOWFAX helper and upgrade review](host-ch-scope/wowfax-helper-upgrade-owner-review.md) leaves provider applicability, path-length constraints and actual failure paths in S16.
 
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
@@ -53,6 +55,10 @@ The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.
 The [WOWFAX property-sheet review](host-ch-scope/wowfax-property-sheets-owner-review.md) identifies a separate original printer UI provider and unconfirmed allocation/cleanup risks. S16 must determine provider applicability and complete ownership before calling those source paths bugs or substituting ordinary dialog support.
 
 The [WOWFAX shared driver review](host-ch-scope/wowfax-shared-driver-owner-review.md) retains distinct client/server FAXDEV ownership, named-mapping/view offsets, callback identity and teardown in S16; generic spooler support is not evidence that this provider is equivalent or active.
+
+The [WOWFAX UI guest-entry trace](host-ch-scope/wowfax-ui-guest-entry-review.md) retains processed status versus driver return value, mapping identity, actual guest driver loading and teardown in S16. Source dispatch is not proof the independent provider ran.
+
+The [video glue physical variant review](shard-3/video-glue-physical-variant-review.md) retains original-versus-selected vector binding and generated declaration questions for S11/S13; source names and line-ending-sensitive diff counts do not prove behavioral equivalence.
 
 | Stage | Cohort and evidence | Established result / remaining work |
 | --- | --- | --- |
