@@ -1,0 +1,24 @@
+SOL options: round=1
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=2
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=3
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=4
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=5
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=6
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=7
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=8
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery

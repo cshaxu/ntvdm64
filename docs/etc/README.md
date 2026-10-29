@@ -80,6 +80,7 @@ explicitly retained final control-observer non-pass.
 [T473 whole recovery stage plan](operations/m0-t473-whole-recovery-stage-plan.md)
 
 [T473 S9 generic public USER wrapper audit](evidence/m0-t473-s9-generic-user-wrapper-audit.md)
+[T473 S10 host C/H audit closure](evidence/m0-t473-s10-closure.md)
 records the first source-proven HWND32 wrapper cohort and its required
 parameter-by-parameter identity proof before any generic-wrapper repair.
 

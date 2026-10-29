@@ -1,0 +1,15 @@
+owned-window=0000000001580026 pid=2108 client=585x384
+geometry phase=before client_ok=1 client=585x384 outer_ok=1 outer=26,26,627,469 style=16cf0000 exstyle=00000100
+geometry-context observer_awareness=0 target_awareness=0 equal=1 target_dpi=96 screen=1280x720 maxtrack=1300x740 monitor_ok=1 monitor=0,0,1280,720 work=0,0,1280,672
+deal-menu-state=0 enabled=1
+phase=ready pixels=b1129045 reference=00000000
+capture=before ok=1
+phase=pre-deal-draw pixels=8834377c reference=65174fed
+capture=pre-deal-draw ok=1
+phase=deal-waste-cleared pixels=65174fed expected=65174fed
+phase=deal pixels=b1129045 reference=00000000
+capture=deal ok=1
+deal-tableau same=1 old=b1129045 new=b1129045 not_a_randomness_assertion=1
+phase=draw-stock pixels=8834377c reference=65174fed
+capture=draw ok=1
+PASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close

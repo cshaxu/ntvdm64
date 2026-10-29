@@ -1,0 +1,2 @@
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery

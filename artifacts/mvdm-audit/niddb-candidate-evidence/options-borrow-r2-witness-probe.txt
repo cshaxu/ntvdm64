@@ -1,0 +1,2 @@
+SOL options: command=1003
+SOL options: modal dialog did not appear

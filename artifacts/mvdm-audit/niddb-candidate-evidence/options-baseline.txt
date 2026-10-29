@@ -1,0 +1,3 @@
+SOL options: command=1003
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: launcher did not finish after owned close

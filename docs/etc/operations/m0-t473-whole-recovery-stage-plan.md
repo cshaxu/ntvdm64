@@ -33,6 +33,22 @@ source identity alone is not execution or behavioral proof. Preserve guest
 immutability, approved host boundaries, and the user's minimum-diff policy.
 Unrelated project-wide minimization remains in the next queue package.
 
+S10 retains the detailed [recovery worklist](../../../artifacts/mvdm-audit/recovery-worklist.md)
+and [stage handoff](../../../artifacts/mvdm-audit/s10-s11-s19-handoff-reconciliation.md).
+The [C/H reconciliation checkpoint](../../../artifacts/mvdm-audit/s10-host-ch-reconciliation-summary.md)
+records bounded source-role decisions and the evidence freshness limitations.
+S11 triages the observed SOL Options failures before assigning any proved DDE
+or USER defect to S14/S15. S17 owns HUNTER and standalone tools/debuggers,
+with CPU prerequisites in S11 and launch/PIF integration in S12. S19 rebinds
+normal, failure and teardown evidence to the actual coherent release package.
+
+S11 owns the NIDDB instance-retirement and allocation-rollback candidates
+identified during S10. The [bounded evidence](../../../artifacts/mvdm-audit/host-ch-scope/niddb-allocation-rollback-review.md)
+includes object-level failure controls and the candidate package's selected
+Full gates; actual VxD lifecycle, game interaction and completion boundaries
+remain separate acceptance obligations. The candidates are not published or
+claimed complete by S10.
+
 S10's [native-source checkpoint](../../../artifacts/mvdm-audit/native-source-role-review.md)
 retains per-file S11 execution/translation and S13 BIOS obligations without
 accepting new runtime behavior. The separate
@@ -49,6 +65,8 @@ S13 also owns the scoped [fixed-disk failure review](../../../artifacts/mvdm-aud
 S15 owns the isolated [EDIT word-break buffer counterexample](../../../artifacts/mvdm-audit/shard-2/wordbreak-boundary-review.md); real guest reachability and the length contract remain to be verified.
 The [selected host failure handoff](../../../artifacts/mvdm-audit/cross-369/selected-host-reproduced-failures-handoff.md) and [cross-shard handoff](../../../artifacts/mvdm-audit/cross-369/cross-shard-runtime-failures-handoff.md) assign bounded controlled failures to S11, S13, S14, S15 and S16. Each later stage must rebind its tested artifact and preserve the recorded distinction between controlled fixtures and live guest outcomes.
 S14/S15 retain the [cursor/icon alias allocation and cleanup boundaries](../../../artifacts/mvdm-audit/cross-369/cursor-cache-disposition.md): both unchecked allocation sites and lock/mapping failure ownership require controlled failure and lifecycle witnesses. The separate [historical DDEML thunk review](../../../artifacts/mvdm-audit/cross-369/ddeml-thunk-disposition.md) leaves actual guest DDEML registration, peer interaction, callbacks and retirement in S14.
+S14 additionally retains the [unselected DDEML thunk source risks](../../../artifacts/mvdm-audit/s10-followup-wow.md): guest mapping across a native call, full binding table and missing lookup returns. Prove actual guest/provider reachability before treating these as current-product defects or choosing an implementation.
+S16 retains the [fax provider and notification boundary](../../../artifacts/mvdm-audit/s10-followup-fax.md): establish actual separate-driver applicability, then test mapping, peer failure, modal dispatch and cleanup. The original potential busy wait is a conditional source finding, not a reproduced current-product defect.
 S12 owns the isolated [DOS label boundary](../../../artifacts/mvdm-audit/shard-1/dem-directory-review.md); guest reachability and safe volume semantics remain to be verified.
 S12 additionally retains the [FCB deletion failure branches](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-delete-review.md) as unconfirmed source risks. Exercise the actual DEM object with controlled attribute and enumeration failures before deciding whether a mirror exception is justified.
 

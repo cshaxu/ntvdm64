@@ -2,78 +2,37 @@
 
 ## Current Work
 
-**Active: M0 T473 S10**
+**Active: M0 T473 S11**
 
-S9 closed with its [USER identity evidence](../history/m0-t473-s9-closure.md).
-The owner approved the T-wide DOS16/WOW32 source reconciliation. The initial
-four-role census is retained; nine logical partitions are assigned to three
-reviewers in parallel batches, with the coordinator integrating evidence.
-Automatic S progression remains in force. Guest media remains unchanged.
-See the [nine-part assignment](../../artifacts/mvdm-audit/nine-way-plan.md).
-
-Current installed ten-image manifest is `assets/release/release-manifest.json`;
-release/installed hashes match. The Video7 mouse-range repair passed all 14
-Full gates in a fresh-identity isolated copy. Never restore historical package-c.
-S10 package-scoped NTSRV isolation and selected probes are recorded in
-[package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
-Host MVDM C/H reconciliation remains open.
-Owner directs an S10 P to audit, build, test and publish the existing
-independent `src/addon/mouse31` changes before resuming that reconciliation.
-Original guest media and binaries remain unchanged. [Acceptance evidence](../../artifacts/mvdm-audit/mouse31-acceptance-review.md) remains incomplete.
-Mouse31 must not use HMA (owner direction).
-Win386 DOS Prompt and post-return mouse are observed; Full retest uses the
-owner-approved visible desktop with an owned Console for Window input.
-
-The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
-retain partial integration and concrete per-file obligations. The latest
-[retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
-predecessors through 15 selected functions and 73 DEM slots.
-The historical all-file exclusion totals are not host C/H completion counts.
-Other file types, including host assembly, support source and behavior tracing;
-they are not individually inventoried in S10. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
-[header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
-[VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
-their unresolved behavior and lifecycle obligations for later stages.
-The [text-retention assessment](../../artifacts/mvdm-audit/mirror-diff-code-retention-review.md) covers 208 current mirror differences; 66 original paths lack a file at that mirror location. The 33 tools16 paths have hash-matching retained copies; their original mirror roles are excluded, not their uses. Text retention is not behavioral coverage.
-[Parallel source reviews](../../artifacts/mvdm-audit/README.md) include DOS,
-C-VID and WOW GDI bindings; execution and lifecycle obligations remain open.
-The [Video7 mouse-range candidate](../../artifacts/mvdm-audit/video7-pointer-review.md)
-was accepted by the owner and passed the full ten-component regression.
-
-The [CPU control evidence](../../artifacts/mvdm-audit/ccpu-control-review.md)
-adds accepted/candidate guest exception paths, oracle negatives and 14 bound
-helpers. Nine owners are partial; only the unused NOP helper file is excluded,
-with the original inline instruction retained. Wider CPU obligations remain open. The [header/macro review](../../artifacts/mvdm-audit/ccpu-header-macro-review.md) adds nine partial
-owners, one inactive PIG declaration exclusion and a reproduced bit-index defect.
-
-Historical SOL Options candidate failures remain unexplained in the
-[candidate review](../../artifacts/mvdm-audit/candidate-runtime-review.md).
-The owner-directed latest-source publication supersedes its old hold;
-selected Full gates do not prove those historical failures repaired.
+S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The owner approved automatic progression and the [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). S11 recovers original execution, callback, identity and lifetime foundations. Preserve all unrelated work and immutable guest media.
 
 ## Active Packet
 
-### M0 T473 S10 — MVDM whole-source reconciliation
+### M0 T473 S11 — execution, identity and lifetime foundations
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S10, Ordinary Mode; coordinator and three reviewers on disjoint shards. |
-| Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
-| Objective | Reconcile applicable host MVDM C/H files against both audit inventories, product composition and evidence; form an owner-group recovery worklist. Other file types are supporting dependencies, not individually classified scope. |
-| Non-goals | Original guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. The owner-directed independent mouse31 add-on may be built and tested. |
-| Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
-| Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package/RPC staging and add-on/tool producer/consumer renames. |
-| Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
-| Verification | Partition coverage/uniqueness and source hash checks; source/edition, compile/link/dispatch, behavior and lifecycle evidence reviewed separately. |
-| Expected Markers | Each in-scope host C/H row has justified full/partial/excluded disposition and selected original owner; mirror diffs are partial with a justified estimate or explicit unmeasurable basis. |
-| Asset Needs | Read-only DOS16/WOW32 inventories and original sources; existing build graphs, maps and noninteractive/authorized desktop probes. |
-| Reporting Requirements | Per-file evidence for applicable MVDM host C/H and unresolved capabilities; source/adapter diff and ownership accounting. Use the external audit inventories to trace relevant capability and provider dependencies, without individually classifying unrelated external files. |
-| Stop Conditions | Guest change, inaccessible original source, private host-layout assumption or new observable semantic concession. |
-| Exit Criteria | Complete reconciled host C/H ledger with no unclassified applicable file, evidence-backed exclusions and finite dependency-ordered recovery groups; compilation or trace alone is not functional proof. |
-| Original Owner Request | Reconnect every feasible original MVDM capability, per-file full/partial/excluded with mirror diffs partial and estimated restored proportion, then complete all required tests before T closure. |
-| Similar-Issue Sweep | Original source presence, selected profile, build/link extraction, callbacks, failure/teardown, duplicate adapters and both guest and host owner boundaries. |
+| Identifier Mode | M0 T473 S11, Ordinary Mode. |
+| Admission And Approval | Automatic progression authorized by the owner; [S10 closure](../etc/evidence/m0-t473-s10-closure.md) and approved stage plan. |
+| Objective | Restore and verify the S11 execution, callback, identity and lifetime owner groups without increasing unnecessary mirror differences. |
+| Non-goals | Guest modification or rebuilding; speculative replacement of original behavior; unrelated Win95 tooling. |
+| Reference Baseline | S10 audit `822c5fe58`; [recovery worklist](../../artifacts/mvdm-audit/recovery-worklist.md); unpublished [NIDDB candidate](../../artifacts/mvdm-audit/host-ch-scope/niddb-allocation-rollback-review.md). |
+| Files And ABI Surface | MVDM CPU, SAS, VxD lifecycle and project-owned callback/identity adapters as justified by source trace; exact changed paths recorded in evidence. |
+| Applicable Rules | Project source policy, architecture and execution rules; original logic first, minimum mirror diff, registered exceptions and immutable guest. |
+| Verification | Cached coherent builds, focused normal/failure/retirement tests, relevant immutable-guest integration and required Full gates; bind each result to exact built package. |
+| Expected Markers | Reproducible witnesses and disposition for each admitted owner group; SOL observations separately attributed before any root-cause claim. |
+| Asset Needs | Original sources, captured build graphs, isolated package, probes and immutable guest inputs; no guest rebuild. |
+| Reporting Requirements | Each change, original owner, mirror diff, evidence, failures and finite S14/S15 handoff; preserve unresolved external Win95 tooling. |
+| Stop Conditions | Guest change, inaccessible original source, private host-layout assumptions or an unapproved observable semantic concession. |
+| Exit Criteria | S11 foundation groups reconciled and verified with coherent publication and required reviews; any allowed boundary recorded, not inferred from compilation. |
+| Original Owner Request | Reconnect feasible original MVDM capabilities, audit/repair in dependency order, then complete product-wide validation and delivery. |
+| Similar-Issue Sweep | Examine adjacent allocation, rollback, reentry, handle identity, callback and lifecycle owners as one group. |
 | Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
-| Temporary Evidence | `build/t473-s10`, 60-minute phase, 3-GiB size and 10-minute no-progress budget; durable ledgers under `artifacts/mvdm-audit`. |
+| Temporary Evidence | `build/t473-s11`, 60-minute phase, 3-GiB size and 10-minute no-progress budget; durable evidence under `artifacts/mvdm-audit`. |
+
+## S10 Closure Record
+
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
 
 ## T471 Closure Record
 
