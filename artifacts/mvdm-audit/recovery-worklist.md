@@ -38,6 +38,10 @@ The [DEM boot-drive selected-object witness](host-ch-scope/dem-bootdrive-review.
 
 The [DEM DOS/WOW FILES selected-object witness](host-ch-scope/dem-wowfiles-review.md) exercises the original DOS-preserve and WOW-255 paths with simulated worker state. S12 retains real guest configuration, mode selection and actual handle-limit validation.
 
+The [DEM disk-reset selected-object witness](host-ch-scope/dem-diskreset-review.md) verifies original reset ordering, guest-counter write and failure dispatch with mocked boundaries. S12/S13 retain real devices, guest leases, error propagation and worker termination.
+
+The [video J-code declaration review](shard-3/video-jcode-declaration-target-review.md) separates original generated inputs, current exact header resolution and unresolved generator/loader applicability; S11/S13 retain vector ABI and actual selected video behavior.
+
 The [DEM debug-state witness](host-ch-scope/dem-isdebug-review.md) checks selected-object branches with a mocked native query. S17 retains real debugger connection, error behavior and guest debug execution.
 
 The [C-VID context and flags review](shard-3/cvidc-context-register-flags-review.md) leaves actual generated macro expansion and provider layout in S11; text mentions alone do not establish a runtime access. The [WOWFAX helper and upgrade review](host-ch-scope/wowfax-helper-upgrade-owner-review.md) leaves provider applicability, path-length constraints and actual failure paths in S16.
@@ -47,6 +51,8 @@ Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-ow
 The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.md) preserves separate original HFX and SWIN_HFX guest/provider applicability in S17; the selected DOS filesystem and redirector are different routes, and captured HFX BOPs resolving to `illegal_bop` are not evidence that the protocol works.
 
 The [WOWFAX property-sheet review](host-ch-scope/wowfax-property-sheets-owner-review.md) identifies a separate original printer UI provider and unconfirmed allocation/cleanup risks. S16 must determine provider applicability and complete ownership before calling those source paths bugs or substituting ordinary dialog support.
+
+The [WOWFAX shared driver review](host-ch-scope/wowfax-shared-driver-owner-review.md) retains distinct client/server FAXDEV ownership, named-mapping/view offsets, callback identity and teardown in S16; generic spooler support is not evidence that this provider is equivalent or active.
 
 | Stage | Cohort and evidence | Established result / remaining work |
 | --- | --- | --- |

@@ -1,0 +1,9 @@
+{
+  "object_sha256": "BC2508AC6DE405587DAEB38E6903202B1149B5ED5DA09ABE44542C2237177A9E",
+  "source_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+  "fixture_sha256": "1434103BB0EC6FC107BD21F599E7652AB18B6855B0CC5EB86FD33A64EFE572FA",
+  "exe_sha256": "C2CEEBBD9F690992E39F33BBDAA4A556B900D109BE02C5ADD739A45688182B58",
+  "output": "PASS reset order, zero write and failure termination dispatch (mocked host/guest boundaries)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}

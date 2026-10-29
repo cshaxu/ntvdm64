@@ -1,0 +1,14 @@
+# Original video J-code declarations and selected NT C-VID
+
+Read-only review of four pending `softpc.new/base/inc` files, after checking the existing `../host-ch-scope/build-id-generated-allocation-review.md`. All four local files match their OpenNT counterparts. No test, guest, product or shared-ledger change was made.
+
+The original `base/cvidc/sources` is an NT `Cvidc` library target and lists `SINIT011–013`, `SEVID000–030`, `ev_glue.c`, `j_c_lang.c`, `accessfn.c` and `vglfunc.c`. Generated `base/cvidc/sevid*.c` and `ev_glue.c` include a same-named `j_c_lang.h`. The captured selected x86 dependency entries resolve these production translation units to **`base/cvidc/j_c_lang.h`**, not the physically different `base/inc/j_c_lang.h`; the latter has been seen in a test fixture only. This matters because the two header files have different bytes and must not be merged by basename.
+
+| Pending physical header | Original declaration / source evidence | Bounded classification |
+|---|---|---|
+| `base/inc/j_c_lang.h` | J-code-generated C register/prototype interface. Original `base/cpu/src/evid/ev_glue.c` includes the name; the selected C-VID sibling resolves its own local header. The historic `base/cpu/src/evid` target and its full include resolution have not been established. | **Pending** that alternate original target; for the captured NT worker this exact input is not established. Selected C-VID generated functions remain separate partial owners. |
+| `base/inc/jcgensyn.h` | Parser token constants for a J-code generation syntax. No exact source include or selected worker dependency found in the bounded tree. | **Pending** original generator tool/target and regeneration obligation; no inference that generated production C lacks a valid source. |
+| `base/inc/jformate.h` | Describes host binary format emitted by `jcc`; no current exact direct consumer or captured worker dependency found. | **Pending** original binary-format producer/loader and supported profile. The linked C-VID output is not proof this binary loading contract is retained. |
+| `base/inc/loader.h` | Interface for a dynamic J-code-derived binary loader; no exact current direct consumer or captured worker dependency found. | **Pending** original loader target, input format, failure and lifecycle, independent of the normal Windows DLL loader. |
+
+Current original C-VID sources and selected object dependency establish a real NT video route, not that the four pending physical headers are all used or that every generated drawing mode works. The x86 C-VID/CCPU vector-layout and behavior obligations remain S11/S13 (`../host-ch-scope/ccpu-evidgen-review.md`). A source comment or empty exact dependency is not sufficient to settle alternate original NT generation targets; do not globally exclude them without a target/scope decision. No shared ledger changed.
