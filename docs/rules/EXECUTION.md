@@ -296,6 +296,15 @@ the drivers, but remain outside the ten-host-image manifest. The shared
 SHA-256 alongside the guest-driver entries. Consumers must copy the declared
 release artifact rather than a disposable build output.
 
+Owner clarification dated 2026-10-28: every `src/addon` build product,
+including guest drivers and host-side utilities, is released only under
+`assets/release/` with its add-on manifest. Do not deploy add-on products to
+`O:/winnt` or include them in the ten-component system32 synchronization.
+Setup and other authorized consumers obtain them from `assets/release/` and
+may copy them into their own explicitly selected target or test staging.
+Historical records of deployment to `O:/winnt/system32` are superseded by
+this rule; retain historical test evidence separately from runtime releases.
+
 Owner-admitted T423 S12 will add ntvwm.exe to the seven-file package described
 below. Starting with S12 NTVWM production delivery, require one coherent eight-file set;
 all prior regression, recovery and publication gates remain binding. The new
