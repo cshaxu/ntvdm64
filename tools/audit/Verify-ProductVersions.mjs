@@ -9,7 +9,8 @@ const logs=path.resolve(process.env.OPENNT_VERSION_TEST_LOGS || path.join(build,
 const runtime=process.env.OPENNT_VERSION_TEST_RUNTIME;
 if(!runtime)throw Error('OPENNT_VERSION_TEST_RUNTIME must name the deployed runtime directory');
 const runtimeBinary=fs.existsSync(path.join(runtime,'system32','run16.exe'))?path.join(runtime,'system32'):runtime;
-const manifest=JSON.parse(fs.readFileSync(path.join(runtime,'product-system32-manifest.json'),'utf8'));
+const manifestText=fs.readFileSync(path.join(runtime,'product-system32-manifest.json'),'utf8');
+const manifest=JSON.parse(manifestText.replace(/^\uFEFF/,''));
 const packageIds=[...new Set(manifest.map(row=>row.PackageId))];
 assert.equal(packageIds.length,1,'Runtime package must have one identity');
 const packageId=packageIds[0];

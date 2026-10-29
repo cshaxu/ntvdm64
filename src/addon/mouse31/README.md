@@ -14,9 +14,10 @@ fresh absolute BuildRoot below build/ and an explicit Python interpreter.
   Windows draws the Windows arrow; this driver does not draw a DOS pointer.
 - Win3.1 Inquire/Enable/Disable use protected-mode selectors. Do not treat a
   selector as a real segment or write mutable state through a code selector.
-- Use the existing DPMI simulated real interrupt and callback services for
-  raw INT33 calls and a protected callback. Save/restore the prior real-mode
-  callback with INT33 exchange; balance only the bridge's own pointer hide.
+- Use DPMI simulated real interrupts for raw INT33 queries and preservation of
+  the prior real-mode callback. Register the Windows event callback through
+  protected-mode INT33 function 0Ch, allowing the DPMI or Windows VMD mouse
+  reflector to own mode conversion. Balance only the bridge's own pointer hide.
 - Real-mode ES values are numeric SI/packet fields. Never load a returned
   real segment into protected ES. Only the protected register-image pointer
   uses ES; a real DPMI test caught and verified this correction.
@@ -24,8 +25,10 @@ fresh absolute BuildRoot below build/ and an explicit Python interpreter.
   leaves exchange translation unimplemented. The retail DOSX/VMM contract
   still requires actual mode-specific runtime tests.
 - Keep callbacks resident/fixed, preserve register/stack return semantics,
-  restore the previous provider callback before freeing its DPMI thunk, and
-  handle repeated Enable/Disable without accumulating resources.
+  unregister the protected callback and restore the saved real-mode provider
+  callback during cleanup. The writable selector alias is temporary and its
+  failed release remains retryable. Repeated Enable/Disable and restoration
+  of a pre-existing protected callback remain explicit verification boundaries.
 - Reuse the independently authored Win101 normalization/button principles,
   not its NE version or real-mode callback address. Verify Win3.1 event masks
   and actual USER consumption before claiming clicks work.

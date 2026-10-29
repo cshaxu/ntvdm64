@@ -16,6 +16,12 @@ $include=(Split-Path $source).Replace('\','/')+'/'
 & $assembler -f bin "-I$include" "$PSScriptRoot/win31_mouse_driver_guest.asm" `
     -o "$root/M31TEST.COM" -l "$root/mock.lst"
 if($LASTEXITCODE){throw 'Mock guest assembly failed'}
+& $assembler -f bin '-DMOUSE31_TEST_REENTRY' "-I$include" "$PSScriptRoot/win31_mouse_driver_guest.asm" `
+    -o "$root/M31REENT.COM" -l "$root/reentry.lst"
+if($LASTEXITCODE){throw 'Reentrant mock guest assembly failed'}
+& $assembler -f bin '-DMOUSE31_TEST_PRIOR_PM' "-I$include" "$PSScriptRoot/win31_mouse_driver_guest.asm" `
+    -o "$root/M31PM.COM" -l "$root/prior-pm.lst"
+if($LASTEXITCODE){throw 'Prior protected callback guest assembly failed'}
 & $assembler -f bin "-I$include" "$PSScriptRoot/win31_mouse_driver_real.asm" `
     -o "$root/M31REAL.COM" -l "$root/real.lst"
 if($LASTEXITCODE){throw 'Real protected-mode guest assembly failed'}
@@ -25,6 +31,30 @@ if($LASTEXITCODE){throw 'Callback context guest assembly failed'}
 & $assembler -f bin "$PSScriptRoot/win31_mouse_windows_probe.asm" `
     -o "$root/M31WIN.EXE" -l "$root/windows-probe.lst"
 if($LASTEXITCODE){throw 'Win16 mouse runtime probe assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_mouse_swap_probe.asm" `
+    -o "$root/M31SWAP.EXE" -l "$root/swap-probe.lst"
+if($LASTEXITCODE){throw 'Win16 mouse exchange probe assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_mouse_dosalloc_probe.asm" `
+    -o "$root/M31ALOC.EXE" -l "$root/dosalloc-probe.lst"
+if($LASTEXITCODE){throw 'Win16 DOS allocation probe assembly failed'}
+& $assembler -f bin '-DMOUSE31_VM_CHILD' "$PSScriptRoot/win31_mouse_dosalloc_probe.asm" `
+    -o "$root/M31VM.EXE" -l "$root/vm-visibility-probe.lst"
+if($LASTEXITCODE){throw 'Win16 VM-visibility parent assembly failed'}
+& $assembler -f bin '-DMOUSE31_VM_CHILD' '-DMOUSE31_VM_LAUNCH_CONTROL' "$PSScriptRoot/win31_mouse_dosalloc_probe.asm" `
+    -o "$root/M31VMCTL.EXE" -l "$root/vm-launch-control.lst"
+if($LASTEXITCODE){throw 'Win16 VM-launch control assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_mouse_vm_child.asm" `
+    -o "$root/M31CHLD.COM" -l "$root/vm-visibility-child.lst"
+if($LASTEXITCODE){throw 'DOS VM-visibility child assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_vxd_trace_probe.asm" `
+    -o "$root/M31VXD.COM" -l "$root/vxd-trace-probe.lst"
+if($LASTEXITCODE){throw 'VxD trace transport probe assembly failed'}
+& $assembler -f bin "$PSScriptRoot/win31_mouse_prior_owner_probe.asm" `
+    -o "$root/M31OWNR.EXE" -l "$root/prior-owner.lst"
+if($LASTEXITCODE){throw 'Win16 prior mouse owner probe assembly failed'}
+& $assembler -f bin '-DMOUSE31_OWNER_CONTROL' "$PSScriptRoot/win31_mouse_prior_owner_probe.asm" `
+    -o "$root/M31CTRL.EXE" -l "$root/prior-owner-control.lst"
+if($LASTEXITCODE){throw 'Win16 prior mouse owner control assembly failed'}
 & $pythonPath "$PSScriptRoot/audit-win31-mouse.py" --driver "$root/MOUSE31.DRV" --output "$root/contract.json" | Out-Null
 if($LASTEXITCODE){throw 'NE audit failed'}
 $audit=Get-Content "$root/contract.json" -Raw|ConvertFrom-Json

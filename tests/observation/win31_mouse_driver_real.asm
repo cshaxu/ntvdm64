@@ -49,52 +49,51 @@ main:
     check 2
     cmp word [capability+2],2
     check 3
+    mov dx,enabling_message
+    mov ah,9
+    int 0x21
     push cs
     push word windows_event
     push cs
     call enable
     cmp ax,1
     check 4
-    cmp byte [allocated],1
+    mov dx,enabled_message
+    mov ah,9
+    int 0x21
+    cmp byte [pm_installed],1
     check 5
     cmp byte [installed],1
     check 6
     cmp byte [hide_owned],1
     check 7
-    mov ax,[real_callback]
-    mov [invoke_regs+42],ax
-    mov ax,[real_callback+2]
-    mov [invoke_regs+44],ax
-    mov word [invoke_regs+28],1
-    mov word [invoke_regs+24],320
-    mov word [invoke_regs+20],240
-    mov word [invoke_regs+32],0x0200
-    push ds
-    pop es
-    mov di,invoke_regs
-    xor cx,cx
-    xor bx,bx
-    mov ax,0x0301               ; invoke actual allocated real->PM callback
-    int 0x31
-    jnc .called
-    mov byte [failed_case],8
-    jmp failure
-.called:
+    ; Exercise the protected callback ABI directly. Actual event delivery
+    ; through the provider is covered by the Windows interaction test.
+    mov ax,1
+    mov cx,320
+    mov dx,240
+    push cs
+    call callback
+    cmp byte [pm_installed],1
+    check 8
     cmp word [event_count],1
     check 9
     cmp word [event_ax],0x8001
     check 10
     cmp word [event_dx],2
     check 11
+    mov dx,disabling_message
+    mov ah,9
+    int 0x21
     push cs
     call disable
-    cmp byte [allocated],0
+    cmp byte [pm_installed],0
     check 12
     cmp byte [installed],0
     check 13
     cmp byte [hide_owned],0
     check 14
-    ; Reentry after complete cleanup must allocate/release correctly again.
+    ; Reentry after complete cleanup must register and unregister again.
     push cs
     push word windows_event
     push cs
@@ -104,7 +103,7 @@ main:
     push word 1
     push cs
     call wep
-    cmp byte [allocated],0
+    cmp byte [pm_installed],0
     check 16
     mov dx,pass_message
     mov ah,9
@@ -139,6 +138,9 @@ event_count: dw 0
 event_ax: dw 0
 event_dx: dw 0
 entered_message: db 'M31PM:ENTER',13,10,'$'
+enabling_message: db 'M31PM:ENABLE',13,10,'$'
+enabled_message: db 'M31PM:ENABLED',13,10,'$'
+disabling_message: db 'M31PM:DISABLE',13,10,'$'
 pass_message: db 'M31PM:PASS 16 checks',13,10,'$'
 fail_message: db 'M31PM:FAIL (exit code is case)',13,10,'$'
 unavailable_message: db 'M31PM:DPMI-UNAVAILABLE',13,10,'$'

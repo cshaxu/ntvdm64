@@ -18,7 +18,8 @@ param(
     [string]$Node='node',
     [string[]]$WowBaselineRoots,
     [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
-    [switch]$FullDeadlines
+    [switch]$FullDeadlines,
+    [switch]$WindowOwnedConsole
 )
 $ErrorActionPreference='Stop'
 $total=[Diagnostics.Stopwatch]::StartNew()
@@ -109,7 +110,7 @@ $null=New-Item -ItemType Directory -Path $log
 $manifest|ConvertTo-Json|Set-Content "$log/runtime-manifest.json"
 $timings=[Collections.Generic.List[object]]::new()
 $preparationMs=$total.ElapsedMilliseconds
-$variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_SHORT_HISTORY','TEST_RUNTIME_ROOT',
+$variables=@('MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_CAF_OWNED_CONSOLE','MVDM_OBSERVER_CAF_OUTER_COMMAND','MVDM_OBSERVER_SHORT_HISTORY','TEST_RUNTIME_ROOT',
     'MVDM_TEST_DIRECT_CMD','MVDM_TEST_S34_REPEAT_DIR','OPENNT_BROKER_PRODUCT_BUILD',
     'OPENNT_VERSION_TEST_BUILD','OPENNT_VERSION_TEST_LOGS','OPENNT_VERSION_TEST_RUNTIME',
     'MVDM_OBSERVER_MILESTONE_INPUT','PATH')
@@ -200,9 +201,23 @@ try {
                 if($mode -eq 'Window'){$env:MVDM_OBSERVER_WINDOW_INPUT='1'}else{Remove-Item Env:MVDM_OBSERVER_WINDOW_INPUT -ErrorAction SilentlyContinue}
                 Invoke-Gate "$mode-17" {
                     try {
+                        if($mode -eq 'Window' -and $WindowOwnedConsole){
+                            Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP -ErrorAction SilentlyContinue
+                            $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE='1'
+                            # The observer uses this exact launch-image path
+                            # to find only this isolated package's NTCON.
+                            $env:MVDM_OBSERVER_CAF_OUTER_COMMAND='"'+(Join-Path $runtimeBinary 'run16.exe')+'"'
+                        }
                         if($InputPolicy -eq 'Observed'){$env:MVDM_OBSERVER_MILESTONE_INPUT='1'}
                         & "$repo/tools/audit/Verify-CommandExitStatus.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogRoot $log -LogPrefix "$mode-17" -GuestFixturePath $GuestFixture -OrdinaryFrontend
-                    }finally{Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue}
+                    }finally{
+                        Remove-Item Env:MVDM_OBSERVER_MILESTONE_INPUT -ErrorAction SilentlyContinue
+                        if($mode -eq 'Window' -and $WindowOwnedConsole){
+                            Remove-Item Env:MVDM_OBSERVER_CAF_OWNED_CONSOLE -ErrorAction SilentlyContinue
+                            Remove-Item Env:MVDM_OBSERVER_CAF_OUTER_COMMAND -ErrorAction SilentlyContinue
+                            $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+                        }
+                    }
                 }
             }
         }
@@ -285,7 +300,7 @@ try {
             Invoke-Gate 'session-isolation' {& "$repo/tests/observation/verify-ntvwm-management.ps1" -Observer $observerPath -MonitorRpc (Join-Path $runtimeBinary 'monitor-rpc-test.exe') -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix isolation -LogRoot $log -TwoSessions}
             Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
-        Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window}
+        Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window -WindowOwnedConsole:$WindowOwnedConsole}
     }
     foreach($row in $manifest){if((Get-IsolatedFileSha256 (Join-Path $runtimeBinary $row.Name)) -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
     "PASS $Suite selected gates; identical $($packageNames.Count)-file package"
@@ -300,7 +315,8 @@ try {
         }
         $total.Stop()
         [pscustomobject]@{Suite=$Suite;ElapsedMs=$total.ElapsedMilliseconds;
-            InputPolicy=$InputPolicy;PreparationMs=$preparationMs;Gates=$timings.ToArray()}|
+            InputPolicy=$InputPolicy;WindowOwnedConsole=[bool]$WindowOwnedConsole;
+            PreparationMs=$preparationMs;Gates=$timings.ToArray()}|
             ConvertTo-Json -Depth 4|Set-Content "$log/timings.json"
         if($runtime){Remove-PhysicalRuntimeStage $runtime}
     }

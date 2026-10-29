@@ -23,6 +23,8 @@ public static class WindowInspector {
  [DllImport("user32.dll")] static extern uint GetWindowThreadProcessId(IntPtr w,out uint p);
  [DllImport("user32.dll",CharSet=CharSet.Unicode)] static extern int GetWindowText(IntPtr w,StringBuilder s,int n);
  [DllImport("user32.dll")] static extern bool IsWindowVisible(IntPtr w);
+ [DllImport("user32.dll")] static extern bool IsWindowEnabled(IntPtr w);
+ [DllImport("user32.dll")] static extern bool IsWindow(IntPtr w);
  static string Text(IntPtr w){var s=new StringBuilder(2048);GetWindowText(w,s,s.Capacity);return s.ToString();}
  public static string Read(int[] ids,string desktop,bool ignoreSerial,bool ignoreDisk,bool ignoreIllegalOpcode){var result=new StringBuilder();
   Visit visit=(w,p)=>{uint pid;GetWindowThreadProcessId(w,out pid);if(Array.IndexOf(ids,(int)pid)<0)return true;
@@ -34,7 +36,11 @@ public static class WindowInspector {
     if(text.Contains("The NTVDM CPU has encountered an illegal instruction."))illegalOpcode=true;
     return true;};EnumChildWindows(w,child,IntPtr.Zero);
    if((ignoreSerial && serial) || (ignoreDisk && disk) || (ignoreIllegalOpcode && illegalOpcode)){IntPtr button=GetDlgItem(w,102),reply;
-    if(button!=IntPtr.Zero && Text(button)=="&Ignore"){string action=serial ? "serial-ignore=" : (disk ? "denied-disk-ignore=" : "illegal-opcode-ignore=");result.AppendLine(action+(SendMessageTimeout(button,0xF5,IntPtr.Zero,IntPtr.Zero,2,1000,out reply)!=IntPtr.Zero));}}
+    if(button!=IntPtr.Zero && Text(button)=="&Ignore"){string action=serial ? "serial-ignore=" : (disk ? "denied-disk-ignore=" : "illegal-opcode-ignore=");
+     bool visible=IsWindowVisible(button),enabled=IsWindowEnabled(button);
+     bool sent=SendMessageTimeout(button,0xF5,IntPtr.Zero,IntPtr.Zero,2,1000,out reply)!=IntPtr.Zero;
+     result.AppendLine(action+sent);
+     result.AppendLine("ignore-diagnostic button-visible="+visible+" button-enabled="+enabled+" dialog-exists="+IsWindow(w)+" dialog-visible="+IsWindowVisible(w));}}
    return true;};
   if(String.IsNullOrEmpty(desktop))EnumWindows(visit,IntPtr.Zero);
   else {IntPtr d=OpenDesktop(desktop,0,false,0x41);if(d==IntPtr.Zero)throw new System.ComponentModel.Win32Exception();

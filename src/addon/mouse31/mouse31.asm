@@ -56,11 +56,12 @@ code equ 0
 %define EVENT (event_proc-data)
 %define OLD (old_proc-data)
 %define MASK (old_mask-data)
-%define THUNK (real_callback-data)
-%define ALLOCATED (allocated-data)
 %define INSTALLED (installed-data)
 %define ENABLED (enabled-data)
 %define HIDDEN (hide_owned-data)
+%define PM_INSTALLED (pm_installed-data)
+%define CODE_ALIAS (code_alias-data)
+%define PM_ENTRY (pm_entry-data)
 
 %macro win_prolog 0
     mov ax,ds
@@ -159,26 +160,6 @@ inquire:
     mov ax,14
     win_epilog 4
 
-allocate_callback:
-    cmp byte [ALLOCATED],0
-    jne .ready
-    push ds
-    mov ax,ds
-    mov es,ax
-    mov di,callback_regs-data
-    push cs
-    pop ds
-    mov si,callback-code
-    mov ax,0x0303
-    int 0x31
-    pop ds
-    jc .done
-    mov [THUNK],dx
-    mov [THUNK+2],cx
-    mov byte [ALLOCATED],1
-.ready: clc
-.done: ret
-
 enable:
     win_prolog
     les di,[bp+6]
@@ -191,8 +172,6 @@ enable:
     call provider_query
     cmp byte [info-data],0
     je .failed
-    call allocate_callback
-    jc .failed
     mov ax,0x0014
     xor cx,cx
     xor dx,dx
@@ -209,13 +188,31 @@ enable:
     call mouse_call
     jc .rollback
     mov byte [HIDDEN],1
+    ; A protected INT 33 callback must use the host's mouse reflector (or
+    ; the enhanced-mode virtual mouse driver), rather than install a DPMI
+    ; real-mode callback into a different virtual machine's mouse state.
+    ; Callbacks arrive with the interrupted task's DS. Patch our fixed code
+    ; through a temporary writable DPMI alias to recover the driver's DS.
+    push cs
+    pop bx
+    mov ax,0x000a
+    int 0x31
+    jc .rollback
+    mov [CODE_ALIAS],ax
+    mov es,ax
+    mov [es:callback_ds-code],ds
+    mov bx,ax
+    mov ax,0x0001
+    int 0x31
+    jc .rollback
+    mov word [CODE_ALIAS],0
     mov byte [ENABLED],1
+    mov [PM_ENTRY+2],cs
+    les dx,[PM_ENTRY]
     mov ax,0x000c
     mov cx,0x001f
-    mov dx,[THUNK]
-    mov si,[THUNK+2]
-    call mouse_call
-    jc .rollback
+    int 0x33
+    mov byte [PM_INSTALLED],1
 .success:
     mov ax,1
     jmp .return
@@ -226,10 +223,18 @@ enable:
 .return:
     win_epilog 4
 
-; Release in dependency order. Failure retains the live callback allocation,
-; never frees a thunk while the provider may still reference it.
+; Stop the protected callback before restoring the previous real-mode handler.
+; An incomplete real-mode restore or alias release remains retryable.
 cleanup:
     mov byte [ENABLED],0
+    cmp byte [PM_INSTALLED],0
+    je .restore
+    les dx,[PM_ENTRY]
+    xor cx,cx
+    mov ax,0x000c
+    int 0x33
+    mov byte [PM_INSTALLED],0
+.restore:
     cmp byte [INSTALLED],0
     je .show
     mov ax,0x000c
@@ -241,21 +246,20 @@ cleanup:
     mov byte [INSTALLED],0
 .show:
     cmp byte [HIDDEN],0
-    je .free
+    je .free_alias
     mov ax,1
     xor si,si
     call mouse_call
     jc .done
     mov byte [HIDDEN],0
-.free:
-    cmp byte [ALLOCATED],0
+.free_alias:
+    mov bx,[CODE_ALIAS]
+    test bx,bx
     je .ready
-    mov ax,0x0304
-    mov cx,[THUNK+2]
-    mov dx,[THUNK]
+    mov ax,0x0001
     int 0x31
     jc .done
-    mov byte [ALLOCATED],0
+    mov word [CODE_ALIAS],0
 .ready: clc
 .done: ret
 
@@ -275,22 +279,35 @@ wep:
     mov ax,1
     win_epilog 2
 
-; DPMI0303 enters with DS:SI -> real stack and ES:DI -> register image.
-; The underlying INT33 continuation is RETF, so consume its two return words
-; in the real register image before returning to the DPMI host with IRET.
+; Protected INT 33 callback: registers are the original mouse event and the
+; caller expects a far return. Preserve the interrupted task's full context.
 callback:
-    ; A 16-bit USER callback may use full 386 registers asynchronously.
     pushfd
     pushad
     push ds
     push es
-    mov ax,[ds:si]
-    mov [es:di+42],ax
-    mov ax,[ds:si+2]
-    mov [es:di+44],ax
-    add word [es:di+46],4
-    mov ax,es
+    push ax
+    db 0xb8                     ; mov ax, immediate driver data selector
+callback_ds: dw 0
     mov ds,ax
+    mov es,ax
+    pop ax
+    ; The callback may interrupt an in-flight DPMI mouse call. Preserve its
+    ; register image on this invocation's stack, including for nested events.
+    mov bp,ax
+    mov bx,cx
+    mov si,IO+48
+    mov cx,25
+.save_image:
+    push word [si]
+    sub si,2
+    loop .save_image
+    mov ax,bp
+    mov cx,bx
+    mov [IO+28],ax
+    mov [IO+24],cx
+    mov [IO+20],dx
+    mov di,IO
     cmp byte [ENABLED],0
     je .return
     mov bp,[di+28]
@@ -330,11 +347,17 @@ callback:
     pop dx
     pop cx
 .return:
+    mov si,IO
+    mov cx,25
+.restore_image:
+    pop word [si]
+    add si,2
+    loop .restore_image
     pop es
     pop ds
     popad
     popfd
-    iret
+    retf
 
 ; Same authored endpoint rule as Win101; not copied original guest code.
 normalize:
@@ -366,12 +389,12 @@ dw 2,50,0,0,0,0
 event_proc: dw 0,0
 old_proc: dw 0,0
 old_mask: dw 0
-real_callback: dw 0,0
-allocated: db 0
+code_alias: dw 0
+pm_installed: db 0
 installed: db 0
 enabled: db 0
 hide_owned: db 0
+pm_entry: dw callback-code,0
 io_regs: times 50 db 0
-callback_regs: times 50 db 0
 data_end:
 image_end:

@@ -14,8 +14,13 @@ param(
     [switch]$OrdinaryFrontend
 )
 $ErrorActionPreference = 'Stop'
-if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1') {
-    throw 'Window input tests require MVDM_OBSERVER_PRIVATE_DESKTOP=1; no product process was started.'
+if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1' -and
+    $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE -ne '1') {
+    throw 'Window input tests require a private desktop or an explicitly owned Console; no product process was started.'
+}
+if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1' -and
+    !$env:MVDM_OBSERVER_CAF_OUTER_COMMAND) {
+    throw 'Owned-Console Window input requires the isolated launcher identity; no product process was started.'
 }
 . (Join-Path $PSScriptRoot 'Merge-ConsoleTextSnapshots.ps1')
 . (Join-Path $PSScriptRoot '../../tests/observation/typeahead_witness.ps1')
@@ -57,6 +62,10 @@ $generatedFixtures = @(
 )
 $productNames = @('run16.exe','ntvdm.exe','ntsrv.exe','ntcon.exe')
 $binaryRoot=Get-PackageBinaryRoot $PackageRoot
+if ($env:MVDM_OBSERVER_WINDOW_INPUT -and $env:MVDM_OBSERVER_PRIVATE_DESKTOP -ne '1' -and
+    $env:MVDM_OBSERVER_CAF_OUTER_COMMAND -ne ('"'+(Join-Path $binaryRoot 'run16.exe')+'"')) {
+    throw 'Owned-Console launcher identity does not match the selected package.'
+}
 # Retain compatibility with sealed pre-NTVWM evidence packages.
 if(Test-Path -LiteralPath (Join-Path $binaryRoot 'ntvwm.exe')){$productNames+='ntvwm.exe'}
 $productPaths = $productNames | ForEach-Object { Join-Path $binaryRoot $_ }

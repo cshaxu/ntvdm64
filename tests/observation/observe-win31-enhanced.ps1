@@ -108,7 +108,22 @@ $allowIllegalOpcode=[bool]$IgnoreIllegalOpcodeWarning
 . "$PSScriptRoot/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $root
 $savedDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
 $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
-$pins=@();$controller=$null
+$pins=@();$pinImages=@{};$recordedExits=@{};$controller=$null
+function RecordPinnedExits {
+    foreach($item in $pins) {
+        if($recordedExits.ContainsKey($item.Id)){continue}
+        try {
+            if(!$item.HasExited){continue}
+            $code=[BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$item.ExitCode),0)
+            [IO.File]::AppendAllText("$root/process-exits.txt",
+                ("pid={0} image={1} exit=0x{2:X8}`r`n" -f $item.Id,$pinImages[$item.Id],$code))
+            $recordedExits[$item.Id]=$true
+        } catch [InvalidOperationException] {
+            [IO.File]::AppendAllText("$root/probe-errors.txt", "process exit unavailable pid=$($item.Id)`r`n")
+            $recordedExits[$item.Id]=$true
+        }
+    }
+}
 try {
     $report=Join-Path $root 'observation.txt'
     $observerArguments = @("$binary\run16.exe", $PackageRoot, $report, $Pif,
@@ -130,6 +145,9 @@ try {
                             $p=[Diagnostics.Process]::GetProcessById($row.ProcessId);$null=$p.Handle
                             if(!$p.HasExited -and $p.MainModule.FileName -eq $row.ExecutablePath){
                                 $pins+=$p
+                                $pinImages[$p.Id]=$row.ExecutablePath
+                                [IO.File]::AppendAllText("$root/process-pins.txt",
+                                    ("pid={0} image={1} base=0x{2:X} size=0x{3:X}`r`n" -f $p.Id,$row.ExecutablePath,$p.MainModule.BaseAddress.ToInt64(),$p.MainModule.ModuleMemorySize))
                                 if($EarlyGuestSnapshot -and $p.MainModule.FileName -eq "$binary\ntvdm.exe"){$nextSnapshot=[DateTime]::UtcNow}
                             }else{$p.Dispose()}
                         } catch [ArgumentException] {}
@@ -138,6 +156,7 @@ try {
             }
             $nextDiscovery=[DateTime]::UtcNow.AddMilliseconds($(if($EarlyGuestSnapshot){100}else{1000}))
         }
+        RecordPinnedExits
         try {$text=[WindowInspector]::Read([int[]]$known,$desktop,$true,$allowDeniedDisk,$allowIllegalOpcode)}catch {
             [IO.File]::AppendAllText("$root/probe-errors.txt",[DateTime]::UtcNow.ToString('o')+' '+$_.Exception.Message+"`r`n")
             continue
@@ -225,6 +244,7 @@ try {
             $sample++;$nextSnapshot=[DateTime]::UtcNow.AddSeconds(5)
         }
     }
+    RecordPinnedExits
     $controller.WaitForExit()
     if($RetainAfterControllerExitMs -gt 0) {
         [IO.File]::WriteAllText("$root/controller-retention.txt",

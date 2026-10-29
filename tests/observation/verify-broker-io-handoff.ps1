@@ -3,7 +3,8 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$ReportPrefix,
     [ValidateSet('native','nested-console','nested-window')][string]$Case='nested-window',
-    [ValidateSet('I386','AMD64')][string]$NativeMachine='I386'
+    [ValidateSet('I386','AMD64')][string]$NativeMachine='I386',
+    [switch]$WindowOwnedConsole
 )
 $ErrorActionPreference='Stop'
 $runtime=(Resolve-Path $RuntimeRoot).Path
@@ -42,7 +43,7 @@ $identity=@($names | ForEach-Object {
 })
 $identity | ConvertTo-Json | Set-Content "$prefix.package.json" -Encoding UTF8
 $environmentNames='MVDM_OBSERVER_PRIVATE_DESKTOP','MVDM_OBSERVER_WINDOW_INPUT','MVDM_OBSERVER_MILESTONE_INPUT',
-    'MVDM_OBSERVER_SHORT_HISTORY',
+    'MVDM_OBSERVER_SHORT_HISTORY','MVDM_OBSERVER_CAF_OWNED_CONSOLE','MVDM_OBSERVER_CAF_OUTER_COMMAND',
     'NTVDM_BOOTSTRAP_TRACE','NTVWM_GEOMETRY_ERROR_LOG'
 $saved=@{}
 foreach($name in $environmentNames) {$saved[$name]=[Environment]::GetEnvironmentVariable($name,'Process')}
@@ -56,6 +57,11 @@ try {
     $launchBinary=$binary
     $observerLaunch=$observerPath
     $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    if($Case -eq 'nested-window' -and $WindowOwnedConsole){
+        Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP -ErrorAction SilentlyContinue
+        $env:MVDM_OBSERVER_CAF_OWNED_CONSOLE='1'
+        $env:MVDM_OBSERVER_CAF_OUTER_COMMAND='"'+(Join-Path $launchBinary 'run16.exe')+'"'
+    }
     # Use the observer's checked disposable 80-column Console fixture, like
     # control regression. The host's default private-desktop geometry is not
     # a stable capability profile; its retained failures remain separate.
@@ -76,9 +82,24 @@ try {
         Observer=$observerLaunch;NativeMachine=$NativeMachine;Case=$Case;Input=$input;
         ShortHistory=$env:MVDM_OBSERVER_SHORT_HISTORY} |
         ConvertTo-Json | Set-Content "$prefix.launch.json" -Encoding UTF8
-    & $observerLaunch (Join-Path $launchBinary 'run16.exe') $launchBinary "$prefix.observer" $cmd /d `
-        --observe-console-input-text $input --observe-console-line-delay-ms 1800 `
-        --observation-timeout-ms 40000
+    # The owned-Console variant must start the observer with its own Console,
+    # matching the command matrix instead of inheriting the runner's buffer.
+    if($Case -eq 'nested-window' -and $WindowOwnedConsole){
+        $arguments=@((Join-Path $launchBinary 'run16.exe'),$launchBinary,"$prefix.observer",$cmd,'/d',
+            '--observe-console-input-text',('"'+$input+'"'),'--observe-console-line-delay-ms','1800',
+            '--observation-timeout-ms','40000')
+        $observerProcess=Start-Process -FilePath $observerLaunch -ArgumentList $arguments `
+            -WorkingDirectory $launchBinary -WindowStyle Hidden -PassThru
+        $observerProcess.WaitForExit();$observerProcess.WaitForExit()
+        $observerExit=$observerProcess.ExitCode;$observerProcess.Dispose()
+    }else{
+        & $observerLaunch (Join-Path $launchBinary 'run16.exe') $launchBinary "$prefix.observer" $cmd /d `
+            --observe-console-input-text $input --observe-console-line-delay-ms 1800 `
+            --observation-timeout-ms 40000
+        $observerExit=$LASTEXITCODE
+    }
+    [IO.File]::WriteAllText("$prefix.observer-exit.txt",[string]$observerExit)
+    if($observerExit){throw "Observer failed with exit $observerExit; inspect $prefix.observer"}
     if(!(Test-Path "$prefix.observer")){throw 'Observer did not write a report'}
     $report=Get-Content "$prefix.observer" -Raw
     if($report -notmatch '(?m)^result=exited\r?$' -or

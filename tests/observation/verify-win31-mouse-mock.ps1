@@ -18,11 +18,11 @@ Copy-Item -LiteralPath "$driver/M31TEST.COM" -Destination $fixture -Force
 $report=Get-Content "$BuildRoot/observation.txt" -Raw
 $screen=Get-Content "$BuildRoot/observation.txt.console.txt" -Raw
 if($report -notmatch '(?m)^result=exited\r?$' -or $report -notmatch '(?m)^exit=0x00000000\r?$' -or
-   $screen -notmatch 'M31MOCK:PASS 50 checks') {
+   $screen -notmatch 'M31MOCK:PASS 60 checks') {
     throw 'Guest mock requires real completion, zero status and this occurrence of the complete pass marker'
 }
 [ordered]@{role='CCPU40-guest-mock-not-real-DPMI-or-Windows-pass';
-    fixtureSha256=(Get-FileHash $fixture).Hash;checks=50;completed=$true;
+    fixtureSha256=(Get-FileHash $fixture).Hash;checks=60;completed=$true;
     exitCode=0;source='tests/observation/win31_mouse_driver_guest.asm'} |
     ConvertTo-Json|Set-Content "$BuildRoot/mock-verdict.json"
-'PASS real x86 CCPU40 execution of 50 driver/mock assertions, output and completion'
+'PASS real x86 CCPU40 execution of 60 driver/mock assertions, output and completion'

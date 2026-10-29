@@ -17,6 +17,12 @@ Full gates in a fresh-identity isolated copy. Never restore historical package-c
 S10 package-scoped NTSRV isolation and selected probes are recorded in
 [package isolation evidence](../../artifacts/mvdm-audit/package-isolation-review.md).
 Host MVDM C/H reconciliation remains open.
+Owner directs an S10 P to audit, build, test and publish the existing
+independent `src/addon/mouse31` changes before resuming that reconciliation.
+Original guest media and binaries remain unchanged. [Acceptance evidence](../../artifacts/mvdm-audit/mouse31-acceptance-review.md) remains incomplete.
+Mouse31 must not use HMA (owner direction).
+Win386 DOS Prompt and post-return mouse are observed; Full retest uses the
+owner-approved visible desktop with an owned Console for Window input.
 
 The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
@@ -54,7 +60,7 @@ selected Full gates do not prove those historical failures repaired.
 | Identifier Mode | M0 T473 S10, Ordinary Mode; coordinator and three reviewers on disjoint shards. |
 | Admission And Approval | [S9 closure](../history/m0-t473-s9-closure.md); owner-approved [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). |
 | Objective | Reconcile applicable host MVDM C/H files against both audit inventories, product composition and evidence; form an owner-group recovery worklist. Other file types are supporting dependencies, not individually classified scope. |
-| Non-goals | Guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. |
+| Non-goals | Original guest modification/rebuild; private NT4 layouts treated as modern host objects; unapproved semantic concessions. The owner-directed independent mouse31 add-on may be built and tested. |
 | Reference Baseline | [Frozen partition and provisional findings](../../artifacts/mvdm-audit/README.md); r10 product; pinned OpenNT and supplemental source identities. |
 | Files And ABI Surface | Audit ledgers and source/build/link evidence; owner-authorized package/RPC staging and add-on/tool producer/consumer renames. |
 | Applicable Rules | Execution, architecture, coding, documentation and source-policy rules; owner exception permits four disjoint audit roles. |
@@ -225,21 +231,7 @@ acceptance evidence, with a 45-minute phase, 2-GiB size and 10-minute
 no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
 are never task evidence roots.
 
-T457 S1 may use only `build/t457-s1` for disposable source-audit and focused
-fixture evidence. Stable `.ninja` and `.ccache` remain reusable caches and
-are never task evidence roots.
-
-T457 S2 may use only `build/t457-s2` for disposable guest-dialog/input/caret
-evidence. Stable `.ninja` and `.ccache` remain reusable caches and are never
-task evidence roots.
-
-T457 S3 may use only `build/t457-s3` for disposable hook/timer evidence.
-Stable `.ninja` and `.ccache` remain reusable caches and are never task
-evidence roots.
-
-T457 S4 may use only `build/t457-s4` for disposable integrated acceptance
-evidence. Stable `.ninja` and `.ccache` remain reusable caches and are never
-task evidence roots.
+T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
 
 T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
 and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
