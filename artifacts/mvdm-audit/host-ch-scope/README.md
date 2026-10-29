@@ -1,5 +1,14 @@
 # Provisional host C/H scope snapshot
 
+The owner clarified that S10 individually audits host C and H sources. The
+historical all-file ledger, including its 2,822-excluded checkpoint, is a
+reference inventory, not a count of excluded or completed host C/H files.
+Assembly and other file types may be consulted to resolve actual ownership,
+calling conventions or behavior, without a separate per-file audit. Guest-only
+C/H files are outside the host audit; shared headers need consumer evidence.
+Neither a host-file exclusion nor this scope restriction excludes its original
+user-visible capability from the T-wide recovery worklist.
+
 `inventory.csv` enumerates the 1,815 unique `.c`/`.h` paths in the four recorded shard CSVs. `observe.py` computes it from those CSVs, with each source file hashed in `evidence.json`; it reads and hashes the same input bytes, rejects duplicate paths, and does not change the shared ledgers. It reads each current shard decision field rather than stale imported reporting_class. Run from the repository root with `python artifacts/mvdm-audit/host-ch-scope/observe.py`. Two consecutive runs against the same input bytes produced byte-identical outputs. Running it against later shard states intentionally creates a **new** snapshot; compare the input hashes before interpreting counts or overwriting a frozen result. This is not a replacement for the authoritative per-file ledgers.
 
 The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 185 pending, 768 partial, 264 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
@@ -11,6 +20,8 @@ The 72 `tool-or-scaffold-candidate` rows (`vdmutils/`, `vdmexts/`, `bde/`, `ieuv
 Output counts and classifications are evidence-bound snapshots. They are neither final scope approval nor evidence that every listed capability executes or passes tests.
 
 The [FCB open ownership review](dem-fcb-open-ownership-review.md) distinguishes helper and caller handle ownership and records failure-path evidence for S12. The [WOW local parameter retirement review](wow-local-parameter-retirement-review.md) records original mapping ownership and a conditional same-key cross-task boundary; its reachability and contract remain unproved.
+
+The [DEM pipe-status observation](dem-pipe-status-review.md) exercises the selected cached object with controlled pipe and file seams. It identifies a reversed source comment; actual pipe synchronization and guest lifecycle remain unproved.
 
 The [FCB metadata actual-object fixture](dem-fcb-metadata-failure-review.md) executes seven controlled API outcomes, including two ignored failures and a successful size sentinel rejected by the original helper. It does not exercise the complete caller or guest path.
 

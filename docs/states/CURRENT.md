@@ -22,7 +22,9 @@ The [indexed source checkpoints](../../artifacts/mvdm-audit/README.md)
 retain partial integration and concrete per-file obligations. The latest
 [retired-host review](../../artifacts/mvdm-audit/retired-host-role-review.md) resolves four
 predecessors through 15 selected functions and 73 DEM slots.
-The earlier all-file ledger is historical; host C/H-only scope and counts are being reconciled. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
+The historical all-file exclusion totals are not host C/H completion counts.
+Other file types, including host assembly, support source and behavior tracing;
+they are not individually inventoried in S10. The [host](../../artifacts/mvdm-audit/host-tail-role-review.md),
 [header](../../artifacts/mvdm-audit/base-inc-wide-role-review.md), and
 [VDD](../../artifacts/mvdm-audit/vdd-native-role-review.md) reviews retain
 their unresolved behavior and lifecycle obligations for later stages.

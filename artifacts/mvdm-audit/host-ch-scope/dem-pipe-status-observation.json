@@ -1,0 +1,10 @@
+{
+  "object_sha256": "706D3670AF83AA52497EEF567E78927AFA3658546BBA039CFAF7BFE724A31EC6",
+  "source_sha256": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE",
+  "fixture_sha256": "6FB7686155B83879592227166BDE5BBD4DE3D492DCC0EACD7C4B0E9CAF4A4DE7",
+  "exe_sha256": "52268B1703A71D516BD8B5891AAE9AC7B17A8C0FD6C371E370C536DD6FD1E6A1",
+  "rebound_import": "GetFileSize",
+  "output": "PASS pipe data/EOF flags and EOF size projection (mocked command/file boundaries)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}
