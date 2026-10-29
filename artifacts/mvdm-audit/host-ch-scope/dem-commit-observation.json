@@ -1,0 +1,10 @@
+{
+  "object_sha256": "706D3670AF83AA52497EEF567E78927AFA3658546BBA039CFAF7BFE724A31EC6",
+  "source_sha256": "80B66C37FEF7BD46B381218833EA9C5A1731120BBFD6841CAE3AACFB8AFBDADE",
+  "fixture_sha256": "0CF094FDEA791195CCF74BFE26EC8555CAC18F0CE94E971EC797B4A1FA481014",
+  "exe_sha256": "CE65334F004EB36FF88A41FBC1482940B08A3366E3DBE8431A322EFFF253CD4B",
+  "rebound_import": "FlushFileBuffers",
+  "output": "PASS commit handle reconstruction, success and two flush-failure cases (mocked host)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}

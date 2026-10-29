@@ -144,6 +144,8 @@ The [DEM disk-reset selected-object fixture](dem-diskreset-review.md) checks the
 
 The [DEM debug-state fixture](dem-isdebug-review.md) tests the original selected object's controlled native-query and trace-flag branches; actual debugger connection and guest debug execution remain unverified.
 
+The [DEM file-commit fixture](dem-commit-review.md) observes the original handler's unconditional carry clear after controlled flush success or failure. Real durability, native handles and guest dispatch remain unverified.
+
 The [DEM IOCTL query fixture](dem-ioctl-query-review.md) checks all 256 block-device query codes through the selected object with synthetic drive data; actual device operations and guest dispatch remain unverified.
 
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.

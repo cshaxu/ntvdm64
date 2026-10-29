@@ -44,6 +44,8 @@ The [video J-code declaration review](shard-3/video-jcode-declaration-target-rev
 
 The [DEM debug-state witness](host-ch-scope/dem-isdebug-review.md) checks selected-object branches with a mocked native query. S17 retains real debugger connection, error behavior and guest debug execution.
 
+The [DEM file-commit witness](host-ch-scope/dem-commit-review.md) observes carry cleared for controlled flush success and errors, matching the inspected original source. S12 retains native file durability, guest dispatch and handle lifetime; no new divergence or repair is asserted.
+
 The [DEM IOCTL query witness](host-ch-scope/dem-ioctl-query-review.md) checks all 256 block-device query codes with synthetic BDS data. S12/S13 retain actual device operations, guest dispatch and BDS lifetime.
 
 The [C-VID context and flags review](shard-3/cvidc-context-register-flags-review.md) leaves actual generated macro expansion and provider layout in S11; text mentions alone do not establish a runtime access. The [WOWFAX helper and upgrade review](host-ch-scope/wowfax-helper-upgrade-owner-review.md) leaves provider applicability, path-length constraints and actual failure paths in S16.
