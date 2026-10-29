@@ -1,31 +1,24 @@
 # Win95 launch tools
 
-The direct launcher is `APPLY.CMD <installed-Windows-95-directory>`. It works
-only on a user-selected, recoverable installed tree: original disk media is
-never mounted or changed. It refuses pre-existing tool-owned `PATCH` content,
-uses the paired Win95 path migrator, identity-checks the one supported VMM32
-consumer image, and creates `PATCH\\WIN.CMD`/`WIN.PIF` plus private NTVDM
-configuration. The wrapper resolves `run16` through `PATH`; it has no fixed
-repository or media path.
+`APPLY.CMD <installed-Windows-95-directory>` prepares one selected installed
+Windows 95 tree. `UNAPPLY.CMD <same-directory>` reverses only a successful
+preparation. Both entry points are CMD files; this directory contains no
+PowerShell implementation or wrapper.
 
-`UNAPPLY.CMD <directory>` requires the exact journal created by a successful
-Apply. It restores only journaled adjacent backups and removes only known
-tool-owned files. A missing journal is a refusal, never an instruction to
-delete `PATCH` content.
+The apply command consumes released `patch95.exe`, `compat95.sys`, `PIF.EXE`,
+and `MOUSE31.DRV` from `assets/release`. It creates the private NTVDM launch
+profile under `PATCH`, prepares identity-checked `SYSTEM\VMM32.VXD` and
+`SYSTEM\KRNL386.EXE` replacements with adjacent `.W95LAUNCH.BAK` recovery
+copies, and creates a patched `PATCH\SETVER.EXE` from the runtime copy. It creates
+`PATCH\\WIN.CMD` / `PATCH\\WIN.PIF` with the existing PIF tool.
 
-`patch95.exe` and `compat95.sys` are consumed from `assets/release`;
-released `PIF.EXE` and `MOUSE31.DRV` are read from `assets/release`. The tool
-does not install a background service or modify the global NTVDM installation.
+Mouse setup deliberately does not edit `SYSTEM.INI`. The tool reads only the
+`[boot]` `mouse.drv` value, resolves its active driver, and replaces that file
+in place with the released driver. The original is retained beside it as
+`<active-driver>.W95LAUNCH.BAK`. Missing, ambiguous, or non-existent active
+driver settings are refusals rather than a fallback to an unused `MOUSE.DRV`.
 
-The lower-level `Apply-Compat95.ps1` / `Restore-StartMenu.ps1` tools remain
-explicit opt-in installation helpers. They require fresh external backups,
-record installed identities, and refuse restoration over later user changes.
-`Prepare-StartMenu.ps1` produces a build-owned hashed plan; it never edits a
-guest tree. For its MS-DOS Prompt candidate, the plan retains both the original
-Start Menu source identity and the installed `DOSPRMPT.PIF` template identity:
-the latter is the actual candidate-content source and its Win95 memory profile
-must survive the dispatch-field update. The original PIF working-directory
-field is limited to 62 OEM bytes; preparation rejects a longer selected root
-before staging an unusable candidate. Their source and recovery contract are
-covered by component fixture tests, not by a claim of general Win95 runtime
-compatibility.
+The schema 3 journal records the patched VMM, kernel, mouse and SETVER hashes.
+Unapply checks the
+installed mouse and release-owned helper before restoring adjacent backups; it
+does not remove unrelated `PATCH` content or rewrite `SYSTEM.INI`.

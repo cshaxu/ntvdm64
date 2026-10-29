@@ -19,3 +19,13 @@ static const struct Delta { DWORD offset; const char *before,*after; } deltas[]=
 {0x19f16du,"30030000","32030000"},
 {0x1af265u,"30030000","32030000"},
 };
+
+/* IOS runtime exchange and its real-mode driver-segment query. Applied after
+ * the original consumer deltas, so both supported input identities converge. */
+static const struct Delta ios_runtime_deltas[]={
+{0xdbe01u,"669cfa8705b4070000f605ec210000047509870d06080000669dc3870db0070000ebf5","669cfa528b15ec210000c1ea10c1e2048782c1070000878ac50700005a669dc3909090"},
+{0xda31bu,"0c06","0706"},
+{0xe9877u,"b89ae7cd2f","e82e0a9090"},
+{0xea2a8u,"00000000000000000000000000000000000000","b89ae7cd2f66508cc066c1e0106609c66658c3"},
+{0xda13cu,"a80a0000","bb0a0000"},
+};

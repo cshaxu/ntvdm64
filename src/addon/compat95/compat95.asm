@@ -332,8 +332,9 @@ k_old2f dd 0
 k_counter dw 0
 k_calls dw 0
 k_int16:
- pushf
- call far [cs:k_old16]
+ ; Keep the published return hook and subsequent IOS slots at their offsets.
+ jmp k_int16_entry
+ times 6-($-k_int16) db 90h
 k_return_hook:
  pushf
  dec word [cs:k_counter]
@@ -548,6 +549,17 @@ d_int19:
 %include "bootlogo.inc"
 %endif
 %include "root.inc"
+k_int16_entry:
+ ; The DOS7 wrapper saves IF=1 for an IRET-style BIOS return, then enters
+ ; the BIOS with IF=0. A plain PUSHF here saves interrupt-entry IF=0 and
+ ; lets an IRET return clear IF in the caller's polling loop.
+ ; Preserve VKD's exact published return address while using this tail.
+ sti
+ pushf
+ cli
+ push cs
+ push word k_return_hook
+ jmp far [cs:k_old16]
 resident_end:
 ; Discardable initialization. Do not use process-only AH31/AH49 services.
 init:

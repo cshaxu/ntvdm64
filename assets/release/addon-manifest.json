@@ -22,21 +22,21 @@
       "file": "compat95.sys",
       "kind": "dos-character-driver",
       "architecture": "i386-real-mode",
-      "sha256": "50117300CE5CCE2C3C1F8671A109A8A9B9C58FC8B27C1DA48746C05C56AB9E6E",
+      "sha256": "49F9219405E08A4DBB35F69AE7836A27A6FF2477F272CCF29D3DD42CEAC5DABC",
       "source": "src/addon/compat95/compat95.asm",
-      "sourceSha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
+      "sourceSha256": "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11",
       "sources": [
         {
-          "sha256": "0B6690F7D9351B4E5C6B6614C2C47555A98B1486528896E45BFC60B636D8BBF7",
-          "name": "compat95.asm"
+          "name": "compat95.asm",
+          "sha256": "FB198CB2B0D4D74764B22DBB010A7C12577D0F2AC5EAD4265D4E2D292CD5FF11"
         },
         {
-          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7",
-          "name": "bootlogo.inc"
+          "name": "bootlogo.inc",
+          "sha256": "21DB3DB939A0D8FD14939063D70D1AC6089D4F025642740003A07702BB318FD7"
         },
         {
-          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D",
-          "name": "root.inc"
+          "name": "root.inc",
+          "sha256": "CB80038540E4363650921A85FCBBCF19F44D2BB26A82A50544995B3E144F639D"
         }
       ],
       "acceptance": "candidate"
@@ -100,20 +100,20 @@
       "sourceSha256": "9592C65A1764D9F1A7F3E963927E21AE7B69E7C0637781C7BDB5F5480E519E98"
     },
     {
-      "id": "patch95",
-      "file": "patch95.exe",
-      "architecture": "amd64",
-      "sha256": "93C6571892E210C40835022584BFD8FA30EBA8B552FF0E091087009874AAF219",
-      "source": "src/addon/patch95/patch95.c",
-      "sourceSha256": "497B8A6B9208BCD3FAF45D241F26FFA97878D9D1CA479D911DF6463222985571"
-    },
-    {
       "id": "path95",
       "file": "path95.exe",
       "architecture": "amd64",
       "sha256": "28C4E068B36C12415A2FDBBC53D9D99EBCF8BC3927AB921D16957F2B207C92DA",
       "source": "src/addon/path95/path95.c",
       "sourceSha256": "F814EB02A895F9F2CCC35F81B54215F328F9B1F87841F2287BBE7CF56BCA281E"
+    },
+    {
+      "id": "patch95",
+      "file": "patch95.exe",
+      "architecture": "amd64",
+      "sha256": "61BE537F3669736E67E51C3D9046A8B600933E37CD5B7173A17AFE74DD683914",
+      "source": "src/addon/patch95/patch95.c",
+      "sourceSha256": "2BDC5737A20E4BDD90C9C7CF6E8D5F288BC07125A6BE03E69562B896DF294704"
     }
   ]
 }
