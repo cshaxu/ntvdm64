@@ -4,7 +4,7 @@ from pathlib import Path,PurePosixPath
 root=Path('src/mvdm'); original=Path('O:/repos.external/OpenNT/base/mvdm')
 inventory=Path('artifacts/mvdm-audit/host-ch-scope/inventory.csv'); raw=inventory.read_bytes()
 allrows=list(csv.DictReader(io.StringIO(raw.decode('utf-8-sig'),newline='')))
-rows=[r for r in allrows if r['scope']=='role-pending']
+rows=[r for r in allrows if r['scope'] in ('role-pending', 'guest-target-observed')]
 host=[r for r in allrows if r['scope']=='host-candidate']
 hashfile=lambda p:hashlib.sha256(p.read_bytes()).hexdigest().upper()
 # Host C includes of same basenames require per-path resolution.

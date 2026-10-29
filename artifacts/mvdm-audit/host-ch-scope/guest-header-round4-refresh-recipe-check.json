@@ -1,0 +1,8 @@
+{
+  "refresh_evidence_sha256": "119E593D41ECF7771ABD0531431C9892FA45E8EC5750CCAD39B806E7103D02C9",
+  "recipe_source_receipt_sha256": "D27F6B85CC8E4CF6C55B5ED7F1489E4FFEBA866ABADF74458329E39240349D72",
+  "candidate_count": 66,
+  "witness_recipe_count": 899,
+  "mismatches": [],
+  "limits": "Recipe matches original recorded hash; guest was not built or executed. Source witnesses verified by refresh observer."
+}

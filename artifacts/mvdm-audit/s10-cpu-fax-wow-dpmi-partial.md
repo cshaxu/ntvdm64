@@ -1,0 +1,5 @@
+# S10 CPU, fax, WOW and DPMI role recommendations
+
+The [per-file table](s10-cpu-fax-wow-dpmi-partial.csv) covers 32 pending host-candidate C/H paths from the current inventory. Each row records original role, bounded build observation and later-stage behavior/lifecycle work. Recommending partial records source/role retention only; it does not claim any unselected implementation is linked, functional equivalence, runtime success, or a completeness percentage. All sources and alternate-profile uncertainty remain intact. Reports linked per row contain the underlying source, graph and hash observations. No guest or product code was changed and no new runtime test was performed.
+
+Fax provider applicability is unresolved; the mapped-status busy loop is a conditional source finding, not an observed current defect. DDEML stale guest mapping and table exhaustion/missing-binding cases are likewise conditional risks in the unselected alternative. CPU 486 decoder gating and DPMI XMS-versus-native allocation equivalence require actual S11/S12 behavior tests. Do not enable an old provider just to classify its file.

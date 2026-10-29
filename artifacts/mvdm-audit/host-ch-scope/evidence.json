@@ -9,6 +9,22 @@
       "sha256": "291AB107F3B0C2F18D8298A8846CC8CCAA4A4C848B2D8F927BEAE3BE6789B72E"
     },
     {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-followup-inventory.csv",
+      "sha256": "44B0BE4407F63C656B0A2A84CBFE4A77C0975274DC3E59EE6973355F499EA509"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-followup-evidence.json",
+      "sha256": "7A8C18EACEED08CDB889A2E6FC4085F73F9A8FA22B7A02E69564ADC850108FB3"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-round3-inventory.csv",
+      "sha256": "A942BF091FDDB881CCC0B3D351F19558546237C019DCC7D477810852A4628154"
+    },
+    {
+      "path": "artifacts/mvdm-audit/host-ch-scope/guest-target-round3-evidence.json",
+      "sha256": "D27F6B85CC8E4CF6C55B5ED7F1489E4FFEBA866ABADF74458329E39240349D72"
+    },
+    {
       "path": "artifacts/mvdm-audit/host-ch-scope/dos-v86-target-current-inventory.csv",
       "sha256": "8584A9E66E5927C6945AC4AB95A6A9E3AF5B62D49A9E1E857DFFE11CB7DA4145"
     },
@@ -18,34 +34,32 @@
     },
     {
       "path": "artifacts/mvdm-audit/shard-0/review.csv",
-      "sha256": "07FACAD9BCC7C711A08F0AA8D172B0BF2925506A88D867D795368A5662CCA5EC"
+      "sha256": "7B8CDD402D5B23E2272C22B89BF9B07829CA5BEB017886966900EA95965FC194"
     },
     {
       "path": "artifacts/mvdm-audit/shard-1/file-audit.csv",
-      "sha256": "292104A9D543ED35B02692DED9DB5D277869DFC9017C19B042900041DA2BBC1C"
+      "sha256": "05D8898F95319F5CB8EE90B6C7529F1E2F1D9D769E0AFDBC82289FCF32467D69"
     },
     {
       "path": "artifacts/mvdm-audit/shard-2/file-audit.csv",
-      "sha256": "28471471096D1C3DAC161B30A28CD7B4CDA7F3D0DCE3791EEF1957A18E77D313"
+      "sha256": "6CF0BE7083DFFEB2E93946A427D25870E847BA80FD9795B2E76CE2D7E2FAC81A"
     },
     {
       "path": "artifacts/mvdm-audit/shard-3/file-review.csv",
-      "sha256": "704585F3D129FD6DB46896CFD37117E0287C94DB2E421D94FC2266822B09390C"
+      "sha256": "71AF659B2A45D8B9649827991CA93DB054780C4E9658F81DDF058481E0485937"
     }
   ],
   "rows": 1815,
   "scope_counts": {
     "tool-or-scaffold-candidate": 72,
     "host-candidate": 1270,
-    "role-pending": 362,
-    "guest-target-observed": 111
+    "role-pending": 278,
+    "guest-target-observed": 195
   },
   "host_candidate_ledger_status_counts": {
-    "partial": 436,
+    "partial": 544,
     "部分复通": 332,
-    "excluded": 176,
-    "待核验": 55,
-    "pending": 130,
+    "excluded": 253,
     "整体排除": 88,
     "full": 36,
     "全复通": 17

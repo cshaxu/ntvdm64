@@ -30,6 +30,8 @@ guest_roles = {}
 evidence = []
 guest_inputs = (
     ('guest-target-candidate-inventory.csv', 'guest-target-candidate-evidence.json'),
+    ('guest-target-followup-inventory.csv', 'guest-target-followup-evidence.json'),
+    ('guest-target-round3-inventory.csv', 'guest-target-round3-evidence.json'),
     ('dos-v86-target-current-inventory.csv', 'dos-v86-target-current-evidence.json'),
 )
 for table_name, receipt_name in guest_inputs:

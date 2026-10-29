@@ -11,20 +11,20 @@ user-visible capability from the T-wide recovery worklist.
 
 `inventory.csv` enumerates the 1,815 unique `.c`/`.h` paths in the four recorded shard CSVs. `observe.py` computes it from those CSVs, with each source file hashed in `evidence.json`; it reads and hashes the same input bytes, rejects duplicate paths, and does not change the shared ledgers. It reads each current shard decision field rather than stale imported reporting_class. Run from the repository root with `python artifacts/mvdm-audit/host-ch-scope/observe.py`. Two consecutive runs against the same input bytes produced byte-identical outputs. Running it against later shard states intentionally creates a **new** snapshot; compare the input hashes before interpreting counts or overwriting a frozen result. This is not a replacement for the authoritative per-file ledgers.
 
-The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 185 pending, 768 partial, 264 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule.
+The 1,270 `host-candidate` rows exclude the path buckets below for triage only. Their recorded ledger statuses group as 0 pending, 876 partial, 341 excluded, and 53 full. These numbers describe recorded statuses, not demonstrated runtime coverage or a final scope decision. In particular host-candidate includes unselected historical architectures, fax/VDD code and standalone module boundaries that need source and build ownership review. Mirror diffs require partial classification under the project rule. The latest 77 exclusions are limited to the selected NT production profile; [device](../s10-followup-devices.md), [CPU](../s10-followup-cpu.md), [video](../s10-followup-video-physical-roles.md), [DOS](../s10-followup-dos.md) and [WOW](../s10-followup-wow.md) and [debug](../s10-followup-debug.md) and [headers](../s10-header-selected-profile-deep-review.md) and [other hosts](../s10-followup-unassigned-host.md) follow-ups preserve alternate-profile and functional obligations.
 
-Of the 473 `wow16/` and `dos/v86/` paths, 111 are now labelled
-`guest-target-observed` on the previously recorded source/recipe and host-graph
-evidence: 98 WRITE/DDEML/COMMDLG C files and 13 MEM/SETVER C/H files. Their
+The [standalone-tool review](../s10-followup-tool-boundaries.md) and [last-header resolution](../s10-tool-last-pending.csv) record 57 independent tools or debugger-extension rows as partial: their separate original target is identified, but product ownership and runtime behavior remain S12/S17. Same-name headers were resolved for the captured profile; alternate configurations remain open. These rows are outside the host-candidate count.
+
+Of the 473 `wow16/` and `dos/v86/` paths, 195 are now labelled
+`guest-target-observed` on the recorded source/recipe and host-graph evidence:
+182 C files from the original Win16 targets and 13 MEM/SETVER C/H files. Their
 source and recipe hashes and captured graph identities were rechecked by the
-observer; dependency logs were rerun for the 98, but not for the 13 DOS rows.
+observer; dependency logs were rerun for the 182, but not for the 13 DOS rows.
 This is a
 bounded physical-source role, not proof of installed binary provenance or a
-functional exclusion. The remaining 362 `role-pending` rows require individual
-ownership review: guest trees can contain host-consumed headers, shared ABI,
-build tools, or dual-use source. Corresponding host capabilities stay in scope.
+functional exclusion. The remaining 278 `role-pending` rows have per-file source-role decisions: 183 partial and 95 physical exclusions for observed profiles. The label remains because selected host/guest ownership is not fully resolved for every partial row; guest trees contain shared ABI, build tools and dual-use source. Corresponding host capabilities stay in scope.
 
-The 72 `tool-or-scaffold-candidate` rows (`vdmutils/`, `vdmexts/`, `bde/`, `ieuvddex/`, `v86/scaffold/`) are provisionally separated as utility, debugger-extension or scaffold paths, not asserted unnecessary: verify per-file linkage and any shared runtime dependencies. `v86/monitor/` remains a host candidate because the original monitor describes itself as user-mode host code; `dbg/` and `vdmdbg/` also remain candidates as possible host DLL capability.
+The 72 `tool-or-scaffold-candidate` rows (`vdmutils/`, `vdmexts/`, `bde/`, `ieuvddex/`, `v86/scaffold/`) are individually classified as utility, debugger-extension or scaffold paths, not asserted unnecessary; actual runtime behavior and other configurations remain future work. `v86/monitor/` remains a host candidate because the original monitor describes itself as user-mode host code; `dbg/` and `vdmdbg/` also remain candidates as possible host DLL capability.
 
 Output counts and classifications are evidence-bound snapshots. They are neither final scope approval nor evidence that every listed capability executes or passes tests.
 
@@ -148,6 +148,8 @@ The [selected suballocator object fixture](suballoc-selected-object-review.md) r
 
 The [DPMI XMEM selected-object fixture](dpmi-xmem-selected-review.md) checks controlled allocation, reallocation and free-failure branches with fake register/provider boundaries; actual XMS pool, guest movement and task lifecycle remain S11/S12 work.
 
+The [NIDDB allocation rollback review](niddb-allocation-rollback-review.md) identifies an untested original-source failure-path table leak, separately from the unpublished retirement candidate; actual notification and allocation-failure reachability remain unproved.
+
 The [DPMI XMEM owner cleanup fixture](dpmi-xmem-owner-review.md) observes that one controlled provider failure stops cleanup after earlier blocks were freed; an explicit fixture retry clears the remaining owner block while a second owner stays separate. Real task teardown, retry and native memory are not covered.
 
 The [DEM default-drive selected-object fixture](dem-default-drive-selected-review.md) verifies original direct-service argument and failure branches with controlled callbacks. The traced active DOS default-drive path does not establish guest reachability of that service.
@@ -257,3 +259,13 @@ The [four legacy host header recheck](../shard-3/four-legacy-host-headers-rechec
 The [GLOBALFREEALL owner trace](globalfreeall-guest-owner-review.md) corrects a host-table inference: original guest kernel paths directly implement and call it. The [memory-bit-index path review](ccpu-bit-index-shared-path-review.md) bounds the previously reproduced BTC defect and keeps the rest of the instruction matrix unproven.
 
 The [15-header review](../shard-3/pending-header-15-disposition-review.md) and [VDMREDIR review](vdmredir-five-role-recheck.md) distinguish exact historical declarations from selected device and DLC owners. Subsequent ledger updates classify only the explicitly identified physical paths; real device and DLC behavior remains independently scoped.
+
+The [46-header partial review](../s10-header-partial-recommendations.csv) records original roles and subsequent stage ownership; partial is not a runtime-coverage claim.
+
+The [WOW16 role trace](../s10-followup-wow16-unresolved-trace.csv) records 119 original-source roles as partial without deciding that their physical targets are host or guest; include resolution and functional handoff remain explicit. [Recipe evidence](../s10-followup-wow16-recipe-roles.md) identifies dual-target DDEML tests and shared GDI code.
+
+The [CPU, fax, WOW and DPMI review](../s10-cpu-fax-wow-dpmi-partial.csv) records 32 retained roles as partial with S11–S16 handoff; neither original source identity nor an unselected provider proves functional equivalence.
+
+The [final host candidate crosswalk](../s10-remaining-host-final-candidates.csv) records the last 21 source roles and their finite S11–S17 obligations. This closes their file-role classification only; functional behavior remains open.
+
+The [195 guest-target counterexample review](../s10-guest-observed-counterexamples.json) rechecked four current Ninja dependency snapshots and found no exact captured host dependency or dual-target recipe counterexample. The observer checks recorded graph and source/recipe hashes but does not refresh current Ninja dependency output or rescan host includes; graph hash alone cannot certify current dependency state. This result is limited to the snapshots and does not exclude other configurations or guest capabilities.

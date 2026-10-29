@@ -33,3 +33,12 @@ Historical corroboration: `tests/mvdm-host/cvidc_vector_binding_fixture.c`
 asserts the slot points to the CCPU provider. T473 S5 records that fixture
 passing (`docs/etc/evidence/m0-t473-s5-softpc-device-lifecycle.md`); this
 is a host binding test, not evidence that a guest exercised an overwrite.
+
+## Subsequent source-comment correction
+
+The current divergence registry already distinguishes the external wrapper
+from its C-VID vector dispatch. The stale explanatory comment in `sas.h` has
+now been corrected to describe that same chain and refer to DIV-189. This is a
+comment-only change; it supplies no new execution or early-initialization
+evidence. The source remains a partial mirror-diff row and its current hash
+and text-retention estimate are recorded in the mirror-diff table.
