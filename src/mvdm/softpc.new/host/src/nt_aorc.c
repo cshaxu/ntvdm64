@@ -252,83 +252,95 @@ GLOBAL word getCPL()
 }
 
 #undef setAL
-GLOBAL VOID setAL(IU8 val)
+GLOBAL VOID		setAL(val)
+half_word	val;
 {
 	setAX( (getAX() & 0xFF00) | (val & 0xFF) );
 }
 
 
 #undef setCL
-GLOBAL VOID setCL(IU8 val)
+GLOBAL VOID		setCL(val)
+half_word	val;
 {
 	setCX( (getCX() & 0xFF00) | (val & 0xFF) );
 }
 
 
 #undef setDL
-GLOBAL VOID setDL(IU8 val)
+GLOBAL VOID		setDL(val)
+half_word	val;
 {
 	setDX( (getDX() & 0xFF00) | (val & 0xFF) );
 }
 
 
 #undef setBL
-GLOBAL VOID setBL(IU8 val)
+GLOBAL VOID		setBL(val)
+half_word	val;
 {
 	setBX( (getBX() & 0xFF00) | (val & 0xFF) );
 }
 
 
 #undef setAH
-GLOBAL VOID setAH(IU8 val)
+GLOBAL VOID		setAH(val)
+half_word	val;
 {
 	setAX( getAL() | ((val & 0xFF) << 8) );
 }
 
 
 #undef setCH
-GLOBAL VOID setCH(IU8 val)
+GLOBAL VOID		setCH(val)
+half_word	val;
 {
 	setCX( getCL() | ((val & 0xFF) << 8) );
 }
 
 
 #undef setDH
-GLOBAL VOID setDH(IU8 val)
+GLOBAL VOID		setDH(val)
+half_word	val;
 {
 	setDX( getDL() | ((val & 0xFF) << 8) );
 }
 
 
 #undef setBH
-GLOBAL VOID setBH(IU8 val)
+GLOBAL VOID		setBH(val)
+half_word	val;
 {
 	setBX( getBL() | ((val & 0xFF) << 8) );
 }
 
 
 #undef setAX
-GLOBAL VOID setAX(IU16 val)
+GLOBAL VOID		setAX(val)
+word	val;
 {
 	c_setAX(val);
 }
 
 #undef setBX
-GLOBAL VOID setBX(IU16 val)
+GLOBAL VOID		setBX(val)
+word	val;
 {
 	c_setBX(val);
 }
 
 
 #undef setCX
-GLOBAL VOID setCX(IU16 val)
+GLOBAL VOID		setCX(val)
+word	val;
 {
 	c_setCX(val);
 }
 
 
 #undef setDX
-GLOBAL VOID setDX(IU16 val)
+GLOBAL VOID		setDX(val)
+word	val;
 {
 	c_setDX(val);
 }
@@ -336,61 +348,70 @@ GLOBAL VOID setDX(IU16 val)
 
 
 #undef setSP
-GLOBAL VOID setSP(IU16 val)
+GLOBAL VOID		setSP(val)
+word	val;
 {
     c_setSP(val);
 }
 
 
 #undef setBP
-GLOBAL VOID setBP(IU16 val)
+GLOBAL VOID		setBP(val)
+word	val;
 {
 	c_setBP(val);
 }
 
 
 #undef setSI
-GLOBAL VOID setSI(IU16 val)
+GLOBAL VOID		setSI(val)
+word	val;
 {
 	c_setSI(val);
 }
 
 
 #undef setDI
-GLOBAL VOID setDI(IU16 val)
+GLOBAL VOID		setDI(val)
+word	val;
 {
 	c_setDI(val);
 }
 
 
 #undef setIP
-GLOBAL VOID setIP(IU16 val)
+GLOBAL VOID		setIP(val)
+word	val;
 {
 	c_setIP(val);
 }
 
 #undef setES
-GLOBAL ISM32 setES(IU16 val)
+GLOBAL 	setES(val)
+word	val;
 {
 	return c_setES(val);
 }
 
 
 #undef setCS
-GLOBAL ISM32 setCS(IU16 val)
+GLOBAL 	setCS(val)
+word	val;
 {
 	return c_setCS(val);
 }
 
 #undef setSS
-GLOBAL ISM32 setSS(IU16 val)
+GLOBAL 	setSS(val)
+word	val;
 {
 	return c_setSS(val);
 }
 
 
 #undef setDS
-GLOBAL ISM32 setDS(IU16 val)
+GLOBAL	setDS(val)
+word	val;
 {
 	return c_setDS(val);
 }
@@ -398,82 +419,94 @@ GLOBAL ISM32 setDS(IU16 val)
 
 
 #undef setCF
-GLOBAL VOID setCF(IBOOL val)
+GLOBAL VOID		setCF(val)
+word	val;
 {
 	c_setCF(val);
 }
 
 
 #undef setPF
-GLOBAL VOID setPF(IBOOL val)
+GLOBAL VOID		setPF(val)
+word	val;
 {
     c_setPF(val);
 }
 
 
 #undef setAF
-GLOBAL VOID setAF(IBOOL val)
+GLOBAL VOID		setAF(val)
+word	val;
 {
 	c_setAF(val);
 }
 
 
 #undef setZF
-GLOBAL VOID setZF(IBOOL val)
+GLOBAL VOID		setZF(val)
+word	val;
 {
     c_setZF(val);
 }
 
 
 #undef setSF
-GLOBAL VOID setSF(IBOOL val)
+GLOBAL VOID		setSF(val)
+word	val;
 {
     c_setSF(val);
 }
 
 
 #undef setTF
-GLOBAL VOID setTF(IBOOL val)
+GLOBAL VOID		setTF(val)
+word	val;
 {
 	c_setTF(val);
 }
 
 
 #undef setIF
-GLOBAL VOID setIF(IBOOL val)
+GLOBAL VOID		setIF(val)
+word	val;
 {
 	c_setIF(val);
 }
 
 
 #undef setDF
-GLOBAL VOID setDF(IBOOL val)
+GLOBAL VOID		setDF(val)
+word	val;
 {
 	c_setDF(val);
 }
 
 
 #undef setOF
-GLOBAL VOID setOF(IBOOL val)
+GLOBAL VOID		setOF(val)
+word	val;
 {
 	c_setOF(val);
 }
 
 #undef setMSW
-GLOBAL VOID setMSW(IU16 val)
+GLOBAL VOID		setMSW(val)
+word	val;
 {
 	c_setMSW(val);
 }
 
 
 #undef setEIP
-GLOBAL VOID setEIP(IU32 val)
+GLOBAL VOID setEIP(val)
+IU32	val;
 {
     c_setEIP(val);
 }
 
 #undef setEFLAGS
-GLOBAL VOID setEFLAGS(IU32 val)
+GLOBAL void setEFLAGS(val)
+IU32	val;
 {
     c_setEFLAGS(val);
 }
@@ -488,7 +521,8 @@ IU32 val;
 #endif
 
 #undef setESP
-GLOBAL VOID setESP(IU32 val)
+void setESP(val)
+IU32  val;
 {
     c_setESP(val);
 }
@@ -509,7 +543,9 @@ GLOBAL word getSS_AR()
 }
 
 #undef setSS_BASE_LIMIT_AR
-GLOBAL IBOOL setSS_BASE_LIMIT_AR(IU32 base, IU32 limit, IU16 ar)
+void setSS_BASE_LIMIT_AR(base,limit,ar)
+IU32  base,limit;
+IU16  ar;
 {
     c_setSS_BASE_LIMIT_AR(base,limit,ar);
 }

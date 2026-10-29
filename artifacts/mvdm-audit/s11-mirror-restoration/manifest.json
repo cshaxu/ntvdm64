@@ -1,0 +1,42 @@
+[
+  {
+    "bytes": 464,
+    "currentBuildSelected": false,
+    "targetSha256": "A5CE8099CC9F560EF1B4AB9C0AB9B338021D928B977545A09212E1E67A6703AA",
+    "path": "src/mvdm/inc/vdmtib.h",
+    "sourceSha256": "A5CE8099CC9F560EF1B4AB9C0AB9B338021D928B977545A09212E1E67A6703AA",
+    "source": "O:/repos.external/OpenNT/base/mvdm/inc/vdmtib.h",
+    "sourceRetentionPercent": 100,
+    "functionalDisposition": "unchanged; not established by restoration"
+  },
+  {
+    "bytes": 15899,
+    "currentBuildSelected": false,
+    "targetSha256": "7816128FBD968703F2F7B478B0992902F522F9C6853CA166EB69A904CD965061",
+    "path": "src/mvdm/softpc.new/host/src/nt_aorc.c",
+    "sourceSha256": "7816128FBD968703F2F7B478B0992902F522F9C6853CA166EB69A904CD965061",
+    "source": "O:/repos.external/OpenNT/base/mvdm/softpc.new/host/src/nt_aorc.c",
+    "sourceRetentionPercent": 100,
+    "functionalDisposition": "unchanged; not established by restoration"
+  },
+  {
+    "bytes": 5876,
+    "currentBuildSelected": false,
+    "targetSha256": "7B7E81EDAE26D68F6577A4928274FF7244637807805B268E62D4EE3CE3E7A1E9",
+    "path": "src/mvdm/wow32/wkglobal.c",
+    "sourceSha256": "7B7E81EDAE26D68F6577A4928274FF7244637807805B268E62D4EE3CE3E7A1E9",
+    "source": "O:/repos.external/OpenNT/base/mvdm/wow32/wkglobal.c",
+    "sourceRetentionPercent": 100,
+    "functionalDisposition": "unchanged; not established by restoration"
+  },
+  {
+    "bytes": 3826,
+    "currentBuildSelected": false,
+    "targetSha256": "88FAEB38403ED790FF538383125B7BF1481A125D1F3F9C69F79BC1E6E1EF6ECB",
+    "path": "src/mvdm/wow32/wklocal.c",
+    "sourceSha256": "88FAEB38403ED790FF538383125B7BF1481A125D1F3F9C69F79BC1E6E1EF6ECB",
+    "source": "O:/repos.external/OpenNT/base/mvdm/wow32/wklocal.c",
+    "sourceRetentionPercent": 100,
+    "functionalDisposition": "unchanged; not established by restoration"
+  }
+]
