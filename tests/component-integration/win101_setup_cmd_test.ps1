@@ -157,12 +157,7 @@ if ($winCmd -notmatch '(?im)^set "TEMP=%~dp0TEMP"' -or $winCmd -match '(?i)Syste
 }
 [IO.File]::WriteAllText((Join-Path $patch 'KEEP.TXT'), 'owner content', [Text.Encoding]::ASCII)
 $unapplyOutput = Invoke-Unapply $media
-foreach ($expected in @(
-    "Restore: MOUSE.DRV => $media",
-    "Remove: SETUP.CMD => $media\PATCH",
-    "Remove: PIF.EXE => $media\PATCH")) {
-    if (!$unapplyOutput.Contains($expected)) { throw "UNAPPLY action report missing: $expected" }
-}
+if (!$unapplyOutput.Contains('Windows 1.01 media restored.')) { throw 'UNAPPLY completion missing' }
 if ((Get-FileHash -LiteralPath (Join-Path $media 'MOUSE.DRV')).Hash -ne $originalMouse) {
     throw 'UNAPPLY.CMD did not restore the original root driver bytes'
 }
@@ -170,7 +165,7 @@ if (Test-Path -LiteralPath (Join-Path $media 'MOUSE.DRV.BAK')) { throw 'UNAPPLY.
 foreach ($name in @('SETUP.CMD','PIF.EXE','HASH.EXE','SETVER.EXE')) {
     if (Test-Path -LiteralPath (Join-Path $patch $name)) { throw "UNAPPLY.CMD retained helper $name" }
 }
-if (!(Test-Path -LiteralPath (Join-Path $patch 'KEEP.TXT') -PathType Leaf)) { throw 'UNAPPLY.CMD removed unknown PATCH content' }
+if (Test-Path -LiteralPath $patch) { throw 'UNAPPLY.CMD retained PATCH directory' }
 Invoke-Unapply $media 2
 
 $failedMedia = New-Media 'f'

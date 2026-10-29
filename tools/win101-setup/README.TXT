@@ -20,4 +20,4 @@ Setup failure.
 No guest core image is patched directly. Original Setup is responsible for
 assembling WIN100.BIN from the root-level replacement MOUSE.DRV.
 
-To restore prepared media, run this tool's UNAPPLY.CMD and enter the same media root. It verifies the replacement before restoring MOUSE.DRV.BAK, removes only verified helpers, and preserves unknown PATCH content.
+To restore prepared media, run this tool's UNAPPLY.CMD and enter the same media root. It restores MOUSE.DRV.BAK directly and deletes the entire media PATCH directory, including user files.

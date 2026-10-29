@@ -14,11 +14,12 @@ mkdir "%FIXTURE%\SYSTEM" "%FIXTURE%\PATCH" || exit /b 2
 >>"%FIXTURE%\SYSTEM.INI" echo mouse.drv=MOUSE.DRV
 >"%FIXTURE%\PATCH\WIN.CMD" echo owner content
 
-call "%~dp0..\..\tools\win95-launch\APPLY.CMD" "%FIXTURE%"
+echo %FIXTURE%| call "%~dp0..\..\tools\win95-launch\APPLY.CMD"
 if not errorlevel 1 exit /b 3
 findstr /x /c:"owner content" "%FIXTURE%\PATCH\WIN.CMD" >nul || exit /b 4
-call "%~dp0..\..\tools\win95-launch\UNAPPLY.CMD" "%FIXTURE%"
-if not errorlevel 1 exit /b 5
-findstr /x /c:"owner content" "%FIXTURE%\PATCH\WIN.CMD" >nul || exit /b 6
+echo %FIXTURE%| call "%~dp0..\..\tools\win95-launch\UNAPPLY.CMD"
+if errorlevel 1 exit /b 5
+if exist "%FIXTURE%\PATCH\" exit /b 6
+findstr /x /c:"fixture-mouse" "%FIXTURE%\SYSTEM\MOUSE.DRV" >nul || exit /b 7
 echo WIN95_LAUNCH_COMMAND_SAFETY_OK
 exit /b 0

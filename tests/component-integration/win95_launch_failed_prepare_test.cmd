@@ -12,7 +12,7 @@ mkdir "%WINDOWS%\SYSTEM" || exit /b 2
 >"%WINDOWS%\SYSTEM\MOUSE.DRV" echo original mouse
 >"%WINDOWS%\SYSTEM.INI" echo [boot]
 >>"%WINDOWS%\SYSTEM.INI" echo mouse.drv=MOUSE.DRV
-call "%~dp0..\..\tools\win95-launch\APPLY.CMD" "%WINDOWS%" >"%ROOT%\apply.log" 2>&1
+echo %WINDOWS%| call "%~dp0..\..\tools\win95-launch\APPLY.CMD" >"%ROOT%\apply.log" 2>&1
 if not errorlevel 1 exit /b 3
 findstr /c:"unsupported or malformed VMM32" "%ROOT%\apply.log" >nul || exit /b 9
 if exist "%WINDOWS%\SYSTEM\KRNL386.EXE.W95LAUNCH.BAK" exit /b 10

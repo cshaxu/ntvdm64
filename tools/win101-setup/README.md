@@ -31,8 +31,6 @@ copied into media `PATCH`. Use a short physical DOS-compatible path without
 spaces or shell metacharacters; PIF string fields are bounded. `run16` is
 resolved through `PATH` and no drive path is hard-coded.
 
-To restore prepared media, open this tool package's `UNAPPLY.CMD` and enter
-the same media root. It first proves that the root `MOUSE.DRV` is still this
-tool's replacement, restores `MOUSE.DRV.BAK` in place, then removes only the
-four byte-for-byte verified helper files. Any other `PATCH` files or
-directories are retained untouched; an empty `PATCH` directory is removed.
+To restore prepared media, run `UNAPPLY.CMD` and enter the same media root.
+It restores `MOUSE.DRV` directly from `MOUSE.DRV.BAK` and deletes the entire
+media `PATCH` directory, including any files placed there by the user.

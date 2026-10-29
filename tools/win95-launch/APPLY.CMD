@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions DisableDelayedExpansion
-set "TARGET=%~1"
-if not defined TARGET set /p "TARGET=Target installed Windows 95 directory: "
+set "TARGET="
+set /p "TARGET=Target installed Windows 95 directory: "
 if not defined TARGET exit /b 64
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
 for %%I in ("%TARGET%") do set "TARGET=%%~sI"
@@ -12,20 +12,16 @@ if not "%TARGET: =%"=="%TARGET%" (
 for %%I in ("%~dp0..\..\assets\release") do set "RELEASE=%%~fI"
 set "SYSTEM=%TARGET%\SYSTEM"
 set "PATCH=%TARGET%\PATCH"
-set "JOURNAL=%PATCH%\W95LAUNCH.MANIFEST"
+set "LOGO_OPTION="
+if exist "%PATCH%\LOGO.SYS" set "LOGO_OPTION= /LOGO=%PATCH%\LOGO.SYS"
 
 for %%F in ("%TARGET%\WIN.COM" "%SYSTEM%\VMM32.VXD" "%SYSTEM%\KRNL386.EXE" "%TARGET%\SYSTEM.INI") do if not exist "%%~F" (
   echo Missing Win95 installation file: %%~F
   exit /b 2
 )
-for %%F in (patch95.exe compat95.sys PIF.EXE HASH.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
+for %%F in (patch95.exe compat95.sys PIF.EXE MOUSE31.DRV) do if not exist "%RELEASE%\%%F" (
   echo Missing released component: %RELEASE%\%%F
   exit /b 3
-)
-if exist "%PATCH%\W95LAUNCH.MANIFEST" (
-  echo Existing Win95 Launch journal: %PATCH%\W95LAUNCH.MANIFEST
-  echo Run UNAPPLY.CMD first.
-  exit /b 5
 )
 for %%F in (CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys SETVER.EXE VMM32.W95NEW KERNEL.W95NEW TEMP) do if exist "%PATCH%\%%F" (
   echo Refusing to overwrite pre-existing PATCH content: %%F
@@ -54,7 +50,7 @@ if not exist "%MOUSE_PATH%" (
   echo SYSTEM.INI [boot] mouse.drv does not name an existing driver: %MOUSE_PATH%
   exit /b 5
 )
-if exist "%MOUSE_PATH%.W95LAUNCH.BAK" (
+if exist "%MOUSE_PATH%.BAK" (
   echo Existing mouse recovery copy; refusing to take over a prior preparation.
   exit /b 5
 )
@@ -89,7 +85,7 @@ set "NEW_KERNEL_BACKUP=1"
 move /y "%PATCH%\KERNEL.W95NEW" "%SYSTEM%\KRNL386.EXE" >nul || goto fail
 copy /y "%RELEASE%\compat95.sys" "%PATCH%\compat95.sys" >nul || goto fail
 
-move /y "%MOUSE_PATH%" "%MOUSE_PATH%.W95LAUNCH.BAK" >nul || goto fail
+move /y "%MOUSE_PATH%" "%MOUSE_PATH%.BAK" >nul || goto fail
 set "NEW_MOUSE_BACKUP=1"
 copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
 
@@ -99,7 +95,7 @@ copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
   echo device=%PATCH%\SETVER.EXE
   echo files=128
   echo device=%TARGET%\IFSHLP.SYS
-  echo device=%PATCH%\compat95.sys /ROOT=%TARGET%
+  echo device=%PATCH%\compat95.sys /ROOT=%TARGET%%LOGO_OPTION%
 )
 >"%PATCH%\AUTOEXEC.NT" (
   echo @echo off
@@ -113,23 +109,6 @@ copy /y "%RELEASE%\MOUSE31.DRV" "%MOUSE_PATH%" >nul || goto fail
 >"%PATCH%\WIN.CMD" (
   echo @echo off
   echo call "%RUN16%" "%%~dp0WIN.PIF"
-)
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%MOUSE_PATH%"') do set "MOUSE_HASH=%%H"
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%SYSTEM%\VMM32.VXD"') do set "VMM_HASH=%%H"
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%SYSTEM%\KRNL386.EXE"') do set "KERNEL_HASH=%%H"
-if not defined KERNEL_HASH goto fail
-for /f "delims=" %%H in ('call "%RELEASE%\HASH.EXE" "%PATCH%\SETVER.EXE"') do set "SETVER_HASH=%%H"
-if not defined SETVER_HASH goto fail
-if not defined MOUSE_HASH goto fail
-if not defined VMM_HASH goto fail
->"%JOURNAL%" (
-  echo schema=3
-  echo mouse=%MOUSE_PATH%
-  echo mousehash=%MOUSE_HASH%
-  echo vmm=%SYSTEM%\VMM32.VXD
-  echo vmmhash=%VMM_HASH%
-  echo kernelhash=%KERNEL_HASH%
-  echo setverhash=%SETVER_HASH%
 )
 echo Win95 launcher prepared: %PATCH%\WIN.CMD
 exit /b 0
@@ -172,9 +151,9 @@ exit /b 0
 
 :fail
 echo Launch preparation failed; restoring only this run's replacements.
-if defined NEW_MOUSE_BACKUP if exist "%MOUSE_PATH%.W95LAUNCH.BAK" (
+if defined NEW_MOUSE_BACKUP if exist "%MOUSE_PATH%.BAK" (
   del /q "%MOUSE_PATH%" >nul 2>nul
-  move /y "%MOUSE_PATH%.W95LAUNCH.BAK" "%MOUSE_PATH%" >nul
+  move /y "%MOUSE_PATH%.BAK" "%MOUSE_PATH%" >nul
 )
 if defined NEW_KERNEL_BACKUP if exist "%SYSTEM%\KRNL386.EXE.W95LAUNCH.BAK" (
   del /q "%SYSTEM%\KRNL386.EXE" >nul 2>nul
@@ -184,7 +163,7 @@ if defined NEW_VMM_BACKUP if exist "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" (
   del /q "%SYSTEM%\VMM32.VXD" >nul 2>nul
   move /y "%SYSTEM%\VMM32.VXD.W95LAUNCH.BAK" "%SYSTEM%\VMM32.VXD" >nul
 )
-for %%F in (VMM32.W95NEW KERNEL.W95NEW SETVER.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys W95LAUNCH.MANIFEST) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F" >nul 2>nul
+for %%F in (VMM32.W95NEW KERNEL.W95NEW SETVER.EXE CONFIG.NT AUTOEXEC.NT WIN.PIF WIN.CMD compat95.sys) do if exist "%PATCH%\%%F" del /q "%PATCH%\%%F" >nul 2>nul
 if defined NEW_TEMP rmdir "%PATCH%\TEMP" 2>nul
 if defined NEW_PATCH rmdir "%PATCH%" 2>nul
 exit /b 5

@@ -1,9 +1,9 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 set "RESULT=1"
-set "TARGET=%~1"
+set "TARGET="
 for %%I in ("%~dp0..\..\assets\release") do set "RELEASE=%%~fI"
-if not defined TARGET set /p "TARGET=Target Windows 3.1 installation-media copy: "
+set /p "TARGET=Target Windows 3.1 installation-media copy: "
 if not defined TARGET (set "RESULT=64"& goto done)
 for %%I in ("%TARGET%") do set "TARGET=%%~fI"
 for %%F in (SETUP.EXE DOSX.EX_ KRNL386.EX_ WIN386.EX_ MOUSE.DR_) do if not exist "%TARGET%\%%F" (echo Missing media file: %%F& set "RESULT=2"& goto done)
