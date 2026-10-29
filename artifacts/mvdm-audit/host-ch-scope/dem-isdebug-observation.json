@@ -1,0 +1,9 @@
+{
+  "object_sha256": "BC2508AC6DE405587DAEB38E6903202B1149B5ED5DA09ABE44542C2237177A9E",
+  "source_sha256": "6051F49602BC3E7FA15848759490680F304F7FF6F71AA56D912EBEB5E1409994",
+  "fixture_sha256": "06858085B7FCBC1CBADD7F085FDDA86F1671938C4FFECCD0CC1C9C58337B7A13",
+  "exe_sha256": "C2CF2E39980EDA536E5496A67FCD7B3ABC9320A2D7B8E391056950D7B53F954D",
+  "output": "PASS debug-port query failure/null/present and trace-flag gating (mocked native query)\n",
+  "exit_code": 0,
+  "build_diagnostics": "Warning: corrupt .drectve at end of def file\n"
+}

@@ -1,0 +1,12 @@
+# Original WOWFAX UI helper and upgrade owner
+
+Current pending `fax/wowfaxui/wfhelper.c` and `wfupgrad.c` are original 32-bit files for the separate WOWFAXUI printer-driver UI, not generic WOW dialog implementations. Original `wowfaxui/sources:28,52-55` selects both in that DLL. Current and both retained original editions match respectively SHA-256 `BF8CD7FE0A51E9339B98C1CED13A7D295A25A0F49DC08BE83D7C07E1B6785BEC` and `67D44211D4014E713116B72347159DA85DF18EC5D9042094C009357F9062617E`. Existing [fax inventory](../nine-way/part-2/fax-boundary-review.md) records no exact separate-driver edges in the captured host graph and no corresponding named images in its package snapshot; it does not prove every installation or other profile lacks the driver.
+
+| File | Original consumer and responsibility | Current classification |
+| --- | --- | --- |
+| `wfhelper.c` | `wowfaxui.c:87,125,561,663` uses registry-based 16-bit driver lookup and its matching cleanup. `wfsheets.c:186-187` uses `DupTokenW` for its private property-sheet names. | Historical separate-provider helper; keep pending applicability, S16 printer/fax owner. |
+| `wfupgrad.c` | Original exported `DrvUpgradePrinter` in `wowfaxui.c:369-387` delegates to `DoUpgradePrinter`; helper builds paths, compares source/destination times, opens printer/driver information and performs upgrade work. | Historical separate-provider implementation; keep pending applicability, S16. |
+
+Selected WOW32 printing uses the separate `wgprnset.c`/`wspool.c` → dynamically resolved WINSPOOL API route. This does not prove that the original registry lookup, property UI or upgrade behavior is provided by it; trace the actual installed spooler driver and explicit integration policy before importing any source or treating a generic printer as equivalent. A conditional source concern is `wfupgrad.c:33-42`: `BuildPathW` allocates `(MAX_PATH+1)` characters and applies `wcscpy`/`wcscat` to its inputs without an evident local length check. Whether caller bounds make that safe is not yet established; this is not a reproduced overflow or an assertion the code is currently reachable. If the provider is admitted, validate path bounds, invalid-level errors, all file/printer allocation failures, critical-section/reentry and exactly-once close/cleanup, and avoid changing installed printer settings during uncontrolled probes.
+
+No tests were run and no product, guest or shared ledger changed. Physical source presence and the original DLL recipe do not constitute a live guest/provider acceptance result.

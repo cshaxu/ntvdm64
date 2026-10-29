@@ -140,11 +140,15 @@ The [DEM boot-drive selected-object fixture](dem-bootdrive-review.md) checks con
 
 The [DEM DOS/WOW FILES selected-object fixture](dem-wowfiles-review.md) checks the original service's DOS-preserve and WOW-255 branches with synthetic mode state; actual guest configuration and handle limits remain unverified.
 
+The [DEM debug-state fixture](dem-isdebug-review.md) tests the original selected object's controlled native-query and trace-flag branches; actual debugger connection and guest debug execution remain unverified.
+
 The [X keyboard table review](../shard-3/m-keybdp-original-nt-profile-review.md) bounds one physical file exclusion to the NT worker. The [legacy multimedia alias witness](old-media-alias-object-review.md) exercises the original cached object with synthetic single-threaded handles; no selected product consumer or guest behavior is thereby established. The [A3 CPU register provider review](dos-a3cpu-register-owner-review.md) retains alternate-profile scope separately from the selected CCPU register owner.
 
 The [historical keyboard declarations review](../shard-3/legacy-keyboard-declaration-target-review.md) bounds two more physical declarations to alternate profiles. The selected NT input/IRQ behavior remains S13, and the SoftWindows provider is still unresolved.
 
 The [historical display declaration review](../shard-3/legacy-display-rom-icon-stats-review.md) distinguishes a selected header from its inactive GISP branch and retains old icon/provider applicability separately; current Video7 tests do not prove those paths.
+
+The [C-VID context and flags review](../shard-3/cvidc-context-register-flags-review.md) identifies a generated macro reference but not its actual expansion. The [WOWFAX helper and upgrade review](wowfax-helper-upgrade-owner-review.md) retains original provider applicability and an unconfirmed path-length risk for S16.
 
 The [WOWFAX property-sheet owner review](wowfax-property-sheets-owner-review.md) separates a historical printer UI from ordinary dialogs and records unconfirmed allocation and cleanup risks for S16.
 

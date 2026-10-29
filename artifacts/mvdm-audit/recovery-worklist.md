@@ -38,6 +38,10 @@ The [DEM boot-drive selected-object witness](host-ch-scope/dem-bootdrive-review.
 
 The [DEM DOS/WOW FILES selected-object witness](host-ch-scope/dem-wowfiles-review.md) exercises the original DOS-preserve and WOW-255 paths with simulated worker state. S12 retains real guest configuration, mode selection and actual handle-limit validation.
 
+The [DEM debug-state witness](host-ch-scope/dem-isdebug-review.md) checks selected-object branches with a mocked native query. S17 retains real debugger connection, error behavior and guest debug execution.
+
+The [C-VID context and flags review](shard-3/cvidc-context-register-flags-review.md) leaves actual generated macro expansion and provider layout in S11; text mentions alone do not establish a runtime access. The [WOWFAX helper and upgrade review](host-ch-scope/wowfax-helper-upgrade-owner-review.md) leaves provider applicability, path-length constraints and actual failure paths in S16.
+
 Additional source groups: [floppy providers](host-ch-scope/dos-floppy-pending-owner-review.md) retain S13/S17 distinctions between original SLAVEPC, diagnostic, virtual and real-device providers; [video diagnostics](shard-3/pending-video-diagnostic-family-review.md) retain S13 trace and state-provider boundaries; [WOW multimedia pending sources](host-ch-scope/wow-multimedia-three-pending-recheck.md) retain S16 guest/provider routes and lifecycle. No completed feature is inferred solely from build or file identity.
 
 The [HFX protocol ownership review](host-ch-scope/dos-hfx-protocol-owner-review.md) preserves separate original HFX and SWIN_HFX guest/provider applicability in S17; the selected DOS filesystem and redirector are different routes, and captured HFX BOPs resolving to `illegal_bop` are not evidence that the protocol works.
