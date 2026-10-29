@@ -21,4 +21,14 @@ The six instruction headers' corresponding objects have no active 486 implementa
 
 The earlier `shard-3/header-inclusions.csv` is a **bounded historical snapshot, not a complete current dependency log**: for these current pending paths it reports only `invlpg.h`, whereas this query finds the ten above. Do not use it as a complete list or infer that either snapshot proves runtime use. Other profiles, generated includes, stale/unbuilt objects and alternate build trees remain outside this query.
 
+An additional source check of pending C-VID `gdebug.h`, `trace_c.h` and
+`prof_c.h` confirms why the absence of an exact dependency is not sufficient
+for a global disposition. The first two describe a GDP structure and its
+trace ring; the distinct MIPS production variant puts `TraceRingRec` at a
+different documented offset. The third defines nine profiling EOI flags also
+found in `base/inc/profile.h`, which contains additional definitions. Matching
+flag values do not prove the generated declarations, debug profile or tracing
+behavior equivalent. Each remains pending until generator and consumer/profile
+ownership is established. These are source observations, not execution tests.
+
 Replay from repository root: `python artifacts/mvdm-audit/host-ch-scope/ccpu-cvidc-pending-header-observer.py`. It reads live shard inputs and the populated `build/.ninja/msvc-x86-release/worker` graph and runs `ninja -t deps`, which does not compile. The output is a new snapshot if any inputs change. Two consecutive runs at the recorded inputs produced JSON SHA-256 `ECF19384951D005E232CFC957A4E2F938D6EB39DC405430DD5BB164D495AEFDE`.

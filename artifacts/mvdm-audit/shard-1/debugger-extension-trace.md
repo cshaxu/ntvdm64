@@ -41,6 +41,16 @@ Win16 debug entrypoints, handles or extensions work. See
   in the selected original `wow32/sources`. Its independent entrypoints and
   relevant original profile still need a source-to-consumer review.
 
+Further original-source evidence narrows that owner: `vdmexts/wow.c` and
+`vdmexts/wowprof.c` record the 1996 integration of these routines; the
+`vdmexts` DLL recipe selects both and exports `dwp`, `apiprofdmp`, and
+`msgprofdmp`. Its separate `vdmexts/debug.c` is a software-breakpoint module,
+not the same file. These source and recipe observations do not prove all
+commands were transferred identically or that a usable extension was built
+or loaded. Keep `wow32/debug.c` pending until S17 resolves tool scope, actual
+debugger ABI and command semantics; never cast modern host state to NT4
+private structures to supply that ABI.
+
 The current worker and WOW32 graphs have no direct entries for the three
 extension packages and `assets/release` did not contain bde.dll, vdmexts.dll,
 or ntvdm.dll at this review. This is a limited path observation, not a claim
