@@ -1948,6 +1948,9 @@ $fixtureHostLibraries = 'worker-base.lib worker-shell.lib worker-command-binding
 # The shared native-child binding now reaches Hook installation and DOS style
 # queries even in the fixture closure. Link the real selected providers.
 $fixtureHostLibraries += ' nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib'
+$graph.Add('build obj/tests/ccpu_monitor_boundary_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_monitor_boundary_fixture.c')))
+# Bind the real protected exception hook ahead of the shared fixture seams.
+$graph.Add('build ccpu-monitor-boundary-test.exe: event_test_link obj/tests/ccpu_monitor_boundary_fixture.obj obj/host/nt_inthk.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build ccpu-halt-reset-test.exe: event_test_link obj/tests/ccpu_halt_reset_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $ccpuThroughputFixtureObject = 'obj/tests/ccpu_throughput_fixture.obj'
 $graph.Add('build ' + $ccpuThroughputFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_throughput_fixture.c')))

@@ -56,6 +56,26 @@ The current C/H classification and frozen coverage checks were rerun after the t
 
 After the Calculator test-only changes, `python tools/audit/EstimateMirrorDiffRetention.py` completed successfully against current worktree bytes. Its regenerated CSV reports 204 differing rows overall, of which 199 are host C/H; an independent join with `combined-initial-status.csv` found all 199 marked partial and all 199 have textual estimates. The 204-row CSV SHA-256 is A7DB47B6524BF34704B8B05BD7AE62F13FDEDFB866B0BCD905207CC4E5600F99. This is a diff-row and ledger consistency check, not a fresh full path-census, runtime test, or behavioral percentage.
 
+The current CPU-monitor candidate was reconciled again: the retention generator reports 205 mirror-difference rows, 204 with textual estimates; the C/H checks inventory all 1,794 current paths, report 200 host C/H differences, all partial, no unlisted differences or stale estimates, and seven absent paths already classified as excluded. The generated CSV SHA-256 is `AE3176BCE3872ACF23965EC121054B122E7A09BF956E5B0DCABB54927D2AA1F0`. These numbers describe this unpublished worktree, not proven runtime restoration. Raw output is in `build/t473-s11/cpu-monitor-{inventory,coverage}`.
+
+After restoring `c_tlb.c`'s original LF representation, the retention generator again reports 205 rows and 204 estimates; the current CSV SHA-256 is `ED6E68AA2392A2A71F16046BD817E7E780E25C59742A916D83E252C62C69E72B`. The previous hash above records the pre-normalization candidate.
+
+Following correction of duplicate exception identifiers, the regenerated current CSV SHA-256 is `96850EA9E952DF46851C84B43E4172B2B648B6AAC5B560D99C79FC8C73C3442F`; row and estimate counts remain 205 and 204. The identifiers are now DIV-473 through DIV-476, distinct from the previously assigned 312–315.
+
+After the duplicate-TLB mapping correction, the same generator reports 205 difference rows, 204 textual estimates, and current CSV SHA-256 `910B062D47279ABD9A4B385577A14097CDB5D3C016A33A282DFB5A27A7D25484`. This updates the earlier worktree hash; it does not represent completion of runtime recovery.
+
+After the protected-mode prefix and LMSW source alignment, the generator again reports 205 rows and 204 textual estimates. The current CSV SHA-256 is `A2F20DA7AA87BEB9A068330ED35E56748DAF8A3B96BA0C118BE2E0FE5A0ACBA5`; all previous hashes above describe earlier worktree states.
+
+The current post-alignment worktree was checked again (`build/t473-s11/cpu-monitor-coverage-r5`): 1,794 C/H paths, none unlisted; 200 differing host C/H files, all partial; no stale estimates; seven absent paths already marked excluded. These are source-inventory and textual-estimate results, not functional acceptance.
+
+After bounded string-I/O storage replaced the two heap allocations, the regenerated worktree CSV SHA-256 is `9B3E8A2140B90CD7E374148BC5B29194BBE45F3EE598D7631946DF9BB54AF595`; it contains 205 mirror-difference rows, of which 204 have textual estimates. The earlier coverage run predates this edit and is not the final current-worktree check.
+
+The subsequent current-worktree coverage check (`build/t473-s11/cpu-monitor-coverage-r6`, exit 0) lists all 1,794 current C/H paths, finds no unlisted differences or stale estimates, and classifies all 200 host C/H mirror differences as partial. Seven absent monitor files retain their recorded excluded disposition. This is a source coverage check, not proof of behavior or stage closure.
+
+After preserving existing guest bytes in the string-I/O input buffer, the retention generator reports 205 mirror-difference rows and 204 textual estimates, with CSV SHA-256 `9B26E48B325423515F41042ED3AC83FB7E7C93F367667769A0297893B448DBCF`. The previous coverage result predates this last edit; the current-worktree check must be rerun.
+
+The post-fix check completed successfully (`build/t473-s11/cpu-monitor-coverage-r7`, exit 0): all 1,794 current C/H paths are inventoried, no unlisted differences or stale estimates exist, and all 200 differing host C/H rows remain partial. Seven missing monitor paths retain their excluded dispositions.
+
 The retention generator was rerun after the current host-adapter and
 Alt+Enter changes. It again passed with 204 mirror differences (203 textual
 estimates) and the same CSV SHA-256. Its assertion requires every differing

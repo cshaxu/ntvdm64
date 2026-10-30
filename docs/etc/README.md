@@ -1,5 +1,9 @@
 # Supporting Material
 
+[T473 planned S12 NTCON input-source handoff](operations/m0-t473-s12-ntcon-input-source-handoff.md)
+records the owner's requested Console / Window keyboard lifecycle repair and
+acceptance matrix; it follows the active S11 and does not admit it early.
+
 [T472 S1 error-dialog owner ledger](evidence/m0-t472-s1-error-dialog-owner-ledger.md)
 records the selected original response/termination routes, the narrow modern
 WOW hard-error boundary, and the finite DOS-fatal proof handoff without

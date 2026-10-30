@@ -83,7 +83,11 @@ try {
     # The DLL must borrow the worker's existing session/TLS, not link a second
     # session implementation merely to satisfy its terminal-thread helper.
     Run-Step 'redirector-worker-import' x86 "dumpbin.exe /nologo /imports:ntvdm.exe `"$x86/worker/VDMREDIR.dll`""
-    if ((Get-Content (Join-Path $output 'redirector-worker-import.stdout.log') -Raw) -notmatch '\bsession_thread_finish\b') {
+    $imports = Get-Content (Join-Path $output 'redirector-worker-import.stdout.log') -Raw
+    $provider = Get-Content (Join-Path $x86 'worker/generated/ntvdm-wow32-provider.def') -Raw
+    $finish = [regex]::Match($provider, '(?m)^\s*session_thread_finish\s+@(\d+)\b')
+    if (!$finish.Success -or ($imports -notmatch '\bsession_thread_finish\b' -and
+        $imports -notmatch ('(?m)^\s*Ordinal\s+' + $finish.Groups[1].Value + '\s*$'))) {
         throw 'Redirector terminal cleanup must import session_thread_finish from ntvdm.exe'
     }
     $images = @(

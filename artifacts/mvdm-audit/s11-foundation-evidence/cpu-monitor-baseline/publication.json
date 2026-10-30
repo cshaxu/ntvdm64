@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/cpu-monitor-package-r8/package",
+  "count": 20,
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-30T19:38:07.9232848Z"
+}

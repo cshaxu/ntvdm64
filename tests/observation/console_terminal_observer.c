@@ -137,6 +137,8 @@ static void s36_note(const char *stage,const char *value)
     int length=snprintf(line,sizeof(line),"\r\nS36-PROBE %s <%s>\r\n",stage,value);
     if(length>0 && length<(int)sizeof(line))WriteFile(raw_log,line,(DWORD)length,&written,NULL);
 }
+static HANDLE caf_probe_job;
+static void repeat_guest_keys(HANDLE job,const char *stage);
 static int s36_sample_title(const char *runtime,const char *stage,char *title,DWORD capacity)
 {
     DWORD pid=s36_process_pid(runtime,"ntvwm.exe"),length,error;
@@ -154,11 +156,55 @@ static int s36_sample_title(const char *runtime,const char *stage,char *title,DW
 static int s36_send_caf(DWORD console_pid)
 {
     HANDLE input;INPUT_RECORD keys[2]={0};DWORD written=0;
+    static unsigned caf_calls;
+    ++caf_calls;
     FreeConsole();
     if(!AttachConsole(console_pid)){s36_note("caf","attach-failed");return 0;}
     input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
         FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_EXISTING,0,NULL);
     if(input==INVALID_HANDLE_VALUE){s36_note("caf","conin-failed");FreeConsole();return 0;}
+    if(GetEnvironmentVariableA("MVDM_CAF_REAL_RECORDS",NULL,0)) {
+        INPUT_RECORD sequence[6]={0},makes[3],breaks[3];DWORD first=0,last=0,make_count=0,break_count=0;
+        char delay_text[16],selected[16]={0};DWORD delay=0;unsigned i;
+        WORD vk[]={VK_CONTROL,VK_MENU,'F','F',VK_MENU,VK_CONTROL};
+        WORD scan[]={0x1d,0x38,0x21,0x21,0x38,0x1d};
+        DWORD flags[]={LEFT_CTRL_PRESSED,LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED,
+            LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED,LEFT_CTRL_PRESSED|LEFT_ALT_PRESSED,
+            LEFT_CTRL_PRESSED,0};
+        if(GetEnvironmentVariableA("MVDM_CAF_RELEASE_DELAY",delay_text,sizeof(delay_text)))
+            delay=(DWORD)strtoul(delay_text,NULL,10);
+        if(caf_calls==1 && GetEnvironmentVariableA("MVDM_CAF_DELAY_SECOND_ONLY",NULL,0))delay=0;
+        if(caf_calls>1)GetEnvironmentVariableA("MVDM_CAF_SINGLE_MODIFIER",selected,sizeof(selected));
+        for(i=0;i<6;i++) {
+            sequence[i].EventType=KEY_EVENT;sequence[i].Event.KeyEvent.bKeyDown=i<3;
+            sequence[i].Event.KeyEvent.wRepeatCount=1;
+            sequence[i].Event.KeyEvent.wVirtualKeyCode=vk[i];sequence[i].Event.KeyEvent.wVirtualScanCode=scan[i];
+            sequence[i].Event.KeyEvent.dwControlKeyState=NUMLOCK_ON|flags[i];
+            if((!strcmp(selected,"ctrl") && vk[i]==VK_MENU) ||
+               (!strcmp(selected,"alt") && vk[i]==VK_CONTROL))continue;
+            if(i<3)makes[make_count++]=sequence[i];else breaks[break_count++]=sequence[i];
+        }
+        if(caf_calls>1 && GetEnvironmentVariableA("MVDM_CAF_PREBALANCE",NULL,0)) {
+            DWORD part=0,balanced=0,trigger=0;
+            if(make_count>1 && break_count>1 &&
+               WriteConsoleInputW(input,makes,make_count-1,&part) && part==make_count-1 &&
+               WriteConsoleInputW(input,breaks+1,break_count-1,&balanced) && balanced==break_count-1 &&
+               WriteConsoleInputW(input,makes+make_count-1,1,&trigger) && trigger==1)
+                first=make_count;
+            s36_note("prebalance",first==make_count ? "sent" : "failed");
+        } else WriteConsoleInputW(input,makes,make_count,&first);
+        if(first==make_count) {
+            if(delay)Sleep(delay);
+            if(delay && caf_probe_job)repeat_guest_keys(caf_probe_job,"guest-keys-before-late-release");
+            WriteConsoleInputW(input,breaks,break_count,&last);
+            if(delay && caf_probe_job) {
+                Sleep(150);
+                repeat_guest_keys(caf_probe_job,"guest-keys-after-late-release");
+            }
+        }
+        CloseHandle(input);FreeConsole();s36_note("caf-physical-records",first==make_count && last==break_count ? "sent" : "failed");
+        return first==make_count && last==break_count;
+    }
     keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
     keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode='F';
     keys[0].Event.KeyEvent.wVirtualScanCode=0x21;
@@ -236,6 +282,174 @@ static int s37_window_text(const char *text)
         ++text;
     }
     return 1;
+}
+
+/* Test-owned NTCON Window only. The hook executes on the Window thread and
+ * gives native GetKeyboardState the same Ctrl/Alt transitions as the messages. */
+static int repeat_window_caf(void)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);
+    HMODULE module;HHOOK hook;DWORD_PTR result;DWORD tid;
+    char path[MAX_PATH];unsigned i;
+    const UINT messages[]={WM_KEYDOWN,WM_SYSKEYDOWN,WM_SYSKEYDOWN,
+        WM_SYSKEYUP,WM_SYSKEYUP,WM_KEYUP};
+    const WPARAM keys[]={VK_CONTROL,VK_MENU,'F','F',VK_MENU,VK_CONTROL};
+    const LPARAM params[]={1|(0x1dL<<16),1|(0x38L<<16)|(1L<<29),
+        1|(0x21L<<16)|(1L<<29),1|(0x21L<<16)|(1L<<29)|(1L<<30)|(1L<<31),
+        1|(0x38L<<16)|(1L<<29)|(1L<<30)|(1L<<31),1|(0x1dL<<16)|(1L<<30)|(1L<<31)};
+    if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
+    module=LoadLibraryA(path);if(!module)return 0;
+    tid=GetWindowThreadProcessId(window,NULL);
+    hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)GetProcAddress(module,"caf_probe_hook"),module,tid);
+    if(!hook){FreeLibrary(module);return 0;}
+    for(i=0;i<6;i++) {
+        if(!IsWindow(window))break;
+        if(!SendMessageTimeoutW(window,messages[i],keys[i],params[i],SMTO_ABORTIFHUNG,3000,&result))break;
+    }
+    UnhookWindowsHookEx(hook);FreeLibrary(module);
+    s36_note("window-caf",i==6 ? "sent" : "partial");
+    return i>=3;
+}
+
+static int repeat_window_physical(const char *text)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);HMODULE module;HHOOK hook;
+    char path[MAX_PATH];DWORD tid;DWORD_PTR result;int ok=1;
+    if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
+    module=LoadLibraryA(path);if(!module)return 0;
+    tid=GetWindowThreadProcessId(window,NULL);
+    hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)GetProcAddress(module,"caf_probe_hook"),module,tid);
+    if(!hook){FreeLibrary(module);return 0;}
+    while(*text && ok) {
+        SHORT mapping=VkKeyScanA(*text++);UINT key=(BYTE)mapping;
+        UINT scan=MapVirtualKeyW(key,MAPVK_VK_TO_VSC);
+        if(mapping==-1 || (mapping&0xff00) || !scan){ok=0;break;}
+        ok=SendMessageTimeoutW(window,WM_KEYDOWN,key,1|((LPARAM)scan<<16),SMTO_ABORTIFHUNG,3000,&result)!=0;
+        if(ok)ok=SendMessageTimeoutW(window,WM_KEYUP,key,1|((LPARAM)scan<<16)|(1L<<30)|(1L<<31),SMTO_ABORTIFHUNG,3000,&result)!=0;
+    }
+    UnhookWindowsHookEx(hook);FreeLibrary(module);return ok;
+}
+
+static int repeat_window_modifiers(void)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);DWORD_PTR result;unsigned i;
+    char selected[16]={0};
+    const WPARAM keys[]={VK_CONTROL,VK_CONTROL,VK_MENU,VK_MENU};
+    const UINT msgs[]={WM_KEYDOWN,WM_KEYUP,WM_SYSKEYDOWN,WM_SYSKEYUP};
+    const unsigned scans[]={0x1d,0x1d,0x38,0x38};
+    if(!window)return 0;
+    GetEnvironmentVariableA("MVDM_CAF_RECOVER",selected,sizeof(selected));
+    for(i=0;i<4;i++) {
+        if(!strcmp(selected,"ctrl") && i>=2)continue;
+        if(!strcmp(selected,"alt") && i<2)continue;
+        LPARAM lp=1|((LPARAM)scans[i]<<16);
+        if(i==1 || i==3)lp|=(1L<<30)|(1L<<31);
+        if(!SendMessageTimeoutW(window,msgs[i],keys[i],lp,SMTO_ABORTIFHUNG,3000,&result))return 0;
+    }
+    return 1;
+}
+
+static int repeat_window_contains(const char *needle)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);DWORD pid;HANDLE process;
+    observed_window_frame sample;kvm_text_cell *cells;SIZE_T bytes,copied;char *text;
+    size_t i;int found=0;
+    if(!window)return 0;
+    GetWindowThreadProcessId(window,&pid);process=OpenProcess(PROCESS_VM_READ,FALSE,pid);
+    if(!process)return 0;
+    if(!observer_window_frame_read(process,window,&sample) || !sample.frame.text ||
+        sample.text.capacity>100000){CloseHandle(process);return 0;}
+    bytes=sample.text.capacity*sizeof(*cells);
+    cells=malloc(bytes);text=malloc(sample.text.capacity+1);
+    if(cells && text && ReadProcessMemory(process,sample.text.cells,cells,bytes,&copied) && copied==bytes) {
+        for(i=0;i<sample.text.capacity;i++)text[i]=cells[i].glyph_index ? (char)cells[i].glyph_index : ' ';
+        text[i]=0;found=strstr(text,needle)!=NULL;
+    }
+    free(cells);free(text);CloseHandle(process);return found;
+}
+
+static void repeat_frame_diagnostic(void)
+{
+    HWND window=FindWindowW(L"LibKvmWindow",NULL);DWORD pid=0;HANDLE process;
+    observed_window_frame sample;char note[256];
+    if(!window){s36_note("frame","no-window");return;}
+    GetWindowThreadProcessId(window,&pid);process=OpenProcess(PROCESS_VM_READ,FALSE,pid);
+    if(!process){snprintf(note,sizeof(note),"open-failed pid=%lu error=%lu",pid,GetLastError());s36_note("frame",note);return;}
+    if(!observer_window_frame_read(process,window,&sample)) {
+        snprintf(note,sizeof(note),"sample-failed pid=%lu error=%lu",pid,GetLastError());s36_note("frame",note);
+    } else if(sample.frame.text) {
+        snprintf(note,sizeof(note),"pid=%lu text=%ux%u cursor=%d,%d capacity=%lu",pid,
+            sample.text.text_columns,sample.text.text_rows,sample.text.cursor_column,
+            sample.text.cursor_row,(unsigned long)sample.text.capacity);s36_note("frame",note);
+    } else s36_note("frame","graphics");
+    CloseHandle(process);
+}
+
+/* Read-only observation of the installed worker's IsKeyDown array. Discover
+ * the actual relocated operand from its unique machine-code signature; only
+ * inspect a worker proven to belong to this probe's owned job. */
+static void repeat_guest_keys(HANDLE job,const char *stage)
+{
+    const BYTE prefix[]={0x8b,0x44,0x24,0x04,0x8b,0x04,0x85};
+    HANDLE file=INVALID_HANDLE_VALUE,snapshot=INVALID_HANDLE_VALUE,process=NULL,modules=INVALID_HANDLE_VALUE;
+    BYTE *image=NULL;DWORD size=0,read=0,rva=0,found=0;SIZE_T got;unsigned i;
+    IMAGE_DOS_HEADER *dos;IMAGE_NT_HEADERS32 *nt;IMAGE_SECTION_HEADER *sections;
+    PROCESSENTRY32 entry={0};MODULEENTRY32 module={0};char note[256];
+    file=CreateFileA("O:\\winnt\\system32\\ntvdm.exe",GENERIC_READ,FILE_SHARE_READ|FILE_SHARE_DELETE,
+        NULL,OPEN_EXISTING,0,NULL);
+    if(file==INVALID_HANDLE_VALUE)goto fail;
+    size=GetFileSize(file,NULL);if(size<sizeof(*dos) || size>100000000)goto fail;
+    image=malloc(size);if(!image || !ReadFile(file,image,size,&read,NULL) || read!=size)goto fail;
+    dos=(IMAGE_DOS_HEADER *)image;
+    if(dos->e_magic!=IMAGE_DOS_SIGNATURE || dos->e_lfanew<0 || (DWORD)dos->e_lfanew>size-sizeof(*nt))goto fail;
+    nt=(IMAGE_NT_HEADERS32 *)(image+dos->e_lfanew);
+    if(nt->Signature!=IMAGE_NT_SIGNATURE || nt->OptionalHeader.Magic!=IMAGE_NT_OPTIONAL_HDR32_MAGIC)goto fail;
+    sections=IMAGE_FIRST_SECTION(nt);
+    for(i=0;i<nt->FileHeader.NumberOfSections;i++) {
+        DWORD j,start=sections[i].PointerToRawData,end=start+sections[i].SizeOfRawData;
+        if(end<start || end>size)goto fail;
+        if(!(sections[i].Characteristics&IMAGE_SCN_MEM_EXECUTE))continue;
+        for(j=start;j+12<=end;j++)if(!memcmp(image+j,prefix,sizeof(prefix)) && image[j+11]==0xc3) {
+            rva=sections[i].VirtualAddress+j-start;++found;
+        }
+    }
+    if(found!=1)goto fail;
+    snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,0);entry.dwSize=sizeof(entry);
+    if(snapshot==INVALID_HANDLE_VALUE || !Process32First(snapshot,&entry))goto fail;
+    do {
+        BOOL owned=FALSE;char path[MAX_PATH];DWORD length=sizeof(path);
+        if(_stricmp(entry.szExeFile,"ntvdm.exe"))continue;
+        process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION|PROCESS_VM_READ,FALSE,entry.th32ProcessID);
+        if(!process)continue;
+        if(!IsProcessInJob(process,job,&owned) || !owned ||
+           !QueryFullProcessImageNameA(process,0,path,&length) || _stricmp(path,"O:\\winnt\\system32\\ntvdm.exe")) {
+            CloseHandle(process);process=NULL;continue;
+        }
+        break;
+    }while(Process32Next(snapshot,&entry));
+    if(!process)goto fail;
+    modules=CreateToolhelp32Snapshot(TH32CS_SNAPMODULE|TH32CS_SNAPMODULE32,entry.th32ProcessID);
+    module.dwSize=sizeof(module);
+    if(modules==INVALID_HANDLE_VALUE || !Module32First(modules,&module))goto fail;
+    {
+        BYTE instruction[12];DWORD array;int ctrl=0,alt=0;
+        if(!ReadProcessMemory(process,module.modBaseAddr+rva,instruction,sizeof(instruction),&got) ||
+           got!=sizeof(instruction) || memcmp(instruction,prefix,sizeof(prefix)) || instruction[11]!=0xc3)goto fail;
+        memcpy(&array,instruction+7,sizeof(array));
+        if(!ReadProcessMemory(process,(void *)(ULONG_PTR)(array+58*sizeof(int)),&ctrl,sizeof(ctrl),&got) || got!=sizeof(ctrl) ||
+           !ReadProcessMemory(process,(void *)(ULONG_PTR)(array+60*sizeof(int)),&alt,sizeof(alt),&got) || got!=sizeof(alt))goto fail;
+        snprintf(note,sizeof(note),"pid=%lu ctrl=%d alt=%d code_rva=%lx array=%lx",entry.th32ProcessID,ctrl,alt,rva,array);
+        s36_note(stage,note);
+    }
+    goto done;
+fail:
+    snprintf(note,sizeof(note),"unavailable error=%lu signature_count=%lu",GetLastError(),found);s36_note(stage,note);
+done:
+    if(modules!=INVALID_HANDLE_VALUE)CloseHandle(modules);
+    if(process)CloseHandle(process);
+    if(snapshot!=INVALID_HANDLE_VALUE)CloseHandle(snapshot);
+    if(file!=INVALID_HANDLE_VALUE)CloseHandle(file);
+    free(image);
 }
 
 static int log_contains(const char *path,const char *needle) {
@@ -501,6 +715,48 @@ if(argc!=4 && (argc!=5 || (strcmp(argv[4],"--s38-window-reentry") && strcmp(argv
     }
     if(argc==5 && !strcmp(argv[4],"--s38-window-reentry")) {
         char runtime[MAX_PATH]="O:\\winnt",launch[MAX_PATH+32];
+        if(GetEnvironmentVariableA("MVDM_CAF_THREE_PROBE",NULL,0)) {
+            ULONGLONG deadline;int first=0,second=0;HWND w;
+            caf_probe_job=job;
+            if(!s36_send_caf(pi.dwProcessId))return 90;
+            deadline=GetTickCount64()+10000;
+            while(GetTickCount64()<deadline && !(w=FindWindowW(L"LibKvmWindow",NULL)))Sleep(25);
+            if(!w)return 91;
+            if(!repeat_window_physical("firstcaf"))return 92;
+            deadline=GetTickCount64()+8000;
+            while(GetTickCount64()<deadline && !(first=repeat_window_contains("firstcaf")))Sleep(25);
+            s36_note("first-input",first ? "observed" : "missing");
+            repeat_frame_diagnostic();
+            repeat_guest_keys(job,"guest-keys-first");
+            if(!repeat_window_caf())return 93;
+            deadline=GetTickCount64()+8000;
+            while(IsWindow(w) && GetTickCount64()<deadline)Sleep(25);
+            if(IsWindow(w)){s36_note("second-caf","window-still-open");return 94;}
+            s36_note("second-caf","window-retired");Sleep(1000);
+            if(!s36_send_caf(pi.dwProcessId))return 95;
+            deadline=GetTickCount64()+10000;w=NULL;
+            while(GetTickCount64()<deadline && !(w=FindWindowW(L"LibKvmWindow",NULL)))Sleep(25);
+            if(!w)return 96;
+            if(!repeat_window_physical("thirdcaf"))return 97;
+            deadline=GetTickCount64()+8000;
+            while(GetTickCount64()<deadline && !(second=repeat_window_contains("thirdcaf")))Sleep(25);
+            s36_note("third-input",second ? "observed" : "missing");
+            repeat_frame_diagnostic();
+            repeat_guest_keys(job,"guest-keys-third");
+            if(first && !second) {
+                int recovered=0;
+                if(repeat_window_modifiers() && repeat_window_physical("recovercaf")) {
+                    deadline=GetTickCount64()+5000;
+                    while(GetTickCount64()<deadline && !(recovered=repeat_window_contains("recovercaf")))Sleep(25);
+                }
+                s36_note("modifier-recovery",recovered ? "observed" : "missing");
+                repeat_guest_keys(job,"guest-keys-recovered");
+            }
+            printf("caf-three first=%d third=%d\n",first,second);fflush(stdout);
+            s36_close_window();CloseHandle(job);ClosePseudoConsole(pty);CloseHandle(write_pipe);
+            WaitForSingleObject(thread,3000);CloseHandle(raw_log);
+            return first && second ? 0 : 1;
+        }
         GetEnvironmentVariableA("TEST_RUNTIME_ROOT",runtime,sizeof(runtime));
         snprintf(launch,sizeof(launch),"%s\\run16 command\r",runtime);
         send_keys(launch);Sleep(3000);

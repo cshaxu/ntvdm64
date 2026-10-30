@@ -649,6 +649,46 @@ test_tlb()
       }
    }
 
+/* DIVERGENCE(MVDM-HOST-DIV-474): expose the existing cached access decision
+ * to the host fault monitor without mutating CPU/TLB state.  A miss is
+ * distinct from a cached protection denial: 1=hit, -1=denied, 0=miss. */
+GLOBAL IS32
+ccpu_monitor_cached_access IFN3(LIN_ADDR, lin, IUM8, access, PHY_ADDR *, phy)
+   {
+   ISM32 set, entry;
+   IU32 lookup;
+   TLB_ENTRY *e;
+   access &= 0x3;
+#ifdef FAST_TLB
+   {
+      IU8 pi = page_index[lin >> DIR_TBL_SHIFT];
+      IU32 ma = pi ? page_address[(pi & PI_SET_ENTRY_MASK) + access] : 0;
+      if (ma)
+         {
+         *phy = ma | (lin & OFFSET_MASK);
+         return 1;
+         }
+   }
+#endif
+   entry = lin >> DIR_TBL_SHIFT & 0x07;
+   lookup = lin & ~OFFSET_MASK;
+   for (set = 0; set < NR_TLB_SETS; set++)
+      {
+      e = &tlb[set][entry];
+      if (e->v && e->la == lookup && (!(access & 1) || e->d))
+         {
+#ifdef SPC486
+         if (access_check[GET_WP()][access][e->mode]) return -1;
+#else
+         if (access_check[access][e->mode]) return -1;
+#endif
+         *phy = e->pa | (lin & OFFSET_MASK);
+         return 1;
+         }
+      }
+   return 0;
+   }
+
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Map external linear address to physical address.                   */
 /* Used only by functions external to the C CPU.                      */

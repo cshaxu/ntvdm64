@@ -4,6 +4,13 @@
 
 **Active: M0 T473 S11**
 
+The CPU40 protected-instruction monitor and cached-TLB boundary are now in a
+tested partial ten-component baseline. Full (16 gates), 51 selected CCPU cases,
+Winmine/SOL/WRITE lifecycle witnesses and four SOL Options cycles passed; both
+release destinations matched all ten image hashes. Original operand-fault,
+mapping/reentry and broader NPX/debug behavior remain S11 work; publication is
+not S11 closure. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
+
 S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The owner approved automatic progression and the [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). S11 recovers original execution, callback, identity and lifetime foundations. Preserve all unrelated work and immutable guest media.
 
 The published foundation group includes far-transfer ownership and WOW
@@ -227,20 +234,8 @@ T461 S3 may use only `build/t461-s3` for disposable persistence/concurrency
 evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
 Stable `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T462 S1 may use only `build/t462-s1` for disposable read-only window/paint
-attribution evidence, with a 30-minute phase, 2-GiB size and 10-minute
-no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
-are never task evidence roots.
-
-T463 S2 may use only `build/t463-s2` for disposable SOL Options attribution
-and coherent three-application evidence, with a 45-minute phase, 2-GiB size
-and 10-minute no-progress budget. Stable `.ninja` and `.ccache` remain
-reusable caches and are never task evidence roots.
-
-T463 S3 may use only `build/t463-s3` for disposable lifecycle and owner
-acceptance evidence, with a 45-minute phase, 2-GiB size and 10-minute
-no-progress budget. Stable `.ninja` and `.ccache` remain reusable caches and
-are never task evidence roots.
+T462 and T463 disposable evidence remains under their `build/t462-s1` and
+`build/t463-s2`/`s3` roots; the shared caches are not evidence roots.
 
 T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
 

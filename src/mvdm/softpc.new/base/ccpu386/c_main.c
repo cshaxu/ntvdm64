@@ -594,6 +594,53 @@ IMPORT IBOOL sf_debug_char_waiting();
 #endif	/* !PROD */
 #endif	/* SFELLOW */
 
+#if defined(NTVDM) && !defined(SFELLOW)
+/* DIVERGENCE(MVDM-HOST-DIV-476): a monitor-emulated debug-register write
+ * must leave fast execution just as CPU40's original MOV DR instruction does. */
+GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
+{
+   MOV_DR(index, value);
+   quick_mode = FALSE;
+   /* Handled exceptions resume at NEXT_INST, after the usual inter-
+    * instruction check. Check the newly armed execution breakpoint now. */
+   CCPU_save_EIP = GET_EIP();
+   if (nr_inst_break && GET_RF() == 0) {
+      check_for_inst_exception(GET_CS_BASE() + GET_EIP());
+      if (debug_exception_pending) {
+         doing_contributory = FALSE;
+         Int1_f();
+      }
+   }
+}
+
+static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)
+{
+   extern BOOL host_hwint_hook IPT1(IS32, int_no);
+   cpu_hw_interrupt_number = (IU16)vector;
+   EXT = EXTERNAL;
+   SYNCH_TICK();
+   if (!host_hwint_hook(vector))
+      do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
+   CCPU_save_EIP = GET_EIP();
+}
+
+/* DIVERGENCE(MVDM-HOST-DIV-475): a handled protected STI completes its
+ * fault before delivering the same CPU-owned external interrupt path. */
+GLOBAL VOID ccpu_monitor_dispatch_irq IFN0()
+{
+   IU32 hook_address = 0;
+   IS32 vector;
+   if (!c_cpu_take_event(CPU_HW_INT_MASK)) return;
+   vector = ica_intack(&hook_address);
+   if (vector == -1) return;
+   doing_contributory = FALSE;
+   /* Normal NEXT_INST saves the completed instruction before dispatch; a
+    * fault while constructing the interrupt frame must see the same EIP. */
+   CCPU_save_EIP = GET_EIP();
+   ccpu_dispatch_accepted_irq(vector);
+}
+#endif
+
 
 /* debugging stuff */
 IMPORT int do_condition_checks;
@@ -4503,22 +4550,17 @@ TYPEFF_3:
 	  * a fabricated INT FF. */
 	 if (acknowledged_interrupt != -1)
 	 {
+	     /* The host monitor and normal CPU path share this accepted-IRQ
+	      * tail, including callback and saved-instruction bookkeeping. */
+#ifdef NTVDM
+	     ccpu_dispatch_accepted_irq(acknowledged_interrupt);
+#else
 	     cpu_hw_interrupt_number = (IU16)acknowledged_interrupt;
 	     EXT = EXTERNAL;
 	     SYNCH_TICK();
-	     /* DPMI registered a source-owned hardware handler through the original
-	      * VdmInstallHardwareIntHandler API.  CCPU owns acknowledge/delivery in
-	      * this product, therefore consult it before the original BIOS fallback. */
-#ifdef NTVDM
-	     {
-	     extern BOOL host_hwint_hook IPT1(IS32, int_no);
-	     if (!host_hwint_hook((IS32)cpu_hw_interrupt_number))
-	         do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-	     }
-#else
 	     do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-#endif
 	     CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
+#endif
 	 }
       }
 #else	/* SFELLOW */

@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+    "Hash": "1506C5261DBA2A41E8841CDCA0BECA4DC0D01D1972BD129E21440806FA48BA01"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "Hash": "387AB211066FB074CBE4E13F48BAE9DCB5BC658348F794EDEEE116EEE9FBE5C8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+    "Hash": "0F8466B85AB94FB7D13EBEE8B9922AC1F275CE92DAA77B9CCB331263DED993E5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_monitor_boundary_fixture.c",
+    "Hash": "D37B6C361C51EADA993DE8A90A2DB550D29F38FAFA4F3C5CFBE080C4834FB667"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-monitor-boundary.ps1",
+    "Hash": "1865DAED4894085186E7766B685113A6A5EEA3829E8997E125366849A0F84468"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "1C33F016B091B7941B25425EE47DA0F63BD9E0C6EDB6A1E5518A6A68180CED69"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\build\\Test-FullComponentBuild.ps1",
+    "Hash": "9E74DB1B20EB754D7C57434784ACDD9BCE6BBFBF963497AF3334E69E8EC376A7"
+  }
+]
