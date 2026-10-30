@@ -1,0 +1,64 @@
+SOL options: round=1
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=3203
+SOL options: dialog-close-recovery-ms=1906
+SOL options: worker-cpu-open-ms=2719 worker-cpu-close-ms=1844
+SOL options: game-thread-cpu-open-ms=2672 game-thread-cpu-close-ms=1860
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=2
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1859
+SOL options: dialog-close-recovery-ms=1875
+SOL options: worker-cpu-open-ms=1516 worker-cpu-close-ms=1828
+SOL options: game-thread-cpu-open-ms=1484 game-thread-cpu-close-ms=1828
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=3
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1750
+SOL options: dialog-close-recovery-ms=1859
+SOL options: worker-cpu-open-ms=1703 worker-cpu-close-ms=1828
+SOL options: game-thread-cpu-open-ms=1640 game-thread-cpu-close-ms=1828
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=4
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1719
+SOL options: dialog-close-recovery-ms=1812
+SOL options: worker-cpu-open-ms=1641 worker-cpu-close-ms=1781
+SOL options: game-thread-cpu-open-ms=1609 game-thread-cpu-close-ms=1782
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=5
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1734
+SOL options: dialog-close-recovery-ms=1860
+SOL options: worker-cpu-open-ms=1547 worker-cpu-close-ms=1765
+SOL options: game-thread-cpu-open-ms=1547 game-thread-cpu-close-ms=1766
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=6
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1672
+SOL options: dialog-close-recovery-ms=1813
+SOL options: worker-cpu-open-ms=1641 worker-cpu-close-ms=1672
+SOL options: game-thread-cpu-open-ms=1625 game-thread-cpu-close-ms=1672
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=7
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1735
+SOL options: dialog-close-recovery-ms=1859
+SOL options: worker-cpu-open-ms=1610 worker-cpu-close-ms=1828
+SOL options: game-thread-cpu-open-ms=1594 game-thread-cpu-close-ms=1828
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=8
+SOL options: game-thread=24872
+SOL options: command=1003
+SOL options: dialog-visible-ms=1796
+SOL options: dialog-close-recovery-ms=1891
+SOL options: worker-cpu-open-ms=1625 worker-cpu-close-ms=1875
+SOL options: game-thread-cpu-open-ms=1609 game-thread-cpu-close-ms=1875
+PASS SOL Options command, modal dialog, close and parent recovery

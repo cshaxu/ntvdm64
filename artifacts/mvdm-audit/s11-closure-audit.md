@@ -164,3 +164,8 @@ the modified fixture copy is
 Inputs and output are under `build/t473-s11/creation-lock-study/failrun` and
 its parent. This verifies this injected failure in one controlled task, not
 all failures, parallel guest execution, or the observed SOL 1400.
+
+## Current released SOL lifecycle repeat
+
+The production candidate's visible-desktop probe completed eight consecutive Options opens and closes and returned launcher exit 0. The exact ten-image stage manifest, probe and observer reports are in [sol-current-lifecycle](s11-foundation-evidence/sol-current-lifecycle/). WOW32 SHA-256 was `6EF2791521DB2B962BFB38E800143C840CBCC3AF70417FDF7BA4E83605C34741`. This is a bounded positive check, not an attribution or resolution of the earlier intermittent 1400. The first sandboxed attempt could not allocate the existing short staging directory and did not exercise the product; the authorized desktop-capable run passed.
+
