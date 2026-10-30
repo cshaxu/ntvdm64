@@ -1,13 +1,14 @@
 # T473 S11 closure audit — current working candidate
 
 This is a bounded review of the active stage, not T closure. The earlier
-foundation candidate was committed as `a8a0aef7e`; the current ten-image
-release and startup-failure correction are recorded in
+foundation candidate was committed as `a8a0aef7e`; the later startup-failure
+correction is recorded in
 [wow-host-attach-failure](s11-foundation-evidence/wow-host-attach-failure/review.md). The
 owner moved SOL/multi-window performance optimization to the queue tail;
 the distinct intermittent native-return failure remains a correctness issue.
-The current ten-image candidate and its results are identified in
-[idle-comment-integrated](s11-foundation-evidence/idle-comment-integrated/review.md);
+The current ten-image release and its results are identified in
+[graph-owner-candidate](s11-foundation-evidence/graph-owner-candidate/review.md);
+[idle-comment-integrated](s11-foundation-evidence/idle-comment-integrated/review.md),
 [retirement-error-integrated](s11-foundation-evidence/retirement-error-integrated/review.md) and [coherent-current](s11-foundation-evidence/coherent-current/review.md) are earlier candidates.
 
 | Foundation | Current implementation/evidence | Remaining boundary |
@@ -48,9 +49,9 @@ stack-underflow witness, with [production-object instruction comparison](s11-fou
 
 ## Delivery status
 
-The latest [scalar CPU-trace release](s11-foundation-evidence/trace-scalar-candidate/review.md)
-supersedes the package identities below. It passed the 16-gate Full suite and
-Winmine gameplay, and both delivery destinations matched all ten hashes. It
+The latest [graph-owner release](s11-foundation-evidence/graph-owner-candidate/review.md)
+supersedes the package identities below. It passed the 16-gate Full suite,
+Winmine gameplay and focused SOL, and both destinations matched all ten hashes. It
 does not resolve the separately observed SOL 1400 or establish every boundary
 listed in this audit.
 

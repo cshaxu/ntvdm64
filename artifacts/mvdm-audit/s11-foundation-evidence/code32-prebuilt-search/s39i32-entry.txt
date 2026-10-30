@@ -1,0 +1,40 @@
+00000000  BCAC12            mov sp,0x12ac
+00000003  BB2B01            mov bx,0x12b
+00000006  B44A              mov ah,0x4a
+00000008  CD21              int byte 0x21
+0000000A  0F822F01          jc 0x13d
+0000000E  B88716            mov ax,0x1687
+00000011  CD2F              int byte 0x2f
+00000013  85C0              test ax,ax
+00000015  0F852401          jnz 0x13d
+00000019  893E4C02          mov [0x24c],di
+0000001D  8C064E02          mov word [0x24e],es
+00000021  89F3              mov bx,si
+00000023  85DB              test bx,bx
+00000025  740A              jz 0x31
+00000027  B448              mov ah,0x48
+00000029  CD21              int byte 0x21
+0000002B  0F820E01          jc 0x13d
+0000002F  8EC0              mov es,ax
+00000031  B80100            mov ax,0x1
+00000034  FF1E4C02          call word far [0x24c]
+00000038  0F820101          jc 0x13d
+0000003C  C606A80231        mov byte [0x2a8],0x31
+00000041  B80402            mov ax,0x204
+00000044  B360              mov bl,0x60
+00000046  CD31              int byte 0x31
+00000048  0F82F100          jc 0x13d
+0000004C  6689165002        mov [0x250],edx
+00000051  890E5402          mov [0x254],cx
+00000055  B80502            mov ax,0x205
+00000058  B360              mov bl,0x60
+0000005A  8CC9              mov cx,cs
+0000005C  66BA27020000      mov edx,0x227
+00000062  CD31              int byte 0x31
+00000064  0F82D500          jc 0x13d
+00000068  89265C02          mov [0x25c],sp
+0000006C  B83412            mov ax,0x1234
+0000006F  F9                stc
+00000070  CD60              int byte 0x60
+00000072  0F83C700          jnc 0x13d
+00000076  3D3412            cmp ax,0x1234
