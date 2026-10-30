@@ -27,6 +27,11 @@ its assertion or report universal test success. Reassess only if an in-scope
 connection or real guest manifestation is established, or the owner changes
 that boundary.
 
+The historical [Winmine 1400 non-pass](s11-foundation-evidence/winmine-native-return-1400/review.md)
+is another unlocalized native-return observation. Its failure substage and
+window are unknown; the separately captured and repaired cross-thread root
+retirement race cannot be assumed to explain it or the historical SOL failure.
+
 S11 cannot be declared fully complete on this checkpoint: the observed SOL
 failure has not been attributed, and the existing installation is not a
 complete manifest-verified guest environment. The remaining work is bounded

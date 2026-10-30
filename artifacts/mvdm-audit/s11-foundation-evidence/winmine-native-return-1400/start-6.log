@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\tests\observation\verify-wow-multi-dialog.ps1:87
+Line |
+  87 |  … $LASTEXITCODE){throw "WOW dialog matrix probe failed: $LASTEXITCODE"}
+     |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | WOW dialog matrix probe failed: 9

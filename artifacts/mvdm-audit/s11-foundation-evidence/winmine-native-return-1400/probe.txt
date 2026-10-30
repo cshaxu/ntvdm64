@@ -1,0 +1,7 @@
+main=00620A30 command=524
+round=1
+command-state enabled=1 menu-state=00000008 thread=31332
+dialog hwnd=029607E4 title=
+dialog-visible-ms=1063
+close-recovery-ms=6703
+PASS menu dialog and parent recovery
