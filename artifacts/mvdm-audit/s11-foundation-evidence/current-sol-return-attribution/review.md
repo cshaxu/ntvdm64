@@ -19,3 +19,11 @@ a guest: the first baseline lacked a system32 directory; the second reused an
 existing output path; an unprivileged attempt could not create the required
 short physical stage. The successful run used the established isolated stage
 and a fresh evidence directory.
+
+The `return-payload-failed` label is broader than a window failure:
+`publish_call_windows` first refreshes window roots and then, when the
+returned menu remains valid, refreshes that menu. A failure marker at this
+stage alone would not distinguish those operations or identify a window
+generation. `return-menu-failed` refers instead to the later process-wide
+menu refresh. No such marker appeared in this run; do not use these labels
+to attribute the historical failure without a more specific witness.
