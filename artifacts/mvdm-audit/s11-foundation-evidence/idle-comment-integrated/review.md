@@ -152,6 +152,15 @@ stage of this candidate. Its [receipt](winmine-gameplay/result.txt),
 The runner records guest, NTVDM, WOW32 and Run16 hashes, not all ten runtime
 hashes, so do not present that separate record as a full ten-image manifest.
 
+After publication, a separate three-round WINMINE Custom-dialog probe passed
+each dialog close and parent recovery, followed by normal launcher completion.
+Its ten-image manifest matched `assets/release/release-manifest.json` exactly;
+the [result](winmine-dialog/result.txt), [probe](winmine-dialog/probe.txt),
+and [manifest](winmine-dialog/manifest.json) are retained. The probe recorded
+the main window minimized, so this verifies its message-driven dialog path,
+not on-screen placement or a forced concurrent retirement. Three passes do
+not identify or disprove the intermittent 1400 failure.
+
 The tested ten-component package was subsequently published to both
 `assets/release` and `O:/winnt/system32`, with all 20 destination hashes
 verified against the Full receipt. The previous two sets were saved under

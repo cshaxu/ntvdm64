@@ -6,7 +6,7 @@
 
 S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The owner approved automatic progression and the [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). S11 recovers original execution, callback, identity and lifetime foundations. Preserve all unrelated work and immutable guest media.
 
-The unpublished foundation group includes far-transfer ownership and WOW
+The published foundation group includes far-transfer ownership and WOW
 entry ABI; NIDDB internal fixes remain outside scope. The selected bridge
 passed controlled loader cycles, not real guest DLL lifecycle. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
 
@@ -23,8 +23,7 @@ and the [performance investigation](../../artifacts/mvdm-audit/s11-dialog-perfor
 An independent prebuilt Win16 witness found that T460 narrowed the accepted
 worker-shared idle query to the selected thread. Restoring the shared query
 passes same-worker cross-task, separate-worker and common-dialog controls; the
-coherent candidate also passed Control. It is unpublished and still needs
-the remaining product gates and review.
+published candidate also passed the Full suite.
 
 Winmine probes previously changed a shared VirtualStore profile without an
 original backup. The owner now explicitly permits restarting Winmine and
@@ -36,7 +35,7 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 The restaged candidate passed Console-17, Window-17, Control and shared-WOW. Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The [ten-input candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/coherent-current/review.md)
+The [ten-input candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md)
 uses current selected cached targets and passed the Full suite and Winmine
 gameplay probe. All ten components are published and hash-verified; S11
 correctness review remains active.
@@ -47,11 +46,11 @@ The current source-retention table was regenerated and host C/H coverage and
 partial-difference checks pass. This is source reconciliation, not runtime
 completion; see [live delta](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
 
-The unpublished NTVDM export candidate selects the original CPU40 template and
+The published NTVDM export implementation selects the original CPU40 template and
 records released ordinals. Its PE retains all 269 released name/ordinal pairs
 and adds two memory exports; automated ordinal and selected alias/owner checks
-pass. A real-worker VDD witness passes on the reconciled candidate; full
-product acceptance remains open. See [export review](../../artifacts/mvdm-audit/export-source-recovery-review.md).
+pass. A real-worker VDD witness and the Full suite passed; broader provider
+behavior remains under review. See [export review](../../artifacts/mvdm-audit/export-source-recovery-review.md).
 
 The unpublished DIV-467/468/469/470/471 internal fixes are saved as held
 [patches](../../artifacts/mvdm-audit/s11-held-cpu/) and removed from the active

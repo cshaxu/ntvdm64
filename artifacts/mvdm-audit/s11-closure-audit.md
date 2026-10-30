@@ -1,7 +1,7 @@
 # T473 S11 closure audit — current working candidate
 
 This is a bounded review of the active stage, not T closure. The candidate
-is unpublished and the working tree contains other authorized changes. The
+was published and committed as `a8a0aef7e`. The
 owner moved SOL/multi-window performance optimization to the queue tail;
 the distinct intermittent native-return failure remains a correctness issue.
 The current ten-image candidate and its results are identified in
@@ -28,17 +28,17 @@ package results must not be attributed to this manifest without identity
 evidence. Mirror differences remain partial with textual estimates; the
 estimates are not behavioral coverage. Held 486 and independently discovered
 internal CCPU changes remain outside the owner-approved connection-boundary
-scope. The Alt+Enter changes and queue-tail proposal remain included in the
-working candidate and require their normal delivery review.
+scope. The Alt+Enter changes and queue-tail proposal were included in that
+published delivery.
 
 The owner explicitly authorized restarting Winmine and changing its profile.
 The current candidate passed the Full suite, including its Winmine startup
 frontier; [receipt](s11-foundation-evidence/idle-comment-integrated/review.md).
-This does not establish Winmine gameplay or the source of the intermittent
-1400. Complete correctness and audit review, publication, commit and push
+An independent Winmine gameplay probe also passed. Neither result establishes
+the source of the intermittent 1400; correctness and audit review remain
 before S11 closure.
 
-The rebuilt retirement-error candidate passed graph and native-nested selected-object fixtures, Console-17, Window-17, Control, guest media, shared-worker idle/dialog, Calculator, Notepad, Write and Program Manager dialog witnesses. The controlled bridge test passed eight loader cycles. These results are bound to the current candidate as described in its evidence record and do not close the Full gate, actual guest DLL failure/unload behavior, or the intermittent native-return 1400.
+The rebuilt retirement-error candidate passed graph and native-nested selected-object fixtures, Console-17, Window-17, Control, guest media, shared-worker idle/dialog, Calculator, Notepad, Write and Program Manager dialog witnesses. The controlled bridge test passed eight loader cycles. These results do not prove actual guest DLL failure/unload behavior or resolve the intermittent native-return 1400; the subsequent Full gate passed separately.
 
 The remaining enabled CALLF and descriptor-store diagnostic read paths were
 traced in [diagnostic read boundary](shard-3/ccpu-diagnostic-read-boundary.md).
