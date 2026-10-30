@@ -1,0 +1,1 @@
+CONTROL wait=0 exit=0

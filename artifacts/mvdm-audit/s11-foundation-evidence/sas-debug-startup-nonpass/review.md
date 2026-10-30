@@ -28,3 +28,25 @@ so this remains a non-pass and is not a successful MEM run, full startup-to-
 exit observation, or proof the breakpoint is unreachable. Raw events, source,
 wrapper and identities are retained here. The isolated package cleanup ran;
 no installed component or guest was changed.
+
+## Debug event and isolation controls
+
+`0x40000005` is the original `STATUS_VDM_EVENT`: `dbg.c::SendVDMEvent`
+raises it and existing `wow_exception_observer.c` explicitly continues it.
+The v2 observer passed it as unhandled. The v3 observer continued these
+events but still timed out; the event-handling mistake was real but is not
+proved to be the timeout's sole cause.
+
+A same-setup no-debug control also timed out. Repeating with the established
+fresh isolated package identity, stage-local TEMP/TMP/PATH, and an absolute
+MEM path completed with exit 0. Therefore the earlier timeout cannot be used
+as evidence of a debugger-only failure or SAS behavior. Applying that stage
+setup and VDM continuation to v4 reached the worker but exited with
+`0x4000001F` before a valid completed run. Windows SDK names this status
+`STATUS_WX86_BREAKPOINT`. V5 additionally continued one such event per process
+as a provisional initialization breakpoint; another distinct WX86 breakpoint
+was delivered and passed through, and the worker and launcher exited with
+`0x4000001F`. Neither breakpoint matched the instrumented SAS address. This
+is a non-pass; the second event's origin and correct disposition remain
+unverified. Do not suppress it or claim an unreachable SAS entry on this basis.
+All runs used an isolated stage, with no product or guest modification.

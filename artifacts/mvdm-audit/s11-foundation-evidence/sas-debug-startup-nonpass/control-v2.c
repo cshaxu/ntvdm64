@@ -1,0 +1,4 @@
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#include <stdio.h>
+int wmain(int argc, wchar_t **argv) { STARTUPINFOW si={sizeof(si)}; PROCESS_INFORMATION pi={0}; WCHAR exe[MAX_PATH],cmd[MAX_PATH*2]; DWORD wait,code=259; if(argc!=2)return 87; si.dwFlags=STARTF_USESHOWWINDOW;si.wShowWindow=SW_HIDE;SetEnvironmentVariableW(L"SystemRoot",argv[1]);swprintf_s(exe,MAX_PATH,L"%ls\\system32\\run16.exe",argv[1]);swprintf_s(cmd,MAX_PATH*2,L"\"%ls\" --wait \"%ls\\system32\\MEM.EXE\"",exe,argv[1]);if(!CreateProcessW(exe,cmd,0,0,FALSE,CREATE_NEW_CONSOLE,0,argv[1],&si,&pi)){printf("create_error=%lu\n",GetLastError());return 1;}wait=WaitForSingleObject(pi.hProcess,60000);if(wait==WAIT_OBJECT_0)GetExitCodeProcess(pi.hProcess,&code);printf("CONTROL wait=%lu exit=%lu\n",wait,code);CloseHandle(pi.hThread);CloseHandle(pi.hProcess);return wait==WAIT_OBJECT_0&&code==0?0:1;}
