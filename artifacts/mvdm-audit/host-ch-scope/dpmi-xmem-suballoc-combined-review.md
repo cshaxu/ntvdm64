@@ -47,3 +47,29 @@ The fixture source is adjacent. Build with x86 MinGW GCC, the repository
 `src/mvdm/inc` include path, `-Wl,--gc-sections`, and the three cached objects
 above; run once with no arguments and once with `--inject`. This is isolated
 host evidence, not a product regression or a new release.
+
+## Original PSP-selector lifetime follow-up
+
+In the retained `dpmi/dxfunc.asm`, protected-mode client setup calls
+`AllocateSelector` in a loop and assigns one of those descriptors to
+`selPSPChild`; the guest stores the previous `selPSPChild` in its host-data
+record. The `dxstrt.asm` child termination path sends that value in DX to
+`TerminateApp`, and restores the parent's saved value afterward. The
+`dxutil.asm` allocator takes the next descriptor from a linked free list and
+`FreeSelector` puts a descriptor back at its head. Thus the owner key is a
+reusable selector in principle, not a unique allocation generation.
+
+This does **not** establish that the terminated child's PSP selector is
+freed while a different DPMI client remains active: the observed
+`dxfunc.asm` free-selector loop is explicitly the client-setup failure path,
+and the `dxstrt.asm` `ReInitGdt` call occurs only when the last DPMI client
+leaves. Nor does source alone prove which exact immutable DOSX image is in a
+particular runtime. A valid guest witness needs to identify two live client
+lifetimes, their actual PSP selectors and the real release/reallocation
+point, without modifying or rebuilding the guest. Do not describe the
+fixture's second owner-A cleanup as an established production retry.
+
+Reviewed source SHA-256: `dxfunc.asm`
+`EA8857F9497CEA63ECD9746AF3E16F222869F0C5C396CF78309CFC506546FBDC`;
+`dxstrt.asm` `E67463A6CA5BBE18447AC51123AB3DEC7F3DCCDB1606F10DBE611EE10580F295`;
+`dxutil.asm` `C87933E2DA13CD0AA87E9ACF74DEA8254AF83672D4447624C3A775FB03730016`.
