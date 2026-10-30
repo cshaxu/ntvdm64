@@ -1,0 +1,7 @@
+worker=35320 base=00000000001E0000 trap=00000000003582E0 opcode=cc slot54=003582e0 slot56=003582e0 mapped_check=1
+GUEST_BOP_5B_CONTINUED tid=18296
+EXIT pid=35320 code=0
+EXIT pid=35360 code=0
+EXIT pid=36200 code=0
+EXIT pid=32692 code=0
+RESULT done=1 exit=0 worker=35320 events=203 sas_hits=0

@@ -36,3 +36,17 @@ The WOW64 exception address comparison has a separate [positive and
 one-byte-offset negative control](../sas-breakpoint-calibration/review.md).
 It confirms the observed address convention on this host, without proving
 that every workload reaches or avoids the target.
+
+## Mapped-image check
+
+A later fresh-isolation DOS run read the actual worker's memory at its create
+process debug event. The mapped `cSasPtrs` initializer entries 54 and 56 both
+contained the relocated target `0x003582e0`, and that target contained `0xcc`;
+the independent breakpoint-address calibration already established how this
+host reports an x86 `int3`. This reads the sealed, relocated process rather
+than assuming its text bytes or pointer relocation from the pre-seal map.
+The worker and launcher exited zero; no target hit was seen. The result is
+one DOS run, not proof of all consumers or of the subsequently copied runtime
+`Sas` vector's full lifecycle. `result-v11-summary.txt`, the stage manifest,
+image hashes, observer source and raw trace hash are retained; the full trace
+is in the active build directory. No product or guest was modified.
