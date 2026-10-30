@@ -1,0 +1,2 @@
+ 0001:00000590       _DpmiIntHandlerIret32      00401590 f   dpmiint.obj
+ 0001:00158300       _DpmiIntHandlerIret32      00559300 f   original-mvdm-dpmi32:dpmiint.obj

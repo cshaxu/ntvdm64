@@ -1,0 +1,3 @@
+build/.ninja/msvc-x86-release/worker/obj/dpmi/dpmiint.obj 343 168637626427283194c26bf259c850c58012b1e4e43db2fee9a62674c6c47596
+build/t473-s11/dpmi-int-iret32-selected/dpmiint.obj 343 168637626427283194c26bf259c850c58012b1e4e43db2fee9a62674c6c47596
+identical= True

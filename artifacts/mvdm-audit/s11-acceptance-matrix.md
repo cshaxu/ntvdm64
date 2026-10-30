@@ -34,6 +34,9 @@ CODE32 INT 21 witness; it does not authorize rebuilding a guest.
 The [selected DPMI fault-return object witness](s11-foundation-evidence/dpmi-iret32-selected/review.md)
 now checks both stack descriptor sizes and two nesting depths with controlled
 register and memory boundaries; it is not the missing live guest witness.
+The adjacent [selected interrupt-return witness](s11-foundation-evidence/dpmi-int-iret32-selected/review.md)
+checks the same stack-size and nesting matrix including the restored return
+frame; it is also controlled object evidence, not guest execution.
 
 The historical [Winmine 1400 non-pass](s11-foundation-evidence/winmine-native-return-1400/review.md)
 is another unlocalized native-return observation. Its failure substage and
