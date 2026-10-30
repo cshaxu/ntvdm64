@@ -1,0 +1,5 @@
+"Algorithm","Hash","Path"
+"SHA256","726B07AA10773E69CD9E39B1C3A3F76BF669448C9F2B05840BF587386091C491","O:\repos.hobby\ntvdm64\tests\mvdm-host\wow_registry_shutdown_fixture.c"
+"SHA256","FE1AF51A5AF635D943837B618232553E9288AB0A0BFCE3F6CA81F778DE65A283","O:\repos.hobby\ntvdm64\tests\mvdm-host\wow_registry_shutdown_fixture.def"
+"SHA256","B2EB5D911966C4A25572178192E49B107D333C0B2B3DFE3E890BE384999690E4","O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\wow32\obj\wow32-dll\wow_registry_binding.obj"
+"SHA256","16F01432D900344576E1C4E8E39C2EB27750DD5C91E8B20DB81B620637A1D590","O:\repos.hobby\ntvdm64\build\t473-s11\registry-populated-formal\fixture.exe"

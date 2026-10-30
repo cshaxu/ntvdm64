@@ -25,6 +25,11 @@ marker output were repaired and its original USER validator passed. The
 adjacent bit-fault fixture remains a recorded non-pass against the deliberately
 held internal bit-index candidate; it was not silently weakened. [Evidence](s11-foundation-evidence/current-ccpu-execution-fixture/review.md).
 
+The current registry binding object now has a controlled populated-token
+shutdown witness, including explicit close, stale tokens, repeated shutdown
+and reopening. It does not prove populated real-worker DLL unload.
+[Evidence](s11-foundation-evidence/current-registry-shutdown/review.md).
+
 ## Delivery status
 
 The current candidate has passing Console-17, Window-17, Control-12, guest

@@ -1,0 +1,13 @@
+EXPORTS
+ntvdm_shadow_reg_open_key=_fixture_open@12
+ntvdm_shadow_reg_create_key=_fixture_open@12
+ntvdm_shadow_reg_close_key=_fixture_close@4
+ntvdm_shadow_reg_delete_key=_fixture_unused@0
+ntvdm_shadow_reg_set_value=_fixture_unused@0
+ntvdm_shadow_reg_set_value_ex=_fixture_unused@0
+ntvdm_shadow_reg_query_value=_fixture_unused@0
+ntvdm_shadow_reg_query_value_ex=_fixture_unused@0
+ntvdm_shadow_reg_enum_key=_fixture_unused@0
+ntvdm_shadow_reg_open_key_ex=_fixture_unused@0
+ntvdm_shadow_reg_query_info_key=_fixture_unused@0
+ntvdm_shadow_reg_enum_value=_fixture_unused@0
