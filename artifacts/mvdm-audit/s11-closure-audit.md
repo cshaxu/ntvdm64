@@ -1,7 +1,9 @@
 # T473 S11 closure audit — current working candidate
 
-This is a bounded review of the active stage, not T closure. The candidate
-was published and committed as `a8a0aef7e`. The
+This is a bounded review of the active stage, not T closure. The earlier
+foundation candidate was committed as `a8a0aef7e`; the current ten-image
+release and startup-failure correction are recorded in
+[wow-host-attach-failure](s11-foundation-evidence/wow-host-attach-failure/review.md). The
 owner moved SOL/multi-window performance optimization to the queue tail;
 the distinct intermittent native-return failure remains a correctness issue.
 The current ten-image candidate and its results are identified in
@@ -11,7 +13,7 @@ The current ten-image candidate and its results are identified in
 | Foundation | Current implementation/evidence | Remaining boundary |
 | --- | --- | --- |
 | Far-transfer validation | Project-added eager diagnostic reads were removed; current selected CCPU fixture passes off/matching/nonmatching trace and valid control. [Evidence](s11-foundation-evidence/coherent-current/far-exception-result.json). | Focused fixture has `/force:multiple` seams; it is not every guest exception or nested delivery. Audit other admitted diagnostic reads against original ownership. |
-| WOW DLL entry | Generated bridge uses original one-byte BOOLEAN; controlled direct and host loader tests pass, and the actual selected link map names that bridge. [Evidence](s11-foundation-evidence/coherent-current/bridge-loader-result.json). | Controlled provider is not a real WOW32 attach-failure, notification and unload test; guest DLL lifecycle is separate. Real package normal-load evidence is [here](s11-foundation-evidence/current-wow32-real-loader/review.md). |
+| WOW DLL entry | Generated bridge uses original one-byte BOOLEAN; controlled direct and host loader tests pass, and the actual selected link map names that bridge. [Evidence](s11-foundation-evidence/coherent-current/bridge-loader-result.json). | An isolated real WOW32 attach-failure witness found and tests the launcher startup-result fix; notification and unload remain untested. Guest DLL lifecycle is separate. [Failure evidence](s11-foundation-evidence/wow-host-attach-failure/review.md). Real package normal-load evidence is [here](s11-foundation-evidence/current-wow32-real-loader/review.md). |
 | NTVDM export boundary | Original template selected; supplemental original restored byte-for-byte, 271 ordinal contracts checked, and selected live VDD/MEM normal and exhaustion witness passed. [Evidence](export-source-recovery-review.md). | Remaining real memory-provider/task behavior belongs jointly to S11/S12; this is not proof of all consumers or failures. |
 | Callback/execution ownership and window identity | Current graph/reclaim and native-nested fixtures cover pinning, retired generations, desktop incoming references, callback nesting, destruction and failed-return execution ownership. Shared-worker idle/dialog witness passed. [Evidence](s11-foundation-evidence/coherent-current/review.md). | The observed live `publish-native-return` error 1400 remains unlocalized: controlled dead-root and menu-owner paths can each produce it. Do not suppress the error or claim it fixed without identifying the real failure. [Evidence](s11-foundation-evidence/atomic-task-retire/execution-check/baseline-failfast-trace/review.md). |
 | SAS and C-VID vector boundary | Selected-object and link/dependency witnesses characterize the differing headers and passing C-VID fixture. [Evidence](host-ch-scope/ccpu-evidgen-review.md), [SAS evidence](shard-3/sas4gen-vector-audit.md). | Selected SAS breakpoint-vector indirect consumers and full worker startup are not exhaustively traced; guest video mode/reset ownership continues in S13. No defect is inferred solely from differing declarations. |

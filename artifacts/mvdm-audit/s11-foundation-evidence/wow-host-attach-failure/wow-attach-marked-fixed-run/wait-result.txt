@@ -1,0 +1,4 @@
+container=console-owning-nondebug
+pid=16560
+result=exited
+exit=0x0000045a

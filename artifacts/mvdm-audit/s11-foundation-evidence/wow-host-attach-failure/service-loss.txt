@@ -1,0 +1,1 @@
+PASS authenticated service death: Run16 returned 6; observed elapsed=162ms; no Console-restoration claim

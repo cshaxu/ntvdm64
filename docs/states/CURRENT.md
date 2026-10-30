@@ -8,7 +8,7 @@ S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-c
 
 The published foundation group includes far-transfer ownership and WOW
 entry ABI; NIDDB internal fixes remain outside scope. The selected bridge
-passed controlled loader cycles; real WOW32 attach failure remains untested. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
+passed controlled loader cycles; forced WOW32 attach failure now returns correctly. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
 
 The owner moved further SOL and related WOW multi-window performance work to
 the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
@@ -39,10 +39,9 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The [ten-input candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md)
-uses current selected cached targets and passed the Full suite and Winmine
-gameplay probe. All ten components are published and hash-verified; S11
-correctness review remains active.
+The [ten-component candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/wow-host-attach-failure/review.md)
+passed Full and Winmine gameplay; all ten components were published and
+hash-verified. S11 correctness review remains active.
 [S11 closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists
 each foundation's evidence and remaining boundary.
 

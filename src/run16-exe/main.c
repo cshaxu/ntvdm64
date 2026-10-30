@@ -312,10 +312,12 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
             result=frontend_capability ? OpenNtBaseClientRequestFrontend(frontend_capability) : ERROR_INVALID_STATE;
             if (result && result!=ERROR_ALREADY_EXISTS) { CloseHandle(parent_wait);goto done; }
         }
-        if ((binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) && !wait_target) {
+        if (binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) {
             result=wait_wow_startup(parent_wait);
-            CloseHandle(parent_wait);
-            goto done;
+            if (result || !wait_target) {
+                CloseHandle(parent_wait);
+                goto done;
+            }
         }
         {
             result=run16_wait_direct_event(parent_wait);
@@ -348,9 +350,9 @@ static DWORD launch_vdm(ULONG binary, PCWSTR application, PCWSTR command,run16_f
         frontend_capability,&worker.hProcess,&parent_wait);
     if(result)goto done;
     resumed = TRUE;
-    if ((binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) && !wait_target) {
+    if (binary==BINARY_TYPE_WIN16 || binary==BINARY_TYPE_SEPWOW) {
         result=wait_wow_startup(parent_wait);
-        goto waited;
+        if (result || !wait_target) goto waited;
     }
     /* NTSRV observes true worker failure and the original independent-Console
      * worker-exit branch. Both reach this service receipt; run16 never waits
