@@ -108,3 +108,17 @@ containing directories rather than linking each receipt individually.
 Documentation governance verification passed after updating this closure
 audit's candidate identity. The current package's bounded evidence is linked
 above; earlier SOL results remain attached only to their own manifests.
+
+## Current cached SAS vector identity check
+
+The existing read-only PE/map probe was rerun against the current selected
+`build/.ninja/msvc-x86-release/worker/ntvdm.exe` input, SHA-256
+`181232BF842294B776E6677C6FFEB80E123A2B23ECFDCF4F43AFF9C69E3241D9`,
+matching the published candidate's recorded cache input. Its matching link map
+identifies the 58-slot initializer: `Sas_touch` (54) and
+`SasVirtualiseInstruction` (56) both point to the selected breakpoint fallback,
+and `IsPageInstanceData` (57) is null. The probe verified both fallback
+opcodes in the PE. This refreshes the prior r10 binary observation; it does
+not establish runtime reachability, validate every consumer, or justify
+changing the original CPU. The sealed deployment image differs in hash from
+this pre-sealing input and was not itself the subject of this PE observation.
