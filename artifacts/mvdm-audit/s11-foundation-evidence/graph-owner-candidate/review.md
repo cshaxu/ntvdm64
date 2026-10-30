@@ -67,3 +67,7 @@ A further [shared-worker witness](../graph-owner-shared-cbt/review.md) ran the
 same real CBT guest alongside a second active Win16 task, whose idle callback
 continued after the hook task retired. It does not deterministically force
 their window operations to overlap.
+
+The [prebuilt DPMI task-cleanup witness](../graph-owner-dpmi-cleanup/review.md)
+also passed against these release inputs, including four child exits with live
+allocations and restored aggregate XMS capacity. Failure paths remain distinct.
