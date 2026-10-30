@@ -1,0 +1,5 @@
+ 0001:00008ad0       _c_cpu_simulate            00409ad0 f   original-ccpu386:c_main.obj
+ 0001:00024500       _IN8                       00425500 f   original-ccpu386:in.obj
+ 0001:00025600       _OUT8                      00426600 f   original-ccpu386:out.obj
+ 0001:00062b10       _io_connect_port           00463b10 f   original-softpc-support:ios.obj
+ 0002:00024070       __sehtable$_c_cpu_simulate 005af070     original-ccpu386:c_main.obj

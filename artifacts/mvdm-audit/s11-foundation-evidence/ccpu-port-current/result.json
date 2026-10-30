@@ -1,0 +1,971 @@
+{
+  "result": "pass",
+  "cases": [
+    {
+      "case": 0,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=1 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=1 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=1 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=1 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=1 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=2 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=2 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=2 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=2 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=2 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=4 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=4 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=4 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=4 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=8 writes=8 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 0,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=0 ring=0 width=4 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=1 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=1 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=1 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=1 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=2 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=2 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=2 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=2 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=4 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=4 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=4 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 1,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=1 ring=3 width=4 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=1 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=1 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=1 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=1 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=1 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=1 writes=1 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=2 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=2 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=2 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=2 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=2 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=2 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=4 form=0 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=4 form=1 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=4 form=2 repeat=0 vector=-1 error=0 ip=0000 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=4 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=8 writes=8 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 2,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=2 ring=3 width=4 form=3 repeat=1 vector=-1 error=0 ip=0000 reads=4 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=1 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=1 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=1 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=1 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=2 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=2 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=2 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=2 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=4 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=4 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=4 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 3,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=3 ring=3 width=4 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=1 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=1 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=1 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=1 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=2 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=2 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=2 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=2 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=4 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=4 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=4 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 4,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=4 ring=3 width=4 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=1 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=1 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=1 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=1 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=2 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=2 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=2 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=2 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=4 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=4 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=4 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 5,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=5 ring=3 width=4 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 1,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=1 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 1,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=1 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 1,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=1 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 1,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=1 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 2,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=2 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 2,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=2 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 2,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=2 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 2,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=2 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 4,
+      "form": 0,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=4 form=0 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 4,
+      "form": 1,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=4 form=1 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 4,
+      "form": 2,
+      "repeat": 0,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=4 form=2 repeat=0 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 6,
+      "width": 4,
+      "form": 3,
+      "repeat": 1,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=6 ring=3 width=4 form=3 repeat=1 vector=13 error=0 ip=8009 reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 7,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=7 ring=3 width=1 form=2 repeat=2 vector=14 error=7 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009100"
+    },
+    {
+      "case": 7,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=7 ring=3 width=2 form=2 repeat=2 vector=14 error=7 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009100"
+    },
+    {
+      "case": 7,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=7 ring=3 width=4 form=2 repeat=2 vector=14 error=7 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009100"
+    },
+    {
+      "case": 8,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=8 ring=3 width=1 form=2 repeat=2 vector=14 error=4 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009000"
+    },
+    {
+      "case": 8,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=8 ring=3 width=2 form=2 repeat=2 vector=14 error=4 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009000"
+    },
+    {
+      "case": 8,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=8 ring=3 width=4 form=2 repeat=2 vector=14 error=4 ip=800c reads=0 writes=0 first=00 result=1 cr2=00009000"
+    },
+    {
+      "case": 9,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=9 ring=3 width=1 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 9,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=9 ring=3 width=2 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 9,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=9 ring=3 width=4 form=2 repeat=2 vector=13 error=0 ip=800c reads=0 writes=0 first=00 result=1 cr2=00000000"
+    },
+    {
+      "case": 10,
+      "width": 1,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=10 ring=3 width=1 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=0 writes=2 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 10,
+      "width": 2,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=10 ring=3 width=2 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=0 writes=4 first=5a result=1 cr2=00000000"
+    },
+    {
+      "case": 10,
+      "width": 4,
+      "form": 2,
+      "repeat": 2,
+      "exit": 0,
+      "output": "CCPU_PORT_PRIVILEGE case=10 ring=3 width=4 form=2 repeat=2 vector=-1 error=0 ip=0000 reads=0 writes=8 first=5a result=1 cr2=00000000"
+    }
+  ],
+  "scope": "selected scalar/string decoder, IOS, controlled byte device/TSS and page faults; not guest dispatch or complete TSS bitmap",
+  "limitations": [
+    "fixture link uses /force:multiple and duplicate-symbol warnings"
+  ],
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_port_privilege_fixture.c",
+      "sha256": "6aed6c8a5dd78d7e44d7ab0db316a5a50f6670fbfde0d9b98f79d0c7ffed93bf"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\ccpu-port-current-20261030\\fixture.obj",
+      "sha256": "76c4af11b48647f49c67a67c67d4679a8c0be3a5d4f920275cc68c974abad4c7"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\ccpu-port-current-20261030\\fixture.exe",
+      "sha256": "1bcd3784018005d018ea478cadab4e1c0a4a20e650f34fd09267c74db02cc6ab"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\ccpu-port-current-20261030\\fixture.exe.map",
+      "sha256": "10600792f9a1826d28a4b8f6f8aab7eb16154f59e34a95d7df78ac4b5de12932"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+      "sha256": "4c5a9bd9c6675ff9fd7f2ab001c366109e2f9b6099c2e4e68100b5cc82501c8f"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-support.lib",
+      "sha256": "44dff8093ed9c117e9715a905f8a4a67bc52481a7a5f3239dd3293a58de92036"
+    }
+  ]
+}
