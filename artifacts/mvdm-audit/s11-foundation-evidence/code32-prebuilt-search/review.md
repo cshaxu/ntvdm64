@@ -151,3 +151,51 @@ source-mode traces and the read-only capture runner remain under
 `build/t473-s11`. Initial capture attempts failed to identify the SUBST image
 path or locate Python under the intentionally restricted PATH; neither counts
 as a guest result. No guest, product source or deployed component changed.
+
+## Isolated host-emulation causality experiment
+
+A disposable host-only candidate was linked by inserting a test-owned copy of
+`nt_inthk.c` ahead of the original host library. It recognizes only direct
+one-byte 16-bit CLI/STI in GP faults, advances the guest IP, updates the
+fixed virtual-interrupt bit and CCPU IF, and does not modify guest or CPU
+source. It is deliberately incomplete: its instruction fetch, 32-bit/prefix
+handling, original interrupt-ack timing, real exceptions and concurrency are
+not established. It is **not a publishable repair**.
+
+The first candidate with no per-hit output progressed past the earlier
+repeated 0d fault and reached a DOS runtime `R6009 - not enough space for
+environment`; its Run16 returned zero, which does not make the application a
+pass. A second build with a 32-hit limit recorded the actual initial
+`STI` at `00c7:4978`, IOPL 0 and fixed state `00000600`, followed by CLI/STI
+hits in other segments. It then repeated a separate GP with error code 1:
+its zero-only test predicate missed an otherwise similar handler-entry STI.
+The original CCPU contributory exception forms its code as
+`(selector & 0xfffc) | EXT`; the low external-event bit therefore matters.
+A third diagnostic allowing codes 0 and 1 recorded the original STI and CLI
+hits, produced no `dpmi-fault` dispatch line during that run, and again
+reached R6009 and observer exit zero. It does not establish why the separate
+R6009 occurs, that all faults were logged, or that the application works.
+The experiment establishes that this particular host-dispatch change is
+causally associated with passing the previously looping STI, not that the
+whole product is compatible.
+
+NT4's protected VDM GP path invokes its opcode dispatcher before reflecting
+an exception. Original `OpcodeSTI` updates the VDM virtual flag, increments
+EIP and invokes `VdmDispatchIntAck` if a pending bit is set; the latter has
+different hardware and timer routes. A production change must account for
+those routes, CCPU's `c_cpu_continue` and hardware-event scheduling, segment
+limits/paging and instruction prefixes, preserve unrelated GP delivery, and
+validate actual guest and IRQ behavior. It must not force IOPL globally or
+change the original guest/CCPU instruction implementation. The follow-on
+R6009 needs a separate attributable control, not a hard-coded workaround.
+
+The third diagnostic source SHA-256 is
+`4BAA33EBF84AD20609B552DA29683ACDE79CEF229D57C28C1A8A2F549AE88FFE`;
+the sealed package manifest hash is
+`46192FDC88743DC0A1EC9EF7B186078CFC8392A095CDD546030CCF8223670032`;
+the fault trace hash is
+`DA021C577864F6D2F09DC68EBFF28473252932BC8B6E10CD61CBAF81EC8A551F`;
+the console receipt hash is
+`E81728C375CE613F0F4E2A1F11467C391839421685F4680976FFD1FA63681FCE`.
+Diagnostic inputs, map and full logs remain in `build/t473-s11/sti-host-experiment`.
+No diagnostic binary was published and the guest remains immutable.
