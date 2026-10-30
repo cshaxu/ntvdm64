@@ -186,3 +186,16 @@ The two original initializers must not be conflated: `base/cvidc/sascdef.c` ends
 Existing evidence is deliberately bounded: the product PE scan and post-initialization bounded SAS witness described above support no observed consumer in those inspected routes. The negative control establishes that **directly reaching the fallback raises a breakpoint**, not that any supported workload reaches it or that a debugger continuation provides valid semantics. The fixture excludes direct CCPU macro calls and startup; it does not demonstrate a guest-visible defect. Original provider bodies, complete indirect consumer closure, and full-lifetime actual-worker tracing remain unresolved. Therefore preserve the coherent generated layout, keep this item pending, and do not substitute a no-op or remove the entries. If a real caller is identified, capture its arguments and expected return/side effects before selecting an exact original implementation or a minimal adapter.
 
 No product, existing guest or runtime state was changed for this recheck. The current cached NTVDM image still hashes `D3437091D920A74FF72FDC8ED023C6207642682A7739C45751E4F03A8C1D53E5`, matching the existing isolated fixture's recorded product identity; this identity match does not turn the fixture into a production guest run.
+
+## Current release input recheck
+
+The static PE vector probe was rerun against the current release input
+`86835839AC83A4FF61493C049264FAD15B3255AAC74C11D3E0E2F75A8B547E4B`
+and its matching map, rather than the earlier r10 executable. The 58-field
+vector still places `Sas_touch` at index 54 and `SasVirtualiseInstruction` at
+56, both pointing to breakpoint address `0x5782e0`; `IsPageInstanceData`
+at index 57 is zero. The temporary adapted probe is under
+`build/t473-s11/sas-current/probe.py`. This is static evidence only: it neither
+proves a supported guest calls these entries nor establishes their full
+lifetime reachability. The release manifest binds this input to the separately
+sealed release image; no product or guest was modified.
