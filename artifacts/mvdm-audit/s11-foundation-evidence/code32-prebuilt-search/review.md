@@ -7,6 +7,12 @@ for `S38_INT32_RETURN_OK` found the three basenames in `basenames.txt`; this
 does not search the entire machine or prove no differently labelled witness
 exists. The only additional prebuilt basename is `S39I32.COM`.
 
+The four Git revisions that changed `assets/winnt.zip` were also inspected
+read-only in memory. None contains a `D38K.COM` entry or a `.COM` entry with
+the expected `S38_INT32_RETURN_OK` marker. The reproducible script and result
+are `search-old-zips.py` and `old-zips.txt`. This covers these archives, not
+other historical packages or media.
+
 The retained first 40 instructions of the exact `S39I32.COM` and
 `S39H32.COM` hashes show a 32-bit DPMI client request (`AX=1`), followed
 directly by 16-bit code after the far call. Neither has the descriptor clone,
