@@ -1,0 +1,12 @@
+160:17764 WindowCreate atom=8002 result=00FA0B9E error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=31320 actualMenu=00000000
+183:17764 WindowDispatch hwnd=04B80970 message=0111 native=05490000 result=00000000 tid=31320 error=0
+204:17764 WindowDispatch hwnd=04B80970 message=0111 native=05490000 result=00000000 tid=31320 error=0
+205:17764 WindowEntry hwnd=04B80970 message=0000 native=05490000 result=00000000 tid=31320 error=1400
+220:17764 WindowCreate atom=8002 result=00FB0B9E error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=31320 actualMenu=00000000
+260:17764 WindowDispatch hwnd=04B80970 message=0111 native=05490000 result=00000000 tid=31320 error=0
+261:17764 WindowEntry hwnd=04B80970 message=0000 native=05490000 result=00000000 tid=31320 error=1400
+274:17764 WindowCreate atom=8002 result=00FC0B9E error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=31320 actualMenu=00000000
+314:17764 WindowDispatch hwnd=04B80970 message=0111 native=05490000 result=00000000 tid=31320 error=0
+315:17764 WindowEntry hwnd=04B80970 message=0000 native=05490000 result=00000000 tid=31320 error=1400
+328:17764 WindowCreate atom=8002 result=01960A22 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=31320 actualMenu=00000000
+348:17764 TaskRetirement tid=31320 task=00000000 stage=publish-native-return status=1400

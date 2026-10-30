@@ -74,6 +74,12 @@ an original CPU repair is inferred solely from this source finding.
 
 ## Live 1400 evidence: distinguish the separate runs
 
+The historical SOL trace also records incoming error 1400 during three
+successful sequences before the final failure. The current and pre-lock
+source save incoming last-error at that trace point. This does not prove the
+final error was stale, but prevents attributing it to a dead HWND from the
+number alone. [Evidence](s11-foundation-evidence/sol-baseline-error-provenance/review.md).
+
 Two earlier shared-worker diagnostic runs identified native-return 1400 on
 different dead mandatory HWND roots from the project window table. A later
 `two-task-ownership-nonpass` trace established one precise interleaving: while
