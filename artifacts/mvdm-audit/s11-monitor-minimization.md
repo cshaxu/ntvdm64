@@ -190,3 +190,23 @@ page, CS limit and prefix controls, passes. This does not assert completion
 of remaining paging or exception-delivery boundaries.
 
 The first Full run failed Window-17 `nested-mem` with an observer timeout; its input report says `input-delivered=0`. The evidence does not establish the cause. The unchanged package passed all 16 Full gates on rerun, the 91-case CCPU suite, Winmine/SOL/WRITE, four SOL Options cycles and the four Win3.1 mode/DOSONLY combinations. All 86 monitored original and isolated guest binaries retained their hashes. Both ten-component destinations were published and all 20 hashes matched. [Failure and passing evidence](s11-monitor-minimization-evidence/operand-limit/).
+
+## Window nested-MEM non-pass: proximate test stop
+
+The retained initial Window-17 `nested-mem` screen evidence shows that the
+first five submitted lines completed, including two MEM results; the last
+snapshot shows `EXIT` at the current prompt with no subsequent prompt. The
+script sends lowercase `exit`; `observer_prompt_echo` intentionally compares
+case exactly, and `write_console_input_text` sends Enter only after the whole
+line's expected echo. The report recorded five Enter key-downs, while the
+script requires a sixth at that point. These observations identify the
+proximate test stop: the expected lowercase echo was not accepted, so the
+probe did not submit the last line and the observer timed out. They do not
+identify why the guest displayed uppercase; keyboard toggle/shift state,
+input-source lifecycle, message injection and timing must not be conflated.
+The unchanged package passed the full rerun, which likewise does not identify
+the cause. The newly archived line-04, line-05 and final screen snapshots,
+input report and timeout report are in [operand-limit](s11-monitor-minimization-evidence/operand-limit/).
+S12 already owns input state across Console/Window sources; its handoff
+includes this observed mismatch without declaring it fixed or attributing it
+to that lifecycle before evidence.

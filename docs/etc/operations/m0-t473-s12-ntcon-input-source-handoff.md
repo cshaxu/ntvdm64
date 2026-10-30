@@ -28,6 +28,15 @@ filtering can discard that release. CAF F debounce also needs a complete
 source-transition lifecycle. Do not infer that the native CUI consumption path
 is immune to all related defects.
 
+A later Window-17 nested COMMAND/MEM run stopped when scripted lowercase
+`exit` appeared as uppercase `EXIT`; the strict observer withheld Enter and
+timed out. A full rerun of the identical candidate passed, but the uppercase
+state remains unattributed. Preserve and inspect the [screen, input and
+timeout evidence](../../../artifacts/mvdm-audit/s11-monitor-minimization-evidence/operand-limit/)
+while tracing modifier and toggle ownership. This is an observed mismatch,
+not proof that S12 source switching caused it; never weaken exact echo or
+reinject keys to manufacture a pass.
+
 ## Scope and required contract
 
 Before implementation, trace the exact queue, locks and ownership transitions

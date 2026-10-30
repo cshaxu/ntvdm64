@@ -1,0 +1,19 @@
+# buffer=80,28 viewport=0,0,79,27
+[1] O:\TMP\N0F8>mem
+[4]     655360 bytes total conventional memory
+[5]     655360 bytes available to MS-DOS
+[6] 4294902944 largest executable program size
+[8]   24117248 bytes total contiguous extended memory
+[9]          0 bytes available contiguous extended memory
+[10]   15434752 bytes available XMS memory
+[11]            MS-DOS resident in High Memory Area
+[13] O:\TMP\N0F8>exit
+[15] O:\TMP\N0F8>mem
+[18]     655360 bytes total conventional memory
+[19]     655360 bytes available to MS-DOS
+[20] 4294914928 largest executable program size
+[22]   24117248 bytes total contiguous extended memory
+[23]          0 bytes available contiguous extended memory
+[24]   15434752 bytes available XMS memory
+[25]            MS-DOS resident in High Memory Area
+[27] O:\TMP\N0F8>
