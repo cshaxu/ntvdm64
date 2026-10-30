@@ -14,6 +14,9 @@ This is a controlled host fixture, not execution by an immutable DOS guest;
 its link uses `/force:multiple` seams and emits existing duplicate-symbol
 warnings. Matching owner names and the worker input hash do not independently
 prove the exact library bytes linked into the earlier worker. The current
-Ninja dry run requests a worker relink because `opennt-base-bindings.lib`
-has a newer recorded timestamp; no product was rebuilt or published by this
-check. The guest interrupt and device boundaries remain for S11/S13.
+Ninja dry run requested a worker relink because `opennt-base-bindings.lib`
+had a newer recorded timestamp. The subsequent cached relink was byte-identical
+outside PE timestamps to the published worker's recorded input, and Ninja
+then reported no work; [comparison](../current-worker-relink/review.md). No
+new image was published. The guest interrupt and device boundaries remain
+for S11/S13.

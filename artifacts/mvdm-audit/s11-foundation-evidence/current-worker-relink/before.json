@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "181232BF842294B776E6677C6FFEB80E123A2B23ECFDCF4F43AFF9C69E3241D9",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-worker-relink\\ntvdm-before.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2EC1F50CFF46B080A646BE5844138AB8782A5C4E198966434B47FED3F65C717F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\opennt-base-bindings.lib"
+  }
+]

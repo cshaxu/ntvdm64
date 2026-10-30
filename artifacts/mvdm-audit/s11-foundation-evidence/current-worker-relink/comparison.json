@@ -1,0 +1,23 @@
+{
+  "before_sha256": "181232bf842294b776e6677c6ffeb80e123a2b23ecfdcf4f43aff9c69e3241d9",
+  "after_sha256": "1f5295a67cb41b96f4d2e1fcc5f5ad3cba4f37fb9bab64f9a9cd39f0e8b980cd",
+  "length": 2097152,
+  "different_offsets": [
+    "0x130",
+    "0x131",
+    "0x19ce7c",
+    "0x19ce7d"
+  ],
+  "allowed_timestamp_fields": {
+    "coff_timestamp": {
+      "offset": "0x130",
+      "length": 4
+    },
+    "debug_timestamp": {
+      "offset": "0x19ce7c",
+      "length": 4
+    }
+  },
+  "outside_timestamp_differences": 0,
+  "normalized_sha256": "27f1af70ea78771531e1f9b8d9d95911f5cc1314ee6e7d8f6e26dfddd0a97f9f"
+}
