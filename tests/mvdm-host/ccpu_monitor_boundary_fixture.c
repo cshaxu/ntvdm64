@@ -552,6 +552,23 @@ static int monitor_fetch_page_access(void) {
         (test_case==88 ? !(pte[0xf1]&0x20) : (pte[0xf1]&0x20));
     c_setPG(0); return (int)i;
 }
+/* NT4 increments the linear instruction pointer modulo 32 bits. */
+static int monitor_wrapped_instruction_offset(void) {
+    unsigned char gdt[40]={0}; half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    int handled,ok;
+    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x00cffa00u;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); c_sas_enable_20_bit_wrapping();
+    *c_GetPhyAdd(0xfffff)=0xe6; *c_GetPhyAdd(0)=0x80;
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
+    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0xffffffffu);
+    io_writes=test_fault=0; VdmInstallFaultHandler((void *)test_sti_fault);
+    handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
+    {char line[100];wsprintfA(line,"MONITOR_WRAP_IP handled=%d fault=%lu writes=%u eip=%08lx\n",handled,test_fault,io_writes,c_getEIP());report(line);}
+    ok=handled && !test_fault && io_writes==1 && c_getEIP()==1;
+    c_sas_disable_20_bit_wrapping(); return ok;
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -661,7 +678,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
+    if(test_case==89) ok=monitor_wrapped_instruction_offset();
+    else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
     else if(test_case==86) ok=monitor_cr0_npx_matrix();
     else if(test_case==49) ok=duplicate_tlb_mapping();
     else if(test_case==83) ok=monitor_register_matrix();

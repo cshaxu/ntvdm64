@@ -1,0 +1,58 @@
+[
+  {
+    "case": "std-dosonly0",
+    "dosonly": false,
+    "enhanced": false,
+    "probeStarted": true,
+    "progmanAndMode": true,
+    "flags": 21,
+    "hwnd": 4456,
+    "observedDosOnly": 0,
+    "normalExit": true,
+    "passed": true,
+    "error": null,
+    "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wrap-ip-win31\\cases\\std-dosonly0.observer.txt"
+  },
+  {
+    "case": "std-dosonly1",
+    "dosonly": true,
+    "enhanced": false,
+    "probeStarted": true,
+    "progmanAndMode": true,
+    "flags": 21,
+    "hwnd": 4456,
+    "observedDosOnly": 1,
+    "normalExit": true,
+    "passed": true,
+    "error": null,
+    "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wrap-ip-win31\\cases\\std-dosonly1.observer.txt"
+  },
+  {
+    "case": "386-dosonly0",
+    "dosonly": false,
+    "enhanced": true,
+    "probeStarted": true,
+    "progmanAndMode": true,
+    "flags": 2085,
+    "hwnd": 4456,
+    "observedDosOnly": 0,
+    "normalExit": true,
+    "passed": true,
+    "error": null,
+    "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wrap-ip-win31\\cases\\386-dosonly0.observer.txt"
+  },
+  {
+    "case": "386-dosonly1",
+    "dosonly": true,
+    "enhanced": true,
+    "probeStarted": true,
+    "progmanAndMode": true,
+    "flags": 2085,
+    "hwnd": 4456,
+    "observedDosOnly": 1,
+    "normalExit": true,
+    "passed": true,
+    "error": null,
+    "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wrap-ip-win31\\cases\\386-dosonly1.observer.txt"
+  }
+]

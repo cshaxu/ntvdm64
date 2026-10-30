@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-30T22:51:53.7723479Z",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/wrap-ip-package/package",
+  "count": 20,
+  "result": "pass"
+}

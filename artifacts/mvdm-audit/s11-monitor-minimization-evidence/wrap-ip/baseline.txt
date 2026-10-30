@@ -1,0 +1,2 @@
+case 89 before: MONITOR_WRAP_IP handled=0 fault=1 writes=0 eip=ffffffff; fixture exit 1.
+case 89 candidate: MONITOR_WRAP_IP handled=1 fault=0 writes=1 eip=00000001; fixture exit 0.

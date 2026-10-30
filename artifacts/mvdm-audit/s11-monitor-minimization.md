@@ -141,3 +141,20 @@ monitor memory must be reconciled with the original monitor and exception
 chain before choosing an implementation. The earlier claim of overall CPU
 permission alignment is superseded by this correction; this is an explicit
 S11 open boundary, not a passing equivalence result.
+
+## Instruction-offset wrap
+
+In NT4 `OpcodeINBimm` and `OpcodeGenericPrefix`, EDI is incremented as a
+32-bit pointer, then `RiCsBase` is subtracted before comparison to the code
+limit. `CheckEip` likewise compares the incremented 32-bit instruction
+offset. The previous adapter added a separate overflow rejection. A real
+selected-CCPU fixture with a full 4-GiB code limit and A20 wrapping places
+`OUT imm8` at EIP FFFFFFFFh with its port byte at offset zero: the previous
+adapter declined it (`handled=0`, no write, unchanged EIP); the candidate
+executes one port write and returns EIP 1. Removing the adapter-only check
+retains the original offset-versus-limit comparison. This is a controlled
+monitor entry witness, not evidence that normal CPU instruction decoding
+can itself produce every corresponding trap. The 88-case selected monitor
+suite passes; see `build/t473-s11/wrap-ip-boundary.log`.
+
+The 88-case monitor suite, all 16 Full gates, Winmine/SOL/WRITE and four SOL Options cycles, and the four Win3.1 mode/DOSONLY combinations passed. All 86 monitored guest binary hashes remained unchanged in both original and isolated trees. The coherent ten-component package was published to each destination with all 20 hashes matching. [Build and verification evidence](s11-monitor-minimization-evidence/wrap-ip/).

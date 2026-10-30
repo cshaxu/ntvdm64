@@ -298,7 +298,7 @@ static BOOL monitor_fetch_byte(const MONITOR_CODE *code, ULONG displacement, UCH
 {
     extern unsigned long SasWrapMask;
     ULONG offset=code->ip+displacement, linear, physical;
-    if (offset<code->ip || offset>code->limit) return FALSE;
+    if (offset>code->limit) return FALSE;
     /* NT4 forms the guest linear address with 32-bit addition. */
     linear=code->base+offset;
     if (!monitor_translate(linear,FALSE,&physical)) return FALSE;
