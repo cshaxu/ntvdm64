@@ -1,0 +1,17 @@
+window-ready elapsed=765 inherited-desktop=0
+owned-window=05DA09B2 pid=3344
+PASS unchanged title and native frame=1
+board-ready elapsed=110 cell=3cc8733b counter=47d384f2
+capture=before ok=1
+sibling-launcher=4280 command="O:\tmp\n7e6\system32\run16.exe" --wait "O:\tmp\n7e6\tests\CDLPROBE.EXE"
+sibling-wait=0 exit=0 survivor=05DA09B2 worker=3344
+board-ready elapsed=31 cell=3cc8733b counter=47d384f2
+phase=flag elapsed=31 cell=62c0567b reference=3cc8733b
+capture=flag ok=1
+counter-before=47d384f2 counter-flag=8caf84f2
+phase=reset elapsed=94 cell=3cc8733b reference=3cc8733b
+capture=reset ok=1
+phase=open elapsed=62 cell=c7639615 reference=3cc8733b
+capture=open ok=1
+PASS flag changed cell+counter, F2 restored covered cell, left click changed cell
+PASS owned game window closed after WM_CLOSE

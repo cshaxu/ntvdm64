@@ -219,3 +219,8 @@ observation delay is not a performance measurement.
 
 The production candidate's visible-desktop probe completed eight consecutive Options opens and closes and returned launcher exit 0. The exact ten-image stage manifest, probe and observer reports are in [sol-current-lifecycle](s11-foundation-evidence/sol-current-lifecycle/). WOW32 SHA-256 was `6EF2791521DB2B962BFB38E800143C840CBCC3AF70417FDF7BA4E83605C34741`. A separate failure-stage diagnostic completed 24 rounds without recurrence; [receipt](s11-foundation-evidence/current-return-stage-repeat/review.md). These bounded checks do not attribute or resolve the earlier intermittent 1400. The first sandboxed production attempt could not allocate the existing short staging directory and did not exercise the product; the authorized desktop-capable run passed.
 
+
+A fresh [published baseline shared-task witness](s11-foundation-evidence/published-shared-retirement-current/review.md)
+also passed 16 explicit dialog closes and task retirement alongside surviving
+Winmine gameplay, with all ten release image hashes matched. It does not force
+the previously observed race or attribute the historical SOL 1400.
