@@ -1,0 +1,4 @@
+container=console-owning-nondebug
+pid=8384
+result=timeout
+exit=0x53504354

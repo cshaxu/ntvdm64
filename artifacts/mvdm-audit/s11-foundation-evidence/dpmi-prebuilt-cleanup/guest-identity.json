@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "22E23ADA26CD7F3BF8F70BAD2D6B9BD4E86AFC043801500BB22FF2F2E15AAA03",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\dpmi_task_cleanup.asm"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E7C6398A4CE40639E6491B44B0FE47CD733A2E9CCFB24EBC155FCF060A9FE7A1",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-cleanup-shortpath\\runtime\\tests\\S6PROBE.COM"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "32F800A0254B42EFA69DB61FAA8B446B2D2C184D2230ECA06209EBEE2F105A1B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-task-cleanup.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8ABBB661B92B5647E5C37851BC1333F0598A30A67032EBC28F5690FDDF6F502F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe"
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2FAAB90371E1F63B7CAE97E65F8BB1DE6B940CA38554DACC1AB391830C02DF94",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\dpmi_suballoc.asm"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9A1574AD8A537D901C6A0C390682D2F60872BD678D6893013B1F934DD2AD4DAD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-cleanup-shortpath\\runtime\\tests\\D36N.COM"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "698DA97B3C254472F4C74CA17258FCED21AE04FC66657B66D9CBD0A131E2C5BD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-cleanup-shortpath\\runtime\\tests\\D36L.COM"
+  }
+]

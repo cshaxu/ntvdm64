@@ -1,0 +1,4 @@
+container=console-owning-nondebug
+pid=15008
+result=exited
+exit=0x00000000
