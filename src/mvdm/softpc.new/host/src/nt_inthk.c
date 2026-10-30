@@ -37,6 +37,10 @@
 #include "debug.h"
 #include "ios.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
+#ifdef CCPU
+#include <c_xcptn.h>
+#endif
 
 /* Make local symbols visible if debugging. */
 #ifndef PROD
@@ -373,24 +377,23 @@ static BOOL monitor_string_io(UCHAR op)
     extern int c_sas_memory_type(unsigned long);
     extern unsigned char *c_GetPhyAdd(unsigned long);
     extern unsigned long SasWrapMask;
-    BOOL input=(op==0x6c || op==0x6d), direct;
+    BOOL input=(op==0x6c || op==0x6d), direct, was_contributory, resolved;
     ULONG width=(op==0x6d || op==0x6f) ? 2 : 1;
     ULONG count=1, index=input ? getDI() : getSI();
-    ULONG base=input ? getES_BASE() : getDS_BASE();
-    ULONG limit=input ? getES_LIMIT() : getDS_LIMIT();
-    ULONG access=input ? getES_AR() : getDS_AR();
-    /* Match SIM32 descriptor-base plus offset, including 32-bit wrap. */
-    ULONG bytes=count*width, address=base+index, i, physical, adapter;
+    ULONG bytes=count*width, address, i, physical, adapter;
     ULONG available=c_sas_memory_size();
     ULONG mapping[2];
     union { USHORT aligned; UCHAR bytes[2]; } storage;
     UCHAR *buffer=storage.bytes;
-    if (!(access & 0x10) || (input && ((access & 0x08) || !(access & 0x02))) ||
-        (!input && (access & 0x08) && !(access & 0x02))) return FALSE;
-    if (bytes>0x10000UL-index || (bytes && address+bytes-1<address)) return FALSE;
-    if (!(access & 0x08) && (access & 0x04)) {
-        if(index<=limit) return FALSE;
-    } else if (index>limit || (bytes && bytes-1>limit-index)) return FALSE;
+    /* The monitor has accepted the guest #GP before SIM32 reads the
+     * descriptor. A nested CCPU fault may leave via c_cpu_continue(), so
+     * clear the in-delivery flag first and restore it only on return. */
+    was_contributory=doing_contributory;
+    doing_contributory=FALSE;
+    resolved=mvdm_softpc_protected_address(input ? getES() : getDS(),index,&address);
+    doing_contributory=was_contributory;
+    if(!resolved) return FALSE;
+    if (bytes && address+bytes-1<address) return FALSE;
     for(i=0;i<bytes;i++) {
         int type;
         if(!monitor_translate(address+i,input,&physical)) goto string_unhandled;

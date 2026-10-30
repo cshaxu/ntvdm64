@@ -5,7 +5,7 @@
 **Active: M0 T473 S11**
 
 The CPU40 protected-instruction monitor and cached-TLB boundary are now in a
-tested partial ten-component baseline. LMSW, page, string-I/O and address fixes passed Full (16 gates), 65 CCPU cases,
+tested partial ten-component baseline. LMSW, page and string-I/O fixes passed Full (16 gates), 74 CCPU cases,
 Winmine/SOL/WRITE lifecycle witnesses and four SOL Options cycles passed; both
 release destinations matched all ten image hashes. Original operand-fault,
 mapping/reentry and broader NPX/debug behavior remain S11 work; publication is

@@ -1,0 +1,2 @@
+ 0001:000052b0       _mvdm_softpc_protected_address 004062b0 f   mvdm-softpc-effective-address:mvdm_softpc_effective_address.obj
+ 0003:0025ac24       _doing_contributory        0080fc24     <common>

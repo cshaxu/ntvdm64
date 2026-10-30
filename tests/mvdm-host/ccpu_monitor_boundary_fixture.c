@@ -25,6 +25,7 @@ extern unsigned short c_getAX(void);
 extern void c_sas_stores(uint32_t, unsigned char *, uint32_t);
 extern unsigned char *c_GetPhyAdd(uint32_t);
 extern int debug_exception_pending;
+extern BOOL doing_contributory;
 extern void ica0_init(void), ica1_init(void);
 extern void InitializeIcaLock(void);
 extern int ica_intack(uint32_t *hook);
@@ -173,7 +174,7 @@ static int protected_scalar_io(void) {
     CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,used);
     c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);
     c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==38 || test_case==40 || test_case==54 ? 0x2b : 0x23);c_setSP(0x800);c_setBX(0);c_setIOPL(test_case==48 ? 3 : 0);c_setIP(0x1000);
-    if(test_case==28)c_setES(0x2b);
+    if(test_case==28){c_setES(0x2b);c_setDI(0x300);*c_GetPhyAdd(0x300)=0;}
     if(test_case>=31)c_setCR0((c_getCR0() & ~6u) | ((test_case==34 || test_case==35) ? 14u : 8u));
     if(test_case==41){ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(j=0;j<512;j++)pte[j]=(j<<12)|7;pte[3]=0;*(uint16_t *)c_GetPhyAdd(0x3000)=6;c_setCR3(0x4000);c_setPG(1);}
     if(test_case>=36 && test_case<=40){*(uint16_t *)c_GetPhyAdd(0x300)=6;*(uint16_t *)c_GetPhyAdd(0x2300)=0;}
@@ -260,7 +261,8 @@ static int protected_scalar_io(void) {
     if(test_case>=42 && test_case<=44) return test_fault==0 && io_reads==0 && io_writes==0 && *(uint32_t *)c_GetPhyAdd(0x300)==(test_case==42 ? 0x00345678u : test_case==43 ? 0u : 1u) && c_getAX()==0xbeef;
     if(test_case==45 || test_case==46) {extern uint32_t nr_inst_break;char line[120];wsprintfA(line,"MONITOR_DEBUG dr0=%08lx dr7=%08lx count=%lu fault=%lu eip=%08lx bx=%04x\n",CCPU_DR[0],CCPU_DR[7],nr_inst_break,test_fault,frame_fault_eip,(unsigned short)c_getBX());report(line);return test_fault==1 && frame_fault_eip==(test_case==46 ? 0x1019 : 0x1018) && (test_case!=45 || (unsigned short)c_getBX()==0) && c_getAX()==0xbeef;}
     if(test_case==47)return test_fault==1 && frame_fault_eip==0x101d && *c_GetPhyAdd(0x300)==0x5a && (CCPU_DR[6]&1) && c_getAX()==0xbeef;
-    if(test_case==28) return test_fault==1 && io_reads==0 && io_writes==0 && c_getAX()==0xbeef;
+    /* NT4 EventVdmStringIo resolves the selector without checking ES write rights. */
+    if(test_case==28) return test_fault==0 && io_reads==1 && io_writes==0 && *c_GetPhyAdd(0x300)==0xa5 && c_getAX()==0xbeef;
     if(test_case==41) return test_fault==1 && io_reads==0 && io_writes==0 && (c_getCR0()&15)==9 && c_getAX()==0xbeef;
     if(test_case==14) return test_fault==0 && io_reads==0 && io_writes==1 && c_getAX()==0xbeef;
     return test_fault==0 && io_reads==width && io_writes==width && c_getAX()==0xbeef;
@@ -355,6 +357,75 @@ static int protected_wrapped_string(void) {
     {char line[100];wsprintfA(line,"WRAPPED_STRING handled=%d fault=%lu reads=%u eip=%lx\n",handled,test_fault,io_reads,c_getEIP());report(line);}
     if(test_case==66)return handled && !test_fault && io_writes==1 && string_writes==1 && first_output==0x42 && c_getSI()==0x2001;
     return handled && !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(0x1000)==0xa5 && c_getDI()==0x2001 && (test_case==65 || c_getEIP()==0x1001);
+}
+static int protected_changed_descriptor(void) {
+    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe};
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;BOOL input=(test_case==67 || test_case==75);
+    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);
+    io_define_out_routines(adapter,probe_write,NULL,probe_string_write_wrapped,NULL);
+    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);if(!input)program[0]=0x6e;
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    *(uint32_t *)(gdt+0x28)=0x0000ffffu;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
+    c_setSP(0x800);c_setSI(0x902);c_setDI(0x912);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
+    *(uint32_t *)c_GetPhyAdd(input ? 0x3028 : 0x3020)=0x2000ffffu;
+    *c_GetPhyAdd(0x902)=0x11;*c_GetPhyAdd(0x2902)=0x42;
+    *c_GetPhyAdd(0x912)=0x11;*c_GetPhyAdd(0x2912)=0;
+    io_reads=io_writes=string_reads=string_writes=first_output=test_fault=0;
+    VdmInstallFaultHandler((void *)test_sti_fault);
+    if(test_case==75){int handled,restored;c_setGDT_BASE_LIMIT(0x3000,0x27);doing_contributory=TRUE;
+        handled=host_exint_hook(13,0);restored=doing_contributory;doing_contributory=FALSE;VdmInstallFaultHandler(NULL);
+        return !handled && restored && test_fault==1 && !io_reads && c_getEIP()==0x1000;}
+    c_cpu_simulate();VdmInstallFaultHandler(NULL);
+    {char line[128];wsprintfA(line,"CHANGED_DESCRIPTOR case=%d fault=%lu reads=%u writes=%u old=%02x new=%02x output=%02x\n",test_case,test_fault,io_reads,io_writes,*c_GetPhyAdd(0x912),*c_GetPhyAdd(0x2912),first_output);report(line);}
+    if(input)return !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(0x912)==0x11 && *c_GetPhyAdd(0x2912)==0xa5 && c_getDI()==0x913 && c_getAX()==0xbeef;
+    return !test_fault && io_writes==1 && string_writes==1 && first_output==0x42 && c_getSI()==0x903 && c_getAX()==0xbeef;
+}
+static int protected_string_segment_limit(void) {
+    unsigned char gdt[48]={0},program[]={0x6d,0xb8,0xef,0xbe,0xd6,0xfe};half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    BOOL last_byte=(test_case==69 || test_case==71);unsigned index=last_byte ? 0xffff : 0x200;int handled;
+    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,probe_string_read_word);
+    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);if(!last_byte)program[0]=0x6c;
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    *(uint32_t *)(gdt+0x28)=last_byte ? 0x0000ffffu : 0x00000100u;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
+    c_setSP(0x800);c_setDI((uint16_t)index);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
+    *c_GetPhyAdd(index)=0;*c_GetPhyAdd(index+1)=0;io_reads=string_reads=test_fault=0;
+    VdmInstallFaultHandler((void *)test_sti_fault);
+    if(test_case==71 || test_case==72){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
+    else handled=host_exint_hook(13,0);
+    VdmInstallFaultHandler(NULL);
+    {char line[100];wsprintfA(line,"STRING_LIMIT case=%d handled=%d fault=%lu reads=%u\n",test_case,handled,test_fault,io_reads);report(line);}
+    return handled && !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(index)==0xa5 &&
+        (last_byte ? (*c_GetPhyAdd(index+1)==0x6b && c_getDI()==1) : c_getDI()==0x201) &&
+        (test_case>=71 || c_getEIP()==0x1001);
+}
+static BOOL descriptor_page_fault(unsigned long vector, unsigned long error) {
+    (void)error;++test_fault;frame_fault_vector=(uint32_t)vector;
+    if(test_case==74 && vector==14){((ULONG *)c_GetPhyAdd(0x5000))[3]=0x3007;c_setEIP(0x1001);}
+    else c_setEIP(test_case==74 ? 0x1003 : 0x1001);
+    return TRUE;
+}
+static int protected_missing_descriptor_page(void) {
+    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe,0,0};
+    ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    if(test_case==74){program[1]=0xe6;program[2]=0x80;program[3]=0xb8;program[4]=0xef;program[5]=0xbe;program[6]=0xd6;program[7]=0xfe;}
+    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);io_define_outb(adapter,probe_write);io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    *(uint32_t *)(gdt+0x28)=0x0000ffffu;*(uint32_t *)(gdt+0x2c)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x2b);
+    c_setSP(0x800);c_setDI(0x912);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
+    ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(i=0;i<512;i++)pte[i]=(i<<12)|7;pte[3]=0;
+    c_setCR3(0x4000);c_setPG(1);io_reads=io_writes=string_reads=test_fault=frame_fault_vector=0;
+    VdmInstallFaultHandler((void *)descriptor_page_fault);c_cpu_simulate();VdmInstallFaultHandler(NULL);c_setPG(0);
+    {char line[100];wsprintfA(line,"DESCRIPTOR_PAGE fault=%lu vector=%lu reads=%u ax=%04x\n",test_fault,frame_fault_vector,io_reads,c_getAX());report(line);}
+    return test_fault==1 && frame_fault_vector==14 && !io_reads && (test_case!=74 || io_writes==1) && c_getAX()==0xbeef;
 }
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
@@ -466,6 +537,9 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==49) ok=duplicate_tlb_mapping();
+    else if(test_case==73 || test_case==74) ok=protected_missing_descriptor_page();
+    else if(test_case>=69 && test_case<=72) ok=protected_string_segment_limit();
+    else if(test_case==67 || test_case==68 || test_case==75) ok=protected_changed_descriptor();
     else if(test_case==64 || test_case==65 || test_case==66) ok=protected_wrapped_string();
     else if(test_case==62 || test_case==63) ok=protected_wrapped_cs();
     else if(test_case==60 || test_case==61) ok=protected_split_word_string();

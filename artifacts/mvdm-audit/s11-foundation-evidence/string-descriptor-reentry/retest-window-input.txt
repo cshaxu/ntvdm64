@@ -1,0 +1,1 @@
+frontend=35564 input-delivered=1 elapsed-before-exit-wait-ms=1875 timeout-ms=20000

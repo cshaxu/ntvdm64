@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/string-descriptor-final-package/package",
+  "utc": "2026-10-30T21:21:54.8740998Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ]
+}

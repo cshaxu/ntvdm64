@@ -1,0 +1,6 @@
+result=timeout
+exit=0x53504354
+timeout-ms=20000
+milestone-input=1 milestone-waits=3 milestone-wait-ms=20719
+window-key-message-count=16 window-enter-count=1
+scripted-console-input=failed

@@ -1,0 +1,67 @@
+OBSERVE PM_STI case=0 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=1 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=2 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=01 ax=beef
+OBSERVE PM_STI case=3 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=4 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_AEOI callback_isr=00
+OBSERVE PM_STI case=5 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SLAVE_EOI master=00 slave=00
+OBSERVE PM_STI case=6 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=7 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=10 width=1 reads=1 writes=1 fault=0 ax=beef
+MONITOR_SCALAR_IO case=11 width=2 reads=2 writes=2 fault=0 ax=beef
+MONITOR_SCALAR_IO case=12 width=1 reads=1 writes=1 fault=0 ax=beef
+MONITOR_SCALAR_IO case=13 width=2 reads=2 writes=2 fault=0 ax=beef
+MONITOR_SCALAR_IO case=14 width=1 reads=0 writes=1 fault=0 ax=beef
+MONITOR_STRING_DF cpu_si=0900 di=0910 cx=0000 reads=2 writes=2 bytes=a5,a5 fault=0
+MONITOR_IF_CONCURRENT state=00100000 fault=0 writer=0 ax=beef
+OBSERVE PM_STI case=17 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=18 fault=0 irq=1 irq_eip=2000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=20 fault=0 irq=1 irq_eip=1007 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=2901 di=3911 cx=0002 reads=1 writes=1 bytes=00,00 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,00 fault=0
+OBSERVE PM_STI case=26 fault=0 irq=1 irq_eip=1001 marker=0 out=0 isr=01 irr=00 ax=beef
+MONITOR_IRQ_FRAME_FAULT vector=11 ip=1001
+OBSERVE PM_STI case=27 fault=0 irq=1 irq_eip=2001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=28 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+OBSERVE PM_STI case=30 fault=0 irq=1 irq_eip=1006 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=31 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=32 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=33 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=34 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=35 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=36 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=37 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=38 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=41 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_SCALAR_IO case=42 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=43 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=44 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=45 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_DEBUG dr0=000f1018 dr7=00000001 count=1 fault=1 eip=00001018 bx=0000
+MONITOR_SCALAR_IO case=46 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_DEBUG dr0=000f1019 dr7=00000001 count=1 fault=1 eip=00001019 bx=0000
+MONITOR_SCALAR_IO case=47 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_SCALAR_IO case=48 width=1 reads=0 writes=0 fault=0 ax=beef
+TLB_DUPLICATE first=8000 write=9000 cpu=9000 monitor=9000 hit=1
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,37 fault=0
+LMSW_CROSS_PAGE handled=0 fault=1 eip=1000 cr0=80000019
+LMSW_CROSS_PAGE handled=1 fault=0 eip=1005 cr0=8000001f
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+WRAPPED_CS handled=1 fault=0 out=1 eip=2002
+WRAPPED_CS handled=1 fault=0 out=1 eip=2007
+WRAPPED_STRING handled=1 fault=0 reads=1 eip=1001
+WRAPPED_STRING handled=1 fault=0 reads=1 eip=1006
+WRAPPED_STRING handled=1 fault=0 reads=0 eip=1006
+CHANGED_DESCRIPTOR case=67 fault=0 reads=1 writes=0 old=11 new=a5 output=00
+CHANGED_DESCRIPTOR case=68 fault=0 reads=0 writes=1 old=11 new=00 output=42
+STRING_LIMIT case=69 handled=0 fault=1 reads=0
+Exception: O:\repos.hobby\ntvdm64\tests\observation\verify-ccpu-monitor-boundary.ps1:9
+Line |
+   9 |  . CODE -ne 0) { throw "CCPU monitor case $case failed: $LASTEXITCODE" }
+     |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | CCPU monitor case 69 failed: 1
