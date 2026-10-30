@@ -193,5 +193,11 @@ all failures, parallel guest execution, or the observed SOL 1400.
 
 ## Current released SOL lifecycle repeat
 
+The later published diagnostic-read release passed eight separate debugger
+attachment intervals and Options opens/closes without a captured exception.
+[Receipt](s11-foundation-evidence/published-sol-fault-capture/review.md).
+The capture changes timing and does not resolve the historic 1400; its 10 s
+observation delay is not a performance measurement.
+
 The production candidate's visible-desktop probe completed eight consecutive Options opens and closes and returned launcher exit 0. The exact ten-image stage manifest, probe and observer reports are in [sol-current-lifecycle](s11-foundation-evidence/sol-current-lifecycle/). WOW32 SHA-256 was `6EF2791521DB2B962BFB38E800143C840CBCC3AF70417FDF7BA4E83605C34741`. A separate failure-stage diagnostic completed 24 rounds without recurrence; [receipt](s11-foundation-evidence/current-return-stage-repeat/review.md). These bounded checks do not attribute or resolve the earlier intermittent 1400. The first sandboxed production attempt could not allocate the existing short staging directory and did not exercise the product; the authorized desktop-capable run passed.
 
