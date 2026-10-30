@@ -100,3 +100,13 @@ estimates, CSV SHA-256
 `A7DB47B6524BF34704B8B05BD7AE62F13FDEDFB866B0BCD905207CC4E5600F99`.
 Its partial-diff assertion is source classification only; it is not proof of
 runtime restoration. The new adapter and test are outside the mirrored tree.
+
+The later current-worktree generator rerun at `f0880afb7` passes with 204
+differing files, including 199 C/H files. An independent join against the
+source ledger finds all 199 C/H rows `partial` and all 199 have a textual
+estimate. Four other differences have source-text estimates and one build
+input has no applicable code-text percentage. The current generated CSV
+SHA-256 is `D2DB2B75B732244295375FC383A1F94641AF396FDEE0D9F6090532F796EE92EF`;
+the earlier A7DB value is a historical snapshot, not the current artifact's
+hash. The generator checks its frozen original identities; it does not
+refresh profile selection or establish runtime behavior.
