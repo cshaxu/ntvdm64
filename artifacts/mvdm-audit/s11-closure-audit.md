@@ -231,3 +231,6 @@ the worker and launcher exited zero and neither selected tail breakpoint was
 observed. The observer explicitly handled the original marked BOP 5B break;
 other exceptions were not silently ignored. This is bounded dynamic evidence,
 not proof for all guests, profiles or external consumers.
+The same SAS observer also covered an original [Win16 task startup and
+exit](s11-foundation-evidence/sas-real-worker-win16/review.md) with no tail
+breakpoint; the resident worker's later lifetime remains outside that run.

@@ -1,0 +1,5 @@
+EXIT pid=29116 code=0
+worker=2840 base=0000000000F00000 trap=00000000010782E0
+MINE_WINDOW pid=2840 hwnd=0000000002660B66 title=Minesweeper
+EXIT pid=34244 code=0
+RESULT done=1 exit=0 worker=2840 events=658 sas_hits=0
