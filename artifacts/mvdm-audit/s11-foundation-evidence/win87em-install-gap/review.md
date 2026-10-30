@@ -29,6 +29,15 @@ that WIN87EM's presence is required for this isolated Calculator startup;
 it is not an exhaustive analysis of the other 14 missing files, all search
 paths, or an observed run from the actual installed package.
 
+The recorded static-import list also contains dependencies among the absent
+files: TIMER and MCIOLE16 import MMSYSTEM; LANMAN imports NETAPI and PMSPL;
+PMSPL imports NETAPI; VER imports LZEXPAND. The currently present files in
+that manifest have no static import of these 15 module names. This is a
+manifest-level observation only: it does not cover dynamic loading, guest
+applications outside the manifest, alias resolution or behavioral acceptance.
+The separately inspected original Calculator outside that manifest imports
+WIN87EM and provides the runtime control described above.
+
 A subsequent same-package single-file absence run extended only the test
 observer's owned-dialog reporting. It captured the dialog body
 `Cannot find WIN87EM.DLL` and again observed no Calculator main window; the
