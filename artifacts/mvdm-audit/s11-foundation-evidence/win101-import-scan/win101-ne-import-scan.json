@@ -1,0 +1,373 @@
+{
+  "root": "O:/W101",
+  "count": 46,
+  "rows": [
+    {
+      "path": "O:\\W101\\CALC.EXE",
+      "sha256": "F4A59C1C1D142257A7714A56EF5D2D1B3E11BE3E99228809C631E8976F64CFE2",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CALENDAR.EXE",
+      "sha256": "EEDDB61DFC110C174D55FAAA7816A83B225012C6C680DAF9FF796656F7A54ACB",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CARDFILE.EXE",
+      "sha256": "C7641F9EE1AD01DE41E64CD4947B62588F72E8074EA5D67DCA8239571BB934AA",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CGA.DRV",
+      "sha256": "BAD3E9B9207B2677C928A8BC291B75BDC3DF6A17916F82021A5F8235129EA880",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\CITOH.DRV",
+      "sha256": "D07FA2328ED4BAF2D3803E4A8E96C2B0B79C3A2C9C9732A9AF4F130DCD254CFC",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CLIPBRD.EXE",
+      "sha256": "A5C9AB1E75851173ED444FBE9EC00B4830A28936E3F34EE9EB4545413274BBDE",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CLOCK.EXE",
+      "sha256": "B5DFD9689CC016912FB9511571AFCEBF157844DCD0B113C88914AAD061E9FF5D",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\COMM.DRV",
+      "sha256": "9A86B6B83E2452173912D8E2BDE32BF93F0B33193888F9905CC721D67FC50254",
+      "imports": [
+        "SYSTEM"
+      ]
+    },
+    {
+      "path": "O:\\W101\\CONTROL.EXE",
+      "sha256": "C67237A35240A8C1C47DA2E9BD4496A555EF2AD5863672EC2F815CFC29DD5F5C",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER",
+        "KEYBOARD"
+      ]
+    },
+    {
+      "path": "O:\\W101\\EGAHIBW.DRV",
+      "sha256": "4F7774107EC7FF3DA8B81186445CA113497352CACDAA95BE52BFF44A8301AB18",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\EGAHIRES.DRV",
+      "sha256": "7DD9E05DCBC54AFDC7CC26F4360FA8F33E3DF25ACC715D010BA373A926BCC353",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\EGALORES.DRV",
+      "sha256": "0C873EBCE2320E2F93B914AA486E339E6980330B45548D9D18E07513D403B919",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\EGAMONO.DRV",
+      "sha256": "35665E3F29770440F14D0016FBF0B187F94E8CD05E1DD574D2CE7D8C58084B4B",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\EPSON.DRV",
+      "sha256": "7006AF4519045B05889F113CBED7A57E04A96A69F4AF294E400438050E0C6C00",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\FTG.DRV",
+      "sha256": "EDC70115F25874F619BA85E3519E49FF4445B46E4CEC559375C3644063576E95",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\GDI.EXE",
+      "sha256": "8AF20331A9290C43BD4A32419DBFC236A5DF5E41E46CA20A6F2CDD881326A28F",
+      "imports": [
+        "KERNEL"
+      ]
+    },
+    {
+      "path": "O:\\W101\\HERCULES.DRV",
+      "sha256": "B0F3C95C12AAAB07B11140FB7950DF4D6E56D2B5DFAC69F08C7710C537601108",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\HP747XA.DRV",
+      "sha256": "447B33DFB344C0E300B58A216136C8A81D50EBD0B2538F08B1E3A574DF4457A0",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\HPLASER.DRV",
+      "sha256": "0133B9901D1335560D8012951D764CDCFD43A14FC394A977C9800B3F7C50533D",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\IBMGRX.DRV",
+      "sha256": "14F92EFB401A8D3537BB35D69A6E3D61AB66D7613BFE7E3EB932B239DFDDBE43",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\JOYMOUSE.DRV",
+      "sha256": "C0E8AF4962CE0EAD818A7B03AA2C22F75648874698F9B118A3C57E4847B54F28",
+      "imports": [
+        "SYSTEM"
+      ]
+    },
+    {
+      "path": "O:\\W101\\KERNEL.EXE",
+      "sha256": "36DC24686FC6F3C61D2521F3406BB2FDFD0438ABDB220055899F2DD82F9E4375",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\KEYBUS.DRV",
+      "sha256": "31F64321294433D20B40A84EF429D9647A51826AA62891A983584E245910EA11",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\LMOUSE.DRV",
+      "sha256": "707CC4F805DF9332BED2F58036EB9D39952412226808288C79A7817406DD09E5",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\LPC.DRV",
+      "sha256": "2A4AF1807E05E2F72CC06A67E823A88BE0CAFC58679A6EC9C80C7805CB9632EC",
+      "imports": [
+        "SYSTEM"
+      ]
+    },
+    {
+      "path": "O:\\W101\\LQ1500.DRV",
+      "sha256": "276DDDB5D9054BEC040860FD2934DE272DC07BCD38DBB6D0F3470651890B532F",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\MOUSE.DRV",
+      "sha256": "DC01039B0FC2B7E9244F31A42A4AAA9ED10613291557B4B6E2695ECE1BA5666E",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\MSDOSD.EXE",
+      "sha256": "AEA0BB5C0B43E1E44F7C62A392438B83F52E8D8C02FFC82FF4189FE95B470042",
+      "imports": [
+        "KERNEL"
+      ]
+    },
+    {
+      "path": "O:\\W101\\MSMOUSE1.DRV",
+      "sha256": "125AAFCE17F9D11CDAAB417DA1A16BBAE7B71C401843127FF24B413FB40EE1AC",
+      "imports": [
+        "KERNEL"
+      ]
+    },
+    {
+      "path": "O:\\W101\\MSMOUSE2.DRV",
+      "sha256": "1D163436F2D7DAD089E09BBDCDD76E499EADDC05185439C6F3AFF5B7B4D30E1A",
+      "imports": [
+        "KERNEL"
+      ]
+    },
+    {
+      "path": "O:\\W101\\NEC3550.DRV",
+      "sha256": "81ED88B7B02150C857685451702D6D15C564C28D8B09830591BA0D0C5259787A",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\NECP2.DRV",
+      "sha256": "5C60D458BFD92652A610A86D1CFBEA59C17A18B626DD9C32954CE1EC3ED2F85B",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\NOMOUSE.DRV",
+      "sha256": "A93C35F3BA3FBB58350985925B64A9ACD57719FEAEC0AE845A3D1D5D31BBE6CF",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\NOTEPAD.EXE",
+      "sha256": "71F5A1024E488B69CCD22D64B75A9FB83C8258502BC6E7892573F2B50B6D89E5",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER",
+        "KEYBOARD"
+      ]
+    },
+    {
+      "path": "O:\\W101\\OKI92.DRV",
+      "sha256": "1037ABB80CF9DE576686F76AD4C52A876CC32AF81D11575697B6EC1544539E5C",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\PAINT.EXE",
+      "sha256": "BD02ABF3584F15C4E27D3851153D1A13FD03B3CED2FC645D4789AA001D482A1E",
+      "imports": [
+        "GDI",
+        "KERNEL",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\REVERSI.EXE",
+      "sha256": "6E3391AAF8C15B61429B7E1C347D678B439F357739787C58499B06494895B43B",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\SG10.DRV",
+      "sha256": "1F0015F5C9A0E65EC1506A5E7279664A6D22EC9AB160620069C7DA44FE872DDB",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\SOUND.DRV",
+      "sha256": "3CA924FAE433F79ABB13C7D6559D8B50F162C47692E2CEBE0ED78B162E54CE97",
+      "imports": [
+        "KERNEL"
+      ]
+    },
+    {
+      "path": "O:\\W101\\SPOOLER.EXE",
+      "sha256": "0A7B20D719E95544F60BBE2B0C967C382DCD1CD23DEA21D8D8883B5E50C71A12",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\SYSTEM.DRV",
+      "sha256": "659A2001C1BD7EFB38F111BDAE189578D4EBAA5B4BEA1C4B531DCF3DD385C678",
+      "imports": []
+    },
+    {
+      "path": "O:\\W101\\TERMINAL.EXE",
+      "sha256": "593A3EF0B081988162B557D6EE19B2ADF00F67D0AFB09874F20F2C57FEC807F7",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER"
+      ]
+    },
+    {
+      "path": "O:\\W101\\TI850.DRV",
+      "sha256": "43423A38C2381D969A8C206AC52F865CBEF62E48EFC64A22B15C566D34959440",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\TOSH.DRV",
+      "sha256": "6B3785A1694D105C70FC110D18DE58C5586A172C74C7FF3649D9319D46D1AD7D",
+      "imports": [
+        "KERNEL",
+        "USER",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\USER.EXE",
+      "sha256": "BCDF488987CC4633BD3D246F6327DF3239C03BEC5BC9FFBA478E23AB1F5EB237",
+      "imports": [
+        "SYSTEM",
+        "KEYBOARD",
+        "MOUSE",
+        "DISPLAY",
+        "SOUND",
+        "COMM",
+        "KERNEL",
+        "GDI"
+      ]
+    },
+    {
+      "path": "O:\\W101\\WRITE.EXE",
+      "sha256": "D4D123A0BB186FA6C2C6740E57EF5D97D0C5A45B67A1A30DAA743006B7215C5E",
+      "imports": [
+        "KERNEL",
+        "GDI",
+        "USER",
+        "KEYBOARD"
+      ]
+    }
+  ],
+  "errors": [],
+  "control": {
+    "path": "O:\\w31\\CALC.EXE",
+    "sha256": "09B5E717589598B9DF943A690A78B5F5F0A586468CF08BEB8CED58623C49BCC7",
+    "imports": [
+      "KERNEL",
+      "GDI",
+      "USER",
+      "WIN87EM",
+      "SHELL"
+    ]
+  },
+  "limitations": "Static module import names only; no dynamic load or runtime evidence."
+}
