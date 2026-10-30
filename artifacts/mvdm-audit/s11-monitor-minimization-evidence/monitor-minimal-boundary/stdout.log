@@ -1,0 +1,33 @@
+[1/2] CC O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): note: 'NTVDM' previously declared on the command line
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(89): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(196): warning C4013: 'c_setBX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(197): warning C4013: 'c_setDI' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(233): warning C4013: 'c_setSI' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(251): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(251): warning C4028: formal parameter 3 different from declaration
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(282): warning C4013: 'c_getBX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(282): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(339): warning C4013: 'c_setDX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(346): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(357): warning C4013: 'c_setAX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(471): warning C4013: 'c_setBP' undefined; assuming extern returning int
+[2/2] link.exe /nologo /force:multiple /map:ccpu-monitor-boundary-test.exe.map /out:ccpu-monitor-boundary-test.exe obj/tests/ccpu_monitor_boundary_fixture.obj obj/host/nt_inthk.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: __swprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _printf already defined in original-softpc-host-fixture-roots.lib(fprt.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sscanf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+ccpu-monitor-boundary-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+CCPU monitor boundary: 84 cases passed

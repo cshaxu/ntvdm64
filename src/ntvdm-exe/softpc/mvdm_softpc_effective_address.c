@@ -25,15 +25,27 @@ IMPORT IU16 c_getMSW IPT0();
  * `selector_outside_GDT_LDT` and `read_descriptor_linear` routines are the
  * same CCPU40 mechanism used by protected-mode instruction paths.  Do not
  * recreate a CPU30 monitor descriptor table in this adapter. */
-int mvdm_softpc_protected_address(IU16 selector, IU32 offset, IU32 *address_out)
+int __cdecl mvdm_softpc_protected_segment(IU16 selector, IU32 *base,
+                                          IU32 *limit, IU32 *access)
 {
     IU32 descriptor_address;
     CPU_DESCR descriptor;
 
-    if (address_out == 0 || selector_outside_GDT_LDT(selector,
-        &descriptor_address)) return 0;
+    if (base == 0 || limit == 0 || access == 0 ||
+        selector_outside_GDT_LDT(selector, &descriptor_address)) return 0;
     read_descriptor_linear(descriptor_address, &descriptor);
-    *address_out = descriptor.base + offset;
+    *base = descriptor.base;
+    *limit = descriptor.limit;
+    *access = descriptor.AR;
+    return 1;
+}
+
+int mvdm_softpc_protected_address(IU16 selector, IU32 offset, IU32 *address_out)
+{
+    IU32 base, limit, access;
+    if (address_out == 0 ||
+        !mvdm_softpc_protected_segment(selector, &base, &limit, &access)) return 0;
+    *address_out = base + offset;
     return 1;
 }
 

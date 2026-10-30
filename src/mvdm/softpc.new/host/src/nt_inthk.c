@@ -40,6 +40,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_effective_address.h"
 #ifdef CCPU
 #include <c_xcptn.h>
+#include <c_reg.h>
 #endif
 
 /* Make local symbols visible if debugging. */
@@ -281,42 +282,36 @@ static BOOL monitor_mark_access(ULONG linear, BOOL write, ULONG expected)
     return xtrn2phy(linear,access,&physical) && (physical & SasWrapMask)==expected;
 }
 
-static BOOL monitor_fetch_byte(ULONG ip, ULONG displacement, UCHAR *value)
+typedef struct { ULONG ip, base, limit; } MONITOR_CODE;
+
+static BOOL monitor_segment(USHORT selector, ULONG *base, ULONG *limit, ULONG *access)
 {
-    ULONG base=getCS_BASE(), offset=ip+displacement, linear, physical;
-    if (offset<ip || offset>getCS_LIMIT()) return FALSE;
+    BOOL was_contributory=doing_contributory, resolved;
+    /* A nested CPU fault can leave through c_cpu_continue without returning. */
+    doing_contributory=FALSE;
+    resolved=mvdm_softpc_protected_segment(selector,base,limit,access);
+    doing_contributory=was_contributory;
+    return resolved;
+}
+
+static BOOL monitor_fetch_byte(const MONITOR_CODE *code, ULONG displacement, UCHAR *value)
+{
+    ULONG offset=code->ip+displacement, linear, physical;
+    if (offset<code->ip || offset>code->limit) return FALSE;
     /* NT4 forms the guest linear address with 32-bit addition. */
-    linear=base+offset;
+    linear=code->base+offset;
     if (!monitor_translate(linear,FALSE,&physical)) return FALSE;
     return monitor_read_ram(physical,value,1);
 }
 
 static ULONG monitor_general_register(UCHAR index)
 {
-    switch(index & 7) {
-    case 0: return getEAX();
-    case 1: return getECX();
-    case 2: return getEDX();
-    case 3: return getEBX();
-    case 4: return getESP();
-    case 5: return getEBP();
-    case 6: return getESI();
-    default: return getEDI();
-    }
+    return GET_GR(index & 7);
 }
 
 static void monitor_set_general_register(UCHAR index, ULONG value)
 {
-    switch(index & 7) {
-    case 0: setEAX(value); break;
-    case 1: setECX(value); break;
-    case 2: setEDX(value); break;
-    case 3: setEBX(value); break;
-    case 4: setESP(value); break;
-    case 5: setEBP(value); break;
-    case 6: setESI(value); break;
-    default: setEDI(value); break;
-    }
+    SET_GR(index & 7,value);
 }
 
 /* KiVdmSetUserCR0 accepts only the guest's MP/EM bits. CPU40 owns the
@@ -329,10 +324,10 @@ static void monitor_set_npx_control(ULONG value)
 }
 
 /* Original VdmDecodeOperand's 16-bit memory-address forms for LMSW. */
-static BOOL monitor_lmsw_operand(ULONG ip, ULONG *cursor, UCHAR modrm, ULONG *value)
+static BOOL monitor_lmsw_operand(const MONITOR_CODE *code, ULONG *cursor, UCHAR modrm, ULONG *value)
 {
     extern unsigned long SasWrapMask;
-    ULONG offset=0, base, access, linear, physical[4], i;
+    ULONG offset=0, base, limit, access, linear, physical[4], i;
     UCHAR lo,hi,bytes[4],mode=modrm>>6,rm=modrm&7;
     BOOL stack=FALSE;
     switch(rm) {
@@ -346,19 +341,17 @@ static BOOL monitor_lmsw_operand(ULONG ip, ULONG *cursor, UCHAR modrm, ULONG *va
         default: offset=getBX();break;
     }
     if(mode==1) {
-            if(*cursor>=15 || !monitor_fetch_byte(ip,(*cursor)++,&lo)) return FALSE;
+            if(*cursor>=15 || !monitor_fetch_byte(code,(*cursor)++,&lo)) return FALSE;
             offset+=(signed char)lo;
     } else if(mode==2 || (mode==0 && rm==6)) {
-            if(*cursor>=14 || !monitor_fetch_byte(ip,(*cursor)++,&lo) ||
-               !monitor_fetch_byte(ip,(*cursor)++,&hi)) return FALSE;
+            if(*cursor>=14 || !monitor_fetch_byte(code,(*cursor)++,&lo) ||
+               !monitor_fetch_byte(code,(*cursor)++,&hi)) return FALSE;
             offset+=(ULONG)lo | ((ULONG)hi<<8);
     }
     /* VdmDecodeOperand accumulates zero-extended 16-bit registers and
      * signed displacement in EBX, without truncating or checking the
      * default selector's segment limit before adding its base. */
-    if(stack){base=getSS_BASE();access=getSS_AR();}
-    else {base=getDS_BASE();access=getDS_AR();}
-    if (!(access&0x10) || ((access&8) && !(access&2))) return FALSE;
+    if(!monitor_segment(stack ? getSS() : getDS(),&base,&limit,&access)) return FALSE;
     linear=base+offset;
     /* VdmOpcodeLmsw reads a dword before KiVdmSetUserCR0 masks it. */
     if(linear>0xfffffffcUL) return FALSE;
@@ -377,22 +370,19 @@ static BOOL monitor_string_io(UCHAR op)
     extern int c_sas_memory_type(unsigned long);
     extern unsigned char *c_GetPhyAdd(unsigned long);
     extern unsigned long SasWrapMask;
-    BOOL input=(op==0x6c || op==0x6d), direct, was_contributory, resolved;
+    extern void insb(io_addr,half_word *,word), insw(io_addr,word *,word);
+    extern void outsb(io_addr,half_word *,word), outsw(io_addr,word *,word);
+    BOOL input=(op==0x6c || op==0x6d), direct;
     ULONG width=(op==0x6d || op==0x6f) ? 2 : 1;
     ULONG count=1, index=input ? getDI() : getSI();
-    ULONG bytes=count*width, address, i, physical, adapter;
+    ULONG bytes=count*width, address, base, limit, access, i, physical;
     ULONG available=c_sas_memory_size();
     ULONG mapping[2];
     union { USHORT aligned; UCHAR bytes[2]; } storage;
     UCHAR *buffer=storage.bytes;
-    /* The monitor has accepted the guest #GP before SIM32 reads the
-     * descriptor. A nested CCPU fault may leave via c_cpu_continue(), so
-     * clear the in-delivery flag first and restore it only on return. */
-    was_contributory=doing_contributory;
-    doing_contributory=FALSE;
-    resolved=mvdm_softpc_protected_address(input ? getES() : getDS(),index,&address);
-    doing_contributory=was_contributory;
-    if(!resolved) return FALSE;
+    /* SIM32 uses the current selector-table descriptor, not the CPU cache. */
+    if(!monitor_segment(input ? getES() : getDS(),&base,&limit,&access)) return FALSE;
+    address=base+index;
     if (bytes && address+bytes-1<address) return FALSE;
     for(i=0;i<bytes;i++) {
         int type;
@@ -412,13 +402,11 @@ static BOOL monitor_string_io(UCHAR op)
      * that same live storage when the validated bytes are contiguous. */
     direct=(bytes==1 || c_GetPhyAdd(mapping[1])==c_GetPhyAdd(mapping[0])+1);
     if(direct) buffer=c_GetPhyAdd(mapping[0]);
-    /* Match the original MONITOR IOS string dispatch, including its input
-     * adapter lookup for both directions. */
-    adapter=(unsigned char)Ios_in_adapter_table[getDX() & (PC_IO_MEM_SIZE-1)];
-    if(input && width==1) Ios_insb_function[adapter](getDX(),(half_word *)buffer,(word)count);
-    else if(input) Ios_insw_function[adapter](getDX(),(word *)buffer,(word)count);
-    else if(width==1) Ios_outsb_function[adapter](getDX(),(half_word *)buffer,(word)count);
-    else Ios_outsw_function[adapter](getDX(),(word *)buffer,(word)count);
+    /* Reuse the original monitor IOS entries and their adapter routing. */
+    if(input && width==1) insb(getDX(),(half_word *)buffer,(word)count);
+    else if(input) insw(getDX(),(word *)buffer,(word)count);
+    else if(width==1) outsb(getDX(),(half_word *)buffer,(word)count);
+    else outsw(getDX(),(word *)buffer,(word)count);
     if(input && !direct)for(i=0;i<bytes;i++)*c_GetPhyAdd(mapping[i])=buffer[i];
     index=(USHORT)(getDF() ? index-bytes : index+bytes);
     if(input)setDI(index);else setSI(index);
@@ -442,14 +430,18 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
         extern void IN8(unsigned long *,unsigned long), IN16(unsigned long *,unsigned long);
         extern void OUT8(unsigned long,unsigned long), OUT16(unsigned long,unsigned long);
         extern void ccpu_monitor_dispatch_irq(void);
-        unsigned long ip=c_getEIP();
+        unsigned long ip=c_getEIP(), cs_access;
+        MONITOR_CODE code;
         unsigned char op;
-        if (monitor_fetch_byte(ip,0,&op)) {
+        code.ip=ip;
+        if(!monitor_segment(getCS(),&code.base,&code.limit,&cs_access) ||
+           (cs_access&0x98)!=0x98) goto candidate_unhandled;
+        if (monitor_fetch_byte(&code,0,&op)) {
             unsigned long prefix=0;
             while (op==0x26 || op==0x2e || op==0x36 || op==0x3e ||
                    op==0x64 || op==0x65 || op==0x66 || op==0x67 || op==0xf0 || op==0xf2 || op==0xf3) {
                 ++prefix;
-                if(prefix>=15 || !monitor_fetch_byte(ip,prefix,&op))
+                if(prefix>=15 || !monitor_fetch_byte(&code,prefix,&op))
                     goto candidate_unhandled;
             }
             if(op==0x0f) {
@@ -458,13 +450,13 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                  * EIP and advances it once, so a leading prefix is not a
                  * supported 0F dispatch. Preserve its fallback path. */
                 if(prefix) goto candidate_unhandled;
-                if(prefix+1>=15 || !monitor_fetch_byte(ip,prefix+1,&second)) goto candidate_unhandled;
+                if(prefix+1>=15 || !monitor_fetch_byte(&code,prefix+1,&second)) goto candidate_unhandled;
                 /* NT4 VdmOpcodeClts intentionally performs no CR0 change. */
                 if(second==0x06) {setEIP(ip+prefix+2);return TRUE;}
                 if(second==0x20) {
                     ULONG value;
                     extern unsigned long c_getCR0(void);
-                    if(prefix+2>=15 || !monitor_fetch_byte(ip,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
+                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
                     value=(modrm&0x38) ? 0 : (c_getCR0() & ~8UL);
                     monitor_set_general_register(modrm,value);
                     setEIP(ip+prefix+3);return TRUE;
@@ -473,7 +465,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                     extern unsigned long CCPU_DR[8];
                     extern void ccpu_monitor_write_dr(unsigned long,unsigned long);
                     ULONG value, index;
-                    if(prefix+2>=15 || !monitor_fetch_byte(ip,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
+                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
                     index=(modrm>>3)&7;
                     if(second==0x21) {
                         value=(index==4 || index==5) ? 0 : CCPU_DR[index];
@@ -495,14 +487,14 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 }
                 if(second==0x22 || second==0x01) {
                     ULONG operand, next=prefix+3;
-                    if(prefix+2>=15 || !monitor_fetch_byte(ip,prefix+2,&modrm)) goto candidate_unhandled;
+                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm)) goto candidate_unhandled;
                     if(second==0x22) {
                         if((modrm&0xc0)!=0xc0 || (modrm&0x38)!=0) goto candidate_unhandled;
                         operand=monitor_general_register(modrm);
                     } else {
                         if((modrm&0x38)!=0x30) goto candidate_unhandled;
                         if((modrm&0xc0)==0xc0) operand=monitor_general_register(modrm);
-                        else if(!monitor_lmsw_operand(ip,&next,modrm,&operand)) goto candidate_unhandled;
+                        else if(!monitor_lmsw_operand(&code,&next,modrm,&operand)) goto candidate_unhandled;
                     }
                     monitor_set_npx_control(operand);
                     setEIP(ip+next);return TRUE;
@@ -522,7 +514,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 unsigned long next=prefix+1;
                 unsigned char immediate;
                 unsigned long port,value=0;
-                if(next>=15 || !monitor_fetch_byte(ip,next,&immediate)) goto candidate_unhandled;
+                if(next>=15 || !monitor_fetch_byte(&code,next,&immediate)) goto candidate_unhandled;
                 port=immediate;
                 if(op==0xe4){IN8(&value,port);setAL(value);} else if(op==0xe5){IN16(&value,port);setAX(value);}
                 else if(op==0xe6) OUT8(port,getAL()); else OUT16(port,getAX());

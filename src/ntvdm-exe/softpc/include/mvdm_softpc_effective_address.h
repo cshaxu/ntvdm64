@@ -17,6 +17,10 @@ IMPORT IU32 c_effective_addr IPT2(IU16, selector, IU32, offset);
 IMPORT int __cdecl mvdm_softpc_effective_address IPT3(IU16, selector, IU32, offset,
                                               IU32 *, address_out);
 
+/* Current descriptor view for monitor consumers; no host pointer is exposed. */
+IMPORT int __cdecl mvdm_softpc_protected_segment IPT4(IU16, selector, IU32 *, base,
+                                              IU32 *, limit, IU32 *, access);
+
 /* SIM32's explicit protected address contract is independent of CPU PE/VM. */
 IMPORT int __cdecl mvdm_softpc_protected_address IPT3(IU16, selector, IU32, offset,
                                               IU32 *, address_out);

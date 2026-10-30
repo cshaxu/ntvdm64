@@ -649,44 +649,14 @@ test_tlb()
       }
    }
 
-/* DIVERGENCE(MVDM-HOST-DIV-474): expose the existing cached access decision
- * to the host fault monitor without mutating CPU/TLB state.  A miss is
- * distinct from a cached protection denial: 1=hit, -1=denied, 0=miss. */
+/* DIVERGENCE(MVDM-HOST-DIV-474): share the original translation's cache
+ * decision with the host monitor, including distinct denial and miss. */
+static IS32 xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only);
+
 GLOBAL IS32
 ccpu_monitor_cached_access IFN3(LIN_ADDR, lin, IUM8, access, PHY_ADDR *, phy)
    {
-   ISM32 set, entry;
-   IU32 lookup;
-   TLB_ENTRY *e;
-   access &= 0x3;
-#ifdef FAST_TLB
-   {
-      IU8 pi = page_index[lin >> DIR_TBL_SHIFT];
-      IU32 ma = pi ? page_address[(pi & PI_SET_ENTRY_MASK) + access] : 0;
-      if (ma)
-         {
-         *phy = ma | (lin & OFFSET_MASK);
-         return 1;
-         }
-   }
-#endif
-   entry = lin >> DIR_TBL_SHIFT & 0x07;
-   lookup = lin & ~OFFSET_MASK;
-   for (set = 0; set < NR_TLB_SETS; set++)
-      {
-      e = &tlb[set][entry];
-      if (e->v && e->la == lookup && (!(access & 1) || e->d))
-         {
-#ifdef SPC486
-         if (access_check[GET_WP()][access][e->mode]) return -1;
-#else
-         if (access_check[access][e->mode]) return -1;
-#endif
-         *phy = e->pa | (lin & OFFSET_MASK);
-         return 1;
-         }
-      }
-   return 0;
+   return xtrn2phy_core(lin, access, phy, TRUE);
    }
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -708,6 +678,12 @@ xtrn2phy IFN3
 				   */
    PHY_ADDR *, phy		/* pntr to Physical Address */
    )
+   {
+   return xtrn2phy_core(lin, access_request, phy, FALSE) > 0;
+   }
+
+static IS32
+xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
    {
    IU32 pde_addr;	/* Address of PDE */
    IU32 pte_addr;	/* Address of PTE */
@@ -765,7 +741,7 @@ xtrn2phy IFN3
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
 	    {
-	    return FALSE;
+	    return cache_only ? -1 : FALSE;
 	    }
 
 	 *phy = e->pa | lin & OFFSET_MASK;
@@ -774,6 +750,7 @@ xtrn2phy IFN3
       }
    
    /* Cache Miss */
+   if (cache_only) return 0;
 
    /* check that pde is present */
    pde_addr = (GET_CR(CR_PDBR) & PE_PFA_MASK) +

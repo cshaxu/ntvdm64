@@ -410,7 +410,8 @@ LOCAL VOID generic_outsd IFN3(io_addr, io_address, double_word *, valarray, word
 #endif
 
 /* ensure any more LOCAL routines remain LOCAL */
-#if defined(NTVDM) && defined(MONITOR)
+/* DIVERGENCE(MVDM-HOST-DIV-477): CPU40 reuses the original monitor IOS entries. */
+#if defined(NTVDM) && (defined(MONITOR) || defined(CCPU))
 #undef LOCAL
 #define LOCAL static
 /*

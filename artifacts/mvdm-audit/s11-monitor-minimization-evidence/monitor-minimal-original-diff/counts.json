@@ -1,0 +1,62 @@
+[
+  {
+    "path": "softpc.new/base/ccpu386/c_main.c",
+    "original_to_baseline": [
+      199,
+      39
+    ],
+    "original_to_current": [
+      199,
+      39
+    ],
+    "baseline_to_current": [
+      0,
+      0
+    ]
+  },
+  {
+    "path": "softpc.new/base/ccpu386/c_tlb.c",
+    "original_to_baseline": [
+      40,
+      0
+    ],
+    "original_to_current": [
+      18,
+      1
+    ],
+    "baseline_to_current": [
+      13,
+      36
+    ]
+  },
+  {
+    "path": "softpc.new/base/support/ios.c",
+    "original_to_baseline": [
+      0,
+      0
+    ],
+    "original_to_current": [
+      2,
+      1
+    ],
+    "baseline_to_current": [
+      2,
+      1
+    ]
+  },
+  {
+    "path": "softpc.new/host/src/nt_inthk.c",
+    "original_to_baseline": [
+      354,
+      0
+    ],
+    "original_to_current": [
+      346,
+      0
+    ],
+    "baseline_to_current": [
+      50,
+      58
+    ]
+  }
+]
