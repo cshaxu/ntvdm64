@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\win16_common_dialog_probe.asm",
+    "Hash": "5A35A28552EEF038633B5E1D84B58A94CEB32EC1F476CFFEE16F496175AFB283"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-prebuilt-mine-retiring\\CDLPROBE.EXE",
+    "Hash": "406D84F9E4EA04CD269045B354E95C47A342C986E0400A2C4F6A58DC818D3A02"
+  },
+  {
+    "Path": "O:\\tmp\\nb31\\system32\\COMMDLG.DLL",
+    "Hash": "54A7981C5667BDE19F0D703580D40A448A0BDEC010FEFFA153004EF4870DC0D4"
+  },
+  {
+    "Path": "O:\\tmp\\nb31\\system32\\KRNL386.EXE",
+    "Hash": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4"
+  },
+  {
+    "Path": "O:\\tmp\\nb31\\system32\\USER.EXE",
+    "Hash": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+  }
+]

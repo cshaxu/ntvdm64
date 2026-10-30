@@ -28,9 +28,9 @@ $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
 if($CallbackAbortPhase -and !$ShellExceptionSibling){throw 'Callback abort requires the isolated Shell sibling contract'}
 if(($PrebuiltStartupProbe -or $PrebuiltStartupProbeSha256) -and
-    (!$StartupFailureSibling -or !$PrebuiltStartupProbe -or
+    ((!$StartupFailureSibling -and !$RetiringSibling) -or !$PrebuiltStartupProbe -or
         $PrebuiltStartupProbeSha256 -notmatch '^[0-9a-fA-F]{64}$')){
-    throw 'Prebuilt probe and SHA-256 require the startup-failure sibling case'
+    throw 'Prebuilt probe and SHA-256 require a startup-failure or retiring sibling case'
 }
 if($CommonDialogRounds -ne 1 -and !$RetiringSibling){throw 'CommonDialogRounds requires the retiring sibling contract'}
 if($StartupFailureSibling -or $ShellExceptionSibling){

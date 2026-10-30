@@ -70,6 +70,12 @@ every relevant cross-thread interleaving is eliminated. The root witness is not
 permission to discard an invalid required root or proof of the current SOL
 failure. The experimental diagnostic must not be treated as a released image.
 
+The published candidate also passed a real Winmine plus 17-dialog sibling
+retirement run using an unchanged, hash-verified prebuilt Win16 witness.
+[Receipt](s11-foundation-evidence/current-mine-dialog-retirement/review.md).
+It covers that combination but does not force the historical interleaving or
+identify the SOL failure.
+
 The earlier deterministic property-only scheduling test used an older
 experimental terminal body, so it did not directly test the current body.
 It has now been rebuilt with a temporary copy of the current source and three
