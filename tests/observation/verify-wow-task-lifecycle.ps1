@@ -12,6 +12,7 @@ param(
     [switch]$RealDialogLifecycleOnly,
     [switch]$TerminalSchedule,
     [switch]$CallbackGraphOverlap,
+    [switch]$HookGraphOverlap,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -25,6 +26,7 @@ if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback require
 if ($RetirementLockProbe -and ($Case -ne 'task-lifecycle' -or $InitRollback)) { throw 'RetirementLockProbe requires ordinary task-lifecycle' }
 if ($RetirementProbeSource -and !$RetirementLockProbe) { throw 'RetirementProbeSource requires RetirementLockProbe' }
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
+if ($HookGraphOverlap) { $CallbackGraphOverlap = $true }
 if ($CallbackGraphOverlap) { $TerminalSchedule = $true }
 if ($TerminalSchedule) { $RealDialogLifecycleOnly = $true }
 if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
@@ -256,6 +258,7 @@ if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' 
 if ($RealDialogLifecycleOnly) { $fixture += ' /DWOW_REAL_DIALOG_LIFECYCLE_FIXTURE' }
 if ($TerminalSchedule) { $fixture += ' /DWOW_TERMINAL_SCHEDULE_FIXTURE' }
 if ($CallbackGraphOverlap) { $fixture += ' /DWOW_CALLBACK_GRAPH_OVERLAP' }
+if ($HookGraphOverlap) { $fixture += ' /DWOW_HOOK_GRAPH_OVERLAP' }
 if ($Case -eq 'standard-class') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_STANDARD_CLASS_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
@@ -505,6 +508,27 @@ if ($CallbackGraphOverlap) {
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'callback-graph-probe.obj'
 }
+if ($HookGraphOverlap) {
+    # The real hook wrapper is paused after callback admission, immediately
+    # before its real graph publication; original hook dispatch is retained.
+    $source = [IO.File]::ReadAllText((Join-Path $repo 'src/wow32-dll/source/wow_hook_callback.c'))
+    $needle = '        if (!wow_user_window_refresh_payload(creation ? (HWND)wp : NULL,'
+    if (($source.Split(@($needle),[StringSplitOptions]::None)).Count -ne 2) { throw 'Hook graph boundary changed' }
+    $after = '                roots, root_count)) __leave;'
+    if (($source.Split(@($after),[StringSplitOptions]::None)).Count -ne 2) { throw 'Hook graph completion changed' }
+    $source = 'extern void __cdecl test_hook_graph_ready(void); extern void __cdecl test_hook_graph_completed(void);' + "`n" + $source.Replace($needle, '        test_hook_graph_ready();' + "`n" + $needle).Replace($after,$after+"`n"+'        test_hook_graph_completed();')
+    $instrumented = Join-Path $out 'hook-graph-probe.c'
+    [IO.File]::WriteAllText($instrumented,$source,[Text.UTF8Encoding]::new($false))
+    $hookCompile = $commands | Where-Object { $_ -match 'wow_hook_callback\.c$' } | Select-Object -Last 1
+    if (!$hookCompile) { throw 'Missing selected hook owner compile command' }
+    $hookCompile = $hookCompile -replace '/Fo\S+\s+\S+wow_hook_callback\.c$', ('/Fo"'+$out+'\hook-graph-probe.obj" "'+$instrumented+'"')
+    if ($hookCompile -notmatch 'hook-graph-probe\.c"$') { throw 'Hook compile substitution failed' }
+    Invoke-Build $hookCompile
+    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_hook_callback\.obj$' })
+    if ($original.Count -ne 1) { throw 'Expected exactly one hook owner' }
+    $objects = @($objects | Where-Object { $_ -notin $original })
+    $parentObjects += Join-Path $out 'hook-graph-probe.obj'
+}
 if ($RetirementLockProbe) {
     # Instrument only a disposable copy of the selected production source.
     # The other thread tries the real runtime lock inside the real scan.
@@ -645,6 +669,7 @@ if ($InitialPublicationOnly) {
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1$')) { throw 'Published window retirement lock witness failed' }
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_GRAPH_OWNER_RESTORE errors=0 success=2 failure=2 held=2 unheld=2$')) { throw 'Graph owner restoration witness failed' }
 if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_CALLBACK_GRAPH_OVERLAP errors=0 graph_succeeded=1 serialized=1 restored=1$')) { throw 'Callback graph overlap witness failed' }
+if ($HookGraphOverlap -and !($fixtureOutput -match '^WOW_HOOK_GRAPH_OVERLAP errors=0 actual_hook=1 serialized=1 restored=1$')) { throw 'Hook graph overlap witness failed' }
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1$')) {
         throw 'Property-only terminal cleanup incorrectly required guest execution'

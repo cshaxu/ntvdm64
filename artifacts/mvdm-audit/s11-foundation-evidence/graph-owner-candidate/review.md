@@ -38,3 +38,15 @@ retirement. The production source was unchanged after publication. Its
 output and exact test/source hashes are `owner-restoration.txt` and
 `owner-restoration-hashes.csv`. This does not inject an exception within every
 native observation or test all reentrant finalizers.
+
+The later `-HookGraphOverlap` witness runs the actual `WU32StdHookProc`
+wrapper and original `WowOriginalStdHookProc` against the real task and CCPU
+graph. Test-only synchronization pauses after callback admission, makes a
+bound resource thread hold the runtime lock, and verifies the graph waits for
+that lock and the callback restores its unlocked state. The test uses an
+unused original hook slot and negative hook code, so no guest hook procedure is
+invoked. The existing direct-callback overlap control also passed. The first
+attempt incorrectly selected original slot zero, which is a permanently used
+sentinel requiring a real PTD, and exited with access violation; slot one fixed
+the fixture setup. This is not a product failure or proof of the historical
+1400. `hook-overlap.txt` and `hook-overlap-hashes.csv` bind the passing run.

@@ -7,7 +7,7 @@ typedef struct terminal_schedule_test {
     HANDLE reached, release;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
     HANDLE locked, finish_graph, graph_requested;
-    volatile LONG graph_gate, graph_acquired;
+    volatile LONG graph_gate, graph_acquired, hook_graph_completed;
     DWORD graph_thread;
 #endif
     DWORD worker_id;
@@ -16,6 +16,22 @@ typedef struct terminal_schedule_test {
     BOOL bound, retired, unbound;
 } terminal_schedule_test;
 static terminal_schedule_test *terminal_schedule_active;
+#ifdef WOW_HOOK_GRAPH_OVERLAP
+LONG WINAPI WU32StdHookProc(INT,LONG,LONG,INT);
+void __cdecl test_hook_graph_ready(void)
+{
+    terminal_schedule_test *t=terminal_schedule_active;
+    if (!t || !t->graph_gate || GetCurrentThreadId()!=t->graph_thread) return;
+    SetEvent(t->release);
+    if (WaitForSingleObject(t->locked,10000)!=WAIT_OBJECT_0) ExitProcess(5);
+}
+void __cdecl test_hook_graph_completed(void)
+{
+    terminal_schedule_test *t=terminal_schedule_active;
+    if (t && t->graph_gate && GetCurrentThreadId()==t->graph_thread)
+        InterlockedExchange(&t->hook_graph_completed,1);
+}
+#endif
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
 void __cdecl test_callback_graph_request(void)
 {
@@ -84,7 +100,9 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     unsigned ownership_before=borrow_errors;
     BOOL graph_ok;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
+#ifndef WOW_HOOK_GRAPH_OVERLAP
     wow_task_callback_scope callback;
+#endif
     BOOL graph_result;
     HANDLE controller;
     DWORD controller_exit=0;
@@ -137,26 +155,44 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     BORROW_CHECK(t.first_phase==1 && t.mutation_unheld==0);
     BORROW_CHECK(wow_user_runtime_leave(main_binding));
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
+#ifndef WOW_HOOK_GRAPH_OVERLAP
     BORROW_CHECK(wow_task_callback_enter(&callback));
     BORROW_CHECK(!main_binding->exclusive_held);
 #endif
+#endif
+#ifndef WOW_HOOK_GRAPH_OVERLAP
     BORROW_CHECK(SetEvent(t.release));
+#endif
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
+#ifndef WOW_HOOK_GRAPH_OVERLAP
     wait=WaitForSingleObject(t.locked,10000);
     if (wait != WAIT_OBJECT_0) ExitProcess(3);
     overlap_before=borrow_errors;
     BORROW_CHECK(t.runtime->owner_thread_id==t.worker_id && !main_binding->exclusive_held);
+#else
+    overlap_before=borrow_errors;
+#endif
     t.graph_thread=GetCurrentThreadId();
     InterlockedExchange(&t.graph_gate,1);
     controller=CreateThread(NULL,0,release_graph_competitor,&t,0,NULL);
     if (!controller) ExitProcess(4);
+#ifdef WOW_HOOK_GRAPH_OVERLAP
+    /* Slot zero is the original permanently-in-use sentinel. Slot one is
+     * unused in this fixture, so original dispatch returns without a PTD. */
+    graph_result=(WU32StdHookProc(-1,0,0,1)==0 && t.hook_graph_completed);
+#else
     graph_result=wow_user_window_refresh_payload(NULL,NULL,0);
+#endif
     InterlockedExchange(&t.graph_gate,0);
     BORROW_CHECK(WaitForSingleObject(controller,10000)==WAIT_OBJECT_0);
     BORROW_CHECK(GetExitCodeThread(controller,&controller_exit) && !controller_exit);
     BORROW_CHECK(graph_result && t.graph_acquired && !main_binding->exclusive_held);
     fprintf(stderr,"WOW_CALLBACK_GRAPH_OVERLAP errors=%u graph_succeeded=%u serialized=1 restored=1\n",
         borrow_errors-overlap_before,graph_result);
+#ifdef WOW_HOOK_GRAPH_OVERLAP
+    fprintf(stderr,"WOW_HOOK_GRAPH_OVERLAP errors=%u actual_hook=1 serialized=1 restored=1\n",
+        borrow_errors-overlap_before);
+#endif
     CloseHandle(controller);
 #endif
     wait=WaitForSingleObject(worker,10000);
@@ -166,7 +202,9 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     }
     BORROW_CHECK(GetExitCodeThread(worker, &worker_exit) && worker_exit == 0);
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
+#ifndef WOW_HOOK_GRAPH_OVERLAP
     BORROW_CHECK(wow_task_callback_leave(&callback));
+#endif
     CloseHandle(t.locked);CloseHandle(t.finish_graph);CloseHandle(t.graph_requested);
 #endif
     terminal_schedule_active=NULL;
