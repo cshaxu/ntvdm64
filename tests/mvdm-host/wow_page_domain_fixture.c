@@ -1669,6 +1669,9 @@ static VOID WINAPI modal_task_ended(void) { BORROW_CHECK(FALSE); }
 #ifdef WOW_REAL_DIALOG_LIFECYCLE_FIXTURE
 #include "wow_dialog_real_lifecycle.h"
 #endif
+#ifdef WOW_TERMINAL_SCHEDULE_FIXTURE
+#include "wow_terminal_schedule_witness.h"
+#endif
 static void verify_original_modal_task(void)
 {
     wow_user_runtime runtime=WOW_USER_RUNTIME_INITIALIZER;
@@ -1723,6 +1726,9 @@ static void verify_original_modal_task(void)
      * actual registered owner's original InitTask without inventing a launch. */
     BORROW_CHECK(wow_user_task_lifecycle_init(lifecycle,0x0400,"MODAL.EXE",
         0x4323,0,0,0,0,200,100,SW_HIDE));
+#ifdef WOW_TERMINAL_SCHEDULE_FIXTURE
+    verify_terminal_schedule(&binding);
+#endif
     {
         HWND w=CreateWindowExW(0,L"STATIC",L"",0,0,0,1,1,NULL,NULL,GetModuleHandleW(NULL),NULL);
         WW words={0};wow_window_words_binding *b;

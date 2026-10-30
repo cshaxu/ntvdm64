@@ -1,0 +1,32 @@
+WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1
+WOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14
+WOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1
+WOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1
+WOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1
+WOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1
+WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1
+WOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1
+WOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1
+WOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1
+WOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1
+WOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1
+WOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1
+WOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1
+WOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2
+WOW_NATIVE_MENU_ENTRY_CCPU result=1
+WOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1
+WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0
+WOW_MODAL_STAGE runtime
+WOW_MODAL_STAGE registered
+WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1
+WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1
+WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1
+WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate
+WOW_MODAL_STAGE admitted
+WOW_NATIVE_DIALOG_RESOURCE_OWNER errors=0 no_original_fnid=1 resource_once=1
+WOW_REAL_DIALOG_SCOPE errors=0 callback_reject=1 capture_exception=1 exact_production_finally=1 cache_restored=1 context_restored=1 owner_restored=1
+WOW_REAL_DIALOG_ROLLBACK errors=0 cases=4 physical_free=1 publications=2 vetoes=2 no_app_callback=1
+WOW_REAL_DIALOG_RESOURCE_OWNER errors=0 normal_consume=1 exit_invoke=1 conflict_rejected=1 reentrant_once=1
+WOW_REAL_DIALOG_LIFECYCLE errors=0 init=3 terminal=2 nested=1 exception_local=1 callback_cache=1 pdlg_retired=1 dying_callback_denied=1
+WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1
+WOW_PAGE_DOMAIN_LIFECYCLE_OK

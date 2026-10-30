@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_terminal_schedule_witness.h",
+    "Hash": "DF40B8A3FB07ABFA1132C76BE2AC1FB446179D16991D00E3E62A5481BBD11DE2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "2CD5A7C75A85BFAFE22CAD4A7545D314A345C454DC01C59CFC2AEB80FE2B71DE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "6D9D348FE481C5C4CA6A6875CF7C3453DB2A048008AF4DA996082C0E61BCB4FD"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+    "Hash": "04DB4AC5376F69811DC40A103AB3C8ABF2781A9D1AC7C894D5977B074FC14CA1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-formal-final\\fixture.exe",
+    "Hash": "660A3C5A4DC034D5C99D2FF8215B5ADCFB3A945C0F1356F33EF93896640BEDEA"
+  }
+]
