@@ -1,0 +1,47 @@
+# buffer=80,300 viewport=0,36,79,57
+[0] prior shell output
+[1] prior shell output
+[2] prior shell output
+[3] prior shell output
+[4] prior shell output
+[5] prior shell output
+[6] prior shell output
+[7] prior shell output
+[8] prior shell output
+[9] prior shell output
+[10] prior shell output
+[11] prior shell output
+[12] prior shell output
+[13] prior shell output
+[14] prior shell output
+[15] prior shell output
+[16] prior shell output
+[17] prior shell output
+[18] prior shell output
+[19] prior shell output
+[20] prior shell output
+[21] prior shell output
+[22] prior shell output
+[23] prior shell output
+[24] prior shell output
+[25] prior shell output
+[26] prior shell output
+[27] prior shell output
+[28] prior shell output
+[29] prior shell output
+[30] prior shell output
+[31] prior shell output
+[32] prior shell output
+[33] prior shell output
+[34] prior shell output
+[35] prior shell output
+[36] prior shell output
+[37] prior shell output
+[38] prior shell output
+[39] prior shell output
+[44] S38_NETWORK_PRINT_REAL_PM_EQUAL_OK
+[45] S38_INT21_CODE32_OK
+[46] S38_INT21_EDX_ABOVE_64K_OK
+[47] S38_INT21_CLIENT32_STATE_OK
+[48] S38_INT21_HIGH_BUFFER_CHUNKS_EOF_CLEANUP_OK
+[49] S38_INT21_IO_STATE_FAILURE_CLEANUP_OK

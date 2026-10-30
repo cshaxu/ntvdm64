@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E54087F97AE746AC869A74915AB33C369272C29BE534131CCFED5776BB902E5D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\dpmi_int21_state.asm"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C8666EAAE8757DBFCA0B08E73731DD457FB4E174DC1FE48957840D8DE59FFB24",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-code32-run\\runtime\\tests\\S6PROBE.COM"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EBBA0C431216108F4E9CF64ECE3290D440DC5D6DDA6A215CD95334510EB77956",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\dpmi-prebuilt-code32.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8ABBB661B92B5647E5C37851BC1333F0598A30A67032EBC28F5690FDDF6F502F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe"
+  }
+]
