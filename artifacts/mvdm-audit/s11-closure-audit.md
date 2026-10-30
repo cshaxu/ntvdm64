@@ -40,6 +40,8 @@ the Full gate. Its remaining coverage boundaries are in
 An additional enabled CPU-trace guest-read correction has a reproduced
 nonidentity-address mismatch, focused controls and a published Full gate.
 [Evidence](s11-foundation-evidence/trace-scalar-candidate/review.md).
+An original CCPU real-mode CALLF/RETF test also passed with trace disabled,
+unmatched and matched; [scope](s11-foundation-evidence/ccpu-callf-trace/review.md).
 The DPMI portion additionally has a selected-source original dispatch and
 stack-underflow witness, with [production-object instruction comparison](s11-foundation-evidence/dpmi-selected-dispatch/review.md).
 

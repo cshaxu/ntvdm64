@@ -1,0 +1,1 @@
+far-call selector=0100 offset=00000020 caller=f000:0000fff5 ldt=0000:00000000/00000000

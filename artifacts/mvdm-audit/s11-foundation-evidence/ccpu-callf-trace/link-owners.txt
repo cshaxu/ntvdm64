@@ -1,0 +1,2 @@
+289: 0001:00006800       _mvdm_softpc_report_wow_far_call_attempt 00407800 f   softpc-fixture-bindings:mvdm_softpc_termination.obj
+569: 0001:00026130       _CALLF                     00427130 f   original-ccpu386:call.obj

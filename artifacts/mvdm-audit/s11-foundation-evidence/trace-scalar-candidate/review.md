@@ -25,3 +25,8 @@ x86 worker build passed. The sealed ten-component package then passed all 16
 Full gates and a separate Winmine gameplay probe; publication verified all 20
 destination hashes. These tests do not prove every enabled diagnostic or live
 guest failure path; no SOL 1400 attribution is implied.
+
+A later [selected CCPU CALLF witness](../ccpu-callf-trace/review.md) executes
+and returns through the original real-mode instruction path with the trace
+off, unmatched and matched. It complements the separate fault-order fixture;
+it is not a protected-mode guest acceptance.
