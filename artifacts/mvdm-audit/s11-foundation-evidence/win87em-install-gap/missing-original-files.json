@@ -1,0 +1,77 @@
+[
+  {
+    "name": "WINSOCK.DLL",
+    "sha256": "629e86c59c83f66d3623388b9ed6ae9d5a664979e588a9eb45b8a54441126fd9",
+    "bytes": 2880
+  },
+  {
+    "name": "MMSYSTEM.DLL",
+    "sha256": "080432d0cad660b163d0d231d37603010f7d9366f58570ac7c74d171c518211a",
+    "bytes": 86976
+  },
+  {
+    "name": "TIMER.DRV",
+    "sha256": "4567fa8b0a10a7b3de47c9366e0a1acfeaf55d1e12387e76c89bbf474b914e5d",
+    "bytes": 4288
+  },
+  {
+    "name": "TOOLHELP.DLL",
+    "sha256": "ddeeccc103f7e3c105602a6f791792baa7778a796709be63983a8a921df80cfe",
+    "bytes": 15520
+  },
+  {
+    "name": "OLESVR.DLL",
+    "sha256": "8bea5e9a9c49e84701f55e14312eb11bd04c1434c1ab59578c916a7db69aa3cc",
+    "bytes": 24064
+  },
+  {
+    "name": "MCIOLE16.DLL",
+    "sha256": "0eba8dc565c51c189134d54d691a89209f4f196239e40d062959606b6b14e8a3",
+    "bytes": 9216
+  },
+  {
+    "name": "RASAPI16.DLL",
+    "sha256": "af31d54e742b4c34f451d40c7405c3198d67a77808d41b559336ad0b9fd49cad",
+    "bytes": 4960
+  },
+  {
+    "name": "CTL3DV2.DLL",
+    "sha256": "3387135a5075439b9238d6c486b047d4dba8d9a6d1dad6bb74050347c70616db",
+    "bytes": 27200
+  },
+  {
+    "name": "LANMAN.DRV",
+    "sha256": "60204f58744d38e9201ba958d45c483ce7989b216b98a67ce5aa355af37dec02",
+    "bytes": 221600
+  },
+  {
+    "name": "LZEXPAND.DLL",
+    "sha256": "faf467ce496dd59655ccd91c26c8ea694551f54fa6bbf5f480f398fc54d12fdd",
+    "bytes": 9936
+  },
+  {
+    "name": "NETAPI.DLL",
+    "sha256": "30a8ed7453779195ad196d2e0a024e05619688c6a101e6b5ae8c6647608bbb1a",
+    "bytes": 108464
+  },
+  {
+    "name": "PMSPL.DLL",
+    "sha256": "432bb90629ceb7714c13f54147caa11ce77d7bdd3a168bba86195565b5fee456",
+    "bytes": 27248
+  },
+  {
+    "name": "VER.DLL",
+    "sha256": "6d03cf1e31748149b6d34725e293c5ee4f3bd7ddebe526285fe7ba41a1d1f5b4",
+    "bytes": 9008
+  },
+  {
+    "name": "WINHELP.EXE",
+    "sha256": "47626dffe7795d7ee6ef9bfb057c398b37b21d397caa5ab0cad7e7dffb643170",
+    "bytes": 256192
+  },
+  {
+    "name": "WIN87EM.DLL",
+    "sha256": "30d6b965d45eddf306268c9526b01494df4841b8b530bab2654c379e1cf49db2",
+    "bytes": 12800
+  }
+]

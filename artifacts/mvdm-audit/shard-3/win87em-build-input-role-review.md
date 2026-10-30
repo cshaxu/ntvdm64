@@ -108,3 +108,12 @@ because the actual initial text has a leading space. Those are probe non-passes,
 not guest failures. This message-driven single operation is numerical behavior
 evidence, not a hardware keyboard test, loaded-module identity, full FPU test,
 or the Win2-specific pre-3.0 branch. The guest was neither changed nor rebuilt.
+
+The later `idle-comment-integrated` test package does contain the matching
+original WIN87EM; the earlier statement about the missing staging directory
+applies only to that earlier inspected stage. The existing `O:/winnt`
+installation still lacks it and 14 other guest-manifest files. A complete-package
+versus single-WIN87EM-absent isolated comparison found Calculator startup only
+in the complete package; [installed-gap review](../s11-foundation-evidence/win87em-install-gap/review.md).
+The installed system itself was not modified, and automatic review rejected
+adding those files without installation-specific authorization.

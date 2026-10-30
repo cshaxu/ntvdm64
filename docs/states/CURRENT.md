@@ -15,6 +15,10 @@ the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recover
 Retain independently justified changes and evidence; do not treat latency as
 an S11 closure gate or claim the performance issue fixed.
 
+The installed `O:/winnt` lacks 15 guest-manifest files, including WIN87EM.
+The isolated single-file absence control prevents Calculator startup; adding
+guest files to the installation was rejected by automatic review. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/win87em-install-gap/review.md).
+
 Winmine 5023 has a focused idle-hook candidate. SOL also reproduced a
 `publish-native-return` 1400 fail-fast on the baseline; its failing substage
 remains unknown. See [evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/baseline-failfast-trace/review.md)
@@ -33,7 +37,7 @@ changing its configuration; the authorized Full test ran. See
 Retirement preserves the first cleanup failure; focused probes and the current
 Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md). Intermittent 1400 attribution remains open.
 
-The restaged candidate passed Console-17, Window-17, Control and shared-WOW. Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
+Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
 The [ten-input candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md)
 uses current selected cached targets and passed the Full suite and Winmine
@@ -42,9 +46,7 @@ correctness review remains active.
 [S11 closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists
 each foundation's evidence and remaining boundary.
 
-The current source-retention table was regenerated and host C/H coverage and
-partial-difference checks pass. This is source reconciliation, not runtime
-completion; see [live delta](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
+Host C/H retention checks pass; runtime completion remains open. [Evidence](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
 
 The published NTVDM export implementation selects the original CPU40 template and
 records released ordinals. Its PE retains all 269 released name/ordinal pairs

@@ -1,0 +1,7 @@
+FAIL no matching owned application window/menu
+owned hwnd=02640C26 visible=0 class=WOWFaxClass title= menu=00000000
+owned hwnd=01380C9C visible=1 class=#32770 title=File Error menu=00000000
+owned hwnd=00D80D80 visible=1 class=WOWExecClass title=O:\tmp\n6a7\GUEST\CALC.EXE: menu=315E0B7D
+owned hwnd=03CC0B08 visible=0 class=IME title=Default IME menu=00000000
+owned hwnd=01A60C64 visible=0 class=MSCTFIME UI title=MSCTFIME UI menu=00000000
+worker-live=1
