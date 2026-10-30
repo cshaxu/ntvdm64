@@ -199,3 +199,145 @@ the console receipt hash is
 `E81728C375CE613F0F4E2A1F11467C391839421685F4680976FFD1FA63681FCE`.
 Diagnostic inputs, map and full logs remain in `build/t473-s11/sti-host-experiment`.
 No diagnostic binary was published and the guest remains immutable.
+
+## Reduced-environment follow-on
+
+The same isolated experimental package was rerun with a test-owned observer
+environment restricted to `SystemRoot`, `WINDIR`, `COMSPEC`, `PATH`, `TEMP`,
+`TMP`, and the existing observer switches. The earlier R6009 message did not
+appear in this run. Instead, DOS/4GW 1.97 reported error 2001, a GP fault at
+`033f:0028fa18`, with a USE32 code descriptor and error code 1. The outer
+observer recorded exit zero; that is **not an application pass**. The console
+receipt SHA-256 is
+`BEC9FACFBE7D713AEC3E76A87F1EBE9154EE6B7DE80D74155A1E40F61E283A25`;
+the observer receipt hash is
+`7D24A4C8523CF47CD5F43C7EE26944D8AB1EB0D72D669C5AC1F068DBBC4098D6`.
+The disposable runner and receipts are under `build/t473-s11`.
+
+This control changes the next diagnostic: a large inherited environment was
+associated with the earlier R6009, but this one run does not establish its
+precise cause. The faulting 32-bit instruction itself has not been captured.
+The experimental handler uses `getIP()` and a 16:16 pointer, so it cannot
+correctly inspect the observed `0028fa18` offset; neither the instruction nor
+the cause of this later fault can be inferred from that limitation alone. The
+original NT opcode table also handles more than CLI/STI and includes operand,
+address and segment prefixes. A production dispatcher needs independently
+validated fetch, instruction and pending-interrupt semantics; broad handling
+or an application-specific workaround would not be justified by this result.
+
+A second reduced-environment run with the existing CPU trace enabled repeated
+the DOS/4GW error at `033f:0028fa18`; the trace records vector 0d, error 0001,
+and dispatch to the guest handler `027f:0000044e`. This corroborates delivery
+of that fault, but not the faulting opcode or its cause. The trace SHA-256 is
+`D01D1C3D885EE564B70F4BAFAE5DD1109E097D00B6FA851A6275D50C04546C3A`;
+the second console receipt hash is
+`4E29583F9EF71F37807D54AD3DEACFA5E12B329BA0DA10561F6AF455BCFAAD8A`.
+The prior automatic approval failure was transient: the same isolated probe
+was later approved and completed. No product binary was replaced.
+
+The current original CCPU exposes `xtrn2phy` as an external linear-to-physical
+translation that explicitly does not raise a page fault or modify the TLB.
+It is a candidate input for a future bounded diagnostic fetch, not by itself
+a complete instruction-fetch contract: segment ownership and limit, CPL,
+page boundaries, and memory backing still need validation. `c_GetLinAdd`
+alone is unsuitable as a failure indicator because its unmapped fallback
+returns a pointer to physical address zero. The existing guest-location
+adapter is real-mode 16:16 and cannot be used for the observed 32-bit EIP.
+
+## 32-bit faulting byte observation
+
+A separately staged diagnostic candidate retained the earlier experimental
+16-bit handler and added a read-only, exact-address witness at the reported
+32-bit GP. In that run the guest code descriptor again had base zero and the
+captured CR0 was `00000011` (paging disabled). At `033f:0028fa18`, the
+observed instruction byte was `fb` (STI). The guest again reported DOS/4GW
+error 2001 and exited; this is not a passing application run. The diagnostic
+does not intercept or repair that 32-bit instruction and does not establish
+pending IRQ or prefix semantics. It does show that the later fault occurred at
+the same opcode class as the earlier 16-bit witness, and that the experimental
+16:16 handler misses the actual 32-bit offset.
+
+The test-only host source hash is
+`DE5E02A0F072924CA04763659F90837B9E9993DFDE3E0700215CDCCB2DFFAFEC`, the
+trace hash is `4AC712F9C682BC9EAB5A8D7629C49FB13030B8C3DB02F6513424F0B8F3F206B1`,
+and the console receipt hash is
+`583D459024FF45CC32714E39227D9D3A18B70314E96BA2F74BDF44CD4C2AF517`.
+The candidate and package remain under `build/t473-s11/sti-32-witness` and
+have not been published. The source trace and this single-byte capture do not
+justify changing guest, CCPU, or the production fault dispatcher yet.
+
+An additional isolated causality candidate handled only the captured
+`033f:0028fa18` STI by advancing EIP and setting the experimental virtual
+and CPU IF states. The same reduced-environment run progressed to another GP,
+`033f:002660b0`, instead of the original 32-bit fault; DOS/4GW still reported
+error 2001. This is evidence that execution proceeded beyond the captured
+instruction, not that the candidate has correct interrupt timing, handles
+other instructions, or runs the application successfully. The second fault's
+opcode and cause are not yet established. The temporary source hash is
+`05375F6A3F3CCCFCC9EAE21AB13D2B93E1630EB9D22893A70B4AC7897F38F921`,
+trace hash `081EDC0CBC18A3539632E61ED83ACAC6E1C99B9D35D8723A6633B95F54854FB2`,
+and console hash `54F122C9D61F74658CDD92B41ABCDEAFFB3B2EA10C1DB1BFE14900ABD67564C4`.
+This address-specific intervention is a diagnostic counterfactual only; it
+must never be used as a production or guest-specific fix.
+
+A follow-on read-only witness captured the second faulting byte as `fb` too;
+CS remained `033f` with the previously observed base zero, CR0 was
+`00000011`, and the reported physical address was `002660b0`. The guest still
+received the exception and exited. The test-only source hash is
+`229C62B266743E0F7EF0B5C376C200DA720B83296E37BBBCB109191443B6A1A5` and
+the trace hash is
+`DB51E555CB3B2C39242CCC32AEDC47EB79F6AA37FE2697CA64A2C0FBC1BEEE67`.
+This establishes two 32-bit STI sites in this run, not a complete inventory
+of privileged opcodes or a correct pending-interrupt implementation.
+
+## Nonpaged generic opcode experiment
+
+A separate isolated host candidate replaced the address-specific experiment
+with a diagnostic CLI/STI handler using the live CS base, full EIP and limit,
+and bounded nonpaged memory. It requires GP error zero or EXT-only and
+CPL greater than IOPL; it does not handle prefixes, paging, instruction-fetch
+faults, or original pending-interrupt timing. It progressed beyond both
+previous 32-bit STI sites but DOS/4GW still reported GP at `033f:002676b4`;
+the trace also observed a later GP at `033f:0026774b`. The bytes and reasons
+for these two faults have not been established. Observer exit zero is not an
+application pass, and the experiment is not a publishable implementation.
+
+Original NT's STI dispatcher explicitly checks pending interrupt state and
+routes hardware and timer acknowledgement separately. The selected CCPU
+instead accepts pending hardware through its event map, `ica_intack`, and
+`host_hwint_hook` when its own IF permits execution. Equivalence and ordering
+between these routes remain unproven; simply writing both IF representations
+does not prove correctness.
+
+The test-only source hash is
+`04C5358695ADD8BF5CC24AF363D6935C83F54991A733BF6C998E1A6637CD6C7A`,
+trace hash `8C724D5553F06E476F3E98A5B5EDEF808DC57BCB57A8DB0F561905147A83149A`,
+and console hash `81B825F0339232C5E741F0BDAF6D53770812A41DB884F8F0C9ED17AA3F85A549`.
+
+An additional nonpaged read-only diagnostic recorded byte `ee` at both
+`033f:002676b4` and `033f:0026774b`, with CR0 `00000011`; the existing
+exception handler still received both faults. `ee` is OUT DX,AL. The pinned
+NT opcode dispatch includes `OpcodeOUTB`, which invokes
+`Ki386VdmDispatchIo`; consequently the observed path requires evaluating
+the I/O monitor boundary as well as CLI/STI. This observation does not prove
+the requested ports or values, guest permission, the destination device, or
+whether reflecting either exception is incorrect. The diagnostic source hash
+is `A8AD0922DB0072AD17202CFCEB0C67CCC1FF69858DD051DEDD8793D042ED9296` and
+trace hash `781FF5E756DD8A254D01602EF27115955C6DEDF4987F870F6334CFE3BEB65C8E`.
+
+A repeated isolated run additionally recorded the actual operands: the first
+OUT used port `0043`, value `36`; the later OUT used port `0020`, value `20`.
+Both reported CPL 3 and IOPL 0. `ios.h` names these as the timer mode and
+master PIC command ports respectively. This observation was made after the
+experimental CLI/STI interception, not on the unmodified released runtime;
+it therefore cannot alone prove the released guest reaches these instructions.
+The selected CCPU checks its TSS I/O permission map before dispatching OUT.
+Original NT `Ki386VdmDispatchIo` first tries an installed port handler, then
+reflects an I/O event to its monitor; it does not simply allow unrestricted
+host hardware access. The precise source of the current permission failure
+and the faithful route to the virtual devices remain unproved.
+
+The operand witness source hash is
+`91B816F53AE8A5E822A50704A4091610E9D09EEFA1A164ABDDA27AFA42578468` and
+its trace hash is
+`6C93067EDC30F0AE2436841511CCB20FF6507A818CAAF79AFC236D32BF9E8258`.
