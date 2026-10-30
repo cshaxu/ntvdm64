@@ -1,0 +1,54 @@
+Microsoft (R) COFF/PE Dumper Version 14.43.34809.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+
+Dump of file build\t473-s11\wow-missing-export-reserved-sealed\package\system32\WOW32.DLL
+
+File Type: DLL
+
+  Section contains the following exports for wow32.dll
+
+    00000000 characteristics
+    FFFFFFFF time date stamp
+        0.00 version
+           1 ordinal base
+          27 number of functions
+          27 number of names
+
+    ordinal hint RVA      name
+
+          1    0 0001B350 CopyDropFilesFrom16
+          2    1 0001B3F0 CopyDropFilesFrom32
+          3    2 0001F230 GetCommHandle
+          4    3 0001F270 GetCommShadowMSR
+          5    4 00001AC0 W32Dispatch
+          6    5 00014BA0 W32HungAppNotifyThread
+          7    6 0005C0A0 W32TerminateTaskTicket
+          8    7 0002ACF0 WOW32DriverCallback
+          9    8 0002AD60 WOW32ResolveHandle
+         10    9 0002AF30 WOW32ResolveMemory
+         11    A 00004E20 WOWCallback16
+         12    B 00004E70 WOWCallback16Ex
+         13    C 0006C370 WOWDirectedYield16
+         14    D 00007A70 WOWFreeMetafile
+         15    E 00002760 WOWGetVDMPointer
+         16    F 00002760 WOWGetVDMPointerFix
+         17   10 0000C1D0 WOWGetVDMPointerUnfix
+         18   11 00004EB0 WOWGlobalAlloc16
+         19   12 00004F60 WOWGlobalAllocLock16
+         20   13 00004FE0 WOWGlobalFree16
+         21   14 00005070 WOWGlobalLock16
+         22   15 000050C0 WOWGlobalLockSize16
+         23   16 00005140 WOWGlobalUnlock16
+         24   17 00005190 WOWGlobalUnlockFree16
+         25   18 00002E70 WOWHandle16
+         26   19 00002F80 WOWHandle32
+         27   1A 0006C400 WOWYield16
+
+  Summary
+
+        7000 .data
+       11000 .rdata
+        8000 .reloc
+        2000 .rsrc
+       87000 .text
