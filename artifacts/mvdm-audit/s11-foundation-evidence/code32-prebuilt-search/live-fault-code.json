@@ -1,0 +1,26 @@
+{
+  "pid": 17044,
+  "image_base": "0x5d0000",
+  "intel_base": "0x3d00000",
+  "ldt_shadow": "0x1367f8",
+  "entries": [
+    {
+      "selector": "00c7",
+      "eip": "00004978",
+      "descriptor": "905f000811fb0000",
+      "base": "0x110800",
+      "limit": "0x5f90",
+      "default32": false,
+      "code_from_eip_minus_12": "f0810e140300029e581feb03fbebf8fc6633c9b919006633f66633ff8bf30376"
+    },
+    {
+      "selector": "01c7",
+      "eip": "00006b51",
+      "descriptor": "ffff70e500fb0000",
+      "base": "0xe570",
+      "limit": "0xffff",
+      "default32": false,
+      "code_from_eip_minus_12": "1f076183c40466cb06178be0fb8bec837e180d74732eff2ebe17eb166652662e"
+    }
+  ]
+}

@@ -101,3 +101,53 @@ traced and untraced observer reports respectively
 `511CF091DF4637AAAF28617F1B419D9DFA6F727D02CF0ED21DEFBCF7E6F7D1C3` and
 `C5A979F07C1A559DE4C0A8A78CEBF9CFF63116902280F9E3F008A727202D9BD7`.
 Full traces and private runners remain under `build/t473-s11`.
+
+## Faulting instruction and original host boundary
+
+A further fresh test used the original `NESTICLE.EXE` name with both it and
+DOS4GW in the test working directory. It again produced an initial vector 0d
+from `00c7:4978`, then repeated vector 0d from `01c7:6b51`; the 15-second
+observer timed out. A read-only, PID- and image-path-bound probe inspected the
+same run's live worker memory after those events. The actual selector records
+were `905f000811fb0000` for 00c7 and `ffff70e500fb0000` for 01c7: both
+were 16-bit code segments with ring-3 access. Exact fetched instruction bytes
+at both recorded fault addresses begin with `FB` (`STI`). The trace's 32-bit
+fault frame recorded saved EFLAGS `00000006`, i.e. IOPL 0. This is a 32-bit
+exception **frame**, not evidence of 32-bit default code segments. The raw
+[read-only capture](live-fault-code.json) binds module base, guest memory base,
+LDT shadow, descriptors and bytes. The capture occurred after the logged first
+fault; it is not an atomic snapshot at that first exception.
+
+The current original CCPU `c_main.c` executes STI only when CPL <= IOPL,
+otherwise raising vector 0d. That behavior accounts for the recorded ring-3,
+IOPL-0 STI conditions; it is not by itself a CPU defect. The current original
+`host_exint_hook` passes installed faults to the DPMI guest handler. In the
+pinned original NT host, `ke/x86/trap.asm` instead routes a protected-mode VDM
+GP through `Ki386DispatchOpcode` before reflecting an unhandled exception;
+`instemul.asm`'s `OpcodeSTI` updates the VDM virtual interrupt state, advances
+EIP and dispatches pending interrupt work. `OpcodeCLI` similarly updates the
+virtual state and advances EIP. The DOSX `FSTI` macro explicitly contains the
+observed STI fallback when interrupt/state bits require it. Thus there is a
+specific original-host instruction-emulation connection to investigate; do
+not solve this by suppressing all GP faults, forcing IOPL globally, modifying
+CCPU or modifying the guest. The same captured STI bytes and dispatch ordering
+are concrete evidence, but the full pending-interrupt/exception contract and
+an A/B repair witness remain unproved.
+
+The selected immutable DOSX has SHA-256
+`C5AF29A29ABF167B243DAABF877459E8278B8C9A339BF6FCEEFF`; its retained
+`dpmi/486/dosx.map` places offset 4978 inside `I31_RMCALL`, consistent with
+`dxint31.asm`'s `FSTI` following its mode switch. The map/source relation is
+supporting evidence, not a claim that map provenance alone proves the binary
+build. The source segment byte length and live fault bytes independently match
+the observed code. The original host source hashes for `instemul.asm`,
+`trap.asm` and `emv86.asm` are respectively
+`6356B416E0942EB3814E4C5A14FF5ED09DB13DC1443842BA51AB9F512522D6E4`,
+`5D01FEC3B1BA603029A7E22DB32805465BB2B499A884CB27DEB7F278EB736D07`, and
+`DCD29FB59584D9D157E75FB5C45A6FE7E9F09CB3F37B0B44E0B6B3AE67B1D702`.
+The live capture hash is
+`F105F08845F0247D023B44E97184597858598CCB6CEDD0FB7CAA3A529C78CB16`;
+source-mode traces and the read-only capture runner remain under
+`build/t473-s11`. Initial capture attempts failed to identify the SUBST image
+path or locate Python under the intentionally restricted PATH; neither counts
+as a guest result. No guest, product source or deployed component changed.

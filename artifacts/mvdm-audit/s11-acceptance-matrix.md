@@ -59,3 +59,11 @@ by those specific facts and the recorded owner handoffs; repeated successful
 SOL runs, more unforced checks, or generic claims that a foundation is
 incomplete are not substitutes for evidence. No new compatibility concession
 or guest modification is authorized here.
+
+The independently staged [DOS4GW/NESticle STI fault-loop observation](s11-foundation-evidence/code32-prebuilt-search/review.md)
+is an S11 execution/host-connection non-pass. Read-only live instruction and
+selector capture plus pinned NT kernel source identify a concrete protected-mode
+privileged-instruction emulation boundary. Full interrupt/exception semantics,
+a targeted repair and real guest A/B acceptance are not yet established; the
+observation is not a passing 32-bit-code-segment return test and does not
+authorize unrelated CCPU or guest changes.
