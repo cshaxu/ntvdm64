@@ -68,6 +68,11 @@ same real CBT guest alongside a second active Win16 task, whose idle callback
 continued after the hook task retired. It does not deterministically force
 their window operations to overlap.
 
+The [Winmine/CBT shared-worker witness](../graph-owner-mine-cbt/review.md)
+establishes that a real game window remains live while a real guest CBT hook
+performs its nested creation/veto/unhook sequence; gameplay still works after
+the hook task retires. It does not force the original race.
+
 The [prebuilt DPMI task-cleanup witness](../graph-owner-dpmi-cleanup/review.md)
 also passed against these release inputs, including four child exits with live
 allocations and restored aggregate XMS capacity. Failure paths remain distinct.

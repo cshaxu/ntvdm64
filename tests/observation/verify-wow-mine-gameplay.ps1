@@ -7,6 +7,7 @@ param(
     [switch]$VisibleDesktop,
     [switch]$StartupOnly,
     [switch]$RetiringSibling,
+    [switch]$CbtSibling,
     [switch]$ExceptionSibling,
     [switch]$StartupFailureSibling,
     [switch]$ShellExceptionSibling,
@@ -23,15 +24,16 @@ param(
 $ErrorActionPreference='Stop'
 $CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
 $Observer=(Resolve-Path -LiteralPath $Observer).Path
-if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
-$withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
+if(([int]$RetiringSibling.IsPresent+[int]$CbtSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$StartupFailureSibling.IsPresent+[int]$ShellExceptionSibling.IsPresent) -gt 1){throw 'Select one sibling contract'}
+$withSibling=$RetiringSibling -or $CbtSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
 if($CallbackAbortPhase -and !$ShellExceptionSibling){throw 'Callback abort requires the isolated Shell sibling contract'}
 if(($PrebuiltStartupProbe -or $PrebuiltStartupProbeSha256) -and
-    ((!$StartupFailureSibling -and !$RetiringSibling) -or !$PrebuiltStartupProbe -or
+    ((!$StartupFailureSibling -and !$RetiringSibling -and !$CbtSibling) -or !$PrebuiltStartupProbe -or
         $PrebuiltStartupProbeSha256 -notmatch '^[0-9a-fA-F]{64}$')){
     throw 'Prebuilt probe and SHA-256 require a startup-failure or retiring sibling case'
 }
+if($CbtSibling -and (!$PrebuiltStartupProbe -or $PrebuiltStartupProbeSha256 -ne 'C133EEF5D498F91D2C06B80DB83DEA480129D2CECD24DFFC516141EBD8E4A7B6')){throw 'CBT sibling requires the known prebuilt witness'}
 if($CommonDialogRounds -ne 1 -and !$RetiringSibling){throw 'CommonDialogRounds requires the retiring sibling contract'}
 if($StartupFailureSibling -or $ShellExceptionSibling){
     $expectedTarget=if($ShellExceptionSibling){'SHLPROBE'}else{'GENPROBE'}
@@ -68,10 +70,12 @@ try {
         if($LASTEXITCODE){throw "Probe build failed: $LASTEXITCODE"}
     } finally {Pop-Location}
     $runtime=New-PhysicalRuntimeStage $PackageRoot -RuntimeImages $RuntimeImages
+    Save-IsolatedPackageManifest $runtime "$root\manifest.json"
     $scope=New-IsolatedPackageScope $runtime
     if($withSibling){
         $siblingName=if($ExceptionSibling -or $StartupFailureSibling){'GENPROBE'}else{'CDLPROBE'}
         $siblingSource=if($ExceptionSibling -or $StartupFailureSibling){"$PSScriptRoot\win16_generic_probe.asm"}else{"$PSScriptRoot\win16_common_dialog_probe.asm"}
+        if($CbtSibling){$siblingName='CBTPROB';$siblingSource="$PSScriptRoot\win16_hook_probe.asm"}
         if($ShellExceptionSibling){$siblingName='SHLPROBE';$siblingSource="$PSScriptRoot\win16_shell_probe.asm"}
         $assemblyArgs=@('-f','bin','-o',"$root\$siblingName.EXE",'-l',"$root\sibling.lst")
         if($RetiringSibling){$assemblyArgs+=('-DCOMMON_DIALOG_ROUNDS='+$CommonDialogRounds)}
@@ -255,6 +259,20 @@ try {
         if($native -notmatch 'startup-thread-live=\d+ worker=\d+' -or
             $native -notmatch 'startup-thread-exit=\d+ wait=0 code=1'){throw 'Actual startup thread retirement missing'}
         'PASS real original InitTask seven failures, registered cleanup, actual host thread exit1 and surviving WINMINE gameplay'|Set-Content "$root\sibling-result.txt"
+    }elseif($CbtSibling){
+        Copy-Item "$runtime\tests\CBTPROB.BIN" "$root\sibling-report.bin"
+        $bytes=[IO.File]::ReadAllBytes("$root\sibling-report.bin")
+        if($bytes.Length -ne 600){throw 'Unexpected CBT report length'}
+        $expected=@(@(0,0,0,0,0,0,0,0,0),@(1,0,2,2,1,0,2,0,0),@(2,0,3,3,1,1,2,0,0),@(4,0,4,4,1,1,3,1,1))
+        for($r=0;$r -lt 4;$r++){
+            $offset=$r*22
+            if([Text.Encoding]::ASCII.GetString($bytes,$offset,4) -ne 'CBT1'){throw 'Invalid CBT report signature'}
+            for($i=0;$i -lt 9;$i++){if([BitConverter]::ToUInt16($bytes,$offset+4+2*$i) -ne $expected[$r][$i]){throw "CBT checkpoint mismatch record=$r field=$i"}}
+        }
+        $trace=Get-Content "$root\lifetime.txt" -Raw
+        $complete=[regex]::Matches($trace,'(?m)^'+$worker.ProcessId+' TaskRetirement .*task=([0-9A-Fa-f]{8}) stage=complete status=0\r?$')
+        if($complete.Count -ne 2 -or $complete[0].Groups[1].Value -eq $complete[1].Groups[1].Value){throw 'Missing distinct task retirements in WINMINE worker'}
+        'PASS same-worker CBT hook, normal task retirements and surviving WINMINE gameplay'|Set-Content "$root\sibling-result.txt"
     }elseif($RetiringSibling){
         Copy-Item "$runtime\tests\CDLPROBE.BIN" "$root\sibling-report.bin"
         $bytes=[IO.File]::ReadAllBytes("$root\sibling-report.bin")
