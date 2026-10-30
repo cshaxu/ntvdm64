@@ -37,6 +37,8 @@ worker: the VDD memory exports and exhausted-reallocation rollback passed.
 The diagnostic guest-read recovery is published after focused witnesses and
 the Full gate. Its remaining coverage boundaries are in
 [the candidate record](s11-foundation-evidence/diagnostic-stack-candidate/review.md).
+The DPMI portion additionally has a selected-source original dispatch and
+stack-underflow witness, with [production-object instruction comparison](s11-foundation-evidence/dpmi-selected-dispatch/review.md).
 
 ## Delivery status
 

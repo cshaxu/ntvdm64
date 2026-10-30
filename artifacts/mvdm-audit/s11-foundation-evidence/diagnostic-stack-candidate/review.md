@@ -34,8 +34,9 @@ not runtime coverage. Outputs and input identities are adjacent to this note.
 The actual selected DPMI object disassembly contains the metadata-report and
 original stack-frame calls but no direct Sim32 mapping call inside
 `DpmiSwIntHandler`; the production map identifies its owning object. This is
-not an injected object-level failure test and does not exclude indirect
-mapping through normal original dispatch. The separate instruction-window
+supplemented by [selected-source execution](../dpmi-selected-dispatch/review.md)
+covering virtual-8086 dispatch and stack underflow. Neither check excludes
+indirect mapping through normal original dispatch. The separate instruction-window
 paths remain outside this check. The separate SOL 1400 failure is not
 attributed to this change. No guest was modified.
 

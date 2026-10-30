@@ -1,0 +1,4 @@
+81: 0001:00000000       _BuildStackFrame           00401000 f   dpmiint.obj
+82: 0001:000000c0       _DpmiSwIntHandler          004010c0 f   dpmiint.obj
+83: 0001:00000280       _ReflectV86Int             00401280 f   dpmiint.obj
+85: 0001:00000310       _Sim32pGetVDMPointer       00401310 f   fixture.obj
