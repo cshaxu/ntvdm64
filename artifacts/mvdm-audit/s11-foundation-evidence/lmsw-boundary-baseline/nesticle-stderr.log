@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\build\t473-s11\dpmi-nesticle-frame-trace.ps1:88
+Line |
+  88 |              throw 'Guest/outer COMMAND did not exit zero'
+     |              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Guest/outer COMMAND did not exit zero

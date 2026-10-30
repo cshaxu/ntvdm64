@@ -165,10 +165,10 @@ static int protected_scalar_io(void) {
     for(i=0;i<2;i++) io_connect_port((io_addr)(0x80+i),adapter,IO_READ_WRITE);
     *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=test_case==51 ? 0x0040fa0fu : 0x0000fa0fu;
     *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
-    *(uint32_t *)(gdt+0x28)=test_case==38 || test_case==40 ? 0x2000ffffu : 0x0000ffffu;*(uint32_t *)(gdt+0x2c)=test_case==38 || test_case==40 ? 0x0000f300u : 0x0000f100u;
+    *(uint32_t *)(gdt+0x28)=test_case==38 || test_case==40 || test_case==54 ? 0x2000ffffu : 0x0000ffffu;*(uint32_t *)(gdt+0x2c)=test_case==38 || test_case==40 || test_case==54 ? 0x0000f300u : 0x0000f100u;
     CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,used);
     c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);
-    c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==38 || test_case==40 ? 0x2b : 0x23);c_setSP(0x800);c_setBX(0);c_setIOPL(test_case==48 ? 3 : 0);c_setIP(0x1000);
+    c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==38 || test_case==40 || test_case==54 ? 0x2b : 0x23);c_setSP(0x800);c_setBX(0);c_setIOPL(test_case==48 ? 3 : 0);c_setIP(0x1000);
     if(test_case==28)c_setES(0x2b);
     if(test_case>=31)c_setCR0((c_getCR0() & ~6u) | ((test_case==34 || test_case==35) ? 14u : 8u));
     if(test_case==41){ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;for(j=0;j<512;j++)pte[j]=(j<<12)|7;pte[3]=0;*(uint16_t *)c_GetPhyAdd(0x3000)=6;c_setCR3(0x4000);c_setPG(1);}
@@ -200,6 +200,38 @@ static int protected_scalar_io(void) {
         handled=host_exint_hook(13,0);
         VdmInstallFaultHandler(NULL);
         return handled && test_fault==0 && c_getEIP()==0x1003 && (c_getCR0()&15)==15;
+    }
+    if(test_case==53) {
+        const unsigned char lmsw_bx_si[]={0x0f,0x01,0x30};
+        int handled;
+        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_bx_si,sizeof(lmsw_bx_si));
+        c_setBX(0xffff);c_setSI(1);
+        *(uint16_t *)c_GetPhyAdd(0)=0;*(uint16_t *)c_GetPhyAdd(0x10000)=6;
+        handled=host_exint_hook(13,0);
+        VdmInstallFaultHandler(NULL);
+        return handled && test_fault==0 && c_getEIP()==0x1003 && (c_getCR0()&15)==15;
+    }
+    if(test_case==54) {
+        const unsigned char lmsw_negative[]={0x0f,0x01,0x70,0xff};
+        int handled;
+        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_negative,sizeof(lmsw_negative));
+        c_setBX(0);c_setSI(0);*(uint16_t *)c_GetPhyAdd(0x1fff)=6;
+        handled=host_exint_hook(13,0);
+        VdmInstallFaultHandler(NULL);
+        return handled && test_fault==0 && c_getEIP()==0x1004 && (c_getCR0()&15)==15;
+    }
+    if(test_case==55 || test_case==56) {
+        const unsigned char lmsw_cross_page[]={0x0f,0x01,0x36,0xfe,0x2f};
+        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;int handled,ok;
+        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_cross_page,sizeof(lmsw_cross_page));
+        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
+        for(j=0;j<512;j++)pte[j]=(j<<12)|7;
+        if(test_case==55)pte[3]=0;
+        *(uint16_t *)c_GetPhyAdd(0x2ffe)=6;c_setCR3(0x4000);c_setPG(1);
+        handled=host_exint_hook(13,0);
+        {char line[120];wsprintfA(line,"LMSW_CROSS_PAGE handled=%d fault=%lu eip=%lx cr0=%lx\n",handled,test_fault,c_getEIP(),c_getCR0());report(line);}
+        ok=test_case==55 ? (!handled && test_fault==1 && c_getEIP()==0x1000 && (c_getCR0()&15)==9) : (handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15);
+        VdmInstallFaultHandler(NULL);c_setPG(0);return ok;
     }
     c_cpu_simulate();VdmInstallFaultHandler(NULL);if(test_case==41)c_setPG(0);
     {char line[120];wsprintfA(line,"MONITOR_SCALAR_IO case=%d width=%u reads=%u writes=%u fault=%lu ax=%04x\n",test_case,width,io_reads,io_writes,test_fault,c_getAX());report(line);}
@@ -357,7 +389,7 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==49) ok=duplicate_tlb_mapping();
-    else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51) ok=protected_scalar_io();
+    else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56) ok=protected_scalar_io();
     else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52) ok=protected_string_reverse_baseline();
     else if (test_case==16) ok=protected_concurrent_if();
     else if ((test_case>=0 && test_case<=7) || test_case==17 || test_case==18 || test_case==20 || test_case==26 || test_case==27 || test_case==30) ok=protected_pending_irq_observe();

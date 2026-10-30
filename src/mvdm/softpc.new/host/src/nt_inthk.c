@@ -329,8 +329,8 @@ static void monitor_set_npx_control(ULONG value)
 static BOOL monitor_lmsw_operand(ULONG ip, ULONG *cursor, UCHAR modrm, ULONG *value)
 {
     extern unsigned long SasWrapMask;
-    ULONG offset=0, base, limit, access, linear, physical[2], i;
-    UCHAR lo,hi,mode=modrm>>6,rm=modrm&7;
+    ULONG offset=0, base, access, linear, physical[4], i;
+    UCHAR lo,hi,bytes[4],mode=modrm>>6,rm=modrm&7;
     BOOL stack=FALSE;
     switch(rm) {
         case 0: offset=getBX()+getSI();break;
@@ -350,19 +350,19 @@ static BOOL monitor_lmsw_operand(ULONG ip, ULONG *cursor, UCHAR modrm, ULONG *va
                !monitor_fetch_byte(ip,(*cursor)++,&hi)) return FALSE;
             offset+=(ULONG)lo | ((ULONG)hi<<8);
     }
-    offset=(USHORT)offset;
-    if(stack){base=getSS_BASE();limit=getSS_LIMIT();access=getSS_AR();}
-    else {base=getDS_BASE();limit=getDS_LIMIT();access=getDS_AR();}
-    if (!(access&0x10) || ((access&8) && !(access&2)) ||
-        offset==0xffffUL) return FALSE;
-    if (!(access&8) && (access&4)) {if(offset<=limit)return FALSE;}
-    else if(offset>limit || limit-offset<1)return FALSE;
+    /* VdmDecodeOperand accumulates zero-extended 16-bit registers and
+     * signed displacement in EBX, without truncating or checking the
+     * default selector's segment limit before adding its base. */
+    if(stack){base=getSS_BASE();access=getSS_AR();}
+    else {base=getDS_BASE();access=getDS_AR();}
+    if (!(access&0x10) || ((access&8) && !(access&2))) return FALSE;
     linear=base+offset;
-    if(linear<base || linear==0xffffffffUL) return FALSE;
-    for(i=0;i<2;i++) if(!monitor_translate(linear+i,FALSE,&physical[i]) ||
-        !monitor_read_ram(physical[i],i ? &hi : &lo,1)) return FALSE;
-    for(i=0;i<2;i++) if(!monitor_mark_access(linear+i,FALSE,physical[i]&SasWrapMask)) return FALSE;
-    *value=(ULONG)lo | ((ULONG)hi<<8);
+    /* VdmOpcodeLmsw reads a dword before KiVdmSetUserCR0 masks it. */
+    if(linear>0xfffffffcUL) return FALSE;
+    for(i=0;i<4;i++) if(!monitor_translate(linear+i,FALSE,&physical[i]) ||
+        !monitor_read_ram(physical[i],&bytes[i],1)) return FALSE;
+    for(i=0;i<4;i++) if(!monitor_mark_access(linear+i,FALSE,physical[i]&SasWrapMask)) return FALSE;
+    *value=(ULONG)bytes[0] | ((ULONG)bytes[1]<<8);
     return TRUE;
 }
 

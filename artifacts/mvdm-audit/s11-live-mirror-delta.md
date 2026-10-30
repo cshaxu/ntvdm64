@@ -76,6 +76,10 @@ After preserving existing guest bytes in the string-I/O input buffer, the retent
 
 The post-fix check completed successfully (`build/t473-s11/cpu-monitor-coverage-r7`, exit 0): all 1,794 current C/H paths are inventoried, no unlisted differences or stale estimates exist, and all 200 differing host C/H rows remain partial. Seven missing monitor paths retain their excluded dispositions.
 
+The subsequent unpublished LMSW address and cross-page corrections retain 205 mirror-difference rows and 204 textual estimates; the regenerated CSV SHA-256 is `EC3A932B26738B9BA68D6DA3D3D4C58290899A3E27703071394C33BB99E6EE00` (`build/t473-s11/lmsw-inventory`, exit 0). The preceding coverage check describes the published baseline and must be repeated for this candidate.
+
+The candidate's own coverage check subsequently passed (`build/t473-s11/lmsw-coverage`, exit 0): all 1,794 C/H paths remain inventoried; 200 host C/H differences are partial, none are unlisted or stale, and the seven absent monitor paths retain excluded dispositions.
+
 The retention generator was rerun after the current host-adapter and
 Alt+Enter changes. It again passed with 204 mirror differences (203 textual
 estimates) and the same CSV SHA-256. Its assertion requires every differing
