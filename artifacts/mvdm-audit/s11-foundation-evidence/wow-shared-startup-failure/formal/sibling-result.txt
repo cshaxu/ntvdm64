@@ -1,0 +1,1 @@
+PASS real original InitTask seven failures, registered cleanup, actual host thread exit1 and surviving WINMINE gameplay

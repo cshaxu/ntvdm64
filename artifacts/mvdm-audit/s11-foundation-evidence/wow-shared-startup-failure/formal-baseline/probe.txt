@@ -1,0 +1,9 @@
+window-ready elapsed=1078 inherited-desktop=0
+owned-window=07190AAE pid=16356
+PASS unchanged title and native frame=1
+board-ready elapsed=110 cell=3cc8733b counter=47d384f2
+capture=before ok=1
+sibling-launcher=35292 command="O:\tmp\nc69\system32\run16.exe" --wait "O:\tmp\nc69\tests\GENPROBE.EXE"
+startup-thread-live=27728 worker=16356
+startup-thread-exit=27728 wait=0 code=1
+sibling-wait=0 exit=0 survivor=07190AAE worker=16356

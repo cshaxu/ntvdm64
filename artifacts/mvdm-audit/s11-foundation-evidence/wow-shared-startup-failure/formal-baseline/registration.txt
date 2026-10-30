@@ -1,0 +1,62 @@
+16356 UserRegisterWowHandlers result=0090A000
+16356 RegisterHung result=00000001
+16356 InitTaskId result=0000039F
+16356 InitTaskSharedId result=FFFFFFFF
+16356 InitTask result=00000001
+16356 RegisterClassContext value=69A46EB8 private=00000000 public=016391F0
+16356 RegisterClassContext value=69A46EB8 private=016392D0 public=016391F0
+16356 RegisterClass result=0000C356
+16356 RegisterClassName name=WOWExecClass atom=C356
+16356 CreateWindowEx result=01CA0BE0
+16356 RegisterClassContext value=69A46EB8 private=016392D0 public=016391F0
+16356 RegisterClassContext value=69A46EB8 private=055002B8 public=016391F0
+16356 RegisterClass result=0000C3EA
+16356 RegisterClassName name=WOWFaxClass atom=C3EA
+16356 CreateWindowEx result=022B0C14
+16356 InitTaskId result=000017B7
+16356 InitTaskSharedId result=00000001
+16356 InitTask result=00000001
+16356 InitTaskNotification result=00000000
+16356 YieldTask result=00000001
+16356 RegisterClassContext value=69A46EB8 private=055002B8 public=016391F0
+16356 RegisterClassContext value=69A46EB8 private=05500A08 public=016391F0
+16356 RegisterClass result=0000C393
+16356 RegisterClassName name=Minesweeper atom=C393
+16356 WaitForMessage result=00000000
+16356 WaitForMessage result=00000000
+16356 WaitForMessage result=00000001
+16356 WaitForMessage result=00000001
+16356 CreateWindowEx result=07190AAE
+16356 WaitForMessage result=00000001
+16356 WaitForMessage result=00000000
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 InitTaskId result=00001737
+16356 InitTaskSharedId result=00000002
+16356 InitTask result=00000000
+16356 InitTaskError result=00000008
+16356 WOWCleanup result=00000001
+16356 YieldTask result=00000001
+16356 WaitForMessage result=00000001

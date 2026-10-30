@@ -1,0 +1,8 @@
+{
+  "normalProvider": "32C4C7F4DF253D5213096A270F5741BE3A31D627AB3BD3F4EED8B7E44DB6123C",
+  "publishable": false,
+  "kind": "diagnostic-only",
+  "target": "GENPROBE",
+  "diagnosticProvider": "CCE65FA1895CC5F145518A7C524F71E8FAA0C2018A4DB4CC9E4A41C8A45769EA",
+  "fault": "second original InitTask allocation"
+}

@@ -14,6 +14,8 @@ param(
     [ValidateSet('Close','Ignore')][string]$ShellExceptionResponse='Close',
     [ValidateSet('Preparation','Returned')][string]$CallbackAbortPhase,
     [string]$StartupDiagnosticManifest,
+    [string]$PrebuiltStartupProbe,
+    [string]$PrebuiltStartupProbeSha256,
     [string]$Nasm='nasm.exe',
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
@@ -25,6 +27,11 @@ if(([int]$RetiringSibling.IsPresent+[int]$ExceptionSibling.IsPresent+[int]$Start
 $withSibling=$RetiringSibling -or $ExceptionSibling -or $StartupFailureSibling -or $ShellExceptionSibling
 if($VisibleDesktop -and $withSibling){throw 'Ordinary desktop acceptance selects only the exact owned game'}
 if($CallbackAbortPhase -and !$ShellExceptionSibling){throw 'Callback abort requires the isolated Shell sibling contract'}
+if(($PrebuiltStartupProbe -or $PrebuiltStartupProbeSha256) -and
+    (!$StartupFailureSibling -or !$PrebuiltStartupProbe -or
+        $PrebuiltStartupProbeSha256 -notmatch '^[0-9a-fA-F]{64}$')){
+    throw 'Prebuilt probe and SHA-256 require the startup-failure sibling case'
+}
 if($CommonDialogRounds -ne 1 -and !$RetiringSibling){throw 'CommonDialogRounds requires the retiring sibling contract'}
 if($StartupFailureSibling -or $ShellExceptionSibling){
     $expectedTarget=if($ShellExceptionSibling){'SHLPROBE'}else{'GENPROBE'}
@@ -71,8 +78,16 @@ try {
         if($ExceptionSibling){$assemblyArgs+='-DFAULT'}
         if($ShellExceptionSibling -and $ShellExceptionResponse -eq 'Ignore'){$assemblyArgs+='-DIGNORE_EXCEPTION'}
         if($CallbackAbortPhase){$assemblyArgs+='-DCALLBACK_ABORT'}
-        & $Nasm @assemblyArgs $siblingSource *> "$root\assemble.txt"
-        if($LASTEXITCODE){throw 'Independent sibling NE assembly failed'}
+        if($PrebuiltStartupProbe){
+            $prebuilt=(Resolve-Path -LiteralPath $PrebuiltStartupProbe).Path
+            if((Get-FileHash -LiteralPath $prebuilt -Algorithm SHA256).Hash -ne $PrebuiltStartupProbeSha256){
+                throw 'Prebuilt startup probe identity mismatch'
+            }
+            Copy-Item -LiteralPath $prebuilt -Destination "$root\$siblingName.EXE"
+        } else {
+            & $Nasm @assemblyArgs $siblingSource *> "$root\assemble.txt"
+            if($LASTEXITCODE){throw 'Independent sibling NE assembly failed'}
+        }
         $null=New-Item -ItemType Directory "$runtime\tests" -Force
         Copy-Item "$root\$siblingName.EXE" "$runtime\tests\$siblingName.EXE"
         if($ShellExceptionSibling){

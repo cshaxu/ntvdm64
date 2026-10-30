@@ -1,0 +1,67 @@
+4644 UserRegisterWowHandlers result=0090A000
+4644 RegisterHung result=00000001
+4644 InitTaskId result=0000039F
+4644 InitTaskSharedId result=FFFFFFFF
+4644 InitTask result=00000001
+4644 RegisterClassContext value=69A46EB8 private=00000000 public=013B7398
+4644 RegisterClassContext value=69A46EB8 private=012DD400 public=013B7398
+4644 RegisterClass result=0000C310
+4644 RegisterClassName name=WOWExecClass atom=C310
+4644 CreateWindowEx result=02270C14
+4644 RegisterClassContext value=69A46EB8 private=012DD400 public=013B7398
+4644 RegisterClassContext value=69A46EB8 private=0528FA30 public=013B7398
+4644 RegisterClass result=0000C360
+4644 RegisterClassName name=WOWFaxClass atom=C360
+4644 CreateWindowEx result=064C0928
+4644 InitTaskId result=000017B7
+4644 InitTaskSharedId result=00000001
+4644 InitTask result=00000001
+4644 InitTaskNotification result=00000000
+4644 YieldTask result=00000001
+4644 RegisterClassContext value=69A46EB8 private=0528FA30 public=013B7398
+4644 RegisterClassContext value=69A46EB8 private=052AF9A8 public=013B7398
+4644 RegisterClass result=0000C2A1
+4644 RegisterClassName name=Minesweeper atom=C2A1
+4644 WaitForMessage result=00000000
+4644 WaitForMessage result=00000000
+4644 WaitForMessage result=00000001
+4644 WaitForMessage result=00000001
+4644 CreateWindowEx result=07170AAE
+4644 WaitForMessage result=00000001
+4644 WaitForMessage result=00000001
+4644 WaitForMessage result=00000001
+4644 WaitForMessage result=00000001
+4644 WaitForMessage result=00000000
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 InitTaskId result=00001737
+4644 InitTaskSharedId result=00000002
+4644 InitTask result=00000000
+4644 InitTaskError result=00000008
+4644 WOWCleanup result=00000001
+4644 YieldTask result=00000001
+4644 WOWCleanup result=00000001
+4644 WOWCleanup result=00000001
+4644 WaitForMessage result=00000001

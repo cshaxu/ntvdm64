@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-mine-gameplay.ps1",
+    "Hash": "A42CE19BCEE7186E7FE05131992A075F0D3D4A2D47FD7D5B72FF7087492517D3"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_mine_gameplay_probe.c",
+    "Hash": "5CADD225995B1200E53B492B9FA6C2722F31AA4BCC4418BFEC6413FAADA0E95B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_startup_failure_provider.c",
+    "Hash": "90FACFC68F56A809F564C4D3C362E0410010B32D4ACB982FAF981B11E7F4D18C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s9\\callpr-guest-candidate-r4\\GENPROBE.EXE",
+    "Hash": "0205A143D10DCCF29449D3947338D457A89099BD608D7C8C09C99CFA7AD19B80"
+  }
+]

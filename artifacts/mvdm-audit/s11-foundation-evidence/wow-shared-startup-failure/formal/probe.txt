@@ -1,0 +1,19 @@
+window-ready elapsed=1078 inherited-desktop=0
+owned-window=07170AAE pid=4644
+PASS unchanged title and native frame=1
+board-ready elapsed=109 cell=3cc8733b counter=47d384f2
+capture=before ok=1
+sibling-launcher=14240 command="O:\tmp\n752\system32\run16.exe" --wait "O:\tmp\n752\tests\GENPROBE.EXE"
+startup-thread-live=18756 worker=4644
+startup-thread-exit=18756 wait=0 code=1
+sibling-wait=0 exit=1114 survivor=07170AAE worker=4644
+board-ready elapsed=328 cell=3cc8733b counter=47d384f2
+phase=flag elapsed=32 cell=62c0567b reference=3cc8733b
+capture=flag ok=1
+counter-before=47d384f2 counter-flag=8caf84f2
+phase=reset elapsed=93 cell=3cc8733b reference=3cc8733b
+capture=reset ok=1
+phase=open elapsed=63 cell=acaf2965 reference=3cc8733b
+capture=open ok=1
+PASS flag changed cell+counter, F2 restored covered cell, left click changed cell
+PASS owned game window closed after WM_CLOSE

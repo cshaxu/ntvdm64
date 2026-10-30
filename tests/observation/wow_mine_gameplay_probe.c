@@ -225,7 +225,8 @@ static BOOL retire_sibling(const char *desktop, const char *launcher, const char
     printf("sibling-wait=%lu exit=%lu survivor=%p worker=%lu\n",wait,status,mine,owner_pid);
     /* Original guest ForceTaskExit uses DOS 4CFF, but WK32KillTask explicitly
      * ends the host thread with EXIT_SUCCESS. Do not equate those contracts. */
-    return wait==WAIT_OBJECT_0 && status==0 &&
+    return wait==WAIT_OBJECT_0 &&
+        status==(startup_identity_path ? (DWORD)ERROR_DLL_INIT_FAILED : 0u) &&
         (!exception_sibling || error_selected) && IsWindow(mine);
 }
 int main(int argc,char **argv)
