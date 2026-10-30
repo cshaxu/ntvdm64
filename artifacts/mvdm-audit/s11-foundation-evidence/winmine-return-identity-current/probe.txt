@@ -1,0 +1,26 @@
+main=01670CE0 command=524 style=34ca0000 exstyle=00000100 zoomed=0
+main-title=Minesweeper window=-32000,-32000,-31763,-31961 client-origin=-32000,-32000 client=0,0
+round=1
+command-state enabled=1 menu-state=00000008 thread=16616
+dialog hwnd=03140C14 title=
+dialog-visible-ms=1015
+close-recovery-ms=1031
+PASS menu dialog and parent recovery
+round=2
+command-state enabled=1 menu-state=00000008 thread=16616
+dialog hwnd=03150C14 title=
+dialog-visible-ms=1188
+close-recovery-ms=1125
+PASS menu dialog and parent recovery
+round=3
+command-state enabled=1 menu-state=00000008 thread=16616
+dialog hwnd=03160C14 title=
+dialog-visible-ms=1109
+close-recovery-ms=1094
+PASS menu dialog and parent recovery
+round=4
+command-state enabled=1 menu-state=00000008 thread=16616
+dialog hwnd=03170C14 title=
+dialog-visible-ms=1078
+close-recovery-ms=1079
+PASS menu dialog and parent recovery

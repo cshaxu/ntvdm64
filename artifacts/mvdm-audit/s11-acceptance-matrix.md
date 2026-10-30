@@ -31,6 +31,9 @@ The historical [Winmine 1400 non-pass](s11-foundation-evidence/winmine-native-re
 is another unlocalized native-return observation. Its failure substage and
 window are unknown; the separately captured and repaired cross-thread root
 retirement race cannot be assumed to explain it or the historical SOL failure.
+Four additional Winmine dialog interactions passed under a separately staged
+identity-diagnostic provider; the [receipt](s11-foundation-evidence/winmine-return-identity-current/review.md)
+records its minimized-window and diagnostic-coverage limitations.
 
 S11 cannot be declared fully complete on this checkpoint: the observed SOL
 failure has not been attributed, and the existing installation is not a
