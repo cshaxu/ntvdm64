@@ -1,10 +1,14 @@
 param([Parameter(Mandatory)][string]$PackageRoot,[Parameter(Mandatory)][string]$BuildRoot,
  [Parameter(Mandatory)][string]$Observer,[Parameter(Mandatory)][string]$CompilerDriver,
- [Parameter(Mandatory)][string]$Nasm,[switch]$SharedTasks,[switch]$LifecycleOnly)
+ [string]$Nasm='nasm.exe',[switch]$SharedTasks,[switch]$LifecycleOnly,
+ [string]$PrebuiltGuestRoot,[string]$PrebuiltProbeSha256,[string]$PrebuiltPeerSha256)
 # Run from an owned hidden supervisor. One service/package owns both workers.
 $ErrorActionPreference='Stop'
 $LifecycleOnly = $LifecycleOnly.IsPresent
 if($LifecycleOnly -and !$SharedTasks){throw 'LifecycleOnly requires SharedTasks'}
+if(($PrebuiltGuestRoot -or $PrebuiltProbeSha256 -or $PrebuiltPeerSha256) -and
+   (!$PrebuiltGuestRoot -or $PrebuiltProbeSha256 -notmatch '^[0-9a-fA-F]{64}$' -or
+    $PrebuiltPeerSha256 -notmatch '^[0-9a-fA-F]{64}$')){throw 'Prebuilt guests require a directory and both SHA-256 hashes'}
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
 $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned root required'}
@@ -20,10 +24,19 @@ try {
  $guestSource="$PSScriptRoot/win16_idle_probe.asm"
  $firstDefines=@(if($SharedTasks){'-DSHARED_WITNESS';'-DTICK_LIMIT=16'})
  $peerDefines=@(if($SharedTasks){'-DSHARED_WITNESS';'-DNO_REGISTER';'-DTICK_LIMIT=4'}else{'-DTICK_LIMIT=12'})
- & $Nasm -f bin @firstDefines -o "$root/IDLPROBE.EXE" -l "$root/first.lst" $guestSource *> "$root/first-assemble.txt"
- if($LASTEXITCODE){throw 'First NE assembly failed'}
- & $Nasm -f bin -DPEER @peerDefines -o "$root/IDLPEER.EXE" -l "$root/peer.lst" $guestSource *> "$root/peer-assemble.txt"
- if($LASTEXITCODE){throw 'Peer NE assembly failed'}
+ if($PrebuiltGuestRoot){
+  $prebuilt=(Resolve-Path -LiteralPath $PrebuiltGuestRoot).Path
+  foreach($item in @(@('IDLPROBE.EXE',$PrebuiltProbeSha256),@('IDLPEER.EXE',$PrebuiltPeerSha256))){
+   $input=Join-Path $prebuilt $item[0]
+   if((Get-FileHash -LiteralPath $input -Algorithm SHA256).Hash -ne $item[1]){throw "Prebuilt guest identity mismatch: $($item[0])"}
+   Copy-Item -LiteralPath $input -Destination "$root/$($item[0])"
+  }
+ } else {
+  & $Nasm -f bin @firstDefines -o "$root/IDLPROBE.EXE" -l "$root/first.lst" $guestSource *> "$root/first-assemble.txt"
+  if($LASTEXITCODE){throw 'First NE assembly failed'}
+  & $Nasm -f bin -DPEER @peerDefines -o "$root/IDLPEER.EXE" -l "$root/peer.lst" $guestSource *> "$root/peer-assemble.txt"
+  if($LASTEXITCODE){throw 'Peer NE assembly failed'}
+ }
  $runtime=New-PhysicalRuntimeStage (Resolve-Path $PackageRoot).Path
  $scope=New-IsolatedPackageScope $runtime
  $null=New-Item -ItemType Directory "$runtime/tests" -Force
