@@ -1,0 +1,17 @@
+src\wow32-dll\source\wow_window_words_binding.c:855:BOOL WINAPI wow_window_words_publish_owner(HWND window, wow_window_words_binding *binding,
+src\wow32-dll\source\wow_window_words_binding.c:865:    } else if (wow_user_window_publish(thread->ppi->objects,window,&binding->cleanup,thread)) {
+src\wow32-dll\source\wow_window_words_binding.c:942:    if (binding->objects && !wow_user_window_retire(binding->objects, window,
+src\wow32-dll\source\wow_window_words_binding.c:963:void WINAPI wow_window_words_detach(HWND window)
+src\wow32-dll\source\wow_window_words_binding.c:1050:            retired = wow_user_window_retire(binding->objects, window,
+src\wow32-dll\source\wow_window_words_binding.c:1418:    if (table_reference && !wow_user_window_cancel_native_adoption(binding->objects,
+src\wow32-dll\source\wow_window_words_binding.c:1484:        if (!wow_window_words_publish_owner(window, binding, owner)) __leave;
+src\wow32-dll\source\wow_window_creation_binding.c:126:        wow_window_words_detach(window);
+src\wow32-dll\source\wow_window_creation_binding.c:130:    if (!wow_window_words_publish_owner(window, *borrow, thread)) goto failed;
+src\wow32-dll\source\wow_user_object_bindings.c:696:BOOL WINAPI wow_user_window_publish(wow_user_object_table *table, HWND window,
+src\wow32-dll\source\wow_user_object_bindings.c:723:BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *table,
+src\wow32-dll\source\wow_user_object_bindings.c:742:BOOL WINAPI wow_user_window_retire(wow_user_object_table *table, HWND window,
+src\wow32-dll\include\wow_window_words_binding.h:156:BOOL WINAPI wow_window_words_publish_owner(HWND, wow_window_words_binding *,
+src\wow32-dll\include\wow_window_words_binding.h:161:void WINAPI wow_window_words_detach(HWND);
+src\wow32-dll\include\wow_user_object_bindings.h:27:BOOL WINAPI wow_user_window_publish(wow_user_object_table *, HWND,
+src\wow32-dll\include\wow_user_object_bindings.h:29:BOOL WINAPI wow_user_window_retire(wow_user_object_table *, HWND,
+src\wow32-dll\include\wow_user_object_bindings.h:31:BOOL WINAPI wow_user_window_cancel_native_adoption(wow_user_object_table *, HWND,

@@ -73,6 +73,10 @@ establishes that a real game window remains live while a real guest CBT hook
 performs its nested creation/veto/unhook sequence; gameplay still works after
 the hook task retires. It does not force the original race.
 
+The adjacent [writer lock audit](../graph-writer-lock-audit/review.md) records
+the directly identified creation, rollback, adoption, retirement and menu
+publication paths, along with their bounded selected-object evidence.
+
 The [prebuilt DPMI task-cleanup witness](../graph-owner-dpmi-cleanup/review.md)
 also passed against these release inputs, including four child exits with live
 allocations and restored aggregate XMS capacity. Failure paths remain distinct.

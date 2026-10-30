@@ -1,0 +1,4 @@
+WOW_NATIVE_CREATION_BINDING errors=0 callbacks=111 nested=1 rejected=1 vetoed=1 destroyed=15 table_empty=1
+WOW_GRAPH_OWNER_RESTORE errors=0 success=2 failure=2 held=2 unheld=2
+WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1
+WOW_REAL_DIALOG_ROLLBACK errors=0 cases=4 physical_free=1 publications=2 vetoes=2 no_app_callback=1
