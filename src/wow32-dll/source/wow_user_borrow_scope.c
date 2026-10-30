@@ -280,14 +280,30 @@ wow_window_words_binding *WINAPI wow_user_borrow_observed_binding(HWND window)
     return NULL;
 }
 
+/* Transaction scratch only. The existing scope list owns every sample;
+ * collisions or mismatched generations always use the original search. */
+#define GRAPH_BORROW_INDEX_SIZE 512u
+typedef struct graph_borrow_index {
+    wow_sampled_words *slot[GRAPH_BORROW_INDEX_SIZE];
+    BOOL validated[GRAPH_BORROW_INDEX_SIZE];
+} graph_borrow_index;
+static unsigned graph_borrow_slot(ULONG backing)
+{
+    return (backing >> 12u) % GRAPH_BORROW_INDEX_SIZE;
+}
 /* Consume one exact-generation pin; the existing scope owns it on success.
  * No HWND lookup or native refresh is allowed on this retained path. */
-static wow_window_words_binding *retain_window_generation(HWND window, ULONG backing)
+static wow_window_words_binding *retain_window_generation(HWND window, ULONG backing,
+    graph_borrow_index *index)
 {
     wow_sampled_words *sample = NULL;
     wow_user_borrow_scope *scope;
     wow_user_borrow *borrow;
     ULONG process_id, thread_id;
+    if (index) {
+        wow_sampled_words *hit = index->slot[graph_borrow_slot(backing)];
+        if (hit && hit->window == window && hit->backing == backing) sample = hit;
+    }
     for (scope = current_scope; scope && !sample; scope = scope->previous)
         for (borrow = scope->borrows; borrow; borrow = borrow->next)
             if (borrow->is_class == WOW_BORROW_SAMPLED &&
@@ -324,6 +340,11 @@ static wow_window_words_binding *retain_window_generation(HWND window, ULONG bac
         }
         if (!retain(sample, WOW_BORROW_SAMPLED)) return NULL;
     }
+    if (index) {
+        unsigned slot = graph_borrow_slot(backing);
+        if (index->slot[slot] != sample) index->validated[slot] = FALSE;
+        index->slot[slot] = sample;
+    }
     return sample->binding;
 }
 
@@ -348,7 +369,7 @@ struct tagWND *WINAPI wow_user_borrow_window_state(HWND window)
         backing = mvdm_softpc_wow_page_domain_borrow_window(full);
         if (!backing) { SetLastError(ERROR_INVALID_STATE); return NULL; }
     }
-    binding = retain_window_generation((HWND)(ULONG_PTR)full, backing);
+    binding = retain_window_generation((HWND)(ULONG_PTR)full, backing, NULL);
     if (!binding) return NULL; /* Incoming pin consumed even on failure. */
     if (!wow_user_borrow_client_graph(binding, GetDesktopWindow())) return NULL;
     SetLastError(saved);
@@ -373,7 +394,7 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
             (ULONG)(ULONG_PTR)window != (ULONG)(LONG)(SHORT)LOWORD(window))) return NULL;
     backing = mvdm_softpc_wow_page_domain_borrow_window(full);
     if (!backing) return NULL;
-    binding = retain_window_generation((HWND)(ULONG_PTR)full, backing);
+    binding = retain_window_generation((HWND)(ULONG_PTR)full, backing, NULL);
     if (!binding) return NULL;
     words = wow_window_words_value(binding);
     if (!mvdm_softpc_wow_page_domain_read_window_words_view(backing,
@@ -385,8 +406,8 @@ struct _WW *WINAPI wow_user_borrow_window(HWND window)
     return words;
 }
 
-BOOL WINAPI wow_user_borrow_window_relation(wow_window_words_binding *source,
-    ULONG relation, wow_window_words_binding **target)
+static BOOL borrow_window_relation_indexed(wow_window_words_binding *source,
+    ULONG relation, wow_window_words_binding **target, graph_borrow_index *index)
 {
     ULONG backing = 0, destination = 0;
     DWORD saved = GetLastError(), error;
@@ -406,17 +427,37 @@ BOOL WINAPI wow_user_borrow_window_relation(wow_window_words_binding *source,
     SetLastError(error);
     if (!result) return FALSE;
     if (!destination) { *target = NULL; SetLastError(saved); return TRUE; }
+    if (index) {
+        wow_sampled_words *hit = index->slot[graph_borrow_slot(destination)];
+        if (hit && hit->backing == destination && hit->binding &&
+                index->validated[graph_borrow_slot(destination)]) {
+            /* This synchronous traversal already validated the full view of
+             * this exact pinned generation. The scope remains its owner;
+             * no native callout or guest execution occurs before commit. */
+            if (!mvdm_softpc_wow_page_domain_release_window(destination))
+                wow_user_native_call_failed("release-graph-index-pin", ERROR_INVALID_STATE);
+            *target = hit->binding;
+            SetLastError(saved);
+            return TRUE;
+        }
+    }
     if (!mvdm_softpc_wow_page_domain_read_window_view(destination, &view)) {
         error = GetLastError();
         if (!mvdm_softpc_wow_page_domain_release_window(destination))
             wow_user_native_call_failed("release-invalid-relation-target", ERROR_INVALID_STATE);
         SetLastError(error); return FALSE;
     }
-    binding = retain_window_generation((HWND)(ULONG_PTR)view.links.window, destination);
+    binding = retain_window_generation((HWND)(ULONG_PTR)view.links.window, destination, index);
     if (!binding) return FALSE; /* Pin consumed even on failure. */
     *target = binding;
     SetLastError(saved);
     return TRUE;
+}
+
+BOOL WINAPI wow_user_borrow_window_relation(wow_window_words_binding *source,
+    ULONG relation, wow_window_words_binding **target)
+{
+    return borrow_window_relation_indexed(source, relation, target, NULL);
 }
 
 static BOOL graph_row_index(wow_window_client_graph_row **rows, ULONG *count,
@@ -453,11 +494,18 @@ BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *root, HWND de
     wow_window_words_binding *binding, *target;
     wow_user_borrow_scope *scope, *outer;
     wow_user_borrow **link, *borrow;
+    graph_borrow_index index_cache = {0};
     if (!current_scope && !root) return TRUE; /* No suspended original graph. */
     if (!current_scope || !desktop) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
     __try {
+        for (scope = current_scope; scope; scope = scope->previous)
+            for (borrow = scope->borrows; borrow; borrow = borrow->next)
+                if (borrow->is_class == WOW_BORROW_SAMPLED) {
+                    wow_sampled_words *sample = borrow->binding;
+                    index_cache.slot[graph_borrow_slot(sample->backing)] = sample;
+                }
         if (root) {
             if (!graph_row_index(&rows, &count, &capacity, root, &index)) __leave;
         } else {
@@ -486,9 +534,13 @@ BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *root, HWND de
                     wow_user_native_call_failed("release-graph-node", ERROR_INVALID_STATE);
                 SetLastError(error); __leave;
             }
-            target = retain_window_generation((HWND)(ULONG_PTR)view.links.window, backing);
+            target = retain_window_generation((HWND)(ULONG_PTR)view.links.window, backing, &index_cache);
             if (!target) __leave; /* Incoming pin consumed on all paths. */
             if (target != binding) { SetLastError(ERROR_INVALID_STATE); __leave; }
+            if (index_cache.slot[graph_borrow_slot(backing)] &&
+                    index_cache.slot[graph_borrow_slot(backing)]->backing == backing &&
+                    index_cache.slot[graph_borrow_slot(backing)]->binding == binding)
+                index_cache.validated[graph_borrow_slot(backing)] = TRUE;
             if (!wow_window_words_prepare_resource_state(binding, desktop)) __leave;
             rows[i].state = wow_window_words_client_state_value(binding);
             rows[i].window = (HWND)(ULONG_PTR)view.links.window;
@@ -500,7 +552,7 @@ BOOL WINAPI wow_user_borrow_client_graph(wow_window_words_binding *root, HWND de
             rows[i].control_id = view.control_id; rows[i].module = view.module;
             rows[i].class_atom = view.descriptor.atom;
             for (edge = 0; edge < 4; ++edge) {
-                if (!wow_user_borrow_window_relation(binding, edge, &target)) __leave;
+                if (!borrow_window_relation_indexed(binding, edge, &target, &index_cache)) __leave;
                 if (!graph_row_index(&rows, &count, &capacity, target, &index)) __leave;
                 rows[i].target[edge] = index;
             }

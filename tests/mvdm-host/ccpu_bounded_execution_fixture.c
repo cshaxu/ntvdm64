@@ -20,6 +20,19 @@
 #include "c_page.h"
 #include "c_tlb.h"
 
+#ifdef CCPU_BIT_MATRIX
+static jmp_buf bit_fault_frame;
+static int bit_fault_vector = -1;
+extern unsigned long DelayIrqLine;
+BOOL host_exint_hook(IS32 number, IS32 error)
+{
+    (void)error;
+    bit_fault_vector = (int)number;
+    longjmp(bit_fault_frame, 1);
+    return FALSE;
+}
+#endif
+
 static half_word port_bytes[4];
 static unsigned port_writes;
 static void fixture_port_outb(io_addr port, half_word value)
@@ -755,6 +768,10 @@ int main(void)
         ica0_post();
         ica1_init();
         ica1_post();
+#ifdef CCPU_BIT_MATRIX
+        /* Reproduce the original keyboard-ready prerequisite for IRQ0. */
+        DelayIrqLine = 0;
+#endif
         ica_hw_interrupt(ICA_MASTER, CPU_TIMER_INT, 1);
         interrupt_vector = ica_intack(&hook_address);
         if (interrupt_vector != 0x08 || fixture_eoi_hook_calls != 0u ||
@@ -838,6 +855,138 @@ int main(void)
         return 1;
     }
 
+#ifdef CCPU_BIT_MATRIX
+    {
+        const unsigned char neg16[] = {0xbb,0,0,0xb9,0xff,0xff,0x0f,0xa3,0x0f,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char pos16[] = {0xbb,0xfe,0xff,0xb9,0x10,0,0x0f,0xa3,0x0f,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char reg16[] = {0xbb,0,0x80,0xb9,0xff,0xff,0x0f,0xa3,0xcb,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char imm16[] = {0xbb,0,0x20,0x0f,0xba,0x27,0xff,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char neg32[] = {0x66,0xbb,0,0x20,0,0,0x66,0xb9,0xff,0xff,0xff,0xff,0x67,0x66,0x0f,0xa3,0x0b,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char dword16addr[] = {0xbb,0,0x40,0x66,0xb9,0,0,0,0,0x66,0x0f,0xa3,0x0f,0x0f,0x92,0x06,0,0x80,0xd6,0xfe};
+        const unsigned char *seq;
+        const char *arg = getenv("CCPU_BIT_CASE");
+        unsigned i, len;
+        int which = arg ? atoi(arg) : -1;
+        int boundary_case = which, boundary_operation = 0;
+        int boundary_address32 = 0;
+        unsigned boundary_base32 = 0;
+        static const int index16[] = {-32768,-17,-16,-15,-1,0,15,16,32767};
+        static const int64_t index32[] = {-2147483648LL,-33,-32,-31,-1,0,31,32,2147483647LL};
+        unsigned target = 0, mask = 0;
+        /* Extend the same independent index/address matrix to BTS, BTR and
+         * BTC. Keep case numbers stable for the existing baseline witness. */
+        if (which >= 30 && which < 84) {
+            boundary_case = 12 + (which - 30) % 18;
+            boundary_operation = 1 + (which - 30) / 18;
+        }
+        if (which >= 84 && which < 120) {
+            boundary_case = 21 + (which - 84) % 9;
+            boundary_operation = (which - 84) / 9;
+            boundary_address32 = 1;
+        }
+        if (boundary_case >= 21 && boundary_case <= 29) {
+            int64_t n = index32[boundary_case - 21];
+            int64_t displacement = n >= 0 ? n / 32 : -((-n + 31) / 32);
+            if (boundary_address32) {
+                /* Keep the translated operand mapped while the base and
+                 * signed index exercise all 32 address bits. */
+                target = 0x4000u;
+                boundary_base32 = (unsigned)(0x4000u - (uint32_t)(displacement * 4));
+            } else target = (unsigned)(0x4000 + displacement * 4) & 0xffffu;
+            mask = 1u << ((unsigned)n & 31u);
+        }
+        if (boundary_case >= 12 && boundary_case <= 20) {
+            int n = index16[boundary_case - 12];
+            int displacement = n >= 0 ? n / 16 : -((-n + 15) / 16);
+            target = (unsigned)(0x4000 + displacement * 2) & 0xffffu;
+            mask = 1u << ((unsigned)n & 15u);
+        }
+        switch (boundary_case) {
+        case 0: case 7: case 8: case 9: case 12: case 13: case 14: case 15: case 16: case 17: case 18: case 19: case 20: seq = neg16; len = sizeof(neg16); break;
+        case 2: case 6: seq = pos16; len = sizeof(pos16); break;
+        case 3: seq = reg16; len = sizeof(reg16); break;
+        case 4: seq = imm16; len = sizeof(imm16); break;
+        case 10: case 11: seq = neg32; len = sizeof(neg32); break;
+        case 21: case 22: case 23: case 24: case 25: case 26: case 27: case 28: case 29: seq = dword16addr; len = sizeof(dword16addr); break;
+        default: sas_term(); return 2;
+        }
+        if (boundary_address32) { seq = neg32; len = sizeof(neg32); }
+        for (i = 0; i < len; ++i) {
+            unsigned char instruction = seq[i];
+            if (boundary_case >= 12 && boundary_case <= 20) {
+                unsigned raw = (unsigned)index16[boundary_case - 12] & 0xffffu;
+                if (i == 1) instruction = 0;
+                if (i == 2) instruction = 0x40;
+                if (i == 4) instruction = (unsigned char)raw;
+                if (i == 5) instruction = (unsigned char)(raw >> 8);
+            }
+            if (!boundary_address32 && boundary_case >= 21 && boundary_case <= 29 && i >= 5 && i <= 8) {
+                unsigned raw = (unsigned)index32[boundary_case - 21];
+                instruction = (unsigned char)(raw >> ((i - 5) * 8));
+            }
+            if (boundary_address32 && i >= 2 && i <= 5)
+                instruction = (unsigned char)(boundary_base32 >> ((i - 2) * 8));
+            if (boundary_address32 && i >= 8 && i <= 11) {
+                unsigned raw = (unsigned)index32[boundary_case - 21];
+                instruction = (unsigned char)(raw >> ((i - 8) * 8));
+            }
+            if (instruction == 0xa3) {
+                if (boundary_operation == 1) instruction = 0xab; /* BTS */
+                else if (boundary_operation == 2) instruction = 0xb3; /* BTR */
+                else if (boundary_operation == 3) instruction = 0xbb; /* BTC */
+                else if (which == 6 || which == 9 || which == 11) instruction = 0xbb; /* BTC */
+                else if (which == 7) instruction = 0xb3; /* BTR */
+                else if (which == 8) instruction = 0xab; /* BTS */
+            }
+            c_sas_store(0x80000 + i, instruction);
+        }
+        c_sas_store(0xfffe, 0); c_sas_store(0xffff, which == 8 ? 0 : 0x80);
+        c_sas_store(0x1ffe, 0); c_sas_store(0x1fff, 0);
+        if (which == 10 || which == 11) {
+            c_sas_store(0x1ffc, 0); c_sas_store(0x1ffd, 0);
+            c_sas_store(0x1ffe, 0); c_sas_store(0x1fff, 0x80);
+        }
+        c_sas_store(0, 1); c_sas_store(1, 0);
+        c_sas_store(0x8000, 0xff); c_sas_store(0x10000, 0); c_sas_store(0x10001, 0);
+        c_sas_store(0x2000, 0); c_sas_store(0x2001, 0x80);
+        if (boundary_case >= 12 && boundary_case <= 20) {
+            unsigned initial = boundary_operation == 1 ? 0 : mask;
+            c_sas_store(target, (unsigned char)initial);
+            c_sas_store(target + 1, (unsigned char)(initial >> 8));
+            c_sas_store(target - 2, 0x5a); c_sas_store(target + 2, 0xa5);
+        }
+        if (boundary_case >= 21 && boundary_case <= 29) {
+            unsigned initial = boundary_operation == 1 ? 0 : mask;
+            c_sas_store(target, (unsigned char)initial);
+            c_sas_store(target + 1, (unsigned char)(initial >> 8));
+            c_sas_store(target + 2, (unsigned char)(initial >> 16));
+            c_sas_store(target + 3, (unsigned char)(initial >> 24));
+            c_sas_store(target - 2, 0x5a); c_sas_store(target + 4, 0xa5);
+        }
+        (void)c_setDS(0); (void)c_setCS(0x8000); c_setIP(0);
+        if (!setjmp(bit_fault_frame)) host_simulate();
+        fprintf(stderr, "bit case=%d fault=%d carry=%u zero=%04x plus64k=%04x\n",
+            which, bit_fault_vector, (unsigned)c_sas_hw_at(0x8000),
+            (unsigned)c_sas_w_at(0), (unsigned)c_sas_w_at(0x10000));
+        if (boundary_case >= 12 && boundary_case <= 20 &&
+                (c_sas_w_at(target) != (boundary_operation >= 2 ? 0u : mask) || c_sas_hw_at(target - 2) != 0x5a ||
+                 c_sas_hw_at(target + 2) != 0xa5)) { sas_term(); return 1; }
+        if (boundary_case >= 21 && boundary_case <= 29 &&
+                (c_sas_dw_at(target) != (boundary_operation >= 2 ? 0u : mask) || c_sas_hw_at(target - 2) != 0x5a ||
+                 c_sas_hw_at(target + 4) != 0xa5)) { sas_term(); return 1; }
+        if (bit_fault_vector != -1 || c_sas_hw_at(0x8000) != (which == 8 || boundary_operation == 1 ? 0 : 1) ||
+            ((which == 2 || which == 6) && c_sas_w_at(0x10000) != 0) ||
+            (which == 2 && c_sas_w_at(0) != 1) ||
+            (which == 6 && c_sas_w_at(0) != 0) ||
+            ((which == 7 || which == 9) && c_sas_w_at(0xfffe) != 0) ||
+            (which == 8 && c_sas_w_at(0xfffe) != 0x8000) ||
+            (which == 10 && c_sas_dw_at(0x1ffc) != 0x80000000u) ||
+            (which == 11 && c_sas_dw_at(0x1ffc) != 0)) {
+            sas_term(); return 1;
+        }
+        sas_term(); return 0;
+    }
+#endif
     if (fixture_host_close_calls != 1u || !fixture_high_linear_page()) {
         sas_term();
         return 1;

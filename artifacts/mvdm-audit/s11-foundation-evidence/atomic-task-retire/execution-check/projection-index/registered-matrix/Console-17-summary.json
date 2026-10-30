@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-empty.txt",
+    "BodyMs": 2608,
+    "CleanupMs": 271
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-native-zero.txt",
+    "BodyMs": 2016,
+    "CleanupMs": 218
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-missing.txt",
+    "BodyMs": 3166,
+    "CleanupMs": 218
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-native-seven.txt",
+    "BodyMs": 1198,
+    "CleanupMs": 223
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-native-streams.txt",
+    "BodyMs": 1146,
+    "CleanupMs": 238
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-native-eof.txt",
+    "BodyMs": 1131,
+    "CleanupMs": 203
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-mem.txt",
+    "BodyMs": 1987,
+    "CleanupMs": 197
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-nested-empty.txt",
+    "BodyMs": 2879,
+    "CleanupMs": 210
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-nested-mem.txt",
+    "BodyMs": 6849,
+    "CleanupMs": 215
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-mem-repeat.txt",
+    "BodyMs": 2708,
+    "CleanupMs": 227
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-direct-mem.txt",
+    "BodyMs": 893,
+    "CleanupMs": 176
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-command-c.txt",
+    "BodyMs": 928,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-command-c-seven.txt",
+    "BodyMs": 1096,
+    "CleanupMs": 206
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-guest-seven.txt",
+    "BodyMs": 925,
+    "CleanupMs": 226
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-command-c-mem.txt",
+    "BodyMs": 932,
+    "CleanupMs": 196
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-direct-seven.txt",
+    "BodyMs": 944,
+    "CleanupMs": 212
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Console-17-edit.txt",
+    "BodyMs": 4024,
+    "CleanupMs": 208
+  }
+]

@@ -1,0 +1,13 @@
+{
+  "result": "pass",
+  "test_sha256": "c214447858dfc8c7e5f411541e1fa4cf15897c9dd1ea0558e7f8d1f1c1f98841",
+  "outputs": {
+    "manifest.json": "a814327f08d3fa68b48f17a0fb72e8ba84324cf6f9672f0a074986584dd2eb46",
+    "observer.txt": "ff22ae94769632e02e93e4f729e6ce30d9d742e44d521d45f326db77ef8d375e",
+    "native.txt": "ac9f6d30cf7258372956d110ffc8c3f0597d27f12beebcd837db0ec2f9dda48d",
+    "lifetime.txt": "ab683ed8b84a7f87a7038d77b21cfaff9e548db8ba64304dfb1d5e8ecc944ae3",
+    "IDLPROBE.bin": "a541bc7d1859d36f2f2cbfc47fbeefaa68a9d2c667e462a4ee4b0b2b771dd759",
+    "CDLPROBE.bin": "f2de264ebb1602729a32619d8370223f64a18bd37cfc81c657ba80b18f6ccd44",
+    "result.txt": "5dd4ef1b1e449c31414e6362fa88cdab7f754e7ea5852b5457d9ec1269e8e9e7"
+  }
+}

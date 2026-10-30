@@ -1,0 +1,16 @@
+{
+  "source_pending": 195,
+  "rows": 195,
+  "unique": 195,
+  "missing": 0,
+  "extra": 0,
+  "tables": [
+    "dos-pending-host-dispositions.csv",
+    "write-pending-host-dispositions.csv",
+    "ddeml-mmsystem-host-dispositions.csv",
+    "ole-pending-host-dispositions.csv",
+    "user-toolhelp-regedit-host-dispositions.csv",
+    "remaining-guest-pending-host-dispositions.csv"
+  ],
+  "limitation": "selected host-input file role only; mixed ledger and T-wide runtime capabilities remain open"
+}

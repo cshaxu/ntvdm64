@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\host-ch-scope\\inventory.csv",
+    "Hash": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\mirror-diff-code-retention.csv",
+    "Hash": "9659E84A959903618660B34C665F36301A6CDF9B5801E0A6626FBEA534E4D61F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\host-ch-scope\\check-frozen-mirror-coverage.py",
+    "Hash": "6DE1252642E739475454DFE3532588CBA6BF3490C854F309E3AD1158684B221C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\host-ch-scope\\check-mirror-diffs.py",
+    "Hash": "6518142FBCD5DDC371C34358130BF6B2425EE5C2545B126FCB03D11B820D21D5"
+  }
+]

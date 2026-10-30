@@ -16,6 +16,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #include <stdio.h>
+
 #include <limits.h>
 
 /* DIVERGENCE(ADAPTER-WOW-027): original kernel WND/thread locks retain WW
@@ -970,60 +971,111 @@ BOOL WINAPI wow_window_words_detach_if(HWND window, wow_window_words_binding *ex
     return detach_matching(window, expected);
 }
 
+/* Existing native-return contract: an enrolled owner cannot be abandoned
+ * after irreversible native cleanup. Only published pending retirement may
+ * return FALSE for the existing collector; no caller-specific fallback. */
+static BOOL terminal_failed(wow_window_words_binding *binding)
+{
+    DWORD error = GetLastError();
+    BOOL enrolled;
+    AcquireSRWLockShared(&publication_lock);
+    enrolled = binding->enrolled;
+    ReleaseSRWLockShared(&publication_lock);
+    if (enrolled) wow_user_native_call_failed("terminal-execution", error);
+    SetLastError(error);
+    return FALSE;
+}
 BOOL WINAPI wow_window_words_terminal(HWND window, wow_window_words_binding *binding)
 {
     BOOL retired = TRUE, property_reference = FALSE, table_reference = FALSE;
+    BOOL task_started = FALSE, runtime_entered = FALSE, publication_held = FALSE;
+    wow_task_callback_scope task;
+    wow_user_runtime_thread *runtime = wow_user_runtime_current();
     WORD finalize_fnid;
+    BOOL needs_task;
     if (!binding) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
-    AcquireSRWLockExclusive(&publication_lock);
-    /* ADAPTER-WOW-063: createw.c marks WFDESTROYED before xxxFreeWindow's
-     * canonical final-control release. This is the existing terminal owner,
-     * not a generic message-based inference or a write to guest/native WND.
-     * Retained original getset.c uses this bit to allow private-word cleanup. */
-    if (binding->enrolled && binding->client_state)
-        SetWF(binding->client_state, WFDESTROYED);
-    finalize_fnid = binding->enrolled && binding->client_state ?
-        GETFNID(binding->client_state) : 0;
-    ReleaseSRWLockExclusive(&publication_lock);
-    /* Original xxxFreeWindow canonical-control fallback precedes identity
-     * withdrawal. No publication lock may span original LOCAL callbacks or
-     * combo parent notification. Nested destruction may retire this owner;
-     * recheck enrollment below after the scoped finalizer returns. */
-    if ((finalize_fnid == FNID_EDIT || finalize_fnid == FNID_COMBOBOX ||
-            finalize_fnid == FNID_LISTBOX || finalize_fnid == FNID_BUTTON) &&
-            !wow_control_finalize_bound(window))
-        wow_user_native_call_failed("finalize-original-control", GetLastError());
-    if (finalize_fnid == FNID_DIALOG && !wow_dialog_finalize_bound(window))
-        wow_user_native_call_failed("finalize-original-dialog", GetLastError());
-    /* Original finalization can reenter destruction and retire this binding.
-     * Never clean a replacement HWND generation's appearance state. No
-     * publication lock spans the DLL's resource release. */
-    AcquireSRWLockExclusive(&publication_lock);
-    if (!binding->enrolled && !binding->terminal_pending) {
+    /* Completed retirement is monotonic, even after task cleanup closes. */
+    AcquireSRWLockShared(&publication_lock);
+    retired = !binding->enrolled && !binding->terminal_pending;
+    /* Pure property metadata has no CCPU allocation or original resource. */
+    needs_task = binding->objects || binding->generation_backing ||
+        binding->retired_guest_backing || binding->client_state || binding->class_words;
+    ReleaseSRWLockShared(&publication_lock);
+    if (retired) return TRUE;
+    retired = TRUE;
+    if (needs_task && runtime && runtime->thread && runtime->thread->ptdb &&
+            (runtime->thread->TIF_flags & WOW_TASK_TIF_16BIT)) {
+        if (!wow_task_resource_cleanup_enter(&task)) return terminal_failed(binding);
+        task_started = TRUE;
+    }
+    __try {
+        if (runtime && !runtime->exclusive_held) {
+            if (!wow_user_runtime_enter(runtime)) { retired = FALSE; __leave; }
+            runtime_entered = TRUE;
+        }
+        AcquireSRWLockExclusive(&publication_lock);
+        publication_held = TRUE;
+        /* ADAPTER-WOW-063: original createw.c marks WFDESTROYED before its
+         * canonical-control finalizer, preserving private-word cleanup. */
+        if (binding->enrolled && binding->client_state)
+            SetWF(binding->client_state, WFDESTROYED);
+        finalize_fnid = binding->enrolled && binding->client_state ?
+            GETFNID(binding->client_state) : 0;
         ReleaseSRWLockExclusive(&publication_lock);
-        return TRUE; /* Nested destruction already consumed this owner. */
+        publication_held = FALSE;
+        if (runtime_entered) {
+            if (!wow_user_runtime_leave(runtime))
+                wow_user_native_call_failed("terminal-finalizer-unlock", GetLastError());
+            runtime_entered = FALSE;
+        }
+        /* Original finalizers retain their own nested task/borrow scopes.
+         * No acquired runtime/publication lock spans these callouts. The
+         * outer task scope restores the native caller even if they raise. */
+        if ((finalize_fnid == FNID_EDIT || finalize_fnid == FNID_COMBOBOX ||
+                finalize_fnid == FNID_LISTBOX || finalize_fnid == FNID_BUTTON) &&
+                !wow_control_finalize_bound(window))
+            wow_user_native_call_failed("finalize-original-control", GetLastError());
+        if (finalize_fnid == FNID_DIALOG && !wow_dialog_finalize_bound(window))
+            wow_user_native_call_failed("finalize-original-dialog", GetLastError());
+        if (runtime && !runtime->exclusive_held) {
+            if (!wow_user_runtime_enter(runtime)) { retired = FALSE; __leave; }
+            runtime_entered = TRUE;
+        }
+        AcquireSRWLockExclusive(&publication_lock);
+        publication_held = TRUE;
+        /* A nested finalizer may already have consumed this exact binding. */
+        if (!binding->enrolled && !binding->terminal_pending) __leave;
+        table_reference = binding->objects != NULL;
+        if (table_reference)
+            retired = wow_user_window_retire(binding->objects, window,
+                &binding->cleanup, &binding->retired_guest_backing);
+        if (binding->enrolled) {
+            if (GetPropW(window, property_name) == binding)
+                RemovePropW(window, property_name);
+            binding->enrolled = FALSE;
+            property_reference = TRUE;
+        }
+        binding->terminal_pending = !retired;
+        if (retired) {
+            binding->objects = NULL;
+            binding->cleanup.thread = NULL;
+            wow_class_words_window_association(binding->class_words, FALSE);
+        }
+        ReleaseSRWLockExclusive(&publication_lock);
+        publication_held = FALSE;
+        if (retired) release_reciprocal_generation_owner(binding);
+        if (retired && table_reference) wow_window_words_release(binding);
+        if (property_reference) wow_window_words_release(binding);
+    } __finally {
+        DWORD error = GetLastError();
+        if (publication_held) ReleaseSRWLockExclusive(&publication_lock);
+        if (runtime_entered && !wow_user_runtime_leave(runtime))
+            wow_user_native_call_failed("terminal-runtime-leave", GetLastError());
+        if (task_started && !wow_task_callback_leave(&task))
+            wow_user_native_call_failed("terminal-task-leave", GetLastError());
+        SetLastError(error);
     }
-    table_reference = binding->objects != NULL;
-    if (table_reference)
-        retired = wow_user_window_retire(binding->objects, window,
-            &binding->cleanup, &binding->retired_guest_backing);
-    if (binding->enrolled) {
-        if (GetPropW(window, property_name) == binding)
-            RemovePropW(window, property_name);
-        binding->enrolled = FALSE;
-        property_reference = TRUE;
-    }
-    binding->terminal_pending = !retired;
-    if (retired) {
-        binding->objects = NULL;
-        binding->cleanup.thread = NULL;
-        wow_class_words_window_association(binding->class_words, FALSE);
-    }
-    ReleaseSRWLockExclusive(&publication_lock);
-    if (retired) release_reciprocal_generation_owner(binding);
-    if (retired && table_reference) wow_window_words_release(binding);
-    if (property_reference) wow_window_words_release(binding);
-    return retired;
+    return retired ? TRUE : terminal_failed(binding);
 }
 
 LRESULT CALLBACK wow_window_terminal_observer(int code, WPARAM wp, LPARAM lp)
@@ -1083,6 +1135,7 @@ BOOL WINAPI wow_window_words_collect_retired(wow_user_object_table *objects)
 {
     ULONG i;
     BOOL complete = TRUE;
+    DWORD first_error = ERROR_SUCCESS;
     if (!objects) return TRUE;
     for (i = 1u; i <= objects->last_handle; ++i) {
         wow_window_words_binding *binding = NULL;
@@ -1098,10 +1151,15 @@ BOOL WINAPI wow_window_words_collect_retired(wow_user_object_table *objects)
         }
         ReleaseSRWLockShared(&publication_lock);
         if (binding) {
-            if (!wow_window_words_terminal(window, binding)) complete = FALSE;
+            /* ADAPTER-WOW-108: keep the first failure across later cleanup. */
+            if (!wow_window_words_terminal(window, binding) && complete) {
+                first_error = GetLastError();
+                complete = FALSE;
+            }
             wow_window_words_release(binding);
         }
     }
+    if (!complete) SetLastError(first_error);
     return complete;
 }
 

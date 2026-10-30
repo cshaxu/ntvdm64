@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "08BD1AB9AF970A9C345C231DE9EFE135985B327677E46B6C18B3BE1B6921E117"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-owner-isolated\\creation-lock.obj",
+    "Hash": "5EEEE6733E40D8DE54889982DBB85E5EA87A356487D12069405A190B76630500"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\scheduler-diagnostic\\wow_user_task_lifecycle.obj",
+    "Hash": "3F992341A9B6060615DAC3B3555DB2DFC7109E6F8B3632B0A49D7CB2FBA09418"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-scheduler\\provider.lib",
+    "Hash": "D541317EF8DF4BE336BA4A3C2700A96637B9684907748FF7D8165C4D8B6D6AB2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-scheduler\\fixture.obj",
+    "Hash": "39E0795A01D2300CCDF506DC137A4B99B57EA875CB1C1A05694D20504CF213AA"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-scheduler\\fixture.exe",
+    "Hash": "16C191E086DDC3F100266766D88C65553D879E6D1F6494CDFCAE973918FD939D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-scheduler\\fixture.map",
+    "Hash": "DEC3427042C6251042864D28355D89090DEEE98E26C9DE6A1E25BE8D25897AEC"
+  }
+]

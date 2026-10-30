@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 9016,
+  "started": "2026-10-29T05:52:44.2505860Z",
+  "arguments": "tests/observation/verify-ccpu-bit-fault.py --build-root build/t473-s11/bit-fault-evidence-v2 --fixture build/t473-s11/bit-fault-build/ccpu-bit-fault-test.exe",
+  "exit": 0,
+  "finished": "2026-10-29T05:52:44.7704988Z"
+}

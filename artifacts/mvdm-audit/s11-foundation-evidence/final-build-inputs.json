@@ -1,0 +1,40 @@
+{
+  "inputs": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+      "Hash": "FDB0E23A0C80318BFFD92A3BE4A51A79DBB12CB249C510A0F5A7912E9E9F8B1D"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+      "Hash": "638D1977B8F588ECA74A01F81D1F34372D1C67646DA3F0A697A00C92C59E5AE9"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "Hash": "45D1E266418E382136875506990C924537121AE245FB8E92F92A8157AB7D3C94"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_termination.c",
+      "Hash": "45A1E89F20F1ABFD6A60E4D0E03E8E2851088669A70D43106E9C7EC0F1D60E8B"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T404S5Wow32ProviderNinja.ps1",
+      "Hash": "CF85CCBDA06F24DBBBC30ED59147D2C131B6151E28598A4A5C49C739D3EBD3EF"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+      "Hash": "8197AA5C477CFF435AB7D12713A138F5CCB66F4F60F83A8D7D6199953935E3F1"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+      "Hash": "D43E0D25E0501CC701D5650616B133E45AFEDCBF80C5E1F3793DF7FC6B898A52"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+      "Hash": "B67C7BB76560C3A1E47FF1C9F33808458971E69E32E818E075F7FE76EF2C4D76"
+    }
+  ],
+  "workerBuild": "x86-other-result.json",
+  "scope": "Current source and producer hashes after x86-other and x64 serial builds; final staged image identity is recorded separately",
+  "nativeBuild": "x64-serial-result.json",
+  "manifest": "final-package-manifest.json"
+}

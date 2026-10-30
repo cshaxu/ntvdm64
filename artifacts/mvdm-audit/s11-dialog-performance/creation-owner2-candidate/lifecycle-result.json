@@ -1,0 +1,28 @@
+{
+  "result": "pass",
+  "pid": 26660,
+  "started": "2026-10-29T07:29:12.4232317Z",
+  "cases": [
+    {
+      "case": "graph-snapshot",
+      "pid": 29640,
+      "exit": 0
+    },
+    {
+      "case": "window-borrow",
+      "pid": 11652,
+      "exit": 0
+    },
+    {
+      "case": "native-nested",
+      "pid": 25700,
+      "exit": 0
+    },
+    {
+      "case": "native-creation",
+      "pid": 4248,
+      "exit": 0
+    }
+  ],
+  "finished": "2026-10-29T07:30:20.3104208Z"
+}

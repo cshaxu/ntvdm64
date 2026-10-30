@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-menu-resource\\fixture.exe",
+    "Hash": "4F06BC3275025EF4C5EA6CDC7A34698AB2F0B428D410DB61C26B1F4B5AC87472"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "32C4C7F4DF253D5213096A270F5741BE3A31D627AB3BD3F4EED8B7E44DB6123C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_menu_client_bindings.c",
+    "Hash": "86E312B5DC15A01AEFC2F208C1B9D19CF40C26B1D1EBAF6AC362B949577B64B0"
+  }
+]

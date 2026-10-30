@@ -154,9 +154,9 @@ BOOL WINAPI InvalidateConsoleDIBits(HANDLE output, PSMALL_RECT rect)
      * already selected and populated the cells. */
     text_result = present_text_invalidation(output, rect);
     if (text_result > 0) {
-        /* A bound app surface may also repaint the copied text plane after an
-         * Alt+Enter transfer.  Its absence must not turn a successful Console
-         * presentation into an original-call failure. */
+        /* A bound app surface may also repaint the copied text plane. Its
+         * absence must not turn a successful Console presentation into an
+         * original-call failure. */
         (void)console_video_event(SESSION_VIDEO_EVENT_INVALIDATE, output,
             NULL, rect, 0u);
         return TRUE;
@@ -277,39 +277,10 @@ HANDLE GetConsoleInputWaitHandle(VOID)
     return ntvdm_console_input_wait_handle();
 }
 
-static volatile LONG mvdm_console_alt_enter_pending;
-
-/* DIVERGENCE(ADAPTER-WIN32-047): the NT4 Console Server handled WM_SYSKEY
- * Alt+Enter before it reached the VDM input buffer.  Modern public Console
- * returns records after that retired server stage.  Consume only the paired
- * reserved host shortcut here; it neither toggles a display nor manufactures
- * a guest input record. */
-static BOOL consume_console_alt_enter(PINPUT_RECORD record)
-{
-    KEY_EVENT_RECORD *key;
-
-    if (record->EventType != KEY_EVENT) return FALSE;
-    key = &record->Event.KeyEvent;
-    if (key->wVirtualKeyCode != VK_RETURN) return FALSE;
-    if (key->bKeyDown &&
-        (key->dwControlKeyState & (LEFT_ALT_PRESSED | RIGHT_ALT_PRESSED)) != 0u &&
-        (key->dwControlKeyState & (LEFT_CTRL_PRESSED | RIGHT_CTRL_PRESSED)) == 0u) {
-        InterlockedExchange(&mvdm_console_alt_enter_pending, 1);
-        return TRUE;
-    }
-    if (!key->bKeyDown &&
-        InterlockedExchangeAdd(&mvdm_console_alt_enter_pending, 0) != 0) {
-        InterlockedExchange(&mvdm_console_alt_enter_pending, 0);
-        return TRUE;
-    }
-    return FALSE;
-}
-
 BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                 LPDWORD read, USHORT flags)
 {
-    DWORD available, index, kept;
-    INPUT_RECORD raw_record;
+    DWORD available;
     if ((flags & ~CONSOLE_READ_VALID) != 0u) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     if (count == 0u)
         return (flags & CONSOLE_READ_NOREMOVE) != 0u ?
@@ -317,28 +288,15 @@ BOOL WINAPI ReadConsoleInputExW(HANDLE input, PINPUT_RECORD records, DWORD count
             ReadConsoleInputW(input, records, count, read);
     if (!records || !read) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     *read = 0u;
-    for (;;) {
-        if ((flags & (CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE)) != 0u) {
-            if (!PeekConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
-            if (available == 0u) return TRUE;
-            /* Preserve the existing non-removing shortcut contract. Normal
-             * consuming reads below pass the full caller capacity through. */
-            if ((flags & CONSOLE_READ_NOREMOVE) != 0u) {
-                if (!consume_console_alt_enter(&raw_record)) {
-                    records[0] = raw_record;
-                    *read = 1u;
-                    return TRUE;
-                }
-                if (!ReadConsoleInputW(input, &raw_record, 1u, &available)) return FALSE;
-                continue;
-            }
+    if ((flags & (CONSOLE_READ_NOWAIT | CONSOLE_READ_NOREMOVE)) != 0u) {
+        if (!PeekConsoleInputW(input, records, 1u, &available)) return FALSE;
+        if (available == 0u) return TRUE;
+        if ((flags & CONSOLE_READ_NOREMOVE) != 0u) {
+            *read = available;
+            return TRUE;
         }
-        if (!ReadConsoleInputW(input, records, count, &available)) return FALSE;
-        for (index = kept = 0u; index < available; ++index)
-            if (!consume_console_alt_enter(&records[index]))
-                records[kept++] = records[index];
-        if (kept) { *read = kept; return TRUE; }
     }
+    return ReadConsoleInputW(input, records, count, read);
 }
 
 /* DIVERGENCE(MVDM-HOST-DIV-211): current Console/RDP may report a virtual

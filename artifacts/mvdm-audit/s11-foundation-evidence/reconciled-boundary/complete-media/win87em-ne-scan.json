@@ -1,0 +1,28 @@
+{
+  "roots": [
+    "build\\t473-s11\\reconciled-complete-media",
+    "O:\\w31"
+  ],
+  "ne_counts": {
+    "build\\t473-s11\\reconciled-complete-media": 39,
+    "O:\\w31": 56
+  },
+  "old_versions": [
+    {
+      "path": "build\\t473-s11\\reconciled-complete-media\\system32\\MOUSE101.DRV",
+      "version": "0x100",
+      "imports_win87em": false,
+      "sha256": "dc01039b0fc2b7e9244f31a42a4aaa9ed10613291557b4b6e2695ece1ba5666e"
+    }
+  ],
+  "win87em_imports": [
+    {
+      "path": "O:\\w31\\CALC.EXE",
+      "version": "0x30a",
+      "imports_win87em": true,
+      "sha256": "09b5e717589598b9df943a690a78b5f5f0a586468cf08beb8ced58623c49bcc7"
+    }
+  ],
+  "scan_errors": [],
+  "scope": "read-only NE-header scan; dynamic imports not covered"
+}

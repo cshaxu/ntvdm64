@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "pid": 29616,
+  "started": "2026-10-29T05:30:43.5700171Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full\\serial.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full/serial.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full/serial.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:32:59.2177895Z"
+}

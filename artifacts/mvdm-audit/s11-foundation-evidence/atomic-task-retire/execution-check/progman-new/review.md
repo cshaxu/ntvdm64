@@ -1,0 +1,3 @@
+# Program Manager New dialog witness
+
+The atomic-execution-retire candidate ran an isolated unchanged O:\w31\PROGMAN.EXE (SHA-256 81AB580D6FB9A22D727A58C77125DEB4825186C6656F7368375AD429463D67E4) with copies of its group files and a test-specific INI. The PID-bound probe selected the actual Program Manager window, opened Program Group Properties through New, closed it, verified parent response, and observed launcher completion. Show time was 1500 ms and close/parent recovery 1281 ms. The latter is still visibly slow; this is one observation, not a paired benchmark, proof of full recovery, or Full acceptance. No guest image was rebuilt or changed.

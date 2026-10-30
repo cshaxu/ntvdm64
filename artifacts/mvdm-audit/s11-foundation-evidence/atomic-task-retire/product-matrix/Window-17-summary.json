@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-empty.txt",
+    "BodyMs": 1710,
+    "CleanupMs": 230
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-native-zero.txt",
+    "BodyMs": 2362,
+    "CleanupMs": 245
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-missing.txt",
+    "BodyMs": 2864,
+    "CleanupMs": 229
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-native-seven.txt",
+    "BodyMs": 1141,
+    "CleanupMs": 220
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-native-streams.txt",
+    "BodyMs": 1128,
+    "CleanupMs": 226
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-native-eof.txt",
+    "BodyMs": 1132,
+    "CleanupMs": 212
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-mem.txt",
+    "BodyMs": 2172,
+    "CleanupMs": 260
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-nested-empty.txt",
+    "BodyMs": 2718,
+    "CleanupMs": 204
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-nested-mem.txt",
+    "BodyMs": 5043,
+    "CleanupMs": 217
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-mem-repeat.txt",
+    "BodyMs": 2479,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-direct-mem.txt",
+    "BodyMs": 869,
+    "CleanupMs": 208
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-command-c.txt",
+    "BodyMs": 921,
+    "CleanupMs": 211
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-command-c-seven.txt",
+    "BodyMs": 1106,
+    "CleanupMs": 211
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-guest-seven.txt",
+    "BodyMs": 914,
+    "CleanupMs": 216
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-command-c-mem.txt",
+    "BodyMs": 895,
+    "CleanupMs": 220
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-direct-seven.txt",
+    "BodyMs": 918,
+    "CleanupMs": 239
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-retire-product-matrix\\Window-17-edit.txt",
+    "BodyMs": 3455,
+    "CleanupMs": 241
+  }
+]

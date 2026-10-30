@@ -1,0 +1,18 @@
+{
+  "previous_sha256": "A4D441B5B683715A9649E0031AE4AFC640CE8458FE9A188B2792BAEBC2EBB65B",
+  "current_sha256": "EDE02E6EFB19702D529746F6D6DA1DDE0FB4104BB5DB3309AC59A9D33DDC75A2",
+  "previous_size": 2097664,
+  "current_size": 2097664,
+  "changed_offsets": [
+    "0x130",
+    "0x131",
+    "0x132",
+    "0x19d07c",
+    "0x19d07d",
+    "0x19d07e"
+  ],
+  "coff_timestamp_offset": "0x130",
+  "debug_directory_timestamp_offset": "0x19d07c",
+  "all_differences_in_timestamp_fields": true,
+  "limits": "Byte comparison only; does not identify packages or replace exact-package gates."
+}

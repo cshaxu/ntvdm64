@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-graph-diagnostic\\wow_user_object_bindings.c",
+    "Hash": "66A08171A0306B7C320BFE295DCA87644055BA0F2AB30E10B4534BEA214F67DD"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-graph-diagnostic\\wow_user_object_bindings.obj",
+    "Hash": "94CD7EFC42902E7D3B5090EAD1AE80AEA7F9C3455B1E757EA48FCA14DD6EBDF1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-graph-diagnostic\\wow32.dll",
+    "Hash": "8E02F9DFC32BA6EB3EA58BA7A394B356EE4775F839A19DC8DDEB2484833B55B6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t459-s2\\common-dialog-guest-r2\\CDLPROBE.EXE",
+    "Hash": "406D84F9E4EA04CD269045B354E95C47A342C986E0400A2C4F6A58DC818D3A02"
+  }
+]

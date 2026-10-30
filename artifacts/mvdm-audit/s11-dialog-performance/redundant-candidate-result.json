@@ -1,0 +1,8 @@
+{
+  "result": "fail",
+  "pid": 14648,
+  "started": "2026-10-29T06:25:39.4070432Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-redundant-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/borrow-redundant-profile-observation -VisibleDesktop -Rounds 4 -NoTrace",
+  "exit": 1,
+  "finished": "2026-10-29T06:26:14.2336222Z"
+}

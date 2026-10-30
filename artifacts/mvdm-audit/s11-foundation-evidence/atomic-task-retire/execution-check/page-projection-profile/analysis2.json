@@ -1,0 +1,71 @@
+{
+  "phases": [
+    {
+      "round": 1,
+      "phase": "open",
+      "wall_ms": 3125,
+      "covered_ms": 3016,
+      "calls": 256,
+      "total_ms": 322.7,
+      "validation_ms": 35.7,
+      "preparation_ms": 78.6,
+      "replacement_ms": 144.5
+    },
+    {
+      "round": 1,
+      "phase": "close",
+      "wall_ms": 2516,
+      "covered_ms": 1391,
+      "calls": 128,
+      "total_ms": 187.3,
+      "validation_ms": 16.9,
+      "preparation_ms": 48.4,
+      "replacement_ms": 90.2
+    },
+    {
+      "round": 2,
+      "phase": "open",
+      "wall_ms": 2235,
+      "covered_ms": 2047,
+      "calls": 192,
+      "total_ms": 266.9,
+      "validation_ms": 25.9,
+      "preparation_ms": 68.4,
+      "replacement_ms": 126.6
+    },
+    {
+      "round": 2,
+      "phase": "close",
+      "wall_ms": 2390,
+      "covered_ms": 1359,
+      "calls": 128,
+      "total_ms": 182.8,
+      "validation_ms": 19.4,
+      "preparation_ms": 44.4,
+      "replacement_ms": 84.9
+    },
+    {
+      "round": 3,
+      "phase": "open",
+      "wall_ms": 2187,
+      "covered_ms": 2000,
+      "calls": 192,
+      "total_ms": 260.4,
+      "validation_ms": 28.4,
+      "preparation_ms": 63.7,
+      "replacement_ms": 120.5
+    },
+    {
+      "round": 3,
+      "phase": "close",
+      "wall_ms": 2422,
+      "covered_ms": 1359,
+      "calls": 128,
+      "total_ms": 181.5,
+      "validation_ms": 19.8,
+      "preparation_ms": 45.3,
+      "replacement_ms": 83.0
+    }
+  ],
+  "limitations": "64-call cumulative counter deltas omit edges; inclusive timings may include nested calls and instrumentation; preparation excludes cleanup; all results diagnostic."
+}

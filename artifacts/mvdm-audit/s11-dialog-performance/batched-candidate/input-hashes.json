@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-batched-candidate\\wow_user_borrow_scope.obj",
+    "Hash": "EEFFF70F9C98A523014026623F04E8DE5A7C31A10C536ABD672407E798F061B6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-batched-candidate\\wow_user_borrow_scope.c",
+    "Hash": "C1FB9DCBAF1B51B51BD92BCFAD6D4365C6515806082C1CDEC744F26759EC6E63"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\batched-candidate-fixture.ps1",
+    "Hash": "044EF0D0123F8D2977CE0A92BF1F25542CD89EAD8D53D23ECC4EA4EF61144EF2"
+  }
+]

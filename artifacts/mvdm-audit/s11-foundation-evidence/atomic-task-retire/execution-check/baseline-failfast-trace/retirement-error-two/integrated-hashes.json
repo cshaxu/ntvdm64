@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated\\package\\product-system32-manifest.json",
+    "Hash": "395748FDB88821A637AFF27FC8AFE06F531375D449498C2375CC42BBEDD728F2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-final-graph-elevated\\fixture.exe",
+    "Hash": "A3BDD8828B57810231EE87A77AEB368BC0DF0C41151A23575A265CB2B6D6F591"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+    "Hash": "04DB4AC5376F69811DC40A103AB3C8ABF2781A9D1AC7C894D5977B074FC14CA1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "78CB9AB23232C7F1823906BE8EE73F4D8608B98A0D805F6CE9915B34CEB7031E"
+  }
+]

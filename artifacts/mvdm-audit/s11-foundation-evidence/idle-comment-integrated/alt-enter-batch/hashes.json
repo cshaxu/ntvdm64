@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\win32\\console_compat.c",
+    "Hash": "03174DC3430F4FACA0746C5BF535F62B11DD9C0EEABAB7D99274B847EA828F2F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\app\\console_input_batch_test.c",
+    "Hash": "42E9C091339A2DA28C47B692D99E3CBF0307707239D3F11FBC435679751FCD05"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-alt-enter-batch\\console-input-batch.exe",
+    "Hash": "22D30C087C8966878DFEE1E12E434BB666D46DFFC32113430DC250BB79E0B645"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "181232BF842294B776E6677C6FFEB80E123A2B23ECFDCF4F43AFF9C69E3241D9"
+  }
+]

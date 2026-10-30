@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-baseline\\fixture.exe",
+    "Hash": "29DA3ECEE8519881EE66446F34BE5180A24CA6262F22F356045D626A9EC419EB"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-baseline\\fixture.map",
+    "Hash": "1603CE51A3E72BE161D2AFFC936D0B1694EC97B9993D70CE46505B14B7860138"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-lifecycle-graph-snapshot\\provider.lib",
+    "Hash": "31FB80715EE7F0AC2FC777697D99D4FA479CE9C18AAA6ACE370152F84F10B59C"
+  }
+]

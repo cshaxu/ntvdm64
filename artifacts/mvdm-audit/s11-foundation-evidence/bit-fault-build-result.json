@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "pid": 15864,
+  "started": "2026-10-29T05:52:26.7441761Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\..\\bit-fault-build\\build.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/bit-fault.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/bit-fault.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:52:33.7940195Z"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "3E37D4A940D9AC31A0D7383A6C2225B842858E16F083509123634DE487765264",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\cvidc-serial\\run.cmd"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "99C387615A91A1107FC8D6FDA60F799BE6E47C5CB609F40F124E4CB1D2B263A7",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\cvidc-serial\\stdout.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\cvidc-serial\\stderr.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A7CEA1D619E7EF55F39369C3CC677DAA63BD197DBF4DBBBD887D9303DC840F21",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\cvidc-vector-binding-fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B40C172F1FF7597ED13A87496D2D639C45EF3D181BDC959C393A3C95E0C04F46",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\cvidc-vector-binding-fixture.exe.map"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5EBEE9014915207ACDC2A9A95EEA413805ED4D1125A8A489BB7DAB97469F109D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\cvidc\\ev_glue.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "6049E67EB804DBA2BD59E3EF7563B1FA0B3979B52EADFC9745745F5E1E000185",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\cvidc_vector_binding_fixture.c"
+  }
+]

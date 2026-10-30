@@ -1,0 +1,98 @@
+diff --git a/src/mvdm/softpc.new/base/ccpu386/c_oprnd.h b/src/mvdm/softpc.new/base/ccpu386/c_oprnd.h
+index 191b07629..3b5a8f670 100644
+--- a/src/mvdm/softpc.new/base/ccpu386/c_oprnd.h
++++ b/src/mvdm/softpc.new/base/ccpu386/c_oprnd.h
+@@ -199,6 +199,15 @@ operand)
+    immed |= (ULONG)GET_INST_BYTE(p) << 8;			\
+    ops[ARG].mlt[1] = immed;
+ 
++/* MVDM-HOST-DIV-471: NPX buffers can cross a page even when their first
++ * word does not. Validate the final byte with the original access rights,
++ * then use the virtual byte path for the non-contiguous physical pages. */
++#define D_NPX_PAGES(ARG, PAGE, SIZE)				\
++      if (GET_PG() && ((m_la[ARG] & 0xfff) + (SIZE) > 0x1000)) { \
++         (VOID)usr_chk_byte(m_la[ARG] + (SIZE) - 1, PAGE);	\
++         m_pa[ARG] = NO_PHYSICAL_MAPPING;			\
++      }
++
+ #define D_E08(ARG, TYPE, PAGE)					\
+       m_isreg[ARG] = FALSE;					\
+       d_mem(modRM, &p, segment_override,			\
+@@ -206,7 +215,8 @@ operand)
+       TYPE							\
+       limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)8);	\
+       m_la[ARG] = GET_SR_BASE(m_seg[ARG]) + m_off[ARG];		\
+-      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);
++      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
++      D_NPX_PAGES(ARG, PAGE, 8)
+ 
+ #define F_E08(ARG)						\
+       vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x08);
+@@ -221,7 +231,8 @@ operand)
+       TYPE							\
+       limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)10);	\
+       m_la[ARG] = GET_SR_BASE(m_seg[ARG]) + m_off[ARG];		\
+-      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);
++      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
++      D_NPX_PAGES(ARG, PAGE, 10)
+ 
+ #define F_E0a(ARG)						\
+       vir_read_bytes(&ops[ARG].npxbuff[0], m_la[ARG], m_pa[ARG], 0x0a);
+@@ -240,7 +251,8 @@ operand)
+       limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)14);	\
+       }								\
+       m_la[ARG] = GET_SR_BASE(m_seg[ARG]) + m_off[ARG];		\
+-      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);
++      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
++      D_NPX_PAGES(ARG, PAGE, (NPX_ADDRESS_SIZE_32 ? 28 : 14))
+ 
+ #define F_E0e(ARG)						\
+       if (NPX_ADDRESS_SIZE_32) {				\
+@@ -262,12 +274,13 @@ operand)
+ 	    &m_seg[ARG], &m_off[ARG]);				\
+       TYPE							\
+       if (NPX_ADDRESS_SIZE_32) {                                \
+-      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)94);	\
++      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)108);	\
+       } else {							\
+-      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)106);	\
++      limit_check(m_seg[ARG], m_off[ARG], (INT)1, (INT)94);	\
+       }								\
+       m_la[ARG] = GET_SR_BASE(m_seg[ARG]) + m_off[ARG];		\
+-      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);
++      m_pa[ARG] = usr_chk_word(m_la[ARG], PAGE);		\
++      D_NPX_PAGES(ARG, PAGE, (NPX_ADDRESS_SIZE_32 ? 108 : 94))
+ 
+ #define F_E5e(ARG)						\
+       if (NPX_ADDRESS_SIZE_32) {				\
+@@ -1065,6 +1078,8 @@ operand)
+  * See the file header for a description of why these are required.
+  */
+ 
++/* MVDM-HOST-DIV-469: register bit indexes are signed element displacements;
++ * address_add applies the current address-size wrap before limit checking. */
+ #define BT_OPSw(TYPE, PAGE) \
+ 	if ( GET_MODE(modRM) == 3 ) {				\
+ 		/*						\
+@@ -1082,7 +1097,9 @@ operand)
+ 		m_isreg[0] = FALSE;				\
+ 		d_mem(modRM, &p, segment_override,		\
+ 			&m_seg[0], &m_off[0]);			\
+-		m_off[0] += (ops[1].sng >> 3) & ~1;		\
++		m_off[0] = address_add(m_off[0],		\
++		    (IS32)(((ops[1].sng & 0xffffu) >> 4) * 2u) - \
++		    ((ops[1].sng & 0x8000u) ? 8192 : 0));	\
+ 		TYPE						\
+ 		limit_check(m_seg[0], m_off[0], (INT)1, (INT)2);	\
+ 		m_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];	\
+@@ -1107,7 +1124,9 @@ operand)
+ 		m_isreg[0] = FALSE;				\
+ 		d_mem(modRM, &p, segment_override,		\
+ 			&m_seg[0], &m_off[0]);			\
+-		m_off[0] += (ops[1].sng >> 3) & ~3;		\
++		m_off[0] = address_add(m_off[0],		\
++		    (IS32)((ops[1].sng >> 5) * 4u) -		\
++		    ((ops[1].sng & 0x80000000u) ? 536870912 : 0)); \
+ 		TYPE						\
+ 		limit_check(m_seg[0], m_off[0], (INT)1, (INT)4);	\
+ 		m_la[0] = GET_SR_BASE(m_seg[0]) + m_off[0];	\

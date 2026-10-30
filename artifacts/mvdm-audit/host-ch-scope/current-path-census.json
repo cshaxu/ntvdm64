@@ -1,0 +1,156 @@
+{
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "inventory_unique": 1815,
+  "current_paths": 1794,
+  "unlisted": [],
+  "absent": [
+    {
+      "path": "v86/monitor/i386/int.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/monitor.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/monitorp.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/proflib.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/sas.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/spcstubs.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/monitor/i386/thread.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "host-candidate",
+      "scope_limit": "host C/H candidate; selected runtime and ownership remain to verify"
+    },
+    {
+      "path": "v86/scaffold/i386/fakebop.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/fakeinit.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/fakekbd.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/fakevid.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/fun.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/softpc.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/stubs.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/x86.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xbios.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xbiosdsk.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xbioskbd.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xbiosvid.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xguest.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    },
+    {
+      "path": "v86/scaffold/i386/xwincon.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "tool-or-scaffold-candidate",
+      "scope_limit": "standalone tool, debugger extension or scaffold; verify per-file ownership"
+    }
+  ],
+  "absent_nonexcluded": []
+}

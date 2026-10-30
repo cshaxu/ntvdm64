@@ -1,0 +1,268 @@
+{
+  "count": 15,
+  "rows": [
+    {
+      "path": "wow16/commdlg/dlgs.c",
+      "current_sha256": "799C8A374DB08EEF2876C730BA8657D114BCBA31476AD94B8FDB4D6CD75E0D07",
+      "original_sha256": "799C8A374DB08EEF2876C730BA8657D114BCBA31476AD94B8FDB4D6CD75E0D07",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/commdlg/font.c",
+      "current_sha256": "8768D16B2F967B66ACBFA476FD486A85D49601C21008D818675BAF8B237CBAFA",
+      "original_sha256": "8768D16B2F967B66ACBFA476FD486A85D49601C21008D818675BAF8B237CBAFA",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/commdlg/parse.c",
+      "current_sha256": "530B214D2067A1FE606F43ADA94632860A8883F0D74442882BD5595EC725DB28",
+      "original_sha256": "530B214D2067A1FE606F43ADA94632860A8883F0D74442882BD5595EC725DB28",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/killwow/killwow.c",
+      "current_sha256": "EC2D3900269A912165B9072A8008046674D835D35118A58DB635A92F8F71D685",
+      "original_sha256": "EC2D3900269A912165B9072A8008046674D835D35118A58DB635A92F8F71D685",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/mciole/mciole.c",
+      "current_sha256": "0D19D3128FB5591E9FCF79165C42A1F9A6D762D5C91876765F8F5F321E5882C6",
+      "original_sha256": "0D19D3128FB5591E9FCF79165C42A1F9A6D762D5C91876765F8F5F321E5882C6",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.c",
+      "current_sha256": "39B3824C07C736A2EAE40BFF6EC783FEA3817C2A2EB6E2A4E71C3E11EC442425",
+      "original_sha256": "39B3824C07C736A2EAE40BFF6EC783FEA3817C2A2EB6E2A4E71C3E11EC442425",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/sherlock/disasm.c",
+      "current_sha256": "59848E5F5BF3EBEB8C2A4C9919464A129D95D9F1E6D5D6BFF7CCC9989A2399B0",
+      "original_sha256": "59848E5F5BF3EBEB8C2A4C9919464A129D95D9F1E6D5D6BFF7CCC9989A2399B0",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/sherlock/drwatson.c",
+      "current_sha256": "CE1F673F515C97C66B971659DBA3ABB3EDF20ABBF2A47B4C0CF0D4C6B5C28D6E",
+      "original_sha256": "CE1F673F515C97C66B971659DBA3ABB3EDF20ABBF2A47B4C0CF0D4C6B5C28D6E",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/sherlock/error.c",
+      "current_sha256": "36F584C497F42E03A87AC56B25F459D35BF1EC6690D2030617E8C583E20D7509",
+      "original_sha256": "36F584C497F42E03A87AC56B25F459D35BF1EC6690D2030617E8C583E20D7509",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/sherlock/getsym.c",
+      "current_sha256": "4B665DA0B3DF8BCA5F0FC8FC7FE8F7FED36098EE922740C1C390B133B410AA21",
+      "original_sha256": "4B665DA0B3DF8BCA5F0FC8FC7FE8F7FED36098EE922740C1C390B133B410AA21",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/wfwnet/lfn.c",
+      "current_sha256": "AD3C9F738F9EF58C40A0EB0AA6A4981951E1819984045FEF4907F952FBB0B0C2",
+      "original_sha256": "AD3C9F738F9EF58C40A0EB0AA6A4981951E1819984045FEF4907F952FBB0B0C2",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/wfwnet/misc.c",
+      "current_sha256": "140D4A6D35E10CBBB6341DF388D2167B9A1D2CC71C7F9E7BE5184BBD1E4A1311",
+      "original_sha256": "140D4A6D35E10CBBB6341DF388D2167B9A1D2CC71C7F9E7BE5184BBD1E4A1311",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/wfwnet/print.c",
+      "current_sha256": "52B122DC693E86CA34A4676CF8331F0C1392B68BE6BF4A2179D41F66390CD446",
+      "original_sha256": "52B122DC693E86CA34A4676CF8331F0C1392B68BE6BF4A2179D41F66390CD446",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/wfwnet/to32.c",
+      "current_sha256": "27877B1F92AA064A17260C519ED2A92B4E4A016BEB7C29690E11906A485E04A0",
+      "original_sha256": "27877B1F92AA064A17260C519ED2A92B4E4A016BEB7C29690E11906A485E04A0",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.c",
+      "current_sha256": "2E46BB1D5B9C3791A70A21B0FC9B053B63748814988665FCABE13792543E6942",
+      "original_sha256": "2E46BB1D5B9C3791A70A21B0FC9B053B63748814988665FCABE13792543E6942",
+      "identical": true,
+      "object_mentioned": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    }
+  ],
+  "makefiles": {
+    "src\\mvdm\\wow16\\commdlg\\makefile": "118C94655FAA068FD0027DE8BBFEF0BEBEC53A8D26B213268D80BC86981A5D36",
+    "src\\mvdm\\wow16\\killwow\\makefile": "6F81DAA8F5E5B79E69E473A7C023AE65EDBD3BF822E473FB4850935E1DE29D91",
+    "src\\mvdm\\wow16\\mciole\\makefile": "7B7D5350B85A364B0C21B9AB370A33DFA5C792FA88CD411CC686D03269F4EDBA",
+    "src\\mvdm\\wow16\\rasapi16\\makefile": "31404923FB8B2BEA3811701BC650D682D4390EE16738AA0EC58418C7D2E484EB",
+    "src\\mvdm\\wow16\\sherlock\\makefile": "D4E0A78455E5C688D42A7D96E8C012A39074F18A3411FA23A917809A8B7199D7",
+    "src\\mvdm\\wow16\\wfwnet\\makefile": "F968A26DB06E9E2C3619A201E016A0AFB14C0A5AC19A2A8C8221831A888C4B4C"
+  }
+}

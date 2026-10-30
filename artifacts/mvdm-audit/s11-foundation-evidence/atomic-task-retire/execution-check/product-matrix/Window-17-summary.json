@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-empty.txt",
+    "BodyMs": 1716,
+    "CleanupMs": 237
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-native-zero.txt",
+    "BodyMs": 2267,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-missing.txt",
+    "BodyMs": 2964,
+    "CleanupMs": 208
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-native-seven.txt",
+    "BodyMs": 1034,
+    "CleanupMs": 202
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-native-streams.txt",
+    "BodyMs": 1050,
+    "CleanupMs": 198
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-native-eof.txt",
+    "BodyMs": 1070,
+    "CleanupMs": 210
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-mem.txt",
+    "BodyMs": 2006,
+    "CleanupMs": 214
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-nested-empty.txt",
+    "BodyMs": 2622,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-nested-mem.txt",
+    "BodyMs": 5172,
+    "CleanupMs": 230
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-mem-repeat.txt",
+    "BodyMs": 2577,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-direct-mem.txt",
+    "BodyMs": 852,
+    "CleanupMs": 212
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-command-c.txt",
+    "BodyMs": 869,
+    "CleanupMs": 198
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-command-c-seven.txt",
+    "BodyMs": 1038,
+    "CleanupMs": 224
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-guest-seven.txt",
+    "BodyMs": 855,
+    "CleanupMs": 234
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-command-c-mem.txt",
+    "BodyMs": 915,
+    "CleanupMs": 228
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-direct-seven.txt",
+    "BodyMs": 929,
+    "CleanupMs": 210
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\atomic-execution-retire-product-matrix\\Window-17-edit.txt",
+    "BodyMs": 3461,
+    "CleanupMs": 206
+  }
+]

@@ -1,0 +1,93 @@
+{
+  "runs": [
+    {
+      "case": "native-creation",
+      "result": "pass",
+      "inputs": [
+        {
+          "path": "build\\t473-s11\\idle-shared-native-creation\\fixture.exe",
+          "sha256": "d6a7c9888eae2e197501e5e51742f36ffd30940aaf280d1e388750491cf723f5"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-native-creation\\fixture.map",
+          "sha256": "2957c8f0d58d5eea2c78a28c9d28a1690cb667747d170a182e976fea959e8b2b"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-native-creation\\stderr.txt",
+          "sha256": "ed702fdee9ba424fcaf838ff2ec7b1501788fe1a1cd7361a771a08d042bdb3a2"
+        },
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_task_lifecycle.obj",
+          "sha256": "058e337291e6570ffe7a6c9764b0bd8737245126102697c680e187a305d44490"
+        }
+      ]
+    },
+    {
+      "case": "graph-snapshot",
+      "result": "pass",
+      "inputs": [
+        {
+          "path": "build\\t473-s11\\idle-shared-graph-snapshot\\fixture.exe",
+          "sha256": "bfb468583e1609785a50a54a73a4b2d26c07938edc0ffc29fc784b26a3d60007"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-graph-snapshot\\fixture.map",
+          "sha256": "74fa8bf57c3f474eaf83a453acd67169678ef9ee4f3b3fce207b3834525f4297"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-graph-snapshot\\stderr.txt",
+          "sha256": "9aae127168fbdeda61ab11a897c07f0cd6b837884028c120c1f789b6a1cb0d27"
+        },
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_task_lifecycle.obj",
+          "sha256": "058e337291e6570ffe7a6c9764b0bd8737245126102697c680e187a305d44490"
+        }
+      ]
+    },
+    {
+      "case": "window-reclaim",
+      "result": "pass",
+      "inputs": [
+        {
+          "path": "build\\t473-s11\\idle-shared-window-reclaim\\fixture.exe",
+          "sha256": "f9f8e0a0d9ca67daa80bf8e54e1fd5feb97f32c238a1a6a98a0795853fb04e71"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-window-reclaim\\fixture.map",
+          "sha256": "92a4d2096d498cef5c00042677f0443a1e905a4e472bf46e6a975584506d91d2"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-window-reclaim\\stderr.txt",
+          "sha256": "324b1dcc6e8fd8fc669e42598c0fdc34163c737812db6e4487f5c2ac862ca654"
+        },
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_task_lifecycle.obj",
+          "sha256": "058e337291e6570ffe7a6c9764b0bd8737245126102697c680e187a305d44490"
+        }
+      ]
+    },
+    {
+      "case": "native-nested",
+      "result": "pass",
+      "inputs": [
+        {
+          "path": "build\\t473-s11\\idle-shared-native-nested\\fixture.exe",
+          "sha256": "60b92417414a98dd62273c31fcf68a9aebf63a4ce451e59ce80d5b9f200f2cbf"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-native-nested\\fixture.map",
+          "sha256": "f15cece572fdeebd5cedb98eafe145e54d68399d5919a330d2d53ddbb3812fdd"
+        },
+        {
+          "path": "build\\t473-s11\\idle-shared-native-nested\\stderr.txt",
+          "sha256": "d1b0b3c1036263062cdf2192ec5a4e119002eeee65e168cbb670738333d2c96d"
+        },
+        {
+          "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_task_lifecycle.obj",
+          "sha256": "058e337291e6570ffe7a6c9764b0bd8737245126102697c680e187a305d44490"
+        }
+      ]
+    }
+  ],
+  "scope": "selected CCPU/provider fixtures with controlled guest callbacks, not a complete real guest or Full test"
+}

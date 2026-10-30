@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "fixture_sha256": "402F59BBA3485E6043A8FDE27019C047822DE96AE5680C42960179BC1DA86979",
+  "map_sha256": "14E82B53F46BD59D1C928055A985D197C0852385C7D8CFD2F98506C6D3592802",
+  "scope": "controlled selected-CCPU paging cases; guest exception delivery remains separate",
+  "cases": [
+    {
+      "case": 0,
+      "exit": 0,
+      "output": "bit-fault case=0 vector=-1 error=0 cf=1 cr2=00000000 result=1"
+    },
+    {
+      "case": 1,
+      "exit": 0,
+      "output": "bit-fault case=1 vector=14 error=7 cf=1 cr2=7ffe0ffc result=1"
+    },
+    {
+      "case": 2,
+      "exit": 0,
+      "output": "bit-fault case=2 vector=14 error=6 cf=1 cr2=7ffe0ffc result=1"
+    }
+  ]
+}

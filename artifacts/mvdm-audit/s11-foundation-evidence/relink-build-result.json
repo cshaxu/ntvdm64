@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "pid": 27120,
+  "started": "2026-10-29T05:44:27.4757275Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\relink-tests.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/relink-tests.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/relink-tests.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:44:32.4658335Z"
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F05909ABA49A886717B9C69024CE6D1B05FCDEC57700A4BA917E4B8FA9565CCD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "289545679B9F495EE10E1943BA59184AAF0A6CC2E692C861D4947E38D9167529",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index\\mvdm_softpc_wow_page_domain.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "FF0E409141C466D6CABA4FC634FF50334F6A782F82F3EB68EE2D78A95BF11650",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index16\\mvdm_softpc_wow_page_domain.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "4BAD223A4952EFD39652916C35D5064BBFF4A0EBE207FD1B816E88C8F9805651",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "38B6D36C3EB72D95C133D5B31663ED2F80A0AB44DAF93AAF01A0020C556FE1C7",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index16\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A9135720530ABF9DB022CBB0DF261B3ED05B09F7F6D054BA0555A86E3CDFAE81",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  }
+]

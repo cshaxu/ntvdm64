@@ -1,0 +1,460 @@
+{
+  "kind": "current-worktree-package-validation",
+  "build": {
+    "x86": 0,
+    "x64": 0,
+    "started": "2026-10-29T15:18:24.5033207Z",
+    "finished": "2026-10-29T15:20:32.7142148Z"
+  },
+  "validation": {
+    "dualTaskExit": 0,
+    "finished": "2026-10-29T15:21:03.7962509Z",
+    "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/terminal-current-product/package"
+  },
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "4B639FC7DE7FEDDD4D03BD31E565E9EB9A676BB16500CB86DE1C52B4964F0C05",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "F9FB97258016F122F92DD51EE1A388A66AA038F2875CE029793980793BB16B65",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "7BEF64D7AE017ACAAED5595775E63D90D50322CD04DF81C0EFF12DE8D55C1B5A",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "C71469E3F3544A49A4ACD17EF8655D27B27C16AA25BE8CB7D26FBD4141074A6C",
+      "Machine": 332,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "8356F96605378A1EC5D8A8E29F433F53F5B3DBAAD51A743C26C452D9C1407E20"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "A24D3F2418F1CE230FA7CEA392988596DC3D9827309F8FAAC3EAC1869024A789",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "07BB6ADB2F11DACDAEA30D47AFDA9461230CC4A716DEC2CA1591BC03929FCA7C",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "DE96E508F3402E06A4AC557C4DAAD7647E63B17851240F70078CFA00CE504B5F",
+      "Machine": 332,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "95B4805708AE41FC33D3C9474746D2286B080DFBE04E194D2D7A297E95C9CCF4"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "EFC9E38D7A30A6F6C76067739448ADE89583E9ECDD710C3CCA98CD3043CF4A06",
+      "Machine": 332,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "C31F22FD9BBC88419D70C4D4A03BDBFC0CC72931838615227E775AA27521CDCA"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "0637FDB4AD48C4AC16F2F6763CE334A828CCCF357B18D12B1BD3D43C7CF1DEC1",
+      "Machine": 332,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "EDBCC025548609296BF94735ACDA8C7BBC25858E2B9B7F17666886E214CB056B",
+      "Machine": 34404,
+      "PackageId": "781d210a-caba-4b88-b310-e3e51524e547",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "dualTaskResult": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion\r\n",
+  "siblingResult": "PASS same-worker sibling normal exit and resource cleanup; surviving WINMINE flag/reset/open/close\r\n",
+  "siblingReport": [
+    {
+      "phase": 0,
+      "errors": 0,
+      "created": 0,
+      "closed": 0,
+      "hooks": 0,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 0,
+      "destroy_ax": 0,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 0,
+      "closed": 0,
+      "hooks": 0,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 0,
+      "destroy_ax": 0,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 1,
+      "closed": 1,
+      "hooks": 1,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 2,
+      "closed": 2,
+      "hooks": 2,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 3,
+      "closed": 3,
+      "hooks": 3,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 4,
+      "closed": 4,
+      "hooks": 4,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 5,
+      "closed": 5,
+      "hooks": 5,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 6,
+      "closed": 6,
+      "hooks": 6,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 7,
+      "closed": 7,
+      "hooks": 7,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 8,
+      "closed": 8,
+      "hooks": 8,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 9,
+      "closed": 9,
+      "hooks": 9,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 10,
+      "closed": 10,
+      "hooks": 10,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 11,
+      "closed": 11,
+      "hooks": 11,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 12,
+      "closed": 12,
+      "hooks": 12,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 13,
+      "closed": 13,
+      "hooks": 13,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 14,
+      "closed": 14,
+      "hooks": 14,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 15,
+      "closed": 15,
+      "hooks": 15,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 1,
+      "errors": 0,
+      "created": 16,
+      "closed": 16,
+      "hooks": 16,
+      "leaving": 0,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    {
+      "phase": 2,
+      "errors": 0,
+      "created": 17,
+      "closed": 16,
+      "hooks": 17,
+      "leaving": 1,
+      "task": 5943,
+      "dialog": 2058,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    }
+  ],
+  "sourceHashes": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+      "Hash": "28381B97F5550E05EC31E0992B3ECF824257672497266E1245361E7AE6009D71"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c",
+      "Hash": "ABE564712453BCBE346513D1F7F0597A92BD46068C1D973B4EABA0ECC948AF11"
+    }
+  ],
+  "fullStatus": "passed-repeat",
+  "fullPid": 8888,
+  "published": false,
+  "partialSummaries": [
+    {
+      "name": "Console-17-summary.json",
+      "cases": 17,
+      "mismatches": 0
+    },
+    {
+      "name": "Window-17-summary.json",
+      "cases": 17,
+      "mismatches": 0
+    }
+  ],
+  "repeatSession": 52833,
+  "fullExit": {
+    "exitCode": 0,
+    "failure": null,
+    "finished": "2026-10-29T15:37:10.718843Z"
+  },
+  "fullTimings": {
+    "Suite": "Full",
+    "ElapsedMs": 321616,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": true,
+    "PreparationMs": 3363,
+    "Gates": [
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 65951,
+        "CleanupMs": 430,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 41565,
+        "CleanupMs": 421,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 38077,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 13546,
+        "CleanupMs": 414,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 8965,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45476,
+        "CleanupMs": 424,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12348,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 27614,
+        "CleanupMs": 431,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30263,
+        "CleanupMs": 435,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 2924,
+        "CleanupMs": 382,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7225,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9617,
+        "CleanupMs": 447,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 2816,
+        "CleanupMs": 269,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 4910,
+        "CleanupMs": 443,
+        "Passed": true
+      }
+    ]
+  },
+  "solNoTrace": {
+    "exitCode": 1,
+    "finished": "2026-10-29T15:37:57.7674798Z"
+  },
+  "solFaultCapture": {
+    "exitCode": 1,
+    "finished": "2026-10-29T15:39:22.8217346Z"
+  }
+}

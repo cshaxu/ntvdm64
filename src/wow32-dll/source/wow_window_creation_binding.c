@@ -421,46 +421,59 @@ static BOOL claim_explicit(HWND window, const CREATESTRUCTA *cs,
         if (cs->hInstance == scope->request->hInstance &&
                 (ATOM)GetClassLongA(window, GCW_ATOM) == scope->atom &&
                 application_parameter(scope, cs) == scope->request->lpCreateParams) {
+            wow_task_callback_scope execution;
+            BOOL task_execution = (scope->thread->TIF_flags & WOW_TASK_TIF_16BIT) != 0;
+            wow_user_runtime_thread *task_runtime = wow_user_runtime_current();
+            BOOL task_lock = task_execution && task_runtime && task_runtime->exclusive_held;
             scope->claimed = TRUE;
             scope->window = window;
-            if (!enroll_created_window(window, cs, scope->words,
-                    &scope->class_words, scope->target, scope->thread,
-                    TRUE, &scope->borrow, &scope->previous_native,
-                    &scope->installed_native)) {
+            /* Explicit original producer: establish its task before the
+             * CCPU-backed WND state is accessed. Release before next hook. */
+            if (task_execution && !wow_task_callback_enter(&execution)) {
                 scope->failure = GetLastError();
                 return FALSE;
             }
-            if (!wow_window_words_set_creation_ansi(scope->borrow, !scope->unicode)) {
-                scope->failure = GetLastError();
-                rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
-                SetLastError(scope->failure);
-                return FALSE;
-            }
-            if (scope->facts_known) {
-                wow_window_creation_facts facts;
-                facts.module_version = scope->module_version;
-                facts.compatibility_flags = scope->compatibility_flags;
-                facts.class_extra_bytes = scope->class_extra_bytes;
-                if (!wow_window_words_set_creation_facts(scope->borrow, &facts)) {
+            if (task_lock && !wow_user_runtime_enter(task_runtime))
+                wow_user_native_call_failed("creation-task-reenter", GetLastError());
+            __try {
+                if (!enroll_created_window(window, cs, scope->words,
+                        &scope->class_words, scope->target, scope->thread,
+                        TRUE, &scope->borrow, &scope->previous_native,
+                        &scope->installed_native)) {
+                    scope->failure = GetLastError();
+                    return FALSE;
+                }
+                if (!wow_window_words_set_creation_ansi(scope->borrow, !scope->unicode)) {
                     scope->failure = GetLastError();
                     rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
                     SetLastError(scope->failure);
                     return FALSE;
                 }
-            }
-            /* Original createw provides WND before the first procedure
-             * call. dlgbegin also validates custom dialog classes directly
-             * after creation; waiting for a canonical EDIT entry misses
-             * that path. Use the already captured creation facts for every
-             * explicit original producer, never infer them from a parent. */
-            if (scope->facts_known) {
-                wow_user_borrow_scope state_scope;
-                BOOL initialized = FALSE;
-                if (wow_user_borrow_enter(&state_scope)) {
-                    __try {
-                        initialized = wow_window_client_create_state(window,
-                            scope->module_version, scope->compatibility_flags,
-                            scope->class_extra_bytes);
+                if (scope->facts_known) {
+                    wow_window_creation_facts facts;
+                    facts.module_version = scope->module_version;
+                    facts.compatibility_flags = scope->compatibility_flags;
+                    facts.class_extra_bytes = scope->class_extra_bytes;
+                    if (!wow_window_words_set_creation_facts(scope->borrow, &facts)) {
+                        scope->failure = GetLastError();
+                        rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
+                        SetLastError(scope->failure);
+                        return FALSE;
+                    }
+                }
+                /* Original createw provides WND before the first procedure
+                 * call. dlgbegin also validates custom dialog classes directly
+                 * after creation; waiting for a canonical EDIT entry misses
+                 * that path. Use the already captured creation facts for every
+                 * explicit original producer, never infer them from a parent. */
+                if (scope->facts_known) {
+                    wow_user_borrow_scope state_scope;
+                    BOOL initialized = FALSE;
+                    if (wow_user_borrow_enter(&state_scope)) {
+                        __try {
+                            initialized = wow_window_client_create_state(window,
+                                scope->module_version, scope->compatibility_flags,
+                                scope->class_extra_bytes);
                     } __finally {
                         wow_user_borrow_leave_required(&state_scope);
                     }
@@ -482,6 +495,14 @@ static BOOL claim_explicit(HWND window, const CREATESTRUCTA *cs,
                 return FALSE;
             }
             *claimed = TRUE;
+            } __finally {
+                DWORD execution_error = GetLastError();
+                if (task_lock && !wow_user_runtime_leave(task_runtime))
+                    wow_user_native_call_failed("creation-task-release", GetLastError());
+                if (task_execution && !wow_task_callback_leave(&execution))
+                    wow_user_native_call_failed("creation-task-leave", ERROR_INVALID_STATE);
+                SetLastError(execution_error);
+            }
         }
     }
     return TRUE;

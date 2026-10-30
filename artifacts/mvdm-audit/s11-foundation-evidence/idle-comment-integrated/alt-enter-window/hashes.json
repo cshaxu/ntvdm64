@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\component-integration\\frontend_window_controller_test.c",
+    "Hash": "37FF29492426FA64D2039382D64019EA3774A829E5A90926578CCEB054002BD4"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntcon-exe\\window_controller.c",
+    "Hash": "E560A86A56642B970A402B6CE51CB7C8A65C7338611BE6EF9286B0A2AC5EA42A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend\\frontend-window-controller-test.exe",
+    "Hash": "B3C672D60D8E787AB8465EB9A5E38C2B7EF3A9C170903E3B339C445E8BE0C2B1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend\\ntcon.exe",
+    "Hash": "250C71E8B4FB61CEC53D39BFBD93470264C11D5904E8AEB10E1C3D2C24BAD185"
+  }
+]

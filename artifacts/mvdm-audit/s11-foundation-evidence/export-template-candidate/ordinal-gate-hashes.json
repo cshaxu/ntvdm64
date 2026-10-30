@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\audit\\Invoke-ProductVerification.ps1",
+    "Hash": "1F5A1D308499E655FB1543325CF461ED8DFCC7162A599FDBC08247B6318D1A09"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ntvdm-export-ordinals.py",
+    "Hash": "E10F751EAE10F44D396C9EFCF4773864150BD7ABAC2D8A67E60DF5ED65B089F0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\ntvdm-export-ordinals.csv",
+    "Hash": "7975CA27F5187FF258E621AB8B6855386563058D87DB331B1C88C815641E4F94"
+  }
+]

@@ -9,6 +9,27 @@ function Get-IsolatedFileSha256([string]$LiteralPath) {
     try {return ([BitConverter]::ToString($algorithm.ComputeHash($stream))).Replace('-','')}
     finally {$stream.Dispose();$algorithm.Dispose()}
 }
+function Save-IsolatedPackageManifest([string]$Runtime, [string]$Destination) {
+    $manifest = Join-Path $Runtime 'product-system32-manifest.json'
+    $rows = Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
+    $rows = @($rows)
+    $expected = @('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
+        'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
+    if (!$rows.Count -or $rows.Count -gt $expected.Count -or
+            @($rows | Select-Object -ExpandProperty Name -Unique).Count -ne $rows.Count) {
+        throw 'Expected unique staged component records'
+    }
+    foreach ($row in $rows) {
+        if ($row.Name -notin $expected -or $row.RelativePath -ne ('system32\' + $row.Name) -or
+                [IO.Path]::GetFileName($row.Name) -ne $row.Name) {
+            throw 'Invalid staged component path'
+        }
+        if ((Get-IsolatedFileSha256 (Join-Path $Runtime $row.RelativePath)) -ne $row.Sha256) {
+            throw "Staged component hash mismatch: $($row.Name)"
+        }
+    }
+    Copy-Item -LiteralPath $manifest -Destination $Destination
+}
 function Get-IsolatedPackageIdentity([string]$Image) {
     if(-not ('NtvdmTestPackageIdentity' -as [type])) {
         Add-Type -TypeDefinition @'
@@ -120,7 +141,8 @@ function New-PhysicalRuntimeStage([string]$PackageRoot,
             # tests that require a different broker must opt in to creating a
             # complete new test package, without touching the source package.
             $manifest=Join-Path $stage 'product-system32-manifest.json'
-            $rows=@((Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json))
+            $rows=Get-Content -LiteralPath $manifest -Raw | ConvertFrom-Json
+            $rows=@($rows)
             $expected=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe',
                 'ntmon.exe','WOW32.DLL','VDMREDIR.DLL','nthook32.dll','nthook64.dll')
             if($rows.Count -ne $expected.Count -or

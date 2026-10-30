@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "46EA3D6C910820842522663A11E3115591F0E0C91D01EEE310F48B49C39B5A91",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "DC1FE74F0CA507C98D33E45713F3BD8038D4B4D15C661741E207A7962E908E46",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F11BC83CC1DB93CB67555B51FD8EB29F2C7ACBD7B4F3C7CF113B75EB5FA7218C",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-integrated-duplicate-graph-r2\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "567EEE1EB2907D5A1AE7352847AC4305E3E4F1E7F7742A0252B7B7E9A40979CF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-integrated-duplicate-graph-r2\\fixture.map"
+  }
+]

@@ -1,0 +1,147 @@
+{
+  "integrated": {
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+        "Hash": "28381B97F5550E05EC31E0992B3ECF824257672497266E1245361E7AE6009D71"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+        "Hash": "F2999793824D54544DC19FA6CC9B938170E5BC14C323850C464BAC6AE3CA1FC3"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+        "Hash": "E34F48ABE4AF5DF727CC9ECF61D87CE1A2EB9EEA5ECC8777AC6629BA00DB61B4"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-integrated-formal\\fixture.exe",
+        "Hash": "6C0B83F9BF1BA184FB9AF53F55B3C378C348808C054AFF4B364829E1C67F0B6A"
+      }
+    ],
+    "markers": [
+      "WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1",
+      "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ],
+    "exit_code": 0
+  },
+  "controls": [
+    {
+      "variant": "normal",
+      "result": {
+        "exit_code": 0,
+        "utc": "2026-10-29T15:01:52.0341879Z"
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-normal\\fixture.exe",
+          "Hash": "F265A72CC9462266A26D60407F4EC3F6E2D71517467D3BF46C270F5527E3CD56"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-normal\\fixture.c",
+          "Hash": "F7509117332449C345A37BB7406C0F5456E79CB1FDF4A14578B2D685339FD674"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-normal\\wow_window_words_binding.c",
+          "Hash": "64E1D1000C025D7BA01B964DFF8D4CD77FB71B6899D8157B5B5812B08C3BF197"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-normal\\wow_window_words_binding.obj",
+          "Hash": "8E2ACA6F8AFAF07FF263259038CA6AF8915ADA030537BE0E25594359D5E56B64"
+        }
+      ],
+      "markers": [
+        "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    },
+    {
+      "variant": "fatal",
+      "result": {
+        "exit_code": -1073740768,
+        "utc": "2026-10-29T15:01:58.1548802Z"
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-fatal\\fixture.exe",
+          "Hash": "F265A72CC9462266A26D60407F4EC3F6E2D71517467D3BF46C270F5527E3CD56"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-fatal\\fixture.c",
+          "Hash": "F7509117332449C345A37BB7406C0F5456E79CB1FDF4A14578B2D685339FD674"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-fatal\\wow_window_words_binding.c",
+          "Hash": "64E1D1000C025D7BA01B964DFF8D4CD77FB71B6899D8157B5B5812B08C3BF197"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-fatal\\wow_window_words_binding.obj",
+          "Hash": "01CAA8F8FD9BD6C54F786ED2F3E0ADFA1C13E81438959056C37B35C3457C0430"
+        }
+      ],
+      "markers": [
+        "WOW_TERMINAL_FAILFAST_ENTER"
+      ]
+    },
+    {
+      "variant": "pending",
+      "result": {
+        "utc": "2026-10-29T15:02:28.0368462Z",
+        "exit_code": 0
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-pending\\fixture.exe",
+          "Hash": "444177CAD62A41FFC466F8158C0B4798B1E78FA7291919DE130C84E3BADD5174"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-pending\\fixture.c",
+          "Hash": "BA1A96B37B5892CFF7785DB7B13DC2B993036FE1DD1845D34DE59F3CFA27BDCF"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-pending\\wow_window_words_binding.c",
+          "Hash": "64E1D1000C025D7BA01B964DFF8D4CD77FB71B6899D8157B5B5812B08C3BF197"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-pending\\wow_window_words_binding.obj",
+          "Hash": "5701C46DF80948CDB286FF45C7B2BA982C2CA294E1B5506A35A8559C3ABE7B0B"
+        }
+      ],
+      "markers": [
+        "WOW_TERMINAL_PENDING_OBSERVER_RETURNED",
+        "WOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    },
+    {
+      "variant": "metadata",
+      "result": {
+        "utc": "2026-10-29T15:04:38.4712234Z",
+        "exit_code": 0
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-metadata\\fixture.exe",
+          "Hash": "11F44E21D94AF37FB6E29AA6E06234BF4E57E69472A8819B8840E2332AB19D04"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-metadata\\fixture.c",
+          "Hash": "F2999793824D54544DC19FA6CC9B938170E5BC14C323850C464BAC6AE3CA1FC3"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-metadata\\wow_window_words_binding.c",
+          "Hash": "274E936E47901D1C029BCE6F000CAAEDF48ACD041158F507C406965B6E5FC399"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-central-metadata\\wow_window_words_binding.obj",
+          "Hash": "C736D66511F431770AAA1D594710D606BC79A8456F49AA5BB6CF90D0CD876232"
+        }
+      ],
+      "markers": [
+        "WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1",
+        "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    }
+  ]
+}

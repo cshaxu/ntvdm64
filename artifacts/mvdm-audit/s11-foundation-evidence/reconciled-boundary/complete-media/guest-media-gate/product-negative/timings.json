@@ -1,0 +1,15 @@
+{
+  "Suite": "Product",
+  "ElapsedMs": 4844,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": false,
+  "PreparationMs": 2893,
+  "Gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 914,
+      "CleanupMs": 494,
+      "Passed": false
+    }
+  ]
+}

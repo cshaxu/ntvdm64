@@ -1,0 +1,20 @@
+{
+  "count": 1815,
+  "source_role_status": {
+    "partial": 1116,
+    "excluded": 646,
+    "full": 53
+  },
+  "scope": {
+    "tool-or-scaffold-candidate": 72,
+    "host-candidate": 1270,
+    "role-pending": 278,
+    "guest-target-observed": 195
+  },
+  "mirror_diff_rows_in_index": 199,
+  "scoped_guest_exclusion_rows": 195,
+  "index_sha256": "AF2385E639ADEF97FA35E8A68801DDB6AB076AD3D9A618EBA60FF4095ECBBBB1",
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "retention_sha256": "A7DB47B6524BF34704B8B05BD7AE62F13FDEDFB866B0BCD905207CC4E5600F99",
+  "limitations": "source-role decisions for recorded selected profiles, not runtime capability; guest-target exclusions are host-source only; retention is textual estimate"
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "FEAE48874677CF3ECC1B86AE9855B3D3322C66F78E715E5EA0E8ECD233215EE8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "16A010D93F1144EABB4BFCDC937BA95FB122BC0BE2AE323E953B7E6B8EFDD1B0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.obj",
+    "Hash": "6708119980C86C33AEA992DE20E7F42C3885CBC613AF3DC215F6FA5E3294018C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.exe",
+    "Hash": "FD39B79A8B296DAD825BEFFC911887E259720A3B0AB2590A4DBA9FDF287F71CB"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\provider.lib",
+    "Hash": "EB1CBCAD10FA8D8F2CCF51D2462985A607D725BFBFA659A945A76E4A6BD69AB9"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 29440,
+  "started": "2026-10-29T06:21:44.4686646Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-multi-dialog.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/multi-dialog-winmine-observation -VisibleDesktop -NoTrace -Mode winmine -Guest O:\\w31\\WINMINE.EXE",
+  "exit": 0,
+  "finished": "2026-10-29T06:22:03.4669029Z"
+}

@@ -1,0 +1,188 @@
+{
+  "candidateSourceSha256": "DAF3FF7D130BE95ABE29A7B8601446ED1344F6541A33057AB951A948FBDA1011",
+  "testSession": 87984,
+  "comparison": [
+    {
+      "Name": "run16.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "ntsrv.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "ntcon.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "ntvdm.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "ntvwm.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "ntmon.exe",
+      "SameInput": true
+    },
+    {
+      "Name": "WOW32.DLL",
+      "SameInput": false
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "SameInput": true
+    },
+    {
+      "Name": "nthook32.dll",
+      "SameInput": true
+    },
+    {
+      "Name": "nthook64.dll",
+      "SameInput": true
+    }
+  ],
+  "status": "completed",
+  "published": false,
+  "candidateManifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "12CB7E4649789CABFA6F627526EC71DCEE6D0A9F40774BC906C2BABDD5466A19",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "B443B774B57DEFBD87562E139978F331AD16BAF3503F0309B224AB9E6A9F2E3B",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "F975B4CE8AF7B55C94D8B899157628E64488D6FB0E2180F71B71648E3EB7A723",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "813832F731303C60FADD8AF419F0CC19283D0E1DB66232E7368C0ADA086D01B8",
+      "Machine": 332,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "8356F96605378A1EC5D8A8E29F433F53F5B3DBAAD51A743C26C452D9C1407E20"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "3EE1480653BBC941214DC5550DE1AFED23D023723AFA2A0C7A09D86526B65272",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "EC0317C7F360999A7FE193B7A3247EB13FC8EB8941E423181AB0C275B62D7CAB",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "6575879A3695A7136B548FB01FB63F962A74F181061753E5B4E6EEB886F60995",
+      "Machine": 332,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "3610812DF616E23D392BC5BDF9FE169F130B7DE9ABF561405DC50EC0B4F75545"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "41D6D098503EC09FE158672890D0F081AC7B283F40ACAC3BDB86AB71A9D9826E",
+      "Machine": 332,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "C31F22FD9BBC88419D70C4D4A03BDBFC0CC72931838615227E775AA27521CDCA"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "7E2AD6E348BD3ED4DB1E479737B5E1B5B4DFF7310DA37F31CD8EB0F371DDAF20",
+      "Machine": 332,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "E615599CCECC5F1F6B4F4B211B54563BD41400D99F4F85D540FA5FC081C35A38",
+      "Machine": 34404,
+      "PackageId": "26f75883-9a1d-43d0-9ced-700556a81b13",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "results": [
+    {
+      "order": 1,
+      "kind": "edge",
+      "exitCode": 0,
+      "showMs": [
+        4516,
+        3281
+      ],
+      "recoveryMs": [
+        3531,
+        3672
+      ],
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4516\r\nSOL options: dialog-close-recovery-ms=3531\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=3281\r\nSOL options: dialog-close-recovery-ms=3672\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n"
+    },
+    {
+      "order": 2,
+      "kind": "baseline",
+      "exitCode": 0,
+      "showMs": [
+        5797,
+        4094
+      ],
+      "recoveryMs": [
+        4844,
+        4578
+      ],
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=5797\r\nSOL options: dialog-close-recovery-ms=4844\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4094\r\nSOL options: dialog-close-recovery-ms=4578\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n"
+    },
+    {
+      "order": 3,
+      "kind": "baseline",
+      "exitCode": 0,
+      "showMs": [
+        5422,
+        4406
+      ],
+      "recoveryMs": [
+        4750,
+        4657
+      ],
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=5422\r\nSOL options: dialog-close-recovery-ms=4750\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4406\r\nSOL options: dialog-close-recovery-ms=4657\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n"
+    },
+    {
+      "order": 4,
+      "kind": "edge",
+      "exitCode": 0,
+      "showMs": [
+        4359,
+        3234
+      ],
+      "recoveryMs": [
+        3766,
+        3687
+      ],
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4359\r\nSOL options: dialog-close-recovery-ms=3766\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=3234\r\nSOL options: dialog-close-recovery-ms=3687\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-cross-page\\ccpu-bit-fault-test.exe",
+    "Hash": "D6FBDA3382D2E7FECBEB24CD52512D9B80AE768025BB264F1D20DA86159A6037"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-cross-page\\ccpu-bit-fault-test.exe.map",
+    "Hash": "73CB804BE51A56961F723855A0636DE2AA71A625DFBB903F1A1ED27C58FD06F1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-cross-page-native\\native.exe",
+    "Hash": "C2FD767ED42FEBBBAEEBDC4BE2C6CE0C6F5EC251050FB0618C95CB7B380B7E07"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+    "Hash": "466CA443C7CF3B32808F28D2EBD0090EE616D768FE272699D05D02A6BF5BC09D"
+  }
+]

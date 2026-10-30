@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "64BB1A9C30EAD70838D6068BC2825BC4574B61CBFC6E30DED6EEEFB87886A144",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-candidate\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E050C187BA26739D491A985C06810FBBEA540A785BD29B9140877D9E26658F62",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-profile\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "32AF0BF2FAB652C9CF1C08749FB79E7355F88570459E7DCA8E23A6AFC23BBD59",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  }
+]

@@ -1,7 +1,7 @@
 {
   "result": "pass",
-  "count": 208,
-  "measured": 207,
+  "count": 204,
+  "measured": 203,
   "absent_current_files": [
     {
       "relative_path": "tools16/buildidx.exe",
@@ -336,7 +336,8 @@
   ],
   "current_drift": [
     "dpmi32/modesw.c",
-    "softpc.new/base/bios/virtual.c",
+    "softpc.new/base/ccpu386/c_oprnd.h",
+    "softpc.new/base/ccpu386/c_xfer.c",
     "softpc.new/base/inc/sas.h",
     "softpc.new/base/video/v7_ports.c",
     "softpc.new/base/video/v7_video.c",
@@ -344,7 +345,7 @@
     "softpc.new/host/src/nt_bop.c",
     "softpc.new/host/src/nt_graph.c"
   ],
-  "csv_sha256": "EB674A63E07C2B48EBC8E764B052E7243833288C18AFF0CEFBC6AC23EF042E3D",
+  "csv_sha256": "A7DB47B6524BF34704B8B05BD7AE62F13FDEDFB866B0BCD905207CC4E5600F99",
   "frozen_sha256": "F73FFD45DFF44FCA4ECEFC49EF769BEAB5C085542CD04FFE4D6A7B5F942E3196",
   "supplemental_provenance_sha256": "A9BD43A4E844A34796968D6F7C1BDC5A8FD971E9557791944F9C9E0337A65849",
   "scope": "Original code text estimate, not executed code or behavioral restoration"

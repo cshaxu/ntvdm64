@@ -1,0 +1,19 @@
+{
+  "sample_count": 23,
+  "counts": [
+    {
+      "symbol": "_refresh_graph@12",
+      "rva": "0x59a06",
+      "tid": 26928,
+      "n": 22
+    },
+    {
+      "symbol": "_refresh_graph@12",
+      "rva": "0x59a06",
+      "tid": 25460,
+      "n": 1
+    }
+  ],
+  "map_hash": "8E83FBC9F78D23DA4A114EFB73C8643D797044B50994EA28B7ECB055AD5E176F",
+  "limits": "Nearest map symbol for sampled return addresses; one per 64 calls, excludes unflushed work and does not reveal refresh_graph callers."
+}

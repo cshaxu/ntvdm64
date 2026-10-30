@@ -11,11 +11,10 @@
 #undef DestroyWindow
 #undef DispatchMessageA
 #undef GetForegroundWindow
+#undef CallNextHookEx
 
-/* The production idle object uses the common native-call ABI. This focused
- * fixture deliberately links only that object, so retain the real USER chain
- * through two direct test-only ABI providers rather than dragging the full
- * lifecycle owner into an idle-order test. */
+/* The focused fixture supplies only the hook-registration ABI; idle-chain
+ * forwarding must link directly to USER, without a guest-publication shim. */
 HHOOK WINAPI wow_native_SetWindowsHookExA(int id, HOOKPROC proc,
     HINSTANCE module, DWORD thread_id)
 {
@@ -23,15 +22,6 @@ HHOOK WINAPI wow_native_SetWindowsHookExA(int id, HOOKPROC proc,
     set_hook_fn set_hook = (set_hook_fn)GetProcAddress(
         GetModuleHandleA("user32.dll"), "SetWindowsHookExA");
     return set_hook ? set_hook(id, proc, module, thread_id) : NULL;
-}
-
-LRESULT WINAPI wow_native_CallNextHookEx(HHOOK hook, int code,
-    WPARAM wp, LPARAM lp)
-{
-    typedef LRESULT (WINAPI *next_hook_fn)(HHOOK, int, WPARAM, LPARAM);
-    next_hook_fn next_hook = (next_hook_fn)GetProcAddress(
-        GetModuleHandleA("user32.dll"), "CallNextHookEx");
-    return next_hook ? next_hook(hook, code, wp, lp) : 0;
 }
 
 PTD gptdTaskHead;
@@ -97,10 +87,17 @@ static LRESULT CALLBACK next_idle(int code, WPARAM wp, LPARAM lp)
 
 /* Real USER chain, not a direct HookProc call. Only a fresh owned desktop is
  * activated, and its prior input desktop is restored before destruction. */
-static void native_chain(TD *registered)
+typedef struct native_chain_context {
+    TD *registered;
+    HDESK desktop;
+} native_chain_context;
+
+static DWORD WINAPI native_chain(void *argument)
 {
+    native_chain_context *context = argument;
+    TD *registered = context->registered;
     HDESK previous = OpenInputDesktop(0, FALSE, DESKTOP_SWITCHDESKTOP);
-    HDESK original = GetThreadDesktop(GetCurrentThreadId()), desktop;
+    HDESK desktop;
     HWND window = NULL;
     HHOOK first = NULL, next = NULL;
     char name[64];
@@ -108,9 +105,14 @@ static void native_chain(TD *registered)
     BOOL switched = FALSE;
     sprintf_s(name, sizeof(name), "wow-idle-chain-%lu", GetCurrentProcessId());
     desktop = CreateDesktopA(name, NULL, NULL, 0, GENERIC_ALL, NULL);
+    context->desktop = desktop;
+    thread.native_thread_id = GetCurrentThreadId();
     CHECK(previous && desktop);
     if (!previous || !desktop) goto done;
-    CHECK(SetThreadDesktop(desktop));
+    if (!SetThreadDesktop(desktop)) {
+        CHECK(FALSE);
+        goto done;
+    }
     window = CreateWindowA("STATIC", "owned idle chain", WS_OVERLAPPEDWINDOW,
         0, 0, 240, 140, NULL, NULL, GetModuleHandle(NULL), NULL);
     CHECK(window != NULL);
@@ -148,10 +150,9 @@ done:
     if (next) CHECK(UnhookWindowsHookEx(next));
     if (switched) CHECK(SwitchDesktop(previous));
     if (window) DestroyWindow(window);
-    CHECK(SetThreadDesktop(original));
-    if (desktop) CloseDesktop(desktop);
     if (previous) CloseDesktop(previous);
     fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN errors=%u next=%u registered_and_unregistered=1 direct_not_forwarded=1\n", errors, next_calls);
+    return 0;
 }
 
 int __cdecl main(int argc, char **argv)
@@ -221,7 +222,17 @@ int __cdecl main(int argc, char **argv)
     if (logic_only) {
         fprintf(stderr, "WOW_IDLE_NATIVE_CHAIN unavailable=logic-only\n");
     } else {
-        native_chain(&second);
+        native_chain_context context = { &second, NULL };
+        HANDLE worker = CreateThread(NULL, 0, native_chain, &context, 0, NULL);
+        CHECK(worker != NULL);
+        if (worker) {
+            if (WaitForSingleObject(worker, INFINITE) != WAIT_OBJECT_0) {
+                fprintf(stderr, "FAIL idle test thread wait error=%lu\n", GetLastError());
+                ExitProcess(1); /* Do not release a context still used by the thread. */
+            }
+            CHECK(CloseHandle(worker));
+        }
+        if (context.desktop) CHECK(CloseDesktop(context.desktop));
     }
     gptdTaskHead = NULL;
     DeleteCriticalSection(&gcsWOW);

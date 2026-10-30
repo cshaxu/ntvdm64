@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "12E144248AB5B0D5C55026C53C4E4455C6E861E9C2E3F45C8274BEAF3DFA9955",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-phase-current\\wow32.dll"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "91E684C4A863677C4C4BFC1402071BE7A05AA781C062B1E4A7C51E0B079ECBD8",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_task_lifecycle.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "30B25028B34B2553D42A38A9671F6E38C87CCD4D3960D6FFAEE691F2E366BCFD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_object_bindings.c"
+  }
+]

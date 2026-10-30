@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EE2F29D94720391DBCE97F9CB1A81E2D5255E36E848FDF6E0695A4F562C0E6CA",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alias-candidate\\mapping.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F8BEF2B03D877F847428A2FA9391D24D124F3CB4A023422C567CD047C081F8AD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alias-candidate\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F69413C8D39BDC0B7D81214CDDC881A04341F8B06C7885A05E39C253B4D336CD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alias-candidate\\build-prod.cmd"
+  }
+]

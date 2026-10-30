@@ -1,0 +1,7 @@
+{
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service",
+  "target": "ntsrv.exe",
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "count": 61,
+  "commands_sha256": "4B2A258A1FEC5A0BE4BFD5BA03AD2AECEFE4A62E3419E0CCCAD8D754D90C6413"
+}

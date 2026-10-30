@@ -1,0 +1,7 @@
+{
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker",
+  "target": "ntvwm.exe",
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "count": 63,
+  "commands_sha256": "936B60BB5550418840F98CD539E66781C2AD402027610089B87A384B8E480AB4"
+}

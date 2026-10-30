@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-index-candidate\\wow_user_borrow_scope.obj",
+    "Hash": "E83144091BA4DDACC3CBB461C62BF8A0050901EFB648570E23E3822B72D8B2C3"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-index-candidate\\wow_user_borrow_scope.c",
+    "Hash": "7DC0F3976E52E24617035B4A775DAAB5FA727D3B27C69911DD2AD9B9A3A61B88"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\index-candidate-fixture.ps1",
+    "Hash": "4139FCE48499761088FA36D10C5FFB1FB054FE9A5EA40668582544297D07D36D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "0070A35385093D5397A338700824366CEB828C29719F43AE31D120927841592C"
+  }
+]

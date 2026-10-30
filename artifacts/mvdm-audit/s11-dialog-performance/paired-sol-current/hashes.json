@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package\\system32\\ntvdm.exe",
+    "Hash": "E744772B5B14C1CE64121EC44DA2F75BBD85A687845E443040B88A70F83E1CC4"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package\\system32\\WOW32.DLL",
+    "Hash": "DA278F7ADB404703A106876D33D968395E6B0CCB27BFA702B61A373EF88AF804"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-clean\\stage\\package\\system32\\ntvdm.exe",
+    "Hash": "C818455D975D5034EFD751F4696810AE8F5EE9510C77E64EA2696442A75A5531"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-clean\\stage\\package\\system32\\WOW32.DLL",
+    "Hash": "D8AFA64337353606F7B138EC96DF3EA4C71D22FD501D102BEAE405CFC7538967"
+  }
+]

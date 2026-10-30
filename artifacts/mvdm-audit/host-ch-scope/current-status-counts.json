@@ -1,0 +1,17 @@
+{
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "file_count": 1815,
+  "normalized_status": {
+    "partial": 1116,
+    "excluded": 451,
+    "pending": 195,
+    "full": 53
+  },
+  "scope": {
+    "tool-or-scaffold-candidate": 72,
+    "host-candidate": 1270,
+    "role-pending": 278,
+    "guest-target-observed": 195
+  },
+  "limitation": "Frozen source-role classification, not demonstrated runtime capability; pending rows remain unresolved."
+}

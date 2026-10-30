@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "08BD1AB9AF970A9C345C231DE9EFE135985B327677E46B6C18B3BE1B6921E117"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-owner-isolated\\creation-lock.obj",
+    "Hash": "5EEEE6733E40D8DE54889982DBB85E5EA87A356487D12069405A190B76630500"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\provider.lib",
+    "Hash": "EB1CBCAD10FA8D8F2CCF51D2462985A607D725BFBFA659A945A76E4A6BD69AB9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.obj",
+    "Hash": "390B6B925B46DA3346D49C9327DDB25082A7C333D8B94428D372E46C0770B5B6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.exe",
+    "Hash": "F5492A8C95F9454212B8D8A50303EA7D3AB30AD200395419EF0F6E41E6FE08ED"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.map",
+    "Hash": "7CC7080D80E63873BCFEAC50613472FDCCB0BC65C52CD3F57134DDE975C51C2E"
+  }
+]

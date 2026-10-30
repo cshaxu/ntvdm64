@@ -1,0 +1,29 @@
+{
+  "result": "pass",
+  "scope": "selected-object fixture; guest and full product remain separate",
+  "fixture_sha256": "3831BAC9837BCC9EDF7A958FCA9DFFC6B769A29F181A75CE075F9EE70332D0D4",
+  "map_sha256": "5D7243D955FF0A4E851A6A1A285CBFD3670E8E6019E19A5FF84A88451D881613",
+  "object_sha256": "E0A4B8045C71155D474632F60AAB6DBCFDD0A29B703BE6A357E591CCE8DF9421",
+  "cases": [
+    {
+      "case": "off",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "matching",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "other",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "valid",
+      "exit": 0,
+      "output": "vector=0 error=0 cr2=12345000 valid=1"
+    }
+  ]
+}

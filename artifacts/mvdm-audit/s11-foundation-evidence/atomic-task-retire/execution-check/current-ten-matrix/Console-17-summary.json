@@ -1,0 +1,138 @@
+﻿[
+    {
+        "Case":  "empty",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-empty.txt",
+        "BodyMs":  2517,
+        "CleanupMs":  286
+    },
+    {
+        "Case":  "native-zero",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-native-zero.txt",
+        "BodyMs":  2113,
+        "CleanupMs":  226
+    },
+    {
+        "Case":  "missing",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-missing.txt",
+        "BodyMs":  2850,
+        "CleanupMs":  220
+    },
+    {
+        "Case":  "native-seven",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-native-seven.txt",
+        "BodyMs":  1129,
+        "CleanupMs":  215
+    },
+    {
+        "Case":  "native-streams",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-native-streams.txt",
+        "BodyMs":  1103,
+        "CleanupMs":  225
+    },
+    {
+        "Case":  "native-eof",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-native-eof.txt",
+        "BodyMs":  1195,
+        "CleanupMs":  228
+    },
+    {
+        "Case":  "mem",
+        "Expected":  1,
+        "Actual":  1,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-mem.txt",
+        "BodyMs":  2108,
+        "CleanupMs":  215
+    },
+    {
+        "Case":  "nested-empty",
+        "Expected":  1,
+        "Actual":  1,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-nested-empty.txt",
+        "BodyMs":  2676,
+        "CleanupMs":  247
+    },
+    {
+        "Case":  "nested-mem",
+        "Expected":  1,
+        "Actual":  1,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-nested-mem.txt",
+        "BodyMs":  6575,
+        "CleanupMs":  256
+    },
+    {
+        "Case":  "mem-repeat",
+        "Expected":  1,
+        "Actual":  1,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-mem-repeat.txt",
+        "BodyMs":  3038,
+        "CleanupMs":  218
+    },
+    {
+        "Case":  "direct-mem",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-direct-mem.txt",
+        "BodyMs":  940,
+        "CleanupMs":  225
+    },
+    {
+        "Case":  "command-c",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-command-c.txt",
+        "BodyMs":  902,
+        "CleanupMs":  214
+    },
+    {
+        "Case":  "command-c-seven",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-command-c-seven.txt",
+        "BodyMs":  1147,
+        "CleanupMs":  220
+    },
+    {
+        "Case":  "guest-seven",
+        "Expected":  7,
+        "Actual":  7,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-guest-seven.txt",
+        "BodyMs":  899,
+        "CleanupMs":  188
+    },
+    {
+        "Case":  "command-c-mem",
+        "Expected":  0,
+        "Actual":  0,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-command-c-mem.txt",
+        "BodyMs":  916,
+        "CleanupMs":  201
+    },
+    {
+        "Case":  "direct-seven",
+        "Expected":  7,
+        "Actual":  7,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-direct-seven.txt",
+        "BodyMs":  962,
+        "CleanupMs":  197
+    },
+    {
+        "Case":  "edit",
+        "Expected":  1,
+        "Actual":  1,
+        "Report":  "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-ten-product-matrix-r2\\Console-17-edit.txt",
+        "BodyMs":  4010,
+        "CleanupMs":  239
+    }
+]

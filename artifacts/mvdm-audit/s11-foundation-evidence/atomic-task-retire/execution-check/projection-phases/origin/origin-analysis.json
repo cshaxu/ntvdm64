@@ -1,0 +1,177 @@
+{
+  "samples": 22,
+  "counts": [
+    {
+      "phase": "open",
+      "symbol": "_publish_guest_return@8",
+      "rva": "0x6251f",
+      "samples": 8
+    },
+    {
+      "phase": "close",
+      "symbol": "_publish_guest_return@8",
+      "rva": "0x6251f",
+      "samples": 5
+    },
+    {
+      "phase": "open",
+      "symbol": "_wow_user_window_refresh_graph@4",
+      "rva": "0x5a61d",
+      "samples": 4
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_user_window_refresh_graph@4",
+      "rva": "0x5a61d",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "symbol": "_wow_user_window_refresh_message@16",
+      "rva": "0x5a67b",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_user_window_refresh_message@16",
+      "rva": "0x5a67b",
+      "samples": 1
+    }
+  ],
+  "records": [
+    {
+      "tick": 56962218,
+      "phase": "open",
+      "rva": "0x5a67b",
+      "symbol": "_wow_user_window_refresh_message@16"
+    },
+    {
+      "tick": 56962656,
+      "phase": "open",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56963234,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56964062,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56965875,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56966843,
+      "phase": "close",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56967765,
+      "phase": "close",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56968531,
+      "phase": "close",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56969343,
+      "phase": "open",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56970187,
+      "phase": "open",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56971062,
+      "phase": "open",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56971875,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56972687,
+      "phase": "close",
+      "rva": "0x5a61d",
+      "symbol": "_wow_user_window_refresh_graph@4"
+    },
+    {
+      "tick": 56973406,
+      "phase": "close",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56973953,
+      "phase": "close",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56974515,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56975125,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56975765,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56976390,
+      "phase": "open",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56977015,
+      "phase": "close",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56977687,
+      "phase": "close",
+      "rva": "0x6251f",
+      "symbol": "_publish_guest_return@8"
+    },
+    {
+      "tick": 56978234,
+      "phase": "close",
+      "rva": "0x5a67b",
+      "symbol": "_wow_user_window_refresh_message@16"
+    }
+  ],
+  "map_sha256": "D9175A0391B51F5F379E536B2DE5DAC1B98D4CE135E668666E29297146C4319D",
+  "limits": "One sampled return address per 64 projections; nearest symbol and optimizer inlining may obscure source-level caller; per-sample frequency is not exact call count. Diagnostic wrappers affect timing."
+}

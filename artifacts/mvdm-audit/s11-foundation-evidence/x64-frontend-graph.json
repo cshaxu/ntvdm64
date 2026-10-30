@@ -1,0 +1,7 @@
+{
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend",
+  "target": "ntcon.exe",
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "count": 74,
+  "commands_sha256": "0011721C15BB9723287CAD06F1011E1F048DF288674DB8F7598C65208B21E7BB"
+}

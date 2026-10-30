@@ -1,0 +1,26 @@
+{
+  "fixtureHash": "3959EAA0FD22969E57074F6775B6BA047440101A87CDBF7B702721D9AEAC363C",
+  "results": [
+    {
+      "case": "graph-snapshot",
+      "exitCode": 0,
+      "finished": "2026-10-29T16:32:16.0833416Z"
+    },
+    {
+      "case": "window-borrow",
+      "exitCode": 0,
+      "finished": "2026-10-29T16:32:32.2721271Z"
+    },
+    {
+      "case": "native-nested",
+      "exitCode": 0,
+      "finished": "2026-10-29T16:32:50.8843788Z"
+    },
+    {
+      "case": "native-creation",
+      "exitCode": 0,
+      "finished": "2026-10-29T16:33:07.8475682Z"
+    }
+  ],
+  "sourceHash": "FF5AF122ABD9E634CA3BEE1D2E15C2FD46FCA241F5A9D985D06889C549613E9A"
+}

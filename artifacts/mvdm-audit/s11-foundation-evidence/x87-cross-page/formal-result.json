@@ -1,0 +1,246 @@
+{
+  "fixture_sha256": "c88e49abd496d99c5028ed2b0f309be368e390d63f685d7ab6002763b1927fac",
+  "map_sha256": "4f8e09dc7df8ded88939506815d4ff15cec5aaf372b343f083953b8e51f561a2",
+  "cases": [
+    {
+      "case": 0,
+      "exit": 0,
+      "stderr": "case=0 group=0 span=94 bits=16 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=0000ffff first_tail=0000037f"
+    },
+    {
+      "case": 1,
+      "exit": 0,
+      "stderr": "case=1 group=0 span=108 bits=32 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=00000000 first_tail=0000037f"
+    },
+    {
+      "case": 2,
+      "exit": 0,
+      "stderr": "case=2 group=0 span=94 bits=16 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 3,
+      "exit": 0,
+      "stderr": "case=3 group=0 span=108 bits=32 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 4,
+      "exit": 0,
+      "stderr": "case=4 group=0 span=94 bits=16 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1059 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 5,
+      "exit": 0,
+      "stderr": "case=5 group=0 span=108 bits=32 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1067 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 6,
+      "exit": 0,
+      "stderr": "case=6 group=0 span=94 bits=16 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1059 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 7,
+      "exit": 0,
+      "stderr": "case=7 group=0 span=108 bits=32 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1067 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 8,
+      "exit": 0,
+      "stderr": "case=8 group=1 span=14 bits=16 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=0000ffff first_tail=0000037f"
+    },
+    {
+      "case": 9,
+      "exit": 0,
+      "stderr": "case=9 group=1 span=28 bits=32 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=00000000 first_tail=0000037f"
+    },
+    {
+      "case": 10,
+      "exit": 0,
+      "stderr": "case=10 group=1 span=14 bits=16 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 11,
+      "exit": 0,
+      "stderr": "case=11 group=1 span=28 bits=32 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 12,
+      "exit": 0,
+      "stderr": "case=12 group=1 span=14 bits=16 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1009 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 13,
+      "exit": 0,
+      "stderr": "case=13 group=1 span=28 bits=32 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1017 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 14,
+      "exit": 0,
+      "stderr": "case=14 group=1 span=14 bits=16 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1009 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 15,
+      "exit": 0,
+      "stderr": "case=15 group=1 span=28 bits=32 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1017 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 16,
+      "exit": 0,
+      "stderr": "case=16 group=2 span=8 bits=16 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=fff80000 first_tail=00000000"
+    },
+    {
+      "case": 17,
+      "exit": 0,
+      "stderr": "case=17 group=2 span=8 bits=32 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=fff80000 first_tail=00000000"
+    },
+    {
+      "case": 18,
+      "exit": 0,
+      "stderr": "case=18 group=2 span=8 bits=16 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000"
+    },
+    {
+      "case": 19,
+      "exit": 0,
+      "stderr": "case=19 group=2 span=8 bits=32 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000"
+    },
+    {
+      "case": 20,
+      "exit": 0,
+      "stderr": "case=20 group=2 span=8 bits=16 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 21,
+      "exit": 0,
+      "stderr": "case=21 group=2 span=8 bits=32 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 22,
+      "exit": 0,
+      "stderr": "case=22 group=2 span=8 bits=16 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 23,
+      "exit": 0,
+      "stderr": "case=23 group=2 span=8 bits=32 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 24,
+      "exit": 0,
+      "stderr": "case=24 group=3 span=10 bits=16 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=c0000000 first_tail=00000000"
+    },
+    {
+      "case": 25,
+      "exit": 0,
+      "stderr": "case=25 group=3 span=10 bits=32 read=0 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=c0000000 first_tail=00000000"
+    },
+    {
+      "case": 26,
+      "exit": 0,
+      "stderr": "case=26 group=3 span=10 bits=16 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 27,
+      "exit": 0,
+      "stderr": "case=27 group=3 span=10 bits=32 read=1 absent=0 readonly=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 28,
+      "exit": 0,
+      "stderr": "case=28 group=3 span=10 bits=16 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 29,
+      "exit": 0,
+      "stderr": "case=29 group=3 span=10 bits=32 read=0 absent=1 readonly=0 vector=14 error=6 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 30,
+      "exit": 0,
+      "stderr": "case=30 group=3 span=10 bits=16 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 31,
+      "exit": 0,
+      "stderr": "case=31 group=3 span=10 bits=32 read=1 absent=1 readonly=0 vector=14 error=4 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 32,
+      "exit": 0,
+      "stderr": "case=32 group=0 span=94 bits=16 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1059 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 33,
+      "exit": 0,
+      "stderr": "case=33 group=0 span=108 bits=32 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1067 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 34,
+      "exit": 0,
+      "stderr": "case=34 group=0 span=94 bits=16 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 35,
+      "exit": 0,
+      "stderr": "case=35 group=0 span=108 bits=32 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 40,
+      "exit": 0,
+      "stderr": "case=40 group=1 span=14 bits=16 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1009 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 41,
+      "exit": 0,
+      "stderr": "case=41 group=1 span=28 bits=32 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1017 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 42,
+      "exit": 0,
+      "stderr": "case=42 group=1 span=14 bits=16 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 43,
+      "exit": 0,
+      "stderr": "case=43 group=1 span=28 bits=32 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 48,
+      "exit": 0,
+      "stderr": "case=48 group=2 span=8 bits=16 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 49,
+      "exit": 0,
+      "stderr": "case=49 group=2 span=8 bits=32 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1003 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 50,
+      "exit": 0,
+      "stderr": "case=50 group=2 span=8 bits=16 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000"
+    },
+    {
+      "case": 51,
+      "exit": 0,
+      "stderr": "case=51 group=2 span=8 bits=32 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000"
+    },
+    {
+      "case": 56,
+      "exit": 0,
+      "stderr": "case=56 group=3 span=10 bits=16 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 57,
+      "exit": 0,
+      "stderr": "case=57 group=3 span=10 bits=32 read=0 absent=0 readonly=1 vector=14 error=7 cr2=7ffe1005 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 58,
+      "exit": 0,
+      "stderr": "case=58 group=3 span=10 bits=16 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    },
+    {
+      "case": 59,
+      "exit": 0,
+      "stderr": "case=59 group=3 span=10 bits=32 read=1 absent=0 readonly=1 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000"
+    }
+  ]
+}

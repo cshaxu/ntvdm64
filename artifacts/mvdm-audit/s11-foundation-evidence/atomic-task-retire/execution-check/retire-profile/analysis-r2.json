@@ -1,0 +1,72 @@
+{
+  "samples_total": 84,
+  "phases": [
+    {
+      "round": 1,
+      "phase": "open",
+      "wall_ms": 2500,
+      "sample_count": 30,
+      "estimated_scans": 1920,
+      "median_slots": 3329.0,
+      "median_sample_us": 113.0,
+      "estimated_inclusive_ms": 230.0,
+      "pending_samples": 0
+    },
+    {
+      "round": 1,
+      "phase": "close",
+      "wall_ms": 2250,
+      "sample_count": 6,
+      "estimated_scans": 384,
+      "median_slots": 3329.0,
+      "median_sample_us": 138.5,
+      "estimated_inclusive_ms": 63.7,
+      "pending_samples": 0
+    },
+    {
+      "round": 2,
+      "phase": "open",
+      "wall_ms": 2016,
+      "sample_count": 7,
+      "estimated_scans": 448,
+      "median_slots": 3329,
+      "median_sample_us": 115,
+      "estimated_inclusive_ms": 53.4,
+      "pending_samples": 0
+    },
+    {
+      "round": 2,
+      "phase": "close",
+      "wall_ms": 2250,
+      "sample_count": 6,
+      "estimated_scans": 384,
+      "median_slots": 3329.0,
+      "median_sample_us": 127.0,
+      "estimated_inclusive_ms": 53.1,
+      "pending_samples": 0
+    },
+    {
+      "round": 3,
+      "phase": "open",
+      "wall_ms": 2062,
+      "sample_count": 7,
+      "estimated_scans": 448,
+      "median_slots": 3329,
+      "median_sample_us": 125,
+      "estimated_inclusive_ms": 55.9,
+      "pending_samples": 0
+    },
+    {
+      "round": 3,
+      "phase": "close",
+      "wall_ms": 2266,
+      "sample_count": 6,
+      "estimated_scans": 384,
+      "median_slots": 3329.0,
+      "median_sample_us": 126.0,
+      "estimated_inclusive_ms": 48.7,
+      "pending_samples": 0
+    }
+  ],
+  "limitations": "Every 64th scan sampled; scan durations are inclusive and can double-count nested scans, sample estimates assume representative calls, file logging perturbs execution; cross-thread events filtered only by time."
+}

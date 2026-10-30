@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "pid": 26704,
+  "started": "2026-10-29T05:14:24.1186427Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\serial-retry.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/retry.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/retry.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:15:53.1324022Z"
+}

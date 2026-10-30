@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-empty.txt",
+    "BodyMs": 2596,
+    "CleanupMs": 254
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-native-zero.txt",
+    "BodyMs": 2240,
+    "CleanupMs": 203
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-missing.txt",
+    "BodyMs": 3246,
+    "CleanupMs": 202
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-native-seven.txt",
+    "BodyMs": 1150,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-native-streams.txt",
+    "BodyMs": 1163,
+    "CleanupMs": 193
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-native-eof.txt",
+    "BodyMs": 1196,
+    "CleanupMs": 194
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-mem.txt",
+    "BodyMs": 2166,
+    "CleanupMs": 218
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-nested-empty.txt",
+    "BodyMs": 2772,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-nested-mem.txt",
+    "BodyMs": 6319,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-mem-repeat.txt",
+    "BodyMs": 3228,
+    "CleanupMs": 226
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-direct-mem.txt",
+    "BodyMs": 944,
+    "CleanupMs": 194
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-command-c.txt",
+    "BodyMs": 979,
+    "CleanupMs": 182
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-command-c-seven.txt",
+    "BodyMs": 1208,
+    "CleanupMs": 208
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-guest-seven.txt",
+    "BodyMs": 937,
+    "CleanupMs": 214
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-command-c-mem.txt",
+    "BodyMs": 1003,
+    "CleanupMs": 225
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-direct-seven.txt",
+    "BodyMs": 1270,
+    "CleanupMs": 180
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reconciled-product-matrix\\Console-17-edit.txt",
+    "BodyMs": 4124,
+    "CleanupMs": 192
+  }
+]

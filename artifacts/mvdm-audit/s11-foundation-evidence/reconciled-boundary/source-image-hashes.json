@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+    "Hash": "2B5BEBDDE07783D3A4B0AC01AE35159F0AD3EA589FD35260AD86E0837C627174"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+    "Hash": "EC6218385A7A9FA6425A9E70DFFDBA8AEEAAFF11D73893EC8B853547F3FE677F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "7B4D0AD556AFE550288BE99390E4D832E25EA81C5E9C16F1343C20FE2BDDDE74"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "13F158DDA8DDBA07CFD7C2400E4ABD7DFB95F3D6BA7E31428066396EA1B317ED"
+  }
+]

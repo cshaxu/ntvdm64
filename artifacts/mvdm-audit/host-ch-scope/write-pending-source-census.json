@@ -1,0 +1,1875 @@
+{
+  "count": 82,
+  "identical": 82,
+  "linked_explicit": 76,
+  "inferred_linked": 82,
+  "rows": [
+    {
+      "path": "wow16/write/addprm.c",
+      "current_sha256": "8036B996D2AAF18BDF42016D47E7C19C4C36F0D3BC3A43952B840D4931AEA770",
+      "original_sha256": "8036B996D2AAF18BDF42016D47E7C19C4C36F0D3BC3A43952B840D4931AEA770",
+      "identical": true,
+      "explicit_make_objects": [
+        "addprm"
+      ],
+      "linked_explicit_objects": [
+        "addprm"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/cache.c",
+      "current_sha256": "B36ADF0B12D2F362FBF7F1206DD4075FEF88AD8BF42B390EF84B062F0CB40DA8",
+      "original_sha256": "B36ADF0B12D2F362FBF7F1206DD4075FEF88AD8BF42B390EF84B062F0CB40DA8",
+      "identical": true,
+      "explicit_make_objects": [
+        "cache"
+      ],
+      "linked_explicit_objects": [
+        "cache"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/chngwin.c",
+      "current_sha256": "DFCCE220D337D11D34A27DD337B761892711B4142C9FF3F3786105337E20CBE7",
+      "original_sha256": "DFCCE220D337D11D34A27DD337B761892711B4142C9FF3F3786105337E20CBE7",
+      "identical": true,
+      "explicit_make_objects": [
+        "chngwin"
+      ],
+      "linked_explicit_objects": [
+        "chngwin"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/clipbord.c",
+      "current_sha256": "2F497E581FD15D90BE3905744C4C2B62070C6028044BAE9D84C09A34D94F5AC6",
+      "original_sha256": "2F497E581FD15D90BE3905744C4C2B62070C6028044BAE9D84C09A34D94F5AC6",
+      "identical": true,
+      "explicit_make_objects": [
+        "clipbord"
+      ],
+      "linked_explicit_objects": [
+        "clipbord"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/clipbrd2.c",
+      "current_sha256": "192C1E68950DB0706F099265523AF5D4626425C9B60A1BF7070FEA996CF00A14",
+      "original_sha256": "192C1E68950DB0706F099265523AF5D4626425C9B60A1BF7070FEA996CF00A14",
+      "identical": true,
+      "explicit_make_objects": [
+        "clipbrd2"
+      ],
+      "linked_explicit_objects": [
+        "clipbrd2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/clipdisp.c",
+      "current_sha256": "153993307F529DE5F09BC59D4F06A6C62FB71D7224B2847BA972F7C9E1AD094B",
+      "original_sha256": "153993307F529DE5F09BC59D4F06A6C62FB71D7224B2847BA972F7C9E1AD094B",
+      "identical": true,
+      "explicit_make_objects": [
+        "clipdisp"
+      ],
+      "linked_explicit_objects": [
+        "clipdisp"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/cmd.c",
+      "current_sha256": "C0316B267A455BD98067F43739F0A756C958144D2BC806A43B2795C2E4E2F845",
+      "original_sha256": "C0316B267A455BD98067F43739F0A756C958144D2BC806A43B2795C2E4E2F845",
+      "identical": true,
+      "explicit_make_objects": [
+        "cmd"
+      ],
+      "linked_explicit_objects": [
+        "cmd"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/commdlg.c",
+      "current_sha256": "D1A806394022627243E51606A1CA5824FE4E7BB8F1CE33D000520F6C9CC8AE9D",
+      "original_sha256": "D1A806394022627243E51606A1CA5824FE4E7BB8F1CE33D000520F6C9CC8AE9D",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/createww.c",
+      "current_sha256": "CAD0BC405F82BF8FD37E6E1003CE9A3176A22D749445C334027B45E047782A08",
+      "original_sha256": "CAD0BC405F82BF8FD37E6E1003CE9A3176A22D749445C334027B45E047782A08",
+      "identical": true,
+      "explicit_make_objects": [
+        "createww"
+      ],
+      "linked_explicit_objects": [
+        "createww"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/curskeys.c",
+      "current_sha256": "02E58429472B6957F9498E7DE8A7F7A71E4B6F28654A48BD88CEA8BD2E920368",
+      "original_sha256": "02E58429472B6957F9498E7DE8A7F7A71E4B6F28654A48BD88CEA8BD2E920368",
+      "identical": true,
+      "explicit_make_objects": [
+        "curskeys"
+      ],
+      "linked_explicit_objects": [
+        "curskeys"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/debug.c",
+      "current_sha256": "090B38EF38690A49D31B9F2CC528244F19B48D679BA5ECCB60A94E9C41154320",
+      "original_sha256": "090B38EF38690A49D31B9F2CC528244F19B48D679BA5ECCB60A94E9C41154320",
+      "identical": true,
+      "explicit_make_objects": [
+        "debug"
+      ],
+      "linked_explicit_objects": [
+        "debug"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/diaalert.c",
+      "current_sha256": "3008B8F20600447967E2D9D663ADF20B5CAE0AE98B3733BA83197FE3AEB40632",
+      "original_sha256": "3008B8F20600447967E2D9D663ADF20B5CAE0AE98B3733BA83197FE3AEB40632",
+      "identical": true,
+      "explicit_make_objects": [
+        "diaalert"
+      ],
+      "linked_explicit_objects": [
+        "diaalert"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/diadiv.c",
+      "current_sha256": "8477B9127E8FEBA8EDCAB090F225911C82D8373E1D0DBEEC20DB858F5BFFCB08",
+      "original_sha256": "8477B9127E8FEBA8EDCAB090F225911C82D8373E1D0DBEEC20DB858F5BFFCB08",
+      "identical": true,
+      "explicit_make_objects": [
+        "diadiv"
+      ],
+      "linked_explicit_objects": [
+        "diadiv"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/diapara.c",
+      "current_sha256": "7D5368F1A2B7E467F1D5E0EF572CBF9CD8808F8BB95F169E3B8E692029CCAAB2",
+      "original_sha256": "7D5368F1A2B7E467F1D5E0EF572CBF9CD8808F8BB95F169E3B8E692029CCAAB2",
+      "identical": true,
+      "explicit_make_objects": [
+        "diapara"
+      ],
+      "linked_explicit_objects": [
+        "diapara"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/diarepag.c",
+      "current_sha256": "67A8CF2F0AE26E5A79FB58E11EEFF36580EBEF0E2E951212DE3AEDD4BCE5C197",
+      "original_sha256": "67A8CF2F0AE26E5A79FB58E11EEFF36580EBEF0E2E951212DE3AEDD4BCE5C197",
+      "identical": true,
+      "explicit_make_objects": [
+        "diarepag"
+      ],
+      "linked_explicit_objects": [
+        "diarepag"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/diasubs.c",
+      "current_sha256": "C3587E6E1061E9385078D3521913ADCB33931FAA05F435F3D6AE689831BBF20B",
+      "original_sha256": "C3587E6E1061E9385078D3521913ADCB33931FAA05F435F3D6AE689831BBF20B",
+      "identical": true,
+      "explicit_make_objects": [
+        "diasubs"
+      ],
+      "linked_explicit_objects": [
+        "diasubs"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/disp.c",
+      "current_sha256": "A8A7FB5ADCB389288D0C90772C77EE560890C7C598028381F676A5C39ABCFE13",
+      "original_sha256": "A8A7FB5ADCB389288D0C90772C77EE560890C7C598028381F676A5C39ABCFE13",
+      "identical": true,
+      "explicit_make_objects": [
+        "disp"
+      ],
+      "linked_explicit_objects": [
+        "disp"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/doc.c",
+      "current_sha256": "0A5087CBA747BB3FBDB68E422893BB0B4D1FE1F46D4019870C38B9CD52FD4CB5",
+      "original_sha256": "0A5087CBA747BB3FBDB68E422893BB0B4D1FE1F46D4019870C38B9CD52FD4CB5",
+      "identical": true,
+      "explicit_make_objects": [
+        "doc"
+      ],
+      "linked_explicit_objects": [
+        "doc"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/doprm.c",
+      "current_sha256": "823BA1AD56C899B5CBDB950F76F2110D2539055C470B474B51C86F0E59D22D4C",
+      "original_sha256": "823BA1AD56C899B5CBDB950F76F2110D2539055C470B474B51C86F0E59D22D4C",
+      "identical": true,
+      "explicit_make_objects": [
+        "doprm"
+      ],
+      "linked_explicit_objects": [
+        "doprm"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/edit.c",
+      "current_sha256": "5A069B76FA47928845005DCA58C0E462488E12B989E11F9286F72195112A23B3",
+      "original_sha256": "5A069B76FA47928845005DCA58C0E462488E12B989E11F9286F72195112A23B3",
+      "identical": true,
+      "explicit_make_objects": [
+        "edit"
+      ],
+      "linked_explicit_objects": [
+        "edit"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/editpgtb.c",
+      "current_sha256": "0A359C075D8541DA3C884F3AD764481B6E8F06797DDD29944A8E2DCA33735EB5",
+      "original_sha256": "0A359C075D8541DA3C884F3AD764481B6E8F06797DDD29944A8E2DCA33735EB5",
+      "identical": true,
+      "explicit_make_objects": [
+        "editpgtb"
+      ],
+      "linked_explicit_objects": [
+        "editpgtb"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fetch.c",
+      "current_sha256": "B0E943FB5D765D0289964A716F18DD0E500B5C68C61FC53D746FF609C5FA2430",
+      "original_sha256": "B0E943FB5D765D0289964A716F18DD0E500B5C68C61FC53D746FF609C5FA2430",
+      "identical": true,
+      "explicit_make_objects": [
+        "fetch"
+      ],
+      "linked_explicit_objects": [
+        "fetch"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/file.c",
+      "current_sha256": "842A8A8C4432F0BBAA00B66886EBD76CF96149460F8AAAED428B2CBDEC48749B",
+      "original_sha256": "842A8A8C4432F0BBAA00B66886EBD76CF96149460F8AAAED428B2CBDEC48749B",
+      "identical": true,
+      "explicit_make_objects": [
+        "file"
+      ],
+      "linked_explicit_objects": [
+        "file"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fileres.c",
+      "current_sha256": "4B8F58BA4C3D89A7F56912B5A19687CC1AF6A81D1EB98EBC766B1172E7991F9E",
+      "original_sha256": "4B8F58BA4C3D89A7F56912B5A19687CC1AF6A81D1EB98EBC766B1172E7991F9E",
+      "identical": true,
+      "explicit_make_objects": [
+        "fileres"
+      ],
+      "linked_explicit_objects": [
+        "fileres"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fileutil.c",
+      "current_sha256": "642CAB428F8D1BA2D3E652F67F7750DF098481102EA55A9E6B446EFE06D0668F",
+      "original_sha256": "642CAB428F8D1BA2D3E652F67F7750DF098481102EA55A9E6B446EFE06D0668F",
+      "identical": true,
+      "explicit_make_objects": [
+        "fileutil"
+      ],
+      "linked_explicit_objects": [
+        "fileutil"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fontdlg.c",
+      "current_sha256": "80EF51FA1601818A8C791DC30930996836F94807ECDC74D68C28DA1219F171BA",
+      "original_sha256": "80EF51FA1601818A8C791DC30930996836F94807ECDC74D68C28DA1219F171BA",
+      "identical": true,
+      "explicit_make_objects": [
+        "fontdlg"
+      ],
+      "linked_explicit_objects": [
+        "fontdlg"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fontenum.c",
+      "current_sha256": "8DF1E484473344870EC3353220C385251A6BFDE3FC8046FD081302E70C8BBE99",
+      "original_sha256": "8DF1E484473344870EC3353220C385251A6BFDE3FC8046FD081302E70C8BBE99",
+      "identical": true,
+      "explicit_make_objects": [
+        "fontenum"
+      ],
+      "linked_explicit_objects": [
+        "fontenum"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/fontutil.c",
+      "current_sha256": "2EF6249031361B5D779032368E6CA40E6F8AFB1C843553366B5B2738291CB3D7",
+      "original_sha256": "2EF6249031361B5D779032368E6CA40E6F8AFB1C843553366B5B2738291CB3D7",
+      "identical": true,
+      "explicit_make_objects": [
+        "fontutil"
+      ],
+      "linked_explicit_objects": [
+        "fontutil"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/format2.c",
+      "current_sha256": "A3A0207CC4D7CC2A7B9595A1E359D6B1399132692DB7B9152EC4F520E86E5D4E",
+      "original_sha256": "A3A0207CC4D7CC2A7B9595A1E359D6B1399132692DB7B9152EC4F520E86E5D4E",
+      "identical": true,
+      "explicit_make_objects": [
+        "format2"
+      ],
+      "linked_explicit_objects": [
+        "format2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/heapmain.c",
+      "current_sha256": "DCC8C1A60B0D300F8410F84D7954E5B6572DE07BE4F8046DA5523EB314CB0D86",
+      "original_sha256": "DCC8C1A60B0D300F8410F84D7954E5B6572DE07BE4F8046DA5523EB314CB0D86",
+      "identical": true,
+      "explicit_make_objects": [
+        "heapmain"
+      ],
+      "linked_explicit_objects": [
+        "heapmain"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/heaprare.c",
+      "current_sha256": "D48BE668786891A51185B9FC20A44D913595F87B6478401B450B954BE82B8D66",
+      "original_sha256": "D48BE668786891A51185B9FC20A44D913595F87B6478401B450B954BE82B8D66",
+      "identical": true,
+      "explicit_make_objects": [
+        "heaprare"
+      ],
+      "linked_explicit_objects": [
+        "heaprare"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/initmmw.c",
+      "current_sha256": "191D79C45121830C90A88BD048A8FE13A57468AB0D83E830B9AAA9808D8AA974",
+      "original_sha256": "191D79C45121830C90A88BD048A8FE13A57468AB0D83E830B9AAA9808D8AA974",
+      "identical": true,
+      "explicit_make_objects": [
+        "initmmw"
+      ],
+      "linked_explicit_objects": [
+        "initmmw"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/initwin.c",
+      "current_sha256": "E305F8DB9272959E6F7766A03AB209D0E60CB07CD9C71F52F893C797D1E48842",
+      "original_sha256": "E305F8DB9272959E6F7766A03AB209D0E60CB07CD9C71F52F893C797D1E48842",
+      "identical": true,
+      "explicit_make_objects": [
+        "initwin"
+      ],
+      "linked_explicit_objects": [
+        "initwin"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/insert.c",
+      "current_sha256": "6FF4EF3B614D06B97641D51E3426D7FEA28CE0A564B738299DD48213250C6C16",
+      "original_sha256": "6FF4EF3B614D06B97641D51E3426D7FEA28CE0A564B738299DD48213250C6C16",
+      "identical": true,
+      "explicit_make_objects": [
+        "insert"
+      ],
+      "linked_explicit_objects": [
+        "insert"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/insert2.c",
+      "current_sha256": "F71925212E5625A1D7BB424C63CBF082194C82AEFE6EC6A03304A80089444549",
+      "original_sha256": "F71925212E5625A1D7BB424C63CBF082194C82AEFE6EC6A03304A80089444549",
+      "identical": true,
+      "explicit_make_objects": [
+        "insert2"
+      ],
+      "linked_explicit_objects": [
+        "insert2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/insertco.c",
+      "current_sha256": "82336C60E7B56A8493AEB56E7173DB800DE1509BEF00DF115A995758F75A05FB",
+      "original_sha256": "82336C60E7B56A8493AEB56E7173DB800DE1509BEF00DF115A995758F75A05FB",
+      "identical": true,
+      "explicit_make_objects": [
+        "insertco"
+      ],
+      "linked_explicit_objects": [
+        "insertco"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/jumppage.c",
+      "current_sha256": "492466270E6CB451D1DA97C29948997DFB8B01C1E6EC1BB66F81FC48CAFC3173",
+      "original_sha256": "492466270E6CB451D1DA97C29948997DFB8B01C1E6EC1BB66F81FC48CAFC3173",
+      "identical": true,
+      "explicit_make_objects": [
+        "jumppage"
+      ],
+      "linked_explicit_objects": [
+        "jumppage"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/loadfnt2.c",
+      "current_sha256": "133CBED5AF13C6A41BBAF05F6CFF0D5E37D10456425B0A96B5278093DC76F81B",
+      "original_sha256": "133CBED5AF13C6A41BBAF05F6CFF0D5E37D10456425B0A96B5278093DC76F81B",
+      "identical": true,
+      "explicit_make_objects": [
+        "loadfnt2"
+      ],
+      "linked_explicit_objects": [
+        "loadfnt2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/loadfont.c",
+      "current_sha256": "28886E6C5899449C24FEDEE1FD63442C5DBA22FC15BFCBF7F4A24E37B557071D",
+      "original_sha256": "28886E6C5899449C24FEDEE1FD63442C5DBA22FC15BFCBF7F4A24E37B557071D",
+      "identical": true,
+      "explicit_make_objects": [
+        "loadfont"
+      ],
+      "linked_explicit_objects": [
+        "loadfont"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/mainloop.c",
+      "current_sha256": "B4942966464098F559FA34A9EEBF3CC9BF0DE693D9DF01C7B247969E285D084C",
+      "original_sha256": "B4942966464098F559FA34A9EEBF3CC9BF0DE693D9DF01C7B247969E285D084C",
+      "identical": true,
+      "explicit_make_objects": [
+        "mainloop"
+      ],
+      "linked_explicit_objects": [
+        "mainloop"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/mdoc.c",
+      "current_sha256": "2900C27DB7A3E88BDA67754624B0AE32C992116321F5BB9F81D71DEDC3E389AC",
+      "original_sha256": "2900C27DB7A3E88BDA67754624B0AE32C992116321F5BB9F81D71DEDC3E389AC",
+      "identical": true,
+      "explicit_make_objects": [
+        "mdoc"
+      ],
+      "linked_explicit_objects": [
+        "mdoc"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/menu.c",
+      "current_sha256": "69F0417C8163BC911E839C2BC78BBFC15B84E97BFD773CC1338A71519C667851",
+      "original_sha256": "69F0417C8163BC911E839C2BC78BBFC15B84E97BFD773CC1338A71519C667851",
+      "identical": true,
+      "explicit_make_objects": [
+        "menu"
+      ],
+      "linked_explicit_objects": [
+        "menu"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/mglobals.c",
+      "current_sha256": "0B92D024E9E6DC693F9214F11F01FFDE1448AA9841C8CF4FCD930C03D304A06D",
+      "original_sha256": "0B92D024E9E6DC693F9214F11F01FFDE1448AA9841C8CF4FCD930C03D304A06D",
+      "identical": true,
+      "explicit_make_objects": [
+        "mglobals"
+      ],
+      "linked_explicit_objects": [
+        "mglobals"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/mmw.c",
+      "current_sha256": "A3CC7629DCC1B710E79EF62340442194363C08A8B0E3B54C20B8269263F05137",
+      "original_sha256": "A3CC7629DCC1B710E79EF62340442194363C08A8B0E3B54C20B8269263F05137",
+      "identical": true,
+      "explicit_make_objects": [
+        "mmw"
+      ],
+      "linked_explicit_objects": [
+        "mmw"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/mouse.c",
+      "current_sha256": "BE1B0906703948AE974D74269AD9188D8D0780B2B819350137500ACBD54D5C2B",
+      "original_sha256": "BE1B0906703948AE974D74269AD9188D8D0780B2B819350137500ACBD54D5C2B",
+      "identical": true,
+      "explicit_make_objects": [
+        "mouse"
+      ],
+      "linked_explicit_objects": [
+        "mouse"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/obj.c",
+      "current_sha256": "C482FF9BE60EF68B1F1D0D294A3CF14E1FCF0C488EA5308254CCF8391211EE16",
+      "original_sha256": "C482FF9BE60EF68B1F1D0D294A3CF14E1FCF0C488EA5308254CCF8391211EE16",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/obj2.c",
+      "current_sha256": "1D09D4B110C58F23473D7616A2171CB0204B81DB5E0234FBF7C56D027E9689BB",
+      "original_sha256": "1D09D4B110C58F23473D7616A2171CB0204B81DB5E0234FBF7C56D027E9689BB",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/obj3.c",
+      "current_sha256": "953C536D28DC19868571EBF330F14A89AA764A50E25CA2034217DAD15537ACFD",
+      "original_sha256": "953C536D28DC19868571EBF330F14A89AA764A50E25CA2034217DAD15537ACFD",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/objpsp.c",
+      "current_sha256": "CF9BE294F1E713C2ED15F397F8F6865A03B583B38EA6B9C53DB266EC08226583",
+      "original_sha256": "CF9BE294F1E713C2ED15F397F8F6865A03B583B38EA6B9C53DB266EC08226583",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/objreg.c",
+      "current_sha256": "87DEDCBEF7BE941D0033022A84FBB9AB6272395DDEE6AB5235817CD961B57146",
+      "original_sha256": "87DEDCBEF7BE941D0033022A84FBB9AB6272395DDEE6AB5235817CD961B57146",
+      "identical": true,
+      "explicit_make_objects": [],
+      "linked_explicit_objects": [],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/open.c",
+      "current_sha256": "DA2CB4D6B8659F29979DC15A6A991DAA3ED613645D89BC1D21387918D0E4653C",
+      "original_sha256": "DA2CB4D6B8659F29979DC15A6A991DAA3ED613645D89BC1D21387918D0E4653C",
+      "identical": true,
+      "explicit_make_objects": [
+        "open"
+      ],
+      "linked_explicit_objects": [
+        "open"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/pageinfo.c",
+      "current_sha256": "10F2A678F06F630C05009FEAC9A25444A15C16E3CF5982AC6FA00A9FFD22430B",
+      "original_sha256": "10F2A678F06F630C05009FEAC9A25444A15C16E3CF5982AC6FA00A9FFD22430B",
+      "identical": true,
+      "explicit_make_objects": [
+        "pageinfo"
+      ],
+      "linked_explicit_objects": [
+        "pageinfo"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/pictdrag.c",
+      "current_sha256": "6249E171FD8D69E4C7E6D24C851D844A796F25BFFA331DC7CAE3D72F43698B60",
+      "original_sha256": "6249E171FD8D69E4C7E6D24C851D844A796F25BFFA331DC7CAE3D72F43698B60",
+      "identical": true,
+      "explicit_make_objects": [
+        "pictdrag"
+      ],
+      "linked_explicit_objects": [
+        "pictdrag"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/picture.c",
+      "current_sha256": "D0530F73787B3E460A7851EAD6831619845930D0ED7D2D49CA5E9870351C4C41",
+      "original_sha256": "D0530F73787B3E460A7851EAD6831619845930D0ED7D2D49CA5E9870351C4C41",
+      "identical": true,
+      "explicit_make_objects": [
+        "picture"
+      ],
+      "linked_explicit_objects": [
+        "picture"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/picture2.c",
+      "current_sha256": "25C7DE9C9F740A6F48B8BEB424C38EC6712CB79867C10B6B608EDBE8C87CEA93",
+      "original_sha256": "25C7DE9C9F740A6F48B8BEB424C38EC6712CB79867C10B6B608EDBE8C87CEA93",
+      "identical": true,
+      "explicit_make_objects": [
+        "picture2"
+      ],
+      "linked_explicit_objects": [
+        "picture2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/print.c",
+      "current_sha256": "482A8E2D64EC26361631BAB7D623092F092482EC7918D54AC8CFCA6E69CE395D",
+      "original_sha256": "482A8E2D64EC26361631BAB7D623092F092482EC7918D54AC8CFCA6E69CE395D",
+      "identical": true,
+      "explicit_make_objects": [
+        "print"
+      ],
+      "linked_explicit_objects": [
+        "print"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/print2.c",
+      "current_sha256": "2E75C06914D772B74E4D75080F02B98C0C237AF71A1BA1BB7B159CFA57CD6CF4",
+      "original_sha256": "2E75C06914D772B74E4D75080F02B98C0C237AF71A1BA1BB7B159CFA57CD6CF4",
+      "identical": true,
+      "explicit_make_objects": [
+        "print2"
+      ],
+      "linked_explicit_objects": [
+        "print2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/print3.c",
+      "current_sha256": "854566A0317CD2AB24E112BED35C10B0977259AF6D703901293F093727A26397",
+      "original_sha256": "854566A0317CD2AB24E112BED35C10B0977259AF6D703901293F093727A26397",
+      "identical": true,
+      "explicit_make_objects": [
+        "print3"
+      ],
+      "linked_explicit_objects": [
+        "print3"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/printdlg.c",
+      "current_sha256": "F378D48C181129A3D71B17EE2FFE4BC0C7F48FDFD37805665F69864DBEE0C2CC",
+      "original_sha256": "F378D48C181129A3D71B17EE2FFE4BC0C7F48FDFD37805665F69864DBEE0C2CC",
+      "identical": true,
+      "explicit_make_objects": [
+        "printdlg"
+      ],
+      "linked_explicit_objects": [
+        "printdlg"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/quit.c",
+      "current_sha256": "D38B19F9F6B819CEF9CE370B8D3B6741F35EC1110268966683007FAF191C8DE6",
+      "original_sha256": "D38B19F9F6B819CEF9CE370B8D3B6741F35EC1110268966683007FAF191C8DE6",
+      "identical": true,
+      "explicit_make_objects": [
+        "quit"
+      ],
+      "linked_explicit_objects": [
+        "quit"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/rare.c",
+      "current_sha256": "8D9C099441F10FBBF524995059DE7EC5DB077CC75881D71C5195AA50C8D6D292",
+      "original_sha256": "8D9C099441F10FBBF524995059DE7EC5DB077CC75881D71C5195AA50C8D6D292",
+      "identical": true,
+      "explicit_make_objects": [
+        "rare"
+      ],
+      "linked_explicit_objects": [
+        "rare"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/ruler.c",
+      "current_sha256": "A625476A3E657466EF53609745DC08B5184D38E1528D76B50378DAA9D56EA779",
+      "original_sha256": "A625476A3E657466EF53609745DC08B5184D38E1528D76B50378DAA9D56EA779",
+      "identical": true,
+      "explicit_make_objects": [
+        "ruler"
+      ],
+      "linked_explicit_objects": [
+        "ruler"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/ruler2.c",
+      "current_sha256": "A77236FC8CD8C52CBC19C1C1094AAE61EACE07B38C15BEA7C57FE35165929114",
+      "original_sha256": "A77236FC8CD8C52CBC19C1C1094AAE61EACE07B38C15BEA7C57FE35165929114",
+      "identical": true,
+      "explicit_make_objects": [
+        "ruler2"
+      ],
+      "linked_explicit_objects": [
+        "ruler2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/ruler3.c",
+      "current_sha256": "B6D453681227FFD48B16F8B6BE32D0E0E7FA36A61D5979AC81DD09FBBB47F5A0",
+      "original_sha256": "B6D453681227FFD48B16F8B6BE32D0E0E7FA36A61D5979AC81DD09FBBB47F5A0",
+      "identical": true,
+      "explicit_make_objects": [
+        "ruler3"
+      ],
+      "linked_explicit_objects": [
+        "ruler3"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/running.c",
+      "current_sha256": "323D7DF31E93038E875158FA5FF9F69F646DAFFD7F2A33AF8B8F04F02ACB5653",
+      "original_sha256": "323D7DF31E93038E875158FA5FF9F69F646DAFFD7F2A33AF8B8F04F02ACB5653",
+      "identical": true,
+      "explicit_make_objects": [
+        "running"
+      ],
+      "linked_explicit_objects": [
+        "running"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/screen.c",
+      "current_sha256": "D321BB6141C2809B42A3DA7B2ED5A329FE9E126141CD475B40E17F71D8E93B87",
+      "original_sha256": "D321BB6141C2809B42A3DA7B2ED5A329FE9E126141CD475B40E17F71D8E93B87",
+      "identical": true,
+      "explicit_make_objects": [
+        "screen"
+      ],
+      "linked_explicit_objects": [
+        "screen"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/scrnchng.c",
+      "current_sha256": "5E02B1978A0CAB4D3A92C876790678A0FB5EC79A9CBF1F68429BB1096D4FBF95",
+      "original_sha256": "5E02B1978A0CAB4D3A92C876790678A0FB5EC79A9CBF1F68429BB1096D4FBF95",
+      "identical": true,
+      "explicit_make_objects": [
+        "scrnchng"
+      ],
+      "linked_explicit_objects": [
+        "scrnchng"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/scrollhz.c",
+      "current_sha256": "998282376D107BFAC8F88499476E1FFAA8AAAA6D9205DF187628269AC7AB5553",
+      "original_sha256": "998282376D107BFAC8F88499476E1FFAA8AAAA6D9205DF187628269AC7AB5553",
+      "identical": true,
+      "explicit_make_objects": [
+        "scrollhz"
+      ],
+      "linked_explicit_objects": [
+        "scrollhz"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/scrollvt.c",
+      "current_sha256": "FBF2C1BC8CE4363912F9DD05FC62DBE1EB63BBFABF4BD334926868DE05D1F446",
+      "original_sha256": "FBF2C1BC8CE4363912F9DD05FC62DBE1EB63BBFABF4BD334926868DE05D1F446",
+      "identical": true,
+      "explicit_make_objects": [
+        "scrollvt"
+      ],
+      "linked_explicit_objects": [
+        "scrollvt"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/search.c",
+      "current_sha256": "FC61F0CA3628AFC7677222B60D3DF8EC5E00E0C5F1ED434910C0E5648BC65B76",
+      "original_sha256": "FC61F0CA3628AFC7677222B60D3DF8EC5E00E0C5F1ED434910C0E5648BC65B76",
+      "identical": true,
+      "explicit_make_objects": [
+        "search"
+      ],
+      "linked_explicit_objects": [
+        "search"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/select.c",
+      "current_sha256": "BEDD5B66FD1C9DC86E7DCDE907F7A491A97901DEB31557D7A0081275024AF25D",
+      "original_sha256": "BEDD5B66FD1C9DC86E7DCDE907F7A491A97901DEB31557D7A0081275024AF25D",
+      "identical": true,
+      "explicit_make_objects": [
+        "select"
+      ],
+      "linked_explicit_objects": [
+        "select"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/select2.c",
+      "current_sha256": "F4188DA970E769DFB5F761E1B9809D39DA9373019B502AF912D8BA57F43A99DD",
+      "original_sha256": "F4188DA970E769DFB5F761E1B9809D39DA9373019B502AF912D8BA57F43A99DD",
+      "identical": true,
+      "explicit_make_objects": [
+        "select2"
+      ],
+      "linked_explicit_objects": [
+        "select2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/selectsp.c",
+      "current_sha256": "7F6A39FEF9C26982C41097E3408DA007B3A95B9FB27398FB447CF9725A993B62",
+      "original_sha256": "7F6A39FEF9C26982C41097E3408DA007B3A95B9FB27398FB447CF9725A993B62",
+      "identical": true,
+      "explicit_make_objects": [
+        "selectsp"
+      ],
+      "linked_explicit_objects": [
+        "selectsp"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/trans2.c",
+      "current_sha256": "23B0B16D189EE2E52FB1CA6A8BA51229C092199A6479CA8D4B8F36C1176E03AB",
+      "original_sha256": "23B0B16D189EE2E52FB1CA6A8BA51229C092199A6479CA8D4B8F36C1176E03AB",
+      "identical": true,
+      "explicit_make_objects": [
+        "trans2"
+      ],
+      "linked_explicit_objects": [
+        "trans2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/trans3.c",
+      "current_sha256": "5F45B6DAF57F4BE6B8463981170E1D57A222D5CA948F30476DFDB9453A622165",
+      "original_sha256": "5F45B6DAF57F4BE6B8463981170E1D57A222D5CA948F30476DFDB9453A622165",
+      "identical": true,
+      "explicit_make_objects": [
+        "trans3"
+      ],
+      "linked_explicit_objects": [
+        "trans3"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/trans4.c",
+      "current_sha256": "A3AA216EBFCA9E26F04B8D4EB0A7BED7F04E78213DDD7BEFA4940D5827B2B1F8",
+      "original_sha256": "A3AA216EBFCA9E26F04B8D4EB0A7BED7F04E78213DDD7BEFA4940D5827B2B1F8",
+      "identical": true,
+      "explicit_make_objects": [
+        "trans4"
+      ],
+      "linked_explicit_objects": [
+        "trans4"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/transbuf.c",
+      "current_sha256": "AA3D96FE3E523D7BCE2BE925F6D23EFCCD6AC7825A93149AB8D7B05B7C21A9D1",
+      "original_sha256": "AA3D96FE3E523D7BCE2BE925F6D23EFCCD6AC7825A93149AB8D7B05B7C21A9D1",
+      "identical": true,
+      "explicit_make_objects": [
+        "transbuf"
+      ],
+      "linked_explicit_objects": [
+        "transbuf"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/transfer.c",
+      "current_sha256": "1E7E1BEFD9125303A240DC3705921C538D9B1518A7FB61F5040D589C640520AA",
+      "original_sha256": "1E7E1BEFD9125303A240DC3705921C538D9B1518A7FB61F5040D589C640520AA",
+      "identical": true,
+      "explicit_make_objects": [
+        "transfer"
+      ],
+      "linked_explicit_objects": [
+        "transfer"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/undo.c",
+      "current_sha256": "06A26A54E9FCB2BF08DCFF4CC217131C049BBB701E40B46408FA497076A303BE",
+      "original_sha256": "06A26A54E9FCB2BF08DCFF4CC217131C049BBB701E40B46408FA497076A303BE",
+      "identical": true,
+      "explicit_make_objects": [
+        "undo"
+      ],
+      "linked_explicit_objects": [
+        "undo"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/util.c",
+      "current_sha256": "7981A317B093A1087EC16F3F0F53703F6CCADF2C42307B54A94A1A6CE0CED2E4",
+      "original_sha256": "7981A317B093A1087EC16F3F0F53703F6CCADF2C42307B54A94A1A6CE0CED2E4",
+      "identical": true,
+      "explicit_make_objects": [
+        "util"
+      ],
+      "linked_explicit_objects": [
+        "util"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/util2.c",
+      "current_sha256": "541BFF2A3FB990F8DABAEB779CF62ACE9387DE349988A71C77ED9EAD9957C004",
+      "original_sha256": "541BFF2A3FB990F8DABAEB779CF62ACE9387DE349988A71C77ED9EAD9957C004",
+      "identical": true,
+      "explicit_make_objects": [
+        "util2"
+      ],
+      "linked_explicit_objects": [
+        "util2"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/write/wwactde.c",
+      "current_sha256": "CEB9B83F45637D0C3244411B350CB2706EFF5EB2F57F030FD7DBC90FC80F6324",
+      "original_sha256": "CEB9B83F45637D0C3244411B350CB2706EFF5EB2F57F030FD7DBC90FC80F6324",
+      "identical": true,
+      "explicit_make_objects": [
+        "wwactde"
+      ],
+      "linked_explicit_objects": [
+        "wwactde"
+      ],
+      "inferred_object_linked": true,
+      "host_selected": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    }
+  ],
+  "limitation": "Original make conditional branches are not evaluated; host selected x86 commands and recorded deps only; no behavior proof.",
+  "build_input_sha256": {
+    "src\\mvdm\\wow16\\write\\makefile": "D5EB390F308326D42ECB1B81EC13136C8AE01C1ADF2623D64A45D489BE60AD83",
+    "src\\mvdm\\wow16\\write\\write.lnk": "BCD0A358ACD9AA0271B1EB17BB3929792C9FC33F2E2DD643AD992A40BD74D151"
+  }
+}

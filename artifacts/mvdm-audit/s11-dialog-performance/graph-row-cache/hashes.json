@@ -1,0 +1,42 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2C796438658DCB9C73E7B64566F3132141F265C14BDBC8526745B81814B7E52A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\fixture-result.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ADEB8B33A9339ED826B7EA59D2172E34A1EF1840E280B14FFC0CD8FF72C09BAE",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\observer.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8785C0F9220A9E2541E0EB7BD10B67CDA787A5422FB528883486F057EB2B8906",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\probe.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "CCB933A84783327E31A17CD9DF88132C0D4F56B1E6F24CF2C966C5E2DEC7CD53",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\product-system32-manifest.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EBBEB7EB7FA5B004737B8C5B9717DBF2D653C044CC8EE9607483677633E70270",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\result.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EBBEB7EB7FA5B004737B8C5B9717DBF2D653C044CC8EE9607483677633E70270",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\stress-result.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5E05AC616DBF7EFD541FF0DC232A1134CB80F763569ED154BBE4FB15311BB36A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\windows.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AB1EAD2DD199D6D31424AC3A462FFB0153926BAAFD66340A7C86D15937C8373F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\graph-row-cache\\wow_user_borrow_scope.c"
+  }
+]

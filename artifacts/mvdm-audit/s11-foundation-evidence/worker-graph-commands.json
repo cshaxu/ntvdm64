@@ -1,0 +1,12 @@
+{
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+  "targets": [
+    "ntvdm.exe",
+    "ccpu-bit-matrix-test.exe",
+    "ccpu-far-exception-test.exe",
+    "ccpu-bit-native-oracle.exe"
+  ],
+  "count": 546,
+  "commands_sha256": "05C5C1DAE75766B6E63AF6548E342D4972C7C0E3FE8D523EB6438A990DB6F76D"
+}

@@ -1,0 +1,9 @@
+{
+  "timingLimit": "capture_fault waits ten seconds before modal observation; timings are not performance evidence",
+  "mode": "CaptureFault diagnostic only",
+  "probeSha256": "914854ABB6932DD478F3137E8EDDC735539EC2ADE47BA108FA619E1E2D00AF99",
+  "result": "PASS SOL Options modal route and launcher completion\r\n",
+  "packageEvidence": "creation-integrated-product-results.json",
+  "nullCreateRecords": 0,
+  "windowsSha256": "99693C9F3688ABA51C282FF09AED92D54A71FF8DB1A609CBD065530489A659A3"
+}

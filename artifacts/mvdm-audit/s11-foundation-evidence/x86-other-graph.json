@@ -1,0 +1,10 @@
+{
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+  "targets": [
+    "VDMREDIR.dll",
+    "nthook32.dll"
+  ],
+  "count": 587,
+  "commands_sha256": "58A952C7F97DDB153640B47BB4027161753E9075044E22894DFF494D1CD8C9EE"
+}

@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C26C7A2B511CF701D7ADC86E3DD810013AE1C19817C9E8DE9CABED31A9ABEEF9",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "0FF8EB7E3E78E5CCEFC44D9E994D3B0DB811B4DFC64C0797084467B46E9B6135",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "740A49A2B0625AAC12CD8FE6B5473AB35F55433767034ACACD4921E651F1DA73",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-dll-entry-bridge.c"
+  }
+]

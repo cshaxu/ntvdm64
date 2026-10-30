@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+    "Hash": "ECE3EB9211EF3A9D19DA6DF1F5815D44D645CC9D6972D4AE202A740D6BF8AA3F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe.map",
+    "Hash": "A8FFF39063B3B841297D9066C8A59AC0AB0DDCE4CD9DB3FCEC7919AC31F988EE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\generated\\ntvdm-wow32-provider.def",
+    "Hash": "1CC31920D8FD17C9B3274D2316AE3BB04FDE4CD7D58E054CFED7F76F6C200F86"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_mem.c",
+    "Hash": "6ABEA408AEF77B1B45C87065F14D56FF046D87C0B52CBFA2534011DB0270D1B1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\inc\\memapi.h",
+    "Hash": "CD8404712FB3293F612BE38DE095E66D7A5B99CB265EE86AD0FC2015FE38439B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "193B9E6B2EAC989945E08CE6A81117D50A85D02BBA75EB64212983F160001F0C"
+  }
+]

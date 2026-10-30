@@ -1,0 +1,70 @@
+[
+  {
+    "variant": "fixed",
+    "result": {
+      "exit_code": 0,
+      "utc": "2026-10-29T14:40:52.9882873Z"
+    },
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-fixed\\fixture.exe",
+        "Hash": "4DDF52038CAD96AB9762DFE50E8A068E0ACEA8A4D36AEA6BAEF98DA89DEA6852"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-fixed\\fixture.c",
+        "Hash": "6CCE706C09B33A5A51DCB49C401C4ADFB36BE230C591B530F468D39D67398D56"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-fixed\\wow_window_words_binding.c",
+        "Hash": "EEF549BE97B9E9E81EDC3D5EEF4AC3AF6D2869FC6D98DB15AD38B5DC0F0D9EBA"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-fixed\\wow_window_words_binding.obj",
+        "Hash": "478F9B91B1E3C6D5F4D2A5F3DF0A817C3B641851D17BF06DD621FD86FD8F9053"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-fixed\\provider.lib",
+        "Hash": "8E11461464B11E53E3B0483CD94B1CCCD5B5F7C265CEEE06DAC94D2B825C831A"
+      }
+    ],
+    "assertions": [
+      "WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ]
+  },
+  {
+    "variant": "baseline",
+    "result": {
+      "exit_code": 1,
+      "utc": "2026-10-29T14:40:53.0402774Z"
+    },
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-baseline\\fixture.exe",
+        "Hash": "1D1EC7F8070189F742BF3A58CB10E114B42A9202ECD10BEB6A62C5387BCF9371"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-baseline\\fixture.c",
+        "Hash": "6CCE706C09B33A5A51DCB49C401C4ADFB36BE230C591B530F468D39D67398D56"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-baseline\\wow_window_words_binding.c",
+        "Hash": "047288660EBC7B50F0C19BB4E174E8F5EC8CB14680EB8C56EE5067561B1F9808"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-baseline\\wow_window_words_binding.obj",
+        "Hash": "2A3C69650A417B7E1938064EE7AFDD49A8C7758861B3F431616F2FE474415113"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-schedule-baseline\\provider.lib",
+        "Hash": "374B67BF941197B5F20207F7C2867D045C93AB8EAC99434B1D2306841D00EBB9"
+      }
+    ],
+    "assertions": [
+      "WINDOW_BORROW_FAIL line=1674 error=0",
+      "WINDOW_BORROW_FAIL line=1680 error=0",
+      "WOW_TERMINAL_SCHEDULE errors=2 first_phase=2 held=0 unheld=2 retired=1 resource_thread=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_FAILED stage=registered-original-modal"
+    ]
+  }
+]

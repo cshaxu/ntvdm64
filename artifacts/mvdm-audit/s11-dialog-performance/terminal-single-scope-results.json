@@ -1,0 +1,205 @@
+{
+  "fixtures": [
+    {
+      "name": "terminal-single-scope",
+      "result": {
+        "utc": "2026-10-29T14:55:05.7332483Z",
+        "exit_code": 0
+      },
+      "hashes": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-scope\\fixture.exe",
+          "Hash": "F827D44B88D9A26C5351CDD37B7BF594C9DCAE67FD701620EF9631B4DC6932D9"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-scope\\fixture.c",
+          "Hash": "B4CBB24ABA2D6AB9DC7DFEE86AC0281D7F3220BCFD667F602D4B1B4B61403159"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-scope\\wow_window_words_binding.c",
+          "Hash": "81063A12C6E676AA30F03737BE3047351CAF5D482496B2F890C397F5C56C36C2"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-scope\\wow_window_words_binding.obj",
+          "Hash": "191DEB7E7F6D7FFE6379F27BB6EA0FA413EB8886186F3D37553FD18FA6117C51"
+        }
+      ],
+      "assertions": [
+        "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    },
+    {
+      "name": "terminal-single-fault-initial",
+      "result": {
+        "utc": "2026-10-29T14:56:31.6947305Z",
+        "exit_code": 0
+      },
+      "hashes": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-initial\\fixture.exe",
+          "Hash": "AB19A3000A58B0466E6D1CAF1DA8C4F374D7615D23C0373BAAB6B2A171DBA752"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-initial\\fixture.c",
+          "Hash": "22DC8873F56F6EF6827475A1632A3C457B95DDD0468015D639A238A5DB341F1D"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-initial\\wow_window_words_binding.c",
+          "Hash": "7B3F336E4F9B4B6A1BCED3186D0B923060EB893D9D2405A07827A751CB899913"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-initial\\wow_window_words_binding.obj",
+          "Hash": "7401B27C43CB224E54DD3392F7D11E619C2B55C86341DA720149CFEFD3344A51"
+        }
+      ],
+      "assertions": [
+        "WOW_TERMINAL_CRITICAL_FAULT caught=1 held_restored=1 owner_restored=1 cleanup=1",
+        "WOW_TERMINAL_CRITICAL_FAULT_HELD caught=1 held_restored=1 owner_restored=1 cleanup=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    },
+    {
+      "name": "terminal-single-fault-withdrawal",
+      "result": {
+        "exit_code": 0,
+        "utc": "2026-10-29T14:56:31.6852598Z"
+      },
+      "hashes": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-withdrawal\\fixture.exe",
+          "Hash": "29EB090D4A6924B9B474380F510BC83D0BFE37C01846D7FFB70905B77B8B7E3D"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-withdrawal\\fixture.c",
+          "Hash": "22DC8873F56F6EF6827475A1632A3C457B95DDD0468015D639A238A5DB341F1D"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-withdrawal\\wow_window_words_binding.c",
+          "Hash": "B97B3F1FC69C31A18320C27296B94E3E1BCF4C2E1A5C494BD3051E22E6A30199"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-single-fault-withdrawal\\wow_window_words_binding.obj",
+          "Hash": "3222AEE0FCF6184A253F89406B8FA2AFC56B1EFB9B5106FB63FDA8135379A325"
+        }
+      ],
+      "assertions": [
+        "WOW_TERMINAL_CRITICAL_FAULT caught=1 held_restored=1 owner_restored=1 cleanup=1",
+        "WOW_TERMINAL_CRITICAL_FAULT_HELD caught=1 held_restored=1 owner_restored=1 cleanup=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    }
+  ],
+  "integration": {
+    "package": [
+      {
+        "Name": "run16.exe",
+        "RelativePath": "system32\\run16.exe",
+        "Sha256": "270A4AB56DD8E22007549E991041BBB82D49F8869368A56423A27E23C2D5EC6B",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "661EAA8B1303A4201F916F369E453CC2E97638A789694693A342A50FBB1577D0"
+      },
+      {
+        "Name": "ntsrv.exe",
+        "RelativePath": "system32\\ntsrv.exe",
+        "Sha256": "CA422E4C8C15839498FA3ED30CD18660165D04872E6A9EC5DC8EA79669C5A73A",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "C7023EDB9DD503780C9B171B35335D6C190033111DCC374F99F422F624B567C6"
+      },
+      {
+        "Name": "ntcon.exe",
+        "RelativePath": "system32\\ntcon.exe",
+        "Sha256": "59D328BC4AED5669D38E8A1E132CEDF64C8A37EF818D5A788124FE395DC82CBD",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "7496B66FD488EF3C1AFEA88EEBF1B3E3A9202CBAD3D0EFB78F1C2C1AAA91A11A"
+      },
+      {
+        "Name": "ntvdm.exe",
+        "RelativePath": "system32\\ntvdm.exe",
+        "Sha256": "A3031B9F9746D585CD2FF0CE44A40A0CA370A9186391CC495CA0EA16D80D46BE",
+        "Machine": 332,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "52760D959FEAD64247E2A9D34036FA1428AFBF30F51DCBE4F857A02AEE964852"
+      },
+      {
+        "Name": "ntvwm.exe",
+        "RelativePath": "system32\\ntvwm.exe",
+        "Sha256": "72541383AE142C13E79BB15410E609C283B372C5C4C05941EAF88369D2D84F13",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "C782C697607FD96DA8AECCB16394B9F3A54BA95DEEDE0AE95A668A4908B1DCA4"
+      },
+      {
+        "Name": "ntmon.exe",
+        "RelativePath": "system32\\ntmon.exe",
+        "Sha256": "C2DC18DF8AB3998A5549B363D8793DEBC56892C6390A17F76DA42254500529F9",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "E84147A16E7199AB66D94D866A7D48DB3B1EBF9661BA1C9E3F18FF40D492215B"
+      },
+      {
+        "Name": "WOW32.DLL",
+        "RelativePath": "system32\\WOW32.DLL",
+        "Sha256": "9DECFD7AFF76934D366B988E176473FFB64CBD3478DF06AA2F424F47FCA43B1E",
+        "Machine": 332,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "80BCFAF9153F837B29FF252A022EC48F6E803272089DE2A72C9FD10119A72BB2"
+      },
+      {
+        "Name": "VDMREDIR.DLL",
+        "RelativePath": "system32\\VDMREDIR.DLL",
+        "Sha256": "5E847BAB9BFBF809CB9497C409EB288958E380D81F09D05173A7500EFA70AA38",
+        "Machine": 332,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "5C7B8666B71E66B12583A225D91F9C0C8C175A906B6FA5904FD99E7AD6F6EE7F"
+      },
+      {
+        "Name": "nthook32.dll",
+        "RelativePath": "system32\\nthook32.dll",
+        "Sha256": "DA4D1AFE996EDF6E9FA827CE4C0ABF9890681F8831FDFB5A2D996D8FFED7E118",
+        "Machine": 332,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "0679B0988DA5B7243ECB0DB830DDFDD040E0956FDD06EAA076BBD0896EB550C9"
+      },
+      {
+        "Name": "nthook64.dll",
+        "RelativePath": "system32\\nthook64.dll",
+        "Sha256": "2225F5599E7CCA62994B2F13D4379788C8739EF7AB013F530AA4836B02F19567",
+        "Machine": 34404,
+        "PackageId": "153e2d22-7d99-43c9-85eb-bdeea43d1993",
+        "InputSha256": "E93726AD5E5DC42D399DF64DAEF647DA55F788866A58829E20BE3E34AFFB4199"
+      }
+    ],
+    "retirements_without_lock": 0,
+    "observer": [
+      "result=exited",
+      "exit=0x00000000"
+    ],
+    "retirements": 70,
+    "guest_last": {
+      "phase": 2,
+      "errors": 0,
+      "created": 17,
+      "closed": 16,
+      "hooks": 17,
+      "leaving": 1,
+      "task": 5943,
+      "dialog": 1990,
+      "destroy_ax": 1,
+      "iswindow_ax": 0
+    },
+    "guest_error_rows": 0,
+    "result": {
+      "status": "passed",
+      "utc": "2026-10-29T14:58:55.7677879Z"
+    },
+    "survivor": [
+      "PASS unchanged title and native frame=1",
+      "PASS flag changed cell+counter, F2 restored covered cell, left click changed cell",
+      "PASS owned game window closed after WM_CLOSE"
+    ]
+  }
+}

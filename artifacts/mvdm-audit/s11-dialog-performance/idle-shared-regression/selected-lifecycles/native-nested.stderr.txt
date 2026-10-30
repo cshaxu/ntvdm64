@@ -1,0 +1,27 @@
+WOW_STANDARD_CLASS_ADMISSION projected=9 calls=10 retry=1 errors=0
+WOW_CONTROL_CALLOUT paints=2 texts=3 errors=0
+WOW_SUSPENDED_CALLBACK_SCOPE errors=0 owner=1 restore=1 last_error=1
+WOW_NATIVE_WAIT_UNWIND errors=0 lifo=1 native_continuation=1 last_error=1
+WOW_NATIVE_MSG_WAIT_NONOWNER errors=0 result=1 lifo=1 last_error=1
+WOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1
+WOW_NATIVE_SEND_BEGIN early=0
+WOW_NATIVE_SEND_RECEIVE early=0
+WOW_NATIVE_SEND_RETURN early=0 result=114
+WOW_NATIVE_SEND_BEGIN early=2
+WOW_NATIVE_SEND_RECEIVE early=2
+WOW_NATIVE_NESTED_CALLBACK scheduled=1 owner=1
+WOW_NATIVE_SEND_RETURN early=2 result=114
+WOW_NATIVE_TIMEOUT_RETURN held=0 error=1460 callbacks=1
+WOW_NATIVE_TIMEOUT_RETURN held=1 error=1460 callbacks=2
+WOW_NATIVE_CALLBACK_EXCEPTION_RETURN held=0 caught_in_callback=1 result=117 owner=1
+WOW_NATIVE_EXCEPTION_RETURN held=0 caught=1 owner=1 production_macro=1
+WOW_NATIVE_CALLBACK_EXCEPTION_RETURN held=1 caught_in_callback=1 result=117 owner=1
+WOW_NATIVE_EXCEPTION_RETURN held=1 caught=1 owner=1 production_macro=1
+WOW_NATIVE_DESTROY_DURING_RETURN result=116 dead=1 owner=1
+WOW_NATIVE_DEAD_TARGET_RETURN error=1400 owner=1
+WOW_NATIVE_RECEIVER_EXIT_RETURN held=0 error=1400 retired=1 owner=1
+WOW_NATIVE_RECEIVER_EXIT_RETURN held=1 error=1400 retired=1 owner=1
+WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=0 own_preserved=1
+WOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64
+WOW_NATIVE_QUIT_ORDER errors=0 wide=1 sentinel=1 exit=42 bound=64
+WOW_USER_TASK_LIFECYCLE errors=0 native_direct=5

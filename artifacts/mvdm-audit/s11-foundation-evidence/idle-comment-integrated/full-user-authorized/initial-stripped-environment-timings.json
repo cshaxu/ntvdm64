@@ -1,0 +1,27 @@
+{
+  "Suite": "Full",
+  "ElapsedMs": 72362,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": true,
+  "PreparationMs": 3384,
+  "Gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1082,
+      "CleanupMs": 519,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 183,
+      "CleanupMs": 464,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 65784,
+      "CleanupMs": 430,
+      "Passed": false
+    }
+  ]
+}

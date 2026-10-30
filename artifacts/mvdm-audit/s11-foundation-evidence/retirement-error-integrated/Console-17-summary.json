@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-empty.txt",
+    "BodyMs": 2667,
+    "CleanupMs": 401
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-native-zero.txt",
+    "BodyMs": 2480,
+    "CleanupMs": 262
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-missing.txt",
+    "BodyMs": 3417,
+    "CleanupMs": 267
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-native-seven.txt",
+    "BodyMs": 1224,
+    "CleanupMs": 255
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-native-streams.txt",
+    "BodyMs": 1232,
+    "CleanupMs": 259
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-native-eof.txt",
+    "BodyMs": 1183,
+    "CleanupMs": 248
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-mem.txt",
+    "BodyMs": 2402,
+    "CleanupMs": 328
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-nested-empty.txt",
+    "BodyMs": 2905,
+    "CleanupMs": 312
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-nested-mem.txt",
+    "BodyMs": 7381,
+    "CleanupMs": 297
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-mem-repeat.txt",
+    "BodyMs": 2941,
+    "CleanupMs": 289
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-direct-mem.txt",
+    "BodyMs": 988,
+    "CleanupMs": 280
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-command-c.txt",
+    "BodyMs": 984,
+    "CleanupMs": 273
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-command-c-seven.txt",
+    "BodyMs": 1231,
+    "CleanupMs": 259
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-guest-seven.txt",
+    "BodyMs": 964,
+    "CleanupMs": 272
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-command-c-mem.txt",
+    "BodyMs": 1089,
+    "CleanupMs": 268
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-direct-seven.txt",
+    "BodyMs": 1021,
+    "CleanupMs": 275
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated-product-matrix\\Console-17-edit.txt",
+    "BodyMs": 4525,
+    "CleanupMs": 279
+  }
+]

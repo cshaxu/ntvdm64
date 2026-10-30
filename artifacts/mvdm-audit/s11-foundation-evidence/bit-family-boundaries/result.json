@@ -1,0 +1,336 @@
+{
+  "result": "pass",
+  "cases": [
+    {
+      "case": 0,
+      "exit": 0
+    },
+    {
+      "case": 2,
+      "exit": 0
+    },
+    {
+      "case": 3,
+      "exit": 0
+    },
+    {
+      "case": 4,
+      "exit": 0
+    },
+    {
+      "case": 6,
+      "exit": 0
+    },
+    {
+      "case": 7,
+      "exit": 0
+    },
+    {
+      "case": 8,
+      "exit": 0
+    },
+    {
+      "case": 9,
+      "exit": 0
+    },
+    {
+      "case": 10,
+      "exit": 0
+    },
+    {
+      "case": 11,
+      "exit": 0
+    },
+    {
+      "case": 12,
+      "exit": 0
+    },
+    {
+      "case": 13,
+      "exit": 0
+    },
+    {
+      "case": 14,
+      "exit": 0
+    },
+    {
+      "case": 15,
+      "exit": 0
+    },
+    {
+      "case": 16,
+      "exit": 0
+    },
+    {
+      "case": 17,
+      "exit": 0
+    },
+    {
+      "case": 18,
+      "exit": 0
+    },
+    {
+      "case": 19,
+      "exit": 0
+    },
+    {
+      "case": 20,
+      "exit": 0
+    },
+    {
+      "case": 21,
+      "exit": 0
+    },
+    {
+      "case": 22,
+      "exit": 0
+    },
+    {
+      "case": 23,
+      "exit": 0
+    },
+    {
+      "case": 24,
+      "exit": 0
+    },
+    {
+      "case": 25,
+      "exit": 0
+    },
+    {
+      "case": 26,
+      "exit": 0
+    },
+    {
+      "case": 27,
+      "exit": 0
+    },
+    {
+      "case": 28,
+      "exit": 0
+    },
+    {
+      "case": 29,
+      "exit": 0
+    },
+    {
+      "case": 30,
+      "exit": 0
+    },
+    {
+      "case": 31,
+      "exit": 0
+    },
+    {
+      "case": 32,
+      "exit": 0
+    },
+    {
+      "case": 33,
+      "exit": 0
+    },
+    {
+      "case": 34,
+      "exit": 0
+    },
+    {
+      "case": 35,
+      "exit": 0
+    },
+    {
+      "case": 36,
+      "exit": 0
+    },
+    {
+      "case": 37,
+      "exit": 0
+    },
+    {
+      "case": 38,
+      "exit": 0
+    },
+    {
+      "case": 39,
+      "exit": 0
+    },
+    {
+      "case": 40,
+      "exit": 0
+    },
+    {
+      "case": 41,
+      "exit": 0
+    },
+    {
+      "case": 42,
+      "exit": 0
+    },
+    {
+      "case": 43,
+      "exit": 0
+    },
+    {
+      "case": 44,
+      "exit": 0
+    },
+    {
+      "case": 45,
+      "exit": 0
+    },
+    {
+      "case": 46,
+      "exit": 0
+    },
+    {
+      "case": 47,
+      "exit": 0
+    },
+    {
+      "case": 48,
+      "exit": 0
+    },
+    {
+      "case": 49,
+      "exit": 0
+    },
+    {
+      "case": 50,
+      "exit": 0
+    },
+    {
+      "case": 51,
+      "exit": 0
+    },
+    {
+      "case": 52,
+      "exit": 0
+    },
+    {
+      "case": 53,
+      "exit": 0
+    },
+    {
+      "case": 54,
+      "exit": 0
+    },
+    {
+      "case": 55,
+      "exit": 0
+    },
+    {
+      "case": 56,
+      "exit": 0
+    },
+    {
+      "case": 57,
+      "exit": 0
+    },
+    {
+      "case": 58,
+      "exit": 0
+    },
+    {
+      "case": 59,
+      "exit": 0
+    },
+    {
+      "case": 60,
+      "exit": 0
+    },
+    {
+      "case": 61,
+      "exit": 0
+    },
+    {
+      "case": 62,
+      "exit": 0
+    },
+    {
+      "case": 63,
+      "exit": 0
+    },
+    {
+      "case": 64,
+      "exit": 0
+    },
+    {
+      "case": 65,
+      "exit": 0
+    },
+    {
+      "case": 66,
+      "exit": 0
+    },
+    {
+      "case": 67,
+      "exit": 0
+    },
+    {
+      "case": 68,
+      "exit": 0
+    },
+    {
+      "case": 69,
+      "exit": 0
+    },
+    {
+      "case": 70,
+      "exit": 0
+    },
+    {
+      "case": 71,
+      "exit": 0
+    },
+    {
+      "case": 72,
+      "exit": 0
+    },
+    {
+      "case": 73,
+      "exit": 0
+    },
+    {
+      "case": 74,
+      "exit": 0
+    },
+    {
+      "case": 75,
+      "exit": 0
+    },
+    {
+      "case": 76,
+      "exit": 0
+    },
+    {
+      "case": 77,
+      "exit": 0
+    },
+    {
+      "case": 78,
+      "exit": 0
+    },
+    {
+      "case": 79,
+      "exit": 0
+    },
+    {
+      "case": 80,
+      "exit": 0
+    },
+    {
+      "case": 81,
+      "exit": 0
+    },
+    {
+      "case": 82,
+      "exit": 0
+    },
+    {
+      "case": 83,
+      "exit": 0
+    }
+  ],
+  "fixture_sha256": "88565B9C6D88DCEE7E1A0007BAFB9FA27C12C9355A183911DC321B9353B632EA",
+  "map_sha256": "D995F5E14B59A1E5FFB44858D3BBBD5285A9C1A47862985C4E80FE61A0DBF73E",
+  "fixture_object_sha256": "6C6CB033D45A6DF36BA9E8EC4B71BD3D287FE5A6693C3C16F45C6E6BBE4D0EEF"
+}

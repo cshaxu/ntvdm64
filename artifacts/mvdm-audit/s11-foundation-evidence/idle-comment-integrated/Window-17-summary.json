@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-empty.txt",
+    "BodyMs": 1691,
+    "CleanupMs": 230
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-native-zero.txt",
+    "BodyMs": 2204,
+    "CleanupMs": 223
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-missing.txt",
+    "BodyMs": 3016,
+    "CleanupMs": 249
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-native-seven.txt",
+    "BodyMs": 1025,
+    "CleanupMs": 221
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-native-streams.txt",
+    "BodyMs": 1043,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-native-eof.txt",
+    "BodyMs": 1058,
+    "CleanupMs": 252
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-mem.txt",
+    "BodyMs": 2015,
+    "CleanupMs": 242
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-nested-empty.txt",
+    "BodyMs": 2851,
+    "CleanupMs": 249
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-nested-mem.txt",
+    "BodyMs": 5151,
+    "CleanupMs": 236
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-mem-repeat.txt",
+    "BodyMs": 2747,
+    "CleanupMs": 251
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-direct-mem.txt",
+    "BodyMs": 898,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-command-c.txt",
+    "BodyMs": 822,
+    "CleanupMs": 242
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-command-c-seven.txt",
+    "BodyMs": 1007,
+    "CleanupMs": 229
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-guest-seven.txt",
+    "BodyMs": 831,
+    "CleanupMs": 224
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-command-c-mem.txt",
+    "BodyMs": 848,
+    "CleanupMs": 230
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-direct-seven.txt",
+    "BodyMs": 1021,
+    "CleanupMs": 244
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated-product-matrix\\Window-17-edit.txt",
+    "BodyMs": 3695,
+    "CleanupMs": 257
+  }
+]

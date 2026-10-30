@@ -1,0 +1,11 @@
+{
+  "result": "fail",
+  "pid": 28604,
+  "started": "2026-10-29T05:19:09.2093359Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full\\run.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full/stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x64-full/stderr.txt",
+  "exit": 1,
+  "finished": "2026-10-29T05:30:12.8060000Z"
+}

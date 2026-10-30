@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EA456813E21E8E6C8E9F916A45F372585A2696C7ABBBB1A14CB6F87CCF450F0B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-guest-media.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "13C7CD6957E88BC4F035E7E727B6AF44313B14894AA4CA1B120DBED555C0EEA0",
+    "Path": "O:\\repos.hobby\\ntvdm64\\assets\\winnt-guest-manifest.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E1873575CBEAA187B5A2F1A783D6387B991B1B73811E234240F072640FB5C1EF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-integrated\\package\\product-system32-manifest.json"
+  }
+]

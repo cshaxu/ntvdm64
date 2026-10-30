@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\task-rollback-current\\fixture.exe",
+    "Hash": "9AD2B607255CE4013A89212DAFD1FFE07B7C9CD20C5F1CC76FA80AB6BAC8D588"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\task-rollback-current\\fixture.map",
+    "Hash": "5C6FCFE5240FEF2C1EB41E3EEF097C2BE31BC69133D72762AFB0BB3A922A1ADF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\task-rollback-current\\init-release.obj",
+    "Hash": "9A2C1F57FED4BBDB7FC46F74EE8DF790201BAE9849CF90DC54B3B7EADF1EDFC3"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\process-retirement-current\\fixture.exe",
+    "Hash": "8AAC0400A303713B1498FD50CE4951819600DF28DD6876EED668290EA128EC1F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\process-retirement-current\\fixture.map",
+    "Hash": "7A3D719443003E1038BED59B963D87A227B9C2D1F9AC5DFEB2B879EDD58D1610"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_user_task_lifecycle.obj",
+    "Hash": "058E337291E6570FFE7A6C9764B0BD8737245126102697C680E187A305D44490"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "516B94B6D699E80EF72B135B45E0DF5F771D72B42B2DFCB63F9EFB1AACEA0BD6"
+  }
+]

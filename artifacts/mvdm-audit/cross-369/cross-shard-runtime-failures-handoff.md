@@ -2,6 +2,17 @@
 
 Scope is existing non-shard-3 selected host behaviors with concrete object/guest evidence, chosen to complement `selected-host-reproduced-failures-handoff.md`. This is read-only reconciliation, not a new reproduction, product patch or guest acceptance. Existing S assignments are those in `recovery-worklist.md`; all source and binary identities belong to the cited checkpoints, not automatically today's deployment.
 
+**Later owner clarification:** this T covers original-to-host connection
+boundaries and their necessary closure, not independently found internal
+defects in an already connected component. The CCPU bit-string internal
+candidate in the historical table below is held outside this T; its fixture
+result does not itself admit that repair to S11. See the current
+[stage plan](../../docs/etc/operations/m0-t473-whole-recovery-stage-plan.md)
+and [recovery worklist](../recovery-worklist.md). Apply the same scope test
+to the other historical entries rather than treating a controlled internal
+counterexample alone as an authorized mirror repair. The WOW DLL-entry row
+remains an S11 adapter-ABI boundary and has a later unpublished candidate.
+
 | Stage / path | Proven event and limitations | Minimal repair and verification dependency |
 | --- | --- | --- |
 | S11, generated WOW DLL-entry bridge from `tools/build/New-T404S5Wow32ProviderNinja.ps1` | `dll-entry-boolean-return.md` tests the actual selected bridge object against a controlled correctly typed BOOLEAN provider: false AL with nonzero unspecified high EAX becomes nonzero `int`; a one-declaration candidate returns zero and both preserve recorded unload cleanup. Recorded image correspondence masks three call relocations. This is a controlled ABI failure, not a reproduced real allocation-failure startup. | Correct the project-owned bridge declaration to the original one-byte BOOLEAN without changing guest or original mirror. Retest true/false attach and notifications, normal and explicit unload cleanup, then actual WOW module initialization/task termination and coherent published package identity. |

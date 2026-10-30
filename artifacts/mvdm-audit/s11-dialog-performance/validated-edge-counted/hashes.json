@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-edge-counted\\wow_user_borrow_scope.obj",
+    "Hash": "0261165E3A372E07E1388944DFBEB2EFA030D55C150A39D6C593B8899EAA452E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-edge-counted\\stage\\package\\system32\\WOW32.DLL",
+    "Hash": "AF6EAF6F7E2C79D3BFB8B34D3151D6C28A1E7E1A9856C27F1DAFFD48120A8B7E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-edge-counted\\stage\\package\\system32\\ntvdm.exe",
+    "Hash": "ABC9E32F796AFE5C063598920B385606CDD32951FC46F3CB0EBC8CAE3AF46191"
+  }
+]

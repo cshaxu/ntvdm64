@@ -20,7 +20,7 @@ try {
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;deadline=$p.StartTime.AddSeconds(20).ToUniversalTime().ToString('o')}|ConvertTo-Json|Set-Content "$root/process.json"
  if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned observer probe timeout'}
  $p.WaitForExit();$p.Refresh()
- if($p.ExitCode -or (Get-Content "$root/probe.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=52 result=0'){throw 'Observer error transparency failed'}
+ if($p.ExitCode -or (Get-Content "$root/probe.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=50 result=0'){throw 'Observer error transparency failed'}
  $trace=Get-Content "$root/trace.txt" -Raw
  foreach($marker in @('wow-bop','wow-dispatch-return','wow-stage stage=fixture')){if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}}
  '0'|Set-Content "$root/exit.txt"

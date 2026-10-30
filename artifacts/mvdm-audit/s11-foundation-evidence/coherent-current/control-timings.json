@@ -1,0 +1,81 @@
+{
+  "Suite": "Control",
+  "ElapsedMs": 186756,
+  "InputPolicy": "Observed",
+  "WindowOwnedConsole": false,
+  "PreparationMs": 3832,
+  "Gates": [
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 212,
+      "CleanupMs": 473,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14153,
+      "CleanupMs": 541,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 10631,
+      "CleanupMs": 578,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 47504,
+      "CleanupMs": 573,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12274,
+      "CleanupMs": 570,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28085,
+      "CleanupMs": 548,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30119,
+      "CleanupMs": 511,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 3431,
+      "CleanupMs": 495,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 7367,
+      "CleanupMs": 594,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9889,
+      "CleanupMs": 502,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4490,
+      "CleanupMs": 559,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6639,
+      "CleanupMs": 524,
+      "Passed": true
+    }
+  ]
+}

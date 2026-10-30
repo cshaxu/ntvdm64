@@ -1,0 +1,45 @@
+{
+  "test_script_sha256": "dbc9fcb5ece7ac14552a3c9783863f02d1d31fd40c6c3a265bb5a77edb23834f",
+  "runs": [
+    {
+      "round": 1,
+      "result": "PASS shared-worker=5632 idle-task=17BF dialog-task=177F dialogs=17 closed=16 later-idle=1",
+      "sha256": {
+        "manifest.json": "b02a50bf396dabb2bc811f15a762bd2fb7c59ba36bdf60faa9f22e745f535bda",
+        "observer.txt": "9523388bb25b3106cc8d3b32a8695b029afca8e04ae5b9d4cd11a6569ab3adf0",
+        "native.txt": "c61436691798c957ca94ef938a732a9409821e4bb21d88ce95efc4e53e842d4c",
+        "lifetime.txt": "62d33813dafef8bb188c2acbf462846ba05d66466dd112fce1988a1ce0f1a905",
+        "IDLPROBE.bin": "a541bc7d1859d36f2f2cbfc47fbeefaa68a9d2c667e462a4ee4b0b2b771dd759",
+        "CDLPROBE.bin": "232f327f29ef52dfcc75df6a254d9647272c7af61c24a2c7d5168a8cac89d93b",
+        "result.txt": "4a33de50ac5a71f49cd6d5ab11eaeb6e30985aad89ba9c69185864e7e7ea54a7"
+      }
+    },
+    {
+      "round": 2,
+      "result": "PASS shared-worker=6496 idle-task=17BF dialog-task=177F dialogs=17 closed=16 later-idle=1",
+      "sha256": {
+        "manifest.json": "715507250520e493dc3f6ab8fb479bd6f22c98467167f2d543b0abf6e3ffc868",
+        "observer.txt": "2e5a972aa99710cb33fcbba86ed404baaa187a044662cac692c7fa6ee2364682",
+        "native.txt": "2ebed3cd5fd3da9c2dcb8f394b0809ce48a2cbcd7d3c5cdcea8eb7c37e1f9493",
+        "lifetime.txt": "0a9922ef6e0f9ae49b57748f7694257bd9f60ef95249f733e09b36e1d2ca6aad",
+        "IDLPROBE.bin": "a541bc7d1859d36f2f2cbfc47fbeefaa68a9d2c667e462a4ee4b0b2b771dd759",
+        "CDLPROBE.bin": "602a1c1630da8bc5d4b26ba71ea0aababb5231a74bc3ad1f50c3737120f95eb0",
+        "result.txt": "7171d3c1f195973870a22cb1b990eec6040b194901cb8efc8f08daa092f9bcaa"
+      }
+    },
+    {
+      "round": 3,
+      "result": "PASS shared-worker=26340 idle-task=17BF dialog-task=177F dialogs=17 closed=16 later-idle=1",
+      "sha256": {
+        "manifest.json": "d82378498315b8955d97e02523632947b25f0ccefbd9643a0a6d1357ea3ce758",
+        "observer.txt": "b434f301c05a704132a610cfb07407dd1e546dc214a9a0a76944bcb7fda545d8",
+        "native.txt": "47392c422f3c9cebd48506f73ed6b0c51c5da72c5f5a88ff5c8c728a550bdaf7",
+        "lifetime.txt": "0f669b6c0bf94a44e4da90b3c9bfc99820f3595b0943448c66a989b30fc7ec66",
+        "IDLPROBE.bin": "a541bc7d1859d36f2f2cbfc47fbeefaa68a9d2c667e462a4ee4b0b2b771dd759",
+        "CDLPROBE.bin": "5f6f1ce083532a823d0920aa67125b1da02282e16883f7a2539e7cbdd6df7fee",
+        "result.txt": "0b2fc1a4d3286915447b1e0fd2e73d1cb843308a9e0dc30e067f86671da8d7ab"
+      }
+    }
+  ],
+  "scope": "three independent same-worker immutable test pairs, not a forced race or Full product test"
+}

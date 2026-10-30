@@ -344,7 +344,13 @@ commits containing production changes remain subject to the runtime gate.
    is uncertain or a required clean-build milestone applies, not for every
 edit by default. New run evidence IDs may reference a validated cache;
 never overwrite sealed artifact/evidence snapshots. Incremental compilation
-does not waive runtime tests or publication of the complete eight-file set.
+does not waive runtime tests or publication of the complete ten-file set.
+When fixtures update an inner Ninja tree, explicitly build that tree's selected
+product link targets before staging; an outer build's "no work" result alone
+does not prove inner image freshness. Keep compiler environment initialization
+inside the build process. Run runtime gates from their established test-parent
+environment, not an inherited compiler shell, and bind evidence to the actual
+linked images.
 3. Pass all 17 established text-gated DOS routes: COMMAND, MEM and EDIT,
    direct, interactive and supported nested COMMAND execution, including EDIT
    exit followed by MEM at the same prompt. Read guest output and verify

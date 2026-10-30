@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EC6218385A7A9FA6425A9E70DFFDBA8AEEAAFF11D73893EC8B853547F3FE677F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\c_oprnd.h"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A02368618BA57A1313E25F5C20B3B22D1C8D78A0E2CF215AC3E9036204D0FABC",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\c_main.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "84302B117BF646D53B858C4119D79A357B84BE0A762B44D58EAFB22BF1DD6D7A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\c_main.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "806DBC17FD2631FFED1C1313827C81A57A2C265280B315FA037196B689E95AC0",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\original-ccpu386.lib"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5768B88660F1B423FFDBB227A229915B57F4DCB7C5F2CB1F3A2E7EBEF310CB8C",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F9D34C0FF23AC6AEDBE95999B5280B1A68D96C144BAFF7C3135EFFBD380B7CD5",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bounded_execution_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "FDB0E23A0C80318BFFD92A3BE4A51A79DBB12CB249C510A0F5A7912E9E9F8B1D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h"
+  }
+]

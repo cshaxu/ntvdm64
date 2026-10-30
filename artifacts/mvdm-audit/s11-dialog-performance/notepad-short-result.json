@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 6372,
+  "started": "2026-10-29T06:34:35.0449437Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-multi-dialog.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/multi-dialog-notepad-short-observation -VisibleDesktop -NoTrace -Mode notepad -Guest O:\\w31\\NOTEPAD.EXE",
+  "exit": 0,
+  "finished": "2026-10-29T06:34:50.4702732Z"
+}

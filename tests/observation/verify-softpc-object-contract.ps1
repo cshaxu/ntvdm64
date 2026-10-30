@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory)][string]$BuildRoot,
     [string]$WorkerBuild = 'build/.ninja/msvc-x86-release/worker',
-    [ValidateSet('qevnt','ios','gfi','keycode','nls','umb','vdd')][string]$Contract = 'qevnt'
+    [ValidateSet('qevnt','ios','gfi','keycode','nls','umb','vdd','niddb')][string]$Contract = 'qevnt',
+    [string]$SelectedObject = ''
 )
 $ErrorActionPreference = 'Stop'
 $repo = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
@@ -17,6 +18,8 @@ $extraObjects = @()
 $extraSources = @()
 $extraFlags = ''
 $extraLibraries = ''
+$negativeSize = 4
+if ($SelectedObject -and $Contract -ne 'niddb') { throw 'SelectedObject is limited to the NIDDB diagnostic' }
 if ($Contract -eq 'vdd') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_vdd.c'
     $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/host/inc/host_def.h','src/mvdm/softpc.new/host/inc/nt_vddp.h','src/mvdm/softpc.new/base/inc/ios.h','src/mvdm/softpc.new/base/inc/dma.h','src/opennt-abi/source/public/sdk/inc/nt_vdd.h') | ForEach-Object { Join-Path $repo $_ }
@@ -25,6 +28,13 @@ if ($Contract -eq 'vdd') {
     $extraSources = @('src/mvdm/softpc.new/base/support/ios.c','src/mvdm/softpc.new/base/ccpu386/in.c','src/mvdm/softpc.new/base/ccpu386/out.c') | ForEach-Object { Join-Path $repo $_ }
     $negativeDefine = 'MVDM_VDD_EXPECT_HANDLER_BYTES'
     $extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm/softpc.new/base/inc') + '" /I"' + (Join-Path $repo 'src/opennt-abi/source/public/sdk/inc') + '" '
+} elseif ($Contract -eq 'niddb') {
+    $original = Join-Path $repo 'src/mvdm/softpc.new/base/bios/virtual.c'
+    $headers = @('src/mvdm/softpc.new/base/inc/virtual.h','src/mvdm/softpc.new/base/inc/sas.h') | ForEach-Object { Join-Path $repo $_ }
+    $object = if ($SelectedObject) { (Resolve-Path -LiteralPath $SelectedObject).Path } else { Join-Path $WorkerBuild 'obj/bios/virtual.obj' }
+    if ($SelectedObject -and !$object.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase)) { throw 'Diagnostic object must be under this repository build directory' }
+    $negativeDefine = 'MVDM_NIDDB_EXPECT_POINTER_BYTES'
+    $negativeSize = 8
 } elseif ($Contract -eq 'umb') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_umb.c'
     $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/host/inc/host_def.h','src/mvdm/softpc.new/base/inc/sas.h','src/mvdm/softpc.new/base/inc/umb.h','src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h') | ForEach-Object { Join-Path $repo $_ }
@@ -73,9 +83,14 @@ if ($Contract -eq 'vdd') {
 }
 $exe = Join-Path $BuildRoot "$Contract-object-contract.exe"
 $fixtureObject = Join-Path $BuildRoot 'fixture.obj'
+$scope = if ($SelectedObject) {
+    'Explicit diagnostic object; controlled host boundaries, no guest or production lifecycle acceptance'
+} else {
+    'Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance'
+}
 $receipt = [ordered]@{
     started = [DateTime]::UtcNow.ToString('o'); owner_pid = $PID
-    result = 'running'; contract = $Contract; scope = 'Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance'
+    result = 'running'; contract = $Contract; scope = $scope
     build_root = $BuildRoot; fixture_path = $exe
     inputs = @(); runs = @()
 }
@@ -91,7 +106,7 @@ try {
     $build.WaitForExit()
     $receipt.runs[-1].exit = $build.ExitCode
     if ($build.ExitCode -ne 0) { throw "Fixture build failed: $($build.ExitCode)" }
-    $negativeCommand = '/d /s /c ""' + $driver + '" cl.exe /nologo /MT /c /D' + $negativeDefine + '=4 ' + $extraFlags + '"' + $source + '" /Fo:"' + (Join-Path $BuildRoot 'negative-abi.obj') + '""'
+    $negativeCommand = '/d /s /c ""' + $driver + '" cl.exe /nologo /MT /c /D' + $negativeDefine + '=' + $negativeSize + ' ' + $extraFlags + '"' + $source + '" /Fo:"' + (Join-Path $BuildRoot 'negative-abi.obj') + '""'
     $negative = Start-Process cmd.exe -ArgumentList $negativeCommand -WorkingDirectory $repo -WindowStyle Hidden -PassThru -RedirectStandardOutput (Join-Path $BuildRoot 'negative-abi.stdout.txt') -RedirectStandardError (Join-Path $BuildRoot 'negative-abi.stderr.txt')
     $receipt.runs += @{ kind = 'negative-abi-compile'; pid = $negative.Id; command = $negativeCommand }
     $receipt | ConvertTo-Json -Depth 8 | Set-Content -Encoding utf8 (Join-Path $BuildRoot 'result.json')
@@ -108,6 +123,12 @@ try {
     $marker = $Contract.ToUpperInvariant() + '_OBJECT_CONTRACT checks=(\d+) failures=0 callbacks=(\d+)'
     if ($run.ExitCode -ne 0 -or $text -notmatch $marker) { throw 'Original-object contract failed' }
     $receipt.checks = [int]$Matches[1]; $receipt.callbacks = [int]$Matches[2]
+    if ($Contract -eq 'niddb') {
+        if ($text -notmatch '(?m)^NIDDB_THREE_VM_REUSE active=1 reused=1 callbacks=3 cleanup=1\r?$') {
+            throw 'NIDDB three-VM slot-reuse contract was not completed'
+        }
+        $receipt.three_vm_reuse = 'pass'
+    }
     foreach ($inputRecord in $receipt.inputs) {
         if ((Get-FileHash -LiteralPath $inputRecord.path -Algorithm SHA256).Hash -ne $inputRecord.sha256) { throw "Input changed during fixture: $($inputRecord.path)" }
     }

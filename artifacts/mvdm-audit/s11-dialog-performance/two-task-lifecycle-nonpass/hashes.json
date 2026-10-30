@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-lifecycle-diagnostic\\wow32.dll",
+    "Hash": "E2CFE5443BA0B0D06DAA4E420D506D58AD375D75134C1731EA77587A96F16C3C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-view-diagnostic\\ntvdm.exe",
+    "Hash": "C04B78EFB34773D084A59BCBD323F06D743E7AF1E31570832BA9E22E869CC81F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t459-s2\\common-dialog-guest-r2\\CDLPROBE.EXE",
+    "Hash": "406D84F9E4EA04CD269045B354E95C47A342C986E0400A2C4F6A58DC818D3A02"
+  }
+]

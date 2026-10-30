@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "FEB2902857F428F0A4732AD14B783DF6EB49A0DED42C87172B0BC69A85E77F30",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "811B06FC1226027A59EB17A3D04EAEFA5912490C5D609A9876A0B40500B0A8F8",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "6011BF8998128350A30355819E617A579FE63D70BE870CA3E39F8E535AF0500F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-mutation\\fixture.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "BA9D9AF1C645E44ADB075883B6FFCE7920286DDB44789F22E3E25E9D0E62F4A4",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-mutation\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "4C35711889D46DC161916AA3B82DA98274D573B5F6F844B07BCE87DE5CF39C1B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-mutation\\unsafe-fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "23271763673B1971E4369E159C6F1864D49A358CCD2183688158DA8FDE22AA51",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-lifecycle-window-borrow\\provider.lib"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "451E5C29B26137DF0DC1E3F9C964DE0556E084541C6B5ED10DBCF4DCA5EDA46E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-ceiling-experiment\\wow_user_borrow_scope.obj"
+  }
+]

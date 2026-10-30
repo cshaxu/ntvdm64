@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+    "Hash": "483500E02FE4CC019533A91C5A61FF954E4E45351BC75D128A00090D870339EF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\niddb-object-rollback\\baseline.obj",
+    "Hash": "53200AB23072904616298B28B6872109CEA42938E31B3732704AC922F4CE9D75"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-multi-vm-exit\\fixture.exe",
+    "Hash": "0571C6BFBDBDDEEC190F811390AACF7C16FA2816DA496FC9F4662BAB987D6997"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-multi-vm-exit\\baseline.exe",
+    "Hash": "144EB74CA24799DCD84EE84F62DED84A28FD3AEE699D52DC0435952F6200579F"
+  }
+]

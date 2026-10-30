@@ -1,0 +1,15 @@
+{
+  "result": "pass",
+  "host_scoped_rows": 195,
+  "mixed_ledger_still_pending": 195,
+  "mirror_difference_rows": 0,
+  "tables": {
+    "dos-pending-host-dispositions.csv": "9E81BC10585EC8D0A667451237DCA26E69B26A461C96D9D8E4EF7B0FC5972E85",
+    "write-pending-host-dispositions.csv": "43ED662E4976F6E5FE6387978AA3160AED98B302FA624D324BE37A08FDFD1D47",
+    "ddeml-mmsystem-host-dispositions.csv": "8BF9BD185006EE18A1126C699BCC4DF90C35C8DCE93F3B38A2C0325566F00514",
+    "ole-pending-host-dispositions.csv": "0D43CEF02E073AA074EF234C25E3D4ED9D3D0AFB3BEDFA04DF7250082F32D009",
+    "user-toolhelp-regedit-host-dispositions.csv": "961C66C6F7778C392998C1BA32D99EA5B00E465E1B914E6A7D1CABFA7BF221DF",
+    "remaining-guest-pending-host-dispositions.csv": "E888B5A93886761F28327D83A8208A6DD73FD05E0E67009700926FDF63610562"
+  },
+  "limitation": "Selected x86 host input only; no claim for other profiles or runtime behavior."
+}

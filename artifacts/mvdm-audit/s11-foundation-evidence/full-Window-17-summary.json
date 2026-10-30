@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-empty.txt",
+    "BodyMs": 1824,
+    "CleanupMs": 215
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-native-zero.txt",
+    "BodyMs": 2460,
+    "CleanupMs": 189
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-missing.txt",
+    "BodyMs": 3122,
+    "CleanupMs": 201
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-native-seven.txt",
+    "BodyMs": 1182,
+    "CleanupMs": 214
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-native-streams.txt",
+    "BodyMs": 1137,
+    "CleanupMs": 237
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-native-eof.txt",
+    "BodyMs": 1252,
+    "CleanupMs": 184
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-mem.txt",
+    "BodyMs": 2232,
+    "CleanupMs": 182
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-nested-empty.txt",
+    "BodyMs": 2846,
+    "CleanupMs": 210
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-nested-mem.txt",
+    "BodyMs": 5391,
+    "CleanupMs": 222
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-mem-repeat.txt",
+    "BodyMs": 2761,
+    "CleanupMs": 211
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-direct-mem.txt",
+    "BodyMs": 924,
+    "CleanupMs": 208
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-command-c.txt",
+    "BodyMs": 888,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-command-c-seven.txt",
+    "BodyMs": 1077,
+    "CleanupMs": 195
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-guest-seven.txt",
+    "BodyMs": 848,
+    "CleanupMs": 191
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-command-c-mem.txt",
+    "BodyMs": 827,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-direct-seven.txt",
+    "BodyMs": 1033,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\full-results\\Window-17-edit.txt",
+    "BodyMs": 3773,
+    "CleanupMs": 203
+  }
+]

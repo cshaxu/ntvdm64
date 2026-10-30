@@ -178,19 +178,6 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
 void mvdm_softpc_report_wow_far_call_validation(unsigned short selector,
     unsigned long descriptor_address, unsigned long access_rights,
     unsigned long current_privilege);
-/* Default-off comparison of the original DOSX source LDT and the separate
- * CPU40 LDT carrier at an already-validated far-call target.  It only copies
- * the two descriptor records for diagnosis; neither table is modified. */
-void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
-    unsigned long descriptor_address, unsigned long ldt_base,
-    unsigned long ldt_limit, unsigned short ldt_selector,
-    unsigned long descriptor_low, unsigned long descriptor_high);
-/* Default-off proof of the actual CCPU page-table translation for an already
- * validated WOW far-call target.  It observes the source descriptor and does
- * not alter descriptors, paging, the TLB, or instruction execution. */
-void mvdm_softpc_report_wow_fetch_translation(unsigned short selector,
-    unsigned long offset, unsigned long linear, unsigned long physical,
-    unsigned long mapped);
 /* Default-off witness for the original WOW_x86 INT 2Ah fast LDT publication
  * protocol.  It records the pre-existing selector and two descriptor words
  * before ordinary CCPU software-interrupt dispatch continues. */

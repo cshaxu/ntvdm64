@@ -30,6 +30,8 @@ typedef CONTEXT observer_guest_context;
 
 static char control_event_report[MAX_PATH];
 static DWORD scripted_window_frontend;
+static HWND find_window_by_pid(DWORD owner_pid, BOOL visible_only);
+static HWND find_scripted_window(void);
 static HANDLE observer_pty_input;
 static BOOL observer_pty_write(const char *text,DWORD bytes)
 {
@@ -349,7 +351,7 @@ static void write_console_snapshot(HANDLE output, const char *report_path)
     CONSOLE_SCREEN_BUFFER_INFO info = {0};
     FILE *file = NULL;
     BOOL opened = FALSE;
-    HWND window = scripted_window_frontend ? FindWindowW(L"LibKvmWindow", NULL) : NULL;
+    HWND window = scripted_window_frontend ? find_scripted_window() : NULL;
 
     if (window && IsWindowVisible(window)) {
         observer_text_view view;
@@ -876,11 +878,10 @@ done:
  * "CAF was used" from "NTCON was destroyed while its Window route was live". */
 static BOOL observer_return_caf_window(DWORD frontend,const char *report_path)
 {
-    HWND window=NULL;DWORD pid=0;ULONGLONG deadline=GetTickCount64()+5000;
+    HWND window=NULL;ULONGLONG deadline=GetTickCount64()+5000;
     FILE *report;char path[MAX_PATH];BOOL returned=FALSE;
     do {
-        window=FindWindowW(L"LibKvmWindow",NULL);
-        if(window) { GetWindowThreadProcessId(window,&pid); if(pid!=frontend)window=NULL; }
+        window=find_window_by_pid(frontend,FALSE);
         if(!window)break;
         if(!PostMessageW(window,WM_CLOSE,0,0))break;
         Sleep(20);
@@ -998,21 +999,38 @@ static BOOL observer_console_cell_is(HANDLE output,COORD position,char value)
     return ReadConsoleOutputCharacterA(output,&cell,1,position,&count) &&
         count==1 && cell==value;
 }
+/* Multiple independent frontends can share this desktop.  Resolve every
+ * subsequent observation against the PID authenticated at CAF entry. */
+static HWND find_window_by_pid(DWORD owner_pid, BOOL visible_only)
+{
+    HWND window=NULL;
+    DWORD pid;
+    while ((window=FindWindowExW(NULL,window,L"LibKvmWindow",NULL)) != NULL) {
+        pid=0;
+        if(GetWindowThreadProcessId(window,&pid) && pid==owner_pid &&
+                (!visible_only || IsWindowVisible(window))) return window;
+    }
+    return NULL;
+}
+
+static HWND find_scripted_window(void)
+{
+    return find_window_by_pid(scripted_window_frontend,TRUE);
+}
+
 static HWND scripted_input_window(void)
 {
-    HWND window=NULL;DWORD pid=0;
+    HWND window=NULL;
     ULONGLONG deadline=GetTickCount64()+5000;
     /* Each handoff may recreate the Window, but not its frontend owner.
      * This is private-desktop observation only, never global input. */
     if(!scripted_window_frontend)return NULL;
     do {
-        window=FindWindowW(L"LibKvmWindow",NULL);
-        if(window && IsWindowVisible(window))break;
+        window=find_scripted_window();
+        if(window)break;
         Sleep(10);
     } while(GetTickCount64()<deadline);
-    if(!window || !IsWindowVisible(window))return NULL;
-    GetWindowThreadProcessId(window,&pid);
-    return pid==scripted_window_frontend ? window : NULL;
+    return window;
 }
 static DWORD scripted_window_key_messages, scripted_window_enters;
 /* SendMessage does not update a foreign thread's keyboard-state table.
@@ -1098,8 +1116,7 @@ static BOOL wait_input_milestone(HANDLE output, const char *echo,
         /* This wait already has its own deadline/death handle. Do not nest
          * the five-second input-window lookup after the final Window closed. */
         if (scripted_window_frontend) {
-            window = FindWindowW(L"LibKvmWindow",NULL);
-            if (window && !IsWindowVisible(window)) window = NULL;
+            window = find_scripted_window();
         }
         if ((!scripted_window_frontend || window) && observer_text_read(output, window,
                 scripted_window_frontend, &view)) {

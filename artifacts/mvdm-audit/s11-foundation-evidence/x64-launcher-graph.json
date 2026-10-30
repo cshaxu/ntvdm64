@@ -1,0 +1,7 @@
+{
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\launcher",
+  "target": "run16.exe",
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "count": 66,
+  "commands_sha256": "EB931F62A80F044A1312EC323141CC7F24ED2C87B1C0808EE2BEE430520AD890"
+}

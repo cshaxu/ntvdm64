@@ -175,11 +175,14 @@ int main(int argc,char **argv)
 {
     HANDLE process; HDESK desktop; RECT rect; DWORD_PTR reply;
     ULONGLONG deadline; DWORD initial, dealt, waste, drawn, empty_waste; int gap;
-    if(argc!=4 || strncmp(argv[2],"NTVDMConsoleTest-",17))return 2;
+    BOOL inherited_desktop;
+    if(argc!=4 || (strcmp(argv[2],"-") && strncmp(argv[2],"NTVDMConsoleTest-",17)))return 2;
+    inherited_desktop=!strcmp(argv[2],"-");
     owner_pid=strtoul(argv[1],NULL,10);
     process=OpenProcess(SYNCHRONIZE|PROCESS_QUERY_LIMITED_INFORMATION,FALSE,owner_pid);
-    desktop=OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
-    if(!process || !desktop || !SetThreadDesktop(desktop))return 3;
+    desktop=inherited_desktop ? GetThreadDesktop(GetCurrentThreadId()) :
+        OpenDesktopA(argv[2],0,FALSE,DESKTOP_READOBJECTS|DESKTOP_WRITEOBJECTS|DESKTOP_ENUMERATE);
+    if(!process || !desktop || (!inherited_desktop && !SetThreadDesktop(desktop)))return 3;
     deadline=GetTickCount64()+10000;
     do {EnumDesktopWindows(desktop,find_game,0);if(game)break;Sleep(25);}
     while(GetTickCount64()<deadline && WaitForSingleObject(process,0)==WAIT_TIMEOUT);
@@ -237,7 +240,7 @@ int main(int argc,char **argv)
                 return 4;
             }
             puts("PARTIAL SOL startup and window close; full gameplay UNVERIFIED: geometry matches host max tracking size");
-            CloseHandle(process);CloseDesktop(desktop);return 77;
+            CloseHandle(process);if(!inherited_desktop)CloseDesktop(desktop);return 77;
         }
         if (geometry != 0) {
             (void)capture(game,argv[3],"geometry-failure");
@@ -289,5 +292,5 @@ int main(int argc,char **argv)
         return 9;
     }
     puts("PASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close");
-    CloseHandle(process);CloseDesktop(desktop);return 0;
+    CloseHandle(process);if(!inherited_desktop)CloseDesktop(desktop);return 0;
 }

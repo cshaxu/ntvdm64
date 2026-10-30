@@ -1,0 +1,143 @@
+{
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "FCC11E823E8B805A8444BA8787A88A250F2E62FF6918B844F2AF0CBB5650E73A",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "E19A471550280BA80345DD660ED9C664A3B6D58B1DD9AC7940B8FE9744FCBEE2",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "0A00E59BA1154A333CE61DF6DB5407A51E674845267C66AA4AC9B9A7C45699DD",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "C6C9E7D1D21467921EF1AA94270A23AE66918A5FD908D27F1867A7FDC1430A61",
+      "Machine": 332,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "8356F96605378A1EC5D8A8E29F433F53F5B3DBAAD51A743C26C452D9C1407E20"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "11DBF94367171FD2171EF241E1ABE653E9ECE821F5BEC56A4877250B4E4CD890",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "E41AC7C4211C4BBDD4B1A430CF87A98E1D53BFEF6F802A510BD42A639D6CFDDE",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "B140C023799A6466657E9C9FEBD8778970E7554E0E959FF9EF9FE5897B95E354",
+      "Machine": 332,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "234921D9D26BEE0F35F693FB31D864835335D6AA4AFDE76E43C146FAB24B7B73"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6CE4D7D53C084C61534ABA32A40C7D70C4AB16C62076F55443BC943DABCB5D98",
+      "Machine": 332,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "C31F22FD9BBC88419D70C4D4A03BDBFC0CC72931838615227E775AA27521CDCA"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "CAB2CC97A2853EE4848D4E3C05033491280CACB44EA9F523AD5DDA8F9111C02D",
+      "Machine": 332,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "D91250F54F20F1B04BDEA52F6BDED7FF11BE8B195846BC25AD745925BBF0C497",
+      "Machine": 34404,
+      "PackageId": "ee7059d0-4cc2-4f32-b5c5-971b10eada87",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "disposition": "reverted only redundant preparation skip; no causal regression claim; no demonstrated benefit",
+  "formal": [
+    {
+      "case": "graph-snapshot",
+      "finished": "2026-10-29T16:45:28.5950316Z",
+      "exitCode": 0
+    },
+    {
+      "case": "window-borrow",
+      "finished": "2026-10-29T16:45:43.5568311Z",
+      "exitCode": 0
+    },
+    {
+      "case": "class-lifetime",
+      "finished": "2026-10-29T16:45:58.6819706Z",
+      "exitCode": 0
+    }
+  ],
+  "guard": "0",
+  "probes": [
+    {
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=6938\r\nSOL options: dialog-close-recovery-ms=4344\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=7718\r\nSOL options: modal close or parent recovery failed dialog=0 worker_wait=258 worker_exit=00000103 parent_responded=0 parent_error=1460 elapsed_ms=8735\r\n",
+      "application": "sol"
+    },
+    {
+      "probe": "main=00920940 command=3\r\ndialog hwnd=014908BA title=Find\r\ndialog-visible-ms=1094\r\nclose-recovery-ms=391\r\nPASS menu dialog and parent recovery\r\n",
+      "application": "notepad"
+    },
+    {
+      "probe": "main=00EB07E4 command=524\r\nFAIL dialog not observed\r\n",
+      "application": "winmine"
+    },
+    {
+      "probe": "main=00550916 command=101\r\ndialog hwnd=00F407EC title=Program Group Properties\r\ndialog-visible-ms=6547\r\nclose-recovery-ms=5953\r\nPASS menu dialog and parent recovery\r\n",
+      "application": "progman"
+    }
+  ],
+  "results": [
+    {
+      "application": "sol",
+      "finished": "2026-10-29T16:49:42.3312835Z",
+      "exitCode": 1
+    },
+    {
+      "application": "notepad",
+      "finished": "2026-10-29T16:49:57.5987148Z",
+      "exitCode": 0
+    },
+    {
+      "application": "winmine",
+      "finished": "2026-10-29T16:50:16.0393028Z",
+      "exitCode": 1
+    },
+    {
+      "application": "progman",
+      "finished": "2026-10-29T16:50:40.8469682Z",
+      "exitCode": 0
+    }
+  ]
+}

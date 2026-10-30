@@ -1,5 +1,12 @@
 # WOW32 DLL target component
 
+ADAPTER-WOW-108 preserves the first error from the window-retirement sweep
+while continuing all later pending retirements and releases. A controlled
+two-entry failure witness demonstrates that the previous code reported the
+last failure; the corrected code returns the first and later permits both
+entries to retire. It changes the project adapter only, not original mirror or
+guest code. It does not establish the cause of the separate SOL 1400 failure.
+
 MVDM-HOST-DIV-454 is the bounded live-HWND adaptation at existing original
 WOW-to-USER boundaries.  NT4's `HWND32` short carrier and its full
 index/uniqueness form could be passed to the paired NT4 USER implementation;

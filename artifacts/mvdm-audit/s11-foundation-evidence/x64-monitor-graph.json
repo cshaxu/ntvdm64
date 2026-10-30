@@ -1,0 +1,7 @@
+{
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\monitor",
+  "target": "ntmon.exe",
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "count": 21,
+  "commands_sha256": "F3B8CFE78EBFF937CDB792F928DB24C345CA801121998DBA72DCF8D7837213A0"
+}

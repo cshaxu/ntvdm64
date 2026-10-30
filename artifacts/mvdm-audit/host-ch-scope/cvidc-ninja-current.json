@@ -1,0 +1,35 @@
+{
+  "result": "pass",
+  "build": "Ninja selected target with x86 MSVC environment driver; subsequent Ninja dry run no work",
+  "fixture": "81 slots; selectors, guards, read/write cases and concurrency passed",
+  "limitations": [
+    "fixture link uses /force:multiple and duplicate-symbol warnings",
+    "not a guest mode/reset test"
+  ],
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "6049e67eb804dba2bd59e3ef7563b1fa0b3979b52eadfc9745745f5e1e000185"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/tests/cvidc_vector_binding_fixture.obj",
+      "sha256": "12de540acb35274b19a6491a13d3b2d6abd7147b6893045f80c9a488fd5b5833"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/ev_glue.obj",
+      "sha256": "5ebee9014915207acdc2a9a95eea413805ed4d1125a8a489bb7dab97469f109d"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/original-softpc-cvidc.lib",
+      "sha256": "93f897595f26270fb654a61f888fe1fc4fa9c0cb40b3dbdcd49e2ce3b27af05c"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe",
+      "sha256": "f9633c978908d33b88061bced7b5b0df6a974e524bb3f0c41dacc5d5befc2a4d"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/cvidc-vector-binding-fixture.exe.map",
+      "sha256": "29112aa6648e4004b81c61240084e644da9140b41b590e7a331da363b9d6836f"
+    }
+  ]
+}

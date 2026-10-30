@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-candidate\\stage\\package\\system32\\WOW32.DLL",
+    "Hash": "CD8C3B8509F50D7BE3AAFEED726BB37F507258AD270CB30A53537A3899701C6A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-candidate\\stage\\package\\system32\\ntvdm.exe",
+    "Hash": "DBAAFE65601F69EF06D081762CBFFFBAE83E48A269895B37CBB1B245621CE87C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-candidate\\wow_window_words_binding.obj",
+    "Hash": "F049EA65152CEE20DA0F03E13768593B57BD0F6CA77E5A6E94939BD94A38F9A5"
+  }
+]

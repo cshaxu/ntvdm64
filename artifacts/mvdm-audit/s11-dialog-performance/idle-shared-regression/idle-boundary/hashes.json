@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\adapter-mvdm-host-out\\wow\\wow_idle_hook_fixture.c",
+    "Hash": "6C3491F48F96C4C6EE980F8AF036286CBCD344F24EFBE2B39D194FE5C075FEA9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_idle_hook_binding.c",
+    "Hash": "0319FB16FF0B553E00003CCFFA35774E13984AB71C6B94C103F983A53B0158B0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-boundary-current\\fixture.exe",
+    "Hash": "7F4326A2CF91C5E31730991F712B1C06B5CEB803B5BB9D744FAE7E12F9A29FED"
+  }
+]

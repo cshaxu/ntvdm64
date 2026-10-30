@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E6D5D5E3F01863FE4A2641E55AE723E970FFE88E5B375557B7A913609F00438D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alias-candidate-fixed\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F88DACFC5AB836CE54EBFC98C41B77A9876897D2C05513BE9D75DC9E178EB999",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alias-candidate-fixed\\mvdm_softpc_physical_mapping.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E1873575CBEAA187B5A2F1A783D6387B991B1B73811E234240F072640FB5C1EF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-integrated\\package\\product-system32-manifest.json"
+  }
+]

@@ -1,0 +1,6 @@
+"Algorithm","Hash","Path"
+"SHA256","9A1AA63CDFB59976280041A7639CF082A57F19642B0AD40F5D861899FB884722","O:\repos.hobby\ntvdm64\src\wow32-dll\source\wow_user_task_lifecycle.c"
+"SHA256","7CFBA100BFE24D41F69AEA1B8BAAEC30B2672DB1C0836B3FF3CE3A587646616A","O:\repos.hobby\ntvdm64\tests\observation\wow_native_wait_publication_fixture.c"
+"SHA256","15329EBCBFDA0D858C1F1404BA31C90309EF3DB156680E439226FA744A301F93","O:\repos.hobby\ntvdm64\build\t473-s11\reconciled-return-unwind\NativeWaitPublication\native_wait_publication_body.h"
+"SHA256","CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152","O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\wow32\msvc-x86.cmd"
+"SHA256","4EAE8256A6D1C277299D17A9E9EF08CA2A3B5558D6CDD7BDE3A22B0B4EDF00E5","O:\repos.hobby\ntvdm64\tests\observation\verify-wow-projection-return-unwind.ps1"

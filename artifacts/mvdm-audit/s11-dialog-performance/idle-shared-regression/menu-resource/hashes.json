@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\menu-resource-desktop\\fixture.exe",
+    "Hash": "0783BFE62A9C481F148F39D6E1F9D65AB235D319D3FC74838510D603294E91FE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\menu-resource-desktop\\fixture.map",
+    "Hash": "BEB4D1F3F6961D177077D172F90F9C7AF97F05DD5B932F657CDF02708E0303A0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_menu_client_bindings.obj",
+    "Hash": "ECD9F95908BD2CB0CAEC4FB865519BC9A724FDC1318BC27EFCD1ABC19AE036E2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "A14E9B276F5B581F7D46B80C4F78E5141D6E8CC8E6995B864C230615093D8740"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "516B94B6D699E80EF72B135B45E0DF5F771D72B42B2DFCB63F9EFB1AACEA0BD6"
+  }
+]

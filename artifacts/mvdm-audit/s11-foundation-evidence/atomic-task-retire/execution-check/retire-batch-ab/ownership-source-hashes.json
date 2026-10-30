@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "28381B97F5550E05EC31E0992B3ECF824257672497266E1245361E7AE6009D71",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "30B25028B34B2553D42A38A9671F6E38C87CCD4D3960D6FFAEE691F2E366BCFD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_object_bindings.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "86E312B5DC15A01AEFC2F208C1B9D19CF40C26B1D1EBAF6AC362B949577B64B0",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_menu_client_bindings.c"
+  }
+]

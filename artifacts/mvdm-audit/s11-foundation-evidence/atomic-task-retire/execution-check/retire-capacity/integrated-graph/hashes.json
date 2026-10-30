@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "32AF0BF2FAB652C9CF1C08749FB79E7355F88570459E7DCA8E23A6AFC23BBD59",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "4F027EA37D11DF6BDED4CBC4C399DF6AD37E47299E6975FC8490F58AD768D248",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "02EA3C4B9165A268A347C098A9BCE0CA27E274C6BE3F5864D1D02E0A2130F7F1",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-graph\\fixture.map"
+  }
+]

@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "E41452963A0F92576C1DC54DFBDBCC41DF37D126BA1BE76D976A902B1132D272"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+    "Hash": "04DB4AC5376F69811DC40A103AB3C8ABF2781A9D1AC7C894D5977B074FC14CA1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-continue-after-error\\fixture.exe",
+    "Hash": "4650A621DF4064DBCCC33F561710F476C3B221C3101F7F5D3A30504CCEA12A05"
+  }
+]

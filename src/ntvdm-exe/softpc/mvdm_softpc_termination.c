@@ -19,7 +19,6 @@ extern void *Ldt;
 extern unsigned long IntelBase;
 extern unsigned long Cpu40GdtShadowAddress;
 extern unsigned long Cpu40LdtShadowAddress;
-extern unsigned long FlatAddress[];
 extern int xtrn2phy(unsigned long linear, unsigned char access,
     unsigned long *physical);
 extern void c_sas_loads(unsigned long source, unsigned char *destination,
@@ -1071,83 +1070,6 @@ void mvdm_softpc_report_wow_far_call_validation(unsigned short selector,
         "far-validate selector=%04x descriptor=%08lx ar=%02lx cpl=%lu\r\n",
         (unsigned int)selector, descriptor_address, access_rights,
         current_privilege);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
-void mvdm_softpc_report_wow_descriptor_domains(unsigned short selector,
-    unsigned long descriptor_address, unsigned long ldt_base,
-    unsigned long ldt_limit, unsigned short ldt_selector,
-    unsigned long descriptor_low, unsigned long descriptor_high)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char filter[16];
-    char line[192];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-    unsigned long selected;
-    unsigned long source[2] = {0, 0};
-    unsigned long shadow[2] = {0, 0};
-    unsigned long offset;
-
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
-        (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
-    selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected || Ldt == NULL ||
-            Cpu40LdtShadowAddress == 0u) goto restore_error;
-    offset = (unsigned long)(selector & 0xfff8u);
-    CopyMemory(source, (unsigned char *)Ldt + offset, sizeof(source));
-    CopyMemory(shadow, (unsigned char *)(uintptr_t)(IntelBase +
-        Cpu40LdtShadowAddress) + offset, sizeof(shadow));
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "far-domains selector=%04x observed=%08lx ldt=%04x:%08lx/%08lx actual=%08lx:%08lx source=%08lx:%08lx shadow=%08lx:%08lx flat=%08lx\\r\\n",
-        (unsigned int)selector, descriptor_address, (unsigned int)ldt_selector,
-        ldt_base, ldt_limit, descriptor_low, descriptor_high, source[0],
-        source[1], shadow[0], shadow[1], FlatAddress[(selector & 0xfff8u) >> 3]);
-    WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
-    CloseHandle(file);
-restore_error:
-    SetLastError(saved_error);
-}
-
-void mvdm_softpc_report_wow_fetch_translation(unsigned short selector,
-    unsigned long offset, unsigned long linear, unsigned long physical,
-    unsigned long mapped)
-{
-    DWORD saved_error = GetLastError();
-    char path[MAX_PATH];
-    char filter[16];
-    char line[256];
-    DWORD bytes;
-    HANDLE file;
-    DWORD written;
-    unsigned long selected;
-
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
-        (DWORD)sizeof(path));
-    if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_SELECTOR", filter,
-        (DWORD)sizeof(filter));
-    if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
-    selected = strtoul(filter, NULL, 16);
-    if (selector != (unsigned short)selected) goto restore_error;
-    file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
-        NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    if (file == INVALID_HANDLE_VALUE) goto restore_error;
-    snprintf(line, sizeof(line),
-        "far-fetch selector=%04x offset=%08lx linear=%08lx mapped=%lu physical=%08lx\\r\\n",
-        (unsigned int)selector, offset, linear, mapped, physical);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
 restore_error:

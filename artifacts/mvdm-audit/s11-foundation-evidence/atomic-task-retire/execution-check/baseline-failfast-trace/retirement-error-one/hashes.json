@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F7F649C10D536CD795C4DD6C370BA7DF18358CA615D5ADB21D2FFA2696A3BDC2",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "63FDEA088FBBEF1A17425342EADA96CA0D7CF703A88B2561D95F9D54AE2487BC",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "59324AA402D9CA3534F3065BCA1A3A69479EB5C23B8C13E7FDAF063CD0FFE4C4",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-one\\fixture.exe"
+  }
+]

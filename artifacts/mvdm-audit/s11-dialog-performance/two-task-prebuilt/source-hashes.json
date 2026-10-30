@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t459-s2\\common-dialog-guest-r2\\CDLPROBE.EXE",
+    "Hash": "406D84F9E4EA04CD269045B354E95C47A342C986E0400A2C4F6A58DC818D3A02"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\win16_common_dialog_probe.asm",
+    "Hash": "5A35A28552EEF038633B5E1D84B58A94CEB32EC1F476CFFEE16F496175AFB283"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\reuse-prebuilt-sibling\\run.ps1",
+    "Hash": "513FF983BFE0A6C287DF5B592AF8CC5F6151C9F4AC138DC111660FAABB2DFDAA"
+  }
+]

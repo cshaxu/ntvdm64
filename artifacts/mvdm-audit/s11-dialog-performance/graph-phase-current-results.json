@@ -1,0 +1,144 @@
+{
+  "phases": [
+    "pin",
+    "full_view",
+    "retain",
+    "prepare",
+    "relation",
+    "row_lookup",
+    "pin_transfer",
+    "publish"
+  ],
+  "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4625\r\nSOL options: dialog-close-recovery-ms=3797\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=3625\r\nSOL options: dialog-close-recovery-ms=3922\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n",
+  "limitation": "Cumulative startup and two dialogs; instrumentation overhead; not per-dialog wall time; diagnostic only",
+  "sourceHash": "FF5AF122ABD9E634CA3BEE1D2E15C2FD46FCA241F5A9D985D06889C549613E9A",
+  "comparison": [
+    {
+      "name": "run16.exe",
+      "sameInput": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "sameInput": true
+    },
+    {
+      "name": "ntcon.exe",
+      "sameInput": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "sameInput": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "sameInput": true
+    },
+    {
+      "name": "ntmon.exe",
+      "sameInput": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "sameInput": false
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sameInput": true
+    },
+    {
+      "name": "nthook32.dll",
+      "sameInput": true
+    },
+    {
+      "name": "nthook64.dll",
+      "sameInput": true
+    }
+  ],
+  "counters": "tid=5980 phase=0 count=4535 ticks=27326 hz=10000000\r\ntid=5980 phase=1 count=4535 ticks=77893 hz=10000000\r\ntid=5980 phase=2 count=4535 ticks=24963 hz=10000000\r\ntid=5980 phase=3 count=4535 ticks=120652 hz=10000000\r\ntid=5980 phase=4 count=18140 ticks=595463 hz=10000000\r\ntid=5980 phase=5 count=18140 ticks=31987 hz=10000000\r\ntid=5980 phase=6 count=12 ticks=21830 hz=10000000\r\ntid=5980 phase=7 count=12 ticks=4287 hz=10000000\r\ntid=5980 phase=0 count=28896 ticks=167992 hz=10000000\r\ntid=5980 phase=1 count=28896 ticks=456289 hz=10000000\r\ntid=5980 phase=2 count=28896 ticks=152378 hz=10000000\r\ntid=5980 phase=3 count=28896 ticks=727855 hz=10000000\r\ntid=5980 phase=4 count=115584 ticks=3563396 hz=10000000\r\ntid=5980 phase=5 count=115584 ticks=202908 hz=10000000\r\ntid=5980 phase=6 count=76 ticks=135572 hz=10000000\r\ntid=5980 phase=7 count=76 ticks=22530 hz=10000000\r\ntid=5980 phase=0 count=53474 ticks=317900 hz=10000000\r\ntid=5980 phase=1 count=53474 ticks=856025 hz=10000000\r\ntid=5980 phase=2 count=53474 ticks=284737 hz=10000000\r\ntid=5980 phase=3 count=53474 ticks=1354173 hz=10000000\r\ntid=5980 phase=4 count=213896 ticks=6620581 hz=10000000\r\ntid=5980 phase=5 count=213896 ticks=347205 hz=10000000\r\ntid=5980 phase=6 count=140 ticks=254598 hz=10000000\r\ntid=5980 phase=7 count=140 ticks=41129 hz=10000000\r\ntid=5980 phase=0 count=78268 ticks=483125 hz=10000000\r\ntid=5980 phase=1 count=78268 ticks=1469437 hz=10000000\r\ntid=5980 phase=2 count=78268 ticks=425798 hz=10000000\r\ntid=5980 phase=3 count=78268 ticks=2131816 hz=10000000\r\ntid=5980 phase=4 count=313072 ticks=9991425 hz=10000000\r\ntid=5980 phase=5 count=313072 ticks=514039 hz=10000000\r\ntid=5980 phase=6 count=204 ticks=389939 hz=10000000\r\ntid=5980 phase=7 count=204 ticks=66739 hz=10000000\r\ntid=5980 phase=0 count=103275 ticks=644003 hz=10000000\r\ntid=5980 phase=1 count=103275 ticks=1905369 hz=10000000\r\ntid=5980 phase=2 count=103275 ticks=572324 hz=10000000\r\ntid=5980 phase=3 count=103275 ticks=2824054 hz=10000000\r\ntid=5980 phase=4 count=413100 ticks=13338933 hz=10000000\r\ntid=5980 phase=5 count=413100 ticks=675817 hz=10000000\r\ntid=5980 phase=6 count=268 ticks=530849 hz=10000000\r\ntid=5980 phase=7 count=268 ticks=92119 hz=10000000\r\ntid=5980 phase=0 count=128363 ticks=798136 hz=10000000\r\ntid=5980 phase=1 count=128363 ticks=2333424 hz=10000000\r\ntid=5980 phase=2 count=128363 ticks=711158 hz=10000000\r\ntid=5980 phase=3 count=128363 ticks=3492363 hz=10000000\r\ntid=5980 phase=4 count=513452 ticks=16590702 hz=10000000\r\ntid=5980 phase=5 count=513452 ticks=826216 hz=10000000\r\ntid=5980 phase=6 count=332 ticks=654716 hz=10000000\r\ntid=5980 phase=7 count=332 ticks=112466 hz=10000000\r\ntid=5980 phase=0 count=153409 ticks=961780 hz=10000000\r\ntid=5980 phase=1 count=153409 ticks=2780240 hz=10000000\r\ntid=5980 phase=2 count=153409 ticks=858710 hz=10000000\r\ntid=5980 phase=3 count=153409 ticks=4186812 hz=10000000\r\ntid=5980 phase=4 count=613636 ticks=20020356 hz=10000000\r\ntid=5980 phase=5 count=613636 ticks=985395 hz=10000000\r\ntid=5980 phase=6 count=396 ticks=788276 hz=10000000\r\ntid=5980 phase=7 count=396 ticks=139718 hz=10000000\r\ntid=5980 phase=0 count=178497 ticks=1114674 hz=10000000\r\ntid=5980 phase=1 count=178497 ticks=3192225 hz=10000000\r\ntid=5980 phase=2 count=178497 ticks=994540 hz=10000000\r\ntid=5980 phase=3 count=178497 ticks=4835469 hz=10000000\r\ntid=5980 phase=4 count=713988 ticks=23229923 hz=10000000\r\ntid=5980 phase=5 count=713988 ticks=1127814 hz=10000000\r\ntid=5980 phase=6 count=460 ticks=916534 hz=10000000\r\ntid=5980 phase=7 count=460 ticks=162776 hz=10000000\r\ntid=5980 phase=0 count=203585 ticks=1270250 hz=10000000\r\ntid=5980 phase=1 count=203585 ticks=3621193 hz=10000000\r\ntid=5980 phase=2 count=203585 ticks=1134491 hz=10000000\r\ntid=5980 phase=3 count=203585 ticks=5496191 hz=10000000\r\ntid=5980 phase=4 count=814340 ticks=26412758 hz=10000000\r\ntid=5980 phase=5 count=814340 ticks=1273041 hz=10000000\r\ntid=5980 phase=6 count=524 ticks=1045885 hz=10000000\r\ntid=5980 phase=7 count=524 ticks=183505 hz=10000000\r\ntid=5980 phase=0 count=228673 ticks=1409507 hz=10000000\r\ntid=5980 phase=1 count=228673 ticks=4007754 hz=10000000\r\ntid=5980 phase=2 count=228673 ticks=1266329 hz=10000000\r\ntid=5980 phase=3 count=228673 ticks=6121101 hz=10000000\r\ntid=5980 phase=4 count=914692 ticks=29496721 hz=10000000\r\ntid=5980 phase=5 count=914692 ticks=1413189 hz=10000000\r\ntid=5980 phase=6 count=588 ticks=1167526 hz=10000000\r\ntid=5980 phase=7 count=588 ticks=198575 hz=10000000\r\ntid=5980 phase=0 count=253761 ticks=1556420 hz=10000000\r\ntid=5980 phase=1 count=253761 ticks=4411647 hz=10000000\r\ntid=5980 phase=2 count=253761 ticks=1399827 hz=10000000\r\ntid=5980 phase=3 count=253761 ticks=6760559 hz=10000000\r\ntid=5980 phase=4 count=1015044 ticks=32609304 hz=10000000\r\ntid=5980 phase=5 count=1015044 ticks=1552312 hz=10000000\r\ntid=5980 phase=6 count=652 ticks=1296971 hz=10000000\r\ntid=5980 phase=7 count=652 ticks=216333 hz=10000000\r\ntid=5980 phase=0 count=278807 ticks=1701665 hz=10000000\r\ntid=5980 phase=1 count=278807 ticks=4805769 hz=10000000\r\ntid=5980 phase=2 count=278807 ticks=1531791 hz=10000000\r\ntid=5980 phase=3 count=278807 ticks=7394781 hz=10000000\r\ntid=5980 phase=4 count=1115228 ticks=35738000 hz=10000000\r\ntid=5980 phase=5 count=1115228 ticks=1689156 hz=10000000\r\ntid=5980 phase=6 count=716 ticks=1416476 hz=10000000\r\ntid=5980 phase=7 count=716 ticks=232604 hz=10000000\r\ntid=5980 phase=0 count=300899 ticks=1832541 hz=10000000\r\ntid=5980 phase=1 count=300899 ticks=5168829 hz=10000000\r\ntid=5980 phase=2 count=300899 ticks=1650703 hz=10000000\r\ntid=5980 phase=3 count=300899 ticks=7977885 hz=10000000\r\ntid=5980 phase=4 count=1203596 ticks=38570999 hz=10000000\r\ntid=5980 phase=5 count=1203596 ticks=1816367 hz=10000000\r\ntid=5980 phase=6 count=774 ticks=1525335 hz=10000000\r\ntid=5980 phase=7 count=774 ticks=253673 hz=10000000\r\ntid=5980 phase=0 count=325382 ticks=1999517 hz=10000000\r\ntid=5980 phase=1 count=325382 ticks=5622311 hz=10000000\r\ntid=5980 phase=2 count=325382 ticks=1794976 hz=10000000\r\ntid=5980 phase=3 count=325382 ticks=8663653 hz=10000000\r\ntid=5980 phase=4 count=1301528 ticks=41974051 hz=10000000\r\ntid=5980 phase=5 count=1301528 ticks=1985348 hz=10000000\r\ntid=5980 phase=6 count=838 ticks=1658633 hz=10000000\r\ntid=5980 phase=7 count=838 ticks=281037 hz=10000000\r\ntid=5980 phase=0 count=350080 ticks=2148941 hz=10000000\r\ntid=5980 phase=1 count=350080 ticks=6022312 hz=10000000\r\ntid=5980 phase=2 count=350080 ticks=1927132 hz=10000000\r\ntid=5980 phase=3 count=350080 ticks=9305766 hz=10000000\r\ntid=5980 phase=4 count=1400320 ticks=45130872 hz=10000000\r\ntid=5980 phase=5 count=1400320 ticks=2131027 hz=10000000\r\ntid=5980 phase=6 count=902 ticks=1779517 hz=10000000\r\ntid=5980 phase=7 count=902 ticks=302928 hz=10000000\r\ntid=5980 phase=0 count=374996 ticks=2306446 hz=10000000\r\ntid=5980 phase=1 count=374996 ticks=6439999 hz=10000000\r\ntid=5980 phase=2 count=374996 ticks=2067825 hz=10000000\r\ntid=5980 phase=3 count=374996 ticks=9982499 hz=10000000\r\ntid=5980 phase=4 count=1499984 ticks=48432144 hz=10000000\r\ntid=5980 phase=5 count=1499984 ticks=2283751 hz=10000000\r\ntid=5980 phase=6 count=966 ticks=1914649 hz=10000000\r\ntid=5980 phase=7 count=966 ticks=327089 hz=10000000\r\ntid=5980 phase=0 count=400074 ticks=2451715 hz=10000000\r\ntid=5980 phase=1 count=400074 ticks=6825712 hz=10000000\r\ntid=5980 phase=2 count=400074 ticks=2199365 hz=10000000\r\ntid=5980 phase=3 count=400074 ticks=10611103 hz=10000000\r\ntid=5980 phase=4 count=1600296 ticks=51524799 hz=10000000\r\ntid=5980 phase=5 count=1600296 ticks=2421069 hz=10000000\r\ntid=5980 phase=6 count=1030 ticks=2036419 hz=10000000\r\ntid=5980 phase=7 count=1030 ticks=342503 hz=10000000\r\ntid=5980 phase=0 count=425148 ticks=2608610 hz=10000000\r\ntid=5980 phase=1 count=425148 ticks=7263022 hz=10000000\r\ntid=5980 phase=2 count=425148 ticks=2338774 hz=10000000\r\ntid=5980 phase=3 count=425148 ticks=11282364 hz=10000000\r\ntid=5980 phase=4 count=1700592 ticks=54815381 hz=10000000\r\ntid=5980 phase=5 count=1700592 ticks=2573234 hz=10000000\r\ntid=5980 phase=6 count=1094 ticks=2164709 hz=10000000\r\ntid=5980 phase=7 count=1094 ticks=364819 hz=10000000\r\ntid=5980 phase=0 count=450236 ticks=2784683 hz=10000000\r\ntid=5980 phase=1 count=450236 ticks=7739338 hz=10000000\r\ntid=5980 phase=2 count=450236 ticks=2490994 hz=10000000\r\ntid=5980 phase=3 count=450236 ticks=12015011 hz=10000000\r\ntid=5980 phase=4 count=1800944 ticks=58440042 hz=10000000\r\ntid=5980 phase=5 count=1800944 ticks=2749756 hz=10000000\r\ntid=5980 phase=6 count=1158 ticks=2301907 hz=10000000\r\ntid=5980 phase=7 count=1158 ticks=393203 hz=10000000\r\ntid=5980 phase=0 count=475324 ticks=2950842 hz=10000000\r\ntid=5980 phase=1 count=475324 ticks=8180572 hz=10000000\r\ntid=5980 phase=2 count=475324 ticks=2632632 hz=10000000\r\ntid=5980 phase=3 count=475324 ticks=12705377 hz=10000000\r\ntid=5980 phase=4 count=1901296 ticks=61812088 hz=10000000\r\ntid=5980 phase=5 count=1901296 ticks=2907215 hz=10000000\r\ntid=5980 phase=6 count=1222 ticks=2434031 hz=10000000\r\ntid=5980 phase=7 count=1222 ticks=415852 hz=10000000\r\ntid=5980 phase=0 count=500412 ticks=3095562 hz=10000000\r\ntid=5980 phase=1 count=500412 ticks=8591000 hz=10000000\r\ntid=5980 phase=2 count=500412 ticks=2765225 hz=10000000\r\ntid=5980 phase=3 count=500412 ticks=13342299 hz=10000000\r\ntid=5980 phase=4 count=2001648 ticks=64961187 hz=10000000\r\ntid=5980 phase=5 count=2001648 ticks=3050687 hz=10000000\r\ntid=5980 phase=6 count=1286 ticks=2559586 hz=10000000\r\ntid=5980 phase=7 count=1286 ticks=432911 hz=10000000\r\ntid=5980 phase=0 count=525500 ticks=3235751 hz=10000000\r\ntid=5980 phase=1 count=525500 ticks=8987559 hz=10000000\r\ntid=5980 phase=2 count=525500 ticks=2898550 hz=10000000\r\ntid=5980 phase=3 count=525500 ticks=13976715 hz=10000000\r\ntid=5980 phase=4 count=2102000 ticks=68052404 hz=10000000\r\ntid=5980 phase=5 count=2102000 ticks=3184774 hz=10000000\r\ntid=5980 phase=6 count=1350 ticks=2682282 hz=10000000\r\ntid=5980 phase=7 count=1350 ticks=447954 hz=10000000\r\ntid=5980 phase=0 count=550587 ticks=3414041 hz=10000000\r\ntid=5980 phase=1 count=550587 ticks=9405505 hz=10000000\r\ntid=5980 phase=2 count=550587 ticks=3038329 hz=10000000\r\ntid=5980 phase=3 count=550587 ticks=14626399 hz=10000000\r\ntid=5980 phase=4 count=2202348 ticks=71262240 hz=10000000\r\ntid=5980 phase=5 count=2202348 ticks=3328328 hz=10000000\r\ntid=5980 phase=6 count=1414 ticks=2804461 hz=10000000\r\ntid=5980 phase=7 count=1414 ticks=465399 hz=10000000\r\n",
+  "result": {
+    "finished": "2026-10-29T17:01:26.5352976Z",
+    "exit": 0
+  },
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "46165B92A95E646A1AD5B6AB55D571169A20B8EE34C3ED3694ED80A5BBCF895D",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "D43911D729AB4C4711A59B966B96C07EAB7DE53462955059C30DF4F3F14DDE33",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "D5D15C7CB0DB6C1E7B1267E10D6738017E1F99B73F6BB772D19F01CBC757430F",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "D74FF4DF012BB93D1582B8814DB20A4537426EAB96115D6E5DAF1F22DD299D9A",
+      "Machine": 332,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "8356F96605378A1EC5D8A8E29F433F53F5B3DBAAD51A743C26C452D9C1407E20"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "387789F1F6FDD9CDB312F54BE6D1124B77057BFB4491DCFCC2FA17FF9AB87BEB",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "46AF8A779181EF590BB81931AB71071E920AC14C41396519725AF85EDBB0CABD",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "0D2297719B3C3A5AD614C179E4722D2EA8806A7EF65DC0D3675ED7477DE5C2FA",
+      "Machine": 332,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "ACAB57D2EA2B605977800292C62D4958190D34CB2EBE0A370069F52B6B27D5FC"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "6504EE5828E81AB0502578A4E7EFCA78A70DBE6D5449042202AF180E966DED83",
+      "Machine": 332,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "C31F22FD9BBC88419D70C4D4A03BDBFC0CC72931838615227E775AA27521CDCA"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "7EFDACDB88C39A95B328DA803F4A1EB1FA3632B7E2461B43C4D321ABB634FEE1",
+      "Machine": 332,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "C06C0C0555021405E4F659DC65EDF5E7153F5E53FCB29412324E04F40097A635",
+      "Machine": 34404,
+      "PackageId": "8afcc599-d663-4e18-88a0-ba539c0164f0",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ]
+}

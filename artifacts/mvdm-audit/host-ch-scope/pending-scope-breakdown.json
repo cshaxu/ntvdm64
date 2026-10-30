@@ -1,0 +1,1375 @@
+{
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "pending_count": 195,
+  "pending_by_scope": {
+    "guest-target-observed": 195
+  },
+  "pending_rows": [
+    {
+      "path": "dos/v86/cmd/mem/mem.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/mem.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/membase.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/memctrlc.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/memex.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/msgdef.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/submsg.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/mem/xmm.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mem.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/setver/message.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/setver/parse.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/setver/setver.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "dos/v86/cmd/setver/usa-ms/message.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target setver.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/commdlg/dlgs.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/commdlg/font.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/commdlg/parse.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target commdlg.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/ddeml.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgdb.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgdde.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmghsz.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgmem.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgmon.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgq.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/dmgwndp.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/hdata.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/heapwach.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/register.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/stdinit.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ddeml/stdptcl.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target ddeml.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/killwow/killwow.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target KillWOW.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mciole/mciole.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mciole16.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/auxout.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/drvproc.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/init.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/joy.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mci.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mciparse.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mcisys.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/midi.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mixer.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mmio.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mmioriff.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/mmwnd.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/playwav.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/sound.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/task.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/time.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/mmsystem/wave.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target mmsystem.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/bm.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/dde.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/defcreat.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/dib.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/doc.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/draw.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/error.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/generic.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/le.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/ledde.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/main.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/mf.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/net.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/pbhandlr.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/client/utils.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olecli.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/block.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/doc.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/item.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/srvr.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/srvrmain.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/ole/server/utils.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target olesvr.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/rasapi16/rasapi16.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target rasapi16.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/cutils1.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/dbase.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/filename.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/merge.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/regedit.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/regmain.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/regporte.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/regthunk.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/sdbase.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/sdkreged.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/utils1.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/regedit/virt.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target regedt16.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/sherlock/disasm.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target drwatson.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/sherlock/drwatson.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target drwatson.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/sherlock/error.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target drwatson.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/sherlock/getsym.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target drwatson.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/global.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/int1.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/local.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/module.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/notify1.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/signal.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/stack1.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/task1.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/toolhelp/usergdi1.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target toolhelp.dll; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/debug.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/drvr.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/drvrrare.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/fastres.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/helpcall.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/init.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/inuserds.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/net.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/rmcreate.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/rmload.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/wowcomm.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/user/wsprintf.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target user.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/wfwnet/lfn.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target wfwnet.drv; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/wfwnet/misc.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target wfwnet.drv; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/wfwnet/print.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target wfwnet.drv; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/wfwnet/to32.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target wfwnet.drv; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/wfwnet/wfwnet.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target wfwnet.drv; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/addprm.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/cache.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/chngwin.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/clipbord.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/clipbrd2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/clipdisp.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/cmd.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/commdlg.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/createww.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/curskeys.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/debug.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/diaalert.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/diadiv.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/diapara.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/diarepag.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/diasubs.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/disp.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/doc.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/doprm.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/edit.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/editpgtb.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fetch.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/file.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fileres.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fileutil.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fontdlg.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fontenum.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/fontutil.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/format2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/heapmain.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/heaprare.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/initmmw.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/initwin.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/insert.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/insert2.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/insertco.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/jumppage.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/loadfnt2.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/loadfont.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/mainloop.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/mdoc.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/menu.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/mglobals.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/mmw.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/mouse.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/obj.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/obj2.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/obj3.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/objpsp.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/objreg.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/open.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/pageinfo.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/pictdrag.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/picture.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/picture2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/print.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/print2.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/print3.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/printdlg.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/quit.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/rare.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/ruler.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/ruler2.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/ruler3.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/running.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/screen.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/scrnchng.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/scrollhz.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/scrollvt.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/search.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/select.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/select2.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/selectsp.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/trans2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/trans3.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/trans4.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/transbuf.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/transfer.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/undo.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/util.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "pending",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/util2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    },
+    {
+      "path": "wow16/write/wwactde.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "待核验",
+      "scope": "guest-target-observed",
+      "scope_limit": "guest target write.exe; captured-profile source role only; host capabilities and other profiles remain separately open"
+    }
+  ],
+  "limitation": "Guest-target-observed is a source-role observation, not proof every capability is guest-only or recovered; T-wide functional handoffs still apply."
+}

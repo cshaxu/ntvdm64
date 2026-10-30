@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-idle-dialog-shared.ps1",
+    "Hash": "C214447858DFC8C7E5F411541E1FA4CF15897C9DD1EA0558E7F8D1F1C1F98841"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\boundary-only-package\\system32\\ntvdm.exe",
+    "Hash": "B0C97B06513FCBE5E17E0AEC6254CB1192174DBC64A5020E4B366A216EA11CAE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\boundary-only-package\\system32\\WOW32.DLL",
+    "Hash": "02BFCC2ACEF57E8DE8805F1578566B78A3DE937220BAA664F994E5905D5A2CC3"
+  }
+]

@@ -1,0 +1,30 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\CMakeLists.txt",
+    "Hash": "C944A209755DE5826984525D377928561FD51F12F6D80E6DAD68FCA9719E9C1D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "F6BE1356FFC591B3B8917A51029DBD7C93578B24C35C8F4987A14EBBDD367B09"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\obj.vdm\\ntvdm.src",
+    "Hash": "D47400179C1388B58FB8EAEC8331C6EEA16EE548BBA10E7AFBE588E9549BD0BC"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\obj.vdm\\obj\\i386\\ntvdm.def",
+    "Hash": "98C00C3C4737108674061779A6C1E06F113C597D76536A49E0723AA617D58A7A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "11CF25262981B1046D7DD0CC47FA83A1670794AB925A85AA6436723304807623"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "D4EED81E07D58AFCE1C34CC36EF49094BB12D6D70EAD8D6F69376075B7715CA7"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe",
+    "Hash": "5728CD20F6B5583634818C2C2FE61F95C6727D752B665F77791C88626FD92F1B"
+  }
+]

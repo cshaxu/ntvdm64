@@ -1,0 +1,22 @@
+{
+  "scope": "Selected bridge object with controlled BOOLEAN provider; not real DLL lifecycle acceptance",
+  "output": "attach=00000001 false_attach=00000000 thread_false=00000000 detach_false=00000000 cleanups=2\r\nPASS typed BOOLEAN bridge returns false and preserves cleanup\r\n",
+  "inputs": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "740A49A2B0625AAC12CD8FE6B5473AB35F55433767034ACACD4921E651F1DA73",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-dll-entry-bridge.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "0FF8EB7E3E78E5CCEFC44D9E994D3B0DB811B4DFC64C0797084467B46E9B6135",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "B019ADA4C13A7C5EB742ED974C564D10CEDAE3AE2317CBC92BB3F6EF5DEF3F3D",
+      "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_entry_boolean_fixture.c"
+    }
+  ],
+  "result": "pass"
+}

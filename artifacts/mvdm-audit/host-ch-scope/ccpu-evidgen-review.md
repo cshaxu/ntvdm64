@@ -43,3 +43,21 @@ compatibility unresolved. Do not mark full or infer a tested defect solely
 from the differing declarations. S11/S13 must resolve actual field access,
 provider ownership, layout and mode/reset behavior across all selected
 contexts. No product or guest source was modified for this observation.
+
+Follow-up against the current cached x86 PROD graph: the current dependency observer reports the same 11 CCPU-header and 23 C-VID-header object names as the earlier receipt, although the build graph hash changed. The explicit source uses of Cpu.Video->GetVideolatches and ->SetVideolatches are both inside c_getset.c's PIG-only block. Its actual selected PROD object has no c_getCpuState/c_setCpuState symbols. A fresh relocation sweep of the 11 CCPU-header consumers found no direct _Cpu, _Video or _C_Video relocations; object hashes and the PROD object witness are in [follow-up receipt](ccpu-evidgen-followup.json), and the current dependency receipt is [here](ccpu-evidgen-current.json). Thus these explicit PIG-only accesses are not evidence of a defect in the selected PROD build. This does not prove all indirect aliases, alternate PIG builds, runtime vector initialization/reset, or the C-VID consumers correct; those remain within the existing S11/S13 boundary. No source repair is justified solely by these declarations.
+
+A separate fresh link of the existing cached selected libraries, using the Ninja fixture's own link command with output redirected to build/t473-s11, completed with exit 0. The fixture exercised 81 C-VID slots, all listed read/write/mark selectors, 256 byte and 253 unaligned word/dword simple read/write cases, guards, republish and concurrency checks. The exact object/library/executable hashes and limitations are in [fixture receipt](cvidc-selected-fixture-current.json). Its inherited /force:multiple fixture link remains a limitation; it is not a fresh rebuild, complete DOS/WOW guest validation, or evidence for the unselected PIG profile. The separate Ninja target process remained live when this receipt was recorded.
+
+The previously pending Ninja target is no longer present in the process inventory. Its current graph reported the test object out of date. A first Ninja invocation without the MSVC environment failed to locate `cl.exe`; no runtime result is counted from that attempt. Invoking the same target through the existing x86 MSVC environment driver rebuilt and linked successfully, the resulting selected fixture passed its 81-slot/selector/read/write/guard/concurrency checks, and a subsequent Ninja dry run reported no work. Input and image hashes are in [current Ninja receipt](cvidc-ninja-current.json). The link still emits the documented `/force:multiple` duplicate-symbol warnings; this does not test guest mode transitions or the PIG profile.
+
+After the later S11 worker changes, the dependency/relocation observer was
+rerun against the current graph: it again found 11 CCPU-header and 23 C-VID
+header consumers and no named `_Video`/`_C_Video` relocation in those 11
+objects ([receipt](ccpu-evidgen-s11-recheck.json)). The selected C-VID fixture
+was relinked from the current cached graph and passed the 81-slot, selector,
+read/write, guard and concurrency checks; a following Ninja dry run was clean.
+[Input hashes](cvidc-s11-recheck-hashes.json) bind the new test executable and
+objects. The existing `/force:multiple` fixture-link warnings remain, and
+these checks still do not prove arbitrary indirect calls, PIG behavior or
+actual guest video reset/mode transitions. Those ownership boundaries remain
+with S11/S13; no original or 486 source repair is justified by this recheck.

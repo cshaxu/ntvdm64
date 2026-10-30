@@ -15,6 +15,7 @@ static DWORD present_fixture(frontend_window_controller *owner,
 #define CHECK(x) do { if(!(x)) { fprintf(stderr,"FAIL line %d error %lu: %s\n",__LINE__,GetLastError(),#x); return __LINE__; } } while(0)
 typedef struct observations {
     LONG retired; DWORD routes; BOOL window,graphics; DWORD consumer_thread;
+    unsigned enter_down,enter_up,alt_down,alt_up,chord_sequence;
     HANDLE native_input;frontend_keyboard_delivery keyboard;
 } observations;
 static DWORD deliver_console(void *context,const INPUT_RECORD *records,DWORD count)
@@ -31,6 +32,16 @@ static lib_bool input(void *context,const frontend_window_input *copied)
     if(!seen->consumer_thread)seen->consumer_thread=GetCurrentThreadId();
     if(seen->consumer_thread!=GetCurrentThreadId() || event->source)return LIB_FALSE;
     if(event->type==KVM_EVENT_SOURCE_RETIRED)InterlockedIncrement(&seen->retired);
+    if(event->type==KVM_EVENT_KEY && event->data.key.key==BASE_KEY_ENTER) {
+        if(event->data.key.pressed) ++seen->enter_down;
+        else ++seen->enter_up;
+        seen->chord_sequence=seen->chord_sequence*5u+(event->data.key.pressed ? 2u : 3u);
+    }
+    if(event->type==KVM_EVENT_KEY && event->data.key.key==BASE_KEY_ALT) {
+        if(event->data.key.pressed) ++seen->alt_down;
+        else ++seen->alt_up;
+        seen->chord_sequence=seen->chord_sequence*5u+(event->data.key.pressed ? 1u : 4u);
+    }
     if(seen->native_input && frontend_keyboard_dispatch(&seen->keyboard,copied,deliver_console,seen))
         return LIB_FALSE;
     return LIB_TRUE;
@@ -93,11 +104,15 @@ static BOOL chord_request(HWND window,BOOL caf)
     chord_alt=1;
     keyboard_hook=SetWindowsHookExW(WH_CALLWNDPROC,set_chord_state,NULL,thread);
     if(!keyboard_hook)return FALSE;
-    sent=SendMessageTimeoutW(window,WM_SYSKEYDOWN,caf ? 'F' : VK_RETURN,
+    sent=caf || SendMessageTimeoutW(window,WM_SYSKEYDOWN,VK_MENU,
+        1|(0x38L<<16)|(1L<<29),SMTO_ABORTIFHUNG,3000,&result)!=0;
+    if(sent)sent=SendMessageTimeoutW(window,WM_SYSKEYDOWN,caf ? 'F' : VK_RETURN,
         1|((LPARAM)(caf ? 0x21 : 0x1c)<<16)|(1L<<29),SMTO_ABORTIFHUNG,3000,&result)!=0;
     if(sent)sent=SendMessageTimeoutW(window,WM_SYSKEYUP,caf ? 'F' : VK_RETURN,
         1|((LPARAM)(caf ? 0x21 : 0x1c)<<16)|(1L<<29)|(1L<<30)|(1L<<31),
         SMTO_ABORTIFHUNG,3000,&result)!=0;
+    if(sent && !caf)sent=SendMessageTimeoutW(window,WM_SYSKEYUP,VK_MENU,
+        1|(0x38L<<16)|(1L<<29)|(1L<<30)|(1L<<31),SMTO_ABORTIFHUNG,3000,&result)!=0;
     if(!UnhookWindowsHookEx(keyboard_hook))sent=FALSE;
     keyboard_hook=NULL;return sent;
 }
@@ -278,15 +293,19 @@ int main(int argc,char **argv)
     CHECK(first.keyboard.physical.source_identity==0 && !first.keyboard.console_records.layout);
     CHECK(SetConsoleMode(first.native_input,input_mode));CloseHandle(first.native_input);first.native_input=NULL;
     {
-        unsigned chord;
-        for(chord=0;chord<2;++chord) {
-            CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
-            wa=lookup("Frontend controller A");CHECK(wa);
-            CHECK(chord_request(wa,chord!=0));
-            CHECK(WaitForSingleObject(frontend_window_wake(a),3000)==WAIT_OBJECT_0);
-            CHECK(!frontend_window_poll(a));
-            CHECK(!frontend_window_visible(a) && frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
-        }
+        CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
+        wa=lookup("Frontend controller A");CHECK(wa);
+        first.enter_down=first.enter_up=first.alt_down=first.alt_up=first.chord_sequence=0;
+        CHECK(chord_request(wa,FALSE));
+        CHECK(WaitForSingleObject(frontend_window_wake(a),3000)==WAIT_OBJECT_0);
+        CHECK(!frontend_window_poll(a));
+        CHECK(frontend_window_visible(a) && frontend_window_mode(a)==FRONTEND_DISPLAY_WINDOW);
+        CHECK(first.enter_down==1 && first.enter_up==1 && first.alt_down==1 && first.alt_up==1 &&
+            first.chord_sequence==194u); /* Alt down, Enter down/up, Alt up. */
+        CHECK(chord_request(wa,TRUE));
+        CHECK(WaitForSingleObject(frontend_window_wake(a),3000)==WAIT_OBJECT_0);
+        CHECK(!frontend_window_poll(a));
+        CHECK(!frontend_window_visible(a) && frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
     }
     /* Native raster is text: only the explicit policy, not frame.graphics,
      * selects Window. Static DOS graphics continues without new frames. */
@@ -302,7 +321,7 @@ int main(int argc,char **argv)
     CHECK(frontend_window_mode(a)==FRONTEND_DISPLAY_CONSOLE);
     CHECK(!frontend_window_poll(a) && frontend_window_visible(a));
     CHECK(!present_fixture(a,frame,FALSE) && !frontend_window_visible(a));
-    CHECK(first.retired==4);
+    CHECK(first.retired==3);
     CHECK(!frontend_window_select(a,FRONTEND_DISPLAY_WINDOW));
     CHECK(frontend_window_visible(a));
     CHECK(!frontend_window_clear(a) && !frontend_window_visible(a));
@@ -362,10 +381,10 @@ int main(int argc,char **argv)
         }
     }
     CHECK(!frontend_window_destroy(a));CHECK(!frontend_window_destroy(b));
-    CHECK(first.retired==6 && second.retired==1);
+    CHECK(first.retired==5 && second.retired==1);
     CHECK(first.consumer_thread==GetCurrentThreadId() && second.consumer_thread==GetCurrentThreadId());
     CHECK(!lookup("Frontend controller A") && !lookup("Frontend controller B"));
     kvm_window_frame_release(frame);free(frame);
-    puts("PASS real private Window: policy, X/CAF/AltEnter, static graphics, native raster classification, owner handoff, independent instances, joined retirement");
+    puts("PASS real private Window: AltEnter delivery, X/CAF, static graphics, native raster classification, owner handoff, independent instances, joined retirement");
     return 0;
 }

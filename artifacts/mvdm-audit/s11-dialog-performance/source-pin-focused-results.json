@@ -1,0 +1,22 @@
+[
+  {
+    "case": "graph-snapshot",
+    "exit": 0
+  },
+  {
+    "case": "window-borrow",
+    "exit": 0
+  },
+  {
+    "case": "window-reclaim",
+    "exit": 0
+  },
+  {
+    "case": "window-index-complete",
+    "exit": 0
+  },
+  {
+    "case": "graph-source-pin",
+    "exit": 0
+  }
+]

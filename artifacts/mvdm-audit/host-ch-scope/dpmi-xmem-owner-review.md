@@ -21,3 +21,38 @@ python artifacts/mvdm-audit/host-ch-scope/dpmi-xmem-owner-run.py
 ```
 
 The executable/logs are disposable under `build/t473-s10/dpmi-xmem-owner-probe`. No previously blocked probe, real device, user data, product or guest mutation is involved.
+
+## Original termination call chain
+
+The original guest source provides a more precise conditional lifecycle.
+Both `dpmi/dxstrt.asm` and `dpmi/486/dxstrt.asm` call `FreeMemByOwner`, set
+DX to the child PSP selector, and issue `DPMIBOP TerminateApp` during
+`ChildTerminationHandler`. `mvdm/inc/dpmi.h` assigns `TerminateApp=16`,
+and `dpmi32.c` dispatches entry 0x10 to `DpmiFreeAppXmem`. The following
+guest code does not check the carry flag or retry that call. If other DPMI
+clients remain, it continues termination without `FreeAllXmem`; when the
+last client exits, it invokes `FreeAllXmem` once before resetting descriptor
+tables and leaving DPMI. The selected host `DpmiFreeAllXmem` also stops on
+the first provider free failure, so this later pass is an opportunity to free
+remaining nodes, not a guarantee when the provider continues to fail.
+
+This is a source-derived description of the two retained original routes,
+not proof that the installed immutable guest was built from either exact
+source or that a real provider failure occurs. It also does not justify
+adding a retry, inventing a carry result or deleting an allocation record
+after a failed free. Actual selected provider and teardown failure behavior
+remain S11/S12 evidence obligations.
+
+The current x86 worker map selects `dpmimemr.obj` for
+`DpmiFreeVirtualMemory` and `xmem.obj` for both cleanup entries. With
+`CPU_40_STYLE`, the selected free adapter calls `SAFree(ExtMemSA, size,
+address)` and translates its BOOL result to NTSTATUS; it does not directly
+call `VdmFreeVirtualMemory`. The XMS initializer and callback distinction are
+traced in the [selected XMS callback review](../shard-2/suballoc-xms-callback-failure-review.md):
+its normal reserved-memory path registers the VDM commit/decommit callbacks,
+while its `STATUS_NOT_IMPLEMENTED` fallback uses the XMS stubs. The existing
+controlled `SAFree` failure witness reports bitmap availability after a
+failed decommit, so blindly retrying the retained XMEM node may interact with
+an already-freed allocator bitmap. That is a source-and-fixture risk, not a
+demonstrated actual-host failure. Reconcile allocator and tracker together
+before selecting any failure recovery change.

@@ -92,11 +92,10 @@ extern void sas_term IPT0();
 
 #include	<sas4gen.h>
 
-/* DIVERGENCE(MVDM-HOST-DIV-092): the selected CPU_40 CCPU provider keeps
- * sas_overwrite_memory as a direct physical-range invalidation function;
- * it is not a SAS vector member declared by sas4gen.h.  Publish its exact
- * fixed-width address/length contract so both native host targets compile
- * the original callers without an implicit-int call ABI. */
+/* DIVERGENCE(MVDM-HOST-DIV-092): publish the external physical-range
+ * wrapper's fixed-width address/length contract for its original callers.
+ * In the selected C-VID profile the wrapper dispatches through the SAS
+ * vector to the CCPU provider; see MVDM-HOST-DIV-189. */
 extern void sas_overwrite_memory IPT2(PHY_ADDR, addr, PHY_ADDR, len);
 
 #ifdef NTVDM

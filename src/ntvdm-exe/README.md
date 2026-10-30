@@ -1,5 +1,57 @@
 # NTVDM worker owner
 
+ADAPTER-WOW-107 checks incoming window references by walking the existing
+borrow records for currently published generations plus the separate desktop,
+rather than scanning every handle-table slot. Window preparation inserts the
+record before publication and retains it until withdrawal. Retired and
+unpublished generations are excluded as they were by the slot scan. This is
+call-local traversal of existing authority, not a second registry. Focused
+graph and reclaim fixtures pass; product-wide acceptance and timing remain
+open. It changes no original mirror or guest bytes.
+
+ADAPTER-WOW-106 allocates the 64 KiB call-local withdrawal bitmap only when
+the window projection has a nonempty retirement set. No identities can be
+withdrawn for an empty set; a nonempty set keeps the same validation and
+rollback checks. The graph-snapshot fixture covers lifecycle and failure
+cases; end-to-end timing and full package acceptance remain open. This changes
+the host adapter only, with no guest or original mirror change.
+
+ADAPTER-WOW-105 bounds the temporary withdrawal array by the existing
+window-record list (capped at the handle-table size), with a guard before
+writing. Newly prepared windows have no published slot and newly pinned
+existing windows belong to the validated view, so neither adds a withdrawn
+entry. In a sampled SOL run the allocation was about 1.5 KiB rather than
+256 KiB; this is temporary allocation size, not a working-set guarantee.
+Existing owner, failure rollback and native-window semantics remain in place.
+The candidate [evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/retire-capacity/review.md)
+does not establish an end-to-end latency improvement; full package acceptance
+remains open. No mirror or guest bytes change.
+
+ADAPTER-WOW-104 reuses the call-local, already validated slot-to-row index
+between full window-graph validation and its synchronous commit. Standalone
+link replacement still allocates and validates its own index. The index is
+never retained across a call, and guest execution or native callbacks do not
+intervene between validation and commit. This removes one 256 KiB temporary
+allocation per full projection without adding state authority or changing
+mirror/guest bytes. The integrated candidate's bounded fixture and package
+evidence, including duplicate-generation rejection, is recorded in
+[S11 projection-index review](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/projection-index/review.md).
+Full product acceptance remains open; no SOL latency improvement is claimed.
+
+T473 S11 unpublished lookup candidate supplements ADAPTER-WOW-088/092 with
+exact-address indexes of the existing WND-generation and CLS allocation
+records. These are non-owning intrusive indexes, not sampled window-state
+caches: the original lists still own pins, retirement, failed physical frees
+and teardown. Successful insertions index the same record; final disposal
+unlinks it, including rollback. Collision resolution compares full addresses.
+No native HWND reuse, graph-refresh boundary or observable state policy changes.
+Each index uses 1024 pointers, plus one link per allocation. The prior entries'
+"no persistent index" descriptions apply to those earlier changes, not this
+candidate. See the measured comparisons, failure/reuse tests and limitations in
+[S11 performance evidence](../../artifacts/mvdm-audit/s11-dialog-performance/investigation.md).
+The repeated graph traversal and intermittent dialog non-pass remain open;
+source lookup speedup does not establish complete functional recovery.
+
 ADAPTER-WOW-096 completes the080 allocated-view scalar read path in graph
 publication, window-slot identity, borrowed-generation relation and handle
 metadata consumers. Only domain-table or retained-record-owned storage uses

@@ -4,6 +4,11 @@
 #include "wow_task_order_bindings.h"
 #include "wow_user_borrow_scope.h"
 
+/* This native observer has left its guest callback scope before forwarding.
+ * The next native hook owns its own callback entry; do not project guest
+ * state from the unowned observer continuation. */
+#undef CallNextHookEx
+
 extern PTD gptdTaskHead;
 extern CRITICAL_SECTION gcsWOW;
 LRESULT CALLBACK WowOriginalForegroundIdleHook(int, WPARAM, LPARAM);
@@ -47,8 +52,9 @@ static LRESULT dispatch_idle(int code, WPARAM wp, LPARAM lp)
     wow_user_borrow_scope borrow;
     BOOL borrowed = FALSE;
     LRESULT result = 0;
-    /* Thread scope excludes other processes; this bound task's original TD
-     * intent gates its observer. Never interpret an unbound TEB as a TD. */
+    /* Thread scope excludes other processes; any live TD registration in
+     * this worker gates the current task's observer. Never treat an unbound
+     * TEB as a TD. */
     if (code < 0 || !binding || !binding->thread || !binding->thread->ptdb ||
             !wow_user_idle_hook_registered(0))
         return 0;

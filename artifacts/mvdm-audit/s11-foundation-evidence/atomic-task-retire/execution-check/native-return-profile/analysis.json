@@ -1,0 +1,429 @@
+{
+  "samples": 42,
+  "counts": [
+    {
+      "phase": "open",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "rva": "0x6330b",
+      "samples": 6
+    },
+    {
+      "phase": "close",
+      "symbol": "_call_previous_window_proc@24",
+      "rva": "0x7633c",
+      "samples": 5
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_EndPaint@8",
+      "rva": "0x63f09",
+      "samples": 4
+    },
+    {
+      "phase": "open",
+      "symbol": "_wow_native_SendMessageW@16",
+      "rva": "0x65e3b",
+      "samples": 3
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_edit_NtUserGetControlColor@16",
+      "rva": "0x6c36e",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "symbol": "_create_bound@36",
+      "rva": "0x735af",
+      "samples": 3
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_BeginPaint@8",
+      "rva": "0x62949",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "symbol": "_call_previous_window_proc@24",
+      "rva": "0x7633c",
+      "samples": 2
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "rva": "0x6330b",
+      "samples": 2
+    },
+    {
+      "phase": "outside",
+      "symbol": "_wow_menu_native_InsertMenuItemW@16",
+      "rva": "0x5d06a",
+      "samples": 1
+    },
+    {
+      "phase": "outside",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "rva": "0x6330b",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "symbol": "_native_default@20",
+      "rva": "0x6a30b",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "symbol": "_wow_native_DispatchMessageW@4",
+      "rva": "0x638f2",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_edit_FillWindow@16",
+      "rva": "0x6c17d",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_InvalidateRect@12",
+      "rva": "0x652ec",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "symbol": "_native_peek@12",
+      "rva": "0x60af5",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "symbol": "_peek_message_published@28",
+      "rva": "0x62036",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_UpdateWindow@4",
+      "rva": "0x679a2",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_DispatchMessageW@4",
+      "rva": "0x638f2",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_wow_native_CallMsgFilterW@8",
+      "rva": "0x62c45",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "symbol": "_peek_message_published@28",
+      "rva": "0x62036",
+      "samples": 1
+    }
+  ],
+  "records": [
+    {
+      "tick": 57099953,
+      "phase": "outside",
+      "rva": "0x5d06a",
+      "symbol": "_wow_menu_native_InsertMenuItemW@16",
+      "target": "00000000"
+    },
+    {
+      "tick": 57100203,
+      "phase": "outside",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00880b1c"
+    },
+    {
+      "tick": 57100343,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00880b1c"
+    },
+    {
+      "tick": 57100468,
+      "phase": "open",
+      "rva": "0x6a30b",
+      "symbol": "_native_default@20",
+      "target": "00860570"
+    },
+    {
+      "tick": 57100765,
+      "phase": "open",
+      "rva": "0x65e3b",
+      "symbol": "_wow_native_SendMessageW@16",
+      "target": "00170d08"
+    },
+    {
+      "tick": 57101109,
+      "phase": "open",
+      "rva": "0x65e3b",
+      "symbol": "_wow_native_SendMessageW@16",
+      "target": "00700cc4"
+    },
+    {
+      "tick": 57101421,
+      "phase": "open",
+      "rva": "0x65e3b",
+      "symbol": "_wow_native_SendMessageW@16",
+      "target": "000b0cc8"
+    },
+    {
+      "tick": 57101765,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00880b1c"
+    },
+    {
+      "tick": 57102765,
+      "phase": "open",
+      "rva": "0x638f2",
+      "symbol": "_wow_native_DispatchMessageW@4",
+      "target": "00860570"
+    },
+    {
+      "tick": 57102984,
+      "phase": "close",
+      "rva": "0x6c17d",
+      "symbol": "_wow_edit_FillWindow@16",
+      "target": "00860570"
+    },
+    {
+      "tick": 57103296,
+      "phase": "close",
+      "rva": "0x62949",
+      "symbol": "_wow_native_BeginPaint@8",
+      "target": "00170d08"
+    },
+    {
+      "tick": 57103578,
+      "phase": "close",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00860570"
+    },
+    {
+      "tick": 57103843,
+      "phase": "close",
+      "rva": "0x6c36e",
+      "symbol": "_wow_edit_NtUserGetControlColor@16",
+      "target": "00860570"
+    },
+    {
+      "tick": 57104093,
+      "phase": "close",
+      "rva": "0x63f09",
+      "symbol": "_wow_native_EndPaint@8",
+      "target": "00060e5e"
+    },
+    {
+      "tick": 57104312,
+      "phase": "close",
+      "rva": "0x652ec",
+      "symbol": "_wow_native_InvalidateRect@12",
+      "target": "01070b04"
+    },
+    {
+      "tick": 57104578,
+      "phase": "close",
+      "rva": "0x63f09",
+      "symbol": "_wow_native_EndPaint@8",
+      "target": "00880b1c"
+    },
+    {
+      "tick": 57105062,
+      "phase": "open",
+      "rva": "0x60af5",
+      "symbol": "_native_peek@12",
+      "target": "00000000"
+    },
+    {
+      "tick": 57105312,
+      "phase": "open",
+      "rva": "0x735af",
+      "symbol": "_create_bound@36",
+      "target": "00000000"
+    },
+    {
+      "tick": 57105640,
+      "phase": "open",
+      "rva": "0x735af",
+      "symbol": "_create_bound@36",
+      "target": "00000000"
+    },
+    {
+      "tick": 57106015,
+      "phase": "open",
+      "rva": "0x735af",
+      "symbol": "_create_bound@36",
+      "target": "00000000"
+    },
+    {
+      "tick": 57106406,
+      "phase": "open",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00870570"
+    },
+    {
+      "tick": 57106625,
+      "phase": "open",
+      "rva": "0x62036",
+      "symbol": "_peek_message_published@28",
+      "target": "00000000"
+    },
+    {
+      "tick": 57106875,
+      "phase": "close",
+      "rva": "0x62949",
+      "symbol": "_wow_native_BeginPaint@8",
+      "target": "004d0cba"
+    },
+    {
+      "tick": 57107156,
+      "phase": "close",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00870570"
+    },
+    {
+      "tick": 57107453,
+      "phase": "close",
+      "rva": "0x6c36e",
+      "symbol": "_wow_edit_NtUserGetControlColor@16",
+      "target": "00870570"
+    },
+    {
+      "tick": 57107734,
+      "phase": "close",
+      "rva": "0x63f09",
+      "symbol": "_wow_native_EndPaint@8",
+      "target": "00720c6e"
+    },
+    {
+      "tick": 57108000,
+      "phase": "close",
+      "rva": "0x679a2",
+      "symbol": "_wow_native_UpdateWindow@4",
+      "target": "00870570"
+    },
+    {
+      "tick": 57108234,
+      "phase": "close",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00870570"
+    },
+    {
+      "tick": 57108421,
+      "phase": "close",
+      "rva": "0x638f2",
+      "symbol": "_wow_native_DispatchMessageW@4",
+      "target": "00870570"
+    },
+    {
+      "tick": 57108812,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00880570"
+    },
+    {
+      "tick": 57109109,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00730c6e"
+    },
+    {
+      "tick": 57109437,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "000e0d28"
+    },
+    {
+      "tick": 57109781,
+      "phase": "open",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00080e5e"
+    },
+    {
+      "tick": 57110156,
+      "phase": "open",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00880570"
+    },
+    {
+      "tick": 57110437,
+      "phase": "close",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00880570"
+    },
+    {
+      "tick": 57110687,
+      "phase": "close",
+      "rva": "0x7633c",
+      "symbol": "_call_previous_window_proc@24",
+      "target": "00880570"
+    },
+    {
+      "tick": 57110968,
+      "phase": "close",
+      "rva": "0x6c36e",
+      "symbol": "_wow_edit_NtUserGetControlColor@16",
+      "target": "00880570"
+    },
+    {
+      "tick": 57111218,
+      "phase": "close",
+      "rva": "0x63f09",
+      "symbol": "_wow_native_EndPaint@8",
+      "target": "000e0d28"
+    },
+    {
+      "tick": 57111468,
+      "phase": "close",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00080e5e"
+    },
+    {
+      "tick": 57111687,
+      "phase": "close",
+      "rva": "0x62c45",
+      "symbol": "_wow_native_CallMsgFilterW@8",
+      "target": "00880570"
+    },
+    {
+      "tick": 57111937,
+      "phase": "close",
+      "rva": "0x6330b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "target": "00880b1c"
+    },
+    {
+      "tick": 57112359,
+      "phase": "close",
+      "rva": "0x62036",
+      "symbol": "_peek_message_published@28",
+      "target": "00000000"
+    }
+  ],
+  "map_sha256": "F5DF17489C96F8AED89F6483DFC1D1F5818AA32ED6E0EE3C9C111F00E57D7785",
+  "limits": "1/16 return addresses, nearest map symbol, does not observe end_wait or direct inline native_call_end or callbacks and not exact frequency; diagnostics can affect execution."
+}

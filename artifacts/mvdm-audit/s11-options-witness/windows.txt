@@ -1,0 +1,180 @@
+10708 WindowEntry hwnd=019104A8 message=0024 native=058F0000 result=00000000 tid=32392 error=6
+10708 WindowDispatch hwnd=019104A8 message=0024 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0081 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0081 native=058F0000 result=00000001 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0083 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0093 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0093 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0083 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0001 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0001 native=058F0000 result=00000001 tid=32392 error=0
+10708 WindowCreate atom=C38C result=019104A8 error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=02CF0000 tid=32392 actualMenu=00350B6E
+10708 WindowEntry hwnd=01680B90 message=0024 native=05900000 result=00000000 tid=32392 error=203
+10708 WindowDispatch hwnd=01680B90 message=0024 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=01680B90 message=0081 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=01680B90 message=0081 native=05900000 result=00000001 tid=32392 error=0
+10708 WindowEntry hwnd=01680B90 message=0083 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=01680B90 message=0083 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=01680B90 message=0001 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=01680B90 message=0001 native=05900000 result=00000000 tid=32392 error=0
+10708 WindowCreate atom=C2A0 result=01680B90 error=0 bindingError=0 claimed=1 menu=00000000 instance=032F03BE style=00CF0000 tid=32392 actualMenu=00000000
+10708 WindowEntry hwnd=019104A8 message=0046 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0024 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0024 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0046 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0083 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0083 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0047 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0003 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0003 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=0005 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0005 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=0047 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=000C native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=000C native=058F0000 result=00000001 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=000C native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=000C native=058F0000 result=00000001 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=2
+10708 WindowDispatch hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=00B404A0 message=0024 native=05950000 result=00000000 tid=9232 error=6
+10708 WindowRejected hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=5023
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=5023
+10708 WindowDispatch hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=000C native=058F0000 result=00000000 tid=32392 error=203
+10708 WindowEntry hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=00AE native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=000C native=058F0000 result=00000001 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=031F native=058F0000 result=00000000 tid=32392 error=203
+10708 WindowDispatch hwnd=019104A8 message=031F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=01680B90 message=031F native=714BC200 result=00000000 tid=32392 error=203
+10708 WindowDispatch hwnd=01680B90 message=031F native=714BC200 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=203
+10708 WindowDispatch hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=C0D5 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=C0D5 native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowEntry hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=019104A8 message=007F native=058F0000 result=00000000 tid=32392 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0024 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0081 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0081 native=05950000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0083 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0093 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0093 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0083 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0001 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0001 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowCreate atom=C3A5 result=00B404A0 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=02CF0000 tid=9232 actualMenu=03BD087C
+10708 WindowEntry hwnd=00B404A0 message=0018 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0018 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0046 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0046 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0046 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0046 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=001C native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=001C native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0086 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=000D native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000D native=05950000 result=00000009 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0086 native=05950000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0006 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0085 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=000D native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000D native=05950000 result=00000009 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0085 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0014 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0014 native=05950000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0281 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0281 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=003D native=05950000 result=00000000 tid=9232 error=127
+10708 WindowDispatch hwnd=00B404A0 message=003D native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=003D native=05950000 result=00000000 tid=9232 error=2
+10708 WindowDispatch hwnd=00B404A0 message=003D native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0007 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0007 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0006 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0047 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0047 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0005 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0005 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0003 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0003 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=000F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0014 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0014 native=05950000 result=00000001 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0081 native=05970000 result=00000000 tid=9232 error=203
+10708 WindowEntry hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=203
+10708 WindowEntry hwnd=00B404A0 message=0000 native=05950000 result=00000000 tid=9232 error=203
+10708 WindowDispatch hwnd=00B404A0 message=0000 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0081 native=05970000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0083 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0083 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0001 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=007F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0001 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0005 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0005 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0003 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0003 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0210 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0210 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowCreate atom=C271 result=03490A98 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=40800003 tid=9232 actualMenu=00000000
+10708 WindowEntry hwnd=03490A98 message=0018 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0018 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0046 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0046 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0014 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0014 native=05950000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0085 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0085 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0014 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0014 native=05970000 result=00000001 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=0047 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=0047 native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=03490A98 message=000F native=05970000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=03490A98 message=000F native=05970000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=031F native=05950000 result=00000000 tid=9232 error=1400
+10708 WindowDispatch hwnd=00B404A0 message=031F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=C0D5 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=C0D5 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0111 native=05950000 result=00000000 tid=9232 error=203
+10708 WindowEntry hwnd=00B404A0 message=001F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=001F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0008 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0008 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0281 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0281 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=000A native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000A native=05950000 result=00000000 tid=9232 error=0
+10708 WindowCreate atom=8002 result=00A40B74 error=0 bindingError=0 claimed=1 menu=00000000 instance=17CF1746 style=80C80080 tid=9232 actualMenu=00000000
+10708 WindowCreate atom=C018 result=01DF07BC error=0 bindingError=0 claimed=1 menu=000003E7 instance=17CF1746 style=50000007 tid=9232 actualMenu=000003E7
+10708 WindowCreate atom=C018 result=01010738 error=0 bindingError=0 claimed=1 menu=0000012C instance=17CF1746 style=50030004 tid=9232 actualMenu=0000012C
+10708 WindowCreate atom=C018 result=010F0494 error=0 bindingError=0 claimed=1 menu=0000012D instance=17CF1746 style=50000004 tid=9232 actualMenu=0000012D
+10708 WindowCreate atom=C018 result=01390970 error=0 bindingError=0 claimed=1 menu=0000FFFF instance=17CF1746 style=50020007 tid=9232 actualMenu=0000FFFF
+10708 WindowCreate atom=C018 result=01B60B20 error=0 bindingError=0 claimed=1 menu=0000012E instance=17CF1746 style=50030004 tid=9232 actualMenu=0000012E
+10708 WindowCreate atom=C018 result=013E0A52 error=0 bindingError=0 claimed=1 menu=0000012F instance=17CF1746 style=50000004 tid=9232 actualMenu=0000012F
+10708 WindowCreate atom=C018 result=01740B5A error=0 bindingError=0 claimed=1 menu=00000130 instance=17CF1746 style=50000004 tid=9232 actualMenu=00000130
+10708 WindowCreate atom=C018 result=02E70A20 error=0 bindingError=0 claimed=1 menu=00000131 instance=17CF1746 style=50030003 tid=9232 actualMenu=00000131
+10708 WindowCreate atom=C018 result=013D04CE error=0 bindingError=0 claimed=1 menu=00000132 instance=17CF1746 style=50010003 tid=9232 actualMenu=00000132
+10708 WindowCreate atom=C018 result=02970ABC error=0 bindingError=0 claimed=1 menu=00000133 instance=17CF1746 style=50010003 tid=9232 actualMenu=00000133
+10708 WindowCreate atom=C018 result=01D50824 error=0 bindingError=0 claimed=1 menu=00000134 instance=17CF1746 style=50010003 tid=9232 actualMenu=00000134
+10708 WindowCreate atom=C018 result=01C90A66 error=0 bindingError=0 claimed=1 menu=00000001 instance=17CF1746 style=50030001 tid=9232 actualMenu=00000001
+10708 WindowCreate atom=C018 result=00000000 error=5023 bindingError=5023 claimed=1 menu=00000002 instance=17CF1746 style=50030000 tid=9232 actualMenu=00000000
+10708 WindowEntry hwnd=00B404A0 message=000A native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000A native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=0111 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=0111 native=05950000 result=00000000 tid=9232 error=203
+10708 WindowDispatch hwnd=00B404A0 message=0111 native=05950000 result=00000000 tid=9232 error=0
+10708 WindowEntry hwnd=00B404A0 message=000F native=05950000 result=00000000 tid=9232 error=0
+10708 WindowDispatch hwnd=00B404A0 message=000F native=05950000 result=00000000 tid=9232 error=0

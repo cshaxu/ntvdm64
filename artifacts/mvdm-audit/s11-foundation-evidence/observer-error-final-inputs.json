@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_termination.c",
+    "Hash": "45A1E89F20F1ABFD6A60E4D0E03E8E2851088669A70D43106E9C7EC0F1D60E8B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\softpc_observer_error_probe.c",
+    "Hash": "55FCFD1816BAAC33901B4BEEE61F564CDD5D15183FDA5434F913AB6C1D9F996D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\observer-error-v2\\probe.exe",
+    "Hash": "5158C1FF9A09A656310BD7E0E6EB8F81DE49A67AAE1A0251FAA91FC82B989F4B"
+  }
+]

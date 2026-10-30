@@ -1,0 +1,44 @@
+{
+  "result": "pass",
+  "exit_code": 0,
+  "method": "relink existing selected cached libraries via exact Ninja link command with output redirected; no claim of fresh rebuild",
+  "limitations": [
+    "fixture graph uses /force:multiple",
+    "isolated selected-object test; not complete guest/mode validation",
+    "Ninja cached target process still pending"
+  ],
+  "inputs": [
+    {
+      "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "sha256": "6049E67EB804DBA2BD59E3EF7563B1FA0B3979B52EADFC9745745F5E1E000185"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/tests/cvidc_vector_binding_fixture.obj",
+      "sha256": "70A677C6FB327F0AA37DA17024FA75AED2BD18FA7BB635DBF369405B464336D3"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/cvidc/ev_glue.obj",
+      "sha256": "5EBEE9014915207ACDC2A9A95EEA413805ED4D1125A8A489BB7DAB97469F109D"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/original-softpc-cvidc.lib",
+      "sha256": "90B68BA8E9875DD2761C574A5527C454841494A7B42D6F3A3077A07D290AD602"
+    },
+    {
+      "path": "build/t473-s11/cvidc-selected-fixture.exe",
+      "sha256": "2BE1474C6522EB1D447126C4019065E84357FBB979103ACC94816E7E538BBAF7"
+    },
+    {
+      "path": "build/t473-s11/cvidc-selected-fixture.map",
+      "sha256": "C1061B7EDAA01D96FF2DA085CB287607C0B6C7C7262CDF7A214FD2F8FE7C91A2"
+    },
+    {
+      "path": "build/t473-s11/cvidc-selected-fixture.log",
+      "sha256": "596051E418CE154B4CBC9D4D7A2EB778E3405191D3F9A7FCC3280C4F04EDE538"
+    },
+    {
+      "path": "build/t473-s11/cvidc-fixture-current-link.txt",
+      "sha256": "9307E7871592746017244AFE05A8DE39DDA735D4D866F7FAA30663003453AB12"
+    }
+  ]
+}

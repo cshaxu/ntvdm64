@@ -14,6 +14,34 @@
 
 static unsigned errors;
 static unsigned native_direct_calls;
+#ifdef WOW_RETIREMENT_LOCK_PROBE
+static DWORD WINAPI try_retirement_lock(LPVOID argument)
+{
+    SRWLOCK *lock = argument;
+    if (TryAcquireSRWLockExclusive(lock)) {
+        ReleaseSRWLockExclusive(lock);
+        return 1;
+    }
+    return 0;
+}
+
+void WINAPI wow_fixture_retirement_lock(wow_user_runtime *runtime)
+{
+    DWORD saved = GetLastError();
+    HANDLE thread = CreateThread(NULL, 0, try_retirement_lock,
+        &runtime->exclusive, 0, NULL);
+    DWORD status, code;
+    if (!thread) ExitProcess(91);
+    status = WaitForSingleObject(thread, 5000);
+    if (status != WAIT_OBJECT_0 || !GetExitCodeThread(thread, &code) || code) {
+        fprintf(stderr, "WOW_RETIREMENT_LOCK failed status=%lu\n", status);
+        ExitProcess(92);
+    }
+    CloseHandle(thread);
+    fprintf(stderr, "WOW_RETIREMENT_LOCK competitor_excluded=1\n");
+    SetLastError(saved);
+}
+#endif
 #ifdef WOW_INIT_ROLLBACK_FIXTURE
 extern unsigned wow_init_alloc_calls, wow_init_fail_at, wow_init_name_live;
 extern unsigned wow_init_name_releases;
@@ -358,6 +386,23 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
         CHECK(thread->ppi->pwpi->CSOwningThread != thread);
 #ifdef WOW_NATIVE_NESTED_FIXTURE
         {
+            wow_task_callback_scope callback;
+            unsigned before = errors;
+            SetLastError(0x447a9302);
+            CHECK(wow_task_callback_enter(&callback));
+            CHECK(GetLastError() == 0x447a9302);
+            CHECK(wow_task_execution_ready(thread));
+            CHECK(thread->ppi->pwpi->CSOwningThread == thread);
+            CHECK(!binding->exclusive_held);
+            CHECK(wow_task_callback_leave(&callback));
+            CHECK(GetLastError() == 0x447a9302);
+            CHECK(!wow_task_execution_ready(thread));
+            CHECK(thread->ppi->pwpi->CSOwningThread != thread);
+            CHECK(!binding->exclusive_held && thread->execution == &outer.execution);
+            fprintf(stderr, "WOW_SUSPENDED_CALLBACK_SCOPE errors=%u owner=1 restore=1 last_error=1\n",
+                errors - before);
+        }
+        {
             BOOL caught = FALSE;
             unsigned before = errors;
             CHECK(wow_user_native_call_begin_inline(&inner));
@@ -377,6 +422,22 @@ static void verify_receive_callout(wow_user_runtime_thread *binding)
             CHECK(thread->execution == &outer.execution && !wow_task_execution_ready(thread));
             CHECK(thread->ppi->pwpi->CSOwningThread != thread && !binding->exclusive_held);
             fprintf(stderr, "WOW_NATIVE_WAIT_UNWIND errors=%u lifo=1 native_continuation=1 last_error=1\n",
+                errors - before);
+        }
+        {
+            HANDLE ready = CreateEventW(NULL, TRUE, TRUE, NULL);
+            unsigned before = errors;
+            CHECK(ready != NULL);
+            if (ready) {
+                SetLastError(0x447a9303);
+                CHECK(wow_user_msg_wait(1, &ready, FALSE, 1000, 0) == WAIT_OBJECT_0);
+                CHECK(GetLastError() == 0x447a9303);
+                CHECK(thread->execution == &outer.execution &&
+                    !wow_task_execution_ready(thread) &&
+                    thread->ppi->pwpi->CSOwningThread != thread && !binding->exclusive_held);
+                CloseHandle(ready);
+            }
+            fprintf(stderr, "WOW_NATIVE_MSG_WAIT_NONOWNER errors=%u result=1 lifo=1 last_error=1\n",
                 errors - before);
         }
 #endif

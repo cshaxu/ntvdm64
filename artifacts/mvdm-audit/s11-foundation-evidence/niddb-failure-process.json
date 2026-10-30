@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 9048,
+  "started": "2026-10-29T06:04:00.7383563Z",
+  "arguments": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-failure-run/probe.py",
+  "exit": 0,
+  "finished": "2026-10-29T06:04:06.8882575Z"
+}

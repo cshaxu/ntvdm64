@@ -16,6 +16,7 @@ param(
     [string]$NativeService,
     [string]$MonitorRpc,
     [string]$Node='node',
+    [string]$Python='python',
     [string[]]$WowBaselineRoots,
     [ValidateSet('Observed','Paced')][string]$InputPolicy='Observed',
     [switch]$FullDeadlines,
@@ -28,6 +29,8 @@ $sourceRuntime=(Resolve-Path $RuntimeRoot).Path
 $cache=(Resolve-Path $BuildCache).Path
 $observerPath=(Resolve-Path $Observer).Path
 $Node=(Get-Command $Node -CommandType Application -ErrorAction Stop).Source
+$Python=Get-Command $Python -CommandType Application -ErrorAction Stop |
+    Select-Object -First 1 -ExpandProperty Source
 $log=[IO.Path]::GetFullPath($LogRoot)
 $build=(Join-Path $repo 'build')+'\'
 if(!$log.StartsWith($build,[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $log)){
@@ -140,6 +143,19 @@ function Invoke-ShortRuntime([scriptblock]$Body) {
     & $Body
 }
 try {
+    if ($Suite -ne 'Control') {
+        Invoke-Gate 'guest-media' {
+            & $Python "$repo/tests/observation/verify-guest-media.py" `
+                $runtime "$repo/assets/winnt-guest-manifest.json" *> "$log/guest-media.txt"
+            if($LASTEXITCODE){throw 'Guest media contract failed; inspect guest-media.txt'}
+        }
+    }
+    Invoke-Gate 'ntvdm-export-ordinals' {
+        & $Python "$repo/tests/observation/verify-ntvdm-export-ordinals.py" `
+            (Join-Path $runtimeBinary 'ntvdm.exe') `
+            "$repo/src/ntvdm-exe/ntvdm-export-ordinals.csv" *> "$log/ntvdm-export-ordinals.txt"
+        if($LASTEXITCODE){throw 'NTVDM export ordinal contract failed; inspect ntvdm-export-ordinals.txt'}
+    }
     # Match the ordinary command matrix's controlled lookup environment.
     # Original COMMAND's large-environment limitation is tested separately.
     $env:PATH=$runtimeBinary+';'+(Join-Path $env:SystemRoot 'System32')

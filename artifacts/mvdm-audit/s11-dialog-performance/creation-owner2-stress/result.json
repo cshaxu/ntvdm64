@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 10976,
+  "started": "2026-10-29T07:33:45.2922509Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-owner-proof-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/creation-owner2-stress-observation -VisibleDesktop -Rounds 3 -DialogWaitMs 30000 -ExternalWindows 150",
+  "exit": 0,
+  "finished": "2026-10-29T07:34:19.9351071Z"
+}

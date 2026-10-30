@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-empty.txt",
+    "BodyMs": 2623,
+    "CleanupMs": 280
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-native-zero.txt",
+    "BodyMs": 2294,
+    "CleanupMs": 194
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-missing.txt",
+    "BodyMs": 3347,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-native-seven.txt",
+    "BodyMs": 1151,
+    "CleanupMs": 218
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-native-streams.txt",
+    "BodyMs": 1108,
+    "CleanupMs": 195
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-native-eof.txt",
+    "BodyMs": 1122,
+    "CleanupMs": 218
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-mem.txt",
+    "BodyMs": 2290,
+    "CleanupMs": 213
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-nested-empty.txt",
+    "BodyMs": 2631,
+    "CleanupMs": 220
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-nested-mem.txt",
+    "BodyMs": 7138,
+    "CleanupMs": 229
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-mem-repeat.txt",
+    "BodyMs": 2763,
+    "CleanupMs": 197
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-direct-mem.txt",
+    "BodyMs": 904,
+    "CleanupMs": 230
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-command-c.txt",
+    "BodyMs": 963,
+    "CleanupMs": 227
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-command-c-seven.txt",
+    "BodyMs": 1148,
+    "CleanupMs": 231
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-guest-seven.txt",
+    "BodyMs": 955,
+    "CleanupMs": 242
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-command-c-mem.txt",
+    "BodyMs": 927,
+    "CleanupMs": 233
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-direct-seven.txt",
+    "BodyMs": 1072,
+    "CleanupMs": 245
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-capacity-integrated-matrix\\Console-17-edit.txt",
+    "BodyMs": 4101,
+    "CleanupMs": 217
+  }
+]

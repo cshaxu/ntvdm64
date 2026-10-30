@@ -509,8 +509,7 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
 }
 /* Recover the former window_input_binding.c Console CAF debounce, with no
  * worker-global binding. Runs only after the frontend consumes a physical
- * Console record; guest peeking never triggers a policy change. Alt+Enter
- * remains Console-owned. */
+ * Console record; guest peeking never triggers a policy change. */
 static DWORD console_input(void *context,const INPUT_RECORD *record,BOOL *keep)
 {
     frontend_session *frontend=context;

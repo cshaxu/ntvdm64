@@ -1,0 +1,28 @@
+{
+  "result": "fail",
+  "pid": 11104,
+  "started": "2026-10-29T07:26:21.6654607Z",
+  "cases": [
+    {
+      "pid": 30528,
+      "exit": 1,
+      "case": "graph-snapshot"
+    },
+    {
+      "pid": 16024,
+      "exit": 1,
+      "case": "window-borrow"
+    },
+    {
+      "pid": 17728,
+      "exit": 0,
+      "case": "native-nested"
+    },
+    {
+      "pid": 31800,
+      "exit": 1,
+      "case": "native-creation"
+    }
+  ],
+  "finished": "2026-10-29T07:27:26.3438938Z"
+}

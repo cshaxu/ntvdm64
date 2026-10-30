@@ -1,0 +1,134 @@
+{
+  "samples": 73,
+  "unattributed": 0,
+  "counts": [
+    {
+      "phase": "open",
+      "export": "NtUserGetWindowContextHelpId",
+      "samples": 13
+    },
+    {
+      "phase": "open",
+      "export": "NtUserGetAncestor",
+      "samples": 9
+    },
+    {
+      "phase": "open",
+      "export": "NtUserGetProp2",
+      "samples": 7
+    },
+    {
+      "phase": "open",
+      "export": "NtUserCreateWindowEx",
+      "samples": 6
+    },
+    {
+      "phase": "close",
+      "export": "NtUserGetProp2",
+      "samples": 6
+    },
+    {
+      "phase": "close",
+      "export": "NtUserGetAncestor",
+      "samples": 4
+    },
+    {
+      "phase": "close",
+      "export": "NtUserGetWindowContextHelpId",
+      "samples": 4
+    },
+    {
+      "phase": "open",
+      "export": "NtGdiGetPixel",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "export": "NtUserInternalGetWindowText",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "export": "NtUserMsgWaitForMultipleObjectsEx",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "export": "NtUserSystemParametersInfo",
+      "samples": 2
+    },
+    {
+      "phase": "close",
+      "export": "NtUserBeginPaint",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "export": "NtUserTransformRect",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "export": "NtUserMessageCall",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "export": "NtUserGetQueueStatus",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "export": "NtGdiGetDCPoint",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "export": "NtGdiSelectBitmap",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtGdiCreateCompatibleDC",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtUserFillWindow",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "export": "NtGdiCreateCompatibleDC",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtGdiPolyPatBlt",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtUserMessageCall",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtGdiDeleteObjectApp",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtGdiGetRealizationInfo",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "export": "NtGdiOpenDCW",
+      "samples": 1
+    }
+  ],
+  "module_sha256": "BD319B02BE682C01DFC69FB678DA82B10B54C2733D906054E0F9BE2FCD5DF2B7",
+  "exports_sha256": "B93119044AA991A653D164B17C285756DEF2CFA5760845F77D070029B6609FD7",
+  "limitation": "nearest export within 16 bytes, x86 stubs only; sampled instruction not syscall duration or CPU share"
+}

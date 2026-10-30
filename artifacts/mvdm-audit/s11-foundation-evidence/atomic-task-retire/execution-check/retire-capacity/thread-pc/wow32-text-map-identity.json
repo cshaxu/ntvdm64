@@ -1,0 +1,96 @@
+{
+  "images": [
+    {
+      "path": "build/t473-s11/retire-capacity-integrated/package/system32/WOW32.DLL",
+      "file_sha256": "26E077D75BDA5566B6F02E164C2E25D124FD9A08EFD3ADB5AA168EED45EF1D45",
+      "image_base": "0x10000000",
+      "text_rva": "0x1000",
+      "text_virtual_size": 581137,
+      "text_raw_size": 581632,
+      "text_sha256": "4FBF75F1B6731B1ECDC78AE81482D7DD4B8AA3E7367A8926134CA20D2633C180"
+    },
+    {
+      "path": "build/t473-s11/projection-index-registered/inputs/WOW32.DLL",
+      "file_sha256": "B83C367B0D168DE2968C13A0A79F6E53A5532A569BC579DF13976140926716E6",
+      "image_base": "0x10000000",
+      "text_rva": "0x1000",
+      "text_virtual_size": 581137,
+      "text_raw_size": 581632,
+      "text_sha256": "4FBF75F1B6731B1ECDC78AE81482D7DD4B8AA3E7367A8926134CA20D2633C180"
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "file_sha256": "098790BCEEC9DDB0376ABC4086463280D7A936463AAC8FE18636AE45DFD04A5C",
+      "image_base": "0x10000000",
+      "text_rva": "0x1000",
+      "text_virtual_size": 581137,
+      "text_raw_size": 581632,
+      "text_sha256": "4FBF75F1B6731B1ECDC78AE81482D7DD4B8AA3E7367A8926134CA20D2633C180"
+    }
+  ],
+  "map_sha256": "9F11D6B0DC87416D0CD10E7AEDD6003DDA80EE33F74AA220C7EC37FCF80E995E",
+  "map_matches_analysis": true,
+  "wow32_samples": [
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8",
+      "samples": 5
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_retain_window_generation@12",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_window_words_publish_client_graph@8",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_graph_row_index@20",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_window_words_pin_generation@8",
+      "samples": 2
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_graph_row_index@20",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_commit_window_info@28",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_project_graph_attempt@20",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_menu_client_refresh_all@4",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8",
+      "samples": 1
+    }
+  ],
+  "limitation": "Identical file .text layout/content links the current map to candidate code; nearest-map attribution is not a validated stack or exclusive time."
+}

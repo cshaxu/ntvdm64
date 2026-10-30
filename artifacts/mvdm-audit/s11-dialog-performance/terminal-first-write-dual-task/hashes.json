@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-first-write-finally\\stage\\package\\system32\\WOW32.DLL",
+    "Hash": "533A0707F260A1586E1030F116C4A2AD933BE62FF85EC235E416BE2F8EDEDE1F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-first-write-finally\\stage\\package\\system32\\ntvdm.exe",
+    "Hash": "B6828F46DF45221770BFB702422B23B816A5EC169C135F9F3A68C0A3BF159C9A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-first-write-finally\\wow_window_words_binding.obj",
+    "Hash": "8DA23793580BFA2E3BEF48DF820892E93DB2FF6D0899E86B69EA5794E0FA6ACF"
+  }
+]

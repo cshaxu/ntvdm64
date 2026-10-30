@@ -1,0 +1,54 @@
+[
+  {
+    "path": "build\\t473-s11\\retirement-error-integrated\\inputs\\WOW32.DLL",
+    "sha256": "60435cb030cdb451f8a7ef1bb10112d1df2fe58fcf2b45104c1e7c125b1ec3ed",
+    "sections": {
+      ".text": {
+        "size": 581632,
+        "sha256": "3f9958ee9666a4f5a3c8f6b0b295191b9858eecb6b122e6e0c671b5d7c6bb8de"
+      },
+      ".rdata": {
+        "size": 73216,
+        "sha256": "7ffbf632cf968cea2024a06651b53081fcbc7fe3b9dd8f17f2a9d51dbafe9957"
+      },
+      ".data": {
+        "size": 16896,
+        "sha256": "d534d3346b5631015e30e2e2aaf2c22be6d2252fb416e5db1df11b8f7a95c266"
+      },
+      ".rsrc": {
+        "size": 5120,
+        "sha256": "788845213b6f1b2475e404b4b39ffa3a73b5cb3705fd53f87d8d5976057b569e"
+      },
+      ".reloc": {
+        "size": 33280,
+        "sha256": "6312e22716d1f5ea4698264e804137f165d233aa12becfbc5b2a7e8f78dff8cb"
+      }
+    }
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "sha256": "32c4c7f4df253d5213096a270f5741be3a31d627ab3bd3f4eed8b7e44db6123c",
+    "sections": {
+      ".text": {
+        "size": 581632,
+        "sha256": "3f9958ee9666a4f5a3c8f6b0b295191b9858eecb6b122e6e0c671b5d7c6bb8de"
+      },
+      ".rdata": {
+        "size": 73216,
+        "sha256": "f351b425be1947cfbf06936b3260a650c7b3a32410c9752bf40d0e03f8d0e676"
+      },
+      ".data": {
+        "size": 16896,
+        "sha256": "d534d3346b5631015e30e2e2aaf2c22be6d2252fb416e5db1df11b8f7a95c266"
+      },
+      ".rsrc": {
+        "size": 5120,
+        "sha256": "788845213b6f1b2475e404b4b39ffa3a73b5cb3705fd53f87d8d5976057b569e"
+      },
+      ".reloc": {
+        "size": 33280,
+        "sha256": "6312e22716d1f5ea4698264e804137f165d233aa12becfbc5b2a7e8f78dff8cb"
+      }
+    }
+  }
+]

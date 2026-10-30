@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 25728,
+  "started": "2026-10-29T07:07:56.7232182Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\borrow-index-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/borrow-index-scaling-r2-observation -VisibleDesktop -Rounds 3 -NoTrace -DialogWaitMs 30000 -ExternalWindows 150",
+  "exit": 0,
+  "finished": "2026-10-29T07:08:51.0440571Z"
+}

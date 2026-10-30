@@ -1,0 +1,42 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\ntcon.exe",
+    "Hash": "E000910044999A9BC6405A4C21E73EF1C709E75D4DC3D3B2AFF4DD42A4332189"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\nthook32.dll",
+    "Hash": "DB88C27CF931B145B02374DDF9E8655D6445504104A52AAF5134435244735F8A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\nthook64.dll",
+    "Hash": "F26E8EC39652B1DFB9262823B4434F9C046452446C0FE88A2A573585269F9CA6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\ntmon.exe",
+    "Hash": "B1B4B92C2C20ED5DAA42640F1EBE4A3D731CA7B26E77536A24728BCABA6A4E1F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\ntsrv.exe",
+    "Hash": "300F1CB76A7CA115F55FA58B00A7FA99BFF7F24E27BA5DCBD43BB2BE2C8AD435"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\ntvdm.exe",
+    "Hash": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\ntvwm.exe",
+    "Hash": "A8887ECF407DC5A592EB2BF1FBBBA1EFC7EC8DEDD46E7C3F6EA59A3D57DE1C40"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\run16.exe",
+    "Hash": "3668A5909CEFEBA9574CEDB609CD9D8277AF056FBFE95F736EB017F664C93A24"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\VDMREDIR.DLL",
+    "Hash": "F1AA244001393318EB4BECDAB60985D468142471B31C0AA82CCB424BEF1B4DD7"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\published-control-stage\\inputs\\WOW32.DLL",
+    "Hash": "FF5AAD62B628F0AF28DF23255D97059ABF089CBBA9226CE46091412F4093E431"
+  }
+]

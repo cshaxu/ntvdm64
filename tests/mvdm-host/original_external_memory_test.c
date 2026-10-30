@@ -18,7 +18,10 @@ extern LONG VdmAddVirtualMemory(ULONG, ULONG, PULONG);
 extern LONG VdmRemoveVirtualMemory(ULONG);
 extern LONG VdmAllocateVirtualMemory(PULONG, ULONG, BOOL);
 extern LONG VdmFreeVirtualMemory(ULONG);
+extern LONG VdmQueryFreeVirtualMemory(PULONG, PULONG);
 extern LONG VdmReallocateVirtualMemory(ULONG, PULONG, ULONG);
+#pragma comment(linker, "/EXPORT:VdmQueryFreeVirtualMemory=_VdmQueryFreeVirtualMemory,@270")
+#pragma comment(linker, "/EXPORT:VdmReallocateVirtualMemory=_VdmReallocateVirtualMemory,@271")
 extern int host_copy_con_to_con(int, unsigned short, unsigned short,
     unsigned short, unsigned short);
 extern void fwd_word_fill(unsigned short, unsigned char *, int);
@@ -177,13 +180,24 @@ int main(void)
     CHECK(external[1] == 0x5a);
     {
         ULONG resized = 0;
-        CHECK(VdmReallocateVirtualMemory(normal, &resized, 16384) == 0);
+        ULONG free_bytes = 0, largest = 0;
+        HMODULE self = GetModuleHandleW(NULL);
+        LONG (__cdecl *query)(PULONG, PULONG) =
+            (LONG (__cdecl *)(PULONG, PULONG))GetProcAddress(self, "VdmQueryFreeVirtualMemory");
+        LONG (__cdecl *reallocate)(ULONG, PULONG, ULONG) =
+            (LONG (__cdecl *)(ULONG, PULONG, ULONG))GetProcAddress(self, "VdmReallocateVirtualMemory");
+        CHECK(query && reallocate);
+        CHECK((FARPROC)query == GetProcAddress(self, MAKEINTRESOURCEA(270)));
+        CHECK((FARPROC)reallocate == GetProcAddress(self, MAKEINTRESOURCEA(271)));
+        CHECK(query(&free_bytes, &largest) == 0 && free_bytes >= largest);
+        CHECK(reallocate(normal, &resized, 16384) == 0);
         CHECK(*c_GetPhyAdd(resized + 1) == 0x19);
         normal = resized;
-        CHECK(VdmReallocateVirtualMemory(normal, &resized, 4096) == 0);
+        CHECK(reallocate(normal, &resized, 4096) == 0);
         CHECK(*c_GetPhyAdd(resized + 1) == 0x19);
         normal = resized;
         report("original allocation grow/shrink content PASS\n");
+        report("original memory exported name/ordinal query and reallocate PASS\n");
     }
     CHECK(VdmFreeVirtualMemory(normal) == 0);
     {

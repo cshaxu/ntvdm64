@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "4EA2112CFC610FBBCBC33A14BBE27C0FA1446B0164DE85539212A208784CFE58",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-profile\\WOW32.DLL"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ABA8932333E0ACF5FD4301186263284061790497D1DC4D036E2F09463ECEE58E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_sol_options_probe.c"
+  }
+]

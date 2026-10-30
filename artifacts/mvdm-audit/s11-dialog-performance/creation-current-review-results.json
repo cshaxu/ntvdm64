@@ -1,0 +1,33 @@
+{
+  "traceOnly": {
+    "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4156\r\nSOL options: dialog-close-recovery-ms=7203\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=5938\r\nSOL options: dialog-close-recovery-ms=6594\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=3\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=6047\r\nSOL options: dialog-close-recovery-ms=6515\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n",
+    "single": {
+      "exitCode": 0,
+      "finished": "2026-10-29T15:42:28.6078883Z"
+    },
+    "three": {
+      "finished": "2026-10-29T15:43:44.642861Z",
+      "exitCode": 0
+    }
+  },
+  "creationOwner": {
+    "normalProbe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=5516\r\nSOL options: modal close or parent recovery failed\r\n",
+    "hashes": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-current-owner\\wow_window_creation_binding.c",
+        "Hash": "708DA471C7AE4348798E5F5D68F06B8DF94FE6F90ACF3841CE6BA47C0B208C2F"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-current-owner\\wow32.dll",
+        "Hash": "A224BFFC3D63AD4A521F801EF533D9A949BE56EC6729A8C3642946FFD5B45935"
+      }
+    ],
+    "longProbe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=4406\r\nSOL options: dialog-close-recovery-ms=7328\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\n",
+    "normal": {
+      "exitCode": 1,
+      "finished": "2026-10-29T15:45:48.1334255Z"
+    }
+  },
+  "productionSourceChanged": false,
+  "published": false
+}

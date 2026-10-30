@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "supervisor_exit": 0,
+  "case_reports": {
+    "Console": 17,
+    "Window": 17
+  },
+  "scope": "Console-17 and Window-17 selected product gates, not WOW frontier or Full",
+  "manifest_sha256": "855c7d0b9419a4a1a7cb204b7b31c5910c27b52d895cf16294e34c90f9c07aa9"
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5D02FD51C5993BB283D215F945F1614493382D355F3C650607FBD92E742AC89E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-checked\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A970123116D0B8B37F0C0778EBA5A1A552FB0831545B76477C70BD6362F7A1C5",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-checked\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EC6C382FC43201E6A239F26CFF0473C040B860E26B30B39002BBC9679651AE00",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-multi-dialog.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7A3975E7BFE9221889CA05910A14D142136678737392E086792540DF020A9A5E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_multi_dialog_probe.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "250A4A99FA40E775121D3E5B30F2A9EC7F2BE48748EFB2937A1D16E5E79E8DE3",
+    "Path": "O:\\w31\\NOTEPAD.EXE"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "633C1328922B4092351E0019B1BA1C6D56C0F0FEA83824CC8B7E2E731B15E80B",
+    "Path": "O:\\w31\\WINMINE.EXE"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "81AB580D6FB9A22D727A58C77125DEB4825186C6656F7368375AD429463D67E4",
+    "Path": "O:\\w31\\PROGMAN.EXE"
+  }
+]

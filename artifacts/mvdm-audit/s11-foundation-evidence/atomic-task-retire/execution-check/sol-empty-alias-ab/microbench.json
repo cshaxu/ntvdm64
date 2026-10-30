@@ -1,0 +1,37 @@
+[
+  {
+    "round": 1,
+    "baseline": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=10026.500 ns_per_call=5.013 invalid_results=0",
+    "candidate": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=6034.500 ns_per_call=3.017 invalid_results=0",
+    "baselineContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1",
+    "candidateContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1"
+  },
+  {
+    "round": 2,
+    "baseline": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=12334.100 ns_per_call=6.167 invalid_results=0",
+    "candidate": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=9785.300 ns_per_call=4.893 invalid_results=0",
+    "baselineContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1",
+    "candidateContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1"
+  },
+  {
+    "round": 3,
+    "baseline": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=10101.100 ns_per_call=5.051 invalid_results=0",
+    "candidate": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=5954.600 ns_per_call=2.977 invalid_results=0",
+    "baselineContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1",
+    "candidateContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1"
+  },
+  {
+    "round": 4,
+    "baseline": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=11039.900 ns_per_call=5.520 invalid_results=0",
+    "candidate": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=6372.400 ns_per_call=3.186 invalid_results=0",
+    "baselineContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1",
+    "candidateContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1"
+  },
+  {
+    "round": 5,
+    "baseline": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=10040.600 ns_per_call=5.020 invalid_results=0",
+    "candidate": "EMPTY_ALIAS_BENCH iterations=2000000 elapsed_us=5445.700 ns_per_call=2.723 invalid_results=0",
+    "baselineContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1",
+    "candidateContract": "PHYSICAL_ALIAS_EMPTY_CONTRACT errors=0 empty=1 null=1 invalid_owner=1 bounds=1 multi_owner=1 remap=1 teardown=1 physical_retained=1"
+  }
+]

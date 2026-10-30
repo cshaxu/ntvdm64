@@ -12,10 +12,11 @@ $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tool
 $envLines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set')
 foreach($line in $envLines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -Path ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
 $sources=@('tests/app/console_input_batch_test.c',
+ 'tests/app/console_input_batch_stubs.c',
  'src/common/console/client.c',
  'src/common/transport/pipe_transfer.c',
  'src/ntvdm-exe/win32/console_client.c','src/ntvdm-exe/win32/console_graphics.c',
- 'src/ntvdm-exe/win32/console_bitmap.c','src/opennt-abi/host-compat/console_grid.c',
+ 'src/ntvdm-exe/win32/console_bitmap.c','src/ntvdm-exe/softpc/v7_pointer.c','src/opennt-abi/host-compat/console_grid.c',
  'src/ntvdm-exe/session/session.c','src/ntvdm-exe/session/guest_memory_lease.c') |
  ForEach-Object {Join-Path $root $_}
 $exe=Join-Path $build 'console-input-batch.exe'
@@ -28,7 +29,9 @@ foreach($source in $sources){
     if($LASTEXITCODE){throw ('Fixture compile failed: '+$source)}
     $objects+= $object
 }
-& link.exe /nologo ('/OUT:'+$exe) /OPT:REF @objects user32.lib gdi32.lib *> (Join-Path $build 'build.log')
+$workerBase=Join-Path $root 'build/.ninja/msvc-x86-release/worker/worker-base.lib'
+if(!(Test-Path -LiteralPath $workerBase)){throw 'Build the cached x86 worker-base library first'}
+& link.exe /nologo ('/OUT:'+$exe) /OPT:REF @objects $workerBase user32.lib gdi32.lib *> (Join-Path $build 'build.log')
 if($LASTEXITCODE){throw 'Batch fixture build failed; see build.log'}
 & $exe *> $log
 if($LASTEXITCODE){throw ('Batch fixture failed; see '+$log)}

@@ -1,0 +1,57 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ABE564712453BCBE346513D1F7F0597A92BD46068C1D973B4EABA0ECC948AF11",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8733E942BFCB0E3D3AFE198B7445D0CF576B50C01A55F23940D1E8D627A677F3",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_reclaim_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "08BD1AB9AF970A9C345C231DE9EFE135985B327677E46B6C18B3BE1B6921E117",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B70ABB46BDEFC542A934A3B178902C5A9D6329D3CC513C97B20C61029068A487",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A9135720530ABF9DB022CBB0DF261B3ED05B09F7F6D054BA0555A86E3CDFAE81",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-fault\\baseline-page-domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5B53EAD027F094565484DEFE8B348251B121EC12032222BBA1F75B2E5BD4EB11",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\baseline.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "0755FB4F17DC7C06A8D915AA5D1D4FC9B105302A35B36DF2C2893F0ABAC3B8B3",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\candidate.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "914B9012862362B85B96D3DDEA2590B04CFF4871BCB039788501DE257F9F68D7",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\collision.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "461580D8D4E6250B5B46DE0A94BEA0DA3C571EA5FAC715D69ED8208A50FBF060",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\baseline.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "21C2D0539F2E9746F6AA4E8D9FFEB1002112BEFD9D82F8513A642B0AA9E02C8F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\candidate.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ED708EFE3617812BA0357D5A28D0F0F5A591EB1BB7AD2F4484E3ABA0D0BA3407",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\collision.exe"
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "result": "fail",
+  "pid": 28520,
+  "started": "2026-10-29T06:32:38.6052452Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-multi-dialog.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/multi-dialog-progman-subdir-observation -VisibleDesktop -NoTrace -Mode progman -Guest O:\\w31\\PROGMAN.EXE",
+  "exit": 1,
+  "finished": "2026-10-29T06:32:51.5792141Z"
+}

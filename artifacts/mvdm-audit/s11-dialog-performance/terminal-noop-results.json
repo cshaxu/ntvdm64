@@ -1,0 +1,92 @@
+{
+  "formal": {
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+        "Hash": "B4CBB24ABA2D6AB9DC7DFEE86AC0281D7F3220BCFD667F602D4B1B4B61403159"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+        "Hash": "B159BAF2A7B8D21CB8684FBF0AF7D8253AB54A42C0C24C375AB81C610563A477"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-formal\\fixture.exe",
+        "Hash": "3CE806CB16311CC65E8430AE4FB79597ACB0AE49A5570E604BEC1089CED72E16"
+      }
+    ],
+    "exit_code": 0,
+    "assertions": [
+      "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ]
+  },
+  "controls": [
+    {
+      "variant": "fixed",
+      "result": {
+        "exit_code": 0,
+        "utc": "2026-10-29T14:45:21.4787378Z"
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-fixed\\fixture.exe",
+          "Hash": "BC7CC2920BDD93375443C8E3C75A34A617D79624FCF3A0B99BA7509840AD60C9"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-fixed\\fixture.c",
+          "Hash": "4C8410BEEF27A3CDC3B848680109B3EA083540FFDB4F7144FD886DA93465D3A6"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-fixed\\wow_window_words_binding.c",
+          "Hash": "B6D18D06B442AFAE4D92D3C98F0BC98492B2FBC1857C8B1C373B79162B3244BE"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-fixed\\wow_window_words_binding.obj",
+          "Hash": "3F0285A6CB1BC5137F4ABA2B11D619CB364C05E5F6A1A0488811A10BA70788D1"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-fixed\\provider.lib",
+          "Hash": "5FAEFE96A6D31C0A0E8FF17A9371CDE7742521A816A8038BA44E4F878EDA6B9C"
+        }
+      ],
+      "assertions": [
+        "WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+      ]
+    },
+    {
+      "variant": "prior",
+      "result": {
+        "exit_code": 1,
+        "utc": "2026-10-29T14:45:21.4787378Z"
+      },
+      "files": [
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-prior\\fixture.exe",
+          "Hash": "79CF1BF5A3FA3711E2D645AFF1EEEE24A5329CFE0D00435B9125D25828E043E4"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-prior\\fixture.c",
+          "Hash": "4C8410BEEF27A3CDC3B848680109B3EA083540FFDB4F7144FD886DA93465D3A6"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-prior\\wow_window_words_binding.c",
+          "Hash": "A6418695CA20A8C1D55256CD4D3AD29D3C65A9D2E0306AE2646051AAB7342826"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-prior\\wow_window_words_binding.obj",
+          "Hash": "1F6CC5B5E9E1019CF396E9B4FC7ACD032BE005D606B7641645C20D85AB5872D4"
+        },
+        {
+          "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-noop-prior\\provider.lib",
+          "Hash": "D9F93C62650B208E7B94F432EFEF91299EB4A414152400632340E5FA58341EAA"
+        }
+      ],
+      "assertions": [
+        "WINDOW_BORROW_FAIL line=1684 error=5023",
+        "WOW_TERMINAL_RETIRED_NOOP errors=1 accepted=0 cleanup_scope_closed=1",
+        "WOW_PAGE_DOMAIN_LIFECYCLE_FAILED stage=registered-original-modal"
+      ]
+    }
+  ]
+}

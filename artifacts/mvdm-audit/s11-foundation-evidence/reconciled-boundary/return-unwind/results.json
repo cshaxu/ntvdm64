@@ -1,0 +1,6 @@
+{
+  "case": "NativeWaitPublication",
+  "exit": 0,
+  "source": "O:\\repos.hobby\\ntvdm64/src/wow32-dll/source/wow_user_task_lifecycle.c",
+  "scope": "Exact helper/control-flow body, not scheduler/CCPU/guest acceptance"
+}

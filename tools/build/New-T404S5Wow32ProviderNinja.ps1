@@ -344,7 +344,7 @@ foreach ($raw in @(
 $dllEntryBridgeSource = Join-Path $build 'wow32-dll-entry-bridge.c'
 $dllEntryBridgeLines = @(
     '/* Generated build-only CRT-to-original DLLENTRY bridge. */',
-    'extern int __stdcall W32DllInitialize(void *, unsigned long, void *);',
+    'extern unsigned char __stdcall W32DllInitialize(void *, unsigned long, void *);',
     'extern void __stdcall wow_bitmap_bindings_shutdown(void);',
     'extern void __stdcall wow_registry_binding_shutdown(void);',
     'int __stdcall DllMain(void *instance, unsigned long reason, void *reserved)',

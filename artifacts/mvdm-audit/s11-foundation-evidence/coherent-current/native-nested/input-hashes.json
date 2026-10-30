@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "91E684C4A863677C4C4BFC1402071BE7A05AA781C062B1E4A7C51E0B079ECBD8",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_task_lifecycle.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A7D996EA6F0CE7706FFB7F60D0C171BB65150A581A64C0FD60A4E1B50464DA6E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "6371B4359B618698BC5E67809834AA6C7C1D36DBDD7C5D1CD1B2073CEC57DBB3",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current-native-nested\\fixture.exe"
+  }
+]

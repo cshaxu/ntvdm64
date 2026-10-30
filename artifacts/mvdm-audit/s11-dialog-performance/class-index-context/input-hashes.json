@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C92A4225E2BE69391C2891C90A1B3DF8F415E8A97CC846F6BD617F822883BACF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-context\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "C92186E80E085BF89FC5B68520CBCBC4C049C6390072BFCBE40C01274959074B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-context\\wow32.dll"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ECDB813FBF8DE85AD6F36D475F082694E2FFF3C9032AF01303B4F85AD4C9CA34",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-context\\mvdm_softpc_wow_page_domain.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AD19B0566A7B0A3F2F73BFCD3417FFBAD8B8A1341E90537DF9AE047C91BD88DA",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\batched-failure-diagnostic\\wow_window_creation_binding.obj"
+  }
+]

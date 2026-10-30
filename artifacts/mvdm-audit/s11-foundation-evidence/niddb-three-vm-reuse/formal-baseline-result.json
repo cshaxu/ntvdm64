@@ -1,0 +1,65 @@
+{
+  "started": "2026-10-29T10:13:49.7159559Z",
+  "owner_pid": 8616,
+  "result": "fail",
+  "contract": "niddb",
+  "scope": "Explicit diagnostic object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-formal-baseline-control",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-formal-baseline-control\\niddb-object-contract.exe",
+  "inputs": [
+    {
+      "sha256": "C48461654840AE5B9F6D4C55FA14E2A5B916705D8A2DF8A3D602108E23EC6917",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1"
+    },
+    {
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd"
+    },
+    {
+      "sha256": "9C9D48DB9EB1E1293FE601CF58306CFAE853BCCFDFA966456E0C4C0731C1640B",
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c"
+    },
+    {
+      "sha256": "45D1E266418E382136875506990C924537121AE245FB8E92F92A8157AB7D3C94",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\virtual.c"
+    },
+    {
+      "sha256": "53200AB23072904616298B28B6872109CEA42938E31B3732704AC922F4CE9D75",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\niddb-object-rollback\\baseline.obj"
+    },
+    {
+      "sha256": "2EC7DCCED054637214013AF7E9ECFB5006E41E2909CE4584FB2529D314FAF367",
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja"
+    },
+    {
+      "sha256": "D4576F40B4C22A3F83BBB76CD07DB800275C0C61154983966B67EA3AAFBBA976",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\virtual.h"
+    },
+    {
+      "sha256": "F4081EDAE56ECD3FAC2E6E90587EE25FC50052BFC7A5BBC4B3C60458EB838C10",
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\sas.h"
+    }
+  ],
+  "runs": [
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\t473-s10\\niddb-object-rollback\\baseline.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-formal-baseline-control\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-formal-baseline-control\\niddb-object-contract.exe\" /link kernel32.lib\"",
+      "exit": 0,
+      "pid": 19904,
+      "kind": "build"
+    },
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_NIDDB_EXPECT_POINTER_BYTES=8 \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-formal-baseline-control\\negative-abi.obj\"\"",
+      "exit": 2,
+      "pid": 19356,
+      "kind": "negative-abi-compile"
+    },
+    {
+      "exit": 1,
+      "diagnostic_budget_ms": 30000,
+      "pid": 24260,
+      "kind": "fixture"
+    }
+  ],
+  "error": "Original-object contract failed",
+  "finished": "2026-10-29T10:13:59.8308943Z"
+}

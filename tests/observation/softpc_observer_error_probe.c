@@ -7,7 +7,6 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 void *Ldt;
 unsigned long IntelBase, Cpu40GdtShadowAddress, Cpu40LdtShadowAddress;
-unsigned long FlatAddress[8192];
 /* Diagnostic-only coverage must never terminate a session or access a CPU. */
 void host_applClose(void) { abort(); }
 int session_terminate_current(uint32_t code) { (void)code; abort(); }
@@ -83,8 +82,6 @@ int main(int argc, char **argv)
     CHECK(mvdm_softpc_report_wow_code_segment_load(0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_far_call_attempt(0, 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_far_call_validation(0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_wow_descriptor_domains(0, 0, 0, 0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_wow_fetch_translation(0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_int2a_ldt(0, 0, 0));
     CHECK(mvdm_softpc_report_wow_int2a(0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_exception_hook(0, 0, 0, 0));

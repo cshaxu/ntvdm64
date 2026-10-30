@@ -1,5 +1,17 @@
 # NIDDB allocation failure rollback
 
+S11 independent review identified two unverified lifecycle boundaries before
+delivery. If a later device BOP observes the ID of a retired active VM,
+`virtual_swap_instance` can dereference its cleared record; the current
+candidate does not establish the INSIGNIA.386 byte-update order. A silent
+fallback to another VM would also risk executing with the wrong identity, so
+neither guest reachability nor a safe replacement is assumed. Separately,
+system-VM allocation failure leaves the original `allocation_allowed` lock
+in place; existing fault-injection tests retry initialization and therefore do
+not prove a no-retry failure/exit contract. These are source and coverage
+findings, not newly reproduced guest crashes. The original VxD implementation
+has not been found in the indexed sources; guest binaries remain unchanged.
+
 Source inspection of `src/mvdm/softpc.new/base/bios/virtual.c` identifies a
 failure-path allocation leak in `allocate_NIDDB`. The committed baseline
 contains that branch; the worktree now has an unpublished correction in
@@ -184,3 +196,28 @@ This is a separate unclassified non-pass, not the earlier 5023 attribution.
 These builds do not prove guest VxD
 lifecycle behavior. Do not claim the defect
 explains a mouse or Win386 symptom without guest evidence.
+
+Additional no-retry selected-object evidence: after a system-VM initialization failure at table allocation or either of two data-block allocations, the candidate retains `allocation_allowed=FALSE` until an explicit `System_Exit` or `NIDDB_System_Reboot`. All six controlled cases then restored allocation eligibility, left zero intercepted allocations, and allowed registered device data to be deallocated (`../s11-foundation-evidence/niddb-no-retry`). The fixture intercepts allocation symbols in the actual cached COFF object and supplies controlled register/VxD boundaries. It does not establish that the original provider sends System_Exit or reboot after a failed Sys_VM_Init, nor that an installed guest follows either route. It resolves the host cleanup behavior conditional on that event, not the original-provider ordering question.
+
+The same six no-retry cases were extended to exercise the API, not just the active flag: before System_Exit/reboot, allocation is rejected and an attempted deallocation leaves both existing device handles intact; after the event, a new device allocation and deallocation succeed. The selected-object fixture passes all six cases with zero tracked transient allocations. This verifies the original lock's observable host behavior under these controlled inputs, but still cannot prove delivery of the required event by the absent guest provider.
+
+The no-retry matrix now has a reusable selected-object runner and fixture at `tests/observation/verify-niddb-no-retry.py` and `tests/mvdm-host/niddb_no_retry_fixture.c`. The candidate passed all six explicit markers; the committed-source baseline control reproduced the table leak (`mode=0 ordinal=1 live=1`) and was accepted only as an expected negative. The runner records the input and intercepted-object hashes and constrains all build outputs and selected objects to the repository build tree. Formal receipts are under `s11-foundation-evidence/niddb-no-retry`. This is an independently invocable controlled test; it has not been claimed as part of the Full product gate or as guest-provider evidence.
+
+Current-worktree recheck: Ninja reports the selected `virtual.obj` up to
+date, and the six no-retry cases passed again in
+`build/t473-s11/niddb-no-retry-current`. The input object SHA-256 is
+`483500E02FE4CC019533A91C5A61FF954E4E45351BC75D128A00090D870339EF`;
+the current source SHA-256 is
+`45D1E266418E382136875506990C924537121AE245FB8E92F92A8157AB7D3C94`.
+This preserves the same controlled-provider limitation and does not resolve
+guest VxD exit ordering or make the candidate publishable by itself.
+
+The allocation rollback fixture now occupies all four supported instance slots
+and injects failure into the table allocation and each of the four data
+allocations, for both System_Exit and reboot. All ten candidate cases passed,
+including locked pre-exit deallocation, zero intercepted live allocations,
+and a successful replacement allocation after exit. The same fixture detected
+the expected table leak against the source-derived baseline at its first data
+allocation failure. Receipts and markers are in
+`../s11-foundation-evidence/niddb-all-slots/`. This extends controlled object
+coverage; it does not establish the missing guest provider ordering.

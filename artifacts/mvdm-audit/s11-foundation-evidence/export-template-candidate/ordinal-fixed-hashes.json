@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\assets\\release\\ntvdm.exe",
+    "Hash": "EF546743393DAD7E45BB7BDA605775524ADB26B94DAE4BDEFE32951EB0510294"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\ntvdm-export-ordinals.csv",
+    "Hash": "7975CA27F5187FF258E621AB8B6855386563058D87DB331B1C88C815641E4F94"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "6062F9D059662AE9150DAEB1671B77052EEC33D48C98F22DBF003FA68582BB83"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\CMakeLists.txt",
+    "Hash": "24F5502242AC11EAF5A941C830628CF61404F096A782503FC53A37DADEA44611"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "C4E46049FCFF8496D44B453DB50EE72D9E583676FB61C86C00D0BAFDB71D8C2B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "13F158DDA8DDBA07CFD7C2400E4ABD7DFB95F3D6BA7E31428066396EA1B317ED"
+  }
+]

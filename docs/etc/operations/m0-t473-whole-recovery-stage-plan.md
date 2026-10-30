@@ -33,21 +33,31 @@ source identity alone is not execution or behavioral proof. Preserve guest
 immutability, approved host boundaries, and the user's minimum-diff policy.
 Unrelated project-wide minimization remains in the next queue package.
 
+The owner clarified that this T audits and restores connection boundaries
+and their necessary closure, not independent internal defects in components
+already connected. Historical findings below are leads rather than automatic
+repair obligations: first establish an in-scope connection or an independently
+admitted observed failure. This applies to every stage and supersedes older
+unconditional repair wording. 486-specific repairs remain excluded.
+
 S10 retains the detailed [recovery worklist](../../../artifacts/mvdm-audit/recovery-worklist.md)
 and [stage handoff](../../../artifacts/mvdm-audit/s10-s11-s19-handoff-reconciliation.md).
 The [C/H reconciliation checkpoint](../../../artifacts/mvdm-audit/s10-host-ch-reconciliation-summary.md)
 records bounded source-role decisions and the evidence freshness limitations.
-S11 triages the observed SOL Options failures before assigning any proved DDE
-or USER defect to S14/S15. S17 owns HUNTER and standalone tools/debuggers,
+S11 retains correctness triage of the observed SOL Options failure before
+assigning any proved DDE or USER defect to S14/S15. The owner moved further
+SOL and WOW multi-window performance optimization to the separate
+[queued proposal](../../proposals/proposal-wow-multiwindow-performance-recovery-001.md);
+latency is no longer an S11 closure gate. S17 owns HUNTER and standalone tools/debuggers,
 with CPU prerequisites in S11 and launch/PIF integration in S12. S19 rebinds
 normal, failure and teardown evidence to the actual coherent release package.
 
-S11 owns the NIDDB instance-retirement and allocation-rollback candidates
-identified during S10. The [bounded evidence](../../../artifacts/mvdm-audit/host-ch-scope/niddb-allocation-rollback-review.md)
-includes object-level failure controls and the candidate package's selected
-Full gates; actual VxD lifecycle, game interaction and completion boundaries
-remain separate acceptance obligations. The candidates are not published or
-claimed complete by S10.
+The NIDDB instance-retirement and allocation-rollback candidates identified
+during S10 are held outside this T after the owner clarified that internal
+defects in connected components are not boundary recovery. Their [bounded
+evidence](../../../artifacts/mvdm-audit/host-ch-scope/niddb-allocation-rollback-review.md)
+and saved patches remain traceable; actual VxD provider reachability is a
+separate original-connection question. The internal changes are not published.
 
 S10's [native-source checkpoint](../../../artifacts/mvdm-audit/native-source-role-review.md)
 retains per-file S11 execution/translation and S13 BIOS obligations without

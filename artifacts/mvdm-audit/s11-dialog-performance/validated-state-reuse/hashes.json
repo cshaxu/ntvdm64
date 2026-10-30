@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-state-reuse\\wow_user_borrow_scope.obj",
+    "Hash": "600BB9C14D1AC96435EA8F445A6B8ED6DF341B56EBE2872CB48E42F219A8113F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-state-reuse\\stage\\package\\system32\\WOW32.DLL",
+    "Hash": "CFB76810A5A28C1FB8EC93256F564B1676B8F5FA7299966A25BDAAA7E6340C2D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\validated-state-reuse-fixture\\fixture.exe",
+    "Hash": "2BD810B18CD989EB9C883C19512ED7DD8DDDA8CA9BFDA0157BF35E7D7CBDF71F"
+  }
+]

@@ -1,0 +1,11 @@
+# Validated resource-state reuse experiment
+
+Build-only candidate; production and guest remain untouched. Candidate source differs at one graph traversal call: after the same exact retained binding and full view have been validated, it skips the resource-construction helper when a client state already exists. For a missing state the original helper still runs. This repeats the shape of an older inconclusive/nonpassing experiment against current source, so it is not presumed safe or faster. Equality of error ordering, invalidation and failure semantics must be tested; the separate extra view read formerly performed by the helper may itself have observable failure behavior.
+
+Candidate compiled. The four current-wrapper lifecycle/object cases are running in owned session 66081 under `build/t473-s11/graph-resource-reuse`; no complete result or SOL comparison exists yet. Never merge on compilation alone.
+Production source SHA-256: FF5AF122ABD9E634CA3BEE1D2E15C2FD46FCA241F5A9D985D06889C549613E9A
+Candidate source SHA-256: 2EA999060C828F56DD111612BD4194FE1D9515348DBF255DB8C5310568EE430D
+
+All four current selected-object fixture cases completed with exit 0; the build-only WOW32 linked and its separate ten-image package staged successfully. The ordered SOL baseline/candidate/baseline comparison is running in owned session 9330 with outputs under `build/t473-s11/graph-resource-reuse`. This does not resolve prior non-pass, failure-order concerns or prove a performance improvement; no production change has been made.
+
+The ordered 3+3+3 SOL comparison completed with all interactions and launcher exits passing. Baseline-before open 2375/1671/1843 and close 2000/2063/2094 ms; candidate open 2469/1875/1875 and close 2047/2063/1969 ms; baseline-after open 2546/1859/2015 and close 1922/2141/2188 ms. Only WOW32 input differs between staged packages; stage identities differ. [Raw probes, staged manifests and fixture output](resource-reuse-current-results/) are retained. This small ordered sample does not show a convincing improvement, and skipping the original helper's second validation retains an unproved failure-order distinction. The build-only candidate is rejected and is not applied to production; the old experiment remains a separate non-pass.

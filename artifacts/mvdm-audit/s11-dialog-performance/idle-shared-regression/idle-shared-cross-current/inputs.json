@@ -1,0 +1,46 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_idle_tasks_probe.c",
+    "Hash": "4F18F8A9D39A77B8716C08739B3BA7EC74AB9A22FE0C8438F20EB8F0F7D1B7BA"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\win16_idle_probe.asm",
+    "Hash": "114E40CC8FBB7E33C36F5941FFCF7A681E76EB13DB2B3857338EF3EA4AFE634E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-shared-cross-current\\IDLEHOST.EXE",
+    "Hash": "8723024DF07355208DFE42D3251920A6687247A32CD65C9530A3FDEC2E533929"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-shared-cross-current\\IDLPROBE.EXE",
+    "Hash": "D8A2B4374D399691F6B968F22F1C52AD51C67E6200D26DFA28A2AF64F34D0E71"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-shared-cross-current\\IDLPEER.EXE",
+    "Hash": "9852AD2E63CD4D3AFEE68F7DBE9E077C5EFB8E16D48D3C176CDBA023762BEBD5"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\ntvdm.exe",
+    "Hash": "DF5827B657E9B7838C45DA0DCEB3AEB7550ED19F4C076D85AE292C86460C369A"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\WOW32.DLL",
+    "Hash": "1D1A6C69BBA30549DB814B0CFC51329E19A135AFE2BFF8CBA2A3D2A95B8B085D"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\nthook32.dll",
+    "Hash": "F56245FE41CC3FBD77BBA33FD68633A30B2DC65CD65959C73CBE9C836CB8BC34"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\run16.exe",
+    "Hash": "3E10A763C2874A8D58207F54532BA1EB5962FC2B9BF0279DD13AB1F0ABB578D9"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\KRNL386.EXE",
+    "Hash": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4"
+  },
+  {
+    "Path": "O:\\tmp\\n16c\\system32\\USER.EXE",
+    "Hash": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+  }
+]

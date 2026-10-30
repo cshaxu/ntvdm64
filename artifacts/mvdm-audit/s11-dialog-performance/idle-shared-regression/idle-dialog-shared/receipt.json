@@ -1,0 +1,48 @@
+{
+  "result": "pass",
+  "scope": "two immutable test tasks sharing one WOW worker; no Winmine or general 1400 guarantee",
+  "inputs": [
+    {
+      "path": "build\\t471-s2\\s3-idle-shared-r3\\IDLEHOST.EXE",
+      "sha256": "8723024df07355208dfe42d3251920a6687247a32cd65c9530a3fdec2e533929"
+    },
+    {
+      "path": "build\\t471-s2\\s3-idle-shared-r3\\IDLPROBE.EXE",
+      "sha256": "d8a2b4374d399691f6b968f22f1c52ad51c67e6200d26dfa28a2af64f34d0e71"
+    },
+    {
+      "path": "build\\t459-s2\\common-dialog-guest-r2\\CDLPROBE.EXE",
+      "sha256": "406d84f9e4ea04cd269045b354e95c47a342c986e0400a2c4f6a58dc818d3a02"
+    }
+  ],
+  "outputs": [
+    {
+      "file": "manifest.json",
+      "sha256": "25709cf6e877fef1fa94242d0649f93280455e0f9abbcba22e898263aaad067e"
+    },
+    {
+      "file": "observer.txt",
+      "sha256": "3db9d18ed7e9c4b283594d934249ea83b8bd8cdcf0df67b08437f6372125f641"
+    },
+    {
+      "file": "native.txt",
+      "sha256": "b03e6104ef59c2ac849d87670ce8902a01eb490c6cb266db806343245ff1d9ef"
+    },
+    {
+      "file": "lifetime.txt",
+      "sha256": "82f4efca15c0b2b53d2df744d06fc20cf32dd4f4b7d4a9672513018c4893ca59"
+    },
+    {
+      "file": "IDLPROBE.bin",
+      "sha256": "a541bc7d1859d36f2f2cbfc47fbeefaa68a9d2c667e462a4ee4b0b2b771dd759"
+    },
+    {
+      "file": "CDLPROBE.bin",
+      "sha256": "7a2ca5a1e3dea5c910e652c10a14024f38aff5df4c96b10eb7023c2e90d9a34e"
+    },
+    {
+      "file": "result.txt",
+      "sha256": "19e35cc260dc309b123f83a60032e393ec12993b8c875f6f4d1d0e1a962163bc"
+    }
+  ]
+}

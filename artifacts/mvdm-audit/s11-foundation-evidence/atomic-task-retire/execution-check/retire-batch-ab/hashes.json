@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E286FC9E17A2FAE16FB612A3598684132692AC6EA0A96E99375DB77091463373",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-batch-candidate\\binding.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D091651F96DA0462FEA688B111D379B4256F9BBDF4A66769B45B912BEA7C9EB2",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retire-batch-candidate\\WOW32.DLL"
+  }
+]

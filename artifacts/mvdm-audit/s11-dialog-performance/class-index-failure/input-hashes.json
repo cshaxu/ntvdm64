@@ -1,0 +1,47 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2DB638FC7DD3CAC50B416430A715B7BBFE56DB906CEE94793253BC3098D82140",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_reclaim_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "47924ACF5519FFD6F13EB37BA107D0B5C845AE53F4C7442C8B8AF2497C0AC496",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D13004E318C6C6424B01D94C66F8AB5C9A722CCB56A819103E0E2B8B1099EEBC",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "3233D12837DC957CDCFB7731FC36AC1FFB5FC7CCCCF4430E9D128EBB8174F8D7",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\baseline.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B79E083F4434AF88C4970C79EF2B58F4AC7C39E9C45F8442AC9B8BB66687121D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\candidate.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A539AEA29A15D94F05082A745AFB48251224DCE68E524268609B1E391118E97A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\collision.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "1DB8C5396F98DEC390A0A19C0D27751501647DBCED409F3759D991E0556372C0",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\baseline.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "810F1C9E018005B687C854463FE2E5E028B4987EE42C330DBA36912A0EDC143D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\candidate.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "FC117463EF8AE4DC916845856A2BD06C22F26FE0F318F1ACF8F3D3CBB0F5AF27",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-formal-test\\collision.exe"
+  }
+]

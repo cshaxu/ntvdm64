@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-window-reclaim\\fixture.exe",
+    "Hash": "D9111D31DA7B0E54F1441C04FDA20CC09004355C48AF76B41B9D63A9CB4AF671"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+    "Hash": "04DB4AC5376F69811DC40A103AB3C8ABF2781A9D1AC7C894D5977B074FC14CA1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "E41452963A0F92576C1DC54DFBDBCC41DF37D126BA1BE76D976A902B1132D272"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "32C4C7F4DF253D5213096A270F5741BE3A31D627AB3BD3F4EED8B7E44DB6123C"
+  }
+]

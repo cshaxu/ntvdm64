@@ -1,0 +1,48 @@
+{
+  "published": false,
+  "observations": [
+    {
+      "probe": "SOL options: round=1\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=5079\r\nSOL options: dialog-close-recovery-ms=4593\r\nPASS SOL Options command, modal dialog, close and parent recovery\r\nSOL options: round=2\r\nSOL options: command=1003\r\nSOL options: modal dialog did not appear\r\n",
+      "log": "Exception: O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1:68\r\nLine |\r\n  68 |  …    if($LASTEXITCODE){throw \"SOL Options probe failed: $LASTEXITCODE\"}\r\n     |                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n     | SOL Options probe failed: 8\r\n",
+      "application": "sol"
+    },
+    {
+      "probe": "main=00080918 command=3\r\ndialog hwnd=004A092C title=Find\r\ndialog-visible-ms=1188\r\nclose-recovery-ms=562\r\nPASS menu dialog and parent recovery\r\n",
+      "log": null,
+      "application": "notepad"
+    },
+    {
+      "probe": "main=000B0934 command=524\r\ndialog hwnd=010200FE title=\r\ndialog-visible-ms=2328\r\nclose-recovery-ms=2688\r\nPASS menu dialog and parent recovery\r\n",
+      "log": null,
+      "application": "winmine"
+    },
+    {
+      "probe": "main=000E0932 command=101\r\ndialog hwnd=011B085C title=Program Group Properties\r\ndialog-visible-ms=3218\r\nclose-recovery-ms=2985\r\nPASS menu dialog and parent recovery\r\n",
+      "log": null,
+      "application": "progman"
+    }
+  ],
+  "results": [
+    {
+      "finished": "2026-10-29T16:11:24.6552453Z",
+      "exitCode": 1,
+      "application": "sol"
+    },
+    {
+      "finished": "2026-10-29T16:11:40.9162052Z",
+      "exitCode": 0,
+      "application": "notepad"
+    },
+    {
+      "finished": "2026-10-29T16:11:59.2755106Z",
+      "exitCode": 0,
+      "application": "winmine"
+    },
+    {
+      "finished": "2026-10-29T16:12:17.6682694Z",
+      "exitCode": 0,
+      "application": "progman"
+    }
+  ],
+  "packageEvidence": "creation-integrated-product-results.json"
+}

@@ -1,0 +1,23 @@
+{
+  "result": "pass",
+  "pid": 25588,
+  "started": "2026-10-29T08:41:36.6772104Z",
+  "cases": [
+    {
+      "case": "notepad",
+      "exit": 0,
+      "pid": 28664
+    },
+    {
+      "case": "winmine",
+      "exit": 0,
+      "pid": 32672
+    },
+    {
+      "case": "progman",
+      "exit": 0,
+      "pid": 28048
+    }
+  ],
+  "finished": "2026-10-29T08:42:30.2255047Z"
+}

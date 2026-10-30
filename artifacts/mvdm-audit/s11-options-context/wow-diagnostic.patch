@@ -1,0 +1,658 @@
+--- production/wow_class_client_bindings.c
++++ diagnostic-only/wow_class_client_bindings.c
+@@ -3,6 +3,7 @@
+ #include "wow_window_creation_binding.h"
+ #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+ #include <stdio.h>
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ ATOM WINAPI wow_original_register_class(WNDCLASSA *, DWORD *);
+ BOOL WINAPI wow_original_unregister_class(LPCSTR, HINSTANCE);
+@@ -18,7 +19,7 @@
+ {
+     if (context && context->classes && context->get_version && context->callback && context->thread)
+         return TRUE;
+-    SetLastError(ERROR_INVALID_STATE);
++    SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+     return FALSE;
+ }
+ 
+@@ -127,7 +128,7 @@
+         if (entry) {
+             if (!wow_class_words_target(binding, &target)) {
+                 result = FALSE;
+-                SetLastError(ERROR_INVALID_STATE);
++                SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+                 __leave;
+             }
+             native_class.lpfnWndProc = (WNDPROC)target.procedure;
+@@ -232,7 +233,7 @@
+     entry = (native_class.style & CS_GLOBALCLASS) ?
+         classes->pclsPublicList : classes->pclsPrivateList;
+     if (!entry) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return NULL;
+     }
+     entry->fnid = fnid;
+@@ -255,7 +256,7 @@
+ 
+         (void)wow_class_words_destroy_native(link, native_class->hInstance,
+             TRUE);
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return FALSE;
+     }
+     return TRUE;
+--- production/wow_class_words_binding.c
++++ diagnostic-only/wow_class_words_binding.c
+@@ -10,6 +10,7 @@
+ #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+ 
+ #include <stdio.h>
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ BOOL WINAPI wow_native_class_resolve_procedure(DWORD procedure, DWORD *resolved)
+ {
+@@ -160,7 +161,7 @@
+         native_class->style, procedure, (DWORD)native_class->cbWndExtra,
+         0u, name.Buffer, (ULONG)name.Length + 1u);
+     RtlFreeAnsiString(&name);
+-    if (!entry->guest_server) SetLastError(ERROR_INVALID_STATE);
++    if (!entry->guest_server) SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+     return entry->guest_server != 0;
+ }
+ 
+@@ -329,7 +330,7 @@
+      * snapshot its resolved identity instead; preserve safe dispatch too. */
+     __try {
+         if (!binding || !binding->original_native_procedure) {
+-            SetLastError(ERROR_INVALID_STATE); __leave;
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); __leave;
+         }
+         wow_window_note_native_procedure(window, binding->original_native_procedure, FALSE);
+         result = CallWindowProcA(binding->original_native_procedure,
+--- production/wow_user_borrow_scope.c
++++ diagnostic-only/wow_user_borrow_scope.c
+@@ -7,6 +7,7 @@
+ #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+ 
+ #include <stdio.h>
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ /* Original private getters return aliases into retained WND/CLS objects.
+  * Native storage references provide that lifetime, without reproducing USER
+@@ -142,7 +143,7 @@
+             !mvdm_softpc_wow_page_domain_collect_observed_classes())
+         reclaimed = FALSE;
+     if (!reclaimed) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return FALSE; /* Scope is consumed; domain still owns pending frees. */
+     }
+     SetLastError(error);
+@@ -196,7 +197,7 @@
+ static wow_window_words_binding *borrow_window(HWND window)
+ {
+     wow_window_words_binding *binding;
+-    if (!current_scope) { SetLastError(ERROR_INVALID_STATE); return NULL; }
++    if (!current_scope) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL; }
+     binding = wow_window_words_acquire(window);
+     return retain(binding, FALSE) ? binding : NULL;
+ }
+@@ -234,7 +235,7 @@
+     wow_user_borrow *borrow;
+     wow_window_words_binding *binding;
+     if (!current_scope || !state) {
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     /* Retained state can outlive native destruction, so validate its stored
+      * identity, not the current HWND property (which may denote a successor). */
+@@ -255,7 +256,7 @@
+     if (!binding) return NULL;
+     if (wow_window_words_client_state_value(binding) != state) {
+         wow_window_words_release(binding);
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     if (!retain(binding, FALSE)) return NULL;
+     SetLastError(error);
+@@ -320,7 +321,7 @@
+                     wow_window_words_thread_id(sample->binding) != thread_id :
+                     !wow_window_words_set_observed_thread_id(sample->binding, thread_id))) {
+             release_binding(sample, WOW_BORROW_SAMPLED);
+-            SetLastError(ERROR_INVALID_STATE); return NULL;
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+         }
+         if (!retain(sample, WOW_BORROW_SAMPLED)) return NULL;
+     }
+@@ -332,7 +333,7 @@
+     DWORD saved = GetLastError();
+     ULONG full = (ULONG)(ULONG_PTR)window, backing = 0;
+     wow_window_words_binding *binding;
+-    if (!current_scope) { SetLastError(ERROR_INVALID_STATE); return NULL; }
++    if (!current_scope) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL; }
+     /* client/wow.c ValidateHwnd's callback fast path precedes the shared
+      * table check. It deliberately keeps a retired callback's exact WND. */
+     if (!mvdm_softpc_wow_page_domain_borrow_callback_window(full, &backing)) return NULL;
+@@ -346,7 +347,7 @@
+         }
+         full = current;
+         backing = mvdm_softpc_wow_page_domain_borrow_window(full);
+-        if (!backing) { SetLastError(ERROR_INVALID_STATE); return NULL; }
++        if (!backing) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL; }
+     }
+     binding = retain_window_generation((HWND)(ULONG_PTR)full, backing);
+     if (!binding) return NULL; /* Incoming pin consumed even on failure. */
+@@ -397,7 +398,7 @@
+         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+     }
+     if (!wow_window_words_pin_generation(source, &backing)) return FALSE;
+-    if (!backing) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
++    if (!backing) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE; }
+     result = mvdm_softpc_wow_page_domain_borrow_window_relation(backing, relation,
+         &destination);
+     error = GetLastError();
+@@ -478,7 +479,7 @@
+         for (i = 0; i < count; ++i) {
+             binding = rows[i].binding;
+             if (!wow_window_words_pin_generation(binding, &backing)) __leave;
+-            if (!backing) { SetLastError(ERROR_INVALID_STATE); __leave; }
++            if (!backing) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); __leave; }
+             read = mvdm_softpc_wow_page_domain_read_window_view(backing, &view);
+             if (!read) {
+                 error = GetLastError();
+@@ -488,7 +489,7 @@
+             }
+             target = retain_window_generation((HWND)(ULONG_PTR)view.links.window, backing);
+             if (!target) __leave; /* Incoming pin consumed on all paths. */
+-            if (target != binding) { SetLastError(ERROR_INVALID_STATE); __leave; }
++            if (target != binding) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); __leave; }
+             if (!wow_window_words_prepare_resource_state(binding, desktop)) __leave;
+             rows[i].state = wow_window_words_client_state_value(binding);
+             rows[i].window = (HWND)(ULONG_PTR)view.links.window;
+@@ -525,7 +526,7 @@
+                     found = TRUE; break;
+                 }
+             }
+-            if (!found) { SetLastError(ERROR_INVALID_STATE); __leave; }
++            if (!found) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); __leave; }
+         }
+         result = wow_window_words_publish_client_graph(count, rows);
+     } __finally {
+@@ -572,7 +573,7 @@
+     ATOM atom, HANDLE module)
+ {
+     wow_class_words_binding *binding;
+-    if (!current_scope) { SetLastError(ERROR_INVALID_STATE); return NULL; }
++    if (!current_scope) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL; }
+     binding = wow_class_words_acquire(context, atom, module);
+     return retain(binding, TRUE) ? wow_class_words_value(binding) : NULL;
+ }
+@@ -587,7 +588,7 @@
+     DWORD *result;
+     if (!current_scope || !current_scope->classes) {
+         trace_named_class(module, name, 0, NULL);
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     if (!name || !name->Length || !HIWORD(name->Buffer)) {
+         trace_named_class(module, name, 0, NULL);
+--- production/wow_user_object_bindings.c
++++ diagnostic-only/wow_user_object_bindings.c
+@@ -18,6 +18,7 @@
+ #define HMIndexFromHandle(handle) ((DWORD)(WORD)(handle))
+ #define GetFullUserHandle wow_original_full_user_handle
+ #include "opennt-host/windows/core/ntuser/client/handles.c"
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ #undef GetFullUserHandle
+ #undef HMIndexFromHandle
+ #undef WowSharedHandleEntry
+@@ -30,7 +31,7 @@
+     DWORD result, metadata;
+     if (!table) { SetLastError(ERROR_INVALID_PARAMETER); return 0; }
+     if (!mvdm_softpc_wow_page_domain_handle_metadata(handle, &metadata)) {
+-        SetLastError(ERROR_INVALID_STATE); return 0;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return 0;
+     }
+     entry.bType = (BYTE)metadata;
+     entry.bFlags = (BYTE)(metadata >> 8);
+@@ -88,7 +89,7 @@
+     if (!binding || !binding->thread || !binding->thread->ppi ||
+             !(objects = binding->thread->ppi->objects) ||
+             objects->last_handle >= 0x10000u) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     if (!wow_window_words_collect_retired(objects)) return FALSE;
+     roots = HeapAlloc(GetProcessHeap(), 0,
+@@ -135,7 +136,7 @@
+     binding = wow_user_runtime_current();
+     if (!binding || !binding->thread || !binding->thread->ppi ||
+             !binding->thread->ppi->objects) {
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     return (HWND)(ULONG_PTR)wow_user_full_handle(
+         binding->thread->ppi->objects, LOWORD(window));
+@@ -154,7 +155,7 @@
+     binding = wow_user_runtime_current();
+     if (!binding || !binding->thread || !binding->thread->ppi ||
+             !binding->thread->ppi->objects) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return NULL;
+     }
+     full = wow_user_window_full_handle(binding->thread->ppi->objects,
+@@ -188,7 +189,7 @@
+     binding = wow_user_runtime_current();
+     if (!binding || !binding->thread || !binding->thread->ppi ||
+             !binding->thread->ppi->objects) {
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     /* MVDM-HOST-DIV-454: only a public modern USER call needs this live
+      * HWND; every original conversion continues to use native_handle above. */
+@@ -448,7 +449,7 @@
+         if (previous->links.window != value->links.window &&
+                 previous->process_id == GetCurrentProcessId() &&
+                 IsWindow((HWND)(ULONG_PTR)previous->links.window)) {
+-            SetLastError(ERROR_INVALID_STATE); return FALSE;
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+         }
+         *previous = *value;
+         return TRUE;
+@@ -635,7 +636,7 @@
+             if (!*target) continue;
+             found = index[LOWORD(*target)];
+             if (found && rows[found - 1u].links.window == *target) continue;
+-            if (rows[i].process_id == pid) { SetLastError(ERROR_INVALID_STATE); goto done; }
++            if (rows[i].process_id == pid) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); goto done; }
+             *target = 0;
+         }
+     }
+@@ -689,7 +690,7 @@
+             entry->bType, entry->bFlags, (unsigned long)(ULONG_PTR)window,
+             object->pcls ? object->pcls->guest_server : 0u, object->adwWOW)) {
+         ZeroMemory(entry,sizeof(*entry));
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     table->windows[index]=window;
+     object->native_window=window;
+@@ -705,11 +706,11 @@
+     entry = &table->entries[LOWORD(window)];
+     if (entry->bType != TYPE_WINDOW || entry->wUniq != HIWORD(window) ||
+             entry->phead != object || table->windows[LOWORD(window)] != window) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     if (!mvdm_softpc_wow_page_domain_cancel_native_adoption(
+             (ULONG)(ULONG_PTR)window, backing)) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     ZeroMemory(entry, sizeof(*entry));
+     table->windows[LOWORD(window)] = NULL;
+@@ -726,7 +727,7 @@
+         SetLastError(ERROR_NOT_FOUND); return FALSE;
+     }
+     if (!mvdm_softpc_wow_page_domain_retire_handle(LOWORD(window), retained_backing)) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     ZeroMemory(entry,sizeof(*entry));
+     table->windows[LOWORD(window)]=NULL;
+--- production/wow_window_client_state_bindings.c
++++ diagnostic-only/wow_window_client_state_bindings.c
+@@ -7,6 +7,7 @@
+ #include "wow_edit_native_bindings.h"
+ #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
+ #include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ /* One host WND/class-extra allocation per existing HWND binding. Original
+  * controls/dialogs own their interpretation and private-state lifecycle. */
+@@ -167,7 +168,7 @@
+     if (!binding) return NULL;
+     state = wow_window_words_client_state_value(binding);
+     if (!wow_window_words_owns_client_state(binding, state)) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return NULL;
+     }
+     SetLastError(error);
+@@ -180,7 +181,7 @@
+     wow_user_runtime_thread *runtime = wow_user_runtime_current();
+     PWND state = NULL;
+     BOOL held;
+-    if (!runtime) { SetLastError(ERROR_INVALID_STATE); return NULL; }
++    if (!runtime) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL; }
+     held = runtime->exclusive_held;
+     if (!held && !wow_user_runtime_enter(runtime)) return NULL;
+     __try {
+@@ -253,7 +254,7 @@
+     if (!binding) return FALSE;
+     if (!wow_window_words_owns_client_state(binding,
+             wow_window_words_client_state_value(binding))) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return FALSE;
+     }
+     if (!wow_window_words_refresh(window, binding)) return FALSE;
+@@ -287,7 +288,7 @@
+     wow_user_runtime_thread *runtime = wow_user_runtime_current();
+     wow_window_words_binding *binding;
+     BOOL held, result = FALSE;
+-    if (!runtime) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
++    if (!runtime) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE; }
+     held = runtime->exclusive_held;
+     if (!held && !wow_user_runtime_enter(runtime)) return FALSE;
+     __try {
+--- production/wow_window_creation_binding.c
++++ diagnostic-only/wow_window_creation_binding.c
+@@ -9,6 +9,7 @@
+ #include "wow_user_borrow_scope.h"
+ #include "wow_menu_resource_bindings.h"
+ #include <stdio.h>
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ /* ADAPTER-WOW-031: original createw.c binds class and WW before CBT/WNDPROC.
+  * Public USER owns creation, message order and failure; a thread-local CBT
+@@ -133,7 +134,7 @@
+         *previous = (WNDPROC)SetWindowLongA(window, GWL_WNDPROC,
+             (LONG)*installed);
+         if (!*previous) {
+-            if (!GetLastError()) SetLastError(ERROR_INVALID_STATE);
++            if (!GetLastError()) SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+             goto failed;
+         }
+     }
+@@ -162,7 +163,7 @@
+     if (!request || !thread || !thread->ppi)
+         return TRUE;
+     if (thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return FALSE;
+     }
+     /* Nested explicit scopes may already own this HWND. Never steal their
+@@ -228,7 +229,7 @@
+     ZeroMemory(enrollment, sizeof(*enrollment));
+     if (!request || !thread || !thread->ppi) return TRUE;
+     if (!runtime || runtime->thread != thread) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     held = runtime->exclusive_held;
+     if (!held && !wow_user_runtime_enter(runtime)) return FALSE;
+@@ -427,11 +428,11 @@
+                     &scope->class_words, scope->target, scope->thread,
+                     TRUE, &scope->borrow, &scope->previous_native,
+                     &scope->installed_native)) {
+-                scope->failure = GetLastError();
++                scope->failure = wow_diag_failure(GetLastError(),__FILE__,__LINE__);
+                 return FALSE;
+             }
+             if (!wow_window_words_set_creation_ansi(scope->borrow, !scope->unicode)) {
+-                scope->failure = GetLastError();
++                scope->failure = wow_diag_failure(GetLastError(),__FILE__,__LINE__);
+                 rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
+                 SetLastError(scope->failure);
+                 return FALSE;
+@@ -442,7 +443,7 @@
+                 facts.compatibility_flags = scope->compatibility_flags;
+                 facts.class_extra_bytes = scope->class_extra_bytes;
+                 if (!wow_window_words_set_creation_facts(scope->borrow, &facts)) {
+-                    scope->failure = GetLastError();
++                    scope->failure = wow_diag_failure(GetLastError(),__FILE__,__LINE__);
+                     rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
+                     SetLastError(scope->failure);
+                     return FALSE;
+@@ -466,7 +467,7 @@
+                     }
+                 }
+                 if (!initialized) {
+-                    scope->failure = GetLastError();
++                    scope->failure = wow_diag_failure(GetLastError(),__FILE__,__LINE__);
+                     rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
+                     SetLastError(scope->failure);
+                     return FALSE;
+@@ -477,7 +478,7 @@
+             enrollment->previous_native = scope->previous_native;
+             enrollment->installed_native = scope->installed_native;
+             if (!enrollment->borrow) {
+-                scope->failure = GetLastError();
++                scope->failure = wow_diag_failure(GetLastError(),__FILE__,__LINE__);
+                 rollback_enrollment(window, scope->borrow, scope->previous_native, scope->installed_native);
+                 return FALSE;
+             }
+@@ -512,7 +513,7 @@
+     }
+     context = thread->ppi->classes;
+     if (thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) {
+-        SetLastError(ERROR_INVALID_STATE); return NULL;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return NULL;
+     }
+     scope.thread = thread;
+     scope.unicode = unicode;
+@@ -533,7 +534,7 @@
+                 (!captured_module_version && (!runtime->classes ||
+                     !runtime->classes->get_version))) {
+             wow_class_words_release(scope.class_words);
+-            SetLastError(ERROR_INVALID_STATE);
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+             return NULL;
+         }
+         if (!GetClassInfoExA(entry->hModule, MAKEINTATOM(atom), &native_class)) {
+@@ -748,7 +749,7 @@
+     }
+     if (!binding || !binding->thread || !binding->classes ||
+             !binding->classes->get_version) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return NULL;
+     }
+     /* Original ntstubs.c truncates GETEXPWINVER(hModule) to WORD before
+--- production/wow_window_words_binding.c
++++ diagnostic-only/wow_window_words_binding.c
+@@ -17,6 +17,7 @@
+ 
+ #include <stdio.h>
+ #include <limits.h>
++#include "O:/repos.hobby/ntvdm64/build/t473-s11/options-diagnostic-wow/error_observation.h"
+ 
+ /* DIVERGENCE(ADAPTER-WOW-027): original kernel WND/thread locks retain WW
+  * across callbacks, even if a callback destroys the window. Public HWND does
+@@ -72,7 +73,7 @@
+         (runtime->thread->TIF_flags&WOW_TASK_TIF_INCLEANUP) ||
+         !binding->enrolled || binding->terminal_pending || binding->resource_destroy_consumed ||
+         GetPropW(window,property_name)!=binding ||
+-        (binding->resource_destroy && binding->resource_destroy!=callback))error=ERROR_INVALID_STATE;
++        (binding->resource_destroy && binding->resource_destroy!=callback))error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else {binding->resource_destroy=callback;result=TRUE;}
+     ReleaseSRWLockExclusive(&publication_lock);
+     wow_window_words_release(binding);SetLastError(error);return result;
+@@ -96,7 +97,7 @@
+         (expected && binding->resource_destroy && binding->resource_destroy!=expected) ||
+         (invoke && binding->resource_destroy &&
+             (!runtime->resource_cleanup_live || !(runtime->thread->TIF_flags&WOW_TASK_TIF_INCLEANUP))))
+-        error=ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else {
+         callback=binding->resource_destroy;
+         binding->resource_destroy=NULL;
+@@ -122,12 +123,12 @@
+     }
+     AcquireSRWLockExclusive(&publication_lock);
+     if (!binding->enrolled || binding->terminal_pending)
+-        error = ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else if (binding->creation_facts_known &&
+             (binding->creation_facts.module_version != facts->module_version ||
+              binding->creation_facts.compatibility_flags != facts->compatibility_flags ||
+              binding->creation_facts.class_extra_bytes != facts->class_extra_bytes))
+-        error = ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else {
+         binding->creation_facts = *facts;
+         binding->creation_facts_known = TRUE;
+@@ -162,7 +163,7 @@
+     AcquireSRWLockExclusive(&publication_lock);
+     if (!binding->enrolled || binding->terminal_pending ||
+             (binding->creation_encoding_known && binding->creation_ansi != ansi))
+-        error = ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else {
+         binding->creation_ansi = ansi;
+         binding->creation_encoding_known = TRUE;
+@@ -230,13 +231,13 @@
+         if (!mvdm_softpc_wow_page_domain_bind_window_host_storage(backing,
+                 binding, release_generation_storage)) {
+             wow_window_words_release(binding);
+-            SetLastError(ERROR_INVALID_STATE);
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+             return NULL;
+         }
+         binding->generation_backing = backing;
+         /* Initial allocation reference now belongs to the generation. */
+     } else if (binding->generation_backing != backing) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return NULL;
+     }
+     InterlockedIncrement(&binding->references);
+@@ -270,7 +271,7 @@
+     generation = binding->generation_backing;
+     result = !generation || mvdm_softpc_wow_page_domain_retain_host_window(generation, binding);
+     ReleaseSRWLockShared(&publication_lock);
+-    if (!result) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
++    if (!result) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE; }
+     *backing = generation;
+     SetLastError(saved);
+     return TRUE;
+@@ -291,7 +292,7 @@
+     }
+     AcquireSRWLockExclusive(&publication_lock);
+     if (!binding->enrolled || binding->terminal_pending)
+-        error = ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else if (binding->client_state_owned)
+         error = ERROR_ALREADY_EXISTS;
+     else if (binding->client_state == state)
+@@ -309,13 +310,13 @@
+         if (binding->objects) {
+             backing = mvdm_softpc_wow_page_domain_borrow_window(
+                 (ULONG)state->head.h);
+-            if (!backing) error = ERROR_INVALID_STATE;
++            if (!backing) error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+             else {
+                 storage = mvdm_softpc_wow_page_domain_window_host_storage(backing);
+                 if (storage == binding && binding->generation_backing == backing)
+                     attached = TRUE;
+                 else if (storage || binding->generation_backing)
+-                    error = ERROR_INVALID_STATE;
++                    error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+                 else {
+                     InterlockedIncrement(&binding->references);
+                     if (mvdm_softpc_wow_page_domain_bind_window_host_storage(
+@@ -324,7 +325,7 @@
+                         attached = TRUE;
+                     } else {
+                         InterlockedDecrement(&binding->references);
+-                        error = ERROR_INVALID_STATE;
++                        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+                     }
+                 }
+             }
+@@ -374,7 +375,7 @@
+     BOOL result = FALSE;
+     if (!binding || !desktop) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+     if (!wow_window_words_pin_generation(binding, &backing)) return FALSE;
+-    if (!backing) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
++    if (!backing) { SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE; }
+     __try {
+         if (!mvdm_softpc_wow_page_domain_read_window_view(backing, &view)) __leave;
+         if (wow_window_words_client_state_value(binding)) {
+@@ -482,7 +483,7 @@
+     if (!binding) return FALSE;
+     AcquireSRWLockExclusive(&publication_lock);
+     if (binding->native_thread_id && binding->native_thread_id != thread_id)
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+     else if (binding->enrolled || GetPropW(window, property_name))
+         SetLastError(ERROR_ALREADY_EXISTS);
+     else attached = SetPropW(window, property_name, binding);
+@@ -549,7 +550,7 @@
+     AcquireSRWLockExclusive(&publication_lock);
+     if (binding->enrolled || binding->terminal_pending ||
+             (binding->native_thread_id && binding->native_thread_id != thread_id))
+-        error = ERROR_INVALID_STATE;
++        error=wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__);
+     else {
+         binding->native_thread_id = thread_id;
+         result = TRUE;
+@@ -783,7 +784,7 @@
+                     (updates[i].binding &&
+                      (updates[i].binding->terminal_pending ||
+                       updates[i].binding->client_state != updates[i].state))) {
+-                SetLastError(ERROR_INVALID_STATE); goto done;
++                SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); goto done;
+             }
+         }
+         if (!mvdm_softpc_wow_page_domain_project_window_graph(count, rows)) goto done;
+@@ -847,7 +848,7 @@
+     if (backing) (void)mvdm_softpc_wow_page_domain_release_window(backing);
+     ReleaseSRWLockExclusive(&publication_lock);
+     wow_window_words_release(binding);
+-    if (!result) SetLastError(ERROR_INVALID_STATE);
++    if (!result) SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+     return result;
+ }
+ 
+@@ -860,7 +861,7 @@
+     }
+     AcquireSRWLockExclusive(&publication_lock);
+     if (GetPropW(window,property_name)!=binding || binding->objects) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+     } else if (wow_user_window_publish(thread->ppi->objects,window,&binding->cleanup,thread)) {
+         binding->cleanup.thread=thread;
+         binding->objects=thread->ppi->objects;
+@@ -1165,7 +1166,7 @@
+             binding->cleanup.thread != runtime->thread ||
+             !(runtime->thread->TIF_flags & WOW_TASK_TIF_INCLEANUP) ||
+             GetPropW(window, property_name) != binding) {
+-        SetLastError(ERROR_INVALID_STATE);
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+         return FALSE;
+     }
+     /* createw.c PatchThreadWindows chooses the exercised standard target,
+@@ -1386,7 +1387,7 @@
+     BOOL held, result = FALSE;
+     if (!previous || !(procedure & WNDPROC_WOW) || !runtime || !runtime->thread ||
+             !runtime->classes || !runtime->classes->callback) {
+-        SetLastError(ERROR_INVALID_STATE); return FALSE;
++        SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); return FALSE;
+     }
+     held = runtime->exclusive_held;
+     if (!held && !wow_user_runtime_enter(runtime)) return FALSE;
+@@ -1409,7 +1410,7 @@
+              runtime->thread->host->find_thread(runtime->thread, tid) : NULL);
+         if (!owner || owner->ppi != runtime->thread->ppi ||
+                 (owner->TIF_flags & WOW_TASK_TIF_INCLEANUP)) {
+-            SetLastError(ERROR_INVALID_STATE); __leave;
++            SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__)); __leave;
+         }
+         borrowed = wow_user_borrow_window(window);
+         if (!borrowed) __leave;
+@@ -1431,7 +1432,7 @@
+         SetLastError(ERROR_SUCCESS);
+         old = SetWindowLongA(window, GWL_WNDPROC, (LONG)entrance);
+         if (!old) {
+-            if (!GetLastError()) SetLastError(ERROR_INVALID_STATE);
++            if (!GetLastError()) SetLastError(wow_diag_failure(ERROR_INVALID_STATE,__FILE__,__LINE__));
+             __leave;
+         }
+         *previous = (DWORD)old;

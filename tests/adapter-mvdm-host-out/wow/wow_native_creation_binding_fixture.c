@@ -809,6 +809,7 @@ int __cdecl main(void)
     }
     veto_hook = SetWindowsHookExA(WH_CBT, reject_hook, NULL, GetCurrentThreadId());
     CHECK(veto_hook != NULL); if (!veto_hook) goto done;
+    fixture_creation_thread.TIF_flags |= WOW_TASK_TIF_16BIT;
     window = create(1); CHECK(window != NULL);
     if (window) CHECK(DestroyWindow(window));
     window = create(3); CHECK(window == NULL);
@@ -823,9 +824,16 @@ int __cdecl main(void)
     /* A vetoed attempt must leave no pending scope that steals this create. */
     window = create(5); CHECK(window != NULL);
     if (window) CHECK(DestroyWindow(window));
+    fixture_creation_thread.TIF_flags &= ~WOW_TASK_TIF_16BIT;
+    CHECK(task_state.CSOwningThread == &fixture_creation_thread);
+    CHECK(!binding.exclusive_held);
     CHECK(UnhookWindowsHookEx(veto_hook));
 #ifdef WOW_CREATION_UNWIND_FIXTURE
+    fixture_creation_thread.TIF_flags |= WOW_TASK_TIF_16BIT;
     verify_creation_unwind();
+    fixture_creation_thread.TIF_flags &= ~WOW_TASK_TIF_16BIT;
+    CHECK(task_state.CSOwningThread == &fixture_creation_thread);
+    CHECK(!binding.exclusive_held);
 #endif
     verify_mdi_creation();
     verify_counted_dialog_creation();

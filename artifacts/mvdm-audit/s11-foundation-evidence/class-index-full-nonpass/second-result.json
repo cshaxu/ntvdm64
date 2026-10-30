@@ -1,0 +1,8 @@
+{
+  "result": "fail",
+  "pid": 3436,
+  "started": "2026-10-29T08:48:55.8017865Z",
+  "script": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-clean\\full-run2\\run.ps1",
+  "exit": 1,
+  "finished": "2026-10-29T08:51:30.2398717Z"
+}

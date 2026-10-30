@@ -1,0 +1,8 @@
+{
+  "result": "fail",
+  "pid": 29236,
+  "started": "2026-10-29T07:10:21.3278114Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\scope-reuse-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/scope-reuse-scaling-observation -VisibleDesktop -Rounds 3 -NoTrace -DialogWaitMs 30000 -ExternalWindows 150",
+  "exit": 1,
+  "finished": "2026-10-29T07:10:58.1015876Z"
+}

@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 18656,
+  "started": "2026-10-29T05:53:09.2793810Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\options-context-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/options-context-observation-r4 -VisibleDesktop -Rounds 16",
+  "exit": 0,
+  "finished": "2026-10-29T05:55:57.3038006Z"
+}

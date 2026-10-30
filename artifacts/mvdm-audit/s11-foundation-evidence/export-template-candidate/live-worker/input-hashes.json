@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ntvdm_export_live_vdd.c",
+    "Hash": "B94423CF5F57E662DC4C38E787E2E29215BB2464951B4DA54AD8D918C8A19574"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ntvdm-export-live.ps1",
+    "Hash": "11B91E1357BF2FFFAA93EADE564996CC01625A08E74548CA5CE46EDE99F7A6AC"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm-export-live-vdd.dll",
+    "Hash": "73037B9434CEF16F11277D22A46137DEE0F15E3EF81245A4AC9E24AC5D133369"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\export-coherent-package\\system32\\MEM.EXE",
+    "Hash": "C4582B1E0738F3AAF89E17DE0F940CAA7E4B3D77A21FCCD6FF91B7E075BDF6EB"
+  }
+]

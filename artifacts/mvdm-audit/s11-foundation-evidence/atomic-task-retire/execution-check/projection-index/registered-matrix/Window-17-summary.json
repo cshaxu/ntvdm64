@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-empty.txt",
+    "BodyMs": 1601,
+    "CleanupMs": 211
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-native-zero.txt",
+    "BodyMs": 2256,
+    "CleanupMs": 207
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-missing.txt",
+    "BodyMs": 2974,
+    "CleanupMs": 210
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-native-seven.txt",
+    "BodyMs": 1035,
+    "CleanupMs": 208
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-native-streams.txt",
+    "BodyMs": 1073,
+    "CleanupMs": 200
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-native-eof.txt",
+    "BodyMs": 1104,
+    "CleanupMs": 205
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-mem.txt",
+    "BodyMs": 2117,
+    "CleanupMs": 203
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-nested-empty.txt",
+    "BodyMs": 2708,
+    "CleanupMs": 235
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-nested-mem.txt",
+    "BodyMs": 5342,
+    "CleanupMs": 249
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-mem-repeat.txt",
+    "BodyMs": 2610,
+    "CleanupMs": 246
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-direct-mem.txt",
+    "BodyMs": 967,
+    "CleanupMs": 266
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-command-c.txt",
+    "BodyMs": 996,
+    "CleanupMs": 262
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-command-c-seven.txt",
+    "BodyMs": 1167,
+    "CleanupMs": 250
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-guest-seven.txt",
+    "BodyMs": 957,
+    "CleanupMs": 249
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-command-c-mem.txt",
+    "BodyMs": 924,
+    "CleanupMs": 246
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-direct-seven.txt",
+    "BodyMs": 1199,
+    "CleanupMs": 268
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-registered-matrix\\Window-17-edit.txt",
+    "BodyMs": 3595,
+    "CleanupMs": 261
+  }
+]

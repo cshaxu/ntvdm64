@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "60435CB030CDB451F8A7EF1BB10112D1DF2FE58FCF2B45104C1E7C125B1EC3ED"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll.map",
+    "Hash": "EC45C7CC06733745D56708E1C3D8E743713F5920B7B44209A172E82A273788FA"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj",
+    "Hash": "0FF8EB7E3E78E5CCEFC44D9E994D3B0DB811B4DFC64C0797084467B46E9B6135"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\retirement-error-integrated\\inputs\\WOW32.DLL",
+    "Hash": "60435CB030CDB451F8A7EF1BB10112D1DF2FE58FCF2B45104C1E7C125B1EC3ED"
+  }
+]

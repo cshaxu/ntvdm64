@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-domain-diagnostic\\ntvdm.exe",
+    "Hash": "1E17228120730D9262408FC0C0C400BC86AD6BBFC4D8F0CE419060210F857F90"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-domain-diagnostic\\mvdm_softpc_wow_page_domain.obj",
+    "Hash": "A732B32D0CB0533572EDF3E9196A8A4253BDD6617FF3A4F1BD709507B642BF48"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-graph-diagnostic\\wow32.dll",
+    "Hash": "8E02F9DFC32BA6EB3EA58BA7A394B356EE4775F839A19DC8DDEB2484833B55B6"
+  }
+]

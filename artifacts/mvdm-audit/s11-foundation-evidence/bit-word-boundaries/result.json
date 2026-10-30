@@ -1,0 +1,105 @@
+{
+  "result": "pass",
+  "scope": "19 selected-object cases including nine signed word boundaries; full bit family and guest remain separate",
+  "fixture_sha256": "52AC939594C592C9D383CA96943043B977D73002BED3B80633DD66832A5E4968",
+  "map_sha256": "2BBB647251A00CB859DC6E89F18BD53363F87910FCCC7DF0BBA53A0853728CE7",
+  "object_sha256": "F0EC1FE38AFBF776AE035FCC7C39AD2EC06C014523C4DFDF8F14332E9CF8DED4",
+  "native_oracle_sha256": "DE1F4B041FBE92CDDA22D1EDC39C9D0D9E33F6463570F49DA6274FF1F7E78892",
+  "cases": [
+    {
+      "case": 0,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x5c5c called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=0 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 2,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x76c8 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=2 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 3,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x27ac called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=3 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 4,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x4b80 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=4 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 6,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x254c called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=6 fault=-1 carry=1 zero=0000 plus64k=0000"
+    },
+    {
+      "case": 7,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x7df0 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=7 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 8,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x6a64 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=8 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 9,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x2350 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=9 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 10,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x7e60 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=10 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 11,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x7254 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=11 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 12,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x46f4 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=12 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 13,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x2d18 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=13 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 14,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x7c14 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=14 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 15,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x71b8 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=15 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 16,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x6d10 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=16 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 17,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x158c called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=17 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 18,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x3218 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=18 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 19,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x56f0 called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=19 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    {
+      "case": 20,
+      "exit": 0,
+      "output": "ccpu386ThrdExptnPtr id:0x191c called with Bad Id\nsas-init\ncpu-init\naccess-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=20 fault=-1 carry=1 zero=0001 plus64k=0000"
+    }
+  ]
+}

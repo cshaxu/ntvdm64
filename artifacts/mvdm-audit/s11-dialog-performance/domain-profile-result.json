@@ -1,0 +1,8 @@
+{
+  "result": "fail",
+  "pid": 2392,
+  "started": "2026-10-29T06:15:22.2118416Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\domain-perf-stage-r2\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/domain-perf-profile-observation -VisibleDesktop -Rounds 2 -NoTrace",
+  "exit": 1,
+  "finished": "2026-10-29T06:15:46.4591298Z"
+}

@@ -5,6 +5,8 @@ param(
     [ValidateSet('task-lifecycle','process-retirement','menu-cleanup','menu-resource','native-dispatch-gate','window-procedure','standard-class','class-query','class-procedure','class-lifetime','dialog-lifecycle','init-notification','start-notification','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect','task-order','class-client','window-borrow','window-reclaim','graph-snapshot','thunk-scope','native-creation')] [string]$Case = 'task-lifecycle',
     [switch]$InitRollback,
     [switch]$CreationUnwind,
+    [switch]$RetirementLockProbe,
+    [string]$RetirementProbeSource,
     [switch]$OriginalModalOnly,
     [switch]$InitialPublicationOnly,
     [switch]$RealDialogLifecycleOnly,
@@ -18,6 +20,8 @@ $ErrorActionPreference = 'Stop'
 $requestedCase = $Case
 if ($Case -eq 'dialog-lifecycle') { $Case='window-borrow'; $RealDialogLifecycleOnly=$true }
 if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback requires task-lifecycle' }
+if ($RetirementLockProbe -and ($Case -ne 'task-lifecycle' -or $InitRollback)) { throw 'RetirementLockProbe requires ordinary task-lifecycle' }
+if ($RetirementProbeSource -and !$RetirementLockProbe) { throw 'RetirementProbeSource requires RetirementLockProbe' }
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
 if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
 if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnly requires window-borrow' }
@@ -240,6 +244,7 @@ if ($Case -eq 'standard-class') { $fixturePath = Join-Path $repo 'tests/mvdm-hos
 $fixture = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\fixture.obj" "'+$fixturePath+'"')
 if ($fixture -eq $compile) { throw 'Fixture substitution failed' }
 if ($InitRollback) { $fixture += ' /DWOW_INIT_ROLLBACK_FIXTURE' }
+if ($RetirementLockProbe) { $fixture += ' /DWOW_RETIREMENT_LOCK_PROBE' }
 if ($Case -eq 'native-creation') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_NATIVE_CREATION_FIXTURE' }
 if ($Case -eq 'class-procedure') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_CLASS_PROCEDURE_FIXTURE' }
 if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
@@ -441,6 +446,40 @@ foreach ($object in $objects) {
         throw "Missing current selected provider object: $object"
     }
 }
+if ($RetirementLockProbe) {
+    # Instrument only a disposable copy of the selected production source.
+    # The other thread tries the real runtime lock inside the real scan.
+    $sourcePath = if ($RetirementProbeSource) {
+        $path = (Resolve-Path -LiteralPath $RetirementProbeSource).Path
+        if (!$path.StartsWith((Join-Path $repo 'build')+'\', [StringComparison]::OrdinalIgnoreCase)) { throw 'Comparison source must be build-owned' }
+        $path
+    } else { Join-Path $repo 'src/wow32-dll/source/wow_user_task_lifecycle.c' }
+    $source = [IO.File]::ReadAllText($sourcePath)
+    $start = $source.IndexOf('static BOOL retire_task(')
+    $finish = $source.IndexOf('BOOL WINAPI wow_user_task_lifecycle_exit(', $start)
+    if ($start -lt 0 -or $finish -le $start) { throw 'Retirement source region missing' }
+    $region = $source.Substring($start, $finish - $start)
+    $needle = 'wow_cleanup_handle *entry = &owner->objects->entries[index];'
+    if (!$region.Contains($needle)) {
+        # The previous implementation performed this scan in its caller.
+        $start = $source.IndexOf('static BOOL WINAPI retire_current_thread(PVOID context)', $finish)
+        $finish = $source.IndexOf('BOOL WINAPI wow_user_task_lifecycle_dispose(', $start)
+        if ($start -lt 0 -or $finish -le $start) { throw 'Previous retirement source region missing' }
+        $region = $source.Substring($start, $finish - $start)
+    }
+    if (($region.Split(@($needle), [StringSplitOptions]::None)).Count -ne 2) { throw 'Expected exactly one retirement scan' }
+    $region = $region.Replace($needle, $needle + "`r`n        if (index == 0) wow_fixture_retirement_lock(binding->runtime);")
+    $source = $source.Substring(0, $start) + 'extern void WINAPI wow_fixture_retirement_lock(wow_user_runtime *);' + "`r`n" + $region + $source.Substring($finish)
+    $instrumented = Join-Path $out 'retirement-lock-probe.c'
+    [IO.File]::WriteAllText($instrumented, $source, [Text.UTF8Encoding]::new($false))
+    $probeCompile = $compile -replace '/Fo\S+\s+\S+wow_user_task_lifecycle\.c$', ('/Fo"'+$out+'\retirement-lock-probe.obj" "'+$instrumented+'"')
+    if ($probeCompile -eq $compile) { throw 'Retirement probe compile substitution failed' }
+    Invoke-Build $probeCompile
+    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_task_lifecycle\.obj$' })
+    if ($original.Count -ne 1) { throw 'Expected exactly one lifecycle owner' }
+    $objects = @($objects | Where-Object { $_ -notin $original })
+    $parentObjects += Join-Path $out 'retirement-lock-probe.obj'
+}
 if ($Case -eq 'init-notification' -or $InitialPublicationOnly) {
     # Preserve the real launch-client library because it provides other
     # selected BaseClient calls.  Redirect only this bridge's notification
@@ -545,6 +584,12 @@ if ($InitialPublicationOnly) {
     return
 }
 if ($OriginalModalOnly) {
+    if (!($fixtureOutput -match '^WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1$')) {
+        throw 'Property-only terminal cleanup incorrectly required guest execution'
+    }
+    if (!($fixtureOutput -match '^WOW_TERMINAL_RETIRED_NOOP errors=0 accepted=1 cleanup_scope_closed=1$')) {
+        throw 'Completed window retirement required task reentry or changed the caller error'
+    }
     if (!($fixtureOutput -match '^WOW_CLIENT_CONTEXT_BINDING_CCPU errors=0 production_op=1 controlled_views=2 scheduling=separate$')) {
         throw 'Original execution initialization or production thread-client projection operation failed'
     }
@@ -565,6 +610,8 @@ if ($OriginalModalOnly) {
         return
     }
     if ($fixtureExitCode -ne 0 -or
+        !($fixtureOutput -match '^WOW_REAL_MODAL_NESTED_HOOK errors=0 outer=49 inner=52 owner=1$') -or
+        !($fixtureOutput -match '^WOW_REAL_MODAL_VETO errors=0 failed=-1 callback=0 owner=1 retired=1$') -or
         !($fixtureOutput -match '^WOW_ORIGINAL_MODAL_CARRIERS errors=0 full=1 zero16=1 signed16=1 original_end=1$') -or
         !($fixtureOutput -match ('^WOW_ORIGINAL_MODAL_CCPU errors=0 modes='+$modalModes+' aw=2 returned=49 pdlg_retired=1$')) -or
         !($fixtureOutput -match '^WOW_ORIGINAL_MODAL_SCOPE real_ccpu=1 registered_owner=1 normal_cleanup=1$') -or
@@ -603,8 +650,12 @@ if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource
     throw 'Native resource-only execution scope was not preserved independently of InitTask'
 }
 if ($Case -eq 'graph-snapshot' -and
-    !($fixtureOutput -match '^WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_withdrawal=1 retained_reader=1$')) {
+    !($fixtureOutput -match '^WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_root_rejected=1 dead_withdrawal=1 retained_reader=1$')) {
     throw 'Whole snapshot failed fresh publication, relation copying or retained-reader retirement'
+}
+if ($Case -eq 'graph-snapshot' -and
+    !($fixtureOutput -match '^WOW_MENU_DEAD_ENROLLMENT_CCPU errors=0 error=1400 controlled=1$')) {
+    throw 'Controlled dead menu-window enrollment did not preserve its error'
 }
 if ($Case -eq 'graph-snapshot' -and
     !($fixtureOutput -match '^WOW_NATIVE_SLOT_REUSE_CCPU errors=0 attempts=[1-9][0-9]* old=[0-9a-f]{8} new=[0-9a-f]{8} old_backing=[0-9a-f]{8} new_backing=[0-9a-f]{8}$')) {
@@ -680,6 +731,18 @@ if ($Case -eq 'graph-snapshot') {
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource') -and
     !($fixtureOutput -match '^WOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1$')) {
     throw 'Native mutation group failed numeric class, scrolling, frame or iconic publication'
+}
+if ($Case -eq 'window-reclaim' -and
+    !($fixtureOutput -match '^WINDOW_INDEX_COLLISION exact=3 middle_remove=1 address_reuse=1 empty=1$')) {
+    throw 'Window record collision, exact identity or address reuse was not verified'
+}
+if ($Case -eq 'window-reclaim' -and
+    !($fixtureOutput -match '^CLASS_STORAGE_TEARDOWN empty=1$')) {
+    throw 'Class ownership or derived index survived domain teardown'
+}
+if ($Case -eq 'window-reclaim' -and
+    !($fixtureOutput -match '^CLASS_INDEX_FAULT collisions=3 failure_retained=1 freed_missing=1 reused_address=[01]$')) {
+    throw 'Class retirement failure, collision traversal or address reuse was not verified'
 }
 if ($Case -eq 'window-reclaim' -and
     !($fixtureOutput -match '^WOW_DEFERRED_RECLAIM_CCPU errors=0 consumed_once=1 class_guard=1 retry=1 retained_owner=1 released=1$')) {
@@ -817,6 +880,10 @@ if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1$')) {
     throw 'Terminal failure lost its table-owned cleanup obligation after native destruction'
 }
+if ($Case -in @('window-borrow','graph-snapshot') -and
+    !($fixtureOutput -match '^WOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1$')) {
+    throw 'Duplicate graph slot was not rejected without publication and allocation leaks'
+}
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1$')) {
     throw 'Graph preparation exposed a partial window or lost rollback ownership'
@@ -824,6 +891,10 @@ if ($Case -eq 'window-borrow' -and
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1$')) {
     throw 'Dead graph replacement partially changed surviving edges or lost retained backing'
+}
+if ($Case -eq 'window-borrow' -and
+    !($fixtureOutput -match '^WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1$')) {
+    throw 'Same-scope graph refresh lost a created or destroyed child'
 }
 if ($Case -eq 'window-borrow' -and
     !($fixtureOutput -match '^WOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1$')) {
@@ -870,6 +941,7 @@ if ($Case -eq 'start-notification' -and
     throw 'Start notification fixture exited without its successful completion marker'
 }
 if ($null -eq $fixtureExitCode -or $fixtureExitCode -ne 0) { throw "Task cleanup fixture failed: exit=$fixtureExitCode case=$Case" }
+if ($RetirementLockProbe -and !($fixtureOutput -match '^WOW_RETIREMENT_LOCK competitor_excluded=1$')) { throw 'Retirement lock witness missing' }
 if ($Case -in @('task-lifecycle','native-send','native-reply','native-nested','native-seen','native-identity','native-foreign','native-indirect')) {
     if (!($fixtureOutput -match '^WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=\d+ own_preserved=1$') -or
         !($fixtureOutput -match '^WOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64$') -or
@@ -904,8 +976,14 @@ if ($Case -eq 'native-indirect' -and
     throw 'Indirect native notification or sent-only posted/quit preservation failed'
 }
 if ($Case -eq 'native-nested') {
+    if (!($fixtureOutput -match '^WOW_SUSPENDED_CALLBACK_SCOPE errors=0 owner=1 restore=1 last_error=1$')) {
+        throw 'Suspended native callback did not restore task ownership, execution scope and error'
+    }
     if (!($fixtureOutput -match '^WOW_NATIVE_WAIT_UNWIND errors=0 lifo=1 native_continuation=1 last_error=1$')) {
         throw 'Native scheduler-wait unwind lost its previous execution frame or error'
+    }
+    if (!($fixtureOutput -match '^WOW_NATIVE_MSG_WAIT_NONOWNER errors=0 result=1 lifo=1 last_error=1$')) {
+        throw 'Native message wait returned without preserving the suspended execution scope'
     }
     foreach ($held in 0,1) {
         if (!($fixtureOutput -match ("^WOW_NATIVE_RECEIVER_EXIT_RETURN held="+$held+" error=(0|1400|1460) retired=1 owner=1$"))) {

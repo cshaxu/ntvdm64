@@ -1,0 +1,11 @@
+{
+  "result": "pass",
+  "pid": 27912,
+  "started": "2026-10-29T05:19:31.1687527Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\x86-other.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/x86-other.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/x86-other.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:21:38.3916539Z"
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-integrated\\package\\system32\\COMMAND.COM",
+    "Hash": "908A77AC617C2D741F0AA1B73F73973DCF29ADC91F092E5BCB02173C8C732C43"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\command_environment_trace.c",
+    "Hash": "B9A9399099F3973B46E6FEC770A0F57CFC7BB89A1653043EEB90CF333FEFBAFE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wow-env-owner-diagnostic\\ntvdm.exe",
+    "Hash": "4E51DCC1D4FB5A84E84DF010992F8C3B9A47957EFC5EE6DC8BE38666AF59777D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wow-env-owner-diagnostic-package\\inputs\\ntvdm.exe",
+    "Hash": "4E51DCC1D4FB5A84E84DF010992F8C3B9A47957EFC5EE6DC8BE38666AF59777D"
+  }
+]

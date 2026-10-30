@@ -54,10 +54,11 @@ int main(void)
     if (!FlushConsoleInputBuffer(input) ||
         !WriteConsoleInputW(input, supplied, 2u, &written) || written != 2u ||
         !ReadConsoleInputExW(input, delivered, 2u, &read, 0u)) return 4;
-    if (read != 1u || delivered[0].EventType != KEY_EVENT ||
-        delivered[0].Event.KeyEvent.wVirtualKeyCode != 'A' ||
-        observed_count != 1u ||
-        observed_event.kind != SESSION_VIDEO_EVENT_DISPLAY_TOGGLE) return 5;
+    if (read != 2u || delivered[0].EventType != KEY_EVENT ||
+        delivered[0].Event.KeyEvent.wVirtualKeyCode != VK_RETURN ||
+        delivered[1].EventType != KEY_EVENT ||
+        delivered[1].Event.KeyEvent.wVirtualKeyCode != 'A' ||
+        observed_count != 0u) return 5;
     if (!session_thread_unbind(&owner) || !session_dispose(&owner)) return 6;
     CloseHandle(input);
     if (allocated_console) FreeConsole();

@@ -1,0 +1,11 @@
+{
+  "result": "fail",
+  "pid": 14644,
+  "started": "2026-10-29T05:10:48.3034182Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\serial-fallback.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/serial.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/serial.stderr.txt",
+  "exit": 1120,
+  "finished": "2026-10-29T05:13:43.9193506Z"
+}

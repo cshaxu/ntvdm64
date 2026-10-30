@@ -1,0 +1,31 @@
+{
+  "result": "fail",
+  "started": "2026-10-29T05:57:08.8500954Z",
+  "runs": [
+    {
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File tests/observation/verify-wow-mine-gameplay.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/visible-mine-final -VisibleDesktop",
+      "name": "mine",
+      "exit": 0,
+      "started": "2026-10-29T05:57:08.8982288Z",
+      "pid": 32664,
+      "finished": "2026-10-29T05:57:22.4240961Z"
+    },
+    {
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File tests/observation/verify-wow-sol-gameplay.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/visible-sol-final -VisibleDesktop",
+      "name": "sol",
+      "exit": 0,
+      "started": "2026-10-29T05:57:22.4415925Z",
+      "pid": 28748,
+      "finished": "2026-10-29T05:57:35.9069271Z"
+    },
+    {
+      "arguments": "-NoProfile -ExecutionPolicy Bypass -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64/build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/visible-options-final -VisibleDesktop -Rounds 4",
+      "name": "options",
+      "exit": 1,
+      "started": "2026-10-29T05:57:35.9242360Z",
+      "pid": 24060,
+      "finished": "2026-10-29T05:57:56.6338277Z"
+    }
+  ],
+  "finished": "2026-10-29T05:57:56.6412569Z"
+}

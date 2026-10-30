@@ -1,0 +1,50 @@
+diff --git a/src/mvdm/softpc.new/base/bios/virtual.c b/src/mvdm/softpc.new/base/bios/virtual.c
+index b0d866294..a55e8b1f8 100644
+--- a/src/mvdm/softpc.new/base/bios/virtual.c
++++ b/src/mvdm/softpc.new/base/bios/virtual.c
+@@ -413,6 +413,9 @@ LOCAL IBOOL allocate_NIDDB IFN2
+ 		  host_free(*p);
+ 	       }
+ 
++	    /* MVDM-HOST-DIV-468: the table is not published in vrecs on
++	       failure, so it must be released along with its data blocks. */
++	    host_free(instance_ptr);
+ 	    return FALSE;
+ 	    }
+ 	 }
+@@ -503,6 +506,7 @@ LOCAL void delete_NIDDB IFN1
+    {
+    int i;
+    IHP *instance_ptr;
++   IU8 previous_virtual_byte = last_virtual_byte;
+ 
+    /* Ensure instance is active (for terminate callback). */
+    swap_NIDDB(record_id);
+@@ -531,6 +535,27 @@ LOCAL void delete_NIDDB IFN1
+    /* Initialise virtual record entry */
+    vrecs[record_id].vr_pinst_tbl = (IHP *)0;
+    vrecs[record_id].vr_inst_handle = (IU32)0;
++
++   /* DIVERGENCE MVDM-HOST-DIV-467: the termination callback must run with
++      the retiring instance active, but its freed data must not remain in
++      master_ptrs. Restore the previously active instance if it survived. */
++   if (previous_virtual_byte != record_id && previous_virtual_byte < MAX_VMS &&
++       vrecs[previous_virtual_byte].vr_pinst_tbl != (IHP *)0)
++      {
++      swap_NIDDB(previous_virtual_byte);
++      return;
++      }
++   for (i = 0; i < MAX_VMS; ++i)
++      if (vrecs[i].vr_pinst_tbl != (IHP *)0)
++         {
++         swap_NIDDB((IU8)i);
++         return;
++         }
++   /* A system-exit or reboot notification will unlock allocations after
++      restoring the snapshot. Until then, keep the pointers valid. */
++   for (i = 0; i < MAX_INSTANCES; ++i)
++      master_ptrs[i] = snapshot_ptrs[i];
++   last_virtual_byte = (IU8)0xff;
+    }
+ 
+ /* Return true if any data instance is extant */

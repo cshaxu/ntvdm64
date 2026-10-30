@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7F18D558B79E87E9D381BDB31F8111C2946EDB98F74870FA3548401D584F625A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A4D441B5B683715A9649E0031AE4AFC640CE8458FE9A188B2792BAEBC2EBB65B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2CE43635CF31A5641BB6A0270632545B638768416C3F31C98A3620DEC16857B3",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\projection-index-candidate\\ntvdm.exe"
+  }
+]

@@ -1,0 +1,27 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D39F554252BE450CB3B83B70060D3E3D35CD933938384FAA6BEE25CBBEB2B74C",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-unwind\\fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "0EB6D0A4B5F21F44FA7F8F5B48317715896A7E7C2695F7DD981F6B59B753D2EA",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-unwind\\unwind.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "DC8781CF96F498C2032EB6B700F4223D272503CCB742C9B096F5A8B2A295EB21",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-unwind\\unwind-out.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "19B514574AC1106C3E4F50F00FC99F2B0A89AAE5F1A9BEBDADF7F165F9D3CA87",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-unwind\\unwind-trace.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-unwind\\fixture-exit.txt"
+  }
+]

@@ -55,6 +55,9 @@ function(ntvdm_generate script)
     -File "${CMAKE_SOURCE_DIR}/tools/build/${script}" ${ARGN} ${_cache_args}
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
 endfunction()
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/obj.vdm/ntvdm.src"
+  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv")
 ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
   -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
   -NodeExecutable "${NTVDM_NODE}"

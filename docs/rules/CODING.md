@@ -60,6 +60,16 @@ monitor-adapter material.
   dependency, rejected earlier rungs, smallest new ABI, failure contract,
   focused test and disposition.
 
+## Optimization evidence
+
+Preserve behavior, correctness and lifetime rules. Evaluate code size,
+elapsed time and memory separately; reducing code without reducing elapsed
+time is a valid optimization. Owner clarification dated 2026-10-29 requires
+reverting an optimization that adds code without demonstrated time reduction.
+Do not retain speculative complexity on an expected future benefit. Record
+the measured inputs, comparison and tradeoffs. Correctness repairs are reviewed
+against their defect contract, not presented as performance optimizations.
+
 ## Placement and dependencies
 
 - Place each production file in one of the architecture roots declared by the

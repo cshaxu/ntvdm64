@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8733E942BFCB0E3D3AFE198B7445D0CF576B50C01A55F23940D1E8D627A677F3",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_reclaim_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "08BD1AB9AF970A9C345C231DE9EFE135985B327677E46B6C18B3BE1B6921E117",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "B70ABB46BDEFC542A934A3B178902C5A9D6329D3CC513C97B20C61029068A487",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "47B929CE56592B02F945E306E998FD6F175E8C19C1F2AFEA2CA1611F786341EB",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-cross\\native-nested.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "ECB2DF9B41B2392587CC0EB5134218BEE7E9ED38AA6322608B995E4C53209A25",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-cross\\graph-snapshot.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "652AAEB183A1FB72B8CFE7162693A1FA6D0B86FF4B2E411FFEFE3C3FEAE88215",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-cross\\native-creation.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EC30142C409DC257E928835E01FDB4466FB257DC5EB999230F174FF3A3611698",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-checked\\mvdm_softpc_wow_page_domain.obj"
+  }
+]

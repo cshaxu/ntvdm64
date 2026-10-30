@@ -1,0 +1,34 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bounded_execution_fixture.c",
+    "Hash": "40B5892D3A6829FC4585AA4AC4675E76534756BE8BDFCE77F1F8C7DA21CD7D8E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bit_memory_oracle.c",
+    "Hash": "6375FB7735EE6BFD1AE276EC79419659A731A546D631C94B48CD796723E1FAB2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-bit-matrix.py",
+    "Hash": "5659F805AC26914B18B5F113F0E417038F750037DB69F98D708FD0A9C5C409BE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-family-boundary\\fixture.exe",
+    "Hash": "5489980D2037F964C6CC44B1660A8BBAEDDD2AD4159CD70F9C30CECBA42F001B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-family-boundary\\fixture.map",
+    "Hash": "3AD8ABF008CA5B46D5CB7183E9AD896E48453E870661FEE798A245DA26F029B8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-family-boundary\\baseline.exe",
+    "Hash": "EA27245DC71397C893C775BBA3A22594F2BD1473B8974D1BFD2B99A90D438899"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\original-ccpu386.lib",
+    "Hash": "806DBC17FD2631FFED1C1313827C81A57A2C265280B315FA037196B689E95AC0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-baseline\\c_oprnd.h",
+    "Hash": "EC6218385A7A9FA6425A9E70DFFDBA8AEEAAFF11D73893EC8B853547F3FE677F"
+  }
+]

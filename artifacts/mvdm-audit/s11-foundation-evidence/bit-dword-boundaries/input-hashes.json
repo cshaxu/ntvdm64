@@ -1,0 +1,42 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F9D34C0FF23AC6AEDBE95999B5280B1A68D96C144BAFF7C3135EFFBD380B7CD5",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bounded_execution_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9B81AFF12935693A8DCDEC71283220DABB0CC3B43AEA235F495924115EE06588",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bit_memory_oracle.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "26FEB9EC63E9C4CC625C0E3216B8F19E4B360F3AA21AE19C7893E6ED7EFE4A29",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-bit-matrix.py"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F027E12DB87EF085C9524920EE2AC1976D3A644BE44C2F8CF2D82816537F4920",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-dword-boundary\\ccpu_bit_matrix_fixture.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "705DE85B022B27229BD89368C27DC341217963B0A7C334082A0F141E604B4E1E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-boundary\\native.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9EF9EB2E94394C6DE9DE3BFB4228DD432A7E72C3BD72BBDE8BC9C4A4388F452A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-dword-boundary\\fixture.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "FEFF85BF35284BE4013983838EACD0429D76B442E0DBFD4EFEA4A9A1AC3F532D",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\bit-boundary\\native.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F0EC1FE38AFBF776AE035FCC7C39AD2EC06C014523C4DFDF8F14332E9CF8DED4",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_main.obj"
+  }
+]

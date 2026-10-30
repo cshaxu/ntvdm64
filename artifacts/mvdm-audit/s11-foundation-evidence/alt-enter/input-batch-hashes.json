@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "42E9C091339A2DA28C47B692D99E3CBF0307707239D3F11FBC435679751FCD05",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\app\\console_input_batch_test.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D63D1695771C6B17958452967220FF5D1A6F4943832A1D2D7DC7D98EA34078C6",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\app\\console_input_batch_stubs.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F1D86DE0CA80D97EB6E2EA995BD7E377D2E20465CD76A170E16F9C2175E0CB06",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-console-input-batch.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8E740C6A0C3346576D97F3428E831DC51207A0E576F2531CC29D70DC8669C450",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\alt-enter-input-fixture-r6\\console-input-batch.exe"
+  }
+]

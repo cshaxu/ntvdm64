@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 10136,
+  "started": "2026-10-29T05:56:12.2878650Z",
+  "arguments": "tests/observation/verify-ccpu-bit-matrix.py --build-root build/t473-s11/bit-matrix-v3",
+  "exit": 0,
+  "finished": "2026-10-29T05:56:13.2838841Z"
+}

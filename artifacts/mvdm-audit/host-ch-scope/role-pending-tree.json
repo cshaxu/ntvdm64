@@ -1,0 +1,1956 @@
+{
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "by_top_level": {
+    "dos": 38,
+    "wow16": 240
+  },
+  "rows": [
+    {
+      "path": "dos/v86/cmd/command/buildmsg.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/cmd/command/usa-ms/bldmsg.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/cmd/mem/parse.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/assert.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/bios.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/conio.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/copyrigh.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/ctype.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/direct.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/dos.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/errno.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/fcntl.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/float.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/graph.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/io.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/limits.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/malloc.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/math.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/memory.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/process.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/search.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/setjmp.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/share.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/signal.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/stdarg.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/stddef.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/stdio.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/stdlib.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/string.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/time.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/varargs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/version.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/h/versionc.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/tools/src/buildidx/buildidx.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/tools/src/getsize/getsize.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/tools/src/h2inc/h2inc.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/tools/src/stripdd/stripdd.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "dos/v86/tools/src/stripz/stripz.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, build tool or shared ABI requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/_xlib.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/cderr.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/colordlg.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/commdlg.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/dlgs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/font.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/isz.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/parse.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/privcomd.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/commdlg/xlib.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ctl3dv2/ctl3d.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ctl3dv2/loaddib.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ctl3dv2/version.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/ddemlp.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/heapwach.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/client.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/cmdln.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/ddestrs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/globals.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/server.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/wrapper.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/ddestrs/wrapper.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/clinit.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dde.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/ddemlcl.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dialog.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/dialog.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/huge.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/huge.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/infoctrl.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/mem.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/track.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/client/track.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/ddemo/ddemo.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/dde.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/ddemlsv.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/dialog.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/dialog.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/huge.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/huge.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/tests/src/server/server.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "整体排除",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ddeml/verddeml.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/drivers/comm/comdev.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/drivers/comm/comdevi.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/gdi/fontres.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/gdi/gdi16.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/gdi/meta.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/gdi/metarec.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/gdi/metasup.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/cderr.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/cmstrip.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/commdlg.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/cpl.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/custcntl.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/dbcs.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/dbcs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/dde.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/ddeml.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/debug.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/dlgs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/drivinit.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/ime.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/io.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/logerror.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/lzdos.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/lzexpand.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/memory.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/mmddk.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/mmsystem.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/multires.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/ole.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/penwin.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/print.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/printer.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/shellapi.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/spl_wnt.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/spool.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/stdarg.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/stdio.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/stdlib.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/string.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/strtable.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/style.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/testing.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/time.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/userproc.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/ver.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/version.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/w32sys.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/wfwnet.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/wife.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/windows.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/windowsx.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/winexp.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/winnet.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/winnls.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/inc/wmsyserr.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/disasm.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/error.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/fixexe.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/ikernel.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/kernel.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/lzexp.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/newexe.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/rip.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/swappro/swap.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/kernel31/up.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mciole/mciole.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mciole/ole.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mciole/shellapi.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/debug.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/drvr.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/drvr.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/drvrrare.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/drvrstr.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/gmem.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/idrv.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mixmgri.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmiocf.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmiocf.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmioi.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmreg.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmsex.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmsysi.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/mmtask/mmtask.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/playwav.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/rinc/mmsysver.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/mmsystem/thunks.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/cmacs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/dll.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/funchead.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/ole.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/ole.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/client/pict.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/server/olever.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/ole/server/srvr.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/rasapi16/bseerr.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/rasapi16/ras.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/rasapi16/raserror.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/common.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/reg1632.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/regdef.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/regedit.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/regporte.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/regresid.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/regedit/sdkreged.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/shell/dragdrop.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/sherlock/disasm.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/sherlock/drwatson.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/sherlock/str.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/test/hello/hello.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/test/hello/hello.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/test/shell/wowexec.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/test/shell/wowexec.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/test/shell/wowexfax.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/toolhelp/class1.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/toolhelp/string.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/toolhelp/toolhelp.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/toolhelp/toolpriv.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/combcom.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/comdev.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/comdev.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/comdevi.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/edecrare.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/edit.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/editec.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/editml.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/editsl.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/edmlonce.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/edmlrare.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/edslrare.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/iuser.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/msutil.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/netdlg.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/user.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/wmsyserr.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/user/wsubcls.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/wfwnet/bseerr.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/wfwnet/locals.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/win87em/win87em.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/winoldap/winoldap.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/wowdeb/wowdeb.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/aaa.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/bitmaps.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/ch.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/chlook.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/cmddefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/code.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/d_disp.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/d_form1.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/d_selec2.c",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/dbcs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/debug.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/diachgpr.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/diaprint.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/dispdefs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/dlgdefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/docdefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/doslib.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/editdefs.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/editftn.c",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/editsect.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/ffdefs.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/filedefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/fkpdefs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/fmtdefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/fontdefs.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/form1.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/globdefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/heapdata.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/heapdefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/heapinit.c",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/help.c",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/kanji.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/looks.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/machdefs.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/macro.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/menudefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/mergedef.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/mouse.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/mw.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/obj.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/objreg.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/preload.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/printdef.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/prmdefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/propdefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/rulerdef.h",
+      "shard": "shard-2/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/scrndefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/stcdefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/str.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "partial",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/toolbox.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/txb.h",
+      "shard": "shard-0/review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/winddefs.h",
+      "shard": "shard-1/file-audit.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    },
+    {
+      "path": "wow16/write/wwdefs.h",
+      "shard": "shard-3/file-review.csv",
+      "ledger_status": "excluded",
+      "scope": "role-pending",
+      "scope_limit": "guest, shared ABI or host use requires per-file role review"
+    }
+  ],
+  "limitation": "Directory grouping is not proof of guest-only status, reachability, or disposition."
+}

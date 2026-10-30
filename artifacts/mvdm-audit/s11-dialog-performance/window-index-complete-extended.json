@@ -1,0 +1,18 @@
+[
+  {
+    "exit": 0,
+    "case": "sibling"
+  },
+  {
+    "exit": 0,
+    "case": "notepad"
+  },
+  {
+    "exit": 0,
+    "case": "winmine"
+  },
+  {
+    "exit": 0,
+    "case": "progman"
+  }
+]

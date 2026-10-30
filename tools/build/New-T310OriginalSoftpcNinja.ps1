@@ -165,7 +165,7 @@ $embeddedRomSources = @(
     (Join-Path $root 'src/mvdm/softpc.new/roms/bios4.rom'),
     (Join-Path $root 'src/mvdm/softpc.new/roms/v7vga.rom')
 )
-$hostExportDefinition = Join-Path $hostEntryRoot 'obj/i386/ntvdm.def'
+$hostExportDefinition = Join-Path $hostEntryRoot 'ntvdm.src'
 $redirResourceSource = Join-Path $redirRoot 'vdmredir.rc'
 $redirExportDefinition = Join-Path $redirRoot 'vdmredir.def'
 $ccpuNames = Get-OriginalSources $ccpuManifest
@@ -440,8 +440,12 @@ New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated') | Out
 # surface only for the standalone composition.  Every entry below already has
 # one selected source owner in the parent; this file introduces no body.
 $wow32ProviderExportDefinition = Join-Path $build 'generated/ntvdm-wow32-provider.def'
+$preprocessedExportDefinition = Join-Path $build 'generated/ntvdm-original-cpu40.def'
+& cmd.exe /d /s /c ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi"' + $preprocessedExportDefinition + '" /Di386 /DCPU_40_STYLE "' + $hostExportDefinition + '"')
+if ($LASTEXITCODE -ne 0) { throw 'Original NTVDM export template preprocessing failed' }
 $wow32ProviderExportLines = [Collections.Generic.List[string]]::new()
-foreach ($line in Get-Content -LiteralPath $hostExportDefinition) {
+foreach ($line in Get-Content -LiteralPath $preprocessedExportDefinition) {
+    if ($line -match '^\s*#\s*line\b') { continue }
     if ($line -match '^\s*NAME\s+') {
         # The selected three-program worker retains the original ntvdm.exe
         # module identity.  WOW32 is late-loaded by that worker, so its import
@@ -462,8 +466,7 @@ foreach ($entry in @(
     'OpenNtBaseClientRetireWowTask=_OpenNtBaseClientRetireWowTask@8',
     'OpenNtBaseClientFailWowTaskClose=_OpenNtBaseClientFailWowTaskClose@8',
     'NtvdmAuthorizeExit=_NtvdmAuthorizeExit@4',
-    'VdmAllocateVirtualMemory', 'VdmFreeVirtualMemory',
-    'VdmAddVirtualMemory', 'VdmRemoveVirtualMemory',
+    'Sim32FlushVDMPointer',
     'VdmAddDescriptorMapping', 'SetWOWforceIncrAlloc',
     'GetNextVDMCommand=_GetNextVDMCommand@4',
     'RegisterWowExec=_RegisterWowExec@4',
@@ -586,11 +589,44 @@ foreach ($entry in @(
     'ntvdm_shadow_reg_query_value',
     'ntvdm_shadow_reg_enum_key',
     'opennt_exit_thread=_opennt_exit_thread@4',
-    'opennt_support_current_teb=_opennt_support_current_teb@0',
     'mvdm_softpc_effective_address'
     'mvdm_softpc_protected_address'
 )) {
     $wow32ProviderExportLines.Add('    ' + $entry)
+}
+# Explicitly retain the released NTVDM ordinal ABI while adding original
+# CPU40 entries. Otherwise LINK renumbers implicit exports when names change.
+$ordinalFile = Join-Path $root 'src/ntvdm-exe/ntvdm-export-ordinals.csv'
+$ordinals = @{}
+$ordinalNumbers = @{}
+foreach ($row in Import-Csv -LiteralPath $ordinalFile) {
+    $ordinal = 0
+    if (!$row.name -or ![int]::TryParse($row.ordinal, [ref]$ordinal) -or
+            $ordinal -lt 1 -or $ordinal -gt 65535 -or
+            $ordinals.ContainsKey($row.name) -or $ordinalNumbers.ContainsKey($ordinal)) {
+        throw "Invalid or duplicate NTVDM export ordinal: $($row.name) $($row.ordinal)"
+    }
+    $ordinals[$row.name] = $ordinal
+    $ordinalNumbers[$ordinal] = $true
+}
+$seenOrdinals = @{}
+for ($i = 0; $i -lt $wow32ProviderExportLines.Count; ++$i) {
+    $line = $wow32ProviderExportLines[$i]
+    if ($line -match '^\s*([A-Za-z_][A-Za-z0-9_]*)(\s*=\s*[^\s;]+)?(\s+DATA)?(\s*(?:;.*)?)$' -and
+            $ordinals.ContainsKey($Matches[1])) {
+        $name = $Matches[1]
+        if ($seenOrdinals.ContainsKey($name)) { throw "Duplicate NTVDM export: $name" }
+        $seenOrdinals[$name] = $true
+        $wow32ProviderExportLines[$i] = '    ' + $name + $Matches[2] + ' @' + $ordinals[$name] + $Matches[3] + $Matches[4]
+    }
+}
+foreach ($name in ($ordinals.Keys | Sort-Object)) {
+    # Some released entries originate from dllexport rather than the DEF;
+    # explicitly assigning them retains their ordinal and requires the real
+    # provider to resolve at link time.
+    if (!$seenOrdinals.ContainsKey($name)) {
+        $wow32ProviderExportLines.Add('    ' + $name + ' @' + $ordinals[$name])
+    }
 }
 $wow32ProviderExportText = ($wow32ProviderExportLines -join [Environment]::NewLine) + [Environment]::NewLine
 if (!(Test-Path -LiteralPath $wow32ProviderExportDefinition) -or
@@ -1960,6 +1996,10 @@ $graph.Add('build s44-bop-vdd.dll: s44_test_vdd_link obj/tests/s44_bop_vdd.obj n
 $graph.Add('build s44-entry-hook-vdd.dll: s44_test_vdd_link obj/tests/s44_entry_hook_vdd.obj ntvdm.lib')
 $graph.Add('build s44-memory-vdd.dll: s44_test_vdd_link obj/tests/s44_memory_vdd.obj ntvdm.lib')
 $graph.Add('build s44-terminate-vdd.dll: s44_test_vdd_link obj/tests/s44_terminate_vdd.obj ntvdm.lib')
+$graph.Add('build obj/tests/ntvdm_export_live_vdd.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ntvdm_export_live_vdd.c')))
+$graph.Add('rule ntvdm_export_live_vdd_link')
+$graph.Add('  command = link.exe /nologo /dll /machine:x86 /entry:VDDInitialize@12 /export:VDDInitialize=_VDDInitialize@12 /out:$out $in kernel32.lib')
+$graph.Add('build ntvdm-export-live-vdd.dll: ntvdm_export_live_vdd_link obj/tests/ntvdm_export_live_vdd.obj ntvdm.lib')
 $graph.Add('build debugger-event-tests: phony debugger-event-transport-test.exe debugger-module-event-test.exe debugger-worker-module-observer.exe')
 $graph.Add('build dpmi-debug-tests: phony ccpu-debug-match-test.exe debug-register-binding-test.exe debugger-event-transport-test.exe debugger-module-event-test.exe ccpu-halt-reset-test.exe')
 $ccpuThreadLifecycleFixtureObject = 'obj/tests/ccpu_thread_lifecycle_test.obj'
@@ -1973,6 +2013,24 @@ $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/
 $highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
 $graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
 $graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('rule ccpu_bit_matrix_cc')
+$graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DCCPU_BIT_MATRIX /Fo$out $in')
+$graph.Add('  deps = msvc')
+$graph.Add('  msvc_deps_prefix = Note: including file: ')
+$graph.Add('build obj/tests/ccpu_bit_matrix_fixture.obj: ccpu_bit_matrix_cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
+$graph.Add('build ccpu-bit-matrix-test.exe: memory_test_link obj/tests/ccpu_bit_matrix_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_bit_fault_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bit_fault_fixture.c')))
+$graph.Add('build ccpu-bit-fault-test.exe: memory_test_link obj/tests/ccpu_bit_fault_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_x87_span_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_x87_span_fixture.c')))
+$graph.Add('build ccpu-x87-span-test.exe: memory_test_link obj/tests/ccpu_x87_span_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_x87_page_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_x87_page_fixture.c')))
+$graph.Add('build ccpu-x87-page-test.exe: memory_test_link obj/tests/ccpu_x87_page_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build obj/tests/ccpu_bit_memory_oracle.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bit_memory_oracle.c')))
+$graph.Add('rule ccpu_native_oracle_link')
+$graph.Add('  command = link.exe /nologo /out:$out $in kernel32.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib')
+$graph.Add('build ccpu-bit-native-oracle.exe: ccpu_native_oracle_link obj/tests/ccpu_bit_memory_oracle.obj')
+$graph.Add('build obj/tests/ccpu_far_exception_fixture.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_far_exception_fixture.c')))
+$graph.Add('build ccpu-far-exception-test.exe: memory_test_link obj/tests/ccpu_far_exception_fixture.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/ccpu_stack_transition_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_stack_transition_test.c')))
 $graph.Add('build ccpu-stack-transition-test.exe: memory_test_link obj/tests/ccpu_stack_transition_test.obj ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('build obj/tests/keyboard_controller_pic_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/keyboard_controller_pic_test.c')))

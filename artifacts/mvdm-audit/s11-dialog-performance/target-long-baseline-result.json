@@ -1,0 +1,8 @@
+{
+  "result": "pass",
+  "pid": 7104,
+  "started": "2026-10-29T06:38:44.9184242Z",
+  "arguments": "-NoProfile -File tests/observation/verify-wow-sol-options.ps1 -PackageRoot O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\final-stage\\package -Observer O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe -CompilerDriver O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/borrow-target-long-baseline-observation -VisibleDesktop -Rounds 1 -NoTrace -DialogWaitMs 30000",
+  "exit": 0,
+  "finished": "2026-10-29T06:39:09.1124684Z"
+}

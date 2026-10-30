@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\adapter-mvdm-host-out\\wow\\wow_user_task_lifecycle_fixture.c",
+    "Hash": "95CD15B599168D485A930BE24BF2CB511485FCEA043BFB2C8D703F290E90970D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "19FE549B066F9210E8A420F56BD7B38F6D846000B91890AC9AFE06C291D8F2FF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-suspended-callback\\fixture.obj",
+    "Hash": "2814C82F996042D602E542058CAED8D478379FA61C2D8EF50D3AB2EDBEC22F54"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-suspended-callback\\fixture.exe",
+    "Hash": "9C823A9A5A3B51E99AEF94D45DE06E435577A3FBB2912D7F0A584E04EF45208E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-suspended-callback\\fixture.map",
+    "Hash": "2C8F0AC1C868961A44735EA4DC6F9AA9AC89AAFB182DC4AFEB6D129FB94EC03B"
+  }
+]

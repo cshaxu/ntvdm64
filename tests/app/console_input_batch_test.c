@@ -133,8 +133,22 @@ int main(void)
     queue[0].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;queue[0].Event.KeyEvent.dwControlKeyState=LEFT_ALT_PRESSED;
     queue[1]=queue[0];queue[1].Event.KeyEvent.bKeyDown=FALSE;queue[1].Event.KeyEvent.dwControlKeyState=0;
     for(i=2;i<5;++i) {queue[i].EventType=MOUSE_EVENT;queue[i].Event.MouseEvent.dwMousePosition.X=(SHORT)i;}
-    CHECK(ReadConsoleInputExW(input,out,5,&got,CONSOLE_READ_NOWAIT) && got==3 && reads==1);
-    for(i=0;i<got;++i) CHECK(out[i].Event.MouseEvent.dwMousePosition.X==(SHORT)(i+2));
-    printf("BATCH-KEY expansion/mixed-order/capacity/shortcut PASS\n");
+    CHECK(ReadConsoleInputExW(input,out,5,&got,CONSOLE_READ_NOREMOVE) && got==1 && position==0);
+    CHECK(!memcmp(&out[0],&queue[0],sizeof(out[0])));
+    CHECK(ReadConsoleInputExW(input,out,5,&got,CONSOLE_READ_NOWAIT) && got==5 && reads==1);
+    for(i=0;i<got;++i) CHECK(!memcmp(&out[i],&queue[i],sizeof(out[i])));
+    reset(4);
+    for(i=0;i<4;++i) {
+        queue[i].EventType=KEY_EVENT;
+        queue[i].Event.KeyEvent.bKeyDown=(i%2u)==0u;
+        queue[i].Event.KeyEvent.wVirtualKeyCode=VK_RETURN;
+        queue[i].Event.KeyEvent.dwControlKeyState=RIGHT_ALT_PRESSED |
+            (i>=2u ? LEFT_CTRL_PRESSED : 0u);
+    }
+    CHECK(ReadConsoleInputExW(input,out,4,&got,CONSOLE_READ_NOREMOVE) && got==1 && position==0);
+    CHECK(!memcmp(&out[0],&queue[0],sizeof(out[0])));
+    CHECK(ReadConsoleInputExW(input,out,4,&got,CONSOLE_READ_NOWAIT) && got==4 && reads==1);
+    for(i=0;i<got;++i) CHECK(!memcmp(&out[i],&queue[i],sizeof(out[i])));
+    printf("BATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\n");
     return 0;
 }

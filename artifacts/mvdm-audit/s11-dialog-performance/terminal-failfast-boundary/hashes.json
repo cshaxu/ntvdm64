@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-candidate\\wow_window_words_binding.obj",
+    "Hash": "F049EA65152CEE20DA0F03E13768593B57BD0F6CA77E5A6E94939BD94A38F9A5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-fixture\\fixture.exe",
+    "Hash": "74411CA61CE61580AA8C2D3C5E89607058254EFF3568A308D9CF8359865BCF5D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-failfast-deferred\\fixture.exe",
+    "Hash": "9610E0FFB9F47BD47385658F99B60807BED56404276A7E8F92507C080B89355D"
+  }
+]

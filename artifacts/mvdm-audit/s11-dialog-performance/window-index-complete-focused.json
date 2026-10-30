@@ -1,0 +1,18 @@
+[
+  {
+    "exit": 0,
+    "case": "graph-snapshot"
+  },
+  {
+    "exit": 0,
+    "case": "window-borrow"
+  },
+  {
+    "exit": 0,
+    "case": "window-reclaim"
+  },
+  {
+    "exit": 0,
+    "case": "sol"
+  }
+]

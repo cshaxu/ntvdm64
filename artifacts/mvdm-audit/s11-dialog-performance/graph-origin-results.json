@@ -1,0 +1,179 @@
+{
+  "purpose": "Isolated graph caller attribution; no production change",
+  "result": {
+    "exit": 1,
+    "finished": "2026-10-29T17:42:42.0104738Z"
+  },
+  "build": {
+    "finished": "2026-10-29T17:41:44.7783935Z",
+    "source": "FF5AF122ABD9E634CA3BEE1D2E15C2FD46FCA241F5A9D985D06889C549613E9A",
+    "exit": 0
+  },
+  "runner": {
+    "pid": 20068,
+    "start": "2026-10-29T17:42:04.120878Z",
+    "host": "C:\\Users\\neko\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+    "script": "1B380B666C054BD4C0F2402EDFD71A012C050297932B8A59EF8265C4A6CD9064"
+  },
+  "symbols": [
+    " 0001:0005ea30       _wow_user_borrow_window_state@4 1005fa30 f   wow_user_borrow_scope.obj",
+    " 0001:0006e4a0       _wow_window_client_prepare_graph@4 1006f4a0 f   wow_window_client_state_bindings.obj",
+    " 0001:000612f0       _publish_guest_return@8    100622f0 f   wow_user_task_lifecycle.obj",
+    " 0002:0000c870       __sehtable$_wow_window_client_prepare_graph@4 1009c870     wow_window_client_state_bindings.obj"
+  ],
+  "counters": "tid=236 caller-rva=000623D5 calls=16 nodes=2439 ticks=426760 hz=10000000\r\ntid=236 caller-rva=000623D5 calls=32 nodes=8009 ticks=1399556 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=16 nodes=347 ticks=79272 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=32 nodes=1045 ticks=190033 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=48 nodes=2092 ticks=438485 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=64 nodes=3839 ticks=814316 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=1 nodes=349 ticks=76540 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=1 nodes=350 ticks=72342 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=73 nodes=6997 ticks=1465614 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=13 nodes=4563 ticks=1019492 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=16 nodes=5615 ticks=1192002 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=73 nodes=6997 ticks=1465614 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=16 nodes=5619 ticks=1243943 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=18 nodes=6319 ticks=1351117 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=80 nodes=9467 ticks=1998447 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=27 nodes=9501 ticks=2080292 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=27 nodes=9496 ticks=2022451 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=81 nodes=9821 ticks=2072867 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=31 nodes=10917 ticks=2379077 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=32 nodes=11266 ticks=2410346 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=81 nodes=9821 ticks=2072867 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=32 nodes=11271 ticks=2454593 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=32 nodes=11266 ticks=2410346 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=89 nodes=12661 ticks=2699407 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=48 nodes=16955 ticks=3665122 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=46 nodes=16241 ticks=3487940 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=91 nodes=13373 ticks=2854478 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=50 nodes=17667 ticks=3816966 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=48 nodes=16954 ticks=3634921 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=96 nodes=15159 ticks=3239341 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=59 nodes=20881 ticks=4524017 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=55 nodes=19454 ticks=4177345 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=97 nodes=15517 ticks=3309316 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=64 nodes=22671 ticks=4899965 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=60 nodes=21244 ticks=4581183 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=101 nodes=16951 ticks=3627003 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=68 nodes=24105 ticks=5216426 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=64 nodes=22679 ticks=4902468 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=105 nodes=18389 ticks=3969166 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=80 nodes=28419 ticks=6203139 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=74 nodes=26275 ticks=5774466 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=109 nodes=19831 ticks=4300346 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=86 nodes=30583 ticks=6726348 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=80 nodes=28440 ticks=6261283 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=112 nodes=20915 ticks=4580902 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=91 nodes=32389 ticks=7133126 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=83 nodes=29524 ticks=6502457 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=113 nodes=21277 ticks=4662689 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=96 nodes=34199 ticks=7527887 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=88 nodes=31334 ticks=6884828 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=118 nodes=23090 ticks=5064113 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=105 nodes=37464 ticks=8226411 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=96 nodes=34237 ticks=7519017 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=119 nodes=23453 ticks=5157349 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=112 nodes=40005 ticks=8813734 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=103 nodes=36778 ticks=8099926 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=128 nodes=26720 ticks=5887215 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=121 nodes=43272 ticks=9537982 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=110 nodes=39319 ticks=8656117 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=130 nodes=27446 ticks=6047825 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=123 nodes=43998 ticks=9693957 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=112 nodes=40045 ticks=8797784 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=132 nodes=28172 ticks=6203436 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=128 nodes=45813 ticks=10074426 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=115 nodes=41134 ticks=9024082 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=144 nodes=32528 ticks=7189595 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=139 nodes=49792 ticks=10995388 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=118 nodes=42223 ticks=9245047 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=147 nodes=33617 ticks=7418700 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=144 nodes=51607 ticks=11378190 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=121 nodes=43312 ticks=9456645 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=154 nodes=36158 ticks=7941304 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=150 nodes=53785 ticks=11815553 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=128 nodes=45853 ticks=9939219 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=160 nodes=38336 ticks=8401696 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=155 nodes=55600 ticks=12209738 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=132 nodes=47305 ticks=10248962 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=164 nodes=39788 ticks=8737721 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=160 nodes=57415 ticks=12584475 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=136 nodes=48757 ticks=10558165 hz=10000000\r\ntid=236 caller-rva=000623D5 calls=48 nodes=13577 ticks=2499598 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=176 nodes=44144 ticks=10736591 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=169 nodes=60602 ticks=13837482 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=136 nodes=48757 ticks=10558165 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=183 nodes=46685 ticks=12167004 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=176 nodes=63129 ticks=15245936 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=141 nodes=50572 ticks=11550241 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=186 nodes=47774 ticks=12795216 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=179 nodes=64218 ticks=15867541 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=144 nodes=51661 ticks=12233950 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=192 nodes=49952 ticks=14022886 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=185 nodes=66396 ticks=17149221 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=150 nodes=53839 ticks=13576963 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=201 nodes=53219 ticks=15910706 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=192 nodes=68937 ticks=18444869 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=156 nodes=56017 ticks=14742565 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=206 nodes=55034 ticks=16985289 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=197 nodes=70752 ticks=19626992 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=160 nodes=57469 ticks=15664329 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=208 nodes=55760 ticks=17432513 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=200 nodes=71841 ticks=20270969 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=162 nodes=58195 ticks=16082505 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=212 nodes=57212 ticks=18334541 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=208 nodes=74745 ticks=22000228 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=166 nodes=59647 ticks=16935102 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=224 nodes=61514 ticks=20733553 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=222 nodes=79773 ticks=24878916 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=175 nodes=62866 ticks=18776279 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=225 nodes=61871 ticks=20937762 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=224 nodes=80487 ticks=25308536 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=175 nodes=62866 ticks=18776279 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=226 nodes=62228 ticks=21138932 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=227 nodes=81558 ticks=25958606 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=176 nodes=63223 ticks=18951712 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=235 nodes=65441 ticks=22880675 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=240 nodes=86199 ticks=28375302 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=183 nodes=65722 ticks=20327905 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=240 nodes=67226 ticks=23816842 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=247 nodes=88698 ticks=29731277 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=187 nodes=67150 ticks=21142156 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=245 nodes=69011 ticks=24769334 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=256 nodes=91911 ticks=31378803 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=191 nodes=68578 ticks=21904226 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=246 nodes=69368 ticks=24930568 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=259 nodes=92982 ticks=31945615 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=192 nodes=68935 ticks=22101528 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=255 nodes=72503 ticks=26541125 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=272 nodes=97506 ticks=34333466 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=199 nodes=71382 ticks=23322222 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=256 nodes=72847 ticks=26713176 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=275 nodes=98538 ticks=34914003 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=199 nodes=71382 ticks=23322222 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=269 nodes=77319 ticks=29086897 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=286 nodes=102322 ticks=36879845 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=208 nodes=74478 ticks=24995006 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=271 nodes=78007 ticks=29410708 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=288 nodes=103010 ticks=37227408 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=208 nodes=74478 ticks=24995006 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=272 nodes=78351 ticks=29614937 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=288 nodes=103010 ticks=37227408 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=208 nodes=74478 ticks=24995006 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=288 nodes=83855 ticks=32422035 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=301 nodes=107482 ticks=39462007 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=221 nodes=78950 ticks=27235181 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=295 nodes=86263 ticks=33512914 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=304 nodes=108514 ticks=39989942 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=223 nodes=79638 ticks=27550806 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=299 nodes=87639 ticks=34153931 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=307 nodes=109546 ticks=40512699 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=224 nodes=79982 ticks=27737775 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=301 nodes=88327 ticks=34510571 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=320 nodes=114018 ticks=42658077 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=236 nodes=84110 ticks=29831516 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=301 nodes=88327 ticks=34510571 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=323 nodes=115050 ticks=43147148 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=240 nodes=85485 ticks=30493623 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=302 nodes=88671 ticks=34698780 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=336 nodes=119431 ticks=45416846 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=252 nodes=89523 ticks=32510287 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=304 nodes=89359 ticks=35082501 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=336 nodes=119431 ticks=45416846 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=252 nodes=89523 ticks=32510287 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=320 nodes=89359 ticks=35082626 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=336 nodes=119431 ticks=45416846 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=252 nodes=89523 ticks=32510287 hz=10000000\r\ntid=13472 caller-rva=000623D5 calls=336 nodes=89359 ticks=35082784 hz=10000000\r\ntid=13472 caller-rva=0005FAF6 calls=336 nodes=119431 ticks=45416846 hz=10000000\r\ntid=13472 caller-rva=0006F551 calls=252 nodes=89523 ticks=32510287 hz=10000000\r\n",
+  "probe": "SOL options: round=1\r\nSOL options: game-thread=13472\r\nSOL options: command=1003\r\nSOL options: dialog-visible-ms=7125\r\nSOL options: modal close or parent recovery failed dialog=0 worker_wait=258 worker_exit=00000103 parent_responded=0 parent_error=1460 elapsed_ms=8578\r\nSOL options: stalled-thread=236 pc=76b25fdc\r\nSOL options: fault-module=win32u.dll base=76B20000 size=114688 rva=00005fdc\r\nSOL options: stack[0]=76b25fdc\r\nSOL options: fault-module=win32u.dll base=76B20000 size=114688 rva=00005fdc\r\nSOL options: stack[1]=69a011cf\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=000611cf\r\nSOL options: code-region base=69A01000 size=192512 state=1000 protect=20 type=1000000 bytes@pc=3bc50f82a10000003dc000000075075f\r\nSOL options: stack[2]=699f3aa8\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=00053aa8\r\nSOL options: stack[3]=69a0927d\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=0006927d\r\nSOL options: stack[4]=77455c5e\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=00095c5e\r\nSOL options: stalled-thread=30132 pc=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[0]=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[1]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: code-region base=75425000 size=425984 state=1000 protect=20 type=1000000 bytes@pc=50ff15f41e4975ff15102049755ea810\r\nSOL options: stack[2]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[3]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=12656 pc=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[0]=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[1]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: code-region base=75425000 size=425984 state=1000 protect=20 type=1000000 bytes@pc=50ff15f41e4975ff15102049755ea810\r\nSOL options: stack[2]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[3]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=22620 pc=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[0]=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[1]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: code-region base=75425000 size=425984 state=1000 protect=20 type=1000000 bytes@pc=50ff15f41e4975ff15102049755ea810\r\nSOL options: stack[2]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[3]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=31580 pc=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[0]=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[1]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: code-region base=75425000 size=425984 state=1000 protect=20 type=1000000 bytes@pc=50ff15f41e4975ff15102049755ea810\r\nSOL options: stack[2]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[3]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=14292 pc=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[0]=7743a1cc\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007a1cc\r\nSOL options: stack[1]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: code-region base=75425000 size=425984 state=1000 protect=20 type=1000000 bytes@pc=50ff15f41e4975ff15102049755ea810\r\nSOL options: stack[2]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[3]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=4956 pc=7743837c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007837c\r\nSOL options: stack[0]=7743837c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007837c\r\nSOL options: stack[1]=00b4df35\r\nSOL options: fault-module=ntvdm.exe base=00B00000 size=4546560 rva=0004df35\r\nSOL options: code-region base=00B4D000 size=1302528 state=1000 protect=20 type=1000000 bytes@pc=ff75ece89301000083c404c38b65e8c7\r\nSOL options: stack[2]=00c6f09a\r\nSOL options: fault-module=ntvdm.exe base=00B00000 size=4546560 rva=0016f09a\r\nSOL options: stack[3]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: stack[4]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[5]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=17312 pc=7743890c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007890c\r\nSOL options: stack[0]=7743890c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007890c\r\nSOL options: stack[1]=75050d98\r\nSOL options: fault-module=KERNELBASE.dll base=74EF0000 size=3006464 rva=00160d98\r\nSOL options: code-region base=75050000 size=1208320 state=1000 protect=20 type=1000000 bytes@pc=5dc21000cccccccccccccccccccccccc\r\nSOL options: stack[2]=00c81053\r\nSOL options: fault-module=ntvdm.exe base=00B00000 size=4546560 rva=00181053\r\nSOL options: stalled-thread=9392 pc=7743890c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007890c\r\nSOL options: stack[0]=7743890c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007890c\r\nSOL options: stack[1]=75050d98\r\nSOL options: fault-module=KERNELBASE.dll base=74EF0000 size=3006464 rva=00160d98\r\nSOL options: code-region base=75050000 size=1208320 state=1000 protect=20 type=1000000 bytes@pc=5dc21000cccccccccccccccccccccccc\r\nSOL options: stack[2]=00b03567\r\nSOL options: fault-module=ntvdm.exe base=00B00000 size=4546560 rva=00003567\r\nSOL options: stack[3]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[4]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=19352 pc=7743837c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007837c\r\nSOL options: stack[0]=7743837c\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0007837c\r\nSOL options: stack[1]=75050032\r\nSOL options: fault-module=KERNELBASE.dll base=74EF0000 size=3006464 rva=00160032\r\nSOL options: code-region base=75050000 size=1208320 state=1000 protect=20 type=1000000 bytes@pc=5dc20800cccccccccccccccccccc6a3c\r\nSOL options: stack[2]=00c66cfa\r\nSOL options: fault-module=ntvdm.exe base=00B00000 size=4546560 rva=00166cfa\r\nSOL options: stack[3]=75425d49\r\nSOL options: fault-module=KERNEL32.DLL base=75410000 size=983040 rva=00015d49\r\nSOL options: stack[4]=7742c88b\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c88b\r\nSOL options: stack[5]=7742c811\r\nSOL options: fault-module=ntdll.dll base=773C0000 size=1851392 rva=0006c811\r\nSOL options: stalled-thread=13472 pc=76b25fdc\r\nSOL options: fault-module=win32u.dll base=76B20000 size=114688 rva=00005fdc\r\nSOL options: stack[0]=76b25fdc\r\nSOL options: fault-module=win32u.dll base=76B20000 size=114688 rva=00005fdc\r\nSOL options: stack[1]=69a011cf\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=000611cf\r\nSOL options: code-region base=69A01000 size=192512 state=1000 protect=20 type=1000000 bytes@pc=3bc50f82a10000003dc000000075075f\r\nSOL options: stack[2]=699f3aa8\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=00053aa8\r\nSOL options: stack[3]=69a029dd\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=000629dd\r\nSOL options: stack[4]=69a01d64\r\nSOL options: fault-module=WOW32.DLL base=699A0000 size=741376 rva=00061d64\r\n",
+  "hashes": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-origin-profile\\wow_user_borrow_scope.c",
+      "Hash": "8D4FA43473C4FCBB5C72CDA85C5303F0F5F5FB9B1D096DBB34955B03BAB3F014"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-origin-profile\\wow32.dll",
+      "Hash": "D9FE93B800BF760280656EDBBFF2AEEB1083EBED8845E578C6EB932986356950"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-origin-profile\\wow32.dll.map",
+      "Hash": "EDA2AECB68BCE73E93DB70143CEA41EA7A7049A91CD174EB5A5080C630A4611C"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-origin-profile\\sol\\probe.exe",
+      "Hash": "6A9AFA94B1D537B3A420076579DD6811FC770CB478FEBFD2A28AFEFDD3F2E5D8"
+    }
+  ],
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "6E6C240E2569777BBAB2586A13F1B950D05DD591BB7314779C58798B10795AEA",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "3C8E74D60527C382EE3BF6B4750ADC45D956ACA637652FFB5A611AEEF36C5FDB",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "D66BA0050C2DB8FFD81A00C42BAAF6D5F209C11A9898FD49F952FC6F72F95409",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "9DDD5ECF7556D4AFE92E4A46BE2ED920FECB2D74FE4FBF29C0A99B99C7CBA35A",
+      "Machine": 332,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "AB9863E771A844FF3AA9AFC40D6580997B8D5172861E5B2AC7743B4C32951273"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "89B22333107588F730F5C76088B0CF71484BFB33DFE1344E6225366AF3848B05",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "3870DC9802213F92ED05FC0836810986DB1E42A8F45B1029969A244CBDE77266",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "65BDEDE3EA4459EEB4C965C81E47613E0ABC846CF788E256A2A74804AFEFB629",
+      "Machine": 332,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "D9FE93B800BF760280656EDBBFF2AEEB1083EBED8845E578C6EB932986356950"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "2A5AA4EB5C68C99C87C2D7D36B5C3BC79C551A5261347A19CE95854C62BAB915",
+      "Machine": 332,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "74352B8AE79C97BE3270195919173E7525D530DD58C6487546FDD35EB4FA8E03"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "D5726EE3E02EB6208118BCC6961E9FF08910D2C2D84929542F25299557506672",
+      "Machine": 332,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "063BF3ABC7C06EAE1C0059D025729C1756C28A91FEF9F84B19941D6FAD0C24F4",
+      "Machine": 34404,
+      "PackageId": "a25519ba-a128-46f3-8cd9-5880bab493ba",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "limitation": "Cumulative startup and one modal round; instrumentation overhead; code10 recovery non-pass; thread samples are sequential and do not prove a deadlock or sustained loop; not acceptance",
+  "comparison": [
+    {
+      "name": "run16.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "ntsrv.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "ntcon.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "ntvdm.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "ntvwm.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "ntmon.exe",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "WOW32.DLL",
+      "sameInput": false,
+      "sameHash": false
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "nthook32.dll",
+      "sameInput": true,
+      "sameHash": false
+    },
+    {
+      "name": "nthook64.dll",
+      "sameInput": true,
+      "sameHash": false
+    }
+  ]
+}

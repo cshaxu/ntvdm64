@@ -1,0 +1,23 @@
+{
+  "file_hashes": {
+    "dos/v86/cmd/command/buildmsg.c": "4B9FE27D3C5F4BC93CCB18DE85DA8C5FF5E601B5DB2D859F5E44A60572203C2A",
+    "dos/v86/cmd/command/usa-ms/bldmsg.h": "618B85A24ADC69EDD629EA1405DA1DEBFE079760C7E808E53C3EE536E7D21F8C",
+    "dos/v86/cmd/command/makefile": "CF9DDE2533C39677CE19078DC9A04489EE4E97AAD21672A3D8343E40D66CD2C4",
+    "dos/v86/cmd/command/makefil0": "310936180E14B62152534B0F1F6D78F15153A21F80A9111211497BEFAE32CB64"
+  },
+  "selected_graph_checks": {
+    "worker": {
+      "build_ninja_sha256": "B153506433C26A83B5DC9DE5C8EFEE9864DDFAC187D5AD6AEA05ACFCB44775C0",
+      "buildmsg_source_selected": false,
+      "locale_header_selected_in_dependencies": false,
+      "deps_output_sha256": "8DEFA4247FAB1E4D645BF4AA767773EF0DCE5A82D209661663F00D9A9455D0E9"
+    },
+    "wow32": {
+      "build_ninja_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "buildmsg_source_selected": false,
+      "locale_header_selected_in_dependencies": false,
+      "deps_output_sha256": "68314E001FA6031A6B4A8E423197D458BADB58315ABE87C4F72DFEE7ED611ABC"
+    }
+  },
+  "limitations": "Ninja deps covers recorded selected builds only; it does not prove all possible configurations or guest output contents."
+}

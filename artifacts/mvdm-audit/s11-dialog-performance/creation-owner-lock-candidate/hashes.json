@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "BC1BAB26D930119449FFC4159247DD4AA578D1F2B6BD318414987FACB54B753E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\creation-lock.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D39F554252BE450CB3B83B70060D3E3D35CD933938384FAA6BEE25CBBEB2B74C",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "F756A14BF66703D1BF94945784B917792AB57B22333800A8D39981D2ECD7CDE4",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\lock-out.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "D7A9240CF276A559E7A72EE231BFD7125AC785F268C210F78F8C04DE164F6F28",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\lock-trace.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\fixture-exit.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7EEDC244D7B427CBD878C14A4B6DAD9C23EB631F4AF030202A6572B91AA7C324",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\lock-unwind-out.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5BFCB33B7C93A8C162524D61DC38A7E6565CC146E1F8FE5E21AC6CAF5E379EF6",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-lock-candidate\\lock-unwind-trace.txt"
+  }
+]

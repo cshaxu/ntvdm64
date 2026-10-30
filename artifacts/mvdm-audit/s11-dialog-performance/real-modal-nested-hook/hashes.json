@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "096C446E6DCEDB80E2202E4346BC34C4BE3F842F0F79FDE306FD1825C832FAC6"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-task-lifecycle.ps1",
+    "Hash": "D3E0938188CA15678ADFF8131D983CBE0690F6B3CFFF6674A85C2F5412ADAC38"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\fixture.exe",
+    "Hash": "ABD14DD8B6C2A0D4D756E14F15339DD8F6B6F524419441E593020CE18DED55F4"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal\\provider.lib",
+    "Hash": "EB1CBCAD10FA8D8F2CCF51D2462985A607D725BFBFA659A945A76E4A6BD69AB9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-domain-modal-baseline\\fixture.exe",
+    "Hash": "6AD83B9331EDFB2D3CE885947DBD608C04EF2571B3BEA65205613EB283FE2FFF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\graph-lifecycle-graph-snapshot\\provider.lib",
+    "Hash": "31FB80715EE7F0AC2FC777697D99D4FA479CE9C18AAA6ACE370152F84F10B59C"
+  }
+]

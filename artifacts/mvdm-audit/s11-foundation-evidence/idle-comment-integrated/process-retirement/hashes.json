@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-process-retirement\\fixture.exe",
+    "Hash": "FEE45CE4278113E63709BCCB6AE6CE472198C39A7AAA0C2EDA1D9598DEFA82BD"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "32C4C7F4DF253D5213096A270F5741BE3A31D627AB3BD3F4EED8B7E44DB6123C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_task_lifecycle.c",
+    "Hash": "91E684C4A863677C4C4BFC1402071BE7A05AA781C062B1E4A7C51E0B079ECBD8"
+  }
+]

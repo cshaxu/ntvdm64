@@ -1,0 +1,216 @@
+{
+  "headers": {
+    "ccpu": {
+      "path": "src/mvdm/softpc.new/base/ccpu386/evidgen.h",
+      "sha256": "7E429987C49EC9E87CA45394EEDDC87C73877E5F95AED73E1BC1D7224D308772",
+      "fields": [
+        "GetVideolatches",
+        "SetVideolatches",
+        "setWritePointers",
+        "setReadPointers",
+        "setMarkPointers"
+      ],
+      "x86_pointer_offsets": {
+        "GetVideolatches": 0,
+        "SetVideolatches": 4,
+        "setWritePointers": 8,
+        "setReadPointers": 12,
+        "setMarkPointers": 16
+      }
+    },
+    "cvidc": {
+      "path": "src/mvdm/softpc.new/base/cvidc/evidgen.h",
+      "sha256": "18CB85AE563AAC444429E489F43EDCB58CDFAC3939D63C6F19A676BC5246E9A6",
+      "fields": [
+        "GetVideolatches",
+        "GetVideorplane",
+        "GetVideowplane",
+        "GetVideoscratch",
+        "GetVideosr_masked_val",
+        "GetVideosr_nmask",
+        "GetVideodata_and_mask",
+        "GetVideodata_xor_mask",
+        "GetVideolatch_xor_mask",
+        "GetVideobit_prot_mask",
+        "GetVideoplane_enable",
+        "GetVideoplane_enable_mask",
+        "GetVideosr_lookup",
+        "GetVideofwd_str_read_addr",
+        "GetVideobwd_str_read_addr",
+        "GetVideodirty_total",
+        "GetVideodirty_low",
+        "GetVideodirty_high",
+        "GetVideovideo_copy",
+        "GetVideomark_byte",
+        "GetVideomark_word",
+        "GetVideomark_string",
+        "GetVideoread_shift_count",
+        "GetVideoread_mapped_plane",
+        "GetVideocolour_comp",
+        "GetVideodont_care",
+        "GetVideov7_bank_vid_copy_off",
+        "GetVideoscreen_ptr",
+        "GetVideorotate",
+        "GetVideocalc_data_xor",
+        "GetVideocalc_latch_xor",
+        "GetVideoread_byte_addr",
+        "GetVideov7_fg_latches",
+        "GetVideoGC_regs",
+        "GetVideolast_GC_index",
+        "GetVideodither",
+        "GetVideowrmode",
+        "GetVideochain",
+        "GetVideowrstate",
+        "SetVideolatches",
+        "SetVideorplane",
+        "SetVideowplane",
+        "SetVideoscratch",
+        "SetVideosr_masked_val",
+        "SetVideosr_nmask",
+        "SetVideodata_and_mask",
+        "SetVideodata_xor_mask",
+        "SetVideolatch_xor_mask",
+        "SetVideobit_prot_mask",
+        "SetVideoplane_enable",
+        "SetVideoplane_enable_mask",
+        "SetVideosr_lookup",
+        "SetVideofwd_str_read_addr",
+        "SetVideobwd_str_read_addr",
+        "SetVideodirty_total",
+        "SetVideodirty_low",
+        "SetVideodirty_high",
+        "SetVideovideo_copy",
+        "SetVideomark_byte",
+        "SetVideomark_word",
+        "SetVideomark_string",
+        "SetVideoread_shift_count",
+        "SetVideoread_mapped_plane",
+        "SetVideocolour_comp",
+        "SetVideodont_care",
+        "SetVideov7_bank_vid_copy_off",
+        "SetVideoscreen_ptr",
+        "SetVideorotate",
+        "SetVideocalc_data_xor",
+        "SetVideocalc_latch_xor",
+        "SetVideoread_byte_addr",
+        "SetVideov7_fg_latches",
+        "SetVideoGC_regs",
+        "SetVideolast_GC_index",
+        "SetVideodither",
+        "SetVideowrmode",
+        "SetVideochain",
+        "SetVideowrstate",
+        "setWritePointers",
+        "setReadPointers",
+        "setMarkPointers"
+      ],
+      "x86_pointer_offsets": {
+        "GetVideolatches": 0,
+        "SetVideolatches": 156,
+        "setWritePointers": 312,
+        "setReadPointers": 316,
+        "setMarkPointers": 320
+      }
+    }
+  },
+  "graph_sha256": "B153506433C26A83B5DC9DE5C8EFEE9864DDFAC187D5AD6AEA05ACFCB44775C0",
+  "deps_sha256": "7B6201961D0B91EBF781E802AE46EDF93C293A5036261E33FD4FB120BFD1D152",
+  "consumers": {
+    "ccpu": [
+      "obj/ccpu/sasCdef.obj: #deps 26, deps mtime 8149886684610022 (VALID)",
+      "obj/keymouse/mouse_io.obj: #deps 51, deps mtime 8149886687570111 (VALID)",
+      "obj/base-debug/trace.obj: #deps 24, deps mtime 8149886695095800 (VALID)",
+      "obj/host/nt_ega.obj: #deps 32, deps mtime 8149886698675467 (VALID)",
+      "obj/host/nt_vga.obj: #deps 27, deps mtime 8149601289186061 (VALID)",
+      "obj/host/nt_graph.obj: #deps 59, deps mtime 8149886701490208 (VALID)",
+      "obj/host/nt_mouse.obj: #deps 53, deps mtime 8149886701490208 (VALID)",
+      "obj/host/nt_fulsc.obj: #deps 56, deps mtime 8149886701490208 (VALID)",
+      "obj/host/nt_det.obj: #deps 51, deps mtime 8149886702398346 (VALID)",
+      "obj/adapter-softpc/mvdm_softpc_text_video.obj: #deps 33, deps mtime 8150371598337177 (VALID)",
+      "obj/adapter-softpc/v7_pointer_binding.obj: #deps 21, deps mtime 8149601327549169 (VALID)"
+    ],
+    "cvidc": [
+      "obj/ccpu/localfm.obj: #deps 16, deps mtime 8149601207590524 (VALID)",
+      "obj/video/ega_mode.obj: #deps 28, deps mtime 8149601227480964 (VALID)",
+      "obj/video/ega_prts.obj: #deps 42, deps mtime 8149886691099653 (VALID)",
+      "obj/video/ega_vide.obj: #deps 43, deps mtime 8149886691089637 (VALID)",
+      "obj/video/gfx_updt.obj: #deps 40, deps mtime 8149886691099653 (VALID)",
+      "obj/video/video.obj: #deps 40, deps mtime 8149886691079636 (VALID)",
+      "obj/video/gvi.obj: #deps 30, deps mtime 8149886691079636 (VALID)",
+      "obj/video/v7_ports.obj: #deps 24, deps mtime 8149601229672597 (VALID)",
+      "obj/video/v7_video.obj: #deps 38, deps mtime 8149886691099653 (VALID)",
+      "obj/video/vga_mode.obj: #deps 28, deps mtime 8149601230605319 (VALID)",
+      "obj/video/ega_read.obj: #deps 30, deps mtime 8149886691089637 (VALID)",
+      "obj/video/vga_prts.obj: #deps 42, deps mtime 8149886691109645 (VALID)",
+      "obj/video/vga_vide.obj: #deps 43, deps mtime 8149886691099653 (VALID)",
+      "obj/video/ega_dmmy.obj: #deps 25, deps mtime 8149886691079636 (VALID)",
+      "obj/video/ega_writ.obj: #deps 24, deps mtime 8149601232153915 (VALID)",
+      "obj/video/egawrtm0.obj: #deps 28, deps mtime 8149886691099653 (VALID)",
+      "obj/video/egwrtm12.obj: #deps 27, deps mtime 8149886691257144 (VALID)",
+      "obj/video/cga.obj: #deps 40, deps mtime 8149886695095800 (VALID)",
+      "obj/cvidc/ev_glue.obj: #deps 21, deps mtime 8149601250248135 (VALID)",
+      "obj/cvidc/vglfunc.obj: #deps 11, deps mtime 8149601251720819 (VALID)",
+      "obj/cvidc/accessfn.obj: #deps 24, deps mtime 8149886695095800 (VALID)",
+      "obj/cvidc/mvdm_cvidc_vector_binding.obj: #deps 20, deps mtime 8149886695095800 (VALID)",
+      "obj/tests/cvidc_vector_binding_fixture.obj: #deps 26, deps mtime 8150137699115999 (VALID)"
+    ]
+  },
+  "ccpu_object_relocations": [
+    {
+      "object": "obj/ccpu/sasCdef.obj",
+      "sha256": "61D48711680E4D5B2E8728008148B6E10701131EFAE4730453AE34FF47A1362E",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/keymouse/mouse_io.obj",
+      "sha256": "33E150BE58BABA199B80F89C95A81DE3BE473B89A2F65683781CF90DB03556F4",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/base-debug/trace.obj",
+      "sha256": "244832196DCB9DAD972EB067E3BD4477BDB51738205F39FA686E09D84398DE0C",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_ega.obj",
+      "sha256": "A9CAC126764FD5B70D54DEB22FDB5249947E6A201C471CF8AF868F03BCBA4E12",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_vga.obj",
+      "sha256": "8B8AF7B54DBFAC089F8391A8A174716C3ED829C49585792B78E80CED935C909F",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_graph.obj",
+      "sha256": "A3A1DFD6F9DC75B9AD12C951AD58A57937E6EF7DEA9D223F1B0236EFBFB93F95",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_mouse.obj",
+      "sha256": "32F6E879955C078C89284A6D78755A4FF5F4196A2DF4A45E9AF45E56C741F69B",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_fulsc.obj",
+      "sha256": "F8AC1D8E3D391085414AA47236C8E8C8B494E7E25E416B50689FB71319B8D3BF",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/host/nt_det.obj",
+      "sha256": "1928C05BB8D459307FCD6AA5E272CE823E559BA3EAE61CE95DE5BA3CF6C77783",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+      "sha256": "C16EADC983F5384DAA76D9313C72FE14FC7EC547DE13BD24D5E1633A2B89A9C4",
+      "direct_video_relocations": []
+    },
+    {
+      "object": "obj/adapter-softpc/v7_pointer_binding.obj",
+      "sha256": "ED24F4952126C729DB934914593DBD81D709F335F9B3B8A24156B254E844DB27",
+      "direct_video_relocations": []
+    }
+  ],
+  "limits": "Offsets assume x86 four-byte pointers; dependency inclusion and absent named relocations do not prove macro expansion, indirect access, runtime behavior or alternate profiles."
+}

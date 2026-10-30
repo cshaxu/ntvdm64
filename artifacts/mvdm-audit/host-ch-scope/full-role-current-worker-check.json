@@ -1,0 +1,470 @@
+{
+  "scope": "full host C/H rows; lexical graph/deps only, not execution coverage; map name does not prove every function or opcode executes",
+  "rows": [
+    {
+      "path": "softpc.new/base/ccpu386/adc.c",
+      "exists": true,
+      "sha256": "f9cb50e05aa3198c03e670556a6b8a849105c9ffbc6ea22dcc41dcfb2875c56b",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/adc.h",
+      "exists": true,
+      "sha256": "ebc8f79a0edab6590c40de2c6216731e540c739f723508fcd2db75103f839e14",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-3/file-review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/add.c",
+      "exists": true,
+      "sha256": "6bbfc3cacd07b66ef1d5c882a45aa88431404571538ef2134f6b0f081e5c3c11",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/add.h",
+      "exists": true,
+      "sha256": "5d6bb2d73cadea179111243737d0dc29526aaddbd0d84f6fb784cbeb2706314e",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/and.c",
+      "exists": true,
+      "sha256": "2973105fbfc70afd2a1f6846e1358c5c781538974e2dde72576286de95d1c489",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/and.h",
+      "exists": true,
+      "sha256": "9294bc9f62d29a89c95ca3bd98083128966b15e0996b994f180ff98e269c239f",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cbw.c",
+      "exists": true,
+      "sha256": "57ed4c085f1deff04e4a1f1d48e19f104928d338d468fef516d3772adbae4f5e",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cbw.h",
+      "exists": true,
+      "sha256": "1b84f9511192257f409ac2f3adaae1fb62d22ddae43a5b01e73a56601780387c",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cdq.c",
+      "exists": true,
+      "sha256": "b1eb591cbf098e64b5dfefa9de3b4ab214c35e23f72c83501ee5a9f713664510",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cdq.h",
+      "exists": true,
+      "sha256": "862784986b4afff6c4d84fab85b6a26875d8aaaff8d0d26ec324f6bff28555e1",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/clc.c",
+      "exists": true,
+      "sha256": "6d356c318117e69751ed0c4e41ef86ad3106882a0dec530bd47cc4bf3fe5c091",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/clc.h",
+      "exists": true,
+      "sha256": "10def390faa04007511027558918905d34eebe17d7646614c5560bc3e490f1c6",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cld.c",
+      "exists": true,
+      "sha256": "6956d48a4b0d63dba81b277584429102624c064658e0a1c4c921efdda8c84d96",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cld.h",
+      "exists": true,
+      "sha256": "767ff331d15e2bb10febc0316f60b634f0dbf086c841bd3042a7fe9a6ecf8b63",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmc.c",
+      "exists": true,
+      "sha256": "7b1dc3c22e44fd0608e616508737e3367bee80520692780b4e1cfa1ee60b5ed8",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmc.h",
+      "exists": true,
+      "sha256": "962988c4ca0915bcd5269689419d284aa8107fb0b716b3399032b6095c5e8dca",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-2/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmp.c",
+      "exists": true,
+      "sha256": "05a601eb2a232efc5e87fb0c6daf44916256b8f0532a607a9a0dbf8755791b77",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cmp.h",
+      "exists": true,
+      "sha256": "f8456be8dc667c754d4dd99ec0443b3212b372fa7c785d6480f10d347f527b25",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-3/file-review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cwd.c",
+      "exists": true,
+      "sha256": "e0b3aeead327b314760573c98a7a20028e74a0f20d2045971566ef9f3b1122bc",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cwd.h",
+      "exists": true,
+      "sha256": "64758f519e4eb046cd2651e5519136624fdad0f6fc35b5439b5c55d2278d0f7f",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cwde.c",
+      "exists": true,
+      "sha256": "1b3345efcfe8d617eefd829fe90dbed07a3cb6ab8826c0ffd856efca3c57a436",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/cwde.h",
+      "exists": true,
+      "sha256": "42b9d04f5c5fa4d46ba9845d27778fa23b7b9977abf2d03f404b20b2b5573aca",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/dec.c",
+      "exists": true,
+      "sha256": "4cb52793a88de120f63d1ecf3ba38507ae4e35e48b1b0a7984db034fd4c2e594",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-2/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/dec.h",
+      "exists": true,
+      "sha256": "75208f017bd31b4e18ff12a6a86a5f5e38d343539e87e1b229e12b719e611f9f",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-3/file-review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/inc.c",
+      "exists": true,
+      "sha256": "6c8c8fd705953ab943e2b0a683ebadfc07318f68f1141ccfca37c3a4435efaf7",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/inc.h",
+      "exists": true,
+      "sha256": "e03526f01236cec907067f9ae765dc3d4f185fea31ccc28c31709399e497899d",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lahf.c",
+      "exists": true,
+      "sha256": "63807c02f388652e88f9db506e8c638e5e25c74991a9788eb2a7685803d132a3",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lahf.h",
+      "exists": true,
+      "sha256": "e0ef7b5fc9976556ddc1da9f9236779dcdc01bff11192893e425b3f9c5f63ea3",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-2/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lea.c",
+      "exists": true,
+      "sha256": "f1577b3dec150b5112803df1c1e1c41ed8faa3baa1552ffd231e22da541ea486",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/lea.h",
+      "exists": true,
+      "sha256": "3b8028ab680eff1cd767238a29999bce219c40b3b4686cd2cc4e22e899554099",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-2/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/neg.c",
+      "exists": true,
+      "sha256": "a4fede2b745ac97036460e7a516c7673ecc5cfa4c1a12013c3834006a8089a16",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/neg.h",
+      "exists": true,
+      "sha256": "5cc7a74536f9734b48ee6cf85ad3f4401f4e1898a9039c2201b573ef0943f3f1",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-2/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/not.c",
+      "exists": true,
+      "sha256": "5a9167e678094855463f96f0ff6d959cbb3f2d356af3c94ab74c9f4ba6bf68f8",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-3/file-review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/not.h",
+      "exists": true,
+      "sha256": "8a3cb20a8e512ea11bc353701165606833d83b408b90e0ab070e85924e08c784",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/or.c",
+      "exists": true,
+      "sha256": "51213de76f39972207c8c68d809530fb469e2376271def4f04b1faaf1bfdbac1",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/or.h",
+      "exists": true,
+      "sha256": "49db3cb8f5a1b8dcdd06a74539a73d995e5c72fee2c02ff419170defe937805f",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sahf.c",
+      "exists": true,
+      "sha256": "fb473e899aaaceef025c2ebf3aba74e7fe5aa9cbffee982443786c53e0fd84f9",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sahf.h",
+      "exists": true,
+      "sha256": "8433ec576a5fba57247bb11b5dc5edc812d8b72c5e2dada14eff8b91c91e731a",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sbb.c",
+      "exists": true,
+      "sha256": "99354b3d7ada08d2aacabbcb44d8e36d9a6d2b5641541d23054cf3c0cc18b63b",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sbb.h",
+      "exists": true,
+      "sha256": "95db2a0edaa6a333c71964b78a1c87628ca08d7c6d7db6a5e62ed75a5156dcfd",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/stc.c",
+      "exists": true,
+      "sha256": "daea4a3de631e0c901f146556fab07444c38c4c0f3781d3c0ad4b9e09bbe341e",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/stc.h",
+      "exists": true,
+      "sha256": "62b2b047c76ceb8367aa14867e300e9260c152985e69a8199e23ba9cc69a7460",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-3/file-review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/std.c",
+      "exists": true,
+      "sha256": "0fc14a782e8ecd49bcafb0b8c546ae036ed2fc22bfa58d9d557b42b5c1441d5a",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-2/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/std.h",
+      "exists": true,
+      "sha256": "6e3db249250942cbdbb4b625133d0f44a1cdb7becfb3b4b8fc03897e18a02a49",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-0/review.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sub.c",
+      "exists": true,
+      "sha256": "f89fbd25b2017e4216ce7c1336749d012fc1c71b55708ac1e1aafe283c3b8587",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/sub.h",
+      "exists": true,
+      "sha256": "673263269f7ceb07ccbb2caf43610665917208979896e4ae8c30fb781b5a63f7",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/test.c",
+      "exists": true,
+      "sha256": "c3c97ce3dc828fd8a33e9fb3981e52b184fdc11dd4da1127392688c283e33ea0",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/test.h",
+      "exists": true,
+      "sha256": "559b1edca4c0a096ce6fad1b771acf3ef6f98251290f84bd222dce7770e3aedf",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xchg.c",
+      "exists": true,
+      "sha256": "e5a2fd36c18fdd3d833eef70b16ab653b49513e9d0767afb1478efca54045f19",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-0/review.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xchg.h",
+      "exists": true,
+      "sha256": "b12f6f0ab67ce7a232459be61a8b379d4387cd144470353685663a1f8bba6386",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-1/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xor.c",
+      "exists": true,
+      "sha256": "2f27c4985f7a2b6f0233c849d58e59b65cfdcbeeea200ea2826b07ede495700c",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-1/file-audit.csv",
+      "link_map_named_object": true
+    },
+    {
+      "path": "softpc.new/base/ccpu386/xor.h",
+      "exists": true,
+      "sha256": "e7e20db6c873645c2f54e9154245a085684e6fc88e6bb586f16c9243cb33f215",
+      "graph_source": false,
+      "dependency": true,
+      "shard": "shard-2/file-audit.csv"
+    },
+    {
+      "path": "softpc.new/base/system/dummy_nt.c",
+      "exists": true,
+      "sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "graph_source": true,
+      "dependency": false,
+      "shard": "shard-2/file-audit.csv",
+      "link_map_named_object": true
+    }
+  ],
+  "count": 53,
+  "graph_source_count": 27,
+  "dependency_count": 26,
+  "neither": [],
+  "missing": [],
+  "inputs": {
+    "inventory_sha256": "50c992a5634dbeb46ef222d28b5f8686e738dd9a1fad1f3db87e788066e7894b",
+    "graph_sha256": "b153506433c26a83b5dc9de5c8efee9864ddfac187d5ad6aea05acfcb44775c0",
+    "map_sha256": "15f4b94b70e6b7067c1462c6942e4f1f6aa7a69973a3bd7f1add4e418986dc63",
+    "ninja_deps_sha256": "7b6201961d0b91ebf781e802ae46edf93c293a5036261e33fd4fb120bfd1d152",
+    "ntvdm_exe_sha256": "181232bf842294b776e6677c6ffeb80e123a2b23ecfdcf4f43aff9c69e3241d9"
+  },
+  "link_map_named_object_count": 27,
+  "no_named_object_in_map": []
+}

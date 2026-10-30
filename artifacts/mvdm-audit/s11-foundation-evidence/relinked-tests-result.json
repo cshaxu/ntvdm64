@@ -1,0 +1,31 @@
+{
+  "result": "pass",
+  "started": "2026-10-29T05:44:43.7496148Z",
+  "runs": [
+    {
+      "pid": 32276,
+      "arguments": "tests/observation/verify-ccpu-bit-matrix.py --build-root build/t473-s11/bit-matrix-v2",
+      "finished": "2026-10-29T05:44:44.7840974Z",
+      "started": "2026-10-29T05:44:43.8129944Z",
+      "name": "bit",
+      "exit": 0
+    },
+    {
+      "pid": 25348,
+      "arguments": "tests/observation/verify-ccpu-far-exception.py --build-root build/t473-s11/far-exception-v3",
+      "finished": "2026-10-29T05:44:45.4645453Z",
+      "started": "2026-10-29T05:44:44.8012412Z",
+      "name": "far",
+      "exit": 0
+    },
+    {
+      "pid": 15744,
+      "arguments": "-NoProfile -File tests/observation/verify-softpc-observer-error.ps1 -BuildRoot O:\\repos.hobby\\ntvdm64/build/t473-s11/observer-error-v2 -CompilerDriver O:\\repos.hobby\\ntvdm64/build/.ninja/msvc-x86-release/wow32/msvc-x86.cmd",
+      "finished": "2026-10-29T05:44:51.9253191Z",
+      "started": "2026-10-29T05:44:45.4807466Z",
+      "name": "observer",
+      "exit": 0
+    }
+  ],
+  "finished": "2026-10-29T05:44:51.9305347Z"
+}

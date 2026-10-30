@@ -204,11 +204,6 @@ IFN6(
    IU32 cs_descr_addr;
    IU8 AR;
    ISM32 super;
-   IU32 descriptor_low;
-   IU32 descriptor_high;
-   IU32 target_linear;
-   PHY_ADDR target_physical;
-   IBOOL target_mapped;
 
    new_cs = *cs;	/* take local copies */
    new_ip = *ip;
@@ -227,27 +222,6 @@ IFN6(
    mvdm_softpc_report_wow_far_call_validation((unsigned short)new_cs,
        (unsigned long)cs_descr_addr, (unsigned long)AR,
        (unsigned long)GET_CPL());
-   mvdm_softpc_report_wow_descriptor_domains((unsigned short)new_cs,
-       (unsigned long)cs_descr_addr, (unsigned long)GET_LDT_BASE(),
-       (unsigned long)GET_LDT_LIMIT(), (unsigned short)GET_LDT_SELECTOR(),
-       (unsigned long)spr_read_dword(cs_descr_addr),
-       (unsigned long)spr_read_dword(cs_descr_addr + 4));
-   /* DIVERGENCE(MVDM-HOST-DIV-308): prove the actual paging translation of
-    * this already validated destination.  A protected-mode descriptor base is
-    * a linear address; reading F000:IP as a physical ROM byte would be an
-    * invalid diagnostic while CR0.PG is set. */
-   descriptor_low = spr_read_dword(cs_descr_addr);
-   descriptor_high = spr_read_dword(cs_descr_addr + 4);
-   target_linear = ((descriptor_low >> 16) & 0xffffu) |
-       ((descriptor_high & 0xffu) << 16) |
-       (descriptor_high & 0xff000000u);
-   target_linear += new_ip;
-   target_physical = 0u;
-   target_mapped = xtrn2phy(target_linear, 0u, &target_physical);
-   mvdm_softpc_report_wow_fetch_translation((unsigned short)new_cs,
-       (unsigned long)new_ip, (unsigned long)target_linear,
-       (unsigned long)target_physical, (unsigned long)target_mapped);
-
    /* validate possible types of target */
    switch ( super = descriptor_super_type((IU16)AR) )
       {

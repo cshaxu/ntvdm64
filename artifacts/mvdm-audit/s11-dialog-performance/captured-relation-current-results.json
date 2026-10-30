@@ -1,0 +1,142 @@
+{
+  "targeted": {
+    "finished": "2026-10-29T17:19:13.17296Z",
+    "retainedRelations": 0,
+    "sol": 1
+  },
+  "limitations": "One-shot per-thread sampling is not simultaneous or sustained profiling. FPO stacks may be incomplete. SOL round2 not observed: not accepted. No default publication.",
+  "sibling": {
+    "finished": "2026-10-29T17:17:31.6446954Z",
+    "environment": "normal modern pwsh; no inherited VsDevCmd",
+    "exit": 0
+  },
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "22A6AD1C3FFF9E110E0C2303E7F73E822E302658AB3756078DCE5F524735CAD5",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "C21BC67418B10CE3B0336860CDC20A6D14BF6DC5A9EB0D5EFD7FA0D565519DBD",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "243524841582B8C84FE0CF7E439610A5E0FD3AD47127F32E2F3A092B7BB191FE",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "EBE62CB1AC3A92CFD61D4E36F1C142C7418B2B30E02B2769A618D986F79197C7",
+      "Machine": 332,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "5A5BC4EA62D390641F6BE27877840EC03055E30E1D84D586E08B393F1504AECF"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "46BF870D2F3CA08140C460B8432235E90317D1348E2596DF8C8E56A750805E5F",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "45BE154048DDF85A4C85D6B0DC0A6D476191B3DE876DCF97467E8DEFC57AF608",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "91A9132A32E1B69EE2DFBB7FB9F5C1349A826EAF946436043F5962237ABD0224",
+      "Machine": 332,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "8B51EC75F23A1CC652FD0EFEC1DA93441C86BD0C95975DDB98775A88EB70F76F"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "708BA1BEA828B2AB67B4720D95CBDBDE671650C7D2568D996A55F23199D0D248",
+      "Machine": 332,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "A390C4134E699067072816A8C645155CD57546BB6B6C0B313D97FF7F687D8C9D"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "09487C7C9D3DC722105AD954DB8A97EA3A0FDBD5FDC3963E6496626FB0AE9484",
+      "Machine": 332,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "0EF8E2AC87A9B5B72C29AAFF6DA9F4976841E4CDEEE99FA57BE903F0BEE0F0FF",
+      "Machine": 34404,
+      "PackageId": "c7c91ea7-b389-4e34-8ebd-40e10d781003",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "formal": [
+    {
+      "finished": "2026-10-29T17:11:50.3905445Z",
+      "case": "graph-snapshot",
+      "exit": 0
+    },
+    {
+      "finished": "2026-10-29T17:12:06.1925256Z",
+      "case": "window-borrow",
+      "exit": 0
+    },
+    {
+      "finished": "2026-10-29T17:12:22.2098687Z",
+      "case": "native-nested",
+      "exit": 0
+    },
+    {
+      "finished": "2026-10-29T17:12:38.3726542Z",
+      "case": "native-creation",
+      "exit": 0
+    }
+  ],
+  "sourceHashes": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_softpc_wow_page_domain.h",
+      "Hash": "7891458E620B878A83B066462F6215C865BADCADD2C66145DBE75AF39F2A2C96"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c",
+      "Hash": "B37484EE424CC8EB79E74534D705C13B18E46E0A9DF6EAEF0A6867DE7674C286"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_borrow_scope.c",
+      "Hash": "354093A1635F097F0018FAB933CBA6A92B3102A7034AECA374A451AAECDCC5DD"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+      "Hash": "A930F4E54B5C7E7410756B56D8A77D36A20E9D0C884BF921C242A5C9D7147469"
+    }
+  ],
+  "mappedPCs": [
+    "WOW32+60fef wait_for_task_or_message+7f",
+    "WOW32+53aa8 xxxSleepTask+278",
+    "WOW32+6909d wow_user_task_lifecycle_wait+ad",
+    "NTVDM+1670e9 copy_window_observation+a9",
+    "NTVDM+78e2 phyR+d2"
+  ]
+}

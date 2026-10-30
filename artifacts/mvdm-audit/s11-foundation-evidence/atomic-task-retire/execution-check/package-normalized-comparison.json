@@ -1,0 +1,131 @@
+{
+  "rows": [
+    {
+      "name": "run16.exe",
+      "old_sha256": "A928902B463E25AE190FC16B3B91E9F0677B2B2262E56D93D08C0D25A67363F0",
+      "new_sha256": "7DE437D7478657FA259308F7274C60AD30954F077097B839E169D70F84927F08",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 316416,
+      "new_length": 316416,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_sha256": "4127FE608A56B08DA2BE350FBD625B7965B1B79F299B87C8E2FA68FB5253A6B4",
+      "new_sha256": "1F4985303030412BCA231ABAC7D2BE0271A21914797F325635BC2FF8B718BB58",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 398848,
+      "new_length": 398848,
+      "diff_offsets_after_guid_zeroing": [
+        "0x100",
+        "0x101",
+        "0x46a94",
+        "0x46a95"
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "old_sha256": "D99520611CC88E81F7FED57C9996071D24F58360B010711B985D72F0F2406359",
+      "new_sha256": "DD6D210D3C4AEAEAF3EB3CBBF28808EF5BF6CABC611BF97949D00F37CD1D2865",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 343040,
+      "new_length": 343040,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_sha256": "07FEFE7EF3F4C563C681714D7D87C00BD662E72F47D49D950EEC7AD98578EEB7",
+      "new_sha256": "7B24587A7CE9B94FD934B8EA2B4AC73AA2FE592862E57D918D7FBD2EB4119D9E",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 2097152,
+      "new_length": 2097152,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_sha256": "7B9EC2DE8ECAEF687BEB2F8A508C8A7A9358D01042F67ACE54BB0D5FD7761B08",
+      "new_sha256": "368A4E11B288B61BE769DAADEA899879029E2CDFE736CC34765EB0D484010BF3",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 340480,
+      "new_length": 340480,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "ntmon.exe",
+      "old_sha256": "DD8D3B153266917F2799CBECCD30725E2DFAEF2228034E20A53F4880F7ECC706",
+      "new_sha256": "7A558AFEED06A7C0100BB2A272F5A2BADB2EE2F9E1B9191B4CBA434E249014DB",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 167936,
+      "new_length": 167936,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "wow32.dll",
+      "old_sha256": "D4C9E632F4963EBE8EA62D48FCB18539804AB24BD17C8415816EE7E93A80E46E",
+      "new_sha256": "B83C367B0D168DE2968C13A0A79F6E53A5532A569BC579DF13976140926716E6",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 711680,
+      "new_length": 711680,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "vdmredir.dll",
+      "old_sha256": "E9D166089BEE3638BC0EA8A3733F6487F7596C37BE2128546B5B517B79C03FCF",
+      "new_sha256": "38D4E86EA7F1763C9426B3F3DFDC604F333E178C0B1902A1F9ED520AF73E0439",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 207872,
+      "new_length": 207872,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "nthook32.dll",
+      "old_sha256": "FAF332AE16487EFB102D42D8EEF9ABEE4A151E7EF13FFDBE4325A9BA3D663CE9",
+      "new_sha256": "AC9603761BD29BCDF1C8B7F1EF83113B48599D9AA0DECFD3FA0BEC589533EC32",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 221184,
+      "new_length": 221184,
+      "diff_offsets_after_guid_zeroing": []
+    },
+    {
+      "name": "nthook64.dll",
+      "old_sha256": "7A9C14480437AEB50A5C3028553C76BDB77FE06056B049F78916583717F30297",
+      "new_sha256": "C968EDB2B6202D72D0C6CF1880C56C721157D7F5062DB9F5BD7BE5055F147E20",
+      "guid_occurrences": [
+        1,
+        1
+      ],
+      "old_length": 270848,
+      "new_length": 270848,
+      "diff_offsets_after_guid_zeroing": []
+    }
+  ],
+  "ntsrv_four_offsets": "0x100,0x101 are COFF header timestamp; 0x46a94,0x46a95 are IMAGE_DEBUG_DIRECTORY timestamp",
+  "scope": "Full byte comparison after GUID-byte replacement, not proof of runtime equivalence; GUID is functional package identity."
+}

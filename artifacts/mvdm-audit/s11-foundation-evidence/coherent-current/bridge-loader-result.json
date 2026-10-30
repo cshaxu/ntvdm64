@@ -1,0 +1,32 @@
+{
+  "scope": "Windows loader with selected bridge and controlled provider; not actual WOW guest DLL lifecycle",
+  "result": "pass",
+  "output": "wow_dll_loader_provider.c\r\nO:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_loader_provider.c(15): warning C4100: 'reserved': unreferenced formal parameter\r\nO:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_loader_provider.c(15): warning C4100: 'reason': unreferenced formal parameter\r\nO:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_loader_provider.c(14): warning C4100: 'instance': unreferenced formal parameter\r\n   Creating library O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current-bridge\\wow-bridge-test.lib and object O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current-bridge\\wow-bridge-test.exp\r\nwow_dll_loader_fixture.c\r\nWOW_BRIDGE_OS_LOADER attach_false=failed attach_true=loaded unload=1 bitmap=1 registry=1 rounds=8\r\n",
+  "inputs": [
+    {
+      "Algorithm": "SHA256",
+      "Hash": "0FF8EB7E3E78E5CCEFC44D9E994D3B0DB811B4DFC64C0797084467B46E9B6135",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll-entry-bridge.obj"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "4E36A08AA26FF21D2B2DA8D82DE8EABE0D91F0D9B0516B52C2528DF97C6287A2",
+      "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_loader_provider.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "08F6813C41C442C8D9D66EB543E43BDF68D3ADC95471F145A1215CAFADB78D48",
+      "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dll_loader_fixture.c"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "327E786CF85FC4AE9D172EB893431B7D4CABB8DE4DB9DDF68F46C4D042505050",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current-bridge\\wow-bridge-test.dll"
+    },
+    {
+      "Algorithm": "SHA256",
+      "Hash": "F8DF48D817AF9B3D82D8FE5743EA5DC1209063077C68F6D64C40B6996A0A4203",
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current-bridge\\wow-bridge-loader.exe"
+    }
+  ]
+}

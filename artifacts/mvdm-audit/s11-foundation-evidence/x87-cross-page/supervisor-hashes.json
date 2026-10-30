@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x87-page-supervisor\\result.json",
+    "Hash": "2F8634F046F372B70F2A02A99A8E65AE9A0EA496FE024E8265B80E3334A1C914"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_x87_page_fixture.c",
+    "Hash": "5A71BB31825F1D3A52E73327BC6EEC0E31FD23F6E8D18F1DD77A92DF692F3228"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-x87-pages.py",
+    "Hash": "7AE2AA07893EE72DAC12B5B237FB68B324AC3C47196A680FA64DFDC2F836D446"
+  }
+]

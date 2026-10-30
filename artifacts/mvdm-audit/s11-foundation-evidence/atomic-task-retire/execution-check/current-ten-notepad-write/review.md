@@ -1,0 +1,3 @@
+# Current ten-input Notepad and Write
+
+The refreshed candidate ran isolated copies of unmodified O:\w31\NOTEPAD.EXE (SHA-256 250A4A99FA40E775121D3E5B30F2A9EC7F2BE48748EFB2937A1D16E5E79E8DE3) and WRITE.EXE (SHA-256 EB44B5D5F5A405B6A8CD018B9F790BCA2E7E895DAD4F7E1F5462EC14CCDAA87A). Each matching application window opened Find, closed it, recovered and exited; the two runner exits were zero. Open/close ms were Notepad 594/265 and Write 1265/1110. This is a single normal dialog interaction per app, not editing, persistence, a paired benchmark or Full acceptance. The source package input manifest is retained; no separate stage manifest was captured.

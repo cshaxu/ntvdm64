@@ -69,7 +69,7 @@ static lib_bool window_input(void *context,const kvm_input_event *event)
     if(event->type==KVM_EVENT_WINDOW_CLOSE ||
         (event->type==KVM_EVENT_HOTKEY &&
          !strcmp((const char *)event->data.hotkey.identifier,"console"))) {
-        /* Repeated X/CAF/AE requests are the same idempotent assignment.
+        /* Repeated X/CAF requests are the same idempotent assignment.
          * Tag it so an old window's queued close cannot close a new instance. */
         InterlockedExchange(&owner->requested_console,owner->epoch);
         if(!SetEvent(owner->wake)) { fail(owner,GetLastError());return LIB_FALSE; }
@@ -128,8 +128,6 @@ static DWORD apply(frontend_window_controller *owner)
         kvm_hotkey_registry_initialize(&options.component.hotkeys);
         error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
             'F',BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT,"console"));
-        if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
-            BASE_KEY_ENTER,BASE_KEY_MODIFIER_ALT,"console"));
         if(!error)error=status_error(kvm_hotkey_registry_register(&options.component.hotkeys,
             'M',BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT,"release-mouse"));
         if(error)return error;

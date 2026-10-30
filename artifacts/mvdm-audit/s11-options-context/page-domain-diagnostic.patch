@@ -1,0 +1,106 @@
+--- production/page-domain.c
++++ diagnostic-only/page-domain.c
+@@ -1472,7 +1472,24 @@
+         return domain.guest_desktop_window;
+     if (!index || index == LOWORD(domain.desktop_handle) || index == 0xffffu) return 0u;
+     client = domain.guest_windows[index];
+-    return client && page_domain_read_owned_word(client) == window ? client : 0u;
++    if (client) {
++        ULONG actual = page_domain_read_owned_word(client);
++        if (actual != window) {
++            char path[MAX_PATH], text[256]; DWORD saved=GetLastError(), n, written; HANDLE file;
++            n=GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH",path,sizeof(path));
++            if(n && n<sizeof(path)) {
++                file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,
++                    NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
++                if(file!=INVALID_HANDLE_VALUE) {
++                    n=(DWORD)wsprintfA(text,"LookupMismatch requested=%08lX observed=%08lX backing=%08lX\r\n",window,actual,client);
++                    (void)WriteFile(file,text,n,&written,NULL);CloseHandle(file);
++                }
++            }
++            SetLastError(saved);return 0u;
++        }
++        return client;
++    }
++    return 0u;
+ }
+ 
+ static mvdm_softpc_wow_window_borrow **window_borrow_link(ULONG backing)
+@@ -1534,9 +1551,74 @@
+ unsigned long mvdm_softpc_wow_page_domain_borrow_window(unsigned long window)
+ {
+     ULONG backing;
+-    if (!page_domain_menu_context() ||
+-            !(backing = page_domain_window_lookup(window))) return 0u;
+-    return borrow_window_backing(backing, NULL) ? backing : 0u;
++    unsigned long observed_active = domain.active, observed_delta = 0, observed_cr0 = 0, observed_cr3 = 0, observed_directory = 0;
++    void *observed_owner = NULL, *observed_current = NULL;
++    unsigned reject_stage = 0;
++    int observed_context;
++    if (!observed_active) reject_stage = 1;
++    else if (!(observed_delta = domain.client_delta)) reject_stage = 2;
++    else if ((observed_owner = domain.owner) != (observed_current = session_thread_current())) reject_stage = 3;
++    else if (!((observed_cr0 = c_getCR0()) & MVDM_SOFTPC_CR0_PG)) reject_stage = 4;
++    else if ((observed_cr3 = c_getCR3()) != (observed_directory = domain.directory)) reject_stage = 5;
++    observed_context = reject_stage == 0;
++    if (reject_stage) {
++        char path[MAX_PATH], text[320]; DWORD saved = GetLastError(), n, written; HANDLE file;
++        n = GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path));
++        if (n && n < sizeof(path)) {
++            file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
++                NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
++            if (file != INVALID_HANDLE_VALUE) {
++                n = (DWORD)wsprintfA(text, "BorrowContextReject window=%08lX stage=%u active=%lu delta=%08lX owner=%p current=%p cr0=%08lX cr3=%08lX directory=%08lX\r\n",
++                    window, reject_stage, observed_active, observed_delta, observed_owner, observed_current,
++                    observed_cr0, observed_cr3, observed_directory);
++                (void)WriteFile(file, text, n, &written, NULL); CloseHandle(file);
++            }
++        }
++        SetLastError(saved);
++    }
++    if (!observed_context ||
++            !(backing = page_domain_window_lookup(window))) {
++        char path[MAX_PATH], text[512]; DWORD saved=GetLastError(), n, written;
++        HANDLE file;
++        n=GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH",path,sizeof(path));
++        if(n && n<sizeof(path)) {
++            file=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,
++                NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
++            if(file!=INVALID_HANDLE_VALUE) {
++                n=(DWORD)wsprintfA(text,"BorrowFailure window=%08lX context=%d active=%d delta=%08lX owner=%p current=%p cr0=%08lX cr3=%08lX directory=%08lX index=%04X backing=%08lX desktop=%08lX head=%08lX sas=%08lX\r\n",
++                    window,observed_context,domain.active,domain.client_delta,domain.owner,session_thread_current(),
++                    c_getCR0(),c_getCR3(),domain.directory,LOWORD(window),
++                    domain.guest_windows[LOWORD(window)],domain.desktop_handle,
++                    page_domain_menu_context() && domain.guest_windows[LOWORD(window)] ?
++                        page_domain_read_owned_word(domain.guest_windows[LOWORD(window)]) : 0u,
++                    page_domain_menu_context() && domain.guest_windows[LOWORD(window)] ?
++                        c_sas_dw_at(domain.guest_windows[LOWORD(window)]) : 0u);
++                (void)WriteFile(file,text,n,&written,NULL);CloseHandle(file);
++            }
++        }
++        SetLastError(saved);return 0u;
++    }
++    {
++        mvdm_softpc_wow_window_borrow *pin = borrow_window_backing(backing, NULL);
++        if (!pin) {
++            mvdm_softpc_wow_window_borrow *entry = *window_borrow_link(backing);
++            char path[MAX_PATH], text[256]; DWORD saved = GetLastError(), n, written; HANDLE file;
++            n = GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH", path, sizeof(path));
++            if (n && n < sizeof(path)) {
++                file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
++                    NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
++                if (file != INVALID_HANDLE_VALUE) {
++                    n = (DWORD)wsprintfA(text, "BorrowPinFailure window=%08lX backing=%08lX entry=%p entry_backing=%08lX retired=%u refs=%lu error=%lu\r\n",
++                        window, backing, entry, entry ? entry->backing : 0u,
++                        entry ? (unsigned)entry->retired : 0u,
++                        entry ? entry->references : 0u, saved);
++                    (void)WriteFile(file, text, n, &written, NULL); CloseHandle(file);
++                }
++            }
++            SetLastError(saved);
++        }
++        return pin ? backing : 0u;
++    }
+ }
+ 
+ /* The private transaction holds this exact record's pin. Public arbitrary

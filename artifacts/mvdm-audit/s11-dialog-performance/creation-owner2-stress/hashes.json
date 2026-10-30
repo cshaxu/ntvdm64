@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9A715E81FE9AF6F20930815C34ED26E4F7869CE8EC5D170D89178239D3373A0B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner2-stress\\result.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "80F38D26A0E983219AC707B73784424AEFA5C0B3457EE4FAF0D5A9DCA62F6146",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner2-stress\\probe.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "15D8C543162B2F0B3C32781E0BDEBEA049695EA5C1A432C4581138FCC261B711",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner2-stress\\windows.txt"
+  }
+]

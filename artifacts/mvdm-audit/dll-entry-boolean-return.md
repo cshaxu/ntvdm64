@@ -1,5 +1,11 @@
 # DLL-entry BOOLEAN return contract
 
+**Historical S10 audit:** the candidate described below has since been
+integrated into the working-tree generator and is not yet published. Current
+implementation and bounded loader evidence are recorded in
+[S11 foundation candidates](s11-foundation-candidates.md); the original
+fixture findings below do not alone prove real guest DLL lifecycle.
+
 The external loader frontier led to a concrete project ABI mismatch rather
 than a need to port NT4 NTDLL. Original `wow32.c::W32DllInitialize` and
 `wow32.h` declare BOOLEAN. The selected Windows ABI defines it as one byte;
@@ -44,3 +50,24 @@ plus existing WOW lifecycle and coherent package gates. Expected mirror diff
 is zero; the proposed change is one project-owned generator declaration, with
 no guest change or private NTDLL import. The candidate is not implemented or
 published by this S10 audit.
+
+## Real WOW32 loader boundary, source recheck
+
+The boolean ABI repair concerns the host WOW32.DLL process initializer, not
+an arbitrary 16-bit guest DLL's entry routine. The selected `nt_bop.c` first
+enters the WOW page domain, calls `SafeLoadLibrary("WOW32")`, resolves
+`W32Init`, `W32Dispatch` and required auxiliary exports, then calls `W32Init`.
+The selected `mvdm_softpc_firmware.c` maps this name to the staged product's
+`system32/WOW32.DLL` and invokes the host loader. Thus successful real WOW
+startup and the previously observed loaded-module path establish a normal
+host-DLL load, while the direct and Windows-loader BOOLEAN fixtures prove the
+bridge's false-return treatment only with a controlled provider.
+
+Original `W32DllInitialize` can return FALSE when `CreateSmallHeap` or
+`HeapCreate` fails during process attach. A failed native load is handled by
+the original `nt_bop.c` load-failure path, which requests VDM termination;
+missing required exports separately call `FreeLibrary` before termination.
+These are source-traced branches, not injected real-provider failure results.
+The call chain and controlled tests do not prove actual heap-failure cleanup,
+thread notifications or guest DLL initialization/unload semantics. No source
+or guest change was made for this recheck.

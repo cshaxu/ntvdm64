@@ -1,0 +1,9 @@
+{
+  "ninja": "C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/ninja.exe",
+  "tree": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+  "targets": [
+    "wow32.dll"
+  ],
+  "count": 235,
+  "commands_sha256": "C717673A838FA1FE70132CA569881563CB176968817731BACEC7E1FDD6FAD30D"
+}

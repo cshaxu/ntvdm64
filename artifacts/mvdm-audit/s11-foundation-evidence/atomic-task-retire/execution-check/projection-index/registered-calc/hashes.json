@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "09B5E717589598B9DF943A690A78B5F5F0A586468CF08BEB8CED58623C49BCC7",
+    "Path": "O:\\w31\\CALC.EXE"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "44592B045EE66EBF897B17BC31899C976424D0B5F598191E1CECA86BBFFD5A9B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_multi_dialog_probe.c"
+  }
+]

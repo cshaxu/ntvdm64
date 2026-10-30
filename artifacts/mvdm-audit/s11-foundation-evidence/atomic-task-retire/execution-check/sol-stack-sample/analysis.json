@@ -1,0 +1,1020 @@
+{
+  "samples": 127,
+  "counts": [
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "nearest_symbol": "",
+      "samples": 20
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "nearest_symbol": "",
+      "samples": 12
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "nearest_symbol": "",
+      "samples": 10
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_session_thread_current",
+      "samples": 8
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "nearest_symbol": "",
+      "samples": 7
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_xtrn2phy",
+      "samples": 5
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_phyR",
+      "samples": 5
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_copy_window_observation",
+      "samples": 5
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_qsort",
+      "samples": 4
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_phyR",
+      "samples": 4
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_copy_window_observation",
+      "samples": 4
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_compare_class_reference",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_memmove",
+      "samples": 3
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve",
+      "samples": 3
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_vd_dummy",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_session_thread_current",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_memset",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_window_borrow_find",
+      "samples": 2
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_phy_r32",
+      "samples": 2
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_bsearch",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_write_word",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "KERNELBASE.dll",
+      "nearest_symbol": "",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_c_sas_dw_at",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_translate",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_phy_r32",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_window_words_pin_generation@8",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_retain_window_generation@12",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_graph_row_index@20",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_mvdm_softpc_wow_page_domain_collect_observed_classes",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_copy_current_window_view",
+      "samples": 1
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_qsort",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_retain_window_generation@12",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_xtrn2phy",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_window_borrow_find",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_c_sas_dw_at",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_memmove",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_memset",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "nearest_symbol": "_mvdm_softpc_wow_page_domain_read_window_view",
+      "samples": 1
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8",
+      "samples": 1
+    }
+  ],
+  "details": [
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x47d91",
+      "nearest_symbol": "_qsort+0x381"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x17b964",
+      "nearest_symbol": "_bsearch+0x80"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x16bc",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x166d60",
+      "nearest_symbol": "_compare_class_reference+0x0"
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x7853c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x7d96",
+      "nearest_symbol": "_write_word+0x6"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x5fdc",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x6d4c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x7ee75",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "KERNELBASE.dll",
+      "rva": "0x15c7a3",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x70b0",
+      "nearest_symbol": "_vd_dummy+0x0"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1c1c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x6ccd",
+      "nearest_symbol": "_c_sas_dw_at+0x3d"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x156c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x5725",
+      "nearest_symbol": "_session_thread_current+0x15"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x3323e",
+      "nearest_symbol": "_memset+0x3e"
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x5edcb",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8+0x45b"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x592c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x32b2e",
+      "nearest_symbol": "_memmove+0x4e"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x176c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x96ac",
+      "nearest_symbol": "_xtrn2phy+0xbc"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x15e0f8",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_translate+0x18"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x78e5",
+      "nearest_symbol": "_phyR+0xd5"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x47ae6",
+      "nearest_symbol": "_qsort+0xd6"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x7985",
+      "nearest_symbol": "_phy_r32+0x5"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x176c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x176c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x16ce93",
+      "nearest_symbol": "_window_borrow_find+0x23"
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x7838c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x7ee75",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x16ce93",
+      "nearest_symbol": "_window_borrow_find+0x23"
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x571e7",
+      "nearest_symbol": "_wow_window_words_pin_generation@8+0x27"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x9707",
+      "nearest_symbol": "_xtrn2phy+0x117"
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x5ea68",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8+0xf8"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x96f0",
+      "nearest_symbol": "_xtrn2phy+0x100"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x32b2e",
+      "nearest_symbol": "_memmove+0x4e"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x167364",
+      "nearest_symbol": "_copy_window_observation+0x2e4"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x592c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x5e604",
+      "nearest_symbol": "_retain_window_generation@12+0x64"
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x95c78",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x5e312",
+      "nearest_symbol": "_graph_row_index@20+0x32"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x167cc2",
+      "nearest_symbol": "_mvdm_softpc_wow_page_domain_collect_observed_classes+0x1c2"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x166e69",
+      "nearest_symbol": "_copy_current_window_view+0xc9"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x78e5",
+      "nearest_symbol": "_phyR+0xd5"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x32b2e",
+      "nearest_symbol": "_memmove+0x4e"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x96d3",
+      "nearest_symbol": "_xtrn2phy+0xe3"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x15e036",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve+0x46"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x16728e",
+      "nearest_symbol": "_copy_window_observation+0x20e"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x1671dc",
+      "nearest_symbol": "_copy_window_observation+0x15c"
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x7ee75",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x3d460",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x4e200",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x4e256",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x47cfa",
+      "nearest_symbol": "_qsort+0x2ea"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x70b0",
+      "nearest_symbol": "_vd_dummy+0x0"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x166d6c",
+      "nearest_symbol": "_compare_class_reference+0xc"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1cac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x95c78",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x121c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x4e256",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1bac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x7907",
+      "nearest_symbol": "_phyR+0xf7"
+    },
+    {
+      "phase": "open",
+      "module": "ntdll.dll",
+      "rva": "0x95c78",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1cac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1cac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x47bbc",
+      "nearest_symbol": "_qsort+0x1ac"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x166d70",
+      "nearest_symbol": "_compare_class_reference+0x10"
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1cac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "win32u.dll",
+      "rva": "0x1cac",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x9669",
+      "nearest_symbol": "_xtrn2phy+0x79"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x167129",
+      "nearest_symbol": "_copy_window_observation+0xa9"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x3323e",
+      "nearest_symbol": "_memset+0x3e"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x5725",
+      "nearest_symbol": "_session_thread_current+0x15"
+    },
+    {
+      "phase": "open",
+      "module": "ntvdm.exe",
+      "rva": "0x78dd",
+      "nearest_symbol": "_phyR+0xcd"
+    },
+    {
+      "phase": "open",
+      "module": "WOW32.DLL",
+      "rva": "0x5edcb",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8+0x45b"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x7853c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x7ee75",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x4e21f",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x571c",
+      "nearest_symbol": "_session_thread_current+0xc"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x47d8a",
+      "nearest_symbol": "_qsort+0x37a"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x5725",
+      "nearest_symbol": "_session_thread_current+0x15"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x571f",
+      "nearest_symbol": "_session_thread_current+0xf"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x571f",
+      "nearest_symbol": "_session_thread_current+0xf"
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "rva": "0x5e5e1",
+      "nearest_symbol": "_retain_window_generation@12+0x41"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x78e5",
+      "nearest_symbol": "_phyR+0xd5"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x79b8",
+      "nearest_symbol": "_phy_r32+0x38"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x96a0",
+      "nearest_symbol": "_xtrn2phy+0xb0"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x78e5",
+      "nearest_symbol": "_phyR+0xd5"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x592c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x6d4c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x16ce93",
+      "nearest_symbol": "_window_borrow_find+0x23"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x5725",
+      "nearest_symbol": "_session_thread_current+0x15"
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x603a0",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x16736f",
+      "nearest_symbol": "_copy_window_observation+0x2ef"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x167129",
+      "nearest_symbol": "_copy_window_observation+0xa9"
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x7853c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x167154",
+      "nearest_symbol": "_copy_window_observation+0xd4"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x6cc6",
+      "nearest_symbol": "_c_sas_dw_at+0x36"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x1bdc",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x782e",
+      "nearest_symbol": "_phyR+0x1e"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x5710",
+      "nearest_symbol": "_session_thread_current+0x0"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x139c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x7815",
+      "nearest_symbol": "_phyR+0x5"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x32b30",
+      "nearest_symbol": "_memmove+0x50"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x167350",
+      "nearest_symbol": "_copy_window_observation+0x2d0"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x181c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x571f",
+      "nearest_symbol": "_session_thread_current+0xf"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x15e050",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve+0x60"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x11fc",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x78c4",
+      "nearest_symbol": "_phyR+0xb4"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x156c",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "rva": "0x7947c",
+      "nearest_symbol": "_memset+0x3c"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x169ad1",
+      "nearest_symbol": "_mvdm_softpc_wow_page_domain_read_window_view+0xb1"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x167329",
+      "nearest_symbol": "_copy_window_observation+0x2a9"
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x95c78",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x15e036",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve+0x46"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x15e036",
+      "nearest_symbol": "_mvdm_softpc_physical_mapping_resolve+0x46"
+    },
+    {
+      "phase": "close",
+      "module": "ntdll.dll",
+      "rva": "0x4e252",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "WOW32.DLL",
+      "rva": "0x5edc0",
+      "nearest_symbol": "_wow_user_borrow_client_graph@8+0x450"
+    },
+    {
+      "phase": "close",
+      "module": "win32u.dll",
+      "rva": "0x5aec",
+      "nearest_symbol": ""
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x571c",
+      "nearest_symbol": "_session_thread_current+0xc"
+    },
+    {
+      "phase": "close",
+      "module": "ntvdm.exe",
+      "rva": "0x79b8",
+      "nearest_symbol": "_phy_r32+0x38"
+    }
+  ],
+  "map_sha256": {
+    "ntvdm.exe": "BD57D1B7069B85C70A9F149AE81D63212D31F7A395742487824B283E4C1F2250",
+    "wow32.dll": "9F11D6B0DC87416D0CD10E7AEDD6003DDA80EE33F74AA220C7EC37FCF80E995E"
+  },
+  "limitation": "One game window thread, nominal 25ms sampling, observer overhead, nearest map symbol only; not process CPU percentages or stack attribution."
+}

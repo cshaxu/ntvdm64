@@ -1,0 +1,265 @@
+{
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "0F9885560A59A413DCB178A7915A7B4134684251B69CFB98E8F4EB0A71D8A27D",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "623F3161CB576EE88406A4012FA7EBB1A3396486C9C6C8AD9BB263CF3512C426",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "ACD6BE1547E463B2313849EE9E70393CC6279E57D325E7F8B2157308A9E047CD",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "FD0A2D4A7097E246B0535C37867692911EDE20FD001D903F4930B8780715450F",
+      "Machine": 332,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "8356F96605378A1EC5D8A8E29F433F53F5B3DBAAD51A743C26C452D9C1407E20"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "959D959BFBCCE0BFEBC56DF722E6842BB74717726C780273BFEEB12559B83E21",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "A675D10B07827E69BDB2A0BF80BDF4387940709038E9F0C7B76FA81E56EE9A70",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "C5268DCA54698BD08E71866CD1B5BAB7026515BEB283C7699C6EA02E510BAF38",
+      "Machine": 332,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "CC9A3A3E0200DDBDB93A22B487FD57C9129C382A212A97A254A294583F48C297"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "BC1DCBB0C927898C523A3F816E2BAC804583E11882D3625BB09D558A63A39A17",
+      "Machine": 332,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "C31F22FD9BBC88419D70C4D4A03BDBFC0CC72931838615227E775AA27521CDCA"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "DA3EA4E51DAD16F10ED62B17B45401C35CB5B31653A81F350E7430E503063C9F",
+      "Machine": 332,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "9707FF7735E372402DA500CF1F88B2E09D518322630CDE9A7CCD031C91B473A9",
+      "Machine": 34404,
+      "PackageId": "445eeedc-d546-4ee4-9006-873758500770",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "limits": "Cumulative native_call_end elapsed time includes execution reacquisition and nested work; startup and both dialogs; emitted every 64 completions so tail may be absent. Diagnostic only.",
+  "rows": [
+    {
+      "thread": "16400",
+      "rva": "0006321b",
+      "symbol": "_wow_native_DefWindowProcA@16",
+      "count": 127,
+      "ms": 1474
+    },
+    {
+      "thread": "16400",
+      "rva": "000762ec",
+      "symbol": "_call_previous_window_proc@24",
+      "count": 75,
+      "ms": 1058
+    },
+    {
+      "thread": "16400",
+      "rva": "0007354f",
+      "symbol": "_create_bound@36",
+      "count": 30,
+      "ms": 437
+    },
+    {
+      "thread": "16400",
+      "rva": "00065d4b",
+      "symbol": "_wow_native_SendMessageW@16",
+      "count": 32,
+      "ms": 419
+    },
+    {
+      "thread": "16400",
+      "rva": "00062859",
+      "symbol": "_wow_native_BeginPaint@8",
+      "count": 31,
+      "ms": 409
+    },
+    {
+      "thread": "16400",
+      "rva": "00063e19",
+      "symbol": "_wow_native_EndPaint@8",
+      "count": 31,
+      "ms": 389
+    },
+    {
+      "thread": "16400",
+      "rva": "0006c2de",
+      "symbol": "_wow_edit_NtUserGetControlColor@16",
+      "count": 28,
+      "ms": 357
+    },
+    {
+      "thread": "16400",
+      "rva": "0005d06a",
+      "symbol": "_wow_menu_native_InsertMenuItemW@16",
+      "count": 14,
+      "ms": 328
+    },
+    {
+      "thread": "16400",
+      "rva": "00061f06",
+      "symbol": "_peek_message_published@28",
+      "count": 16,
+      "ms": 173
+    },
+    {
+      "thread": "16400",
+      "rva": "00063802",
+      "symbol": "_wow_native_DispatchMessageW@4",
+      "count": 9,
+      "ms": 170
+    },
+    {
+      "thread": "16400",
+      "rva": "00062b55",
+      "symbol": "_wow_native_CallMsgFilterW@8",
+      "count": 10,
+      "ms": 142
+    },
+    {
+      "thread": "16400",
+      "rva": "00063b19",
+      "symbol": "_wow_native_EnableWindow@8",
+      "count": 6,
+      "ms": 79
+    },
+    {
+      "thread": "16400",
+      "rva": "00064356",
+      "symbol": "_wow_native_GetDC@4",
+      "count": 5,
+      "ms": 79
+    },
+    {
+      "thread": "16400",
+      "rva": "000677a9",
+      "symbol": "_wow_native_ShowWindow@8",
+      "count": 4,
+      "ms": 78
+    },
+    {
+      "thread": "16400",
+      "rva": "000678b2",
+      "symbol": "_wow_native_UpdateWindow@4",
+      "count": 4,
+      "ms": 48
+    },
+    {
+      "thread": "16400",
+      "rva": "000664ee",
+      "symbol": "_wow_native_SetFocus@4",
+      "count": 4,
+      "ms": 48
+    },
+    {
+      "thread": "16400",
+      "rva": "0006a27b",
+      "symbol": "_native_default@20",
+      "count": 3,
+      "ms": 46
+    },
+    {
+      "thread": "16400",
+      "rva": "0006c0ed",
+      "symbol": "_wow_edit_FillWindow@16",
+      "count": 2,
+      "ms": 32
+    },
+    {
+      "thread": "16400",
+      "rva": "00067076",
+      "symbol": "_wow_native_SetWindowPos@28",
+      "count": 1,
+      "ms": 16
+    },
+    {
+      "thread": "16400",
+      "rva": "000651fc",
+      "symbol": "_wow_native_InvalidateRect@12",
+      "count": 4,
+      "ms": 16
+    },
+    {
+      "thread": "16400",
+      "rva": "0006a055",
+      "symbol": "_wow_dialog_set_system_menu@4",
+      "count": 2,
+      "ms": 16
+    },
+    {
+      "thread": "16400",
+      "rva": "00063722",
+      "symbol": "_wow_native_DispatchMessageA@4",
+      "count": 4,
+      "ms": 15
+    },
+    {
+      "thread": "16400",
+      "rva": "00065e2e",
+      "symbol": "_wow_native_SetActiveWindow@4",
+      "count": 1,
+      "ms": 15
+    },
+    {
+      "thread": "16400",
+      "rva": "000609c5",
+      "symbol": "_native_peek@12",
+      "count": 3,
+      "ms": 0
+    },
+    {
+      "thread": "16400",
+      "rva": "00066218",
+      "symbol": "_wow_native_SetCursor@4",
+      "count": 2,
+      "ms": 0
+    }
+  ],
+  "sourceHash": "1929D186CBFBAABF4BCDC01D6BF0F480BE18B58467958C0B9B4A5323DE6D1578",
+  "exit": "0",
+  "mapHash": "5E9341FFCAA491C5E35B9FE6F1D9E4CDA7D063908DA6B511D5603C074FE8BBF9"
+}

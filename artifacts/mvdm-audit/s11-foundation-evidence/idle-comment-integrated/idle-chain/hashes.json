@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_idle_hook_binding.c",
+    "Hash": "0458E0CDB21C2DCA361D10F52C061EC88FF2DF4BD6311BB3A7F2B79BE185BBC1"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\adapter-mvdm-host-out\\wow\\wow_idle_hook_fixture.c",
+    "Hash": "402FD6618DA3B690509993FB3BF98EC48F5B4B668601E71A7F286216A0EB7B20"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_idle_hook_binding.obj",
+    "Hash": "5282D53EE9714A953F36966B4FBE4125CFEB59451131D71EB44DB76A2C8C5C66"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32.dll",
+    "Hash": "32C4C7F4DF253D5213096A270F5741BE3A31D627AB3BD3F4EED8B7E44DB6123C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\idle-comment-current-chain\\fixture.exe",
+    "Hash": "7EC163128D740581E4ABB38BD8A35574E01BA14B3855A56E55B80CBDE7BA193A"
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "ccpu_header_consumers": [
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/ccpu/sasCdef.obj",
+      "sha256": "61D48711680E4D5B2E8728008148B6E10701131EFAE4730453AE34FF47A1362E",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/keymouse/mouse_io.obj",
+      "sha256": "33E150BE58BABA199B80F89C95A81DE3BE473B89A2F65683781CF90DB03556F4",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/base-debug/trace.obj",
+      "sha256": "244832196DCB9DAD972EB067E3BD4477BDB51738205F39FA686E09D84398DE0C",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_ega.obj",
+      "sha256": "A9CAC126764FD5B70D54DEB22FDB5249947E6A201C471CF8AF868F03BCBA4E12",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_vga.obj",
+      "sha256": "8B8AF7B54DBFAC089F8391A8A174716C3ED829C49585792B78E80CED935C909F",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_graph.obj",
+      "sha256": "A3A1DFD6F9DC75B9AD12C951AD58A57937E6EF7DEA9D223F1B0236EFBFB93F95",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_mouse.obj",
+      "sha256": "32F6E879955C078C89284A6D78755A4FF5F4196A2DF4A45E9AF45E56C741F69B",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_fulsc.obj",
+      "sha256": "F8AC1D8E3D391085414AA47236C8E8C8B494E7E25E416B50689FB71319B8D3BF",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/host/nt_det.obj",
+      "sha256": "1928C05BB8D459307FCD6AA5E272CE823E559BA3EAE61CE95DE5BA3CF6C77783",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/adapter-softpc/mvdm_softpc_text_video.obj",
+      "sha256": "CA6A011B50A7FD4C14CA4745C174A1F00223AE0F152AFDF2A3B9FEDA7FE96F3F",
+      "cpu_video_relocations": []
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/worker/obj/adapter-softpc/v7_pointer_binding.obj",
+      "sha256": "ED24F4952126C729DB934914593DBD81D709F335F9B3B8A24156B254E844DB27",
+      "cpu_video_relocations": []
+    }
+  ],
+  "prod_getset": {
+    "object": "build/.ninja/msvc-x86-release/worker/obj/ccpu/c_getset.obj",
+    "sha256": "71250F6E4FECC984202210179C1AE53BC61B2CA8E7D938A00C475130D890BBCF",
+    "public_cpu_state_symbols": [],
+    "source_guard": "PIG",
+    "selected_profile": "PROD"
+  },
+  "scope": "Selected cached x86 product objects only; indirect aliases and C-VID behavior remain separate."
+}

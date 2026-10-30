@@ -1,0 +1,22 @@
+{
+  "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
+  "status_by_scope": {
+    "tool-or-scaffold-candidate": {
+      "partial": 57,
+      "excluded": 15
+    },
+    "host-candidate": {
+      "partial": 876,
+      "excluded": 341,
+      "full": 53
+    },
+    "role-pending": {
+      "excluded": 95,
+      "partial": 183
+    },
+    "guest-target-observed": {
+      "pending": 195
+    }
+  },
+  "limitation": "scope is provisional, not proof of runtime behavior or guest exclusivity"
+}

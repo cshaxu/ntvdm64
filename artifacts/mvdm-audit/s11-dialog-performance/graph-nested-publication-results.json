@@ -1,0 +1,22 @@
+{
+  "fixtureSha256": "3959EAA0FD22969E57074F6775B6BA047440101A87CDBF7B702721D9AEAC363C",
+  "scope": "Nested graph publication and alias lifetime; no performance acceptance",
+  "results": [
+    {
+      "marker": "WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1",
+      "exit": "0",
+      "name": "graph-nested-current"
+    },
+    {
+      "marker": "WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1",
+      "exit": "0",
+      "name": "graph-nested-edge"
+    },
+    {
+      "marker": "WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1",
+      "exit": "0",
+      "name": "borrow-nested-current"
+    }
+  ],
+  "candidateSha256": "DAF3FF7D130BE95ABE29A7B8601446ED1344F6541A33057AB951A948FBDA1011"
+}

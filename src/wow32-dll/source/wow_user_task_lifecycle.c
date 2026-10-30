@@ -193,9 +193,9 @@ static BOOL WINAPI idle_hooked(wow_task_order_thread *thread)
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     if (!binding || binding->thread != thread || !binding->exclusive_held)
         lifecycle_failure("idle-hook-query-owner", ERROR_INVALID_STATE);
-    /* The selected TD owns both the original registration intent and this
-     * task's native observer. */
-    return wow_user_idle_hook_registered(thread->native_thread_id);
+    /* The idle vector is shared by the worker. The selected task supplies
+     * the callback context even when another live task registered it. */
+    return wow_user_idle_hook_registered(0);
 }
 
 static void WINAPI idle_hook(wow_task_order_thread *thread)
@@ -652,7 +652,10 @@ BOOL WINAPI wow_user_task_lifecycle_yield(wow_user_task_lifecycle *owner)
     if (!task || !wow_user_runtime_enter(wow_user_runtime_current())) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
     }
-    __try { result = xxxUserYield(&task->thread); }
+    __try {
+        result = xxxUserYield(&task->thread);
+        if (result) publish_scheduled_return(wow_user_runtime_current());
+    }
     __finally { (void)wow_user_runtime_leave(wow_user_runtime_current()); }
     return result;
 }
@@ -715,7 +718,7 @@ DWORD WINAPI wow_user_msg_wait(DWORD count, const HANDLE *handles, BOOL all,
         result = MsgWaitForMultipleObjects(count, handles, all, timeout, wake_mask);
     } __finally {
         error = GetLastError();
-        if (!wow_user_native_call_end(&call))
+        if (!wow_user_native_call_end_wait(&call))
             wow_user_native_call_failed("msg-wait-return", GetLastError());
         SetLastError(error);
     }
@@ -1591,6 +1594,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     wow_user_task_lifecycle_thread *task;
     wow_user_runtime_thread *binding = wow_user_runtime_current();
     BOOL result = FALSE;
+    ULONG index;
     if (!owner || !binding || binding->runtime != owner->runtime ||
             !wow_user_runtime_enter(binding)) {
         SetLastError(ERROR_INVALID_STATE); return FALSE;
@@ -1601,6 +1605,22 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
     if (!task) {
         (void)wow_user_runtime_leave(binding);
         SetLastError(ERROR_NOT_FOUND); return FALSE;
+    }
+    if (task->thread.execution && !binding->terminal_exit) {
+        (void)wow_user_runtime_leave(binding);
+        SetLastError(ERROR_BUSY); return FALSE;
+    }
+    if (binding->terminal_exit)
+        task->thread.TIF_flags |= WOW_TASK_TIF_INCLEANUP;
+    /* Keep the live-window check and task withdrawal under the same lock as
+     * cross-task native adoption, so a new owner cannot appear in between. */
+    for (index = 0; index <= owner->objects->last_handle; ++index) {
+        wow_cleanup_handle *entry = &owner->objects->entries[index];
+        if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
+            retirement_trace("live-window", task_id, ERROR_BUSY);
+            (void)wow_user_runtime_leave(binding);
+            SetLastError(ERROR_BUSY); return FALSE;
+        }
     }
     /* Native-thread retirement is distinct from pfnWOWCleanup. Keep the
      * carrier alive if the finite original cleanup binding rejects release. */
@@ -1775,30 +1795,10 @@ static BOOL WINAPI retire_current_thread(PVOID context)
     wow_user_task_lifecycle *owner = context;
     wow_user_task_lifecycle_thread *task = current_task(owner);
     wow_user_runtime_thread *binding = wow_user_runtime_current();
-    ULONG index;
     if (!task) { SetLastError(ERROR_INVALID_STATE); return FALSE; }
-    if (!wow_user_runtime_enter(binding)) return FALSE;
-    if (task->thread.execution && !binding->terminal_exit) {
-        (void)wow_user_runtime_leave(binding);
-        SetLastError(ERROR_BUSY);
-        return FALSE;
-    }
-    if (!wow_user_runtime_leave(binding))
-        wow_user_native_call_failed("retire-execution-scope", GetLastError());
     retirement_trace("enter", task->thread.ptdb->hTaskWow, 0);
     /* Window destruction belongs before original resource teardown, not
      * here. Late finalization retains/refuses any surviving object owner. */
-    if (binding && binding->terminal_exit)
-        task->thread.TIF_flags |= WOW_TASK_TIF_INCLEANUP;
-    /* Retryable detach rejects live windows without changing them. Terminal
-     * cleanup must also prove its destruction pass removed every owner. */
-    for (index = 0; index <= owner->objects->last_handle; ++index) {
-        wow_cleanup_handle *entry = &owner->objects->entries[index];
-        if (entry->bType == TYPE_WINDOW && entry->pOwner == &task->thread) {
-            retirement_trace("live-window", task->thread.ptdb->hTaskWow, ERROR_BUSY);
-            SetLastError(ERROR_BUSY); return FALSE;
-        }
-    }
     {
         DWORD task_id = task->thread.ptdb->hTaskWow;
         BOOL result = retire_task(owner, task_id, NULL, NULL, 0);

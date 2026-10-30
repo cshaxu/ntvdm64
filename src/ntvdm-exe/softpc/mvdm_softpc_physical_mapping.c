@@ -199,14 +199,17 @@ int32_t VdmUnmapDosMemory(uint32_t dos_intel_page, uint32_t page_count)
 int mvdm_softpc_physical_mapping_translate(uint32_t intel_address,
     uint32_t *translated_address_out)
 {
-    session *owner = session_thread_current();
+    session *owner;
     physical_alias_record *record;
 
     if (translated_address_out != NULL) *translated_address_out = intel_address;
     /* ADAPTER-WOW-083: no alias can match an empty list. Preserve the
      * negative output without a per-access session fence; active alias
      * lookup still uses every original owner/session/range check below. */
-    if (aliases == NULL || owner == NULL || !session_valid(owner) || translated_address_out == NULL)
+    if (aliases == NULL || translated_address_out == NULL)
+        return 0;
+    owner = session_thread_current();
+    if (owner == NULL || !session_valid(owner))
         return 0;
     for (record = aliases; record != NULL; record = record->next) {
         uint32_t offset;

@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\two-task-owner-candidate\\wow32.dll",
+    "Hash": "48253C616C4B51BCEBE98138960A9258AEBD280BC04AC8F70B1B7A93D38BB003"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-owner-isolated\\creation-lock.obj",
+    "Hash": "5EEEE6733E40D8DE54889982DBB85E5EA87A356487D12069405A190B76630500"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\publish-failure-diagnostic\\wow_user_task_lifecycle.obj",
+    "Hash": "FD0A9633D0830734A5FD986C19D3F516D2F412683180F328F249E44C19E7C0A9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-index-context\\ntvdm.exe",
+    "Hash": "C92A4225E2BE69391C2891C90A1B3DF8F415E8A97CC846F6BD617F822883BACF"
+  }
+]

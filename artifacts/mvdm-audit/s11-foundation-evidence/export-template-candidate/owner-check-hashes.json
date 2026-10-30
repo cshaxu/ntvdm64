@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ntvdm-export-owners.py",
+    "Hash": "215D6497481A9C15199A810DC97C62B12C2A610C735061EEB6B9A8E6126592E2"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe",
+    "Hash": "C4E46049FCFF8496D44B453DB50EE72D9E583676FB61C86C00D0BAFDB71D8C2B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ntvdm.exe.map",
+    "Hash": "0AF325B900F4370FE3AE4D0AF00281EF5DE7480B4A44E9B734FFD9AF1B5CA0CE"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\export-ordinal-fixed-dump.txt",
+    "Hash": "8A5C1F9ACC6C76633378ED11A354DEFC9F1F555276E2AB36ED65B37794C4DBDA"
+  }
+]

@@ -1,0 +1,67 @@
+{
+  "started": "2026-10-29T05:22:04.1817256Z",
+  "owner_pid": 5572,
+  "result": "pass",
+  "contract": "niddb",
+  "scope": "Actual cached original object; controlled host boundaries, no guest or production lifecycle acceptance",
+  "build_root": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-contract",
+  "fixture_path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-contract\\niddb-object-contract.exe",
+  "inputs": [
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-softpc-object-contract.ps1",
+      "sha256": "A9D2F7FD7BA0FC1CDAE1DC132511CE0A2D4D4556E4148E715672E6EF8E88F381"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "sha256": "CDD1B91450DC725A2C629F1DDD08705DFC8D57A6BD40F5E8F3BF894D66EC9152"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c",
+      "sha256": "342E9101E2AFC0E16162FCB1495545D3C26DC2F1429A1B4F3BF1D096F46095B1"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "sha256": "45D1E266418E382136875506990C924537121AE245FB8E92F92A8157AB7D3C94"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+      "sha256": "483500E02FE4CC019533A91C5A61FF954E4E45351BC75D128A00090D870339EF"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "sha256": "2EC7DCCED054637214013AF7E9ECFB5006E41E2909CE4584FB2529D314FAF367"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\virtual.h",
+      "sha256": "D4576F40B4C22A3F83BBB76CD07DB800275C0C61154983966B67EA3AAFBBA976"
+    },
+    {
+      "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "sha256": "8DB9ADFA6A70456066DDF7BAD691130CB76571723A980E73D76C67FEE1A4FF51"
+    }
+  ],
+  "runs": [
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /W4 /MT /Od /D_CRT_SECURE_NO_WARNINGS \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" \"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-contract\\fixture.obj\" /Fe:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-contract\\niddb-object-contract.exe\" /link kernel32.lib\"",
+      "kind": "build",
+      "pid": 18416,
+      "exit": 0
+    },
+    {
+      "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd\" cl.exe /nologo /MT /c /DMVDM_NIDDB_EXPECT_POINTER_BYTES=8 \"O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\niddb_object_contract_fixture.c\" /Fo:\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-contract\\negative-abi.obj\"\"",
+      "kind": "negative-abi-compile",
+      "pid": 6308,
+      "exit": 2
+    },
+    {
+      "diagnostic_budget_ms": 30000,
+      "kind": "fixture",
+      "pid": 10828,
+      "exit": 0
+    }
+  ],
+  "checks": 15,
+  "callbacks": 3,
+  "fixture_sha256": "0CFA5A260E69E2CBE4146C50CD1B701585F3D8C3BE4F3D1313D9AE8421A918C0",
+  "finished": "2026-10-29T05:22:17.4783382Z"
+}

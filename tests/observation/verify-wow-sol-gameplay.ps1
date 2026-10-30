@@ -4,6 +4,7 @@ param(
     [Parameter(Mandatory)][string]$Observer,
     [Parameter(Mandatory)][string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
+    [switch]$VisibleDesktop,
     [ValidateSet('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')]
     [string[]]$RuntimeImages=@('run16.exe','ntsrv.exe','ntcon.exe','ntvdm.exe','ntvwm.exe')
 )
@@ -33,7 +34,8 @@ try {
         [pscustomobject]@{File=$_;SHA256=(Get-IsolatedFileSha256 (Join-Path $runtime $_))}
     } | ConvertTo-Json | Set-Content "$root\inputs.json"
     $env:TEMP=$runtime;$env:TMP=$runtime;$env:PATH="$runtime\system32;"+$env:SystemRoot+'\System32'
-    $env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+    if($VisibleDesktop){Remove-Item Env:MVDM_OBSERVER_PRIVATE_DESKTOP -ErrorAction SilentlyContinue}
+    else{$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'}
     $start=[Diagnostics.ProcessStartInfo]::new($Observer)
     $start.UseShellExecute=$false;$start.CreateNoWindow=$true
     $start.Arguments='"'+$runtime+'\system32\run16.exe" "'+$runtime+'" "'+$root+'\observer.txt" --wait "'+$runtime+'\SOL.EXE" --observation-timeout-ms 60000'
@@ -46,7 +48,8 @@ try {
         if($worker -or $process.HasExited){break};Start-Sleep -Milliseconds 50
     }while([DateTime]::UtcNow -lt $deadline)
     if(!$worker){throw 'No worker in this owned runtime'}
-    & "$root\probe.exe" $worker.ProcessId "NTVDMConsoleTest-$($process.Id)" "$root\sol" *> "$root\probe.txt"
+    $desktopName=if($VisibleDesktop){'-'}else{"NTVDMConsoleTest-$($process.Id)"}
+    & "$root\probe.exe" $worker.ProcessId $desktopName "$root\sol" *> "$root\probe.txt"
     $probeResult=$LASTEXITCODE
     if($probeResult -ne 0 -and $probeResult -ne 77){throw "Gameplay probe failed: $probeResult"}
     if(!$process.WaitForExit(65000)){throw 'Observer exceeded bound after window close'}

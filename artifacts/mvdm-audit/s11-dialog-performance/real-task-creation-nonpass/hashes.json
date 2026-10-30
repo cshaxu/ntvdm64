@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-creation-scope\\fixture.exe",
+    "Hash": "683C858A8C3660FC221C428503DCD1AEC625795DC685F434BD38D0AA81407A62"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-creation-scope\\provider.lib",
+    "Hash": "A84BA90613700F9345985C0C837B816AD7AFBA90B5A730FE5BFBA65D936AFD9B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-owner-isolated\\creation-lock.obj",
+    "Hash": "5EEEE6733E40D8DE54889982DBB85E5EA87A356487D12069405A190B76630500"
+  }
+]

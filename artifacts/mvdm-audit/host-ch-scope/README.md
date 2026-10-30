@@ -269,3 +269,39 @@ The [CPU, fax, WOW and DPMI review](../s10-cpu-fax-wow-dpmi-partial.csv) records
 The [final host candidate crosswalk](../s10-remaining-host-final-candidates.csv) records the last 21 source roles and their finite S11–S17 obligations. This closes their file-role classification only; functional behavior remains open.
 
 The [195 guest-target counterexample review](../s10-guest-observed-counterexamples.json) rechecked four current Ninja dependency snapshots and found no exact captured host dependency or dual-target recipe counterexample. The observer checks recorded graph and source/recipe hashes but does not refresh current Ninja dependency output or rescan host includes; graph hash alone cannot certify current dependency state. This result is limited to the snapshots and does not exclude other configurations or guest capabilities.
+
+The 53 host C/H rows recorded `full` / `全复通` in the frozen source-role
+inventory were rechecked against the current x86 worker Ninja graph and its
+cached dependency records. All files exist: 27 C files occur as graph inputs
+and their named objects occur in the selected NTVDM link map; 26 headers occur
+in the Ninja dependency output. Per-file hashes, evidence inputs and results
+are in [full-role-current-worker-check.json](full-role-current-worker-check.json).
+The two language labels were normalized; counting only the English label
+would incorrectly omit 17 rows. This is build/dependency and link-map evidence,
+not proof that each opcode, error path or guest behavior has executed. It does
+not change any source-role status or the S11–S19 capability obligations.
+
+A separate current-byte recheck hashed each of these 53 worktree files and
+the corresponding `O:/repos.external/OpenNT/base/mvdm` file. All 53 pairs
+matched and every referenced original existed. The input row list remains
+`full-role-current-worker-check.json`; this is original source identity, not
+independent evidence that every preprocessor branch is selected or every
+runtime behavior is restored.
+
+The [current per-file disposition index](current-ch-disposition-index.csv)
+joins the recorded C/H inventory, scoped guest-source crosswalk and mirror
+retention table. It normalizes both Chinese and English status labels, rejects
+missing or duplicate guest dispositions, and rejects any indexed mirror diff
+not classified partial. Its [summary](current-ch-disposition-index-summary.json)
+binds the inventory and retention input hashes. The reproducible join script
+is `build-disposition-index.py` and must be run from the repository root after
+refreshing its input snapshots; its output is not a source or runtime scan.
+
+The index includes 1,815 recorded C/H paths: 53 full, 1,116 partial and 646
+excluded **as source roles in the recorded scope**. The excluded total includes
+195 guest-target paths excluded only as selected host inputs; it does not
+exclude those guest capabilities. All 199 C/H mirror differences appearing in
+this index are partial with textual retention estimates. Remaining mirror rows
+outside the C/H index are tracked in the original retention table. Full source
+role does not mean all runtime behavior or failure paths have passed; future
+stage responsibilities and other configurations remain as recorded above.

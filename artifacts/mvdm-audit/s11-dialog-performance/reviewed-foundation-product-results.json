@@ -1,0 +1,153 @@
+{
+  "fullStatus": "passed",
+  "manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "3F8C4E1F1238C63C20E47EF7FAC718397F2E06361AB923EAF6730CC61003056B",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "08F1F3C74A964719D06B24E507128F232354ED442B83D4A2F49CB7EB42496676"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "C1008227CC357F8F8AFA21CB9C24181BB38BCBB79BC37FAF9BF3D60BEE76BB94",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "717AE541DF8CA2F67AEDAD008C42F62EB8D7F7B71750C22BA131F21F13D5D650"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "CF9775495F92CCFF73A0F0BC2D079ACD36306DF0C9C8150B4A78D2D1D73F55B3",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "EB83C7973D16ADBA39B64403D36B754CC9F7A418CC8F3A0D8D9D294EB58FCE56"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "6A09E258BDBD8672F5A50A35108ED7E349A482E8DFC3A3BD5D0BA69D63E12DF3",
+      "Machine": 332,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "AB9863E771A844FF3AA9AFC40D6580997B8D5172861E5B2AC7743B4C32951273"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "976BCA8A8B81D6E39AF263320C94CB3947A757AFCC98F6235778652907B44AFD",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "26A4A4E0706FD731FB9E11C5E46B4C6148E2D10C2DE4C6BB7ECFF2625A2CD93F"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "89402EE76E242719396C08ED1EF50884E26C70793D185D85BA7D1041F2826B92",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "25EE7050E840D88E73F0A29091D441AA2711F0E732795DAF25F68E18CDFD65AD"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "202BF754F0E7EBFD17EE033D28E789EB925A1E07A3CF457BFDFB77A5E6B1C1E7",
+      "Machine": 332,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "A23F8E164B92724A886951DAF749BCEBF1791D34D05F9CA59D5AA48188E20852"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "4406AF86172A33147242D62829B58E107827DD86C69AC0E990103FD01C226BFF",
+      "Machine": 332,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "74352B8AE79C97BE3270195919173E7525D530DD58C6487546FDD35EB4FA8E03"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "E2CC0A030B64A3E163DDA139A049F7E6EFC6845BC5D0A696D0E2BDBBC2B19A00",
+      "Machine": 332,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "72E9547DAB8788A9579858F1E6275738109E3F16450777F163F9F4CDB79E99B7"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "EE91849247269029E7F4A27D24BBE1133E14C03D88C72AF6BE17129669333385",
+      "Machine": 34404,
+      "PackageId": "c6602866-df53-4628-8289-0e80cf826db6",
+      "InputSha256": "7000D2177253D200485EBA3C0E0A0D470712799403D8D1018432D478C045F054"
+    }
+  ],
+  "build": {
+    "exitCode": 0,
+    "finished": "2026-10-29T17:31:26.329632Z"
+  },
+  "limitations": "Source snapshots accompany explicit inner link logs; Full result pending. Unrelated Win95 tool modifications preserved.",
+  "sources": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\README.md",
+      "Hash": "7837F54FE41D3029022AC097C70D61E84D5A3C1308E34B4D25B8796E576978D7"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "Hash": "45D1E266418E382136875506990C924537121AE245FB8E92F92A8157AB7D3C94"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+      "Hash": "FDB0E23A0C80318BFFD92A3BE4A51A79DBB12CB249C510A0F5A7912E9E9F8B1D"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+      "Hash": "638D1977B8F588ECA74A01F81D1F34372D1C67646DA3F0A697A00C92C59E5AE9"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "Hash": "F4081EDAE56ECD3FAC2E6E90587EE25FC50052BFC7A5BBC4B3C60458EB838C10"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\include\\mvdm_softpc_termination.h",
+      "Hash": "1C067406AF5906D6DE016A4FC18DEF9CC0B251C07C217FE33866180FDE0FD6E2"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_termination.c",
+      "Hash": "45A1E89F20F1ABFD6A60E4D0E03E8E2851088669A70D43106E9C7EC0F1D60E8B"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c",
+      "Hash": "ABE564712453BCBE346513D1F7F0597A92BD46068C1D973B4EABA0ECC948AF11"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_user_borrow_scope.c",
+      "Hash": "FF5AF122ABD9E634CA3BEE1D2E15C2FD46FCA241F5A9D985D06889C549613E9A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_creation_binding.c",
+      "Hash": "B62CB2A26E86B4E3731C6C1CBD42DCF715833863B19204E111EA32B2ED887B04"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_words_binding.c",
+      "Hash": "28381B97F5550E05EC31E0992B3ECF824257672497266E1245361E7AE6009D71"
+    }
+  ],
+  "published": false,
+  "fullResult": {
+    "finished": "2026-10-29T17:38:18.2521936Z",
+    "exitCode": 0
+  },
+  "finalSourceFormal": [
+    {
+      "case": "graph-snapshot",
+      "finished": "2026-10-29T17:39:05.950366Z",
+      "exit": 0
+    },
+    {
+      "case": "window-borrow",
+      "finished": "2026-10-29T17:39:21.494029Z",
+      "exit": 0
+    }
+  ]
+}

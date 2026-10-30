@@ -1,0 +1,138 @@
+[
+  {
+    "Case": "empty",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-empty.txt",
+    "BodyMs": 1760,
+    "CleanupMs": 257
+  },
+  {
+    "Case": "native-zero",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-native-zero.txt",
+    "BodyMs": 2291,
+    "CleanupMs": 275
+  },
+  {
+    "Case": "missing",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-missing.txt",
+    "BodyMs": 3086,
+    "CleanupMs": 252
+  },
+  {
+    "Case": "native-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-native-seven.txt",
+    "BodyMs": 1185,
+    "CleanupMs": 256
+  },
+  {
+    "Case": "native-streams",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-native-streams.txt",
+    "BodyMs": 1173,
+    "CleanupMs": 259
+  },
+  {
+    "Case": "native-eof",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-native-eof.txt",
+    "BodyMs": 1347,
+    "CleanupMs": 282
+  },
+  {
+    "Case": "mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-mem.txt",
+    "BodyMs": 2234,
+    "CleanupMs": 281
+  },
+  {
+    "Case": "nested-empty",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-nested-empty.txt",
+    "BodyMs": 2716,
+    "CleanupMs": 310
+  },
+  {
+    "Case": "nested-mem",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-nested-mem.txt",
+    "BodyMs": 5709,
+    "CleanupMs": 276
+  },
+  {
+    "Case": "mem-repeat",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-mem-repeat.txt",
+    "BodyMs": 2790,
+    "CleanupMs": 286
+  },
+  {
+    "Case": "direct-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-direct-mem.txt",
+    "BodyMs": 1303,
+    "CleanupMs": 288
+  },
+  {
+    "Case": "command-c",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-command-c.txt",
+    "BodyMs": 1245,
+    "CleanupMs": 285
+  },
+  {
+    "Case": "command-c-seven",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-command-c-seven.txt",
+    "BodyMs": 1308,
+    "CleanupMs": 266
+  },
+  {
+    "Case": "guest-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-guest-seven.txt",
+    "BodyMs": 1156,
+    "CleanupMs": 267
+  },
+  {
+    "Case": "command-c-mem",
+    "Expected": 0,
+    "Actual": 0,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-command-c-mem.txt",
+    "BodyMs": 1155,
+    "CleanupMs": 264
+  },
+  {
+    "Case": "direct-seven",
+    "Expected": 7,
+    "Actual": 7,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-direct-seven.txt",
+    "BodyMs": 1537,
+    "CleanupMs": 274
+  },
+  {
+    "Case": "edit",
+    "Expected": 1,
+    "Actual": 1,
+    "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\complete-media-product-matrix\\Window-17-edit.txt",
+    "BodyMs": 5125,
+    "CleanupMs": 286
+  }
+]

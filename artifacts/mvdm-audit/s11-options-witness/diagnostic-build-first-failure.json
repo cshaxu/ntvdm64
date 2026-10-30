@@ -1,0 +1,11 @@
+{
+  "result": "fail",
+  "pid": 20196,
+  "started": "2026-10-29T05:28:53.6771487Z",
+  "command": "/d /s /c \"\"O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build\\..\\options-diagnostic\\build.cmd\"\"",
+  "cwd": "O:\\repos.hobby\\ntvdm64",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/diagnostic.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\foundation-build/diagnostic.stderr.txt",
+  "exit": 1181,
+  "finished": "2026-10-29T05:29:00.6154282Z"
+}

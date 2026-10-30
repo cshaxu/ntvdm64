@@ -89,7 +89,8 @@ try {
             '--observe-console-input-text',('"'+$input+'"'),'--observe-console-line-delay-ms','1800',
             '--observation-timeout-ms','40000')
         $observerProcess=Start-Process -FilePath $observerLaunch -ArgumentList $arguments `
-            -WorkingDirectory $launchBinary -WindowStyle Hidden -PassThru
+            -WorkingDirectory $launchBinary -WindowStyle Hidden -PassThru `
+            -RedirectStandardError "$prefix.observer-stderr.txt"
         $observerProcess.WaitForExit();$observerProcess.WaitForExit()
         $observerExit=$observerProcess.ExitCode;$observerProcess.Dispose()
     }else{

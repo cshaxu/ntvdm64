@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+    "Hash": "3DD83504D51827B1C9EF694086A3EF6813AE83E60A66BDDAB9F6977918B4B81E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_x87_page_fixture.c",
+    "Hash": "60E4A39E7F041B0994B964AAC03044A91BD4F9BCF8E03B282E9527E90215B685"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-x87-pages.py",
+    "Hash": "B8D7E914D3380F712606518FCD496C3FCB51F687C40ABCDF8714F1512433DB8F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x87-page-baseline2\\c_oprnd.h",
+    "Hash": "DBF98F993DA0EB654720B3F8312AA7C3D6E362A0AE62E1E3F56062F810072715"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x87-page-baseline2\\zfrsrvd.obj",
+    "Hash": "0111818DF944E05091FD50476CDD5A03B15F97A8D86DCA31D3FDBF1348FA9AD8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-x87-page-test.exe",
+    "Hash": "C88E49ABD496D99C5028ED2B0F309BE368E390D63F685D7AB6002763B1927FAC"
+  }
+]

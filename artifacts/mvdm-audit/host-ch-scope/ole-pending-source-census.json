@@ -1,0 +1,366 @@
+{
+  "count": 21,
+  "rows": [
+    {
+      "path": "wow16/ole/client/bm.c",
+      "current_sha256": "254A5030EFA1A98B67742F6AC3E33F871892FB6BF8CF692ADF6C0C2E05C90EA9",
+      "original_sha256": "254A5030EFA1A98B67742F6AC3E33F871892FB6BF8CF692ADF6C0C2E05C90EA9",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/dde.c",
+      "current_sha256": "B3779E315402836838EC8DC03BD051BF1539FA762BCE8E939D10C6E05B7FDAB2",
+      "original_sha256": "B3779E315402836838EC8DC03BD051BF1539FA762BCE8E939D10C6E05B7FDAB2",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/defcreat.c",
+      "current_sha256": "3AE79A6B97DCB7B9A174C10EA91C043F291C6A538AB864D2170B353CF2F6805E",
+      "original_sha256": "3AE79A6B97DCB7B9A174C10EA91C043F291C6A538AB864D2170B353CF2F6805E",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/dib.c",
+      "current_sha256": "45A64AF1615A122D945FD564B85A8AF1D7355F70E8452734FEA98584DFBE6BBD",
+      "original_sha256": "45A64AF1615A122D945FD564B85A8AF1D7355F70E8452734FEA98584DFBE6BBD",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/doc.c",
+      "current_sha256": "98DDCE817EDB90CE27EB038CDF7B0FC496CAE2C78EC094CEF1BC19CBF3E0A871",
+      "original_sha256": "98DDCE817EDB90CE27EB038CDF7B0FC496CAE2C78EC094CEF1BC19CBF3E0A871",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/draw.c",
+      "current_sha256": "F1736FF0B981B62A0EF4E847754C57A1771C8FD339BE2FFE8D141306FCF2E61A",
+      "original_sha256": "F1736FF0B981B62A0EF4E847754C57A1771C8FD339BE2FFE8D141306FCF2E61A",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/error.c",
+      "current_sha256": "DD09F9804439BD39CC200C5EC1B6CB8822FA4AC557AD3141161F0E6F2042ECBE",
+      "original_sha256": "DD09F9804439BD39CC200C5EC1B6CB8822FA4AC557AD3141161F0E6F2042ECBE",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/generic.c",
+      "current_sha256": "ECEC4BF77ED9B4FADD6B65062BCCD9E5723B7471763883EF20F34A4D23F66A15",
+      "original_sha256": "ECEC4BF77ED9B4FADD6B65062BCCD9E5723B7471763883EF20F34A4D23F66A15",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/le.c",
+      "current_sha256": "B3FEA346C40D04A23CCE48434FF1CE43AF27F8713BCAD5125F62929CFD5490B4",
+      "original_sha256": "B3FEA346C40D04A23CCE48434FF1CE43AF27F8713BCAD5125F62929CFD5490B4",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/ledde.c",
+      "current_sha256": "CA212E3DAB06E6DEFC05AF97F297A8702899BE87B75170B4E1C814A7590998B1",
+      "original_sha256": "CA212E3DAB06E6DEFC05AF97F297A8702899BE87B75170B4E1C814A7590998B1",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/main.c",
+      "current_sha256": "9F3E990A9E9685E4A62720EC676483BE2E459A40B5553713E4881600D52A0205",
+      "original_sha256": "9F3E990A9E9685E4A62720EC676483BE2E459A40B5553713E4881600D52A0205",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/mf.c",
+      "current_sha256": "319344C9ED130F8D1266E798545673E7825CF58C5BBE7218FE7EE0D6793ADCB4",
+      "original_sha256": "319344C9ED130F8D1266E798545673E7825CF58C5BBE7218FE7EE0D6793ADCB4",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/net.c",
+      "current_sha256": "D25C854C6BE563132F37BF6DBF49C704BBD6890E742E75C48AA5056D69BC308D",
+      "original_sha256": "D25C854C6BE563132F37BF6DBF49C704BBD6890E742E75C48AA5056D69BC308D",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/pbhandlr.c",
+      "current_sha256": "F6F26DD290AFDFF519F5DC284302D8EF7348F939809F3633B85C360F23EA2598",
+      "original_sha256": "F6F26DD290AFDFF519F5DC284302D8EF7348F939809F3633B85C360F23EA2598",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/client/utils.c",
+      "current_sha256": "6ED48E62191188AC2E4063986F2D6A2AEF1F1B56709B25931E332E7EC2DB378F",
+      "original_sha256": "6ED48E62191188AC2E4063986F2D6A2AEF1F1B56709B25931E332E7EC2DB378F",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/block.c",
+      "current_sha256": "D9B75019303D96650865EBCAEAA5812168342B91EF5B83B8B9E74E0DF98CDA74",
+      "original_sha256": "D9B75019303D96650865EBCAEAA5812168342B91EF5B83B8B9E74E0DF98CDA74",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/doc.c",
+      "current_sha256": "82AE0805AB2AA97A9F042F99D144084842902C307715DCFF63B2C4959D140178",
+      "original_sha256": "82AE0805AB2AA97A9F042F99D144084842902C307715DCFF63B2C4959D140178",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/item.c",
+      "current_sha256": "6F5024127209F89B8F2DF45FF274D0477E5F8F4A998832955926DC5FA0FB7892",
+      "original_sha256": "6F5024127209F89B8F2DF45FF274D0477E5F8F4A998832955926DC5FA0FB7892",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/srvr.c",
+      "current_sha256": "50B83FABECA031549E16345E49B0356B0D6F5B7FF9D5A245F436A324AA46470C",
+      "original_sha256": "50B83FABECA031549E16345E49B0356B0D6F5B7FF9D5A245F436A324AA46470C",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/srvrmain.c",
+      "current_sha256": "0BD33CB4C8EB66DF54CCDB255742046135D110D9752802F7BCCE4888508AFF74",
+      "original_sha256": "0BD33CB4C8EB66DF54CCDB255742046135D110D9752802F7BCCE4888508AFF74",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    },
+    {
+      "path": "wow16/ole/server/utils.c",
+      "current_sha256": "5A7D8240861F7A07E3AE2A147034CC20215634C76A3108A19A46B65A066CD9E5",
+      "original_sha256": "5A7D8240861F7A07E3AE2A147034CC20215634C76A3108A19A46B65A066CD9E5",
+      "identical": true,
+      "same_stem_object_in_makefile": true,
+      "selected_graph": {
+        "worker": {
+          "commands": false,
+          "deps": false
+        },
+        "wow32": {
+          "commands": false,
+          "deps": false
+        }
+      }
+    }
+  ],
+  "makefiles": {
+    "src\\mvdm\\wow16\\ole\\client\\makefile": "42A19F54364CF6FEE49047DA225A702FADFF759541E37143B298F3A2EC7C0B58",
+    "src\\mvdm\\wow16\\ole\\server\\makefile": "040ECF946AE5F0FFBBC946C70637801210FDBFE01533E5CC66D0C85133665009"
+  }
+}

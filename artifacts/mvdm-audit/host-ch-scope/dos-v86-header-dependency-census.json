@@ -1,0 +1,375 @@
+{
+  "files": [
+    {
+      "path": "dos/v86/h/assert.h",
+      "sha256": "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC",
+      "original_sha256": "6A32B3D4B878A7CAFFDB6EA632B951D5A6CAFA4CB1E81E00C112D9DD8FE97CDC",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/bios.h",
+      "sha256": "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB",
+      "original_sha256": "E90ADF1F14F8759007492240785FEEFEF435AB1C2D2B6736B2F4B31C625E21BB",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/conio.h",
+      "sha256": "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE",
+      "original_sha256": "4C58132772FFB983E70D2EC2F6EAB920E518DE251094623ABC34718618B45EDE",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/copyrigh.h",
+      "sha256": "0F4BDA1C3E6822EDCD68FE07CE47A8098EC68093E15B0F5029E03E8F4588FA57",
+      "original_sha256": "0F4BDA1C3E6822EDCD68FE07CE47A8098EC68093E15B0F5029E03E8F4588FA57",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/ctype.h",
+      "sha256": "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4",
+      "original_sha256": "C96D2C704A0EA7B026B541703A57E2773F3C25D07843273CDC48BDCE5D9D2FF4",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/direct.h",
+      "sha256": "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D",
+      "original_sha256": "687ECC8484732C72DA3C8B340BB1319A31D0580539BAED457AA73D82A1037B5D",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/dos.h",
+      "sha256": "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E",
+      "original_sha256": "DD9F790B37B77707ADCA97D7C9024D3445C80C5401D29ED724B25DFCBA5E283E",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/errno.h",
+      "sha256": "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A",
+      "original_sha256": "55E3CED19F97845A0461DC54359C6EC10C3FBC9B893CF64CCBC1CE553BF1642A",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/fcntl.h",
+      "sha256": "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857",
+      "original_sha256": "79915EE9A0E6D182C4D7F1A0BCA12D3B07CEC3A0DBEA033DBE58821FD99E0857",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/float.h",
+      "sha256": "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA",
+      "original_sha256": "386D2DD80397DE6A2CB9AB66743878167B253B11F57B19BC6EF00089F03D94BA",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/graph.h",
+      "sha256": "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3",
+      "original_sha256": "3A2D85CE58B3C9009E0C57727A84962E167A3F2168C778377A1BFFC4A35875C3",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/io.h",
+      "sha256": "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9",
+      "original_sha256": "41A51F1EAB9E46FB62F21C69F2412F02F9D6A2E522734340F222832D565DE9D9",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/limits.h",
+      "sha256": "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D",
+      "original_sha256": "AFE7F9B89DED5925DEB4F4FF02C5BD6C7105F5770EE42FA6D6B2ECEFF20C193D",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/malloc.h",
+      "sha256": "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4",
+      "original_sha256": "AA0CB86F9D6B0F475F339F0452FEE810F321C61B3F0C9E23562077A5D32A76E4",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/math.h",
+      "sha256": "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825",
+      "original_sha256": "4DF668BF2766DCADE39669A9A4DC5280FF7A8C573AF5A71AC8A00F725B93D825",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/memory.h",
+      "sha256": "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA",
+      "original_sha256": "AD17BB794DEF6CBFE18A83F786DD1940BED498AF4566F2A5F6242E0E5C7B1BDA",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/process.h",
+      "sha256": "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA",
+      "original_sha256": "0D005443E2782762CD7F0146CC570E5E774CCE11D59E91DAC2C07CBE046875FA",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/search.h",
+      "sha256": "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A",
+      "original_sha256": "2D476B5F3629AB2126835923B724310FED71D0CD5B84408F4C2ED9109358D34A",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/setjmp.h",
+      "sha256": "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48",
+      "original_sha256": "1A3265E579C8C7C226429B67531879D7A750B1756BC3069FAD3CD5DC88093A48",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/share.h",
+      "sha256": "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D",
+      "original_sha256": "F72AFE01CCAFD4541E7289FC2D640056564D3E35A0948A03C8FBFD0368B1312D",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/signal.h",
+      "sha256": "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E",
+      "original_sha256": "8ADE415619A7AF677DF7B0B57522DE0A1E25A4B6B17F6B9433948BE80AE04E5E",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/stdarg.h",
+      "sha256": "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3",
+      "original_sha256": "1375A4706D03A1258C7F75F786ABDD645C15B646F1C131F19400BE91A1E19CA3",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/stddef.h",
+      "sha256": "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F",
+      "original_sha256": "EF005074DBC269245308884F36E549698D5791726C0E6F50B7FECD063935701F",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/stdio.h",
+      "sha256": "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434",
+      "original_sha256": "5F33039B1DEEA27B376DC48EBF42D2716AA074C59A520744E01534229D373434",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/stdlib.h",
+      "sha256": "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A",
+      "original_sha256": "9F2969D0FF20AD4F24506BD3EE06ED04B357894E8B08FB2129D0C705861D026A",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/string.h",
+      "sha256": "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0",
+      "original_sha256": "B1643C5775110A0222C4B0862EE9C385E8EA58130D19F8E995C31098D9BF9BF0",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/time.h",
+      "sha256": "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561",
+      "original_sha256": "9B26227E1F2EDAA5E428F08D62BAF0C686D89B8D6C0046CE5A3B918C5675B561",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/varargs.h",
+      "sha256": "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005",
+      "original_sha256": "9D4D6F8357B276ACDC49E9AB509F6C253A9EEBB5060AD3E29B0215C0669F8005",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "partial",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/version.h",
+      "sha256": "0ACB18FC1A4DE9D457B89D1EEF3ED24366763CA7B2C88C6BC58E1B7A91D1A02C",
+      "original_sha256": "0ACB18FC1A4DE9D457B89D1EEF3ED24366763CA7B2C88C6BC58E1B7A91D1A02C",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    },
+    {
+      "path": "dos/v86/h/versionc.h",
+      "sha256": "6782153411F326006A8A8910CAFC406A48ED39EF9E69D766E076E324CD2DDA36",
+      "original_sha256": "6782153411F326006A8A8910CAFC406A48ED39EF9E69D766E076E324CD2DDA36",
+      "identical_original": true,
+      "selected_dependency": {
+        "worker": false,
+        "wow32": false
+      },
+      "frozen_provisional": "excluded",
+      "direct_build_selection": "not-directly-compiled"
+    }
+  ],
+  "graphs": {
+    "worker": {
+      "ninja_sha256": "B153506433C26A83B5DC9DE5C8EFEE9864DDFAC187D5AD6AEA05ACFCB44775C0",
+      "deps_sha256": "8DEFA4247FAB1E4D645BF4AA767773EF0DCE5A82D209661663F00D9A9455D0E9"
+    },
+    "wow32": {
+      "ninja_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "deps_sha256": "68314E001FA6031A6B4A8E423197D458BADB58315ABE87C4F72DFEE7ED611ABC"
+    }
+  },
+  "limitations": "Selected x86 graphs and recorded Ninja dependencies only; same-named compiler headers must not be identified by basename. Header identity does not prove guest runtime behavior, all configurations or source role."
+}

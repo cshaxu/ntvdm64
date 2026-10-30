@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\bios\\virtual.obj",
+    "Hash": "483500E02FE4CC019533A91C5A61FF954E4E45351BC75D128A00090D870339EF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-no-retry\\virtual-intercept.obj",
+    "Hash": "3D50B19AD67DA6BAD95060D1F75D72D09E07D39579997CDFAD8AB0BE3019C139"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\niddb-no-retry\\fixture.exe",
+    "Hash": "1756B9C36D55A1C0BD26DAE11079930B19C75A7B1338A1385F168C1027B91B30"
+  }
+]

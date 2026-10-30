@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+    "Hash": "DBF98F993DA0EB654720B3F8312AA7C3D6E362A0AE62E1E3F56062F810072715"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_x87_span_fixture.c",
+    "Hash": "8169E42A093C7246629B7144C90DF7CDA08B7ADA0768713D4E337961E860EB7B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-x87-span.py",
+    "Hash": "ADDE4B5AE706042313F42AA5BE1EBE08376A1D1975929D271B2D3AD5126D2501"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x87-baseline\\c_oprnd.h",
+    "Hash": "FDB0E23A0C80318BFFD92A3BE4A51A79DBB12CB249C510A0F5A7912E9E9F8B1D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\x87-baseline\\zfrsrvd.obj",
+    "Hash": "DEAC64E107988BB92DA5E97D5A3F46FFD35E6B9FD02455277925651BDCF4ABAC"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-x87-span-test.exe",
+    "Hash": "B1A372C0E4D38BD5E9F216B1D97874DD1BD08ACC66F789AAC67012A811CB8FA4"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\batched-failure-diagnostic\\wow_window_creation_binding.c",
+    "Hash": "D71703A475E918482EEBF17F3A9F6C346B3EF72F879407AA4BD13FCC407B44B7"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\options-context\\mvdm_softpc_wow_page_domain.c",
+    "Hash": "70CF68147F65D48444D00052FCE566E670811482BDB520D85AC4914FE0AA1731"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\batched-failure-diagnostic\\WOW32.DLL",
+    "Hash": "250046EEF6C1F62E845C965C45EDD8D5C01C8CE33ED6B6323C9403DEB13BEA1A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\options-context\\ntvdm.exe",
+    "Hash": "2B5F58E3F6DAF7D88B28A654B9993D410905C214ABB276450483358A62F740E7"
+  }
+]

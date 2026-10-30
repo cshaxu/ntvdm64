@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "EB7A9C4C536E8043B45D5B16EE0D0E22674503E1D77AAEC7A74BCC2A522B1F6E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-fixture\\fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A3824B2411729CA6E4DA6C21C08B33A3A8F2B35A4DF1D2B1E09909E2C79893AF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-fixture\\stdout3.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "69D2AB052130EC2C4EFB0230D9266C8F55373B4185DC17A012CA0BCE967F4D75",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-fixture\\fixture-trace.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\creation-owner-isolated-fixture\\fixture-exit.txt"
+  }
+]

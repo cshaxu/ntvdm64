@@ -1,0 +1,42 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_page_domain_fixture.c",
+    "Hash": "FEAE48874677CF3ECC1B86AE9855B3D3322C66F78E715E5EA0E8ECD233215EE8"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dialog_real_lifecycle.h",
+    "Hash": "9EB718648BBE47BE11A375460B506F6B11F00F99288712828521DD61AA24488A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\wow_dialog_page_faults.c",
+    "Hash": "6A61E27887FB899A56F0EA8DCA7408DD974A72AC45DF8599186186354B1BFF02"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\adapter-mvdm-host-out\\wow\\wow_dialog_scope_faults.c",
+    "Hash": "8C55BCEC21E8CE83DC1CD2AFD1F490857142EDD6D58E7176E026F7B27ACC13AF"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\fixture.obj",
+    "Hash": "8441AA664DA450FE4E346EFA48929787343B3535D202DA768E88CF5EC3FA8444"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\dialog-page-faults.obj",
+    "Hash": "FDE72F151C7DB0B4E9239AC220CA9122653D69D32E58EEB526FEE664C3068FD9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\dialog-scope-faults.obj",
+    "Hash": "31B104B049086145ECB370AD4700BC3609747216420092E32AC83D4D894B9174"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\provider.lib",
+    "Hash": "21047A25BACD42E7107D4A477DC185B45C042D1E342C454EC9B1BCBD09118255"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\fixture.exe",
+    "Hash": "A6FBB49B836A88CF50028765B1520377BF8B1919673A388D6DA7DC59AE26642D"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\real-dialog-fault-candidate\\fixture.map",
+    "Hash": "CE9D67072EEAFCD8888715B0FC5037BD8AEF0574DBE604A90F9C5521DC61F92C"
+  }
+]

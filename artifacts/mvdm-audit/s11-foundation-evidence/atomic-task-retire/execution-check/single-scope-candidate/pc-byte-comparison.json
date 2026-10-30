@@ -1,0 +1,29 @@
+{
+  "images": [
+    {
+      "path": "build/t473-s11/single-scope-package/system32/WOW32.DLL",
+      "sha256": "A5287185427C1001789B1C7EE9F0CB5E518D63A6E14F1906AB81C13947B35A46",
+      "preferred_base": "0x10000000",
+      "rva_bytes": {
+        "0x681b3": "5ecccccccccccccccccccccccc538b5c",
+        "0x61fc1": "cccccccccccccccccccccccccccccc55",
+        "0x60faf": "3bc50f82a10000003dc000000075075f",
+        "0x53aa8": "8b4e208bd8568b4908ffd18b4e20568b",
+        "0x6900d": "8bf08975e485f6740be8e65c020050e8"
+      }
+    },
+    {
+      "path": "build/.ninja/msvc-x86-release/wow32/wow32.dll",
+      "sha256": "A7CA14497B22D4B64F60A1C32A3D8E4F35E51153793F64FE0E6621ADDCAC1490",
+      "preferred_base": "0x10000000",
+      "rva_bytes": {
+        "0x681b3": "240c558b6c241c568b74241c578b7c24",
+        "0x61fc1": "000000005083ec40535657a100480a10",
+        "0x60faf": "6c007511578d86a000000050e8b0fcff",
+        "0x53aa8": "8b4e208bd8568b4908ffd18b4e20568b",
+        "0x6900d": "df91ffffc745fcfeffffffe819000000"
+      }
+    }
+  ],
+  "limit": "PE bytes are unrelocated file data; context bytes logged for stack frame 1, not necessarily instruction pointer; no candidate map or exception record was retained."
+}

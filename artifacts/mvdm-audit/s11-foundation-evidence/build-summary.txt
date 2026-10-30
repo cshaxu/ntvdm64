@@ -1,0 +1,16 @@
+First serial failure:
+ccpu_bit_memory_oracle.obj : error LNK2019: unresolved external symbol _printf referenced in function _main
+ccpu-bit-native-oracle.exe : fatal error LNK1120: 1 unresolved externals
+Targeted retry link tail:
+   Creating library legacy-wow-ntdll.lib and object legacy-wow-ntdll.exp
+graph-command 235/235
+O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def(3) : warning LNK4017: DESCRIPTION statement not supported for the target platform; ignored
+O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommHandle' specified multiple times; using first specification
+O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-x86.def : warning LNK4197: export 'GetCommShadowMSR' specified multiple times; using first specification
+   Creating library wow32.lib and object wow32.exp
+158730808D1DEA20B58995A7CAF3DA2339D96E6A24D9B32719F5E1F0650A4368 O:\repos.hobby\ntvdm64\build\t473-s11\foundation-build\serial.stdout.txt
+88FC234EA9FFE8255F17BAA9191B001CD0156F265334853129333B00C4DAF41A O:\repos.hobby\ntvdm64\build\t473-s11\foundation-build\retry.stdout.txt
+FDB0E23A0C80318BFFD92A3BE4A51A79DBB12CB249C510A0F5A7912E9E9F8B1D O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\ccpu386\c_oprnd.h
+638D1977B8F588ECA74A01F81D1F34372D1C67646DA3F0A697A00C92C59E5AE9 O:\repos.hobby\ntvdm64\src\mvdm\softpc.new\base\ccpu386\c_xfer.c
+2D729FB2907A8132D4D1D7E68183E0A7B40FAE115ADC063D9EE0FCB710580E4B O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker\ntvdm.exe
+B67C7BB76560C3A1E47FF1C9F33808458971E69E32E818E075F7FE76EF2C4D76 O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\wow32\wow32.dll

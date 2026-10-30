@@ -61,3 +61,12 @@ witness and published bridge correspondence, all 4,684 MVDM partitions and
 the two live-difference classifications. Documentation governance and
 whitespace checks passed. This is not a whole-provider, real DLL-failure or
 full-product regression result.
+
+A read-only freshness check of the seven recorded triage inputs found each
+SHA-256 unchanged, including the current external DOS16 source catalog and
+WOW32 source-coverage, seam registry and scope. The current WOW32 frontier
+and evidence-map hashes also match the individual recorded hashes in the
+[inventory review](shard-2/external-inventory-obligation-review.md).
+[Input results](external-input-freshness-current.json) bind this check. It
+confirms the recorded input identities only; it does not prove that the
+pending provider obligations or runtime capabilities have been resolved.

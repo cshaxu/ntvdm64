@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\original_external_memory_test.c",
+    "Hash": "66CF5E5BE7E6FE8833F87A11F0AF1435ED0ACC225952F89A814504A747F722A5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe",
+    "Hash": "9483BCB23F384F67930EE912AF0D1543FEAD3191D97B43C3AD605967806F2087"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-external-memory-test.exe.map",
+    "Hash": "6F084A72E9A00B4587E691A9A47C275D36EA2DC522B8DEB09A79C70AA2AAD575"
+  }
+]

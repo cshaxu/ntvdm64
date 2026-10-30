@@ -1,0 +1,62 @@
+[
+  {
+    "recoveryMs": [
+      2344,
+      2719,
+      3078
+    ],
+    "package": "reviewed-foundation-product",
+    "phase": "sol",
+    "showMs": [
+      3719,
+      1703,
+      2813
+    ],
+    "passed": 3
+  },
+  {
+    "recoveryMs": [
+      1688,
+      1672,
+      1813
+    ],
+    "package": "window-index-candidate",
+    "phase": "sol",
+    "showMs": [
+      2344,
+      1563,
+      1593
+    ],
+    "passed": 3
+  },
+  {
+    "recoveryMs": [
+      3219,
+      3297,
+      3406
+    ],
+    "package": "reviewed-foundation-product",
+    "phase": "reverse",
+    "showMs": [
+      4203,
+      2969,
+      3000
+    ],
+    "passed": 3
+  },
+  {
+    "recoveryMs": [
+      2156,
+      1937,
+      1750
+    ],
+    "package": "window-index-candidate",
+    "phase": "reverse",
+    "showMs": [
+      2625,
+      1656,
+      1891
+    ],
+    "passed": 3
+  }
+]

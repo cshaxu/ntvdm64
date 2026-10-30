@@ -1,0 +1,72 @@
+[
+  {
+    "variant": "fixed",
+    "result": {
+      "exit_code": 0,
+      "utc": "2026-10-29T14:36:29.8816265Z"
+    },
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-fixed\\fixture.exe",
+        "Hash": "C43A37B7B11D1A3EE702F12F025D5941C1B211FD81CCE6277807284D8BD07BE3"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-fixed\\fixture.c",
+        "Hash": "22DC8873F56F6EF6827475A1632A3C457B95DDD0468015D639A238A5DB341F1D"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-fixed\\wow_window_words_binding.c",
+        "Hash": "E4FE17A3826BB98F8832A06063C2105FC0E2285F63F5B5CD5659C58338B072E8"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-fixed\\wow_window_words_binding.obj",
+        "Hash": "18EC0190B076AA9EC332F5D1979841C9AC14CB045B5CCA789E8567F8DF2949F3"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-fixed\\provider.lib",
+        "Hash": "66144D3962F95068D97974D7EE08CEE8CB90373335991CC813F69D07EE2C33C4"
+      }
+    ],
+    "assertions": [
+      "WOW_TERMINAL_CRITICAL_FAULT caught=1 held_restored=1 owner_restored=1 cleanup=1",
+      "WOW_TERMINAL_CRITICAL_FAULT_HELD caught=1 held_restored=1 owner_restored=1 cleanup=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ]
+  },
+  {
+    "variant": "negative",
+    "result": {
+      "exit_code": 1,
+      "utc": "2026-10-29T14:36:29.8816265Z"
+    },
+    "files": [
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-negative\\fixture.exe",
+        "Hash": "6ADF485764770E4949578B408FDBC764805EA049BCD973B94DFA69870F03C923"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-negative\\fixture.c",
+        "Hash": "22DC8873F56F6EF6827475A1632A3C457B95DDD0468015D639A238A5DB341F1D"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-negative\\wow_window_words_binding.c",
+        "Hash": "54F57728483D6B31EDC56538BC258D2ABE8A84135FBAF085C741CAE47E4773A3"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-negative\\wow_window_words_binding.obj",
+        "Hash": "7437475D2520E9E8F66365FBFE29587AB0CA366F865EA87FF7286F9652B3ED2A"
+      },
+      {
+        "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\terminal-withdrawal-negative\\provider.lib",
+        "Hash": "C3530B8FEF53D2112E6699325A1A8FBAEAA4B030CC81B3884C11367FD301AC9B"
+      }
+    ],
+    "assertions": [
+      "WINDOW_BORROW_FAIL line=1681 error=2",
+      "WOW_TERMINAL_CRITICAL_FAULT caught=1 held_restored=1 owner_restored=1 cleanup=1",
+      "WINDOW_BORROW_FAIL line=1701 error=0",
+      "WOW_TERMINAL_CRITICAL_FAULT_HELD caught=1 held_restored=1 owner_restored=1 cleanup=1",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_FAILED stage=registered-original-modal"
+    ]
+  }
+]

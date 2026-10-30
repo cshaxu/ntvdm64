@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "pid": 8744,
+  "started": "2026-10-29T05:08:00.2889039Z",
+  "image": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\native-oracle\\oracle.exe",
+  "stdout": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\native-oracle/run.stdout.txt",
+  "stderr": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\native-oracle/run.stderr.txt",
+  "exit": 0,
+  "finished": "2026-10-29T05:08:00.4799027Z"
+}

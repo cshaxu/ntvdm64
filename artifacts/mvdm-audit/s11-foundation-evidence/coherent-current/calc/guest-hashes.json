@@ -1,0 +1,12 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "09B5E717589598B9DF943A690A78B5F5F0A586468CF08BEB8CED58623C49BCC7",
+    "Path": "O:\\w31\\calc.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "30D6B965D45EDDF306268C9526B01494DF4841B8B530BAB2654C379E1CF49DB2",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\coherent-current\\package\\system32\\WIN87EM.DLL"
+  }
+]

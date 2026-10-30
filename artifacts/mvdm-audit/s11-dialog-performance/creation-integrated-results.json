@@ -1,0 +1,42 @@
+{
+  "tests": [
+    {
+      "case": "native-creation",
+      "exitCode": 0
+    },
+    {
+      "case": "unwind",
+      "exitCode": 0
+    },
+    {
+      "case": "dialog-lifecycle",
+      "exitCode": 0
+    }
+  ],
+  "sources": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_window_creation_binding.c",
+      "Hash": "B62CB2A26E86B4E3731C6C1CBD42DCF715833863B19204E111EA32B2ED887B04"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\tests\\adapter-mvdm-host-out\\wow\\wow_native_creation_binding_fixture.c",
+      "Hash": "D39F554252BE450CB3B83B70060D3E3D35CD933938384FAA6BEE25CBBEB2B74C"
+    }
+  ],
+  "fixtures": [
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-integrated\\native-creation\\fixture.exe",
+      "Hash": "EBAF79F539E68C0AB50EF64D896612B9FB4932C76EC7EB3EC89B7F877FF556CB"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-integrated\\unwind\\fixture.exe",
+      "Hash": "4B68B7AAD6763B751EBB809209ACE541005A02162F9D0993A26297624562875A"
+    },
+    {
+      "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\creation-integrated\\dialog-lifecycle\\fixture.exe",
+      "Hash": "759C712E20C6E4095F4A6E683C41382C96BE3BF8043AE3BA59632C2B18A56F3C"
+    }
+  ],
+  "published": false,
+  "fullPackagePending": true
+}

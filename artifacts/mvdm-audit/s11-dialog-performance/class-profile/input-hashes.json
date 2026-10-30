@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "0A81ACE61D96CBA03A5D7B4D92A904CD9567E27E3EAC778CF66E4773E3A528DA",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-profile\\ntvdm.exe"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "E9F3DA52711002F2893F24B427255597BE0BE242E04214BB6E2168921AF0FAB7",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-profile\\mvdm_softpc_wow_page_domain.obj"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "A9135720530ABF9DB022CBB0DF261B3ED05B09F7F6D054BA0555A86E3CDFAE81",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\ntvdm-exe\\softpc\\mvdm_softpc_wow_page_domain.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "987E97890E5E92AA45CF9334289C382972D21755799CBE06B8972E27AD600F22",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\class-profile\\observation\\windows.txt"
+  }
+]

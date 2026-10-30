@@ -1,0 +1,32 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "02C4FF37F513A918DCB146C9831F6D737D2C3CE5A89CE6E459EA673B0E8FA5DC",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\probe.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "9F58DBE38A11F6812C45753032DB564F30AB06252308C639839A885EB22BDADD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\product-system32-manifest.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "7DF51D61ED376BA732E3B7175D3E4D6CB0239AA8238945CE6CD008622CC701FB",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\result.json"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "660B68545C5CADCD4F4DA5E8FDC3EB23CA93D1E744F8D6275043D97BE93515DD",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\windows.txt"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "988296461EAA620F284C1BB303E903ABF7303DDFF932769494FC6653429C321B",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\wow_user_object_bindings.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "CE7CC184CB0A3B2C4BBA58AD4669726420EAFABE5327C731ED63CBE5E83228CA",
+    "Path": "O:\\repos.hobby\\ntvdm64\\artifacts\\mvdm-audit\\s11-dialog-performance\\publish-failure-root-diagnostic\\wow_user_task_lifecycle.c"
+  }
+]
