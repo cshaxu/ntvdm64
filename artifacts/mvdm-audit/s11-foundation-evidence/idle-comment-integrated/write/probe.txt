@@ -1,0 +1,8 @@
+main=02440BE6 command=4128 style=14cf0000 exstyle=00000110 zoomed=0
+main-title=Write - (Untitled) window=26,26,986,501 client-origin=34,77 client=944,416
+round=1
+command-state enabled=1 menu-state=00000000 thread=36712
+dialog hwnd=00BE0D2E title=Find
+dialog-visible-ms=1360
+close-recovery-ms=953
+PASS menu dialog and parent recovery

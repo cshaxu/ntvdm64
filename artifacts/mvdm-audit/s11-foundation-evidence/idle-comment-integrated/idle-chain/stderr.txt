@@ -1,0 +1,2 @@
+WOW_IDLE_HOOK_GUARD errors=0 calls=5 nested=1 exception=1 denied=2 foreign=2 retired=1 worker_shared=1
+WOW_IDLE_NATIVE_CHAIN errors=0 next=13 registered_and_unregistered=1 direct_not_forwarded=1

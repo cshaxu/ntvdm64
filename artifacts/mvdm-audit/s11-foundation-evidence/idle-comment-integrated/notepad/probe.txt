@@ -1,0 +1,8 @@
+main=02700BAA command=3 style=14ff0000 exstyle=00000110 zoomed=0
+main-title=Notepad - (Untitled) window=104,104,1064,579 client-origin=112,155 client=927,399
+round=1
+command-state enabled=1 menu-state=00000000 thread=31360
+dialog hwnd=027B0BD2 title=Find
+dialog-visible-ms=641
+close-recovery-ms=328
+PASS menu dialog and parent recovery

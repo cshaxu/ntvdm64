@@ -1,0 +1,9 @@
+WOW_STANDARD_CLASS_ADMISSION projected=9 calls=10 retry=1 errors=0
+WOW_CONTROL_CALLOUT paints=2 texts=3 errors=0
+WOW_NATIVE_EXECUTION_SCOPES errors=0 inline=1 nested=1 wait=1 unbind_rejected=1
+WOW_NATIVE_QUEUE_PRECONDITION errors=0 drained=0 own_preserved=1
+WOW_NATIVE_QUIT_ORDER errors=0 wide=0 sentinel=1 exit=41 bound=64
+WOW_NATIVE_QUIT_ORDER errors=0 wide=1 sentinel=1 exit=42 bound=64
+WOW_IDLE_OBSERVER_LIFECYCLE errors=0 install_failures=3 live=0
+WOW_INIT_ROLLBACK errors=0 failed_allocations=2 name_releases=2
+WOW_USER_TASK_LIFECYCLE errors=0 native_direct=5

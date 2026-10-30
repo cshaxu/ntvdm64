@@ -1,0 +1,8 @@
+main=04F70988 command=101 style=16cf0000 exstyle=00000100 zoomed=0
+main-title=Program Manager window=156,156,1116,631 client-origin=164,207 client=944,416
+round=1
+command-state enabled=1 menu-state=00000000 thread=36428
+dialog hwnd=031E09AE title=Program Group Properties
+dialog-visible-ms=1625
+close-recovery-ms=1578
+PASS menu dialog and parent recovery

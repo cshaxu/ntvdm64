@@ -161,6 +161,21 @@ the main window minimized, so this verifies its message-driven dialog path,
 not on-screen placement or a forced concurrent retirement. Three passes do
 not identify or disprove the intermittent 1400 failure.
 
+A same-worker Winmine / prebuilt CDLPROBE run first failed its probe's 10-second
+wait: the sibling was still running after 11 recorded successful dialog closes.
+That is a non-pass, not a captured 1400 or proof of deadlock. A second run
+changed only the test probe's sibling wait to 30 seconds and its observer
+watchdog to 60 seconds; no product or guest was modified. It completed all 16
+explicit dialog closes and sibling retirement, then Winmine flag, reset, open,
+close and launcher exit. The guest binary SHA-256 was
+`406D84F9E4EA04CD269045B354E95C47A342C986E0400A2C4F6A58DC818D3A02`.
+The [initial non-pass](winmine-sibling/initial-timeout-probe.txt),
+[successful result](winmine-sibling/sibling-result.txt),
+[probe](winmine-sibling/probe.txt), and guest checkpoint are retained there.
+This is a timed, instrumented run with four product input hashes recorded;
+it does not prove the original 10-second contract, forced cross-task race,
+the independent SOL 1400 attribution, or performance acceptance.
+
 The tested ten-component package was subsequently published to both
 `assets/release` and `O:/winnt/system32`, with all 20 destination hashes
 verified against the Full receipt. The previous two sets were saved under

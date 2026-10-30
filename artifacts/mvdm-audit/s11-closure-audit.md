@@ -101,6 +101,9 @@ permanent retention. At the T boundary, retain any still-needed evidence or
 explicitly dispose of the archive under the build cleanup policy. Compact
 audit reports, source-role tables, directly linked witnesses and production
 tests are retained separately in the delivery. No guest or user file was moved.
+Twenty-four compact receipts were subsequently restored from that archive and
+matched against the recorded hashes, because several reports referred to their
+containing directories rather than linking each receipt individually.
 
 Documentation governance verification passed after updating this closure
 audit's candidate identity. The current package's bounded evidence is linked
