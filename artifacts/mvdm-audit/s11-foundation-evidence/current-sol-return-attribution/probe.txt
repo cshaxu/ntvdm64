@@ -1,0 +1,72 @@
+SOL options: round=1
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10000
+SOL options: dialog-close-recovery-ms=781
+SOL options: worker-cpu-open-ms=6094 worker-cpu-close-ms=734
+SOL options: game-thread-cpu-open-ms=6046 game-thread-cpu-close-ms=735
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=2
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10015
+SOL options: dialog-close-recovery-ms=1078
+SOL options: worker-cpu-open-ms=5797 worker-cpu-close-ms=765
+SOL options: game-thread-cpu-open-ms=5766 game-thread-cpu-close-ms=766
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=3
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10016
+SOL options: dialog-close-recovery-ms=953
+SOL options: worker-cpu-open-ms=7250 worker-cpu-close-ms=922
+SOL options: game-thread-cpu-open-ms=7203 game-thread-cpu-close-ms=922
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=4
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10000
+SOL options: dialog-close-recovery-ms=860
+SOL options: worker-cpu-open-ms=6891 worker-cpu-close-ms=828
+SOL options: game-thread-cpu-open-ms=6875 game-thread-cpu-close-ms=812
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=5
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10000
+SOL options: dialog-close-recovery-ms=860
+SOL options: worker-cpu-open-ms=6860 worker-cpu-close-ms=828
+SOL options: game-thread-cpu-open-ms=6828 game-thread-cpu-close-ms=828
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=6
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10000
+SOL options: dialog-close-recovery-ms=750
+SOL options: worker-cpu-open-ms=5641 worker-cpu-close-ms=734
+SOL options: game-thread-cpu-open-ms=5609 game-thread-cpu-close-ms=735
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=7
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10016
+SOL options: dialog-close-recovery-ms=875
+SOL options: worker-cpu-open-ms=5500 worker-cpu-close-ms=734
+SOL options: game-thread-cpu-open-ms=5453 game-thread-cpu-close-ms=735
+PASS SOL Options command, modal dialog, close and parent recovery
+SOL options: round=8
+SOL options: game-thread=14844
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n566\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10016
+SOL options: dialog-close-recovery-ms=734
+SOL options: worker-cpu-open-ms=5578 worker-cpu-close-ms=718
+SOL options: game-thread-cpu-open-ms=5500 game-thread-cpu-close-ms=719
+PASS SOL Options command, modal dialog, close and parent recovery
