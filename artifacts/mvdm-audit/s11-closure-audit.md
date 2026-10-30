@@ -234,3 +234,7 @@ not proof for all guests, profiles or external consumers.
 The same SAS observer also covered an original [Win16 task startup and
 exit](s11-foundation-evidence/sas-real-worker-win16/review.md) with no tail
 breakpoint; the resident worker's later lifetime remains outside that run.
+
+The [bounded acceptance matrix](s11-acceptance-matrix.md) distinguishes
+published passes, the earlier observed non-pass, installed guest-media gap,
+owner-excluded CPU fixture and explicit later-stage handoffs.
