@@ -1,0 +1,1 @@
+PASS same-worker sibling normal exit and resource cleanup; surviving WINMINE flag/reset/open/close
