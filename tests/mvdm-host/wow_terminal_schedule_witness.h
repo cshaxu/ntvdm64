@@ -81,6 +81,8 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     HANDLE worker;
     DWORD wait, worker_exit = 0;
     unsigned before=borrow_errors;
+    unsigned ownership_before=borrow_errors;
+    BOOL graph_ok;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
     wow_task_callback_scope callback;
     BOOL graph_result;
@@ -91,6 +93,25 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     t.runtime=main_binding->runtime;
     t.session_owner=session_thread_current();
     BORROW_CHECK(t.session_owner != NULL);
+    /* Test both caller ownership states on success and on the actual
+     * invalid-payload failure, including the public last-error contract. */
+    BORROW_CHECK(!main_binding->exclusive_held);
+    SetLastError(0x47311u);
+    graph_ok=wow_user_window_refresh_payload(NULL,NULL,0);
+    BORROW_CHECK(graph_ok && !main_binding->exclusive_held && GetLastError()==0x47311u);
+    SetLastError(0x47312u);
+    graph_ok=wow_user_window_refresh_payload(NULL,NULL,1);
+    BORROW_CHECK(!graph_ok && !main_binding->exclusive_held && GetLastError()==ERROR_INVALID_PARAMETER);
+    BORROW_CHECK(wow_user_runtime_enter(main_binding));
+    SetLastError(0x47313u);
+    graph_ok=wow_user_window_refresh_payload(NULL,NULL,0);
+    BORROW_CHECK(graph_ok && main_binding->exclusive_held && GetLastError()==0x47313u);
+    SetLastError(0x47314u);
+    graph_ok=wow_user_window_refresh_payload(NULL,NULL,1);
+    BORROW_CHECK(!graph_ok && main_binding->exclusive_held && GetLastError()==ERROR_INVALID_PARAMETER);
+    BORROW_CHECK(wow_user_runtime_leave(main_binding));
+    fprintf(stderr,"WOW_GRAPH_OWNER_RESTORE errors=%u success=2 failure=2 held=2 unheld=2\n",
+        borrow_errors-ownership_before);
     t.reached=CreateEventW(NULL,TRUE,FALSE,NULL);
     t.release=CreateEventW(NULL,TRUE,FALSE,NULL);
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP

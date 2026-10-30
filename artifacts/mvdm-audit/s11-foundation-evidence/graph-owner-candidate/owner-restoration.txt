@@ -1,0 +1,3 @@
+WOW_GRAPH_OWNER_RESTORE errors=0 success=2 failure=2 held=2 unheld=2
+WOW_CALLBACK_GRAPH_OVERLAP errors=0 graph_succeeded=1 serialized=1 restored=1
+WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1

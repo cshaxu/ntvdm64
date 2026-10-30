@@ -30,3 +30,11 @@ Publication copied the tested complete ten-component package to both
 `assets/release` and `O:/winnt/system32` and verified all 20 file hashes.
 This does not establish universal callback interleavings, remedy the 15 absent
 installed guest files, or attribute the historical Winmine/SOL 1400.
+
+The subsequent selected-object owner-restoration witness passed graph success
+and invalid-payload failure with both held and unheld caller locks. It checks
+the exact error and caller lock state, along with the forced competing
+retirement. The production source was unchanged after publication. Its
+output and exact test/source hashes are `owner-restoration.txt` and
+`owner-restoration-hashes.csv`. This does not inject an exception within every
+native observation or test all reentrant finalizers.
