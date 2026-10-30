@@ -27,5 +27,8 @@ if ($LASTEXITCODE) { throw 'Selected DPMI fixture link failed' }
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1')) {
     throw 'Selected DPMI fixture failed'
 }
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full')) {
+    throw 'Selected DPMI fault-return fixture failed'
+}
 @($source, $fixture, "$out/dpmiint.obj", "$out/fixture.exe", "$out/fixture.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"

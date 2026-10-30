@@ -1,0 +1,3 @@
+build/.ninja/msvc-x86-release/worker/obj/dpmi/dpmiint.obj 174 a021d0ec9f9f9a4dfa369c3fa662375b923016c6fdfdb53496bcafbf81539848
+build/t473-s11/dpmi-fault-iret32-selected/dpmiint.obj 174 a021d0ec9f9f9a4dfa369c3fa662375b923016c6fdfdb53496bcafbf81539848
+identical= True

@@ -1,0 +1,2 @@
+DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1
+DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full

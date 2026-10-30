@@ -31,6 +31,9 @@ The dedicated true 32-bit-code-segment DPMI interrupt/fault-return witness
 is not established for the current release. A [bounded prebuilt search](s11-foundation-evidence/code32-prebuilt-search/review.md)
 distinguishes it from existing 32-bit client-frame probes and the separate
 CODE32 INT 21 witness; it does not authorize rebuilding a guest.
+The [selected DPMI fault-return object witness](s11-foundation-evidence/dpmi-iret32-selected/review.md)
+now checks both stack descriptor sizes and two nesting depths with controlled
+register and memory boundaries; it is not the missing live guest witness.
 
 The historical [Winmine 1400 non-pass](s11-foundation-evidence/winmine-native-return-1400/review.md)
 is another unlocalized native-return observation. Its failure substage and
