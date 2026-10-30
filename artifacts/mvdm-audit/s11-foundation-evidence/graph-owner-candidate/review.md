@@ -57,3 +57,8 @@ that initially held the lock and one that did not caught the injected exception
 and retained their original lock state; the hook/retirement overlap also
 passed. See `owner-exception.txt` and `owner-exception-hashes.csv`. This tests
 the owner's unwind boundary, not an actual native USER or guest exception.
+
+An unchanged prebuilt Win16 guest additionally exercised a real CBT hook,
+including nested creation, veto, later recovery and unhook on the published
+input set; see [guest witness](../graph-owner-real-hook/review.md). It does not
+force the concurrent retirement interleaving.

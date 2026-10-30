@@ -1,0 +1,46 @@
+[
+  {
+    "phase": 0,
+    "errors": 0,
+    "created": 0,
+    "queried": 0,
+    "nested": 0,
+    "vetoed": 0,
+    "destroyed": 0,
+    "unhooked": 0,
+    "freed": 0
+  },
+  {
+    "phase": 1,
+    "errors": 0,
+    "created": 2,
+    "queried": 2,
+    "nested": 1,
+    "vetoed": 0,
+    "destroyed": 2,
+    "unhooked": 0,
+    "freed": 0
+  },
+  {
+    "phase": 2,
+    "errors": 0,
+    "created": 3,
+    "queried": 3,
+    "nested": 1,
+    "vetoed": 1,
+    "destroyed": 2,
+    "unhooked": 0,
+    "freed": 0
+  },
+  {
+    "phase": 4,
+    "errors": 0,
+    "created": 4,
+    "queried": 4,
+    "nested": 1,
+    "vetoed": 1,
+    "destroyed": 3,
+    "unhooked": 1,
+    "freed": 1
+  }
+]
