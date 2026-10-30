@@ -1,0 +1,21 @@
+container=console-owning-nondebug
+pid=4052
+result=exited
+exit=0x0000045a
+graphics-handshake=none
+post-exit-observation-ms=0
+console-owner-observer=14000
+console-members-after-wait=1
+console-member=14000
+direct-child pid=17428 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\tmp\n017\system32\ntsrv.exe
+timeout-ms=40000
+milestone-input=0 milestone-waits=0 milestone-wait-ms=0
+window-key-message-count=0 window-enter-count=0
+scripted-console-input=none
+console-mouse-mode-observed=no
+console-mouse-input=none
+fixed-system-root=O:\tmp\n017
+fixed-system-root-chars=11
+fixed-system-root-short-chars=11
+fixed-system-root-short=O:\tmp\n017
+image-identity=unavailable
