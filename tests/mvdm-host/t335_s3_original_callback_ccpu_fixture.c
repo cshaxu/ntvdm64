@@ -2,9 +2,9 @@
  * A bounded, source-shaped CallBack16 transaction proof.
  *
  * The test deliberately enters the selected original wcall16.c body.  The
- * temporary VDMFRAME/CBVDMFRAME aliases are the production bounded leases,
- * and the recursive execution spelling is the original nt_cpu.c
- * host_simulate() wrapper selected by CCPU40.  The outer guest stream enters
+ * current VDMFRAME/CBVDMFRAME resolution uses the original protected-mode
+ * pointer path, and recursive execution uses the original nt_cpu.c
+ * host_simulate() wrapper selected by CCPU40. The outer guest stream enters
  * the existing BIOS BOP table and its inner stream uses CCPU's original
  * unsimulate return opcode (D6 FE); it proves the host-side callback order
  * without claiming a completed WOW16 trampoline.

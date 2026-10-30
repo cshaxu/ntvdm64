@@ -96,7 +96,7 @@ successor capability is marked complete by this audit ledger.
 | USER-DIALOG-01 | S8 | wudlg.c/W32InitDlg; E40 native initialization evidence | Real guest controls, initialization/procedure replacement, creation veto, cancellation and release. |
 | USER-TASK-01 | S3 | wkman.c; recovered queue/taskman/exitwin slices; E42 | Registration/init/yield/wait through real task context and CCPU callback; multiple tasks and failure recovery. |
 | USER-TASK-EXIT-01 | S3/S4/S8 by resource | W32DestroyTask, WU32FreeModule; E42 helper failure/retry pass | Connect thread/worker cleanup/dispose; module release must not destroy a live thread; prove teardown ordering. |
-| USER-CALLBACK-01 | S3 | wcall16.c CallBack16 and wmdisp32.c; E40/E42 | Real frame lease, recursive CCPU entry/return, exception/reentry, task frame restoration and cancelled callback. |
+| USER-CALLBACK-01 | S3 | wcall16.c CallBack16 and wmdisp32.c; E40/E42 | Original protected-mode frame resolution, recursive CCPU entry/return, exception/reentry, task frame restoration and cancelled callback. |
 | GDI-01 | S9/S10 by family | wgdi/wgfont/wgtext/wgmeta/wgpal/wdib families; E40 partial experiments | Drawing/DC/text/font/palette/metafile/DIB content, alias ownership, invalid input and native/guest release. |
 | RESOURCE-01 | S7 foundation / S11 consumers | wres16/wres32/wcuricon/waccel and recovered clres/cldib; E40 | Real names/IDs/old formats, resource lease, conversion, callback timing and failed load cleanup; bitmap depends on GDI-01. |
 | MENU-01 | S11 | wumenu.c and recovered original menu parser; E40 owner-draw counterexample/recovery | Original-layout menu graph and mutations, owner-draw data, callbacks, invalid handles and release; consumes S2 publication. |
