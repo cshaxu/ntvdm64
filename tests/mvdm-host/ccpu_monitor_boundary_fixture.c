@@ -586,6 +586,28 @@ static int monitor_prefix_length(void) {
     if(test_case==92)return !handled && test_fault==1 && !io_writes && c_getEIP()==0x1000;
     return handled && !test_fault && io_writes==1 && c_getEIP()==0x1000+prefixes+2;
 }
+/* A code selector's translated base does not establish a linear host alias
+ * for an independently remapped later code page. */
+static int dpmi_remapped_code_page(void) {
+    unsigned char ldt[40]={0}; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000); unsigned j; BOOL handled;
+    extern ULONG Cpu40LdtShadowAddress, IntelBase;
+    extern USHORT DosxRmCodeSelector;
+    extern BOOL DpmiEmulateInstruction(void);
+    c_cpu_init(); *(uint32_t *)(ldt+0x18)=0x0000ffffu; *(uint32_t *)(ldt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(ldt+0x20)=0x0000ffffu; *(uint32_t *)(ldt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt)); ZeroMemory(c_GetPhyAdd(0x4000),0x2000);
+    *(ULONG *)c_GetPhyAdd(0x4000)=0x5007; for(j=0;j<512;j++)pte[j]=(j<<12)|7;
+    pte[0xf1]=test_case==94 ? 0xf1007 : 0x6007; *c_GetPhyAdd(0xf1000)=0x90;
+    if(test_case==95) { *c_GetPhyAdd(0xf0fff)=0x8e; *c_GetPhyAdd(0x6000)=0xe0; }
+    else { unsigned long code=test_case==94 ? 0xf1000 : 0x6000;
+        *c_GetPhyAdd(code)=0x8e; *c_GetPhyAdd(code+1)=0xe0; }
+    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
+    c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setEIP(test_case==95 ? 0xfff : 0x1000);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
+    c_setCR3(0x4000); c_setPG(1); handled=DpmiEmulateInstruction(); c_setPG(0);
+    {char line[120];wsprintfA(line,"DPMI_REMAPPED_CODE handled=%d eip=%08lx\n",handled,c_getEIP());report(line);}
+    return handled && c_getEIP()==(test_case==95 ? 0x1001 : 0x1002);
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -695,7 +717,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
+    if(test_case>=93 && test_case<=95) ok=dpmi_remapped_code_page();
+    else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
     else if(test_case==89) ok=monitor_wrapped_instruction_offset();
     else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
     else if(test_case==86) ok=monitor_cr0_npx_matrix();

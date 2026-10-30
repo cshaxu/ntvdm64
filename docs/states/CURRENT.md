@@ -7,8 +7,8 @@
 The CPU40 protected-instruction monitor and cached-TLB boundary are now in a
 tested partial ten-component baseline. Full (16 gates), 91 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
-release destinations matched all ten image hashes. Original operand-fault,
-mapping/reentry and broader NPX/debug behavior remain S11 work; publication is
+release destinations matched all ten image hashes. DPMI mapped-code, operand-fault,
+reentry and NPX/debug behavior remain S11 work; publication is
 not S11 closure. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
 
 S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The owner approved automatic progression and the [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). S11 recovers execution foundations and includes the owner-approved [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md). Preserve unrelated work and immutable guest media.

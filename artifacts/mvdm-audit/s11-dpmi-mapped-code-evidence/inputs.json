@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\dpmiint.c",
+    "Hash": "E6C7EAAD5284700F3832D97DCB7D0FA0C6DE926B4957B0ADA8D7517802B6D9A5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\sim32.c",
+    "Hash": "A412788912D241593D74753C6DB23ECBB528E0DDC2F5DFD9D5C44B376B7AB0A4"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+    "Hash": "4A209094D48DE6003255367352E17518D98233CF72829D18DEA268DC608B996B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_monitor_boundary_fixture.c",
+    "Hash": "249711FB1D885CDF25E4C69306BC1F1B3D100E182D5F8C9761709D7FE0A69589"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-monitor-boundary-test.exe",
+    "Hash": "884E8EB5681E55823D34BBEF18D7A790131C28C7AB5352ADC89EBC749AB85B53"
+  }
+]
