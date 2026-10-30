@@ -31,3 +31,8 @@ pre-seal input, not independently read mapped instruction bytes. No product
 or guest binary was edited or rebuilt.
 The retained event text normalizes line endings and trailing whitespace; raw
 output remains in the task build directory.
+
+The WOW64 exception address comparison has a separate [positive and
+one-byte-offset negative control](../sas-breakpoint-calibration/review.md).
+It confirms the observed address convention on this host, without proving
+that every workload reaches or avoids the target.
