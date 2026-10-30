@@ -1,0 +1,2 @@
+dead hwnd=02730AAC tid=0 pid=0 error=1400
+invalid tid=0 error=1400
