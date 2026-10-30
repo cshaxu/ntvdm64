@@ -1,0 +1,22 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "942817AFC6B8C1F55D984AEE05C8D5F72D3DE689C4A8F3F23354D00526B330BB",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\xms_capability.asm"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8C113A855040A05B72747BE627D8E66AC94EED264B6B64A3546AAD21B3982782",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\prebuilt-xms\\runtime\\tests\\S6PROBE.COM"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AE09A2F689002A4C59290A59053023075B8418172C5A6928A411C17307A3DB8E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\prebuilt-interrupt-xms.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "8ABBB661B92B5647E5C37851BC1333F0598A30A67032EBC28F5690FDDF6F502F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe"
+  }
+]
