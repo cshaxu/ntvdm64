@@ -30,6 +30,10 @@ shutdown witness, including explicit close, stale tokens, repeated shutdown
 and reopening. It does not prove populated real-worker DLL unload.
 [Evidence](s11-foundation-evidence/current-registry-shutdown/review.md).
 
+The latest release inputs were also rechecked in a freshly resealed live
+worker: the VDD memory exports and exhausted-reallocation rollback passed.
+[Evidence](s11-foundation-evidence/published-export-live/review.md).
+
 The diagnostic guest-read recovery is published after focused witnesses and
 the Full gate. Its remaining coverage boundaries are in
 [the candidate record](s11-foundation-evidence/diagnostic-stack-candidate/review.md).
