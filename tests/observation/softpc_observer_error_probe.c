@@ -22,13 +22,13 @@ int main(int argc, char **argv)
 {
     unsigned mode;
     char long_path[MAX_PATH + 32];
-    if (argc != 3) return 2;
+    if (argc != 3 && argc != 4) return 2;
     SetEnvironmentVariableA("MVDM_WOW_NT_TRACE_PATH", NULL);
     SetEnvironmentVariableA("MVDM_TERMINATE_VDM_REPORT_PATH", NULL);
     SetEnvironmentVariableA("MVDM_WIN31_SETUP_HARDWARE_TRACE_PATH", NULL);
     SetEnvironmentVariableA("MVDM_WIN31_SETUP_MODE_TRACE_PATH", NULL);
     SetEnvironmentVariableA("MVDM_WIN31_SETUP_XMS_TRACE_PATH", NULL);
-    SetEnvironmentVariableA("MVDM_WIN31_SETUP_ILLEGAL_TRACE_PATH", NULL);
+    SetEnvironmentVariableA("MVDM_WIN31_SETUP_ILLEGAL_TRACE_PATH", argc == 4 ? argv[1] : NULL);
     SetEnvironmentVariableA("MVDM_WIN31_SETUP_REAL_TRACE_PATH", NULL);
     SetEnvironmentVariableA("MVDM_WIN31_SETUP_COMMAND_TRACE_PATH", NULL);
     SetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", NULL);
@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     CHECK(mvdm_softpc_report_setup_mode_switch(NULL, 0, 0));
     CHECK(mvdm_softpc_report_xms_service(0, 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_xms_move(0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_setup_illegal_opcode(0, 0, 0, 0, 0, 0, 0, 0, 0));
+    CHECK(mvdm_softpc_report_setup_illegal_opcode(0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_setup_real_instruction(0, 0, 0, 0, 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_setup_command_classification(NULL, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_dpmi_table_address(NULL, 0, 0, 0));
@@ -72,7 +72,7 @@ int main(int argc, char **argv)
     CHECK(mvdm_softpc_report_dpmi_fast_bop_result(0, 0, 0));
     CHECK(mvdm_softpc_report_virtual_device_control(0, 0, 0, 0));
     CHECK(mvdm_softpc_report_dpmi_swint(0, 0, 0, 0, 0, 0));
-    CHECK(mvdm_softpc_report_dpmi_swint_target(0, 0, 0, 0, NULL, 0));
+    CHECK(mvdm_softpc_report_dpmi_swint_target(0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_allocsel_instruction(0, 0, 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_setdescriptor_instruction(0, 0, 0, 0, 0, 0, 0, 0));
     CHECK(mvdm_softpc_report_wow_getsel_instruction(0, 0, 0, 0, 0, 0, 0));
@@ -95,9 +95,11 @@ int main(int argc, char **argv)
         const char *path = mode == 0 ? long_path : (mode == 1 ? argv[2] : argv[1]);
         SetEnvironmentVariableA("MVDM_S41_WOW_BOP_REPORT_PATH", path);
         SetEnvironmentVariableA("MVDM_S42_WOW_RETURN_REPORT_PATH", path);
+        SetEnvironmentVariableA("MVDM_S42_DPMI_SWINT_REPORT_PATH", path);
         CHECK(mvdm_softpc_report_wow_bop_state(0, 0, 0, 0, 0, 0));
         CHECK(mvdm_softpc_report_wow_dispatch_return_state(0, 0, 0, 0));
         CHECK(mvdm_softpc_report_wow_stage("fixture", 0, 0, 0, 0));
+        CHECK(mvdm_softpc_report_dpmi_swint_target(0x31, 0x1234, 0x5678, 0x9abc));
     }
     printf("OBSERVER_LAST_ERROR checks=%u result=0\n", checks);
     return 0;

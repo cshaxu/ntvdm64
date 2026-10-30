@@ -36,8 +36,7 @@ void mvdm_softpc_report_xms_move(unsigned long source,
  * the original panel/one-byte continuation changes that frame. */
 void mvdm_softpc_report_setup_illegal_opcode(unsigned short cs,
     unsigned short ip, unsigned short ss, unsigned long esp,
-    unsigned short stack0, unsigned short stack1, unsigned short stack2,
-    unsigned short stack3, unsigned long eflags);
+    unsigned long eflags);
 /* Diagnostic-build-only instruction witness for the short real-mode window
  * that has already transferred into the bad #UD segment. */
 void mvdm_softpc_report_setup_real_instruction(unsigned short cs,
@@ -120,8 +119,7 @@ void mvdm_softpc_report_dpmi_swint(unsigned long interrupt_number,
     unsigned short caller_cs, unsigned long caller_eip);
 void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
     unsigned short handler_cs, unsigned long handler_eip,
-    unsigned short handler_flags, unsigned char const *code,
-    unsigned long code_size);
+    unsigned short handler_flags);
 void mvdm_softpc_report_wow_allocsel_instruction(unsigned short cs,
     unsigned long eip, unsigned short ax, unsigned short bx,
     unsigned short cx, unsigned short dx, unsigned short bp,

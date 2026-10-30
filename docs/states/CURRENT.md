@@ -39,9 +39,9 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The [ten-component candidate](../../artifacts/mvdm-audit/s11-foundation-evidence/wow-host-attach-failure/review.md)
-passed Full and Winmine gameplay; all ten components were published and
-hash-verified. S11 correctness review remains active.
+The latest [ten-component release](../../artifacts/mvdm-audit/s11-foundation-evidence/diagnostic-stack-candidate/review.md)
+passed Full and Winmine gameplay and was hash-verified at both destinations.
+Diagnostic guest-read recovery is delivered; S11 correctness review remains active.
 [S11 closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists
 each foundation's evidence and remaining boundary.
 

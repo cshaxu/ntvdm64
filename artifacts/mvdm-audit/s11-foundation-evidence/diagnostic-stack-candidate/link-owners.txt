@@ -1,0 +1,2 @@
+3923: 0001:00158610       _DpmiSwIntHandler          00559610 f   original-mvdm-dpmi32:dpmiint.obj
+4022: 0001:0015e040       _mvdm_softpc_report_dpmi_swint_target 0055f040 f   softpc-bindings:mvdm_softpc_termination.obj

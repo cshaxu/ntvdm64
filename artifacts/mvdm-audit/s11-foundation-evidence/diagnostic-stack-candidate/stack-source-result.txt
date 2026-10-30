@@ -1,0 +1,9 @@
+artifacts/mvdm-audit/shard-1/bop9-source-fixture.py
+original source_sha256=378A34807645277090BF4B38556EA210502F79A898855B649B39D6C4CCC47F66 reads=0 handler_calls=1 ax=5a31 report_calls=0
+current source_sha256=8FB11614B624E5FE660A7B876CEF65A9C20D21B9FD8FDACBB0CDC4013E8C182F reads=0 handler_calls=1 ax=5a31 report_calls=3
+artifacts/mvdm-audit/shard-1/int15-source-fixture.py
+original sha256=3AA86F1FAF07F68937629F1D6E410EB41F498E17DC6D747647C7D6E5697C80AA reads=0 ah=91 al=25 cf=7 report_calls=0
+current sha256=ADC473BF906150D61759CB9193475238E68263962F8B685318CA8D8F01C4E634 reads=0 ah=91 al=25 cf=7 report_calls=2
+artifacts/mvdm-audit/shard-0/illegal-op-source-fixture.py
+original reads=4 writes=2 panel=1 dispatch=1 ip=1235 reports=0
+current reads=4 writes=2 panel=1 dispatch=1 ip=1235 reports=1

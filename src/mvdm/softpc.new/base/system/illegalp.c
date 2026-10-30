@@ -98,13 +98,9 @@ void illegal_op_int()
 	cs = sas_hw_at(stack+2) + (sas_hw_at(stack+3)<<8);
 
 #ifdef NTVDM
-	/* DIVERGENCE(MVDM-HOST-DIV-328): S4's default-off Setup witness samples
-	 * the original #UD frame before this owner opens its existing panel and
-	 * advances the interrupted IP.  It cannot select an exception handler,
-	 * alter the frame, or affect the original continuation. */
-	mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(),
-		sas_hw_at(stack), sas_hw_at(stack + 2), sas_hw_at(stack + 4),
-		sas_hw_at(stack + 6), getEFLAGS());
+	/* DIVERGENCE(MVDM-HOST-DIV-328): report only the frame values already
+	 * consumed by the original handler; never sample additional guest bytes. */
+	mvdm_softpc_report_setup_illegal_opcode(cs, ip, getSS(), getESP(), getEFLAGS());
 #endif
 
 	where(string, cs, ip);

@@ -74,10 +74,6 @@ void cassette_io()
 {
         unsigned long setup_int15_function = (unsigned long)getAH();
         unsigned long setup_int15_argument = (unsigned long)getAL();
-        sys_addr setup_int15_stack = effective_addr(getSS(), getSP());
-        unsigned long setup_int15_caller =
-            ((unsigned long)sas_w_at(setup_int15_stack + 2) << 16) |
-            (unsigned long)sas_w_at(setup_int15_stack);
 #ifdef PM
 #ifndef	CPU_30_STYLE
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
@@ -113,10 +109,9 @@ half_word target_AR;
         /*
          *	Determine function
          */
+	/* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */
 	mvdm_softpc_report_setup_hardware_probe("int15-enter",
 		setup_int15_function, setup_int15_argument);
-	mvdm_softpc_report_setup_hardware_probe("int15-caller",
-		setup_int15_caller, (unsigned long)getAX());
 	switch ( getAH() )
 	{
 	case INT15_DEVICE_OPEN:

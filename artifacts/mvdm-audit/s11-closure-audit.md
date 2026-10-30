@@ -30,7 +30,17 @@ shutdown witness, including explicit close, stale tokens, repeated shutdown
 and reopening. It does not prove populated real-worker DLL unload.
 [Evidence](s11-foundation-evidence/current-registry-shutdown/review.md).
 
+The diagnostic guest-read recovery is published after focused witnesses and
+the Full gate. Its remaining coverage boundaries are in
+[the candidate record](s11-foundation-evidence/diagnostic-stack-candidate/review.md).
+
 ## Delivery status
+
+The later [diagnostic guest-read release](s11-foundation-evidence/diagnostic-stack-candidate/review.md)
+supersedes the package identities below. It passed the 16-gate Full suite and
+Winmine gameplay, and both delivery destinations matched all ten hashes. It
+does not resolve the separately observed SOL 1400 or establish every boundary
+listed in this audit.
 
 The current candidate has passing Console-17, Window-17, Control-12, guest
 manifest, bounded Calculator/Notepad/Write/Program Manager and shared-WOW probes.

@@ -1,0 +1,10 @@
+{
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/diagnostic-stack-package/package",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-30T10:39:39.5583212Z"
+}

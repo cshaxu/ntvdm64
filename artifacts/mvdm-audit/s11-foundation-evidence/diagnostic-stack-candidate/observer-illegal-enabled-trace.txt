@@ -1,0 +1,4 @@
+tid=34852 #ud frame=0000:0000 stack=0000:00000000 flags=00000000
+wow-bop cr0=00000000 cr3=00000000 csip=0000:0000 dsbase=00000000 dslimit=00000000
+wow-dispatch-return cr0=00000000 cr3=00000000 csip=0000:0000
+wow-stage stage=fixture cr0=00000000 cr3=00000000 csip=0000:0000\r\ndpmi-swint-target int=31 handler=1234:00005678 flags=9abc

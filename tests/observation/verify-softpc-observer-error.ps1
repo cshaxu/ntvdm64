@@ -20,8 +20,14 @@ try {
  @{pid=$p.Id;start=$p.StartTime.ToUniversalTime().ToString('o');command=$line;deadline=$p.StartTime.AddSeconds(20).ToUniversalTime().ToString('o')}|ConvertTo-Json|Set-Content "$root/process.json"
  if(!$p.WaitForExit(20000)){& taskkill.exe /PID $p.Id /T /F;throw 'Owned observer probe timeout'}
  $p.WaitForExit();$p.Refresh()
- if($p.ExitCode -or (Get-Content "$root/probe.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=50 result=0'){throw 'Observer error transparency failed'}
+ if($p.ExitCode -or (Get-Content "$root/probe.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=53 result=0'){throw 'Observer error transparency failed'}
  $trace=Get-Content "$root/trace.txt" -Raw
- foreach($marker in @('wow-bop','wow-dispatch-return','wow-stage stage=fixture')){if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}}
+ foreach($marker in @('wow-bop','wow-dispatch-return','wow-stage stage=fixture','dpmi-swint-target int=31 handler=1234:00005678 flags=9abc')){if(!$trace.Contains($marker)){throw "Missing enabled output: $marker"}}
+ $enabled='"'+$root+'/illegal-enabled.txt" "'+$root+'/absent/trace.txt" enabled'
+ $p=Start-Process "$root/probe.exe" -ArgumentList $enabled -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/enabled.out" -RedirectStandardError "$root/enabled.err"
+ $p.WaitForExit(); $p.Refresh()
+ if($p.ExitCode -or (Get-Content "$root/enabled.out" -Raw) -notmatch 'OBSERVER_LAST_ERROR checks=53 result=0'){throw 'Enabled illegal-op observer failed'}
+ $illegal=Get-Content "$root/illegal-enabled.txt" -Raw
+ if(!$illegal.Contains('#ud frame=0000:0000 stack=0000:00000000 flags=00000000') -or $illegal.Contains('words=')){throw 'Unexpected enabled illegal-op output'}
  '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

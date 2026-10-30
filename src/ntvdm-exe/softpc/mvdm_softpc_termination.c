@@ -229,8 +229,7 @@ void mvdm_softpc_report_xms_move(unsigned long source,
 
 void mvdm_softpc_report_setup_illegal_opcode(unsigned short cs,
     unsigned short ip, unsigned short ss, unsigned long esp,
-    unsigned short stack0, unsigned short stack1, unsigned short stack2,
-    unsigned short stack3, unsigned long eflags)
+    unsigned long eflags)
 {
     static __declspec(thread) char path[MAX_PATH];
     static __declspec(thread) unsigned initialized, count;
@@ -249,11 +248,9 @@ void mvdm_softpc_report_setup_illegal_opcode(unsigned short cs,
             NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
         if (file != INVALID_HANDLE_VALUE) {
             bytes = (DWORD)snprintf(line, sizeof(line),
-                "tid=%lu #ud frame=%04x:%04x stack=%04x:%08lx words=%04x,%04x,%04x,%04x flags=%08lx\r\n",
+                "tid=%lu #ud frame=%04x:%04x stack=%04x:%08lx flags=%08lx\r\n",
                 GetCurrentThreadId(), (unsigned int)cs, (unsigned int)ip,
-                (unsigned int)ss, esp, (unsigned int)stack0,
-                (unsigned int)stack1, (unsigned int)stack2,
-                (unsigned int)stack3, eflags);
+                (unsigned int)ss, esp, eflags);
             if (bytes < sizeof(line)) (void)WriteFile(file, line, bytes, &written, NULL);
             CloseHandle(file);
         }
@@ -710,8 +707,7 @@ restore_error:
 
 void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
     unsigned short handler_cs, unsigned long handler_eip,
-    unsigned short handler_flags, unsigned char const *code,
-    unsigned long code_size)
+    unsigned short handler_flags)
 {
     DWORD saved_error = GetLastError();
     char path[MAX_PATH];
@@ -728,16 +724,9 @@ void mvdm_softpc_report_dpmi_swint_target(unsigned long interrupt_number,
         OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
-        "dpmi-swint-target int=%02lx handler=%04x:%08lx flags=%04x code=%02x%02x%02x%02x%02x%02x%02x%02x\\r\\n",
+        "dpmi-swint-target int=%02lx handler=%04x:%08lx flags=%04x\r\n",
         interrupt_number, (unsigned int)handler_cs, handler_eip,
-        (unsigned int)handler_flags, (unsigned int)(code_size > 0u ? code[0] : 0u),
-        (unsigned int)(code_size > 1u ? code[1] : 0u),
-        (unsigned int)(code_size > 2u ? code[2] : 0u),
-        (unsigned int)(code_size > 3u ? code[3] : 0u),
-        (unsigned int)(code_size > 4u ? code[4] : 0u),
-        (unsigned int)(code_size > 5u ? code[5] : 0u),
-        (unsigned int)(code_size > 6u ? code[6] : 0u),
-        (unsigned int)(code_size > 7u ? code[7] : 0u));
+        (unsigned int)handler_flags);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
 restore_error:

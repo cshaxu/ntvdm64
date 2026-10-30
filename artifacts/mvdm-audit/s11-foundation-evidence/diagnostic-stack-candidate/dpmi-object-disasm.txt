@@ -1,0 +1,148 @@
+_DpmiSwIntHandler:
+  00000000: 51                 push        ecx
+  00000001: 56                 push        esi
+  00000002: 57                 push        edi
+  00000003: 8B 7C 24 10        mov         edi,dword ptr [esp+10h]
+  00000007: 83 FF 31           cmp         edi,31h
+  0000000A: 74 09              je          00000015
+  0000000C: 83 FF 2A           cmp         edi,2Ah
+  0000000F: 0F 85 82 00 00 00  jne         00000097
+  00000015: E8 00 00 00 00     call        _getEIP
+  0000001A: 50                 push        eax
+  0000001B: E8 00 00 00 00     call        _getCS
+  00000020: 0F B7 C0           movzx       eax,ax
+  00000023: 50                 push        eax
+  00000024: E8 00 00 00 00     call        _getCX
+  00000029: 0F B7 C0           movzx       eax,ax
+  0000002C: 50                 push        eax
+  0000002D: E8 00 00 00 00     call        _getBX
+  00000032: 0F B7 C0           movzx       eax,ax
+  00000035: 50                 push        eax
+  00000036: E8 00 00 00 00     call        _getAX
+  0000003B: 0F B7 C0           movzx       eax,ax
+  0000003E: 50                 push        eax
+  0000003F: 57                 push        edi
+  00000040: E8 00 00 00 00     call        _mvdm_softpc_report_dpmi_swint
+  00000045: 83 C4 18           add         esp,18h
+  00000048: 83 FF 2A           cmp         edi,2Ah
+  0000004B: 75 4A              jne         00000097
+  0000004D: E8 00 00 00 00     call        _getEAX
+  00000052: 3D F1 F0 F0 F0     cmp         eax,0F0F0F0F1h
+  00000057: 75 3E              jne         00000097
+  00000059: E8 00 00 00 00     call        _getEBP
+  0000005E: 3D F1 F0 F0 F0     cmp         eax,0F0F0F0F1h
+  00000063: 75 32              jne         00000097
+  00000065: E8 00 00 00 00     call        _getEDX
+  0000006A: 50                 push        eax
+  0000006B: E8 00 00 00 00     call        _getECX
+  00000070: 50                 push        eax
+  00000071: E8 00 00 00 00     call        _getEBX
+  00000076: 50                 push        eax
+  00000077: E8 00 00 00 00     call        _DpmiSetWowLdtEntry
+  0000007C: 8B F0              mov         esi,eax
+  0000007E: 56                 push        esi
+  0000007F: E8 00 00 00 00     call        _setEAX
+  00000084: C1 EE 1F           shr         esi,1Fh
+  00000087: 56                 push        esi
+  00000088: E8 00 00 00 00     call        _setCF
+  0000008D: 83 C4 14           add         esp,14h
+  00000090: 8D 47 D7           lea         eax,[edi-29h]
+  00000093: 5F                 pop         edi
+  00000094: 5E                 pop         esi
+  00000095: 59                 pop         ecx
+  00000096: C3                 ret
+  00000097: 0F B7 14 FD 00 00  movzx       edx,word ptr _DpmiInterruptHandlers[edi*8]
+            00 00
+  0000009F: A1 00 00 00 00     mov         eax,dword ptr [_Ldt]
+  000000A4: 8B CA              mov         ecx,edx
+  000000A6: C1 E9 03           shr         ecx,3
+  000000A9: 81 E1 FF FF FF 1F  and         ecx,1FFFFFFFh
+  000000AF: 53                 push        ebx
+  000000B0: F7 44 C8 04 00 80  test        dword ptr [eax+ecx*8+4],8000h
+            00 00
+  000000B8: 0F 84 FA 00 00 00  je          000001B8
+  000000BE: 83 FF 31           cmp         edi,31h
+  000000C1: 75 18              jne         000000DB
+  000000C3: 0F B7 05 8A 01 00  movzx       eax,word ptr [_DpmiInterruptHandlers+18Ah]
+            00
+  000000CA: 50                 push        eax
+  000000CB: FF 35 8C 01 00 00  push        dword ptr [_DpmiInterruptHandlers+18Ch]
+  000000D1: 52                 push        edx
+  000000D2: 57                 push        edi
+  000000D3: E8 00 00 00 00     call        _mvdm_softpc_report_dpmi_swint_target
+  000000D8: 83 C4 10           add         esp,10h
+  000000DB: E8 00 00 00 00     call        _getEFLAGS
+  000000E0: 8B D8              mov         ebx,eax
+  000000E2: 81 E3 FF BF FF FF  and         ebx,0FFFFBFFFh
+  000000E8: 8B CB              mov         ecx,ebx
+  000000EA: 81 E1 FF FE FF FF  and         ecx,0FFFFFEFFh
+  000000F0: 51                 push        ecx
+  000000F1: E8 00 00 00 00     call        _setEFLAGS
+  000000F6: 83 C4 04           add         esp,4
+  000000F9: E8 00 00 00 00     call        _getMSW
+  000000FE: A8 01              test        al,1
+  00000100: 75 14              jne         00000116
+  00000102: 53                 push        ebx
+  00000103: 57                 push        edi
+  00000104: E8 00 00 00 00     call        _ReflectV86Int
+  00000109: 83 C4 08           add         esp,8
+  0000010C: B8 01 00 00 00     mov         eax,1
+  00000111: 5B                 pop         ebx
+  00000112: 5F                 pop         edi
+  00000113: 5E                 pop         esi
+  00000114: 59                 pop         ecx
+  00000115: C3                 ret
+  00000116: 8D 44 24 0C        lea         eax,[esp+0Ch]
+  0000011A: 50                 push        eax
+  0000011B: 8D 44 24 18        lea         eax,[esp+18h]
+  0000011F: 50                 push        eax
+  00000120: 6A 03              push        3
+  00000122: E8 00 00 00 00     call        _BuildStackFrame
+  00000127: 83 C4 0C           add         esp,0Ch
+  0000012A: 85 C0              test        eax,eax
+  0000012C: 0F 84 86 00 00 00  je          000001B8
+  00000132: 66 83 3D 00 00 00  cmp         word ptr [_CurrentAppFlags],0
+            00 00
+  0000013A: 8B 74 24 14        mov         esi,dword ptr [esp+14h]
+  0000013E: 74 2D              je          0000016D
+  00000140: 89 5E FC           mov         dword ptr [esi-4],ebx
+  00000143: E8 00 00 00 00     call        _getCS
+  00000148: 0F B7 C0           movzx       eax,ax
+  0000014B: 89 46 F8           mov         dword ptr [esi-8],eax
+  0000014E: E8 00 00 00 00     call        _getEIP
+  00000153: 89 46 F4           mov         dword ptr [esi-0Ch],eax
+  00000156: FF 34 FD 04 00 00  push        dword ptr _DpmiInterruptHandlers[edi*8+4]
+            00
+  0000015D: E8 00 00 00 00     call        _setEIP
+  00000162: FF 74 24 10        push        dword ptr [esp+10h]
+  00000166: E8 00 00 00 00     call        _setESP
+  0000016B: EB 2D              jmp         0000019A
+  0000016D: 66 89 5E FE        mov         word ptr [esi-2],bx
+  00000171: E8 00 00 00 00     call        _getCS
+  00000176: 66 89 46 FC        mov         word ptr [esi-4],ax
+  0000017A: E8 00 00 00 00     call        _getEIP
+  0000017F: 66 89 46 FA        mov         word ptr [esi-6],ax
+  00000183: 0F B7 04 FD 04 00  movzx       eax,word ptr _DpmiInterruptHandlers[edi*8+4]
+            00 00
+  0000018B: 50                 push        eax
+  0000018C: E8 00 00 00 00     call        _setEIP
+  00000191: FF 74 24 10        push        dword ptr [esp+10h]
+  00000195: E8 00 00 00 00     call        _setSP
+  0000019A: 0F B7 04 FD 00 00  movzx       eax,word ptr _DpmiInterruptHandlers[edi*8]
+            00 00
+  000001A2: 83 C4 08           add         esp,8
+  000001A5: 50                 push        eax
+  000001A6: E8 00 00 00 00     call        _setCS
+  000001AB: 83 C4 04           add         esp,4
+  000001AE: B8 01 00 00 00     mov         eax,1
+  000001B3: 5B                 pop         ebx
+  000001B4: 5F                 pop         edi
+  000001B5: 5E                 pop         esi
+  000001B6: 59                 pop         ecx
+  000001B7: C3                 ret
+  000001B8: 5B                 pop         ebx
+  000001B9: 5F                 pop         edi
+  000001BA: 33 C0              xor         eax,eax
+  000001BC: 5E                 pop         esi
+  000001BD: 59                 pop         ecx
+  000001BE: C3                 ret

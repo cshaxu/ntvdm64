@@ -1502,22 +1502,9 @@ void kb_idle_poll()
     */
 void keyboard_io()
 {
-   sys_addr setup_keyboard_stack = effective_addr(getSS(), getSP());
-   unsigned long setup_keyboard_caller =
-       ((unsigned long)sas_w_at(setup_keyboard_stack + 2) << 16) |
-       (unsigned long)sas_w_at(setup_keyboard_stack);
-   unsigned long setup_keyboard_interrupted =
-       ((unsigned long)sas_w_at(setup_keyboard_stack + 6) << 16) |
-       (unsigned long)sas_w_at(setup_keyboard_stack + 4);
+   /* DIVERGENCE(MVDM-HOST-DIV-325): register-only diagnostics. */
    mvdm_softpc_report_setup_hardware_probe("keyboard-bop-enter",
        (unsigned long)getAH(), (unsigned long)getAL());
-   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-caller",
-       setup_keyboard_caller, (unsigned long)getAX());
-   /* The first return pair is the BIOS BOP stub.  The next pair identifies
-    * the interrupted DOS client and lets the opt-in trace distinguish a
-    * normal idle loop from an application wait. */
-   mvdm_softpc_report_setup_hardware_probe("keyboard-bop-interrupted",
-       setup_keyboard_interrupted, (unsigned long)getSS());
    switch (getAH()) {
            /*
             * The 16 bit thread has not reached idle status yet

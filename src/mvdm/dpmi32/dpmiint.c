@@ -581,13 +581,11 @@ Return Value:
     }
 
     if (IntNumber == 0x31u) {
-        PUCHAR HandlerCode = Sim32GetVDMPointer(
-            ((ULONG)Handlers[IntNumber].CsSelector << 16) |
-            Handlers[IntNumber].Eip, 8, TRUE);
-
+        /* DIVERGENCE(MVDM-HOST-DIV-472): diagnostic target metadata must
+         * not map or read guest code. */
         mvdm_softpc_report_dpmi_swint_target(IntNumber,
             Handlers[IntNumber].CsSelector, Handlers[IntNumber].Eip,
-            Handlers[IntNumber].Flags, HandlerCode, 8u);
+            Handlers[IntNumber].Flags);
     }
 
     SaveEFLAGS = getEFLAGS();
