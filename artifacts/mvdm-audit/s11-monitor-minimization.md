@@ -174,3 +174,19 @@ instruction without first raising an exception. The separate prefixed-0F
 fall-through and segment limits are unchanged.
 
 The 91-case monitor suite, 16 Full gates, Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 mode/DOSONLY combinations passed. All 86 monitored guest binaries retained their hashes in original and isolated trees; both published ten-component destinations match the tested package. [Evidence](s11-monitor-minimization-evidence/prefix-limit/).
+
+## Unreachable 0F length guards
+
+The selected adapter rejects any prefix before entering its `0F` branch,
+so `prefix` is zero for every fetch there. Its length checks for
+`prefix + 1 >= 15` and `prefix + 2 >= 15` cannot be true. LMSW begins
+operand decoding at cursor 3 and supports only the original unprefixed
+16-bit forms: the longest displacement consumes two bytes, ending at cursor
+5. Its two cursor-15 guards likewise cannot be true. Those six comparisons
+were removed; the original code-limit checks in `monitor_fetch_byte`,
+operand reads, selector resolution and all failure exits remain. The 91-case
+actual selected-CCPU monitor fixture, including LMSW displacement, missing
+page, CS limit and prefix controls, passes. This does not assert completion
+of remaining paging or exception-delivery boundaries.
+
+The first Full run failed Window-17 `nested-mem` with an observer timeout; its input report says `input-delivered=0`. The evidence does not establish the cause. The unchanged package passed all 16 Full gates on rerun, the 91-case CCPU suite, Winmine/SOL/WRITE, four SOL Options cycles and the four Win3.1 mode/DOSONLY combinations. All 86 monitored original and isolated guest binaries retained their hashes. Both ten-component destinations were published and all 20 hashes matched. [Failure and passing evidence](s11-monitor-minimization-evidence/operand-limit/).

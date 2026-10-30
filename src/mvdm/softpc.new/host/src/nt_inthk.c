@@ -344,10 +344,10 @@ static BOOL monitor_lmsw_operand(const MONITOR_CODE *code, ULONG *cursor, UCHAR 
         default: offset=getBX();break;
     }
     if(mode==1) {
-            if(*cursor>=15 || !monitor_fetch_byte(code,(*cursor)++,&lo)) return FALSE;
+            if(!monitor_fetch_byte(code,(*cursor)++,&lo)) return FALSE;
             offset+=(signed char)lo;
     } else if(mode==2 || (mode==0 && rm==6)) {
-            if(*cursor>=14 || !monitor_fetch_byte(code,(*cursor)++,&lo) ||
+            if(!monitor_fetch_byte(code,(*cursor)++,&lo) ||
                !monitor_fetch_byte(code,(*cursor)++,&hi)) return FALSE;
             offset+=(ULONG)lo | ((ULONG)hi<<8);
     }
@@ -453,13 +453,13 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                  * EIP and advances it once, so a leading prefix is not a
                  * supported 0F dispatch. Preserve its fallback path. */
                 if(prefix) goto candidate_unhandled;
-                if(prefix+1>=15 || !monitor_fetch_byte(&code,prefix+1,&second)) goto candidate_unhandled;
+                if(!monitor_fetch_byte(&code,prefix+1,&second)) goto candidate_unhandled;
                 /* NT4 VdmOpcodeClts intentionally performs no CR0 change. */
                 if(second==0x06) {setEIP(ip+prefix+2);return TRUE;}
                 if(second==0x20) {
                     ULONG value;
                     extern unsigned long c_getCR0(void);
-                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
+                    if(!monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
                     value=(modrm&0x38) ? 0 : (c_getCR0() & ~8UL);
                     monitor_set_general_register(modrm,value);
                     setEIP(ip+prefix+3);return TRUE;
@@ -468,7 +468,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                     extern unsigned long CCPU_DR[8];
                     extern void ccpu_monitor_write_dr(unsigned long,unsigned long);
                     ULONG value, index;
-                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
+                    if(!monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
                     index=(modrm>>3)&7;
                     if(second==0x21) {
                         value=(index==4 || index==5) ? 0 : CCPU_DR[index];
@@ -490,7 +490,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 }
                 if(second==0x22 || second==0x01) {
                     ULONG operand, next=prefix+3;
-                    if(prefix+2>=15 || !monitor_fetch_byte(&code,prefix+2,&modrm)) goto candidate_unhandled;
+                    if(!monitor_fetch_byte(&code,prefix+2,&modrm)) goto candidate_unhandled;
                     if(second==0x22) {
                         if((modrm&0xc0)!=0xc0 || (modrm&0x38)!=0) goto candidate_unhandled;
                         operand=monitor_general_register(modrm);
