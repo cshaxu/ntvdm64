@@ -34,6 +34,9 @@ retirement race cannot be assumed to explain it or the historical SOL failure.
 Four additional Winmine dialog interactions passed under a separately staged
 identity-diagnostic provider; the [receipt](s11-foundation-evidence/winmine-return-identity-current/review.md)
 records its minimized-window and diagnostic-coverage limitations.
+The same diagnostic provider also passed a [shared-worker idle/dialog
+witness](s11-foundation-evidence/current-identity-shared-idle-dialog/review.md);
+this does not force the historic race.
 
 S11 cannot be declared fully complete on this checkpoint: the observed SOL
 failure has not been attributed, and the existing installation is not a
