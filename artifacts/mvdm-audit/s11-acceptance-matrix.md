@@ -31,6 +31,9 @@ The historical [Winmine 1400 non-pass](s11-foundation-evidence/winmine-native-re
 is another unlocalized native-return observation. Its failure substage and
 window are unknown; the separately captured and repaired cross-thread root
 retirement race cannot be assumed to explain it or the historical SOL failure.
+The [hook graph lock boundary](s11-foundation-evidence/hook-graph-lock-boundary.md)
+is an additional source-level concurrency candidate requiring a directed
+witness before choosing a repair or attributing either historical failure.
 Four additional Winmine dialog interactions passed under a separately staged
 identity-diagnostic provider; the [receipt](s11-foundation-evidence/winmine-return-identity-current/review.md)
 records its minimized-window and diagnostic-coverage limitations.
