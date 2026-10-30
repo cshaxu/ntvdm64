@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-high-linear-page-test.exe.map",
+    "Hash": "7A5F75AC68A2BB3E7131EDA04A382751CF3952745DF591A6D48E8F8F8DAFA66F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-ccpu386.lib",
+    "Hash": "4C5A9BD9C6675FF9FD7F2AB001C366109E2F9B6099C2E4E68100B5CC82501C8F"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\original-softpc-support.lib",
+    "Hash": "44DFF8093ED9C117E9715A905F8A4A67BC52481A7A5F3239DD3293A58DE92036"
+  }
+]

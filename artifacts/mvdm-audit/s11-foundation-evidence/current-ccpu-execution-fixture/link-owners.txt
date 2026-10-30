@@ -1,0 +1,6 @@
+ 0001:00001ee0       _ExitVDM@8                 00402ee0 f   ccpu_host_fixture_seams.obj
+ 0001:00001ef0       _GetNextVDMCommand@4       00402ef0 f   ccpu_host_fixture_seams.obj
+ 0001:00001f10       _SetVDMCurrentDirectories@8 00402f10 f   ccpu_host_fixture_seams.obj
+ 0001:00001fd0       _host_simulate             00402fd0 f   original-softpc-host-fixture-roots:nt_cpu.obj
+ 0001:0000b860       _c_cpu_simulate            0040c860 f   original-ccpu386:c_main.obj
+ 0002:00023968       __sehtable$_c_cpu_simulate 00577968     original-ccpu386:c_main.obj

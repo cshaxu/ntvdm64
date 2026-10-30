@@ -1,0 +1,1 @@
+bit-fault case=0 vector=14 error=4 cf=0 cr2=9ffe0ffc result=0

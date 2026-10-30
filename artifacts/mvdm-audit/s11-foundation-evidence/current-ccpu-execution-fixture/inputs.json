@@ -1,0 +1,26 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_bounded_execution_fixture.c",
+    "Hash": "6F781931902A79493C0D4C4324CDFCDE0E20C44C41473D51BD2B93F149208078"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_host_fixture_seams.c",
+    "Hash": "3332B0E2C57008773E2820ED909CF3A490CF05BF3F10C2B4A4EF234E9BF77B92"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tools\\build\\New-T310OriginalSoftpcNinja.ps1",
+    "Hash": "32CB26D7A225933672B1CEF5673244D780CE8B348CD3FD8B931DCB84CB728690"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-high-linear-page-test.exe",
+    "Hash": "AAF61C60F5F4C19C04B4CD72375887591DBCEC1AD6C63600886035389F8D9CA5"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\ccpu-bit-fault-test.exe",
+    "Hash": "76517F2F5F70D003D0CB1D0B69B98D104A06A6CBC86EE2D50628E26B6865D162"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\wow16\\user\\k\\daytona\\USER.EXE",
+    "Hash": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+  }
+]

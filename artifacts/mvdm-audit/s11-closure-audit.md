@@ -20,6 +20,11 @@ The current ten-image candidate and its results are identified in
 | Controlled CPU port permissions | Current port-routing witness and original owner mapping exist. The 117 controlled decoder/TSS cases passed after relinking to the current cached libraries. [Evidence](s11-foundation-evidence/ccpu-port-current/review.md). | S11 owns the selected decoder/privilege/fault entry; S13 owns device concurrency and reset. The fixture does not prove live guest execution or exact earlier worker library bytes. |
 | Win16 loader dependency | [WIN87EM review](shard-3/win87em-build-input-role-review.md) distinguishes archive, installed/staged paths and loader ownership. | Actual Win2 dependency lookup and relevant FPU behavior remain S11/S14; absence in one inspected directory is not by itself a failure. Never rebuild or modify guest. |
 
+The current CCPU high-page fixture's missing link seam, IRQ-ready setup and
+marker output were repaired and its original USER validator passed. The
+adjacent bit-fault fixture remains a recorded non-pass against the deliberately
+held internal bit-index candidate; it was not silently weakened. [Evidence](s11-foundation-evidence/current-ccpu-execution-fixture/review.md).
+
 ## Delivery status
 
 The current candidate has passing Console-17, Window-17, Control-12, guest

@@ -20,10 +20,10 @@
 #include "c_page.h"
 #include "c_tlb.h"
 
+extern unsigned long DelayIrqLine;
 #ifdef CCPU_BIT_MATRIX
 static jmp_buf bit_fault_frame;
 static int bit_fault_vector = -1;
-extern unsigned long DelayIrqLine;
 BOOL host_exint_hook(IS32 number, IS32 error)
 {
     (void)error;
@@ -139,6 +139,16 @@ extern unsigned fixture_eoi_hook_calls;
 extern unsigned fixture_wow_idle_calls;
 extern unsigned fixture_host_close_calls;
 
+/* The linked legacy host CRT can own a different stdout stream. Emit the
+ * acceptance markers through the actual inherited Windows handle. */
+static int fixture_stdout(const char *message)
+{
+    DWORD written, length = (DWORD)strlen(message);
+    HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE);
+    return output && output != INVALID_HANDLE_VALUE &&
+        WriteFile(output, message, length, &written, NULL) && written == length;
+}
+
 extern IU32 c_getCR0(void);
 extern IU32 c_getCR3(void);
 extern void c_setCR0(IU32 value);
@@ -226,8 +236,7 @@ static int fixture_original_user_handle(IU32 gdt)
             return 0;
         }
     }
-    puts("CCPU_ORIGINAL_USER_HANDLE_VALIDATOR_OK cases=10");
-    return 1;
+    return fixture_stdout("CCPU_ORIGINAL_USER_HANDLE_VALIDATOR_OK cases=10\r\n");
 bad:
     fclose(input);
     return 0;
@@ -500,7 +509,7 @@ done:
             !session_dispose(&memory_owner)) passed = 0;
     }
     if (VdmFreeVirtualMemory(allocation) != STATUS_SUCCESS) passed = 0;
-    if (passed) puts("CCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK");
+    if (passed && !fixture_stdout("CCPU_HIGH_LINEAR_PAGE_BOUNDARY_OK\r\n")) passed = 0;
     return passed;
 }
 
@@ -768,10 +777,8 @@ int main(void)
         ica0_post();
         ica1_init();
         ica1_post();
-#ifdef CCPU_BIT_MATRIX
         /* Reproduce the original keyboard-ready prerequisite for IRQ0. */
         DelayIrqLine = 0;
-#endif
         ica_hw_interrupt(ICA_MASTER, CPU_TIMER_INT, 1);
         interrupt_vector = ica_intack(&hook_address);
         if (interrupt_vector != 0x08 || fixture_eoi_hook_calls != 0u ||

@@ -2012,7 +2012,7 @@ $graph.Add('build obj/tests/original_external_memory_test.obj: cc ' + (NinjaPath
 $graph.Add('build original-external-memory-test.exe: memory_test_link obj/tests/original_external_memory_test.obj ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $highLinearPageFixtureObject = 'obj/tests/ccpu_bounded_execution_fixture.obj'
 $graph.Add('build ' + $highLinearPageFixtureObject + ': cc ' + (NinjaPath (Join-Path $root 'tests/mvdm-host/ccpu_bounded_execution_fixture.c')))
-$graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $fixtureHostLibraries)
+$graph.Add('build ccpu-high-linear-page-test.exe: memory_test_link ' + $highLinearPageFixtureObject + ' ' + $boundedExecutionFixtureSeamsObject + ' ' + $hostFixtureSeamsObject + ' ' + $fixtureHostLibraries)
 $graph.Add('rule ccpu_bit_matrix_cc')
 $graph.Add('  command = ' + $compilerCommand + ' $cflags $release_cflags /DCCPU_BIT_MATRIX /Fo$out $in')
 $graph.Add('  deps = msvc')
