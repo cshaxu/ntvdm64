@@ -238,3 +238,9 @@ breakpoint; the resident worker's later lifetime remains outside that run.
 The [bounded acceptance matrix](s11-acceptance-matrix.md) distinguishes
 published passes, the earlier observed non-pass, installed guest-media gap,
 owner-excluded CPU fixture and explicit later-stage handoffs.
+
+The [WOW32 unload-owner review](s11-foundation-evidence/wow32-unload-owner-review/review.md)
+separates missing-export explicit unload before `W32Init`, process termination,
+and the original generic thunk's independent native module references. This is
+source-level ownership evidence, not proof that initialized live-worker unload
+or all process-exit cleanup is impossible or correct.
