@@ -1,0 +1,1 @@
+Cases 90 and 91 before: 16 and 127 prefixes each produced handled=0 fault=1 writes=0 eip=00001000, exit 1. Case 92 with 128 prefixes correctly rejected, exit 0. Candidate: 16 and 127 prefixes succeed with EIP 00001012 and 00001081; 128 is rejected, all exits 0.

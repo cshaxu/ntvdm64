@@ -569,6 +569,23 @@ static int monitor_wrapped_instruction_offset(void) {
     ok=handled && !test_fault && io_writes==1 && c_getEIP()==1;
     c_sas_disable_20_bit_wrapping(); return ok;
 }
+/* OpcodeGenericPrefix permits instruction length through 128 before dispatch. */
+static int monitor_prefix_length(void) {
+    unsigned char gdt[40]={0}, program[130]; half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    unsigned prefixes=test_case==90 ? 16 : test_case==91 ? 127 : 128; int handled;
+    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
+    FillMemory(program,prefixes,0x66); program[prefixes]=0xe6; program[prefixes+1]=0x80;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); CopyMemory(c_GetPhyAdd(0xf1000),program,prefixes+2);
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
+    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
+    io_writes=test_fault=0; VdmInstallFaultHandler((void *)test_sti_fault);
+    handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
+    {char line[120];wsprintfA(line,"MONITOR_PREFIX count=%u handled=%d fault=%lu writes=%u eip=%08lx\n",prefixes,handled,test_fault,io_writes,c_getEIP());report(line);}
+    if(test_case==92)return !handled && test_fault==1 && !io_writes && c_getEIP()==0x1000;
+    return handled && !test_fault && io_writes==1 && c_getEIP()==0x1000+prefixes+2;
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -678,7 +695,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==89) ok=monitor_wrapped_instruction_offset();
+    if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
+    else if(test_case==89) ok=monitor_wrapped_instruction_offset();
     else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
     else if(test_case==86) ok=monitor_cr0_npx_matrix();
     else if(test_case==49) ok=duplicate_tlb_mapping();

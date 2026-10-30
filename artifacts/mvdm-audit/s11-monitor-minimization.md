@@ -158,3 +158,19 @@ can itself produce every corresponding trap. The 88-case selected monitor
 suite passes; see `build/t473-s11/wrap-ip-boundary.log`.
 
 The 88-case monitor suite, all 16 Full gates, Winmine/SOL/WRITE and four SOL Options cycles, and the four Win3.1 mode/DOSONLY combinations passed. All 86 monitored guest binary hashes remained unchanged in both original and isolated trees. The coherent ten-component package was published to each destination with all 20 hashes matching. [Build and verification evidence](s11-monitor-minimization-evidence/wrap-ip/).
+
+## Original prefix-dispatch bound
+
+NT4 `OpcodeGenericPrefix` increments its byte instruction-length count and
+rejects it only when greater than 128; the immediate byte handler then reads
+the port byte and increments the count. The adapter's previous independent
+15-byte cap rejected sequences that this original dispatcher accepts. Real
+selected-CCPU monitor-entry cases 90 and 91 use 16 and 127 operand-size
+prefixes before OUT imm8: the old adapter declined both; the candidate
+performs the output and advances EIP. Case 92 uses 128 prefixes and verifies
+original rejection without I/O or EIP advance. This is a controlled dispatch
+witness; it does not claim the processor can ordinarily execute a longer
+instruction without first raising an exception. The separate prefixed-0F
+fall-through and segment limits are unchanged.
+
+The 91-case monitor suite, 16 Full gates, Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 mode/DOSONLY combinations passed. All 86 monitored guest binaries retained their hashes in original and isolated trees; both published ten-component destinations match the tested package. [Evidence](s11-monitor-minimization-evidence/prefix-limit/).

@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$WorkerBuild)
 $ErrorActionPreference = 'Stop'
 $image = Join-Path (Resolve-Path -LiteralPath $WorkerBuild).Path 'ccpu-monitor-boundary-test.exe'
 if (!(Test-Path -LiteralPath $image -PathType Leaf)) { throw "Missing fixture: $image" }
-$cases = @(0..7) + @(10..89)
+$cases = @(0..7) + @(10..92)
 foreach ($case in $cases) {
     & $image $case
     if ($LASTEXITCODE -ne 0) { throw "CCPU monitor case $case failed: $LASTEXITCODE" }

@@ -444,7 +444,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
             while (op==0x26 || op==0x2e || op==0x36 || op==0x3e ||
                    op==0x64 || op==0x65 || op==0x66 || op==0x67 || op==0xf0 || op==0xf2 || op==0xf3) {
                 ++prefix;
-                if(prefix>=15 || !monitor_fetch_byte(&code,prefix,&op))
+                if(prefix>=128 || !monitor_fetch_byte(&code,prefix,&op))
                     goto candidate_unhandled;
             }
             if(op==0x0f) {
@@ -517,7 +517,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 unsigned long next=prefix+1;
                 unsigned char immediate;
                 unsigned long port,value=0;
-                if(next>=15 || !monitor_fetch_byte(&code,next,&immediate)) goto candidate_unhandled;
+                if(!monitor_fetch_byte(&code,next,&immediate)) goto candidate_unhandled;
                 port=immediate;
                 if(op==0xe4){IN8(&value,port);setAL(value);} else if(op==0xe5){IN16(&value,port);setAX(value);}
                 else if(op==0xe6) OUT8(port,getAL()); else OUT16(port,getAX());
