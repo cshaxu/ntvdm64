@@ -73,3 +73,18 @@ The independent compat files `mvdm_softpc_effective_address.c` and its header ch
 The selected target build completed all eight cached Ninja steps; an immediate no-change build reported no work in all eight. Original SoftPC IOS entrypoints and the CPU descriptor/cache owners are present in the actual `ntvdm.exe` link map. The selected CCPU boundary suite passed 84 cases including a 16-operation all-register matrix, separate input/output adapter routing, LDT descriptor changes, descriptor fault reentry, FAST_TLB and access/dirty controls. The CALLF and external-address selected-host fixture passed. The complete 16-gate package verification and Winmine/SOL/WRITE/four SOL Options witnesses passed. A test-owned copy of the current Win3.1 installation passed standard/enhanced x DOSONLY 0/1, each with startup, expected mode and normal exit. Before and after, 86 system binary hashes matched both the original read-only installation and the isolated copy; only test-copy configurations and independent test probes were changed. Ten components were published to each destination and all 20 hashes matched. Product gates and these witnesses do not prove the remaining noncontiguous, exception, selector-kind, device-memory or arbitrary reentry boundaries.
 
 Compact build, original-diff, baseline, verification, publication and isolated Win3.1 evidence is archived in [monitor-minimization-evidence](s11-monitor-minimization-evidence/). The previous baseline’s first Window-17 observation failure and later unmodified pass remain in the separately linked foundation evidence; the cause is not asserted.
+
+## CR0 EM/MP four-state boundary witness
+
+NT4 `vdmnpx.c` defines four input mappings and eight output mappings to
+shadow the guest-visible EM/MP values separately from kernel scheduling state.
+`KiVdmSetUserCR0` installs the mapped state and `VdmOpcodeGetCrx` maps it
+back, clearing the scheduler TS bit in the returned value. Selected fixture
+case 86 exercises all four guest input pairs through the actual `nt_inthk.c`
+MOV-to-CR0 and MOV-from-CR0 dispatch, verifies other CCPU CR0 bits are
+unchanged by the write, checks the readback pair and checks TS is hidden.
+The selected fixture build and all 85 boundary cases pass. This tests the
+observable bit projection only: it does not establish that CCPU and NT4 have
+equivalent FPU execution, NPX context switching, actual #NM delivery,
+callbacks or process teardown. The fixture uses its documented
+`/force:multiple` host seams and no guest binary is changed.

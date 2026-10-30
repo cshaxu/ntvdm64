@@ -498,6 +498,33 @@ static int monitor_register_matrix(void) {
     }
     report("MONITOR_REGISTER_MATRIX 8 read and 8 write cases passed\n");return 1;
 }
+/* NT4 VdmUserCr0MapIn/Out preserve each guest-visible EM/MP pair. */
+static int monitor_cr0_npx_matrix(void) {
+    unsigned char gdt[40]={0}, program[]={0x0f,0x22,0xc0,0x0f,0x20,0xc1};
+    unsigned n; int handled;
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
+    for(n=0;n<4;n++) {
+        uint32_t before, readback;
+        c_cpu_init(); CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));
+        CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+        c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
+        c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
+        c_setCR0((c_getCR0() & ~6u) | 8u); before=c_getCR0();
+        CCPU_GR[0]=n<<1; CCPU_GR[1]=0xdeadbeefu; test_fault=0;
+        VdmInstallFaultHandler((void *)test_sti_fault);
+        handled=host_exint_hook(13,0);
+        if(!handled || test_fault || c_getEIP()!=0x1003 ||
+           (c_getCR0() & ~6u)!=(before & ~6u) || (c_getCR0() & 6u)!=(n<<1)) {
+            VdmInstallFaultHandler(NULL); return 0;
+        }
+        handled=host_exint_hook(13,0); readback=CCPU_GR[1];
+        VdmInstallFaultHandler(NULL);
+        if(!handled || test_fault || c_getEIP()!=0x1006 ||
+           (readback & 6u)!=(n<<1) || (readback & 8u)) return 0;
+    }
+    report("MONITOR_CR0_NPX_MATRIX four EM/MP states passed\n"); return 1;
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -607,7 +634,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==49) ok=duplicate_tlb_mapping();
+    if(test_case==86) ok=monitor_cr0_npx_matrix();
+    else if(test_case==49) ok=duplicate_tlb_mapping();
     else if(test_case==83) ok=monitor_register_matrix();
     else if((test_case>=77 && test_case<=81) || test_case==84 || test_case==85) ok=protected_ldt_descriptor();
     else if(test_case==76) ok=monitor_cache_contract();
