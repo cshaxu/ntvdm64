@@ -50,3 +50,15 @@ was delivered and passed through, and the worker and launcher exited with
 is a non-pass; the second event's origin and correct disposition remain
 unverified. Do not suppress it or claim an unreachable SAS entry on this basis.
 All runs used an isolated stage, with no product or guest modification.
+
+V6/V7 resolved the second WX86 breakpoint to SysWOW64 `KERNELBASE.dll` RVA
+`0x201b82`, two bytes after the 32-bit `DebugBreak` export in a same-host
+control. The captured WOW64 stack's immediate return RVA `0x4ec23` falls in
+selected `ntvdm!DbgBreakPoint`; the next NTVDM return RVA `0x14acc` is
+immediately after the CCPU `BIOS` indirect call. V8 observed the original
+`NTVDM:BOP_DBGBREAKPOINT` output from that worker thread immediately before
+the event. The BIOS table and original `MS_bop_B` identify BOP 5B as the
+specific intentional debugger break; the selected object compiles it as a
+tail jump to `DbgBreakPoint`. These observations guided the narrowly matched
+[v9 real-worker witness](../sas-real-worker-observation/review.md), rather
+than suppressing arbitrary breakpoints. The old non-passes remain non-passes.

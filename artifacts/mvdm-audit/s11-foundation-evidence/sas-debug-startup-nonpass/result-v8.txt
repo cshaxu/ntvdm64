@@ -1,0 +1,273 @@
+EVENT pid=15948 code=3
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=21076 code=3
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=2
+EVENT pid=21076 code=2
+EVENT pid=21076 code=1
+EXCEPTION pid=21076 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=2
+EVENT pid=21076 code=4
+EVENT pid=21076 code=4
+EVENT pid=21076 code=4
+EVENT pid=21076 code=2
+EVENT pid=21076 code=6
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\interactivity\win32\systemconfigurationprovider.cpp(212)\conhost.exe!00007FF6580052B5: (caller: 00007FF65801F9FA) LogHr(1) tid(3c9c) 80004005 Unspecified error
+
+
+EVENT pid=21076 code=2
+EVENT pid=21076 code=6
+EVENT pid=21076 code=2
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=21076 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=2
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=2
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=2
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=1
+EXCEPTION pid=15948 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=15948 code=6
+EVENT pid=15948 code=6
+EVENT pid=15948 code=2
+EVENT pid=15948 code=2
+EVENT pid=15948 code=1
+EXCEPTION pid=15948 code=000006ba addr=00007FFD8AF1569A first=1
+EVENT pid=30688 code=3
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=2
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=2
+EVENT pid=30688 code=2
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=1
+EXCEPTION pid=30688 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=30688 code=6
+EVENT pid=30688 code=6
+EVENT pid=30688 code=2
+EVENT pid=30688 code=2
+EVENT pid=30688 code=6
+EVENT pid=33260 code=3
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=2
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=2
+EVENT pid=33260 code=2
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=6
+EVENT pid=33260 code=1
+EXCEPTION pid=33260 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=33260 code=6
+EVENT pid=33260 code=2
+EVENT pid=33260 code=2
+EVENT pid=30688 code=2
+EVENT pid=33260 code=2
+EVENT pid=33260 code=2
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\server\apidispatchers.cpp(65)\conhost.exe!00007FF658021D9E: (caller: 00007FF658022EE6) ReturnHr(1) tid(3c9c) 80070006 The handle is invalid.
+
+
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\server\apidispatchers.cpp(65)\conhost.exe!00007FF658021D9E: (caller: 00007FF658022EE6) ReturnHr(2) tid(3c9c) 80070006 The handle is invalid.
+
+
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\server\apidispatchers.cpp(65)\conhost.exe!00007FF658021D9E: (caller: 00007FF658022EE6) ReturnHr(3) tid(3c9c) 80070006 The handle is invalid.
+
+
+EVENT pid=35768 code=3
+worker=35768 base=0000000000D00000 trap=0000000000E782E0
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=2
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=6
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=4000001f addr=00000000774DD248 first=1
+MODULE pid=35768 base=00000000773C0000 offset=0011d248 name=C:\WINDOWS\SysWOW64\ntdll.dll
+WOWSTACK eip=774dd249 esp=00cff60c read=32
+STACK[0]=66d3667b
+STACK[1]=00a5c000
+STACK[2]=01393a70
+STACK[3]=00000000
+EVENT pid=35768 code=6
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=33260 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=2
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=40000005 addr=000000007505D444 first=1
+EVENT pid=35768 code=8
+DEBUG_STRING pid=35768 tid=34000 text=NTVDM:BOP_DBGBREAKPOINT
+
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=4000001f addr=00000000750F1B82 first=1
+MODULE pid=35768 base=0000000074EF0000 offset=00201b82 name=C:\WINDOWS\SysWOW64\KERNELBASE.dll
+WOWSTACK eip=750f1b83 esp=00cff980 read=32
+STACK[0]=00d4ec23
+MODULE pid=35768 base=0000000000D00000 offset=0004ec23 name=O:\tmp\n9c7\system32\ntvdm.exe
+STACK[1]=ffffffff
+STACK[2]=00d14acc
+MODULE pid=35768 base=0000000000D00000 offset=00014acc name=O:\tmp\n9c7\system32\ntvdm.exe
+STACK[3]=013bc880
+EVENT pid=35768 code=1
+EXCEPTION pid=35768 code=4000001f addr=00000000750F1B82 first=0
+MODULE pid=35768 base=0000000074EF0000 offset=00201b82 name=C:\WINDOWS\SysWOW64\KERNELBASE.dll
+WOWSTACK eip=750f1b82 esp=00cff980 read=32
+STACK[0]=00d4ec23
+MODULE pid=35768 base=0000000000D00000 offset=0004ec23 name=O:\tmp\n9c7\system32\ntvdm.exe
+STACK[1]=ffffffff
+STACK[2]=00d14acc
+MODULE pid=35768 base=0000000000D00000 offset=00014acc name=O:\tmp\n9c7\system32\ntvdm.exe
+STACK[3]=013bc880
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=4
+EVENT pid=35768 code=2
+EVENT pid=35768 code=4
+EVENT pid=35768 code=5
+EXIT pid=35768 code=1073741855
+EVENT pid=33260 code=4
+EVENT pid=30688 code=2
+EVENT pid=30688 code=2
+EVENT pid=33260 code=4
+EVENT pid=33260 code=4
+EVENT pid=33260 code=6
+EVENT pid=15948 code=6
+EVENT pid=33260 code=4
+EVENT pid=33260 code=4
+EVENT pid=33260 code=4
+EVENT pid=33260 code=4
+EVENT pid=33260 code=4
+EVENT pid=15948 code=4
+EVENT pid=15948 code=4
+EVENT pid=15948 code=4
+EVENT pid=15948 code=4
+EVENT pid=15948 code=4
+EVENT pid=33260 code=5
+EXIT pid=33260 code=233
+EVENT pid=15948 code=5
+EXIT pid=15948 code=1073741855
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\interactivity\win32\windowio.cpp(98)\conhost.exe!00007FF658004FE2: (caller: 00007FF658023916) LogNt(2) tid(3c9c) C0000022 {Access Denied}
+
+A process has requested access to an object, but has not been granted those access rights.
+
+
+EVENT pid=21076 code=8
+DEBUG_STRING pid=21076 tid=15516 text=onecore\windows\core\console\open\src\server\condrvdevicecomm.cpp(147)\conhost.exe!00007FF658029665: (caller: 00007FF658022DEF) ReturnHr(4) tid(3c9c) 800700E9 No process is on the other end of the pipe.
+
+
+EVENT pid=21076 code=4
+EVENT pid=21076 code=4
+EVENT pid=21076 code=4
+EVENT pid=21076 code=5
+EXIT pid=21076 code=0
+RESULT done=1 exit=1073741855 worker=35768 events=201 sas_hits=0

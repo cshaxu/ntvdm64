@@ -1,0 +1,251 @@
+EVENT pid=17772 code=3
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=30260 code=3
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=2
+EVENT pid=30260 code=2
+EVENT pid=30260 code=1
+EXCEPTION pid=30260 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=2
+EVENT pid=30260 code=4
+EVENT pid=30260 code=4
+EVENT pid=30260 code=4
+EVENT pid=30260 code=2
+EVENT pid=30260 code=6
+EVENT pid=30260 code=8
+EVENT pid=30260 code=2
+EVENT pid=30260 code=6
+EVENT pid=30260 code=2
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=30260 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=2
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=2
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=2
+EVENT pid=17772 code=6
+EVENT pid=17772 code=1
+EXCEPTION pid=17772 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=17772 code=6
+EVENT pid=17772 code=6
+EVENT pid=17772 code=2
+EVENT pid=17772 code=2
+EVENT pid=17772 code=1
+EXCEPTION pid=17772 code=000006ba addr=00007FFD8AF1569A first=1
+EVENT pid=16996 code=3
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=2
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=2
+EVENT pid=16996 code=2
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=1
+EXCEPTION pid=16996 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=16996 code=6
+EVENT pid=16996 code=6
+EVENT pid=16996 code=2
+EVENT pid=16996 code=2
+EVENT pid=16996 code=6
+EVENT pid=11860 code=3
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=2
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=2
+EVENT pid=11860 code=2
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=6
+EVENT pid=11860 code=1
+EXCEPTION pid=11860 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=11860 code=6
+EVENT pid=11860 code=2
+EVENT pid=11860 code=2
+EVENT pid=16996 code=2
+EVENT pid=11860 code=2
+EVENT pid=11860 code=2
+EVENT pid=30260 code=8
+EVENT pid=30260 code=8
+EVENT pid=30260 code=8
+EVENT pid=28632 code=3
+worker=28632 base=0000000000CD0000 trap=0000000000E482E0
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=80000003 addr=00007FFD8D8F5245 first=1
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=2
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=6
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=4000001f addr=00000000774DD248 first=1
+MODULE pid=28632 base=00000000773C0000 offset=0011d248 name=C:\WINDOWS\SysWOW64\ntdll.dll
+WOWSTACK eip=774dd249 esp=00aff8d4 read=32
+STACK[0]=fac9255e
+STACK[1]=0092d000
+STACK[2]=011a3a70
+STACK[3]=00000000
+EVENT pid=28632 code=6
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=11860 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=2
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=40000005 addr=000000007505D444 first=1
+EVENT pid=28632 code=8
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=4000001f addr=00000000750F1B82 first=1
+MODULE pid=28632 base=0000000074EF0000 offset=00201b82 name=C:\WINDOWS\SysWOW64\KERNELBASE.dll
+WOWSTACK eip=750f1b83 esp=00affc48 read=32
+STACK[0]=00d1ec23
+MODULE pid=28632 base=0000000000CD0000 offset=0004ec23 name=O:\tmp\n2c8\system32\ntvdm.exe
+STACK[1]=ffffffff
+STACK[2]=00ce4acc
+MODULE pid=28632 base=0000000000CD0000 offset=00014acc name=O:\tmp\n2c8\system32\ntvdm.exe
+STACK[3]=011cc880
+EVENT pid=28632 code=1
+EXCEPTION pid=28632 code=4000001f addr=00000000750F1B82 first=0
+MODULE pid=28632 base=0000000074EF0000 offset=00201b82 name=C:\WINDOWS\SysWOW64\KERNELBASE.dll
+WOWSTACK eip=750f1b82 esp=00affc48 read=32
+STACK[0]=00d1ec23
+MODULE pid=28632 base=0000000000CD0000 offset=0004ec23 name=O:\tmp\n2c8\system32\ntvdm.exe
+STACK[1]=ffffffff
+STACK[2]=00ce4acc
+MODULE pid=28632 base=0000000000CD0000 offset=00014acc name=O:\tmp\n2c8\system32\ntvdm.exe
+STACK[3]=011cc880
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=2
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=28632 code=4
+EVENT pid=11860 code=4
+EVENT pid=28632 code=5
+EXIT pid=28632 code=1073741855
+EVENT pid=16996 code=2
+EVENT pid=16996 code=2
+EVENT pid=11860 code=4
+EVENT pid=11860 code=4
+EVENT pid=11860 code=6
+EVENT pid=17772 code=6
+EVENT pid=11860 code=4
+EVENT pid=11860 code=4
+EVENT pid=11860 code=4
+EVENT pid=11860 code=4
+EVENT pid=11860 code=4
+EVENT pid=11860 code=5
+EXIT pid=11860 code=233
+EVENT pid=17772 code=4
+EVENT pid=17772 code=4
+EVENT pid=17772 code=4
+EVENT pid=17772 code=4
+EVENT pid=17772 code=4
+EVENT pid=17772 code=5
+EXIT pid=17772 code=1073741855
+EVENT pid=30260 code=8
+EVENT pid=30260 code=8
+EVENT pid=30260 code=4
+EVENT pid=30260 code=4
+EVENT pid=30260 code=4
+EVENT pid=30260 code=5
+EXIT pid=30260 code=0
+RESULT done=1 exit=1073741855 worker=28632 events=201 sas_hits=0

@@ -224,3 +224,10 @@ A fresh [published baseline shared-task witness](s11-foundation-evidence/publish
 also passed 16 explicit dialog closes and task retirement alongside surviving
 Winmine gameplay, with all ten release image hashes matched. It does not force
 the previously observed race or attribute the historical SOL 1400.
+
+A [real-worker DOS startup-to-exit observation](s11-foundation-evidence/sas-real-worker-observation/review.md)
+now covers one immutable MEM launch from process creation under the debugger:
+the worker and launcher exited zero and neither selected tail breakpoint was
+observed. The observer explicitly handled the original marked BOP 5B break;
+other exceptions were not silently ignored. This is bounded dynamic evidence,
+not proof for all guests, profiles or external consumers.
