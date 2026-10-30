@@ -1,0 +1,3 @@
+far-call selector=0008 offset=00000000 caller=0008:00000020 ldt=0000:00000000/00000000
+dpmi-fault vector=0d error=0002 source=0008:00000020 handler=0008:00000020 result=0008:00000020 stack=0010:00000030 frame32=0
+source-descriptor-store selector=0008 address=00000008 width=4 value=00001234 writer=0008:00000020 stack=0010:00000030

@@ -26,3 +26,9 @@ store witness. Do not claim the enabled trace preserves all guest semantics,
 nor conflate this opt-in concern with the normal product path. The source
 registration already records that enabled behavior needs separate verification.
 No source change or original 486 repair follows from inspection alone.
+
+A later [controlled counterexample and candidate](../s11-foundation-evidence/trace-scalar-candidate/review.md)
+demonstrate the nonidentity address mismatch in the actual project reporter
+and remove diagnostic-only guest reads from three related reporters. The
+change passed Full and is published; it does not claim a guest
+crash or modify original CCPU algorithms.

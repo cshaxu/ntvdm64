@@ -37,12 +37,15 @@ worker: the VDD memory exports and exhausted-reallocation rollback passed.
 The diagnostic guest-read recovery is published after focused witnesses and
 the Full gate. Its remaining coverage boundaries are in
 [the candidate record](s11-foundation-evidence/diagnostic-stack-candidate/review.md).
+An additional enabled CPU-trace guest-read correction has a reproduced
+nonidentity-address mismatch, focused controls and a published Full gate.
+[Evidence](s11-foundation-evidence/trace-scalar-candidate/review.md).
 The DPMI portion additionally has a selected-source original dispatch and
 stack-underflow witness, with [production-object instruction comparison](s11-foundation-evidence/dpmi-selected-dispatch/review.md).
 
 ## Delivery status
 
-The later [diagnostic guest-read release](s11-foundation-evidence/diagnostic-stack-candidate/review.md)
+The latest [scalar CPU-trace release](s11-foundation-evidence/trace-scalar-candidate/review.md)
 supersedes the package identities below. It passed the 16-gate Full suite and
 Winmine gameplay, and both delivery destinations matched all ten hashes. It
 does not resolve the separately observed SOL 1400 or establish every boundary

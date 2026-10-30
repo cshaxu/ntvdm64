@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/trace-scalar-package/package",
+  "utc": "2026-10-30T11:08:35.3042601Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "count": 20,
+  "result": "pass"
+}

@@ -1,0 +1,4 @@
+"Algorithm","Hash","Path"
+"SHA256","E1019B18E4BC5D1E81A50AA7D178312D3DCFC92F2B6852B949741DFACD876B8F","O:\repos.hobby\ntvdm64\src\ntvdm-exe\softpc\mvdm_softpc_termination.c"
+"SHA256","05042373C1046178B6758D24DD0C79FCB460287A28795E09BC06E7B0B1223A15","O:\repos.hobby\ntvdm64\tests\observation\softpc_trace_no_guest_reads.c"
+"SHA256","14791A03B79951DBFA268994640C81B90B6BFBB4BC32600DC4D15E31DCAF6563","O:\repos.hobby\ntvdm64\build\t473-s11\trace-no-guest-reads\probe.exe"

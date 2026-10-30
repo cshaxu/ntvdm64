@@ -1,0 +1,38 @@
+{
+  "result": "pass",
+  "scope": "selected-object fixture; guest and full product remain separate",
+  "fixture_sha256": "2F48AF8DAE7B372ED9A5C8A6FF4A7D9E0F681A810CA21AE43314AFC399408419",
+  "map_sha256": "86B10CF65218D699D5B3F4151B3BF11D02E175D9836BBA05AD4F1C8AD77994E2",
+  "object_sha256": "75B8D22FD78354F5E6D82D9A593CF8F73B865CD501EA2C9697A4E4E4EF6E622E",
+  "original_symbol_owners": {
+    "validate_far_dest": "c_xfer.obj",
+    "descriptor_super_type": "c_bsic.obj",
+    "xtrn2phy": "c_tlb.obj",
+    "phy_w32": "ccpusas4.obj",
+    "sas_init": "ccpusas4.obj",
+    "sas_term": "ccpusas4.obj",
+    "c_cpu_init": "c_main.obj"
+  },
+  "cases": [
+    {
+      "case": "off",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "matching",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "other",
+      "exit": 0,
+      "output": "vector=13 error=8 cr2=12345000 valid=0"
+    },
+    {
+      "case": "valid",
+      "exit": 0,
+      "output": "vector=0 error=0 cr2=12345000 valid=1"
+    }
+  ]
+}

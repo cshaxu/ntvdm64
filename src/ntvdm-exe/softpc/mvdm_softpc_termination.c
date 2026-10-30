@@ -19,10 +19,6 @@ extern void *Ldt;
 extern unsigned long IntelBase;
 extern unsigned long Cpu40GdtShadowAddress;
 extern unsigned long Cpu40LdtShadowAddress;
-extern int xtrn2phy(unsigned long linear, unsigned char access,
-    unsigned long *physical);
-extern void c_sas_loads(unsigned long source, unsigned char *destination,
-    unsigned long byte_count);
 /* Observation only. Remember adjacent decode states, never alter guest FLAGS.
  * The path is fixed per thread on first execution, and only transitions log. */
 void mvdm_softpc_report_nt_transition(unsigned short cs, unsigned long ip,
@@ -978,14 +974,6 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
     HANDLE file;
     DWORD written;
     unsigned long selected;
-    unsigned long caller_source[2] = {0, 0};
-    unsigned long caller_shadow[2] = {0, 0};
-    unsigned long caller_offset;
-    unsigned long caller_base;
-    unsigned long caller_linear;
-    unsigned long caller_physical = 0;
-    int caller_mapped;
-    unsigned char caller_bytes[16] = {0};
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
@@ -995,36 +983,13 @@ void mvdm_softpc_report_wow_far_call_attempt(unsigned short selector,
     if (bytes == 0u || bytes >= sizeof(filter)) goto restore_error;
     selected = strtoul(filter, NULL, 16);
     if (selector != (unsigned short)selected) goto restore_error;
-    if (Ldt != NULL) {
-        caller_offset = (unsigned long)(caller_cs & 0xfff8u);
-        CopyMemory(caller_source, (unsigned char *)Ldt + caller_offset,
-            sizeof(caller_source));
-        if (Cpu40LdtShadowAddress != 0u && IntelBase != 0u) {
-            CopyMemory(caller_shadow, (unsigned char *)(uintptr_t)(IntelBase +
-                Cpu40LdtShadowAddress) + caller_offset, sizeof(caller_shadow));
-        }
-        caller_base = ((caller_source[0] >> 16) & 0xffffu) |
-            ((caller_source[1] & 0xffu) << 16) |
-            (caller_source[1] & 0xff000000u);
-        /* CALLF has already consumed its operand when this witness runs;
-         * retain the eight preceding bytes as well as the post-call bytes. */
-        caller_linear = caller_base + caller_eip - 8u;
-        caller_mapped = xtrn2phy(caller_linear, 0u, &caller_physical);
-        c_sas_loads(caller_mapped ? caller_physical : caller_linear,
-            caller_bytes, sizeof(caller_bytes));
-    }
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
-        "far-call selector=%04x offset=%08lx caller=%04x:%08lx ldt=%04x:%08lx/%08lx source=%08lx:%08lx shadow=%08lx:%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x%02x\r\n",
+        "far-call selector=%04x offset=%08lx caller=%04x:%08lx ldt=%04x:%08lx/%08lx\r\n",
         (unsigned int)selector, offset, (unsigned int)caller_cs, caller_eip,
-        (unsigned int)ldt_selector, ldt_base, ldt_limit,
-        caller_source[0], caller_source[1], caller_shadow[0], caller_shadow[1],
-        caller_bytes[0], caller_bytes[1], caller_bytes[2], caller_bytes[3],
-        caller_bytes[4], caller_bytes[5], caller_bytes[6], caller_bytes[7],
-        caller_bytes[8], caller_bytes[9], caller_bytes[10], caller_bytes[11],
-        caller_bytes[12], caller_bytes[13], caller_bytes[14], caller_bytes[15]);
+        (unsigned int)ldt_selector, ldt_base, ldt_limit);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
 restore_error:
@@ -1153,38 +1118,16 @@ void mvdm_softpc_report_dpmi_fault_dispatch(unsigned long exception_number,
     DWORD bytes;
     DWORD written;
     HANDLE file;
-    unsigned long source_descriptor[2] = {0, 0};
-    unsigned long source_offset;
-    unsigned long source_base = 0;
-    unsigned long source_linear = 0;
-    unsigned long source_physical = 0;
-    int source_mapped = 0;
-    unsigned char source_bytes[8] = {0};
 
     bytes = GetEnvironmentVariableA("MVDM_WOW_CALLBACK_CPU_TRACE_PATH", path,
         (DWORD)sizeof(path));
     if (bytes == 0u || bytes >= sizeof(path)) goto restore_error;
-    if (Ldt != NULL) {
-        source_offset = (unsigned long)(source_cs & 0xfff8u);
-        CopyMemory(source_descriptor, (unsigned char *)Ldt + source_offset,
-            sizeof(source_descriptor));
-        source_base = ((source_descriptor[0] >> 16) & 0xffffu) |
-            ((source_descriptor[1] & 0xffu) << 16) |
-            (source_descriptor[1] & 0xff000000u);
-        source_linear = source_base + source_eip;
-        source_mapped = xtrn2phy(source_linear, 0u, &source_physical);
-        c_sas_loads(source_mapped ? source_physical : source_linear,
-            source_bytes, sizeof(source_bytes));
-    }
     file = CreateFileA(path, FILE_APPEND_DATA, FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
-        "dpmi-fault vector=%02lx error=%04lx source=%04x:%08lx base=%08lx linear=%08lx mapped=%d physical=%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x handler=%04x:%08lx result=%04x:%08lx stack=%04x:%08lx frame32=%lu\r\n",
+        "dpmi-fault vector=%02lx error=%04lx source=%04x:%08lx handler=%04x:%08lx result=%04x:%08lx stack=%04x:%08lx frame32=%lu\r\n",
         exception_number, error_code, (unsigned int)source_cs, source_eip,
-        source_base, source_linear, source_mapped, source_physical,
-        source_bytes[0], source_bytes[1], source_bytes[2], source_bytes[3],
-        source_bytes[4], source_bytes[5], source_bytes[6], source_bytes[7],
         (unsigned int)handler_cs, handler_eip, (unsigned int)resulting_cs,
         resulting_eip, (unsigned int)resulting_ss, resulting_esp, frame32);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
@@ -1276,14 +1219,6 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
     unsigned long ldt_shadow_address;
     unsigned long descriptor_address;
     char const *domain;
-    unsigned long writer_source[2] = {0, 0};
-    unsigned long writer_shadow[2] = {0, 0};
-    unsigned long writer_offset;
-    unsigned long writer_base;
-    unsigned long writer_linear;
-    unsigned long writer_physical = 0;
-    int writer_mapped;
-    unsigned char writer_bytes[8] = {0};
 
     if (!mvdm_softpc_wow_source_descriptor_trace_active || Ldt == NULL ||
         IntelBase == 0u) goto restore_error;
@@ -1303,35 +1238,14 @@ void mvdm_softpc_report_wow_source_descriptor_store(unsigned long address,
         address < ldt_shadow_address + sizeof(LDT_ENTRY)) ? "ldt" :
         ((address + width > gdt_shadow_address &&
         address < gdt_shadow_address + sizeof(LDT_ENTRY)) ? "gdt" : "source");
-    writer_offset = (unsigned long)(cs & 0xfff8u);
-    CopyMemory(writer_source, (unsigned char *)Ldt + writer_offset,
-        sizeof(writer_source));
-    if (Cpu40LdtShadowAddress != 0u) {
-        CopyMemory(writer_shadow, (unsigned char *)(uintptr_t)(IntelBase +
-            Cpu40LdtShadowAddress) + writer_offset, sizeof(writer_shadow));
-    }
-    writer_base = ((writer_source[0] >> 16) & 0xffffu) |
-        ((writer_source[1] & 0xffu) << 16) |
-        (writer_source[1] & 0xff000000u);
-    writer_linear = writer_base + eip;
-    writer_mapped = xtrn2phy(writer_linear, 0u, &writer_physical);
-    /* A pre-paging DOSX segment is physically addressed.  Capture that
-     * original fetch location too; this is only a trace read and does not
-     * select, publish, or alter the current CCPU translation. */
-    c_sas_loads(writer_mapped ? writer_physical : writer_linear,
-        writer_bytes, sizeof(writer_bytes));
     file = CreateFileA(wow_source_descriptor_trace_path, FILE_APPEND_DATA,
         FILE_SHARE_READ | FILE_SHARE_WRITE,
         NULL, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     if (file == INVALID_HANDLE_VALUE) goto restore_error;
     snprintf(line, sizeof(line),
-        "%s-descriptor-store selector=%04lx address=%08lx width=%lu value=%08lx writer=%04x:%08lx stack=%04x:%08lx source=%08lx:%08lx shadow=%08lx:%08lx linear=%08lx mapped=%d physical=%08lx code=%02x%02x%02x%02x%02x%02x%02x%02x\\r\\n",
+        "%s-descriptor-store selector=%04lx address=%08lx width=%lu value=%08lx writer=%04x:%08lx stack=%04x:%08lx\r\n",
         domain, selected, address, width, value, (unsigned int)cs, eip,
-        (unsigned int)ss, esp,
-        writer_source[0], writer_source[1], writer_shadow[0], writer_shadow[1],
-        writer_linear, writer_mapped, writer_physical, writer_bytes[0], writer_bytes[1],
-        writer_bytes[2], writer_bytes[3], writer_bytes[4], writer_bytes[5],
-        writer_bytes[6], writer_bytes[7]);
+        (unsigned int)ss, esp);
     WriteFile(file, line, (DWORD)strlen(line), &written, NULL);
     CloseHandle(file);
 restore_error:
