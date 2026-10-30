@@ -296,12 +296,15 @@ static BOOL monitor_segment(USHORT selector, ULONG *base, ULONG *limit, ULONG *a
 
 static BOOL monitor_fetch_byte(const MONITOR_CODE *code, ULONG displacement, UCHAR *value)
 {
+    extern unsigned long SasWrapMask;
     ULONG offset=code->ip+displacement, linear, physical;
     if (offset<code->ip || offset>code->limit) return FALSE;
     /* NT4 forms the guest linear address with 32-bit addition. */
     linear=code->base+offset;
     if (!monitor_translate(linear,FALSE,&physical)) return FALSE;
-    return monitor_read_ram(physical,value,1);
+    if (!monitor_read_ram(physical,value,1)) return FALSE;
+    /* The original host read participates in paging accessed accounting. */
+    return monitor_mark_access(linear,FALSE,physical & SasWrapMask);
 }
 
 static ULONG monitor_general_register(UCHAR index)

@@ -88,3 +88,29 @@ observable bit projection only: it does not establish that CCPU and NT4 have
 equivalent FPU execution, NPX context switching, actual #NM delivery,
 callbacks or process teardown. The fixture uses its documented
 `/force:multiple` host seams and no guest binary is changed.
+
+## Instruction-fetch page-access accounting
+
+NT4 `Ki386DispatchOpcode` and `OpcodeGenericPrefix` read instruction bytes
+through the host virtual address, so a real page-table walk accounts for the
+read. The selected CPU40 host adapter previously translated and read bytes
+without the access-marking step. Real selected-CCPU case 87 starts with a
+cold translation and clear instruction PTE A/D bits. Before the change its
+I/O instruction completed with PTE `000f1007` (accessed still clear); after
+using the existing `monitor_mark_access` / `xtrn2phy` path it completes with
+`000f1027` (A set, D clear). Case 88 warms the old translation, then changes
+the PTE to a different page without a TLB invalidation: execution still uses
+the valid old cached mapping and the replacement PTE remains `000f2007`.
+These witnesses distinguish walk accounting from incorrectly consulting a
+new PTE for an existing cached translation. They do not establish all
+concurrent remapping, exception, device-backed or host-processor cases.
+
+The 87-case selected CCPU boundary suite passed, followed by cached full
+product build, all 16 Full gates, Winmine/SOL/WRITE and four SOL Options
+cycles. Win3.1 standard/enhanced by DOSONLY 0/1 passed, and the 86 monitored
+original and isolated guest binaries retained their hashes. The coherent ten
+component package was published to each destination and all 20 hashes
+matched. The initial Full run used Windows PowerShell 5.1 and failed in the
+RPC harness because `ProcessStartInfo.ArgumentList` was unavailable; the
+recorded complete rerun used PowerShell 7 and passed. Compact evidence is in
+[fetch-access](s11-monitor-minimization-evidence/fetch-access/).

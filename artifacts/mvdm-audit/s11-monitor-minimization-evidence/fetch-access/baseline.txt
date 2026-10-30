@@ -1,0 +1,4 @@
+Case 87 before code change: MONITOR_FETCH_PAGE handled=1 fault=0 writes=1 pde=00005027 pte=000f1007; exit=1.
+Case 87 candidate: MONITOR_FETCH_PAGE handled=1 fault=0 writes=1 pde=00005027 pte=000f1027; exit=0.
+Case 88 candidate: MONITOR_FETCH_PAGE handled=1 fault=0 writes=1 pde=00005027 pte=000f2007; exit=0.
+Full initial attempt failed at RPC because Windows PowerShell 5.1 has no ProcessStartInfo.ArgumentList. Full r2 ran with PowerShell 7 and passed.

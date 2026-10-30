@@ -1,0 +1,45 @@
+{
+    "Suite":  "Full",
+    "ElapsedMs":  161773,
+    "InputPolicy":  "Observed",
+    "WindowOwnedConsole":  true,
+    "PreparationMs":  2922,
+    "Gates":  [
+                  {
+                      "Gate":  "guest-media",
+                      "ElapsedMs":  949,
+                      "CleanupMs":  563,
+                      "Passed":  true
+                  },
+                  {
+                      "Gate":  "ntvdm-export-ordinals",
+                      "ElapsedMs":  155,
+                      "CleanupMs":  546,
+                      "Passed":  true
+                  },
+                  {
+                      "Gate":  "wow-frontiers",
+                      "ElapsedMs":  67517,
+                      "CleanupMs":  465,
+                      "Passed":  true
+                  },
+                  {
+                      "Gate":  "Console-17",
+                      "ElapsedMs":  43717,
+                      "CleanupMs":  522,
+                      "Passed":  true
+                  },
+                  {
+                      "Gate":  "Window-17",
+                      "ElapsedMs":  41182,
+                      "CleanupMs":  562,
+                      "Passed":  true
+                  },
+                  {
+                      "Gate":  "rpc",
+                      "ElapsedMs":  90,
+                      "CleanupMs":  570,
+                      "Passed":  false
+                  }
+              ]
+}

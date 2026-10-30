@@ -525,6 +525,33 @@ static int monitor_cr0_npx_matrix(void) {
     }
     report("MONITOR_CR0_NPX_MATRIX four EM/MP states passed\n"); return 1;
 }
+/* Original host instruction reads set accessed on a page-table walk. */
+static int monitor_fetch_page_access(void) {
+    unsigned char gdt[40]={0}, program[]={0xe6,0x80};
+    ULONG *pde=(ULONG *)c_GetPhyAdd(0x4000), *pte=(ULONG *)c_GetPhyAdd(0x5000);
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1; unsigned i; int handled;
+    extern void flush_tlb(void);
+    extern ULONG lin2phy(ULONG, int);
+    c_cpu_init(); io_init(); io_define_outb(adapter,probe_write); io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt)); CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    ZeroMemory(c_GetPhyAdd(0x4000),0x2000); pde[0]=0x5007;
+    for(i=0;i<512;i++) pte[i]=(i<<12)|7;
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
+    c_setCS(0x1b); c_setSS(0x23); c_setDS(0x23); c_setIOPL(0); c_setEIP(0x1000);
+    c_setCR3(0x4000); c_setPG(1); flush_tlb(); io_writes=test_fault=0;
+    if(test_case==88) {
+        if(lin2phy(0xf1000,2)!=0xf1000) {c_setPG(0);return 0;}
+        *c_GetPhyAdd(0xf2000)=0xf4; pte[0xf1]=0xf2007;
+    }
+    VdmInstallFaultHandler((void *)test_sti_fault); handled=host_exint_hook(13,0);
+    VdmInstallFaultHandler(NULL);
+    {char line[120]; wsprintfA(line,"MONITOR_FETCH_PAGE handled=%d fault=%lu writes=%u pde=%08lx pte=%08lx\n",handled,test_fault,io_writes,pde[0],pte[0xf1]);report(line);}
+    i=handled && !test_fault && io_writes==1 && (pde[0]&0x20) && !(pte[0xf1]&0x40) &&
+        (test_case==88 ? !(pte[0xf1]&0x20) : (pte[0xf1]&0x20));
+    c_setPG(0); return (int)i;
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -634,7 +661,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==86) ok=monitor_cr0_npx_matrix();
+    if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
+    else if(test_case==86) ok=monitor_cr0_npx_matrix();
     else if(test_case==49) ok=duplicate_tlb_mapping();
     else if(test_case==83) ok=monitor_register_matrix();
     else if((test_case>=77 && test_case<=81) || test_case==84 || test_case==85) ok=protected_ldt_descriptor();
