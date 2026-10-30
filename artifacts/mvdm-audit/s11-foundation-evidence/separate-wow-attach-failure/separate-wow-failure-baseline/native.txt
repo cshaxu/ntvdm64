@@ -1,0 +1,2 @@
+child-pid=7468 image=O:\tmp\n68a\system32\run16.exe
+separate-startup-exit=255

@@ -1,0 +1,2 @@
+child-pid=21296 image=O:\tmp\n076\system32\run16.exe
+separate-startup-exit=255
