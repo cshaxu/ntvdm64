@@ -341,3 +341,217 @@ The operand witness source hash is
 `91B816F53AE8A5E822A50704A4091610E9D09EEFA1A164ABDDA27AFA42578468` and
 its trace hash is
 `6C93067EDC30F0AE2436841511CCB20FF6507A818CAAF79AFC236D32BF9E8258`.
+
+The pinned original `v86/monitor/i386/monitor.c::EventVdmIo` dispatches
+reflected byte and word I/O through SoftPC `inb/outb/inw/outw`. The selected
+CCPU's `OUT8` invokes the same installed device tables directly; its source
+explicitly avoids `outb` because its virtualization path could re-enter the
+CPU. This is a concrete reuse candidate, but equivalence for optional
+virtualization, unregistered ports, widths, and reentrancy is not established.
+
+An isolated experimental candidate routed unprefixed nonpaged `OUT DX,AL`
+to the existing `OUT8` after its diagnostic CLI/STI handler. The observer
+timed out after 15 seconds, with no graphics handshake and a blank captured
+console; its test script correctly rejected this as a non-pass. The trace
+did not contain a `dpmi-fault vector=0d` line, but this is not evidence that
+the interactive application started, that a graphics frame was produced, or
+that all failures were covered. Pending-interrupt behavior remains unresolved.
+Source hash `A4626512E31B26AA023BCD6E67942F7FD5CEC424A70A8E7A16A76A4E585AE5B2`,
+trace hash `31D47B8D7E2F70FC665B9D305CCC7B5C3065C645C759028E7CEA04B53F1CD1B7`,
+and observer receipt hash
+`C54236BE6B1641B2165FC94F7DAEF225F35905DC97CE8E9A2697EBB0FCAD1920`.
+This unapproved-semantics diagnostic stays in the isolated build tree only.
+
+`graphics-handshake=none` specifically means the observer's optional
+`MVDM_OBSERVER_GRAPHICS_RETURN` handshake was not enabled. It is not a
+negative observation of graphics output. The blank console snapshot is also
+insufficient to determine whether an interactive graphics application is
+alive and rendering. The 15-second observer timeout confirms only that its
+outer process had not completed within that interval.
+
+The observer's single timeout snapshot identifies the staged worker at
+module base `00ea0000` and its main sampled thread at `00eab3fd`. Resolving
+that address against the diagnostic build's own linker map gives `phy_w16+0xd`;
+other captured worker threads resolve to timer, input, and publication paths.
+This is a momentary host CPU-memory-write observation, not proof of a guest
+loop, successful display, a deadlock, or the missing interrupt's cause. The
+observer record does not capture the guest CS:EIP at this point; further
+attribution must correlate guest execution or a frame with this exact
+candidate, rather than interpreting the timeout as a definitive failure mode.
+
+## Frontend frame observation
+
+An isolated x64 frontend was linked with the existing test-only
+`tests/app/console_video_observed.c` wrapper and staged with the experimental
+worker. The receiver logged its PID, console geometry, and a successful
+console write containing the DOS/4GW banner. During the 15-second observation
+it logged no `FRAME`, `TEXT_FRAME`, or `FRAME_ERROR` records; the outer process
+remained alive until the observer timeout. This verifies that the observer
+was active and no frame was received by that instrumented frontend in the
+observation interval. It does not prove the guest could never produce one,
+nor distinguish guest execution, video generation, or transmission failures.
+The existing optional graphics-return handshake was not enabled. The observer
+is test-only and was not published; guest and released images were unchanged.
+
+Observed frontend hash
+`DE3449A682E034C36B347A2964EAAFF758B5EC7DCCC85CA629D9792D7E636CD1`,
+frame log hash `24ABEF8A40F7182F2CE6433F34C1CD5B7CA0AFEE117994B4DEDC95DD14FBE84D`,
+and observer receipt hash
+`5004950B3D93AC8075CDC638B78B14DBFFDB8C3E4B696163903D9D99C4316077`.
+
+A subsequent run of the same staged frontend/worker enabled the observer's
+existing read-only first-MiB guest-memory capture at timeout. The BIOS data
+area mode byte at `0040:0049` was `13h`, with 40 columns and 25 rows recorded;
+the captured value is consistent with a mode-13h transition. The frontend
+frame log again contained its receiver and console records but no `FRAME`,
+`TEXT_FRAME`, or `FRAME_ERROR` entries. This narrows the investigation to
+the relationship between the guest's BIOS mode state and video/frame path;
+the BDA byte is not proof that the VGA device entered that mode or that a
+frame was generated. The zero-filled apparent A000 region in the raw memory
+dump is not treated as a framebuffer observation because video memory can have
+separate device backing. The guest was read only.
+
+Guest-memory capture SHA-256
+`0E7234EE0C7A0A9281D894EF8A31F77A9C1E5CB57FD2E1DF8A9A9EF844300FC2`,
+frame log hash `DFAEA8D123B8C4BD6270E6E323033518E6A3C3C00995B2DB20E0368A05D3B9D4`,
+and observer receipt hash
+`27BD89B5CE1BE4B4D7345028015EE4F2BDF8C7E0BE6A658009C11504E0B41062`.
+
+An additional timeout-only observer read fixed symbols from the exact
+experimental worker map, without writing process memory. The snapshot reports
+`Currently_emulated_video_mode=13h`, `Video_mode=13h`, `sc.ScreenState=1`
+(`FULLSCREEN`), `sc.ModeType=1` (`GRAPHICS`), `ConsoleInitialised=1`, and
+`ConsoleNoUpdates=0`. A separate x86 compile of the selected source struct
+confirmed the `ScreenState` and `ModeType` offsets as 48 and 52 bytes. The
+same run's observed frontend recorded no completed frame. These are samples
+at timeout, not proof of the full transition sequence: neither painter
+completion, bitmap/palette readiness, publication signal nor transport outcome
+has yet been established. The value `CntrlHandlerState=00010000` does not
+include the `CNTRL_VDMBLOCKED` bit `00020000`.
+
+Observer-source hash `66B2C3F1551C30D99790D4B9AB75430EFE339B2CDE1CF16F3909D9DF460D7716`,
+timeout-live receipt hash `53B35A8F1937430980C82D5FE9FD74B535134EC1A02B468127FA550C393FB302`,
+and frontend report hash `E45C55D756FA79E806583844793D8548FBC884CD126963412A0E9BB7A10519F5`.
+
+A second timeout snapshot of the same staged candidate also read the
+map-selected `nt_graph.c` values: `flush_count=0`, `update_vlt=0`, and
+`mode_change_now=0`. These fields are sampled once, so zero does not establish
+that the timer callback failed to run, that a mode transition finished, or
+that a painter completed. The source's `nt_graphics_tick` also gates work on
+`get_mode_change_required()` and the selected update algorithm; a causal
+decision needs a witness at those boundaries, not more conclusions from a
+single counter value. The timeout-live receipt hash is
+`1A4B6AE0B8418B389924357261BAF0AB442EFBD833153FABE5F509DD89199481`.
+
+A later isolated worker linked a test-only copy of `nt_graph.c` with three
+monotonic entry counters; no production or guest source changed. At the
+timeout snapshot, the test counted 159 `nt_graphics_tick` entries, 77
+`software_update_completed` branches, and zero `nt_flush_screen` entries;
+its same snapshot reported FULLSCREEN/GRAPHICS and mode 13h. The source
+counter increments after the tick's update path, not inside the painter, so
+it does not prove that `calc_update` produced dirty pixels or that a graphics
+buffer was ready. The initial state of the counters is zero but they span the
+whole run, including startup; no per-mode timing is implied. This evidence
+rules out the simple claim that no graphics ticks occurred. It does not
+establish whether lack of `nt_flush_screen` calls explains this workload.
+
+The test-only `nt_graph.c` hash is
+`67D2838990F70F908854F26743C85BD90A989F97F6D702A33CEF11131408305B`
+and timeout-live receipt hash is
+`A8DF779F1CA56C39F8702B0FE9430D656482DF2A416B1E63322CBF5840FDDCD1`.
+
+A distinct isolated diagnostic counted only calls made while `sc.ModeType`
+was GRAPHICS. At timeout it recorded 151 graphics ticks, 76 graphics-mode
+completed update branches, and 76 entries each to `nt_start_update` and
+`nt_end_update`; no `nt_flush_screen` entry was observed. The instrumented
+frontend still received no completed video frame. The paired painter callbacks
+prove that a graphics update path ran, but do not prove it rendered the
+intended pixels or that its bitmap/palette was ready for capture. They also
+do not establish why the `host_flush_screen` boundary was absent. The
+test-only source hash is
+`B3F1E33C4FECCEF68A9C5AF3AC9D979F856A25ED254B6E97D036836E7EBA1D6B`
+and the timeout-live receipt hash is
+`3B79C712128887FC8B7399C25DF54876B1750183D6C16BBC30B40E6B7679005C`.
+
+An additional isolated selected-object witness instrumented the project-owned
+graphics capture, signal, invalidation and update-end paths. At timeout it
+recorded 71 successful bitmap captures, 74 publication signals, zero signal
+errors, one palette-not-ready capture and two no-work captures. The final
+update-end sample had a bitmap identity and palette, with dirty state set;
+71 graphics invalidations were recorded. The independently instrumented
+frontend logged no completed video frames in this observation. This narrows
+the remaining question to publication admission/send, transport, and receiver
+boundaries after capture; signal success alone is not delivery success.
+The witness contains the earlier experimental privileged-instruction
+interception, is not production code and does not prove the input pixels are
+correct. The test-only source hash is
+`8E7F1E3D1BF43771CF2A8D3E2BA8E00B4B68A79C38DA7530232D5CE6B203CBB9`;
+timeout-live receipt hash is
+`0C8F7F14C843BECB1D30D58B1A4DA877FF9039316BB35C76D17D52F2AD88F1FF`.
+
+## Correction: frontend witness coverage
+
+An additional selected-object sender witness observed 75 sends started,
+75 returned and zero returned errors; the final blob size was `0003ec18`.
+This does not prove on-screen display. Source review then found that the
+existing `console_video_observed.c` wrapper records `frontend_video_data`,
+but the normal standalone path in `console_channel.c::video_data` calls
+`frontend_video_stage_data` and commits via `frontend_session_video` instead.
+Therefore the earlier absence of `FRAME` records **does not establish that the
+frontend received no frame**. Earlier claims in this record of "no frame
+received" are superseded: only no frame was recorded by that particular
+wrapper. A witness covering the staged path and actual render is still needed.
+
+The isolated sender source hash is
+`72FB2130616DD05D8581FCA8D0FDAD0F3E8DC26E0D239BD23E2914764CF90B32`
+and timeout-live receipt hash is
+`7F17B949E20973C4C895496748A079D7F0E963F135FA3C1552A5C270400AA062`.
+
+The following isolated frontend witness wrapped the actual
+`frontend_video_stage_data` and `frontend_video_commit_pending` calls. It
+recorded 78 successful stage and 78 successful commit entries, including the
+last two 640x400 8-bit graphics frames, each with 256000 payload bytes. This
+confirms logical frame reception and commit for that experimental package and
+observation period; it does not establish rendered pixels, application input,
+or correct privileged instruction/interrupt semantics. The process remained
+alive until observation timeout; that is not itself failure for an
+interactive application. The prior missing-record observation was a test
+coverage limitation, not evidence of a broken publication route.
+
+Test-only frontend wrapper hash
+`0BEEBC4067D0F186EC24D623E605F3D473DDC0AEBDFA4658B97161D8AFFEC9B4`,
+frame log hash `9AB08B0E9B25EB73036A5CA28BA9A77D9733158B6749FC826793502049426086`,
+and timeout-live receipt hash
+`2BE24045F58C561E61A5229EF59DF46667F4F8AC4D830E255C3F1C8FB15AB9CB`.
+
+An additional test-only wrapper copied the most recently committed DIB and
+its palette to a build-owned file. Converting its top-down 640x400 8-bit
+payload yielded a frame showing the NESticle menu and mouse pointer; 16
+distinct palette indices occurred. Thus the experimental worker reached and
+published an actual application graphical interface, not only its DOS/4GW
+banner. This is the frontend's committed pixel buffer, not a screenshot of a
+rendered desktop window; neither input responsiveness, an actual game, nor
+correct exception and interrupt behavior is established. The original guest
+was unchanged and this experimental worker remains unsuitable for release.
+
+The committed description and payload hash is
+`0649F68D080DD4DDD2B9284D0B53D0C8BE7BA194A8CFD0B89DADAC4317617066`,
+the converted image hash is
+`B3F34581E5A9C87DC56F2BF8D2FF8D03552EED39F873A156883855BBDC257949`,
+and the test wrapper hash is
+`64FAF0CED32F82B9B1C8BD6E63662C2DA9A5E094434B315FEAEA115E851391C0`.
+All three artifacts remain under `build/t473-s11/committed-pixel-witness`.
+
+The source-level continuation comparison exposes a remaining timing concern:
+the selected CCPU `c_cpu_continue()` jumps to the exception continuation in
+`ccpu()`, which ordinarily reaches `NEXT_INST`; the existing handled-hook
+path does not itself explicitly acknowledge a pending PIC interrupt. The NT4
+`OpcodeSTI` handler, in contrast, invokes `VdmDispatchIntAck` immediately
+when its fixed VDM pending bits are set. The original CCPU's legal STI path
+also explicitly goes to `NEXT_INST` with one-instruction suppression. These
+facts do not by themselves establish which ordering a particular DOS/WOW
+guest observes after the experimental trap: event-map state and build-time
+`SYNCH_TIMERS` influence the selected path. They do rule out assuming that
+setting IF alone proves equivalence. A production host bridge must validate
+the pending hardware and timer routes and preserve legitimate guest fault
+reflection; this has not yet been implemented.
