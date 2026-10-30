@@ -1,0 +1,30 @@
+--- current
++++ diagnostic
+@@ -1065,3 +1065,10 @@
+-    return wow_user_window_refresh_payload(NULL, roots, count) &&
+-        (!call->returned_menu || !IsMenu(call->returned_menu) ||
+-            wow_menu_native_refresh_menu(call->returned_menu));
++    if (!wow_user_window_refresh_payload(NULL, roots, count)) {
++        retirement_trace("return-window-failed", (DWORD)(ULONG_PTR)call->target_window, GetLastError());
++        return FALSE;
++    }
++    if (call->returned_menu && IsMenu(call->returned_menu) &&
++            !wow_menu_native_refresh_menu(call->returned_menu)) {
++        retirement_trace("return-returned-menu-failed", (DWORD)(ULONG_PTR)call->returned_menu, GetLastError());
++        return FALSE;
++    }
++    return TRUE;
+@@ -1074,3 +1081,10 @@
+-    BOOL published = (call ? publish_call_windows(call) : wow_user_window_refresh_graph(NULL)) &&
+-        wow_user_borrow_client_graph(NULL, GetDesktopWindow()) &&
+-        wow_menu_client_refresh_all(binding->thread->ppi);
++    BOOL published = (call ? publish_call_windows(call) : wow_user_window_refresh_graph(NULL));
++    if (!published) retirement_trace("return-payload-failed", 0, GetLastError());
++    if (published) {
++        published = wow_user_borrow_client_graph(NULL, GetDesktopWindow());
++        if (!published) retirement_trace("return-graph-failed", 0, GetLastError());
++    }
++    if (published) {
++        published = wow_menu_client_refresh_all(binding->thread->ppi);
++        if (!published) retirement_trace("return-menu-failed", 0, GetLastError());
++    }
