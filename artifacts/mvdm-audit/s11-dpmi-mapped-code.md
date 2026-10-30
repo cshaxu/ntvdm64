@@ -36,3 +36,14 @@ fault/rollback contract are still unresolved. Do not substitute generic
 #GP, assume contiguous mapping, or use an unchecked fallback. This remains
 a concrete S11 blocker to unqualified mapping/exception parity; no production
 code or guest was changed by this witness.
+
+The same controls were extended through the actual `DpmiFaultHandler(13,0)`
+(cases 96–98) and through `host_exint_hook(13,0)` with that handler installed
+(cases 99–101). Both produce the same identity pass and remapped/split-page
+non-passes. The latter proves the selected monitor's actual fallback reaches
+the affected function in this controlled setup; it does not show that a
+released guest reaches this configuration. The fixture links selected
+objects with its existing `/force:multiple` boundaries. Outputs are retained
+in [actual-chain-result](s11-dpmi-mapped-code-evidence/actual-chain-result.txt);
+the normal 91-case monitor suite also passed after relinking. No runtime
+implementation was changed.
