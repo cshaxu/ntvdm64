@@ -1,0 +1,15 @@
+--- current
++++ diagnostic
+@@ -1,0 +2,9 @@
++
++#include <stdio.h>
++static void audit_identity_trace(const char *stage, HWND window, DWORD status) {
++ char path[MAX_PATH], line[160]; DWORD saved=GetLastError(), n, written, size; HANDLE f;
++ n=GetEnvironmentVariableA("MVDM_WOW_WINDOW_TRACE_PATH",path,sizeof(path));
++ if(n && n<sizeof(path)) { f=CreateFileA(path,FILE_APPEND_DATA,FILE_SHARE_READ|FILE_SHARE_WRITE,NULL,OPEN_ALWAYS,FILE_ATTRIBUTE_NORMAL,NULL);
++ if(f!=INVALID_HANDLE_VALUE) { size=(DWORD)sprintf_s(line,sizeof(line),"%lu IdentityFailure tid=%lu stage=%s hwnd=%08lX status=%lu\r\n",GetCurrentProcessId(),GetCurrentThreadId(),stage,(DWORD)(ULONG_PTR)window,status); if(size) (void)WriteFile(f,line,size,&written,NULL); CloseHandle(f); } }
++ SetLastError(saved);
++}
+@@ -291 +300 @@
+-        if (!GetWindowInfo(window, &info)) return FALSE;
++        if (!GetWindowInfo(window, &info)) { audit_identity_trace("menu-owner-info", window, GetLastError()); return FALSE; }
