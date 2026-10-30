@@ -122,3 +122,27 @@ opcodes in the PE. This refreshes the prior r10 binary observation; it does
 not establish runtime reachability, validate every consumer, or justify
 changing the original CPU. The sealed deployment image differs in hash from
 this pre-sealing input and was not itself the subject of this PE observation.
+
+## Explicit creation enrollment lock witness
+
+`wow_window_creation_enroll_internal` enters the runtime lock before calling
+`enroll_internal_locked`, which invokes `claim_explicit`; the latter records
+that lock before its task callback and reacquires it for enrollment. Thus an
+unlocked entry to the public enrollment path alone is not evidence of an
+unlocked explicit attachment. A test-only wrapper around the current
+`wow_window_words_attach_target` observed seven controlled 16-bit task
+attachments with runtime held, task flag set and a non-null synthetic TDB; 29
+other attachments also held it. The existing native-creation and injected
+unwind fixture exited zero, including cleanup and retry. This replaces the
+incorrect earlier assumption that the fixture never supplies a TDB: its main
+function initializes one. It is a controlled single-thread fixture, not a
+real Win16 guest, concurrent rollback proof or diagnosis of SOL 1400.
+
+The production creation source SHA-256 was
+`B62CB2A26E86B4E3731C6C1CBD42DCF715833863B19204E111EA32B2ED887B04`;
+the temporary observer wrapper SHA-256 was
+`E51D1F5B5506DBCAE935C3E98EE26A92002E3981DE0186C8774401BE4FB51090`.
+The non-publishable wrapper, isolated fixture output and test runner remain
+under `build/t473-s11/creation-lock-study/`. A restricted-session attempt
+reported desktop access error 5 and was not counted; the desktop-capable run
+was `run3`. No product or guest was changed.
