@@ -1,0 +1,7 @@
+launch0 returned_pid=19388 flags=0 command="O:\tmp\n3d6\system32\run16.exe" --wait "O:\tmp\n3d6\tests\IDLPROBE.EXE"
+registrar guest checkpoint observed
+launch1 returned_pid=35504 flags=0 command="O:\tmp\n3d6\system32\run16.exe" --wait "O:\tmp\n3d6\tests\CBTPROB.EXE"
+peer wait=0 exit=0
+peer-exited registrar-still-running
+registrar wait=0 exit=0
+result=0 error=0

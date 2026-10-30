@@ -62,3 +62,8 @@ An unchanged prebuilt Win16 guest additionally exercised a real CBT hook,
 including nested creation, veto, later recovery and unhook on the published
 input set; see [guest witness](../graph-owner-real-hook/review.md). It does not
 force the concurrent retirement interleaving.
+
+A further [shared-worker witness](../graph-owner-shared-cbt/review.md) ran the
+same real CBT guest alongside a second active Win16 task, whose idle callback
+continued after the hook task retired. It does not deterministically force
+their window operations to overlap.
