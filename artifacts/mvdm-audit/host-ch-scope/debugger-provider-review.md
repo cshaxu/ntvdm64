@@ -31,3 +31,11 @@ debugger services. Current package identity, WOW event routes, other OEM
 codepages, malformed guest frames, debugger disconnect, nested exceptions,
 register ownership and cleanup remain open. No behavioral percentage is
 inferred, and no guest, product, build or shared ledger changed in this review.
+
+The latest worker Ninja graph (`7336D5FFDA67810253CD3362B2E7AE39DCA998958ED16719CE46C84CE544F151`)
+was rechecked against all 4,684 frozen rows. The sole transitive-input
+contradiction remains `dbg/dbg.c`; the current map also identifies the selected
+`debugger-bindings:dbg.obj` as owner of `DBGDispatch`, `ModuleLoad` and
+`SendVDMEvent`. The separately maintained host C/H disposition remains partial,
+not the frozen initial selection claim. This is a current build-selection
+check; the historical worker execution is not a current live-debugger test.

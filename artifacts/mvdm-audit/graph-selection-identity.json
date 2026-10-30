@@ -3,7 +3,7 @@
     {
       "target": "ntvdm",
       "graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
-      "graph_sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "graph_sha256": "7336D5FFDA67810253CD3362B2E7AE39DCA998958ED16719CE46C84CE544F151",
       "transitive_mvdm_inputs": 351
     },
     {
@@ -15,7 +15,7 @@
     {
       "target": "vdmredir",
       "graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
-      "graph_sha256": "3706BBEAE9FEF8D67A9BAAC6E5CAFF1A7BDB44077F97DAB0DC1FCB0DC3433F83",
+      "graph_sha256": "7336D5FFDA67810253CD3362B2E7AE39DCA998958ED16719CE46C84CE544F151",
       "transitive_mvdm_inputs": 367
     }
   ],
