@@ -1,0 +1,5 @@
+launch0 returned_pid=14504 flags=0 command="O:\tmp\n542\system32\run16.exe" --wait "O:\tmp\n542\tests\CDLPROBE.EXE"
+registrar guest checkpoint observed
+launch1 returned_pid=17952 flags=0 command="O:\tmp\n542\system32\run16.exe" --wait "O:\tmp\n542\tests\CBTPROB.EXE"
+peer wait=0 exit=0
+result=1 error=0
