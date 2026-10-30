@@ -50,3 +50,10 @@ attempt incorrectly selected original slot zero, which is a permanently used
 sentinel requiring a real PTD, and exited with access violation; slot one fixed
 the fixture setup. This is not a product failure or proof of the historical
 1400. `hook-overlap.txt` and `hook-overlap-hashes.csv` bind the passing run.
+
+An additional selected-object hook-overlap run injected a controlled exception
+inside the actual graph owner's `__try`, after lock admission. Both a caller
+that initially held the lock and one that did not caught the injected exception
+and retained their original lock state; the hook/retirement overlap also
+passed. See `owner-exception.txt` and `owner-exception-hashes.csv`. This tests
+the owner's unwind boundary, not an actual native USER or guest exception.

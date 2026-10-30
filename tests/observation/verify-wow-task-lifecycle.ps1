@@ -495,7 +495,10 @@ if ($CallbackGraphOverlap) {
     $entry = 'if (!held && !wow_user_runtime_enter(binding)) return FALSE;'
     if (($region.Split(@($entry),[StringSplitOptions]::None)).Count -ne 2) { throw 'Graph lock boundary changed' }
     $region = $region.Replace($entry,'test_callback_graph_request(); '+$entry+' test_callback_graph_acquired();')
-    $source = $source.Substring(0,$start) + 'extern void __cdecl test_callback_graph_request(void); extern void __cdecl test_callback_graph_acquired(void);' + "`n" + $region + $source.Substring($finish)
+    $body = '        result = refresh_graph(callback_window, payload, count);'
+    if (($region.Split(@($body),[StringSplitOptions]::None)).Count -ne 2) { throw 'Graph owner body changed' }
+    $region = $region.Replace($body, '        test_callback_graph_fault();' + "`n" + $body)
+    $source = $source.Substring(0,$start) + 'extern void __cdecl test_callback_graph_request(void); extern void __cdecl test_callback_graph_acquired(void); extern void __cdecl test_callback_graph_fault(void);' + "`n" + $region + $source.Substring($finish)
     $instrumented = Join-Path $out 'callback-graph-probe.c'
     [IO.File]::WriteAllText($instrumented,$source,[Text.UTF8Encoding]::new($false))
     $graphCompile = $commands | Where-Object { $_ -match 'wow_user_object_bindings\.c$' } | Select-Object -Last 1
@@ -669,6 +672,7 @@ if ($InitialPublicationOnly) {
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1$')) { throw 'Published window retirement lock witness failed' }
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_GRAPH_OWNER_RESTORE errors=0 success=2 failure=2 held=2 unheld=2$')) { throw 'Graph owner restoration witness failed' }
 if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_CALLBACK_GRAPH_OVERLAP errors=0 graph_succeeded=1 serialized=1 restored=1$')) { throw 'Callback graph overlap witness failed' }
+if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_GRAPH_OWNER_EXCEPTION errors=0 caught=2 held=1 unheld=1$')) { throw 'Graph owner exception restoration failed' }
 if ($HookGraphOverlap -and !($fixtureOutput -match '^WOW_HOOK_GRAPH_OVERLAP errors=0 actual_hook=1 serialized=1 restored=1$')) { throw 'Hook graph overlap witness failed' }
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1$')) {

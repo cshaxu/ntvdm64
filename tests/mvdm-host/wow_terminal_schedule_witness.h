@@ -7,7 +7,7 @@ typedef struct terminal_schedule_test {
     HANDLE reached, release;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
     HANDLE locked, finish_graph, graph_requested;
-    volatile LONG graph_gate, graph_acquired, hook_graph_completed;
+    volatile LONG graph_gate, graph_acquired, hook_graph_completed, graph_raise;
     DWORD graph_thread;
 #endif
     DWORD worker_id;
@@ -45,6 +45,13 @@ void __cdecl test_callback_graph_acquired(void)
     if(t && t->graph_gate && GetCurrentThreadId()==t->graph_thread &&
             t->runtime->owner_thread_id==t->graph_thread)
         InterlockedExchange(&t->graph_acquired,1);
+}
+void __cdecl test_callback_graph_fault(void)
+{
+    terminal_schedule_test *t=terminal_schedule_active;
+    if (t && GetCurrentThreadId()==t->graph_thread &&
+            InterlockedExchange(&t->graph_raise,0))
+        RaiseException(0xe0473111u,0,0,NULL);
 }
 static DWORD WINAPI release_graph_competitor(void *context)
 {
@@ -205,6 +212,20 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
 #ifndef WOW_HOOK_GRAPH_OVERLAP
     BORROW_CHECK(wow_task_callback_leave(&callback));
 #endif
+    {
+        unsigned fault_before=borrow_errors, held;
+        for (held=0;held<2;++held) {
+            BOOL caught=FALSE;
+            if (held) BORROW_CHECK(wow_user_runtime_enter(main_binding));
+            InterlockedExchange(&t.graph_raise,1);
+            __try { (void)wow_user_window_refresh_graph(NULL); }
+            __except(GetExceptionCode()==0xe0473111u ? EXCEPTION_EXECUTE_HANDLER : EXCEPTION_CONTINUE_SEARCH) { caught=TRUE; }
+            BORROW_CHECK(caught && main_binding->exclusive_held==(BOOL)held);
+            if (held) BORROW_CHECK(wow_user_runtime_leave(main_binding));
+        }
+        fprintf(stderr,"WOW_GRAPH_OWNER_EXCEPTION errors=%u caught=2 held=1 unheld=1\n",
+            borrow_errors-fault_before);
+    }
     CloseHandle(t.locked);CloseHandle(t.finish_graph);CloseHandle(t.graph_requested);
 #endif
     terminal_schedule_active=NULL;
