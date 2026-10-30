@@ -1,0 +1,18 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\wow32-dll\\source\\wow_bitmap_bindings.c",
+    "Hash": "FCEF55AD919E28AC93F7FD5AD4CFCC76FAD9450FB79FA97180A3E077FFDD1DA9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\obj\\wow32-dll\\wow_bitmap_bindings.obj",
+    "Hash": "250C2EE529E57F9F1A6B61FA8E4DBE457FE012EF1EEE0F18BA8D89D34E79C8C0"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-bitmap-cleanup\\binding.exe",
+    "Hash": "31F1B83640B7111B2DFDD02B1BA8F9041A7F972D52D7BA4CC97A28A4220329EB"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\current-bitmap-cleanup\\binding_failure.exe",
+    "Hash": "CF07444E0A844EA48882EB9C6552BCB539E2572C5C019B67E5913A23D8D530A4"
+  }
+]
