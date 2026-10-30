@@ -11,6 +11,7 @@ param(
     [switch]$InitialPublicationOnly,
     [switch]$RealDialogLifecycleOnly,
     [switch]$TerminalSchedule,
+    [switch]$CallbackGraphOverlap,
     [string]$Ninja = 'ninja.exe',
     [string]$VsDevCmd = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 )
@@ -24,6 +25,7 @@ if ($InitRollback -and $Case -ne 'task-lifecycle') { throw 'InitRollback require
 if ($RetirementLockProbe -and ($Case -ne 'task-lifecycle' -or $InitRollback)) { throw 'RetirementLockProbe requires ordinary task-lifecycle' }
 if ($RetirementProbeSource -and !$RetirementLockProbe) { throw 'RetirementProbeSource requires RetirementLockProbe' }
 if ($CreationUnwind -and $Case -ne 'native-creation') { throw 'CreationUnwind requires native-creation' }
+if ($CallbackGraphOverlap) { $TerminalSchedule = $true }
 if ($TerminalSchedule) { $RealDialogLifecycleOnly = $true }
 if ($RealDialogLifecycleOnly) { $OriginalModalOnly = $true }
 if ($OriginalModalOnly -and $Case -ne 'window-borrow') { throw 'OriginalModalOnly requires window-borrow' }
@@ -253,6 +255,7 @@ if ($OriginalModalOnly) { $fixture += ' /DWOW_ORIGINAL_MODAL_FIXTURE' }
 if ($InitialPublicationOnly) { $fixture += ' /DWOW_INITIAL_PUBLICATION_FIXTURE' }
 if ($RealDialogLifecycleOnly) { $fixture += ' /DWOW_REAL_DIALOG_LIFECYCLE_FIXTURE' }
 if ($TerminalSchedule) { $fixture += ' /DWOW_TERMINAL_SCHEDULE_FIXTURE' }
+if ($CallbackGraphOverlap) { $fixture += ' /DWOW_CALLBACK_GRAPH_OVERLAP' }
 if ($Case -eq 'standard-class') { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE /DWOW_STANDARD_CLASS_FIXTURE' }
 if ($Case -in @('window-borrow','window-reclaim','graph-snapshot','menu-resource')) { $fixture += ' /DWOW_WINDOW_BORROW_FIXTURE' }
 if ($Case -eq 'window-reclaim') { $fixture += ' /DWOW_RECLAIM_FAILURE_FIXTURE' }
@@ -463,7 +466,7 @@ if ($TerminalSchedule) {
             ($region.Split(@($publication), [StringSplitOptions]::None)).Count -ne 3) {
         throw 'Terminal observation points changed'
     }
-    $region = $region.Replace($entry, 'test_terminal_schedule(1); ' + $entry)
+    $region = $region.Replace($entry, 'test_terminal_schedule(1); ' + $entry + ' test_terminal_schedule(3);')
     $region = $region.Replace($publication, $publication + ' test_terminal_schedule(2);')
     $source = $source.Substring(0, $start) + 'extern void __cdecl test_terminal_schedule(unsigned);' + "`n" + $region + $source.Substring($finish)
     $instrumented = Join-Path $out 'terminal-schedule-probe.c'
@@ -477,6 +480,30 @@ if ($TerminalSchedule) {
     if ($original.Count -ne 1) { throw 'Expected exactly one terminal owner' }
     $objects = @($objects | Where-Object { $_ -notin $original })
     $parentObjects += Join-Path $out 'terminal-schedule-probe.obj'
+}
+if ($CallbackGraphOverlap) {
+    # Test-only synchronization at the exact graph lock boundary.
+    $graphPath = Join-Path $repo 'src/wow32-dll/source/wow_user_object_bindings.c'
+    $source = [IO.File]::ReadAllText($graphPath)
+    $start = $source.IndexOf('static BOOL refresh_graph_owned(')
+    $finish = $source.IndexOf('BOOL WINAPI wow_user_window_refresh_graph(', $start)
+    if ($start -lt 0 -or $finish -le $start) { throw 'Graph owner region missing' }
+    $region = $source.Substring($start,$finish-$start)
+    $entry = 'if (!held && !wow_user_runtime_enter(binding)) return FALSE;'
+    if (($region.Split(@($entry),[StringSplitOptions]::None)).Count -ne 2) { throw 'Graph lock boundary changed' }
+    $region = $region.Replace($entry,'test_callback_graph_request(); '+$entry+' test_callback_graph_acquired();')
+    $source = $source.Substring(0,$start) + 'extern void __cdecl test_callback_graph_request(void); extern void __cdecl test_callback_graph_acquired(void);' + "`n" + $region + $source.Substring($finish)
+    $instrumented = Join-Path $out 'callback-graph-probe.c'
+    [IO.File]::WriteAllText($instrumented,$source,[Text.UTF8Encoding]::new($false))
+    $graphCompile = $commands | Where-Object { $_ -match 'wow_user_object_bindings\.c$' } | Select-Object -Last 1
+    if (!$graphCompile) { throw 'Missing selected graph owner compile command' }
+    $graphCompile = $graphCompile -replace '/Fo\S+\s+\S+wow_user_object_bindings\.c$', ('/Fo"'+$out+'\callback-graph-probe.obj" "'+$instrumented+'"')
+    if ($graphCompile -notmatch 'callback-graph-probe\.c"$') { throw 'Graph compile substitution failed' }
+    Invoke-Build $graphCompile
+    $original = @($objects | Where-Object { $_ -match '[\\/]wow32-dll[\\/]wow_user_object_bindings\.obj$' })
+    if ($original.Count -ne 1) { throw 'Expected exactly one graph owner' }
+    $objects = @($objects | Where-Object { $_ -notin $original })
+    $parentObjects += Join-Path $out 'callback-graph-probe.obj'
 }
 if ($RetirementLockProbe) {
     # Instrument only a disposable copy of the selected production source.
@@ -616,6 +643,7 @@ if ($InitialPublicationOnly) {
     return
 }
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1$')) { throw 'Published window retirement lock witness failed' }
+if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_CALLBACK_GRAPH_OVERLAP errors=0 graph_succeeded=1 serialized=1 restored=1$')) { throw 'Callback graph overlap witness failed' }
 if ($OriginalModalOnly) {
     if (!($fixtureOutput -match '^WOW_TERMINAL_METADATA_ONLY errors=0 task_cleanup_closed=1 retired=1$')) {
         throw 'Property-only terminal cleanup incorrectly required guest execution'

@@ -114,15 +114,38 @@ static BOOL refresh_graph(HWND callback_window, const HWND *payload, ULONG paylo
     return result;
 }
 
+static BOOL refresh_graph_owned(HWND callback_window, const HWND *payload,
+    ULONG count)
+{
+    wow_user_runtime_thread *binding = wow_user_runtime_current();
+    BOOL held, result;
+    DWORD error;
+    /* An inactive domain has no shared graph; the existing publisher owns
+     * validation of an active domain without a bound task. */
+    if (!mvdm_softpc_wow_page_domain_active() || !binding)
+        return refresh_graph(callback_window, payload, count);
+    held = binding->exclusive_held;
+    if (!held && !wow_user_runtime_enter(binding)) return FALSE;
+    __try {
+        result = refresh_graph(callback_window, payload, count);
+    } __finally {
+        error = GetLastError();
+        if (!held && !wow_user_runtime_leave(binding))
+            wow_user_native_call_failed("release-window-graph-owner", GetLastError());
+        SetLastError(error);
+    }
+    return result;
+}
+
 BOOL WINAPI wow_user_window_refresh_graph(HWND callback_window)
 {
-    return refresh_graph(callback_window, NULL, 0);
+    return refresh_graph_owned(callback_window, NULL, 0);
 }
 
 BOOL WINAPI wow_user_window_refresh_payload(HWND callback_window,
     const HWND *payload, ULONG count)
 {
-    return refresh_graph(callback_window, payload, count);
+    return refresh_graph_owned(callback_window, payload, count);
 }
 
 typedef mvdm_softpc_wow_window_observation window_observation;
