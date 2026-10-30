@@ -83,3 +83,5 @@ S12 additionally retains the [FCB deletion failure branches](../../../artifacts/
 S12 also owns the [FCB open metadata failure review](../../../artifacts/mvdm-audit/nine-way/part-8/dem-fcb-open-review.md): validate acquired-handle publication and retirement through the actual selected DEM object before deciding a mirror exception.
 
 S11/S13 own the [CCPU and C-VID VideoVector layout boundary](../../../artifacts/mvdm-audit/host-ch-scope/ccpu-evidgen-review.md): establish actual cross-object accesses, ownership and ABI before any repair; different declarations alone do not prove an executed defect.
+
+S11/S13 also retain the [B067/B068 BIOS fallback and enhanced-mode selector boundary](../../../artifacts/mvdm-audit/s11-foundation-evidence/b068-selected-boundary/review.md). S11 owns selected execution identity; S13 owns device, provider and reset evidence, with S14 for any demonstrated Win16 callback effects. The owner's exclusion of unrelated CCPU-internal and 486 repairs remains in force; a conditional source finding is not a guest failure or permission to rewrite it.
