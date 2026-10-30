@@ -146,3 +146,19 @@ The non-publishable wrapper, isolated fixture output and test runner remain
 under `build/t473-s11/creation-lock-study/`. A restricted-session attempt
 reported desktop access error 5 and was not counted; the desktop-capable run
 was `run3`. No product or guest was changed.
+
+### Injected post-attachment acquisition failure
+
+A separate temporary test-only wrapper forces the acquisition immediately
+after a successful explicit attachment to fail with `ERROR_NOT_ENOUGH_MEMORY`.
+The controlled 16-bit task creation returns failure and records
+`CREATION_FAIL_DETACH_HELD result=1`: the exact detach call observed the
+runtime lock held. The same fixture then creates normally, exercises its
+existing exception/unwind case, verifies empty object slots and exits zero.
+The wrapper does not alter the production source. Its SHA-256 is
+`EAB4103E1AE946A8E4060F31276406E95ECE2346CC0DFAAFDCFE27712310F40A`;
+the modified fixture copy is
+`40D8FE45A7E27C00C63D9B85154F8F389F542FD7633D8DBE32F90D317A7F15C4`.
+Inputs and output are under `build/t473-s11/creation-lock-study/failrun` and
+its parent. This verifies this injected failure in one controlled task, not
+all failures, parallel guest execution, or the observed SOL 1400.
