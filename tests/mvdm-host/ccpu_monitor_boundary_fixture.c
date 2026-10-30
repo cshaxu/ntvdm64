@@ -247,17 +247,17 @@ static int protected_scalar_io(void) {
     }
     if(test_case==57 || test_case==58) {
         const unsigned char lmsw_mixed_permissions[]={0x0f,0x01,0x36,0x00,0x23};
-        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000),physical;unsigned j;int handled,cpu_allows;
+        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000),physical;unsigned j;int handled,external_allows;
         extern int xtrn2phy(unsigned long,unsigned char,unsigned long *);
         CopyMemory(c_GetPhyAdd(0xf1000),lmsw_mixed_permissions,sizeof(lmsw_mixed_permissions));
         ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=test_case==58 ? 0x5003 : 0x5007;
         for(j=0;j<512;j++)pte[j]=(j<<12)|7;
         if(test_case==57)pte[2]=0x2003;
         *(uint16_t *)c_GetPhyAdd(0x2300)=6;
-        c_setCR3(0x4000);c_setPG(1);cpu_allows=xtrn2phy(0x2300,2,&physical);
+        c_setCR3(0x4000);c_setPG(1);external_allows=xtrn2phy(0x2300,2,&physical);
         handled=host_exint_hook(13,0);
         VdmInstallFaultHandler(NULL);c_setPG(0);
-        return cpu_allows && physical==0x2300 && handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15;
+        return external_allows && physical==0x2300 && handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15;
     }
     if(test_case==55 || test_case==56) {
         const unsigned char lmsw_cross_page[]={0x0f,0x01,0x36,0xfe,0x2f};

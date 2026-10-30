@@ -114,3 +114,30 @@ matched. The initial Full run used Windows PowerShell 5.1 and failed in the
 RPC harness because `ProcessStartInfo.ArgumentList` was unavailable; the
 recorded complete rerun used PowerShell 7 and passed. Compact evidence is in
 [fetch-access](s11-monitor-minimization-evidence/fetch-access/).
+
+## Correction: mixed page permissions
+
+The earlier mixed-permission entry in `code32-prebuilt-search/review.md`
+incorrectly calls `xtrn2phy` acceptance “accepted by the CCPU” without
+distinguishing the external helper from normal executed accesses. In actual
+selected CCPU source, a cold `lin2phy` combines PDE and PTE permissions by
+the numerically smaller U/S and R/W pair, whereas a cold `xtrn2phy` uses OR
+for U/S and AND for R/W. A prior selected-CPU execution witness recorded a
+user-read #PF (error 5) on a supervisor PTE that the external helper accepted.
+Cases 57/58 only prove current monitor behavior agrees with the external
+helper on those cold mixed mappings; they do not prove agreement with the
+CPU's instruction/data accesses or NT4. The misleading fixture variable
+`cpu_allows` has been renamed `external_allows`, with assertions unchanged.
+
+Original NT4 `Ki386DispatchOpcode` executes its direct memory reads in the
+kernel VDM monitor, and native guest mappings/page faults are owned by the
+NT memory manager. A kernel read, a simulated guest user read, and the
+current external translator are not automatically interchangeable. Cached
+translations add a further constraint: a valid cached decision must not be
+replaced by a fresh PTE sample. Neither changing the original CPU helper nor
+reinstating the previous fresh-walk guard is justified by this difference
+alone. The actual owner and failure contract for cold supervisor-only
+monitor memory must be reconciled with the original monitor and exception
+chain before choosing an implementation. The earlier claim of overall CPU
+permission alignment is superseded by this correction; this is an explicit
+S11 open boundary, not a passing equivalence result.
