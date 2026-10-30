@@ -56,3 +56,5 @@ failed decommit, so blindly retrying the retained XMEM node may interact with
 an already-freed allocator bitmap. That is a source-and-fixture risk, not a
 demonstrated actual-host failure. Reconcile allocator and tracker together
 before selecting any failure recovery change.
+
+The [combined selected-object and native-memory witness](dpmi-xmem-suballoc-combined-review.md) now demonstrates address reuse and page decommit on a controlled explicit same-owner retry after an injected failure. The original guest's actual sequencing and real callback failure remain unproved; S12 retains that investigation.
