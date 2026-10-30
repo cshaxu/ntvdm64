@@ -1,0 +1,9 @@
+FAIL no matching owned application window/menu
+owned hwnd=01E4057E visible=0 class=WOWFaxClass title= menu=00000000
+owned hwnd=01FF0586 visible=1 class=#32770 title=File Error menu=00000000
+child class=Static text=Cannot find WIN87EM.DLL
+child class=Button text=Close
+owned hwnd=006E0E42 visible=1 class=WOWExecClass title=O:\tmp\n069\GUEST\CALC.EXE: menu=1BA30A8F
+owned hwnd=051B0928 visible=0 class=IME title=Default IME menu=00000000
+owned hwnd=018B0DFC visible=0 class=MSCTFIME UI title=MSCTFIME UI menu=00000000
+worker-live=1

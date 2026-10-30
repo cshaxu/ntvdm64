@@ -83,7 +83,9 @@ static BOOL CALLBACK report_owned_window(HWND window, LPARAM unused)
     GetWindowTextW(window, title, ARRAYSIZE(title));
     printf("owned hwnd=%p visible=%d class=%ls title=%ls menu=%p\n",
         window, IsWindowVisible(window), cls, title, GetMenu(window));
-    if (window == startup_error) EnumChildWindows(window, report_child, 0);
+    /* File/load failures may use a different dialog title from the generic
+     * startup error. Report their child text for the owned worker too. */
+    if (!wcscmp(cls, L"#32770")) EnumChildWindows(window, report_child, 0);
     return TRUE;
 }
 

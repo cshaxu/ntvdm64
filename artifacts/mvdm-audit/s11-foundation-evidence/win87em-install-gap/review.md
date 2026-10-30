@@ -29,6 +29,19 @@ that WIN87EM's presence is required for this isolated Calculator startup;
 it is not an exhaustive analysis of the other 14 missing files, all search
 paths, or an observed run from the actual installed package.
 
+A subsequent same-package single-file absence run extended only the test
+observer's owned-dialog reporting. It captured the dialog body
+`Cannot find WIN87EM.DLL` and again observed no Calculator main window; the
+[negative receipt](win87em-absence-error-details.txt) and its ten-image
+[manifest](win87em-absence-error-details-manifest.json) are retained. All ten
+host hashes match the published release. This identifies the missing module
+reported in the isolated control, not the precise file chosen by the loader
+in the complete-package run or the behavior of the other 14 missing files.
+With the same observer change, the [complete-package control](complete-package-error-report-control.txt)
+still observed `1/2 = 0.5`, About closure and parent recovery, and the runner
+reported normal launcher completion. Only the test observer changed; no product
+or guest binary was rebuilt or modified.
+
 An attempted deployment of the 15 original files was rejected by automatic
 approval review because adding them would alter the existing guest installation.
 The command was not executed. A build-owned, hash-verified preparation exists
