@@ -4,7 +4,7 @@ param(
     [Parameter(Mandatory)][string]$CompilerDriver,
     [Parameter(Mandatory)][string]$BuildRoot,
     [Parameter(Mandatory)][string]$Guest,
-    [Parameter(Mandatory)][ValidateSet("notepad","progman","winmine","calc","write")][string]$Mode,
+    [Parameter(Mandatory)][ValidateSet("notepad","progman","winmine","calc","calc-arithmetic","write")][string]$Mode,
     [string]$Observer,
     [switch]$VisibleDesktop,
     [ValidateRange(1,32)][int]$Rounds=1,
@@ -16,6 +16,10 @@ param(
 $ErrorActionPreference='Stop'
 $CompilerDriver=(Resolve-Path -LiteralPath $CompilerDriver).Path
 $Guest=(Resolve-Path -LiteralPath $Guest).Path
+if ($Mode -eq 'calc-arithmetic' -and
+        (Get-FileHash -LiteralPath $Guest -Algorithm SHA256).Hash -ne '09B5E717589598B9DF943A690A78B5F5F0A586468CF08BEB8CED58623C49BCC7') {
+    throw 'Calculator command IDs require the verified original guest image'
+}
 if (!$VisibleDesktop) { throw "The matrix probe requires the approved visible desktop" }
 if($VisibleDesktop -and !$Observer){throw 'Visible desktop requires the console observer'}
 if(!$VisibleDesktop -and $Rounds -ne 1){throw 'Repeated Options requires a PID-bound visible-desktop probe'}
@@ -86,6 +90,10 @@ try {
         if(!$worker){throw 'No worker in this owned runtime'}
         & "$root\probe.exe" $worker.ProcessId $Mode "$root\probe.txt" $Rounds
         if($LASTEXITCODE){throw "WOW dialog matrix probe failed: $LASTEXITCODE"}
+        if($Mode -eq 'calc-arithmetic' -and
+                !(Select-String -LiteralPath "$root\probe.txt" -Pattern '^PASS calculator 1/2 = 0\.5$')) {
+            throw 'Calculator arithmetic result not observed'
+        }
         if((Select-String -LiteralPath "$root\probe.txt" -Pattern '^PASS menu dialog and parent recovery$').Count -ne $Rounds){throw 'Dialog probe did not complete every requested round'}
         if(!$process.WaitForExit($observationMs+5000)){throw 'Observer exceeded bound after SOL Options close'}
         $report=Get-Content "$root\observer.txt" -Raw

@@ -92,3 +92,19 @@ manifest and Calculator/WIN87EM hashes are retained in
 This remains indirect static-import startup evidence, not a loaded-module
 identity, FPU arithmetic result or pre-3.0 branch test. The earlier arithmetic
 probe non-passes remain recorded in the preceding witness review.
+
+The original Win3.1 Calculator's NE accelerator table maps `1`, `/`, `2`,
+and `=` to command IDs 49, 90, 50, and 111. A new optional test mode requires
+the exact original Calculator SHA-256 above before issuing those commands to
+its owned window. It identified the initially zero-valued Static display,
+observed `0.5` for `1/2`, then opened and closed About and observed launcher
+completion. The existing ordinary Calculator mode independently passed, and
+using a different guest image was rejected before launch. Both positive runs'
+ten-image manifests match the published release. [Arithmetic receipt](../s11-foundation-evidence/idle-comment-integrated/calc-arithmetic-formal/probe.txt),
+[ordinary control](../s11-foundation-evidence/idle-comment-integrated/calc-ordinary-formal/result.txt).
+The first experimental build failed before launch because its temporary source
+could not find a test header; the next two runs failed display identification
+because the actual initial text has a leading space. Those are probe non-passes,
+not guest failures. This message-driven single operation is numerical behavior
+evidence, not a hardware keyboard test, loaded-module identity, full FPU test,
+or the Win2-specific pre-3.0 branch. The guest was neither changed nor rebuilt.

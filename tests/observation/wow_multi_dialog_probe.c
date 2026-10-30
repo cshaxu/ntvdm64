@@ -10,6 +10,7 @@
 
 static DWORD owner_pid;
 static HWND main_window, dialog_window, startup_error;
+static HWND calc_display;
 static const WCHAR *needle;
 static const WCHAR *main_title_filter;
 static UINT command_id;
@@ -97,6 +98,22 @@ static BOOL CALLBACK find_dialog(HWND window, LPARAM unused)
     return FALSE;
 }
 
+static BOOL CALLBACK find_calc_display(HWND window, LPARAM unused)
+{
+    WCHAR cls[64] = L"", text[128] = L"";
+    const WCHAR *value = text;
+    (void)unused;
+    GetClassNameW(window, cls, ARRAYSIZE(cls));
+    GetWindowTextW(window, text, ARRAYSIZE(text));
+    while (*value == L' ') ++value;
+    if (!wcscmp(cls, L"Static") &&
+            (!wcscmp(value, L"0.") || !wcscmp(value, L"0") || !wcscmp(value, L"0,"))) {
+        calc_display = window;
+        return FALSE;
+    }
+    return TRUE;
+}
+
 int main(int argc, char **argv)
 {
     HANDLE process; HDESK desktop; DWORD_PTR reply; ULONGLONG until, start, visible;
@@ -113,7 +130,9 @@ int main(int argc, char **argv)
     if (!strcmp(argv[2], "notepad")) needle = L"Find";
     else if (!strcmp(argv[2], "progman")) needle = L"New";
     else if (!strcmp(argv[2], "winmine")) needle = L"Custom";
-    else if (!strcmp(argv[2], "calc")) { needle = L"About"; main_title_filter = L"Calculator"; }
+    else if (!strcmp(argv[2], "calc") || !strcmp(argv[2], "calc-arithmetic")) {
+        needle = L"About"; main_title_filter = L"Calculator";
+    }
     else if (!strcmp(argv[2], "write")) { needle = L"Find"; main_title_filter = L"Write"; }
     else return 2;
     process = OpenProcess(SYNCHRONIZE | PROCESS_QUERY_LIMITED_INFORMATION, FALSE, owner_pid);
@@ -143,6 +162,24 @@ int main(int argc, char **argv)
                 title, window_rect.left, window_rect.top, window_rect.right, window_rect.bottom,
                 client_origin.x, client_origin.y, client_rect.right, client_rect.bottom);
         }
+    }
+    if (!strcmp(argv[2], "calc-arithmetic")) {
+        /* IDs come from the verified guest image's NE accelerator resource. */
+        const UINT commands[] = {49, 90, 50, 111}; /* 1 / 2 = */
+        WCHAR text[128] = L"";
+        const WCHAR *value = text;
+        unsigned i;
+        EnumChildWindows(main_window, find_calc_display, 0);
+        if (!calc_display) { puts("FAIL no calculator display with initial zero"); return 20; }
+        for (i = 0; i < ARRAYSIZE(commands); ++i) {
+            if (!SendMessageTimeoutW(main_window, WM_COMMAND, commands[i], 0,
+                    SMTO_ABORTIFHUNG, 10000, &reply)) return 21;
+        }
+        GetWindowTextW(calc_display, text, ARRAYSIZE(text));
+        printf("calculator-result=%ls\n", text);
+        while (*value == L' ') ++value;
+        if (wcscmp(value, L"0.5") && wcscmp(value, L".5")) return 22;
+        puts("PASS calculator 1/2 = 0.5");
     }
     for (round = 1; round <= rounds; ++round) {
         printf("round=%u\n", round);

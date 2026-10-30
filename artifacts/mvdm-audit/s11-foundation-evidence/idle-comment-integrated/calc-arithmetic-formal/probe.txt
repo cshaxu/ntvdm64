@@ -1,0 +1,10 @@
+main=01200D34 command=303 style=14ca0000 exstyle=00010100 zoomed=0
+main-title=Calculator window=620,130,1102,471 client-origin=628,181 client=466,282
+calculator-result= 0.5
+PASS calculator 1/2 = 0.5
+round=1
+command-state enabled=1 menu-state=00000000 thread=32864
+dialog hwnd=05F409DC title=About Calculator
+dialog-visible-ms=296
+close-recovery-ms=110
+PASS menu dialog and parent recovery
