@@ -89,6 +89,7 @@ static void probe_string_read(io_addr port, half_word *out, word count) { (void)
 static void probe_string_read_visible(io_addr port, half_word *out, word count) { (void)port;++string_reads;io_reads+=count;if(count){*out=0xa5;string_visible_during_callback=(*c_GetPhyAdd(0x912)==0xa5);} }
 static void probe_string_read_word(io_addr port, word *out, word count) { (void)port;++string_reads;io_reads+=count;string_word_direct=((void *)out==(void *)c_GetPhyAdd(0x7fff));if(count)*out=0x6ba5; }
 static void probe_string_read_untouched(io_addr port, half_word *out, word count) { (void)port;(void)out;++string_reads;io_reads+=count; }
+static void probe_string_write_wrapped(io_addr port, half_word *in, word count) { (void)port;++string_writes;io_writes+=count;if(count)first_output=*in; }
 static void probe_string_write_visible(io_addr port, half_word *in, word count) { (void)port;++string_writes;io_writes+=count;string_output_uses_guest=(in==c_GetPhyAdd(0x902) && *in==0x42); }
 static void probe_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;++string_writes;io_writes+=count; }
 static BOOL test_sti_fault(unsigned long vector, unsigned long error) {
@@ -318,6 +319,43 @@ static int protected_split_word_string(void) {
         string_word_direct==(test_case==61) && *c_GetPhyAdd(0x7fff)==0xa5 &&
         *c_GetPhyAdd(second)==0x6b && c_getDI()==0x8001 && c_getEIP()==0x1001;
 }
+static int protected_wrapped_cs(void) {
+    unsigned char gdt[40]={0},program[]={0xe6,0x80,0xb8,0xef,0xbe,0xd6,0xfe};
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;int handled;
+    c_cpu_init();io_init();io_define_outb(adapter,probe_write);io_connect_port((io_addr)0x80,adapter,IO_WRITE);
+    *(uint32_t *)(gdt+0x18)=0xf000ffffu;*(uint32_t *)(gdt+0x1c)=0xff00faffu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0x1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);
+    c_setSP(0x800);c_setAX(0x5a);c_setIOPL(0);c_setIP(0x2000);io_writes=test_fault=0;
+    VdmInstallFaultHandler((void *)test_sti_fault);
+    if(test_case==63){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
+    else handled=host_exint_hook(13,0);
+    VdmInstallFaultHandler(NULL);
+    {char line[100];wsprintfA(line,"WRAPPED_CS handled=%d fault=%lu out=%u eip=%lx\n",handled,test_fault,io_writes,c_getEIP());report(line);}
+    return handled && !test_fault && io_writes==1 && first_output==0x5a && (test_case==63 || c_getEIP()==0x2002);
+}
+static int protected_wrapped_string(void) {
+    unsigned char gdt[48]={0},program[]={0x6c,0xb8,0xef,0xbe,0xd6,0xfe};
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;int handled;
+    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);
+    if(test_case==66){program[0]=0x6e;io_define_out_routines(adapter,probe_write,NULL,probe_string_write_wrapped,NULL);}
+    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    *(uint32_t *)(gdt+0x28)=0xf000ffffu;*(uint32_t *)(gdt+0x2c)=0xff00f3ffu;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(test_case==66 ? 0x2b : 0x23);c_setES(0x2b);
+    c_setSP(0x800);c_setDI(0x2000);c_setSI(0x2000);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
+    *c_GetPhyAdd(0x1000)=test_case==66 ? 0x42 : 0;io_reads=io_writes=string_reads=string_writes=test_fault=0;
+    VdmInstallFaultHandler((void *)test_sti_fault);
+    if(test_case==65 || test_case==66){c_cpu_simulate();handled=(c_getAX()==0xbeef);}
+    else handled=host_exint_hook(13,0);
+    VdmInstallFaultHandler(NULL);
+    {char line[100];wsprintfA(line,"WRAPPED_STRING handled=%d fault=%lu reads=%u eip=%lx\n",handled,test_fault,io_reads,c_getEIP());report(line);}
+    if(test_case==66)return handled && !test_fault && io_writes==1 && string_writes==1 && first_output==0x42 && c_getSI()==0x2001;
+    return handled && !test_fault && io_reads==1 && string_reads==1 && *c_GetPhyAdd(0x1000)==0xa5 && c_getDI()==0x2001 && (test_case==65 || c_getEIP()==0x1001);
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -428,6 +466,8 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==49) ok=duplicate_tlb_mapping();
+    else if(test_case==64 || test_case==65 || test_case==66) ok=protected_wrapped_string();
+    else if(test_case==62 || test_case==63) ok=protected_wrapped_cs();
     else if(test_case==60 || test_case==61) ok=protected_split_word_string();
     else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56 || test_case==57 || test_case==58) ok=protected_scalar_io();
     else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52 || test_case==59) ok=protected_string_reverse_baseline();

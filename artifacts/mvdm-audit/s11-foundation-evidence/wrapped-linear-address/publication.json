@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/wrapped-both-package/package",
+  "utc": "2026-10-30T20:54:14.7021041Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "count": 20
+}

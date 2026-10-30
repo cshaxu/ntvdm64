@@ -281,8 +281,9 @@ static BOOL monitor_fetch_byte(ULONG ip, ULONG displacement, UCHAR *value)
 {
     ULONG base=getCS_BASE(), offset=ip+displacement, linear, physical;
     if (offset<ip || offset>getCS_LIMIT()) return FALSE;
+    /* NT4 forms the guest linear address with 32-bit addition. */
     linear=base+offset;
-    if (linear<base || !monitor_translate(linear,FALSE,&physical)) return FALSE;
+    if (!monitor_translate(linear,FALSE,&physical)) return FALSE;
     return monitor_read_ram(physical,value,1);
 }
 
@@ -378,6 +379,7 @@ static BOOL monitor_string_io(UCHAR op)
     ULONG base=input ? getES_BASE() : getDS_BASE();
     ULONG limit=input ? getES_LIMIT() : getDS_LIMIT();
     ULONG access=input ? getES_AR() : getDS_AR();
+    /* Match SIM32 descriptor-base plus offset, including 32-bit wrap. */
     ULONG bytes=count*width, address=base+index, i, physical, adapter;
     ULONG available=c_sas_memory_size();
     ULONG mapping[2];
@@ -385,7 +387,7 @@ static BOOL monitor_string_io(UCHAR op)
     UCHAR *buffer=storage.bytes;
     if (!(access & 0x10) || (input && ((access & 0x08) || !(access & 0x02))) ||
         (!input && (access & 0x08) && !(access & 0x02))) return FALSE;
-    if (address<base || bytes>0x10000UL-index || (bytes && address+bytes-1<address)) return FALSE;
+    if (bytes>0x10000UL-index || (bytes && address+bytes-1<address)) return FALSE;
     if (!(access & 0x08) && (access & 0x04)) {
         if(index<=limit) return FALSE;
     } else if (index>limit || (bytes && bytes-1>limit-index)) return FALSE;

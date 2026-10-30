@@ -138,3 +138,5 @@ refresh profile selection or establish runtime behavior.
 The published DIV-473 host boundary subsequently removed its duplicate PDE/PTE permission calculation. Selected CCPU source `c_tlb.c::xtrn2phy` owns this decision; two mixed-permission fixture cases compare that API with monitor execution. The existing mirror exception remains DIV-473. Current retention CSV SHA-256: `5C378BF80453AC5FF41F9D373AC817A339C0472283883939A79E9CD1306AE3A8`.
 
 DIV-473's string-I/O candidate now passes the validated guest buffer directly to IOS when the mapped bytes are contiguous; its controlled callback witness sees the guest write before returning, unlike the earlier staged-only path. Noncontiguous mappings still use staging and remain a reentry-semantics boundary. Current retention CSV SHA-256: `55CB0C16732D9048974AA98998501DC839F4D86BDEB73CA3DD44DAD10355E444`.
+
+DIV-473 now retains original 32-bit segment-base addition for monitor instruction fetch and string I/O. This removes two adapter-only rejection branches; full segment, linear-end and failure behavior remains partial. Retention CSV SHA-256: `0D7FEE3BA2CBA09FFFCA1A8F1EF6549B6FA89F752C15FC4DF22D129B076DB3E9`.

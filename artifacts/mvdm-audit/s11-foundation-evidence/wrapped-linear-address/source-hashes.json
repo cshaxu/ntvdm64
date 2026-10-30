@@ -1,0 +1,17 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "35FD4114C11C6C2B80EFEA9343508DD2CC3B7BFCD88B15F0D5FE02E3CF0B04AF",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AB56786FF002B5DFD2E6FDAE5944DF4BF9C38367F55215A0FF38D8753CBA406E",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_monitor_boundary_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "CBE9A9F44A7888F3B5A2F261EE8C0287BDF89081F83D40BA78D2EAF3DDEA853F",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-monitor-boundary.ps1"
+  }
+]
