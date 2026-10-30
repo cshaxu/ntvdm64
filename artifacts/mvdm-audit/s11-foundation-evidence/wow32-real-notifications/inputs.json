@@ -1,0 +1,46 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\wow_idle_workers_probe.c",
+    "Hash": "625552FFBE7EC8E61F12897471A0622241EFA93D5EA4380719DE297052370C79"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\win16_idle_probe.asm",
+    "Hash": "114E40CC8FBB7E33C36F5941FFCF7A681E76EB13DB2B3857338EF3EA4AFE634E"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wow-notification-separate-pid\\IDLEHOST.EXE",
+    "Hash": "CD549C4710E1A24850A06923544084FDA476FC918DC5DB38BB3F6EAF5D295D0C"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wow-notification-separate-pid\\IDLPROBE.EXE",
+    "Hash": "080881A754E5871E739174C0DAF7EC93EBAFAF243BA5D1A8D9C5D6CEF08FD5F9"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\wow-notification-separate-pid\\IDLPEER.EXE",
+    "Hash": "D6083E486DDB413E257236637FDFCBC93CB29246C4E54DDCAE9B60C8E6DF5C50"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\ntvdm.exe",
+    "Hash": "E9FCF6DCC123EA75C2D83C011C56FFDC6D520E4992EF058C87E6C55B10AD5E29"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\WOW32.DLL",
+    "Hash": "EB68494359E108A61A4BD573999358249EBE827AD04A168B4B4A433CD32716F0"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\nthook32.dll",
+    "Hash": "EB4BD415B34495882354CCC9A624DFC582BEAA01E99D526A01CACECF4101F162"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\run16.exe",
+    "Hash": "57C1FDEA95EDA538D6A4382CC09F679335B5A0DC710645E6AFBCE0586D1C5225"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\KRNL386.EXE",
+    "Hash": "D404576899CC11D23F368F2B30554E6108657CD37809837B341FD37E6B1A7AF4"
+  },
+  {
+    "Path": "O:\\tmp\\ne7b\\system32\\USER.EXE",
+    "Hash": "6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C"
+  }
+]

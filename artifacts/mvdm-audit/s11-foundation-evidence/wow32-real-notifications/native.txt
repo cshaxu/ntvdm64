@@ -1,0 +1,10 @@
+launch0 returned_pid=27792 flags=CREATE_SEPARATE_WOW_VDM
+launch1 returned_pid=17236 flags=CREATE_SEPARATE_WOW_VDM
+worker-observed pid=36824 created=01DD68515669A342 image=O:\tmp\ne7b\system32\ntvdm.exe
+worker-observed pid=25468 created=01DD6851566A668A image=O:\tmp\ne7b\system32\ntvdm.exe
+PASS both startup-only launchers returned with workers alive
+first-exited peer-still-running
+worker-exited pid=36824 exit=0 peer=25468 trace_bytes=9937
+worker-exited pid=25468 exit=0 final=1
+PASS both independent requests completed
+result=0 exit0=0 exit1=0
