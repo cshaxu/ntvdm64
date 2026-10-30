@@ -244,3 +244,8 @@ separates missing-export explicit unload before `W32Init`, process termination,
 and the original generic thunk's independent native module references. This is
 source-level ownership evidence, not proof that initialized live-worker unload
 or all process-exit cleanup is impossible or correct.
+
+The [separate-worker retirement witness](s11-foundation-evidence/published-separate-worker-exit-current/review.md)
+passed against the published ten-image baseline: one WOW worker exited while
+the other continued idle callbacks, then the second exited normally. This does
+not establish every cleanup path or resolve the intermittent SOL error.
