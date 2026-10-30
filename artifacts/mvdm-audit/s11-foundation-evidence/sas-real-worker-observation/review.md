@@ -50,3 +50,16 @@ one DOS run, not proof of all consumers or of the subsequently copied runtime
 `Sas` vector's full lifecycle. `result-v11-summary.txt`, the stage manifest,
 image hashes, observer source and raw trace hash are retained; the full trace
 is in the active build directory. No product or guest was modified.
+
+## Initialized live vector
+
+In a further fresh-identity DOS run, the observer read both initializer
+slots and the `0xcc` target from the actual relocated process at creation. At
+the later original BOP 5B debug event, it also read the runtime `Sas` record:
+slots 54 and 56 both equaled the same relocated target. Source `sas_init`
+uses `SasSetPointers` to copy the initializer. The worker then completed and
+Run16 returned zero, without an observed target break. The observer requires
+both live-slot comparisons for success. The stage manifest, exact image hashes,
+summary, source and full event-log hash are retained alongside this review.
+This is one point after initialization, not proof that the slots never change
+later or that any untested guest cannot reach them. No product or guest changed.

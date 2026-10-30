@@ -1,0 +1,8 @@
+worker=14436 base=0000000000EF0000 trap=00000000010682E0 opcode=cc slot54=010682e0 slot56=010682e0 mapped_check=1
+LIVE_SAS slot54=010682e0 slot56=010682e0 expected=00000000010682E0 matched=1
+GUEST_BOP_5B_CONTINUED tid=24272
+EXIT pid=14436 code=0
+EXIT pid=30992 code=0
+EXIT pid=20820 code=0
+EXIT pid=24028 code=0
+RESULT done=1 exit=0 worker=14436 events=202 sas_hits=0
