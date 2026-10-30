@@ -1,0 +1,93 @@
+WOW_EXPORTED_CALLBACK_REJECT errors=0 output_untouched=1 no_guest_entry=1
+WOW_DESKTOP_FNID_CCPU value=029d adjacent=0 root=1
+WOW_CLASS_NAME_CCPU copied=1 rebase=1 bytes=14
+WOW_MENU_EXTERNAL_EDGE_CCPU external_unlink=1 local_guard=1
+WOW_DESKTOP_INCOMING_EDGE_CCPU guarded=1
+WOW_WINDOW_LINKS_CCPU atomic=1 rebase=1 intermediate=1 retirement=1 reuse=1
+WOW_WINDOW_VIEW_BORROWS_CCPU retained_class=1 release_orders=2 duplicate=1 words=1
+WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1
+WOW_RESOURCE_EXECUTION_SCOPE ready=1 restored=1 no_scheduler=1
+WOW_ORIGINAL_MENU_ENTRY_CCPU create=1 popup=1 registered=1
+WOW_RESOURCE_MENU_CCPU registered=1 nested=1 rollback=1
+WOW_MENU_MESSAGE_CCPU borrowed=1 detached=1 terminal=1 invalid_passthrough=1
+WOW_SYSTEM_MENU_CCPU borrowed=1 observer_preserved=1 revert_retired=1
+WOW_MENU_TRACKING_CCPU cancelled=1 reentered=1 unlocked=1 mutation_published=1 detached_published=1
+WOW_MENU_NATIVE_RETURN_CCPU default_close=1 dispatch_close=1 retired=1 lock_restored=1
+WOW_MENU_CREATION_ROLLBACK_CCPU result=1 modes=2
+WOW_NATIVE_MENU_ENTRY_CCPU result=1
+WOW_MENU_OBSERVATION_CCPU unowned=1 cleanup_skips=1 native_survives=1 released=1
+WOW_CLIENT_CONTEXT_CCPU versions=2 suspended=1 retired=1 alias=1 rejected=2 shared=unchanged errors=0
+WOW_CLASS_COMMIT_CCPU errors=0 cases=2 original_words=1 original_task=1 released=1
+WOW_DESKTOP_QUERY_CCPU errors=0 single_root=1 class_name=1 retained=1 idempotent=1
+WOW_CLASS_LIFETIME_VIEW phase=before-native-classes hwnd=05d504ae live=1 class=#32769 next=00000000 parent=00000000 child=00000000 owner=00000000
+WOW_MANAGED_REUSE_CASE mode=0 attempts=1 old=027e0aac new=027f0aac
+WOW_MANAGED_REUSE_CASE mode=1 attempts=1 old=02800aac new=02810aac
+WOW_MANAGED_SLOT_REUSE_CCPU errors=0 creation=1 null_class=1 retained=1 released=1
+WOW_TERMINAL_NATIVE_TARGET hwnd=03E40306 target=005ce3b0 classA=77479720 classW=77479730 fnid=0000 cleanup=00000000
+WOW_TERMINAL_NATIVE_PROVIDER module=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe rva=0003e3b0
+WOW_TERMINAL_PREPARE_CCPU errors=0 dialog_suppressed=1 native_button=1 creation_denied=1 callback_denied=1
+WOW_DIALOG_CACHE_CCPU errors=0 nested_destroy=1 released=1
+WOW_NATIVE_CREATE_CCPU errors=0 forward=1 subclass=1 veto=1 retired=1 internal_combo=1 internal_dialog=1
+WOW_CLASS_ALLOCATION before=6139904 after=6139904
+WOW_UNOWNED_VIEW_CCPU errors=0 foreign_root=1 local_unowned=1 class_guard=1 native_untouched=1 released=1
+WOW_CLASS_MEMBERSHIP_COPY_CCPU errors=0 phases=4 owned=2 nonowned=2 page_crossing=1 invalid_name=1
+WOW_VIEW_PROMOTION_CCPU errors=0 same_backing=1 words=1 stale_rejected=1 ownership=1 released=1
+WOW_NATIVE_CLASS_WND_OWNER_CCPU errors=0 same_class=1 same_generation=1 managed_retirement=1 modes=2
+WOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=0 callback_double=1 rollback_retry=1 identity_retained=1
+WOW_NATIVE_FIRST_SUBCLASS_CCPU errors=0 existing_subclass=1 callback_double=1 rollback_retry=1 identity_retained=1
+WOW_CLASS_RELEASE_CCPU errors=0 live_rejected=1 borrowed_safe=1 no_resurrection=1 reclaimed=1
+WOW_CLASS_REFERENCE_SET_CCPU errors=0 classes=32 live=16 retired_borrowed=16 retained=1 reclaimed=1
+WOW_VIEW_RETIREMENT_CCPU errors=0 nested_borrow=1 class_guard=1 consumed_once=1 released=1
+WOW_DEAD_GRAPH_CCPU errors=0 atomic=1 live_guard=1 retained=1 released=1
+WOW_GRAPH_DUPLICATE_SLOT_CCPU errors=0 no_publication=1 released=1
+WOW_GRAPH_PREPARATION_CCPU errors=0 descriptor_failure=1 missing_desktop=1 unpublished=1 released=1
+WOW_VIEW_WORDS_CCPU errors=0 same_alias=1 creator_words=1 duplicate_safe=1 nested_retirement=1
+WOW_SAME_SCOPE_GRAPH_MUTATION errors=0 create_destroy=1 alias_stable=1 nested_publication=1 existing_state_validation=1
+WOW_NATIVE_CLASS_CCPU errors=0 projected=9 owned_handle=1 native_pointers=0 released=1
+WOW_CONTROL_NATIVE_RETURN_CCPU errors=0 paint=1 scroll=1 caret=1 lock=1
+WOW_GRAPH_MUTATION_GROUP_CCPU errors=0 class=1 scroll=1 bars=1 iconic=1 popups=1 invalid=1
+WOW_RETURNED_WINDOWS_CCPU errors=0 parent=1 owner=1 numeric=1 previous=1 capture=1 dead=1
+WOW_MESSAGE_OPERANDS_CCPU errors=0 typed=1 numeric=1 menu=1 position=1 nested=1
+WOW_GRAPH_NATIVE_MUTATION_CCPU errors=0 child_id=1 reparent=1 deferred_geometry=1
+WOW_IMMUTABLE_CARRIERS callbacks=3 full=1 zero16=1 signed16=1 live=1
+WOW_TERMINAL_RETRY_CCPU errors=0 property_removed=1 table_retained=1 native_gone=1 released=1
+WOW_TERMINAL_MULTI_ERROR errors=0 low=1168 high=5023 later_reclaimed=1
+WOW_WINDOW_BORROW_CCPU errors=0 normal=1 exception=1
+EXPECTED_DEAD_ROOT=050B0A06
+WOW_GRAPH_SNAPSHOT_CCPU errors=0 fresh=1 child_id=1 dead_root_rejected=1 dead_withdrawal=1 retained_reader=1
+EXPECTED_DEAD_MENU_OWNER=050C0A06
+WOW_MENU_DEAD_ENROLLMENT_CCPU errors=0 error=1400 controlled=1
+WOW_KNOWN_RECORD_ROLLBACK_CCPU errors=0 failures=32 positions=2 retained=2
+WOW_PREPARED_EDGE_RESOLUTION_CCPU errors=0 rows=4 fields=5 staged=1 full_generation=1
+WOW_LOCAL_OBSERVATION_COMMIT_CCPU errors=0 rows=2 rollback=1 commit=1
+WOW_NATIVE_SLOT_REUSE_CCPU errors=0 attempts=1 old=03fc0306 new=03fd0306 old_backing=00226000 new_backing=0022a000
+WOW_MENU_PROJECTION_CCPU errors=0 phases=3 fields=3 capacity=1 retired=1
+WOW_EXTERNAL_OBSERVATION_CCPU errors=0 separate_process=1 local_updates=32
+WOW_EXTERNAL_REFRESH_BOUNDARY_CCPU errors=0 retained=1 explicit_refresh=1 native_mutation=1 local_fresh=1
+WOW_EXTERNAL_CAPTURE_CCPU errors=0 dead_native=1 committed_observation=1
+WOW_TERMINAL_CHILD option=--post-native-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.post-native-failure.stderr.txt
+WOW_POST_NATIVE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--native-entry-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.native-entry-failure.stderr.txt
+WOW_NATIVE_ENTRY_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--callback-owner-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.callback-owner-failure.stderr.txt
+WOW_CALLBACK_OWNER_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--callback-borrow-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.callback-borrow-failure.stderr.txt
+WOW_CALLBACK_BORROW_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--window-cache-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.window-cache-failure.stderr.txt
+WOW_WINDOW_CACHE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--dialog-cache-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.dialog-cache-failure.stderr.txt
+WOW_DIALOG_CACHE_FAILURE_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_TERMINAL_CHILD option=--class-retirement-failure reached=1 exit=c0000420 log=O:\repos.hobby\ntvdm64\build\t473-s11\current-return-identity\fixture-identity.exe.class-retirement-failure.stderr.txt
+WOW_CLASS_RETIREMENT_TERMINAL_CCPU errors=0 consumed_once=1 worker_exit=c0000420
+WOW_CLASS_RETIREMENT_FAILURE_CCPU errors=0 native_removed=1 stale_projection_rejected=1 terminal=1
+WOW_PROPERTY_DISCOVERY_CCPU errors=0 held=0 atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1
+WOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=0 dead=0 full=1 unsigned16=1 signed16=1 native_output=1
+WOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=0 dead=1 full=1 unsigned16=1 signed16=1 native_output=1
+WOW_DISCOVERY_CCPU errors=0 held=0 fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1
+WOW_PROPERTY_DISCOVERY_CCPU errors=0 held=1 atom=1 string=1 signed=1 stop=1 exception=1 removal=1 invalid=1
+WOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=1 dead=0 full=1 unsigned16=1 signed16=1 native_output=1
+WOW_WINDOW_THREAD_QUERY_CCPU errors=0 held=1 dead=1 full=1 unsigned16=1 signed16=1 native_output=1
+WOW_DISCOVERY_CCPU errors=0 held=1 fresh=1 nested=1 stop=1 exception=1 failure=1 recovery=1
+WOW_DOMAIN_EXIT_WITNESS hwnd=0ce505a6 prior=00000000
+WOW_DOMAIN_EXIT_STORAGE backing=00227000 existing=00000000
+WOW_PAGE_DOMAIN_LIFECYCLE_OK

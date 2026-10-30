@@ -1,0 +1,87 @@
+1644 WindowCreate atom=C319 result=00000000 error=0 bindingError=0 claimed=1 menu=0E800353 instance=00590000 style=00CF0000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C319 result=00000000 error=0 bindingError=0 claimed=1 menu=40DA05CD instance=00590000 style=00CF0000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=07B308E2 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=027F0AAC error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=02820AAC error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C01F result=01A70CC2 error=0 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=35136 actualMenu=000003E8
+1644 WindowCreate atom=C019 result=01C30802 error=0 bindingError=0 claimed=1 menu=000003E9 instance=00590000 style=50000300 tid=35136 actualMenu=000003E9
+1644 WindowCreate atom=C01D result=02830AAC error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C01F result=00000000 error=87 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C01D result=00000000 error=1400 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=00000000 error=87 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=8002 result=07B508E2 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=02850AAC error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=35136 actualMenu=00000065
+1644 WindowCreate atom=8002 result=07B608E2 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35136 actualMenu=00000000
+1644 WindowCreate atom=C018 result=03E40306 error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=35136 actualMenu=00000065
+1644 WindowCreate atom=8002 result=07B708E2 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35136 actualMenu=00000000
+1644 WindowEntry hwnd=07BC08E2 message=802F native=020C0000 result=00000000 tid=35136 error=1168
+1644 WindowDispatch hwnd=07BC08E2 message=802F native=020C0000 result=92340056 tid=35136 error=0
+1644 WindowEntry hwnd=07BD08E2 message=802F native=020C0000 result=00000000 tid=35136 error=1168
+1644 WindowDispatch hwnd=07BD08E2 message=802F native=020C0000 result=92340056 tid=35136 error=0
+1644 WindowEntry hwnd=0CD005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=4660
+1644 WindowRejected hwnd=0CD005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=5023
+1644 WindowEntry hwnd=0CD005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=5023
+1644 WindowDispatch hwnd=0CD005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=21947
+1644 WindowEntry hwnd=000005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=21947
+1644 WindowDispatch hwnd=000005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=21947
+1644 WindowEntry hwnd=000005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=21947
+1644 WindowDispatch hwnd=000005A6 message=8046 native=06D50000 result=00000000 tid=35136 error=21947
+1644 WindowEntry hwnd=0CD005A6 message=0090 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD005A6 message=0090 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowEntry hwnd=0CD005A6 message=0002 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD005A6 message=0002 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowEntry hwnd=0CD005A6 message=0082 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD005A6 message=0082 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowEntry hwnd=0CD105A6 message=0090 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD105A6 message=0090 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowEntry hwnd=0CD105A6 message=0002 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD105A6 message=0002 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowEntry hwnd=0CD105A6 message=0082 native=06D50000 result=00000000 tid=35136 error=0
+1644 WindowDispatch hwnd=0CD105A6 message=0082 native=06D50000 result=00000000 tid=35136 error=0
+1644 IdentityFailure tid=35136 stage=required-root-capture hwnd=050B0A06 status=1400
+1644 IdentityFailure tid=35136 stage=menu-owner-info hwnd=050C0A06 status=1400
+356 TaskRetirement tid=32184 task=00000000 stage=publish-native-return status=5023
+12088 TaskRetirement tid=36356 task=00000000 stage=release-native-handoff status=5023
+30764 TaskRetirement tid=35152 task=00000000 stage=restore-callback-owner status=5023
+26588 TaskRetirement tid=36700 task=00000000 stage=restore-callback-borrow status=5023
+6316 WindowCreate atom=C3E0 result=00000000 error=0 bindingError=0 claimed=1 menu=22F90AE3 instance=00590000 style=00CF0000 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C3E0 result=00000000 error=0 bindingError=0 claimed=1 menu=4FFF1A19 instance=00590000 style=00CF0000 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C018 result=04EE0A84 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C018 result=04030306 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C01F result=079A0AAE error=0 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=14076 actualMenu=000003E8
+6316 WindowCreate atom=C019 result=01D304A4 error=0 bindingError=0 claimed=1 menu=000003E9 instance=00590000 style=50000300 tid=14076 actualMenu=000003E9
+6316 WindowCreate atom=C01D result=04040306 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C01F result=00000000 error=87 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C01D result=00000000 error=1400 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C018 result=00000000 error=87 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=8002 result=04F00A84 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C018 result=04060306 error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=14076 actualMenu=00000065
+6316 WindowCreate atom=8002 result=04F10A84 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=14076 actualMenu=00000000
+6316 WindowCreate atom=C018 result=04970A5E error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=14076 actualMenu=00000065
+6316 WindowCreate atom=8002 result=04F20A84 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=14076 actualMenu=00000000
+6316 WindowEntry hwnd=04F70A84 message=802F native=03900000 result=00000000 tid=14076 error=1168
+6316 WindowDispatch hwnd=04F70A84 message=802F native=03900000 result=92340056 tid=14076 error=0
+6316 WindowEntry hwnd=04F80A84 message=802F native=03900000 result=00000000 tid=14076 error=1168
+6316 WindowDispatch hwnd=04F80A84 message=802F native=03900000 result=92340056 tid=14076 error=0
+6316 WindowEntry hwnd=033B08C0 message=8046 native=03910000 result=00000000 tid=14076 error=4660
+6316 WindowRejected hwnd=033B08C0 message=8046 native=03910000 result=00000000 tid=14076 error=5023
+6316 WindowEntry hwnd=033B08C0 message=8046 native=03910000 result=00000000 tid=14076 error=5023
+6316 TaskRetirement tid=14076 task=00000000 stage=restore-window-callback-cache status=5023
+13196 WindowCreate atom=C3E0 result=00000000 error=0 bindingError=0 claimed=1 menu=3EBE1AE1 instance=00590000 style=00CF0000 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C3E0 result=00000000 error=0 bindingError=0 claimed=1 menu=1C6E09BB instance=00590000 style=00CF0000 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C018 result=034208C0 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C018 result=01CD0802 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C01F result=02310B66 error=0 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=35224 actualMenu=000003E8
+13196 WindowCreate atom=C019 result=00EA0E42 error=0 bindingError=0 claimed=1 menu=000003E9 instance=00590000 style=50000300 tid=35224 actualMenu=000003E9
+13196 WindowCreate atom=C01D result=01CE0802 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C01F result=00000000 error=87 bindingError=0 claimed=1 menu=000003E8 instance=00590000 style=54808041 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C01D result=00000000 error=1400 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=40000002 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C018 result=00000000 error=87 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000000 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=8002 result=034408C0 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C018 result=01D00802 error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=35224 actualMenu=00000065
+13196 WindowCreate atom=8002 result=034508C0 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35224 actualMenu=00000000
+13196 WindowCreate atom=C018 result=04B20A5E error=0 bindingError=0 claimed=1 menu=00000065 instance=00590000 style=40000000 tid=35224 actualMenu=00000065
+13196 WindowCreate atom=8002 result=034608C0 error=0 bindingError=0 claimed=1 menu=00000000 instance=00590000 style=80000004 tid=35224 actualMenu=00000000
+13196 TaskRetirement tid=35224 task=00000000 stage=publish-native-return status=5023
+1644 IdentityFailure tid=35136 stage=required-root-capture hwnd=000008C0 status=1400
+1644 IdentityFailure tid=35136 stage=required-root-capture hwnd=00000A06 status=1400
