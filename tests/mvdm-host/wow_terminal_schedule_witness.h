@@ -107,6 +107,9 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     unsigned before=borrow_errors;
     unsigned ownership_before=borrow_errors;
     BOOL graph_ok;
+    mvdm_softpc_wow_window_observation *snapshot = NULL;
+    ULONG snapshot_count = 0, copied_count = 0, snapshot_index;
+    BOOL root_found = FALSE;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
 #ifndef WOW_HOOK_GRAPH_OVERLAP
     wow_task_callback_scope callback;
@@ -162,6 +165,11 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     BORROW_CHECK(wait==WAIT_OBJECT_0);
     BORROW_CHECK(main_binding->exclusive_held && t.runtime->owner_thread_id==GetCurrentThreadId());
     BORROW_CHECK(t.first_phase==1 && t.mutation_unheld==0);
+    BORROW_CHECK(mvdm_softpc_wow_page_domain_copy_window_view(0, NULL, &snapshot_count));
+    BORROW_CHECK(snapshot_count > 0);
+    if (snapshot_count)
+        snapshot = HeapAlloc(GetProcessHeap(), 0, snapshot_count * sizeof(*snapshot));
+    BORROW_CHECK(snapshot != NULL);
     /* In the ordinary path release the resource thread before refreshing;
      * the hook path keeps its gate until callback admission to avoid blocking
      * that admission on the resource thread's test-only pause. */
@@ -169,12 +177,24 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     BORROW_CHECK(SetEvent(t.release));
     BORROW_CHECK(WaitForSingleObject(t.attempting,10000)==WAIT_OBJECT_0);
 #endif
+    if (snapshot) {
+        copied_count = snapshot_count;
+        BOOL copied = mvdm_softpc_wow_page_domain_copy_window_view(
+            snapshot_count, snapshot, &copied_count);
+        BORROW_CHECK(copied && copied_count == snapshot_count);
+        if (copied && copied_count <= snapshot_count)
+            for (snapshot_index = 0; snapshot_index < copied_count; ++snapshot_index)
+                if (snapshot[snapshot_index].links.window == (ULONG)(ULONG_PTR)t.window)
+                    root_found = TRUE;
+        HeapFree(GetProcessHeap(), 0, snapshot);
+    }
+    BORROW_CHECK(root_found);
     BORROW_CHECK(wow_user_window_refresh_graph(NULL));
     BORROW_CHECK(main_binding->exclusive_held && t.mutation_held==0 &&
         t.mutation_unheld==0 &&
         mvdm_softpc_wow_page_domain_window_handle(LOWORD(t.window)) ==
             (ULONG)(ULONG_PTR)t.window);
-    fprintf(stderr,"WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=%u root_live=1 no_mutation=1\n",
+    fprintf(stderr,"WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=%u root_live=1 no_mutation=1 count_copy=1\n",
         borrow_errors-before);
     BORROW_CHECK(wow_user_runtime_leave(main_binding));
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP

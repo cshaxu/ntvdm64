@@ -114,3 +114,20 @@ No product or guest code changed. The gate proves the competitor is poised at
 lock acquisition, not that the OS has already parked it on that lock; this
 is selected-object evidence, not a real Win16 forced race or attribution of
 the historical SOL failure.
+
+The gate now also spans the actual page-domain count-only and populated window
+view calls, motivated by the separately observed 5023 count/copy mismatch.
+The fixture asserts equal counts and the exact published root in the copied
+view, then performs the graph refresh, all while the main thread owns the
+runtime lock. Plain, callback and hook modes passed the new required marker
+`WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=0 root_live=1 no_mutation=1 count_copy=1`
+and their prior mode-specific assertions. The header and verifier SHA-256 are
+`62D88DC3CF508E6ABF8E16491EAADC1BB0E9AB8F5E0375F8B21560CD5ACEFAE0`
+and `F15CC48111016CDE027F9DC3F7877F59AE562FC1BB325CE15778EB16428239B4`.
+The three fixture EXE hashes, in that order, are
+`A893B61C7681D09BD79391EEE68FBCBF838E314A5830CCD0A858D9CEDC8F8070`,
+`89E3AA5483742B91E65242A8338A6E03891224D77BC43A5304C1AB57D85B5BE6`,
+and `4B746A6E7063ED6A94E9953F63129574C1E3BEEC4A4DFF0030FB575D1EB70400`;
+outputs are in `build/t473-s11/terminal-count-copy-{plain,callback,hook}-20261030`.
+This controlled observation does not establish the cause of the earlier 5023
+or prove all other mutation callers participate in the same lock discipline.
