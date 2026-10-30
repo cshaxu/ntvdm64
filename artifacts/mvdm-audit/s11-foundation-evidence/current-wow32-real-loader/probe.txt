@@ -1,0 +1,9 @@
+SOL options: round=1
+SOL options: game-thread=21300
+SOL options: command=1003
+SOL options: wow32-module=O:\tmp\n241\system32\WOW32.DLL
+SOL options: dialog-visible-ms=10000
+SOL options: dialog-close-recovery-ms=563
+SOL options: worker-cpu-open-ms=5125 worker-cpu-close-ms=547
+SOL options: game-thread-cpu-open-ms=5015 game-thread-cpu-close-ms=547
+PASS SOL Options command, modal dialog, close and parent recovery

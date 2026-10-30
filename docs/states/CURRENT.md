@@ -8,7 +8,7 @@ S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-c
 
 The published foundation group includes far-transfer ownership and WOW
 entry ABI; NIDDB internal fixes remain outside scope. The selected bridge
-passed controlled loader cycles, not real guest DLL lifecycle. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
+passed controlled loader cycles; real WOW32 attach failure remains untested. [Evidence](../../artifacts/mvdm-audit/s11-foundation-candidates.md).
 
 The owner moved further SOL and related WOW multi-window performance work to
 the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
