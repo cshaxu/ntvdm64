@@ -670,6 +670,7 @@ if ($InitialPublicationOnly) {
     return
 }
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_TERMINAL_SCHEDULE errors=0 first_phase=1 held=2 unheld=0 retired=1 resource_thread=1$')) { throw 'Published window retirement lock witness failed' }
+if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=0 root_live=1 no_mutation=1$')) { throw 'Graph refresh overlapped terminal mutation' }
 if ($TerminalSchedule -and !($fixtureOutput -match '^WOW_GRAPH_OWNER_RESTORE errors=0 success=2 failure=2 held=2 unheld=2$')) { throw 'Graph owner restoration witness failed' }
 if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_CALLBACK_GRAPH_OVERLAP errors=0 graph_succeeded=1 serialized=1 restored=1$')) { throw 'Callback graph overlap witness failed' }
 if ($CallbackGraphOverlap -and !($fixtureOutput -match '^WOW_GRAPH_OWNER_EXCEPTION errors=0 caught=2 held=1 unheld=1$')) { throw 'Graph owner exception restoration failed' }

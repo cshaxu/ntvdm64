@@ -4,7 +4,7 @@ typedef struct terminal_schedule_test {
     session *session_owner;
     HWND window;
     wow_window_words_binding *words;
-    HANDLE reached, release;
+    HANDLE reached, release, attempting;
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
     HANDLE locked, finish_graph, graph_requested;
     volatile LONG graph_gate, graph_acquired, hook_graph_completed, graph_raise;
@@ -81,6 +81,7 @@ void __cdecl test_terminal_schedule(unsigned phase)
     if(InterlockedCompareExchange(&t->first_phase,(LONG)phase,0)==0) {
         SetEvent(t->reached);
         WaitForSingleObject(t->release,INFINITE);
+        SetEvent(t->attempting);
     }
 }
 static DWORD WINAPI terminal_schedule_worker(void *context)
@@ -139,6 +140,7 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
         borrow_errors-ownership_before);
     t.reached=CreateEventW(NULL,TRUE,FALSE,NULL);
     t.release=CreateEventW(NULL,TRUE,FALSE,NULL);
+    t.attempting=CreateEventW(NULL,TRUE,FALSE,NULL);
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
     t.locked=CreateEventW(NULL,TRUE,FALSE,NULL);
     t.finish_graph=CreateEventW(NULL,TRUE,FALSE,NULL);
@@ -146,7 +148,7 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     BORROW_CHECK(t.locked && t.finish_graph && t.graph_requested);
 #endif
     t.window=CreateWindowExW(0,L"STATIC",L"",0,0,0,1,1,NULL,NULL,GetModuleHandleW(NULL),NULL);
-    BORROW_CHECK(t.reached && t.release && t.window && wow_window_words_attach(t.window,&words));
+    BORROW_CHECK(t.reached && t.release && t.attempting && t.window && wow_window_words_attach(t.window,&words));
     t.words=wow_window_words_acquire(t.window);
     BORROW_CHECK(t.words && main_binding->thread &&
         wow_window_words_publish_owner(t.window,t.words,main_binding->thread));
@@ -160,6 +162,20 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
     BORROW_CHECK(wait==WAIT_OBJECT_0);
     BORROW_CHECK(main_binding->exclusive_held && t.runtime->owner_thread_id==GetCurrentThreadId());
     BORROW_CHECK(t.first_phase==1 && t.mutation_unheld==0);
+    /* In the ordinary path release the resource thread before refreshing;
+     * the hook path keeps its gate until callback admission to avoid blocking
+     * that admission on the resource thread's test-only pause. */
+#ifndef WOW_HOOK_GRAPH_OVERLAP
+    BORROW_CHECK(SetEvent(t.release));
+    BORROW_CHECK(WaitForSingleObject(t.attempting,10000)==WAIT_OBJECT_0);
+#endif
+    BORROW_CHECK(wow_user_window_refresh_graph(NULL));
+    BORROW_CHECK(main_binding->exclusive_held && t.mutation_held==0 &&
+        t.mutation_unheld==0 &&
+        mvdm_softpc_wow_page_domain_window_handle(LOWORD(t.window)) ==
+            (ULONG)(ULONG_PTR)t.window);
+    fprintf(stderr,"WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=%u root_live=1 no_mutation=1\n",
+        borrow_errors-before);
     BORROW_CHECK(wow_user_runtime_leave(main_binding));
 #ifdef WOW_CALLBACK_GRAPH_OVERLAP
 #ifndef WOW_HOOK_GRAPH_OVERLAP
@@ -245,5 +261,5 @@ static void verify_terminal_schedule(wow_user_runtime_thread *main_binding)
         borrow_errors-before,t.first_phase,t.mutation_held,t.mutation_unheld,t.retired);
     wow_window_words_release(t.words);
     BORROW_CHECK(DestroyWindow(t.window));
-    CloseHandle(worker);CloseHandle(t.reached);CloseHandle(t.release);
+    CloseHandle(worker);CloseHandle(t.reached);CloseHandle(t.release);CloseHandle(t.attempting);
 }

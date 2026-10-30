@@ -80,3 +80,37 @@ publication paths, along with their bounded selected-object evidence.
 The [prebuilt DPMI task-cleanup witness](../graph-owner-dpmi-cleanup/review.md)
 also passed against these release inputs, including four child exits with live
 allocations and restored aggregate XMS capacity. Failure paths remain distinct.
+
+## Graph refresh immediately before competing retirement
+
+The terminal-schedule fixture now places a second gate immediately before the
+resource thread's runtime-lock acquisition. In the ordinary and callback
+variants, the main thread still holds the runtime lock, releases that gate,
+waits until the resource thread reaches the acquisition boundary, and executes
+an actual graph refresh before releasing its lock. The test asserts that the
+published root is still present and no retirement mutation has run. The hook
+variant retains its original callback-admission ordering, then checks the same
+graph-before-retirement state; it does not claim that the competitor had
+passed its gate during that preliminary refresh.
+
+The final fixture passed the plain terminal, callback-overlap and original
+hook-overlap verifier modes, including the existing owner/exception checks.
+All three produced `WOW_TERMINAL_GRAPH_BEFORE_RETIRE errors=0 root_live=1
+no_mutation=1`. Fixture EXE SHA-256 values are respectively
+`96788BE38CE30B671309EF97586D9336781EB675FA5E689639C980EB11247157`,
+`A4AA716DE4F52BF52198984AB2452542D589732E5F908473D39931BE9F7953B1`,
+`15638835A49051B16E83EA130DFD49C6C7A514F56A53495E3DC0FBACD821D68F`.
+The test header SHA-256 is
+`0996BF84B66AD12802F11E4659A911877C3018CE80E23CDD6438A85A7E78C213`;
+the verifier SHA-256 is
+`FD9697934AA25E96B807CDDDE74CB216D241BFC1B27EB09ED8437BDB8AE0528E`.
+Outputs are in `build/t473-s11/terminal-graph-{plain,callback-final,hook-fixed}-20261030`.
+
+An initial ordinary-sandbox run exited before creating its test desktop; it
+is not counted. A first hook variant was interrupted after its test-only gate
+was released before callback admission, which could deadlock against the
+paused resource thread. The corrected hook variant keeps the prior ordering.
+No product or guest code changed. The gate proves the competitor is poised at
+lock acquisition, not that the OS has already parked it on that lock; this
+is selected-object evidence, not a real Win16 forced race or attribution of
+the historical SOL failure.
