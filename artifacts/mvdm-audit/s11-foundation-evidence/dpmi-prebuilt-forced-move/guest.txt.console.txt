@@ -1,0 +1,46 @@
+# buffer=80,300 viewport=0,36,79,57
+[0] prior shell output
+[1] prior shell output
+[2] prior shell output
+[3] prior shell output
+[4] prior shell output
+[5] prior shell output
+[6] prior shell output
+[7] prior shell output
+[8] prior shell output
+[9] prior shell output
+[10] prior shell output
+[11] prior shell output
+[12] prior shell output
+[13] prior shell output
+[14] prior shell output
+[15] prior shell output
+[16] prior shell output
+[17] prior shell output
+[18] prior shell output
+[19] prior shell output
+[20] prior shell output
+[21] prior shell output
+[22] prior shell output
+[23] prior shell output
+[24] prior shell output
+[25] prior shell output
+[26] prior shell output
+[27] prior shell output
+[28] prior shell output
+[29] prior shell output
+[30] prior shell output
+[31] prior shell output
+[32] prior shell output
+[33] prior shell output
+[34] prior shell output
+[35] prior shell output
+[36] prior shell output
+[37] prior shell output
+[38] prior shell output
+[39] prior shell output
+[40] S36_DPMI_ENTERING
+[41] S36_DPMI_ENTERED
+[42] S36_DPMI_ALLOCATED
+[43] S36_DPMI_FORCED_MOVE_FAILED_GROW_DATA_FREE_OK
+[44] S36_DPMI_ALLOC_REALLOC_DATA_FREE_OK
