@@ -37,15 +37,15 @@ continued ownership. Guest and product source/binaries were not modified.
 
 Inputs SHA-256:
 
-* Fixture `0FF982B208D857E0C0F2EA203802CDAECFEA902BEFDA6FD66251EBC064495927`.
+* Fixture `03E8D369AD08B7F1FB0A41850E4539F25EA7621CD25802FFFA701B9C2712DC1D`.
 * `xmem.obj` `E2A12D8FB9485616AAF4170FEBA72DE5DC79C79B2537540F24EF7E20B5DF84CB`.
 * `dpmimemr.obj` `D3F07F4BD83EBEDD830593EF979E3CD5059B336B5A468AAD3F8B9923734E7FF4`.
 * `suballoc.obj` `F5CF62A66083A173274455CB4714BA7E8C3C9FA27D56A2F548F7AF908169C373`.
-* Test executable `3D5D798052C84420E958C4F49A50CEC0D5C13840349C2E60ACA08C20B02E5B54`.
+* Test executable `945AB39EF1915C45DDE04397860256A728946093F1850E6B626AE0C890B79E10`.
 
 The fixture source is adjacent. Build with x86 MinGW GCC, the repository
 `src/mvdm/inc` include path, `-Wl,--gc-sections`, and the three cached objects
-above; run once with no arguments and once with `--inject`. This is isolated
+above; run with no arguments, with `--inject`, and with `--explicit-inject`. This is isolated
 host evidence, not a product regression or a new release.
 
 ## Original PSP-selector lifetime follow-up
@@ -73,3 +73,24 @@ Reviewed source SHA-256: `dxfunc.asm`
 `EA8857F9497CEA63ECD9746AF3E16F222869F0C5C396CF78309CFC506546FBDC`;
 `dxstrt.asm` `E67463A6CA5BBE18447AC51123AB3DEC7F3DCCDB1606F10DBE611EE10580F295`;
 `dxutil.asm` `C87933E2DA13CD0AA87E9ACF74DEA8254AF83672D4447624C3A775FB03730016`.
+
+## Explicit DPMI free failure without task retry
+
+A third mode tests the actual `DpmiFreeXmem` entry rather than task cleanup.
+On the same full pool, the injected decommit failure makes the entry return
+CF=1 and retain the original XMEM handle. After the other owner frees an
+earlier block and allocates twice, it receives the failed-free address. A
+write through the new allocation changes the byte read through the original
+address from `73` to `5a`. The fixture reports
+`explicit_free_failure_cf=1 same_address=1 original_data=5a` and exits zero.
+No second cleanup or selector reuse is needed for this controlled
+counterexample. The normal and task-cleanup controls were rerun and retained
+the expected states.
+
+This strengthens the actual-object ownership finding: a failed explicit free
+can leave a tracked allocation sharing an address with a later allocation.
+The decommit failure is still injected at a test callback, not observed from
+`VdmDeCommitVirtualMemory` or a real guest. Determine real error reachability,
+the original contract, partial multi-page effects and the minimal repair at
+the S12 allocator/provider boundary; this test does not by itself authorize a
+guest modification or establish that all memory failures can be rolled back.
