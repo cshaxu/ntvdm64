@@ -220,6 +220,20 @@ static int protected_scalar_io(void) {
         VdmInstallFaultHandler(NULL);
         return handled && test_fault==0 && c_getEIP()==0x1004 && (c_getCR0()&15)==15;
     }
+    if(test_case==57 || test_case==58) {
+        const unsigned char lmsw_mixed_permissions[]={0x0f,0x01,0x36,0x00,0x23};
+        ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000),physical;unsigned j;int handled,cpu_allows;
+        extern int xtrn2phy(unsigned long,unsigned char,unsigned long *);
+        CopyMemory(c_GetPhyAdd(0xf1000),lmsw_mixed_permissions,sizeof(lmsw_mixed_permissions));
+        ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=test_case==58 ? 0x5003 : 0x5007;
+        for(j=0;j<512;j++)pte[j]=(j<<12)|7;
+        if(test_case==57)pte[2]=0x2003;
+        *(uint16_t *)c_GetPhyAdd(0x2300)=6;
+        c_setCR3(0x4000);c_setPG(1);cpu_allows=xtrn2phy(0x2300,2,&physical);
+        handled=host_exint_hook(13,0);
+        VdmInstallFaultHandler(NULL);c_setPG(0);
+        return cpu_allows && physical==0x2300 && handled && test_fault==0 && c_getEIP()==0x1005 && (c_getCR0()&15)==15;
+    }
     if(test_case==55 || test_case==56) {
         const unsigned char lmsw_cross_page[]={0x0f,0x01,0x36,0xfe,0x2f};
         ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned j;int handled,ok;
@@ -389,7 +403,7 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==49) ok=duplicate_tlb_mapping();
-    else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56) ok=protected_scalar_io();
+    else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56 || test_case==57 || test_case==58) ok=protected_scalar_io();
     else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52) ok=protected_string_reverse_baseline();
     else if (test_case==16) ok=protected_concurrent_if();
     else if ((test_case>=0 && test_case<=7) || test_case==17 || test_case==18 || test_case==20 || test_case==26 || test_case==27 || test_case==30) ok=protected_pending_irq_observe();

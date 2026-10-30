@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/mixed-permission-package/package",
+  "count": 20,
+  "utc": "2026-10-30T20:19:49.8139907Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "result": "pass"
+}

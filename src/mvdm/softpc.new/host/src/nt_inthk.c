@@ -254,15 +254,13 @@ static BOOL monitor_translate(ULONG linear, BOOL write, ULONG *physical)
     *physical=linear;
     if (c_getCR0() & 0x80000000UL) {
         ULONG pde,pte,dir=(c_getCR3() & 0xfffff000UL)+((linear>>22)<<2);
-        ULONG table, protection;
+        ULONG table;
         int cached=ccpu_monitor_cached_access(linear,access,physical);
         if(cached<0) return FALSE;
         if(cached>0) return TRUE;
         if (!monitor_read_ram(dir,&pde,sizeof(pde)) || !(pde&1)) return FALSE;
         table=(pde&0xfffff000UL)+(((linear>>12)&0x3ffUL)<<2);
         if (!monitor_read_ram(table,&pte,sizeof(pte)) || !(pte&1)) return FALSE;
-        protection=(pde&6)<(pte&6) ? pde : pte;
-        if ((access&2) && (!(protection&4) || ((access&1) && !(protection&2)))) return FALSE;
         if (!xtrn2phy(linear,access,physical)) return FALSE;
     }
     return TRUE;

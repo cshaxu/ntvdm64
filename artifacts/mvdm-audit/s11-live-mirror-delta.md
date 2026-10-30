@@ -134,3 +134,5 @@ SHA-256 is `D2DB2B75B732244295375FC383A1F94641AF396FDEE0D9F6090532F796EE92EF`;
 the earlier A7DB value is a historical snapshot, not the current artifact's
 hash. The generator checks its frozen original identities; it does not
 refresh profile selection or establish runtime behavior.
+
+The published DIV-473 host boundary subsequently removed its duplicate PDE/PTE permission calculation. Selected CCPU source `c_tlb.c::xtrn2phy` owns this decision; two mixed-permission fixture cases compare that API with monitor execution. The existing mirror exception remains DIV-473. Current retention CSV SHA-256: `5C378BF80453AC5FF41F9D373AC817A339C0472283883939A79E9CD1306AE3A8`.
