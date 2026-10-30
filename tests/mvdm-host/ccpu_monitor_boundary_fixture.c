@@ -82,11 +82,14 @@ static int duplicate_tlb_mapping(void) {
     c_setPG(0);
     return first==0x8000 && second==0x9000 && actual==0x9000 && hit==1 && monitor==actual;
 }
-static unsigned io_reads, io_writes, string_reads, string_writes, first_output;
+static unsigned io_reads, io_writes, string_reads, string_writes, first_output, string_visible_during_callback, string_output_uses_guest, string_word_direct;
 static void probe_read(io_addr port, half_word *value) { (void)port; ++io_reads; *value=0xa5; }
 static void probe_write(io_addr port, half_word value) { (void)port; if(!io_writes)first_output=value; ++io_writes; }
 static void probe_string_read(io_addr port, half_word *out, word count) { (void)port;++string_reads;io_reads+=count;while(count--)*out++=0xa5; }
+static void probe_string_read_visible(io_addr port, half_word *out, word count) { (void)port;++string_reads;io_reads+=count;if(count){*out=0xa5;string_visible_during_callback=(*c_GetPhyAdd(0x912)==0xa5);} }
+static void probe_string_read_word(io_addr port, word *out, word count) { (void)port;++string_reads;io_reads+=count;string_word_direct=((void *)out==(void *)c_GetPhyAdd(0x7fff));if(count)*out=0x6ba5; }
 static void probe_string_read_untouched(io_addr port, half_word *out, word count) { (void)port;(void)out;++string_reads;io_reads+=count; }
+static void probe_string_write_visible(io_addr port, half_word *in, word count) { (void)port;++string_writes;io_writes+=count;string_output_uses_guest=(in==c_GetPhyAdd(0x902) && *in==0x42); }
 static void probe_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;++string_writes;io_writes+=count; }
 static BOOL test_sti_fault(unsigned long vector, unsigned long error) {
     (void)vector; (void)error; ++test_fault; return FALSE;
@@ -274,6 +277,7 @@ static int protected_string_reverse_baseline(void) {
     c_cpu_init();io_init();io_define_inb(adapter,probe_read);io_define_outb(adapter,probe_write);
     if(test_case==23){io_define_in_routines(adapter,probe_read,NULL,probe_string_read,NULL);io_define_out_routines(adapter,probe_write,NULL,probe_string_write,NULL);}
     if(test_case==52)io_define_in_routines(adapter,probe_read,NULL,probe_string_read_untouched,NULL);
+    if(test_case==59){io_define_in_routines(adapter,probe_read,NULL,probe_string_read_visible,NULL);io_define_out_routines(adapter,probe_write,NULL,probe_string_write_visible,NULL);}
     io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
     *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
     *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
@@ -290,8 +294,29 @@ static int protected_string_reverse_baseline(void) {
     if(test_case==22 || test_case==24)c_setPG(0);
     {char line[140];wsprintfA(line,"MONITOR_STRING_DF cpu_si=%04x di=%04x cx=%04x reads=%u writes=%u bytes=%02x,%02x fault=%lu\n",c_getSI(),c_getDI(),c_getCX(),io_reads,io_writes,*c_GetPhyAdd(0x911),*c_GetPhyAdd(0x912),test_fault);report(line);}
     if(test_case==15) return c_getSI()==source-2 && c_getDI()==target_index-2 && c_getCX()==0 && io_reads==2 && io_writes==2 && *c_GetPhyAdd(target-1)==0xa5 && *c_GetPhyAdd(target)==0xa5 && test_fault==0 && c_getAX()==0xbeef;
+    if(test_case==59)return string_visible_during_callback && string_output_uses_guest && *c_GetPhyAdd(target)==0xa5 && test_fault==0 && c_getAX()==0xbeef;
     if(test_case==52)return c_getSI()==source-1 && c_getDI()==target_index-1 && c_getCX()==2 && io_reads==1 && io_writes==1 && string_reads==1 && *c_GetPhyAdd(target)==0x37 && test_fault==0 && c_getAX()==0xbeef;
     return c_getSI()==source-1 && c_getDI()==target_index-1 && c_getCX()==2 && io_reads==1 && io_writes==1 && *c_GetPhyAdd(target)==0xa5 && *c_GetPhyAdd(target+1)!=0xa5 && test_fault==0 && c_getAX()==0xbeef && (test_case!=25 || first_output==0x42) && (test_case!=23 || (string_reads==1 && string_writes==1)) && (test_case!=24 || ((*(ULONG *)c_GetPhyAdd(0x5008)&0x20) && (*(ULONG *)c_GetPhyAdd(0x500c)&0x60)==0x60));
+}
+static int protected_split_word_string(void) {
+    unsigned char gdt[40]={0};ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);unsigned i;
+    const unsigned char program[]={0x6d};half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    ULONG second=test_case==60 ? 0x9000 : 0x8000;int handled;
+    c_cpu_init();io_init();io_define_in_routines(adapter,probe_read,NULL,NULL,probe_string_read_word);
+    io_connect_port((io_addr)0x80,adapter,IO_READ_WRITE);
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setES(0x23);
+    c_setSP(0x800);c_setDI(0x7fff);c_setDX(0x80);c_setIOPL(0);c_setIP(0x1000);
+    ZeroMemory(c_GetPhyAdd(0x4000),0x2000);*(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
+    for(i=0;i<512;i++)pte[i]=(i<<12)|7;pte[8]=second|7;
+    *c_GetPhyAdd(0x7fff)=0;*c_GetPhyAdd(second)=0;c_setCR3(0x4000);c_setPG(1);
+    io_reads=string_reads=string_word_direct=test_fault=0;VdmInstallFaultHandler((void *)test_sti_fault);
+    handled=host_exint_hook(13,0);VdmInstallFaultHandler(NULL);c_setPG(0);
+    return handled && !test_fault && string_reads==1 && io_reads==1 &&
+        string_word_direct==(test_case==61) && *c_GetPhyAdd(0x7fff)==0xa5 &&
+        *c_GetPhyAdd(second)==0x6b && c_getDI()==0x8001 && c_getEIP()==0x1001;
 }
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
@@ -403,8 +428,9 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==49) ok=duplicate_tlb_mapping();
+    else if(test_case==60 || test_case==61) ok=protected_split_word_string();
     else if ((test_case>=10 && test_case<=14) || test_case==19 || test_case==28 || (test_case>=31 && test_case<=48) || test_case==50 || test_case==51 || test_case==53 || test_case==54 || test_case==55 || test_case==56 || test_case==57 || test_case==58) ok=protected_scalar_io();
-    else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52) ok=protected_string_reverse_baseline();
+    else if (test_case==15 || (test_case>=21 && test_case<=25) || test_case==29 || test_case==52 || test_case==59) ok=protected_string_reverse_baseline();
     else if (test_case==16) ok=protected_concurrent_if();
     else if ((test_case>=0 && test_case<=7) || test_case==17 || test_case==18 || test_case==20 || test_case==26 || test_case==27 || test_case==30) ok=protected_pending_irq_observe();
     else return 5;

@@ -364,15 +364,15 @@ static BOOL monitor_lmsw_operand(ULONG ip, ULONG *cursor, UCHAR modrm, ULONG *va
     return TRUE;
 }
 
-/* Provisional unpaged string event, following NT4 EventVdmStringIo's
- * 16-bit count/index contract. Decline unsupported mappings before any I/O. */
+/* NT4 EventVdmStringIo's 16-bit count/index contract.
+ * Decline unsupported mappings before any I/O. */
 static BOOL monitor_string_io(UCHAR op)
 {
     extern unsigned long c_sas_memory_size(void);
     extern int c_sas_memory_type(unsigned long);
     extern unsigned char *c_GetPhyAdd(unsigned long);
     extern unsigned long SasWrapMask;
-    BOOL input=(op==0x6c || op==0x6d);
+    BOOL input=(op==0x6c || op==0x6d), direct;
     ULONG width=(op==0x6d || op==0x6f) ? 2 : 1;
     ULONG count=1, index=input ? getDI() : getSI();
     ULONG base=input ? getES_BASE() : getDS_BASE();
@@ -403,6 +403,10 @@ static BOOL monitor_string_io(UCHAR op)
     for(i=0;i<bytes;i+=0x1000UL-((address+i)&0xfffUL)) {
         if(!monitor_mark_access(address+i,input,mapping[i])) goto string_unhandled;
     }
+    /* The original monitor passes its guest pointer to the device.  Use
+     * that same live storage when the validated bytes are contiguous. */
+    direct=(bytes==1 || c_GetPhyAdd(mapping[1])==c_GetPhyAdd(mapping[0])+1);
+    if(direct) buffer=c_GetPhyAdd(mapping[0]);
     /* Match the original MONITOR IOS string dispatch, including its input
      * adapter lookup for both directions. */
     adapter=(unsigned char)Ios_in_adapter_table[getDX() & (PC_IO_MEM_SIZE-1)];
@@ -410,7 +414,7 @@ static BOOL monitor_string_io(UCHAR op)
     else if(input) Ios_insw_function[adapter](getDX(),(word *)buffer,(word)count);
     else if(width==1) Ios_outsb_function[adapter](getDX(),(half_word *)buffer,(word)count);
     else Ios_outsw_function[adapter](getDX(),(word *)buffer,(word)count);
-    if(input)for(i=0;i<bytes;i++)*c_GetPhyAdd(mapping[i])=buffer[i];
+    if(input && !direct)for(i=0;i<bytes;i++)*c_GetPhyAdd(mapping[i])=buffer[i];
     index=(USHORT)(getDF() ? index-bytes : index+bytes);
     if(input)setDI(index);else setSI(index);
     return TRUE;

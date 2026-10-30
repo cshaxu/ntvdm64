@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "result": "pass",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/string-direct-package/package",
+  "utc": "2026-10-30T20:35:40.0816264Z",
+  "count": 20
+}
