@@ -1,6 +1,10 @@
 # S11 protected software-interrupt frame candidate
 
-Status: candidate verified against the isolated ten-component package; publication pending.
+Status: published as a tested partial baseline, not S11 closure. Source
+commit `f1a641bd7`; the isolated candidate was published to both release
+destinations with all 20 hashes verified. The installed `run16 cmd /c ver`
+smoke exited successfully; see [publication](s11-swint-frame-evidence/publication.json)
+and [installed smoke](s11-swint-frame-evidence/installed-smoke.txt).
 
 The final candidate passed the 16 Full gates, the 105-case CCPU boundary
 suite, Winmine/SOL/WRITE and four SOL Options cycles, and Win3.1 standard

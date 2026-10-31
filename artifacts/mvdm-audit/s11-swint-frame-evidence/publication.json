@@ -1,0 +1,10 @@
+{
+  "result": "pass",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/swint-final-package",
+  "count": 20,
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-31T06:10:44.8820233Z"
+}
