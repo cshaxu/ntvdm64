@@ -206,6 +206,24 @@ next owner. This establishes where the existing projected client view changes;
 it does not establish that this is the only possible CPU-state switch point
 or justify saving debug state there without checking nested execution and
 original task semantics.
+`wow_user_task_lifecycle_init` allocates a zero-initialized per-task carrier,
+links it and sets its thread context before original `xxxInitTask`; failed
+initialization unlinks and frees it. In the selected taskman,
+`ExitWowCritSect` is reached from removal and sleep paths, while scheduler
+wake and the queue path enter via `EnterWowCritSect`. The task carrier has no
+debug-register member. This is a candidate lifetime location, not a complete
+implementation design: initial boot state, nested callbacks, unregistered
+CCPU use, debugger interactions and failure/terminal paths still need a
+single coherent owner before a per-task copy can be introduced.
+There is also an independently reachable original DPMI debug-service route:
+`dpmi32.c` dispatches BOP index `0e` to `DpmiSetDebugRegisters`, which reads
+six guest-supplied values and calls the selected `ThreadSetDebugContext`.
+The project CCPU40 provider applies them through original `MOV_DR` for
+DR0--DR3, DR6 and DR7. The retained DOSX source calls this service from its
+debug-register operations; this is not evidence that WOW taskman calls it at
+every task switch. Any future scheduling adaptation must account for this
+existing writer and debugger ownership rather than treating monitor MOV-DR as
+the only source of changes.
 
 ## Instruction-fetch page-access accounting
 
