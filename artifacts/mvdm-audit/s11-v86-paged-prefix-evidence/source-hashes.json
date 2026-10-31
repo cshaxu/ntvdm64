@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\dpmiint.c",
+    "Hash": "B7E6189003ED0FAE5D76F2A7F5DC91970587B6953F6310C5559AEC65A0A2DD4B"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "Hash": "DAEA02BBE16712A89B9C57CE0A2FD6706943D93D0DD497F46D02D1A749CC1760"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+    "Hash": "F423EE15CDC2A813C055070DA940ECB9BBCFA739A96B58BBEAF3C9478AB4DBC7"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_monitor_boundary_fixture.c",
+    "Hash": "407818618E9CE43855CE67FE5D69F6576F98DA42ADA09C4E5AACFD4550E61B89"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\dpmi_swint_selected_fixture.c",
+    "Hash": "1E9B41E300FA5EA99732DC9F2D38928FDC869D6EEEAF997CF909BE14964A3B83"
+  }
+]

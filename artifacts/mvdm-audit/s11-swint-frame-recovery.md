@@ -1092,6 +1092,30 @@ already modified by parallel work and is not part of this runtime change;
 the [failure output](s11-v86-idt-candidate-evidence/governance-nonpass.txt)
 is retained. This is not counted as an S11 closure or a passing governance
 gate.
+
+Subsequent real CCPU paging controls found a regression in published DIV-491:
+when `26 CD 31` faults on either of two stack pages, the slow helper has
+already cleared CPU IF. A fixture fault handler repairs the mapping and lets
+CCPU retry; the resulting saved FLAGS is `3002` instead of the original
+`3202`. The [page-3 baseline](s11-v86-paged-prefix-evidence/baseline203.txt)
+and [page-2 baseline](s11-v86-paged-prefix-evidence/baseline204.txt) are
+controlled retry tests, not proof of the production DOSX fault outcome.
+The correction candidate restores the preceding fast ordering for paged
+prefixed cases and preserves the preceding paged operand-override fallback;
+cases 203–206 cover these boundaries. This is a regression containment,
+not a claim that NT4's slow fault/exception semantics are connected. The
+full original-path recovery remains required.
+
+The regression-containment candidate passed the 197-case CCPU suite, the
+16-gate Full product suite, the Winmine/SOL/WRITE and four-round SOL Options
+witnesses, and four Win3.1 mode/DOSONLY combinations. Source and all ten
+package hashes were unchanged through testing; 86 guest binaries were
+unchanged in both original and isolated trees. It was published to both
+destinations with 20 matching hashes. [Evidence](s11-v86-paged-prefix-evidence/).
+The published paging fallback is not treated as a complete original monitor.
+The documentation-governance gate was rerun and still rejects the separately
+modified S12 handoff's local path; its [output](s11-v86-paged-prefix-evidence/governance-nonpass.txt)
+is retained. S11 remains open.
 An additional PE-section comparison found the selected worker's `.text`,
 `.data`, detour sections and `.reloc` byte-identical to the tested sealed
 image; `.rdata` and `.rsrc` differ. See

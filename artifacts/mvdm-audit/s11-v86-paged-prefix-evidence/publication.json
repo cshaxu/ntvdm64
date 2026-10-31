@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-31T13:06:21.5235587Z",
+  "result": "pass",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-paged-retry-candidate-package",
+  "count": 20
+}

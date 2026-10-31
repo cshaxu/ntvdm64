@@ -3650,12 +3650,15 @@ TYPEC4:
          /* NT4's user-accessible IDT gates reflect these as exceptions. */
          if (!host_exint_hook((IS32)ops[0].sng, 0)) INTx(ops[0].sng);
       } else if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
-          /* The other user-accessible NT service gates have separate
-           * owners; retain the prior operand-override fallback for them. */
-          (GET_OPERAND_SIZE() != USE16 && ops[0].sng >= 0x2b && ops[0].sng <= 0x2e) ||
+          /* Preserve the previous paged and NT service-gate fallbacks.
+           * CCPU retries paged faults after a nonlocal exit; the NT slow
+           * handler's earlier flag commit cannot be replayed unchanged. */
+          (GET_OPERAND_SIZE() != USE16 &&
+           (GET_PG() || (ops[0].sng >= 0x2b && ops[0].sng <= 0x2e))) ||
           /* NT4's V86 INT 2Ah gate rewinds to CD before trap dispatch. */
           !host_v86_software_int((IS32)ops[0].sng,
-                                 length > 2 && !(ops[0].sng >= 0x2a && ops[0].sng <= 0x2e)))
+                                 length > 2 && !GET_PG() &&
+                                 !(ops[0].sng >= 0x2a && ops[0].sng <= 0x2e)))
 #endif
       INTx(ops[0].sng);
 #if defined(NTVDM) && defined(CPU_40_STYLE)

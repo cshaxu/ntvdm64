@@ -1,0 +1,2 @@
+V86_MAPPED_STACK pass=0 ip=0103 cs=0100 flags=3002 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=203 count=1 error=2 flags=23002 sp=1004 ip=100 partial=0/0/0
