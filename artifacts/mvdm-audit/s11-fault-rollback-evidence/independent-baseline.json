@@ -1,0 +1,17 @@
+[
+  {
+    "case": "--pm-fault-absent",
+    "exit": 1,
+    "output": "line 96: flags==0x3302 && sp==0x200 && ss==0x27 && cs==0x37 && ip==0x1234"
+  },
+  {
+    "case": "--pm-fault-first",
+    "exit": 1,
+    "output": "line 108: flags==0x3302 && sp==(depth ? 0x21u : 0x200u) && ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth\nDPMI_PM_FAULT_REJECT depth=0 flags=3002 ss=27 sp=200 count=0"
+  },
+  {
+    "case": "--pm-fault-nested",
+    "exit": 1,
+    "output": "line 108: flags==0x3302 && sp==(depth ? 0x21u : 0x200u) && ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth\nDPMI_PM_FAULT_REJECT depth=1 flags=3002 ss=17 sp=1 count=1"
+  }
+]

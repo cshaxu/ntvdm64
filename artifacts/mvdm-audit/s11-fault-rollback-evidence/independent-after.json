@@ -1,0 +1,17 @@
+[
+  {
+    "case": "--pm-fault-absent",
+    "exit": 0,
+    "output": "DPMI_PM_FAULT_CASE_OK --pm-fault-absent"
+  },
+  {
+    "case": "--pm-fault-first",
+    "exit": 0,
+    "output": "DPMI_PM_FAULT_REJECT depth=0 flags=3302 ss=27 sp=200 count=0\nDPMI_PM_FAULT_CASE_OK --pm-fault-first"
+  },
+  {
+    "case": "--pm-fault-nested",
+    "exit": 0,
+    "output": "DPMI_PM_FAULT_REJECT depth=1 flags=3302 ss=17 sp=21 count=1\nDPMI_PM_FAULT_CASE_OK --pm-fault-nested"
+  }
+]

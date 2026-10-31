@@ -13,6 +13,11 @@ handler and restores saved ESP and flags on failed frame construction for
 CPU40/CCPU protected mode. The [post-change object control](s11-fault-rollback-evidence/after.txt)
 covers absent handler, outermost failure and nested failure; the 125-case CCPU
 suite also passes. It does not prove all nested host faults or V86 fallback.
+Independent runs against the same pre-change object establish that all three
+controls fail separately: the outermost failure retains `flags=3002`, and the
+nested failure retains `flags=3002, ESP=1` instead of `3302, 21`. All three
+pass against the delivered object. See [old object](s11-fault-rollback-evidence/independent-baseline.json)
+and [delivered object](s11-fault-rollback-evidence/independent-after.json).
 The [candidate evidence](s11-fault-rollback-evidence/) records the coherent
 ten-image Full, application and Win3.1 runs, and unchanged guest hashes.
 The tested package was published to both destinations with all 20 hashes
