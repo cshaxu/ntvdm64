@@ -45,3 +45,9 @@ isolated trees were unchanged. Both release destinations were updated and all
 [s11-dpmi-mapped-code-evidence](s11-dpmi-mapped-code-evidence/). These product
 checks do not demonstrate that any guest executed the mapped decoder path or
 close the boundaries above. Mirror exception: MVDM-HOST-DIV-488.
+
+The refreshed mirror ledger classifies both changed source files as partial:
+`dpmi32/dpmiint.c` retains an estimated 97.97% of original code lines and
+`softpc.new/host/src/sim32.c` 99.31%. These are textual matching estimates,
+not execution coverage. The C/H inventory check found no unlisted differences
+or stale estimates; role-pending entries remain unresolved as before.
