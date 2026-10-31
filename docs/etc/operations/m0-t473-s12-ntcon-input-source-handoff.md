@@ -1,10 +1,18 @@
 # T473 planned S12: NTCON input-source handoff
 
 The owner inserts this stage after S11; it is planned, not the active S.
-The former S12–S19 become S13–S20. S11 and the remaining T objective retain
+With the later insertion of WINMINE display repair as S13, the former
+S12–S19 scopes become S14–S21. S11 and the remaining T objective retain
 their existing scope. Admit this packet in CURRENT only after S11 concludes.
 
 ## Observed problem and evidence
+
+Owner-reported additional issue: using the installed Win3.1 `PATCH/WIN386.CMD`, open the
+MS-DOS Prompt in a window and press Alt+Enter. The shortcut has no visible
+effect and the system appears to hang. This is a manual observation; neither
+the apparent hang nor its root cause has yet been independently verified.
+Investigate this alongside CAF without assuming that the two have the same
+cause or changing the installed guest.
 
 In one DOS worker, `run16 command` → Ctrl+Alt+F (CAF) → CAF → CAF can leave
 keyboard input ineffective on the second entry to Window. The equivalent
@@ -71,6 +79,13 @@ As read-only design comparisons, inspect the current SoftPC implementations:
 these are not runtime dependencies or evidence that every upstream timing has
 been validated.
 
+Trace Alt+Enter from the Win3.1 MS-DOS Prompt through its guest, keyboard,
+display and host boundaries against the original implementation. Determine
+whether the apparent hang is a guest, worker, frontend or display transition
+failure before selecting a fix. Preserve the intended shortcut semantics and
+ordinary Alt/Enter input; do not assume it is equivalent to CAF or add a
+guest-specific shortcut workaround.
+
 ## Required validation and delivery
 
 Use isolated, test-owned processes/desktops and probes; no computer use.
@@ -85,6 +100,13 @@ independent Ctrl and Alt, left/right modifiers and focus loss. Cover ordinary
 Ctrl+C, Ctrl+letter, Alt combinations, held normal keys, repeats, ordinary and
 mouse input. Verify late and reordered events, unconsumed queues, Peek,
 prepend / ReturnUnusedKeyEvents, owner handoff, exit and error rollback.
+
+Using a test-owned copy of the same Win3.1 installation and the actual
+`win386.cmd` launch path, reproduce the windowed MS-DOS Prompt Alt+Enter
+observation on the identified baseline, distinguish lack of visual response
+from loss of system progress, and verify the corrected transition and return
+path. Record the tested binary identities and separate simulated-input
+evidence from physical-keyboard acceptance; preserve original guest binaries.
 
 Complete the repository-required build, appropriate full and focused gates,
 coherent publication, review, commit and push. Report unexecuted physical or

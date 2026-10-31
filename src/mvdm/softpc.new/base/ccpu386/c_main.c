@@ -3631,7 +3631,7 @@ TYPEC4:
       if ( GET_VM() == 1 && GET_CPL() > GET_IOPL() )
 	 {
 #if defined(NTVDM) && defined(CPU_40_STYLE)
-         /* NT4's V86 monitor handles the unprefixed, unpaged fast path.
+         /* NT4's V86 monitor handles the unpaged fast and slow paths.
           * A declined handler retains the existing GP route. */
          if (!GET_PG() && !v86_int_unsafe_prefix) {
             extern BOOL host_v86_software_int_at(IS32, BOOL, IU16);
@@ -3641,8 +3641,8 @@ TYPEC4:
             next_ip = (IU16)GET_EIP();
             length = (IU16)(GET_EIP() - CCPU_save_EIP);
             SET_EIP(CCPU_save_EIP);
-            if (length == 2 &&
-                host_v86_software_int_at((IS32)ops[0].sng, FALSE, next_ip)) {
+            if (length >= 2 && length <= 15 &&
+                host_v86_software_int_at((IS32)ops[0].sng, length > 2, next_ip)) {
                took_absolute_toc = TRUE;
                start_trap = 0;
                CANCEL_HOST_IP();

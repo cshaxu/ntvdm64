@@ -17,11 +17,12 @@ internal repair, without excluding a genuinely missing original connection.
 
 Stage-number clarification: this worklist retains its historical labels. The
 [current approved stage plan](../../docs/etc/operations/m0-t473-whole-recovery-stage-plan.md)
-inserts NTCON input-source work as S12, so the former S12 through S19 labels
-below map to current S13 through S20 respectively; S11 is unchanged. Thus the
-DPMI/XMS allocator and DEM service follow-ups below belong to current S13,
-not the inserted NTCON S12. This is a numbering crosswalk, not a transfer of
-any unfinished capability out of the T or permission to defer an S11 defect.
+inserts NTCON input-source work as S12 and WINMINE display repair as S13, so
+the former S12 through S19 labels below map to current S14 through S21
+respectively; S11 is unchanged. Thus the DPMI/XMS allocator and DEM service
+follow-ups below belong to current S14, not either inserted stage. This is a
+numbering crosswalk, not a transfer of any unfinished capability out of the
+T or permission to defer an S11 defect.
 
 The [DEM pipe-status observation](host-ch-scope/dem-pipe-status-review.md) records a comment whose ZF description is reversed relative to both the selected handler and the original guest branch. S12 must verify actual pipe state, synchronization and retirement before adjusting the comment or claiming integrated behavior; controlled seams alone are not a guest test.
 

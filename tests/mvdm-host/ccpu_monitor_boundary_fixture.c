@@ -1174,25 +1174,33 @@ static BOOL v86_low_int_gp_probe(ULONG vector, ULONG error) {
 /* Exercise the selected DPMI owner and the declined-owner #GP fallback. */
 static int v86_low_int_gp_observe(void) {
     const unsigned char code[]={0xcd,0x31,0xd6,0xfe};
-    const unsigned char prefixed[]={0x26,0xcd,0x31,0xd6,0xfe};
+    unsigned char prefixed[]={0x26,0xcd,0x31,0xd6,0xfe};
     const unsigned char stop[]={0xbb,0xef,0xbe,0xd6,0xfe};
     extern BOOL DpmiSwIntHandler(ULONG);
-    BOOL ok, enabled=test_case<247, declined=test_case>=238 && test_case<=246; ULONG flags; char line[120];
-    c_cpu_init(); InitializeIcaLock(); c_setPE(1); c_setVM(1); c_setCPL(3); c_setIOPL((test_case-235)%3);
+    BOOL ok, enabled=test_case<247 || (test_case>=250 && test_case<=276), declined=test_case>=238 && test_case<=243;
+    BOOL has_prefix=(test_case>=244 && test_case<=246) || test_case>=250;
+    unsigned vector=test_case>=262 && test_case<=276 ? 0x2a+(test_case-262)/3 : 0x31;
+    ULONG flags; char line[120];
+    c_cpu_init(); InitializeIcaLock(); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setIOPL(test_case>=262 && test_case<=276 ? (test_case-262)%3 : (test_case-235)%3);
     c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100); c_setIF(enabled); c_setBX(0);
     flags=c_getEFLAGS(); *(ULONG *)c_GetPhyAdd(0x714)=enabled ? 0xa203 : 0xa003;
-    if(test_case>=244 && test_case<=246) CopyMemory(c_GetPhyAdd(0x1100),prefixed,sizeof(prefixed));
+    if(test_case>=277) prefixed[0]=0x26;
+    else if(test_case>=262) prefixed[0]=0x66;
+    else if(test_case>=250) { const unsigned char prefixes[]={0x66,0x67,0xf2,0xf3}; prefixed[0]=prefixes[(test_case-250)/3]; }
+    prefixed[2]=(unsigned char)vector;
+    if(has_prefix) CopyMemory(c_GetPhyAdd(0x1100),prefixed,sizeof(prefixed));
     else CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
     CopyMemory(c_GetPhyAdd(0x3456),stop,sizeof(stop));
-    *(USHORT *)c_GetPhyAdd(0x31*4)=0x456; *(USHORT *)c_GetPhyAdd(0x31*4+2)=0x300;
-    DpmiInterruptHandlers[0x31].flags=(test_case>=241 && test_case<=243) ? 4 : 0;
+    *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
+    DpmiInterruptHandlers[vector].flags=(test_case>=241 && test_case<=243) ? 4 : 0;
     test_irq=0; test_fault=0;
     VdmInstallSoftwareIntHandler((void *)((test_case>=238 && test_case<=240) ? swint_origin_probe : DpmiSwIntHandler));
     VdmInstallFaultHandler((void *)v86_low_int_gp_probe);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
     ok=c_getBX()==0xbeef && test_irq==0 && (declined ?
        (test_fault==1 && v86_low_gp_ip==0x100 && c_getSP()==0x800 && *(ULONG *)c_GetPhyAdd(0x714)==0xa203) :
-       (test_fault==0 && c_getSP()==0x7fa && *(USHORT *)c_GetPhyAdd(0x27fa)==0x102 &&
+       (test_fault==0 && c_getSP()==0x7fa && *(USHORT *)c_GetPhyAdd(0x27fa)==(has_prefix ? 0x103 : 0x102) &&
         *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 && *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)(flags|0x3000) &&
         !(c_getEFLAGS()&0x200) && *(ULONG *)c_GetPhyAdd(0x714)==0xa003));
     wsprintfA(line,"V86_LOW_INT case=%d pass=%d gp=%lu sw=%lu sp=%x\n",
@@ -1551,7 +1559,7 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case>=235 && test_case<=249) ok=v86_low_int_gp_observe();
+    if(test_case>=235 && test_case<=279) ok=v86_low_int_gp_observe();
     else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=213 && test_case<=216) ok=v86_missing_exception_owner();
     else if(test_case==211 || test_case==212) ok=v86_declining_exception_owner();

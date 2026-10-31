@@ -85,6 +85,16 @@ application tests and four Win3.1 combinations passed; 86 tracked guest
 binary hashes remained unchanged. The tested ten-component package was
 published to both targets with 20 matching hashes. [Evidence](s11-v86-low-int-evidence/).
 
+The next, unpublished candidate extends unpaged low-IOPL dispatch to admitted
+prefixes. Unlike the direct-IOPL gate path, the CPU first takes #GP here, so
+the NT4 `OpcodeINTnnV86` slow dispatcher applies to prefixed 2Ah–2Eh as well;
+the candidate does not reuse the high-IOPL service-gate shortcut. Selected
+CCPU controls cover IOPL 0–2, segment/address/operand/REP prefixes and each
+2Ah–2Eh vector; a separately linked pre-change baseline declines the segment
+prefix. The slow path's four memory-access failures are mocked to check the
+fixed IF, stack, flags and EIP sequence; these do not prove actual host fault
+delivery. Paged, hooked and non-DPMI routes remain separately unproved.
+
 The one-byte INT3 and taken INTO dispatchers previously required IOPL 3
 before calling the now IOPL-independent unpaged exception owner. Removing
 that guard reconnects the owner at IOPL 0–2; `CD` software interrupts retain

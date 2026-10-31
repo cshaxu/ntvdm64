@@ -81,7 +81,7 @@ runtime: the owner clarified boundary-recovery scope.
 | Verification | Cached coherent builds, focused normal/failure/retirement tests, relevant immutable-guest integration and required Full gates; bind each result to exact built package. |
 | Expected Markers | Reproducible witnesses and disposition for each admitted owner group; performance optimization is queued, while correctness failures remain in scope. |
 | Asset Needs | Original sources, captured build graphs, isolated package, probes and immutable guest inputs; no guest rebuild. |
-| Reporting Requirements | Each change, original owner, mirror diff, evidence, failures and finite S14/S15 handoff; preserve unresolved external Win95 tooling. |
+| Reporting Requirements | Each change, original owner, mirror diff, evidence, failures and finite S15/S16 handoff; preserve unresolved external Win95 tooling. |
 | Stop Conditions | Guest change, inaccessible original source, private host-layout assumptions or an unapproved observable semantic concession. |
 | Exit Criteria | S11 foundation groups reconciled and verified with coherent publication and required reviews; any allowed boundary recorded, not inferred from compilation. |
 | Original Owner Request | Reconnect feasible original MVDM capabilities, audit/repair in dependency order, then complete product-wide validation and delivery. |

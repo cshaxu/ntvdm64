@@ -547,7 +547,7 @@ BOOL DpmiV86SoftwareIntAt(ULONG IntNumber, BOOL Prefixed, USHORT ReturnIP)
     ULONG StackBase;
     USHORT Sp, TargetIp, TargetCs;
     BOOL LowIopl = (Flags & 0x3000) != 0x3000;
-    if (!(Flags & EFLAGS_VM_MASK) || (LowIopl && (Prefixed || (getCR0() & 0x80000000UL))) ||
+    if (!(Flags & EFLAGS_VM_MASK) || (LowIopl && (getCR0() & 0x80000000UL)) ||
         (DpmiInterruptHandlers[IntNumber].Flags & VDM_INT_HOOKED))
         return FALSE;
     if (Prefixed) {
@@ -555,8 +555,13 @@ BOOL DpmiV86SoftwareIntAt(ULONG IntNumber, BOOL Prefixed, USHORT ReturnIP)
          * SP, then reads the IVT. Preserve this order on partial failure. */
         StackBase = (ULONG)getSS() << 4;
         Sp = getSP();
+        if (LowIopl) {
+            extern void __cdecl host_cpu40_set_virtual_if(BOOL Enabled);
+            host_cpu40_set_virtual_if(FALSE);
+            setIF(0);
+        }
         setEFLAGS(Flags & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
-        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, (USHORT)Flags);
+        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, (USHORT)(Flags | (LowIopl ? 0x3000 : 0)));
         Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, getCS());
         Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, ReturnIP);
         setSP(Sp);

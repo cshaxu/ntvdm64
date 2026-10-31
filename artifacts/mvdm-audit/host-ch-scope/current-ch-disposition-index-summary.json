@@ -15,6 +15,6 @@
   "scoped_guest_exclusion_rows": 195,
   "index_sha256": "769D7BB92D9E2ACF612ED6A1B807C7733F60A8321C782F216730154B626F1B0F",
   "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
-  "retention_sha256": "4E611324C67C444CF89615A660B64122EBD81A6AD35B91B36A3421A84A7438CD",
+  "retention_sha256": "23A73C96214E962ECD45670CE19D34FEC21F6A1D6D9953F3576D0C0C0C624844",
   "limitations": "source-role decisions for recorded selected profiles, not runtime capability; guest-target exclusions are host-source only; retention is textual estimate"
 }

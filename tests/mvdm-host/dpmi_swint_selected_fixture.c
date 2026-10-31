@@ -252,6 +252,22 @@ int main(int argc, char **argv){
     puts("DPMI_V86_LOW_INT_ACCESS_FAILURE_OK stages=4 mocked=1");
     return 0;
   }
+  if(argc==2 && strcmp(argv[1],"--v86-low-prefix-access-failure")==0) {
+    for(mode=1;mode<=4;++mode) {
+      mock_cr0=0; flags=0x20302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
+      *(ULONG *)(memory+0x714)=0xa203; DpmiInterruptHandlers[0x31].Flags=0;
+      *(USHORT *)(memory+0x1fe)=0xaaaa; *(USHORT *)(memory+0x1fc)=0xbbbb;
+      *(USHORT *)(memory+0x1fa)=0xcccc; v86_order_count=0; v86_fail_at=mode;
+      if(setjmp(v86_failure)==0) { (void)DpmiV86SoftwareIntAt(0x31,TRUE,0x1237); CHECK(0); }
+      CHECK(v86_order_count==mode && sp==(mode==4 ? 0x1fa : 0x200) && cs==0x27 && ip==0x1234);
+      CHECK(flags==0x20002u && *(ULONG *)(memory+0x714)==0xa003u);
+      CHECK(*(USHORT *)(memory+0x1fe)==(mode>1 ? 0x3302 : 0xaaaa));
+      CHECK(*(USHORT *)(memory+0x1fc)==(mode>2 ? 0x27 : 0xbbbb));
+      CHECK(*(USHORT *)(memory+0x1fa)==(mode>3 ? 0x1237 : 0xcccc));
+    }
+    puts("DPMI_V86_LOW_PREFIX_ACCESS_FAILURE_OK stages=4 mocked=1");
+    return 0;
+  }
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && targets==0 && flags==0x4321);
   descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=15;
   CHECK(DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==1 && dispatches==1);
@@ -271,6 +287,7 @@ int main(int argc, char **argv){
   DpmiInterruptHandlers[0x31].Flags=4;
   CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x23202);
+  mock_cr0=0x80000000u;
   DpmiInterruptHandlers[0x31].Flags=0; flags=0x20202;
   CHECK(!DpmiV86SoftwareInt(0x31, TRUE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x20202);
@@ -278,6 +295,7 @@ int main(int argc, char **argv){
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x21202);
   flags=0x22202; CHECK(!DpmiV86SoftwareInt(0x31, TRUE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x22202);
+  mock_cr0=0;
   flags=0x3202; CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x3202);
   CHECK(v86_reads==1 && v86_writes==3);
