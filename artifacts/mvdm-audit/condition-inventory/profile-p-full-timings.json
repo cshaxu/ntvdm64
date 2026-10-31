@@ -1,104 +1,104 @@
 {
   "Suite": "Full",
-  "ElapsedMs": 368192,
+  "ElapsedMs": 390621,
   "InputPolicy": "Observed",
   "WindowOwnedConsole": false,
-  "PreparationMs": 6667,
+  "PreparationMs": 6354,
   "Gates": [
     {
       "Gate": "guest-media",
-      "ElapsedMs": 1043,
-      "CleanupMs": 627,
+      "ElapsedMs": 1072,
+      "CleanupMs": 642,
       "Passed": true
     },
     {
       "Gate": "ntvdm-export-ordinals",
-      "ElapsedMs": 183,
-      "CleanupMs": 553,
+      "ElapsedMs": 210,
+      "CleanupMs": 562,
       "Passed": true
     },
     {
       "Gate": "wow-frontiers",
-      "ElapsedMs": 68169,
-      "CleanupMs": 547,
+      "ElapsedMs": 68540,
+      "CleanupMs": 587,
       "Passed": true
     },
     {
       "Gate": "Console-17",
-      "ElapsedMs": 46222,
-      "CleanupMs": 619,
+      "ElapsedMs": 48054,
+      "CleanupMs": 557,
       "Passed": true
     },
     {
       "Gate": "Window-17",
-      "ElapsedMs": 43922,
-      "CleanupMs": 595,
+      "ElapsedMs": 45214,
+      "CleanupMs": 548,
       "Passed": true
     },
     {
       "Gate": "rpc",
-      "ElapsedMs": 14158,
-      "CleanupMs": 570,
+      "ElapsedMs": 14469,
+      "CleanupMs": 538,
       "Passed": true
     },
     {
       "Gate": "native-gui",
-      "ElapsedMs": 10361,
-      "CleanupMs": 584,
+      "ElapsedMs": 10326,
+      "CleanupMs": 508,
       "Passed": true
     },
     {
       "Gate": "version-negatives",
-      "ElapsedMs": 62370,
-      "CleanupMs": 499,
+      "ElapsedMs": 76624,
+      "CleanupMs": 712,
       "Passed": true
     },
     {
       "Gate": "strict-dir",
-      "ElapsedMs": 12446,
-      "CleanupMs": 563,
+      "ElapsedMs": 12759,
+      "CleanupMs": 636,
       "Passed": true
     },
     {
       "Gate": "modern-edit-return",
-      "ElapsedMs": 28375,
-      "CleanupMs": 564,
+      "ElapsedMs": 31830,
+      "CleanupMs": 549,
       "Passed": true
     },
     {
       "Gate": "cooked-return",
-      "ElapsedMs": 30674,
-      "CleanupMs": 558,
+      "ElapsedMs": 30171,
+      "CleanupMs": 537,
       "Passed": true
     },
     {
       "Gate": "rapid-relaunch",
-      "ElapsedMs": 3787,
-      "CleanupMs": 566,
+      "ElapsedMs": 3858,
+      "CleanupMs": 535,
       "Passed": true
     },
     {
       "Gate": "interactive-relaunch",
-      "ElapsedMs": 7762,
-      "CleanupMs": 482,
+      "ElapsedMs": 7719,
+      "CleanupMs": 551,
       "Passed": true
     },
     {
       "Gate": "session-isolation",
-      "ElapsedMs": 10298,
-      "CleanupMs": 520,
+      "ElapsedMs": 10108,
+      "CleanupMs": 589,
       "Passed": true
     },
     {
       "Gate": "retirement-wiring",
-      "ElapsedMs": 4834,
-      "CleanupMs": 525,
+      "ElapsedMs": 5042,
+      "CleanupMs": 544,
       "Passed": true
     },
     {
       "Gate": "nested-window-handoff",
-      "ElapsedMs": 6255,
-      "CleanupMs": 486,
+      "ElapsedMs": 7288,
+      "CleanupMs": 611,
       "Passed": true
     }
   ]

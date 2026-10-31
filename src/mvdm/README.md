@@ -1,5 +1,21 @@
 # mvdm
 
+MVDM-HOST-DIV-479 (published): retain the selected standard-C branches in
+`softpc.new/base/inc/base_def.h`, `softpc.new/base/inc/xt.h` and
+`softpc.new/host/inc/insignia.h`; omit their pre-ANSI alternatives and the
+`#undef ANSI` in `softpc.new/host/src/stubs.c`. Under the selected product
+profile the stub's instruction and relocation outputs match the original;
+the changed-file budget is four original files, with no replacement behavior.
+Keeping `ANSI` in every authored consumer retains the unwanted build-profile
+coupling; copying headers would duplicate their interface. Positive evidence:
+the prior selected declarations and ten affected adapter preprocess outputs
+match after removing line markers; the stub's selected machine instructions
+and relocations match. Negative control: deleting old header branches while
+retaining the stub's `#undef ANSI` fails to compile. Pre-ANSI configurations
+are deliberately excluded. The 16-gate Full suite and Win3.1 Standard/386
+Enhanced by DOSONLY matrix passed on the published candidate; see
+`../../artifacts/mvdm-audit/condition-inventory/README.md` for limits.
+
 MVDM-HOST-DIV-468, held outside current boundary recovery: free the unpublished NIDDB pointer
 table when a per-instance allocation fails, after freeing its data blocks.
 Controlled allocation-failure comparisons are recorded in

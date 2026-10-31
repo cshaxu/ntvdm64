@@ -121,17 +121,10 @@ extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */
  * External function declarations.
  */
  
-#ifdef ANSI
-extern void applInit(int, char *[]);
+extern void applInit(int, char *[]); /* DIVERGENCE(MVDM-HOST-DIV-479): selected standard-C branch. */
 extern void applClose(void);
 extern void terminate(void);
 extern void host_terminate(void);
-#else
-extern void applInit();
-extern void applClose();
-extern void terminate();
-extern void host_terminate();
-#endif /* ANSI */
 
 #ifdef SPC386
 extern IBOOL CsIsBig IPT1(IU16, csVal);	/* is this a 32 bit code segment? */

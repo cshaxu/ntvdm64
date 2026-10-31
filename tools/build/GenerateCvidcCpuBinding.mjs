@@ -59,10 +59,13 @@ const text = [
   emit('MVDM_CVIDC_CPU_PRIVATE_SLOTS', slots.CpuPrivateVectorNames, privateSpecial),
 ].join('');
 fs.mkdirSync(path.dirname(output), { recursive: true });
-if (!fs.existsSync(output) || fs.readFileSync(output, 'utf8') !== text) fs.writeFileSync(output, text);
+const writeChanged = (file, content) => {
+  if (!fs.existsSync(file) || fs.readFileSync(file, 'utf8') !== content) fs.writeFileSync(file, content);
+};
+writeChanged(output, text);
 const providersOutput = path.join(path.dirname(output), 'cvidc_selected_providers.inc');
 const providersText = '/* Original selected CPU/SAS declarations; generated, do not edit. */\n' + sasEnum + '\n#include "sas4gen.h"\n' + cpuDeclarations.join('\n') + '\n';
-if (!fs.existsSync(providersOutput) || fs.readFileSync(providersOutput, 'utf8') !== providersText) fs.writeFileSync(providersOutput, providersText);
+writeChanged(providersOutput, providersText);
 // Text presentation consumes the original selected V7 declarations. Emit
 // source-derived subsets so the authored adapter needs no device profile.
 for (const [name, input] of [
@@ -79,7 +82,7 @@ for (const [name, input] of [
   });
   if (count !== 2) throw new Error(`Unexpected V7 condition count in ${input}: ${count}`);
   const destination = path.join(path.dirname(output), `text_video_${name}.h`);
-  if (!fs.existsSync(destination) || fs.readFileSync(destination, 'utf8') !== selected) fs.writeFileSync(destination, selected);
+  writeChanged(destination, selected);
 }
 const graphics = fs.readFileSync(path.join(sourceRoot, 'inc', 'gfx_upd.h'), 'utf8');
 const graphicsPrefix = graphics.match(/^[\s\S]*?}\s*UPDATE_ALG\s*;/)?.[0];
@@ -87,7 +90,7 @@ const ports = fs.readFileSync(path.join(sourceRoot, 'inc', 'egaports.h'), 'utf8'
 const selectedPlane = ports.match(/#ifdef[ \t]+V7VGA[\s\S]*?^(#define[ \t]+EGA_PLANE_SIZE[ \t]+[^\r\n]+)/m)?.[1];
 if (!selectedPlane) throw new Error('Original V7 plane size changed');
 const planeOutput = path.join(path.dirname(output), 'v7_selected_plane.h');
-if (!fs.existsSync(planeOutput) || fs.readFileSync(planeOutput, 'utf8') !== selectedPlane + '\n') fs.writeFileSync(planeOutput, selectedPlane + '\n');
+writeChanged(planeOutput, selectedPlane + '\n');
 const selectedPorts = [
   /^\s*extern\s+byte\s*\*EGA_planes\s*;/gm,
   /^\s*#define\s+FONT_BASE_ADDR\s+[^\r\n]+/gm,
@@ -100,7 +103,7 @@ const selectedPorts = [
 if (!graphicsPrefix) throw new Error('Original VGA update interface changed');
 const textGraphicsOutput = path.join(path.dirname(output), 'text_video_gfx.h');
 const textGraphics = graphicsPrefix + '\nextern UPDATE_ALG update_alg;\n' + selectedPorts.join('\n') + '\n';
-if (!fs.existsSync(textGraphicsOutput) || fs.readFileSync(textGraphicsOutput, 'utf8') !== textGraphics) fs.writeFileSync(textGraphicsOutput, textGraphics);
+writeChanged(textGraphicsOutput, textGraphics);
 const casesOutput = path.join(path.dirname(output), 'cvidc_accessor_cases.inc');
 const casesText = '/* Test offsets extracted from original generated setters, not vglob field layout. */\n' + videoCases.join('\n') + '\n';
-if (!fs.existsSync(casesOutput) || fs.readFileSync(casesOutput, 'utf8') !== casesText) fs.writeFileSync(casesOutput, casesText);
+writeChanged(casesOutput, casesText);

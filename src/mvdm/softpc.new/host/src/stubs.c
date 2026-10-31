@@ -1,5 +1,4 @@
-#undef ANSI     // until file tidied or better still, lost
-
+/* DIVERGENCE(MVDM-HOST-DIV-479): retain the selected standard-C profile. */
 #include <windows.h>
 #include <string.h>
 #include <math.h>

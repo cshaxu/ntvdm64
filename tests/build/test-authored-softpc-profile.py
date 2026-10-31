@@ -5,7 +5,7 @@ import subprocess
 
 
 ROOT = Path(__file__).resolve().parents[2]
-FLAGS = {"CCPU", "CPU_40_STYLE", "NEW_CPU", "C_VID", "SPC386", "SIM32", "V7VGA", "PROD"}
+FLAGS = {"CCPU", "CPU_40_STYLE", "NEW_CPU", "C_VID", "SPC386", "SIM32", "V7VGA", "PROD", "NTVDM", "ANSI"}
 SOURCE_FLAGS = FLAGS | {"CPU_PRIVATE"}
 ORIGINAL_ROOTS = ("src/mvdm/", "src/opennt-host/", "src/opennt-abi/source/")
 

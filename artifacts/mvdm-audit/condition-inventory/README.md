@@ -86,10 +86,32 @@ The candidate retains it for the authored event-thread caller and its
 implementation, rather than handing it to every adapter.
 `MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION` selects the original host bootstrap's
 no-host-mutation branch in `nt_msscs.c`; it is not an adapter profile.
-`ANSI` is retained pending separate review. In the original SoftPC
-`base_def.h` and `insignia.h` it selects modern C prototypes and `const`, not
-just character encoding; removing it blindly would change declarations. This
-does not imply CPU40 or V7 flags are required by an authored consumer.
+In the original SoftPC headers `ANSI` selects standard-C prototypes and
+`const`, not just character encoding. The original `stubs.c` undefines it;
+compiling a candidate with that undefinition removed produced identical
+instructions and relocations for the selected object, with source-path debug
+metadata differing. Three headers now retain the standard-C branch and omit
+the old branch, and the selected stub keeps `ANSI`; see MVDM-HOST-DIV-479.
+The ten affected NTVDM adapters matched previous preprocessed content after
+removing line markers and blank lines; 51 others were byte-identical already.
+The 71 actual authored WOW adapter compile commands produce byte-identical
+preprocessed output without `ANSI`: see [comparison](adapter-remaining-flags.csv).
+The authored WOW build no longer defines it; the original WOW source profile
+and original USER Unicode selection remain unchanged. Authored NTVDM units
+likewise no longer define it. The published candidate passed the Full suite
+and Win3.1 mode matrix linked above.
+For `NTVDM`, all 71 WOW and 60 of 61 NTVDM adapter commands were identical
+without the command-line flag. The remaining keyboard reset unit included
+configuration-sensitive PIC headers for two functions; it now declares those
+original functions' exact signatures instead. The comparison
+records the pre-change results; original-source compile flags remain intact.
+MSVC disassembly of the keyboard reset object before and after the dependency
+change differs only in the dump's input filename.
+After adding local divergence comments without changing line counts, a rebuild
+of NTVDM was compared after applying the candidate's package identity. All
+bytes match the previously built candidate except the PE COFF timestamp and
+the matching timestamp in its debug-directory entry. The WOW32 build input
+hash is identical. The sealed earlier candidate remains the tested package.
 
 The V7 pointer binding uses the selected original declarations from
 `egaports.h` and `gfx_upd.h`, including the original 0x20000-byte plane size,

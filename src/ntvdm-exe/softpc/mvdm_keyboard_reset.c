@@ -1,6 +1,4 @@
 #include "insignia.h"
-#include "ica.h"
-#include "nt_eoi.h"
 #include "include/mvdm_keyboard_history.h"
 
 /* The original reset clears the 8042 queue but leaves a pending host IRQ.
@@ -8,6 +6,8 @@
  * DOS command. The standalone host owns the delayed IRQ and PIC carrier. */
 extern int output_full;
 extern mvdm_keyboard_history nt_keyboard_history;
+extern BOOL host_DelayHwInterrupt(int irq_line, int call_count, ULONG delay);
+extern void ica_hw_interrupt_cancel(IU32 adapter, IU32 line_no);
 
 enum { MVDM_MASTER_PIC = 0, MVDM_KEYBOARD_IRQ = 1 };
 

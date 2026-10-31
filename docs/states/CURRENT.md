@@ -7,7 +7,7 @@
 Owner additionally directs an in-scope P to isolate authored components from
 historical MVDM conditional compilation and remove confirmed excluded paths;
 audit per translation unit and preserve selected CCPU and shared interfaces.
-The published P removes CPU profile flags from selected authored units;
+The published P removes CPU profile, NTVDM and ANSI flags from authored units;
 134 CCPU and focused input tests pass. The shutdown fixture passes in the
 product test environment; restricted-environment invalid-handle behavior differs.
 See [condition inventory](../../artifacts/mvdm-audit/condition-inventory/README.md).

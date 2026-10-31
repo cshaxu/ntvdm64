@@ -34,14 +34,8 @@
  * it is still in use
  */
 
-#ifdef	ANSI
-#define STRINGIFY(x)	#x
+#define STRINGIFY(x)	#x /* DIVERGENCE(MVDM-HOST-DIV-479): selected standard-C branch. */
 #define	CAT(x,y)	x ## y
-#else	/* !ANSI */
-#define STRINGIFY(x)    "x"
-#define	CAT(x,y)	x y
-#define	const		/* nothing */
-#endif	/* ANSI */
 
 #ifndef TRUE
 #define TRUE	((IBOOL)!0)
@@ -113,7 +107,6 @@
 **
 */
 
-#ifdef  ANSI
  
 /* Function prototypes */
  
@@ -175,102 +168,3 @@
 #define IFN15(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13, t14, n14, t15, n15) \
         (t1 n1, t2 n2, t3 n3, t4 n4, t5 n5, t6 n6, t7 n7, t8 n8, t9 n9, t10 n10, t11 n11, t12 n12, t13 n13, t14 n14, t15 n15)
 
-#else   /* ANSI */
- 
-/* Function prototypes */
- 
-#define IPT0()                                                          ()
-#define IPT1(t1, n1)                                                    ()
-#define IPT2(t1, n1, t2, n2)                                            ()
-#define IPT3(t1, n1, t2, n2, t3, n3)                                    ()
-#define IPT4(t1, n1, t2, n2, t3, n3, t4, n4)                            ()
-#define IPT5(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5)                    ()
-#define IPT6(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6)            ()
-#define IPT7(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7)    ()
-#define IPT8(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8) \
-        ()
-#define IPT9(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9) \
-        ()
-#define IPT10(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10) \
-        ()
-#define IPT11(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11) \
-        ()
-#define IPT12(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12) \
-        ()
-#define IPT13(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13) \
-        ()
-#define IPT14(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13, t14, n14) \
-        ()
-#define IPT15(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13, t14, n14, t15, n15) \
-        ()
- 
-/* Function definitions */
- 
-#define IFN0()                                  ()
-#define IFN1(t1, n1)                            (n1) \
-                                                t1 n1;
-#define IFN2(t1, n1, t2, n2)                    (n1, n2) \
-                                                t1 n1; t2 n2;
-#define IFN3(t1, n1, t2, n2, t3, n3)            (n1, n2, n3) \
-                                                t1 n1; t2 n2; t3 n3;
-#define IFN4(t1, n1, t2, n2, t3, n3, t4, n4)    (n1, n2, n3, n4) \
-                                                t1 n1; t2 n2; t3 n3; t4 n4;
-#define IFN5(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5) \
-                                                (n1, n2, n3, n4, n5) \
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5;
-#define IFN6(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6) \
-                                                (n1, n2, n3, n4, n5, n6) \
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6;
-#define IFN7(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7) \
-                                                (n1, n2, n3, n4, n5, n6, n7) \
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7;
-#define IFN8(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8;
-#define IFN9(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8, n9)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; t9 n9;
-#define IFN10(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8, n9, n10)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; t9 n9;t10 n10;
-#define IFN11(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8,\
-						n9, n10, n11)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; \
-						t9 n9;t10 n10;t11 n11;
-#define IFN12(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8,\
-						n9, n10, n11, n12)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; \
-						t9 n9;t10 n10;t11 n11;t12 n12;
-#define IFN13(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8,\
-						n9, n10, n11, n12, n13)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; \
-						t9 n9; t10 n10; t11 n11; \
-						t12 n12; t13 n13;
-#define IFN14(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13, t14, n14) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8,\
-						n9, n10, n11, n12, n13, n14)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; \
-						t9 n9; t10 n10; t11 n11; \
-						t12 n12; t13 n13; t14 n14;
-#define IFN15(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8, t9, n9, t10, n10, t11, n11, t12, n12, t13, n13, t14, n14, t15, n15) \
-                                               (n1, n2, n3, n4, n5, n6, n7, n8,\
-						n9, n10, n11, n12, n13, n14, n15)\
-                                                t1 n1; t2 n2; t3 n3; t4 n4; \
-                                                t5 n5; t6 n6; t7 n7; t8 n8; \
-						t9 n9; t10 n10; t11 n11; \
-						t12 n12; t13 n13; t14 n14; \
-						t15 n15;
-#endif  /* ANSI */
