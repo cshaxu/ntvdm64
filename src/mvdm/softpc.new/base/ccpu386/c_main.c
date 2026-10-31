@@ -4875,37 +4875,7 @@ LOCAL VOID
       }
 
 #ifdef	PIG
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   /* To push an interrupt frame in response to an external interrupt.   */
-   /* Called from CPU under test, just before it processes the interrupt */
-   /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-   GLOBAL VOID
-   c_pig_interrupt
-   IFN1(
-	   IU8, vector
-       )
-
-      {
-      if (simulate_level >= FRAMES)
-	 fprintf(stderr, "Stack overflow in c_do_interrupt()!\n");
-
-      /* Save current context and invoke a new CPU level */
-#ifdef NTVDM
-      if ( setjmp(*ccpu386SimulatePtr()) == 0)
-#else
-      if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )
-#endif
-	 {
-	 in_C = 0;
-	 EXT = EXTERNAL;
-
-         /* Reset default mode */
-         SET_OPERAND_SIZE(GET_CS_AR_X());
-         SET_ADDRESS_SIZE(GET_CS_AR_X());
-
-	 do_intrupt((IU16)vector, FALSE, FALSE, (IU16)0);
-	 }
-      }
+/* DIVERGENCE MVDM-HOST-DIV-499: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
 

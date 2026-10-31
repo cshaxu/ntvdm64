@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm/softpc.new/base/ccpu386/c_main.c",
+  "start": 4877,
+  "end": 4909,
+  "removed_lines": 31,
+  "body_sha256": "1a6ad0b08b3483ebb62782cc396f08946b3f82e7a6fc85e30f5105c72cf267dd",
+  "baseline": "8637f70b7",
+  "difference_from_opennt": "project-corrected dereference of ccpu386SimulatePtr inside inactive PIG branch",
+  "active_simulator_unchanged": true
+}
