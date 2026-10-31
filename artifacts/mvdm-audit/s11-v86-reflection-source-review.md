@@ -61,17 +61,29 @@ The adjacent low-IOPL `CD nn` path is a separate unresolved boundary. The
 original `trap.asm:V86Intnn` emulates an unprefixed unhooked V86 interrupt,
 but sends hooked interrupts to its pass-through owner; the slow
 `emv86.asm:OpcodeINTnnV86` has distinct prefix, flag and write ordering.
-Current CCPU `c_main.c` raises #GP before decoding the immediate when CPL
-exceeds IOPL; `host_exint_hook` excludes V86 from its protected opcode
-monitor. Diagnostic CCPU cases 235–237 install a test-only #GP consumer and
-observe #GP, no software-hook call and unchanged SP for IOPL 0–2; see
+The previous CCPU `c_main.c` raised #GP before decoding the immediate when CPL
+exceeded IOPL; `host_exint_hook` excludes V86 from its protected opcode
+monitor. Earlier diagnostic CCPU cases 235–237 installed a test-only #GP consumer and
+observed #GP, no software-hook call and unchanged SP for IOPL 0–2; see
 [observations](s11-v86-low-int-current.txt). This deliberately intercepted
 diagnostic does not establish the real downstream guest result. It is not in
 the passing compatibility suite and must not become the desired contract.
-The existing `DpmiV86SoftwareInt` is not a drop-in repair: it rejects low
-IOPL, and changing its admission must also account for the original saved
-IF/IOPL image, fixed-state IF, hooked vectors, prefixes, fault priority and
-partial-write ordering before committing any new behavior.
+The published correction reconnects the matching unprefixed,
+unpaged and unhooked DPMI fast route at IOPL 0–2. It saves an IOPL-3 frame
+image and clears CCPU IF and fixed-state IF at the original fast-path boundary.
+The return IP is passed as data; CPU EIP remains at the faulting instruction
+until the reflector has completed the memory accesses and commits the target.
+The same real CCPU fixture linked against the previous objects fails all three
+selected-owner controls, while the candidate passes them and declined-owner,
+hooked, prefixed and initially-clear-IF controls. Controlled selected-object
+fault injection records the four fast-path access boundaries. These are
+scoped tests; the force-linked fixtures and mocked access failures do not prove
+actual NT4 host-memory fault delivery or guest reachability. Paged, prefixed,
+hooked and non-DPMI low-IOPL cases retain their prior #GP fallback, not a claim
+of full NT4 equivalence. The 240-case CCPU suite, Full 16-gate suite, WOW
+application tests and four Win3.1 combinations passed; 86 tracked guest
+binary hashes remained unchanged. The tested ten-component package was
+published to both targets with 20 matching hashes. [Evidence](s11-v86-low-int-evidence/).
 
 The one-byte INT3 and taken INTO dispatchers previously required IOPL 3
 before calling the now IOPL-independent unpaged exception owner. Removing

@@ -3629,7 +3629,30 @@ TYPEC4:
 
    case 0xcd:   /* T2 INT Ib */
       if ( GET_VM() == 1 && GET_CPL() > GET_IOPL() )
+	 {
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+         /* NT4's V86 monitor handles the unprefixed, unpaged fast path.
+          * A declined handler retains the existing GP route. */
+         if (!GET_PG() && !v86_int_unsafe_prefix) {
+            extern BOOL host_v86_software_int_at(IS32, BOOL, IU16);
+            IU16 next_ip, length;
+            D_Ib(0);
+            UPDATE_INTEL_IP(p);
+            next_ip = (IU16)GET_EIP();
+            length = (IU16)(GET_EIP() - CCPU_save_EIP);
+            SET_EIP(CCPU_save_EIP);
+            if (length == 2 &&
+                host_v86_software_int_at((IS32)ops[0].sng, FALSE, next_ip)) {
+               took_absolute_toc = TRUE;
+               start_trap = 0;
+               CANCEL_HOST_IP();
+               PIG_SYNCH(CHECK_ALL);
+               break;
+            }
+         }
+#endif
 	 GP((IU16)0, FAULT_CCPU_INT_ACCESS);
+	 }
       took_absolute_toc = TRUE;
       D_Ib(0);
       UPDATE_INTEL_IP(p);

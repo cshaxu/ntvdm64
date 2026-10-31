@@ -153,6 +153,13 @@ GLOBAL BOOL host_v86_software_int IFN2(IS32, int_no, BOOL, prefixed)
     extern BOOL DpmiSwIntHandler(ULONG);
     return SWIntHandler == DpmiSwIntHandler && DpmiV86SoftwareInt((ULONG)int_no, prefixed);
 }
+GLOBAL BOOL host_v86_software_int_at IFN3(IS32, int_no, BOOL, prefixed, IU16, return_ip)
+{
+    extern BOOL DpmiV86SoftwareIntAt(ULONG, BOOL, USHORT);
+    extern BOOL DpmiSwIntHandler(ULONG);
+    return SWIntHandler == DpmiSwIntHandler &&
+        DpmiV86SoftwareIntAt((ULONG)int_no, prefixed, return_ip);
+}
 #endif
 GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 {

@@ -71,6 +71,10 @@ if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-fault-reject-result
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-fault-access-failure.txt" -SimpleMatch 'DPMI_V86_FAULT_ACCESS_FAILURE_OK stages=4 mocked=1')) {
     throw 'Selected DPMI V86 fault access failure fixture failed'
 }
+& "$out/fixture.exe" --v86-low-int-access-failure | Tee-Object -FilePath "$out/v86-low-int-access-failure.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-low-int-access-failure.txt" -SimpleMatch 'DPMI_V86_LOW_INT_ACCESS_FAILURE_OK stages=4 mocked=1')) {
+    throw 'Selected DPMI V86 low IOPL INT access failure fixture failed'
+}
 & "$out/fixture.exe" --pm-fault-vector14 | Tee-Object -FilePath "$out/pm-fault-result.txt"
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-result.txt" -SimpleMatch 'DPMI_PM_VECTOR14_FRAME_OK')) {
     throw 'Selected DPMI protected fault-vector fixture failed'

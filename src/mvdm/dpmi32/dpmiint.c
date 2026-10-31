@@ -539,14 +539,15 @@ Arguments:
 #if defined(CPU_40_STYLE) && defined(CCPU)
 /* DIVERGENCE(MVDM-HOST-DIV-482): invoked only for a decoded V86 INT
  * instruction, not for an exception that happens to share its vector. */
-BOOL DpmiV86SoftwareInt(ULONG IntNumber, BOOL Prefixed)
+BOOL DpmiV86SoftwareIntAt(ULONG IntNumber, BOOL Prefixed, USHORT ReturnIP)
 {
     extern void spr_write_word(ULONG, USHORT);
     extern ULONG spr_read_dword(ULONG);
     ULONG Flags = getEFLAGS(), Target;
     ULONG StackBase;
     USHORT Sp, TargetIp, TargetCs;
-    if (!(Flags & EFLAGS_VM_MASK) || (Flags & 0x3000) != 0x3000 ||
+    BOOL LowIopl = (Flags & 0x3000) != 0x3000;
+    if (!(Flags & EFLAGS_VM_MASK) || (LowIopl && (Prefixed || (getCR0() & 0x80000000UL))) ||
         (DpmiInterruptHandlers[IntNumber].Flags & VDM_INT_HOOKED))
         return FALSE;
     if (Prefixed) {
@@ -557,7 +558,7 @@ BOOL DpmiV86SoftwareInt(ULONG IntNumber, BOOL Prefixed)
         setEFLAGS(Flags & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
         Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, (USHORT)Flags);
         Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, getCS());
-        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, getIP());
+        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, ReturnIP);
         setSP(Sp);
         Target = spr_read_dword(IntNumber * 4);
         setIP(LOWORD(Target)); setCS(HIWORD(Target));
@@ -569,15 +570,24 @@ BOOL DpmiV86SoftwareInt(ULONG IntNumber, BOOL Prefixed)
     TargetIp = LOWORD(Target); TargetCs = HIWORD(Target);
     StackBase = (ULONG)getSS() << 4;
     Sp = (USHORT)(getSP() - 6);
-    spr_write_word(StackBase + Sp + 4, (USHORT)Flags);
+    spr_write_word(StackBase + Sp + 4, (USHORT)(Flags | (LowIopl ? 0x3000 : 0)));
     spr_write_word(StackBase + Sp + 2, getCS());
-    spr_write_word(StackBase + Sp, getIP());
+    if (LowIopl) {
+        extern void __cdecl host_cpu40_set_virtual_if(BOOL Enabled);
+        host_cpu40_set_virtual_if(FALSE);
+        setIF(0);
+    }
+    spr_write_word(StackBase + Sp, ReturnIP);
     /* A recoverable page fault restarts the instruction.  Do not discard its
      * original flags or commit SP before all of these accesses complete. */
     setEFLAGS(Flags & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
     setSP(Sp);
     setIP(TargetIp); setCS(TargetCs);
     return TRUE;
+}
+BOOL DpmiV86SoftwareInt(ULONG IntNumber, BOOL Prefixed)
+{
+    return DpmiV86SoftwareIntAt(IntNumber, Prefixed, getIP());
 }
 #endif
 

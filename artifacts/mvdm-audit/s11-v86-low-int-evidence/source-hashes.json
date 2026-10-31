@@ -1,0 +1,37 @@
+[
+  {
+    "Algorithm": "SHA256",
+    "Hash": "AFCF770723043C265EAB810592DBC4D82509E8434B6B3C7DD000808D3D88CB5A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\dpmiint.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "1C5695C2FCAEEB6097550F52AD3DB36C4DE1124146372461F1E49C2E2DCFD417",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "216806D501F0B8886B0BEE349D36B0F0DE6BA13737A704BB74A546FE1529B860",
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "226F18D8E4917C9B621279EE231F4A4F2C849B3525B303859C710BFA597E0F9A",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\ccpu_monitor_boundary_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "5B11700F5038F27D8171D1C550B3560F19FB8DC45A756D2088E6C4253F820EBE",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\mvdm-host\\dpmi_swint_selected_fixture.c"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "2B82E9E951B29F4C1FCBC83C33F52836C8127BD1D485312CEA90C41885A4A037",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-ccpu-monitor-boundary.ps1"
+  },
+  {
+    "Algorithm": "SHA256",
+    "Hash": "54A86498624498A776F2865976E84571F7C52B99F6FAD929E64B3B991AE132C1",
+    "Path": "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-dpmi-swint-selected.ps1"
+  }
+]

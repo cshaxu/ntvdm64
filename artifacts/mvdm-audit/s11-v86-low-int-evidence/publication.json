@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-low-int-commit-candidate-package",
+  "utc": "2026-10-31T14:57:18.2984121Z",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "count": 20
+}

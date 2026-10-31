@@ -1,0 +1,6 @@
+V86_LOW_INT case=235 pass=0 gp=1 sw=0 sp=800
+case=235 exit=1
+V86_LOW_INT case=236 pass=0 gp=1 sw=0 sp=800
+case=236 exit=1
+V86_LOW_INT case=237 pass=0 gp=1 sw=0 sp=800
+case=237 exit=1

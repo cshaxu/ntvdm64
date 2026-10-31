@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-low-trap-baseline.obj",
+    "Hash": "E1FD40F6F7A1D3120C43171A610E8C52C34B21879094F8CBD395AFA67D95B409"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-low-iopl-selected\\dpmiint.obj",
+    "Hash": "96028252E268511956CB1B8D757D56B037C99CAFCFD3508AC4A58C6189855146"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-low-int-baseline.exe",
+    "Hash": "61ECFAF829ED774CAD8037299F22FC9F25AD5C4BCBE49BC526D6610609C63CEA"
+  }
+]

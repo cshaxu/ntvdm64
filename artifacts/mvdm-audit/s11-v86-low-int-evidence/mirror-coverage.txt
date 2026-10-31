@@ -1,0 +1,9 @@
+current C/H paths 1794 missing from inventory 0
+source roles requiring scoped interpretation {'guest-target-observed': 195, 'role-pending': 278, 'tool-or-scaffold-candidate': 72}
+recorded C/H mirror differences not classified partial 0
+additional non-host C/H comparisons 531
+compared 1263 unlisted differences 0 stale estimates 0 missing current 21 no frozen original 0
+unlisted: []
+stale estimates: []
+missing current files: ['v86/monitor/i386/int.c', 'v86/monitor/i386/monitor.c', 'v86/monitor/i386/monitorp.h', 'v86/monitor/i386/proflib.c', 'v86/monitor/i386/sas.c', 'v86/monitor/i386/spcstubs.c', 'v86/monitor/i386/thread.c', 'v86/scaffold/i386/fakebop.c', 'v86/scaffold/i386/fakeinit.c', 'v86/scaffold/i386/fakekbd.c', 'v86/scaffold/i386/fakevid.c', 'v86/scaffold/i386/fun.h', 'v86/scaffold/i386/softpc.c', 'v86/scaffold/i386/stubs.c', 'v86/scaffold/i386/x86.h', 'v86/scaffold/i386/xbios.h', 'v86/scaffold/i386/xbiosdsk.h', 'v86/scaffold/i386/xbioskbd.h', 'v86/scaffold/i386/xbiosvid.h', 'v86/scaffold/i386/xguest.h', 'v86/scaffold/i386/xwincon.h']
+missing without exclusion: []
