@@ -89,6 +89,71 @@ callers are not ruled out by the search.
 
 A direct NT4 source check adds a material qualification to the existing tests: `CsToLinearPM` calls `Ki386GetSelectorParameters`, which accepts a user LDT selector and requires an executable segment; it reads the current descriptor rather than the CPU's hidden segment cache. Many existing selected-CCPU fixtures use synthetic user GDT selectors, so their successes do not prove NT4's CS-selector admission semantics. The current monitor accepts those fixtures through cached CS base/limit. The real installed guest selector and error path must be traced before restricting this path: rejecting previously accepted GDT execution without that evidence would be a new observable compatibility change. Changed-descriptor tests should use a real CCPU LDT as well as the existing GDT controls. The same review applies to LMSW default DS/SS lookup, whose original `VdmSegParams` uses the descriptor table. This is not resolved by the TLB-cache simplification.
 
+The original check is in `base/ntos/ke/x86/vdm.c`: it rejects selectors whose
+table-indicator and RPL bits are not LDT and ring 3 before inspecting the
+current NT process LDT. `vdm.inc:CsToLinearPM` then requires the executable
+flag. The selected software CPU, however, supplies a *guest* selector and
+guest GDT/LDT through `mvdm_softpc_protected_segment`, not the NT process's
+native LDT. Consequently an NT4 host-selector bit test cannot be applied to
+the guest selector merely because both carry the same bit encoding. The
+existing real-CCPU fixture exercises both GDT execution and LDT descriptor
+replacement; neither establishes how a guest GDT selector corresponds to the
+original NT VDM's host LDT identity. Resolve that mapping with an actual
+protected DOS/Win3.1 execution and its original monitor call chain before
+changing admission. This preserves the identified mismatch as an open S11
+boundary; it is not approval to keep a known semantic regression permanently.
+
+The selected DOSX adapter does provide a narrower identity witness:
+`DpmiPassTableAddress` allocates separate CPU40 images for the DOSX GDT and
+the projected process LDT, `DpmiSetWowLdtEntry` publishes the latter, and
+`DpmiSwitchToProtectedMode` installs the DOSX GDT before loading the original
+saved guest selectors. Thus, while that DOSX context is actually selected,
+the LDT image is intended to represent the original NT process-LDT owner;
+the GDT image has a different source. The mere existence of either allocated
+image does not prove that the current CPU is still in that DOSX context, or
+that a full Win3.1 system uses it. Any conditional admission change must use
+the live context owner and prove its transition and retirement behavior,
+including whether a valid source-supplied DOSX GDT selector can reach this
+fault path. No selector restriction has yet been implemented on this basis.
+
+### Protected VDM #GP dispatch error code
+
+In the original `base/ntos/ke/x86/trap.asm`, `Kt0d02` routes a protected
+VDM to `Kt0d110`, which calls `Ki386DispatchOpcode` before exception
+reflection; this branch does not filter the #GP error code. The selected
+adapter previously rejected every nonzero selector/index error before opcode
+dispatch. A selected-CCPU LDT fixture with a valid trapped `OUT` and error
+code 4 failed before this change and now performs exactly one I/O operation
+and advances EIP; an unsupported opcode still reaches the existing exception
+handler with error code 4 and unchanged EIP. The old GDT-shaped case 19 was
+updated to this same dispatch contract, while the separately documented
+GDT-versus-LDT identity question remains open. `Kt0d110` is also entered
+before the non-VDM IOPL diagnostic at `Kt0d50`; a separate LDT fixture with
+IOPL 3 failed the adapter's additional IOPL guard and passes after removing
+that guard. All 105 selected monitor cases passed after rebuilding. These
+are controlled host entry witnesses, not
+proof that an immutable guest has executed this particular nonzero-error path.
+
+The candidate subsequently passed the [16-gate Full suite](s11-gp-dispatch-evidence/full-timings.json),
+[Winmine/SOL/Write and four Options rounds](s11-gp-dispatch-evidence/game-runs.json),
+and the [four Win3.1 mode/DOSONLY combinations](s11-gp-dispatch-evidence/win31-matrix.json).
+The original and isolated copies retained all [86 monitored guest binary hashes](s11-gp-dispatch-evidence/win31-integrity.json).
+An injected Win386 mouse burst and all eight follow-up movements produced
+[fresh pixels](s11-gp-dispatch-evidence/mouse-observations.txt); the
+observation run was budget-terminated, so this does not prove natural exit
+or physical mouse input. The [exact ten-component manifest](s11-gp-dispatch-evidence/package-manifest.json)
+binds these results to the candidate, whose NTVDM SHA-256 is
+`1E7BB124DCEBC183E5B8AA364F0E51D0532EDF941C5B84CA4AF9E69D27E134CA`.
+
+Original DOSX sources provide an additional reason not to impose the NT4
+test indiscriminately: `dpmi/pmdefs.inc` gives `STD_RING` the LDT indicator
+under `WOW`, but omits that indicator for the non-WOW build; `dxboot.asm`
+uses `SEL_DXCODE OR STD_RING` and `SEL_DXPMCODE OR STD_RING` for DOSX code
+selectors. These are source-defined distinct execution profiles, not proof
+that every such code segment executes a trapped instruction. They do show
+that the GDT form is not inherently a malformed guest selector. Verify the
+actual active DOSX profile and protected fault before narrowing the adapter.
+
 ## C2: original descriptor view â€” candidate
 
 `CsToLinearPM` resolves a present executable descriptor and snapshots its base/limit before dispatch; `VdmSegParams` resolves the default LMSW segment through the current table. The old adapter instead used hidden CCPU segment-cache values. A real CCPU LDT witness loaded CS, changed its descriptor, and then trapped I/O: the original-source expectation is the new descriptor's opcode; the old monitor executed the cached opcode (`ldt-selector-baseline`, cases 77/78). Additional controls changed the current code descriptor to non-executable or shortened its limit, and changed the current DS descriptor before LMSW; the old monitor failed cases 79â€“81. The candidate extends the already-owned CPU40 descriptor provider to expose base/limit/access, snapshots CS once, and uses current DS/SS for LMSW. It reuses one descriptor walk, rather than recreating another descriptor parser. Existing GDT-admission compatibility remains unchanged and explicitly differs from NT4's LDT-only selector check; no claim is made that this boundary is resolved. Descriptor lookup uses the existing nonlocal-exception scope and cases 73â€“75 still pass.

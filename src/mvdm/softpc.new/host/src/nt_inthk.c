@@ -424,9 +424,10 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
     BOOL handlerInstalled = EXIntHandler != NULL;
 #ifdef CCPU
     /* DIVERGENCE(MVDM-HOST-DIV-473): provisional CPU40 host monitor dispatch. Further instruction, paging and lifecycle coverage is required before release. */
-    /* CPU40 carries the external-event bit in bit 0. Selector/index bits
-     * must be zero; either value of the external bit may reach this path. */
-    if (exp_no == 13 && (error_code & ~1) == 0 && getCPL() != 0 && !getVM()) {
+    /* DIVERGENCE(MVDM-HOST-DIV-480): NT4's protected-VDM Kt0d110 attempts
+     * opcode dispatch for #GP without filtering its error code; unhandled
+     * operations retain the original handler and its complete code below. */
+    if (exp_no == 13 && getCPL() != 0 && !getVM()) {
         extern unsigned long c_getEIP(void);
         extern unsigned char *c_GetPhyAdd(unsigned long);
         extern void host_ica_lock(void), host_ica_unlock(void);
@@ -504,9 +505,8 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 }
                 goto candidate_unhandled;
             }
-            /* IOPL governs I/O and interrupt flags, not privileged 0F
-             * instructions, which can fault even when CPL <= IOPL. */
-            if(getCPL() <= getIOPL()) goto candidate_unhandled;
+            /* Kt0d110 invokes the protected-VDM dispatcher before the
+             * non-VDM IOPL diagnosis in Kt0d50. */
             if(op>=0x6c && op<=0x6f) {
                 /* NT4's protected dispatcher passes the length in EBX;
                  * OpcodeINS/OUTS test EBX, not RiPrefixFlags, for REP. */

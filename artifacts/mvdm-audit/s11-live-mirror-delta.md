@@ -18,6 +18,14 @@ and all 206 marked partial. The current CSV SHA-256 is
 estimate is 196/198 (98.99%). The separate historical diff in that file
 remains classified partial.
 
+For the current protected-VDM #GP dispatch candidate, regeneration reports
+206 differing rows, 205 measured, and all 206 marked partial. The retention
+CSV SHA-256 is
+`A22562A9FDE462AC9B3E5A973BE4CE9D66B564CB9962D4040C6E4494C6CA1283`.
+`nt_inthk.c`'s source-line estimate remains 100% because the added host
+dispatch has no removed original code lines; its real mirror diff and
+unresolved behavior still require the partial classification.
+
 The frozen S10 host C/H ledger classified every one of its 202 recorded
 mirror-difference rows as partial. Rechecking the current worktree against
 that frozen checkpoint now reports one newly differing file and six stale

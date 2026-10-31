@@ -71,7 +71,7 @@ static volatile unsigned long test_out;
 static int test_case;
 extern void do_intrupt(unsigned short, BOOL, BOOL, unsigned short);
 static volatile uint32_t test_fault, test_irq, test_irq_eip, test_irq_isr;
-static volatile uint32_t frame_fault_vector, frame_fault_eip;
+static volatile uint32_t frame_fault_vector, frame_fault_eip, test_fault_vector, test_fault_error;
 extern uint32_t lin2phy(uint32_t,int);
 extern int ccpu_monitor_cached_access(uint32_t,unsigned char,uint32_t *);
 static int duplicate_tlb_mapping(void) {
@@ -117,7 +117,7 @@ static void probe_string_write_visible(io_addr port, half_word *in, word count) 
 static void probe_wrong_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;(void)count;++wrong_string_write; }
 static void probe_string_write(io_addr port, half_word *in, word count) { (void)port;(void)in;++string_writes;io_writes+=count; }
 static BOOL test_sti_fault(unsigned long vector, unsigned long error) {
-    (void)vector; (void)error; ++test_fault; return FALSE;
+    test_fault_vector=vector; test_fault_error=error; ++test_fault; return FALSE;
 }
 extern void c_setEIP(uint32_t);
 extern void c_setRF(IBOOL);
@@ -275,7 +275,7 @@ static int protected_scalar_io(void) {
         *c_GetPhyAdd(0xf1000)=0xe6;*c_GetPhyAdd(0xf1001)=0x80;
         handled=host_exint_hook(13,4);
         VdmInstallFaultHandler(NULL);
-        return !handled && test_fault==1 && !io_reads && !io_writes && c_getIP()==0x1000;
+        return handled && test_fault==0 && !io_reads && io_writes==1 && c_getIP()==0x1002;
     }
     if(test_case==39 || test_case==40 || test_case==50) {
         unsigned offset=test_case==40 ? 18 : 6;
@@ -533,6 +533,20 @@ static int protected_ldt_descriptor(void) {
     c_setLDT_SELECTOR(0x28);c_setLDT_BASE_LIMIT(0x4000,sizeof(ldt)-1);c_setPE(1);c_setCPL(3);
     if(c_setCS(0x1f) || c_setSS(0x27) || c_setDS(0x27))return 0;
     c_setSP(0x800);c_setAX(0x5a);c_setIOPL(0);c_setIP(0x1000);
+    if(test_case==118 || test_case==119 || test_case==120) {
+        int handled;
+        /* NT4 Kt0d110 attempts protected-VDM opcode dispatch irrespective
+         * of the #GP error code. Use its user-LDT selector profile here. */
+        if(test_case==119) *c_GetPhyAdd(0xf1000)=0x90;
+        if(test_case==120) c_setIOPL(3);
+        io_reads=io_writes=test_fault=test_fault_vector=test_fault_error=0;
+        VdmInstallFaultHandler((void *)test_sti_fault);
+        handled=host_exint_hook(13,4);
+        VdmInstallFaultHandler(NULL);
+        if(test_case==118 || test_case==120)
+            return handled && !test_fault && io_writes==1 && c_getEIP()==0x1002;
+        return !handled && test_fault==1 && test_fault_vector==13 && test_fault_error==4 && !io_writes && c_getEIP()==0x1000;
+    }
     if(test_case==78){*(uint32_t *)c_GetPhyAdd(0x4018)=0x5000ffffu;*(uint32_t *)c_GetPhyAdd(0x401c)=0x0000fa00u;CopyMemory(c_GetPhyAdd(0x6000),new_code,sizeof(new_code));}
     if(test_case==79)*(uint32_t *)c_GetPhyAdd(0x401c)=0x0000f20fu;
     if(test_case==80)*(uint32_t *)c_GetPhyAdd(0x4018)=0x00000fffu;
@@ -883,7 +897,7 @@ int main(int argc, char **argv) {
     else if(test_case==86) ok=monitor_cr0_npx_matrix();
     else if(test_case==49) ok=duplicate_tlb_mapping();
     else if(test_case==83) ok=monitor_register_matrix();
-    else if((test_case>=77 && test_case<=81) || test_case==84 || test_case==85) ok=protected_ldt_descriptor();
+    else if((test_case>=77 && test_case<=81) || test_case==84 || test_case==85 || (test_case>=118 && test_case<=120)) ok=protected_ldt_descriptor();
     else if(test_case==76) ok=monitor_cache_contract();
     else if(test_case==73 || test_case==74) ok=protected_missing_descriptor_page();
     else if(test_case>=69 && test_case<=72) ok=protected_string_segment_limit();

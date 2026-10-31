@@ -1,0 +1,21 @@
+{
+  "source": "OpenNT base/ntos/ke/x86/trap.asm Kt0d02 -> Kt0d110 -> Ki386DispatchOpcode",
+  "scope": "selected CCPU controlled host entry; not immutable guest execution",
+  "initial": {
+    "case19_gdt_nonzero_error": 1,
+    "case118_ldt_nonzero_error": 1,
+    "case119_ldt_unknown_opcode": 0
+  },
+  "after_error_code_guard_removal": {
+    "case118_ldt_nonzero_error": 0,
+    "case119_ldt_unknown_opcode": 0,
+    "case120_ldt_iopl3_nonzero_error": 1
+  },
+  "after_both_guard_removals": {
+    "case118_ldt_nonzero_error": 0,
+    "case119_ldt_unknown_opcode": 0,
+    "case120_ldt_iopl3_nonzero_error": 0,
+    "selected_cases_passed": 105
+  },
+  "exit_code_convention": "0 = fixture assertions passed; 1 = fixture assertions failed"
+}
