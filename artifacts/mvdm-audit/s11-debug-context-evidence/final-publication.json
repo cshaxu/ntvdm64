@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/debug-context-final-package",
+  "utc": "2026-10-31T05:17:58.4143970Z",
+  "count": 20,
+  "result": "pass"
+}

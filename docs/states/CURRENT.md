@@ -46,12 +46,12 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The current [ten-component release](../../artifacts/mvdm-audit/s11-win386-v86-mouse-regression.md)
-includes the V86 mouse correction and earlier graph-retirement change. Full,
-game and four-mode Win3.1 witnesses passed; all ten images matched at both
-destinations. Physical mouse validation remains separate. S11 remains active.
-[S11 closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists
-each foundation's evidence and remaining boundary.
+The current [ten-component release](../../artifacts/mvdm-audit/s11-debug-context-candidate.md)
+adds per-task CCPU debug-context handoff. Full, game, four-mode Win3.1 and
+automated mouse witnesses passed; both destinations match. A single earlier
+Window-17 input timeout remains unlocated. S11 remains active; the
+[closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
+remaining boundaries.
 
 Host C/H retention checks pass; runtime completion remains open. [Evidence](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
 

@@ -1,6 +1,6 @@
 # S11 debug context handoff candidate
 
-Status: **unpublished worktree candidate; not S11 closure**. The original x86
+Status: **published partial baseline; not S11 closure**. The original x86
 monitor uses a thread-specific trap frame for a guest MOV DR, but its DPMI
 `ThreadSetDebugContext` broadcasts six values to all monitor-registered
 threads and supplies active debug state to subsequently created threads. The
@@ -367,3 +367,12 @@ records NTVDM SHA-256
 `1D381FFBC38421B4AF79A58C502BDAD9EB62A954DF7E3C1E9D402A6AB0585619`.
 The single earlier Window-17 input failure remains unlocated and is not
 claimed fixed by the subsequent six controls and Full pass.
+
+Source commit `f4400d311` was followed by the coherent ten-image
+[publication](s11-debug-context-evidence/final-publication.json); both
+destinations matched all 20 expected hashes. A post-publication
+[owned-Console smoke](s11-debug-context-evidence/final-installed-smoke.txt)
+ran the installed `run16 cmd /c ver`, exited zero and displayed the
+[host version](s11-debug-context-evidence/final-installed-smoke-console.txt).
+An earlier direct invocation from the tool process returned 87 without an
+owned Console; it is not a passing or comparable Console-launch witness.
