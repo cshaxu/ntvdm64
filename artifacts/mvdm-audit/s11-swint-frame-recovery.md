@@ -196,6 +196,12 @@ contract. The experiments use synthetic vector 31h and controlled descriptors;
 they do not establish an actual immutable DOSX guest call, guest reentry or
 task-switch lifecycle.
 
+IOPL 0 is not merely a synthetic possibility: an earlier immutable-DOSX
+fault observation recorded a protected-mode saved EFLAGS of `00000006`
+while executing the STI fallback. That observation was a fault-frame sample,
+not an observed interrupt-gate entry or evidence that every task uses IOPL 0.
+See [actual DOSX fault attribution](s11-foundation-evidence/code32-prebuilt-search/review.md).
+
 Original NT4's protected dispatch table does not select an IRET emulator,
 while the original DOSX `FIRET` macro takes different paths based on the
 software-CPU flag: on the native path it restores the fixed interrupt bit,
