@@ -1,0 +1,3 @@
+Pre-fix controlled CCPU fixture: case 207 (CD 03, no exception handler) exit 0xC0000005.
+Pre-fix controlled CCPU fixture: case 208 (CD 04, no exception handler) exit 0xC0000005.
+The fixture has a DPMI software handler and a valid V86 IVT target; it is not a guest application result.

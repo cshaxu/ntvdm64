@@ -1113,11 +1113,14 @@ static int v86_unsupported_int_prefix(void) {
     report(line); return ok;
 }
 
-/* NT4 handles one-byte INT3 and taken INTO as exceptions, unlike CD nn. */
+/* NT4 handles INT3, taken INTO and user-gate CD 03/04 as exceptions. */
+static BOOL v86_reflection_decline(ULONG vector, ULONG error) {
+    (void)vector; (void)error; ++test_fault; c_setBX(0xcafe); return FALSE;
+}
 static int v86_trap_instruction(void) {
     unsigned char code[]={0xcc,0xd6,0xfe,0,0};
     const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
-    unsigned vector=(test_case==157 || test_case==195 || test_case==197) ? 3 : 4;
+    unsigned vector=(test_case==157 || test_case==195 || test_case==197 || test_case==207 || test_case==209) ? 3 : 4;
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     BOOL taken=test_case!=159, ok; ULONG flags; char line[160];
     USHORT return_ip=0x101;
@@ -1129,7 +1132,7 @@ static int v86_trap_instruction(void) {
     flags=c_getEFLAGS(); if(vector==4 && taken) flags|=0x800; else flags&=~0x800u;
     c_setEFLAGS(flags); if(vector==4) code[0]=0xce;
     if(test_case>=195) {
-        unsigned prefix=test_case>=197 ? 1 : 0;
+        unsigned prefix=(test_case==197 || test_case==198 || test_case==209 || test_case==210) ? 1 : 0;
         if(prefix) code[0]=0x66;
         code[prefix]=0xcd; code[prefix+1]=(unsigned char)vector;
         code[prefix+2]=0xd6; code[prefix+3]=0xfe;
@@ -1141,10 +1144,13 @@ static int v86_trap_instruction(void) {
     CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
     CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
     *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
-    test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
-    VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    test_irq=0; test_fault=0; VdmInstallSoftwareIntHandler((void *)((test_case==207 || test_case==208) ? DpmiSwIntHandler : swint_origin_probe));
+    if(test_case<207) VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    else if(test_case>=209) VdmInstallFaultHandler((void *)v86_reflection_decline);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
-    ok=test_irq==0 && (taken ? (c_getCS()==0x300 && c_getSP()==0x7fa && c_getBX()==0xbeef &&
+    if(test_case>=209) {
+        ok=test_irq==vector && test_fault==1 && c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0xcafe;
+    } else ok=test_irq==0 && test_fault==0 && (taken ? (c_getCS()==0x300 && c_getSP()==0x7fa && c_getBX()==0xbeef &&
        *(USHORT *)c_GetPhyAdd(0x27fa)==return_ip && *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
        *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)flags) :
        (c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0));
@@ -1182,6 +1188,23 @@ static int v86_explicit_software_int(void) {
     ok=test_fault==0 && test_irq==vector && c_getCS()==0x100 && c_getSP()==0x800;
     wsprintfA(line,"V86_EXPLICIT_SWINT case=%d pass=%d vector=%lu\n",test_case,ok,test_irq);
     report(line); return ok;
+}
+
+static int v86_declining_exception_owner(void) {
+    extern BOOL host_v86_trap(LONG, BOOL);
+    ULONG vector=test_case==211 ? 3 : 4;
+    BOOL handled, ok;
+    c_cpu_init(); c_setPE(1); c_setVM(1); c_setCPL(3); c_setIOPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100); c_setBX(0);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); test_fault=0;
+    DpmiInterruptHandlers[vector].flags=0;
+    VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
+    VdmInstallFaultHandler((void *)v86_reflection_decline);
+    handled=host_v86_trap((LONG)vector,TRUE);
+    VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
+    ok=!handled && test_fault==1 && c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0xcafe;
+    report(ok ? "V86_DECLINING_OWNER_PRESERVED\n" : "V86_DECLINING_OWNER_FAILED\n");
+    return ok;
 }
 
 static int v86_real_divide_fault(void) {
@@ -1457,7 +1480,8 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
-    else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198)) ok=v86_trap_instruction();
+    else if(test_case==211 || test_case==212) ok=v86_declining_exception_owner();
+    else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198) || (test_case>=207 && test_case<=210)) ok=v86_trap_instruction();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
     else if(test_case==180 || test_case==181 || test_case==185 || test_case==190 || test_case==191 || (test_case>=199 && test_case<=202) || test_case==205 || test_case==206) ok=v86_unsupported_int_prefix();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();

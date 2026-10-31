@@ -1116,6 +1116,41 @@ The published paging fallback is not treated as a complete original monitor.
 The documentation-governance gate was rerun and still rejects the separately
 modified S12 handoff's local path; its [output](s11-v86-paged-prefix-evidence/governance-nonpass.txt)
 is retained. S11 remains open.
+
+The published DIV-492 fallback was then tested with the actual CCPU and
+selected DPMI software handler installed but no exception handler: cases 207
+and 208 each exited with access violation rather than reaching the valid V86
+IVT target. An initial correction attempted the pre-existing V86 reflector
+after either an absent or declining exception handler. It was narrowed before
+publication: the revised host boundary uses that reflector only if no
+exception handler is installed. An installed handler's decline keeps the
+previous `INTx` fallback, including any state the handler changed. Cases
+207/208 cover absence; prefixed cases 209/210 cover a handler that changes BX
+and declines, while 211/212 directly verify no second reflector is invoked
+when both a declining exception owner and the selected software owner exist.
+The 203-case CCPU suite passes. This preserves the old decline behavior; it
+does not establish that arbitrary provider mutations or all subsequent fault
+delivery match NT. [Evidence](s11-v86-trap-refusal-evidence/).
+The final candidate also retains the existing exception-hook diagnostic when
+no handler is installed. The real selected-object case 207 recorded
+`installed=0 handled=0` before successfully reflecting to the IVT target;
+the [trace](s11-v86-trap-refusal-evidence/no-handler-trace.txt) is retained.
+The selected `EnableIntHooks` source installs the software handler before
+the exception handler; `DisableIntHooks` removes the software handler before
+the exception handler. The registration order makes the no-exception-owner
+state representable, but source order alone does not prove that a guest
+instruction can interleave inside either registration sequence.
+
+The final candidate passed the 203-case CCPU suite, the 16-gate Full product
+suite, Winmine/SOL/WRITE and four SOL Options rounds, and the four Win3.1
+mode/DOSONLY combinations. Source and all ten package hashes remained
+unchanged across tests; 86 guest binary hashes matched in the original and
+isolated Win3.1 trees. The coherent package was published to both targets and
+all 20 hashes matched. [Evidence](s11-v86-trap-refusal-evidence/). No claim
+is made that the preserved installed-handler decline fallback is fully NT
+equivalent or that the controlled no-handler case occurs in a real guest.
+The documentation-governance gate still rejects the separate modified S12
+handoff's local path; [failure output](s11-v86-trap-refusal-evidence/governance-nonpass.txt).
 An additional PE-section comparison found the selected worker's `.text`,
 `.data`, detour sections and `.reloc` byte-identical to the tested sealed
 image; `.rdata` and `.rsrc` differ. See

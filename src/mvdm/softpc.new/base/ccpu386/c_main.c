@@ -3639,7 +3639,7 @@ TYPEC4:
        * never another INTx caller, enters the V86 host reflector. */
       {
       extern BOOL host_v86_software_int(IS32, BOOL);
-      extern BOOL host_exint_hook(IS32, IS32);
+      extern BOOL host_v86_trap(IS32, BOOL);
       IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
       /* DIVERGENCE(MVDM-HOST-DIV-490): the NT V86 slow dispatcher
        * constructs a 16-bit INT frame even with operand-size prefixes.
@@ -3648,7 +3648,7 @@ TYPEC4:
           length <= 15 && !v86_int_unsafe_prefix &&
           (ops[0].sng == 3 || ops[0].sng == 4)) {
          /* NT4's user-accessible IDT gates reflect these as exceptions. */
-         if (!host_exint_hook((IS32)ops[0].sng, 0)) INTx(ops[0].sng);
+         if (!host_v86_trap((IS32)ops[0].sng, length > 2)) INTx(ops[0].sng);
       } else if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
           /* Preserve the previous paged and NT service-gate fallbacks.
            * CCPU retries paged faults after a nonlocal exit; the NT slow

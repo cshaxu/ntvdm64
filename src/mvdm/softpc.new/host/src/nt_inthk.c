@@ -193,6 +193,16 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 
     return( returnStatus );
 }
+#ifdef CCPU
+/* An installed exception owner retains the original decline/fallback
+ * contract; only absence permits the separate V86 software reflector. */
+GLOBAL BOOL host_v86_trap IFN2(IS32, int_no, BOOL, prefixed)
+{
+    BOOL handlerInstalled = EXIntHandler != NULL;
+    BOOL handled = host_exint_hook(int_no, 0);
+    return handled || (!handlerInstalled && host_v86_software_int(int_no, prefixed));
+}
+#endif
 #endif /* CCPU */
 
 /*(

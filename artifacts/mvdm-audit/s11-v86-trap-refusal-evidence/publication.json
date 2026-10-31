@@ -1,0 +1,10 @@
+{
+  "count": 20,
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-trap-final-candidate-package",
+  "utc": "2026-10-31T13:38:58.5377563Z"
+}

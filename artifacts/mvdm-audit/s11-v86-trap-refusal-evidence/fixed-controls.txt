@@ -1,0 +1,6 @@
+V86_TRAP_INSN case=207 pass=1 sw=0 cs=300 sp=7fa bx=beef
+V86_TRAP_INSN case=208 pass=1 sw=0 cs=300 sp=7fa bx=beef
+V86_TRAP_INSN case=209 pass=1 sw=3 cs=100 sp=800 bx=cafe
+V86_TRAP_INSN case=210 pass=1 sw=4 cs=100 sp=800 bx=cafe
+V86_DECLINING_OWNER_PRESERVED
+V86_DECLINING_OWNER_PRESERVED
