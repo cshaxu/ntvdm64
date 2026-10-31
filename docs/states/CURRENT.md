@@ -2,24 +2,21 @@
 
 ## Current Work
 
-**Active: M0 T473 S11**
+**Active: M0 T473 S12**
 
-Owner additionally directs an in-scope P to isolate authored components from
-historical MVDM conditional compilation and remove confirmed excluded paths;
-audit per translation unit and preserve selected CCPU and shared interfaces.
-The published P removes CPU profile, NTVDM and ANSI flags from authored units;
-134 CCPU and focused input tests pass. The shutdown fixture passes in the
-product test environment; restricted-environment invalid-handle behavior differs.
-See [condition inventory](../../artifacts/mvdm-audit/condition-inventory/README.md).
+S11 closed its owner-narrowed non-MVDM compilation-condition audit and
+cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
+Unfinished original foundation and later recovery work is transferred to the
+first queued recovery proposal. S12 owns NTCON input-source handoff.
 
 The CPU40 monitor and TLB boundary are in a
 tested partial baseline. Full (16 gates), 93 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
-release destinations matched all ten image hashes. CPU30 source removal published; CCPU V86 stays. Mouse unverified. DPMI mapped-code, operand-fault,
-reentry and NPX/debug behavior remain S11 work; publication is
-not S11 closure. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
+release destinations matched all ten image hashes. CPU30 source removal published; CCPU V86 stays. Mouse unverified. Unfinished DPMI mapped-code, operand-fault,
+reentry and NPX/debug work transfers to the queued recovery; earlier publication
+does not prove that recovery complete. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
 
-S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The owner approved the [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md). S11 recovers execution foundations and includes the owner-approved [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md). Preserve unrelated work and immutable guest media.
+S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The revised [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md) preserves the earlier [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md) as handoff evidence. Preserve unrelated work and immutable guest media.
 
 The published foundation group includes far-transfer ownership and WOW
 entry ABI; NIDDB internal fixes remain outside scope. The selected bridge
@@ -28,7 +25,7 @@ passed controlled loader cycles; forced WOW32 attach failure now returns correct
 The owner moved further SOL and related WOW multi-window performance work to
 the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
 Retain independently justified changes and evidence; do not treat latency as
-an S11 closure gate or claim the performance issue fixed.
+a condition-cleanup gate or claim the performance issue fixed.
 
 The installed `O:/winnt` lacks 15 guest-manifest files, including WIN87EM.
 The isolated single-file absence control prevents Calculator startup; adding
@@ -57,7 +54,7 @@ Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [E
 The current [ten-component release](../../artifacts/mvdm-audit/s11-swint-frame-recovery.md)
 also restores DPMI software-interrupt frames and stack limits. Full, game, Win3.1 and
 automated mouse witnesses passed; both destinations match. An earlier
-Window-17 timeout remains unlocated. [Win386 mouse](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md): prior guard tested; physical input unverified. S11 remains active; the
+Window-17 timeout remains unlocated. [Win386 mouse](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md): prior guard tested; physical input unverified. The prior
 [closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
 remaining boundaries.
 
@@ -75,27 +72,31 @@ runtime: the owner clarified boundary-recovery scope.
 
 ## Active Packet
 
-### M0 T473 S11 — execution, identity and lifetime foundations
+### M0 T473 S12 — NTCON input-source handoff
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S11, Ordinary Mode. |
-| Admission And Approval | Automatic progression authorized by the owner; [S10 closure](../etc/evidence/m0-t473-s10-closure.md) and approved stage plan. |
-| Objective | Restore and verify the S11 execution, callback, identity and lifetime owner groups without increasing unnecessary mirror differences. |
-| Non-goals | Guest modification or rebuilding; 486-specific repair; unrelated internal defects in connected components; speculative replacement; unrelated Win95 tooling. |
-| Reference Baseline | S10 audit `822c5fe58`; [recovery worklist](../../artifacts/mvdm-audit/recovery-worklist.md); unpublished [NIDDB candidate](../../artifacts/mvdm-audit/host-ch-scope/niddb-allocation-rollback-review.md). |
-| Files And ABI Surface | MVDM CPU, SAS, VxD lifecycle and project-owned callback/identity adapters as justified by source trace; exact changed paths recorded in evidence. |
-| Applicable Rules | Project source policy, architecture and execution rules; original logic first, minimum mirror diff, registered exceptions and immutable guest. |
-| Verification | Cached coherent builds, focused normal/failure/retirement tests, relevant immutable-guest integration and required Full gates; bind each result to exact built package. |
-| Expected Markers | Reproducible witnesses and disposition for each admitted owner group; performance optimization is queued, while correctness failures remain in scope. |
-| Asset Needs | Original sources, captured build graphs, isolated package, probes and immutable guest inputs; no guest rebuild. |
-| Reporting Requirements | Each change, original owner, mirror diff, evidence, failures and finite S15/S16 handoff; preserve unresolved external Win95 tooling. |
-| Stop Conditions | Guest change, inaccessible original source, private host-layout assumptions or an unapproved observable semantic concession. |
-| Exit Criteria | S11 foundation groups reconciled and verified with coherent publication and required reviews; any allowed boundary recorded, not inferred from compilation. |
-| Original Owner Request | Reconnect feasible original MVDM capabilities, audit/repair in dependency order, then complete product-wide validation and delivery. |
-| Similar-Issue Sweep | Examine adjacent allocation, rollback, reentry, handle identity, callback and lifecycle owners as one group. |
-| Candidate Proposal | [MVDM whole-closure recovery](../proposals/proposal-mvdm-whole-closure-recovery-001.md). |
-| Temporary Evidence | `build/t473-s11`, 60-minute phase, 3-GiB size and 10-minute no-progress budget; durable evidence under `artifacts/mvdm-audit`. |
+| Identifier Mode | M0 T473 S12, Ordinary Mode. |
+| Admission And Approval | Owner directed automatic continuation after S11; [S11 closure](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md). |
+| Objective | Repair Console/Window input-source key lifecycle and investigate the Win3.1 MS-DOS Prompt Alt+Enter observation. |
+| Non-goals | Guest modification or rebuilding, Computer Use, guest-specific shortcuts, unrelated original-code recovery. |
+| Reference Baseline | [S12 handoff](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md); reproduce the documented failures before selecting a repair. |
+| Files And ABI Surface | NTCON input/session and worker input boundaries; preserve input record identity, ordering and lifecycle. |
+| Applicable Rules | Source policy, lifecycle ownership, immutable guest, minimal diff and event-driven execution. |
+| Verification | Same-package baseline and fixed probes for DOS and native CUI, source changes, modifier/focus/rollback paths, Alt+Enter, Full gates and coherent ten-image delivery. |
+| Expected Markers | Exact delivered-key ownership and symmetric source retirement, with positive, negative and failure evidence. |
+| Asset Needs | Existing immutable guest, approved isolated probes and desktop-capable runner. |
+| Reporting Requirements | Root cause, ownership, regressions, publication identity and remaining physical-input limits. |
+| Stop Conditions | Guest changes, inaccessible original source, private host-layout assumptions or unapproved observable semantic concessions. |
+| Exit Criteria | Handoff acceptance and required publication, commit and push; do not claim physical-input verification without evidence. |
+| Original Owner Request | Finish S11 condition cleanup; admit S12 input-source repair; transfer other original recovery to the next queued task. |
+| Similar-Issue Sweep | Review both source directions, both worker kinds, key identity, repeat, focus loss, failure and exit. |
+| Candidate Proposal | [MVDM recovery proposal](../proposals/proposal-mvdm-whole-closure-recovery-001.md); S12 stays in the current task. |
+| Temporary Evidence | `build/t473-s12`, 60-minute phase, 3-GiB size and 10-minute no-progress budget; archive required evidence before cleanup. |
+
+## S11 Closure Record
+
+The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md) records the selected non-MVDM cleanup, published package equivalence and deferred recovery boundaries.
 
 ## S10 Closure Record
 
@@ -122,15 +123,6 @@ task lifecycle acceptance.
 
 The [T461 S3 record](../etc/evidence/m0-t461-s3-registry-persistence-candidate.md)
 retains the durable-overlay delivery and its acceptance evidence.
-
-## S10 Current P — add-on ownership and Win3.1 Setup
-
-Owner requires this sequential P before resuming the original S10 census.
-Scope and pending gates are recorded in the
-[add-on review](../../artifacts/mvdm-audit/addon-layout-review.md#current-p-setup-correction-and-closure-gates).
-Complete add-on/tool cleanup, graphical Setup mouse investigation and
-profile-only finalization. Prove pure-DOS DOSONLY=0/1 with Standard/386 Enhanced
-startup. Future WOW31 conversion is excluded. [Video7 pointer evidence](../../artifacts/mvdm-audit/video7-pointer-review.md) records the published checkpoint and pending Raw Input/Setup completion.
 
 T461 S1's unchanged inventory is retained in its
 [owner matrix](../etc/evidence/m0-t461-s1-shell-registry-owner-matrix.md).
