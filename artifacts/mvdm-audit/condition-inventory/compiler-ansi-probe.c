@@ -1,0 +1,5 @@
+#ifdef ANSI
+ANSI_DEFINED
+#else
+ANSI_UNDEFINED
+#endif
