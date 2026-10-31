@@ -1,0 +1,1 @@
+DPMI_V86_FAULT_ACCESS_FAILURE_OK stages=4 mocked=1

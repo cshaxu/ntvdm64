@@ -32,6 +32,15 @@ recorded in [their evidence](s11-v86-fault-decline-evidence/). Neither result
 proves the successful IOPL 0–2 path, paged reflection, host access failures,
 reentrant mapping changes, or a particular live Win386 exception path.
 
+The selected-object fixture now interrupts each of the three stack writes and
+the IVT read before the selected access occurs. All four controls preserve
+registers and fixed-state IF, while retaining exactly the writes preceding the
+failure; see [result](s11-v86-fault-access-failure.txt). This compares the
+source-level access order to `PushException` and exercises mocked nonlocal
+exit only: it does not prove the host's actual page-fault or exception owner.
+The original `instemul.asm` reviewed for this sequence has SHA-256
+`6356B416E0942EB3814E4C5A14FF5ED09DB13DC1443842BA51AB9F512522D6E4`.
+
 For further recovery, compare the original NT4 `PushException`/V86 interrupt
 owner with these specific cases: virtual-IF policy and saved frame flags;
 cross-page stack and IVT access with first/second access failures; and the

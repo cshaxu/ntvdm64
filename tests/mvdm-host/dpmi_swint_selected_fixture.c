@@ -201,6 +201,29 @@ int main(int argc, char **argv){
     puts("DPMI_V86_FAULT_REJECT_ROLLBACK_OK first=1 nested=1");
     return 0;
   }
+  if(argc==2 && strcmp(argv[1],"--v86-fault-access-failure")==0) {
+    /* Selected-object seam: stop at each access before it mutates memory.
+     * This checks partial frame order, not real CCPU exception delivery. */
+    for(mode=1;mode<=4;++mode) {
+      msw=1; mock_cr0=0; flags=0x23302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
+      *(ULONG *)(memory+0x714)=0xa203;
+      *(USHORT *)(memory+0x1fe)=0xaaaa;
+      *(USHORT *)(memory+0x1fc)=0xbbbb;
+      *(USHORT *)(memory+0x1fa)=0xcccc;
+      v86_order_count=0; v86_fail_at=mode;
+      if(setjmp(v86_failure)==0) {
+        (void)DpmiFaultHandler(7,0);
+        CHECK(0);
+      }
+      CHECK(v86_order_count==mode && sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x23302);
+      CHECK(*(ULONG *)(memory+0x714)==0xa203);
+      CHECK(*(USHORT *)(memory+0x1fe)==(mode>1 ? 0x3302 : 0xaaaa));
+      CHECK(*(USHORT *)(memory+0x1fc)==(mode>2 ? 0x27 : 0xbbbb));
+      CHECK(*(USHORT *)(memory+0x1fa)==(mode>3 ? 0x1234 : 0xcccc));
+    }
+    puts("DPMI_V86_FAULT_ACCESS_FAILURE_OK stages=4 mocked=1");
+    return 0;
+  }
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && targets==0 && flags==0x4321);
   descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=15;
   CHECK(DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==1 && dispatches==1);
