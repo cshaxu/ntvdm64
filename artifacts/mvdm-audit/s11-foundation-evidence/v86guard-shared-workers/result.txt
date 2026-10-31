@@ -1,0 +1,1 @@
+PASS shared worker 12124, A vector ran on unregistered B task, both requests exited normally

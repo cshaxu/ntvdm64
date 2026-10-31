@@ -38,6 +38,22 @@ The selected SAS physical store is reserved with `VirtualAlloc` (`host/src/nt_me
 
 For unresolvable monitor-internal reads, `trap.asm:Kt0e8` dispatches a user exception from the saved user frame; the selected CCPU callback runs inside the exception delivery and may nonlocally return. `W32Exception` is present at WOW thunk boundaries and its existence alone does not establish a DOS or nested CPU-to-WOW exception handoff. Calling `RaiseException` or substituting guest #PF/#GP without tracing that owner would change observable behavior. No replacement is admitted by this observation.
 
+The actual source constraints are narrower than a generic “raise an access
+violation”: NT4 `Kt0e8` is reached only for an unresolved kernel-mode fault
+in a VDM, with the expected kernel code selector and no registered exception
+handler; its separate in-page/high-IRQL path does not take the same route.
+It switches back to the saved user trap frame, marks this particular access as
+a read, and passes the saved user EIP and failing address to the common
+exception dispatcher. In the selected product, the `W32Dispatch` filter and
+`W32TryCall` catch exceptions in their own thunk call scopes. The adapter
+`wow_user_dispatch_exception` temporarily selects that thunk's established
+task stack and restores it during filter processing; `W32Exception` may
+continue search, display a task error, or set a task-exit return marker on a
+VDM frame. No inspected source establishes that an arbitrary CCPU exception
+outside that thunk scope has such a live frame or equivalent SEH continuation.
+These source observations limit direct reuse; they do not prove that the NT4
+host path is unreachable or prescribe an alternative failure disposition.
+
 ## Selector ownership finding
 
 A direct NT4 source check adds a material qualification to the existing tests: `CsToLinearPM` calls `Ki386GetSelectorParameters`, which accepts a user LDT selector and requires an executable segment; it reads the current descriptor rather than the CPU's hidden segment cache. Many existing selected-CCPU fixtures use synthetic user GDT selectors, so their successes do not prove NT4's CS-selector admission semantics. The current monitor accepts those fixtures through cached CS base/limit. The real installed guest selector and error path must be traced before restricting this path: rejecting previously accepted GDT execution without that evidence would be a new observable compatibility change. Changed-descriptor tests should use a real CCPU LDT as well as the existing GDT controls. The same review applies to LMSW default DS/SS lookup, whose original `VdmSegParams` uses the descriptor table. This is not resolved by the TLB-cache simplification.

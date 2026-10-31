@@ -1,0 +1,2 @@
+PASS NTVDM export name/ordinal query/allocate/reallocate/free
+PASS failed reallocation preserves allocation and free space

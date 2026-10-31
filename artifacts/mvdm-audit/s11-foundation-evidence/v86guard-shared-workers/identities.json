@@ -1,0 +1,18 @@
+[
+  {
+    "name": "IDLPROBE",
+    "task": "000017BF",
+    "ticks": 16,
+    "idles": 19,
+    "cross": 4,
+    "crossTask": "0000177F"
+  },
+  {
+    "name": "IDLPEER",
+    "task": "0000177F",
+    "ticks": 4,
+    "idles": 0,
+    "cross": 0,
+    "crossTask": "00000000"
+  }
+]

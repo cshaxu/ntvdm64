@@ -1,9 +1,10 @@
 # T473 S11: finite acceptance and unresolved boundaries
 
 This is a checkpoint against the active S11 packet, not a T closure or a new
-scope. The released ten-component package is identified by the
-[manifest](s11-foundation-evidence/graph-owner-candidate/runtime-manifest.json)
-and [Full receipt](s11-foundation-evidence/graph-owner-candidate/timings.json).
+scope. The latest released ten-component package is identified by the
+[V86 mouse-regression record](s11-win386-v86-mouse-regression.md) and its
+[Full receipt](s11-win386-v86-mouse-evidence/full-timings.json). Earlier
+receipts below retain their original package identities.
 The owner excluded unrelated 486/CCPU internals and moved multi-window latency
 optimization to the queued T. Neither qualification turns a failed test into a
 pass or excuses a proved in-scope connection failure.
@@ -12,9 +13,9 @@ pass or excuses a proved in-scope connection failure.
 | --- | --- | --- |
 | Original execution / diagnostics | Targeted exception ordering and unneeded guest reads were recovered; selected objects and Full passed. [Receipt](s11-foundation-evidence/trace-scalar-candidate/review.md) | Full guest exception space and unsupported CPU profiles are not established. Separate demonstrated bit-index failure below is outside admitted repair scope. |
 | WOW host entry / failure | BOOLEAN bridge, controlled real-loader failure, normal loading and 16 Full gates passed. [Receipt](s11-foundation-evidence/wow-host-attach-failure/review.md) | Populated live explicit unload and independent Win16 guest DLL lifecycle are not established; preserve their specific owner and S14 handoff. |
-| Window identity / execution ownership | Terminal runtime ownership was corrected; deterministic lock and published real shared-worker retirement controls passed. [Audit](s11-closure-audit.md); [published witness](s11-foundation-evidence/published-shared-retirement-current/review.md) | Earlier pre-repair SOL native-return `1400` terminated a worker. Its failing substage/object was not captured, and later passing runs do not identify it. Correctness triage remains in S11 as required by the stage plan. Do not claim this observed failure fixed solely because a different interleaving was fixed. |
+| Window identity / execution ownership | Terminal runtime ownership was corrected; the V86guard release passed [same-worker task/idle](s11-foundation-evidence/v86guard-shared-workers/review.md) and [separate-worker retirement](s11-foundation-evidence/v86guard-separate-workers/review.md) rechecks. [Audit](s11-closure-audit.md); [shared dialog witness](s11-foundation-evidence/published-shared-retirement-current/review.md) | Earlier pre-repair SOL native-return `1400` terminated a worker. Its failing substage/object was not captured, and later passing runs do not identify it. Correctness triage remains in S11 as required by the stage plan. Do not claim this observed failure fixed solely because a different interleaving was fixed. |
 | SAS / BIOS dispatch | Original selected BOP and ROM verified; two fallback vector entries identified, actual initialized slots and calibrated breakpoints observed in one DOS and one Win16 path without hits. [Receipt](s11-foundation-evidence/sas-real-worker-observation/review.md) | These paths cannot prove universal non-reachability. Actual enhanced-mode external provider and selector/reset ownership remain S13 and any demonstrated guest callback consequence S14; retain original explicit failure behavior until a real consumer is established. |
-| Export identity / live memory provider | Canonical source and ordinal surface restored; selected real worker VDD/MEM normal and exhausted-reallocation controls passed. [Receipt](s11-foundation-evidence/published-export-live/review.md) | Broader memory-provider and task lifetime belong to S12; the bounded witness is not all consumers. |
+| Export identity / live memory provider | Canonical source and ordinal surface restored; the current V86guard release passed real worker VDD/MEM normal and exhausted-reallocation controls. [Receipt](s11-foundation-evidence/v86guard-export-live/review.md) | Broader memory-provider and task lifetime belong to S12; the bounded witness is not all consumers. |
 | Guest dependency / deployment | Archive contains manifest-matching original files; single-file isolated control shows Calculator reports missing WIN87EM when it is absent. [Receipt](s11-foundation-evidence/win87em-install-gap/review.md) | The current installation remains missing 15 manifest files. Automatic review rejected the attempted installation; do not bypass it or modify/recompile guest. Win2-specific loader and FPU behavior remain unverified, with S14 ownership. The Full receipt used a complete staged guest package, not this installed tree. |
 
 The independently controlled [CCPU bit-fault non-pass](s11-foundation-evidence/current-ccpu-execution-fixture/review.md)
@@ -63,7 +64,15 @@ or guest modification is authorized here.
 The independently staged [DOS4GW/NESticle STI fault-loop observation](s11-foundation-evidence/code32-prebuilt-search/review.md)
 is an S11 execution/host-connection non-pass. Read-only live instruction and
 selector capture plus pinned NT kernel source identify a concrete protected-mode
-privileged-instruction emulation boundary. Full interrupt/exception semantics,
-a targeted repair and real guest A/B acceptance are not yet established; the
-observation is not a passing 32-bit-code-segment return test and does not
-authorize unrelated CCPU or guest changes.
+privileged-instruction emulation boundary. The later monitored partial
+implementation and immutable guest observations in the same record reached
+graphical frames and were published, but did not establish a normal guest exit
+or complete interrupt/exception parity. The observation is not a passing
+32-bit-code-segment return test and does not authorize unrelated CCPU or guest
+changes. The later V86 regression and fix are separately documented in the
+latest release record above.
+
+A [V86guard NTVDM recheck](s11-foundation-evidence/v86guard-dos4gw/review.md)
+reached 78 graphical commits with the prior diagnostic frontend, but timed
+out while the interactive guest remained active. It does not establish normal
+exit or test the released NTCON.

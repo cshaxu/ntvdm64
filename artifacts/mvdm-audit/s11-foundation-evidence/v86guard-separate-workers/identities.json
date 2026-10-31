@@ -1,0 +1,34 @@
+[
+  [
+    {
+      "name": "IDLPROBE",
+      "task": "000017BF",
+      "ticks": 2,
+      "idles": 1,
+      "cross": 0,
+      "crossTask": "00000000"
+    },
+    {
+      "name": "IDLPEER",
+      "task": "000017B7",
+      "ticks": 12,
+      "idles": 11,
+      "cross": 0,
+      "crossTask": "00000000"
+    }
+  ],
+  [
+    {
+      "pid": "13208",
+      "task": "000017B7",
+      "exit": 0,
+      "kind": "original-process-exit"
+    },
+    {
+      "pid": "30532",
+      "task": "000017BF",
+      "exit": 0,
+      "kind": "original-process-exit"
+    }
+  ]
+]

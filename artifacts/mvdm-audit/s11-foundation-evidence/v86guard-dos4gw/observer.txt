@@ -1,0 +1,225 @@
+container=console-owning-nondebug
+pid=26304
+result=timeout
+exit=0x53504354
+graphics-handshake=none
+post-exit-observation-ms=0
+console-owner-observer=11676
+console-members-after-wait=2
+console-member=23816
+console-member=11676
+direct-child pid=34512 name=ntsrv.exe wait=258 exit-known=1 exit=00000103 path=O:\repos.hobby\ntvdm64\build\t473-s11\v86guard-dos4gw-run\runtime\system32\ntsrv.exe
+child-module pid=34512 base=6c970000 size=00066000 path=Z:\system32\ntsrv.exe
+child-module pid=34512 base=8d7d0000 size=0026c000 path=C:\WINDOWS\SYSTEM32\ntdll.dll
+child-module pid=34512 base=8c4b0000 size=000cb000 path=C:\WINDOWS\System32\KERNEL32.DLL
+child-module pid=34512 base=8ae50000 size=00409000 path=C:\WINDOWS\System32\KERNELBASE.dll
+child-module pid=34512 base=87310000 size=0009f000 path=C:\WINDOWS\SYSTEM32\apphelp.dll
+child-module pid=34512 base=8b6b0000 size=00118000 path=C:\WINDOWS\System32\RPCRT4.dll
+child-module pid=34512 base=8c1d0000 size=001de000 path=C:\WINDOWS\System32\USER32.dll
+child-module pid=34512 base=8ae20000 size=00027000 path=C:\WINDOWS\System32\win32u.dll
+child-module pid=34512 base=8d530000 size=0002b000 path=C:\WINDOWS\System32\GDI32.dll
+child-module pid=34512 base=8aa50000 size=00129000 path=C:\WINDOWS\System32\gdi32full.dll
+child-module pid=34512 base=8ac10000 size=000a3000 path=C:\WINDOWS\System32\msvcp_win.dll
+child-module pid=34512 base=8acc0000 size=0014c000 path=C:\WINDOWS\System32\ucrtbase.dll
+child-module pid=34512 base=8c3c0000 size=000bb000 path=C:\WINDOWS\System32\ADVAPI32.dll
+child-module pid=34512 base=8bb10000 size=000a9000 path=C:\WINDOWS\System32\msvcrt.dll
+child-module pid=34512 base=8b7d0000 size=000a8000 path=C:\WINDOWS\System32\sechost.dll
+child-module pid=34512 base=8bca0000 size=00031000 path=C:\WINDOWS\System32\IMM32.DLL
+child-module pid=34512 base=898b0000 size=0004a000 path=C:\WINDOWS\SYSTEM32\sspicli.dll
+child-module pid=34512 base=8a990000 size=000ac000 path=C:\WINDOWS\System32\bcryptPrimitives.dll
+child-image pid=34512 base=6c970000 size=00066000
+child-thread pid=34512 tid=7808 available=0 eip=00000000
+child-thread pid=34512 tid=12716 available=0 eip=00000000
+child-thread pid=34512 tid=31724 available=0 eip=00000000
+child-thread pid=34512 tid=19108 available=0 eip=00000000
+child-thread pid=34512 tid=5724 available=0 eip=00000000
+child-thread pid=34512 tid=17260 available=0 eip=00000000
+child-thread pid=34512 tid=19292 available=0 eip=00000000
+child-thread pid=34512 tid=15520 available=0 eip=00000000
+descendant-child pid=23816 name=ntcon.exe wait=258 exit-known=1 exit=00000103 path=O:\repos.hobby\ntvdm64\build\t473-s11\v86guard-dos4gw-run\runtime\system32\ntcon.exe
+child-module pid=23816 base=ce600000 size=00060000 path=Z:\system32\ntcon.exe
+child-module pid=23816 base=8d7d0000 size=0026c000 path=C:\WINDOWS\SYSTEM32\ntdll.dll
+child-module pid=23816 base=8c4b0000 size=000cb000 path=C:\WINDOWS\System32\KERNEL32.DLL
+child-module pid=23816 base=8ae50000 size=00409000 path=C:\WINDOWS\System32\KERNELBASE.dll
+child-module pid=23816 base=87310000 size=0009f000 path=C:\WINDOWS\SYSTEM32\apphelp.dll
+child-module pid=23816 base=8b6b0000 size=00118000 path=C:\WINDOWS\System32\RPCRT4.dll
+child-module pid=23816 base=8c1d0000 size=001de000 path=C:\WINDOWS\System32\USER32.dll
+child-module pid=23816 base=8ae20000 size=00027000 path=C:\WINDOWS\System32\win32u.dll
+child-module pid=23816 base=8d530000 size=0002b000 path=C:\WINDOWS\System32\GDI32.dll
+child-module pid=23816 base=8aa50000 size=00129000 path=C:\WINDOWS\System32\gdi32full.dll
+child-module pid=23816 base=8ac10000 size=000a3000 path=C:\WINDOWS\System32\msvcp_win.dll
+child-module pid=23816 base=8acc0000 size=0014c000 path=C:\WINDOWS\System32\ucrtbase.dll
+child-module pid=23816 base=8c3c0000 size=000bb000 path=C:\WINDOWS\System32\ADVAPI32.dll
+child-module pid=23816 base=8bb10000 size=000a9000 path=C:\WINDOWS\System32\msvcrt.dll
+child-module pid=23816 base=8b7d0000 size=000a8000 path=C:\WINDOWS\System32\sechost.dll
+child-module pid=23816 base=8bca0000 size=00031000 path=C:\WINDOWS\System32\IMM32.DLL
+child-module pid=23816 base=87510000 size=000aa000 path=C:\WINDOWS\system32\uxtheme.dll
+child-module pid=23816 base=8d180000 size=003a5000 path=C:\WINDOWS\System32\combase.dll
+child-module pid=23816 base=8d020000 size=0015b000 path=C:\WINDOWS\System32\MSCTF.dll
+child-module pid=23816 base=895f0000 size=0001b000 path=C:\WINDOWS\SYSTEM32\kernel.appcore.dll
+child-module pid=23816 base=8a990000 size=000ac000 path=C:\WINDOWS\System32\bcryptPrimitives.dll
+child-module pid=23816 base=7af00000 size=0001a000 path=C:\WINDOWS\system32\msctfmonitor.dll
+child-module pid=23816 base=7a490000 size=00058000 path=C:\WINDOWS\system32\MSUTB.dll
+child-module pid=23816 base=8bbc0000 size=000d9000 path=C:\WINDOWS\System32\OLEAUT32.dll
+child-module pid=23816 base=80680000 size=00146000 path=C:\WINDOWS\SYSTEM32\textinputframework.dll
+child-module pid=23816 base=8d560000 size=00199000 path=C:\WINDOWS\System32\ole32.dll
+child-module pid=23816 base=7a0b0000 size=00075000 path=C:\WINDOWS\system32\Oleacc.dll
+child-module pid=23816 base=8cf30000 size=000af000 path=C:\WINDOWS\System32\clbcatq.dll
+child-module pid=23816 base=781f0000 size=00033000 path=C:\WINDOWS\system32\msctfp.dll
+child-module pid=23816 base=233e0000 size=00044000 path=C:\WINDOWS\system32\MLANG.DLL
+child-module pid=23816 base=6ecc0000 size=000d6000 path=C:\Windows\System32\InputSwitch.dll
+child-module pid=23816 base=86d30000 size=0012d000 path=C:\Windows\System32\CoreMessaging.dll
+child-module pid=23816 base=82b50000 size=001aa000 path=C:\Windows\System32\DUI70.dll
+child-module pid=23816 base=76b80000 size=00291000 path=C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.26100.9818_none_3e071914e3359bdd\Comctl32.dll
+child-module pid=23816 base=8cd40000 size=000f8000 path=C:\WINDOWS\System32\shcore.dll
+child-module pid=23816 base=21230000 size=000a3000 path=C:\Windows\System32\DUser.dll
+child-module pid=23816 base=68b60000 size=006ff000 path=C:\WINDOWS\system32\windowsudk.shellcommon.dll
+child-module pid=23816 base=83a90000 size=0016a000 path=C:\WINDOWS\SYSTEM32\wintypes.dll
+child-module pid=23816 base=88380000 size=008c0000 path=C:\WINDOWS\SYSTEM32\windows.storage.dll
+child-module pid=23816 base=7e2a0000 size=00250000 path=C:\Windows\System32\twinapi.appcore.dll
+child-module pid=23816 base=70550000 size=00199000 path=C:\Windows\System32\Windows.UI.Core.TextInput.dll
+child-module pid=23816 base=82450000 size=002ed000 path=C:\WINDOWS\SYSTEM32\CoreUIComponents.dll
+child-module pid=23816 base=70310000 size=0005e000 path=C:\Windows\System32\Bcp47Langs.dll
+child-module pid=23816 base=85b00000 size=0026b000 path=C:\WINDOWS\system32\dwrite.dll
+child-module pid=23816 base=8c580000 size=007b0000 path=C:\WINDOWS\System32\SHELL32.dll
+child-module pid=23816 base=83410000 size=00050000 path=C:\WINDOWS\System32\UIAnimation.dll
+child-module pid=23816 base=85d70000 size=0025f000 path=C:\Windows\System32\d3d11.dll
+child-module pid=23816 base=87630000 size=00143000 path=C:\Windows\System32\dxgi.dll
+child-module pid=23816 base=8a7e0000 size=0005e000 path=C:\WINDOWS\SYSTEM32\powrprof.dll
+child-module pid=23816 base=8a7b0000 size=00015000 path=C:\WINDOWS\SYSTEM32\UMPDC.dll
+child-module pid=23816 base=19a50000 size=005b0000 path=C:\WINDOWS\SYSTEM32\D3D10Warp.dll
+child-module pid=23816 base=875e0000 size=0004a000 path=C:\WINDOWS\SYSTEM32\dxcore.dll
+child-module pid=23816 base=8b320000 size=0017e000 path=C:\WINDOWS\System32\CRYPT32.dll
+child-module pid=23816 base=842e0000 size=0005f000 path=C:\WINDOWS\SYSTEM32\directxdatabasehelper.dll
+child-module pid=23816 base=8a4e0000 size=00052000 path=C:\WINDOWS\SYSTEM32\cfgmgr32.dll
+child-module pid=23816 base=7e5d0000 size=0001d000 path=C:\WINDOWS\SYSTEM32\windows.staterepositorycore.dll
+child-module pid=23816 base=86660000 size=00234000 path=C:\WINDOWS\SYSTEM32\dcomp.dll
+child-module pid=23816 base=87110000 size=0001a000 path=C:\WINDOWS\SYSTEM32\Microsoft.Internal.WarpPal.dll
+child-module pid=23816 base=6de60000 size=000ff000 path=C:\WINDOWS\SYSTEM32\TextShaping.dll
+child-image pid=23816 base=ce600000 size=00060000
+child-thread pid=23816 tid=9764 available=0 eip=00000000
+child-thread pid=23816 tid=33708 available=0 eip=00000000
+child-thread pid=23816 tid=14236 available=0 eip=00000000
+child-thread pid=23816 tid=37476 available=0 eip=00000000
+child-thread pid=23816 tid=31544 available=0 eip=00000000
+child-thread pid=23816 tid=38368 available=0 eip=00000000
+child-thread pid=23816 tid=12432 available=0 eip=00000000
+child-thread pid=23816 tid=19768 available=0 eip=00000000
+child-thread pid=23816 tid=4464 available=0 eip=00000000
+child-thread pid=23816 tid=22124 available=0 eip=00000000
+child-thread pid=23816 tid=12196 available=0 eip=00000000
+child-thread pid=23816 tid=20128 available=0 eip=00000000
+child-thread pid=23816 tid=2264 available=0 eip=00000000
+child-thread pid=23816 tid=19320 available=0 eip=00000000
+child-thread pid=23816 tid=38112 available=0 eip=00000000
+child-thread pid=23816 tid=31560 available=0 eip=00000000
+child-thread pid=23816 tid=36236 available=0 eip=00000000
+child-thread pid=23816 tid=8428 available=0 eip=00000000
+child-thread pid=23816 tid=35452 available=0 eip=00000000
+child-thread pid=23816 tid=31508 available=0 eip=00000000
+descendant-child pid=17280 name=ntvdm.exe wait=258 exit-known=1 exit=00000103 path=O:\repos.hobby\ntvdm64\build\t473-s11\v86guard-dos4gw-run\runtime\system32\ntvdm.exe
+child-module pid=17280 base=00030000 size=00458000 path=Z:\system32\ntvdm.exe
+child-module pid=17280 base=8d7d0000 size=0026c000 path=C:\WINDOWS\SYSTEM32\ntdll.dll
+child-module pid=17280 base=8ced0000 size=00055000 path=C:\WINDOWS\System32\wow64.dll
+child-module pid=17280 base=8bb00000 size=0000b000 path=C:\WINDOWS\System32\wow64base.dll
+child-module pid=17280 base=8ce40000 size=0008b000 path=C:\WINDOWS\System32\wow64win.dll
+child-module pid=17280 base=8c490000 size=00019000 path=C:\WINDOWS\System32\wow64con.dll
+child-module pid=17280 base=773b0000 size=0000a000 path=C:\WINDOWS\System32\wow64cpu.dll
+child-image pid=17280 base=00030000 size=00458000
+child-thread pid=17280 tid=38184 available=1 eip=00035725
+child-frame pid=17280 tid=38184 index=0 pc=00035725
+child-frame pid=17280 tid=38184 index=1 pc=0018eff5
+child-frame pid=17280 tid=38184 index=2 pc=00037972
+child-frame pid=17280 tid=38184 index=3 pc=00037a42
+child-frame pid=17280 tid=38184 index=4 pc=00047fa9
+child-frame pid=17280 tid=38184 index=5 pc=00041ce2
+child-frame pid=17280 tid=38184 index=6 pc=774387dc
+child-frame pid=17280 tid=38184 index=7 pc=000620e6
+child-frame pid=17280 tid=38184 index=8 pc=75425d49
+child-frame pid=17280 tid=38184 index=9 pc=7742c88b
+child-frame pid=17280 tid=38184 index=10 pc=7742c811
+child-thread pid=17280 tid=33204 available=1 eip=7743a1cc
+child-frame pid=17280 tid=33204 index=0 pc=7743a1cc
+child-frame pid=17280 tid=33204 index=1 pc=75425d49
+child-frame pid=17280 tid=33204 index=2 pc=7742c88b
+child-frame pid=17280 tid=33204 index=3 pc=7742c811
+child-thread pid=17280 tid=34924 available=1 eip=7743a1cc
+child-frame pid=17280 tid=34924 index=0 pc=7743a1cc
+child-frame pid=17280 tid=34924 index=1 pc=75425d49
+child-frame pid=17280 tid=34924 index=2 pc=7742c88b
+child-frame pid=17280 tid=34924 index=3 pc=7742c811
+child-thread pid=17280 tid=12932 available=1 eip=7743a1cc
+child-frame pid=17280 tid=12932 index=0 pc=7743a1cc
+child-frame pid=17280 tid=12932 index=1 pc=75425d49
+child-frame pid=17280 tid=12932 index=2 pc=7742c88b
+child-frame pid=17280 tid=12932 index=3 pc=7742c811
+child-thread pid=17280 tid=31720 available=1 eip=7743a1cc
+child-frame pid=17280 tid=31720 index=0 pc=7743a1cc
+child-frame pid=17280 tid=31720 index=1 pc=75425d49
+child-frame pid=17280 tid=31720 index=2 pc=7742c88b
+child-frame pid=17280 tid=31720 index=3 pc=7742c811
+child-thread pid=17280 tid=11868 available=1 eip=7743a1cc
+child-frame pid=17280 tid=11868 index=0 pc=7743a1cc
+child-frame pid=17280 tid=11868 index=1 pc=75425d49
+child-frame pid=17280 tid=11868 index=2 pc=7742c88b
+child-frame pid=17280 tid=11868 index=3 pc=7742c811
+child-thread pid=17280 tid=9684 available=1 eip=7743890c
+child-frame pid=17280 tid=9684 index=0 pc=7743890c
+child-frame pid=17280 tid=9684 index=1 pc=75050d98
+child-frame pid=17280 tid=9684 index=2 pc=001b11c2
+child-thread pid=17280 tid=11108 available=1 eip=7743890c
+child-frame pid=17280 tid=11108 index=0 pc=7743890c
+child-frame pid=17280 tid=11108 index=1 pc=75050d98
+child-frame pid=17280 tid=11108 index=2 pc=001b1a73
+child-thread pid=17280 tid=15792 available=1 eip=7743890c
+child-frame pid=17280 tid=15792 index=0 pc=7743890c
+child-frame pid=17280 tid=15792 index=1 pc=75050d98
+child-frame pid=17280 tid=15792 index=2 pc=001b0ba3
+child-frame pid=17280 tid=15792 index=3 pc=75425d49
+child-frame pid=17280 tid=15792 index=4 pc=7742c88b
+child-frame pid=17280 tid=15792 index=5 pc=7742c811
+child-thread pid=17280 tid=34060 available=1 eip=7743890c
+child-frame pid=17280 tid=34060 index=0 pc=7743890c
+child-frame pid=17280 tid=34060 index=1 pc=000812a2
+child-frame pid=17280 tid=34060 index=2 pc=773f925f
+child-frame pid=17280 tid=34060 index=3 pc=773f9236
+child-frame pid=17280 tid=34060 index=4 pc=773f9279
+child-frame pid=17280 tid=34060 index=5 pc=773f91bc
+child-frame pid=17280 tid=34060 index=6 pc=773f91fd
+child-frame pid=17280 tid=34060 index=7 pc=77475252
+child-frame pid=17280 tid=34060 index=8 pc=7743a09c
+child-frame pid=17280 tid=34060 index=9 pc=773f279f
+child-frame pid=17280 tid=34060 index=10 pc=7747560b
+child-thread pid=17280 tid=16116 available=1 eip=7743837c
+child-frame pid=17280 tid=16116 index=0 pc=7743837c
+child-frame pid=17280 tid=16116 index=1 pc=0007e2ee
+child-frame pid=17280 tid=16116 index=2 pc=0007e075
+child-frame pid=17280 tid=16116 index=3 pc=0019fcba
+child-frame pid=17280 tid=16116 index=4 pc=75425d49
+child-frame pid=17280 tid=16116 index=5 pc=7742c88b
+child-frame pid=17280 tid=16116 index=6 pc=7742c811
+child-thread pid=17280 tid=22212 available=1 eip=7743890c
+child-frame pid=17280 tid=22212 index=0 pc=7743890c
+child-frame pid=17280 tid=22212 index=1 pc=75050d98
+child-frame pid=17280 tid=22212 index=2 pc=001b1a73
+child-thread pid=17280 tid=15756 available=1 eip=7743890c
+child-frame pid=17280 tid=15756 index=0 pc=7743890c
+child-frame pid=17280 tid=15756 index=1 pc=75050d98
+child-frame pid=17280 tid=15756 index=2 pc=00033567
+child-frame pid=17280 tid=15756 index=3 pc=7742c88b
+child-frame pid=17280 tid=15756 index=4 pc=7742c811
+timeout-ms=15000
+milestone-input=1 milestone-waits=0 milestone-wait-ms=0
+window-key-message-count=0 window-enter-count=0
+scripted-console-input=none
+console-mouse-mode-observed=no
+console-mouse-input=none
+fixed-system-root=Z:\
+fixed-system-root-chars=3
+fixed-system-root-short-chars=3
+fixed-system-root-short=Z:\
+image-module=run16.exe
+image-path=Z:\system32\run16.exe
+image-base=0x61b00000
+image-size=0x00053000
+stop-context=unavailable

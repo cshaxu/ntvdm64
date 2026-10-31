@@ -1,0 +1,10 @@
+{
+  "graphical_commits": 78,
+  "result": "timeout",
+  "launcher_exit": "0x53504354",
+  "native_frontend": "historical diagnostic, not release NTCON",
+  "ntvdm_input_sha256": "99BE9489EF361B97F77BFAE036FDBDA9F3A6202A1826258FF3FEE756B0C50400",
+  "guest_nesticle_sha256": "224E348E1FD5C11B16EF096FF5607C7C57C49D65FA7E4DBBC9B2A5C9C53E832B",
+  "guest_dos4gw_sha256": "B8265123AC8A189637448618409EF3ECD2E9F3E1A47062C685A02240F688DEC1",
+  "z_drive_after_cleanup": false
+}

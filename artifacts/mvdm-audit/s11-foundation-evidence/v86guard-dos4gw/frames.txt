@@ -1,0 +1,174 @@
+RECEIVER pid=23816
+GEOMETRY tick=139723203 op=2 seq=1 handle=00000000000001FC before=1:80,300/0,40/0,36,79,40 after=1:80,300/0,40/0,36,79,40 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723234 op=2 seq=7 handle=0000000000000200 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723453 op=2 seq=14 handle=0000000000000200 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723500 op=2 seq=22 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723500 op=2 seq=23 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723515 op=16 seq=24 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723515 op=2 seq=25 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723515 op=2 seq=26 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+GEOMETRY tick=139723921 op=2 seq=33 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,4/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+WRITE op=14 seq=34 status=0 result=1 error=0 rect=0,0,79,21 bytes=7040 text=priorshelloutputpriorshelloutputpriorshelloutputpriorshelloutputDOS/4GWProtectedModeRun-timeVersion1.97Copyright(c)RationalSystems,Inc.1990-1994
+GEOMETRY tick=139723921 op=3 seq=35 handle=0000000000000204 before=1:80,22/0,4/0,0,79,21 after=1:80,22/0,6/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+STAGED serial=1 error=0 kind=1 width=80 height=22 depth=0 bytes=19940
+COMMIT error=0 serial=1 kind=1 width=80 height=22 depth=0
+GEOMETRY tick=139724234 op=2 seq=44 handle=0000000000000214 before=1:80,22/0,6/0,0,79,21 after=1:80,22/0,6/0,0,79,21 request=0,0,0,0 status=0 result=1 error=0
+STAGED serial=2 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=2 kind=0 width=640 height=400 depth=8
+INPUT pid=23816 generation=2 op=18 seq=54 status=0 result=1 error=0 bytes=52 tick=139724484
+RECORD type=32771 down=0 repeat=0 vk=0 scan=0 char=0 control=0
+STAGED serial=3 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=3 kind=0 width=640 height=400 depth=8
+STAGED serial=4 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=4 kind=0 width=640 height=400 depth=8
+STAGED serial=5 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=5 kind=0 width=640 height=400 depth=8
+STAGED serial=6 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=6 kind=0 width=640 height=400 depth=8
+STAGED serial=7 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=7 kind=0 width=640 height=400 depth=8
+STAGED serial=8 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=8 kind=0 width=640 height=400 depth=8
+STAGED serial=9 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=9 kind=0 width=640 height=400 depth=8
+STAGED serial=10 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=10 kind=0 width=640 height=400 depth=8
+STAGED serial=11 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=11 kind=0 width=640 height=400 depth=8
+STAGED serial=12 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=12 kind=0 width=640 height=400 depth=8
+STAGED serial=13 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=13 kind=0 width=640 height=400 depth=8
+STAGED serial=14 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=14 kind=0 width=640 height=400 depth=8
+STAGED serial=15 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=15 kind=0 width=640 height=400 depth=8
+STAGED serial=16 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=16 kind=0 width=640 height=400 depth=8
+STAGED serial=17 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=17 kind=0 width=640 height=400 depth=8
+STAGED serial=18 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=18 kind=0 width=640 height=400 depth=8
+STAGED serial=19 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=19 kind=0 width=640 height=400 depth=8
+STAGED serial=20 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=20 kind=0 width=640 height=400 depth=8
+STAGED serial=21 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=21 kind=0 width=640 height=400 depth=8
+STAGED serial=22 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=22 kind=0 width=640 height=400 depth=8
+STAGED serial=23 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=23 kind=0 width=640 height=400 depth=8
+STAGED serial=24 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=24 kind=0 width=640 height=400 depth=8
+STAGED serial=25 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=25 kind=0 width=640 height=400 depth=8
+STAGED serial=26 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=26 kind=0 width=640 height=400 depth=8
+STAGED serial=27 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=27 kind=0 width=640 height=400 depth=8
+STAGED serial=28 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=28 kind=0 width=640 height=400 depth=8
+STAGED serial=29 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=29 kind=0 width=640 height=400 depth=8
+STAGED serial=30 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=30 kind=0 width=640 height=400 depth=8
+STAGED serial=31 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=31 kind=0 width=640 height=400 depth=8
+STAGED serial=32 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=32 kind=0 width=640 height=400 depth=8
+STAGED serial=33 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=33 kind=0 width=640 height=400 depth=8
+STAGED serial=34 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=34 kind=0 width=640 height=400 depth=8
+STAGED serial=35 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=35 kind=0 width=640 height=400 depth=8
+STAGED serial=36 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=36 kind=0 width=640 height=400 depth=8
+STAGED serial=37 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=37 kind=0 width=640 height=400 depth=8
+STAGED serial=38 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=38 kind=0 width=640 height=400 depth=8
+STAGED serial=39 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=39 kind=0 width=640 height=400 depth=8
+STAGED serial=40 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=40 kind=0 width=640 height=400 depth=8
+STAGED serial=41 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=41 kind=0 width=640 height=400 depth=8
+STAGED serial=42 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=42 kind=0 width=640 height=400 depth=8
+STAGED serial=43 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=43 kind=0 width=640 height=400 depth=8
+STAGED serial=44 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=44 kind=0 width=640 height=400 depth=8
+STAGED serial=45 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=45 kind=0 width=640 height=400 depth=8
+STAGED serial=46 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=46 kind=0 width=640 height=400 depth=8
+STAGED serial=47 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=47 kind=0 width=640 height=400 depth=8
+STAGED serial=48 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=48 kind=0 width=640 height=400 depth=8
+STAGED serial=49 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=49 kind=0 width=640 height=400 depth=8
+STAGED serial=50 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=50 kind=0 width=640 height=400 depth=8
+STAGED serial=51 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=51 kind=0 width=640 height=400 depth=8
+STAGED serial=52 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=52 kind=0 width=640 height=400 depth=8
+STAGED serial=53 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=53 kind=0 width=640 height=400 depth=8
+STAGED serial=54 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=54 kind=0 width=640 height=400 depth=8
+STAGED serial=55 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=55 kind=0 width=640 height=400 depth=8
+STAGED serial=56 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=56 kind=0 width=640 height=400 depth=8
+STAGED serial=57 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=57 kind=0 width=640 height=400 depth=8
+STAGED serial=58 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=58 kind=0 width=640 height=400 depth=8
+STAGED serial=59 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=59 kind=0 width=640 height=400 depth=8
+STAGED serial=60 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=60 kind=0 width=640 height=400 depth=8
+STAGED serial=61 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=61 kind=0 width=640 height=400 depth=8
+STAGED serial=62 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=62 kind=0 width=640 height=400 depth=8
+STAGED serial=63 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=63 kind=0 width=640 height=400 depth=8
+STAGED serial=64 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=64 kind=0 width=640 height=400 depth=8
+STAGED serial=65 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=65 kind=0 width=640 height=400 depth=8
+STAGED serial=66 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=66 kind=0 width=640 height=400 depth=8
+STAGED serial=67 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=67 kind=0 width=640 height=400 depth=8
+STAGED serial=68 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=68 kind=0 width=640 height=400 depth=8
+STAGED serial=69 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=69 kind=0 width=640 height=400 depth=8
+STAGED serial=70 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=70 kind=0 width=640 height=400 depth=8
+STAGED serial=71 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=71 kind=0 width=640 height=400 depth=8
+STAGED serial=72 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=72 kind=0 width=640 height=400 depth=8
+STAGED serial=73 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=73 kind=0 width=640 height=400 depth=8
+STAGED serial=74 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=74 kind=0 width=640 height=400 depth=8
+STAGED serial=75 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=75 kind=0 width=640 height=400 depth=8
+STAGED serial=76 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=76 kind=0 width=640 height=400 depth=8
+STAGED serial=77 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=77 kind=0 width=640 height=400 depth=8
+STAGED serial=78 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=78 kind=0 width=640 height=400 depth=8
+STAGED serial=79 error=0 kind=0 width=640 height=400 depth=8 bytes=256000
+COMMIT error=0 serial=79 kind=0 width=640 height=400 depth=8
+WINDOW_EVENT tick=139738640 source=1 type=6 down=0 scan=0
