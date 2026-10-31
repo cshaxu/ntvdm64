@@ -112,8 +112,50 @@ hooks and invokes a matched hook; its unmatched path raises a noncontinuable
 access violation with no exception parameters. A symbol search under
 `src/mvdm` found its definition and declaration, but no direct named caller.
 That VDD-hook failure path is therefore not evidence for synthesizing the
-saved-user-frame access exception required by `Kt0e8`; indirect or external
-callers are not ruled out by the search.
+saved-user-frame access exception required by `Kt0e8`. A source-wide original
+OpenNT comparison identifies its historical named caller in the separate
+`v86/monitor/i386/monitor.c:EventVdmMemAccess`: NT4's
+`vdmfault.c:VdmDispatchPageFault` publishes a `VdmMemAccess` event for a
+qualifying VDM access below 1 MiB, and the monitor passes the event address and
+read/write mode to `DispatchPageFault`. This removes the uncertainty about the
+historical caller, but the event originates in NT's host mapping fault and is
+not automatically equivalent to a CCPU guest-PTE page fault. The selected CCPU
+product does not contain that original i386 event loop. Reusing the existing
+dispatcher requires establishing the matching host-mapping fault boundary,
+address representation and continuation behavior; unconditionally calling it
+from CCPU #PF would change guest fault semantics. In particular the selected
+`nt_msscs.c:DispatchPageFault` subtracts the SIM32 base before matching its
+hook list, whereas the emulated CPU's fault address is a guest linear value;
+passing that value as the original host address would be wrong even when the
+numeric range is below 1 MiB. Hook registration also reserves UMB pages; it
+must be correlated with the selected SAS/host mapping before this path is
+connected.
+
+The correlation is now narrower: selected non-MONITOR `nt_umb.c` marks VDD
+reservations as `SAS_VDD` (`SAS_IO`) rather than creating NT4's protected
+section views. Selected CCPU `ccpusas4.c:phyR` has no dedicated SAS_IO read
+branch; its physical writes dispatch non-RAM/ROM types through registered
+memory handlers. The source search finds VIDEO registrations, but no explicit
+`gmi_define_mem(SAS_VDD, ...)` registration. These observations do not prove
+which provider a particular linked configuration installs or that a real VDD
+access succeeds or fails. The UMB object fixture validates the type transition
+only, not the VDD callback; `s44_test_vdd.c` uses a synthetic low guest
+address. Original SAMPLE2 obtains a mapped address via `GetVDMPointer` before
+registering, so that example also requires an actual pointer-identity check.
+VDD hook installation, access and teardown remain in S17, while S11 retains
+the separate monitor-fault ownership boundary; neither establishes the other.
+Inspection of the existing `S44_MEMORY_PROVIDER` confirms that its attach
+routine installs the hook, allocates and frees its range, and removes the hook
+before returning; it never executes a guest access while the hook is active.
+Therefore even that provider's successful registration cycle cannot stand in
+for the missing access/callback witness.
+Actual selected CCPU/SAS fixture case 146 now marks D0000h as SAS_VDD without
+installing a handler: a byte read returns backing byte `5a`, and a byte write
+raises `STATUS_ACCESS_VIOLATION` at null. This confirms the unbound-control
+behavior only; it deliberately does not call `VDDInstallMemoryHook`, initialize
+the complete production machine, or exercise a real VDD, and cannot establish
+the product's installed-hook lifecycle. The output is retained in
+[the control](s11-v86-origin-evidence/vdd-sas-unbound-control.txt).
 
 ## Selector ownership finding
 

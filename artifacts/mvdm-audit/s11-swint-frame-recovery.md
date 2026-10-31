@@ -565,6 +565,17 @@ the calls publishing flag 4 or the NT4 `DosxRmReflector` value. This supports
 the relevance of the IVT path without proving that hooked NT4 behavior is
 unreachable in every guest or lifecycle.
 
+A further source-wide search of the supplied OpenNT `.c`, `.h`, `.asm` and
+`.inc` files found `DosxRmReflector` named only in the ABI definitions and
+the NT4 consumers `emv86.asm` and `vdmints.c:PushRmInterrupt`; it found no
+named writer. The latter consumer independently confirms the same
+`CS -= vector; IP += vector * 16` encoding. The selected CPU40
+`DpmiInitDosx` reads its original shared-data fields, including `RmBopFe`,
+but has no `DosxRmReflector` field; its `RmBopFe` is used by buffer/stack
+completion. This rules out treating those two values as interchangeable, but
+does not exclude an offset-based or guest-side writer. No zero default or
+invented registration is used as evidence that the hook can be dispatched.
+
 The current unprefixed IOPL-3 candidate now follows the ordering in NT4
 `V86Intnn`: a single dword IVT read precedes three word writes at the wrapped
 final SP. With that exact implementation, the rebuilt CCPU boundary fixture

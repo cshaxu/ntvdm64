@@ -1085,6 +1085,19 @@ static LONG v86_installed_exception(EXCEPTION_POINTERS *ep) {
               ep->ExceptionRecord->NumberParameters > 1 ? (void *)ep->ExceptionRecord->ExceptionInformation[1] : NULL);
     report(line); return EXCEPTION_EXECUTE_HANDLER;
 }
+static int vdd_sas_unbound_control(void) {
+    extern void c_sas_connect_memory(ULONG,ULONG,int);
+    extern unsigned char spr_read_byte(ULONG);
+    extern void spr_write_byte(ULONG,unsigned char);
+    unsigned char before; char line[90];
+    c_sas_connect_memory(0xd0000,0xd0fff,4);
+    *c_GetPhyAdd(0xd0000)=0x5a;
+    before=spr_read_byte(0xd0000);
+    wsprintfA(line,"VDD_SAS_UNBOUND read=%02x\n",before); report(line);
+    __try {spr_write_byte(0xd0000,0xa5); report("VDD_SAS_UNBOUND_WRITE_RETURNED\n");}
+    __except(v86_installed_exception(GetExceptionInformation())) {return 1;}
+    return 0;
+}
 static USHORT v86_fault_partial_cs, v86_fault_partial_flags, v86_fault_partial_ip;
 static BOOL v86_stack_page_fault(ULONG vector, ULONG error) {
     ULONG *pte=(ULONG *)c_GetPhyAdd(0x9000);
@@ -1205,7 +1218,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==145) ok=v86_a20_word_ram_control();
+    if(test_case==146) ok=vdd_sas_unbound_control();
+    else if(test_case==145) ok=v86_a20_word_ram_control();
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
