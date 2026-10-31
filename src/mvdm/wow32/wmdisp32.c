@@ -379,28 +379,7 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 {
 
 #if 0
-    //
-    // this routine is never called!  It's used as a placeholder.
-    // if you want to make a change here, you have to make the change
-    // to the places where we compare the thunk routine to WM32NoThunking
-    // and only call the thunk routine if it's not this.  also make sure
-    // that this 'default' thunking happens for NoThunking messages.
-    //
-
-    if (lpwm32mpex->fThunk) {
-        LOGDEBUG(6,("    No Thunking was required for the 32-bit message %s(%04x)\n", (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));
-
-        lpwm32mpex->Parm16.WndProc.wMsg = (WORD)lpwm32mpex->uMsg;
-        lpwm32mpex->Parm16.WndProc.wParam = (WORD)lpwm32mpex->uParam;
-        lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpwm32mpex->lParam;
-    }
-
-    //
-    // this routine is never called!  It's used as a placeholder.
-    // if you want to make a change here, you have to make the change
-    // to the places where we compare the thunk routine to WM32NoThunking
-    // and only call the thunk routine if it's not this.
-    //
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     //

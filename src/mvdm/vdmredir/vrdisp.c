@@ -135,11 +135,7 @@ Return Value:
 
 {
 #if 0
-#if DBG
-    DbgPrint("VrDisp: You have successfully made a Bop into VdmRedir (%d)\n",
-        SvcCode
-        );
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     if (SvcCode > LAST_VR_FUNCTION) {

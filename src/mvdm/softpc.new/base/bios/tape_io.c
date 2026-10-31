@@ -116,7 +116,7 @@ half_word target_AR;
 
 	case INT15_EMS_DETERMINE:
 #if 0 /* I'm sure we've all had enough of this one */
-                always_trace0("INT15 Extended Memory Access");
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 #ifdef PM
                 outb(CMOS_PORT, CMOS_U_M_S_LO);

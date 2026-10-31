@@ -2018,7 +2018,7 @@ void SLKillFocus(
         if (!ped->fNoHideSel && (ped->ichMinSel != ped->ichMaxSel)) {
             NtUserInvalidateRect(ped->hwnd, NULL, FALSE);
 #if 0
-            SLSetSelection(ped, ped->ichCaret, ped->ichCaret);
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
         }
     }
@@ -2482,29 +2482,7 @@ foo:
         break;
 
 #if 0
-    case WM_NCPAINT: // not in server.c gawEditWndProc[] anyway.
-
-        /*
-         * LATER - This is an NT optimization.  It needs to be revisited
-         * for validity once all of the Chicago changes are done - Johnl
-         */
-
-        pwnd = (PWND)HtoP(hwnd);
-
-        /*
-         * Check to see if this window has any non-client areas that
-         * would be painted.  If not, don't bother calling DefWindowProc()
-         * since it'll be a wasted c/s transition.
-         */
-        if (!ped->fBorder &&
-            TestWF(pwnd, WEFDLGMODALFRAME) == 0 &&
-            !TestWF(pwnd, (WFMPRESENT | WFVPRESENT | WFHPRESENT)) &&
-            TestWF(pwnd, WFSIZEBOX) == 0) {
-            break;
-        } else {
-            goto PassToDefaultWindowProc;
-        }
-        break;
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     default:

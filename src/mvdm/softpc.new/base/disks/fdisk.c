@@ -1552,7 +1552,7 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #endif
 
 #if 0
-		dt1(DHW | PORTIO, 0, "inw on sector buffer returns %x(hex)\n", *value)
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 		dt1(DHW | PORTIO, INW_TRACE_HNDL, "inw on sector buffer", *value)
 #endif
@@ -1645,8 +1645,7 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 	{
 	case TFBASE:
 #if 0
-		dt1(DHW | PORTIO, 0, "outw to sector buffer, val %x(hex)\n",
-		    (unsigned) value)
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 		dt1(DHW | PORTIO, OUTW_TRACE_HNDL, "outw to sector buffer",
 		    (unsigned) value)

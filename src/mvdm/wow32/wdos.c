@@ -739,35 +739,7 @@ ULONG FASTCALL WK32GetCurrentDate(PVDMFRAME pFrame)
 
 
 #if 0
-/* The following routine will probably never be used because we allow
-   WOW apps to set a local time within the WOW. So we really want apps
-   that read the time with int21 to go down to DOS where this local time
-   is kept. But if we ever want to return the win32 time, then this
-   routine will do it. */
-/* WK32GetCurrentTime - Emulate DOS Get current Time call
- *
- *
- * Entry -
- *
- * Exit
- *    return value is packed with time information
- *
- */
-ULONG FASTCALL WK32GetCurrentTime(PVDMFRAME pFrame)
-{
-    SYSTEMTIME systemtime;
-
-    UNREFERENCED_PARAMETER(pFrame);
-
-    GetLocalTime(&systemtime);
-
-    return ((DWORD) (systemtime.wHour   << 24 |
-                     systemtime.wMinute << 16 |
-                     systemtime.wSecond << 8  |
-                     systemtime.wMilliseconds/10
-                     ));
-
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 /* WK32DeviceIOCTL - Emulate misc. DOS IOCTLs

@@ -276,7 +276,7 @@ CONST WORD gawEditWndProc[] = {
     WM_RBUTTONUP,
     WM_FINALDESTROY,
 #if 0
-    WM_NCPAINT,
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
     WM_PAINT,
     WM_PASTE,

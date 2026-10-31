@@ -669,23 +669,9 @@ HBITMAP CreateScreenBitmap(
                 dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;
 
 #if 0 // We use to do the dib-section create, but this breaks icons
-      // when they are made public (can't make a dibsection public). So
-      // we now wil create this as a real-dib.
-      //
-                {
-                DWORD dwDummy;
-
-                dib4Vga.bi.biWidth    =  cx;
-                dib4Vga.bi.biHeight   = -cy;     // top-down DIB (like a DDB)
-
-                hbm = CreateDIBSection(hdcScreen,
-                                       (LPBITMAPINFO)&dib4Vga,
-                                       DIB_RGB_COLORS,
-                                       (LPVOID)&dwDummy,
-                                       0,
-                                       0);
-                }
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
+#line 689 /* OPENNT-HOST-128: retain original diagnostic line numbers. */
 
                 dib1Vga.bi.biWidth  = cx;
                 dib1Vga.bi.biHeight = cy;

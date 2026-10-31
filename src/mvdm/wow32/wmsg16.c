@@ -377,10 +377,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_VSCROLL:
         *plParamNew = (LONG) HWND32(HIWORD(lParam));
 #if 0
-        if ((wParam == SB_THUMBPOSITION) || (wParam == SB_THUMBTRACK)) {
-            HIW(lpmpex->uParam) = LOWORD(lParam);
-        }
-        else if (wParam > SB_ENDSCROLL) {
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 
         //

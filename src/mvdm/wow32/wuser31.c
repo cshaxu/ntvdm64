@@ -768,9 +768,7 @@ ULONG FASTCALL WU32GetQueueStatus(PVDMFRAME pFrame)
     ULONG ul = 0;
 
 #if 0
-    UNREFERENCED_PARAMETER(pFrame);
-
-    LOGDEBUG(0, ("WOW : WU32GetQueueStatus() (Win 3.1) : contact ChandanC"));
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
     register PGETQUEUESTATUS16 parg16;
     GETARGPTR(pFrame, sizeof(GETQUEUESTATUS16), parg16);

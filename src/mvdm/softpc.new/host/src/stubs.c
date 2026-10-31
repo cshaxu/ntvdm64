@@ -529,18 +529,7 @@ getIntelRegistersPointer()
 }
 
 #if  0
-// these two crept into WOW - they are x86 monitor'isms
-
-word getEIP()
-{
-   return(c_getIP());
-}
-
-void setEIP(val)
-word  val;
-{
-    c_setIP(val);
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 int FlatAddress[1];

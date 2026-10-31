@@ -427,19 +427,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 	A_vid_writes = *handler;
 
 #if	0
-	A_vid_writes.b_write = handler->b_write;
-	A_vid_writes.w_write = handler->w_write;
-
-#ifndef	NO_STRING_OPERATIONS
-
-	A_vid_writes.b_fill = handler->b_fill;
-	A_vid_writes.w_fill = handler->w_fill;
-	A_vid_writes.b_fwd_move = handler->b_fwd_move;
-	A_vid_writes.b_bwd_move = handler->b_bwd_move;
-	A_vid_writes.w_fwd_move = handler->w_fwd_move;
-	A_vid_writes.w_bwd_move = handler->w_bwd_move;
-
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif	/* 0 */
 
 #endif /* C_VID */

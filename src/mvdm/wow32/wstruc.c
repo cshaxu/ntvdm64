@@ -957,16 +957,7 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
     lplf->lfPitchAndFamily = plf16->lfPitchAndFamily;
 
 #if 0
-    //
-    // can't do it this way, an app can have an unitialized lfFaceName
-    // that's a looong stream of non-null chars, in which case we blow
-    // out our stack.
-    //
-
-    p1 = lplf->lfFaceName;
-    p2 = plf16->lfFaceName;
-
-    while (*p1++ = *p2++);
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 
 #if (LF_FACESIZE != 32)

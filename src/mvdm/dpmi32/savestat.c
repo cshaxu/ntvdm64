@@ -114,14 +114,7 @@ Return Value:
 
 
 #if 0
-    if (getSS() != SavedState->SegSs) {
-        char szFormat[] = "NTVDM Dpmi Error! Can't set SS to %.4X\n";
-        char szMsg[sizeof(szFormat)+30];
-
-        wsprintf(szMsg, szFormat, SavedState->SegSs);
-        OutputDebugString(szMsg);
-        DbgBreakPoint();
-    }
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     setESP(SavedState->Esp);

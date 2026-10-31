@@ -572,7 +572,7 @@ IS32 ica_accept IFN1(IU32, adapter)
 	 * for some programs (eg DOOM with a mouse)
 	 */
 #if 0
-        line1 = 7;
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 	/* Skip spurious ints. These are any that are caused by clearing an

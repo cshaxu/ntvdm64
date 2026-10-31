@@ -470,72 +470,7 @@ DWORD GetThunkWindowProc(
 
 
 #if 0  // Currently unused
-
-BOOL FreeThunkWindowProc(
-    DWORD vpProc16
-) {
-    VPVOID      vptwp;
-    LPTWPLIST   lptwp;
-
-    /*
-    ** Scan the list for available TWPLIST entries
-    */
-    vptwp = vptwpFirst;
-
-    while ( vptwp != (VPVOID)NULL ) {
-
-        GETVDMPTR( vptwp, sizeof(TWPLIST), lptwp );
-
-        if ( lptwp->vpfn16 == vpProc16 ) {
-            /*
-            ** Found slot to free
-            */
-            lptwp->lpfn32 = 0;
-            lptwp->hwnd32 = (HWND)0;
-            lptwp->iClass = WOWCLASS_UNKNOWN;
-            FREEVDMPTR( lptwp );
-            return( TRUE );
-        }
-
-        vptwp = lptwp->vptwpNext;
-
-        FREEVDMPTR( lptwp );
-    }
-
-    return( FALSE );
-}
-
-void W32FreeThunkWindowProc(
-    DWORD       lpfn32,
-    DWORD       lpfn16
-) {
-    VPVOID      vptwp;
-    LPTWPLIST   lptwp;
-
-    /*
-    ** Scan the list for available TWPLIST entries
-    */
-    vptwp = vptwpFirst;
-
-    while ( vptwp != (VPVOID)NULL ) {
-
-        GETVDMPTR( vptwp, sizeof(TWPLIST), lptwp );
-
-        if ( lptwp->lpfn32 == lpfn32 ) {
-            /*
-            ** Found slot to free
-            */
-            lptwp->lpfn32 = 0;
-            lptwp->hwnd32 = (HWND)0;
-            lptwp->iClass = WOWCLASS_UNKNOWN;
-            FREEVDMPTR( lptwp );
-        }
-
-        vptwp = lptwp->vptwpNext;
-
-        FREEVDMPTR( lptwp );
-    }
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 DWORD IsThunkWindowProc(

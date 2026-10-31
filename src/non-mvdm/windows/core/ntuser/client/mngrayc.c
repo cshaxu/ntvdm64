@@ -145,13 +145,7 @@ BOOL ClientDrawState(
              * we're supporting GrayString().
              */
 #if 0 // This will get turned on if/when we change GrayString to tie
-      // into DrawState.
-      //
-      // FritzS
-            if ((uFlags & DST_GRAYSTRING) && SELECTOROF(qfnCallBack)) {
-                uFlags &= ~DST_TYPEMASK;
-                uFlags |= DST_COMPLEX;
-            }
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
             break;
 
@@ -187,11 +181,7 @@ BOOL ClientDrawState(
 
         case DST_COMPLEX:
 #if 0
-            if (!SELECTOROF(qfnCallBack)) {
-                DebugErr(DBF_ERROR, "DrawState: invalid callback for DST_COMPLEX");
-                fResult = FALSE;
-                goto CDS_Leave;
-            }
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
             break;
 

@@ -2170,38 +2170,5 @@ void CPU EmptyRXBuffer(int adapter)
 
 
 #if 0
-void host_com_state(int adapter)
-{
-
-    CURRENT_ADAPTER();
-
-    printf("Adapter          %d\n\n",adapter);
-    printf("RX in control    %s\n", current->RX_in_Control ? "TRUE" : "FALSE");
-    printf("XOFFInProgress   %s\n", current->XOFFInProgress ? "TRUE" : "FALSE");
-
-    printf("Head buffer ptr  %xh\n",current->head_inx);
-    printf("Tail buffer ptr  %xh\n",current->tail_inx);
-    printf("Bytes in buffer  %d\n",current->bytes_in_rxbuf);
-
-    printf("Bytes in TX buf  %d\n",current->no_tx_chars);
-    printf("TX buf threshold %d\n",current->tx_threshold);
-    printf("TX threshold max %d\n",current->max_tx_threshold);
-    printf("TX flush count   %d\n",current->tx_flush_count);
-    printf("TX timer count   %d\n",current->tx_heart_beat_count);
-
-    if(current->AdapterLock.DebugInfo)
-    {
-	printf("Adapter CS count %d\n",current->AdapterLock.DebugInfo->ContentionCount);
-	printf("Data CS count    %d\n",current->CSEvent.DebugInfo->ContentionCount);
-    }
-
-    printf("Bytes RX to date %d\n",byte_count);
-    printf("Last read size   %d\n",lastread);
-    printf("Avg read size    %d\n",byte_count && readcount ? byte_count/readcount : 0);
-    printf("Zero reads       %d\n",zeroreads);
-
-    zeroreads = readcount = byte_count=0;
-
-    com_reg_dump();
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif

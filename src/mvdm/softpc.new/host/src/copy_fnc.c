@@ -16,10 +16,7 @@ bwdcopy(
     )
 {
 #if 0
-register int loop;
-      for(loop = 0; loop < len; loop++)
-         *dest-- = *src--;
-
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
       int i;
 
@@ -57,25 +54,7 @@ memfill(
      memset(l_addr_in, data, len);
 
 #if 0
-	unsigned int data4;
-	unsigned char *l_addr = l_addr_in;
-	unsigned char *h_addr = h_addr_in;
-	unsigned int *l_addr4,*h_addr4;
-
-	l_addr4 = (unsigned int *)(((unsigned int)l_addr+3) & (~3));
-	h_addr4 = (unsigned int *)(((unsigned int)h_addr+1) & (~3));
-	if(h_addr4 > l_addr4)
-        {
-                data4 = data*0x01010101;   // 0x61 * 0x01010101 = 0x61616161
-                for(;(unsigned int *)l_addr < l_addr4;l_addr++)
-                    *l_addr = data;
-                do {
-                    *l_addr4++ = data4;
-                  } while (h_addr4 > l_addr4);
-
-		l_addr = (unsigned char *)l_addr4;
-	}
-        for(;l_addr <= h_addr;l_addr++)*l_addr = data;
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 }
 
@@ -179,10 +158,7 @@ memset4(
     )
 {
 #if 0
-        while( count -- )
-        {
-                *laddr++ = data;
-        }
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 
    /*

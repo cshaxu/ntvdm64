@@ -327,12 +327,7 @@ Notes:
             ((SubAlloc->BaseAddress + SubAlloc->Size * SUBALLOC_GRANULARITY)
             > *Address));
 #if 0            
-        {
-            char Buffer[80];
-            
-            sprintf(Buffer, "SAAllocate: Allocating at address %lx\n", *Address);
-            OutputDebugString(Buffer);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif        
         return TRUE;
         

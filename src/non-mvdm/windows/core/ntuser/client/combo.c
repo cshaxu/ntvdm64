@@ -1504,7 +1504,7 @@ BOOL xxxCBHideListBoxWindow(
     TL tlpwndList;
 
 #if 0
-    RECT rclistboxInvalid;
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     CheckLock(pcbox->spwnd);

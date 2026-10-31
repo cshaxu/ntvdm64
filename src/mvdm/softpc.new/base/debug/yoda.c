@@ -9363,59 +9363,7 @@ LOCAL print_stats IFN0()
 	}
 
 #if 0
-	switch (command)
-	{
-	    case RANGE:
-		for (i = from; i <= to; i++)
-		    counts_array[i] = 0;
-		break;
-
-	    case POINT:
-		counts_array[from] = 0;
-		break;
-
-	    case SELMEM:
-		for (i = 0; i < 192; i++)
-		    if ((i & 0x38) == to) 
-			counts_array[from + i] = 0;
-		break;
-
-	    case ALLMEM:
-		for (i = 0; i < 192; i++)
-		    counts_array[from + i] = 0;
-		break;
-
-	    case SELREG:
-		for (i = 192; i < 256; i++)
-		    if ((i & 0x38) == to) 
-			counts_array[from + i] = 0;
-		break;
-
-	    case SELALL:
-		for (i = 0; i < 256; i++)
-		    if ((i & 0x38) == to) 
-			counts_array[from + i] = 0;
-		break;
-
-	    case SEL5:
-		for (i = 0; i < 256; i++)
-		    if ((i & 0xF8) == to) 
-			counts_array[from + i] = 0;
-		break;
-
-	    case ALLREG:
-		for (i = 192; i < 256; i++)
-		    counts_array[from + i] = 0;
-		break;
-
-	    case ALL:
-		for (i = 0; i < 256; i++)
-		    counts_array[from + i] = 0;
-		break;
-
-	    default:
-		printf("Unknown command\n");
-	}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 	if (command != USE_NORMAL && command != USE_ZEROF)
@@ -9441,13 +9389,7 @@ LOCAL print_stats IFN0()
     fprintf(stats_file,"\nGRAND TOTAL = %d\n", super_total);
 
 #if 0
-    for (i = 0; i < 0x10000; i++)
-    {
-	if (instr_counts[i])
-	    printf("%d normals at %x\n", instr_counts[i], i);
-	if (zerof_instr_counts[i])
-	    printf("%d zerofs at %x\n", zerof_instr_counts[i], i);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 }
 

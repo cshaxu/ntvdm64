@@ -818,12 +818,7 @@ ULONG FASTCALL WG32SetBoundsRect(PVDMFRAME pFrame)
 
 
 #if 0  // implemented in gdi.exe
-
-ULONG FASTCALL WG32SetMetaFileBitsBetter(PVDMFRAME pFrame)
-{
-    return(WG32SetMetaFileBits(pFrame));
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 ULONG FASTCALL WG32SetViewportExtEx(PVDMFRAME pFrame)

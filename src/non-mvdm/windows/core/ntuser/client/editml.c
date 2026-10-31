@@ -1479,12 +1479,7 @@ void MLBuildchLines(
             }
         }
 #if 0
-        if (!ISDELIMETERAW((*(ptext + (ichLineEnd - 1)*ped->cbChar))) && ISDELIMETERAW((*(ptext + ichLineEnd*ped->cbChar)))) #ERROR
-
-            if ((*(ptext + ichLineEnd - 1) != ' ' &&
-                        *(ptext + ichLineEnd - 1) != VK_TAB) &&
-                        (*(ptext + ichLineEnd) == ' ' ||
-                        *(ptext + ichLineEnd) == VK_TAB))
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
         while (AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, ' ') ||
                 AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, VK_TAB)) {
@@ -1743,7 +1738,7 @@ void MLKeyDown(
              * Fix for Bug #4123 -- 02/07/91 -- SANKAR --
              */
 #if 0
-            if (GetDlgItem(ped->hwndParent, IDCANCEL))
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
                 /*
@@ -2843,7 +2838,7 @@ void MLSetFocus(
         ECReleaseEditDC(ped, hdc, TRUE);
     }
 #if 0
-    MLEnsureCaretVisible(ped);
+/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
     /*

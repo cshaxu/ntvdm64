@@ -65,18 +65,7 @@ VOID xmsEnableA20Wrapping(VOID)
 	*pHimemA20State = 0;
 
 #if 0 // this is not necessay because the intel space(pointed by
-      // HimemA20State) doesn't contain instruction
-      // doesn't contain instruction
-#ifdef MIPS
-	Sim32FlushVDMPointer
-	 (
-	  (((ULONG)pHimemA20State >> 4) << 16) | ((ULONG)pHimemA20State & 0xF),
-	  1,
-	  pHimemA20State,
-	  FALSE
-	 );
-
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 }
@@ -89,18 +78,7 @@ VOID xmsDisableA20Wrapping(VOID)
     if (pHimemA20State != NULL)
 	*pHimemA20State = 1;
 #if 0 // this is not necessay because the intel space(pointed by
-      // HimemA20State) doesn't contain instruction
-      // doesn't contain instruction
-#ifdef MIPS
-	Sim32FlushVDMPointer
-	 (
-	  (((ULONG)pHimemA20State >> 4) << 16) | ((ULONG)pHimemA20State & 0xF),
-	  1,
-	  pHimemA20State,
-	  FALSE
-	 );
-
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 }

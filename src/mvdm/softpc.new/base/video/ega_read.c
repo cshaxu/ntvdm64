@@ -685,11 +685,7 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 	A_vid_reads = *handler;
 
 #if	0
-	A_vid_reads.b_read = handler->b_read;
-	A_vid_reads.w_read = handler->w_read;
-#ifndef	NO_STRING_OPERATIONS
-	A_vid_reads.str_read = handler->str_read;
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif	/* 0 */
 
 #endif	/* C_VID */

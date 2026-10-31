@@ -1299,42 +1299,7 @@ nt_rflop_rate IFN2(UTINY, drive, half_word, rate)
 // only one FDC(and mutiple drive).
 
 #if 0
-	FLP flp = &floppy_data[drive];
-
-	switch (rate)
-	{
-		/* 2.88M high-density floppies */
-		case DCR_RATE_1000:
-
-			flp->density_state = DENSITY_EXTENDED;
-			set_floppy_parms (flp);
-			break;
-
-		/* 1.2M or 1.44M high-density floppies */
-		case DCR_RATE_500:
-
-			flp->density_state = DENSITY_HIGH;
-			set_floppy_parms (flp);
-			break;
-
-		/* 360K or 720K low-density floppies */
-		case DCR_RATE_250:
-		case DCR_RATE_300:
-
-			flp->density_state = DENSITY_LOW;
-			set_floppy_parms (flp);
-			break;
-
-		/* crapola density passed */
-		default:
-
-			return FAILURE;
-	}
-	note_trace2 (GFI_VERBOSE, "FDC: Set rate %0x => density %d",
-		rate, flp->density_state);
-	/* read floppy's boot sector */
-	/* to determine the real density */
-//	guess_media_density (drive);
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 #ifndef PROD
 	if (rflop_dbg & RFLOP_RATE) {

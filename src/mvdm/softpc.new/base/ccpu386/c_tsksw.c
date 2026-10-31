@@ -563,11 +563,7 @@ IFN5(
    /* code ok, load hidden cache */
    load_CS_cache(new_cs, cs_descr, &cs_entry);
 #if 0
-   /* retain operand size from gate until first instruction fetch */
-   if ( GET_CS_AR_X() == USE16 )
-      SET_OPERAND_SIZE(USE16);
-   else   /* USE32 */
-      SET_OPERAND_SIZE(USE32);
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
    /* check new SS and load if ok */

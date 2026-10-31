@@ -86,13 +86,13 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Remove artificial host/ABI intermediate roots, restore original non-MVDM relative paths, and resolve three duplicate headers without losing selected semantics. |
+| Objective | Audit and remove proven excluded mirror branch bodies while retaining conditional structure and registering each divergence; original-path correction is published. |
 | Delivery State | Original-path correction published; owner extended S12 to audit and mark excluded mirror branches. DOS4GW external fixture skipped. |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
 | Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
-| Verification | Trace each duplicate's actual consumers and source, compare preprocessed declarations and output, cached full builds, product regressions, complete ten-image publication and documentation checks. |
+| Verification | Trace actual build contexts and original sources; preserve active alternatives and guest; compare rebuilt ten-image outputs and run warranted regressions and documentation checks. |
 | Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
 | Asset Needs | Existing sources and build caches; no new guest. |
 | Reporting Requirements | Paths, collisions, tests, publication, commit and remaining limits. |

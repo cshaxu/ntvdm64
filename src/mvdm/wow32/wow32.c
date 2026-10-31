@@ -1875,12 +1875,7 @@ Return Value:
 #endif
 
 #if 0 // this code is a paranoid check, only useful when debugging GetPModeVDMPointer.
-        if (vp != Sim32GetVDMPointer(Address, Count, TRUE)) {
-            LOGDEBUG(LOG_ALWAYS,
-                ("GetPModeVDMPointer: GetPModeVDMPointerMacro(%x) returns %x, Sim32 returns %x!\n",
-                 Address, vp, Sim32GetVDMPointer(Address, Count, TRUE)));
-            vp =  Sim32GetVDMPointer(Address, Count, TRUE);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
         return vp;

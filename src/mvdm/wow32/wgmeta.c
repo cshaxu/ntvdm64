@@ -528,35 +528,5 @@ PMFR_Exit:
 }
 
 #if 0  // implemented in gdi.exe
-
-ULONG FASTCALL WG32GetMetaFileBits(PVDMFRAME pFrame)
-{
-    ULONG ul = 0;
-    register PGETMETAFILEBITS16 parg16;
-
-    GETARGPTR(pFrame, sizeof(GETMETAFILEBITS16), parg16);
-
-    if (GlobalLock16(parg16->f1,NULL))
-    {
-        GlobalUnlock16(parg16->f1);
-        ul = parg16->f1;
-    }
-
-    FREEARGPTR(parg16);
-    RETURN(ul);
-}
-
-ULONG FASTCALL WG32SetMetaFileBits(PVDMFRAME pFrame)
-{
-    ULONG ul;
-    register PSETMETAFILEBITS16 parg16;
-
-    GETARGPTR(pFrame, sizeof(SETMETAFILEBITS16), parg16);
-
-    ul = parg16->f1;
-
-    FREEARGPTR(parg16);
-    RETURN(ul);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif

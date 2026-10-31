@@ -1,4 +1,12 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-128: retain the original conditional directives and active
+alternatives while replacing verified original literal-zero branch bodies
+with numbered exclusion markers. The owner requires this format. These
+branches are disabled by their original #if 0 in every profile; details
+`clres.c` also retains its original diagnostic line number via `#line 689`;
+and original body hashes are recorded in
+`../../artifacts/mvdm-audit/s12-if0-original-subsets.json`.
+
 
 OPENNT-HOST-127: restore the original `ds/netapi/rap` paths for seven
 selected RAP sources and `ds/netapi/rpcxlate/apiworke.h` for the identical

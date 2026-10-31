@@ -121,37 +121,7 @@ BOOL FASTCALL WK32VirtualFree(PVDMFRAME pFrame)
 
 
 #if 0
-BOOL FASTCALL WK32VirtualLock(PVDMFRAME pFrame)
-{
-    PVIRTUALLOCK16 parg16;
-    BOOL fResult;
-
-    WOW32ASSERT(FALSE);     //BUGBUG we don't appear to ever use this function
-
-    GETARGPTR(pFrame, sizeof(VIRTUALLOCK16), parg16);
-
-    fResult = VirtualLock((LPVOID)parg16->lpvAddress,
-                             parg16->cbSize);
-
-    FREEARGPTR(parg16);
-    return (fResult);
-}
-
-BOOL FASTCALL WK32VirtualUnLock(PVDMFRAME pFrame)
-{
-    PVIRTUALUNLOCK16 parg16;
-    BOOL fResult;
-
-    WOW32ASSERT(FALSE);     //BUGBUG we don't appear to ever use this function
-
-    GETARGPTR(pFrame, sizeof(VIRTUALUNLOCK16), parg16);
-
-    fResult = VirtualUnlock((LPVOID)parg16->lpvAddress,
-                               parg16->cbSize);
-
-    FREEARGPTR(parg16);
-    return (fResult);
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 

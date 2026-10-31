@@ -590,12 +590,7 @@ GLOBAL void host_lpt_heart_beat(void)
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 #if 0
-GLOBAL boolean host_print_doc(int adapter)
-{
-    if(host_lpt[adapter].active) host_lpt_close(adapter);	    /* Close printer port */
-
-    return(TRUE);
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

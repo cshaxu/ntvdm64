@@ -700,14 +700,12 @@ ULONG FASTCALL WG32CreateIC(PVDMFRAME pFrame)
     len = psz1 ? strlen(psz1) : 0;
     if (len >= 7) {
 #if 0
-        static CHAR achPS[] = "PostScript Printer";
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
         if (!_stricmp(psz1+len-7, "pscript")
 #if 0
-            // let's see who else thinks they're using a pscript driver
-            //
-            && (RtlCompareMemory(achPS, psz2, sizeof(achPS)) == sizeof(achPS))
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
            ) {
 
@@ -2040,15 +2038,7 @@ ULONG FASTCALL WG32FrameRgn(PVDMFRAME pFrame)
 
 
 #if 0
-// there's no thunk for this routine
-ULONG FASTCALL WG32GdiFlush(PVDMFRAME pFrame)
-{
-    GdiFlush();
-
-    RETURN(0);
-
-    pFrame;
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 ULONG FASTCALL WG32GetBitmapBits(PVDMFRAME pFrame)
@@ -3986,19 +3976,7 @@ ULONG FASTCALL WG32UnrealizeObject(PVDMFRAME pFrame)
 // *** New Private APIs ***
 
 #if 0
-// no thunk for this routine!
-ULONG FASTCALL WG32GetObjectType( PVDMFRAME pFrame)
-{
-    ULONG ul;
-    PGETOBJECTTYPE16 parg16;
-
-    GETARGPTR(pFrame, sizeof(GETOBJECTTYPE16), parg16);
-
-    ul = GetObjectType(HOBJ32(parg16->f1));
-
-    FREEARGPTR(parg16);
-    RETURN(ul);
-}
+/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 
