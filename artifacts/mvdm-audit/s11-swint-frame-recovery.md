@@ -97,7 +97,11 @@ the separate final package from ten current build outputs also passed
 and the [synthetic mouse witness](s11-swint-limit-evidence/latest-mouse.txt).
 The original and isolated installations retained all 86 monitored guest
 binary hashes. This does not cover physical mouse input or every exception,
-selector-identity or callback-reentry boundary. Publication remains pending.
+selector-identity or callback-reentry boundary. Source commit `a40d83287`
+was published as a coherent ten-component baseline; both destinations match
+all 20 hashes. The installed `run16 cmd /c ver` smoke exited zero:
+[publication](s11-swint-limit-evidence/publication.json),
+[installed smoke](s11-swint-limit-evidence/installed-smoke.txt).
 The first Full invocation rejected mismatched sealed/unsealed cache identities
 before product tests; its [preflight result](s11-swint-limit-evidence/full-first-preflight.txt)
 is retained. The rerun uses hash-matched sealed runtime inputs and is separate.

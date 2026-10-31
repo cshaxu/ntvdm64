@@ -1,0 +1,10 @@
+{
+  "count": 20,
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/swint-limit-latest-package",
+  "result": "pass",
+  "utc": "2026-10-31T06:42:04.2734786Z"
+}
