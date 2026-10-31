@@ -1,0 +1,14 @@
+[
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\dpmi32\\dpmiint.c",
+    "Hash": "2A4AAD44674B7B7D8F1197B539A895378E7CB6B0413206A7E27376C1BB2C6B6A"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\host\\src\\nt_inthk.c",
+    "Hash": "D39BF0EE51B1EEF3D8CACAB1D82998B936FF5599746FC97468F5AC1022A68C84"
+  },
+  {
+    "Path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "Hash": "0F8FE0BDF89896F568349E9E0041A4F5D67A06EAC1A92078DA7D2D129D241D9E"
+  }
+]

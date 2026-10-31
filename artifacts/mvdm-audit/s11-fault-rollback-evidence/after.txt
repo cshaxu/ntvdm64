@@ -1,0 +1,1 @@
+DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1

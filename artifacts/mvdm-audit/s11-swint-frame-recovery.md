@@ -1,5 +1,25 @@
 # S11 protected software-interrupt frame candidate
 
+## Protected exception failure rollback (DIV-486)
+
+The original NT4 `Ki386VdmReflectException` builds its result in `RI` and
+copies registers back to the trap frame only after `PushException` succeeds.
+The selected CCPU DPMI handler instead cleared IF/TF before declining an
+absent protected fault handler, and deducted 20h from ESP before a failing
+frame build; `EndUseLockedPMStack` restores ESP only on the outermost unwind.
+The [selected-object baseline](s11-fault-rollback-evidence/before.txt) fails
+the unchanged-flags assertion. The candidate restores flags on an absent
+handler and restores saved ESP and flags on failed frame construction for
+CPU40/CCPU protected mode. The [post-change object control](s11-fault-rollback-evidence/after.txt)
+covers absent handler, outermost failure and nested failure; the 125-case CCPU
+suite also passes. It does not prove all nested host faults or V86 fallback.
+The [candidate evidence](s11-fault-rollback-evidence/) records the coherent
+ten-image Full, application and Win3.1 runs, and unchanged guest hashes.
+The tested package was published to both destinations with all 20 hashes
+matching; see [publication](s11-fault-rollback-evidence/publication.json).
+This delivery is a bounded S11 baseline and does not close the remaining
+monitor, paging or guest-exception ownership work.
+
 Status: published as a tested partial baseline, not S11 closure. Source
 commit `f1a641bd7`; the isolated candidate was published to both release
 destinations with all 20 hashes verified. The installed `run16 cmd /c ver`

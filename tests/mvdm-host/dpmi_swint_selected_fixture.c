@@ -84,6 +84,23 @@ void mvdm_softpc_report_dpmi_iret16(USHORT bits,USHORT a,USHORT b,USHORT c,USHOR
 int main(int argc, char **argv){
   unsigned mode, depth, order;
   ULONG before_fault_maps, before_fault_dispatches;
+  if(argc==2 && strcmp(argv[1],"--pm-fault-failure")==0) {
+    msw=1; flags=0x3302; sp=0x200; ss=0x27; cs=0x37; ip=0x1234;
+    DpmiFaultHandlers[14].CsSelector=0;
+    CHECK(!DpmiFaultHandler(14,2));
+    CHECK(flags==0x3302 && sp==0x200 && ss==0x27 && cs==0x37 && ip==0x1234);
+    descriptors[1].HighWord.Bits.Pres=1; DpmiFaultHandlers[14].CsSelector=0x0f;
+    for(depth=0;depth<2;++depth) {
+      flags=0x3302; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;
+      cs=0x37; ip=0x1234; LockedPMStackSel=0x17; LockedPMStackCount=depth;
+      descriptors[2].LimitLow=depth ? 0xffff : 1;
+      CHECK(!DpmiFaultHandler(14,2));
+      CHECK(flags==0x3302 && sp==(depth ? 0x21u : 0x200u) &&
+            ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth);
+    }
+    puts("DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1");
+    return 0;
+  }
   if(argc==2 && strcmp(argv[1],"--pm-fault-vector14")==0) {
     msw=1; flags=0x3302; sp=0x200; ss=0x27; cs=0x37; ip=0x1234;
     descriptors[1].HighWord.Bits.Pres=1; descriptors[2].LimitLow=0xffff;
@@ -173,7 +190,7 @@ int main(int argc, char **argv){
   CHECK(mappings==before_fault_maps && dispatches==before_fault_dispatches);
   DpmiFaultHandlers[14].CsSelector=0;
   flags=0x3302; CHECK(!DpmiFaultHandler(14, 2));
-  CHECK(flags==0x3002 && sp==0x200 && cs==0x27 && ip==0x1234);
+  CHECK(flags==0x3302 && sp==0x200 && cs==0x27 && ip==0x1234);
   puts("DPMI_V86_HIGH_FAULT_DECLINED_OK installed=2 protected=unchanged");
   msw=0;
   flags=0x4321; ss=16;

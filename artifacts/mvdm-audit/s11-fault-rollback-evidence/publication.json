@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-faultrollback-package",
+  "count": 20,
+  "result": "pass",
+  "utc": "2026-10-31T10:16:59.2694891Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ]
+}
