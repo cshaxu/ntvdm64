@@ -888,6 +888,7 @@ extern LDT_ENTRY *Ldt;
 extern ULONG IntelBase, Cpu40LdtShadowAddress;
 extern USHORT CurrentAppFlags;
 extern BOOL DpmiSwIntHandler(ULONG);
+extern BOOL host_swint_hook(long);
 extern long VdmInstallSoftwareIntHandler(void *);
 extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
 extern ULONG c_getEAX(void);
@@ -910,6 +911,20 @@ static int v86_decoded_interrupt(void) {
     c_setIOPL(3); c_setIF(1); c_setBX(0);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
+    if(test_case==147) {
+        BOOL handled;
+        DpmiInterruptHandlers[0x2a].cs=0;
+        DpmiInterruptHandlers[0x2a].flags=4;
+        c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1);
+        saved=c_getEFLAGS();
+        VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
+        handled=host_swint_hook(0x2a);
+        VdmInstallSoftwareIntHandler(NULL);
+        wsprintfA(line,"V86_HOOKED_INT2A handled=%d eax=%lx flags=%lx\n",handled,c_getEAX(),c_getEFLAGS());
+        report(line);
+        return !handled && c_getEAX()==0xf0f0f0f1 && c_getEFLAGS()==saved &&
+               c_getCS()==0x100 && c_getSP()==0x800 && c_getIP()==0x100;
+    }
     if(test_case==123) {
         test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
         INTx(7); VdmInstallSoftwareIntHandler(NULL);
@@ -1223,7 +1238,7 @@ int main(int argc, char **argv) {
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
-    else if(test_case>=121 && test_case<=127) ok=v86_decoded_interrupt();
+    else if((test_case>=121 && test_case<=127) || test_case==147) ok=v86_decoded_interrupt();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();

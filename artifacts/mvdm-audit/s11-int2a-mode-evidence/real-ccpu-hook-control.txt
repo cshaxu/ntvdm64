@@ -1,0 +1,1 @@
+V86_HOOKED_INT2A handled=0 eax=f0f0f0f1 flags=23202

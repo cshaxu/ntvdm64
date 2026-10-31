@@ -12,6 +12,11 @@ declines the signature in real mode and V86 while still handling the protected
 WOW signature. The guard is restricted to CPU40 CCPU. This test calls the
 selected DPMI object directly; it does not prove an installed guest reaches
 the collision or that the separate V86 hooked-reflector path is complete.
+The later real CCPU case 147 calls the installed `host_swint_hook` with VM=1,
+a hooked INT 2Ah and the same signature. It declines while preserving EAX,
+flags, CS, IP and SP; the expanded 126-case CCPU suite passes. This is a
+host-hook entry control, not an executed guest INT or proof that the subsequent
+hooked-reflector fallback works. [Control](s11-int2a-mode-evidence/real-ccpu-hook-control.txt).
 The coherent package passed the 125-case CCPU boundary fixture, Full gate,
 Winmine/SOL/WRITE and four SOL Options rounds, plus all four Win3.1
 mode/DOSONLY combinations. The 86 monitored guest binaries were unchanged.
