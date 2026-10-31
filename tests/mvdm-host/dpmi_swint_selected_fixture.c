@@ -3,6 +3,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <setjmp.h>
 #pragma pack(push,1)
 typedef struct { USHORT CsSelector, Flags; ULONG Eip; } HANDLER;
 #pragma pack(pop)
@@ -10,7 +11,7 @@ extern HANDLER DpmiInterruptHandlers[256];
 typedef struct { USHORT CsSelector, SsSelector; ULONG Eip, Esp, Flags; } FAULT_HANDLER;
 extern FAULT_HANDLER DpmiFaultHandlers[32];
 extern BOOL __cdecl DpmiSwIntHandler(ULONG);
-extern BOOL __cdecl DpmiV86SoftwareInt(ULONG);
+extern BOOL __cdecl DpmiV86SoftwareInt(ULONG, BOOL);
 extern BOOL __cdecl DpmiFaultHandler(ULONG, ULONG);
 extern void __cdecl DpmiFaultHandlerIret32(void);
 extern void __cdecl DpmiIntHandlerIret32(void);
@@ -76,8 +77,16 @@ void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
 LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;++ldt_publications;return 0;}
 static ULONG v86_reads, v86_writes;
-ULONG spr_read_dword(ULONG address){++v86_reads; return *(ULONG *)(memory+address);}
-void spr_write_word(ULONG address,USHORT value){++v86_writes; *(USHORT *)(memory+address)=value;}
+static ULONG v86_order[8], v86_sp[8], v86_flags[8], v86_order_count;
+static unsigned v86_fail_at;
+static jmp_buf v86_failure;
+static void v86_record(ULONG address) {
+  if(v86_order_count<8) { v86_order[v86_order_count]=address; v86_sp[v86_order_count]=sp;
+    v86_flags[v86_order_count++]=flags; }
+  if(v86_fail_at && v86_order_count==v86_fail_at) longjmp(v86_failure,1);
+}
+ULONG spr_read_dword(ULONG address){++v86_reads; v86_record(0x80000000u|address); return *(ULONG *)(memory+address);}
+void spr_write_word(ULONG address,USHORT value){++v86_writes; v86_record(address); *(USHORT *)(memory+address)=value;}
 void host_cpu40_set_virtual_if(BOOL enabled)
 {if(enabled) *(ULONG *)(memory+0x714)|=0x200; else *(ULONG *)(memory+0x714)&=~0x200u;}
 void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
@@ -188,26 +197,49 @@ int main(int argc, char **argv){
   flags=0x27302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
   *(USHORT *)(memory+0x31*4)=0x456; *(USHORT *)(memory+0x31*4+2)=0x300;
   DpmiInterruptHandlers[0x31].Flags=0;
-  CHECK(DpmiV86SoftwareInt(0x31));
+  CHECK(DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x1fa && cs==0x300 && ip==0x456 && flags==0x23002);
   CHECK(*(USHORT *)(memory+0x1fa)==0x1234 &&
         *(USHORT *)(memory+0x1fc)==0x27 && *(USHORT *)(memory+0x1fe)==0x7302);
   CHECK(v86_reads==1 && v86_writes==3);
   flags=0x23202; sp=0x200; cs=0x27; ip=0x1234;
   DpmiInterruptHandlers[0x31].Flags=4;
-  CHECK(!DpmiV86SoftwareInt(0x31));
+  CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x23202);
   DpmiInterruptHandlers[0x31].Flags=0; flags=0x20202;
-  CHECK(!DpmiV86SoftwareInt(0x31));
+  CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x20202);
-  flags=0x21202; CHECK(!DpmiV86SoftwareInt(0x31));
+  flags=0x21202; CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x21202);
-  flags=0x22202; CHECK(!DpmiV86SoftwareInt(0x31));
+  flags=0x22202; CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x22202);
-  flags=0x3202; CHECK(!DpmiV86SoftwareInt(0x31));
+  flags=0x3202; CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
   CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x3202);
   CHECK(v86_reads==1 && v86_writes==3);
   puts("DPMI_V86_INT_OWNER_OK ivt=1 hooked=untouched virtual_if=untouched pm=untouched");
+  flags=0x27302; ss=0; sp=4; cs=0x27; ip=0x1234; v86_order_count=0;
+  CHECK(DpmiV86SoftwareInt(0x31, TRUE));
+  CHECK(sp==0xfffe && cs==0x300 && ip==0x456 && flags==0x23002);
+  CHECK(*(USHORT *)(memory+2)==0x7302 && *(USHORT *)memory==0x27 &&
+        *(USHORT *)(memory+0xfffe)==0x1234);
+  CHECK(v86_order_count==4 && v86_order[0]==2 && v86_order[1]==0 &&
+        v86_order[2]==0xfffe && v86_order[3]==(0x80000000u|0xc4));
+  CHECK(v86_sp[0]==4 && v86_sp[1]==4 && v86_sp[2]==4 && v86_sp[3]==0xfffe &&
+        v86_flags[0]==0x23002 && v86_flags[1]==0x23002 &&
+        v86_flags[2]==0x23002 && v86_flags[3]==0x23002);
+  puts("DPMI_V86_PREFIX_SLOW_ORDER_OK wraps=1 ivt_last=1");
+  for(v86_fail_at=1;v86_fail_at<=4;v86_fail_at++) {
+    flags=0x27302; ss=0; sp=4; cs=0x27; ip=0x1234; v86_order_count=0;
+    *(USHORT *)(memory+2)=*(USHORT *)memory=*(USHORT *)(memory+0xfffe)=0xaaaa;
+    if(!setjmp(v86_failure)) { DpmiV86SoftwareInt(0x31, TRUE); CHECK(0); }
+    CHECK(flags==0x23002 && cs==0x27 && ip==0x1234);
+    CHECK(sp==(v86_fail_at==4 ? 0xfffe : 4));
+    CHECK(*(USHORT *)(memory+2)==(v86_fail_at>1 ? 0x7302 : 0xaaaa));
+    CHECK(*(USHORT *)memory==(v86_fail_at>2 ? 0x27 : 0xaaaa));
+    CHECK(*(USHORT *)(memory+0xfffe)==(v86_fail_at>3 ? 0x1234 : 0xaaaa));
+  }
+  v86_fail_at=0;
+  puts("DPMI_V86_PREFIX_PARTIAL_FAILURE_OK stages=4 mocked=1");
   /* NT4 PushException refuses V86 vectors above 7 before touching state,
    * regardless of whether a protected-mode fault vector is installed. */
   before_fault_maps=mappings; before_fault_dispatches=dispatches;

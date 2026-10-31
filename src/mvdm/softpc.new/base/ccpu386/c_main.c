@@ -3638,14 +3638,24 @@ TYPEC4:
       /* DIVERGENCE(MVDM-HOST-DIV-483): only this decoded software INT,
        * never another INTx caller, enters the V86 host reflector. */
       {
-      extern BOOL host_v86_software_int(IS32);
+      extern BOOL host_v86_software_int(IS32, BOOL);
+      extern BOOL host_exint_hook(IS32, IS32);
       IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
-      /* DIVERGENCE(MVDM-HOST-DIV-490): segment, address-size and REP
-       * prefixes do not alter the 16-bit INT frame. Exclude LOCK, F1,
-       * operand-size override and overlength instructions. */
-      if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
-          GET_OPERAND_SIZE() != USE16 ||
-          !host_v86_software_int((IS32)ops[0].sng))
+      /* DIVERGENCE(MVDM-HOST-DIV-490): the NT V86 slow dispatcher
+       * constructs a 16-bit INT frame even with operand-size prefixes.
+       * Exclude LOCK, F1 and overlength instructions. */
+      if (GET_VM() && GET_IOPL() == 3 && !GET_PG() && length >= 2 &&
+          length <= 15 && !v86_int_unsafe_prefix &&
+          (ops[0].sng == 3 || ops[0].sng == 4)) {
+         /* NT4's user-accessible IDT gates reflect these as exceptions. */
+         if (!host_exint_hook((IS32)ops[0].sng, 0)) INTx(ops[0].sng);
+      } else if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
+          /* The other user-accessible NT service gates have separate
+           * owners; retain the prior operand-override fallback for them. */
+          (GET_OPERAND_SIZE() != USE16 && ops[0].sng >= 0x2b && ops[0].sng <= 0x2e) ||
+          /* NT4's V86 INT 2Ah gate rewinds to CD before trap dispatch. */
+          !host_v86_software_int((IS32)ops[0].sng,
+                                 length > 2 && !(ops[0].sng >= 0x2a && ops[0].sng <= 0x2e)))
 #endif
       INTx(ops[0].sng);
 #if defined(NTVDM) && defined(CPU_40_STYLE)

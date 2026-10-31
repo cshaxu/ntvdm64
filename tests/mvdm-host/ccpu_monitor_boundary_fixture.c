@@ -971,12 +971,12 @@ static int protected_fault_decline_cpu(void) {
 
 static int v86_decoded_interrupt(void) {
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
-    unsigned vector=test_case==122 ? 0x2a : 0x31;
+    unsigned vector=(test_case==122 || test_case==194) ? 0x2a : 0x31;
     unsigned char code[]={0xcd,0x31,0xd6,0xfe};
     const unsigned char prefixes[]={0x26,0x2e,0x36,0x3e,0x64,0x65};
     unsigned char prefixed[]={0x26,0xcd,0x31,0xd6,0xfe};
-    BOOL segment_prefix=test_case>=168 && test_case<=174;
-    BOOL multiple_prefix=(test_case>=175 && test_case<=179) || test_case==182 || test_case==183 || (test_case>=186 && test_case<=189);
+    BOOL segment_prefix=(test_case>=168 && test_case<=174) || test_case==193 || test_case==194;
+    BOOL multiple_prefix=(test_case>=175 && test_case<=179) || (test_case>=182 && test_case<=184) || (test_case>=186 && test_case<=189) || test_case==192;
     unsigned char grouped[17]; unsigned group_length=0;
     unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
     ULONG saved; BOOL ok; char line[160];
@@ -1022,13 +1022,15 @@ static int v86_decoded_interrupt(void) {
     if(test_case==126) c_setIP(0xfffe);
     if(test_case==174) c_setIP(0xfffd);
     if(test_case==179 || test_case==189) c_setIP(0xfffc);
-    if(test_case==127) c_setSP(4);
+    if(test_case==127 || test_case==193 || test_case==194) c_setSP(4);
     DpmiInterruptHandlers[vector].cs=0x1f;
     DpmiInterruptHandlers[vector].flags=0; DpmiInterruptHandlers[vector].eip=0x200;
     if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
     code[1]=(unsigned char)vector;
     if(multiple_prefix) {
-        if(test_case==182 || test_case==183) { grouped[0]=test_case==182 ? 0xf2 : 0xf3; group_length=1; }
+        if(test_case==184) { grouped[0]=0x66; grouped[1]=0x26; group_length=2; }
+        else if(test_case==192) { grouped[0]=0x66; grouped[1]=0xf3; grouped[2]=0x26; group_length=3; }
+        else if(test_case==182 || test_case==183) { grouped[0]=test_case==182 ? 0xf2 : 0xf3; group_length=1; }
         else if(test_case==186) { grouped[0]=0x67; grouped[1]=0xf3; group_length=2; }
         else if(test_case==187) { grouped[0]=0x26; grouped[1]=0xf2; grouped[2]=0x2e; grouped[3]=0xf3; group_length=4; }
         else if(test_case==188) { memset(grouped,0xf3,13); group_length=13; }
@@ -1040,17 +1042,18 @@ static int v86_decoded_interrupt(void) {
         grouped[group_length+2]=0xd6; grouped[group_length+3]=0xfe;
         CopyMemory(c_GetPhyAdd((test_case==179 || test_case==189) ? 0x10ffc : 0x1100),grouped,group_length+4);
     } else if(segment_prefix) {
-        prefixed[0]=prefixes[test_case==174 ? 1 : test_case-168];
+        prefixed[0]=prefixes[test_case==174 ? 1 : ((test_case==193 || test_case==194) ? 0 : test_case-168)];
+        prefixed[2]=(unsigned char)vector;
         CopyMemory(c_GetPhyAdd(test_case==174 ? 0x10ffd : 0x1100),prefixed,sizeof(prefixed));
     } else CopyMemory(c_GetPhyAdd(test_case==126 ? 0x10ffe : 0x1100),code,sizeof(code));
     CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
     *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
     saved=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
     c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL);
-    ok=c_getCS()==0x300 && c_getSP()==(test_case==127 ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
-       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==((test_case==126 || test_case==174 || test_case==179 || test_case==189) ? 0 : (multiple_prefix ? 0x102+group_length : (segment_prefix ? 0x103 : 0x102))) &&
-       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12000 : 0x27fc)==0x100 &&
-       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12002 : 0x27fe)==(USHORT)saved &&
+    ok=c_getCS()==0x300 && c_getSP()==((test_case==127 || test_case==193 || test_case==194) ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
+       *(USHORT *)c_GetPhyAdd((test_case==127 || test_case==193 || test_case==194) ? 0x11ffe : 0x27fa)==((test_case==126 || test_case==174 || test_case==179 || test_case==189) ? 0 : (multiple_prefix ? 0x102+group_length : (segment_prefix ? 0x103 : 0x102))) &&
+       *(USHORT *)c_GetPhyAdd(test_case==193 ? 0x2000 : ((test_case==127 || test_case==194) ? 0x12000 : 0x27fc))==0x100 &&
+       *(USHORT *)c_GetPhyAdd(test_case==193 ? 0x2002 : ((test_case==127 || test_case==194) ? 0x12002 : 0x27fe))==(USHORT)saved &&
        !(c_getEFLAGS() & 0x4300) &&
        (test_case!=122 || c_getEAX()==0xf0f0f0f1);
     wsprintfA(line,"V86_DECODED_INT case=%d pass=%d cs=%x sp=%x bx=%x\n",
@@ -1079,7 +1082,10 @@ static int v86_unsupported_int_prefix(void) {
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
     DpmiInterruptHandlers[0x31].cs=0; DpmiInterruptHandlers[0x31].flags=0;
-    if(test_case>=190) {
+    if(test_case>=199) {
+        mixed[0]=0x66; mixed[4]=(unsigned char)(0x2b+test_case-199);
+        CopyMemory(c_GetPhyAdd(0x1100),mixed,sizeof(mixed));
+    } else if(test_case>=190) {
         mixed[0]=test_case==190 ? 0xf0 : (test_case==191 ? 0xf1 : 0x66);
         CopyMemory(c_GetPhyAdd(0x1100),mixed,sizeof(mixed));
     } else if(test_case==185) {
@@ -1101,11 +1107,12 @@ static int v86_unsupported_int_prefix(void) {
 
 /* NT4 handles one-byte INT3 and taken INTO as exceptions, unlike CD nn. */
 static int v86_trap_instruction(void) {
-    unsigned char code[]={0xcc,0xd6,0xfe};
+    unsigned char code[]={0xcc,0xd6,0xfe,0,0};
     const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
-    unsigned vector=test_case==157 ? 3 : 4;
+    unsigned vector=(test_case==157 || test_case==195 || test_case==197) ? 3 : 4;
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     BOOL taken=test_case!=159, ok; ULONG flags; char line[160];
+    USHORT return_ip=0x101;
     extern BOOL DpmiFaultHandler(ULONG, ULONG);
     c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
     c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
@@ -1113,6 +1120,13 @@ static int v86_trap_instruction(void) {
     c_setIOPL(3); c_setIF(1); c_setBX(0);
     flags=c_getEFLAGS(); if(vector==4 && taken) flags|=0x800; else flags&=~0x800u;
     c_setEFLAGS(flags); if(vector==4) code[0]=0xce;
+    if(test_case>=195) {
+        unsigned prefix=test_case>=197 ? 1 : 0;
+        if(prefix) code[0]=0x66;
+        code[prefix]=0xcd; code[prefix+1]=(unsigned char)vector;
+        code[prefix+2]=0xd6; code[prefix+3]=0xfe;
+        return_ip=(USHORT)(0x102+prefix);
+    }
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
     DpmiFaultHandlers[vector].cs=0; DpmiFaultHandlers[vector].flags=0;
@@ -1123,7 +1137,7 @@ static int v86_trap_instruction(void) {
     VdmInstallFaultHandler((void *)DpmiFaultHandler);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
     ok=test_irq==0 && (taken ? (c_getCS()==0x300 && c_getSP()==0x7fa && c_getBX()==0xbeef &&
-       *(USHORT *)c_GetPhyAdd(0x27fa)==0x101 && *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
+       *(USHORT *)c_GetPhyAdd(0x27fa)==return_ip && *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
        *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)flags) :
        (c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0));
     wsprintfA(line,"V86_TRAP_INSN case=%d pass=%d sw=%lu cs=%x sp=%x bx=%x\n",
@@ -1432,9 +1446,9 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
-    else if(test_case>=157 && test_case<=159) ok=v86_trap_instruction();
+    else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198)) ok=v86_trap_instruction();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
-    else if(test_case==180 || test_case==181 || test_case==184 || test_case==185 || (test_case>=190 && test_case<=192)) ok=v86_unsupported_int_prefix();
+    else if(test_case==180 || test_case==181 || test_case==185 || test_case==190 || test_case==191 || (test_case>=199 && test_case<=202)) ok=v86_unsupported_int_prefix();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();
     else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
     else if(test_case==146) ok=vdd_sas_unbound_control();
@@ -1442,7 +1456,7 @@ int main(int argc, char **argv) {
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
-    else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=179) || test_case==182 || test_case==183 || (test_case>=186 && test_case<=189)) ok=v86_decoded_interrupt();
+    else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=179) || (test_case>=182 && test_case<=184) || (test_case>=186 && test_case<=189) || (test_case>=192 && test_case<=194)) ok=v86_decoded_interrupt();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();

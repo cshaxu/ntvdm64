@@ -1,0 +1,18 @@
+DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1
+DPMI_V86_INT_OWNER_OK ivt=1 hooked=untouched virtual_if=untouched pm=untouched
+DPMI_V86_PREFIX_SLOW_ORDER_OK wraps=1 ivt_last=1
+DPMI_V86_PREFIX_PARTIAL_FAILURE_OK stages=4 mocked=1
+DPMI_V86_HIGH_FAULT_DECLINED_OK installed=2 protected=unchanged
+DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2
+DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2
+DPMI_SWINT_NULL_MAPPING_OK fallback=1 state=unchanged
+DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved
+DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full
+DPMI_INT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 frame=full
+DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled
+DPMI_PM_FAULT_REJECT depth=0 flags=3302 ss=27 sp=200 count=0
+DPMI_PM_FAULT_REJECT depth=1 flags=3302 ss=17 sp=21 count=1
+DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1
+DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2
+DPMI_PM_VECTOR14_FRAME_OK
+DPMI_NON_CCPU_V86_ISOLATION_OK

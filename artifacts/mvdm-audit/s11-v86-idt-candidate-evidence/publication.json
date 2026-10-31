@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-idt-final-candidate-package",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "result": "pass",
+  "count": 20,
+  "utc": "2026-10-31T12:48:17.1306507Z"
+}

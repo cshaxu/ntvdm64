@@ -539,7 +539,7 @@ Arguments:
 #if defined(CPU_40_STYLE) && defined(CCPU)
 /* DIVERGENCE(MVDM-HOST-DIV-482): invoked only for a decoded V86 INT
  * instruction, not for an exception that happens to share its vector. */
-BOOL DpmiV86SoftwareInt(ULONG IntNumber)
+BOOL DpmiV86SoftwareInt(ULONG IntNumber, BOOL Prefixed)
 {
     extern void spr_write_word(ULONG, USHORT);
     extern ULONG spr_read_dword(ULONG);
@@ -549,6 +549,20 @@ BOOL DpmiV86SoftwareInt(ULONG IntNumber)
     if (!(Flags & EFLAGS_VM_MASK) || (Flags & 0x3000) != 0x3000 ||
         (DpmiInterruptHandlers[IntNumber].Flags & VDM_INT_HOOKED))
         return FALSE;
+    if (Prefixed) {
+        /* NT4 OpcodeINTnnV86 commits flags first, wraps each push, commits
+         * SP, then reads the IVT. Preserve this order on partial failure. */
+        StackBase = (ULONG)getSS() << 4;
+        Sp = getSP();
+        setEFLAGS(Flags & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
+        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, (USHORT)Flags);
+        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, getCS());
+        Sp = (USHORT)(Sp - 2); spr_write_word(StackBase + Sp, getIP());
+        setSP(Sp);
+        Target = spr_read_dword(IntNumber * 4);
+        setIP(LOWORD(Target)); setCS(HIWORD(Target));
+        return TRUE;
+    }
     /* NT4 V86Intnn reads the IVT first, then writes a contiguous frame from
      * the wrapped final SP.  CCPU supervisor access translates each page. */
     Target = spr_read_dword(IntNumber * 4);

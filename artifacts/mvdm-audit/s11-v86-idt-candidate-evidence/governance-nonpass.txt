@@ -1,0 +1,6 @@
+Exception: O:\repos.hobby\ntvdm64\tools\governance\Verify-DocumentationGovernance.ps1:358
+Line |
+ 358 |  . yNtvdm64) { throw "Unapproved local path in current authority: $($cur .
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Unapproved local path in current authority:
+     | O:\repos.hobby\ntvdm64\docs\etc\operations\m0-t473-s12-ntcon-input-source-handoff.md: O:\w31\patch\win386.cmd

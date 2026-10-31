@@ -147,11 +147,11 @@ OUTPUT:
 #if defined(CCPU) || !defined(PROD)
 #ifdef CCPU
 /* A decoded V86 INT is distinct from x87 exceptions that also call INTx. */
-GLOBAL BOOL host_v86_software_int IFN1(IS32, int_no)
+GLOBAL BOOL host_v86_software_int IFN2(IS32, int_no, BOOL, prefixed)
 {
-    extern BOOL DpmiV86SoftwareInt(ULONG);
+    extern BOOL DpmiV86SoftwareInt(ULONG, BOOL);
     extern BOOL DpmiSwIntHandler(ULONG);
-    return SWIntHandler == DpmiSwIntHandler && DpmiV86SoftwareInt((ULONG)int_no);
+    return SWIntHandler == DpmiSwIntHandler && DpmiV86SoftwareInt((ULONG)int_no, prefixed);
 }
 #endif
 GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
