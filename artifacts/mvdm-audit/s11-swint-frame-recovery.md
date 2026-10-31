@@ -866,9 +866,12 @@ this is a controlled implementation mismatch, not a live guest reproduction.
 The assertion stays outside the passing suite until the reflection has
 correct virtual-IF, mapping and failure semantics.
 
-The unpaged IOPL-3 portion now has candidate `MVDM-HOST-DIV-485`: it reuses
-the original `ReflectV86Int` stack/IVT function, then clears TF and applies
-the registered interrupt-gate IF rule. The former vector-7 mismatch is now a
+The unpaged IOPL-3 portion now has `MVDM-HOST-DIV-485`: it reproduces
+the original `ReflectV86Int` stack/IVT sequence through CCPU supervisor memory
+accessors rather than calling that function, then clears TF and applies the
+registered interrupt-gate IF rule. The access choice and its unproved failure
+boundaries are recorded in [the source review](s11-v86-reflection-source-review.md).
+The former vector-7 mismatch is now a
 selected-object check over all eight vectors and both gate flags; it passes.
 A real CCPU divide-by-zero instruction also reached its IVT target and left
 the expected 16-bit fault frame; the expanded 117-case CCPU suite passed.
