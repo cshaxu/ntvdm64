@@ -11,7 +11,7 @@ Abstract: Selected Base-client VDM environment and command routines.
  * needs the excluded Base/CSR process-creation shell. Names, parameters,
  * algorithm, call order and failure directions are retained. */
 #include <nt.h>
-#include "opennt-host/base/ntos/rtl/environapi.h"
+#include "non-mvdm/host/base/ntos/rtl/environapi.h"
 #include <ntrtl.h>
 #include <wchar.h>
 

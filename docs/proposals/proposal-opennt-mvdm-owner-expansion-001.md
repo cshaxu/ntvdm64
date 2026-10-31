@@ -12,7 +12,7 @@ default build dependency.
 The product has twelve source components:
 
 - Original-code mirrors: `bx-core`, `opennt-guest`, `opennt-bop`,
-  `opennt-host`, `opennt-softpc`, `opennt-utils`.
+  `non-mvdm/host`, `opennt-softpc`, `opennt-utils`.
 - Mechanical adaptation: `bx-mantle`, `adapter-bop`, `adapter-softpc`,
   `adapter-win32`.
 - Project composition: `app`, `session`.
@@ -40,9 +40,9 @@ owner.
    `vdmutils` products. Import only a source-identical package with a declared
    caller; put non-production reference material under `docs/etc/legacy_code`.
 5. **S5 — optional host package preparation.** Audit VDD, debugger, fax and
-   WOW host packages for their future `opennt-host` owner. Preserve their
+   WOW host packages for their future `non-mvdm/host` owner. Preserve their
    external-source provenance and package boundaries, but do **not** import
-   them into `src/opennt-host` until a reached provider is admitted for actual
+   them into `src/non-mvdm/host` until a reached provider is admitted for actual
    composition.
 6. **S6 — original tool closure.** Admit needed `tools16` inputs below
    `tools/opennt` with source hashes and a declared guest-build consumer.

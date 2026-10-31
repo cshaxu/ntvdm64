@@ -709,7 +709,7 @@ return-2 behavior; export presence alone is not behavioral acceptance.
 This directory owns the target-local binding edge of `WOW32.DLL`.  It is not
 an OpenNT mirror root: the selected 77 original WOW32 C bodies, `wow32.def`,
 `wow32.rc`, and their original manifest remain under `src/mvdm/wow32/`.
-Original USER support bodies remain in their original `src/opennt-host/`
+Original USER support bodies remain in their original `src/non-mvdm/host/`
 paths.
 
 `source/` contains the 21 finite bindings selected by the formal WOW32 link.
@@ -1127,7 +1127,7 @@ instance.
 
 `include/nt_vdd.h` is a WOW32-only declaration wrapper for three cdecl worker
 imports under the original `/Gz` target convention.  The byte-exact original
-ABI carrier remains `src/opennt-abi/source/public/sdk/inc/nt_vdd.h`; ordinary
+ABI carrier remains `src/non-mvdm/abi/public/sdk/inc/nt_vdd.h`; ordinary
 MVDM consumers continue to include that original carrier directly.
 
 ## USER message and task boundary

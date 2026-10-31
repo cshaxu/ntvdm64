@@ -4,7 +4,7 @@
 
 S3 replaces the 137-line mutable MULTI_SZ implementation in
 `adapter-mvdm-host-out/win32/source/opennt_support_rtl.c` with the selected
-original OpenNT body at `opennt-host/base/ntos/rtl/environ.c`.  The imported
+original OpenNT body at `non-mvdm/host/base/ntos/rtl/environ.c`.  The imported
 body owns create, clone, query, set/replace/delete, current-environment and
 destroy behavior.  It is compiled with its historical x86 stdcall ABI into
 `original-opennt-rtl-x86.lib`.

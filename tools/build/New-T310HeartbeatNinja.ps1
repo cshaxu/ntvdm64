@@ -46,7 +46,7 @@ $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('cflags = /nologo /TC /c /MT /W4 /showIncludes /I "' +
     (NinjaPath (Join-Path $root 'src')) + '" /I "' +
-    (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '" /I "' +
+    (NinjaPath (Join-Path $root 'src/compat/include')) + '" /I "' +
     (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include')) + '"')
 $graph.Add('rule cc')
 $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in')

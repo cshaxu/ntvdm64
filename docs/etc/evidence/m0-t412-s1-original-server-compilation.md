@@ -3,7 +3,7 @@
 ## Scope and reproduction
 
 `node tools/audit/Verify-BrokerOriginalCompilation.mjs` compiles the complete
-selected `src/opennt-host/base/win32/server/srvvdm.c`, without changing its
+selected `src/non-mvdm/host/base/win32/server/srvvdm.c`, without changing its
 function bodies. It uses the existing formal x86 CCPU40 graph's compiler flags,
 MSVC 2022, and a test-only declaration boundary. All generated files remain in
 `build/M0-T412/S1/base-owner`. No probe executable is published.

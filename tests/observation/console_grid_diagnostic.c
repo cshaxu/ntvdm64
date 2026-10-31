@@ -42,4 +42,4 @@ static BOOL grid_write(HANDLE h,const CHAR_INFO *c,COORD s,COORD o,SMALL_RECT *r
 #define SetConsoleScreenBufferSize grid_size
 #define ReadConsoleOutputW grid_read
 #define WriteConsoleOutputW grid_write
-#include "../../src/opennt-abi/host-compat/console_grid.c"
+#include "../../src/compat/console_grid.c"

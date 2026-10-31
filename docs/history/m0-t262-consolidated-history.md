@@ -16,7 +16,7 @@ standard:
 - `opennt-guest`: 678 exact original inputs, including the owner-authorized
   OpenNT/OpenNT-4.5 DOS/V86 deployable, build and diagnostic inputs; no local
   divergence exists.
-- `opennt-host`: seven exact OpenNT files and four named original subsets with
+- `non-mvdm/host`: seven exact OpenNT files and four named original subsets with
   equal local/README `HOST-DIV-012..024` coverage; no non-mirror host file
   remains.
 

@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 
 int WINAPI wow_original_DialogBoxIndirectParamAorW(HINSTANCE instance,
     LPCDLGTEMPLATEW template_data, HWND owner, DLGPROC procedure,

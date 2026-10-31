@@ -6,7 +6,7 @@
 
 ## Decision
 
-`opennt-host` must follow the same source-fidelity rule as `opennt-guest`:
+`non-mvdm/host` must follow the same source-fidelity rule as `opennt-guest`:
 the component root may replace the historical repository prefix, but a retained
 OpenNT translation unit keeps its historical relative directory, filename and
 body.  A different filename such as `*_shim.c` is not an OpenNT mirror merely
@@ -44,17 +44,17 @@ source or dependency must be added to that audit before it enters an S.
 | S5 | Split the selector-blind copied-frame ingress from `opennt-bop` into `adapter-bop`, preserving OpenNT selector/service routing in `opennt-bop`. | `adapter-bop` owns the generic typed ingress/completion ABI; it names no selector, service family, DOS/WOW algorithm or provider, and `opennt-bop` no longer owns generic machine-event mechanics. |
 | S6 | Reconcile the ten-component target across architecture, goal, coding, rules and the active-packet terminology. Do not move implementation. | Component count, current build-module count, mapping ownership, adapter terminology and S follow-on ownership are internally consistent. |
 | S7 | Split the dependency-free per-VDM `session` foundation out of current composition/adapter state. Move only neutral lifecycle, resource/token, capability-registration, completion/event and teardown ownership; keep `app` as instance owner and retain all OpenNT/BOP/Win32/Bochs meaning in its existing owner. | `session` has no product-component dependency or service vocabulary; all extracted state has an exact former/new-owner map; no component calls upward into `app` to obtain session state. |
-| S8 | Restore the admitted non-original `opennt-host` exceptions through original OpenNT owner packages. Remove the drive-filter product feature; make original DEM, VDMREDIR and `nt_error.c` paths the providers; move XMS mechanics to `adapter-softpc`; and delete the superseded host shims. | The S8 disposition ledger is empty: every listed file is either byte-identical/re-rooted original source or has been deleted after its declared original/adaptor replacement passes focused tests. |
+| S8 | Restore the admitted non-original `non-mvdm/host` exceptions through original OpenNT owner packages. Remove the drive-filter product feature; make original DEM, VDMREDIR and `nt_error.c` paths the providers; move XMS mechanics to `adapter-softpc`; and delete the superseded host shims. | The S8 disposition ledger is empty: every listed file is either byte-identical/re-rooted original source or has been deleted after its declared original/adaptor replacement passes focused tests. |
 | S9 | Rebuild `nt_error.c`, `vrinit.c` and `vrnmpipe.c` as reviewable original-body subsets after owner rejection of the prior source-derived reductions. | Every retained function and its explanatory comments originate in the corresponding OpenNT span; only statement-local adapter calls differ, and no incomplete historical success is exposed. |
 | S10 | Remove selector-aware BOP/NTDOS/COMMAND observation and fixture-only residue from adapter production roots; relocate source-owned interpretation to `opennt-bop` and generic test hooks to `tests/` without altering provider behavior. | `adapter-bop` and `adapter-softpc` are selector/service/family/DOS/WOW blind in production code; component roots contain no fixture-only provider. |
 | S11 | Resolve remaining configuration support and any later-discovered host source-truth row not owned by S8/S9, using the same rule. | No generic configuration or unclassified host shim remains. |
-| S12 | Repair manifest/includes/tests, run formal Ninja closure and audit source/README exception one-to-one. | All production `opennt-host` paths meet the re-rooted-original or explicit-exception rule. |
-| S13 | Replace project-authored OpenNT-host compatibility headers with original `error.h`, `vrputil.h` and `vrnmpipe.h` mirrors; move only the necessary non-original composition/test declarations to their real owner. | No `*_compat.h` remains in `opennt-host`; every retained mirror is an exact original file or a reachable original subset with statement-local `DIVERGENCE(<ID>)` entries and one README row per difference. |
+| S12 | Repair manifest/includes/tests, run formal Ninja closure and audit source/README exception one-to-one. | All production `non-mvdm/host` paths meet the re-rooted-original or explicit-exception rule. |
+| S13 | Replace project-authored OpenNT-host compatibility headers with original `error.h`, `vrputil.h` and `vrnmpipe.h` mirrors; move only the necessary non-original composition/test declarations to their real owner. | No `*_compat.h` remains in `non-mvdm/host`; every retained mirror is an exact original file or a reachable original subset with statement-local `DIVERGENCE(<ID>)` entries and one README row per difference. |
 
 ## S8 owner-directed exception disposition
 
 S8 is the real source-fidelity closure for the currently admitted non-original
-`opennt-host` production files. It is not permission to retain a working
+`non-mvdm/host` production files. It is not permission to retain a working
 source-derived replacement merely because it has a fixture.
 
 1. **Remove drive filtering entirely.** Delete the CLI/environment
@@ -71,7 +71,7 @@ source-derived replacement merely because it has a fixture.
 3. **Delete `dem/opennt_dem_drive_policy_facade.h`.** It is a misplaced,
    unused BOP-composition declaration; its implementation is already owned by
    `opennt-bop/dem`. It has no replacement or migration target.
-4. **Move XMS mechanics out of `opennt-host`.** Split
+4. **Move XMS mechanics out of `non-mvdm/host`.** Split
    `xms/xms_shim.{c,h}` by reached original interface: A20, IVT, checked RAM
    and historical pointer-call mechanics become same-shaped `adapter-softpc`
    implementations; the original `xms.486` algorithm/body remains in
@@ -80,7 +80,7 @@ source-derived replacement merely because it has a fixture.
 5. **Replace `redir/redir_session_shim.{c,h}` with the original VDMREDIR
    package.** Import only reached original owner units from
    `base/mvdm/vdmredir/`.  Re-root host-only named-pipe/init helpers below
-   `opennt-host/vdmredir/`; re-root selector dispatch and guest-register/
+   `non-mvdm/host/vdmredir/`; re-root selector dispatch and guest-register/
    mailslot BOP bodies below `opennt-bop/vdmredir/`, because those units retain
    BOP service meaning. Preserve their call/record/failure structure; use
    existing `adapter-win32`, `adapter-softpc` and `session` contracts for
@@ -88,7 +88,7 @@ source-derived replacement merely because it has a fixture.
    and its self-authored pipe/mailslot implementation after replacement.
 6. **Replace `top_level/top_level_nosupport_shim.{c,h}` with original
    `softpc.new/host/src/nt_error.c`.** Re-root that source and its reached
-   headers in `opennt-host`; retain `host_direct_access_error` ordering and
+   headers in `non-mvdm/host`; retain `host_direct_access_error` ordering and
    per-thread duplicate suppression. A public modern dialog or controlled-stop
    seam belongs in `adapter-win32`/`session` only where the original NT4
    UI/CSR dependency cannot compose. Delete the shim afterward.
@@ -104,10 +104,10 @@ Examples of admissible paths:
 
 ```text
 refs/opennt/base/mvdm/softpc.new/host/src/nt_pif.c
-  -> src/opennt-host/softpc.new/host/src/nt_pif.c
+  -> src/non-mvdm/host/softpc.new/host/src/nt_pif.c
 
 refs/opennt/base/mvdm/softpc.new/host/inc/nt_pif.h
-  -> src/opennt-host/softpc.new/host/inc/nt_pif.h
+  -> src/non-mvdm/host/softpc.new/host/inc/nt_pif.h
 ```
 
 An adapter source may not masquerade as an OpenNT file.  For example, a new
@@ -142,7 +142,7 @@ composition name and must not replace the imported `nt_pif.c` body.
   `refs/opennt`, or exact enumerated source edits.
 - For each adapter/rehost: original call site, retained interface/layout/order,
   unavailable dependency, failure behavior, owner and focused fixture.
-- Static scan: no generic `*_shim.*` remains in `opennt-host` without an audit
+- Static scan: no generic `*_shim.*` remains in `non-mvdm/host` without an audit
   row and explicit final disposition.
 - Formal T260-derived manifest/Ninja build, `git diff --check`, documentation
   governance, and an independent single-person review of the final diff.

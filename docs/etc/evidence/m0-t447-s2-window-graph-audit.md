@@ -2472,7 +2472,7 @@ images matching assets/release and O:/winnt/system32. Only two images change:
 
 Other11 host images and46 guest/config files remain identical. The committed
 owner-approved ZIP remains unchanged. No changed paths under src/mvdm or
-src/opennt-host, no guest rebuild/hot patch, no new exported ABI or second
+src/non-mvdm/host, no guest rebuild/hot patch, no new exported ABI or second
 scheduler/object registry. Original message converters and cleanup remain
 selected; the new facade only publishes their typed host identities.
 Partial checkpoints and the r1 missing-header failure remain above rather
@@ -2624,7 +2624,7 @@ match the prior baseline. Candidate SHA256 identities:
 Separate source review confirms no new graph owner, property registry,
 scheduler, guest conversion or native enumeration policy. Added bindings are
 project-owned and selected through the existing provider header. Zero changed
-paths in src/mvdm or src/opennt-host; no guest image is rebuilt or patched.
+paths in src/mvdm or src/non-mvdm/host; no guest image is rebuilt or patched.
 The owner-approved ZIP remains exactly the committed6275809e0 payload.
 This closes only the returned-object group, not S2 or T447; message payload,
 reply identity and WRITE editing remain outside this delivery's acceptance.

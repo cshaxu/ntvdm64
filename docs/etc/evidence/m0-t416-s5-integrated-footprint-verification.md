@@ -43,7 +43,7 @@ The reproducible final paired measurement is
 | Cohort | S1 | S5 | Net |
 | --- | ---: | ---: | ---: |
 | Paired `mvdm` text distance | 4,695 | 4,621 | -74 |
-| Paired `opennt-host` text distance | 14,410 | 14,410 | 0 |
+| Paired `non-mvdm/host` text distance | 14,410 | 14,410 | 0 |
 | `mvdm-overlay` | 7 files / 266 lines | 7 / 266 | 0 |
 | `opennt-host-overlay` | 1 file / 30 lines | 1 / 30 | 0 |
 | Raw `adapter-mvdm-host-out` inventory | 10,219 lines | 9,719 lines | -500 |

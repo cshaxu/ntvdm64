@@ -9,7 +9,7 @@ invent a replacement subsystem?
 ## Evidence base
 
 - The selected 77-body manifest and ten original dispatch tables.
-- Original non-MVDM USER source already admitted as finite `opennt-host`
+- Original non-MVDM USER source already admitted as finite `non-mvdm/host`
   subsets, including desktop/client/cleanup/task/class/resource algorithms.
 - [Dynamic host-surface audit](m0-t422-s1-dynamic-host-surface-audit.md),
   which resolves 143 selected dynamic exports on this x86 host.
@@ -22,7 +22,7 @@ invent a replacement subsystem?
 | Dependency family | Original role | S1 disposition | Permitted receiving mechanism | Explicit prohibition / receiver |
 | --- | --- | --- | --- | --- |
 | Original WOW32 bodies | Win16 thunk, conversion and dispatch policy | Reuse selected body as-is; all 77 are already source-selected. | Original `src/mvdm/wow32` body plus finite ABI binding only at an unavailable edge. | No duplicated algorithm in a target-local facade; S2--S7 own runtime closure. |
-| Original USER client/kernel/RTL slices | Layout, class, cleanup, resource and selected client algorithms | Reuse only the function-scoped already admitted source slices or further individually admitted original files. | `src/opennt-host` at original path, with a bounded worker/DLL binding. | No recursive `ntuser` server import; no CSRSS/Win32k server runtime. S2--S7 name each added file/range. |
+| Original USER client/kernel/RTL slices | Layout, class, cleanup, resource and selected client algorithms | Reuse only the function-scoped already admitted source slices or further individually admitted original files. | `src/non-mvdm/host` at original path, with a bounded worker/DLL binding. | No recursive `ntuser` server import; no CSRSS/Win32k server runtime. S2--S7 name each added file/range. |
 | Guest-visible USER view | NT4 mapped desktop/client view and handle records | Required finite representation, source-shaped layouts/order. | One worker-local CCPU-visible backing producer paired with native object operations. | No host pointer/HWND/TEB in guest memory; no copied host desktop graph; S2. |
 | USER server scheduling / queues | USER locks, task queues, callback transitions | Recover selected original task algorithms, bind one worker-local runtime to public modern queue wait where contract permits. | Existing single runtime/session binding and original taskman/queue slices. | No second scheduler, TLS owner, SMS list or USER server; S2. |
 | NT kernel VDM / CPU30 monitor | Ring-0 trap/context/process mechanisms | Not composable for CPU40 standalone. | Existing CCPU40 worker, current finite guest-memory/page-domain ABI only. | No V86 monitor, trap frame, kernel thread/object or CPU30 revival; S2/S6 must not reintroduce it. |

@@ -32,6 +32,6 @@ original-code mirror bodies or invent a replacement external ABI.
 - [Mapping evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t268-s1-live-naming-mapping-001.md)
 - [Closure evidence](../../artifacts/documentation-archive/20260910/etc/evidence/m0-t268-current-naming-convergence-closure-001.md)
 
-T269 is separately admitted for `opennt-host` mirror and overlay convergence;
+T269 is separately admitted for `non-mvdm/host` mirror and overlay convergence;
 it does not reopen T268's completed naming scope.
 

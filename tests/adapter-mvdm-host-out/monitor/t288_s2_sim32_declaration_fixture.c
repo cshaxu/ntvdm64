@@ -1,4 +1,4 @@
-#include "opennt-abi/host-compat/include/nt.h"
+#include "compat/include/nt.h"
 #include "sim32.h"
 
 int monitor_declaration_fixture(void)

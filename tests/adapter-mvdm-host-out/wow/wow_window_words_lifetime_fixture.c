@@ -5,7 +5,7 @@
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
 #pragma warning(pop)
 
 static unsigned errors, active, destroyed;

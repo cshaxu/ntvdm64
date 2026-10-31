@@ -12,10 +12,10 @@ mkdirSync(`${build}/obj`, { recursive: true });
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/DWIN32", "/DWINNT",
-  "/FI", `\"${root}/src/opennt-abi/host-compat/include/nt.h\"`,
+  "/FI", `\"${root}/src/compat/include/nt.h\"`,
   "/I", `\"${root}/src/mvdm/inc\"`,
-  "/I", `\"${root}/src/opennt-abi/host-compat/include\"`,
-  "/I", `\"${root}/src/opennt-host/public/sdk/inc\"`
+  "/I", `\"${root}/src/compat/include\"`,
+  "/I", `\"${root}/src/non-mvdm/host/public/sdk/inc\"`
 ].join(" ");
 
 const lines = [

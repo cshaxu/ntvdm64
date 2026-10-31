@@ -6,7 +6,7 @@
 
 ## Decision
 
-The original-code components `bx-core`, `opennt-guest`, and `opennt-host` are
+The original-code components `bx-core`, `opennt-guest`, and `non-mvdm/host` are
 not general compatibility roots. Each production file must be exactly one of:
 
 1. a byte-identical file at the re-rooted Bochs/OpenNT relative path;
@@ -28,7 +28,7 @@ new non-mirror source file below the component root.
 | S1 | Full file/hash/diff/marker/README ledger for the three components. | Every production file has a source identity and disposition; no remediation is inferred from path names. |
 | S2 | `bx-core` repair: move its non-mirror header to the actual mechanical owner and make every retained Bochs diff hunk locally marked and README-indexed. | No project-authored source remains in `bx-core`; each retained upstream edit has a local marker and precise register row. |
 | S3 | `opennt-guest` zero-difference closure. | Every retained guest input is versioned or explicitly excluded as a non-production artifact; the two source roots remain byte-identical. |
-| S4 | `opennt-host` subset and minimal-edit closure. | Every non-exact host file is a named original subset/edit, its local markers match its README rows, and no non-mirror file remains. |
+| S4 | `non-mvdm/host` subset and minimal-edit closure. | Every non-exact host file is a named original subset/edit, its local markers match its README rows, and no non-mirror file remains. |
 | S5 | Cross-component final audit and formal-build regression. | Hash/marker/index checks pass; component boundaries remain unchanged; formal Ninja focused closure and documentation governance pass. |
 
 ## Source roots

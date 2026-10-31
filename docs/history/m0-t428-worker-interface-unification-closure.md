@@ -22,7 +22,7 @@ run16 remains a thin submitter/result waiter. NTCON is presentation-only;
 common carries neutral protocol/client/transport and worker-base carries the
 matching worker-only mechanisms. Cancellation and acknowledgment distinguish
 I/O lifetime from command completion. NTVDM's original execution, records,
-blocking/resume and cleanup remain in src/mvdm/src/opennt-host, unchanged by T428.
+blocking/resume and cleanup remain in src/mvdm/src/non-mvdm/host, unchanged by T428.
 Native real target/Console operations remain worker-local rather than becoming
 synthetic DOS records. Source-owned differences are explicitly audited, not
 hidden by neutral wrappers or mass renaming alone.

@@ -34,7 +34,7 @@ $manifest = [ordered]@{ schema = 'm0.t288.s2.monitor-declaration.v1'; architectu
     sources = @($fixture, $source | ForEach-Object { [ordered]@{ path = $_; sha256 = Sha256 (Join-Path $root $_) } });
     forbiddenInputs = @('src.old', 'sim32.c', 'v86 monitor body', 'prebuilt product archive') }
 $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
-$includes = @('src', 'src/mvdm-host/sim32', 'src/opennt-abi/host-compat/include',
+$includes = @('src', 'src/mvdm-host/sim32', 'src/compat/include',
     'src/mvdm-platform-abi/source/public/sdk/inc', 'src/mvdm-platform-abi/source/public/internal/base/inc',
     'src/mvdm-platform-abi/source/public/ddk/inc') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 ' + ($includes -join ' ')

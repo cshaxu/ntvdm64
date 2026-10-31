@@ -1,5 +1,14 @@
 # Source Layout
 
+## Original and shared compatibility roots
+
+`src/mvdm` remains the selected original MVDM mirror. `src/non-mvdm/host`
+and `src/non-mvdm/abi` retain the two original non-MVDM source cohorts; three
+headers share relative names but differ in content and must not be merged.
+`src/compat` contains the shared project-owned historical ABI bindings.
+Component-private adapters remain with their component. Moving these roots
+does not change their source provenance, executable ownership or ABI.
+
 ## Base RPC client slices — T445 S7
 
 NTSRV retains both source owners under opennt/source:
@@ -118,8 +127,8 @@ pair-only wording below, not the ban on native-specific frontend renderers.
 ```text
 src/
   mvdm/
-  opennt-host/
-  opennt-abi/host-compat/
+  non-mvdm/host/
+  compat/
   common/{protocol,codec,transport,console}/
   worker-base/
   run16-exe/
@@ -139,7 +148,7 @@ their manifest-declared build roles. It has no private implementation partner:
 strict mirror policy permits source only in its original OpenNT owner file,
 including audited original files newly imported at their upstream paths.
 The remaining
-`opennt-host/base/win32/winnls/fontsup/system/` carries the exact selected
+`non-mvdm/host/base/win32/winnls/fontsup/system/` carries the exact selected
 OpenNT font files, which are not under `base/mvdm`. The extracted printer
 carrier is named monitor-adapter material, not a second original root.
 One physical tree may generate several libraries; a path move does not create
@@ -250,7 +259,7 @@ executable that owns its process-local resource. Original code remains in its
 mirror even when several EXEs link it; BaseSrv protocol/client code remains
 `ntsrv`-owned even when both clients link it. Only a named, same-shaped
 historical host ABI whose finite public-Win32/NTDLL binding is recorded may
-live in `opennt-abi/host-compat`. The stateless shared product surface is
+live in `compat`. The stateless shared product surface is
 limited to common's specifically admitted protocol/codec/transport/Console
 mechanisms; worker package/media configuration lives in
 `ntvdm-exe/package_layout.[ch]`. Common/protocol owns service IDL and copied
@@ -273,7 +282,7 @@ historical record is evidence, not a selectable configuration.
   `vdmutils` tool and immutable `softpc.new/{bios,roms,data}` inputs preserve
   original relative paths. Build manifests, rather than parallel source roots,
   declare their host/guest/tool/firmware role.
-- `opennt-host` contains every complete selected original OpenNT host-service
+- `non-mvdm/host` contains every complete selected original OpenNT host-service
   package outside MVDM, plus separately admitted load-only OpenNT inputs such
   as the exact WinNLS font directory; each retains upstream-relative paths and
   filenames.
@@ -292,16 +301,16 @@ historical record is evidence, not a selectable configuration.
   not a host-runtime library or a second machine. Executable
   `mvdm/softpc.new/base/{bios,keymouse}` remains host-selected; `ntvdm` selects
   immutable inputs through its admitted composition binding.
-- `opennt-abi/host-compat` contains only the named, same-shaped historical
+- `compat` contains only the named, same-shaped historical
   host ABI declarations and finite public-Win32/NTDLL bindings that are used
   by more than one executable. It owns no broker wire policy, session state or
   guest state.
 - NTVDMx64-derived declarations or missing-provider fallbacks are provenance-
   registered adapter/ABI inputs, never a mirror component. They may not add a
-  file below `mvdm` or `opennt-host`; a mirror change is permitted only in an
+  file below `mvdm` or `non-mvdm/host`; a mirror change is permitted only in an
   existing upstream-mirror file and only when that file owns the logic.
 - `mvdm/dos/v86`, `mvdm/bin86` and `mvdm/wow16` are load-only selected guest
-  carries; `opennt-host/base/win32/winnls/fontsup/system` is the separately sourced load-only Win16 font
+  carries; `non-mvdm/host/base/win32/winnls/fontsup/system` is the separately sourced load-only Win16 font
   carry. None implies an unselected external source-universe import.
 - `run16` owns discovery, CreateProcess-style admission and parent waiting.
   `basesrv` owns authenticated endpoint/transport and the original-record

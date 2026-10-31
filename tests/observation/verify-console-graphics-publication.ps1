@@ -13,7 +13,7 @@ $sources=@('src/worker-base/publication.c','src/ntvdm-exe/win32/console_bitmap.c
 $objects=@()
 foreach($source in $sources){
  $object=Join-Path $root (([IO.Path]::GetFileNameWithoutExtension($source))+'.obj')
- & $wrapper cl.exe /nologo /MT /W4 /WX /O2 /TC "/I$repo/src" "/I$repo/src/opennt-abi/host-compat/include" /c (Join-Path $repo $source) "/Fo$object" *> (Join-Path $root ((Split-Path $object -Leaf)+'.log'))
+ & $wrapper cl.exe /nologo /MT /W4 /WX /O2 /TC "/I$repo/src" "/I$repo/src/compat/include" /c (Join-Path $repo $source) "/Fo$object" *> (Join-Path $root ((Split-Path $object -Leaf)+'.log'))
  if($LASTEXITCODE){throw "Compilation failed: $source"}
  $objects+=$object
 }

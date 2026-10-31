@@ -39,7 +39,7 @@ static PVOID WINAPI startup_allocate(SIZE_T bytes)
 #undef UserAllocPoolWithQuota
 #define UserAllocPoolWithQuota(bytes, tag) startup_allocate(bytes)
 #define xxxInitTask diagnostic_original_InitTask
-#include "../../src/opennt-host/windows/core/ntuser/kernel/queue.c"
+#include "../../src/non-mvdm/host/windows/core/ntuser/kernel/queue.c"
 #undef xxxInitTask
 
 NTSTATUS WINAPI xxxInitTask(UINT version, PUNICODE_STRING name, DWORD task,

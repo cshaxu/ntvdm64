@@ -89,10 +89,10 @@ it does not admit implementation, close audit rows or reorder Queue.
 | D05 | DOS task completion, parent notification, exit-code and record cleanup, with WOW exit capability explicitly accounted for. | Original BaseSrv exit/lifecycle slice, including `BaseSrvExitDOSTask`, hosted in `basesrv.exe`. |
 | D06 | Reentry accounting and its interaction with native-child waits and completion; remove autonomous scheduling policy from the adapter. | `srvvdm.c:BaseSrvSetReenterCount` and its original callers. |
 | D07 | Client capture/result-copy, wait and retry ordering, including insufficient buffers and cleared retry exit code. | Original BaseClient `vdm.c:GetNextVDMCommand` slice, on the requesting client/worker side, not a server-side replacement. |
-| D10 | Original executable-format classification and error behavior; keep CLI existence checks, search, routing and worker creation distinct. | Original BaseClient `vdm.c:GetBinaryTypeW` slice in `opennt-host`, used by the `run16.exe` entry composition. |
+| D10 | Original executable-format classification and error behavior; keep CLI existence checks, search, routing and worker creation distinct. | Original BaseClient `vdm.c:GetBinaryTypeW` slice in `non-mvdm/host`, used by the `run16.exe` entry composition. |
 
 One package does not mean one source component: original BaseSrv/BaseClient
-algorithms remain in `opennt-host`; original MVDM callers remain in
+algorithms remain in `non-mvdm/host`; original MVDM callers remain in
 `mvdm-host`; `app` supplies launcher/product composition; package-private
 adapters and `broker` supply finite resource bindings and copied transport.
 D07 runs where the API caller resides, including `ntvdm.exe`; it must not
@@ -118,8 +118,8 @@ WOW32, DPMI, DOSX or WRITE internal behavior into the broker.
 ### Finite outgoing closure and ownership
 
 - Retain the selected original BaseSrv bodies, structures, ordering and
-  failure rules under `opennt-host/base/win32/server/`, including `srvvdm.c`.
-  Original BaseClient slices also remain in `opennt-host`; MVDM consumers
+  failure rules under `non-mvdm/host/base/win32/server/`, including `srvvdm.c`.
+  Original BaseClient slices also remain in `non-mvdm/host`; MVDM consumers
   remain in `mvdm-host`. Executable placement in `basesrv.exe` does not move
   original algorithms into the project-owned `broker` source component.
 - Bind CSR transport through a package-private `adapter-opennt-host` seam

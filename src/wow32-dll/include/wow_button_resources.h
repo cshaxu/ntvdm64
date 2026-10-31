@@ -2,7 +2,7 @@
 #define WOW_BUTTON_RESOURCES_H
 #include <windows.h>
 #define WOW_ORIGINAL_BUTTON_RESOURCES
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_BUTTON_RESOURCES
 
 /* Caller-owned derived resources. No HWND, private host pointer or cache. */

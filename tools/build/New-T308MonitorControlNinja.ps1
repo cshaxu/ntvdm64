@@ -14,7 +14,7 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (!(Test-Path $vs) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'Missing MSVC Build Tools or Ninja.' }
 $sources = @(
     'src/ntvdm-exe/session/guest_memory_lease.c', 'src/ntvdm-exe/session/session.c',
-    'src/opennt-abi/host-compat/opennt_support_rtl.c',
+    'src/compat/opennt_support_rtl.c',
     'src/ntvdm-exe/monitor/source/vdm_control.c',
     'src/ntvdm-exe/monitor/mvdm_vdm_tib.c')
 $fixtures = @(
@@ -24,7 +24,7 @@ foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
 $envFile = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T308_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T308_CALLER_CWD%"', '%*') | Set-Content $envFile -Encoding ascii
-$includes = @('src/ntvdm-exe/session','src/opennt-abi/host-compat/include','src/opennt-host/public/sdk/inc','src/opennt-abi/source/public/sdk/inc','src/opennt-abi/source/public/internal/base/inc','src/ntvdm-exe/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$includes = @('src/ntvdm-exe/session','src/compat/include','src/non-mvdm/host/public/sdk/inc','src/non-mvdm/abi/public/sdk/inc','src/non-mvdm/abi/public/internal/base/inc','src/ntvdm-exe/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 # Do not define the historical i386 product marker globally.  The monitor
 # context selects only the original _X86_ declaration gate for this x86 build.
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /WX /showIncludes /DWIN_32 ' + ($includes -join ' ')

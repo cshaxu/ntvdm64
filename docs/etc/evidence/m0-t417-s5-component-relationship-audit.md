@@ -11,7 +11,7 @@ In particular, the audit checked direct callers of the legacy `broker_*`
 exports and found definitions only: there is no production source caller.
 
 The strict mirror rule already adopted during T417 applies to every proposed
-change: neither `src/mvdm` nor `src/opennt-host` may receive a new file.  An
+change: neither `src/mvdm` nor `src/non-mvdm/host` may receive a new file.  An
 existing mirror may take only a minimal original-owner-local divergence.  A
 modern mechanism stays in a named adapter/ABI component.
 
@@ -72,7 +72,7 @@ not a license for either adapter to own original policy.
 4. **Do not relocate current functional adapters into a mirror.**  C-VID
    binding, Console projection, broker RPC, guest-memory publication and VDD
    attachment are modern-system mechanisms with no exact directly composable
-   original body.  Moving them to `mvdm`/`opennt-host` would violate the
+   original body.  Moving them to `mvdm`/`non-mvdm/host` would violate the
    strict mirror rule and obscure, rather than reduce, divergence.
 
 ## Migration order, risks and verification

@@ -5,7 +5,7 @@
 #include "wow_native_process.h"
 #include "wow_menu_client_bindings.h"
 #include "wow_idle_hook_binding.h"
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 
 #include <stdio.h>
 #ifdef WOW_NATIVE_INDIRECT_FIXTURE

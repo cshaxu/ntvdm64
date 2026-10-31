@@ -8,7 +8,7 @@ Consolidated task record. Raw contemporaneous records are retained in the extern
 
 ## Closed outcome
 
-T269 makes `src/opennt-host` a compliant OpenNT mirror component. Its ten
+T269 makes `src/non-mvdm/host` a compliant OpenNT mirror component. Its ten
 production units now have a selected original baseline and one valid
 classification: six are byte-identical, four are locally marked/registered
 subsets or same-shaped modifications, and all private binding code is confined

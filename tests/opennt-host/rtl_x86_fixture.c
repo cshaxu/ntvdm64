@@ -2,7 +2,7 @@
 #include <nt.h>
 #include <ntrtl.h>
 #include <stdio.h>
-#include "opennt-host/base/ntos/rtl/environapi.h"
+#include "non-mvdm/host/base/ntos/rtl/environapi.h"
 
 static int expect(int condition, int code)
 {

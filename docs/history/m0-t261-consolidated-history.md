@@ -8,7 +8,7 @@ Consolidated task record. Raw contemporaneous records are retained in the extern
 
 ## Result
 
-M0 T261 is closed after S1--S12. `src/opennt-host` now uses re-rooted OpenNT
+M0 T261 is closed after S1--S12. `src/non-mvdm/host` now uses re-rooted OpenNT
 paths and original filenames for its admitted source surface. Project-authored
 `nt_error_compat.h`, `vrputil_compat.h`, and `vrnmpipe_compat.h` no longer
 exist beneath that component.

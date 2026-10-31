@@ -3,7 +3,7 @@
 ## Composition and reproduction
 
 Run `node tools/audit/Verify-BrokerOriginalLifecycle.mjs`. Each invocation
-compiles the complete unchanged `opennt-host/base/win32/server/srvvdm.c`, a
+compiles the complete unchanged `non-mvdm/host/base/win32/server/srvvdm.c`, a
 test host, and the original RtlConvertLongToLuid body extracted from the
 accepted original declaration carrier. The inline storage specifier is removed
 only for that generated test object; the algorithm is not rewritten.
@@ -63,7 +63,7 @@ by this evidence checkpoint.
 ## Original BaseClient restoration continuation
 
 The complete original GetNextVDMCommand function is now restored in
-`opennt-host/base/win32/client/vdm.c`, under OPENNT-HOST-014's explicit
+`non-mvdm/host/base/win32/client/vdm.c`, under OPENNT-HOST-014's explicit
 command-cohort selection. It contains 390 original lines; its LF-normalized
 SHA-256 is `47cf285cbc505d9d43a50af16e283ea51d1d9ef8d2ff093795086d0ca327addd`.
 Comparison with `O:/repos.external/OpenNT/base/win32/client/vdm.c` at revision
@@ -469,7 +469,7 @@ type classification. run16 needs this source-owned path for the parent event
 returned by BaseUpdateVDMEntry: worker lifetime is not guest task lifetime.
 
 The unchanged 39-line BaseCheckForVDM is restored in the command cohort of
-opennt-host/base/win32/client/vdm.c. Pinned original file SHA-256 is
+non-mvdm/host/base/win32/client/vdm.c. Pinned original file SHA-256 is
 `3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173`;
 function SHA-256 (LF, no final newline) is
 `c6cf2dfdab281ee73c257c5f0a051eebe3439355f273d4a2a5eae5fa7e9d7b85`.

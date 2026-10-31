@@ -1,5 +1,5 @@
 /* A prior type-only mirror include must not suppress the opt-in layouts. */
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #include "wow_user_client_view_layout.h"
 #include <stdio.h>
 

@@ -20,7 +20,7 @@ admission and has no allocated numeric task.
 - Freeze the repository revision and selected upstream provenance/hash for
   each comparison. Distinguish accepted product history from retained WIP.
 - Cover `mvdm-host`, its overlays and SoftPC patches; separately cover
-  non-MVDM `opennt-host`, its adapters, and replacements in app/session and
+  non-MVDM `non-mvdm/host`, its adapters, and replacements in app/session and
   all adapter families even when no upstream mirror file is linked.
 - Include startup, BaseClient/BaseSrv, environment, DOS file and memory
   services, DPMI/WOW transitions, keyboard, mouse, Console/text video,
@@ -47,7 +47,7 @@ Deliver a prioritized restore/replace/retain/delete ledger. Every proposed
 replacement identifies the original owner, smallest missing modern binding,
 superseded code, and COMMAND/EDIT/WRITE regression requirements. Kernel-origin
 logic is not automatically excluded: assess finite semantic reuse under the
-source policy and place accepted non-MVDM owners in `opennt-host`.
+source policy and place accepted non-MVDM owners in `non-mvdm/host`.
 
 ## Implementation and verification
 

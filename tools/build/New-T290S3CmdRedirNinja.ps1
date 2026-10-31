@@ -16,11 +16,11 @@ New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T290_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T290_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
-$includes = @('src', 'src/opennt-abi/host-compat/include',
+$includes = @('src', 'src/compat/include',
     'src/ntvdm-exe/softpc/include',
-    'src/opennt-host/public/sdk/inc',
-    'src/opennt-abi/source/public/sdk/inc',
-    'src/opennt-abi/source/public/internal/base/inc',
+    'src/non-mvdm/host/public/sdk/inc',
+    'src/non-mvdm/abi/public/sdk/inc',
+    'src/non-mvdm/abi/public/internal/base/inc',
     'src/mvdm-support/inc', 'src/mvdm/inc', 'src/mvdm/dos/command', 'src/ntvdm-exe/session',
     'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }

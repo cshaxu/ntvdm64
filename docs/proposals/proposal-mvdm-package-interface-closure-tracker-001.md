@@ -28,7 +28,7 @@ The final owner groups are:
 - `opennt-mvdm-host`: true MVDM host-runtime provider packages;
 - `opennt-mvdm-support`: `dirs`, `makefil0`, `inc`, `oemuni` and `suballoc`;
 - `opennt-mvdm-tools`: `vdmutils` standalone products/resources.
-- `opennt-host`: an original, non-MVDM OpenNT host package with a complete
+- `non-mvdm/host`: an original, non-MVDM OpenNT host package with a complete
   source/ABI selection record. It never becomes a generic replacement layer.
 
 The selected roots are:

@@ -1,5 +1,11 @@
 # Source And Research Policy
 
+The selected non-MVDM original source cohorts are `src/non-mvdm/host` and
+`src/non-mvdm/abi`; both retain their registered upstream origin and mirror
+restrictions. `src/compat` is project-owned shared compatibility code, not a
+mirror and not authority to import a broader system implementation. The two
+original cohorts retain distinct same-named headers where their bytes differ.
+
 OpenNT NT4 MVDM/NTDOS is the primary historical guest/service source family.
 
 ### Owner-supplied independent add-on audit — T460 S3
@@ -126,7 +132,7 @@ still follows the source-first recovery ladder below.
 
 The mirror-file rule prohibits project-invented files, not recovery of files
 that exist in original OpenNT. An audited original file may be added under
-`mvdm` or `opennt-host` at its original relative path as byte-exact source,
+`mvdm` or `non-mvdm/host` at its original relative path as byte-exact source,
 a registered true subset or a registered minimal same-shaped adaptation.
 The package-boundary, provenance and stopping-boundary requirements below
 still apply; original filename existence alone is not runtime admission.
@@ -150,7 +156,7 @@ SoftPC-control categories do not create split source roots. Executable
 host slice even when it initializes firmware state. Exact declarations required
 from outside MVDM belong to `mvdm-platform-abi`.
 `mvdm-host` is recovered as a complete selected original host-package union,
-not as a collection of trace-reached files. `opennt-host` is the single mirror
+not as a collection of trace-reached files. `non-mvdm/host` is the single mirror
 root for **all** separately accepted original OpenNT host packages outside
 MVDM; BaseSrv/BaseClient VDM is only its first accepted slice. An original
 OpenNT package outside MVDM may enter that mirror only after complete-package
@@ -173,7 +179,7 @@ same-shaped modern binding only for private host interfaces identified in its
 accepted imported package; it must not become a generic compatibility layer.
 The
 shared declaration-only `mvdm-platform-abi` remains separate unless a tracked
-declaration is proved private to one admitted `opennt-host` package.
+declaration is proved private to one admitted `non-mvdm/host` package.
 
 ### Kernel VDM semantic-carrier admission
 
@@ -182,7 +188,7 @@ carrier for a directly reached selected `mvdm-host` caller. Its origin in the
 kernel is not itself a prohibition; an admission must instead prove that the
 selected state transition, structure/layout, validation, ordering or failure
 rule can execute through a finite standalone ABI. The imported source remains
-under `opennt-host/<original-relative-path>` when its upstream owner is
+under `non-mvdm/host/<original-relative-path>` when its upstream owner is
 outside MVDM (including `base/ntos/vdm`), with its upstream filename and
 source shape. Original `base/mvdm` owners remain in `mvdm-host`; a kernel or
 monitor label does not change provenance. Neither belongs in an adapter or
@@ -236,7 +242,7 @@ comparative evidence only and cannot become runtime/acceptance dependencies.
 The owner has expressly approved a narrow exception for
 `O:\repos.external\ntvdmx64`: an individually audited SoftPC patch body or
 generated SoftPC build carrier may be copied only into its named adapter/ABI
-carrier; it must not create a file below `src/mvdm` or `src/opennt-host`. Each
+carrier; it must not create a file below `src/mvdm` or `src/non-mvdm/host`. Each
 imported file must have a register row naming
 the exact NTVDMx64 path and hash, the original SoftPC caller/interface it
 serves, the original-source alternative, the reason that alternative lacks a

@@ -1,0 +1,16 @@
+{
+  "baseline": "HEAD before source-layout delivery",
+  "trackedOriginalFiles": 383,
+  "exactBlobMatches": 380,
+  "changed": [
+    "src/non-mvdm/host/README.md",
+    "src/non-mvdm/host/base/win32/client/vdm.c",
+    "src/non-mvdm/host/windows/core/ntuser/rtl/chartran.c"
+  ],
+  "collidingRelativePaths": [
+    "public/sdk/inc/ntexapi.h",
+    "public/sdk/inc/ntrtl.h",
+    "public/sdk/inc/nturtl.h"
+  ],
+  "guestBinariesModified": false
+}

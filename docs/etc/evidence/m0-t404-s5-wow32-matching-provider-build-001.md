@@ -219,7 +219,7 @@ tile's base/limit/access/lifetime, and no original-equivalence claim is made.
 encoder and a potential replacement for autonomous field construction. It
 always sets Default_Big=1 and Pres=1, so it must not be substituted blindly
 for a 16-bit data or system descriptor. Audit its caller-required parameters
-and subsequent field adjustments before admission into `opennt-host`.
+and subsequent field adjustments before admission into `non-mvdm/host`.
 
 ### Descriptor publication boundary identified
 
@@ -239,7 +239,7 @@ Its finite policy permits invalid entries, checks present base/limit and
 overflow, rejects system/gate and conforming-code entries, and requires DPL
 3 for ordinary entries. It depends on `MM_HIGHEST_USER_ADDRESS`, descriptor
 layout and `PAGED_CODE`, not process scheduling. This is a concrete
-`opennt-host` candidate for the LDT publication boundary, but not for GDT
+`non-mvdm/host` candidate for the LDT publication boundary, but not for GDT
 entries: applying it to the combined current table would wrongly reject
 system descriptors. No import or runtime repair is claimed by this audit.
 

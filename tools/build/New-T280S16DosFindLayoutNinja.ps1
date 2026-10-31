@@ -12,7 +12,7 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T280/{0}-dos-find-layout" -f $Architecture)
 New-Item -ItemType Directory -Force -Path $build | Out-Null
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h /I ' + $root + '/src/opennt-abi/host-compat/include /I ' + $root + '/src/mvdm-host/dos/dem /I ' + $root + '/src/mvdm-support/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc /I ' + $root + '/src/mvdm-host/softpc.new/host/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /FI ' + $root + '/src/compat/include/nt.h /I ' + $root + '/src/compat/include /I ' + $root + '/src/mvdm-host/dos/dem /I ' + $root + '/src/mvdm-support/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/sdk/inc /I ' + $root + '/src/mvdm-platform-abi/source/public/ddk/inc /I ' + $root + '/src/mvdm-host/softpc.new/base/inc /I ' + $root + '/src/mvdm-host/softpc.new/host/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

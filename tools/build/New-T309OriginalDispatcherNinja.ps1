@@ -47,21 +47,21 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $includes = @(
     'src',
-    'src/opennt-abi/host-compat/include',
+    'src/compat/include',
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/monitor/include',
     'src/mvdm-support/inc',
-    'src/opennt-abi/source/public/sdk/inc',
-    'src/opennt-abi/source/public/internal/base/inc',
-    'src/opennt-abi/source/public/internal/windows/inc',
-    'src/opennt-abi/source/public/ddk/inc',
+    'src/non-mvdm/abi/public/sdk/inc',
+    'src/non-mvdm/abi/public/internal/base/inc',
+    'src/non-mvdm/abi/public/internal/windows/inc',
+    'src/non-mvdm/abi/public/ddk/inc',
     'src/mvdm-host/dos/dem',
     'src/mvdm-host/dos/command',
     'src/mvdm-host/softpc.new/host/inc',
     'src/mvdm-host/softpc.new/base/inc'
 ) | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     ($includes -join ' ')
 

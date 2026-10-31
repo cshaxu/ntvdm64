@@ -25,7 +25,7 @@
 #include "wow32-dll/include/wow_user_task_lifecycle.h"
 #include "wow32-dll/include/wow_user_private_access.h"
 #include "ntvdm-exe/wow/include/wow_gdi_alias.h"
-#include "opennt-abi/host-compat/include/nt.h"
+#include "compat/include/nt.h"
 
 extern BOOL WINAPI StoreDC(WORD, WORD, WORD, HWND);
 extern BOOL WINAPI CacheReleasedDC(WORD, WORD, WORD);
@@ -95,7 +95,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "wow32-dll/include/wow_window_creation_binding.h"
 #include <commctrl.h>
 #pragma comment(lib, "comctl32.lib")
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 #include "wow32-dll/include/wow_window_words_binding.h"
 #include "wow32-dll/include/wow_window_procedure_entry.h"
 #include "wow32-dll/include/wow_task_order_bindings.h"
@@ -108,7 +108,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "wow32-dll/include/wow_edit_lookaside_bindings.h"
 #define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "opennt-host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #include "wow32-dll/include/wow_user_registered_callbacks.h"

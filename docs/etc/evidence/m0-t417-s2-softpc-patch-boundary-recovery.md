@@ -3,7 +3,7 @@
 ## Result
 
 `src/mvdm-softpc-patch` is retired.  No new source file was added below either
-`src/mvdm` or `src/opennt-host`.
+`src/mvdm` or `src/non-mvdm/host`.
 
 The three unavailable selected-x86 generated declaration headers now live at
 `src/adapter-mvdm-host-out/softpc/include/generated/x86/prod/`.  The four
@@ -36,4 +36,4 @@ no existing file which owns these absent generator outputs/providers.
 - Added to the adapter/ABI boundary: the same three declaration headers and a
   41-line selected fallback carrier.  This is a relocation of required input,
   not new MVDM/OpenNT-host source behavior.
-- New mirror files: 0 in `mvdm`; 0 in `opennt-host`.
+- New mirror files: 0 in `mvdm`; 0 in `non-mvdm/host`.

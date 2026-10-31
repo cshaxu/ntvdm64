@@ -7,7 +7,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 foreach ($relative in @(
-    'src/opennt-abi/host-compat/include/ntioapi.h',
+    'src/compat/include/ntioapi.h',
     'src/ntvdm/win32/ntioapi_facade.c',
     'tests/adapter-mvdm-host-out/win32/t280_s11_ntioapi_facade_fixture.c',
     'tools/build/New-T280S11NtioapiFacadeNinja.ps1',
@@ -16,7 +16,7 @@ foreach ($relative in @(
 )) {
     if (-not (Test-Path -LiteralPath (Join-Path $root $relative) -PathType Leaf)) { throw "Missing T280 S11 artifact: $relative" }
 }
-$header = Get-Content -Raw -LiteralPath (Join-Path $root 'src/opennt-abi/host-compat/include/ntioapi.h')
+$header = Get-Content -Raw -LiteralPath (Join-Path $root 'src/compat/include/ntioapi.h')
 $source = Get-Content -Raw -LiteralPath (Join-Path $root 'src/ntvdm/win32/ntioapi_facade.c')
 foreach ($token in @('OPENNT_IO_STATUS_BLOCK', 'opennt_NtOpenFile', 'opennt_NtQueryDirectoryFile', 'opennt_NtQueryVolumeInformationFile', 'opennt_NtQueryObject', 'opennt_NtOpenSymbolicLinkObject', 'opennt_NtQuerySymbolicLinkObject')) {
     if ($header -notmatch [regex]::Escape($token) -or $source -notmatch [regex]::Escape($token)) { throw "T280 S11 source-shaped facade misses $token." }

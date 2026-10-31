@@ -1,6 +1,6 @@
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #include <stdio.h>
 

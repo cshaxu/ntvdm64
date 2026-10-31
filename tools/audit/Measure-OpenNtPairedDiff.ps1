@@ -18,9 +18,9 @@ foreach ($row in Import-Csv -LiteralPath (Join-Path $repo $CoverageCsv)) {
     }
     $pairs.Add([pscustomobject]@{path=$row.path;source=$row.source;group=$row.provenance;equal=($row.identity -eq 'byte-equal')})
 }
-foreach ($name in @(& git -C $repo ls-files src/opennt-host)) {
-    if ($name -eq 'src/opennt-host/README.md') { continue }
-    $relative = $name.Substring('src/opennt-host/'.Length)
+foreach ($name in @(& git -C $repo ls-files src/non-mvdm/host)) {
+    if ($name -eq 'src/non-mvdm/host/README.md') { continue }
+    $relative = $name.Substring('src/non-mvdm/host/'.Length)
     # Registered NetLib mirror drops the original ds/ prefix.
     if ($relative.StartsWith('netapi/')) { $relative = 'ds/' + $relative }
     $source = Join-Path 'O:/repos.external/OpenNT' $relative

@@ -17,7 +17,7 @@ $bytes = [ordered]@{
     pfnWowSetFakeDialogClass=4; pfnWowCBStoreHandle=8
 }
 $source = Join-Path $RepositoryRoot 'src/mvdm/wow32/wow32.c'
-$header = Join-Path $RepositoryRoot 'src/opennt-abi/source/public/internal/windows/inc/wowuserp.h'
+$header = Join-Path $RepositoryRoot 'src/non-mvdm/abi/public/internal/windows/inc/wowuserp.h'
 $code = Get-Content -Raw -LiteralPath $source
 $declarations = Get-Content -Raw -LiteralPath $header
 $table = [regex]::Match($declarations, '(?s)typedef struct tagAPFNWOWHANDLERSIN\s*\{(.*?)\}\s*PFNWOWHANDLERSIN')

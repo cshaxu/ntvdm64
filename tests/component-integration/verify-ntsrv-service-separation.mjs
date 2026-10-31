@@ -74,8 +74,8 @@ for (const type of ['OPENNT_BASE_SERVICE', 'OPENNT_BASE_CONNECTION', 'OPENNT_BAS
   const prior = old.match(expression)?.[0], current = header.match(expression)?.[0];
   if (!prior || prior !== current) throw Error('Private state layout drift: ' + type);
 }
-for (const path of ['src/opennt-host/base/win32/server/srvvdm.c',
-  'src/opennt-host/base/win32/server/srvinit.c', 'src/opennt-host/base/win32/client/vdm.c',
+for (const path of ['src/non-mvdm/host/base/win32/server/srvvdm.c',
+  'src/non-mvdm/host/base/win32/server/srvinit.c', 'src/non-mvdm/host/base/win32/client/vdm.c',
   prefix + 'include/base_service.h', 'src/common/protocol/service.idl', 'src/common/protocol/version.h']) {
   if (read(path) !== original(path)) throw Error('Original/public-contract drift: ' + path);
 }

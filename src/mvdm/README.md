@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-494: update three existing host-only include paths in
+`dos/command/cmdenv.c` and `dos/command/cmdexec.c` for the non-MVDM/compat
+source-layout rename. The selected declarations, call behavior and guest
+are unchanged; this exception records path spelling only.
+
 MVDM-HOST-DIV-479 (withdrawn, published): the owner requested restoring
 the original ANSI/pre-ANSI branches and the original `stubs.c` undefinition
 in the four affected files. The tested candidate is published; see

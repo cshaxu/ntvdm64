@@ -87,7 +87,7 @@ message callouts. The final native-send build also includes the subsequently
 added post-unbind query rejection assertion; the earlier task-lifecycle build
 predates only that assertion. Existing /FORCE:multiple fixture bindings and
 page-domain stub remain explicit fixture limitations, not real guest evidence.
-No src/mvdm or src/opennt-host diff was introduced.
+No src/mvdm or src/non-mvdm/host diff was introduced.
 
 ## DOS delivery and launcher relay
 

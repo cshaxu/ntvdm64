@@ -40,4 +40,4 @@ BOOL WINAPI wow_init_fixture_free(HANDLE heap, DWORD flags, PVOID memory)
 #define UserAllocPoolWithQuota(bytes, tag) allocate_original(bytes)
 #undef UserFreePool
 #define UserFreePool(pointer) wow_init_fixture_free(GetProcessHeap(), 0, pointer)
-#include "../../../src/opennt-host/windows/core/ntuser/kernel/queue.c"
+#include "../../../src/non-mvdm/host/windows/core/ntuser/kernel/queue.c"

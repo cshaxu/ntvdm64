@@ -7,7 +7,7 @@
 #include "worker-base/input_watch.h"
 #include "common/console/client.h"
 #include "common/protocol/frontend_protocol.h"
-#include "opennt-abi/host-compat/include/console_grid.h"
+#include "compat/include/console_grid.h"
 #include "ntsrv-exe/opennt/include/base_rpc_client.h"
 #include "worker-base/connection.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"

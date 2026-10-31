@@ -1,0 +1,92 @@
+[
+  {
+    "root": "addon",
+    "tracked": 40,
+    "source_text_files": 16,
+    "physical_source_lines": 3301.0
+  },
+  {
+    "root": "common",
+    "tracked": 52,
+    "source_text_files": 47,
+    "physical_source_lines": 2296.0
+  },
+  {
+    "root": "compat",
+    "tracked": 19,
+    "source_text_files": 18,
+    "physical_source_lines": 1492.0
+  },
+  {
+    "root": "mvdm",
+    "tracked": 4618,
+    "source_text_files": 2713,
+    "physical_source_lines": 1367515.0
+  },
+  {
+    "root": "non-mvdm",
+    "tracked": 384,
+    "source_text_files": 330,
+    "physical_source_lines": 146115.0
+  },
+  {
+    "root": "ntcon-exe",
+    "tracked": 81,
+    "source_text_files": 71,
+    "physical_source_lines": 8951.0
+  },
+  {
+    "root": "nthook32-dll",
+    "tracked": 18,
+    "source_text_files": 16,
+    "physical_source_lines": 13248.0
+  },
+  {
+    "root": "ntmon-exe",
+    "tracked": 3,
+    "source_text_files": 3,
+    "physical_source_lines": 668.0
+  },
+  {
+    "root": "ntsrv-exe",
+    "tracked": 66,
+    "source_text_files": 64,
+    "physical_source_lines": 12267.0
+  },
+  {
+    "root": "ntvdm-exe",
+    "tracked": 127,
+    "source_text_files": 117,
+    "physical_source_lines": 17875.0
+  },
+  {
+    "root": "ntvwm-exe",
+    "tracked": 12,
+    "source_text_files": 11,
+    "physical_source_lines": 2379.0
+  },
+  {
+    "root": "run16-exe",
+    "tracked": 13,
+    "source_text_files": 12,
+    "physical_source_lines": 1072.0
+  },
+  {
+    "root": "vdmredir-dll",
+    "tracked": 6,
+    "source_text_files": 4,
+    "physical_source_lines": 225.0
+  },
+  {
+    "root": "worker-base",
+    "tracked": 10,
+    "source_text_files": 9,
+    "physical_source_lines": 709.0
+  },
+  {
+    "root": "wow32-dll",
+    "tracked": 155,
+    "source_text_files": 153,
+    "physical_source_lines": 17836.0
+  }
+]

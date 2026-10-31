@@ -79,7 +79,7 @@ that every historical rapid-launch timeout has this cause.
 ## Ownership and remaining work
 
 All affected state is project-added NTSRV adaptation in its private modules;
-the `opennt/source` path is not the original `src/opennt-host` mirror.
+the `opennt/source` path is not the original `src/non-mvdm/host` mirror.
 Original execution/records/scheduling, independent completion receipts,
 retire/restored acknowledgements and direct worker I/O remain untouched.
 The defect belongs to the existing service lock and manual-reset notification,

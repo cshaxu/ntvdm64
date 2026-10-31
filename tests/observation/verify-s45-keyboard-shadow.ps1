@@ -47,7 +47,7 @@ foreach ($line in $envLines) {
     }
 }
 
-& $compiler /nologo /MT /W4 /I (Join-Path $repository 'src\opennt-abi\source\public\internal\windows\inc') $pifSource "/Fe:$builder"
+& $compiler /nologo /MT /W4 /I (Join-Path $repository 'src\non-mvdm\abi\public\internal\windows\inc') $pifSource "/Fe:$builder"
 if ($LASTEXITCODE -ne 0) { throw 'S45 PIF builder compilation failed.' }
 & $compiler /nologo /MT /W4 $observerSource user32.lib "/Fe:$observer"
 if ($LASTEXITCODE -ne 0) { throw 'S45 Console observer compilation failed.' }

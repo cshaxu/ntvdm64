@@ -38,7 +38,7 @@ LONG GetPrefixCount(LPCWSTR lpstr, int cb, LPWSTR lpstrCopy, int cbCopy);
 #ifndef VER40
 #define VER40 0x0400
 #endif
-#include "opennt-abi/host-compat/include/wow_control_resource_abi.h"
+#include "compat/include/wow_control_resource_abi.h"
 /* Resource sizes include original two-byte packing; the packing header
  * must restore the surrounding ABI before any owned state is declared. */
 C_ASSERT(sizeof(DLGTEMPLATE2) == 26);
@@ -76,7 +76,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 #define TestWindowProcess wow_window_client_owns_state
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_GETSET
-#include "opennt-host/windows/core/ntuser/inc/ntsend.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/ntsend.h"
 #endif
 #ifdef WOW_ORIGINAL_PRIVATE_WORD_SETTER
 /* The selected original server body can access only our retained local
@@ -86,7 +86,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 DWORD WINAPI xxxSetWindowLong(PWND, int, DWORD, BOOL);
 DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #endif
-#include "opennt-host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
 #undef WOW_ORIGINAL_CONTROL_PROTOTYPES
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT

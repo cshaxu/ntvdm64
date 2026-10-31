@@ -28,7 +28,7 @@ commit and push before closure; T423 awaits owner acceptance.
   Console-return path. This is not a claim that every DOS video mode has that
   shape. Original mode, BIOS, copyConsoleToRegen and event-resume logic remain
   in place; no mirror or guest changes have been made for this candidate.
-- Existing `opennt-abi/host-compat/console_grid.c` provides the source-shaped
+- Existing `compat/console_grid.c` provides the source-shaped
   non-reflow buffer conversion. The candidate reuses it, rather than adding
   another cell-reflow engine.
 - NTW32 seeds from the copied frontend screen. Its existing exact-size seed

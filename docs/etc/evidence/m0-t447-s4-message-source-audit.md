@@ -3546,7 +3546,7 @@ injection pass.
 Candidate NTVDM SHA25668E6B0499DC90EFE047877D0C6D6B52E16C4B82F48CE01BDC7D3282F2D1AF74B,
 MAP AA8F68BD600A63482E2B836F058790AF07E43D9A390D7C55ACEE3909C7DD3065.
 Provider remains exact P9. Source-review-r1 completes0 and verifies no new
-src/mvdm/src/opennt-host working diff. class-membership-verify-r1 owns the
+src/mvdm/src/non-mvdm/host working diff. class-membership-verify-r1 owns the
 fixed091/new/new/091 callback timing, nested controls, complete original/native/
 guest/application/DOS/modal/logon floors and combined structured/early/timeout
 messages. Neither a passing focused fixture nor a new full pass proves the

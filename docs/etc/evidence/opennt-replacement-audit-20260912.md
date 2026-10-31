@@ -80,7 +80,7 @@ total has been established.
 - CPU40 descriptor transitions, BOP/interrupt return, keyboard, mouse,
   text video, memory and environment services remain incomplete audit areas.
   Include mirror-internal special cases and diagnostics, not just adapters.
-- Architecture/source policy now places external kernel VDM in `opennt-host`,
+- Architecture/source policy now places external kernel VDM in `non-mvdm/host`,
   but `docs/design/CODING.md` and `docs/rules/CODING.md` still retain older
   kernel-vdm placement text. Record this governance inconsistency; no source
   move is justified solely by the directory label.
@@ -2041,7 +2041,7 @@ selected-build verification for their providers.
 ### ABI WOW subset reconciliation
 
 The supplementary pairing check is now reconciled for all 209 files under
-opennt-abi/source: 194 same-path byte-equal files; four relocated/cohort
+non-mvdm/abi: 194 same-path byte-equal files; four relocated/cohort
 byte-equal files; seven terminal-blank-line-only differences; one guarded
 vdmapi.h; three WOW subset carriers read below. This exhausts this directory's
 file denominator, not the complete project or transitive runtime ABI proof.
@@ -2057,7 +2057,7 @@ artifacts/documentation-archive/20260910/etc/operations/ledgers. The README
 problem is a stale current-path link, not evidence that the manifests were
 lost. No source import or dependency selection was changed by locating them.
 
-Rechecked every file under opennt-abi/source against its same relative path
+Rechecked every file under non-mvdm/abi against its same relative path
 in the current external OpenNT checkout. This supplementary check is not a
 replacement for edition-aware provenance: four private-path files have no
 same-path counterpart, and the three named WOW subsets intentionally have
@@ -2175,7 +2175,7 @@ OpenNT-duplicate count. Product source, build and runtime were unchanged.
 
 ### BaseClient retained environment bodies
 
-Compared all three current opennt-host/base/win32/client/vdm.c environment
+Compared all three current non-mvdm/host/base/win32/client/vdm.c environment
 functions with original OpenNT base/win32/client/vdm.c lines 3022--3286.
 BaseCreateVDMEnvironment, BaseDestroyVDMEnvironment and BaseGetEnvNameType_U
 retain the inspected original branches, path-shortening policy, arithmetic,

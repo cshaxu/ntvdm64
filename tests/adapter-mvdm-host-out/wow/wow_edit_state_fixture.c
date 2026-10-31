@@ -3,7 +3,7 @@
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_borrow_scope.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
 #include <stdio.h>
 #include <string.h>
 

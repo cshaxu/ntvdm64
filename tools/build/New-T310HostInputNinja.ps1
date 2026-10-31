@@ -24,7 +24,7 @@ $environment = Join-Path $build 'msvc-mt.cmd'
   'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T310_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
 $cflags = '/nologo /TC /MT /W4 /showIncludes /I ' + $root +
-    '/src /I ' + $root + '/src/opennt-abi/host-compat/include'
+    '/src /I ' + $root + '/src/compat/include'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -49,7 +49,7 @@ build obj/worker_client.obj: cc `$root/src/common/console/client.c
 build obj/common_pipe_transfer.obj: cc `$root/src/common/transport/pipe_transfer.c
 build obj/console_graphics.obj: cc `$root/src/ntvdm-exe/win32/console_graphics.c
 build obj/console_bitmap.obj: cc `$root/src/ntvdm-exe/win32/console_bitmap.c
-build obj/console_grid.obj: cc `$root/src/opennt-abi/host-compat/console_grid.c
+build obj/console_grid.obj: cc `$root/src/compat/console_grid.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build console_input_contract_fixture.exe: link obj/fixture.obj obj/console_compat.obj obj/console_client.obj obj/worker_client.obj obj/common_pipe_transfer.obj obj/console_graphics.obj obj/console_bitmap.obj obj/console_grid.obj obj/session.obj obj/guest_memory_lease.obj

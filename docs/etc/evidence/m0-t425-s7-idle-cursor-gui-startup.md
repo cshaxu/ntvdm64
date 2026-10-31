@@ -17,7 +17,7 @@ of character-I/O startup for window-only NTVDM/NTVWM work. Reference is S6
 | NTVWM execution.c, project adaptation | GUI capability absence already distinguishes its admitted route. | Use the shared gate; native process creation, completion and resource ownership stay local. |
 | NTSRV frontend_registry.c, project service | Normal WOW startup relied on an unsupported-operation result. | Remove that convention. Erroneous authenticated WOW character acquisition is denied; normal WOW does not request it. |
 
-Original BaseGetVdmConfigInfo in opennt-host/base/win32/client/vdm.c supplies
+Original BaseGetVdmConfigInfo in non-mvdm/host/base/win32/client/vdm.c supplies
 the mandatory -w switch for WOW. Original mvdm/softpc.new/host/src/nt_reset.c
 recognizes - or / and case-insensitive w. No original mirror, guest or imported
 library is changed; no helper or wire revision is introduced (RPC37/I/O25).

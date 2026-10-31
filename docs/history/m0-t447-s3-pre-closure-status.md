@@ -283,7 +283,7 @@ permanent parent/child reference cycles or fabricated private flags are added.
 Owner rejects the host-version-bound private-reader route and approves the
 bounded original USER collaboration-group direction after clarification that
 this imports non-MVDM host source, not guest USER.EXE. Required original
-ComboBox/EDIT/ListBox collaboration belongs under src/opennt-host; modern
+ComboBox/EDIT/ListBox collaboration belongs under src/non-mvdm/host; modern
 procedure tokens remain opaque and use native interfaces. This authorizes
 dependency audit and bounded implementation, not recursive USER/Win32k import
 or an assertion that dialog procedure ownership has already been solved.

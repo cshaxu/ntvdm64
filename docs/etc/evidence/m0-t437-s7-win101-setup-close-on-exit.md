@@ -10,7 +10,7 @@ appeared to finish, and what is the smallest project-owned repair?
 This is not a guest `SETUP.EXE` or `COMMAND.COM` modification problem.
 
 - Original `BaseCheckVDM` requires a PIF to have a new Console
-  (`opennt-host/base/win32/client/vdm.c`, PIF branch). The project preserves
+  (`non-mvdm/host/base/win32/client/vdm.c`, PIF branch). The project preserves
   that condition in `run16-exe/main.c` by passing `CREATE_NEW_CONSOLE` for a
   PIF.
 - Original `nt_pif.c` maps standard PIF `MSflags & 0x10` to `CloseOnExit` for

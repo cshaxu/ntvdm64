@@ -1,0 +1,8 @@
+{
+  "exitCode": 0,
+  "started": "2026-10-31T21:40:03.5977832Z",
+  "pid": 14712,
+  "ended": "2026-10-31T21:40:04.9112414Z",
+  "command": "python tests/build/test-authored-softpc-profile.py",
+  "scriptSha256": "27718CD3878E452128BDDCAE3E593C55F06AC570F724E1367ADA58CC40FFD74E"
+}

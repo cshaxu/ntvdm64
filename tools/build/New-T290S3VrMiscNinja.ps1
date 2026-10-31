@@ -16,11 +16,11 @@ New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T290_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T290_CALLER_CWD%"', '%*') |
     Set-Content -LiteralPath $environment -Encoding ascii
-$includes = @('src', 'src/opennt-abi/host-compat/include',
+$includes = @('src', 'src/compat/include',
     # `nt.h` binds modern base types, then exposes the reached original public
     # declaration slice (`ntpsapi.h`). This is the same source-facing order
     # as the formal CPU40 graph, not a fixture-local declaration substitute.
-    'src/opennt-host/public/sdk/inc',
+    'src/non-mvdm/host/public/sdk/inc',
     'src/ntvdm-exe/softpc/include', 'src/mvdm-support/inc',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',

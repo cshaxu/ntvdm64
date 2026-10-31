@@ -1091,3 +1091,5 @@ semantics, strict native compile/link/layout attempts and the proposed diff budg
 [T457 S4 integrated acceptance](evidence/m0-t457-s4-integrated-acceptance.md)
 records the selected original USER providers, callback and task-loss ownership,
 focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
+
+[T473 source-layout rename](evidence/m0-t473-s12-source-layout.md) records the original-cohort move, collisions and verification.

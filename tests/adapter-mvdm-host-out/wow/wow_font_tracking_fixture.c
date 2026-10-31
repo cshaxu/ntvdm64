@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <string.h>
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 
 static UINT drive_type;
 static unsigned drive_calls, remove_calls;

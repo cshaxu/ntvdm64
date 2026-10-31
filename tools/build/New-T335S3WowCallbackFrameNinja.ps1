@@ -23,7 +23,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T335_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T335_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/opennt-abi/host-compat/include /I ' + $root + '/src/opennt-host/public/sdk/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/host/public/sdk/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root
@@ -40,7 +40,7 @@ build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_l
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/mvdm_softpc_guest_memory.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c
 build obj/wow_callback_frame_lease.obj: cc `$root/src/wow32-dll/source/wow_callback_frame_lease.c
-build obj/opennt_support_rtl.obj: cc `$root/src/opennt-abi/host-compat/opennt_support_rtl.c
+build obj/opennt_support_rtl.obj: cc `$root/src/compat/opennt_support_rtl.c
 build obj/fixture.obj: cc `$root/tests/ntvdm/wow/t335_s3_wow_callback_frame_lease_fixture.c
 build bin/t335-s3-wow-callback-frame-fixture.exe: link obj/guest_memory_lease.obj obj/session.obj obj/mvdm_softpc_guest_memory.obj obj/wow_callback_frame_lease.obj obj/opennt_support_rtl.obj obj/fixture.obj
 default bin/t335-s3-wow-callback-frame-fixture.exe

@@ -1,7 +1,7 @@
 #ifndef WOW_USER_OBJECT_BINDINGS_H
 #define WOW_USER_OBJECT_BINDINGS_H
 #include <windows.h>
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 struct wow_task_order_thread;
 struct wow_cleanup_window;
 typedef struct wow_cleanup_handle {

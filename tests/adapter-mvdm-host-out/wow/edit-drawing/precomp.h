@@ -1,10 +1,10 @@
 #ifndef WOW_EDIT_DRAWING_FIXTURE_PRECOMP_H
 #define WOW_EDIT_DRAWING_FIXTURE_PRECOMP_H
 #include <windows.h>
-#include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
 /* Original winuserp.h color range, not a modern extended palette. */
 #define COLOR_MAX (COLOR_INFOBK + 1)
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 
 /* Test-only finite GDI boundary. Compile the two original RTL units with
  * this directory first in their include path; never use in product builds. */

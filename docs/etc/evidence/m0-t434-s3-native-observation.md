@@ -184,7 +184,7 @@ prints MS-DOS Version5.00.500, both native CMDs print their unique marker,
 all return0, and all ten installed hashes match. Test-owned product processes
 are identity-checked and ended; no Z mapping remains.
 
-Final review: no src/mvdm or src/opennt-host mirror changes. Common carries
+Final review: no src/mvdm or src/non-mvdm/host mirror changes. Common carries
 one async copied observation RPC/client, Hook32/64 share the existing successful
 creation boundary, and NTSRV owns refs/one-shot waits/sidecar projection.
 Observed nodes never enter execution records, STACK, receipt, IsEmpty or

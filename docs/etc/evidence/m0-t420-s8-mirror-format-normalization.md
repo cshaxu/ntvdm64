@@ -19,7 +19,7 @@ byte-identical or had a non-format difference and were not touched. A repeat
 sweep reports zero remaining newline-only or trailing-whitespace-only drift.
 
 `src/mvdm/**` is marked `-text -whitespace`, matching the existing
-`opennt-host` rule, so Git preserves upstream line endings and historical
+`non-mvdm/host` rule, so Git preserves upstream line endings and historical
 whitespace rather than reformatting the mirror. The coding rule requires the
 same bytewise-plus-normalized sweep at every future S closure.
 

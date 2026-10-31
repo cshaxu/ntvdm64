@@ -24,7 +24,7 @@ function Run($name,$file,$arguments,$expected,$seconds){
 try{
  $paths=@('src/mvdm/inc/wow.h','src/mvdm/inc/wowusr.h','src/mvdm/inc/wowcmpat.h','src/mvdm/wow32/walias.h','src/mvdm/wow32/wmdisp32.h','src/mvdm/wow32/wparam.h','src/mvdm/wow32/wparam.c','src/mvdm/wow32/wmsg16.c','src/mvdm/wow32/wmsgcb.c','src/mvdm/wow32/wmdisp32.c','src/mvdm/wow32/wcntl32.c','src/mvdm/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','tests/observation/wow_parameter_map_fixture.c','tests/observation/verify-wow-parameter-map.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
- Get-FileHash "$repo/src/opennt-abi/host-compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
+ Get-FileHash "$repo/src/compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
   $wow=Read 'src/mvdm/inc/wow.h' $old;$aliases=Read 'src/mvdm/wow32/walias.h' $old;$forward=Read 'src/mvdm/wow32/wmdisp32.h' $old

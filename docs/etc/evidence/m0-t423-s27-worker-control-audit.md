@@ -8,7 +8,7 @@ evidence; recorded hashes, dates, results and limitations are unchanged.
 ## Source and ownership decision
 
 This review compares the selected x86 product graph, not merely similar
-function names. Original OpenNT DOS/WOW policy remains in `src/opennt-host`
+function names. Original OpenNT DOS/WOW policy remains in `src/non-mvdm/host`
 and `src/mvdm`; no original mirror source was edited.
 
 | Mechanism | Source and current owner | S27 disposition |

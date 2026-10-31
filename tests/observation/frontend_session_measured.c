@@ -8,7 +8,7 @@
 #include "ntcon-exe/window_mouse.h"
 #include "ntcon-exe/window_frame.h"
 #include "lib/kvm-window/render.h"
-#include "opennt-abi/host-compat/include/console_grid.h"
+#include "compat/include/console_grid.h"
 static DWORD measured_decode(const frontend_video *,kvm_window_frame_storage *);
 static DWORD measured_present(frontend_window_controller *,BOOL);
 DWORD measured_actual_destroy(frontend_session *);

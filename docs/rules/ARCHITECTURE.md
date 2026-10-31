@@ -206,8 +206,8 @@ logical dependency vocabulary without splitting original source for builds or
 visual comparison.
 
 1. The production source owners are the canonical physical `mvdm` tree (with
-   manifest-declared host, guest, tool and firmware slices), `opennt-host`,
-   `opennt-abi/host-compat`, declaration-only `interface`, `worker-base`, and the
+   manifest-declared host, guest, tool and firmware slices), `non-mvdm/host`,
+   `compat`, declaration-only `interface`, `worker-base`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted
    `ntcon-exe` and `ntvwm-exe` roots. NTVWM owns its admitted native Console
    backend, using its own ordinary hidden Console, not ConPTY or DOS/WOW policy. NTCON
@@ -218,10 +218,10 @@ visual comparison.
    retains only launcher/direct-target completion duties. T418 has retired
    generic `app`, `session`, `broker` and `adapter-*` production roots;
    retained README-only directories are historical move markers. No generic
-   `common`, `compat` or `win32api` component may be introduced.
+   general-purpose `common`, `compat` or `win32api` component may be introduced; the admitted `compat` root is restricted to the historical ABI boundary described below.
 2. `mvdm` is the sole complete selected OpenNT `base/mvdm` physical mirror;
    its manifest-selected executable slice is the MVDM host-runtime mirror.
-   `opennt-host` is the sole original non-MVDM OpenNT host-service mirror and
+   `non-mvdm/host` is the sole original non-MVDM OpenNT host-service mirror and
    location for separately admitted load-only OpenNT inputs. It contains every
    separately accepted original owner package, not only the
    first Base VDM slice, and accepts only a required original slice after a complete package-boundary
@@ -232,7 +232,7 @@ visual comparison.
    import an NT4 system/product shell. CSR/CSRSS, NTDLL CSR transport, the
    full BaseClient/Kernel32 product, Win32k and USER/GDI server are stopping
    boundaries, not recursive import candidates. Kernel VDM may enter only as
-   an individually admitted `opennt-host` semantic carrier when its original
+   an individually admitted `non-mvdm/host` semantic carrier when its original
    owner is outside MVDM; original MVDM owners stay in `mvdm-host`. For a
    direct MVDM consumer: it preserves original shape and has a finite
    standalone ABI, while an adapter owns only that ABI binding. Kernel
@@ -247,7 +247,7 @@ visual comparison.
    data inputs; it is neither a host-runtime library nor a machine executor.
    `ntvdm` stages an admitted immutable input through the selected backend
    binding. Executable `softpc.new/base/*` packages belong to `mvdm-host`.
-   The narrow `opennt-abi/host-compat` island contains only named historical
+   The narrow `compat` island contains only named historical
    host ABI bindings; it owns no product policy or MVDM state.
    For source-function BFS, zero-degree is all original definitions in
    `mvdm-host` plus their transitive resolved call closure while each physical
@@ -309,7 +309,7 @@ visual comparison.
     access and epoch. No such pointer crosses an ABI or reaches asynchronous
     work.
 15. `mvdm/dos/v86`, `mvdm/bin86`, `mvdm/wow16` and the separately sourced
-   `opennt-host/base/win32/winnls/fontsup/system` fonts are complete load-only mirrors. Their source, objects,
+   `non-mvdm/host/base/win32/winnls/fontsup/system` fonts are complete load-only mirrors. Their source, objects,
     libraries and products never satisfy a host symbol. ntvdm loads
     manifest-selected immutable bytes through the selected backend binding.
 16. The selected OpenNT tree is one package-scope union of the pinned OpenNT
@@ -332,9 +332,9 @@ visual comparison.
     an actual original OpenNT file, at its original relative path, after the
     required provenance and package-boundary admission. It may be byte-exact,
     a registered true subset, or a registered minimal same-shaped adaptation.
-    Project-invented files may not enter `mvdm` or `opennt-host`. A mirror
+    Project-invented files may not enter `mvdm` or `non-mvdm/host`. A mirror
     change must belong to that file's original owner.
-20. Do not introduce generic `compat`, `common`, `adapter-host` or
+20. Do not introduce general-purpose `compat`, `common`, `adapter-host` or
     `adapter-common` roots. A new specialist adapter requires a complete
     original owner-package and ABI audit plus explicit admission.
 21. Modern host integration may use public Win32 filesystem, device, process,
@@ -382,4 +382,4 @@ visual comparison.
     register row identifying their caller/interface shape, provenance, reason,
     x86/x64 disposition, mapping-manager use and removal condition. They live
     in the named adapter/ABI family, never as a mirror component or a new file
-    below `mvdm` or `opennt-host`.
+    below `mvdm` or `non-mvdm/host`.

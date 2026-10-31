@@ -31,7 +31,7 @@ Read-only inputs:
   task ID, records wait object and parent, for startup/WaitForInputIdle.
   This is before task creation, not proof of a loaded target. Its kernel
   process/thread/USER-global dependencies prevent direct whole-unit reuse.
-- Selected [srvvdm.c](../../../src/opennt-host/base/win32/server/srvvdm.c):
+- Selected [srvvdm.c](../../../src/non-mvdm/host/base/win32/server/srvvdm.c):
   BaseSrvUpdateWOWEntry creates paired parent wait handles and conditionally
   calls UserNotifyProcessCreate. BaseSrvRemoveWOWRecordByITask signals the
   parent event on removal. BaseSrvGetVDMExitCode returns zero for the shared

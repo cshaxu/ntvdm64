@@ -41,7 +41,7 @@ static BOOL encode_input(const INPUT_RECORD *record,console_io_input *wire)
 }
 
 
-#include "opennt-abi/host-compat/include/console_grid.h"
+#include "compat/include/console_grid.h"
 #include <limits.h>
 #include <stddef.h>
 #include <string.h>

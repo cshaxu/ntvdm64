@@ -8,7 +8,7 @@ function Read-ObjectSource([string]$relative, [string]$hash) {
     [IO.File]::ReadAllText($p).Replace("`r`n","`n")
 }
 function Read-ObjectMirror([string]$relative) {
-    $p=Join-Path $RepositoryRoot ('src/opennt-host/'+$relative)
+    $p=Join-Path $RepositoryRoot ('src/non-mvdm/host/'+$relative)
     $t=[IO.File]::ReadAllText($p)
     if ([regex]::IsMatch($t,'(?<!\r)\n')) { throw "Mirror is not CRLF: $relative" }
     $t.Replace("`r`n","`n")
@@ -73,7 +73,7 @@ if ($byteBound -ne 52 -or $firstUnsafeProcedureIndex -ge $byteBound) {
 # Check the full recovered owner, reversing only registered textual edits.
 $marker = "/*`n * Determines if a Wow wndproc"
 $original = $source.Replace("`r`n","`n")
-$mirror = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/opennt-host/windows/core/ntuser/kernel/cleanup.c'))
+$mirror = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/host/windows/core/ntuser/kernel/cleanup.c'))
 if ([regex]::IsMatch($mirror,'(?<!\r)\n')) { throw 'Cleanup mirror must retain CRLF' }
 $body = $mirror.Replace("`r`n","`n")
 $body = $body.Substring($body.IndexOf($marker)).TrimEnd()

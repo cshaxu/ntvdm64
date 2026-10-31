@@ -50,7 +50,7 @@ try {
                     $parts[0] -like 'artifacts/documentation-archive/*' -or
                     $parts[0] -eq 'src/ntcon-exe/window_keyboard.c' -or
                     $parts[0] -eq 'src/ntvdm-exe/win32/console_graphics.c' -or
-                    $parts[0] -eq 'src/opennt-abi/host-compat/README.md') { $class = 'original-console-source' }
+                    $parts[0] -eq 'src/compat/README.md') { $class = 'original-console-source' }
                 elseif ($parts[0] -match '^docs/(proposals/proposal-(native-worker-frontend-renaming-001|worker-task-trace-observation-001|native-launch-hook-001)\.md|states/CURRENT\.md|etc/operations/t424-worker-frontend-renaming-plan\.md|etc/evidence/m0-t424-s2-native-worker-identity\.md)$' -and
                     $parts[2] -match '(?i)frontend|must never denote|and .+ is the renamed') { $class = 'reserved-frontend' }
                 $rows.Add([pscustomobject]@{Path=$parts[0];Line=[int]$parts[1];Column=$match.Index+1;Token=$match.Value;Class=$class;Text=$parts[2]})

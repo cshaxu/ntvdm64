@@ -22,13 +22,13 @@ $log = Join-Path $OutputRoot 'nt-com-mock-fixture.log'
 
 $include = @(
     'src',
-    'src\opennt-abi\host-compat\include',
+    'src\compat\include',
     'src\mvdm\softpc.new\base\inc',
     'src\mvdm\softpc.new\host\inc',
-    'src\opennt-host\public\sdk\inc',
-    'src\opennt-abi\source\public\sdk\inc',
-    'src\opennt-abi\source\public\internal\base\inc',
-    'src\opennt-abi\source\public\internal\windows\inc',
+    'src\non-mvdm\host\public\sdk\inc',
+    'src\non-mvdm\abi\public\sdk\inc',
+    'src\non-mvdm\abi\public\internal\base\inc',
+    'src\non-mvdm\abi\public\internal\windows\inc',
     'src\mvdm\inc',
     'src\ntvdm-exe\softpc\include'
 ) | ForEach-Object { '/I "' + (Join-Path $repo $_) + '"' }
@@ -36,7 +36,7 @@ $include = @(
 $compile = @(
     'call "' + $vsDevCmd + '" -arch=x86 -host_arch=x86 >nul &&',
     'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',
-    '/FI "' + (Join-Path $repo 'src\opennt-abi\host-compat\include\nt.h') + '"',
+    '/FI "' + (Join-Path $repo 'src\compat\include\nt.h') + '"',
     '/FI "' + (Join-Path $repo 'src\ntvdm-exe\softpc\include\mvdm_softpc_symbol_compat.h') + '"',
     ($include -join ' '),
     '"' + $fixture + '"',

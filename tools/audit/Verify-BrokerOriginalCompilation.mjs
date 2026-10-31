@@ -11,7 +11,7 @@ const graphPath=path.resolve(process.argv[2] ?? 'build/M0-T412/S1/text-cell-repa
 const graph=fs.readFileSync(graphPath,'utf8');
 const flags=graph.match(/^cflags = (.*)$/m)?.[1].replaceAll('$:',':');
 assert(flags,'Generate the formal x86 product graph before this compile probe');
-const source=path.resolve('src/opennt-host/base/win32/server/srvvdm.c');
+const source=path.resolve('src/non-mvdm/host/base/win32/server/srvvdm.c');
 const sourceBefore=fs.readFileSync(source);
 const env=path.join(build,'msvc.cmd');
 const vc='C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat';
@@ -27,7 +27,7 @@ function command(args,logName) {
     fs.closeSync(log);
     assert.equal(result.status,0,`${logName}: ${result.error?.message ?? result.status}`);
 }
-command(`cl.exe ${flags} /we4013 /FI "${root}/tests/broker/source_compile_probe.h" /I "${build}" /I "${root}/src/opennt-host/base/win32/inc" /Fo"${build}/srvvdm.obj" "${source}"`,'compile.log');
+command(`cl.exe ${flags} /we4013 /FI "${root}/tests/broker/source_compile_probe.h" /I "${build}" /I "${root}/src/non-mvdm/host/base/win32/inc" /Fo"${build}/srvvdm.obj" "${source}"`,'compile.log');
 command(`dumpbin.exe /symbols "${build}/srvvdm.obj"`,'symbols.txt');
 assert.deepEqual(fs.readFileSync(source),sourceBefore,'The original owner must not be edited');
 const object=fs.readFileSync(path.join(build,'srvvdm.obj'));

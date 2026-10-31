@@ -18,7 +18,7 @@ $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
     Set-Content -LiteralPath $environment -Encoding ascii
 $includes = @(
     'src',
-    'src/opennt-abi/host-compat/include',
+    'src/compat/include',
     'src/ntvdm-exe/softpc/include',
     'src/mvdm-support/inc',
     'src/mvdm-platform-abi/source/public/internal/ds/inc',

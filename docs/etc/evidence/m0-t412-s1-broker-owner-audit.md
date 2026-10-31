@@ -37,7 +37,7 @@ autonomous `base_vdm_client.c` -> autonomous `base_vdm_local.c`.
 
 The app assigns broker ID 1 and immediately copies between two local stores.
 This is not an existing service process to which IPC merely needs attaching.
-The selected Base client `opennt-host/base/win32/client/vdm.c` contains only
+The selected Base client `non-mvdm/host/base/win32/client/vdm.c` contains only
 the environment subset, not GetNextVDMCommand/GetBinaryTypeW. The original
 server file exists but is not in this formal product source list.
 `adapter-opennt-host/README.md` explicitly records no implementation bodies yet.

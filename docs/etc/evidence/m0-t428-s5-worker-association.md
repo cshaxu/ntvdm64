@@ -152,7 +152,7 @@ NTVDM.REG and configuration remain untouched. Publication passed. r030
 published Console/Window empty/native-zero/MEM/EDIT smoke and all eight hashes
 passed. Final source/ownership/lock/handle and diff review passed; the only
 production change in this increment is phase-based route cancellation.
-No src/mvdm or src/opennt-host file changed. Documentation governance/links
+No src/mvdm or src/non-mvdm/host file changed. Documentation governance/links
 and whitespace are checked before forming the final reviewed P.
 
 Final reviewed P db855a66c is pushed; S5 is closed. S6 retains naming and final

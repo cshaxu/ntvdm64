@@ -25,9 +25,9 @@ def main():
               'current_source_hashes', 'decision', 'remaining_proof']
     output = []
     mappings = {
-        'nt/private/': ('src/opennt-host', 'src/opennt-abi/source/private'),
-        'base/': ('src/opennt-host/base', 'src/opennt-abi/source/base'),
-        'public/': ('src/opennt-host/public', 'src/opennt-abi/source/public'),
+        'nt/private/': ('src/non-mvdm/host', 'src/non-mvdm/abi/private'),
+        'base/': ('src/non-mvdm/host/base', 'src/non-mvdm/abi/base'),
+        'public/': ('src/non-mvdm/host/public', 'src/non-mvdm/abi/public'),
     }
     for row in selected:
         path = row['path'].replace('\\', '/')

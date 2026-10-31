@@ -360,7 +360,7 @@ silently reduce the proposal's four-width acceptance to same-width support.
 
 | Mechanism | Source/current location | Selected disposition |
 | --- | --- | --- |
-| Legacy image recognition | opennt-host/base/win32/client/vdm.c, GetBinaryTypeW and BaseIsDosApplication | Reuse the existing classifier cohort through a narrowly selected launcher-owned static library. Retain original section-status/type/error rules; no extension-only or MZ-only classifier. |
+| Legacy image recognition | non-mvdm/host/base/win32/client/vdm.c, GetBinaryTypeW and BaseIsDosApplication | Reuse the existing classifier cohort through a narrowly selected launcher-owned static library. Retain original section-status/type/error rules; no extension-only or MZ-only classifier. |
 | Native subsystem query | run16-exe/image_classification.c | Reuse OS image-section metadata. Opposite-machine rejection by the legacy classifier is not evidence of a DOS image. |
 | run16 user search | run16-exe/application_search.c | Unchanged launcher policy. Do not use it as Windows CreateProcess search. |
 | Native resource/creation primitive | run16-exe/native_launch.c; NTVWM execution.c | Retain restricted streams/capabilities, actual suspended child and original bind/resume/completion ownership. Installer consumes that child; it never creates a replacement CMD. |

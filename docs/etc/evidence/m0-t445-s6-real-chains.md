@@ -513,7 +513,7 @@ proves actual viewport movement and exits normally. The retained runner now
 pins the process handle and rejects an unavailable exit code; its bounded
 timeout uses the supported Kill()/WaitForExit API. The fixture already owns
 the demo lifetime through its cleanup job. Original mirrors have no worktree
-diff (`git diff --name-only -- src/mvdm src/opennt-host` is empty).
+diff (`git diff --name-only -- src/mvdm src/non-mvdm/host` is empty).
 
 r074 PID5396 starts12:50:24 (600s deadline), exits0. Dependency-driven Ninja
 relinks only basesrv-service-reservation-test.exe. The29-case in-process

@@ -13,7 +13,7 @@ The recovery order was reviewed before changing code:
    direct consumer for the relevant desktop, WND graph and menu queries.
 2. The selected original owners remain `src/mvdm/wow32/walias.c` (standard
    class table/classifier), `wumenu.c`/`wmdisp32.c` (menu algorithms and
-   conversion), and `opennt-host/windows/core/ntuser/kernel/queue.c`
+   conversion), and `non-mvdm/host/windows/core/ntuser/kernel/queue.c`
    (`xxxInitTask`).
 3. The existing project adapter is limited to copied identities and lifetime
    coordination; it neither recreates a USER server nor treats host objects

@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-abi/host-compat/include/nt.h"
+#include "compat/include/nt.h"
 /* wowuserp.h normally receives this exact private callback typedef through
  * the original precompiled USER declarations.  The fixture needs only the
  * registration record, so retain the ABI spelling without importing the
@@ -19,7 +19,7 @@
 typedef VOID (WINAPI *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
 #pragma warning(pop)
 
 typedef DWORD (WINAPI *wow_user_register_proc)(APFNWOWHANDLERSIN,

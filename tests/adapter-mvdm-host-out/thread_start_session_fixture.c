@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "opennt-abi/host-compat/include/thread_start_compat.h"
+#include "compat/include/thread_start_compat.h"
 #include "ntvdm-exe/session/session.h"
 
 static DWORD __cdecl bound_worker(LPVOID parameter)

@@ -3,7 +3,7 @@
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_user_object_bindings.h"
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 #include <stdio.h>
 
 /* Actual thin entry, with original creator/task/borrow transport doubles.

@@ -6,7 +6,7 @@
 #define VDDAllocateDosHandle __cdecl VDDAllocateDosHandle
 #define VDDAssociateNtHandle __cdecl VDDAssociateNtHandle
 #define VDDRetrieveNtHandle __cdecl VDDRetrieveNtHandle
-#include "opennt-abi/source/public/sdk/inc/nt_vdd.h"
+#include "non-mvdm/abi/public/sdk/inc/nt_vdd.h"
 #undef VDDAllocateDosHandle
 #undef VDDAssociateNtHandle
 #undef VDDRetrieveNtHandle

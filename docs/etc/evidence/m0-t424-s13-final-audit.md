@@ -89,7 +89,7 @@ explicit debt; existing 30ms sampling remains intentionally unchanged.
 pwsh -NoProfile -File build/M0-T424/S13/r001/final-audit.ps1
 git grep -I -n -i ntkvm -- src tests tools
 git grep -I -n -i ntw32 -- src tests tools
-git diff f64559086 --numstat -- src/mvdm src/opennt-host src/opennt-abi
+git diff f64559086 --numstat -- src/mvdm src/non-mvdm/host src/opennt-abi
 pwsh -NoProfile -File tools/governance/Verify-DocumentationGovernance.ps1
 pwsh -NoProfile -File tools/governance/Test-DocumentationRelativeLinks.ps1
 git diff --check

@@ -4,7 +4,7 @@
 #include "wow_edit_drawing_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include <wchar.h>
-#include "opennt-abi/host-compat/include/wow_control_resource_abi.h"
+#include "compat/include/wow_control_resource_abi.h"
 #define ghdcGray (wow_control_draw_current->gray_dc)
 #define ghdcBits2 (wow_control_draw_current->bits_dc)
 #define gcxGray (wow_control_draw_current->gray_width)

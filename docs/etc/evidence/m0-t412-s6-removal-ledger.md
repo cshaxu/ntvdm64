@@ -37,8 +37,8 @@ duplicates:
 
 | Surface | Current owner | Reason |
 | --- | --- | --- |
-| DOS/WOW command records and wait/reentry semantics | original `opennt-host/base/win32/server/srvvdm.c` | The recovered original BaseSrv owner executes through the standalone service adapter. |
-| `GetNextVDMCommand`, `ExitVDM` and related client bodies | original `opennt-host/base/win32/client/vdm.c` | The recovered original BaseClient calls the finite authenticated transport. |
+| DOS/WOW command records and wait/reentry semantics | original `non-mvdm/host/base/win32/server/srvvdm.c` | The recovered original BaseSrv owner executes through the standalone service adapter. |
+| `GetNextVDMCommand`, `ExitVDM` and related client bodies | original `non-mvdm/host/base/win32/client/vdm.c` | The recovered original BaseClient calls the finite authenticated transport. |
 | `run16.exe` | `run16_entry.c` plus original BaseClient classification/config calls | This is the standalone representation of the CreateProcess parent role. |
 | `basesrv.exe` | `basesrv_entry.c` plus original BaseSrv service dispatch | This is the one broker process; it has no retired local queue provider. |
 | `ntvdm.exe` | original `softpc.new/obj.vdm/ntvdm.c::main` | The original worker C entry is the PE entry.  A finite standalone binding is called by that entry solely to supply process-private BaseClient capture storage, broker connection, selected session, guest-memory lease and termination escape; it contains no classification, record queue, argv rewriting or worker scheduling policy. |

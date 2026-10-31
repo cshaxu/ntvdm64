@@ -27,20 +27,20 @@ const sources = [
 ];
 const includes = [
   "src",
-  "src/opennt-abi/host-compat/include",
+  "src/compat/include",
   "src/ntvdm-exe/softpc/include",
-  "src/opennt-host/public/sdk/inc",
+  "src/non-mvdm/host/public/sdk/inc",
   "src/mvdm/inc",
   "src/mvdm/xms.486",
   "src/mvdm/softpc.new/base/inc",
-  "src/opennt-abi/source/public/sdk/inc",
-  "src/opennt-abi/source/public/internal/base/inc",
-  "src/opennt-abi/source/public/ddk/inc"
+  "src/non-mvdm/abi/public/sdk/inc",
+  "src/non-mvdm/abi/public/internal/base/inc",
+  "src/non-mvdm/abi/public/ddk/inc"
 ].map((path) => `/I "${source(path)}"`).join(" ");
 const flags = [
   "/nologo", "/std:c11", "/MT", "/W4", "/showIncludes",
   "/DWIN32", "/DWINNT", "/DWIN_32", "/DCPU_40_STYLE", "/DDEVL",
-  `/FI "${source("src/opennt-abi/host-compat/include/nt.h")}"`, includes
+  `/FI "${source("src/compat/include/nt.h")}"`, includes
 ].join(" ");
 const objects = sources.map((path, index) => `obj/${String(index).padStart(2, "0")}-${basename(path, ".c")}.obj`);
 const lines = [

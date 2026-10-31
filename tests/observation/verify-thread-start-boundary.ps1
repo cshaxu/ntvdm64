@@ -31,7 +31,7 @@ try {
     foreach ($source in $sources) {
         $object=[IO.Path]::GetFileNameWithoutExtension($source)+'.obj'
         $objects+=('"'+$root+'\'+$object+'"')
-        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\opennt-abi\host-compat\include" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
+        $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /c /O2 /MT /W4 /I "'+$repo+'\src" /I "'+$repo+'\src\compat\include" /Fo"'+$root+'\'+$object+'" "'+$repo+'\'+$source+'""'
         Run-Owned ('compile-'+[IO.Path]::GetFileNameWithoutExtension($source)) 'cmd.exe' $argsLine 120
     }
     $argsLine='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && link.exe /nologo /out:"'+$root+'\fixture.exe" '+($objects -join ' ')+' kernel32.lib"'

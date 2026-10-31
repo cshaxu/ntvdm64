@@ -9,7 +9,7 @@ The two private production roots are absent:
 
 This is a placement recovery, not a behavior expansion.  The governing rule
 is now enforced by the selected build: neither `src/mvdm` nor
-`src/opennt-host` receives a new file.  A retained body is either a minimal
+`src/non-mvdm/host` receives a new file.  A retained body is either a minimal
 change to an existing original owner or a named adapter whose modern boundary
 cannot compose in the mirror.
 

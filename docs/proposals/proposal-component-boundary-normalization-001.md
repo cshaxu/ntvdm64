@@ -16,7 +16,7 @@ src/ntvdm-exe/   → ntvdm.exe
 The objective is to retire broad, free-standing `adapter-*`, `session` and
 obsolete local broker ownership where they conceal a single executable's
 private implementation. The two original source mirrors remain unchanged in
-principle: `src/mvdm` and `src/opennt-host` retain their strict no-new-file rule
+principle: `src/mvdm` and `src/non-mvdm/host` retain their strict no-new-file rule
 and own only original source or minimal owner-local divergences.
 
 ## Final component model
@@ -24,7 +24,7 @@ and own only original source or minimal owner-local divergences.
 | Component | Owns | Must not own |
 | --- | --- | --- |
 | `run16` | public CLI `main.c`; discovery; original classifier invocation; BaseSrv startup/connection; suspended worker creation/registration; parent completion wait | BaseSrv DOS/WOW records, worker machine/session state, Console presentation, a new command parser |
-| `basesrv` | thin `main.c`; RPC endpoint/authentication/rundown; stream/receipt transfer; Console membership; broker liveness; transport assembly around `opennt-host` `srvvdm.c` | original DOS/WOW record selection, queue policy, or a replacement of BaseSrv semantics |
+| `basesrv` | thin `main.c`; RPC endpoint/authentication/rundown; stream/receipt transfer; Console membership; broker liveness; transport assembly around `non-mvdm/host` `srvvdm.c` | original DOS/WOW record selection, queue policy, or a replacement of BaseSrv semantics |
 | `ntvdm` | original entry behind the thinnest process-local pre-init; worker lifecycle; guest-memory lease; thread binding; termination cleanup; SoftPC/CCPU and worker-local Console presentation | cross-process broker policy, launcher creation, global reusable session management |
 | `product-abi` / `product-package` | deliberately tiny shared product-version identity and package/media layout contract | generic utilities, state, process policy or a generic `common` component |
 
@@ -41,10 +41,10 @@ more than one executable only through that owner's narrow static library:
 
 | Kind | Final owner and use |
 | --- | --- |
-| Original OpenNT/MVDM algorithm | Its existing file in `mvdm` or `opennt-host`; each consumer links the selected original-owner library. |
+| Original OpenNT/MVDM algorithm | Its existing file in `mvdm` or `non-mvdm/host`; each consumer links the selected original-owner library. |
 | BaseSrv protocol, client stubs and copied wire records | `basesrv`; `run16` and `ntvdm` may link its versioned client library, but cannot own a second protocol implementation. |
 | Process-local Win32 operation | The one executable whose process owns the HANDLE, Console, thread or lifetime: `run16`, `basesrv`, or `ntvdm`. |
-| Same-shaped unavailable historical host ABI needed by several owners | `opennt-abi/host-compat`, only when its README names the original declaration, finite public-Win32/NTDLL binding and consumers. It is a host-ABI compatibility island, not a `common` utility layer. |
+| Same-shaped unavailable historical host ABI needed by several owners | `compat`, only when its README names the original declaration, finite public-Win32/NTDLL binding and consumers. It is a host-ABI compatibility island, not a `common` utility layer. |
 | Product version and package/media constants | Stateless `product-abi` and `product-package` only. |
 
 Thus no new `win32api`, `common`, or generic compatibility root is admitted.
@@ -87,7 +87,7 @@ and parent wait behaviour.
 
 Move service entry, protocol contract, authenticated transport and BaseSrv
 bindings to `src/basesrv`; retain `srvvdm.c` as original record owner under
-`opennt-host`. Prove connection/rundown, stream/receipt, Console membership,
+`non-mvdm/host`. Prove connection/rundown, stream/receipt, Console membership,
 protocol mismatch and broker-death behaviour without changing DOS/WOW policy.
 
 ### S4 — ntvdm worker-local reorganization
@@ -111,7 +111,7 @@ separately.
 
 Reopen only because S1 deleted the dead local broker plane while S2--S5 mostly
 relocated live code. Inventory every selected body below `run16`, `basesrv`,
-`ntvdm`, `opennt-abi/host-compat`, `product-abi` and `product-package`.
+`ntvdm`, `compat`, `product-abi` and `product-package`.
 For each, record its physical-line count, callers/build targets, original
 owner/source-first recovery ladder and exactly one disposition: delete,
 restore original owner, retain as finite binding, or defer with a named

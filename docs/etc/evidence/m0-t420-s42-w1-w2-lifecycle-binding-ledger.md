@@ -20,7 +20,7 @@ second USER implementation or a second domain inside `WOW32.DLL`?
 - Active packet: M0 T420 S42.
 - Original WOW32 callers: `src/mvdm/wow32/wkman.c`, `wuclass.c`, `wudlg.c`,
   `wuser.c`, and `wkgthunk.c`.
-- Recovered original owners: `src/opennt-host/windows/core/ntuser/kernel/`
+- Recovered original owners: `src/non-mvdm/host/windows/core/ntuser/kernel/`
   `taskman.c`, `queue.c`, and `exitwin.c`.
 - Worker-local boundary: `src/ntvdm-exe/wow/wow_user_{runtime,session_binding}.c`
   and `src/ntvdm-exe/softpc/mvdm_standalone_worker.c`.
@@ -614,7 +614,7 @@ actually bound and the real path and regressions pass.
 
 ### Original shared-object schema recovered for the production binding
 
-The selected `opennt-host/windows/core/ntuser/inc/user.h` now also retains
+The selected `non-mvdm/host/windows/core/ntuser/inc/user.h` now also retains
 the original LARGE_UNICODE_STRING, HEAD/SHROBJHEAD/THROBJHEAD, WND and
 DESKTOPINFO declarations under an opt-in compile boundary. Four extracted
 spans are byte-for-byte checked against source user.h SHA-256

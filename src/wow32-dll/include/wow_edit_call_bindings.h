@@ -2,7 +2,7 @@
 #define WOW_EDIT_CALL_BINDINGS_H
 #include <windows.h>
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 BOOL WINAPI wow_edit_NtUserDefSetText(HWND, const LARGE_STRING *);
 /* ADAPTER-WOW-061: original EDIT caller shape; existing native boundary
@@ -36,7 +36,7 @@ DWORD WINAPI wow_edit_control_extent(WORD);
 #if defined(WOW_ORIGINAL_CONTROL_STATE_CALLS) || defined(WOW_ORIGINAL_EDIT_CLIENT)
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_CLIENT_HANDLES
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_CLIENT_HANDLES
 #endif
 #if defined(WOW_ORIGINAL_CONTROL_STATE_CALLS) || defined(WOW_ORIGINAL_EDIT_CLIENT)

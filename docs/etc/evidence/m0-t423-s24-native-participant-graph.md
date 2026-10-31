@@ -407,8 +407,8 @@ task scheduler/registry rather than a restoration of BaseSrv semantics.
 The authoritative direct-request boundary is therefore both the smallest
 standalone design and the closest available original-owner boundary.
 
-Source evidence: `src/opennt-host/base/win32/server/srvinit.c` (VDM service
-table) and `src/opennt-host/base/win32/server/srvvdm.c` (`DOSRECORD`,
+Source evidence: `src/non-mvdm/host/base/win32/server/srvinit.c` (VDM service
+table) and `src/non-mvdm/host/base/win32/server/srvvdm.c` (`DOSRECORD`,
 `WOWRECORD`, `CONSOLERECORD`, wait/dispatch paths).
 
 ## Helperless Existing-Console Association

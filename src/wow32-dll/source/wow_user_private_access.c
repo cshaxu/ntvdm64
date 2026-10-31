@@ -4,7 +4,7 @@
 #include "wow_class_client_bindings.h"
 #include "wow_dialog_state_bindings.h"
 #include "wow_window_procedure_entry.h"
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 
 static DWORD decoded_procedure(DWORD native, BOOL *guest)
 {

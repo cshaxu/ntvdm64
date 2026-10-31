@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <winternl.h>
 
-#include "opennt-abi/host-compat/include/thread_start_compat.h"
+#include "compat/include/thread_start_compat.h"
 
 /* The original source TU intentionally sees CreateThread through the cdecl
  * bridge.  This fixture itself needs the native WINAPI entry to drive its

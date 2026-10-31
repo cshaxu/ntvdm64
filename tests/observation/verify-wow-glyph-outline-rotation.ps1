@@ -15,7 +15,7 @@ $fixture = Join-Path $root 'tests\adapter-mvdm-host-out\wow\wow_glyph_outline_ro
 $provider = Join-Path $root 'src\wow32-dll\source\wow_public_user_facade.c'
 New-Item -ItemType Directory -Force -Path $out | Out-Null
 $compile = 'call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cd /d "' +
-    $out + '" && cl /nologo /TC /MT /W4 /WX /I"' + $root + '\src" /I"' + $root + '\src\opennt-abi\source\public\internal\windows\inc" /Fe:wow_glyph_outline_rotation_fixture.exe "' +
+    $out + '" && cl /nologo /TC /MT /W4 /WX /I"' + $root + '\src" /I"' + $root + '\src\non-mvdm\abi\public\internal\windows\inc" /Fe:wow_glyph_outline_rotation_fixture.exe "' +
     $fixture + '" "' + $provider + '" /link gdi32.lib user32.lib kernel32.lib'
 & cmd.exe /d /s /c $compile
 if ($LASTEXITCODE) { throw 'x86 WOW glyph-outline fixture build failed.' }

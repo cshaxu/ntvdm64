@@ -8,7 +8,7 @@ unreviewed project-component boundary.
 - S1 froze all private-root ownership, callers and formal build edges.
 - S2 retired `src/mvdm-softpc-patch` under the strict mirror policy.
 - S3--S4 retired `src/mvdm-overlay` and `src/opennt-host-overlay`; neither
-  `src/mvdm` nor `src/opennt-host` gained a file.  Original-owner-local
+  `src/mvdm` nor `src/non-mvdm/host` gained a file.  Original-owner-local
   changes stayed in existing mirror files; C-VID ABI composition and the
   monitor printer bridge are named adapters.
 - S5 completed the required non-mutating audit of app, broker, session and

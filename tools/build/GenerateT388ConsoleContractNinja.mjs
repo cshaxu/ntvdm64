@@ -22,7 +22,7 @@ const normalizedEnvironment = environment.replaceAll("\\", "/");
 const ninja = [
   "ninja_required_version = 1.10",
   `root = ${root}`,
-  `cflags = /nologo /TC /MT /W4 /showIncludes /I ${root}/src /I ${root}/src/opennt-abi/host-compat/include`,
+  `cflags = /nologo /TC /MT /W4 /showIncludes /I ${root}/src /I ${root}/src/compat/include`,
   `environment = ${normalizedEnvironment}`,
   "",
   "rule cc",

@@ -1330,7 +1330,7 @@ guest changes, runtime test or publication resulted from this source audit.
 Original editsl.c calls CopyInflateRect and DrawFrame; editml.c also calls
 DrawFrame. Recovered true subsets at their original rtl/rect.c and rtl/draw.c
 paths retain those complete function bodies. Full-file SHA256 values and
-admission are in src/opennt-host/README.md. Original inc/user.h DrawFrame
+admission are in src/non-mvdm/host/README.md. Original inc/user.h DrawFrame
 command declarations are retained too (source SHA256
 ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1).
 The only function-file changes are the subset/provenance header and private
@@ -1738,7 +1738,7 @@ boundary: shared retained WND/DIALOG storage precedes window-long routing;
 do not attach original PDLG to modern USER's private state.
 
 OPENNT-HOST-083 retains the complete unchanged SetDialogPointer body from
-kernel/miscutil.c (provenance/hash in src/opennt-host/README.md). Its only
+kernel/miscutil.c (provenance/hash in src/non-mvdm/host/README.md). Its only
 outgoing operations are local PDLG assignment, FNID and WFDIALOGWINDOW state
 updates. Original ValidateDialogPwnd and final default-dialog cleanup are its
 direct callers. Queue/desktop/shell routines in the same upstream file are
@@ -2530,7 +2530,7 @@ recovered EDIT resources are different contracts. This consumer mapping and
 runtime menu acceptance remain pending; merely linking the resource is not
 proof of a functioning context menu. No original command-policy rewrite or
 new menu construction routine is introduced. Source hashes/provenance are
-registered in opennt-host/README; the complete group is still unbuilt.
+registered in non-mvdm/host/README; the complete group is still unbuilt.
 
 ### Unicode native message return boundary
 
@@ -4518,7 +4518,7 @@ algorithm is rejected. Native private-state casting and recursive USER server
 import remain rejected alternatives.
 
 All paths below are relative to the read-only reference
-windows/core/ntuser/client and retain that path under src/opennt-host. Reference
+windows/core/ntuser/client and retain that path under src/non-mvdm/host. Reference
 revision remains the recorded5c5b979ec08c17d3ca2eb70e8aad62d26515d01c;
 the current content identity is independently pinned by each hash. Existing
 notices stay unchanged. lboxctl2.c/lboxctl3.c have historical module/history
@@ -6967,7 +6967,7 @@ runtime bugs. No blanket macro stubs or guessed private state were added.
 Source-traced declaration batch restores EDIT allocation/text-limit,
 modifier and undo constants plus list allocation/search/selection constants
 and LBItem/LBODItem records in the existing usercli subset. Registered under
-OPENNT-HOST-074/086 in src/opennt-host/README.md with source hash and ranges.
+OPENNT-HOST-074/086 in src/non-mvdm/host/README.md with source hash and ranges.
 No original C-body changes or guest inputs; no mutable storage or autonomous
 behavior introduced. This batch is not rebuilt while the shared declaration
 and service-input group remains incomplete.
@@ -7725,7 +7725,7 @@ group before claiming the implicit-declaration/build closure complete.
 ### Restore the dialog lookup, default-button and geometry cohort
 
 OPENNT-HOST-108 now retains six complete original bodies, with exact source
-hashes and crop/selection boundaries in src/opennt-host/README.md:
+hashes and crop/selection boundaries in src/non-mvdm/host/README.md:
 client/wow.c _GetDlgItem; client/dlgmgr2.c _FindDlgItem,
 xxxRemoveDefaultButton and xxxCheckDefPushButton; client/winmgrc.c
 _AdjustWindowRectEx; rtl/winmgr.c NeedsWindowEdge. Source extraction/comparison
@@ -10178,7 +10178,7 @@ not authorize weakening these semantics.
 ### Original outgoing CPD owner selected, incoming normalization still open
 
 OPENNT-HOST-120 restores the complete unchanged client/clmsg.c::GetCPD body
-from the pinned source (SHA256 recorded in opennt-host/README.md). A separate
+from the pinned source (SHA256 recorded in non-mvdm/host/README.md). A separate
 production object selects it with the existing control-client facade, original
 HW projection and existing named NtUserGetCPD service. No copied token table,
 private native layout or new conversion algorithm. The selected callers are
@@ -10538,7 +10538,7 @@ is no longer treated as implementation progress; implementation is authorized.
 
 ### Approved actual-dialog owner implementation, first grouped verification
 
-OPENNT-HOST-121 is registered in src/opennt-host/README.md for five existing
+OPENNT-HOST-121 is registered in src/non-mvdm/host/README.md for five existing
 mirror files: dlgbegin/dlgmgr, client ntstubs and RTL/kernel getset. The
 production control facade selects public native dialog procedure/result
 storage; original PDLG procedure/ANSI/result fields are not competing owners.
@@ -12647,7 +12647,7 @@ implementation is selected, and the existing ten source-retirement failures
 remain delivery blockers. A source-policy audit of the other fixed S3 groups
 finds actionable ownership violations independently of that technical gap.
 
-Enumerate every changed/untracked C/H/RC/ASM path under src/opennt-host and
+Enumerate every changed/untracked C/H/RC/ASM path under src/non-mvdm/host and
 src/mvdm, map to pinned OpenNT's original relative path, and test membership.
 Of59 existing paths,57 have same-path originals. The two exceptions are
 client/controlabi.h and rtl/chartranapi.h: both are project-made facade
@@ -12657,7 +12657,7 @@ other work; relocate both as one declaration-boundary group instead of
 removing their required original declarations or conversion bindings.
 
 The complete former controlabi.h moves to
-opennt-abi/host-compat/include/wow_control_resource_abi.h; change its three
+compat/include/wow_control_resource_abi.h; change its three
 control-client/control-draw-state/button-resources precomp includes. The
 complete former chartranapi.h moves to the same ABI include directory as
 wow_char_conversion_abi.h; replace its relative original user.h include
@@ -13956,7 +13956,7 @@ published DLL widths, opposite-width rejection, duplicate/foreign-thread
 rejection, immutable query binding, font restoration/unload, plus published
 W16Style's28 pages, viewport movement and normal process exit. Full evidence:
 build/M0-T447/S3/control-info-delivery-r1. Original guest/ZIP unchanged;
-src/mvdm and src/opennt-host diff is empty. Existing075 reuses DIV335 without
+src/mvdm and src/non-mvdm/host diff is empty. Existing075 reuses DIV335 without
 adding another mirror exception;074/075 owned seams are registered in README.
 
 Second-role review: registration metadata is not another resource registry;

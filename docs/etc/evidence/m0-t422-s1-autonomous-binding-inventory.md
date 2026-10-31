@@ -26,7 +26,7 @@ The selected provider currently contains:
 | Composition class | Files | Lines | Meaning |
 | --- | ---: | ---: | --- |
 | Original selected WOW32 bodies | 77 | build-selected original bodies | `src/mvdm/wow32`; original algorithms and dispatch remain here. |
-| Imported original non-MVDM USER slices | 16 source files / 19 link objects | 4,674 | `src/opennt-host/windows/core/ntuser/{client,kernel,rtl}`; repeated `client.c` and `class.c` objects are deliberately compiled under distinct original subsets. |
+| Imported original non-MVDM USER slices | 16 source files / 19 link objects | 4,674 | `src/non-mvdm/host/windows/core/ntuser/{client,kernel,rtl}`; repeated `client.c` and `class.c` objects are deliberately compiled under distinct original subsets. |
 | Target-local standalone bindings | 21 | 2,977 | `src/wow32-dll/source`; this is the audited autonomous/boundary surface. |
 | Worker-local WOW runtime binding | 2 | 180 | `src/ntvdm-exe/wow`; one worker TLS/session domain, not a DLL-owned second runtime. |
 
@@ -60,7 +60,7 @@ responsibilities as follows:
 ## Immediate conclusions
 
 1. The 2,977 lines are not eligible for a bulk move into `mvdm` or
-   `opennt-host`: no file is an original OpenNT mirror file.  Moving them
+   `non-mvdm/host`: no file is an original OpenNT mirror file.  Moving them
    would disguise autonomous implementation as source recovery and violate
    canonical-mirror policy.
 2. Nor may they be treated as accepted merely because they link.  The known

@@ -8,11 +8,11 @@ $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 
 $required = @(
-    'src/opennt-abi/host-compat/include/nt.h',
-    'src/opennt-abi/host-compat/include/ntrtl.h',
-    'src/opennt-abi/host-compat/include/nturtl.h',
-    'src/opennt-abi/host-compat/include/vdmapi.h',
-    'src/opennt-abi/host-compat/opennt_support_rtl.c',
+    'src/compat/include/nt.h',
+    'src/compat/include/ntrtl.h',
+    'src/compat/include/nturtl.h',
+    'src/compat/include/vdmapi.h',
+    'src/compat/opennt_support_rtl.c',
     'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t279-s2-adapter-mvdm-host-out/win32-binding-plan-001.md',
     'artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t279-s2-adapter-mvdm-host-out/win32-binding-audit-001.md'
 )

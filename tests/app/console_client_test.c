@@ -35,7 +35,7 @@ static COORD native_font_size(HANDLE h,DWORD index) { return GetConsoleFontSize(
 static BOOL native_display(DWORD *mode) { return GetConsoleDisplayMode(mode); }
 static BOOL native_set_display(HANDLE h,DWORD flags,COORD *size)
 { return SetConsoleDisplayMode(h,flags,size); }
-#include "opennt-abi/host-compat/include/conapi.h"
+#include "compat/include/conapi.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>

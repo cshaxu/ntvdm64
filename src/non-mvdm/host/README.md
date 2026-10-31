@@ -1,4 +1,11 @@
-# opennt-host
+# non-mvdm original host sources
+
+OPENNT-HOST-126: source-layout rename updates only the existing project-added
+include paths in `base/win32/client/vdm.c` and
+`windows/core/ntuser/rtl/chartran.c` to the new original/compat roots. The
+referenced files and compiled behavior are unchanged by those path edits.
+The host and ABI cohorts remain separate because three same-relative-path
+headers differ; neither cohort is overwritten or merged.
 
 OPENNT-HOST-125 registers LBSetTabStops' one original release-result
 predicate in client/lboxrare.c, pinned OpenNT5c5b979ec08c17d3ca2eb70e8aad62d26515d01c,
@@ -71,7 +78,7 @@ failure channel; no guest edits, helper HWND or private native layouts.
 This registration precedes the five mirror edits; joint verification pending.
 
 T447 S3 mirror-path audit moves the project-only controlabi.h and chartranapi.h
-facades to opennt-abi/host-compat/include/wow_control_resource_abi.h and
+facades to compat/include/wow_control_resource_abi.h and
 wow_char_conversion_abi.h. Neither filename exists at its former pinned
 OpenNT path. Required original declarations, packing and conversion-service
 bindings remain unchanged; selected original bodies include the ABI facade.
@@ -1490,7 +1497,7 @@ except registered true subsets and minimal same-shaped adaptations required
 by a selected formal runtime.
 The source selection, rejected OpenNT-4.5 `vdm.c` candidate and initial
 interface dispositions are recorded in
-[`m0-t291-s5-p2-basesrv-source-package-audit-001.md`](../../docs/etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md)
+[`m0-t291-s5-p2-basesrv-source-package-audit-001.md`](../../../docs/etc/evidence/m0-t291-s5-p2-basesrv-source-package-audit-001.md)
 and the shared MVDM/OpenNT host trackers.
 
 `base/ntos/rtl/environ.c` is the selected D11 RTL slice. It is directly
@@ -1528,7 +1535,7 @@ complete, byte-identical status-conversion unit directly reached by original
 not admit NetAPI services, RAP transport, NetBIOS, CSRSS, or a network
 provider. Its identical three-source provenance and bounded disposition are
 recorded in
-[`m0-t324-s1-original-redirector-owner-binding-baseline-001.md`](../../docs/etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md).
+[`m0-t324-s1-original-redirector-owner-binding-baseline-001.md`](../../../docs/etc/evidence/m0-t324-s1-original-redirector-owner-binding-baseline-001.md).
 
 `netapi/netlib/copystr.c` is the third selected NetLib slice.  It is the
 complete, byte-identical OpenNT and OpenNT-4.5 conversion unit directly
@@ -1622,7 +1629,7 @@ and RegisterWowExec as one contiguous 320-line source group. Its LF-normalized
 SHA-256 is `2936de23dcbbdec23cf9ea23416606a7a3faeb96473d407e4bfaee00f89ac3aa`,
 from the same pinned source/revision. No additional outgoing CSR operation
 shape is needed beyond the four declared bindings. See the
-[S2 execution evidence](../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
+[S2 execution evidence](../../../docs/etc/evidence/m0-t412-s2-original-lifecycle.md).
 
 BaseUpdateVDMEntry is also restored unchanged in that cohort (57 lines;
 LF-normalized SHA-256
@@ -1669,4 +1676,4 @@ test covers dispatch/deep copy, hotkey conversion and pre-dispatch failures.
 | OPENNT-HOST-014 | `base/win32/client/vdm.c` supplies `BaseCreateVDMEnvironment`, `BaseDestroyVDMEnvironment`, and `BaseGetEnvNameType_U` before original Base creates an NTVDM child. | The full source file pulls the excluded Base/CSR process-creation product shell, while the selected CLI needs this exact environment projection before its direct SoftPC entry. | Preserve the three original bodies as a source-identified true subset. Its clone uses the admitted original D11 RTL body; the separate adapter owns only current-process installation/restoration around direct entry. | `base/win32/client/vdm.c`; `base/ntos/rtl/environ.c`; `../ntvdm/win32/mvdm_base_vdm_environment.c` |
 | OPENNT-HOST-015 | `base/ntos/rtl/environ.c` provides original create/clone/query/mutate/destroy ownership for ordered UTF-16 MULTI_SZ environments. | Original MVDM/VDM callers require the complete D11 algorithm, but standalone cannot expose NT4's real PEB or private kernel VM service shell. | Preserve the selected body under its original-relative path. Its only outgoing closure is a private PEB projection, PEB lock, public user-mode NTDLL `Zw*VirtualMemory` declarations and private symbol names, supplied by the bounded adapter seams. | `base/ntos/rtl/{environ.c,ntrtlp.h,environapi.h,zwapi.h}`; direct consumers `base/win32/client/vdm.c`, `../mvdm-host/dos/command/cmdenv.c` |
 | OPENNT-HOST-016 | `base/ntos/rtl/error.c` and generated `error.h` map NTSTATUS values to DOS/Win32 errors and record the reached status in the TEB. | Modern NTDLL exports the historical names, so it cannot be mixed with the selected original table under the public symbol names; the standalone process also cannot expose the NT4 TEB layout. | Preserve the selected original source/table under the original-relative path and route selected callers to a private symbol domain. The adapter contributes only the source-shaped TLS `LastStatusValue` carrier; it supplies no mapping entries or fallback policy. | `base/ntos/rtl/{error.c,error.h,ntrtlp.h}`; `public/sdk/inc/ntrtl.h`; `../adapter-mvdm-host-out/win32/{include/nt.h,source/opennt_support_rtl.c}` |
-| OPENNT-HOST-068 | BaseSrv stores numeric PID/TID and wait-receipt identities in HANDLE-shaped local carriers. | AMD64 rejects direct DWORD/pointer conversions and truncation in parent bit-zero masking. | Seven expressions convert through ULONG_PTR; tag mask retains full carrier width. Native srvvdm TU alone binds NULL=0, avoiding eleven irrelevant literal-zero edits. No structure, wire, scheduling, completion or cleanup algorithm changes; x86 remains supported. [Audit](../../docs/etc/evidence/m0-t433-s6-native-service-mirror-audit.md). | `base/win32/server/srvvdm.c`; `../../tools/build/New-NativeWorkerNinja.ps1` |
+| OPENNT-HOST-068 | BaseSrv stores numeric PID/TID and wait-receipt identities in HANDLE-shaped local carriers. | AMD64 rejects direct DWORD/pointer conversions and truncation in parent bit-zero masking. | Seven expressions convert through ULONG_PTR; tag mask retains full carrier width. Native srvvdm TU alone binds NULL=0, avoiding eleven irrelevant literal-zero edits. No structure, wire, scheduling, completion or cleanup algorithm changes; x86 remains supported. [Audit](../../../docs/etc/evidence/m0-t433-s6-native-service-mirror-audit.md). | `base/win32/server/srvvdm.c`; `../../../tools/build/New-NativeWorkerNinja.ps1` |

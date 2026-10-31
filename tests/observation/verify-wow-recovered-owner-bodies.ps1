@@ -26,7 +26,7 @@ $checks = @(
     @{ File='class.c'; Name='_UnregisterClass'; Source=$classSource }
 )
 foreach ($check in $checks) {
-    $path = Join-Path $RepositoryRoot ('src/opennt-host/windows/core/ntuser/kernel/' + $check.File)
+    $path = Join-Path $RepositoryRoot ('src/non-mvdm/host/windows/core/ntuser/kernel/' + $check.File)
     $mirror = [IO.File]::ReadAllText($path)
     if ($mirror -match '(?<!\r)\n') { throw "Non-original LF in mirror: $path" }
     $actual = Body ($mirror.Replace("`r`n", "`n")) $check.Name
@@ -57,7 +57,7 @@ if ((Get-FileHash -LiteralPath $probePath -Algorithm SHA256).Hash -ne
     throw 'Original probe.c identity changed'
 }
 $originalProbe = [IO.File]::ReadAllText($probePath)
-$mirrorProbe = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/opennt-host/base/ntos/ex/probe.c'))
+$mirrorProbe = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/host/base/ntos/ex/probe.c'))
 if ($mirrorProbe -match '(?<!\r)\n') { throw 'Non-original LF in probe.c' }
 $marker = '#undef ProbeForRead'
 if (!$originalProbe.Contains($marker) -or !$mirrorProbe.Contains($marker) -or
@@ -74,7 +74,7 @@ if ((Get-FileHash -LiteralPath $userPath -Algorithm SHA256).Hash -ne
     throw 'Original user.h identity changed'
 }
 $originalUser = [IO.File]::ReadAllText($userPath)
-$mirrorUser = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/opennt-host/windows/core/ntuser/inc/user.h'))
+$mirrorUser = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/host/windows/core/ntuser/inc/user.h'))
 if ($mirrorUser -match '(?<!\r)\n') { throw 'Non-original LF in user.h' }
 foreach ($pattern in @(
     'typedef struct _LARGE_UNICODE_STRING \{[\s\S]*?\} LARGE_UNICODE_STRING, \*PLARGE_UNICODE_STRING;',

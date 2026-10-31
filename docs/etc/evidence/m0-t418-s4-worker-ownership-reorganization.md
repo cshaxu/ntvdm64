@@ -8,7 +8,7 @@ families were relocated without changing their bodies or public protocol:
 | Final owner | Relocated families |
 | --- | --- |
 | `src/ntvdm` | `session`, `command`, `softpc`, `monitor`, `redir`, `vdd`, `debugger`, `wow`, and worker-local `win32` implementations |
-| `src/opennt-abi/host-compat` | historical declaration carriers and `opennt_support_rtl.c`, compiled separately into each consuming process |
+| `src/compat` | historical declaration carriers and `opennt_support_rtl.c`, compiled separately into each consuming process |
 
 The legacy `src/adapter-mvdm-host-out` root is absent.  No source was added to
 either original mirror.  `host-compat` has no broker state, guest state or

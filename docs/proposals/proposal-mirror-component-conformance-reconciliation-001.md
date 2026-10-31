@@ -16,7 +16,7 @@ and does not itself recover a new OpenNT service or Bochs machine feature.
    adapter.
 2. **S2 — `opennt-guest`.** Recompute source/artifact ownership and reconcile
    every guest source divergence with its selected OpenNT original.
-3. **S3 — `opennt-host`.** Independently recheck T269's final inventory,
+3. **S3 — `non-mvdm/host`.** Independently recheck T269's final inventory,
    including private binding reachability, marker/register identity and any
    source-body owner edge subsequently affected by S1/S2.
 4. **S4 — `opennt-bop`.** Consume the former BOP mirror-convergence candidate:

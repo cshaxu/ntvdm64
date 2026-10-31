@@ -34,13 +34,13 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 
 $includes = @(
     'src',
-    'src/opennt-abi/host-compat/include',
-    'src/opennt-host/public/sdk/inc',
-    'src/opennt-abi/source/public/sdk/inc',
-    'src/opennt-abi/source/public/internal/base/inc',
-    'src/opennt-abi/source/public/internal/windows/inc',
-    'src/opennt-abi/source/private/windows/inc',
-    'src/opennt-abi/source/public/ddk/inc',
+    'src/compat/include',
+    'src/non-mvdm/host/public/sdk/inc',
+    'src/non-mvdm/abi/public/sdk/inc',
+    'src/non-mvdm/abi/public/internal/base/inc',
+    'src/non-mvdm/abi/public/internal/windows/inc',
+    'src/non-mvdm/abi/private/windows/inc',
+    'src/non-mvdm/abi/public/ddk/inc',
     'src/mvdm-support/inc',
     'src/ntvdm-exe/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
@@ -54,9 +54,9 @@ $includes = @(
     $includePath = if ([IO.Path]::IsPathRooted($_)) { $_ } else { Join-Path $root $_ }
     '/I "' + (NinjaPath $includePath) + '"'
 }
-$nt = NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')
-$ntexapi = NinjaPath (Join-Path $root 'src/opennt-host/public/sdk/inc/ntexapi.h')
-$threadCompat = NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/thread_start_compat.h')
+$nt = NinjaPath (Join-Path $root 'src/compat/include/nt.h')
+$ntexapi = NinjaPath (Join-Path $root 'src/non-mvdm/host/public/sdk/inc/ntexapi.h')
+$threadCompat = NinjaPath (Join-Path $root 'src/compat/include/thread_start_compat.h')
 $cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" /FI "' + $threadCompat + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')

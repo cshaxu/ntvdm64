@@ -34,12 +34,12 @@ writeFileSync(`${build}/dem-media-source.sha256`, createHash("sha256").update(me
 
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
-  "/FI", `\"${root}/src/opennt-abi/host-compat/include/nt.h\"`,
+  "/FI", `\"${root}/src/compat/include/nt.h\"`,
   "/I", `\"${root}/src/mvdm/inc\"`,
   "/I", `\"${root}/src/mvdm/oemuni\"`,
   "/I", `\"${root}/src/ntvdm-exe/softpc/include\"`,
-  "/I", `\"${root}/src/opennt-abi/host-compat/include\"`,
-  "/I", `\"${root}/src/opennt-host/public/sdk/inc\"`
+  "/I", `\"${root}/src/compat/include\"`,
+  "/I", `\"${root}/src/non-mvdm/host/public/sdk/inc\"`
 ].join(" ");
 
 const lines = [

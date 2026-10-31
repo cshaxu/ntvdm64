@@ -47,10 +47,10 @@ $sources=@('src/nthook32-dll/entry.cpp','src/nthook32-dll/context.cpp',
     'src/nthook32-dll/installer.cpp','src/nthook32-dll/create_process.cpp',
     'src/common/native_image.c',
     'src/run16-exe/hook_classification.c',
-    'src/opennt-host/base/win32/client/vdm.c',
+    'src/non-mvdm/host/base/win32/client/vdm.c',
     'src/ntsrv-exe/opennt/source/base_classifier_path.c',
-    'src/opennt-abi/host-compat/opennt_support_rtl.c',
-    'src/opennt-host/base/ntos/rtl/error.c')
+    'src/compat/opennt_support_rtl.c',
+    'src/non-mvdm/host/base/ntos/rtl/error.c')
 foreach($name in @('detours','modules','disasm','image','creatwth')) {
     $sources += 'src/nthook32-dll/detours/'+$name+'.cpp'
 }
@@ -59,10 +59,10 @@ $objects=@();$manifest=@();$i=0
 foreach($source in $sources) {
     $object='unit'+$i+'.obj';++$i;$objects+=$object
     $graph.Add('build '+$object+': cc '+(NP (Join-Path $root $source))+' | obj/basesrv/service.h')
-    if($source -eq 'src/opennt-host/base/win32/client/vdm.c') {
+    if($source -eq 'src/non-mvdm/host/base/win32/client/vdm.c') {
         $graph.Add('  cflags = $cflags /DOPENNT_BASE_CLIENT_CLASSIFIER /FI"'+(NP (Join-Path $root 'src/nthook32-dll/legacy_classifier_arch.h'))+'"')
     }
-    if($source -eq 'src/opennt-host/base/ntos/rtl/error.c') {
+    if($source -eq 'src/non-mvdm/host/base/ntos/rtl/error.c') {
         $graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME')
     }
     $manifest += @{path=$source;sha256=(Get-FileHash (Join-Path $root $source) -Algorithm SHA256).Hash;object=$object}

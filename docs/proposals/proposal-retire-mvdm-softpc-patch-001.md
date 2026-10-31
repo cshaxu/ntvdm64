@@ -9,7 +9,7 @@ Eliminate all three temporary/private source-component roots:
 3. `src/opennt-host-overlay`.
 
 Their content must become either a minimal, registered source change in the
-proper original mirror (`mvdm` or `opennt-host`) or a narrowly named
+proper original mirror (`mvdm` or `non-mvdm/host`) or a narrowly named
 `adapter-*` binding where the original owner cannot call the modern platform
 directly. It is not acceptable to preserve a directory by renaming it, or to
 move original provider policy into an adapter simply to make the directory
@@ -26,7 +26,7 @@ Every moved line is classified before it moves:
 
 | Content kind | Final location |
 | --- | --- |
-| Original OpenNT/SoftPC declaration, algorithm, or same-shaped small correction | Its original-relative path under `src/mvdm` or `src/opennt-host`, with a `DIVERGENCE:` register row where bytes differ. |
+| Original OpenNT/SoftPC declaration, algorithm, or same-shaped small correction | Its original-relative path under `src/mvdm` or `src/non-mvdm/host`, with a `DIVERGENCE:` register row where bytes differ. |
 | Bounded modern OS/ABI binding required by a reached original call | The named `adapter-mvdm-host-*` or `adapter-opennt-host` family that owns that external interface. |
 | Project lifecycle, cross-process coordination, or product policy | `session`, `broker`, or `app` only when it actually belongs to that component's declared responsibility. |
 | Provenance-only patch excerpt or retired diagnostic | Indexed `docs/etc` evidence or deletion; never a production source component. |
@@ -82,7 +82,7 @@ Audit each private OpenNT-host overlay body and its original-package caller.
 For `dos_worker_wait.inc`, first attempt a source-shaped minimal body inside
 the original BaseSrv `srvvdm.c` mirror; if it is solely a modern transport
 binding, move it to the BaseSrv subfamily of `adapter-opennt-host` while
-keeping record lookup, locking and queue policy in `opennt-host`.
+keeping record lookup, locking and queue policy in `non-mvdm/host`.
 
 Closure for this phase is zero tracked paths and no formal production reference
 under `src/opennt-host-overlay`, with resident-worker versus pending-command

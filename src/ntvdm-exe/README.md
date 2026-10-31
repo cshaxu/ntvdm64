@@ -219,6 +219,6 @@ without changing path or failure behavior; they are not shared product ABI.
 The win32 directory keeps private declarations beside their implementation:
 environment projection, thread alert, WOW hard-error presentation and the scoped
 original-host CRT redirect. Their historical divergence records remain indexed
-in opennt-abi/host-compat/README.md. Shared original declarations and genuinely
+in compat/README.md. Shared original declarations and genuinely
 multi-owner bindings remain separate; this relocation does not introduce a
 generic compatibility library or modify original guest media.

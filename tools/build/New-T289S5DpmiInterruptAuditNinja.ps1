@@ -38,14 +38,14 @@ $manifest = [ordered]@{ schema = 'm0.t289.s5.dpmi-interrupt-audit.v1'; architect
     sources = @($sources | ForEach-Object { [ordered]@{ path = $_; sha256 = Sha256 (Join-Path $root $_) } });
     forbiddenInputs = @('src.old', 'DOSX host translation unit', 'host LDT implementation', 'BOP ingress', 'prebuilt product archive') }
 $manifest | ConvertTo-Json -Depth 5 | Set-Content -LiteralPath (Join-Path $build 'source-manifest.json') -Encoding utf8
-$includes = @('src', 'src/ntvdm-exe/softpc/include', 'src/opennt-abi/host-compat/include',
+$includes = @('src', 'src/ntvdm-exe/softpc/include', 'src/compat/include',
     'src/ntvdm-exe/monitor/include', 'src/mvdm-host/dpmi32', 'src/mvdm-host-overlay/dpmi32',
     'src/mvdm-support/inc', 'src/mvdm-platform-abi/source/public/sdk/inc',
     'src/mvdm-platform-abi/source/public/internal/base/inc', 'src/mvdm-platform-abi/source/public/ddk/inc',
     'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +
-    '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/softpc/include/error_abi.h')) + '" ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/ntvdm-exe/monitor/include/monitor_context.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()

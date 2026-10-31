@@ -142,7 +142,7 @@ Win32 mailslots have no peek operation.
 `INT 21h/5F44h` had previously returned `ERROR_INVALID_FUNCTION` because
 the standalone adapter stubbed `XsNetWkstaGetInfo`.  It now enters original
 `ds/netapi/xactsrv/apiwksta.c`, with its exact selected XACTSRV/RAP descriptor
-helpers restored under `opennt-host`; no local provider remains in that stub.
+helpers restored under `non-mvdm/host`; no local provider remains in that stub.
 RAP remote transport remains the sole approved exclusion.
 
 ### XACTSRV function-slice admission ledger

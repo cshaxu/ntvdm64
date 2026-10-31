@@ -22,7 +22,7 @@ of the paths below.
 
 | Family | Original owner and source | What the original code does |
 | --- | --- | --- |
-| DPMI stack/TIB ABI | `src/mvdm-host/dpmi32/dpmiint.c:376`; `src/mvdm-host/dpmi/486/dxboot.asm:1824`; `src/opennt-abi/source/public/internal/base/inc/vdm.h:225` | `DpmiPassPmStackInfo` supplies the packed `VDM_DPMIINFO`; DOSX installs the returned `CX:DX` address as `SEL_VDMTIB`. |
+| DPMI stack/TIB ABI | `src/mvdm-host/dpmi32/dpmiint.c:376`; `src/mvdm-host/dpmi/486/dxboot.asm:1824`; `src/non-mvdm/abi/public/internal/base/inc/vdm.h:225` | `DpmiPassPmStackInfo` supplies the packed `VDM_DPMIINFO`; DOSX installs the returned `CX:DX` address as `SEL_VDMTIB`. |
 | Process LDT | `src/mvdm-host/dpmi32/i386/dpmi386.c:73` | Original user-mode DPMI publishes descriptors with `NtSetLdtEntries` / `ProcessLdtInformation`. |
 | Kernel VDM backing | `O:/repos.external/OpenNT/base/ntos/vdm/x86/vdminit.c:66`; `O:/repos.external/OpenNT/base/ntos/vdm/x86/strtexec.c:90` | The kernel probes the user-resident `VDM_TIB`, saves it in its VDM objects, and swaps monitor/VDM contexts. |
 | FastWOW | `src/mvdm-host/wow32/i386/fastwow.asm:256` | Original assembly obtains the native TEB through `FS:[PcTeb]`, reads `TbWOW32Reserved`, then maintains PTD `vpStack` and `WtdFastWowEsp` through callback entry and return. |

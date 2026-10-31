@@ -17,7 +17,7 @@ static __declspec(thread) PHE original_shared_entry;
 #define WowSharedHandleEntry(index) (original_shared_entry)
 #define HMIndexFromHandle(handle) ((DWORD)(WORD)(handle))
 #define GetFullUserHandle wow_original_full_user_handle
-#include "opennt-host/windows/core/ntuser/client/handles.c"
+#include "non-mvdm/host/windows/core/ntuser/client/handles.c"
 #undef GetFullUserHandle
 #undef HMIndexFromHandle
 #undef WowSharedHandleEntry

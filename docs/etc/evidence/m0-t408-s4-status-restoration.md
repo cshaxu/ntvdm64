@@ -12,7 +12,7 @@ one source-observable TEB side effect?
   OpenNT-4.5 does not contain this source path, so there is no competing
   edition to select.
 - Imported the original translation unit and generated status table under
-  `src/opennt-host/base/ntos/rtl/`.  A content comparison ignoring the
+  `src/non-mvdm/host/base/ntos/rtl/`.  A content comparison ignoring the
   repository's terminal newline reports no source/table difference.
 - Replaced the adapter's `STATUS_SUCCESS`/`STATUS_NO_MEMORY`/
   `STATUS_BUFFER_OVERFLOW` fallback with the imported source in a private

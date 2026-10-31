@@ -29,7 +29,7 @@ function seedDisposition(seed) {
     return ['source-shaped-basevdm-boundary', 'ntvdm/command', 'use original BaseClient/BaseSrv as source contract; stop at CSR/CSRSS'];
   }
   if (seed.source_class === 'netapi-package-candidate') {
-    if (seed.callee_spelling === 'NetpNtStatusToApiStatus') return ['opennt-host-netstatus-slice', 'opennt-host/netapi/netlib', 'future exact ntstatus.c mirror slice'];
+    if (seed.callee_spelling === 'NetpNtStatusToApiStatus') return ['opennt-host-netstatus-slice', 'non-mvdm/host/netapi/netlib', 'future exact ntstatus.c mirror slice'];
     if (seed.callee_spelling === 'RxNetUserPasswordSet') return ['redirector-protocol-hard-boundary', 'adapter-mvdm-host-out/redir', 'preserve source contract; no substitute success'];
     return ['public-win32-redirector-binding', 'adapter-mvdm-host-out/win32 + redir', 'bind current public workstation API with bounded buffer ownership'];
   }

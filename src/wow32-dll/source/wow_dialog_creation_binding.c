@@ -3,7 +3,7 @@
 #include "wow_user_task_lifecycle.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_dialog_context_bindings.h"
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
+#include "compat/include/wow32_provider_private.h"
 
 /* ADAPTER-WOW-063 supersedes ADAPTER-WOW-052's native creator approximation.
  * Original dlgbegin.c owns template parsing, PDLG, WOWDlgInit, children,

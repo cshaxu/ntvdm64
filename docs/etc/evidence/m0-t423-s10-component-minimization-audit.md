@@ -36,8 +36,8 @@ it is not a general Ninja parser or a runtime dynamic-import resolver.
 | --- | --- | --- |
 | product-package | One C and one H, 165 physical lines; header includes worker session; only production caller is mvdm_standalone_worker.c. Other consumers are fixtures. | Move unchanged to ntvdm-exe's startup/package binding. Remove the artificial top-level component. Do not change path/search policy. |
 | product-abi | Four headers, 155 physical lines; shared version plus worker/frontend Console I/O, mouse and video contracts; no runtime library. | Keep the small shared contract for now. Do not mix session-dependent package implementation into it. Its README must describe the actual contracts, not three-EXE identity only. |
-| opennt-abi/source | 209 declaration/media-of-declaration files, about 2.72 MB; original topology plus selected subsets. | Original declarations may ultimately join opennt-host at original paths, but reconcile duplicate paths and subset provenance first. No blind tree merge. |
-| opennt-abi/host-compat | 17 headers, two C files and README; includes RTL/TLS/PEB binding and Console grid code. | Keep truly shared compatibility separate from original mirrors; return exclusively worker-owned adapters to ntvdm-exe. No invented file may enter a mirror as an original. |
+| non-mvdm/abi | 209 declaration/media-of-declaration files, about 2.72 MB; original topology plus selected subsets. | Original declarations may ultimately join opennt-host at original paths, but reconcile duplicate paths and subset provenance first. No blind tree merge. |
+| compat | 17 headers, two C files and README; includes RTL/TLS/PEB binding and Console grid code. | Keep truly shared compatibility separate from original mirrors; return exclusively worker-owned adapters to ntvdm-exe. No invented file may enter a mirror as an original. |
 
 The minimum-risk recommendation is therefore **remove product-package as a
 component, retain product-abi as a header-only contract, and decompose opennt-abi
@@ -179,7 +179,7 @@ The owner approved both consolidation and the audited cleanup. Against pushed
 142c619fe, the candidate removes product-package as a root: its 165 C/H lines
 move to ntvdm-exe/package_layout, with the sole production include, formal graph
 and package fixture updated. Four worker-private compatibility headers (58
-lines) move from opennt-abi/host-compat to ntvdm-exe/win32. These 223 lines are
+lines) move from compat to ntvdm-exe/win32. These 223 lines are
 relocation, not implementation deletion. product-abi remains a small shared
 contract; original declaration collisions remain subject to the audit above.
 

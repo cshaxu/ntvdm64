@@ -10,7 +10,7 @@ for(const suffix of ['COM','pif','exe','bin']) fs.writeFileSync(path.join(build,
 const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');
 const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':')+` /I "${root}/src/ntsrv-exe/opennt/include"`;
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
-const source=fs.readFileSync('src/opennt-host/base/win32/client/vdm.c','utf8');
+const source=fs.readFileSync('src/non-mvdm/host/base/win32/client/vdm.c','utf8');
 const upstream=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8');
 const hashes={};
 for(const [name,pattern] of [['GetBinaryTypeW',/BOOL\r?\nWINAPI\r?\nGetBinaryTypeW\([\s\S]*?\r?\n}\r?\n/],['BaseIsDosApplication',/ULONG\r?\nBaseIsDosApplication\([\s\S]*?\r?\n}\r?\n/]]) {
@@ -22,17 +22,17 @@ assert.deepEqual(hashes,{GetBinaryTypeW:'f7fd9766ea08e676a2fd457fb3fa50838463064
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "classifier_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%classifier_cwd%"\r\n%*\r\n');
 let commands=[
-    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/opennt-abi/host-compat/opennt_support_rtl.c"`,
-    `cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo"${build}/client.obj" "${root}/src/opennt-host/base/win32/client/vdm.c"`,
+    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
+    `cl.exe ${flags} /we4013 /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER /Fo"${build}/client.obj" "${root}/src/non-mvdm/host/base/win32/client/vdm.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/path.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_classifier_path.c"`,
-    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
+    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/host/base/ntos/rtl/error.c"`,
     'link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map client.obj fixture.obj path.obj support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib'
 ];
 if(ownerBuild) commands=[
-    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/opennt-abi/host-compat/opennt_support_rtl.c"`,
+    `cl.exe ${flags} /we4013 /Gy /Fo"${build}/support.obj" "${root}/src/compat/opennt_support_rtl.c"`,
     `cl.exe ${flags} /we4013 /Fo"${build}/fixture.obj" "${root}/tests/broker/original_classifier.c"`,
-    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/opennt-host/base/ntos/rtl/error.c"`,
+    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/host/base/ntos/rtl/error.c"`,
     `link.exe /nologo /opt:ref /out:original-classifier.exe /map:original-classifier.map fixture.obj "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" support.obj error.obj ntdll.lib kernel32.lib legacy_stdio_definitions.lib`
 ];
 const log=fs.openSync(path.join(build,'build.log'),'w');

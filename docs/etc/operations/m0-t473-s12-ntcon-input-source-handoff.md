@@ -1,4 +1,8 @@
-# T473 planned S12: NTCON input-source handoff
+# T473 NTCON input-source handoff
+
+Owner-directed insertion: the original S12 input-source scope is deferred to
+S13 while S12 performs the source-layout rename. The historical S12 references
+below identify prior evidence, not completion of the deferred input repair.
 
 The owner inserts this stage after S11; it is planned, not the active S.
 With the later insertion of WINMINE display repair as S13, the former

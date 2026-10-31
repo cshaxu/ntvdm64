@@ -16,19 +16,19 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path.Replace('\', '/')
 $build = Join-Path $root ("build/M0-T282/S7/{0}" -f $Architecture)
 New-Item -ItemType Directory -Force $build | Out-Null
 $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
-    '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
+    '/FI ' + $root + '/src/compat/include/nt.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/softpc/include/error_abi.h ' +
     '/FI ' + $root + '/src/ntvdm-exe/monitor/include/monitor_context.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
+    '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/ntvdm-exe/monitor/include ' +
-    '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/internal/windows/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/private/windows/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/host/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/internal/base/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/internal/windows/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/private/windows/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/mvdm-host/dos/command ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +

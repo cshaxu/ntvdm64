@@ -14,7 +14,7 @@ const lines = [
   'cflags = /nologo /TC /c /MT /W4 /WX /showIncludes /I ' + source('src') +
     ' /I ' + source('src/session') +
     ' /I ' + source('src/ntvdm-exe/softpc/include') +
-    ' /I ' + source('src/opennt-abi/host-compat/include'),
+    ' /I ' + source('src/compat/include'),
   'rule cc',
   '  command = cl.exe $cflags /Fo$out $in',
   '  deps = msvc',

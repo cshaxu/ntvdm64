@@ -24,7 +24,7 @@ foreach($width in 'x86','x64'){
 $rows|ConvertTo-Json|Set-Content "$out/manifest.json"
 Push-Location $out
 try{
- & (Join-Path $out 'x64.cmd') cl.exe /nologo /MT /W4 /we4013 "/I$repo/src/opennt-abi/source/public/internal/windows/inc" "$PSScriptRoot/mixed_batch_pif.c" "/Fo$out/pif.obj" "/Fe$out/pif-builder.exe" *> "$out/pif-build.log"
+ & (Join-Path $out 'x64.cmd') cl.exe /nologo /MT /W4 /we4013 "/I$repo/src/non-mvdm/abi/public/internal/windows/inc" "$PSScriptRoot/mixed_batch_pif.c" "/Fo$out/pif.obj" "/Fe$out/pif-builder.exe" *> "$out/pif-build.log"
  if($LASTEXITCODE){throw 'Authored PIF builder failed'}
 }finally{Pop-Location}
 'PASS authored mixed-batch CUI/GUI probes built at both widths; no product code linked'

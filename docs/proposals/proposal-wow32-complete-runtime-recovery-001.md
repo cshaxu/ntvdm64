@@ -56,7 +56,7 @@ source hashes, original owners, test procedures and superseded hypotheses:
   [S39 DOSX](../etc/evidence/m0-t420-s39-dpmi-guest-capability-review.md).
 - [Source policy](../etc/operations/policy/source-policy.md),
   [MVDM divergence register](../../src/mvdm/README.md),
-  [OpenNT-host provenance](../../src/opennt-host/README.md), and
+  [OpenNT-host provenance](../../src/non-mvdm/host/README.md), and
   [worker WOW boundary](../../src/ntvdm-exe/wow/README.md).
 
 Research artifacts remain under `build/M0-T420/S40`, `S41`, `S42`; runtime
@@ -522,7 +522,7 @@ USER/CSRSS server import and parallel provider policy remain prohibited.
 Guest media is immutable. Proven original-guest defects are registered with
 reproducers and limitations, never silently repaired or counted as passes.
 
-Report `mvdm` and `opennt-host` mirror additions/deletions separately, restore
+Report `mvdm` and `non-mvdm/host` mirror additions/deletions separately, restore
 format-only drift to upstream bytes, and separately measure retained/removed
 adapter and other autonomous code. Importing an original file and deleting
 a duplicate are different metrics. Completion requires working selected

@@ -6,7 +6,7 @@
 #include "window_frame.h"
 #include "common/protocol/frontend_lifecycle.h"
 #include "lib/kvm-window/render.h"
-#include "opennt-abi/host-compat/include/console_grid.h"
+#include "compat/include/console_grid.h"
 #include <stdint.h>
 
 /* Visible presentation and copied input only. The active identity is a local

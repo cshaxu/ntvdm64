@@ -1180,7 +1180,7 @@ The production gap itself is directly established:
   Loading failure does not itself abort window creation. Child IDs and
   explicit caller menus do not take this branch.
 - Original `inc/ntcb.h::ClientLoadMenu` calls the menu resource client.
-  The already-selected `opennt-host/.../client/clmenu.c` retains LoadMenuA/W
+  The already-selected `non-mvdm/host/.../client/clmenu.c` retains LoadMenuA/W
   as `wow_user_load_menuA/W`, CommonLoadMenu and the original parser.
   `W32LockResource` retains the Win16 menu conversion. No new menu parser or
   guest modification is needed. The current provider map retains the parser

@@ -32,7 +32,7 @@
  * the adapter's void-worker bridge, which carries the creator session and
  * records only the original worker spelling for a default-off disposal
  * diagnostic. */
-#include "opennt-abi/host-compat/include/thread_start_compat.h"
+#include "compat/include/thread_start_compat.h"
 #undef CreateThread
 #define CreateThread(attributes, stack_bytes, start_routine, parameter, flags, thread_id) \
     opennt_create_void_cdecl_thread_named((attributes), (stack_bytes), \
@@ -41,7 +41,7 @@
 /* DIVERGENCE(MVDM-HOST-DIV-149): retain the source's standard-handle swap
  * order but bind it to a child-only STARTUPINFO carrier, not this app's
  * process-wide standard streams. */
-#include "opennt-abi/host-compat/include/command_process_compat.h"
+#include "compat/include/command_process_compat.h"
 #include "ntvdm-exe/softpc/include/mvdm_shadow_registry.h"
 /* DIVERGENCE(MVDM-HOST-DIV-327): default-off attribution for the original
  * Win3.1 DOSX-to-KRNL286 compatibility branch.  The observer consumes only

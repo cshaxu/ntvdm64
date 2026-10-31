@@ -13,7 +13,7 @@
 #include "wow_task_profile_bindings.h"
 #include "wow_idle_hook_binding.h"
 #include "wow_user_session_binding.h"
-#include "opennt-abi/host-compat/include/thread_start_compat.h"
+#include "compat/include/thread_start_compat.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 #include <stdio.h>
 

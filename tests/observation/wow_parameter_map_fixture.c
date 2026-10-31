@@ -11,7 +11,7 @@ typedef DWORD VPVOID,VPSZ,VPSTR,VPBYTE,VPRECT16,VPPROC;
 #define GlobalUnlockFree16 WOWGlobalUnlockFree16
 typedef LPSTR LPSZ,PSZ;
 typedef struct {DWORD dwStyle,dwExStyle;} WW,*PWW;
-#include "../../src/opennt-abi/host-compat/include/wow_control_message_abi.h"
+#include "../../src/compat/include/wow_control_message_abi.h"
 #include "parameter_types.h"
 #include "../../src/mvdm/wow32/wparam.h"
 #include "../../src/wow32-dll/include/wow_message_lifetime.h"

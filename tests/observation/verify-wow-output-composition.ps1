@@ -18,7 +18,7 @@ $end = $text.IndexOf('return (DWORD)&gSharedInfo;', $start)
 if ($start -lt 0 -or $end -le $start) { throw 'Original registration boundary changed.' }
 $assignments = [regex]::Matches($text.Substring($start, $end - $start),
     'apfnWowOut->(pfn\w+)\s*=\s*(\w+)\s*;')
-$header = [IO.File]::ReadAllText((Join-Path $root 'src/opennt-abi/source/public/internal/windows/inc/wowuserp.h'))
+$header = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/abi/public/internal/windows/inc/wowuserp.h'))
 $headerStart = $header.IndexOf('pfnCsCreateWindowEx;')
 $headerEnd = $header.IndexOf('pfnFillWindow;', $headerStart)
 if ($headerStart -lt 0 -or $headerEnd -lt $headerStart) { throw 'Output ABI boundary changed.' }

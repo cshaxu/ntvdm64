@@ -1,6 +1,6 @@
 /* Finite copied-buffer binding for Base VDM messages. Original CSR capture
  * pointers cannot cross standalone IPC; original copy/capacity policy remains
- * in opennt-host/base/win32/{client/vdm.c,server/srvvdm.c}. */
+ * in non-mvdm/host/base/win32/{client/vdm.c,server/srvvdm.c}. */
 #include "vdm_payload.h"
 #include <string.h>
 

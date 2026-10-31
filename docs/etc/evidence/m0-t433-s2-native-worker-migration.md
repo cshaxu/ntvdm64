@@ -154,7 +154,7 @@ r019 deployed DOS MEM plus actual32/64 CMD VER/echo/direct receipts pass.
 All ten deployed images and notice still match; no guest/configuration was
 replaced. Explicit test-owned process cleanup is not normal retirement proof.
 Native build/source/ABI checks and final mirror diff against the preceding
-production commit remain clean: no src/mvdm or src/opennt-host body change.
+production commit remain clean: no src/mvdm or src/non-mvdm/host body change.
 Review/governance/commit/push conclude delivery; S3 remains unadmitted.
 
 Production P1 14796f8ba56a51075f098a532d251531a9937db2 is committed/pushed;

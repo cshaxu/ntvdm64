@@ -21,7 +21,7 @@ if(!$baseFlags){throw 'Missing audited reference flags'}
 $includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
 $nativeFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00 '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
 if($Component -eq 'Service'){
- $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/opennt-host/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/opennt-host/base/win32/server'))+'"'
+ $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/host/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/non-mvdm/host/base/win32/server'))+'"'
 }
 $edges=@{}
 foreach($match in [regex]::Matches($text,'(?m)^build ([^\r\n]+): ([^\r\n]+)\r?\n((?:[ \t]+[^\r\n]*\r?\n)*)')) {
@@ -117,7 +117,7 @@ function Add-Edge([string]$target) {
  $source=$inputs[0]
  if($Component -eq 'Service' -and $target -eq 'obj/opennt-base-bindings/config-command.obj'){
   # Same verbatim fragment recipe as the formal graph; architecture-local output.
-  $configSource=Join-Path $root 'src/opennt-host/base/win32/client/vdm.c'
+  $configSource=Join-Path $root 'src/non-mvdm/host/base/win32/client/vdm.c'
   $configText=[IO.File]::ReadAllText($configSource)
   $helper=[regex]::Matches($configText,'(?ms)^static VOID BaseSetLastNTError\(.*?^}')
   $function=[regex]::Matches($configText,'(?ms)^BOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
@@ -166,10 +166,10 @@ function Add-Edge([string]$target) {
  if($target -eq 'obj/run16/rpc_client_launch.obj'){
   # This existing client imports historical local Base message declarations.
   # Keep its source-facing ABI header, without injecting it into UI/worker TUs.
-  $flags+=' /FI "'+(NP (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h'))+'"'
+  $flags+=' /FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'"'
  }
  if($source -match '\.cpp$'){
-  $flags=$flags.Replace('/FI "'+(NP (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h'))+'"','')
+  $flags=$flags.Replace('/FI "'+(NP (Join-Path $root 'src/compat/include/nt.h'))+'"','')
   $flags+=' /TP /std:c++14'
  }
  if($target -like 'obj/ntvwm/*'){$flags+=' /I frontend-font'}
@@ -180,7 +180,7 @@ function Add-Edge([string]$target) {
   $originalAllowed=@('/base/ntos/rtl/error.c')
   if($Component -eq 'Launcher'){$originalAllowed+=@('/base/ntos/rtl/environ.c','/base/win32/client/vdm.c','/base/ntdll/csrutil.c')}
   if($Component -eq 'Service'){$originalAllowed+=@('/base/win32/server/srvvdm.c','/windows/core/ntuser/server/exports.c')}
-  if($normalized.Contains('/src/mvdm/') -or ($normalized.Contains('/src/opennt-host/') -and !@($originalAllowed|Where-Object {$normalized.EndsWith($_)}).Count)){throw "Unadmitted original source: $path"}
+  if($normalized.Contains('/src/mvdm/') -or ($normalized.Contains('/src/non-mvdm/host/') -and !@($originalAllowed|Where-Object {$normalized.EndsWith($_)}).Count)){throw "Unadmitted original source: $path"}
   $manifest.Add(@{path=$path;sha256=(Get-FileHash $path).Hash;object=$target})
  }
 }

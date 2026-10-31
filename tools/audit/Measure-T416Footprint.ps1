@@ -36,12 +36,12 @@ foreach ($row in Import-Csv -LiteralPath $unionLedger -Delimiter "`t") {
     $mvdmSource[$row.target_path] = $row.primary_path
 }
 
-$tracked = @(& git -C $repo ls-files src/mvdm src/opennt-host src/mvdm-overlay src/opennt-host-overlay src/adapter-mvdm-host-in src/adapter-mvdm-host-out src/adapter-opennt-host)
+$tracked = @(& git -C $repo ls-files src/mvdm src/non-mvdm/host src/mvdm-overlay src/opennt-host-overlay src/adapter-mvdm-host-in src/adapter-mvdm-host-out src/adapter-opennt-host)
 if ($LASTEXITCODE -ne 0) { throw 'git ls-files failed' }
 $mirrorRows = [Collections.Generic.List[object]]::new()
-foreach ($path in $tracked | Where-Object { $_ -like 'src/mvdm/*' -or $_ -like 'src/opennt-host/*' }) {
+foreach ($path in $tracked | Where-Object { $_ -like 'src/mvdm/*' -or $_ -like 'src/non-mvdm/host/*' }) {
     if ($path -match '/README\.md$') { continue }
-    $relative = if ($path.StartsWith('src/mvdm/')) { $path.Substring('src/mvdm/'.Length) } else { $path.Substring('src/opennt-host/'.Length) }
+    $relative = if ($path.StartsWith('src/mvdm/')) { $path.Substring('src/mvdm/'.Length) } else { $path.Substring('src/non-mvdm/host/'.Length) }
     $owner = if ($path.StartsWith('src/mvdm/')) { 'mvdm' } else { 'opennt-host' }
     $original = ''
     if ($owner -eq 'mvdm' -and $mvdmSource.ContainsKey($relative)) { $original = $mvdmSource[$relative] }

@@ -88,7 +88,7 @@ records the implementation and retained failed attempts.
 | Shared management shutdown | Both workers call worker-base's same shutdown/close mechanism, production-linked37 assertions and real close/loss tests pass. [S4](m0-t428-s4-common-worker-shutdown.md). | NTVDM's original close handler/forced fallback and NTVWM's true Console close acknowledgment are distinct local operations, not duplicated transport. |
 | Honest ownership/format names | This S6 inventory, generated source/link checks and negative controls cover all private renames and remove aliases. Frontend source/object ownership is NTCON; shared close body is byte-equivalent after newline normalization. | Text/config/DIB and Console/Window distinctions are message/backend formats, not worker-type policy. |
 
-Review finds no changed src/mvdm, src/opennt-host or common/protocol input.
+Review finds no changed src/mvdm, src/non-mvdm/host or common/protocol input.
 There is no new helper, registry, scheduler, command replay, lifetime policy,
 CLI, DTO or wire revision. Existing 30ms native presentation polling remains.
 The unchanged shutdown body is separated only to link the actual mechanism

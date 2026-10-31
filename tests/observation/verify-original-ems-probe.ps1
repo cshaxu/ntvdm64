@@ -37,7 +37,7 @@ try{
  # config and original guest binaries stay unchanged. The older memory-transition
  # runner requires SUBST and foreground compilation, so reuse its producer only.
  Copy-Item "$root/EMSPROBE.COM" "$tests/E30.COM"
- $line='/d /s /c ""'+(Resolve-Path $CompilerDriver).Path+'" cl.exe /nologo /MT /W4 /I"'+$repo+'/src/opennt-abi/source/public/internal/windows/inc" /Fo"'+$root+'/pif.obj" /Fe"'+$root+'/pif-builder.exe" "'+$PSScriptRoot+'/ems_pif_builder.c""'
+ $line='/d /s /c ""'+(Resolve-Path $CompilerDriver).Path+'" cl.exe /nologo /MT /W4 /I"'+$repo+'/src/non-mvdm/abi/public/internal/windows/inc" /Fo"'+$root+'/pif.obj" /Fe"'+$root+'/pif-builder.exe" "'+$PSScriptRoot+'/ems_pif_builder.c""'
  OwnedTool pif-build $env:ComSpec $line 120
  OwnedTool pif-profile "$root/pif-builder.exe" ('"'+$tests+'" --close-on-exit') 30
  Get-FileHash "$PSScriptRoot/ems_pif_builder.c",$CompilerDriver,"$tests/E30.COM","$tests/E30.PIF","$tests/E30.NT","$tests/E30AUTO.NT"|Export-Csv -NoTypeInformation "$root/profile-inputs.csv"

@@ -1,14 +1,14 @@
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "opennt-host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #include "wow_edit_entry_bindings.h"
 #include "wow_user_borrow_scope.h"
 #include "wow_button_lifetime.h"
 #include "wow_user_task_lifecycle.h"
-#include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
 #include <stddef.h>
 
 C_ASSERT(sizeof(void *) == 4);

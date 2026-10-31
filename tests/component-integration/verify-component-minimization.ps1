@@ -11,7 +11,7 @@ if($graph -notmatch 'src/ntvdm-exe/package_layout.c'){
 }
 foreach($name in 'mvdm_base_vdm_environment','mvdm_crt_redirect','nt_thread_alert_compat','wow_hard_error_dialog'){
     if(!(Test-Path (Join-Path $repo "src/ntvdm-exe/win32/$name.h")) -or
-        (Test-Path (Join-Path $repo "src/opennt-abi/host-compat/include/$name.h"))){
+        (Test-Path (Join-Path $repo "src/compat/include/$name.h"))){
         throw "Worker-private declaration not consolidated: $name"
     }
 }

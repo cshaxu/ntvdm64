@@ -34,7 +34,7 @@ original one.
 | --- | --- | --- |
 | `ntvdm/command/{include,mvdm_image_classification.*}` | Deleted duplicate classifier and removed its stale formal-generator input. | One selected C input removed; 264 physical C lines retired. |
 | `ntvdm/monitor/{include/host_idle.h,source/host_idle.c}` | Deleted unselected duplicate. | Original `nt_unix.c` remains the sole live provider. |
-| `ntvdm/win32/mvdm_redirector_thread.c` and `opennt-abi/host-compat/include/mvdm_redirector_thread.h` | Deleted unreferenced unavailable error stub. | No product source/map provider removed. |
+| `ntvdm/win32/mvdm_redirector_thread.c` and `compat/include/mvdm_redirector_thread.h` | Deleted unreferenced unavailable error stub. | No product source/map provider removed. |
 
 The three deleted C bodies total 292 physical lines.  The selected formal
 non-mirror closure falls from 74 / 12,427 to **73 / 12,163**: the 264-line

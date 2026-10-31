@@ -168,7 +168,7 @@ resume; successful handoff is never rolled back by killing the running GUI.
 Service startup acknowledgement succeeds before worker occupancy is released.
 The carrier-survival fixture confirms the GUI survives that later retirement.
 
-`git diff --numstat -- src/mvdm src/opennt-host lib` is empty. No guest,
+`git diff --numstat -- src/mvdm src/non-mvdm/host lib` is empty. No guest,
 shared-library, system-registry, Job, helper or monitor display change is part
 of this increment. Classifier rerun r004 passes 227/0/zero handle delta.
 Execution test r006 was invoked without its required report argument and

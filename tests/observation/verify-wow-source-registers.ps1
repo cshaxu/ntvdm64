@@ -41,8 +41,8 @@ try {
     $registers=@{
         'MVDM-HOST-DIV-'="$repo/src/mvdm/README.md"
         'MVDM-SUPPORT-DIV-'="$repo/src/mvdm/README.md"
-        'OPENNT-HOST-'="$repo/src/opennt-host/README.md"
-        'ADAPTER-WIN32-'="$repo/src/opennt-abi/host-compat/README.md"
+        'OPENNT-HOST-'="$repo/src/non-mvdm/host/README.md"
+        'ADAPTER-WIN32-'="$repo/src/compat/README.md"
         'ADAPTER-WOW-'="$repo/src/wow32-dll/README.md"
     }
     $rows=@();$issues=@();$single=[Text.Encoding]::GetEncoding(28591)
@@ -52,7 +52,7 @@ try {
         $prefix=$repo.Replace('\','/')+'/'
         if(!$absolute.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)){continue}
         $relative=$absolute.Substring($prefix.Length)
-        if($relative.StartsWith('src/opennt-host/')){
+        if($relative.StartsWith('src/non-mvdm/host/')){
             $original=$relative.Substring(16)
             if($original.StartsWith('netapi/')){$original='ds/'+$original}
             $source=Join-Path $OriginalRoot $original

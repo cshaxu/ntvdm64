@@ -23,7 +23,7 @@ sources have no nthook/Detours implementation.
 
 | Mechanism | Current owner/location | Decision and constraint |
 | --- | --- | --- |
-| DOS/WOW classification | opennt-host/base/win32/client/vdm.c GetBinaryTypeW/BaseIsDosApplication, selected through base_classifier.h | Reuse the existing original classifier cohort, not extension-only/MZ recognition or a new PE classifier. Its native same-machine check and x86 ABI must not be generalized in the mirror for Hook64. |
+| DOS/WOW classification | non-mvdm/host/base/win32/client/vdm.c GetBinaryTypeW/BaseIsDosApplication, selected through base_classifier.h | Reuse the existing original classifier cohort, not extension-only/MZ recognition or a new PE classifier. Its native same-machine check and x86 ABI must not be generalized in the mirror for Hook64. |
 | CUI/GUI metadata | run16-exe/image_classification.c | Reuse OS image-section metadata. Hook installation needs actual process bitness independently; subsystem alone is insufficient. |
 | User image search | run16-exe/application_search.c | Reuse directory-first CWD/PATH policy for the admitted launcher contract. A CreateProcess null-application command requires native token/ambiguous-name interpretation audit before using this resolver; do not substitute CLI search for Windows semantics. |
 | Original CLI | run16-exe/launch_options.c and main.c | Keep optional leading --wait/-- and original target argument syntax. No newly required --. Redirect only confirmed DOS/PIF/WOW targets; missing/unknown/native images remain native failure/passthrough, not launcher COMSPEC fallback. |

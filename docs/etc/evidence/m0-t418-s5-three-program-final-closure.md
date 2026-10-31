@@ -23,10 +23,10 @@ and original BaseSrv-record assembly; its client library is linked by run16
 and ntvdm without creating duplicate protocol providers. `ntvdm` owns the
 worker-local session, guest-memory lease and all local Console/SoftPC/monitor/
 Redirector/VDD/WOW/debugger bindings. Original algorithms remain in `mvdm` or
-`opennt-host`.
+`non-mvdm/host`.
 
 The only non-executable shared implementation island is
-`opennt-abi/host-compat`: named same-shaped historical host ABI bindings with
+`compat`: named same-shaped historical host ABI bindings with
 finite public-Win32/NTDLL closures. It owns neither broker wire policy nor
 worker/session/guest state. `product-abi` and `product-package` remain
 stateless version/layout data. There is no `common` or `win32api` component.

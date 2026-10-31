@@ -28,13 +28,13 @@ $lookupNext = $lookup.IndexOf('VOID UnlockAndFreeCPDs(', $lookupStart)
 $lookupEnd = $lookup.LastIndexOf("`r`n}", $lookupNext)
 if ($lookupStart -lt 0 -or $lookupEnd -le $lookupStart) { throw 'Original class lookup boundaries changed.' }
 $lookupBody = $lookup.Substring($lookupStart, $lookupEnd + 3 - $lookupStart)
-$lookupMirror = [IO.File]::ReadAllText((Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c'))
+$lookupMirror = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/class.c'))
 $mirrorStart = $lookupMirror.IndexOf('PPCLS _InnerGetClassPtr(')
 if ($mirrorStart -lt 0 -or $lookupMirror.Substring($mirrorStart).TrimEnd([char[]]"`r`n") -cne $lookupBody) {
     throw 'Original class lookup mirror bodies are not byte-exact.'
 }
 Write-Output 'WOW_ORIGINAL_CLASS_LOOKUP_BYTE_MATCH'
-$mirror = [IO.File]::ReadAllText((Join-Path $root 'src/opennt-host/windows/core/ntuser/inc/ntcftxt.h'))
+$mirror = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/inc/ntcftxt.h'))
 $expected = (Slice $text '#define StringDuplicate TEXT_FN(StringDuplicate)' 'DWORD  APIENTRY SetClassLong') +
     (Slice $text 'ATOM TEXT_FN(RegisterClassExWOW)(' 'UINT RegisterClipboardFormat(') +
     (Slice $text 'BOOL UnregisterClass(' 'SHORT VkKeyScan(')

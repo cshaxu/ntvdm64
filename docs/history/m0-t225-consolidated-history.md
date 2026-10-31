@@ -208,7 +208,7 @@ execution, parent/child return, or general BOP recovery.
 
 `src/bx-core` and `src/bx-mantle` remain selector-, BOP-, OpenNT- and DOS-blind.
 `src/bx-vdm` alone recognizes the admitted three-byte machine event and routes
-copied operations to `opennt-host`; no host-capability or general BOP provider
+copied operations to `non-mvdm/host`; no host-capability or general BOP provider
 was added.  The observed `02h` is therefore only a machine/BIOS owner-package
 audit fact.  S24 must inventory and source-classify the complete reachable
 machine/BIOS selector family before admitting another implementation.  It may
@@ -234,7 +234,7 @@ or execution of a guest program.
   Their original owners, current bound routes, recovery rungs and
   Direct/Readonly disposition are recorded in the
   [S24 ledger](../../artifacts/documentation-archive/20260910/etc/research/t225-s24-machine-bios-current-route-ledger-001.md).
-- `06` is the sole typed native `opennt-host` transaction. `02` is reachable
+- `06` is the sole typed native `non-mvdm/host` transaction. `02` is reachable
   but currently declines through the formal bridge; the old callback/TLS
   `machine_composition_v2` island is compiled evidence, not a valid live
   successor.
@@ -746,7 +746,7 @@ existing `50:36 -> 50:3C -> 54:0B` guest lifecycle.  The focused regression
 proves disabled, ordered, out-of-order and rejected-outcome behavior.  A
 fresh formal MSVC x64 `/MT` Ninja build links the CLI and fixture; the
 manifest's pre-existing S6 static-library closure was corrected to include
-its existing `opennt-host` provider dependency.
+its existing `non-mvdm/host` provider dependency.
 
 One bounded native Direct/Readonly pair on the same source-built inputs
 produced identical logs and the same existing budget terminal.  Each observed only one `50:36`; the copied `DS:SI=0c41:0100` is COM-style and cannot be attributed to the selected MZ SHARE target. Neither observed child termination nor COMMAND parent return. Thus S46 does not claim that SHARE executes, terminates, or returns,

@@ -11,7 +11,7 @@ $lines=& cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && set'
 if($LASTEXITCODE){throw 'VS toolchain initialization failed'}
 foreach($line in $lines){$i=$line.IndexOf('=');if($i -gt 0){Set-Item -LiteralPath ('env:'+$line.Substring(0,$i)) -Value $line.Substring($i+1)}}
 & cl.exe /nologo /MT /W4 /c /I (Join-Path $root 'src') `
-    (Join-Path $root 'src/opennt-abi/host-compat/console_grid.c') "/Fo:$build/grid.obj"
+    (Join-Path $root 'src/compat/console_grid.c') "/Fo:$build/grid.obj"
 if($LASTEXITCODE){throw 'Production grid compilation failed'}
 & cl.exe /nologo /MT /W4 /I (Join-Path $root 'src') `
     (Join-Path $root 'tests/app/console_channel_lifetime_test.c') `

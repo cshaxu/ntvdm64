@@ -43,16 +43,16 @@ $sources = @(
     'src/ntvdm-exe/session/session.c'
 )
 $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
-    '/FI ' + $root + '/src/opennt-abi/host-compat/include/nt.h ' +
+    '/FI ' + $root + '/src/compat/include/nt.h ' +
     '/I ' + $root + '/src ' +
-    '/I ' + $root + '/src/opennt-abi/host-compat/include ' +
+    '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
-    '/I ' + $root + '/src/opennt-host/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/host/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm/xms.486 ' +
     '/I ' + $root + '/src/mvdm/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/sdk/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/internal/base/inc ' +
-    '/I ' + $root + '/src/opennt-abi/source/public/ddk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/internal/base/inc ' +
+    '/I ' + $root + '/src/non-mvdm/abi/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm/softpc.new/host/inc ' +
     '/I ' + $root + '/src/mvdm/softpc.new/base/inc '
 $objects = @()

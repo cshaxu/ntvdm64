@@ -14,7 +14,7 @@ const toNinja = value => value.replaceAll("\\", "/").replace(":", "$:");
 const includeRoots = [
   "src",
   "src/ntvdm-exe/softpc/include",
-  "src/opennt-abi/host-compat/include",
+  "src/compat/include",
   "src/mvdm/inc",
   "src/mvdm/vdmredir",
   "src/ntvdm-exe/redir/include",
@@ -22,15 +22,15 @@ const includeRoots = [
   "src/mvdm/dos/command",
   "src/mvdm/softpc.new/base/inc",
   "src/mvdm/softpc.new/host/inc",
-  "src/opennt-host/netapi/netlib",
-  "src/opennt-abi/source/public/internal/base/inc",
-  "src/opennt-abi/source/public/internal/ds/inc",
-  "src/opennt-abi/source/public/internal/net/inc",
-  "src/opennt-abi/source/private/ds/netapi/rpcxlate",
-  "src/opennt-host/public/sdk/inc",
-  "src/opennt-abi/source/public/sdk/inc",
-  "src/opennt-abi/source/public/ddk/inc",
-  "src/opennt-abi/source/private/inc"
+  "src/non-mvdm/host/netapi/netlib",
+  "src/non-mvdm/abi/public/internal/base/inc",
+  "src/non-mvdm/abi/public/internal/ds/inc",
+  "src/non-mvdm/abi/public/internal/net/inc",
+  "src/non-mvdm/abi/private/ds/netapi/rpcxlate",
+  "src/non-mvdm/host/public/sdk/inc",
+  "src/non-mvdm/abi/public/sdk/inc",
+  "src/non-mvdm/abi/public/ddk/inc",
+  "src/non-mvdm/abi/private/inc"
 ].map(value => `/I \"${path.join(root, value).replaceAll("\\", "/")}\"`).join(" ");
 const environment = path.join(buildRoot, `msvc-${architecture}.cmd`);
 fs.writeFileSync(environment, [

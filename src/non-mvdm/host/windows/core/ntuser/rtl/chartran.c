@@ -13,7 +13,7 @@
 * 05-14-92 GregoryW      Modified to use the Rtl translation routines.
 \***************************************************************************/
 
-#include "opennt-abi/host-compat/include/wow_char_conversion_abi.h"
+#include "compat/include/wow_char_conversion_abi.h"
 /* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
 #define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))

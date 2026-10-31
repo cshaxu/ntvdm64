@@ -65,7 +65,7 @@ T416 S5 acceptance.
 | Project session code, displacement guard | 19 lines | 0 | **19 lines** |
 
 The adapter result is a true autonomous fallback deletion. No code moved;
-`opennt-host` metrics are unchanged.
+`non-mvdm/host` metrics are unchanged.
 
 ## Follow-up
 

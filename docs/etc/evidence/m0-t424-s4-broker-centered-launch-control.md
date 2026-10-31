@@ -19,7 +19,7 @@ source audit/admission, not a new build, runtime pass or published capability.
 Read the repository authority set and source policy. Inspect the actual
 launcher bootstrap, worker creation, native request/receipt and server record
 paths, distinguishing project-owned `ntsrv-exe/opennt/source` adapters from
-immutable `src/opennt-host` mirrors. Repeatable inspection commands:
+immutable `src/non-mvdm/host` mirrors. Repeatable inspection commands:
 
 ```powershell
 git status --short
@@ -85,7 +85,7 @@ sessions. The drawing describes target ownership, not a current runtime pass.
 
 | Mechanism and provenance | Current owner/location | Target and reason |
 | --- | --- | --- |
-| Original DOS Check/Update/GetNext/exit record semantics | `opennt-host/base/win32/client` and `server/srvvdm.c`, MVDM callers | Unchanged originals. Service adapter calls/binds them; never extract scheduler or rewrite records for native shape. |
+| Original DOS Check/Update/GetNext/exit record semantics | `non-mvdm/host/base/win32/client` and `server/srvvdm.c`, MVDM callers | Unchanged originals. Service adapter calls/binds them; never extract scheduler or rewrite records for native shape. |
 | Project-added suspended worker creation and startup rollback | `run16-exe/worker_launch.c`, `main.c`, scope native creation | NTSRV finite worker-spawn owner. Preserve immutable worker command/environment/configuration and Prepare-before-Resume order. No successful-worker launcher kill pairing. |
 | Project-added frontend bootstrap | `run16-exe/bootstrap_client.c`, `ntcon-exe/main.c` | Service owns creation and authenticated handoff request/acknowledgement. Derive actual caller process from authenticated launcher connection; supply restricted capabilities to frontend. Remove direct launcher pipe/events; never attach frontend to service Console. |
 | Native packet bounds/resource binding | `run16-exe/native_launch_packet.c`, `native_launch.c` and NTW32 execution | Reuse existing codec/bounds and worker-local target creation. Cross RPC only copied/versioned payload and typed authenticated stream attachments; no trusted sender-local handle numbers or generic duplication API. |
@@ -170,7 +170,7 @@ and evidence are not overwritten.
 | Independent native roots | `tests/observation/verify-ntw32-management.ps1 -TwoSessions`: exact authorized close and unaffected session input/result23, no cross-root reuse. |
 | Product regressions | Same Console17 and Window17 scripts/arguments as S3 evidence, guest output-gated 17/17 each; retained WINMINE/SOL/WRITE frontiers via `tests/observation/observe-wow-frontiers.ps1`, do not relabel known memory errors as usability passes. |
 | Wire coherence | Regenerate MIDL and rebuild affected x86 links together; real service rejects old interface, protocol and application version; no mixed-package registration. |
-| No mirror/lib/guest changes | Review `git diff -- src/mvdm src/opennt-host lib` and guest/config identities, exact source/build graph, deletion of superseded clients and auth/ownership/lock/failure contract review. |
+| No mirror/lib/guest changes | Review `git diff -- src/mvdm src/non-mvdm/host lib` and guest/config identities, exact source/build graph, deletion of superseded clients and auth/ownership/lock/failure contract review. |
 | Delivery | Governance, relative links, `git diff --check`, eight-file tested/publication hash equality, recoverable S3 set, reviewed sequential P and clean pushed main. T remains open. |
 
 Physical desktop/RDP observations remain unclaimed unless actually performed.

@@ -3,7 +3,7 @@
 #include <windows.h>
 #include <stddef.h>
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "opennt-host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
 /* OPENNT-HOST-118: inspected x86 USER counted-input layout, not NT4

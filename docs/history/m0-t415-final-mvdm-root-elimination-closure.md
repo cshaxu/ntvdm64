@@ -1,7 +1,7 @@
 # M0 T415 final MVDM-root elimination closure
 
 T415 completes the physical cleanup following T414. All 42 OpenNT WinNLS font
-blobs are now at `src/opennt-host/base/win32/winnls/fontsup/system`; the two
+blobs are now at `src/non-mvdm/host/base/win32/winnls/fontsup/system`; the two
 original `v86/util` inputs are at `src/mvdm/v86/util`; and the non-original
 extracted printer carrier is at
 `src/mvdm-overlay/v86/monitor/i386/monitor_printer.c`. The retired

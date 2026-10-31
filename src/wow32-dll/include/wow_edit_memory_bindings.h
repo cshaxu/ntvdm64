@@ -25,7 +25,7 @@
 
 /* Keep original argument order and the instance/DS and realloc pointer
  * contracts; do not substitute native Local* or a shadow text allocation. */
-#include "opennt-host/windows/core/ntuser/client/globals.h"
+#include "non-mvdm/host/windows/core/ntuser/client/globals.h"
 
 /* Original retail UserAssert does not evaluate its argument. */
 #ifndef UserAssert

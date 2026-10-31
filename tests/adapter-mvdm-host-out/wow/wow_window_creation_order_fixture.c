@@ -6,7 +6,7 @@
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201) /* Original ABI deliberately uses anonymous unions. */
-#include "opennt-abi/source/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
 #pragma warning(pop)
 typedef char ww_size_is_32[(sizeof(WW) == 32) ? 1 : -1];
 typedef char ww_prefix_is_12[(sizeof(((WW *)0)->adwWOW) == 12) ? 1 : -1];

@@ -16,7 +16,7 @@
 #include <ctype.h>
 #include <memory.h>
 #include <oemuni.h>
-#include "opennt-host/base/ntos/rtl/environapi.h"
+#include "non-mvdm/host/base/ntos/rtl/environapi.h"
 
 /* DIVERGENCE(MVDM-HOST-DIV-193): the original ES:0 environment destination
  * was a process-address alias.  Preserve the original byte order and BX

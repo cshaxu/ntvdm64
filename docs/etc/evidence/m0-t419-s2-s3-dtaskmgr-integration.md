@@ -8,7 +8,7 @@ operation.  OpenNT has no corresponding standalone task-manager program or
 management RPC.  The recovery disposition is therefore:
 
 1. **Original source reuse:** the selected, compiled
-   `src/opennt-host/base/win32/server/srvvdm.c` owns `DOSHead`, `WOWHead`,
+   `src/non-mvdm/host/base/win32/server/srvvdm.c` owns `DOSHead`, `WOWHead`,
    `DOSRECORD`, `WOWRECORD`, `VDMINFO`, worker sequence numbers and the
    post-exit `BaseSrvCleanupVDMResources` path.  `base_service.c` reads those
    owners under their existing locks; it does not create a second registry.

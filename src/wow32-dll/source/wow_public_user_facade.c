@@ -7,8 +7,8 @@
 
 #include <windows.h>
 #include "wow_dialog_creation_binding.h"
-#include "opennt-abi/host-compat/include/wow32_provider_private.h"
-#include "opennt-abi/source/public/internal/windows/inc/wingdip.h"
+#include "compat/include/wow32_provider_private.h"
+#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
 
 /* ADAPTER-WOW-063 supersedes ADAPTER-WIN32-051's native modal substitution.
  * Preserve the complete input flags so the original entry owns their

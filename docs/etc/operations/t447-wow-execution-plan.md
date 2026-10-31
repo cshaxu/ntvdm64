@@ -1482,7 +1482,7 @@ styled frame, scrollbar, capture and dropdown acceptance before delivery.
 This does not authorize replacing other default-handler algorithms or guest.
 
 Owner approves recovery of the necessary non-MVDM OpenNT USER control group
-under src/opennt-host after the option-two/three comparison. This supersedes
+under src/non-mvdm/host after the option-two/three comparison. This supersedes
 the pending private-native-reader choice, not the six open S3 integration
 groups in Current. Version-bound native-layout readers are rejected. Original
 guest USER.EXE and all other guest inputs remain immutable and unrebuilt.

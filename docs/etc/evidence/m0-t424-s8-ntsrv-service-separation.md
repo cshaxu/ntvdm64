@@ -43,7 +43,7 @@ table below records every definition, origin boundary and target owner.
 | Frontend identity and capabilities | frontend_registry; pinned process identities are Console discriminators, never task/child observations. Existing attachment and Console-return acknowledgement remain unchanged. |
 | Native payload, start/result events and direct receipt | native_commands; ownership moves through existing typed replies. Only actual target completion and final I/O can complete the existing receipt. No new scheduler or descendant tracking. |
 | Retirement deadlines / shutdown request | lifecycle; existing ten-second service authority and explicit management termination remain here, not in projection or common. |
-| Original DOS/WOW heads, records, locks and algorithms | src/opennt-host/base/win32/server/srvvdm.c remains owner. Management reads them under original locks; native records remain the project-owned direct counterpart. |
+| Original DOS/WOW heads, records, locks and algorithms | src/non-mvdm/host/base/win32/server/srvvdm.c remains owner. Management reads them under original locks; native records remain the project-owned direct counterpart. |
 | Original-shaped resource/dispatch hooks and DOS results | retained base_service.c; calls original Check/Update/Get/ExitCode/Reenter/Exit and preserves parent result before original cleanup. Do not extract the original policy into a shared/new service module. |
 | Connection watch drain | Connection rundown releases service lock before blocking UnregisterWaitEx; service stop remains after RPC/rundowns/watches drain. No new lock/wait policy. |
 | Cross-owner lock order | Existing service lock before original DOS/WOW lock where both are needed. Helpers retain caller-held lock contracts; recursive calls do not acquire a second service state. |
@@ -72,7 +72,7 @@ Read-only pinned upstream inputs:
 
 The first and third selected mirrors have pre-existing substantive differences;
 srvinit is byte-exact. S8 neither recovers nor expands that historical diff.
-`git diff --exit-code d83d2b212 -- src/mvdm src/opennt-host` passes: all original
+`git diff --exit-code d83d2b212 -- src/mvdm src/non-mvdm/host` passes: all original
 mirror changes in this P are zero. This statement does not turn three upstream
 comparisons into a complete historical mirror audit. No guest/configuration,
 shared KVM library, polling interval or wire version is changed.

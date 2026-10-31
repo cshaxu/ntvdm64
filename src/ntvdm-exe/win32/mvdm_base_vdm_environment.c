@@ -7,7 +7,7 @@
 #include "mvdm_base_vdm_environment.h"
 
 #include <nt.h>
-#include "opennt-host/base/ntos/rtl/environapi.h"
+#include "non-mvdm/host/base/ntos/rtl/environapi.h"
 #include <ntrtl.h>
 
 BOOL BaseCreateVDMEnvironment(PWCHAR lpEnvironment, ANSI_STRING *pAStringEnv,

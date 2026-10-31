@@ -134,9 +134,9 @@ $providerSupportSources = @(
     (Join-Path $adapterWow 'wow_clipboard_epoch.c'),
     (Join-Path $adapterWow 'wow_standard_class_bindings.c'),
     (Join-Path $adapterWow 'wow_user_registration_bridge.c'),
-    (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/chartran.c'),
-    (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/random.c'),
-    (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/help.c'),
+    (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/chartran.c'),
+    (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/random.c'),
+    (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/help.c'),
     (Join-Path $adapterWow 'ntuser_rtl_compat.c'),
     (Join-Path $adapterWow 'wow_public_user_facade.c'),
     # This is the already-admitted narrow historical CRT spelling bridge.  It
@@ -372,19 +372,19 @@ $environment = Join-Path $build 'msvc-x86.cmd'
 
 $includeRoots = @(
     'src',
-    'src/opennt-abi/host-compat/include',
+    'src/compat/include',
     'src/wow32-dll/include',
     'src/ntvdm-exe/wow/include',
     'src/mvdm/wow32',
     'src/mvdm/inc',
     'src/mvdm/softpc.new/base/inc',
     'src/mvdm/softpc.new/host/inc',
-    'src/opennt-host/public/sdk/inc',
-    'src/opennt-abi/source/public/sdk/inc',
-    'src/opennt-abi/source/public/internal/base/inc',
-    'src/opennt-abi/source/public/internal/windows/inc',
-    'src/opennt-abi/source/public/internal/shell/inc',
-    'src/opennt-abi/source/private/windows/inc',
+    'src/non-mvdm/host/public/sdk/inc',
+    'src/non-mvdm/abi/public/sdk/inc',
+    'src/non-mvdm/abi/public/internal/base/inc',
+    'src/non-mvdm/abi/public/internal/windows/inc',
+    'src/non-mvdm/abi/public/internal/shell/inc',
+    'src/non-mvdm/abi/private/windows/inc',
     'src/ntvdm-exe/softpc/include',
     'src/ntvdm-exe/command/include',
     'src/ntvdm-exe/monitor/include',
@@ -392,7 +392,7 @@ $includeRoots = @(
     'src/ntvdm-exe/session'
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
-$force = '/FI "' + (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') + '"'
+$force = '/FI "' + (Join-Path $root 'src/compat/include/nt.h') + '"'
 # Original NT x86 i386mk.inc defaults to /Gz. Keep this DLL's
 # internal ABI; worker-owned cdecl imports need explicit declarations, not a
 # package-wide /Gd override or aliases that conceal different stack cleanup.
@@ -459,7 +459,7 @@ foreach ($controlBody in @('editec','edecrare','editsl','editml','edmlonce',
         'edmlrare','edslrare','combo','combodir','comboini','lb1','lboxctl1',
         'lboxctl2','lboxctl3','lboxmult','lboxrare','lboxvar','dlgbegin',
         'dlgend','dlgmgr','dlgmgrc','dlgmgr2','dmmnem','wow','winmgrc')) {
-    $controlBodyPath = Join-Path $root ('src/opennt-host/windows/core/ntuser/client/' + $controlBody + '.c')
+    $controlBodyPath = Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/client/' + $controlBody + '.c')
     if (!(Test-Path -LiteralPath $controlBodyPath -PathType Leaf)) {
         throw "Missing admitted original control body: $controlBodyPath"
     }
@@ -478,17 +478,17 @@ foreach ($controlBody in @('editec','edecrare','editsl','editml','edmlonce',
 foreach ($viewBody in @('winmgr','wow')) {
     $viewObject = 'obj/opennt-user/control-view-' + $viewBody + '.obj'
     $objects.Add($viewObject)
-    $ninja.Add('build ' + $viewObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/rtl/' + $viewBody + '.c'))))
+    $ninja.Add('build ' + $viewObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/rtl/' + $viewBody + '.c'))))
     $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT')
 }
 # Original USER owner, not an adapter implementation (OPENNT-HOST-032).
 $ddeDataObject = 'obj/opennt-user/hdata.obj'
 $objects.Add($ddeDataObject)
-$ninja.Add('build ' + $ddeDataObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/hdata.c')))
+$ninja.Add('build ' + $ddeDataObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/hdata.c')))
 foreach ($userOwner in @('clres', 'cldib', 'client', 'rtlinit', 'ntstubs', 'clmenu', 'clglobal')) {
     $object = 'obj/opennt-user/' + $userOwner + '.obj'
     $objects.Add($object)
-    $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/client/' + $userOwner + '.c'))))
+    $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/client/' + $userOwner + '.c'))))
     if ($userOwner -eq 'clglobal') {
         # Original USER globals include WCHAR TEXT literals; retain that
         # unit's Unicode contract, distinct from the ANSI WOW thunk build.
@@ -501,7 +501,7 @@ $classLookupObject = 'obj/opennt-user/class.obj'
 # the capture object above; changing its flags would remove that provider.
 $controlLookasideObject = 'obj/opennt-user/control-lookaside.obj'
 $objects.Add($controlLookasideObject)
-$ninja.Add('build ' + $controlLookasideObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/rtlinit.c')))
+$ninja.Add('build ' + $controlLookasideObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/rtlinit.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_LOOKASIDE')
 # Original dialog initialization and shared EDIT DS callbacks use the same
 # registered WOW table as LOCAL*. Do not replace these bodies in an adapter.
@@ -510,10 +510,10 @@ $dialogMemoryObject = 'obj/opennt-user/dialog-memory.obj'
 # bitmap slice. The existing modal entry owns context/task/borrow lifetimes.
 $dialogTemplateObject = 'obj/opennt-user/dialog-template.obj'
 $objects.Add($dialogTemplateObject)
-$ninja.Add('build ' + $dialogTemplateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/clres.c')))
+$ninja.Add('build ' + $dialogTemplateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/clres.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_DIALOG_CLIENT /DWOW_ORIGINAL_DIALOG_MANAGER /DWOW_ORIGINAL_DIALOG_TEMPLATE')
 $objects.Add($dialogMemoryObject)
-$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/client.c')))
+$ninja.Add('build ' + $dialogMemoryObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DIALOG_EDIT')
 # Original state transitions, not replacements in the binding units. The
 # kernel ntstubs subset has its registered receive facade in the source;
@@ -521,42 +521,42 @@ $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DIALOG_EDIT')
 $controlFnidObject = 'obj/opennt-user/control-fnid.obj'
 $controlTextObject = 'obj/opennt-user/control-text.obj'
 $objects.Add($controlTextObject)
-$ninja.Add('build ' + $controlTextObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/ntstubs.c')))
+$ninja.Add('build ' + $controlTextObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_CONTROL_TEXT')
 $controlColorObject = 'obj/opennt-user/control-color.obj'
 $objects.Add($controlColorObject)
-$ninja.Add('build ' + $controlColorObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/ntstubs.c')))
+$ninja.Add('build ' + $controlColorObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_COLOR')
 $controlBrushObject = 'obj/opennt-user/control-brush.obj'
 $controlBrushClientObject = 'obj/opennt-user/control-brush-client.obj'
 $objects.Add($controlBrushClientObject)
-$ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/ntstubs.c')))
+$ninja.Add('build ' + $controlBrushClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_BRUSH_CLIENT')
 $objects.Add($controlBrushObject)
-$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/random.c')))
+$ninja.Add('build ' + $controlBrushObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/random.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $controlStateObject = 'obj/opennt-user/control-state.obj'
 $objects.Add($controlStateObject)
-$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/client.c')))
+$ninja.Add('build ' + $controlStateObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_CONTROL_STATE')
 $objects.Add($controlFnidObject)
-$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/ntstubs.c')))
+$ninja.Add('build ' + $controlFnidObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/ntstubs.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags')
 $dialogPointerObject = 'obj/opennt-user/dialog-pointer.obj'
 $objects.Add($dialogPointerObject)
-$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/miscutil.c')))
+$ninja.Add('build ' + $dialogPointerObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/miscutil.c')))
 # This must precede global include roots: MVDM also has a precomp.h, whose
 # declarations belong to a different translation-unit contract.
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
 $controlRectObject = 'obj/opennt-user/control-rect.obj'
 $objects.Add($controlRectObject)
-$ninja.Add('build ' + $controlRectObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/rect.c')))
+$ninja.Add('build ' + $controlRectObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/rect.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-state')) + '" $cflags $control_user_flags')
 $controlDrawObject = 'obj/opennt-user/control-draw.obj'
 $defaultMessagesObject = 'obj/opennt-user/default-messages.obj'
 $defaultClientObject = 'obj/opennt-user/default-client.obj'
 $objects.Add($defaultClientObject)
-$ninja.Add('build ' + $defaultClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/clmsg.c')))
+$ninja.Add('build ' + $defaultClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/clmsg.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_WINDOW')
 $defaultBitsObject = 'obj/opennt-user/default-window-bits.obj'
 $clientCpdObject = 'obj/opennt-user/client-callproc.obj'
@@ -570,43 +570,43 @@ foreach ($accessOwner in @(
 )) {
     $accessObject = 'obj/opennt-user/' + $accessOwner[0] + '.obj'
     $objects.Add($accessObject)
-    $ninja.Add('build ' + $accessObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/' + $accessOwner[1]))))
+    $ninja.Add('build ' + $accessObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/' + $accessOwner[1]))))
     $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT ' + $accessOwner[2])
 }
 $objects.Add($privateWordSetterObject)
-$ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/getset.c')))
+$ninja.Add('build ' + $privateWordSetterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/getset.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_PRIVATE_WORD_SETTER')
 $objects.Add($clientCpdObject)
-$ninja.Add('build ' + $clientCpdObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/clmsg.c')))
+$ninja.Add('build ' + $clientCpdObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/clmsg.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_CLIENT_CPD')
 $objects.Add($defaultBitsObject)
-$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/client.c')))
+$ninja.Add('build ' + $defaultBitsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DEF_WINDOW_BITS')
 $defaultBordersObject = 'obj/opennt-user/default-borders.obj'
 $objects.Add($defaultBordersObject)
-$ninja.Add('build ' + $defaultBordersObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/winmgr.c')))
+$ninja.Add('build ' + $defaultBordersObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/winmgr.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-geometry')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_GEOMETRY')
 $objects.Add($defaultMessagesObject)
-$ninja.Add('build ' + $defaultMessagesObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/server.c')))
+$ninja.Add('build ' + $defaultMessagesObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/server.c')))
 $ninja.Add('  cflags = $cflags $control_user_flags /DWOW_ORIGINAL_DEFAULT_MESSAGES')
 $objects.Add($controlDrawObject)
-$ninja.Add('build ' + $controlDrawObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/draw.c')))
+$ninja.Add('build ' + $controlDrawObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/draw.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_DRAWING')
 foreach ($textPart in @('client', 'rtl')) {
     $textObject = 'obj/opennt-user/control-text-' + $textPart + '.obj'
     $objects.Add($textObject)
-    $ninja.Add('build ' + $textObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/' + $textPart + '/drawtext.c'))))
+    $ninja.Add('build ' + $textObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/' + $textPart + '/drawtext.c'))))
     $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_MNEMONIC_DRAWING')
 }
 # T447 S3 original painting dependencies, not a substitute button WndProc.
 $extentObject = 'obj/opennt-user/control-text-extent.obj'
 $objects.Add($extentObject)
-$ninja.Add('build ' + $extentObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/rtl/text.c')))
+$ninja.Add('build ' + $extentObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/rtl/text.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-drawing')) + '" $cflags $control_user_flags')
 foreach ($drawingPart in @('draw', 'mngrayc')) {
     $drawingObject = 'obj/opennt-user/control-client-' + $drawingPart + '.obj'
     $objects.Add($drawingObject)
-    $ninja.Add('build ' + $drawingObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/opennt-host/windows/core/ntuser/client/' + $drawingPart + '.c'))))
+    $ninja.Add('build ' + $drawingObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root ('src/non-mvdm/host/windows/core/ntuser/client/' + $drawingPart + '.c'))))
     if ($drawingPart -eq 'mngrayc') {
         $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-draw-state')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_STATE_DRAWING /DWOW_ORIGINAL_BUTTON_ATLAS')
     } else {
@@ -616,53 +616,53 @@ foreach ($drawingPart in @('draw', 'mngrayc')) {
 $atlasTableObject = 'obj/opennt-user/button-atlas-table.obj'
 $buttonObject = 'obj/opennt-user/button-client.obj'
 $objects.Add($buttonObject)
-$ninja.Add('build ' + $buttonObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/btnctl.c')))
+$ninja.Add('build ' + $buttonObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/btnctl.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/control-client')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_EDIT_CLIENT /DWOW_ORIGINAL_BUTTON_CLIENT')
 $buttonBlitObject = 'obj/opennt-user/button-blit.obj'
 $objects.Add($buttonBlitObject)
-$ninja.Add('build ' + $buttonBlitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/mngrayc.c')))
+$ninja.Add('build ' + $buttonBlitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/mngrayc.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-drawing')) + '" $cflags $control_user_flags /DWOW_ORIGINAL_BUTTON_ATLAS /DWOW_ORIGINAL_BUTTON_BLIT_ONLY')
 $objects.Add($atlasTableObject)
-$ninja.Add('build ' + $atlasTableObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/inctlpan.c')))
+$ninja.Add('build ' + $atlasTableObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/inctlpan.c')))
 $ninja.Add('  cflags = /I "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/button-resources')) + '" $cflags $control_user_flags')
   $probeObject = 'obj/opennt-user/probe.obj'
   $cleanupObject = 'obj/opennt-user/cleanup.obj'
   $handleFlagsObject = 'obj/opennt-user/handtabl.obj'
   $objects.Add($handleFlagsObject)
-  $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/handtabl.c')))
+  $ninja.Add('build ' + $handleFlagsObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/handtabl.c')))
   $objects.Add($cleanupObject)
-  $ninja.Add('build ' + $cleanupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/cleanup.c')))
+  $ninja.Add('build ' + $cleanupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/cleanup.c')))
 $objects.Add($probeObject)
-$ninja.Add('build ' + $probeObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/base/ntos/ex/probe.c')))
+$ninja.Add('build ' + $probeObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/base/ntos/ex/probe.c')))
 $classRegisterObject = 'obj/opennt-user/class-register.obj'
 $classRemoveObject = 'obj/opennt-user/class-remove.obj'
 $objects.Add($classRemoveObject)
-$ninja.Add('build ' + $classRemoveObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
+$ninja.Add('build ' + $classRemoveObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/class.c')))
 $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REMOVAL')
 $objects.Add($classRegisterObject)
-$ninja.Add('build ' + $classRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
+$ninja.Add('build ' + $classRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/class.c')))
 $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_REGISTRATION')
 $taskOrderObject = 'obj/opennt-user/taskman.obj'
 $objects.Add($taskOrderObject)
-$ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/taskman.c')))
+$ninja.Add('build ' + $taskOrderObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/taskman.c')))
 $classClientObject = 'obj/opennt-user/class-client.obj'
 $inputGroupObject = 'obj/opennt-user/input.obj'
 $objects.Add($inputGroupObject)
-$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/input.c')))
+$ninja.Add('build ' + $inputGroupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/input.c')))
 $taskInitObject = 'obj/opennt-user/queue.obj'
 $profileObject = 'obj/opennt-user/profile.obj'
 $objects.Add($profileObject)
-$ninja.Add('build ' + $profileObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/profile.c')))
+$ninja.Add('build ' + $profileObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/profile.c')))
 $objects.Add($taskInitObject)
-$ninja.Add('build ' + $taskInitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/queue.c')))
+$ninja.Add('build ' + $taskInitObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/queue.c')))
 $taskRegisterObject = 'obj/opennt-user/exitwin.obj'
 $objects.Add($taskRegisterObject)
-$ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/exitwin.c')))
+$ninja.Add('build ' + $taskRegisterObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/exitwin.c')))
 $objects.Add($classClientObject)
-$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/client.c')))
+$ninja.Add('build ' + $classClientObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/client.c')))
 $ninja.Add('  cflags = $cflags /DWOW_ORIGINAL_CLASS_CLIENT')
 $objects.Add($classLookupObject)
-$ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/kernel/class.c')))
+$ninja.Add('build ' + $classLookupObject + ': cc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/kernel/class.c')))
 foreach ($source in $providerSupportSources) {
     $owner = if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase)) { 'wow32-dll' } else { 'adapter-win32' }
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
@@ -685,7 +685,7 @@ $ninja.Add('  cflags = $adapter_cflags')
 $ninja.Add('build obj/wow32.res: rc ' + (ConvertTo-NinjaPath $resource))
 $editMenuResource = 'obj/opennt-user/edit-menu.res'
 $objects.Add($editMenuResource)
-$ninja.Add('build ' + $editMenuResource + ': rc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/opennt-host/windows/core/ntuser/client/res.rc')))
+$ninja.Add('build ' + $editMenuResource + ': rc ' + (ConvertTo-NinjaPath (Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/res.rc')))
 $ninja.Add('build legacy-wow-user32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyUser32Definition))
 $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyKernel32Definition))
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))

@@ -16,7 +16,7 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds)
     if($p.ExitCode -ne 0){throw "Failed $name actual=$($p.ExitCode)"}
 }
 try {
-    $flags='/nologo /TC /W4 /WX /MT /DWIN32 /I"'+$repo+'/src/opennt-abi/host-compat/include" /I"'+$repo+'/src/ntvdm-exe/win32"'
+    $flags='/nologo /TC /W4 /WX /MT /DWIN32 /I"'+$repo+'/src/compat/include" /I"'+$repo+'/src/ntvdm-exe/win32"'
     $sources='"'+$repo+'/src/ntvdm-exe/win32/wow_hard_error_decoder.c" "'+$repo+'/tests/adapter-mvdm-host-out/wow/wow_hard_error_decoder_fixture.c"'
     $command='/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl.exe '+$flags+' /Fe"'+$root+'/fixture.exe" '+$sources+'"'
     Run-Owned 'compile' 'cmd.exe' $command 120

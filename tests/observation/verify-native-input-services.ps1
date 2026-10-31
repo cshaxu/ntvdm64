@@ -17,7 +17,7 @@ function Owned($name,$exe,$line,$seconds){
  }finally{$p.Dispose()}
 }
 try{
- $original="$repo/src/opennt-host/windows/core/ntuser/kernel/input.c"
+ $original="$repo/src/non-mvdm/host/windows/core/ntuser/kernel/input.c"
  $sources=@('wow_native_input_group_fixture','wow_native_input_focus_fixture','wow_input_membership_fixture')
  $inputs=@($PSCommandPath,$driver,$original,"$repo/src/wow32-dll/include/wow_input_group_bindings.h","$repo/src/wow32-dll/include/wow_task_order_bindings.h")
  $inputs+=@($sources|ForEach-Object {"$repo/tests/adapter-mvdm-host-out/wow/$_.c"})

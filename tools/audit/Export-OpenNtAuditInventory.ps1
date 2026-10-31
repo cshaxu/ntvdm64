@@ -10,8 +10,8 @@ $files=@(& git -C $repo ls-files src)
 if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate tracked source.' }
 $roles=@{
     'mvdm'='original-MVDM-union-by-subrole';
-    'opennt-host'='original-non-MVDM-host-by-owner';
-    'opennt-abi'='declaration-provenance';
+    'non-mvdm'='original-non-MVDM-by-cohort';
+    'compat'='project-shared-historical-ABI-bindings';
     'common'='project-shared-runtime';
     'worker-base'='project-lifecycle-runtime';
     'run16-exe'='project-launcher-runtime';
@@ -29,6 +29,7 @@ $textExtensions=@('.c','.h','.cpp','.cxx','.hpp','.asm','.inc','.def','.rc','.pa
 $rows=foreach($name in $files){
     $root=($name -split '/')[1]
     if (-not $roles.ContainsKey($root)) { throw "Unclassified source root: $root" }
+    if ($root -eq 'non-mvdm' -and $name -notmatch '^src/non-mvdm/(host|abi)/') { throw "Unclassified original cohort: $name" }
     $absolute=Join-Path $repo $name
     $bytes=[IO.File]::ReadAllBytes($absolute)
     $extension=[IO.Path]::GetExtension($name).ToLowerInvariant()

@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include "service.h"
 #include "ntsrv-exe/transport/rpc_security.h"
-#include "opennt-abi/source/public/internal/base/inc/vdmapi.h"
+#include "non-mvdm/abi/public/internal/base/inc/vdmapi.h"
 #include "ntsrv-exe/opennt/include/base_service.h"
 #include "common/protocol/version.h"
 #include "common/protocol/frontend_protocol.h"

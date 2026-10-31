@@ -141,7 +141,7 @@ to NTVDM/WOW. Service-owned parent identity reflects that actual ownership,
 not process ancestry reconstructed by NTMON. Known former frontend roots
 remain MISSING while associated watches survive, not independent nodes.
 
-The original [srvvdm.c](../../../src/opennt-host/base/win32/server/srvvdm.c)
+The original [srvvdm.c](../../../src/non-mvdm/host/base/win32/server/srvvdm.c)
 allocates WOWRecord with iTask, not a per-task Windows process handle.
 BaseSrvGetWOWTaskId wraps and avoids currently live IDs, not historical IDs.
 WOW_TASK therefore needs a stable admission identity retained with the
