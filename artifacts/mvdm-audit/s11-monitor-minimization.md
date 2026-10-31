@@ -264,6 +264,30 @@ and `wow_user_task_lifecycle.obj` is
 The temporary preparation, build log and full fixture output are under
 `build/t473-s11/dr-context-study` and remain subject to task cleanup.
 
+A stronger independent temporary variant used the existing `native-nested`
+fixture: two real Windows threads register separate WOW task carriers and
+exercise the selected task scheduler and cross-thread native callback. Before
+the first send the sender wrote `12345678` directly to `CCPU_DR[0]`; the
+receiver observed that value while it owned execution, wrote `87654321`, and
+the sender observed the latter after execution was returned. The original
+value was restored after observation. The complete existing native-nested
+fixture, including nested callback and retirement controls, exited 0. Its map
+selects the production task-lifecycle object and original CCPU `MOV_DR`, and
+contains the linked `_CCPU_DR` common symbol.
+
+This demonstrates that this host-side two-thread handoff does not isolate the
+directly written DR0 value. The fixture supplies host boundary seams, performs
+direct test writes rather than guest MOV-DR/BOP operations, and runs no guest;
+it does not prove a supported Win16 program hits the path or determine the
+required initial, nested, debugger and termination semantics. It is a
+counterexample to assuming this handoff itself exchanges DR0, not acceptance
+of a new state owner. Temporary source SHA-256
+`0F80308586CC7C9DAEF7213DAA8D8398570693443E0219D92EC492F42B84665F`;
+fixture image SHA-256
+`5663C1A297C4A2E2D1F467AED3E2E35819162FEE1FFFB55DE94D2402340DB23F`.
+Preparation and build/fixture records remain in
+`build/t473-s11/dr-context-study/native` and its parent for this active task.
+
 ## Instruction-fetch page-access accounting
 
 NT4 `Ki386DispatchOpcode` and `OpcodeGenericPrefix` read instruction bytes
