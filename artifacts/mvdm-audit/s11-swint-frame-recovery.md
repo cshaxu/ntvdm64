@@ -336,6 +336,33 @@ The tested ten-component package was subsequently published to both release
 destinations; all 20 installed hashes matched. This is a partial S11 baseline,
 not S11 closure or a claim that the open exception paths are restored.
 
+An additional odd-SP diagnostic, case 144, places a 16-bit flags write across
+the A20 boundary itself. Its initial test accidentally let the wrapped write
+change the INT 0 IVT target; after controlling that alias the fixture still
+reports `STATUS_ACCESS_VIOLATION`, instruction address zero. A direct call to
+`spr_write_word(0xfffff, ...)` reproduces the same null call before guest
+execution; the real SAS type query reports ROM then RAM. The original physical
+word path classifies that as a cross-type write and falls through its default
+write-handler dispatch. The fixture does not establish whether the full
+machine provides that handler. A temporary adapter-only byte-split candidate
+avoided the immediate null call but the guest failed to complete: the first
+byte lies in ROM and cannot simply be assumed writable. That candidate was
+removed. This diagnostic remains outside the passing gate; it is not evidence
+that a physical Win3.1 workload hits this boundary or that an unrelated CCPU
+change is justified. The interaction of ROM-write and real exception delivery
+remains unresolved.
+
+Case 145 isolates the original CCPU memory provider without exception
+reflection: it marks both boundary pages RAM, enables A20 wrapping, and calls
+`spr_write_word(0xfffff, 0xa55a)`. The observed bytes are `fffff=5a`,
+`zero=66` (unchanged), `100000=a5`; expected bytewise wrapping would write
+`a5` at zero. `ccpusas4.c:phy_w16` masks the starting address once before a
+word write, which explains the result for this controlled setup. This is an
+original CCPU physical-access boundary, not proof of a real workload, and
+the fixture remains outside the pass gate. Fixing only the new exception
+writer would not repair original IRET's corresponding word read. Per S11's
+scope it is not an authorization to change the unrelated core memory path.
+
 A second candidate used `ReflectV86Int` for unhooked VM=1, IOPL=3 and
 preserved the 16-bit frame and cleared IF/TF/NT. The selected DPMI fixture,
 two selected-CCPU `INTx` cases and the 107-case CCPU suite passed; see

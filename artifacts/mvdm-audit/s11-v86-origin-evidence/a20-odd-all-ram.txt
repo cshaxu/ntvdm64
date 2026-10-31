@@ -1,0 +1,1 @@
+A20_ODD_RAM fffff=5a zero=66 above=a5

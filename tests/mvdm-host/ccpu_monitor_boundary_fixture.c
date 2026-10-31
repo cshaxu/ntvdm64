@@ -1000,6 +1000,7 @@ static BOOL v86_iret_irq_handler(ULONG vector) {
     ica_outb(0x20,0x20);
     return vector==8;
 }
+static LONG v86_installed_exception(EXCEPTION_POINTERS *ep);
 static int v86_fault_iret(void) {
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     const unsigned char code[]={0xbb,0,0,0xf7,0xf3,0xbb,0xef,0xbe,0xd6,0xfe};
@@ -1018,19 +1019,34 @@ static int v86_fault_iret(void) {
     c_setIOPL(3); c_setIF(1); c_setBX(0);
     if(test_case==142) {c_sas_enable_20_bit_wrapping(); c_setSS(0xffff); c_setSP(0x20);}
     if(test_case==143) {c_sas_disable_20_bit_wrapping(); c_setSS(0xffff); c_setSP(0x20);}
+    if(test_case==144) {c_sas_enable_20_bit_wrapping(); c_setSS(0xffff); c_setSP(0x11);}
+    if(test_case==144) {
+        extern int c_sas_memory_type(ULONG);
+        char diag[100];
+        wsprintfA(diag,"A20_ODD_SAS types=%d,%d\n",c_sas_memory_type(0xfffff),c_sas_memory_type(0x100000));
+        report(diag);
+    }
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
     DpmiFaultHandlers[0].cs=0; DpmiFaultHandlers[0].flags=1;
     /* CPU40 initializes the historical software-CPU selector bit. */
     *(ULONG *)c_GetPhyAdd(0x714)=0xa600;
     CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
-    CopyMemory(c_GetPhyAdd(0x3456),handler,sizeof(handler));
-    *(USHORT *)c_GetPhyAdd(0)=0x456; *(USHORT *)c_GetPhyAdd(2)=0x300;
+    CopyMemory(c_GetPhyAdd(test_case==144 ? 0x3432 : 0x3456),handler,sizeof(handler));
+    /* The wrapped high byte of saved FLAGS aliases IVT[0]'s low byte.
+     * Keep its intended value 0x32 so the architecturally ordered IVT read
+     * still finds the handler after the stack write. */
+    *(USHORT *)c_GetPhyAdd(0)=test_case==144 ? 0x432 : 0x456;
+    *(USHORT *)c_GetPhyAdd(2)=0x300;
     VdmInstallFaultHandler((void *)(test_case==141 ? v86_iret_irq_fault : DpmiFaultHandler));
-    c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+    if(test_case==144) {
+        __try {c_cpu_simulate();}
+        __except(v86_installed_exception(GetExceptionInformation())) {VdmInstallFaultHandler(NULL); return 0;}
+    } else c_cpu_simulate();
+    VdmInstallFaultHandler(NULL);
     if(test_case==141) VdmInstallHardwareIntHandler(NULL);
     flags=c_getEFLAGS();
-    ok=c_getCS()==0x100 && c_getSP()==(test_case>=142 ? 0x20 : 0x800) && c_getBX()==0xbeef &&
+    ok=c_getCS()==0x100 && c_getSP()==(test_case==144 ? 0x11 : test_case>=142 ? 0x20 : 0x800) && c_getBX()==0xbeef &&
        (flags & 0x20000) && (flags & 0x200) &&
        *(ULONG *)c_GetPhyAdd(0x714)==0xa400;
     if(test_case==141) {
@@ -1042,11 +1058,23 @@ static int v86_fault_iret(void) {
     }
     wsprintfA(line,"V86_FAULT_IRET pass=%d cs=%x sp=%x bx=%x flags=%lx fixed=%lx\n",
               ok,c_getCS(),c_getSP(),c_getBX(),flags,*(ULONG *)c_GetPhyAdd(0x714));
-    if(test_case==142) c_sas_disable_20_bit_wrapping();
+    if(test_case==142 || test_case==144) c_sas_disable_20_bit_wrapping();
     report(line); return ok;
 }
 
 static ULONG v86_fault_flags, v86_fault_sp, v86_fault_ip;
+static int v86_a20_word_ram_control(void) {
+    extern void c_sas_connect_memory(ULONG,ULONG,int);
+    extern void spr_write_word(ULONG,USHORT);
+    unsigned char *base=c_GetPhyAdd(0); char line[120];
+    c_sas_connect_memory(0xff000,0xfffff,0);
+    c_sas_enable_20_bit_wrapping();
+    base[0xfffff]=0; base[0]=0x66; base[0x100000]=0x77;
+    spr_write_word(0xfffff,0xa55a);
+    wsprintfA(line,"A20_ODD_RAM fffff=%02x zero=%02x above=%02x\n",base[0xfffff],base[0],base[0x100000]);
+    report(line); c_sas_disable_20_bit_wrapping();
+    return base[0xfffff]==0x5a && base[0]==0xa5 && base[0x100000]==0x77;
+}
 static ULONG v86_installed_flags, v86_installed_sp, v86_installed_cs, v86_installed_ip;
 static BOOL v86_installed_handled;
 static LONG v86_installed_exception(EXCEPTION_POINTERS *ep) {
@@ -1177,7 +1205,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case>=140 && test_case<=143) ok=v86_fault_iret();
+    if(test_case==145) ok=v86_a20_word_ram_control();
+    else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
     else if(test_case>=121 && test_case<=127) ok=v86_decoded_interrupt();
