@@ -101,7 +101,7 @@ dpmi32/debug.c,excluded,host-candidate,host C/H candidate; selected runtime and 
 dpmi32/dpmi32.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,yes,136,136,100.00
 dpmi32/dpmi32p.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,168,168,100.00
 dpmi32/dpmidata.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,418,418,100.00
-dpmi32/dpmiint.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,739,730,98.78
+dpmi32/dpmiint.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,739,725,98.11
 dpmi32/dpmiint.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,39,38,97.44
 dpmi32/dpmimemr.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,121,117,96.69
 dpmi32/dpmimscr.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,28,28,100.00
@@ -284,7 +284,7 @@ softpc.new/base/ccpu386/c_seg.c,partial,host-candidate,host C/H candidate; selec
 softpc.new/base/ccpu386/c_seg.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,no,,,
 softpc.new/base/ccpu386/c_stack.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,no,,,
 softpc.new/base/ccpu386/c_stack.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,no,,,
-softpc.new/base/ccpu386/c_tlb.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,no,,,
+softpc.new/base/ccpu386/c_tlb.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,565,564,99.82
 softpc.new/base/ccpu386/c_tlb.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,no,,,
 softpc.new/base/ccpu386/c_tsksw.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,347,347,100.00
 softpc.new/base/ccpu386/c_tsksw.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,no,,,
@@ -827,7 +827,7 @@ softpc.new/base/keymouse/mouse.c,partial,host-candidate,host C/H candidate; sele
 softpc.new/base/keymouse/mouse_io.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,4170,4087,98.01
 softpc.new/base/keymouse/ppi.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,no,,,
 softpc.new/base/support/get_env.c,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,no,,,
-softpc.new/base/support/ios.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,no,,,
+softpc.new/base/support/ios.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,558,557,99.82
 softpc.new/base/support/main.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,yes,168,166,98.81
 softpc.new/base/support/terminat.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,90,90,100.00
 softpc.new/base/support/time_day.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,no,,,

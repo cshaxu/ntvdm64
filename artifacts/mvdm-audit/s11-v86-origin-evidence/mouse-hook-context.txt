@@ -1,0 +1,11 @@
+process=18528 session=3 image=C:\Users\neko\.cache\codex-runtimes\codex-primary-runtime\dependencies\native\powershell\pwsh.exe
+
+Mandatory Label\Medium Mandatory Level                        Label            S-1-16-8192
+
+
+
+
+ModuleName FileName
+---------- --------
+USER32.dll C:\WINDOWS\System32\USER32.dll
+win32u.dll C:\WINDOWS\System32\win32u.dll

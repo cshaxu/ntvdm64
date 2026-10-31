@@ -1,0 +1,60 @@
+ninja: Entering directory `O:\repos.hobby\ntvdm64\build\.ninja\msvc-x86-release\worker'
+[1/3] CC-DPMI O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\dpmiint.h(38): warning C4005: 'VDM_INT_INT_GATE': macro redefinition
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(335): note: see previous definition of 'VDM_INT_INT_GATE'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\dpmiint.h(39): warning C4005: 'EFLAGS_TF_MASK': macro redefinition
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(178): note: see previous definition of 'EFLAGS_TF_MASK'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32\dpmiint.h(40): warning C4005: 'VDM_INT_32': macro redefinition
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(337): note: see previous definition of 'VDM_INT_32'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(78): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(137): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(188): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(197): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(224): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(265): warning C4057: '=': 'PCHAR' differs in indirection to slightly different base types from 'UCHAR *'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(185): warning C4101: 'FaultingEip': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(184): warning C4101: 'FaultingCS': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(544): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(545): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(646): warning C4456: declaration of 'VdmStackPointer' hides previous local declaration
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(596): note: see declaration of 'VdmStackPointer'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(596): warning C4101: 'VdmStackPointer': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(762): warning C4456: declaration of 'VdmStackPointer' hides previous local declaration
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(738): note: see declaration of 'VdmStackPointer'
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(738): warning C4101: 'VdmStackPointer': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(825): warning C4706: assignment used as a condition
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(825): note: if an assignment is intended you can enclose it in parentheses, '(e1 = e2)', to silence this warning
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(946): warning C4706: assignment used as a condition
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(946): note: if an assignment is intended you can enclose it in parentheses, '(e1 = e2)', to silence this warning
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(1045): warning C4101: 'StackOffset': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(1392): warning C4152: nonstandard extension, function/data pointer conversion in expression
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(1393): warning C4152: nonstandard extension, function/data pointer conversion in expression
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(1394): warning C4152: nonstandard extension, function/data pointer conversion in expression
+O:/repos.hobby/ntvdm64/src/mvdm/dpmi32/dpmiint.c(1437): warning C4100: 'Increment': unreferenced formal parameter
+[2/3] LIB original-mvdm-dpmi32.lib
+[3/3] link.exe /nologo /force:multiple /map:ccpu-monitor-boundary-test.exe.map /out:ccpu-monitor-boundary-test.exe obj/tests/ccpu_monitor_boundary_fixture.obj obj/host/nt_inthk.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: __swprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _printf already defined in original-softpc-host-fixture-roots.lib(fprt.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sscanf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+ccpu-monitor-boundary-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+case=129 pid=5352
+case=129 exit=0
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=129 count=1 error=2 flags=23202 sp=1004 ip=100
+case=130 pid=34364
+case=130 exit=0
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=130 count=1 error=2 flags=23202 sp=1004 ip=100

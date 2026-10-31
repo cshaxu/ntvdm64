@@ -1,0 +1,3 @@
+v86-hook-cross-mitigation.c
+mitigation parent=1:0 child=1:0 signature=1:0 image=1:0
+parent=32956 child=21484 thread=35636 hook=0000000000000000 error=126

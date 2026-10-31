@@ -145,6 +145,15 @@ OUTPUT:
 
 
 #if defined(CCPU) || !defined(PROD)
+#ifdef CCPU
+/* A decoded V86 INT is distinct from x87 exceptions that also call INTx. */
+GLOBAL BOOL host_v86_software_int IFN1(IS32, int_no)
+{
+    extern BOOL DpmiV86SoftwareInt(ULONG);
+    extern BOOL DpmiSwIntHandler(ULONG);
+    return SWIntHandler == DpmiSwIntHandler && DpmiV86SoftwareInt((ULONG)int_no);
+}
+#endif
 GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 {
     BOOL returnStatus = FALSE;
@@ -230,6 +239,17 @@ OUTPUT:
 
 #if defined(CCPU) || !defined(PROD)
 #ifdef CCPU
+/* The NT VDM fixed-state IF bit is shared with ICA and guest code. */
+GLOBAL void host_cpu40_set_virtual_if IFN1(BOOL, enabled)
+{
+    extern unsigned char *c_GetPhyAdd(unsigned long);
+    extern void host_ica_lock(void), host_ica_unlock(void);
+    volatile LONG *state=(volatile LONG *)c_GetPhyAdd(0x714);
+    host_ica_lock();
+    if(enabled) InterlockedOr(state,0x200);
+    else InterlockedAnd(state,~0x200);
+    host_ica_unlock();
+}
 /* Non-faulting fetch for the CPU40 monitor path. The CPU's cached decision
  * remains authoritative; a cache miss uses its page-protection rules. */
 static BOOL monitor_read_ram(ULONG physical, void *value, ULONG size)
@@ -305,16 +325,6 @@ static BOOL monitor_fetch_byte(const MONITOR_CODE *code, ULONG displacement, UCH
     if (!monitor_read_ram(physical,value,1)) return FALSE;
     /* The original host read participates in paging accessed accounting. */
     return monitor_mark_access(linear,FALSE,physical & SasWrapMask);
-}
-
-static ULONG monitor_general_register(UCHAR index)
-{
-    return GET_GR(index & 7);
-}
-
-static void monitor_set_general_register(UCHAR index, ULONG value)
-{
-    SET_GR(index & 7,value);
 }
 
 /* KiVdmSetUserCR0 accepts only the guest's MP/EM bits. CPU40 owns the
@@ -429,8 +439,6 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
      * operations retain the original handler and its complete code below. */
     if (exp_no == 13 && getCPL() != 0 && !getVM()) {
         extern unsigned long c_getEIP(void);
-        extern unsigned char *c_GetPhyAdd(unsigned long);
-        extern void host_ica_lock(void), host_ica_unlock(void);
         extern void IN8(unsigned long *,unsigned long), IN16(unsigned long *,unsigned long);
         extern void OUT8(unsigned long,unsigned long), OUT16(unsigned long,unsigned long);
         extern void ccpu_monitor_dispatch_irq(void);
@@ -462,7 +470,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                     extern unsigned long c_getCR0(void);
                     if(!monitor_fetch_byte(&code,prefix+2,&modrm) || (modrm&0xc0)!=0xc0) goto candidate_unhandled;
                     value=(modrm&0x38) ? 0 : (c_getCR0() & ~8UL);
-                    monitor_set_general_register(modrm,value);
+                    SET_GR(modrm & 7,value);
                     setEIP(ip+prefix+3);return TRUE;
                 }
                 if(second==0x21 || second==0x23) {
@@ -475,9 +483,9 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                         value=(index==4 || index==5) ? 0 : CCPU_DR[index];
                         if(index==6)value&=0x0000e00fUL;
                         if(index==7)value&=0xffff0155UL;
-                        monitor_set_general_register(modrm,value);
+                        SET_GR(modrm & 7,value);
                     } else if(index!=4 && index!=5) {
-                        value=monitor_general_register(modrm);
+                        value=GET_GR(modrm & 7);
                         if(index<4)value&=0x00ffffffUL;
                         else if(index==6)value&=0x0000e00fUL;
                         else value=(value | ((value&0x2aaUL)>>1)) & 0xffff0155UL;
@@ -494,10 +502,10 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                     if(!monitor_fetch_byte(&code,prefix+2,&modrm)) goto candidate_unhandled;
                     if(second==0x22) {
                         if((modrm&0xc0)!=0xc0 || (modrm&0x38)!=0) goto candidate_unhandled;
-                        operand=monitor_general_register(modrm);
+                        operand=GET_GR(modrm & 7);
                     } else {
                         if((modrm&0x38)!=0x30) goto candidate_unhandled;
-                        if((modrm&0xc0)==0xc0) operand=monitor_general_register(modrm);
+                        if((modrm&0xc0)==0xc0) operand=GET_GR(modrm & 7);
                         else if(!monitor_lmsw_operand(&code,&next,modrm,&operand)) goto candidate_unhandled;
                     }
                     monitor_set_npx_control(operand);
@@ -530,11 +538,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 setEIP(ip+prefix+1);return TRUE;
             }
             if (op==0xfa || op==0xfb) {
-                volatile LONG *state=(volatile LONG *)c_GetPhyAdd(0x714);
-                host_ica_lock();
-                if(op==0xfb) InterlockedOr(state,0x200);
-                else InterlockedAnd(state,~0x200);
-                host_ica_unlock();
+                host_cpu40_set_virtual_if(op==0xfb);
                 /* NT4 OpcodeCLI/OpcodeSTI advance the trapped EIP once,
                  * including when its dispatcher encountered a prefix. */
                 setIF(op==0xfb); setEIP(ip+1);

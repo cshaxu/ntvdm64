@@ -1,0 +1,4 @@
+v86-hook-cross-x86-dll.c
+   Creating library O:\repos.hobby\ntvdm64\build\t473-s11\v86-hook-cross-x86.lib and object O:\repos.hobby\ntvdm64\build\t473-s11\v86-hook-cross-x86.exp
+v86-hook-cross-x86.c
+parent=20896 child=28844 thread=22320 hook=00000000 error=126

@@ -1,0 +1,4 @@
+Synthetic real CCPU fixture, case 134; exit 0 with BX=0xBEEF and VM flag asserted by fixture.
+At CS:IP 001F:0555, real-mode linear address 0x745 contains MOV BX,0xBEEF; descriptor-base linear 0x555 contains MOV BX,0xFACE.
+Observed handler return: flags=0x23002, CS=0x1F, IP=0x555, SP=0xFD0.
+This distinguishes the real-mode target selected by CCPU in the fixture; it is not an installed DOSX guest or a proof of original NT fault delivery.

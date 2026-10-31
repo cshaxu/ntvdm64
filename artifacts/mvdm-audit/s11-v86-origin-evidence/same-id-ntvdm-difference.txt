@@ -1,0 +1,3 @@
+changed_bytes 4 ranges 2
+0x130..0x131 size=2
+0x19dc8c..0x19dc8d size=2

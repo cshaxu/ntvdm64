@@ -1,0 +1,4 @@
+            8664 machine (x64)
+    USER32.dll
+    KERNEL32.dll
+          1    0 00001000 MouseInputHook

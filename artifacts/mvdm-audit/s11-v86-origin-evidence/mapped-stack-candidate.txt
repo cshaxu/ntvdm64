@@ -1,0 +1,1 @@
+V86_MAPPED_STACK pass=0 ip=0102 cs=0000 flags=0000 expected=3202 raw-cs=0100 raw-flags=3202

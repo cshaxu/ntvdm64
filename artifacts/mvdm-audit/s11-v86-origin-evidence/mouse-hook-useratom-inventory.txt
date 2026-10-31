@@ -1,0 +1,1 @@
+user_lookup_count=656 dll_suffix_count=13 pathlike_count=86 probe_name_count=0 user32_name_count=0 kernel32_name_count=0 slots=16384 scope=user_name_lookup_not_hook_table

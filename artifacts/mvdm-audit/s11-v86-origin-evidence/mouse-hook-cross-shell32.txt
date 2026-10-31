@@ -1,0 +1,2 @@
+v86-hook-cross-shell32.c
+parent=13488 child=36276 thread=35548 hook=0000000000000000 error=126

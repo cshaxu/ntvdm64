@@ -1,0 +1,8 @@
+DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1
+DPMI_V86_INT_OWNER_OK ivt=1 hooked=untouched virtual_if=untouched pm=untouched
+DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2
+DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2
+DPMI_SWINT_NULL_MAPPING_OK fallback=1 state=unchanged
+DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved
+DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full
+DPMI_INT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 frame=full

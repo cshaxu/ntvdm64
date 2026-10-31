@@ -1,0 +1,1 @@
+global_atom_count=160 dll_suffix_count=0 pathlike_count=0 slots=16384 scope=global_atom_table_only

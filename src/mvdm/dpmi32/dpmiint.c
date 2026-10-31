@@ -536,6 +536,37 @@ Arguments:
     setCS(*pIVT);
 }
 
+#if defined(CPU_40_STYLE) && defined(CCPU)
+/* DIVERGENCE(MVDM-HOST-DIV-482): invoked only for a decoded V86 INT
+ * instruction, not for an exception that happens to share its vector. */
+BOOL DpmiV86SoftwareInt(ULONG IntNumber)
+{
+    extern void spr_write_word(ULONG, USHORT);
+    extern ULONG spr_read_dword(ULONG);
+    ULONG Flags = getEFLAGS(), Target;
+    ULONG StackBase;
+    USHORT Sp, TargetIp, TargetCs;
+    if (!(Flags & EFLAGS_VM_MASK) || (Flags & 0x3000) != 0x3000 ||
+        (DpmiInterruptHandlers[IntNumber].Flags & VDM_INT_HOOKED))
+        return FALSE;
+    /* NT4 V86Intnn reads the IVT first, then writes a contiguous frame from
+     * the wrapped final SP.  CCPU supervisor access translates each page. */
+    Target = spr_read_dword(IntNumber * 4);
+    TargetIp = LOWORD(Target); TargetCs = HIWORD(Target);
+    StackBase = (ULONG)getSS() << 4;
+    Sp = (USHORT)(getSP() - 6);
+    spr_write_word(StackBase + Sp + 4, (USHORT)Flags);
+    spr_write_word(StackBase + Sp + 2, getCS());
+    spr_write_word(StackBase + Sp, getIP());
+    /* A recoverable page fault restarts the instruction.  Do not discard its
+     * original flags or commit SP before all of these accesses complete. */
+    setEFLAGS(Flags & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
+    setSP(Sp);
+    setIP(TargetIp); setCS(TargetCs);
+    return TRUE;
+}
+#endif
+
 #if defined(CPU_40_STYLE)
 static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame, BOOL NativePushInt,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
@@ -1024,6 +1055,37 @@ Return Value:
     SaveEFLAGS = getEFLAGS();
     SaveEIP = getEIP();
     SaveCS  = getCS();
+#if defined(CPU_40_STYLE) && defined(CCPU)
+    /* DIVERGENCE(MVDM-HOST-DIV-484): NT4 PushException refuses V86
+     * exception vectors above 7 before constructing a protected frame. */
+    if ((SaveEFLAGS & EFLAGS_VM_MASK) && IntNumber > 7)
+        return FALSE;
+    /* DIVERGENCE(MVDM-HOST-DIV-485): use the original real-mode frame and
+     * IVT carrier when CCPU memory is unpaged and IF is directly represented.
+     * Paged and virtual-IF cases retain their existing exception path. */
+    if ((SaveEFLAGS & EFLAGS_VM_MASK) && (SaveEFLAGS & 0x3000) == 0x3000 &&
+        !(getCR0() & 0x80000000UL)) {
+        extern void spr_write_word(ULONG, USHORT);
+        extern ULONG spr_read_dword(ULONG);
+        ULONG ReturnFlags = SaveEFLAGS & ~(EFLAGS_TF_MASK | 0x4000UL);
+        ULONG StackBase = (ULONG)SaveSS << 4, Target;
+        USHORT Sp = (USHORT)SaveESP;
+        /* ReflectV86Int's single host pointer cannot represent an A20 wrap.
+         * Retain its per-word stack offsets and write order via the CPU. */
+        Sp -= 2; spr_write_word(StackBase + Sp, (USHORT)(SaveEFLAGS | 0x3000UL));
+        Sp -= 2; spr_write_word(StackBase + Sp, (USHORT)SaveCS);
+        Sp -= 2; spr_write_word(StackBase + Sp, (USHORT)SaveEIP);
+        Target = spr_read_dword(IntNumber * 4);
+        setSP(Sp); setIP(LOWORD(Target)); setCS(HIWORD(Target));
+        if (Handlers[IntNumber].Flags & VDM_INT_INT_GATE) {
+            extern void __cdecl host_cpu40_set_virtual_if(BOOL Enabled);
+            ReturnFlags &= ~EFLAGS_INTERRUPT_MASK;
+            host_cpu40_set_virtual_if(FALSE);
+        }
+        setEFLAGS(ReturnFlags);
+        return TRUE;
+    }
+#endif
     setEFLAGS(SaveEFLAGS & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK));
 
     if (!(getMSW() & MSW_PE)) {

@@ -876,6 +876,297 @@ static int protected_pending_irq_observe(void) {
     return test_fault==0 && !(pic_isr & 1) && c_getAX()==0xbeef && (test_case==0 ? (test_irq==1 && test_irq_eip==0x1001 && *c_GetPhyAdd(0x301)==1 && test_out==0 && !(pic_irr&1)) : (test_irq==0 && *c_GetPhyAdd(0x301)==0 && test_out==0 && ((pic_irr&1)==(test_case==2 ? 1 : 0))));
 }
 
+#pragma pack(push,1)
+typedef struct { USHORT cs, flags; ULONG eip; } SWINT_HANDLER;
+#pragma pack(pop)
+extern SWINT_HANDLER DpmiInterruptHandlers[256];
+typedef struct { USHORT cs, ss; ULONG eip, esp, flags; } FAULT_HANDLER;
+extern FAULT_HANDLER DpmiFaultHandlers[32];
+extern USHORT LockedPMStackSel;
+extern ULONG LockedPMStackCount;
+extern LDT_ENTRY *Ldt;
+extern ULONG IntelBase, Cpu40LdtShadowAddress;
+extern USHORT CurrentAppFlags;
+extern BOOL DpmiSwIntHandler(ULONG);
+extern long VdmInstallSoftwareIntHandler(void *);
+extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
+extern ULONG c_getEAX(void);
+extern USHORT c_getCS(void), c_getSP(void);
+extern void INTx(ULONG);
+extern void ZFRSRVD(ULONG);
+static BOOL swint_origin_probe(ULONG vector) {test_irq=vector; return TRUE;}
+
+static int v86_decoded_interrupt(void) {
+    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
+    unsigned vector=test_case==122 ? 0x2a : 0x31;
+    unsigned char code[]={0xcd,0x31,0xd6,0xfe};
+    unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    ULONG saved; BOOL ok; char line[160];
+    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
+    *(ULONG *)(gdt+0x200)=0x0000ffff; *(ULONG *)(gdt+0x204)=0x0000f300;
+    *(ULONG *)(ldt+0x18)=0x0000ffff; *(ULONG *)(ldt+0x1c)=0x0000fa00;
+    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
+    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
+    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
+    if(test_case==123) {
+        test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
+        INTx(7); VdmInstallSoftwareIntHandler(NULL);
+        return test_irq==7 && c_getCS()==0x100 && c_getIP()==0x100 && c_getSP()==0x800;
+    }
+    if(test_case==125) {
+        test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
+        c_setCR0(c_getCR0() | 4u); /* EM: real x87 prologue takes INTx(7). */
+        ZFRSRVD(0); VdmInstallSoftwareIntHandler(NULL);
+        return test_irq==7 && c_getCS()==0x100 && c_getIP()==0x100 && c_getSP()==0x800;
+    }
+    if(test_case==124) {
+        code[1]=7; CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+        test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
+        c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL);
+        return test_irq==7 && c_getCS()==0x100 && c_getSP()==0x800;
+    }
+    if(test_case==126) c_setIP(0xfffe);
+    if(test_case==127) c_setSP(4);
+    DpmiInterruptHandlers[vector].cs=0x1f;
+    DpmiInterruptHandlers[vector].flags=0; DpmiInterruptHandlers[vector].eip=0x200;
+    if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
+    code[1]=(unsigned char)vector;
+    CopyMemory(c_GetPhyAdd(test_case==126 ? 0x10ffe : 0x1100),code,sizeof(code));
+    CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
+    *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
+    saved=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
+    c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL);
+    ok=c_getCS()==0x300 && c_getSP()==(test_case==127 ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
+       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==(test_case==126 ? 0 : 0x102) &&
+       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12000 : 0x27fc)==0x100 &&
+       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12002 : 0x27fe)==(USHORT)saved &&
+       !(c_getEFLAGS() & 0x4300) &&
+       (test_case!=122 || c_getEAX()==0xf0f0f0f1);
+    wsprintfA(line,"V86_DECODED_INT case=%d pass=%d cs=%x sp=%x bx=%x\n",
+              test_case,ok,c_getCS(),c_getSP(),c_getBX()); report(line);
+    return ok;
+}
+
+static int v86_real_divide_fault(void) {
+    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
+    const unsigned char code[]={0xbb,0x00,0x00,0xf7,0xf3,0xd6,0xfe};
+    const unsigned char npx_code[]={0xd9,0xe8,0xd6,0xfe};
+    const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    ULONG flags; BOOL ok, gate=(test_case==136 || test_case==138); char line[150];
+    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
+    if(gate) InitializeIcaLock();
+    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(gate ? 4 : 0x800); c_setIP(0x100);
+    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
+    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
+    DpmiFaultHandlers[test_case==137 ? 7 : 0].cs=0;
+    DpmiFaultHandlers[test_case==137 ? 7 : 0].flags=gate ? 1 : 0;
+    if(test_case==137) {
+        CopyMemory(c_GetPhyAdd(0x1100),npx_code,sizeof(npx_code));
+        c_setCR0(c_getCR0() | 4u);
+    } else CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+    CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
+    *(USHORT *)c_GetPhyAdd(test_case==137 ? 28 : 0)=0x456;
+    *(USHORT *)c_GetPhyAdd(test_case==137 ? 30 : 2)=0x300;
+    if(test_case==138 || test_case==139) *(ULONG *)c_GetPhyAdd(0x714)=0xa203;
+    VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+    flags=c_getEFLAGS();
+    ok=c_getCS()==0x300 && c_getSP()==(gate ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
+       *(USHORT *)c_GetPhyAdd(gate ? 0x11ffe : 0x27fa)==(test_case==137 ? 0x100 : 0x103) &&
+       *(USHORT *)c_GetPhyAdd(gate ? 0x2000 : 0x27fc)==0x100 &&
+       (*(USHORT *)c_GetPhyAdd(gate ? 0x2002 : 0x27fe) & 0x3200)==0x3200 &&
+       (flags & 0x20000) && ((flags & 0x200)==(gate ? 0u : 0x200u)) &&
+       ((test_case!=138 && test_case!=139) ||
+        *(ULONG *)c_GetPhyAdd(0x714)==(test_case==138 ? 0xa003u : 0xa203u));
+    wsprintfA(line,"V86_REAL_FAULT case=%d pass=%d cs=%x sp=%x bx=%x flags=%lx\n",
+              test_case,ok,c_getCS(),c_getSP(),c_getBX(),flags); report(line);
+    if(test_case==138 || test_case==139) {wsprintfA(line,"V86_FIXED_IF state=%lx cpu_flags=%lx\n",*(ULONG *)c_GetPhyAdd(0x714),flags);report(line);}
+    return ok;
+}
+
+static BOOL v86_iret_irq_fault(ULONG vector, ULONG error) {
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    BOOL handled=DpmiFaultHandler(vector,error);
+    if (handled) ica_hw_interrupt(0,0,1);
+    return handled;
+}
+static BOOL v86_iret_irq_handler(ULONG vector) {
+    ++test_irq; test_irq_eip=c_getEIP();
+    ica_outb(0x20,0x20);
+    return vector==8;
+}
+static int v86_fault_iret(void) {
+    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
+    const unsigned char code[]={0xbb,0,0,0xf7,0xf3,0xbb,0xef,0xbe,0xd6,0xfe};
+    const unsigned char handler[]={0x89,0xe5,0x83,0x46,0,2,0xcf};
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    ULONG flags; BOOL ok; char line[150];
+    c_cpu_init(); InitializeIcaLock(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
+    if(test_case==141) {
+        ica0_init(); ica1_init(); DelayIrqLine=0; test_irq=test_irq_eip=0;
+        ica_outb(0x20,0x11); ica_outb(0x21,8); ica_outb(0x21,4);
+        ica_outb(0x21,1); ica_outb(0x21,0xfe);
+        VdmInstallHardwareIntHandler((void *)v86_iret_irq_handler);
+    }
+    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
+    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    if(test_case==142) {c_sas_enable_20_bit_wrapping(); c_setSS(0xffff); c_setSP(0x20);}
+    if(test_case==143) {c_sas_disable_20_bit_wrapping(); c_setSS(0xffff); c_setSP(0x20);}
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
+    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
+    DpmiFaultHandlers[0].cs=0; DpmiFaultHandlers[0].flags=1;
+    /* CPU40 initializes the historical software-CPU selector bit. */
+    *(ULONG *)c_GetPhyAdd(0x714)=0xa600;
+    CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+    CopyMemory(c_GetPhyAdd(0x3456),handler,sizeof(handler));
+    *(USHORT *)c_GetPhyAdd(0)=0x456; *(USHORT *)c_GetPhyAdd(2)=0x300;
+    VdmInstallFaultHandler((void *)(test_case==141 ? v86_iret_irq_fault : DpmiFaultHandler));
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+    if(test_case==141) VdmInstallHardwareIntHandler(NULL);
+    flags=c_getEFLAGS();
+    ok=c_getCS()==0x100 && c_getSP()==(test_case>=142 ? 0x20 : 0x800) && c_getBX()==0xbeef &&
+       (flags & 0x20000) && (flags & 0x200) &&
+       *(ULONG *)c_GetPhyAdd(0x714)==0xa400;
+    if(test_case==141) {
+        char irqline[100];
+        wsprintfA(irqline,"V86_IRET_IRQ count=%lu eip=%lx\n",test_irq,test_irq_eip);
+        /* The original CCPU IRET path defers interrupt checks until after
+         * the next instruction, so MOV BX completes before IRQ delivery. */
+        report(irqline); ok=ok && test_irq==1 && test_irq_eip==0x108;
+    }
+    wsprintfA(line,"V86_FAULT_IRET pass=%d cs=%x sp=%x bx=%x flags=%lx fixed=%lx\n",
+              ok,c_getCS(),c_getSP(),c_getBX(),flags,*(ULONG *)c_GetPhyAdd(0x714));
+    if(test_case==142) c_sas_disable_20_bit_wrapping();
+    report(line); return ok;
+}
+
+static ULONG v86_fault_flags, v86_fault_sp, v86_fault_ip;
+static ULONG v86_installed_flags, v86_installed_sp, v86_installed_cs, v86_installed_ip;
+static BOOL v86_installed_handled;
+static LONG v86_installed_exception(EXCEPTION_POINTERS *ep) {
+    char line[180];
+    wsprintfA(line,"V86_REAL_INSTALLED_EXCEPTION code=%lx at=%p access=%lu address=%p\n",
+              ep->ExceptionRecord->ExceptionCode,ep->ExceptionRecord->ExceptionAddress,
+              ep->ExceptionRecord->NumberParameters ? ep->ExceptionRecord->ExceptionInformation[0] : 0,
+              ep->ExceptionRecord->NumberParameters > 1 ? (void *)ep->ExceptionRecord->ExceptionInformation[1] : NULL);
+    report(line); return EXCEPTION_EXECUTE_HANDLER;
+}
+static USHORT v86_fault_partial_cs, v86_fault_partial_flags, v86_fault_partial_ip;
+static BOOL v86_stack_page_fault(ULONG vector, ULONG error) {
+    ULONG *pte=(ULONG *)c_GetPhyAdd(0x9000);
+    if(vector!=14 || test_fault) return FALSE;
+    ++test_fault; test_fault_error=error;
+    v86_fault_flags=c_getEFLAGS(); v86_fault_sp=c_getSP(); v86_fault_ip=c_getEIP();
+    v86_fault_partial_cs=*(USHORT *)c_GetPhyAdd(0x7000);
+    v86_fault_partial_flags=*(USHORT *)c_GetPhyAdd(0x7002);
+    v86_fault_partial_ip=*(USHORT *)c_GetPhyAdd(0x2ffe);
+    pte[test_case==129 ? 3 : test_case==130 ? 2 : 0]=
+        test_case==129 ? 0x7007 : test_case==130 ? 0x2007 : 0x0007;
+    return TRUE;
+}
+static BOOL v86_observe_original_fault(ULONG vector, ULONG error) {
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    ULONG before=c_getEFLAGS(); BOOL handled;
+    char line[160];
+    if (test_case==133 || test_case==134) {
+        wsprintfA(line,"V86_REAL_INSTALLED_ENTER vector=%lu error=%lx flags=%lx sp=%x ip=%lx\n",
+                  vector,error,before,c_getSP(),c_getEIP()); report(line);
+    }
+    if(test_case==133 || test_case==134) {
+        __try { handled=DpmiFaultHandler(vector,error); }
+        __except(v86_installed_exception(GetExceptionInformation())) { handled=FALSE; }
+    } else handled=DpmiFaultHandler(vector,error);
+    wsprintfA(line,"V86_ORIGINAL_FAULT vector=%lu error=%lx handled=%d flags=%lx/%lx sp=%x ip=%lx\n",
+              vector,error,handled,before,c_getEFLAGS(),c_getSP(),c_getEIP()); report(line);
+    if (test_case==133 || test_case==134) {
+        extern void c_cpu_unsimulate(void);
+        v86_installed_handled=handled; v86_installed_flags=c_getEFLAGS();
+        v86_installed_sp=c_getSP(); v86_installed_cs=c_getCS(); v86_installed_ip=c_getEIP();
+        if(test_case==133) c_cpu_unsimulate(); /* Observe before executing a handler. */
+    }
+    return handled;
+}
+
+/* Two adjacent V86 linear stack pages need not be physically adjacent. */
+static int v86_mapped_stack(void) {
+    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(test_case>=133 ? 0x4000 : 0x3000);
+    ULONG *pte=(ULONG *)c_GetPhyAdd(0x9000); ULONG flags, stack1, stack2, ivt; unsigned i; BOOL ok;
+    const unsigned char code[]={0xcd,0x31,0xd6,0xfe};
+    const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    char line[180];
+    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
+    *(ULONG *)(gdt+0x200)=0x0000ffff; *(ULONG *)(gdt+0x204)=0x0000f300;
+    *(ULONG *)(ldt+0x18)=0x0000ffff; *(ULONG *)(ldt+0x1c)=0x0000fa00;
+    if(test_case>=133) { *(ULONG *)(ldt+0x10)=0x0000ffff; *(ULONG *)(ldt+0x14)=0x0000f300; }
+    c_setGDT_BASE_LIMIT(0x5000,0x407);
+    if(test_case>=133) { c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x4000,0x407); }
+    c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x1004); c_setIP(0x100);
+    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
+    Cpu40LdtShadowAddress=test_case>=133 ? 0x4000 : 0x3000; CurrentAppFlags=0;
+    DpmiInterruptHandlers[0x31].cs=0x1f; DpmiInterruptHandlers[0x31].flags=0;
+    DpmiInterruptHandlers[0x31].eip=0x200;
+    CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+    CopyMemory(c_GetPhyAdd(0x7456),target,sizeof(target));
+    if(test_case==134) {
+        const unsigned char protected_target[]={0xbb,0xce,0xfa,0xd6,0xfe};
+        CopyMemory(c_GetPhyAdd(0x745),target,sizeof(target));
+        CopyMemory(c_GetPhyAdd(0x555),protected_target,sizeof(protected_target));
+    }
+    *(USHORT *)c_GetPhyAdd(0x31*4)=0x456; *(USHORT *)c_GetPhyAdd(0x31*4+2)=0x300;
+    ZeroMemory(c_GetPhyAdd(0x8000),0x2000); *(ULONG *)c_GetPhyAdd(0x8000)=0x9007;
+    for(i=0;i<512;i++)pte[i]=(i<<12)|7; pte[3]=0x7007;
+    *(ULONG *)c_GetPhyAdd(0x7000)=0; *(USHORT *)c_GetPhyAdd(0x2ffe)=0;
+    flags=c_getEFLAGS(); test_fault=0;
+    if(test_case==129 || test_case==132 || test_case>=133)pte[3]=0;
+    if(test_case==130)pte[2]=0;
+    if(test_case==131)pte[0]=0;
+    c_setCR3(0x8000); c_setPG(1); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
+    if(test_case>=129 && test_case<=131) VdmInstallFaultHandler((void *)v86_stack_page_fault);
+    if(test_case>=133) {
+        DpmiFaultHandlers[14].cs=0x1f; DpmiFaultHandlers[14].eip=0x555;
+        LockedPMStackSel=0x17; LockedPMStackCount=0;
+    }
+    if(test_case>=132) VdmInstallFaultHandler((void *)v86_observe_original_fault);
+    c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL); VdmInstallFaultHandler(NULL);
+    stack1=pte[2]; stack2=pte[3]; ivt=pte[0]; c_setPG(0);
+    if(test_case>=133) {
+        wsprintfA(line,"V86_REAL_INSTALLED handled=%d flags=%lx sp=%lx cs=%lx ip=%lx\n",
+                  v86_installed_handled,v86_installed_flags,v86_installed_sp,v86_installed_cs,v86_installed_ip);
+        report(line); DpmiFaultHandlers[14].cs=0; LockedPMStackCount=0;
+        if(test_case==134) { wsprintfA(line,"V86_REAL_INSTALLED_EXEC bx=%x flags=%lx\n",c_getBX(),c_getEFLAGS()); report(line); }
+        return v86_installed_handled && (v86_installed_flags & 0x20000) &&
+               v86_installed_sp==0xfd0 && v86_installed_cs==0x1f && v86_installed_ip==0x555 &&
+               (test_case==133 || (c_getBX()==0xbeef && (c_getEFLAGS() & 0x20000)));
+    }
+    ok=c_getBX()==0xbeef && c_getSP()==0x0ffe &&
+       *(USHORT *)c_GetPhyAdd(0x2ffe)==0x102 &&
+       *(USHORT *)c_GetPhyAdd(0x7000)==0x100 &&
+       *(USHORT *)c_GetPhyAdd(0x7002)==(USHORT)flags &&
+       (stack1 & 0x60)==0x60 && (stack2 & 0x60)==0x60 && (ivt & 0x20)==0x20 &&
+       ((test_case==128 && !test_fault) || (test_case!=128 && test_fault==1 &&
+        test_fault_error==(test_case==131 ? 0u : 2u) && v86_fault_flags==flags && v86_fault_sp==0x1004 &&
+        v86_fault_ip==0x100 &&
+        v86_fault_partial_cs==(test_case==130 ? 0x100 : 0) &&
+        v86_fault_partial_flags==(test_case==130 ? (USHORT)flags : 0) &&
+        v86_fault_partial_ip==0));
+    wsprintfA(line,"V86_MAPPED_STACK pass=%d ip=%04x cs=%04x flags=%04x expected=%04x raw-cs=%04x raw-flags=%04x pte=%lx/%lx/%lx\n",
+              ok,*(USHORT *)c_GetPhyAdd(0x2ffe),*(USHORT *)c_GetPhyAdd(0x7000),
+              *(USHORT *)c_GetPhyAdd(0x7002),(USHORT)flags,
+              *(USHORT *)c_GetPhyAdd(0x3000),*(USHORT *)c_GetPhyAdd(0x3002),stack1,stack2,ivt); report(line);
+    if(test_case!=128) {wsprintfA(line,"V86_STACK_FAULT case=%d count=%lu error=%lx flags=%lx sp=%lx ip=%lx partial=%x/%x/%x\n",
+        test_case,test_fault,test_fault_error,v86_fault_flags,v86_fault_sp,v86_fault_ip,
+        v86_fault_partial_ip,v86_fault_partial_cs,v86_fault_partial_flags);report(line);}
+    return ok;
+}
+
 int main(int argc, char **argv) {
     session owner;
     int ok;
@@ -886,7 +1177,11 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+    if(test_case>=140 && test_case<=143) ok=v86_fault_iret();
+    else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
+    else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
+    else if(test_case>=121 && test_case<=127) ok=v86_decoded_interrupt();
+    else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();

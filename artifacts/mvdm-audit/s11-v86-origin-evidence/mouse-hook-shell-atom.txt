@@ -1,0 +1,10 @@
+kernelbase.dll=0
+imm32.dll=0
+ole32.dll=0
+combase.dll=0
+ntdll.dll=0
+win32u.dll=0
+gdi32.dll=0
+advapi32.dll=0
+shell32.dll=1
+shell32_exact_system_path=1

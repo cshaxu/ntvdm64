@@ -1,0 +1,4 @@
+691: 0001:000248c0       _INTx                      004258c0 f   original-ccpu386:intx.obj
+1592: 0001:0004e120       _host_v86_software_int     0044f120 f   original-softpc-host-roots:nt_inthk.obj
+3861: 0001:00155ff0       _DpmiSwIntHandler          00556ff0 f   original-mvdm-dpmi32:dpmiint.obj
+3863: 0001:00156520       _DpmiV86SoftwareInt        00557520 f   original-mvdm-dpmi32:dpmiint.obj

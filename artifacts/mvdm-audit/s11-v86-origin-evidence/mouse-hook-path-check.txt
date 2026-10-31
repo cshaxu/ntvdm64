@@ -1,0 +1,2 @@
+module-path=O:\repos.hobby\ntvdm64\build\t473-s10\mouse31-input-probe\mouse-hook.dll length=72 error=0
+module=140726259679232 load=0 export=140726259683328 lookup=0 hook=0 error=126

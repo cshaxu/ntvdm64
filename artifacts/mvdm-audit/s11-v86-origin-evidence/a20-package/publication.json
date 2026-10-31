@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-31T09:52:41.0684941Z",
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-a20-package",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "result": "pass"
+}

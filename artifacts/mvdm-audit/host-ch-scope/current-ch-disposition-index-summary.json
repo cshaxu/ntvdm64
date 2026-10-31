@@ -11,10 +11,10 @@
     "role-pending": 278,
     "guest-target-observed": 195
   },
-  "mirror_diff_rows_in_index": 199,
+  "mirror_diff_rows_in_index": 201,
   "scoped_guest_exclusion_rows": 195,
-  "index_sha256": "AF2385E639ADEF97FA35E8A68801DDB6AB076AD3D9A618EBA60FF4095ECBBBB1",
+  "index_sha256": "D2E3B7E015FCC2CFD6CA4E9B77CB05889D9C583CAB1FC88A3CC42A9837C00E15",
   "inventory_sha256": "50C992A5634DBEB46EF222D28B5F8686E738DD9A1FAD1F3DB87E788066E7894B",
-  "retention_sha256": "D2DB2B75B732244295375FC383A1F94641AF396FDEE0D9F6090532F796EE92EF",
+  "retention_sha256": "D05C15B4A2818584F7FF245C17005A126B294992BEE04E2A6FB9D98309E799E1",
   "limitations": "source-role decisions for recorded selected profiles, not runtime capability; guest-target exclusions are host-source only; retention is textual estimate"
 }

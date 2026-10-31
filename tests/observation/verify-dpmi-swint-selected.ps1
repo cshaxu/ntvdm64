@@ -27,6 +27,12 @@ if ($LASTEXITCODE) { throw 'Selected DPMI fixture link failed' }
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1')) {
     throw 'Selected DPMI fixture failed'
 }
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_V86_INT_OWNER_OK ivt=1 hooked=untouched virtual_if=untouched pm=untouched')) {
+    throw 'Selected DPMI V86 software interrupt ownership fixture failed'
+}
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_V86_HIGH_FAULT_DECLINED_OK installed=2 protected=unchanged')) {
+    throw 'Selected DPMI V86 high fault-vector fixture failed'
+}
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2')) {
     throw 'Selected DPMI handler-width fixture failed'
 }
@@ -45,5 +51,26 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_FAULT_IRET
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_INT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 frame=full')) {
     throw 'Selected DPMI interrupt-return fixture failed'
 }
+& "$out/fixture.exe" --v86-nt4-vector7 | Tee-Object -FilePath "$out/v86-low-fault-result.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-low-fault-result.txt" -SimpleMatch 'DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2')) {
+    throw 'Selected DPMI V86 low fault-vector fixture failed'
+}
+& "$out/fixture.exe" --pm-fault-vector14 | Tee-Object -FilePath "$out/pm-fault-result.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-result.txt" -SimpleMatch 'DPMI_PM_VECTOR14_FRAME_OK')) {
+    throw 'Selected DPMI protected fault-vector fixture failed'
+}
+$nonCcpuCommand = $command.Replace('/DCCPU', '/UCCPU').Replace('dpmiint.obj"', 'dpmiint-nonccpu.obj"')
+if ($nonCcpuCommand -eq $command -or !$nonCcpuCommand.Contains('/UCCPU') -or !$nonCcpuCommand.Contains('dpmiint-nonccpu.obj')) {
+    throw 'Could not construct non-CCPU negative compile'
+}
+[IO.File]::WriteAllText("$out/compile-nonccpu.cmd", $nonCcpuCommand, [Text.Encoding]::ASCII)
+Push-Location $worker
+try { & $driver cmd.exe /d /c "$out/compile-nonccpu.cmd" *> "$out/compile-nonccpu.log"; if ($LASTEXITCODE) { throw 'Non-CCPU DPMI source compile failed' } }
+finally { Pop-Location }
+& $driver dumpbin.exe /symbols "$out/dpmiint-nonccpu.obj" *> "$out/nonccpu-symbols.log"
+if ($LASTEXITCODE -or (Select-String -LiteralPath "$out/nonccpu-symbols.log" -Pattern 'DpmiV86SoftwareInt|host_cpu40_set_virtual_if')) {
+    throw 'CCPU-only V86 symbol leaked into non-CCPU object'
+}
+Write-Output 'DPMI_NON_CCPU_V86_ISOLATION_OK'
 @($source, $fixture, "$out/dpmiint.obj", "$out/fixture.exe", "$out/fixture.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"

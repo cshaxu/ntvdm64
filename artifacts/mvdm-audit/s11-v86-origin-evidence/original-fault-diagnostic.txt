@@ -1,0 +1,2 @@
+V86_ORIGINAL_FAULT vector=14 error=2 handled=0 flags=23202/23002 sp=1004 ip=100
+V86_ORIGINAL_FAULT vector=8 error=0 handled=0 flags=23002/23002 sp=1004 ip=100

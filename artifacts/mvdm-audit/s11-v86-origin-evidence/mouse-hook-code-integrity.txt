@@ -1,0 +1,1 @@
+log=Microsoft-Windows-CodeIntegrity/Operational enabled=True events_last_15min=0

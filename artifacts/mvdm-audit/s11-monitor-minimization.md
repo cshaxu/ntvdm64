@@ -4,6 +4,14 @@ Status: active audit and implementation, not S11 closure. Owner's 2026-10-30 req
 
 ## Accounting boundary
 
+Working candidate: removed the two `monitor_general_register` wrappers and
+use CCPU's original `GET_GR`/`SET_GR` macros with the same `& 7` index at
+each call site. The macros directly index the CCPU register array; no
+register ownership, width, or instruction-selection rule changes. The
+rebuilt worker and 117-case CCPU boundary suite passed. This cleanup is not
+independent evidence for the unresolved V86 page-fault path, and the working
+candidate remains unpublished.
+
 Against `2f5273440^`, before the monitor group, at baseline the three mirrored files have textual changes: `nt_inthk.c` +326/-1, `c_tlb.c` +40/-0, `c_main.c` +53/-11 (git numstat; comments and blanks included). Total +419/-12, net +407 across these files. This is a task-start comparison, not percentage of executed code or an OpenNT-to-current semantic proof. New non-mirror test/evidence files and existing independently developed adapters are accounted separately when the final diff is known. Whole-mirror per-file estimates remain in [retention CSV](mirror-diff-code-retention.csv).
 
 ## Calling chain and bounded decisions

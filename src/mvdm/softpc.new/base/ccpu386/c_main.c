@@ -3617,7 +3617,18 @@ TYPEC4:
       D_Ib(0);
       UPDATE_INTEL_IP(p);
       start_trap = 0;   /* clear any pending TF exception */
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+      /* DIVERGENCE(MVDM-HOST-DIV-483): only this decoded software INT,
+       * never another INTx caller, enters the V86 host reflector. */
+      {
+      extern BOOL host_v86_software_int(IS32);
+      if (!GET_VM() || (IU16)(GET_EIP() - CCPU_save_EIP) != 2 ||
+          !host_v86_software_int((IS32)ops[0].sng))
+#endif
       INTx(ops[0].sng);
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+      }
+#endif
       CANCEL_HOST_IP();
       PIG_SYNCH(CHECK_ALL);
       break;
