@@ -1,0 +1,19 @@
+{
+  "commit": "64840052bebf7386c0c91608ab1d8b4799177e29",
+  "tracked_c_h_files": 2643,
+  "mvdm_files": 1794,
+  "sites": 13825,
+  "mvdm_sites": 12176,
+  "distinct_tokens": 1818,
+  "profiles": [
+    "x86-worker",
+    "x86-wow32",
+    "x64-launcher",
+    "x64-service",
+    "x64-frontend",
+    "x64-worker",
+    "x64-monitor",
+    "x64-hook"
+  ],
+  "limitations": "Lexical only; includes guards and unselected files; no reachability or macro values, no header-defined/forced defines; non-C/H excluded; each file hash records snapshot."
+}
