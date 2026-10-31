@@ -962,7 +962,25 @@ passed together with the CCPU object controls.
 
 ### Operand-size override and the V86 dispatcher
 
-The pinned NT4 `ntos/ke/i386/emv86.asm` maps `OPER32` through
+**Source attribution correction:** The first source comparison below used
+`opennt-src-2/nt/private/ntos/ke/i386/emv86.asm`, whose SHA-256
+`7DA4B4EE445F077CC0D33441EA2783690BC3347A47827360FE143C04FBD79693`
+matches the local OpenNT-4.5 file, not the pinned OpenNT file. The
+`opennt-src-2` policy exception covers MVDM paths absent from the canonical
+union, not this NT kernel file. This source was read for comparison; no file
+was imported. The pinned OpenNT `base/ntos/ke/x86/emv86.asm` is SHA-256
+`DCD29FB59584D9D157E75FB5C45A6FE7E9F09CB3F37B0B44E0B6B3AE67B1D702`;
+its `trap.asm` is
+`5D01FEC3B1BA603029A7E22DB32805465BB2B499A884CB27DEB7F278EB736D07`.
+The published unhooked direct-IF ordering was rechecked against those pinned
+files: the fast path checks `VDM_INT_HOOKED`, reads the IVT and writes the
+contiguous frame; the slow path writes separately wrapped words then chooses
+the IVT or `DosxRmReflector`. Both also differ in virtual-IF details from the
+other version. The helper declines hooked and low-IOPL cases, so these
+differences are not evidence that the tested admitted path is wrong, nor do
+they prove full parity. No source variant is treated as interchangeable.
+
+The pinned NT4 `base/ntos/ke/x86/emv86.asm` maps `OPER32` through
 `OpcodeGenericPrefixV86`; its `OpcodeINTnnV86` does not consult the prefix
 bits and writes three 16-bit words.  It updates the saved flags first, wraps
 each stack decrement separately, commits SP, then reads the IVT.  This is
