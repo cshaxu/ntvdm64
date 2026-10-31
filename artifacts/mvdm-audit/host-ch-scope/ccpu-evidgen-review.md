@@ -21,6 +21,15 @@ five-slot allocation in this selected object; it does not prove runtime
 initialization order, all consumers, or compatibility of the unselected PIG
 layout.
 
+The selected source startup ordering is explicit: `main.c` publishes the
+video table before `config()`, then runs `cpu_init()` and calls
+`setup_vga_globals()` before `host_init_screen()`. The selected CCPU body of
+`setup_vga_globals()` calls the full binder, which republishes the video
+table and installs `Cpu.Video` along with the CPU/SAS vector bindings. This
+is a source-path ordering observation, not a trace of every initialization
+failure or mode-reset path. The binder's stale "once" comment was corrected
+to distinguish the early video publication from full binding.
+
 | Field | CCPU offset | C-VID offset |
 | --- | ---: | ---: |
 | `GetVideolatches` | 0 | 0 |

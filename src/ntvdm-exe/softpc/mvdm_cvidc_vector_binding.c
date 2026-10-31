@@ -2,7 +2,8 @@
  * DIVERGENCE(MVDM-HOST-DIV-156): the retained CCPU40 manifest contains the
  * original CCPU carrier and C-VID generated table but not their historical
  * product-generated binding unit.  Preserve both original global names and
- * tables; bind them once at C-VID's existing setup_vga_globals assembly point.
+ * tables; bind the video table before config and bind the complete vectors at
+ * C-VID's existing setup_vga_globals assembly point.
  */
 #include <insignia.h>
 #include <host_def.h>
