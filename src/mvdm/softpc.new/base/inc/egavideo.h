@@ -50,14 +50,7 @@
 
 /* Location of font definitions */
 #if 0
-#define EGA_CGMN	0xC2230
-#define EGA_CGDDOT	0xC3160
-#define EGA_HIFONT	0xC3990		/* 8x16 font for 640x480 ext */
-#define EGA_CGMN_OFF	0x2230
-#define EGA_CGMN_FDG_OFF 0x3030
-#define EGA_CGDDOT_OFF	0x3160
-#define EGA_HIFONT_OFF	0x3990
-#define EGA_INT1F_OFF	0x3560
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 #ifdef VGG

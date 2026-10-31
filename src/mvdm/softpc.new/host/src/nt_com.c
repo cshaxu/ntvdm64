@@ -55,9 +55,9 @@ GLOBAL void host_com_unlock(int adapter);
 GLOBAL int host_com_open(int);
 
 #if 0
-GLOBAL boolean host_com_suspend(int adapter);
-GLOBAL boolean host_com_resume(int adapter);
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
+#line 61 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 /* autoflush stub */
 GLOBAL void host_setup_aflush (int);

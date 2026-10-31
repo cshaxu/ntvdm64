@@ -46,7 +46,7 @@ Revision History:
 // Force code to be stepped through
 //
 #if 0
-#define ASSERT_STEPTHROUGH DbgBreakPoint()
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #else
 #define ASSERT_STEPTHROUGH
 #endif

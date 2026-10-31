@@ -909,67 +909,14 @@ GLOBAL VOID ResetConsoleState(VOID)
 	** be people who don't like having a DOS window size forced upon them.  
 	*/                                                                      
 #if 0                                                                           
-	/* Now resize the window to start-up size. */
-	newWin.Top = newWin.Left = 0;
-	newWin.Bottom = ConsBufferInfo.srWindow.Bottom -
-			ConsBufferInfo.srWindow.Top;
-	newWin.Right = ConsBufferInfo.srWindow.Right -
-		       ConsBufferInfo.srWindow.Left;
-
-	if(!SetConsoleWindowInfo(sc.OutputHandle, TRUE, &newWin))
-	    itfailed = TRUE;
-
-	if(!SetConsoleScreenBufferSize(sc.OutputHandle,ConsBufferInfo.dwSize))
-	    ErrorExit();
-	if (itfailed)	//try 'it' again...
-	    if(!SetConsoleWindowInfo(sc.OutputHandle, TRUE, &newWin))
-		ErrorExit();
-
-	/*
-	 * Now call video routine to set the character height, updating the
-	 * BIOS RAM as it does so.
-	 */
-	recalc_text(StartupCharHeight);
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif	//Zero
+#line 934 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 #if 0
-	/* williamh. If we really want to do the following thing,
-		     we have to copy regen to console buffer.
-		     since we are runniing in windowed TEXT mode
-		     the console always has our up-to-date regen
-		     content, the following actually is not necessary
-		     It worked before taking this out it because console
-		     doesn't verify the parameters we passed. No console
-		     has the checking and we are in trouble if we continue
-		     to do so.
-	*/
-
-	/* Clear the undisplayed part of the console buffer. */
-	bufferSize.X = MAX_CONSOLE_WIDTH;
-	bufferSize.Y = MAX_CONSOLE_HEIGHT;
-	videoHeight = (SHORT) (sas_hw_at_no_check(vd_rows_on_screen) + 1);
-	to = consoleBuffer + bufferSize.X * videoHeight;
-	nChars = bufferSize.X * ( bufferSize.Y - videoHeight );
-
-	while (nChars--)
-	{
-		to->Char.AsciiChar = 0x20;
-		to->Attributes = 7;
-		to++;
-	}
-	bufferCoord.X      = 0;
-	bufferCoord.Y	   = (SHORT)videoHeight;
-	writeRegion.Left   = 0;
-	writeRegion.Top    = (SHORT)videoHeight;
-	writeRegion.Right  = MAX_CONSOLE_WIDTH-1;
-	writeRegion.Bottom = bufferSize.Y-1;
-	if (!WriteConsoleOutput(sc.OutputHandle,
-				consoleBuffer,
-				bufferSize,
-				bufferCoord,
-				&writeRegion))
-		ErrorExit();
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
+#line 973 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 	/*
 	** Tim, September 92. Put the Console cursor to the same place as the
 	** SoftPC cursor. We already do this in full-screen text mode below.
@@ -1099,16 +1046,9 @@ GLOBAL VOID ResetConsoleState(VOID)
 		ErrorExit();
 
 #if 0  //STF removed with new mouse stuff??
-            /*                                                          
-            ** Tim, September 92.                                       
-            ** Try this after the WriteConsoleOutput(), can now copy the
-            ** right stuff from video memory to console.                
-            ** For mouse purposes we have selected a graphics buffer, so now
-	    ** we must reselect the text buffer.
-            */                                                          
-            if (!SetConsoleActiveScreenBuffer(sc.OutputHandle))         
-                ErrorExit();                                            
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif //STF
+#line 1112 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 	    /*
 	     * Get the cursor position from the BIOS RAM and tell the
@@ -1132,13 +1072,9 @@ GLOBAL VOID ResetConsoleState(VOID)
             blocked_in_gfx_mode = TRUE;
 
 #if 0  //STF removed with new mouse stuff??
-            /*                                                        
-            ** Tim, September 92, think we want one of these here too.
-	    ** Change to the normal console text buffer.
-            */                                                        
-            if (!SetConsoleActiveScreenBuffer(sc.OutputHandle))       
-                ErrorExit();                                          
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif //STF
+#line 1142 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 	    /* Get the current screen buffer info. */
 	    if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &bufferInfo))
@@ -1346,9 +1282,9 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
 		UnFreezeWinTitle();
 
 #if 0  //STF removed with new mouse stuff??
-		/* Revert to text buffer. */
-		closeGraphicsBuffer(); /* Tim Oct 92 */
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif //STF
+#line 1352 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 		/* Get Window to correct shape */
 		textResize();
@@ -1379,9 +1315,9 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
              }
 
 #if 0 //STF removed with new mouse stuff
-            /* remove any graphics buffer from frozen screen */
-             closeGraphicsBuffer();
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
+#line 1385 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
 	    /* Do mouse scaling */
 	     mode = sas_hw_at_no_check(vd_video_mode);
@@ -1411,6 +1347,7 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
 }
 
 #endif /* X86GFX */
+#line 1414 /* MVDM-HOST-DIV-497: preserve line numbers when X86GFX is excluded. */
 
 /*
 ***************************************************************************

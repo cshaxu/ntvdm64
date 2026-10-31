@@ -208,18 +208,7 @@ typedef struct _Vdm_FaultHandler {
 /* XLATON */
 // ==== CHANGED TO _VdmDpmiInfo
 #if 0
-typedef struct _VdmPmStackInfo {        /* VDMTIB */
-    USHORT LockCount;
-    USHORT Flags;
-    USHORT SsSelector;
-    USHORT SaveSsSelector;
-    ULONG  SaveEsp;
-    ULONG  SaveEip;
-    ULONG  DosxIntIret;
-    ULONG  DosxIntIretD;
-    ULONG  DosxFaultIret;
-    ULONG  DosxFaultIretD;
-} VDM_PMSTACKINFO, *PVDM_PMSTACKINFO;
+/* DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif
 
 typedef struct _VdmDpmiInfo {        /* VDMTIB */

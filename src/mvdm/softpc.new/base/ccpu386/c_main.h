@@ -165,16 +165,7 @@ IMPORT VOID c_cpu_unsimulate IPT0();
 
 
 #if 0				/* ROG */
-IMPORT VOID read_descriptor IPT2(
-   IU32, addr,
-   CPU_DESCR *, descr
-   );
-
-IMPORT ISM32 selector_outside_table IPT2(
-   IU16, selector,
-   IU32 *, descr_addr
-   );
-
+/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
 #endif				/* 0 ROG */
 
 #endif /* !DOUBLE_CPU */

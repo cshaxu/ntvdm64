@@ -1,0 +1,197 @@
+[
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_com.c",
+    "start": 57,
+    "end": 60,
+    "alternative_preserved": false,
+    "removed_lines": 2,
+    "removed_sha256": "db0631b2ff9eceea506543eed104f6070555b919ee9feab1145f4d528986672c",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 61,
+      "reason": "Preserve original line-sensitive diagnostics."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 1381,
+    "end": 1384,
+    "alternative_preserved": false,
+    "removed_lines": 2,
+    "removed_sha256": "3bb8d54134a927e1c5f737cbddddffd4dfd54db6d0f5b00e232c3e97e7d1e7ec",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 1385,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 1348,
+    "end": 1351,
+    "alternative_preserved": false,
+    "removed_lines": 2,
+    "removed_sha256": "61bd82d844cefa30f2e5c9b9e9b36106f01e335c54ebcc37baa74686ddeb1f3a",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 1352,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 1134,
+    "end": 1141,
+    "alternative_preserved": false,
+    "removed_lines": 6,
+    "removed_sha256": "a8605f00e207c5b2246e1136bab4945f9caff2c85a8c7c54b80d2da5c06148e6",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 1142,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 1101,
+    "end": 1111,
+    "alternative_preserved": false,
+    "removed_lines": 9,
+    "removed_sha256": "b9c11bddea7d8fa3e861be1743ee56fb178566141ea5f07ec0de6a1b8869a976",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 1112,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 935,
+    "end": 972,
+    "alternative_preserved": false,
+    "removed_lines": 36,
+    "removed_sha256": "a90d7b854fb8cfcbc12084f6c1a09ae48a321df0c18dca71b8f004ce40290f6e",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 973,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/nt_fulsc.c",
+    "start": 911,
+    "end": 933,
+    "alternative_preserved": false,
+    "removed_lines": 21,
+    "removed_sha256": "32a9bf229fc182b837bd740679db1a67784173c40cff11769055ce81be491ede",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497",
+    "line_restore": {
+      "line": 934,
+      "reason": "Preserve original line-sensitive diagnostics."
+    },
+    "outer_line_restore": {
+      "line": 1414,
+      "reason": "Selected non-X86GFX compilation skips line directives inside the enclosing X86GFX branch; restore original numbering after its endif."
+    }
+  },
+  {
+    "path": "src/mvdm/suballoc/suballcp.h",
+    "start": 48,
+    "end": 50,
+    "alternative_preserved": true,
+    "removed_lines": 1,
+    "removed_sha256": "bfa0cbb94b34cbfeef34b9296f55a99075cbc54697b58152a3cc63d9f8feb551",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497"
+  },
+  {
+    "path": "src/mvdm/wow32/fastwow.h",
+    "start": 48,
+    "end": 81,
+    "alternative_preserved": false,
+    "removed_lines": 32,
+    "removed_sha256": "33ab340a5b20e787073581a32dc9196c33627a54c24654139f5e21ce10e19fed",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497"
+  },
+  {
+    "path": "src/mvdm/wow32/wkmem.h",
+    "start": 16,
+    "end": 19,
+    "alternative_preserved": false,
+    "removed_lines": 2,
+    "removed_sha256": "cb795bc9f3784f8d4e8b79b5658d21a2862e45fa97fb3c2aa72d7372804525e6",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/ccpu386/c_main.h",
+    "start": 167,
+    "end": 178,
+    "alternative_preserved": false,
+    "removed_lines": 10,
+    "removed_sha256": "d243ce0bb89ccfa95c7e9837f1c437dd87aae2bdf11a6f2cc64c244a95174829",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/inc/egavideo.h",
+    "start": 52,
+    "end": 61,
+    "alternative_preserved": false,
+    "removed_lines": 8,
+    "removed_sha256": "a3add9a806136b93bda666355632205cf4ae829b8e2d9ef1a005d50fa7c1512f",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "MVDM-HOST-DIV-497"
+  },
+  {
+    "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+    "start": 210,
+    "end": 223,
+    "alternative_preserved": false,
+    "removed_lines": 12,
+    "removed_sha256": "3d18f5251fb30aa35f9283c0acc079fa66b899414c2961672e6b4c7cd8ea2ff2",
+    "upstream": "OpenNT",
+    "baseline": "64f0be779",
+    "divergence": "OPENNT-HOST-129"
+  }
+]

@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-129: replace the original literal-zero body in the selected
+`public/internal/base/inc/vdm.h` with the numbered exclusion marker; retain
+all conditional directives. Provenance and body hash:
+`../../artifacts/mvdm-audit/s12-if0-header-host-subsets.json`.
+
 OPENNT-HOST-128: retain the original conditional directives and active
 alternatives while replacing verified original literal-zero branch bodies
 with numbered exclusion markers. The owner requires this format. These
