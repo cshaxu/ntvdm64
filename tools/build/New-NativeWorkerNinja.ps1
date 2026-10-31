@@ -19,7 +19,7 @@ $compilerCacheDirectory=if($CompilerCache){Join-Path $root 'build/.ccache'}else{
 $baseFlags=[regex]::Match($text,'(?m)^cflags = (.*)$').Groups[1].Value
 if(!$baseFlags){throw 'Missing audited reference flags'}
 $includes=@([regex]::Matches($baseFlags,'/I "[^"]+"')|ForEach-Object {$_.Value})
-$nativeFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00 '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
+$nativeFlags='/nologo /c /MT /W4 /we4013 /we4311 /we4302 /Gy /showIncludes /DWINNT /D_NO_CRT_STDIO_INLINE /D_WIN32_WINNT=0x0A00 '+($includes -join ' ')+' /I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'" /I obj/basesrv'
 if($Component -eq 'Service'){
  $nativeFlags+=' /we4312 /FI "'+(NP (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h'))+'" /I "'+(NP (Join-Path $root 'src/opennt-host/base/win32/inc'))+'" /I "'+(NP (Join-Path $root 'src/opennt-host/base/win32/server'))+'"'
 }

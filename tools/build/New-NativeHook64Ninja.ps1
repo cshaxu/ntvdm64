@@ -25,7 +25,7 @@ $referenceRun16=Join-Path (Split-Path -Parent ([IO.Path]::GetFullPath($Reference
 # Reuse only native include closure, never x86 objects/defines/worker targets.
 $includes=@([regex]::Matches($referenceFlags,'/I "[^"]+"') | ForEach-Object { $_.Value })
 $includes += '/I "'+(NP (Join-Path $root 'src/ntsrv-exe/opennt/include'))+'"'
-$flags='/nologo /c /MT /W4 /Gy /showIncludes /DWIN32 /D_WIN32_WINNT=0x0A00 /I obj/basesrv '+($includes -join ' ')
+$flags='/nologo /c /MT /W4 /Gy /showIncludes /D_WIN32_WINNT=0x0A00 /I obj/basesrv '+($includes -join ' ')
 $graph=[Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
 $graph.Add('release_cflags = /O2')

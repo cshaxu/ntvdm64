@@ -88,6 +88,9 @@ explicitly retained final control-observer non-pass.
 records the first source-proven HWND32 wrapper cohort and its required
 parameter-by-parameter identity proof before any generic-wrapper repair.
 
+[T473 S11 compilation-condition cleanup](evidence/m0-t473-s11-condition-cleanup-closure.md)
+records the non-MVDM selector audit, verified cleanup and recovery handoff.
+
 [T473 S2 Redirector/monitor reconciliation](evidence/m0-t473-s2-redirector-monitor-reconciliation.md)
 finishes the source-owner sweep with bounded async-copy, monitor, VDD and
 debugger boundaries instead of private-subsystem substitutions.

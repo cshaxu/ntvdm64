@@ -103,13 +103,9 @@ typedef enum _NT_PRODUCT_TYPE {
  * devioctl.h and own GetDiskSpaceInformation as an unrelated BOOL helper.
  * Keep the storage carrier visible and remove only the conflicting modern
  * SDK convenience alias; ntioapi.h awaits its own complete ABI binding. */
-#ifdef GetDiskSpaceInformation
 #undef GetDiskSpaceInformation
-#endif
 
-#ifdef NtCurrentTeb
 #undef NtCurrentTeb
-#endif
 
 #ifndef NT_SUCCESS
 #define NT_SUCCESS(Status) (((NTSTATUS)(Status)) >= 0)

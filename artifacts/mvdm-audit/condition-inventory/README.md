@@ -51,7 +51,7 @@ all 71 WOW adapter units: for example the SDK exposes `EndTask` only with
 matched their previous preprocessed output after removing line markers and
 blank lines. The remaining NTVDM adapter is an empty CCPU callback without
 includes or conditionals. The redundant definition is removed from these
-authored profiles; `WINNT` remains the explicit SDK selection.
+authored x86 and x64 profiles; `WINNT` remains the explicit SDK selection.
 After rebuilding and applying the published package identity, both NTVDM and
 WOW32 matched the tested images byte-for-byte outside their PE COFF and
 debug-directory link timestamps. The published package and its test evidence
@@ -98,6 +98,10 @@ excluded; the active CCPU software V86 remains in scope. No guest is rebuilt.
 `NtAlertThread` declaration in `opennt-host/public/sdk/inc/ntpsapi.h`.
 The candidate retains it for the authored event-thread caller and its
 implementation, rather than handing it to every adapter.
+The five x64 component graphs contain neither the alert adapter nor its
+event-thread caller, so their inherited definition was removed. Their
+selected files do not call `NtAlertThread`; the header retains its normal
+system-import declaration when included on those graphs.
 `MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION` selects the original host bootstrap's
 no-host-mutation branch in `nt_msscs.c`; it is not an adapter profile.
 In the original SoftPC headers `ANSI` selects standard-C prototypes and
@@ -142,3 +146,62 @@ result is an environment-specific non-pass, not evidence of a runtime fix.
 The unused WOW build-only `MVDM_WOW32_PROVIDER` and `STD_CALL` defines were
 removed after a repository-source and generated-WOW-source search found no
 consumer. The selected `/Gz` calling convention remains unchanged.
+
+## Remaining selector roles
+
+- `WOW_ORIGINAL_*`, `WOW_COMMON_DIALOG_BINDING`, `WOW_NATIVE_PROCESS_BINDING`
+  and `WOW_NATIVE_EXTENSION_BINDING` select narrowly scoped declarations and
+  remappings for individual original USER/WOW translation units. The
+  [selector ledger](wow-selector-build-uses.csv) records their build sources
+  and conditional sites. Some are defined locally by original source rather
+  than on the compiler command line. They are not CCPU/video profile choices.
+  The local `WOW_ORIGINAL_LARGE_STRING_LAYOUT`, `CLIENT_VIEW_LAYOUT`,
+  `CLIENT_HANDLES`, `DIALOG_LAYOUT`, `DIALOG_GETSET_LAYOUT`,
+  `COMBO_STATE_LAYOUT`, `CONTROL_EXTENT_LAYOUT`, `CONTROL_PROTOTYPES`,
+  `BUTTON_STATE` and `BUTTON_RESOURCES` selectors expose only the named
+  original `user.h`/`usercli.h` declarations. Most are defined and cleared
+  around that include; `BUTTON_STATE` remains set in the dialog precompiled
+  header's translation unit. `WOW_USER_PRIVATE_REDIRECT` is selected by the
+  original WOW precompiled header for its window/class bindings.
+- `MVDM_REDIRECTOR_WORKER_EXPORTS` selects export versus import decoration
+  across the redirector DLL boundary; removing the distinction changes the ABI.
+- `OPENNT_BASE_VDM_SERVER` selects the finite BaseSrv binding and excludes
+  the unavailable DFS include in the original `basesrv.h`. `_CSRSRV_` makes
+  CSR server declarations non-imported: `base_process.c` supplies
+  `CsrLockProcessByClientId` and `CsrUnlockProcess` locally.
+  `OPENNT_BASE_NATIVE_RESOURCES` is limited to the two resource/wait units
+  that must call native operations instead of the adapter remappings.
+- `_WIN32_WINNT` selects the Windows API declaration level;
+  `WIN32_LEAN_AND_MEAN` limits SDK includes. `_NO_CRT_STDIO_INLINE` selects
+  the build's CRT declaration/link contract. These are SDK/compiler controls,
+  not MVDM execution-profile flags; the review does not assert that every
+  SDK option is individually indispensable to every source file.
+- `_X86_` in `monitor_context.h` is a temporary, restored declaration gate for
+  the original x86 guest VDM record on either host width; it does not select a
+  native V86 executor. SDK fallback guards prevent declaration collisions.
+- The provenance-registered `sas4gen.h` is a generated original-interface
+  carrier, not authored execution logic. Its CCPU and non-CCPU alternatives
+  have different selected consumers: Ninja's dependency log confirms the
+  original C-VID `accessfn.c` includes this exact carrier with CCPU undefined,
+  while the CPU40 source graph uses it with CCPU defined. The authored C-VID
+  binder also includes it for its vector declaration. Both branches are
+  required by the selected composition; globally collapsing them changes the
+  original accessors. They are not project-authored CPU alternatives.
+- The shared console-library width/compiler branches select actual pointer
+  width and MSVC atomics; their other recorded sites are include guards. The
+  Detours sites and generated SoftPC declarations are separately sourced,
+  not independently authored product policy. `OPENNT_HOST_CREATE_THREAD_ABI`
+  distinguishes the two original WinAPI-start-routine units from original
+  cdecl callbacks; it is not propagated as a global machine profile.
+- Seven guards surrounding only `#undef` were removed: unconditional
+  `#undef` has the same macro state whether the name existed or not. They
+  affected monitor, SDK-compatibility, default-window and edit headers.
+- The dialog resource `LPDLGTEMPLATE2A` and `LPDLGTEMPLATE2W` aliases both
+  name the same `DLGTEMPLATE2 *` type. Their `UNICODE` selection was replaced
+  with that exact common alias; A/W aliases and resource layout remain intact.
+
+The final x86/x64 cached builds, actual-command check and same-identity
+ten-image comparison are recorded in [final checks](s11-final-checks.json).
+The rebuilt images are identical to the published package except for PE
+link/debug-directory timestamps; both publication destinations still match
+its ten-image manifest. Its Full and Win3.1 test evidence above is reused.

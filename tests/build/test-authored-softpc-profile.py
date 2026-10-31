@@ -40,8 +40,10 @@ def main():
             checked += 1
             defined = set(re.findall(r"(?:^|\s)/D([A-Za-z_][A-Za-z_0-9]*)", command))
             leaked = sorted(defined & FLAGS)
-            if architecture == "msvc-x86-release" and "WIN32" in defined:
+            if "WIN32" in defined:
                 leaked.append("WIN32")
+            if architecture == "msvc-x64-release" and "OPENNT_ADAPTER_NT_ALERT_THREAD" in defined:
+                leaked.append("OPENNT_ADAPTER_NT_ALERT_THREAD")
             if leaked:
                 failures.append(f"{architecture}/{tree}: {source}: {', '.join(leaked)}")
             if relative and relative not in scanned_sources and "/detours/" not in relative:

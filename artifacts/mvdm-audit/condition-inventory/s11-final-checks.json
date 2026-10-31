@@ -1,0 +1,116 @@
+{
+  "x86Build": {
+    "command": "cmake --build --preset msvc-x86-release-ccache --target worker wow32",
+    "ended": "2026-10-31T20:39:11.0296015Z",
+    "pid": 4936,
+    "started": "2026-10-31T20:38:50.6132225Z",
+    "exitCode": 0
+  },
+  "x64Build": {
+    "exitCode": 0,
+    "pid": 16000,
+    "ended": "2026-10-31T20:35:29.6502373Z",
+    "command": "cmake --build --preset msvc-x64-release-ccache --target native-worker native-frontend native-monitor native-launcher native-service hook64",
+    "started": "2026-10-31T20:33:07.9487022Z"
+  },
+  "profileCheck": {
+    "pid": 13428,
+    "started": "2026-10-31T20:39:23.2088504Z",
+    "ended": "2026-10-31T20:39:24.6198357Z",
+    "command": "python tests/build/test-authored-softpc-profile.py",
+    "exitCode": 0,
+    "scriptSha256": "7D7E0541F9463EA0C22D4DB764D38844FF31FE3D5C394F63FFF74DA750CB66AA"
+  },
+  "imageComparison": [
+    {
+      "name": "run16.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 6,
+      "lengths": [
+        316416,
+        316416
+      ]
+    },
+    {
+      "name": "ntsrv.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 4,
+      "lengths": [
+        398848,
+        398848
+      ]
+    },
+    {
+      "name": "ntcon.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 6,
+      "lengths": [
+        343040,
+        343040
+      ]
+    },
+    {
+      "name": "ntvdm.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 4,
+      "lengths": [
+        2100736,
+        2100736
+      ]
+    },
+    {
+      "name": "ntvwm.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 4,
+      "lengths": [
+        340480,
+        340480
+      ]
+    },
+    {
+      "name": "ntmon.exe",
+      "result": "link-timestamp-only",
+      "diffBytes": 6,
+      "lengths": [
+        167936,
+        167936
+      ]
+    },
+    {
+      "name": "WOW32.DLL",
+      "result": "link-timestamp-only",
+      "diffBytes": 4,
+      "lengths": [
+        712192,
+        712192
+      ]
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "result": "identical",
+      "diffBytes": 0,
+      "lengths": [
+        206848,
+        206848
+      ]
+    },
+    {
+      "name": "nthook32.dll",
+      "result": "identical",
+      "diffBytes": 0,
+      "lengths": [
+        221184,
+        221184
+      ]
+    },
+    {
+      "name": "nthook64.dll",
+      "result": "link-timestamp-only",
+      "diffBytes": 6,
+      "lengths": [
+        270848,
+        270848
+      ]
+    }
+  ]
+}

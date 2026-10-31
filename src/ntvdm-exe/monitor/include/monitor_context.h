@@ -35,9 +35,7 @@ extern ULONG mvdm_monitor_ntvdm_state;
 /* The historical low-address state macro is unavailable outside the NT4
  * monitor.  This process-local value has the same source-facing scalar form
  * and shares the one-worker lifetime of the original VDM TIB. */
-#ifdef pNtVDMState
 #undef pNtVDMState
-#endif
 #define pNtVDMState (&mvdm_monitor_ntvdm_state)
 
 int mvdm_monitor_bind_current_thread(void);

@@ -48,9 +48,7 @@ LONG WINAPI wow_default_CsSendMessage(HWND, UINT, WPARAM, LPARAM,
 #define ahbrSystem wow_edit_system_brushes
 #define ghbrGray wow_edit_gray_brush
 #define SetTaskmanWindow wow_default_ensure_shell_message
-#ifdef CsSendMessage
 #undef CsSendMessage
-#endif
 #define CsSendMessage wow_default_CsSendMessage
 #define SendMessageWorker wow_window_client_send_message
 #define SendMessageW wow_native_SendMessageW

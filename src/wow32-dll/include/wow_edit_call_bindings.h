@@ -128,18 +128,12 @@ C_ASSERT(SHOW_OPENWINDOW == SW_SHOWNORMAL);
 #define NtUserAlterWindowStyle wow_edit_alter_window_style
 /* INITCONTROLLOOKASIDE's failure path is in usercli.h, not the .c callers. */
 #define NtUserDestroyWindow wow_native_DestroyWindow
-#ifdef CsSendMessage
 #undef CsSendMessage
-#endif
 #define CsSendMessage wow_edit_CsSendMessage
 /* The seven original EDIT units use these only for ECGetControlBrush's
  * equality comparison. Do not expose this as a general THREADINFO provider. */
-#ifdef PtiCurrent
 #undef PtiCurrent
-#endif
-#ifdef GETPTI
 #undef GETPTI
-#endif
 #define PtiCurrent() GetCurrentThreadId()
 #define GETPTI(window) wow_edit_window_thread_id(window)
 #endif
