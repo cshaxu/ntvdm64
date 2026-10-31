@@ -1,0 +1,6 @@
+DpmiSwIntHandler build/.ninja/msvc-x86-release/worker/obj/dpmi/dpmiint.obj 465 9e9b757283ea62777e8eb1436c55f5986e77f9eb61ba7d09ecfd8a9369dbccb5
+DpmiSwIntHandler build/t473-s11/swint-null-candidate/dpmiint.obj 465 9e9b757283ea62777e8eb1436c55f5986e77f9eb61ba7d09ecfd8a9369dbccb5
+DpmiSwIntHandler identical=yes; relocation values unresolved
+BuildStackFrameWithWidth build/.ninja/msvc-x86-release/worker/obj/dpmi/dpmiint.obj 276 da8fc70a32dbfab3e675b3adfbd85c476c7cc56a420ff5c14e1c95fba23f854c
+BuildStackFrameWithWidth build/t473-s11/swint-null-candidate/dpmiint.obj 276 da8fc70a32dbfab3e675b3adfbd85c476c7cc56a420ff5c14e1c95fba23f854c
+BuildStackFrameWithWidth identical=yes; relocation values unresolved

@@ -1,0 +1,2 @@
+null_mapping host_fault=1 handled=1 sp=200 cs=27 ip=1234 flags=202
+line 149: !host_fault && !handled && sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x302

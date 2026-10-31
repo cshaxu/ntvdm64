@@ -41,6 +41,11 @@ Comments:
 #include <dpmiint.h>
 #include <intapi.h>
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
+#if defined(CPU_40_STYLE)
+/* Existing CCPU c_bsic.h entry, using its IU16/IU32 Windows ABI. Including
+ * the CPU header here would redefine the DPMI layer's BOOL spelling. */
+extern BOOL __cdecl selector_outside_GDT_LDT(USHORT Selector, ULONG *Address);
+#endif
 
 
 VOID
@@ -1305,6 +1310,16 @@ Notes:
 
     *pNewSP = NewSP;
     VdmStackPointer = Sim32GetVDMPointer(((ULONG)SegSs)<<16, 1, TRUE);
+    #if defined(CPU_40_STYLE)
+    /* SIM32 can also return NULL for video scratch allocation failure. Only
+     * take the native monitor's selector-failure path when the existing CPU
+     * descriptor owner confirms that the selector cannot be resolved. */
+    if (NativePushInt && VdmStackPointer == NULL) {
+        ULONG StackAddress;
+        if (selector_outside_GDT_LDT(SegSs, &StackAddress))
+            return FALSE;
+    }
+    #endif
     VdmStackPointer += VdmSp;
     *pVdmStackPointer = VdmStackPointer;
     return(TRUE);

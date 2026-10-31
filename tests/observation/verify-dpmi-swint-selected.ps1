@@ -33,6 +33,12 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HAND
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2')) {
     throw 'Selected DPMI stack-limit fixture failed'
 }
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_NULL_MAPPING_OK fallback=1 state=unchanged')) {
+    throw 'Selected DPMI null-mapping fixture failed'
+}
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved')) {
+    throw 'Selected DPMI non-selector null-mapping fixture failed'
+}
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full')) {
     throw 'Selected DPMI fault-return fixture failed'
 }

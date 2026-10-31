@@ -42,6 +42,15 @@ The candidate's independent [C/H inventory check](s11-swint-limit-evidence/mirro
 found 1,794 listed paths, no unlisted differences or stale estimates, and no
 recorded C/H differences classified other than partial. Its 278 role-pending,
 195 guest-target and 72 tool/scaffold entries still need scoped disposition.
+The subsequent pending NULL-alias guard retains 206 difference rows, 205
+estimates and 98.11% for `dpmiint.c`; the refreshed CSV SHA-256 is
+`F149B5029C95BA94DDB486476D6318BD553DF98767F49AED945262FB3B88FCB1`.
+After narrowing the NULL guard to out-of-table selectors, the refreshed
+CSV SHA-256 is `65FA947F980EB38043480A095364E4CAA7FC99B708CDBA1EA90E12E22C73D580`;
+counts and the `dpmiint.c` textual estimate remain unchanged.
+After eliminating a redundant null-selector branch, the candidate CSV hash
+is `C900FD4D6DF12D5B7ED892604F5AC7E6FF65733421F020B6B41A8F285D07CA61`;
+this remains a source-text estimate, not runtime coverage.
 
 The frozen S10 host C/H ledger classified every one of its 202 recorded
 mirror-difference rows as partial. Rechecking the current worktree against

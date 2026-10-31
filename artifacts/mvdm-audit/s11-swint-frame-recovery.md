@@ -111,3 +111,56 @@ package and two differed in hash from the just-built outputs. That package
 is retained as a preliminary result, not the latest-build delivery. A new
 package is sealed from all ten actual current build outputs, with each input
 hash checked; its full and product tests must pass separately.
+
+## Candidate: rejected SIM32 stack mapping
+
+The CPU40 SIM32 adapter returns NULL when its selected descriptor walker
+rejects a selector. The software-interrupt stack helper formerly added SP to
+that NULL alias, cleared TF, and wrote a frame; a controlled selected-source
+fixture caught a host access violation and observed changed flags. NT4
+`SsToLinear` instead returns failure when its selector lookup fails. The
+candidate checks the alias before changing flags or writing a frame and
+returns unhandled to the existing CPU interrupt path. Identical fixture
+inputs report `host_fault=0`, `handled=0` and unchanged registers and flags;
+see [baseline](s11-swint-null-evidence/baseline-stderr.txt) and
+[candidate](s11-swint-null-evidence/candidate-stderr.txt).
+
+This is a controlled NULL-return seam, not a live stale-selector witness.
+It does not establish that SIM32's NULL result covers every NT4 selector
+failure, resolve nonlocal descriptor-read faults, or unify the source and
+projected LDT identities. Other stack-frame callers retain their prior path.
+
+The first NULL guard is not eligible for publication as written: source
+review found that `GetVideoMemory` can also return NULL when allocation of
+its video scratch buffer fails. Treating every NULL as an invalid selector
+would conflate distinct errors and change the existing failure path. The
+first candidate passed Full, but its results do not certify the narrower
+candidate. The latter calls the original CCPU `selector_outside_GDT_LDT`
+only after a NULL alias and returns unhandled only for a null or out-of-table
+selector. For a selector still in the table it retains the old failure path,
+rather than claiming the NULL was caused by the selector. The controlled
+fixture passes both cases; it stubs the descriptor-owner result, and does not
+prove concurrent table mutation, live selector failure or complete fault
+delivery. A direct CCPU declaration is used because including `insignia.h`
+in the DPMI translation unit redefines its `BOOL` and caused new type
+warnings; the declaration's 16-bit selector and 32-bit address types were
+checked against the original CCPU declarations. The production link map and
+object relocation identify the original CCPU provider:
+[symbols](s11-swint-null-evidence/narrow-production-symbols.txt).
+The narrower ten-component package passed [Full](s11-swint-null-evidence/narrow-full-timings.json),
+[game](s11-swint-null-evidence/narrow-game-runs.json),
+[Win3.1](s11-swint-null-evidence/narrow-win31-matrix.json) and
+[synthetic mouse](s11-swint-null-evidence/narrow-mouse.txt) checks; all 86
+monitored guest binaries remained unchanged in both trees. These results do
+not prove live selector failure, concurrent table mutation or physical input.
+Publication is pending.
+
+The interrupt-gate flag boundary is a separate unresolved group: NT4
+`PushInt` clears the shared virtual interrupt bit for interrupt gates, while
+CPU40's `setFLAGS` changes IF only when CPL is no greater than IOPL. CPU40's
+normal interrupt entry uses a direct IF update, and `IRET` returns through
+the privilege-sensitive flag setter. DOSX chooses interrupt gates for real
+vectors in `dxfunc.asm`, while `InitialiseDosEmulation` selects the software
+CPU's FCLI/FSTI fallback. A one-sided IF clear without tracing the return and
+shared-flag lifecycle could leave interrupts disabled; the null-alias guard
+does not attempt that change or prove gate equivalence.

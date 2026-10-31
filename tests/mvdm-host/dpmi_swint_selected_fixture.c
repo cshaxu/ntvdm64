@@ -15,6 +15,7 @@ static BYTE memory[131072]; ULONG IntelBase=(ULONG)(ULONG_PTR)memory;
 static USHORT ss=16,cs=0x20;
 static ULONG sp=0x100,ip=0x30;
 static ULONG flags=0x4321,msw,mappings,targets,dispatches,iret_reports;
+static BOOL mapping_unavailable,selector_resolves;
 USHORT CurrentAppFlags, DosxRmCodeSelector, LockedPMStackSel, LockedPMStackCount;
 ULONG PMLockOrigEIP,PMLockOrigSS,PMLockOrigESP,DosxFaultHandlerIret,DosxFaultHandlerIretd;
 ULONG DosxIntHandlerIret,DosxIntHandlerIretd,Cpu40PmStackInfoAddress,Cpu40LdtShadowAddress,DosxIret,DosxIretd;
@@ -45,7 +46,9 @@ void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
 LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;abort();}
-void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return memory;}
+void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
+BOOL selector_outside_GDT_LDT(USHORT selector,ULONG *address)
+{*address=0x1000;return (selector & ~3u)==0 || !selector_resolves;}
 void mvdm_softpc_report_dpmi_swint(ULONG a,USHORT b,USHORT c,USHORT d,USHORT e,ULONG f)
 {(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;}
 void mvdm_softpc_report_dpmi_swint_target(ULONG a,USHORT b,ULONG c,USHORT d)
@@ -134,6 +137,42 @@ int main(void){
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x1100c);
   descriptors[2].HighWord.Bits.Granularity=0;
   puts("DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2");
+  /* A SIM32 selector mapping failure must not become a host access fault. */
+  {
+    BOOL handled=TRUE, host_fault=FALSE;
+    descriptors[2].LimitLow=0xffff;
+    ss=0x17;cs=0x27;sp=0x200;ip=0x1234;flags=0x302;
+    mapping_unavailable=TRUE;
+    __try { handled=DpmiSwIntHandler(0x31); }
+    __except(EXCEPTION_EXECUTE_HANDLER) { host_fault=TRUE; }
+    mapping_unavailable=FALSE;
+    fprintf(stderr,"null_mapping host_fault=%d handled=%d sp=%lx cs=%x ip=%lx flags=%lx\n",
+            host_fault,handled,sp,cs,ip,flags);
+    CHECK(!host_fault && !handled && sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x302);
+  }
+  puts("DPMI_SWINT_NULL_MAPPING_OK fallback=1 state=unchanged");
+  {
+    BOOL host_fault=FALSE,handled=TRUE;
+    descriptors[0].LimitLow=0xffff;
+    ss=0;cs=0x27;sp=0x200;ip=0x1234;flags=0x302;
+    mapping_unavailable=TRUE;selector_resolves=TRUE;
+    __try { handled=DpmiSwIntHandler(0x31); }
+    __except(EXCEPTION_EXECUTE_HANDLER) { host_fault=TRUE; }
+    mapping_unavailable=FALSE;selector_resolves=FALSE;
+    CHECK(!host_fault && !handled && sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x302);
+  }
+  /* A resolvable selector and NULL alias may instead be allocation failure;
+   * retain the existing host-failure path instead of reporting a bad selector. */
+  {
+    BOOL host_fault=FALSE;
+    ss=0x17;cs=0x27;sp=0x200;ip=0x1234;flags=0x302;
+    mapping_unavailable=TRUE;selector_resolves=TRUE;
+    __try { (void)DpmiSwIntHandler(0x31); }
+    __except(EXCEPTION_EXECUTE_HANDLER) { host_fault=TRUE; }
+    mapping_unavailable=FALSE;selector_resolves=FALSE;
+    CHECK(host_fault);
+  }
+  puts("DPMI_SWINT_NONSELECTOR_NULL_OK prior_failure=preserved");
   /* Real selected fault-return body, with controlled register and memory
    * boundaries. Different stack descriptor sizes select SP versus ESP. */
   for (mode=0;mode<2;++mode) for (depth=1;depth<=2;++depth) {

@@ -1,0 +1,1 @@
+null_mapping host_fault=0 handled=0 sp=200 cs=27 ip=1234 flags=302

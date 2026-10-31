@@ -1,0 +1,101 @@
+[
+  {
+    "name": "x86-worker",
+    "pid": 12408,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\run-ninja-parallel.cmd",
+    "arguments": [
+      "ntvdm.exe",
+      "VDMREDIR.dll",
+      "nthook32.dll"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+    "startUtc": "2026-10-31T06:59:49.4163755Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T06:59:58.9436713Z"
+  },
+  {
+    "name": "x86-wow32",
+    "pid": 37984,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+    "arguments": [
+      "ninja",
+      "wow32.dll"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+    "startUtc": "2026-10-31T06:59:58.9947689Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:06.1663801Z"
+  },
+  {
+    "name": "x64-launcher",
+    "pid": 33728,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\launcher\\run-ninja.cmd",
+    "arguments": [
+      "run16.exe"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\launcher",
+    "startUtc": "2026-10-31T07:00:06.2145364Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:12.4189978Z"
+  },
+  {
+    "name": "x64-service",
+    "pid": 8016,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\\run-ninja.cmd",
+    "arguments": [
+      "ntsrv.exe"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service",
+    "startUtc": "2026-10-31T07:00:12.4579643Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:17.8933785Z"
+  },
+  {
+    "name": "x64-frontend",
+    "pid": 24088,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend\\run-ninja.cmd",
+    "arguments": [
+      "ntcon.exe"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend",
+    "startUtc": "2026-10-31T07:00:17.9300235Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:22.7400585Z"
+  },
+  {
+    "name": "x64-worker",
+    "pid": 15732,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker\\run-ninja.cmd",
+    "arguments": [
+      "ntvwm.exe"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker",
+    "startUtc": "2026-10-31T07:00:22.7739962Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:27.6801541Z"
+  },
+  {
+    "name": "x64-monitor",
+    "pid": 25392,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\monitor\\run-ninja.cmd",
+    "arguments": [
+      "ntmon.exe"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\monitor",
+    "startUtc": "2026-10-31T07:00:27.7174110Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:33.1108611Z"
+  },
+  {
+    "name": "x64-hook",
+    "pid": 16136,
+    "command": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\hook\\run-ninja.cmd",
+    "arguments": [
+      "nthook64.dll"
+    ],
+    "cwd": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\hook",
+    "startUtc": "2026-10-31T07:00:33.1501959Z",
+    "exitCode": 0,
+    "endUtc": "2026-10-31T07:00:40.4025116Z"
+  }
+]
