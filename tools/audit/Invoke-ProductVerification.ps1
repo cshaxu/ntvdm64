@@ -6,6 +6,7 @@ param(
     [Parameter(Mandatory)][string]$LogRoot,
     [ValidateSet('Product','Control','Full')][string]$Suite='Full',
     [string]$GuestFixture,
+    [string]$Dos4gwFixtureRoot,
     [string]$WindowObserver,
     [string]$TerminalObserver,
     [string]$NativeHook64,
@@ -317,6 +318,11 @@ try {
             Invoke-Gate 'retirement-wiring' {& "$repo/tests/observation/verify-broker-retirement.ps1" -Observer $observerPath -PackageRoot $runtime -ProcessPackageRoot $runtime -LogPrefix retirement -LogRoot $log -FullDeadlines:$FullDeadlines}
         }
         Invoke-Gate 'nested-window-handoff' {& "$repo/tests/observation/verify-broker-io-handoff.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -ReportPrefix "$log/handoff" -Case nested-window -WindowOwnedConsole:$WindowOwnedConsole}
+        if($Dos4gwFixtureRoot) {
+            Invoke-Gate 'dos4gw-nesticle' {& "$repo/tests/observation/verify-dos4gw-nesticle.ps1" -RuntimeRoot $sourceRuntime -Observer $observerPath -FixtureRoot $Dos4gwFixtureRoot -ReportRoot "$log/dos4gw-nesticle"}
+        } else {
+            Write-Output 'SKIP dos4gw-nesticle: supply -Dos4gwFixtureRoot with the verified external fixtures'
+        }
     }
     foreach($row in $manifest){if((Get-IsolatedFileSha256 (Join-Path $runtimeBinary $row.Name)) -ne $row.Sha256){throw 'Runtime identity changed during verification'}}
     "PASS $Suite selected gates; identical $($packageNames.Count)-file package"

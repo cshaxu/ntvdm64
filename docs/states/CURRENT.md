@@ -13,6 +13,8 @@ S11 closed its owner-narrowed non-MVDM compilation-condition audit and
 cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
 Unfinished original foundation and later recovery work is transferred to the
 first queued recovery proposal. S12 owns NTCON input-source handoff.
+The DOS4GW/NESticle integration case and its unresolved environment-sensitive
+startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
 
 The CPU40 monitor and TLB boundary are in a
 tested partial baseline. Full (16 gates), 93 CCPU cases,

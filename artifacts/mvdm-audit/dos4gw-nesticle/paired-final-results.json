@@ -1,0 +1,12 @@
+[
+  {
+    "passed": false,
+    "mode": "inherited",
+    "error": "A visible error or modal dialog remains on the test desktop"
+  },
+  {
+    "passed": true,
+    "mode": "minimal",
+    "error": ""
+  }
+]

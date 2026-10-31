@@ -1,0 +1,19 @@
+[
+  {
+    "passed": true,
+    "padding": 0
+  },
+  {
+    "passed": true,
+    "padding": 1024
+  },
+  {
+    "passed": true,
+    "padding": 2048
+  },
+  {
+    "passed": false,
+    "padding": 4096,
+    "error": "NESticle did not remain running with a visible graphics window (observer exit 0)"
+  }
+]
