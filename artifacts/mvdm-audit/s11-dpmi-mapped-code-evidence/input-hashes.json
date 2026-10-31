@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/mvdm/dpmi32/dpmiint.c",
+    "sha256": "8D07F9B0F614F48748BF914A93EA4629C6714FA4172D5B08C65FCDFAC3278911"
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/src/sim32.c",
+    "sha256": "ADC9DD77923497F8947C41FEA2CD706CEE8A9E0B02A121E3C9DD38F7A444D57F"
+  },
+  {
+    "path": "tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+    "sha256": "6FCA3E0C6BF5FEA6062709BE9FD6DFC737A4E1098E76FCC5D9012DD870C99301"
+  },
+  {
+    "path": "tests/mvdm-host/dpmi_swint_selected_fixture.c",
+    "sha256": "B97553E9255B5226BDB47311D64FC52BA71876CF065BE682759009F6E2FDD2E0"
+  },
+  {
+    "path": "tests/observation/verify-ccpu-monitor-boundary.ps1",
+    "sha256": "7BE71E6B6F36DCEC2D2B9C09F77C312FE6C7964CC4F7F28C5FC5F9C00AC593C1"
+  }
+]

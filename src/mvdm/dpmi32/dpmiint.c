@@ -1508,6 +1508,38 @@ Return Value:
 }
 
 #ifndef i386
+#if defined(CPU_40_STYLE) && defined(CCPU)
+/* DIVERGENCE(MVDM-HOST-DIV-488): SIM32 maps the selector base, not an entire linear address range.  A
+ * subsequent guest code page can therefore have an unrelated host alias.
+ * Keep the existing SIM32 fallback for cases this non-faulting lookup cannot
+ * resolve; exception delivery for those cases remains a separate boundary. */
+static BOOL
+DpmiMappedCodeByte(ULONG Base, ULONG Offset, PUCHAR Value)
+{
+    extern unsigned long c_getCR0(void), c_sas_memory_size(void);
+    extern int c_sas_memory_type(unsigned long);
+    extern int xtrn2phy(unsigned long, unsigned char, unsigned long *);
+    extern unsigned char *c_GetPhyAdd(unsigned long);
+    ULONG physical = Base + Offset;
+    int type;
+
+    /* SIM32 owns a separate scratch alias for linear video memory. */
+    if ((Base >= 0xa0000UL && Base <= 0xbffffUL) ||
+        (physical >= 0xa0000UL && physical <= 0xbffffUL))
+        return FALSE;
+
+    if ((c_getCR0() & 0x80000000UL) &&
+        !xtrn2phy(physical, 0, &physical))
+        return FALSE;
+    if (physical >= c_sas_memory_size())
+        return FALSE;
+    type = c_sas_memory_type(physical);
+    if (type != 0 && type != 2) /* SAS_RAM or SAS_ROM */
+        return FALSE;
+    *Value = *c_GetPhyAdd(physical);
+    return TRUE;
+}
+#endif
 BOOL
 DpmiEmulateInstruction(
     VOID
@@ -1540,10 +1572,20 @@ Return Value:
 
 #if defined(CPU_40_STYLE)
     PLDT_ENTRY DescriptorTable;
+#if defined(CCPU)
+    ULONG CodeBase, CodeOffset;
+    BOOL MappedCode;
+    UCHAR MappedOpcode, Operands[2];
+    extern UCHAR *__cdecl Sim32pGetVDMPointerWithLinear(ULONG, UCHAR, ULONG *);
+#endif
 #endif
 
     SegCS = getCS();
+#if defined(CPU_40_STYLE) && defined(CCPU)
+    pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
+#else
     pCode = Sim32GetVDMPointer(SegCS<<16, 1, TRUE);
+#endif
 
     /* The original x86 monitor always exposed an alias for an active
      * protected-mode selector.  CPU40's checked SIM32 bridge can reject a
@@ -1564,6 +1606,10 @@ Return Value:
         return FALSE;
     DescriptorTable = (PLDT_ENTRY)(IntelBase + Cpu40LdtShadowAddress);
     CodeSegmentIsBig = DescriptorTable[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
+#if defined(CCPU)
+    CodeOffset = CodeSegmentIsBig ? getEIP() : getIP();
+    MappedCode = TRUE;
+#endif
     if (CodeSegmentIsBig) {
 #else
     CodeSegmentIsBig = Ldt[(SegCS & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big ? 1u : 0u;
@@ -1574,12 +1620,42 @@ Return Value:
         pCode += getIP();
     }
 
-    Opcode = *pCode++;
+#if defined(CPU_40_STYLE) && defined(CCPU)
+DecodeInstruction:
+    if (MappedCode) {
+        if (DpmiMappedCodeByte(CodeBase, CodeOffset, &MappedOpcode))
+            Opcode = MappedOpcode;
+        else {
+            MappedCode = FALSE;
+            Opcode = *pCode;
+        }
+    } else
+#endif
+        Opcode = *pCode;
+    pCode++;
     switch (Opcode) {
         case 0xf:
             if (!CheckEIP(1)) {
                 break;
             }
+#if defined(CPU_40_STYLE) && defined(CCPU)
+            if (MappedCode) {
+                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &Operands[0])) {
+                    MappedCode = FALSE;
+                    --pCode;
+                    goto DecodeInstruction;
+                }
+                if (Operands[0] != 0x20 && Operands[0] != 0x22)
+                    break;
+                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 2, &Operands[1])) {
+                    MappedCode = FALSE;
+                    --pCode;
+                    goto DecodeInstruction;
+                }
+                bReturn = DpmiOp0f(Operands);
+                break;
+            }
+#endif
             bReturn = DpmiOp0f(pCode);
             break;
 
@@ -1593,6 +1669,16 @@ Return Value:
             if (!CheckEIP(2)) {
                 break;
             }
+#if defined(CPU_40_STYLE) && defined(CCPU)
+            if (SegCS == DosxRmCodeSelector && MappedCode) {
+                if (!DpmiMappedCodeByte(CodeBase, CodeOffset + 1, &MappedOpcode)) {
+                    MappedCode = FALSE;
+                    --pCode;
+                    goto DecodeInstruction;
+                }
+                pCode = &MappedOpcode;
+            }
+#endif
             //
             // Look for code in dxutil.asm EnterProtectedMode
             //

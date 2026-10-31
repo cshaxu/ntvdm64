@@ -149,7 +149,9 @@ BOOL SetVideoMemory(ULONG iaddr)
  *      WARNING: This routine returns a pointer into M, and
  *               WILL NOT work for backward M.
  */
-UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
+/* DIVERGENCE(MVDM-HOST-DIV-488): let the CPU40 DPMI decoder use the same
+ * numeric address as its SIM32 alias without walking the descriptor twice. */
+UCHAR *Sim32pGetVDMPointerWithLinear(ULONG addr, UCHAR pm, ULONG *linear)
 {
         sys_addr iaddr;
 
@@ -157,6 +159,7 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
 	    return(NULL);
 
         convert_addr (iaddr, addr, pm, NULL);
+        if (linear) *linear = (ULONG)iaddr;
 //STF - need sas_wrap_mask with PE....iaddr &= Sas_wrap_mask;
 
         if (IsVideoMemory(iaddr)) {
@@ -164,6 +167,11 @@ UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
             }
 
         return (NtGetPtrToLinAddrByte(iaddr));
+}
+
+UCHAR *Sim32pGetVDMPointer(ULONG addr, UCHAR pm)
+{
+        return Sim32pGetVDMPointerWithLinear(addr, pm, NULL);
 }
 
 /*

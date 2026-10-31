@@ -16,6 +16,14 @@ extern void __cdecl DpmiFaultHandlerIret32(void);
 extern void __cdecl DpmiIntHandlerIret32(void);
 static LDT_ENTRY descriptors[4]; LDT_ENTRY *Ldt=descriptors;
 static BYTE memory[131072]; ULONG IntelBase=(ULONG)(ULONG_PTR)memory;
+/* This selected-object fixture has no CCPU page tables; retain its existing
+ * SIM32 seam. Real mapped instruction fetch is covered by the CCPU fixture. */
+unsigned long c_getCR0(void) { return 0; }
+unsigned long c_sas_memory_size(void) { return sizeof(memory); }
+int c_sas_memory_type(unsigned long p) { (void)p; return 0; }
+int xtrn2phy(unsigned long l, unsigned char a, unsigned long *p)
+{ (void)a; *p=l; return 1; }
+unsigned char *c_GetPhyAdd(unsigned long p) { return memory+p; }
 static USHORT ss=16,cs=0x20;
 static ULONG sp=0x100,ip=0x30;
 static ULONG flags=0x4321,msw,mock_cr0,mappings,targets,dispatches,iret_reports;
@@ -73,6 +81,8 @@ void spr_write_word(ULONG address,USHORT value){++v86_writes; *(USHORT *)(memory
 void host_cpu40_set_virtual_if(BOOL enabled)
 {if(enabled) *(ULONG *)(memory+0x714)|=0x200; else *(ULONG *)(memory+0x714)&=~0x200u;}
 void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
+void *Sim32pGetVDMPointerWithLinear(ULONG address, UCHAR mode, ULONG *linear)
+{ *linear=sizeof(memory); return Sim32pGetVDMPointer(address,mode); }
 BOOL selector_outside_GDT_LDT(USHORT selector,ULONG *address)
 {*address=0x1000;return (selector & ~3u)==0 || !selector_resolves;}
 void mvdm_softpc_report_dpmi_swint(ULONG a,USHORT b,USHORT c,USHORT d,USHORT e,ULONG f)

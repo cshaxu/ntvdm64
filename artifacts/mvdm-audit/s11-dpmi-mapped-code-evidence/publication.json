@@ -1,0 +1,10 @@
+{
+  "count": 20,
+  "utc": "2026-10-31T11:08:20.0230346Z",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/dpmi-remap-package4",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ]
+}

@@ -674,12 +674,17 @@ static int monitor_prefix_length(void) {
 static int dpmi_remapped_code_page(void) {
     unsigned char ldt[40]={0}; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
     unsigned j, mode=test_case>=99 ? test_case-6 : test_case>=96 ? test_case-3 : test_case; BOOL handled;
+    ULONG expected_cr0;
     BOOL negative=(test_case>=104 && test_case<=106);
+    BOOL cr_case=(test_case>=150 && test_case<=153) || test_case==155 || test_case==156;
+    BOOL cr_write=(test_case==155 || test_case==156);
     extern ULONG Cpu40LdtShadowAddress, IntelBase;
     extern LDT_ENTRY *Ldt;
     extern USHORT DosxRmCodeSelector;
     extern BOOL DpmiEmulateInstruction(void), DpmiFaultHandler(ULONG, ULONG);
-    if (negative) mode=test_case==104 ? 93 : test_case==105 ? 94 : 95;
+    extern void c_setEAX(ULONG);
+    if (cr_case) { mode=(test_case & 1) ? 95 : 93; negative=test_case>=152 && !cr_write; }
+    if (negative && !cr_case) mode=test_case==104 ? 93 : test_case==105 ? 94 : 95;
     c_cpu_init(); *(uint32_t *)(ldt+0x18)=0x0000ffffu; *(uint32_t *)(ldt+0x1c)=0x0000fa0fu;
     *(uint32_t *)(ldt+0x20)=0x0000ffffu; *(uint32_t *)(ldt+0x24)=0x0000f300u;
     CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt)); ZeroMemory(c_GetPhyAdd(0x4000),0x2000);
@@ -693,19 +698,58 @@ static int dpmi_remapped_code_page(void) {
         else { *c_GetPhyAdd(mode==94 ? 0xf1000 : 0x6000)=0x90;
             if(mode==93) { *c_GetPhyAdd(0xf1000)=0x8e; *c_GetPhyAdd(0xf1001)=0xe0; } }
     }
+    if (cr_case) {
+        unsigned long first=mode==95 ? 0xf0fff : 0x6000;
+        unsigned long second=mode==95 ? 0x6000 : 0x6001;
+        unsigned long third=mode==95 ? 0x6001 : 0x6002;
+        *c_GetPhyAdd(first)=0x0f;
+        *c_GetPhyAdd(second)=negative ? 0x21 : (cr_write ? 0x22 : 0x20);
+        *c_GetPhyAdd(third)=0xc0;
+        if (mode==93) {
+            *c_GetPhyAdd(0xf1000)=0x0f; *c_GetPhyAdd(0xf1001)=0x20;
+            *c_GetPhyAdd(0xf1002)=0xc0;
+        } else { *c_GetPhyAdd(0xf1000)=0x20; *c_GetPhyAdd(0xf1001)=0xc0; }
+    }
     c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
     c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setIOPL(0); c_setEIP(mode==95 ? 0xfff : 0x1000);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
     Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
-    c_setCR3(0x4000); c_setPG(1);
-    if(test_case>=99 && !negative) {
+    c_setCR3(0x4000); c_setPG(1); expected_cr0=c_getCR0();
+    if(cr_write) c_setEAX(expected_cr0 ^ 4u);
+    if(test_case>=99 && !negative && !cr_case) {
         VdmInstallFaultHandler((void *)DpmiFaultHandler);
         handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
-    } else handled=test_case>=96 && !negative ? DpmiFaultHandler(13,0) : DpmiEmulateInstruction();
+    } else handled=test_case>=96 && !negative && !cr_case ? DpmiFaultHandler(13,0) : DpmiEmulateInstruction();
+    if(cr_write && c_getCR0()!=(expected_cr0 ^ 4u)) { c_setPG(0); return 0; }
     c_setPG(0);
     {char line[120];wsprintfA(line,"DPMI_REMAPPED_CODE handled=%d eip=%08lx\n",handled,c_getEIP());report(line);}
     if(negative) return !handled && c_getEIP()==(mode==95 ? 0xfff : 0x1000);
-    return handled && c_getEIP()==(mode==95 ? 0x1001 : 0x1002);
+    if(cr_case && !cr_write && c_getEAX()!=expected_cr0) return 0;
+    return handled && c_getEIP()==(mode==95 ? (cr_case ? 0x1002 : 0x1001) : (cr_case ? 0x1003 : 0x1002));
+}
+/* A missing second page must not combine the corrected first opcode with
+ * operands taken from the older contiguous SIM32 alias. */
+static int dpmi_remapped_decode_fallback(void) {
+    unsigned char ldt[40]={0}; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
+    unsigned j; BOOL handled;
+    extern ULONG Cpu40LdtShadowAddress, IntelBase;
+    extern LDT_ENTRY *Ldt;
+    extern USHORT DosxRmCodeSelector;
+    extern BOOL DpmiEmulateInstruction(void);
+    c_cpu_init(); *(uint32_t *)(ldt+0x18)=0x0000ffffu; *(uint32_t *)(ldt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(ldt+0x20)=0x0000ffffu; *(uint32_t *)(ldt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt)); ZeroMemory(c_GetPhyAdd(0x4000),0x2000);
+    *(ULONG *)c_GetPhyAdd(0x4000)=0x5007; for(j=0;j<512;j++) pte[j]=(j<<12)|7;
+    pte[0xf1]=0x6007; pte[0xf2]=0;
+    *c_GetPhyAdd(0x6fff)=0x0f; *c_GetPhyAdd(0xf1fff)=0x90;
+    *c_GetPhyAdd(0xf2000)=0x20; *c_GetPhyAdd(0xf2001)=0xc0;
+    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
+    c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setIOPL(0); c_setEIP(0x1fff);
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
+    Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
+    c_setCR3(0x4000); c_setPG(1); handled=DpmiEmulateInstruction(); c_setPG(0);
+    report(handled ? "DPMI_DECODE_FALLBACK mixed-path\n" : "DPMI_DECODE_FALLBACK original-path\n");
+    return !handled && c_getEIP()==0x1fff;
 }
 /* A changed descriptor selects a nonpresent decoder page after the CPU has
  * fetched the original #UD instruction through its cached CS descriptor. */
@@ -1262,6 +1306,8 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
+    else if(test_case==154) ok=dpmi_remapped_decode_fallback();
+    else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
     else if(test_case==146) ok=vdd_sas_unbound_control();
     else if(test_case==145) ok=v86_a20_word_ram_control();
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
@@ -1272,7 +1318,7 @@ int main(int argc, char **argv) {
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
-    else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106)) ok=dpmi_remapped_code_page();
+    else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106) || (test_case>=150 && test_case<=153)) ok=dpmi_remapped_code_page();
     else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
     else if(test_case==89) ok=monitor_wrapped_instruction_offset();
     else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();
