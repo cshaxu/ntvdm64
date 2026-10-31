@@ -1,0 +1,14 @@
+[
+  {
+    "path": "src/mvdm/softpc.new/base/ccpu386/c_main.c",
+    "sha256": "51D56132F76ED4479C3A9D5C962DC3FC7E9B888D62B65B0324AD130EA967BBFA"
+  },
+  {
+    "path": "tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+    "sha256": "4C4FE812F4E9930F28B4BCE8DF41845E864DA4D31EA0D854C895F246CF4958F5"
+  },
+  {
+    "path": "tests/observation/verify-ccpu-monitor-boundary.ps1",
+    "sha256": "5A626FA5A0E3449097DC6A8CCF982A4B395A7829848FFFC8E37D67B2B3CC0523"
+  }
+]

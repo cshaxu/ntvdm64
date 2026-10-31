@@ -861,6 +861,9 @@ IFN1(
       /* Prefix handling variables */
    IU8 repeat;		/* Repeat Prefix for current inst. */
    IU32 rep_count;		/* Repeat Count for string insts. */
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+   BOOL v86_int_unsafe_prefix;
+#endif
 
       /* General CPU variables */
    IU32 ip_phy_addr;		/* Used when setting up IP */
@@ -938,6 +941,9 @@ DO_INST:
    /* 'zero' all prefix byte indicators */
    segment_override = SEG_CLR;
    repeat = REP_CLR;
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+   v86_int_unsafe_prefix = FALSE;
+#endif
 
    /*
       Decode and Action instruction.
@@ -3634,10 +3640,11 @@ TYPEC4:
       {
       extern BOOL host_v86_software_int(IS32);
       IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
-      /* DIVERGENCE(MVDM-HOST-DIV-490): a single segment override does not
-       * change the 16-bit V86 INT frame. Other prefixes remain unhandled. */
-      if (!GET_VM() || (length != 2 &&
-          !(length == 3 && segment_override != SEG_CLR && GET_OPERAND_SIZE() == USE16)) ||
+      /* DIVERGENCE(MVDM-HOST-DIV-490): segment and address-size overrides
+       * do not alter the 16-bit INT frame. Do not take this path for LOCK,
+       * F1, REP, operand-size override, or an overlength instruction. */
+      if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
+          repeat != REP_CLR || GET_OPERAND_SIZE() != USE16 ||
           !host_v86_software_int((IS32)ops[0].sng))
 #endif
       INTx(ops[0].sng);
@@ -4133,10 +4140,16 @@ TYPEE8:
       break;
 
    case 0xf0:   /* T0 LOCK */
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+      v86_int_unsafe_prefix = TRUE;
+#endif
       CHECK_PREFIX_LENGTH();
       goto DECODE;   /* NB. Incorrect Emulation! */
 
    case 0xf1:
+#if defined(NTVDM) && defined(CPU_40_STYLE)
+      v86_int_unsafe_prefix = TRUE;
+#endif
       CHECK_PREFIX_LENGTH();
       goto DECODE;
 

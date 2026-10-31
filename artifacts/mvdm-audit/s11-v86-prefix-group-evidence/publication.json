@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-prefix-group-package",
+  "result": "pass",
+  "count": 20,
+  "utc": "2026-10-31T11:53:35.2012492Z"
+}
