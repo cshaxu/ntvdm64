@@ -2,8 +2,11 @@
 
 The owner reported that `O:\w31\patch\win386.cmd` enters Windows and freezes
 after about five seconds of mouse movement, a regression from earlier builds.
-The root cause is not established; neither the reported regression nor its
-repair is disproved by the isolated probe below.
+The earlier [V86 dispatch investigation](s11-win386-v86-mouse-regression.md)
+identified and fixed a reproducible synthetic-input stall caused by our new
+protected-instruction monitor accepting V86 faults. It is not established
+whether that reproducer covers every physical-input freeze; the isolated
+probe below does not prove that broader claim.
 
 On the published `1a1b76419` ten-component runtime, a private-desktop probe
 ran an isolated `O:\w31` copy with the same `SYSTEM.INI` and `MOUSE.DRV`

@@ -49,7 +49,7 @@ Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [E
 The current [ten-component release](../../artifacts/mvdm-audit/s11-swint-frame-recovery.md)
 also restores handler-defined DPMI software-interrupt frames. Full, game, Win3.1 and
 automated mouse witnesses passed; both destinations match. An earlier
-Window-17 input timeout and the [Win386 mouse freeze](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md) remain unlocated. S11 remains active; the
+Window-17 timeout remains unlocated. [Win386 mouse](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md): V86 fix tested; physical input unverified. S11 remains active; the
 [closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
 remaining boundaries.
 
