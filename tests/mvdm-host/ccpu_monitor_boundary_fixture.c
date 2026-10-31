@@ -1036,6 +1036,69 @@ static int v86_decoded_interrupt(void) {
     return ok;
 }
 
+/* NT4 handles one-byte INT3 and taken INTO as exceptions, unlike CD nn. */
+static int v86_trap_instruction(void) {
+    unsigned char code[]={0xcc,0xd6,0xfe};
+    const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    unsigned vector=test_case==157 ? 3 : 4;
+    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
+    BOOL taken=test_case!=159, ok; ULONG flags; char line[160];
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
+    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
+    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    flags=c_getEFLAGS(); if(vector==4 && taken) flags|=0x800; else flags&=~0x800u;
+    c_setEFLAGS(flags); if(vector==4) code[0]=0xce;
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
+    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
+    DpmiFaultHandlers[vector].cs=0; DpmiFaultHandlers[vector].flags=0;
+    CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+    CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
+    *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
+    test_irq=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
+    VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
+    ok=test_irq==0 && (taken ? (c_getCS()==0x300 && c_getSP()==0x7fa && c_getBX()==0xbeef &&
+       *(USHORT *)c_GetPhyAdd(0x27fa)==0x101 && *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
+       *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)flags) :
+       (c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0));
+    wsprintfA(line,"V86_TRAP_INSN case=%d pass=%d sw=%lu cs=%x sp=%x bx=%x\n",
+              test_case,ok,test_irq,c_getCS(),c_getSP(),c_getBX()); report(line);
+    return ok;
+}
+
+/* CD 03 and CD 04 remain software INT instructions, not the one-byte traps. */
+static BOOL v86_unadmitted_fault_probe(ULONG vector, ULONG error) {
+    (void)vector; (void)error; ++test_fault; return FALSE;
+}
+static int v86_explicit_software_int(void) {
+    unsigned vector=(test_case==160 || test_case==162 || test_case==164 || test_case==166) ? 3 : 4;
+    unsigned char code[]={0xcd,0,0xd6,0xfe};
+    BOOL ok; char line[100];
+    c_cpu_init(); c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
+    c_setIOPL(3); code[1]=(unsigned char)vector;
+    if(test_case==164 || test_case==165) c_setIOPL(0);
+    if(test_case>=162) {
+        code[0]=vector==3 ? 0xcc : 0xce; code[1]=0xd6; code[2]=0xfe;
+        if(vector==4) c_setEFLAGS(c_getEFLAGS() | 0x800u);
+    }
+    CopyMemory(c_GetPhyAdd(0x1100),code,sizeof(code));
+    if(test_case>=166) {
+        unsigned i; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
+        ZeroMemory(c_GetPhyAdd(0x4000),0x2000); *(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
+        for(i=0;i<512;i++) pte[i]=(i<<12)|7;
+        c_setCR3(0x4000); c_setPG(1);
+    }
+    test_irq=0; test_fault=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
+    if(test_case>=164) VdmInstallFaultHandler((void *)v86_unadmitted_fault_probe);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
+    ok=test_fault==0 && test_irq==vector && c_getCS()==0x100 && c_getSP()==0x800;
+    wsprintfA(line,"V86_EXPLICIT_SWINT case=%d pass=%d vector=%lu\n",test_case,ok,test_irq);
+    report(line); return ok;
+}
+
 static int v86_real_divide_fault(void) {
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     const unsigned char code[]={0xbb,0x00,0x00,0xf7,0xf3,0xd6,0xfe};
@@ -1306,6 +1369,8 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
+    else if(test_case>=157 && test_case<=159) ok=v86_trap_instruction();
+    else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();
     else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
     else if(test_case==146) ok=vdd_sas_unbound_control();

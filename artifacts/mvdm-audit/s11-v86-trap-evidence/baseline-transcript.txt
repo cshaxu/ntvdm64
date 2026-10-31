@@ -1,0 +1,3 @@
+case 157 exit 1 V86_TRAP_INSN case=157 pass=0 sw=3 cs=100 sp=800 bx=0
+case 158 exit 1 V86_TRAP_INSN case=158 pass=0 sw=4 cs=100 sp=800 bx=0
+case 159 exit 0 V86_TRAP_INSN case=159 pass=1 sw=0 cs=100 sp=800 bx=0
