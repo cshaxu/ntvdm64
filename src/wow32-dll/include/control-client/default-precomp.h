@@ -4,7 +4,7 @@
  * No EDIT context or native private USER layout belongs to this entry. */
 #include "wow_user_client_view_layout.h"
 #define WOW_ORIGINAL_CLIENT_HANDLES
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_CLIENT_HANDLES
 #include "wow_default_window_bindings.h"
 #include "wow_edit_lookaside_bindings.h"

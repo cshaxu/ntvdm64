@@ -24,7 +24,7 @@ and own only original source or minimal owner-local divergences.
 | Component | Owns | Must not own |
 | --- | --- | --- |
 | `run16` | public CLI `main.c`; discovery; original classifier invocation; BaseSrv startup/connection; suspended worker creation/registration; parent completion wait | BaseSrv DOS/WOW records, worker machine/session state, Console presentation, a new command parser |
-| `basesrv` | thin `main.c`; RPC endpoint/authentication/rundown; stream/receipt transfer; Console membership; broker liveness; transport assembly around `non-mvdm/host` `srvvdm.c` | original DOS/WOW record selection, queue policy, or a replacement of BaseSrv semantics |
+| `basesrv` | thin `main.c`; RPC endpoint/authentication/rundown; stream/receipt transfer; Console membership; broker liveness; transport assembly around `non-mvdm` `srvvdm.c` | original DOS/WOW record selection, queue policy, or a replacement of BaseSrv semantics |
 | `ntvdm` | original entry behind the thinnest process-local pre-init; worker lifecycle; guest-memory lease; thread binding; termination cleanup; SoftPC/CCPU and worker-local Console presentation | cross-process broker policy, launcher creation, global reusable session management |
 | `product-abi` / `product-package` | deliberately tiny shared product-version identity and package/media layout contract | generic utilities, state, process policy or a generic `common` component |
 
@@ -41,7 +41,7 @@ more than one executable only through that owner's narrow static library:
 
 | Kind | Final owner and use |
 | --- | --- |
-| Original OpenNT/MVDM algorithm | Its existing file in `mvdm` or `non-mvdm/host`; each consumer links the selected original-owner library. |
+| Original OpenNT/MVDM algorithm | Its existing file in `mvdm` or `non-mvdm`; each consumer links the selected original-owner library. |
 | BaseSrv protocol, client stubs and copied wire records | `basesrv`; `run16` and `ntvdm` may link its versioned client library, but cannot own a second protocol implementation. |
 | Process-local Win32 operation | The one executable whose process owns the HANDLE, Console, thread or lifetime: `run16`, `basesrv`, or `ntvdm`. |
 | Same-shaped unavailable historical host ABI needed by several owners | `compat`, only when its README names the original declaration, finite public-Win32/NTDLL binding and consumers. It is a host-ABI compatibility island, not a `common` utility layer. |
@@ -87,7 +87,7 @@ and parent wait behaviour.
 
 Move service entry, protocol contract, authenticated transport and BaseSrv
 bindings to `src/basesrv`; retain `srvvdm.c` as original record owner under
-`non-mvdm/host`. Prove connection/rundown, stream/receipt, Console membership,
+`non-mvdm`. Prove connection/rundown, stream/receipt, Console membership,
 protocol mismatch and broker-death behaviour without changing DOS/WOW policy.
 
 ### S4 — ntvdm worker-local reorganization

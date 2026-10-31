@@ -6,7 +6,7 @@ package and APP0.0.427/RPC38/I/O25. Other-session planning is preserved.
 
 ## Source audit and implementation
 
-Original `src/non-mvdm/host/base/win32/server/srvvdm.c` owns DOS records,
+Original `src/non-mvdm/base/win32/server/srvvdm.c` owns DOS records,
 completion events and exit codes. The original `GetNextVDMCommand`/
 `RETURN_ON_NO_COMMAND` result remains the DOS resume decision; the existing
 project seam in NTSRV `base_service.c` authorizes I/O only after that result.

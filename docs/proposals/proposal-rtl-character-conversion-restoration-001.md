@@ -15,7 +15,7 @@ and may not run concurrently with the active packet.
 
 Replace duplicated runtime algorithms with their original OpenNT owners and
 the smallest finite modern bindings. Original non-MVDM bodies remain under
-`non-mvdm/host` with original-relative paths; MVDM callers remain in
+`non-mvdm` with original-relative paths; MVDM callers remain in
 `mvdm-host`. Follow the [source policy](../etc/operations/policy/source-policy.md)
 and [architecture rules](../rules/ARCHITECTURE.md). Broker deployment, CLI
 changes, CPU instruction changes and complete WRITE recovery are non-goals.
@@ -44,7 +44,7 @@ S1 is deliberately research/design only.  It must not bulk-import RTL/USER
 directories or retain a local replacement because its name happens to match an
 original symbol.  It records the exact OpenNT revision/path, selected current
 caller and ABI/layout/failure contract for each proposed provider.  If a
-non-MVDM source body is directly composable, it remains under `non-mvdm/host` at
+non-MVDM source body is directly composable, it remains under `non-mvdm` at
 its original-relative path; otherwise S1 names the finite adapter ABI and why
 the original translation unit cannot compose.
 

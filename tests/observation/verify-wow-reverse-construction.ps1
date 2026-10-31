@@ -34,7 +34,7 @@ function Run($name,$file,$Arguments,$expected,$seconds){
  if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm/inc/wow.h','src/mvdm/wow32/walias.h','src/mvdm/wow32/wstruc.h','src/mvdm/wow32/wstruc.c','src/mvdm/wow32/wmsgem.c','src/mvdm/wow32/wmsglb.c','src/mvdm/wow32/wmsg16.c','src/non-mvdm/host/windows/core/ntuser/inc/user.h','src/non-mvdm/host/windows/core/ntuser/client/lboxrare.c','tests/observation/wow_reverse_construction_fixture.c','tests/observation/verify-wow-reverse-construction.ps1')
+ $paths=@('src/mvdm/inc/wow.h','src/mvdm/wow32/walias.h','src/mvdm/wow32/wstruc.h','src/mvdm/wow32/wstruc.c','src/mvdm/wow32/wmsgem.c','src/mvdm/wow32/wmsglb.c','src/mvdm/wow32/wmsg16.c','src/non-mvdm/windows/core/ntuser/inc/user.h','src/non-mvdm/windows/core/ntuser/client/lboxrare.c','tests/observation/wow_reverse_construction_fixture.c','tests/observation/verify-wow-reverse-construction.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
@@ -43,12 +43,12 @@ try{
   $types+=(Slice $alias 'typedef struct _DLGDATA' '#define MSG16NEEDSTHUNKING' 'original message/inline records')
   [IO.File]::WriteAllText("$dir/reverse_types.h",$types)
   $bodies=@((Slice $struct '#define STACKORHEAPALLOC' '#define PUTINTARRAY16' 'original stack-or-heap macros'))
-  $user=Read 'src/non-mvdm/host/windows/core/ntuser/inc/user.h' $old
+  $user=Read 'src/non-mvdm/windows/core/ntuser/inc/user.h' $old
   $bodies+=Slice $user '#define MultDiv' '#define XPixFromXDU' 'original dialog-unit arithmetic'
   $conversions=Read 'src/mvdm/wow32/wstruc.c' $old
   foreach($name in @('getintarray16','putintarray16')){$bodies+=Body $conversions $name}
   foreach($pair in @(@('wmsgem.c','ThunkEMMsg16','UnThunkEMMsg16'),@('wmsglb.c','ThunkLBMsg16','UnThunkLBMsg16'))){$source=Read "src/mvdm/wow32/$($pair[0])" $old;foreach($name in $pair[1..2]){$bodies+=Body $source $name}}
-  $native=Read 'src/non-mvdm/host/windows/core/ntuser/client/lboxrare.c' $old
+  $native=Read 'src/non-mvdm/windows/core/ntuser/client/lboxrare.c' $old
   $bodies+=Body $native 'LBSetTabStops'
   $destruction=Slice $native '        if (pLBIV->iTabPixelPositions != NULL) {' '        Unlock(&pLBIV->spwnd);' 'original tab destruction'
   $bodies+='VOID DestroyTabs(PLBIV pLBIV){'+"`n"+$destruction+"`n}"

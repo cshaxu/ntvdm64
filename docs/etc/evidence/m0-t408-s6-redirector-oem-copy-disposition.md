@@ -3,7 +3,7 @@
 ## Result
 
 No replacement is required: the selected x86 graph already compiles the
-complete original `non-mvdm/host/netapi/netlib/copystr.c` together with its
+complete original `non-mvdm/ds/netapi/netlib/copystr.c` together with its
 original `allocstr.c` and `initoem.c` support.  `vrnetapi.c` continues to call
 the original `NetpCopyWStrToStr` for host-local bounded result buffers.
 

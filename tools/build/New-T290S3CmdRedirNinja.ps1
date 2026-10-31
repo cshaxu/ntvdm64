@@ -18,9 +18,9 @@ $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
     Set-Content -LiteralPath $environment -Encoding ascii
 $includes = @('src', 'src/compat/include',
     'src/ntvdm-exe/softpc/include',
-    'src/non-mvdm/host/public/sdk/inc',
-    'src/non-mvdm/abi/public/sdk/inc',
-    'src/non-mvdm/abi/public/internal/base/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/internal/base/inc',
     'src/mvdm-support/inc', 'src/mvdm/inc', 'src/mvdm/dos/command', 'src/ntvdm-exe/session',
     'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }

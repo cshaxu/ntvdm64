@@ -103,7 +103,7 @@ outputs and must not be deleted as an incidental cleanup.
 
 Original source owners already exist and remain unmodified:
 
-- non-mvdm/host/base/win32/client/vdm.c::BaseCheckVDM distinguishes a new Console
+- non-mvdm/base/win32/client/vdm.c::BaseCheckVDM distinguishes a new Console
   through bNewConsole and publishes a null-Console/session-id request.
 - mvdm/dos/command/cmdmisc.c::cmdGetNextCmd uses DosSessionId and the original
   PIF CloseOnExit rule to terminate an independent DOS session after its task.

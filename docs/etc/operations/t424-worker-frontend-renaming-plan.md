@@ -468,7 +468,7 @@ claim the later NTMON view or the separately inserted S10 race repair.
   observation, Job tracker, helper, scheduler or new executable.
 
 Source disposition of the owner's clarification: original `BaseSrvExitWOWTask`
-in non-mvdm/host/base/win32/server/srvvdm.c removes the matching WOWRecord, not the
+in non-mvdm/base/win32/server/srvvdm.c removes the matching WOWRecord, not the
 shared WOW process. Win16 remains hosted by WOW throughout execution; native
 GUI is an independent Windows process. Thus GUI startup releases only NTVWM
 request occupancy; its real GUI handle/management record remains owned by NTSRV

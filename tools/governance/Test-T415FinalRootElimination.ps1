@@ -10,7 +10,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 }
 $RepositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $openNt = 'O:\repos.external\OpenNT'
-$fontRoot = Join-Path $RepositoryRoot 'src/non-mvdm/host/base/win32/winnls/fontsup/system'
+$fontRoot = Join-Path $RepositoryRoot 'src/non-mvdm/base/win32/winnls/fontsup/system'
 $utilRoot = Join-Path $RepositoryRoot 'src/mvdm/v86/util'
 $carrier = 'src/ntvdm/monitor/source/monitor_printer.c'
 $formerCarrier = 'src/mvdm-host/kernel-vdm/v86/monitor/i386/monitor_printer.c'

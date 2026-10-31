@@ -56,7 +56,7 @@ LONG WINAPI wow_default_CsSendMessage(HWND, UINT, WPARAM, LPARAM,
 #define DefWindowProcWorker wow_default_window_proc
 #endif
 #if defined(WOW_ORIGINAL_DEFAULT_WINDOW) || defined(WOW_ORIGINAL_EDIT_CLIENT) || defined(WOW_ORIGINAL_DIALOG_CLIENT)
-#include "non-mvdm/host/windows/core/ntuser/rtl/userrtl.h"
+#include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
 #define FindNCHit wow_default_find_nc_hit
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_CLIENT

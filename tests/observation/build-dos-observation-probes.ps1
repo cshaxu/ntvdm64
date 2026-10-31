@@ -15,7 +15,7 @@ foreach($variant in @(
  if($LASTEXITCODE){throw "Guest witness assembly failed: $($variant.Name)"}
 }
 $wrapper=Join-Path $build 'build-pif.cmd'
-$command='@echo off'+"`r`n"+'call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul'+"`r`n"+'if errorlevel 1 exit /b %errorlevel%'+"`r`n"+'cl.exe /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\abi\public\internal\windows\inc" /Fo"'+$build+'\pif.obj" /Fe"'+$build+'\pif.exe" "'+$PSScriptRoot+'\dos_observation_pif.c"'+"`r`n"
+$command='@echo off'+"`r`n"+'call "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat" -arch=x64 -host_arch=x64 >nul'+"`r`n"+'if errorlevel 1 exit /b %errorlevel%'+"`r`n"+'cl.exe /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\public\internal\windows\inc" /Fo"'+$build+'\pif.obj" /Fe"'+$build+'\pif.exe" "'+$PSScriptRoot+'\dos_observation_pif.c"'+"`r`n"
 [IO.File]::WriteAllText($wrapper,$command,[Text.UTF8Encoding]::new($false))
 & $wrapper *> (Join-Path $build 'pif-build.log')
 if($LASTEXITCODE){throw 'Authored PIF builder failed'}

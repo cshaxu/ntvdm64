@@ -1,0 +1,52 @@
+[
+  {
+    "variant": "subset",
+    "source": "nt_timer.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "subset",
+    "source": "nt_eoi.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "subset",
+    "source": "cmdenv.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "subset",
+    "source": "xmsa20.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "subset",
+    "source": "environ.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "full",
+    "source": "nt_timer.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "full",
+    "source": "nt_eoi.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "full",
+    "source": "cmdenv.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "full",
+    "source": "xmsa20.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "full",
+    "source": "environ.c",
+    "exitCode": 2
+  }
+]

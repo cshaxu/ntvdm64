@@ -27,15 +27,15 @@ $environment = Join-Path $BuildRoot ("msvc-{0}.cmd" -f $Architecture)
     Set-Content -LiteralPath $environment -Encoding ascii
 $includeRoots = @(
     'src', 'src/ntvdm-exe/redir/include', 'src/vdmredir-dll/include', 'src/mvdm/inc', 'src/mvdm/vdmredir',
-    'src/mvdm/dos/command', 'src/non-mvdm/host/netapi/netlib',
+    'src/mvdm/dos/command', 'src/non-mvdm/ds/netapi/netlib',
     'src/mvdm/softpc.new/base/inc', 'src/mvdm/softpc.new/host/inc',
     'src/ntvdm-exe/softpc/include',
     'src/compat/include',
-    'src/non-mvdm/abi/public/internal/base/inc',
-    'src/non-mvdm/abi/public/internal/ds/inc',
-    'src/non-mvdm/host/public/sdk/inc',
-    'src/non-mvdm/abi/public/sdk/inc', 'src/non-mvdm/abi/public/ddk/inc',
-    'src/non-mvdm/abi/private/inc') | ForEach-Object {
+    'src/non-mvdm/public/internal/base/inc',
+    'src/non-mvdm/public/internal/ds/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/sdk/inc', 'src/non-mvdm/public/ddk/inc',
+    'src/non-mvdm/private/inc') | ForEach-Object {
         '/I "' + (Join-Path $root $_).Replace('\', '/') + '"'
     }
 $threadHeader = (Join-Path $root 'src/compat/include/thread_start_compat.h').Replace('\', '/')
@@ -63,7 +63,7 @@ build obj/vrdisp.obj: cc `$root/src/mvdm/vdmredir/vrdisp.c
 build obj/vrmisc.obj: cc `$root/src/mvdm/vdmredir/vrmisc.c
 build obj/vrmslot.obj: cc `$root/src/mvdm/vdmredir/vrmslot.c
 build obj/cmdredir.obj: cc `$root/src/mvdm/dos/command/cmdredir.c
-build obj/ntstatus.obj: cc `$root/src/non-mvdm/host/netapi/netlib/ntstatus.c
+build obj/ntstatus.obj: cc `$root/src/non-mvdm/ds/netapi/netlib/ntstatus.c
 build obj/async.obj: cc `$root/src/ntvdm-exe/redir/mvdm_redirector_async.c
 build obj/guest-copy.obj: cc `$root/src/vdmredir-dll/source/mvdm_redirector_guest_copy.c
 build obj/location.obj: cc `$root/src/ntvdm-exe/softpc/mvdm_guest_location.c

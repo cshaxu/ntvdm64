@@ -12,7 +12,7 @@ The project uses exactly ten production source components, organized into
 three responsibility strata:
 
 - **Original-source mirrors:** `bx-core`, `opennt-guest`, `opennt-bop`, and
-  `non-mvdm/host`.  Each preserves source identity where the original unit is
+  `non-mvdm`.  Each preserves source identity where the original unit is
   available.  Every necessary edit has a local `DIVERGENCE:` marker and an
   entry in that component's `README.md` exception register.
 - **Mechanical adapters:** `bx-mantle`, `adapter-bop`, `adapter-softpc`, and
@@ -325,8 +325,8 @@ The detailed decision and the required rebaseline procedure are in
 
 # Td closure — OpenNT-host package-root governance — 2026-08-27
 
-The owner clarified that `non-mvdm/host` is the canonical mirror root for all
+The owner clarified that `non-mvdm` is the canonical mirror root for all
 accepted non-MVDM OpenNT host packages, not only BaseSrv/BaseClient VDM. The
 directory and adapter rules now preserve per-package boundaries under
-`non-mvdm/host` and `adapter-opennt-host`; no new package was imported.
+`non-mvdm` and `adapter-opennt-host`; no new package was imported.
 

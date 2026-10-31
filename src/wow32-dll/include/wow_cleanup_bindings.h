@@ -55,7 +55,7 @@ void WINAPI wow_cleanup_set_class_procedure(wow_class_lookup_entry *, WNDPROC);
 
 #ifdef WOW_ORIGINAL_CLEANUP
 #define WOW_USER_OBJECT_FLAGS_ONLY
-#include "non-mvdm/host/windows/core/ntuser/kernel/userk.h"
+#include "non-mvdm/windows/core/ntuser/kernel/userk.h"
 #undef WOW_USER_OBJECT_FLAGS_ONLY
 typedef wow_cleanup_window *PWND;
 typedef wow_class_lookup_entry *PCLS, **PPCLS;

@@ -31,7 +31,7 @@ or convenient API may verify a completed package but cannot choose the next
 package or substitute a new provider for source-shaped recovery.  The finite
 external-boundary selection has closed: all 7,367 physical direct exits now
 have an adoption disposition.  It selected only the exact
-`non-mvdm/host/netapi/netlib/ntstatus.c` mirror slice, retained the bounded
+`non-mvdm/ds/netapi/netlib/ntstatus.c` mirror slice, retained the bounded
 source-shaped Base VDM seam, assigned the existing machine/Win32/Redirector
 adapter families, and recorded CSRSS, downlevel RAP and second-SoftPC paths as
 hard boundaries.  The remaining non-admissible rows are caller-owned identity

@@ -5,7 +5,7 @@ The selected debugger owner is the byte-identical original
 segment notifications, fault/return notifications, and the WOW-facing export
 shapes. Its `STATUS_VDM_EVENT` transport is a continuable Win32 debug
 exception, not a private CSR RPC. The selected public event layout is the
-original `src/non-mvdm/host/public/sdk/inc/vdmdbg.h`.
+original `src/non-mvdm/public/sdk/inc/vdmdbg.h`.
 
 This component contains only the two worker-local boundaries that the original
 body cannot own on a standalone CCPU40 process:

@@ -30,7 +30,7 @@ line numbers are not a substitute for source identity.
 | Frontend concurrent death handling | session_service.c independently waits broker; frontend_service_close joins pump/channel and restores | Shared hard-kill watcher can race local cleanup; eliminate competing exits and propagate failure |
 | NTMON request | src/ntmon-exe/main.c close path uses common_rpc_close_management_node | Retain ordinary caller; acceptance must survive requester death, no local completion dependency |
 | Reservation rollback | src/ntsrv-exe/opennt/source/base_reservation.c Abandon kills only unclaimed retained worker | Preserve startup rollback versus admitted lifetime distinction |
-| Original exit policy | src/non-mvdm/host/base/win32/server/srvvdm.c BaseSrvExitVDM dispatches DOS/WOW record cleanup | Retain original task result/record owner, not a substitute whole-process handoff barrier |
+| Original exit policy | src/non-mvdm/base/win32/server/srvvdm.c BaseSrvExitVDM dispatches DOS/WOW record cleanup | Retain original task result/record owner, not a substitute whole-process handoff barrier |
 | Original host termination | src/mvdm/softpc.new/host/src/nt_reset.c host_terminate calls ExitVDM then ExitProcess; nt_event.c CntrlHandler handles Console close; wow32/wkman.c has task and ALL_TASKS exits | Management receiver alone cannot cover spontaneous/fatal exits; selected call-site/build binding audit must finish before S1 closure |
 
 ## Source-first decision

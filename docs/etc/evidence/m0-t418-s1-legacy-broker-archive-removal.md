@@ -15,7 +15,7 @@ plane. The only direct users were its two isolated tests. The live broker uses
 `vdm_message`, `vdm_values`, `vdm_startup`, `vdm_receipt`, `vdm_delivery`,
 `console_membership`, `rpc_security` and `service.idl`; all remain selected in
 `broker-transport.lib`. In particular, the original BaseSrv strategy remains
-in mirrored `non-mvdm/host/base/win32/server/srvvdm.c`, rather than in the
+in mirrored `non-mvdm/base/win32/server/srvvdm.c`, rather than in the
 deleted local record.
 
 ## Fresh x86 proof

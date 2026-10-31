@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$header = Join-Path $root 'src\non-mvdm\abi\public\internal\windows\inc\wowuserp.h'
+$header = Join-Path $root 'src\non-mvdm\public\internal\windows\inc\wowuserp.h'
 $wow32 = Join-Path $root 'src\mvdm\wow32\wow32.c'
 $bridge = Join-Path $root 'src\wow32-dll\source\wow_user_registration_bridge.c'
 foreach ($path in @($header, $wow32, $bridge)) {

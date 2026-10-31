@@ -25,12 +25,12 @@ if ($LASTEXITCODE -ne 0) { throw "NASM D30 fixture failed: $LASTEXITCODE" }
 & $nasm.Source -f bin -o (Join-Path $build 'P30.COM') (Join-Path $repository 'tests\observation\pure_dos_capability.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM P30 fixture failed: $LASTEXITCODE" }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$compile = "call `"$vs`" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\abi\public\internal\windows\inc`" `"$repository\tests\observation\ems_pif_builder.c`" /Fe:`"$build\ems-pif-builder.exe`""
+$compile = "call `"$vs`" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\public\internal\windows\inc`" `"$repository\tests\observation\ems_pif_builder.c`" /Fe:`"$build\ems-pif-builder.exe`""
 cmd.exe /d /s /c $compile
 if ($LASTEXITCODE -ne 0) { throw "EMS PIF builder compilation failed: $LASTEXITCODE" }
 & (Join-Path $build 'ems-pif-builder.exe') $RuntimeTestRoot
 if ($LASTEXITCODE -ne 0) { throw "EMS PIF/config generation failed: $LASTEXITCODE" }
-$pureCompile = "call `"$vs`" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\abi\public\internal\windows\inc`" `"$repository\tests\observation\pure_dos_pif_builder.c`" /Fe:`"$build\pure-dos-pif-builder.exe`""
+$pureCompile = "call `"$vs`" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\public\internal\windows\inc`" `"$repository\tests\observation\pure_dos_pif_builder.c`" /Fe:`"$build\pure-dos-pif-builder.exe`""
 cmd.exe /d /s /c $pureCompile
 if ($LASTEXITCODE -ne 0) { throw "Pure DOS PIF builder compilation failed: $LASTEXITCODE" }
 & (Join-Path $build 'pure-dos-pif-builder.exe') $RuntimeTestRoot

@@ -16,7 +16,7 @@ New-Item -ItemType Directory -Force $build | Out-Null
 # (`ntpsapi.h`, `ntexapi.h`) under opennt-host.  Keep this focused fixture on
 # the same include boundary as the formal SoftPC graph rather than relying on
 # an old aggregate tree.
-$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/host/public/sdk/inc /I ' + $root + '/src/non-mvdm/abi/public/sdk/inc /I ' + $root + '/src/non-mvdm/abi/public/internal/base/inc /I ' + $root + '/src/session'
+$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/public/sdk/inc /I ' + $root + '/src/non-mvdm/public/sdk/inc /I ' + $root + '/src/non-mvdm/public/internal/base/inc /I ' + $root + '/src/session'
 $content = @"
 ninja_required_version = 1.10
 root = $root

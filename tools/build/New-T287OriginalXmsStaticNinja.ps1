@@ -59,13 +59,13 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DCPU_40_STYLE
     '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/ntvdm-exe/monitor/include ' +
-    '/I ' + $root + '/src/non-mvdm/host/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
     '/I ' + $root + '/src/mvdm/xms.486 ' +
     '/I ' + $root + '/src/mvdm/softpc.new/host/src ' +
     '/I ' + $root + '/src/mvdm/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/sdk/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/internal/base/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/ddk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/internal/base/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm/softpc.new/host/inc ' +
     '/I ' + $root + '/src/mvdm/softpc.new/base/inc '
 

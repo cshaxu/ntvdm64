@@ -25,10 +25,10 @@ $include = @(
     'src\compat\include',
     'src\mvdm\softpc.new\base\inc',
     'src\mvdm\softpc.new\host\inc',
-    'src\non-mvdm\host\public\sdk\inc',
-    'src\non-mvdm\abi\public\sdk\inc',
-    'src\non-mvdm\abi\public\internal\base\inc',
-    'src\non-mvdm\abi\public\internal\windows\inc',
+    'src\non-mvdm\public\sdk\inc',
+    'src\non-mvdm\public\sdk\inc',
+    'src\non-mvdm\public\internal\base\inc',
+    'src\non-mvdm\public\internal\windows\inc',
     'src\mvdm\inc',
     'src\ntvdm-exe\softpc\include'
 ) | ForEach-Object { '/I "' + (Join-Path $repo $_) + '"' }

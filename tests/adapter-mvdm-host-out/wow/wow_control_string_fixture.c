@@ -4,7 +4,7 @@
 #include <string.h>
 #include "wow_edit_native_bindings.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 VOID RtlInitLargeUnicodeString(PLARGE_UNICODE_STRING, LPCWSTR, UINT);
 VOID RtlInitLargeAnsiString(PLARGE_ANSI_STRING, LPCSTR, UINT);
 DWORD FindCharPosition(LPWSTR, WCHAR);

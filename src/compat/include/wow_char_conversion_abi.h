@@ -8,9 +8,9 @@
  */
 
 #include <nt.h>
-#include "non-mvdm/abi/public/sdk/inc/ntrtl_wow32.h"
+#include "ntrtl_wow32.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
 
 USHORT WINAPI OpenNtUserNlsAnsiCodePage(VOID);

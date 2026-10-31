@@ -20,7 +20,7 @@ $includes = @('src', 'src/compat/include',
     # `nt.h` binds modern base types, then exposes the reached original public
     # declaration slice (`ntpsapi.h`). This is the same source-facing order
     # as the formal CPU40 graph, not a fixture-local declaration substitute.
-    'src/non-mvdm/host/public/sdk/inc',
+    'src/non-mvdm/public/sdk/inc',
     'src/ntvdm-exe/softpc/include', 'src/mvdm-support/inc',
     'src/mvdm-host/inc',
     'src/mvdm-host/softpc.new/base/inc',

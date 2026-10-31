@@ -86,22 +86,22 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Move non-MVDM original source to `src/non-mvdm`, shared host compatibility to `src/compat`; preserve original MVDM. |
-| Delivery State | Ten-image candidate built, Full and Win3.1 matrix passed, published and hash-verified; owner acceptance pending. |
+| Objective | Remove artificial host/ABI intermediate roots, restore original non-MVDM relative paths, and resolve three duplicate headers without losing selected semantics. |
+| Delivery State | Original-path correction built, passed selected Full gates, and published to both destinations; awaiting owner acceptance. DOS4GW external fixture skipped. |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
 | Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
-| Verification | Collision/hash audit, cached full builds, behavior-equivalence checks or product regressions, complete ten-image publication, documentation checks. |
+| Verification | Trace each duplicate's actual consumers and source, compare preprocessed declarations and output, cached full builds, product regressions, complete ten-image publication and documentation checks. |
 | Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
 | Asset Needs | Existing sources and build caches; no new guest. |
 | Reporting Requirements | Paths, collisions, tests, publication, commit and remaining limits. |
 | Stop Conditions | Loss of source identity, guest changes or unapproved behavior change. |
 | Exit Criteria | Audited builds and tests, coherent publication, commit and push; wait for owner acceptance. |
-| Original Owner Request | Rename `src/non-mvdm/host`, `src/non-mvdm/abi` and `src/compat` under `src/non-mvdm` and `src/compat`. |
+| Original Owner Request | Keep original non-MVDM relative paths under `src/non-mvdm`; retain shared project bindings under `src/compat`. |
 | Similar-Issue Sweep | Check all active build, test, governance and provenance references. |
 | Candidate Proposal | [Source-layout rename](../proposals/proposal-original-source-layout-rename-001.md). |
-| Temporary Evidence | `build/t473-s12-layout`, 60-minute phase, 3-GiB size, 10-minute no-progress budget. |
+| Temporary Evidence | `build/t473-s12-flat`, 60-minute phase, 3-GiB size, 10-minute no-progress budget. |
 
 The original input-source handoff remains planned as S13: [scope](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). Its partial probes do not constitute a fix.
 

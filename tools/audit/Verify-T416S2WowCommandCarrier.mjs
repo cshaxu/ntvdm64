@@ -8,7 +8,7 @@ const firmwareHeader = read('src/ntvdm/softpc/include/mvdm_softpc_firmware.h');
 const sessionHeader = read('src/session/session.h');
 const session = read('src/session/session.c');
 const launcher = read('src/app/run16_entry.c');
-const client = read('src/non-mvdm/host/base/win32/client/vdm.c');
+const client = read('src/non-mvdm/base/win32/client/vdm.c');
 
 for (const source of [cmdmisc, firmware, firmwareHeader, sessionHeader, session]) {
   assert(!source.includes('mvdm_wow_bootstrap_kernel'),

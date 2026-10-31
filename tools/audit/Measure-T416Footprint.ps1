@@ -36,17 +36,22 @@ foreach ($row in Import-Csv -LiteralPath $unionLedger -Delimiter "`t") {
     $mvdmSource[$row.target_path] = $row.primary_path
 }
 
-$tracked = @(& git -C $repo ls-files src/mvdm src/non-mvdm/host src/mvdm-overlay src/opennt-host-overlay src/adapter-mvdm-host-in src/adapter-mvdm-host-out src/adapter-opennt-host)
+$tracked = @(& git -C $repo ls-files src/mvdm src/mvdm-overlay src/opennt-host-overlay src/adapter-mvdm-host-in src/adapter-mvdm-host-out src/adapter-opennt-host)
 if ($LASTEXITCODE -ne 0) { throw 'git ls-files failed' }
+$previousHost = @(& git -C $repo ls-tree -r --name-only dc0d7e8f6 -- src/non-mvdm/host)
+if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate original host cohort before flattening.' }
+$tracked += @($previousHost | Where-Object { $_ -notmatch '/(environapi|zwapi|ntrtlp|xactsrv_wksta_minimal)\.h$' } | ForEach-Object {
+    ($_ -replace '^src/non-mvdm/host/netapi/xactsrv/(ascii|auxdata|convert|examine|parmnum|pointer|strucsiz)\.c$', 'src/non-mvdm/ds/netapi/rap/$1.c' -replace '^src/non-mvdm/host/netapi/', 'src/non-mvdm/ds/netapi/' -replace '^src/non-mvdm/host/', 'src/non-mvdm/' -replace '/(largeint|movemem)-selected\.asm$', '/$1.asm')
+})
 $mirrorRows = [Collections.Generic.List[object]]::new()
-foreach ($path in $tracked | Where-Object { $_ -like 'src/mvdm/*' -or $_ -like 'src/non-mvdm/host/*' }) {
+foreach ($path in $tracked | Where-Object { $_ -like 'src/mvdm/*' -or $_ -like 'src/non-mvdm/*' }) {
     if ($path -match '/README\.md$') { continue }
-    $relative = if ($path.StartsWith('src/mvdm/')) { $path.Substring('src/mvdm/'.Length) } else { $path.Substring('src/non-mvdm/host/'.Length) }
+    $relative = if ($path.StartsWith('src/mvdm/')) { $path.Substring('src/mvdm/'.Length) } else { $path.Substring('src/non-mvdm/'.Length) }
     $owner = if ($path.StartsWith('src/mvdm/')) { 'mvdm' } else { 'opennt-host' }
     $original = ''
     if ($owner -eq 'mvdm' -and $mvdmSource.ContainsKey($relative)) { $original = $mvdmSource[$relative] }
     if ($owner -eq 'opennt-host') {
-        $upstreamRelative = if ($relative.StartsWith('netapi/')) { 'ds/' + $relative } else { $relative }
+        $upstreamRelative = $relative
         $candidate = Join-Path 'O:/repos.external/OpenNT' $upstreamRelative
         if (Test-Path -LiteralPath $candidate -PathType Leaf) { $original = $candidate }
     }

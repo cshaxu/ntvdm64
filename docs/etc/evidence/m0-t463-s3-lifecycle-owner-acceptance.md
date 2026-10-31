@@ -21,7 +21,7 @@ from that package.  The selected original chain is unchanged:
 BaseSrvCheckWOW -> WM_WOWEXECSTARTAPP -> WOWEXEC registered shell
 ```
 
-`src/non-mvdm/host/base/win32/server/srvvdm.c` publishes the request;
+`src/non-mvdm/base/win32/server/srvvdm.c` publishes the request;
 `src/mvdm/wow32/wkman.c` owns shell-window registration; and
 `src/mvdm/wow16/test/shell/wowexec.c` receives and starts the requested
 application.  No project-owned lifecycle replacement was introduced.

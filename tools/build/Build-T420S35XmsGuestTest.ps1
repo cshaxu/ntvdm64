@@ -35,7 +35,7 @@ if ($StartupFault) { $driverDefines += '-DSTARTUP_FAULT' }
 & $nasm.Source -f bin @driverDefines -o (Join-Path $build 'X35UMB.SYS') (Join-Path $repository 'tests\observation\xms_umb_driver.asm')
 if ($LASTEXITCODE -ne 0) { throw "NASM S35 UMB boot fixture failed: $LASTEXITCODE" }
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-$compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\abi\public\internal\windows\inc`" `"$repository\tests\observation\xms_profile_builder.c`" /Fo`"$build\profile.obj`" /Fe`"$build\profile.exe`""
+$compile = "call `"$vs`" -arch=x86 -host_arch=x86 >nul && cl /nologo /MT /W4 /I `"$repository\src\non-mvdm\public\internal\windows\inc`" `"$repository\tests\observation\xms_profile_builder.c`" /Fo`"$build\profile.obj`" /Fe`"$build\profile.exe`""
 cmd.exe /d /s /c $compile
 if ($LASTEXITCODE -ne 0) { throw "S35 profile builder failed: $LASTEXITCODE" }
 $profileArguments = @($build, $RuntimeTestRoot)

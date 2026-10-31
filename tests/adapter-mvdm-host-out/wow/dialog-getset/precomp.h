@@ -4,13 +4,13 @@
 #include "wow_edit_state_bindings.h"
 #define WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
 #define WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
-#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/windows/core/ntuser/client/usercli.h"
 #define WOW_ORIGINAL_CLIENT_HANDLES
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_CLIENT_HANDLES
 #undef WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/inc/ntsend.h"
+#include "non-mvdm/windows/core/ntuser/inc/ntsend.h"
 
 /* Actual original layouts; only unavailable transports are test doubles.
  * CBFNID's adapter calls the production canonical registration query, not

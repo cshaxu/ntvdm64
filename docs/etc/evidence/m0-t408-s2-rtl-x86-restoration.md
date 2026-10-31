@@ -5,7 +5,7 @@
 S2 retires the 33-line C provider for D13--D15 from
 `adapter-mvdm-host-out/win32/source/opennt_support_rtl.c`.  The selected
 worker now links the two original-source x86 routines from
-`non-mvdm/host/base/ntos/rtl/x86` through a dedicated MSVC `ml.exe` rule and
+`non-mvdm/base/ntos/rtl/x86` through a dedicated MSVC `ml.exe` rule and
 `original-opennt-rtl-x86.lib`.
 
 The source files are mechanical selected bodies of OpenNT's

@@ -12,13 +12,13 @@ src/ntvdm/   -> ntvdm.exe
 S1 deleted the unreachable local broker archive. S2 placed launcher and
 stateless product version/package code at their final owners. S3 placed the
 authenticated BaseSrv endpoint and transport in `basesrv`, while retaining
-original `srvvdm.c` as the record-policy owner in `non-mvdm/host`. S4 moved the
+original `srvvdm.c` as the record-policy owner in `non-mvdm`. S4 moved the
 worker-local session and interface bindings to `ntvdm`. S5 established the
 final shared-code rule, regenerated the formal x86 package, and passed the
 original-owner, runtime and failure-lifecycle matrix.
 
 No generic `common`, `win32api`, session manager or broker component remains.
-An original algorithm remains in `mvdm` or `non-mvdm/host`; BaseSrv protocol code
+An original algorithm remains in `mvdm` or `non-mvdm`; BaseSrv protocol code
 is basesrv-owned; process-local Win32 integration stays with its executable;
 and the only reusable historical-host binding island is the named,
 source-shaped `compat` closure. Product-wide sharing remains

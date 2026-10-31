@@ -15,7 +15,7 @@ const cflags = [
   "/FI", `\"${root}/src/compat/include/nt.h\"`,
   "/I", `\"${root}/src/mvdm/inc\"`,
   "/I", `\"${root}/src/compat/include\"`,
-  "/I", `\"${root}/src/non-mvdm/host/public/sdk/inc\"`
+  "/I", `\"${root}/src/non-mvdm/public/sdk/inc\"`
 ].join(" ");
 
 const lines = [

@@ -19,7 +19,7 @@
 typedef VOID (WINAPI *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
-#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/public/internal/windows/inc/wowuserp.h"
 #pragma warning(pop)
 
 typedef DWORD (WINAPI *wow_user_register_proc)(APFNWOWHANDLERSIN,

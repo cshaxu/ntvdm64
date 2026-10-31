@@ -35,8 +35,8 @@ if ($start -lt 0 -or $end -le $start) { throw 'Menu converter boundary changed.'
     ($parts -join "`r`n"), [Text.Encoding]::ASCII)
 # Controlled resource inputs are namespaced together with only their original
 # clients. Never shadow the provider's real W32 callbacks at archive link time.
-$clientPath=Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/clmenu.c'
-$coverPath=Join-Path $root 'src/non-mvdm/host/windows/core/ntuser/client/clres.c'
+$clientPath=Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clmenu.c'
+$coverPath=Join-Path $root 'src/non-mvdm/windows/core/ntuser/client/clres.c'
 $client=[IO.File]::ReadAllText($clientPath)
 $cover=[IO.File]::ReadAllText($coverPath)
 $start=$client.IndexOf('HMENU CommonLoadMenu(')

@@ -20,7 +20,7 @@ repairs matching include statements, build manifests, fixture target names,
 source lists and documentation links. Renames use `git mv`.
 
 The six original-code mirrors—`bochs-core` after its component rename,
-`opennt-guest`, `opennt-bop`, `non-mvdm/host`, `opennt-softpc`, and
+`opennt-guest`, `opennt-bop`, `non-mvdm`, `opennt-softpc`, and
 `opennt-utils`—and all corresponding `*-overlay` roots are out of scope.
 Their upstream-relative filenames are source identity, not project branding.
 

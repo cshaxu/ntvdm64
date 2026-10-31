@@ -24,7 +24,7 @@ corresponding late-loaded target in S2/S3 or proven absent from the product.
   the corresponding target include root rather than producing a dead path.
 - Moved the WOW32-only `nt_vdd.h` declaration wrapper to
   `wow32-dll/include`.  The byte-exact original carrier stays under
-  `non-mvdm/abi/public/sdk/inc`; ordinary MVDM users still include it
+  `non-mvdm/public/sdk/inc`; ordinary MVDM users still include it
   directly.
 
 The generic historical CRT compatibility unit remains under `ntvdm-exe/win32`:

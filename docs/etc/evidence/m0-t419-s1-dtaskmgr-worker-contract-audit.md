@@ -15,7 +15,7 @@ The audit read the active three-program BaseSrv transport and service:
 - `src/basesrv/main.c`;
 - `src/basesrv/opennt/source/base_service.c`, `base_process.c` and
   `base_reservation.c`;
-- the selected original `src/non-mvdm/host/base/win32/server/srvvdm.{h,c}`; and
+- the selected original `src/non-mvdm/base/win32/server/srvvdm.{h,c}`; and
 - the current x86 build graph in `tools/build/New-T310OriginalSoftpcNinja.ps1`.
 
 It traced connection registration, launch reservation, worker registration,

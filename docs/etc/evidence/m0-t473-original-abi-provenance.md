@@ -1,11 +1,16 @@
 # non-mvdm original ABI declarations
 
+This document preserves the former declaration-cohort provenance. Its old
+physical-layout statements are historical: the selected sources now share
+their original relative paths under `src/non-mvdm`; three unselected full
+header copies remain in Git history, not as current duplicate source files.
+
 T433 S5 OPENNT-HOST-066 changes only the two process-local CSR capture-table
 pointer element declarations in source/public/sdk/inc/ntcsrmsg.h to ULONG_PTR.
 The original x86 element/header layout is unchanged; native64 capture uses
 matching full-width metadata. This is not a wire declaration widening or an
 original CSR transport admission. The source owner registers its matching
-allocation/alignment/storage expressions in non-mvdm/host/README.md.
+allocation/alignment/storage expressions in non-mvdm/README.md.
 
 This subtree retains the original declaration cohort previously located under
 `src/opennt-abi/source`. Shared project-owned compatibility declarations and
@@ -17,20 +22,20 @@ cohorts are intentionally preserved. Registered source differences remain.
 
 - `public/...` and `private/...` preserve only logical upstream
   topology; neither source-tree nor edition names appear in product paths.
-- [T283 S1 selection ledger](../../../docs/etc/operations/m0-t283-s1-platform-abi-selection-ledger-001.tsv)
+- [T283 S1 selection ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t283-s1-platform-abi-selection-ledger-001.tsv)
   records the exact selected source/hash, rejected corresponding candidate and
-  basis for every header. The companion [canonical import manifest](../../../docs/etc/operations/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv)
+  basis for every header. The companion [canonical import manifest](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t283-s2-platform-abi-canonical-import-manifest-001.tsv)
   records each selected logical product path.
-- [T274 S2 import manifest](../../../docs/etc/operations/m0-t274-s2-platform-abi-import-manifest.tsv)
+- [T274 S2 import manifest](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s2-platform-abi-import-manifest.tsv)
   is retained as the historical initial-import record; T283's canonical
   manifest is the current selection authority.
-- [T274 S2 direct-include ledger](../../../docs/etc/operations/m0-t274-s2-platform-abi-direct-include-ledger.tsv)
+- [T274 S2 direct-include ledger](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s2-platform-abi-direct-include-ledger.tsv)
   records every scanned direct declaration need and its disposition.
 
 The component presently contains the 24 resolved direct platform
 headers plus three package-led DEM declaration carriers (`ntdddisk.h`,
 `ntddstor.h`, and `ntioapi.h`) recorded by
-[T280 S8](../../../docs/etc/operations/m0-t280-s8-platform-declaration-import-manifest.tsv).
+[T280 S8](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t280-s8-platform-declaration-import-manifest.tsv).
 CRT and public SDK headers remain toolchain inputs; ambiguous, generated, and
 unresolved include forms remain explicit ledger rows for their owning MVDM
 package rather than speculative copies.
@@ -86,9 +91,9 @@ T290 S5 selected the complete byte-exact OpenNT
 cohort required by the original Redirector NetAPI source without importing a
 Lanman implementation, server, RPC service, or Redirector route. The
 package-selection record and per-file source/hash manifest are
-[here](../../../docs/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
+[here](../../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
 and
-[here](../../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
+[here](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
 
 T325 S2 selected byte-identical `apiworke.h` under
 `source/private/ds/netapi/rpcxlate` for the original `vrremote.c` local
@@ -100,9 +105,9 @@ The same S5 compilation closure selected exact OpenNT
 They supply the original `smbgtpt.h` and `tstring.h` dependencies of the DS
 headers only; neither package activates its historical host services. Their
 selection and per-file hashes are recorded
-[here](../../../docs/etc/operations/m0-t290-s5-public-internal-declaration-cohort-selection-001.md)
+[here](../../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/m0-t290-s5-public-internal-declaration-cohort-selection-001.md)
 and
-[here](../../../docs/etc/operations/m0-t290-s5-public-internal-declaration-cohort-manifest-001.tsv).
+[here](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t290-s5-public-internal-declaration-cohort-manifest-001.tsv).
 
 T290 S5 selected the complete byte-exact OpenNT
 `public/internal/ds/inc` declaration package under
@@ -110,9 +115,9 @@ T290 S5 selected the complete byte-exact OpenNT
 cohort required by the original Redirector NetAPI source without importing a
 Lanman implementation, server, RPC service, or Redirector route. The
 package-selection record and per-file source/hash manifest are
-[here](../../../docs/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
+[here](../../../artifacts/documentation-archive/20260910/strict-topology/etc/operations/m0-t290-s5-ds-declaration-package-selection-001.md)
 and
-[here](../../../docs/etc/operations/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
+[here](../../../artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t290-s5-ds-declaration-package-manifest-001.tsv).
 
 ## Divergence register
 

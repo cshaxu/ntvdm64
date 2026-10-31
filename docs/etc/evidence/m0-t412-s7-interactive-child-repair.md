@@ -18,7 +18,7 @@ arguments were changed. Runtime observations are below `O:\winnt\logs`.
    A separate borrowed HANDLE vector fixes the stride; the candidate records
    still own handles and post-query identity validation.
 2. Each authenticated connection issued the same first parent-wait receipt.
-   Original `non-mvdm/host/base/win32/server/srvvdm.c::BaseSrvGetVDMExitCode`
+   Original `non-mvdm/base/win32/server/srvvdm.c::BaseSrvGetVDMExitCode`
    compares that HANDLE-shaped identity across the Console's DOS record list.
    A nested child's receipt could match the still-active outer record. After
    the stride repair MEM executed but reported STILL_ACTIVE (259). Wait

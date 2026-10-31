@@ -47,12 +47,12 @@ static int unexpected_branch(void) { ExitProcess(90); return 0; }
 /* This fixture tests supplied bytes; native name loading has a separate test. */
 #define LoadBmp(module, name, cx, cy, flags) ((HBITMAP)(ULONG_PTR)unexpected_branch())
 #define MBToWCS(text, count, output, capacity, allocate) unexpected_branch()
-#include "../../../src/non-mvdm/host/windows/core/ntuser/client/cldib.c"
+#include "../../../src/non-mvdm/windows/core/ntuser/client/cldib.c"
 #ifdef WOW_BITMAP_UPSTREAM_NEGATIVE
 #define ChangeDibColors(header, flags) unexpected_branch()
 #include "original-bitmap-header.inc"
 #else
-#include "../../../src/non-mvdm/host/windows/core/ntuser/client/clres.c"
+#include "../../../src/non-mvdm/windows/core/ntuser/client/clres.c"
 #endif
 
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d\n", __LINE__); return 1; } } while (0)

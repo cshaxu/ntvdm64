@@ -97,7 +97,7 @@ The complete byte-identical `mvdm/dbg/dbg.c` compiles with a translation-unit
 the reached body does not consume any declaration from that header, while the
 otherwise included historical header recursively declares unavailable LPC/Dbg
 subsystem structures. The selected source now uses the exact original public
-`vdmdbg.h` under `non-mvdm/host/public/sdk/inc` (SHA-256
+`vdmdbg.h` under `non-mvdm/public/sdk/inc` (SHA-256
 `A3048CBCAA26E32AE542A73AAE59356E9FA2EB85AF00932A027FF4E8E47F225C`).
 
 The formal x86 product link succeeds with original `DBGInit`, `DBGDispatch`,

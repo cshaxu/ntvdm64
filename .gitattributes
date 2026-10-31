@@ -20,7 +20,7 @@ src/bochs-core/README.md text
 # T266 S3 exact OpenNT inputs retained for current local staging and source maps.
 src/opennt-bop/inc/** -text -whitespace
 src/mvdm/** -text -whitespace
-src/non-mvdm/host/** -text -whitespace
+src/non-mvdm/** -text -whitespace
 # Pinned nxvm presentation inputs retain their upstream byte identity.
 src/frontend-exe/lib/** -text
 src/ntcon-exe/lib/** -text

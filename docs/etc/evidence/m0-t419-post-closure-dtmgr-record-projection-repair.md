@@ -16,7 +16,7 @@ query, and resumed-parent request can all occur without creating or finishing
 a DOS task.  Consequently five nested COMMAND instances could be displayed as
 depth seven.
 
-The original owner is `non-mvdm/host/base/win32/server/srvvdm.c`.  Its DOS task
+The original owner is `non-mvdm/base/win32/server/srvvdm.c`.  Its DOS task
 lifetime is the `CONSOLERECORD::DOSRecord` chain: `BaseSrvCheckDOS` appends or
 reuses a `DOSRECORD`; `BaseSrvGetNextVDMCommand` marks the selected record
 `VDM_BUSY`; and `BaseSrvGetVDMExitCode` removes a returned child or returns the
@@ -32,7 +32,7 @@ the same parent-wait identity used by original exit-code lookup.  It neither
 creates, pops, nor selects task records.  Stale labels are pruned by traversal
 of the original chain and all remaining labels are released on worker exit.
 
-No `mvdm` or `non-mvdm/host` mirror source changes.  The changed files are the
+No `mvdm` or `non-mvdm` mirror source changes.  The changed files are the
 existing BaseSrv executable management adapter, its copied RPC projection, and
 the existing DTMgr Console client.
 

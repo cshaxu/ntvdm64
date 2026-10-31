@@ -11,7 +11,7 @@ load/link result as WOW16 acceptance?
 The original WOW32 carrier remains exactly where OpenNT places it:
 `src/mvdm/wow32/sources` selects 77 C translation units, with `wow32.def` and
 `wow32.rc` beside them.  Original selected USER translation units remain in
-their canonical `src/non-mvdm/host/windows/core/ntuser/...` paths.
+their canonical `src/non-mvdm/windows/core/ntuser/...` paths.
 
 `src/wow32-dll/` now owns the 21 target-only C bindings selected by the formal
 DLL link and 30 target declarations.  This is a path-only relocation: no

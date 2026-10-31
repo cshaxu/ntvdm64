@@ -9,7 +9,7 @@ app/BaseVDM boundary, without exposing worker flags to the user?
 ## Source-recovery ledger
 
 1. **Original source reuse.** OpenNT
-   `non-mvdm/host/base/win32/server/srvvdm.c:BaseSrvCheckVDM` dispatches
+   `non-mvdm/base/win32/server/srvvdm.c:BaseSrvCheckVDM` dispatches
    `BINARY_TYPE_WIN16` to `BaseSrvCheckWOW`, not `BaseSrvCheckDOS`. Original
    `mvdm-host/dos/command/cmdmisc.c:GetWowKernelCmdLine` obtains the WOW
    bootstrap target from the worker process command line in the exact

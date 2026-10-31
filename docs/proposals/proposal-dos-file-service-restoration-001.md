@@ -19,7 +19,7 @@ BaseSrv queue policy, process splitting, CPU execution changes and complete
 WRITE recovery are not prerequisites or deliverables of this package.
 
 Original DEM/VDD logic remains in `mvdm-host/dos/dem/demfile.c`. Any admitted
-non-MVDM `base/ntos/vdm/x86/rdwr.c` semantic slice belongs under `non-mvdm/host`
+non-MVDM `base/ntos/vdm/x86/rdwr.c` semantic slice belongs under `non-mvdm`
 at its original-relative path, following the
 [source policy](../etc/operations/policy/source-policy.md) and
 [architecture rules](../rules/ARCHITECTURE.md). Adapters bind finite missing

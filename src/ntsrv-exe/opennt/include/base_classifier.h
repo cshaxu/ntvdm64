@@ -3,8 +3,8 @@
  * No classifier policy or PE parser is implemented here. */
 #ifndef OPENNT_BASE_CLASSIFIER_H
 #define OPENNT_BASE_CLASSIFIER_H
-#include "non-mvdm/host/public/sdk/inc/nturtl.h"
-#include "non-mvdm/host/base/win32/inc/basevdm.h"
+#include "non-mvdm/public/sdk/inc/nturtl.h"
+#include "non-mvdm/base/win32/inc/basevdm.h"
 /* Private symbol avoids colliding with Kernel32's imported GetBinaryTypeW. */
 #define GetBinaryTypeW OpenNtBaseGetBinaryTypeW
 /* This owner consumes an NT path; the DEM DOS-path adapter is not its edge. */

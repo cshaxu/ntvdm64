@@ -1,0 +1,64 @@
+PASS independent retained WOW frontier winmine; not gameplay acceptance
+PASS independent retained WOW frontier sol; not gameplay acceptance
+PASS independent retained WOW frontier write; not gameplay acceptance
+PASS empty: 0
+PASS native-zero: 0
+PASS missing: 0
+PASS native-seven: 0
+PASS native-streams: 0
+PASS native-eof: 0
+PASS mem: 1
+PASS nested-empty: 1
+PASS nested-mem: 1
+PASS mem-repeat: 1
+PASS direct-mem: 0
+PASS command-c: 0
+PASS command-c-seven: 0
+PASS guest-seven: 7
+PASS command-c-mem: 0
+PASS direct-seven: 7
+PASS edit: 1
+PASS empty: 0
+PASS native-zero: 0
+PASS missing: 0
+PASS native-seven: 0
+PASS native-streams: 0
+PASS native-eof: 0
+PASS mem: 1
+PASS nested-empty: 1
+PASS nested-mem: 1
+PASS mem-repeat: 1
+PASS direct-mem: 0
+PASS command-c: 0
+PASS command-c-seven: 0
+PASS guest-seven: 7
+PASS command-c-mem: 0
+PASS direct-seven: 7
+PASS edit: 1
+PASS client actual fixture exit zero and assertion output
+PASS bootstrap actual fixture exit zero and assertion output
+PASS startup-rejections actual fixture exit zero and assertion output
+PASS native-worker-failure actual fixture exit zero and assertion output
+PASS native-completed-worker-loss actual fixture exit zero and assertion output
+PASS monitor-rpc actual fixture exit zero and assertion output
+PASS GUI startup exit=0x00000000
+PASS GUI wait exit=0x00000025
+PASS GUI gui-fresh-text exit=0x00000025
+PASS GUI carrier-residency exit=0x00000000 PASS GUI-SURVIVAL-EXIT-37
+PASS GUI text-gui-text exit=0x00000013 S9-GUI-TEXT-RESUMED
+PASS old-app: launcher and worker reject before task delivery, no launcher retry
+PASS wrong-protocol: launcher and worker reject before task delivery, no launcher retry
+PASS reply-app: launcher and worker reject before task delivery, no launcher retry
+PASS reply-protocol: launcher and worker reject before task delivery, no launcher retry
+PASS legacy-interface: launcher and worker reject before task delivery, no launcher retry
+PASS real modern EDIT screen, Ctrl+Q, CMD echo, DOS MEM and launcher completion
+PASS same outer CMD: DOS MEM/EXIT -> native VER -> DOS MEM/EXIT -> cooked CMD exit 19
+PASS 12 immediate native/DOS relaunch pairs, final output and outer CMD exit 19
+PASS 12 immediate interactive CMD exit/relaunches, final output and outer19
+PASS real close (frontend-loss=False): worker=6868 target=4020 target-exit=-1073741510
+PASS independent Console survives selected worker close, accepts new input and returns 23
+PASS ntvdm frontend loss: real worker shutdown, frontend exit and direct receipt 1067; explicit fixture cleanup
+PASS ntvwm frontend loss: real worker shutdown, frontend exit and direct receipt 1067; explicit fixture cleanup
+PASS broker I/O nested-window I386 : actual CMD/DOS input, parent return and direct exit=23
+SKIP dos4gw-nesticle: supply -Dos4gwFixtureRoot with the verified external fixtures
+PASS Full selected gates; identical 10-file package

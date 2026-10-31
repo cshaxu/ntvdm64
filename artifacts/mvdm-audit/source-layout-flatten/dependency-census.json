@@ -1,0 +1,122 @@
+[
+  {
+    "graph": "x86-worker",
+    "ntexapi.h": {
+      "host": 6,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 448,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 90,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x86-wow32",
+    "ntexapi.h": {
+      "host": 1,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 229,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 88,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-worker",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 6,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 5,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-service",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 49,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 15,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-frontend",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 4,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 3,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-launcher",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 14,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 9,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-monitor",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 0,
+      "abi": 0
+    }
+  },
+  {
+    "graph": "x64-hook",
+    "ntexapi.h": {
+      "host": 0,
+      "abi": 0
+    },
+    "ntrtl.h": {
+      "host": 6,
+      "abi": 0
+    },
+    "nturtl.h": {
+      "host": 5,
+      "abi": 0
+    }
+  }
+]

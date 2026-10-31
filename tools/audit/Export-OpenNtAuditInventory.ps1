@@ -29,7 +29,6 @@ $textExtensions=@('.c','.h','.cpp','.cxx','.hpp','.asm','.inc','.def','.rc','.pa
 $rows=foreach($name in $files){
     $root=($name -split '/')[1]
     if (-not $roles.ContainsKey($root)) { throw "Unclassified source root: $root" }
-    if ($root -eq 'non-mvdm' -and $name -notmatch '^src/non-mvdm/(host|abi)/') { throw "Unclassified original cohort: $name" }
     $absolute=Join-Path $repo $name
     $bytes=[IO.File]::ReadAllBytes($absolute)
     $extension=[IO.Path]::GetExtension($name).ToLowerInvariant()

@@ -13,7 +13,7 @@ single-string command-line compatibility contract or changing native creates?
 - `src/run16-exe/main.c` remains the sole owner of `run16 <target> <args>`:
   CWD/PATH and COM/EXE/BAT/PIF search, error distinction, and the compact
   `command/c` normalization are unchanged.
-- `src/non-mvdm/host/base/win32/client/vdm.c`, `BaseCheckVDM`, is the retained
+- `src/non-mvdm/base/win32/client/vdm.c`, `BaseCheckVDM`, is the retained
   mirror source for the three-branch DOS-tail shape. No new OpenNT source was
   imported and no mirror file changed.
 

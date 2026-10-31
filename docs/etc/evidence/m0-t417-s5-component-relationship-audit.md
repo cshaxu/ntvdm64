@@ -72,7 +72,7 @@ not a license for either adapter to own original policy.
 4. **Do not relocate current functional adapters into a mirror.**  C-VID
    binding, Console projection, broker RPC, guest-memory publication and VDD
    attachment are modern-system mechanisms with no exact directly composable
-   original body.  Moving them to `mvdm`/`non-mvdm/host` would violate the
+   original body.  Moving them to `mvdm`/`non-mvdm` would violate the
    strict mirror rule and obscure, rather than reduce, divergence.
 
 ## Migration order, risks and verification

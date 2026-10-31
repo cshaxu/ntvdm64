@@ -66,7 +66,7 @@ and guest-controller ownership intact.
 For each row record: current selected implementation; original OpenNT owner;
 evidenced divergence reason; exact restoration/removal and outgoing bindings;
 positive, negative and runtime acceptance. MVDM algorithms remain in
-`mvdm-host`, admitted non-MVDM originals in `non-mvdm/host`, and only finite host
+`mvdm-host`, admitted non-MVDM originals in `non-mvdm`, and only finite host
 mechanics in adapters. Do not import Console Server wholesale. Two unsynchronized
 input queues do not restore the original ordering contract.
 

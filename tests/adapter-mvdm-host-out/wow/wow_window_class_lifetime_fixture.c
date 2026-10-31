@@ -3,7 +3,7 @@
 #include "wow_user_private_access.h"
 #include "wow_user_client_view_layout.h"
 #include "wow_window_client_state_bindings.h"
-#include "non-mvdm/host/windows/core/ntuser/rtl/userrtl.h"
+#include "non-mvdm/windows/core/ntuser/rtl/userrtl.h"
 #include <stdio.h>
 
 static unsigned errors, callbacks;

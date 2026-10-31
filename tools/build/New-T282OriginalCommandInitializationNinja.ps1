@@ -23,12 +23,12 @@ $cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +
     '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/ntvdm-exe/monitor/include ' +
-    '/I ' + $root + '/src/non-mvdm/host/public/sdk/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/sdk/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/internal/base/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/internal/windows/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/private/windows/inc ' +
-    '/I ' + $root + '/src/non-mvdm/abi/public/ddk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/internal/base/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/internal/windows/inc ' +
+    '/I ' + $root + '/src/non-mvdm/private/windows/inc ' +
+    '/I ' + $root + '/src/non-mvdm/public/ddk/inc ' +
     '/I ' + $root + '/src/mvdm-support/inc ' +
     '/I ' + $root + '/src/mvdm-host/dos/command ' +
     '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +

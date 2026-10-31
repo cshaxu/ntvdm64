@@ -15,7 +15,7 @@ pretext to report remote-network success.
 - `src/mvdm-host/vdmredir/vrremote.c` — remote/RAP request path.
 - Reached `src/mvdm-host/dos/command/cmdredir.c` caller forms and
   `src/mvdm-host/inc/vdmredir.h` declarations.
-- `src/non-mvdm/host/netapi/netlib/ntstatus.c` — selected, byte-identical
+- `src/non-mvdm/ds/netapi/netlib/ntstatus.c` — selected, byte-identical
   `NetpNtStatusToApiStatus` / `NetpApiStatusToNtStatus` conversion algorithms.
 - The P02/T306 NetAPI cohort ledger, in particular its public
   `NetWkstaGetInfo` / `NetWkstaUserGetInfo` rows and its RAP hard-boundary row.

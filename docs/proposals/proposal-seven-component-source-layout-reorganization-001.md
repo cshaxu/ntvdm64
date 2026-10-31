@@ -25,7 +25,7 @@ Accordingly:
   build inputs move under `docs/etc/legacy_code/` (with their provenance);
 - tests remain under `tests/`, and build recipes remain under `tools/`;
 - a minimal-change OpenNT source that is actually part of the product moves
-  into its original owner-family directory in `opennt-bop` or `non-mvdm/host`;
+  into its original owner-family directory in `opennt-bop` or `non-mvdm`;
   `original/`, `mirror/`, `overlay/`, and generic `capability/` are not target
   production-layout categories;
 - project-owned BOP ingress may remain in an explicitly named production
@@ -47,7 +47,7 @@ An aggregate count is not a substitute for these rows.
 | `src/bx-mantle` | Cropped, Bochs-only native assembly/lifecycle layer. It contains no OpenNT, DOS, VDM, WOW or Win32 semantics. |
 | `src/opennt-guest` | OpenNT DOS/WOW16 source and guest images. Original prebuilt artifacts are packaged by default; original-source builds are fallback/reproducibility paths. `README.md` records every divergence, expected to be none. |
 | `src/non-mvdm/host` | Independently composable original OpenNT host-capability components and necessary source-derived replacements for unavailable historical host facilities. `README.md` records every changed import and new component. |
-| `src/opennt-bop` | Minimal-change mirrors of OpenNT BOP providers. Original names, interfaces, structures, ordering and failure behavior stay visible. `README.md` records every imported-source exception; each necessary dependency redirection is annotated `DIVERGENCE:` and targets `non-mvdm/host`, `adapter-win32`, or `adapter-softpc`. |
+| `src/opennt-bop` | Minimal-change mirrors of OpenNT BOP providers. Original names, interfaces, structures, ordering and failure behavior stay visible. `README.md` records every imported-source exception; each necessary dependency redirection is annotated `DIVERGENCE:` and targets `non-mvdm`, `adapter-win32`, or `adapter-softpc`. |
 | `src/adapter-softpc` | Bochs-backed recovery of reached historical SoftPC/CCPU interfaces with the same name, parameters, ABI and observable mechanical semantics. It does not own BOP meaning. |
 | `src/adapter-win32` | Same-shaped modern public-Win32 facades for unavailable historical Win32 APIs. It does not own BOP policy. |
 | `src/app` | `ntvdm64` executable entry, CLI, and explicit final loading/composition of all other components. |
@@ -81,20 +81,20 @@ manifest before S3 changes product paths.
 | `src/cli/` | `src/app/` | `git mv` the CLI, BYOB/image selection, startup lifecycle, cancellation, and native executable entry. |
 | `src/bx-vdm/bop/opennt/{dem,command,xms,dpmi,softpc}` | `src/opennt-bop/…` | `git mv` each original mirror while retaining its owner-family layout, original interface shape, and existing `DIVERGENCE:` annotations. |
 | `src/bx-vdm/bop/*_generic_ud_bridge*`, BOP runtime/composition/ingress routes, and historical selector/service maps | `src/opennt-bop/` | Move as BOP interpretation/routing. They may request a bounded `adapter-softpc` operation but are not adapter mechanics. |
-| `src/bx-vdm/bop/shim/` file/path/process/environment/PIF/redirector/XMS/DEM session capability code and `src/opennt/local/compat/host/` | `src/non-mvdm/host/` | Classify by original host-capability owner and move there when it provides a host service rather than an unavailable-API facade or Bochs conversion. |
+| `src/bx-vdm/bop/shim/` file/path/process/environment/PIF/redirector/XMS/DEM session capability code and `src/opennt/local/compat/host/` | `src/non-mvdm/` | Classify by original host-capability owner and move there when it provides a host service rather than an unavailable-API facade or Bochs conversion. |
 | Same-named unavailable Win32/NTDLL facade code, including RTL and message/dialog facades | `src/adapter-win32/` | Move by API family. Preserve historical spelling and observable semantics; this component owns no BOP/provider policy. |
 | Root `src/bx-vdm/` CPU-frame, exception, checked guest-memory, instruction-window, typed-result, and machine-engine contracts | `src/adapter-softpc/` | `git mv` as bounded same-shaped SoftPC/CCPU-to-Bochs mechanics. It must remain selector/service blind. |
-| Shared mapping-manager implementation and its session-local `guest_memory`, `host_handle`, and `session_data` instances | `src/adapter-softpc/` | Retain one implementation and three session instances. The manager maps opaque IDs only; Win32 handle semantics/lifetime remains in `adapter-win32` or `non-mvdm/host`. |
-| Root `src/bx-vdm/` host-drive/namespace policy and final startup/session/image plan | `src/non-mvdm/host/` or `src/app/` | Host path/drive capability is `non-mvdm/host`; final component assembly, guest-image loading and startup selection is `app`. S1 assigns each file, not its name. |
+| Shared mapping-manager implementation and its session-local `guest_memory`, `host_handle`, and `session_data` instances | `src/adapter-softpc/` | Retain one implementation and three session instances. The manager maps opaque IDs only; Win32 handle semantics/lifetime remains in `adapter-win32` or `non-mvdm`. |
+| Root `src/bx-vdm/` host-drive/namespace policy and final startup/session/image plan | `src/non-mvdm/` or `src/app/` | Host path/drive capability is `non-mvdm`; final component assembly, guest-image loading and startup selection is `app`. S1 assigns each file, not its name. |
 | Live DOS/WOW source and guest artifact/build inputs below `src/opennt/base/mvdm/{dos,wow16}` | `src/opennt-guest/` | Move only source and artifact inputs belonging to the guest. Original prebuilt artifacts remain default packaging inputs. |
-| Live OpenNT headers below `src/opennt/base/mvdm/inc`, SoftPC includes, and public/internal include trees | `opennt-bop/include`, `non-mvdm/host/include`, or `opennt-guest/include` | Split by original consumer/owner; host ABI declarations are published by `non-mvdm/host` to its declared consumers. |
+| Live OpenNT headers below `src/opennt/base/mvdm/inc`, SoftPC includes, and public/internal include trees | `opennt-bop/include`, `non-mvdm/include`, or `opennt-guest/include` | Split by original consumer/owner; host ABI declarations are published by `non-mvdm` to its declared consumers. |
 | Unreached full OpenNT source not named by the product manifest | `refs/opennt/` evidence input | Remove it from product source/build roots while retaining immutable original-source provenance. It is not a second runtime provider. |
 | `tests/bx-vdm/`, `tests/opennt/`, `tests/runner/`, and old machine-composition test paths | `tests/adapter-softpc`, `tests/opennt-bop`, `tests/opennt-host`, `tests/opennt-guest`, or `tests/app` | Move each test with the library/component under test. Retain historical task names only in fixture filenames and evidence. |
 | `tools/build/*manifest*` and formal Ninja source lists | `tools/build/` | Keep tools in place; replace legacy paths, include roots, module names, fixture library lists, and final link order with target-component entries. |
 
 `src/bx-vdm/bop/shim/` is explicitly a mixed historical directory. Its name is
 not an ownership category and it may not survive as a target product path:
-each file is classified as `non-mvdm/host`, `adapter-win32`, `adapter-softpc`, or
+each file is classified as `non-mvdm`, `adapter-win32`, `adapter-softpc`, or
 `opennt-bop` before it moves. Likewise, a file is not moved to `adapter-softpc`
 merely because it presently mentions a guest pointer; BOP/provider semantics
 remain in the OpenNT owner and only the bounded mechanical conversion moves.
@@ -128,10 +128,10 @@ Move `src/cli` to `src/app` and move live DOS/WOW source/artifact inputs to
 Move the original DEM/COMMAND/XMS/DPMI/SoftPC mirrors and BOP ingress/route
 logic out of `bx-vdm` without changing provider semantics.
 
-### S6 — `non-mvdm/host` and `adapter-win32`
+### S6 — `non-mvdm` and `adapter-win32`
 
 Classify every remaining mixed legacy `shim` file: host capability moves to
-`non-mvdm/host`; unavailable API same-shape facade moves to `adapter-win32`.
+`non-mvdm`; unavailable API same-shape facade moves to `adapter-win32`.
 
 ### S7 — `adapter-softpc`
 

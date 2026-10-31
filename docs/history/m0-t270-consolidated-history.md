@@ -20,7 +20,7 @@ guest, firmware, CPU, device or host capability behavior was admitted.
   OpenNT inputs. Current staging/provenance verification produced 113
   artifacts; the old standalone build recipe is separately recorded as a tool
   closure issue.
-- **S3 `non-mvdm/host`:** six selected originals are exact and four registered
+- **S3 `non-mvdm`:** six selected originals are exact and four registered
   divergences remain. The three over-threshold retained subsets moved to
   `opennt-host-overlay` behind same-signature mirror boundaries; formal Ninja
   and focused host fixture passed.

@@ -35,7 +35,7 @@ records current behavior; it does not establish the required original result.
 
 Apply the [source policy](../etc/operations/policy/source-policy.md) and
 [architecture rules](../rules/ARCHITECTURE.md): original MVDM algorithms stay
-in `mvdm-host`; separately admitted non-MVDM bodies belong to `non-mvdm/host`
+in `mvdm-host`; separately admitted non-MVDM bodies belong to `non-mvdm`
 at original-relative paths. Bind only the proved unavailable mechanics.
 Do not mistake this memory-address service for the retired generic x64
 identity manager. No generic mapping/token manager, kernel shell, ring-0

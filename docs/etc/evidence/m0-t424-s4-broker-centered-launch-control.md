@@ -85,7 +85,7 @@ sessions. The drawing describes target ownership, not a current runtime pass.
 
 | Mechanism and provenance | Current owner/location | Target and reason |
 | --- | --- | --- |
-| Original DOS Check/Update/GetNext/exit record semantics | `non-mvdm/host/base/win32/client` and `server/srvvdm.c`, MVDM callers | Unchanged originals. Service adapter calls/binds them; never extract scheduler or rewrite records for native shape. |
+| Original DOS Check/Update/GetNext/exit record semantics | `non-mvdm/base/win32/client` and `server/srvvdm.c`, MVDM callers | Unchanged originals. Service adapter calls/binds them; never extract scheduler or rewrite records for native shape. |
 | Project-added suspended worker creation and startup rollback | `run16-exe/worker_launch.c`, `main.c`, scope native creation | NTSRV finite worker-spawn owner. Preserve immutable worker command/environment/configuration and Prepare-before-Resume order. No successful-worker launcher kill pairing. |
 | Project-added frontend bootstrap | `run16-exe/bootstrap_client.c`, `ntcon-exe/main.c` | Service owns creation and authenticated handoff request/acknowledgement. Derive actual caller process from authenticated launcher connection; supply restricted capabilities to frontend. Remove direct launcher pipe/events; never attach frontend to service Console. |
 | Native packet bounds/resource binding | `run16-exe/native_launch_packet.c`, `native_launch.c` and NTW32 execution | Reuse existing codec/bounds and worker-local target creation. Cross RPC only copied/versioned payload and typed authenticated stream attachments; no trusted sender-local handle numbers or generic duplication API. |

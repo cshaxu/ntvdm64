@@ -10,7 +10,7 @@ general WOW capability closure. T425 remains open.
 
 ## Source findings
 
-- Original `src/non-mvdm/host/base/win32/server/srvvdm.c` BaseSrvCheckWOW,
+- Original `src/non-mvdm/base/win32/server/srvvdm.c` BaseSrvCheckWOW,
   lines 805-884, allocates another WOW record, copies the command, creates its
   independent parent wait and notifies authenticated WOWEXEC with
   WM_WOWEXECSTARTAPP. Shared worker residency does not suppress a request.

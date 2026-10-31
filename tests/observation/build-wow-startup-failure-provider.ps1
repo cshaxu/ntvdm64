@@ -35,7 +35,7 @@ try {
  if((Get-FileHash "$provider/wow32.dll").Hash -ne $normalHash){throw 'Normal provider was modified'}
  if(!(Test-Path "$out/WOW32.DLL")){throw 'No diagnostic DLL'}
  $objects=@([regex]::Matches($link,'(?<!\S)obj/[^\s"]+\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)
- @($source,"$repo/src/non-mvdm/host/windows/core/ntuser/kernel/queue.c","$repo/src/wow32-dll/source/wow_shell_callback.c","$provider/build.ninja","$provider/wow32.dll","$out/WOW32.DLL")+$objects|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$out/inputs.json"
+ @($source,"$repo/src/non-mvdm/windows/core/ntuser/kernel/queue.c","$repo/src/wow32-dll/source/wow_shell_callback.c","$provider/build.ninja","$provider/wow32.dll","$out/WOW32.DLL")+$objects|Get-FileHash|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$out/inputs.json"
  $target=if($ShellException){'SHLPROBE'}else{'GENPROBE'}
  $fault=if($ShellException){'exception after original Shell callback return'}else{'second original InitTask allocation'}
  @{kind='diagnostic-only';publishable=$false;target=$target;fault=$fault;normalProvider=$normalHash;diagnosticProvider=(Get-FileHash "$out/WOW32.DLL").Hash}|ConvertTo-Json|Set-Content "$out/diagnostic-manifest.json"

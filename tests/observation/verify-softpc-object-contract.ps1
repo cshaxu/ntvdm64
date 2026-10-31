@@ -22,12 +22,12 @@ $negativeSize = 4
 if ($SelectedObject -and $Contract -ne 'niddb') { throw 'SelectedObject is limited to the NIDDB diagnostic' }
 if ($Contract -eq 'vdd') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_vdd.c'
-    $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/host/inc/host_def.h','src/mvdm/softpc.new/host/inc/nt_vddp.h','src/mvdm/softpc.new/base/inc/ios.h','src/mvdm/softpc.new/base/inc/dma.h','src/non-mvdm/abi/public/sdk/inc/nt_vdd.h') | ForEach-Object { Join-Path $repo $_ }
+    $headers = @('src/mvdm/softpc.new/host/inc/insignia.h','src/mvdm/softpc.new/host/inc/host_def.h','src/mvdm/softpc.new/host/inc/nt_vddp.h','src/mvdm/softpc.new/base/inc/ios.h','src/mvdm/softpc.new/base/inc/dma.h','src/non-mvdm/public/sdk/inc/nt_vdd.h') | ForEach-Object { Join-Path $repo $_ }
     $object = Join-Path $WorkerBuild 'obj/host/nt_vdd.obj'
     $extraObjects = @('obj/support/ios.obj','obj/ccpu/in.obj','obj/ccpu/out.obj') | ForEach-Object { Join-Path $WorkerBuild $_ }
     $extraSources = @('src/mvdm/softpc.new/base/support/ios.c','src/mvdm/softpc.new/base/ccpu386/in.c','src/mvdm/softpc.new/base/ccpu386/out.c') | ForEach-Object { Join-Path $repo $_ }
     $negativeDefine = 'MVDM_VDD_EXPECT_HANDLER_BYTES'
-    $extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm/softpc.new/base/inc') + '" /I"' + (Join-Path $repo 'src/non-mvdm/abi/public/sdk/inc') + '" '
+    $extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I"' + (Join-Path $repo 'src/mvdm/softpc.new/host/inc') + '" /I"' + (Join-Path $repo 'src/mvdm/softpc.new/base/inc') + '" /I"' + (Join-Path $repo 'src/non-mvdm/public/sdk/inc') + '" '
 } elseif ($Contract -eq 'niddb') {
     $original = Join-Path $repo 'src/mvdm/softpc.new/base/bios/virtual.c'
     $headers = @('src/mvdm/softpc.new/base/inc/virtual.h','src/mvdm/softpc.new/base/inc/sas.h') | ForEach-Object { Join-Path $repo $_ }

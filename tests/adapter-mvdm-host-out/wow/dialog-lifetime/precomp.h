@@ -14,7 +14,7 @@ typedef struct tagWND {
 } WND, *PWND;
 typedef struct { PWND held; } TL;
 #define WOW_ORIGINAL_DIALOG_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_DIALOG_LAYOUT
 C_ASSERT(sizeof(void *) == 4);
 C_ASSERT(sizeof(DLG) == 40);

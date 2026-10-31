@@ -64,7 +64,7 @@ admitted package.
 Use `dos/dem/dem.c`, `demdata.c`, `demdisp.c` and the DEM provider files as
 the sole service/order/layout source.  Replace project-authored DEM route and
 composition logic with same-shaped `adapter-softpc`, `adapter-win32`,
-`non-mvdm/host` or `session` facades.  Preserve the 73-slot original dispatcher
+`non-mvdm` or `session` facades.  Preserve the 73-slot original dispatcher
 and source-defined unavailable paths; do not add a DEM service merely because
 its selector exists.
 

@@ -10,7 +10,7 @@ original path/UI processing; allocation, access and termination failures are
 explicit, and the original environment expansion remains in `cmdenv.c`.
 
 BaseSrv command records, DOS/WOW selection, re-entry and wait ownership are
-the selected original `non-mvdm/host/base/win32/server/srvvdm.c` implementation.
+the selected original `non-mvdm/base/win32/server/srvvdm.c` implementation.
 The retired local `base_vdm_client`, `base_vdm_local` and `base_vdm_broker`
 providers are intentionally absent: they were a single-process replacement for
 that original owner and are not a fallback runtime path.

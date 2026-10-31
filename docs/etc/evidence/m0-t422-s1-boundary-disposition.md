@@ -9,7 +9,7 @@ invent a replacement subsystem?
 ## Evidence base
 
 - The selected 77-body manifest and ten original dispatch tables.
-- Original non-MVDM USER source already admitted as finite `non-mvdm/host`
+- Original non-MVDM USER source already admitted as finite `non-mvdm`
   subsets, including desktop/client/cleanup/task/class/resource algorithms.
 - [Dynamic host-surface audit](m0-t422-s1-dynamic-host-surface-audit.md),
   which resolves 143 selected dynamic exports on this x86 host.

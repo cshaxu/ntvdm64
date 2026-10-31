@@ -50,7 +50,7 @@ monitor-adapter material.
   CSR/CSRSS, NTDLL CSR transport, full BaseClient/Kernel32, Win32k, or
   USER/GDI server merely to satisfy an import. A Kernel VDM function may be
   admitted only under the source policy's semantic-carrier rule: retain its
-  original source under `non-mvdm/host/<original-relative-path>`, document its
+  original source under `non-mvdm/<original-relative-path>`, document its
   direct MVDM consumer and every excluded kernel dependency, and confine any
   adapter to the finite unavailable-kernel ABI rather than its state machine.
   A non-original extraction from an MVDM-owned monitor file, such as the
@@ -73,16 +73,16 @@ against their defect contract, not presented as performance optimizations.
 ## Placement and dependencies
 
 - Place each production file in one of the architecture roots declared by the
-  architecture rules. `mvdm` and `non-mvdm/host` preserve selected MVDM runtime
+  architecture rules. `mvdm` and `non-mvdm` preserve selected MVDM runtime
   (including its original support paths) and accepted non-MVDM OpenNT host
   package topology respectively; package libraries do not create ad-hoc new
   source owners.
 - Individually provenance-registered NTVDMx64-derived declarations or missing
   providers belong to the named adapter/ABI family. They must not create a
-  file below `mvdm` or `non-mvdm/host`; an existing mirror file may change only
+  file below `mvdm` or `non-mvdm`; an existing mirror file may change only
   when it is the original owner of the logic.
 - A newly accepted non-MVDM OpenNT package keeps its original relative path
-  below `non-mvdm/host`. Its private historical boundary, if one is needed,
+  below `non-mvdm`. Its private historical boundary, if one is needed,
   belongs below the correspondingly named `adapter-opennt-host` subfamily;
   neither root may be used as a generic helper collection.
 - `mvdm-platform-abi` contains exact original declarations only.

@@ -30,11 +30,11 @@ editions, or call a historical guest-only path a recovered host file.
 | `mvdm` | text different | 156 | 3,662 | 1,033 | 4,695 |
 | `mvdm` | byte equal / CR-only | 3,286 / 38 | 0 | 0 | 0 |
 | `mvdm` | unpaired selected-union gap | 1,137 | — | — | — |
-| `non-mvdm/host` | text different | 17 | 719 | 13,691 | 14,410 |
-| `non-mvdm/host` | byte equal | 51 | 0 | 0 | 0 |
-| `non-mvdm/host` | unpaired | 5 | — | — | — |
+| `non-mvdm` | text different | 17 | 719 | 13,691 | 14,410 |
+| `non-mvdm` | byte equal | 51 | 0 | 0 | 0 |
+| `non-mvdm` | unpaired | 5 | — | — | — |
 
-The large `non-mvdm/host` deletion count is mostly intentional, finite imported
+The large `non-mvdm` deletion count is mostly intentional, finite imported
 SDK/RTL/USER slices.  It is not a T416 restoration candidate: replacing a
 small composable slice with whole NT headers or CSRSS-era implementation would
 increase the standalone closure and violate the source-policy stopping

@@ -106,7 +106,7 @@ allocations. The implementer owns each item and its evidence update.
 
 - [ ] **C01 - Native send/reply handoff** (`USER-MESSAGE-01`). Owner:
   `wow32-dll` API/task bindings, with original MVDM thunks and original
-  `non-mvdm/host` task algorithms retained. Repair the E92 early-reply failure;
+  `non-mvdm` task algorithms retained. Repair the E92 early-reply failure;
   verify normal, early and duplicate reply, same-task and cross-task nested
   sends, foreign sender and external target, Win16-to-Win16 and both Win16/
   Win32 directions. Native USER owns delivery/result; returning a result must

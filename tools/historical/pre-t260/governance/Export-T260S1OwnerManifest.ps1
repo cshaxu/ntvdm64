@@ -106,7 +106,7 @@ function Get-SourceDisposition([string]$Path, [string]$CurrentModule) {
     if ($p -like 'src/opennt-bop/ingress/*') { return @('opennt-bop', 'project-authored BOP ingress/route', 'retain', 'S5', 'selector/service routing and provider composition') }
     if ($p -like 'src/opennt-bop/*') { return @('opennt-bop', 'OpenNT BOP component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/opennt-guest/*') { return @('opennt-guest', 'OpenNT guest component record', 'retain', 'S2', 'target component root record') }
-    if ($p -like 'src/non-mvdm/host/*') { return @('opennt-host', 'OpenNT host component record', 'retain', 'S2', 'target component root record') }
+    if ($p -like 'src/non-mvdm/*') { return @('opennt-host', 'OpenNT host component record', 'retain', 'S2', 'target component root record') }
     if ($p -like 'src/bx-core/*') {
         return @('bx-core', 'adopted Bochs 2.6', 'retain', 'S3', 'adopted core; README exception register required')
     }
@@ -274,7 +274,7 @@ while ($pending.Count -gt 0) {
     }
 }
 
-foreach ($legacyRoot in @('src/bx-core', 'src/bx-machine', 'src/bx-vdm', 'src/cli', 'src/opennt', 'src/app', 'src/adapter-softpc', 'src/adapter-win32', 'src/opennt-bop', 'src/opennt-guest', 'src/non-mvdm/host')) {
+foreach ($legacyRoot in @('src/bx-core', 'src/bx-machine', 'src/bx-vdm', 'src/cli', 'src/opennt', 'src/app', 'src/adapter-softpc', 'src/adapter-win32', 'src/opennt-bop', 'src/opennt-guest', 'src/non-mvdm')) {
     $legacyFullPath = Join-Path $root $legacyRoot
     if (-not (Test-Path -LiteralPath $legacyFullPath)) { continue }
     Get-ChildItem -LiteralPath $legacyFullPath -Recurse -File | ForEach-Object {

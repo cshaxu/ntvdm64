@@ -1769,7 +1769,7 @@ the expanded fixture is currently failing and must not be reported green.
 
 Following the owner's mirror-rule clarification, OPENNT-HOST-032 imports
 only FreeDDEData into its original path
-src/non-mvdm/host/windows/core/ntuser/client/hdata.c. Original body comparison
+src/non-mvdm/windows/core/ntuser/client/hdata.c. Original body comparison
 (newline-normalized) passes with ORIGINAL_FREE_DDE_BODY_IDENTICAL. The
 source identity is 3BEC21C4BB3CAEF0798208693A89012DF6005C6A330F0F670F974A1CE821FCA2.
 The original module header and function documentation remain; crop/include
@@ -1828,7 +1828,7 @@ The DLL was not deployed and is not a real-Win16 acceptance result.
 OpenNT-4.5 nt/private/ntos/w32/ntuser/client/clres.c has the same SHA-256 as
 the selected OpenNT clres.c. Both contain the observed old-header pointer
 ordering defect. OPENNT-HOST-033 imports the seven original bitmap functions
-and constants/header layout into non-mvdm/host/windows/core/ntuser/client/clres.c
+and constants/header layout into non-mvdm/windows/core/ntuser/client/clres.c
 as a registered subset; original header retained, unrelated resource families
 cropped, dependency definitions ordered before callers. It is fixture-selected
 only: no generated research include is a product source dependency.
@@ -2349,7 +2349,7 @@ original ntcftxt.h::UnregisterClass body also enters this test.
 The earlier mock capture was supporting evidence only. The new original
 capture reproduces the same two-allocation leak. The finite original class
 client subset is now imported at its real upstream-relative path:
-src/non-mvdm/host/windows/core/ntuser/inc/ntcftxt.h (OPENNT-HOST-036).
+src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h (OPENNT-HOST-036).
 It retains StringDuplicate, InitClsMenuName, RegisterClassExWOW and
 UnregisterClass; unrelated text APIs are explicitly cropped. The smallest
 host fix adds two LocalFree calls only at InitClsMenuName's capture-error
@@ -2369,7 +2369,7 @@ installed into the formal WOW32 output table or its direct unregister import.
 The required native class/callback/shared-graph binding remains unfinished.
 
 Build uses the preceding x86 recipe with the original mirror include path
-`/Isrc/non-mvdm/host/windows/core/ntuser/inc`. Build `original.exe` without
+`/Isrc/non-mvdm/windows/core/ntuser/inc`. Build `original.exe` without
 WOW_CLASS_MIRROR and `corrected.exe` with `/DWOW_CLASS_MIRROR`, using distinct
 same-named object outputs under class-registration-r1. The original arm
 includes the hash-pinned extracted functions; the corrected arm includes
@@ -2491,7 +2491,7 @@ W32Win16WndProcEx owns selector-tag decoding, message thunking and CallBack16;
 none belongs in this native binding.
 
 The complete DispatchClientMessage function body is imported byte-for-byte
-at src/non-mvdm/host/windows/core/ntuser/client/client.c (OPENNT-HOST-038).
+at src/non-mvdm/windows/core/ntuser/client/client.c (OPENNT-HOST-038).
 The original copyright/header is retained. Its private precompiled environment
 and other client API families are cropped. Mirror SHA-256:
 `C6BFBCAED042AE9CC3A63964A9E464E8E1BDE913DF3802543B074D27611015D8`.
@@ -2930,7 +2930,7 @@ interface stopping rule excludes the USER service engine, not an independently
 composable metadata lookup; no recursive server import is admitted here.
 
 OPENNT-HOST-039 imports those two functions only at their real original path,
-src/non-mvdm/host/windows/core/ntuser/kernel/class.c. Original SHA-256:
+src/non-mvdm/windows/core/ntuser/kernel/class.c. Original SHA-256:
 `82528443BC5F6C227E0E14FE8A9DBC928BA735F98CF3891744C20C8E1604939A`.
 Mirror subset SHA-256:
 `FD2A69EE3CE88856DDE0DDADD5D47778F537411134FBC06903FC43309E4E5122`.
@@ -4529,7 +4529,7 @@ remain open; neither guest media nor mirror implementation changed here.
 
 OPENNT-HOST-043 imports exact CommonLoadMenu/LoadMenuA/W bodies; 044 adds
 exact WOWFindResourceExWCover to clres.c. Source hashes and crop boundaries
-are registered in non-mvdm/host/README. Formal provider SHA-256:
+are registered in non-mvdm/README. Formal provider SHA-256:
 `755D38C8F524588623DCF6274E4782C5F65E6DE1E2E8136D3CBECA8814E91742`.
 It is not deployed or real-Win16 accepted.
 
@@ -4703,7 +4703,7 @@ version-only successful InitTask would repeat the removed incomplete stub.
 OPENNT-HOST-047 recovers the byte-exact InsertTask body at its original path.
 All other taskman functions remain required but are not imported under fake
 event/message bindings. Package/source/outgoing-boundary disposition is in
-non-mvdm/host/README. ADAPTER-WOW-039 contains only the three finite field views;
+non-mvdm/README. ADAPTER-WOW-039 contains only the three finite field views;
 it introduces no independent policy, task count, table capacity or executor.
 Original taskman SHA-256:
 `E37F4D724650D5758EE05C54E181771AA584AEAD15F5A1376B322ECB7016E64E`.
@@ -6125,7 +6125,7 @@ independent, guest-accepted component before the W2 message/window owner and
 the complete USER registration table exist?
 
 Inputs: the selected original `src/mvdm/wow32/wkman.c`, the imported original
-`non-mvdm/host/windows/core/ntuser/kernel/{queue.c,taskman.c,exitwin.c}`, and
+`non-mvdm/windows/core/ntuser/kernel/{queue.c,taskman.c,exitwin.c}`, and
 pinned OpenNT `windows/core/ntuser/{client/client.c,kernel/{ntstubs.c,
 taskman.c,cleanup.c}}`.
 
@@ -6744,7 +6744,7 @@ state used by USER16.  The original `CallCsrFlag` is likewise written as a
 pointer during `FUN_FINALUSERINIT`.  A lone clock mapping, a zero structure,
 or a BOP-time `VdmAddVirtualMemory` call cannot be a valid W1 implementation.
 
-The locally recovered `src/non-mvdm/host/.../client/client.c` is currently a
+The locally recovered `src/non-mvdm/.../client/client.c` is currently a
 registered selected-function subset, not the complete original client
 translation unit.  It therefore cannot be relabelled as the original USER
 shared-section producer.  The actual producer path crosses the explicitly

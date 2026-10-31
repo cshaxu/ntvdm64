@@ -23,7 +23,7 @@ and original BaseSrv-record assembly; its client library is linked by run16
 and ntvdm without creating duplicate protocol providers. `ntvdm` owns the
 worker-local session, guest-memory lease and all local Console/SoftPC/monitor/
 Redirector/VDD/WOW/debugger bindings. Original algorithms remain in `mvdm` or
-`non-mvdm/host`.
+`non-mvdm`.
 
 The only non-executable shared implementation island is
 `compat`: named same-shaped historical host ABI bindings with

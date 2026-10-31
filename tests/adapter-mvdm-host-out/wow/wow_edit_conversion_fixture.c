@@ -1,6 +1,6 @@
 #include "wow_edit_conversion_bindings.h"
 #include "wow_edit_entry_bindings.h"
-#include "non-mvdm/host/windows/core/ntuser/client/globals.h"
+#include "non-mvdm/windows/core/ntuser/client/globals.h"
 #include <stdio.h>
 
 /* Supplemental transport contract only. Link the real conversion binding

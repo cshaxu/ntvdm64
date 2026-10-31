@@ -1013,7 +1013,7 @@ none is an unclassified x64-width rollback candidate:
 | `gmi.h` two `IHPE` move callbacks | Necessary selected CPU40/C-VID function-table ABI; the original generic no-prototype table does not describe the selected generated providers. |
 | `insignia.h` `IHPE` | Only the original line's trailing whitespace differs; source code and type are original. Restoring that whitespace would violate the repository whitespace check. |
 | `xmsblock.c` x64 wording | Explanation attached to retained DIV-077 lease boundary, not an independent code implementation. |
-| `non-mvdm/host/public/sdk/inc/ntrtl.h` two `SIZE_T` declarations | Original public SDK declaration carrier, not local behavior. |
+| `non-mvdm/public/sdk/inc/ntrtl.h` two `SIZE_T` declarations | Original public SDK declaration carrier, not local behavior. |
 
 The three remaining diagnostic candidates were restored to their pinned
 OpenNT `%lx` forms in `config.c`, `nt_mem.c`, and `stubs.c`. The formal x86

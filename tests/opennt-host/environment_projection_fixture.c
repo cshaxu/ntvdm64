@@ -1,7 +1,7 @@
 #include <windows.h>
 #include <nt.h>
 #include <ntrtl.h>
-#include "non-mvdm/host/base/ntos/rtl/environapi.h"
+#include "compat/include/environapi.h"
 #include "ntvdm-exe/win32/mvdm_base_vdm_environment.h"
 
 BOOL BaseCreateVDMEnvironment(PWCHAR environment, ANSI_STRING *ansi,

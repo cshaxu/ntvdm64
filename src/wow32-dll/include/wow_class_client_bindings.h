@@ -27,7 +27,7 @@ BOOL WINAPI wow_class_client_query(wow_class_client_context *, HINSTANCE,
 #ifdef WOW_ORIGINAL_CLASS_CLIENT
 #include <tchar.h>
 #include "wow_user_capture_bindings.h"
-#include "non-mvdm/host/windows/core/ntuser/inc/ntsend.h"
+#include "non-mvdm/windows/core/ntuser/inc/ntsend.h"
 wow_class_client_context *WINAPI wow_class_client_current(void);
 ATOM WINAPI wow_class_client_publish(WNDCLASSEXA *, PUNICODE_STRING,
     PCLSMENUNAME, PROC, WORD, DWORD, DWORD *);

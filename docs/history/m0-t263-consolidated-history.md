@@ -16,7 +16,7 @@ not product behavior.
   becoming a second machine runtime.
 - New `opennt-utils` gained the exact original `suballoc` package without
   becoming a generic common layer.
-- `non-mvdm/host` retains only actually composed/recovered original host bodies.
+- `non-mvdm` retains only actually composed/recovered original host bodies.
   A brief preservation-only import of VDD/debugger/fax packages was withdrawn:
   future owner packages must import them only when their provider is admitted.
 - `tools/opennt` gained the exact `tools16` closure as a non-runtime historical

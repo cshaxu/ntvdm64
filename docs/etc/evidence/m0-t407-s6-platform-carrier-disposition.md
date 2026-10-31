@@ -24,7 +24,7 @@ because their fields resemble x86 structures.
 2. PM-stack projection and CCPU table bindings are finite compatibility seams
    because original kernel addresses cannot cross into guest state.
 3. Kernel VDM task construction and native TEB carrier are unavailable outside
-   kernel/NT4 USER environment; importing them as `non-mvdm/host` helpers would
+   kernel/NT4 USER environment; importing them as `non-mvdm` helpers would
    import their owning runtime.
 4. S6 adds no replacement lifecycle.
 

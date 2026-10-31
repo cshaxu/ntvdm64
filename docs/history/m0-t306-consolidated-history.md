@@ -21,7 +21,7 @@ binding.
   sole executor and no second SoftPC executor is admitted.
 - 54 calls retain the bounded source-shaped Base VDM local seam; the
   CSRSS-bound BaseClient/BaseSrv product shell is not imported.
-- 11 calls select the exact `non-mvdm/host/netapi/netlib/ntstatus.c` mirror
+- 11 calls select the exact `non-mvdm/ds/netapi/netlib/ntstatus.c` mirror
   slice, owned by the Redirector package; four use public Win32 Redirector
   bindings and one remains a downlevel RAP protocol hard boundary.
 - 15 calls are public CRT leaves and one is an NTDLL/CSRSS hard boundary.

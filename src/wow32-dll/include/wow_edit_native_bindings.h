@@ -4,9 +4,9 @@
 #include <winternl.h>
 #include "wow_native_gui_thread.h"
 #define WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef WOW_ORIGINAL_LARGE_STRING_LAYOUT
-#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 
 /* ADAPTER-WOW-057. Native leaves for the original EDIT package, not a
  * replacement editor. Callers retain the existing task/native-call scopes.

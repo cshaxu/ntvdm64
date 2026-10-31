@@ -1,0 +1,32 @@
+[
+  {
+    "variant": "only-ntexapi",
+    "source": "nt_timer.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "only-ntexapi",
+    "source": "cmdenv.c",
+    "exitCode": 0
+  },
+  {
+    "variant": "only-ntrtl",
+    "source": "nt_timer.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "only-ntrtl",
+    "source": "cmdenv.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "only-nturtl",
+    "source": "nt_timer.c",
+    "exitCode": 2
+  },
+  {
+    "variant": "only-nturtl",
+    "source": "cmdenv.c",
+    "exitCode": 0
+  }
+]

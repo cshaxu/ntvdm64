@@ -18,11 +18,14 @@ foreach ($row in Import-Csv -LiteralPath (Join-Path $repo $CoverageCsv)) {
     }
     $pairs.Add([pscustomobject]@{path=$row.path;source=$row.source;group=$row.provenance;equal=($row.identity -eq 'byte-equal')})
 }
-foreach ($name in @(& git -C $repo ls-files src/non-mvdm/host)) {
-    if ($name -eq 'src/non-mvdm/host/README.md') { continue }
-    $relative = $name.Substring('src/non-mvdm/host/'.Length)
-    # Registered NetLib mirror drops the original ds/ prefix.
-    if ($relative.StartsWith('netapi/')) { $relative = 'ds/' + $relative }
+$previousHost = @(& git -C $repo ls-tree -r --name-only dc0d7e8f6 -- src/non-mvdm/host)
+if ($LASTEXITCODE -ne 0) { throw 'Cannot enumerate original host cohort before flattening.' }
+$hostFiles = @($previousHost | Where-Object { $_ -notmatch '/(environapi|zwapi|ntrtlp|xactsrv_wksta_minimal)\.h$' } | ForEach-Object {
+    ($_ -replace '^src/non-mvdm/host/netapi/xactsrv/(ascii|auxdata|convert|examine|parmnum|pointer|strucsiz)\.c$', 'src/non-mvdm/ds/netapi/rap/$1.c' -replace '^src/non-mvdm/host/netapi/', 'src/non-mvdm/ds/netapi/' -replace '^src/non-mvdm/host/', 'src/non-mvdm/' -replace '/(largeint|movemem)-selected\.asm$', '/$1.asm')
+})
+foreach ($name in $hostFiles) {
+    if ($name -eq 'src/non-mvdm/README.md') { continue }
+    $relative = $name.Substring('src/non-mvdm/'.Length)
     $source = Join-Path 'O:/repos.external/OpenNT' $relative
     if (-not (Test-Path -LiteralPath $source -PathType Leaf)) { throw "Missing original: $source" }
     $equal = (Get-FileHash -LiteralPath $source).Hash -eq (Get-FileHash -LiteralPath (Join-Path $repo $name)).Hash

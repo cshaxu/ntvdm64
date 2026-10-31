@@ -1,0 +1,16 @@
+{
+  "baseline": "dc0d7e8f6",
+  "exactGitBlobs": 172,
+  "changed": [
+    {
+      "old": "src/non-mvdm/host/README.md",
+      "new": "src/non-mvdm/README.md"
+    },
+    {
+      "old": "src/non-mvdm/host/base/win32/client/vdm.c",
+      "new": "src/non-mvdm/base/win32/client/vdm.c"
+    }
+  ],
+  "missing": [],
+  "note": "Host cohort; unselected ABI full copies and JPEG header removed, selected OpenNT 4.5 dependencies recorded in README."
+}

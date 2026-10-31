@@ -659,7 +659,7 @@ guest restrictions remain in force. Identity is physical—selected source path,
 edition/provenance, signature and content identity where applicable—not a
 function spelling.
 
-An original OpenNT package outside `base/mvdm` is eligible for `non-mvdm/host`
+An original OpenNT package outside `base/mvdm` is eligible for `non-mvdm`
 only when a complete-package audit proves all of the following. The audit may
 select only the required original slice; it never implies importing unrelated
 translation units from an otherwise accepted package:
@@ -724,10 +724,10 @@ future real-host retest.
   and `base/keymouse` controller sources—SIM/monitor providers, and original
   package-internal `inc`, `oemuni` and `suballoc` support paths. Original
   MVDM monitor routines remain MVDM-owned even when they expose a kernel
-  boundary. Non-MVDM kernel VDM semantic carriers belong to `non-mvdm/host`,
+  boundary. Non-MVDM kernel VDM semantic carriers belong to `non-mvdm`,
   not this mirror. It does not own standalone
   tools or immutable firmware media inputs.
-- `non-mvdm/host`: the canonical original non-MVDM OpenNT host-service mirror.
+- `non-mvdm`: the canonical original non-MVDM OpenNT host-service mirror.
   It owns every complete, source-audited OpenNT host package accepted for use
   by `mvdm-host`; BaseSrv/client VDM is merely its first accepted service
   slice, not this component's boundary. It is neither a replacement MVDM
@@ -748,7 +748,7 @@ future real-host retest.
   packages remain in `mvdm-host`.
 - Reviewed NTVDMx64-derived declarations or missing-provider fallbacks belong
   to the named adapter/ABI family. They never create a mirror component or a
-  new file below `mvdm` or `non-mvdm/host`; only an existing original file may
+  new file below `mvdm` or `non-mvdm`; only an existing original file may
   receive a minimal owner-local divergence.
 - `mvdm-platform-abi`: exact original declarations and contracts outside
   MVDM required to compile imported MVDM packages. It contains no replacement
@@ -756,7 +756,7 @@ future real-host retest.
 - `mvdm/dos/v86`: complete selected DOS/V86 guest source, resources, build
   descriptions, intermediates and original products. `mvdm/bin86` and
   `mvdm/wow16` are the selected load-only Bin86 and WOW16 carries; the separate
-  `non-mvdm/host/base/win32/winnls/fontsup/system` carries exact original
+  `non-mvdm/base/win32/winnls/fontsup/system` carries exact original
   16-bit fonts. None
   implies an external WOW16 source-universe mirror.
 
@@ -783,7 +783,7 @@ process-local bindings have moved to the owning executable root.
   provider policy or retired-machine objects.
 - `adapter-opennt-host`: the package-private OpenNT host-interface adapter.
   It owns only same-shaped substitutions for reached private-host calls from
-  an accepted `non-mvdm/host` package; it has no MVDM, guest, BOP or Bochs
+  an accepted `non-mvdm` package; it has no MVDM, guest, BOP or Bochs
   meaning. Its subfamilies remain named by the accepted original owner package
   rather than being merged into a generic compatibility layer.
 
@@ -1234,10 +1234,10 @@ protocol declarations directly. Worker-base remains worker-only.
 ```text
 run16 -> ntsrv protocol client
 ntmon -> ntsrv management protocol client
-run16 -> non-mvdm/host Base client + compat
-ntsrv -> service RPC transport + non-mvdm/host BaseSrv owner
+run16 -> non-mvdm Base client + compat
+ntsrv -> service RPC transport + non-mvdm BaseSrv owner
 ntvdm -> worker-local session, command, monitor, SoftPC, Redirector, VDD, WOW and debugger bindings
-ntvdm -> original mvdm + non-mvdm/host + compat
+ntvdm -> original mvdm + non-mvdm + compat
 
 compat -> public modern Win32/NTDLL only
 common/protocol -> versioned fixed-width protocol declarations and service IDL

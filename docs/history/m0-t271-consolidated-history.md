@@ -143,7 +143,7 @@ S3 restores the admitted OpenNT COMMAND package as the active source owner.
   divergence records.
 - Same-shaped CCPU/SAS, VDM API, public Win32/OEM, child lifecycle and host
   event dependencies are now owned by `adapter-softpc`, `adapter-win32` and
-  `non-mvdm/host`, respectively. App-owned startup/session composition no
+  `non-mvdm`, respectively. App-owned startup/session composition no
   longer remains under `opennt-bop/ingress`.
 - The PIF parser remains an exact COMMAND owner-family source due its shared
   global state and incompatible historical parser/caller `PIF_DATA` layouts;

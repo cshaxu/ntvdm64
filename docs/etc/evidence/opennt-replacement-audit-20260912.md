@@ -80,7 +80,7 @@ total has been established.
 - CPU40 descriptor transitions, BOP/interrupt return, keyboard, mouse,
   text video, memory and environment services remain incomplete audit areas.
   Include mirror-internal special cases and diagnostics, not just adapters.
-- Architecture/source policy now places external kernel VDM in `non-mvdm/host`,
+- Architecture/source policy now places external kernel VDM in `non-mvdm`,
   but `docs/design/CODING.md` and `docs/rules/CODING.md` still retain older
   kernel-vdm placement text. Record this governance inconsistency; no source
   move is justified solely by the directory label.
@@ -2175,7 +2175,7 @@ OpenNT-duplicate count. Product source, build and runtime were unchanged.
 
 ### BaseClient retained environment bodies
 
-Compared all three current non-mvdm/host/base/win32/client/vdm.c environment
+Compared all three current non-mvdm/base/win32/client/vdm.c environment
 functions with original OpenNT base/win32/client/vdm.c lines 3022--3286.
 BaseCreateVDMEnvironment, BaseDestroyVDMEnvironment and BaseGetEnvNameType_U
 retain the inspected original branches, path-shortening policy, arithmetic,

@@ -15,7 +15,7 @@ runtime source content or leaving an obsolete MVDM root?
 ## Procedure
 
 1. Compared all 42 `*.fon` files at
-   `src/non-mvdm/host/base/win32/winnls/fontsup/system` against OpenNT
+   `src/non-mvdm/base/win32/winnls/fontsup/system` against OpenNT
    `base/win32/winnls/fontsup/system` by Git blob identity.
 2. Compared `src/mvdm/v86/util/{makefile,quit.asm}` against
    `base/mvdm/v86/util` by Git blob identity.

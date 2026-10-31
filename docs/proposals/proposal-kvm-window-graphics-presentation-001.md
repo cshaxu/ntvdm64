@@ -1277,7 +1277,7 @@ src/
   basesrv-exe/
     transport/                     # 有限认证关联、失效/撤销；无帧/输入
   mvdm/                            # 原始 DOS/视频/输入 owner 的最小登记 hook
-  non-mvdm/host/                     # 原始 BaseClient/BaseSrv 策略，不重写
+  non-mvdm/                     # 原始 BaseClient/BaseSrv 策略，不重写
   product-abi/                      # 既有共享版本定义；不放运行态机制
   product-package/                  # 包路径；不硬编码 O:/winnt
 tests/

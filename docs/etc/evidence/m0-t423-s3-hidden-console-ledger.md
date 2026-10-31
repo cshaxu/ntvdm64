@@ -1834,7 +1834,7 @@ Recovery admission for this finite binding:
 
 | Rung | Disposition |
 | --- | --- |
-| Original source | Original non-mvdm/host/base/win32/server/srvvdm.c remains the owner of ConsoleRecord, task selection, READY/BUSY and reentry. It is unchanged. Its ConsoleHandle discriminator assumes the original system Console association; it cannot discover a product-created hidden Console's former execution context. |
+| Original source | Original non-mvdm/base/win32/server/srvvdm.c remains the owner of ConsoleRecord, task selection, READY/BUSY and reentry. It is unchanged. Its ConsoleHandle discriminator assumes the original system Console association; it cannot discover a product-created hidden Console's former execution context. |
 | Same-shaped boundary | Existing service_bind_existing_console supplies the verified physical membership and broker-local Console key. The new operation retains that key before physical detachment, without issuing fake CheckVDM or creating a DOS record. |
 | External intrusion | None required; no guest, MVDM, OpenNT mirror or shared-library changes. No CSRSS/Console server import. |
 | Product exception | The owner-approved root/helper split requires carrying that preexisting association across Consoles. A separate unnamed, server-issued SYNCHRONIZE-only event is an authenticated capability. It carries neither a chosen worker ID nor Console key from the caller; the original task algorithm still decides execution. |

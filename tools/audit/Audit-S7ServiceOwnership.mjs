@@ -48,7 +48,7 @@ for(const f of current.functions) {
 }
 const comparisons=originals.map(original=>{
   const relative=original.path.replace('O:/repos.external/OpenNT/','');
-  const mirror='src/non-mvdm/host/'+relative;
+  const mirror='src/non-mvdm/'+relative;
   if(!fs.existsSync(mirror))return {original:original.path,mirror,selectedMirrorPresent:false};
   const selected=source(mirror);
   return {original:original.path,originalSha256:original.sha256,mirror,

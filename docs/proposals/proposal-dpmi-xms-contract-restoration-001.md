@@ -16,7 +16,7 @@ duplicate implementation ownership.
 Restore original DPMI/XMS allocation, memory movement and mode-transition
 contracts with minimal mirror diff and no autonomous duplicate algorithms.
 Original MVDM owners remain in `mvdm-host`; any separately admitted non-MVDM
-semantic carrier belongs under `non-mvdm/host` at its original-relative path.
+semantic carrier belongs under `non-mvdm` at its original-relative path.
 Follow the [source policy](../etc/operations/policy/source-policy.md) and
 [architecture rules](../rules/ARCHITECTURE.md). Bind only finite unavailable
 operations after proving the original owner and complete outgoing boundary.

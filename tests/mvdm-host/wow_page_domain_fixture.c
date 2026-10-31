@@ -108,7 +108,7 @@ extern LONG VdmQueryFreeVirtualMemory(ULONG *bytes, ULONG *largest);
 #include "wow32-dll/include/wow_edit_lookaside_bindings.h"
 #define WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #define WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
-#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/windows/core/ntuser/client/usercli.h"
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_COMBO_STATE_LAYOUT
 #include "wow32-dll/include/wow_user_registered_callbacks.h"

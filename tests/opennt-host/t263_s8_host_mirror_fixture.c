@@ -4,8 +4,8 @@
 #include <lmerr.h>
 
 #define VDMREDIR_DLL
-#include "non-mvdm/host/inc/vrnmpipe.h"
-#include "non-mvdm/host/vdmredir/vrputil.h"
+#include "non-mvdm/inc/vrnmpipe.h"
+#include "non-mvdm/vdmredir/vrputil.h"
 
 BOOLEAN runtime_vr_initialized_provider(VOID);
 

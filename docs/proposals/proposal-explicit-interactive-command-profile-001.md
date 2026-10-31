@@ -136,7 +136,7 @@ There is exactly one Console-input owner at a time:
 
 * `mvdm-host/dos/command` retains `cmdGetNextCmd`, `cmdGetStartInfo`,
   `cmdExec`, command parsing and guest lifecycle logic.
-* `non-mvdm/host` BaseClient/BaseSrv slices retain the selected `VDMINFO` and
+* `non-mvdm` BaseClient/BaseSrv slices retain the selected `VDMINFO` and
   command-record layouts/order wherever independently composable.
 * `adapter-mvdm-host-out` retains only same-shaped private monitor/Base VDM
   binding that public modern Win32 cannot provide directly.

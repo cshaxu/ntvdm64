@@ -11,7 +11,7 @@ Consolidated task record. Raw contemporaneous records are retained in the extern
 T260 closes the non-behavioural eight-component source-layout migration.  The
 live `src/` tree has exactly these production components:
 
-`bx-core`, `bx-mantle`, `opennt-guest`, `non-mvdm/host`, `opennt-bop`,
+`bx-core`, `bx-mantle`, `opennt-guest`, `non-mvdm`, `opennt-bop`,
 `adapter-win32`, `adapter-softpc`, and `app`.
 
 `opennt-guest` remains the artifact-only eighth component.  The other seven

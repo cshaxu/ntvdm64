@@ -76,7 +76,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 #define TestWindowProcess wow_window_client_owns_state
 #endif
 #ifdef WOW_ORIGINAL_DIALOG_GETSET
-#include "non-mvdm/host/windows/core/ntuser/inc/ntsend.h"
+#include "non-mvdm/windows/core/ntuser/inc/ntsend.h"
 #endif
 #ifdef WOW_ORIGINAL_PRIVATE_WORD_SETTER
 /* The selected original server body can access only our retained local
@@ -86,7 +86,7 @@ BOOL WINAPI _DefSetText(HWND, LPCWSTR, BOOL);
 DWORD WINAPI xxxSetWindowLong(PWND, int, DWORD, BOOL);
 DWORD WINAPI xxxSetWindowData(PWND, int, DWORD, BOOL);
 #endif
-#include "non-mvdm/host/windows/core/ntuser/client/usercli.h"
+#include "non-mvdm/windows/core/ntuser/client/usercli.h"
 #undef WOW_ORIGINAL_CONTROL_PROTOTYPES
 #undef WOW_ORIGINAL_CONTROL_EXTENT_LAYOUT
 #undef WOW_ORIGINAL_DIALOG_GETSET_LAYOUT

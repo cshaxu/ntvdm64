@@ -32,5 +32,5 @@ passed. Strict mirror roots were not changed.
 ## Handoff
 
 S3 may now move the service entry, protocol and authenticated transport into
-`src/basesrv` while keeping `srvvdm.c` in `non-mvdm/host` as the original
+`src/basesrv` while keeping `srvvdm.c` in `non-mvdm` as the original
 DOS/WOW record-policy owner.

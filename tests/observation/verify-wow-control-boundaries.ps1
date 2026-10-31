@@ -48,7 +48,7 @@ function RunOwned([string]$name, [string]$exe, [string[]]$arguments, [int]$secon
 try {
     & "$root/tools/build/New-T447S3CallBoundaryNinja.ps1" -RepositoryRoot $root -BuildRoot $build -VsDevCmd $VsDevCmd
     # Include untracked staged sources: git diff alone omits new original slices.
-    $sourceRoots = @('src/wow32-dll','src/non-mvdm/host/windows/core/ntuser','src/compat/include','tests/adapter-mvdm-host-out/wow','tools/build/New-T447S3CallBoundaryNinja.ps1')
+    $sourceRoots = @('src/wow32-dll','src/non-mvdm/windows/core/ntuser','src/compat/include','tests/adapter-mvdm-host-out/wow','tools/build/New-T447S3CallBoundaryNinja.ps1')
     $deletedPaths = @(& git -C $root ls-files -d -- @sourceRoots)
     if ($LASTEXITCODE) { throw 'Cannot enumerate deleted source inputs.' }
     $paths = @(& git -C $root ls-files -co --exclude-standard -- @sourceRoots) | Sort-Object -Unique

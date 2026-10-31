@@ -11,7 +11,7 @@ OpenNT meaningful without changing source contents or build ownership.
 The logical build classifications remain explicit: executable host source,
 load-only guest source, independently buildable tools and immutable firmware
 inputs. A physical source root does not authorize a new link edge. Existing
-non-MVDM `non-mvdm/host`, project code and adapters remain outside this tree.
+non-MVDM `non-mvdm`, project code and adapters remain outside this tree.
 
 `src/mvdm-host-overlay` is not original OpenNT content. Re-root it as the
 private paired `src/mvdm-overlay` tree, retaining its same relative source

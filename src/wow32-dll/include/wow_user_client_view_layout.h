@@ -24,7 +24,7 @@ typedef LONG (APIENTRY *WNDPROC_PWND)(PWND, UINT, DWORD, LONG);
 /* The original-layout opaque pointer is not the cleanup/input adapter's
  * PTHREADINFO typedef. Restrict this spelling to the retained layout body. */
 #define PTHREADINFO PWOW_CLIENT_THREADINFO
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #undef PTHREADINFO
 #undef WOW_ORIGINAL_CLIENT_VIEW_LAYOUT
 #undef CWINHOOKS

@@ -35,12 +35,12 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $includes = @(
     'src',
     'src/compat/include',
-    'src/non-mvdm/host/public/sdk/inc',
-    'src/non-mvdm/abi/public/sdk/inc',
-    'src/non-mvdm/abi/public/internal/base/inc',
-    'src/non-mvdm/abi/public/internal/windows/inc',
-    'src/non-mvdm/abi/private/windows/inc',
-    'src/non-mvdm/abi/public/ddk/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/internal/base/inc',
+    'src/non-mvdm/public/internal/windows/inc',
+    'src/non-mvdm/private/windows/inc',
+    'src/non-mvdm/public/ddk/inc',
     'src/mvdm-support/inc',
     'src/ntvdm-exe/softpc/include/generated/x86/prod',
     'src/mvdm-host/softpc.new/base/ccpu386',
@@ -56,7 +56,7 @@ $includes = @(
     '/I "' + (NinjaPath $includePath) + '"'
 }
 $nt = NinjaPath (Join-Path $root 'src/compat/include/nt.h')
-$ntexapi = NinjaPath (Join-Path $root 'src/non-mvdm/host/public/sdk/inc/ntexapi.h')
+$ntexapi = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
 $cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + $nt + '" /FI "' + $ntexapi + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')

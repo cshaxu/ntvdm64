@@ -23,7 +23,7 @@ if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorA
 New-Item -ItemType Directory -Force -Path $build | Out-Null
 $environment = Join-Path $build ("msvc-{0}.cmd" -f $Architecture)
 @('@echo off', 'set "MVDM_T335_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T335_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/host/public/sdk/inc'
+$cflags = '/nologo /std:c11 /MT /W4 /WX /showIncludes /I ' + $root + '/src /I ' + $root + '/src/session /I ' + $root + '/src/wow32-dll/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/non-mvdm/public/sdk/inc'
 $content = @"
 ninja_required_version = 1.10
 root = $root

@@ -9,7 +9,7 @@ Eliminate all three temporary/private source-component roots:
 3. `src/opennt-host-overlay`.
 
 Their content must become either a minimal, registered source change in the
-proper original mirror (`mvdm` or `non-mvdm/host`) or a narrowly named
+proper original mirror (`mvdm` or `non-mvdm`) or a narrowly named
 `adapter-*` binding where the original owner cannot call the modern platform
 directly. It is not acceptable to preserve a directory by renaming it, or to
 move original provider policy into an adapter simply to make the directory
@@ -82,7 +82,7 @@ Audit each private OpenNT-host overlay body and its original-package caller.
 For `dos_worker_wait.inc`, first attempt a source-shaped minimal body inside
 the original BaseSrv `srvvdm.c` mirror; if it is solely a modern transport
 binding, move it to the BaseSrv subfamily of `adapter-opennt-host` while
-keeping record lookup, locking and queue policy in `non-mvdm/host`.
+keeping record lookup, locking and queue policy in `non-mvdm`.
 
 Closure for this phase is zero tracked paths and no formal production reference
 under `src/opennt-host-overlay`, with resident-worker versus pending-command

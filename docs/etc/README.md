@@ -1093,3 +1093,7 @@ records the selected original USER providers, callback and task-loss ownership,
 focused timer/hook witnesses, and the finite S2 dialog/input/caret handoff.
 
 [T473 source-layout rename](evidence/m0-t473-s12-source-layout.md) records the original-cohort move, collisions and verification.
+
+[T473 original declaration provenance](evidence/m0-t473-original-abi-provenance.md) preserves the imported declaration-cohort record.
+
+[T473 original-path correction](evidence/m0-t473-s12-original-path-correction.md) records the flat source layout and header selection evidence.

@@ -2,7 +2,7 @@
 #include "wow_window_words_binding.h"
 #include "wow_edit_entry_bindings.h"
 #include "wow_dialog_state_bindings.h"
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include <stdio.h>
 #include <string.h>
 static unsigned errors;

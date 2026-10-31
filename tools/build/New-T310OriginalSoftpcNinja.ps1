@@ -95,12 +95,13 @@ $dosRoot = Join-Path $root 'src/mvdm/softpc.new/base/dos'
 $demRoot = Join-Path $root 'src/mvdm/dos/dem'
 $commandRoot = Join-Path $root 'src/mvdm/dos/command'
 $redirRoot = Join-Path $root 'src/mvdm/vdmredir'
-$openntNetlibRoot = Join-Path $root 'src/non-mvdm/host/netapi/netlib'
-$openntNetapiRoot = Join-Path $root 'src/non-mvdm/host/netapi/api'
-$openntXactSrvRoot = Join-Path $root 'src/non-mvdm/host/netapi/xactsrv'
-$openntBaseVdmRoot = Join-Path $root 'src/non-mvdm/host/base/win32/client'
-$openntRtlRoot = Join-Path $root 'src/non-mvdm/host/base/ntos/rtl'
-$openntRtlX86Root = Join-Path $root 'src/non-mvdm/host/base/ntos/rtl/x86'
+$openntNetlibRoot = Join-Path $root 'src/non-mvdm/ds/netapi/netlib'
+$openntNetapiRoot = Join-Path $root 'src/non-mvdm/ds/netapi/api'
+$openntXactSrvRoot = Join-Path $root 'src/non-mvdm/ds/netapi/xactsrv'
+$openntRapRoot = Join-Path $root 'src/non-mvdm/ds/netapi/rap'
+$openntBaseVdmRoot = Join-Path $root 'src/non-mvdm/base/win32/client'
+$openntRtlRoot = Join-Path $root 'src/non-mvdm/base/ntos/rtl'
+$openntRtlX86Root = Join-Path $root 'src/non-mvdm/base/ntos/rtl/x86'
 $xmsRoot = Join-Path $root 'src/mvdm/xms.486'
 $dpmiRoot = Join-Path $root 'src/mvdm/dpmi32'
 $suballocRoot = Join-Path $root 'src/mvdm/suballoc'
@@ -291,9 +292,10 @@ $adapterRedirWorkerNames = @('mvdm_redirector_worker_copy.c',
 $openntNetlibNames = @('ntstatus.c', 'copystr.c', 'allocstr.c', 'initoem.c', 'memalloc.c', 'time.c', 'timezone.c', 'xlatesvc.c', 'svcinfo.c', 'packstr.c')
 $openntNetapiNames = @('apibuff.c')
 $openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')
+$openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'auxdata.c', 'parmnum.c')
 $openntBaseVdmNames = @('vdm.c')
 $openntRtlNames = @('environ.c', 'error.c', 'time.c')
-$openntRtlX86Names = @('largeint-selected.asm', 'movemem-selected.asm')
+$openntRtlX86Names = @('largeint.asm', 'movemem.asm')
 $adapterSoftpcNames = @('mvdm_softpc_firmware.c', 'mvdm_shadow_registry.c', 'mvdm_xms_memory.c', 'mvdm_a20.c', 'mvdm_softpc_guest_memory.c', 'mvdm_softpc_physical_mapping.c',
                          'mvdm_guest_location.c', 'mvdm_softpc_execution.c', 'mvdm_softpc_termination.c',
                          'mvdm_softpc_ccpu_wait.c',
@@ -416,7 +418,8 @@ foreach ($name in $openntNetapiNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntNetapiRoot $name))) { throw "Original OpenNT NetAPI source missing: $name" }
 }
 foreach ($name in $openntXactSrvNames) {
-    if (!(Test-Path -LiteralPath (Join-Path $openntXactSrvRoot $name))) { throw "Original OpenNT XACTSRV source missing: $name" }
+    $sourceRoot = if ($name -in $openntRapNames) { $openntRapRoot } else { $openntXactSrvRoot }
+    if (!(Test-Path -LiteralPath (Join-Path $sourceRoot $name))) { throw "Original OpenNT XACTSRV/RAP source missing: $name" }
 }
 foreach ($name in $openntBaseVdmNames) {
     if (!(Test-Path -LiteralPath (Join-Path $openntBaseVdmRoot $name))) { throw "Original OpenNT Base VDM source missing: $name" }
@@ -694,29 +697,28 @@ $includeRootPaths = @(
     'src',
     'src/vdmredir-dll/include',
     'src/ntvdm-exe/redir/include',
-    'src/non-mvdm/host/netapi/xactsrv',
+    'src/non-mvdm/ds/netapi/xactsrv',
     'src/ntvdm-exe/vdd/include',
     # The adapter owns the modern `nt.h` type binding. Original reached NT
-    # public-header subsets are restored under opennt-host below, so source
+    # public-header subsets are retained under non-mvdm below, so source
     # files still resolve historical short names without an adapter copy.
     'src/compat/include',
     # Reached original non-MVDM OpenNT declaration slices retain their
-    # source identity under opennt-host. Keep this after the adapter's nt.h:
+    # source identity under non-mvdm. Keep this after the adapter's nt.h:
     # nt.h owns modern type binding while this directory owns original
     # public-header subsets such as ntexapi.h.
-    'src/non-mvdm/host/public/sdk/inc',
-    'src/non-mvdm/abi/public/sdk/inc',
-    'src/non-mvdm/abi/public/internal/base/inc',
-    'src/non-mvdm/abi/public/internal/windows/inc',
+    'src/non-mvdm/public/sdk/inc',
+    'src/non-mvdm/public/internal/base/inc',
+    'src/non-mvdm/public/internal/windows/inc',
     # VDMREDIR's original Net/RPC and DLC bodies consume these retained
     # declaration-only OpenNT ABI headers.  They are original include roots,
     # not replacement implementations.
-    'src/non-mvdm/abi/public/internal/ds/inc',
-    'src/non-mvdm/abi/public/internal/net/inc',
-    'src/non-mvdm/abi/private/inc',
-    'src/non-mvdm/abi/private/ds/netapi/rpcxlate',
-    'src/non-mvdm/abi/private/windows/inc',
-    'src/non-mvdm/abi/public/ddk/inc',
+    'src/non-mvdm/public/internal/ds/inc',
+    'src/non-mvdm/public/internal/net/inc',
+    'src/non-mvdm/private/inc',
+    'src/non-mvdm/ds/netapi/rpcxlate',
+    'src/non-mvdm/private/windows/inc',
+    'src/non-mvdm/public/ddk/inc',
     'src/mvdm/inc',
     # The selected x86 product generator output is absent from the source
     # union, so it remains a bounded SoftPC adapter carrier, not a new mirror
@@ -1129,7 +1131,7 @@ $graph.Add('build ' + $object + ': cc_host ' + (NinjaPath (Join-Path $hostRoot $
         # guard before the original source reaches <ntexapi.h>.  Force the
         # selected opennt-host subset after nt.h so the original timer's
         # declarations stay visible on both architectures.
-        $ntexapiSubset = NinjaPath (Join-Path $root 'src/non-mvdm/host/public/sdk/inc/ntexapi.h')
+        $ntexapiSubset = NinjaPath (Join-Path $root 'src/non-mvdm/public/sdk/inc/ntexapi.h')
         # Both entry points already use WINAPI; a cdecl thunk double-pops
         # their callback argument on x86 when the thread routine returns.
         $threadAbiFlag = if ($name -in @('nt_thred.c', 'nt_error.c')) { ' /DOPENNT_HOST_CREATE_THREAD_ABI' } else { '' }
@@ -1266,7 +1268,8 @@ $openntNetapiObjects = foreach ($name in $openntNetapiNames) {
 }
 $openntXactSrvObjects = foreach ($name in $openntXactSrvNames) {
     $object = 'obj/opennt-xactsrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $openntXactSrvRoot $name)))
+    $sourceRoot = if ($name -in $openntRapNames) { $openntRapRoot } else { $openntXactSrvRoot }
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sourceRoot $name)))
     $graph.Add('  cflags = ' + $xactSrvFlags)
     $object
 }
@@ -1283,19 +1286,19 @@ $brokerTransportManifest = @()
 if ($Architecture -eq 'x86') {
     $baseBindingInclude = NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/include')
     $baseOwnerFlags = $baseFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
-        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/host/base/win32/inc')) + '"' +
-        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/host/base/win32/server')) + '"'
+        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
     $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /FI "' +
         $baseBindingInclude + '/base_server.h"'
     # Project-owned Base/RPC sources consume the public adapter contracts, not
     # the SoftPC execution profile. Keep historical flags on original units.
     $baseAdapterFlags = $authoredSoftpcFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
-        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/host/base/win32/inc')) + '"' +
-        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/host/base/win32/server')) + '"'
+        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/inc')) + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/non-mvdm/base/win32/server')) + '"'
     # Select the original configuration closure without importing client RPC
     # dispatch or CSR capture into the service. The function bodies are copied
     # verbatim from the tracked mirror; the generated carrier is build-only.
-    $vdmConfigSource = Join-Path $root 'src/non-mvdm/host/base/win32/client/vdm.c'
+    $vdmConfigSource = Join-Path $root 'src/non-mvdm/base/win32/client/vdm.c'
     $vdmConfigText = [IO.File]::ReadAllText($vdmConfigSource)
     $vdmConfigHelper = [regex]::Matches($vdmConfigText, '(?ms)^static VOID BaseSetLastNTError\(.*?^}')
     $vdmConfigFunction = [regex]::Matches($vdmConfigText, '(?ms)^BOOL\r?\nBaseGetVdmConfigInfo\(.*?^}')
@@ -1309,12 +1312,12 @@ if ($Architecture -eq 'x86') {
         [Text.UTF8Encoding]::new($false))
     $baseOwnerGroups = @{
         'opennt-base-client' = @(
-            @('client', 'src/non-mvdm/host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /DOPENNT_BASE_CLIENT_VDM_ENVIRONMENT')),
-            @('classifier', 'src/non-mvdm/host/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER')),
-            @('capture', 'src/non-mvdm/host/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
+            @('client', 'src/non-mvdm/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /DOPENNT_BASE_CLIENT_VDM_ENVIRONMENT')),
+            @('classifier', 'src/non-mvdm/base/win32/client/vdm.c', ($baseOwnerFlags + ' /Gy /DOPENNT_BASE_CLIENT_CLASSIFIER')),
+            @('capture', 'src/non-mvdm/base/ntdll/csrutil.c', ($baseOwnerFlags + ' /Gz')))
         'opennt-base-server' = @(
-            @('srvvdm', 'src/non-mvdm/host/base/win32/server/srvvdm.c', $baseServerFlags),
-            @('exports', 'src/non-mvdm/host/windows/core/ntuser/server/exports.c', $baseServerFlags))
+            @('srvvdm', 'src/non-mvdm/base/win32/server/srvvdm.c', $baseServerFlags),
+            @('exports', 'src/non-mvdm/windows/core/ntuser/server/exports.c', $baseServerFlags))
         'opennt-base-bindings' = @(
             @('service', 'src/ntsrv-exe/opennt/source/base_service.c', $baseServerFlags),
             @('service-core', 'src/ntsrv-exe/opennt/source/service_core.c', $baseServerFlags),
@@ -1365,7 +1368,7 @@ if ($Architecture -eq 'x86') {
             $members = @($members) + $configObject + 'obj/common/native_image.obj'
             $baseOwnerManifest += [ordered]@{
                 archive = $group + '.lib'
-                path = 'src/non-mvdm/host/base/win32/client/vdm.c'
+                path = 'src/non-mvdm/base/win32/client/vdm.c'
                 sha256 = Get-NodeSha256 $vdmConfigSource
                 object = $configObject
                 buildDisposition = 'verbatim BaseGetVdmConfigInfo and BaseSetLastNTError closure; generated build-only carrier; no client RPC or CSR capture'
@@ -2077,9 +2080,9 @@ $wowMenuClientFixtureObject = 'obj/adapter-wow/wow_menu_client_bindings.obj'
 $wowMenuCleanupFixtureObjects = @(
     @('obj/adapter-wow/wow_menu_native_bindings.obj', 'src/wow32-dll/source/wow_menu_native_bindings.c'),
     @('obj/tests/wow_menu_runtime.obj', 'src/ntvdm-exe/wow/wow_user_runtime.c'),
-    @('obj/tests/wow_original_cleanup.obj', 'src/non-mvdm/host/windows/core/ntuser/kernel/cleanup.c'),
-    @('obj/tests/wow_original_handtabl.obj', 'src/non-mvdm/host/windows/core/ntuser/kernel/handtabl.c'),
-    @('obj/tests/wow_original_probe.obj', 'src/non-mvdm/host/base/ntos/ex/probe.c'),
+    @('obj/tests/wow_original_cleanup.obj', 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c'),
+    @('obj/tests/wow_original_handtabl.obj', 'src/non-mvdm/windows/core/ntuser/kernel/handtabl.c'),
+    @('obj/tests/wow_original_probe.obj', 'src/non-mvdm/base/ntos/ex/probe.c'),
     @('obj/adapter-wow/wow_cleanup_bindings.obj', 'src/wow32-dll/source/wow_cleanup_bindings.c')
 )
 foreach ($pair in $wowMenuCleanupFixtureObjects) {

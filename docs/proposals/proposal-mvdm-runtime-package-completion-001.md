@@ -386,7 +386,7 @@ When selected original MVDM code calls an NT4 kernel-VDM service, recover the
 original user-mode caller and its exact public function name, parameter
 layout, call ordering, status/failure behavior and teardown first.  A
 directly composable original non-MVDM OpenNT implementation belongs under its
-original relative path in `non-mvdm/host`; it must not be re-authored as an
+original relative path in `non-mvdm`; it must not be re-authored as an
 adapter merely because it sits outside MVDM.  Kernel-only implementation
 bodies whose required kernel state cannot compose in the standalone worker
 remain a finite worker-local adapter only after the source-first rung ledger

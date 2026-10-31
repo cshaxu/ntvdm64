@@ -1,7 +1,7 @@
 #ifndef WOW_DEFAULT_MESSAGE_BINDINGS_H
 #define WOW_DEFAULT_MESSAGE_BINDINGS_H
 #include <windows.h>
-#include "non-mvdm/host/windows/core/ntuser/inc/user.h"
+#include "non-mvdm/windows/core/ntuser/inc/user.h"
 #include "compat/include/wow_control_message_abi.h"
 
 /* OPENNT-HOST-090: selected original winuserp.h constants absent from the

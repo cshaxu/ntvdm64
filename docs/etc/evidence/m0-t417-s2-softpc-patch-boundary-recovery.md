@@ -36,4 +36,4 @@ no existing file which owns these absent generator outputs/providers.
 - Added to the adapter/ABI boundary: the same three declaration headers and a
   41-line selected fallback carrier.  This is a relocation of required input,
   not new MVDM/OpenNT-host source behavior.
-- New mirror files: 0 in `mvdm`; 0 in `non-mvdm/host`.
+- New mirror files: 0 in `mvdm`; 0 in `non-mvdm`.

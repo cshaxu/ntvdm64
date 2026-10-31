@@ -22,15 +22,15 @@ const includeRoots = [
   "src/mvdm/dos/command",
   "src/mvdm/softpc.new/base/inc",
   "src/mvdm/softpc.new/host/inc",
-  "src/non-mvdm/host/netapi/netlib",
-  "src/non-mvdm/abi/public/internal/base/inc",
-  "src/non-mvdm/abi/public/internal/ds/inc",
-  "src/non-mvdm/abi/public/internal/net/inc",
-  "src/non-mvdm/abi/private/ds/netapi/rpcxlate",
-  "src/non-mvdm/host/public/sdk/inc",
-  "src/non-mvdm/abi/public/sdk/inc",
-  "src/non-mvdm/abi/public/ddk/inc",
-  "src/non-mvdm/abi/private/inc"
+  "src/non-mvdm/ds/netapi/netlib",
+  "src/non-mvdm/public/internal/base/inc",
+  "src/non-mvdm/public/internal/ds/inc",
+  "src/non-mvdm/public/internal/net/inc",
+  "src/non-mvdm/ds/netapi/rpcxlate",
+  "src/non-mvdm/public/sdk/inc",
+  "src/non-mvdm/public/sdk/inc",
+  "src/non-mvdm/public/ddk/inc",
+  "src/non-mvdm/private/inc"
 ].map(value => `/I \"${path.join(root, value).replaceAll("\\", "/")}\"`).join(" ");
 const environment = path.join(buildRoot, `msvc-${architecture}.cmd`);
 fs.writeFileSync(environment, [

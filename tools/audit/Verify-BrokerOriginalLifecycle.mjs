@@ -9,9 +9,9 @@ fs.mkdirSync(build,{recursive:true});
 const graph=fs.readFileSync(path.join(ownerBuild || 'build/M0-T412/S1/text-cell-repair/product','build.ninja'),'utf8');
 const flags=graph.match(/^cflags = (.*)$/m)[1].replaceAll('$:',':');
 const rtlFlags=graph.match(/^build obj\/opennt-rtl\/error\.obj:.*\r?\n  rtl_cflags = (.*)$/m)[1].replaceAll('$:',':');
-const ownerPath=path.resolve('src/non-mvdm/host/base/win32/server/srvvdm.c');
+const ownerPath=path.resolve('src/non-mvdm/base/win32/server/srvvdm.c');
 const ownerBefore=fs.readFileSync(ownerPath);
-const clientSource=fs.readFileSync('src/non-mvdm/host/base/win32/client/vdm.c','utf8');
+const clientSource=fs.readFileSync('src/non-mvdm/base/win32/client/vdm.c','utf8');
 const configPattern=/BOOL\r?\nBaseGetVdmConfigInfo\([\s\S]*?\r?\n}/;
 const configOriginal=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(configPattern)[0].replace(/\r\n/g,'\n');
 assert.equal(createHash('sha256').update(configOriginal).digest('hex'),'2d57d7b0edaf2534e9a5654d3a2e30a6d91e2a24aea04fcc9e282af747a8c667');
@@ -23,7 +23,7 @@ assert.equal(createHash('sha256').update(clientSource.match(exitPattern)[0].repl
 assert.equal(clientSource.match(exitPattern)[0].replace(/\r\n/g,'\n'),
     fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(exitPattern)[0].replace(/\r\n/g,'\n'));
 const capturePattern=/PCSR_CAPTURE_HEADER\r?\nCsrAllocateCaptureBuffer\([\s\S]*?ULONG\r?\nCsrAllocateMessagePointer\([\s\S]*?\r?\n}/;
-const captureBody=fs.readFileSync('src/non-mvdm/host/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n');
+const captureBody=fs.readFileSync('src/non-mvdm/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n');
 assert.equal(captureBody,fs.readFileSync('O:/repos.external/OpenNT/base/ntdll/csrutil.c','utf8').match(capturePattern)[0].replace(/\r\n/g,'\n'));
 assert.equal(createHash('sha256').update(captureBody).digest('hex'),'41d54b575c6895809c956136c3a35067dc3b87610a6226d8ec23fab431e11cab');
 const clientBody=clientSource.match(/BOOL\r?\nAPIENTRY\r?\nGetNextVDMCommand\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
@@ -37,7 +37,7 @@ const checkBody=clientSource.match(/BOOL\r?\nBaseCheckVDM\([\s\S]*?\r?\n}\r?\n/)
 const checkOriginal=fs.readFileSync('O:/repos.external/OpenNT/base/win32/client/vdm.c','utf8').match(/BOOL\r?\nBaseCheckVDM\([\s\S]*?\r?\n}\r?\n/)[0].replace(/\r\n/g,'\n');
 assert.equal(checkBody,checkOriginal,'Original launch body changed');
 const tokenPattern=/NTSTATUS\r?\n_UserTestTokenForInteractive\([\s\S]*?\r?\n}/;
-const tokenSource=fs.readFileSync('src/non-mvdm/host/windows/core/ntuser/server/exports.c','utf8').match(tokenPattern)[0].replace(/\r\n/g,'\n');
+const tokenSource=fs.readFileSync('src/non-mvdm/windows/core/ntuser/server/exports.c','utf8').match(tokenPattern)[0].replace(/\r\n/g,'\n');
 assert.equal(createHash('sha256').update(tokenSource).digest('hex'),'7b6c9072220144e4b77aca973682838333994c3bc962eb802143e210e912a520','Pinned token helper changed');
 assert.equal(tokenSource,fs.readFileSync('O:/repos.external/OpenNT/windows/core/ntuser/server/exports.c','utf8').match(tokenPattern)[0].replace(/\r\n/g,'\n'),'Original token helper changed');
 assert.equal(createHash('sha256').update(checkBody).digest('hex'),'579840e2d5598051d157d9e92871027b543ecfcba8d299a745928bfd71c6386e','Pinned launch body changed');
@@ -45,7 +45,7 @@ assert.equal(createHash('sha256').update(updateBody).digest('hex'),
     'de56cfccd08922ae57df7332cc8df70f60db186f44f177336188c2d236e9fd26','Original update body changed');
 const env=path.join(build,'msvc.cmd');
 fs.writeFileSync(env,'@echo off\r\nset "lifecycle_cwd=%CD%"\r\ncall "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\Common7\\Tools\\VsDevCmd.bat" -arch=x86 -host_arch=x64 >nul\r\nif errorlevel 1 exit /b %errorlevel%\r\ncd /d "%lifecycle_cwd%"\r\n%*\r\n');
-const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/non-mvdm/host/base/win32/inc" /I "${root}/src/non-mvdm/host/base/win32/server"`;
+const includes=`/D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /we4013 /FI "${root}/src/adapter-opennt-host/basesrv/include/base_server.h" /I "${root}/src/adapter-opennt-host/basesrv/include" /I "${root}/src/non-mvdm/base/win32/inc" /I "${root}/src/non-mvdm/base/win32/server"`;
 let commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/command.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_command.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/values.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_values.c"`,
@@ -56,15 +56,15 @@ let commands=[
     `cl.exe ${flags} ${includes} /Fo"${build}/registry.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/request.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_request.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/config.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_config.c"`,
-    `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/non-mvdm/host/base/win32/client/vdm.c"`,
-    `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/non-mvdm/host/base/win32/server/srvvdm.c"`,
+    `cl.exe ${flags} /Fo"${build}/environment-check.obj" "${root}/src/non-mvdm/base/win32/client/vdm.c"`,
+    `cl.exe ${flags} ${includes} /Fo"${build}/srvvdm.obj" "${root}/src/non-mvdm/base/win32/server/srvvdm.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
     `cl.exe ${flags} /Fo"${build}/process.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_client_process.c"`,
     `cl.exe ${flags} ${includes} /Fo"${build}/interactive.obj" "${root}/src/adapter-opennt-host/basesrv/source/base_interactive.c"`,
-    `cl.exe ${flags} ${includes} /Fo"${build}/exports.obj" "${root}/src/non-mvdm/host/windows/core/ntuser/server/exports.c"`,
-    `cl.exe ${flags} ${includes} /Gz /Fo"${build}/capture.obj" "${root}/src/non-mvdm/host/base/ntdll/csrutil.c"`,
-    `cl.exe ${flags} ${includes} /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /Fo"${build}/client.obj" "${root}/src/non-mvdm/host/base/win32/client/vdm.c"`,
-    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/host/base/ntos/rtl/error.c"`,
+    `cl.exe ${flags} ${includes} /Fo"${build}/exports.obj" "${root}/src/non-mvdm/windows/core/ntuser/server/exports.c"`,
+    `cl.exe ${flags} ${includes} /Gz /Fo"${build}/capture.obj" "${root}/src/non-mvdm/base/ntdll/csrutil.c"`,
+    `cl.exe ${flags} ${includes} /Gy /DOPENNT_BASE_CLIENT_VDM_COMMANDS /Fo"${build}/client.obj" "${root}/src/non-mvdm/base/win32/client/vdm.c"`,
+    `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
     'lib.exe /nologo /out:opennt-base-server.lib srvvdm.obj exports.obj',
     'lib.exe /nologo /out:opennt-base-client.lib client.obj capture.obj',
     'link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj opennt-base-server.lib opennt-base-client.lib request.obj config.obj process.obj interactive.obj error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib'
@@ -74,7 +74,7 @@ if(ownerBuild) {
         assert(fs.existsSync(path.join(ownerBuild,name)),`Missing formal owner archive ${name}`);
     commands=[
         `cl.exe ${flags} ${includes} /Fo"${build}/fixture.obj" "${root}/tests/broker/original_server_lifecycle.c"`,
-        `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/host/base/ntos/rtl/error.c"`,
+        `cl.exe ${rtlFlags} /Fo"${build}/error.obj" "${root}/src/non-mvdm/base/ntos/rtl/error.c"`,
         `link.exe /nologo /opt:ref /out:original-lifecycle.exe /map:original-lifecycle.map fixture.obj "${ownerBuild}/opennt-base-server.lib" "${ownerBuild}/opennt-base-client.lib" "${ownerBuild}/opennt-base-bindings.lib" "${ownerBuild}/original-opennt-rtl-x86.lib" error.obj ntdll.lib kernel32.lib user32.lib advapi32.lib legacy_stdio_definitions.lib`
     ];
 }
@@ -97,7 +97,7 @@ for(const retired of ['source_compile_probe.h','ntdddfs.h','luid.c'])
     assert(!buildLog.includes(retired),`Retired test build dependency: ${retired}`);
 const inlinePattern=/__inline LUID\s+NTAPI\s+RtlConvertLongToLuid\([\s\S]*?\n\}/;
 const normalizeInline=text=>text.match(inlinePattern)[0].split(/\r?\n/).map(line=>line.trimEnd()).join('\n');
-assert.equal(normalizeInline(fs.readFileSync('src/non-mvdm/host/public/sdk/inc/ntrtl.h','utf8')),
+assert.equal(normalizeInline(fs.readFileSync('src/non-mvdm/public/sdk/inc/ntrtl.h','utf8')),
     normalizeInline(fs.readFileSync('O:/repos.external/OpenNT/public/sdk/inc/ntrtl.h','utf8')),'Original LUID inline changed');
 assert.deepEqual(fs.readFileSync(ownerPath),ownerBefore,'Original owner changed during test');
 const image=fs.readFileSync(path.join(build,'original-lifecycle.exe'));

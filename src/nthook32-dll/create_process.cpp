@@ -139,7 +139,7 @@ static BOOL select_command_image(PCWSTR command,PWSTR output,DWORD capacity)
     }
 }
 /* Exact tail selection shape retained from original OpenNT BaseCheckVDM:
- * src/non-mvdm/host/base/win32/client/vdm.c.  The Hook emits a normal Run16
+ * src/non-mvdm/base/win32/client/vdm.c.  The Hook emits a normal Run16
  * CLI; Run16 then calls the original implementation with the same selected
  * application/tail relationship. */
 static PCWSTR opennt_vdm_tail(PCWSTR application,PCWSTR command)

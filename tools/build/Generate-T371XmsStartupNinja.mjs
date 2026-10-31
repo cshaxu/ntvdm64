@@ -29,13 +29,13 @@ const includes = [
   "src",
   "src/compat/include",
   "src/ntvdm-exe/softpc/include",
-  "src/non-mvdm/host/public/sdk/inc",
+  "src/non-mvdm/public/sdk/inc",
   "src/mvdm/inc",
   "src/mvdm/xms.486",
   "src/mvdm/softpc.new/base/inc",
-  "src/non-mvdm/abi/public/sdk/inc",
-  "src/non-mvdm/abi/public/internal/base/inc",
-  "src/non-mvdm/abi/public/ddk/inc"
+  "src/non-mvdm/public/sdk/inc",
+  "src/non-mvdm/public/internal/base/inc",
+  "src/non-mvdm/public/ddk/inc"
 ].map((path) => `/I "${source(path)}"`).join(" ");
 const flags = [
   "/nologo", "/std:c11", "/MT", "/W4", "/showIncludes",

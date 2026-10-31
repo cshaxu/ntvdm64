@@ -2,7 +2,7 @@
 #include "wow_task_order_bindings.h"
 #include <stdio.h>
 typedef VOID (WINAPI *PFNW32ET)(VOID);
-#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/public/internal/windows/inc/wowuserp.h"
 
 static unsigned errors, enters, leaves, native_calls;
 static BOOL raise_native;

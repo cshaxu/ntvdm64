@@ -5,7 +5,7 @@
 typedef VOID (APIENTRY *PFNW32ET)(VOID);
 #pragma warning(push)
 #pragma warning(disable:4201)
-#include "non-mvdm/abi/public/internal/windows/inc/wowuserp.h"
+#include "non-mvdm/public/internal/windows/inc/wowuserp.h"
 #pragma warning(pop)
 
 /* Link original wcall32.c /Gy, retaining W32InitDlg, not a copied body.

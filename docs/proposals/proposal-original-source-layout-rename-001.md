@@ -5,10 +5,10 @@ declaration cohorts beneath `src/non-mvdm`, and the project-owned shared
 historical ABI bindings to `src/compat`. Keep `src/mvdm` as the selected
 original MVDM mirror and preserve component-private adapters in their owners.
 
-The original host and ABI cohorts contain three same-relative-path headers
-with different contents: `ntexapi.h`, `ntrtl.h` and `nturtl.h`. Keep them
-in `src/non-mvdm/host` and `src/non-mvdm/abi` respectively; retain their
-selected include order and provenance instead of overwriting or merging them.
+The original host and declaration cohorts contain three same-relative-path
+headers with different contents: `ntexapi.h`, `ntrtl.h` and `nturtl.h`.
+After owner correction, select one implementation per original path based on
+actual consumer and compilation evidence; preserve provenance and behavior.
 Update original code only where an existing host include names the old path;
 record these minimal path-only divergences. Preserve guest binaries and all
 unrelated edits.

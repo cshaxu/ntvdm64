@@ -6,7 +6,7 @@
 #include "wow_task_order_bindings.h"
 #include "wow_edit_native_bindings.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
-#include "non-mvdm/abi/public/internal/windows/inc/wingdip.h"
+#include "non-mvdm/public/internal/windows/inc/wingdip.h"
 
 /* One host WND/class-extra allocation per existing HWND binding. Original
  * controls/dialogs own their interpretation and private-state lifecycle. */

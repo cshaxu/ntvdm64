@@ -1,0 +1,20 @@
+[
+  {
+    "path": "public/sdk/inc/ntexapi.h",
+    "selectedSha256": "7f0fffb20ebf6c1c203cc93aa1dbf635811ec366a71465b1324596cc1efc0249",
+    "unselectedFullSha256": "34575fead108b94e4c9288ee5d3381a12db702cbb394de1d170393ac2eeb262e",
+    "unselectedInGit": "dc0d7e8f6:src/non-mvdm/abi/public/sdk/inc/ntexapi.h"
+  },
+  {
+    "path": "public/sdk/inc/ntrtl.h",
+    "selectedSha256": "c19410b27dab5f529495ab13cb24870be28a9871cae660c7a40cff03c7f0ce8f",
+    "unselectedFullSha256": "2a2ee7c5721fbe5da288c63bd3f3e1b0f37c3fd7b9a9d481109eaa91074204f8",
+    "unselectedInGit": "dc0d7e8f6:src/non-mvdm/abi/public/sdk/inc/ntrtl.h"
+  },
+  {
+    "path": "public/sdk/inc/nturtl.h",
+    "selectedSha256": "5a66bd709ab16679f0d341def570d3f25ff90f989ca929ffc936cfd177cdee2f",
+    "unselectedFullSha256": "32291892bb397a5dc2b873bc3d3353cf04b3c27d577d77f4bdfa07b4957c559b",
+    "unselectedInGit": "dc0d7e8f6:src/non-mvdm/abi/public/sdk/inc/nturtl.h"
+  }
+]

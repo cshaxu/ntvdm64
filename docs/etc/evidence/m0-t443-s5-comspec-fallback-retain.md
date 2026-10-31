@@ -11,7 +11,7 @@ batch/script syntax and failed image-like command text before choosing its
 Reviewed the public run16 entry in `src/run16-exe/main.c`, its shared
 application search (`src/common/application_search.c`), the original
 `OpenNtBaseGetBinaryTypeW` contract in
-`src/non-mvdm/host/base/win32/client/vdm.c`, and S3's accepted COMMAND tail
+`src/non-mvdm/base/win32/client/vdm.c`, and S3's accepted COMMAND tail
 route.
 
 ## Observation

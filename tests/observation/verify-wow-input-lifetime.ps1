@@ -18,7 +18,7 @@ function Owned($name,$image,$line,$seconds,$expected=0){
 }
 try{
  $fixture="$repo/tests/adapter-mvdm-host-out/wow/wow_input_lifetime_fixture.c"
- $original="$repo/src/non-mvdm/host/windows/core/ntuser/kernel/input.c"
+ $original="$repo/src/non-mvdm/windows/core/ntuser/kernel/input.c"
  Get-FileHash $PSCommandPath,$driver,$fixture,$original,
   "$repo/src/wow32-dll/source/wow_input_group_lifetime.c",
   "$repo/src/wow32-dll/include/wow_input_group_lifetime.h",

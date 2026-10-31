@@ -24,7 +24,7 @@ foreach ($path in $sources + $fixtures) { if (!(Test-Path (Join-Path $root $path
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'obj'), (Join-Path $build 'bin') | Out-Null
 $envFile = Join-Path $build 'msvc-mt.cmd'
 @('@echo off', 'set "MVDM_T308_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=' + $Architecture + ' -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T308_CALLER_CWD%"', '%*') | Set-Content $envFile -Encoding ascii
-$includes = @('src/ntvdm-exe/session','src/compat/include','src/non-mvdm/host/public/sdk/inc','src/non-mvdm/abi/public/sdk/inc','src/non-mvdm/abi/public/internal/base/inc','src/ntvdm-exe/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
+$includes = @('src/ntvdm-exe/session','src/compat/include','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/sdk/inc','src/non-mvdm/public/internal/base/inc','src/ntvdm-exe/monitor/include') | ForEach-Object { '/I "' + (NinjaPath (Join-Path $root $_)) + '"' }
 # Do not define the historical i386 product marker globally.  The monitor
 # context selects only the original _X86_ declaration gate for this x86 build.
 $flags = '/nologo /TC /c /std:c11 /MT /W4 /WX /showIncludes /DWIN_32 ' + ($includes -join ' ')

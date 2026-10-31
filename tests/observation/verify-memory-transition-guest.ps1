@@ -46,7 +46,7 @@ if($Case -eq 'task-cleanup'){
 if($Case -eq 'ems-call'){
     Copy-Item $probe (Join-Path $binary 'E30.COM')
     $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
-    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\abi\public\internal\windows\inc" /Fo"'+$out+'\pif.obj" /Fe"'+$out+'\pif-builder.exe" "'+$PSScriptRoot+'\ems_pif_builder.c"') 2>&1 | Tee-Object (Join-Path $out 'build.txt')
+    & cmd.exe /d /s /c ('call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cl /nologo /MT /W4 /I"'+$repo+'\src\non-mvdm\public\internal\windows\inc" /Fo"'+$out+'\pif.obj" /Fe"'+$out+'\pif-builder.exe" "'+$PSScriptRoot+'\ems_pif_builder.c"') 2>&1 | Tee-Object (Join-Path $out 'build.txt')
     if($LASTEXITCODE){throw 'EMS profile builder failed'}
 }
 Get-FileHash (Join-Path $PSScriptRoot $source),$probe,$PSCommandPath,$observerPath |
