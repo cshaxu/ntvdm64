@@ -196,6 +196,17 @@ contract. The experiments use synthetic vector 31h and controlled descriptors;
 they do not establish an actual immutable DOSX guest call, guest reentry or
 task-switch lifecycle.
 
+The original WOW_x86 `riret`/`riretd` macros in `inc/intmac.inc` are
+distinct from `FIRET`: they copy the saved IF to the fixed word before IRET,
+and execute STI/CLI only when `RI_BIT_MASK` is set. The WOW hardware
+reflector in `dpmi/dxintr.asm` uses this return form, whereas other source
+paths contain ordinary IRET. The synthetic direct-IRET cases above do not
+exercise the macro. In particular, they cannot prove an actual reflector
+fails or justify applying a global IRET override. The original CCPU IRQ
+loop checks CPU IF, while the protected monitor and WOW_x86 return macro
+also use the fixed word; both ownership and every path that changes those
+representations must be reconciled together before changing either one.
+
 IOPL 0 is not merely a synthetic possibility: an earlier immutable-DOSX
 fault observation recorded a protected-mode saved EFLAGS of `00000006`
 while executing the STI fallback. That observation was a fault-frame sample,
