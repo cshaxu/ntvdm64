@@ -57,6 +57,22 @@ exit only: it does not prove the host's actual page-fault or exception owner.
 The original `instemul.asm` reviewed for this sequence has SHA-256
 `6356B416E0942EB3814E4C5A14FF5ED09DB13DC1443842BA51AB9F512522D6E4`.
 
+The adjacent low-IOPL `CD nn` path is a separate unresolved boundary. The
+original `trap.asm:V86Intnn` emulates an unprefixed unhooked V86 interrupt,
+but sends hooked interrupts to its pass-through owner; the slow
+`emv86.asm:OpcodeINTnnV86` has distinct prefix, flag and write ordering.
+Current CCPU `c_main.c` raises #GP before decoding the immediate when CPL
+exceeds IOPL; `host_exint_hook` excludes V86 from its protected opcode
+monitor. Diagnostic CCPU cases 235–237 install a test-only #GP consumer and
+observe #GP, no software-hook call and unchanged SP for IOPL 0–2; see
+[observations](s11-v86-low-int-current.txt). This deliberately intercepted
+diagnostic does not establish the real downstream guest result. It is not in
+the passing compatibility suite and must not become the desired contract.
+The existing `DpmiV86SoftwareInt` is not a drop-in repair: it rejects low
+IOPL, and changing its admission must also account for the original saved
+IF/IOPL image, fixed-state IF, hooked vectors, prefixes, fault priority and
+partial-write ordering before committing any new behavior.
+
 The one-byte INT3 and taken INTO dispatchers previously required IOPL 3
 before calling the now IOPL-independent unpaged exception owner. Removing
 that guard reconnects the owner at IOPL 0–2; `CD` software interrupts retain

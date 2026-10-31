@@ -1,0 +1,3 @@
+V86_LOW_INT_CURRENT case=235 pass=1 gp=1 sw=0 sp=800
+V86_LOW_INT_CURRENT case=236 pass=1 gp=1 sw=0 sp=800
+V86_LOW_INT_CURRENT case=237 pass=1 gp=1 sw=0 sp=800
