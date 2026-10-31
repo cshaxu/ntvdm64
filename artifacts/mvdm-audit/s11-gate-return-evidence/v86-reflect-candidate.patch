@@ -1,0 +1,142 @@
+diff --git a/src/mvdm/dpmi32/dpmiint.c b/src/mvdm/dpmi32/dpmiint.c
+index 43fc9c45d..dbc50e413 100644
+--- a/src/mvdm/dpmi32/dpmiint.c
++++ b/src/mvdm/dpmi32/dpmiint.c
+@@ -567,6 +567,20 @@ Return Value:
+     ULONG SaveEFLAGS;
+     ULONG NewSP;
+
++#if defined(CPU_40_STYLE)
++    /* DIVERGENCE(MVDM-HOST-DIV-482): a directly executed V86 INT with
++     * IOPL 3 uses the real-mode IVT, not the protected-mode handler table.
++     * CCPU has already advanced IP; use the existing real-mode reflector. */
++    SaveEFLAGS = getEFLAGS();
++    if ((SaveEFLAGS & EFLAGS_VM_MASK) &&
++            (SaveEFLAGS & 0x3000) == 0x3000 &&
++            !(Handlers[IntNumber].Flags & VDM_INT_HOOKED)) {
++        setEFLAGS(SaveEFLAGS & ~(EFLAGS_INTERRUPT_MASK | EFLAGS_TF_MASK | 0x4000));
++        ReflectV86Int(IntNumber, SaveEFLAGS);
++        return TRUE;
++    }
++#endif
++
+     DBGTRACE(DPMI_SW_INT, IntNumber, 0, 0);
+     if (IntNumber == 0x31u || IntNumber == 0x2au)
+         mvdm_softpc_report_dpmi_swint(IntNumber, getAX(), getBX(), getCX(),
+diff --git a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c b/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+index 11b8d243d..e8b0c0e2a 100644
+--- a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
++++ b/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+@@ -876,6 +876,51 @@ static int protected_pending_irq_observe(void) {
+     return test_fault==0 && !(pic_isr & 1) && c_getAX()==0xbeef && (test_case==0 ? (test_irq==1 && test_irq_eip==0x1001 && *c_GetPhyAdd(0x301)==1 && test_out==0 && !(pic_irr&1)) : (test_irq==0 && *c_GetPhyAdd(0x301)==0 && test_out==0 && ((pic_irr&1)==(test_case==2 ? 1 : 0))));
+ }
+
++#pragma pack(push,1)
++typedef struct { USHORT cs, flags; ULONG eip; } SWINT_HANDLER;
++#pragma pack(pop)
++extern SWINT_HANDLER DpmiInterruptHandlers[256];
++extern LDT_ENTRY *Ldt;
++extern ULONG IntelBase, Cpu40LdtShadowAddress;
++extern USHORT CurrentAppFlags;
++extern BOOL DpmiSwIntHandler(ULONG);
++extern long VdmInstallSoftwareIntHandler(void *);
++extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
++extern ULONG c_getEAX(void);
++extern USHORT c_getCS(void), c_getSP(void);
++extern void INTx(ULONG);
++
++static int v86_swint_ivt(void) {
++    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
++    unsigned vector=test_case==122 ? 0x2a : 0x31;
++    ULONG beforeflags; BOOL ok; char line[160];
++    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
++    *(ULONG *)(gdt+0x200)=0x0000ffff; *(ULONG *)(gdt+0x204)=0x0000f300;
++    *(ULONG *)(ldt+0x18)=0x0000ffff; *(ULONG *)(ldt+0x1c)=0x0000fa00;
++    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
++    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x102);
++    c_setIOPL(3); c_setIF(1);
++    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
++    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
++    DpmiInterruptHandlers[vector].cs=0x1f;
++    DpmiInterruptHandlers[vector].flags=0; DpmiInterruptHandlers[vector].eip=0x200;
++    if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
++    *(USHORT *)c_GetPhyAdd(vector*4)=0x456;
++    *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
++    beforeflags=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
++    INTx(vector);
++    ok=c_getCS()==0x300 && c_getIP()==0x456 && c_getSP()==0x7fa &&
++       *(USHORT *)c_GetPhyAdd(0x27fa)==0x102 &&
++       *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
++       *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)beforeflags &&
++       !(c_getEFLAGS() & 0x4300) &&
++       (test_case!=122 || c_getEAX()==0xf0f0f0f1);
++    VdmInstallSoftwareIntHandler(NULL);
++    wsprintfA(line,"V86_SWINT_IVT case=%d pass=%d cs=%x ip=%x sp=%x\n",
++              test_case,ok,c_getCS(),c_getIP(),c_getSP()); report(line);
++    return ok;
++}
++
+ int main(int argc, char **argv) {
+     session owner;
+     int ok;
+@@ -886,7 +931,8 @@ int main(int argc, char **argv) {
+     sas_init(0x200000);
+     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
+     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
+-    if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
++    if(test_case==121 || test_case==122) ok=v86_swint_ivt();
++    else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
+     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
+     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
+diff --git a/tests/mvdm-host/dpmi_swint_selected_fixture.c b/tests/mvdm-host/dpmi_swint_selected_fixture.c
+index dc3cd3575..bff23d2e2 100644
+--- a/tests/mvdm-host/dpmi_swint_selected_fixture.c
++++ b/tests/mvdm-host/dpmi_swint_selected_fixture.c
+@@ -65,6 +65,19 @@ int main(void){
+   msw=1; sp=2; descriptors[2].LimitLow=0xffff;
+   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==2 && dispatches==1);
+   puts("DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1");
++  /* The IOPL-3 V86 path must use the IVT despite PE and an installed PM
++   * handler, save a 16-bit return frame, and clear IF, TF and NT. */
++  flags=0x27302; sp=0x200; cs=0x27; ip=0x1234;
++  *(USHORT *)(memory+0x31*4)=0x456;
++  *(USHORT *)(memory+0x31*4+2)=0x300;
++  DpmiInterruptHandlers[0x31].Flags=0;
++  CHECK(DpmiSwIntHandler(0x31));
++  CHECK(sp==0x1fa && cs==0x300 && ip==0x456 && flags==0x23002);
++  CHECK(*(USHORT *)(memory+0x1fa)==0x1234 &&
++        *(USHORT *)(memory+0x1fc)==0x27 &&
++        *(USHORT *)(memory+0x1fe)==0x7302);
++  puts("DPMI_SWINT_V86_IVT_OK frame=16 flags=cleared");
++  flags=0x4321;
+   /* NT4 PushInt selects frame width from the installed handler, independently
+    * of the interrupted application's 16/32-bit flag. */
+   descriptors[1].HighWord.Bits.Type=0x1a; /* present readable code, DPL 3 */
+diff --git a/tests/observation/verify-ccpu-monitor-boundary.ps1 b/tests/observation/verify-ccpu-monitor-boundary.ps1
+index 354b2ddc2..2845a3a3b 100644
+--- a/tests/observation/verify-ccpu-monitor-boundary.ps1
++++ b/tests/observation/verify-ccpu-monitor-boundary.ps1
+@@ -3,7 +3,7 @@ param([Parameter(Mandatory)][string]$WorkerBuild)
+ $ErrorActionPreference = 'Stop'
+ $image = Join-Path (Resolve-Path -LiteralPath $WorkerBuild).Path 'ccpu-monitor-boundary-test.exe'
+ if (!(Test-Path -LiteralPath $image -PathType Leaf)) { throw "Missing fixture: $image" }
+-$cases = @(0..7) + @(10..92) + @(102,103,109,110,111,112,113,114,115,116,117,118,119,120)
++$cases = @(0..7) + @(10..92) + @(102,103,109,110,111,112,113,114,115,116,117,118,119,120,121,122)
+ foreach ($case in $cases) {
+     & $image $case
+     if ($LASTEXITCODE -ne 0) { throw "CCPU monitor case $case failed: $LASTEXITCODE" }
+diff --git a/tests/observation/verify-dpmi-swint-selected.ps1 b/tests/observation/verify-dpmi-swint-selected.ps1
+index f9b40a1c6..deaee39ad 100644
+--- a/tests/observation/verify-dpmi-swint-selected.ps1
++++ b/tests/observation/verify-dpmi-swint-selected.ps1
+@@ -27,6 +27,9 @@ if ($LASTEXITCODE) { throw 'Selected DPMI fixture link failed' }
+ if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1')) {
+     throw 'Selected DPMI fixture failed'
+ }
++if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_V86_IVT_OK frame=16 flags=cleared')) {
++    throw 'Selected DPMI V86 IVT fixture failed'
++}
+ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2')) {
+     throw 'Selected DPMI handler-width fixture failed'
+ }

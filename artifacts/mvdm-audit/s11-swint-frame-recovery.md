@@ -294,3 +294,16 @@ the existing `ReflectV86Int`, which pushes the caller-provided EFLAGS and
 changes SP, IP and CS, would not by itself establish the original flag or
 failure contract. This is part of the same interrupt ownership investigation,
 not proof that either controlled path was observed in a real guest.
+
+A second candidate used `ReflectV86Int` for unhooked VM=1, IOPL=3 and
+preserved the 16-bit frame and cleared IF/TF/NT. The selected DPMI fixture,
+two selected-CCPU `INTx` cases and the 107-case CCPU suite passed; see
+[candidate fixture](s11-gate-return-evidence/v86-reflect-candidate.patch)
+and [results](s11-gate-return-evidence/v86-reflect-candidate-results.txt).
+Review then found that `ccpu386/zfrsrvd.c:DoNpxPrologue` also calls `INTx(7)`
+for EM/TS, whereas `c_main.c` calls `INTx` for decoded software INT and INT3.
+The shared software hook receives only the vector, so that candidate cannot
+distinguish an x87 device-not-available path from software `INT 7`; its
+passing tests do not prove the exception contract. It was removed before
+publication. Reconnection must preserve instruction origin as well as the
+hooked-reflector, IOPL and flag ownership boundaries.

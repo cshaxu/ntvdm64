@@ -1,0 +1,3 @@
+V86_SWINT_IVT case=121 pass=1 cs=300 ip=456 sp=7fa
+V86_SWINT_IVT case=122 pass=1 cs=300 ip=456 sp=7fa
+CCPU monitor suite: 107 cases passed; candidate rejected pending INTx caller distinction.
