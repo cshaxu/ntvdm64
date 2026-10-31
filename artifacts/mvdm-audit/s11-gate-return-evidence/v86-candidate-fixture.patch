@@ -5,7 +5,7 @@ index 11b8d243d..fae13e279 100644
 @@ -876,6 +876,55 @@ static int protected_pending_irq_observe(void) {
      return test_fault==0 && !(pic_isr & 1) && c_getAX()==0xbeef && (test_case==0 ? (test_irq==1 && test_irq_eip==0x1001 && *c_GetPhyAdd(0x301)==1 && test_out==0 && !(pic_irr&1)) : (test_irq==0 && *c_GetPhyAdd(0x301)==0 && test_out==0 && ((pic_irr&1)==(test_case==2 ? 1 : 0))));
  }
- 
+
 +#pragma pack(push,1)
 +typedef struct { USHORT cs, flags; ULONG eip; } SWINT_HANDLER;
 +#pragma pack(pop)
