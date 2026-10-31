@@ -1,0 +1,2 @@
+# buffer=120,30 viewport=0,0,119,29
+[1] Microsoft Windows [Version 10.0.26300.9818]

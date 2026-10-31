@@ -1,0 +1,10 @@
+{
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/swint-null-final2-package",
+  "result": "pass",
+  "utc": "2026-10-31T07:11:28.8626656Z",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "count": 20
+}

@@ -153,7 +153,10 @@ The narrower ten-component package passed [Full](s11-swint-null-evidence/narrow-
 [synthetic mouse](s11-swint-null-evidence/narrow-mouse.txt) checks; all 86
 monitored guest binaries remained unchanged in both trees. These results do
 not prove live selector failure, concurrent table mutation or physical input.
-Publication is pending.
+Source commit `222b0e5a1` was published as a coherent ten-component package;
+both destinations matched all 20 hashes and installed `run16 cmd /c ver`
+exited zero. [Publication](s11-swint-null-evidence/publication.json),
+[installed smoke](s11-swint-null-evidence/installed-smoke.txt).
 
 The interrupt-gate flag boundary is a separate unresolved group: NT4
 `PushInt` clears the shared virtual interrupt bit for interrupt gates, while
