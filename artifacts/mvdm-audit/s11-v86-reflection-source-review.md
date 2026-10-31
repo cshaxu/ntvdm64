@@ -57,6 +57,18 @@ exit only: it does not prove the host's actual page-fault or exception owner.
 The original `instemul.asm` reviewed for this sequence has SHA-256
 `6356B416E0942EB3814E4C5A14FF5ED09DB13DC1443842BA51AB9F512522D6E4`.
 
+The one-byte INT3 and taken INTO dispatchers previously required IOPL 3
+before calling the now IOPL-independent unpaged exception owner. Removing
+that guard reconnects the owner at IOPL 0–2; `CD` software interrupts retain
+their existing privilege check. A force-linked pre-change `c_main` object
+fails the two low-IOPL declining-owner controls; the candidate passes those
+and six real-CCPU handler controls, with 225 boundary cases passing in total.
+The full 16-gate, application and four Win3.1 combination checks passed for
+the released package; 86 guest binary hashes remained unchanged and both
+ten-component destinations matched. The CCPU fixture uses force-linked seams;
+these controls are not proof of real guest incidence or paged exception
+delivery. [Results and release](s11-v86-low-trap-evidence/).
+
 For further recovery, compare the original NT4 `PushException`/V86 interrupt
 owner with these specific cases: virtual-IF policy and saved frame flags;
 cross-page stack and IVT access with first/second access failures; and the

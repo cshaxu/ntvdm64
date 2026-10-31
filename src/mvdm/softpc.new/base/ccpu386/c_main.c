@@ -3614,10 +3614,10 @@ TYPEC4:
 #if defined(NTVDM) && defined(CPU_40_STYLE)
       /* DIVERGENCE(MVDM-HOST-DIV-489): NT4 delivers the one-byte INT3
        * as a VDM exception, not as the CD 03 software-INT path. Limit
-       * this route to the existing unpaged, direct-IF V86 fault owner. */
+       * this route to the existing unpaged V86 fault owner. */
       {
       extern BOOL host_exint_hook(IS32, IS32);
-      if (!GET_VM() || GET_IOPL() != 3 || GET_PG() || !host_exint_hook(3, 0))
+      if (!GET_VM() || GET_PG() || !host_exint_hook(3, 0))
 #endif
       INTx(ops[0].sng);
 #if defined(NTVDM) && defined(CPU_40_STYLE)
@@ -3678,7 +3678,7 @@ TYPEC4:
          /* NT4's taken INTO follows the vector-4 exception path. */
          {
          extern BOOL host_exint_hook(IS32, IS32);
-         if (!GET_VM() || GET_IOPL() != 3 || GET_PG() || !host_exint_hook(4, 0))
+         if (!GET_VM() || GET_PG() || !host_exint_hook(4, 0))
 #endif
 	 INTO();
 #if defined(NTVDM) && defined(CPU_40_STYLE)

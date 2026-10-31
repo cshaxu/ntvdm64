@@ -1120,7 +1120,8 @@ static BOOL v86_reflection_decline(ULONG vector, ULONG error) {
 static int v86_trap_instruction(void) {
     unsigned char code[]={0xcc,0xd6,0xfe,0,0};
     const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
-    unsigned vector=(test_case==157 || test_case==195 || test_case==197 || test_case==207 || test_case==209) ? 3 : 4;
+    BOOL low=(test_case>=229 && test_case<=234);
+    unsigned vector=(test_case==157 || test_case==195 || test_case==197 || test_case==207 || test_case==209 || (low && (test_case & 1))) ? 3 : 4;
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     BOOL taken=test_case!=159, ok; ULONG flags; char line[160];
     USHORT return_ip=0x101;
@@ -1128,10 +1129,10 @@ static int v86_trap_instruction(void) {
     c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
     c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
     c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
-    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    c_setIOPL(low ? (test_case-229)/2 : 3); c_setIF(1); c_setBX(0);
     flags=c_getEFLAGS(); if(vector==4 && taken) flags|=0x800; else flags&=~0x800u;
     c_setEFLAGS(flags); if(vector==4) code[0]=0xce;
-    if(test_case>=195) {
+    if(test_case>=195 && !low) {
         unsigned prefix=(test_case==197 || test_case==198 || test_case==209 || test_case==210) ? 1 : 0;
         if(prefix) code[0]=0x66;
         code[prefix]=0xcd; code[prefix+1]=(unsigned char)vector;
@@ -1145,14 +1146,14 @@ static int v86_trap_instruction(void) {
     CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
     *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
     test_irq=0; test_fault=0; VdmInstallSoftwareIntHandler((void *)((test_case==207 || test_case==208) ? DpmiSwIntHandler : swint_origin_probe));
-    if(test_case<207) VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    if(test_case<207 || low) VdmInstallFaultHandler((void *)DpmiFaultHandler);
     else if(test_case>=209) VdmInstallFaultHandler((void *)v86_reflection_decline);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
-    if(test_case>=209) {
+    if(test_case>=209 && !low) {
         ok=test_irq==vector && test_fault==1 && c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0xcafe;
     } else ok=test_irq==0 && test_fault==0 && (taken ? (c_getCS()==0x300 && c_getSP()==0x7fa && c_getBX()==0xbeef &&
        *(USHORT *)c_GetPhyAdd(0x27fa)==return_ip && *(USHORT *)c_GetPhyAdd(0x27fc)==0x100 &&
-       *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)flags) :
+       *(USHORT *)c_GetPhyAdd(0x27fe)==(USHORT)(flags | (low ? 0x3000u : 0))) :
        (c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0));
     wsprintfA(line,"V86_TRAP_INSN case=%d pass=%d sw=%lu cs=%x sp=%x bx=%x\n",
               test_case,ok,test_irq,c_getCS(),c_getSP(),c_getBX()); report(line);
@@ -1185,7 +1186,7 @@ static int v86_explicit_software_int(void) {
     test_irq=0; test_fault=0; VdmInstallSoftwareIntHandler((void *)swint_origin_probe);
     if(test_case>=164) VdmInstallFaultHandler((void *)v86_unadmitted_fault_probe);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL); VdmInstallSoftwareIntHandler(NULL);
-    ok=test_fault==0 && test_irq==vector && c_getCS()==0x100 && c_getSP()==0x800;
+    ok=test_fault==((test_case==164 || test_case==165) ? 1u : 0u) && test_irq==vector && c_getCS()==0x100 && c_getSP()==0x800;
     wsprintfA(line,"V86_EXPLICIT_SWINT case=%d pass=%d vector=%lu\n",test_case,ok,test_irq);
     report(line); return ok;
 }
@@ -1518,7 +1519,7 @@ int main(int argc, char **argv) {
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=213 && test_case<=216) ok=v86_missing_exception_owner();
     else if(test_case==211 || test_case==212) ok=v86_declining_exception_owner();
-    else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198) || (test_case>=207 && test_case<=210)) ok=v86_trap_instruction();
+    else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198) || (test_case>=207 && test_case<=210) || (test_case>=229 && test_case<=234)) ok=v86_trap_instruction();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
     else if(test_case==180 || test_case==181 || test_case==185 || test_case==190 || test_case==191 || (test_case>=199 && test_case<=202) || test_case==205 || test_case==206) ok=v86_unsupported_int_prefix();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();

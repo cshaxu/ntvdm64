@@ -1,0 +1,4 @@
+V86_EXPLICIT_SWINT case=164 pass=0 vector=3
+case=164 exit=1
+V86_EXPLICIT_SWINT case=165 pass=0 vector=4
+case=165 exit=1
