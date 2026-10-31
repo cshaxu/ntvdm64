@@ -2,7 +2,6 @@
 #include <insignia.h>
 #include <host_def.h>
 #include <xt.h>
-#include <sas.h>
 #include <mouse_io.h>
 #include <nt_mouse.h>
 #include <host_rrr.h>
@@ -16,6 +15,8 @@ extern void host_ica_lock(void);
 extern void host_ica_unlock(void);
 extern void mouse_pointer_route_changed(int);
 extern IU8 Currently_emulated_video_mode;
+/* The selected CCPU SAS read is the original sas_load expansion. */
+extern IU8 c_sas_hw_at(IU32 address);
 
 BOOL mvdm_softpc_mouse_route_active(void)
 {
@@ -44,7 +45,7 @@ BOOL mvdm_softpc_mouse_apply(MOUSE_CURSOR_STATUS *cursor,MOUSE_VECTOR *counter,
     mvdm_mouse_input_sample input;
     half_word mode;
     if(!mvdm_softpc_mouse_next(state,&input))return FALSE;
-    sas_load(0x449,&mode);
+    mode=c_sas_hw_at(0x449);
     /* Video 7 stores extended graphics modes as mode - 0x4c in the
      * BIOS data area. LimitCoordinates needs the actual mode, just as the
      * original mouse video interception does. Require agreement with the

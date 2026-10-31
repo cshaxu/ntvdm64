@@ -4,6 +4,14 @@
 
 **Active: M0 T473 S11**
 
+Owner additionally directs an in-scope P to isolate authored components from
+historical MVDM conditional compilation and remove confirmed excluded paths;
+audit per translation unit and preserve selected CCPU and shared interfaces.
+The published P removes CPU profile flags from selected authored units;
+134 CCPU and focused input tests pass. The shutdown fixture passes in the
+product test environment; restricted-environment invalid-handle behavior differs.
+See [condition inventory](../../artifacts/mvdm-audit/condition-inventory/README.md).
+
 The CPU40 monitor and TLB boundary are in a
 tested partial baseline. Full (16 gates), 93 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
@@ -225,14 +233,8 @@ T461 S1 may use only `build/t461-s1` for disposable source-audit evidence,
 with a 30-minute phase, 2-GiB size and 10-minute no-progress budget. Stable
 `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
 
-T461 S2 may use only `build/t461-s2` for disposable Shell/Registry fixture and
-build evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress
-budget. Stable `.ninja` and `.ccache` remain reusable caches and are never task
-evidence roots.
-
-T461 S3 may use only `build/t461-s3` for disposable persistence/concurrency
-evidence, with a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
-Stable `.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+T461 S2/S3 disposable evidence uses `build/t461-s2` and `build/t461-s3`;
+each has a 45-minute phase, 2-GiB size and 10-minute no-progress budget.
 
 T462 and T463 disposable evidence remains under their `build/t462-s1` and
 `build/t463-s2`/`s3` roots; the shared caches are not evidence roots.
@@ -250,11 +252,7 @@ during closure; deletion requires verified quiescence and the existing
 exact-target ownership checks. Durable results are linked from the closure.
 Stable `.ninja` and `.ccache` caches remain untouched.
 
-T456 S1 may use only `build/t456-s1` for disposable evidence. Stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
-
-T456 S2 may use only `build/t456-s2` for disposable evidence. Stable `.ninja`
-and `.ccache` remain reusable caches and are never task evidence roots.
+T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 
 ## Recent M0 Closures
 

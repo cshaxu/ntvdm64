@@ -17,6 +17,9 @@ extern void c_sas_storedw(uint32_t address, uint32_t value);
  * monitor's host CS:IP. Reserve one LDT identity for that endpoint, then let
  * the original CALLF owner redirect it to the existing BOP dispatcher. */
 extern NTSTATUS DpmiSetWowLdtEntry(ULONG selector, ULONG low, ULONG high);
+/* This adapter uses the selected CPU40 provider directly; it does not select
+ * the original DPMI header's alternate CPU implementations. */
+extern ULONG Cpu40LdtShadowAddress;
 
 #define FAST_BOP_DISPATCH_OFFSET 0x10u
 #define FAST_WOW_DISPATCH_OFFSET 0x20u

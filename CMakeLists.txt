@@ -57,7 +57,21 @@ function(ntvdm_generate script)
 endfunction()
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
   "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/obj.vdm/ntvdm.src"
-  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv")
+  "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv"
+  "${CMAKE_SOURCE_DIR}/tools/build/GenerateCvidcCpuBinding.mjs"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/c2cpusad.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/cpu4gen.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/evidgen.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit011.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit012.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit013.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cpu/src/evid/vglob.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/sas.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/gvi.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/egagraph.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/gfx_upd.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/egaports.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/host/inc/nt_graph.h")
 ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
   -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
   -NodeExecutable "${NTVDM_NODE}"

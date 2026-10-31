@@ -8,10 +8,8 @@
 #include <insignia.h>
 #include <host_def.h>
 #include "evidgen.h"
-#define CCPU
-#define CPU_PRIVATE
 #include "cpu4.h"
-#include "sas.h"
+#include "cvidc_selected_providers.inc"
 #include "mvdm_cvidc_vector_binding.h"
 
 extern struct VideoVector C_Video;
@@ -51,17 +49,17 @@ static struct CpuPrivateVector CvidCpuPrivate;
  * to the existing original CCPU setters, not a new instruction provider. */
 static void mvdm_cvidc_set_status(IU16 flags)
 {
-    setNT((flags >> 14) & 1);
-    setIOPL((flags >> 12) & 3);
-    setOF((flags >> 11) & 1);
-    setDF((flags >> 10) & 1);
-    setIF((flags >> 9) & 1);
-    setTF((flags >> 8) & 1);
-    setSF((flags >> 7) & 1);
-    setZF((flags >> 6) & 1);
-    setAF((flags >> 4) & 1);
-    setPF((flags >> 2) & 1);
-    setCF(flags & 1);
+    c_setNT((flags >> 14) & 1);
+    c_setIOPL((flags >> 12) & 3);
+    c_setOF((flags >> 11) & 1);
+    c_setDF((flags >> 10) & 1);
+    c_setIF((flags >> 9) & 1);
+    c_setTF((flags >> 8) & 1);
+    c_setSF((flags >> 7) & 1);
+    c_setZF((flags >> 6) & 1);
+    c_setAF((flags >> 4) & 1);
+    c_setPF((flags >> 2) & 1);
+    c_setCF(flags & 1);
 }
 
 static void mvdm_cvidc_bind_cpu_private(void)

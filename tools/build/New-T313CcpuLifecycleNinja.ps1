@@ -33,7 +33,7 @@ if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node 22 i
 
 $ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
 $hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
-$ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
+$ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c'
 $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources') | Where-Object { $_ -ne 'ntstubs.c' })
 $hostSources = @('nt_cprgs.c', 'nt_cpu.c', 'sim32.c', 'nt_mem.c')
 $controllerSources = @('at_dma.c', 'ica.c')
@@ -56,7 +56,7 @@ $cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10'); $graph.Add('cflags = ' + $cflags); $graph.Add('')
 $graph.Add('rule cc'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
-$graph.Add('rule cc_patch'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /DMVDM_CCPU_VECTOR_DEFAULTS_ONLY /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
+$graph.Add('rule cc_patch'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' cl.exe $cflags /Fo$out $in'); $graph.Add('  deps = msvc'); $graph.Add('  msvc_deps_prefix = Note: including file:')
 $graph.Add('rule lib'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' lib.exe /nologo /out:$out $in')
 $graph.Add('rule link'); $graph.Add('  command = cmd.exe /d /s /c call ' + (NinjaPath $environment) + ' link.exe /nologo /out:$out $in kernel32.lib user32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib')
 function Add-Objects([string]$Group, [string]$Rule, [string]$Directory, [string[]]$Names) { $objects = @(); foreach ($name in $Names) { $object = 'obj/' + $Group + '/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $object + ': ' + $Rule + ' ' + (NinjaPath (Join-Path $Directory $name))); $objects += $object }; return $objects }

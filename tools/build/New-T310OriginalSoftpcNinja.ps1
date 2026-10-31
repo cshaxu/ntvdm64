@@ -136,7 +136,8 @@ $adapterRedirRoot = Join-Path $root 'src/ntvdm-exe/redir'
 $redirDllRoot = Join-Path $root 'src/vdmredir-dll'
 $redirDllBindingRoot = Join-Path $redirDllRoot 'source'
 $adapterVddRoot = Join-Path $root 'src/ntvdm-exe/vdd'
-$ccpuFallbackSource = Join-Path $adapterSoftpcRoot 'mvdm_softpc_ccpu_fallback.c'
+$ccpuVectorSource = Join-Path $adapterSoftpcRoot 'mvdm_ccpu_vector_defaults.c'
+$ccpuActivitySource = Join-Path $adapterSoftpcRoot 'mvdm_ccpu_activity_check.c'
 $ccpuProductIncludeRoot = Join-Path $adapterSoftpcRoot 'include/generated/x86/prod'
 $ccpuManifest = Join-Path $ccpuRoot 'sources'
 $biosManifest = Join-Path $biosRoot 'sources'
@@ -430,7 +431,9 @@ if (!(Test-Path -LiteralPath $kernelVdmPrinterSource)) { throw "Required kernel 
 foreach ($name in @('PigReg_c.h', 'sas4gen.h', 'gdpvar.h')) {
     if (!(Test-Path -LiteralPath (Join-Path $ccpuProductIncludeRoot $name))) { throw "Selected x86 CCPU product carrier missing: $name" }
 }
-if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw "Selected CCPU fallback source missing: $ccpuFallbackSource" }
+foreach ($source in @($ccpuVectorSource, $ccpuActivitySource)) {
+    if (!(Test-Path -LiteralPath $source)) { throw "Selected CCPU fallback source missing: $source" }
+}
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated') | Out-Null
 
@@ -785,6 +788,10 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     '/FI "' + (NinjaPath $softpcSymbolCompat) + '" ' +
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
+# Authored adapters consume the selected interfaces, not the SoftPC profile.
+$authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DANSI ' +
+    '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" '
+$authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ')
 $ccpuFlags = $baseFlags
 $hostFlags = $baseFlags + ' /FI "' + (NinjaPath $hostCrtRedirect) + '"'
 # XACTSRV's selected local-provider bodies retain the original RAP-to-native
@@ -817,8 +824,6 @@ $cvidcRuleFlags = $cvidcFirstFlags
 # second `c_cpu_*` executor provider.  The one translation unit therefore
 # retains the same original vector call shape without claiming CCPU ownership.
 $cvidcAccessFlags = $cvidcRuleFlags.Replace('/DCCPU ', '').Replace('/DPROD ', '')
-$patchVectorDefaultsFlags = $baseFlags + ' /DMVDM_CCPU_VECTOR_DEFAULTS_ONLY'
-$patchActivityCheckFlags = $baseFlags + ' /DMVDM_CCPU_ACTIVITY_CHECK_ONLY'
 
 $graph = [Collections.Generic.List[string]]::new()
 $graph.Add('ninja_required_version = 1.10')
@@ -835,8 +840,6 @@ $graph.Add('dpmi_cflags = ' + $dpmiFlags)
 $graph.Add('cvidc_first_cflags = ' + $cvidcFirstFlags)
 $graph.Add('cvidc_rule_cflags = ' + $cvidcRuleFlags)
 $graph.Add('cvidc_access_cflags = ' + $cvidcAccessFlags)
-$graph.Add('patch_vector_defaults_cflags = ' + $patchVectorDefaultsFlags)
-$graph.Add('patch_activity_check_cflags = ' + $patchActivityCheckFlags)
 $graph.Add('rcflags = ' + ($includeRoots -join ' '))
 $graph.Add('')
 $graph.Add('rule cc')
@@ -880,16 +883,6 @@ $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_cvidc_access')
 $graph.Add('  command = ' + $compilerCommand + ' $cvidc_access_cflags $release_cflags /Fo$out $in')
 $graph.Add('  description = CC-CVIDC-ACCESS $in')
-$graph.Add('  deps = msvc')
-$graph.Add('  msvc_deps_prefix = Note: including file: ')
-$graph.Add('rule cc_patch_vector_defaults')
-$graph.Add('  command = ' + $compilerCommand + ' $patch_vector_defaults_cflags $release_cflags /Fo$out $in')
-$graph.Add('  description = CC-PATCH $in')
-$graph.Add('  deps = msvc')
-$graph.Add('  msvc_deps_prefix = Note: including file: ')
-$graph.Add('rule cc_patch_activity_check')
-$graph.Add('  command = ' + $compilerCommand + ' $patch_activity_check_cflags $release_cflags /Fo$out $in')
-$graph.Add('  description = CC-PATCH $in')
 $graph.Add('  deps = msvc')
 $graph.Add('  msvc_deps_prefix = Note: including file: ')
 $graph.Add('rule cc_mvdm_debugger')
@@ -1003,7 +996,8 @@ $cvidcCpuBindingInclude = Join-Path $build 'generated/cvidc_cpu_binding.inc'
 $cvidcCpuBindingGenerator = Join-Path $root 'tools/build/GenerateCvidcCpuBinding.mjs'
 & $NodeExecutable $cvidcCpuBindingGenerator $cvidcCpuBindingInclude (Split-Path $cvidcRoot -Parent)
 if ($LASTEXITCODE -ne 0) { throw 'C-VID CPU binding generation failed.' }
-$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude))
+$graph.Add('build obj/cvidc/mvdm_cvidc_vector_binding.obj: cc_cvidc_rule ' + (NinjaPath $cvidcVectorBindingSource) + ' | ' + (NinjaPath $cvidcCpuBindingInclude) + ' generated/cvidc_selected_providers.inc')
+$graph.Add('  cvidc_rule_cflags = ' + $authoredCommonFlags + ($cvidcFirstIncludeRoots -join ' ') + ' ' + $cvidcGeneratedInclude)
 $cvidcObjects += 'obj/cvidc/mvdm_cvidc_vector_binding.obj'
 $cvidcAccessorSource = Join-Path $root 'src/mvdm/softpc.new/base/cpu/src/evid/vglob.c'
 $graph.Add('build obj/cvidc/vglob.obj: cc_cvidc_rule ' + (NinjaPath $cvidcAccessorSource))
@@ -1087,11 +1081,13 @@ $oemuniObjects = foreach ($name in $oemuniNames) {
 $sessionObjects = foreach ($name in $sessionNames) {
     $object = 'obj/ntvdm/session/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $sessionRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $adapterWowWorkerObjects = foreach ($name in $adapterWowWorkerNames) {
     $object = 'obj/adapter-wow-worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWowRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $cpu40DescriptorDomainFixtureObject = 'obj/tests/cpu40_descriptor_domain_fixture.obj'
@@ -1157,10 +1153,13 @@ $hostObjects += $hostEntryObject
 $adapterWin32Objects = foreach ($name in $adapterWin32Names) {
     $object = 'obj/adapter-win32/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterWin32Root $name)))
+    $alertBinding = if ($name -eq 'nt_thread_alert_compat.c') { ' /DOPENNT_ADAPTER_NT_ALERT_THREAD' } else { '' }
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $alertBinding)
     $object
 }
 $hostCompatObject = 'obj/opennt-abi-host-compat/opennt_support_rtl.obj'
 $graph.Add('build ' + $hostCompatObject + ': cc ' + (NinjaPath $hostCompatSource))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $adapterWin32Objects += $hostCompatObject
 $consoleGridObject = 'obj/opennt-abi-host-compat/console_grid.obj'
 $graph.Add('build ' + $consoleGridObject + ': cc ' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/console_grid.c')))
@@ -1169,17 +1168,20 @@ $adapterWin32Objects += $consoleGridObject
 $adapterBaseSrvObjects = foreach ($name in $adapterBaseSrvNames) {
     $object = 'obj/adapter-basesrv/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterBaseSrvRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $adapterMonitorObjects = foreach ($name in $adapterMonitorNames) {
     $object = 'obj/adapter-monitor/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterMonitorRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $adapterDebuggerRoot = Join-Path $root 'src/ntvdm-exe/debugger/source'
 $adapterDebuggerObjects = foreach ($name in $adapterDebuggerNames) {
     $object = 'obj/adapter-debugger/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterDebuggerRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $originalDebuggerObject = 'obj/mvdm-debugger/dbg.obj'
@@ -1187,7 +1189,11 @@ $graph.Add('build ' + $originalDebuggerObject + ': cc_mvdm_debugger ' +
     (NinjaPath (Join-Path $root 'src/mvdm/dbg/dbg.c')))
 $adapterSoftpcObjects = foreach ($name in $adapterSoftpcNames) {
     $object = 'obj/adapter-softpc/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
-    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterSoftpcRoot $name)))
+    $selectedVideoInputs = if ($name -eq 'mvdm_softpc_text_video.c') { ' | generated/text_video_gfx.h generated/text_video_gvi.h generated/text_video_egagraph.h generated/text_video_nt_graph.h' } elseif ($name -eq 'v7_pointer_binding.c') { ' | generated/v7_selected_plane.h' } else { '' }
+    $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterSoftpcRoot $name)) + $selectedVideoInputs)
+    $alertBinding = if ($name -eq 'mvdm_softpc_event_thread.c') { ' /DOPENNT_ADAPTER_NT_ALERT_THREAD' } else { '' }
+    $videoInclude = if ($name -in @('mvdm_softpc_text_video.c', 'v7_pointer_binding.c')) { ' ' + $cvidcGeneratedInclude } else { '' }
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags + $alertBinding + $videoInclude)
     $object
 }
 $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
@@ -1198,6 +1204,7 @@ $adapterRedirObjects = foreach ($name in $adapterRedirNames) {
 $adapterRedirWorkerObjects = foreach ($name in $adapterRedirWorkerNames) {
     $object = 'obj/adapter-redir/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterRedirRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $adapterSoftpcFixtureObjects = @($adapterSoftpcObjects | Where-Object {
@@ -1227,9 +1234,11 @@ $openntRtlObjects = foreach ($name in $openntRtlNames) {
 }
 $kernelVdmPrinterObject = 'obj/kernel-vdm/monitor_printer.obj'
 $graph.Add('build ' + $kernelVdmPrinterObject + ': cc ' + (NinjaPath $kernelVdmPrinterSource))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $adapterVddObjects = foreach ($name in $adapterVddNames) {
     $object = 'obj/adapter-vdd/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $adapterVddRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $openntNetlibObjects = foreach ($name in $openntNetlibNames) {
@@ -1278,6 +1287,11 @@ if ($Architecture -eq 'x86') {
         ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/server')) + '"'
     $baseServerFlags = $baseOwnerFlags + ' /D_CSRSRV_ /DOPENNT_BASE_VDM_SERVER /FI "' +
         $baseBindingInclude + '/base_server.h"'
+    # Project-owned Base/RPC sources consume the public adapter contracts, not
+    # the SoftPC execution profile. Keep historical flags on original units.
+    $baseAdapterFlags = $authoredSoftpcFlags + ' /we4013 /I "' + $baseBindingInclude + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/inc')) + '"' +
+        ' /I "' + (NinjaPath (Join-Path $root 'src/opennt-host/base/win32/server')) + '"'
     # Select the original configuration closure without importing client RPC
     # dispatch or CSR capture into the service. The function bodies are copied
     # verbatim from the tracked mirror; the generated carrier is build-only.
@@ -1331,7 +1345,10 @@ if ($Architecture -eq 'x86') {
         $members = foreach ($member in $baseOwnerGroups[$group]) {
             $object = 'obj/' + $group + '/' + $member[0] + '.obj'
             $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $member[1])))
-            $graph.Add('  cflags = ' + $member[2])
+            $memberFlags = if ($member[1].StartsWith('src/ntsrv-exe/')) {
+                $member[2].Replace($baseOwnerFlags, $baseAdapterFlags)
+            } else { $member[2] }
+            $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{
                 archive = $group + '.lib'
                 path = $member[1]
@@ -1455,6 +1472,9 @@ if ($Architecture -eq 'x86') {
     $graph.Add('build obj/tests/v7_pointer_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/v7_pointer_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build v7-pointer-test.exe: bitmap_test_link obj/tests/v7_pointer_test.obj obj/tests/v7_pointer.obj')
+    $graph.Add('build obj/tests/v7_pointer_binding_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/component-integration/v7_pointer_binding_test.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
+    $graph.Add('build v7-pointer-binding-test.exe: bitmap_test_link obj/tests/v7_pointer_binding_test.obj obj/adapter-softpc/v7_pointer_binding.obj')
     $graph.Add('build obj/tests/v7_graphics_test.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/v7_graphics_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags + ' /I"' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include')) + '"')
     $graph.Add('build obj/tests/frontend_scope_lifetime.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/frontend_scope_lifetime_test.c')))
@@ -1467,7 +1487,7 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:mainCRTStartup /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
     $graph.Add('build native-lifetime-pair-target.exe: native_pair_gui_link obj/tests/native_lifetime_pair.obj')
     $graph.Add('build obj/run16/entry.obj: cc ' + (NinjaPath (Join-Path $run16Root 'main.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('  cflags = ' + $baseAdapterFlags)
     $graph.Add('build obj/common/application_search.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/application_search.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/tests/application_search.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/application_search_test.c')))
@@ -1479,13 +1499,17 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build guest-environment-test.exe: broker_test_link obj/tests/guest_environment.obj obj/common/guest_environment.obj')
     $graph.Add('build obj/worker-base/connection.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/connection.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/shutdown_close.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/shutdown_close.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/ntvwm/next_command.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntvwm-exe/next_command.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/publication.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/publication.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/input_watch.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/input_watch.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build obj/worker-base/task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'src/worker-base/task_observation.c')))
+    $graph.Add('  cflags = ' + $nativeServiceFlags)
     $graph.Add('build worker-base.lib: lib obj/worker-base/connection.obj obj/worker-base/shutdown_close.obj obj/worker-base/publication.obj obj/worker-base/input_watch.obj obj/worker-base/task_observation.obj')
     $graph.Add('build obj/tests/worker_task_observation.obj: cc ' + (NinjaPath (Join-Path $root 'tests/app/worker_task_observation_test.c')))
     $graph.Add('  cflags = ' + $nativeServiceFlags)
@@ -1558,11 +1582,11 @@ if ($Architecture -eq 'x86') {
     $graph.Add('  command = link.exe /nologo /subsystem:windows /entry:wmainCRTStartup /out:$out $in libcmt.lib libvcruntime.lib libucrt.lib kernel32.lib')
     $graph.Add('build run16-gui-wait-target.exe: gui_wait_target_link obj/tests/run16_gui_wait.obj')
     $graph.Add('build obj/run16/support.obj: cc ' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/opennt_support_rtl.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
     $graph.Add('build obj/run16/rpc_client_core.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/source/base_rpc_client_core.c')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
+    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
     $graph.Add('build obj/run16/rpc_client_launch.obj: cc ' + (NinjaPath (Join-Path $root 'src/ntsrv-exe/opennt/source/base_rpc_client_launch.c')) + ' | obj/basesrv/service.h')
-    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
+    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /I obj/basesrv')
     $graph.Add('build base-rpc-client-core.lib: lib obj/run16/rpc_client_core.obj')
     $graph.Add('build base-rpc-client-launch.lib: lib obj/run16/rpc_client_launch.obj')
     $graph.Add('  cflags = ' + $baseOwnerFlags + ' /I obj/basesrv')
@@ -1652,9 +1676,9 @@ if ($Architecture -eq 'x86') {
         $graph.Add('build ntvwm.exe: native_worker_import')
     }
     $graph.Add('build obj/run16/image_classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'image_classification.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('  cflags = ' + $baseAdapterFlags)
     $graph.Add('build obj/common/native_image.obj: cc ' + (NinjaPath (Join-Path $root 'src/common/native_image.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags)
+    $graph.Add('  cflags = ' + $baseAdapterFlags)
     # One worker; actual child machine selects the reviewed matching Hook installer.
     $hookFlags = '/nologo /TP /c /MT /O2 /Gy /W4 /showIncludes /std:c++14 /DWIN32_LEAN_AND_MEAN /D_WIN32_WINNT=0x0A00 /I obj/basesrv /I "' + (NinjaPath (Join-Path $root 'src')) + '"'
     $hookDetoursObjects = @()
@@ -1669,7 +1693,7 @@ if ($Architecture -eq 'x86') {
         $graph.Add('  cflags = ' + $hookFlags)
     }
     $graph.Add('build obj/nthook32/classification.obj: cc ' + (NinjaPath (Join-Path $run16Root 'hook_classification.c')))
-    $graph.Add('  cflags = ' + $baseOwnerFlags + ' /Gy')
+    $graph.Add('  cflags = ' + $baseAdapterFlags + ' /Gy')
     $graph.Add('build nthook-context.lib: lib obj/nthook32/context.obj ' + ($hookDetoursObjects -join ' '))
     $graph.Add('build nthook-installer.lib: lib obj/nthook32/installer.obj obj/common/native_image.obj')
     $graph.Add('rule nthook_dll_link')
@@ -1884,13 +1908,17 @@ if ($Architecture -eq 'x86') {
 $workerPackageObjects = foreach ($name in $workerPackageNames) {
     $object = 'obj/worker/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
     $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $workerPackageRoot $name)))
+    $graph.Add('  cflags = ' + $authoredSoftpcFlags)
     $object
 }
 $graph.Add('build ' + $effectiveAddressObject + ': cc ' + (NinjaPath $effectiveAddressSource))
+$graph.Add('  cflags = ' + $authoredSoftpcFlags)
 $patchVectorDefaultsObject = 'obj/ccpu/fmstubs_vector_defaults.obj'
-$graph.Add('build ' + $patchVectorDefaultsObject + ': cc_patch_vector_defaults ' + (NinjaPath $ccpuFallbackSource))
+$graph.Add('build ' + $patchVectorDefaultsObject + ': cc ' + (NinjaPath $ccpuVectorSource))
+$graph.Add('  cflags = ' + $baseAdapterFlags)
 $patchActivityCheckObject = 'obj/ccpu/fmstubs_activity_check.obj'
-$graph.Add('build ' + $patchActivityCheckObject + ': cc_patch_activity_check ' + (NinjaPath $ccpuFallbackSource))
+$graph.Add('build ' + $patchActivityCheckObject + ': cc ' + (NinjaPath $ccpuActivitySource))
+$graph.Add('  cflags = ' + $nativeServiceFlags)
 $redirResourceObject = 'obj/redir/vdmredir.res'
 $graph.Add('build ' + $redirResourceObject + ': rc ' + (NinjaPath $redirResourceSource))
 $graph.Add('build original-ccpu386.lib: lib ' + ($ccpuObjects -join ' '))
@@ -2386,14 +2414,12 @@ sources = @('src/common/protocol/native_hook.h', 'src/nthook32-dll/hook.h', 'src
     })
     selectedCcpuFallbacks = @(
         [ordered]@{
-            path = 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
-            selector = 'MVDM_CCPU_VECTOR_DEFAULTS_ONLY'
+            path = 'src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c'
             symbols = @('EDL_fast_bop', 'c_sas_touch', 'c_VirtualiseInstruction')
             buildDisposition = 'compile-and-force-link-debugbreak-vector-defaults-only'
         }
         [ordered]@{
-            path = 'src/ntvdm-exe/softpc/mvdm_softpc_ccpu_fallback.c'
-            selector = 'MVDM_CCPU_ACTIVITY_CHECK_ONLY'
+            path = 'src/ntvdm-exe/softpc/mvdm_ccpu_activity_check.c'
             symbols = @('ActivityCheckAfterTimeSlice')
             buildDisposition = 'compile-and-normal-link-empty-activity-callback-only'
         }

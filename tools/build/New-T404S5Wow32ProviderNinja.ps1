@@ -393,10 +393,11 @@ $includeRoots = @(
 )
 $includes = ($includeRoots | ForEach-Object { '/I "' + (Join-Path $root $_) + '"' }) -join ' '
 $force = '/FI "' + (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') + '"'
-# Original NT x86 i386mk.inc defaults to /Gz and STD_CALL. Keep this DLL's
+# Original NT x86 i386mk.inc defaults to /Gz. Keep this DLL's
 # internal ABI; worker-owned cdecl imports need explicit declarations, not a
 # package-wide /Gd override or aliases that conceal different stack cleanup.
-$cflags = '/nologo /TC /c /MT /W3 /Gz /DSTD_CALL /showIncludes /DMVDM_WOW32_PROVIDER /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
+$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
+$adapterCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DANSI ' + $force + ' ' + $includes
 
 $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
@@ -404,6 +405,7 @@ $ninja.Add('root = ' + (ConvertTo-NinjaPath $root))
 $ninja.Add('environment = ' + (ConvertTo-NinjaPath $environment))
 $ninja.Add('release_cflags = /O2')
 $ninja.Add('cflags = ' + $cflags.Replace('\', '/'))
+$ninja.Add('adapter_cflags = ' + $adapterCflags.Replace('\', '/'))
 # OpenNT ntuser/client/sources.inc and rtl/client/sources.inc select UNICODE.
 # Keep the recovered USER island distinct from original WOW32's ANSI graph.
 $ninja.Add('control_user_flags = /UANSI /DUNICODE')
@@ -666,13 +668,20 @@ foreach ($source in $providerSupportSources) {
     $object = 'obj/' + $owner + '/' + [IO.Path]::GetFileNameWithoutExtension($source) + '.obj'
     $supportObjects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath $source))
+    if ($source.StartsWith($adapterWow, [StringComparison]::OrdinalIgnoreCase) -or
+        $source.StartsWith((Join-Path $root 'src/ntvdm-exe'), [StringComparison]::OrdinalIgnoreCase)) {
+        $ninja.Add('  cflags = $adapter_cflags')
+    }
 }
 $systemImportAliasObject = 'obj/wow32-system-import-abi-aliases.obj'
 $ninja.Add('build ' + $systemImportAliasObject + ': cc ' + (ConvertTo-NinjaPath $systemImportAliasSource))
+$ninja.Add('  cflags = $adapter_cflags')
 $parentImportAliasObject = 'obj/wow32-parent-import-abi-aliases.obj'
 $ninja.Add('build ' + $parentImportAliasObject + ': cc ' + (ConvertTo-NinjaPath $parentImportAliasSource))
+$ninja.Add('  cflags = $adapter_cflags')
 $dllEntryBridgeObject = 'obj/wow32-dll-entry-bridge.obj'
 $ninja.Add('build ' + $dllEntryBridgeObject + ': cc ' + (ConvertTo-NinjaPath $dllEntryBridgeSource))
+$ninja.Add('  cflags = $adapter_cflags')
 $ninja.Add('build obj/wow32.res: rc ' + (ConvertTo-NinjaPath $resource))
 $editMenuResource = 'obj/opennt-user/edit-menu.res'
 $objects.Add($editMenuResource)
