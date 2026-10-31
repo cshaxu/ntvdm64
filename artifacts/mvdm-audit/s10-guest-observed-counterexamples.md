@@ -1,5 +1,11 @@
 # S10 review of 195 observed guest-target C/H roles
 
+The live counterexample observer was rerun on 2026-10-30 against the four
+current Ninja dependency streams and source/recipe receipts. All 195 remain
+`keep-guest-observed-profile`; all four streams report zero stale dependency
+blocks. The refreshed JSON records the current dependency hashes. This is a
+selected-profile source-role check, not guest functionality or T acceptance.
+
 [Per-file results](s10-guest-observed-counterexamples.csv), [full evidence](s10-guest-observed-counterexamples.json), and [observer](s10-guest-observed-counterexamples.py) recheck the 195 current `guest-target-observed` C/H paths in `host-ch-scope/inventory.csv`. The observed distinction is a physical-source role in four selected build trees; it neither removes a guest feature nor establishes any guest runtime result.
 
 All 195 paths have at least one currently matching source/recipe receipt; all 436 collected witness pairs matched their recorded hashes. The observer explicitly reads the four current worker/WOW32 Ninja dependency streams with Ninja 1.13.2, reporting zero stale dependency blocks. It finds no exact selected-tree dependency, exact selected graph path, local-resolved physical include from non-WOW16/non-DOS-v86 C/H, same-basename non-guest C/H include, or adjacent recipe with both an explicit WIN32 marker and matching source/object token for these 195 paths. Therefore no path warrants return to host/shared on these bounded observations. This is not an exhaustive search of alternate targets or ambiguous indirect rules. The previously identified dual Win16/Win32 DDEML test files are `role-pending`, not part of these 195.
