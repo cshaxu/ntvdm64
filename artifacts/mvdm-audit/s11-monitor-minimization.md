@@ -188,6 +188,25 @@ call; ordinal or dynamically resolved consumers are not excluded by that
 search. No state ownership or runtime fix is inferred from absence of a
 named reference.
 
+For debug registers, the original NT4 `VdmOpcodeGetDrx` and
+`VdmOpcodeSetDrx` read or write the current trap frame's `TsDr0` through
+`TsDr7`; setting DR7 also updates the current kernel thread's debug-active
+flag. The selected CCPU instead exposes the process-global `CCPU_DR` array,
+and its monitor invokes `ccpu_monitor_write_dr` to update the original CCPU
+breakpoint machinery. The project's taskman `client_context` callback
+exchanges the guest callback view and expected version, not debug registers.
+This identifies different storage and an actual scheduler callback boundary;
+it does not prove that no other task-switch owner saves those registers, or
+that a real guest can observe a cross-task mismatch. A separate two-task
+execution witness and complete switch/retirement owner trace are needed
+before changing the state authority.
+The selected `EnterWowCritSect` and `ExitWowCritSect` call that callback as
+execution ownership is acquired or released, including a release with a null
+next owner. This establishes where the existing projected client view changes;
+it does not establish that this is the only possible CPU-state switch point
+or justify saving debug state there without checking nested execution and
+original task semantics.
+
 ## Instruction-fetch page-access accounting
 
 NT4 `Ki386DispatchOpcode` and `OpcodeGenericPrefix` read instruction bytes
