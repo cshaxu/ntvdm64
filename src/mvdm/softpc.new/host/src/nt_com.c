@@ -389,9 +389,6 @@ GLOBAL CPU int host_com_open(int adapter)
 
     /*::::::::::::::::::::::::::::::: Enable IRET hooks for comms interrupt */
 
-#ifdef MONITOR
-    ica_iret_hook_control(current->controller, current->line, TRUE);
-#endif
 
     /*:::::::::::::::::::::: Create objects used to control comms activity */
 
@@ -713,9 +710,6 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 
 	/*.......................... Disable IRET hooks for comms interrupt */
 
-#ifdef MONITOR
-	ica_iret_hook_control(current->controller, current->line, FALSE);
-#endif
 
 	/*. This makes sure that the next access to the port will reopen it */
 	current->ReOpenCounter = 0;

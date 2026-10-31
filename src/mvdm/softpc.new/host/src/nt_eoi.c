@@ -36,10 +36,6 @@
 #include "nt_reset.h"
 #include "nt_eoi.h"
 
-// from monitor.lib
-HANDLE ThreadLookUp(PVOID);
-extern PVOID CurrentMonitorTeb;
-
 // from nt_timer.c
 extern ULONG GetPerfCounter(VOID);
 
@@ -48,11 +44,6 @@ RTL_CRITICAL_SECTION IcaLock;   // ICA critical section lock
 ULONG UndelayIrqLine=0;
 ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 
-#ifdef MONITOR
-ULONG iretHookActive=0;
-ULONG iretHookMask  =0;
-ULONG AddrIretBopTable=0;  // seg:offset
-#endif
 
 HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 
@@ -63,7 +54,6 @@ HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 static EOIHOOKPROC EoiHooks[16]={NULL};  // must be init to NULL
 
 
-#ifndef MONITOR
 void DelayIrqQuickEvent(long param);
 q_ev_handle DelayHandle[16];
 #define pNtVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
@@ -71,7 +61,6 @@ q_ev_handle DelayHandle[16];
 LARGE_INTEGER BlockTime = {0,0};
 extern LARGE_INTEGER CurrHeartBeat;
 void host_TimeStamp(PLARGE_INTEGER pliTime);
-#endif
 
 
 /*
@@ -98,9 +87,7 @@ BlockWOWIdle(
    if (Blocking) {
        *pNtVDMState |= VDM_WOWBLOCKED;
 
-#ifndef MONITOR
        BlockTime = CurrHeartBeat;
-#endif
 
        }
    else {
@@ -108,7 +95,6 @@ BlockWOWIdle(
 
 
 
-#ifndef MONITOR
        if (BlockTime.QuadPart &&
            (CurrHeartBeat.QuadPart >= BlockTime.QuadPart + SYSTEM_TICK_INTV/2))
           {
@@ -118,7 +104,6 @@ BlockWOWIdle(
            ActivityCheckAfterTimeSlice();
            return;
            }
-#endif
        }
 
    host_ica_unlock();
@@ -231,12 +216,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
    int adapter;
    ULONG  IrqLine;
 
-#ifdef MONITOR
-   NTSTATUS status;
-   VDMDELAYINTSDATA DelayIntsData;
-#else
    ULONG TicCount;
-#endif
 
    host_ica_lock();
 
@@ -254,27 +234,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
            Delay = 1000;
            }
 
-#ifdef MONITOR
-
-       //
-       // Set Kernel timer for this IrqLine
-       //
-       DelayIntsData.Delay        = Delay;
-       DelayIntsData.DelayIrqLine = IrqLineNum;
-       DelayIntsData.hThread      = ThreadLookUp(CurrentMonitorTeb);
-       if (DelayIntsData.hThread) {
-           status = NtVdmControl(VdmDelayInterrupt, &DelayIntsData);
-           if (!NT_SUCCESS(status))  {
-#if DBG
-               DbgPrint("NtVdmControl.VdmDelayInterrupt status=%lx\n",status);
-#endif
-               host_ica_unlock();
-               return FALSE;
-               }
-
-           }
-
-#else
 
         //
         // Cancel delay hw interrupt, delete quick event if any
@@ -306,7 +265,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 
 
 
-#endif
         }
 
 
@@ -328,7 +286,6 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 
 
 
-#ifndef MONITOR
 /*
  * QuickEvent call back function
  *
@@ -345,7 +302,6 @@ void DelayIrqQuickEvent(long param)
    host_ica_unlock();
 
 }
-#endif
 
 
 
@@ -377,30 +333,6 @@ void InitializeIcaLock(void)
 
 
 
-#ifdef MONITOR
-//
-// Force creation of the LazyCreate LockSemaphore
-// for the ica lock.
-// It is assumed that:
-//    the cpu thread Owns the critsect
-//    the HeartBeat Thread will wait on the critsect creating contention
-//
-// This is done by polling for a lock count greater than zero
-// and verifying that the lock semaphore has been created.
-// If these conditions are not met we will end up polling infinitely.
-// Sounds dangerous but it is okay, since we will either get a
-// CreateSemaphore or a timeout(deadlock) error from the rtl critical
-// section code, which will result in an exception.
-//
-VOID WaitIcaLockFullyInitialized(VOID)
-{
-   DWORD Delay = 0;
-
-   do {
-      Sleep(Delay++);
-   } while (IcaLock.LockCount < 1 || !IcaLock.LockSemaphore);
-}
-#endif
 
 
 
@@ -462,9 +394,6 @@ void ica_reset_interrupt_state(void)
     VirtualIca[ICA_MASTER].ica_cpu_int =
     VirtualIca[ICA_SLAVE].ica_cpu_int  = FALSE;
 
-#ifdef MONITOR
-    iretHookActive = 0;
-#endif
     DelayIrqLine  = 0;
 
     //Tell CPU to remove any pending interrupts
@@ -504,17 +433,6 @@ VOID DisableEmulatorIretHooks(void)
 //
 VOID ica_RestartInterrupts(ULONG IrqLine)
 {
-#ifdef MONITOR
-
-     //
-     // on x86 we may get multiple bits set
-     // so check both slave and master
-     //
-    UndelayIrqLine = 0;
-
-    if (!ica_restart_interrupts(ICA_SLAVE))
-        ica_restart_interrupts(ICA_MASTER);
-#else
     host_ica_lock();
 
     DelayIrqLine &= ~IrqLine;
@@ -522,31 +440,5 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
     ica_restart_interrupts(IrqLine >> 3 ? ICA_SLAVE : ICA_MASTER);
 
     host_ica_unlock();
-#endif
 }
 
-#ifdef MONITOR
-extern IU16 getMSW(void);
-
-IU32 host_iret_bop_table_addr(IU32 line)
-{
-    ULONG AddrBopTable, IretBopSize;
-
-    ASSERT(line <= 15);
-
-    if (!(iretHookMask & (1 << line))) {
-        return 0;
-        }
-
-    if (getMSW() & 1) {
-	AddrBopTable = (VDM_PM_IRETBOPSEG << 16) | VDM_PM_IRETBOPOFF;
-	IretBopSize = VDM_PM_IRETBOPSIZE;
-    }
-    else {
-	AddrBopTable = AddrIretBopTable;
-	IretBopSize = VDM_RM_IRETBOPSIZE;
-    }
-    return AddrBopTable + IretBopSize * line;
-
-}
-#endif /* MONITOR */

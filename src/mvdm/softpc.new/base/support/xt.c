@@ -80,7 +80,7 @@ half_word ica_lock;
  * delivery.  Keep the original shared support data and routines below, but
  * exclude only this obsolete CPU-state carrier from the CPU40 build.
  */
-#if defined(CCPU) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
+#if defined(CCPU) && !defined(CPU_40_STYLE)
 #ifndef MAC_LIKE
 reg A;		/* Accumulator		*/
 reg B;		/* Base			*/
@@ -151,7 +151,7 @@ int STATUS_IF;
 int STATUS_DF;
 int STATUS_NT;
 int STATUS_IOPL;
-#endif /* defined(CCPU) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE) */
+#endif /* defined(CCPU) && !defined(CPU_40_STYLE) */
 
 /*
  * Global Flags and variables
@@ -163,188 +163,6 @@ int verbose;			/* TRUE => trace instructions   */
  * Misc. Prot Mode support routines which are independant of CPU type
  *                                  ---------------------------------
  */
-#ifdef CPU_30_STYLE
-#ifndef GISP_CPU    /* GISP has its own versions of these internal to the CPU */
-
-#define GET_SELECTOR_INDEX_TIMES8(x)  ((x) & 0xfff8)
-#define GET_SELECTOR_TI(x)            (((x) & 0x0004) >> 2)
-
-#if defined(CPU_40_STYLE)
-#if defined(PROD) && !defined(CCPU)
-#undef effective_addr
-GLOBAL LIN_ADDR effective_addr IFN2(IU16, seg, IU32, off)
-{
-	return (*(Cpu.EffectiveAddr))(seg, off);
-}
-#endif	/* PROD & !CCPU */
-#else	/* !CPU_40_STYLE */
-#if !(defined(NTVDM) && defined(MONITOR))  /* MS NT monitor has own effective_addr fn */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Calculate effective address.                                       */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-GLOBAL LIN_ADDR effective_addr IFN2(IU16, seg, IU32, off)
-{
-	LIN_ADDR descr_addr;
-	DESCR entry;
-
-	if ((!getPE()) || getVM()) {
-		return ((LIN_ADDR)seg << 4) + off;
-	} else {
-#if defined(SWIN_CPU_OPTS) || defined(CPU_40_STYLE)
-		LIN_ADDR base;
-
-		if (Cpu_find_dcache_entry( seg, &base ))
-		{
-			/* Cache Hit!! */
-			return base + off;
-		}
-#endif /* SWIN_CPU_OPTS or CPU_40_STYLE*/
-
-		if ( selector_outside_table(seg, &descr_addr) == 1 ) {
-
-			/*
-			 * This is probably not a major disaster, just a result
-			 * of the fact that after protected mode is invoked it
-			 * will take say 5-10 instructions for an application
-			 * to update all the segment registers. We just
-			 * maintain real mode semantics while this error occurs.
-			 */
-
-			return ((LIN_ADDR)seg << 4) + off;
-		}
-		else
-		{
-			read_descriptor(descr_addr, &entry);
-			return entry.base + off;
-		}
-      	}
-}
-
-#endif	/* !(NTVDM & MONITOR) */
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Read a decriptor table entry from memory.                          */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-#endif	/* !CPU_40_STYLE */
-
-GLOBAL void read_descriptor IFN2(LIN_ADDR, addr, DESCR *, descr)
-{
-	IU32 first_dword, second_dword;
-	IU32 limit;
-
-	/*
-	 * The format of a 286 descriptor is:-
-	 *
-	 * ===========================
-	 * +1 |        LIMIT 15-0       | +0
-	 * ===========================
-	 * +3 |        BASE 15-0        | +2
-	 * ===========================
-	 * +5 |     AR     | BASE 23-16 | +4
-	 * ===========================
-	 * +7 |         RESERVED        | +6
-	 * ===========================
-	 */
-	/*
-	 * The format of a 386 descriptor is:-
-	 *
-	 *    =============================      AR  = Access Rights.
-	 * +1 |         LIMIT 15-0        | +0   AVL = Available.
-	 *    =============================      D   = Default Operand
-	 * +3 |         BASE 15-0         | +2          Size, = 0 16-bit
-	 *    =============================                   = 1 32-bit.
-	 * +5 |      AR     | BASE 23-16  | +4   G   = Granularity,
-	 *    =============================             = 0 byte limit
-	 *    |             | | | |A|LIMIT|             = 1 page limit.
-	 * +7 | BASE 31-24  |G|D|0|V|19-16| +6
-	 *    |             | | | |L|     |
-	 *    =============================
-	 *
-	 */
-
-	/* read in decriptor with minimum interaction with memory */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-    /* On NT, this routine can be called from non-CPU threads, so we don't */
-    /* want to use SAS at all. Instead, we rely on NtGetPtrToLinAddrByte,  */
-    /* which is provided by the CPU and is safe for multi-threading. We are*/
-    /* also relying on the fact the NT is always little-endian. */
-    {
-        IU32 *desc_addr = (IU32 *) NtGetPtrToLinAddrByte(addr);
-
-        first_dword = *desc_addr;
-        second_dword = *(desc_addr + 1);
-    }
-#else
-	first_dword = sas_dw_at(addr);
-	second_dword = sas_dw_at(addr+4);
-#endif
-
-	/* load attributes and access rights */
-	descr->AR = (second_dword >> 8) & 0xff;
-
-	/* unpack the base */
-	descr->base = (first_dword >> 16) | 
-#ifdef SPC386
-	    (second_dword & 0xff000000) |
-#endif
-	    (second_dword << 16 & 0xff0000 );
-
-	/* unpack the limit */
-#ifndef SPC386
-	descr->limit = first_dword & 0xffff;
-#else
-	limit = (first_dword & 0xffff) | (second_dword & 0x000f0000);
-
-	if ( second_dword & 0x00800000 ) /* check bit 23 */
-		{
-			/* Granularity Bit Set. Limit is expressed in pages
-	 (4k bytes), convert to byte limit */
-			limit = limit << 12 | 0xfff;
-		}
-	descr->limit = limit;
-#endif /* ifndef SPC386 else */
-
-}
-
-#if !(defined(NTVDM) && defined(MONITOR))  /* MS NT monitor has own selector_outside_table fn */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Check if selector outside bounds of GDT or LDT                     */
-/* Return 1 for outside table, 0 for inside table.                    */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-
-GLOBAL boolean selector_outside_table IFN2(IU16, selector, LIN_ADDR *, descr_addr)
-{
-	/* selector		(I) selector to be checked */
-	/* descr_addr	(O) address of related descriptor */
-
-	LIN_ADDR offset;
-
-	offset = GET_SELECTOR_INDEX_TIMES8(selector);
-
-	/* choose a table */
-	if ( GET_SELECTOR_TI(selector) == 0 )
-	{
-		/* GDT - trap NULL selector or outside table */
-		if ( offset == 0 || offset + 7 > getGDT_LIMIT() )
-			return 1;
-		*descr_addr = getGDT_BASE() + offset;
-	}
-	else
-	{
-		/* LDT - trap invalid LDT or outside table */
-		if ( getLDT_SELECTOR() == 0 || offset + 7 > getLDT_LIMIT() )
-			return 1;
-		*descr_addr = getLDT_BASE() + offset;
-	}
-
-	return 0;
-}
-
-#endif	/* !(NTVDM & MONITOR) */
-
-#endif /* !GISP_CPU */
-#endif /* CPU_30_STYLE */
 
 
 /*
@@ -357,7 +175,7 @@ GLOBAL boolean selector_outside_table IFN2(IU16, selector, LIN_ADDR *, descr_add
  * in the selected CCPU40 product produces a second provider with no distinct
  * consumer. Keep the source's original table for every other profile.
  */
-#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
+#if !defined(MAC_LIKE) && !defined(CPU_40_STYLE)
 
 half_word pf_table[] = {
 	1,	/* 00 */
@@ -617,7 +435,7 @@ half_word pf_table[] = {
 	0,	/* fe */
 	1	/* ff */
 };
-#endif /* !defined(MAC_LIKE) && !defined(CPU_30_STYLE) */
+#endif /* !defined(MAC_LIKE) && !defined(CPU_40_STYLE) */
 
 
 /*(

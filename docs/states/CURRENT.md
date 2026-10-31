@@ -7,7 +7,7 @@
 The CPU40 monitor and TLB boundary are in a
 tested partial baseline. Full (16 gates), 93 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
-release destinations matched all ten image hashes. V86 host-monitor removal is published; CCPU V86 stays. Mouse unverified. DPMI mapped-code, operand-fault,
+release destinations matched all ten image hashes. CPU30 source removal published; CCPU V86 stays. Mouse unverified. DPMI mapped-code, operand-fault,
 reentry and NPX/debug behavior remain S11 work; publication is
 not S11 closure. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
 

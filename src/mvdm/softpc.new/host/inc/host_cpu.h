@@ -14,102 +14,6 @@
 
 /* SccsID[]="@(#)host_cpu.h     1.22 4/15/91 Copyright Insignia Solutions Ltd."; */
 
-#ifdef CPU_30_STYLE
-
-#ifndef _HOST_CPU_H
-#define _HOST_CPU_H
-
-
-#ifdef MONITOR
-#include <monregs.h>
-
-#define	 getSTATUS() 	(getCF()        |	\
-			getOF()   << 11 |	\
-			getZF()   << 6  |	\
-			getSF()   << 7  |	\
-			getAF()   << 4  |	\
-			getPF()   << 2  |	\
-			getTF()   << 8  |	\
-			getIF()   << 9  |	\
-			getDF()   << 10 |	\
-			getIOPL() << 12 |	\
-			getNT()   << 14)
-
-#endif
-
-/*
- * Union representing different ways of accessing a register
- *
- * Should probably not be here, but is for historical reasons.
- *
- * If it goes, then host_cpu.h should have reached nirvana (i.e. be totally empty)!
- */
-
-#ifdef BIGEND
-
-typedef union
-    {
-        word    X;
-    struct
-        {                               /* as two bytes */
-        half_word high;
-        half_word low;
-        word pad;
-        } byte;
-    struct
-        {                               /* as 4 nibbles */
-        word n3:4;
-        word n2:4;
-        word n1:4;
-        word n0:4;
-        word pad;
-        } nibble;
-    struct
-        {                               /* as 16 bits   */
-        word b15:1;
-        word b14:1;
-        word b13:1;
-        word b12:1;
-        word b11:1;
-        word b10:1;
-        word b9:1;
-        word b8:1;
-        word b7:1;
-        word b6:1;
-        word b5:1;
-        word b4:1;
-        word b3:1;
-        word b2:1;
-        word b1:1;
-        word b0:1;
-        word pad;
-        } bit;
-    } reg;
-
-#endif /* BIGEND */
-
-
-#ifdef LITTLEND
-
-typedef union
-    {
-        word    X;
-    struct
-        {                               /* as two bytes */
-        half_word low;
-        half_word high;
-        } byte;
-    } reg;
-
-#endif /* LITTLEND */
-
-
-
-
-
-
-#endif
-#else /* CPU_30_STYLE */
 
 /*
  * ============================================================================
@@ -523,4 +427,3 @@ extern void do_setCF();
 #define getINTR()       (R_INTR)
 #endif A2CPU
 
-#endif /* CPU_30_STYLE */

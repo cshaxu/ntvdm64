@@ -191,7 +191,6 @@ int     timer_blocked = 0;
 #include "egagraph.h"
 #endif	/* EGG */
 
-#ifndef CPU_30_STYLE
 #define CPU_YODA_INT 0
 
 LOCAL VOID cpu_interrupt IFN2(int,x,int,y)
@@ -201,7 +200,6 @@ LOCAL VOID cpu_interrupt IFN2(int,x,int,y)
 	cpu_interrupt_map |= CPU_YODA_EXCEPTION_MASK;
 	host_cpu_interrupt();
 }
-#endif
 
 
 #define	sizeoftable(tab)	(sizeof(tab)/sizeof(tab[0]))
@@ -1608,12 +1606,8 @@ LOCAL YODA_COMMAND(do_par)
 	    fprintf(trace_file, "GS: BASE:%08x LIMIT:%08x AR:%04x\n",
 	       getGS_BASE(), getGS_LIMIT(), getGS_AR());
 #else /* SPC386 */
-#ifdef CPU_30_STYLE
-	fprintf(trace_file, "3.0 CPU doesn't support this yet!\n");
-#else
         fprintf(trace_file, "CS: %d DS: %d ES: %d SS: %d\n",
                              ALC_CS, ALC_DS, ALC_ES, ALC_SS);
-#endif /* CPU_30_STYLE */
 #endif /* SPC386 */							 
 	return(YODA_LOOP);
 }
@@ -1643,7 +1637,6 @@ LOCAL YODA_COMMAND(do_pdtrc)
 
 LOCAL YODA_COMMAND(do_pseg)
 {
-#ifndef CPU_30_STYLE
 	/* Print Segment Registers */
 	cs = (getCS_AR() & 0x60) >> 5;      /*  dpl */
 	ip = (getCS_AR() & 0x1f);           /*  super */
@@ -1661,16 +1654,6 @@ LOCAL YODA_COMMAND(do_pseg)
 	ip = (getES_AR() & 0x1f);           /*  super */
 	fprintf(trace_file, "ES:: SELECTOR:%4x DPL:%1d TYPE:%25s BASE: %6x LIMIT:%4x\n",                   
 	        getES_SELECTOR(), cs, segment_names[ip], getES_BASE(), getES_LIMIT());
-#else
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	fprintf(trace_file, "Function not supported anymore\n");
-#endif
 	return(YODA_LOOP);
 }
 

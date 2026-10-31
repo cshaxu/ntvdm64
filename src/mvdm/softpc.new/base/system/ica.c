@@ -231,10 +231,6 @@ VDMVIRTUALICA VirtualIca[2];
  * hook inside kernel)
  */
 
-#ifdef MONITOR
-extern  ULONG iretHookMask;
-extern  ULONG iretHookActive;
-#endif
 
 
 /*
@@ -482,11 +478,7 @@ ica_scan_irr IFN1(IU32, adapter)
 
 #if defined (NTVDM)
 
-#ifdef MONITOR
-    iret_hook_mask = (IU8)((iretHookActive | DelayIrqLine) >> (adapter << 3));
-#else
     iret_hook_mask = (IU8)(DelayIrqLine >> (adapter << 3));
-#endif
 
 #else  /* !NTVDM */
     /* if iret hooks are not being used, iretHookActive will always be 0 */
@@ -1506,14 +1498,7 @@ ica_intack IFN0()
 
 #if defined (NTVDM)
 
-#ifdef MONITOR
-    *hook_address = host_iret_bop_table_addr(line);
-    if (*hook_address) {
-        iretHookActive |= 1 << line;
-        }
-#else
     *hook_address = 0;
-#endif
 
 
 #else
@@ -1783,38 +1768,6 @@ cancel_action_interrupt IFN2(IU32, adapter, IU32, line)
 
 #if defined(NTVDM)
 
-#ifdef MONITOR
-/*
- *  Assumes caller has ica lock
- */
-
-GLOBAL void
-ica_iret_hook_called IFN1(IU32, abs_line)
-{
-     int i;
-     IU32 adapter = abs_line >> 3;
-
-     iretHookActive &= ~(1 << abs_line);
-     if ((i = ica_scan_irr(adapter)) & 0x80)
-          ica_interrupt_cpu(adapter, i & 0x07);
-}
-
-
-GLOBAL void
-ica_iret_hook_control IFN3(IU32, adapter, IU32, line, IBOOL, enable)
-{
-      int mask = 1 << (line + (adapter << 3));
-
-      host_ica_lock();
-
-      if (enable)
-          iretHookMask |= mask;
-      else
-          iretHookMask &= ~mask;
-
-      host_ica_unlock();
-}
-#else
 
 /*
  *  obsolete, to be removed... but the current ntvdm emulator libs ref
@@ -1825,7 +1778,6 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 {
     return; // do nothing!
 }
-#endif
 
 #endif   /* NTVDM */
 

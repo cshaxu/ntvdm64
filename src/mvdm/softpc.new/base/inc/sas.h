@@ -169,7 +169,6 @@ extern half_word M[];
  * of 4.0 easier.  We'll leave them in for builds prior to 3.0 though.
  *
  */
-#ifndef CPU_30_STYLE
 #define M_low (long)Start_of_M_area
 #define M_high (long)(Length_of_M_area-1)
 #ifdef BACK_M
@@ -196,7 +195,6 @@ extern void sas_move_bytes_backward IPT3(sys_addr, src, sys_addr, dest,
 	sys_addr, len);
 extern void sas_move_words_backward IPT3(sys_addr, src, sys_addr, dest,
 	sys_addr, len);
-#endif /* !CPU_30_STYLE */
 
 /********************************************************/
 /* function declarations */

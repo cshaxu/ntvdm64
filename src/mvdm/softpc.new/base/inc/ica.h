@@ -79,7 +79,7 @@
  * CPU_30_STYLE even when it selected CPU_40_STYLE, solely to keep this ICA
  * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
  * in this product, so keep the original macro out of every CCPU build instead. */
-#if !defined(CPU_30_STYLE) && !defined(CCPU)
+#if !defined(CCPU)
 
 /* def of bits in the CPU_INTERRUPT_MAP ?? */
 #define CPU_HW_INT		0

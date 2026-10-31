@@ -103,7 +103,6 @@ q_event_init(
       void
       )
 {
-#ifndef MONITOR
      PLIST_ENTRY Next;
      PQEV_ENTRY pqevEntry;
 
@@ -139,11 +138,9 @@ q_event_init(
      host_TimeStamp(&qevCalibTime);
 
      host_ica_unlock();
-#endif
 }
 
 
-#ifndef MONITOR
 
 /*
  *  Caller must hold ica lock
@@ -185,7 +182,6 @@ ResetCpuQevCount(
      qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;
      host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));
 }
-#endif
 
 
 
@@ -203,18 +199,6 @@ add_q_event_t(
       )
 {
 
-#ifdef MONITOR
-        /*
-         *  On X86 dispatch immediately, as x86 has no efficient way
-         *  to acheive usec granularity.
-         */
-
-        (*func)(param);
-
-        return (q_ev_handle)1;
-
-
-#else  /* MONITOR */
 
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
@@ -295,7 +279,6 @@ add_q_event_t(
         return qevHandle.Handle;
 
 
-#endif
 }
 
 
@@ -327,7 +310,6 @@ dispatch_q_event(
     void
     )
 {
-#ifndef MONITOR
         PQEV_ENTRY  pqevEntry;
         LARGE_INTEGER CurrTime;
         Q_CALLBACK_FN qevCallBack = NULL;
@@ -363,7 +345,6 @@ dispatch_q_event(
         if (qevCallBack) {
             (*qevCallBack)(Param);
             }
-#endif
 }
 
 
@@ -372,7 +353,6 @@ delete_q_event(
         q_ev_handle Handle
         )
 {
-#ifndef MONITOR
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
         LARGE_INTEGER CurrTime;
@@ -441,12 +421,10 @@ delete_q_event(
 
 
         host_ica_unlock();
-#endif
 }
 
 
 
-#ifndef MONITOR
 
 /*
  * The QuickEvent list stores time in usecs. The CPU quick event counter
@@ -608,4 +586,3 @@ quick_tick_recalibrate(void)
 
 }
 
-#endif

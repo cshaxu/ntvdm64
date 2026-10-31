@@ -75,29 +75,20 @@ void cassette_io()
         unsigned long setup_int15_function = (unsigned long)getAH();
         unsigned long setup_int15_argument = (unsigned long)getAL();
 #ifdef PM
-#ifndef	CPU_30_STYLE
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
 	word *, limit, sys_addr, descr_addr);
-#endif	/* not CPU_30_STYLE */
 half_word cmos_u_m_s_hi;
 half_word cmos_u_m_s_lo;
 sys_addr gdt;
 sys_addr  source;
 sys_addr  source_base;
 sys_addr  target;
-#if (!defined(PROD) || !defined(CPU_30_STYLE))
 word      source_limit;
 word      target_limit;
-#endif
 sys_addr  target_base;
 sys_addr byte_count;   /* Max size is 0x8000 * 2 = 10000 */
-#ifdef CPU_30_STYLE
-DESCR src_entry;
-DESCR dst_entry;
-#else
 half_word source_AR;
 half_word target_AR;
-#endif /* CPU_30_STYLE */
 #endif /* PM */
 
 	half_word	mask,		/* interrupt mask			*/
@@ -149,26 +140,11 @@ half_word target_AR;
                source = gdt + 0x10;   /* see layout in bios listing */
                target = gdt + 0x18;
 
-#ifdef CPU_30_STYLE
-	       read_descriptor(source, &src_entry);
-	       read_descriptor(target, &dst_entry);
-	       source_base = src_entry.base;
-	       target_base = dst_entry.base;
-#ifndef PROD
-	       source_limit = src_entry.limit;
-	       target_limit = dst_entry.limit;
-#endif
-
-		assert1( (src_entry.AR & 0x9e) == 0x92, "Bad source access rights %x", src_entry.AR );
-		assert1( (dst_entry.AR & 0x9e) == 0x92, "Bad dest access rights %x", dst_entry.AR );
-
-#else /* CPU_30_STYLE */
 		/* retrieve descriptor information for source */
 		retrieve_descr_fields(&source_AR, &source_base, &source_limit, source);
 
 		/* retrieve descriptor information for target */
 		retrieve_descr_fields(&target_AR, &target_base, &target_limit, target);
-#endif /* CPU_30_STYLE */
 
 		/* make word count into a byte count */
 		byte_count = getCX() << 1;

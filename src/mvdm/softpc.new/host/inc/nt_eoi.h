@@ -20,7 +20,6 @@ BOOL host_DelayHwInterrupt(int IrqLine, int CallCount, ULONG Delay);
 void host_ica_lock(void);
 void host_ica_unlock(void);
 void InitializeIcaLock(void);
-void WaitIcaLockFullyInitialized(VOID);
 VOID ica_RestartInterrupts(ULONG IrqLine);
 BOOL ica_restart_interrupts(int adapter);
 
@@ -30,12 +29,6 @@ extern ULONG UndelayIrqLine;
 
 extern VDMVIRTUALICA VirtualIca[];
 
-#ifdef MONITOR
-extern ULONG iretHookActive;
-extern ULONG iretHookMask;
-extern ULONG AddrIretBopTable;  // seg:offset
-extern IU32 host_iret_bop_table_addr(IU32 line);
-#endif
 
 //from base ica.c
 LONG ica_intack(ULONG *hook_addr);

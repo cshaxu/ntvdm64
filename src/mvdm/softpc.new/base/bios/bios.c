@@ -646,7 +646,7 @@ void (*BIOS[])() = {
 #else
                         illegal_bop,    /* BOP FD */
 #endif	/* NTVDM && MONITOR */
-#if !defined(LDBIOS) && !defined(CPU_30_STYLE)
+#if !defined(LDBIOS)
                         host_unsimulate,/* BOP FE */
 #else
 #if defined(NTVDM) && defined(MONITOR)
@@ -654,7 +654,7 @@ void (*BIOS[])() = {
 #else
                         illegal_bop,    /* BOP FE */
 #endif	/* NTVDM && MONITOR */
-#endif	/* !LDBIOS && !CPU_30_STYLE */
+#endif	/* !LDBIOS */
 
 #else /* ndef GISP_CPU */
 

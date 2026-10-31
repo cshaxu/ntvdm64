@@ -6671,7 +6671,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 
 	/* Set CS:IP to the registered user subroutine. */
 	setCS(segment);
-#if defined(CPU_30_STYLE) || defined(CPU_40_STYLE)
+#if defined(CPU_40_STYLE)
 	/* DIVERGENCE(MVDM-HOST-DIV-222): CPU40's CCPU starts at live EIP.
 	 * An INT 33h callback registered by EDIT points at ordinary guest code,
 	 * not at a BOP marker: its two preceding bytes decode as ADD, while its

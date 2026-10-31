@@ -247,7 +247,6 @@ IMPORT BOOL LoadCPIFont(UINT, WORD, WORD);
 
 #ifdef X86GFX
 VOID locateNativeBIOSfonts(VOID);
-VOID GetROMsMapped(VOID);
 VOID LoseRegenMemory(VOID);
 VOID RegainRegenMemory(VOID);
 #endif

@@ -547,7 +547,6 @@ GLOBAL VOID config( VOID )
 
 
 #ifdef X86GFX
-        GetROMsMapped();        /* before anyone else can toy with memory */
 
 	locateNativeBIOSfonts();	/* get fonts from page 0 */
 #endif
@@ -821,33 +820,7 @@ struct
 
 void host_runtime_init()
 {
-#ifdef MONITOR
-    CONTEXT txt;
-
-    // get Floating point info for system.
-    txt.ContextFlags = CONTEXT_FLOATING_POINT;
-    if (! GetThreadContext(GetCurrentThread(), &txt) )
-    {
-        runtime_status.npx_enabled = FALSE;     //dont know for sure so be safe
-    }
-    else
-    {
-#if 0	/* if the correct fix ever is made... */
-	if (txt.FloatSave.Cr0NpxState & EMBITSET)
-            runtime_status.npx_enabled = FALSE;     //EM only on if no NPX
-	else
-            runtime_status.npx_enabled = TRUE;      //NPX present.
-#endif
-
-	// If no coprocessor, the CONTEXT_F_P bit will have been cleared
-	if ((txt.ContextFlags & CONTEXT_FLOATING_POINT) == CONTEXT_FLOATING_POINT)
-            runtime_status.npx_enabled = TRUE;     //EM only on if no NPX
-	else
-            runtime_status.npx_enabled = FALSE;
-    }
-#else
     runtime_status.npx_enabled = TRUE;
-#endif
 }
 
 short host_runtime_inquire IFN1(UTINY, what)
@@ -1196,27 +1169,6 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 #endif
 
 
-#ifdef MONITOR
-/* this function returns the backfill starting segment to monitor
-  *
- * VERT IMPORTANT !!!!
- * the backfill segment must be available before sas_init.
- *
- */
-
-unsigned short get_lim_backfill_segment(void)
-{
-#ifdef LIM
-    if (lim_config_data.initialized)
-        return lim_config_data.base_segment;
-    else
-        return 640 * 1024 / 16;
-#else
-    return 640 * 1024 / 16;
-#endif
-
-}
-#endif
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::: Get VDM Memory Size :::::::::::::::::::::::::::::*/

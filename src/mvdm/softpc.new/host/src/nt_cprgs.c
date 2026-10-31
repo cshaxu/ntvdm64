@@ -161,7 +161,7 @@ GLOBAL VOID		(*host_simulate_func) ();
  * soft_ccpu register-state implementation when the supported CPU_40_STYLE
  * profile is built without CPU_30_STYLE.  Select the same CCPU vector
  * branch explicitly for CPU40; CPU30 is neither defined nor linked. */
-#if defined(CPU_30_STYLE) || defined(CPU_40_STYLE)
+#if defined(CPU_40_STYLE)
 
 #ifdef CCPU
 
@@ -379,7 +379,7 @@ GLOBAL VOID load_sw_cpu_access_functions ()
 }
 #endif /* A3CPU */
 
-#else /* CPU_30_STYLE */
+#else /* CPU_40_STYLE */
 
 
 #ifdef CCPU
@@ -1780,7 +1780,7 @@ load_sw_cpu_access_functions ()
 #endif A2CPU
 
 
-#endif /* CPU_30_STYLE || CPU_40_STYLE */
+#endif /* CPU_40_STYLE */
 
 
 

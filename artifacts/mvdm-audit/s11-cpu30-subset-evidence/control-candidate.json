@@ -1,0 +1,8 @@
+{
+  "Case": "nested-mem",
+  "Expected": 1,
+  "Actual": 1,
+  "Report": "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\cpu30-window-control-candidate\\window-control-nested-mem.txt",
+  "BodyMs": 14974,
+  "CleanupMs": 234
+}

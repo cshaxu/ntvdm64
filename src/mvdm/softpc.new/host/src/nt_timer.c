@@ -204,9 +204,7 @@ DWORD HeartBeatThread(PVOID pv);
 void CreepAdjust(LARGE_INTEGER DiffTime);
 void DemHeartBeat(void);
 
-#ifndef MONITOR
 void quick_tick_recalibrate(void);
-#endif
 
 void rtc_init(void);
 void RtcTick(struct host_timeval *time);
@@ -242,9 +240,6 @@ BOOL   bUpdateRtc;
 
 
 
-#if defined (MONITOR) && defined (X86GFX)
-HANDLE SuspendEventObjects[2];
-#endif
 
 
 
@@ -422,9 +417,7 @@ void host_timer_event()
             PrioWaitIfIdle(FgBgPriority);
         }
 
-#ifndef MONITOR
    quick_tick_recalibrate();
-#endif
 
 
 
@@ -497,9 +490,7 @@ VOID host_init_bda_timer(void)
     // reset the Real Time Clock
     rtc_init();
 
-#ifndef MONITOR
     q_event_init();
-#endif
 
 }
 
@@ -577,14 +568,6 @@ DWORD HeartBeatThread(PVOID pv)
 
    try {
 
-#ifdef MONITOR
-      //
-      // On x86 we have to force the creation of the critsect lock semaphore
-      // When the heartbeat thread start running the cpu thread holds the
-      // ica lock forcing contention (and creation). See ConsoleInit.
-      //
-      host_ica_lock();   // take ica lock to force creation of critsect
-#endif
 
 
        //
@@ -614,9 +597,6 @@ DWORD HeartBeatThread(PVOID pv)
           }
 #endif
 
-#ifdef MONITOR
-      host_ica_unlock();
-#endif
 
       dwRet = Win32_host_timer();
 
@@ -774,58 +754,6 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
      liDelay.QuadPart  = Int32x32To64(Delay, -10);
 
-#ifdef MONITOR
-
-RewaitSuspend:
-     status = NtWaitForMultipleObjects(VDMForWOW ? 1 : 2,
-                                       SuspendEventObjects,
-                                       WaitAny,
-                                       TRUE,
-                                       &liDelay);
-
-                // delay time has expired
-     if (status == STATUS_TIMEOUT) {
-         return status;
-         }
-
-#ifdef X86GFX   // screen switch event
-     if (status == 1)  {
-         DoHandShake();
-         liDelay.QuadPart = -10;
-         goto RewaitSuspend;
-         }
-#endif
-
-           // suspend event
-     if (!status)  {
-         SuspendEventObjects[0] = hHBResumeEvent;
-         ica_hw_interrupt_cancel(ICA_MASTER,CPU_TIMER_INT);
-         host_DelayHwInterrupt(CPU_TIMER_INT, 0, 0xFFFFFFFF);
-
-RewaitResume:
-         status = NtWaitForMultipleObjects(VDMForWOW ? 1 : 2,
-                                           SuspendEventObjects,
-                                           WaitAny,
-                                           TRUE,
-                                           NULL);
-
-                    // resume event
-         if (!status) {
-             SuspendEventObjects[0] = hHBSuspendEvent;
-             return status;
-             }
-
-
-#ifdef X86GFX       // screen switch event
-         if (status == 1)  {
-             DoHandShake();
-             goto RewaitResume;
-             }
-#endif
-         }
-
-
-#else          // ndef MONITOR
 //
 // On Risc platforms we only have to deal with the
 // HeartBeat Resume\Suspend objects so things are much simpler
@@ -846,7 +774,6 @@ RewaitResume:
              }
          }
 
-#endif
 
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter

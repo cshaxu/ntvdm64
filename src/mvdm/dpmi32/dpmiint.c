@@ -90,25 +90,7 @@ Routine Description:
                                          Handlers[IntNumber].CsSelector,
                                          Handlers[IntNumber].Eip);
 
-#ifdef i386
-    if (IntNumber == 0x21)
-    {
-        VDMSET_INT21_HANDLER_DATA    ServiceData;
-        NTSTATUS Status;
 
-        ServiceData.Selector = Handlers[IntNumber].CsSelector;
-        ServiceData.Offset =   Handlers[IntNumber].Eip;
-        ServiceData.Gate32 = Handlers[IntNumber].Flags & VDM_INT_32;
-
-        Status = NtVdmControl(VdmSetInt21Handler,  &ServiceData);
-
-#if DBG
-        if (!NT_SUCCESS(Status)) {
-            OutputDebugString("DPMI32: Error Setting Int21handler\n");
-        }
-#endif
-    }
-#endif      //i386
 
     setAX(0);
 }

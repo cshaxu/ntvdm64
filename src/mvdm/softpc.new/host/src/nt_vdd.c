@@ -216,9 +216,6 @@ WORD FreeVddAdapter(HANDLE hVdd)
    return 0;
 }
 
-#ifdef MONITOR
-extern BOOLEAN MonitorVddConnectPrinter(WORD Adapter, HANDLE hVdd, BOOLEAN Connect);
-#endif /* MONITOR */
 
 
 /*** VDDInstallIOHook - This service is provided for VDDs to hook the
@@ -275,9 +272,6 @@ BOOL VDDInstallIOHook (
    WORD              w, i;
    WORD              wAdapter;
    PVDD_IO_PORTRANGE pPRange;
-#ifdef MONITOR
-   WORD 	     lptAdapter = 0;
-#endif
 
 
       // check parameters
@@ -327,20 +321,6 @@ BOOL VDDInstallIOHook (
    while (i) {
           for (w = pPRange->First; w <= pPRange->Last; w++)
             {
-#ifdef MONITOR
-	    // watch out for lpt ports
-	    // note that the vdd must hook every port assoicated with
-	    // the lpt. Just imanging that the vdd traps the control
-	    // port while leaves the rest for softpc-- we are going
-	    // to screw up badly and so does the vdd.
-	    // QUESTION: How can we enforece this????
-	      if (w >= LPT1_PORT_START && w < LPT1_PORT_END)
-		lptAdapter |= 1;
-	      else if (w >= LPT2_PORT_START && w < LPT2_PORT_END)
-		lptAdapter |= 2;
-	      else if (w >= LPT3_PORT_START && w < LPT3_PORT_END)
-		lptAdapter |= 4;
-#endif
               if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))
                  {
                   // if one of the port connects failed
@@ -369,16 +349,6 @@ BOOL VDDInstallIOHook (
           i--;
           }
 
-#ifdef MONITOR
-// i/o ports are hooked successfully, stop printer status port
-// kernel emulation if the they are in the hooked range
-      if (lptAdapter & 1)
-	MonitorVddConnectPrinter(0, hVdd, TRUE);
-      if (lptAdapter & 2)
-	MonitorVddConnectPrinter(1, hVdd, TRUE);
-      if (lptAdapter & 4)
-	MonitorVddConnectPrinter(2, hVdd, TRUE);
-#endif /* MONITOR */
    return TRUE;
 }
 
@@ -407,9 +377,6 @@ VOID VDDDeInstallIOHook (
 {
     WORD w;
     WORD wAdapter;
-#ifdef MONITOR
-   WORD 	     lptAdapter = 0;
-#endif
 
 
     wAdapter = FreeVddAdapter(hVdd);
@@ -422,35 +389,11 @@ VOID VDDDeInstallIOHook (
    while (cPortRange--) {
           for (w = pPortRange->First; w <= pPortRange->Last; w++)
             {
-#ifdef MONITOR
-	    // watch out for lpt status ports
-	    // note that the vdd must unhook every port assoicated with
-	    // the lpt. Just imanging that the vdd traps the control
-	    // port while leaves the rest for softpc-- we are going
-	    // to screw up badly and so does the vdd.
-	    // QUESTION: How can we enforece this????
-	      if (w >= LPT1_PORT_START && w < LPT1_PORT_END)
-		lptAdapter |= 1;
-	      else if (w >= LPT2_PORT_START && w < LPT2_PORT_END)
-		lptAdapter |= 2;
-	      else if (w >= LPT3_PORT_START && w < LPT3_PORT_END)
-		lptAdapter |= 4;
-#endif
               io_disconnect_port(w, (half_word)wAdapter);
               }
           pPortRange++;
 	  }
 
-#ifdef MONITOR
-// i/o ports are Unhooked successfully, resume printer status port
-// kernel emulation if the they are in the hooked range
-      if (lptAdapter & 1)
-	MonitorVddConnectPrinter(0, hVdd, FALSE);
-      if (lptAdapter & 2)
-	MonitorVddConnectPrinter(1, hVdd, FALSE);
-      if (lptAdapter & 4)
-	MonitorVddConnectPrinter(2, hVdd, FALSE);
-#endif	/* MONITOR */
 }
 
 

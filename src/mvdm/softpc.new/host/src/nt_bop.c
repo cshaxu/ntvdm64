@@ -8,9 +8,7 @@
 #include "host_def.h"
 #include <nt_thred.h>
 
-#ifndef MONITOR
 #include <gdpvar.h>
-#endif
 
 /*          INSIGNIA MODULE SPECIFICATION
             -----------------------------
@@ -777,27 +775,7 @@ void MS_bop_C(void)
 
 void MS_bop_D(void)
 {
-#ifdef MONITOR
-    extern VOID MonitorEndIretHook(VOID);
-    half_word iret_index;
-
-
-    // get iret index
-    iret_index = *Sim32GetVDMPointer(SEGOFF(getCS(),getIP()),
-                                     1,
-                                     (UCHAR)(getPE() ? TRUE : FALSE)
-                                     );
-
-    // Tell ica that an iret bop has been called
-    ica_iret_hook_called((int) iret_index);
-
-    //
-    // Clean up stack, and resume normal code path
-    //
-    MonitorEndIretHook();
-#else
     illegal_bop();
-#endif
 
 }
 
@@ -832,17 +810,6 @@ void MS_bop_F(void)
     kb_setup_vectors();
 
 
-#ifdef MONITOR
-
-    AddrIretBopTable = ( ((ULONG)getDS() << 16) | (ULONG)getDI() );
-
-#ifndef PROD
-    if (getCX() != VDM_RM_IRETBOPSIZE) {
-        OutputDebugString("NTVDM:spacing != VDM_RM_IRETBOPSIZE\n");
-        DebugBreak();
-        }
-#endif
-#endif
 
     /*
      * Now that spckbd is loaded, and the ivt rom vectors are hooked
@@ -857,11 +824,7 @@ void MS_bop_F(void)
         ica_restart_interrupts(ICA_MASTER);
     host_ica_unlock();
 
-#ifdef MONITOR
-    setCF(1);
-#else
     setCF(0);
-#endif
 }
 
 

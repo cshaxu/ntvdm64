@@ -389,9 +389,6 @@ LOCAL void announce_variant IFN0()
 
 	strcpy (buff, "Non-PROD build variant:");
 
-#if defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
-	strcat (buff, " CPU_30_STYLE");
-#endif /* CPU_30_STYLE && ! CPU_40_STYLE*/
 
 #ifdef CPU_40_STYLE
 	strcat (buff, " CPU_40_STYLE");
@@ -616,12 +613,12 @@ void reset()
 				setAX(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
-#if !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
+#if !defined(CPU_40_STYLE)
 				/* DIVERGENCE(MVDM-HOST-DIV-265): DOSX built this IRET
 				 * continuation as DXCODE:enrm50.  CPU40 starts at live EIP,
 				 * so it must enter that ordinary guest instruction directly. */
 				temp_word = temp_word + HOST_BOP_IP_FUDGE;
-#endif /* !CPU_30_STYLE && !CPU_40_STYLE */
+#endif /* !CPU_40_STYLE */
 				setIP(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
@@ -683,11 +680,11 @@ void reset()
 		
 			    /* fake up jump to indicated point */
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_INIT), &temp_word);
-#if !defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
+#if !defined(CPU_40_STYLE)
 			    /* DIVERGENCE(MVDM-HOST-DIV-265): DOSX stored the direct
 			     * DXCODE:enrm45 jump target.  It is not a BOP address. */
 			    temp_word = temp_word + HOST_BOP_IP_FUDGE;
-#endif /* !CPU_30_STYLE && !CPU_40_STYLE */
+#endif /* !CPU_40_STYLE */
 			    setIP(temp_word);
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_SEG), &temp_word);
 			    setCS(temp_word);

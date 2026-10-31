@@ -70,26 +70,6 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
  * Effective address calculation stuff
  */
 
-#ifdef CPU_30_STYLE
-/* ========================================================== */
-
-/*
-   Our model for the data extracted from a decriptor entry.
- */
-typedef struct
-   {
-   double_word base;		/* 32-bit base address */
-   double_word limit;		/* 32-bit offset limit */
-   word  AR;			/* 16-bit attributes/access rights */
-   } DESCR;
-
-extern LIN_ADDR effective_addr IPT2( IU16, seg,  IU32, off);
-extern void read_descriptor IPT2( LIN_ADDR, addr, DESCR*, descr);
-extern boolean selector_outside_table IPT2( IU16, selector, IU32*, descr_addr);
-
-
-/* ========================================================== */
-#else /* CPU_30_STYLE */
 /* ========================================================== */
 
 #ifdef A2CPU
@@ -107,7 +87,6 @@ extern sys_addr effective_addr IPT2( word, seg, word, ofs);
 #endif /* CCPU */
 
 /* ========================================================== */
-#endif /* CPU_30_STYLE */
 
 
 #ifdef CCPU
@@ -134,11 +113,9 @@ extern CHAR *SPC_Product_Name;		/* "SoftPC" or "SoftWindows"	*/
  * The Parity Lookup table
  */
 
-#ifndef CPU_30_STYLE
 
 extern half_word pf_table[]; /* shouldn't this be in host_cpu.h ? */
 
-#endif /* CPU_30_STYLE */
 
 /*
  * External function declarations.

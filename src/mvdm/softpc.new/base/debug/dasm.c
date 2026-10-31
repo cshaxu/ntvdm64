@@ -136,29 +136,6 @@
 #define REPNE_FLAG 0
 #define REPE_FLAG 1
 
-#ifdef CPU_30_STYLE
-/* cpu.h no longer supplies this... supply our own */
-#ifdef BACK_M
-typedef struct
-{
-                half_word FOURTH_BYTE;
-                half_word THIRD_BYTE;
-                half_word SECOND_BYTE;
-                half_word OPCODE;
-}  OPCODE_FRAME;
-
-#else
-typedef struct
-{
-                half_word OPCODE;
-                half_word SECOND_BYTE;
-                half_word THIRD_BYTE;
-                half_word FOURTH_BYTE;
-}  OPCODE_FRAME;
-
-#endif /* BACK_M */
-
-#endif /* CPU_30_STYLE */
 
 char trace_buf[512];
 

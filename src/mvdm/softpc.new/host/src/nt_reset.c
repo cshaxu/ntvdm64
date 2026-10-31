@@ -66,14 +66,9 @@ extern VIDEOFUNCS nt_video_funcs;
 extern KEYBDFUNCS nt_keybd_funcs;
 extern HOSTMOUSEFUNCS the_mouse_funcs;
 
-#ifndef MONITOR
 extern WORD BWVKey;
 extern char achES[];
-#endif
 
-#ifdef MONITOR
-extern VOID AddTempIVTFixups(VOID);
-#endif
 
 extern IU8 lcifo[];
 
@@ -121,17 +116,6 @@ host_reset()
 	/*::::::::::::::::::::::::::::::::::::::::::::::::: Enable idle detect */
     }
 
-#ifdef MONITOR
-    /* Borrow the end of this routine to add temp code that hooks certain
-     * Ints back to the VDM and not into the native BIOS. These will only
-     * be active for the DOSEM initialisation ie until keyboard.sys can
-     * come along and do it properly. We must do this though as some real
-     * BIOS' can hang on certain initialisation functions. eg Dec 486/50
-     * will hang on printer init as it is waiting for a responce from a 
-     * 'private' port.
-     */
-    AddTempIVTFixups();
-#endif  /* MONITOR */
 
 
     //
@@ -140,9 +124,6 @@ host_reset()
     //
     ResumeThread(ThreadInfo.HeartBeat.Handle);
 
-#ifdef MONITOR
-    WaitIcaLockFullyInitialized();
-#endif
 
     host_ica_unlock();
 
@@ -216,7 +197,6 @@ void  host_applInit(int argc,char *argv[])
                 bSwitchF = TRUE;
                 continue;
             }
-#ifndef MONITOR
             //
             // Check for windowed graphics resize
             //
@@ -232,7 +212,6 @@ void  host_applInit(int argc,char *argv[])
                }
             }
             else
-#endif
             if(tolower(*psz) == 'w'){
                 VDMForWOW = TRUE;
                 if (bSwitchF)

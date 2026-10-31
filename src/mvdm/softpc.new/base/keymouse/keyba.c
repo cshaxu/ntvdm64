@@ -2646,9 +2646,6 @@ if (!waiting_for_next_8042_code)
 #ifndef NTVDM
 				reset_was_by_kbd = TRUE;
 #endif
-#ifdef CPU_30_STYLE
-				cpu_interrupt(CPU_HW_RESET, 0);
-#else /* CPU_30_STYLE */
 				/*
 				 * DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40
 				 * controller branch reaches CCPU's private interrupt bitmap
@@ -2660,7 +2657,6 @@ if (!waiting_for_next_8042_code)
 				 * selected single-session executor.
 				 */
 				cpu_interrupt(CPU_HW_RESET, 0);
-#endif /* CPU_30_STYLE */
 #endif
 				sure_note_trace0(AT_KBD_VERBOSE,"CPU RESET via keyboard");
 				}

@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\tools\audit\Verify-CommandExitStatus.ps1:318
+Line |
+ 318 |  …             throw "Unexpected $($case.Name) result: $actual; expected …
+     |                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Unexpected nested-mem result: 1397769044; expected 1

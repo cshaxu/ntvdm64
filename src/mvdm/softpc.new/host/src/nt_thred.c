@@ -101,9 +101,6 @@ Return Value:
         ccpu386newthread();
 #endif
 /****************************** STF ********************************/
-#ifdef MONITOR
-        cpu_createthread(Thread);
-#endif
         if (!(dwCreationFlags & CREATE_SUSPENDED))
             ResumeThread(Thread);
 
@@ -161,8 +158,5 @@ Return Value:
     ccpu386exitthread();
 #endif
 /****************************** STF ********************************/
-#ifdef MONITOR
-    cpu_exitthread();
-#endif
     ExitThread(dwExitCode);
 }

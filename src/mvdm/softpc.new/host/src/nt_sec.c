@@ -112,47 +112,4 @@ GLOBAL VOID RegainRegenMemory(VOID)
 }
 
 
-#ifdef X86GFX
 
-extern RTL_CRITICAL_SECTION IcaLock;
-extern HANDLE hWowIdleEvent;
-
-
-/*****************************************************************************
- * Function:                                                                 *
- *      GetROMsMapped                                                        *
- *                                                                           *
- * Description:                                                              *
- *      Calls NT to get the ROMS of the host machine mapped into place in    *
- *      emulated memory. The bottom page (4k) of PC memory is copied into    *
- *      the bottom of emulated memory to provide the correct IVT & bios data *
- *      area setup for the mapped bios. (Which will have been initialised).  *
- *                                                                           *
- * Parameters:                                                               *
- *      None                                                                 *
- *                                                                           *
- * Return Value:                                                             *
- *      None - fails internally on NT error.                                 *
- *                                                                           *
- *****************************************************************************/
-GLOBAL VOID GetROMsMapped(VOID)
-{
-    NTSTATUS status;
-    VDMICAUSERDATA IcaUserData;
-
-    IcaUserData.pIcaLock         = &IcaLock;
-    IcaUserData.pIcaMaster       = &VirtualIca[0];
-    IcaUserData.pIcaSlave        = &VirtualIca[1];
-    IcaUserData.pDelayIrq        = &DelayIrqLine;
-    IcaUserData.pUndelayIrq      = &UndelayIrqLine;
-    IcaUserData.pDelayIret	 = &iretHookActive;
-    IcaUserData.pIretHooked	 = &iretHookMask;
-    IcaUserData.pAddrIretBopTable  = &AddrIretBopTable;
-    IcaUserData.phWowIdleEvent     = &hWowIdleEvent;
-
-    status = NtVdmControl(VdmInitialize, &IcaUserData);
-    if (!NT_SUCCESS(status))
-        DisplayErrorTerm(EHS_FUNC_FAILED,status,__FILE__,__LINE__);
-
-}
-#endif //X86GFX

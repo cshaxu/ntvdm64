@@ -124,9 +124,6 @@ void terminate()
 	/*
 	 * Do any cpu-specific termination bits.
 	 */
-#ifdef CPU_30_STYLE
-	cpu_terminate();
-#endif
 
 #ifdef NOVELL
 	net_term();	/* Shutdown network */

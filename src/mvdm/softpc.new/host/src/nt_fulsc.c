@@ -158,7 +158,6 @@ VOID setVDMCursorPosition(UTINY, PCOORD);
 VOID waitForInputFocus(VOID);
 GLOBAL int getModeType(VOID);
 #ifdef X86GFX
-VOID AddTempIVTFixups(VOID);
 VOID GfxReset(VOID);
 #endif /* X86GFX */
 
@@ -684,7 +683,7 @@ GLOBAL VOID ConsoleInit(VOID)
 
 #ifdef X86GFX
 
-    /* Now GetROMsMapped called from config after sas_init */
+    /* Software video initialization is performed after sas_init. */
 
     /*
      * Set emulation to a known state when starting up windowed. This has to
@@ -2063,17 +2062,6 @@ VOID waitForInputFocus()
 {
     if (WaitForSingleObject(sc.FocusEvent, INFINITE))
 	ErrorExit();
-}
-
-VOID AddTempIVTFixups()
-{
-		   /* BOP        17,   IRET */
-    UTINY code[] = { 0xc4, 0xc4, 0x17, 0xcf };
-
-    //location is random but should be safe until DOS is initialised!!!
-    sas_stores(0x40000, code, sizeof(code));	// new Int 17 code
-    sas_storew(0x17*4, 0);			// Int 17h offset
-    sas_storew((0x17*4) + 2, 0x4000);		// Int 17h segment
 }
 
 /***************************************************************************

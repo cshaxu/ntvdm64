@@ -1,0 +1,18 @@
+# buffer=80,28 viewport=0,0,79,27
+[0] Microsoft(R) Windows NT DOS
+[1] (C)Copyright Microsoft Corp 1990-1996.
+[3] O:\TMP\N45D>command
+[4] Microsoft(R) Windows NT DOS
+[5] (C)Copyright Microsoft Corp 1990-1996.
+[7] O:\TMP\N45D>command
+[8] Microsoft(R) Windows NT DOS
+[9] (C)Copyright Microsoft Corp 1990-1996.
+[11] O:\TMP\N45D>mem
+[14]     655360 bytes total conventional memory
+[15]     655360 bytes available to MS-DOS
+[16] 4294903440 largest executable program size
+[18]   24117248 bytes total contiguous extended memory
+[19]          0 bytes available contiguous extended memory
+[20]   15434752 bytes available XMS memory
+[21]            MS-DOS resident in High Memory Area
+[23] O:\TMP\N45D>EXIT
