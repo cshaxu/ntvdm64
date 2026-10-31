@@ -1,0 +1,4 @@
+case=125
+GATE handled=1 old=202 entry=2 entryvirtual=200 saved=202 return=2 returnvirtual=200 eip=1000
+case=126
+GATE handled=1 old=3202 entry=3002 entryvirtual=200 saved=3202 return=3202 returnvirtual=200 eip=1000

@@ -1,0 +1,1 @@
+GATE handled=1 old=202 entry=202 entryvirtual=200 saved=202 return=2 returnvirtual=0 eip=1000

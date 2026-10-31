@@ -167,3 +167,41 @@ vectors in `dxfunc.asm`, while `InitialiseDosEmulation` selects the software
 CPU's FCLI/FSTI fallback. A one-sided IF clear without tracing the return and
 shared-flag lifecycle could leave interrupts disabled; the null-alias guard
 does not attempt that change or prove gate equivalence.
+
+### Selected CCPU entry/return comparison
+
+A test-only extension of the existing CCPU monitor fixture links the real
+selected DPMI handler and CCPU providers. It uses an installed 16-bit
+software interrupt handler, a controlled valid LDT and CPL 3, and captures
+both CPU flags and the fixed-state word. With an interrupt gate, IF initially
+set and IOPL 0, the current handler returns with CPU IF and the fixed virtual
+IF still set. The test then **deliberately forces both off** and calls the
+real CCPU `IRET`; CPU IF and the fixed bit both remain off despite the saved
+frame containing IF=1. With IOPL 3, CPU IF is restored but the fixed bit
+remains off. A trap-gate control keeps IF set, and an initially disabled
+interrupt-gate control remains disabled. [Matrix](s11-gate-return-evidence/matrix-results.txt),
+[fixture diff](s11-gate-return-evidence/matrix-fixture.patch),
+[identities](s11-gate-return-evidence/matrix-inputs.csv).
+The stored fixture diffs remove trailing whitespace from added blank lines;
+the identity hashes describe the original compiled temporary files.
+
+A second controlled path writes an actual CCPU interrupt-gate descriptor and
+uses the original `do_intrupt` and `IRET` directly. Native entry clears CPU
+IF but does not clear the fixed virtual bit. At IOPL 0, IRET leaves CPU IF
+off; at IOPL 3 it restores CPU IF. [Results](s11-gate-return-evidence/native-results.txt),
+[fixture diff](s11-gate-return-evidence/native-fixture.patch).
+Thus neither clearing IF on the existing DPMI entry alone nor bypassing it via
+CCPU's IDT is a complete restoration of the selected NT4 virtual interrupt
+contract. The experiments use synthetic vector 31h and controlled descriptors;
+they do not establish an actual immutable DOSX guest call, guest reentry or
+task-switch lifecycle.
+
+Original NT4's protected dispatch table does not select an IRET emulator,
+while the original DOSX `FIRET` macro takes different paths based on the
+software-CPU flag: on the native path it restores the fixed interrupt bit,
+while on the software-CPU path it executes IRET. DOSX installs interrupt
+gates for vectors 08h–0fh and 70h–77h. Any fix must reconcile this source
+choice with the selected CCPU's actual CPL/IOPL state and return path; it
+must not globally reinterpret unrelated protected-mode IRET or introduce an
+unowned parallel task/stack state. No runtime change or semantic concession
+is claimed by this diagnostic.

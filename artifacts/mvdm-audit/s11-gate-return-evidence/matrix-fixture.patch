@@ -1,0 +1,44 @@
+diff --git a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c b/build/t473-s11/swint-gate-matrix/fixture.c
+index 11b8d243d..374592e01 100644
+--- a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
++++ b/build/t473-s11/swint-gate-matrix/fixture.c
+@@ -878,0 +879,33 @@ static int protected_pending_irq_observe(void) {
++
++#pragma pack(push,1)
++typedef struct { USHORT cs, flags; ULONG eip; } GATE_HANDLER;
++#pragma pack(pop)
++extern GATE_HANDLER DpmiInterruptHandlers[256];
++extern LDT_ENTRY *Ldt; extern ULONG IntelBase,Cpu40LdtShadowAddress;
++extern USHORT CurrentAppFlags;
++extern BOOL DpmiSwIntHandler(ULONG);
++extern void IRET(void); extern ULONG CCPU_MODE[];
++static int test_gate_roundtrip(void) {
++    unsigned char ldt[40]={0}; ULONG oldflags,entryflags,retflags,entryvirtual,retvirtual;
++    USHORT savedflags; BOOL handled; char line[220];
++    c_cpu_init();
++    *(ULONG *)(ldt+0x18)=0x0000ffff; *(ULONG *)(ldt+0x1c)=0x0000fa0f;
++    *(ULONG *)(ldt+0x20)=0x0000ffff; *(ULONG *)(ldt+0x24)=0x0000f300;
++    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt));
++    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
++    c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27);
++    c_setSP(0x800); c_setEIP(0x1000); c_setIOPL(test_case==122 ? 3 : 0); c_setIF(test_case==124 ? 0 : 1);
++    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
++    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
++    DpmiInterruptHandlers[0x31].cs=0x1f; DpmiInterruptHandlers[0x31].flags=(USHORT)(test_case==123 ? 0 : 1);
++    DpmiInterruptHandlers[0x31].eip=0x200; *(ULONG *)c_GetPhyAdd(0x714)=test_case==124 ? 0 : 0x200;
++    oldflags=c_getEFLAGS(); handled=DpmiSwIntHandler(0x31);
++    entryflags=c_getEFLAGS(); entryvirtual=*(ULONG *)c_GetPhyAdd(0x714);
++    savedflags=*(USHORT *)c_GetPhyAdd(0x7fe);
++    /* Diagnostic only: force gate-disable to test native selected IRET restore. */
++    if(test_case!=123){c_setIF(0); *(ULONG *)c_GetPhyAdd(0x714)&=~0x200u;} CCPU_MODE[0]=0; IRET();
++    retflags=c_getEFLAGS();retvirtual=*(ULONG *)c_GetPhyAdd(0x714);
++    wsprintfA(line,"GATE handled=%d old=%lx entry=%lx entryvirtual=%lx saved=%x return=%lx returnvirtual=%lx eip=%lx\n",handled,oldflags,entryflags,entryvirtual,savedflags,retflags,retvirtual,c_getEIP());report(line);
++    return handled && c_getEIP()==0x1000;
++}
++
+@@ -889 +922,2 @@ int main(int argc, char **argv) {
+-    if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
++    if(test_case>=121 && test_case<=124) ok=test_gate_roundtrip();
++    else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+@@ -914,0 +949 @@ int main(int argc, char **argv) {
++
