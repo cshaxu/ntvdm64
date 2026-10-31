@@ -25,12 +25,12 @@ commands by `tests/build/test-authored-softpc-profile.py` below.
 
 At this snapshot, the NTVDM target closure contains 481 compiler-command rows: `/DCCPU` on 450, `/DCPU_40_STYLE` on 451, `/DMONITOR` on 5, and `/DX86GFX` on one. The five explicit MONITOR sources are `nt_lpt.c`, `bios.c`, `keybd_io.c`, `video.c`, and `printer.c`; video.c is the sole explicit X86GFX source. The NTVDM `accessfn.c` command has CPU_40_STYLE but no `/DCCPU` or `/DPROD`. Never project a target-wide setting onto every row.
 
-## Authored-component isolation candidate
+## Authored-component isolation
 
 The owner requires original-source selection to be established at its source
 boundary; authored consumers should use the selected interfaces without
-inheriting historical execution-profile selectors. The candidate remains
-unpublished. [Non-MVDM sites](non-mvdm-conditional-sites.csv) include
+inheriting historical execution-profile selectors. The audited group is
+published; remaining platform macro review continues. [Non-MVDM sites](non-mvdm-conditional-sites.csv) include
 the project host-compat subtree and provenance hints, not a final classification.
 Other OpenNT ABI/host mirrors and addons require separate provenance review.
 [WOW selector uses](wow-selector-build-uses.csv)
