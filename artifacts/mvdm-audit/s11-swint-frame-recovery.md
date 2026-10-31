@@ -67,3 +67,43 @@ same selected-source fixture then passed. This does not prove recovery after
 a later fault during target-selector loading, or the virtual-IF rules above.
 An earlier package's background tests were already running before this
 additional source change; their results do not certify this final candidate.
+
+## Candidate: original PushInt stack-limit decision
+
+`SsToLinear` expands a granular limit as `(limit << 12) | 0xfff`;
+`PushInt` first subtracts the frame size, then rejects a normal segment when
+the new SP is greater than or equal to that limit, or an expand-down segment
+when the new SP is less than or equal to it. The selected non-i386 helper
+instead incremented before expanding the limit, tested the old SP for a
+normal segment, and accepted equality on an expand-down segment. Those
+decisions differed in controlled selected-source fixtures.
+
+The candidate keeps the prior helper behavior for its other callers and
+non-CPU40 profiles. Only the CPU40 protected software-interrupt call requests
+the `PushInt` decision; it continues to use the existing DOSX source table and
+mapping service, whose identity and fault boundaries remain unproved above.
+The actual selected source before the change fails the new normal-limit
+positive case; the candidate passes two normal, two expand-down and two
+granular cases. These use controlled register, memory and descriptor seams,
+not a live guest, and do not prove selector admission or failed native-access
+delivery. The production and fixture objects have identical extracted
+instruction bytes for the handler and helper, with relocations unresolved:
+[comparison](s11-swint-limit-evidence/selected-object-instructions.txt).
+The candidate passed the [16-gate Full suite](s11-swint-limit-evidence/full-timings.json);
+the separate final package from ten current build outputs also passed
+[Full](s11-swint-limit-evidence/latest-full-timings.json),
+[games](s11-swint-limit-evidence/latest-game-runs.json),
+[four Win3.1 cases](s11-swint-limit-evidence/latest-win31-matrix.json),
+and the [synthetic mouse witness](s11-swint-limit-evidence/latest-mouse.txt).
+The original and isolated installations retained all 86 monitored guest
+binary hashes. This does not cover physical mouse input or every exception,
+selector-identity or callback-reentry boundary. Publication remains pending.
+The first Full invocation rejected mismatched sealed/unsealed cache identities
+before product tests; its [preflight result](s11-swint-limit-evidence/full-first-preflight.txt)
+is retained. The rerun uses hash-matched sealed runtime inputs and is separate.
+Afterward, comparison with the latest cached build outputs showed that the
+first tested package's nine unchanged inputs came from the previous sealed
+package and two differed in hash from the just-built outputs. That package
+is retained as a preliminary result, not the latest-build delivery. A new
+package is sealed from all ten actual current build outputs, with each input
+hash checked; its full and product tests must pass separately.

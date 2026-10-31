@@ -1,0 +1,9 @@
+burst fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-burst-0.bmp
+after-00 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-00-0.bmp
+after-01 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-01-0.bmp
+after-02 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-02-0.bmp
+after-03 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-03-0.bmp
+after-04 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-04-0.bmp
+after-05 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-05-0.bmp
+after-06 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-06-0.bmp
+after-07 fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-mouse/mouse-after-07-0.bmp

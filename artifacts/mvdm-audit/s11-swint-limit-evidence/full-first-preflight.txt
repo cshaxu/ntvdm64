@@ -1,0 +1,5 @@
+Exception: O:\repos.hobby\ntvdm64\tools\audit\Invoke-ProductVerification.ps1:80
+Line |
+  80 |          throw "Build cache/runtime mismatch: $name; build affected ta …
+     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Build cache/runtime mismatch: run16.exe; build affected targets first

@@ -34,6 +34,14 @@ and remains partial; this percentage does not prove runtime equivalence.
 After adding the stack-rejection flag recovery, the refreshed CSV SHA-256 is
 `6E6D93607EFD37EFB8ECF315135BBD6463178392B00EDABAE25AA4944657AC46`;
 its row counts and `dpmiint.c` percentage remain unchanged.
+The subsequent pending `PushInt` stack-limit candidate retains the same row
+counts and 98.11% textual estimate; the refreshed CSV SHA-256 is
+`0D102FA8553EE5691750099025D2676761A0CC70DDDEF9E00F6CCCDB38BB5CB8`.
+This is source matching, not behavior or coverage.
+The candidate's independent [C/H inventory check](s11-swint-limit-evidence/mirror-audit.txt)
+found 1,794 listed paths, no unlisted differences or stale estimates, and no
+recorded C/H differences classified other than partial. Its 278 role-pending,
+195 guest-target and 72 tool/scaffold entries still need scoped disposition.
 
 The frozen S10 host C/H ledger classified every one of its 202 recorded
 mirror-difference rows as partial. Rechecking the current worktree against

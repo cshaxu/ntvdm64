@@ -111,6 +111,29 @@ int main(void){
   CHECK(DpmiSwIntHandler(0x31));
   CHECK(sp==2 && *(USHORT *)(memory+2)==0x1234);
   puts("DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2");
+  /* NT4 PushInt compares the new SP with the expanded SS limit. */
+  ss=0x17;cs=0x27;sp=0x10b;ip=0x1234;flags=0x202;msw=1;
+  descriptors[2].HighWord.Bits.Default_Big=1;
+  descriptors[2].HighWord.Bits.Type=0x12;
+  descriptors[2].HighWord.Bits.Granularity=0;
+  descriptors[2].HighWord.Bits.LimitHi=0;descriptors[2].LimitLow=0x100;
+  DpmiInterruptHandlers[0x31].Flags=2;
+  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0xff);
+  ss=0x17;cs=0x27;sp=0x10c;ip=0x1234;flags=0x202;
+  CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x10c);
+  descriptors[2].HighWord.Bits.Type=0x16; /* expand-down */
+  ss=0x17;cs=0x27;sp=0x10c;ip=0x1234;flags=0x202;
+  CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x10c);
+  ss=0x17;cs=0x27;sp=0x10d;ip=0x1234;flags=0x202;
+  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x101);
+  descriptors[2].HighWord.Bits.Type=0x12;
+  descriptors[2].HighWord.Bits.Granularity=1;descriptors[2].LimitLow=0x10;
+  ss=0x17;cs=0x27;sp=0x1100a;ip=0x1234;flags=0x202;
+  CHECK(DpmiSwIntHandler(0x31)); CHECK(sp==0x10ffe);
+  ss=0x17;cs=0x27;sp=0x1100c;ip=0x1234;flags=0x202;
+  CHECK(!DpmiSwIntHandler(0x31)); CHECK(sp==0x1100c);
+  descriptors[2].HighWord.Bits.Granularity=0;
+  puts("DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2");
   /* Real selected fault-return body, with controlled register and memory
    * boundaries. Different stack descriptor sizes select SP versus ESP. */
   for (mode=0;mode<2;++mode) for (depth=1;depth<=2;++depth) {

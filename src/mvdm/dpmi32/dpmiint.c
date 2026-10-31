@@ -532,7 +532,7 @@ Arguments:
 }
 
 #if defined(CPU_40_STYLE)
-static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
+static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame, BOOL NativePushInt,
     PUCHAR *pVdmStackPointer, ULONG *pNewSP);
 #endif
 
@@ -617,7 +617,7 @@ Return Value:
          * selects the return frame from the registered handler flags, not
          * the interrupted application's default width. */
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
-        if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
+        if (!BuildStackFrameWithWidth(3, WideFrame, TRUE, &VdmStackPointer, &NewSP)) {
 #else
         BOOL WideFrame;
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
@@ -1204,6 +1204,7 @@ static BOOL
 BuildStackFrameWithWidth(
     ULONG StackUnits,
     BOOL WideFrame,
+    BOOL NativePushInt,
 #else
 BOOL
 BuildStackFrame(
@@ -1258,7 +1259,10 @@ Notes:
     //
     // 
     // bugbug is this really correct?
-    Limit++;
+    #if defined(CPU_40_STYLE)
+    if (!NativePushInt)
+    #endif
+        Limit++;
     if (Ldt[SelIndex].HighWord.Bits.Granularity) {
         Limit = (Limit << 12) | 0xfff;
     }
@@ -1282,6 +1286,16 @@ Notes:
 
     NewSP = VdmSp - StackOffset;
     bExpandDown = (BOOL) (Ldt[SelIndex].HighWord.Bits.Type & 4);
+    #if defined(CPU_40_STYLE)
+    /* NT4 PushInt compares the new stack pointer against SsToLinear's
+     * expanded limit; leave other callers on their original rules. */
+    if (NativePushInt) {
+        if (StackOffset > VdmSp ||
+            (!bExpandDown && NewSP >= Limit) ||
+            (bExpandDown && NewSP <= Limit))
+            return FALSE;
+    } else
+    #endif
     if ((StackOffset > VdmSp) || 
         (!bExpandDown && (VdmSp > Limit)) ||
         (bExpandDown && (NewSP < Limit))) {
@@ -1301,7 +1315,7 @@ Notes:
 BOOL
 BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
 {
-    return BuildStackFrameWithWidth(StackUnits, Frame32, pVdmStackPointer, pNewSP);
+    return BuildStackFrameWithWidth(StackUnits, Frame32, FALSE, pVdmStackPointer, pNewSP);
 }
 #endif
 

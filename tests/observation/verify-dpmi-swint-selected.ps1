@@ -30,6 +30,9 @@ if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatc
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2')) {
     throw 'Selected DPMI handler-width fixture failed'
 }
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2')) {
+    throw 'Selected DPMI stack-limit fixture failed'
+}
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full')) {
     throw 'Selected DPMI fault-return fixture failed'
 }

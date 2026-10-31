@@ -1,0 +1,6 @@
+"Algorithm","Hash","Path"
+"SHA256","FA16EDC9F831EEFD4CADACF7A6B3CFD46F633F7A31D5626429D295EA262BF15A","O:\repos.hobby\ntvdm64\src\mvdm\dpmi32\dpmiint.c"
+"SHA256","10205AF2B21423E842EB1DBA7D8ED712468217E699199E19503618DBDE3D3436","O:\repos.hobby\ntvdm64\tests\mvdm-host\dpmi_swint_selected_fixture.c"
+"SHA256","ECD1BCA5386F962259CE3CEE23D2E78A63C7162BED872CBBE2A86DD16BDAF890","O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-final-fixture\dpmiint.obj"
+"SHA256","1DBE3FE159294D7B4FEDFF2C1CF3F80F1E2B98B20C107B8CB43FF421573ABDB5","O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-final-fixture\fixture.exe"
+"SHA256","FA184E0CE0851D9765B849FF4716E9916D2F83A13D64C4F356F0A916B3F6D058","O:\repos.hobby\ntvdm64\build\t473-s11\swint-limit-final-fixture\fixture.map"

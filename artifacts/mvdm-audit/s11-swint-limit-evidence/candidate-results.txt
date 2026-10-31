@@ -1,0 +1,5 @@
+DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1
+DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2
+DPMI_SWINT_STACK_LIMIT_OK normal=2 expand=2 granular=2
+DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full
+DPMI_INT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 frame=full
