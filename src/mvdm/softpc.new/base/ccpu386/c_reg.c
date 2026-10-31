@@ -41,18 +41,9 @@ Provide External Interface to CPU Registers.
  * modern host ABIs check it instead of assuming an `int` call contract. */
 #include <stdio.h>
 #ifdef PIG
-#include <gdpvar.h>
-#define AR_FIXUP				\
-{						\
-	if (GLOBAL_AR_FixupWanted)		\
-	{					\
-		if (GET_PE()==0)		\
-			return 0x93;		\
-		if (GET_VM()!=0)		\
-			return 0xF3;		\
-	}					\
-}
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* PIG */
+#line 56 /* MVDM-HOST-DIV-498: preserve original diagnostic line numbers. */
 #define	AR_FIXUP
 #endif /* PIG */
 

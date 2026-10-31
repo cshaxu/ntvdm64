@@ -167,10 +167,7 @@ LOCAL VOID check_for_shutdown IFN1(IU16, xcode)
       c_cpu_reset();
 
 #ifdef	PIG
-      save_last_xcptn_details("Exception:- Shutdown @%2d\n", xcode, 0, 0, 0, 0);
-      ccpu_synch_count++;
-      pig_cpu_action = CHECK_ALL;
-      c_cpu_unsimulate();
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
       /* then carry on */
@@ -211,7 +208,7 @@ IFN3(
    EXT = source;
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- #%s-%d @%2d \n", (IUH)faultstr(nmbr), nmbr, xcode, 0, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
@@ -273,7 +270,7 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- #%s-%d(%04x) @%2d\n", (IUH)faultstr(nmbr), nmbr, error_code, xcode, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x).\n",
@@ -335,7 +332,7 @@ IFN3(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- %s-%d(%04x) @%2d\n", (IUH)faultstr(nmbr), nmbr, error_code, xcode, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
 	if ( GET_IDT_LIMIT() != 0 ){
@@ -398,7 +395,7 @@ IFN1(
    EXT = INTERNAL;
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- #DF-8 @%2d\n", xcode, 0, 0, 0, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
         if ( GET_IDT_LIMIT() != 0 ){
@@ -466,7 +463,7 @@ GLOBAL VOID Int0 IFN0 ()
 
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- #DIV-0\n", 0, 0, 0, 0, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
         fprintf(trace_file, "(%04x:%08x)Exception:- %d.\n",
@@ -612,7 +609,7 @@ IFN2(
 
    check_exception_env();
 #ifdef	PIG
-   save_last_xcptn_details("Exception:- #PF-14(%04x) CR2=%08x @%2d\n", page_error, GET_CR(CR_PFLA), xcode, 0, 0);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
    if (show_exceptions){
 	fprintf(trace_file, "(%04x:%08x)Exception:- %d(%04x) CR2=%08x.\n",

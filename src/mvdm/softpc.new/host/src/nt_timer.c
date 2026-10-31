@@ -610,14 +610,14 @@ DWORD HeartBeatThread(PVOID pv)
 
 
 #ifdef PIG
-int TimerCount = 20;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 DWORD Win32_host_timer(void)
 {
     NTSTATUS      status;
 #ifdef PIG
-    int		  count = 0;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
     LONG          DelayPeriod;
     LARGE_INTEGER DiffTime;
@@ -699,12 +699,9 @@ HBresume:
           * Update the VirtualTimerHardware
           */
 #ifdef PIG
-       if (++count >= TimerCount)
-       {
-           time_tick();
-           count = 0;
-       }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
+#line 708 /* MVDM-HOST-DIV-498: preserve original diagnostic line numbers. */
        time_tick();
 #endif /* PIG */
 

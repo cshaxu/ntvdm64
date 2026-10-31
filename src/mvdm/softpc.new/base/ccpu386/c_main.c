@@ -23,7 +23,7 @@ Actual worker routines are spun off elsewhere.
 #include  <sas.h>	/* need memory(M)     */
 #include  <ccpusas4.h>	/* the cpu internal sas bits */
 #ifdef	PIG
-#include  <Cpu_c.h>	/* Intel pointer manipulation macros */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 #include CpuH
 /* #include "event.h" */	/* Event Manager         */
@@ -331,27 +331,7 @@ LOCAL BOOL quick_mode = FALSE;	/* true if no special processing (trap
 
 
 #ifdef	PIG
-
-/* We must delay the actual synch (i.e. the c_cpu_unsimulate)
- * until after processing any trap/breakpoint stuff.
- */
-#define	PIG_SYNCH(action)			\
-	SYNCH_TICK();				\
-	if (ccpu_pig_enabled)			\
-	{					\
-		pig_cpu_action = (action);	\
-		quick_mode = FALSE;		\
-		pig_synch_required = TRUE;	\
-		CANCEL_HOST_IP();		\
-	}
-	
-
-LOCAL IBOOL pig_synch_required = FALSE; /* This indicates that the current
-					 * instruction needs a pig synch,
-					 * and after trap/breakpoint
-					 * processing we must return to
-					 * the pigger.
-					 */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 
 #define	PIG_SYNCH(action)			\
@@ -379,10 +359,7 @@ LOCAL jmp_buf next_inst[FRAMES];
  * our buffer.
  */
 #ifdef	PIG
-LOCAL int prefix_length = 0;
-#define	CHECK_PREFIX_LENGTH()				\
-	if (++prefix_length >= MAX_INTEL_PREFIX)	\
-		Int6();
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* !PIG */
 #define	CHECK_PREFIX_LENGTH()
 #endif	/* PIG */
@@ -708,10 +685,7 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
 /* setup host format IP from Intel format IP */
 /*    and set up end of page marker          */
 #ifdef PIG
-#define SETUP_HOST_IP(x)							\
-   ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) & SasWrapMask;	\
-   x = Sas.SasPtrToPhysAddrByte(ip_phy_addr);					\
-   pg_end = AddCpuPtrLS8(CeilingIntelPageLS8(x), 1);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* !PIG */
 GLOBAL UTINY *CCPU_M;
 #ifdef BACK_M
@@ -877,10 +851,7 @@ IFN1(
    took_relative_jump = FALSE;
    took_absolute_toc = FALSE;
 #ifdef PIG
-   pig_synch_required = FALSE;
-#if defined(SFELLOW)
-   pig_mmio_info.flags &= ~(MM_INPUT_OCCURRED | MM_OUTPUT_OCCURRED);
-#endif	/* SFELLOW */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
    /* somewhere for exceptions to return to */
@@ -911,7 +882,7 @@ DO_INST:
 
    /* INSIGNIA debugging */
 #ifdef	PIG
-   /* We do not want to do check_I() in both CPUs */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* PIG */
    if ( do_condition_checks )
       {
@@ -921,8 +892,7 @@ DO_INST:
 #endif	/* !PIG */
 
 #ifdef	PIG
-   save_last_inst_details(NULL);
-   prefix_length = 0;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
    QUICK_EVENT_TICK();
@@ -1392,9 +1362,7 @@ TYPE0F02:
 
       case  0x0f:
 #ifdef PIG
-	 SET_EIP(CCPU_save_EIP);
-	 CANCEL_HOST_IP();
-	 PIG_SYNCH(CHECK_NO_EXEC);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 	 Int6();
 #endif /* PIG */
@@ -2342,7 +2310,7 @@ TYPE40:
 	  */
 	 }
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_SOME_MEM);
       quick_mode = FALSE;
@@ -2383,7 +2351,7 @@ TYPE40:
 	    }
 	 }
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_SOME_MEM);
       quick_mode = FALSE;
@@ -2406,7 +2374,7 @@ TYPE40:
 	 /* KNOWN BUG #1. */
 	 }
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_ALL);
       quick_mode = FALSE;
@@ -2447,7 +2415,7 @@ TYPE40:
 	    }
 	 }
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_ALL);
       quick_mode = FALSE;
@@ -2460,74 +2428,13 @@ TYPE70:
       D_Jb(0);
       UPDATE_INTEL_IP_USE_OP_SIZE(p);
 #ifdef PIG
-      if ((opcode != 0xeb) && (ops[0].sng == 3))
-      {
-	/* Convert the EDL cpu super-instructions
-	 *
-	 *	Jcc	.+03
-	 *	JMPN	dst
-	 *
-	 * into
-	 *
-	 *	Jcc'	dest
-	 */
-	 int offset_in_page = DiffCpuPtrsLS8(FloorIntelPageLS8(p), p);
-
-	 if ((GET_CS_AR_X() == 0)
-	     && (offset_in_page != 0)
-	     && (offset_in_page <= 0xFFD)
-	     && (*p == 0xe9)) 
-	 {
-		 p_start = p;
-		 (void)GET_INST_BYTE(p);
-		 switch (opcode)
-		 {
-		 case 0x70:   /* T2 JO   Jb */   inst32 = JNO;    goto TYPE0F80;
-		 case 0x71:   /* T2 JNO  Jb */   inst32 = JO;     goto TYPE0F80;
-		 case 0x72:   /* T2 JB   Jb */   inst32 = JNB;    goto TYPE0F80;
-		 case 0x73:   /* T2 JNB  Jb */   inst32 = JB;     goto TYPE0F80;
-		 case 0x74:   /* T2 JZ   Jb */   inst32 = JNZ;    goto TYPE0F80;
-		 case 0x75:   /* T2 JNZ  Jb */   inst32 = JZ;     goto TYPE0F80;
-		 case 0x76:   /* T2 JBE  Jb */   inst32 = JNBE;   goto TYPE0F80;
-		 case 0x77:   /* T2 JNBE Jb */   inst32 = JBE;    goto TYPE0F80;
-		 case 0x78:   /* T2 JS   Jb */   inst32 = JNS;    goto TYPE0F80;
-		 case 0x79:   /* T2 JNS  Jb */   inst32 = JS;     goto TYPE0F80;
-		 case 0x7a:   /* T2 JP   Jb */   inst32 = JNP;    goto TYPE0F80;
-		 case 0x7b:   /* T2 JNP  Jb */   inst32 = JP;     goto TYPE0F80;
-		 case 0x7c:   /* T2 JL   Jb */   inst32 = JNL;    goto TYPE0F80;
-		 case 0x7d:   /* T2 JNL  Jb */   inst32 = JL;     goto TYPE0F80;
-		 case 0x7e:   /* T2 JLE  Jb */   inst32 = JNLE;   goto TYPE0F80;
-		 case 0x7f:   /* T2 JNLE Jb */   inst32 = JLE;    goto TYPE0F80;
-		 default:
-			 break;
-		 }
-	 }
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
       (*inst32)(ops[0].sng);
       CANCEL_HOST_IP();
 
 #ifdef PIG
-      if (single_instruction_delay && !took_relative_jump)
-      {
-	 if (single_instruction_delay_enable)
-	 {
-	    save_last_xcptn_details("STI/POPF blindspot\n", 0, 0, 0, 0, 0);
-	    PIG_SYNCH(CHECK_NO_EXEC);
-         }
-	 else
-	 {
-	    save_last_xcptn_details("STI/POPF problem\n", 0, 0, 0, 0, 0);
-	 }
-	 break;
-      }
-#ifdef SYNCH_BOTH_WAYS
-      took_relative_jump = TRUE;
-#endif	/* SYNCH_BOTH_WAYS */
-      if (took_relative_jump)
-      {
-	 PIG_SYNCH(CHECK_ALL);
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
       break;
 
@@ -2974,20 +2881,7 @@ TYPE9A:
 	 POPFD();
 	 }
 #ifdef PIG
-      if (getIF()==1 && oldIF==0)
-      {
-          /* locally update IP - interrupts are supressed after POPF */
-          UPDATE_INTEL_IP(p);
-
-	  /* We need to pig sync one instr *after* an POPF that enabled
-	   * interrupts, because the A4CPU might need to take a H/W interrupt
-	   */
-
-	  single_instruction_delay = TRUE;
-	  PIG_SYNCH(CHECK_ALL);
-
-          goto NEXT_INST;
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
       quick_mode = FALSE;
@@ -3459,12 +3353,7 @@ TYPEC4:
 	  }
           immed |= ops[0].sng;
 #ifdef	PIG
-          if (immed == 0xfe)
-	     SET_EIP(CCPU_save_EIP);
-	  else
-	     UPDATE_INTEL_IP(p);
-	  CANCEL_HOST_IP();
-	  PIG_SYNCH(CHECK_NO_EXEC);	/* Everything checkable up to this point */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* PIG */
 	  UPDATE_INTEL_IP(p);
           if ((immed & 0xff) == 0xfe)
@@ -3644,15 +3533,7 @@ TYPEC4:
       PIG_SYNCH(CHECK_ALL);
       /* Dont do interrupt checks etc after an IRET */
 #ifdef PIG
-      /* If the destination is going to page fault, or need
-       * accessing, then the EDL CPU will do so before issuing
-       * the pig synch. We use the dasm386 decode to prefetch
-       * a single instruction which mimics the EDL Cpu's behaviour
-       * when close to a page boundary.
-       */
-      prefetch_1_instruction();	/* Will PF if destination not present */
-      ccpu_synch_count++;
-      c_cpu_unsimulate();
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
       goto NEXT_INST;
@@ -3817,10 +3698,7 @@ TYPED4:
 	}
 
 #ifdef	PIG
-	/* Must get npx registers from test CPU
-	 * This is lazily done for efficiency.
-	 */
-	c_checkCpuNpxRegisters();
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
 	modRM = GET_INST_BYTE(p);
@@ -3845,26 +3723,7 @@ TYPEE0:
       CANCEL_HOST_IP();
 
 #ifdef PIG
-      if (single_instruction_delay && !took_relative_jump)
-      {
-	 if (single_instruction_delay_enable)
-	 {
-	    save_last_xcptn_details("STI/POPF blindspot\n", 0, 0, 0, 0, 0);
-	    PIG_SYNCH(CHECK_NO_EXEC);
-         }
-	 else
-	 {
-	    save_last_xcptn_details("STI/POPF problem\n", 0, 0, 0, 0, 0);
-	 }
-	 break;
-      }
-#ifdef SYNCH_BOTH_WAYS
-      took_relative_jump = TRUE;
-#endif	/* SYNCH_BOTH_WAYS */
-      if (took_relative_jump)
-      {
-	 PIG_SYNCH(CHECK_ALL);
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
       break;
 
@@ -3892,7 +3751,7 @@ TYPEE0:
       IN8(&ops[0].sng, ops[1].sng);
       P_Fal(0);
 #ifdef PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_NO_AL);
       quick_mode = FALSE;
@@ -3909,7 +3768,7 @@ TYPEE0:
 	 IN16(&ops[0].sng, ops[1].sng);
 	 P_Fax(0);
 #ifdef PIG
-	 UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
          PIG_SYNCH(CHECK_NO_AX);
 	 }
@@ -3921,7 +3780,7 @@ TYPEE0:
 	 IN32(&ops[0].sng, ops[1].sng);
 	 P_Feax(0);
 #ifdef PIG
-	 UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 	 PIG_SYNCH(CHECK_NO_EAX);
 	 }
@@ -3937,16 +3796,7 @@ TYPEE0:
       F_Fal(1);
       OUT8(ops[0].sng, ops[1].sng);
 #ifdef PIG
-      UPDATE_INTEL_IP(p);
-      if (ops[0].sng == 0x60)
-         {
-	      /* This may be a change of A20 wrap status */
-	      PIG_SYNCH(CHECK_NO_A20);
-         }
-      else
-         {
-         PIG_SYNCH(CHECK_ALL);
-         }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
       SYNCH_TICK();
 #endif
@@ -3972,7 +3822,7 @@ TYPEE0:
 	 OUT32(ops[0].sng, ops[1].sng);
 	 }
 #ifdef PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_ALL);
       quick_mode = FALSE;
@@ -4020,7 +3870,7 @@ TYPEE8:
       IN8(&ops[0].sng, ops[1].sng);
       P_Fal(0);
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_NO_AL);
       quick_mode = FALSE;
@@ -4037,7 +3887,7 @@ TYPEE8:
 	 IN16(&ops[0].sng, ops[1].sng);
 	 P_Fax(0);
 #ifdef PIG
-	 UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
          PIG_SYNCH(CHECK_NO_AX);
 	 }
@@ -4049,7 +3899,7 @@ TYPEE8:
 	 IN32(&ops[0].sng, ops[1].sng);
 	 P_Feax(0);
 #ifdef PIG
-	 UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
          PIG_SYNCH(CHECK_NO_EAX);
 	 }
@@ -4065,7 +3915,7 @@ TYPEE8:
       F_Fal(1);
       OUT8(ops[0].sng, ops[1].sng);
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_ALL);
       quick_mode = FALSE;
@@ -4091,7 +3941,7 @@ TYPEE8:
 	 OUT32(ops[0].sng, ops[1].sng);
 	 }
 #ifdef	PIG
-      UPDATE_INTEL_IP(p);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       PIG_SYNCH(CHECK_ALL);
       quick_mode = FALSE;
@@ -4347,11 +4197,7 @@ TYPEF7_6:
       UPDATE_INTEL_IP(p);
 
 #ifdef PIG
-      /* We need to pig sync one instr *after* an STI that enabled
-       * interrupts, because the A4CPU might need to take a H/W interrupt
-       */
-      single_instruction_delay = TRUE;
-      PIG_SYNCH(CHECK_ALL);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
       goto NEXT_INST;
 
@@ -4611,47 +4457,7 @@ CPU_RESTORED_RESET:
 #endif	/* SFELLOW */
 
 #ifdef PIG
-   if ( pig_synch_required )
-      {
-      if (IgnoringThisSynchPoint(GET_CS_SELECTOR(), GET_EIP()))
-      {
-      	pig_synch_required = FALSE;
-      }
-      else
-      {
-      /* If the destination is going to page fault, or need
-       * accessing, then the EDL CPU will do so before issuing
-       * the pig synch. We use the dasm386 decode to prefetch
-       * a single instruction which mimics the EDL Cpu's behaviour
-       * when close to a page boundary.
-       */
-      prefetch_1_instruction();	/* Will PF if destination not present */
-#if defined(SFELLOW)
-      /*
-       * Check for occurrence of memory-mapped input.
-       * This initial crude implementation just leaves the entire synch
-       * section unchecked.
-       */
-      if ( pig_mmio_info.flags & MM_INPUT_OCCURRED )
-      {
-         pig_cpu_action = CHECK_NONE;	/* cos' its effects are unknown */
-#if COLLECT_MMIO_STATS
-         if ( ++pig_mmio_info.mm_input_section_count == 0 )
-            pig_mmio_info.flags |= MM_INPUT_SECTION_COUNT_WRAPPED;
-#endif	/* COLLECT_MMIO_STATS */
-      }
-      if ( pig_mmio_info.flags & MM_OUTPUT_OCCURRED )
-      {
-#if COLLECT_MMIO_STATS
-         if ( ++pig_mmio_info.mm_output_section_count == 0 )
-            pig_mmio_info.flags |= MM_OUTPUT_SECTION_COUNT_WRAPPED;
-#endif	/* COLLECT_MMIO_STATS */
-      }
-#endif	/* SFELLOW */
-      ccpu_synch_count++;
-      c_cpu_unsimulate();
-      }
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 NEXT_INST:
@@ -4712,7 +4518,7 @@ NEXT_INST:
 	start_trap == 0 &&
 	nr_inst_break == 0
 #ifdef PIG
-	&& !pig_synch_required
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 	)
       {
@@ -4823,7 +4629,7 @@ LOCAL VOID
       p_start = *q;
 
 #ifdef	PIG
-      return *IncCpuPtrLS8(*q);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* PIG */
 #ifdef BACK_M
       return *(*q)--;
@@ -4842,30 +4648,7 @@ LOCAL VOID
       SAVED IBOOL first = TRUE;
 
 #ifdef	PIG
-      SAVED char default_flags[] = "faults accessed";
-
-      if (first)
-      {
-	char *s = getenv("FLAGS_IGNORE_DEFAULT");
-	if (s)
-	  set_flags_ignore(s);
-	else
-	  set_flags_ignore(default_flags);
-	single_instruction_delay_enable = FALSE;
-	s = getenv("SINGLE_INSTRUCTION_BLIND_SPOT");
-	if (s)
-	{
-	    if (strcmp(s, "TRUE") == 0)
-	       single_instruction_delay_enable = TRUE;
-	    else if (strcmp(s, "FALSE") == 0)
-	       single_instruction_delay_enable = FALSE;
-	    else
-	       printf("*** Ignoring getenv(\"SINGLE_INSTRUCTION_BLIND_SPOT\") value\n");
-	    printf("STI/POPF %s cause a blind spot after next conditional\n",
-		   single_instruction_delay_enable ? "will": "will not");
-        }
-	first = FALSE;
-      }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
 #ifdef NTVDM

@@ -702,8 +702,7 @@ operand)
    vir_write_byte(m_la[ARG], m_pa[ARG], (IU8)ops[ARG].sng);
 
 #ifdef	PIG
-#define PIG_P_Yb(ARG)						\
-   cannot_vir_write_byte(m_la[ARG], m_pa[ARG], 0x00);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 #define PIG_P_Yb(ARG)						\
    vir_write_byte(m_la[ARG], m_pa[ARG], (IU8)ops[ARG].sng);
@@ -750,8 +749,7 @@ operand)
    vir_write_word(m_la[ARG], m_pa[ARG], (IU16)ops[ARG].sng);
 
 #ifdef	PIG
-#define PIG_P_Yw(ARG)						\
-   cannot_vir_write_word(m_la[ARG], m_pa[ARG], 0x0000);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 #define PIG_P_Yw(ARG)						\
    vir_write_word(m_la[ARG], m_pa[ARG], (IU16)ops[ARG].sng);
@@ -1052,8 +1050,7 @@ operand)
    vir_write_dword(m_la[ARG], m_pa[ARG], (IU32)ops[ARG].sng);
 
 #ifdef	PIG
-#define PIG_P_Yd(ARG)						\
-   cannot_vir_write_dword(m_la[ARG], m_pa[ARG], 0x00000000);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 #define PIG_P_Yd(ARG)						\
    vir_write_dword(m_la[ARG], m_pa[ARG], (IU32)ops[ARG].sng);

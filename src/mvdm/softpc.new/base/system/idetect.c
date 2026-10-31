@@ -492,7 +492,7 @@ int flag;
 {
 #ifdef NTVDM
 #ifdef PIG
-    ienabled = 0;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
     if (IdleDisabledFromPIF)    /* configured setting overrides normal control*/
 	ienabled = 0;

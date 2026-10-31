@@ -286,8 +286,7 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_dword(next_addr, (IU32)flags);
 #ifdef PIG
-      /* Note the possibility of unknown flags "pushed" */
-      record_flags_addr(next_addr);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
       next_addr += 4;
 
@@ -338,8 +337,7 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_word(next_addr, (IU16)flags);
 #ifdef PIG
-      /* Note the possibility of unknown flags "pushed" */
-      record_flags_addr(next_addr);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
       next_addr += 2;
 

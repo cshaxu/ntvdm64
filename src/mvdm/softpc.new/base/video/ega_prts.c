@@ -1814,7 +1814,7 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 {
 	ULONG roffs, woffs;
 #ifdef PIG
-	IMPORT ULONG pig_vid_bank;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 #ifdef V7VGA
@@ -1836,7 +1836,7 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 #endif
 
 #ifdef PIG
-	pig_vid_bank = woffs;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 	setVideorplane(EGA_planes + roffs);
 	setVideowplane(EGA_planes + woffs);

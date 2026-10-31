@@ -258,53 +258,7 @@ IFN1(
    }
 
 #ifdef PIG
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Push word or double word onto the stack.                           */
-/* Used by instructions which implicitly reference the stack.         */
-/* Stack Checking MUST have been completed earlier.                   */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-GLOBAL VOID
-spush_flags
-       	          
-IFN1(
-	IU32, data	/* value to be pushed */
-    )
-
-
-   {
-   IU32 addr;	/* stack address */
-
-   /*
-    * see comment for spush().
-    */
-
-   if ( GET_OPERAND_SIZE() == USE16 )
-      {
-      /* push word */
-      byte_change_SP((IS32)-2);
-      addr = GET_SS_BASE() + GetStackPointer();
-      vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
-
-      /*
-       * record the address at which we may not know the flags value
-       * -- we will examine PigIgnoreFlags when the EDL CPU runs to check
-       * if there's a problem.
-       */
-      record_flags_addr(addr);
-      }
-   else   /* USE32 */
-      {
-      /* push double word */
-      byte_change_SP((IS32)-4);
-      addr = GET_SS_BASE() + GetStackPointer();
-      vir_write_dword(addr, NO_PHYSICAL_MAPPING, (IU32)data);
-
-      /*
-       * no need to record word at addr+2 as the flags are always known for this word
-       */
-      record_flags_addr(addr);
-      }
-   }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -345,44 +299,7 @@ IFN1(
    }
 
 #ifdef PIG
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Push word onto the stack.                                          */
-/* Operand size of 32 will still push 16 bits of data, but the stack  */
-/* pointer is adjusted by 4.                                          */
-/* Used by PUSH segment-register                                      */
-/* Stack Checking MUST have been completed earlier.                   */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-GLOBAL VOID
-spush16_flags
-       	          
-IFN1(
-	IU32, data	/* value to be pushed */
-    )
-
-
-   {
-   IU32 addr;	/* stack address */
-
-   if ( GET_OPERAND_SIZE() == USE16 )
-      {
-      /* stack item size is word */
-      byte_change_SP((IS32)-2);
-      addr = GET_SS_BASE() + GetStackPointer();
-      vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
-      record_flags_addr(addr);
-      }
-   else   /* USE32 */
-      {
-      /* stack item size is double word */
-      byte_change_SP((IS32)-4);
-      addr = GET_SS_BASE() + GetStackPointer();
-      vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
-      record_flags_addr(addr);
-#ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
-      cannot_vir_write_word(addr+2, NO_PHYSICAL_MAPPING, 0x0000);
-#endif	/* PIG_DONT_CHECK_OTHER_WORD_ON_STACK */
-      }
-   }
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -635,45 +552,6 @@ IFN2(
    }
 
 #ifdef PIG
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Record a (physical) ESP value for later use if PigIgnoreFlags is   */
-/* set by the EDL CPU after the pigger has run.                       */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-GLOBAL void
-record_flags_addr IFN1(LIN_ADDR, lin_addr)
-{
-	IU32 phy_addr;
-
-	if ( GET_PG() == 1 )
-	{
-		/*
-		 * we ask for supervisor access because the access has
-		 * already been checked by the push. We dont know the
-		 * U/S used then but asking for PG_S will always work.
-		 */
-		phy_addr = lin2phy(lin_addr, PG_S | PG_W);
-	}
-	else
-		phy_addr = lin_addr;
-
-	/* printf("recording stack flags push @ lin: %x, phy %x\n", lin_addr, phy_addr); */
-
-	pig_fault_write(phy_addr, (~ARITH_FLAGS_BITS) & 0xff);
-
-	/*
-	 * short-cut - if bottom bits not 0xfff then we can just add 1
-	 * to the physical addr for byte 2. Otherwise we have to recalculate
-	 * the whole address.
-	 */
-	if (((phy_addr & 0xfff) != 0xfff) || (GET_PG() == 0))
-		pig_fault_write(phy_addr + 1, ((~ARITH_FLAGS_BITS) >> 8) & 0xff);
-	else
-	{
-		phy_addr = lin2phy(lin_addr + 1, PG_S | PG_W);
-		pig_fault_write(phy_addr, ((~ARITH_FLAGS_BITS) >> 8) & 0xff);
-	}
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 

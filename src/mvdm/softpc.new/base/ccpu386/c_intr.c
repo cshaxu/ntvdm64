@@ -33,7 +33,7 @@ Interrupt Support.
 #include <fault.h>
 
 #ifdef PIG
-#include <gdpvar.h>
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 /*
@@ -251,17 +251,14 @@ IFN4(
       if ( doing_fault )
       {
 #ifdef PIG
-         if (GLOBAL_RF_OnXcptnWanted)
-	    flags |= BIT16_MASK;   /* SET RF bit */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 	 flags |= BIT16_MASK;   /* SET RF bit */
 #endif
       }
 
 #ifdef PIG
-      if (vector < 31 && (((1 << vector) & NO_FLAGS_EXCEPTION_MASK) != 0))
-         spush_flags(flags);
-      else
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
          spush(flags);
 
@@ -323,17 +320,14 @@ IFN4(
 	 if ( doing_fault )
          {
 #ifdef PIG
-            if (GLOBAL_RF_OnXcptnWanted)
-	       flags |= BIT16_MASK;   /* SET RF bit */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 	    flags |= BIT16_MASK;   /* SET RF bit */
 #endif
          }
 
 #ifdef PIG
-	 if (vector < 31 && (((1 << vector) & NO_FLAGS_EXCEPTION_MASK) != 0))
-	    spush_flags(flags);
-	 else
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 	    spush(flags);
 
@@ -398,8 +392,7 @@ IFN4(
 	 if ( doing_fault )
          {
 #ifdef PIG
-            if (GLOBAL_RF_OnXcptnWanted)
-	       flags |= BIT16_MASK;   /* SET RF bit */
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 	    flags |= BIT16_MASK;   /* SET RF bit */
 #endif
@@ -454,9 +447,7 @@ IFN4(
 
 	 /* push old flags */
 #ifdef PIG
-	 if (vector < 31 && (((1 << vector) & NO_FLAGS_EXCEPTION_MASK) != 0))
-	    spush_flags(flags);
-	 else
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 	    spush(flags);
 
@@ -485,16 +476,7 @@ IFN4(
       }
    EXT = INTERNAL;
 #ifdef	PIG
-   save_last_inst_details("do_intr");
-   pig_cpu_action = CHECK_ALL;
-   /* If the destination is going to page fault, or need
-    * accessing, then the EDL CPU will do so before issuing
-    * the pig synch. We use the dasm386 decode to prefetch
-    * a single instruction which mimics the EDL Cpu's behaviour
-    * when close to a page boundary.
-    */
-   prefetch_1_instruction();	/* Will PF if destination not present */
-   ccpu_synch_count++;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* !PIG */
 #ifdef SYNCH_TIMERS
    if (doing_fault)
@@ -510,6 +492,6 @@ IFN4(
    doing_page_fault = FALSE;
    doing_double_fault = FALSE;
 #ifdef PIG
-   c_cpu_unsimulate();
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
    }

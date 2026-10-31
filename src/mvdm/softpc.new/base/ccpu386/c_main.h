@@ -126,7 +126,7 @@ typedef struct
 IMPORT IU8 pf_table[];
 
 #ifdef	PIG
-IMPORT IBOOL took_relative_jump;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
 

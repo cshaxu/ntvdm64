@@ -4560,20 +4560,7 @@ LOCAL YODA_COMMAND(do_imdst)
 #endif /* CPU_40_STYLE && !CCPU */
 
 #ifdef PIG
-LOCAL YODA_COMMAND(do_pig)
-{
-	extern void pig_yoda();
-
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	pig_yoda();
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 #ifdef SYNCH_TIMERS
@@ -5067,7 +5054,7 @@ static struct
 #endif /* CPU_40_STYLE && !CCPU */
 
 #ifdef PIG
-{ "pig",	do_pig,		FALSE, NULL, "Pig interface" },
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 #if	defined(GENERIC_NPX) && !defined(CPU_40_STYLE)
@@ -5594,15 +5581,7 @@ LOCAL IBOOL entry_pending = FALSE;
 GLOBAL VOID Enter_yoda IFN0()
 {
 #ifdef	PIG
-	GLOBAL IHP GetSadInfo IPT1(char *, name);
-
-	/* Check to see if LCIF has been built with Pig capability */
-
-	if (!(IBOOL)GetSadInfo("PigSupported"))
-	{
-		fprintf(stderr, "*** LCIF has not been built with Pig support\n");
-		entry_pending = TRUE;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif	/* PIG */
 
 	if (entry_pending)

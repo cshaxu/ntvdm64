@@ -523,9 +523,7 @@ IFN2(
       {
       phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-      save_last_xcptn_details("PTE %08x: %03x => %03x", pte_addr, pte & 0xFFF, new_pte & 0xFFF, 0, 0);
-      if (((new_pte ^ pte) == PE_ACCESSED) && ignore_page_accessed())
-         cannot_phy_write_byte(pte_addr, ~PE_ACCESSED);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       }
 
@@ -533,9 +531,7 @@ IFN2(
       {
       phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-      save_last_xcptn_details("PDE %08x: %03x => %03x", pde_addr, pde & 0xFFF, new_pde & 0xFFF, 0, 0);
-      if ((new_pde ^ pde) == PE_ACCESSED)
-         cannot_phy_write_byte(pde_addr, ~PE_ACCESSED);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
       }
 
@@ -819,9 +815,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
             {
             phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-            save_last_xcptn_details("PTE %08x: %03x -> %03x", pte_addr, pte & 0xFFF, new_pte & 0xFFF, 0, 0);
-	    if ((new_pte ^ pte) == PE_ACCESSED)
-		cannot_phy_write_byte(pte_addr, ~PE_ACCESSED);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
             }
          if (new_pde != pde)
@@ -829,10 +823,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
             IU8 mask;
             phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-            save_last_xcptn_details("PDE %08x: %03x -> %03x", pde_addr, pde & 0xFFF, new_pde & 0xFFF, 0, 0);
-	    mask = 0xff;
-	    if (((new_pde ^ pde) == PE_ACCESSED) && ignore_page_accessed())
-		cannot_phy_write_byte(pde_addr, ~PE_ACCESSED);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
             }
 	 }
@@ -873,98 +864,5 @@ IFN1(
    }
 
 #ifdef PIG
-
-GLOBAL void Pig_NotePDECacheAccess IFN2(IU32, linearAddress, IU32, accessBits)
-{
-	return;
-}
-
-GLOBAL void Pig_NotePTECacheAccess IFN2(IU32, linearAddress, IU32, accessBits)
-{
-   IU8 pi;		/* page_index entry */
-   IU32 ma;		/* mapped address */
-
-   ISM32 set, entry;
-   IU32 lookup;	/* Linear address minus offset */
-   BOOL read_op;	/* true if read operation */
-   TLB_ENTRY *e;	/* current tlb entry */
-
-#ifdef FAST_TLB
-
-   /* Search optimised format TLB */
-   if ( pi = page_index[linearAddress >> DIR_TBL_SHIFT] )
-      {
-      /* we have hit for the page, get mapped address */
-      if ( ma = page_address[(pi & PI_SET_ENTRY_MASK) + accessBits] )
-	 {
-	 deal_with_pte_cache_hit(linearAddress & OFFSET_MASK);
-	 return;
-	 }
-      }
-   
-   /* Otherwise do things the Intel way. */
-
-#endif /* FAST_TLB */
-
-   /* Check for entry in TLB <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/
-
-   entry = linearAddress >> DIR_TBL_SHIFT & 0x07;   /* isolate bits 14-12 */
-   lookup = linearAddress & ~OFFSET_MASK;
-   read_op = (accessBits & PG_W) ? FALSE : TRUE;
-
-   for ( set = 0; set < NR_TLB_SETS; set++ )
-      {
-      e = &tlb[set][entry];
-      if ( e->v && e->la == lookup && (read_op || e->d) )
-	 {
-	 /* Cache Hit <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
-
-	 /* check access validity */
-#ifdef SPC486
-	 if ( access_check[GET_WP()][accessBits][e->mode] )
-#else
-	 if ( access_check[accessBits][e->mode] )
-#endif /* SPC486 */
-	    {
-		/* would page fault. Ignore it */
-		return;
-	    }
-
-	 deal_with_pte_cache_hit(linearAddress & OFFSET_MASK);
-	 return;
-	 }
-      }
-   /* not in cache - no need to do anything */
-}
-
-LOCAL void
-deal_with_pte_cache_hit IFN1(IU32, linearAddress)
-{
-   IU32 pde_addr;	/* Address of Page Directory Entry */
-   IU32 pde;		/* Page Directory Entry */
-   IU32 pte_addr;	/* Address of Page Table Entry */
-   IU32 pte;		/* Page Table Entry */
-
-   /* check that pde is present */
-   pde_addr = (GET_CR(CR_PDBR) & PE_PFA_MASK) +
-		 ((linearAddress >> DIR_SHIFT & DIR_MASK) << 2);
-   pde = phy_read_dword(pde_addr);
-
-   /* check pde present */
-   if ( (pde & PE_P_MASK) == 0 )
-      return;
-
-   /* check that pte is present */
-   pte_addr = (pde & PE_PFA_MASK) + ((linearAddress >> TBL_SHIFT & TBL_MASK) << 2);
-   pte = phy_read_dword(pte_addr);
-
-   if ( (pte & PE_P_MASK) == 0 )
-      return;
-
-   /* fprintf(trace_file, "deal_with_pte_cache_hit: addr %08lx, pte=%08lx @ %08lx\n",
-    * 	linearAddress, pte, pte_addr);
-    */
-   cannot_phy_write_byte(pte_addr, ~PE_ACCESSED);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif

@@ -128,7 +128,6 @@ GLOBAL char *a_getNpxStackReg	IPT2(IU32, reg_num, char *, buffer);
 #endif /* PROD */
 
 #ifdef PIG
-GLOBAL void a_setNpxControlReg	IPT1(IU32, newControl);
-GLOBAL void a_setNpxStatusReg	IPT1(IU32, newStatus);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 #endif /* !CCPU */

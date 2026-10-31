@@ -2145,7 +2145,7 @@ static  time_factor = 0;
 #endif
 
 #ifdef PIG
-extern	IBOOL ccpu_pig_enabled;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 #ifndef PROD
@@ -2159,14 +2159,7 @@ extern	IBOOL ccpu_pig_enabled;
        	if ( time_factor == 0 )
        		time_factor = 1;
 #ifdef PIG
-	if ( pig_factor == 0 )
-	{
- 		env = host_getenv("PIG_TIMER_FACTOR");
-	       	if ( env )
-       			pig_factor = atoi(env);
-	       	if ( pig_factor == 0 )
-       			pig_factor = 10;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 	pig_factor = 1;
 #endif
@@ -2177,9 +2170,7 @@ extern	IBOOL ccpu_pig_enabled;
     {
 #ifndef PROD
 #ifdef PIG
-		if ( ccpu_pig_enabled ) {
-			ticks_blocked = pig_factor-1;
-		} else
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 			ticks_blocked = time_factor-1;
 #endif

@@ -84,12 +84,7 @@ IPT1(
    );
 
 #ifdef PIG
-IMPORT VOID spush_flags
-       
-IPT1(
-	IU32, data
-
-   );
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 IMPORT VOID spush16
@@ -100,12 +95,7 @@ IPT1(
    );
 
 #ifdef PIG
-IMPORT VOID spush16_flags
-       
-IPT1(
-	IU32, data
-
-   );
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 

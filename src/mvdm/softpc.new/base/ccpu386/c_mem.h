@@ -23,8 +23,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
    n = new posn, o = old posn. */
 
 #ifdef	PIG
-#include <Cpu_c.h>
-#define DIFF_INST_BYTE(n, o) DiffCpuPtrsLS8((o), (n))
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* !PIG */
 #ifdef BACK_M
 #define DIFF_INST_BYTE(n, o) ((o) - (n))
@@ -35,8 +34,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 
 /* To get next inst. byte and move pointer to next inst. byte. */
 #ifdef	PIG
-#define GET_INST_BYTE(x) \
-   save_instruction_byte( DiffCpuPtrsLS8((x), pg_end) <= 0 ? ccpu_new_code_page(&(x)) : *IncCpuPtrLS8(x) )
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* !PIG */
 #ifdef BACK_M
 #define GET_INST_BYTE(x) \
@@ -51,17 +49,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 /* >>>>>>>>>>>>>>>> KOSHER FORM <<<<<<<<<<<<<<<< */
 
 #ifdef PIG
-
-IMPORT IU8	phy_read_byte	IPT1(LIN_ADDR, address );
-IMPORT IU16	phy_read_word	IPT1(LIN_ADDR, address );
-IMPORT IU32	phy_read_dword	IPT1(LIN_ADDR, address );
-IMPORT VOID	phy_write_byte	IPT2(LIN_ADDR, address, IU8, data);
-IMPORT VOID	phy_write_word	IPT2(LIN_ADDR, address, IU16, data);
-IMPORT VOID	phy_write_dword	IPT2(LIN_ADDR, address, IU32, data);
-
-IMPORT VOID cannot_phy_write_byte	IPT2(LIN_ADDR, address, IU8, valid_mask);
-IMPORT VOID cannot_phy_write_word	IPT2(LIN_ADDR, address, IU16, valid_mask);
-IMPORT VOID cannot_phy_write_dword	IPT2(LIN_ADDR, address, IU32, valid_mask);
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else
 
 #define phy_read_byte(x)	((IU8)(phy_r8((PHY_ADDR)x)))

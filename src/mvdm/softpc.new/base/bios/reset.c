@@ -152,7 +152,7 @@ IMPORT	CHAR	*host_get_years IPT0();
 IMPORT	CHAR	*host_get_copyright IPT0();
 
 #ifdef PIG
-extern long pig_gfx_adapter;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 #define STATUS_PORT   0x64   /* keyboard status port */
@@ -419,7 +419,7 @@ LOCAL void announce_variant IFN0()
 #endif /* SPC486 */
 
 #ifdef PIG
-	strcat (buff, " PIG");
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif /* PIG */
 
 #ifdef A_VID
@@ -870,8 +870,7 @@ void reset()
 
 	gvi_init((half_word) gfxAdapt);
 #ifdef PIG
-	/* tell the pig what video adapter we are using */
-	pig_gfx_adapter = gfxAdapt;
+/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #endif
 
 	SWTMR_init_funcptrs ();
