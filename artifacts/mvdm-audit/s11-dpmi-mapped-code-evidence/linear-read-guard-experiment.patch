@@ -1,0 +1,31 @@
+diff --git a/src/mvdm/dpmi32/dpmiint.c b/build/t473-s11/dpmi-fetch-guard-experiment/dpmiint.c
+index c30a1cbda..493826113 100644
+--- a/src/mvdm/dpmi32/dpmiint.c
++++ b/build/t473-s11/dpmi-fetch-guard-experiment/dpmiint.c
+@@ -1371,0 +1372,6 @@ Return Value:
++    UCHAR codebytes[3] = {0};
++    ULONG base;
++    extern ULONG sim32_effective_addr(ULONG, BOOL);
++    extern UCHAR spr_read_byte(ULONG);
++    extern BOOL doing_contributory;
++    BOOL saved_contributory;
+@@ -1382 +1388,2 @@ Return Value:
+-    pCode = Sim32GetVDMPointer(SegCS<<16, 1, TRUE);
++    base = sim32_effective_addr(SegCS<<16, TRUE);
++    pCode = base == 0xffffffffu ? NULL : codebytes;
+@@ -1408 +1415 @@ Return Value:
+-        pCode += getEIP();
++        base += getEIP();
+@@ -1410 +1417 @@ Return Value:
+-        pCode += getIP();
++        base += getIP();
+@@ -1412,0 +1420,9 @@ Return Value:
++    saved_contributory = doing_contributory;
++    doing_contributory = FALSE;
++    codebytes[0] = spr_read_byte(base);
++    if (codebytes[0] == 0x0f || (codebytes[0] == 0x8e && SegCS == DosxRmCodeSelector)) {
++        codebytes[1] = spr_read_byte(base + 1);
++        if (codebytes[0] == 0x0f && (codebytes[1] == 0x20 || codebytes[1] == 0x22))
++            codebytes[2] = spr_read_byte(base + 2);
++    }
++    doing_contributory = saved_contributory;

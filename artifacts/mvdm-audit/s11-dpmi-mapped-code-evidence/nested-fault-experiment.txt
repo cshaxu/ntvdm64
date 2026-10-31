@@ -1,0 +1,18 @@
+build/.ninja/msvc-x86-release/worker/ccpu-monitor-boundary-test.exe case=107 exit=0
+DPMI_NESTED_RESULT faults=0 doubles=0 ax=beef flags=00000202 contributory=0
+build/t473-s11/dpmi-fetch-experiment/fixture.exe case=107 exit=0
+DPMI_NESTED_FETCH vector=14 eip=00001000 flags=00000202
+DPMI_NESTED_RESULT faults=1 doubles=0 ax=beef flags=00000202 contributory=0
+build/t473-s11/dpmi-fetch-guard-experiment/fixture.exe case=107 exit=0
+DPMI_NESTED_FETCH vector=14 eip=00001000 flags=00000202
+DPMI_NESTED_RESULT faults=1 doubles=0 ax=beef flags=00000202 contributory=0
+build/.ninja/msvc-x86-release/worker/ccpu-monitor-boundary-test.exe case=108 exit=0
+DPMI_NESTED_RESULT faults=0 doubles=0 ax=beef flags=00000202 contributory=0
+build/t473-s11/dpmi-fetch-experiment/fixture.exe case=108 exit=0
+DPMI_NESTED_FETCH vector=14 eip=00001000 flags=00000202
+DPMI_NESTED_SECOND vector=8
+DPMI_NESTED_RESULT faults=1 doubles=1 ax=beef flags=00000202 contributory=1
+build/t473-s11/dpmi-fetch-guard-experiment/fixture.exe case=108 exit=0
+DPMI_NESTED_FETCH vector=14 eip=00001000 flags=00000202
+DPMI_NESTED_FETCH vector=14 eip=00001001 flags=00000202
+DPMI_NESTED_RESULT faults=2 doubles=0 ax=beef flags=00000202 contributory=0

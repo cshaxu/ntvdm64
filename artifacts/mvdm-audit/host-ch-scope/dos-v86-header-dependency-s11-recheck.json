@@ -1,0 +1,19 @@
+{
+  "count": 30,
+  "sha_changed": [],
+  "selected_dependency": [],
+  "controls": {
+    "worker": "src/mvdm/softpc.new/base/inc/sas.h",
+    "wow32": "src/mvdm/inc/wowfax.h"
+  },
+  "graph_identity": {
+    "worker": {
+      "build_graph_sha256": "44E6149CBBBB18F397B19C89A532E0EAA63B372B4292E990E50ED2397E1FF13E",
+      "deps_sha256": "CC969F2CD35D73D141CBCA6F198F6781E72FBC05F19E580066437147B1586590"
+    },
+    "wow32": {
+      "build_graph_sha256": "03FE1C4AEB2CFB7434FA1471C55A3EF62652254615E630BA5861AE7F8729E278",
+      "deps_sha256": "1F0D48BC7EDF5A6C7159F481DC71A340A6E95D2B10312AED8EC76F68D28FC1CA"
+    }
+  }
+}

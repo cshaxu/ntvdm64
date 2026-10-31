@@ -591,10 +591,12 @@ static int monitor_prefix_length(void) {
 static int dpmi_remapped_code_page(void) {
     unsigned char ldt[40]={0}; ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000);
     unsigned j, mode=test_case>=99 ? test_case-6 : test_case>=96 ? test_case-3 : test_case; BOOL handled;
+    BOOL negative=(test_case>=104 && test_case<=106);
     extern ULONG Cpu40LdtShadowAddress, IntelBase;
     extern LDT_ENTRY *Ldt;
     extern USHORT DosxRmCodeSelector;
     extern BOOL DpmiEmulateInstruction(void), DpmiFaultHandler(ULONG, ULONG);
+    if (negative) mode=test_case==104 ? 93 : test_case==105 ? 94 : 95;
     c_cpu_init(); *(uint32_t *)(ldt+0x18)=0x0000ffffu; *(uint32_t *)(ldt+0x1c)=0x0000fa0fu;
     *(uint32_t *)(ldt+0x20)=0x0000ffffu; *(uint32_t *)(ldt+0x24)=0x0000f300u;
     CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt)); ZeroMemory(c_GetPhyAdd(0x4000),0x2000);
@@ -603,18 +605,76 @@ static int dpmi_remapped_code_page(void) {
     if(mode==95) { *c_GetPhyAdd(0xf0fff)=0x8e; *c_GetPhyAdd(0x6000)=0xe0; }
     else { unsigned long code=mode==94 ? 0xf1000 : 0x6000;
         *c_GetPhyAdd(code)=0x8e; *c_GetPhyAdd(code+1)=0xe0; }
+    if(negative) {
+        if(mode==95) { *c_GetPhyAdd(0x6000)=0x90; *c_GetPhyAdd(0xf1000)=0xe0; }
+        else { *c_GetPhyAdd(mode==94 ? 0xf1000 : 0x6000)=0x90;
+            if(mode==93) { *c_GetPhyAdd(0xf1000)=0x8e; *c_GetPhyAdd(0xf1001)=0xe0; } }
+    }
     c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
     c_setPE(1); c_setCPL(3); c_setCS(0x1f); c_setSS(0x27); c_setIOPL(0); c_setEIP(mode==95 ? 0xfff : 0x1000);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
     Cpu40LdtShadowAddress=0x3000; DosxRmCodeSelector=0x1f;
     c_setCR3(0x4000); c_setPG(1);
-    if(test_case>=99) {
+    if(test_case>=99 && !negative) {
         VdmInstallFaultHandler((void *)DpmiFaultHandler);
         handled=host_exint_hook(13,0); VdmInstallFaultHandler(NULL);
-    } else handled=test_case>=96 ? DpmiFaultHandler(13,0) : DpmiEmulateInstruction();
+    } else handled=test_case>=96 && !negative ? DpmiFaultHandler(13,0) : DpmiEmulateInstruction();
     c_setPG(0);
     {char line[120];wsprintfA(line,"DPMI_REMAPPED_CODE handled=%d eip=%08lx\n",handled,c_getEIP());report(line);}
+    if(negative) return !handled && c_getEIP()==(mode==95 ? 0xfff : 0x1000);
     return handled && c_getEIP()==(mode==95 ? 0x1001 : 0x1002);
+}
+/* A changed descriptor selects a nonpresent decoder page after the CPU has
+ * fetched the original #UD instruction through its cached CS descriptor. */
+static BOOL dpmi_decode_page_fault(unsigned long vector, unsigned long error) {
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    if(vector==6 || (test_case==108 && vector==13)) {
+        BOOL handled=DpmiFaultHandler(vector,error);
+        if(!handled) c_setEIP(test_case==108 ? c_getEIP()+1 : 0x1002);
+        return TRUE;
+    }
+    if(vector==14) {
+        char line[140];
+        ++test_fault;
+        wsprintfA(line,"DPMI_NESTED_FETCH vector=%lu eip=%08lx flags=%08lx\n",vector,c_getEIP(),c_getEFLAGS());
+        report(line);
+        c_setEIP(test_case==108 ? c_getEIP()+1 : 0x1002);
+        return TRUE;
+    }
+    if(test_case==108 && vector==8) {
+        ++test_irq;
+        report("DPMI_NESTED_SECOND vector=8\n");
+        c_setEIP(0x1002);
+        return TRUE;
+    }
+    return FALSE;
+}
+static int dpmi_faulting_decode_page(void) {
+    unsigned char gdt[40]={0}, program[]={0x0f,0x0b,0xb8,0xef,0xbe,0xd6,0xfe,0};
+    ULONG *pte=(ULONG *)c_GetPhyAdd(0x5000); unsigned i;
+    extern ULONG Cpu40LdtShadowAddress, IntelBase;
+    extern LDT_ENTRY *Ldt;
+    extern BOOL doing_contributory;
+    c_cpu_init();
+    if(test_case==108) { program[0]=0xec; program[1]=0xec; program[2]=0xb8;
+        program[3]=0xef; program[4]=0xbe; program[5]=0xd6; program[6]=0xfe; }
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu; *(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu; *(uint32_t *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x3000),gdt,sizeof(gdt));
+    CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    ZeroMemory(c_GetPhyAdd(0x4000),0x2000); *(ULONG *)c_GetPhyAdd(0x4000)=0x5007;
+    for(i=0;i<512;i++)pte[i]=(i<<12)|7;
+    pte[0x21]=0;
+    c_setGDT_BASE_LIMIT(0x3000,sizeof(gdt)-1); c_setPE(1); c_setCPL(3);
+    c_setCS(0x1b); c_setSS(0x23); c_setIOPL(0); c_setIF(1); c_setEIP(0x1000);
+    *(uint32_t *)c_GetPhyAdd(0x301c)=0x0000fa02u;
+    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Cpu40LdtShadowAddress=0x3000;
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000);
+    c_setCR3(0x4000); c_setPG(1); test_fault=0; test_irq=0;
+    VdmInstallFaultHandler((void *)dpmi_decode_page_fault);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL); c_setPG(0);
+    {char line[150];wsprintfA(line,"DPMI_NESTED_RESULT faults=%lu doubles=%lu ax=%04x flags=%08lx contributory=%d\n",test_fault,test_irq,c_getAX(),c_getEFLAGS(),doing_contributory);report(line);}
+    return c_getAX()==0xbeef;
 }
 /* The NT4 protected dispatcher is not the V86 #GP dispatcher. */
 static int monitor_v86_mode_boundary(void) {
@@ -743,8 +803,9 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
-    else if(test_case>=93 && test_case<=101) ok=dpmi_remapped_code_page();
+    if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
+    else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
+    else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106)) ok=dpmi_remapped_code_page();
     else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
     else if(test_case==89) ok=monitor_wrapped_instruction_offset();
     else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();

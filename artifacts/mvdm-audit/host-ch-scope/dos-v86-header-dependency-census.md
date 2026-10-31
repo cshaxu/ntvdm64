@@ -25,3 +25,11 @@ not authorize changing the frozen mixed-scope classification ledger or making
 a full behavioral-coverage claim. Further configuration and shared-ABI checks
 remain necessary before converting the provisional source-role recommendation
 into a final per-file disposition. No guest image or mirrored source changed.
+
+On 2026-10-30 the 30 paths were rechecked against the then-current x86 worker
+and WOW32 Ninja dependency records; all still matched their recorded OpenNT
+hashes and none appeared as an exact dependency. Positive controls for each
+graph were present. The [receipt](dos-v86-header-dependency-s11-recheck.json)
+records build graph and dependency-output hashes. This updates only the
+selected recorded build evidence; it does not resolve unbuilt profiles or
+replace the remaining guest/runtime responsibility above.

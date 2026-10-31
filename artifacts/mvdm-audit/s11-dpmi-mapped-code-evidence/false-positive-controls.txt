@@ -1,0 +1,13 @@
+case=93 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=94 observed-exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=95 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00000fff
+case=96 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=97 observed-exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=98 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00000fff
+case=99 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=100 observed-exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=101 observed-exit=1 DPMI_REMAPPED_CODE handled=0 eip=00000fff
+case=104 observed-exit=1 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=105 observed-exit=0 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=106 observed-exit=1 DPMI_REMAPPED_CODE handled=1 eip=00001001
+PASS diagnostic: identity controls pass; remapped and split-page false-negative and false-positive cases remain known non-passes

@@ -46,10 +46,10 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The latest [ten-component release](../../artifacts/mvdm-audit/s11-foundation-evidence/graph-owner-candidate/review.md)
-serializes graph publication with terminal retirement. It passed Full, focused
-WOW dialog and Winmine gameplay checks and was hash-verified at both destinations.
-S11 correctness review remains active.
+The current [ten-component release](../../artifacts/mvdm-audit/s11-win386-v86-mouse-regression.md)
+includes the V86 mouse correction and earlier graph-retirement change. Full,
+game and four-mode Win3.1 witnesses passed; all ten images matched at both
+destinations. Physical mouse validation remains separate. S11 remains active.
 [S11 closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists
 each foundation's evidence and remaining boundary.
 

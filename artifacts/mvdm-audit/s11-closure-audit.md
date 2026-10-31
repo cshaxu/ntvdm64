@@ -1,5 +1,25 @@
 # T473 S11 closure audit — current working candidate
 
+2026-10-30 inventory recheck: `check-frozen-mirror-coverage.py` enumerated
+1,794 current host C/H paths with none missing from its inventory. Of 1,263
+host paths and 531 other paths compared against the frozen mirror, no
+differences or retention estimates were unlisted or stale. Seven missing
+monitor files and 14 missing scaffold files were already classified as
+excluded. This is a path and textual-accounting check, not
+proof that the corresponding functions are connected or behaviorally complete.
+The checker now also requires every recorded C/H mirror difference to be
+classified partial. All 201 matching inventory entries meet that rule; five
+additional difference-table entries are non-C/H files outside this inventory.
+All 53 entries labelled full are in the host comparison set, so the
+independent current-hash comparison also checks those entries for unrecorded
+differences. Role-pending and guest/tool entries still require their own
+scope and behavior disposition; this check does not close those groups.
+The inventory currently retains 278 `role-pending`, 195
+`guest-target-observed` and 72 `tool-or-scaffold-candidate` entries. Their
+scope labels describe evidence about source roles, not automatic functional
+exclusions; the 195 guest-target entries retain pending source-level ledger
+labels and cannot be counted as a completed three-way classification.
+
 This is a bounded review of the active stage, not T closure. The earlier
 foundation candidate was committed as `a8a0aef7e`; the later startup-failure
 correction is recorded in
@@ -7,7 +27,9 @@ correction is recorded in
 owner moved SOL/multi-window performance optimization to the queue tail;
 the distinct intermittent native-return failure remains a correctness issue.
 The current ten-image release and its results are identified in
-[graph-owner-candidate](s11-foundation-evidence/graph-owner-candidate/review.md);
+[the V86 mouse-regression repair](s11-win386-v86-mouse-regression.md);
+[graph-owner-candidate](s11-foundation-evidence/graph-owner-candidate/review.md)
+is an earlier release;
 [idle-comment-integrated](s11-foundation-evidence/idle-comment-integrated/review.md),
 [retirement-error-integrated](s11-foundation-evidence/retirement-error-integrated/review.md) and [coherent-current](s11-foundation-evidence/coherent-current/review.md) are earlier candidates.
 
@@ -49,11 +71,12 @@ stack-underflow witness, with [production-object instruction comparison](s11-fou
 
 ## Delivery status
 
-The latest [graph-owner release](s11-foundation-evidence/graph-owner-candidate/review.md)
-supersedes the package identities below. It passed the 16-gate Full suite,
-Winmine gameplay and focused SOL, and both destinations matched all ten hashes. It
-does not resolve the separately observed SOL 1400 or establish every boundary
-listed in this audit.
+The [V86 mouse-regression release](s11-win386-v86-mouse-regression.md)
+supersedes the package identities below. Its 16-gate Full suite, game and
+four-mode Win3.1 witnesses passed, and both destinations matched all ten
+hashes. Its injected-input mouse witness is not physical-mouse acceptance.
+It does not resolve the separately observed SOL 1400 or establish every
+boundary listed in this audit.
 
 The current candidate has passing Console-17, Window-17, Control-12, guest
 manifest, bounded Calculator/Notepad/Write/Program Manager and shared-WOW probes.

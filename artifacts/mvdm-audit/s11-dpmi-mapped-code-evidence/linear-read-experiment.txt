@@ -1,0 +1,12 @@
+case=93 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=94 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=95 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001001
+case=96 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=97 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=98 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001001
+case=99 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=100 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001002
+case=101 exit=0 DPMI_REMAPPED_CODE handled=1 eip=00001001
+case=104 exit=0 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=105 exit=0 DPMI_REMAPPED_CODE handled=0 eip=00001000
+case=106 exit=0 DPMI_REMAPPED_CODE handled=0 eip=00000fff
