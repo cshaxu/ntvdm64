@@ -4,13 +4,13 @@ Status: active audit and implementation, not S11 closure. Owner's 2026-10-30 req
 
 ## Accounting boundary
 
-Working candidate: removed the two `monitor_general_register` wrappers and
+Published baseline `2f453794b`: removed the two `monitor_general_register` wrappers and
 use CCPU's original `GET_GR`/`SET_GR` macros with the same `& 7` index at
 each call site. The macros directly index the CCPU register array; no
 register ownership, width, or instruction-selection rule changes. The
-rebuilt worker and 117-case CCPU boundary suite passed. This cleanup is not
-independent evidence for the unresolved V86 page-fault path, and the working
-candidate remains unpublished.
+rebuilt worker and the then-current 117-case CCPU boundary suite passed. The
+later 125-case suite and complete product gate cover the published baseline;
+this cleanup is not independent evidence for the unresolved V86 page-fault path.
 
 Against `2f5273440^`, before the monitor group, at baseline the three mirrored files have textual changes: `nt_inthk.c` +326/-1, `c_tlb.c` +40/-0, `c_main.c` +53/-11 (git numstat; comments and blanks included). Total +419/-12, net +407 across these files. This is a task-start comparison, not percentage of executed code or an OpenNT-to-current semantic proof. New non-mirror test/evidence files and existing independently developed adapters are accounted separately when the final diff is known. Whole-mirror per-file estimates remain in [retention CSV](mirror-diff-code-retention.csv).
 
@@ -24,6 +24,28 @@ Against `2f5273440^`, before the monitor group, at baseline the three mirrored f
 | LMSW, CR and DR | `VdmOpcodeLmsw`, `VdmDecodeOperand`, `KiVdmSetUserCR0`, `VdmOpcodeGet/SetCrx`, `VdmOpcodeGet/SetDrx`; NT4 NPX save area, trap frame and scheduler state. | Host decoder uses CCPU register getters/setters, `c_get/setCR0`; `ccpu_monitor_write_dr` invokes original `MOV_DR` and existing breakpoint check. Cases 31â€“51 and 53â€“58, plus cross-page controls, cover selected results. | Register switch/operand logic is independent code; audit use of original index APIs without changing NT4's operand quirks. CR0's CCPU state is not automatically NT4's NPX context; preserve open NPX/DR lifetime and failure boundaries. |
 | Address, paging, TLB and A/D | NT4 `CsToLinearPM`, `VdmDecodeOperand`, SIM32 selector conversion and native memory/exception machinery; selected CCPU `lin2phy`, `xtrn2phy`, `c_tlb.c` and SAS. | Host preflights RAM/page-table bounds, asks `ccpu_monitor_cached_access`, then calls `xtrn2phy` and `monitor_mark_access`. `ccpu_monitor_cached_access` duplicates the cache-hit portion of `xtrn2phy`; tests include stale/multiple mappings, permissions, A20, A/D and wrapped addresses. | Duplicated cache lookup is a concrete minimization target: share one decision with `xtrn2phy` only if tri-state miss/denial/hit and FAST_TLB priority are preserved and no unsupported 486 repair is introduced. Bounds/unsupported memory checks are not automatically redundant: original native mappings differ from SAS. Current CS/LMSW use cached segment descriptors whereas NT4 looks up selector parameters: verify changed-descriptor cases before changing. Exact instruction-fetch A/D, missing pages, aliases and 4-GiB-end behavior remain open. |
 | Reentry and failures | NT4 `trap.asm:Kt0e8` restores the user frame and dispatches a user access exception for unresolvable faults in kernel VDM support; guest page faults use a distinct path. Original CCPU `c_xcptn.c` and SIM32 own their state. | Current host fallback calls the existing exception handler; it suspends the accepted contributory-fault state around descriptor resolution to avoid stale #DF on nonlocal exit. Cases 73â€“75 establish one nested #PF, later I/O, and normal failure restoration. | This is an adapter boundary, not proof that NT4 user exception delivery is restored. Trace the actual DOS and WOW exception owners, nesting and lifecycle before replacing fallback. Noncontiguous buffers cannot be fixed by merely copying elsewhere or adding another unowned authority. No new observable concession is approved. |
+
+The protected string-I/O count was rechecked against both original files:
+`instemul.asm:_Ki386DispatchOpcode` initializes EBX to 1 and
+`OpcodeGenericPrefix` only increments it, rejecting values greater than 128;
+`base/ntos/vdm/x86/vdm.inc` defines `PREFIX_REP` as `00040000h`.
+Consequently the original protected `OpcodeINS*`/`OpcodeOUTS*` tests of
+EBX cannot see that bit on this dispatcher path, even when the instruction
+contains REP, and the original path requests one element. The current single
+element behavior is therefore intentional for this specific original entry,
+not a general claim about REP execution by CCPU or the separate V86 dispatcher.
+This source check does not resolve the noncontiguous-buffer or failure-owner
+limitations above.
+
+The first-level protected opcode table also distinguishes recognized indices
+from implemented handlers: PUSHF, POPF and IRET have index entries but no
+protected `OpcodeDispatch` entry, so that table selects its default invalid
+handler. `OpcodeINTO` itself returns failure. The selected CCPU already owns
+normal PUSHF, POPF, IRET and INTO execution in `c_main.c`; software INT uses
+the installed DPMI hook when its conditions apply. Adding handlers merely
+because these opcodes appear in `OpcodeIndex` would therefore duplicate or
+change the original protected dispatcher. This finding does not resolve the
+separate V86 low-IOPL or hooked-interrupt paths.
 
 ## Finite implementation sequence
 
