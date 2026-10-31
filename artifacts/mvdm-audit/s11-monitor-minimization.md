@@ -224,6 +224,18 @@ debug-register operations; this is not evidence that WOW taskman calls it at
 every task switch. Any future scheduling adaptation must account for this
 existing writer and debugger ownership rather than treating monitor MOV-DR as
 the only source of changes.
+The original x86 monitor's `v86/monitor/i386/thread.c` gives this distinction
+an explicit contract: `ThreadSetDebugContext` applies the six supplied debug
+register values to **all** monitor-registered threads and records them in
+`InitialContext`; `cpu_createthread` also installs that debug context on a
+new thread when `DebugContextActive` is set. Therefore the process-wide DPMI
+debug-service write is intentional original behavior. In contrast, NT4
+`VdmOpcodeSetDrx` changes the current thread's trap frame. An unconditional
+save/restore of a separate per-task array at every WOW switch would risk
+undoing the original all-thread DPMI operation, and the direct-write fixture
+cannot distinguish these two writers. Any fix must preserve both contracts,
+including new-thread initialization and failure/retirement; global DR0 in
+the experiment alone is not sufficient to prescribe per-task isolation.
 The original `dxint31.asm` further documents `Debug_Regs` as one memory
 image, and its debug API uses `Load_DBG_Regs` after mutations; its WOW branch
 does not call `Store_DBG_Regs` at API entry. This is another guest-side view
