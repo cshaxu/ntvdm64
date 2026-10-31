@@ -1,0 +1,7 @@
+
+std-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True
+std-dosonly1: started=True desktop-and-mode=True normal-exit=True pass=True
+386-dosonly0: started=True desktop-and-mode=True normal-exit=True pass=True
+386-dosonly1: started=True desktop-and-mode=True normal-exit=True pass=True
+PASS 4 selected Windows 3.1 mode/DOSONLY combinations
+PASS Win31 matrix; 86 binary hashes unchanged in both trees

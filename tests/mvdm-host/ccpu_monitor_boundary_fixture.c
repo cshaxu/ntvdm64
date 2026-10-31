@@ -1218,7 +1218,7 @@ static int v86_missing_exception_owner(void) {
     c_setPE(1); c_setVM(1); c_setCPL(3); c_setIOPL(test_case==214 ? 3 : 0);
     c_setCS(0x100); c_setSS(test_case==216 ? 0x17 : 0x200); c_setSP(test_case==216 ? 0x21 : 0x800);
     c_setEFLAGS(c_getEFLAGS() | 0x100u); c_setIF(1);
-    if(test_case==214) c_setPG(1);
+    c_setPG(1);
     DpmiFaultHandlers[7].cs=0;
     if(stack_failure) {
         DpmiFaultHandlers[7].cs=0x0f;
@@ -1229,7 +1229,7 @@ static int v86_missing_exception_owner(void) {
     }
     before=c_getEFLAGS(); before_ss=c_getSS(); before_sp=c_getSP();
     handled=DpmiFaultHandler(7,0); after=c_getEFLAGS();
-    if(test_case==214) c_setPG(0);
+    c_setPG(0);
     ok=!handled && before==after && c_getSS()==before_ss && c_getSP()==before_sp &&
        (!stack_failure || LockedPMStackCount==(test_case==216 ? 1u : 0u));
     wsprintfA(line,"V86_MISSING_EXCEPTION_OWNER case=%d pass=%d handled=%d flags=%lx/%lx ss=%x/%x sp=%x/%x depth=%lu\n",
@@ -1247,12 +1247,14 @@ static int v86_real_divide_fault(void) {
     const unsigned char npx_code[]={0xd9,0xe8,0xd6,0xfe};
     const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
     extern BOOL DpmiFaultHandler(ULONG, ULONG);
-    ULONG flags; BOOL ok, gate=(test_case==136 || test_case==138); char line[150];
+    ULONG flags; BOOL low=(test_case>=217 && test_case<=228);
+    BOOL enabled=(test_case<223 || test_case>228);
+    BOOL ok, gate=(test_case==136 || test_case==138 || (low && !(test_case & 1))); char line[150];
     c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
     if(gate) InitializeIcaLock();
     c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
     c_setCS(0x100); c_setSS(0x200); c_setSP(gate ? 4 : 0x800); c_setIP(0x100);
-    c_setIOPL(3); c_setIF(1); c_setBX(0);
+    c_setIOPL(low ? ((test_case-217)%6)/2 : 3); c_setIF(enabled); c_setBX(0);
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
     DpmiFaultHandlers[test_case==137 ? 7 : 0].cs=0;
@@ -1264,17 +1266,17 @@ static int v86_real_divide_fault(void) {
     CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
     *(USHORT *)c_GetPhyAdd(test_case==137 ? 28 : 0)=0x456;
     *(USHORT *)c_GetPhyAdd(test_case==137 ? 30 : 2)=0x300;
-    if(test_case==138 || test_case==139) *(ULONG *)c_GetPhyAdd(0x714)=0xa203;
+    if(test_case==138 || test_case==139 || low) *(ULONG *)c_GetPhyAdd(0x714)=enabled ? 0xa203 : 0xa003;
     VdmInstallFaultHandler((void *)DpmiFaultHandler);
     c_cpu_simulate(); VdmInstallFaultHandler(NULL);
     flags=c_getEFLAGS();
     ok=c_getCS()==0x300 && c_getSP()==(gate ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
        *(USHORT *)c_GetPhyAdd(gate ? 0x11ffe : 0x27fa)==(test_case==137 ? 0x100 : 0x103) &&
        *(USHORT *)c_GetPhyAdd(gate ? 0x2000 : 0x27fc)==0x100 &&
-       (*(USHORT *)c_GetPhyAdd(gate ? 0x2002 : 0x27fe) & 0x3200)==0x3200 &&
-       (flags & 0x20000) && ((flags & 0x200)==(gate ? 0u : 0x200u)) &&
-       ((test_case!=138 && test_case!=139) ||
-        *(ULONG *)c_GetPhyAdd(0x714)==(test_case==138 ? 0xa003u : 0xa203u));
+       (*(USHORT *)c_GetPhyAdd(gate ? 0x2002 : 0x27fe) & 0x3200)==(enabled ? 0x3200 : 0x3000) &&
+       (flags & 0x20000) && ((flags & 0x200)==(gate || !enabled ? 0u : 0x200u)) &&
+       ((test_case!=138 && test_case!=139 && !low) ||
+        *(ULONG *)c_GetPhyAdd(0x714)==(gate || !enabled ? 0xa003u : 0xa203u));
     wsprintfA(line,"V86_REAL_FAULT case=%d pass=%d cs=%x sp=%x bx=%x flags=%lx\n",
               test_case,ok,c_getCS(),c_getSP(),c_getBX(),flags); report(line);
     if(test_case==138 || test_case==139) {wsprintfA(line,"V86_FIXED_IF state=%lx cpu_flags=%lx\n",*(ULONG *)c_GetPhyAdd(0x714),flags);report(line);}
@@ -1524,7 +1526,7 @@ int main(int argc, char **argv) {
     else if(test_case==146) ok=vdd_sas_unbound_control();
     else if(test_case==145) ok=v86_a20_word_ram_control();
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
-    else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
+    else if((test_case>=135 && test_case<=139) || (test_case>=217 && test_case<=228)) ok=v86_real_divide_fault();
     else if((test_case>=128 && test_case<=134) || test_case==203 || test_case==204) ok=v86_mapped_stack();
     else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=179) || (test_case>=182 && test_case<=184) || (test_case>=186 && test_case<=189) || (test_case>=192 && test_case<=194)) ok=v86_decoded_interrupt();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();

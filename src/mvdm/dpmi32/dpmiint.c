@@ -1081,10 +1081,9 @@ Return Value:
     if ((SaveEFLAGS & EFLAGS_VM_MASK) && IntNumber > 7)
         return FALSE;
     /* DIVERGENCE(MVDM-HOST-DIV-485): use the original real-mode frame and
-     * IVT carrier when CCPU memory is unpaged and IF is directly represented.
-     * Paged and virtual-IF cases retain their existing exception path. */
-    if ((SaveEFLAGS & EFLAGS_VM_MASK) && (SaveEFLAGS & 0x3000) == 0x3000 &&
-        !(getCR0() & 0x80000000UL)) {
+     * IVT carrier when CCPU memory is unpaged. CCPU owns the guest IF even
+     * when guest IOPL prevents the ordinary FLAGS setter from changing it. */
+    if ((SaveEFLAGS & EFLAGS_VM_MASK) && !(getCR0() & 0x80000000UL)) {
         extern void spr_write_word(ULONG, USHORT);
         extern ULONG spr_read_dword(ULONG);
         ULONG ReturnFlags = SaveEFLAGS & ~(EFLAGS_TF_MASK | 0x4000UL);
@@ -1101,6 +1100,7 @@ Return Value:
             extern void __cdecl host_cpu40_set_virtual_if(BOOL Enabled);
             ReturnFlags &= ~EFLAGS_INTERRUPT_MASK;
             host_cpu40_set_virtual_if(FALSE);
+            setIF(0);
         }
         setEFLAGS(ReturnFlags);
         return TRUE;

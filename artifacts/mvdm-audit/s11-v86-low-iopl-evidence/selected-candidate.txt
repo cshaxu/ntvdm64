@@ -1,0 +1,1 @@
+DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2

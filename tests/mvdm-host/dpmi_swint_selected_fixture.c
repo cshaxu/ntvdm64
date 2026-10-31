@@ -71,6 +71,7 @@ ULONG getEDX(void){return 0;} ULONG getESP(void){return sp;}
 ULONG getEFLAGS(void){return flags;} ULONG getMSW(void){return msw;}
 ULONG getCR0(void){return mock_cr0;}
 void setEFLAGS(ULONG x){flags=x;} void setEAX(ULONG x){mock_eax=x;}
+void setIF(ULONG x){flags=(flags & ~0x200u) | (x ? 0x200u : 0u);}
 void setCF(ULONG x){mock_cf=x;} void setCS(USHORT x){cs=x;dispatches++;}
 void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
@@ -174,21 +175,27 @@ int main(int argc, char **argv){
       CHECK(flags==(order ? 0x23002u : 0x23202u));
       CHECK(*(ULONG *)(memory+0x714)==(order ? 0xa003u : 0xa203u));
     }
-    /* Paged and non-direct-IF cases remain on the existing path: do not
-     * mistake that path for proof of NT4 reflection semantics. */
+    /* Paged cases remain on the existing path: this is not proof of NT4
+     * paged reflection semantics. */
     DpmiFaultHandlers[7].Flags=0; DpmiFaultHandlers[7].CsSelector=0;
     before_fault_maps=mappings; mock_cr0=0x80000000u; flags=0x23202;
     sp=0x200; cs=0x27; ip=0x1234; *(ULONG *)(memory+0x714)=0xa200;
     CHECK(!DpmiFaultHandler(7, 0));
     CHECK(flags==0x23202 && mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
-    mock_cr0=0; flags=0x22202;
-    CHECK(!DpmiFaultHandler(7, 0));
-    CHECK(flags==0x22202 && mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
+    for(mode=0;mode<3;++mode) for(order=0;order<2;++order) {
+      mock_cr0=0; flags=0x20302 | (mode<<12); ss=0; sp=0x200; cs=0x27; ip=0x1234;
+      *(ULONG *)(memory+0x714)=0xa203; DpmiFaultHandlers[7].Flags=order;
+      *(ULONG *)(memory+28)=0x03000456;
+      CHECK(DpmiFaultHandler(7,0));
+      CHECK(sp==0x1fa && cs==0x300 && ip==0x456 && *(USHORT *)(memory+0x1fe)==0x3302);
+      CHECK((flags & 0x200)==(order ? 0u : 0x200u));
+      CHECK(*(ULONG *)(memory+0x714)==(order ? 0xa003u : 0xa203u));
+    }
     puts("DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2");
     return 0;
   }
   if(argc==2 && strcmp(argv[1],"--v86-fault-reject")==0) {
-    msw=1; mock_cr0=0; descriptors[1].HighWord.Bits.Pres=1;
+    msw=1; mock_cr0=0x80000000u; descriptors[1].HighWord.Bits.Pres=1;
     DpmiFaultHandlers[7].CsSelector=0x0f;
     for(depth=0;depth<2;++depth) {
       flags=0x22302; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;

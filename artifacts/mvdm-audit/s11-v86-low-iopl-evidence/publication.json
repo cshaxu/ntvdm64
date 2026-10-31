@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-31T14:17:09.5330979Z",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-low-iopl-candidate-package"
+}
