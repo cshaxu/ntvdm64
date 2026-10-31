@@ -224,6 +224,13 @@ debug-register operations; this is not evidence that WOW taskman calls it at
 every task switch. Any future scheduling adaptation must account for this
 existing writer and debugger ownership rather than treating monitor MOV-DR as
 the only source of changes.
+The original `dxint31.asm` further documents `Debug_Regs` as one memory
+image, and its debug API uses `Load_DBG_Regs` after mutations; its WOW branch
+does not call `Store_DBG_Regs` at API entry. This is another guest-side view
+whose interaction with per-host-thread NT4 trap frames needs explicit
+reconciliation. Its single-copy comment is not by itself a proof that the
+entire WOW worker's debug state should be shared, nor proof that a specific
+installed guest executes this source.
 
 ## Instruction-fetch page-access accounting
 
