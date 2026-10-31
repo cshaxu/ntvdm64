@@ -101,7 +101,7 @@ dpmi32/debug.c,excluded,host-candidate,host C/H candidate; selected runtime and 
 dpmi32/dpmi32.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,yes,136,136,100.00
 dpmi32/dpmi32p.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,168,168,100.00
 dpmi32/dpmidata.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,418,418,100.00
-dpmi32/dpmiint.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,739,725,98.11
+dpmi32/dpmiint.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,739,724,97.97
 dpmi32/dpmiint.h,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,39,38,97.44
 dpmi32/dpmimemr.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,121,117,96.69
 dpmi32/dpmimscr.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,28,28,100.00
@@ -1099,7 +1099,7 @@ softpc.new/host/src/nt_vflop.c,partial,host-candidate,host C/H candidate; select
 softpc.new/host/src/nt_vga.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,yes,1411,1410,99.93
 softpc.new/host/src/nt_wcom.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,no,,,
 softpc.new/host/src/nt_yoda.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-3/file-review.csv,no,,,
-softpc.new/host/src/sim32.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,288,287,99.65
+softpc.new/host/src/sim32.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,yes,288,286,99.31
 softpc.new/host/src/stf_conf.c,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-0/review.csv,no,,,
 softpc.new/host/src/stubs.c,partial,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-1/file-audit.csv,yes,469,468,99.79
 softpc.new/host/src/x86_emm.c,excluded,host-candidate,host C/H candidate; selected runtime and ownership remain to verify,shard-2/file-audit.csv,no,,,
