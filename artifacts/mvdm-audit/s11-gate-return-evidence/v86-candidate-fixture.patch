@@ -1,0 +1,70 @@
+diff --git a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c b/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+index 11b8d243d..fae13e279 100644
+--- a/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
++++ b/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+@@ -876,6 +876,55 @@ static int protected_pending_irq_observe(void) {
+     return test_fault==0 && !(pic_isr & 1) && c_getAX()==0xbeef && (test_case==0 ? (test_irq==1 && test_irq_eip==0x1001 && *c_GetPhyAdd(0x301)==1 && test_out==0 && !(pic_irr&1)) : (test_irq==0 && *c_GetPhyAdd(0x301)==0 && test_out==0 && ((pic_irr&1)==(test_case==2 ? 1 : 0))));
+ }
+ 
++#pragma pack(push,1)
++typedef struct { USHORT cs, flags; ULONG eip; } SWINT_HANDLER;
++#pragma pack(pop)
++extern SWINT_HANDLER DpmiInterruptHandlers[256];
++extern LDT_ENTRY *Ldt;
++extern ULONG IntelBase, Cpu40LdtShadowAddress;
++extern USHORT CurrentAppFlags;
++extern BOOL DpmiSwIntHandler(ULONG), host_swint_hook(long);
++extern long VdmInstallSoftwareIntHandler(void *);
++extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
++extern ULONG c_getEAX(void);
++extern USHORT c_getCS(void), c_getSP(void);
++extern void INTx(ULONG);
++
++static int v86_software_interrupt(void) {
++    unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
++    ULONG beforeflags; BOOL handled; char line[160];
++    c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
++    *(ULONG *)(gdt+0x200)=0x0000ffff; *(ULONG *)(gdt+0x204)=0x0000f300;
++    *(ULONG *)(ldt+0x18)=0x0000ffff; *(ULONG *)(ldt+0x1c)=0x0000fa00;
++    *(ULONG *)(ldt+0x200)=0x0000ffff; *(ULONG *)(ldt+0x204)=0x0000f300;
++    c_setGDT_BASE_LIMIT(0x5000,0x407); c_setPE(1); c_setVM(1); c_setCPL(3);
++    c_setCS(0x100); c_setSS(0x200); c_setSP(0x800); c_setIP(0x100);
++    c_setIOPL(3); c_setIF(1);
++    IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
++    Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
++    DpmiInterruptHandlers[0x31].cs=0x1f;
++    DpmiInterruptHandlers[0x31].flags=0; DpmiInterruptHandlers[0x31].eip=0x200;
++    if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
++    beforeflags=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
++    if(test_case==123) {
++        *(USHORT *)c_GetPhyAdd(0x31*4)=0x456;
++        *(USHORT *)c_GetPhyAdd(0x31*4+2)=0x300;
++        INTx(0x31);
++        handled=(c_getCS()==0x300 && c_getIP()==0x456 && c_getSP()==0x7fa &&
++                 *(USHORT *)c_GetPhyAdd(0x27fa)==0x100 &&
++                 *(USHORT *)c_GetPhyAdd(0x27fc)==0x100);
++    } else {
++        handled=!host_swint_hook(test_case==122 ? 0x2a : 0x31) &&
++                c_getCS()==0x100 && c_getIP()==0x100 && c_getSP()==0x800 &&
++                c_getEFLAGS()==beforeflags &&
++                (test_case!=122 || c_getEAX()==0xf0f0f0f1);
++    }
++    VdmInstallSoftwareIntHandler(NULL);
++    wsprintfA(line,"V86_SWINT case=%d pass=%d cs=%x ip=%x sp=%x\n",
++              test_case,handled,c_getCS(),c_getIP(),c_getSP()); report(line);
++    return handled;
++}
++
+ int main(int argc, char **argv) {
+     session owner;
+     int ok;
+@@ -886,7 +935,8 @@ int main(int argc, char **argv) {
+     sas_init(0x200000);
+     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
+     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
+-    if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
++    if(test_case>=121 && test_case<=123) ok=v86_software_interrupt();
++    else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
+     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
+     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();

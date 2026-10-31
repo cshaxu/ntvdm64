@@ -248,3 +248,49 @@ choice with the selected CCPU's actual CPL/IOPL state and return path; it
 must not globally reinterpret unrelated protected-mode IRET or introduce an
 unowned parallel task/stack state. No runtime change or semantic concession
 is claimed by this diagnostic.
+
+## V86 software interrupt routing candidate
+
+NT4 `emv86.asm:OpcodeINTnnV86` checks `VDM_INT_HOOKED`: an unhooked
+vector uses the real-mode interrupt table, while a hooked vector uses
+`VDM_DPMIINFO.DosxRmReflector`. Selected CCPU `INTx` calls the host software
+hook whenever PE is set, including VM=1; the current DPMI handler instead
+interpreted that state as protected mode and also applied the WOW INT 2Ah
+signature. A controlled selected-CCPU baseline observed both interceptions
+with VM=1 and an unhooked vector. It is not evidence of an immutable guest
+failure. The original DOSX source also contains an IVT-based reflector, so
+the presence and ownership of the separate NT4 hooked reflector cannot be
+assumed from its name.
+
+An early candidate returned unhandled for an unhooked V86 interrupt. The
+selected source-object and direct hook checks passed, but the end-to-end
+`INTx` test failed: selected CCPU `do_intrupt` selects its protected IDT
+whenever PE=1, including VM=1. Thus the fallback does **not** perform the
+required V86 IVT dispatch. The candidate was removed. The controlled test
+fixture patch and logs are retained as diagnostic evidence; they are not a
+passing regression or an immutable-guest failure. Original `ReflectV86Int`
+already builds a real-mode frame, but its flag updates, stack failure and
+hooked-reflector ownership still need to be reconciled with the NT4 monitor
+before it can be used as a complete replacement. No guest change or release
+is implied.
+
+The baseline and rejected candidate are retained in
+[V86 baseline](s11-gate-return-evidence/v86-baseline-results.txt),
+[fixture patch](s11-gate-return-evidence/v86-candidate-fixture.patch), and
+[candidate results](s11-gate-return-evidence/v86-candidate-results.txt).
+The unhooked tests set PE and VM together, install the production DPMI
+software hook, and compare registers before and after a direct hook call;
+the third case calls the original CCPU `INTx` with a controlled IVT entry.
+Cases 121 and 122 passed only with the rejected candidate; case 123 terminated
+with a diagnostic exception before reporting its assertion. Source tracing
+confirms `do_intrupt` selects the protected IDT on PE alone. The test is a
+controlled host fixture, not an end-to-end DOSX or product verdict.
+
+NT4 `trap.asm:V86Intnn` supplies a further constraint: on the default
+virtualized-IF path, the saved IF comes from VDM fixed state, the virtual IF
+is cleared, and the saved frame presents IOPL 3 while current NT and TF are
+cleared. Its direct-IOPL path clears CPU IF instead. Therefore simply calling
+the existing `ReflectV86Int`, which pushes the caller-provided EFLAGS and
+changes SP, IP and CS, would not by itself establish the original flag or
+failure contract. This is part of the same interrupt ownership investigation,
+not proof that either controlled path was observed in a real guest.

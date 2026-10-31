@@ -1,0 +1,6 @@
+case=129
+V86_SWINT case=129 handled=1 cs=1f ip=200 sp=fd07fa flags=23202 eax=0
+exit=1
+case=130
+V86_SWINT case=130 handled=1 cs=100 ip=100 sp=fd0800 flags=23202 eax=0
+exit=1

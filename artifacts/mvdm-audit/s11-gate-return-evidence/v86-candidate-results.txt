@@ -1,0 +1,3 @@
+V86_SWINT case=121 pass=1 cs=100 ip=100 sp=800
+V86_SWINT case=122 pass=1 cs=100 ip=100 sp=800
+case=123 process_exit=-1073741783 (unhandled diagnostic failure; candidate rejected)
