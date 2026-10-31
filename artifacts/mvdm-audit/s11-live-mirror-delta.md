@@ -1,5 +1,23 @@
 # S11 live mirror reconciliation checkpoint
 
+The previously tested unpublished debug-context candidate was reconciled with
+`EstimateMirrorDiffRetention.py`: 206 differing original-source rows, 205
+with textual estimates, and a join against `combined-initial-status.csv`
+found all 206 classified `partial`. The current retention CSV SHA-256 is
+`B429211C1E6AA43C4D1DC4AD022CCAA953D3CF85A18EE9F4418EA866226C1FF4`.
+Among the current candidate's mirror files, `c_main.c` retains an estimated
+3,885 of 3,923 original code lines (99.03%) and `ntthread.c` 195 of 198
+(98.48%). This is current source-text matching, not proof of execution,
+semantic equivalence, test coverage or an S11 completion claim.
+
+After the external-debugger TLS experiment was held for its complete S18
+integration, the generator again reported 206 differing rows, 205 measured,
+and all 206 marked partial. The current CSV SHA-256 is
+`5D8C96108E0979551D94E734707302C22503CD3D8469D81BFB9F1FCF6F8D17AA`;
+`ntthread.c` is again at the previously committed source and its textual
+estimate is 196/198 (98.99%). The separate historical diff in that file
+remains classified partial.
+
 The frozen S10 host C/H ledger classified every one of its 202 recorded
 mirror-difference rows as partial. Rechecking the current worktree against
 that frozen checkpoint now reports one newly differing file and six stale

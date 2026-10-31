@@ -270,3 +270,6 @@ wow_user_runtime_set_context,268
 wow_user_worker_active,269
 VdmQueryFreeVirtualMemory,270
 VdmReallocateVirtualMemory,271
+mvdm_debug_task_register,272
+mvdm_debug_task_exchange,273
+mvdm_debug_task_retire,274

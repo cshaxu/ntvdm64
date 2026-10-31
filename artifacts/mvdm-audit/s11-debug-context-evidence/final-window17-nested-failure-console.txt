@@ -1,0 +1,4 @@
+# buffer=80,28 viewport=0,0,79,27
+[0] Microsoft(R) Windows NT DOS
+[1] (C)Copyright Microsoft Corp 1990-1996.
+[3] O:\TMP\NA1B>COMM

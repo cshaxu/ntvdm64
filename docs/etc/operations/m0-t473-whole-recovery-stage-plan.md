@@ -52,6 +52,11 @@ SOL and WOW multi-window performance optimization to the separate
 latency is no longer an S11 closure gate. S18 owns HUNTER and standalone tools/debuggers,
 with CPU prerequisites in S11 and launch/PIF integration in S13. S20 rebinds
 normal, failure and teardown evidence to the actual coherent release package.
+S18's debugger scope includes the selected original WOW remote-entry path:
+the [S11 handoff](../../../artifacts/mvdm-audit/s11-debug-context-candidate.md)
+records its held first-entry experiment, session and execution ownership,
+context restoration, failure and teardown requirements. S11's ordinary WOW
+task debug-context handoff does not claim that remote path is connected.
 
 The NIDDB instance-retirement and allocation-rollback candidates identified
 during S10 are held outside this T after the owner clarified that internal

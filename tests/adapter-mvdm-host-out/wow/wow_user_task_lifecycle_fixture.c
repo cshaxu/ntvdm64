@@ -14,6 +14,12 @@
 
 static unsigned errors;
 static unsigned native_direct_calls;
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+extern unsigned long CCPU_DR[];
+extern int ThreadSetDebugContext(unsigned long *);
+extern void ccpu_monitor_write_dr(unsigned long, unsigned long);
+static volatile LONG debug_handoff_active;
+#endif
 #ifdef WOW_RETIREMENT_LOCK_PROBE
 static DWORD WINAPI try_retirement_lock(LPVOID argument)
 {
@@ -631,6 +637,12 @@ static LRESULT cross_receive_body(HWND window, UINT message, WPARAM wp, LPARAM l
         CHECK(binding->thread->ptdb && binding->thread->ptdb->hTaskWow == 0x1235);
         CHECK(InSendMessage() && !binding->exclusive_held);
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+        if (InterlockedCompareExchange(&debug_handoff_active, 0, 0)) {
+            CHECK(CCPU_DR[0] == 0x123456u);
+            ccpu_monitor_write_dr(0, 0x654321u);
+        }
+#endif
         ++test->delivered;
 #ifdef WOW_NATIVE_FOREIGN_FIXTURE
         if (test->delivered == 1) {
@@ -851,6 +863,9 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
     WW sender_words = {0};
     DWORD code;
     unsigned early;
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+    unsigned long saved_debug[6], broadcast_debug[6] = {0x123456u, 0, 0, 0, 0, 0};
+#endif
     cls.lpfnWndProc = cross_receive;
     cls.hInstance = GetModuleHandleW(NULL);
     cls.lpszClassName = L"WOW_NATIVE_CROSS";
@@ -994,6 +1009,16 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
         reply = early ? 2 : 0;
 #endif
         fprintf(stderr, "WOW_NATIVE_SEND_BEGIN early=%u\n", reply);
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+        if (!early) {
+            unsigned index;
+            for (index = 0; index < 4; ++index) saved_debug[index] = CCPU_DR[index];
+            saved_debug[4] = CCPU_DR[6];
+            saved_debug[5] = CCPU_DR[7];
+            CHECK(ThreadSetDebugContext(broadcast_debug));
+            InterlockedExchange(&debug_handoff_active, 1);
+        }
+#endif
 #ifdef WOW_NATIVE_REPLY_FIXTURE
         {
             wow_user_native_call call;
@@ -1010,6 +1035,15 @@ static void verify_cross_callout(session *owner, wow_user_runtime_thread *bindin
 #else
         CHECK(wow_native_SendMessageTimeoutA(test.window, WM_APP + 65, reply, 0,
             SMTO_ABORTIFHUNG, 3000, &result) != 0 && result == 114);
+#endif
+#ifdef WOW_NATIVE_NESTED_FIXTURE
+        if (!early) {
+            BOOL sender_isolated = CCPU_DR[0] == broadcast_debug[0];
+            InterlockedExchange(&debug_handoff_active, 0);
+            CHECK(ThreadSetDebugContext(saved_debug));
+            CHECK(sender_isolated);
+            fprintf(stderr, "WOW_DEBUG_TASK_HANDOFF isolated=%u broadcast=1\n", sender_isolated);
+        }
 #endif
         CHECK(binding->thread->ppi->pwpi->CSOwningThread == binding->thread);
         CHECK(!binding->thread->psmsSent && !binding->exclusive_held);

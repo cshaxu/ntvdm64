@@ -41,6 +41,10 @@ int __cdecl mvdm_softpc_wow_page_domain_set_expected_windows_version(
 int __cdecl mvdm_softpc_wow_page_domain_exchange_client_context(
     unsigned long *previous_callback, unsigned long version,
     const unsigned long next_callback[2]);
+/* Original monitor debug contexts follow the registered native task thread. */
+int __cdecl mvdm_debug_task_register(unsigned long thread_id);
+int __cdecl mvdm_debug_task_exchange(unsigned long previous, unsigned long next);
+void __cdecl mvdm_debug_task_retire(unsigned long thread_id, int rollback);
 /* SoftPC's original host mouse boundary supplies the final guest virtual
  * coordinates before guest mouse processing. Publish only that already
  * transformed value into USER16's direct shared cursor field. */

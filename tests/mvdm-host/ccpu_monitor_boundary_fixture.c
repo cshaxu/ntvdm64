@@ -22,6 +22,8 @@ extern uint32_t c_cpu_q_ev_get_count(void);
 extern void c_setIP(unsigned short);
 extern unsigned short c_getIP(void);
 extern unsigned short c_getAX(void);
+extern unsigned short c_getBX(void);
+extern void c_setBX(unsigned short);
 extern void c_sas_stores(uint32_t, unsigned char *, uint32_t);
 extern unsigned char *c_GetPhyAdd(uint32_t);
 extern int debug_exception_pending;
@@ -31,6 +33,7 @@ extern void InitializeIcaLock(void);
 extern int ica_intack(uint32_t *hook);
 extern uint32_t CCPU_DR[8], CCPU_GR[8];
 extern void MOV_DR(uint32_t, uint32_t);
+extern void ccpu_restore_debug_context(const uint32_t *, BOOL);
 extern void c_setGDT_BASE_LIMIT(uint32_t, uint16_t);
 extern void c_setLDT_SELECTOR(uint16_t), c_setLDT_BASE_LIMIT(uint32_t, uint32_t);
 extern void c_setIDT_BASE_LIMIT(uint32_t, uint16_t);
@@ -117,6 +120,16 @@ static BOOL test_sti_fault(unsigned long vector, unsigned long error) {
     (void)vector; (void)error; ++test_fault; return FALSE;
 }
 extern void c_setEIP(uint32_t);
+extern void c_setRF(IBOOL);
+extern IBOOL c_getCF(void);
+extern BOOL ThreadSetDebugContext(PULONG);
+extern void DpmiSetDebugRegisters(void);
+static void debug_broadcast_out(io_addr port, half_word value) {
+    ULONG registers[6]={0xf1002,0,0,0,0,1};
+    (void)port; (void)value;
+    if (test_case>=114) DpmiSetDebugRegisters();
+    else if (!ThreadSetDebugContext(registers)) ++wrong_string_write;
+}
 static BOOL probe_unhandled_fault(unsigned long vector, unsigned long error) {
     if(vector!=13 || error!=0) return FALSE;
     ++test_fault;
@@ -129,7 +142,63 @@ static BOOL probe_irq_frame_fault(unsigned long vector, unsigned long error) {
 }
 static BOOL probe_debug_fault(unsigned long vector, unsigned long error) {
     (void)error;if(vector!=1)return FALSE;
-    ++test_fault;frame_fault_eip=c_getEIP();c_setEIP(test_case==47 ? 0x101d : test_case==46 ? 0x101a : 0x1019);return TRUE;
+    ++test_fault;frame_fault_eip=c_getEIP();c_setEIP(test_case==116 ? 0x1004 : test_case>=113 ? 0x1003 : test_case>=109 ? 0x1001 : test_case==47 ? 0x101d : test_case==46 ? 0x101a : 0x1019);return TRUE;
+}
+static int restored_debug_execution(void) {
+    unsigned char gdt[40]={0}, program[]={0x43,0xb8,0xef,0xbe,0xd6,0xfe};
+    uint32_t registers[6]={0xf1000,0,0,0,0,0};
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x0000fa0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x0000f300u;
+    c_cpu_init();CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
+    CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(3);
+    c_setCS(0x1b);c_setSS(0x23);c_setDS(0x23);c_setSP(0x800);
+    c_setBX(0);c_setEIP(0x1000);test_fault=frame_fault_eip=0;
+    if(test_case==109 || test_case==111 || test_case==117) registers[5]=1;
+    if(test_case==111) c_setRF(1);
+    ccpu_restore_debug_context(registers,test_case==110);
+    if(test_case==117) {
+        const unsigned char reset_program[]={0xb8,0xef,0xbe,0xd6,0xfe};
+        CopyMemory(c_GetPhyAdd(0xffff0),reset_program,sizeof(reset_program));
+        c_cpu_interrupt(0,0);
+    }
+    VdmInstallFaultHandler((void *)probe_debug_fault);
+    c_cpu_simulate();VdmInstallFaultHandler(NULL);MOV_DR(7,0);
+    {char line[120];wsprintfA(line,"RESTORED_DEBUG case=%d fault=%lu eip=%lx bx=%04x\n",test_case,test_fault,frame_fault_eip,c_getBX());report(line);}
+    if(test_case==111 || test_case==112)
+        return test_fault==0 && c_getBX()==1 && c_getAX()==0xbeef;
+    if(test_case==117) return !test_fault && c_getBX()==0 && c_getAX()==0xbeef;
+    return test_fault==1 && frame_fault_eip==0x1000 && c_getBX()==0 && c_getAX()==0xbeef;
+}
+static int broadcast_debug_execution(void) {
+    unsigned char gdt[40]={0}, program[]={0xe6,0x80,0x43,0xb8,0xef,0xbe,0xd6,0xfe};
+    half_word adapter=IO_MAX_NUMBER_ADAPTORS-1;
+    c_cpu_init();io_init();io_define_outb(adapter,debug_broadcast_out);
+    io_connect_port((io_addr)0x80,adapter,IO_WRITE);
+    if(test_case==116) {
+        const unsigned char bop[]={0xd6,0x53,0x0e,0x43,0xb8,0xef,0xbe,0xd6,0xfe};
+        CopyMemory(c_GetPhyAdd(0xf1000),bop,sizeof(bop));
+    }
+    *(uint32_t *)(gdt+0x18)=0x0000ffffu;*(uint32_t *)(gdt+0x1c)=0x00009a0fu;
+    *(uint32_t *)(gdt+0x20)=0x0000ffffu;*(uint32_t *)(gdt+0x24)=0x00009300u;
+    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
+    if(test_case!=116) CopyMemory(c_GetPhyAdd(0xf1000),program,sizeof(program));
+    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setPE(1);c_setCPL(0);
+    c_setCS(0x18);c_setSS(0x20);c_setDS(0x20);c_setSP(0x800);
+    if(test_case>=114) {
+        ULONG registers[6]={0xf1002,0,0,0,0,1};
+        if(test_case==116) registers[0]=0xf1003;
+        CopyMemory(c_GetPhyAdd(0x300),registers,sizeof(registers));
+        c_setSI(test_case==115 ? 0xfff0 : 0x300);
+    }
+    c_setEIP(0x1000);c_setBX(0);
+    test_fault=frame_fault_eip=wrong_string_write=0;
+    VdmInstallFaultHandler((void *)probe_debug_fault);
+    c_cpu_simulate();VdmInstallFaultHandler(NULL);MOV_DR(7,0);
+    {char line[120];wsprintfA(line,"BROADCAST_DEBUG fault=%lu eip=%lx bx=%04x\n",test_fault,frame_fault_eip,c_getBX());report(line);}
+    if(test_case==115) return !wrong_string_write && !test_fault && c_getBX()==1 && c_getCF();
+    if(test_case==116) return !test_fault ? 0 : frame_fault_eip==0x1003 && c_getBX()==0;
+    return !wrong_string_write && test_fault==1 && frame_fault_eip==0x1002 && c_getBX()==0;
 }
 static BOOL test_irq_handler(unsigned long vector) {
     unsigned char isr=0;
@@ -803,7 +872,9 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
+    if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
+    else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
+    else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
     else if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
     else if((test_case>=93 && test_case<=101) || (test_case>=104 && test_case<=106)) ok=dpmi_remapped_code_page();
     else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();

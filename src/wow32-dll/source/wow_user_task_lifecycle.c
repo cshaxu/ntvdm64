@@ -59,6 +59,7 @@ typedef struct wow_user_task_lifecycle_thread {
     DWORD message_wakes;
     DWORD launch_request;
     BOOL start_pending;
+    BOOL debug_registered;
     /* xxxInitTask has committed this carrier, but its one initial copied
      * USER view has not yet reached the W32Thread return boundary. */
     BOOL initial_publication_pending;
@@ -307,6 +308,9 @@ static void WINAPI client_context(wow_task_order_thread *previous,
             (previous && previous->ppi != &owner->process) ||
             (next && next->ppi != &owner->process))
         wow_user_native_call_failed("client-context-owner", ERROR_INVALID_STATE);
+    if (!mvdm_debug_task_exchange(previous ? previous->native_thread_id : 0,
+            next ? next->native_thread_id : 0))
+        wow_user_native_call_failed("debug-context-transfer", GetLastError());
     /* A quiesced native-thread unbind abandons its frames, not resumes them.
      * The CPU view may already be withdrawn. No inactive scalar snapshot
      * owns a borrow; the next execution owner replaces the view before use. */
@@ -512,6 +516,8 @@ BOOL WINAPI wow_user_task_lifecycle_init(wow_user_task_lifecycle *owner,
      * this binding's input links have been retired. */
     if (!wow_edit_native_ensure_gui_thread()) goto done;
     task->thread.native_thread_id = GetCurrentThreadId();
+    if (!mvdm_debug_task_register(task->thread.native_thread_id)) goto done;
+    task->debug_registered = TRUE;
     task->thread.native_thread = OpenThread(SYNCHRONIZE | THREAD_QUERY_LIMITED_INFORMATION,
         FALSE, task->thread.native_thread_id);
     if (!task->thread.native_thread) goto done;
@@ -597,6 +603,7 @@ done:
         wow_user_message_bridge_dispose(&task->messages);
         if (task->queue_event) CloseHandle(task->queue_event);
         if (task->thread.native_thread) CloseHandle(task->thread.native_thread);
+        if (task->debug_registered) mvdm_debug_task_retire(task->thread.native_thread_id, TRUE);
         /* queue.c DeleteThreadInfo owns this final release in original USER.
          * xxxInitTask may allocate the name and then reject TDB allocation;
          * this project carrier must release it on rollback as well. */
@@ -1654,6 +1661,7 @@ static BOOL retire_task(wow_user_task_lifecycle *owner, DWORD task_id,
         wow_user_message_bridge_dispose(&task->messages);
         CloseHandle(task->queue_event);
         CloseHandle(task->thread.native_thread);
+        if (task->debug_registered) mvdm_debug_task_retire(task->thread.native_thread_id, FALSE);
         /* DestroyTask releases the TDB, not THREADINFO's application name.
          * Retain DeleteThreadInfo's separate final-release responsibility. */
         cleanup_release(task->thread.pstrAppName);

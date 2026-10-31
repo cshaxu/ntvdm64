@@ -1,0 +1,38 @@
+[
+  {
+    "package": "prior",
+    "round": 1,
+    "passed": true,
+    "error": null
+  },
+  {
+    "package": "prior",
+    "round": 2,
+    "passed": true,
+    "error": null
+  },
+  {
+    "package": "prior",
+    "round": 3,
+    "passed": true,
+    "error": null
+  },
+  {
+    "package": "candidate",
+    "round": 1,
+    "passed": true,
+    "error": null
+  },
+  {
+    "package": "candidate",
+    "round": 2,
+    "passed": true,
+    "error": null
+  },
+  {
+    "package": "candidate",
+    "round": 3,
+    "passed": true,
+    "error": null
+  }
+]

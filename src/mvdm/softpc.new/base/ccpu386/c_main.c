@@ -595,6 +595,7 @@ IMPORT IBOOL sf_debug_char_waiting();
 #endif	/* SFELLOW */
 
 #if defined(NTVDM) && !defined(SFELLOW)
+static BOOL debug_context_resume_check;
 /* DIVERGENCE(MVDM-HOST-DIV-476): a monitor-emulated debug-register write
  * must leave fast execution just as CPU40's original MOV DR instruction does. */
 GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
@@ -611,6 +612,25 @@ GLOBAL VOID ccpu_monitor_write_dr IFN2(IU32, index, IU32, value)
          Int1_f();
       }
    }
+}
+
+/* DIVERGENCE(MVDM-HOST-DIV-478): update the shared execution bank through
+ * CPU40's debug provider and leave the fast instruction path. */
+GLOBAL VOID ccpu_apply_debug_context IFN1(const IU32 *, registers)
+{
+   IU32 index;
+   for (index = 0; index != 4; ++index) MOV_DR(index, registers[index]);
+   MOV_DR(6, registers[4]);
+   MOV_DR(7, registers[5]);
+   quick_mode = FALSE;
+}
+
+/* A task restore resumes at NEXT_INST, after the normal boundary checks. */
+GLOBAL VOID ccpu_restore_debug_context IFN2(const IU32 *, registers, BOOL, pending)
+{
+   ccpu_apply_debug_context(registers);
+   debug_exception_pending = pending;
+   debug_context_resume_check = TRUE;
 }
 
 static VOID ccpu_dispatch_accepted_irq IFN1(IS32, vector)
@@ -4471,6 +4491,9 @@ TYPEFF_3:
 #endif /* SYNCH_TIMERS */
    if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
       {
+#if defined(NTVDM) && !defined(SFELLOW)
+CPU_RESTORED_RESET:
+#endif
       c_cpu_reset();
       doing_contributory = FALSE;
       doing_page_fault = FALSE;
@@ -4634,6 +4657,25 @@ TYPEFF_3:
 NEXT_INST:
 
    CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
+
+#if defined(NTVDM) && !defined(SFELLOW)
+   /* A restored task enters here without the normal inter-instruction
+    * checks. Deliver its pending trap or execution breakpoint before it
+    * executes, using the same CPU-owned checks as that path. */
+   if (debug_context_resume_check) {
+      /* RESET has priority over debug delivery in the normal boundary. */
+      if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
+         goto CPU_RESTORED_RESET;
+      debug_context_resume_check = FALSE;
+      if (debug_exception_pending)
+         Int1_t();
+      if (nr_inst_break && GET_RF() == 0) {
+         check_for_inst_exception(GET_CS_BASE() + GET_EIP());
+         if (debug_exception_pending)
+            Int1_f();
+      }
+   }
+#endif
 
 #if defined(SFELLOW) && !defined(PROD)
 	if (sf_debug_char_waiting())
@@ -4927,6 +4969,9 @@ LOCAL VOID
       SET_DR(DR_DAR3, 0);   /* Really Undefined */
       SET_DR(DR_DSR, 0);    /* Really Undefined */
       debug_exception_pending = FALSE; /* MVDM-HOST-DIV-282: reset. */
+#if defined(NTVDM) && !defined(SFELLOW)
+      debug_context_resume_check = FALSE;
+#endif
       MOV_DR((IU32) DR_DCR, (IU32) 0);   /* Disable Breakpoints */
 
       SET_TR(TR_TCR, 0);   /* Really Undefined */

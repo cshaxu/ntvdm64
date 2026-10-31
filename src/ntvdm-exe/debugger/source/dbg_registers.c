@@ -25,6 +25,114 @@ extern IBOOL c_getPG(void);
 extern IBOOL c_getVM(void);
 extern IUH c_getCPL(void);
 extern IU32 c_sas_memory_size(void);
+extern IU32 CCPU_DR[8];
+extern BOOL debug_exception_pending;
+extern void ccpu_restore_debug_context(const IU32 *registers, BOOL pending);
+extern void ccpu_apply_debug_context(const IU32 *registers);
+
+/* Original x86 monitor thread contexts are per thread; its DPMI debug
+ * service broadcasts to every registered thread and supplies the initial
+ * context of later threads. CCPU has one execution register bank, so retain
+ * only the suspended thread contexts at this boundary. */
+typedef struct debug_task_context {
+    struct debug_task_context *next;
+    DWORD thread_id;
+    IU32 registers[6];
+    BOOL pending;
+    BOOL bootstrap;
+} debug_task_context;
+
+static SRWLOCK debug_context_lock = SRWLOCK_INIT;
+static debug_task_context *debug_tasks;
+static IU32 initial_debug_registers[6];
+static BOOL initial_debug_active;
+static BOOL bootstrap_debug_registered;
+
+static debug_task_context *debug_task_find(DWORD thread_id)
+{
+    debug_task_context *task;
+    for (task = debug_tasks; task; task = task->next)
+        if (task->thread_id == thread_id) return task;
+    return NULL;
+}
+
+static void debug_context_capture(debug_task_context *task)
+{
+    ULONG index;
+    for (index = 0; index != 4; ++index) task->registers[index] = CCPU_DR[index];
+    task->registers[4] = CCPU_DR[6];
+    task->registers[5] = CCPU_DR[7];
+    task->pending = debug_exception_pending;
+}
+
+BOOL __cdecl mvdm_debug_task_register(DWORD thread_id)
+{
+    debug_task_context *task;
+    DWORD saved = GetLastError();
+    if (!thread_id) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
+    task = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, sizeof(*task));
+    if (!task) { SetLastError(ERROR_NOT_ENOUGH_MEMORY); return FALSE; }
+    task->thread_id = thread_id;
+    AcquireSRWLockExclusive(&debug_context_lock);
+    if (debug_task_find(thread_id)) {
+        ReleaseSRWLockExclusive(&debug_context_lock);
+        HeapFree(GetProcessHeap(), 0, task);
+        SetLastError(ERROR_ALREADY_EXISTS);
+        return FALSE;
+    }
+    if (!bootstrap_debug_registered) {
+        debug_context_capture(task);
+        task->bootstrap = TRUE;
+        bootstrap_debug_registered = TRUE;
+    }
+    else if (initial_debug_active)
+        CopyMemory(task->registers, initial_debug_registers, sizeof(task->registers));
+    task->next = debug_tasks;
+    debug_tasks = task;
+    ReleaseSRWLockExclusive(&debug_context_lock);
+    SetLastError(saved);
+    return TRUE;
+}
+
+BOOL __cdecl mvdm_debug_task_exchange(DWORD previous, DWORD next)
+{
+    debug_task_context *old_task, *new_task;
+    DWORD saved = GetLastError();
+    AcquireSRWLockExclusive(&debug_context_lock);
+    old_task = previous ? debug_task_find(previous) : NULL;
+    new_task = next ? debug_task_find(next) : NULL;
+    if ((previous && !old_task) || (next && !new_task)) {
+        ReleaseSRWLockExclusive(&debug_context_lock);
+        SetLastError(ERROR_INVALID_STATE);
+        return FALSE;
+    }
+    if (previous != next) {
+        if (old_task) debug_context_capture(old_task);
+        if (new_task) ccpu_restore_debug_context(new_task->registers, new_task->pending);
+    }
+    ReleaseSRWLockExclusive(&debug_context_lock);
+    SetLastError(saved);
+    return TRUE;
+}
+
+void __cdecl mvdm_debug_task_retire(DWORD thread_id, BOOL rollback)
+{
+    debug_task_context **link, *task = NULL;
+    DWORD saved = GetLastError();
+    AcquireSRWLockExclusive(&debug_context_lock);
+    for (link = &debug_tasks; *link; link = &(*link)->next) {
+        if ((*link)->thread_id == thread_id) {
+            task = *link;
+            *link = task->next;
+            if (rollback && task->bootstrap && !debug_tasks)
+                bootstrap_debug_registered = FALSE;
+            break;
+        }
+    }
+    ReleaseSRWLockExclusive(&debug_context_lock);
+    if (task) HeapFree(GetProcessHeap(), 0, task);
+    SetLastError(saved);
+}
 
 static BOOL debug_readable_span(IU32 address, IU32 count, IUM8 access)
 {
@@ -66,11 +174,15 @@ BOOL mvdm_debugger_read_debug_registers(USHORT selector, USHORT offset,
 
 BOOL ThreadSetDebugContext(PULONG registers)
 {
-    ULONG index;
+    debug_task_context *task;
 
     if (registers == NULL) return FALSE;
-    for (index = 0; index != 4; ++index) MOV_DR(index, registers[index]);
-    MOV_DR(6, registers[4]);
-    MOV_DR(7, registers[5]);
+    AcquireSRWLockExclusive(&debug_context_lock);
+    CopyMemory(initial_debug_registers, registers, sizeof(initial_debug_registers));
+    initial_debug_active = (registers[5] & 0x0f) != 0;
+    for (task = debug_tasks; task; task = task->next)
+        CopyMemory(task->registers, registers, sizeof(task->registers));
+    ccpu_apply_debug_context(registers);
+    ReleaseSRWLockExclusive(&debug_context_lock);
     return TRUE;
 }

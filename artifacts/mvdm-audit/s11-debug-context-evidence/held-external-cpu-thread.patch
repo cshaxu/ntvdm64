@@ -1,0 +1,81 @@
+diff --git a/src/mvdm/softpc.new/base/ccpu386/ntthread.c b/src/mvdm/softpc.new/base/ccpu386/ntthread.c
+index 835df5e1e..b32326183 100644
+--- a/src/mvdm/softpc.new/base/ccpu386/ntthread.c
++++ b/src/mvdm/softpc.new/base/ccpu386/ntthread.c
+@@ -136,7 +136,10 @@ jmp_buf *ccpu386SimulatePtr()
+
+     // Check for 'first call in new thread context' case where we need to set
+     // up new thread data space.
+-    if (potentialNewThread)
++    /* DIVERGENCE(MVDM-HOST-DIV-479): the original WOW debugger may create
++     * its remote thread outside host_CreateThread. Its first CPU entry must
++     * discover the thread even when no host creation notification was made. */
++    if (potentialNewThread || TlsGetValue(ccpuSimId) == NULL)
+     {
+         prev = tp = tidlist;
+         while(tp != TIDNULL)        // look for tid in current list
+diff --git a/tests/mvdm-host/ccpu_halt_reset_test.c b/tests/mvdm-host/ccpu_halt_reset_test.c
+index 1763f9dde..768b27860 100644
+--- a/tests/mvdm-host/ccpu_halt_reset_test.c
++++ b/tests/mvdm-host/ccpu_halt_reset_test.c
+@@ -1,5 +1,6 @@
+ #include <stdint.h>
+ #include <stdlib.h>
++#include <string.h>
+ #include <windows.h>
+ #include "ntvdm-exe/session/session.h"
+ #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"
+@@ -37,6 +38,19 @@ extern void c_setCR3(uint32_t);
+ extern void c_setPG(int);
+ extern void c_setPE(int);
+ extern BOOL mvdm_debugger_read_debug_registers(USHORT, USHORT, PULONG);
++extern void cpu_createthread(HANDLE);
++extern void ccpu386exitthread(void);
++
++static DWORD WINAPI remote_thread_entry_probe(void *unused)
++{
++    (void)unused;
++    /* W32RemoteThread receives a native thread from its debugger, not
++     * host_CreateThread, and calls the exported cpu_createthread itself. */
++    cpu_createthread(GetCurrentThread());
++    c_cpu_simulate();
++    ccpu386exitthread();
++    return c_getAX() == 0xbeef ? 0 : 1;
++}
+
+ static volatile uint32_t halt_quick_count_before_reset;
+
+@@ -252,7 +266,7 @@ static LONG WINAPI report_exception(EXCEPTION_POINTERS *e)
+     return EXCEPTION_EXECUTE_HANDLER;
+ }
+
+-int main(void)
++int main(int argc, char **argv)
+ {
+     session owner;
+     HANDLE producer;
+@@ -280,6 +294,24 @@ int main(void)
+     CCPU_DR[6] = 0x4001;
+     c_cpu_init();
+     if (debug_exception_pending || CCPU_DR[6]) return 6;
++    if (argc == 2 && strcmp(argv[1], "remote-thread") == 0) {
++        DWORD result = 1, round;
++        const unsigned char remote_program[] = {0xb8,0xef,0xbe,0xd6,0xfe};
++        CopyMemory(c_GetPhyAdd(0xf1000), remote_program, sizeof(remote_program));
++        for (round = 0; round != 4; ++round) {
++            c_setIP(0x1000);
++            HANDLE remote = CreateThread(NULL, 0, remote_thread_entry_probe, NULL, 0, NULL);
++            if (!remote) return 20;
++            if (WaitForSingleObject(remote, INFINITE) != WAIT_OBJECT_0 ||
++                !GetExitCodeThread(remote, &result)) return 21;
++            CloseHandle(remote);
++            if (result) break;
++        }
++        report(result ? "CCPU_REMOTE_THREAD_EXECUTION_FAIL\n" :
++            "CCPU_REMOTE_THREAD_EXECUTION_OK rounds=4\n");
++        mvdm_softpc_ccpu_wait_end();
++        return (int)result;
++    }
+     report("guest-program\n");
+     c_sas_stores(0xf1000, program, sizeof(program));
+     c_sas_stores(0xffff0, reset_vector, sizeof(reset_vector));

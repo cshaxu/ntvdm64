@@ -1,0 +1,85 @@
+[
+  {
+    "name": "mine",
+    "pid": 30100,
+    "startUtc": "2026-10-31T05:13:09.0076098Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-mine-gameplay.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-game\\mine",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd",
+      "-VisibleDesktop"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T05:13:23.0256562Z"
+  },
+  {
+    "name": "sol",
+    "pid": 16036,
+    "startUtc": "2026-10-31T05:13:23.0895184Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-gameplay.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-game\\sol",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd",
+      "-VisibleDesktop"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T05:13:36.7394742Z"
+  },
+  {
+    "name": "write",
+    "pid": 5220,
+    "startUtc": "2026-10-31T05:13:36.7951300Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-write-lifecycle.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-game\\write",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T05:13:49.2206523Z"
+  },
+  {
+    "name": "options",
+    "pid": 36108,
+    "startUtc": "2026-10-31T05:13:49.2744004Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\debug-context-final-game\\options",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "-VisibleDesktop",
+      "-Rounds",
+      "4"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T05:14:18.2334903Z"
+  }
+]
