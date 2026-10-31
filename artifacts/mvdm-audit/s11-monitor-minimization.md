@@ -240,6 +240,30 @@ cross-task or current-release pass. In particular it does not justify either
 guest modification or automatically clearing a live worker's shared debug
 state at task retirement.
 
+A controlled current-object experiment exercised the actual `client_context`
+operation with the existing CCPU page-domain fixture and two client-view
+records. The test set `CCPU_DR[0]` to `12345678` before switching to the
+second record, then to `87654321` before switching back. The observed values
+were respectively `12345678` and `87654321`: this callback did not exchange
+the debug register. It restored the original value afterwards, and the modal
+fixture exited 0 with its existing nested-dialog checks passing. The first
+ordinary fixture run did not enter this branch and is not evidence for it.
+The actual result uses one fixture thread and a synthetic second record, with
+direct test writes rather than the MOV-DR/BOP paths; it does not establish a
+real two-task mismatch or prove that another switch boundary cannot restore
+state. No product or guest was modified.
+
+The temporary instrumented fixture SHA-256 is
+`9741626A226B0D32FB1D98182C53FE801BB16D989FD5EEED36441E34ECFFB9B0`;
+the modal executable is
+`09356C7DC5A61150FFE479025C867451533E1B5663CF558246FA8B2638942134`.
+The selected cached `c_main.obj` is
+`FC032B7053936E51B8DC694D65548EFFC28BB774EF830B6230042661D89A3108`,
+and `wow_user_task_lifecycle.obj` is
+`D2E10000A6978E2B03ECB6F771457C5B6D73BC7B350B24BB3FC616C2F51FA12C`.
+The temporary preparation, build log and full fixture output are under
+`build/t473-s11/dr-context-study` and remain subject to task cleanup.
+
 ## Instruction-fetch page-access accounting
 
 NT4 `Ki386DispatchOpcode` and `OpcodeGenericPrefix` read instruction bytes
