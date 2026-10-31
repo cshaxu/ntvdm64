@@ -1,0 +1,4 @@
+case=127
+HW_GATE handled=1 old=202 entry=202 entryvirtual=200 cs=1f eip=200
+case=128
+HW_GATE handled=1 old=3202 entry=3002 entryvirtual=200 cs=1f eip=200

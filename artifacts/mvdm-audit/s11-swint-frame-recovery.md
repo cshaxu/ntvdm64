@@ -196,6 +196,32 @@ contract. The experiments use synthetic vector 31h and controlled descriptors;
 they do not establish an actual immutable DOSX guest call, guest reentry or
 task-switch lifecycle.
 
+The same original-linked CCPU fixture also directly invoked the selected
+`DpmiHwIntHandler` with a controlled installed IRQ-8 handler and locked
+stack. With initial IF=1, entry retained CPU IF at CPL 3 / IOPL 0 despite
+the handler's `setEFLAGS(... & ~IF)`; at IOPL 3 the same code cleared CPU
+IF. The fixed virtual bit remained set in both cases. [Hardware entry
+results](s11-gate-return-evidence/hw-results.txt),
+[fixture diff](s11-gate-return-evidence/hw-fixture.patch). This is a direct
+function invocation with controlled CPU and descriptor state: it does not
+prove a real PIC acknowledgment, a live DOSX entry, nested delivery, or
+successful return. It does show that reviewing software INT alone misses a
+separate hardware-entry owner; a complete repair must include both paths.
+
+The hardware stack-failure route cannot be equated to a generic rollback.
+NT4 `vdm/x86/vdmints.c:PushPmInterrupt` increments the lock count, records
+the prior stack at the first nesting level, switches the trap frame to the
+locked stack, and deliberately publishes the computed invalid ESP before
+returning `STATUS_ACCESS_VIOLATION`; `VdmDispatchInterrupts` then dispatches
+the exception. The selected `DpmiHwIntHandler` instead attempts to end its
+locked-stack use and returns FALSE, causing `ccpu_dispatch_accepted_irq` to
+enter CCPU's ordinary `do_intrupt` fallback; it also attempts to clear flags
+before constructing the stack. Merely restoring registers on FALSE, or
+raising a synthetic guest fault, would not establish the original debugger,
+stack, exception or locked-stack semantics. This remains an S11 execution
+and failure-ownership gap, not a claim that the controlled entry fixture
+proved a live failure.
+
 The original WOW_x86 `riret`/`riretd` macros in `inc/intmac.inc` are
 distinct from `FIRET`: they copy the saved IF to the fixed word before IRET,
 and execute STI/CLI only when `RI_BIT_MASK` is set. The WOW hardware
