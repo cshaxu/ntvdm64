@@ -46,10 +46,16 @@ This is configuration evidence, not runtime or link-semantic proof.
 `WIN32` and `WINNT` are Windows SDK selection flags, not SoftPC CPU profile
 flags. Removing both changed preprocessed declarations in 60 of 61 NTVDM and
 all 71 WOW adapter units: for example the SDK exposes `EndTask` only with
-`WINNT`. The SDK defines `WIN32` itself; one WOW sample had identical
-non-line-marker output without its command-line definition, which alone does
-not establish that removing it from every unit is safe. Both remain pending
-individual review; this is not a claim that both are strictly necessary.
+`WINNT`. The SDK defines `WIN32` itself. Without its command-line definition,
+60 NTVDM adapter and 71 WOW adapter units plus three generated WOW bridges
+matched their previous preprocessed output after removing line markers and
+blank lines. The remaining NTVDM adapter is an empty CCPU callback without
+includes or conditionals. The redundant definition is removed from these
+authored profiles; `WINNT` remains the explicit SDK selection.
+After rebuilding and applying the published package identity, both NTVDM and
+WOW32 matched the tested images byte-for-byte outside their PE COFF and
+debug-directory link timestamps. The published package and its test evidence
+therefore remain unchanged.
 
 The corresponding NTVDM comparison found 50 of 59 selected adapter command
 outputs byte-identical; nine differed. A per-flag follow-up found one of the

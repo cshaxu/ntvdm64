@@ -789,7 +789,7 @@ $baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE 
     ''
 $baseFlags = $baseCommonFlags + ($softpcIncludeRoots -join ' ')
 # Authored adapters consume the selected interfaces, not the SoftPC profile.
-$authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT ' +
+$authoredCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' +
     '/FI "' + (NinjaPath (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h')) + '" '
 $authoredSoftpcFlags = $authoredCommonFlags + ($softpcIncludeRoots -join ' ')
 $ccpuFlags = $baseFlags

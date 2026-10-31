@@ -397,7 +397,7 @@ $force = '/FI "' + (Join-Path $root 'src/opennt-abi/host-compat/include/nt.h') +
 # internal ABI; worker-owned cdecl imports need explicit declarations, not a
 # package-wide /Gd override or aliases that conceal different stack cleanup.
 $cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $includes
-$adapterCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT ' + $force + ' ' + $includes
+$adapterCflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWINNT ' + $force + ' ' + $includes
 
 $ninja = [System.Collections.Generic.List[string]]::new()
 $ninja.Add('ninja_required_version = 1.10')
