@@ -77,6 +77,14 @@ outside that thunk scope has such a live frame or equivalent SEH continuation.
 These source observations limit direct reuse; they do not prove that the NT4
 host path is unreachable or prescribe an alternative failure disposition.
 
+The separate original `nt_msscs.c:DispatchPageFault` searches VDD memory
+hooks and invokes a matched hook; its unmatched path raises a noncontinuable
+access violation with no exception parameters. A symbol search under
+`src/mvdm` found its definition and declaration, but no direct named caller.
+That VDD-hook failure path is therefore not evidence for synthesizing the
+saved-user-frame access exception required by `Kt0e8`; indirect or external
+callers are not ruled out by the search.
+
 ## Selector ownership finding
 
 A direct NT4 source check adds a material qualification to the existing tests: `CsToLinearPM` calls `Ki386GetSelectorParameters`, which accepts a user LDT selector and requires an executable segment; it reads the current descriptor rather than the CPU's hidden segment cache. Many existing selected-CCPU fixtures use synthetic user GDT selectors, so their successes do not prove NT4's CS-selector admission semantics. The current monitor accepts those fixtures through cached CS base/limit. The real installed guest selector and error path must be traced before restricting this path: rejecting previously accepted GDT execution without that evidence would be a new observable compatibility change. Changed-descriptor tests should use a real CCPU LDT as well as the existing GDT controls. The same review applies to LMSW default DS/SS lookup, whose original `VdmSegParams` uses the descriptor table. This is not resolved by the TLB-cache simplification.
@@ -166,6 +174,19 @@ when `Have8087` is set, but the inspected references identify exports and
 debugger-oriented declarations, not a proven normal WOW task-switch call.
 This identifies plausible existing owners to trace; it is not a demonstrated
 failure or authority to modify the guest or original FPU implementation.
+
+The original host also has two narrowly scoped native-x86 FPU guards:
+`nt_bop.c:SafeLoadLibrary` saves/restores the physical x87 around VDD library
+loading, and `wow32/wkgthunk.c:WK32LoadLibraryEx32` does the same around a
+Win32 library load. Both are conditional on `i386`; neither is a WOW task
+switch or a saved CCPU software-FPU context. The original DOS extender's
+startup code explicitly excludes its EM-bit save/clear sequence under `WOW`,
+so that standalone-DOS sequence also cannot be used as proof of WOW task
+isolation. A symbol search in the retained MVDM C, H, ASM and DEF sources
+found WIN87EM save/restore declarations and exports but no named scheduler
+call; ordinal or dynamically resolved consumers are not excluded by that
+search. No state ownership or runtime fix is inferred from absence of a
+named reference.
 
 ## Instruction-fetch page-access accounting
 
