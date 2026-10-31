@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-31T13:59:40.1381952Z",
+  "count": 20,
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "result": "pass",
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-fault-decline-candidate-package"
+}

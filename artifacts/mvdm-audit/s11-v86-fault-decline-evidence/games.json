@@ -1,0 +1,85 @@
+[
+  {
+    "name": "mine",
+    "pid": 15236,
+    "startUtc": "2026-10-31T13:56:47.5383923Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-mine-gameplay.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-game\\mine",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd",
+      "-VisibleDesktop"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T13:56:59.9306452Z"
+  },
+  {
+    "name": "sol",
+    "pid": 20576,
+    "startUtc": "2026-10-31T13:56:59.9849052Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-gameplay.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-game\\sol",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd",
+      "-VisibleDesktop"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T13:57:12.9608950Z"
+  },
+  {
+    "name": "write",
+    "pid": 20500,
+    "startUtc": "2026-10-31T13:57:13.0157719Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-write-lifecycle.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-game\\write",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\msvc-x64.cmd"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T13:57:24.6782090Z"
+  },
+  {
+    "name": "options",
+    "pid": 27304,
+    "startUtc": "2026-10-31T13:57:24.7279584Z",
+    "arguments": [
+      "-NoProfile",
+      "-File",
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\verify-wow-sol-options.ps1",
+      "-PackageRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-package",
+      "-BuildRoot",
+      "O:\\repos.hobby\\ntvdm64\\build\\t473-s11\\v86-fault-decline-candidate-game\\options",
+      "-Observer",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\console-observers-x64\\console-startup-observer.exe",
+      "-CompilerDriver",
+      "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\msvc-x86.cmd",
+      "-VisibleDesktop",
+      "-Rounds",
+      "4"
+    ],
+    "exitCode": 0,
+    "endUtc": "2026-10-31T13:57:55.0998864Z"
+  }
+]

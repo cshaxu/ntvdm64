@@ -58,6 +58,19 @@ matching; see [publication](s11-fault-rollback-evidence/publication.json).
 This delivery is a bounded S11 baseline and does not close the remaining
 monitor, paging or guest-exception ownership work.
 
+The same failure boundary was subsequently checked in V86 fallback. Real
+CCPU cases 213 and 214 observed an absent exception selector returning FALSE
+after changing FLAGS from `20302` to `20202` at low IOPL and from `23302` to
+`23002` with paging enabled. The published CPU40/CCPU correction restores the
+saved flags on that rejection and restores saved ESP and flags after rejected
+frame construction in both modes. Cases 213–216 pass with real CCPU register
+access, including first and nested stack failure; a separately linked selected
+DPMI object passes the same two stack-depth controls. The first two real-CPU
+stack tests initially misdeclared `c_getSS` and compared undefined upper return
+bits; that fixture error and correction are retained in the [evidence](s11-v86-fault-decline-evidence/).
+These tests prove failed-return state under controlled inputs, not successful
+virtual-IF or paged exception reflection or actual guest reachability.
+
 Status: published as a tested partial baseline, not S11 closure. Source
 commit `f1a641bd7`; the isolated candidate was published to both release
 destinations with all 20 hashes verified. The installed `run16 cmd /c ver`
@@ -1151,6 +1164,10 @@ is made that the preserved installed-handler decline fallback is fully NT
 equivalent or that the controlled no-handler case occurs in a real guest.
 The documentation-governance gate still rejects the separate modified S12
 handoff's local path; [failure output](s11-v86-trap-refusal-evidence/governance-nonpass.txt).
+After changing that one path reference to the equivalent installation-relative
+`PATCH/WIN386.CMD` description, the [gate passes on the current working tree](s11-v86-trap-refusal-evidence/governance-working-tree-pass.txt).
+The surrounding S12 handoff remains uncommitted parallel work; this result is
+not a claim about a clean checkout or S11 closure.
 An additional PE-section comparison found the selected worker's `.text`,
 `.data`, detour sections and `.reloc` byte-identical to the tested sealed
 image; `.rdata` and `.rsrc` differ. See

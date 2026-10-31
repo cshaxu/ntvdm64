@@ -180,11 +180,25 @@ int main(int argc, char **argv){
     before_fault_maps=mappings; mock_cr0=0x80000000u; flags=0x23202;
     sp=0x200; cs=0x27; ip=0x1234; *(ULONG *)(memory+0x714)=0xa200;
     CHECK(!DpmiFaultHandler(7, 0));
-    CHECK(mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
+    CHECK(flags==0x23202 && mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
     mock_cr0=0; flags=0x22202;
     CHECK(!DpmiFaultHandler(7, 0));
-    CHECK(mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
+    CHECK(flags==0x22202 && mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
     puts("DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2");
+    return 0;
+  }
+  if(argc==2 && strcmp(argv[1],"--v86-fault-reject")==0) {
+    msw=1; mock_cr0=0; descriptors[1].HighWord.Bits.Pres=1;
+    DpmiFaultHandlers[7].CsSelector=0x0f;
+    for(depth=0;depth<2;++depth) {
+      flags=0x22302; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;
+      cs=0x37; ip=0x1234; LockedPMStackSel=0x17; LockedPMStackCount=depth;
+      descriptors[2].LimitLow=depth ? 0xffff : 1;
+      CHECK(!DpmiFaultHandler(7,0));
+      CHECK(flags==0x22302 && sp==(depth ? 0x21u : 0x200u) &&
+            ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth);
+    }
+    puts("DPMI_V86_FAULT_REJECT_ROLLBACK_OK first=1 nested=1");
     return 0;
   }
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && targets==0 && flags==0x4321);

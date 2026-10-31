@@ -936,7 +936,7 @@ extern BOOL host_swint_hook(long);
 extern long VdmInstallSoftwareIntHandler(void *);
 extern void c_setVM(int), c_setEAX(ULONG), c_setEBP(ULONG), c_setEBX(ULONG);
 extern ULONG c_getEAX(void);
-extern USHORT c_getCS(void), c_getSP(void);
+extern USHORT c_getCS(void), c_getSS(void), c_getSP(void);
 extern void INTx(ULONG);
 extern void ZFRSRVD(ULONG);
 static BOOL swint_origin_probe(ULONG vector) {test_irq=vector; return TRUE;}
@@ -1205,6 +1205,40 @@ static int v86_declining_exception_owner(void) {
     ok=!handled && test_fault==1 && c_getCS()==0x100 && c_getSP()==0x800 && c_getBX()==0xcafe;
     report(ok ? "V86_DECLINING_OWNER_PRESERVED\n" : "V86_DECLINING_OWNER_FAILED\n");
     return ok;
+}
+
+static int v86_missing_exception_owner(void) {
+    extern BOOL DpmiFaultHandler(ULONG, ULONG);
+    unsigned char *ldt=c_GetPhyAdd(0x3000);
+    ULONG before, after;
+    BOOL handled, ok, stack_failure=(test_case==215 || test_case==216);
+    USHORT before_ss, before_sp;
+    char line[140];
+    c_cpu_init(); ZeroMemory(ldt,0x408); Ldt=(LDT_ENTRY *)ldt;
+    c_setPE(1); c_setVM(1); c_setCPL(3); c_setIOPL(test_case==214 ? 3 : 0);
+    c_setCS(0x100); c_setSS(test_case==216 ? 0x17 : 0x200); c_setSP(test_case==216 ? 0x21 : 0x800);
+    c_setEFLAGS(c_getEFLAGS() | 0x100u); c_setIF(1);
+    if(test_case==214) c_setPG(1);
+    DpmiFaultHandlers[7].cs=0;
+    if(stack_failure) {
+        DpmiFaultHandlers[7].cs=0x0f;
+        Ldt[1].HighWord.Bits.Pres=1;
+        Ldt[2].LimitLow=test_case==215 ? 1 : 0xffff;
+        LockedPMStackSel=0x17; LockedPMStackCount=test_case==216 ? 1 : 0;
+        CurrentAppFlags=0;
+    }
+    before=c_getEFLAGS(); before_ss=c_getSS(); before_sp=c_getSP();
+    handled=DpmiFaultHandler(7,0); after=c_getEFLAGS();
+    if(test_case==214) c_setPG(0);
+    ok=!handled && before==after && c_getSS()==before_ss && c_getSP()==before_sp &&
+       (!stack_failure || LockedPMStackCount==(test_case==216 ? 1u : 0u));
+    wsprintfA(line,"V86_MISSING_EXCEPTION_OWNER case=%d pass=%d handled=%d flags=%lx/%lx ss=%x/%x sp=%x/%x depth=%lu\n",
+              test_case,ok,handled,before,after,before_ss,c_getSS(),before_sp,c_getSP(),LockedPMStackCount);
+    report(line);
+    wsprintfA(line,"V86_DECLINE_ASSERT absent=%d flags=%d ss=%d sp=%d depth=%d\n",!handled,before==after,
+              c_getSS()==before_ss,c_getSP()==before_sp,
+              !stack_failure || LockedPMStackCount==(test_case==216 ? 1u : 0u));
+    report(line); return ok;
 }
 
 static int v86_real_divide_fault(void) {
@@ -1480,6 +1514,7 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
+    else if(test_case>=213 && test_case<=216) ok=v86_missing_exception_owner();
     else if(test_case==211 || test_case==212) ok=v86_declining_exception_owner();
     else if((test_case>=157 && test_case<=159) || (test_case>=195 && test_case<=198) || (test_case>=207 && test_case<=210)) ok=v86_trap_instruction();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();

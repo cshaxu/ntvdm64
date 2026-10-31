@@ -1123,7 +1123,7 @@ Return Value:
 #if defined(CPU_40_STYLE) && defined(CCPU)
         /* DIVERGENCE(MVDM-HOST-DIV-486): NT4 commits the exception frame
          * only after successful reflection; keep the fallback's input flags. */
-        if (!(SaveEFLAGS & EFLAGS_VM_MASK)) setEFLAGS(SaveEFLAGS);
+        setEFLAGS(SaveEFLAGS);
 #endif
         return FALSE;
     }
@@ -1149,11 +1149,9 @@ Return Value:
         //BUGBUG Check for double fault
         EndUseLockedPMStack();
 #if defined(CPU_40_STYLE) && defined(CCPU)
-        if (!(SaveEFLAGS & EFLAGS_VM_MASK)) {
-            /* EndUseLockedPMStack restores the outer stack only at depth 0. */
-            setESP(SaveESP);
-            setEFLAGS(SaveEFLAGS);
-        }
+        /* EndUseLockedPMStack restores the outer stack only at depth 0. */
+        setESP(SaveESP);
+        setEFLAGS(SaveEFLAGS);
 #endif
         return FALSE;
     }

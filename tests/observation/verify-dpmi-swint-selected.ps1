@@ -63,6 +63,10 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_INT_IRET32
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-low-fault-result.txt" -SimpleMatch 'DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2')) {
     throw 'Selected DPMI V86 low fault-vector fixture failed'
 }
+& "$out/fixture.exe" --v86-fault-reject | Tee-Object -FilePath "$out/v86-fault-reject-result.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/v86-fault-reject-result.txt" -SimpleMatch 'DPMI_V86_FAULT_REJECT_ROLLBACK_OK first=1 nested=1')) {
+    throw 'Selected DPMI V86 rejected-stack fixture failed'
+}
 & "$out/fixture.exe" --pm-fault-vector14 | Tee-Object -FilePath "$out/pm-fault-result.txt"
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-result.txt" -SimpleMatch 'DPMI_PM_VECTOR14_FRAME_OK')) {
     throw 'Selected DPMI protected fault-vector fixture failed'
