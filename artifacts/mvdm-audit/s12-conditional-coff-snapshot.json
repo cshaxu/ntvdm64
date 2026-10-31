@@ -1,0 +1,66 @@
+{
+  "out": {
+    "mvdm": {
+      "sources_observed": 443,
+      "all_objects_no_code_section": 38,
+      "no_code_files": [
+        "src/mvdm/softpc.new/host/src/cpucstbs.c",
+        "src/mvdm/softpc.new/host/src/nt_sas.c",
+        "src/mvdm/softpc.new/host/src/x86_emm.c",
+        "src/mvdm/softpc.new/base/disks/gfi_ibm.c",
+        "src/mvdm/softpc.new/base/disks/gfi_sflp.c",
+        "src/mvdm/softpc.new/base/disks/gfi_test.c",
+        "src/mvdm/softpc.new/base/video/ega_trcr.c",
+        "src/mvdm/softpc.new/base/cvidc/evidfunc.c",
+        "src/mvdm/softpc.new/base/cvidc/vglfunc.c",
+        "src/mvdm/softpc.new/base/comms/prt_scrn.c",
+        "src/mvdm/dos/dem/demdata.c",
+        "src/mvdm/dos/dem/demmsg.c",
+        "src/mvdm/dos/command/cmddata.c",
+        "src/mvdm/dpmi32/debug.c",
+        "src/mvdm/softpc.new/base/debug/debuggng.c",
+        "src/mvdm/softpc.new/base/debug/ega_dump.c",
+        "src/mvdm/softpc.new/base/debug/btrace.c",
+        "src/mvdm/softpc.new/base/debug/pigyoda.c",
+        "src/mvdm/softpc.new/base/debug/dasm.c",
+        "src/mvdm/softpc.new/base/ccpu386/bswap.c",
+        "src/mvdm/softpc.new/base/ccpu386/ccpupig.c",
+        "src/mvdm/softpc.new/base/ccpu386/cmpxchg.c",
+        "src/mvdm/softpc.new/base/ccpu386/c_getset.c",
+        "src/mvdm/softpc.new/base/ccpu386/invd.c",
+        "src/mvdm/softpc.new/base/ccpu386/invlpg.c",
+        "src/mvdm/softpc.new/base/ccpu386/wbinvd.c",
+        "src/mvdm/softpc.new/base/ccpu386/xadd.c",
+        "src/mvdm/softpc.new/base/ccpu386/localfm.c",
+        "src/mvdm/vdmredir/vrdlcdbg.c",
+        "src/mvdm/vdmredir/vrdebug.c",
+        "src/mvdm/wow32/wmtbl32.c",
+        "src/mvdm/wow32/wgman.c",
+        "src/mvdm/wow32/wmmedia1.c",
+        "src/mvdm/wow32/wmmedia2.c",
+        "src/mvdm/wow32/wmmstruc.c",
+        "src/mvdm/wow32/wmmstru1.c",
+        "src/mvdm/wow32/wmmstru2.c",
+        "src/mvdm/wow32/wthman.c"
+      ],
+      "some_code": 405
+    },
+    "non-mvdm": {
+      "sources_observed": 94,
+      "all_objects_no_code_section": 3,
+      "no_code_files": [
+        "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+        "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+        "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c"
+      ],
+      "some_code": 91
+    },
+    "compat": {
+      "sources_observed": 2,
+      "all_objects_no_code_section": 0,
+      "no_code_files": [],
+      "some_code": 2
+    }
+  },
+  "errors": []
+}

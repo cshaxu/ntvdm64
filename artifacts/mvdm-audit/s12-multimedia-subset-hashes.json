@@ -1,0 +1,37 @@
+[
+  {
+    "path": "src/mvdm/wow32/wmmedia1.c",
+    "prior_sha256": "cea78423a1a9d0c77c48511201a79ef6d137904336bc112c36fcb265048eab48",
+    "upstream_normalized_equal": true,
+    "new_sha256": "3c29f28fabf2afa437db976b8ff78ca168bcd93da75b5c92e32f5958b7959b22",
+    "removed_physical_lines": 514
+  },
+  {
+    "path": "src/mvdm/wow32/wmmedia2.c",
+    "prior_sha256": "7241b536fe7230764b4004f3e05646d9eededd6c83aea8724a932c9071cc7443",
+    "upstream_normalized_equal": true,
+    "new_sha256": "62bbbd3d78e7054d576ee3b9063513dc594a707b7ddec9d2471c0ea6904b3acd",
+    "removed_physical_lines": 3341
+  },
+  {
+    "path": "src/mvdm/wow32/wmmstru1.c",
+    "prior_sha256": "d2ca490eea2a5fe46806a1a079e3da93dfa61b00cbe615173d478fd9b792212f",
+    "upstream_normalized_equal": true,
+    "new_sha256": "926fb69806deb63ea93376f68b96106be63bc4cb5f23a08c842462f8a9af5d4a",
+    "removed_physical_lines": 1550
+  },
+  {
+    "path": "src/mvdm/wow32/wmmstru2.c",
+    "prior_sha256": "fb647aa2cf3c881c6bbf47e449c5944435da46b39c99d4efc5080888eaa44cc4",
+    "upstream_normalized_equal": true,
+    "new_sha256": "df0955f80f0662f8d81ac73bf974ba43f23dc9c1e1449294dfc31ae82efe41c5",
+    "removed_physical_lines": 512
+  },
+  {
+    "path": "src/mvdm/wow32/wmmstruc.c",
+    "prior_sha256": "7d636a1dca27ac98e27a2cc419fa3253ccc0c1371c735b0df00347915b292ecf",
+    "upstream_normalized_equal": true,
+    "new_sha256": "d85846be9128ef59e6e9d62e83f1a4ccefade9e2541016f18cd430af2723b277",
+    "removed_physical_lines": 727
+  }
+]
