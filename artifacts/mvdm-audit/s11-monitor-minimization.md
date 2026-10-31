@@ -36,6 +36,29 @@ Relative to the immediate baseline, mirrored `c_tlb.c` is +13/-36, net -23 lines
 
 The selected SAS physical store is reserved with `VirtualAlloc` (`host/src/nt_mem.c:InitIntelMemory`) and `c_GetPhyAdd` resolves physical bindings (`base/ccpu386/ccpusas4.c`). Two nonadjacent guest physical pages do not thereby form one contiguous native pointer. Original user `EventVdmStringIo` passes a direct SIM32 pointer; the distinct NT4 kernel `VdmCallStringIoHandler` deliberately uses a kernel buffer. The selected SoftPC IOS table is reached through the user-event-equivalent path, so citing the kernel buffer does not establish equivalent reentrant visibility. Creating an additional copied alias or imposing a new shared-memory backing is not an already established same-semantics solution. The two-byte noncontiguous fallback remains explicitly partial while existing page/mapping owners and reversible alias options are examined.
 
+This callback boundary is not limited to the built-in generic word handlers.
+The selected original `VDDInstallIOHook` in `host/src/nt_vdd.c` accepts
+optional VDD `insw_handler` and `outsw_handler` functions and installs them
+through `io_define_in_routines` and `io_define_out_routines`; the original
+`insw`/`outsw` entries in `base/support/ios.c` call the registered function
+with its pointer and count. Consequently splitting one word into byte I/O or
+assuming every device uses the generic handler is not a source-equivalent
+replacement. This establishes an allowed callback registration path, not that
+an installed VDD actually exercises a noncontiguous mapping or reenters.
+The current cached worker image (SHA-256
+`99BE9489EF361B97F77BFAE036FDBDA9F3A6202A1826258FF3FEE756B0C50400`,
+the V86guard release's pre-sealing input) links `VDDInstallIOHook` from
+`nt_vdd.obj` and `insw`/`outsw` from `ios.obj`; that link-map observation is
+not itself a call or a proof of guest reachability.
+The earlier [S44 live VDD evidence](../../docs/etc/evidence/m0-t420-s44-vdd-capability-ledger.md)
+does demonstrate real BOP registration and guest byte input/output on port
+E9h, but its test provider registers no string handlers and its detach
+`HOOK_REMOVE_OK` marker concerns the user hook, not an I/O-hook retirement
+assertion. It cannot validate a custom word-string callback or its unload
+lifetime. The separate original VDD teardown findings remain with their
+existing S13 ownership and are not repaired as unrelated original internals
+in S11.
+
 For unresolvable monitor-internal reads, `trap.asm:Kt0e8` dispatches a user exception from the saved user frame; the selected CCPU callback runs inside the exception delivery and may nonlocally return. `W32Exception` is present at WOW thunk boundaries and its existence alone does not establish a DOS or nested CPU-to-WOW exception handoff. Calling `RaiseException` or substituting guest #PF/#GP without tracing that owner would change observable behavior. No replacement is admitted by this observation.
 
 The actual source constraints are narrower than a generic “raise an access
@@ -104,6 +127,45 @@ observable bit projection only: it does not establish that CCPU and NT4 have
 equivalent FPU execution, NPX context switching, actual #NM delivery,
 callbacks or process teardown. The fixture uses its documented
 `/force:multiple` host seams and no guest binary is changed.
+
+The selected source stores the CCPU control-register array `CCPU_CR` as
+process-global CPU state in `base/ccpu386/c_main.c`; the monitor's CR0 write
+modifies its EM/MP bits via `c_setCR0`. By contrast, the native NT4 monitor's
+CR0 read maps the current thread's floating-point save-area `FpCr0NpxState`.
+The CCPU `ntthread.c` TLS structure is specifically a simulation/exception
+jump-buffer stack; that structure alone is not evidence of per-task CR0
+storage. These facts do not prove a leak between WOW tasks: the guest and
+scheduler may save or restore relevant state elsewhere. The actual task-switch
+path and FPU state ownership must be traced before adding a second authority
+or claiming equivalent per-task behavior.
+
+The original WOW guest source distinguishes its path from the standalone
+Windows 3.1 scheduler: `kernel31/makefile` selects `tasking.obj`;
+`tasking.asm:SwitchTask` calls `SaveState` then returns through
+`WOW16CallNewTaskRet`, and its `SaveState` places `fstcw TDB_FCW` inside
+`if 0`. The separate `schedule.asm` contains conditional `fstcw` and `fldcw`,
+but treating that separate scheduler as evidence for WOW would be wrong.
+On the host side, `wkman.c:W32RemoteThread` saves named general/segment
+registers, not CR0, and `wow_callback_control_restore` explicitly does not
+reinstate a saved NPX value. These are selected source-path observations,
+not proof of the bytes or execution of a particular installed guest, nor a
+complete enumeration of any other FPU context owner. In particular an x87
+control word is not CR0.EM/MP. No per-task FPU or CR0 repair follows from
+this source comparison alone. The current copies of these three guest-source
+files (`tasking.asm`, `schedule.asm`, `makefile`) match the read-only OpenNT
+source hashes; no guest was built or changed.
+
+The selected link map places `FSAVE` and `FRSTOR` in original CCPU `fpu.obj`.
+That software implementation keeps its control/status and stack pointers in
+file-static CPU storage, while `c_getset.c`'s complete CPU/NPX state transfer
+is under `PIG` rather than the selected PROD configuration. This means native
+Windows thread FPU context switching alone cannot be assumed to save the
+emulated state. The retained `WIN87EM` source does contain explicit
+`__WIN87EMSAVE` and `__WIN87EMRESTORE` entries using guest `fsave`/`frstor`
+when `Have8087` is set, but the inspected references identify exports and
+debugger-oriented declarations, not a proven normal WOW task-switch call.
+This identifies plausible existing owners to trace; it is not a demonstrated
+failure or authority to modify the guest or original FPU implementation.
 
 ## Instruction-fetch page-access accounting
 

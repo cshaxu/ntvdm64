@@ -52,3 +52,9 @@ and S14 owns any demonstrated Win16 callback implications. A supported real
 provider, ordering and width witness must be established before any repair or
 capability exclusion. No source, product, guest or system configuration was
 changed by this review.
+
+The same PE/map check was rerun after the V86guard release on the current
+cached NTVDM input (`99BE9489EF361B97F77BFAE036FDBDA9F3A6202A1826258FF3FEE756B0C50400`).
+The actual B1 table slot still targets `virtual_device_trap`; the
+[result](v86guard-bop-result.txt) identifies the tested image. This remains
+a selection check, not a live fallback invocation or provider-lifetime test.
