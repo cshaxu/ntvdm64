@@ -3,7 +3,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <setjmp.h>
 #pragma pack(push,1)
 typedef struct { USHORT CsSelector, Flags; ULONG Eip; } HANDLER;
 #pragma pack(pop)
@@ -11,8 +10,6 @@ extern HANDLER DpmiInterruptHandlers[256];
 typedef struct { USHORT CsSelector, SsSelector; ULONG Eip, Esp, Flags; } FAULT_HANDLER;
 extern FAULT_HANDLER DpmiFaultHandlers[32];
 extern BOOL __cdecl DpmiSwIntHandler(ULONG);
-extern BOOL __cdecl DpmiV86SoftwareInt(ULONG, BOOL);
-extern BOOL __cdecl DpmiV86SoftwareIntAt(ULONG, BOOL, USHORT);
 extern BOOL __cdecl DpmiFaultHandler(ULONG, ULONG);
 extern void __cdecl DpmiFaultHandlerIret32(void);
 extern void __cdecl DpmiIntHandlerIret32(void);
@@ -78,19 +75,6 @@ void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
 LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;++ldt_publications;return 0;}
-static ULONG v86_reads, v86_writes;
-static ULONG v86_order[8], v86_sp[8], v86_flags[8], v86_order_count;
-static unsigned v86_fail_at;
-static jmp_buf v86_failure;
-static void v86_record(ULONG address) {
-  if(v86_order_count<8) { v86_order[v86_order_count]=address; v86_sp[v86_order_count]=sp;
-    v86_flags[v86_order_count++]=flags; }
-  if(v86_fail_at && v86_order_count==v86_fail_at) longjmp(v86_failure,1);
-}
-ULONG spr_read_dword(ULONG address){++v86_reads; v86_record(0x80000000u|address); return *(ULONG *)(memory+address);}
-void spr_write_word(ULONG address,USHORT value){++v86_writes; v86_record(address); *(USHORT *)(memory+address)=value;}
-void host_cpu40_set_virtual_if(BOOL enabled)
-{if(enabled) *(ULONG *)(memory+0x714)|=0x200; else *(ULONG *)(memory+0x714)&=~0x200u;}
 void *Sim32pGetVDMPointer(ULONG address,ULONG mode){(void)address;(void)mode;mappings++;return mapping_unavailable ? NULL : memory;}
 void *Sim32pGetVDMPointerWithLinear(ULONG address, UCHAR mode, ULONG *linear)
 { *linear=sizeof(memory); return Sim32pGetVDMPointer(address,mode); }
@@ -161,113 +145,6 @@ int main(int argc, char **argv){
     puts("DPMI_PM_VECTOR14_FRAME_OK");
     return 0;
   }
-  if(argc==2 && strcmp(argv[1],"--v86-nt4-vector7")==0) {
-    /* NT4 PushException: V86 exceptions 0–7 use the real-mode IVT and
-     * 16-bit stack, even without a protected-mode selector. */
-    for(mode=0;mode<8;++mode) for(order=0;order<2;++order) {
-      msw=1; mock_cr0=0; flags=0x23302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
-      *(ULONG *)(memory+0x714)=0xa203;
-      DpmiFaultHandlers[mode].Flags=order;
-      *(USHORT *)(memory+mode*4)=0x456; *(USHORT *)(memory+mode*4+2)=0x300;
-      CHECK(DpmiFaultHandler(mode, 0));
-      CHECK(sp==0x1fa && cs==0x300 && ip==0x456);
-      CHECK(*(USHORT *)(memory+0x1fa)==0x1234 &&
-            *(USHORT *)(memory+0x1fc)==0x27 && *(USHORT *)(memory+0x1fe)==0x3302);
-      CHECK(flags==(order ? 0x23002u : 0x23202u));
-      CHECK(*(ULONG *)(memory+0x714)==(order ? 0xa003u : 0xa203u));
-    }
-    /* Paged cases remain on the existing path: this is not proof of NT4
-     * paged reflection semantics. */
-    DpmiFaultHandlers[7].Flags=0; DpmiFaultHandlers[7].CsSelector=0;
-    before_fault_maps=mappings; mock_cr0=0x80000000u; flags=0x23202;
-    sp=0x200; cs=0x27; ip=0x1234; *(ULONG *)(memory+0x714)=0xa200;
-    CHECK(!DpmiFaultHandler(7, 0));
-    CHECK(flags==0x23202 && mappings==before_fault_maps && *(ULONG *)(memory+0x714)==0xa200);
-    for(mode=0;mode<3;++mode) for(order=0;order<2;++order) {
-      mock_cr0=0; flags=0x20302 | (mode<<12); ss=0; sp=0x200; cs=0x27; ip=0x1234;
-      *(ULONG *)(memory+0x714)=0xa203; DpmiFaultHandlers[7].Flags=order;
-      *(ULONG *)(memory+28)=0x03000456;
-      CHECK(DpmiFaultHandler(7,0));
-      CHECK(sp==0x1fa && cs==0x300 && ip==0x456 && *(USHORT *)(memory+0x1fe)==0x3302);
-      CHECK((flags & 0x200)==(order ? 0u : 0x200u));
-      CHECK(*(ULONG *)(memory+0x714)==(order ? 0xa003u : 0xa203u));
-    }
-    puts("DPMI_V86_LOW_FAULT_REFLECTION_OK vectors=8 gates=2");
-    return 0;
-  }
-  if(argc==2 && strcmp(argv[1],"--v86-fault-reject")==0) {
-    msw=1; mock_cr0=0x80000000u; descriptors[1].HighWord.Bits.Pres=1;
-    DpmiFaultHandlers[7].CsSelector=0x0f;
-    for(depth=0;depth<2;++depth) {
-      flags=0x22302; sp=depth ? 0x21 : 0x200; ss=depth ? 0x17 : 0x27;
-      cs=0x37; ip=0x1234; LockedPMStackSel=0x17; LockedPMStackCount=depth;
-      descriptors[2].LimitLow=depth ? 0xffff : 1;
-      CHECK(!DpmiFaultHandler(7,0));
-      CHECK(flags==0x22302 && sp==(depth ? 0x21u : 0x200u) &&
-            ss==(depth ? 0x17 : 0x27) && cs==0x37 && ip==0x1234 && LockedPMStackCount==depth);
-    }
-    puts("DPMI_V86_FAULT_REJECT_ROLLBACK_OK first=1 nested=1");
-    return 0;
-  }
-  if(argc==2 && strcmp(argv[1],"--v86-fault-access-failure")==0) {
-    /* Selected-object seam: stop at each access before it mutates memory.
-     * This checks partial frame order, not real CCPU exception delivery. */
-    for(mode=1;mode<=4;++mode) {
-      msw=1; mock_cr0=0; flags=0x23302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
-      *(ULONG *)(memory+0x714)=0xa203;
-      *(USHORT *)(memory+0x1fe)=0xaaaa;
-      *(USHORT *)(memory+0x1fc)=0xbbbb;
-      *(USHORT *)(memory+0x1fa)=0xcccc;
-      v86_order_count=0; v86_fail_at=mode;
-      if(setjmp(v86_failure)==0) {
-        (void)DpmiFaultHandler(7,0);
-        CHECK(0);
-      }
-      CHECK(v86_order_count==mode && sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x23302);
-      CHECK(*(ULONG *)(memory+0x714)==0xa203);
-      CHECK(*(USHORT *)(memory+0x1fe)==(mode>1 ? 0x3302 : 0xaaaa));
-      CHECK(*(USHORT *)(memory+0x1fc)==(mode>2 ? 0x27 : 0xbbbb));
-      CHECK(*(USHORT *)(memory+0x1fa)==(mode>3 ? 0x1234 : 0xcccc));
-    }
-    puts("DPMI_V86_FAULT_ACCESS_FAILURE_OK stages=4 mocked=1");
-    return 0;
-  }
-  if(argc==2 && strcmp(argv[1],"--v86-low-int-access-failure")==0) {
-    /* NT4 V86Intnn reads the IVT, writes FLAGS and CS, clears virtual IF,
-     * and then writes IP. Stop before each access and inspect partial state. */
-    for(mode=1;mode<=4;++mode) {
-      mock_cr0=0; flags=0x20302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
-      *(ULONG *)(memory+0x714)=0xa203; DpmiInterruptHandlers[0x31].Flags=0;
-      *(USHORT *)(memory+0x1fe)=0xaaaa; *(USHORT *)(memory+0x1fc)=0xbbbb;
-      *(USHORT *)(memory+0x1fa)=0xcccc;
-      v86_order_count=0; v86_fail_at=mode;
-      if(setjmp(v86_failure)==0) { (void)DpmiV86SoftwareIntAt(0x31,FALSE,0x1236); CHECK(0); }
-      CHECK(v86_order_count==mode && sp==0x200 && cs==0x27 && ip==0x1234);
-      CHECK(flags==(mode==4 ? 0x20102u : 0x20302u));
-      CHECK(*(ULONG *)(memory+0x714)==(mode==4 ? 0xa003u : 0xa203u));
-      CHECK(*(USHORT *)(memory+0x1fe)==(mode>2 ? 0x3302 : 0xaaaa));
-      CHECK(*(USHORT *)(memory+0x1fc)==(mode>3 ? 0x27 : 0xbbbb));
-      CHECK(*(USHORT *)(memory+0x1fa)==0xcccc);
-    }
-    puts("DPMI_V86_LOW_INT_ACCESS_FAILURE_OK stages=4 mocked=1");
-    return 0;
-  }
-  if(argc==2 && strcmp(argv[1],"--v86-low-prefix-access-failure")==0) {
-    for(mode=1;mode<=4;++mode) {
-      mock_cr0=0; flags=0x20302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
-      *(ULONG *)(memory+0x714)=0xa203; DpmiInterruptHandlers[0x31].Flags=0;
-      *(USHORT *)(memory+0x1fe)=0xaaaa; *(USHORT *)(memory+0x1fc)=0xbbbb;
-      *(USHORT *)(memory+0x1fa)=0xcccc; v86_order_count=0; v86_fail_at=mode;
-      if(setjmp(v86_failure)==0) { (void)DpmiV86SoftwareIntAt(0x31,TRUE,0x1237); CHECK(0); }
-      CHECK(v86_order_count==mode && sp==(mode==4 ? 0x1fa : 0x200) && cs==0x27 && ip==0x1234);
-      CHECK(flags==0x20002u && *(ULONG *)(memory+0x714)==0xa003u);
-      CHECK(*(USHORT *)(memory+0x1fe)==(mode>1 ? 0x3302 : 0xaaaa));
-      CHECK(*(USHORT *)(memory+0x1fc)==(mode>2 ? 0x27 : 0xbbbb));
-      CHECK(*(USHORT *)(memory+0x1fa)==(mode>3 ? 0x1237 : 0xcccc));
-    }
-    puts("DPMI_V86_LOW_PREFIX_ACCESS_FAILURE_OK stages=4 mocked=1");
-    return 0;
-  }
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && targets==0 && flags==0x4321);
   descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=15;
   CHECK(DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==1 && dispatches==1);
@@ -275,73 +152,6 @@ int main(int argc, char **argv){
   msw=1; sp=2; descriptors[2].LimitLow=0xffff;
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==2 && dispatches==1);
   puts("DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1");
-  flags=0x27302; ss=0; sp=0x200; cs=0x27; ip=0x1234;
-  *(USHORT *)(memory+0x31*4)=0x456; *(USHORT *)(memory+0x31*4+2)=0x300;
-  DpmiInterruptHandlers[0x31].Flags=0;
-  CHECK(DpmiV86SoftwareInt(0x31, FALSE));
-  CHECK(sp==0x1fa && cs==0x300 && ip==0x456 && flags==0x23002);
-  CHECK(*(USHORT *)(memory+0x1fa)==0x1234 &&
-        *(USHORT *)(memory+0x1fc)==0x27 && *(USHORT *)(memory+0x1fe)==0x7302);
-  CHECK(v86_reads==1 && v86_writes==3);
-  flags=0x23202; sp=0x200; cs=0x27; ip=0x1234;
-  DpmiInterruptHandlers[0x31].Flags=4;
-  CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
-  CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x23202);
-  mock_cr0=0x80000000u;
-  DpmiInterruptHandlers[0x31].Flags=0; flags=0x20202;
-  CHECK(!DpmiV86SoftwareInt(0x31, TRUE));
-  CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x20202);
-  flags=0x21202; CHECK(!DpmiV86SoftwareInt(0x31, TRUE));
-  CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x21202);
-  flags=0x22202; CHECK(!DpmiV86SoftwareInt(0x31, TRUE));
-  CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x22202);
-  mock_cr0=0;
-  flags=0x3202; CHECK(!DpmiV86SoftwareInt(0x31, FALSE));
-  CHECK(sp==0x200 && cs==0x27 && ip==0x1234 && flags==0x3202);
-  CHECK(v86_reads==1 && v86_writes==3);
-  puts("DPMI_V86_INT_OWNER_OK ivt=1 hooked=untouched virtual_if=untouched pm=untouched");
-  flags=0x27302; ss=0; sp=4; cs=0x27; ip=0x1234; v86_order_count=0;
-  CHECK(DpmiV86SoftwareInt(0x31, TRUE));
-  CHECK(sp==0xfffe && cs==0x300 && ip==0x456 && flags==0x23002);
-  CHECK(*(USHORT *)(memory+2)==0x7302 && *(USHORT *)memory==0x27 &&
-        *(USHORT *)(memory+0xfffe)==0x1234);
-  CHECK(v86_order_count==4 && v86_order[0]==2 && v86_order[1]==0 &&
-        v86_order[2]==0xfffe && v86_order[3]==(0x80000000u|0xc4));
-  CHECK(v86_sp[0]==4 && v86_sp[1]==4 && v86_sp[2]==4 && v86_sp[3]==0xfffe &&
-        v86_flags[0]==0x23002 && v86_flags[1]==0x23002 &&
-        v86_flags[2]==0x23002 && v86_flags[3]==0x23002);
-  puts("DPMI_V86_PREFIX_SLOW_ORDER_OK wraps=1 ivt_last=1");
-  for(v86_fail_at=1;v86_fail_at<=4;v86_fail_at++) {
-    flags=0x27302; ss=0; sp=4; cs=0x27; ip=0x1234; v86_order_count=0;
-    *(USHORT *)(memory+2)=*(USHORT *)memory=*(USHORT *)(memory+0xfffe)=0xaaaa;
-    if(!setjmp(v86_failure)) { DpmiV86SoftwareInt(0x31, TRUE); CHECK(0); }
-    CHECK(flags==0x23002 && cs==0x27 && ip==0x1234);
-    CHECK(sp==(v86_fail_at==4 ? 0xfffe : 4));
-    CHECK(*(USHORT *)(memory+2)==(v86_fail_at>1 ? 0x7302 : 0xaaaa));
-    CHECK(*(USHORT *)memory==(v86_fail_at>2 ? 0x27 : 0xaaaa));
-    CHECK(*(USHORT *)(memory+0xfffe)==(v86_fail_at>3 ? 0x1234 : 0xaaaa));
-  }
-  v86_fail_at=0;
-  puts("DPMI_V86_PREFIX_PARTIAL_FAILURE_OK stages=4 mocked=1");
-  /* NT4 PushException refuses V86 vectors above 7 before touching state,
-   * regardless of whether a protected-mode fault vector is installed. */
-  before_fault_maps=mappings; before_fault_dispatches=dispatches;
-  msw=1; flags=0x23302; sp=0x200; cs=0x27; ip=0x1234;
-  CHECK(!DpmiFaultHandler(14, 2));
-  CHECK(flags==0x23302 && sp==0x200 && cs==0x27 && ip==0x1234);
-  CHECK(mappings==before_fault_maps && dispatches==before_fault_dispatches);
-  CHECK(!DpmiFaultHandler(8, 0));
-  CHECK(flags==0x23302 && sp==0x200 && cs==0x27 && ip==0x1234);
-  CHECK(!DpmiFaultHandler(31, 0));
-  CHECK(flags==0x23302 && sp==0x200 && cs==0x27 && ip==0x1234);
-  descriptors[1].HighWord.Bits.Pres=1; DpmiFaultHandlers[14].CsSelector=0x0f;
-  CHECK(!DpmiFaultHandler(14, 2));
-  CHECK(flags==0x23302 && sp==0x200 && cs==0x27 && ip==0x1234);
-  CHECK(mappings==before_fault_maps && dispatches==before_fault_dispatches);
-  DpmiFaultHandlers[14].CsSelector=0;
-  flags=0x3302; CHECK(!DpmiFaultHandler(14, 2));
-  CHECK(flags==0x3302 && sp==0x200 && cs==0x27 && ip==0x1234);
-  puts("DPMI_V86_HIGH_FAULT_DECLINED_OK installed=2 protected=unchanged");
   msw=0;
   flags=0x4321; ss=16;
   /* NT4 PushInt selects frame width from the installed handler, independently

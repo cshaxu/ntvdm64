@@ -861,9 +861,6 @@ IFN1(
       /* Prefix handling variables */
    IU8 repeat;		/* Repeat Prefix for current inst. */
    IU32 rep_count;		/* Repeat Count for string insts. */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-   BOOL v86_int_unsafe_prefix;
-#endif
 
       /* General CPU variables */
    IU32 ip_phy_addr;		/* Used when setting up IP */
@@ -941,9 +938,6 @@ DO_INST:
    /* 'zero' all prefix byte indicators */
    segment_override = SEG_CLR;
    repeat = REP_CLR;
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-   v86_int_unsafe_prefix = FALSE;
-#endif
 
    /*
       Decode and Action instruction.
@@ -3611,82 +3605,19 @@ TYPEC4:
       F_I3(0);
       UPDATE_INTEL_IP(p);
       start_trap = 0;   /* clear any pending TF exception */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      /* DIVERGENCE(MVDM-HOST-DIV-489): NT4 delivers the one-byte INT3
-       * as a VDM exception, not as the CD 03 software-INT path. Limit
-       * this route to the existing unpaged V86 fault owner. */
-      {
-      extern BOOL host_exint_hook(IS32, IS32);
-      if (!GET_VM() || GET_PG() || !host_exint_hook(3, 0))
-#endif
       INTx(ops[0].sng);
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      }
-#endif
       CANCEL_HOST_IP();
       PIG_SYNCH(CHECK_ALL);
       break;
 
    case 0xcd:   /* T2 INT Ib */
       if ( GET_VM() == 1 && GET_CPL() > GET_IOPL() )
-	 {
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-         /* NT4's V86 monitor handles the unpaged fast and slow paths.
-          * A declined handler retains the existing GP route. */
-         if (!GET_PG() && !v86_int_unsafe_prefix) {
-            extern BOOL host_v86_software_int_at(IS32, BOOL, IU16);
-            IU16 next_ip, length;
-            D_Ib(0);
-            UPDATE_INTEL_IP(p);
-            next_ip = (IU16)GET_EIP();
-            length = (IU16)(GET_EIP() - CCPU_save_EIP);
-            SET_EIP(CCPU_save_EIP);
-            if (length >= 2 && length <= 15 &&
-                host_v86_software_int_at((IS32)ops[0].sng, length > 2, next_ip)) {
-               took_absolute_toc = TRUE;
-               start_trap = 0;
-               CANCEL_HOST_IP();
-               PIG_SYNCH(CHECK_ALL);
-               break;
-            }
-         }
-#endif
 	 GP((IU16)0, FAULT_CCPU_INT_ACCESS);
-	 }
       took_absolute_toc = TRUE;
       D_Ib(0);
       UPDATE_INTEL_IP(p);
       start_trap = 0;   /* clear any pending TF exception */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      /* DIVERGENCE(MVDM-HOST-DIV-483): only this decoded software INT,
-       * never another INTx caller, enters the V86 host reflector. */
-      {
-      extern BOOL host_v86_software_int(IS32, BOOL);
-      extern BOOL host_v86_trap(IS32, BOOL);
-      IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
-      /* DIVERGENCE(MVDM-HOST-DIV-490): the NT V86 slow dispatcher
-       * constructs a 16-bit INT frame even with operand-size prefixes.
-       * Exclude LOCK, F1 and overlength instructions. */
-      if (GET_VM() && GET_IOPL() == 3 && !GET_PG() && length >= 2 &&
-          length <= 15 && !v86_int_unsafe_prefix &&
-          (ops[0].sng == 3 || ops[0].sng == 4)) {
-         /* NT4's user-accessible IDT gates reflect these as exceptions. */
-         if (!host_v86_trap((IS32)ops[0].sng, length > 2)) INTx(ops[0].sng);
-      } else if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
-          /* Preserve the previous paged and NT service-gate fallbacks.
-           * CCPU retries paged faults after a nonlocal exit; the NT slow
-           * handler's earlier flag commit cannot be replayed unchanged. */
-          (GET_OPERAND_SIZE() != USE16 &&
-           (GET_PG() || (ops[0].sng >= 0x2b && ops[0].sng <= 0x2e))) ||
-          /* NT4's V86 INT 2Ah gate rewinds to CD before trap dispatch. */
-          !host_v86_software_int((IS32)ops[0].sng,
-                                 length > 2 && !GET_PG() &&
-                                 !(ops[0].sng >= 0x2a && ops[0].sng <= 0x2e)))
-#endif
       INTx(ops[0].sng);
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      }
-#endif
       CANCEL_HOST_IP();
       PIG_SYNCH(CHECK_ALL);
       break;
@@ -3697,16 +3628,7 @@ TYPEC4:
 	 took_absolute_toc = TRUE;
 	 UPDATE_INTEL_IP(p);
 	 start_trap = 0;   /* clear any pending TF exception */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-         /* NT4's taken INTO follows the vector-4 exception path. */
-         {
-         extern BOOL host_exint_hook(IS32, IS32);
-         if (!GET_VM() || GET_PG() || !host_exint_hook(4, 0))
-#endif
 	 INTO();
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-         }
-#endif
 	 CANCEL_HOST_IP();
 	 PIG_SYNCH(CHECK_ALL);
 	 }
@@ -4176,16 +4098,10 @@ TYPEE8:
       break;
 
    case 0xf0:   /* T0 LOCK */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      v86_int_unsafe_prefix = TRUE;
-#endif
       CHECK_PREFIX_LENGTH();
       goto DECODE;   /* NB. Incorrect Emulation! */
 
    case 0xf1:
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-      v86_int_unsafe_prefix = TRUE;
-#endif
       CHECK_PREFIX_LENGTH();
       goto DECODE;
 

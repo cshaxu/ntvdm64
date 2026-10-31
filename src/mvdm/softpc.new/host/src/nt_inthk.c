@@ -145,22 +145,6 @@ OUTPUT:
 
 
 #if defined(CCPU) || !defined(PROD)
-#ifdef CCPU
-/* A decoded V86 INT is distinct from x87 exceptions that also call INTx. */
-GLOBAL BOOL host_v86_software_int IFN2(IS32, int_no, BOOL, prefixed)
-{
-    extern BOOL DpmiV86SoftwareInt(ULONG, BOOL);
-    extern BOOL DpmiSwIntHandler(ULONG);
-    return SWIntHandler == DpmiSwIntHandler && DpmiV86SoftwareInt((ULONG)int_no, prefixed);
-}
-GLOBAL BOOL host_v86_software_int_at IFN3(IS32, int_no, BOOL, prefixed, IU16, return_ip)
-{
-    extern BOOL DpmiV86SoftwareIntAt(ULONG, BOOL, USHORT);
-    extern BOOL DpmiSwIntHandler(ULONG);
-    return SWIntHandler == DpmiSwIntHandler &&
-        DpmiV86SoftwareIntAt((ULONG)int_no, prefixed, return_ip);
-}
-#endif
 GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 {
     BOOL returnStatus = FALSE;
@@ -200,16 +184,6 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 
     return( returnStatus );
 }
-#ifdef CCPU
-/* An installed exception owner retains the original decline/fallback
- * contract; only absence permits the separate V86 software reflector. */
-GLOBAL BOOL host_v86_trap IFN2(IS32, int_no, BOOL, prefixed)
-{
-    BOOL handlerInstalled = EXIntHandler != NULL;
-    BOOL handled = host_exint_hook(int_no, 0);
-    return handled || (!handlerInstalled && host_v86_software_int(int_no, prefixed));
-}
-#endif
 #endif /* CCPU */
 
 /*(
@@ -256,17 +230,6 @@ OUTPUT:
 
 #if defined(CCPU) || !defined(PROD)
 #ifdef CCPU
-/* The NT VDM fixed-state IF bit is shared with ICA and guest code. */
-GLOBAL void host_cpu40_set_virtual_if IFN1(BOOL, enabled)
-{
-    extern unsigned char *c_GetPhyAdd(unsigned long);
-    extern void host_ica_lock(void), host_ica_unlock(void);
-    volatile LONG *state=(volatile LONG *)c_GetPhyAdd(0x714);
-    host_ica_lock();
-    if(enabled) InterlockedOr(state,0x200);
-    else InterlockedAnd(state,~0x200);
-    host_ica_unlock();
-}
 /* Non-faulting fetch for the CPU40 monitor path. The CPU's cached decision
  * remains authoritative; a cache miss uses its page-protection rules. */
 static BOOL monitor_read_ram(ULONG physical, void *value, ULONG size)
@@ -555,7 +518,13 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
                 setEIP(ip+prefix+1);return TRUE;
             }
             if (op==0xfa || op==0xfb) {
-                host_cpu40_set_virtual_if(op==0xfb);
+                extern unsigned char *c_GetPhyAdd(unsigned long);
+                extern void host_ica_lock(void), host_ica_unlock(void);
+                volatile LONG *state=(volatile LONG *)c_GetPhyAdd(0x714);
+                host_ica_lock();
+                if(op==0xfb) InterlockedOr(state,0x200);
+                else InterlockedAnd(state,~0x200);
+                host_ica_unlock();
                 /* NT4 OpcodeCLI/OpcodeSTI advance the trapped EIP once,
                  * including when its dispatcher encountered a prefix. */
                 setIF(op==0xfb); setEIP(ip+1);
