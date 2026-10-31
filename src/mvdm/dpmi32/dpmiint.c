@@ -531,6 +531,11 @@ Arguments:
     setCS(*pIVT);
 }
 
+#if defined(CPU_40_STYLE)
+static BOOL BuildStackFrameWithWidth(ULONG StackUnits, BOOL WideFrame,
+    PUCHAR *pVdmStackPointer, ULONG *pNewSP);
+#endif
+
 BOOL
 DpmiSwIntHandler(
     ULONG IntNumber
@@ -591,10 +596,15 @@ Return Value:
     SaveEFLAGS = getEFLAGS();
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
+#if !defined(CPU_40_STYLE)
     setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
+#endif
 
     if (!(getMSW() & MSW_PE)) {
 
+#if defined(CPU_40_STYLE)
+        setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
+#endif
         ReflectV86Int(IntNumber, SaveEFLAGS);
 
     } else {
@@ -602,28 +612,54 @@ Return Value:
 
         // Protect mode
 
+#if defined(CPU_40_STYLE)
+        /* DIVERGENCE(MVDM-HOST-DIV-481): the x86 monitor's PushInt
+         * selects the return frame from the registered handler flags, not
+         * the interrupted application's default width. */
+        BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
+        if (!BuildStackFrameWithWidth(3, WideFrame, &VdmStackPointer, &NewSP)) {
+#else
+        BOOL WideFrame;
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
+#endif
             return FALSE;
         }
 
-        if (Frame32) {
+#if defined(CPU_40_STYLE)
+        /* A rejected frame does not commit the monitor's flag updates. */
+        setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
+#else
+        WideFrame = Frame32;
+#endif
+        if (WideFrame) {
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
+#if defined(CPU_40_STYLE)
+            /* PushInt changes DX after loading the return EIP into EDX. */
+            *(PDWORD16)(VdmStackPointer-8) = (getEIP() & 0xffff0000UL) | getCS();
+#else
             *(PDWORD16)(VdmStackPointer-8) =  getCS();
+#endif
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
-            setEIP(Handlers[IntNumber].Eip);
-            setESP(NewSP);
-
         } else {
 
             *(PWORD16)(VdmStackPointer-2) = (WORD) SaveEFLAGS;
             *(PWORD16)(VdmStackPointer-4) = (WORD) getCS();
             *(PWORD16)(VdmStackPointer-6) = (WORD) getEIP();
-            setEIP((DWORD)LOWORD(Handlers[IntNumber].Eip));
-            setSP((WORD)NewSP);
-
         }
 
+#if defined(CPU_40_STYLE)
+        setEIP(Handlers[IntNumber].Eip);
+        setESP(NewSP);
+#else
+        if (WideFrame) {
+            setEIP(Handlers[IntNumber].Eip);
+            setESP(NewSP);
+        } else {
+            setEIP((DWORD)LOWORD(Handlers[IntNumber].Eip));
+            setSP((WORD)NewSP);
+        }
+#endif
         setCS(Handlers[IntNumber].CsSelector);
 
 #if DBG
@@ -1163,9 +1199,16 @@ Routine Description:
 }
 
 
+#if defined(CPU_40_STYLE)
+static BOOL
+BuildStackFrameWithWidth(
+    ULONG StackUnits,
+    BOOL WideFrame,
+#else
 BOOL
 BuildStackFrame(
     ULONG StackUnits,
+#endif
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
     )
@@ -1227,7 +1270,11 @@ Notes:
         VdmSp = getSP();
     }
 
+    #if defined(CPU_40_STYLE)
+    if (WideFrame) {
+    #else
     if (CurrentAppFlags) {
+    #endif
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
         StackOffset = StackUnits*sizeof(WORD);
@@ -1249,6 +1296,14 @@ Notes:
     return(TRUE);
 
 }
+
+#if defined(CPU_40_STYLE)
+BOOL
+BuildStackFrame(ULONG StackUnits, PUCHAR *pVdmStackPointer, ULONG *pNewSP)
+{
+    return BuildStackFrameWithWidth(StackUnits, Frame32, pVdmStackPointer, pNewSP);
+}
+#endif
 
 VOID
 EnableIntHooks(

@@ -1,0 +1,1 @@
+line 108: sp==8 && cs==0x27 && ip==0x1234 && flags==0x302 && memory[0]==0x5a

@@ -54,14 +54,63 @@ void mvdm_softpc_report_dpmi_iret16(USHORT bits,USHORT a,USHORT b,USHORT c,USHOR
 {(void)a;(void)b;(void)c;(void)d;(void)e;(void)f;if(bits==32)++iret_reports;}
 #define CHECK(x) do { if(!(x)){fprintf(stderr,"line %d: %s\n",__LINE__,#x);return 1;} }while(0)
 int main(void){
-  unsigned mode, depth;
+  unsigned mode, depth, order;
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==0 && targets==0 && flags==0x4321);
-  descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=8;
+  descriptors[1].HighWord.Bits.Pres=1; DpmiInterruptHandlers[0x31].CsSelector=15;
   CHECK(DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==1 && dispatches==1);
   CHECK(sp==0xfa && *(USHORT *)(memory+0xfa)==0x30);
   msw=1; sp=2; descriptors[2].LimitLow=0xffff;
   CHECK(!DpmiSwIntHandler(0x31)); CHECK(mappings==1 && targets==2 && dispatches==1);
   puts("DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1");
+  /* NT4 PushInt selects frame width from the installed handler, independently
+   * of the interrupted application's 16/32-bit flag. */
+  descriptors[1].HighWord.Bits.Type=0x1a; /* present readable code, DPL 3 */
+  descriptors[1].HighWord.Bits.Dpl=3;
+  descriptors[2].HighWord.Bits.Type=0x12; /* writable stack data, DPL 3 */
+  descriptors[2].HighWord.Bits.Dpl=3;
+  descriptors[2].HighWord.Bits.Pres=1;
+  for (order=0;order<8;++order) {
+    mode=order ^ 2u;
+    ULONG top=(mode & 4) ? 0x10100u : 0x100u;
+    BOOL wide=(mode & 2) != 0;
+    memset(memory,0,sizeof(memory));
+    descriptors[2].LimitLow=0xffff;
+    descriptors[2].HighWord.Bits.LimitHi=(mode & 4) ? 1 : 0;
+    descriptors[2].HighWord.Bits.Default_Big=(mode & 4) != 0;
+    descriptors[1].LimitLow=0xffff;
+    descriptors[1].HighWord.Bits.LimitHi=1;
+    descriptors[1].HighWord.Bits.Default_Big=1;
+    ss=0x17;cs=0x27;sp=(mode & 4) ? top : (0xabcd0000u | top);
+    ip=0x12345678;flags=0x202;msw=1;
+    CurrentAppFlags=(USHORT)(mode & 1);
+    DpmiInterruptHandlers[0x31].Flags=(USHORT)(wide ? 2 : 0);
+    DpmiInterruptHandlers[0x31].Eip=0x14321;
+    CHECK(DpmiSwIntHandler(0x31));
+    if (wide) {
+      CHECK(sp==top-12);
+      CHECK(*(ULONG *)(memory+top-12)==0x12345678 &&
+            *(ULONG *)(memory+top-8)==0x12340027 && *(ULONG *)(memory+top-4)==0x202 &&
+            ip==0x14321);
+    } else {
+      CHECK(sp==top-6);
+      CHECK(*(USHORT *)(memory+top-6)==0x5678 &&
+            *(USHORT *)(memory+top-4)==0x27 && *(USHORT *)(memory+top-2)==0x202 &&
+            ip==0x14321);
+    }
+    CHECK(cs==15);
+  }
+  memset(memory,0x5a,sizeof(memory));
+  ss=0x17;cs=0x27;sp=8;ip=0x1234;flags=0x302;msw=1;
+  descriptors[2].LimitLow=0xffff;descriptors[2].HighWord.Bits.LimitHi=0;
+  descriptors[2].HighWord.Bits.Default_Big=0;
+  CurrentAppFlags=0;DpmiInterruptHandlers[0x31].Flags=2;
+  CHECK(!DpmiSwIntHandler(0x31));
+  CHECK(sp==8 && cs==0x27 && ip==0x1234 && flags==0x302 && memory[0]==0x5a);
+  flags=0x202;
+  CurrentAppFlags=1;DpmiInterruptHandlers[0x31].Flags=0;
+  CHECK(DpmiSwIntHandler(0x31));
+  CHECK(sp==2 && *(USHORT *)(memory+2)==0x1234);
+  puts("DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2");
   /* Real selected fault-return body, with controlled register and memory
    * boundaries. Different stack descriptor sizes select SP versus ESP. */
   for (mode=0;mode<2;++mode) for (depth=1;depth<=2;++depth) {

@@ -26,6 +26,15 @@ CSV SHA-256 is
 dispatch has no removed original code lines; its real mirror diff and
 unresolved behavior still require the partial classification.
 
+For the pending CPU40 software-interrupt frame candidate, the regenerated
+CSV still has 206 difference rows and 205 estimates; its SHA-256 is
+`04A1DBC36BEEC0AE9C1397FFF17285B520CA1C93FBD5A480F01AB1F3FB0EC513`.
+`dpmi32/dpmiint.c` has a 98.11% textual original-code retention estimate
+and remains partial; this percentage does not prove runtime equivalence.
+After adding the stack-rejection flag recovery, the refreshed CSV SHA-256 is
+`6E6D93607EFD37EFB8ECF315135BBD6463178392B00EDABAE25AA4944657AC46`;
+its row counts and `dpmiint.c` percentage remain unchanged.
+
 The frozen S10 host C/H ledger classified every one of its 202 recorded
 mirror-difference rows as partial. Rechecking the current worktree against
 that frozen checkpoint now reports one newly differing file and six stale

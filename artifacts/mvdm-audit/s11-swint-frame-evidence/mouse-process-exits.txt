@@ -1,0 +1,3 @@
+pid=38536 image=O:\tmp\ndea\system32\run16.exe exit=0x53504354
+pid=33144 image=O:\repos.hobby\ntvdm64\build\t473-s10\mouse31-prior-observer.exe exit=0x00000000
+pid=12060 image=O:\tmp\ndea\system32\ntvdm.exe exit=0x000000FF

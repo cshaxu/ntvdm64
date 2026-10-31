@@ -27,6 +27,9 @@ if ($LASTEXITCODE) { throw 'Selected DPMI fixture link failed' }
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1')) {
     throw 'Selected DPMI fixture failed'
 }
+if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_SWINT_HANDLER_WIDTH_OK app=2 handler=2 stack=2')) {
+    throw 'Selected DPMI handler-width fixture failed'
+}
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_FAULT_IRET32_SELECTED_OBJECT_OK stacks=2 nesting=2 registers=full')) {
     throw 'Selected DPMI fault-return fixture failed'
 }

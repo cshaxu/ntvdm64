@@ -1,0 +1,1 @@
+DPMI_SWINT_SELECTED_OBJECT_OK absent=1 v86=1 stack_failure=1
