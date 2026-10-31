@@ -107,16 +107,19 @@ original functions' exact signatures instead. The comparison
 records the pre-change results; original-source compile flags remain intact.
 MSVC disassembly of the keyboard reset object before and after the dependency
 change differs only in the dump's input filename.
-After adding local divergence comments without changing line counts, a rebuild
-of NTVDM was compared after applying the candidate's package identity. All
-bytes match the previously built candidate except the PE COFF timestamp and
-the matching timestamp in its debug-directory entry. The WOW32 build input
-hash is identical. The sealed earlier candidate remains the tested package.
+For the ANSI cleanup, adding local divergence comments without changing line
+counts was checked using the earlier candidate's package identity: all NTVDM
+bytes matched except the PE COFF timestamp and its debug-directory counterpart,
+and the WOW32 build input hash was identical. The subsequent flush-probe
+removal was built and tested in the current sealed package.
 
 The V7 pointer binding uses the selected original declarations from
 `egaports.h` and `gfx_upd.h`, including the original 0x20000-byte plane size,
 without importing their alternate configuration branches. Its focused test
 checks callback registration, first invalid offset and null-plane behavior.
+The project-added `nt_flush_screen` probe had an empty implementation and no
+selected override or test caller. Its call, declaration, implementation and
+override macro are removed; the painter and its publication remain unchanged.
 The worker shutdown fixture passed all 37 assertions in the same unrestricted
 process environment used for product tests. In the restricted environment its
 invalid-handle case instead raised `STATUS_INVALID_HANDLE`; this was also

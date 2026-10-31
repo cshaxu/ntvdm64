@@ -321,14 +321,6 @@ int ntvdm_console_graphics_flush(void)
     return result;
 }
 
-#ifndef NTVDM_CONSOLE_GRAPHICS_FLUSH_PROBE_EXTERNAL
-void ntvdm_console_graphics_flush_probe(DWORD screen_state,DWORD mode_type)
-{
-    UNREFERENCED_PARAMETER(screen_state);
-    UNREFERENCED_PARAMETER(mode_type);
-}
-#endif
-
 int ntvdm_console_graphics_palette(HANDLE output,HPALETTE palette,DWORD flags)
 {
     ntvdm_console_graphics *state=ntvdm_console_graphics_context();

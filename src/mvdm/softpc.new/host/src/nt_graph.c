@@ -825,7 +825,7 @@ static void publish_text_update(void)
 void nt_flush_screen(void)
 {
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_flush_screen");
-    ntvdm_console_graphics_flush_probe((DWORD)sc.ScreenState,(DWORD)sc.ModeType);
+
 
 #if defined(CCPU) && defined(X86GFX)
     /* The original X86GFX FULLSCREEN path writes its active graphics DIB
