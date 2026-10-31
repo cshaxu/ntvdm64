@@ -18,6 +18,9 @@ fresh surface pixels, and a subsequent move/down/up opened Program Manager's
 File menu, showing guest response in this controlled run. Evidence:
 [observations](s11-win386-mouse-freeze-evidence/mouse-observations.txt),
 [menu capture](s11-win386-mouse-freeze-evidence/mouse-down-3.bmp).
+The first and hundredth movement report timestamps were 06:15:18 and
+06:15:47 UTC respectively, about 29 seconds apart; the menu click followed
+at 06:15:48. This is sustained synthetic activity, not physical input.
 The observer subsequently ended its 75-second observation and terminated the
 isolated processes; this was not a clean Windows exit test.
 
@@ -31,3 +34,7 @@ progress boundary on the failing path, and retain the guest media unchanged.
 The synthetic hook enters the frontend output boundary directly. Real captured
 motion arrives through `WM_INPUT`, `kvm_win32_mouse_move` and the frontend's
 queued/coalesced mouse delivery first, so those paths require separate evidence.
+Between the prior Mouse31 acceptance commit `9c5e8435f` and this release,
+the Mouse31 driver, `kvm-window/win32/{component,mouse}.c`, and frontend
+`window_mouse.c` did not change; CPU monitor and DPMI files did. This is a
+source-history comparison, not a causal finding or a runtime bisect.
