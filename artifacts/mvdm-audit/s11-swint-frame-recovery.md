@@ -291,6 +291,38 @@ loop checks CPU IF, while the protected monitor and WOW_x86 return macro
 also use the fixed word; both ownership and every path that changes those
 representations must be reconciled together before changing either one.
 
+### Low-IOPL V86 return: concrete dispatch boundary
+
+For a handled CCPU contributory fault, `c_xcptn.c` clears the contributory
+state and calls `c_cpu_continue`; the selected build without `SYNCH_TIMERS`
+resumes through `NEXT_INST`. That entry does not run the normal completed-instruction PIC
+check. Consequently an emulated V86 IRET that merely restores registers and
+returns handled can execute the return target before a previously pending
+PIC event is accepted. The existing protected-STI adapter explicitly calls
+`ccpu_monitor_dispatch_irq` for this reason.
+
+The original NT4 slow `OpcodeIRETV86` has an additional ordering distinction:
+after restoring state it reads the return target; a BOP target is dispatched
+first, whereas otherwise a pending enabled virtual interrupt is acknowledged
+before returning. Blindly calling the STI IRQ helper for every emulated IRET
+would discard that BOP priority; blindly relying on `NEXT_INST` would omit
+the original pre-return acknowledgement. Target-byte access failures also
+belong to the original host exception boundary and are not synonymous with a
+guest page fault. The existing `ccpu_monitor_dispatch_irq` handles a selected
+CPU event and PIC acknowledgement, but does not itself determine BOP priority.
+
+The selected source's `ica_interrupt_cpu` calls `host_set_hw_int`, which
+raises the CCPU hardware-event bit. The inspected selected C paths do not
+write the NT4 fixed word's `VDM_INTERRUPT_PENDING` bits at that call site;
+therefore the CPU event and the fixed word cannot simply be treated as
+interchangeable based on their names. Startup also sets `MIPS_BIT_MASK`,
+making original `FCLI`/`FSTI`/`FIRET` use real CPU instructions. These are
+source-level ownership facts, not proof of all worker configurations or an
+observed guest failure. A complete adaptation must preserve the selected
+CPU/PIC event owner, BOP priority, IF/virtual-bit synchronization and the
+respective failure paths together; no isolated IF or IRET change follows
+from this observation alone.
+
 IOPL 0 is not merely a synthetic possibility: an earlier immutable-DOSX
 fault observation recorded a protected-mode saved EFLAGS of `00000006`
 while executing the STI fallback. That observation was a fault-frame sample,
