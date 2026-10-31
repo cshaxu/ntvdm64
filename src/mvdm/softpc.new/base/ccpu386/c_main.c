@@ -3640,11 +3640,11 @@ TYPEC4:
       {
       extern BOOL host_v86_software_int(IS32);
       IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
-      /* DIVERGENCE(MVDM-HOST-DIV-490): segment and address-size overrides
-       * do not alter the 16-bit INT frame. Do not take this path for LOCK,
-       * F1, REP, operand-size override, or an overlength instruction. */
+      /* DIVERGENCE(MVDM-HOST-DIV-490): segment, address-size and REP
+       * prefixes do not alter the 16-bit INT frame. Exclude LOCK, F1,
+       * operand-size override and overlength instructions. */
       if (!GET_VM() || length < 2 || length > 15 || v86_int_unsafe_prefix ||
-          repeat != REP_CLR || GET_OPERAND_SIZE() != USE16 ||
+          GET_OPERAND_SIZE() != USE16 ||
           !host_v86_software_int((IS32)ops[0].sng))
 #endif
       INTx(ops[0].sng);

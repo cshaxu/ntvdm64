@@ -976,7 +976,7 @@ static int v86_decoded_interrupt(void) {
     const unsigned char prefixes[]={0x26,0x2e,0x36,0x3e,0x64,0x65};
     unsigned char prefixed[]={0x26,0xcd,0x31,0xd6,0xfe};
     BOOL segment_prefix=test_case>=168 && test_case<=174;
-    BOOL multiple_prefix=test_case>=175 && test_case<=179;
+    BOOL multiple_prefix=(test_case>=175 && test_case<=179) || test_case==182 || test_case==183 || (test_case>=186 && test_case<=189);
     unsigned char grouped[17]; unsigned group_length=0;
     unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
     ULONG saved; BOOL ok; char line[160];
@@ -1021,19 +1021,24 @@ static int v86_decoded_interrupt(void) {
     }
     if(test_case==126) c_setIP(0xfffe);
     if(test_case==174) c_setIP(0xfffd);
-    if(test_case==179) c_setIP(0xfffc);
+    if(test_case==179 || test_case==189) c_setIP(0xfffc);
     if(test_case==127) c_setSP(4);
     DpmiInterruptHandlers[vector].cs=0x1f;
     DpmiInterruptHandlers[vector].flags=0; DpmiInterruptHandlers[vector].eip=0x200;
     if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
     code[1]=(unsigned char)vector;
     if(multiple_prefix) {
-        if(test_case==175) { grouped[0]=0x67; group_length=1; }
+        if(test_case==182 || test_case==183) { grouped[0]=test_case==182 ? 0xf2 : 0xf3; group_length=1; }
+        else if(test_case==186) { grouped[0]=0x67; grouped[1]=0xf3; group_length=2; }
+        else if(test_case==187) { grouped[0]=0x26; grouped[1]=0xf2; grouped[2]=0x2e; grouped[3]=0xf3; group_length=4; }
+        else if(test_case==188) { memset(grouped,0xf3,13); group_length=13; }
+        else if(test_case==189) { grouped[0]=0xf3; grouped[1]=0x2e; group_length=2; }
+        else if(test_case==175) { grouped[0]=0x67; group_length=1; }
         else if(test_case==178) { memset(grouped,0x26,13); group_length=13; }
         else { grouped[0]=test_case==176 ? 0x26 : 0x67; grouped[1]=0x2e; group_length=2; }
         grouped[group_length]=0xcd; grouped[group_length+1]=0x31;
         grouped[group_length+2]=0xd6; grouped[group_length+3]=0xfe;
-        CopyMemory(c_GetPhyAdd(test_case==179 ? 0x10ffc : 0x1100),grouped,group_length+4);
+        CopyMemory(c_GetPhyAdd((test_case==179 || test_case==189) ? 0x10ffc : 0x1100),grouped,group_length+4);
     } else if(segment_prefix) {
         prefixed[0]=prefixes[test_case==174 ? 1 : test_case-168];
         CopyMemory(c_GetPhyAdd(test_case==174 ? 0x10ffd : 0x1100),prefixed,sizeof(prefixed));
@@ -1043,7 +1048,7 @@ static int v86_decoded_interrupt(void) {
     saved=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
     c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL);
     ok=c_getCS()==0x300 && c_getSP()==(test_case==127 ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
-       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==((test_case==126 || test_case==174 || test_case==179) ? 0 : (multiple_prefix ? 0x102+group_length : (segment_prefix ? 0x103 : 0x102))) &&
+       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==((test_case==126 || test_case==174 || test_case==179 || test_case==189) ? 0 : (multiple_prefix ? 0x102+group_length : (segment_prefix ? 0x103 : 0x102))) &&
        *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12000 : 0x27fc)==0x100 &&
        *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12002 : 0x27fe)==(USHORT)saved &&
        !(c_getEFLAGS() & 0x4300) &&
@@ -1062,6 +1067,7 @@ static BOOL v86_prefix_fallback_fault(ULONG vector, ULONG error) {
 static int v86_unsupported_int_prefix(void) {
     const unsigned char prefixes[]={0xf0,0xf1,0xf2,0xf3,0x66};
     unsigned char code[]={0xf0,0x26,0xcd,0x31,0xd6,0xfe};
+    unsigned char mixed[]={0xf0,0xf3,0x26,0xcd,0x31,0xd6,0xfe};
     unsigned char overlength[18];
     const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
@@ -1073,7 +1079,10 @@ static int v86_unsupported_int_prefix(void) {
     IntelBase=(ULONG)(ULONG_PTR)c_GetPhyAdd(0); Ldt=(LDT_ENTRY *)ldt;
     Cpu40LdtShadowAddress=0x3000; CurrentAppFlags=0;
     DpmiInterruptHandlers[0x31].cs=0; DpmiInterruptHandlers[0x31].flags=0;
-    if(test_case==185) {
+    if(test_case>=190) {
+        mixed[0]=test_case==190 ? 0xf0 : (test_case==191 ? 0xf1 : 0x66);
+        CopyMemory(c_GetPhyAdd(0x1100),mixed,sizeof(mixed));
+    } else if(test_case==185) {
         memset(overlength,0x26,14); overlength[14]=0xcd; overlength[15]=0x31;
         overlength[16]=0xd6; overlength[17]=0xfe;
         CopyMemory(c_GetPhyAdd(0x1100),overlength,sizeof(overlength));
@@ -1425,7 +1434,7 @@ int main(int argc, char **argv) {
     if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=157 && test_case<=159) ok=v86_trap_instruction();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
-    else if(test_case>=180 && test_case<=185) ok=v86_unsupported_int_prefix();
+    else if(test_case==180 || test_case==181 || test_case==184 || test_case==185 || (test_case>=190 && test_case<=192)) ok=v86_unsupported_int_prefix();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();
     else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();
     else if(test_case==146) ok=vdd_sas_unbound_control();
@@ -1433,7 +1442,7 @@ int main(int argc, char **argv) {
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
-    else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=179)) ok=v86_decoded_interrupt();
+    else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=179) || test_case==182 || test_case==183 || (test_case>=186 && test_case<=189)) ok=v86_decoded_interrupt();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();

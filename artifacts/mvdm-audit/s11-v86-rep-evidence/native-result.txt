@@ -1,0 +1,5 @@
+case=0 exception=80000003 expected=80000003 ip-offset=1
+case=1 exception=80000003 expected=80000003 ip-offset=2
+case=2 exception=80000003 expected=80000003 ip-offset=2
+case=3 exception=80000003 expected=80000003 ip-offset=3
+case=4 exception=c000001d expected=c000001d ip-offset=0

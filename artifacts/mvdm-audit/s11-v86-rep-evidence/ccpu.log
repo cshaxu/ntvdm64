@@ -1,0 +1,585 @@
+[1/4] CC O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): note: 'NTVDM' previously declared on the command line
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(92): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(192): warning C4013: 'c_setSI' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(266): warning C4013: 'c_setDI' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(320): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(320): warning C4028: formal parameter 3 different from declaration
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(351): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(408): warning C4013: 'c_setDX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(415): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(426): warning C4013: 'c_setAX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(554): warning C4013: 'c_setBP' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(616): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(617): warning C4028: formal parameter 1 different from declaration
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(617): warning C4142: 'lin2phy': benign redefinition of type
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(75): note: see declaration of 'lin2phy'
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(684): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(684): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(685): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(726): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(727): warning C4013: 'c_getEAX' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(727): warning C4389: '!=': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(728): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(766): warning C4013: 'c_getEFLAGS' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(808): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(822): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(938): warning C4142: 'c_getEAX': benign redefinition of type
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1002): warning C4389: '==': signed/unsigned mismatch
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1115): warning C4013: 'c_setEFLAGS' undefined; assuming extern returning int
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1237): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1280): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1281): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1303): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1304): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c(1342): warning C4210: nonstandard extension used: function given file scope
+[2/4] CC-CCPU O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): warning C4005: 'NTVDM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_def.h(150): note: 'NTVDM' previously declared on the command line
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(397): warning C4005: 'setAL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(266): note: see previous definition of 'setAL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(412): warning C4005: 'setAH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(265): note: see previous definition of 'setAH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(427): warning C4005: 'setAX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(264): note: see previous definition of 'setAX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(457): warning C4005: 'setBL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(269): note: see previous definition of 'setBL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(472): warning C4005: 'setBH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(268): note: see previous definition of 'setBH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(487): warning C4005: 'setBX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(267): note: see previous definition of 'setBX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(517): warning C4005: 'setCL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(272): note: see previous definition of 'setCL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(532): warning C4005: 'setCH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(271): note: see previous definition of 'setCH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(547): warning C4005: 'setCX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(270): note: see previous definition of 'setCX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(577): warning C4005: 'setDL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(275): note: see previous definition of 'setDL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(592): warning C4005: 'setDH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(274): note: see previous definition of 'setDH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(607): warning C4005: 'setDX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(273): note: see previous definition of 'setDX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(637): warning C4005: 'setSI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(278): note: see previous definition of 'setSI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(667): warning C4005: 'setDI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(279): note: see previous definition of 'setDI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(697): warning C4005: 'setSP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(276): note: see previous definition of 'setSP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(723): warning C4005: 'setBP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(277): note: see previous definition of 'setBP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(753): warning C4005: 'setIP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(280): note: see previous definition of 'setIP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(782): warning C4005: 'setCS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(281): note: see previous definition of 'setCS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(795): warning C4005: 'setSS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(284): note: see previous definition of 'setSS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(808): warning C4005: 'setDS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(282): note: see previous definition of 'setDS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(821): warning C4005: 'setES': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(283): note: see previous definition of 'setES'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(886): warning C4005: 'setIOPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(311): note: see previous definition of 'setIOPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(899): warning C4005: 'setMSW': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(285): note: see previous definition of 'setMSW'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(951): warning C4005: 'setCF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(294): note: see previous definition of 'setCF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(964): warning C4005: 'setPF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(289): note: see previous definition of 'setPF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(977): warning C4005: 'setAF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(290): note: see previous definition of 'setAF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(990): warning C4005: 'setZF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(292): note: see previous definition of 'setZF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1003): warning C4005: 'setSF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(291): note: see previous definition of 'setSF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1016): warning C4005: 'setTF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(288): note: see previous definition of 'setTF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1029): warning C4005: 'setIF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(287): note: see previous definition of 'setIF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1042): warning C4005: 'setDF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(286): note: see previous definition of 'setDF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1055): warning C4005: 'setOF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(293): note: see previous definition of 'setOF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1068): warning C4005: 'setNT': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(310): note: see previous definition of 'setNT'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1120): warning C4005: 'setPE': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(309): note: see previous definition of 'setPE'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1133): warning C4005: 'setMP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(308): note: see previous definition of 'setMP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1146): warning C4005: 'setEM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(307): note: see previous definition of 'setEM'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1159): warning C4005: 'setTS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(306): note: see previous definition of 'setTS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1211): warning C4005: 'getAL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(205): note: see previous definition of 'getAL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1224): warning C4005: 'getAH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(204): note: see previous definition of 'getAH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1237): warning C4005: 'getAX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(203): note: see previous definition of 'getAX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1263): warning C4005: 'getBL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(208): note: see previous definition of 'getBL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1276): warning C4005: 'getBH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(207): note: see previous definition of 'getBH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1289): warning C4005: 'getBX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(206): note: see previous definition of 'getBX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1315): warning C4005: 'getCL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(211): note: see previous definition of 'getCL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1328): warning C4005: 'getCH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(210): note: see previous definition of 'getCH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1341): warning C4005: 'getCX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(209): note: see previous definition of 'getCX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1367): warning C4005: 'getDL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(214): note: see previous definition of 'getDL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1380): warning C4005: 'getDH': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(213): note: see previous definition of 'getDH'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1393): warning C4005: 'getDX': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(212): note: see previous definition of 'getDX'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1419): warning C4005: 'getSI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(217): note: see previous definition of 'getSI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1445): warning C4005: 'getDI': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(218): note: see previous definition of 'getDI'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1471): warning C4005: 'getSP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(215): note: see previous definition of 'getSP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1497): warning C4005: 'getBP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(216): note: see previous definition of 'getBP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1523): warning C4005: 'getIP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(219): note: see previous definition of 'getIP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1549): warning C4005: 'getCS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(220): note: see previous definition of 'getCS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1562): warning C4005: 'getSS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(223): note: see previous definition of 'getSS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1575): warning C4005: 'getDS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(221): note: see previous definition of 'getDS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1588): warning C4005: 'getES': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(222): note: see previous definition of 'getES'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1640): warning C4005: 'getSTATUS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(251): note: see previous definition of 'getSTATUS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1653): warning C4005: 'getIOPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(250): note: see previous definition of 'getIOPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1666): warning C4005: 'getMSW': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(224): note: see previous definition of 'getMSW'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1721): warning C4005: 'getCF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(233): note: see previous definition of 'getCF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1734): warning C4005: 'getPF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(228): note: see previous definition of 'getPF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1747): warning C4005: 'getAF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(229): note: see previous definition of 'getAF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1760): warning C4005: 'getZF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(231): note: see previous definition of 'getZF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1773): warning C4005: 'getSF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(230): note: see previous definition of 'getSF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1786): warning C4005: 'getTF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(227): note: see previous definition of 'getTF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1799): warning C4005: 'getIF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(226): note: see previous definition of 'getIF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1812): warning C4005: 'getDF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(225): note: see previous definition of 'getDF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1825): warning C4005: 'getOF': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(232): note: see previous definition of 'getOF'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1838): warning C4005: 'getNT': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(249): note: see previous definition of 'getNT'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1890): warning C4005: 'getPE': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(248): note: see previous definition of 'getPE'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1903): warning C4005: 'getMP': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(247): note: see previous definition of 'getMP'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1916): warning C4005: 'getEM': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(246): note: see previous definition of 'getEM'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(1929): warning C4005: 'getTS': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(245): note: see previous definition of 'getTS'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(2879): warning C4005: 'getCPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(237): note: see previous definition of 'getCPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\cpu4gen.h(2892): warning C4005: 'setCPL': macro redefinition
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/host/inc\host_cpu.h(298): note: see previous definition of 'setCPL'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386\c_main.h(145): warning C4028: formal parameter 2 different from declaration
+O:/repos.hobby/ntvdm64/src/opennt-abi/source/public/internal/base/inc\vdm.h(428): warning C4201: nonstandard extension used: nameless struct/union
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(638): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(786): warning C4100: 'text': unreferenced formal parameter
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(991): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(996): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1006): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1011): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1015): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1030): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1034): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1045): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1049): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1054): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1069): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1081): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1141): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1143): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1154): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1187): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1215): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1275): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1279): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1284): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1518): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1520): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1560): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1565): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1577): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1583): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1587): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1604): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1610): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1614): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1633): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1635): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1639): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1658): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1662): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1667): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1737): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1740): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1745): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1755): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1772): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1779): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1804): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1808): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1813): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1830): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1833): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1838): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(1848): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2006): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2020): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2028): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2039): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2050): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2058): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2117): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2172): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2202): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2210): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2221): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2226): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2274): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2279): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2284): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2310): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2315): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2320): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2341): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2371): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2386): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2411): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2436): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2451): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2565): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2569): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2583): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2601): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2605): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2609): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2630): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2637): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2656): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2660): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2664): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2682): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2689): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2703): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2708): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2709): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2716): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2721): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2722): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2726): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2738): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2742): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2749): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2753): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2757): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2768): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2771): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2779): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2782): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2787): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2801): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2805): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2822): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2825): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2830): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2842): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2862): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2864): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2869): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2898): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(2899): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3015): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3024): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3069): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3070): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3088): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3089): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3103): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3104): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3122): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3123): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3146): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3147): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3166): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3167): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3190): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3207): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3220): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3236): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3237): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3253): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3254): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3267): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3283): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3305): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3323): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3345): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3361): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3405): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3409): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3413): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3456): warning C4456: declaration of 'i' hides previous local declaration
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(874): note: see declaration of 'i'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3513): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3516): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3521): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3537): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3540): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3556): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3559): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3563): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3619): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3641): warning C4210: nonstandard extension used: function given file scope
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3716): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3720): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3740): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3744): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3748): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3769): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3773): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3793): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3797): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3801): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3935): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(3952): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4063): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4080): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4233): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4236): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4243): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4246): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4253): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4257): warning C4244: '=': conversion from 'IU32' to 'IU8', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4266): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4287): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4290): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4294): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4307): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4310): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4314): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4328): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4332): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4336): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4356): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4362): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4441): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4446): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4463): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4468): warning C4057: 'function': 'ISM32 *' differs in indirection to slightly different base types from 'int *'
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(824): warning C4100: 'single_step': unreferenced formal parameter
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(874): warning C4101: 'i': unreferenced local variable
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4802): warning C4244: '=': conversion from 'IU32' to 'IU16', possible loss of data
+O:/repos.hobby/ntvdm64/src/mvdm/softpc.new/base/ccpu386/c_main.c(4940): warning C4100: 'number': unreferenced formal parameter
+[3/4] LIB original-ccpu386.lib
+[4/4] link.exe /nologo /force:multiple /map:ccpu-monitor-boundary-test.exe.map /out:ccpu-monitor-boundary-test.exe obj/tests/ccpu_monitor_boundary_fixture.obj obj/host/nt_inthk.obj obj/tests/ccpu_host_fixture_seams.obj worker-base.lib worker-shell.lib worker-command-bindings.lib original-softpc-host-fixture-roots.lib original-softpc-support.lib original-softpc-bios.lib original-softpc-keymouse.lib original-softpc-system.lib original-softpc-disks.lib original-softpc-video.lib original-softpc-cvidc.lib original-softpc-comms.lib original-softpc-dos.lib original-mvdm-dem.lib original-mvdm-command.lib original-mvdm-xms.lib original-mvdm-dpmi32.lib original-mvdm-host-suballoc.lib original-mvdm-host-oemuni.lib original-softpc-base-trace.lib original-opennt-base-vdm.lib original-opennt-rtl-x86.lib softpc-fixture-bindings.lib vdmredir-dll-bindings.lib vdd-bindings.lib softpc-win32-bindings.lib monitor-bindings.lib kernel-vdm-printer.lib debugger-bindings.lib session.lib mvdm-softpc-effective-address.lib softpc-ccpu-vector-defaults.lib softpc-activity-check.lib original-ccpu386.lib obj/host/softpc-resource.res nthook-installer.lib nthook-context.lib base-rpc-client-core.lib base-rpc-client-launch.lib obj/worker/stub.obj opennt-base-bindings.lib broker-transport.lib common-rpc.lib common-root.lib common-rpc.lib common-transport.lib common-codec.lib common-console.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib rpcrt4.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientAcquireConsoleContext already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientConnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientDisconnectCurrent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientStopBrokerWatch already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWaitFrontend already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWatchBroker already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerFrontendCapability already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoCheckpoint already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoReleaseEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerIoTransition already defined in ccpu_host_fixture_seams.obj; second definition ignored
+base-rpc-client-core.lib(rpc_client_core.obj) : warning LNK4006: _OpenNtBaseClientWorkerShutdownEvent already defined in ccpu_host_fixture_seams.obj; second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: __swprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _printf already defined in original-softpc-host-fixture-roots.lib(fprt.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sprintf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+legacy_stdio_definitions.lib(legacy_stdio_definitions.obj) : warning LNK4006: _sscanf already defined in softpc-win32-bindings.lib(crt_compat.obj); second definition ignored
+ccpu-monitor-boundary-test.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+OBSERVE PM_STI case=0 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=1 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=2 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=01 ax=beef
+OBSERVE PM_STI case=3 fault=0 irq=0 irq_eip=0000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=4 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_AEOI callback_isr=00
+OBSERVE PM_STI case=5 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SLAVE_EOI master=00 slave=00
+OBSERVE PM_STI case=6 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=7 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=10 width=1 reads=1 writes=1 fault=0 ax=beef
+MONITOR_SCALAR_IO case=11 width=2 reads=2 writes=2 fault=0 ax=beef
+MONITOR_SCALAR_IO case=12 width=1 reads=1 writes=1 fault=0 ax=beef
+MONITOR_SCALAR_IO case=13 width=2 reads=2 writes=2 fault=0 ax=beef
+MONITOR_SCALAR_IO case=14 width=1 reads=0 writes=1 fault=0 ax=beef
+MONITOR_STRING_DF cpu_si=0900 di=0910 cx=0000 reads=2 writes=2 bytes=a5,a5 fault=0
+MONITOR_IF_CONCURRENT state=00100000 fault=0 writer=0 ax=beef
+OBSERVE PM_STI case=17 fault=0 irq=1 irq_eip=1001 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=18 fault=0 irq=1 irq_eip=2000 marker=1 out=0 isr=00 irr=00 ax=beef
+OBSERVE PM_STI case=20 fault=0 irq=1 irq_eip=1007 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_STRING_DF cpu_si=2901 di=3911 cx=0002 reads=1 writes=1 bytes=00,00 fault=0
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,00 fault=0
+OBSERVE PM_STI case=26 fault=0 irq=1 irq_eip=1001 marker=0 out=0 isr=01 irr=00 ax=beef
+MONITOR_IRQ_FRAME_FAULT vector=11 ip=1001
+OBSERVE PM_STI case=27 fault=0 irq=1 irq_eip=2001 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=28 width=1 reads=1 writes=0 fault=0 ax=beef
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+OBSERVE PM_STI case=30 fault=0 irq=1 irq_eip=1006 marker=1 out=0 isr=00 irr=00 ax=beef
+MONITOR_SCALAR_IO case=31 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=32 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=33 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=34 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=35 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=36 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=37 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=38 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=41 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_SCALAR_IO case=42 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=43 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=44 width=1 reads=0 writes=0 fault=0 ax=beef
+MONITOR_SCALAR_IO case=45 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_DEBUG dr0=000f1018 dr7=00000001 count=1 fault=1 eip=00001018 bx=0000
+MONITOR_SCALAR_IO case=46 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_DEBUG dr0=000f1019 dr7=00000001 count=1 fault=1 eip=00001019 bx=0000
+MONITOR_SCALAR_IO case=47 width=1 reads=0 writes=0 fault=1 ax=beef
+MONITOR_SCALAR_IO case=48 width=1 reads=0 writes=0 fault=0 ax=beef
+TLB_DUPLICATE first=8000 write=9000 cpu=9000 monitor=9000 hit=1
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,37 fault=0
+LMSW_CROSS_PAGE handled=0 fault=1 eip=1000 cr0=80000019
+LMSW_CROSS_PAGE handled=1 fault=0 eip=1005 cr0=8000001f
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+WRAPPED_CS handled=1 fault=0 out=1 eip=2002
+WRAPPED_CS handled=1 fault=0 out=1 eip=2007
+WRAPPED_STRING handled=1 fault=0 reads=1 eip=1001
+WRAPPED_STRING handled=1 fault=0 reads=1 eip=1006
+WRAPPED_STRING handled=1 fault=0 reads=0 eip=1006
+CHANGED_DESCRIPTOR case=67 fault=0 reads=1 writes=0 old=11 new=a5 output=00
+CHANGED_DESCRIPTOR case=68 fault=0 reads=0 writes=1 old=11 new=00 output=42
+STRING_LIMIT case=69 handled=1 fault=0 reads=1
+STRING_LIMIT case=70 handled=1 fault=0 reads=1
+STRING_LIMIT case=71 handled=1 fault=0 reads=1
+STRING_LIMIT case=72 handled=1 fault=0 reads=1
+DESCRIPTOR_PAGE fault=1 vector=14 reads=0 ax=beef
+DESCRIPTOR_PAGE fault=1 vector=14 reads=0 ax=beef
+CACHE_CONTRACT miss=0 hit=1 deny=-1 write_miss=0 ext=1,0,1
+LDT_MONITOR case=77 fault=0 reads=0 writes=1 ax=beef
+LDT_MONITOR case=78 fault=0 reads=1 writes=0 ax=beef
+LDT_MONITOR case=81 fault=0 reads=0 writes=0 ax=beef
+MONITOR_STRING_DF cpu_si=0901 di=0911 cx=0002 reads=1 writes=1 bytes=00,a5 fault=0
+MONITOR_REGISTER_MATRIX 8 read and 8 write cases passed
+LDT_MONITOR case=84 fault=0 reads=0 writes=0 ax=beef
+MONITOR_CR0_NPX_MATRIX four EM/MP states passed
+MONITOR_FETCH_PAGE handled=1 fault=0 writes=1 pde=00005027 pte=000f1027
+MONITOR_FETCH_PAGE handled=1 fault=0 writes=1 pde=00005027 pte=000f2007
+MONITOR_WRAP_IP handled=1 fault=0 writes=1 eip=00000001
+MONITOR_PREFIX count=16 handled=1 fault=0 writes=1 eip=00001012
+MONITOR_PREFIX count=127 handled=1 fault=0 writes=1 eip=00001081
+MONITOR_PREFIX count=128 handled=0 fault=1 writes=0 eip=00001000
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001001
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001001
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001001
+MONITOR_V86 case=102 handled=0 fault=1 ip=100 flags=20202 state=200
+MONITOR_V86 case=103 handled=0 fault=1 ip=100 flags=20202 state=200
+DPMI_REMAPPED_CODE handled=0 eip=00001000
+DPMI_REMAPPED_CODE handled=0 eip=00001000
+DPMI_REMAPPED_CODE handled=0 eip=00000fff
+RESTORED_DEBUG case=109 fault=1 eip=1000 bx=0000
+RESTORED_DEBUG case=110 fault=1 eip=1000 bx=0000
+RESTORED_DEBUG case=111 fault=0 eip=0 bx=0001
+RESTORED_DEBUG case=112 fault=0 eip=0 bx=0001
+BROADCAST_DEBUG fault=1 eip=1002 bx=0000
+BROADCAST_DEBUG fault=1 eip=1002 bx=0000
+BROADCAST_DEBUG fault=0 eip=0 bx=0001
+BROADCAST_DEBUG fault=1 eip=1003 bx=0000
+RESTORED_DEBUG case=117 fault=0 eip=0 bx=0000
+V86_DECODED_INT case=121 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=122 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=126 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=127 pass=1 cs=300 sp=fffe bx=beef
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=129 count=1 error=2 flags=23202 sp=1004 ip=100 partial=0/0/0
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=130 count=1 error=2 flags=23202 sp=1004 ip=100 partial=0/100/3202
+V86_MAPPED_STACK pass=1 ip=0102 cs=0100 flags=3202 expected=3202 raw-cs=0000 raw-flags=0000 pte=2067/7067/27
+V86_STACK_FAULT case=131 count=1 error=0 flags=23202 sp=1004 ip=100 partial=0/0/0
+V86_REAL_FAULT case=135 pass=1 cs=300 sp=7fa bx=beef flags=23202
+V86_REAL_FAULT case=136 pass=1 cs=300 sp=fffe bx=beef flags=23002
+V86_REAL_FAULT case=137 pass=1 cs=300 sp=7fa bx=beef flags=23202
+V86_REAL_FAULT case=138 pass=1 cs=300 sp=fffe bx=beef flags=23002
+V86_FIXED_IF state=a003 cpu_flags=23002
+V86_REAL_FAULT case=139 pass=1 cs=300 sp=7fa bx=beef flags=23202
+V86_FIXED_IF state=a203 cpu_flags=23202
+V86_FAULT_IRET pass=1 cs=100 sp=800 bx=beef flags=23202 fixed=a400
+V86_IRET_IRQ count=1 eip=108
+V86_FAULT_IRET pass=1 cs=100 sp=800 bx=beef flags=23202 fixed=a400
+V86_FAULT_IRET pass=1 cs=100 sp=20 bx=beef flags=23202 fixed=a400
+V86_FAULT_IRET pass=1 cs=100 sp=20 bx=beef flags=23202 fixed=a400
+V86_HOOKED_INT2A handled=0 eax=f0f0f0f1 flags=23202
+PROTECTED_FAULT_DECLINE_CPU case=148 pass=1 sp=7fa saved_flags=3202 bx=beef
+PROTECTED_FAULT_DECLINE_CPU case=149 pass=1 sp=7fa saved_flags=202 bx=beef
+DPMI_REMAPPED_CODE handled=1 eip=00001003
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=0 eip=00001000
+DPMI_REMAPPED_CODE handled=0 eip=00000fff
+DPMI_DECODE_FALLBACK original-path
+DPMI_REMAPPED_CODE handled=1 eip=00001002
+DPMI_REMAPPED_CODE handled=1 eip=00001003
+V86_TRAP_INSN case=157 pass=1 sw=0 cs=300 sp=7fa bx=beef
+V86_TRAP_INSN case=158 pass=1 sw=0 cs=300 sp=7fa bx=beef
+V86_TRAP_INSN case=159 pass=1 sw=0 cs=100 sp=800 bx=0
+V86_EXPLICIT_SWINT case=160 pass=1 vector=3
+V86_EXPLICIT_SWINT case=161 pass=1 vector=4
+V86_EXPLICIT_SWINT case=162 pass=1 vector=3
+V86_EXPLICIT_SWINT case=163 pass=1 vector=4
+V86_EXPLICIT_SWINT case=164 pass=1 vector=3
+V86_EXPLICIT_SWINT case=165 pass=1 vector=4
+V86_EXPLICIT_SWINT case=166 pass=1 vector=3
+V86_EXPLICIT_SWINT case=167 pass=1 vector=4
+V86_DECODED_INT case=168 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=169 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=170 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=171 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=172 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=173 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=174 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=175 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=176 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=177 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=178 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=179 pass=1 cs=300 sp=7fa bx=beef
+V86_PREFIX_FALLBACK case=180 pass=1 faults=1
+V86_PREFIX_FALLBACK case=181 pass=1 faults=1
+V86_DECODED_INT case=182 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=183 pass=1 cs=300 sp=7fa bx=beef
+V86_PREFIX_FALLBACK case=184 pass=1 faults=1
+V86_PREFIX_FALLBACK case=185 pass=1 faults=1
+V86_DECODED_INT case=186 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=187 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=188 pass=1 cs=300 sp=7fa bx=beef
+V86_DECODED_INT case=189 pass=1 cs=300 sp=7fa bx=beef
+V86_PREFIX_FALLBACK case=190 pass=1 faults=1
+V86_PREFIX_FALLBACK case=191 pass=1 faults=1
+V86_PREFIX_FALLBACK case=192 pass=1 faults=1
+CCPU monitor boundary: 183 cases passed

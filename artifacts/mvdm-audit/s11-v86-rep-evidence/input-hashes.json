@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/mvdm/softpc.new/base/ccpu386/c_main.c",
+    "sha256": "36022FE6A11C4514798A505E2215E09282E8FFC0D4C76E8102F0411AAF43BD3C"
+  },
+  {
+    "path": "tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+    "sha256": "C9F04423BB46BB68D45218640EE32111479AFCBB49C23169D0AA485FB42A5838"
+  },
+  {
+    "path": "tests/observation/verify-ccpu-monitor-boundary.ps1",
+    "sha256": "30BEAC8BD3DA44E1ECE20A26445FC837ACF3CCBE2B9E75A450D2CD1C4EE55D68"
+  },
+  {
+    "path": "tests/mvdm-host/native_int_prefix_control.c",
+    "sha256": "1AC7B66677D38DE90809D9E1AADFB31308B57496125B6EC7D5CD65744EFAA1E0"
+  },
+  {
+    "path": "tests/observation/verify-native-int-prefix.ps1",
+    "sha256": "50F72AF1E13C95DD8461999C7A0EDBDB102F583FBCC9FB516D199B31038963A2"
+  }
+]

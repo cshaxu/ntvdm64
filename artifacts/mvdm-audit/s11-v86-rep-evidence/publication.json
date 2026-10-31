@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-31T12:10:01.7320826Z",
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86-rep-package",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ]
+}
