@@ -19,6 +19,7 @@ static BYTE memory[131072]; ULONG IntelBase=(ULONG)(ULONG_PTR)memory;
 static USHORT ss=16,cs=0x20;
 static ULONG sp=0x100,ip=0x30;
 static ULONG flags=0x4321,msw,mock_cr0,mappings,targets,dispatches,iret_reports;
+static ULONG mock_eax,mock_ebp,ldt_publications,mock_cf;
 static BOOL mapping_unavailable,selector_resolves;
 USHORT CurrentAppFlags, DosxRmCodeSelector, LockedPMStackSel;
 ULONG LockedPMStackCount;
@@ -55,17 +56,17 @@ USHORT getAX(void){return 1;} USHORT getBX(void){return 2;}
 USHORT getCX(void){return 3;} USHORT getCS(void){return cs;}
 USHORT getSS(void){return ss;} USHORT getSP(void){return (USHORT)sp;}
 USHORT getIP(void){return (USHORT)ip;} ULONG getEIP(void){return ip;}
-ULONG getEAX(void){return 0;} ULONG getEBP(void){return 0;}
+ULONG getEAX(void){return mock_eax;} ULONG getEBP(void){return mock_ebp;}
 ULONG getEBX(void){return 0;} ULONG getECX(void){return 0;}
 ULONG getEDX(void){return 0;} ULONG getESP(void){return sp;}
 ULONG getEFLAGS(void){return flags;} ULONG getMSW(void){return msw;}
 ULONG getCR0(void){return mock_cr0;}
-void setEFLAGS(ULONG x){flags=x;} void setEAX(ULONG x){(void)x;}
-void setCF(ULONG x){(void)x;} void setCS(USHORT x){cs=x;dispatches++;}
+void setEFLAGS(ULONG x){flags=x;} void setEAX(ULONG x){mock_eax=x;}
+void setCF(ULONG x){mock_cf=x;} void setCS(USHORT x){cs=x;dispatches++;}
 void setIP(USHORT x){ip=x;} void setEIP(ULONG x){ip=x;}
 void setSP(USHORT x){sp=(sp & 0xffff0000u)|x;} void setESP(ULONG x){sp=x;}
 void setSS(USHORT x){ss=x;}
-LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;abort();}
+LONG DpmiSetWowLdtEntry(ULONG a,ULONG b,ULONG c){(void)a;(void)b;(void)c;++ldt_publications;return 0;}
 static ULONG v86_reads, v86_writes;
 ULONG spr_read_dword(ULONG address){++v86_reads; return *(ULONG *)(memory+address);}
 void spr_write_word(ULONG address,USHORT value){++v86_writes; *(USHORT *)(memory+address)=value;}
@@ -84,6 +85,20 @@ void mvdm_softpc_report_dpmi_iret16(USHORT bits,USHORT a,USHORT b,USHORT c,USHOR
 int main(int argc, char **argv){
   unsigned mode, depth, order;
   ULONG before_fault_maps, before_fault_dispatches;
+  if(argc==2 && !strcmp(argv[1],"--wow-signature-mode")) {
+    msw=1; flags=0x23302; mock_eax=mock_ebp=0xf0f0f0f1u;
+    CHECK(!DpmiSwIntHandler(0x2a));
+    CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && flags==0x23302);
+    msw=0; flags=0x3302;
+    CHECK(!DpmiSwIntHandler(0x2a));
+    CHECK(ldt_publications==0 && mock_eax==0xf0f0f0f1u && flags==0x3302);
+    msw=1;
+    flags=0x3302; mock_cf=1;
+    CHECK(DpmiSwIntHandler(0x2a));
+    CHECK(ldt_publications==1 && mock_eax==0 && mock_cf==0 && flags==0x3302);
+    puts("DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled");
+    return 0;
+  }
   if(argc==2 && (!strcmp(argv[1],"--pm-fault-failure") ||
                  !strcmp(argv[1],"--pm-fault-absent") ||
                  !strcmp(argv[1],"--pm-fault-first") ||

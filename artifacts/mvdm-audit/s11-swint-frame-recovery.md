@@ -1,5 +1,24 @@
 # S11 protected software-interrupt frame candidate
 
+## WOW INT 2Ah mode ownership (DIV-487)
+
+The original `KiGetTickCount` signature is a protected WOW USER16 service;
+the separately decoded V86 software INT uses the V86 interrupt route. The
+selected DPMI callback previously tested only EAX/EBP and could publish a
+WOW LDT entry if invoked in V86 with the same values. The
+[selected-object baseline](s11-int2a-mode-evidence/before.txt) reproduces
+that misclassification; the [candidate](s11-int2a-mode-evidence/after.txt)
+declines the signature in real mode and V86 while still handling the protected
+WOW signature. The guard is restricted to CPU40 CCPU. This test calls the
+selected DPMI object directly; it does not prove an installed guest reaches
+the collision or that the separate V86 hooked-reflector path is complete.
+The coherent package passed the 125-case CCPU boundary fixture, Full gate,
+Winmine/SOL/WRITE and four SOL Options rounds, plus all four Win3.1
+mode/DOSONLY combinations. The 86 monitored guest binaries were unchanged.
+The same tested ten-component package was published to both destinations;
+[results, package identity and publication](s11-int2a-mode-evidence/)
+record these bounded checks, not complete V86 reflection.
+
 ## Protected exception failure rollback (DIV-486)
 
 The original NT4 `Ki386VdmReflectException` builds its result in `RI` and

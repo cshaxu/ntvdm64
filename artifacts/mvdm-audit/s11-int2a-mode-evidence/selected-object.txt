@@ -1,0 +1,1 @@
+DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled

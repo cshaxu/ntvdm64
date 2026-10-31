@@ -609,7 +609,13 @@ Return Value:
      * 0, 0, 0), returning the NTSTATUS in EAX and its failure in CF.  CCPU
      * has no NT kernel process LDT, so reproduce only that finite current-
      * worker publication through the existing CCPU LDT carrier. */
-    if (IntNumber == 0x2au && getEAX() == 0xf0f0f0f1UL &&
+    if (IntNumber == 0x2au &&
+#if defined(CPU_40_STYLE) && defined(CCPU)
+            /* DIVERGENCE(MVDM-HOST-DIV-487): this signature belongs to
+             * protected WOW, not a V86 interrupt with the same registers. */
+            (getMSW() & MSW_PE) && !(getEFLAGS() & EFLAGS_VM_MASK) &&
+#endif
+            getEAX() == 0xf0f0f0f1UL &&
             getEBP() == 0xf0f0f0f1UL) {
         NTSTATUS Status = DpmiSetWowLdtEntry(getEBX(), getECX(), getEDX());
         setEAX((ULONG)Status);

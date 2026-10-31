@@ -33,6 +33,10 @@ if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_V86_INT_OW
 if (!(Select-String -LiteralPath "$out/result.txt" -SimpleMatch 'DPMI_V86_HIGH_FAULT_DECLINED_OK installed=2 protected=unchanged')) {
     throw 'Selected DPMI V86 high fault-vector fixture failed'
 }
+& "$out/fixture.exe" --wow-signature-mode | Tee-Object -FilePath "$out/wow-signature-mode.txt"
+if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/wow-signature-mode.txt" -SimpleMatch 'DPMI_INT2A_MODE_OWNER_OK v86=declined real=declined protected=handled')) {
+    throw 'Selected DPMI INT 2A mode ownership fixture failed'
+}
 & "$out/fixture.exe" --pm-fault-failure | Tee-Object -FilePath "$out/pm-fault-failure.txt"
 if ($LASTEXITCODE -or !(Select-String -LiteralPath "$out/pm-fault-failure.txt" -SimpleMatch 'DPMI_PM_FAULT_FAILURE_ROLLBACK_OK absent=1 first=1 nested=1')) {
     throw 'Selected DPMI fault failure rollback fixture failed'
