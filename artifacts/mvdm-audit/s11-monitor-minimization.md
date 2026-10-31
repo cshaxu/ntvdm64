@@ -231,6 +231,14 @@ whose interaction with per-host-thread NT4 trap frames needs explicit
 reconciliation. Its single-copy comment is not by itself a proof that the
 entire WOW worker's debug state should be shared, nor proof that a specific
 installed guest executes this source.
+Earlier [S38 evidence](../../docs/etc/evidence/m0-t420-s38-dpmi32-capability-review.md)
+attributes the reversed guest debug-status predicate to the hash-matched
+installed DOSX image, and records direct and twice-nested watchpoint delivery
+on an earlier isolated worker. That evidence distinguishes a confirmed
+original guest status defect from the host writer and is not a WOW
+cross-task or current-release pass. In particular it does not justify either
+guest modification or automatically clearing a live worker's shared debug
+state at task retirement.
 
 ## Instruction-fetch page-access accounting
 
