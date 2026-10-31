@@ -10,6 +10,17 @@ the result is tied to that specific build snapshot.
 The CCPU file declares five function-pointer fields; the C-VID file declares
 81. Assuming four-byte x86 pointers, the same names have these offsets:
 
+For the selected x86 build, `localfm.c` explicitly includes the C-VID header
+before defining `Video`. Its cached COFF object declares `_Video` as a
+`0x144`-byte common symbol: 81 x86 pointers. The current worker link map
+places `_Video` at section offset `0025a800`, before the next listed common
+symbol `_Cpu` at `0025a960`. The binder references that storage and assigns
+the C-VID table to it; the selected graph uses `localfm.c`, not the separate
+five-field `ntstubs.c` definition. This evidence rules out an undersized
+five-slot allocation in this selected object; it does not prove runtime
+initialization order, all consumers, or compatibility of the unselected PIG
+layout.
+
 | Field | CCPU offset | C-VID offset |
 | --- | ---: | ---: |
 | `GetVideolatches` | 0 | 0 |
