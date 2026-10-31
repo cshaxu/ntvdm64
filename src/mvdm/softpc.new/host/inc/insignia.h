@@ -143,10 +143,11 @@ typedef int BOOL;	/* only defined in windows */
 **
 */
 
+#ifdef  ANSI
 
 /* Function prototypes */
 
-#define IPT0()                                  (void) /* DIVERGENCE(MVDM-HOST-DIV-479): selected standard-C branch. */
+#define IPT0()                                  (void)
 #define IPT1(t1, n1)                            (t1 n1)
 #define IPT2(t1, n1, t2, n2)                    (t1 n1, t2 n2)
 #define IPT3(t1, n1, t2, n2, t3, n3)            (t1 n1, t2 n2, t3 n3)
@@ -176,6 +177,50 @@ typedef int BOOL;	/* only defined in windows */
 #define IFN8(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8) \
         (t1 n1, t2 n2, t3 n3, t4 n4, t5 n5, t6 n6, t7 n7, t8 n8)
 
+#else   /* ANSI */
+
+/* Function prototypes */
+
+#define IPT0()                                                          ()
+#define IPT1(t1, n1)                                                    ()
+#define IPT2(t1, n1, t2, n2)                                            ()
+#define IPT3(t1, n1, t2, n2, t3, n3)                                    ()
+#define IPT4(t1, n1, t2, n2, t3, n3, t4, n4)                            ()
+#define IPT5(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5)                    ()
+#define IPT6(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6)            ()
+#define IPT7(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7)    ()
+#define IPT8(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8) \
+        ()
+
+/* Function definitions */
+
+#define IFN0()                                  ()
+#define IFN1(t1, n1)                            (n1) \
+                                                t1 n1;
+#define IFN2(t1, n1, t2, n2)                    (n1, n2) \
+                                                t1 n1; t2 n2;
+#define IFN3(t1, n1, t2, n2, t3, n3)            (n1, n2, n3) \
+                                                t1 n1; t2 n2; t3 n3;
+#define IFN4(t1, n1, t2, n2, t3, n3, t4, n4)    (n1, n2, n3, n4) \
+                                                t1 n1; t2 n2; t3 n3; t4 n4;
+#define IFN5(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5) \
+                                                (n1, n2, n3, n4, n5) \
+                                                t1 n1; t2 n2; t3 n3; t4 n4; \
+                                                t5 n5;
+#define IFN6(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6) \
+                                                (n1, n2, n3, n4, n5, n6) \
+                                                t1 n1; t2 n2; t3 n3; t4 n4; \
+                                                t5 n5; t6 n6;
+#define IFN7(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7) \
+                                                (n1, n2, n3, n4, n5, n6, n7) \
+                                                t1 n1; t2 n2; t3 n3; t4 n4; \
+                                                t5 n5; t6 n6; t7 n7;
+#define IFN8(t1, n1, t2, n2, t3, n3, t4, n4, t5, n5, t6, n6, t7, n7, t8, n8) \
+                                               (n1, n2, n3, n4, n5, n6, n7, n8)\
+                                                t1 n1; t2 n2; t3 n3; t4 n4; \
+                                                t5 n5; t6 n6; t7 n7; t8 n8;
+
+#endif  /* ANSI */
 
 
 #endif /* _INSIGNIA_H */

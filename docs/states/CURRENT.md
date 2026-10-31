@@ -4,6 +4,11 @@
 
 **Active: M0 T473 S12**
 
+Owner-approved S12 delivery: restore the four MVDM ANSI-profile files changed
+by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
+cached product builds and product verification before delivery. The restoration
+is published; [evidence](../../artifacts/mvdm-audit/condition-inventory/ansi-restoration/README.md).
+
 S11 closed its owner-narrowed non-MVDM compilation-condition audit and
 cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
 Unfinished original foundation and later recovery work is transferred to the

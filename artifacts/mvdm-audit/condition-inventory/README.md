@@ -104,6 +104,10 @@ selected files do not call `NtAlertThread`; the header retains its normal
 system-import declaration when included on those graphs.
 `MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION` selects the original host bootstrap's
 no-host-mutation branch in `nt_msscs.c`; it is not an adapter profile.
+Historical S11 evidence below describes the published candidate before the
+owner-approved restoration of DIV-479. The restoration is under verification;
+the statements about removed branches do not describe the current worktree.
+
 In the original SoftPC headers `ANSI` selects standard-C prototypes and
 `const`, not just character encoding. The original `stubs.c` undefines it;
 compiling a candidate with that undefinition removed produced identical
@@ -205,3 +209,5 @@ ten-image comparison are recorded in [final checks](s11-final-checks.json).
 The rebuilt images are identical to the published package except for PE
 link/debug-directory timestamps; both publication destinations still match
 its ten-image manifest. Its Full and Win3.1 test evidence above is reused.
+
+The owner-approved restoration and verification are recorded in [ANSI restoration](ansi-restoration/README.md).
