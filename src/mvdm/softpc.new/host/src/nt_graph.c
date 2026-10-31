@@ -2035,7 +2035,7 @@ VOID windowSize IFN4( int, w, int, h, int, top, int, left )
 	WinSize.Right  = left + w - 1;
 
 #ifndef	PROD
-	//fprintf(trace_file, "newW: %d.%d at %d.%d\n", h, w, top, left);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	if( !SetConsoleWindowInfo( sc.OutputHandle, TRUE, &WinSize ) )
 		assert3( NO, "VDM: SetConsoleWindowInfo() w=%d h=%d failed:%#x",
@@ -2055,7 +2055,7 @@ VOID bufferSize IFN2( int, w, int, h )
 	ScrSize.X = w;
 	ScrSize.Y = h;
 #ifndef	PROD
-	//fprintf(trace_file, "newB: %d.%d\n", h, w);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	if( !SetConsoleScreenBufferSize( sc.OutputHandle, ScrSize ) )
 		assert3( NO, "VDM: SetCons...BufferSize() w=%d h=%d failed:%#x",
@@ -2109,10 +2109,7 @@ VOID resizeWindow IFN2( int, w, int, h )
 	oldW.Y  = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top  + 1;
 	oldB    = bufferInfo.dwSize;
 #ifndef	PROD
-	//fprintf(trace_file, "resz: %d.%d\n", h, w);
-	//fprintf(trace_file, "oldW: %d.%d\n", oldW.Y, oldW.X);
-	//fprintf(trace_file, "maxW: %d.%d\n", bufferInfo.dwMaximumWindowSize.Y, bufferInfo.dwMaximumWindowSize.X);
-	//fprintf(trace_file, "oldB: %d.%d\n", oldB.Y, oldB.X);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	/*
 	 * Reduce window width and height as necessary:
@@ -2136,7 +2133,7 @@ VOID resizeWindow IFN2( int, w, int, h )
 			assert1( NO, "VDM: GetConsoleScreenBufferInfo() failed:%#x",
 				GetLastError() );
 #ifndef	PROD
-		//fprintf(trace_file, "maxW: %d.%d\n", bufferInfo.dwMaximumWindowSize.Y, bufferInfo.dwMaximumWindowSize.X);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	/*
@@ -2427,7 +2424,7 @@ void nt_mode_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
-    fprintf(trace_file, "WARNING - nt_mode_select_changed\n");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -2435,7 +2432,7 @@ void nt_color_select_changed(int dummy)
 {
     UNUSED(dummy);
 #ifndef PROD
-    fprintf(trace_file, "WARNING - nt_color_select_changed\n");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 

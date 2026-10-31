@@ -3995,10 +3995,7 @@ TYPEE8:
 	    }
 
 #ifndef	PROD
-	 if (c_cpu_take_event(CPU_SAD_EXCEPTION_MASK))
-	    {
-	    force_yoda();
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 
          SYNCH_TICK();

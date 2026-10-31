@@ -641,7 +641,7 @@ void nt_process_focus(PFOCUS_EVENT_RECORD FocusEvent)
         MouseOutOfFocus();      /* turn off mouse 'attachment' */
 
 #ifndef PROD
-    fprintf(trace_file,"Focus lost\n");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 
@@ -1381,11 +1381,9 @@ BOOL CntrlHandler(ULONG CtrlType)
        case CTRL_LOGOFF_EVENT:
        case CTRL_SHUTDOWN_EVENT:
 #ifndef PROD
-            if (VDMForWOW) {  // shouldn't happen
-                printf("WOW: Received EndTask Notice, but we shouldn't\n");
-                break;
-                }
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
+#line 1389 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
                 /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
                  * cmdPushExit cleanup until the service's Console-close
@@ -1407,9 +1405,9 @@ BOOL CntrlHandler(ULONG CtrlType)
             break;
 
 #ifndef PROD
-       default:   // shouldn't happen
-            printf("NTVDM: Received unknown CtrlType=%lu\n",CtrlType);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
+#line 1413 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
        }
     return TRUE;
 }
@@ -1580,7 +1578,7 @@ BOOL CntrlHandler(ULONG CtrlType)
     if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 #ifndef PROD
-    fprintf(trace_file,"Blocked event thread\n");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -1626,7 +1624,7 @@ void nt_resume_event_thread(void)
 
     CntrlHandlerState &= ~CNTRL_VDMBLOCKED;
 #ifndef PROD
-    fprintf(trace_file,"Resume event thread\n");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     // Setup Console modes

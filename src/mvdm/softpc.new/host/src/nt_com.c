@@ -966,9 +966,9 @@ void SendDataToDriver(int adapter, char data)
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Display error */
 
 #ifndef PROD
-    if(error)
-	always_trace2("host_com_write error, adapter %d,%d\n",adapter,error);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
+#line 972 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
     /* tell base that the tx shift register is empty */
     tx_shift_register_empty(adapter);
 
@@ -1744,7 +1744,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	if (error != ERROR_SUCCESS) {
 	    ClearCommError(current->handle, &error, NULL);
 #ifndef PROD
-	    always_trace2("host_com_write error, adapter %d,%d\n", adapter, error);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	tx_shift_register_empty(adapter);
@@ -1767,8 +1767,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	}
 
 #ifndef PROD
-	if(error)
-	    always_trace2("host_com_write error, adapter %d,%d\n",adapter,error);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -1789,8 +1788,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	{
 	    ClearCommError(current->handle,&error,NULL);
 #ifndef PROD
-	    always_trace2("host_com_write error, adapter %d,%d\n",adapter,
-			  error);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
     }

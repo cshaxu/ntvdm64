@@ -76,7 +76,7 @@ GLOBAL DWORD mouse_buffer_width = 0,
 #endif /* X86GFX */
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
 #ifndef PROD
-GLOBAL UTINY	FullScreenDebug = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 /* We have to prevent bad values from oddball video cards (eg Prodesigner II
@@ -1131,8 +1131,7 @@ GLOBAL VOID ResetConsoleState(VOID)
 	    if (!SetConsoleCursorPosition(sc.OutputHandle, cursorPos))
 		ErrorExit();
 #ifndef PROD
-            if (sc.ScreenState == WINDOWED)	// transient switch??
-                assert0(NO, "Mismatched screenstate on shutdown");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	    /* Set up the screen. */
@@ -1211,7 +1210,7 @@ GLOBAL VOID TextToGraphics(VOID)
     if ((flags & CONSOLE_FULLSCREEN_HARDWARE) == CONSOLE_FULLSCREEN_HARDWARE)
     {
 #ifndef PROD
-	assert0(NO,"NTVDM:rejected fullscreen switch as console already FS");
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return;
     }

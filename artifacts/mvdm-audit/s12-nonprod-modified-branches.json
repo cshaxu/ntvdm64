@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/mvdm/softpc.new/base/ccpu386/c_main.c",
+    "start": 3997,
+    "end": 4002,
+    "removed_lines": 4,
+    "removed_sha256": "5bff6dd36d5b2d87c5682de914e7ff7659e43002b51e2184a2cca365c3866134",
+    "baseline": "526b108d3",
+    "prior_changes": "project event-state adaptation",
+    "divergence": "MVDM-HOST-DIV-502"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/debug/dasm.c",
+    "start": 34,
+    "end": 2924,
+    "removed_lines": 2889,
+    "removed_sha256": "cb67558cf2e90d8d4af942a320ff323eb3dfc8194c1c9daa8955f29a3c14e193",
+    "baseline": "526b108d3",
+    "prior_changes": "DIV-493 removed hardware-monitor/CPU30 branches",
+    "divergence": "MVDM-HOST-DIV-502"
+  }
+]

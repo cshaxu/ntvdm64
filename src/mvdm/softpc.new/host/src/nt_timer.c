@@ -160,9 +160,9 @@ ERROR RECOVERY    :     errors are ignored
 
 #include "debug.h"
 #ifndef PROD
-#include "trace.h"
-#include "host_trc.h"
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
+#line 166 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
 
 #include "ica.h"
 #include "nt_uis.h"

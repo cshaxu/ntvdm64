@@ -120,24 +120,7 @@ int RemoveCompletedIOCTLs(void **firstBlock, void **lastBlock)
         nxt = nxt->NxtStatusBlock;  // Next element to process
 
 #ifndef PROD
-        switch(remove->ioStatusBlock.Status)
-	{
-	    case STATUS_SUCCESS:
-		sub_note_trace0(HOST_COM_VERBOSE,"XOFF (counter)\n");
-		break;
-
-	    case STATUS_SERIAL_MORE_WRITES:
-		sub_note_trace0(HOST_COM_VERBOSE,"XOFF (more writes)\n");
-		break;
-
-	    case STATUS_SERIAL_COUNTER_TIMEOUT:
-		sub_note_trace0(HOST_COM_VERBOSE,"XOFF (timeout)\n");
-		break;
-
-	    default:
-		sub_note_trace0(HOST_COM_VERBOSE,"XOFF (unknown)\n");
-		break;
-        }
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
         free(remove);               // Deallocate element
@@ -192,8 +175,7 @@ int OutputQueueSize)
     {
 	// Should display an error here
 #ifndef PROD
-	fprintf(trace_file, "%s (%d) ",__FILE__,__LINE__);
-	fprintf(trace_file, "NtDeviceIoControlFile failed %x\n",rtn);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return(FALSE);
     }
@@ -206,8 +188,7 @@ int OutputQueueSize)
     /*............................................ Check completion status */
 
 #ifndef PROD
-    if(ioStatusBlock.Status != STATUS_SUCCESS)
-	fprintf(trace_file, "FastSetupComm failed (%x)\n",ioStatusBlock.Status);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
@@ -235,8 +216,7 @@ ULONG  CommMask)
     {
 	// Should display an error here
 #ifndef PROD
-	fprintf(trace_file, "%s (%d) ",__FILE__,__LINE__);
-	fprintf(trace_file, "NtDeviceIoControlFile failed %x\n",rtn);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return(FALSE);
     }
@@ -249,8 +229,7 @@ ULONG  CommMask)
     /*............................................ Check completion status */
 
 #ifndef PROD
-    if(ioStatusBlock.Status != STATUS_SUCCESS)
-	fprintf(trace_file,"FastSetCommMask failed (%x)\n",ioStatusBlock.Status);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
@@ -279,8 +258,7 @@ PULONG ModemStatus)
     {
 	// Should display an error here
 #ifndef PROD
-	fprintf(trace_file, "%s (%d) ",__FILE__,__LINE__);
-	fprintf(trace_file, "NtDeviceIoControlFile failed %x\n",rtn);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return(FALSE);
     }
@@ -293,8 +271,7 @@ PULONG ModemStatus)
     /*............................................ Check completion status */
 
 #ifndef PROD
-    if(ioStatusBlock.Status != STATUS_SUCCESS)
-	fprintf(trace_file,"GetCommModemStatus failed (%x)\n",ioStatusBlock.Status);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
@@ -346,8 +323,7 @@ PULONG SignalledObj)
 	{
 	    // Should display an error here
 #ifndef PROD
-	    fprintf(trace_file, "%s (%d) ",__FILE__,__LINE__);
-	    fprintf(trace_file, "NtDeviceIoControlFile failed %x\n",rtn);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    SETUPLASTERROR(rtn);
 	    return(FALSE);
@@ -417,8 +393,7 @@ unsigned char EscapeChar)
 				&EscapeChar, sizeof(unsigned char),NULL,0)))
     {
 #ifndef PROD
-	fprintf(trace_file, "%s (%d) ",__FILE__,__LINE__);
-	fprintf(trace_file, "NtDeviceIoControlFile failed %x\n",rtn);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return(FALSE);
     }
@@ -432,9 +407,7 @@ unsigned char EscapeChar)
     /*............................................ Check completion status */
 
 #ifndef PROD
-    if(ioStatusBlock.Status != STATUS_SUCCESS)
-	fprintf(trace_file,"IOCTL_SERIAL_LSRMST_INSERT ioctl failed (%x)\n",
-		ioStatusBlock.Status);
+/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
