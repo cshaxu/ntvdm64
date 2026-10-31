@@ -3633,7 +3633,11 @@ TYPEC4:
        * never another INTx caller, enters the V86 host reflector. */
       {
       extern BOOL host_v86_software_int(IS32);
-      if (!GET_VM() || (IU16)(GET_EIP() - CCPU_save_EIP) != 2 ||
+      IU16 length = (IU16)(GET_EIP() - CCPU_save_EIP);
+      /* DIVERGENCE(MVDM-HOST-DIV-490): a single segment override does not
+       * change the 16-bit V86 INT frame. Other prefixes remain unhandled. */
+      if (!GET_VM() || (length != 2 &&
+          !(length == 3 && segment_override != SEG_CLR && GET_OPERAND_SIZE() == USE16)) ||
           !host_v86_software_int((IS32)ops[0].sng))
 #endif
       INTx(ops[0].sng);

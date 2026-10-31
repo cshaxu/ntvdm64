@@ -973,6 +973,9 @@ static int v86_decoded_interrupt(void) {
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     unsigned vector=test_case==122 ? 0x2a : 0x31;
     unsigned char code[]={0xcd,0x31,0xd6,0xfe};
+    const unsigned char prefixes[]={0x26,0x2e,0x36,0x3e,0x64,0x65};
+    unsigned char prefixed[]={0x26,0xcd,0x31,0xd6,0xfe};
+    BOOL segment_prefix=test_case>=168 && test_case<=174;
     unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
     ULONG saved; BOOL ok; char line[160];
     c_cpu_init(); ZeroMemory(gdt,0x408); ZeroMemory(ldt,0x408);
@@ -1015,18 +1018,22 @@ static int v86_decoded_interrupt(void) {
         return test_irq==7 && c_getCS()==0x100 && c_getSP()==0x800;
     }
     if(test_case==126) c_setIP(0xfffe);
+    if(test_case==174) c_setIP(0xfffd);
     if(test_case==127) c_setSP(4);
     DpmiInterruptHandlers[vector].cs=0x1f;
     DpmiInterruptHandlers[vector].flags=0; DpmiInterruptHandlers[vector].eip=0x200;
     if(test_case==122) {c_setEAX(0xf0f0f0f1); c_setEBP(0xf0f0f0f1); c_setEBX(0);}
     code[1]=(unsigned char)vector;
-    CopyMemory(c_GetPhyAdd(test_case==126 ? 0x10ffe : 0x1100),code,sizeof(code));
+    if(segment_prefix) {
+        prefixed[0]=prefixes[test_case==174 ? 1 : test_case-168];
+        CopyMemory(c_GetPhyAdd(test_case==174 ? 0x10ffd : 0x1100),prefixed,sizeof(prefixed));
+    } else CopyMemory(c_GetPhyAdd(test_case==126 ? 0x10ffe : 0x1100),code,sizeof(code));
     CopyMemory(c_GetPhyAdd(0x3456),target,sizeof(target));
     *(USHORT *)c_GetPhyAdd(vector*4)=0x456; *(USHORT *)c_GetPhyAdd(vector*4+2)=0x300;
     saved=c_getEFLAGS(); VdmInstallSoftwareIntHandler((void *)DpmiSwIntHandler);
     c_cpu_simulate(); VdmInstallSoftwareIntHandler(NULL);
     ok=c_getCS()==0x300 && c_getSP()==(test_case==127 ? 0xfffe : 0x7fa) && c_getBX()==0xbeef &&
-       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==(test_case==126 ? 0 : 0x102) &&
+       *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x11ffe : 0x27fa)==((test_case==126 || test_case==174) ? 0 : (segment_prefix ? 0x103 : 0x102)) &&
        *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12000 : 0x27fc)==0x100 &&
        *(USHORT *)c_GetPhyAdd(test_case==127 ? 0x12002 : 0x27fe)==(USHORT)saved &&
        !(c_getEFLAGS() & 0x4300) &&
@@ -1378,7 +1385,7 @@ int main(int argc, char **argv) {
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();
     else if(test_case>=128 && test_case<=134) ok=v86_mapped_stack();
-    else if((test_case>=121 && test_case<=127) || test_case==147) ok=v86_decoded_interrupt();
+    else if((test_case>=121 && test_case<=127) || test_case==147 || (test_case>=168 && test_case<=174)) ok=v86_decoded_interrupt();
     else if(test_case>=113 && test_case<=116) ok=broadcast_debug_execution();
     else if((test_case>=109 && test_case<=112) || test_case==117) ok=restored_debug_execution();
     else if(test_case==107 || test_case==108) ok=dpmi_faulting_decode_page();
