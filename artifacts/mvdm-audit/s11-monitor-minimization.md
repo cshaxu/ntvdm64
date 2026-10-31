@@ -236,6 +236,29 @@ undoing the original all-thread DPMI operation, and the direct-write fixture
 cannot distinguish these two writers. Any fix must preserve both contracts,
 including new-thread initialization and failure/retirement; global DR0 in
 the experiment alone is not sufficient to prescribe per-task isolation.
+The selected CCPU `host_CreateThread` calls `ccpu386newthread` but calls
+`cpu_createthread` only under `MONITOR`; the selected non-monitor export in
+`host/src/stubs.c` is the original MIPS-compatibility empty body. The CCPU
+`ntthread.c` registry supports nested simulate/unsimulate jump stacks, not the
+original x86 monitor's debug/floating-point `InitialContext` broadcast.
+`wkman.c:W32RemoteThread` separately calls the exported `cpu_createthread`
+for its opened remote thread handle. These distinct call sites do not prove
+the ordinary CCPU path registers original monitor contexts. The retained
+callback lifetime and selected binary identity require verification before
+changing the shared thread registry.
+The current cached worker map attributes `cpu_createthread` to `stubs.obj`,
+`ccpu386newthread` to `ntthread.obj`, `ThreadSetDebugContext` to the debugger
+binding, and `host_CreateThread` to `nt_thred.obj`. This identifies the
+selected link inputs, not a live trace of every thread-creation branch.
+
+`MOV_DR` invokes `setup_breakpoints` when DR0--DR3 or DR7 changes; that helper
+rebuilds CCPU's process-global instruction/data breakpoint tables. CCPU also
+keeps `debug_exception_pending`, and its execution loop uses `quick_mode` to
+decide when to check. Copying only `CCPU_DR` could leave derived breakpoint
+state or pending-exception ownership inconsistent. The monitor's ordinary
+write helper can also perform an immediate instruction-breakpoint check,
+which is not automatically appropriate at every switch. These are source
+constraints, not an implemented or tested restore mechanism.
 The original `dxint31.asm` further documents `Debug_Regs` as one memory
 image, and its debug API uses `Load_DBG_Regs` after mutations; its WOW branch
 does not call `Store_DBG_Regs` at API entry. This is another guest-side view
