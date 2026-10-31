@@ -144,9 +144,9 @@ LOCAL VOID syncVGAEmulationToHardware(VOID);
 LOCAL BOOL funnyMode(VOID);
 LOCAL VOID freezeWindow(VOID);
 #ifndef PROD
-LOCAL VOID dumpBlock(VOID);
-LOCAL VOID dumpPlanes(UTINY *, UTINY *, UTINY *, UTINY *);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
+#line 150 /* MVDM-HOST-DIV-500: preserve original diagnostic line numbers. */
 
 /*
  * ==========================================================================
@@ -833,7 +833,7 @@ LOCAL VOID syncHardwareToVGAEmulation(SHORT dataType)
 						   videoState->PlaneLength;
 
 #ifndef PROD
-    dumpBlock();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
    /* Transfer to this label only occurs if console has removed videostate */
@@ -854,8 +854,7 @@ syncHandshake:
     if (timo != 0)		// 0 is 'signalled'
     {
 #ifndef PROD
-	if (timo == WAIT_TIMEOUT)
-	    printf("NTVDM:Waiting for console to map frame buffer Timed Out\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	ErrorExit();
@@ -973,8 +972,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     if (timo != 0)		/* 0 is 'signalled' */
     {
 #ifndef PROD
-	if (timo == WAIT_TIMEOUT)
-	    printf("NTVDM:Waiting for console to unmap frame buffer Timed Out\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	ErrorExit();
@@ -1053,7 +1051,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     plane4Ptr = GET_OFFSET(Plane4Offset);
 
 #ifndef PROD
-    dumpPlanes(plane1Ptr, plane2Ptr, plane3Ptr, plane4Ptr);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
     /*
@@ -1172,7 +1170,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     else {
 	ModeSetBatch = TRUE;
 #ifndef PROD
-	OutputDebugString("fullscreen->windowed switching in set mode\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -1188,7 +1186,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     {
 
 #ifndef PROD
-	dumpBlock();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
         /* if in middle of mode change, don't want to draw screen */
@@ -1243,8 +1241,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
 	if (timo != 0)		/* 0 is 'signalled' */
 	{
 #ifndef PROD
-	    if (timo == WAIT_TIMEOUT)
-		printf("NTVDM:Waiting for console to map frame buffer Timed Out\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
             SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	    ErrorExit();
@@ -1268,8 +1265,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
 
         blocked_in_gfx_mode = FALSE;   /* save restart mode switch */
 #ifndef PROD
-	/* Dump out a view of the state block as it might be useful. */
-	dumpBlock();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
     }
 
@@ -1382,178 +1378,7 @@ LOCAL VOID freezeWindow(VOID)
 }
 
 #ifndef PROD
-
-/***************************************************************************
- * Function:								   *
- *	dumpBlock							   *
- *									   *
- * Description: 							   *
- *	Dumps the contents of the video state block.			   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-int dumpit = 0;
-LOCAL VOID dumpBlock(VOID)
-{
-    USHORT i,
-	   dacIndex;
-    UTINY *regPtr,
-	   index,
-	   rgb;
-
-    if (dumpit == 0) return;
-
-    /* Dump out single value registers. */
-    printf("\nSingle value registers:\n");
-    for (i = 0; i < 0x30; i++)
-	printf("\tPort %#x = %#x\n", i, videoState->PortValue[i]);
-
-    /* Dump sequencer values */
-    regPtr = GET_OFFSET(BasicSequencerOffset);
-    printf("Sequencer registers: (addr %#x)\n",regPtr);
-    for (index = 0; index < NUM_SEQ_REGS; index++)
-    {
-	printf(" %#x = %#x\t", index, *regPtr++);
-    }
-    printf("\n");
-
-    /* Dump CRTC values */
-    regPtr = GET_OFFSET(BasicCrtContOffset);
-    printf("CRTC registers: (addr %#x)\n",regPtr);
-    for (index = 0; index < NUM_CRTC_REGS; index++)
-    {
-	printf(" %#x = %#x\t", index, *regPtr++);
-    }
-    printf("\n");
-
-    /* Dump graphics context values */
-    regPtr = GET_OFFSET(BasicGraphContOffset);
-    printf("Graphics context registers: (addr %#x)\n",regPtr);
-    for (index = 0; index < NUM_GC_REGS; index++)
-    {
-	printf(" %#x = %#x\t", index, *regPtr++);
-    }
-    printf("\n");
-
-    /* Dump attribute context values */
-    regPtr = GET_OFFSET(BasicAttribContOffset);
-    printf("Attribute context registers: (addr %#x)\n",regPtr);
-    for (index = 0; index < NUM_AC_REGS; index++)
-    {
-	printf(" %#x = %#x\t", index, *regPtr++);
-    }
-    printf("\n");
-
-    /* Dump DACs. First few only otherwise too slow & console times out! */
-    regPtr = GET_OFFSET(BasicDacOffset);
-    printf("DAC registers:\n");
-    for (dacIndex = 0; dacIndex < NUM_DAC_REGS/8; dacIndex++)
-    {
-	printf("Ind:%#02x:  ", dacIndex);
-	for (rgb = 0; rgb < 3; rgb++)
-	{
-	    printf("R:%#02x G:%#02x B:%#02x\t", *regPtr++, *regPtr++, *regPtr++);
-	}
-	if ((dacIndex % 4) == 0) printf("\n");
-    }
-}
-
-int doPlaneDump = 0;
-LOCAL VOID dumpPlanes(UTINY *plane1Ptr, UTINY *plane2Ptr, UTINY *plane3Ptr,
-		      UTINY *plane4Ptr)
-{
-    HANDLE	outFile;
-    char	planeBuffer[256],
-		*bufptr;
-    DWORD	i,
-		j,
-		k,
-		plane,
-		nBytes,
-		bytesWritten;
-    UTINY	*planes[4];
-    FAST UTINY	*tempPlanePtr;
-
-    if (doPlaneDump)
-    {
-
-	/* Dump out plane(s). */
-	outFile = CreateFile("PLANE",
-			     GENERIC_WRITE,
-			     (DWORD) 0,
-			     (LPSECURITY_ATTRIBUTES) NULL,
-			     CREATE_ALWAYS,
-			     FILE_ATTRIBUTE_NORMAL,
-			     (HANDLE) NULL);
-	if (outFile == INVALID_HANDLE_VALUE)
-	    ErrorExit();
-	planes[0] = plane1Ptr;
-	planes[1] = plane2Ptr;
-	planes[2] = plane3Ptr;
-	planes[3] = plane4Ptr;
-	for (plane = 0; plane < 4; plane++)
-	{
-	    tempPlanePtr = planes[plane];
-	    sprintf(planeBuffer, "Plane %d\n", plane);
-	    strcat(planeBuffer, "-------\n");
-	    if (!WriteFile(outFile,
-			   planeBuffer,
-			   strlen(planeBuffer),
-			   &bytesWritten,
-			   (LPOVERLAPPED) NULL))
-		ErrorExit();
-	    for (i = 0; i < 0x10000; i += 0x10)
-	    {
-		sprintf(planeBuffer, "%04x\t", i);
-		bufptr = planeBuffer + strlen(planeBuffer);
-		for (j = 0; j < 2; j++)
-		{
-		    for (k = 0; k < 8; k++)
-		    {
-			LOCAL char numTab[] =
-			{
-			    '0', '1', '2', '3', '4', '5', '6', '7',
-			    '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'
-			};
-			FAST UTINY temp;
-
-			temp = *tempPlanePtr++;
-			*bufptr++ = numTab[(temp >> 4) & 0xf];
-			*bufptr++ = numTab[temp & 0xf];
-			*bufptr++ = ' ';
-		    }
-		    if (j == 0)
-		    {
-			*bufptr++ = '-';
-			*bufptr++ = ' ';
-		    }
-		}
-		*bufptr++ = '\n';
-		*bufptr++ = '\0';
-		nBytes = strlen(planeBuffer);
-		if (!WriteFile(outFile,
-			       planeBuffer,
-			       nBytes,
-			       &bytesWritten,
-			       (LPOVERLAPPED) NULL))
-		    ErrorExit();
-	    }
-	    if (!WriteFile(outFile,
-			   "\n",
-			   1,
-			   &bytesWritten,
-			   (LPOVERLAPPED) NULL))
-		ErrorExit();
-	}
-	CloseHandle(outFile);
-    }
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #endif /* X86GFX */
 

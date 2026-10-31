@@ -979,7 +979,7 @@ void reset()
 	 * sort of a SoftPC they are running.
 	 */
 #ifndef PROD
-	announce_variant();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 #endif	/* NTVDM */

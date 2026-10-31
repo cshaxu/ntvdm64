@@ -4192,8 +4192,7 @@ void mon_text_update()
     /*::::::::::::::::::::::::::::::::::::::::::: Check for buffer overflows */
 
 #ifndef PROD
-    if(((int)to) & 3)		printf("Video copy not aligned on DWORD\n");
-    if(get_screen_length() & 3) printf("Screen size incorrect\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*::::::::::::::::::::::::::::::::::::::::::::::: Has the screen changed */

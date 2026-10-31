@@ -371,25 +371,7 @@ manager_files_init()
 
 
 #ifndef PROD
-/*
- * =========================================================================
- *
- * FUNCTION		: host_symb_debug_init
- *
- * PURPOSE		: Does nothing
- *
- * RETURNED STATUS	: None.
- *
- * DESCRIPTION	: Called from main.c.
- *
- *
- * =======================================================================
- */
-
-void
-host_symb_debug_init IFN1(char *, name)
-{
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif				/* nPROD */
 
 

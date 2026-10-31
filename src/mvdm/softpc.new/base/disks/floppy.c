@@ -859,12 +859,7 @@ void fl_disk_type IFN1(int, drive)
 	setCF(0);
 
 #ifndef PROD
-switch( getAH() ){
-case DRIVE_IQ_UNKNOWN: note_trace0( GFI_VERBOSE, "unknown drive\n" ); break;
-case DRIVE_IQ_CHANGE_LINE: note_trace0( GFI_VERBOSE, "change line\n" ); break;
-case DRIVE_IQ_NO_CHANGE_LINE: note_trace0( GFI_VERBOSE, "no change line\n" ); break;
-default: note_trace0( GFI_VERBOSE, "bad AH return value\n" ); break;
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -2442,31 +2437,7 @@ LOCAL half_word get_parm IFN1(int, index)
 	sas_load(effective_addr(segment, offset+index), &value);
 
 #ifndef PROD
-        {
-                char *parm_name = "Unknown???";
-
-#define DT_PARM_NAME(x,y)       case x: parm_name = y; break;
-
-                switch (index) {
-                DT_PARM_NAME(DT_SPECIFY1,"SPECIFY1");
-                DT_PARM_NAME(DT_SPECIFY2,"SPECIFY2");
-                DT_PARM_NAME(DT_MOTOR_WAIT,"MOTOR_WAIT");
-                DT_PARM_NAME(DT_N_FORMAT,"N_FORMAT");
-                DT_PARM_NAME(DT_LAST_SECTOR,"LAST_SECTOR");
-                DT_PARM_NAME(DT_GAP_LENGTH,"GAP_LENGTH");
-                DT_PARM_NAME(DT_DTL,"DTL");
-                DT_PARM_NAME(DT_FORMAT_GAP_LENGTH,"FORMAT_GAP_LENGTH");
-                DT_PARM_NAME(DT_FORMAT_FILL_BYTE,"FORMAT_FILL_BYTE");
-                DT_PARM_NAME(DT_HEAD_SETTLE,"HEAD_SETTLE");
-                DT_PARM_NAME(DT_MOTOR_START,"MOTOR_START");
-                DT_PARM_NAME(DT_MAXIMUM_TRACK,"MAXIMUM_TRACK");
-                DT_PARM_NAME(DT_DATA_TRANS_RATE,"DATA_TRANS_RATE");
-                }
-
-        note_trace5(FLOPBIOS_VERBOSE,
-		"diskette_io:get_parm(%04x:%04x+%02x) %s=%02x)",
-                 segment, offset, index, parm_name, value);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 	return(value);

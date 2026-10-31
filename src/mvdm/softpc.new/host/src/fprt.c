@@ -12,13 +12,7 @@ void OutputString(char *);
 int _CRTAPI1 printf(const char *str, ...)
 {
 #ifndef PROD
-    va_list ap;
-    char buf[500];
-
-    va_start(ap,str);
-    vsprintf(buf, str, ap);
-    OutputString(buf);
-    va_end(ap);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     return(0);
 }
@@ -30,37 +24,7 @@ static HANDLE pipe=NULL;
 void OutputString(char *str)
 {
 #ifndef PROD
-    char StrSizeStr[2];
-    int  StrSize;
-    DWORD BytesWritten;
-
-    /*............................................ Connect to debug pipe */
-
-    if(pipe == NULL && getenv("PIPE") != NULL)
-    {
-        pipe = CreateFile(getenv("PIPE"),GENERIC_READ | GENERIC_WRITE,
-                          FILE_SHARE_READ | FILE_SHARE_WRITE, NULL,
-                          OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL,
-                          NULL);
-
-        if(pipe == (HANDLE) -1)
-            OutputDebugString("ntvdm : Failed to connect to debug pipe\n");
-    }
-
-    /*.................................................... Output string */
-
-    if(pipe != NULL && pipe != (HANDLE) -1)
-    {
-        StrSize = strlen(str);
-        StrSizeStr[0] = (char) (StrSize % 256);
-        StrSizeStr[1] = (char) (StrSize / 256);
-
-        WriteFile(pipe, StrSizeStr, 2, &BytesWritten, NULL);
-        WriteFile(pipe, str, StrSize, &BytesWritten, NULL);
-    }
-    else
-        OutputDebugString(str);
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #ifdef HUNTER
     if (TrapperDump != (HANDLE) -1)
@@ -76,66 +40,7 @@ void OutputString(char *str)
 VOID InputString(char *str, int len)
 {
 #ifndef PROD
-
-    char input_request[2];
-    DWORD BytesWritten, BytesRead;
-    int StringSize;
-    UNALIGNED DWORD *addsig;
-    char *inorout;
-    IMPORT ULONG DbgPrompt(char *, char *, ULONG);
-
-    if(pipe != NULL && pipe != (HANDLE) -1)
-    {
-        input_request[0] = (char)0xff; input_request[1] = (char)0xff;
-        WriteFile(pipe, input_request, 2, &BytesWritten, NULL);
-
-        ReadFile(pipe, str, 2, &BytesRead, NULL);
-        StringSize = (str[0]&0xff) + ((str[1]&0xff)*256);
-
-        if(StringSize >= len)
-            OutputDebugString("ntvdm : PIPE BUFFER OVERFLOW [FATAL]\n");
-
-        ReadFile(pipe, str, StringSize, &BytesRead, NULL);
-    }
-    else
-    {
-/* 
-    We used to do this...
-        DbgPrompt("",str,len);
-    but foozle dust now does this...
-
-    Call OutputDebugString with the following:
-
-     "Message" | 0xdefaced | len | inBuffer
-
-where "Message" is printed
-      0xdefaced is a magic (DWORD) signature
-      len is a byte length of,,,
-      inBuffer which the reply to 'Message will appear in.
-*/
-        /* do this so we can add prompt passing if we wish */
-        StringSize = strlen("") + 1;
-	inorout = malloc(len + StringSize + 5);
-        if (!inorout)
-        {
-            printf("\nmemory allocation failure - getting input via kd\n");
-            DbgPrompt("NTVDM>> ", str, len);
-            return;
-        }
-	strcpy(inorout, "");
-	addsig = (PDWORD)&inorout[StringSize];
-	*addsig = INPUT_API_SIG;
-	*(inorout + StringSize+4) = (BYTE)len;
-        *(inorout + StringSize+5) = (BYTE)0xff; // success flag
-        OutputDebugString(inorout);
-        // check for no debugger or debugger that can't speak foozle
-        if (*(inorout + StringSize + 5) == 0xff)
-            DbgPrompt("", str, len);
-        else
-	    strcpy(str, inorout + StringSize + 5);
-        free(inorout);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -144,16 +49,7 @@ where "Message" is printed
 int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)
 {
 #ifndef PROD
-    va_list ap;
-    char buf[500];
-
-    if (getenv("TRACE") == NULL)        //JonLu request to limit debugs
-        return(0);
-
-    va_start(ap,str);
-    vsprintf(buf, str, ap);
-    va_end(ap);
-    OutputString(buf);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     return(0);
 }
@@ -226,7 +122,7 @@ size_t _CRTAPI1 fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 
     tmp_buf[len] = 0;		// Bullshit write into a const ptr!
 #ifndef PROD
-    OutputString((char *)buf);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif  /* PROD */
     return(len);
 }

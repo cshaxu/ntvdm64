@@ -780,8 +780,7 @@ setup_vga_globals IFN0()
         GLOBAL_SubrRingPtr = GLOBAL_SubrRingLowIncl;
 
 #ifndef PROD
-	if (getenv("CEVID_VERBOSE") != 0)
-		cevid_verbose = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 }
 

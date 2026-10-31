@@ -542,10 +542,7 @@ addEOI IFN3 (EOIHANDLE, newhandle, char *, tag, IU8, attrib)
 	lastEoin = eoin = EventsOfInterest;
 	do {
 #ifndef PROD
-	    if (eoin->handle == newhandle)	/* sanity check */
-	    {
-		assert1(NO, "profiler:addEOI - adding previously added handle %ld",newhandle);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 	    lastEoin = eoin;
 	    eoin = eoin->next;
@@ -1527,7 +1524,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
     {
 	(void)addEOI(CurMaxEOI, tag, attrib);	/* No init file, enable all */
 #ifndef PROD
-	printf( "Adding EOI %d (%s) for C (No init file)\n", CurMaxEOI, tag );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return(CurMaxEOI);		/* return new handle */
     }
@@ -1567,7 +1564,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
 	    {
 		(void)addEOI(CurMaxEOI, tag, flags);
 #ifndef PROD
-		printf( "Adding C EOI %d (%s), found in init file\n", CurMaxEOI, tag );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		return(CurMaxEOI);
 	    }
@@ -1576,7 +1573,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
 
     (void)addEOI(CurMaxEOI, tag, attrib | EOI_DISABLED);
 #ifndef PROD
-    printf( "Adding disabled C EOI %d (%s), not found\n", CurMaxEOI, tag );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     return(CurMaxEOI);		/* return new handle */
 }

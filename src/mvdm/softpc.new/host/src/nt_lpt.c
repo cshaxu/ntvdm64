@@ -74,7 +74,7 @@ Work outstanding on this module,
 #include "printer.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 boolean flushBuffer IFN1(int, adapter);
@@ -216,7 +216,7 @@ SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
 					      + adapter), NULL);
 
 #ifndef PROD
-    fprintf(trace_file, "Opening printer port %s (%d)\n",lptName,adapter);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     if ((lpt->kBuffer = (byte *)host_malloc (KBUFFER_SIZE)) == NULL) {
@@ -247,7 +247,7 @@ SHORT host_lpt_open(int adapter, BOOLEAN direct_access)
         host_free (lpt->kBuffer);
 	// UIF needed to inform user that the open attempt failed
 #ifndef PROD
-	fprintf(trace_file, "Failed to open printer port\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	if (direct_access && GetLastError() == ERROR_FILE_NOT_FOUND)
 	    lpt->no_device_attached = TRUE;
@@ -333,7 +333,7 @@ VOID host_lpt_close(int adapter)
 	(void)flushBuffer(adapter);
 
 #ifndef PROD
-	fprintf(trace_file, "Closing printer port (%d)\n",adapter);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef MONITOR
@@ -348,7 +348,7 @@ VOID host_lpt_close(int adapter)
         set_lpt_status(adapter, 0);           /* Reset port status */
 
 #ifndef PROD
-        fprintf(trace_file, "Counter expired, closing LPT%d\n", adapter+1);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 }
@@ -378,7 +378,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
 	if(!host_lpt_open(adapter, TRUE))
 	{
 #ifndef PROD
-	    fprintf(trace_file, "file open error %d\n", GetLastError());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
 	    return(FALSE);	     /* exit, printer not active !!!! */
@@ -398,10 +398,7 @@ GLOBAL UCHAR host_read_printer_status_port(int adapter)
                      )) {
 
 #ifndef PROD
-       fprintf(trace_file,
-               "host_read_printer_status_port failed, error = %ld\n",
-               GetLastError()
-               );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         PrinterStatus = 0;
     }
@@ -469,7 +466,7 @@ boolean flushBuffer IFN1( int, adapter )
 	                lpt->bytesInBuffer, &BytesWritten, NULL )
 	  ){
 #ifndef PROD
-		fprintf(trace_file, "lpt write error %d\n", GetLastError());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		lpt->bytesInBuffer = 0;
 		return(FALSE);
@@ -525,7 +522,7 @@ GLOBAL BOOL host_print_byte(int adapter, byte value)
 	if(!host_lpt_open(adapter, FALSE))
 	{
 #ifndef PROD
-	    fprintf(trace_file, "file open error %d\n", GetLastError());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
 	    return(FALSE);	     /* exit, printer not active !!!! */
@@ -635,7 +632,7 @@ GLOBAL boolean host_print_buffer(int adapter)
 	if(!host_lpt_open(adapter, FALSE))
 	{
 #ifndef PROD
-	    fprintf(trace_file, "file open error %d\n", GetLastError());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    set_lpt_status(adapter, HOST_LPT_BUSY);
 	    return(FALSE);	     /* exit, printer not active !!!! */

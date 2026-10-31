@@ -434,11 +434,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 			break;
 	}
 #ifndef PROD
-	if( *value==DUAL_CARD_ID ){
-		note_trace0( FLA_VERBOSE, "Dual Card\n" );
-	}else{
-		note_trace0( FLA_VERBOSE, "No Dual Card\n" );
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
     else
@@ -710,8 +706,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     }
 
 #ifndef PROD
-    else
-        note_trace0(FLA_VERBOSE, "<unknown port>");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     fla_busy = FALSE;

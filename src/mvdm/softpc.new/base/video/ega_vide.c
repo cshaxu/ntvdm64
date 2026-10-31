@@ -112,7 +112,7 @@ DESCRIPTION	  : 	describe what (not how) function does
 #include "host_gfx.h"
 #include "idetect.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #include "host.h"
 
@@ -1009,7 +1009,7 @@ GLOBAL void ega_set_mode IFN0()
 #endif /* V7VGA */
 
 #ifndef PROD
-	trace("setting video mode", DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef GISP_SVGA
@@ -1330,7 +1330,7 @@ GLOBAL void ega_set_mode IFN0()
     mouse_video_mode_changed(video_mode);
 #endif
 #ifndef PROD
-    trace("end of video set mode", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -2289,8 +2289,7 @@ sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 			return params_addr;
 		    }
 #ifndef PROD
-		    else
-			printf("NTVDM:video window parm table not loaded but system initialised\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		}
 		if(babyModeTable > 0)

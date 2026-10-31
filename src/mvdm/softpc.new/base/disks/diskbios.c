@@ -106,10 +106,7 @@ LOCAL int maxsectors, maxoffset;
 LOCAL int tfstatus;
 
 #ifndef PROD
-/*
-* disk trace control variable; global only for use by Yoda.
-*/
-GLOBAL IU32 disktraceinfo;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -363,201 +360,7 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 }
 
 #ifndef PROD
-/*
-FUNCTION	:	relevant()
-PURPOSE		:	filter out unwanted tracing as requested by the
-			disk trace flag.
-INPUT PARAMS	:
-	i		encoded flag indicating type of tracing information
-			asking to be output
-*/
-LOCAL BOOL relevant IFN1(int, i)
-{
-	if ((i & disktraceinfo) == i)
-		return ~0;
-	else
-		return 0;
-}
-
-LOCAL BOOL storing_trace = FALSE;
-LOCAL int stored_trace_hndl, stored_trace_count = 0;
-
-#ifdef macintosh
-GLOBAL	int	*stored_trace_data;
-#else
-LOCAL int stored_trace_data[1024];
-#endif
-LOCAL int stored_tr_dptr = 0;
-LOCAL int stored_infoid;
-LOCAL char stored_tr_string[80];
-
-void unload_stored_trace IFN1(int, hndl)
-{
-	int i,linecount;
-
-	if (stored_infoid & DBIOS)
-		fprintf (trace_file, "DBIOS:");
-
-	if (stored_infoid & DHW)
-		fprintf (trace_file, "DHW  :");
-
-	switch (hndl)
-	{
-	case INW_TRACE_HNDL:
-	case OUTW_TRACE_HNDL:
-		if (stored_trace_count == 1)
-		{
-			fprintf (trace_file, "%s : 0x%04x\n",stored_tr_string,stored_trace_data[0]);
-		}
-		else
-		{
-			fprintf (trace_file, "%d lots of %s : \n",
-				stored_trace_count,stored_tr_string);
-			linecount = 8;
-			for (i=0;i<stored_trace_count;i++)
-			{
-				if (linecount >= 8)
-				{
-					fprintf(trace_file, "\n");
-					if (stored_infoid & DBIOS)
-						fprintf (trace_file, "DBIOS:");
-				
-					if (stored_infoid & DHW)
-						fprintf (trace_file, "DHW  :");
-					linecount = 0;
-				}
-				fprintf(trace_file, "0x%04x ",stored_trace_data[i]);
-				linecount++;
-			}
-			fprintf(trace_file, "\n");
-		}
-		break;
-	default:
-		/* unknown handle */
-		break;
-	}
-	stored_tr_dptr = 0;
-	stored_trace_count = 0;
-}
-
-void add_to_stored_trace IFN1(int, data)
-{
-	stored_trace_data[stored_tr_dptr++]=data;
-}
-
-#ifdef ANSI
-void disktrace (int infoid, int nargs, int hndl, char *fmt, unsigned long a1,
-		unsigned long a2, unsigned long a3, unsigned long a4,
-		unsigned long a5)
-#else
-void disktrace (infoid, nargs, hndl, fmt, a1, a2, a3, a4, a5)
-int infoid;
-int nargs;
-int hndl;
-char *fmt;
-unsigned long a1;
-unsigned long a2;
-unsigned long a3;
-unsigned long a4;
-unsigned long a5;
-#endif	/* ANSI */
-{
-
-
-	if (relevant (infoid))
-	{
-		switch(hndl)
-		{
-		case INW_TRACE_HNDL:
-		case OUTW_TRACE_HNDL:
-			if (storing_trace && (stored_trace_hndl != hndl))
-				unload_stored_trace(stored_trace_hndl);
-			if (!storing_trace)
-			{	
-				storing_trace = TRUE;
-				stored_trace_hndl = hndl;
-				strcpy(stored_tr_string, fmt);
-				stored_infoid = infoid;
-			}
-			add_to_stored_trace(a1);
-			stored_trace_count++;
-			return;
-		default:
-		case 0:
-			if (storing_trace)
-				unload_stored_trace(stored_trace_hndl);
-			storing_trace = FALSE;
-			break;
-		}			
-				
-		if (infoid & DBIOS)
-			fprintf (trace_file, "DBIOS:");
-
-		if (infoid & DHW)
-			fprintf (trace_file, "DHW  :");
-
-		switch (nargs)
-		{
-			case 0:
-				fprintf (trace_file, fmt);
-				break;
-			case 1:
-				fprintf (trace_file, fmt, a1);
-				break;
-			case 2:
-				fprintf (trace_file, fmt, a1, a2);
-				break;
-			case 3:
-				fprintf (trace_file, fmt, a1, a2, a3);
-				break;
-			case 4:
-				fprintf (trace_file, fmt, a1, a2, a3, a4);
-				break;
-			case 5:
-				fprintf (trace_file, fmt, a1, a2, a3, a4, a5);
-				break;
-		}
-	}
-}
-
-
-void setdisktrace IFN0()
-{
-	char l[30];
-	int value;
-
-/* make the compiler happy */
-#if defined(NTVDM) && defined(MONITOR)
-	value = 0;
-#endif
-	printf ("select disk trace mask\n");
-	printf ("\tcmnd info\t%x\n",CMDINFO);
-	printf ("\texec info\t%x\n",XINFO);
-	printf ("\texec status\t%x\n",XSTAT);
-	printf ("\tphys.att\t%x\n",PAD);
-	printf ("\tio-att\t\t%x\n",IOAD);
-	printf ("\tportio\t\t%x\n",PORTIO);
-	printf ("\tints\t\t%x\n",INTRUPT);
-	printf ("\thw xinfo\t%x\n",HWXINFO);
-	printf ("\tdata dump\t%x\n",DDATA);
-	printf ("\tPhys IO\t\t%x\n",PHYSIO);
-	printf ("\thardware\t\t%x\n",DHW);
-	printf ("\tbios\t\t%x\n",DBIOS);
-#ifdef WDCTRL_BOP
-	printf ("\twdctrl\t\t%x\n",WDCTRL);
-#endif /* WDCTRL_BOP
-	printf (" .. ? ");
-	 gets (l);
-	 sscanf (l, "%x", &value);
-
-	/*
-	 * automatically select BIOS entry,exit tracing if BIOS
-	 * tracing selected
-	 */
-	if (value & DBIOS)
-		 value |= CALL;
-	 disktraceinfo = value;
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif				/* nPROD */
 
 
@@ -596,31 +399,7 @@ LOCAL void (*disk_func[]) () =
 };
 
 #ifndef PROD
-static char *BIOSnames[] =
-{
-        "reset disk (AH=0)",
-        "read last status (AH=1)",
-        "read sectors (AH=2)",
-        "write sectors (AH=3)",
-        "verify sectors (AH=4)",
-        "format track (AH=5)",
-        "unused (AH=6)",
-        "unused (AH=7)",
-        "return current drive parameters (AH=8)",
-        "set drive geometry for controller (AH=9)",
-        "read long (AH=0xa)",
-        "write long (AH=0xb)",
-        "seek (AH=0xc)",
-        "alternate disk reset (AH=0xd)",
-        "unused (AH=0xe)",
-        "unused (AH=0xf)",
-        "test drive ready (AH=0x10)",
-        "recalibrate (AH=0x11)",
-        "unused (AH=0x12)",
-        "unused (AH=0x13)",
-        "diagnostics (AH=0x14)",
-        "read dasd type (AH=0x15)"
-};
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */
 
 /* Fixed disk BIOS mainline */
@@ -628,7 +407,7 @@ void disk_io IFN0()
 {
 	register int BIOS_command;
 #ifndef PROD
-	int ax,bx,cx,dx,es;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -640,21 +419,7 @@ void disk_io IFN0()
 	BIOS_command = getAH ();
 
 #ifndef PROD
-
-        ax = getAX();
-        bx = getBX();
-        cx = getCX();
-        dx = getDX();
-        es = getES();
-
-        dt5(DBIOS, 0, "<ax %x bx %x cx %x dx %x es %x\n", ax,bx,cx,dx,es)
-
-        if (BIOS_command > 0x15)
-                dt1(DBIOS|CALL, 0, "bad BIOS call (AH=%x)\n", BIOS_command)
-        else
-                dt1(DBIOS|CALL, 0, "BIOS call = %s\n",
-				(unsigned long)BIOSnames[BIOS_command])
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 	/* clear up the status before we kick off */
@@ -709,11 +474,7 @@ void disk_io IFN0()
 		 * of a device.
 		 */
 #ifndef PROD
-		if (BIOS_command != 8) {
-			assert0 (NO,"FAST DISK COMMAND FAILED \n");
-			assert1 (NO,"STATUS %x   ", rstatus ());
-			assert1 (NO,"BIOS_command %x \n", BIOS_command);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 		setCF (1);	/* cmd fails */
 	}
@@ -1279,27 +1040,7 @@ GLOBAL void wdctrl_bop IFN0()
 	command = getDH();
 
 #ifndef PROD
-	/* #ifndef PROD so the tests don't occur in PROD version */
-	{
-		IUM32	cs = getCS();
-		IUM32	eip = getEIP();
-		
-		if (command == BDC_READ)
-		{
-			dt2(WDCTRL, 0, "WDCTRL READ: called from %04x:%08x\n",
-	                                cs, eip);
-	        }
-	        else if (command == BDC_WRITE)
-		{
-			dt2(WDCTRL, 0, "WDCTRL WRITE: called from %04x:%08x\n",
-					cs, eip);
-		}
-		else
-		{
-			dt3(WDCTRL, 0, "WDCTRL command %d: called from %04x:%08x\n",
-					command, cs, eip);
-		}
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	/* clear up the status before we kick off */
@@ -1420,26 +1161,7 @@ GLOBAL void wdctrl_bop IFN0()
 		setAL ((unsigned char) com.sectors);
 	}
 #ifndef PROD
-/* These are for debugging scatter gather - I never had one and don't know
- * if the intel side is correct...
- */
-else if (command == 4)
-{
-	/* Just to let me know we've got a scatter/gather loop */
-	dt0(WDCTRL, 0, "wdctrl_bop: scatter gather detected ********\n");
-	force_yoda();
-	return;
-}
-else if (command == 5)
-{
-	/* Just to let me know we've got a scatter/gather loop */
-	dt0(WDCTRL, 0, "wdctrl_bop: scatter gather processing ********\n");
-	force_yoda();
-	return;
-}
-/*
- * end of debugging commands
- */
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 	else
 	{
@@ -1457,9 +1179,7 @@ else if (command == 5)
 		 * of a device.
 		 */
 #ifndef PROD
-		assert0 (NO,"FAST DISK COMMAND FAILED \n");
-		assert1 (NO,"STATUS %x   ", rstatus ());
-		assert1 (NO,"command %x \n", command);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 		setCF (1);	/* cmd fails */
 	}

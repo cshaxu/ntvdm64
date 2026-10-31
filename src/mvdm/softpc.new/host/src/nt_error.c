@@ -150,8 +150,7 @@ int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
     UNUSED(ErrorNo);    //Always internal error
 
 #ifndef PROD
-    sprintf(Msg,"NTVDM:ErrNo %#x, %s:%d\n", OSErrno, Filename, Lineno);
-    OutputDebugString(Msg);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     // assume NT error if either of top two bits set (err or warning).
@@ -196,10 +195,7 @@ SHORT host_error(int error_num, int options, char *extra_char)
 
 
 #ifndef PROD
-    OutputDebugString(message);
-    if (extra_char) {
-        OutputDebugString("\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);
@@ -618,9 +614,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
     else {
 #ifndef PROD
-        printf("CreateThread(ErrorDialogBoxThread) GLE=%d\n", GetLastError());
-        printf("NTVDM:<%s>\n<%s>\n", edgi.Title, edgi.message );
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         ResumeTimerThread();
 
@@ -1163,17 +1157,7 @@ ULONG WOWSysErrorBox(
 
 
 #ifndef PROD
-/*
- *  HostDebugBreak
- *
- *  Raises a breakpoint by creating an access violation
- *  to give us a chance to get into a user mode debugger
- *
- */
-void HostDebugBreak(void)
-{
-  DbgBreakPoint();
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg)

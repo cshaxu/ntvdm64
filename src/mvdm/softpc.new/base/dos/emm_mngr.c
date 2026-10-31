@@ -95,7 +95,7 @@ AMMENDMENTS	:
 #include "gmi.h"
 #include "debug.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #include "timer.h"
 
@@ -2077,57 +2077,6 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 #endif	/* !NTVDM || MVDM_SOFTPC_RECOVER_LIM_WRITEBACK */
 
 #ifndef PROD
-/*
-===========================================================================
-
-FUNCTION	: print_handle_data
-
-PURPOSE		: used for debugging only - prints all the data stored 
-		for a given handle
-
-RETURNED STATUS	: none
-
-DESCRIPTION	: 
-
-=========================================================================
-*/
-GLOBAL void print_handle_data IFN1(short, handle_no)
-
-{
-	long	storage_ID;
-	byte	*ptr;
-	short	no_pages, i;
-	char	*name_ptr;
-	short	*map_ptr;
-	short	*page_ptr;
-
-	if ((storage_ID = handle[handle_no]) == 0)
-	{
-		printf("Unassigned handle - No. %d\n",handle_no);
-		return;
-	}
-	ptr = USEBLOCK(storage_ID);
-	name_ptr = (char *)ptr + NAME_OFFSET;
-	map_ptr = (short *)(ptr + MAP_OFFSET);
-	page_ptr = (short *)(ptr + page_offset);
-
-	no_pages = *(short *)ptr;
-	printf("Handle No. %d\n",handle_no);
-	printf("No. of Pages = %d\n",no_pages);
-	printf("Name         = '");
-	for(i=0;i<8;i++)
-		printf("%c",*name_ptr++);
-	printf("'\n");
-	printf("Map = ");
-	for(i=0;i<no_phys_pages;i++)
-		printf(" %d",*map_ptr++);
-	printf("\n");
-	for(i=0;i<no_pages;i++)
-		printf("Page (%d)     = %d\n",i,*page_ptr++);
-
-	FORGETBLOCK(storage_ID);
-
-	return;
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* !PROD	*/
 #endif 	/* LIM		*/

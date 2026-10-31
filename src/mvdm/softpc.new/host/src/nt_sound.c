@@ -142,7 +142,7 @@ HANDLE OpenBeepDevice(void)
 
     if (!NT_SUCCESS( Status )) {
 #ifndef PROD
-	printf("NTVDM: OpenBeepDevice Status=%lx\n",Status);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         hBeep = INVALID_HANDLE_VALUE;
     }

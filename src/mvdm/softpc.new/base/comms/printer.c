@@ -109,7 +109,7 @@ static char SccsID[] = "@(#)printer.c	1.19 11/14/94 Copyright Insignia Solutions
 
 #include "debug.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -586,9 +586,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif
 
 #ifndef	PROD
-			if (old_control & IRQ)
-				note_trace1(PRINTER_VERBOSE, "Warning: LPT%d is being interrupt driven\n",
-					number_for_adapter(adapter));
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 			break;
 		}
@@ -654,8 +652,7 @@ static void notbusy_check IFN1(int,adapter)
 #endif /* NTVDM && !MONITOR */
 
 #ifndef	PROD
-		if (io_verbose & PRINTER_VERBOSE)
-		    fprintf(trace_file, "<printer notbusy_check() - adapter %d changed to NOTBUSY>\n", adapter);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 		if (get_control(adapter) & IRQ)

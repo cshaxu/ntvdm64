@@ -365,26 +365,7 @@ gfi_slave_drive_type IFN1(UTINY, drive)
 	drivetype( drive, &dtype, &status );
 	note_trace2( GFI_VERBOSE, "dtype=%x status=%x", dtype, status );
 #ifndef PROD
-	switch( dtype )
-	{
-		case GFI_DRIVE_TYPE_NULL:
-			note_trace0( GFI_VERBOSE, "Bad drive" );
-			break;
-		case GFI_DRIVE_TYPE_360:
-			note_trace0( GFI_VERBOSE, "360k" );
-			break;
-		case GFI_DRIVE_TYPE_12:
-			note_trace0( GFI_VERBOSE, "1.2M" );
-			break;
-		case GFI_DRIVE_TYPE_720:
-			note_trace0( GFI_VERBOSE, "720k" );
-			break;
-		case GFI_DRIVE_TYPE_144:
-			note_trace0( GFI_VERBOSE, "1.44M" );
-			break;
-		default: always_trace0( "Unrecognised drive value" );
-			break;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 
 	if ( status != SUCCESS )
@@ -639,7 +620,7 @@ gfi_slave_command
    	       if (nres != info.n_resblk)
 	       {
 #ifndef	PROD
-		   printf("result block discrepancy !!!\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
        		   failure(PROTOCOL);
 	       }
@@ -743,11 +724,7 @@ int *status;
       ioff += nbytes;
    }
 #ifndef PROD
-   if( errors>0 ){
-      note_trace3( GFI_VERBOSE,
-                   "Read 0x%x bytes of 0x%x with errors=%d",ioff , n, errors );
-   }else
-      note_trace1( GFI_VERBOSE, "Read 0x%x bytes OK", ioff );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
    return(0);
 }

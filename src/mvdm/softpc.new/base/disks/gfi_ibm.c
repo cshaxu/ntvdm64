@@ -271,13 +271,7 @@ int drive, *changed, *status;
 	int	i;
 
 #ifndef PROD
-	if( io_verbose & GFI_VERBOSE )
-	{
-		fprintf(trace_file,"gfi_IBM: cmd ");
-		for( i = 0; i < ncom; i++ )
-			fprintf(trace_file,"%x ",*(command + i) );
-		fprintf(trace_file,"\n");
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	   err = 1;
 	   if (ncom > 0 && ncom < 10)
@@ -326,14 +320,7 @@ int drive, *changed, *status;
 		    }
 		}
 #ifndef PROD
-	if( io_verbose & GFI_VERBOSE )
-	{
-		fprintf(trace_file,"gfi_IBM: res ");
-		for( i = 0; i < *nres; i++ )
-			fprintf(trace_file,"%x ",*(result - *nres + i) );
-		fprintf(trace_file,"\n");
-
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    return(0);
 	}

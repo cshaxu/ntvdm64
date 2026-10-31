@@ -3408,17 +3408,7 @@ LOCAL void mouse_set_text IFN4(word *,junk1,MOUSE_STATE *,text_cursor_type_ptr,M
 	UNUSED(junk1);
 	
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE)
-	{
-		fprintf(trace_file, "mouse_io:set_text(type=%d,",
-			*text_cursor_type_ptr);
-		if (*text_cursor_type_ptr == MOUSE_TEXT_CURSOR_TYPE_SOFTWARE)
-			fprintf(trace_file, "screen=0x%x,cursor=0x%x)\n",
-				*parameter1_ptr, *parameter2_ptr);
-		else
-			fprintf(trace_file, "start=%d,stop=%d)\n",
-				*parameter1_ptr, *parameter2_ptr);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	if (mouse_text_cursor_type_in_range(*text_cursor_type_ptr))
@@ -3830,7 +3820,7 @@ LOCAL void mouse_restore_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	}else{
 		/* Something failed.... ignore the call */
 #ifndef PROD
-		printf ("mouse_io.c: invalid call to restore context.\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 }
@@ -4041,7 +4031,7 @@ LOCAL void mouse_set_pointer_page IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 		}
 	}else{
 #ifndef PROD
-		fprintf(trace_file, "mouse_io: Bad page requested\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 }
@@ -5076,14 +5066,7 @@ LOCAL void mouse_unrecognised IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	 *	number is found
 	 */
 #ifndef PROD
-	int function = *m1;
-
-	UNUSED(m2);
-	UNUSED(m3);
-	UNUSED(m4);
-
-	fprintf(trace_file, 
-		"mouse_io:unrecognised function(fn=%d)\n", function);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #else
 	UNUSED(m1);
 	UNUSED(m2);
@@ -5655,8 +5638,7 @@ LOCAL EGA_graphics_cursor_display IFN0()
 {
 #ifdef REAL_VGA
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE)
-	    fprintf(trace_file, "oops - EGA graphics display cursor\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #else
 	/*
@@ -5846,8 +5828,7 @@ LOCAL EGA_graphics_cursor_undisplay IFN0()
 {
 #ifdef REAL_VGA
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE)
-	    fprintf(trace_file, "oops - EGA graphics undisplay cursor\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #else
 	/*
@@ -5929,8 +5910,7 @@ LOCAL VOID	VGA_graphics_cursor_display IFN0()
 {
 #ifdef REAL_VGA
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE)
-	    fprintf(trace_file, "oops - VGA graphics display cursor\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #else /* REAL_VGA */
 
@@ -6016,8 +5996,7 @@ LOCAL VOID	VGA_graphics_cursor_undisplay IFN0()
 {
 #ifdef REAL_VGA
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE)
-	    fprintf(trace_file, "oops - VGA graphics undisplay cursor\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #else /* REAL_VGA */
 

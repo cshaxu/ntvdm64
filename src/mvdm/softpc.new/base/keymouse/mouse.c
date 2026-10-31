@@ -74,7 +74,7 @@ int button_right = 0;	/* Current state of right button */
 int delta_x = 0, delta_y = 0;	/* Current mouse delta moves */
 
 #ifndef PROD
-static char buff[132];
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 static half_word data1_reg = 0,
@@ -119,10 +119,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
 		break;
 	    default :
 #ifndef PROD
-		if (io_verbose & MOUSE_VERBOSE) {
-			sprintf(buff, "mouse_inb() :  Bad P");
-			trace(buff,DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	}
@@ -143,10 +140,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
     }
 
 #ifndef PROD
-    if (io_verbose & MOUSE_VERBOSE) {
-	sprintf(buff, "mouse_inb() : port %x value %x", port, *value);
-	trace(buff,DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -154,15 +148,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
 void mouse_outb IFN2(io_addr, port, half_word, value)
 {
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE) {
-		if ((port == MOUSE_PORT_0)
-		 || (port == MOUSE_PORT_1)
-		 || (port == MOUSE_PORT_2))
-			sprintf(buff, "mouse_outb() : port %x value %x", port, value);
-		else
-			sprintf(buff, "mouse_outb() : bad port: %x value %x", port, value);
-		trace(buff,DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	/*
@@ -186,10 +172,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 
 			if ((value & 0x20) && ((mouse_mode_reg & 0x20) == 0)) {
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() : hold bit 0 -> 1");
-					trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				/* clear the interrupt */
 				ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);
@@ -220,10 +203,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			/* ready for next read from queue, so send interrupt */
 			else if ((mouse_mode_reg & 0x20) && ((value & 0x20)==0)){
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() : hold bit 1 -> 0");
-					trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 			}
 			/*
@@ -233,9 +213,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			switch (value & 0x7) {
 			case 0x0 :		/* 0 Hz INTR low */
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() : INTR low"); trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);
 				break;
@@ -265,9 +243,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			    {
 				loadsainterrupts--;
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() : Loadsainterrupts"); trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				/*
 				** AT version is asking for a 100 interrupts.
@@ -280,16 +256,12 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			case 0x5: /* reserved */
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse: reserved"); trace(buff,DUMP_NONE);
-					}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				break;
 			case 0x6 :		/* 0 Hz INTR hi */
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() : INTR hi"); trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER,AT_CPU_MOUSE_INT,1);
 				break;
@@ -297,10 +269,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			default:
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff,"mouse_outb() : bad mode");
-					trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				break;
 
@@ -314,10 +283,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 		else
 		if ((address_reg & 0x07) == INTERFACE_CONTROL_REG){
 #ifndef PROD
-				if (io_verbose & MOUSE_VERBOSE) {
-					sprintf(buff, "mouse_outb() :  interface control reg port %x value %x",port,value);
-					trace(buff,DUMP_NONE);
-				}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		}
 
@@ -387,10 +353,7 @@ void mouse_init IFN0()
     int p;
 
 #ifndef PROD
-    if (io_verbose & MOUSE_VERBOSE) {
-	sprintf(buff, "mouse_init()");
-	trace(buff,DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     mouse_inb_toggle = 0;
@@ -409,10 +372,7 @@ void mouse_init IFN0()
 #endif
 
 #ifndef PROD
-	if (io_verbose & MOUSE_VERBOSE) {
-	    sprintf(buff, "Mouse Port connected: %x", p);
-	    trace(buff,DUMP_NONE);
-	}  
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
     host_deinstall_host_mouse();

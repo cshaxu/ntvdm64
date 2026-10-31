@@ -202,8 +202,7 @@ void gvi_init IFN1(half_word, v_adapter)
 #endif
         default:
 #ifndef PROD
-            fprintf(trace_file, "gvi_term: invalid video adaptor: %d\n",
-                    video_adapter);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    break;
         }
@@ -329,8 +328,7 @@ void gvi_term IFN0()
 	break;
     default:
 #ifndef PROD
-        fprintf(trace_file, "gvi_term: invalid video adaptor: %d\n",
-                video_adapter);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	break;
     }

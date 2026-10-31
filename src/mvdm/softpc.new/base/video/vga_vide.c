@@ -65,7 +65,7 @@
 #include "debug.h"
 
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #include "host_gfx.h"

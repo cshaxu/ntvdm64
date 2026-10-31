@@ -275,8 +275,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 	includes. Return error -1.
 	*/
 #ifndef PROD
-        printf("NTVDM:sim32:effective addr: Error for addr %#x (seg %#x)\n",addr, seg);
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
             return ((sys_addr)-1);
 	}
@@ -365,7 +364,7 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
                         MEM_RESERVE, PAGE_READWRITE)))
                 {
 #ifndef PROD
-                        printf ("NTVDM:Failed to reserve 16 Meg virtual memory for sas\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
                         exit (0);
                 }
@@ -407,7 +406,7 @@ GLOBAL UTINY *sas_alter_size IFN1(sys_addr, new)
         if (!reserve_for_sas)
         {
 #ifndef PROD
-                printf ("NTVDM:Sas trying to alter size before reserve setup\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif 
                 return (NULL);
         }
@@ -462,7 +461,7 @@ GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
     {
 	/* Initialise function failed, exit */
 #ifndef PROD
-       printf ("NTVDM:Failed to allocate virtual memory for sas\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
        /* DIVERGENCE(MVDM-HOST-DIV-147): the original selected CCPU40

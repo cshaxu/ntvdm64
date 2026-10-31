@@ -45,7 +45,7 @@
 
 /* Make local symbols visible if debugging. */
 #ifndef PROD
-#define LOCAL
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* not PROD */
 
 /* Macros and typedefs. */
@@ -92,9 +92,7 @@ GLOBAL BOOL host_hwint_hook IFN1(IS32, int_no)
 	returnStatus = (HWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
-	if(!returnStatus)
-	    always_trace0("Hardware interrupt handler failed");
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
     }
 
@@ -175,10 +173,7 @@ GLOBAL BOOL host_swint_hook IFN1(IS32, int_no)
 	returnStatus = (SWIntHandler)((ULONG) int_no);
 
 #ifndef PROD
-
-	if(!returnStatus)
-	    always_trace0("Software interrupt handler failed");
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
     }
 
@@ -544,10 +539,7 @@ candidate_unhandled:
 	returnStatus = (EXIntHandler)((ULONG) exp_no, (ULONG) error_code);
 
 #ifndef PROD
-
-	if(!returnStatus)
-	    always_trace0("Exception interrupt handler failed (%x)");
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
     }
 

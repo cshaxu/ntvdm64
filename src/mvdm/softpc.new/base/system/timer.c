@@ -71,7 +71,7 @@ static char SccsID[]="@(#)timer.c	1.41 05/31/95 Copyright Insignia Solutions Ltd
 #include "quick_ev.h"
 
 #ifndef PROD
-#include <stdlib.h>
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef HUNTER
@@ -116,7 +116,7 @@ static  int     ticks_blocked = 0;
 #endif /* NTVDM */
 
 #ifndef PROD
-static char buf[80];  /* Used for tracing messages */
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef HUNTER			/* Only needed for HUNTER */
@@ -422,9 +422,7 @@ word                RealTimeCountCounterZero;
 
 
 #ifndef PROD
-ULONG NtTicTesting = 0;   /* tracing specific to NT port */
-ULONG TicsGenerated;
-ULONG TicsReceived;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /* for optimizing timer hardware interrupt generation */
@@ -468,15 +466,13 @@ LOCAL ULONG	n_rm_instrs_before_full_speed = 3000000;/* Nominal number of instruc
 LOCAL ULONG	adj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_mode_ticks_in_a_row must reach
 							   before the hack is disabled */
 #ifndef PROD
-LOCAL ULONG	ticks_ignored = 0;			/* For information purposes only. */
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #endif /* NTVDM */
 
 #ifndef PROD	/* Specific Timer change tracing that isn't timer_verbose */
-
-
-GLOBAL int DoTimerChangeTracing = 0;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #if !defined(NTVDM)
@@ -612,11 +608,7 @@ void SWTMR_gate IFN2(io_addr, port, half_word, value)
 
     emu_8253 (port, GATE_SIGNAL, value);
 #ifndef PROD
-    if (io_verbose & TIMER_VERBOSE)
-    {
-        sprintf(buf, "timer_gate() - sending %d to port 0x%x", value, port);
-        trace(buf, DUMP_REG);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM
@@ -669,11 +661,7 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 			break;
 	}
 #ifndef PROD
-    if (io_verbose & TIMER_VERBOSE)
-    {
-        sprintf(buf, "timer_inb() - Returning %d(0x%x) for port 0x%x", *value, *value, port);
-        trace(buf, DUMP_REG);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #ifdef NTVDM
     host_ica_unlock();
@@ -702,11 +690,7 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 	else
 	    emu_8253 (port, WRITE_SIGNAL, value);
 #ifndef PROD
-    if (io_verbose & TIMER_VERBOSE)
-    {
-	sprintf(buf, "timer_outb() - Value %d to port 0x%x", value, port);
-        trace(buf, DUMP_REG);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM
@@ -1029,7 +1013,7 @@ LOCAL void loadCounter IFN0()
 		if (maxback > max_backlog)
 		{
 #ifndef PROD
-			fprintf(trace_file, "setting max backlog to %d\n", maxback);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 			max_backlog = maxback;
                 }
@@ -1755,9 +1739,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
     {
     case 0:  usec_val = now->tv_usec - first->tv_usec;
 #ifndef PROD
-	    if (io_verbose & TIMER_VERBOSE)
-		    if ( usec_val == 0 )
-	        	trace("clocksSinceCounterActivated() == 0 !", 0);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
              break;
@@ -1770,10 +1752,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
 	     nclocks   = ((now->tv_usec - first->tv_usec) * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
 	     nclocks  += secs * (1000000L * TIMER_CLOCK_DENOM / TIMER_CLOCK_NUMER);
 #ifndef PROD
-	    if (io_verbose & TIMER_VERBOSE) {
-		sprintf(buf, "timer[%d]: %d seconds have passed!", pcu-timers, secs);
-		trace(buf, DUMP_NONE);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	     break;
     }
@@ -1880,19 +1859,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 	if (getPE()){
 		/* Prot mode tick... */
 #ifndef PROD
-		if (!hack_active){
-			SAVED BOOL first=TRUE;
-
-			always_trace0 ("PM timer Hack activated.");
-			if (first){
-				always_trace1 ("Min # instrs between interrupts = %d", HOST_TIMER_TOOLONG_DELAY);
-				always_trace1 ("        Nominal instrs_per_tick = %d", instrs_per_tick);
-				always_trace1 ("       adjusted instrs_per_tick = %d", adj_instrs_per_tick);
-				always_trace1 ("  # rm instrs before full speed = %d", n_rm_instrs_before_full_speed);
-				always_trace1 ("     rm ticks before full speed = %d", adj_n_real_mode_ticks_before_full_speed);
-				first = FALSE;
-			}
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		hack_active = TRUE;
 		real_mode_ticks_in_a_row = 0;
@@ -1918,10 +1885,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 		}else{
 			ticks_lost_this_time = TRUE;
 #ifndef PROD
-			ticks_ignored++;
-			if (!(ticks_ignored & 0xFF)){
-				always_trace0 ("another 256 ticks lost!");
-			}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		}
 	}else{
@@ -2140,8 +2104,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 	IU16 int_delay;	/* delay before handling wrapped int */
 
 #ifndef PROD
-static	pig_factor  = 0;
-static  time_factor = 0;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef PIG
@@ -2393,11 +2356,7 @@ LOCAL void updateCount IFN3(unsigned long, ticks, unsigned long *, wrap,
 			ticks %= modulo;
 
 #ifndef PROD
-			if (io_verbose & TIMER_VERBOSE)
-			    if ( pcu->m == INT_ON_TERMINALCOUNT ) {
-				sprintf(buf, "%lx wraps for timer[%d]", *wrap, pcu-timers);
-			        trace(buf, DUMP_NONE);
-			}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		}
 	}
@@ -2474,10 +2433,7 @@ LOCAL unsigned long guess IFN0()
 		pcu->saveCount = pcu->Count;
 		pcu->timeFrig = ((ticksPerIdealInterval * 7) >> 3) / pcu->guessesPerHostTick;	   /* guesses over 7/8 of tick */
 #ifndef PROD
-		if (io_verbose & TIMER_VERBOSE) {
-			sprintf(buf, "guess init timer[%d]: timeFrig = %lx", pcu-timers, pcu->timeFrig);
-		        trace(buf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	if(pcu->guessesSoFar++ > pcu->guessesPerHostTick)
@@ -2488,10 +2444,7 @@ LOCAL unsigned long guess IFN0()
 	 */
 		pcu->timeFrig = (pcu->timeFrig >> 1) + 1;
 #ifndef PROD
-		if (io_verbose & TIMER_VERBOSE) {
-			sprintf(buf, "guess decay: timeFrig = %lx", pcu->timeFrig);
-		        trace(buf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	pcu->microtick += pcu->timeFrig;
@@ -2511,11 +2464,7 @@ LOCAL void throwaway IFN0()
 	if (!pcu->microtick)
 		return;
 #ifndef PROD
-    if (io_verbose & TIMER_VERBOSE)
-    {
-        sprintf(buf, "throwaway: guessesPerHostTick = %d", (int)pcu->guessesPerHostTick);
-        trace(buf, DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	pcu->Count = pcu->saveCount;
 	pcu->microtick = 0;
@@ -2627,10 +2576,7 @@ LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
 		 */
 
 #ifndef	PROD
-#ifndef	PIG
-		sprintf(buf,"TIME WARP!!");
-		trace(buf,0);
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		*t = idealtime;
 	}
@@ -2646,11 +2592,7 @@ LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
 void	axe_ticks IFN1(int, ticks)
 {
 #ifndef	PROD
-	/*
-	 * No need to axe ticks if timers are disabled by toff2 (if
-	 * ticks_blocked is negative)
-	 */
-	if (ticks_blocked >=0)
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 		ticks_blocked = ticks;
 }
@@ -2840,33 +2782,6 @@ void	timer_post IFN0()
 
 #ifdef DOCUMENTATION
 #ifndef	PROD
-
-/*
- * Debugging code....
- * This code has no effect.  It is left here in case anyone wants to
- * expand it in future.
- */
-
-dumpCounter IFN0()
-{
-	static char *modes[] =
-	{	"int on tc",
-		"prog one shot",
-		"rate gen",
-		"squarewave gen",
-		"sw trig strobe",
-		"hw trig strobe"
-	};
-
-	static char *as[] =
-	{	"binary",
-		"bcd"
-	};
-
-	char *p, *q;
-
-	p = modes[pcu->m];
-	q = as[pcu->bcd];
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */
 #endif /* DOCUMENTATION */

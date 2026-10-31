@@ -509,10 +509,7 @@ quick_tick_recalibrate(void)
      ULONG CalibCount;
 
 #ifndef PROD
-     if (DisableQuickTickRecal) {
-         qevUsecPerIJC = DEFAULT_IJCTIME * qevJumpRestart;
-         return;
-         }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
      host_ica_lock();

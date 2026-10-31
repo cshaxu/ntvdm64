@@ -567,7 +567,7 @@ extern IBOOL checkForQEvent IPT0();
 extern int ica_intack IPT0();
 extern int VectorBase8259Slave IPT0();
 #if !defined(PROD)
-IMPORT IBOOL sf_debug_char_waiting();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* !PROD */
 #endif	/* SFELLOW */
 
@@ -4862,7 +4862,7 @@ LOCAL VOID
          {
 	 fprintf(stderr, "host_unsimulate() - already at base of stack!\n");
 #ifndef	PROD
-	 force_yoda();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */	 
 	 }
       else

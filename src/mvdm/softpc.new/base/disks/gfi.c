@@ -153,8 +153,7 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
     int ret_stat = SUCCESS;
 
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-	gfi_test_command(command_block, result_block);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     if (get_type_cmd(command_block) == FDC_SPECIFY)
@@ -185,8 +184,7 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
 GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 {
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-	gfi_test_drive_on(drive);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -199,8 +197,7 @@ GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 GLOBAL SHORT gfi_drive_off IFN1(UTINY,drive)
 {
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-	gfi_test_drive_off(drive);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -218,8 +215,7 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
      */
 
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-	gfi_test_reset(result_block);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -246,8 +242,7 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
 GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 {
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-        gfi_test_high(drive);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -261,8 +256,7 @@ GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 {
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-        gfi_test_drive_type(drive);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
  
     /*
@@ -275,8 +269,7 @@ GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 GLOBAL SHORT gfi_change IFN1(UTINY,drive)
 {
 #ifndef PROD
-    if (io_verbose & GFI_VERBOSE)
-        gfi_test_change(drive);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
  
     /*

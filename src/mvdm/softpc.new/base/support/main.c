@@ -148,7 +148,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif	/* NTVDM, macintosh, VMS */
 
 #ifndef PROD
-  host_set_yoda_ints();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 
 #ifdef SECURE
@@ -185,7 +185,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   verbose = FALSE;
 
 #ifndef PROD
-  io_verbose = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
   /*
@@ -271,19 +271,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif
 
 #ifndef PROD
-
-  if (host_getenv("YODA") != NULL)
-  {
-    force_yoda();
-  }
-
-/*
- * Look for environment variable TOFF, when set no timer interrupts
- *------------------------------------------------------------------*/
-
-  if( host_getenv("TOFF") != NULL )
-    axe_ticks( -1 );		/* lives in base:timer.c */
-
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 #ifdef GISP_SVGA

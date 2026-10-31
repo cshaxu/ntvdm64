@@ -93,8 +93,7 @@ void host_idle_init(void)
     IdleEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL, FALSE, FALSE, NULL);
 
 #ifndef PROD
-    if (IdleEvent == NULL)
-	printf("NTVDM:Idlling Event creation failed. Err %d\n",GetLastError());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 

@@ -43,7 +43,7 @@ GCSfn GetCommShadowMSR;
 /*::::::::::::::::::::::::::::::::::::::::::::: Internal function protocols */
 
 #ifndef PROD
-void DisplayPortAccessError(int PortOffset, BOOL ReadAccess, BOOL PortOpen);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch);
@@ -89,8 +89,7 @@ void wow_com_inb(io_addr port, half_word *value)
 
    FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-    if( FileH== NULL)
-        DisplayPortAccessError(port & 0x7, TRUE, FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*.................................................... Process port read */
@@ -159,8 +158,7 @@ void wow_com_inb(io_addr port, half_word *value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-    if(Invalid_port_access)
-        DisplayPortAccessError(port & 0x7, TRUE, TRUE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -185,8 +183,7 @@ void wow_com_outb(io_addr port, half_word value)
 
     FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-    if(FileH == NULL)
-        DisplayPortAccessError(port & 0x7, FALSE, FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*.................................................... Process port write */
@@ -248,8 +245,7 @@ void wow_com_outb(io_addr port, half_word value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-    if(Invalid_port_access)
-        DisplayPortAccessError(port & 0x7, FALSE, TRUE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -398,41 +394,5 @@ BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch)
 
 
 #ifndef PROD
-/*
- *  user warnings are not needed here, return errors and let the
- *  app handle it. message boxes are also not permitted, because
- *  it can kill WOW. 20-Feb-1993 Jonle
- */
-void DisplayPortAccessError(int PortOffset, BOOL ReadAccess, BOOL PortOpen)
-{
-    static char *PortInError;
-    static char ErrorMessage[250];
-    int rtn;
-
-    // Identify port in error
-
-    switch(PortOffset)
-    {
-	case RS232_TX_RX:   PortInError = ReadAccess ? "RX" : "TX" ; break;
-	case RS232_IER:     PortInError = "IER" ; break;
-	case RS232_IIR:     PortInError = "IIR" ; break;
-	case RS232_MCR:     PortInError = "MCR" ; break;
-	case RS232_LSR:     PortInError = "LSR" ; break;
-	case RS232_MSR:     PortInError = "MSR" ; break;
-	case RS232_LCR:     PortInError = "LCR" ; break;
-	case RS232_SCRATCH: PortInError = "Scratch" ; break;
-	default:	    PortInError = "Unidentified"; break;
-    }
-
-    //Construct Error message
-
-    sprintf(ErrorMessage, "The Application attempted to %s the %s register",
-	    ReadAccess ? "read" : "write", PortInError);
-
-    if(!PortOpen)
-	strcat(ErrorMessage,", however the comm port has not yet been opened");
-
-    //Display message box
-    printf("WOW Communication Port Access Error\n%s\n",ErrorMessage);
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif

@@ -189,7 +189,7 @@ void (*ica_clear_int_func) IPT2(IU32, adapter, IU32, line_no);
 #endif
 
 #ifndef PROD
-char icamsgbuf[132];	/* Text buffer for debug messages */
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -425,11 +425,7 @@ ica_eoi IFN3(IU32, adapter, IS32 *, line, IBOOL, rotate)
     }
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE)
-    {
-	sprintf(icamsgbuf, "**** CPU END-OF-INT %c (%d) ****", (adapter == ICA_MASTER? 'M': 'S'), *line);
-	trace(icamsgbuf, DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     if (rotate && (*line >= 0))
@@ -622,11 +618,7 @@ IS32 ica_accept IFN1(IU32, adapter)
     }
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE)
-    {
-        sprintf(icamsgbuf, "**** CPU INTACK %c (%d) ****", (adapter == ICA_MASTER? 'M': 'S'), line1 + asp->ica_base);
-        trace(icamsgbuf, DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     return((IS32)line1);
@@ -649,11 +641,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     if (asp->ica_cpu_int)
     {
 #ifndef PROD
-	if ((io_verbose & ICA_VERBOSE) && (asp->ica_int_line != line))
-	{
-	    sprintf(icamsgbuf,"******* INT LINE ALREADY HIGH %c line=%d ****", (adapter == ICA_MASTER? 'M': 'S'), asp->ica_int_line);
-	    trace(icamsgbuf, DUMP_NONE);	
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         asp->ica_int_line = line;
 
@@ -670,11 +658,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     if (asp->ica_master)		/* If ICA is Master */
     {
 #ifndef PROD
-        if (io_verbose & ICA_VERBOSE)
-        {
-            sprintf(icamsgbuf, "**** CPU INTERRUPT (%x) ****", line);
-            trace(icamsgbuf, DUMP_NONE);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
         /*
@@ -700,11 +684,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
     else
     {				/* If ICA is Slave */
 #ifndef PROD
-        if (io_verbose & ICA_VERBOSE)
-        {
-            sprintf(icamsgbuf, "**** SLAVE ICA INTERRUPT (%x) ****", line);
-            trace(icamsgbuf, DUMP_NONE);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         /*
          * Signal the Master ICA.
@@ -735,7 +715,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
 void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 {
 #ifndef PROD
-    char *reg_name;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */    
     IU32 adapter       = adapter_for_port(port);
     ADAPTER_STATE *asp = &adapter_state[adapter];
@@ -745,12 +725,7 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
      */
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE)
-        if ((port != ICA_PORT_0) && (port != ICA_PORT_1))
-	{
-	    sprintf(icamsgbuf, "ica_inb: bad port (%x)", port);
-	    trace(icamsgbuf, DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -775,11 +750,7 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	host_ica_unlock();			/* free lock if supported */
 
 #ifndef PROD
-        if (io_verbose & ICA_VERBOSE)
-	{
-	    sprintf(icamsgbuf, "ica_inb: responding to Poll with %x", *value);
-	    trace(icamsgbuf, DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 
@@ -796,30 +767,26 @@ void SWPIC_inb IFN2(io_addr, port, IU8 *, value)
 	    {
 		*value = asp->ica_isr;
 #ifndef PROD
-		reg_name = "ISR";
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */		
 	    }
 	    else
 	    {
 		*value = asp->ica_irr;
 #ifndef PROD
-		reg_name = "IRR";
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */		
 	    }
 	else
 	{
 	    *value = asp->ica_imr;
 #ifndef PROD
-	    reg_name = "IMR";
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* nPROD */	    
 	}
 
 #ifndef PROD
-	if (io_verbose & ICA_VERBOSE)
-	{
-	    sprintf(icamsgbuf, "ica_inb: delivered %s value %x", reg_name, *value);
-	    trace(icamsgbuf, DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 }
@@ -868,11 +835,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
     if ((port & 0xfffe) != ICA_PORT_0)
     {
 #ifndef PROD
-	if (io_verbose & ICA_VERBOSE)
-	{
-	    sprintf(icamsgbuf, "ica_outb: bad port (%x)", port);
-	    trace(icamsgbuf, DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	return;
     }
@@ -918,8 +881,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 #endif
 
 #ifndef PROD
-        if (io_verbose & ICA_VERBOSE)
-	    trace("ica_outb: ICW1 detected, initialisation begins", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         return;
     }
@@ -944,11 +906,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	{
 	    asp->ica_imr = value & 0xff;
 #ifndef PROD
-            if (io_verbose & ICA_VERBOSE)
-	    {
-	        sprintf(icamsgbuf, "ica_outb: new %c IMR: %x", (adapter == ICA_MASTER? 'M': 'S'), value);
-	        trace(icamsgbuf, DUMP_NONE);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    if (asp->ica_cpu_int)
 	    {
@@ -977,16 +935,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 0:		/* Clear rotate in auto EOI	*/
 		asp->ica_mode &= ~ICA_RAEOI;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    trace("ica_outb: Clear Rotate in Auto EOI",DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 
 	    case 1:		/* Non-specific EOI		*/
 		line = -1;	/* -1 -> highest priority	*/
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    trace("ica_outb: Non-specific EOI", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		ica_eoi(adapter, &line, FALSE);
 		break;
@@ -997,11 +953,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 3:		/* Specific EOI command		*/
 		line  = value & 0x07;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		{
-		    sprintf(icamsgbuf, "ica_outb: Specific EOI, line %d", line);
-		    trace(icamsgbuf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		ica_eoi(adapter, &line, FALSE);
 		break;
@@ -1009,16 +961,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 4:		/* Set rotate in auto EOI mode	*/
 		asp->ica_mode |= ICA_RAEOI;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    trace("ica_outb: Set Rotate in Auto EOI",DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 
 	    case 5:		/* Rotate on non-specific EOI	*/
 		line = -1;	/* -1 -> non specific		*/
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    trace("ica_outb: Rotate on Non-specific EOI",DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		ica_eoi(adapter, &line, TRUE);
 		break;
@@ -1026,22 +976,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    case 6:		/* Set priority			*/
 		asp->ica_hipri = (value + 1) & 0x07;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		{
-		    sprintf(icamsgbuf, "ica_outb: Set Priority, line %d", value & 0x07);
-		    trace(icamsgbuf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 
 	    case 7:		/* Rotate on specific EOI	*/
 		line  = value & 0x07;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		{
-		    sprintf(icamsgbuf, "ica_outb: Rotate on specific EOI, line %d", line);
-		    trace(icamsgbuf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		ica_eoi(adapter, &line, TRUE);
 		break;
@@ -1054,11 +996,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode = (asp->ica_mode & ~ICA_SMM) | (((IU16)value << 4) & ICA_SMM);
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    if (asp->ica_mode & ICA_SMM)
-			trace("ica_outb: Special Mask Mode set", DUMP_NONE);
-		    else
-			trace("ica_outb: Special Mask Mode unset", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    }
 
@@ -1066,8 +1004,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode |= ICA_POLL;
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    trace("ica_outb: Poll detected!", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    }
 	    else
@@ -1075,11 +1012,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    {
 		asp->ica_mode = (asp->ica_mode & ~ICA_RIS) | (((IU16)value << 11) & ICA_RIS);
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		    if (asp->ica_mode & ICA_RIS)
-			trace("ica_outb: ISR selected", DUMP_NONE);
-		    else
-			trace("ica_outb: IRR selected", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    }
 	}
@@ -1090,20 +1023,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	if (!(port & 1))	/* Should be odd address, so check	*/
 	{
 #ifndef PROD
-	    sprintf(icamsgbuf, "ica_outb: bad port (%x) while awaiting ICW2",
-			 (unsigned)port);
-	    trace(icamsgbuf, DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	else
 	{
 	    asp->ica_base = value & ICA_BASE_MASK;
 #ifndef PROD
-	    if (io_verbose & ICA_VERBOSE)
-	    {
-		sprintf(icamsgbuf, "ica_outb: vector base set to %x", asp->ica_base);
-		trace(icamsgbuf, DUMP_NONE);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    if (!(asp->ica_mode & ICA_SINGL))
 		sequence[adapter] = 3;
@@ -1120,20 +1047,14 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	if (!(port & 1))	/* Should be odd address, so check	*/
 	{
 #ifndef PROD
-	    sprintf(icamsgbuf, "ica_outb: bad port (%x) while awaiting ICW3",
-			 (unsigned)port);
-	    trace(icamsgbuf, DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	else
 	{
 	    asp->ica_ssr = value & 0xff;
 #ifndef PROD
-	    if (io_verbose & ICA_VERBOSE)
-	    {
-		sprintf(icamsgbuf, "ica_outb: slave register set to %x", asp->ica_ssr);
-		trace(icamsgbuf, DUMP_NONE);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    if (asp->ica_mode & ICA_IC4)
 		sequence[adapter] = 4;
@@ -1147,9 +1068,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	if (!(port & 1))	/* Should be odd address, so check	*/
 	{
 #ifndef PROD
-	    sprintf(icamsgbuf, "ica_outb: bad port (%x) while awaiting ICW4",
-			 (unsigned)port);
-	    trace(icamsgbuf, DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	else
@@ -1157,20 +1076,7 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 	    asp->ica_mode = (asp->ica_mode & ~ICA_ICW4_MASK)
 		           | (((IU16)value << 4) &  ICA_ICW4_MASK);
 #ifndef PROD
-	    if (io_verbose & ICA_VERBOSE)
-	    {
-		sprintf(icamsgbuf, "ica_outb: IC4 value %x", value);
-		trace(icamsgbuf, DUMP_NONE);
-	    }
-	    /*
-	     * Check the mode bits for sensible values
-	     */
-	    if (!(asp->ica_mode & ICA_MPM))
-		trace("ica_outb: attempt to set up 8080 mode!", DUMP_NONE);
-
-	    if ((asp->ica_mode & ICA_BUF) && !(asp->ica_mode & ICA_MS)
-				     && !(asp->ica_mode & ICA_SINGL))
-		trace("ica_outb: attempt to set up slave mode!", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	sequence[adapter] = 0;
@@ -1178,15 +1084,13 @@ void SWPIC_outb IFN2(io_addr, port, IU8, value)
 
     case -1:		/* Power on but so far uninitialised	*/
 #ifndef PROD
-	sprintf(icamsgbuf, "ica_outb: bad port/value (%x/%x) while awaiting ICW1",
-		     (unsigned)port, value);
-	trace(icamsgbuf, DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	break;
 
     default:		/* This cannot happen			*/;
 #ifndef PROD
-	trace("ica_outb: impossible error, programmer brain-dead", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 
@@ -1211,29 +1115,7 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
 #endif	/* CPU_40_STYLE */
 
 #ifndef PROD
-    SAVED char *linename[2][8] =
-    {
-        {
-            "IRQ  0 TIMER",
-            "IRQ  1 KEYBOARD",
-            "IRQ  2 SLAVE_ICA",
-            "IRQ  3 COM2",
-            "IRQ  4 COM1",
-            "IRQ  5 PARALLEL2",
-            "IRQ  6 DISKETTE",
-            "IRQ  7 PARALLEL1"
-        },
-        {
-            "IRQ  8 REALTIME CLOCK",
-            "IRQ  9 MOUSE",
-            "IRQ 10 SOFTNODE",
-            "IRQ 11 SOUND DRIVER",
-            "IRQ 12 ASPI",
-            "IRQ 13 COPROCESSOR",
-            "IRQ 14 FIXED DISK",
-            "IRQ 15 reserved"
-        }
-    };
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -1249,12 +1131,7 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
     host_ica_lock();
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE_LOCK)
-    {
-	if(adapter>1 || line_no>7)
-		printf("**** H/W INTERRUPT (%sx%d) [%d:%d] ****\n",
-		       linename[adapter][line_no], call_count,adapter,line_no);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -1272,12 +1149,7 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
     asp->ica_count[line_no] += call_count;	/* Add the further requests */
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE)
-    {
-	sprintf(icamsgbuf, "**** H/W INTERRUPT (%sx%d) ****",
-			 linename[adapter][line_no], call_count);
-	trace(icamsgbuf, DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -1300,11 +1172,7 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
 	if (ica_lock_inc())
 	{
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE_LOCK)
-		{
-			sprintf(icamsgbuf, "*");
-			trace(icamsgbuf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		ica_lock_dec();
 		return;
@@ -1381,11 +1249,7 @@ void SWPIC_clear_int IFN2(IU32, adapter, IU32, line_no)
     }
 
 #ifndef PROD
-    if (io_verbose & ICA_VERBOSE)
-    {
-	sprintf(icamsgbuf, "**** ICA_CLEAR_INT, line %d ****", line_no);
-	trace(icamsgbuf, DUMP_NONE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
     host_ica_unlock();
@@ -1596,10 +1460,7 @@ GLOBAL void ica_async_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call
 	ICA_ASYNC_HANDLER *iahp;
 	
 #ifndef PROD
-	if (call_count != 1) {
-		always_trace3("ica_async_interrupt(%s, %d, %d): call_count must be 1",
-			adapter? "MASTER":"SLAVE", line_no, call_count);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 
 	for (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {
@@ -1691,11 +1552,7 @@ action_interrupt IFN4(IU32, adapter, IU32, line, ICA_CALLBACK, func, IU32, parm)
 	if (asp->callback_fn[line] != NO_ICA_CALLBACK)
 	{
 #ifndef PROD
-		if (io_verbose & ICA_VERBOSE)
-		{
-			sprintf(icamsgbuf, "action_interrupt called before line %d cleared", line);
-			trace(icamsgbuf, DUMP_NONE);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 		host_ica_unlock();	/* real unlock if available */
 		return(FALSE);
@@ -1790,13 +1647,7 @@ GLOBAL IU32 ica_iret_hook_needed IFN1(IU32, line)
 	IU16 ireq_mask = 1 << line;
 
 #ifndef PROD
-	if (line < 0 || line > 15)
-	{
-		/* Line is out of range */
-		sprintf(icamsgbuf, "**** ICA IRET HOOK IMPOSSIBLE line %d ****", line);
-		trace(icamsgbuf, DUMP_NONE);
-		return 0;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	/* does this line require iret hooks */
@@ -1836,11 +1687,7 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 	IU8 i;
 
 #ifndef PROD
-	if (io_verbose & ICA_VERBOSE)
-	{
-		sprintf(icamsgbuf, "**** ICA IRET HOOK, line %d ****", line);
-		trace(icamsgbuf, DUMP_NONE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef CPU_40_STYLE
@@ -2107,110 +1954,6 @@ void ica1_init IFN0()
 
 
 #if !defined(PROD)
-/*
- * The following functions are used for DEBUG purposes only.
- */
-LOCAL void
-ica_print_int IFN2(char *, str, IS32, val)
-{
-    printf("%-20s 0x%02X\n", str, val);
-}
-
-LOCAL void
-ica_print_str IFN2(char *, str, char *, val)
-{
-    printf("%-20s %s\n", str, val);
-}
-
-GLOBAL void
-ica_dump IFN1(IU32, adapter)
-{
-    ADAPTER_STATE *asp = &adapter_state[adapter];
-    char buff[80];
-    int i;
-
-    if (adapter == ICA_MASTER)
-        printf("MASTER 8259A State:\n\n");
-    else
-        printf("SLAVE  8259A State:\n\n");
-
-    ica_print_str("ica_master", (asp->ica_master ? "Master" : "Slave"));
-    ica_print_int("ica_irr", asp->ica_irr);
-    ica_print_int("ica_isr", asp->ica_isr);
-    ica_print_int("ica_imr", asp->ica_imr);
-    ica_print_int("ica_ssr", asp->ica_ssr);
-    ica_print_int("ica_base", asp->ica_base);
-    ica_print_int("ica_hipri", asp->ica_hipri);
-    ica_print_int("ica_mode", asp->ica_mode);
-    printf("%-20s %8d%8d%8d%8d%8d%8d%8d%8d\n", "ica_count",
-		asp->ica_count[0], asp->ica_count[1], asp->ica_count[2], asp->ica_count[3],
-		asp->ica_count[4], asp->ica_count[5], asp->ica_count[6], asp->ica_count[7]);
-    ica_print_int("ica_int_line", asp->ica_int_line);
-    ica_print_str("ica_cpu_int", (asp->ica_cpu_int ? "TRUE" : "FALSE"));
-
-#if defined(CPU_40_STYLE) && !defined(NTVDM)
-    printf("%-20s %8d%8d%8d%8d%8d%8d%8d%8d\n", "callback_parm",
-                asp->callback_parm[0], asp->callback_parm[1], asp->callback_parm[2], asp->callback_parm[3],
-                asp->callback_parm[4], asp->callback_parm[5], asp->callback_parm[6], asp->callback_parm[7]);
-    printf("%-20s %8p%8p%8p%8p%8p%8p%8p%8p\n", "callback_fn",
-                asp->callback_fn[0], asp->callback_fn[1], asp->callback_fn[2], asp->callback_fn[3],
-                asp->callback_fn[4], asp->callback_fn[5], asp->callback_fn[6], asp->callback_fn[7]);
-    printf("%-20s %8d%8d%8d%8d%8d%8d%8d%8d\n", "isr_depth",
-                asp->isr_depth[0], asp->isr_depth[1], asp->isr_depth[2], asp->isr_depth[3],
-                asp->isr_depth[4], asp->isr_depth[5], asp->isr_depth[6], asp->isr_depth[7]);
-    for (i=0; i<(MAX_ISR_DEPTH + 1); i++)
-    {
-	    int j;
-	    int progress[8];
-	    IBOOL some_progress = FALSE;
-	    
-	    for (j = 0; j < 8; j++)
-	    {
-		    if (asp->isr_depth[j] >= i)
-		    {
-			    some_progress = TRUE;
-			    progress[j] = asp->isr_progress[j][i];
-		    }
-		    else
-		    {
-			    progress[j] = 0;
-		    }
-	    }
-	    sprintf (buff, "isr_progress[%d]", i);
-	    printf("%-20s %8d%8d%8d%8d%8d%8d%8d%8d\n", buff,
-		   progress[0], progress[1], progress[2], progress[3],
-		   progress[4], progress[5], progress[6], progress[7]);
-	    if (!some_progress)
-		    break;
-    }
-    for (i=0; i<MAX_ISR_DEPTH; i++)
-    {
-	    int j;
-	    int decay[8];
-	    IBOOL some_decay = FALSE;
-	    
-	    for (j = 0; j < 8; j++)
-	    {
-		    if (asp->isr_depth[j] >= i)
-		    {
-			    decay[j] = asp->isr_time_decay[j][i];
-			    some_decay = TRUE;
-		    }
-		    else
-		    {
-			    decay[j] = 0;
-		    }
-	    }
-	    sprintf (buff, "isr_time_decay[%d]", i);
-	    printf("%-20s %8d%8d%8d%8d%8d%8d%8d%8d\n", buff,
-		   decay[0], decay[1], decay[2], decay[3],
-		   decay[4], decay[5], decay[6], decay[7]);
-	    if (!some_decay)
-		    break;
-    }
-#endif /* CPU_40_STYLE && !NTVDM */
-
-    printf("\n\n");
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 

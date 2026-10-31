@@ -94,8 +94,7 @@ void scs_init(int argc, char **argv)
 
     if(!DBGInit (argc,argv)) {
 #ifndef PROD
-        printf("NTVDM:DBGInit fails\n");
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         TerminateVDM();
     }
@@ -154,8 +153,7 @@ InitialiseDosEmulation(int argc, char **argv)
     //
     TlsDirectError = TlsAlloc();
 #ifndef PROD
-    if (TlsDirectError == 0xFFFFFFFF)
-        printf("NTVDM: TlsDirectError==0xFFFFFFFF GLE=%ld\n", GetLastError);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -207,7 +205,7 @@ InitialiseDosEmulation(int argc, char **argv)
          BytesRead )
         {
 #ifndef PROD
-         printf("NTVDM:Fatal Error, Invalid file or missing - %s\n",buffer);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
          host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
          if (hFile != INVALID_HANDLE_VALUE) {
@@ -224,7 +222,7 @@ InitialiseDosEmulation(int argc, char **argv)
         {
 
 #ifndef PROD
-          printf("NTVDM:Fatal Error, Read file error - %s\n",buffer);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
           host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
           CloseHandle(hFile);

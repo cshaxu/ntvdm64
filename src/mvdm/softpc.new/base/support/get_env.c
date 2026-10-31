@@ -71,8 +71,7 @@ LOCAL void setupVerboseGetenv IFN0()
 			how = "Setting";
 		}
 #ifndef	PROD
-		printf("%10s %25s IBOOL value \"%s\"\n",
-			      how, "VERBOSE_GETENV", verboseGetenv ? "TRUE": "FALSE");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 		firstGetenv = FALSE;
 	}

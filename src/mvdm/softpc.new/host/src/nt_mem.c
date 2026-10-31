@@ -1096,10 +1096,7 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
     IU32     commitSize;
 
 #ifndef PROD
-    if (prevHeader)
-        assert0(newHeader > prevHeader, "prevHeader invalid");
-    if (nextHeader)
-        assert0(newHeader < nextHeader, "nextHeader invalid");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 
     /* Commit and zero table header entries if necessary. */
@@ -1367,12 +1364,7 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
-
-    /* Check for sensible parameters. */
-    if (prevAllocLastAddr)
-        assert0(address > prevAllocLastAddr, "address out of range");
-    if (nextAllocFirstAddr)
-        assert0(address < nextAllocFirstAddr, "address out of range");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 
     /*

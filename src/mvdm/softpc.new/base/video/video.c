@@ -84,7 +84,7 @@
 #include "debug.h"
 #include "timer.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #include "egavideo.h"
 /* DIVERGENCE(MVDM-HOST-DIV-067): retain the same-package EGA service's
@@ -346,7 +346,7 @@ GLOBAL void vd_set_mode IFN0()
     if ((half_word)current_video_mode > VD_MAX_MODE ||
 	vd_mode_table[current_video_mode].mode_control_val == VD_BAD_MODE) {
 #ifndef PROD
-	trace(EBAD_VIDEO_MODE, DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         return;
     }
@@ -583,7 +583,7 @@ GLOBAL void vd_get_light_pen IFN0()
     }
     else {		        /* not supported */
 #ifndef PROD
-	trace("call to light pen - trigger | switch was on!", DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     }
 }
@@ -947,7 +947,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 
     default:
 #ifndef PROD
-	trace("bad video mode\n",DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	;
     }
@@ -1271,7 +1271,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 
     default:
 #ifndef PROD
-	trace("bad video mode\n",DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	;
     }
@@ -2486,7 +2486,7 @@ GLOBAL void graphics_write_char IFN5(half_word, x, half_word, y, half_word, wcha
         if ( (char_addr = extend_addr(4*BIOS_EXTEND_CHAR)) == 0)
         {
 #ifndef PROD
-            trace("want extended char but no ex char gen set \n",DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
             return;
         }

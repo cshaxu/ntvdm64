@@ -79,11 +79,7 @@ GLOBAL void ms_bop ()		    /* called from MS_bop_5 ie bop 0x55 */
 LOCAL void ms_not_a_bop()
 {
 #ifndef PROD
-    printf ("AH=%x, This is not a valid value for an MS BOP\n", getAH());
-    illegal_bop();
-#ifdef YODA
-    force_yoda ();
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 

@@ -233,8 +233,7 @@ unsigned long TX_delay[] =
 };
 
 #ifndef PROD
-FILE     *com_trace_fd = NULL;
-int       com_dbg_pollcount = 0;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 /*
  * =====================================================================
@@ -695,16 +694,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"RX %x (%c)\n",*value,
-				isprint(toascii(*value))?toascii(*value):'?');
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 																		
@@ -722,15 +712,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"IER read %x \n",*value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 
@@ -753,15 +735,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"IIR read %x \n",*value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	
@@ -788,15 +762,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"LCR read %x \n",*value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	
@@ -811,15 +777,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"MCR read %x \n",*value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	
@@ -850,31 +808,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if ((*value & 0x9f) != 0x0)
-			{
-				if (com_dbg_pollcount)
-				{
-					fprintf(com_trace_fd,"\n");
-					com_dbg_pollcount = 0;
-				}
-				fprintf(com_trace_fd,"LSR read %x \n",*value);
-			}
-			else
-			{
-				com_dbg_pollcount++;
-				if (*value == 0)
-					fprintf(com_trace_fd,"0");
-				else
-					fprintf(com_trace_fd,".");
-				if (com_dbg_pollcount > 19)
-				{
-					fprintf(com_trace_fd,"\n");
-					com_dbg_pollcount = 0;
-				}
-			}
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	
@@ -954,15 +888,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"MSR read %x \n",*value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 
@@ -976,17 +902,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	}
 
 #ifndef PROD
-	if (io_verbose & RS232_VERBOSE)
-	{
-		if (((port & 0xf) == 0xd) && (*value == 0x60))
-			fprintf(trace_file,".");
-		else
-		{
-			sprintf(buf, "com_inb() - port %x, returning val %x", port,
-				*value);
-			trace(buf, DUMP_REG);
-		}
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM
@@ -1007,12 +923,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #ifndef PROD
-	if (io_verbose & RS232_VERBOSE)
-	{
-		sprintf(buf, "com_outb() - port %x, set to value %x",
-			port, value);
-		trace(buf, DUMP_REG);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	
 	switch(port & 0x7)
@@ -1082,16 +993,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"TX %x (%c)\n",value,
-				isprint(toascii(value))?toascii(value):'?');
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 																		
@@ -1156,15 +1058,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"IER write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 		
@@ -1210,15 +1104,7 @@ vel];
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"IIR write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 #endif /* NTVDM && FIFO_ON */
@@ -1258,15 +1144,7 @@ vel];
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"LCR write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 		
@@ -1295,15 +1173,7 @@ vel];
 		set_out1(adapter);
 		set_out2(adapter);
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"MCR write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 		
@@ -1320,15 +1190,7 @@ vel];
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"LSR write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 		
@@ -1345,15 +1207,7 @@ vel];
 		}
 #endif
 #ifndef PROD
-		if (com_trace_fd)
-		{
-			if (com_dbg_pollcount)
-			{
-				fprintf(com_trace_fd,"\n");
-				com_dbg_pollcount = 0;
-			}
-			fprintf(com_trace_fd,"MSR write %x \n",value);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		/* DrDOS writes to this reg after setting int on MSR change
 		 * and expects to get an interrupt back!!! So we will oblige.
@@ -1423,9 +1277,7 @@ com_hook_again IFN1(IUM32, adapter)
 	host_com_ioctl(adapter, HOST_COM_INPUT_READY, (long)&input_ready);
 
 #ifndef PROD
-	if ((input_ready) && (asp->current_count >= asp->batch_size)) {
-		sure_note_trace1(RS232_VERBOSE, "In hook again, adapter %d", adapter);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	if((!input_ready)  || (asp->current_count >= asp->batch_size)) {
@@ -2678,9 +2530,7 @@ void com_close IFN1(int, adapter)
 #endif
 
 #ifndef PROD
-	if (com_trace_fd)
-		fclose (com_trace_fd);
-	com_trace_fd = NULL;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	/* reset host specific communications channel */
 	config_activate(C_COM1_NAME + adapter, FALSE);
@@ -2797,458 +2647,6 @@ GLOBAL void com_psflush_change IFN2(
  * - comdebug - from the yoda command line....
  */
 #ifndef PROD
-#define   YODA_LOOP       2
-#define   RX_BYTE         1
-#define   TX_BYTE         2
-int       srxcount = 0, stxcount = 0;
-int       com_save_rx = 0, com_save_tx = 0;
-unsigned  char *rxtx_buff = NULL;
-
-int       com_debug_help ();
-void      psaved();
-
-static char *port_debugs[] =
-{
-	"txrx","ier","iir", "lcr", "mcr","lsr", "msr"
-};
-
-static int do_inbs = 0; /* start with inb reporting OFF */
-
-static unsigned char *locate_register ()
-{
-	int i;
-	char ref[10];
-	struct ADAPTER_STATE *asp = &adapter_state[COM1];
-
-	printf ("COM.. reg? ");
-	scanf ("%s", ref);
-	for (i=0; i<7; i++)
-	{
-		if (!strcmp (ref, port_debugs[i]))
-		{
-			switch (i)
-			{	
-				case 0:
-					return (&asp->tx_buffer);
-				case 1:
-					return (&(asp->int_enable_reg.all));
-				case 2:
-					return (&(asp->int_id_reg.all));
-				case 3:
-					return (&(asp->line_control_reg.all));
-				case 4:
-					return (&(asp->modem_control_reg.all));
-				case 5:
-					return (&(asp->line_status_reg.all));
-				case 6:
-					return (&(asp->modem_status_reg.all));
-				default:
-					return (NULL);
-			}
-		}
-	}
-	return (NULL);
-}
-
-int com_debug_stat ()
-{
-	printf ("DEBUG STATUS...\n");
-	printf ("INB mismatch reporting .... %s\n", do_inbs ? "ON" : "OFF");
-	printf ("INB/OUTB tracing .......... %s\n", com_trace_fd ? "ON" : "OFF");
-	return (0);
-}
-
-int com_reg_dump ()
-{
-	/* dump com1 emulations registers */
-	struct ADAPTER_STATE *asp = &adapter_state[COM1];
-
-	printf ("TX %2x RX %2x IER %2x IIR %2x LCR %2x MCR %2x LSR %2x MSR %2x \n", 
-		(asp->tx_buffer), (asp->rx_buffer), (asp->int_enable_reg.all),
-		(asp->int_id_reg.all), (asp->line_control_reg.all),
-		(asp->modem_control_reg.all), (asp->line_status_reg.all),
-		(asp->modem_status_reg.all));
-	printf (" break_state		%d\n loopback_state		%d\n",
-	        asp->break_state, asp->loopback_state);
-	printf(" dtr_state		%d\n rts_state		%d\n",
-	        asp->dtr_state, asp->rts_state);
-	printf(" out1_state		%d\n out2_state		%d\n",
-	        asp->out1_state, asp->out2_state);
-	printf(" receiver_line_status_interrupt_state		%d\n",
-	        asp->receiver_line_status_interrupt_state);
-	printf(" data_available_interrupt_state		%d\n",
-	       asp->data_available_interrupt_state);
-	printf(" tx_holding_register_empty_interrupt_state		%d\n",
-	        asp->tx_holding_register_empty_interrupt_state);
-	printf(" modem_status_interrupt_state		%d\n",
-	        asp->modem_status_interrupt_state);
-	printf(" hw_interrupt_priority		%d\n", 
-	        asp->hw_interrupt_priority);
-	printf(" com_baud_delay		%d\n had_first_read		%d\n",
-	        TX_delay[asp->com_baud_ind], asp->had_first_read);
-	return (0);
-}
-
-int com_s_reg ()
-{
-	unsigned char *creg;
-	int val1;
-
-	if (creg = locate_register())
-	{
-		printf ("SET to > ");
-		scanf ("%x", &val1);
-
-		*creg = (unsigned char)val1;
-	}
-	else
-		printf ("Unknown reg\n");
-	return (0);
-}
-
-int com_p_reg ()
-{
-	unsigned char *creg;
-
-	if (creg = locate_register())
-		printf ("%x\n", *creg);
-	else
-		printf ("Unknown reg\n");
-	return (0);
-}
-
-int conv_com_reg (com_reg)
-char *com_reg;
-{
-	int loop;
-
-	for (loop = 0; loop < 7; loop++)
-		if (!strcmp (port_debugs[loop], com_reg))
-			return (loop+RS232_COM1_PORT_START);
-	return (0);
-}
-
-int com_do_inb ()
-{
-	char com_reg[10];
-	half_word val;
-	io_addr port;
-
-	printf ("Port > ");
-	scanf ("%s", com_reg);
-	if (!(port = conv_com_reg (com_reg)))
-	{
-		printf ("funny port %s\n", com_reg);
-		return (0);
-	}
-	com_inb (port, &val);
-	printf ("%s = %x\n", val);
-	return (0);
-}
-
-int com_do_outb ()
-{
-	char com_reg[10];
-	half_word val;
-	io_addr port;
-
-	printf ("Port > ");
-	scanf ("%s", com_reg);
-	if (!(port = conv_com_reg (com_reg)))
-	{
-		printf ("funny port %s\n", com_reg);
-		return (0);
-	}
-	printf ("Value >> ");
-	scanf ("%x", &val);
-	com_outb (port, val);
-	return (0);
-}
-
-int com_run_file ()
-{
-	char filename[100], com_reg[10], dir;
-	int val, line;
-	half_word spare_val;
-	io_addr port;
-	FILE *fd = NULL;
-
-	printf ("FILE > ");
-	scanf ("%s", filename);
-	if (!(fd = fopen (filename, "r")))
-	{
-		printf ("Cannot open %s\n", filename);
-		return (0);
-	}
-	line = 1;
-
-	/* dump file is of format : %c-%x-%s
-	 * 1 char I or O denotes inb or outb
-	 * -
-	 * Hex value the value expected in case of inb or value to write in
-	 * case of outb.
-	 * -
-	 * string representing the register port to use..
-	 *
-	 * A typical entry would be
-	 *	O-txrx-60 - which translates to outb(START_OF_COM1+txrx, 0x60);
-	 *
-	 * Files for this feature can be generated using the comdebug 'open' command.
-	 */
-	while (fscanf (fd, "%c-%x-%s", &dir, &val, com_reg) != EOF)
-	{
-		if (!(port = conv_com_reg (com_reg)))
-		{
-			printf ("funny port %s at line %d\n", com_reg, line);
-			break;
-		}
-		switch (dir)
-		{
-			case 'I':
-				/* inb */
-				com_inb (port, &spare_val);
-				if (spare_val != val && do_inbs)
-				{
-					printf ("INB no match at line %d %c-%s-%x val= %x\n",
-						line, dir, com_reg, val, spare_val);
-				}
-				break;
-			case 'O':
-				/* outb */
-				/* convert com_register to COM1 address com_register */
-				com_outb (port, val);
-				printf ("outb (%s, %x)\n", com_reg, val);
-				break;
-			default:
-				/* crap */
-				break;
-		}
-		line ++;
-	}
-	fclose (fd);
-	return (0);
-}
-	
-int com_debug_quit ()
-{
-	printf ("Returning to YODA\n");
-	return (1);
-}
-
-int com_o_debug_file ()
-{
-	char filename[100];
-	printf ("FILE > ");
-	scanf ("%s", filename);
-	if (!(com_trace_fd = fopen (filename, "w")))
-	{
-		printf ("Cannot open %s\n", filename);
-		return (0);
-	}
-	printf ("Com debug file = '%s'\n", filename);
-	return (0);
-}
-
-int com_c_debug_file ()
-{
-	if (com_trace_fd)
-		fclose (com_trace_fd);
-	com_trace_fd = NULL;
-	return (0);
-}
-
-int com_forget_inb ()
-{
-	do_inbs = 1- do_inbs;
-	if (do_inbs)
-		printf ("INB mismatch reporting ON\n");
-	else
-		printf ("INB mismatch reporting OFF\n");
-	return (0);
-}
-
-int com_s_rx()
-{
-	srxcount = stxcount = 0;
-	com_save_rx = 1 - com_save_rx;
-	printf("Save and Dump Received Bytes ");
-	if (com_save_rx)
-		printf("ON\n");
-	else
-		printf("OFF\n");
-	return(0);
-}
-
-int com_s_tx()
-{
-	srxcount = stxcount = 0;
-	com_save_tx = 1 - com_save_tx;
-	printf("Save and Dump Transmitted Bytes ");
-	if (com_save_tx)
-		printf("ON\n");
-	else
-		printf("OFF\n");
-	return(0);
-}
-
-int com_p_rx()
-{
-	printf("There are %d received bytes, out of %d bytes saved.\n",
-	       srxcount, srxcount + stxcount);
-	psaved(RX_BYTE, stdout);
-	return(0);
-}
-
-int com_p_tx()
-{
-	printf("There are %d transmitted bytes, out of %d bytes saved.\n",
-	       stxcount, srxcount + stxcount);
-	psaved(TX_BYTE, stdout);
-	return(0);
-}
-
-int com_p_all()
-{
-	printf("There are %d bytes saved.\n", srxcount + stxcount);
-	psaved(RX_BYTE + TX_BYTE, stdout);
-	return(0);
-}
-
-int com_d_all()
-{
-	int cl_fin = 0;
-
-	if (!com_trace_fd)
-	{
-		com_o_debug_file();
-		cl_fin = 1;
-	}
-
-	fprintf(com_trace_fd, "There are %d bytes saved.\n", srxcount + stxcount);
-	psaved(RX_BYTE + TX_BYTE, com_trace_fd);
-
-	if (cl_fin)
-		com_c_debug_file();
-	return(0);
-}
-
-void psaved(typ, fd)
-
-int typ;
-FILE *fd;
-{
-	int c, nc = 0;
-
-	for (c = 0; c < srxcount + stxcount; c++)
-	{
-		if (rxtx_buff[c * 2] & typ)
-		{
-			if (typ == RX_BYTE + TX_BYTE)
-				if (rxtx_buff[c * 2] & RX_BYTE)
-			  		fprintf(fd, "R ");
-				  else
-				  	fprintf(fd, "T ");
-			fprintf(fd, "%2x  ",rxtx_buff[c * 2 + 1]);
-			nc++;
-			if ((nc % 16) == 0)
-				fprintf(fd, "\n");
-		}
-	}
-	fprintf(fd, "\nAll bytes dumped.\n");
-}
-
-com_save_rxbytes IFN2(int, n, CHAR *, buf)
-{
-	int tc, bs;
-
-	if (com_save_rx)
-	{
-		bs = srxcount + stxcount;
-		for (tc = 0; tc < n; tc++)
-		{
-			rxtx_buff[(tc + bs) * 2] = RX_BYTE;
-			rxtx_buff[(tc + bs) * 2 + 1] = buf[tc];
-		}
-		srxcount += n;
-	}
-}
-
-com_save_txbyte IFN1(CHAR, value)
-{
-	if (com_save_tx)
-	{
-		rxtx_buff[(srxcount + stxcount) * 2] = TX_BYTE;
-		rxtx_buff[(srxcount + stxcount) * 2 + 1] = value;
-		stxcount++;
-	}
-}
-
-static struct 
-{
-	char *name;
-	int (*fn)();
-	char *comment;
-} comtab[]=
-{
-	{"q",      com_debug_quit,   "	QUIT comdebug return to YODA"},
-	{"h",      com_debug_help,   "	Print this message"},
-	{"stat",   com_debug_stat,   "	Print status of comdebug"},
-	{"s",      com_s_reg,        "	Set the specified register"},
-	{"p",      com_p_reg,        "	Print specified register"},
-	{"dump",   com_reg_dump,     "	Print all registers"},
-	{"open",   com_o_debug_file, "	Open a debug file"},
-	{"close",  com_c_debug_file, "	Close current debug file"},
-	{"runf",   com_run_file,     "	'Run' a trace file"},
-	{"toginb", com_forget_inb,   "	Toggle INB mismatch reporting"},
-	{"inb",    com_do_inb,       "	Perform INB on port"},
-	{"outb",   com_do_outb,      "	Perform OUTB on port"},
-	{"srx",    com_s_rx,         "	Save all received bytes"},
-	{"stx",    com_s_tx,         "	Save all transmitted bytes"},
-	{"prx",    com_p_rx,         "	Print all received bytes"},
-	{"ptx",    com_p_tx,         "	Print all transmitted bytes"},
-	{"pall",   com_p_all,        "	Print all received/transmitted bytes"},
-	{"dall",   com_d_all,        "	Dump all received/transmitted bytes"},
-	{"", NULL, ""}
-};
-
-int com_debug_help ()
-{
-	int i;
-	printf ("COMDEBUG COMMANDS\n");
-	for (i=0; comtab[i].name[0]; i++)
-		printf ("%s\t%s\n", comtab[i].name, comtab[i].comment);
-	printf ("recognised registers :\n");
-	for (i=0; i<7; i++)
-		printf ("%s\n", port_debugs[i]);
-	return (0);
-}
-
-int com_debug()
-{
-	char com[100];
-	int i;
-
-	if (rxtx_buff == NULL)
-		check_malloc(rxtx_buff, 50000, unsigned char);
-
-	printf ("COM1 debugging stuff...\n");
-	while (TRUE)
-	{
-		printf ("COM> ");
-		scanf ("%s", com);
-		for (i=0; comtab[i].name[0]; i++)
-		{	
-			if (!strcmp (comtab[i].name, com))
-			{
-				if ((*comtab[i].fn) ())
-					return(YODA_LOOP);
-				break;
-			}
-		}
-		if (comtab[i].name[0])
-			continue;
-		printf ("Unknown command %s\n", com);
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* !PROD */
 /********************************************************/

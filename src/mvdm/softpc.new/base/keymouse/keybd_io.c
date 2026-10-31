@@ -82,7 +82,7 @@ static char SccsID[]="@(#)keybd_io.c	1.35 06/27/95 Copyright Insignia Solutions 
 #include "keyba.h"
 #include "ica.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 #include "debug.h"
@@ -2019,9 +2019,7 @@ void kb_setup_vectors(void)
         effective_addr(KbdSeg, *pkio_table++));
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD
-   if (*pkio_table != getAX()) {
-       always_trace0("ERROR: KbdVectorTable!");
-       }
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
    TimerInt1CSeg = KbdSeg;
    TimerInt1COff = dummy_int_off;
@@ -2073,7 +2071,7 @@ void UpdateKbdInt15(word Seg,word Off)
     if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)
       {
 #ifndef PROD
-       printf("NTVDM: UpdateKbdInt15 Nuking I15 offsets\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
        sp_int15_handler_off = sp_int15_handler_seg = 0;
        return;

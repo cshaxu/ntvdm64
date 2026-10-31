@@ -162,7 +162,7 @@ void time_of_day()
 
 #else   /* ! NTVDM */
 #ifndef PROD
-	if (host_getenv("TIME_OF_DAY_FRIG") == NULL){
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	    /*
 	     * First get the time from the host
@@ -184,23 +184,7 @@ void time_of_day()
 	    sas_store(TIMER_OVFL, 0);	/* Always write zero after read	*/
 
 #ifndef PROD
-	}else{
-	    SAVED int first=1;
-
-	    if (first){
-		first = 0;
-		printf ("FRIG ALERT!!!! - time of day frozen!\n");
-	    }
-
-	    setDX(1);
-	    sas_storew(TIMER_LOW, 1);
-
-	    setCX(1);
-	    sas_storew(TIMER_HIGH, 1);
-
- 	    setAL(0);
-	    sas_store(TIMER_OVFL, 0);	/* Always write zero after read	*/
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #endif /* NTVDM */
 
@@ -227,7 +211,7 @@ void time_of_day()
 
 #ifndef NTVDM
 #ifndef PROD
-	if (host_getenv("TIME_OF_DAY_FRIG") == NULL){
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #endif
 		if( UPDATE_IN_PROGRESS )
@@ -242,20 +226,7 @@ void time_of_day()
 		}
 #ifndef NTVDM
 #ifndef PROD
-	}else{
-	    SAVED int first=1;
-
-	    if (first){
-		first = 0;
-		printf ("FRIG ALERT!!!! - real time clock frozen!\n");
-	    }
-
-			setDH( 1 );
-			setDL( 0 );	/* DSE bit	*/
-			setCL( 1 );
-			setCH( 1 );
-			setCF(0);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #endif
 		break;
@@ -284,7 +255,7 @@ void time_of_day()
 
 #ifndef NTVDM
 #ifndef PROD
-	if (host_getenv("TIME_OF_DAY_FRIG") == NULL){
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #endif
 		if( UPDATE_IN_PROGRESS )
@@ -299,20 +270,7 @@ void time_of_day()
 		}
 #ifndef NTVDM
 #ifndef PROD
-	}else{
-	    SAVED int first=1;
-
-	    if (first){
-		first = 0;
-		printf ("FRIG ALERT!!!! - date frozen!\n");
-	    }
-
-			setDL( 1 );
-			setDH( 4 );
-			setCL( 91 );
-			setCH( 19 );
-			setCF(0);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #endif
 		break;

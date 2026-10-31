@@ -264,30 +264,7 @@ GLOBAL PHY_ADDR highCheckAccess = 0;
 #endif /* !CHECK_ACCESS else */
 
 #ifndef PROD
-/*
- * This function is useful for calling from a debugger!
- */
-
-GLOBAL void
-DumpMemType()
-{
-	SAS_MEM_TYPE currentType;
-	PHY_ADDR numEntries;	/* number of entries in the table */
-	PHY_ADDR currEntry;
-
-	currentType = SAS_DANGEROUS;  /* memory_type should never have this */
-	numEntries = c_sas_memory_size() >> 12;
-
-	for (currEntry = 0; currEntry < numEntries; currEntry++) {
-		if (memory_type[currEntry] != currentType) {
-			fprintf(stderr,"0x%.8x	%s\n", currEntry << 12,
-				SAS_TYPE_TO_STRING(memory_type[currEntry]));
-			currentType = memory_type[currEntry];
-		}
-	}
-	fprintf(stderr,"0x%.8x End of Memory\n", c_sas_memory_size());
-
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* ndef PROD */
 
 
@@ -1300,10 +1277,7 @@ c_GetLinAdd IFN1(PHY_ADDR, linAddr)
 		return(c_GetPhyAdd(phyAddr));
 	else {
 #ifndef	PROD
-		if (!AlreadyInYoda) {
-			always_trace1("get_byte_addr for linear address 0x%x which is unmapped", linAddr);
-			force_yoda();
-		}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		return(c_GetPhyAdd(0));	/* as good as anything! */
 	}
@@ -1976,7 +1950,7 @@ LOCAL	void	c_sas_not_used	IFN0()
 {
 	always_trace0("c_sas_not_used called");
 #ifndef	PROD
-	force_yoda();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 

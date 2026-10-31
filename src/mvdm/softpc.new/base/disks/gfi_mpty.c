@@ -150,43 +150,37 @@ gfi_empty_command
       {
    case FDC_READ_DATA:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf (trace_file, "\tGFI-empty: Read Data Command \n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_WRITE_DATA:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf (trace_file,"\tGFI-empty: Write Data Command\n");	
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_READ_TRACK:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file,"\tGFI-empty: Read Track Command \n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_SPECIFY:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file, "\tGFI-empty: Specify command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_READ_ID:
 #ifndef PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file, "\tGFI-empty: read id command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_RECALIBRATE:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf (trace_file, "\tGFI-empty: Recalibrate command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       /* Controller tries 77 pulses to get drive to head 0,
 	 but fails, so we set Equipment Check */
@@ -200,30 +194,24 @@ gfi_empty_command
 
    case FDC_SENSE_DRIVE_STATUS:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf (trace_file, "\tGFI-empty: Sense Drive Status command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_SEEK:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file, "\tGFI-empty: Seek command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
    case FDC_FORMAT_TRACK:
 #ifndef	PROD
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file, "\tGFI-empty: Format Track command\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       break;
 
 #ifndef	PROD
-   default:
-      if (io_verbose & GFI_VERBOSE)
-	 fprintf(trace_file, "GFI-empty: Unimplemented command, type %x\n",
-	                      get_type_cmd (command_block));
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
       }
 

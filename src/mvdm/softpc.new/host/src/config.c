@@ -246,7 +246,7 @@ VOID process_pif_exe (char *PifName)
 	    if (pfdata.fullorwin == PF_WINDOWED)
 	    {
 #ifndef PROD
-	        fprintf(trace_file, "Going windowed...\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 	        if (!SetConsoleDisplayMode(sc.OutputHandle,
 				           CONSOLE_WINDOWED_MODE,
@@ -259,7 +259,7 @@ VOID process_pif_exe (char *PifName)
 	    if (pfdata.fullorwin == PF_FULLSCREEN)
 	    {
 #ifndef PROD
-	        fprintf(trace_file, "Going fullscreen...\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 	        if (!SetConsoleDisplayMode(sc.OutputHandle,
 				           CONSOLE_FULLSCREEN_MODE,
@@ -529,10 +529,7 @@ GLOBAL VOID config( VOID )
 #endif
 
 #ifndef PROD
-	dpmiMemorySize = vdmMemorySize - (xmsMemorySize + emsMemorySize + 1024);
-
-	printf("NTVDM: %dK Memory: %dK XMS, %dK EMS, %dK DPMI\n",
-	       vdmMemorySize, xmsMemorySize, emsMemorySize, dpmiMemorySize);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	sas_init(vdmMemorySize*ONEKB);
@@ -562,7 +559,7 @@ GLOBAL VOID config( VOID )
             if (!hWndConsole) {
                 hWndConsole = HWND_DESKTOP;
 #ifndef PROD
-                printf("NTVDM: using HWND_DESKTOP\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
                 }
             }
@@ -835,7 +832,7 @@ short host_runtime_inquire IFN1(UTINY, what)
                         return (runtime_status.sound_on);
                 default:
 #ifndef PROD
-                        fprintf (trace_file,"host_runtime_inquire : Unknown option %d\n",what);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
                         ;
         }
@@ -856,7 +853,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
                         break;
                 default:
 #ifndef PROD
-                        fprintf (trace_file,"host_runtime_set : Unknown option %d\n",what);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
                         ;
         }

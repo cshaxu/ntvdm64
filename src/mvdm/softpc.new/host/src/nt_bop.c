@@ -212,7 +212,7 @@ void MS_bop_1(void) {
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         mvdm_softpc_report_wow_stage("load-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -224,7 +224,7 @@ void MS_bop_1(void) {
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         mvdm_softpc_report_wow_stage("init-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -239,7 +239,7 @@ void MS_bop_1(void) {
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         mvdm_softpc_report_wow_stage("dispatch-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -252,7 +252,7 @@ void MS_bop_1(void) {
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -262,7 +262,7 @@ void MS_bop_1(void) {
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -275,7 +275,7 @@ void MS_bop_1(void) {
     if (!pW32HungAppNotifyThread)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -289,7 +289,7 @@ void MS_bop_1(void) {
     if ((*WOWInitEntry)() == FALSE)
     {
 #ifndef PROD
-        HostDebugBreak();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
         mvdm_softpc_report_wow_stage("init-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -366,7 +366,7 @@ void MS_bop_2(void) {
 void MS_bop_int3(void) {
 
 #ifndef PROD
-    force_yoda();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -741,8 +741,7 @@ void MS_bop_A(void)
         if (control == 1)
             WakeUpNow();
 #ifndef PROD
-        else
-            printf("NTVDM:Idle control from VDD bop passed bad AX value (%d)\n", control);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -796,7 +795,7 @@ void MS_bop_E(void)
        }
    else {
 #ifndef PROD
-       printf("Invalid notification bop\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
        }
 }
@@ -959,7 +958,7 @@ void ISV_DeRegisterModule (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-    printf("Invalid BOP Handle Passed to DeRegisterModule");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     TerminateVDM();
     return;
@@ -980,7 +979,7 @@ void ISV_DispatchCall (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-    printf("Invalid BOP Handle Passed to DispatchCall");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     TerminateVDM();
     return;

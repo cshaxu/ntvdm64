@@ -1752,7 +1752,7 @@ if (!keyboard_disabled)
 		** This will ignore extra key ups.
 		*/
 #ifndef PROD
-		sure_note_trace1( AT_KBD_VERBOSE, "Ignored extra key up:%d", key );
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	}
 	else 

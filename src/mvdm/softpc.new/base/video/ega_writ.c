@@ -533,7 +533,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 	ULONG mode_and_chain;
 	WRT_POINTERS *handler;
 #ifndef PROD
-	LOCAL WRT_POINTERS *last_handler;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	note_entrance1("ega_write_routines_update(%d)",reason);
@@ -837,7 +837,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #endif	/* CPU_40_STYLE */
 
 #ifndef PROD
-		last_handler = handler;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 		set_mark_funcs();

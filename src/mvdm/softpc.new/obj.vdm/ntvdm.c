@@ -132,7 +132,7 @@ DWORD       dw;
                   NULL );
      if (!NT_SUCCESS(dw) || MyDebugPort == NULL)  {
 #ifndef PROD
-           RaiseException(STATUS_ACCESS_VIOLATION, 0L, 0L, NULL);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
            return;
           }

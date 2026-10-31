@@ -159,21 +159,7 @@ patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)
 	sas_connect_memory(start, start + roundedLength - 1, SAS_RAM);
 
 #ifndef PROD
-	if (roundedLength != length) {
-		always_trace3("ROM at 0x%.5lx length rounded up from 0x%.8lx to 0x%.8lx", start, length, roundedLength);
-	}
-
-	if (roundedLength > (128 * 1024)) {
-		always_trace2("ROM at 0x%.5lx has a length of 0x%.8lx which is more than 128K", start, roundedLength);
-		force_yoda();
-		return;
-	}
-
-	if ((roundedLength <= offset) || (roundedLength < 4)) {
-		always_trace1("ROM at 0x%.5lx is too short!", start);
-		force_yoda();
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 	signature = sas_PR16(start);
@@ -671,7 +657,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	if (((endLinAddr ^ DOS_SCRATCH_PAD) > 0xfff) || (endLinAddr > DOS_SCRATCH_PAD_END))
 	{
 #ifndef PROD
-		fprintf(trace_file, "*** Warning ***: patch string into ROM too long; tuncating string '%s'", string_ptr);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		if ((DOS_SCRATCH_PAD_END ^ DOS_SCRATCH_PAD) > 0xfff)
 		{

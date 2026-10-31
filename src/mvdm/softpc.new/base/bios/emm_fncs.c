@@ -93,7 +93,7 @@ AMMENDMENTS	:
 #include "timeval.h"
 #include "debug.h"
 #ifndef PROD
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #include "timer.h"
 #include <error.h>
@@ -136,8 +136,7 @@ static boolean set_called;		/* flag to indicate if the 'set'*/
 #endif
 
 #ifndef PROD
-static FILE *fp;
-static boolean trace_flag = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 /* 	Internal Function Declarations	*/
@@ -176,8 +175,7 @@ LOCAL void Increment_Address IPT4(unsigned short *,seg_or_page,
 			      unsigned long, increment_by,
 			      unsigned char, memory_type);
 #ifndef PROD
-LOCAL void Start_Trace();
-LOCAL void End_Trace();
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 void (*emm_func[]) () = {
@@ -212,48 +210,12 @@ void (*emm_func[]) () = {
 	Prepare_Expanded_Memory_HW_For_Warm_Boot,
 	Enable_Disable_OSE_Function_Set_Functions
 #ifndef PROD
-	,Start_Trace,
-	End_Trace
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	};
 
 #ifndef PROD
-char *func_names[] = {
-	"Get_Status",
-	"Get_Page_Frame_Address",
-	"Get_Unallocated_Page_Count",
-	"Allocate_Pages",
-	"Map_Unmap_Handle_Pages",
-	"Deallocate_Pages",
-	"Get_Version",
-	"Save_Page_Map",
-	"Restore_Page_Map",
-	"Reserved",
-	"Reserved",
-	"Get_Handle_Count",
-	"Get_Handle_Pages",
-	"Get_All_Handle_Pages",
-	"Get_Set_Page_Map",
-	"Get_Set_Partial_Page_Map",
-	"Map_Unmap_Multiple_Handle_Pages",
-	"Reallocate_Pages",
-	"Get_Set_Handle_Attribute",
-	"Get_Set_Handle_Name",
-	"Get_Handle_Directory",
-	"Alter_Page_Map_And_Jump",
-	"Alter_Page_Map_And_Call",
-	"Move_Exchange_Memory_Region",
-	"Get_Mappable_Physical_Address_Array",
-	"Get_Hardware_Configuration_Array",
-	"Allocate_Raw_Pages",
-	"Alternate_Map_Register_Support",
-	"Prepare_Expanded_Memory_HW_For_Warm_Boot",
-	"Enable_Disable_OSE_Function_Set_Functions"
-#ifndef PROD
-	,"Start_Trace",
-	"End_Trace"
-#endif
-	};
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 /* Defintion of this is non-standard */
@@ -2790,44 +2752,6 @@ GLOBAL void reset_emm_funcs IFN0()
 }
 
 #ifndef PROD
-/*
-===========================================================================
-
-FUNCTION	: Routines to start and end a trace of all EMM calls
-
-PURPOSE		: 
-
-RETURNED STATUS	: in AH register
-		SUCCESS
-
-DESCRIPTION	: 
-
-=========================================================================
-*/
-LOCAL void Start_Trace IFN0()
-{
-	if ((fp = fopen("emm_trace","w")) == NULL)
-	{
-		setAH(EMM_HW_ERROR);
-		return;
-	}
-
-	setbuf(fp, NULL);	
-	trace_flag = TRUE;
-
-	setAH(SUCCESS);
-	return;
-}
-
-
-LOCAL void End_Trace IFN0()
-{
-	fflush(fp);
-	fclose(fp);
-	trace_flag = FALSE;
-
-	setAH(SUCCESS);
-	return;
-}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 #endif /* LIM */

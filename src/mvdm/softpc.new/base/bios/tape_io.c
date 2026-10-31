@@ -286,14 +286,7 @@ half_word target_AR;
 		 *	All other functions invalid.
 		 */			
 #ifndef	PROD
-	{
-		LIN_ADDR stack=effective_addr(getSS(),getSP());
-
-		IU16 ip = sas_w_at(stack);
-		IU16 cs = sas_w_at(stack+2);
-
-                note_trace3(GENERAL_VERBOSE, "INT15: AH=%02x @ %04x:%04x", getAH(), cs, ip);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif	/* PROD */
 
 		/* Fall through */

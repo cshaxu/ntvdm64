@@ -73,7 +73,7 @@ long		idt_base;
 #define setLIMIT(limit, value) limit = value
 
 #ifndef PROD
-    extern RTL_CRITICAL_SECTION IcaLock;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -228,8 +228,7 @@ VOID EmulatorEndIretHook()
         setSP(getSP()+6);
     }
 #ifndef PROD
-    else
-        printf("NTVDM extreme badness - can't get stack pointer %x:%x mode:%d\n",getSS(), getSP(), getPE());
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif  /* PROD */
 }
 #endif /* A3CPU */

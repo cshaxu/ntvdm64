@@ -280,7 +280,7 @@ v7vga_extended_set_mode()
 	ULONG font_offset;
 	word clr_char;
 #ifndef PROD
-	trace("setting video mode", DUMP_REG);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 	set_host_pix_height(1);
 	set_banking( 0, 0 );
@@ -463,7 +463,7 @@ v7vga_extended_set_mode()
     mouse_video_mode_changed(video_mode);
 #endif
 #ifndef PROD
-    trace("end of video set mode", DUMP_NONE);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 }
 

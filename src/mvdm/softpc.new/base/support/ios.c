@@ -73,8 +73,7 @@ GLOBAL char	Ios_in_adapter_table[PC_IO_MEM_SIZE];
 GLOBAL char	Ios_out_adapter_table[PC_IO_MEM_SIZE];
 #endif	/* MAC68K */
 #ifndef PROD
-GLOBAL IU32	*ios_empty_in = (IU32 *)0;
-GLOBAL IU32	*ios_empty_out = (IU32 *)0;
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 /*
@@ -983,17 +982,7 @@ GLOBAL void	io_init IFN0()
 #endif	/* MAC68K */
 
 #ifndef PROD
-	if (host_getenv("EMPTY_IO_VERBOSE") != NULL)
-	{
-		/* User does want empty I/O messages,
-		 * so we must allocate bitmaps with one bit for every
-		 * possible port number.
-		 */
-		ios_empty_in = (IU32 *)host_malloc((64*1024)/8);
-		ios_empty_out = (IU32 *)host_malloc((64*1024)/8);
-		memset((char *)ios_empty_in, 0, (64*1024)/8);
-		memset((char *)ios_empty_out, 0, (64*1024)/8);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif /* PROD */
 
 	for (i = 0; i < PC_IO_MEM_SIZE; i++){
@@ -1007,7 +996,7 @@ GLOBAL void	io_init IFN0()
 GLOBAL char GetExtIoInAdapter (io_addr ioaddr)
 {
 #ifndef PROD
-    printf("GetExtIoInAdapter(%x) called\n",ioaddr);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     return EMPTY_ADAPTOR;
 }
@@ -1015,7 +1004,7 @@ GLOBAL char GetExtIoInAdapter (io_addr ioaddr)
 GLOBAL char GetExtIoOutAdapter (io_addr ioaddr)
 {
 #ifndef PROD
-    printf("GetExtIoOutAdapter(%x) called\n",ioaddr);
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
     return EMPTY_ADAPTOR;
 }

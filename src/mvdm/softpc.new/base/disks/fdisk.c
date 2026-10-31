@@ -1498,7 +1498,7 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 		 		 * sector buffer must be accessed only in 16 bit quantities
 		 		 */
 #ifndef PROD
-				printf("(fdisk_inb()) inb on sector buffer ignored!\n");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 				break;
 			default:
@@ -1580,7 +1580,7 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 		 * byte access to sector buffer is not a good idea
 		 */
 #ifndef PROD
-		printf("(disk_outb()) outb to sector buffer ignored\n!");
+/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 		break;
 	case TFPCMP:
