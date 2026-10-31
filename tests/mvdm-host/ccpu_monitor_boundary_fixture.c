@@ -897,6 +897,34 @@ extern void INTx(ULONG);
 extern void ZFRSRVD(ULONG);
 static BOOL swint_origin_probe(ULONG vector) {test_irq=vector; return TRUE;}
 
+static int protected_fault_decline_cpu(void) {
+    unsigned char gdt[40]={0};
+    const unsigned char gate[8]={0x00,0x11,0x1b,0x00,0x00,0x86,0x00,0x00};
+    const unsigned char faulting[]={0xf7,0xf3,0xd6,0xfe};
+    const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    BOOL ok; char line[140];
+    extern BOOL DpmiFaultHandler(ULONG,ULONG);
+    c_cpu_init();
+    *(ULONG *)(gdt+0x18)=0x0000ffffu; *(ULONG *)(gdt+0x1c)=0x0000fa0fu;
+    *(ULONG *)(gdt+0x20)=0x0000ffffu; *(ULONG *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
+    CopyMemory(c_GetPhyAdd(0x9000),gate,sizeof(gate));
+    CopyMemory(c_GetPhyAdd(0xf1000),faulting,sizeof(faulting));
+    CopyMemory(c_GetPhyAdd(0xf1100),target,sizeof(target));
+    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1); c_setIDT_BASE_LIMIT(0x9000,7);
+    c_setPE(1); c_setCPL(3); c_setCS(0x1b); c_setSS(0x23); c_setSP(0x800);
+    c_setIOPL(test_case==149 ? 0 : 3); c_setIF(1); c_setIP(0x1000); c_setBX(0); c_setEAX(1);
+    Ldt=(LDT_ENTRY *)c_GetPhyAdd(0x3000); ZeroMemory(Ldt,8);
+    DpmiFaultHandlers[0].cs=0;
+    VdmInstallFaultHandler((void *)DpmiFaultHandler);
+    c_cpu_simulate(); VdmInstallFaultHandler(NULL);
+    ok=c_getBX()==0xbeef && c_getSP()==0x7fa &&
+       (*(USHORT *)c_GetPhyAdd(0x7fe)&0x200)!=0;
+    wsprintfA(line,"PROTECTED_FAULT_DECLINE_CPU case=%d pass=%d sp=%x saved_flags=%x bx=%x\n",
+              test_case,ok,c_getSP(),*(USHORT *)c_GetPhyAdd(0x7fe),c_getBX());
+    report(line); return ok;
+}
+
 static int v86_decoded_interrupt(void) {
     unsigned char *gdt=c_GetPhyAdd(0x5000), *ldt=c_GetPhyAdd(0x3000);
     unsigned vector=test_case==122 ? 0x2a : 0x31;
@@ -1233,7 +1261,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==146) ok=vdd_sas_unbound_control();
+    if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
+    else if(test_case==146) ok=vdd_sas_unbound_control();
     else if(test_case==145) ok=v86_a20_word_ram_control();
     else if(test_case>=140 && test_case<=144) ok=v86_fault_iret();
     else if(test_case>=135 && test_case<=139) ok=v86_real_divide_fault();

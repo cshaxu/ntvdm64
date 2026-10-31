@@ -42,6 +42,15 @@ controls fail separately: the outermost failure retains `flags=3002`, and the
 nested failure retains `flags=3002, ESP=1` instead of `3302, 21`. All three
 pass against the delivered object. See [old object](s11-fault-rollback-evidence/independent-baseline.json)
 and [delivered object](s11-fault-rollback-evidence/independent-after.json).
+Real CCPU cases 148/149 execute a divide exception, let the DPMI handler
+decline an absent vector, and inspect the flags placed by the subsequent
+original IDT fallback. At IOPL 3 the force-linked old DPMI object yields
+`3002` while the delivered object yields `3202`; at IOPL 0 both yield `0202`
+because CCPU's privilege-sensitive EFLAGS setter leaves IF unchanged. The
+[comparison](s11-fault-rollback-evidence/real-ccpu-decline-comparison.json)
+uses the same fixture and records both executable hashes; it is not a real DOSX
+guest or proof of the separate nested hardware-IRQ failure contract. These
+two cases join the 128-case CCPU suite.
 The [candidate evidence](s11-fault-rollback-evidence/) records the coherent
 ten-image Full, application and Win3.1 runs, and unchanged guest hashes.
 The tested package was published to both destinations with all 20 hashes

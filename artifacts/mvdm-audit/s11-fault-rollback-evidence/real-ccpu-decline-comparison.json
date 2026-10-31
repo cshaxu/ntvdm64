@@ -1,0 +1,30 @@
+[
+  {
+    "version": "baseline",
+    "case": 148,
+    "exit": 1,
+    "output": "PROTECTED_FAULT_DECLINE_CPU case=148 pass=0 sp=7fa saved_flags=3002 bx=beef",
+    "imageSha256": "56AA37D784E668CFAC644CF60124DC9418C812743BFB975D8239F71F85707273"
+  },
+  {
+    "version": "baseline",
+    "case": 149,
+    "exit": 0,
+    "output": "PROTECTED_FAULT_DECLINE_CPU case=149 pass=1 sp=7fa saved_flags=202 bx=beef",
+    "imageSha256": "56AA37D784E668CFAC644CF60124DC9418C812743BFB975D8239F71F85707273"
+  },
+  {
+    "version": "candidate",
+    "case": 148,
+    "exit": 0,
+    "output": "PROTECTED_FAULT_DECLINE_CPU case=148 pass=1 sp=7fa saved_flags=3202 bx=beef",
+    "imageSha256": "9451903A7F4CAF828DE259B64DFF8C47CCDF821C0C25152C35D7E1AEF3FE39E5"
+  },
+  {
+    "version": "candidate",
+    "case": 149,
+    "exit": 0,
+    "output": "PROTECTED_FAULT_DECLINE_CPU case=149 pass=1 sp=7fa saved_flags=202 bx=beef",
+    "imageSha256": "9451903A7F4CAF828DE259B64DFF8C47CCDF821C0C25152C35D7E1AEF3FE39E5"
+  }
+]
