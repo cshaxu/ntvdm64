@@ -1,0 +1,10 @@
+{
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "utc": "2026-10-31T05:38:18.8526022Z",
+  "count": 20,
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/gp-dispatch-package",
+  "result": "pass"
+}

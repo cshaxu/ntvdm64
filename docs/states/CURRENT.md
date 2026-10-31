@@ -46,9 +46,9 @@ Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/
 
 Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
 
-The current [ten-component release](../../artifacts/mvdm-audit/s11-debug-context-candidate.md)
-adds per-task CCPU debug-context handoff. Full, game, four-mode Win3.1 and
-automated mouse witnesses passed; both destinations match. A single earlier
+The current [ten-component release](../../artifacts/mvdm-audit/s11-monitor-minimization.md)
+also aligns protected-VDM #GP dispatch with NT4. Full, game, Win3.1 and
+automated mouse witnesses passed; both destinations match. An earlier
 Window-17 input timeout remains unlocated. S11 remains active; the
 [closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
 remaining boundaries.

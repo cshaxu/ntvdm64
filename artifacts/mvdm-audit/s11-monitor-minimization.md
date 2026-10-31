@@ -144,6 +144,11 @@ observation run was budget-terminated, so this does not prove natural exit
 or physical mouse input. The [exact ten-component manifest](s11-gp-dispatch-evidence/package-manifest.json)
 binds these results to the candidate, whose NTVDM SHA-256 is
 `1E7BB124DCEBC183E5B8AA364F0E51D0532EDF941C5B84CA4AF9E69D27E134CA`.
+Source commit `08df0aef6` was followed by a coherent
+[publication](s11-gp-dispatch-evidence/publication.json) to both destinations,
+with all 20 hashes matched. A post-publication
+[owned-Console launch](s11-gp-dispatch-evidence/installed-smoke.txt) of
+`run16 cmd /c ver` exited zero and showed the expected host version.
 
 Original DOSX sources provide an additional reason not to impose the NT4
 test indiscriminately: `dpmi/pmdefs.inc` gives `STD_RING` the LDT indicator
