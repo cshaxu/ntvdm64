@@ -323,6 +323,26 @@ fixture image SHA-256
 Preparation and build/fixture records remain in
 `build/t473-s11/dr-context-study/native` and its parent for this active task.
 
+The two-thread experiment was then repeated using the selected real writers
+rather than direct writes: sender `ThreadSetDebugContext` installed DR0
+`12345678` with breakpoints disabled, the scheduled receiver observed that
+value and invoked `ccpu_monitor_write_dr(0, 87654321)`, and the resumed sender
+observed `87654321`. The fixture restored all six saved debug registers via
+`ThreadSetDebugContext` and its normal native-nested suite exited 0. The map
+binds these two writers to `dbg_registers.obj` and `c_main.obj` respectively.
+This controlled result now distinguishes the original broadcast-service
+writer from the original current-thread monitor writer; it establishes a
+host-scheduler isolation gap for that combination, but still executes no
+Win16 guest instruction and uses the fixture's documented host seams. It
+does not prove every DR6/DR7, pending exception, creation or retirement case.
+Temporary source SHA-256
+`96E4A90E9D73C76A4F3EAA8739D6B48BCDB74E95B9DF224A82C7266A578EC948`;
+fixture image SHA-256
+`454CC3A3D753435F745F7C0163E09BB59CE69E357A997AEFA91A2E8E8FDBEBD4`.
+The writer-based variant superseded the earlier temporary native fixture
+source; the first executable and its build records remain, but its exact
+temporary source copy is no longer retained.
+
 ## Instruction-fetch page-access accounting
 
 NT4 `Ki386DispatchOpcode` and `OpcodeGenericPrefix` read instruction bytes
